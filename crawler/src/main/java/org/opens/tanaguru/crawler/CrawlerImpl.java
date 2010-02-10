@@ -7,7 +7,7 @@ import org.opens.tanaguru.entity.subject.WebResource;
  * 
  * @author ADEX
  */
-public class CrawlerImpl implements Crawler {
+public class CrawlerImpl implements Crawler {// TODO
 
     private WebResource result;
     private WebResourceFactory webResourceFactory;

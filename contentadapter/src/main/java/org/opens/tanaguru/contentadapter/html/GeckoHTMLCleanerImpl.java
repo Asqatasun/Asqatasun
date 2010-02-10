@@ -44,7 +44,7 @@ public class GeckoHTMLCleanerImpl extends AbstractHTMLCleaner implements
         Shell shell = new Shell(display);
         swtBrowser = new Browser(shell, SWT.MOZILLA);
 
-        // TODO xulrunner-1.9.0.15
+        // TODO Add xulrunner-1.9.0.15-sdk lib
 //        nsIWebBrowserSetup nsIWebBrowserSet = (nsIWebBrowserSetup) ((nsIWebBrowser) swtBrowser.getWebBrowser()).queryInterface(nsIWebBrowserSetup.NS_IWEBBROWSERSETUP_IID);
 //        nsIWebBrowserSet.setProperty(nsIWebBrowserSetup.SETUP_ALLOW_SUBFRAMES,
 //                0);
@@ -75,8 +75,8 @@ public class GeckoHTMLCleanerImpl extends AbstractHTMLCleaner implements
                 swtBrowser.getDisplay().sleep();
             }
         }
-        swtBrowser.getDisplay().dispose();
-        initialized = false;
+        swtBrowser.getDisplay().dispose();// Frees the display after the loading is completed.
+        initialized = false;// Sets the component in un-initialized state.
     }
 
     public void setGreHome(String greHome) {
@@ -97,9 +97,13 @@ public class GeckoHTMLCleanerImpl extends AbstractHTMLCleaner implements
     private void swtBrowserCompleted(ProgressEvent event) {
         String url = swtBrowser.getUrl();
 
+        // Mozilla may load blank pages before loading the real page.
+        // It is due to the use of XULRunner and its asynchronous type of execution.
+        // We allow the component to load 2 blank pages before considering it as an error and skip loading.
         if (url.equalsIgnoreCase("about:blank")) {
             blankCount++;
             if (blankCount >= 2) {
+                // TODO Add log
                 pageLoadComplete = true;
                 swtBrowser.getDisplay().wake();
             }
@@ -111,9 +115,7 @@ public class GeckoHTMLCleanerImpl extends AbstractHTMLCleaner implements
         // nsIWebBrowser browser = (nsIWebBrowser) swtBrowser.getWebBrowser();
         // nsIDOMWindow window = browser.getContentDOMWindow();
         // nsIDOMDocument document = window.getDocument();
-        // nsIDOMSerializer serializer = (nsIDOMSerializer)
-        // getComponentManager().createInstanceByContractID(NS_XMLSERIALIZER_CONTRACTID,
-        // null, nsIDOMSerializer.NS_IDOMSERIALIZER_IID);
+        // nsIDOMSerializer serializer = (nsIDOMSerializer) getComponentManager().createInstanceByContractID(NS_XMLSERIALIZER_CONTRACTID, null, nsIDOMSerializer.NS_IDOMSERIALIZER_IID);
         // String serializedDOM = serializer.serializeToString(document);
 
         try {
@@ -127,9 +129,9 @@ public class GeckoHTMLCleanerImpl extends AbstractHTMLCleaner implements
         }
 
         tempHTMLFileManager.delete();
-        currentURL = null;
+        currentURL = null;// XXX Not used anymore
         pageLoadComplete = true;
-        swtBrowser.getDisplay().wake();
+        swtBrowser.getDisplay().wake();// XXX See what it is used for?
     }
 
     public String getCorrectorName() {

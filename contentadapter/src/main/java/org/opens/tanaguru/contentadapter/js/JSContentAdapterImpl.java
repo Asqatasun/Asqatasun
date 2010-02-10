@@ -198,7 +198,7 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
                 // TODO Enlever ce commentaire qui ajoute ressource script pour l'association à l'audit et ainsi la persister.
 //                contentList.add(contentFactory.createStylesheetContent(new Date(), externalResourceAbsolutePath, ssp, downloader.getResult()));
 
-                resource = new JSResourceImpl(src, locator.getLineNumber(),
+                resource = new JSResourceImpl(downloader.getResult(), locator.getLineNumber(),
                         new ExternalRsrc());
                 // localJS
             } else {

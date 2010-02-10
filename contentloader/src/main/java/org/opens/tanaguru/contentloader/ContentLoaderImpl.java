@@ -36,7 +36,7 @@ public class ContentLoaderImpl implements ContentLoader {
         result = run(webResource);
     }
 
-    private List<Content> run(WebResource webResource) {
+    private List<Content> run(WebResource webResource) {// TODO Handle exceptions like 404, 403, 500, ...
         List<Content> localResult = new ArrayList<Content>();
 
         if (webResource instanceof Page) {

@@ -192,7 +192,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
                 downloader.run();
 
                 // TODO Enlever ce commentaire qui ajoute ressource feuille de style pour l'association à l'audit et ainsi la persister.
-//                contentList.add(contentFactory.createStylesheetContent(new Date(), cssAbsolutePath, ssp, downloader.getResult()));
+//              contentList.add(contentFactory.createStylesheetContent(new Date(), cssAbsolutePath, ssp, downloader.getResult()));
 
                 resource = new CSSResourceImpl(downloader.getResult(),
                         locator.getLineNumber(), new ExternalRsrc());

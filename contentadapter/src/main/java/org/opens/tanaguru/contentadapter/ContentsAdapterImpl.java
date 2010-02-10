@@ -12,6 +12,7 @@ import org.opens.tanaguru.entity.audit.SSP;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.opens.tanaguru.contentadapter.js.JSContentAdapter;
 
 /**
  * 
@@ -84,7 +85,7 @@ public class ContentsAdapterImpl implements ContentsAdapter {
                     if (contentAdapter instanceof CSSContentAdapter) {
                         ssp.setStylesheet(contentAdapter.getAdaptation());
                     }
-                    if (contentAdapter instanceof CSSContentAdapter) {
+                    if (contentAdapter instanceof JSContentAdapter) {
                         ssp.setJavascript(contentAdapter.getAdaptation());
                     }
                     localResult.addAll(contentAdapter.getContentList());

@@ -1,9 +1,4 @@
 <?xml version="1.0"?><project xmlns:pom="http://maven.apache.org/POM/4.0.0">
-    <parent>
-        <artifactId>tanguru-engine</artifactId>
-        <groupId>org.opens</groupId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.opens</groupId>
     <artifactId>nomenclatureloader</artifactId>

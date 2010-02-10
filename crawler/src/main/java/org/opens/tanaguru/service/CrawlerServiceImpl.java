@@ -29,6 +29,7 @@ public class CrawlerServiceImpl implements CrawlerService {
 
     public Site crawl(Site site) {
         crawler.setSiteURL(site.getURL());
+        crawler.run();
         Site result = (Site) crawler.getResult();
         site.addAllChild((Collection<WebResource>) result.getComponentList());
         return site;
