@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <bean id="webResourceFactory" class="org.opens.tanaguru.entity.factory.subject.WebResourceFactoryImpl"/>
+    <bean id="crawlerComponent" class="org.opens.tanaguru.crawler.CrawlerImpl">
+        <property name="webResourceFactory" ref="webResourceFactory"/>
+    </bean>
+    <bean id="crawlerService" class="org.opens.tanaguru.service.CrawlerServiceImpl">
+        <property name="crawler" ref="crawlerComponent"/>
+    </bean>
+
+</beans>

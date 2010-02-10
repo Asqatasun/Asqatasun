@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0"
+             xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+    <persistence-unit name="tanaguruPU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <non-jta-data-source>jdbc/tanaguruDS</non-jta-data-source>
+
+        <class>org.opens.tanaguru.entity.reference.CriterionImpl</class>
+        <class>org.opens.tanaguru.entity.reference.DecisionLevelImpl</class>
+        <class>org.opens.tanaguru.entity.reference.LevelImpl</class>
+        <class>org.opens.tanaguru.entity.reference.NomenclatureCssUnitImpl</class>
+        <class>org.opens.tanaguru.entity.reference.NomenclatureElementImpl</class>
+        <class>org.opens.tanaguru.entity.reference.NomenclatureImpl</class>
+        <class>org.opens.tanaguru.entity.reference.ReferenceImpl</class>
+        <class>org.opens.tanaguru.entity.reference.RuleImpl</class>
+        <class>org.opens.tanaguru.entity.reference.RulePackageImpl</class>
+        <class>org.opens.tanaguru.entity.reference.ScopeImpl</class>
+        <class>org.opens.tanaguru.entity.reference.StandardMessageImpl</class>
+        <class>org.opens.tanaguru.entity.reference.TestImpl</class>
+        <class>org.opens.tanaguru.entity.reference.ThemeImpl</class>
+
+        <class>org.opens.tanaguru.entity.audit.AuditImpl</class>
+        <class>org.opens.tanaguru.entity.audit.ContentImpl</class>
+        <class>org.opens.tanaguru.entity.audit.DefiniteResultImpl</class>
+        <class>org.opens.tanaguru.entity.audit.IndefiniteResultImpl</class>
+        <class>org.opens.tanaguru.entity.audit.JavascriptContentImpl</class>
+        <class>org.opens.tanaguru.entity.audit.ProcessRemarkImpl</class>
+        <class>org.opens.tanaguru.entity.audit.ProcessResultImpl</class>
+        <class>org.opens.tanaguru.entity.audit.SSPImpl</class>
+        <class>org.opens.tanaguru.entity.audit.SourceCodeRemarkImpl</class>
+        <class>org.opens.tanaguru.entity.audit.StylesheetContentImpl</class>
+        <class>org.opens.tanaguru.entity.audit.RelatedTextContentImpl</class>
+
+        <class>org.opens.tanaguru.entity.subject.PageImpl</class>
+        <class>org.opens.tanaguru.entity.subject.SiteImpl</class>
+        <class>org.opens.tanaguru.entity.subject.WebResourceImpl</class>
+
+        <!--class>org.opens.tanaguru.i18n.LanguageImpl</class>
+
+        <class>org.opens.tanaguru.i18n.entity.reference.CriterionI18nImpl</class>
+        <class>org.opens.tanaguru.i18n.entity.reference.DecisionLevelI18nImpl</class>
+        <class>org.opens.tanaguru.i18n.entity.reference.LevelI18nImpl</class>
+        <class>org.opens.tanaguru.i18n.entity.reference.NomenclatureElementI18nImpl</class>
+        <class>org.opens.tanaguru.i18n.entity.reference.NomenclatureI18nImpl</class>
+        <class>org.opens.tanaguru.i18n.entity.reference.ReferenceI18nImpl</class>
+        <class>org.opens.tanaguru.i18n.entity.reference.ScopeI18nImpl</class>
+        <class>org.opens.tanaguru.i18n.entity.reference.StandardMessageI18nImpl</class>
+        <class>org.opens.tanaguru.i18n.entity.reference.TestI18nImpl</class>
+        <class>org.opens.tanaguru.i18n.entity.reference.ThemeI18nImpl</class>
+
+        <class>org.opens.tanaguru.entity.membership.OfficeGroupImpl</class>
+        <class>org.opens.tanaguru.entity.membership.OfficeImpl</class>
+        <class>org.opens.tanaguru.entity.membership.RoleImpl</class>
+        <class>org.opens.tanaguru.entity.membership.UserImpl</class-->
+
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <!-- property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" / -->
+            <!-- property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/evalaccess" />
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+            <property name="hibernate.connection.username" value="root" />
+            <property name="hibernate.connection.password" value="root" / -->
+            <!-- property name="hibernate.show_sql" value="true" / -->
+            <property name="hibernate.hbm2ddl.auto" value="validate" /><!-- possible values are validate, update, create, create-drop -->
+
+            <!-- property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect"/ -->
+            <!-- propertyname="hibernate.max_fetch_depth" value="3"/ -->
+
+                        <!-- cache configuration -->
+                        <!--
+                                <property
+                                name="hibernate.ejb.classcache.org.hibernate.ejb.test.Item"
+                                value="read-write" /> <property
+                                name="hibernate.ejb.collectioncache.org.hibernate.ejb.test.Item.distributors"
+                                value="read-write, RegionName" />
+                        -->
+
+                        <!--
+                                alternatively to <class> and <property> declarations, you can use a
+                                regular hibernate.cfg.xml file
+                        -->
+                        <!--
+                                property name="hibernate.ejb.cfgfile"
+                                value="/org/hibernate/ejb/test/hibernate.cfg.xml"/
+                        -->
+        </properties>
+    </persistence-unit>
+</persistence>

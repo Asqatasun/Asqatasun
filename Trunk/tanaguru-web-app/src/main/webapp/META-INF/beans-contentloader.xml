@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <bean id="downloaderComponent" class="org.opens.tanaguru.contentloader.DownloaderImpl"/>
+    <bean id="contentLoaderComponent" class="org.opens.tanaguru.contentloader.ContentLoaderImpl">
+        <property name="downloader" ref="downloaderComponent"/>
+        <property name="contentFactory" ref="contentFactory"/>
+    </bean>
+    <bean id="contentLoaderService" class="org.opens.tanaguru.service.ContentLoaderServiceImpl">
+        <property name="contentsLoader" ref="contentLoaderComponent"/>
+    </bean>
+
+</beans>
