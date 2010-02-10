@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <bean id="tempHTMLFileManagerComponent" class="org.opens.tanaguru.contentadapter.html.util.TempHTMLFileManagerImpl">
+        <!-- property name="tempFolder" value="${tempFolder}"/ -->
+    </bean>
+    <bean id="geckoHTMLCleanerComponent" class="org.opens.tanaguru.contentadapter.html.GeckoHTMLCleanerImpl">
+        <property name="greHome" value="${greHome}"/>
+        <property name="tempHTMLFileManager" ref="tempHTMLFileManagerComponent"/>
+    </bean>
+
+    <bean id="htmlParserComponent" class="org.opens.tanaguru.contentadapter.html.HTMLParserImpl"/>
+    <bean id="htmlCleanerComponent" class="org.opens.tanaguru.contentadapter.html.HTMLCleanerImpl"/>
+    <bean id="cssParserComponent" class="org.opens.tanaguru.contentadapter.css.CSSParserImpl"/>
+    <bean id="jsParserComponent" class="org.opens.tanaguru.contentadapter.js.JSParserImpl"/>
+    <bean id="urlIdentifierComponent" class="org.opens.tanaguru.contentadapter.util.URLIdentifierImpl"/>
+    <bean id="adapterComponent" class="org.opens.tanaguru.contentadapter.ContentsAdapterImpl">
+        <!--<property name="HTMLCleaner" ref="geckoHTMLCleanerComponent"/>-->
+        <property name="HTMLCleaner" ref="htmlCleanerComponent"/>
+        <property name="HTMLParser" ref="htmlParserComponent"/>
+        <property name="contentAdapterSet">
+            <set>
+                <bean class="org.opens.tanaguru.contentadapter.css.CSSContentAdapterImpl">
+                    <property name="downloader" ref="downloaderComponent"/>
+                    <property name="parser" ref="cssParserComponent"/>
+                    <property name="URLIdentifier" ref="urlIdentifierComponent"/>
+                    <property name="contentFactory" ref="contentFactory"/>
+                </bean>
+                <bean class="org.opens.tanaguru.contentadapter.js.JSContentAdapterImpl">
+                    <property name="downloader" ref="downloaderComponent"/>
+                    <property name="parser" ref="jsParserComponent"/>
+                    <property name="URLIdentifier" ref="urlIdentifierComponent"/>
+                    <property name="contentFactory" ref="contentFactory"/>
+                </bean>
+            </set>
+        </property>
+    </bean>
+    <bean id="contentAdapterService" class="org.opens.tanaguru.service.ContentAdapterServiceImpl">
+        <property name="adapter" ref="adapterComponent"/>
+    </bean>
+
+</beans>

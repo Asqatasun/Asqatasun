@@ -1,0 +1,26 @@
+/* 
+    Document   : resulttable
+    Created on : 29 janv. 2010, 16:04:20
+    Author     : nselly
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+/*root {
+    display: block;
+}*/
+
+.outertable {
+    width:800px;
+    vertical-align: top;
+    text-align: left;
+}
+
+.remarkcolumnheader {
+    width:30%;
+}
