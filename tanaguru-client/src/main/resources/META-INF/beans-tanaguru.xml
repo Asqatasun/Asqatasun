@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <bean id="auditDAO" class="org.opens.tanaguru.entity.dao.audit.AuditDAOImpl"/>
+    <bean id="auditFactory" class="org.opens.tanaguru.entity.factory.audit.AuditFactoryImpl"/>
+    <bean id="auditDataService" class="org.opens.tanaguru.entity.service.audit.AuditDataServiceImpl">
+        <property name="entityFactory" ref="auditFactory"/>
+        <property name="entityDao" ref="auditDAO"/>
+    </bean>
+
+    <bean id="webResourceDAO" class="org.opens.tanaguru.entity.dao.subject.WebResourceDAOImpl"/>
+    <bean id="webResourceDataService" class="org.opens.tanaguru.entity.service.subject.WebResourceDataServiceImpl">
+        <property name="entityFactory" ref="webResourceFactory"/>
+        <property name="entityDao" ref="webResourceDAO"/>
+    </bean>
+
+    <bean id="testFactory" class="org.opens.tanaguru.entity.factory.reference.TestFactoryImpl"/>
+    <bean id="testDAO" class="org.opens.tanaguru.entity.dao.reference.TestDAOImpl"/>
+    <bean id="testDataService" class="org.opens.tanaguru.entity.service.reference.TestDataServiceImpl">
+        <property name="entityFactory" ref="testFactory"/>
+        <property name="entityDao" ref="testDAO"/>
+    </bean>
+
+    <bean id="processResultFactory" class="org.opens.tanaguru.entity.factory.audit.ProcessResultFactoryImpl"/>
+    <bean id="processResultDAO" class="org.opens.tanaguru.entity.dao.audit.ProcessResultDAOImpl"/>
+    <bean id="processResultDataService" class="org.opens.tanaguru.entity.service.audit.ProcessResultDataServiceImpl">
+        <property name="entityFactory" ref="processResultFactory"/>
+        <property name="entityDao" ref="processResultDAO"/>
+    </bean>
+
+    <bean id="auditService" class="org.opens.tanaguru.service.AuditServiceImpl">
+        <property name="crawlerService" ref="crawlerService"/>
+        <property name="contentLoaderService" ref="contentLoaderService"/>
+        <property name="contentAdapterService" ref="contentAdapterService"/>
+        <property name="processorService" ref="processorService"/>
+        <property name="consolidatorService" ref="consolidatorService"/>
+        <property name="analyserService" ref="analyserService"/>
+
+        <property name="auditDataService" ref="auditDataService"/>
+        <property name="webResourceDataService" ref="webResourceDataService"/>
+        <property name="testDataService" ref="testDataService"/>
+
+        
+        <property name="processResultDataService" ref="processResultDataService"/>
+    </bean>
+
+</beans>
