@@ -111,6 +111,12 @@
             <artifactId>xbean-spring-v2c</artifactId>
             <version>2.8</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <properties>
         <netbeans.hint.deploy.server>Tomcat55</netbeans.hint.deploy.server>

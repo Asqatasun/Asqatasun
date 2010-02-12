@@ -1,10 +1,10 @@
 <?xml version="1.0"?><project xmlns:pom="http://maven.apache.org/POM/4.0.0">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.opens</groupId>
-    <artifactId>tanaguru-membership</artifactId>
-    <name>tanaguru-membership</name>
+    <artifactId>tanaguru-testing-tools</artifactId>
+    <name>tanaguru-testing-tools</name>
     <version>1.0-SNAPSHOT</version>
-    <url>http://www.open-s.com</url>
+    <url>http://www.tanaguru.org</url>
     <build>
         <plugins>
             <plugin>
@@ -20,9 +20,9 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>com.adex</groupId>
-            <artifactId>commons-entity-jpa</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>tanaguru-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -32,4 +32,7 @@
         </dependency>
     </dependencies>
 </project>
+
+
+
 
