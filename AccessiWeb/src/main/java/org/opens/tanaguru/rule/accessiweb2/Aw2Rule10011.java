@@ -15,13 +15,51 @@ import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
 import org.w3c.dom.Node;
 
 /**
- *
+ * This rule tests if forbidden representation tags are used in the source
+ * code.
+ * We use the specific nomenclature "DeprecatedRepresentationTags" to determine
+ * the presence of these
  * @author jkowalczyk
  */
 public class Aw2Rule10011 extends AbstractPageRuleImplementation {
 
+//    Object selectionNomenclatureList;
+//    private boolean initialized = false;
+
+    public Aw2Rule10011() {
+        super();
+//        setUp();
+    }
+
+//    void initialize() {
+//        if (initialized) {
+//            return;
+//        }
+//
+//        initialized = true;
+//    }
+
+//    Object process() {
+//        initialize();
+//        processImpl();
+//    }
+
+//    Object getSelectionNomenclatureList() {
+//        return null;
+//    }
+
+//    void setUp() {
+//        selectionNomenclatureList.add("DeprecatedRepresentationTags");
+//    }
+
+    /**
+     *
+     * @param sspHandler
+     * @return
+     */
     @Override
     protected ProcessResult processImpl(SSPHandler sspHandler) {
+//        nomenclatureList.get("DeprecatedRepresentationTags");
 
         Nomenclature deprecatedHtmlTags = nomenclatureLoaderService.
                 loadByCode("DeprecatedRepresentationTags");
@@ -36,7 +74,7 @@ public class Aw2Rule10011 extends AbstractPageRuleImplementation {
         for (Node node : sspHandler.getSelectedElementList()) {
             testSolution = TestSolution.FAILED;
             processRemarkList.add(processRemarkFactory.
-                    create(testSolution, "DeprecatedReprsentationTagFound"));
+                    create(testSolution, "DeprecatedRepresentationTagFound"));
         }
 
         ProcessResult processResult = definiteResultFactory.create(
