@@ -15,10 +15,7 @@ import org.opens.tanaguru.ws.DefiniteResultImpl;
 public class AuditWebServiceClient {
 
     public static void main(String[] args) {
-        run("one-one");
-        run("one-two");
-        run("two-one");
-        run("two-two");
+        run("opens-all");
     }
 
     static void run(String bundleName) {
