@@ -21,6 +21,18 @@ public class Aw2Rule08051 extends AbstractPageRuleImplementation {
     private static final String HEAD_TAG = "head";
     private static final String TTTLE_TAG = "title";
 
+    /**
+     *
+     */
+    public Aw2Rule08051(){
+        super();
+    }
+
+    /**
+     *
+     * @param sspHandler
+     * @return
+     */
     @Override
     protected ProcessResult processImpl(SSPHandler sspHandler) {
 
