@@ -28,7 +28,26 @@ public class HTMLCleanerImpl extends AbstractHTMLCleaner implements HTMLCleaner 
             node.removeAttribute("xmlns:xml");
             // node.removeAttribute("xml:lang");
             CleanerProperties props = cleaner.getProperties();
-            props.setUseCdataForScriptAndStyle(false);
+
+            //XXX verify each property 
+//            props.setAdvancedXmlEscape(false);
+//            props.setAllowHtmlInsideAttributes(true);
+//            props.setAllowMultiWordAttributes(true);
+//            props.setIgnoreQuestAndExclam(false);
+//            props.setNamespacesAware(true);
+            props.setOmitComments(false);
+            props.setOmitDeprecatedTags(false);
+            props.setOmitDoctypeDeclaration(false);
+            props.setOmitHtmlEnvelope(false);
+            props.setOmitUnknownTags(false);
+            props.setOmitXmlDeclaration(false);
+//            props.setRecognizeUnicodeChars(true);
+//            props.setTranslateSpecialEntities(false);
+//            props.setTreatDeprecatedTagsAsContent(false);
+//            props.setTreatUnknownTagsAsContent(false);
+//            props.setUseCdataForScriptAndStyle(false);
+//            props.setUseEmptyElementTags(true);
+
             XmlSerializer serializer = new PrettyXmlSerializer(props);
             result = serializer.getXmlAsString(node);
         } catch (IOException ex) {
