@@ -392,6 +392,14 @@ public class DOMHandlerImpl implements DOMHandler {
 
     public TestSolution checkTextContentValue(Collection<String> blacklist,
             Collection<String> whitelist) {
+
+        if (whitelist == null) {
+            whitelist = new ArrayList<String>();
+        }
+        if (blacklist == null) {
+            blacklist = new ArrayList<String>();
+        }
+
         Set<TestSolution> resultSet = new HashSet<TestSolution>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.NEED_MORE_INFO;
