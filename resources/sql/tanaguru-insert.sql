@@ -59,7 +59,8 @@ INSERT INTO `NOMENCLATURE` (`Id_Nomenclature`, `Cd_Nomenclature`, `Description`,
 INSERT INTO `NOMENCLATURE` (`Id_Nomenclature`, `Cd_Nomenclature`, `Description`, `Long_Label`, `Short_Label`, `Id_Nomenclature_Parent`) VALUES (8,'PossibleImageTags',NULL,NULL,NULL,NULL);
 INSERT INTO `NOMENCLATURE` (`Id_Nomenclature`, `Cd_Nomenclature`, `Description`, `Long_Label`, `Short_Label`, `Id_Nomenclature_Parent`) VALUES (9,'RelativeCssUnits',NULL,NULL,NULL,NULL);
 INSERT INTO `NOMENCLATURE` (`Id_Nomenclature`, `Cd_Nomenclature`, `Description`, `Long_Label`, `Short_Label`, `Id_Nomenclature_Parent`) VALUES (10,'ValidLanguageCode',NULL,NULL,NULL,NULL);
-INSERT INTO `NOMENCLATURE` (`Id_Nomenclature`, `Cd_Nomenclature`, `Description`, `Long_Label`, `Short_Label`, `Id_Nomenclature_Parent`) VALUES (11,'DeprecatedHtmlTags',NULL,NULL,NULL,NULL);
+INSERT INTO `NOMENCLATURE` (`Id_Nomenclature`, `Cd_Nomenclature`, `Description`, `Long_Label`, `Short_Label`, `Id_Nomenclature_Parent`) VALUES (11,'DeprecatedRepresentationTags',NULL,NULL,NULL,NULL);
+INSERT INTO `NOMENCLATURE` (`Id_Nomenclature`, `Cd_Nomenclature`, `Description`, `Long_Label`, `Short_Label`, `Id_Nomenclature_Parent`) VALUES (12,'UnexplicitPageTitle',NULL,NULL,NULL,NULL);
 
 --
 -- Dumping data for table `NOMENCLATURE_ELEMENT`
@@ -246,16 +247,17 @@ INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`,
 INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',179,'pa',NULL,10);
 INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',180,'ie',NULL,10);
 INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',181,'lo',NULL,10);
-INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',182,'APPLET',NULL,11);
-INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',183,'BASEFONT',NULL,11);
-INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',184,'CENTER',NULL,11);
-INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',185,'DIR',NULL,11);
-INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',186,'FONT',NULL,11);
-INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',187,'ISINDEX',NULL,11);
-INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',188,'MENU',NULL,11);
-INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',189,'S',NULL,11);
-INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',190,'STRIKE',NULL,11);
-INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',191,'U',NULL,11);
+INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',182,'BASEFONT',NULL,11);
+INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',183,'CENTER',NULL,11);
+INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',184,'DIR',NULL,11);
+INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',185,'FONT',NULL,11);
+INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',186,'ISINDEX',NULL,11);
+INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',187,'MENU',NULL,11);
+INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',188,'S',NULL,11);
+INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',189,'STRIKE',NULL,11);
+INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',190,'U',NULL,11);
+INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',191,'',NULL,12);
+INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',192,'bienvenue dans GoLive6',NULL,12);
 --
 -- Dumping data for table `PROCESS_REMARK`
 --
@@ -300,7 +302,8 @@ INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `L
 INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (8,'AccessKeyNotMatch',NULL,'AccessKey not match');
 INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (9,'BadUnitType',NULL,'Bad unit type');
 INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (10,'InvalidLanguageCode',NULL,'Invalid language code');
-INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (11,'DeprecatedTagFound',NULL,'Deprecated tag found : {0} at line {1}');
+INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (11,'DeprecatedRepresentationTagFound',NULL,'Deprecated tag found : {0} at line {1}');
+
 
 --
 -- Dumping data for table `TEST`
@@ -323,7 +326,9 @@ INSERT INTO `TEST` (`Id_Test`, `Cd_Test`, `Description`, `Label`, `Rank`, `Rule_
 INSERT INTO `TEST` (`Id_Test`, `Cd_Test`, `Description`, `Label`, `Rank`, `Rule_Archive_Name`, `Rule_Class_Name`, `Id_Criterion`, `Id_Decision_Level`, `Id_Level`, `Id_Rule`, `Id_Scope`) VALUES (15,'1109a',NULL,NULL,15,'AccessiWeb','org.opens.tanaguru.rule.accessiweb.Rule1109a',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `TEST` (`Id_Test`, `Cd_Test`, `Description`, `Label`, `Rank`, `Rule_Archive_Name`, `Rule_Class_Name`, `Id_Criterion`, `Id_Decision_Level`, `Id_Level`, `Id_Rule`, `Id_Scope`) VALUES (16,'1203c',NULL,NULL,16,'AccessiWeb','org.opens.tanaguru.rule.accessiweb.Rule1203c',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `TEST` (`Id_Test`, `Cd_Test`, `Description`, `Label`, `Rank`, `Rule_Archive_Name`, `Rule_Class_Name`, `Id_Criterion`, `Id_Decision_Level`, `Id_Level`, `Id_Rule`, `Id_Scope`) VALUES (17,'1303a',NULL,NULL,17,'AccessiWeb','org.opens.tanaguru.rule.accessiweb.Rule1303a',NULL,NULL,NULL,NULL,NULL);
-INSERT INTO `TEST` (`Id_Test`, `Cd_Test`, `Description`, `Label`, `Rank`, `Rule_Archive_Name`, `Rule_Class_Name`, `Id_Criterion`, `Id_Decision_Level`, `Id_Level`, `Id_Rule`, `Id_Scope`) VALUES (18,'10011',NULL,NULL,18,'AccessiWeb','org.opens.tanaguru.rule.accessiweb2.Rule10011',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `TEST` (`Id_Test`, `Cd_Test`, `Description`, `Label`, `Rank`, `Rule_Archive_Name`, `Rule_Class_Name`, `Id_Criterion`, `Id_Decision_Level`, `Id_Level`, `Id_Rule`, `Id_Scope`) VALUES (18,'Aw2_10011',NULL,NULL,18,'AccessiWeb','org.opens.tanaguru.rule.accessiweb2.Aw2Rule10011',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `TEST` (`Id_Test`, `Cd_Test`, `Description`, `Label`, `Rank`, `Rule_Archive_Name`, `Rule_Class_Name`, `Id_Criterion`, `Id_Decision_Level`, `Id_Level`, `Id_Rule`, `Id_Scope`) VALUES (19,'Aw2_08501',NULL,NULL,19,'AccessiWeb','org.opens.tanaguru.rule.accessiweb2.Aw2Rule08501',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `TEST` (`Id_Test`, `Cd_Test`, `Description`, `Label`, `Rank`, `Rule_Archive_Name`, `Rule_Class_Name`, `Id_Criterion`, `Id_Decision_Level`, `Id_Level`, `Id_Rule`, `Id_Scope`) VALUES (20,'Aw2_08601',NULL,NULL,20,'AccessiWeb','org.opens.tanaguru.rule.accessiweb2.Aw2Rule08601',NULL,NULL,NULL,NULL,NULL);
 
 --
 -- Dumping data for table `THEME`
