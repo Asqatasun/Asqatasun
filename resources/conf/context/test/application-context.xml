@@ -17,7 +17,6 @@
     <import resource="../beans-factories.xml"/>
     <import resource="../beans-persistence.xml"/>
 
-    <import resource="../beans-crawler.xml"/>
     <import resource="../beans-contentloader.xml"/>
     <import resource="beans-contentadapter.xml"/>
     <import resource="../beans-processor.xml"/>
