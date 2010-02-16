@@ -13,4 +13,5 @@
     <bean id="testFactory" class="org.opens.tanaguru.entity.factory.reference.TestFactoryImpl"/>
     <bean id="processResultFactory" class="org.opens.tanaguru.entity.factory.audit.ProcessResultFactoryImpl"/>
 
+    <bean id="webResourceFactory" class="org.opens.tanaguru.entity.factory.subject.WebResourceFactoryImpl"/>
 </beans>
