@@ -5,6 +5,7 @@
 package org.opens.tanaguru.rule.accessiweb2;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
@@ -63,6 +64,14 @@ public class Aw2Rule10011 extends AbstractPageRuleImplementation {
 
         Nomenclature deprecatedHtmlTags = nomenclatureLoaderService.
                 loadByCode("DeprecatedRepresentationTags");
+
+        Collection<String> nomenclatureValuesList = new ArrayList<String>();
+
+        for (String nomenclatureValue : deprecatedHtmlTags.getValueList()) {
+            nomenclatureValuesList.add(nomenclatureValue);
+            nomenclatureValuesList.add(nomenclatureValue.toLowerCase());
+        }
+ 
 
         sspHandler.beginSelection().
                 selectDocumentNodes(deprecatedHtmlTags.getValueList());
