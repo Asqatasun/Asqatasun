@@ -16,8 +16,8 @@ import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
  */
 public class Aw2Rule08061 extends AbstractPageRuleImplementation {
 
-    private static final String HEAD_TAG = "head";
-    private static final String TTTLE_TAG = "title";
+    private static final String HEAD_TAG = "HEAD";
+    private static final String TTTLE_TAG = "TITLE";
 
     /**
      *
@@ -39,7 +39,7 @@ public class Aw2Rule08061 extends AbstractPageRuleImplementation {
 
         Nomenclature unexplicitePageTitle = nomenclatureLoaderService.
                 loadByCode("UnexplicitPageTitle");
-
+        
         TestSolution testSolution = sspHandler.
                 checkTextContentValue(unexplicitePageTitle.getValueList(), null);
 
