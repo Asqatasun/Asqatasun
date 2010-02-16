@@ -58,25 +58,9 @@ public class ContentsAdapterImpl implements ContentsAdapter {
 
                 htmlCleaner.setDirtyHTML(ssp.getSource());
                 htmlCleaner.run();
-                ssp.setDOM(htmlCleaner.getResult());
 
-                if (true) {// @debug
-                    String fileName = null;
-                    int lastIndexOfSlash = ssp.getURI().lastIndexOf("/");
-                    if (lastIndexOfSlash == ssp.getURI().length() - 1) {
-                        fileName = "index.html";
-                    } else {
-                        fileName = ssp.getURI().substring(lastIndexOfSlash + 1);
-                    }
-                    try {
-                        FileWriter fw = new FileWriter("/var/tmp/" + htmlCleaner.getCorrectorName()
-                                + '-' + new Date().getTime() + '-' + fileName);
-                        fw.write(ssp.getDOM());
-                        fw.close();
-                    } catch (IOException ex) {
-                        Logger.getLogger(ContentsAdapterImpl.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
+                ssp.setDOM(removeUpperCaseTags(htmlCleaner.getResult()));
+                writeCleanDomInFile(ssp);
 
                 htmlParser.setSSP(ssp);
                 htmlParser.run();
@@ -88,6 +72,7 @@ public class ContentsAdapterImpl implements ContentsAdapter {
                     if (contentAdapter instanceof JSContentAdapter) {
                         ssp.setJavascript(contentAdapter.getAdaptation());
                     }
+
                     localResult.addAll(contentAdapter.getContentList());
                 }
                 localResult.add(ssp);
@@ -110,5 +95,61 @@ public class ContentsAdapterImpl implements ContentsAdapter {
 
     public void setHTMLParser(HTMLParser htmlParser) {
         this.htmlParser = htmlParser;
+    }
+
+    private String removeUpperCaseTags(String cleanHtml) {
+        StringBuffer newCleanHtml = new StringBuffer();
+        int strPtr=0;
+        int tmpPtr=0;
+        while (strPtr != cleanHtml.length()){
+            if (cleanHtml.charAt(strPtr) == '<') {
+                if (cleanHtml.charAt(strPtr+1) == '!') { //To ignore the case of <!doctype
+                    newCleanHtml.append(cleanHtml.charAt(strPtr));
+                    strPtr++;
+                } else if (cleanHtml.charAt(strPtr+1) == '/') {
+                    tmpPtr = cleanHtml.indexOf('>', strPtr);
+                    newCleanHtml.append('<');
+                    newCleanHtml.append('/');
+                    newCleanHtml.append(cleanHtml.substring(strPtr+2, tmpPtr).toLowerCase());
+                    strPtr = tmpPtr;
+                } else {
+                    if (cleanHtml.indexOf(' ', strPtr) < cleanHtml.indexOf('>', strPtr)) {
+                        // case of self-closing tag
+                        tmpPtr = cleanHtml.indexOf(' ', strPtr);
+                    } else {
+                        // case of classical opening tag
+                        tmpPtr = cleanHtml.indexOf('>', strPtr);
+                    }
+                    newCleanHtml.append('<');
+                    newCleanHtml.append(cleanHtml.substring(strPtr+1, tmpPtr).toLowerCase());
+                    strPtr = tmpPtr;
+                }
+            } else {
+                newCleanHtml.append(cleanHtml.charAt(strPtr));
+                strPtr++;
+            }
+        }
+        return newCleanHtml.toString();
+    }
+
+    private void writeCleanDomInFile(SSP ssp){
+        if (true) {
+            // @debug
+            String fileName = null;
+            int lastIndexOfSlash = ssp.getURI().lastIndexOf("/");
+            if (lastIndexOfSlash == ssp.getURI().length() - 1) {
+                fileName = "index.html";
+            } else {
+                fileName = ssp.getURI().substring(lastIndexOfSlash + 1);
+            }
+            try {
+                FileWriter fw = new FileWriter("/var/tmp/" + htmlCleaner.getCorrectorName()
+                        + '-' + new Date().getTime() + '-' + fileName);
+                fw.write(ssp.getDOM());
+                fw.close();
+            } catch (IOException ex) {
+                Logger.getLogger(ContentsAdapterImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }
