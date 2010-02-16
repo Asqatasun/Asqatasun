@@ -43,10 +43,33 @@ public class HTMLParserImpl implements HTMLParser {
             return;
         }
 
+        // http://xerces.apache.org/xerces2-j/features.html
+        // General features
         saxReader = XMLReaderFactory.createXMLReader("org.apache.xerces.parsers.SAXParser");
-        saxReader.setFeature(
-                "http://apache.org/xml/features/nonvalidating/load-external-dtd",
-                false);
+        saxReader.setFeature("http://xml.org/sax/features/namespaces", false);
+        saxReader.setFeature("http://xml.org/sax/features/use-entity-resolver2", false);
+        saxReader.setFeature("http://apache.org/xml/features/validation/schema/normalized-value", false);
+        saxReader.setFeature("http://apache.org/xml/features/validation/schema/element-default", false);
+        saxReader.setFeature("http://apache.org/xml/features/validation/schema/augment-psvi", false);
+        saxReader.setFeature("http://apache.org/xml/features/validation/schema/ignore-xsi-type-until-elemdecl", true);
+        saxReader.setFeature("http://apache.org/xml/features/generate-synthetic-annotations", false);
+        saxReader.setFeature("http://xml.org/sax/features/external-general-entities", false);
+        saxReader.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+        saxReader.setFeature("http://apache.org/xml/features/validation/id-idref-checking", false);
+        saxReader.setFeature("http://apache.org/xml/features/validation/identity-constraint-checking", false);
+        saxReader.setFeature("http://apache.org/xml/features/validation/unparsed-entity-checking", false);
+        saxReader.setFeature("http://apache.org/xml/features/allow-java-encodings", true);
+        saxReader.setFeature("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);
+        saxReader.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+        saxReader.setFeature("http://apache.org/xml/features/xinclude/fixup-base-uris", false);
+        saxReader.setFeature("http://apache.org/xml/features/xinclude/fixup-language", false);
+
+        // SAX features
+//        saxReader.setFeature("http://xml.org/sax/features/string-interning", false);// Crashes
+//        saxReader.setFeature("http://xml.org/sax/features/lexical-handler/parameter-entities", false);// XXX
+//        saxReader.setFeature("http://xml.org/sax/features/is-standalone", false);// XXX
+        // http://xml.org/sax/features/resolve-dtd-uris
+
         DOMContentHandlerDecorator contentHandlerDecorator = new DOMContentHandlerDecoratorImpl();
         for (ContentAdapter contentAdapter : contentAdapterSet) {
             contentHandlerDecorator.addContentHandler((ContentHandler) contentAdapter);

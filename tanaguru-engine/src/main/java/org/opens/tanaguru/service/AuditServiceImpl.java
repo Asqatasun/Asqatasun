@@ -83,7 +83,9 @@ public class AuditServiceImpl implements AuditService {
 
     public Audit audit(Audit audit) {
         audit = init(audit);
-        audit = crawl(audit);
+        if (audit.getSubject() instanceof Site) {
+            audit = crawl(audit);
+        }
         audit = loadContent(audit);
         audit = adaptContent(audit);
         audit = process(audit);

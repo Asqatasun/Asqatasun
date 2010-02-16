@@ -1,6 +1,5 @@
 package org.opens.tanaguru.contentadapter.util;
 
-import org.opens.tanaguru.contentadapter.util.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 
