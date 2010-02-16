@@ -4,9 +4,6 @@
  */
 package org.opens.tanaguru.rule.accessiweb2;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
@@ -18,13 +15,13 @@ import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
  */
 public class Aw2Rule08051 extends AbstractPageRuleImplementation {
 
-    private static final String HEAD_TAG = "head";
-    private static final String TTTLE_TAG = "title";
+    private static final String HEAD_TAG = "HEAD";
+    private static final String TTTLE_TAG = "TITLE";
 
     /**
      *
      */
-    public Aw2Rule08051(){
+    public Aw2Rule08051() {
         super();
     }
 
@@ -36,9 +33,24 @@ public class Aw2Rule08051 extends AbstractPageRuleImplementation {
     @Override
     protected ProcessResult processImpl(SSPHandler sspHandler) {
 
-        sspHandler.beginSelection().selectDocumentNodes(HEAD_TAG);
+        sspHandler.beginSelection().selectDocumentNodes(HEAD_TAG).
+                selectChildNodes(TTTLE_TAG);
 
-        TestSolution testSolution = sspHandler.checkChildNodeExists(TTTLE_TAG);
+        TestSolution testSolution = null;
+
+        if (sspHandler.getSelectedElementList() != null
+                && sspHandler.getSelectedElementList().size() == 1) {
+            testSolution = TestSolution.PASSED;
+        } else {
+            sspHandler.beginSelection().selectDocumentNodes(HEAD_TAG.toLowerCase()).
+                    selectChildNodes(TTTLE_TAG.toLowerCase());
+            if (sspHandler.getSelectedElementList() != null
+                && sspHandler.getSelectedElementList().size() == 1) {
+                testSolution = TestSolution.PASSED;
+            } else {
+                testSolution = TestSolution.FAILED;
+            }
+        }
 
         ProcessResult processResult = definiteResultFactory.create(
                 test,
