@@ -257,7 +257,9 @@ INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`,
 INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',189,'STRIKE',NULL,11);
 INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',190,'U',NULL,11);
 INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',191,'',NULL,12);
-INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',192,'bienvenue dans GoLive6',NULL,12);
+INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',192,'Bienvenue dans Adobe GoLive 6',NULL,12);
+INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',193,'Page title',NULL,12);
+INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',194,'Titre de la page',NULL,12);
 --
 -- Dumping data for table `PROCESS_REMARK`
 --
