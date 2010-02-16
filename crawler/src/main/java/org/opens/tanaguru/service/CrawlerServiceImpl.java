@@ -27,6 +27,11 @@ public class CrawlerServiceImpl implements CrawlerService {
         this.crawler = crawler;
     }
 
+    /**
+     * Calls the crawler component process then updates the site.
+     * @param site the site to crawl
+     * @return returns the site after modification
+     */
     public Site crawl(Site site) {
         crawler.setSiteURL(site.getURL());
         crawler.run();

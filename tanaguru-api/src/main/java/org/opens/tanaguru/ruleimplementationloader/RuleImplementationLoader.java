@@ -8,19 +8,19 @@ import org.opens.tanaguru.ruleimplementation.RuleImplementation;
  */
 public interface RuleImplementationLoader {
 
-	String getArchiveName();
+    String getArchiveName();
 
-	String getArchiveRoot();
+    String getArchiveRoot();
 
-	String getClassName();
+    String getClassName();
 
-	RuleImplementation getResult();
+    RuleImplementation getResult();
 
-	void run();
+    void run();
 
-	void setArchiveName(String archiveName);
+    void setArchiveName(String archiveName);
 
-	void setArchiveRoot(String ruleImplementationArchveRoot);
+    void setArchiveRoot(String ruleImplementationArchveRoot);
 
-	void setClassName(String className);
+    void setClassName(String className);
 }

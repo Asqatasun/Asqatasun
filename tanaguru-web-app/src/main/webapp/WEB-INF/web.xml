@@ -19,7 +19,7 @@
     <!-- Spring -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/META-INF/application-context.xml</param-value>
+        <param-value>file:///etc/tanaguru/context/web-app/application-context.xml</param-value>
     </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

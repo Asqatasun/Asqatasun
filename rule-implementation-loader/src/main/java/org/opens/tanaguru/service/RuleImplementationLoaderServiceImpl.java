@@ -28,6 +28,7 @@ public class RuleImplementationLoaderServiceImpl implements
         super();
     }
 
+    @Override
     public Set<RuleImplementation> loadRuleImplementationSet(Set<Test> testSet) {
         Set<RuleImplementation> ruleImplementationSet = new HashSet<RuleImplementation>();
         for (Test test : testSet) {
@@ -36,36 +37,43 @@ public class RuleImplementationLoaderServiceImpl implements
         return ruleImplementationSet;
     }
 
+    @Override
     public void setDefiniteResultFactory(
             DefiniteResultFactory definiteResultFactory) {
         this.definiteResultFactory = definiteResultFactory;
     }
 
+    @Override
     public void setIndefiniteResultFactory(
             IndefiniteResultFactory indefiniteResultFactory) {
         this.indefiniteResultFactory = indefiniteResultFactory;
     }
 
+    @Override
     public void setNomenclatureLoaderService(
             NomenclatureLoaderService nomenclatureService) {
         this.nomenclatureLoaderService = nomenclatureService;
     }
 
+    @Override
     public void setProcessRemarkFactory(
             ProcessRemarkFactory processRemarkFactory) {
         this.processRemarkFactory = processRemarkFactory;
     }
 
+    @Override
     public void setRuleImplementationLoader(
             RuleImplementationLoader ruleImplementationLoader) {
         this.ruleImplementationLoader = ruleImplementationLoader;
     }
 
+    @Override
     public void setSourceCodeRemarkFactory(
             SourceCodeRemarkFactory sourceCodeRemarkFactory) {
         this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
     }
 
+    @Override
     public RuleImplementation loadRuleImplementation(Test test) {
         ruleImplementationLoader.setArchiveName(test.getRuleArchiveName());
         ruleImplementationLoader.setClassName(test.getRuleClassName());

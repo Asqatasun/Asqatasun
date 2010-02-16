@@ -7,13 +7,15 @@ import org.opens.tanaguru.service.AuditService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 /**
  * 
  * @author ADEX
  */
 public class FullClientImpl {
+
+    private static final String APPLICATION_CONTEXT_FILE_PATH = "file:///etc/tanaguru/context/local-app/context-fullclient.xml";
 
     public static void main(String[] args) {
 //        run("one-one");
@@ -32,7 +34,7 @@ public class FullClientImpl {
         String[] pageUrlList = parametersBundle.getString("pageUrlList").split(", ");
         String[] testCodeList = parametersBundle.getString("testCodeList").split(", ");
 
-        ApplicationContext springApplicationContext = new ClassPathXmlApplicationContext("/META-INF/context-fullclient.xml");
+        ApplicationContext springApplicationContext = new FileSystemXmlApplicationContext(APPLICATION_CONTEXT_FILE_PATH);
         BeanFactory springBeanFactory = springApplicationContext;
         AuditService auditService = (AuditService) springBeanFactory.getBean("auditService");
 

@@ -1,16 +1,24 @@
 package org.opens.tanaguru.contentloader;
 
-public interface Downloader {
+public interface Downloader {// TODO Write Javadoc
 
-	/**
-	 * 
-	 * @return the content downloaded
-	 */
-	String getResult();
+    /**
+     *
+     * @return the content downloaded
+     */
+    String getResult();
 
-	String getURL();
+    /**
+     *
+     * @return the URL set
+     */
+    String getURL();
 
-	void run();
+    void run();
 
-	void setURL(String url);
+    /**
+     *
+     * @param url the URL of the content to download
+     */
+    void setURL(String url);
 }

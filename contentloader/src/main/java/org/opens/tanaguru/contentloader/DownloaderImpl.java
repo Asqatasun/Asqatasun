@@ -17,15 +17,7 @@ public class DownloaderImpl implements Downloader {
         super();
     }
 
-    public String getResult() {
-        return result;
-    }
-
-    public String getURL() {
-        return url;
-    }
-
-    public void run() {
+    private String download(String url) {
         BufferedReader in = null;
         try {
             String urlContent = "";
@@ -35,7 +27,7 @@ public class DownloaderImpl implements Downloader {
             while ((thisLine = in.readLine()) != null) {
                 urlContent = urlContent + thisLine;
             }
-            result = urlContent;
+            return urlContent;
         } catch (IOException ex) {
             Logger.getLogger(DownloaderImpl.class.getName()).log(Level.SEVERE,
                     null, ex);
@@ -53,6 +45,22 @@ public class DownloaderImpl implements Downloader {
         }
     }
 
+    @Override
+    public String getResult() {
+        return result;
+    }
+
+    @Override
+    public String getURL() {
+        return url;
+    }
+
+    @Override
+    public void run() {
+        result = download(url);
+    }
+
+    @Override
     public void setURL(String url) {
         this.url = url;
     }

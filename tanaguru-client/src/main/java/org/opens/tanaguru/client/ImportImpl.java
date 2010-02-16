@@ -15,7 +15,7 @@ import java.util.HashSet;
 import java.util.Set;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.w3c.css.sac.LexicalUnit;
 
 /**
@@ -24,6 +24,7 @@ import org.w3c.css.sac.LexicalUnit;
  */
 public class ImportImpl {
 
+    private static final String APPLICATION_CONTEXT_FILE_PATH = "file:///etc/tanaguru/context/local-app/context-import.xml";
     private static String RULE_ARCHIVE_NAME = "AccessiWeb";
     private static String RULE_PACKAGE_NAME = "org.opens.tanaguru.rule.accessiweb.";
 
@@ -332,8 +333,8 @@ public class ImportImpl {
 
     public static void main(String[] args) {
 
-        ApplicationContext springApplicationContext = new ClassPathXmlApplicationContext(
-                "/META-INF/context-import.xml");
+        ApplicationContext springApplicationContext = new FileSystemXmlApplicationContext(
+                APPLICATION_CONTEXT_FILE_PATH);
         BeanFactory springBeanFactory = springApplicationContext;
 
         // Nomenclature

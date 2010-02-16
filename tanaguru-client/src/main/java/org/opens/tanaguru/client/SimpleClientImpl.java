@@ -5,7 +5,6 @@ import java.util.List;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.reference.Test;
-import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.entity.factory.reference.TestFactory;
 import org.opens.tanaguru.service.ContentAdapterService;
@@ -17,7 +16,7 @@ import org.opens.tanaguru.service.ProcessorService;
 import org.opens.tanaguru.service.RuleImplementationLoaderService;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 /**
  * 
@@ -25,6 +24,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class SimpleClientImpl {
 
+    private static final String APPLICATION_CONTEXT_FILE_PATH = "file:///etc/tanaguru/context/local-app/context-simpleclient.xml";
     private static String RULE_ARCHIVE_NAME = "AccessiWeb";
     private static String RULE_PACKAGE_NAME = "org.opens.tanaguru.rule.accessiweb.";
 
@@ -117,8 +117,7 @@ public class SimpleClientImpl {
     }
 
     public static void main(String[] args) {
-        ApplicationContext springApplicationContext = new ClassPathXmlApplicationContext(
-                "/META-INF/context-simpleclient.xml");
+        ApplicationContext springApplicationContext = new FileSystemXmlApplicationContext(APPLICATION_CONTEXT_FILE_PATH);
         BeanFactory springBeanFactory = springApplicationContext;
 
         CrawlerService crawlerService = (CrawlerService) springBeanFactory.getBean("crawlerService");
