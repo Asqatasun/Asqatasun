@@ -5,7 +5,6 @@
 package org.opens.tanaguru.rule.test;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,12 +14,12 @@ import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.factory.reference.TestFactory;
 import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
 import org.opens.tanaguru.entity.reference.Test;
+import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.service.ConsolidatorService;
 import org.opens.tanaguru.service.ContentAdapterService;
 import org.opens.tanaguru.service.ContentLoaderService;
-import org.opens.tanaguru.service.CrawlerService;
 import org.opens.tanaguru.service.ProcessorService;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -34,7 +33,6 @@ public abstract class AbstractRuleImplementationTestCase extends TestCase {
     private static final String APPLICATION_CONTEXT_FILE_PATH = "file:///etc/tanaguru/context/test/application-context.xml";
     private BeanFactory springBeanFactory;
     private TestFactory testFactory;
-    private CrawlerService crawlerService;
     private ContentLoaderService contentLoaderService;
     private ContentAdapterService contentAdapterService;
     private ProcessorService processorService;
@@ -61,7 +59,6 @@ public abstract class AbstractRuleImplementationTestCase extends TestCase {
 
         testFactory = (TestFactory) springBeanFactory.getBean("testFactory");
 
-        crawlerService = (CrawlerService) springBeanFactory.getBean("crawlerService");
         contentLoaderService = (ContentLoaderService) springBeanFactory.getBean("contentLoaderService");
         contentAdapterService = (ContentAdapterService) springBeanFactory.getBean("contentAdapterService");
 
@@ -87,10 +84,6 @@ public abstract class AbstractRuleImplementationTestCase extends TestCase {
         testList.add(test);
 
         for (WebResource webResource : webResourceMap.values()) {
-            if (webResource instanceof Site) {
-                Site site = crawlerService.crawl((Site) webResource);// Not necessary because the web resource is updated inside the method.
-                ((Site) webResource).addAllChild((Collection<WebResource>) site.getComponentList());// Not necessary because the site has been updated inside the previous method.
-            }
             contentMap.put(webResource, contentLoaderService.loadContent(webResource));
             contentMap.put(webResource, contentAdapterService.adaptContent(contentMap.get(webResource)));
         }
@@ -124,4 +117,16 @@ public abstract class AbstractRuleImplementationTestCase extends TestCase {
     protected abstract void setProcess();
 
     protected abstract void setConsolidate();
+
+    protected ProcessResult getGrossResult(String pageKey, String siteKey) {
+        Site site = (Site) webResourceMap.get(siteKey);
+        List<ProcessResult> grossResultList = grossResultMap.get(site);
+        Page page = (Page) webResourceMap.get(pageKey);
+        for (ProcessResult grossResult : grossResultList) {
+            if (grossResult.getSubject().equals(page)) {
+                return grossResult;
+            }
+        }
+        return null;
+    }
 }
