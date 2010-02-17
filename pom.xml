@@ -30,7 +30,8 @@
         <module>tanaguru-web-app</module>
         <module>tanaguru-membership</module>
         <module>tanaguru-i18n</module>
-        <module>AccessiWeb</module>
+        <module>accessiweb1.1</module>
+        <module>accessiweb2.0</module>
         <module>tanaguru-testing-tools</module>
     </modules>
 </project>
