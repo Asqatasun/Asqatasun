@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<title>AW11 Test.1.5.b Failed 01</title>
+</head>
+<body>
+<div>
+
+	<h1>AW11 Test.1.5.b Failed 01</h1>
+
+	<p class="test-detail">
+		<span lang="fr">
+			Pour chaque image (balise img, balise img ou balise object avec l'attribut usemap) ayant un attribut longdesc,
+			le contenu de cet attribut est-il une url valide ?
+		</span>
+	</p>
+
+	<p class="test-detail-Open-S">
+		<span lang="fr">
+			Intitulé réellement retenu pour ce test:<br />
+			Pour chaque image (balise img) ayant un attribut longdesc,
+			le contenu de cet attribut est-il une url valide ?
+			<br />
+			<br />
+			27/01/2009: demande de correction faite auprès de Braillenet
+		</span>
+	</p>
+
+	<div class="testcase">
+		<img src="dummy-image.jpg" alt="dummy alt" longdesc="wrong longdesc value (not an url)" />
+	</div>
+
+	<p class="test-explanation">Failed: image has longdesc but is not a valid URL</p>
+
+</div>
+</body>
+</html>
