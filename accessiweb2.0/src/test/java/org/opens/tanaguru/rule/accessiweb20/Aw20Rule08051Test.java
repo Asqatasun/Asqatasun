@@ -11,9 +11,9 @@ import org.opens.tanaguru.rule.test.AbstractRuleImplementationTestCase;
  *
  * @author jkowalczyk
  */
-public class Aw2Rule08051Test extends AbstractRuleImplementationTestCase {
+public class Aw20Rule08051Test extends AbstractRuleImplementationTestCase {
 
-    public Aw2Rule08051Test(String testName) {
+    public Aw20Rule08051Test(String testName) {
         super(testName);
     }
 
