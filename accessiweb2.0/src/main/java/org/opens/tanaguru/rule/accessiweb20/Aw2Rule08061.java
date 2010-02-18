@@ -16,8 +16,8 @@ import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
  */
 public class Aw2Rule08061 extends AbstractPageRuleImplementation {
 
-    private static final String HEAD_TAG = "HEAD";
-    private static final String TTTLE_TAG = "TITLE";
+    private static final String HEAD_TAG = "head";
+    private static final String TTTLE_TAG = "title";
 
     /**
      *
@@ -36,6 +36,8 @@ public class Aw2Rule08061 extends AbstractPageRuleImplementation {
 
         sspHandler.beginSelection().selectDocumentNodes(HEAD_TAG).
                 selectChildNodes(TTTLE_TAG);
+
+        System.out.println("sspHandler.getSelectedElementList().isEmpty()" + sspHandler.getSelectedElementList().isEmpty());
 
         Nomenclature unexplicitePageTitle = nomenclatureLoaderService.
                 loadByCode("UnexplicitPageTitle");
