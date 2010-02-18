@@ -15,8 +15,8 @@ import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
  */
 public class Aw2Rule08051 extends AbstractPageRuleImplementation {
 
-    private static final String HEAD_TAG = "HEAD";
-    private static final String TTTLE_TAG = "TITLE";
+    private static final String HEAD_TAG = "head";
+    private static final String TTTLE_TAG = "title";
 
     /**
      *
@@ -42,14 +42,7 @@ public class Aw2Rule08051 extends AbstractPageRuleImplementation {
                 && sspHandler.getSelectedElementList().size() == 1) {
             testSolution = TestSolution.PASSED;
         } else {
-            sspHandler.beginSelection().selectDocumentNodes(HEAD_TAG.toLowerCase()).
-                    selectChildNodes(TTTLE_TAG.toLowerCase());
-            if (sspHandler.getSelectedElementList() != null
-                && sspHandler.getSelectedElementList().size() == 1) {
-                testSolution = TestSolution.PASSED;
-            } else {
-                testSolution = TestSolution.FAILED;
-            }
+            testSolution = TestSolution.FAILED;
         }
 
         ProcessResult processResult = definiteResultFactory.create(
