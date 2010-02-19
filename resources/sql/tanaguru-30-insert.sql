@@ -1,3 +1,5 @@
+USE tanaguru;
+
 -- MySQL dump 10.11
 --
 -- Host: localhost    Database: tanaguru
