@@ -19,7 +19,7 @@ public class Aw20Rule10011Test extends AbstractRuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        ruleImplementationClassName = "org.opens.tanaguru.rule.accessiweb20.Aw2Rule10011";
+        ruleImplementationClassName = "org.opens.tanaguru.rule.accessiweb20.Aw20Rule10011";
     }
 
     @Override
