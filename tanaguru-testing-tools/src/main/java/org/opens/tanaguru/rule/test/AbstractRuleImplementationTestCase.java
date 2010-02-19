@@ -44,6 +44,7 @@ public abstract class AbstractRuleImplementationTestCase extends TestCase {
     protected WebResourceFactory webResourceFactory;
     protected String ruleImplementationClassName;
     protected Map<String, WebResource> webResourceMap = new HashMap<String, WebResource>();
+    protected static final String TESTCASES_FILES_PATH = "file:///home/jkowalczyk/Documents/Sources/TanaguruEngine/Trunk/tanaguru-testing-tools/resources/testcases/";
 
     public AbstractRuleImplementationTestCase(String testName) {
         super(testName);
@@ -65,6 +66,8 @@ public abstract class AbstractRuleImplementationTestCase extends TestCase {
         processorService = (ProcessorService) springBeanFactory.getBean("processorService");
 
         consolidatorService = (ConsolidatorService) springBeanFactory.getBean("consolidatorService");
+//        PropertyPlaceholderConfigurer myPlaceHolder =
+//                (PropertyPlaceholderConfigurer) springBeanFactory.getBean("consolidatorService");
     }
 
     /**
