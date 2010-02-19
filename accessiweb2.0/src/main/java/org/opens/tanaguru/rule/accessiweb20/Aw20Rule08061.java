@@ -22,7 +22,7 @@ public class Aw20Rule08061 extends AbstractPageRuleImplementation {
     /**
      *
      */
-    public Aw20Rule08061(){
+    public Aw20Rule08061() {
         super();
     }
 
@@ -37,13 +37,11 @@ public class Aw20Rule08061 extends AbstractPageRuleImplementation {
         sspHandler.beginSelection().selectDocumentNodes(HEAD_TAG).
                 selectChildNodes(TTTLE_TAG);
 
-        System.out.println("sspHandler.getSelectedElementList().isEmpty()" + sspHandler.getSelectedElementList().isEmpty());
+        Nomenclature unexplicitePageTitle =
+                nomenclatureLoaderService.loadByCode("UnexplicitPageTitle");
 
-        Nomenclature unexplicitePageTitle = nomenclatureLoaderService.
-                loadByCode("UnexplicitPageTitle");
-        
-        TestSolution testSolution = sspHandler.
-                checkTextContentValue(unexplicitePageTitle.getValueList(), null);
+        TestSolution testSolution =
+                sspHandler.checkTextContentValue(unexplicitePageTitle.getValueList(), null);
 
         ProcessResult processResult = definiteResultFactory.create(
                 test,
@@ -53,5 +51,4 @@ public class Aw20Rule08061 extends AbstractPageRuleImplementation {
 
         return processResult;
     }
-
 }
