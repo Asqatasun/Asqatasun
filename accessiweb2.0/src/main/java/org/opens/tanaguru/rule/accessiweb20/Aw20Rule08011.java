@@ -16,11 +16,12 @@ import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
  */
 public class Aw20Rule08011 extends AbstractPageRuleImplementation {
 
+    public Aw20Rule08011() {
+        super();
+    }
+
     @Override
     protected ProcessResult processImpl(SSPHandler sspHandler) {
-
-
-
         TestSolution checkResult = sspHandler.checkChildNodeExists("doctype");
         DefiniteResult definiteResult = definiteResultFactory.create(
                 test,
