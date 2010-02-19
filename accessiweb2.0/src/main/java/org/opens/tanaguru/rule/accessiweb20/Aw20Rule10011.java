@@ -5,7 +5,6 @@
 package org.opens.tanaguru.rule.accessiweb20;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
