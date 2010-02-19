@@ -587,7 +587,8 @@ public class DOMHandlerImpl implements DOMHandler {
             factory.setFeature(
                     "http://apache.org/xml/features/nonvalidating/load-external-dtd",
                     false);
-            factory.setNamespaceAware(true);
+            //@TODO verify the namespace property is necessary in our context
+//            factory.setNamespaceAware(true);
             DocumentBuilder builder = factory.newDocumentBuilder();
             document = builder.parse(new ByteArrayInputStream(ssp.getDOM().getBytes("UTF-8")));
             initialized = true;
