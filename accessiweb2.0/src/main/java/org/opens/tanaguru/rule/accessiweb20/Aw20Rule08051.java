@@ -15,8 +15,8 @@ import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
  */
 public class Aw20Rule08051 extends AbstractPageRuleImplementation {
 
-    private static final String HEAD_TAG = "head";
-    private static final String TTTLE_TAG = "title";
+    private static final String HEAD_TAG = "HEAD";
+    private static final String TTTLE_TAG = "TITLE";
 
     /**
      *
