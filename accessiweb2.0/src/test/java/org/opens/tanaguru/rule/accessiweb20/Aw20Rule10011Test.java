@@ -26,34 +26,34 @@ public class Aw20Rule10011Test extends AbstractRuleImplementationTestCase {
     protected void setUpWebResourceMap() {
         webResourceMap.put("AW20.Test.10.01.01-1Passed-01", 
                 webResourceFactory.createPage(
-                "file:///home/jkowalczyk/Documents/Sources/TanaguruEngine/Trunk/tanaguru-testing-tools/resources/testcases/AW22/AW20.Test.10.01.01-1Passed-01.html"));
+                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.01.01-1Passed-01.html"));
         webResourceMap.put("AW20.Test.10.01.01-2Failed-01", 
                 webResourceFactory.createPage(
-                "file:///home/jkowalczyk/Documents/Sources/TanaguruEngine/Trunk/tanaguru-testing-tools/resources/testcases/AW22/AW20.Test.10.01.01-2Failed-01.html"));
+                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.01.01-2Failed-01.html"));
         webResourceMap.put("AW20.Test.10.01.01-2Failed-02",
                 webResourceFactory.createPage(
-                "file:///home/jkowalczyk/Documents/Sources/TanaguruEngine/Trunk/tanaguru-testing-tools/resources/testcases/AW22/AW20.Test.10.01.01-2Failed-02.html"));
+                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.01.01-2Failed-02.html"));
         webResourceMap.put("AW20.Test.10.01.01-2Failed-03", 
                 webResourceFactory.createPage(
-                "file:///home/jkowalczyk/Documents/Sources/TanaguruEngine/Trunk/tanaguru-testing-tools/resources/testcases/AW22/AW20.Test.10.01.01-2Failed-03.html"));
+                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.01.01-2Failed-03.html"));
         webResourceMap.put("AW20.Test.10.01.01-2Failed-04", 
                 webResourceFactory.createPage(
-                "file:///home/jkowalczyk/Documents/Sources/TanaguruEngine/Trunk/tanaguru-testing-tools/resources/testcases/AW22/AW20.Test.10.01.01-2Failed-04.html"));
+                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.01.01-2Failed-04.html"));
         webResourceMap.put("AW20.Test.10.01.01-2Failed-05", 
                 webResourceFactory.createPage(
-                "file:///home/jkowalczyk/Documents/Sources/TanaguruEngine/Trunk/tanaguru-testing-tools/resources/testcases/AW22/AW20.Test.10.01.01-2Failed-05.html"));
+                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.01.01-2Failed-05.html"));
         webResourceMap.put("AW20.Test.10.01.01-2Failed-06", 
                 webResourceFactory.createPage(
-                "file:///home/jkowalczyk/Documents/Sources/TanaguruEngine/Trunk/tanaguru-testing-tools/resources/testcases/AW22/AW20.Test.10.01.01-2Failed-06.html"));
+                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.01.01-2Failed-06.html"));
         webResourceMap.put("AW20.Test.10.01.01-2Failed-07", 
                 webResourceFactory.createPage(
-                "file:///home/jkowalczyk/Documents/Sources/TanaguruEngine/Trunk/tanaguru-testing-tools/resources/testcases/AW22/AW20.Test.10.01.01-2Failed-07.html"));
+                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.01.01-2Failed-07.html"));
         webResourceMap.put("AW20.Test.10.01.01-2Failed-08", 
                 webResourceFactory.createPage(
-                "file:///home/jkowalczyk/Documents/Sources/TanaguruEngine/Trunk/tanaguru-testing-tools/resources/testcases/AW22/AW20.Test.10.01.01-2Failed-08.html"));
+                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.01.01-2Failed-08.html"));
         webResourceMap.put("AW20.Test.10.01.01-2Failed-09", 
                 webResourceFactory.createPage(
-                "file:///home/jkowalczyk/Documents/Sources/TanaguruEngine/Trunk/tanaguru-testing-tools/resources/testcases/AW22/AW20.Test.10.01.01-2Failed-09.html"));
+                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.01.01-2Failed-09.html"));
     }
 
     @Override
