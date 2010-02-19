@@ -22,7 +22,7 @@ public class Aw20Rule01012 extends AbstractPageRuleImplementation {
     public static final String XPATH_EXPR2 =
             "//AREA[ancestor::MAP/@name = //IMG/@usemap]";
 
-    public static final String ALT_ATTRIBUTE = "ALT";
+    public static final String ALT_ATTRIBUTE = "alt";
 
     public Aw20Rule01012(){
         super();
