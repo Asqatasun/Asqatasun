@@ -19,6 +19,10 @@ public class Aw20Rule01011 extends AbstractPageRuleImplementation {
     public static final String IMG_TAG = "IMG";
     public static final String ALT_ATTRIBUTE = "alt";
 
+    public Aw20Rule01011() {
+        super();
+    }
+
     @Override
     protected ProcessResult processImpl(SSPHandler sspHandler) {
 
