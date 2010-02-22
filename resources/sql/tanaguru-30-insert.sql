@@ -63,7 +63,7 @@ INSERT INTO `NOMENCLATURE` (`Id_Nomenclature`, `Cd_Nomenclature`, `Description`,
 INSERT INTO `NOMENCLATURE` (`Id_Nomenclature`, `Cd_Nomenclature`, `Description`, `Long_Label`, `Short_Label`, `Id_Nomenclature_Parent`) VALUES (10,'ValidLanguageCode',NULL,NULL,NULL,NULL);
 INSERT INTO `NOMENCLATURE` (`Id_Nomenclature`, `Cd_Nomenclature`, `Description`, `Long_Label`, `Short_Label`, `Id_Nomenclature_Parent`) VALUES (11,'DeprecatedRepresentationTags',NULL,NULL,NULL,NULL);
 INSERT INTO `NOMENCLATURE` (`Id_Nomenclature`, `Cd_Nomenclature`, `Description`, `Long_Label`, `Short_Label`, `Id_Nomenclature_Parent`) VALUES (12,'UnexplicitPageTitle',NULL,NULL,NULL,NULL);
-
+INSERT INTO `NOMENCLATURE` (`Id_Nomenclature`, `Cd_Nomenclature`, `Description`, `Long_Label`, `Short_Label`, `Id_Nomenclature_Parent`) VALUES (13,'ImageFileExtensions',NULL,NULL,NULL,NULL);
 --
 -- Dumping data for table `NOMENCLATURE_ELEMENT`
 --
@@ -262,6 +262,11 @@ INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`,
 INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',192,'Bienvenue dans Adobe GoLive 6',NULL,12);
 INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',193,'Page title',NULL,12);
 INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',194,'Titre de la page',NULL,12);
+INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',195,'jpg',NULL,13);
+INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',196,'gif',NULL,13);
+INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',197,'jpeg',NULL,13);
+INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',198,'png',NULL,13);
+INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES ('NomenclatureElementImpl',199,'bmp',NULL,13);
 --
 -- Dumping data for table `PROCESS_REMARK`
 --
