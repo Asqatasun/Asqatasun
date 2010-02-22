@@ -40,6 +40,9 @@ public class Aw20Rule01021Test extends AbstractRuleImplementationTestCase {
         webResourceMap.put("AW20.Test.01.02.01-2Failed-02",
                 webResourceFactory.createPage(
                 TESTCASES_FILES_PATH + "AW22/AW20.Test.01.02.01-2Failed-02.html"));
+        webResourceMap.put("AW20.Test.01.02.01-2Failed-03",
+                webResourceFactory.createPage(
+                TESTCASES_FILES_PATH + "AW22/AW20.Test.01.02.01-2Failed-03.html"));
         webResourceMap.put("AW20.Test.01.02.01-3NMI-01",
                 webResourceFactory.createPage(
                 TESTCASES_FILES_PATH + "AW22/AW20.Test.01.02.01-3NMI-01.html"));
@@ -66,6 +69,8 @@ public class Aw20Rule01021Test extends AbstractRuleImplementationTestCase {
                 processPageTest("AW20.Test.01.02.01-2Failed-01").getValue());
         assertEquals(TestSolution.FAILED,
                 processPageTest("AW20.Test.01.02.01-2Failed-02").getValue());
+        assertEquals(TestSolution.FAILED,
+                processPageTest("AW20.Test.01.02.01-2Failed-03").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
                 processPageTest("AW20.Test.01.02.01-3NMI-01").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
@@ -88,6 +93,8 @@ public class Aw20Rule01021Test extends AbstractRuleImplementationTestCase {
                 consolidate("AW20.Test.01.02.01-2Failed-01").getValue());
         assertEquals(TestSolution.FAILED,
                 consolidate("AW20.Test.01.02.01-2Failed-02").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW20.Test.01.02.01-2Failed-03").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW20.Test.01.02.01-3NMI-01").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
