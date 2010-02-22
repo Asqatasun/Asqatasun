@@ -11,7 +11,7 @@ import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
 
 /**
- * This rule tests if all the decorative images have an empty "alt" attribute
+ * This rule tests if all images have an empty "alt" attribute
  * @author jkowalczyk
  */
 public class Aw20Rule01011 extends AbstractPageRuleImplementation {
