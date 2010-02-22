@@ -14,6 +14,7 @@ import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
 import org.opens.tanaguru.ruleimplementation.ImageChecker;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
+import org.opens.tanaguru.entity.reference.Nomenclature;
 
 /**
  * This rule tests if an informative image has a pertinent alt attribute content
@@ -26,7 +27,7 @@ public class Aw20Rule01031 extends AbstractPageRuleImplementation {
     public static final String ALT_ATTRIBUTE = "alt";
     public static final String TITLE_ATTRIBUTE = "title";
     public static final String XPATH_EXPR =
-            "//IMG[@title and @alt and @longdesc]";
+            "//IMG[@alt and @longdesc]";
 
     public Aw20Rule01031() {
         super();
@@ -39,7 +40,8 @@ public class Aw20Rule01031 extends AbstractPageRuleImplementation {
         List<ProcessRemark> processRemarkList = new ArrayList<ProcessRemark>();
 
         List<Node> imgNodes = sspHandler.beginSelection().
-                selectDocumentNodes(IMG_TAG).getSelectedElementList();
+                selectDocumentNodes(IMG_TAG).
+                keepNodesWithAttribute(ALT_ATTRIBUTE).getSelectedElementList();
 
         int decorativeImgCount = 0;
 
@@ -54,17 +56,18 @@ public class Aw20Rule01031 extends AbstractPageRuleImplementation {
         if (decorativeImgCount== imgNodes.size()) {
             checkResult = TestSolution.NOT_APPLICABLE;
         } else {
-            List<Node> informativeWithTitleAndAltNodes = 
+            List<Node> imgWithLongdescAndAltNodeList =
                     sspHandler.beginSelection().
                     domXPathSelectNodeSet(XPATH_EXPR).getSelectedElementList();
             String altAttributeContent = null;
-            String titleAttributeContent = null;
-            for (Node node : informativeWithTitleAndAltNodes) {
+            String fileName = null;
+            for (Node node : imgWithLongdescAndAltNodeList) {
                 altAttributeContent = node.getAttributes().
                         getNamedItem(ALT_ATTRIBUTE).getTextContent();
-                titleAttributeContent = node.getAttributes().
-                        getNamedItem(TITLE_ATTRIBUTE).getTextContent();
-                if (altAttributeContent.equalsIgnoreCase(titleAttributeContent))   {
+                fileName = getFileNameFromUrl(node.getAttributes().
+                        getNamedItem(SRC_ATTRIBUTE).getTextContent());
+                if (fileName!=null &&
+                        altAttributeContent.equalsIgnoreCase(fileName))   {
                     checkResult = TestSolution.FAILED;
                     processRemarkList.add(processRemarkFactory.
                             create(TestSolution.FAILED, "NotPertinentAltAttribute"));
@@ -80,5 +83,38 @@ public class Aw20Rule01031 extends AbstractPageRuleImplementation {
                 processRemarkList);
 
         return result;
+    }
+
+    /**
+     *
+     * @param url
+     * @return
+     */
+    private String getFileNameFromUrl(String url) {
+        int beginIndex = url.lastIndexOf('/');
+        String fileName = url.substring(beginIndex+1, url.length());
+        if (hasAnImageExtension(fileName)) {
+            return fileName;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     *
+     * @param fileName
+     * @return
+     */
+    private boolean hasAnImageExtension(String fileName) {
+        Nomenclature imageFileExtensionNomenclature = nomenclatureLoaderService.
+                loadByCode("ImageFileExtensions");
+        int beginIndex = fileName.lastIndexOf('.');
+        String fileExt = fileName.substring(beginIndex+1, fileName.length());
+        for (String object : imageFileExtensionNomenclature.getValueList()) {
+            if (fileExt.equalsIgnoreCase(object)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
