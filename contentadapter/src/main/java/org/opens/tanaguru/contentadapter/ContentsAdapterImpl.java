@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.opens.tanaguru.contentadapter.js.JSContentAdapter;
+import org.opens.tanaguru.contentadapter.util.DocumentCaseInsensitiveAdapter;
 
 /**
  * 
@@ -59,7 +60,8 @@ public class ContentsAdapterImpl implements ContentsAdapter {
                 htmlCleaner.setDirtyHTML(ssp.getSource());
                 htmlCleaner.run();
 
-                ssp.setDOM(removeLowerCaseTags(htmlCleaner.getResult()));
+                ssp.setDOM(DocumentCaseInsensitiveAdapter.
+                        removeLowerCaseTags(htmlCleaner.getResult()));
                 writeCleanDomInFile(ssp);
 
                 htmlParser.setSSP(ssp);
@@ -95,41 +97,6 @@ public class ContentsAdapterImpl implements ContentsAdapter {
 
     public void setHTMLParser(HTMLParser htmlParser) {
         this.htmlParser = htmlParser;
-    }
-
-    private String removeLowerCaseTags(String cleanHtml) {
-        StringBuffer newCleanHtml = new StringBuffer();
-        int strPtr=0;
-        int tmpPtr=0;
-        while (strPtr != cleanHtml.length()){
-            if (cleanHtml.charAt(strPtr) == '<') {
-                if (cleanHtml.charAt(strPtr+1) == '!') { //To ignore the case of <!doctype
-                    newCleanHtml.append(cleanHtml.charAt(strPtr));
-                    strPtr++;
-                } else if (cleanHtml.charAt(strPtr+1) == '/') {
-                    tmpPtr = cleanHtml.indexOf('>', strPtr);
-                    newCleanHtml.append('<');
-                    newCleanHtml.append('/');
-                    newCleanHtml.append(cleanHtml.substring(strPtr+2, tmpPtr).toUpperCase());
-                    strPtr = tmpPtr;
-                } else {
-                    if (cleanHtml.indexOf(' ', strPtr) < cleanHtml.indexOf('>', strPtr)) {
-                        // case of self-closing tag
-                        tmpPtr = cleanHtml.indexOf(' ', strPtr);
-                    } else {
-                        // case of classical opening tag
-                        tmpPtr = cleanHtml.indexOf('>', strPtr);
-                    }
-                    newCleanHtml.append('<');
-                    newCleanHtml.append(cleanHtml.substring(strPtr+1, tmpPtr).toUpperCase());
-                    strPtr = tmpPtr;
-                }
-            } else {
-                newCleanHtml.append(cleanHtml.charAt(strPtr));
-                strPtr++;
-            }
-        }
-        return newCleanHtml.toString();
     }
 
     private void writeCleanDomInFile(SSP ssp){
