@@ -1,0 +1,106 @@
+/* 
+    Document   : tanaguru
+    Created on : 23 févr. 2010, 18:24:34
+    Author     : mfaure
+    Description:
+        CSS for Tanaguru
+*/
+
+/*
+ * Utils
+ * ==============================================
+ */
+
+/* =clearfix
+ -------------------------------------------------- */
+/* clearfix/easyclearing: cf http://www.positioniseverything.net/easyclearing.html */
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.clearfix {display: inline-block;}
+/* Hides from IE-mac \*/
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+/* End hide from IE-mac */
+
+/*
+ * HTML tags
+ * ==============================================
+ */
+
+/*
+ * Header
+ * ==============================================
+ */
+
+#hd h1 {
+    font-size: 197%;
+    color: orange;
+}
+/*
+ * Body
+ * ==============================================
+ */
+ #bd {}
+ #bd h2 {font-size: 161.6%;}
+
+/*
+ * Footer
+ * ==============================================
+ */
+ #ft {
+     border-top: solid 1px orange;
+     margin: 15em 0em 0.5em;
+     padding: 0.5em;
+     text-align: center;
+}
+
+/*
+ * Page: home
+ * ==============================================
+ */
+#tanaguru-home #input-url {width:20em;}
+
+
+/*
+ * Page: audit results
+ * ==============================================
+ */
+#audit-result caption {display: none;}
+
+#audit-result dl.table-display {
+}
+#audit-result .table-display dt,
+#audit-result .table-display dd {
+    padding-bottom: 0.5em;
+}
+#audit-result .table-display dt {
+    float: left;
+    clear: left;
+    width: 5em;
+    font-weight: bold;
+}
+#audit-result .table-display dd {
+    margin: 0 0 0 5em;
+}
+
+#result-synthetised th {text-align: left;}
+#result-synthetised #passed {
+    background: url(../Images/ico-passed.png) 10% 50% no-repeat;
+    padding-left: 2em;
+}
+#result-synthetised #failed {
+    background: url(../Images/ico-failed.png) 10% 50% no-repeat;
+    padding-left: 2em;
+}
+#result-synthetised #nmi {
+    background: url(../Images/ico-nmi.png) 10% 50% no-repeat;
+    padding-left: 2em;
+}
+#result-synthetised #na {}
+
+#result-detailed th {background-color: rgb(255,255,204);}

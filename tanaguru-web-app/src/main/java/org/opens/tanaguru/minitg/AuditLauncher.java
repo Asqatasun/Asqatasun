@@ -66,7 +66,7 @@ public class AuditLauncher extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet AuditLauncher</title>");
-            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/resulttable.css\"/>");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"Css/resulttable.css\"/>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet AuditLauncher at " + request.getContextPath() + "</h1>");
