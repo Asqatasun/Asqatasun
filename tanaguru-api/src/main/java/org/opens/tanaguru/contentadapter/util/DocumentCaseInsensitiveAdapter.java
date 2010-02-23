@@ -22,7 +22,8 @@ public abstract class DocumentCaseInsensitiveAdapter {
         int tmpPtr=0;
         while (strPtr != cleanHtml.length()){
             if (cleanHtml.charAt(strPtr) == '<') {
-                if (cleanHtml.charAt(strPtr+1) == '!') { //To ignore the case of <!doctype
+                if (cleanHtml.charAt(strPtr+1) == '!' || 
+                        cleanHtml.charAt(strPtr+1) == '?') { //To ignore the case of <!doctype and <?xml
                     newCleanHtml.append(cleanHtml.charAt(strPtr));
                     strPtr++;
                 } else if (cleanHtml.charAt(strPtr+1) == '/') {
