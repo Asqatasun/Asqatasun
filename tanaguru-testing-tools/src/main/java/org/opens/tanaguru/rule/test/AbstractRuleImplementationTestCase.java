@@ -44,7 +44,7 @@ public abstract class AbstractRuleImplementationTestCase extends TestCase {
     protected WebResourceFactory webResourceFactory;
     protected String ruleImplementationClassName;
     protected Map<String, WebResource> webResourceMap = new HashMap<String, WebResource>();
-    protected static final String TESTCASES_FILES_PATH = "file:///home/jkowalczyk/Documents/Sources/TanaguruEngine/Trunk/tanaguru-testing-tools/resources/testcases/";
+    protected static final String TESTCASES_FILES_PATH = "file:///home/mfaure/Documents/open-s/Projets/NetBeans/TanaguruEngine/tanaguru/Trunk/tanaguru-testing-tools/resources/testcases/";
 
     public AbstractRuleImplementationTestCase(String testName) {
         super(testName);
