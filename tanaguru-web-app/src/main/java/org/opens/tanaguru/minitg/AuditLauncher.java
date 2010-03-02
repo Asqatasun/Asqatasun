@@ -6,9 +6,12 @@ package org.opens.tanaguru.minitg;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -63,21 +66,16 @@ public class AuditLauncher extends HttpServlet {
                 audit = auditService.auditPage(pageURLList[0], testCodeList);
             }
 
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AuditLauncher</title>");
-            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"Css/resulttable.css\"/>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AuditLauncher at " + request.getContextPath() + "</h1>");
+            // define meta-values for audit
+            String resourceUrl = audit.getSubject().getURL();
+            Calendar myAuditCalendar = Calendar.getInstance();
+            StringBuilder myHtml = new StringBuilder();
 
-            out.println("<p>Note: " + audit.getMark() + "</p>");
-
+            // Count nb of each type of result for synthetised table
             int passedCount = 0;
             int failedCount = 0;
             int nmiCount = 0;
             int naCount = 0;
-
             for (ProcessResult processResult : audit.getNetResultList()) {
                 TestSolution result = (TestSolution) processResult.getValue();
                 switch (result) {
@@ -98,7 +96,6 @@ public class AuditLauncher extends HttpServlet {
 
             // Sorts net result list by test rank
             Collections.sort(audit.getNetResultList(), new Comparator<ProcessResult>() {
-
                 @Override
                 public int compare(ProcessResult o1, ProcessResult o2) {
                     if (o1.getTest().getRank() < o2.getTest().getRank()) {
@@ -111,51 +108,103 @@ public class AuditLauncher extends HttpServlet {
                 }
             });
 
-            out.println("<table>");
-            out.println("<tr>");
-            out.println("<th>Passed</th>");
-            out.println("<th>Failed</th>");
-            out.println("<th>NMI</th>");
-            out.println("<th>NA</th>");
-            out.println("</tr>");
-            out.println("<tr>");
-            out.println("<td>" + passedCount + "</td>");
-            out.println("<td>" + failedCount + "</td>");
-            out.println("<td>" + nmiCount + "</td>");
-            out.println("<td>" + naCount + "</td>");
-            out.println("</tr>");
-            out.println("</table>");
+            myHtml.append("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
+            myHtml.append("    <head>");
+            myHtml.append("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>");
+            myHtml.append("        <meta http-equiv=\"Author\" content=\"Open-S.com // Matthieu Faure\" lang=\"fr\" />");
+            myHtml.append("        <title>Audit result for " + resourceUrl + "</title>");
+            myHtml.append("        <link rel=\"stylesheet\" type=\"text/css\" href=\"http://yui.yahooapis.com/combo?2.8.0r4/build/reset-fonts/reset-fonts.css&amp;2.8.0r4/build/base/base-min.css\"/>");
+            myHtml.append("        <link rel=\"stylesheet\" type=\"text/css\" href=\"Css/tanaguru.css\" />");
+            myHtml.append("    </head>");
+            myHtml.append("    <body id=\"audit-result\">");
+            myHtml.append("    <div id=\"doc2\">");
+            myHtml.append("        <div id=\"hd\">");
+            myHtml.append("            <h1>Result of accessibility audit</h1>");
+            myHtml.append("        </div>");
+            myHtml.append("");
+            myHtml.append("        <div id=\"bd\">");
+            myHtml.append("            <h2>Synthesis</h2>");
+            myHtml.append("");
 
-            String resourceUrl = audit.getSubject().getURL();
-            out.println("<h2>URL: " + resourceUrl + "</h2>");
-            out.println("<h3>Thématique: " + "" + "</h3>");
-            out.println("<h4>Critère: " + "" + "</h4>");
+            // audit meta-data
+            myHtml.append("            <table summary=\"Audit meta-data\" id=\"result-meta\">");
+            myHtml.append("                <caption>Audit meta-data</caption>");
+            myHtml.append("                <tr>");
+            myHtml.append("                    <th id=\"meta-score\" scope=\"row\" class=\"col01\">Score:</th>");
+            myHtml.append("                    <td class=\"col02\">" + audit.getMark() + "%</td>");
+            myHtml.append("                </tr>");
+            myHtml.append("                <tr>");
+            myHtml.append("                    <th id=\"meta-url\" scope=\"row\" class=\"col01\">URL:</th>");
+            myHtml.append("                    <td class=\"col02\"><a href=\"" + resourceUrl + "\">" + resourceUrl + "</a></td>");
+            myHtml.append("                </tr>");
+            myHtml.append("                <tr>");
+            myHtml.append("                    <th id=\"meta-date\" scope=\"row\" class=\"col01\">Date:</th>");
+            myHtml.append("                    <td class=\"col02\">" + myAuditCalendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.FRENCH) + "</td>");
+            myHtml.append("                </tr>");
+            myHtml.append("            </table>");
+            myHtml.append("");
+/*
+            myHtml.append("            <dl class=\"table-display clearfix\">");
+            myHtml.append("                <dt id=\"score-dt\">Score:</dt><dd id=\"score-dd\">" + audit.getMark() + "%</dd>");
+            myHtml.append("                <dt>URL:</dt><dd><a href=\"" + resourceUrl + "\">" + resourceUrl + "</a></dd>");
+            myHtml.append("                <dt>Date:</dt><dd>" + myAuditCalendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.FRENCH) + "</dd>");
+            myHtml.append("            </dl>");
+            myHtml.append("");
+  */
+            
+            // synthetised results
+            myHtml.append("            <table summary=\"Synthetised result of accessibility audit\" id=\"result-synthetised\">");
+            myHtml.append("                <caption>Synthetised result of accessibility audit</caption>");
+            myHtml.append("                <tr>");
+            myHtml.append("                    <th id=\"passed\" scope=\"row\" class=\"col01\">Passed</th>");
+            myHtml.append("                    <td class=\"col02\">" + passedCount + "</td>");
+            myHtml.append("                </tr>");
+            myHtml.append("                <tr>");
+            myHtml.append("                    <th id=\"failed\" scope=\"row\" class=\"col01\">Failed</th>");
+            myHtml.append("                    <td class=\"col02\">" + failedCount + "</td>");
+            myHtml.append("                </tr>");
+            myHtml.append("                <tr>");
+            myHtml.append("                    <th id=\"nmi\" scope=\"row\" class=\"col01\"><abbr title=\"Need More Information\">NMI</abbr></th>");
+            myHtml.append("                    <td class=\"col02\">" + nmiCount + "</td>");
+            myHtml.append("                </tr>");
+            myHtml.append("                <tr>");
+            myHtml.append("                    <th id=\"na\" scope=\"row\" class=\"col01\"><abbr title=\"Not Applicable\">NA</abbr></th>");
+            myHtml.append("                    <td class=\"col02\">" + naCount + "</td>");
+            myHtml.append("                </tr>");
+            myHtml.append("            </table>");
+            myHtml.append("");
 
-            out.println("<table class=\"outertable\" border=\"1\">");
-            out.println("<tr>");
-            out.println("<th>Test</th>");
-            out.println("<th>Résultat</th>");
-            out.println("<th class=\"remarkcolumnheader\">Remarques</th>");
-            out.println("</tr>");
-
+            // detailed results
+            myHtml.append("            <h2>Detailed result</h2>");
+            myHtml.append("            <table summary=\"Detailed result of accessibility audit\" id=\"result-detailed\">");
+            myHtml.append("                <caption>Detailed result of accessibility audit</caption>");
+            myHtml.append("                <tr>");
+            myHtml.append("                    <th scope=\"col\" class=\"col01\">Test</th>");
+            myHtml.append("                    <th scope=\"col\" class=\"col02\">Result</th>");
+            myHtml.append("                    <th scope=\"col\" class=\"col03\">Remark</th>");
+            myHtml.append("                </tr>");
             for (ProcessResult processResult : audit.getNetResultList()) {
-                out.println("<tr>");
-                out.println("<td>" + processResult.getTest().getCode() + "</td>");
-                out.println("<td>" + processResult.getValue() + "</td>");
-                out.println("<td>");
+                myHtml.append("                <tr>");
+                myHtml.append("                    <td class=\"col01\">" + processResult.getTest().getCode() + "</td>");
+                myHtml.append("                    <td class=\"col02\">" + processResult.getValue() + "</td>");
+                myHtml.append("                    <td class=\"col03\">");
                 for (ProcessRemark remark : processResult.getRemarkList()) {
-                    out.println("<p>" + remark.getMessageCode() + "</p>");
+                    myHtml.append("                         <p>" + remark.getMessageCode() + "</p>");
                 }
-                out.println("</td>");
-                out.println("</tr>");
+                myHtml.append("                    </td>");
+                myHtml.append("                </tr>");
             }
-            out.println("</table>");
+            myHtml.append("            </table>");
+            myHtml.append("        </div><!-- id=\"bd\" -->");
+            myHtml.append("");
+            myHtml.append("        <div id=\"ft\">");
+            myHtml.append("            &copy; <a href=\"http://www.Open-S.com/\">Open-S</a>");
+            myHtml.append("        </div>");
+            myHtml.append("    </div>");
+            myHtml.append("    </body>");
+            myHtml.append("</html>");
 
-
-
-
-            out.println("</body>");
-            out.println("</html>");
+            out.println(myHtml);
         } finally {
             out.close();
         }

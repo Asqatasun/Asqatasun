@@ -63,7 +63,7 @@
  * Page: home
  * ==============================================
  */
-#tanaguru-home #input-url {width:20em;}
+#tanaguru-home #pageUrl {width:20em;}
 
 
 /*
@@ -87,8 +87,24 @@
 #audit-result .table-display dd {
     margin: 0 0 0 5em;
 }
+#audit-result #score-dd,
+#audit-result #score-dt {
+    font-size: 153.9%;
+}
 
+/* Synthetised results (=audit-result)
+ -------------------------------------------------- */
 #result-synthetised th {text-align: left;}
+
+#result-synthetised .col01 {
+    width: 5em;
+}
+
+#result-synthetised .col02 {
+    width: 5em;
+    text-align: center;
+}
+
 #result-synthetised #passed {
     background: url(../Images/ico-passed.png) 10% 50% no-repeat;
     padding-left: 2em;
@@ -103,4 +119,9 @@
 }
 #result-synthetised #na {}
 
+/* Detailed results (=result-detailed)
+ -------------------------------------------------- */
 #result-detailed th {background-color: rgb(255,255,204);}
+#result-detailed .col01 {width: 7em;}
+#result-detailed .col02 {width: 12em;}
+#result-detailed .col03 {width: 40em;}

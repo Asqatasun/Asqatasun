@@ -1,5 +1,5 @@
 window.onload = function() {
-    var i = document.getElementById('input-url');
+    var i = document.getElementById('pageUrl');
     i.focus();
 }
 
