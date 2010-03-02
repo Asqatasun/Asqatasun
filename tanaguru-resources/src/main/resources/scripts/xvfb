@@ -1,0 +1,24 @@
+#!/bin/sh
+
+RUN_AS_USER=tomcat55
+OPTS=":99 -screen 1 1024x768x24 -nolisten tcp"
+XVFB_DIR=/usr/bin
+
+case $1 in
+
+start)
+/sbin/start-stop-daemon --chuid $RUN_AS_USER -b --start --exec $XVFB_DIR/Xvfb -- $OPTS &
+;;
+
+stop)
+killall Xvfb
+;;
+
+*)
+echo "Usage: $0 (start|stop)"
+exit 1
+;;
+
+esac
+
+exit 0
