@@ -72,6 +72,26 @@
  */
 #audit-result caption {display: none;}
 
+/* Meta results (=result-meta)
+ -------------------------------------------------- */
+#result-meta td,
+#result-meta th {
+    border: none;
+    vertical-align: bottom;
+}
+
+#result-meta .col01 {width: 6em; text-align: left;}
+#result-meta .col02 {width: 20em;}
+
+#audit-result #result-meta #meta-score {
+
+}
+#audit-result #result-meta #meta-score-data {
+    font-size: 197%;
+    font-weight: bold;
+}
+
+/*
 #audit-result dl.table-display {
 }
 #audit-result .table-display dt,
@@ -91,6 +111,7 @@
 #audit-result #score-dt {
     font-size: 153.9%;
 }
+*/
 
 /* Synthetised results (=audit-result)
  -------------------------------------------------- */

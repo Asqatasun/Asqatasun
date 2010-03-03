@@ -69,7 +69,11 @@ public class AuditLauncher extends HttpServlet {
             // define meta-values for audit
             String resourceUrl = audit.getSubject().getURL();
             Calendar myAuditCalendar = Calendar.getInstance();
+            String myAuditDate = myAuditCalendar.getDisplayName(Calendar.DAY_OF_MONTH, Calendar.SHORT, Locale.ENGLISH) + " " +
+                    myAuditCalendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH) + " " +
+                    myAuditCalendar.getDisplayName(Calendar.YEAR, Calendar.LONG, Locale.ENGLISH);
             StringBuilder myHtml = new StringBuilder();
+            Float myAuditMark = audit.getMark();
 
             // Count nb of each type of result for synthetised table
             int passedCount = 0;
@@ -131,7 +135,7 @@ public class AuditLauncher extends HttpServlet {
             myHtml.append("                <caption>Audit meta-data</caption>");
             myHtml.append("                <tr>");
             myHtml.append("                    <th id=\"meta-score\" scope=\"row\" class=\"col01\">Score:</th>");
-            myHtml.append("                    <td class=\"col02\">" + audit.getMark() + "%</td>");
+            myHtml.append("                    <td id=\"meta-score-data\" class=\"col02\">" + myAuditMark.intValue() + "%</td>");
             myHtml.append("                </tr>");
             myHtml.append("                <tr>");
             myHtml.append("                    <th id=\"meta-url\" scope=\"row\" class=\"col01\">URL:</th>");
@@ -139,7 +143,7 @@ public class AuditLauncher extends HttpServlet {
             myHtml.append("                </tr>");
             myHtml.append("                <tr>");
             myHtml.append("                    <th id=\"meta-date\" scope=\"row\" class=\"col01\">Date:</th>");
-            myHtml.append("                    <td class=\"col02\">" + myAuditCalendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.FRENCH) + "</td>");
+            myHtml.append("                    <td class=\"col02\">" + myAuditDate + "</td>");
             myHtml.append("                </tr>");
             myHtml.append("            </table>");
             myHtml.append("");
