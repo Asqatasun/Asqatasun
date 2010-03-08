@@ -18,20 +18,25 @@ public class FullClientImpl {
     private static final String APPLICATION_CONTEXT_FILE_PATH = "file:///etc/tanaguru/context/local-app/context-fullclient.xml";
 
     public static void main(String[] args) {
-//        run("one-one");
-//        run("one-two");
-//        run("two-one");
-//        run("two-two");
-        run("opens-all");
-//        run("one-all");
-//        run("two-all");
+        if (args[0] != null && args[1] != null) {
+            run("opens-all", null);
+        } else {
+            run(args[0], args[1]);
+        }
     }
 
-    private static void run(String bundleName) throws BeansException {
+    private static void run(String bundleName, String url) throws BeansException {
         ResourceBundle parametersBundle = ResourceBundle.getBundle(bundleName);
 
         String siteUrl = parametersBundle.getString("siteUrl");
-        String[] pageUrlList = parametersBundle.getString("pageUrlList").split(", ");
+
+        String[] pageUrlList = null;
+        if (url != null) {
+            pageUrlList = new String[]{url};
+        } else {
+            pageUrlList = parametersBundle.getString("pageUrlList").split(", ");
+        }
+
         String[] testCodeList = parametersBundle.getString("testCodeList").split(", ");
 
         ApplicationContext springApplicationContext = new FileSystemXmlApplicationContext(APPLICATION_CONTEXT_FILE_PATH);
@@ -52,6 +57,5 @@ public class FullClientImpl {
         System.out.println("grossResultCount: " + audit.getGrossResultList().size());
         System.out.println("netResultCount: " + audit.getNetResultList().size());
         System.out.println("mark: " + audit.getMark());
-        System.out.println();
-    }
+     }
 }
