@@ -44,7 +44,7 @@ file=${file#file:///}
 file=${file%%/*}
 
 
-echo -e "\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+echo "\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 echo "Testing $1 page"
 $LAUNCH_TANAGURU $1 1>$RESULT_MAIN_DIR/$file-$DATE_SUFFIX-passed.txt 2>$RESULT_MAIN_DIR/$file-$DATE_SUFFIX-failed.txt \
 	&& echo "OK" \
@@ -61,4 +61,4 @@ else
 echo "see @ $RESULT_MAIN_DIR/$file-$DATE_SUFFIX-failed.txt for details"
 fi
 
-echo -e ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n"
+echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n"
