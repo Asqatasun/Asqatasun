@@ -23,7 +23,8 @@ public abstract class DocumentCaseInsensitiveAdapter {
         while (strPtr != cleanHtml.length()){
             if (cleanHtml.charAt(strPtr) == '<') {
                 if (cleanHtml.charAt(strPtr+1) == '!' || 
-                        cleanHtml.charAt(strPtr+1) == '?') { //To ignore the case of <!doctype and <?xml
+                        cleanHtml.charAt(strPtr+1) == '?' || //To ignore the case of <!doctype and <?xml
+                        cleanHtml.charAt(strPtr+1) == '_') { 
                     newCleanHtml.append(cleanHtml.charAt(strPtr));
                     strPtr++;
                 } else if (cleanHtml.charAt(strPtr+1) == '/') {
@@ -35,7 +36,8 @@ public abstract class DocumentCaseInsensitiveAdapter {
                     strPtr = tmpPtr;
                 } else {
                     if (cleanHtml.indexOf(' ', strPtr) <
-                            cleanHtml.indexOf('>', strPtr)) {
+                            cleanHtml.indexOf('>', strPtr) &&
+                            cleanHtml.indexOf(' ', strPtr) > 0) {
                         // case of self-closing tag
                         tmpPtr = cleanHtml.indexOf(' ', strPtr);
                     } else {
