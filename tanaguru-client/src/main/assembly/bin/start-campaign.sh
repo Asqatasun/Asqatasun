@@ -59,7 +59,7 @@ for j in ${LIST_FILES}; do
  
   while IFS=\; read file_name address
   do
-    echo "\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+    echo -e "\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
     echo "Testing $address in ${j} file"
 	
     FILE_NAME_RESULT="$LIST_ELEMENTS_RESULT_DIR/$file_name.txt"
@@ -76,6 +76,6 @@ for j in ${LIST_FILES}; do
       echo "see $LIST_ELEMENTS_RESULT_DIR/failed/$file_name.txt for details"
     fi
  
-    echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n"
+    echo -e ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n"
   done < ${j}
 done
