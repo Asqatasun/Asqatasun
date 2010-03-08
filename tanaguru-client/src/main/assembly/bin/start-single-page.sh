@@ -39,12 +39,14 @@ LAUNCH_TANAGURU="$JAVA_HOME/bin/java $JAVA_OPTS $TEST_SET_FILE_NAME"
 # launch tanaguru
 ##################
 DATE_SUFFIX=`date '+%Y%m%d-%Hh%Mm%S'`
-file=${1#http://www.}
+file=${1#http://}
+file=${1#https://}
+file=${1#www.}
 file=${file#file:///}
 file=${file%%/*}
 
 
-echo "\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+echo -e "\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 echo "Testing $1 page"
 $LAUNCH_TANAGURU $1 1>$RESULT_MAIN_DIR/$file-$DATE_SUFFIX-passed.txt 2>$RESULT_MAIN_DIR/$file-$DATE_SUFFIX-failed.txt \
 	&& echo "OK" \
@@ -61,4 +63,4 @@ else
 echo "see @ $RESULT_MAIN_DIR/$file-$DATE_SUFFIX-failed.txt for details"
 fi
 
-echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n"
+echo -e ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n"
