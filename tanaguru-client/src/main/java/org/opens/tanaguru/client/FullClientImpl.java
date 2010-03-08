@@ -19,9 +19,9 @@ public class FullClientImpl {
 
     public static void main(String[] args) {
         if (args[0] != null && args[1] != null) {
-            run("opens-all", null);
-        } else {
             run(args[0], args[1]);
+        } else {
+            run("opens-all", null);
         }
     }
 
