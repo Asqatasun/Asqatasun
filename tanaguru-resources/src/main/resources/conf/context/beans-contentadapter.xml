@@ -36,6 +36,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 </bean>
             </set>
         </property>
+	<property name="writeCleanHtmlInFile" value="false"/>
     </bean>
     <bean id="contentAdapterService" class="org.opens.tanaguru.service.ContentAdapterServiceImpl">
         <property name="adapter" ref="adapterComponent"/>
