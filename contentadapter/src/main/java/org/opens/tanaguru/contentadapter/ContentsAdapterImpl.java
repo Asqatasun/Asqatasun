@@ -131,7 +131,6 @@ public class ContentsAdapterImpl implements ContentsAdapter {
         }
     }
 
-    @Override
     public void setWriteCleanHtmlInFile(Boolean writeCleanHtmlInFile) {
         this.writeCleanHtmlInFile = writeCleanHtmlInFile;
     }
