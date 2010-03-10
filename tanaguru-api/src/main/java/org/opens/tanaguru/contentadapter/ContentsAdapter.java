@@ -44,4 +44,10 @@ public interface ContentsAdapter {// TODO Write javadoc
      * @param htmlParser
      */
     void setHTMLParser(HTMLParser htmlParser);
+
+    /**
+     * 
+     * @param writeCleanHtmlInFile
+     */
+    void setWriteCleanHtmlInFile(Boolean writeCleanHtmlInFile);
 }

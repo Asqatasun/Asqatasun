@@ -21,17 +21,21 @@ import org.opens.tanaguru.contentadapter.util.DocumentCaseInsensitiveAdapter;
  */
 public class ContentsAdapterImpl implements ContentsAdapter {
 
-    private Set<ContentAdapter> contentAdapterSet = new HashSet<ContentAdapter>();
+    private Set<ContentAdapter> contentAdapterSet =
+            new HashSet<ContentAdapter>();
+
     private List<Content> contentList;
     private HTMLCleaner htmlCleaner;
     private HTMLParser htmlParser;
     private boolean initialized = false;
     private List<Content> result;
+    private Boolean writeCleanHtmlInFile = false;
 
     public ContentsAdapterImpl() {
         super();
     }
 
+    @Override
     public List<Content> getResult() {
         return result;
     }
@@ -45,6 +49,7 @@ public class ContentsAdapterImpl implements ContentsAdapter {
         initialized = true;
     }
 
+    @Override
     public void run() {
         initialize();
 
@@ -60,9 +65,11 @@ public class ContentsAdapterImpl implements ContentsAdapter {
                 htmlCleaner.setDirtyHTML(ssp.getSource());
                 htmlCleaner.run();
 
-                ssp.setDOM(DocumentCaseInsensitiveAdapter.
-                        removeLowerCaseTags(htmlCleaner.getResult()));
-                writeCleanDomInFile(ssp);
+                ssp.setDOM(DocumentCaseInsensitiveAdapter.removeLowerCaseTags(htmlCleaner.getResult()));
+
+                if (writeCleanHtmlInFile) {
+                    writeCleanDomInFile(ssp);
+                }
 
                 htmlParser.setSSP(ssp);
                 htmlParser.run();
@@ -83,23 +90,27 @@ public class ContentsAdapterImpl implements ContentsAdapter {
         return localResult;
     }
 
+    @Override
     public void setContentAdapterSet(Set<ContentAdapter> contentAdapterSet) {
         this.contentAdapterSet = contentAdapterSet;
     }
 
+    @Override
     public void setContentList(List<Content> contentList) {
         this.contentList = contentList;
     }
 
+    @Override
     public void setHTMLCleaner(HTMLCleaner htmlCleaner) {
         this.htmlCleaner = htmlCleaner;
     }
 
+    @Override
     public void setHTMLParser(HTMLParser htmlParser) {
         this.htmlParser = htmlParser;
     }
 
-    private void writeCleanDomInFile(SSP ssp){
+    private void writeCleanDomInFile(SSP ssp) {
         if (true) {
             // @debug
             String fileName = null;
@@ -118,5 +129,10 @@ public class ContentsAdapterImpl implements ContentsAdapter {
                 Logger.getLogger(ContentsAdapterImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    @Override
+    public void setWriteCleanHtmlInFile(Boolean writeCleanHtmlInFile) {
+        this.writeCleanHtmlInFile = writeCleanHtmlInFile;
     }
 }
