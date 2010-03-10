@@ -16,3 +16,4 @@ banque-de-bretagne;http://www.bdbretagne.com/site
 credit-du-nord;https://www.credit-du-nord.fr/
 credit-foncier;http://www.creditfoncier.fr/editorial/Home_Particuliers.html
 banque-populaire;http://www.banquepopulaire.fr/
+ING;http://www.ingdirect.fr/
