@@ -20,3 +20,7 @@ champagne-ardenne;http://www.cr-champagne-ardenne.fr/
 auvergne;http://www.auvergne.fr/index.html?m=1
 midipyrenees;http://www.midipyrenees.fr/
 bourgogne;http://www.cr-bourgogne.fr/
+reunion;http://www.regionreunion.com/fr/spip/spip.php?page=accueilv2
+guyane;http://www.cr-guyane.fr/
+guadeloupe;http://www.cr-guadeloupe.fr/
+martinique;http://www.cr-martinique.fr/
