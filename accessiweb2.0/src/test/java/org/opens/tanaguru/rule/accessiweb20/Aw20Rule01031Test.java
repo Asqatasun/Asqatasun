@@ -46,6 +46,9 @@ public class Aw20Rule01031Test extends AbstractRuleImplementationTestCase {
         webResourceMap.put("AW20.Test.01.03.01-3NMI-02",
                 webResourceFactory.createPage(
                 TESTCASES_FILES_PATH + "AW22/AW20.Test.01.03.01-3NMI-02.html"));
+        webResourceMap.put("AW20.Test.01.03.01-3NMI-03",
+                webResourceFactory.createPage(
+                TESTCASES_FILES_PATH + "AW22/AW20.Test.01.03.01-3NMI-03.html"));
         webResourceMap.put("AW20.Test.01.03.01-4NA-01",
                 webResourceFactory.createPage(
                 TESTCASES_FILES_PATH + "AW22/AW20.Test.01.03.01-4NA-01.html"));
@@ -55,6 +58,9 @@ public class Aw20Rule01031Test extends AbstractRuleImplementationTestCase {
         webResourceMap.put("AW20.Test.01.03.01-4NA-03",
                 webResourceFactory.createPage(
                 TESTCASES_FILES_PATH + "AW22/AW20.Test.01.03.01-4NA-03.html"));
+        webResourceMap.put("AW20.Test.01.03.01-4NA-04",
+                webResourceFactory.createPage(
+                TESTCASES_FILES_PATH + "AW22/AW20.Test.01.03.01-4NA-04.html"));
     }
 
     @Override
@@ -73,12 +79,16 @@ public class Aw20Rule01031Test extends AbstractRuleImplementationTestCase {
                 processPageTest("AW20.Test.01.03.01-3NMI-01").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
                 processPageTest("AW20.Test.01.03.01-3NMI-02").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                processPageTest("AW20.Test.01.03.01-3NMI-03").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 processPageTest("AW20.Test.01.03.01-4NA-01").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 processPageTest("AW20.Test.01.03.01-4NA-02").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 processPageTest("AW20.Test.01.03.01-4NA-03").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                processPageTest("AW20.Test.01.03.01-4NA-04").getValue());
     }
 
     @Override
@@ -97,11 +107,15 @@ public class Aw20Rule01031Test extends AbstractRuleImplementationTestCase {
                 consolidate("AW20.Test.01.03.01-3NMI-01").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW20.Test.01.03.01-3NMI-02").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW20.Test.01.03.01-3NMI-03").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("AW20.Test.01.03.01-4NA-01").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("AW20.Test.01.03.01-4NA-02").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("AW20.Test.01.03.01-4NA-03").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW20.Test.01.03.01-4NA-04").getValue());
     }
 }

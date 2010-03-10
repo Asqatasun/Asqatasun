@@ -16,7 +16,8 @@ import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
  */
 public class Aw20Rule01011 extends AbstractPageRuleImplementation {
 
-    public static final String IMG_TAG = "IMG";
+    public static final String XPATH_EXPR =
+            "//IMG[not(ancestor::A)]";
     public static final String ALT_ATTRIBUTE = "alt";
 
     public Aw20Rule01011() {
@@ -26,8 +27,7 @@ public class Aw20Rule01011 extends AbstractPageRuleImplementation {
     @Override
     protected ProcessResult processImpl(SSPHandler sspHandler) {
 
-        sspHandler.beginSelection().
-                selectDocumentNodes(IMG_TAG);
+        sspHandler.beginSelection().domXPathSelectNodeSet(XPATH_EXPR);
 
         TestSolution checkResult = sspHandler.checkAttributeExists(ALT_ATTRIBUTE);
 

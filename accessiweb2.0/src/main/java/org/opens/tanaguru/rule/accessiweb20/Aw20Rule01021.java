@@ -23,10 +23,15 @@ public class Aw20Rule01021 extends AbstractPageRuleImplementation {
 
     public static final String IMG_TAG = "IMG";
     public static final String SRC_ATTRIBUTE = "src";
-    public static final String LONGDESC_ATTRIBUTE = "longdesc";
     public static final String ALT_ATTRIBUTE = "alt";
     public static final String EMPTY_STRING = "";
     public static final String WRONG_IMG_MSG = "DecorativeImageWithNotEmptyAltAttribute";
+    public static final String XPATH_EXPR1 =
+            "//IMG[@alt and @longdesc and not(ancestor::A)]";
+    public static final String XPATH_EXPR2 =
+            "//IMG[@alt and not(ancestor::A)]";
+    public static final String XPATH_EXPR3 =
+            "//IMG[@alt and not(ancestor::A) and not(@longdesc)]";
 
     public Aw20Rule01021() {
         super();
@@ -40,16 +45,13 @@ public class Aw20Rule01021 extends AbstractPageRuleImplementation {
 
         // number of informative images (images with "alt"
         // and "longdesc" attributes)
-        int imgWithAltAndLongdescAttributeCounter = sspHandler.beginSelection().
-                selectDocumentNodes(IMG_TAG).
-                keepNodesWithAttribute(ALT_ATTRIBUTE).
-                keepNodesWithAttribute(LONGDESC_ATTRIBUTE).
+        int imgWithAltAndLongdescAttributeCounter =
+                sspHandler.beginSelection().domXPathSelectNodeSet(XPATH_EXPR1).
                 getSelectedElementList().size();
 
         // number of images with "alt" attribute
-        int imgWithAltAttributeCounter = sspHandler.beginSelection().
-                selectDocumentNodes(IMG_TAG).
-                keepNodesWithAttribute(ALT_ATTRIBUTE).
+        int imgWithAltAttributeCounter = 
+                sspHandler.beginSelection().domXPathSelectNodeSet(XPATH_EXPR2).
                 getSelectedElementList().size();
 
         // if there's no img in the page with "alt" attribute or all the images
@@ -67,10 +69,8 @@ public class Aw20Rule01021 extends AbstractPageRuleImplementation {
         }
 
         // selection of images with "alt" attribute but without "longdesc" attribute
-        List<Node> imgWithAltAttributeNodeList = sspHandler.beginSelection().
-                selectDocumentNodes(IMG_TAG).
-                keepNodesWithAttribute(ALT_ATTRIBUTE).
-                excludeNodesWithAttribute(LONGDESC_ATTRIBUTE).
+        List<Node> imgWithAltAttributeNodeList = 
+                sspHandler.beginSelection().domXPathSelectNodeSet(XPATH_EXPR3).
                 getSelectedElementList();
 
         int decorativeImgCounter = 0;

@@ -26,8 +26,10 @@ public class Aw20Rule01031 extends AbstractPageRuleImplementation {
     public static final String SRC_ATTRIBUTE = "src";
     public static final String ALT_ATTRIBUTE = "alt";
     public static final String TITLE_ATTRIBUTE = "title";
-    public static final String XPATH_EXPR =
-            "//IMG[@alt and @longdesc]";
+    public static final String XPATH_EXPR1 =
+            "//IMG[@alt and not(ancestor::A)]";
+    public static final String XPATH_EXPR2 =
+            "//IMG[@alt and @longdesc and not(ancestor::A)]";
 
     public Aw20Rule01031() {
         super();
@@ -40,8 +42,7 @@ public class Aw20Rule01031 extends AbstractPageRuleImplementation {
         List<ProcessRemark> processRemarkList = new ArrayList<ProcessRemark>();
 
         List<Node> imgNodes = sspHandler.beginSelection().
-                selectDocumentNodes(IMG_TAG).
-                keepNodesWithAttribute(ALT_ATTRIBUTE).getSelectedElementList();
+                domXPathSelectNodeSet(XPATH_EXPR1).getSelectedElementList();
 
         int decorativeImgCount = 0;
 
@@ -58,7 +59,7 @@ public class Aw20Rule01031 extends AbstractPageRuleImplementation {
         } else {
             List<Node> imgWithLongdescAndAltNodeList =
                     sspHandler.beginSelection().
-                    domXPathSelectNodeSet(XPATH_EXPR).getSelectedElementList();
+                    domXPathSelectNodeSet(XPATH_EXPR2).getSelectedElementList();
             String altAttributeContent = null;
             String fileName = null;
             for (Node node : imgWithLongdescAndAltNodeList) {
