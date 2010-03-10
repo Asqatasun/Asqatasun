@@ -40,8 +40,8 @@ LAUNCH_TANAGURU="$JAVA_HOME/bin/java $JAVA_OPTS $TEST_SET_FILE_NAME"
 ##################
 DATE_SUFFIX=`date '+%Y%m%d-%Hh%Mm%S'`
 file=${1#http://}
-file=${1#https://}
-file=${1#www.}
+file=${file#https://}
+file=${file#www.}
 file=${file#file:///}
 file=${file%%/*}
 
