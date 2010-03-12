@@ -36,8 +36,10 @@ public class SSPHandlerImpl implements SSPHandler {
 
     public SSPHandler beginSelection() {
         domHandler.beginSelection();
-        cssHandler.beginSelection();
-        jsHandler.beginSelection();
+        if (cssHandler != null)
+            cssHandler.beginSelection();
+        if (jsHandler!=null)
+            jsHandler.beginSelection();
 
         selectionExpression = null;
         remarkList = new ArrayList<ProcessRemark>();
@@ -91,7 +93,9 @@ public class SSPHandlerImpl implements SSPHandler {
     }
 
     public TestSolution checkRelativeUnitExists(Collection<Integer> blackList) {
-        return cssHandler.checkRelativeUnitExists(blackList);
+        if (cssHandler != null)
+            return cssHandler.checkRelativeUnitExists(blackList);
+        else return TestSolution.NOT_APPLICABLE;
     }
 
     public TestSolution checkTextContentAndAttributeValue(String attributeName,
@@ -141,9 +145,12 @@ public class SSPHandlerImpl implements SSPHandler {
         List<ProcessRemark> allRemarkList = new ArrayList<ProcessRemark>();
 
         allRemarkList.addAll(remarkList);
-        allRemarkList.addAll(domHandler.getRemarkList());
-        allRemarkList.addAll(cssHandler.getRemarkList());
-        allRemarkList.addAll(jsHandler.getRemarkList());
+        if (domHandler != null)
+            allRemarkList.addAll(domHandler.getRemarkList());
+        if (cssHandler != null)
+            allRemarkList.addAll(cssHandler.getRemarkList());
+        if (jsHandler!=null)
+            allRemarkList.addAll(jsHandler.getRemarkList());
 
         return allRemarkList;
     }
@@ -210,12 +217,14 @@ public class SSPHandlerImpl implements SSPHandler {
     }
 
     public SSPHandler selectAllJS() {
-        jsHandler.selectAllJS();
+        if (jsHandler != null)
+            jsHandler.selectAllJS();
         return this;
     }
 
     public SSPHandler selectAllRules() {
-        cssHandler.selectAllRules();
+        if (cssHandler != null)
+            cssHandler.selectAllRules();
         return this;
     }
 
@@ -261,17 +270,20 @@ public class SSPHandlerImpl implements SSPHandler {
     }
 
     public SSPHandler selectExternalJS() {
-        jsHandler.selectExternalJS();
+        if (jsHandler!=null)
+            jsHandler.selectExternalJS();
         return this;
     }
 
     public SSPHandler selectInlineJS() {
-        jsHandler.selectInlineJS();
+        if (jsHandler!=null)
+            jsHandler.selectInlineJS();
         return this;
     }
 
     public SSPHandler selectLocalJS() {
-        jsHandler.selectLocalJS();
+        if (jsHandler!=null)
+            jsHandler.selectLocalJS();
         return this;
     }
 
@@ -294,8 +306,10 @@ public class SSPHandlerImpl implements SSPHandler {
     public void setSSP(SSP ssp) {
         this.ssp = ssp;
         domHandler.setSSP(ssp);
-        cssHandler.setSSP(ssp);
-        jsHandler.setSSP(ssp);
+        if (cssHandler!=null)
+            cssHandler.setSSP(ssp);
+        if (jsHandler!=null)
+            jsHandler.setSSP(ssp);
     }
 
     public void setNomenclatureLoaderService(NomenclatureLoaderService nomenclatureLoaderService) {
