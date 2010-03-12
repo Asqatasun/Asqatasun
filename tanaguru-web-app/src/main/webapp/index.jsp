@@ -16,11 +16,15 @@
         </div>
 
         <div id="bd">
-        <p>Please enter the page URL to check (reference: AccessiWeb 2.0)</p>
+        <p>Please enter the page URL to check</p>
 
         <form action="AuditLauncher" id="submit-form" method="post">
             <div>
                 <input type="text" title="Page URL to check" name="pageUrl" id="pageUrl"/>
+                <select id="reference-select" title="Accessibility reference">
+                    <option selected="selected">AccessiWeb 2.0</option>
+                    <option disabled="disabled">RGAA 2.2.1</option>
+                </select>
                 <input type="submit" value="Check accessibility" id="input-submit"/>
             </div>
         </form>
