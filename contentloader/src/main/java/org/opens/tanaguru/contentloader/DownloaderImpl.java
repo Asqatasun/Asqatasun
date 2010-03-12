@@ -26,7 +26,7 @@ public class DownloaderImpl implements Downloader {
             in = new BufferedReader(new InputStreamReader(u.openStream()));
             while ((thisLine = in.readLine()) != null) {
                 //Correction of #34 bug
-                urlContent = urlContent + thisLine + " ";
+                urlContent = urlContent + thisLine + "\r";
             }
             return urlContent;
         } catch (IOException ex) {
