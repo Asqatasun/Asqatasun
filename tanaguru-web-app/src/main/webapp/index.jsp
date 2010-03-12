@@ -25,7 +25,8 @@
                     <option selected="selected">AccessiWeb 2.0</option>
                     <option disabled="disabled">RGAA 2.2.1</option>
                 </select>
-                <input type="submit" value="Check accessibility" id="input-submit"/>
+                <%--<input type="submit" value="Check accessibility" id="input-submit" class="large red awesome"/>--%>
+                <button type="submit" id="input-submit" class="red awesome">Check accessibility &raquo;</button>
             </div>
         </form>
         </div>
