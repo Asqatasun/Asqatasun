@@ -45,6 +45,7 @@ DATE_SUFFIX=`date '+%Y%m%d-%Hh%Mm%S'`
 RESULT_DIR="$RESULT_MAIN_DIR/test-campaign-$DATE_SUFFIX"
 if [ ! -d $RESULT_DIR ]; then
   mkdir $RESULT_DIR
+  mkdir $RESULT_DIR/failed
 fi
 
 for j in ${LIST_FILES}; do
@@ -73,6 +74,7 @@ for j in ${LIST_FILES}; do
       echo "see $LIST_ELEMENTS_RESULT_DIR/passed/$file_name.txt for details"
     else
       rm -f $LIST_ELEMENTS_RESULT_DIR/passed/$file_name.txt
+      cp $LIST_ELEMENTS_RESULT_DIR/failed/$file_name.txt $RESULT_DIR/failed
       echo "see $LIST_ELEMENTS_RESULT_DIR/failed/$file_name.txt for details"
     fi
  
