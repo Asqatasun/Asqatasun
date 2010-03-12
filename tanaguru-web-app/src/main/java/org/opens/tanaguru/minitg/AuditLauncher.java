@@ -6,11 +6,12 @@ package org.opens.tanaguru.minitg;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -67,10 +68,11 @@ public class AuditLauncher extends HttpServlet {
 
             // define meta-values for audit
             String resourceUrl = audit.getSubject().getURL();
-            Calendar myAuditCalendar = Calendar.getInstance();
-            String myAuditDate = myAuditCalendar.getDisplayName(Calendar.DAY_OF_MONTH, Calendar.SHORT, Locale.ENGLISH) + " " +
-                    myAuditCalendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH) + " " +
-                    myAuditCalendar.getDisplayName(Calendar.YEAR, Calendar.LONG, Locale.ENGLISH);
+//            String dateFormat = "yyyy-MM-dd HH:mm:ss";
+            String dateFormat = "yyyy-MM-dd";
+            Calendar calendar = GregorianCalendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+            String myAuditDate = sdf.format(calendar.getTime());
             StringBuilder myHtml = new StringBuilder();
             Float myAuditMark = audit.getMark();
 
@@ -99,6 +101,7 @@ public class AuditLauncher extends HttpServlet {
 
             // Sorts net result list by test rank
             Collections.sort(audit.getNetResultList(), new Comparator<ProcessResult>() {
+
                 @Override
                 public int compare(ProcessResult o1, ProcessResult o2) {
                     if (o1.getTest().getRank() < o2.getTest().getRank()) {
@@ -146,15 +149,15 @@ public class AuditLauncher extends HttpServlet {
             myHtml.append("                </tr>");
             myHtml.append("            </table>");
             myHtml.append("");
-/*
+            /*
             myHtml.append("            <dl class=\"table-display clearfix\">");
             myHtml.append("                <dt id=\"score-dt\">Score:</dt><dd id=\"score-dd\">" + audit.getMark() + "%</dd>");
             myHtml.append("                <dt>URL:</dt><dd><a href=\"" + resourceUrl + "\">" + resourceUrl + "</a></dd>");
             myHtml.append("                <dt>Date:</dt><dd>" + myAuditCalendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.FRENCH) + "</dd>");
             myHtml.append("            </dl>");
             myHtml.append("");
-  */
-            
+             */
+
             // synthetised results
             myHtml.append("            <table summary=\"Synthetised result of accessibility audit\" id=\"result-synthetised\">");
             myHtml.append("                <caption>Synthetised result of accessibility audit</caption>");
