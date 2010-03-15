@@ -65,7 +65,7 @@ cg-64;http://www.cg64.fr/
 cg-65;http://www.cg65.fr/
 cg-66-pyrennees-orientales;http://www.cg66.fr/
 cg-67;http://www.bas-rhin.fr/accueil
-cg-68;;http://www.cg68.fr/
+cg-68;http://www.cg68.fr/
 cg-69-rhone;http://www.rhone.fr/
 cg-70;http://www.cg70.fr/
 cg-71;http://www.cg71.fr/
