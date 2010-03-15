@@ -62,10 +62,15 @@ public class ContentsAdapterImpl implements ContentsAdapter {
             if (content instanceof SSP) {
                 SSP ssp = (SSP) content;
 
-                htmlCleaner.setDirtyHTML(ssp.getSource());
+                htmlCleaner.setDirtyHTML(
+                        DocumentCaseInsensitiveAdapter.
+                        removeDoctypeDeclaration(ssp.getSource()));
+
                 htmlCleaner.run();
 
-                ssp.setDOM(DocumentCaseInsensitiveAdapter.removeLowerCaseTags(htmlCleaner.getResult()));
+                ssp.setDOM(
+                        DocumentCaseInsensitiveAdapter.
+                        removeLowerCaseTags(htmlCleaner.getResult()));
 
                 if (writeCleanHtmlInFile) {
                     writeCleanDomInFile(ssp);
