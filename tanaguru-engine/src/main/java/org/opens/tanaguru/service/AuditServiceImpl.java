@@ -143,8 +143,12 @@ public class AuditServiceImpl implements AuditService {
         boolean hasContent = false;
         for (Content content : audit.getContentList()) {
             if (content instanceof SSP) {
-                hasContent = true;
-                break;
+                //We check that some content has been downloaded and has to
+                //be adapted. For the moment we ignore the returned error code @TODO
+                if (!((SSP)content).getSource().isEmpty()) {
+                    hasContent = true;
+                    break;
+                }
             }
         }
         if (hasContent) {
