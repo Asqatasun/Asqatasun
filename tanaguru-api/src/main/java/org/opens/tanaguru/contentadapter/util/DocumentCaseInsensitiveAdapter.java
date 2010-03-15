@@ -100,4 +100,19 @@ public abstract class DocumentCaseInsensitiveAdapter {
         return newCleanHtml.toString();
     }
 
+    public static String removeDoctypeDeclaration(String html){
+        int doctypeBeginTagPtr = html.indexOf("<!DOCTYPE");
+        if (doctypeBeginTagPtr == -1 )
+               return html;
+        int doctypeEndTagPtr = html.indexOf('>', doctypeBeginTagPtr);
+        StringBuilder cleanHtmlWithoutDoctype = new StringBuilder();
+        if (doctypeBeginTagPtr > 0) {
+            cleanHtmlWithoutDoctype.append(html, 0, doctypeBeginTagPtr-1);
+        }
+        cleanHtmlWithoutDoctype.append(
+                html, doctypeEndTagPtr+1, html.length()-1);
+
+        return cleanHtmlWithoutDoctype.toString();
+    }
+
 }
