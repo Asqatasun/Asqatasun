@@ -17,8 +17,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.audit.AuditStatus;
+import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.dao.reference.TestDAO;
 import org.opens.tanaguru.entity.reference.Test;
@@ -66,14 +69,39 @@ public class AuditLauncher extends HttpServlet {
                 audit = auditService.auditPage(pageURLList[0], testCodeList);
             }
 
-            // define meta-values for audit
             String resourceUrl = audit.getSubject().getURL();
-//            String dateFormat = "yyyy-MM-dd HH:mm:ss";
+
+            if (audit.getStatus().equals(AuditStatus.ERROR)) {
+                boolean hasContent = false;
+                for (Content content : audit.getContentList()) {
+                    if (content instanceof SSP) {
+                    //We check that some content has been downloaded and has to
+                    //adapter. For the moment we ignore the return error code @TODO
+                        if (!((SSP)content).getSource().isEmpty()) {
+                            hasContent = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!hasContent){
+                    out.println(returnPageLoadingProblem(resourceUrl));
+                    return;
+                }
+
+                if (audit.getGrossResultList().isEmpty()) {
+                    out.println(returnPageProcessingProblem(resourceUrl));
+                    return;
+                }
+
+            }
+            StringBuilder myHtml = new StringBuilder();
+            // define meta-values for audit
+            //String dateFormat = "yyyy-MM-dd HH:mm:ss";
             String dateFormat = "yyyy-MM-dd";
             Calendar calendar = GregorianCalendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
             String myAuditDate = sdf.format(calendar.getTime());
-            StringBuilder myHtml = new StringBuilder();
             Float myAuditMark = audit.getMark();
 
             // Count nb of each type of result for synthetised table
@@ -114,6 +142,7 @@ public class AuditLauncher extends HttpServlet {
                 }
             });
 
+            myHtml.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
             myHtml.append("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
             myHtml.append("    <head>");
             myHtml.append("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>");
@@ -214,6 +243,107 @@ public class AuditLauncher extends HttpServlet {
         } finally {
             out.close();
         }
+    }
+
+    private String returnPageLoadingProblem(String resourceUrl){
+        String dateFormat = "yyyy-MM-dd HH:mm:ss";
+        Calendar calendar = GregorianCalendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+        String myAuditDate = sdf.format(calendar.getTime());
+
+        StringBuilder myHtml = new StringBuilder();
+        myHtml.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
+        myHtml.append("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
+        myHtml.append("    <head>");
+        myHtml.append("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>");
+        myHtml.append("        <meta http-equiv=\"Author\" content=\"Open-S.com // Matthieu Faure\" lang=\"fr\" />");
+        myHtml.append("        <title>Audit result for " + resourceUrl + "</title>");
+        myHtml.append("        <link rel=\"stylesheet\" type=\"text/css\" href=\"http://yui.yahooapis.com/combo?2.8.0r4/build/reset-fonts/reset-fonts.css&amp;2.8.0r4/build/base/base-min.css\"/>");
+        myHtml.append("        <link rel=\"stylesheet\" type=\"text/css\" href=\"Css/tanaguru.css\" />");
+        myHtml.append("    </head>");
+        myHtml.append("    <body id=\"audit-result\">");
+        myHtml.append("    <div id=\"doc2\">");
+        myHtml.append("        <div id=\"hd\">");
+        myHtml.append("            <h1>Result of accessibility audit</h1>");
+        myHtml.append("        </div>");
+        myHtml.append("");
+        myHtml.append("        <div id=\"bd\">");
+        myHtml.append("            <h2>A problem occured while loading page content</h2>");
+        myHtml.append("");
+        // audit meta-data
+        myHtml.append("            <table summary=\"Audit meta-data\" id=\"result-meta\">");
+        myHtml.append("                <caption>Audit meta-data</caption>");
+        myHtml.append("                <tr>");
+        myHtml.append("                    <th id=\"meta-url\" scope=\"row\" class=\"col01\">URL:</th>");
+        myHtml.append("                    <td class=\"col02\"><a href=\"" + resourceUrl + "\">" + resourceUrl + "</a></td>");
+        myHtml.append("                </tr>");
+        myHtml.append("                <tr>");
+        myHtml.append("                    <th id=\"meta-date\" scope=\"row\" class=\"col01\">Date:</th>");
+        myHtml.append("                    <td class=\"col02\">" + myAuditDate + "</td>");
+        myHtml.append("                </tr>");
+        myHtml.append("            </table>");
+        myHtml.append("");
+        myHtml.append("        </div><!-- id=\"bd\" -->");
+        myHtml.append("");
+        myHtml.append("        <div id=\"ft\">");
+        myHtml.append("            &copy; <a href=\"http://www.Open-S.com/\">Open-S</a>");
+        myHtml.append("        </div>");
+        myHtml.append("    </div>");
+        myHtml.append("    </body>");
+        myHtml.append("</html>");
+
+        return myHtml.toString();
+    }
+
+    private String returnPageProcessingProblem(String resourceUrl){
+        String dateFormat = "yyyy-MM-dd HH:mm:ss";
+        Calendar calendar = GregorianCalendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+        String myAuditDate = sdf.format(calendar.getTime());
+
+        StringBuilder myHtml = new StringBuilder();
+        myHtml.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
+        myHtml.append("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
+        myHtml.append("    <head>");
+        myHtml.append("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>");
+        myHtml.append("        <meta http-equiv=\"Author\" content=\"Open-S.com // Matthieu Faure\" lang=\"fr\" />");
+        myHtml.append("        <title>Audit result for " + resourceUrl + "</title>");
+        myHtml.append("        <link rel=\"stylesheet\" type=\"text/css\" href=\"http://yui.yahooapis.com/combo?2.8.0r4/build/reset-fonts/reset-fonts.css&amp;2.8.0r4/build/base/base-min.css\"/>");
+        myHtml.append("        <link rel=\"stylesheet\" type=\"text/css\" href=\"Css/tanaguru.css\" />");
+        myHtml.append("    </head>");
+        myHtml.append("    <body id=\"audit-result\">");
+        myHtml.append("    <div id=\"doc2\">");
+        myHtml.append("        <div id=\"hd\">");
+        myHtml.append("            <h1>Result of accessibility audit</h1>");
+        myHtml.append("        </div>");
+        myHtml.append("");
+        myHtml.append("        <div id=\"bd\">");
+        myHtml.append("            <h2>A problem occured while processing page</h2>");
+        myHtml.append("");
+
+        // audit meta-data
+        myHtml.append("            <table summary=\"Audit meta-data\" id=\"result-meta\">");
+        myHtml.append("                <caption>Audit meta-data</caption>");
+        myHtml.append("                <tr>");
+        myHtml.append("                    <th id=\"meta-url\" scope=\"row\" class=\"col01\">URL:</th>");
+        myHtml.append("                    <td class=\"col02\"><a href=\"" + resourceUrl + "\">" + resourceUrl + "</a></td>");
+        myHtml.append("                </tr>");
+        myHtml.append("                <tr>");
+        myHtml.append("                    <th id=\"meta-date\" scope=\"row\" class=\"col01\">Date:</th>");
+        myHtml.append("                    <td class=\"col02\">" + myAuditDate + "</td>");
+        myHtml.append("                </tr>");
+        myHtml.append("            </table>");
+        myHtml.append("");
+        myHtml.append("        </div><!-- id=\"bd\" -->");
+        myHtml.append("");
+        myHtml.append("        <div id=\"ft\">");
+        myHtml.append("            &copy; <a href=\"http://www.Open-S.com/\">Open-S</a>");
+        myHtml.append("        </div>");
+        myHtml.append("    </div>");
+        myHtml.append("    </body>");
+        myHtml.append("</html>");
+
+        return myHtml.toString();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
