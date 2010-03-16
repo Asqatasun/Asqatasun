@@ -102,8 +102,14 @@ public abstract class DocumentCaseInsensitiveAdapter {
 
     public static String removeDoctypeDeclaration(String html){
         int doctypeBeginTagPtr = html.indexOf("<!DOCTYPE");
-        if (doctypeBeginTagPtr == -1 )
-               return html;
+
+        if (doctypeBeginTagPtr == -1 ) {
+               doctypeBeginTagPtr = html.indexOf("<!doctype");
+               if (doctypeBeginTagPtr == -1 ) {
+                    return html;
+               }
+        }
+
         int doctypeEndTagPtr = html.indexOf('>', doctypeBeginTagPtr);
         StringBuilder cleanHtmlWithoutDoctype = new StringBuilder();
         if (doctypeBeginTagPtr > 0) {
