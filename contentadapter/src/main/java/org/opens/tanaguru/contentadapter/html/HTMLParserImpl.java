@@ -9,6 +9,8 @@ import java.io.StringReader;
 import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Set;
+import org.xml.sax.ContentHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -16,8 +18,6 @@ import org.xml.sax.helpers.XMLReaderFactory;
 
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.contentadapter.HTMLParser;
-import java.util.Set;
-import org.xml.sax.ContentHandler;
 
 public class HTMLParserImpl implements HTMLParser {
 
@@ -43,32 +43,15 @@ public class HTMLParserImpl implements HTMLParser {
             return;
         }
 
-        // http://xerces.apache.org/xerces2-j/features.html
         // General features
         saxReader = XMLReaderFactory.createXMLReader("org.apache.xerces.parsers.SAXParser");
-        saxReader.setFeature("http://xml.org/sax/features/namespaces", false);
-        saxReader.setFeature("http://xml.org/sax/features/use-entity-resolver2", false);
-        saxReader.setFeature("http://apache.org/xml/features/validation/schema/normalized-value", false);
-        saxReader.setFeature("http://apache.org/xml/features/validation/schema/element-default", false);
-        saxReader.setFeature("http://apache.org/xml/features/validation/schema/augment-psvi", false);
-        saxReader.setFeature("http://apache.org/xml/features/validation/schema/ignore-xsi-type-until-elemdecl", true);
-        saxReader.setFeature("http://apache.org/xml/features/generate-synthetic-annotations", false);
-        saxReader.setFeature("http://xml.org/sax/features/external-general-entities", false);
-        saxReader.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
-        saxReader.setFeature("http://apache.org/xml/features/validation/id-idref-checking", false);
-        saxReader.setFeature("http://apache.org/xml/features/validation/identity-constraint-checking", false);
-        saxReader.setFeature("http://apache.org/xml/features/validation/unparsed-entity-checking", false);
+
         saxReader.setFeature("http://apache.org/xml/features/allow-java-encodings", true);
         saxReader.setFeature("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);
         saxReader.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
-        saxReader.setFeature("http://apache.org/xml/features/xinclude/fixup-base-uris", false);
-        saxReader.setFeature("http://apache.org/xml/features/xinclude/fixup-language", false);
-
-        // SAX features
-//        saxReader.setFeature("http://xml.org/sax/features/string-interning", false);// Crashes
-//        saxReader.setFeature("http://xml.org/sax/features/lexical-handler/parameter-entities", false);// XXX
-//        saxReader.setFeature("http://xml.org/sax/features/is-standalone", false);// XXX
-        // http://xml.org/sax/features/resolve-dtd-uris
+        saxReader.setFeature("http://xml.org/sax/features/validation",false);
+        saxReader.setFeature("http://apache.org/xml/features/validation/schema",false);
+        saxReader.setFeature("http://apache.org/xml/features/continue-after-fatal-error", true);
 
         DOMContentHandlerDecorator contentHandlerDecorator = new DOMContentHandlerDecoratorImpl();
         for (ContentAdapter contentAdapter : contentAdapterSet) {
@@ -90,6 +73,11 @@ public class HTMLParserImpl implements HTMLParser {
         } catch (SAXException ex) {
             Logger.getLogger(HTMLParserImpl.class.getName()).log(Level.WARNING,
                     null, ex);
+            // If the corrected dom cannot be parsed, the dom is emptied
+            // to avoid parsing errors while proccessing and to provide the user
+            // an error message
+            // Bug #41 correction
+            ssp.setDOM("");
         } catch (IOException ex) {
             Logger.getLogger(HTMLParserImpl.class.getName()).log(Level.WARNING,
                     null, ex);
