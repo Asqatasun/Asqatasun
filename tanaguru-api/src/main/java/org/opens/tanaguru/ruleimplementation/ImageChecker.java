@@ -16,7 +16,7 @@ import org.opens.tanaguru.contentadapter.util.URLIdentifier;
 import org.opens.tanaguru.processor.SSPHandler;
 
 /**
- * This class is used to determine if an image can be decorative
+ * This class is used to determine if an image is decorative
  * @author jkowalczyk
  */
 public class ImageChecker {
@@ -35,7 +35,7 @@ public class ImageChecker {
         return imageChecker;
     }
 
-    public boolean isDecorativeImage(SSPHandler sspHandler, String imgUrl) {
+    public boolean isDecorativeImage(SSPHandler sspHandler, String imgUrl)  {
         boolean isMonoColorImg = true;
         boolean isMonoDimension = false;
         boolean isDecorativeImg = false;
@@ -48,8 +48,11 @@ public class ImageChecker {
                 image = ImageIO.read(uRLIdentifier.resolve(imgUrl));
             } catch (IOException ex) {
                 Logger.getLogger(ImageChecker.class.getName()).
-                        log(Level.WARNING, null, ex);
-            }
+                        log(Level.WARNING, imgUrl, ex);
+            } catch (IllegalArgumentException ex){
+                Logger.getLogger(ImageChecker.class.getName()).
+                        log(Level.WARNING, imgUrl, ex);
+            } 
 
             int rgbColor = -1;
             if (image != null) {
@@ -69,10 +72,11 @@ public class ImageChecker {
                         }
                     }
                 }
+                if (isMonoColorImg || isMonoDimension) {
+                    isDecorativeImg = true;
+                }
             }
-            if (isMonoColorImg || isMonoDimension) {
-                isDecorativeImg = true;
-            }
+            
         } catch (MalformedURLException ex) {
             Logger.getLogger(ImageChecker.class.getName()).
                     log(Level.SEVERE, null, ex);
