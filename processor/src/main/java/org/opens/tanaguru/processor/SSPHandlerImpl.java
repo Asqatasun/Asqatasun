@@ -71,6 +71,10 @@ public class SSPHandlerImpl implements SSPHandler {
         return domHandler.checkAttributeValueNotEmpty(attributeName);
     }
 
+    public TestSolution checkAttributeValueIsEmpty(String attributeName) {
+        return domHandler.checkAttributeValueIsEmpty(attributeName);
+    }
+
     public TestSolution checkChildNodeExists(String childNodeName) {
         return domHandler.checkChildNodeExists(childNodeName);
     }
