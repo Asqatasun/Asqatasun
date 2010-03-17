@@ -309,11 +309,7 @@ public class DOMHandlerImpl implements DOMHandler {
             boolean isInBlackList = false;
             boolean isInWhiteList = false;
             String nodeValue = workingElement.getNodeValue();
-            System.out.println("sur quoi ca merde?   "
-                    + nodeValue);
             for (String text : blacklist) {
-                System.out.println("sur quoi ca merde 2?   "
-                    + text);
                 if (nodeValue.toLowerCase().equals(text.toLowerCase())) {
                     isInBlackList = true;
                     break;
