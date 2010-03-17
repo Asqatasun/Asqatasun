@@ -70,6 +70,14 @@ public interface DOMHandler {
 
     /**
      *
+     * @param attributeName
+     *            the name of the attribute to check
+     * @return the result of the check processing
+     */
+    TestSolution checkAttributeValueIsEmpty(String attributeName);
+
+    /**
+     *
      * @param childNodeName
      *            the name of the childNode to check
      * @return the result of the check processing
