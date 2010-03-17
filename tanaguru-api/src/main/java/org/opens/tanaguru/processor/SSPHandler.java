@@ -414,4 +414,14 @@ public interface SSPHandler {
      * @param errorMessageCode
      */
     TestSolution domCheckNodeValueInNomenclature(String nomenclatureCode, String errorMessageCode);
+
+    /**
+     * Add a source code remark
+     * @param processResult
+     * @param node
+     * @param messageCode
+     * @param attributeName
+     */
+    public void addSourceCodeRemark(TestSolution processResult, Node node,
+            String messageCode, String attributeName);
 }

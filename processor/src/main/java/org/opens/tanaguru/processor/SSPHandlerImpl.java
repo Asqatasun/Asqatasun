@@ -385,4 +385,16 @@ public class SSPHandlerImpl implements SSPHandler {
     public void setSelectionExpression(String selectionExpression) {
         this.selectionExpression = selectionExpression;
     }
+
+    /**
+     * 
+     * @param processResult
+     * @param node
+     * @param messageCode
+     * @param attributeName
+     */
+    public void addSourceCodeRemark(TestSolution processResult, Node node,
+            String messageCode, String attributeName) {
+        domHandler.addSourceCodeRemark(processResult, node, messageCode, attributeName);
+    }
 }

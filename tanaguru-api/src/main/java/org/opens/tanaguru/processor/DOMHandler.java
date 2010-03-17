@@ -393,4 +393,14 @@ public interface DOMHandler {
      *            the SSP to set
      */
     void setSSP(SSP ssp);
+
+    /**
+     * Add a source code remark
+     * @param processResult
+     * @param node
+     * @param messageCode
+     * @param attributeName
+     */
+    public void addSourceCodeRemark(TestSolution processResult, Node node,
+            String messageCode, String attributeName);
 }
