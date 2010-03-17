@@ -56,7 +56,7 @@ public class DOMHandlerImpl implements DOMHandler {
         this.ssp = ssp;
     }
 
-    protected void addSourceCodeRemark(TestSolution processResult, Node node,
+    public void addSourceCodeRemark(TestSolution processResult, Node node,
             String messageCode, String attributeName) {// XXX
         SourceCodeRemark remark = sourceCodeRemarkFactory.create();
         remark.setIssue(processResult);
@@ -73,8 +73,13 @@ public class DOMHandlerImpl implements DOMHandler {
                 lineNumber++;
                 index = 0;
                 while (index != -1) {
+                    int indexOri = index;
                     index = line.toLowerCase().indexOf(
-                            "<" + node.getNodeName().toLowerCase(), index);
+                            "<" + node.getNodeName().toLowerCase() + ">", index);
+                    if (index == -1) {
+                        index = line.toLowerCase().indexOf(
+                            "<" + node.getNodeName().toLowerCase() + " ", indexOri);
+                    }
                     if (index != -1) {
                         if (nodeIndex == 0) {
                             found = true;
@@ -561,6 +566,7 @@ public class DOMHandlerImpl implements DOMHandler {
 
     protected int getNodeIndex(Node node) {
         NodeList nodeList = document.getElementsByTagName(node.getNodeName());
+        System.out.println("combien il trouve d'images?   " + nodeList.getLength());
         for (int i = 0; i < nodeList.getLength(); i++) {
             Node current = nodeList.item(i);
             if (current.equals(node)) {
