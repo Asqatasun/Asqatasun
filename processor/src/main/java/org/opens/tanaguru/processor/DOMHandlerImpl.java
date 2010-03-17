@@ -177,6 +177,26 @@ public class DOMHandlerImpl implements DOMHandler {
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
 
+    public TestSolution checkAttributeValueIsEmpty(String attributeName) {
+        Set<TestSolution> resultSet = new HashSet<TestSolution>();
+        for (Node workingElement : selectedElementList) {
+            TestSolution result = TestSolution.PASSED;
+            Node attribute = workingElement.getAttributes().getNamedItem(
+                    attributeName);
+            if (attribute != null) {
+                if (attribute.getNodeValue().length() != 0) {
+                    result = TestSolution.FAILED;
+                    addSourceCodeRemark(result, workingElement, "ValueNotEmpty",
+                            attributeName);
+                }
+            } else {
+                result = TestSolution.NOT_APPLICABLE;
+            }
+            resultSet.add(result);
+        }
+        return RuleHelper.synthesizeTestSolutionCollection(resultSet);
+    }
+
     public TestSolution checkChildNodeExists(String childNodeName) {
         Set<TestSolution> resultSet = new HashSet<TestSolution>();
         for (Node workingElement : selectedElementList) {
@@ -289,7 +309,11 @@ public class DOMHandlerImpl implements DOMHandler {
             boolean isInBlackList = false;
             boolean isInWhiteList = false;
             String nodeValue = workingElement.getNodeValue();
+            System.out.println("sur quoi ca merde?   "
+                    + nodeValue);
             for (String text : blacklist) {
+                System.out.println("sur quoi ca merde 2?   "
+                    + text);
                 if (nodeValue.toLowerCase().equals(text.toLowerCase())) {
                     isInBlackList = true;
                     break;
