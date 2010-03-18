@@ -69,19 +69,20 @@ public class Aw20Rule10011 extends AbstractPageRuleImplementation {
 
         TestSolution testSolution = TestSolution.PASSED;
 
-        List<ProcessRemark> processRemarkList = new ArrayList<ProcessRemark>();
-
         for (Node node : sspHandler.getSelectedElementList()) {
             testSolution = TestSolution.FAILED;
-            processRemarkList.add(processRemarkFactory.
-                    create(testSolution, "DeprecatedRepresentationTagFound"));
+            sspHandler.addSourceCodeRemark(
+                    testSolution,
+                    node,
+                    "DeprecatedRepresentationTagFound",
+                    node.getNodeName());
         }
 
         ProcessResult processResult = definiteResultFactory.create(
                 test,
                 sspHandler.getPage(),
                 testSolution,
-                processRemarkList);
+                sspHandler.getRemarkList());
 
         return processResult;
     }
