@@ -25,7 +25,7 @@ public class Aw20Rule01021 extends AbstractPageRuleImplementation {
     public static final String SRC_ATTRIBUTE = "src";
     public static final String ALT_ATTRIBUTE = "alt";
     public static final String EMPTY_STRING = "";
-    public static final String WRONG_IMG_MSG = "DecorativeImageWithNotEmptyAltAttribute";
+//    public static final String WRONG_IMG_MSG = "DecorativeImageWithNotEmptyAltAttribute";
     public static final String XPATH_EXPR1 =
             "//IMG[@alt and @longdesc and not(ancestor::A)]";
     public static final String XPATH_EXPR2 =
@@ -73,41 +73,37 @@ public class Aw20Rule01021 extends AbstractPageRuleImplementation {
                 sspHandler.beginSelection().domXPathSelectNodeSet(XPATH_EXPR3).
                 getSelectedElementList();
 
-        int decorativeImgCounter = 0;
+        List<Node> decorativeImgWithAltAttributeNodeList = new ArrayList<Node>();
+
         for (Node imgNode : imgWithAltAttributeNodeList) {
             String imgSrc = imgNode.getAttributes().
                     getNamedItem(SRC_ATTRIBUTE).getTextContent();
 
             // for each element of the collection, we test if this image is decorative
             if (ImageChecker.getInstance().isDecorativeImage(sspHandler, imgSrc)) {
-                decorativeImgCounter++;
-                if (!imgNode.getAttributes().getNamedItem(ALT_ATTRIBUTE).
-                        getTextContent().equals(EMPTY_STRING)) {
-
-                    // if an image is decorative and its "alt" attribute is not
-                    // equal to an empty string, the test is failed
-                    checkResult = TestSolution.FAILED;
-                    processRemarkList.add(processRemarkFactory.create(
-                            TestSolution.FAILED,
-                            WRONG_IMG_MSG));
-                }
+               decorativeImgWithAltAttributeNodeList.add(imgNode);
             }
         }
 
+        if (!decorativeImgWithAltAttributeNodeList.isEmpty()) {
+            sspHandler.setSelectedElementList(decorativeImgWithAltAttributeNodeList);
+            checkResult = sspHandler.checkAttributeValueIsEmpty(ALT_ATTRIBUTE);
+        }
         // if all the images with an "alt" attribute but without "longdesc"
         // attribute are seen as decorative and if none of them has an "alt"
         // attribute equals to an empty string, the test is passed
-        if (checkResult != TestSolution.FAILED
-                && decorativeImgCounter == imgWithAltAttributeNodeList.size()) {
-            checkResult = TestSolution.PASSED;
+        if (checkResult == TestSolution.PASSED
+                && decorativeImgWithAltAttributeNodeList.size() <
+                imgWithAltAttributeNodeList.size()) {
+            checkResult = TestSolution.NEED_MORE_INFO;
         }
 
-        processRemarkList.addAll(sspHandler.getRemarkList());
+//      processRemarkList.addAll(sspHandler.getRemarkList());
         DefiniteResult result = definiteResultFactory.create(
                 test,
                 sspHandler.getSSP().getPage(),
                 checkResult,
-                processRemarkList);
+                sspHandler.getRemarkList());
 
         return result;
     }
