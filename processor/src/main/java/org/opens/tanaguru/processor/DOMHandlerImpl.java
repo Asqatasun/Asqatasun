@@ -27,8 +27,11 @@ import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
 import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.ruleimplementation.RuleHelper;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -47,6 +50,7 @@ public class DOMHandlerImpl implements DOMHandler {
     protected SourceCodeRemarkFactory sourceCodeRemarkFactory;
     protected SSP ssp;
     protected XPath xpath;
+    protected Map<Integer,String> sourceCodeWithLine = new HashMap<Integer, String>();
 
     public DOMHandlerImpl() {
         super();
@@ -65,37 +69,36 @@ public class DOMHandlerImpl implements DOMHandler {
         int lineNumber = 0;
         StringReader sr = new StringReader(ssp.getDOM());
         BufferedReader br = new BufferedReader(sr);
-        String line;
         boolean found = false;
-        int index = 0;
-        try {
-            while (((line = br.readLine()) != null) && !found) {
-                lineNumber++;
-                index = 0;
-                while (index != -1) {
-                    int indexOri = index;
-                    index = line.toLowerCase().indexOf(
-                            "<" + node.getNodeName().toLowerCase() + ">", index);
-                    if (index == -1) {
-                        index = line.toLowerCase().indexOf(
-                            "<" + node.getNodeName().toLowerCase() + " ", indexOri);
+        int characterPosition = 0;
+        Iterator<Integer> iter = sourceCodeWithLine.keySet().iterator();
+        while(iter.hasNext() || !found) {
+            int myLineNumber = iter.next();
+            int index = 0;
+            while (index != -1) {
+                int characterPositionOri = index;
+                index = sourceCodeWithLine.get(myLineNumber).toLowerCase().indexOf(
+                        "<" + node.getNodeName().toLowerCase() + ">", index);
+                if (index == -1) {
+                    index = sourceCodeWithLine.get(myLineNumber).toLowerCase().indexOf(
+                        "<" + node.getNodeName().toLowerCase() + " ", characterPositionOri);
+                }
+                if (index != -1) {
+                    if (nodeIndex == 0) {
+                        found = true;
+                        lineNumber = myLineNumber;
+                        characterPosition = index;
+                        break;
                     }
-                    if (index != -1) {
-                        if (nodeIndex == 0) {
-                            found = true;
-                            break;
-                        }
-                        nodeIndex--;
-                        index += node.getNodeName().length();
-                    }
+                    nodeIndex--;
+                    characterPosition += node.getNodeName().length();
                 }
             }
-            remark.setLineNumber(lineNumber);
-            remark.setCharacterPosition(index + 1);
-            remark.setTarget(attributeName);
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
         }
+
+        remark.setLineNumber(lineNumber);
+        remark.setCharacterPosition(characterPosition + 1);
+        remark.setTarget(attributeName);
         remarkList.add(remark);
     }
 
@@ -566,7 +569,6 @@ public class DOMHandlerImpl implements DOMHandler {
 
     protected int getNodeIndex(Node node) {
         NodeList nodeList = document.getElementsByTagName(node.getNodeName());
-        System.out.println("combien il trouve d'images?   " + nodeList.getLength());
         for (int i = 0; i < nodeList.getLength(); i++) {
             Node current = nodeList.item(i);
             if (current.equals(node)) {
@@ -630,6 +632,18 @@ public class DOMHandlerImpl implements DOMHandler {
             Logger.getLogger(DOMHandlerImpl.class.getName()).log(Level.SEVERE,
                     null, ex);
             throw new RuntimeException(ex);
+        }
+        int lineNumber = 1;
+        StringReader sr = new StringReader(ssp.getDOM());
+        BufferedReader br = new BufferedReader(sr);
+        String line;
+        try {
+            while ((line = br.readLine()) != null) {
+                sourceCodeWithLine.put(lineNumber, line);
+                lineNumber++;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(DOMHandlerImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
