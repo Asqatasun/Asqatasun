@@ -1,0 +1,5 @@
+delirium;http://www.delirium.be/
+jupiler;http://www.jupiler.be/page/home/actions-jupiler
+cineyvirtuel;http://www.cineyvirtuel.com/rubrique,biere-de-ciney,81793.html
+achouffe;http://www.achouffe.be/en
+duvel;http://www.duvel.be/

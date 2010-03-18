@@ -1,0 +1,6 @@
+romandie;http://www.romandie.com/news/
+lematin;http://www.lematin.ch/
+lenouvelliste;http://www.lenouvelliste.ch/fr/news/suisse/index.php?idIndex=10
+20min;http://www.20min.ch/
+journaldujura;http://www.journaldujura.ch/Nouvelles_en_ligne
+lagruyere;http://www.lagruyere.ch/
