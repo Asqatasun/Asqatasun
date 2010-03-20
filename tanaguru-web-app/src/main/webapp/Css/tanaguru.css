@@ -157,28 +157,6 @@
     font-weight: bold;
 }
 
-/*
-#audit-result dl.table-display {
-}
-#audit-result .table-display dt,
-#audit-result .table-display dd {
-    padding-bottom: 0.5em;
-}
-#audit-result .table-display dt {
-    float: left;
-    clear: left;
-    width: 5em;
-    font-weight: bold;
-}
-#audit-result .table-display dd {
-    margin: 0 0 0 5em;
-}
-#audit-result #score-dd,
-#audit-result #score-dt {
-    font-size: 153.9%;
-}
-*/
-
 /* Synthetised results (=audit-result)
  -------------------------------------------------- */
 #result-synthetised th {text-align: left;}
@@ -209,6 +187,7 @@
 /* Detailed results (=result-detailed)
  -------------------------------------------------- */
 #result-detailed th {background-color: rgb(255,255,204);}
+#result-detailed td {vertical-align: top; }
 #result-detailed .col01 {width: 7em;}
 #result-detailed .col02 {width: 12em;}
 #result-detailed .col03 {width: 40em;}
