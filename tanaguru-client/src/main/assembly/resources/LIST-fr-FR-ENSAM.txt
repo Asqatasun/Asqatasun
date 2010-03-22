@@ -1,1 +1,1 @@
-ENSAM Paris;http://www.ensam.fr/
+ENSAM-Paris;http://www.ensam.fr/
