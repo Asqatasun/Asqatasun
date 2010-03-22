@@ -7,11 +7,14 @@ package org.opens.tanaguru.minitg;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +25,7 @@ import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.SSP;
+import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.dao.reference.TestDAO;
 import org.opens.tanaguru.entity.reference.Test;
@@ -222,11 +226,7 @@ public class AuditLauncher extends HttpServlet {
                 myHtml.append("                <tr>");
                 myHtml.append("                    <td class=\"col01\">" + processResult.getTest().getCode() + "</td>");
                 myHtml.append("                    <td class=\"col02\">" + processResult.getValue() + "</td>");
-                myHtml.append("                    <td class=\"col03\">");
-                for (ProcessRemark remark : processResult.getRemarkList()) {
-                    myHtml.append("                         <p>" + remark.getMessageCode() + "</p>");
-                }
-                myHtml.append("                    </td>");
+                formatTestResults(myHtml, processResult);
                 myHtml.append("                </tr>");
             }
             myHtml.append("            </table>");
@@ -344,6 +344,45 @@ public class AuditLauncher extends HttpServlet {
         myHtml.append("</html>");
 
         return myHtml.toString();
+    }
+
+    private void formatTestResults(StringBuilder htmlResponse, ProcessResult processResult){
+        htmlResponse.append("                    <td class=\"col03\">");
+        Map <String, List<String>> remarks = new HashMap<String, List<String>>();
+        for (ProcessRemark remark : processResult.getRemarkList()) {
+            if (!remarks.containsKey(remark.getMessageCode())) {
+                List<String> remarksInfos = new ArrayList<String>();
+                if (remark instanceof SourceCodeRemark) {
+                    remarksInfos.add(
+                        "element " + ((SourceCodeRemark)remark).getTarget().toLowerCase() + " " +
+                        "at line " + ((SourceCodeRemark)remark).getLineNumber() + " " + 
+                        "and character position " + ((SourceCodeRemark)remark).getCharacterPosition());
+                } else if (remark instanceof ProcessRemark) {
+                    remarksInfos.add(
+                        " element " + remark.getSelectedElement());
+                }
+                remarks.put(remark.getMessageCode(), remarksInfos);
+            } else {
+                if (remark instanceof SourceCodeRemark) {
+                    remarks.get(remark.getMessageCode()).add(
+                        "element " + ((SourceCodeRemark)remark).getTarget().toLowerCase() + " " +
+                        "at line " + ((SourceCodeRemark)remark).getLineNumber() + " " +
+                        "and character position " + ((SourceCodeRemark)remark).getCharacterPosition());
+                } else if (remark instanceof ProcessRemark) {
+                    remarks.get(remark.getMessageCode()).add(
+                        "element " + remark.getSelectedElement());
+                }
+            }
+        }
+        for (String messageCode : remarks.keySet()) {
+            htmlResponse.append("                         <p>");
+            for (String messageInfo : remarks.get(messageCode)) {
+                htmlResponse.append(messageCode + ":" + messageInfo + "<br/>");
+            }
+            htmlResponse.append("                         </p>");
+        }
+
+        htmlResponse.append("                    </td>");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
