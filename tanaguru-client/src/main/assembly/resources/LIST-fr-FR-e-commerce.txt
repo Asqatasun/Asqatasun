@@ -9,12 +9,12 @@ grosbill;http://www.grosbill.com/
 magma;http://www.magma.fr/
 opodo;http://www.opodo.fr/
 go-voyages;http://www.govoyages.com/
-Vente privée;http://fr.vente-privee.com/VP4/Login/Portal.ashx
+Vente-privée;http://fr.vente-privee.com/VP4/Login/Portal.ashx
 Discounteo;http://www.discounteo.com/
 Camif;http://www.camif.fr/
 3suisses;http://www.3suisses.fr/
-La Redoute;http://www.laredoute.fr/
+La-Redoute;http://www.laredoute.fr/
 Snkrs;http://www.snkrs.com/
-Shop Adidas;http://shop.adidas.fr/
-Store Nike FR;http://store.nike.com/index.jsp?country=FR&lang_locale=fr_FR
+Shop-Adidas;http://shop.adidas.fr/
+Store-Nike-FR;http://store.nike.com/index.jsp?country=FR&lang_locale=fr_FR
 Sarenza;http://www.sarenza.com/
