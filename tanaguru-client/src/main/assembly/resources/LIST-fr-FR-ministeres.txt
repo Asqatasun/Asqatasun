@@ -13,4 +13,4 @@ immigration;http://www.immigration.gouv.fr/
 enseignement-sup;http://www.enseignementsup-recherche.gouv.fr/
 education;http://www.education.gouv.fr/
 minefe;http://www.minefe.gouv.fr/
-http://www.ministeredudedans.com/index.php
+ministere-du-dedans;http://www.ministeredudedans.com/index.php
