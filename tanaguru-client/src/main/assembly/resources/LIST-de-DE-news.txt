@@ -16,7 +16,6 @@ das-weisse-pferd;http://www.das-weisse-pferd.com/
 wideperspective;http://www.wideperspective.net/
 focus;http://www.focus.de/
 sonntagsblatt;http://www.sonntagsblatt.de/
-woche;http://www.woche.de/
 urlaubtipp;http://www.urlaubtipp.de/
 handelsblatt;http://www.handelsblatt.com/
 neues-deutschland;http://www.neues-deutschland.de/
