@@ -1,7 +1,6 @@
 Aeroport-Agen;http://www.aeroport-agen.com/
 Aeroport-Ajaccio;http://www.ajaccio.aeroport.fr/
 Aeroport-Picardie;http://www.aeroportalbertpicardie.fr/
-Aeroport-Angers;http://www.angers-loire-aeroport.fr/
 Aeroport-Angouleme;http://www.aeroport-angouleme-cognac.com/
 Aeroport-Annecy;http://www.annecy.aeroport.fr/
 Aeroport-Avignon;http://www.avignon.aeroport.fr/
@@ -14,7 +13,6 @@ Aeroport-Biarritz;http://www.biarritz.aeroport.fr/
 Aeroport-Bordeaux;http://www.bordeaux.aeroport.fr/
 Aeroport-Brest;http://www.brest.aeroport.fr/
 Aeroport-Caen;http://www.caen.aeroport.fr/
-Aeroport-Calais;http://www.aeroport.calais.free.fr/
 Aeroport-Calvi;http://www.calvi.aeroport.fr/
 Aeroport-Cannes;http://www.cannes.aeroport.fr/
 Aeroport-Cannes-Heliport;http://www.riviera-ports.com/
