@@ -50,7 +50,7 @@ public class DOMHandlerImpl implements DOMHandler {
     protected SourceCodeRemarkFactory sourceCodeRemarkFactory;
     protected SSP ssp;
     protected XPath xpath;
-    protected Map<Integer,String> sourceCodeWithLine = new HashMap<Integer, String>();
+    protected Map<Integer,String> sourceCodeWithLine;
 
     public DOMHandlerImpl() {
         super();
@@ -72,7 +72,7 @@ public class DOMHandlerImpl implements DOMHandler {
         boolean found = false;
         int characterPosition = 0;
         Iterator<Integer> iter = sourceCodeWithLine.keySet().iterator();
-        while(iter.hasNext() || !found) {
+        while(iter.hasNext() && !found) {
             int myLineNumber = iter.next();
             int index = 0;
             while (index != -1) {
@@ -89,13 +89,13 @@ public class DOMHandlerImpl implements DOMHandler {
                         lineNumber = myLineNumber;
                         characterPosition = index;
                         break;
+                        
                     }
                     nodeIndex--;
-                    characterPosition += node.getNodeName().length();
+                    index += node.getNodeName().length();
                 }
             }
         }
-
         remark.setLineNumber(lineNumber);
         remark.setCharacterPosition(characterPosition + 1);
         remark.setTarget(attributeName);
@@ -633,6 +633,7 @@ public class DOMHandlerImpl implements DOMHandler {
                     null, ex);
             throw new RuntimeException(ex);
         }
+        sourceCodeWithLine = new HashMap<Integer, String>();
         int lineNumber = 1;
         StringReader sr = new StringReader(ssp.getDOM());
         BufferedReader br = new BufferedReader(sr);
