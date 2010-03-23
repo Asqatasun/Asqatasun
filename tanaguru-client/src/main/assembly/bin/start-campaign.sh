@@ -13,6 +13,25 @@ if [ ! -d $RESULT_MAIN_DIR ]; then
   mkdir $RESULT_MAIN_DIR
 fi
 
+while getopts o: option
+do
+ case $option in
+  o)
+   echo "option offline with the following path : $OPTARG"
+   if [ -d $OPTAGR ] 
+     then 
+       OFFLINE_PATH=$OPTARG 
+     else
+       echo "The path given in argument does not exit" 
+       exit 1 
+   fi 
+   ;;
+  \?) 
+   exit 1
+   ;;
+ esac
+done
+
 ##################
 #Build-in classpath
 ##################
@@ -39,7 +58,6 @@ LAUNCH_TANAGURU="$JAVA_HOME/bin/java $JAVA_OPTS $TEST_SET_FILE_NAME"
 ##################
 #find all lists files, extract URLs and launch tanaguru
 ##################
-LIST_FILES="$RESOURCES_DIR/*.txt*"
 DATE_SUFFIX=`date '+%Y%m%d-%Hh%Mm%S'`
 
 RESULT_DIR="$RESULT_MAIN_DIR/test-campaign-$DATE_SUFFIX"
@@ -48,36 +66,79 @@ if [ ! -d $RESULT_DIR ]; then
   mkdir $RESULT_DIR/failed
 fi
 
-for j in ${LIST_FILES}; do
-  file=${j##*/}
-  base=${file%%.*}
-  base=${base#*-}
- 
-  LIST_ELEMENTS_RESULT_DIR="$RESULT_DIR/$base"
-  mkdir $LIST_ELEMENTS_RESULT_DIR
-  mkdir $LIST_ELEMENTS_RESULT_DIR/passed 
-  mkdir $LIST_ELEMENTS_RESULT_DIR/failed
- 
-  while IFS=\; read file_name address
-  do
-    echo -e "\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-    echo "Testing $address in ${j} file"
+if [ $OFFLINE_PATH ] 
+  then 
+    LIST_SITES=`find $OFFLINE_PATH -name "index.html"`
+
+    for j in ${LIST_SITES}; do
+      base=${j%/*}
+      base=${base%/*}
+      base=${base##*/}
+      LIST_ELEMENTS_RESULT_DIR="$RESULT_DIR/$base"
+      
+      if [ ! -d $LIST_ELEMENTS_RESULT_DIR ]; then
+         mkdir $LIST_ELEMENTS_RESULT_DIR
+         mkdir $LIST_ELEMENTS_RESULT_DIR/passed 
+         mkdir $LIST_ELEMENTS_RESULT_DIR/failed
+      fi
+
+      file_name=${j%/*}
+      file_name=${file_name##*/}
+      
+      echo -e "\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+      echo "Testing ${j} "
 	
-    FILE_NAME_RESULT="$LIST_ELEMENTS_RESULT_DIR/$file_name.txt"
-    $LAUNCH_TANAGURU $address 1>$LIST_ELEMENTS_RESULT_DIR/passed/$file_name.txt 2>$LIST_ELEMENTS_RESULT_DIR/failed/$file_name.txt \
-	&& echo "OK" \
-	|| echo "Boum !"
-    var=` tail -1 $LIST_ELEMENTS_RESULT_DIR/passed/$file_name.txt | grep mark | wc -l ` 
-    if [ $var -eq 1 ]
-    then 
-      rm -f $LIST_ELEMENTS_RESULT_DIR/failed/$file_name.txt
-      echo "see $LIST_ELEMENTS_RESULT_DIR/passed/$file_name.txt for details"
-    else
-      rm -f $LIST_ELEMENTS_RESULT_DIR/passed/$file_name.txt
-      cp $LIST_ELEMENTS_RESULT_DIR/failed/$file_name.txt $RESULT_DIR/failed
-      echo "see $LIST_ELEMENTS_RESULT_DIR/failed/$file_name.txt for details"
-    fi
+      FILE_NAME_RESULT="$LIST_ELEMENTS_RESULT_DIR/$file_name.txt"
+      $LAUNCH_TANAGURU $j 1>$LIST_ELEMENTS_RESULT_DIR/passed/$file_name.txt 2>$LIST_ELEMENTS_RESULT_DIR/failed/$file_name.txt \
+        	&& echo "OK" \
+        	|| echo "Boum !"
+        var=` tail -1 $LIST_ELEMENTS_RESULT_DIR/passed/$file_name.txt | grep mark | wc -l ` 
+        if [ $var -eq 1 ]
+          then 
+            rm -f $LIST_ELEMENTS_RESULT_DIR/failed/$file_name.txt
+            echo "see $LIST_ELEMENTS_RESULT_DIR/passed/$file_name.txt for details"
+          else
+            rm -f $LIST_ELEMENTS_RESULT_DIR/passed/$file_name.txt
+            cp $LIST_ELEMENTS_RESULT_DIR/failed/$file_name.txt $RESULT_DIR/failed
+            echo "see $LIST_ELEMENTS_RESULT_DIR/failed/$file_name.txt for details"
+        fi
  
-    echo -e ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n"
-  done < ${j}
-done
+        echo -e ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n"
+    done
+  else
+    LIST_FILES="$RESOURCES_DIR/*.txt*" 
+    echo $LIST_FILES
+    for j in ${LIST_FILES}; do
+      file=${j##*/}
+      base=${file%%.*}
+      base=${base#*-}
+ 
+      LIST_ELEMENTS_RESULT_DIR="$RESULT_DIR/$base"
+      mkdir $LIST_ELEMENTS_RESULT_DIR
+      mkdir $LIST_ELEMENTS_RESULT_DIR/passed 
+      mkdir $LIST_ELEMENTS_RESULT_DIR/failed
+ 
+      while IFS=\; read file_name address
+      do
+        echo -e "\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+        echo "Testing $address in ${j} file"
+	
+        FILE_NAME_RESULT="$LIST_ELEMENTS_RESULT_DIR/$file_name.txt"
+        $LAUNCH_TANAGURU $address 1>$LIST_ELEMENTS_RESULT_DIR/passed/$file_name.txt 2>$LIST_ELEMENTS_RESULT_DIR/failed/$file_name.txt \
+        	&& echo "OK" \
+        	|| echo "Boum !"
+        var=` tail -1 $LIST_ELEMENTS_RESULT_DIR/passed/$file_name.txt | grep mark | wc -l ` 
+        if [ $var -eq 1 ]
+          then 
+            rm -f $LIST_ELEMENTS_RESULT_DIR/failed/$file_name.txt
+            echo "see $LIST_ELEMENTS_RESULT_DIR/passed/$file_name.txt for details"
+          else
+            rm -f $LIST_ELEMENTS_RESULT_DIR/passed/$file_name.txt
+            cp $LIST_ELEMENTS_RESULT_DIR/failed/$file_name.txt $RESULT_DIR/failed
+            echo "see $LIST_ELEMENTS_RESULT_DIR/failed/$file_name.txt for details"
+        fi
+ 
+        echo -e ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n"
+      done < ${j}
+    done
+fi
