@@ -136,13 +136,9 @@ public class AuditLauncher extends HttpServlet {
 
                 @Override
                 public int compare(ProcessResult o1, ProcessResult o2) {
-                    if (o1.getTest().getRank() < o2.getTest().getRank()) {
-                        return -1;
-                    }
-                    if (o1.getTest().getRank() > o2.getTest().getRank()) {
-                        return 1;
-                    }
-                    return 0;
+                    return String.CASE_INSENSITIVE_ORDER.compare(
+                            o1.getTest().getCode(), 
+                            o2.getTest().getCode());
                 }
             });
 
