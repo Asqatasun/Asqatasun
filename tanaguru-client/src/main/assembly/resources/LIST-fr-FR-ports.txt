@@ -2,8 +2,6 @@ Port-Sete;http://www.sete.port.fr/
 Port-Strasbourg;http://www.strasbourg.port.fr/
 Port-Paris;http://www.paris-ports.fr/
 Port-Guadeloupe;http://www.port-guadeloupe.com/
-Port-Reunion;http://reunion.port.fr/
-Port-Tahiti;http://www.portdepapeete.pf/
 Port-Caen;http://www.caen.port.fr/
 Port-Le-Havre;http://www.havre-port.net/
 Port-Rouen;http://www.rouen.port.fr/
