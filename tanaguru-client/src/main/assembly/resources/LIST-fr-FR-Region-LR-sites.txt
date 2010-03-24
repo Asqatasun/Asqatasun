@@ -2,7 +2,7 @@ RegionLR-Se-Former;http://www.laregion-seformer.fr/
 RegionLR-Culture;http://www.laregion-culture.fr/
 RegionLR-CRAC;http://crac.laregion.fr/
 RegionLR-Info-entreprises-LR;http://www.info-entrepriseslr.fr/
-RegionLR-Parcs-d'activité;http://www.laregion-parcsdactivites.fr/
+RegionLR-Parcs-dactivité;http://www.laregion-parcsdactivites.fr/
 RegionLR-Risques-naturels;http://www.laregion-risquesnaturels.fr/
 RegionLR-La-tribu;http://www.latribu-lr.fr/
 RegionLR-Sud-de-France;http://www.sud-de-france.com/
