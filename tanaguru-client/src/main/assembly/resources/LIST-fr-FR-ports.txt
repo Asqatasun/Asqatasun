@@ -12,7 +12,7 @@ Port-Brest;http://www.brest.port.fr/
 Port-Lorient;http://www.lorient.port.fr/
 Port-Nantes;http://www.nantes.port.fr/
 Port-La-Rochelle;http://www.larochelle.port.fr/
-Port-St-Pierre-d'Oleron;http://www.saint-pierre-oleron.com/
+Port-St-Pierre-d-Oleron;http://www.saint-pierre-oleron.com/
 Port-Rochefort;http://www.rochefort.port.fr/
 Port-Bordeaux;http://www.bordeaux-port.fr
 Port-Arcachon;http://www.bordeaux-port.fr
