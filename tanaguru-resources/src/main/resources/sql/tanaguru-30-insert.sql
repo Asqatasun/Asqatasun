@@ -314,6 +314,7 @@ INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `L
 INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (11,'DeprecatedRepresentationTagFound',NULL,'Deprecated tag found : {0} at line {1}');
 INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (12,'DecorativeImageWithNotEmptyAltAttribute',NULL,'A decorative image with a not empty alt attribute has been found');
 INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (13,'NotPertinentAltAttribute',NULL,'The alt attribute of the tag is not pertinent');
+INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (14,'HeaderTagNotHierarchicallyWelldefined',NULL,'The hierarchy between the title (h tags) of the page is not pertinent');
 
 
 --
@@ -327,7 +328,8 @@ INSERT INTO `TEST` (`Cd_Test`, `Description`, `Label`, `Rank`, `Rule_Archive_Nam
 ('Aw20-01031', NULL, NULL, 2010301, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule01031', NULL, NULL, NULL, NULL, NULL),
 ('Aw20-08051', NULL, NULL, 2080501, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule08051', NULL, NULL, NULL, NULL, NULL),
 ('Aw20-08061', NULL, NULL, 2080601, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule08061', NULL, NULL, NULL, NULL, NULL),
-('Aw20-09011', NULL, NULL, 2090101, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule09011', NULL, NULL, NULL, NULL, NULL);
+('Aw20-09011', NULL, NULL, 2090101, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule09011', NULL, NULL, NULL, NULL, NULL),
+('Aw20-09012', NULL, NULL, 2090102, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule09012', NULL, NULL, NULL, NULL, NULL),
 ('Aw20-10011', NULL, NULL, 2100101, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule10011', NULL, NULL, NULL, NULL, NULL);
 
 --
