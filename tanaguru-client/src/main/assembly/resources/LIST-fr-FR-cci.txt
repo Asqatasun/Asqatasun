@@ -100,7 +100,7 @@ CCI-Rochefort;http://www.rochefort.cci.fr/
 CCI-Rodez;http://www.rodez.cci.fr/
 CCI-Rouen;http://www.rouen.cci.fr/
 CCI-St-Etienne;http://www.saint-etienne.cci.fr/
-CCI-saone-et-Loire;http://www.stomer.cci.fr/
+CCI-saone-et-Loire;http://www.cci71.fr/site_internet_cci_71/
 CCI-Seine-et-Marne;http://www.seineetmarne.cci.fr/
 CCI-Sete;http://www.sete.cci.fr/
 CCI-Tarbes;http://www.tarbes.cci.fr/
