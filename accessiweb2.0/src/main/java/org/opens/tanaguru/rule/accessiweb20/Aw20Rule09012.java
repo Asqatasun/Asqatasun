@@ -36,6 +36,7 @@ public class Aw20Rule09012 extends AbstractPageRuleImplementation {
         TestSolution testSolution = TestSolution.NOT_APPLICABLE;
 
         int previousNodeIndex = -1;
+        int indexOfReference = -1;
         int currentHeaderNodeIndex;
         boolean selectionHasOneElement = false;
 
@@ -49,10 +50,13 @@ public class Aw20Rule09012 extends AbstractPageRuleImplementation {
                         testSolution = testSolution.FAILED;
                         addSourceCodeRemark(sspHandler,testSolution,node);
                     }
-                // If the first encountered header is not H1
-                } else if (currentHeaderNodeIndex != 1 ) {
-                    testSolution = testSolution.FAILED;
-                    addSourceCodeRemark(sspHandler,testSolution,node);
+                    if (currentHeaderNodeIndex < indexOfReference) {
+                        testSolution = testSolution.FAILED;
+                        addSourceCodeRemark(sspHandler,testSolution,node);
+                    }
+                // the first encountered header
+                } else {
+                    indexOfReference = currentHeaderNodeIndex;
                 }
                 selectionHasOneElement = true;
                 previousNodeIndex = currentHeaderNodeIndex;

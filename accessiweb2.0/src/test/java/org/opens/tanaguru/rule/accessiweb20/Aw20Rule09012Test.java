@@ -47,6 +47,12 @@ public class Aw20Rule09012Test extends AbstractRuleImplementationTestCase {
         webResourceMap.put("AW20.Test.09.01.02-1Passed-07",
                 webResourceFactory.createPage(
                 TESTCASES_FILES_PATH + "AW22/AW20.Test.09.01.02-1Passed-07.html"));
+        webResourceMap.put("AW20.Test.09.01.02-1Passed-08",
+                webResourceFactory.createPage(
+                TESTCASES_FILES_PATH + "AW22/AW20.Test.09.01.02-1Passed-08.html"));
+        webResourceMap.put("AW20.Test.09.01.02-1Passed-09",
+                webResourceFactory.createPage(
+                TESTCASES_FILES_PATH + "AW22/AW20.Test.09.01.02-1Passed-09.html"));
         webResourceMap.put("AW20.Test.09.01.02-2Failed-01",
                 webResourceFactory.createPage(
                 TESTCASES_FILES_PATH + "AW22/AW20.Test.09.01.02-2Failed-01.html"));
@@ -86,6 +92,10 @@ public class Aw20Rule09012Test extends AbstractRuleImplementationTestCase {
                 processPageTest("AW20.Test.09.01.02-1Passed-06").getValue());
         assertEquals(TestSolution.PASSED,
                 processPageTest("AW20.Test.09.01.02-1Passed-07").getValue());
+        assertEquals(TestSolution.PASSED,
+                processPageTest("AW20.Test.09.01.02-1Passed-08").getValue());
+        assertEquals(TestSolution.PASSED,
+                processPageTest("AW20.Test.09.01.02-1Passed-09").getValue());
         assertEquals(TestSolution.FAILED,
                 processPageTest("AW20.Test.09.01.02-2Failed-01").getValue());
         assertEquals(TestSolution.FAILED,
@@ -118,6 +128,10 @@ public class Aw20Rule09012Test extends AbstractRuleImplementationTestCase {
                 consolidate("AW20.Test.09.01.02-1Passed-06").getValue());
         assertEquals(TestSolution.PASSED,
                 consolidate("AW20.Test.09.01.02-1Passed-07").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("AW20.Test.09.01.02-1Passed-08").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("AW20.Test.09.01.02-1Passed-09").getValue());
         assertEquals(TestSolution.FAILED,
                 consolidate("AW20.Test.09.01.02-2Failed-01").getValue());
         assertEquals(TestSolution.FAILED,
