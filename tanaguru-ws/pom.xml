@@ -120,6 +120,7 @@
     </dependencies>
     <properties>
         <netbeans.hint.deploy.server>Tomcat55</netbeans.hint.deploy.server>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>
 
