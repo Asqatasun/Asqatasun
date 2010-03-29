@@ -110,10 +110,13 @@ if [ $OFFLINE_PATH ]
     echo $LIST_FILES
     for j in ${LIST_FILES}; do
       file=${j##*/}
-      base=${file%%.*}
-      base=${base#*-}
- 
-      LIST_ELEMENTS_RESULT_DIR="$RESULT_DIR/$base"
+
+      # toggle comments to have topic directories created
+      #base=${file%%.*}
+      #base=${base#*-}
+      #LIST_ELEMENTS_RESULT_DIR="$RESULT_DIR/$base"
+      LIST_ELEMENTS_RESULT_DIR="$RESULT_DIR/"
+
       mkdir $LIST_ELEMENTS_RESULT_DIR
       mkdir $LIST_ELEMENTS_RESULT_DIR/passed 
       mkdir $LIST_ELEMENTS_RESULT_DIR/failed
