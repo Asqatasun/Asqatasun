@@ -78,7 +78,7 @@ if [ $OFFLINE_PATH ]
       
       if [ ! -d $LIST_ELEMENTS_RESULT_DIR ]; then
          mkdir $LIST_ELEMENTS_RESULT_DIR
-         mkdir $LIST_ELEMENTS_RESULT_DIR/passed 
+         mkdir $LIST_ELEMENTS_RESULT_DIR/passed
          mkdir $LIST_ELEMENTS_RESULT_DIR/failed
       fi
 
@@ -117,9 +117,9 @@ if [ $OFFLINE_PATH ]
       #LIST_ELEMENTS_RESULT_DIR="$RESULT_DIR/$base"
       LIST_ELEMENTS_RESULT_DIR="$RESULT_DIR/"
 
-      mkdir $LIST_ELEMENTS_RESULT_DIR
-      mkdir $LIST_ELEMENTS_RESULT_DIR/passed 
-      mkdir $LIST_ELEMENTS_RESULT_DIR/failed
+      mkdir -p $LIST_ELEMENTS_RESULT_DIR
+      mkdir -p $LIST_ELEMENTS_RESULT_DIR/passed
+      mkdir -p $LIST_ELEMENTS_RESULT_DIR/failed
  
       while IFS=\; read file_name address
       do
