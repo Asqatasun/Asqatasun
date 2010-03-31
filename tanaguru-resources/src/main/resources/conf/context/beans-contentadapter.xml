@@ -22,7 +22,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         <property name="HTMLParser" ref="htmlParserComponent"/>
         <property name="contentAdapterSet">
             <set>
-                <bean class="org.opens.tanaguru.contentadapter.css.CSSContentAdapterImpl">
+<!--                <bean class="org.opens.tanaguru.contentadapter.css.CSSContentAdapterImpl">
                     <property name="downloader" ref="downloaderComponent"/>
                     <property name="parser" ref="cssParserComponent"/>
                     <property name="URLIdentifier" ref="urlIdentifierComponent"/>
@@ -33,7 +33,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                     <property name="parser" ref="jsParserComponent"/>
                     <property name="URLIdentifier" ref="urlIdentifierComponent"/>
                     <property name="contentFactory" ref="contentFactory"/>
-                </bean>
+                </bean>-->
             </set>
         </property>
 	<property name="writeCleanHtmlInFile" value="false"/>

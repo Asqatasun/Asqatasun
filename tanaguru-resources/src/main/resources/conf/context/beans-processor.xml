@@ -7,18 +7,18 @@
         <property name="processRemarkFactory" ref="processRemarkFactory"/>
         <property name="sourceCodeRemarkFactory" ref="sourceCodeRemarkFactory"/>
     </bean>
-    <bean id="cssHandlerComponent" class="org.opens.tanaguru.processor.CSSHandlerImpl">
+<!--    <bean id="cssHandlerComponent" class="org.opens.tanaguru.processor.CSSHandlerImpl">
         <property name="processRemarkFactory" ref="processRemarkFactory"/>
         <property name="sourceCodeRemarkFactory" ref="sourceCodeRemarkFactory"/>
     </bean>
     <bean id="jsHandlerComponent" class="org.opens.tanaguru.processor.JSHandlerImpl">
         <property name="processRemarkFactory" ref="processRemarkFactory"/>
         <property name="sourceCodeRemarkFactory" ref="sourceCodeRemarkFactory"/>
-    </bean>
+    </bean>-->
     <bean id="sspHandlerComponent" class="org.opens.tanaguru.processor.SSPHandlerImpl">
         <property name="DOMHandler" ref="domHandlerComponent"/>
-        <property name="CSSHandler" ref="cssHandlerComponent"/>
-        <property name="JSHandler" ref="jsHandlerComponent"/>
+<!--        <property name="CSSHandler" ref="cssHandlerComponent"/>
+        <property name="JSHandler" ref="jsHandlerComponent"/>-->
         <property name="nomenclatureLoaderService" ref="nomenclatureLoaderService"/>
         <property name="processRemarkFactory" ref="processRemarkFactory"/>
     </bean>
