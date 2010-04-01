@@ -1,6 +1,8 @@
 package org.opens.tanaguru.processor;
 
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.opens.tanaguru.contentadapter.css.CSSOMDeclaration;
 import org.opens.tanaguru.contentadapter.css.CSSOMRule;
@@ -14,8 +16,10 @@ import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.ruleimplementation.RuleHelper;
 import com.thoughtworks.xstream.XStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class CSSHandlerImpl implements CSSHandler {
@@ -27,6 +31,8 @@ public class CSSHandlerImpl implements CSSHandler {
     protected SourceCodeRemarkFactory sourceCodeRemarkFactory;
     protected SSP ssp;
     private Set<CSSOMStyleSheet> styleSet;
+    private Map<String, Set<CSSOMRule>> rulesByMedia =
+            new HashMap<String, Set<CSSOMRule>>();
 
     public CSSHandlerImpl() {
         super();
@@ -42,39 +48,41 @@ public class CSSHandlerImpl implements CSSHandler {
         remark.setIssue(processResult);
         remark.setMessageCode(messageCode);
         remark.setLineNumber(rule.getOwnerStyle().getLineNumber());
-        // remark.setCharacterPosition(index + 1);
         remark.setTarget(attrName);
+        remarkList.add(remark);
     }
 
-    public CSSHandler beginSelection() {
+    public CSSHandler beginSelection(){
         initialize();
 
-        selectedRuleList = new ArrayList<CSSOMRule>();
+        selectedRuleList = new HashSet<CSSOMRule>();
         remarkList = new ArrayList<ProcessRemark>();
         return this;
     }
 
     public TestSolution checkRelativeUnitExists(Collection<Integer> blacklist) {
         Set<TestSolution> resultSet = new HashSet<TestSolution>();
-
         for (CSSOMRule workingRule : selectedRuleList) {
-
             List<CSSOMDeclaration> declarations = workingRule.getDeclarations();
             TestSolution processResult = TestSolution.PASSED;
+            try  {
             for (CSSOMDeclaration declaration : declarations) {
                 int unit = declaration.getUnit();
                 for (int blackListedUnit : blacklist) {
                     if (unit == blackListedUnit) {
                         processResult = TestSolution.FAILED;
+                        resultSet.add(processResult);
+                        addSourceCodeRemark(processResult, workingRule, "BadUnitType",
+                            workingRule.toString());
                         break;
                     }
                 }
-
-                addSourceCodeRemark(processResult, workingRule, "BadUnitType",
-                        workingRule.toString());
             }
+            } catch (Exception e){
+                
+            }
+            resultSet.add(processResult);
         }
-
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
 
@@ -89,6 +97,7 @@ public class CSSHandlerImpl implements CSSHandler {
 
         XStream xstream = new XStream();
         styleSet = (Set<CSSOMStyleSheet>) xstream.fromXML(ssp.getStylesheet());
+        setRulesByMedia();
         initialized = true;
     }
 
@@ -121,4 +130,41 @@ public class CSSHandlerImpl implements CSSHandler {
         this.ssp = ssp;
         initialized = false;
     }
+
+    @Override
+    public CSSHandler keepRulesWithMedia(Collection<String> mediaNames) {
+        if (styleSet == null) {
+            return this;
+        }
+
+        for (String media : mediaNames) {
+            if (rulesByMedia.containsKey(media)) {
+                selectedRuleList.addAll(rulesByMedia.get(media));
+            }
+        }
+        return this;
+    }
+
+    private void setRulesByMedia()  {
+        if (styleSet == null) {
+            return;
+        }
+        String mediaName;
+
+        for (CSSOMStyleSheet style : styleSet) {
+            for (CSSOMRule rule : style.getRules()) {
+                for (int i=0 ; i < ((CSSOMRule)rule).getMediaList().getLength();i++){
+                    mediaName = ((CSSOMRule)rule).getMediaList().item(i);
+                    if (rulesByMedia.containsKey(mediaName)) {
+                        rulesByMedia.get(mediaName).add(((CSSOMRule)rule));
+                    } else {
+                        Set<CSSOMRule> rulesSet = new HashSet<CSSOMRule>();
+                        rulesSet.add(((CSSOMRule)rule));
+                        rulesByMedia.put(mediaName, rulesSet);
+                    }
+                }
+            }
+        }
+    }
+
 }

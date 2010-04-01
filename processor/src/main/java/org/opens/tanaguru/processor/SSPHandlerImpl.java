@@ -36,7 +36,7 @@ public class SSPHandlerImpl implements SSPHandler {
 
     public SSPHandler beginSelection() {
         domHandler.beginSelection();
-        if (cssHandler != null)
+        if (cssHandler != null) 
             cssHandler.beginSelection();
         if (jsHandler!=null)
             jsHandler.beginSelection();
@@ -397,4 +397,12 @@ public class SSPHandlerImpl implements SSPHandler {
             String messageCode, String attributeName) {
         domHandler.addSourceCodeRemark(processResult, node, messageCode, attributeName);
     }
+
+    @Override
+    public SSPHandler keepRulesWithMedia(Collection<String> mediaNames) {
+        if (cssHandler != null)
+            cssHandler.keepRulesWithMedia(mediaNames);
+        return this;
+    }
+
 }
