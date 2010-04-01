@@ -38,7 +38,8 @@ INSERT INTO `NOMENCLATURE` (`Id_Nomenclature`, `Cd_Nomenclature`, `Description`,
 (10, 'ValidLanguageCode', NULL, NULL, NULL, NULL),
 (11, 'DeprecatedRepresentationTags', NULL, NULL, NULL, NULL),
 (12, 'UnexplicitPageTitle', NULL, NULL, NULL, NULL),
-(13, 'ImageFileExtensions', NULL, NULL, NULL, NULL);
+(13, 'ImageFileExtensions', NULL, NULL, NULL, NULL),
+(14, 'MediaListNotAcceptingRelativeUnits', NULL, NULL, NULL, NULL);
 
 --
 -- Dumping data for table `NOMENCLATURE_ELEMENT`
@@ -243,7 +244,12 @@ INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`,
 ('NomenclatureElementImpl', 196, 'gif', NULL, 13),
 ('NomenclatureElementImpl', 197, 'jpeg', NULL, 13),
 ('NomenclatureElementImpl', 198, 'png', NULL, 13),
-('NomenclatureElementImpl', 199, 'bmp', NULL, 13);
+('NomenclatureElementImpl', 199, 'bmp', NULL, 13),
+('NomenclatureElementImpl', 200, 'all', NULL, 14),
+('NomenclatureElementImpl', 201, 'screen', NULL, 14),
+('NomenclatureElementImpl', 202, 'projection', NULL, 14),
+('NomenclatureElementImpl', 203, 'handheld', NULL, 14),
+('NomenclatureElementImpl', 204, 'tv', NULL, 14);
 
 --
 -- Dumping data for table `REFERENCE`
@@ -301,7 +307,8 @@ INSERT INTO `TEST` (`Id_Test`, `Cd_Test`, `Description`, `Label`, `Rank`, `Rule_
 (6, 'Aw20-08061', NULL, '8.6.1', 2080601, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule08061', NULL, NULL, 1, NULL, 1),
 (7, 'Aw20-09011', NULL, '9.1.1', 2090101, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule09011', NULL, NULL, 1, NULL, 1),
 (8, 'Aw20-09012', NULL, '9.1.2', 2090102, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule09012', NULL, NULL, 1, NULL, 1),
-(9, 'Aw20-10011', NULL, '10.1.1', 2100101, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule10011', NULL, NULL, 1, NULL, 1);
+(9, 'Aw20-10011', NULL, '10.1.1', 2100101, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule10011', NULL, NULL, 1, NULL, 1),
+(9, 'Aw20-10041', NULL, '10.4.1', 2100401, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule10041', NULL, NULL, 1, NULL, 1);
 
 --
 -- Dumping data for table `THEME`
