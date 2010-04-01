@@ -1,8 +1,6 @@
 package org.opens.tanaguru.processor;
 
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.opens.tanaguru.contentadapter.css.CSSOMDeclaration;
 import org.opens.tanaguru.contentadapter.css.CSSOMRule;
@@ -33,6 +31,8 @@ public class CSSHandlerImpl implements CSSHandler {
     private Set<CSSOMStyleSheet> styleSet;
     private Map<String, Set<CSSOMRule>> rulesByMedia =
             new HashMap<String, Set<CSSOMRule>>();
+    private final String CSS_ON_ERROR = "CSS_ON_ERROR";
+    private boolean cssOnError = false;
 
     public CSSHandlerImpl() {
         super();
@@ -65,7 +65,6 @@ public class CSSHandlerImpl implements CSSHandler {
         for (CSSOMRule workingRule : selectedRuleList) {
             List<CSSOMDeclaration> declarations = workingRule.getDeclarations();
             TestSolution processResult = TestSolution.PASSED;
-            try  {
             for (CSSOMDeclaration declaration : declarations) {
                 int unit = declaration.getUnit();
                 for (int blackListedUnit : blacklist) {
@@ -78,10 +77,11 @@ public class CSSHandlerImpl implements CSSHandler {
                     }
                 }
             }
-            } catch (Exception e){
-                
-            }
             resultSet.add(processResult);
+        }
+        if (selectedRuleList.isEmpty() && cssOnError) {
+            TestSolution fakeSolution = TestSolution.NEED_MORE_INFO;
+            resultSet.add(fakeSolution);
         }
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
@@ -96,9 +96,13 @@ public class CSSHandlerImpl implements CSSHandler {
         }
 
         XStream xstream = new XStream();
-        styleSet = (Set<CSSOMStyleSheet>) xstream.fromXML(ssp.getStylesheet());
-        setRulesByMedia();
-        initialized = true;
+        if (!ssp.getStylesheet().equalsIgnoreCase(CSS_ON_ERROR)) {
+            styleSet = (Set<CSSOMStyleSheet>) xstream.fromXML(ssp.getStylesheet());
+            setRulesByMedia();
+            initialized = true;
+        } else {
+            cssOnError = true;
+        }
     }
 
     public CSSHandler selectAllRules() {
