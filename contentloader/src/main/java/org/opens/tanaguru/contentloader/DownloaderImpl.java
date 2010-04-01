@@ -22,7 +22,7 @@ public class DownloaderImpl implements Downloader {
     protected String url;
     private final String HTTP_PROTOCOL_PREFIX = "http://";
     private final String HTTPS_PROTOCOL_PREFIX = "https://";
-    private final String FILE_PROTOCOL_PREFIX = "file://";
+    private final String FILE_PROTOCOL_PREFIX = "file:/";
 
     public DownloaderImpl() {
         super();
@@ -44,7 +44,6 @@ public class DownloaderImpl implements Downloader {
             Logger.getLogger(DownloaderImpl.class.getName()).log(Level.SEVERE,
                     null, ex);
             return "";
-//            throw new RuntimeException(ex);
         } finally {
             try {
                 if (in != null) {
@@ -71,8 +70,6 @@ public class DownloaderImpl implements Downloader {
         } catch (HttpResponseException ex) {
             Logger.getLogger(DownloaderImpl.class.getName()).
                     log(Level.SEVERE, null, ex);
-//            HttpReturnStatus returnStatus = new HttpReturnStatus(ex.getStatusCode());
-//            return returnStatus.toString();
             return "";
         } catch (UnknownHostException ex ) {
             Logger.getLogger(DownloaderImpl.class.getName()).
@@ -109,8 +106,12 @@ public class DownloaderImpl implements Downloader {
         if (url.startsWith(HTTP_PROTOCOL_PREFIX)
                 || url.startsWith(HTTPS_PROTOCOL_PREFIX)) {
             result = download(url);
+            Logger.getLogger(DownloaderImpl.class.getName()).
+                    log(Level.INFO, "download resource "  + url);
         } else if (url.startsWith(FILE_PROTOCOL_PREFIX)) {
             result = load(url);
+            Logger.getLogger(DownloaderImpl.class.getName()).
+                    log(Level.INFO, "Load resource "  + url);
         }
     }
 
