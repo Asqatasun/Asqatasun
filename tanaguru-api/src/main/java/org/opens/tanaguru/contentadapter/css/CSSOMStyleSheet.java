@@ -1,6 +1,7 @@
 package org.opens.tanaguru.contentadapter.css;
 
 import java.util.List;
+import org.w3c.css.sac.SACMediaList;
 
 public interface CSSOMStyleSheet {
 
@@ -30,6 +31,12 @@ public interface CSSOMStyleSheet {
 	 */
 	short getType();
 
+        /**
+	 *
+	 * @return a style sheet media
+	 */
+	SACMediaList getMediaList();
+
 	/**
 	 * 
 	 * @param lineNumber
@@ -50,4 +57,11 @@ public interface CSSOMStyleSheet {
 	 *            the type to set
 	 */
 	void setType(short type);
+
+        /**
+         * 
+         * @param media
+         *              the media to set
+         */
+        void setMediaList(SACMediaList media);
 }

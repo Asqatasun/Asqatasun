@@ -1,6 +1,7 @@
 package org.opens.tanaguru.contentadapter.css;
 
 import java.util.List;
+import org.w3c.css.sac.SACMediaList;
 
 public interface CSSOMRule {
 
@@ -38,6 +39,12 @@ public interface CSSOMRule {
 	 */
 	List<CSSOMSelector> getSelectors();
 
+        /**
+	 *
+	 * @return a list of selectors
+	 */
+	SACMediaList getMediaList();
+
 	/**
 	 * 
 	 * @param declarations
@@ -58,4 +65,12 @@ public interface CSSOMRule {
 	 *            the list of selectors to set
 	 */
 	void setSelectors(List<CSSOMSelector> selectors);
+
+        /**
+         * 
+         * @param mediaList
+         *              the list of media to set
+         */
+	void setMediaList(SACMediaList mediaList);
+
 }

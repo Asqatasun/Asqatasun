@@ -1,6 +1,5 @@
 package org.opens.tanaguru.contentadapter.css;
 
-import org.opens.tanaguru.contentadapter.css.*;
 import java.util.List;
 
 import org.w3c.css.sac.Condition;
