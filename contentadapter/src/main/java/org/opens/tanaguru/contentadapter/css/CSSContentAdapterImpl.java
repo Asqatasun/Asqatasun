@@ -14,9 +14,9 @@ import org.opens.tanaguru.contentadapter.util.HtmlNodeAttr;
 import org.opens.tanaguru.contentadapter.util.HtmlTags;
 import org.opens.tanaguru.contentadapter.util.InlineRsrc;
 import org.opens.tanaguru.contentadapter.util.LocalRsrc;
-import org.opens.tanaguru.contentadapter.util.ReferencedRsrc;
 import com.thoughtworks.xstream.XStream;
 import java.util.HashSet;
+import org.w3c.css.sac.SACMediaList;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.helpers.LocatorImpl;
 
@@ -25,13 +25,16 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
 
     private StringBuffer buffer;
     private Set<CSSOMStyleSheet> cssSet;
+    private Set importedCssVector;
     private Set cssVector;
     private boolean isExternalCSS = false;
     private boolean isInlineCSS = false;
     private boolean isLocalCSS = false;
-    private boolean isReferencedCSS = false;
     private Locator locator;
     private CSSParser parser;
+    private String currentLocalResourcePath;
+    private final String HTTP_PREFIX = "http";
+    private final String WWW_PREFIX = "www";
 
     /**
      * Default constructor.
@@ -50,7 +53,6 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
 
         if (isLocalCSS) {
             buffer.append(new String(ch, start, end).trim());
-            resource.setResource(buffer.toString());
         }
     }
 
@@ -63,7 +65,11 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
     public void endDocument() throws SAXException {
         if (resource != null) {
             resource.addAllResource(cssVector);
+            if (importedCssVector != null)
+                resource.addAllResource(importedCssVector);
 
+            // At the end of the document, parse and get the result for each
+            // found resource
             for (Object object : resource.getResourceSet()) {
                 Resource r = (Resource) object;
                 if (r.getResource() != null) {
@@ -82,11 +88,18 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
     public void endElement(String nameSpaceURI, String localName, String rawName)
             throws SAXException {
 
-        if ((isLocalCSS) || (isExternalCSS)) {
+        if (isLocalCSS){
+            resource.setResource(buffer.toString());
+        }
+
+        if ((isLocalCSS) || (isExternalCSS) || isInlineCSS) {
             if (resource != null) {
                 cssVector.add(resource);
+                // search imported resource from the resource
+                getImportedResources(resource, currentLocalResourcePath);
                 isLocalCSS = false;
                 isExternalCSS = false;
+                isInlineCSS = false;
             }
 
         }
@@ -169,73 +182,42 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         buffer.setLength(0);
 
         // localCSS
-        if (HtmlTags.STYLE.equalsIgnoreCase(localName)) {
+        if (HtmlTags.STYLE.equalsIgnoreCase(rawName)) {
             isLocalCSS = true;
             resource = new CSSResourceImpl(null, locator.getLineNumber(),
                     new LocalRsrc());
+            buffer.delete(0, buffer.capacity());
+            currentLocalResourcePath = urlIdentifier.resolve(".").toExternalForm();
         }
         // externalCSS
-        if (HtmlNodeAttr.LINK.equalsIgnoreCase(localName)) {
+        if (HtmlNodeAttr.LINK.equalsIgnoreCase(rawName)) {
 
             String rel = attributs.getValue(HtmlNodeAttr.REL);
 
             if ("stylesheet".equalsIgnoreCase(rel)) {
                 isExternalCSS = true;
-
                 // resolve the css relative path to its absolute path and add it
                 // to the external css links collection
                 String cssRelativePath = attributs.getValue(HtmlNodeAttr.HREF);
 
-                String cssAbsolutePath = urlIdentifier.resolve(cssRelativePath).toExternalForm();
-
-                downloader.setURL(cssAbsolutePath);
-                downloader.run();
-
-                // TODO Enlever ce commentaire qui ajoute ressource feuille de style pour l'association à l'audit et ainsi la persister.
-//              contentList.add(contentFactory.createStylesheetContent(new Date(), cssAbsolutePath, ssp, downloader.getResult()));
-
-                resource = new CSSResourceImpl(downloader.getResult(),
-                        locator.getLineNumber(), new ExternalRsrc());
+                resource = getExternalResource(cssRelativePath,
+                        getListOfMediaFromAttributeValue(attributs.getValue(HtmlNodeAttr.MEDIA)),
+                        false);
             }
         }
 
         // look up for inlineCSS
         for (int i = 0; i < attributs.getLength(); i++) {
             String attrValue = attributs.getValue(i);
-            String attrName = attributs.getLocalName(i);
-
+            String attrName = attributs.getQName(i);
             if (HtmlNodeAttr.STYLE.equalsIgnoreCase(attrName)) {
                 isInlineCSS = true;
-                String cssString = localName + "{" + attrValue + "}";
+                String cssString = rawName + "{" + attrValue + "}";
                 resource = new CSSResourceImpl(cssString, locator.getLineNumber(), new InlineRsrc());
                 cssVector.add(resource);
+                currentLocalResourcePath = urlIdentifier.resolve(".").toExternalForm();
                 break;
             }
-        }
-        // look up for id attribute ReferencedCSS
-        for (int i = 0; i < attributs.getLength(); i++) {
-            String attrValue = attributs.getValue(i);
-            String attrName = attributs.getLocalName(i);
-            if (HtmlNodeAttr.ID.equalsIgnoreCase(attrName)) {
-                isReferencedCSS = true;
-                String cssString = attrValue + "{property : value}";
-                resource = new CSSResourceImpl(cssString, locator.getLineNumber(), new ReferencedRsrc());
-                cssVector.add(resource);
-                break;
-            }
-        }
-        // look up for class attribute ReferencedCSS
-        for (int i = 0; i < attributs.getLength(); i++) {
-            String attrValue = attributs.getValue(i);
-            String attrName = attributs.getLocalName(i);
-            if (HtmlNodeAttr.CLASS.equalsIgnoreCase(attrName)) {
-                isReferencedCSS = true;
-                String cssString = attrValue + "{property : value}";
-                resource = new CSSResourceImpl(cssString, locator.getLineNumber(), new ReferencedRsrc());
-                cssVector.add(resource);
-                break;
-            }
-
         }
 
     }
@@ -247,8 +229,131 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
      * @see org.xml.sax.ContentHandler#startPrefixMapping(java.lang.String,
      *      java.lang.String)
      */
+    @Override
     public void startPrefixMapping(String prefix, String URI)
             throws SAXException {
         // Not used
     }
+
+    /**
+     * Get the list of media from the media attribute content
+     * @param mediaAttribute
+     * @return
+     */
+    private SACMediaList getListOfMediaFromAttributeValue(String mediaAttribute) {
+        if (mediaAttribute == null) {
+            return null;
+        } else {
+            String localMedia = mediaAttribute.replaceAll("\\s", "");
+            SACMediaList mediaList = new SACMediaListImpl();
+            for(String media : localMedia.split(",")) {
+                ((SACMediaListImpl)mediaList).addItem(media);
+            }
+            return mediaList;
+        }
+    }
+
+    /**
+     * Get the current resource path (needed for relative file access)
+     * @param absolutePath
+     * @return
+     */
+    private String getCurrentResourcePath(String absolutePath){
+        int endIndex = absolutePath.lastIndexOf('/');
+        String path = absolutePath.substring(0, endIndex+1);
+        return path;
+    }
+
+    /**
+     * Downloads an external resource and returns a Resource instance
+     * @param cssRelativePath
+     * @param sacMediaList
+     * @param importedFromCss
+     * @return
+     */
+    private Resource getExternalResource(String cssRelativePath,
+            SACMediaList sacMediaList, boolean importedFromCss) {
+        Resource externalResouce = null;
+
+        String cssAbsolutePath =
+                urlIdentifier.resolve(cssRelativePath).toExternalForm();
+
+        downloader.setURL(cssAbsolutePath);
+        downloader.run();
+        if (!importedFromCss) {
+            // In case of external resource found when parsing the html,
+            // the path of the resource is saved for imports with relative path
+            currentLocalResourcePath = getCurrentResourcePath(cssAbsolutePath);
+        }
+        if (sacMediaList != null) {
+            externalResouce = new CSSResourceImpl(downloader.getResult(),
+                    locator.getLineNumber(), new ExternalRsrc(),sacMediaList);
+        } else {
+            externalResouce = new CSSResourceImpl(downloader.getResult(),
+                    locator.getLineNumber(), new ExternalRsrc());
+        }
+        return externalResouce;
+    }
+
+    /**
+     * Search and download imported resources from resources found in the html
+     * Can be call recursively if an imported stylesheet is defined within an
+     * imported stylesheet
+     * @param resource
+     * @param path
+     *          The resource path
+     */
+    private void getImportedResources(Resource resource, String path) {
+        Set<CSSImportedStyle> importedStyles =
+                new HashSet<CSSImportedStyle>();
+        do {
+            if (resource.getResource() != null) {
+
+            //Get all the @import refences found in the resource
+            parser.setResource(resource);
+            importedStyles = parser.searchImportedStyles();
+
+            if (!importedStyles.isEmpty())
+                // for each foudn imported resource within a resource
+                for (CSSImportedStyle cssImportedStyle : importedStyles) {
+
+                    //build the resource path
+                    //If the path is relative, build in it from the path of the
+                    // current resource
+                    String resourcePath = cssImportedStyle.getPath();
+                    if (!resourcePath.startsWith(HTTP_PREFIX)
+                        && !resourcePath.startsWith(WWW_PREFIX)) {
+                        resourcePath = path +
+                            cssImportedStyle.getPath();
+                    }
+
+                    // create an instance for the
+                    Resource importedResource = getExternalResource(
+                            resourcePath,
+                            cssImportedStyle.getSACMediaList(), true);
+                    
+                    // check if the imported resource handle an imported resource
+                    // by a recursive call to getImportResources
+                    getImportedResources(importedResource, 
+                            getCurrentResourcePath(resourcePath));
+                    
+                    addImportedResource(importedResource);
+                }
+                importedStyles.clear();
+            }
+        } while (!importedStyles.isEmpty());
+    }
+
+    /**
+     * Add an "from css imported" resource to the vector
+     * @param importedResource
+     */
+    private void addImportedResource(Resource importedResource) {
+        if (importedCssVector == null) {
+            importedCssVector = new HashSet();
+        }
+        importedCssVector.add(importedResource);
+    }
+
 }
+
