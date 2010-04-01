@@ -9,4 +9,5 @@ public abstract class HtmlNodeAttr {
 	public final static String REL = "rel";
 	public final static String SRC = "src";
 	public final static String STYLE = "style";
+        public final static String MEDIA = "media";
 }
