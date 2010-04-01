@@ -11,9 +11,15 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         <property name="tempHTMLFileManager" ref="tempHTMLFileManagerComponent"/>
     </bean>
 
+    <bean id="fluteParser" class="org.w3c.flute.parser.Parser"/>
+    <!--bean id="batikParser" class="org.apache.batik.css.parser.Parser"/-->
+
+    <bean id="cssParserComponent" class="org.opens.tanaguru.contentadapter.css.CSSParserImpl"/>
+        <property name="parser" ref="fluteParser"/>
+    </bean>
+
     <bean id="htmlParserComponent" class="org.opens.tanaguru.contentadapter.html.HTMLParserImpl"/>
     <bean id="htmlCleanerComponent" class="org.opens.tanaguru.contentadapter.html.HTMLCleanerImpl"/>
-    <bean id="cssParserComponent" class="org.opens.tanaguru.contentadapter.css.CSSParserImpl"/>
     <bean id="jsParserComponent" class="org.opens.tanaguru.contentadapter.js.JSParserImpl"/>
     <bean id="urlIdentifierComponent" class="org.opens.tanaguru.contentadapter.util.URLIdentifierImpl"/>
     <bean id="adapterComponent" class="org.opens.tanaguru.contentadapter.ContentsAdapterImpl">
