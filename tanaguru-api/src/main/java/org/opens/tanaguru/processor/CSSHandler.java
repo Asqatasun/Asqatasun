@@ -35,6 +35,12 @@ public interface CSSHandler {
 	 */
 	CSSHandler selectAllRules();
 
+        /**
+	 *
+	 * @return the current CSSHandler instance
+	 */
+	CSSHandler keepRulesWithMedia(Collection<String> mediaNames);
+
 	/**
 	 * 
 	 * @param processRemarkFactory
