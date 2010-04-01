@@ -309,6 +309,12 @@ public interface SSPHandler {
 
     /**
      *
+     * @return the current SSPHandler with a set of CSS rules
+     */
+    SSPHandler keepRulesWithMedia(Collection<String> mediaNames);
+
+    /**
+     *
      * @param attributeName
      *            the name of the atribute to select
      * @return the current DOMHandler instance
