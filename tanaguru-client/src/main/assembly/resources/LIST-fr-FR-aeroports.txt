@@ -52,7 +52,7 @@ Aeroport-Nimes;http://www.nimes-aeroport.fr/
 Aeroport-Orleans;http://www.loiret.aeroport.fr/
 Aeroport-Paris-Vatry;http://www.parisvatry.com/
 Aeroport-Pau;http://www.pau.aeroport.fr/
-Aeroport-Perpignan;http://www.perpignan.cci.fr/
+Aeroport-Perpignan;http://www.perpignan.cci.fr/2-13674-Accueil.php
 Aeroport-Poitiers;http://www.poitiers.aeroport.fr/
 Aeroport-Quiberon;http://www.aerodrome-quiberon.fr/
 Aeroport-Quimper;http://www.quimper.aeroport.fr/
