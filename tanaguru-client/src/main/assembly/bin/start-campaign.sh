@@ -111,18 +111,20 @@ if [ $OFFLINE_PATH ]
     for j in ${LIST_FILES}; do
       file=${j##*/}
 
-      # toggle comments to have topic directories created
+      # toggle comments to have topic directories created (here *AND* in the while loop)
       #base=${file%%.*}
       #base=${base#*-}
       #LIST_ELEMENTS_RESULT_DIR="$RESULT_DIR/$base"
-      LIST_ELEMENTS_RESULT_DIR="$RESULT_DIR/"
-
-      mkdir -p $LIST_ELEMENTS_RESULT_DIR
-      mkdir -p $LIST_ELEMENTS_RESULT_DIR/passed
-      mkdir -p $LIST_ELEMENTS_RESULT_DIR/failed
+      #mkdir -p $LIST_ELEMENTS_RESULT_DIR
+      #mkdir -p $LIST_ELEMENTS_RESULT_DIR/passed
+      #mkdir -p $LIST_ELEMENTS_RESULT_DIR/failed
  
       while IFS=\; read file_name address
       do
+        LIST_ELEMENTS_RESULT_DIR="$RESULT_DIR/$file_name"
+        mkdir -p $LIST_ELEMENTS_RESULT_DIR/passed
+        mkdir -p $LIST_ELEMENTS_RESULT_DIR/failed
+
         echo -e "\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
         echo "Testing $address in ${j} file"
 	
