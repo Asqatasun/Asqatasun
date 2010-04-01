@@ -139,7 +139,7 @@ if [ $OFFLINE_PATH ]
             echo "see $LIST_ELEMENTS_RESULT_DIR/passed/$file_name.txt for details"
           else
             rm -f $LIST_ELEMENTS_RESULT_DIR/passed/$file_name.txt
-            cp $LIST_ELEMENTS_RESULT_DIR/failed/$file_name.txt $RESULT_DIR/failed
+            cp -f $LIST_ELEMENTS_RESULT_DIR/failed/$file_name.txt $RESULT_DIR/failed
             echo "see $LIST_ELEMENTS_RESULT_DIR/failed/$file_name.txt for details"
         fi
  
