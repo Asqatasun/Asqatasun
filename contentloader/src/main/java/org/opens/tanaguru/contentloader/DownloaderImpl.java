@@ -6,8 +6,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.UnknownHostException;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.net.ssl.SSLPeerUnverifiedException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.HttpResponseException;
@@ -15,6 +14,7 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.log4j.Logger;
 
 public class DownloaderImpl implements Downloader {
 
@@ -23,6 +23,7 @@ public class DownloaderImpl implements Downloader {
     private final String HTTP_PROTOCOL_PREFIX = "http://";
     private final String HTTPS_PROTOCOL_PREFIX = "https://";
     private final String FILE_PROTOCOL_PREFIX = "file:/";
+    private final String unreachableUrl = "Unreachable Url : ";
 
     public DownloaderImpl() {
         super();
@@ -41,8 +42,7 @@ public class DownloaderImpl implements Downloader {
             }
             return urlContent.toString();
         } catch (IOException ex) {
-            Logger.getLogger(DownloaderImpl.class.getName()).log(Level.SEVERE,
-                    null, ex);
+            Logger.getLogger(DownloaderImpl.class.getName()).warn(ex);
             return "";
         } finally {
             try {
@@ -50,8 +50,7 @@ public class DownloaderImpl implements Downloader {
                     in.close();
                 }
             } catch (IOException ex) {
-                Logger.getLogger(DownloaderImpl.class.getName()).log(
-                        Level.SEVERE, null, ex);
+                Logger.getLogger(DownloaderImpl.class.getName()).warn(ex);
                 throw new RuntimeException(ex);
             }
         }
@@ -69,19 +68,19 @@ public class DownloaderImpl implements Downloader {
             responseBody = httpclient.execute(httpget, responseHandler);
         } catch (HttpResponseException ex) {
             Logger.getLogger(DownloaderImpl.class.getName()).
-                    log(Level.SEVERE, null, ex);
+                    warn(ex.getMessage() + " " +url);
             return "";
         } catch (UnknownHostException ex ) {
             Logger.getLogger(DownloaderImpl.class.getName()).
-                    log(Level.SEVERE, null, ex);
+                    warn(ex.getMessage() + " " +url);
             return "";
         } catch (SSLPeerUnverifiedException ex) {
             Logger.getLogger(DownloaderImpl.class.getName()).
-                    log(Level.SEVERE, null, ex);
+                    warn(ex.getMessage() + " " +url);
             return "";
         } catch (IOException ex) {
             Logger.getLogger(DownloaderImpl.class.getName()).
-                    log(Level.SEVERE, null, ex);
+                    warn(ex.getMessage() + " " +url);
             return "";
         } 
         // When HttpClient instance is no longer needed,
@@ -105,13 +104,13 @@ public class DownloaderImpl implements Downloader {
     public void run() {
         if (url.startsWith(HTTP_PROTOCOL_PREFIX)
                 || url.startsWith(HTTPS_PROTOCOL_PREFIX)) {
+            Logger.getLogger(DownloaderImpl.class.getName()).
+                    info("Download resource "  + url);
             result = download(url);
-            Logger.getLogger(DownloaderImpl.class.getName()).
-                    log(Level.INFO, "download resource "  + url);
         } else if (url.startsWith(FILE_PROTOCOL_PREFIX)) {
-            result = load(url);
             Logger.getLogger(DownloaderImpl.class.getName()).
-                    log(Level.INFO, "Load resource "  + url);
+                    info("Load resource "  + url);
+            result = load(url);
         }
     }
 
