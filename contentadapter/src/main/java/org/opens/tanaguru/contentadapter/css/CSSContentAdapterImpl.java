@@ -54,6 +54,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
      * @param end
      * @see org.xml.sax.ContentHandler#characters(char[], int, int)
      */
+    @Override
     public void characters(char[] ch, int start, int end) throws SAXException {
 
         if (isLocalCSS) {
@@ -67,6 +68,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
      * @throws SAXException
      * @see org.xml.sax.ContentHandler#endDocument()
      */
+    @Override
     public void endDocument() throws SAXException {
         if (resource != null) {
             resource.addAllResource(cssVector);
@@ -90,6 +92,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
      * @see org.xml.sax.ContentHandler#endElement(java.lang.String,
      *      java.lang.String, java.lang.String)
      */
+    @Override
     public void endElement(String nameSpaceURI, String localName, String rawName)
             throws SAXException {
 
@@ -114,10 +117,12 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
      * @param prefixe
      * @see org.xml.sax.ContentHandler#endPrefixMapping(java.lang.String)
      */
+    @Override
     public void endPrefixMapping(String prefix) throws SAXException {
         // Not used
     }
 
+    @Override
     public String getAdaptation() {
         if (cssOnError) {
             return (CSS_ON_ERROR);
@@ -132,6 +137,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
      * @param end
      * @see org.xml.sax.ContentHandler#ignorableWhitespace(char[], int, int)
      */
+    @Override
     public void ignorableWhitespace(char[] ch, int start, int end)
             throws SAXException {
         // Not used
@@ -144,15 +150,26 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
      * @see org.xml.sax.ContentHandler#processingInstruction(java.lang.String,
      *      java.lang.String)
      */
+    @Override
     public void processingInstruction(String target, String data)
             throws SAXException {
         // Not used
     }
 
+    /**
+     * 
+     * @param locator
+     */
+    @Override
     public void setDocumentLocator(Locator locator) {
         this.locator = locator;
     }
 
+    /**
+     * 
+     * @param parser
+     */
+    @Override
     public void setParser(ContentParser parser) {
         this.parser = (CSSParser) parser;
     }
@@ -160,6 +177,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
     /**
      * @see org.xml.sax.ContentHandler#skippedEntity(java.lang.String)
      */
+    @Override
     public void skippedEntity(String arg0) throws SAXException {
         // Not used
     }
@@ -170,6 +188,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
      * @throws SAXException
      * @see org.xml.sax.ContentHandler#startDocument()
      */
+    @Override
     public void startDocument() throws SAXException {
         locator = new LocatorImpl();
         cssVector = new HashSet();
@@ -185,6 +204,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
      * @see org.xml.sax.ContentHandler#startElement(java.lang.String,
      *      java.lang.String, java.lang.String, org.xml.sax.Attributes)
      */
+    @Override
     public void startElement(String nameSpaceURI, String localName,
             String rawName, Attributes attributs) throws SAXException {
 
@@ -274,7 +294,8 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
     }
 
     /**
-     * Downloads an external resource and returns a Resource instance
+     * Downloads an external resource and returns a Resource instance or null
+     * if the download has failed
      * @param cssRelativePath
      * @param sacMediaList
      * @param importedFromCss
@@ -360,17 +381,18 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
                             }
                         }
 
-                        // create an instance for the
+                        // create an instance of resource and download the content
                         Resource importedResource = getExternalResource(
                                 resourcePath,
                                 cssImportedStyle.getSACMediaList(), true);
                     
                         // check if the imported resource handle an imported resource
                         // by a recursive call to getImportResources
-                        getImportedResources(importedResource,
+                        if (importedResource != null) {
+                            getImportedResources(importedResource,
                                 getCurrentResourcePath(resourcePath));
-                    
-                        addImportedResource(importedResource);
+                            addImportedResource(importedResource);
+                        }
                     }
                 importedStyles.clear();
             }
