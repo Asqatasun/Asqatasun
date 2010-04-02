@@ -9,9 +9,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import org.apache.log4j.Logger;
 import org.opens.tanaguru.contentadapter.util.URLIdentifier;
 import org.opens.tanaguru.processor.SSPHandler;
 
@@ -48,10 +47,10 @@ public class ImageChecker {
                 image = ImageIO.read(uRLIdentifier.resolve(imgUrl));
             } catch (IOException ex) {
                 Logger.getLogger(ImageChecker.class.getName()).
-                        log(Level.WARNING, imgUrl, ex);
+                        warn(ex.getMessage() + " " + uRLIdentifier.resolve(imgUrl));
             } catch (IllegalArgumentException ex){
                 Logger.getLogger(ImageChecker.class.getName()).
-                        log(Level.WARNING, imgUrl, ex);
+                        warn(ex.getMessage() + " " + uRLIdentifier.resolve(imgUrl));
             } 
 
             int rgbColor = -1;
@@ -79,7 +78,7 @@ public class ImageChecker {
             
         } catch (MalformedURLException ex) {
             Logger.getLogger(ImageChecker.class.getName()).
-                    log(Level.SEVERE, null, ex);
+                    warn(ex.getMessage() + " " + uRLIdentifier.resolve(imgUrl));
         }
         return isDecorativeImg;
     }
