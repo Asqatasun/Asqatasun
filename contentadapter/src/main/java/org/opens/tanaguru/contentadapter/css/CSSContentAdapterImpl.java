@@ -192,8 +192,11 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
     public void startDocument() throws SAXException {
         locator = new LocatorImpl();
         cssVector = new HashSet();
+        importedCssVector = new HashSet();
+        currentLocalResourcePath = null;
         buffer = new StringBuffer();
         cssSet = new HashSet<CSSOMStyleSheet>();
+        cssOnError = false;
     }
 
     /**
