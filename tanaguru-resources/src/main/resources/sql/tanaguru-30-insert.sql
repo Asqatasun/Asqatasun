@@ -310,6 +310,7 @@ INSERT INTO `TEST` (`Id_Test`, `Cd_Test`, `Description`, `Label`, `Rank`, `Rule_
 (9, 'Aw20-10011', NULL, '10.1.1', 2100101, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule10011', NULL, NULL, 1, NULL, 1),
 (10, 'Aw20-10041', NULL, '10.4.1', 2100401, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule10041', NULL, NULL, 1, NULL, 1);
 (11, 'Aw20-02011', NULL, '2.1.1', 2020101, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule02011', NULL, NULL, 1, NULL, 1);
+(11, 'Aw20-02012', NULL, '2.1.2', 2020102, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule02012', NULL, NULL, 1, NULL, 1);
 
 
 --
