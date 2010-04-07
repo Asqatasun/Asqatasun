@@ -19,6 +19,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.w3c.css.sac.LexicalUnit;
 
 public class CSSHandlerImpl implements CSSHandler {
 
@@ -29,8 +30,7 @@ public class CSSHandlerImpl implements CSSHandler {
     protected SourceCodeRemarkFactory sourceCodeRemarkFactory;
     protected SSP ssp;
     private Set<CSSOMStyleSheet> styleSet;
-    private Map<String, Set<CSSOMRule>> rulesByMedia =
-            new HashMap<String, Set<CSSOMRule>>();
+    private Map<String, Set<CSSOMRule>> rulesByMedia ;
     private final String CSS_ON_ERROR = "CSS_ON_ERROR";
     private boolean cssOnError = false;
 
@@ -72,17 +72,19 @@ public class CSSHandlerImpl implements CSSHandler {
                         processResult = TestSolution.FAILED;
                         resultSet.add(processResult);
                         addSourceCodeRemark(processResult, workingRule, "BadUnitType",
-                            workingRule.toString());
+                            getLexicalStringFromValue(unit));
                         break;
                     }
                 }
             }
             resultSet.add(processResult);
         }
+
         if (selectedRuleList.isEmpty() && cssOnError) {
             TestSolution fakeSolution = TestSolution.NEED_MORE_INFO;
             resultSet.add(fakeSolution);
         }
+
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
 
@@ -95,12 +97,15 @@ public class CSSHandlerImpl implements CSSHandler {
             return;
         }
 
-        XStream xstream = new XStream();
         if (!ssp.getStylesheet().equalsIgnoreCase(CSS_ON_ERROR)) {
-            styleSet = (Set<CSSOMStyleSheet>) xstream.fromXML(ssp.getStylesheet());
-            setRulesByMedia();
+            styleSet = (Set<CSSOMStyleSheet>)
+                    new XStream().fromXML(ssp.getStylesheet());
+            rulesByMedia = setRulesByMedia(styleSet);
+            cssOnError = false;
             initialized = true;
         } else {
+            rulesByMedia =
+                new HashMap<String, Set<CSSOMRule>>();
             cssOnError = true;
         }
     }
@@ -137,7 +142,7 @@ public class CSSHandlerImpl implements CSSHandler {
 
     @Override
     public CSSHandler keepRulesWithMedia(Collection<String> mediaNames) {
-        if (styleSet == null) {
+        if (rulesByMedia.isEmpty()) {
             return this;
         }
 
@@ -149,25 +154,48 @@ public class CSSHandlerImpl implements CSSHandler {
         return this;
     }
 
-    private void setRulesByMedia()  {
-        if (styleSet == null) {
-            return;
-        }
-        String mediaName;
+    private HashMap<String, Set<CSSOMRule>> setRulesByMedia
+            (Set<CSSOMStyleSheet> styleSet)  {
 
+        HashMap<String, Set<CSSOMRule>> rules =
+                new HashMap<String, Set<CSSOMRule>>();
+
+        if (styleSet == null || styleSet.isEmpty()) {
+            return rules;
+        }
+
+        String mediaName;
         for (CSSOMStyleSheet style : styleSet) {
             for (CSSOMRule rule : style.getRules()) {
                 for (int i=0 ; i < ((CSSOMRule)rule).getMediaList().getLength();i++){
                     mediaName = ((CSSOMRule)rule).getMediaList().item(i);
-                    if (rulesByMedia.containsKey(mediaName)) {
-                        rulesByMedia.get(mediaName).add(((CSSOMRule)rule));
+                    if (rules.containsKey(mediaName)) {
+                        rules.get(mediaName).add(((CSSOMRule)rule));
                     } else {
                         Set<CSSOMRule> rulesSet = new HashSet<CSSOMRule>();
                         rulesSet.add(((CSSOMRule)rule));
-                        rulesByMedia.put(mediaName, rulesSet);
+                        rules.put(mediaName, rulesSet);
                     }
                 }
             }
+        }
+        return rules;
+    }
+
+    private String getLexicalStringFromValue(int value){
+        switch (value) {
+            case LexicalUnit.SAC_INCH:
+                return "in";
+            case LexicalUnit.SAC_MILLIMETER:
+                return "mm";
+            case LexicalUnit.SAC_POINT:
+                return "pt";
+            case LexicalUnit.SAC_CENTIMETER:
+                return "in";
+            case LexicalUnit.SAC_PICA:
+                return "pc";
+            default:
+                return "";
         }
     }
 
