@@ -197,6 +197,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         buffer = new StringBuffer();
         cssSet = new HashSet<CSSOMStyleSheet>();
         cssOnError = false;
+        resource = null;
     }
 
     /**
