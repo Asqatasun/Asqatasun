@@ -14,6 +14,7 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpParams;
 import org.apache.log4j.Logger;
 
 public class DownloaderImpl implements Downloader {
@@ -23,7 +24,7 @@ public class DownloaderImpl implements Downloader {
     private final String HTTP_PROTOCOL_PREFIX = "http://";
     private final String HTTPS_PROTOCOL_PREFIX = "https://";
     private final String FILE_PROTOCOL_PREFIX = "file:/";
-    private final String unreachableUrl = "Unreachable Url : ";
+//    private final String unreachableUrl = "Unreachable Url : ";
 
     public DownloaderImpl() {
         super();
@@ -61,6 +62,11 @@ public class DownloaderImpl implements Downloader {
 
         HttpGet httpget = new HttpGet(url);
 
+        httpclient.getParams().setParameter(
+                "http.socket.timeout", new Integer(10000));
+        httpclient.getParams().setParameter(
+                "http.connection.timeout", new Integer(10000));
+
         // Create a response handler
         ResponseHandler<String> responseHandler = new BasicResponseHandler();
         String responseBody = null;
@@ -82,7 +88,7 @@ public class DownloaderImpl implements Downloader {
             Logger.getLogger(DownloaderImpl.class.getName()).
                     warn(ex.getMessage() + " " +url);
             return "";
-        } 
+        }
         // When HttpClient instance is no longer needed,
         // shut down the connection manager to ensure
         // immediate deallocation of all system resources
@@ -117,6 +123,6 @@ public class DownloaderImpl implements Downloader {
     @Override
     public void setURL(String url) {
         this.url = url;
-    }
+        }
 
 }
