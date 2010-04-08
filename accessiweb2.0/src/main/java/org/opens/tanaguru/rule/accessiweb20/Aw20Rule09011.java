@@ -5,6 +5,9 @@
 package org.opens.tanaguru.rule.accessiweb20;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
@@ -28,18 +31,20 @@ public class Aw20Rule09011 extends AbstractPageRuleImplementation {
     protected ProcessResult processImpl(SSPHandler sspHandler) {
         sspHandler.beginSelection().selectDocumentNodes(BODY_TAG).selectChildNodesRecursively(H1_TAG);
 //                selectChildNodes(H1_TAG);
-
+        
+        List<ProcessRemark> processRemarkList = new ArrayList<ProcessRemark>();
         TestSolution testSolution = TestSolution.PASSED;
 
         if (sspHandler.getSelectedElementList().isEmpty()) {
             testSolution = TestSolution.FAILED;
+            processRemarkList.add(processRemarkFactory.create(TestSolution.FAILED, "H1TagMissing"));
         }
 
         ProcessResult processResult = definiteResultFactory.create(
                 test,
                 sspHandler.getPage(),
                 testSolution,
-                null);
+                processRemarkList);
 
         return processResult;
 
