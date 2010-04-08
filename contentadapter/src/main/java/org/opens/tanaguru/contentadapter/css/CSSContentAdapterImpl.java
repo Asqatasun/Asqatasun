@@ -96,7 +96,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
     public void endElement(String nameSpaceURI, String localName, String rawName)
             throws SAXException {
 
-        if (isLocalCSS){
+        if (isLocalCSS && resource != null){
             resource.setResource(buffer.toString());
         }
 
@@ -105,11 +105,10 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
                 cssVector.add(resource);
                 // search imported resource from the resource
                 getImportedResources(resource, currentLocalResourcePath);
-                isLocalCSS = false;
-                isExternalCSS = false;
-                isInlineCSS = false;
             }
-
+            isLocalCSS = false;
+            isExternalCSS = false;
+            isInlineCSS = false;
         }
     }
 
