@@ -5,9 +5,6 @@
 package org.opens.tanaguru.rule.accessiweb20;
 
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
