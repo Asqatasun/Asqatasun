@@ -278,21 +278,23 @@ INSERT INTO `SCOPE` (`Id_Scope`, `Code`, `Description`, `Label`) VALUES
 -- Dumping data for table `STANDARD_MESSAGE`
 --
 
-INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (1,'AttributeMissing',NULL,'The attribute is missing');
-INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (2,'BlackListedValue',NULL,'The value is blacklisted');
-INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (3,'VerifyValue',NULL,'The value needs verification');
-INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (4,'ChildNodeMissing',NULL,'The child node is missing');
-INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (5,'ValueEmpty',NULL,'The value is empty');
-INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (6,'NotMatchExpression',NULL,'Regular expression not match');
-INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (7,'LengthTooLong',NULL,'Length too long');
-INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (8,'AccessKeyNotMatch',NULL,'AccessKey not match');
-INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (9,'BadUnitType',NULL,'Bad unit type');
-INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (10,'InvalidLanguageCode',NULL,'Invalid language code');
-INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (11,'DeprecatedRepresentationTagFound',NULL,'Deprecated tag found : {0} at line {1}');
-INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (12,'DecorativeImageWithNotEmptyAltAttribute',NULL,'A decorative image with a not empty alt attribute has been found');
-INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (13,'NotPertinentAltAttribute',NULL,'The alt attribute of the tag is not pertinent');
-INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES (14,'HeaderTagNotHierarchicallyWelldefined',NULL,'The hierarchy between the title (h tags) of the page is not pertinent');
-
+INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES
+(1, 'AttributeMissing', NULL, 'The attribute is missing'),
+(2, 'BlackListedValue', NULL, 'The value is blacklisted'),
+(3, 'VerifyValue', NULL, 'The value needs verification'),
+(4, 'ChildNodeMissing', NULL, 'The child node is missing'),
+(5, 'ValueEmpty', NULL, 'The value is empty'),
+(6, 'NotMatchExpression', NULL, 'Regular expression not match'),
+(7, 'LengthTooLong', NULL, 'Length too long'),
+(8, 'AccessKeyNotMatch', NULL, 'AccessKey not match'),
+(9, 'BadUnitType', NULL, 'Bad unit type'),
+(10, 'InvalidLanguageCode', NULL, 'Invalid language code'),
+(11, 'DeprecatedRepresentationTagFound', NULL, 'Deprecated tag found : {0} at line {1}'),
+(12, 'DecorativeImageWithNotEmptyAltAttribute', NULL, 'A decorative image with a not empty alt attribute has been found'),
+(13, 'NotPertinentAltAttribute', NULL, 'The alt attribute of the tag is not pertinent'),
+(14, 'HeaderTagNotHierarchicallyWelldefined', NULL, 'The hierarchy between the title (h tags) of the page is not pertinent'),
+(15, 'TitleTagMissing', NULL, 'Title tag is missing'),
+(16, 'H1TagMissing', NULL, 'H1 tag is missing');
 
 --
 -- Dumping data for table `TEST`
