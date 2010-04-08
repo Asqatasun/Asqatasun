@@ -65,19 +65,19 @@ public class Aw20Rule01021Test extends AbstractRuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 processPageTest("AW20.Test.01.02.01-1Passed-01").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 processPageTest("AW20.Test.01.02.01-1Passed-02").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 processPageTest("AW20.Test.01.02.01-1Passed-03").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 processPageTest("AW20.Test.01.02.01-1Passed-04").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 processPageTest("AW20.Test.01.02.01-2Failed-01").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 processPageTest("AW20.Test.01.02.01-2Failed-02").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 processPageTest("AW20.Test.01.02.01-2Failed-03").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
                 processPageTest("AW20.Test.01.02.01-3NMI-01").getValue());
@@ -93,19 +93,19 @@ public class Aw20Rule01021Test extends AbstractRuleImplementationTestCase {
 
     @Override
     protected void setConsolidate() {
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW20.Test.01.02.01-1Passed-01").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW20.Test.01.02.01-1Passed-02").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW20.Test.01.02.01-1Passed-03").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW20.Test.01.02.01-1Passed-04").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW20.Test.01.02.01-2Failed-01").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW20.Test.01.02.01-2Failed-02").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW20.Test.01.02.01-2Failed-03").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW20.Test.01.02.01-3NMI-01").getValue());

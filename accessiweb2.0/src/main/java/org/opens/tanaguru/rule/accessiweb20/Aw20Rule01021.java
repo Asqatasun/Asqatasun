@@ -25,9 +25,10 @@ public class Aw20Rule01021 extends AbstractPageRuleImplementation {
     public static final String SRC_ATTRIBUTE = "src";
     public static final String ALT_ATTRIBUTE = "alt";
     public static final String EMPTY_STRING = "";
-//    public static final String WRONG_IMG_MSG = "DecorativeImageWithNotEmptyAltAttribute";
+    public static final String SUSPECTED_IMG_MSG =
+            "SuspectedDecorativeImageWithNotEmptyAltAttribute";
     public static final String XPATH_EXPR1 =
-            "//IMG[@alt and @longdesc and not(ancestor::A)]";
+    "//IMG[@alt and @longdesc and not(ancestor::A)]";
     public static final String XPATH_EXPR2 =
             "//IMG[@alt and not(ancestor::A)]";
     public static final String XPATH_EXPR3 =
@@ -76,29 +77,51 @@ public class Aw20Rule01021 extends AbstractPageRuleImplementation {
         List<Node> decorativeImgWithAltAttributeNodeList = new ArrayList<Node>();
 
         for (Node imgNode : imgWithAltAttributeNodeList) {
-            String imgSrc = imgNode.getAttributes().
+            if (imgNode.getAttributes().
+                    getNamedItem(SRC_ATTRIBUTE) != null) {
+                String imgSrc = imgNode.getAttributes().
                     getNamedItem(SRC_ATTRIBUTE).getTextContent();
 
-            // for each element of the collection, we test if this image is decorative
-            if (ImageChecker.getInstance().isDecorativeImage(sspHandler, imgSrc)) {
-               decorativeImgWithAltAttributeNodeList.add(imgNode);
+                // for each element of the collection, we test if this image is decorative
+                if (ImageChecker.getInstance().
+                        isDecorativeImage(sspHandler, imgSrc)) {
+                    decorativeImgWithAltAttributeNodeList.add(imgNode);
+                }
             }
         }
 
-        if (!decorativeImgWithAltAttributeNodeList.isEmpty()) {
-            sspHandler.setSelectedElementList(decorativeImgWithAltAttributeNodeList);
-            checkResult = sspHandler.checkAttributeValueIsEmpty(ALT_ATTRIBUTE);
-        }
-        // if all the images with an "alt" attribute but without "longdesc"
-        // attribute are seen as decorative and if none of them has an "alt"
-        // attribute equals to an empty string, the test is passed
-        if (checkResult == TestSolution.PASSED
-                && decorativeImgWithAltAttributeNodeList.size() <
-                imgWithAltAttributeNodeList.size()) {
-            checkResult = TestSolution.NEED_MORE_INFO;
+        for(Node workingElement : decorativeImgWithAltAttributeNodeList){
+            Node altAttribute = workingElement.getAttributes().getNamedItem(
+                    ALT_ATTRIBUTE);
+            Node srcAttribute = workingElement.getAttributes().getNamedItem(
+                    SRC_ATTRIBUTE);
+            if (altAttribute != null && srcAttribute != null) {
+                if (altAttribute.getNodeValue().length() != 0) {
+                    sspHandler.addSourceCodeRemark(
+                            checkResult,
+                            workingElement,
+                            SUSPECTED_IMG_MSG,
+                            srcAttribute.getNodeValue());
+                }
+            }
         }
 
-//      processRemarkList.addAll(sspHandler.getRemarkList());
+//        if (!decorativeImgWithAltAttributeNodeList.isEmpty()) {
+//            sspHandler.setSelectedElementList(decorativeImgWithAltAttributeNodeList);
+//            sspHandler.checkAttributeValueIsEmpty(ALT_ATTRIBUTE);
+
+//        }
+
+//        // if all the images with an "alt" attribute but without "longdesc"
+//        // attribute are seen as decorative and if none of them has an "alt"
+//        // attribute equals to an empty string, the test is passed
+//        if (checkResult == TestSolution.PASSED
+//                && decorativeImgWithAltAttributeNodeList.size() <
+//                imgWithAltAttributeNodeList.size()) {
+//            checkResult = TestSolution.NEED_MORE_INFO;
+//        }
+
+
         DefiniteResult result = definiteResultFactory.create(
                 test,
                 sspHandler.getSSP().getPage(),
