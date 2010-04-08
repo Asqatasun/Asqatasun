@@ -1,4 +1,3 @@
-lalibre;http://www.lalibre.be/
 dhnet;http://www.dhnet.be/
 lameuse;http://www.lameuse.be/
 lesoir;http://www.lesoir.be/

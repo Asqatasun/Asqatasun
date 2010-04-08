@@ -10,7 +10,6 @@ rg-rb;http://www.rg-rb.de/
 taz;http://www.taz.de/
 ostpreussenblatt;http://www.ostpreussenblatt.de/
 finanznachrichten;http://www.finanznachrichten.de/
-kontakt-online;http://www.kontakt-online.com/
 das-weisse-pferd;http://www.das-weisse-pferd.com/
 focus;http://www.focus.de/
 sonntagsblatt;http://www.sonntagsblatt.de/

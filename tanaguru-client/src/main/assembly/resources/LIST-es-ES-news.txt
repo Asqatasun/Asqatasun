@@ -1,5 +1,4 @@
 El-Pais;http://www.elpais.com/global/
-Cambio16;http://www.elpais.com/global/
 Que;http://www.que.es/
 El-Correo;http://www.elcorreo.com/
 Diario-vasco;http://www.diariovasco.com/
