@@ -93,6 +93,10 @@
  * HTML tags
  * ==============================================
 */
+code {
+     font-family: monospace;
+     font-weight: bold;
+}
 
 /*
  * Header
@@ -138,6 +142,22 @@
 */
 #audit-result caption {display: none;}
 
+.passed {
+    background: url(../Images/ico-passed.png) 7px 7px no-repeat;
+    padding-left: 2em;
+}
+.failed {
+    background: url(../Images/ico-failed.png) 7px 7px no-repeat;
+    padding-left: 2em;
+}
+.nmi {
+    background: url(../Images/ico-nmi.png) 7px 7px no-repeat;
+    padding-left: 2em;
+}
+.na {
+    padding-left: 2em;
+}
+
 /* Meta results (=result-meta)
  -------------------------------------------------- */
 #result-meta td,
@@ -152,7 +172,7 @@
 #audit-result #result-meta #meta-score {
 
 }
-#audit-result #result-meta #meta-score-data {
+#audit-result #result-meta #meta-score-data span {
     font-size: 197%;
     font-weight: bold;
 }
@@ -170,19 +190,6 @@
     text-align: center;
 }
 
-#result-synthetised #passed {
-    background: url(../Images/ico-passed.png) 10% 50% no-repeat;
-    padding-left: 2em;
-}
-#result-synthetised #failed {
-    background: url(../Images/ico-failed.png) 10% 50% no-repeat;
-    padding-left: 2em;
-}
-#result-synthetised #nmi {
-    background: url(../Images/ico-nmi.png) 10% 50% no-repeat;
-    padding-left: 2em;
-}
-#result-synthetised #na {}
 
 /* Detailed results (=result-detailed)
  -------------------------------------------------- */
@@ -191,3 +198,13 @@
 #result-detailed .col01 {width: 7em;}
 #result-detailed .col02 {width: 12em;}
 #result-detailed .col03 {width: 40em;}
+#result-detailed p.process-remarks {margin-bottom: 0.25em; }
+#result-detailed ul.process-remarks {margin-top:0; }
+
+/* Remaining-work (=work-todo)
+ -------------------------------------------------- */
+#remaining-work th {background-color: rgb(255,255,204);}
+#remaining-work td {vertical-align: top; }
+#remaining-work .col01 {width: 4em;}
+#remaining-work .col02 {width: 11em;}
+#remaining-work .col03 {width: 40em;}

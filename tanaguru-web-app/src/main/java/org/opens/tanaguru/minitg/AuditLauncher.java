@@ -79,16 +79,16 @@ public class AuditLauncher extends HttpServlet {
                 boolean hasContent = false;
                 for (Content content : audit.getContentList()) {
                     if (content instanceof SSP) {
-                    //We check that some content has been downloaded and has to
-                    //adapter. For the moment we ignore the return error code @TODO
-                        if (!((SSP)content).getSource().isEmpty()) {
+                        //We check that some content has been downloaded and has to
+                        //adapter. For the moment we ignore the return error code @TODO
+                        if (!((SSP) content).getSource().isEmpty()) {
                             hasContent = true;
                             break;
                         }
                     }
                 }
 
-                if (!hasContent){
+                if (!hasContent) {
                     out.println(returnPageLoadingProblem(resourceUrl));
                     return;
                 }
@@ -137,103 +137,127 @@ public class AuditLauncher extends HttpServlet {
                 @Override
                 public int compare(ProcessResult o1, ProcessResult o2) {
                     return String.CASE_INSENSITIVE_ORDER.compare(
-                            o1.getTest().getCode(), 
+                            o1.getTest().getCode(),
                             o2.getTest().getCode());
                 }
             });
 
-            myHtml.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
-            myHtml.append("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
-            myHtml.append("    <head>");
-            myHtml.append("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>");
-            myHtml.append("        <meta http-equiv=\"Author\" content=\"Open-S.com // Matthieu Faure\" lang=\"fr\" />");
-            myHtml.append("        <title>Audit result for " + resourceUrl + "</title>");
-            myHtml.append("        <link rel=\"stylesheet\" type=\"text/css\" href=\"http://yui.yahooapis.com/combo?2.8.0r4/build/reset-fonts/reset-fonts.css&amp;2.8.0r4/build/base/base-min.css\"/>");
-            myHtml.append("        <link rel=\"stylesheet\" type=\"text/css\" href=\"Css/tanaguru.css\" />");
-            myHtml.append("    </head>");
-            myHtml.append("    <body id=\"audit-result\">");
-            myHtml.append("    <div id=\"doc2\">");
-            myHtml.append("        <div id=\"hd\">");
-            myHtml.append("            <h1>Result of accessibility audit</h1>");
-            myHtml.append("        </div>");
-            myHtml.append("");
-            myHtml.append("        <div id=\"bd\">");
-            myHtml.append("            <h2>Synthesis</h2>");
-            myHtml.append("");
+            myHtml.append(getResultPageHeader(resourceUrl));
+
+            myHtml.append("    <body id=\"audit-result\">\n");
+            myHtml.append("    <div id=\"doc2\">\n");
+            myHtml.append("        <div id=\"hd\">\n");
+            myHtml.append("            <h1>Result of accessibility audit</h1>\n");
+            myHtml.append("        </div>\n");
+            myHtml.append("\n");
+            myHtml.append("         <ol>\n");
+            myHtml.append("             <li><a href=\"#synthesis\">Synthesis</a></li>\n");
+            myHtml.append("             <li><a href=\"#work-done\">Detailed result (what's been checked)</a></li>\n");
+            myHtml.append("             <li><a href=\"#work-todo\">Remaing points to check</a></li>\n");
+            myHtml.append("         </ol>\n");
+            myHtml.append("\n");
+            myHtml.append("         <div id=\"bd\">\n");
+            myHtml.append("            <h2 id=\"synthesis\">Synthesis</h2>\n");
+            myHtml.append("\n");
 
             // audit meta-data
-            myHtml.append("            <table summary=\"Audit meta-data\" id=\"result-meta\">");
-            myHtml.append("                <caption>Audit meta-data</caption>");
-            myHtml.append("                <tr>");
-            myHtml.append("                    <th id=\"meta-score\" scope=\"row\" class=\"col01\">Score:</th>");
-            myHtml.append("                    <td id=\"meta-score-data\" class=\"col02\">" + myAuditMark.intValue() + "%</td>");
-            myHtml.append("                </tr>");
-            myHtml.append("                <tr>");
-            myHtml.append("                    <th id=\"meta-url\" scope=\"row\" class=\"col01\">URL:</th>");
-            myHtml.append("                    <td class=\"col02\"><a href=\"" + resourceUrl + "\">" + resourceUrl + "</a></td>");
-            myHtml.append("                </tr>");
-            myHtml.append("                <tr>");
-            myHtml.append("                    <th id=\"meta-date\" scope=\"row\" class=\"col01\">Date:</th>");
-            myHtml.append("                    <td class=\"col02\">" + myAuditDate + "</td>");
-            myHtml.append("                </tr>");
-            myHtml.append("            </table>");
-            myHtml.append("");
-            /*
-            myHtml.append("            <dl class=\"table-display clearfix\">");
-            myHtml.append("                <dt id=\"score-dt\">Score:</dt><dd id=\"score-dd\">" + audit.getMark() + "%</dd>");
-            myHtml.append("                <dt>URL:</dt><dd><a href=\"" + resourceUrl + "\">" + resourceUrl + "</a></dd>");
-            myHtml.append("                <dt>Date:</dt><dd>" + myAuditCalendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.FRENCH) + "</dd>");
-            myHtml.append("            </dl>");
-            myHtml.append("");
-             */
+            myHtml.append("            <table summary=\"Audit meta-data\" id=\"result-meta\">\n");
+            myHtml.append("                <caption>Audit meta-data</caption>\n");
+            myHtml.append("                <tr>\n");
+            myHtml.append("                    <th id=\"meta-score\" scope=\"row\" class=\"col01\">Score <sup><a href=\"#score-formula\" title=\"Note 1: score formula detail\">1</a></sup> :</th>\n");
+            myHtml.append("                    <td id=\"meta-score-data\" class=\"col02\"><span>" + myAuditMark.intValue() + "%</span></td>\n");
+            myHtml.append("                </tr>\n");
+            myHtml.append("                <tr>\n");
+            myHtml.append("                    <th id=\"meta-url\" scope=\"row\" class=\"col01\">URL:</th>\n");
+            myHtml.append("                    <td class=\"col02\"><a href=\"" + resourceUrl + "\">" + resourceUrl + "</a></td>\n");
+            myHtml.append("                </tr>\n");
+            myHtml.append("                <tr>\n");
+            myHtml.append("                    <th id=\"meta-date\" scope=\"row\" class=\"col01\">Date:</th>\n");
+            myHtml.append("                    <td class=\"col02\">" + myAuditDate + "</td>\n");
+            myHtml.append("                </tr>\n");
+            myHtml.append("            </table>\n");
+            myHtml.append("\n");
 
             // synthetised results
-            myHtml.append("            <table summary=\"Synthetised result of accessibility audit\" id=\"result-synthetised\">");
-            myHtml.append("                <caption>Synthetised result of accessibility audit</caption>");
-            myHtml.append("                <tr>");
-            myHtml.append("                    <th id=\"passed\" scope=\"row\" class=\"col01\">Passed</th>");
-            myHtml.append("                    <td class=\"col02\">" + passedCount + "</td>");
-            myHtml.append("                </tr>");
-            myHtml.append("                <tr>");
-            myHtml.append("                    <th id=\"failed\" scope=\"row\" class=\"col01\">Failed</th>");
-            myHtml.append("                    <td class=\"col02\">" + failedCount + "</td>");
-            myHtml.append("                </tr>");
-            myHtml.append("                <tr>");
-            myHtml.append("                    <th id=\"nmi\" scope=\"row\" class=\"col01\"><abbr title=\"Need More Information\">NMI</abbr></th>");
-            myHtml.append("                    <td class=\"col02\">" + nmiCount + "</td>");
-            myHtml.append("                </tr>");
-            myHtml.append("                <tr>");
-            myHtml.append("                    <th id=\"na\" scope=\"row\" class=\"col01\"><abbr title=\"Not Applicable\">NA</abbr></th>");
-            myHtml.append("                    <td class=\"col02\">" + naCount + "</td>");
-            myHtml.append("                </tr>");
-            myHtml.append("            </table>");
-            myHtml.append("");
+            myHtml.append("            <table summary=\"Synthetised result of accessibility audit\" id=\"result-synthetised\">\n");
+            myHtml.append("                <caption>Synthetised result of accessibility audit</caption>\n");
+            myHtml.append("                <tr>\n");
+            myHtml.append("                    <th class=\"col01 passed\" scope=\"row\">Passed</th>\n");
+            myHtml.append("                    <td class=\"col02\">" + passedCount + "</td>\n");
+            myHtml.append("                </tr>\n");
+            myHtml.append("                <tr>\n");
+            myHtml.append("                    <th class=\"col01 failed\" scope=\"row\">Failed</th>\n");
+            myHtml.append("                    <td class=\"col02\">" + failedCount + "</td>\n");
+            myHtml.append("                </tr>\n");
+            myHtml.append("                <tr>\n");
+            myHtml.append("                    <th class=\"col01 nmi\" scope=\"row\"><abbr title=\"Need More Information\">NMI</abbr></th>\n");
+            myHtml.append("                    <td class=\"col02\">" + nmiCount + "</td>\n");
+            myHtml.append("                </tr>\n");
+            myHtml.append("                <tr>\n");
+            myHtml.append("                    <th class=\"col01 na\" scope=\"row\"><abbr title=\"Not Applicable\">NA</abbr></th>\n");
+            myHtml.append("                    <td class=\"col02\">" + naCount + "</td>\n");
+            myHtml.append("                </tr>\n");
+            myHtml.append("            </table>\n");
+            myHtml.append("\n");
 
             // detailed results
-            myHtml.append("            <h2>Detailed result</h2>");
-            myHtml.append("            <table summary=\"Detailed result of accessibility audit\" id=\"result-detailed\">");
-            myHtml.append("                <caption>Detailed result of accessibility audit</caption>");
-            myHtml.append("                <tr>");
-            myHtml.append("                    <th scope=\"col\" class=\"col01\">Test</th>");
-            myHtml.append("                    <th scope=\"col\" class=\"col02\">Result</th>");
-            myHtml.append("                    <th scope=\"col\" class=\"col03\">Remark</th>");
-            myHtml.append("                </tr>");
+            myHtml.append("            <h2 id=\"work-done\">Detailed result (what's been checked)</h2>\n");
+            myHtml.append("            <table summary=\"Detailed result of accessibility audit\" id=\"result-detailed\">\n");
+            myHtml.append("                <caption>Detailed result of accessibility audit</caption>\n");
+            myHtml.append("                <tr>\n");
+            myHtml.append("                    <th scope=\"col\" class=\"col01\">Test</th>\n");
+            myHtml.append("                    <th scope=\"col\" class=\"col02\">Result</th>\n");
+            myHtml.append("                    <th scope=\"col\" class=\"col03\">Remark</th>\n");
+            myHtml.append("                </tr>\n");
             for (ProcessResult processResult : audit.getNetResultList()) {
-                myHtml.append("                <tr>");
-                myHtml.append("                    <td class=\"col01\">" + processResult.getTest().getCode() + "</td>");
-                myHtml.append("                    <td class=\"col02\">" + processResult.getValue() + "</td>");
+                myHtml.append("                <tr>\n");
+                myHtml.append("                    <td class=\"col01\"><a href=\"" + processResult.getTest().getDescription() + "\">" + processResult.getTest().getLabel() + "</a></td>\n");
+                myHtml.append("                    <td class=\"col02");
+                if (processResult.getValue().toString().equalsIgnoreCase("FAILED")) {
+                    myHtml.append(" failed");
+                } else if (processResult.getValue().toString().equalsIgnoreCase("PASSED")) {
+                    myHtml.append(" passed");
+                } else if (processResult.getValue().toString().equalsIgnoreCase("NEED_MORE_INFO")) {
+                    myHtml.append(" nmi");
+                } else if (processResult.getValue().toString().equalsIgnoreCase("NOT_APPLICABLE")) {
+                    myHtml.append(" na");
+                }
+                myHtml.append("\">" + processResult.getValue() + "</td>\n");
                 formatTestResults(myHtml, processResult);
-                myHtml.append("                </tr>");
+                myHtml.append("                </tr>\n");
             }
-            myHtml.append("            </table>");
-            myHtml.append("        </div><!-- id=\"bd\" -->");
-            myHtml.append("");
-            myHtml.append("        <div id=\"ft\">");
-            myHtml.append("            &copy; <a href=\"http://www.Open-S.com/\">Open-S</a>");
-            myHtml.append("        </div>");
-            myHtml.append("    </div>");
-            myHtml.append("    </body>");
-            myHtml.append("</html>");
+            myHtml.append("            </table>\n");
+
+            // table of remaining points to check
+            myHtml.append("            <h2 id=\"work-todo\">Remaing points to check</h2>\n");
+            myHtml.append("            <p>... on <a href=\"" + resourceUrl + "\">" + resourceUrl + "</a></p>\n");
+            myHtml.append("            <table summary=\"Remaing points to check\" id=\"remaining-work\">\n");
+            myHtml.append("                <caption>Remaing points to check</caption>\n");
+            myHtml.append("                <tr>\n");
+            myHtml.append("                    <th scope=\"col\" class=\"col01\">Test</th>\n");
+            myHtml.append("                    <th scope=\"col\" class=\"col02\">Result</th>\n");
+            myHtml.append("                    <th scope=\"col\" class=\"col03\">Remark</th>\n");
+            myHtml.append("                </tr>\n");
+
+            for (ProcessResult processResult : audit.getNetResultList()) {
+                if (processResult.getValue().toString().equalsIgnoreCase("NEED_MORE_INFO")) {
+                    myHtml.append("                <tr>\n");
+                    myHtml.append("                    <td class=\"col01\"><a href=\"" + processResult.getTest().getDescription() + "\">" + processResult.getTest().getLabel() + "</a></td>\n");
+                    myHtml.append("                    <td class=\"col02 nmi\">" + processResult.getValue() + "</td>\n");
+                    formatTestResults(myHtml, processResult);
+                    myHtml.append("                </tr>\n");
+                }
+            }
+
+            myHtml.append("            </table>\n");
+            myHtml.append("\n");
+            myHtml.append("            <p id=\"score-formula\">\n");
+            myHtml.append("                Score formula : (Passed + <acronym title=\"Not Applicable\">NA</acronym>) / (Total tests - <acronym title=\"Need More Information\">NMI</acronym>)\n");
+            myHtml.append("            </p>\n");
+
+            myHtml.append("        </div><!-- id=\"bd\" -->\n");
+
+            myHtml.append(getResultPageFooter());
 
             out.println(myHtml);
         } finally {
@@ -241,144 +265,153 @@ public class AuditLauncher extends HttpServlet {
         }
     }
 
-    private String returnPageLoadingProblem(String resourceUrl){
+    private String returnPageLoadingProblem(String resourceUrl) {
         String dateFormat = "yyyy-MM-dd HH:mm:ss";
         Calendar calendar = GregorianCalendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
         String myAuditDate = sdf.format(calendar.getTime());
 
         StringBuilder myHtml = new StringBuilder();
-        myHtml.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
-        myHtml.append("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
-        myHtml.append("    <head>");
-        myHtml.append("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>");
-        myHtml.append("        <meta http-equiv=\"Author\" content=\"Open-S.com // Matthieu Faure\" lang=\"fr\" />");
-        myHtml.append("        <title>Audit result for " + resourceUrl + "</title>");
-        myHtml.append("        <link rel=\"stylesheet\" type=\"text/css\" href=\"http://yui.yahooapis.com/combo?2.8.0r4/build/reset-fonts/reset-fonts.css&amp;2.8.0r4/build/base/base-min.css\"/>");
-        myHtml.append("        <link rel=\"stylesheet\" type=\"text/css\" href=\"Css/tanaguru.css\" />");
-        myHtml.append("    </head>");
-        myHtml.append("    <body id=\"audit-result\">");
-        myHtml.append("    <div id=\"doc2\">");
-        myHtml.append("        <div id=\"hd\">");
-        myHtml.append("            <h1>Result of accessibility audit</h1>");
-        myHtml.append("        </div>");
-        myHtml.append("");
-        myHtml.append("        <div id=\"bd\">");
-        myHtml.append("            <h2>A problem occured while loading page content</h2>");
-        myHtml.append("");
+        myHtml.append(getResultPageHeader(resourceUrl));
+        myHtml.append("    <body id=\"audit-result\">\n");
+        myHtml.append("    <div id=\"doc2\">\n");
+        myHtml.append("        <div id=\"hd\">\n");
+        myHtml.append("            <h1>Result of accessibility audit</h1>\n");
+        myHtml.append("        </div>\n");
+        myHtml.append("\n");
+        myHtml.append("        <div id=\"bd\">\n");
+        myHtml.append("            <h2>A problem occured while loading page content</h2>\n");
+        myHtml.append("\n\n");
         // audit meta-data
-        myHtml.append("            <table summary=\"Audit meta-data\" id=\"result-meta\">");
-        myHtml.append("                <caption>Audit meta-data</caption>");
-        myHtml.append("                <tr>");
-        myHtml.append("                    <th id=\"meta-url\" scope=\"row\" class=\"col01\">URL:</th>");
-        myHtml.append("                    <td class=\"col02\"><a href=\"" + resourceUrl + "\">" + resourceUrl + "</a></td>");
-        myHtml.append("                </tr>");
-        myHtml.append("                <tr>");
-        myHtml.append("                    <th id=\"meta-date\" scope=\"row\" class=\"col01\">Date:</th>");
-        myHtml.append("                    <td class=\"col02\">" + myAuditDate + "</td>");
-        myHtml.append("                </tr>");
-        myHtml.append("            </table>");
-        myHtml.append("");
-        myHtml.append("        </div><!-- id=\"bd\" -->");
-        myHtml.append("");
-        myHtml.append("        <div id=\"ft\">");
-        myHtml.append("            &copy; <a href=\"http://www.Open-S.com/\">Open-S</a>");
-        myHtml.append("        </div>");
-        myHtml.append("    </div>");
-        myHtml.append("    </body>");
-        myHtml.append("</html>");
+        myHtml.append("            <table summary=\"Audit meta-data\" id=\"result-meta\">\n");
+        myHtml.append("                <caption>Audit meta-data</caption>\n");
+        myHtml.append("                <tr>\n");
+        myHtml.append("                    <th id=\"meta-url\" scope=\"row\" class=\"col01\">URL:</th>\n");
+        myHtml.append("                    <td class=\"col02\"><a href=\"" + resourceUrl + "\">" + resourceUrl + "</a></td>\n");
+        myHtml.append("                </tr>\n");
+        myHtml.append("                <tr>\n");
+        myHtml.append("                    <th id=\"meta-date\" scope=\"row\" class=\"col01\">Date:</th>\n");
+        myHtml.append("                    <td class=\"col02\">" + myAuditDate + "</td>\n");
+        myHtml.append("                </tr>\n");
+        myHtml.append("            </table>\n");
+        myHtml.append("\n\n");
+        myHtml.append("        </div><!-- id=\"bd\" -->\n");
+        myHtml.append(getResultPageFooter());
 
         return myHtml.toString();
     }
 
-    private String returnPageProcessingProblem(String resourceUrl){
+    private String returnPageProcessingProblem(String resourceUrl) {
         String dateFormat = "yyyy-MM-dd HH:mm:ss";
         Calendar calendar = GregorianCalendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
         String myAuditDate = sdf.format(calendar.getTime());
 
         StringBuilder myHtml = new StringBuilder();
-        myHtml.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
-        myHtml.append("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
-        myHtml.append("    <head>");
-        myHtml.append("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>");
-        myHtml.append("        <meta http-equiv=\"Author\" content=\"Open-S.com // Matthieu Faure\" lang=\"fr\" />");
-        myHtml.append("        <title>Audit result for " + resourceUrl + "</title>");
-        myHtml.append("        <link rel=\"stylesheet\" type=\"text/css\" href=\"http://yui.yahooapis.com/combo?2.8.0r4/build/reset-fonts/reset-fonts.css&amp;2.8.0r4/build/base/base-min.css\"/>");
-        myHtml.append("        <link rel=\"stylesheet\" type=\"text/css\" href=\"Css/tanaguru.css\" />");
-        myHtml.append("    </head>");
-        myHtml.append("    <body id=\"audit-result\">");
-        myHtml.append("    <div id=\"doc2\">");
-        myHtml.append("        <div id=\"hd\">");
-        myHtml.append("            <h1>Result of accessibility audit</h1>");
-        myHtml.append("        </div>");
-        myHtml.append("");
-        myHtml.append("        <div id=\"bd\">");
-        myHtml.append("            <h2>A problem occured while processing page</h2>");
-        myHtml.append("");
+
+        myHtml.append(getResultPageHeader(resourceUrl));
+        myHtml.append("    <body id=\"audit-result\">\n");
+        myHtml.append("    <div id=\"doc2\">\n");
+        myHtml.append("        <div id=\"hd\">\n");
+        myHtml.append("            <h1>Result of accessibility audit</h1>\n");
+        myHtml.append("        </div>\n");
+        myHtml.append("\n\n");
+        myHtml.append("        <div id=\"bd\">\n");
+        myHtml.append("            <h2>A problem occured while processing page</h2>\n");
+        myHtml.append("\n\n");
 
         // audit meta-data
-        myHtml.append("            <table summary=\"Audit meta-data\" id=\"result-meta\">");
-        myHtml.append("                <caption>Audit meta-data</caption>");
-        myHtml.append("                <tr>");
-        myHtml.append("                    <th id=\"meta-url\" scope=\"row\" class=\"col01\">URL:</th>");
-        myHtml.append("                    <td class=\"col02\"><a href=\"" + resourceUrl + "\">" + resourceUrl + "</a></td>");
-        myHtml.append("                </tr>");
-        myHtml.append("                <tr>");
-        myHtml.append("                    <th id=\"meta-date\" scope=\"row\" class=\"col01\">Date:</th>");
-        myHtml.append("                    <td class=\"col02\">" + myAuditDate + "</td>");
-        myHtml.append("                </tr>");
-        myHtml.append("            </table>");
-        myHtml.append("");
-        myHtml.append("        </div><!-- id=\"bd\" -->");
-        myHtml.append("");
-        myHtml.append("        <div id=\"ft\">");
-        myHtml.append("            &copy; <a href=\"http://www.Open-S.com/\">Open-S</a>");
-        myHtml.append("        </div>");
-        myHtml.append("    </div>");
-        myHtml.append("    </body>");
-        myHtml.append("</html>");
+        myHtml.append("            <table summary=\"Audit meta-data\" id=\"result-meta\">\n");
+        myHtml.append("                <caption>Audit meta-data</caption>\n");
+        myHtml.append("                <tr>\n");
+        myHtml.append("                    <th id=\"meta-url\" scope=\"row\" class=\"col01\">URL:</th>\n");
+        myHtml.append("                    <td class=\"col02\"><a href=\"" + resourceUrl + "\">" + resourceUrl + "</a></td>\n");
+        myHtml.append("                </tr>\n");
+        myHtml.append("                <tr>\n");
+        myHtml.append("                    <th id=\"meta-date\" scope=\"row\" class=\"col01\">Date:</th>\n");
+        myHtml.append("                    <td class=\"col02\">" + myAuditDate + "</td>\n");
+        myHtml.append("                </tr>\n");
+        myHtml.append("            </table>\n");
+        myHtml.append("\n\n");
+        myHtml.append("        </div><!-- id=\"bd\" -->\n");
+        myHtml.append(getResultPageFooter());
 
         return myHtml.toString();
     }
 
-    private void formatTestResults(StringBuilder htmlResponse, ProcessResult processResult){
-        htmlResponse.append("                    <td class=\"col03\">");
-        Map <String, List<String>> remarks = new HashMap<String, List<String>>();
+    private StringBuilder getResultPageHeader(String resourceUrl) {
+        StringBuilder myHtml = new StringBuilder();
+        myHtml.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n");
+        myHtml.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en\">\n");
+        myHtml.append("    <head>\n");
+        myHtml.append("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>\n");
+        myHtml.append("        <meta http-equiv=\"Author\" content=\"Open-S.com // Matthieu Faure\" lang=\"fr\" />\n");
+        myHtml.append("        <title>Audit result for " + resourceUrl + "</title>\n");
+        myHtml.append("        <link rel=\"stylesheet\" type=\"text/css\" href=\"http://yui.yahooapis.com/combo?2.8.0r4/build/reset-fonts/reset-fonts.css&amp;2.8.0r4/build/base/base-min.css\"/>\n");
+        myHtml.append("        <link rel=\"stylesheet\" type=\"text/css\" href=\"Css/tanaguru.css\" />\n");
+        myHtml.append("    </head>\n");
+        myHtml.append("\n");
+        return myHtml;
+    }
+
+    private StringBuilder getResultPageFooter() {
+        StringBuilder myHtml = new StringBuilder();
+        myHtml.append("\n");
+        myHtml.append("        <div id=\"ft\">\n");
+        myHtml.append("            &copy; <a href=\"http://www.Open-S.com/\">Open-S</a>\n");
+        myHtml.append("        </div>\n");
+        myHtml.append("    </div>\n");
+        myHtml.append("    </body>\n");
+        myHtml.append("</html>\n");
+        return myHtml;
+    }
+
+    private StringBuilder getResultPageWorkTodo() {
+        StringBuilder myHtml = new StringBuilder();
+
+        return myHtml;
+    }
+
+    private void formatTestResults(StringBuilder htmlResponse, ProcessResult processResult) {
+        htmlResponse.append("                    <td class=\"col03\">\n");
+        Map<String, List<String>> remarks = new HashMap<String, List<String>>();
         for (ProcessRemark remark : processResult.getRemarkList()) {
             if (!remarks.containsKey(remark.getMessageCode())) {
                 List<String> remarksInfos = new ArrayList<String>();
                 if (remark instanceof SourceCodeRemark) {
                     remarksInfos.add(
-                        "element " + ((SourceCodeRemark)remark).getTarget().toLowerCase() + " " +
-                        "at line " + ((SourceCodeRemark)remark).getLineNumber() + " " + 
-                        "and character position " + ((SourceCodeRemark)remark).getCharacterPosition());
+                            "element <code>" + ((SourceCodeRemark) remark).getTarget().toLowerCase() + "</code> "
+                            + "at line " + ((SourceCodeRemark) remark).getLineNumber() + " "
+                            + "and character position " + ((SourceCodeRemark) remark).getCharacterPosition());
                 } else if (remark instanceof ProcessRemark) {
                     remarksInfos.add(
-                        " element " + remark.getSelectedElement());
+                            " element <code>" + remark.getSelectedElement() + "</code>");
                 }
                 remarks.put(remark.getMessageCode(), remarksInfos);
             } else {
                 if (remark instanceof SourceCodeRemark) {
                     remarks.get(remark.getMessageCode()).add(
-                        "element " + ((SourceCodeRemark)remark).getTarget().toLowerCase() + " " +
-                        "at line " + ((SourceCodeRemark)remark).getLineNumber() + " " +
-                        "and character position " + ((SourceCodeRemark)remark).getCharacterPosition());
+                            "element <code>" + ((SourceCodeRemark) remark).getTarget().toLowerCase() + "</code> "
+                            + "at line " + ((SourceCodeRemark) remark).getLineNumber() + " "
+                            + "and character position " + ((SourceCodeRemark) remark).getCharacterPosition());
                 } else if (remark instanceof ProcessRemark) {
                     remarks.get(remark.getMessageCode()).add(
-                        "element " + remark.getSelectedElement());
+                            "element <code>" + remark.getSelectedElement() + "</code>");
                 }
             }
         }
+
         for (String messageCode : remarks.keySet()) {
-            htmlResponse.append("                         <p>");
+            htmlResponse.append("<p class=\"process-remarks\">\n");
+            htmlResponse.append("<strong>" + messageCode + "</strong>:</p>\n");
+            htmlResponse.append("<ul class=\"process-remarks\">\n");
             for (String messageInfo : remarks.get(messageCode)) {
-                htmlResponse.append(messageCode + ":" + messageInfo + "<br/>");
+                htmlResponse.append("<li>" + messageInfo + "</li>\n");
             }
-            htmlResponse.append("                         </p>");
+            htmlResponse.append("</ul>\n");
         }
 
-        htmlResponse.append("                    </td>");
+        htmlResponse.append("                    </td>\n");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
