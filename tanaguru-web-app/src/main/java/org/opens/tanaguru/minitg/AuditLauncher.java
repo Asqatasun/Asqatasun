@@ -229,27 +229,32 @@ public class AuditLauncher extends HttpServlet {
             myHtml.append("            </table>\n");
 
             // table of remaining points to check
-            myHtml.append("            <h2 id=\"work-todo\">Remaing points to check</h2>\n");
-            myHtml.append("            <p>... on <a href=\"" + resourceUrl + "\">" + resourceUrl + "</a></p>\n");
-            myHtml.append("            <table summary=\"Remaing points to check\" id=\"remaining-work\">\n");
-            myHtml.append("                <caption>Remaing points to check</caption>\n");
-            myHtml.append("                <tr>\n");
-            myHtml.append("                    <th scope=\"col\" class=\"col01\">Test</th>\n");
-            myHtml.append("                    <th scope=\"col\" class=\"col02\">Result</th>\n");
-            myHtml.append("                    <th scope=\"col\" class=\"col03\">Remark</th>\n");
-            myHtml.append("                </tr>\n");
+            myHtml.append("            <h2 id=\"work-todo\">Remaining points to check</h2>\n");
+            if (nmiCount == 0) {
+                myHtml.append("<p>Nothing more to check.</p>");
+                myHtml.append("<p>Cool, you can go fishing ! :)</p>");
+            } else {
+                myHtml.append("            <p>... on <a href=\"" + resourceUrl + "\">" + resourceUrl + "</a></p>\n");
+                myHtml.append("            <table summary=\"Remaing points to check\" id=\"remaining-work\">\n");
+                myHtml.append("                <caption>Remaing points to check</caption>\n");
+                myHtml.append("                <tr>\n");
+                myHtml.append("                    <th scope=\"col\" class=\"col01\">Test</th>\n");
+                myHtml.append("                    <th scope=\"col\" class=\"col02\">Result</th>\n");
+                myHtml.append("                    <th scope=\"col\" class=\"col03\">Remark</th>\n");
+                myHtml.append("                </tr>\n");
 
-            for (ProcessResult processResult : audit.getNetResultList()) {
-                if (processResult.getValue().toString().equalsIgnoreCase("NEED_MORE_INFO")) {
-                    myHtml.append("                <tr>\n");
-                    myHtml.append("                    <td class=\"col01\"><a href=\"" + processResult.getTest().getDescription() + "\">" + processResult.getTest().getLabel() + "</a></td>\n");
-                    myHtml.append("                    <td class=\"col02 nmi\">" + processResult.getValue() + "</td>\n");
-                    formatTestResults(myHtml, processResult);
-                    myHtml.append("                </tr>\n");
+                for (ProcessResult processResult : audit.getNetResultList()) {
+                    if (processResult.getValue().toString().equalsIgnoreCase("NEED_MORE_INFO")) {
+                        myHtml.append("                <tr>\n");
+                        myHtml.append("                    <td class=\"col01\"><a href=\"" + processResult.getTest().getDescription() + "\">" + processResult.getTest().getLabel() + "</a></td>\n");
+                        myHtml.append("                    <td class=\"col02 nmi\">" + processResult.getValue() + "</td>\n");
+                        formatTestResults(myHtml, processResult);
+                        myHtml.append("                </tr>\n");
+                    }
                 }
-            }
 
-            myHtml.append("            </table>\n");
+                myHtml.append("            </table>\n");
+            }
             myHtml.append("\n");
             myHtml.append("            <p id=\"score-formula\">\n");
             myHtml.append("                Score formula : (Passed + <acronym title=\"Not Applicable\">NA</acronym>) / (Total tests - <acronym title=\"Need More Information\">NMI</acronym>)\n");
@@ -366,12 +371,6 @@ public class AuditLauncher extends HttpServlet {
         return myHtml;
     }
 
-    private StringBuilder getResultPageWorkTodo() {
-        StringBuilder myHtml = new StringBuilder();
-
-        return myHtml;
-    }
-
     private void formatTestResults(StringBuilder htmlResponse, ProcessResult processResult) {
         htmlResponse.append("                    <td class=\"col03\">\n");
         Map<String, List<String>> remarks = new HashMap<String, List<String>>();
@@ -383,9 +382,6 @@ public class AuditLauncher extends HttpServlet {
                             "element <code>" + ((SourceCodeRemark) remark).getTarget().toLowerCase() + "</code> "
                             + "at line " + ((SourceCodeRemark) remark).getLineNumber() + " "
                             + "and character position " + ((SourceCodeRemark) remark).getCharacterPosition());
-                } else if (remark instanceof ProcessRemark) {
-                    remarksInfos.add(
-                            " element <code>" + remark.getSelectedElement() + "</code>");
                 }
                 remarks.put(remark.getMessageCode(), remarksInfos);
             } else {
@@ -394,9 +390,6 @@ public class AuditLauncher extends HttpServlet {
                             "element <code>" + ((SourceCodeRemark) remark).getTarget().toLowerCase() + "</code> "
                             + "at line " + ((SourceCodeRemark) remark).getLineNumber() + " "
                             + "and character position " + ((SourceCodeRemark) remark).getCharacterPosition());
-                } else if (remark instanceof ProcessRemark) {
-                    remarks.get(remark.getMessageCode()).add(
-                            "element <code>" + remark.getSelectedElement() + "</code>");
                 }
             }
         }
@@ -404,11 +397,13 @@ public class AuditLauncher extends HttpServlet {
         for (String messageCode : remarks.keySet()) {
             htmlResponse.append("<p class=\"process-remarks\">\n");
             htmlResponse.append("<strong>" + messageCode + "</strong>:</p>\n");
-            htmlResponse.append("<ul class=\"process-remarks\">\n");
-            for (String messageInfo : remarks.get(messageCode)) {
-                htmlResponse.append("<li>" + messageInfo + "</li>\n");
+            if (!remarks.get(messageCode).isEmpty()) {
+                htmlResponse.append("<ul class=\"process-remarks\">\n");
+                for (String messageInfo : remarks.get(messageCode)) {
+                    htmlResponse.append("<li>" + messageInfo + "</li>\n");
+                }
+                htmlResponse.append("</ul>\n");
             }
-            htmlResponse.append("</ul>\n");
         }
 
         htmlResponse.append("                    </td>\n");
