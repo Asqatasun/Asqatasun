@@ -294,7 +294,8 @@ INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `L
 (13, 'NotPertinentAltAttribute', NULL, 'The alt attribute of the tag is not pertinent'),
 (14, 'HeaderTagNotHierarchicallyWelldefined', NULL, 'The hierarchy between the title (h tags) of the page is not pertinent'),
 (15, 'TitleTagMissing', NULL, 'Title tag is missing'),
-(16, 'H1TagMissing', NULL, 'H1 tag is missing');
+(16, 'H1TagMissing', NULL, 'H1 tag is missing'),
+(17, 'LinkContentMissing', NULL, 'Link content is missing');
 
 --
 -- Dumping data for table `TEST`
@@ -305,14 +306,15 @@ INSERT INTO `TEST` (`Id_Test`, `Cd_Test`, `Description`, `Label`, `Rank`, `Rule_
 (2, 'Aw20-01012', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#images', '1.1.2', 2010102, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule01012', NULL, NULL, 1, NULL, 1),
 (3, 'Aw20-01021', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#images', '1.2.1', 2010201, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule01021', NULL, NULL, 1, NULL, 1),
 (4, 'Aw20-01031', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#images', '1.3.1', 2010301, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule01031', NULL, NULL, 1, NULL, 1),
-(5, 'Aw20-08051', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#elements', '8.5.1', 2080501, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule08051', NULL, NULL, 1, NULL, 1),
-(6, 'Aw20-08061', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#elements', '8.6.1', 2080601, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule08061', NULL, NULL, 1, NULL, 1),
-(7, 'Aw20-09011', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#structure', '9.1.1', 2090101, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule09011', NULL, NULL, 1, NULL, 1),
-(8, 'Aw20-09012', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#structure', '9.1.2', 2090102, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule09012', NULL, NULL, 1, NULL, 1),
-(9, 'Aw20-10011', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#presentation', '10.1.1', 2100101, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule10011', NULL, NULL, 1, NULL, 1),
-(11, 'Aw20-02011', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#cadres', '2.1.1', 2020101, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule02011', NULL, NULL, 1, NULL, 1),
-(12, 'Aw20-02012', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#cadres', '2.1.2', 2020102, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule02012', NULL, NULL, 1, NULL, 1),
-(10, 'Aw20-10041', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#presentation', '10.4.1', 2100401, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule10041', NULL, NULL, 1, NULL, 1);
+(5, 'Aw20-02011', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#cadres', '2.1.1', 2020101, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule02011', NULL, NULL, 1, NULL, 1),
+(6, 'Aw20-02012', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#cadres', '2.1.2', 2020102, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule02012', NULL, NULL, 1, NULL, 1),
+(7, 'Aw20-06071', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#liens', '6.7.1', 2060701, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule06071', NULL, NULL, 1, NULL, 1),
+(8, 'Aw20-08051', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#elements', '8.5.1', 2080501, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule08051', NULL, NULL, 1, NULL, 1),
+(9, 'Aw20-08061', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#elements', '8.6.1', 2080601, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule08061', NULL, NULL, 1, NULL, 1),
+(10, 'Aw20-09011', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#structure', '9.1.1', 2090101, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule09011', NULL, NULL, 1, NULL, 1),
+(11, 'Aw20-09012', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#structure', '9.1.2', 2090102, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule09012', NULL, NULL, 1, NULL, 1),
+(12, 'Aw20-10011', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#presentation', '10.1.1', 2100101, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule10011', NULL, NULL, 1, NULL, 1),
+(13, 'Aw20-10041', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#presentation', '10.4.1', 2100401, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule10041', NULL, NULL, 1, NULL, 1);
 
 
 --
