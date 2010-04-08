@@ -295,7 +295,8 @@ INSERT INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `L
 (14, 'HeaderTagNotHierarchicallyWelldefined', NULL, 'The hierarchy between the title (h tags) of the page is not pertinent'),
 (15, 'TitleTagMissing', NULL, 'Title tag is missing'),
 (16, 'H1TagMissing', NULL, 'H1 tag is missing'),
-(17, 'LinkContentMissing', NULL, 'Link content is missing');
+(17, 'LinkContentMissing', NULL, 'Link content is missing'),
+(18, 'TitleTagNotRelevant', NULL, 'Title tag is not relevant');
 
 --
 -- Dumping data for table `TEST`

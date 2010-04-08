@@ -4,6 +4,9 @@
  */
 package org.opens.tanaguru.rule.accessiweb20;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Nomenclature;
@@ -33,7 +36,7 @@ public class Aw20Rule08061 extends AbstractPageRuleImplementation {
      */
     @Override
     protected ProcessResult processImpl(SSPHandler sspHandler) {
-
+        List<ProcessRemark> processRemarkList = new ArrayList<ProcessRemark>();
         sspHandler.beginSelection().selectDocumentNodes(HEAD_TAG).
                 selectChildNodes(TTTLE_TAG);
 
@@ -43,11 +46,15 @@ public class Aw20Rule08061 extends AbstractPageRuleImplementation {
         TestSolution testSolution =
                 sspHandler.checkTextContentValue(unexplicitePageTitle.getValueList(), null);
 
+        if (testSolution == TestSolution.FAILED) {
+            processRemarkList.add(processRemarkFactory.create(TestSolution.FAILED, "TitleTagNotRevelevant"));
+        }
+
         ProcessResult processResult = definiteResultFactory.create(
                 test,
                 sspHandler.getPage(),
                 testSolution,
-                null);
+                processRemarkList);
 
         return processResult;
     }
