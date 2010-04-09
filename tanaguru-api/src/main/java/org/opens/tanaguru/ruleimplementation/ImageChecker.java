@@ -36,7 +36,8 @@ public class ImageChecker {
 
     public boolean isDecorativeImage(SSPHandler sspHandler, String imgUrl)  {
         Logger.getLogger(ImageChecker.class.getName()).
-                    debug("Testing if image " + uRLIdentifier.resolve(imgUrl) + " is decorative");
+                    info("Testing if image " + uRLIdentifier.resolve(imgUrl) +
+                    " is decorative");
         long beginDate = System.currentTimeMillis();
         boolean isMonoColorImg = true;
         boolean isMonoDimension = false;
@@ -85,7 +86,8 @@ public class ImageChecker {
         }
         Long processDuration = new Long(System.currentTimeMillis() - beginDate);
         Logger.getLogger(ImageChecker.class.getName()).
-                    debug("image tested in " + processDuration.toString() + " ms");
+                    info("image tested in " + processDuration.toString() +
+                    " ms");
         return isDecorativeImg;
     }
 
