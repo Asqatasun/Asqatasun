@@ -27,9 +27,9 @@ public class Aw20Rule01031 extends AbstractPageRuleImplementation {
     public static final String ALT_ATTRIBUTE = "alt";
     public static final String TITLE_ATTRIBUTE = "title";
     public static final String XPATH_EXPR1 =
-            "//IMG[@alt and not(ancestor::A)]";
+            "//IMG[@alt and not(ancestor::A) and @src]";
     public static final String XPATH_EXPR2 =
-            "//IMG[@alt and @longdesc and not(ancestor::A)]";
+            "//IMG[@alt and @longdesc and not(ancestor::A) and @src]";
 
     public Aw20Rule01031() {
         super();
