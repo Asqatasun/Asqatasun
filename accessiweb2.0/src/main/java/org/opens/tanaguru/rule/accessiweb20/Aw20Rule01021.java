@@ -28,11 +28,11 @@ public class Aw20Rule01021 extends AbstractPageRuleImplementation {
     public static final String SUSPECTED_IMG_MSG =
             "SuspectedDecorativeImageWithNotEmptyAltAttribute";
     public static final String XPATH_EXPR1 =
-    "//IMG[@alt and @longdesc and not(ancestor::A)]";
+        "//IMG[@alt and @longdesc and not(ancestor::A) and @src]";
     public static final String XPATH_EXPR2 =
-            "//IMG[@alt and not(ancestor::A)]";
+            "//IMG[@alt and not(ancestor::A) and @src]";
     public static final String XPATH_EXPR3 =
-            "//IMG[@alt and not(ancestor::A) and not(@longdesc)]";
+            "//IMG[@alt and not(ancestor::A) and not(@longdesc) and @src]";
 
     public Aw20Rule01021() {
         super();
@@ -77,16 +77,13 @@ public class Aw20Rule01021 extends AbstractPageRuleImplementation {
         List<Node> decorativeImgWithAltAttributeNodeList = new ArrayList<Node>();
 
         for (Node imgNode : imgWithAltAttributeNodeList) {
-            if (imgNode.getAttributes().
-                    getNamedItem(SRC_ATTRIBUTE) != null) {
-                String imgSrc = imgNode.getAttributes().
-                    getNamedItem(SRC_ATTRIBUTE).getTextContent();
+            String imgSrc = imgNode.getAttributes().
+                getNamedItem(SRC_ATTRIBUTE).getTextContent();
 
-                // for each element of the collection, we test if this image is decorative
-                if (ImageChecker.getInstance().
-                        isDecorativeImage(sspHandler, imgSrc)) {
-                    decorativeImgWithAltAttributeNodeList.add(imgNode);
-                }
+            // for each element of the collection, we test if this image is decorative
+            if (ImageChecker.getInstance().
+                    isDecorativeImage(sspHandler, imgSrc)) {
+                decorativeImgWithAltAttributeNodeList.add(imgNode);
             }
         }
 
