@@ -30,7 +30,8 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
  */
 public abstract class AbstractRuleImplementationTestCase extends TestCase {
 
-    private static final String APPLICATION_CONTEXT_FILE_PATH = "file:///etc/tanaguru/context/test/application-context.xml";
+    private String applicationContextFilePath =
+            "../tanaguru-testing-tools/src/main/resources/application-context.xml";
     private BeanFactory springBeanFactory;
     private TestFactory testFactory;
     private ContentLoaderService contentLoaderService;
@@ -44,7 +45,7 @@ public abstract class AbstractRuleImplementationTestCase extends TestCase {
     protected WebResourceFactory webResourceFactory;
     protected String ruleImplementationClassName;
     protected Map<String, WebResource> webResourceMap = new HashMap<String, WebResource>();
-    protected static final String TESTCASES_FILES_PATH = "file:///home/mfaure/Documents/open-s/Projets/NetBeans/TanaguruEngine/tanaguru/Trunk/tanaguru-testing-tools/resources/testcases/";
+    protected String testcasesFilePath = "../tanaguru-testing-tools/resources/testcases/";
 
     public AbstractRuleImplementationTestCase(String testName) {
         super(testName);
@@ -55,7 +56,8 @@ public abstract class AbstractRuleImplementationTestCase extends TestCase {
     }
 
     private void initialize() {
-        springBeanFactory = new FileSystemXmlApplicationContext(APPLICATION_CONTEXT_FILE_PATH);
+        initializePath();
+        springBeanFactory = new FileSystemXmlApplicationContext(applicationContextFilePath);
         webResourceFactory = (WebResourceFactory) springBeanFactory.getBean("webResourceFactory");
 
         testFactory = (TestFactory) springBeanFactory.getBean("testFactory");
@@ -66,8 +68,7 @@ public abstract class AbstractRuleImplementationTestCase extends TestCase {
         processorService = (ProcessorService) springBeanFactory.getBean("processorService");
 
         consolidatorService = (ConsolidatorService) springBeanFactory.getBean("consolidatorService");
-//        PropertyPlaceholderConfigurer myPlaceHolder =
-//                (PropertyPlaceholderConfigurer) springBeanFactory.getBean("consolidatorService");
+
     }
 
     /**
@@ -131,5 +132,12 @@ public abstract class AbstractRuleImplementationTestCase extends TestCase {
             }
         }
         return null;
+    }
+
+    private void initializePath(){
+        testcasesFilePath = 
+                "file://"+System.getenv("PWD")+"/"+testcasesFilePath;
+        applicationContextFilePath =
+                "file://"+System.getenv("PWD")+"/"+applicationContextFilePath;
     }
 }

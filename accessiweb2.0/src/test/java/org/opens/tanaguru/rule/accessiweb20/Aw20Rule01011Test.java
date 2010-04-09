@@ -25,24 +25,25 @@ public class Aw20Rule01011Test extends AbstractRuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
+        System.out.println("testcasesFilePath + AW22/AW20.Test.01.01.01-1Passed-01.html) "  + testcasesFilePath + "AW22/AW20.Test.01.01.01-1Passed-01.html");
         webResourceMap.put("AW20.Test.01.01.01-1Passed-01",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.01.01.01-1Passed-01.html"));
+                testcasesFilePath + "AW22/AW20.Test.01.01.01-1Passed-01.html"));
         webResourceMap.put("AW20.Test.01.01.01-1Passed-02",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.01.01.01-1Passed-02.html"));
+                testcasesFilePath + "AW22/AW20.Test.01.01.01-1Passed-02.html"));
         webResourceMap.put("AW20.Test.01.01.01-2Failed-01",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.01.01.01-2Failed-01.html"));
+                testcasesFilePath + "AW22/AW20.Test.01.01.01-2Failed-01.html"));
         webResourceMap.put("AW20.Test.01.01.01-2Failed-02",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.01.01.01-2Failed-02.html"));
+                testcasesFilePath + "AW22/AW20.Test.01.01.01-2Failed-02.html"));
         webResourceMap.put("AW20.Test.01.01.01-4NA-01",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.01.01.01-4NA-01.html"));
+                testcasesFilePath + "AW22/AW20.Test.01.01.01-4NA-01.html"));
         webResourceMap.put("AW20.Test.01.01.01-4NA-02",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.01.01.01-4NA-02.html"));
+                testcasesFilePath + "AW22/AW20.Test.01.01.01-4NA-02.html"));
     }
 
     @Override

@@ -26,98 +26,98 @@ public class Aw20Rule10041Test extends AbstractRuleImplementationTestCase {
     protected void setUpWebResourceMap() {
         webResourceMap.put("AW20.Test.10.04.01-4NA-01",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-4NA-01.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-4NA-01.html"));
         
         webResourceMap.put("AW20.Test.10.04.01-1Passed-01",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-1Passed-01.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-1Passed-01.html"));
         webResourceMap.put("AW20.Test.10.04.01-1Passed-02",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-1Passed-02.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-1Passed-02.html"));
 
         webResourceMap.put("AW20.Test.10.04.01-2Failed-01_1",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-01_1.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-01_1.html"));
         webResourceMap.put("AW20.Test.10.04.01-2Failed-01_2",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-01_2.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-01_2.html"));
         webResourceMap.put("AW20.Test.10.04.01-2Failed-01_3",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-01_3.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-01_3.html"));
         webResourceMap.put("AW20.Test.10.04.01-2Failed-01_4",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-01_4.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-01_4.html"));
         webResourceMap.put("AW20.Test.10.04.01-2Failed-01_5",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-01_5.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-01_5.html"));
 
         webResourceMap.put("AW20.Test.10.04.01-2Failed-02_1",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-02_1.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-02_1.html"));
         webResourceMap.put("AW20.Test.10.04.01-2Failed-02_2",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-02_2.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-02_2.html"));
         webResourceMap.put("AW20.Test.10.04.01-2Failed-02_3",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-02_3.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-02_3.html"));
         webResourceMap.put("AW20.Test.10.04.01-2Failed-02_4",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-02_4.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-02_4.html"));
         webResourceMap.put("AW20.Test.10.04.01-2Failed-02_5",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-02_5.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-02_5.html"));
 
         webResourceMap.put("AW20.Test.10.04.01-2Failed-03_1",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-03_1.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-03_1.html"));
         webResourceMap.put("AW20.Test.10.04.01-2Failed-03_2",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-03_2.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-03_2.html"));
         webResourceMap.put("AW20.Test.10.04.01-2Failed-03_3",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-03_3.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-03_3.html"));
         webResourceMap.put("AW20.Test.10.04.01-2Failed-03_4",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-03_4.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-03_4.html"));
         webResourceMap.put("AW20.Test.10.04.01-2Failed-03_5",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-03_5.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-03_5.html"));
 
         webResourceMap.put("AW20.Test.10.04.01-2Failed-04_1",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-04_1.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-04_1.html"));
         webResourceMap.put("AW20.Test.10.04.01-2Failed-04_2",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-04_2.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-04_2.html"));
         webResourceMap.put("AW20.Test.10.04.01-2Failed-04_3",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-04_3.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-04_3.html"));
         webResourceMap.put("AW20.Test.10.04.01-2Failed-04_4",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-04_4.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-04_4.html"));
         webResourceMap.put("AW20.Test.10.04.01-2Failed-04_5",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-04_5.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-04_5.html"));
 
         webResourceMap.put("AW20.Test.10.04.01-2Failed-05_1",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-05_1.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-05_1.html"));
         webResourceMap.put("AW20.Test.10.04.01-2Failed-05_2",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-05_2.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-05_2.html"));
         webResourceMap.put("AW20.Test.10.04.01-2Failed-05_3",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-05_3.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-05_3.html"));
         webResourceMap.put("AW20.Test.10.04.01-2Failed-05_4",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-05_4.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-05_4.html"));
         webResourceMap.put("AW20.Test.10.04.01-2Failed-05_5",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-2Failed-05_5.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-2Failed-05_5.html"));
 
         webResourceMap.put("AW20.Test.10.04.01-3NMI-01",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.10.04.01-3NMI-01.html"));
+                testcasesFilePath + "AW22/AW20.Test.10.04.01-3NMI-01.html"));
     }
 
     @Override

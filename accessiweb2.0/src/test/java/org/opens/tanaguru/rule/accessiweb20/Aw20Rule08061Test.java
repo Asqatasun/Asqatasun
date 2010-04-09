@@ -27,23 +27,23 @@ public class Aw20Rule08061Test extends AbstractRuleImplementationTestCase {
     protected void setUpWebResourceMap() {
         webResourceMap.put("AW20.Test.08.06.01-2Failed-01",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.08.06.01-2Failed-01.html"));
+                testcasesFilePath + "AW22/AW20.Test.08.06.01-2Failed-01.html"));
 
         webResourceMap.put("AW20.Test.08.06.01-2Failed-02",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.08.06.01-2Failed-02.html"));
+                testcasesFilePath + "AW22/AW20.Test.08.06.01-2Failed-02.html"));
 
         webResourceMap.put("AW20.Test.08.06.01-2Failed-03",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.08.06.01-2Failed-03.html"));
+                testcasesFilePath + "AW22/AW20.Test.08.06.01-2Failed-03.html"));
 
         webResourceMap.put("AW20.Test.08.06.01-3NMI-01",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.08.06.01-3NMI-01.html"));
+                testcasesFilePath + "AW22/AW20.Test.08.06.01-3NMI-01.html"));
 
         webResourceMap.put("AW20.Test.08.06.01-4NA-01",
                 webResourceFactory.createPage(
-                TESTCASES_FILES_PATH + "AW22/AW20.Test.08.06.01-4NA-01.html"));
+                testcasesFilePath + "AW22/AW20.Test.08.06.01-4NA-01.html"));
     }
 
     @Override
