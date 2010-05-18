@@ -4,6 +4,7 @@
  */
 package org.opens.tanaguru.rule.accessiweb20;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import org.w3c.dom.Node;
@@ -75,15 +76,18 @@ public class Aw20Rule01021 extends AbstractPageRuleImplementation {
                 getSelectedElementList();
 
         List<Node> decorativeImgWithAltAttributeNodeList = new ArrayList<Node>();
-
+        BufferedImage image = null;
         for (Node imgNode : imgWithAltAttributeNodeList) {
             String imgSrc = imgNode.getAttributes().
                 getNamedItem(SRC_ATTRIBUTE).getTextContent();
 
             // for each element of the collection, we test if this image is decorative
-            if (ImageChecker.getInstance().
-                    isDecorativeImage(sspHandler, imgSrc)) {
-                decorativeImgWithAltAttributeNodeList.add(imgNode);
+            image = sspHandler.getImageFromURL(imgSrc);
+            if (image != null ) {
+                if (ImageChecker.getInstance().
+                        isDecorativeImage(image)) {
+                    decorativeImgWithAltAttributeNodeList.add(imgNode);
+                }
             }
         }
 
