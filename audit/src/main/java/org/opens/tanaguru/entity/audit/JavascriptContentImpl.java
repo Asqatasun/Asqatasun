@@ -32,4 +32,9 @@ public class JavascriptContentImpl extends RelatedTextContentImpl implements
             SSP ssp, String sourceCode) {
         super(dateOfLoading, uri, ssp, sourceCode);
     }
+
+    public JavascriptContentImpl(Date dateOfLoading, String uri,
+            SSP ssp, String sourceCode, int httpStatusCode) {
+        super(dateOfLoading, uri, ssp, sourceCode, httpStatusCode);
+    }
 }

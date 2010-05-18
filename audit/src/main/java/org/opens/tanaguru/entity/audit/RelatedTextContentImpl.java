@@ -11,7 +11,10 @@ public abstract class RelatedTextContentImpl extends RelatedContentImpl implemen
         TextContent, RelatedContent, Serializable {
 
     @Column(name = "Source", length = 400000)
-    protected String source;
+    protected String source = null;
+
+    @Column(name = "Adapted_Content", length = 400000)
+    protected String adaptedContent = null;
 
     public RelatedTextContentImpl() {
         super();
@@ -30,6 +33,11 @@ public abstract class RelatedTextContentImpl extends RelatedContentImpl implemen
         this.source = source;
     }
 
+    public RelatedTextContentImpl(Date dateOfLoading, String uri, SSP ssp, String source, int httpStatusCode) {
+        super(dateOfLoading, uri, ssp, httpStatusCode);
+        this.source = source;
+    }
+
     public String getSource() {
         return source;
     }
@@ -37,4 +45,13 @@ public abstract class RelatedTextContentImpl extends RelatedContentImpl implemen
     public void setSource(String source) {
         this.source = source;
     }
+
+    public String getAdaptedContent() {
+        return adaptedContent;
+    }
+
+    public void setAdaptedContent(String adaptedContent) {
+        this.adaptedContent = adaptedContent;
+    }
+
 }

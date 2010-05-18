@@ -37,6 +37,8 @@ public abstract class ContentImpl implements Content, Serializable {
     protected Long id;
     @Column(name = "Uri", nullable = false)
     protected String uri;
+    @Column(name = "Http_Status_Code", nullable = false)
+    protected int httpStatusCode;
 
     public ContentImpl() {
         super();
@@ -46,6 +48,13 @@ public abstract class ContentImpl implements Content, Serializable {
         super();
         this.dateOfLoading = dateOfLoading;
         this.uri = uri;
+    }
+
+    public ContentImpl(Date dateOfLoading, String uri, int httpStatusCode) {
+        super();
+        this.dateOfLoading = dateOfLoading;
+        this.uri = uri;
+        this.httpStatusCode = httpStatusCode;
     }
 
     @XmlTransient
@@ -65,6 +74,10 @@ public abstract class ContentImpl implements Content, Serializable {
         return uri;
     }
 
+    public int getHttpStatusCode() {
+        return httpStatusCode;
+    }
+
     public void setAudit(Audit audit) {
         this.audit = (AuditImpl) audit;
     }
@@ -80,4 +93,9 @@ public abstract class ContentImpl implements Content, Serializable {
     public void setURI(String uri) {
         this.uri = uri;
     }
+
+    public void setHttpStatusCode(int httpStatusCode) {
+        this.httpStatusCode = httpStatusCode;
+    }
+
 }

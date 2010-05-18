@@ -31,4 +31,9 @@ public class StylesheetContentImpl extends RelatedTextContentImpl implements
             String sourceCode) {
         super(dateOfLoading, uri, ssp, sourceCode);
     }
+
+    public StylesheetContentImpl(Date dateOfLoading, String uri, SSP ssp,
+            String sourceCode, int httpStatusCode) {
+        super(dateOfLoading, uri, ssp, sourceCode, httpStatusCode);
+    }
 }
