@@ -1,0 +1,13 @@
+El-Pais;http://www.elpais.com/global/
+Que;http://www.que.es/
+El-Correo;http://www.elcorreo.com/
+Diario-vasco;http://www.diariovasco.com/
+El-Mundo;http://www.elmundo.es/
+El-Periodico;http://www.elperiodico.com/
+La-Vanguardia;http://www.lavanguardia.es/
+Estrella-Digital;http://www.estrelladigital.es/ED/diario/portada.asp
+La-Razon;http://www.larazon.es/
+El-Mundo-Deportivo;http://www.elmundodeportivo.es/
+Maxi-Futbol;http://www.maxifutbol.com/
+Deia;http://www.deia.com/
+Gara;http://www.gara.net/
