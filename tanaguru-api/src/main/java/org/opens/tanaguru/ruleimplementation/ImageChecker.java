@@ -34,6 +34,7 @@ public class ImageChecker {
         return imageChecker;
     }
 
+    @Deprecated
     public boolean isDecorativeImage(SSPHandler sspHandler, String imgUrl)  {
         Logger.getLogger(ImageChecker.class.getName()).
                     info("Testing if image " + uRLIdentifier.resolve(imgUrl) +
@@ -83,6 +84,44 @@ public class ImageChecker {
         } catch (MalformedURLException ex) {
             Logger.getLogger(ImageChecker.class.getName()).
                     warn(ex.getMessage() + " " + uRLIdentifier.resolve(imgUrl));
+        }
+        Long processDuration = new Long(System.currentTimeMillis() - beginDate);
+        Logger.getLogger(ImageChecker.class.getName()).
+                    info("image tested in " + processDuration.toString() +
+                    " ms");
+        return isDecorativeImg;
+    }
+
+    public boolean isDecorativeImage(BufferedImage image)  {
+        Logger.getLogger(ImageChecker.class.getName()).
+                    info("Testing if image " + 
+                    " is decorative");
+        long beginDate = System.currentTimeMillis();
+        boolean isMonoColorImg = true;
+        boolean isMonoDimension = false;
+        boolean isDecorativeImg = false;
+
+        int rgbColor = -1;
+        if (image != null) {
+            if (image.getWidth() < 1 || image.getHeight() < 1) {
+                isMonoDimension = true;
+            } else {
+                for (int i = 0; i < image.getWidth(); i++) {
+                    for (int j = 0; j < image.getHeight(); j++) {
+                        if (i == 0 && j == 0) {
+                            rgbColor = image.getRGB(i, j);
+                        }
+                        if (rgbColor != image.getRGB(i, j)) {
+                            i = image.getWidth();
+                            j = image.getHeight();
+                            isMonoColorImg = false;
+                        }
+                    }
+                }
+            }
+            if (isMonoColorImg || isMonoDimension) {
+                isDecorativeImg = true;
+            }
         }
         Long processDuration = new Long(System.currentTimeMillis() - beginDate);
         Logger.getLogger(ImageChecker.class.getName()).
