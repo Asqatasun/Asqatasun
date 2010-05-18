@@ -83,10 +83,10 @@ public class AuditServiceImpl implements AuditService {
 
     public Audit audit(Audit audit) {
         audit = init(audit);
-        if (audit.getSubject() instanceof Site) {
-            audit = crawl(audit);
-        }
-        audit = loadContent(audit);
+//        if (audit.getSubject() instanceof Site) {
+        audit = crawl(audit);
+//        }
+//        audit = loadContent(audit);
         audit = adaptContent(audit);
         audit = process(audit);
         audit = consolidate(audit);
@@ -121,7 +121,27 @@ public class AuditServiceImpl implements AuditService {
             crawlerService.crawl((Site) audit.getSubject());
         }
 
-        audit.setStatus(AuditStatus.CONTENT_LOADING);
+        boolean hasContent = false;
+
+        for (Content content : audit.getContentList()) {
+            if (content instanceof SSP) {
+                // We check that some content has been downloaded and has to
+                // be adapted. We only deal with contents with a 200 Http Status
+                // code
+                if (content.getHttpStatusCode() == 200 && 
+                        !((SSP)content).getSource().isEmpty() ) {
+                    hasContent = true;
+                    break;
+                }
+                
+            }
+        }
+        if (hasContent) {
+            audit.setStatus(AuditStatus.CONTENT_ADAPTING);
+        } else {
+            Logger.getLogger(AuditServiceImpl.class).warn("Audit has no content");
+            audit.setStatus(AuditStatus.ERROR);
+        }
 
         audit = auditDataService.saveOrUpdate(audit);
         return audit;
@@ -172,7 +192,6 @@ public class AuditServiceImpl implements AuditService {
                     + " was required");
             return audit;
         }
-
         audit.setContentList(contentAdapterService.adaptContent((List<Content>) audit.getContentList()));
 
         boolean hasCorrectedDOM = false;
