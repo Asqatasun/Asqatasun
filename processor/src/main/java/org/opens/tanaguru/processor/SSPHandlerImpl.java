@@ -1,14 +1,30 @@
 package org.opens.tanaguru.processor;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import org.apache.commons.httpclient.URIException;
+import org.archive.net.UURIFactory;
+import org.opens.tanaguru.contentadapter.util.URLIdentifier;
+import org.opens.tanaguru.entity.audit.Content;
+import org.opens.tanaguru.entity.audit.ImageContent;
 
 import org.w3c.dom.Node;
 
 import org.opens.tanaguru.entity.audit.ProcessRemark;
+import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -29,6 +45,9 @@ public class SSPHandlerImpl implements SSPHandler {
     protected ProcessRemarkFactory processRemarkFactory;
     protected String selectionExpression;
     protected List<ProcessRemark> remarkList;
+    protected Map<String, BufferedImage> imageMap;
+    private URLIdentifier urlIdentifier;
+    Set<ImageContent> imageOnErrorSet;
 
     public SSPHandlerImpl() {
         super();
@@ -43,6 +62,14 @@ public class SSPHandlerImpl implements SSPHandler {
 
         selectionExpression = null;
         remarkList = new ArrayList<ProcessRemark>();
+
+        URL src;
+        try {
+            src = new URL(ssp.getURI());
+            urlIdentifier.setUrl(src);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(SSPHandlerImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
 //        XXX R2-implémenter avec la mise en commun des listes de remarques
 //        domHandler.setRemarkList(remarkList);
@@ -314,6 +341,7 @@ public class SSPHandlerImpl implements SSPHandler {
             cssHandler.setSSP(ssp);
         if (jsHandler!=null)
             jsHandler.setSSP(ssp);
+        initializeImageMap();
     }
 
     public void setNomenclatureLoaderService(NomenclatureLoaderService nomenclatureLoaderService) {
@@ -326,6 +354,10 @@ public class SSPHandlerImpl implements SSPHandler {
 
     public void setSourceCodeRemarkFactory(SourceCodeRemarkFactory sourceCodeRemarkFactory) {
         this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
+    }
+
+    public void setUrlIdentifier(URLIdentifier urlIdentifier) {
+        this.urlIdentifier = urlIdentifier;
     }
 
     /**
@@ -403,6 +435,46 @@ public class SSPHandlerImpl implements SSPHandler {
         if (cssHandler != null)
             cssHandler.keepRulesWithMedia(mediaNames);
         return this;
+    }
+
+    private void initializeImageMap(){
+        if (imageMap==null){
+            imageMap = new HashMap<String, BufferedImage>();
+        }
+        if (imageOnErrorSet==null){
+            imageOnErrorSet = new HashSet<ImageContent>();
+        }
+        imageMap.clear();
+        for(RelatedContent relatedContent : ssp.getRelatedContentList()){
+            if (relatedContent instanceof ImageContent){
+
+                BufferedImage image;
+                if (((ImageContent) relatedContent).getHttpStatusCode()!= 200 ||
+                        ((ImageContent) relatedContent).getContent()==null){
+                    imageOnErrorSet.add((ImageContent)relatedContent);
+                } else {
+                    try {
+                        image = ImageIO.read(new ByteArrayInputStream(
+                                ((ImageContent) relatedContent).getContent()));
+                        imageMap.put(((Content)relatedContent).getURI(), image);
+                    } catch (IOException ex) {
+                        Logger.getLogger(SSPHandlerImpl.class.getName()).
+                                log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public BufferedImage getImageFromURL(String url) {
+        try {
+            return imageMap.get(UURIFactory.getInstance(urlIdentifier.resolve(url)
+                    .toExternalForm()).toString());
+        } catch (URIException ex) {
+            Logger.getLogger(SSPHandlerImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
 }

@@ -19,6 +19,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.opens.tanaguru.entity.audit.RelatedContent;
+import org.opens.tanaguru.entity.audit.StylesheetContent;
 import org.w3c.css.sac.LexicalUnit;
 
 public class CSSHandlerImpl implements CSSHandler {
@@ -32,7 +34,7 @@ public class CSSHandlerImpl implements CSSHandler {
     private Set<CSSOMStyleSheet> styleSet;
     private Map<String, Set<CSSOMRule>> rulesByMedia ;
     private final String CSS_ON_ERROR = "CSS_ON_ERROR";
-    private boolean cssOnError = false;
+    Set<StylesheetContent> cssOnErrorSet;
 
     public CSSHandlerImpl() {
         super();
@@ -54,7 +56,6 @@ public class CSSHandlerImpl implements CSSHandler {
 
     public CSSHandler beginSelection(){
         initialize();
-
         selectedRuleList = new HashSet<CSSOMRule>();
         remarkList = new ArrayList<ProcessRemark>();
         return this;
@@ -80,8 +81,11 @@ public class CSSHandlerImpl implements CSSHandler {
             resultSet.add(processResult);
         }
 
-        if (selectedRuleList.isEmpty() && cssOnError) {
+        if (selectedRuleList.isEmpty() || !cssOnErrorSet.isEmpty()) {
             TestSolution fakeSolution = TestSolution.NEED_MORE_INFO;
+            for (StylesheetContent stylesheetContent : cssOnErrorSet){
+                remarkList.add(processRemarkFactory.create(fakeSolution, "UnTested Resource :" + stylesheetContent.getURI()));
+            }
             resultSet.add(fakeSolution);
         }
 
@@ -96,18 +100,24 @@ public class CSSHandlerImpl implements CSSHandler {
         if (initialized) {
             return;
         }
-
-        if (!ssp.getStylesheet().equalsIgnoreCase(CSS_ON_ERROR)) {
-            styleSet = (Set<CSSOMStyleSheet>)
-                    new XStream().fromXML(ssp.getStylesheet());
-            rulesByMedia = setRulesByMedia(styleSet);
-            cssOnError = false;
-            initialized = true;
-        } else {
-            rulesByMedia =
-                new HashMap<String, Set<CSSOMRule>>();
-            cssOnError = true;
+        initializeStyleSet();
+        initializeCssOnErrorSet();
+        XStream xstream = new XStream();
+        for (RelatedContent relatedContent : ssp.getRelatedContentList()){
+            if (relatedContent instanceof StylesheetContent){
+                if (!((StylesheetContent)relatedContent).getAdaptedContent().equalsIgnoreCase(CSS_ON_ERROR) &&
+                        ((StylesheetContent)relatedContent).getAdaptedContent() != null &&
+                        ((StylesheetContent)relatedContent).getHttpStatusCode() == 200) {
+                    styleSet.add(
+                        (CSSOMStyleSheet) xstream.fromXML(
+                        ((StylesheetContent)relatedContent).getAdaptedContent()));
+                } else{
+                    addStylesheetOnError((StylesheetContent)relatedContent);
+                }
+            }
         }
+        rulesByMedia = setRulesByMedia(styleSet);
+        initialized = true;
     }
 
     public CSSHandler selectAllRules() {
@@ -199,4 +209,33 @@ public class CSSHandlerImpl implements CSSHandler {
         }
     }
 
+    public Set<StylesheetContent> getStylesheetOnError(){
+        return cssOnErrorSet;
+    }
+
+    public void addStylesheetOnError(StylesheetContent css){
+        cssOnErrorSet.add(css);
+    }
+
+    /**
+     * This method initializes or re-initializes the set of stylesheets
+     * on error related with a css
+     */
+    private void initializeCssOnErrorSet(){
+        if (cssOnErrorSet == null){
+            cssOnErrorSet = new HashSet<StylesheetContent>();
+        }
+        cssOnErrorSet.clear();
+    }
+
+    /**
+     * This method initializes or re-initializes the set of stylesheets related
+     * with a css
+     */
+    private void initializeStyleSet(){
+        if (styleSet==null){
+            styleSet = new HashSet<CSSOMStyleSheet>();
+        }
+        styleSet.clear();
+    }
 }
