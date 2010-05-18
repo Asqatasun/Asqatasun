@@ -1,5 +1,6 @@
 package org.opens.tanaguru.processor;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -430,4 +431,12 @@ public interface SSPHandler {
      */
     public void addSourceCodeRemark(TestSolution processResult, Node node,
             String messageCode, String attributeName);
+
+    /**
+     * return the recorded image associated with an URL
+     * @param URL
+     * @return
+     */
+    public BufferedImage getImageFromURL(String URL);
+
 }
