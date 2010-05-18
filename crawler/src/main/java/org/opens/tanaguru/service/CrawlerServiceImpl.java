@@ -2,6 +2,7 @@ package org.opens.tanaguru.service;
 
 import java.util.Collection;
 import org.opens.tanaguru.crawler.Crawler;
+import org.opens.tanaguru.crawler.CrawlerImpl;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
 
@@ -37,6 +38,14 @@ public class CrawlerServiceImpl implements CrawlerService {
         crawler.run();
         Site result = (Site) crawler.getResult();
         site.addAllChild((Collection<WebResource>) result.getComponentList());
+        for (WebResource webResource : site.getComponentList()) {
+            webResource.setAudit(site.getAudit());
+        }
+        // The crawler component gets the webResources AND the associated contents
+        if (crawler instanceof CrawlerImpl){
+            site.getAudit().addAllContent(
+                    ((CrawlerImpl)crawler).getContentListResult());
+        }
         return site;
     }
 }
