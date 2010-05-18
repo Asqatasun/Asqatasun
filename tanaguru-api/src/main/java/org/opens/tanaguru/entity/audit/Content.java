@@ -30,6 +30,12 @@ public interface Content extends Entity {
 
     /**
      *
+     * @return the http Status Code
+     */
+    int getHttpStatusCode();
+
+    /**
+     *
      * @param audit
      *            the audit to set
      */
@@ -48,4 +54,11 @@ public interface Content extends Entity {
      *            the URI to set
      */
     void setURI(String uri);
+
+    /**
+     *
+     * @param httpReturnCode
+     *            the Http Status Code when fetched the content
+     */
+    void setHttpStatusCode(int httpStatusCode);
 }
