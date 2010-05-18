@@ -68,9 +68,9 @@ public class AuditLauncher extends HttpServlet {
 
             Audit audit = null;
             if (siteURL != null) {
-                audit = auditService.auditSite(siteURL, (String[]) testCodeList);
+                audit = auditService.auditPage(siteURL, (String[]) testCodeList);
             } else {
-                audit = auditService.auditPage(pageURLList[0], testCodeList);
+                audit = auditService.auditSite(pageURLList[0], (String[]) testCodeList);
             }
 
             String resourceUrl = audit.getSubject().getURL();
@@ -264,6 +264,11 @@ public class AuditLauncher extends HttpServlet {
 
             myHtml.append(getResultPageFooter());
 
+            // Explicit call to the garbage collector, to ensure no "java heap
+            // space" error happens every 10 audits
+            if ((audit.getId()%10) ==0){
+                System.gc();
+            }
             out.println(myHtml);
         } finally {
             out.close();
