@@ -4,6 +4,8 @@
  */
 package org.opens.tanaguru.rule.accessiweb20;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rule.test.AbstractRuleImplementationTestCase;
 
@@ -118,6 +120,23 @@ public class Aw20Rule10041Test extends AbstractRuleImplementationTestCase {
         webResourceMap.put("AW20.Test.10.04.01-3NMI-01",
                 webResourceFactory.createPage(
                 testcasesFilePath + "AW22/AW20.Test.10.04.01-3NMI-01.html"));
+
+        setUpRelatedContentMap();
+    }
+
+    private void setUpRelatedContentMap(){
+        List<String> relatedContent1 = new ArrayList<String>();
+        relatedContent1.add("css/AW20.Test.10.04.01-2Failed-01_1.css");
+        relatedContentMap.put(webResourceMap.get("AW20.Test.10.04.01-2Failed-01_1"), relatedContent1);
+
+        List<String> relatedContent2 = new ArrayList<String>();
+        relatedContent2.add("css/AW20.Test.10.04.01-2Failed-01_2.css");
+        relatedContent2.add("css/AW20.Test.10.04.01-2Failed-01_2_1.css");
+        relatedContentMap.put(webResourceMap.get("AW20.Test.10.04.01-2Failed-01_2"), relatedContent2);
+
+        List<String> relatedContent3 = new ArrayList<String>();
+        relatedContent3.add("css/AW20.Test.10.04.01-2Failed-01_3.css");
+        relatedContentMap.put(webResourceMap.get("AW20.Test.10.04.01-2Failed-01_3"), relatedContent3);
     }
 
     @Override
