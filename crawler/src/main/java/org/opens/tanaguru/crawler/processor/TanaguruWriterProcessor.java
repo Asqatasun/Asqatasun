@@ -39,20 +39,19 @@ import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.WebResource;
 
 /**
-   Processor module that convert the results of successful fetches to
-   tanaguru-like Web-Resources and Contents.
-   @author jkowalczyk
-*/
+Processor module that convert the results of successful fetches to
+tanaguru-like Web-Resources and Contents.
+@author jkowalczyk
+ */
 @SuppressWarnings("unchecked")
-public class TanaguruWriterProcessor extends Processor 
-        implements ExtractorHTMLListener, ExtractorCSSListener{
+public class TanaguruWriterProcessor extends Processor
+        implements ExtractorHTMLListener, ExtractorCSSListener {
 
     private final Logger logger =
             Logger.getLogger(TanaguruWriterProcessor.class.getName());
-
     private static final long serialVersionUID = 3L;
-
     private WebResourceFactory webResourceFactory;
+
     /**
      * Set the webResource Factory
      * @param webResourceFactory
@@ -60,8 +59,8 @@ public class TanaguruWriterProcessor extends Processor
     public void setWebResourceFactory(WebResourceFactory webResourceFactory) {
         this.webResourceFactory = webResourceFactory;
     }
-
     private ContentFactory contentFactory;
+
     /**
      * Set the content factory 
      * @param contentFactory
@@ -69,8 +68,8 @@ public class TanaguruWriterProcessor extends Processor
     public void setContentFactory(ContentFactory contentFactory) {
         this.contentFactory = contentFactory;
     }
-
     private List<Content> contentList = new ArrayList<Content>();
+
     /**
      * 
      * @return the list of contents
@@ -78,8 +77,8 @@ public class TanaguruWriterProcessor extends Processor
     public List<Content> getContentList() {
         return contentList;
     }
-
     private List<WebResource> webResourceList = new ArrayList<WebResource>();
+
     /**
      *
      * @return the list of webResources
@@ -87,12 +86,11 @@ public class TanaguruWriterProcessor extends Processor
     public List<WebResource> getWebResourceList() {
         return webResourceList;
     }
-
-
     private Map<String, Collection<String>> contentRelationShipMap =
             Collections.synchronizedMap(new HashMap<String, Collection<String>>());
     private Map<String, Collection<String>> cssContentRelationShipMap =
             Collections.synchronizedMap(new LinkedHashMap<String, Collection<String>>());
+
     /**
      *
      * @return the list of webResources
@@ -101,59 +99,56 @@ public class TanaguruWriterProcessor extends Processor
         associateExtractedCSSContentWithParents();
         return contentRelationShipMap;
     }
-
     private Pattern cssFilePattern;
+
     /**
      *
      * @return the css File Pattern
      */
-    private Pattern getCssFilePattern(){
-        if (cssFilePattern == null){
+    private Pattern getCssFilePattern() {
+        if (cssFilePattern == null) {
             cssFilePattern = Pattern.compile(cssRegexp);
         }
         return cssFilePattern;
     }
-    
     private String cssRegexp;
+
     /**
      * Set the css Regexp
      * @param cssRegexp
      */
-    public void setCssRegexp(String cssRegexp){
+    public void setCssRegexp(String cssRegexp) {
         this.cssRegexp = cssRegexp;
     }
-
-
     private Pattern htmlFilePattern;
+
     /**
      * 
      * @return the html File Pattern
      */
-    private Pattern getHtmlFilePattern(){
-        if (htmlFilePattern == null){
+    private Pattern getHtmlFilePattern() {
+        if (htmlFilePattern == null) {
             htmlFilePattern = Pattern.compile(htmlRegexp);
         }
         return htmlFilePattern;
     }
-
     private String htmlRegexp;
+
     /**
      * the regular expression used to discover an html content based-on its
      * extension
      * @param htmlRegexp
      */
-    public void setHtmlRegexp(String htmlRegexp){
+    public void setHtmlRegexp(String htmlRegexp) {
         this.htmlRegexp = htmlRegexp;
     }
-
 
     /**
      * 
      * @return the images file pattern
      */
-    private Pattern getImageFilePattern(){
-        return MatchesFilePatternDecideRule.Preset.IMAGES.
-                            getPattern();
+    private Pattern getImageFilePattern() {
+        return MatchesFilePatternDecideRule.Preset.IMAGES.getPattern();
     }
 
     /**
@@ -162,12 +157,11 @@ public class TanaguruWriterProcessor extends Processor
     public TanaguruWriterProcessor() {
     }
 
-    
     @Override
     protected boolean shouldProcess(CrawlURI curi) {
         return isSuccess(curi);
     }
-    
+
     @Override
     protected void innerProcess(CrawlURI curi) {
         UURI uuri = curi.getUURI(); // Current URI.
@@ -186,17 +180,17 @@ public class TanaguruWriterProcessor extends Processor
         if (curi.getFetchStatus() != 200) {
             ContentType resourceContentType =
                     getContentTypeFromUnreacheableResource(curi.getCanonicalString());
-            switch (resourceContentType){
+            switch (resourceContentType) {
                 case css:
-                    logger.log(Level.FINEST, 
+                    logger.log(Level.FINEST,
                             "Unreachable CSS Resource " + curi.getURI() + " : "
                             + curi.getFetchStatus());
                     Content cssContent = contentFactory.createStylesheetContent(
-                        new Date(),
-                        curi.getURI(),
-                        null,
-                        null,
-                        curi.getFetchStatus());
+                            new Date(),
+                            curi.getURI(),
+                            null,
+                            null,
+                            curi.getFetchStatus());
                     contentList.add(cssContent);
                     break;
                 case html:
@@ -204,11 +198,11 @@ public class TanaguruWriterProcessor extends Processor
                             "Unreachable HTML Resource " + curi.getURI() + " : "
                             + curi.getFetchStatus());
                     Content htmlContent = contentFactory.createSSP(
-                        new Date(),
-                        curi.getURI(),
-                        null,
-                        null,
-                        curi.getFetchStatus());
+                            new Date(),
+                            curi.getURI(),
+                            null,
+                            null,
+                            curi.getFetchStatus());
                     contentList.add(htmlContent);
                     break;
                 case img:
@@ -216,11 +210,11 @@ public class TanaguruWriterProcessor extends Processor
                             "Unreachable Image Resource " + curi.getURI() + " : "
                             + curi.getFetchStatus());
                     Content imgContent = contentFactory.createImageContent(
-                        new Date(),
-                        curi.getURI(),
-                        null,
-                        null,
-                        curi.getFetchStatus());
+                            new Date(),
+                            curi.getURI(),
+                            null,
+                            null,
+                            curi.getFetchStatus());
                     contentList.add(imgContent);
                     break;
                 case misc:
@@ -233,20 +227,20 @@ public class TanaguruWriterProcessor extends Processor
 
         try {
             logger.log(Level.FINEST,
-                            "Writing " + curi.getURI() + " : "
-                            + curi.getFetchStatus());
-            if (curi.getContentType().contains(ContentType.html.getType()) &&
-                    !curi.getURI().contains("robots.txt")){
+                    "Writing " + curi.getURI() + " : "
+                    + curi.getFetchStatus());
+            if (curi.getContentType().contains(ContentType.html.getType())
+                    && !curi.getURI().contains("robots.txt")) {
                 WebResource webResource = webResourceFactory.createPage(curi.getURI());
                 webResourceList.add(webResource);
                 Content htmlContent = contentFactory.createSSP(
                         new Date(),
                         curi.getURI(),
                         getTextContent(recis.getContentReplayInputStream()),
-                        (Page)webResource,
+                        (Page) webResource,
                         curi.getFetchStatus());
                 contentList.add(htmlContent);
-            } else if (curi.getContentType().contains(ContentType.css.getType())){
+            } else if (curi.getContentType().contains(ContentType.css.getType())) {
                 Content cssContent = contentFactory.createStylesheetContent(
                         new Date(),
                         curi.getURI(),
@@ -254,13 +248,13 @@ public class TanaguruWriterProcessor extends Processor
                         getTextContent(recis.getContentReplayInputStream()),
                         curi.getFetchStatus());
                 contentList.add(cssContent);
-            } else if (curi.getContentType().contains(ContentType.img.getType())){
+            } else if (curi.getContentType().contains(ContentType.img.getType())) {
                 Content imgContent = contentFactory.createImageContent(
                         new Date(),
                         curi.getURI(),
                         null,
                         getImageContent(recis.getContentReplayInputStream(),
-                                        getImageExtension(curi.getURI())),
+                        getImageExtension(curi.getURI())),
                         curi.getFetchStatus());
                 contentList.add(imgContent);
             }
@@ -274,75 +268,79 @@ public class TanaguruWriterProcessor extends Processor
      * @param is
      * @return
      */
-    private String getTextContent(InputStream is){
+    private String getTextContent(InputStream is) {
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        String line=null;
+        String line = null;
         StringBuffer sb = new StringBuffer();
         try {
             while ((line = br.readLine()) != null) {
-                sb.append(line+"\r");
+                sb.append(line + "\r");
             }
         } catch (IOException ex) {
             Logger.getLogger(CrawlerImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-       return sb.toString();
-   }
+        return sb.toString();
+    }
 
-   /**
-    * Get the raw content of an image
-    * @param is
-    * @param imgExtension
-    * @return
-    */
-   private byte[] getImageContent(InputStream is, String imgExtension){
-       // O P E N
-       ByteArrayOutputStream baos = new ByteArrayOutputStream( 1000 );
-       BufferedImage image = null;
-       byte[] resultImageAsRawBytes = null;
-       try {
-           image = ImageIO.read(is);
-           // W R I T E
-           ImageIO.write(image, imgExtension, baos);
-           // C L O S E
-           baos.flush();
-           resultImageAsRawBytes = baos.toByteArray();
-           baos.close();
-       } catch (IOException ex) {
-           Logger.getLogger(TanaguruWriterProcessor.class.getName()).log(Level.SEVERE, null, ex);
-       }
-       return resultImageAsRawBytes;
-   }
+    /**
+     * Get the raw content of an image
+     * @param is
+     * @param imgExtension
+     * @return
+     */
+    private byte[] getImageContent(InputStream is, String imgExtension) {
+        // O P E N
+        ByteArrayOutputStream baos = new ByteArrayOutputStream(1000);
+        BufferedImage image = null;
+        byte[] resultImageAsRawBytes = null;
+        try {
+            image = ImageIO.read(is);
+            // W R I T E
+            ImageIO.write(image, imgExtension, baos);
+            // C L O S E
+            baos.flush();
+            resultImageAsRawBytes = baos.toByteArray();
+            baos.close();
+        } catch (IOException ex) {
+            Logger.getLogger(TanaguruWriterProcessor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultImageAsRawBytes;
+    }
 
-   /**
-    * Get an image extension from the image url
-    * @param imageUrl
-    * @return
-    */
-   public String getImageExtension(String imageUrl){
-       String ext = imageUrl.substring(imageUrl.lastIndexOf('.')+1);
-       try {
-           java.util.Iterator<ImageWriter> it =
-                   ImageIO.getImageWritersBySuffix(ext);
-           if (it.next() != null) {
+    /**
+     * Get an image extension from the image url
+     * @param imageUrl
+     * @return
+     */
+    public String getImageExtension(String imageUrl) {
+        String ext = imageUrl.substring(imageUrl.lastIndexOf('.') + 1);
+        try {
+            java.util.Iterator<ImageWriter> it =
+                    ImageIO.getImageWritersBySuffix(ext);
+            if (it.next() != null) {
                 return ext;
-           }
-       } catch (NoSuchElementException ex) {
-           return "jpg";
-       }
-       return "jpg";
-   }
+            }
+        } catch (NoSuchElementException ex) {
+            return "jpg";
+        }
+        return "jpg";
+    }
 
+    /**
+     * 
+     * @param curi
+     */
     @Override
-    public void computeFoundResource(CrawlURI curi) {
-        Collection<String> relatedLinkToHtml =new HashSet<String>();
+    public void computeResource(CrawlURI curi) {
+        Collection<String> relatedLinkToHtml = new HashSet<String>();
         String url = null;
-        for (Link link : curi.getOutLinks()){
+        for (Link link : curi.getOutLinks()) {
             url = link.getDestination().toString();
             relatedLinkToHtml.add(url);
-            if (contentRelationShipMap.containsKey(url)){
+            if (contentRelationShipMap.containsKey(url)) {
                 contentRelationShipMap.get(url).add(curi.getURI());
             } else {
-                Collection<String> relatedHtmlToLink =new HashSet<String>();
+                Collection<String> relatedHtmlToLink = new HashSet<String>();
                 relatedHtmlToLink.add(curi.getURI());
                 contentRelationShipMap.put(url, relatedHtmlToLink);
             }
@@ -359,19 +357,18 @@ public class TanaguruWriterProcessor extends Processor
      */
     @Override
     public void computeCSSResource(CrawlURI curi) {
-        Collection<String> relatedChildToParent =new HashSet<String>();
+        Collection<String> relatedChildToParent = new HashSet<String>();
         String url;
-        for (Link link : curi.getOutLinks()){
+        for (Link link : curi.getOutLinks()) {
             url = link.getDestination().toString();
             relatedChildToParent.add(url);
         }
-        if (!cssContentRelationShipMap.containsKey(curi.getURI())){
-            cssContentRelationShipMap.put(curi.getURI(),relatedChildToParent);
+        if (!cssContentRelationShipMap.containsKey(curi.getURI())) {
+            cssContentRelationShipMap.put(curi.getURI(), relatedChildToParent);
         } else {
             cssContentRelationShipMap.get(curi.getURI()).addAll(relatedChildToParent);
         }
     }
-
 
     /**
      * At the end of the extraction, we combine contents extracted from a css
@@ -379,15 +376,15 @@ public class TanaguruWriterProcessor extends Processor
      */
     private void associateExtractedCSSContentWithParents() {
 
-        for (Map.Entry<String, Collection<String>> e : 
-                            cssContentRelationShipMap.entrySet()){
+        for (Map.Entry<String, Collection<String>> e :
+                cssContentRelationShipMap.entrySet()) {
 
             if (!e.getValue().isEmpty()) {
                 for (Map.Entry<String, Collection<String>> f :
-                            contentRelationShipMap.entrySet()){
+                        contentRelationShipMap.entrySet()) {
                     // We test the presence of the css from which css have been
                     // extracted in the content relationship map collections
-                    if (f.getValue().contains(e.getKey())){
+                    if (f.getValue().contains(e.getKey())) {
                         // we associate the parent content with its new
                         // children
                         contentRelationShipMap.get(f.getKey()).addAll(e.getValue());
@@ -406,13 +403,12 @@ public class TanaguruWriterProcessor extends Processor
      * @param uri
      * @return
      */
-    private ContentType getContentTypeFromUnreacheableResource(String uri){
-        if (MatchesFilePatternDecideRule.Preset.IMAGES.
-                            getPattern().matcher(uri).matches()) {
+    private ContentType getContentTypeFromUnreacheableResource(String uri) {
+        if (MatchesFilePatternDecideRule.Preset.IMAGES.getPattern().matcher(uri).matches()) {
             return ContentType.img;
-        } else if (getHtmlFilePattern().matcher(uri).matches()){
+        } else if (getHtmlFilePattern().matcher(uri).matches()) {
             return ContentType.html;
-        } else if (getCssFilePattern().matcher(uri).matches()){
+        } else if (getCssFilePattern().matcher(uri).matches()) {
             return ContentType.css;
         }
         return ContentType.misc;

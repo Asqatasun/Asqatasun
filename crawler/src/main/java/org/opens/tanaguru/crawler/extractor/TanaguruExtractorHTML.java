@@ -54,7 +54,7 @@ public class TanaguruExtractorHTML extends ExtractorHTML {
 
     private void dispatchToListener(CrawlURI curi){
         for (ExtractorHTMLListener extractorHTMLListener : getExtractorHTMLListenerSet()) {
-            extractorHTMLListener.computeFoundResource(curi);
+            extractorHTMLListener.computeResource(curi);
         }
     }
 
