@@ -6,13 +6,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.opens.tanaguru.contentadapter.css.CSSContentAdapter;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.SSP;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.opens.tanaguru.contentadapter.js.JSContentAdapter;
 import org.opens.tanaguru.contentadapter.util.DocumentCaseInsensitiveAdapter;
 
 /**
@@ -59,7 +57,9 @@ public class ContentsAdapterImpl implements ContentsAdapter {
     private List<Content> run(List<Content> contentList) {
         List<Content> localResult = new ArrayList<Content>();
         for (Content content : contentList) {
-            if (content instanceof SSP) {
+            // Unreachable resources (404 error) are saved in the list for reports
+            // We only handle here the fetched content (HttpStatus=200)
+            if (content instanceof SSP && content.getHttpStatusCode()==200) {
                 SSP ssp = (SSP) content;
 
                 htmlCleaner.setDirtyHTML(
@@ -68,7 +68,7 @@ public class ContentsAdapterImpl implements ContentsAdapter {
 
                 htmlCleaner.run();
 
-                ssp.setDOM(
+                ssp.setAdaptedContent(
                         DocumentCaseInsensitiveAdapter.
                         removeLowerCaseTags(htmlCleaner.getResult()));
 
@@ -80,13 +80,6 @@ public class ContentsAdapterImpl implements ContentsAdapter {
                 htmlParser.run();
 
                 for (ContentAdapter contentAdapter : contentAdapterSet) {
-                    if (contentAdapter instanceof CSSContentAdapter) {
-                        ssp.setStylesheet(contentAdapter.getAdaptation());
-                    }
-                    if (contentAdapter instanceof JSContentAdapter) {
-                        ssp.setJavascript(contentAdapter.getAdaptation());
-                    }
-
                     localResult.addAll(contentAdapter.getContentList());
                 }
                 localResult.add(ssp);

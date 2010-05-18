@@ -1,11 +1,14 @@
 package org.opens.tanaguru.contentadapter.css;
 
 import com.thoughtworks.xstream.XStream;
+import java.util.Date;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.httpclient.URIException;
+import org.archive.net.UURIFactory;
 
 import org.opens.tanaguru.contentadapter.ContentParser;
 import org.opens.tanaguru.contentadapter.Resource;
@@ -15,6 +18,8 @@ import org.opens.tanaguru.contentadapter.util.HtmlNodeAttr;
 import org.opens.tanaguru.contentadapter.util.HtmlTags;
 import org.opens.tanaguru.contentadapter.util.InlineRsrc;
 import org.opens.tanaguru.contentadapter.util.LocalRsrc;
+import org.opens.tanaguru.entity.audit.RelatedContent;
+import org.opens.tanaguru.entity.audit.StylesheetContent;
 
 import org.w3c.css.sac.SACMediaList;
 import org.xml.sax.ContentHandler;
@@ -23,14 +28,18 @@ import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
+/**
+ * External resources are adapted on the fly, and inline and local css are
+ * adapted at the end of the document parse
+ * @author jkowalczyk
+ */
+
 public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         CSSContentAdapter, ContentHandler {
 
     private StringBuffer buffer;
     private Set<CSSOMStyleSheet> cssSet;
-    private Set importedCssVector;
     private Set cssVector;
-    private boolean isExternalCSS = false;
     private boolean isInlineCSS = false;
     private boolean isLocalCSS = false;
     private Locator locator;
@@ -40,6 +49,9 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
     private final String WWW_PREFIX = "www";
     private boolean cssOnError = false;
     private final String CSS_ON_ERROR = "CSS_ON_ERROR";
+
+    private Set<StylesheetContent> relatedCssSet =
+            new HashSet<StylesheetContent>();
 
     /**
      * Default constructor.
@@ -69,20 +81,24 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
      * @see org.xml.sax.ContentHandler#endDocument()
      */
     @Override
+    @SuppressWarnings("element-type-mismatch")
     public void endDocument() throws SAXException {
         if (resource != null) {
             resource.addAllResource(cssVector);
-            if (importedCssVector != null)
-                resource.addAllResource(importedCssVector);
 
             // At the end of the document, parse and get the result for each
-            // found resource
+            // inline or local resource
             for (Object object : resource.getResourceSet()) {
                 Resource r = (Resource) object;
-                if (r.getResource() != null) {
-                    parser.setResource(r);
-                    parser.run();
-                    cssSet.add(parser.getResult());
+                StylesheetContent cssContent =
+                        getStylesheetFromResource(r.getResource());
+                adaptContent(cssContent, r);
+                cssContent.setAudit(ssp.getAudit());
+                ssp.addRelatedContent(cssContent);
+            }
+            for (StylesheetContent cssContent : relatedCssSet) {
+                if (cssContent.getAdaptedContent() == null){
+                    cssContent.setAdaptedContent(CSS_ON_ERROR);
                 }
             }
         }
@@ -100,14 +116,13 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
             resource.setResource(buffer.toString());
         }
 
-        if ((isLocalCSS) || (isExternalCSS) || isInlineCSS) {
+        if ((isLocalCSS) || isInlineCSS) {
             if (resource != null) {
                 cssVector.add(resource);
                 // search imported resource from the resource
                 getImportedResources(resource, currentLocalResourcePath);
             }
             isLocalCSS = false;
-            isExternalCSS = false;
             isInlineCSS = false;
         }
     }
@@ -191,12 +206,17 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
     public void startDocument() throws SAXException {
         locator = new LocatorImpl();
         cssVector = new HashSet();
-        importedCssVector = new HashSet();
         currentLocalResourcePath = null;
         buffer = new StringBuffer();
         cssSet = new HashSet<CSSOMStyleSheet>();
         cssOnError = false;
         resource = null;
+        relatedCssSet.clear();
+        for (RelatedContent relatedContent : ssp.getRelatedContentList()) {
+            if (relatedContent instanceof StylesheetContent) {
+                relatedCssSet.add((StylesheetContent) relatedContent);
+            }
+        }
     }
 
     /**
@@ -225,16 +245,20 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         if (HtmlNodeAttr.LINK.equalsIgnoreCase(rawName)) {
 
             String rel = attributs.getValue(HtmlNodeAttr.REL);
+            String type = attributs.getValue(HtmlNodeAttr.TYPE);
+            //do nothing
 
-            if ("stylesheet".equalsIgnoreCase(rel)) {
-                isExternalCSS = true;
+            if ((rel != null && rel.contains("stylesheet")) ||
+                    (type != null && type.contains("text/css"))) {
                 // resolve the css relative path to its absolute path and add it
                 // to the external css links collection
                 String cssRelativePath = attributs.getValue(HtmlNodeAttr.HREF);
-
-                resource = getExternalResource(cssRelativePath,
+                if (cssRelativePath != null) {
+                    currentLocalResourcePath = urlIdentifier.resolve(".").toExternalForm();
+                    getExternalResourceAndAdapt(cssRelativePath,
                         getListOfMediaFromAttributeValue(attributs.getValue(HtmlNodeAttr.MEDIA)),
                         false);
+                }
             }
         }
 
@@ -244,10 +268,14 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
             String attrName = attributs.getQName(i);
             if (HtmlNodeAttr.STYLE.equalsIgnoreCase(attrName)) {
                 isInlineCSS = true;
-                String cssString = rawName + "{" + attrValue + "}";
-                resource = new CSSResourceImpl(cssString, locator.getLineNumber(), new InlineRsrc());
-                cssVector.add(resource);
-                currentLocalResourcePath = urlIdentifier.resolve(".").toExternalForm();
+                if (!attrValue.isEmpty()) {
+                    String cssString = rawName + "{" + attrValue + "}";
+                    resource = new CSSResourceImpl(cssString, locator.getLineNumber(), new InlineRsrc());
+                    cssVector.add(resource);
+                    currentLocalResourcePath = urlIdentifier.resolve(".").toExternalForm();
+                } else {
+                    resource = null;
+                }
                 break;
             }
         }
@@ -304,41 +332,42 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
      * @param importedFromCss
      * @return
      */
-    private Resource getExternalResource(String cssRelativePath,
+    private boolean getExternalResourceAndAdapt(String cssRelativePath,
             SACMediaList sacMediaList, boolean importedFromCss) {
-        Resource externalResouce = null;
+
         String cssAbsolutePath = null;
+        StringBuffer rawCss = new StringBuffer();
+        cssAbsolutePath = urlIdentifier.resolve(cssRelativePath).toExternalForm();
+
         try {
-        cssAbsolutePath =
-                urlIdentifier.resolve(cssRelativePath).toExternalForm();
-            downloader.setURL(cssAbsolutePath);
-            downloader.run();
-        } catch (Exception ex){
-            Logger.getLogger(CSSContentAdapterImpl.class.getName()).log(Level.SEVERE,
-                    null, ex);
-            cssOnError = true;
-            return null;
+            cssAbsolutePath = UURIFactory.getInstance(cssAbsolutePath).toString();
+        } catch (URIException ex) {
+            Logger.getLogger(CSSContentAdapterImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+        for (StylesheetContent stylesheetContent : relatedCssSet){
+            if (stylesheetContent.getAdaptedContent()==null &&
+                    stylesheetContent.getURI().contains(cssAbsolutePath) ){
 
-        // In case of caught error while downloading or resolving the url
-        if (downloader.getResult().isEmpty() || cssAbsolutePath == null){
-            cssOnError = true;
-            return null;
-        }
-
-        if (!importedFromCss) {
-            // In case of external resource found when parsing the html,
-            // the path of the resource is saved for imports with relative path
-            currentLocalResourcePath = getCurrentResourcePath(cssAbsolutePath);
-        }
-        if (sacMediaList != null) {
-            externalResouce = new CSSResourceImpl(downloader.getResult(),
+                rawCss.append(stylesheetContent.getSource());
+                Resource localResource = null;
+                if (sacMediaList != null) {
+                    localResource = new CSSResourceImpl(rawCss.toString(),
                     locator.getLineNumber(), new ExternalRsrc(),sacMediaList);
-        } else {
-            externalResouce = new CSSResourceImpl(downloader.getResult(),
+                } else {
+                    localResource = new CSSResourceImpl(rawCss.toString(),
                     locator.getLineNumber(), new ExternalRsrc());
+                }
+//                if if(resourcePath.startsWith("/")(!importedFromCss) {
+                    // In case of external resource found when parsing the html,
+                    // the path of the resource is saved for imports with relative path
+                currentLocalResourcePath = getCurrentResourcePath(cssAbsolutePath);
+//                }
+                getImportedResources(localResource, currentLocalResourcePath);
+                adaptContent(stylesheetContent, localResource);
+                return true;
+            }
         }
-        return externalResouce;
+        return false;
     }
 
     /**
@@ -360,57 +389,58 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
                 importedStyles = parser.searchImportedStyles();
 
                 if(importedStyles == null) {
-                    cssOnError = true;
                     return;
                 }
 
                 if (!importedStyles.isEmpty())
-                    // for each foudn imported resource within a resource
+                    // for each imported resource found within an inline resource
                     for (CSSImportedStyle cssImportedStyle : importedStyles) {
 
                         //build the resource path
                         //If the path is relative, build in it from the path of the
                         // current resource
                         String resourcePath = cssImportedStyle.getPath();
-                        if (!resourcePath.startsWith(HTTP_PREFIX)
-                            && !resourcePath.startsWith(WWW_PREFIX)) {
+                        if (!resourcePath.startsWith(HTTP_PREFIX) &&
+                              !resourcePath.startsWith(WWW_PREFIX) &&
+                              !resourcePath.startsWith("/")) {
 
-                            if(resourcePath.startsWith("/")){
-                                resourcePath = path +
-                                    cssImportedStyle.getPath().substring(1);
-                            } else {
-                                resourcePath = path +
+                              resourcePath = path +
                                     cssImportedStyle.getPath();
-                            }
                         }
 
                         // create an instance of resource and download the content
-                        Resource importedResource = getExternalResource(
+                        getExternalResourceAndAdapt(
                                 resourcePath,
                                 cssImportedStyle.getSACMediaList(), true);
-                    
-                        // check if the imported resource handle an imported resource
-                        // by a recursive call to getImportResources
-                        if (importedResource != null) {
-                            getImportedResources(importedResource,
-                                getCurrentResourcePath(resourcePath));
-                            addImportedResource(importedResource);
-                        }
                     }
                 importedStyles.clear();
             }
         } while (!importedStyles.isEmpty());
     }
 
-    /**
-     * Add an "from css imported" resource to the vector
-     * @param importedResource
-     */
-    private void addImportedResource(Resource importedResource) {
-        if (importedCssVector == null) {
-            importedCssVector = new HashSet();
+    private StylesheetContent getStylesheetFromResource(String resource){
+        StylesheetContent cssContent = contentFactory.createStylesheetContent(
+                new Date(),
+                ssp.getURI(),
+                ssp,
+                resource,
+                200);
+        cssContent.setAudit(ssp.getAudit());
+        ssp.addRelatedContent(cssContent);
+        return cssContent;
+    }
+
+    private void adaptContent(StylesheetContent stylesheetContent, Resource resource){
+        if (stylesheetContent.getAdaptedContent() == null &&
+                resource.getResource() != null) {
+            parser.setResource(resource);
+            parser.run();
+            if (parser.getResult() != null) {
+                stylesheetContent.setAdaptedContent(new XStream().toXML(parser.getResult()));
+            } else {
+                stylesheetContent.setAdaptedContent(CSS_ON_ERROR);
+            }
         }
-        importedCssVector.add(importedResource);
     }
 
 }

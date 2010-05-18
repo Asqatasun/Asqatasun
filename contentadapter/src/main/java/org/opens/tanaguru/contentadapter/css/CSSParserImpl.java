@@ -35,6 +35,7 @@ public class CSSParserImpl extends AbstractContentParser implements CSSParser {
     @Override
     public void run() {
         try {
+            result = null;
             String rsrc = resource.getResource();
             InputSource is = new InputSource(new StringReader(rsrc));
 
