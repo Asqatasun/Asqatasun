@@ -54,17 +54,31 @@ CREATE TABLE `CONTENT` (
   `Dt_Loading` datetime NOT NULL,
   `Uri` varchar(255) NOT NULL,
   `Source` longtext,
-  `Dom` longtext,
-  `Javascript` longtext,
-  `Stylesheet` longtext,
+  `Adapted_Content` longtext,
+  `Binary_Content` lonblob default NULL,
+  `Http_StatusCode` int NOT NULL,
   `Id_Audit` bigint(20) NOT NULL,
   `Id_Ssp` bigint(20) default NULL,
   `Id_Page` bigint(20) default NULL,
   PRIMARY KEY  (`Id_Content`),
-  UNIQUE KEY `Uri` (`Uri`,`Id_Audit`),
   KEY `FK6382C059493EC9C2` (`Id_Audit`),
   KEY `FK6382C05977C2CAAC` (`Id_Ssp`),
   KEY `FK6382C059A8A177A1` (`Id_Page`)
+);
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `CONTENT_RELATIONSHIP`
+--
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `CONTENT_RELATIONSHIP` (
+`Id` bigint(20) NOT NULL AUTO_increment,
+`Id_Content_Parent` bigint(20) NOT NULL,
+`Id_Content_Child` bigint(20) NOT NULL,
+PRIMARY KEY (`Id`),
+FOREIGN KEY (`Id_Content_Parent`) REFERENCES CONTENT(`Id_Content`),
+FOREIGN KEY (`Id_Content_Child`) REFERENCES CONTENT(`Id_Content`)
 );
 SET character_set_client = @saved_cs_client;
 
