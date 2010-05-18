@@ -1,5 +1,6 @@
 package org.opens.tanaguru.entity.audit;
 
+import java.util.List;
 import org.opens.tanaguru.entity.subject.Page;
 
 /**
@@ -17,21 +18,15 @@ public interface SSP extends TextContent {
 
     /**
      *
-     * @return the javascript
-     */
-    String getJavascript();
-
-    /**
-     *
      * @return the page
      */
     Page getPage();
 
     /**
-     *
-     * @return the stylesheet
+     * 
+     * @return the list of related raw content of the ssp
      */
-    String getStylesheet();
+    List<? extends RelatedContent> getRelatedContentList();
 
     /**
      *
@@ -42,13 +37,6 @@ public interface SSP extends TextContent {
 
     /**
      *
-     * @param javascript
-     *            the javascript to set
-     */
-    void setJavascript(String javascript);
-
-    /**
-     *
      * @param page
      *            the page to set
      */
@@ -56,8 +44,16 @@ public interface SSP extends TextContent {
 
     /**
      *
-     * @param stylesheet
-     *            the stylesheet to set
+     * @param contentList
+     *          The content list to add
      */
-    void setStylesheet(String stylesheet);
+    public void addAllRelationContent(List<? extends RelatedContent> contentList);
+
+    /**
+     *
+     * @param content
+     *              The content to add
+     */
+    public void addRelatedContent(RelatedContent content);
+
 }
