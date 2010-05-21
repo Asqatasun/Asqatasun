@@ -16,6 +16,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -77,15 +78,16 @@ public class TanaguruWriterProcessor extends Processor
     public List<Content> getContentList() {
         return contentList;
     }
-    private List<WebResource> webResourceList = new ArrayList<WebResource>();
+    private Set<WebResource> webResourceSet = new HashSet<WebResource>();
 
     /**
      *
      * @return the list of webResources
      */
-    public List<WebResource> getWebResourceList() {
-        return webResourceList;
+    public Set<WebResource> getWebResourceSet() {
+        return webResourceSet;
     }
+
     private Map<String, Collection<String>> contentRelationShipMap =
             Collections.synchronizedMap(new HashMap<String, Collection<String>>());
     private Map<String, Collection<String>> cssContentRelationShipMap =
@@ -232,7 +234,7 @@ public class TanaguruWriterProcessor extends Processor
             if (curi.getContentType().contains(ContentType.html.getType())
                     && !curi.getURI().contains("robots.txt")) {
                 WebResource webResource = webResourceFactory.createPage(curi.getURI());
-                webResourceList.add(webResource);
+                webResourceSet.add(webResource);
                 Content htmlContent = contentFactory.createSSP(
                         new Date(),
                         curi.getURI(),

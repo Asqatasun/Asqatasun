@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.apache.log4j.Logger;
 import org.archive.crawler.framework.CrawlJob;
 import org.archive.modules.Processor;
@@ -103,8 +104,21 @@ public class CrawlerImpl implements Crawler {
      * @param siteUrl
      */
     @Override
-    public void setSiteURL(String webResourceURL) {
-        webResource = webResourceFactory.createSite(webResourceURL);
+    public void setSiteURL(String siteURL) {
+        webResource = webResourceFactory.createSite(siteURL);
+        this.crawlJob = new CrawlJob(initializeCrawlContext());
+        if (crawlJob.isLaunchable()) {
+            crawlJob.checkXML();
+        }
+    }
+
+    /**
+     *
+     * @param siteUrl
+     */
+    @Override
+    public void setPageURL(String pageURL) {
+        webResource = webResourceFactory.createPage(pageURL);
         this.crawlJob = new CrawlJob(initializeCrawlContext());
         if (crawlJob.isLaunchable()) {
             crawlJob.checkXML();
@@ -120,7 +134,7 @@ public class CrawlerImpl implements Crawler {
             Logger.getLogger(CrawlerImpl.class.getName()).info(
                     "crawljob is launchable");
             crawlJob.launch();
-            if (!crawlJob.isRunning()){
+            if (!crawlJob.isRunning()) {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {
@@ -172,7 +186,7 @@ public class CrawlerImpl implements Crawler {
             StringBuffer newContextFile = new StringBuffer();
             while ((c = in.readLine()) != null) {
                 if (c.equalsIgnoreCase(urlStrToReplace)) {
-                    UURIFactory.getInstance(webResource.getURL()).toString();
+                    newContextFile.append(UURIFactory.getInstance(webResource.getURL()).toString());
                 } else {
                     newContextFile.append(c);
                 }
@@ -194,12 +208,12 @@ public class CrawlerImpl implements Crawler {
     private void computeResult() {
         for (Processor processor : crawlJob.getCrawlController().getDispositionChain().getProcessors()) {
             if (processor instanceof TanaguruWriterProcessor) {
-                List<WebResource> webResourceList =
-                        ((TanaguruWriterProcessor) processor).getWebResourceList();
+                Set<WebResource> webResourceList =
+                        ((TanaguruWriterProcessor) processor).getWebResourceSet();
                 if (webResource instanceof Site) {
                     ((Site) webResource).addAllChild(webResourceList);
                 } else if (webResourceList.size() == 1) {
-                    webResource = webResourceList.get(0);
+                    webResource = webResourceList.iterator().next();
                 }
                 contentList =
                         ((TanaguruWriterProcessor) processor).getContentList();
@@ -288,5 +302,4 @@ public class CrawlerImpl implements Crawler {
         }
         return (file.delete());
     }
-
 }
