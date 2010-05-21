@@ -445,7 +445,7 @@ public class SSPHandlerImpl implements SSPHandler {
             imageOnErrorSet = new HashSet<ImageContent>();
         }
         imageMap.clear();
-        for(RelatedContent relatedContent : ssp.getRelatedContentList()){
+        for(RelatedContent relatedContent : ssp.getRelatedContentSet()){
             if (relatedContent instanceof ImageContent){
 
                 BufferedImage image;

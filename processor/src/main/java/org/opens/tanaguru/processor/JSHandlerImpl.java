@@ -79,7 +79,7 @@ public class JSHandlerImpl implements JSHandler {
 
         XStream xstream = new XStream();
 
-        for (RelatedContent relatedContent : ssp.getRelatedContentList()) {
+        for (RelatedContent relatedContent : ssp.getRelatedContentSet()) {
             if (relatedContent instanceof JavascriptContent) {
                 if (javaScriptSet == null) {
                     javaScriptSet = new HashSet<JSResource>();

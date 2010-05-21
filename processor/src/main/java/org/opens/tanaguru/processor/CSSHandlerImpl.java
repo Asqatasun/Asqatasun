@@ -103,7 +103,7 @@ public class CSSHandlerImpl implements CSSHandler {
         initializeStyleSet();
         initializeCssOnErrorSet();
         XStream xstream = new XStream();
-        for (RelatedContent relatedContent : ssp.getRelatedContentList()){
+        for (RelatedContent relatedContent : ssp.getRelatedContentSet()){
             if (relatedContent instanceof StylesheetContent){
                 if (!((StylesheetContent)relatedContent).getAdaptedContent().equalsIgnoreCase(CSS_ON_ERROR) &&
                         ((StylesheetContent)relatedContent).getAdaptedContent() != null &&
