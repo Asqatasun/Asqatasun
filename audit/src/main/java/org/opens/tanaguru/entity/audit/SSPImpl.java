@@ -27,7 +27,7 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
     @Column(name = "Adapted_Content", length = 400000)
     protected String dom;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "Id_Page")
     protected PageImpl page;
 
