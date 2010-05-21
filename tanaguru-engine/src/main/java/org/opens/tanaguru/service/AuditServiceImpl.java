@@ -44,7 +44,7 @@ public class AuditServiceImpl implements AuditService {
         Audit audit = auditDataService.create();
         audit.setSubject(page);
         audit.setTestList(testList);
-        audit.setStatus(AuditStatus.CONTENT_LOADING);
+        audit.setStatus(AuditStatus.CRAWLING);
 
         audit = audit(audit);
         return audit;
@@ -75,7 +75,7 @@ public class AuditServiceImpl implements AuditService {
         Audit audit = auditDataService.create();
         audit.setSubject(site);
         audit.setTestList(testList);
-        audit.setStatus(AuditStatus.CONTENT_LOADING);
+        audit.setStatus(AuditStatus.CRAWLING);
 
         audit = audit(audit);
         return audit;
@@ -118,7 +118,9 @@ public class AuditServiceImpl implements AuditService {
         }
 
         if (audit.getSubject() instanceof Site) {
-            crawlerService.crawl((Site) audit.getSubject());
+            crawlerService.crawl((Site)audit.getSubject());
+        } else if (audit.getSubject() instanceof Page) {
+            crawlerService.crawl((Page)audit.getSubject());
         }
 
         boolean hasContent = false;
