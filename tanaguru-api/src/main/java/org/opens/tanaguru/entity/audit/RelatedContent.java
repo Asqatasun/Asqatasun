@@ -1,6 +1,6 @@
 package org.opens.tanaguru.entity.audit;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -12,14 +12,14 @@ public interface RelatedContent {// TODO Write javadoc
      *
      * @return the list of related raw content of the ssp
      */
-    List<? extends Content> getParentContentList();
+    Set<? extends Content> getParentContentSet();
 
     /**
      *
      * @param contentList
      *          The content list to add
      */
-    public void addAllParentContent(List<? extends Content> contentList);
+    public void addAllParentContent(Set<? extends Content> contentList);
 
     /**
      *
