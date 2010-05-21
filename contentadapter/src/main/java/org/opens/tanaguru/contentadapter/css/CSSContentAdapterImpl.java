@@ -212,7 +212,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         cssOnError = false;
         resource = null;
         relatedCssSet.clear();
-        for (RelatedContent relatedContent : ssp.getRelatedContentList()) {
+        for (RelatedContent relatedContent : ssp.getRelatedContentSet()) {
             if (relatedContent instanceof StylesheetContent) {
                 relatedCssSet.add((StylesheetContent) relatedContent);
             }
