@@ -2,6 +2,7 @@ package org.opens.tanaguru.service;
 
 import javax.xml.bind.annotation.XmlTransient;
 import org.opens.tanaguru.crawler.Crawler;
+import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 
 /**
@@ -20,10 +21,10 @@ public interface CrawlerService {
 
     /**
      * 
-     * @param siteURL ths URL of the site to crawl
+     * @param page  the page to crawl
      * @return a crawled site from the URL
      */
-    Site crawl(String siteURL);
+    Page crawl(Page page);
 
     /**
      * 
