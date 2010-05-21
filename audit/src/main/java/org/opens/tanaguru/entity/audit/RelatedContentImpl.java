@@ -1,15 +1,14 @@
 package org.opens.tanaguru.entity.audit;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import java.util.Date;
-import java.util.List;
-import javax.persistence.CascadeType;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -19,13 +18,15 @@ import javax.xml.bind.annotation.XmlTransient;
 public class RelatedContentImpl extends ContentImpl implements
         RelatedContent, Serializable {
 
-    @ManyToOne
-    @JoinColumn(name = "Id_Ssp")
-    protected SSPImpl ssp;
-
-    @ManyToMany(targetEntity=org.opens.tanaguru.entity.audit.SSPImpl.class, mappedBy="relatedContentList", cascade=CascadeType.MERGE)
-    protected List<ContentImpl> parentContentList =
-            new ArrayList<ContentImpl>();
+    @ManyToMany
+        @JoinTable(name = "CONTENT_RELATIONSHIP", joinColumns =
+        @JoinColumn(name = "Id_Content_Child"), inverseJoinColumns =
+        @JoinColumn(name = "Id_Content_Parent"))
+//    @ManyToMany(
+//        targetEntity=org.opens.tanaguru.entity.audit.SSPImpl.class,
+//        mappedBy="relatedContentSet", cascade=CascadeType.MERGE)
+    protected Set<ContentImpl> parentContentSet =
+            new HashSet<ContentImpl>();
 
     public RelatedContentImpl() {
         super();
@@ -37,8 +38,8 @@ public class RelatedContentImpl extends ContentImpl implements
 
     public RelatedContentImpl(Date dateOfLoading, String uri, SSP ssp) {
         super(dateOfLoading, uri);
-        this.ssp = (SSPImpl)ssp;
-        this.parentContentList.add((SSPImpl) ssp);
+        if (ssp != null)
+            this.parentContentSet.add((SSPImpl) ssp);
     }
 
     public RelatedContentImpl(Date dateOfLoading, String uri, int httpStatusCode) {
@@ -47,34 +48,26 @@ public class RelatedContentImpl extends ContentImpl implements
 
     public RelatedContentImpl(Date dateOfLoading, String uri, SSP ssp, int httpStatusCode) {
         super(dateOfLoading, uri, httpStatusCode);
-        this.ssp = (SSPImpl)ssp;
-        this.parentContentList.add((SSPImpl) ssp);
-    }
-
-    @XmlTransient
-    public SSP getSSP() {
-        return ssp;
-    }
-
-    public void setSSP(SSP ssp) {
-        this.ssp = (SSPImpl) ssp;
+//        this.ssp = (SSPImpl)ssp;
+        if (ssp != null)
+            this.parentContentSet.add((SSPImpl) ssp);
     }
 
     @XmlElementWrapper
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.SSPImpl.class)})
     @XmlTransient
-    public List<ContentImpl> getParentContentList() {
-        return parentContentList;
+    public Set<ContentImpl> getParentContentSet() {
+        return parentContentSet;
     }
 
-    public void addAllParentContent(List<? extends Content> contentList) {
+    public void addAllParentContent(Set<? extends Content> contentList) {
         for (Content content : contentList) {
             addParentContent(content);
         }
     }
 
     public void addParentContent(Content content) {
-        this.parentContentList.add((ContentImpl) content);
+        this.parentContentSet.add((ContentImpl) content);
     }
 }

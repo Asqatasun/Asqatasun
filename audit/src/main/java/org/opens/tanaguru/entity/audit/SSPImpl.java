@@ -1,7 +1,6 @@
 package org.opens.tanaguru.entity.audit;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,10 +8,10 @@ import javax.persistence.Entity;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.PageImpl;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlElementRef;
@@ -35,12 +34,15 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
     @Column(name = "Source", length = 400000)
     protected String source;
 
-    @ManyToMany(cascade=CascadeType.MERGE)
-    @JoinTable(name = "CONTENT_RELATIONSHIP", joinColumns =
-    @JoinColumn(name = "Id_Content_Parent"), inverseJoinColumns =
-    @JoinColumn(name = "Id_Content_Child"))
-    protected List<RelatedContentImpl> relatedContentList =
-            new ArrayList<RelatedContentImpl>();
+//    @ManyToMany
+//        @JoinTable(name = "CONTENT_RELATIONSHIP", joinColumns =
+//        @JoinColumn(name = "Id_Content_Parent"), inverseJoinColumns =
+//        @JoinColumn(name = "Id_Content_Child"))
+    @ManyToMany(
+        targetEntity=org.opens.tanaguru.entity.audit.RelatedContentImpl.class,
+        mappedBy="parentContentSet", cascade=CascadeType.MERGE)
+    protected Set<RelatedContentImpl> relatedContentSet =
+            new HashSet<RelatedContentImpl>();
 
     public SSPImpl() {
         super();
@@ -87,14 +89,6 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
         this.page = (PageImpl) page;
     }
 
-//    /**
-//     * @param stylesheet
-//     *            the stylesheet to set
-//     */
-//    public void setStylesheet(String stylesheet) {
-//        this.stylesheet = stylesheet;
-//    }
-
     public String getSource() {
         return source;
     }
@@ -108,11 +102,11 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.JavascriptContentImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.StylesheetContentImpl.class)})
     @XmlTransient
-    public List<RelatedContentImpl> getRelatedContentList() {
-        return relatedContentList;
+    public Set<RelatedContentImpl> getRelatedContentSet() {
+        return relatedContentSet;
     }
 
-    public void addAllRelationContent(List<? extends RelatedContent> contentList) {
+    public void addAllRelationContent(Set<? extends RelatedContent> contentList) {
         for (RelatedContent content : contentList) {
             addRelatedContent(content);
         }
@@ -120,7 +114,7 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
 
     public void addRelatedContent(RelatedContent content) {
         content.addParentContent(this);
-        this.relatedContentList.add((RelatedContentImpl) content);
+        this.relatedContentSet.add((RelatedContentImpl) content);
     }
 
     @Override
