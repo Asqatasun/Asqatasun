@@ -61,7 +61,6 @@ CREATE TABLE `CONTENT` (
   `Id_Page` bigint(20) default NULL,
   PRIMARY KEY  (`Id_Content`),
   KEY `FK6382C059493EC9C2` (`Id_Audit`),
-  KEY `FK6382C05977C2CAAC` (`Id_Ssp`),
   KEY `FK6382C059A8A177A1` (`Id_Page`)
 );
 SET character_set_client = @saved_cs_client;
