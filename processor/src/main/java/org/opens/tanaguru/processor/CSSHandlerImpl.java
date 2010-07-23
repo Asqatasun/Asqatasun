@@ -81,12 +81,16 @@ public class CSSHandlerImpl implements CSSHandler {
             resultSet.add(processResult);
         }
 
-        if (selectedRuleList.isEmpty() || !cssOnErrorSet.isEmpty()) {
+        if (!cssOnErrorSet.isEmpty()) {
             TestSolution fakeSolution = TestSolution.NEED_MORE_INFO;
             for (StylesheetContent stylesheetContent : cssOnErrorSet){
                 remarkList.add(processRemarkFactory.create(fakeSolution, "UnTested Resource :" + stylesheetContent.getURI()));
             }
             resultSet.add(fakeSolution);
+        }
+
+        if (selectedRuleList.isEmpty()){
+            resultSet.add(TestSolution.NOT_APPLICABLE);
         }
 
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
