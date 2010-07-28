@@ -98,6 +98,11 @@ public interface DOMHandler {
      */
     TestSolution checkContentNotEmpty();
 
+    /**
+     * 
+     * @param expr
+     * @return the result of the check processing using xpath
+     */
     TestSolution checkEachWithXpath(String expr);
 
     /**
@@ -403,4 +408,17 @@ public interface DOMHandler {
      */
     public void addSourceCodeRemark(TestSolution processResult, Node node,
             String messageCode, String attributeName);
+
+    /**
+     *
+     * @param attributeName
+     * @param blackList
+     * @param attributeToCompareWithList
+     * @param sourceCodeRemark
+     * @return
+     */
+    TestSolution checkAttributePertinence(String attributeName,
+            Collection<String> blackList,
+            Collection<String> attributeToCompareWithList,
+            String sourceCodeRemark);
 }

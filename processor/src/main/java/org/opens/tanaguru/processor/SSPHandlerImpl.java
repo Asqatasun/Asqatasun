@@ -477,4 +477,17 @@ public class SSPHandlerImpl implements SSPHandler {
         return null;
     }
 
+    @Override
+    public TestSolution checkAttributePertinence(
+            String attributeName,
+            Collection<String> blackList,
+            Collection<String> attributeToCompareWithList,
+            String sourceCodeRemark) {
+        return domHandler.checkAttributePertinence(
+                attributeName,
+                blackList,
+                attributeToCompareWithList,
+                sourceCodeRemark);
+    }
+
 }

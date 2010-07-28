@@ -60,6 +60,7 @@ public class DOMHandlerImpl implements DOMHandler {
         this.ssp = ssp;
     }
 
+    @Override
     public void addSourceCodeRemark(TestSolution processResult, Node node,
             String messageCode, String attributeName) {// XXX
         SourceCodeRemark remark = sourceCodeRemarkFactory.create();
@@ -102,6 +103,7 @@ public class DOMHandlerImpl implements DOMHandler {
         remarkList.add(remark);
     }
 
+    @Override
     public DOMHandler beginSelection() {
         initialize();
 
@@ -111,6 +113,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    @Override
     public TestSolution checkAttributeExists(String attributeName) {
         Set<TestSolution> resultSet = new HashSet<TestSolution>();
         for (Node workingElement : selectedElementList) {
@@ -127,6 +130,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
 
+    @Override
     public TestSolution checkAttributeValueExpression(String attributeName,
             String regexp) {
         Set<TestSolution> resultSet = new HashSet<TestSolution>();
@@ -148,6 +152,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
 
+    @Override
     public TestSolution checkAttributeValueLengthLower(String attributeName,
             int length, TestSolution defaultFailResult) {
         Set<TestSolution> resultSet = new HashSet<TestSolution>();
@@ -165,6 +170,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
 
+    @Override
     public TestSolution checkAttributeValueNotEmpty(String attributeName) {
         Set<TestSolution> resultSet = new HashSet<TestSolution>();
         for (Node workingElement : selectedElementList) {
@@ -185,6 +191,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
 
+    @Override
     public TestSolution checkAttributeValueIsEmpty(String attributeName) {
         Set<TestSolution> resultSet = new HashSet<TestSolution>();
         for (Node workingElement : selectedElementList) {
@@ -205,6 +212,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
 
+    @Override
     public TestSolution checkChildNodeExists(String childNodeName) {
         Set<TestSolution> resultSet = new HashSet<TestSolution>();
         for (Node workingElement : selectedElementList) {
@@ -228,6 +236,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
 
+    @Override
     public TestSolution checkChildNodeExistsRecursively(String childNodeName) {
         Set<TestSolution> resultSet = new HashSet<TestSolution>();
         for (Node workingElement : selectedElementList) {
@@ -264,11 +273,15 @@ public class DOMHandlerImpl implements DOMHandler {
         return false;
     }
 
+    @Override
     public TestSolution checkContentNotEmpty() {
         Set<TestSolution> resultSet = new HashSet<TestSolution>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.PASSED;
-            if (workingElement.getTextContent().length() == 0 && workingElement.getChildNodes().getLength() == 0) {
+            if (workingElement.getTextContent().trim().isEmpty() && 
+                    (workingElement.getChildNodes().getLength() == 0 ||
+                    (workingElement.getChildNodes().getLength() == 1 &&
+                    workingElement.getChildNodes().item(0).getNodeName().equalsIgnoreCase("#text")))) {
                 result = TestSolution.FAILED;
                 addSourceCodeRemark(result, workingElement, "ValueEmpty",
                         workingElement.getNodeValue());
@@ -278,6 +291,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
 
+    @Override
     public TestSolution checkEachWithXpath(String expr) {
         Set<TestSolution> resultSet = new HashSet<TestSolution>();
         for (Node node : selectedElementList) {
@@ -302,6 +316,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
 
+    @Override
     public TestSolution checkNodeValue(Collection<String> blacklist,
             Collection<String> whitelist) {
         if (whitelist == null) {
@@ -351,6 +366,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
 
+    @Override
     public TestSolution checkTextContentAndAttributeValue(String attributeName,
             Collection<String> blacklist, Collection<String> whitelist) {
         if (whitelist == null) {
@@ -418,6 +434,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
 
+    @Override
     public TestSolution checkTextContentValue(Collection<String> blacklist,
             Collection<String> whitelist) {
 
@@ -468,6 +485,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
 
+    @Override
     public TestSolution checkTextContentValueLengthLower(int length,
             TestSolution defaultFailResult) {
         Set<TestSolution> resultSet = new HashSet<TestSolution>();
@@ -485,6 +503,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
 
+    @Override
     public TestSolution checkTextContentValueNotEmpty() {
         Set<TestSolution> resultSet = new HashSet<TestSolution>();
         for (Node workingElement : selectedElementList) {
@@ -499,6 +518,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
 
+    @Override
     public DOMHandler excludeNodesWithAttribute(String attributeName) {
         List<Node> nodes = new ArrayList<Node>();
         for (Node workingElement : selectedElementList) {
@@ -512,6 +532,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    @Override
     public DOMHandler excludeNodesWithChildNode(ArrayList<String> childNodeNames) {
         List<Node> nodes = new ArrayList<Node>();
         for (Node workingElement : selectedElementList) {
@@ -535,6 +556,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    @Override
     public DOMHandler excludeNodesWithChildNode(String childNodeName) {
         List<Node> nodes = new ArrayList<Node>();
         for (Node workingElement : selectedElementList) {
@@ -555,6 +577,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    @Override
     public List<String> getAttributeValues(String attributeName) {
         List<String> values = new ArrayList<String>();
         for (Node workingElement : selectedElementList) {
@@ -578,22 +601,27 @@ public class DOMHandlerImpl implements DOMHandler {
         return -1;
     }
 
+    @Override
     public WebResource getPage() {
         return this.ssp.getPage();
     }
 
+    @Override
     public List<ProcessRemark> getRemarkList() {
         return remarkList;
     }
 
+    @Override
     public List<Node> getSelectedElementList() {
         return selectedElementList;
     }
 
+    @Override
     public SSP getSSP() {
         return ssp;
     }
 
+    @Override
     public List<String> getTextContentValues() {
         List<String> values = new ArrayList<String>();
         for (Node workingElement : selectedElementList) {
@@ -648,10 +676,12 @@ public class DOMHandlerImpl implements DOMHandler {
         }
     }
 
+    @Override
     public boolean isSelectedElementsEmpty() {
-        return !selectedElementList.isEmpty();
+        return selectedElementList.isEmpty();
     }
 
+    @Override
     public DOMHandler keepNodesWithAttribute(String attributeName) {
         List<Node> elements = new ArrayList<Node>();
         for (Node workingElement : selectedElementList) {
@@ -665,6 +695,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    @Override
     public DOMHandler keepNodesWithAttributeValueEquals(String attributeName,
             Collection<String> values) {
         List<Node> elements = new ArrayList<Node>();
@@ -685,6 +716,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    @Override
     public DOMHandler keepNodesWithAttributeValueNonEmpty(String attributeName) {
         List<Node> elements = new ArrayList<Node>();
         for (Node workingElement : selectedElementList) {
@@ -698,6 +730,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    @Override
     public DOMHandler keepNodesWithAttributeValueStartingWith(
             String attributeName, Collection<String> values) {
         List<Node> elements = new ArrayList<Node>();
@@ -719,6 +752,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    @Override
     public DOMHandler keepNodesWithAttributeValueStartingWith(
             String attributeName, String value) {
         List<Node> elements = new ArrayList<Node>();
@@ -738,6 +772,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    @Override
     public DOMHandler keepNodesWithChildNode(String childNodeName) {
         List<Node> elements = new ArrayList<Node>();
         for (Node workingElement : selectedElementList) {
@@ -753,6 +788,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    @Override
     public DOMHandler keepNodesWithoutChildNode(
             Collection<String> childNodeNames) {
         List<Node> elements = new ArrayList<Node>();
@@ -776,6 +812,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    @Override
     public DOMHandler keepNodesWithoutChildNode(String childNodeName) {
         List<Node> elements = new ArrayList<Node>();
         for (Node workingElement : selectedElementList) {
@@ -796,6 +833,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    @Override
     public DOMHandler selectAttributeByName(String name) {
         List<Node> elements = new ArrayList<Node>();
         for (Node workingElement : selectedElementList) {
@@ -808,6 +846,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    @Override
     public DOMHandler selectChildNodes(Collection<String> childNodeNames) {
         List<Node> elements = new ArrayList<Node>();
         for (Node workingElement : selectedElementList) {
@@ -828,6 +867,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    @Override
     public DOMHandler selectChildNodes(String childNodeName) {
         List<Node> elements = new ArrayList<Node>();
         for (Node workingElement : selectedElementList) {
@@ -843,6 +883,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    @Override
     public DOMHandler selectChildNodesRecursively(
             Collection<String> childNodeNames) {
         List<Node> elements = new ArrayList<Node>();
@@ -873,6 +914,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return nodes;
     }
 
+    @Override
     public DOMHandler selectChildNodesRecursively(String childNodeName) {
         List<Node> elements = new ArrayList<Node>();
         for (Node workingElement : selectedElementList) {
@@ -917,6 +959,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return nodes;
     }
 
+    @Override
     public DOMHandler selectDocumentNodes(Collection<String> labels) {
         for (String label : labels) {
             NodeList nodeList = document.getElementsByTagName(label);
@@ -927,6 +970,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    @Override
     public DOMHandler selectDocumentNodes(String tagName) {
         NodeList nodeList = document.getElementsByTagName(tagName);
         for (int j = 0; j < nodeList.getLength(); j++) {
@@ -935,6 +979,7 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    @Override
     public DOMHandler selectDocumentNodesWithAttribute(String attributeName) {
         List<Node> elements = new ArrayList<Node>();
         NodeList childNodes = document.getChildNodes();
@@ -952,6 +997,7 @@ public class DOMHandlerImpl implements DOMHandler {
      * @param expr
      * @return
      */
+    @Override
     public DOMHandler xPathSelectNodeSet(String expr) {
         try {
             XPathExpression xPathExpression = xpath.compile(expr);
@@ -969,22 +1015,107 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    @Override
     public void setProcessRemarkFactory(
             ProcessRemarkFactory processRemarkFactory) {
         this.processRemarkFactory = processRemarkFactory;
     }
 
+    @Override
     public void setSelectedElementList(List<Node> selectedElementList) {
         this.selectedElementList = selectedElementList;
     }
 
+    @Override
     public void setSourceCodeRemarkFactory(
             SourceCodeRemarkFactory sourceCodeRemarkFactory) {
         this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
     }
 
+    @Override
     public void setSSP(SSP ssp) {
         this.ssp = ssp;
         initialized = false;
     }
+
+    /**
+     *
+     * @param attributeName
+     * @param blacklist (can be null)
+     * @param attributeToCompareWithList (can be null)
+     * @param sourceCodeRemark
+     * @return
+     */
+    @Override
+    public TestSolution checkAttributePertinence(
+            String attributeName,
+            Collection<String> blacklist,
+            Collection<String> attributeToCompareWithList,
+            String sourceCodeRemark) {
+
+        // We first check whether the content of the tested node is not empty
+        TestSolution testSolution = checkAttributeValueNotEmpty(attributeName);
+        // If the content of the tested attribute is not empty
+        if (testSolution != TestSolution.FAILED){
+            Set<TestSolution> resultSet = new HashSet<TestSolution>();
+            for (Node workingElement : selectedElementList) {
+                TestSolution result = TestSolution.NEED_MORE_INFO;
+                Node testedAttribute = workingElement.getAttributes().
+                        getNamedItem(attributeName);
+
+                // We check whether the content of the tested attribute is
+                // different from the content of each element of the attribute
+                // list passed as argument
+                if (attributeToCompareWithList != null) {
+                    for (String attribute : attributeToCompareWithList) {
+                        Node att = workingElement.getAttributes().
+                                getNamedItem(attribute);
+                        if (att != null && att.getNodeValue().
+                                equalsIgnoreCase(testedAttribute.getNodeValue())) {
+                            result = TestSolution.FAILED;
+                            addSourceCodeRemark(
+                                    result,
+                                    workingElement,
+                                    sourceCodeRemark,
+                                    testedAttribute.getNodeName());
+                            break;
+                        }
+                    }
+                }
+
+                // We check whether the content of the tested attribute is
+                // different from each element of the blacklist passed as argument
+                if (blacklist != null) {
+                    for (String text : blacklist) {
+                        if (testedAttribute.getNodeValue().equalsIgnoreCase(text)) {
+                            result = TestSolution.FAILED;
+                            addSourceCodeRemark(
+                                    result,
+                                    workingElement,
+                                    sourceCodeRemark,
+                                    testedAttribute.getNodeName());
+                            break;
+                        }
+                    }
+                }
+
+                // We check whether the content of the tested attribute is
+                // different from the text content of the current node
+                if ((!workingElement.getTextContent().trim().isEmpty()) &&
+                    (testedAttribute.getNodeValue().
+                            equalsIgnoreCase(workingElement.getTextContent()))) {
+                        result = TestSolution.FAILED;
+                        addSourceCodeRemark(
+                                    result,
+                                    workingElement,
+                                    sourceCodeRemark,
+                                    testedAttribute.getNodeName());
+                }
+                resultSet.add(result);
+            }
+            testSolution = RuleHelper.synthesizeTestSolutionCollection(resultSet);
+        }
+        return testSolution;
+    }
+
 }

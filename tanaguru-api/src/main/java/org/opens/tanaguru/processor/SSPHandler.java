@@ -439,4 +439,17 @@ public interface SSPHandler {
      */
     public BufferedImage getImageFromURL(String URL);
 
+    /**
+     *
+     * @param attributeName
+     * @param blackList
+     * @param attributeToCompareWithList
+     * @param sourceCodeRemark
+     * @return
+     */
+    TestSolution checkAttributePertinence(String attributeName, 
+            Collection<String> blackList, 
+            Collection<String> attributeToCompareWithList,
+            String sourceCodeRemark);
+
 }
