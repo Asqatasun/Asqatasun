@@ -480,14 +480,12 @@ public class SSPHandlerImpl implements SSPHandler {
     @Override
     public TestSolution checkAttributePertinence(
             String attributeName,
-            Collection<String> blackList,
-            Collection<String> attributeToCompareWithList,
-            String sourceCodeRemark) {
+            Collection<String> blacklist,
+            boolean isEqualContentAuthorized){
         return domHandler.checkAttributePertinence(
                 attributeName,
-                blackList,
-                attributeToCompareWithList,
-                sourceCodeRemark);
+                blacklist,
+                isEqualContentAuthorized);
     }
 
 }
