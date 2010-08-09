@@ -33,6 +33,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -50,7 +51,9 @@ public class DOMHandlerImpl implements DOMHandler {
     protected SourceCodeRemarkFactory sourceCodeRemarkFactory;
     protected SSP ssp;
     protected XPath xpath;
-    protected Map<Integer,String> sourceCodeWithLine;
+    protected Map<Integer, String> sourceCodeWithLine;
+    private static final Pattern NON_ALPHANUMERIC_PATTERN =
+            Pattern.compile("[\\W_]+");
 
     public DOMHandlerImpl() {
         super();
@@ -73,7 +76,7 @@ public class DOMHandlerImpl implements DOMHandler {
         boolean found = false;
         int characterPosition = 0;
         Iterator<Integer> iter = sourceCodeWithLine.keySet().iterator();
-        while(iter.hasNext() && !found) {
+        while (iter.hasNext() && !found) {
             int myLineNumber = iter.next();
             int index = 0;
             while (index != -1) {
@@ -82,7 +85,7 @@ public class DOMHandlerImpl implements DOMHandler {
                         "<" + node.getNodeName().toLowerCase() + ">", index);
                 if (index == -1) {
                     index = sourceCodeWithLine.get(myLineNumber).toLowerCase().indexOf(
-                        "<" + node.getNodeName().toLowerCase() + " ", characterPositionOri);
+                            "<" + node.getNodeName().toLowerCase() + " ", characterPositionOri);
                 }
                 if (index != -1) {
                     if (nodeIndex == 0) {
@@ -90,7 +93,7 @@ public class DOMHandlerImpl implements DOMHandler {
                         lineNumber = myLineNumber;
                         characterPosition = index;
                         break;
-                        
+
                     }
                     nodeIndex--;
                     index += node.getNodeName().length();
@@ -278,10 +281,10 @@ public class DOMHandlerImpl implements DOMHandler {
         Set<TestSolution> resultSet = new HashSet<TestSolution>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.PASSED;
-            if (workingElement.getTextContent().trim().isEmpty() && 
-                    (workingElement.getChildNodes().getLength() == 0 ||
-                    (workingElement.getChildNodes().getLength() == 1 &&
-                    workingElement.getChildNodes().item(0).getNodeName().equalsIgnoreCase("#text")))) {
+            if (workingElement.getTextContent().trim().isEmpty()
+                    && (workingElement.getChildNodes().getLength() == 0
+                    || (workingElement.getChildNodes().getLength() == 1
+                    && workingElement.getChildNodes().item(0).getNodeName().equalsIgnoreCase("#text")))) {
                 result = TestSolution.FAILED;
                 addSourceCodeRemark(result, workingElement, "ValueEmpty",
                         workingElement.getNodeValue());
@@ -1050,8 +1053,7 @@ public class DOMHandlerImpl implements DOMHandler {
     public TestSolution checkAttributePertinence(
             String attributeName,
             Collection<String> blacklist,
-            Collection<String> attributeToCompareWithList,
-            String sourceCodeRemark) {
+            boolean isEqualContentAuthorized) {
 
         // We first check whether the content of the tested node is not empty
         TestSolution testSolution = checkAttributeValueNotEmpty(attributeName);
@@ -1064,26 +1066,6 @@ public class DOMHandlerImpl implements DOMHandler {
                         getNamedItem(attributeName);
 
                 // We check whether the content of the tested attribute is
-                // different from the content of each element of the attribute
-                // list passed as argument
-                if (attributeToCompareWithList != null) {
-                    for (String attribute : attributeToCompareWithList) {
-                        Node att = workingElement.getAttributes().
-                                getNamedItem(attribute);
-                        if (att != null && att.getNodeValue().
-                                equalsIgnoreCase(testedAttribute.getNodeValue())) {
-                            result = TestSolution.FAILED;
-                            addSourceCodeRemark(
-                                    result,
-                                    workingElement,
-                                    sourceCodeRemark,
-                                    testedAttribute.getNodeName());
-                            break;
-                        }
-                    }
-                }
-
-                // We check whether the content of the tested attribute is
                 // different from each element of the blacklist passed as argument
                 if (blacklist != null) {
                     for (String text : blacklist) {
@@ -1092,30 +1074,128 @@ public class DOMHandlerImpl implements DOMHandler {
                             addSourceCodeRemark(
                                     result,
                                     workingElement,
-                                    sourceCodeRemark,
+                                    "NotPertinent"+testedAttribute.getNodeName()+"Attribute",
                                     testedAttribute.getNodeName());
                             break;
                         }
                     }
                 }
-
-                // We check whether the content of the tested attribute is
-                // different from the text content of the current node
-                if ((!workingElement.getTextContent().trim().isEmpty()) &&
-                    (testedAttribute.getNodeValue().
-                            equalsIgnoreCase(workingElement.getTextContent()))) {
+                if (result != TestSolution.FAILED) {
+                    if (checkAttributeOnlyContainsNonAlphanumericCharacters(
+                            testedAttribute, workingElement, result).
+                            equals(TestSolution.FAILED)) {
                         result = TestSolution.FAILED;
-                        addSourceCodeRemark(
-                                    result,
-                                    workingElement,
-                                    sourceCodeRemark,
-                                    testedAttribute.getNodeName());
+                    }
+//                    if (!workingElement.getTextContent().trim().isEmpty()) {
+                        if (compareAttributeContentAndNodeContent(
+                                testedAttribute,workingElement, isEqualContentAuthorized).
+                                equals(TestSolution.FAILED)) {
+                            result = TestSolution.FAILED;
+                        }
+//                    }
                 }
                 resultSet.add(result);
             }
             testSolution = RuleHelper.synthesizeTestSolutionCollection(resultSet);
         }
         return testSolution;
+    }
+
+    /**
+     * This method checks whether an attribute only contains
+     * non alphanumeric characters
+     * @param attribute
+     * @param node
+     * @param currentTestSolution
+     * @return
+     */
+    private TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
+            Node attribute, 
+            Node workingElement,
+            TestSolution currentTestSolution) {
+
+        String attributeContent = attribute.getNodeValue().toLowerCase();
+        if (NON_ALPHANUMERIC_PATTERN.matcher(attributeContent).matches()) {
+            addSourceCodeRemark(
+                    TestSolution.FAILED,
+                    workingElement,
+                    "NotPertinent"+attribute.getNodeName()+"Attribute",
+                    attribute.getNodeName());
+            return TestSolution.FAILED;
+        } else {
+            return currentTestSolution;
+        }
+    }
+
+    /**
+     * We check whether the content of the tested attribute is equal, quite 
+     * equal or different from the text content of the current node to determine
+     * the pertinence of the attribute.
+     * @param testedAttribute
+     * @param workingElement
+     * @param isEqualContentAuthorized
+     * @return
+     */
+    private TestSolution compareAttributeContentAndNodeContent(
+            Node testedAttribute,
+            Node workingElement,
+            boolean isEqualContentAuthorized) {
+
+        TestSolution result = TestSolution.NEED_MORE_INFO;
+        String nodeContent = buildTextContentFromNodeElements(workingElement);
+        String attributeContent = testedAttribute.getNodeValue().trim();
+        if (attributeContent.
+                equalsIgnoreCase(nodeContent)) {
+            if (isEqualContentAuthorized) {
+                addSourceCodeRemark(
+                    result,
+                    workingElement,
+                    "SuspectedPertinent"+testedAttribute.getNodeName()+"Attribute",
+                    testedAttribute.getNodeName());
+            } else {
+                result = TestSolution.FAILED;
+                addSourceCodeRemark(
+                    result,
+                    workingElement,
+                    "NotPertinent"+testedAttribute.getNodeName()+"Attribute",
+                    testedAttribute.getNodeName());
+            }
+        } else if (attributeContent.
+                contains(nodeContent)) {
+            addSourceCodeRemark(
+                    result,
+                    workingElement,
+                    "SuspectedPertinent"+testedAttribute.getNodeName()+"Attribute",
+                    testedAttribute.getNodeName());
+        } else {
+            addSourceCodeRemark(
+                    result,
+                    workingElement,
+                    "SuspectedNotPertinent"+testedAttribute.getNodeName()+"Attribute",
+                    testedAttribute.getNodeName());
+        }
+        return result;
+    }
+
+    private String buildTextContentFromNodeElements(Node node) {
+        StringBuffer strBuffer = new StringBuffer();
+        for (int i=0;i<node.getChildNodes().getLength();i++){
+            if (node.getChildNodes().item(i).getNodeName().equalsIgnoreCase("#text")) {
+                strBuffer.append(node.getChildNodes().item(i).getNodeValue()+" ");
+            } else if (node.getChildNodes().item(i).getNodeName().equalsIgnoreCase("img")) {
+                strBuffer.append(node.getChildNodes().item(i).getAttributes().getNamedItem("alt").getNodeValue()+" ");
+            } else if (node.getChildNodes().item(i).getNodeName().equalsIgnoreCase("object")) {
+                strBuffer.append(node.getChildNodes().item(i).getTextContent()+" ");
+            } else if (node.getChildNodes().item(i).getNodeName().equalsIgnoreCase("area")) {
+                strBuffer.append(node.getChildNodes().item(i).getAttributes().getNamedItem("alt").getNodeValue()+" ");
+            }
+        }
+        for (int i=0;i<node.getAttributes().getLength();i++){
+            if (node.getAttributes().item(i).getNodeName().equalsIgnoreCase("alt")) {
+                strBuffer.append(node.getAttributes().item(i).getNodeValue()+" ");
+            }
+        }
+        return strBuffer.toString().trim();
     }
 
 }
