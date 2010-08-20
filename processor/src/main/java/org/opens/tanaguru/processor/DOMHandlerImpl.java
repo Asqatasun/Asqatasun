@@ -322,6 +322,16 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     public TestSolution checkNodeValue(Collection<String> blacklist,
             Collection<String> whitelist) {
+        return  checkNodeValue(blacklist, whitelist, TestSolution.FAILED,
+                "BlackListedValue");
+    }
+
+    @Override
+    public TestSolution checkNodeValue(
+            Collection<String> blacklist,
+            Collection<String> whitelist, 
+            TestSolution testSolution,
+            String erroMessageCode) {
         if (whitelist == null) {
             whitelist = new ArrayList<String>();
         }
@@ -331,10 +341,12 @@ public class DOMHandlerImpl implements DOMHandler {
 
         Set<TestSolution> resultSet = new HashSet<TestSolution>();
         for (Node workingElement : selectedElementList) {
+
             TestSolution result = TestSolution.NEED_MORE_INFO;
             boolean isInBlackList = false;
             boolean isInWhiteList = false;
-            String nodeValue = workingElement.getNodeValue();
+            String nodeValue = workingElement.getTextContent().trim();
+
             for (String text : blacklist) {
                 if (nodeValue.toLowerCase().equals(text.toLowerCase())) {
                     isInBlackList = true;
@@ -352,16 +364,16 @@ public class DOMHandlerImpl implements DOMHandler {
                         new IncoherentValueDomainsException());
             }
             if (isInBlackList) {
-                result = TestSolution.FAILED;
-                addSourceCodeRemark(result, workingElement, "BlackListedValue",
+                result = testSolution;
+                addSourceCodeRemark(result, workingElement, erroMessageCode,
                         nodeValue);
             }
             if (isInWhiteList) {
                 result = TestSolution.PASSED;
             }
             if (result.equals(TestSolution.NEED_MORE_INFO)) {
-                addSourceCodeRemark(result, workingElement, "VerifyValue",
-                        nodeValue);
+//                addSourceCodeRemark(result, workingElement, "VerifyValue",
+//                        nodeValue);
             }
             resultSet.add(result);
         }
@@ -1042,63 +1054,35 @@ public class DOMHandlerImpl implements DOMHandler {
     }
 
     /**
-     *
-     * @param attributeName
-     * @param blacklist (can be null)
-     * @param attributeToCompareWithList (can be null)
-     * @param sourceCodeRemark
+     * This method checks whether an attribute only contains
+     * non alphanumeric characters
+     * @param attribute
+     * @param node
+     * @param currentTestSolution
      * @return
      */
     @Override
-    public TestSolution checkAttributePertinence(
-            String attributeName,
-            Collection<String> blacklist,
-            boolean isEqualContentAuthorized) {
-
-        // We first check whether the content of the tested node is not empty
-        TestSolution testSolution = checkAttributeValueNotEmpty(attributeName);
-        // If the content of the tested attribute is not empty
-        if (testSolution != TestSolution.FAILED){
-            Set<TestSolution> resultSet = new HashSet<TestSolution>();
-            for (Node workingElement : selectedElementList) {
-                TestSolution result = TestSolution.NEED_MORE_INFO;
-                Node testedAttribute = workingElement.getAttributes().
-                        getNamedItem(attributeName);
-
-                // We check whether the content of the tested attribute is
-                // different from each element of the blacklist passed as argument
-                if (blacklist != null) {
-                    for (String text : blacklist) {
-                        if (testedAttribute.getNodeValue().equalsIgnoreCase(text)) {
-                            result = TestSolution.FAILED;
-                            addSourceCodeRemark(
-                                    result,
-                                    workingElement,
-                                    "NotPertinent"+testedAttribute.getNodeName()+"Attribute",
-                                    testedAttribute.getNodeName());
-                            break;
-                        }
-                    }
-                }
-                if (result != TestSolution.FAILED) {
-                    if (checkAttributeOnlyContainsNonAlphanumericCharacters(
-                            testedAttribute, workingElement, result).
-                            equals(TestSolution.FAILED)) {
-                        result = TestSolution.FAILED;
-                    }
-//                    if (!workingElement.getTextContent().trim().isEmpty()) {
-                        if (compareAttributeContentAndNodeContent(
-                                testedAttribute,workingElement, isEqualContentAuthorized).
-                                equals(TestSolution.FAILED)) {
-                            result = TestSolution.FAILED;
-                        }
-//                    }
-                }
-                resultSet.add(result);
-            }
-            testSolution = RuleHelper.synthesizeTestSolutionCollection(resultSet);
+    public  TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
+            Node attribute, 
+            Node workingElement,
+            TestSolution testSolution,
+            String remarkMessage) {
+        String attributeContent;
+        if (attribute.getNodeName().equalsIgnoreCase("#text")) {
+            attributeContent = attribute.getTextContent().toLowerCase();
+        } else {
+            attributeContent = attribute.getNodeValue().toLowerCase();
         }
-        return testSolution;
+        if (NON_ALPHANUMERIC_PATTERN.matcher(attributeContent).matches()) {
+            addSourceCodeRemark(
+                testSolution,
+                workingElement,
+                remarkMessage,
+                attribute.getNodeName());
+            return testSolution;
+        } else {
+            return TestSolution.PASSED;
+        }
     }
 
     /**
@@ -1109,93 +1093,22 @@ public class DOMHandlerImpl implements DOMHandler {
      * @param currentTestSolution
      * @return
      */
-    private TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
-            Node attribute, 
+    @Override
+    public  TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
+            String attributeContent,
             Node workingElement,
-            TestSolution currentTestSolution) {
-
-        String attributeContent = attribute.getNodeValue().toLowerCase();
+            TestSolution testSolution,
+            String remarkMessage) {
         if (NON_ALPHANUMERIC_PATTERN.matcher(attributeContent).matches()) {
             addSourceCodeRemark(
-                    TestSolution.FAILED,
-                    workingElement,
-                    "NotPertinent"+attribute.getNodeName()+"Attribute",
-                    attribute.getNodeName());
-            return TestSolution.FAILED;
+                testSolution,
+                workingElement,
+                remarkMessage,
+                workingElement.getNodeName());
+            return testSolution;
         } else {
-            return currentTestSolution;
+            return TestSolution.PASSED;
         }
-    }
-
-    /**
-     * We check whether the content of the tested attribute is equal, quite 
-     * equal or different from the text content of the current node to determine
-     * the pertinence of the attribute.
-     * @param testedAttribute
-     * @param workingElement
-     * @param isEqualContentAuthorized
-     * @return
-     */
-    private TestSolution compareAttributeContentAndNodeContent(
-            Node testedAttribute,
-            Node workingElement,
-            boolean isEqualContentAuthorized) {
-
-        TestSolution result = TestSolution.NEED_MORE_INFO;
-        String nodeContent = buildTextContentFromNodeElements(workingElement);
-        String attributeContent = testedAttribute.getNodeValue().trim();
-        if (attributeContent.
-                equalsIgnoreCase(nodeContent)) {
-            if (isEqualContentAuthorized) {
-                addSourceCodeRemark(
-                    result,
-                    workingElement,
-                    "SuspectedPertinent"+testedAttribute.getNodeName()+"Attribute",
-                    testedAttribute.getNodeName());
-            } else {
-                result = TestSolution.FAILED;
-                addSourceCodeRemark(
-                    result,
-                    workingElement,
-                    "NotPertinent"+testedAttribute.getNodeName()+"Attribute",
-                    testedAttribute.getNodeName());
-            }
-        } else if (attributeContent.
-                contains(nodeContent)) {
-            addSourceCodeRemark(
-                    result,
-                    workingElement,
-                    "SuspectedPertinent"+testedAttribute.getNodeName()+"Attribute",
-                    testedAttribute.getNodeName());
-        } else {
-            addSourceCodeRemark(
-                    result,
-                    workingElement,
-                    "SuspectedNotPertinent"+testedAttribute.getNodeName()+"Attribute",
-                    testedAttribute.getNodeName());
-        }
-        return result;
-    }
-
-    private String buildTextContentFromNodeElements(Node node) {
-        StringBuffer strBuffer = new StringBuffer();
-        for (int i=0;i<node.getChildNodes().getLength();i++){
-            if (node.getChildNodes().item(i).getNodeName().equalsIgnoreCase("#text")) {
-                strBuffer.append(node.getChildNodes().item(i).getNodeValue()+" ");
-            } else if (node.getChildNodes().item(i).getNodeName().equalsIgnoreCase("img")) {
-                strBuffer.append(node.getChildNodes().item(i).getAttributes().getNamedItem("alt").getNodeValue()+" ");
-            } else if (node.getChildNodes().item(i).getNodeName().equalsIgnoreCase("object")) {
-                strBuffer.append(node.getChildNodes().item(i).getTextContent()+" ");
-            } else if (node.getChildNodes().item(i).getNodeName().equalsIgnoreCase("area")) {
-                strBuffer.append(node.getChildNodes().item(i).getAttributes().getNamedItem("alt").getNodeValue()+" ");
-            }
-        }
-        for (int i=0;i<node.getAttributes().getLength();i++){
-            if (node.getAttributes().item(i).getNodeName().equalsIgnoreCase("alt")) {
-                strBuffer.append(node.getAttributes().item(i).getNodeValue()+" ");
-            }
-        }
-        return strBuffer.toString().trim();
     }
 
 }

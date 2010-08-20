@@ -118,6 +118,24 @@ public interface DOMHandler {
 
     /**
      *
+     * @param blacklist
+     *            the list of prevented values
+     * @param whitelist
+     *            the list of granted values
+     * @param result
+     *            the result associated with a blacklisted element
+     * @param errorMessageCode
+     *            the errorMessageCode to use to create the processRemark
+     * @return
+     */
+    TestSolution checkNodeValue(
+            Collection<String> blacklist,
+            Collection<String> whitelist,
+            TestSolution result,
+            String errorMessageCode);
+
+    /**
+     *
      * @param attributeName
      *            the name of the attribute to check
      * @param blacklist
@@ -410,15 +428,32 @@ public interface DOMHandler {
             String messageCode, String attributeName);
 
     /**
-     *
-     * @param attributeName
-     * @param blackList
-     * @param attributeToCompareWithList
-     * @param sourceCodeRemark
+     * This method checks whether an attribute only contains non alphanumeric
+     * characters
+     * @param attribute
+     * @param workingElement
+     * @param currentTestSolution
+     * @param remarkMessage
      * @return
      */
-    TestSolution checkAttributePertinence(String attributeName,
-            Collection<String> blackList,
-            Collection<String> attributeToCompareWithList,
-            String sourceCodeRemark);
+    public  TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
+            Node attribute,
+            Node workingElement,
+            TestSolution testSolution,
+            String remarkMessage);
+
+    /**
+     * This method checks whether an attribute only contains non alphanumeric
+     * characters
+     * @param attributeContent
+     * @param workingElement
+     * @param currentTestSolution
+     * @param remarkMessage
+     * @return
+     */
+    public  TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
+            String attributeContent,
+            Node workingElement,
+            TestSolution testSolution,
+            String remarkMessage);
 }

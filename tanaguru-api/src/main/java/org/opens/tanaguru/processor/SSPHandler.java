@@ -99,6 +99,11 @@ public interface SSPHandler {
      */
     TestSolution checkContentNotEmpty();
 
+    /**
+     *
+     * @param expr
+     * @return
+     */
     TestSolution checkEachWithXpath(String expr);
 
     /**
@@ -111,6 +116,24 @@ public interface SSPHandler {
      */
     TestSolution checkNodeValue(Collection<String> blacklist,
             Collection<String> whitelist);
+
+    /**
+     * 
+     * @param blacklist
+     *            the list of prevented values
+     * @param whitelist
+     *            the list of granted values
+     * @param testSolution
+     *            the test solution when the node value belongs to the black list
+     * @param erroMessageCode
+     *            the error message code
+     * @return the result of the check processing
+     */
+    TestSolution checkNodeValue(
+            Collection<String> blacklist,
+            Collection<String> whitelist,
+            TestSolution testSolution,
+            String erroMessageCode);
 
     /**
      *
@@ -229,7 +252,7 @@ public interface SSPHandler {
      */
     boolean isSelectedElementsEmpty();
 
-    /**
+   /**
      *
      * @param attributeName
      *            the name of the attribute to filter
@@ -440,16 +463,33 @@ public interface SSPHandler {
     public BufferedImage getImageFromURL(String URL);
 
     /**
-     *
-     * @param attributeName
-     * @param blackList
-     * @param attributeToCompareWithList
-     * @param sourceCodeRemark
+     * This method checks whether an attribute only contains non alphanumeric
+     * characters
+     * @param attribute
+     * @param workingElement
+     * @param testSolution
+     * @param remarkMessage
      * @return
      */
-    TestSolution checkAttributePertinence(String attributeName, 
-            Collection<String> blackList, 
-            Collection<String> attributeToCompareWithList,
-            String sourceCodeRemark);
+    public  TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
+            Node attribute,
+            Node workingElement,
+            TestSolution testSolution,
+            String remarkMessage);
+
+    /**
+     * This method checks whether an attribute only contains non alphanumeric
+     * characters
+     * @param attributeContent
+     * @param workingElement
+     * @param currentTestSolution
+     * @param remarkMessage
+     * @return
+     */
+    public  TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
+            String attributeContent,
+            Node workingElement,
+            TestSolution testSolution,
+            String remarkMessage);
 
 }

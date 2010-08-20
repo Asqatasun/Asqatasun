@@ -53,6 +53,7 @@ public class SSPHandlerImpl implements SSPHandler {
         super();
     }
 
+    @Override
     public SSPHandler beginSelection() {
         domHandler.beginSelection();
         if (cssHandler != null) 
@@ -79,99 +80,131 @@ public class SSPHandlerImpl implements SSPHandler {
         return this;
     }
 
+    @Override
     public TestSolution checkAttributeExists(String attributeName) {
         return domHandler.checkAttributeExists(attributeName);
     }
 
+    @Override
     public TestSolution checkAttributeValueExpression(String attributeName,
             String regex) {
         return domHandler.checkAttributeValueExpression(attributeName, regex);
     }
 
+    @Override
     public TestSolution checkAttributeValueLengthLower(String attributeName,
             int length, TestSolution defaultFailResult) {
         return domHandler.checkAttributeValueLengthLower(attributeName, length,
                 defaultFailResult);
     }
 
+    @Override
     public TestSolution checkAttributeValueNotEmpty(String attributeName) {
         return domHandler.checkAttributeValueNotEmpty(attributeName);
     }
 
+    @Override
     public TestSolution checkAttributeValueIsEmpty(String attributeName) {
         return domHandler.checkAttributeValueIsEmpty(attributeName);
     }
 
+    @Override
     public TestSolution checkChildNodeExists(String childNodeName) {
         return domHandler.checkChildNodeExists(childNodeName);
     }
 
+    @Override
     public TestSolution checkChildNodeExistsRecursively(String childNodeName) {
         return domHandler.checkChildNodeExistsRecursively(childNodeName);
     }
 
+    @Override
     public TestSolution checkContentNotEmpty() {
         return domHandler.checkContentNotEmpty();
     }
 
+    @Override
     public TestSolution checkEachWithXpath(String expr) {
         return domHandler.checkEachWithXpath(expr);
     }
 
+    @Override
     public TestSolution checkNodeValue(Collection<String> blacklist,
             Collection<String> whitelist) {
         return domHandler.checkNodeValue(blacklist, whitelist);
     }
 
+    @Override
+    public TestSolution checkNodeValue(Collection<String> blacklist,
+            Collection<String> whitelist,
+            TestSolution testSolution,
+            String errorCodeMessage) {
+        return domHandler.checkNodeValue(blacklist,
+                whitelist,
+                testSolution,
+                errorCodeMessage);
+    }
+
+    @Override
     public TestSolution checkRelativeUnitExists(Collection<Integer> blackList) {
         if (cssHandler != null)
             return cssHandler.checkRelativeUnitExists(blackList);
         else return TestSolution.NOT_APPLICABLE;
     }
 
+    @Override
     public TestSolution checkTextContentAndAttributeValue(String attributeName,
             Collection<String> blacklist, Collection<String> whitelist) {
         return domHandler.checkTextContentAndAttributeValue(attributeName,
                 blacklist, whitelist);
     }
 
+    @Override
     public TestSolution checkTextContentValue(Collection<String> blacklist,
             Collection<String> whitelist) {
         return domHandler.checkTextContentValue(blacklist, whitelist);
     }
 
+    @Override
     public TestSolution checkTextContentValueLengthLower(int length,
             TestSolution defaultFailResult) {
         return domHandler.checkTextContentValueLengthLower(length,
                 defaultFailResult);
     }
 
+    @Override
     public TestSolution checkTextContentValueNotEmpty() {
         return domHandler.checkTextContentValueNotEmpty();
     }
 
+    @Override
     public DOMHandler excludeNodesWithAttribute(String attributeName) {
         return domHandler.excludeNodesWithAttribute(attributeName);
     }
 
+    @Override
     public SSPHandler excludeNodesWithChildNode(ArrayList<String> childNodeNames) {
         domHandler.excludeNodesWithChildNode(childNodeNames);
         return this;
     }
 
+    @Override
     public SSPHandler excludeNodesWithChildNode(String childNodeName) {
         domHandler.excludeNodesWithChildNode(childNodeName);
         return this;
     }
 
+    @Override
     public List<String> getAttributeValues(String attributeName) {
         return domHandler.getAttributeValues(attributeName);
     }
 
+    @Override
     public WebResource getPage() {
         return domHandler.getPage();
     }
 
+    @Override
     public List<ProcessRemark> getRemarkList() {// XXX Ré-implémenter avec la mise en commun des listes de remarques
         List<ProcessRemark> allRemarkList = new ArrayList<ProcessRemark>();
 
@@ -186,38 +219,46 @@ public class SSPHandlerImpl implements SSPHandler {
         return allRemarkList;
     }
 
+    @Override
     public List<Node> getSelectedElementList() {
         return domHandler.getSelectedElementList();
     }
 
+    @Override
     public SSP getSSP() {
         return ssp;
     }
 
+    @Override
     public List<String> getTextContentValues() {
         return domHandler.getTextContentValues();
     }
 
+    @Override
     public boolean isSelectedElementsEmpty() {
         return domHandler.isSelectedElementsEmpty();
     }
 
+    @Override
     public SSPHandler keepNodesWithAttribute(String attributeName) {
         domHandler.keepNodesWithAttribute(attributeName);
         return this;
     }
 
+    @Override
     public SSPHandler keepNodesWithAttributeValueEquals(String attributeName,
             Collection<String> values) {
         domHandler.keepNodesWithAttributeValueEquals(attributeName, values);
         return this;
     }
 
+    @Override
     public SSPHandler keepNodesWithAttributeValueNonEmpty(String attributeName) {
         domHandler.keepNodesWithAttributeValueNonEmpty(attributeName);
         return this;
     }
 
+    @Override
     public SSPHandler keepNodesWithAttributeValueStartingWith(
             String attributeName, Collection<String> values) {
         domHandler.keepNodesWithAttributeValueStartingWith(attributeName,
@@ -225,23 +266,27 @@ public class SSPHandlerImpl implements SSPHandler {
         return this;
     }
 
+    @Override
     public SSPHandler keepNodesWithAttributeValueStartingWith(
             String attributeName, String value) {
         domHandler.keepNodesWithAttributeValueStartingWith(attributeName, value);
         return this;
     }
 
+    @Override
     public SSPHandler keepNodesWithChildNode(String childNodeName) {
         domHandler.keepNodesWithChildNode(childNodeName);
         return this;
     }
 
+    @Override
     public SSPHandler keepNodesWithoutChildNode(
             Collection<String> childNodeNames) {
         domHandler.keepNodesWithoutChildNode(childNodeNames);
         return this;
     }
 
+    @Override
     public SSPHandler keepNodesWithoutChildNode(String childNodeName) {
         domHandler.keepNodesWithChildNode(childNodeName);
         return this;
@@ -253,48 +298,57 @@ public class SSPHandlerImpl implements SSPHandler {
         return this;
     }
 
+    @Override
     public SSPHandler selectAllRules() {
         if (cssHandler != null)
             cssHandler.selectAllRules();
         return this;
     }
 
+    @Override
     public SSPHandler selectAttributeByName(String attributeName) {
         domHandler.selectAttributeByName(attributeName);
         return this;
     }
 
+    @Override
     public SSPHandler selectChildNodes(Collection<String> childNodeNames) {
         domHandler.selectChildNodes(childNodeNames);
         return this;
     }
 
+    @Override
     public SSPHandler selectChildNodes(String childNodeName) {
         domHandler.selectChildNodes(childNodeName);
         return this;
     }
 
+    @Override
     public SSPHandler selectChildNodesRecursively(
             Collection<String> childNodeNames) {
         domHandler.selectChildNodesRecursively(childNodeNames);
         return this;
     }
 
+    @Override
     public SSPHandler selectChildNodesRecursively(String childNodeName) {
         domHandler.selectChildNodesRecursively(childNodeName);
         return this;
     }
 
+    @Override
     public SSPHandler selectDocumentNodes(Collection<String> nodeNames) {
         domHandler.selectDocumentNodes(nodeNames);
         return this;
     }
 
+    @Override
     public SSPHandler selectDocumentNodes(String nodeName) {
         domHandler.selectDocumentNodes(nodeName);
         return this;
     }
 
+    @Override
     public SSPHandler selectDocumentNodesWithAttribute(String attributeName) {
         domHandler.selectDocumentNodesWithAttribute(attributeName);
         return this;
@@ -330,10 +384,12 @@ public class SSPHandlerImpl implements SSPHandler {
         this.jsHandler = jsHandler;
     }
 
-    public void setSelectedElementList(List<Node> selectedElementList) {// XXX Cette méthode doit-elle être rester visible de l'extérieur?
+    @Override
+    public void setSelectedElementList(List<Node> selectedElementList) {
         domHandler.setSelectedElementList(selectedElementList);
     }
 
+    @Override
     public void setSSP(SSP ssp) {
         this.ssp = ssp;
         domHandler.setSSP(ssp);
@@ -348,10 +404,12 @@ public class SSPHandlerImpl implements SSPHandler {
         this.nomenclatureLoaderService = nomenclatureLoaderService;
     }
 
+    @Override
     public void setProcessRemarkFactory(ProcessRemarkFactory processRemarkFactory) {
         this.processRemarkFactory = processRemarkFactory;
     }
 
+    @Override
     public void setSourceCodeRemarkFactory(SourceCodeRemarkFactory sourceCodeRemarkFactory) {
         this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
     }
@@ -366,12 +424,14 @@ public class SSPHandlerImpl implements SSPHandler {
      * @param expr
      * @return
      */
+    @Override
     public SSPHandler domXPathSelectNodeSet(String expression) {
         domHandler.xPathSelectNodeSet(expression);
         selectionExpression = expression;
         return this;
     }
 
+    @Override
     public TestSolution domCheckNodeValueInNomenclature(String nomenclatureCode, String errorMessage) {
         Set<TestSolution> resultSet = new HashSet<TestSolution>();
 
@@ -425,6 +485,7 @@ public class SSPHandlerImpl implements SSPHandler {
      * @param messageCode
      * @param attributeName
      */
+    @Override
     public void addSourceCodeRemark(TestSolution processResult, Node node,
             String messageCode, String attributeName) {
         domHandler.addSourceCodeRemark(processResult, node, messageCode, attributeName);
@@ -437,6 +498,48 @@ public class SSPHandlerImpl implements SSPHandler {
         return this;
     }
 
+    @Override
+    public BufferedImage getImageFromURL(String url) {
+        try {
+            return imageMap.get(UURIFactory.getInstance(urlIdentifier.resolve(url)
+                    .toExternalForm()).toString());
+        } catch (URIException ex) {
+            Logger.getLogger(SSPHandlerImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public  TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
+            Node attribute,
+            Node workingElement,
+            TestSolution testSolution,
+            String remarkMessage) {
+        return domHandler.checkAttributeOnlyContainsNonAlphanumericCharacters(
+                attribute,
+                workingElement,
+                testSolution,
+                remarkMessage);
+    }
+
+    @Override
+    public  TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
+            String attributeContent,
+            Node workingElement,
+            TestSolution testSolution,
+            String remarkMessage) {
+        return domHandler.checkAttributeOnlyContainsNonAlphanumericCharacters(
+                attributeContent,
+                workingElement,
+                testSolution,
+                remarkMessage);
+    }
+
+    /**
+     * This method is used to initialize the image map. Images are downloaded
+     * by the crawler component, and the map we initialize here associates
+     * the url of the image with the binary image content.
+     */
     private void initializeImageMap(){
         if (imageMap==null){
             imageMap = new HashMap<String, BufferedImage>();
@@ -464,28 +567,6 @@ public class SSPHandlerImpl implements SSPHandler {
                 }
             }
         }
-    }
-
-    @Override
-    public BufferedImage getImageFromURL(String url) {
-        try {
-            return imageMap.get(UURIFactory.getInstance(urlIdentifier.resolve(url)
-                    .toExternalForm()).toString());
-        } catch (URIException ex) {
-            Logger.getLogger(SSPHandlerImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-
-    @Override
-    public TestSolution checkAttributePertinence(
-            String attributeName,
-            Collection<String> blacklist,
-            boolean isEqualContentAuthorized){
-        return domHandler.checkAttributePertinence(
-                attributeName,
-                blacklist,
-                isEqualContentAuthorized);
     }
 
 }
