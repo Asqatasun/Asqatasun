@@ -39,7 +39,9 @@ INSERT INTO `NOMENCLATURE` (`Id_Nomenclature`, `Cd_Nomenclature`, `Description`,
 (11, 'DeprecatedRepresentationTags', NULL, NULL, NULL, NULL),
 (12, 'UnexplicitPageTitle', NULL, NULL, NULL, NULL),
 (13, 'ImageFileExtensions', NULL, NULL, NULL, NULL),
-(14, 'MediaListNotAcceptingRelativeUnits', NULL, NULL, NULL, NULL);
+(14, 'MediaListNotAcceptingRelativeUnits', NULL, NULL, NULL, NULL),
+(15, 'DeprecatedRepresentationAttributes', NULL, NULL, NULL, NULL),
+(16, 'DeprecatedRepresentationAttributesWithExceptions', NULL, NULL, NULL, NULL);
 
 --
 -- Dumping data for table `NOMENCLATURE_ELEMENT`
@@ -249,7 +251,39 @@ INSERT INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`,
 ('NomenclatureElementImpl', 201, 'screen', NULL, 14),
 ('NomenclatureElementImpl', 202, 'projection', NULL, 14),
 ('NomenclatureElementImpl', 203, 'handheld', NULL, 14),
-('NomenclatureElementImpl', 204, 'tv', NULL, 14);
+('NomenclatureElementImpl', 204, 'tv', NULL, 14),
+('NomenclatureElementImpl', 205, 'telecharger', NULL, 7),
+('NomenclatureElementImpl', 206, 'télécharger', NULL, 7),
+('NomenclatureElementImpl', 207, 'download', NULL, 7),
+('NomenclatureElementImpl', 208, 'visiter', NULL, 7),
+('NomenclatureElementImpl', 209, 'visit', NULL, 7),
+('NomenclatureElementImpl', 210, 'ajouter', NULL, 7),
+('NomenclatureElementImpl', 211, 'add', NULL, 7),
+('NomenclatureElementImpl', 212, 'acheter', NULL, 7),
+('NomenclatureElementImpl', 213, 'buy', NULL, 7),
+('NomenclatureElementImpl', 214, 'ouvrir', NULL, 7),
+('NomenclatureElementImpl', 215, 'open', NULL, 7),
+('NomenclatureElementImpl', 216, 'valider', NULL, 7),
+('NomenclatureElementImpl', 217, 'validate', NULL, 7),
+('NomenclatureElementImpl', 218, 'envoyer', NULL, 7),
+('NomenclatureElementImpl', 219, 'send', NULL, 7),
+('NomenclatureElementImpl', 220, 'suivant', NULL, 7),
+('NomenclatureElementImpl', 221, 'next', NULL, 7),
+('NomenclatureElementImpl', 222, 'precedent', NULL, 7),
+('NomenclatureElementImpl', 223, 'précédent', NULL, 7),
+('NomenclatureElementImpl', 224, 'previous', NULL, 7),
+('NomenclatureElementImpl', 225, 'align', NULL, 15),
+('NomenclatureElementImpl', 226, 'alink', NULL, 15),
+('NomenclatureElementImpl', 227, 'background', NULL, 15),
+('NomenclatureElementImpl', 228, 'basefont', NULL, 15),
+('NomenclatureElementImpl', 229, 'bgcolor', NULL, 15),
+('NomenclatureElementImpl', 230, 'border', NULL, 15),
+('NomenclatureElementImpl', 231, 'color', NULL, 15),
+('NomenclatureElementImpl', 232, 'link', NULL, 15),
+('NomenclatureElementImpl', 233, 'text', NULL, 15),
+('NomenclatureElementImpl', 234, 'vlink', NULL, 15),
+('NomenclatureElementImpl', 235, 'width', NULL, 16),
+('NomenclatureElementImpl', 236, 'height', NULL, 16);
 
 --
 -- Dumping data for table `REFERENCE`
@@ -306,10 +340,10 @@ INSERT INTO `TEST` (`Id_Test`, `Cd_Test`, `Description`, `Label`, `Rank`, `Rule_
 (1, 'Aw20-01011', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#images', '1.1.1', 2010101, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule01011', NULL, NULL, 1, NULL, 1),
 (2, 'Aw20-01012', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#images', '1.1.2', 2010102, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule01012', NULL, NULL, 1, NULL, 1),
 (3, 'Aw20-01021', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#images', '1.2.1', 2010201, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule01021', NULL, NULL, 1, NULL, 1),
-(4, 'Aw20-01031', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#images', '1.3.1', 2010301, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule01031', NULL, NULL, 1, NULL, 1),
+-- (4, 'Aw20-01031', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#images', '1.3.1', 2010301, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule01031', NULL, NULL, 1, NULL, 1),
 (5, 'Aw20-02011', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#cadres', '2.1.1', 2020101, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule02011', NULL, NULL, 1, NULL, 1),
 (6, 'Aw20-02012', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#cadres', '2.1.2', 2020102, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule02012', NULL, NULL, 1, NULL, 1),
-(7, 'Aw20-06071', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#liens', '6.7.1', 2060701, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule06071', NULL, NULL, 1, NULL, 1),
+--(7, 'Aw20-06071', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#liens', '6.7.1', 2060701, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule06071', NULL, NULL, 1, NULL, 1),
 (8, 'Aw20-08051', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#elements', '8.5.1', 2080501, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule08051', NULL, NULL, 1, NULL, 1),
 (9, 'Aw20-08061', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#elements', '8.6.1', 2080601, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule08061', NULL, NULL, 1, NULL, 1),
 (10, 'Aw20-09011', 'http://www.braillenet.org/accessibilite/referentiel-aw2/liste-deploye.php#structure', '9.1.1', 2090101, 'accessiweb2.0', 'org.opens.tanaguru.rule.accessiweb20.Aw20Rule09011', NULL, NULL, 1, NULL, 1),
@@ -326,3 +360,4 @@ INSERT INTO `TEST` (`Id_Test`, `Cd_Test`, `Description`, `Label`, `Rank`, `Rule_
 --
 -- Dumping data for table `WEB_RESOURCE`
 --
+
