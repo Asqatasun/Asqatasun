@@ -16,7 +16,7 @@
         <module>rule-implementation-loader</module>
         <module>nomenclatureloader</module>
         <module>crawler</module>
-        <module>contentloader</module>
+        <!--<module>contentloader</module>-->
         <module>contentadapter</module>
         <module>processor</module>
         <module>consolidator</module>
@@ -24,15 +24,12 @@
         <module>persistence</module>
         <module>tanaguru-engine</module>
         <module>logging</module>
-        <module>tanaguru-client</module>
+        <!--<module>tanaguru-client</module>
         <module>tanaguru-ws</module>
-        <module>tanaguru-ws-client</module>
-        <module>tanaguru-web-app</module>
+        <module>tanaguru-ws-client</module>-->
         <module>tanaguru-membership</module>
         <module>tanaguru-i18n</module>
-        <!--<module>accessiweb1.1</module>-->
-        <module>accessiweb2.0</module>
-        <module>tanaguru-testing-tools</module>
+        <!--<module>tanaguru-testing-tools</module>-->
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

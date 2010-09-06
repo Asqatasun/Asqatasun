@@ -23,14 +23,15 @@ public class CrawlerServiceImpl implements CrawlerService {
     public Page crawl(Page page) {
         crawler.setPageURL(page.getURL());
         crawler.run();
-        Page result = (Page) crawler.getResult();
-        result.setAudit(page.getAudit());
+        ((Page)crawler.getResult()).setAudit(page.getAudit());
+        page = (Page) crawler.getResult();
+
         // The crawler component gets the webResources AND the associated contents
         if (crawler instanceof CrawlerImpl){
             page.getAudit().addAllContent(
                     ((CrawlerImpl)crawler).getContentListResult());
         }
-        return result;
+        return page;
     }
 
     public void setCrawler(Crawler crawler) {
@@ -43,10 +44,23 @@ public class CrawlerServiceImpl implements CrawlerService {
      * @return returns the site after modification
      */
     public Site crawl(Site site) {
-        crawler.setSiteURL(site.getURL());
+        int componentListSize = site.getComponentList().size();
+        if (componentListSize == 0) {
+            crawler.setSiteURL(site.getURL());
+        } else {
+            String[] urlPage = new String[componentListSize];
+            Object[] webresourceTab = site.getComponentList().toArray();
+            for (int i=0;i<componentListSize;i++) {
+                if (webresourceTab[i] instanceof WebResource) {
+                    urlPage[i] = ((WebResource)webresourceTab[i]).getURL();
+                }
+            }
+            crawler.setSiteURL(site.getURL(), urlPage);
+        }
         crawler.run();
-        Site result = (Site) crawler.getResult();
-        site.addAllChild((Collection<WebResource>) result.getComponentList());
+        ((Site)crawler.getResult()).setAudit(site.getAudit());
+        site = (Site) crawler.getResult();
+//        site.addAllChild((Collection<WebResource>) result.getComponentList());
         for (WebResource webResource : site.getComponentList()) {
             webResource.setAudit(site.getAudit());
         }

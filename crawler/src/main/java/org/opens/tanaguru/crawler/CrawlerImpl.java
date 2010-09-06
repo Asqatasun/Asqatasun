@@ -106,7 +106,21 @@ public class CrawlerImpl implements Crawler {
     @Override
     public void setSiteURL(String siteURL) {
         webResource = webResourceFactory.createSite(siteURL);
-        this.crawlJob = new CrawlJob(initializeCrawlContext());
+        String[] siteUrl = {siteURL};
+        this.crawlJob = new CrawlJob(initializeCrawlContext(siteUrl));
+        if (crawlJob.isLaunchable()) {
+            crawlJob.checkXML();
+        }
+    }
+
+    /**
+     *
+     * @param siteUrl
+     */
+    @Override
+    public void setSiteURL(String siteName, String[] siteURL) {
+        webResource = webResourceFactory.createSite(siteName);
+        this.crawlJob = new CrawlJob(initializeCrawlContext(siteURL));
         if (crawlJob.isLaunchable()) {
             crawlJob.checkXML();
         }
@@ -119,7 +133,8 @@ public class CrawlerImpl implements Crawler {
     @Override
     public void setPageURL(String pageURL) {
         webResource = webResourceFactory.createPage(pageURL);
-        this.crawlJob = new CrawlJob(initializeCrawlContext());
+        String[] pageUrl = {pageURL};
+        this.crawlJob = new CrawlJob(initializeCrawlContext(pageUrl));
         if (crawlJob.isLaunchable()) {
             crawlJob.checkXML();
         }
@@ -168,7 +183,7 @@ public class CrawlerImpl implements Crawler {
      * This method initialize the heritrix context before starting the crawl
      * @return
      */
-    private File initializeCrawlContext() {
+    private File initializeCrawlContext(String[] url) {
         // Create one directory
         currentJobOutputDir = new File(outputDir + "/" + "crawl" + "-" + new Date().getTime());
         if (!currentJobOutputDir.exists()) {
@@ -186,7 +201,10 @@ public class CrawlerImpl implements Crawler {
             StringBuffer newContextFile = new StringBuffer();
             while ((c = in.readLine()) != null) {
                 if (c.equalsIgnoreCase(urlStrToReplace)) {
-                    newContextFile.append(UURIFactory.getInstance(webResource.getURL()).toString());
+                    for (int i=0 ; i<url.length ; i++) {
+                        newContextFile.append(UURIFactory.getInstance(url[i]));
+                        newContextFile.append("\r");
+                    }
                 } else {
                     newContextFile.append(c);
                 }
@@ -302,4 +320,4 @@ public class CrawlerImpl implements Crawler {
         }
         return (file.delete());
     }
-}
+         }
