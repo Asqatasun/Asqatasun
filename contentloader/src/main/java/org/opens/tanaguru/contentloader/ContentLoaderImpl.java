@@ -15,6 +15,8 @@ import java.util.List;
  */
 public class ContentLoaderImpl implements ContentLoader {
 
+    private static final int HTTP_CODE_OK = 200;
+
     private ContentFactory contentFactory;
     private Downloader downloader;
     private List<Content> result;
@@ -43,7 +45,12 @@ public class ContentLoaderImpl implements ContentLoader {
             downloader.setURL(webResource.getURL());
             downloader.run();
             String stringContent = downloader.getResult();
-            Content content = contentFactory.createSSP(new Date(), webResource.getURL(), stringContent, (Page) webResource);
+            Content content = contentFactory.createSSP(
+                    new Date(),
+                    webResource.getURL(),
+                    stringContent,
+                    (Page) webResource,
+                    HTTP_CODE_OK);
             localResult.add(content);
         }
         if (webResource instanceof Site) {
