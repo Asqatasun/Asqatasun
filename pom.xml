@@ -16,7 +16,7 @@
         <module>rule-implementation-loader</module>
         <module>nomenclatureloader</module>
         <module>crawler</module>
-        <!--<module>contentloader</module>-->
+        <module>contentloader</module>
         <module>contentadapter</module>
         <module>processor</module>
         <module>consolidator</module>
