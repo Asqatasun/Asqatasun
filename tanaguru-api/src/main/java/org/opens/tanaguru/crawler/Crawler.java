@@ -16,4 +16,8 @@ public interface Crawler {
     void setWebResourceFactory(WebResourceFactory webResourceFactory);
 
     void setSiteURL(String webResourceURL);
+
+    void setSiteURL(String siteName, String[] webResourceURL);
+
+    void setPageURL(String pageURL);
 }
