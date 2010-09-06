@@ -118,9 +118,9 @@ public class AuditServiceImpl implements AuditService {
         }
 
         if (audit.getSubject() instanceof Site) {
-            crawlerService.crawl((Site)audit.getSubject());
+            audit.setSubject(crawlerService.crawl((Site)audit.getSubject()));
         } else if (audit.getSubject() instanceof Page) {
-            crawlerService.crawl((Page)audit.getSubject());
+            audit.setSubject(crawlerService.crawl((Page)audit.getSubject()));
         }
 
         boolean hasContent = false;
