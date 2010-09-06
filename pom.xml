@@ -23,13 +23,13 @@
         <module>analyser</module>
         <module>persistence</module>
         <module>tanaguru-engine</module>
+        <module>tanaguru-resources</module>
         <module>logging</module>
         <!--<module>tanaguru-client</module>
         <module>tanaguru-ws</module>
         <module>tanaguru-ws-client</module>-->
         <module>tanaguru-membership</module>
         <module>tanaguru-i18n</module>
-        <!--<module>tanaguru-testing-tools</module>-->
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
