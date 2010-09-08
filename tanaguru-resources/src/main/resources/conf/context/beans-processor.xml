@@ -7,24 +7,30 @@
         <property name="processRemarkFactory" ref="processRemarkFactory"/>
         <property name="sourceCodeRemarkFactory" ref="sourceCodeRemarkFactory"/>
     </bean>
+
     <bean id="cssHandlerComponent" class="org.opens.tanaguru.processor.CSSHandlerImpl">
         <property name="processRemarkFactory" ref="processRemarkFactory"/>
         <property name="sourceCodeRemarkFactory" ref="sourceCodeRemarkFactory"/>
     </bean>
+
 <!--    <bean id="jsHandlerComponent" class="org.opens.tanaguru.processor.JSHandlerImpl">
         <property name="processRemarkFactory" ref="processRemarkFactory"/>
         <property name="sourceCodeRemarkFactory" ref="sourceCodeRemarkFactory"/>
     </bean>-->
+
     <bean id="sspHandlerComponent" class="org.opens.tanaguru.processor.SSPHandlerImpl">
         <property name="DOMHandler" ref="domHandlerComponent"/>
         <property name="CSSHandler" ref="cssHandlerComponent"/>
 <!--        <property name="JSHandler" ref="jsHandlerComponent"/>-->
         <property name="nomenclatureLoaderService" ref="nomenclatureLoaderService"/>
         <property name="processRemarkFactory" ref="processRemarkFactory"/>
+        <property name="urlIdentifier" ref="urlIdentifierComponent"/>
     </bean>
+
     <bean id="processorComponent" class="org.opens.tanaguru.processor.ProcessorImpl">
         <property name="SSPHandler" ref="sspHandlerComponent"/>
     </bean>
+
     <bean id="processorService" class="org.opens.tanaguru.service.ProcessorServiceImpl">
         <property name="processor" ref="processorComponent"/>
         <property name="ruleImplementationLoaderService" ref="ruleImplementationLoaderService"/>
@@ -33,7 +39,7 @@
     <bean id="imageChecker" class="org.opens.tanaguru.ruleimplementation.ImageChecker" factory-method="getInstance">
     </bean>
 
-    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+    <!--<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="targetObject"><ref local="imageChecker"/></property>
         <property name="targetMethod"><value>setUrlIdentifier</value></property>
         <property name="arguments">
@@ -41,6 +47,6 @@
                 <ref bean="urlIdentifierComponent"/>
             </list>
         </property>
-    </bean>
+    </bean>-->
 
 </beans>

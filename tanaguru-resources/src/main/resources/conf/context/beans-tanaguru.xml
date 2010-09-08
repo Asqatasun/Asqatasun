@@ -22,6 +22,12 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         <property name="entityDao" ref="testDAO"/>
     </bean>
 
+    <bean id="contentDAO" class="org.opens.tanaguru.entity.dao.audit.ContentDAOImpl"/>
+    <bean id="contentDataService" class="org.opens.tanaguru.entity.service.audit.ContentDataServiceImpl">
+        <property name="entityFactory" ref="contentFactory"/>
+        <property name="entityDao" ref="contentDAO"/>
+    </bean>
+
     <bean id="processResultDAO" class="org.opens.tanaguru.entity.dao.audit.ProcessResultDAOImpl"/>
     <bean id="processResultDataService" class="org.opens.tanaguru.entity.service.audit.ProcessResultDataServiceImpl">
         <property name="entityFactory" ref="processResultFactory"/>
@@ -35,12 +41,9 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         <property name="processorService" ref="processorService"/>
         <property name="consolidatorService" ref="consolidatorService"/>
         <property name="analyserService" ref="analyserService"/>
-
         <property name="auditDataService" ref="auditDataService"/>
         <property name="webResourceDataService" ref="webResourceDataService"/>
         <property name="testDataService" ref="testDataService"/>
-
-        
         <property name="processResultDataService" ref="processResultDataService"/>
     </bean>
 
