@@ -1,2 +1,0 @@
-mairie-maizieu;http://www.meyzieu.fr/
-transport-lyon;http://www.tcl.fr/

@@ -1,3 +1,0 @@
-youtube;http://www.youtube.com/?gl=FR&hl=fr
-dailymotion;http://www.dailymotion.com/fr
-vimeo;http://vimeo.com/

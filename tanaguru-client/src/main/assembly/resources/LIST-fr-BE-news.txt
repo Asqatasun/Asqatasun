@@ -1,5 +1,0 @@
-dhnet;http://www.dhnet.be/
-lameuse;http://www.lameuse.be/
-lesoir;http://www.lesoir.be/
-levif;http://levif.rnews.be/
-actu24;http://www.actu24.be/page/homepage/1.aspx

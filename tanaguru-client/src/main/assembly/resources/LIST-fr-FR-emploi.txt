@@ -1,3 +1,0 @@
-pole-emploi;http://www.pole-emploi.fr/accueil/
-cadre-emploi;http://www.cadremploi.fr/
-apec;http://www.apec.fr/Accueil/ApecIndexAccueil.jsp
