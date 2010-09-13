@@ -287,7 +287,7 @@ public class DOMHandlerImpl implements DOMHandler {
                     && workingElement.getChildNodes().item(0).getNodeName().equalsIgnoreCase("#text")))) {
                 result = TestSolution.FAILED;
                 addSourceCodeRemark(result, workingElement, "ValueEmpty",
-                        workingElement.getNodeValue());
+                        workingElement.getNodeName());
             }
             resultSet.add(result);
         }
