@@ -24,6 +24,18 @@ public interface SSP extends TextContent {
 
     /**
      * 
+     * @return the charset
+     */
+    String getCharset();
+
+    /**
+     *
+     * @return the doctype
+     */
+    String getDoctype();
+
+    /**
+     * 
      * @return the list of related raw content of the ssp
      */
     Set<? extends RelatedContent> getRelatedContentSet();
@@ -41,6 +53,20 @@ public interface SSP extends TextContent {
      *            the page to set
      */
     void setPage(Page page);
+
+    /**
+     * 
+     * @param charset
+     *          the charset of the SSP
+     */
+    void setCharset(String charset);
+
+    /**
+     * 
+     * @param doctype
+     *              the doctype of the SSP
+     */
+    void setDoctype(String doctype);
 
     /**
      *

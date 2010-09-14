@@ -21,7 +21,6 @@ public class ContentsAdapterImpl implements ContentsAdapter {
 
     private Set<ContentAdapter> contentAdapterSet =
             new HashSet<ContentAdapter>();
-
     private List<Content> contentList;
     private HTMLCleaner htmlCleaner;
     private HTMLParser htmlParser;
@@ -62,6 +61,8 @@ public class ContentsAdapterImpl implements ContentsAdapter {
             if (content instanceof SSP && content.getHttpStatusCode()==200) {
                 SSP ssp = (SSP) content;
 
+                ssp.setDoctype(DocumentCaseInsensitiveAdapter.
+                        extractDoctypeDeclaration(ssp.getSource()));
                 htmlCleaner.setDirtyHTML(
                         DocumentCaseInsensitiveAdapter.
                         removeDoctypeDeclaration(ssp.getSource()));
@@ -109,7 +110,7 @@ public class ContentsAdapterImpl implements ContentsAdapter {
     }
 
     private void writeCleanDomInFile(SSP ssp) {
-        if (true) {
+        if (writeCleanHtmlInFile) {
             // @debug
             String fileName = null;
             int lastIndexOfSlash = ssp.getURI().lastIndexOf("/");
@@ -132,4 +133,5 @@ public class ContentsAdapterImpl implements ContentsAdapter {
     public void setWriteCleanHtmlInFile(Boolean writeCleanHtmlInFile) {
         this.writeCleanHtmlInFile = writeCleanHtmlInFile;
     }
+
 }

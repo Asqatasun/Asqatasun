@@ -121,4 +121,25 @@ public abstract class DocumentCaseInsensitiveAdapter {
         return cleanHtmlWithoutDoctype.toString();
     }
 
+    /**
+     * This method extracts the doctype declaration from the html source code
+     * @param html
+     * @return
+     */
+    public static String extractDoctypeDeclaration(String html){
+        int doctypeBeginTagPtr = html.indexOf("<!DOCTYPE");
+
+        if (doctypeBeginTagPtr == -1 ) {
+               doctypeBeginTagPtr = html.indexOf("<!doctype");
+               if (doctypeBeginTagPtr == -1 ) {
+                    return html;
+               }
+        }
+
+        int doctypeEndTagPtr = html.indexOf('>', doctypeBeginTagPtr);
+        StringBuilder doctype = new StringBuilder();
+        doctype.append(html,doctypeBeginTagPtr, doctypeEndTagPtr+1);
+        return doctype.toString();
+    }
+
 }
