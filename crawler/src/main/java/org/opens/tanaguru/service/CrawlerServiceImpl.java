@@ -1,6 +1,5 @@
 package org.opens.tanaguru.service;
 
-import java.util.Collection;
 import org.opens.tanaguru.crawler.Crawler;
 import org.opens.tanaguru.crawler.CrawlerImpl;
 import org.opens.tanaguru.entity.subject.Page;
