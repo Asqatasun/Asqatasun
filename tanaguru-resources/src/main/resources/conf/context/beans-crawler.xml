@@ -6,6 +6,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     
     <bean id="crawlerComponent" class="org.opens.tanaguru.crawler.CrawlerImpl">
         <property name="webResourceFactory" ref="webResourceFactory"/>
+        <property name="contentFactory" ref="contentFactory"/>
         <property name="outputDir" value="${heritrixHome}"/>
     </bean>
 

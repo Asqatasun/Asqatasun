@@ -3,6 +3,7 @@ package org.opens.tanaguru.crawler;
 import java.util.logging.Level;
 import org.opens.tanaguru.crawler.processor.TanaguruWriterProcessor;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -19,9 +20,13 @@ import org.archive.crawler.framework.CrawlJob;
 import org.archive.modules.Processor;
 import org.archive.net.UURIFactory;
 import org.opens.tanaguru.entity.audit.Content;
+import org.opens.tanaguru.entity.audit.ImageContent;
 import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.audit.SSP;
+import org.opens.tanaguru.entity.audit.StylesheetContent;
 import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
+import org.opens.tanaguru.entity.factory.audit.ContentFactory;
+import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
 
@@ -93,10 +98,15 @@ public class CrawlerImpl implements Crawler {
     public List<Content> getContentListResult() {
         return contentList;
     }
-    private WebResourceFactory webResourceFactory;
 
+    private WebResourceFactory webResourceFactory;
     public void setWebResourceFactory(WebResourceFactory webResourceFactory) {
         this.webResourceFactory = webResourceFactory;
+    }
+
+    private ContentFactory contentFactory;
+    public void setContentFactory(ContentFactory contentFactory) {
+        this.contentFactory = contentFactory;
     }
 
     /**
@@ -141,6 +151,7 @@ public class CrawlerImpl implements Crawler {
     }
 
     public WebResource getResult() {
+        crawlJob = null;
         return webResource;
     }
 
@@ -235,8 +246,11 @@ public class CrawlerImpl implements Crawler {
                 }
                 contentList =
                         ((TanaguruWriterProcessor) processor).getContentList();
+                contentDeepCopy(((TanaguruWriterProcessor) processor).getWebResourceSet(),
+                        ((TanaguruWriterProcessor) processor).getContentList());
                 computeContentRelationShip(
                         ((TanaguruWriterProcessor) processor).getContentRelationShipMap());
+                cleanUpWriterResources((TanaguruWriterProcessor) processor);
                 break;
             }
         }
@@ -320,4 +334,116 @@ public class CrawlerImpl implements Crawler {
         }
         return (file.delete());
     }
-         }
+
+    private void contentDeepCopy(Set<WebResource> webResourceSet,
+            List<Content> contentListToCopy){
+        if (webResource instanceof Site) {
+            for (WebResource wr : webResourceSet) {
+                ((Site) webResource).addChild(webResourceDeepCopy(wr));
+            }
+        } else if (webResourceSet.size() == 1) {
+            webResource = webResourceDeepCopy(webResourceSet.iterator().next());
+        }
+        contentList = contentDeepCopy(contentListToCopy);
+    }
+
+    /**
+     * This methods realizes a deep copy of a webresource instance
+     * @param webResource
+     * @return
+     */
+    private WebResource webResourceDeepCopy(WebResource webResource){
+        WebResource webResourceCopy =
+                webResourceFactory.createPage(new String(webResource.getURL()));
+
+        webResourceCopy.setId(webResource.getId());
+        webResourceCopy.setLabel(new String(webResource.getLabel()));
+        return webResourceCopy;
+    }
+
+    /**
+     * This method realizes a deep copy of a content list and all its elements
+     * @param contentListToCopy
+     * @return
+     */
+    private List<Content> contentDeepCopy(List<Content> contentListToCopy){
+        List<Content> localContentList = new ArrayList<Content>();
+        for(Content contentToCopy : contentListToCopy) {
+            if (contentToCopy instanceof SSP) {
+                SSP ssp = (SSP)contentToCopy;
+                Content htmlContent = contentFactory.createSSP(
+                        new Date(),
+                        new String(ssp.getURI()),
+                        new String(ssp.getSource()),
+                        (Page)retrieveWebResource(ssp.getPage()),
+                        ssp.getHttpStatusCode());
+                ((SSP)htmlContent).setCharset(ssp.getCharset());
+                localContentList.add(htmlContent);
+            } else if (contentToCopy instanceof StylesheetContent) {
+                StylesheetContent stylesheetContent = (StylesheetContent)contentToCopy;
+                Content cssContent = contentFactory.createStylesheetContent(
+                        new Date(),
+                        new String(stylesheetContent.getURI()),
+                        null,
+                        new String(stylesheetContent.getSource()),
+                        stylesheetContent.getHttpStatusCode());
+                localContentList.add(cssContent);
+            } else if (contentToCopy instanceof ImageContent) {
+                ImageContent imageContent = (ImageContent)contentToCopy;
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                try {
+                    baos.write(imageContent.getContent());
+                } catch (IOException ex) {
+                    java.util.logging.Logger.getLogger(
+                            CrawlerImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                byte[] data = baos.toByteArray();
+                Content imgContent = contentFactory.createImageContent(
+                        new Date(),
+                        new String(imageContent.getURI()),
+                        null,
+                        data,
+                        imageContent.getHttpStatusCode());
+                localContentList.add(imgContent);
+            }
+        }
+        return localContentList;
+    }
+
+    /**
+     * This method enables to retrieve a instance of webResource among the local
+     * set of webResources through its url.s
+     * @param wr
+     * @return
+     */
+    private WebResource retrieveWebResource(WebResource wr) {
+        if (webResource instanceof Page){
+            if (webResource.getURL().equalsIgnoreCase(wr.getURL())) {
+                return webResource;
+            }
+        } else if (webResource instanceof Site) {
+            for (WebResource childPage : ((Site)webResource).getComponentList()) {
+                if (childPage instanceof Page && childPage.getURL().
+                        equalsIgnoreCase(wr.getURL()))  {
+                    return childPage;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * This method cleans up the resources created by the TanaguruWriterProcessor
+     * class. All these resources have been copied (to enable the
+     * TanaguruWriterProcessor instance to be garbaged)
+     * @param processor
+     */
+    private void cleanUpWriterResources(TanaguruWriterProcessor processor){
+        processor.setContentList(null);
+        processor.setContentRelationShipMap(null);
+        processor.setCssContentRelationShipMap(null);
+        processor.setWebResourceSet(null);
+        processor.setWebResourceFactory(null);
+        processor.setContentFactory(null);
+    }
+}

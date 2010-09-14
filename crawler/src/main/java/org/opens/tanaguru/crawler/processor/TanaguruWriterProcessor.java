@@ -34,6 +34,7 @@ import org.opens.tanaguru.crawler.CrawlerImpl;
 import org.opens.tanaguru.crawler.extractor.listener.ExtractorCSSListener;
 import org.opens.tanaguru.crawler.extractor.listener.ExtractorHTMLListener;
 import org.opens.tanaguru.entity.audit.Content;
+import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
 import org.opens.tanaguru.entity.subject.Page;
@@ -52,6 +53,11 @@ public class TanaguruWriterProcessor extends Processor
             Logger.getLogger(TanaguruWriterProcessor.class.getName());
     private static final long serialVersionUID = 3L;
     private WebResourceFactory webResourceFactory;
+    private static final String DEFAULT_CHARSET = "UTF-8";
+    private static final String CHARSET_DEFINITION_START = "<meta http-equiv=\"content-type\"";
+    private static final char EQUAL_CHAR = '=';
+    private static final char DOUBLE_QUOTE_CHAR = '"';
+    private static final String CHARSET_STRING = "charset";
 
     /**
      * Set the webResource Factory
@@ -71,6 +77,10 @@ public class TanaguruWriterProcessor extends Processor
     }
     private List<Content> contentList = new ArrayList<Content>();
 
+    public void setContentList(List<Content> contentList) {
+        this.contentList = contentList;
+    }
+
     /**
      * 
      * @return the list of contents
@@ -78,8 +88,8 @@ public class TanaguruWriterProcessor extends Processor
     public List<Content> getContentList() {
         return contentList;
     }
-    private Set<WebResource> webResourceSet = new HashSet<WebResource>();
 
+    private Set<WebResource> webResourceSet = new HashSet<WebResource>();
     /**
      *
      * @return the list of webResources
@@ -88,11 +98,24 @@ public class TanaguruWriterProcessor extends Processor
         return webResourceSet;
     }
 
+    public void setWebResourceSet(Set<WebResource> webResourceSet) {
+        this.webResourceSet = webResourceSet;
+    }
+
     private Map<String, Collection<String>> contentRelationShipMap =
             Collections.synchronizedMap(new HashMap<String, Collection<String>>());
+    public void setContentRelationShipMap(
+            Map<String, Collection<String>> contentRelationShipMap) {
+        this.contentRelationShipMap = contentRelationShipMap;
+    }
+
     private Map<String, Collection<String>> cssContentRelationShipMap =
             Collections.synchronizedMap(new LinkedHashMap<String, Collection<String>>());
-
+    public void setCssContentRelationShipMap(
+            Map<String, Collection<String>> cssContentRelationShipMap) {
+        this.cssContentRelationShipMap = cssContentRelationShipMap;
+    }
+    
     /**
      *
      * @return the list of webResources
@@ -226,7 +249,6 @@ public class TanaguruWriterProcessor extends Processor
             }
             return;
         }
-
         try {
             logger.log(Level.FINEST,
                     "Writing " + curi.getURI() + " : "
@@ -235,24 +257,28 @@ public class TanaguruWriterProcessor extends Processor
                     && !curi.getURI().contains("robots.txt")) {
                 WebResource webResource = webResourceFactory.createPage(curi.getURI());
                 webResourceSet.add(webResource);
+                String charset = extractCharset(recis.getContentReplayInputStream());
                 Content htmlContent = contentFactory.createSSP(
-                        new Date(),
+                        null,
                         curi.getURI(),
-                        getTextContent(recis.getContentReplayInputStream()),
+                        recis.getReplayCharSequence(charset).toString(),
                         (Page) webResource,
                         curi.getFetchStatus());
+                if (htmlContent instanceof SSP){
+                    ((SSP)htmlContent).setCharset(charset);
+                }
                 contentList.add(htmlContent);
             } else if (curi.getContentType().contains(ContentType.css.getType())) {
                 Content cssContent = contentFactory.createStylesheetContent(
-                        new Date(),
+                        null,
                         curi.getURI(),
                         null,
-                        getTextContent(recis.getContentReplayInputStream()),
+                        recis.getReplayCharSequence().toString(),
                         curi.getFetchStatus());
                 contentList.add(cssContent);
             } else if (curi.getContentType().contains(ContentType.img.getType())) {
                 Content imgContent = contentFactory.createImageContent(
-                        new Date(),
+                        null,
                         curi.getURI(),
                         null,
                         getImageContent(recis.getContentReplayInputStream(),
@@ -263,25 +289,6 @@ public class TanaguruWriterProcessor extends Processor
         } catch (IOException e) {
             curi.getNonFatalFailures().add(e);
         }
-    }
-
-    /**
-     * Get the raw text of a content (css, javascript, html)
-     * @param is
-     * @return
-     */
-    private String getTextContent(InputStream is) {
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        String line = null;
-        StringBuffer sb = new StringBuffer();
-        try {
-            while ((line = br.readLine()) != null) {
-                sb.append(line + "\r");
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(CrawlerImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return sb.toString();
     }
 
     /**
@@ -414,5 +421,34 @@ public class TanaguruWriterProcessor extends Processor
             return ContentType.css;
         }
         return ContentType.misc;
+    }
+
+    /**
+     * This method extracts the charset from the html source code.
+     * If the charset is not specified, it is set to UTF-8 by default
+     * @param is
+     * @return
+     */
+    private String extractCharset(InputStream is) {
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        String line = null;
+        try {
+            while ((line = br.readLine().trim().toLowerCase()) != null) {
+                if (line.startsWith(CHARSET_DEFINITION_START) &&
+                    line.contains(CHARSET_STRING)) {
+                    int begin = line.indexOf(EQUAL_CHAR, line.indexOf(CHARSET_STRING))+1;
+                    int end = -1;
+                    if (begin != -1) {
+                        end = line.indexOf(DOUBLE_QUOTE_CHAR, begin);
+                    }
+                    if (end != -1 ) {
+                        return line.substring(begin, end).trim().toUpperCase();
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(CrawlerImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return DEFAULT_CHARSET;
     }
 }

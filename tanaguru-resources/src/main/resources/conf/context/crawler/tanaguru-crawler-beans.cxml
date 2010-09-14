@@ -148,6 +148,7 @@ metadata.description=Basic crawl starting with useful defaults
         <property name="regexList">
             <list>
                 <value>.*(?i)(/|\.htm|\.html|\.php|\.asp|\.jsp|\.do)$</value>
+                <value>.*(?i)(frame\>|)$</value>
            </list>
           </property>
     </bean>
@@ -285,7 +286,7 @@ metadata.description=Basic crawl starting with useful defaults
   <!-- <property name="extractValueAttributes" value="true" /> -->
   <!-- <property name="ignoreFormActionUrls" value="false" /> -->
   <!-- <property name="extractOnlyFormGets" value="true" /> -->
-  <!-- <property name="treatFramesAsEmbedLinks" value="true" /> -->
+   <property name="treatFramesAsEmbedLinks" value="false" />
   <!-- <property name="ignoreUnexpectedHtml" value="true" /> -->
   <!-- <property name="maxElementLength" value="1024" /> -->
   <!-- <property name="maxAttributeNameLength" value="1024" /> -->
@@ -300,11 +301,11 @@ metadata.description=Basic crawl starting with useful defaults
  <!--bean id="extractorCss" class="org.archive.modules.extractor.ExtractorCSS">
  </bean--> 
  <bean id="extractorCss" class="org.opens.tanaguru.crawler.extractor.TanaguruExtractorCSS">
-	<property name="extractorCSSListenerSet">
-		<set>
-	        	<ref bean="tanaguruWriter"/>
-		</set>
-	</property>
+     <property name="extractorCSSListenerSet">
+         <set>
+            <ref bean="tanaguruWriter"/>
+	 </set>
+     </property>
  </bean> 
 
  <!--bean id="extractorJs" class="org.archive.modules.extractor.ExtractorJS">
@@ -414,7 +415,8 @@ metadata.description=Basic crawl starting with useful defaults
   <!-- <property name="maxToeThreads" value="25" /> -->
       <property name="pauseAtStart" value="false" />
       <property name="pauseAtFinish" value="false" />
-  <!-- <property name="recorderInBufferBytes" value="524288" /> -->  <!-- <property name="recorderOutBufferBytes" value="16384" /> -->
+  <!-- <property name="recorderInBufferBytes" value="524288" /> -->
+  <!-- <property name="recorderOutBufferBytes" value="16384" /> -->
   <!-- <property name="checkpointerPeriod" value="-1" /> -->
   <!-- <property name="scratchDir" value="scratchs" /> -->
   <!-- <property name="checkpointsDir" value="checkpoints" /> -->
