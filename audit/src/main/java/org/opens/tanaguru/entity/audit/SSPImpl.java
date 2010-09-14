@@ -34,6 +34,12 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
     @Column(name = "Source", length = 400000)
     protected String source;
 
+    @Column(name = "Doctype")
+    protected String doctype;
+
+    @Column(name = "Charset")
+    protected String charset;
+
 //    @ManyToMany
 //        @JoinTable(name = "CONTENT_RELATIONSHIP", joinColumns =
 //        @JoinColumn(name = "Id_Content_Parent"), inverseJoinColumns =
@@ -72,27 +78,33 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
         this.page = (PageImpl) page;
     }
 
+    @Override
     public String getDOM() {
         return dom;
     }
 
     @XmlElementRef(type = org.opens.tanaguru.entity.subject.PageImpl.class)
+    @Override
     public Page getPage() {
         return page;
     }
 
+    @Override
     public void setDOM(String dom) {
         this.dom = dom;
     }
 
+    @Override
     public void setPage(Page page) {
         this.page = (PageImpl) page;
     }
 
+    @Override
     public String getSource() {
         return source;
     }
 
+    @Override
     public void setSource(String source) {
         this.source = source;
     }
@@ -102,16 +114,19 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.JavascriptContentImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.StylesheetContentImpl.class)})
     @XmlTransient
+    @Override
     public Set<RelatedContentImpl> getRelatedContentSet() {
         return relatedContentSet;
     }
 
+    @Override
     public void addAllRelationContent(Set<? extends RelatedContent> contentList) {
         for (RelatedContent content : contentList) {
             addRelatedContent(content);
         }
     }
 
+    @Override
     public void addRelatedContent(RelatedContent content) {
         content.addParentContent(this);
         this.relatedContentSet.add((RelatedContentImpl) content);
@@ -125,6 +140,26 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
     @Override
     public void setAdaptedContent(String adaptedContent) {
         this.dom = adaptedContent;
+    }
+
+    @Override
+    public String getCharset() {
+        return charset;
+    }
+
+    @Override
+    public String getDoctype() {
+        return doctype;
+    }
+
+    @Override
+    public void setCharset(String charset) {
+        this.charset = charset;
+    }
+
+    @Override
+    public void setDoctype(String doctype) {
+        this.doctype = doctype;
     }
 
 }
