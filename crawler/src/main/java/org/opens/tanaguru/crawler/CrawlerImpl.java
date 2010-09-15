@@ -357,7 +357,9 @@ public class CrawlerImpl implements Crawler {
                 webResourceFactory.createPage(new String(webResource.getURL()));
 
         webResourceCopy.setId(webResource.getId());
-        webResourceCopy.setLabel(new String(webResource.getLabel()));
+        if(webResource.getLabel() != null) {
+            webResourceCopy.setLabel(new String(webResource.getLabel()));
+        }
         return webResourceCopy;
     }
 
