@@ -130,10 +130,10 @@ public abstract class DocumentCaseInsensitiveAdapter {
         int doctypeBeginTagPtr = html.indexOf("<!DOCTYPE");
 
         if (doctypeBeginTagPtr == -1 ) {
-               doctypeBeginTagPtr = html.indexOf("<!doctype");
+           doctypeBeginTagPtr = html.indexOf("<!doctype");
                if (doctypeBeginTagPtr == -1 ) {
-                    return html;
-               }
+                return "";
+            }
         }
 
         int doctypeEndTagPtr = html.indexOf('>', doctypeBeginTagPtr);
