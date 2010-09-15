@@ -373,36 +373,61 @@ public class CrawlerImpl implements Crawler {
         for(Content contentToCopy : contentListToCopy) {
             if (contentToCopy instanceof SSP) {
                 SSP ssp = (SSP)contentToCopy;
+                String uri = null;
+                if (ssp.getURI() != null) {
+                    uri = new String (ssp.getURI());
+                }
+                String sourceCode = null;
+                if (ssp.getSource() != null) {
+                    sourceCode = new String (ssp.getSource());
+                }
                 Content htmlContent = contentFactory.createSSP(
                         new Date(),
-                        new String(ssp.getURI()),
-                        new String(ssp.getSource()),
+                        uri,
+                        sourceCode,
                         (Page)retrieveWebResource(ssp.getPage()),
                         ssp.getHttpStatusCode());
-                ((SSP)htmlContent).setCharset(ssp.getCharset());
+                if (ssp.getCharset() != null) {
+                    ((SSP)htmlContent).setCharset(new String(ssp.getCharset()));
+                }
                 localContentList.add(htmlContent);
             } else if (contentToCopy instanceof StylesheetContent) {
-                StylesheetContent stylesheetContent = (StylesheetContent)contentToCopy;
+                StylesheetContent stylesheetContent = 
+                        (StylesheetContent)contentToCopy;
+                String uri = null;
+                if (stylesheetContent.getURI() != null) {
+                    uri = new String (stylesheetContent.getURI());
+                }
+                String sourceCode = null;
+                if (stylesheetContent.getSource() != null) {
+                    sourceCode = new String (stylesheetContent.getSource());
+                }
                 Content cssContent = contentFactory.createStylesheetContent(
                         new Date(),
-                        new String(stylesheetContent.getURI()),
+                        uri,
                         null,
-                        new String(stylesheetContent.getSource()),
+                        sourceCode,
                         stylesheetContent.getHttpStatusCode());
                 localContentList.add(cssContent);
             } else if (contentToCopy instanceof ImageContent) {
                 ImageContent imageContent = (ImageContent)contentToCopy;
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 try {
-                    baos.write(imageContent.getContent());
+                    if (imageContent.getContent() != null) {
+                        baos.write(imageContent.getContent());
+                    }
                 } catch (IOException ex) {
                     java.util.logging.Logger.getLogger(
                             CrawlerImpl.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 byte[] data = baos.toByteArray();
+                String uri = null;
+                if (imageContent.getURI() != null) {
+                    uri = new String (imageContent.getURI());
+                }
                 Content imgContent = contentFactory.createImageContent(
                         new Date(),
-                        new String(imageContent.getURI()),
+                        uri,
                         null,
                         data,
                         imageContent.getHttpStatusCode());
@@ -419,15 +444,17 @@ public class CrawlerImpl implements Crawler {
      * @return
      */
     private WebResource retrieveWebResource(WebResource wr) {
-        if (webResource instanceof Page){
-            if (webResource.getURL().equalsIgnoreCase(wr.getURL())) {
-                return webResource;
-            }
-        } else if (webResource instanceof Site) {
-            for (WebResource childPage : ((Site)webResource).getComponentList()) {
-                if (childPage instanceof Page && childPage.getURL().
-                        equalsIgnoreCase(wr.getURL()))  {
-                    return childPage;
+        if (wr != null) {
+            if (webResource instanceof Page){
+                if (webResource.getURL().equalsIgnoreCase(wr.getURL())) {
+                    return webResource;
+                }
+            } else if (webResource instanceof Site) {
+                for (WebResource childPage : ((Site)webResource).getComponentList()) {
+                    if (childPage instanceof Page && childPage.getURL().
+                            equalsIgnoreCase(wr.getURL()))  {
+                        return childPage;
+                    }
                 }
             }
         }
