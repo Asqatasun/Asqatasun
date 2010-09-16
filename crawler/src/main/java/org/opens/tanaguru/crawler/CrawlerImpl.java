@@ -190,6 +190,9 @@ public class CrawlerImpl implements Crawler {
             Logger.getLogger(CrawlerImpl.class.getName()).info(
                         "Configuration Heritrix files cannot be deleted");
             }
+        } else {
+            Logger.getLogger(CrawlerImpl.class.getName()).info(
+                        "The crawljob is not teardowned");
         }
     }
 
