@@ -433,7 +433,8 @@ public class TanaguruWriterProcessor extends Processor
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         String line = null;
         try {
-            while ((line = br.readLine().trim().toLowerCase()) != null) {
+            while ((line = br.readLine()) != null) {
+                line = line.trim().toLowerCase();
                 if (line.startsWith(CHARSET_DEFINITION_START) &&
                     line.contains(CHARSET_STRING)) {
                     int begin = line.indexOf(EQUAL_CHAR, line.indexOf(CHARSET_STRING))+1;
