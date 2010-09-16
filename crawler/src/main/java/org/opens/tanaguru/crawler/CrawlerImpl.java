@@ -186,7 +186,10 @@ public class CrawlerImpl implements Crawler {
         computeResult();
         crawlJob.terminate();
         if (crawlJob.teardown()) {
-            removeConfigFile(currentJobOutputDir);
+            if (!removeConfigFile(currentJobOutputDir)) {
+            Logger.getLogger(CrawlerImpl.class.getName()).info(
+                        "Configuration Heritrix files cannot be deleted");
+            }
         }
     }
 
@@ -468,9 +471,12 @@ public class CrawlerImpl implements Crawler {
      * @param processor
      */
     private void cleanUpWriterResources(TanaguruWriterProcessor processor){
+        processor.getContentList().clear();
         processor.setContentList(null);
+        processor.getContentRelationShipMap().clear();
         processor.setContentRelationShipMap(null);
         processor.setCssContentRelationShipMap(null);
+        processor.getWebResourceSet().clear();
         processor.setWebResourceSet(null);
         processor.setWebResourceFactory(null);
         processor.setContentFactory(null);
