@@ -13,7 +13,7 @@ public class SourceCodeRemarkImpl extends ProcessRemarkImpl implements
 	protected int characterPosition;
 	@Column(name = "Line_Number")
 	protected int lineNumber;
-	@Column(name = "Target")
+	@Column(name = "Target", columnDefinition = "mediumtext")
 	protected String target;
 
 	public SourceCodeRemarkImpl() {
