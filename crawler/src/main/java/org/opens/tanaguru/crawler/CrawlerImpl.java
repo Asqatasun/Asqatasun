@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -243,19 +244,13 @@ public class CrawlerImpl implements Crawler {
     private void computeResult() {
         for (Processor processor : crawlJob.getCrawlController().getDispositionChain().getProcessors()) {
             if (processor instanceof TanaguruWriterProcessor) {
-                Set<WebResource> webResourceList =
-                        ((TanaguruWriterProcessor) processor).getWebResourceSet();
-                if (webResource instanceof Site) {
-                    ((Site) webResource).addAllChild(webResourceList);
-                } else if (webResourceList.size() == 1) {
-                    webResource = webResourceList.iterator().next();
-                }
                 contentList =
                         ((TanaguruWriterProcessor) processor).getContentList();
                 contentDeepCopy(((TanaguruWriterProcessor) processor).getWebResourceSet(),
                         ((TanaguruWriterProcessor) processor).getContentList());
                 computeContentRelationShip(
                         ((TanaguruWriterProcessor) processor).getContentRelationShipMap());
+                removeOrphanContent();
                 cleanUpWriterResources((TanaguruWriterProcessor) processor);
                 break;
             }
@@ -484,4 +479,24 @@ public class CrawlerImpl implements Crawler {
         processor.setWebResourceFactory(null);
         processor.setContentFactory(null);
     }
+
+    /**
+     * Some resources may have been downloaded by the crawler component but they
+     * are not linked with a webresource. They have to be removed from the
+     * contentList. 
+     */
+    private void removeOrphanContent() {
+        List<Content> contentToRemoveList = new ArrayList<Content>();
+        for (Content content :contentList) {
+            if (content instanceof SSP) {
+                if (((SSP)content).getPage() == null) {
+                    contentToRemoveList.add(content);
+                }
+            }
+        }
+        for (Content content : contentToRemoveList) {
+            contentList.remove(content);
+        }
+    }
+
 }
