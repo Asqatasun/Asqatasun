@@ -186,15 +186,15 @@ public class CrawlerImpl implements Crawler {
         }
         computeResult();
         crawlJob.terminate();
-        if (crawlJob.teardown()) {
-            if (!removeConfigFile(currentJobOutputDir)) {
-            Logger.getLogger(CrawlerImpl.class.getName()).info(
-                        "Configuration Heritrix files cannot be deleted");
-            }
-        } else {
-            Logger.getLogger(CrawlerImpl.class.getName()).info(
-                        "The crawljob is not teardowned");
-        }
+//        if (crawlJob.teardown()) {
+//            if (!removeConfigFile(currentJobOutputDir)) {
+//            Logger.getLogger(CrawlerImpl.class.getName()).info(
+//                        "Configuration Heritrix files cannot be deleted");
+//            }
+//        } else {
+//            Logger.getLogger(CrawlerImpl.class.getName()).info(
+//                        "The crawljob is not teardowned");
+//        }
     }
 
     /**
