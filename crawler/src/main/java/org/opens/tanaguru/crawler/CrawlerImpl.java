@@ -11,11 +11,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
 import org.apache.log4j.Logger;
 import org.archive.crawler.framework.CrawlJob;
 import org.archive.modules.Processor;
@@ -186,15 +187,16 @@ public class CrawlerImpl implements Crawler {
         }
         computeResult();
         crawlJob.terminate();
-//        if (crawlJob.teardown()) {
-//            if (!removeConfigFile(currentJobOutputDir)) {
-//            Logger.getLogger(CrawlerImpl.class.getName()).info(
-//                        "Configuration Heritrix files cannot be deleted");
-//            }
-//        } else {
-//            Logger.getLogger(CrawlerImpl.class.getName()).info(
-//                        "The crawljob is not teardowned");
-//        }
+        if (crawlJob.teardown()) {
+            closeCrawlerLogFiles();
+            if (!removeConfigFile(currentJobOutputDir)) {
+            Logger.getLogger(CrawlerImpl.class.getName()).info(
+                        "Configuration Heritrix files cannot be deleted");
+            }
+        } else {
+            Logger.getLogger(CrawlerImpl.class.getName()).info(
+                        "The crawljob is not teardowned");
+        }
     }
 
     /**
@@ -496,6 +498,23 @@ public class CrawlerImpl implements Crawler {
         }
         for (Content content : contentToRemoveList) {
             contentList.remove(content);
+        }
+    }
+
+    /**
+     * Heritrix lets its log files opened at the end of the crawl.
+     * We have to close them "manually".
+     */
+    private void closeCrawlerLogFiles() {
+        List<FileHandler> loggerHandlerList = new ArrayList<FileHandler>();
+        for (Handler handler: crawlJob.getJobLogger().getHandlers()) {
+            if (handler instanceof FileHandler) {
+                ((FileHandler)handler).close();
+                loggerHandlerList.add((FileHandler)handler);
+            }
+        }
+        for (FileHandler fileHandler : loggerHandlerList) {
+            crawlJob.getJobLogger().removeHandler(fileHandler);
         }
     }
 
