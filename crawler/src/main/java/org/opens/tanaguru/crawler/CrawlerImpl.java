@@ -38,11 +38,14 @@ import org.opens.tanaguru.entity.subject.WebResource;
  */
 public class CrawlerImpl implements Crawler {
 
+    private static final String urlStrToReplace = "# URLS HERE";
+    private static int CRAWL_LAUNCHER_RETRY_TIMEOUT = 1000;
+    private static int CRAWL_LOGGER_TIMEOUT = 2000;
+
     private WebResource webResource;
     private File currentJobOutputDir;
-    protected String heritrixFileName = "tanaguru-crawler-beans.cxml";
-    protected CrawlJob crawlJob;
-    private final String urlStrToReplace = "# URLS HERE";
+    private String heritrixFileName = "tanaguru-crawler-beans.cxml";
+    private CrawlJob crawlJob;
     private List<Content> contentList = new ArrayList<Content>();
 
     public CrawlerImpl() {
@@ -164,7 +167,7 @@ public class CrawlerImpl implements Crawler {
             crawlJob.launch();
             if (!crawlJob.isRunning()) {
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(CRAWL_LAUNCHER_RETRY_TIMEOUT);
                 } catch (InterruptedException ex) {
                     java.util.logging.Logger.getLogger(
                             CrawlerImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -180,7 +183,7 @@ public class CrawlerImpl implements Crawler {
                 }
                 Logger.getLogger(CrawlerImpl.class.getName()).info(
                         "crawljob is running");
-                Thread.sleep(2000);
+                Thread.sleep(CRAWL_LOGGER_TIMEOUT);
             } catch (InterruptedException e) {
                 // do nothing
             }
@@ -213,8 +216,10 @@ public class CrawlerImpl implements Crawler {
                         "Directory: " + currentJobOutputDir + " created");
             }
         }
+        BufferedReader in = null;
+        FileWriter fw = null;
         try {
-            BufferedReader in = new BufferedReader(
+            in = new BufferedReader(
                     new FileReader(crawlConfigFilePath + "/" + heritrixFileName));
 
             String c;
@@ -230,12 +235,27 @@ public class CrawlerImpl implements Crawler {
                 }
                 newContextFile.append("\r");
             }
-            FileWriter fw = new FileWriter(currentJobOutputDir.getPath() + "/" + heritrixFileName);
+            fw = new FileWriter(currentJobOutputDir.getPath() + "/" + heritrixFileName);
             fw.write(newContextFile.toString());
             fw.close();
             in.close();
         } catch (IOException ex) {
             Logger.getLogger(CrawlerImpl.class.getName()).error(ex);
+        } finally {
+            if (in != null) {
+               try {
+                   in.close();
+		} catch (IOException e) {
+                    e.printStackTrace();
+		}
+            }
+            if (fw != null) {
+                try {
+                    fw.close();
+		} catch (IOException e) {
+                    e.printStackTrace();
+		}
+            }
         }
         return new File(currentJobOutputDir.getPath() + "/" + heritrixFileName);
     }
@@ -338,6 +358,12 @@ public class CrawlerImpl implements Crawler {
         return (file.delete());
     }
 
+    /**
+     * This methods realized a deep copy of a content object and add the
+     * copied object to the content list.
+     * @param webResourceSet
+     * @param contentListToCopy
+     */
     private void contentDeepCopy(Set<WebResource> webResourceSet,
             List<Content> contentListToCopy){
         if (webResource instanceof Site) {
@@ -356,11 +382,15 @@ public class CrawlerImpl implements Crawler {
      * @return
      */
     private WebResource webResourceDeepCopy(WebResource webResource){
+        StringBuilder webResourceUrl = new StringBuilder();
+        webResourceUrl.append(webResource.getURL());
         WebResource webResourceCopy =
-                webResourceFactory.createPage(new String(webResource.getURL()));
+                webResourceFactory.createPage(webResourceUrl.toString());
 
         webResourceCopy.setId(webResource.getId());
         if(webResource.getLabel() != null) {
+            StringBuilder webResourceLabel = new StringBuilder();
+            webResourceLabel.append(webResource.getLabel());
             webResourceCopy.setLabel(new String(webResource.getLabel()));
         }
         return webResourceCopy;
@@ -482,23 +512,53 @@ public class CrawlerImpl implements Crawler {
         processor.setContentFactory(null);
     }
 
+    // Bug #154 fix
     /**
      * Some resources may have been downloaded by the crawler component but they
-     * are not linked with a webresource. They have to be removed from the
+     * are not linked with any webresource. They have to be removed from the
      * contentList. 
      */
+    @SuppressWarnings("element-type-mismatch")
     private void removeOrphanContent() {
         List<Content> contentToRemoveList = new ArrayList<Content>();
+        List<RelatedContent> relatedContentToRemoveList =
+                new ArrayList<RelatedContent>();
+        List<RelatedContent> relatedContentList =
+                new ArrayList<RelatedContent>();
+
+        // we search the SSP without webresource
         for (Content content :contentList) {
-            if (content instanceof SSP) {
-                if (((SSP)content).getPage() == null) {
-                    contentToRemoveList.add(content);
+            if (content instanceof SSP && ((SSP)content).getPage() == null) {
+                contentToRemoveList.add(content);
+            } else if (content instanceof RelatedContent) {
+                relatedContentList.add((RelatedContent)content);
+            }
+        }
+
+        // we remove the orphan SSP from the contentList and we remove the
+        // reference of these SSP from the Parent Set of each relatedContent.
+        for (Content content : contentToRemoveList) {
+            contentList.remove(content);
+            for (RelatedContent relatedContent : relatedContentList) {
+                if ((relatedContent).getParentContentSet().contains((SSP)content)) {
+                    relatedContent.getParentContentSet().remove(content);
                 }
             }
         }
-        for (Content content : contentToRemoveList) {
-            contentList.remove(content);
+
+        // we search the related contents without parent (whose parents were
+        // orphan SSP that are now deleted)
+        for (RelatedContent relatedContent : relatedContentList) {
+            if (relatedContent.getParentContentSet().isEmpty()) {
+                relatedContentToRemoveList.add(relatedContent);
+            }
         }
+
+        // we remove from the content list the relatedContent without parent
+        for (RelatedContent relatedContent : relatedContentToRemoveList) {
+            contentList.remove(relatedContent);
+        }
+
     }
 
     /**
