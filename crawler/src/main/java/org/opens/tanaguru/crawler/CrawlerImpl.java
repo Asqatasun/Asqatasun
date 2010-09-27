@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.log4j.Logger;
 import org.archive.crawler.framework.CrawlJob;
 import org.archive.modules.Processor;
@@ -192,10 +193,10 @@ public class CrawlerImpl implements Crawler {
         crawlJob.terminate();
         if (crawlJob.teardown()) {
             closeCrawlerLogFiles();
-            if (!removeConfigFile(currentJobOutputDir)) {
-            Logger.getLogger(CrawlerImpl.class.getName()).info(
-                        "Configuration Heritrix files cannot be deleted");
-            }
+//            if (!removeConfigFile(currentJobOutputDir)) {
+//            Logger.getLogger(CrawlerImpl.class.getName()).info(
+//                        "Configuration Heritrix files cannot be deleted");
+//            }
         } else {
             Logger.getLogger(CrawlerImpl.class.getName()).info(
                         "The crawljob is not teardowned");
@@ -223,11 +224,15 @@ public class CrawlerImpl implements Crawler {
                     new FileReader(crawlConfigFilePath + "/" + heritrixFileName));
 
             String c;
+            String uri;
             StringBuffer newContextFile = new StringBuffer();
             while ((c = in.readLine()) != null) {
                 if (c.equalsIgnoreCase(urlStrToReplace)) {
                     for (int i=0 ; i<url.length ; i++) {
-                        newContextFile.append(UURIFactory.getInstance(url[i]));
+                        // first convert the URI in unicode
+                        uri = UURIFactory.getInstance(url[i]).getEscapedURI();
+                        // then escape the URI to be written in a xml file.
+                        newContextFile.append(StringEscapeUtils.escapeXml(uri));
                         newContextFile.append("\r");
                     }
                 } else {
