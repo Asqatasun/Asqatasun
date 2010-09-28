@@ -420,12 +420,14 @@ public class CrawlerImpl implements Crawler {
      */
     private List<Content> contentDeepCopy(List<Content> contentListToCopy){
         List<Content> localContentList = new ArrayList<Content>();
-        StringBuilder uri = new StringBuilder();
         for(Content contentToCopy : contentListToCopy) {
             if (contentToCopy instanceof SSP) {
                 SSP ssp = (SSP)contentToCopy;
+                StringBuilder uri = new StringBuilder();
                 if (ssp.getURI() != null) {
                     uri.append(ssp.getURI());
+                } else {
+                    uri.append("");
                 }
                 String sourceCode = null;
                 if (ssp.getSource() != null) {
@@ -446,8 +448,11 @@ public class CrawlerImpl implements Crawler {
             } else if (contentToCopy instanceof StylesheetContent) {
                 StylesheetContent stylesheetContent = 
                         (StylesheetContent)contentToCopy;
+                StringBuilder uri = new StringBuilder();
                 if (stylesheetContent.getURI() != null) {
                     uri.append(stylesheetContent.getURI());
+                } else {
+                    uri.append("");
                 }
                 String sourceCode = null;
                 if (stylesheetContent.getSource() != null) {
@@ -472,8 +477,11 @@ public class CrawlerImpl implements Crawler {
                             CrawlerImpl.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 byte[] data = baos.toByteArray();
+                StringBuilder uri = new StringBuilder();
                 if (imageContent.getURI() != null) {
                     uri.append(imageContent.getURI());
+                } else {
+                    uri.append("");
                 }
                 Content imgContent = contentFactory.createImageContent(
                         new Date(),
