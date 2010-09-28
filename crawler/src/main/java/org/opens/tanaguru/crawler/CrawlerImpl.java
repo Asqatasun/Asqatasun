@@ -254,14 +254,18 @@ public class CrawlerImpl implements Crawler {
                try {
                    in.close();
 		} catch (IOException e) {
-                    e.printStackTrace();
+                    java.util.logging.Logger.getLogger(
+                            CrawlerImpl.class.getName()).log(
+                            Level.SEVERE, null, e);
 		}
             }
             if (fw != null) {
                 try {
                     fw.close();
 		} catch (IOException e) {
-                    e.printStackTrace();
+                    java.util.logging.Logger.getLogger(
+                            CrawlerImpl.class.getName()).log(
+                            Level.SEVERE, null, e);
 		}
             }
         }
@@ -336,10 +340,9 @@ public class CrawlerImpl implements Crawler {
                         // We check that the content found by the extractor has been
                         // actually downloaded and we only keep related content
                         // (to avoid to have a relation between 2 SSP
-                        if (tempMap.containsKey(childUrl)) {
-                            if (tempMap.get(childUrl) instanceof SSP) {
-                                localRelatedContent.addParentContent(tempMap.get(childUrl));
-                            }
+                        if (tempMap.containsKey(childUrl) &&
+                            tempMap.get(childUrl) instanceof SSP) {
+                            localRelatedContent.addParentContent(tempMap.get(childUrl));
                         }
                     }
                 }
@@ -359,7 +362,13 @@ public class CrawlerImpl implements Crawler {
                 if (files[i].isDirectory()) {
                     removeConfigFile(files[i]);
                 } else {
-                    files[i].delete();
+                    boolean isDeleted = files[i].delete();
+                    if (!isDeleted) {
+                        java.util.logging.Logger.getLogger(
+                            CrawlerImpl.class.getName()).log(Level.SEVERE, null,
+                            "The file " + files[i].getPath() +
+                            " cannot be deleted" );
+                    }
                 }
             }
         }
@@ -411,12 +420,12 @@ public class CrawlerImpl implements Crawler {
      */
     private List<Content> contentDeepCopy(List<Content> contentListToCopy){
         List<Content> localContentList = new ArrayList<Content>();
+        StringBuilder uri = new StringBuilder();
         for(Content contentToCopy : contentListToCopy) {
             if (contentToCopy instanceof SSP) {
                 SSP ssp = (SSP)contentToCopy;
-                String uri = null;
                 if (ssp.getURI() != null) {
-                    uri = new String (ssp.getURI());
+                    uri.append(ssp.getURI());
                 }
                 String sourceCode = null;
                 if (ssp.getSource() != null) {
@@ -424,7 +433,7 @@ public class CrawlerImpl implements Crawler {
                 }
                 Content htmlContent = contentFactory.createSSP(
                         new Date(),
-                        uri,
+                        uri.toString(),
                         sourceCode,
                         (Page)retrieveWebResource(ssp.getPage()),
                         ssp.getHttpStatusCode());
@@ -437,9 +446,8 @@ public class CrawlerImpl implements Crawler {
             } else if (contentToCopy instanceof StylesheetContent) {
                 StylesheetContent stylesheetContent = 
                         (StylesheetContent)contentToCopy;
-                String uri = null;
                 if (stylesheetContent.getURI() != null) {
-                    uri = new String (stylesheetContent.getURI());
+                    uri.append(stylesheetContent.getURI());
                 }
                 String sourceCode = null;
                 if (stylesheetContent.getSource() != null) {
@@ -447,7 +455,7 @@ public class CrawlerImpl implements Crawler {
                 }
                 Content cssContent = contentFactory.createStylesheetContent(
                         new Date(),
-                        uri,
+                        uri.toString(),
                         null,
                         sourceCode,
                         stylesheetContent.getHttpStatusCode());
@@ -464,13 +472,12 @@ public class CrawlerImpl implements Crawler {
                             CrawlerImpl.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 byte[] data = baos.toByteArray();
-                String uri = null;
                 if (imageContent.getURI() != null) {
-                    uri = new String (imageContent.getURI());
+                    uri.append(imageContent.getURI());
                 }
                 Content imgContent = contentFactory.createImageContent(
                         new Date(),
-                        uri,
+                        uri.toString(),
                         null,
                         data,
                         imageContent.getHttpStatusCode());
