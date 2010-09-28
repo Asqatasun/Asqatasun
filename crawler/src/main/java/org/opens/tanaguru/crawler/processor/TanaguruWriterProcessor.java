@@ -6,6 +6,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.nio.charset.UnsupportedCharsetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -429,7 +431,7 @@ public class TanaguruWriterProcessor extends Processor
      * @param is
      * @return
      */
-    private String extractCharset(InputStream is) {
+    public String extractCharset(InputStream is) {
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         String line = null;
         try {
@@ -443,7 +445,13 @@ public class TanaguruWriterProcessor extends Processor
                         end = line.indexOf(DOUBLE_QUOTE_CHAR, begin);
                     }
                     if (end != -1 ) {
-                        return line.substring(begin, end).trim().toUpperCase();
+                        String charset = line.substring(begin, end).trim().
+                                toUpperCase();
+                        if (!charset.isEmpty() && isValidCharset(charset)) {
+                            return charset;
+                        } else {
+                            return DEFAULT_CHARSET;
+                        }
                     }
                 }
             }
@@ -452,4 +460,19 @@ public class TanaguruWriterProcessor extends Processor
         }
         return DEFAULT_CHARSET;
     }
+
+    /**
+     * This methods tests if a charset is valid regarding the charset nio API.
+     * @param charset
+     * @return
+     */
+    private boolean isValidCharset(String charset) {
+        try {
+            Charset.forName(charset);
+        } catch (UnsupportedCharsetException e) {
+            return false;
+        }
+        return true;
+    }
+
 }
