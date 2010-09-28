@@ -40,8 +40,8 @@ import org.opens.tanaguru.entity.subject.WebResource;
 public class CrawlerImpl implements Crawler {
 
     private static final String urlStrToReplace = "# URLS HERE";
-    private static int CRAWL_LAUNCHER_RETRY_TIMEOUT = 1000;
-    private static int CRAWL_LOGGER_TIMEOUT = 2000;
+    private static final int CRAWL_LAUNCHER_RETRY_TIMEOUT = 1000;
+    private static final int CRAWL_LOGGER_TIMEOUT = 2000;
 
     private WebResource webResource;
     private File currentJobOutputDir;
@@ -106,6 +106,7 @@ public class CrawlerImpl implements Crawler {
     }
 
     private WebResourceFactory webResourceFactory;
+    @Override
     public void setWebResourceFactory(WebResourceFactory webResourceFactory) {
         this.webResourceFactory = webResourceFactory;
     }
@@ -156,11 +157,13 @@ public class CrawlerImpl implements Crawler {
         }
     }
 
+    @Override
     public WebResource getResult() {
         crawlJob = null;
         return webResource;
     }
 
+    @Override
     public void run() {
         if (crawlJob.isLaunchable()) {
             Logger.getLogger(CrawlerImpl.class.getName()).info(
@@ -193,10 +196,10 @@ public class CrawlerImpl implements Crawler {
         crawlJob.terminate();
         if (crawlJob.teardown()) {
             closeCrawlerLogFiles();
-//            if (!removeConfigFile(currentJobOutputDir)) {
-//            Logger.getLogger(CrawlerImpl.class.getName()).info(
-//                        "Configuration Heritrix files cannot be deleted");
-//            }
+            if (!removeConfigFile(currentJobOutputDir)) {
+            Logger.getLogger(CrawlerImpl.class.getName()).info(
+                        "Configuration Heritrix files cannot be deleted");
+            }
         } else {
             Logger.getLogger(CrawlerImpl.class.getName()).info(
                         "The crawljob is not teardowned");
@@ -396,7 +399,7 @@ public class CrawlerImpl implements Crawler {
         if(webResource.getLabel() != null) {
             StringBuilder webResourceLabel = new StringBuilder();
             webResourceLabel.append(webResource.getLabel());
-            webResourceCopy.setLabel(new String(webResource.getLabel()));
+            webResourceCopy.setLabel(webResourceLabel.toString());
         }
         return webResourceCopy;
     }
@@ -426,7 +429,9 @@ public class CrawlerImpl implements Crawler {
                         (Page)retrieveWebResource(ssp.getPage()),
                         ssp.getHttpStatusCode());
                 if (ssp.getCharset() != null) {
-                    ((SSP)htmlContent).setCharset(new String(ssp.getCharset()));
+                    StringBuffer charset = new StringBuffer();
+                    charset.append(ssp.getCharset());
+                    ((SSP)htmlContent).setCharset(charset.toString());
                 }
                 localContentList.add(htmlContent);
             } else if (contentToCopy instanceof StylesheetContent) {
@@ -545,7 +550,7 @@ public class CrawlerImpl implements Crawler {
         for (Content content : contentToRemoveList) {
             contentList.remove(content);
             for (RelatedContent relatedContent : relatedContentList) {
-                if ((relatedContent).getParentContentSet().contains((SSP)content)) {
+                if ((relatedContent).getParentContentSet().contains(content)) {
                     relatedContent.getParentContentSet().remove(content);
                 }
             }
@@ -561,7 +566,9 @@ public class CrawlerImpl implements Crawler {
 
         // we remove from the content list the relatedContent without parent
         for (RelatedContent relatedContent : relatedContentToRemoveList) {
-            contentList.remove(relatedContent);
+            if (relatedContent instanceof Content) {
+                contentList.remove((Content)relatedContent);
+            }
         }
 
     }
