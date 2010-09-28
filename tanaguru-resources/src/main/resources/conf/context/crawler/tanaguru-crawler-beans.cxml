@@ -147,7 +147,7 @@ metadata.description=Basic crawl starting with useful defaults
         <property name="listLogicalOr" value="true" />
         <property name="regexList">
             <list>
-                <value>.*(?i)(/|\.htm|\.html|\.php|\.asp|\.jsp|\.do)$</value>
+                <value>.*(?i)(/|\.htm|\.html|\.php|\.asp|\.aspx|\.jsp|\.do)$</value>
                 <value>.*(?i)(frame\>|)$</value>
            </list>
           </property>
@@ -173,7 +173,7 @@ metadata.description=Basic crawl starting with useful defaults
         <property name="regexList">
             <list>
                 <value>.*(?i)(\.css(\?.*)?)$</value>
-                <value>.*(?i)(\.(bmp|gif|jpe?g|png|svg|tiff?))$</value>
+                <!--<value>.*(?i)(\.(bmp|gif|jpe?g|png|svg|tiff?))$</value>-->
            </list>
           </property>
     </bean>
@@ -355,7 +355,7 @@ metadata.description=Basic crawl starting with useful defaults
     <property name="webResourceFactory" ref="webResourceFactory"/>
     <property name="contentFactory" ref="contentFactory"/>
     <property name="htmlRegexp">
-	<value>.*(?i)(/|\.htm|\.html|\.php|\.asp|\.jsp|\.do)$</value>
+	<value>.*(?i)(/|\.htm|\.html|\.php|\.asp|\.aspx|\.jsp|\.do)$</value>
     </property>
     <property name="cssRegexp">
 	<value>.*(?i)(\.css(\?.*)?)$</value>
@@ -412,11 +412,11 @@ metadata.description=Basic crawl starting with useful defaults
  <!-- CRAWLCONTROLLER: Control interface, unifying context -->
  <bean id="crawlController" 
    class="org.archive.crawler.framework.CrawlController">
-  <!-- <property name="maxToeThreads" value="25" /> -->
+      <property name="maxToeThreads" value="3" />
       <property name="pauseAtStart" value="false" />
       <property name="pauseAtFinish" value="false" />
-  <!-- <property name="recorderInBufferBytes" value="524288" /> -->
-  <!-- <property name="recorderOutBufferBytes" value="16384" /> -->
+      <property name="recorderInBufferBytes" value="2097152" />
+      <property name="recorderOutBufferBytes" value="65536" />
   <!-- <property name="checkpointerPeriod" value="-1" /> -->
   <!-- <property name="scratchDir" value="scratchs" /> -->
   <!-- <property name="checkpointsDir" value="checkpoints" /> -->
