@@ -1,11 +1,11 @@
 package org.opens.tanaguru.crawler.processor;
 
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.ArrayList;
@@ -31,8 +31,8 @@ import org.archive.modules.Processor;
 import org.archive.modules.deciderules.MatchesFilePatternDecideRule;
 import org.archive.modules.extractor.Link;
 import org.archive.net.UURI;
+import org.mozilla.universalchardet.UniversalDetector;
 import org.opens.tanaguru.crawler.ContentType;
-import org.opens.tanaguru.crawler.CrawlerImpl;
 import org.opens.tanaguru.crawler.extractor.listener.ExtractorCSSListener;
 import org.opens.tanaguru.crawler.extractor.listener.ExtractorHTMLListener;
 import org.opens.tanaguru.entity.audit.Content;
@@ -60,13 +60,14 @@ public class TanaguruWriterProcessor extends Processor
     private static final String HTTP_PREFIX = "http";
     private static final String HTTPS_PREFIX = "https";
     private static final String DEFAULT_CHARSET = "UTF-8";
-    private static final String CHARSET_DEFINITION_START = "<meta http-equiv=\"content-type\"";
-    private static final char EQUAL_CHAR = '=';
-    private static final char DOUBLE_QUOTE_CHAR = '"';
-    private static final String CHARSET_STRING = "charset";
     private static final int HTTP_SUCCESS_RETURN_CODE = 200;
     private static final int BYTE_BUFFER_SIZE = 1000;
     private static final String DEFAULT_IMG_EXTENSION = "jpg";
+    //    private static final String CHARSET_DEFINITION_START =
+//          "<meta http-equiv=\"content-type\"";
+//    private static final char EQUAL_CHAR = '=';
+//    private static final char DOUBLE_QUOTE_CHAR = '"';
+//    private static final String CHARSET_STRING = "charset";
 
     /**
      * Set the webResource Factory
@@ -112,14 +113,16 @@ public class TanaguruWriterProcessor extends Processor
     }
 
     private Map<String, Collection<String>> contentRelationShipMap =
-            Collections.synchronizedMap(new HashMap<String, Collection<String>>());
+            Collections.synchronizedMap(
+            new HashMap<String, Collection<String>>());
     public void setContentRelationShipMap(
             Map<String, Collection<String>> contentRelationShipMap) {
         this.contentRelationShipMap = contentRelationShipMap;
     }
 
     private Map<String, Collection<String>> cssContentRelationShipMap =
-            Collections.synchronizedMap(new LinkedHashMap<String, Collection<String>>());
+            Collections.synchronizedMap(
+            new LinkedHashMap<String, Collection<String>>());
     public void setCssContentRelationShipMap(
             Map<String, Collection<String>> cssContentRelationShipMap) {
         this.cssContentRelationShipMap = cssContentRelationShipMap;
@@ -267,10 +270,11 @@ public class TanaguruWriterProcessor extends Processor
                 WebResource webResource = webResourceFactory.createPage(curi.getURI());
                 webResourceSet.add(webResource);
                 String charset = extractCharset(recis.getContentReplayInputStream());
+                String sourceCode = convertSourceCodeIntoUtf8(recis, charset);
                 Content htmlContent = contentFactory.createSSP(
                         null,
                         curi.getURI(),
-                        recis.getReplayCharSequence(charset).toString(),
+                        sourceCode,
                         (Page) webResource,
                         curi.getFetchStatus());
                 ((SSP)htmlContent).setCharset(charset);
@@ -383,7 +387,8 @@ public class TanaguruWriterProcessor extends Processor
         if (!cssContentRelationShipMap.containsKey(curi.getURI())) {
             cssContentRelationShipMap.put(curi.getURI(), relatedChildToParent);
         } else {
-            cssContentRelationShipMap.get(curi.getURI()).addAll(relatedChildToParent);
+            cssContentRelationShipMap.get(curi.getURI()).addAll(
+                    relatedChildToParent);
         }
     }
 
@@ -404,7 +409,8 @@ public class TanaguruWriterProcessor extends Processor
                     if (f.getValue().contains(e.getKey())) {
                         // we associate the parent content with its new
                         // children
-                        contentRelationShipMap.get(f.getKey()).addAll(e.getValue());
+                        contentRelationShipMap.get(f.getKey()).addAll(
+                                e.getValue());
                     }
                 }
             }
@@ -421,7 +427,8 @@ public class TanaguruWriterProcessor extends Processor
      * @return
      */
     private ContentType getContentTypeFromUnreacheableResource(String uri) {
-        if (MatchesFilePatternDecideRule.Preset.IMAGES.getPattern().matcher(uri).matches()) {
+        if (MatchesFilePatternDecideRule.Preset.IMAGES.getPattern().
+                matcher(uri).matches()) {
             return ContentType.img;
         } else if (getHtmlFilePattern().matcher(uri).matches()) {
             return ContentType.html;
@@ -437,34 +444,56 @@ public class TanaguruWriterProcessor extends Processor
      * @param is
      * @return
      */
-    public String extractCharset(InputStream is) {
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        String line = null;
-        try {
-            while ((line = br.readLine()) != null) {
-                line = line.trim().toLowerCase();
-                if (line.startsWith(CHARSET_DEFINITION_START) &&
-                    line.contains(CHARSET_STRING)) {
-                    int begin = line.indexOf(EQUAL_CHAR, line.indexOf(CHARSET_STRING))+1;
-                    int end = -1;
-                    if (begin != -1) {
-                        end = line.indexOf(DOUBLE_QUOTE_CHAR, begin);
-                    }
-                    if (end != -1 ) {
-                        String charset = line.substring(begin, end).trim().
-                                toUpperCase();
-                        if (!charset.isEmpty() && isValidCharset(charset)) {
-                            return charset;
-                        } else {
-                            return DEFAULT_CHARSET;
-                        }
-                    }
-                }
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(CrawlerImpl.class.getName()).log(Level.SEVERE, null, ex);
+    public String extractCharset(InputStream is)  throws java.io.IOException {
+        byte[] buf = new byte[4096];
+        UniversalDetector detector = new UniversalDetector(null);
+        int nread;
+        while ((nread = is.read(buf)) > 0 && !detector.isDone()) {
+          detector.handleData(buf, 0, nread);
         }
-        return DEFAULT_CHARSET;
+        detector.dataEnd();
+
+        String encoding = detector.getDetectedCharset();
+        if (encoding != null) {
+          logger.info("Detected encoding = " + encoding);
+        } else {
+          logger.info("No encoding detected.");
+        }
+
+        detector.reset();
+        if (encoding != null && isValidCharset(encoding)) {
+            return encoding;
+        } else {
+            return DEFAULT_CHARSET;
+        }
+        
+//        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+//        String line = null;
+//        try {
+//            while ((line = br.readLine()) != null) {
+//                line = line.trim().toLowerCase();
+//                if (line.startsWith(CHARSET_DEFINITION_START) &&
+//                    line.contains(CHARSET_STRING)) {
+//                    int begin = line.indexOf(EQUAL_CHAR, line.indexOf(CHARSET_STRING))+1;
+//                    int end = -1;
+//                    if (begin != -1) {
+//                        end = line.indexOf(DOUBLE_QUOTE_CHAR, begin);
+//                    }
+//                    if (end != -1 ) {
+//                        String charset = line.substring(begin, end).trim().
+//                                toUpperCase();
+//                        if (!charset.isEmpty() && isValidCharset(charset)) {
+//                            return charset;
+//                        } else {
+//                            return DEFAULT_CHARSET;
+//                        }
+//                    }
+//                }
+//            }
+//        } catch (IOException ex) {
+//            Logger.getLogger(CrawlerImpl.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return DEFAULT_CHARSET;
     }
 
     /**
@@ -479,6 +508,32 @@ public class TanaguruWriterProcessor extends Processor
             return false;
         }
         return true;
+    }
+
+    /**
+     * This method converts the sourceCode into UTF-8 charset to ensure the
+     * charset compatibility with the source and the charset used for the
+     * persistence.
+     * @param recis
+     * @param charset
+     * @return
+     * @throws IOException
+     */
+    private String convertSourceCodeIntoUtf8 (
+            RecordingInputStream recis,
+            String charset) throws IOException {
+        if (!charset.equalsIgnoreCase(DEFAULT_CHARSET)) {
+            Charset utf8charset = Charset.forName(DEFAULT_CHARSET);
+            Charset incomingCharset = Charset.forName(charset);
+            ByteBuffer inputBuffer = ByteBuffer.wrap(
+                    recis.getReplayCharSequence(charset).toString().getBytes(charset));
+            CharBuffer data = incomingCharset.decode(inputBuffer);
+            ByteBuffer outputBuffer = utf8charset.encode(data);
+            byte[] outputData = outputBuffer.array();
+            return new String(outputData);
+        } else {
+            return recis.getReplayCharSequence(charset).toString();
+        }
     }
 
 }
