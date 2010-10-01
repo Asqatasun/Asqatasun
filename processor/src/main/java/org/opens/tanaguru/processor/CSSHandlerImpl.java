@@ -111,8 +111,8 @@ public class CSSHandlerImpl implements CSSHandler {
         for (RelatedContent relatedContent : ssp.getRelatedContentSet()){
             if (relatedContent instanceof StylesheetContent){
                 if (((StylesheetContent)relatedContent).getHttpStatusCode() == HTTP_OK_STATUS_CODE &&
-                        !((StylesheetContent)relatedContent).getAdaptedContent().equalsIgnoreCase(CSS_ON_ERROR) &&
-                        ((StylesheetContent)relatedContent).getAdaptedContent() != null) {
+                        ((StylesheetContent)relatedContent).getAdaptedContent() != null &&
+                        !((StylesheetContent)relatedContent).getAdaptedContent().equalsIgnoreCase(CSS_ON_ERROR) ){
                     styleSet.add(
                         (CSSOMStyleSheet) xstream.fromXML(
                         ((StylesheetContent)relatedContent).getAdaptedContent()));
