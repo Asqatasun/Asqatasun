@@ -291,7 +291,7 @@ CREATE TABLE `WEB_RESOURCE` (
   `Id_Web_Resource` bigint(20) NOT NULL auto_increment,
   `Label` varchar(255) default NULL,
   `Url` varchar(255) NOT NULL,
-  `Id_Audit` bigint(20) NOT NULL,
+  `Id_Audit` bigint(20) default NULL,
   `Id_Web_Resource_Parent` bigint(20) default NULL,
   PRIMARY KEY  (`Id_Web_Resource`),
   KEY `FKD9A970B9493EC9C2` (`Id_Audit`),

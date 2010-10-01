@@ -71,8 +71,8 @@ public class SiteImpl extends WebResourceImpl implements Site, Serializable {
     public void setAudit(Audit audit) {
         super.setAudit(audit);
 
-        for (WebResource component : componentList) {
-            component.setAudit(audit);
-        }
+//        for (WebResource component : componentList) {
+//            component.setAudit(audit);
+//        }
     }
 }
