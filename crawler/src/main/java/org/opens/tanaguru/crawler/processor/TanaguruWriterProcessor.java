@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriter;
+import org.archive.io.GzippedInputStream;
 
 import org.archive.io.RecordingInputStream;
 import org.archive.modules.CrawlURI;
@@ -280,11 +281,19 @@ public class TanaguruWriterProcessor extends Processor
                 ((SSP)htmlContent).setCharset(charset);
                 contentList.add(htmlContent);
             } else if (curi.getContentType().contains(ContentType.css.getType())) {
-                Content cssContent = contentFactory.createStylesheetContent(
+               boolean compressed = GzippedInputStream.
+                       isCompressedStream(recis.getContentReplayInputStream());
+               String cssCode = null;
+               if (compressed) {
+                   cssCode = "";
+               } else {
+                   cssCode = recis.getReplayCharSequence().toString();
+               }
+               Content cssContent = contentFactory.createStylesheetContent(
                         null,
                         curi.getURI(),
                         null,
-                        recis.getReplayCharSequence().toString(),
+                        cssCode,
                         curi.getFetchStatus());
                 contentList.add(cssContent);
             } else if (curi.getContentType().contains(ContentType.img.getType())) {
