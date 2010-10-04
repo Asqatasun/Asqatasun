@@ -28,7 +28,7 @@ import org.opens.tanaguru.entity.audit.ProcessResultImpl;
 public abstract class WebResourceImpl implements WebResource, Serializable {
 
     @OneToOne
-    @JoinColumn(name = "Id_Audit", nullable = false)
+    @JoinColumn(name = "Id_Audit", nullable = true)
     protected AuditImpl audit;
     @Id
     @GeneratedValue

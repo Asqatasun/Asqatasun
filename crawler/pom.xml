@@ -40,6 +40,11 @@
             <version>3.0.0</version>
         </dependency>
         <dependency>
+            <groupId>org.mozilla</groupId>
+            <artifactId>juniversalchardet</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>3.8.2</version>

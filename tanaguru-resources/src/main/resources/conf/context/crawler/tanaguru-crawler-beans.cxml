@@ -147,8 +147,7 @@ metadata.description=Basic crawl starting with useful defaults
         <property name="listLogicalOr" value="true" />
         <property name="regexList">
             <list>
-                <value>.*(?i)(/|\.htm|\.html|\.php|\.asp|\.jsp|\.do)$</value>
-                <value>.*(?i)(frame\>|)$</value>
+                <value>.*(?i)(/|\.htm|\.html|\.php|\.asp|\.aspx|\.jsp|\.do)$</value>
            </list>
           </property>
     </bean>
@@ -173,7 +172,7 @@ metadata.description=Basic crawl starting with useful defaults
         <property name="regexList">
             <list>
                 <value>.*(?i)(\.css(\?.*)?)$</value>
-                <value>.*(?i)(\.(bmp|gif|jpe?g|png|svg|tiff?))$</value>
+                <!--<value>.*(?i)(\.(bmp|gif|jpe?g|png|svg|tiff?))$</value>-->
            </list>
           </property>
     </bean>
@@ -251,13 +250,13 @@ metadata.description=Basic crawl starting with useful defaults
 
  <bean id="fetchHttp" class="org.archive.modules.fetcher.FetchHTTP">
   <!-- <property name="maxLengthBytes" value="0" /> -->
-       <property name="timeoutSeconds" value="10" /> 
+       <property name="timeoutSeconds" value="5" />
   <!-- <property name="maxFetchKBSec" value="0" /> -->
-  <!-- <property name="defaultEncoding" value="ISO-8859-1" /> -->
+       <property name="defaultEncoding" value="UTF-8" />
   <!-- <property name="shouldFetchBodyRule"> 
         <bean class="org.archive.modules.deciderules.AcceptDecideRule"/>
        </property> -->
-       <property name="soTimeoutMs" value="10000" /> 
+       <property name="soTimeoutMs" value="5000" />
   <!-- <property name="sendIfModifiedSince" value="true" /> -->
   <!-- <property name="sendIfNoneMatch" value="true" /> -->
   <!-- <property name="sendConnectionClose" value="true" /> -->
@@ -291,11 +290,11 @@ metadata.description=Basic crawl starting with useful defaults
   <!-- <property name="maxElementLength" value="1024" /> -->
   <!-- <property name="maxAttributeNameLength" value="1024" /> -->
   <!-- <property name="maxAttributeValueLength" value="16384" /> -->
-	<property name="extractorHTMLListenerSet">
-		<set>
-	        	<ref bean="tanaguruWriter"/>
-		</set>
-	</property>
+     <property name="extractorHTMLListenerSet">
+         <set>
+	     <ref bean="tanaguruWriter"/>
+	 </set>
+     </property>
  </bean>
 
  <!--bean id="extractorCss" class="org.archive.modules.extractor.ExtractorCSS">
@@ -355,7 +354,7 @@ metadata.description=Basic crawl starting with useful defaults
     <property name="webResourceFactory" ref="webResourceFactory"/>
     <property name="contentFactory" ref="contentFactory"/>
     <property name="htmlRegexp">
-	<value>.*(?i)(/|\.htm|\.html|\.php|\.asp|\.jsp|\.do)$</value>
+	<value>.*(?i)(/|\.htm|\.html|\.php|\.asp|\.aspx|\.jsp|\.do)$</value>
     </property>
     <property name="cssRegexp">
 	<value>.*(?i)(\.css(\?.*)?)$</value>
@@ -388,7 +387,7 @@ metadata.description=Basic crawl starting with useful defaults
  </bean>
  <bean id="disposition" class="org.archive.crawler.postprocessor.DispositionProcessor">
   <!-- <property name="delayFactor" value="5.0" /> -->
-       <property name="minDelayMs" value="0" /> 
+       <property name="minDelayMs" value="1" />
   <!-- <property name="respectCrawlDelayUpToSeconds" value="300" /> -->
        <property name="maxDelayMs" value="1000" /> 
   <!-- <property name="maxPerHostBandwidthUsageKbSec" value="0" /> -->
@@ -412,11 +411,11 @@ metadata.description=Basic crawl starting with useful defaults
  <!-- CRAWLCONTROLLER: Control interface, unifying context -->
  <bean id="crawlController" 
    class="org.archive.crawler.framework.CrawlController">
-  <!-- <property name="maxToeThreads" value="25" /> -->
+      <property name="maxToeThreads" value="3" />
       <property name="pauseAtStart" value="false" />
       <property name="pauseAtFinish" value="false" />
-  <!-- <property name="recorderInBufferBytes" value="524288" /> -->
-  <!-- <property name="recorderOutBufferBytes" value="16384" /> -->
+      <property name="recorderInBufferBytes" value="2097152" />
+      <property name="recorderOutBufferBytes" value="65536" />
   <!-- <property name="checkpointerPeriod" value="-1" /> -->
   <!-- <property name="scratchDir" value="scratchs" /> -->
   <!-- <property name="checkpointsDir" value="checkpoints" /> -->

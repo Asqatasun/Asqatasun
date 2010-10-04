@@ -37,6 +37,11 @@ import org.xml.sax.SAXException;
 public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         CSSContentAdapter, ContentHandler {
 
+    private static final String HTTP_PREFIX = "http";
+    private static final String WWW_PREFIX = "www";
+    private static final String CSS_ON_ERROR = "CSS_ON_ERROR";
+    private static final String URI_PREFIX = "#tanaguru-css-";
+    
     private StringBuffer buffer;
     private Set<CSSOMStyleSheet> cssSet;
     private Set cssVector;
@@ -45,14 +50,14 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
     private Locator locator;
     private CSSParser parser;
     private String currentLocalResourcePath;
-    private final String HTTP_PREFIX = "http";
-    private final String WWW_PREFIX = "www";
+    
     private boolean cssOnError = false;
-    private final String CSS_ON_ERROR = "CSS_ON_ERROR";
+    
 
     private Set<StylesheetContent> relatedCssSet =
             new HashSet<StylesheetContent>();
 
+    private int internalCssCounter = 1;
     /**
      * Default constructor.
      */
@@ -421,11 +426,12 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
     private StylesheetContent getStylesheetFromResource(String resource){
         StylesheetContent cssContent = contentFactory.createStylesheetContent(
                 new Date(),
-                ssp.getURI(),
+                ssp.getURI()+URI_PREFIX+internalCssCounter,
                 ssp,
                 resource,
                 200);
         cssContent.setAudit(ssp.getAudit());
+        internalCssCounter++;
         ssp.addRelatedContent(cssContent);
         return cssContent;
     }

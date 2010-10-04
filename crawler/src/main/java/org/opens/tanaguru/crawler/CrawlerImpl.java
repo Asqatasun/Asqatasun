@@ -15,6 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.log4j.Logger;
 import org.archive.crawler.framework.CrawlJob;
 import org.archive.modules.Processor;
@@ -36,11 +39,14 @@ import org.opens.tanaguru.entity.subject.WebResource;
  */
 public class CrawlerImpl implements Crawler {
 
+    private static final String urlStrToReplace = "# URLS HERE";
+    private static final int CRAWL_LAUNCHER_RETRY_TIMEOUT = 1000;
+    private static final int CRAWL_LOGGER_TIMEOUT = 2000;
+
     private WebResource webResource;
     private File currentJobOutputDir;
-    protected String heritrixFileName = "tanaguru-crawler-beans.cxml";
-    protected CrawlJob crawlJob;
-    private final String urlStrToReplace = "# URLS HERE";
+    private String heritrixFileName = "tanaguru-crawler-beans.cxml";
+    private CrawlJob crawlJob;
     private List<Content> contentList = new ArrayList<Content>();
 
     public CrawlerImpl() {
@@ -100,6 +106,7 @@ public class CrawlerImpl implements Crawler {
     }
 
     private WebResourceFactory webResourceFactory;
+    @Override
     public void setWebResourceFactory(WebResourceFactory webResourceFactory) {
         this.webResourceFactory = webResourceFactory;
     }
@@ -150,11 +157,13 @@ public class CrawlerImpl implements Crawler {
         }
     }
 
+    @Override
     public WebResource getResult() {
         crawlJob = null;
         return webResource;
     }
 
+    @Override
     public void run() {
         if (crawlJob.isLaunchable()) {
             Logger.getLogger(CrawlerImpl.class.getName()).info(
@@ -162,7 +171,7 @@ public class CrawlerImpl implements Crawler {
             crawlJob.launch();
             if (!crawlJob.isRunning()) {
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(CRAWL_LAUNCHER_RETRY_TIMEOUT);
                 } catch (InterruptedException ex) {
                     java.util.logging.Logger.getLogger(
                             CrawlerImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -178,7 +187,7 @@ public class CrawlerImpl implements Crawler {
                 }
                 Logger.getLogger(CrawlerImpl.class.getName()).info(
                         "crawljob is running");
-                Thread.sleep(2000);
+                Thread.sleep(CRAWL_LOGGER_TIMEOUT);
             } catch (InterruptedException e) {
                 // do nothing
             }
@@ -186,7 +195,14 @@ public class CrawlerImpl implements Crawler {
         computeResult();
         crawlJob.terminate();
         if (crawlJob.teardown()) {
-            removeConfigFile(currentJobOutputDir);
+            closeCrawlerLogFiles();
+            if (!removeConfigFile(currentJobOutputDir)) {
+            Logger.getLogger(CrawlerImpl.class.getName()).info(
+                        "Configuration Heritrix files cannot be deleted");
+            }
+        } else {
+            Logger.getLogger(CrawlerImpl.class.getName()).info(
+                        "The crawljob is not teardowned");
         }
     }
 
@@ -204,16 +220,22 @@ public class CrawlerImpl implements Crawler {
                         "Directory: " + currentJobOutputDir + " created");
             }
         }
+        BufferedReader in = null;
+        FileWriter fw = null;
         try {
-            BufferedReader in = new BufferedReader(
+            in = new BufferedReader(
                     new FileReader(crawlConfigFilePath + "/" + heritrixFileName));
 
             String c;
+            String uri;
             StringBuffer newContextFile = new StringBuffer();
             while ((c = in.readLine()) != null) {
                 if (c.equalsIgnoreCase(urlStrToReplace)) {
                     for (int i=0 ; i<url.length ; i++) {
-                        newContextFile.append(UURIFactory.getInstance(url[i]));
+                        // first convert the URI in unicode
+                        uri = UURIFactory.getInstance(url[i]).getEscapedURI();
+                        // then escape the URI to be written in a xml file.
+                        newContextFile.append(StringEscapeUtils.escapeXml(uri));
                         newContextFile.append("\r");
                     }
                 } else {
@@ -221,12 +243,31 @@ public class CrawlerImpl implements Crawler {
                 }
                 newContextFile.append("\r");
             }
-            FileWriter fw = new FileWriter(currentJobOutputDir.getPath() + "/" + heritrixFileName);
+            fw = new FileWriter(currentJobOutputDir.getPath() + "/" + heritrixFileName);
             fw.write(newContextFile.toString());
             fw.close();
             in.close();
         } catch (IOException ex) {
             Logger.getLogger(CrawlerImpl.class.getName()).error(ex);
+        } finally {
+            if (in != null) {
+               try {
+                   in.close();
+		} catch (IOException e) {
+                    java.util.logging.Logger.getLogger(
+                            CrawlerImpl.class.getName()).log(
+                            Level.SEVERE, null, e);
+		}
+            }
+            if (fw != null) {
+                try {
+                    fw.close();
+		} catch (IOException e) {
+                    java.util.logging.Logger.getLogger(
+                            CrawlerImpl.class.getName()).log(
+                            Level.SEVERE, null, e);
+		}
+            }
         }
         return new File(currentJobOutputDir.getPath() + "/" + heritrixFileName);
     }
@@ -237,19 +278,13 @@ public class CrawlerImpl implements Crawler {
     private void computeResult() {
         for (Processor processor : crawlJob.getCrawlController().getDispositionChain().getProcessors()) {
             if (processor instanceof TanaguruWriterProcessor) {
-                Set<WebResource> webResourceList =
-                        ((TanaguruWriterProcessor) processor).getWebResourceSet();
-                if (webResource instanceof Site) {
-                    ((Site) webResource).addAllChild(webResourceList);
-                } else if (webResourceList.size() == 1) {
-                    webResource = webResourceList.iterator().next();
-                }
                 contentList =
                         ((TanaguruWriterProcessor) processor).getContentList();
                 contentDeepCopy(((TanaguruWriterProcessor) processor).getWebResourceSet(),
                         ((TanaguruWriterProcessor) processor).getContentList());
                 computeContentRelationShip(
                         ((TanaguruWriterProcessor) processor).getContentRelationShipMap());
+                removeOrphanContent();
                 cleanUpWriterResources((TanaguruWriterProcessor) processor);
                 break;
             }
@@ -305,10 +340,9 @@ public class CrawlerImpl implements Crawler {
                         // We check that the content found by the extractor has been
                         // actually downloaded and we only keep related content
                         // (to avoid to have a relation between 2 SSP
-                        if (tempMap.containsKey(childUrl)) {
-                            if (tempMap.get(childUrl) instanceof SSP) {
-                                localRelatedContent.addParentContent(tempMap.get(childUrl));
-                            }
+                        if (tempMap.containsKey(childUrl) &&
+                            tempMap.get(childUrl) instanceof SSP) {
+                            localRelatedContent.addParentContent(tempMap.get(childUrl));
                         }
                     }
                 }
@@ -328,13 +362,25 @@ public class CrawlerImpl implements Crawler {
                 if (files[i].isDirectory()) {
                     removeConfigFile(files[i]);
                 } else {
-                    files[i].delete();
+                    boolean isDeleted = files[i].delete();
+                    if (!isDeleted) {
+                        java.util.logging.Logger.getLogger(
+                            CrawlerImpl.class.getName()).log(Level.SEVERE, null,
+                            "The file " + files[i].getPath() +
+                            " cannot be deleted" );
+                    }
                 }
             }
         }
         return (file.delete());
     }
 
+    /**
+     * This methods realized a deep copy of a content object and add the
+     * copied object to the content list.
+     * @param webResourceSet
+     * @param contentListToCopy
+     */
     private void contentDeepCopy(Set<WebResource> webResourceSet,
             List<Content> contentListToCopy){
         if (webResource instanceof Site) {
@@ -353,12 +399,16 @@ public class CrawlerImpl implements Crawler {
      * @return
      */
     private WebResource webResourceDeepCopy(WebResource webResource){
+        StringBuilder webResourceUrl = new StringBuilder();
+        webResourceUrl.append(webResource.getURL());
         WebResource webResourceCopy =
-                webResourceFactory.createPage(new String(webResource.getURL()));
+                webResourceFactory.createPage(webResourceUrl.toString());
 
         webResourceCopy.setId(webResource.getId());
         if(webResource.getLabel() != null) {
-            webResourceCopy.setLabel(new String(webResource.getLabel()));
+            StringBuilder webResourceLabel = new StringBuilder();
+            webResourceLabel.append(webResource.getLabel());
+            webResourceCopy.setLabel(webResourceLabel.toString());
         }
         return webResourceCopy;
     }
@@ -373,9 +423,11 @@ public class CrawlerImpl implements Crawler {
         for(Content contentToCopy : contentListToCopy) {
             if (contentToCopy instanceof SSP) {
                 SSP ssp = (SSP)contentToCopy;
-                String uri = null;
+                StringBuilder uri = new StringBuilder();
                 if (ssp.getURI() != null) {
-                    uri = new String (ssp.getURI());
+                    uri.append(ssp.getURI());
+                } else {
+                    uri.append("");
                 }
                 String sourceCode = null;
                 if (ssp.getSource() != null) {
@@ -383,20 +435,24 @@ public class CrawlerImpl implements Crawler {
                 }
                 Content htmlContent = contentFactory.createSSP(
                         new Date(),
-                        uri,
+                        uri.toString(),
                         sourceCode,
                         (Page)retrieveWebResource(ssp.getPage()),
                         ssp.getHttpStatusCode());
                 if (ssp.getCharset() != null) {
-                    ((SSP)htmlContent).setCharset(new String(ssp.getCharset()));
+                    StringBuffer charset = new StringBuffer();
+                    charset.append(ssp.getCharset());
+                    ((SSP)htmlContent).setCharset(charset.toString());
                 }
                 localContentList.add(htmlContent);
             } else if (contentToCopy instanceof StylesheetContent) {
                 StylesheetContent stylesheetContent = 
                         (StylesheetContent)contentToCopy;
-                String uri = null;
+                StringBuilder uri = new StringBuilder();
                 if (stylesheetContent.getURI() != null) {
-                    uri = new String (stylesheetContent.getURI());
+                    uri.append(stylesheetContent.getURI());
+                } else {
+                    uri.append("");
                 }
                 String sourceCode = null;
                 if (stylesheetContent.getSource() != null) {
@@ -404,7 +460,7 @@ public class CrawlerImpl implements Crawler {
                 }
                 Content cssContent = contentFactory.createStylesheetContent(
                         new Date(),
-                        uri,
+                        uri.toString(),
                         null,
                         sourceCode,
                         stylesheetContent.getHttpStatusCode());
@@ -421,13 +477,15 @@ public class CrawlerImpl implements Crawler {
                             CrawlerImpl.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 byte[] data = baos.toByteArray();
-                String uri = null;
+                StringBuilder uri = new StringBuilder();
                 if (imageContent.getURI() != null) {
-                    uri = new String (imageContent.getURI());
+                    uri.append(imageContent.getURI());
+                } else {
+                    uri.append("");
                 }
                 Content imgContent = contentFactory.createImageContent(
                         new Date(),
-                        uri,
+                        uri.toString(),
                         null,
                         data,
                         imageContent.getHttpStatusCode());
@@ -468,11 +526,83 @@ public class CrawlerImpl implements Crawler {
      * @param processor
      */
     private void cleanUpWriterResources(TanaguruWriterProcessor processor){
+        processor.getContentList().clear();
         processor.setContentList(null);
+        processor.getContentRelationShipMap().clear();
         processor.setContentRelationShipMap(null);
         processor.setCssContentRelationShipMap(null);
+        processor.getWebResourceSet().clear();
         processor.setWebResourceSet(null);
         processor.setWebResourceFactory(null);
         processor.setContentFactory(null);
     }
+
+    // Bug #154 fix
+    /**
+     * Some resources may have been downloaded by the crawler component but they
+     * are not linked with any webresource. They have to be removed from the
+     * contentList. 
+     */
+    @SuppressWarnings("element-type-mismatch")
+    private void removeOrphanContent() {
+        List<Content> contentToRemoveList = new ArrayList<Content>();
+        List<RelatedContent> relatedContentToRemoveList =
+                new ArrayList<RelatedContent>();
+        List<RelatedContent> relatedContentList =
+                new ArrayList<RelatedContent>();
+
+        // we search the SSP without webresource
+        for (Content content :contentList) {
+            if (content instanceof SSP && ((SSP)content).getPage() == null) {
+                contentToRemoveList.add(content);
+            } else if (content instanceof RelatedContent) {
+                relatedContentList.add((RelatedContent)content);
+            }
+        }
+
+        // we remove the orphan SSP from the contentList and we remove the
+        // reference of these SSP from the Parent Set of each relatedContent.
+        for (Content content : contentToRemoveList) {
+            contentList.remove(content);
+            for (RelatedContent relatedContent : relatedContentList) {
+                if ((relatedContent).getParentContentSet().contains(content)) {
+                    relatedContent.getParentContentSet().remove(content);
+                }
+            }
+        }
+
+        // we search the related contents without parent (whose parents were
+        // orphan SSP that are now deleted)
+        for (RelatedContent relatedContent : relatedContentList) {
+            if (relatedContent.getParentContentSet().isEmpty()) {
+                relatedContentToRemoveList.add(relatedContent);
+            }
+        }
+
+        // we remove from the content list the relatedContent without parent
+        for (RelatedContent relatedContent : relatedContentToRemoveList) {
+            if (relatedContent instanceof Content) {
+                contentList.remove((Content)relatedContent);
+            }
+        }
+
+    }
+
+    /**
+     * Heritrix lets its log files opened at the end of the crawl.
+     * We have to close them "manually".
+     */
+    private void closeCrawlerLogFiles() {
+        List<FileHandler> loggerHandlerList = new ArrayList<FileHandler>();
+        for (Handler handler: crawlJob.getJobLogger().getHandlers()) {
+            if (handler instanceof FileHandler) {
+                ((FileHandler)handler).close();
+                loggerHandlerList.add((FileHandler)handler);
+            }
+        }
+        for (FileHandler fileHandler : loggerHandlerList) {
+            crawlJob.getJobLogger().removeHandler(fileHandler);
+        }
+    }
+
 }

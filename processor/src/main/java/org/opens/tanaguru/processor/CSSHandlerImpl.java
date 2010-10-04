@@ -35,6 +35,7 @@ public class CSSHandlerImpl implements CSSHandler {
     private Map<String, Set<CSSOMRule>> rulesByMedia ;
     private final String CSS_ON_ERROR = "CSS_ON_ERROR";
     Set<StylesheetContent> cssOnErrorSet;
+    private static int  HTTP_OK_STATUS_CODE = 200;
 
     public CSSHandlerImpl() {
         super();
@@ -109,9 +110,9 @@ public class CSSHandlerImpl implements CSSHandler {
         XStream xstream = new XStream();
         for (RelatedContent relatedContent : ssp.getRelatedContentSet()){
             if (relatedContent instanceof StylesheetContent){
-                if (!((StylesheetContent)relatedContent).getAdaptedContent().equalsIgnoreCase(CSS_ON_ERROR) &&
+                if (((StylesheetContent)relatedContent).getHttpStatusCode() == HTTP_OK_STATUS_CODE &&
                         ((StylesheetContent)relatedContent).getAdaptedContent() != null &&
-                        ((StylesheetContent)relatedContent).getHttpStatusCode() == 200) {
+                        !((StylesheetContent)relatedContent).getAdaptedContent().equalsIgnoreCase(CSS_ON_ERROR) ){
                     styleSet.add(
                         (CSSOMStyleSheet) xstream.fromXML(
                         ((StylesheetContent)relatedContent).getAdaptedContent()));
