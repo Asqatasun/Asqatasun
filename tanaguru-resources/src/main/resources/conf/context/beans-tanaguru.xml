@@ -34,6 +34,13 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         <property name="entityDao" ref="processResultDAO"/>
     </bean>
 
+    <bean id="evidenceDAO" class="org.opens.tanaguru.entity.dao.audit.EvidenceDAOImpl"/>
+    <bean id="evidenceFactory" class="org.opens.tanaguru.entity.factory.audit.EvidenceFactoryImpl"/>
+    <bean id="evidenceDataService" class="org.opens.tanaguru.entity.service.audit.EvidenceDataServiceImpl">
+        <property name="entityFactory" ref="evidenceFactory"/>
+        <property name="entityDao" ref="evidenceDAO"/>
+    </bean>
+
     <bean id="auditService" class="org.opens.tanaguru.service.AuditServiceImpl">
         <property name="crawlerService" ref="crawlerService"/>
         <property name="contentLoaderService" ref="contentLoaderService"/>

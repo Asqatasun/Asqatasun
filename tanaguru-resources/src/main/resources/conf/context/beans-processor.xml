@@ -6,6 +6,8 @@
     <bean id="domHandlerComponent" class="org.opens.tanaguru.processor.DOMHandlerImpl">
         <property name="processRemarkFactory" ref="processRemarkFactory"/>
         <property name="sourceCodeRemarkFactory" ref="sourceCodeRemarkFactory"/>
+        <property name="evidenceDataService" ref="evidenceDataService"/>
+        <property name="evidenceElementFactory" ref="evidenceElementFactory"/>
     </bean>
 
     <bean id="cssHandlerComponent" class="org.opens.tanaguru.processor.CSSHandlerImpl">

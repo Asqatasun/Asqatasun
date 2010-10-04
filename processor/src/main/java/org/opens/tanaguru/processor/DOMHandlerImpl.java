@@ -39,6 +39,9 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import org.opens.tanaguru.entity.audit.EvidenceElement;
+import org.opens.tanaguru.entity.factory.audit.EvidenceElementFactory;
+import org.opens.tanaguru.entity.service.audit.EvidenceDataService;
 import org.xml.sax.SAXException;
 
 public class DOMHandlerImpl implements DOMHandler {
@@ -49,6 +52,8 @@ public class DOMHandlerImpl implements DOMHandler {
     protected List<ProcessRemark> remarkList;
     protected List<Node> selectedElementList;
     protected SourceCodeRemarkFactory sourceCodeRemarkFactory;
+    protected EvidenceElementFactory evidenceElementFactory;
+    protected EvidenceDataService evidenceDataService;
     protected SSP ssp;
     protected XPath xpath;
     protected Map<Integer, String> sourceCodeWithLine;
@@ -102,6 +107,11 @@ public class DOMHandlerImpl implements DOMHandler {
         }
         remark.setLineNumber(lineNumber);
         remark.setCharacterPosition(characterPosition + 1);
+        EvidenceElement evidenceElement = evidenceElementFactory.create();
+        evidenceElement.setProcessRemark(remark);
+        evidenceElement.setLabel(attributeName);
+        evidenceElement.setEvidence(evidenceDataService.findByCode("AttributeName"));
+        remark.addElement(evidenceElement);
         remark.setTarget(attributeName);
         remarkList.add(remark);
     }
@@ -1045,6 +1055,15 @@ public class DOMHandlerImpl implements DOMHandler {
     public void setSourceCodeRemarkFactory(
             SourceCodeRemarkFactory sourceCodeRemarkFactory) {
         this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
+    }
+
+    public void setEvidenceElementFactory(
+            EvidenceElementFactory evidenceElementFactory) {
+        this.evidenceElementFactory = evidenceElementFactory;
+    }
+
+    public void setEvidenceDataService(EvidenceDataService evidenceDataService) {
+        this.evidenceDataService = evidenceDataService;
     }
 
     @Override

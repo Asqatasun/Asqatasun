@@ -84,6 +84,12 @@ public interface ProcessResult extends Entity {
 
     /**
      *
+     * @return the number of tested elements
+     */
+    int getElementCounter();
+
+    /**
+     *
      * @param subResultList
      *            the sub result list to set
      */
@@ -137,4 +143,12 @@ public interface ProcessResult extends Entity {
      *            the value to set
      */
     void setValue(Object value);
+    
+    /**
+     * 
+     * @param elementCounter
+     *              the number of tested elements
+     */
+    void setElementCounter(int elementCounter);
+
 }

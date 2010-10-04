@@ -75,16 +75,17 @@ FOREIGN KEY (`Id_Content_Child`) REFERENCES CONTENT(`Id_Content`)
 --
 
 CREATE TABLE `CRITERION` (
-  `IdCriterion` bigint(20) NOT NULL auto_increment,
+  `Id_Criterion` bigint(20) NOT NULL auto_increment,
+  `Reference_Id_Reference` bigint(20) default NULL,
+  `Theme_Id_Theme` bigint(20) default NULL,
   `Cd_Criterion` varchar(255) default NULL,
   `Description` varchar(255) default NULL,
   `Label` varchar(255) default NULL,
+  `Url` varchar(255) default NULL,
   `Rank` int(11) default NULL,
-  `Id_Reference` bigint(20) default NULL,
-  `Id_Theme` bigint(20) default NULL,
-  PRIMARY KEY  (`IdCriterion`),
-  KEY `FKBCFA1E81DA004892` (`Id_Reference`),
-  KEY `FKBCFA1E81D667448E` (`Id_Theme`)
+  PRIMARY KEY  (`Id_Criterion`),
+  KEY `FKBCFA1E81DA004892` (`Reference_Id_Reference`),
+  KEY `FKBCFA1E81D667448E` (`Theme_Id_Theme`)
 ) DEFAULT CHARACTER SET utf8;
 
 --
@@ -115,7 +116,6 @@ CREATE TABLE `LEVEL` (
 --
 -- Table structure for table `NOMENCLATURE`
 --
-
 CREATE TABLE `NOMENCLATURE` (
   `Id_Nomenclature` bigint(20) NOT NULL auto_increment,
   `Cd_Nomenclature` varchar(255) default NULL,
@@ -130,7 +130,6 @@ CREATE TABLE `NOMENCLATURE` (
 --
 -- Table structure for table `NOMENCLATURE_ELEMENT`
 --
-
 CREATE TABLE `NOMENCLATURE_ELEMENT` (
   `DTYPE` varchar(31) NOT NULL,
   `Id_Nomenclature_Element` bigint(20) NOT NULL auto_increment,
@@ -139,6 +138,31 @@ CREATE TABLE `NOMENCLATURE_ELEMENT` (
   `Id_Nomenclature` bigint(20) default NULL,
   PRIMARY KEY  (`Id_Nomenclature_Element`),
   KEY `FK44F856145FAB5EF2` (`Id_Nomenclature`)
+) DEFAULT CHARACTER SET utf8;
+
+--
+-- Table structure for table `EVIDENCE`
+--
+CREATE TABLE `EVIDENCE` (
+  `Id_Evidence` bigint(20) NOT NULL auto_increment,
+  `Cd_Evidence` varchar(255) default NULL,
+  `Description` varchar(255) default NULL,
+  `Long_Label` varchar(255) default NULL,
+  PRIMARY KEY  (`Id_Evidence`)
+) DEFAULT CHARACTER SET utf8;
+
+--
+-- Table structure for table `EVIDENCE_ELEMENT`
+--
+CREATE TABLE `EVIDENCE_ELEMENT` (
+  `DTYPE` varchar(31) NOT NULL,
+  `Id_Evidence_Element` bigint(20) NOT NULL auto_increment,
+  `Label` varchar(255) NOT NULL,
+  `EVIDENCE_Id_Evidence` bigint(20) default NULL,
+  `PROCESS_REMARK_Id_Process_Remark` bigint(20) default NULL,
+  PRIMARY KEY  (`Id_Evidence_Element`),
+  KEY `FK_EVIDENCE_ELEMENT_PROCESS_REMARK` (`PROCESS_REMARK_Id_Process_Remark`),
+  KEY `FK_EVIDENCE_ELEMENT_EVIDENCE` (`EVIDENCE_Id_Evidence`)
 ) DEFAULT CHARACTER SET utf8;
 
 --
@@ -163,11 +187,11 @@ CREATE TABLE `PROCESS_REMARK` (
 --
 -- Table structure for table `PROCESS_RESULT`
 --
-
 CREATE TABLE `PROCESS_RESULT` (
   `DTYPE` varchar(31) NOT NULL,
   `Id_Process_Result` bigint(20) NOT NULL auto_increment,
   `Definite_Value` varchar(255) default NULL,
+  `Element_Counter` bigint(20) default NULL,
   `Indefinite_Value` longtext,
   `Id_Audit_Gross_Result` bigint(20) default NULL,
   `Id_Audit_Net_Result` bigint(20) default NULL,
@@ -187,12 +211,12 @@ CREATE TABLE `PROCESS_RESULT` (
 --
 -- Table structure for table `REFERENCE`
 --
-
 CREATE TABLE `REFERENCE` (
   `Id_Reference` bigint(20) NOT NULL auto_increment,
   `Cd_Reference` varchar(255) default NULL,
   `Description` varchar(255) default NULL,
   `Label` varchar(255) NOT NULL,
+  `Url` varchar(255) NOT NULL,
   `Rank` int(11) default NULL,
   PRIMARY KEY  (`Id_Reference`)
 ) DEFAULT CHARACTER SET utf8;
@@ -200,7 +224,6 @@ CREATE TABLE `REFERENCE` (
 --
 -- Table structure for table `RULE`
 --
-
 CREATE TABLE `RULE` (
   `Id_Rule` bigint(20) NOT NULL auto_increment,
   `Class_Name` varchar(255) NOT NULL,

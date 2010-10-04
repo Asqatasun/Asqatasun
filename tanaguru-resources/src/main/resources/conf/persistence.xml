@@ -33,6 +33,8 @@
         <class>org.opens.tanaguru.entity.audit.StylesheetContentImpl</class>
         <class>org.opens.tanaguru.entity.audit.RelatedTextContentImpl</class>
 	<class>org.opens.tanaguru.entity.audit.RelatedBinaryContentImpl</class>
+        <class>org.opens.tanaguru.entity.audit.EvidenceElementImpl</class>
+        <class>org.opens.tanaguru.entity.audit.EvidenceImpl</class>
 
         <class>org.opens.tanaguru.entity.subject.PageImpl</class>
         <class>org.opens.tanaguru.entity.subject.SiteImpl</class>

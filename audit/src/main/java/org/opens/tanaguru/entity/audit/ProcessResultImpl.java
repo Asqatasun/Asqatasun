@@ -57,11 +57,14 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     @ManyToOne
     @JoinColumn(name = "Id_Test")
     protected TestImpl test;
+    @JoinColumn(name = "Element_Counter")
+    protected int elementCounter;
 
     public ProcessResultImpl() {
         super();
     }
 
+    @Override
     public void addAllRemark(List<? extends ProcessRemark> remarkList) {
         if (remarkList == null) {
             return;
@@ -72,16 +75,19 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
         }
     }
 
+    @Override
     public void addChildResult(ProcessResult childResult) {
         childResult.setParentResult(this);
         this.childResultList.add((ProcessResultImpl) childResult);
     }
 
+    @Override
     public void addRemark(ProcessRemark remark) {
         remark.setProcessResult(this);
         this.remarkList.add((ProcessRemarkImpl) remark);
     }
 
+    @Override
     @XmlElementWrapper
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.DefiniteResultImpl.class),
@@ -90,25 +96,30 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
         return childResultList;
     }
 
+    @Override
     @XmlTransient
     public Audit getGrossResultAudit() {
         return grossResultAudit;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     @XmlTransient
     public Audit getNetResultAudit() {
         return netResultAudit;
     }
 
+    @Override
     @XmlTransient
     public ProcessResult getParentResult() {
         return parentResult;
     }
 
+    @Override
     @XmlElementWrapper
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.ProcessRemarkImpl.class),
@@ -117,18 +128,26 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
         return remarkList;
     }
 
+    @Override
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.subject.PageImpl.class),
-        @XmlElementRef(type = org.opens.tanaguru.entity.subject.SiteImpl.class)})
+    @XmlElementRef(type = org.opens.tanaguru.entity.subject.SiteImpl.class)})
     public WebResource getSubject() {
         return subject;
     }
 
+    @Override
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.TestImpl.class)
     public Test getTest() {
         return test;
     }
 
+    @Override
+    public int getElementCounter(){
+       return elementCounter;
+    }
+
+    @Override
     public void setChildResultList(
             List<? extends ProcessResult> childResultList) {
         for (ProcessResult processResult : childResultList) {
@@ -137,22 +156,27 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
         this.childResultList = (List<ProcessResultImpl>) childResultList;
     }
 
+    @Override
     public void setGrossResultAudit(Audit grossResultAudit) {
         this.grossResultAudit = (AuditImpl) grossResultAudit;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
+    @Override
     public void setNetResultAudit(Audit netResultAudit) {
         this.netResultAudit = (AuditImpl) netResultAudit;
     }
 
+    @Override
     public void setParentResult(ProcessResult parentResult) {
         this.parentResult = (ProcessResultImpl) parentResult;
     }
 
+    @Override
     public void setRemarkList(List<? extends ProcessRemark> remarkList) {
         for (ProcessRemark processRemark : remarkList) {
             processRemark.setProcessResult(this);
@@ -160,11 +184,19 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
         this.remarkList = (List<ProcessRemarkImpl>) remarkList;
     }
 
+    @Override
     public void setSubject(WebResource subject) {
         this.subject = (WebResourceImpl) subject;
     }
 
+    @Override
     public void setTest(Test test) {
         this.test = (TestImpl) test;
     }
+    
+    @Override
+    public void setElementCounter(int elementCounter){
+       this.elementCounter = elementCounter;
+    }
+
 }

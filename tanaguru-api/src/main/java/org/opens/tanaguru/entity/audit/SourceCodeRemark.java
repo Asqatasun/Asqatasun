@@ -1,5 +1,7 @@
 package org.opens.tanaguru.entity.audit;
 
+import java.util.Collection;
+
 /**
  * 
  * @author ADEX
@@ -7,42 +9,62 @@ package org.opens.tanaguru.entity.audit;
  */
 public interface SourceCodeRemark extends ProcessRemark {
 
-	/**
-	 * 
-	 * @return the position of the first character
-	 */
-	int getCharacterPosition();
+    /**
+     *
+     * @param element
+     *            the element to add
+     */
+    void addElement(EvidenceElement element);
 
-	/**
-	 * 
-	 * @return the line number
-	 */
-	int getLineNumber();
+    /**
+     *
+     * @return the position of the first character
+     */
+    int getCharacterPosition();
 
-	/**
-	 * 
-	 * @return the target
-	 */
-	String getTarget();
+    /**
+     *
+     * @return the line number
+     */
+    int getLineNumber();
 
-	/**
-	 * 
-	 * @param characterPosition
-	 *            the position of the character to set
-	 */
-	void setCharacterPosition(int characterPosition);
+    /**
+     *
+     * @return the target
+     */
+    String getTarget();
 
-	/**
-	 * 
-	 * @param lineNumber
-	 *            the line number to set
-	 */
-	void setLineNumber(int lineNumber);
+    /**
+     *
+     * @return the elements
+     */
+    Collection<? extends EvidenceElement> getElementList();
 
-	/**
-	 * 
-	 * @param target
-	 *            the target to set
-	 */
-	void setTarget(String target);
+    /**
+     *
+     * @param characterPosition
+     *            the position of the character to set
+     */
+    void setCharacterPosition(int characterPosition);
+
+    /**
+     *
+     * @param lineNumber
+     *            the line number to set
+     */
+    void setLineNumber(int lineNumber);
+
+    /**
+     *
+     * @param target
+     *            the target to set
+     */
+    void setTarget(String target);
+
+    /**
+     *
+     * @param elements
+     *            the elements to set
+     */
+    void setElementList(Collection<? extends EvidenceElement> elements);
 }
