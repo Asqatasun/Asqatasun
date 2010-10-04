@@ -45,6 +45,12 @@ public interface Reference extends Entity, Reorderable {
 
     /**
      *
+     * @return the Url
+     */
+    String getUrl();
+
+    /**
+     *
      * @param code
      *            the code to set
      */
@@ -70,4 +76,11 @@ public interface Reference extends Entity, Reorderable {
      *            the label to set
      */
     void setLabel(String label);
+
+    /**
+     *
+     * @param url
+     *            the url to set
+     */
+    void setUrl(String url);
 }

@@ -34,6 +34,8 @@ public class ReferenceImpl implements Reference, Serializable {
     protected String label;
     @Column(name = "Rank")
     protected int rank;
+    @Column(name = "Url", nullable = true)
+    protected String url;
 
     public ReferenceImpl() {
         super();
@@ -99,5 +101,15 @@ public class ReferenceImpl implements Reference, Serializable {
 
     public void setRank(int rank) {
         this.rank = rank;
+    }
+
+    @Override
+    public String getUrl() {
+        return url;
+    }
+
+    @Override
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

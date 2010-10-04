@@ -44,6 +44,12 @@ public interface Criterion extends Entity, Reorderable {
 
     /**
      *
+     * @return the url
+     */
+    String getUrl();
+
+    /**
+     *
      * @return the tests
      */
     List<? extends Test> getTestList();
@@ -95,4 +101,11 @@ public interface Criterion extends Entity, Reorderable {
      *            the theme to set
      */
     void setTheme(Theme theme);
+
+    /**
+     *
+     * @param url
+     *            the url to set
+     */
+    void setUrl(String url);
 }

@@ -28,19 +28,21 @@ public class CriterionImpl implements Criterion, Serializable {
     protected String description;
     @Id
     @GeneratedValue
-    @Column(name = "IdCriterion")
+    @Column(name = "Id_Criterion")
     protected Long id;
     @Column(name = "Label")
     protected String label;
+    @Column(name = "Url")
+    protected String url;
     @Column(name = "Rank")
     protected int rank;
     @ManyToOne
-    @JoinColumn(name = "Id_Reference")
+    @JoinColumn(name = "Reference_Id_Reference")
     protected ReferenceImpl reference;
     @OneToMany(mappedBy = "criterion", cascade = CascadeType.ALL)
     protected List<TestImpl> testList = new ArrayList<TestImpl>();
     @ManyToOne
-    @JoinColumn(name = "Id_Theme")
+    @JoinColumn(name = "Theme_Id_Theme")
     protected ThemeImpl theme;
 
     public CriterionImpl() {
@@ -125,5 +127,15 @@ public class CriterionImpl implements Criterion, Serializable {
 
     public void setTheme(Theme theme) {
         this.theme = (ThemeImpl) theme;
+    }
+
+    @Override
+    public String getUrl() {
+        return url;
+    }
+
+    @Override
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
