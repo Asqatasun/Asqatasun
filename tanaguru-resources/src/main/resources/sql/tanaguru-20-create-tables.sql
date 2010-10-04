@@ -191,7 +191,7 @@ CREATE TABLE `PROCESS_RESULT` (
   `DTYPE` varchar(31) NOT NULL,
   `Id_Process_Result` bigint(20) NOT NULL auto_increment,
   `Definite_Value` varchar(255) default NULL,
-  `Element_Counter` bigint(20) default NULL,
+  `Element_Counter` int(20) default NULL,
   `Indefinite_Value` longtext,
   `Id_Audit_Gross_Result` bigint(20) default NULL,
   `Id_Audit_Net_Result` bigint(20) default NULL,

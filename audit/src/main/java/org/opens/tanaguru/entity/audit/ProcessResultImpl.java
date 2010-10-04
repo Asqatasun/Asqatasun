@@ -57,7 +57,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     @ManyToOne
     @JoinColumn(name = "Id_Test")
     protected TestImpl test;
-    @JoinColumn(name = "Element_Counter")
+    @Column(name = "Element_Counter")
     protected int elementCounter;
 
     public ProcessResultImpl() {
