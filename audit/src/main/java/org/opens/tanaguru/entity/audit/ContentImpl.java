@@ -35,7 +35,7 @@ public abstract class ContentImpl implements Content, Serializable {
     @GeneratedValue
     @Column(name = "Id_Content")
     protected Long id;
-    @Column(name = "Uri", columnDefinition = "mediumtext", nullable = false)
+    @Column(name = "Uri", length = 500, nullable = false)
     protected String uri;
     @Column(name = "Http_Status_Code", nullable = false)
     protected int httpStatusCode;

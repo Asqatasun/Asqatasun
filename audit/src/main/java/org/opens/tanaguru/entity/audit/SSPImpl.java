@@ -34,7 +34,7 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
     @Column(name = "Source", length = 400000)
     protected String source;
 
-    @Column(name = "Doctype", columnDefinition = "mediumtext")
+    @Column(name = "Doctype", length = 500)
     protected String doctype;
 
     @Column(name = "Charset")

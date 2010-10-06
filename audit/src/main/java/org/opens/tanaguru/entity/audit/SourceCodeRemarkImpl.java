@@ -21,7 +21,7 @@ public class SourceCodeRemarkImpl extends ProcessRemarkImpl implements
     protected int characterPosition;
     @Column(name = "Line_Number")
     protected int lineNumber;
-    @Column(name = "Target", columnDefinition = "mediumtext")
+    @Column(name = "Target", length = 5000)
     protected String target;
     @OneToMany(mappedBy = "evidence", cascade = CascadeType.ALL)
     protected Collection<EvidenceElementImpl> elementList = new HashSet<EvidenceElementImpl>();

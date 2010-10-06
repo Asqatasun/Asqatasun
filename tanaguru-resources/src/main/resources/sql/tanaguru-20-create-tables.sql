@@ -44,11 +44,11 @@ CREATE TABLE `CONTENT` (
   `DTYPE` varchar(31) NOT NULL,
   `Id_Content` bigint(20) NOT NULL auto_increment,
   `Dt_Loading` datetime NOT NULL,
-  `Uri` mediumtext NOT NULL,
+  `Uri` varchar(500) NOT NULL,
   `Source` longtext default NULL,
   `Adapted_Content` longtext default NULL,
-  `Doctype` mediumtext default NULL,
-  `Charset` tinytext default NULL,
+  `Doctype` varchar(500) default NULL,
+  `Charset` varchar(255) default NULL,
   `Binary_Content` longblob default NULL,
   `Http_Status_Code` int(11) NOT NULL,
   `Id_Audit` bigint(20) NOT NULL,
@@ -156,7 +156,7 @@ CREATE TABLE `EVIDENCE` (
 --
 CREATE TABLE `EVIDENCE_ELEMENT` (
   `Id_Evidence_Element` bigint(20) NOT NULL auto_increment,
-  `Element_Value` longtext NOT NULL,
+  `Element_Value` varchar(5000) NOT NULL,
   `EVIDENCE_Id_Evidence` bigint(20) default NULL,
   `PROCESS_REMARK_Id_Process_Remark` bigint(20) default NULL,
   PRIMARY KEY  (`Id_Evidence_Element`),
@@ -177,7 +177,7 @@ CREATE TABLE `PROCESS_REMARK` (
   `Selection_Expression` varchar(255) default NULL,
   `Character_Position` int(11) default NULL,
   `Line_Number` int(11) default NULL,
-  `Target` mediumtext default NULL,
+  `Target` varchar(5000) default NULL,
   `Id_Process_Result` bigint(20) default NULL,
   PRIMARY KEY  (`Id_Process_Remark`),
   KEY `FK1C3EA37045A988AD` (`Id_Process_Result`)
