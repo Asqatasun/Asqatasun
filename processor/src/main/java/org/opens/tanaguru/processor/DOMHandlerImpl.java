@@ -109,7 +109,7 @@ public class DOMHandlerImpl implements DOMHandler {
         remark.setCharacterPosition(characterPosition + 1);
         EvidenceElement evidenceElement = evidenceElementFactory.create();
         evidenceElement.setProcessRemark(remark);
-        evidenceElement.setLabel(attributeName);
+        evidenceElement.setValue(attributeName);
         evidenceElement.setEvidence(evidenceDataService.findByCode("AttributeName"));
         remark.addElement(evidenceElement);
         remark.setTarget(attributeName);
