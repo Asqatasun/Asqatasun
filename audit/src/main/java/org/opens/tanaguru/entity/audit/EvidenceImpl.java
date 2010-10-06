@@ -92,7 +92,7 @@ public class EvidenceImpl implements Evidence, Serializable {
     public Collection<String> getValueList() {
         Collection<String> values = new HashSet<String>();
         for (EvidenceElement element : elementList) {
-            values.add(element.getLabel());
+            values.add(element.getValue());
         }
         return values;
     }

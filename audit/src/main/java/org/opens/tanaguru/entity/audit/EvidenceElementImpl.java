@@ -29,8 +29,8 @@ public class EvidenceElementImpl implements EvidenceElement,
     @ManyToOne
     @JoinColumn(name = "EVIDENCE_Id_Evidence")
     protected EvidenceImpl evidence;
-    @Column(name = "Label", nullable = false)
-    protected String label;
+    @Column(name = "Element_Value", nullable = false, columnDefinition = "longtext")
+    protected String value;
     @ManyToOne
     @JoinColumn(name = "PROCESS_REMARK_Id_Process_Remark")
     protected SourceCodeRemarkImpl sourceCodeRemark;
@@ -41,7 +41,7 @@ public class EvidenceElementImpl implements EvidenceElement,
 
     public EvidenceElementImpl(String value) {
         super();
-        this.label = value;
+        this.value = value;
     }
 
     @Override
@@ -56,8 +56,8 @@ public class EvidenceElementImpl implements EvidenceElement,
     }
 
     @Override
-    public String getLabel() {
-        return label;
+    public String getValue() {
+        return value;
     }
 
     @Override
@@ -71,8 +71,8 @@ public class EvidenceElementImpl implements EvidenceElement,
     }
 
     @Override
-    public void setLabel(String value) {
-        this.label = value;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     @XmlTransient

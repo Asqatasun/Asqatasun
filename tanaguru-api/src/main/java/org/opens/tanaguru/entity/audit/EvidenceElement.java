@@ -18,7 +18,7 @@ public interface EvidenceElement extends Entity {
      *
      * @return the value
      */
-    String getLabel();
+    String getValue();
 
     /**
      * 
@@ -38,7 +38,7 @@ public interface EvidenceElement extends Entity {
      * @param value
      *            the value to set
      */
-    void setLabel(String value);
+    void setValue(String value);
 
     /**
      *

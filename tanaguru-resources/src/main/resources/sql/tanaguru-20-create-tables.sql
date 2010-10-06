@@ -155,9 +155,8 @@ CREATE TABLE `EVIDENCE` (
 -- Table structure for table `EVIDENCE_ELEMENT`
 --
 CREATE TABLE `EVIDENCE_ELEMENT` (
-  `DTYPE` varchar(31) NOT NULL,
   `Id_Evidence_Element` bigint(20) NOT NULL auto_increment,
-  `Label` varchar(255) NOT NULL,
+  `Element_Value` longtext NOT NULL,
   `EVIDENCE_Id_Evidence` bigint(20) default NULL,
   `PROCESS_REMARK_Id_Process_Remark` bigint(20) default NULL,
   PRIMARY KEY  (`Id_Evidence_Element`),
