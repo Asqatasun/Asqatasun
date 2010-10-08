@@ -244,7 +244,6 @@ public class DOMHandlerImpl implements DOMHandler {
                     || (workingElement.getChildNodes().getLength() == 1
                     && workingElement.getChildNodes().item(0).getNodeName().equalsIgnoreCase("#text")))) {
                 result = TestSolution.FAILED;
-                System.out.println("combien de fois je rentre ici? " + workingElement);
                 addSourceCodeRemark(result, workingElement, "ValueEmpty",
                         workingElement.getNodeName());
             }
