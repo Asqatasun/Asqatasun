@@ -4,15 +4,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
     <bean id="domHandlerComponent" class="org.opens.tanaguru.processor.DOMHandlerImpl">
-        <property name="processRemarkFactory" ref="processRemarkFactory"/>
-        <property name="sourceCodeRemarkFactory" ref="sourceCodeRemarkFactory"/>
-        <property name="evidenceDataService" ref="evidenceDataService"/>
-        <property name="evidenceElementFactory" ref="evidenceElementFactory"/>
     </bean>
 
     <bean id="cssHandlerComponent" class="org.opens.tanaguru.processor.CSSHandlerImpl">
-        <property name="processRemarkFactory" ref="processRemarkFactory"/>
-        <property name="sourceCodeRemarkFactory" ref="sourceCodeRemarkFactory"/>
     </bean>
 
 <!--    <bean id="jsHandlerComponent" class="org.opens.tanaguru.processor.JSHandlerImpl">
@@ -25,7 +19,7 @@
         <property name="CSSHandler" ref="cssHandlerComponent"/>
 <!--        <property name="JSHandler" ref="jsHandlerComponent"/>-->
         <property name="nomenclatureLoaderService" ref="nomenclatureLoaderService"/>
-        <property name="processRemarkFactory" ref="processRemarkFactory"/>
+        <property name="processRemarkService" ref="processRemarkService"/>
         <property name="urlIdentifier" ref="urlIdentifierComponent"/>
     </bean>
 
@@ -41,6 +35,12 @@
     <bean id="imageChecker" class="org.opens.tanaguru.ruleimplementation.ImageChecker" factory-method="getInstance">
     </bean>
 
+    <bean id="processRemarkService" class="org.opens.tanaguru.service.ProcessRemarkServiceImpl">
+        <property name="processRemarkFactory" ref="processRemarkFactory"/>
+        <property name="sourceCodeRemarkFactory" ref="sourceCodeRemarkFactory"/>
+        <property name="evidenceDataService" ref="evidenceDataService"/>
+        <property name="evidenceElementFactory" ref="evidenceElementFactory"/>
+    </bean>
     <!--<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="targetObject"><ref local="imageChecker"/></property>
         <property name="targetMethod"><value>setUrlIdentifier</value></property>
