@@ -1,9 +1,7 @@
 package org.opens.tanaguru.processor;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.Collection;
 
 import java.util.logging.Level;
@@ -19,17 +17,12 @@ import org.w3c.dom.NodeList;
 
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.exception.IncoherentValueDomainsException;
-import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
-import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.ruleimplementation.RuleHelper;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -39,26 +32,21 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-import org.opens.tanaguru.entity.audit.EvidenceElement;
-import org.opens.tanaguru.entity.factory.audit.EvidenceElementFactory;
-import org.opens.tanaguru.entity.service.audit.EvidenceDataService;
+import org.opens.tanaguru.service.ProcessRemarkService;
 import org.xml.sax.SAXException;
 
 public class DOMHandlerImpl implements DOMHandler {
 
     protected Document document;
     private boolean initialized = false;
-    protected ProcessRemarkFactory processRemarkFactory;
-    protected List<ProcessRemark> remarkList;
     protected List<Node> selectedElementList;
-    protected SourceCodeRemarkFactory sourceCodeRemarkFactory;
-    protected EvidenceElementFactory evidenceElementFactory;
-    protected EvidenceDataService evidenceDataService;
     protected SSP ssp;
     protected XPath xpath;
     protected Map<Integer, String> sourceCodeWithLine;
     private static final Pattern NON_ALPHANUMERIC_PATTERN =
             Pattern.compile("[\\W_]+");
+
+    protected ProcessRemarkService processRemarkService;
 
     public DOMHandlerImpl() {
         super();
@@ -70,59 +58,19 @@ public class DOMHandlerImpl implements DOMHandler {
 
     @Override
     public void addSourceCodeRemark(TestSolution processResult, Node node,
-            String messageCode, String attributeName) {// XXX
-        SourceCodeRemark remark = sourceCodeRemarkFactory.create();
-        remark.setIssue(processResult);
-        remark.setMessageCode(messageCode);
-        int nodeIndex = getNodeIndex(node);
-        int lineNumber = 0;
-        StringReader sr = new StringReader(ssp.getDOM());
-        BufferedReader br = new BufferedReader(sr);
-        boolean found = false;
-        int characterPosition = 0;
-        Iterator<Integer> iter = sourceCodeWithLine.keySet().iterator();
-        while (iter.hasNext() && !found) {
-            int myLineNumber = iter.next();
-            int index = 0;
-            while (index != -1) {
-                int characterPositionOri = index;
-                index = sourceCodeWithLine.get(myLineNumber).toLowerCase().indexOf(
-                        "<" + node.getNodeName().toLowerCase() + ">", index);
-                if (index == -1) {
-                    index = sourceCodeWithLine.get(myLineNumber).toLowerCase().indexOf(
-                            "<" + node.getNodeName().toLowerCase() + " ", characterPositionOri);
-                }
-                if (index != -1) {
-                    if (nodeIndex == 0) {
-                        found = true;
-                        lineNumber = myLineNumber;
-                        characterPosition = index;
-                        break;
-
-                    }
-                    nodeIndex--;
-                    index += node.getNodeName().length();
-                }
-            }
-        }
-        remark.setLineNumber(lineNumber);
-        remark.setCharacterPosition(characterPosition + 1);
-        EvidenceElement evidenceElement = evidenceElementFactory.create();
-        evidenceElement.setProcessRemark(remark);
-        evidenceElement.setValue(attributeName);
-        evidenceElement.setEvidence(evidenceDataService.findByCode("AttributeName"));
-        remark.addElement(evidenceElement);
-        remark.setTarget(attributeName);
-        remarkList.add(remark);
+            String messageCode, String attributeName) {
+        processRemarkService.addSourceCodeRemark(
+                processResult,
+                node,
+                messageCode,
+                attributeName);
     }
 
     @Override
     public DOMHandler beginSelection() {
         initialize();
-
         selectedElementList = new ArrayList<Node>();
-        remarkList = new ArrayList<ProcessRemark>();
-
+        processRemarkService.initializeService(document, ssp.getDOM());
         return this;
     }
 
@@ -296,6 +244,7 @@ public class DOMHandlerImpl implements DOMHandler {
                     || (workingElement.getChildNodes().getLength() == 1
                     && workingElement.getChildNodes().item(0).getNodeName().equalsIgnoreCase("#text")))) {
                 result = TestSolution.FAILED;
+                System.out.println("combien de fois je rentre ici? " + workingElement);
                 addSourceCodeRemark(result, workingElement, "ValueEmpty",
                         workingElement.getNodeName());
             }
@@ -633,7 +582,7 @@ public class DOMHandlerImpl implements DOMHandler {
 
     @Override
     public List<ProcessRemark> getRemarkList() {
-        return remarkList;
+        return processRemarkService.getRemarkList();
     }
 
     @Override
@@ -685,19 +634,6 @@ public class DOMHandlerImpl implements DOMHandler {
             Logger.getLogger(DOMHandlerImpl.class.getName()).log(Level.SEVERE,
                     null, ex);
             throw new RuntimeException(ex);
-        }
-        sourceCodeWithLine = new HashMap<Integer, String>();
-        int lineNumber = 1;
-        StringReader sr = new StringReader(ssp.getDOM());
-        BufferedReader br = new BufferedReader(sr);
-        String line;
-        try {
-            while ((line = br.readLine()) != null) {
-                sourceCodeWithLine.put(lineNumber, line);
-                lineNumber++;
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(DOMHandlerImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -1041,29 +977,8 @@ public class DOMHandlerImpl implements DOMHandler {
     }
 
     @Override
-    public void setProcessRemarkFactory(
-            ProcessRemarkFactory processRemarkFactory) {
-        this.processRemarkFactory = processRemarkFactory;
-    }
-
-    @Override
     public void setSelectedElementList(List<Node> selectedElementList) {
         this.selectedElementList = selectedElementList;
-    }
-
-    @Override
-    public void setSourceCodeRemarkFactory(
-            SourceCodeRemarkFactory sourceCodeRemarkFactory) {
-        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
-    }
-
-    public void setEvidenceElementFactory(
-            EvidenceElementFactory evidenceElementFactory) {
-        this.evidenceElementFactory = evidenceElementFactory;
-    }
-
-    public void setEvidenceDataService(EvidenceDataService evidenceDataService) {
-        this.evidenceDataService = evidenceDataService;
     }
 
     @Override
@@ -1118,16 +1033,27 @@ public class DOMHandlerImpl implements DOMHandler {
             Node workingElement,
             TestSolution testSolution,
             String remarkMessage) {
+        processRemarkService.addEvidenceElement("href");
         if (NON_ALPHANUMERIC_PATTERN.matcher(attributeContent).matches()) {
             addSourceCodeRemark(
                 testSolution,
                 workingElement,
                 remarkMessage,
-                workingElement.getNodeName());
+                attributeContent);
             return testSolution;
         } else {
             return TestSolution.PASSED;
         }
+    }
+
+    @Override
+    public int getSelectedElementNumber() {
+        return selectedElementList.size();
+    }
+
+    @Override
+    public void setProcessRemarkService(ProcessRemarkService processRemarkService) {
+        this.processRemarkService = processRemarkService;
     }
 
 }

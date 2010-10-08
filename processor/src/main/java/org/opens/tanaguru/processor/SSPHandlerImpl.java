@@ -20,6 +20,7 @@ import org.archive.net.UURIFactory;
 import org.opens.tanaguru.contentadapter.util.URLIdentifier;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.ImageContent;
+import org.opens.tanaguru.service.ProcessRemarkService;
 
 import org.w3c.dom.Node;
 
@@ -48,6 +49,7 @@ public class SSPHandlerImpl implements SSPHandler {
     protected Map<String, BufferedImage> imageMap;
     private URLIdentifier urlIdentifier;
     Set<ImageContent> imageOnErrorSet;
+    ProcessRemarkService processRemarkService;
 
     public SSPHandlerImpl() {
         super();
@@ -71,12 +73,6 @@ public class SSPHandlerImpl implements SSPHandler {
         } catch (MalformedURLException ex) {
             Logger.getLogger(SSPHandlerImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-//        XXX R2-implémenter avec la mise en commun des listes de remarques
-//        domHandler.setRemarkList(remarkList);
-//        cssHandler.setRemarkList(remarkList);
-//        jsHandler.setRemarkList(remarkList);
-
         return this;
     }
 
@@ -205,18 +201,8 @@ public class SSPHandlerImpl implements SSPHandler {
     }
 
     @Override
-    public List<ProcessRemark> getRemarkList() {// XXX Ré-implémenter avec la mise en commun des listes de remarques
-        List<ProcessRemark> allRemarkList = new ArrayList<ProcessRemark>();
-
-        allRemarkList.addAll(remarkList);
-        if (domHandler != null)
-            allRemarkList.addAll(domHandler.getRemarkList());
-        if (cssHandler != null)
-            allRemarkList.addAll(cssHandler.getRemarkList());
-        if (jsHandler!=null)
-            allRemarkList.addAll(jsHandler.getRemarkList());
-
-        return allRemarkList;
+    public List<ProcessRemark> getRemarkList() {
+        return processRemarkService.getRemarkList();
     }
 
     @Override
@@ -404,16 +390,6 @@ public class SSPHandlerImpl implements SSPHandler {
         this.nomenclatureLoaderService = nomenclatureLoaderService;
     }
 
-    @Override
-    public void setProcessRemarkFactory(ProcessRemarkFactory processRemarkFactory) {
-        this.processRemarkFactory = processRemarkFactory;
-    }
-
-    @Override
-    public void setSourceCodeRemarkFactory(SourceCodeRemarkFactory sourceCodeRemarkFactory) {
-        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
-    }
-
     public void setUrlIdentifier(URLIdentifier urlIdentifier) {
         this.urlIdentifier = urlIdentifier;
     }
@@ -476,19 +452,6 @@ public class SSPHandlerImpl implements SSPHandler {
      */
     public void setSelectionExpression(String selectionExpression) {
         this.selectionExpression = selectionExpression;
-    }
-
-    /**
-     * 
-     * @param processResult
-     * @param node
-     * @param messageCode
-     * @param attributeName
-     */
-    @Override
-    public void addSourceCodeRemark(TestSolution processResult, Node node,
-            String messageCode, String attributeName) {
-        domHandler.addSourceCodeRemark(processResult, node, messageCode, attributeName);
     }
 
     @Override
@@ -567,6 +530,28 @@ public class SSPHandlerImpl implements SSPHandler {
                 }
             }
         }
+    }
+
+    @Override
+    public int getSelectedElementNumber() {
+        return domHandler.getSelectedElementNumber();
+    }
+
+    @Override
+    public void setProcessRemarkService(ProcessRemarkService processRemarkService) {
+        this.processRemarkService = processRemarkService;
+        domHandler.setProcessRemarkService(processRemarkService);
+        cssHandler.setProcessRemarkService(processRemarkService);
+    }
+
+    @Override
+    public ProcessRemarkService getProcessRemarkService() {
+        return processRemarkService;
+    }
+
+    @Override
+    public int getCssSelectorNumber() {
+        return cssHandler.getCssSelectorNumber();
     }
 
 }

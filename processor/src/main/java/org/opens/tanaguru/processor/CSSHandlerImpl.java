@@ -7,10 +7,7 @@ import org.opens.tanaguru.contentadapter.css.CSSOMRule;
 import org.opens.tanaguru.contentadapter.css.CSSOMStyleSheet;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
-import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.ruleimplementation.RuleHelper;
 import com.thoughtworks.xstream.XStream;
 import java.util.ArrayList;
@@ -19,23 +16,32 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.audit.StylesheetContent;
+import org.opens.tanaguru.service.ProcessRemarkService;
 import org.w3c.css.sac.LexicalUnit;
 
 public class CSSHandlerImpl implements CSSHandler {
 
     private boolean initialized = false;
-    protected ProcessRemarkFactory processRemarkFactory;
-    private Collection<ProcessRemark> remarkList;
+//    protected ProcessRemarkFactory processRemarkFactory;
+//    private Collection<ProcessRemark> remarkList;
     private Collection<CSSOMRule> selectedRuleList;
-    protected SourceCodeRemarkFactory sourceCodeRemarkFactory;
+//    protected SourceCodeRemarkFactory sourceCodeRemarkFactory;
     protected SSP ssp;
     private Set<CSSOMStyleSheet> styleSet;
     private Map<String, Set<CSSOMRule>> rulesByMedia ;
     private final String CSS_ON_ERROR = "CSS_ON_ERROR";
     Set<StylesheetContent> cssOnErrorSet;
     private static int  HTTP_OK_STATUS_CODE = 200;
+    private static final String BAD_UNIT_TYPE_MSG_CODE = "BadUnitType";
+    private static final String UNTESTED_RESOURCE_MSG_CODE = "UnTestedResource";
+
+    protected ProcessRemarkService processRemarkService;
+    public void setProcessRemarkService(ProcessRemarkService processRemarkService) {
+        this.processRemarkService = processRemarkService;
+    }
 
     public CSSHandlerImpl() {
         super();
@@ -47,18 +53,14 @@ public class CSSHandlerImpl implements CSSHandler {
 
     private void addSourceCodeRemark(TestSolution processResult,
             CSSOMRule rule, String messageCode, String attrName) {// XXX
-        SourceCodeRemark remark = sourceCodeRemarkFactory.create();
-        remark.setIssue(processResult);
-        remark.setMessageCode(messageCode);
-        remark.setLineNumber(rule.getOwnerStyle().getLineNumber());
-        remark.setTarget(attrName);
-        remarkList.add(remark);
+        processRemarkService.addCssCodeRemark(processResult, rule, messageCode, attrName);
     }
 
     public CSSHandler beginSelection(){
         initialize();
         selectedRuleList = new HashSet<CSSOMRule>();
-        remarkList = new ArrayList<ProcessRemark>();
+        processRemarkService.initializeService(null, null);
+//        remarkList = new ArrayList<ProcessRemark>();
         return this;
     }
 
@@ -73,8 +75,9 @@ public class CSSHandlerImpl implements CSSHandler {
                     if (unit == blackListedUnit) {
                         processResult = TestSolution.FAILED;
                         resultSet.add(processResult);
-                        addSourceCodeRemark(processResult, workingRule, "BadUnitType",
-                            getLexicalStringFromValue(unit));
+                        addSourceCodeRemark(processResult, workingRule,
+                                BAD_UNIT_TYPE_MSG_CODE,
+                                getLexicalStringFromValue(unit));
                         break;
                     }
                 }
@@ -84,8 +87,18 @@ public class CSSHandlerImpl implements CSSHandler {
 
         if (!cssOnErrorSet.isEmpty()) {
             TestSolution fakeSolution = TestSolution.NEED_MORE_INFO;
-            for (StylesheetContent stylesheetContent : cssOnErrorSet){
-                remarkList.add(processRemarkFactory.create(fakeSolution, "UnTested Resource :" + stylesheetContent.getURI()));
+            for (StylesheetContent stylesheetContent : cssOnErrorSet) {
+                List<EvidenceElement> evidenceElementList =
+                        new ArrayList<EvidenceElement>();
+                evidenceElementList.add(processRemarkService.
+                        getEvidenceElement(
+                        ProcessRemarkService.DEFAULT_EVIDENCE,
+                        stylesheetContent.getURI()));
+                processRemarkService.addSourceCodeRemark(
+                        fakeSolution,
+                        null,
+                        UNTESTED_RESOURCE_MSG_CODE,
+                        evidenceElementList);
             }
             resultSet.add(fakeSolution);
         }
@@ -98,7 +111,7 @@ public class CSSHandlerImpl implements CSSHandler {
     }
 
     public Collection<ProcessRemark> getRemarkList() {
-        return remarkList;
+        return processRemarkService.getRemarkList();
     }
 
     private void initialize() {
@@ -136,19 +149,19 @@ public class CSSHandlerImpl implements CSSHandler {
         return this;
     }
 
-    public void setProcessRemarkFactory(
-            ProcessRemarkFactory processRemarkFactory) {
-        this.processRemarkFactory = processRemarkFactory;
-    }
-
-    public void setRemarkList(Collection<ProcessRemark> remarkList) {
-        this.remarkList = remarkList;
-    }
-
-    public void setSourceCodeRemarkFactory(
-            SourceCodeRemarkFactory sourceCodeRemarkFactory) {
-        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
-    }
+//    public void setProcessRemarkFactory(
+//            ProcessRemarkFactory processRemarkFactory) {
+//        this.processRemarkFactory = processRemarkFactory;
+//    }
+//
+//    public void setRemarkList(Collection<ProcessRemark> remarkList) {
+//        this.remarkList = remarkList;
+//    }
+//
+//    public void setSourceCodeRemarkFactory(
+//            SourceCodeRemarkFactory sourceCodeRemarkFactory) {
+//        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
+//    }
 
     public void setSSP(SSP ssp) {
         this.ssp = ssp;
@@ -243,4 +256,10 @@ public class CSSHandlerImpl implements CSSHandler {
         }
         styleSet.clear();
     }
+
+    @Override
+    public int getCssSelectorNumber() {
+        return selectedRuleList.size();
+    }
+
 }

@@ -3,8 +3,6 @@ package org.opens.tanaguru.service;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.factory.audit.DefiniteResultFactory;
 import org.opens.tanaguru.entity.factory.audit.IndefiniteResultFactory;
-import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
-import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.ruleimplementation.RuleImplementation;
 import org.opens.tanaguru.ruleimplementationloader.RuleImplementationLoader;
 import java.util.HashSet;
@@ -20,9 +18,7 @@ public class RuleImplementationLoaderServiceImpl implements
     private DefiniteResultFactory definiteResultFactory;
     private IndefiniteResultFactory indefiniteResultFactory;
     private NomenclatureLoaderService nomenclatureLoaderService;
-    private ProcessRemarkFactory processRemarkFactory;
     private RuleImplementationLoader ruleImplementationLoader;
-    private SourceCodeRemarkFactory sourceCodeRemarkFactory;
 
     public RuleImplementationLoaderServiceImpl() {
         super();
@@ -56,21 +52,9 @@ public class RuleImplementationLoaderServiceImpl implements
     }
 
     @Override
-    public void setProcessRemarkFactory(
-            ProcessRemarkFactory processRemarkFactory) {
-        this.processRemarkFactory = processRemarkFactory;
-    }
-
-    @Override
     public void setRuleImplementationLoader(
             RuleImplementationLoader ruleImplementationLoader) {
         this.ruleImplementationLoader = ruleImplementationLoader;
-    }
-
-    @Override
-    public void setSourceCodeRemarkFactory(
-            SourceCodeRemarkFactory sourceCodeRemarkFactory) {
-        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
     }
 
     @Override
@@ -83,8 +67,6 @@ public class RuleImplementationLoaderServiceImpl implements
         ruleImplementation.setTest(test);
         ruleImplementation.setDefiniteResultFactory(definiteResultFactory);
         ruleImplementation.setIndefiniteResultFactory(indefiniteResultFactory);
-        ruleImplementation.setProcessRemarkFactory(processRemarkFactory);
-        ruleImplementation.setSourceCodeRemarkFactory(sourceCodeRemarkFactory);
         ruleImplementation.setNomenclatureLoaderService(nomenclatureLoaderService);
 
         return ruleImplementation;
