@@ -8,8 +8,6 @@ import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.entity.factory.audit.DefiniteResultFactory;
 import org.opens.tanaguru.entity.factory.audit.IndefiniteResultFactory;
-import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
-import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.service.NomenclatureLoaderService;
 import java.util.Map;
 
@@ -51,23 +49,13 @@ public interface RuleImplementation {
     void setIndefiniteResultFactory(
             IndefiniteResultFactory indefiniteResultFactory);
 
+    /**
+     *
+     * @param nomemclatureLoaderService
+     *          the nomenclature loader service
+     */
     void setNomenclatureLoaderService(
             NomenclatureLoaderService nomemclatureLoaderService);
-
-    /**
-     *
-     * @param processRemarkFactory
-     *            the process remark factory to set
-     */
-    void setProcessRemarkFactory(ProcessRemarkFactory processRemarkFactory);
-
-    /**
-     *
-     * @param sourceCodeRemarkFactory
-     *            the source code remark factory to set
-     */
-    void setSourceCodeRemarkFactory(
-            SourceCodeRemarkFactory sourceCodeRemarkFactory);
 
     /**
      *

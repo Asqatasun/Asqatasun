@@ -11,8 +11,7 @@ import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.subject.WebResource;
-import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
-import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
+import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
  * 
@@ -411,25 +410,10 @@ public interface SSPHandler {
 
     /**
      *
-     * @param processRemarkFactory
-     *            the process remark factory to set
-     */
-    void setProcessRemarkFactory(ProcessRemarkFactory processRemarkFactory);
-
-    /**
-     *
      * @param selectedElementList
      *            the selected element list to set
      */
     void setSelectedElementList(List<Node> selectedElementList);
-
-    /**
-     *
-     * @param sourceCodeRemarkFactory
-     *            the source code remark factory to set
-     */
-    void setSourceCodeRemarkFactory(
-            SourceCodeRemarkFactory sourceCodeRemarkFactory);
 
     /**
      *
@@ -444,16 +428,6 @@ public interface SSPHandler {
      * @param errorMessageCode
      */
     TestSolution domCheckNodeValueInNomenclature(String nomenclatureCode, String errorMessageCode);
-
-    /**
-     * Add a source code remark
-     * @param processResult
-     * @param node
-     * @param messageCode
-     * @param attributeName
-     */
-    public void addSourceCodeRemark(TestSolution processResult, Node node,
-            String messageCode, String attributeName);
 
     /**
      * return the recorded image associated with an URL
@@ -492,4 +466,26 @@ public interface SSPHandler {
             TestSolution testSolution,
             String remarkMessage);
 
+    /**
+     * This method return the number of selected elements
+     * @return
+     */
+    public int getSelectedElementNumber();
+
+    /**
+     * @return the number of css selectors
+     */
+    public int getCssSelectorNumber();
+
+    /**
+     * 
+     * @param processRemarkService
+     */
+    public void setProcessRemarkService (ProcessRemarkService processRemarkService);
+
+    /**
+     * 
+     * @return the processRemarkService
+     */
+    public ProcessRemarkService getProcessRemarkService ();
 }

@@ -10,8 +10,7 @@ import org.w3c.dom.Node;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
-import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
+import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
  * 
@@ -390,25 +389,10 @@ public interface DOMHandler {
 
     /**
      *
-     * @param processRemarkFactory
-     *            the process remark factory to set
-     */
-    void setProcessRemarkFactory(ProcessRemarkFactory processRemarkFactory);
-
-    /**
-     *
      * @param selectedElementList
      *            the selected element list to set
      */
     void setSelectedElementList(List<Node> selectedElementList);
-
-    /**
-     *
-     * @param sourceCodeRemarkFactory
-     *            the source code remark factory to set
-     */
-    void setSourceCodeRemarkFactory(
-            SourceCodeRemarkFactory sourceCodeRemarkFactory);
 
     /**
      *
@@ -456,4 +440,16 @@ public interface DOMHandler {
             Node workingElement,
             TestSolution testSolution,
             String remarkMessage);
+
+    /**
+     * This method return the number of selected elements
+     * @return
+     */
+    public int getSelectedElementNumber();
+
+    /**
+     *
+     * @param processRemarkService
+     */
+    public void setProcessRemarkService (ProcessRemarkService processRemarkService);
 }

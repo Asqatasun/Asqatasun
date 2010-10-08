@@ -8,8 +8,6 @@ import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.entity.factory.audit.DefiniteResultFactory;
 import org.opens.tanaguru.entity.factory.audit.IndefiniteResultFactory;
-import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
-import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.service.NomenclatureLoaderService;
 import java.util.HashMap;
 import java.util.List;
@@ -28,8 +26,6 @@ public abstract class AbstractRuleImplementation implements RuleImplementation {
     protected DefiniteResultFactory definiteResultFactory;
     protected IndefiniteResultFactory indefiniteResultFactory;
     protected NomenclatureLoaderService nomenclatureLoaderService;
-    protected ProcessRemarkFactory processRemarkFactory;
-    protected SourceCodeRemarkFactory sourceCodeRemarkFactory;
     protected Test test;
 
     public AbstractRuleImplementation() {
@@ -127,17 +123,8 @@ public abstract class AbstractRuleImplementation implements RuleImplementation {
         this.nomenclatureLoaderService = nomenclatureLoaderService;
     }
 
-    public void setProcessRemarkFactory(
-            ProcessRemarkFactory processRemarkFactory) {
-        this.processRemarkFactory = processRemarkFactory;
-    }
-
-    public void setSourceCodeRemarkFactory(
-            SourceCodeRemarkFactory sourceCodeRemarkFactory) {
-        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
-    }
-
     public void setTest(Test test) {
         this.test = test;
     }
+
 }
