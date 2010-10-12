@@ -4,10 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.xpath.XPath;
@@ -40,6 +40,8 @@ import org.w3c.flute.parser.selectors.DescendantSelectorImpl;
 public class ProcessRemarkServiceImpl implements ProcessRemarkService{
 
     private static final String CSS_SELECTOR_EVIDENCE = "Css-Selector";
+    private static final String START_COMMENT_OCCURENCE = "<!--";
+    private static final String END_COMMENT_OCCURENCE = "-->";
 
     private XPath xpath = XPathFactory.newInstance().newXPath();
     Document document;
@@ -103,7 +105,8 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
         this.evidenceDataService = evidenceDataService;
     }
 
-    protected Map<Integer, String> sourceCodeWithLine;
+    protected Map<Integer, String> sourceCodeWithLine =
+            new TreeMap<Integer, String>();
 
     @Override
     public void initializeService(Document document, String adaptedContent) {
@@ -233,27 +236,46 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
         int nodeIndex = getNodeIndex(node);
         int lineNumber = 0;
         boolean found = false;
+        boolean isWithinComment = false;
         Iterator<Integer> iter = sourceCodeWithLine.keySet().iterator();
+        String codeLine;
         while (iter.hasNext() && !found) {
             int myLineNumber = iter.next();
             int index = 0;
             while (index != -1) {
+                codeLine = sourceCodeWithLine.get(myLineNumber).toLowerCase();
                 int characterPositionOri = index;
-                index = sourceCodeWithLine.get(myLineNumber).toLowerCase().indexOf(
-                        "<" + node.getNodeName().toLowerCase() + ">", index);
+                index = codeLine.indexOf("<"+node.getNodeName().toLowerCase()+">",
+                        index);
                 if (index == -1) {
-                    index = sourceCodeWithLine.get(myLineNumber).toLowerCase().indexOf(
-                            "<" + node.getNodeName().toLowerCase() + " ", characterPositionOri);
+                    index = codeLine.indexOf("<"+node.getNodeName().toLowerCase()+" ",
+                            characterPositionOri);
                 }
-                if (index != -1) {
-                    if (nodeIndex == 0) {
-                        found = true;
-                        lineNumber = myLineNumber;
-                        break;
-
+                int startCommentIndex = codeLine.indexOf(
+                        START_COMMENT_OCCURENCE, characterPositionOri);
+                int endCommentIndex = codeLine.indexOf(
+                        END_COMMENT_OCCURENCE, characterPositionOri);
+                if (index != -1 ) { // if an occurence of the tag is found
+                    if (!isWithinComment &&
+                        !(startCommentIndex != -1 && index>startCommentIndex ) &&
+                        !(endCommentIndex != -1 && index<endCommentIndex )) { // if a comment is not currently opened or a comment is found on the current line and the occurence is not within
+                        if (nodeIndex == 0) {
+                            found = true;
+                            lineNumber = myLineNumber;
+                            break;
+                        }
+                        nodeIndex--;
                     }
-                    nodeIndex--;
                     index += node.getNodeName().length();
+                }
+                // if a "start comment" occurence is found on the line,
+                // the boolean isWithinComment is set to true. Thus, while a
+                // "end comment" is not found, all the occurences of the
+                // wanted node will be ignored
+                if (!isWithinComment && startCommentIndex != -1 && endCommentIndex == -1) {
+                    isWithinComment = true;
+                } else if (isWithinComment && endCommentIndex != -1 && startCommentIndex < endCommentIndex) {
+                    isWithinComment = false;
                 }
             }
         }
@@ -299,7 +321,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
      * @param adaptedContent
      */
     private void initializeSourceCodeMap(String adaptedContent) {
-        sourceCodeWithLine = new HashMap<Integer, String>();
+        sourceCodeWithLine.clear();
         int lineNumber = 1;
         StringReader sr = new StringReader(adaptedContent);
         BufferedReader br = new BufferedReader(sr);
