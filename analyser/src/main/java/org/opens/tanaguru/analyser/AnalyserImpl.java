@@ -50,7 +50,8 @@ public class AnalyserImpl implements Analyser {
             }
         }
 
-        result = ((passed + notApplicable) / (netResultList.size() - needMoreInfo)) * 100f;
+        float ratioNMI = needMoreInfo / (passed+failed+needMoreInfo);
+        result = ((1-ratioNMI) * passed/(passed+failed) + ratioNMI * needMoreInfo/(passed+failed+needMoreInfo)) *100f;
     }
 
     public void setNetResultList(List<ProcessResult> netResultList) {
