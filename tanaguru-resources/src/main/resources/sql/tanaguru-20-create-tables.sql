@@ -283,6 +283,7 @@ CREATE TABLE `TEST` (
   `Id_Level` bigint(20) default NULL,
   `Id_Rule` bigint(20) default NULL,
   `Id_Scope` bigint(20) default NULL,
+  `Rule_Design_Url` varchar(255) default NULL,
   PRIMARY KEY  (`Id_Test`),
   KEY `FK273C9250C99824` (`Id_Scope`),
   KEY `FK273C9272343A84` (`Id_Level`),

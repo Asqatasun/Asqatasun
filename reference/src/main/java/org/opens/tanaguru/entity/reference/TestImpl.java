@@ -48,6 +48,9 @@ public class TestImpl implements Test, Serializable {
     @ManyToOne
     @JoinColumn(name = "Id_Scope")
     protected ScopeImpl scope;
+    @Column(name = "Rule_Design_Url")
+    protected String ruleDesignUrl;
+
 
     public TestImpl() {
         super();
@@ -131,6 +134,10 @@ public class TestImpl implements Test, Serializable {
         return this.scope;
     }
 
+    public String getRuleDesignUrl() {
+        return this.ruleDesignUrl;
+    }
+
     public void setCode(String code) {
         this.code = code;
     }
@@ -177,5 +184,9 @@ public class TestImpl implements Test, Serializable {
 
     public void setScope(Scope scope) {
         this.scope = (ScopeImpl) scope;
+    }
+
+    public void setRuleDesignUrl(String ruleDesignUrl) {
+        this.ruleDesignUrl = ruleDesignUrl;
     }
 }
