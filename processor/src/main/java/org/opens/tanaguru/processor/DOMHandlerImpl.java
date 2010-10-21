@@ -1034,7 +1034,6 @@ public class DOMHandlerImpl implements DOMHandler {
             TestSolution testSolution,
             String remarkMessage) {
         processRemarkService.addEvidenceElement("href");
-        processRemarkService.addEvidenceElement("title");
         if (NON_ALPHANUMERIC_PATTERN.matcher(attributeContent).matches()) {
             addSourceCodeRemark(
                 testSolution,
