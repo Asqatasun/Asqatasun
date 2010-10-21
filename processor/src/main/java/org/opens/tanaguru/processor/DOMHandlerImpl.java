@@ -44,7 +44,8 @@ public class DOMHandlerImpl implements DOMHandler {
     protected XPath xpath;
     protected Map<Integer, String> sourceCodeWithLine;
     private static final Pattern NON_ALPHANUMERIC_PATTERN =
-            Pattern.compile("[\\W_]+");
+            Pattern.compile("[!@#$%^&*()_+=`°\\£€[{]};:<>|./§~\"?,-ø']+");
+//            Pattern.compile("[\\W_]+");
 
     protected ProcessRemarkService processRemarkService;
 
@@ -1033,6 +1034,7 @@ public class DOMHandlerImpl implements DOMHandler {
             TestSolution testSolution,
             String remarkMessage) {
         processRemarkService.addEvidenceElement("href");
+        processRemarkService.addEvidenceElement("title");
         if (NON_ALPHANUMERIC_PATTERN.matcher(attributeContent).matches()) {
             addSourceCodeRemark(
                 testSolution,
