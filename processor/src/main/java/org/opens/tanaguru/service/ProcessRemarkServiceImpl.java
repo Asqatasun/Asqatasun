@@ -139,26 +139,11 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
     @Override
     public void addSourceCodeRemark(TestSolution processResult, Node node,
             String messageCode, String attributeName) {
-        SourceCodeRemark remark = sourceCodeRemarkFactory.create();
-        remark.setIssue(processResult);
-        remark.setMessageCode(messageCode);
-
-        remark.setLineNumber(searchNodeLineNumber(node));
-        EvidenceElement evidenceElement = evidenceElementFactory.create();
-        evidenceElement.setProcessRemark(remark);
-        evidenceElement.setValue(attributeName);
-        evidenceElement.setEvidence(evidenceDataService.findByCode(DEFAULT_EVIDENCE));
-        for (String attr  : evidenceElementList) {
-            if (node.getAttributes().getNamedItem(attr) != null) {
-                EvidenceElement evidenceElementSup = evidenceElementFactory.create();
-                evidenceElementSup.setProcessRemark(remark);
-                evidenceElementSup.setValue(node.getAttributes().getNamedItem(attr).getNodeValue());
-                evidenceElementSup.setEvidence(evidenceDataService.findByCode(attr));
-                remark.addElement(evidenceElementSup);
-            }
-        }
-        remark.addElement(evidenceElement);
-        remarkList.add(remark);
+        remarkList.add(createSourceCodeRemark(
+                processResult,
+                node,
+                messageCode,
+                attributeName));
     }
 
     @Override
@@ -343,6 +328,31 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
         evidenceElement.setEvidence(
                 evidenceDataService.findByCode(evidenceCode));
         return evidenceElement;
+    }
+
+    @Override
+    public SourceCodeRemark createSourceCodeRemark(TestSolution processResult,
+                Node node, String messageCode, String elementName) {
+        SourceCodeRemark remark = sourceCodeRemarkFactory.create();
+        remark.setIssue(processResult);
+        remark.setMessageCode(messageCode);
+
+        remark.setLineNumber(searchNodeLineNumber(node));
+        EvidenceElement evidenceElement = evidenceElementFactory.create();
+        evidenceElement.setProcessRemark(remark);
+        evidenceElement.setValue(elementName);
+        evidenceElement.setEvidence(evidenceDataService.findByCode(DEFAULT_EVIDENCE));
+        for (String attr  : evidenceElementList) {
+            if (node.getAttributes().getNamedItem(attr) != null) {
+                EvidenceElement evidenceElementSup = evidenceElementFactory.create();
+                evidenceElementSup.setProcessRemark(remark);
+                evidenceElementSup.setValue(node.getAttributes().getNamedItem(attr).getNodeValue());
+                evidenceElementSup.setEvidence(evidenceDataService.findByCode(attr));
+                remark.addElement(evidenceElementSup);
+            }
+        }
+        remark.addElement(evidenceElement);
+        return remark;
     }
 
 }
