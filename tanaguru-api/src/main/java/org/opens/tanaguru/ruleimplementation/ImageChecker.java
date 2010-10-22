@@ -27,7 +27,7 @@ public class ImageChecker {
 
     }
 
-    public static ImageChecker getInstance() {
+    public static synchronized ImageChecker getInstance() {
         if (imageChecker == null) {
             imageChecker = new ImageChecker();
         }
@@ -85,7 +85,7 @@ public class ImageChecker {
             Logger.getLogger(ImageChecker.class.getName()).
                     warn(ex.getMessage() + " " + uRLIdentifier.resolve(imgUrl));
         }
-        Long processDuration = new Long(System.currentTimeMillis() - beginDate);
+        Long processDuration = Long.valueOf(System.currentTimeMillis() - beginDate);
         Logger.getLogger(ImageChecker.class.getName()).
                     info("image tested in " + processDuration.toString() +
                     " ms");
@@ -123,7 +123,7 @@ public class ImageChecker {
                 isDecorativeImg = true;
             }
         }
-        Long processDuration = new Long(System.currentTimeMillis() - beginDate);
+        Long processDuration = Long.valueOf(System.currentTimeMillis() - beginDate);
         Logger.getLogger(ImageChecker.class.getName()).
                     info("image tested in " + processDuration.toString() +
                     " ms");

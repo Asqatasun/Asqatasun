@@ -74,58 +74,25 @@ public class CSSOMDocumentHandlerImpl implements DocumentHandler {
         switch (lexicalUnit.getLexicalUnitType()) {
 
             case LexicalUnit.SAC_OPERATOR_COMMA:
-                break;
-
             case LexicalUnit.SAC_OPERATOR_PLUS:
-                break;
-
             case LexicalUnit.SAC_OPERATOR_MINUS:
-                break;
-
             case LexicalUnit.SAC_OPERATOR_MULTIPLY:
-                break;
-
             case LexicalUnit.SAC_OPERATOR_SLASH:
-                break;
-
             case LexicalUnit.SAC_OPERATOR_MOD:
-                break;
-
             case LexicalUnit.SAC_OPERATOR_EXP:
-                break;
-
             case LexicalUnit.SAC_OPERATOR_LT:
-                break;
-
             case LexicalUnit.SAC_OPERATOR_GT:
-                break;
-
             case LexicalUnit.SAC_OPERATOR_LE:
-                break;
-
             case LexicalUnit.SAC_OPERATOR_GE:
-                break;
-
             case LexicalUnit.SAC_OPERATOR_TILDE:
-                break;
-
             case LexicalUnit.SAC_INHERIT:
-                break;
-
             case LexicalUnit.SAC_INTEGER:
-                break;
-
             case LexicalUnit.SAC_REAL:
-                break;
-
             case LexicalUnit.SAC_EM:
-                break;
-
             case LexicalUnit.SAC_EX:
                 break;
 
             case LexicalUnit.SAC_PIXEL:
-
                 Float pixelValue = new Float(lexicalUnit.getFloatValue());
                 lexicalUnitValue = pixelValue.toString() + "px";
                 break;
@@ -156,40 +123,21 @@ public class CSSOMDocumentHandlerImpl implements DocumentHandler {
                 break;
 
             case LexicalUnit.SAC_PERCENTAGE:
-                break;
-
             case LexicalUnit.SAC_URI:
-                break;
-
             case LexicalUnit.SAC_COUNTER_FUNCTION:
-                break;
-
             case LexicalUnit.SAC_COUNTERS_FUNCTION:
                 break;
 
             case LexicalUnit.SAC_RGBCOLOR:
-
                 lexicalUnitValue = "RGB(" + lexicalUnit.getParameters() + ")";
                 break;
 
             case LexicalUnit.SAC_DEGREE:
-                break;
-
             case LexicalUnit.SAC_GRADIAN:
-                break;
-
             case LexicalUnit.SAC_RADIAN:
-                break;
-
             case LexicalUnit.SAC_MILLISECOND:
-                break;
-
             case LexicalUnit.SAC_SECOND:
-                break;
-
             case LexicalUnit.SAC_HERTZ:
-                break;
-
             case LexicalUnit.SAC_KILOHERTZ:
                 break;
 
@@ -198,23 +146,11 @@ public class CSSOMDocumentHandlerImpl implements DocumentHandler {
                 break;
 
             case LexicalUnit.SAC_STRING_VALUE:
-                break;
-
             case LexicalUnit.SAC_ATTR:
-                break;
-
             case LexicalUnit.SAC_RECT_FUNCTION:
-                break;
-
             case LexicalUnit.SAC_UNICODERANGE:
-                break;
-
             case LexicalUnit.SAC_SUB_EXPRESSION:
-                break;
-
             case LexicalUnit.SAC_FUNCTION:
-                break;
-
             case LexicalUnit.SAC_DIMENSION:
                 break;
 
@@ -273,20 +209,12 @@ public class CSSOMDocumentHandlerImpl implements DocumentHandler {
         if (getNodeStack().empty()) {
             styleSheet = new CSSOMStyleSheetImpl(rsrc);
 
-            // check if the style sheet is of referended type
-            if (styleSheet.getType() == RsrcLocator.REFERENCED) {
-                // treatment here
-            }
-
             // create the rule list
             List<CSSOMRule> rules = new ArrayList<CSSOMRule>();
             styleSheet.setRules(rules);
             getNodeStack().push(styleSheet);
             getNodeStack().push(rules);
-        } else {
-            // XXX error
         }
-
     }
 
     public void startFontFace() throws CSSException {

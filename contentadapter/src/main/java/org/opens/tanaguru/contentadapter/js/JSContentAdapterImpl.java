@@ -147,7 +147,9 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
     }
 
     public void setParser(ContentParser parser) {
-        this.parser = (JSParser) parser;
+        if (parser instanceof JSParser) {
+            this.parser = (JSParser) parser;
+        }
     }
 
     /**

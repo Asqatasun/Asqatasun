@@ -27,8 +27,6 @@ public class AuditDataServiceImpl extends AbstractGenericDataService<Audit, Long
     }
 
     protected void deepLoad(ProcessResult processResult) {
-        for (ProcessRemark remark : processResult.getRemarkList()) {
-        }
         for (ProcessResult childResult : processResult.getChildResultList()) {
             deepLoad(childResult);
         }
@@ -42,13 +40,13 @@ public class AuditDataServiceImpl extends AbstractGenericDataService<Audit, Long
     public Audit read(Long key) {
         Audit entity = super.read(key);
 
-        for (Test test : entity.getTestList()) {
-        }
+//        for (Test test : entity.getTestList()) {
+//        }
 
         entity.getSubject();
 
-        for (Content content : entity.getContentList()) {
-        }
+//        for (Content content : entity.getContentList()) {
+//        }
 
         for (ProcessResult netResult : entity.getNetResultList()) {
             deepLoad(netResult);

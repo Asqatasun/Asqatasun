@@ -38,15 +38,15 @@ public class JSHandlerImpl implements JSHandler {
         this.ssp = ssp;
     }
 
-    private void addSourceCodeRemark(TestSolution processResult,
-            JSResource jsResource, String messageCode, String attrName) {
-        SourceCodeRemark remark = sourceCodeRemarkFactory.create();
-        remark.setIssue(processResult);
-        remark.setMessageCode(messageCode);
-        remark.setLineNumber(jsResource.getLineNumber());
-        // remark.setCharacterPosition(index + 1);
-        remark.setTarget(attrName);
-    }
+//    private void addSourceCodeRemark(TestSolution processResult,
+//            JSResource jsResource, String messageCode, String attrName) {
+//        SourceCodeRemark remark = sourceCodeRemarkFactory.create();
+//        remark.setIssue(processResult);
+//        remark.setMessageCode(messageCode);
+//        remark.setLineNumber(jsResource.getLineNumber());
+//        // remark.setCharacterPosition(index + 1);
+//        remark.setTarget(attrName);
+//    }
 
     public JSHandler beginSelection() {
         initialize();

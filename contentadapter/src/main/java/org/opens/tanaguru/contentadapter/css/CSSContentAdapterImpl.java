@@ -190,7 +190,9 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
      */
     @Override
     public void setParser(ContentParser parser) {
-        this.parser = (CSSParser) parser;
+        if (parser instanceof CSSParser) {
+            this.parser = (CSSParser) parser;
+        }
     }
 
     /**

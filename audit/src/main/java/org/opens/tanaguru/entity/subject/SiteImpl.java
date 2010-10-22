@@ -38,12 +38,13 @@ public class SiteImpl extends WebResourceImpl implements Site, Serializable {
     public void addChild(WebResource webResource) {
         webResource.setParent(this);
 
-        if (webResource instanceof Site) {
+        if (webResource instanceof SiteImpl) {
             componentList.add((SiteImpl) webResource);
             return;
         }
-
-        componentList.add((PageImpl) webResource);
+        if (webResource instanceof PageImpl) {
+            componentList.add((PageImpl) webResource);
+        }
     }
 
     public boolean contains(String url) {

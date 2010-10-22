@@ -144,8 +144,7 @@ public abstract class DocumentCaseInsensitiveAdapter {
         }
 
         int doctypeEndTagPtr = html.indexOf('>', doctypeBeginTagPtr);
-        String doctype = new String();
-        doctype = html.substring(doctypeBeginTagPtr, doctypeEndTagPtr+1).
+        String doctype = html.substring(doctypeBeginTagPtr, doctypeEndTagPtr+1).
                     trim().
                     replace(CARRIAGE_RETURN_CHAR_1,EMPTY_CHAR).
                     replace(CARRIAGE_RETURN_CHAR_2, EMPTY_CHAR);

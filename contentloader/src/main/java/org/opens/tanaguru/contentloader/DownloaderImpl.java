@@ -14,7 +14,6 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.HttpParams;
 import org.apache.log4j.Logger;
 
 public class DownloaderImpl implements Downloader {
@@ -63,9 +62,9 @@ public class DownloaderImpl implements Downloader {
         HttpGet httpget = new HttpGet(url);
 
         httpclient.getParams().setParameter(
-                "http.socket.timeout", new Integer(10000));
+                "http.socket.timeout", Integer.valueOf(10000));
         httpclient.getParams().setParameter(
-                "http.connection.timeout", new Integer(10000));
+                "http.connection.timeout", Integer.valueOf(10000));
 
         // Create a response handler
         ResponseHandler<String> responseHandler = new BasicResponseHandler();
