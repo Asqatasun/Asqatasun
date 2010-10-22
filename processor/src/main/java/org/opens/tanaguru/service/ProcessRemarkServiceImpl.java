@@ -59,7 +59,9 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
     List<String> evidenceElementList = new ArrayList<String>();
     @Override
     public void addEvidenceElement(String element) {
-        evidenceElementList.add(element);
+        if (!evidenceElementList.contains(element)) {
+            evidenceElementList.add(element);
+        }
     }
 
     @Override
@@ -107,6 +109,12 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
 
     protected Map<Integer, String> sourceCodeWithLine =
             new TreeMap<Integer, String>();
+
+    /**
+     * Local map of evidence to avoid multiple access to database
+     */
+//    private Map<String, Evidence> evidenceMap =
+//            new HashMap<String, Evidence>();
 
     @Override
     public void initializeService(Document document, String adaptedContent) {
@@ -354,5 +362,21 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
         remark.addElement(evidenceElement);
         return remark;
     }
+
+    /**
+     * Return an evidence instance for a given code. This method avoids multiple
+     * access to mysql databases, by maintaining a map. 
+     * @param code
+     * @return
+     */
+//    public Evidence getEvidence(String code) {
+//        if (evidenceMap.containsKey(code)) {
+//            return evidenceMap.get(code);
+//        } else {
+//            Evidence evidence = evidenceDataService.findByCode(code);
+//            evidenceMap.put(code, evidence);
+//            return evidence;
+//        }
+//    }
 
 }
