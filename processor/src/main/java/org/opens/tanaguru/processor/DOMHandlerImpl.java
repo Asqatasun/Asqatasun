@@ -44,7 +44,7 @@ public class DOMHandlerImpl implements DOMHandler {
     protected XPath xpath;
     protected Map<Integer, String> sourceCodeWithLine;
     private static final Pattern NON_ALPHANUMERIC_PATTERN =
-            Pattern.compile("[!@#$%^&*()_+=`°\\£€[{]};:<>|./§~\"?,-ø']+¨");
+            Pattern.compile("[!@#$%^&*()_+=`°\\£€[{]};:<>|./§~\"?,-ø'¨]+");
 //            Pattern.compile("[\\W_]+");
 
     protected ProcessRemarkService processRemarkService;
