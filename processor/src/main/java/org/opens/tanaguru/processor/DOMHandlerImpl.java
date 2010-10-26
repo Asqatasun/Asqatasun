@@ -44,7 +44,7 @@ public class DOMHandlerImpl implements DOMHandler {
     protected XPath xpath;
     protected Map<Integer, String> sourceCodeWithLine;
     private static final Pattern NON_ALPHANUMERIC_PATTERN =
-            Pattern.compile("[!@#$%^&*()_+=`°\\£€[{]};:<>|./§~\"?,-ø'¨]+");
+              Pattern.compile("[^\\p{L}]+");
 //            Pattern.compile("[\\W_]+");
 
     protected ProcessRemarkService processRemarkService;
@@ -1013,8 +1013,10 @@ public class DOMHandlerImpl implements DOMHandler {
                 workingElement,
                 remarkMessage,
                 attribute.getNodeName());
+            System.out.println("alphanum   " + attributeContent);
             return testSolution;
         } else {
+            System.out.println("not alphanum  " + attributeContent);
             return TestSolution.PASSED;
         }
     }
