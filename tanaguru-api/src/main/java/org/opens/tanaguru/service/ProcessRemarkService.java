@@ -5,6 +5,7 @@ import java.util.List;
 import org.opens.tanaguru.contentadapter.css.CSSOMRule;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
+import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.factory.audit.EvidenceElementFactory;
 import org.opens.tanaguru.entity.service.audit.EvidenceDataService;
@@ -99,6 +100,18 @@ public interface ProcessRemarkService {
      * @return
      */
     public ProcessRemark createProcessRemark(TestSolution processResult, String messageCode);
+
+
+    /**
+     * 
+     * @param processResult
+     * @param node
+     * @param messageCode
+     * @param elementName
+     * @return
+     */
+    public SourceCodeRemark createSourceCodeRemark(TestSolution processResult,
+            Node node, String messageCode, String elementName);
 
     /**
      *

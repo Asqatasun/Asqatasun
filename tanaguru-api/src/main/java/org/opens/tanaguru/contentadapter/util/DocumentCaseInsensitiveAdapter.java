@@ -5,11 +5,18 @@
 
 package org.opens.tanaguru.contentadapter.util;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @author jkowalczyk
  */
 public abstract class DocumentCaseInsensitiveAdapter {
 
+
+    private static final char CARRIAGE_RETURN_CHAR_1 = '\n';
+    private static final char CARRIAGE_RETURN_CHAR_2 = '\r';
+    private static final char EMPTY_CHAR = ' ';
 
     /**
      *
@@ -137,9 +144,14 @@ public abstract class DocumentCaseInsensitiveAdapter {
         }
 
         int doctypeEndTagPtr = html.indexOf('>', doctypeBeginTagPtr);
-        StringBuilder doctype = new StringBuilder();
-        doctype.append(html,doctypeBeginTagPtr, doctypeEndTagPtr+1);
-        return doctype.toString();
+        String doctype = html.substring(doctypeBeginTagPtr, doctypeEndTagPtr+1).
+                    trim().
+                    replace(CARRIAGE_RETURN_CHAR_1,EMPTY_CHAR).
+                    replace(CARRIAGE_RETURN_CHAR_2, EMPTY_CHAR);
+        Pattern pattern = Pattern.compile("\\s+");
+        Matcher matcher = pattern.matcher(doctype);
+        doctype = matcher.replaceAll(" ");
+        return doctype;
     }
 
 }

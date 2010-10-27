@@ -40,10 +40,12 @@ public class CSSOMSelectorImpl implements CSSOMSelector, Serializable {
         this.ownerDeclaration = selectorDeclaration;
     }
 
+    @Override
     public boolean addCSSOMDeclaration(CSSOMDeclaration declaration) {
         return ownerDeclaration.add(declaration);
     }
 
+    @Override
     public String conditionToString(Condition condition) {
 
         if (condition instanceof AttributeCondition) {
@@ -66,15 +68,9 @@ public class CSSOMSelectorImpl implements CSSOMSelector, Serializable {
 
             selectorTxt += attributeCondition.getValue();
         }
-        if (condition instanceof ContentCondition) {
-            // XXX Implement ContentCondition handling.
-        }
         if (condition instanceof LangCondition) {
             LangCondition langCondition = (LangCondition) condition;
             selectorTxt += ":lang(" + langCondition.getLang() + ")";
-        }
-        if (condition instanceof PositionalCondition) {
-            // XXX Implement PositionalCondition handling.
         }
         if (condition instanceof NegativeCondition) {
             NegativeCondition negativeCondition = (NegativeCondition) condition;
@@ -89,26 +85,27 @@ public class CSSOMSelectorImpl implements CSSOMSelector, Serializable {
         return selectorTxt;
     }
 
+    @Override
     public List<CSSOMDeclaration> getOwnerDeclaration() {
         return ownerDeclaration;
     }
 
+    @Override
     public Selector getSelector() {
         return selector;
     }
 
+    @Override
     public String getSelectorTxt() {
         return selectorTxt;
     }
 
+    @Override
     public String selectorToString(Selector selector) {
 
         if (selector instanceof SimpleSelector) {
 
             SimpleSelector simpleSelector = (SimpleSelector) selector;
-            if (simpleSelector instanceof CharacterDataSelector) {
-                // XXX
-            }
             if (simpleSelector instanceof ElementSelector) {
                 ElementSelector elementSelector = (ElementSelector) simpleSelector;
 
@@ -117,12 +114,6 @@ public class CSSOMSelectorImpl implements CSSOMSelector, Serializable {
                 } else {
                     selectorTxt += elementSelector.getLocalName();
                 }
-            }
-            if (simpleSelector instanceof NegativeSelector) {
-                // XXX
-            }
-            if (simpleSelector instanceof ProcessingInstructionSelector) {
-                // XXX
             }
             if (simpleSelector instanceof ConditionalSelector) {
                 ConditionalSelector conditionalSelector = (ConditionalSelector) simpleSelector;
@@ -161,15 +152,18 @@ public class CSSOMSelectorImpl implements CSSOMSelector, Serializable {
         return selectorTxt;
     }
 
+    @Override
     public void setSelector(Selector selector) {
         this.selector = selector;
     }
 
+    @Override
     public void setSelectorDeclaration(
             List<CSSOMDeclaration> selectorDeclaration) {
         this.ownerDeclaration = selectorDeclaration;
     }
 
+    @Override
     public void setSelectorTxt(String selectorTxt) {
         this.selectorTxt = selectorTxt;
     }

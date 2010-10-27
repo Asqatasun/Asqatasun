@@ -83,7 +83,9 @@ public class EvidenceElementImpl implements EvidenceElement,
 
     @Override
     public void setProcessRemark(ProcessRemark processRemark) {
-        this.sourceCodeRemark = (SourceCodeRemarkImpl)processRemark;
+        if (processRemark instanceof SourceCodeRemarkImpl) {
+            this.sourceCodeRemark = (SourceCodeRemarkImpl)processRemark;
+        }
     }
 
 }

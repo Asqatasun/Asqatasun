@@ -18,8 +18,8 @@ public class CriterionDataServiceImpl extends AbstractGenericDataService<Criteri
     @Override
     public Criterion read(Long key) {
         Criterion entity = super.read(key);
-        for (Test test : entity.getTestList()) {
-        }
+//        for (Test test : entity.getTestList()) {
+//        }
         return entity;
     }
 }

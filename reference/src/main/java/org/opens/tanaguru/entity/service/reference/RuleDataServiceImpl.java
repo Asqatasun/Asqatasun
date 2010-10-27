@@ -10,21 +10,20 @@ import com.adex.sdk.entity.service.AbstractGenericDataService;
  * @author ADEX
  */
 public class RuleDataServiceImpl extends AbstractGenericDataService<Rule, Long>
-		implements RuleDataService {
+        implements RuleDataService {
 
-	public RuleDataServiceImpl() {
-		super();
-	}
+    public RuleDataServiceImpl() {
+        super();
+    }
 
-	public Rule find(Test test) {
-		return ((RuleDAO) entityDao).retrieve(test);
-	}
+    @Override
+    public Rule find(Test test) {
+        return ((RuleDAO) entityDao).retrieve(test);
+    }
 
-	@Override
-	public Rule read(Long key) {
-		Rule entity = super.read(key);
-		for (Test test : entity.getTestList()) {
-		}
-		return entity;
-	}
+    @Override
+    public Rule read(Long key) {
+        Rule entity = super.read(key);
+        return entity;
+    }
 }

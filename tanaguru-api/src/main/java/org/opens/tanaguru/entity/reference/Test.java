@@ -52,6 +52,12 @@ public interface Test extends Entity, Reorderable {
 	 */
 	Level getLevel();
 
+        /**
+	 *
+	 * @return the rule design url
+	 */
+	String getRuleDesignUrl();
+
 	/**
 	 * 
 	 * @return the rule
@@ -129,4 +135,6 @@ public interface Test extends Entity, Reorderable {
 	 *            the scrope to set
 	 */
 	void setScope(Scope scope);
+
+	void setRuleDesignUrl(String ruleDesignUrl);
 }

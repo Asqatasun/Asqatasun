@@ -11,17 +11,19 @@ import java.util.List;
  * @author ADEX
  */
 public class TestDataServiceImpl extends AbstractGenericDataService<Test, Long>
-		implements TestDataService {
+        implements TestDataService {
 
-	public TestDataServiceImpl() {
-		super();
-	}
+    public TestDataServiceImpl() {
+        super();
+    }
 
-	public List<Test> findAll(Reference reference) {
-		return ((TestDAO) entityDao).retrieveAll(reference);
-	}
+    @Override
+    public List<Test> findAll(Reference reference) {
+        return ((TestDAO) entityDao).retrieveAll(reference);
+    }
 
-	public List<Test> findAllByCode(String[] codeArray) {
-		return ((TestDAO) entityDao).retrieveAllByCode(codeArray);
-	}
+    @Override
+    public List<Test> findAllByCode(String[] codeArray) {
+        return ((TestDAO) entityDao).retrieveAllByCode(codeArray);
+    }
 }
