@@ -34,11 +34,30 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         <property name="entityDao" ref="processResultDAO"/>
     </bean>
 
+    <bean id="processRemarkDAO" class="org.opens.tanaguru.entity.dao.audit.ProcessRemarkDAOImpl"/>
+    <bean id="processRemarkDataService" class="org.opens.tanaguru.entity.service.audit.ProcessRemarkDataServiceImpl">
+        <property name="entityFactory" ref="processRemarkFactory"/>
+        <property name="entityDao" ref="processRemarkDAO"/>
+    </bean>
+
+    <bean id="scopeDAO" class="org.opens.tanaguru.entity.dao.reference.ScopeDAOImpl"/>
+    <bean id="scopeDataService" class="org.opens.tanaguru.entity.service.reference.ScopeDataServiceImpl">
+        <property name="entityFactory" ref="scopeFactory"/>
+        <property name="entityDao" ref="scopeDAO"/>
+    </bean>
+
     <bean id="evidenceDAO" class="org.opens.tanaguru.entity.dao.audit.EvidenceDAOImpl"/>
     <bean id="evidenceFactory" class="org.opens.tanaguru.entity.factory.audit.EvidenceFactoryImpl"/>
     <bean id="evidenceDataService" class="org.opens.tanaguru.entity.service.audit.EvidenceDataServiceImpl">
         <property name="entityFactory" ref="evidenceFactory"/>
         <property name="entityDao" ref="evidenceDAO"/>
+    </bean>
+
+    <bean id="evidenceElementDAO" class="org.opens.tanaguru.entity.dao.audit.EvidenceElementDAOImpl"/>
+    <bean id="evidenceElementFactory" class="org.opens.tanaguru.entity.factory.audit.EvidenceElementFactoryImpl"/>
+    <bean id="evidenceElementDataService" class="org.opens.tanaguru.entity.service.audit.EvidenceElementDataServiceImpl">
+        <property name="entityFactory" ref="evidenceElementFactory"/>
+        <property name="entityDao" ref="evidenceElementDAO"/>
     </bean>
 
     <bean id="auditService" class="org.opens.tanaguru.service.AuditServiceImpl">
