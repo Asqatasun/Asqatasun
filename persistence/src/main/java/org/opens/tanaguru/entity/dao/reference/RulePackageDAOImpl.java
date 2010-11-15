@@ -11,22 +11,22 @@ import javax.persistence.Query;
  * @author ADEX
  */
 public class RulePackageDAOImpl extends AbstractJPADAO<RulePackage, Long>
-		implements RulePackageDAO {
+        implements RulePackageDAO {
 
-	public RulePackageDAOImpl() {
-		super();
-	}
+    public RulePackageDAOImpl() {
+        super();
+    }
 
-	@Override
-	protected Class<? extends RulePackage> getEntityClass() {
-		return RulePackageImpl.class;
-	}
+    @Override
+    protected Class<? extends RulePackage> getEntityClass() {
+        return RulePackageImpl.class;
+    }
 
-	public Collection<RulePackage> retrieveAllByPackageName(String packageName) {
-		Query query = entityManager.createQuery("SELECT r FROM "
-				+ getEntityClass().getName()
-				+ " r WHERE r.packageName = :packageName");
-		query.setParameter("packageName", packageName);
-		return query.getResultList();
-	}
+    public Collection<RulePackage> retrieveAllByPackageName(String packageName) {
+        Query query = entityManager.createQuery("SELECT r FROM "
+                + getEntityClass().getName()
+                + " r WHERE r.packageName = :packageName");
+        query.setParameter("packageName", packageName);
+        return query.getResultList();
+    }
 }

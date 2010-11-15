@@ -15,31 +15,30 @@ import org.opens.tanaguru.entity.reference.RulePackage;
  */
 public class RuleDAOImpl extends AbstractJPADAO<Rule, Long> implements RuleDAO {
 
-	public RuleDAOImpl() {
-		super();
-	}
+    public RuleDAOImpl() {
+        super();
+    }
 
-	@Override
-	protected Class<? extends Rule> getEntityClass() {
-		return RuleImpl.class;
-	}
+    @Override
+    protected Class<? extends Rule> getEntityClass() {
+        return RuleImpl.class;
+    }
 
-	public Rule retrieve(Test test) {
-		Query query = entityManager.createQuery("SELECT r FROM "
-				+ getEntityClass().getName() + " r, IN(r.testList) t"
-				+ " WHERE t = :test");
-		query.setParameter("test", test);
-		return (Rule) query.getSingleResult();
-	}
+    public Rule retrieve(Test test) {
+        Query query = entityManager.createQuery("SELECT r FROM "
+                + getEntityClass().getName() + " r, IN(r.testList) t"
+                + " WHERE t = :test");
+        query.setParameter("test", test);
+        return (Rule) query.getSingleResult();
+    }
 
-	public Collection<Rule> retrieveAll(RulePackage owningPackage,
-			String className) {
-		Query query = entityManager
-				.createQuery("SELECT r FROM "
-						+ getEntityClass().getName()
-						+ " r WHERE r.owningPackage = :owningPackage AND r.className = :className");
-		query.setParameter("owningPackage", owningPackage);
-		query.setParameter("className", className);
-		return query.getResultList();
-	}
+    public Collection<Rule> retrieveAll(RulePackage owningPackage,
+            String className) {
+        Query query = entityManager.createQuery("SELECT r FROM "
+                + getEntityClass().getName()
+                + " r WHERE r.owningPackage = :owningPackage AND r.className = :className");
+        query.setParameter("owningPackage", owningPackage);
+        query.setParameter("className", className);
+        return query.getResultList();
+    }
 }

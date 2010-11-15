@@ -6,6 +6,7 @@ import com.adex.sdk.entity.dao.jpa.AbstractJPADAO;
 import java.util.Collection;
 import javax.persistence.Query;
 import org.opens.tanaguru.entity.audit.Evidence;
+import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 
 public class EvidenceElementDAOImpl extends AbstractJPADAO<EvidenceElement, Long> implements
         EvidenceElementDAO {
@@ -23,9 +24,19 @@ public class EvidenceElementDAOImpl extends AbstractJPADAO<EvidenceElement, Long
             Evidence Evidence, String EvidenceValue) {
         Query query = entityManager.createQuery("SELECT r FROM "
                 + getEntityClass().getName()
-                + " r WHERE r.EvidenceValue = :EvidenceValue AND r.Evidence = :Evidence");
+                + " r WHERE r.value = :EvidenceValue AND r.evidence = :Evidence");
         query.setParameter("EvidenceValue", EvidenceValue);
         query.setParameter("Evidence", Evidence);
         return query.getResultList();
     }
+
+    public Collection<EvidenceElement> retrieveAllBySourceCodeRemark(
+            SourceCodeRemark sourceCodeRemark) {
+        Query query = entityManager.createQuery("SELECT r FROM "
+                + getEntityClass().getName()
+                + " r WHERE r.sourceCodeRemark = :sourceCodeRemark");
+        query.setParameter("sourceCodeRemark", sourceCodeRemark);
+        return query.getResultList();
+    }
+
 }

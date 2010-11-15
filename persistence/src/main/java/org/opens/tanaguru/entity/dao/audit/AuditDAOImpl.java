@@ -8,38 +8,38 @@ import java.util.List;
 import javax.persistence.Query;
 
 public class AuditDAOImpl extends AbstractJPADAO<Audit, Long> implements
-		AuditDAO {
+        AuditDAO {
 
-	public AuditDAOImpl() {
-		super();
-	}
+    public AuditDAOImpl() {
+        super();
+    }
 
-	@Override
-	public List<Audit> findAll() {
-		List<Audit> auditList = super.findAll();
-		for (Audit audit : auditList) {
-                    audit.getSubject();
-		}
-		return auditList;
-	}
+    @Override
+    public List<Audit> findAll() {
+        List<Audit> auditList = super.findAll();
+        for (Audit audit : auditList) {
+            audit.getSubject();
+        }
+        return auditList;
+    }
 
-	public List<Audit> findAll(AuditStatus status) {
-		Query query = entityManager.createQuery("SELECT o FROM "
-				+ getEntityClass().getName() + " o"
-				+ " WHERE o.status = :status");
-		query.setParameter("status", status);
+    public List<Audit> findAll(AuditStatus status) {
+        Query query = entityManager.createQuery("SELECT o FROM "
+                + getEntityClass().getName() + " o"
+                + " WHERE o.status = :status");
+        query.setParameter("status", status);
 
-		List<Audit> auditList = query.getResultList();
+        List<Audit> auditList = query.getResultList();
 
-		for (Audit audit : auditList) {
-			audit.getSubject();
-		}
+        for (Audit audit : auditList) {
+            audit.getSubject();
+        }
 
-		return auditList;
-	}
+        return auditList;
+    }
 
-	@Override
-	protected Class<AuditImpl> getEntityClass() {
-		return AuditImpl.class;
-	}
+    @Override
+    protected Class<AuditImpl> getEntityClass() {
+        return AuditImpl.class;
+    }
 }

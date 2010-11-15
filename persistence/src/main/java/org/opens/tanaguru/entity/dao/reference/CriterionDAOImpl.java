@@ -9,26 +9,25 @@ import org.opens.tanaguru.entity.reference.Reference;
 import org.opens.tanaguru.entity.reference.Theme;
 
 public class CriterionDAOImpl extends AbstractJPADAO<Criterion, Long> implements
-		CriterionDAO {
+        CriterionDAO {
 
-	public CriterionDAOImpl() {
-		super();
-	}
+    public CriterionDAOImpl() {
+        super();
+    }
 
-	@Override
-	protected Class<CriterionImpl> getEntityClass() {
-		return CriterionImpl.class;
-	}
+    @Override
+    protected Class<CriterionImpl> getEntityClass() {
+        return CriterionImpl.class;
+    }
 
-	public Collection<Criterion> retrieveAll(String code, Reference reference,
-			Theme theme) {
-		Query query = entityManager
-				.createQuery("SELECT r FROM "
-						+ getEntityClass().getName()
-						+ " r WHERE r.code = :code AND r.reference = :reference AND r.theme = :theme");
-		query.setParameter("code", code);
-		query.setParameter("reference", reference);
-		query.setParameter("theme", theme);
-		return query.getResultList();
-	}
+    public Collection<Criterion> retrieveAll(String code, Reference reference,
+            Theme theme) {
+        Query query = entityManager.createQuery("SELECT r FROM "
+                + getEntityClass().getName()
+                + " r WHERE r.code = :code AND r.reference = :reference AND r.theme = :theme");
+        query.setParameter("code", code);
+        query.setParameter("reference", reference);
+        query.setParameter("theme", theme);
+        return query.getResultList();
+    }
 }

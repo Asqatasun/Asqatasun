@@ -7,21 +7,21 @@ import java.util.Collection;
 import javax.persistence.Query;
 
 public class ThemeDAOImpl extends AbstractJPADAO<Theme, Long> implements
-		ThemeDAO {
+        ThemeDAO {
 
-	public ThemeDAOImpl() {
-		super();
-	}
+    public ThemeDAOImpl() {
+        super();
+    }
 
-	@Override
-	protected Class<ThemeImpl> getEntityClass() {
-		return ThemeImpl.class;
-	}
+    @Override
+    protected Class<ThemeImpl> getEntityClass() {
+        return ThemeImpl.class;
+    }
 
-	public Collection<Theme> retrieveAllByCode(String code) {
-		Query query = entityManager.createQuery("SELECT r FROM "
-				+ getEntityClass().getName() + " r WHERE r.code = :code");
-		query.setParameter("code", code);
-		return query.getResultList();
-	}
+    public Collection<Theme> retrieveAllByCode(String code) {
+        Query query = entityManager.createQuery("SELECT r FROM "
+                + getEntityClass().getName() + " r WHERE r.code = :code");
+        query.setParameter("code", code);
+        return query.getResultList();
+    }
 }
