@@ -6,6 +6,7 @@ import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
 import org.opens.tanaguru.entity.dao.subject.WebResourceDAO;
 import com.adex.sdk.entity.service.AbstractGenericDataService;
+import org.opens.tanaguru.entity.audit.ProcessResult;
 
 /**
  * 
@@ -37,6 +38,26 @@ public class WebResourceDataServiceImpl extends AbstractGenericDataService<WebRe
     @Override
     public WebResource findByUrl(String url) {
         return ((WebResourceDAO) entityDao).findByUrl(url);
+    }
+
+    @Override
+    public WebResource read(Long key) {
+        WebResource entity = super.read(key);
+        for (ProcessResult netResult : entity.getProcessResultList()) {
+            deepLoad(netResult);
+        }
+        if (entity instanceof Site) {
+            for (WebResource wr : ((Site)entity).getComponentList()) {
+
+            }
+        }
+        return entity;
+    }
+
+    protected void deepLoad(ProcessResult processResult) {
+        for (ProcessResult childResult : processResult.getChildResultList()) {
+            deepLoad(childResult);
+        }
     }
 
     /**

@@ -23,9 +23,4 @@ public class EvidenceDataServiceImpl extends AbstractGenericDataService<Evidence
         return ((EvidenceDAO) entityDao).retrieveByCode(code);
     }
 
-    @Override
-    public Evidence read(Long key) {
-        Evidence entity = super.read(key);
-        return entity;
-    }
 }
