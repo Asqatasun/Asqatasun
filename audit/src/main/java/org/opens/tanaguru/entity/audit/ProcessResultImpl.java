@@ -8,7 +8,6 @@ import java.util.Vector;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -49,7 +48,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     @ManyToOne
     @JoinColumn(name = "Id_Process_Result_Parent")
     protected ProcessResultImpl parentResult;
-    @OneToMany(mappedBy = "processResult", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "processResult", cascade = CascadeType.ALL)
     protected List<ProcessRemarkImpl> remarkList = new Vector<ProcessRemarkImpl>();
     @ManyToOne
     @JoinColumn(name = "Id_Web_Resource", nullable = false)

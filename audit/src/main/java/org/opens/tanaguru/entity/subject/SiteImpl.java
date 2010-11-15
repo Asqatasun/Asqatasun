@@ -6,7 +6,6 @@ import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
@@ -18,7 +17,7 @@ import org.opens.tanaguru.entity.audit.Audit;
 @XmlRootElement
 public class SiteImpl extends WebResourceImpl implements Site, Serializable {
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
     protected Collection<WebResourceImpl> componentList = new ArrayList<WebResourceImpl>();
 
     public SiteImpl() {
