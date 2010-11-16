@@ -2,17 +2,18 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
+    <bean id="auditFactory" class="org.opens.tanaguru.entity.factory.audit.AuditFactoryImpl"/>
     <bean id="contentFactory" class="org.opens.tanaguru.entity.factory.audit.ContentFactoryImpl"/>
-
-    <bean id="processRemarkFactory" class="org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactoryImpl"/>
-    <bean id="sourceCodeRemarkFactory" class="org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactoryImpl"/>
-
     <bean id="definiteResultFactory" class="org.opens.tanaguru.entity.factory.audit.DefiniteResultFactoryImpl"/>
+    <bean id="evidenceElementFactory" class="org.opens.tanaguru.entity.factory.audit.EvidenceElementFactoryImpl"/>
+    <bean id="evidenceFactory" class="org.opens.tanaguru.entity.factory.audit.EvidenceFactoryImpl"/>
     <bean id="indefiniteResultFactory" class="org.opens.tanaguru.entity.factory.audit.IndefiniteResultFactoryImpl"/>
-    
-    <bean id="testFactory" class="org.opens.tanaguru.entity.factory.reference.TestFactoryImpl"/>
+    <bean id="processRemarkFactory" class="org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactoryImpl"/>
     <bean id="processResultFactory" class="org.opens.tanaguru.entity.factory.audit.ProcessResultFactoryImpl"/>
-
+    <bean id="scopeFactory" class="org.opens.tanaguru.entity.factory.reference.ScopeFactoryImpl"/>
+    <bean id="sourceCodeRemarkFactory" class="org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactoryImpl"/>
+    <bean id="testFactory" class="org.opens.tanaguru.entity.factory.reference.TestFactoryImpl"/>
+    <bean id="themeFactory" class="org.opens.tanaguru.entity.factory.reference.ThemeFactoryImpl"/>
     <bean id="webResourceFactory" class="org.opens.tanaguru.entity.factory.subject.WebResourceFactoryImpl"/>
 
 </beans>
