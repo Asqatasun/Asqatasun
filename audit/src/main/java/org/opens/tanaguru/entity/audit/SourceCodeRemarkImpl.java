@@ -5,6 +5,7 @@ import java.util.HashSet;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
@@ -23,7 +24,7 @@ public class SourceCodeRemarkImpl extends ProcessRemarkImpl implements
     protected int lineNumber;
     @Column(name = "Target", length = 5000)
     protected String target;
-    @OneToMany(mappedBy = "evidence", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "evidence", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     protected Collection<EvidenceElementImpl> elementList = new HashSet<EvidenceElementImpl>();
     
     public SourceCodeRemarkImpl() {
