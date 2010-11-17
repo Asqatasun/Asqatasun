@@ -12,6 +12,7 @@ import org.opens.tanaguru.service.NomenclatureLoaderService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
  * This class is the top level superclass of all concrete
@@ -47,7 +48,8 @@ public abstract class AbstractRuleImplementation implements RuleImplementation {
      * @return the net result list from the consolidation operation.
      */
     public List<ProcessResult> consolidate(
-            Map<WebResource, List<ProcessResult>> grossResultMap) {
+            Map<WebResource, List<ProcessResult>> grossResultMap,
+            ProcessRemarkService processRemarkService) {
         Map<WebResource, List<ProcessResult>> fileteredGrossResultMap = new HashMap<WebResource, List<ProcessResult>>();
         for (Map.Entry<WebResource, List<ProcessResult>> entry : grossResultMap.entrySet()) {
             List<ProcessResult> processResultSet = new ArrayList<ProcessResult>();
@@ -61,7 +63,7 @@ public abstract class AbstractRuleImplementation implements RuleImplementation {
             }
         }
 
-        return consolidateImpl(fileteredGrossResultMap);
+        return consolidateImpl(fileteredGrossResultMap, processRemarkService);
     }
 
     /**
@@ -74,7 +76,8 @@ public abstract class AbstractRuleImplementation implements RuleImplementation {
      * @return the net result list from the consolidation operation.
      */
     protected abstract List<ProcessResult> consolidateImpl(
-            Map<WebResource, List<ProcessResult>> grossResultMap);
+            Map<WebResource, List<ProcessResult>> grossResultMap,
+            ProcessRemarkService processRemarkService);
 
     public Test getTest() {
         return test;

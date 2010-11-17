@@ -4,6 +4,7 @@ import java.util.List;
 import org.opens.tanaguru.entity.audit.DefiniteResult;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.subject.Site;
+import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
  * This class should be overriden by concrete {@link RuleImplementation} classes
@@ -17,8 +18,9 @@ public abstract class AbstractSiteRuleImplementation extends AbstractGroupRuleIm
 
     @Override
     protected DefiniteResult consolidateGroupImpl(Site group,
-            List<ProcessResult> groupedGrossResultList) {
-        return consolidateSiteImpl(group, groupedGrossResultList);
+            List<ProcessResult> groupedGrossResultList,
+            ProcessRemarkService processRemarkService) {
+        return consolidateSiteImpl(group, groupedGrossResultList, processRemarkService);
     }
 
     /**
@@ -28,5 +30,6 @@ public abstract class AbstractSiteRuleImplementation extends AbstractGroupRuleIm
      * @return
      */
     protected abstract DefiniteResult consolidateSiteImpl(Site group,
-            List<ProcessResult> groupedGrossResultList);
+            List<ProcessResult> groupedGrossResultList,
+            ProcessRemarkService processRemarkService);
 }

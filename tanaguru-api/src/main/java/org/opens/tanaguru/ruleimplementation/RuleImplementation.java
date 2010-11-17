@@ -10,6 +10,7 @@ import org.opens.tanaguru.entity.factory.audit.DefiniteResultFactory;
 import org.opens.tanaguru.entity.factory.audit.IndefiniteResultFactory;
 import org.opens.tanaguru.service.NomenclatureLoaderService;
 import java.util.Map;
+import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
  * 
@@ -18,7 +19,18 @@ import java.util.Map;
  */
 public interface RuleImplementation {
 
-    List<ProcessResult> consolidate(Map<WebResource, List<ProcessResult>> grossResultMap);
+
+    /**
+     * 
+     * @param grossResultMap
+     * @param processRemarkService
+     * @return
+     *         the list of processResults
+     */
+    List<ProcessResult> consolidate(
+            Map<WebResource,
+            List<ProcessResult>> grossResultMap,
+            ProcessRemarkService processRemarkService);
 
     /**
      *

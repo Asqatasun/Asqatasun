@@ -9,6 +9,7 @@ import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
 import java.util.Map;
+import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
  * This class should be overriden by concrete {@link RuleImplementation} classes
@@ -32,12 +33,14 @@ public abstract class AbstractGroupRuleImplementation extends AbstractRuleImplem
      * @return the net result of the group from the gross result list
      */
     protected DefiniteResult consolidateGroup(Site group,
-            List<ProcessResult> groupedGrossResultSet) {
-        return consolidateGroupImpl(group, groupedGrossResultSet);
+            List<ProcessResult> groupedGrossResultSet,
+            ProcessRemarkService processRemarkService) {
+        return consolidateGroupImpl(group, groupedGrossResultSet, processRemarkService);
     }
 
     protected abstract DefiniteResult consolidateGroupImpl(Site group,
-            List<ProcessResult> groupedGrossResultSet);
+            List<ProcessResult> groupedGrossResultSet,
+            ProcessRemarkService processRemarkService);
 
     /**
      * This is the implementation of the method declared in
@@ -54,7 +57,8 @@ public abstract class AbstractGroupRuleImplementation extends AbstractRuleImplem
      */
     @Override
     protected List<ProcessResult> consolidateImpl(
-            Map<WebResource, List<ProcessResult>> grossResultMap) {
+            Map<WebResource, List<ProcessResult>> grossResultMap, 
+            ProcessRemarkService processRemarkService) {
         List<ProcessResult> netResultList = new ArrayList<ProcessResult>();
 
         for (Map.Entry<WebResource, List<ProcessResult>> entry : grossResultMap.entrySet()) {
@@ -71,15 +75,16 @@ public abstract class AbstractGroupRuleImplementation extends AbstractRuleImplem
                 netResultList.add(netResult);
                 continue;
             } else {
-                netResultList.add(consolidateGroup((Site) key, grossResultList));
+                netResultList.add(consolidateGroup((Site) key, grossResultList,processRemarkService));
             }
         }
 
-        return consolidateSite(netResultList);
+        return consolidateSite(netResultList, processRemarkService);
     }
 
     protected List<ProcessResult> consolidateSite(
-            List<ProcessResult> netResultSet) {
+            List<ProcessResult> netResultSet,
+            ProcessRemarkService processRemarkService) {
         return netResultSet;
     }
 }

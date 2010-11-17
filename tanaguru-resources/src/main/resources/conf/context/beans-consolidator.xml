@@ -3,7 +3,10 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-    <bean id="consolidatorComponent" class="org.opens.tanaguru.consolidator.ConsolidatorImpl"/>
+    <bean id="consolidatorComponent" class="org.opens.tanaguru.consolidator.ConsolidatorImpl">
+        <property name="processRemarkService" ref="processRemarkService"/>
+    </bean>
+
     <bean id="consolidatorService" class="org.opens.tanaguru.service.ConsolidatorServiceImpl">
         <property name="consolidator" ref="consolidatorComponent"/>
         <property name="ruleImplementationLoaderService" ref="ruleImplementationLoaderService"/>

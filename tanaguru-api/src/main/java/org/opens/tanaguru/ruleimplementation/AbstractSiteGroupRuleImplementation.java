@@ -2,6 +2,7 @@ package org.opens.tanaguru.ruleimplementation;
 
 import java.util.List;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
  * This class should be overriden by concrete {@link RuleImplementation} classes
@@ -15,8 +16,9 @@ public abstract class AbstractSiteGroupRuleImplementation extends AbstractGroupR
 
     @Override
     protected List<ProcessResult> consolidateSite(
-            List<ProcessResult> netResultList) {
-        return consolidateSiteImpl(netResultList);
+            List<ProcessResult> netResultList,
+            ProcessRemarkService processRemarkService) {
+        return consolidateSiteImpl(netResultList, processRemarkService);
     }
 
     /**
@@ -25,5 +27,6 @@ public abstract class AbstractSiteGroupRuleImplementation extends AbstractGroupR
      * @return
      */
     protected abstract List<ProcessResult> consolidateSiteImpl(
-            List<ProcessResult> netResultSet);
+            List<ProcessResult> netResultSet,
+            ProcessRemarkService processRemarkService);
 }

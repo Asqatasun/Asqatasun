@@ -3,6 +3,7 @@ package org.opens.tanaguru.consolidator;
 import java.util.List;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.ruleimplementation.RuleImplementation;
+import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
  * 
@@ -44,4 +45,10 @@ public interface Consolidator {
      * @param ruleImplementation
      */
     void setRuleImplementation(RuleImplementation ruleImplementation);
+
+    /**
+     * 
+     * @param processRemarkService
+     */
+    void setProcessRemarkService(ProcessRemarkService processRemarkService);
 }

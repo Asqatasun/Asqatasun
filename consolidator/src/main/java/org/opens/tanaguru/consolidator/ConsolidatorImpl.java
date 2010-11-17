@@ -7,6 +7,7 @@ import org.opens.tanaguru.ruleimplementation.RuleImplementation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
  * 
@@ -19,6 +20,7 @@ public class ConsolidatorImpl implements Consolidator {
     private boolean initialized = false;
     private List<ProcessResult> result;
     private RuleImplementation ruleImplementation;
+    private ProcessRemarkService processRemarkService;
 
     public ConsolidatorImpl() {
         super();
@@ -74,7 +76,7 @@ public class ConsolidatorImpl implements Consolidator {
     public void run() {
         initialize();
 
-        result = ruleImplementation.consolidate(groupedProcessResultMap);
+        result = ruleImplementation.consolidate(groupedProcessResultMap, processRemarkService);
     }
 
     public void setGrossResultList(List<ProcessResult> grossResultList) {
@@ -84,5 +86,9 @@ public class ConsolidatorImpl implements Consolidator {
 
     public void setRuleImplementation(RuleImplementation ruleImplementation) {
         this.ruleImplementation = ruleImplementation;
+    }
+
+    public void setProcessRemarkService(ProcessRemarkService processRemarkService) {
+        this.processRemarkService = processRemarkService;
     }
 }

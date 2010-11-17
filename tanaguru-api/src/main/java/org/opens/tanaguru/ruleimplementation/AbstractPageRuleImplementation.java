@@ -5,6 +5,7 @@ import java.util.List;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.subject.WebResource;
 import java.util.Map;
+import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
  * This class should be overriden by concrete {@link RuleImplementation} classes
@@ -30,7 +31,7 @@ public abstract class AbstractPageRuleImplementation extends AbstractRuleImpleme
      */
     @Override
     protected List<ProcessResult> consolidateImpl(
-            Map<WebResource, List<ProcessResult>> grossResultMap) {
+            Map<WebResource, List<ProcessResult>> grossResultMap, ProcessRemarkService processRemarkService) {
         List<ProcessResult> netResultList = new ArrayList<ProcessResult>();
 
         for (Map.Entry<WebResource, List<ProcessResult>> entry : grossResultMap.entrySet()) {
