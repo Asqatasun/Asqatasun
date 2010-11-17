@@ -417,7 +417,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
         if (url != null) {
             EvidenceElement evidenceElement = evidenceElementFactory.create();
             evidenceElement.setProcessRemark(remark);
-            evidenceElement.setValue(value);
+            evidenceElement.setValue(url);
             evidenceElement.setEvidence(getEvidence(URL_EVIDENCE));
             remark.addElement(evidenceElement);
         }
