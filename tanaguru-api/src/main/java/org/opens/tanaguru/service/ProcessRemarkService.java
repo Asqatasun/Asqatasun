@@ -3,6 +3,7 @@ package org.opens.tanaguru.service;
 
 import java.util.List;
 import org.opens.tanaguru.contentadapter.css.CSSOMRule;
+import org.opens.tanaguru.entity.audit.ConsolidationRemark;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.SourceCodeRemark;
@@ -19,6 +20,7 @@ import org.w3c.dom.Node;
 public interface ProcessRemarkService {
 
     public static final String DEFAULT_EVIDENCE = "Element-Name";
+    public static final String URL_EVIDENCE = "Url";
 
     /**
      *
@@ -27,7 +29,7 @@ public interface ProcessRemarkService {
      * @param messageCode
      * @param elementName
      */
-    public void addSourceCodeRemark(TestSolution processResult, Node node,
+    void addSourceCodeRemark(TestSolution processResult, Node node,
             String messageCode, String elementName);
 
     /**
@@ -38,7 +40,7 @@ public interface ProcessRemarkService {
      * @param elementType
      * @param elementName
      */
-    public void addSourceCodeRemark(TestSolution processResult, Node node,
+    void addSourceCodeRemark(TestSolution processResult, Node node,
             String messageCode, String elementType, String elementName);
 
     /**
@@ -48,7 +50,7 @@ public interface ProcessRemarkService {
      * @param messageCode
      * @param evidenceElementList
      */
-    public void addSourceCodeRemark(TestSolution processResult, Node node,
+    void addSourceCodeRemark(TestSolution processResult, Node node,
             String messageCode, List<EvidenceElement> evidenceElementList);
 
     /**
@@ -58,40 +60,45 @@ public interface ProcessRemarkService {
      * @param messageCode
      * @param attrName
      */
-    public void addCssCodeRemark(TestSolution processResult,
+    void addCssCodeRemark(TestSolution processResult,
             CSSOMRule rule, String messageCode, String attrName);
 
     /**
      *
      * @return
      */
-    public List<ProcessRemark> getRemarkList();
+    List<ProcessRemark> getRemarkList();
 
     /**
      *
      * @param element
      */
-    public void addEvidenceElement (String element);
+    void addEvidenceElement (String element);
 
     /**
      *
      * @param element
      */
-    public void setEvidenceElementList (List<String> element);
+    void setEvidenceElementList (List<String> element);
 
     /**
      *
      * @param document
      * @param adaptedContent
      */
-    public void initializeService (Document document, String adaptedContent);
+    void initializeService (Document document, String adaptedContent);
+
+    /**
+     * 
+     */
+    void initializeService ();
 
     /**
      *
      * @param processResult
      * @param messageCode
      */
-    public void addProcessRemark(TestSolution processResult, String messageCode);
+    void addProcessRemark(TestSolution processResult, String messageCode);
 
     /**
      *
@@ -99,7 +106,7 @@ public interface ProcessRemarkService {
      * @param messageCode
      * @return
      */
-    public ProcessRemark createProcessRemark(TestSolution processResult, String messageCode);
+    ProcessRemark createProcessRemark(TestSolution processResult, String messageCode);
 
 
     /**
@@ -110,20 +117,50 @@ public interface ProcessRemarkService {
      * @param elementName
      * @return
      */
-    public SourceCodeRemark createSourceCodeRemark(TestSolution processResult,
+    SourceCodeRemark createSourceCodeRemark(TestSolution processResult,
             Node node, String messageCode, String elementName);
 
     /**
+     * 
+     * @param processResult
+     * @param messageCode
+     * @param evidenceElementList
+     */
+    void addConsolidationRemark(TestSolution processResult,
+            String messageCode, List<EvidenceElement> evidenceElementList);
+
+    /**
+     * 
+     * @param processResult
+     * @param messageCode
+     * @param value
+     * @param url
+     */
+    void addConsolidationRemark(TestSolution processResult,
+            String messageCode, String value, String url);
+
+    /**
      *
+     * @param processResult
+     * @param messageCode
+     * @param value
+     * @param url
      * @return
      */
-    public EvidenceElementFactory getEvidenceElementFactory();
+    ConsolidationRemark createConsolidationRemark(TestSolution processResult,
+            String messageCode, String value, String url);
 
     /**
      *
      * @return
      */
-    public EvidenceDataService getEvidenceDataService();
+    EvidenceElementFactory getEvidenceElementFactory();
+
+    /**
+     *
+     * @return
+     */
+    EvidenceDataService getEvidenceDataService();
 
     /**
      *
@@ -131,6 +168,6 @@ public interface ProcessRemarkService {
      * @param evidenceValue
      * @return
      */
-    public EvidenceElement getEvidenceElement(String evidenceCode, String evidenceValue);
+    EvidenceElement getEvidenceElement(String evidenceCode, String evidenceValue);
 
 }

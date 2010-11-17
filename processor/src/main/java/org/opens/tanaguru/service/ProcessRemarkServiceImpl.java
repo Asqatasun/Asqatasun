@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -16,10 +17,13 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import org.opens.tanaguru.contentadapter.css.CSSOMRule;
+import org.opens.tanaguru.entity.audit.ConsolidationRemark;
+import org.opens.tanaguru.entity.audit.Evidence;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.factory.audit.ConsolidationRemarkFactory;
 import org.opens.tanaguru.entity.factory.audit.EvidenceElementFactory;
 import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
 import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
@@ -87,6 +91,15 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
         this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
     }
 
+    protected ConsolidationRemarkFactory consolidationRemarkFactory;
+    public ConsolidationRemarkFactory getConsolidationRemarkFactory() {
+        return consolidationRemarkFactory;
+    }
+
+    public void setConsolidationRemarkFactory(ConsolidationRemarkFactory consolidationRemarkFactory) {
+        this.consolidationRemarkFactory = consolidationRemarkFactory;
+    }
+
     protected EvidenceElementFactory evidenceElementFactory;
     @Override
     public EvidenceElementFactory getEvidenceElementFactory() {
@@ -113,8 +126,8 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
     /**
      * Local map of evidence to avoid multiple access to database
      */
-//    private Map<String, Evidence> evidenceMap =
-//            new HashMap<String, Evidence>();
+    private Map<String, Evidence> evidenceMap =
+            new HashMap<String, Evidence>();
 
     @Override
     public void initializeService(Document document, String adaptedContent) {
@@ -124,6 +137,11 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
         if (adaptedContent != null) {
             initializeSourceCodeMap(adaptedContent);
         }
+        initialize();
+    }
+
+    @Override
+    public void initializeService() {
         initialize();
     }
 
@@ -184,7 +202,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
         EvidenceElement evidenceElement = evidenceElementFactory.create();
         evidenceElement.setProcessRemark(remark);
         evidenceElement.setValue(attrName);
-        evidenceElement.setEvidence(evidenceDataService.findByCode(DEFAULT_EVIDENCE));
+        evidenceElement.setEvidence(getEvidence(DEFAULT_EVIDENCE));
         remark.addElement(evidenceElement);
         try {
             String selectorValue = "";
@@ -201,7 +219,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
                 EvidenceElement cssSelectorEvidenceElement = evidenceElementFactory.create();
                 cssSelectorEvidenceElement.setProcessRemark(remark);
                 cssSelectorEvidenceElement.setValue(selectorValue);
-                cssSelectorEvidenceElement.setEvidence(evidenceDataService.findByCode(CSS_SELECTOR_EVIDENCE));
+                cssSelectorEvidenceElement.setEvidence(getEvidence(CSS_SELECTOR_EVIDENCE));
                 remark.addElement(cssSelectorEvidenceElement);
             }
         } catch (ClassCastException ex) {
@@ -333,8 +351,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
     public EvidenceElement getEvidenceElement(String evidenceCode, String evidenceValue) {
         EvidenceElement evidenceElement = evidenceElementFactory.create();
         evidenceElement.setValue(evidenceValue);
-        evidenceElement.setEvidence(
-                evidenceDataService.findByCode(evidenceCode));
+        evidenceElement.setEvidence(getEvidence(evidenceCode));
         return evidenceElement;
     }
 
@@ -349,17 +366,61 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
         EvidenceElement evidenceElement = evidenceElementFactory.create();
         evidenceElement.setProcessRemark(remark);
         evidenceElement.setValue(elementName);
-        evidenceElement.setEvidence(evidenceDataService.findByCode(DEFAULT_EVIDENCE));
+        evidenceElement.setEvidence(getEvidence(DEFAULT_EVIDENCE));
         for (String attr  : evidenceElementList) {
             if (node.getAttributes().getNamedItem(attr) != null) {
                 EvidenceElement evidenceElementSup = evidenceElementFactory.create();
                 evidenceElementSup.setProcessRemark(remark);
                 evidenceElementSup.setValue(node.getAttributes().getNamedItem(attr).getNodeValue());
-                evidenceElementSup.setEvidence(evidenceDataService.findByCode(attr));
+                evidenceElementSup.setEvidence(getEvidence(attr));
                 remark.addElement(evidenceElementSup);
             }
         }
         remark.addElement(evidenceElement);
+        return remark;
+    }
+
+    @Override
+    public void addConsolidationRemark(TestSolution processResult,
+                String messageCode, String value, String url) {
+        remarkList.add(
+                createConsolidationRemark(processResult, messageCode, value, url));
+    }
+
+    @Override
+    public void addConsolidationRemark(TestSolution processResult,
+                String messageCode, List<EvidenceElement> evidenceElementList) {
+        ConsolidationRemark remark = consolidationRemarkFactory.create();
+        remark.setIssue(processResult);
+        remark.setMessageCode(messageCode);
+        for (EvidenceElement element : evidenceElementList) {
+            remark.addElement(element);
+            element.setProcessRemark(remark);
+        }
+        remarkList.add(remark);
+    }
+
+    @Override
+    public ConsolidationRemark createConsolidationRemark(TestSolution processResult,
+                String messageCode, String value, String url) {
+        ConsolidationRemark remark = consolidationRemarkFactory.create();
+        remark.setIssue(processResult);
+        remark.setMessageCode(messageCode);
+
+        if (value != null) {
+            EvidenceElement evidenceElement = evidenceElementFactory.create();
+            evidenceElement.setProcessRemark(remark);
+            evidenceElement.setValue(value);
+            evidenceElement.setEvidence(getEvidence(DEFAULT_EVIDENCE));
+            remark.addElement(evidenceElement);
+        }
+        if (url != null) {
+            EvidenceElement evidenceElement = evidenceElementFactory.create();
+            evidenceElement.setProcessRemark(remark);
+            evidenceElement.setValue(value);
+            evidenceElement.setEvidence(getEvidence(URL_EVIDENCE));
+            remark.addElement(evidenceElement);
+        }
         return remark;
     }
 
@@ -369,14 +430,14 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
      * @param code
      * @return
      */
-//    public Evidence getEvidence(String code) {
-//        if (evidenceMap.containsKey(code)) {
-//            return evidenceMap.get(code);
-//        } else {
-//            Evidence evidence = evidenceDataService.findByCode(code);
-//            evidenceMap.put(code, evidence);
-//            return evidence;
-//        }
-//    }
+    public Evidence getEvidence(String code) {
+        if (evidenceMap.containsKey(code)) {
+            return evidenceMap.get(code);
+        } else {
+            Evidence evidence = evidenceDataService.findByCode(code);
+            evidenceMap.put(code, evidence);
+            return evidence;
+        }
+    }
 
 }

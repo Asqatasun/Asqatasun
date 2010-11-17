@@ -38,6 +38,7 @@
     <bean id="processRemarkService" class="org.opens.tanaguru.service.ProcessRemarkServiceImpl">
         <property name="processRemarkFactory" ref="processRemarkFactory"/>
         <property name="sourceCodeRemarkFactory" ref="sourceCodeRemarkFactory"/>
+        <property name="consolidationRemarkFactory" ref="consolidationRemarkFactory"/>
         <property name="evidenceDataService" ref="evidenceDataService"/>
         <property name="evidenceElementFactory" ref="evidenceElementFactory"/>
     </bean>
