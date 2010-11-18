@@ -2,6 +2,7 @@ package org.opens.tanaguru.entity.dao.audit;
 
 import java.util.Collection;
 import com.adex.sdk.entity.dao.GenericDAO;
+import org.opens.tanaguru.entity.audit.ConsolidationRemark;
 import org.opens.tanaguru.entity.audit.Evidence;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.SourceCodeRemark;
@@ -29,4 +30,11 @@ public interface EvidenceElementDAO extends
      * @return
      */
     Collection<EvidenceElement> retrieveAllBySourceCodeRemark(SourceCodeRemark sourceCodeRemark);
+
+    /**
+     * 
+     * @param consolidationRemark
+     * @return
+     */
+    Collection<EvidenceElement> retrieveAllByConsolidationRemark(ConsolidationRemark consolidationRemark);
 }

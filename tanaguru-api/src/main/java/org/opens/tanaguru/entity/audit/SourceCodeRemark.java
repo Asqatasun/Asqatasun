@@ -7,14 +7,7 @@ import java.util.Collection;
  * @author ADEX
  * @version 1.0.0
  */
-public interface SourceCodeRemark extends ProcessRemark {
-
-    /**
-     *
-     * @param element
-     *            the element to add
-     */
-    void addElement(EvidenceElement element);
+public interface SourceCodeRemark extends ConsolidationRemark {
 
     /**
      *
@@ -33,12 +26,6 @@ public interface SourceCodeRemark extends ProcessRemark {
      * @return the target
      */
     String getTarget();
-
-    /**
-     *
-     * @return the elements
-     */
-    Collection<? extends EvidenceElement> getElementList();
 
     /**
      *
@@ -61,10 +48,4 @@ public interface SourceCodeRemark extends ProcessRemark {
      */
     void setTarget(String target);
 
-    /**
-     *
-     * @param elements
-     *            the elements to set
-     */
-    void setElementList(Collection<? extends EvidenceElement> elements);
 }

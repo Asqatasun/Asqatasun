@@ -1,5 +1,6 @@
 package org.opens.tanaguru.entity.dao.audit;
 
+import org.opens.tanaguru.entity.audit.ConsolidationRemark;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.EvidenceElementImpl;
 import com.adex.sdk.entity.dao.jpa.AbstractJPADAO;
@@ -34,8 +35,18 @@ public class EvidenceElementDAOImpl extends AbstractJPADAO<EvidenceElement, Long
             SourceCodeRemark sourceCodeRemark) {
         Query query = entityManager.createQuery("SELECT r FROM "
                 + getEntityClass().getName()
-                + " r WHERE r.sourceCodeRemark = :sourceCodeRemark");
+                + " r WHERE r.consolidationRemark = :sourceCodeRemark");
         query.setParameter("sourceCodeRemark", sourceCodeRemark);
+        return query.getResultList();
+    }
+
+    @Override
+    public Collection<EvidenceElement> retrieveAllByConsolidationRemark(
+            ConsolidationRemark consolidationRemark) {
+        Query query = entityManager.createQuery("SELECT r FROM "
+                + getEntityClass().getName()
+                + " r WHERE r.consolidationRemark = :consolidationRemark");
+        query.setParameter("consolidationRemark", consolidationRemark);
         return query.getResultList();
     }
 

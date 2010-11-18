@@ -31,9 +31,12 @@ public class EvidenceElementImpl implements EvidenceElement,
     protected EvidenceImpl evidence;
     @Column(name = "Element_Value", length = 5000, nullable = false)
     protected String value;
+//    @ManyToOne
+//    @JoinColumn(name = "PROCESS_REMARK_Id_Process_Remark")
+//    protected SourceCodeRemarkImpl sourceCodeRemark;
     @ManyToOne
     @JoinColumn(name = "PROCESS_REMARK_Id_Process_Remark")
-    protected SourceCodeRemarkImpl sourceCodeRemark;
+    protected ConsolidationRemarkImpl consolidationRemark;
 
     public EvidenceElementImpl() {
         super();
@@ -78,13 +81,13 @@ public class EvidenceElementImpl implements EvidenceElement,
     @XmlTransient
     @Override
     public ProcessRemark getProcessRemark() {
-        return sourceCodeRemark;
+        return consolidationRemark;
     }
 
     @Override
     public void setProcessRemark(ProcessRemark processRemark) {
-        if (processRemark instanceof SourceCodeRemarkImpl) {
-            this.sourceCodeRemark = (SourceCodeRemarkImpl)processRemark;
+        if (processRemark instanceof ConsolidationRemarkImpl) {
+            this.consolidationRemark = (ConsolidationRemarkImpl)processRemark;
         }
     }
 

@@ -3,6 +3,7 @@ package org.opens.tanaguru.entity.service.audit;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
 import com.adex.sdk.entity.service.AbstractGenericDataService;
 import java.util.Collection;
+import org.opens.tanaguru.entity.audit.ConsolidationRemark;
 import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.dao.audit.EvidenceElementDAO;
 
@@ -20,7 +21,13 @@ public class EvidenceElementDataServiceImpl extends AbstractGenericDataService<E
     public Collection<EvidenceElement> findAllBySourceCodeRemark(
             SourceCodeRemark sourceCodeRemark) {
         return ((EvidenceElementDAO) entityDao).
-                retrieveAllBySourceCodeRemark(sourceCodeRemark);
+                retrieveAllByConsolidationRemark(sourceCodeRemark);
+    }
+
+    public Collection<EvidenceElement> findAllByConsolidationRemark(
+            ConsolidationRemark consolidationRemark) {
+        return ((EvidenceElementDAO) entityDao).
+                retrieveAllByConsolidationRemark(consolidationRemark);
     }
 
 }
