@@ -2,8 +2,10 @@ package org.opens.tanaguru.entity.audit;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Vector;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -49,7 +51,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     @JoinColumn(name = "Id_Process_Result_Parent")
     protected ProcessResultImpl parentResult;
     @OneToMany(mappedBy = "processResult", cascade = CascadeType.ALL)
-    protected List<ProcessRemarkImpl> remarkList = new Vector<ProcessRemarkImpl>();
+    protected Set<ProcessRemarkImpl> remarkList = new LinkedHashSet<ProcessRemarkImpl>();
     @ManyToOne
     @JoinColumn(name = "Id_Web_Resource", nullable = false)
     protected WebResourceImpl subject;
@@ -64,7 +66,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     }
 
     @Override
-    public void addAllRemark(List<? extends ProcessRemark> remarkList) {
+    public void addAllRemark(Collection<? extends ProcessRemark> remarkList) {
         if (remarkList == null) {
             return;
         }
@@ -123,7 +125,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.ProcessRemarkImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.SourceCodeRemarkImpl.class)})
-    public List<ProcessRemarkImpl> getRemarkList() {
+    public Collection<ProcessRemarkImpl> getRemarkList() {
         return remarkList;
     }
 
@@ -148,7 +150,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
 
     @Override
     public void setChildResultList(
-            List<? extends ProcessResult> childResultList) {
+            Collection<? extends ProcessResult> childResultList) {
         for (ProcessResult processResult : childResultList) {
             processResult.setParentResult(this);
         }
@@ -176,11 +178,11 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     }
 
     @Override
-    public void setRemarkList(List<? extends ProcessRemark> remarkList) {
+    public void setRemarkList(Collection<? extends ProcessRemark> remarkList) {
         for (ProcessRemark processRemark : remarkList) {
             processRemark.setProcessResult(this);
         }
-        this.remarkList = (List<ProcessRemarkImpl>) remarkList;
+        this.remarkList = (Set<ProcessRemarkImpl>) remarkList;
     }
 
     @Override

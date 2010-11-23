@@ -2,7 +2,7 @@ package org.opens.tanaguru.entity.audit;
 
 
 import com.adex.sdk.entity.Entity;
-import java.util.List;
+import java.util.Collection;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.subject.WebResource;
 
@@ -18,7 +18,7 @@ public interface ProcessResult extends Entity {
      * @param remarkList
      *            the remark list to add
      */
-    void addAllRemark(List<? extends ProcessRemark> remarkList);
+    void addAllRemark(Collection<? extends ProcessRemark> remarkList);
 
     /**
      *
@@ -38,7 +38,7 @@ public interface ProcessResult extends Entity {
      *
      * @return the sub result list
      */
-    List<? extends ProcessResult> getChildResultList();
+    Collection<? extends ProcessResult> getChildResultList();
 
     /**
      *
@@ -62,7 +62,7 @@ public interface ProcessResult extends Entity {
      *
      * @return the remark list
      */
-    List<? extends ProcessRemark> getRemarkList();
+    Collection<? extends ProcessRemark> getRemarkList();
 
     /**
      *
@@ -93,7 +93,7 @@ public interface ProcessResult extends Entity {
      * @param subResultList
      *            the sub result list to set
      */
-    void setChildResultList(List<? extends ProcessResult> subResultList);
+    void setChildResultList(Collection<? extends ProcessResult> subResultList);
 
     /**
      *
@@ -121,7 +121,7 @@ public interface ProcessResult extends Entity {
      * @param remarkList
      *            the remark list to set
      */
-    void setRemarkList(List<? extends ProcessRemark> remarkList);
+    void setRemarkList(Collection<? extends ProcessRemark> remarkList);
 
     /**
      *

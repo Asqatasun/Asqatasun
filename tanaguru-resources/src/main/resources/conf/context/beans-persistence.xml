@@ -13,15 +13,8 @@
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="persistenceXmlLocation" value="${persistenceXmlLocation}"/>
-        <!-- property name="loadTimeWeaver">
-            <bean class="org.springframework.instrument.classloading.ReflectiveLoadTimeWeaver"/>
-        </property -->
         <property name="jpaProperties">
             <props>
-                <!-- prop key="hibernate.transaction.manager_lookup_class">org.hibernate.transaction.JNDITransactionManagerLookup</prop>
-                <prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JTATransactionFactory</prop -->
-
-                <!-- prop key="hibernate.hbm2ddl.auto">create</prop -->
                 <prop key="hibernate.show_sql">${jpa.showSql}</prop>
             </props>
         </property>
@@ -39,8 +32,7 @@
         -->
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
-    <!-- Transaction manager for  JTA  -->
-    <!-- bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager" -->
+    <!-- Transaction manager for  JPA  -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
@@ -56,19 +48,11 @@
         and @PersistenceUnit (if available).
         -->
     <context:annotation-config/>
-    <!-- context:component-scan base-package="org.opens.tanaguru.entity.*" />
-    <context:component-scan base-package="org.opens.tanaguru.entity.audit.*" />
-    <context:component-scan base-package="org.opens.tanaguru.entity.membership.*" />
-    <context:component-scan base-package="org.opens.tanaguru.entity.reference.*" />
-    <context:component-scan base-package="org.opens.tanaguru.entity.subject.*" />
-    <context:component-scan base-package="org.opens.tanaguru.i18n.*" />
-    <context:component-scan base-package="org.opens.tanaguru.i18n.reference.*" / -->
     <!--
         Instruct Spring to retrieve and apply @AspectJ aspects which are defined
         as beans in this context (such as the UsageLogAspect below).
         -->
     <!-- aop:aspectj-autoproxy/ -->
-
     <aop:config>
         <aop:pointcut id="transactionalMethods" expression="bean(*DAO) || bean(*Service) || bean(eaLoggerComponent)"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="transactionalMethods"/>
@@ -79,9 +63,7 @@
             <tx:method name="create*" propagation="REQUIRED"/>
             <tx:method name="update*" propagation="REQUIRED"/>
             <tx:method name="delete*" propagation="REQUIRED"/>
-            <!--<tx:method name="read*" propagation="REQUIRED"/>-->
             <tx:method name="save*" propagation="REQUIRED"/>
-
             <tx:method name="init" propagation="REQUIRED"/>
             <tx:method name="crawl*" propagation="REQUIRED"/>
             <tx:method name="load*" propagation="REQUIRED"/>
@@ -89,19 +71,8 @@
             <tx:method name="process*" propagation="REQUIRED"/>
             <tx:method name="consolidate*" propagation="REQUIRED"/>
             <tx:method name="analyse*" propagation="REQUIRED"/>
-
-            <!--Sans ça, tout pète-->
             <tx:method name="audit*" propagation="REQUIRED"/>
-
-            <!--<tx:method name="crawl" propagation="REQUIRES_NEW"/>
-            <tx:method name="loadContent" propagation="REQUIRES_NEW"/>
-            <tx:method name="adaptAdaptContent" propagation="REQUIRES_NEW"/>
-            <tx:method name="process" propagation="REQUIRES_NEW"/>
-            <tx:method name="consolidate" propagation="REQUIRES_NEW"/>
-            <tx:method name="analyse" propagation="REQUIRES_NEW"/>-->
-
             <tx:method name="log*" propagation="REQUIRED"/>
-
             <tx:method name="*" propagation="SUPPORTS" read-only="true"/>
         </tx:attributes>
     </tx:advice>

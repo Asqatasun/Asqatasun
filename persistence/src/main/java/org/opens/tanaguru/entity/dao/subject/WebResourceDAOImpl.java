@@ -18,9 +18,10 @@ public class WebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
     public WebResource findByUrl(String url) {
         try {
             Query query = entityManager.createQuery(
-                    "SELECT w FROM " +
-                    getEntityClass().getName() +
-                    " w WHERE w.url = :url");
+                    "SELECT wr FROM " +
+                    getEntityClass().getName() + " wr"
+                    + " left join fetch wr.processResultList pr"
+                    + " WHERE wr.url = :url");
             query.setParameter("url", url);
             return (WebResource) query.getSingleResult();
         } catch (NoResultException nre) {
@@ -31,9 +32,10 @@ public class WebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
     public WebResource findByAuditAndUrl(Audit audit, String url) {
         try {
             Query query = entityManager.createQuery(
-                    "SELECT w FROM " +
-                    getEntityClass().getName() +
-                    " w WHERE w.url = :url AND w.audit = :audit");
+                    "SELECT wr FROM " +
+                    getEntityClass().getName() + " wr"
+                    + " left join fetch wr.processResultList pr"
+                    + " WHERE wr.url = :url AND wr.audit = :audit");
             query.setParameter("url", url);
             query.setParameter("audit", audit);
             return (WebResource) query.getSingleResult();
@@ -49,7 +51,18 @@ public class WebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
 
     @Override
     public WebResource read(Long key) {
-        return super.read(key);
+        try {
+            Query query = entityManager.createQuery("SELECT wr FROM "
+                + getEntityClass().getName() + " wr"
+                + " inner join fetch wr.processResultList prs"
+                + " left join fetch prs.remarkList prk"
+                + " left join fetch prk.elementList pr"
+                + " WHERE wr.id = :id ORDER BY prk.id");
+            query.setParameter("id", key);
+            return (WebResource) query.getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
     }
 
 

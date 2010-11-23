@@ -3,8 +3,10 @@ package org.opens.tanaguru.entity.subject;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditImpl;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
@@ -42,7 +44,7 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     @Column(name = "Url", nullable = false)
     protected String url;
     @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
-    protected List<ProcessResultImpl> processResultList = new ArrayList<ProcessResultImpl>();
+    protected Set<ProcessResultImpl> processResultList = new LinkedHashSet<ProcessResultImpl>();
 
     public WebResourceImpl() {
         super();
@@ -99,12 +101,12 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.IndefiniteResultImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.DefiniteResultImpl.class)})
-    public List<ProcessResultImpl> getProcessResultList() {
+    public Collection<ProcessResultImpl> getProcessResultList() {
         return processResultList;
     }
 
-    public void setProcessResultList(List<? extends ProcessResult> processResultList) {
-        this.processResultList = (List<ProcessResultImpl>) processResultList;
+    public void setProcessResultList(Collection<? extends ProcessResult> processResultList) {
+        this.processResultList = (HashSet<ProcessResultImpl>) processResultList;
     }
 
     public void addProcessResult(ProcessResult processResult) {
@@ -112,7 +114,7 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
         this.processResultList.add((ProcessResultImpl) processResult);
     }
 
-    public void addAllProcessResult(List<? extends ProcessResult> processResultList) {
+    public void addAllProcessResult(Collection<? extends ProcessResult> processResultList) {
         for (ProcessResult processResult : processResultList) {
             addProcessResult(processResult);
         }

@@ -1,7 +1,7 @@
 package org.opens.tanaguru.entity.subject;
 
 import com.adex.sdk.entity.Entity;
-import java.util.List;
+import java.util.Collection;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 
@@ -59,13 +59,13 @@ public interface WebResource extends Entity {
      *
      * @return the process result list
      */
-    List<? extends ProcessResult> getProcessResultList();
+    Collection<? extends ProcessResult> getProcessResultList();
 
     /**
      *
-     * @param processResultList the process result list to set
+     * @param processResultList the process result Collection to set
      */
-    void setProcessResultList(List<? extends ProcessResult> processResultList);
+    void setProcessResultList(Collection<? extends ProcessResult> processResultList);
 
     /**
      *
@@ -75,7 +75,7 @@ public interface WebResource extends Entity {
 
     /**
      *
-     * @param processResultList the process result list to add
+     * @param processResultList the process result Collection to add
      */
-    void addAllProcessResult(List<? extends ProcessResult> processResultList);
+    void addAllProcessResult(Collection<? extends ProcessResult> processResultList);
 }

@@ -1,13 +1,12 @@
 package org.opens.tanaguru.entity.dao.audit;
 
-import org.opens.tanaguru.entity.audit.ConsolidationRemark;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.EvidenceElementImpl;
 import com.adex.sdk.entity.dao.jpa.AbstractJPADAO;
 import java.util.Collection;
 import javax.persistence.Query;
 import org.opens.tanaguru.entity.audit.Evidence;
-import org.opens.tanaguru.entity.audit.SourceCodeRemark;
+import org.opens.tanaguru.entity.audit.ProcessRemark;
 
 public class EvidenceElementDAOImpl extends AbstractJPADAO<EvidenceElement, Long> implements
         EvidenceElementDAO {
@@ -21,6 +20,7 @@ public class EvidenceElementDAOImpl extends AbstractJPADAO<EvidenceElement, Long
         return EvidenceElementImpl.class;
     }
 
+    @Override
     public Collection<EvidenceElement> retrieveAll(
             Evidence Evidence, String EvidenceValue) {
         Query query = entityManager.createQuery("SELECT r FROM "
@@ -31,22 +31,13 @@ public class EvidenceElementDAOImpl extends AbstractJPADAO<EvidenceElement, Long
         return query.getResultList();
     }
 
-    public Collection<EvidenceElement> retrieveAllBySourceCodeRemark(
-            SourceCodeRemark sourceCodeRemark) {
-        Query query = entityManager.createQuery("SELECT r FROM "
-                + getEntityClass().getName()
-                + " r WHERE r.consolidationRemark = :sourceCodeRemark");
-        query.setParameter("sourceCodeRemark", sourceCodeRemark);
-        return query.getResultList();
-    }
-
     @Override
-    public Collection<EvidenceElement> retrieveAllByConsolidationRemark(
-            ConsolidationRemark consolidationRemark) {
+    public Collection<EvidenceElement> retrieveAllByProcessRemark(
+            ProcessRemark processRemark) {
         Query query = entityManager.createQuery("SELECT r FROM "
                 + getEntityClass().getName()
-                + " r WHERE r.consolidationRemark = :consolidationRemark");
-        query.setParameter("consolidationRemark", consolidationRemark);
+                + " r WHERE r.processRemark = :processRemark");
+        query.setParameter("processRemark", processRemark);
         return query.getResultList();
     }
 
