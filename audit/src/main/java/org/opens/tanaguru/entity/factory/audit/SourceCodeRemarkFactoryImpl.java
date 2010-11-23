@@ -1,6 +1,5 @@
 package org.opens.tanaguru.entity.factory.audit;
 
-import org.opens.tanaguru.entity.factory.audit.*;
 import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.SourceCodeRemarkImpl;
 
@@ -10,11 +9,11 @@ import org.opens.tanaguru.entity.audit.SourceCodeRemarkImpl;
  */
 public class SourceCodeRemarkFactoryImpl implements SourceCodeRemarkFactory {
 
-	public SourceCodeRemarkFactoryImpl() {
-		super();
-	}
+    public SourceCodeRemarkFactoryImpl() {
+        super();
+    }
 
-	public SourceCodeRemark create() {
-		return new SourceCodeRemarkImpl();
-	}
+    public SourceCodeRemark create() {
+        return new SourceCodeRemarkImpl();
+    }
 }

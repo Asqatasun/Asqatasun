@@ -17,13 +17,11 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import org.opens.tanaguru.contentadapter.css.CSSOMRule;
-import org.opens.tanaguru.entity.audit.ConsolidationRemark;
 import org.opens.tanaguru.entity.audit.Evidence;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.entity.factory.audit.ConsolidationRemarkFactory;
 import org.opens.tanaguru.entity.factory.audit.EvidenceElementFactory;
 import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
 import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
@@ -89,15 +87,6 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
 
     public void setSourceCodeRemarkFactory(SourceCodeRemarkFactory sourceCodeRemarkFactory) {
         this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
-    }
-
-    protected ConsolidationRemarkFactory consolidationRemarkFactory;
-    public ConsolidationRemarkFactory getConsolidationRemarkFactory() {
-        return consolidationRemarkFactory;
-    }
-
-    public void setConsolidationRemarkFactory(ConsolidationRemarkFactory consolidationRemarkFactory) {
-        this.consolidationRemarkFactory = consolidationRemarkFactory;
     }
 
     protected EvidenceElementFactory evidenceElementFactory;
@@ -317,14 +306,6 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
             throw new RuntimeException(ex);
         }
         return -1;
-//        NodeList nodeList = document.getElementsByTagName(node.getNodeName());
-//        for (int i = 0; i < nodeList.getLength(); i++) {
-//            Node current = nodeList.item(i);
-//            if (current.equals(node)) {
-//                return i;
-//            }
-//        }
-//        return -1;
     }
 
     /**
@@ -356,8 +337,11 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
     }
 
     @Override
-    public SourceCodeRemark createSourceCodeRemark(TestSolution processResult,
-                Node node, String messageCode, String elementName) {
+    public SourceCodeRemark createSourceCodeRemark(
+            TestSolution processResult,
+            Node node, 
+            String messageCode,
+            String elementName) {
         SourceCodeRemark remark = sourceCodeRemarkFactory.create();
         remark.setIssue(processResult);
         remark.setMessageCode(messageCode);
@@ -381,29 +365,51 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
     }
 
     @Override
-    public void addConsolidationRemark(TestSolution processResult,
-                String messageCode, String value, String url) {
-        remarkList.add(
-                createConsolidationRemark(processResult, messageCode, value, url));
+    public void addConsolidationRemark(
+            TestSolution processResult,
+            String messageCode, 
+            String value,
+            String url) {
+        remarkList.add(createConsolidationRemark(
+                processResult,
+                messageCode,
+                value,
+                url));
     }
 
     @Override
-    public void addConsolidationRemark(TestSolution processResult,
-                String messageCode, List<EvidenceElement> evidenceElementList) {
-        ConsolidationRemark remark = consolidationRemarkFactory.create();
+    public void addProcessRemark(
+            TestSolution processResult,
+            String messageCode,
+            List<EvidenceElement> evidenceElementList) {
+        remarkList.add(createProcessRemark(
+                processResult,
+                messageCode,
+                evidenceElementList));
+    }
+
+    @Override
+    public ProcessRemark createProcessRemark(
+            TestSolution processResult,
+            String messageCode,
+            List<EvidenceElement> evidenceElementList) {
+        ProcessRemark remark = processRemarkFactory.create();
         remark.setIssue(processResult);
         remark.setMessageCode(messageCode);
         for (EvidenceElement element : evidenceElementList) {
             remark.addElement(element);
             element.setProcessRemark(remark);
         }
-        remarkList.add(remark);
+        return remark;
     }
 
     @Override
-    public ConsolidationRemark createConsolidationRemark(TestSolution processResult,
-                String messageCode, String value, String url) {
-        ConsolidationRemark remark = consolidationRemarkFactory.create();
+    public ProcessRemark createConsolidationRemark(
+            TestSolution processResult,
+            String messageCode, 
+            String value,
+            String url) {
+        ProcessRemark remark = processRemarkFactory.create();
         remark.setIssue(processResult);
         remark.setMessageCode(messageCode);
 

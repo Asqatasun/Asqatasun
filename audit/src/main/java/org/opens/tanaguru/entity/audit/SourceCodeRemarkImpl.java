@@ -1,20 +1,12 @@
 package org.opens.tanaguru.entity.audit;
 
-import java.util.Collection;
-import java.util.HashSet;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @XmlRootElement
-public class SourceCodeRemarkImpl extends ConsolidationRemarkImpl implements
+public class SourceCodeRemarkImpl extends ProcessRemarkImpl implements
         SourceCodeRemark {
 
     @Column(name = "Character_Position")
@@ -28,26 +20,32 @@ public class SourceCodeRemarkImpl extends ConsolidationRemarkImpl implements
         super();
     }
 
+    @Override
     public int getCharacterPosition() {
         return characterPosition;
     }
 
+    @Override
     public int getLineNumber() {
         return lineNumber;
     }
 
+    @Override
     public String getTarget() {
         return target;
     }
 
+    @Override
     public void setCharacterPosition(int characterPosition) {
         this.characterPosition = characterPosition;
     }
 
+    @Override
     public void setLineNumber(int lineNumber) {
         this.lineNumber = lineNumber;
     }
 
+    @Override
     public void setTarget(String target) {
         this.target = target;
     }

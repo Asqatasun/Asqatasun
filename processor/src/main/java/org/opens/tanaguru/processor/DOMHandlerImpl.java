@@ -1013,10 +1013,8 @@ public class DOMHandlerImpl implements DOMHandler {
                 workingElement,
                 remarkMessage,
                 attribute.getNodeName());
-            System.out.println("alphanum   " + attributeContent);
             return testSolution;
         } else {
-            System.out.println("not alphanum  " + attributeContent);
             return TestSolution.PASSED;
         }
     }
