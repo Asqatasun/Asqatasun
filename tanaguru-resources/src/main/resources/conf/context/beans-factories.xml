@@ -4,7 +4,6 @@
 
     <bean id="auditFactory" class="org.opens.tanaguru.entity.factory.audit.AuditFactoryImpl"/>
     <bean id="contentFactory" class="org.opens.tanaguru.entity.factory.audit.ContentFactoryImpl"/>
-    <bean id="consolidationRemarkFactory" class="org.opens.tanaguru.entity.factory.audit.ConsolidationRemarkFactoryImpl"/>
     <bean id="definiteResultFactory" class="org.opens.tanaguru.entity.factory.audit.DefiniteResultFactoryImpl"/>
     <bean id="evidenceElementFactory" class="org.opens.tanaguru.entity.factory.audit.EvidenceElementFactoryImpl"/>
     <bean id="evidenceFactory" class="org.opens.tanaguru.entity.factory.audit.EvidenceFactoryImpl"/>
