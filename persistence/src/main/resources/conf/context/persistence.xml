@@ -5,8 +5,8 @@
         <non-jta-data-source>jdbc/tanaguruDS</non-jta-data-source>
         <class>org.opens.tanaguru.entity.audit.ProcessResultImpl</class>
         <class>org.opens.tanaguru.entity.audit.DefiniteResultImpl</class>
+        <class>org.opens.tanaguru.entity.audit.IndefiniteResultImpl</class>
         <class>org.opens.tanaguru.entity.audit.SourceCodeRemarkImpl</class>
-        <class>org.opens.tanaguru.entity.audit.ConsolidationRemarkImpl</class>
         <class>org.opens.tanaguru.entity.audit.ProcessRemarkImpl</class>
         <class>org.opens.tanaguru.entity.audit.EvidenceImpl</class>
         <class>org.opens.tanaguru.entity.audit.EvidenceElementImpl</class>
