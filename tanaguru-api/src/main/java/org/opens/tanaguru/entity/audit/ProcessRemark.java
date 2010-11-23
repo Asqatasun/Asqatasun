@@ -1,6 +1,7 @@
 package org.opens.tanaguru.entity.audit;
 
 import com.adex.sdk.entity.Entity;
+import java.util.Collection;
 
 /**
  * 
@@ -15,6 +16,10 @@ public interface ProcessRemark extends Entity {
      */
     TestSolution getIssue();
 
+    /**
+     * 
+     * @return the message code
+     */
     String getMessageCode();
 
     /**
@@ -42,6 +47,11 @@ public interface ProcessRemark extends Entity {
      */
     void setIssue(TestSolution issue);
 
+    /**
+     *
+     * @param messageCode
+     *              the message code to set
+     */
     void setMessageCode(String messageCode);
 
     /**
@@ -62,4 +72,24 @@ public interface ProcessRemark extends Entity {
      * @param selectionExpression the selection expression to set
      */
     void setSelectionExpression(String selectionExpression);
+
+    /**
+     *
+     * @param element
+     *            the element to add
+     */
+    void addElement(EvidenceElement element);
+
+    /**
+     *
+     * @return the elements
+     */
+    Collection<? extends EvidenceElement> getElementList();
+
+    /**
+     *
+     * @param elements
+     *            the elements to set
+     */
+    void setElementList(Collection<? extends EvidenceElement> elements);
 }

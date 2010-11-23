@@ -1,13 +1,11 @@
 package org.opens.tanaguru.entity.audit;
 
-import java.util.Collection;
-
 /**
  * 
  * @author ADEX
  * @version 1.0.0
  */
-public interface SourceCodeRemark extends ConsolidationRemark {
+public interface SourceCodeRemark extends ProcessRemark {
 
     /**
      *

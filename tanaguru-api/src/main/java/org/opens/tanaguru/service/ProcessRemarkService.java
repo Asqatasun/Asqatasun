@@ -3,7 +3,6 @@ package org.opens.tanaguru.service;
 
 import java.util.List;
 import org.opens.tanaguru.contentadapter.css.CSSOMRule;
-import org.opens.tanaguru.entity.audit.ConsolidationRemark;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.SourceCodeRemark;
@@ -21,6 +20,18 @@ public interface ProcessRemarkService {
 
     public static final String DEFAULT_EVIDENCE = "Element-Name";
     public static final String URL_EVIDENCE = "Url";
+
+    /**
+     *
+     * @param document
+     * @param adaptedContent
+     */
+    void initializeService (Document document, String adaptedContent);
+
+    /**
+     *
+     */
+    void initializeService ();
 
     /**
      *
@@ -56,42 +67,23 @@ public interface ProcessRemarkService {
     /**
      *
      * @param processResult
+     * @param node
+     * @param messageCode
+     * @param elementName
+     * @return
+     */
+    SourceCodeRemark createSourceCodeRemark(TestSolution processResult,
+            Node node, String messageCode, String elementName);
+
+    /**
+     *
+     * @param processResult
      * @param rule
      * @param messageCode
      * @param attrName
      */
     void addCssCodeRemark(TestSolution processResult,
             CSSOMRule rule, String messageCode, String attrName);
-
-    /**
-     *
-     * @return
-     */
-    List<ProcessRemark> getRemarkList();
-
-    /**
-     *
-     * @param element
-     */
-    void addEvidenceElement (String element);
-
-    /**
-     *
-     * @param element
-     */
-    void setEvidenceElementList (List<String> element);
-
-    /**
-     *
-     * @param document
-     * @param adaptedContent
-     */
-    void initializeService (Document document, String adaptedContent);
-
-    /**
-     * 
-     */
-    void initializeService ();
 
     /**
      *
@@ -104,29 +96,27 @@ public interface ProcessRemarkService {
      *
      * @param processResult
      * @param messageCode
+     * @param evidenceElementList
+     */
+    void addProcessRemark(TestSolution processResult,
+            String messageCode, List<EvidenceElement> evidenceElementList);
+
+    /**
+     *
+     * @param processResult
+     * @param messageCode
      * @return
      */
     ProcessRemark createProcessRemark(TestSolution processResult, String messageCode);
 
-
     /**
-     * 
-     * @param processResult
-     * @param node
-     * @param messageCode
-     * @param elementName
-     * @return
-     */
-    SourceCodeRemark createSourceCodeRemark(TestSolution processResult,
-            Node node, String messageCode, String elementName);
-
-    /**
-     * 
+     *
      * @param processResult
      * @param messageCode
      * @param evidenceElementList
+     * @return
      */
-    void addConsolidationRemark(TestSolution processResult,
+    ProcessRemark createProcessRemark(TestSolution processResult,
             String messageCode, List<EvidenceElement> evidenceElementList);
 
     /**
@@ -147,8 +137,35 @@ public interface ProcessRemarkService {
      * @param url
      * @return
      */
-    ConsolidationRemark createConsolidationRemark(TestSolution processResult,
+    ProcessRemark createConsolidationRemark(TestSolution processResult,
             String messageCode, String value, String url);
+
+    /**
+     *
+     * @return
+     *          the list of remarks created by the service
+     */
+    List<ProcessRemark> getRemarkList();
+
+    /**
+     *
+     * @param evidenceCode
+     * @param evidenceValue
+     * @return
+     */
+    EvidenceElement getEvidenceElement(String evidenceCode, String evidenceValue);
+
+        /**
+     *
+     * @param element
+     */
+    void addEvidenceElement (String element);
+
+    /**
+     *
+     * @param element
+     */
+    void setEvidenceElementList (List<String> element);
 
     /**
      *
@@ -161,13 +178,5 @@ public interface ProcessRemarkService {
      * @return
      */
     EvidenceDataService getEvidenceDataService();
-
-    /**
-     *
-     * @param evidenceCode
-     * @param evidenceValue
-     * @return
-     */
-    EvidenceElement getEvidenceElement(String evidenceCode, String evidenceValue);
 
 }
