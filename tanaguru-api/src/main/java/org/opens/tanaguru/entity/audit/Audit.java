@@ -103,12 +103,6 @@ public interface Audit extends Entity {
 
     /**
      *
-     * @return the mark
-     */
-    float getMark();
-
-    /**
-     *
      * @return the net result list
      */
     List<? extends ProcessResult> getNetResultList();
@@ -158,13 +152,6 @@ public interface Audit extends Entity {
      *            the gross result list to set
      */
     void setGrossResultList(List<? extends ProcessResult> grossResultList);
-
-    /**
-     *
-     * @param mark
-     *            the mark to set
-     */
-    void setMark(float mark);
 
     /**
      *

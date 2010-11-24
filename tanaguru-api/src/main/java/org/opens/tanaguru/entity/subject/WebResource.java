@@ -32,6 +32,16 @@ public interface WebResource extends Entity {
      */
     String getURL();
 
+    /**
+     *
+     * @return the mark
+     */
+    float getMark();
+
+    /**
+     *
+     * @param audit
+     */
     void setAudit(Audit audit);
 
     /**
@@ -69,6 +79,13 @@ public interface WebResource extends Entity {
 
     /**
      *
+     * @param mark
+     *            the mark to set
+     */
+    void setMark(float mark);
+
+    /**
+     *
      * @param processResult the process result to add
      */
     void addProcessResult(ProcessResult processResult);
@@ -78,4 +95,5 @@ public interface WebResource extends Entity {
      * @param processResultList the process result Collection to add
      */
     void addAllProcessResult(Collection<? extends ProcessResult> processResultList);
+
 }

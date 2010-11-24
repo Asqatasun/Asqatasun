@@ -47,8 +47,6 @@ public class AuditImpl implements Audit, Serializable {
     @GeneratedValue
     @Column(name = "Id_Audit")
     protected Long id;
-    @Column(name = "Mark")
-    protected float mark;
     @OneToMany(mappedBy = "netResultAudit", cascade = CascadeType.ALL)
     protected List<ProcessResultImpl> netResultList = new ArrayList<ProcessResultImpl>();
     @Enumerated(EnumType.STRING)
@@ -70,58 +68,69 @@ public class AuditImpl implements Audit, Serializable {
         this.dateOfCreation = dateOfCreation;
     }
 
+    @Override
     public void addAllContent(List<? extends Content> contentList) {
         for (Content content : contentList) {
             addContent(content);
         }
     }
 
+    @Override
     public void addAllGrossResult(List<? extends ProcessResult> pageResultList) {
         for (ProcessResult pageResult : pageResultList) {
             addGrossResult(pageResult);
         }
     }
 
+    @Override
     public void addAllNetResult(List<? extends ProcessResult> testResultList) {
         for (ProcessResult testResult : testResultList) {
             addNetResult(testResult);
         }
     }
 
+    @Override
     public void addAllTest(List<? extends Test> testList) {
         for (Test test : testList) {
             addTest(test);
         }
     }
 
+    @Override
     public void addContent(Content content) {
         content.setAudit(this);
         this.contentList.add((ContentImpl) content);
     }
 
+    @Override
     public void addGrossResult(ProcessResult pageResult) {
         pageResult.setGrossResultAudit(this);
         grossResultList.add((ProcessResultImpl) pageResult);
     }
 
+    @Override
     public void addNetResult(ProcessResult testResult) {
         testResult.setNetResultAudit(this);
         netResultList.add((ProcessResultImpl) testResult);
     }
 
+    @Override
     public void setSubject(WebResource subject) {
         subject.setAudit(this);
         this.subject = (WebResourceImpl) subject;
     }
 
+    @Override
     public void addTest(Test test) {
         this.testList.add((TestImpl) test);
     }
 
+    @Override
     public String getComment() {
         return comment;
     }
 
+    @Override
     @XmlElementWrapper
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.SSPImpl.class),
@@ -131,10 +140,12 @@ public class AuditImpl implements Audit, Serializable {
         return contentList;
     }
 
+    @Override
     public Date getDateOfCreation() {
         return dateOfCreation;
     }
 
+    @Override
     @XmlElementWrapper
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.IndefiniteResultImpl.class),
@@ -143,24 +154,24 @@ public class AuditImpl implements Audit, Serializable {
         return grossResultList;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
-    public float getMark() {
-        return mark;
-    }
-
+    @Override
     @XmlElementWrapper
     @XmlElementRef(type = org.opens.tanaguru.entity.audit.DefiniteResultImpl.class)
     public List<ProcessResultImpl> getNetResultList() {
         return netResultList;
     }
 
+    @Override
     public AuditStatus getStatus() {
         return status;
     }
 
+    @Override
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.subject.PageImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.subject.SiteImpl.class)})
@@ -168,16 +179,19 @@ public class AuditImpl implements Audit, Serializable {
         return subject;
     }
 
+    @Override
     @XmlElementWrapper
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.TestImpl.class)
     public List<TestImpl> getTestList() {
         return testList;
     }
 
+    @Override
     public void setComment(String comment) {
         this.comment = comment;
     }
 
+    @Override
     public void setContentList(List<? extends Content> contentList) {
         for (Content content : contentList) {
             content.setAudit(this);
@@ -185,10 +199,12 @@ public class AuditImpl implements Audit, Serializable {
         this.contentList = (List<ContentImpl>) contentList;
     }
 
+    @Override
     public void setDateOfCreation(Date dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
     }
 
+    @Override
     public void setGrossResultList(List<? extends ProcessResult> pageResultList) {
         for (ProcessResult grossResult : pageResultList) {
             grossResult.setGrossResultAudit(this);
@@ -196,14 +212,12 @@ public class AuditImpl implements Audit, Serializable {
         this.grossResultList = (List<ProcessResultImpl>) pageResultList;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setMark(float mark) {
-        this.mark = mark;
-    }
-
+    @Override
     public void setNetResultList(List<? extends ProcessResult> netResultList) {
         for (ProcessResult netResult : netResultList) {
             netResult.setNetResultAudit(this);
@@ -211,10 +225,12 @@ public class AuditImpl implements Audit, Serializable {
         this.netResultList = (List<ProcessResultImpl>) netResultList;
     }
 
+    @Override
     public void setStatus(AuditStatus status) {
         this.status = status;
     }
 
+    @Override
     public void setTestList(List<? extends Test> testList) {
         this.testList = (List<TestImpl>) testList;
     }

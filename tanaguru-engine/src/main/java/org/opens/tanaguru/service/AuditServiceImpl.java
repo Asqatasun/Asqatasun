@@ -1,5 +1,6 @@
 package org.opens.tanaguru.service;
 
+import java.util.ArrayList;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.audit.Content;
@@ -11,9 +12,11 @@ import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import java.util.List;
 import org.apache.log4j.Logger;
+import org.opens.tanaguru.entity.audit.DefiniteResult;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
+import org.opens.tanaguru.entity.subject.WebResource;
 
 /**
  * 
@@ -36,6 +39,7 @@ public class AuditServiceImpl implements AuditService {
         super();
     }
 
+    @Override
     public Audit auditPage(String pageUrl, String[] testCodeList) {
         Page page = webResourceDataService.createPage(pageUrl);
 
@@ -50,6 +54,7 @@ public class AuditServiceImpl implements AuditService {
         return audit;
     }
 
+    @Override
     public Audit auditSite(String siteUrl, String[] testCodeList) {
         Site site = webResourceDataService.createSite(siteUrl);
 
@@ -64,6 +69,7 @@ public class AuditServiceImpl implements AuditService {
         return audit;
     }
 
+    @Override
     public Audit auditSite(String siteUrl, String[] pageUrlList, String[] testCodeList) {
         Site site = webResourceDataService.createSite(siteUrl);
         for (String pageUrl : pageUrlList) {
@@ -81,6 +87,7 @@ public class AuditServiceImpl implements AuditService {
         return audit;
     }
 
+    @Override
     public Audit audit(Audit audit) {
         audit = init(audit);
 //        if (audit.getSubject() instanceof Site) {
@@ -94,6 +101,7 @@ public class AuditServiceImpl implements AuditService {
         return audit;
     }
 
+    @Override
     public Audit init(Audit audit) {
         if (audit.getSubject() == null || audit.getTestList().isEmpty()) {
             Logger.getLogger(AuditServiceImpl.class).warn("Audit is not well initialized");
@@ -106,6 +114,7 @@ public class AuditServiceImpl implements AuditService {
         return audit;
     }
 
+    @Override
     public Audit crawl(Audit audit) {
         if (!audit.getStatus().equals(AuditStatus.CRAWLING)) {
             Logger.getLogger(AuditServiceImpl.class).warn(
@@ -149,6 +158,7 @@ public class AuditServiceImpl implements AuditService {
         return audit;
     }
 
+    @Override
     public Audit loadContent(Audit audit) {
         if (!audit.getStatus().equals(AuditStatus.CONTENT_LOADING)) {
             Logger.getLogger(AuditServiceImpl.class).warn(
@@ -184,6 +194,7 @@ public class AuditServiceImpl implements AuditService {
         return audit;
     }
 
+    @Override
     public Audit adaptContent(Audit audit) {
         if (!audit.getStatus().equals(AuditStatus.CONTENT_ADAPTING)) {
             Logger.getLogger(AuditServiceImpl.class).warn(
@@ -216,6 +227,7 @@ public class AuditServiceImpl implements AuditService {
         return audit;
     }
 
+    @Override
     public Audit process(Audit audit) {
         if (!audit.getStatus().equals(AuditStatus.PROCESSING)) {
             Logger.getLogger(AuditServiceImpl.class).warn(
@@ -241,6 +253,7 @@ public class AuditServiceImpl implements AuditService {
         return audit;
     }
 
+    @Override
     public Audit consolidate(Audit audit) {
         if (!audit.getStatus().equals(AuditStatus.CONSOLIDATION)) {
             Logger.getLogger(AuditServiceImpl.class).warn(
@@ -275,6 +288,7 @@ public class AuditServiceImpl implements AuditService {
         return audit;
     }
 
+    @Override
     public Audit analyse(Audit audit) {
         if (!audit.getStatus().equals(AuditStatus.ANALYSIS)) {
             Logger.getLogger(AuditServiceImpl.class).warn(
@@ -286,7 +300,25 @@ public class AuditServiceImpl implements AuditService {
             return audit;
         }
 
-        audit.setMark(analyserService.analyse((List<ProcessResult>) audit.getNetResultList()));
+        if (audit.getSubject() instanceof Page) {
+            audit.getSubject().setMark(analyserService.analyse((List<ProcessResult>) audit.getNetResultList()));
+        } else if (audit.getSubject() instanceof Site) {
+            audit.getSubject().setMark(analyserService.analyse((List<ProcessResult>) audit.getNetResultList()));
+            Logger.getLogger(AuditServiceImpl.class).info("site score  " + audit.getSubject().getMark());
+            Logger.getLogger(AuditServiceImpl.class).info("nombre de composants  " + ((Site)audit.getSubject()).getComponentList().size());
+            for (WebResource webresource : ((Site)audit.getSubject()).getComponentList()) {
+                List<ProcessResult> webResourceNetResultList = new ArrayList<ProcessResult>();
+                Logger.getLogger(AuditServiceImpl.class).info("webresource nb of processResult elements  " + webresource.getProcessResultList().size());
+                for (ProcessResult processResult : audit.getNetResultList()) {
+                    if (processResult instanceof DefiniteResult && processResult.getSubject().equals(webresource)) {
+                        webResourceNetResultList.add(processResult);
+                    }
+                }
+                
+                webresource.setMark(analyserService.analyse(webResourceNetResultList));
+                Logger.getLogger(AuditServiceImpl.class).info("page score  " + webresource.getMark());
+            }
+        }
 
         audit.setStatus(AuditStatus.COMPLETED);
 

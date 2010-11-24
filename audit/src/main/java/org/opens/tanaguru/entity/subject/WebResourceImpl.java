@@ -45,6 +45,8 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     protected String url;
     @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
     protected Set<ProcessResultImpl> processResultList = new LinkedHashSet<ProcessResultImpl>();
+    @Column(name = "Mark")
+    protected float mark;
 
     public WebResourceImpl() {
         super();
@@ -55,48 +57,69 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
         this.url = url;
     }
 
+    @Override
     @XmlTransient
     public Audit getAudit() {
         return audit;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
+    public float getMark() {
+        return mark;
+    }
+
+    @Override
     public String getLabel() {
         return label;
     }
 
+    @Override
     @XmlTransient
     public Site getParent() {
         return parent;
     }
 
+    @Override
     public String getURL() {
         return url;
     }
 
+    @Override
     public void setAudit(Audit audit) {
         this.audit = (AuditImpl) audit;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
+    @Override
+    public void setMark(float mark) {
+        this.mark = mark;
+    }
+
+    @Override
     public void setLabel(String label) {
         this.label = label;
     }
 
+    @Override
     public void setParent(Site parent) {
         this.parent = (SiteImpl) parent;
     }
 
+    @Override
     public void setURL(String url) {
         this.url = url;
     }
 
+    @Override
     @XmlElementWrapper
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.IndefiniteResultImpl.class),
@@ -105,15 +128,18 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
         return processResultList;
     }
 
+    @Override
     public void setProcessResultList(Collection<? extends ProcessResult> processResultList) {
         this.processResultList = (HashSet<ProcessResultImpl>) processResultList;
     }
 
+    @Override
     public void addProcessResult(ProcessResult processResult) {
         processResult.setSubject(this);
         this.processResultList.add((ProcessResultImpl) processResult);
     }
 
+    @Override
     public void addAllProcessResult(Collection<? extends ProcessResult> processResultList) {
         for (ProcessResult processResult : processResultList) {
             addProcessResult(processResult);

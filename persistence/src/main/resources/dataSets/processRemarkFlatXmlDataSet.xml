@@ -19,11 +19,11 @@
     <TEST Id_Test="5" Cd_Test="010105" Description="Test 1.1.5" Label="1.1.5" Rank="5" Id_Criterion="1" Id_Scope="1"/>
     <TEST Id_Test="6" Cd_Test="010106" Description="Test 1.1.6" Label="1.1.6" Rank="6" Id_Criterion="2" Id_Scope="1"/>
 
-    <AUDIT Id_Audit="1" Dt_Creation="2010-10-26 13:50:29" Mark="50" Status="COMPLETED"/>
-    <AUDIT Id_Audit="2" Dt_Creation="2010-10-26 14:50:29" Mark="75" Status="COMPLETED"/>
+    <AUDIT Id_Audit="1" Dt_Creation="2010-10-26 13:50:29" Status="COMPLETED"/>
+    <AUDIT Id_Audit="2" Dt_Creation="2010-10-26 14:50:29" Status="COMPLETED"/>
     
-    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="1" Label="NULL" Url="http://www.open-s.com/1" Id_Audit="1" />
-    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="2" Label="NULL" Url="http://www.open-s.com/2" Id_Audit="2" />
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="1" Label="NULL" Url="http://www.open-s.com/1" Id_Audit="1" Mark="50" />
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="2" Label="NULL" Url="http://www.open-s.com/2" Id_Audit="2" Mark="75" />
 
     <PROCESS_RESULT DTYPE="DefiniteResultImpl" Id_Process_Result="1" Definite_Value="NEED_MORE_INFO" Element_Counter="2" Id_Web_Resource="1" Id_Test="1" />
     <PROCESS_RESULT DTYPE="DefiniteResultImpl" Id_Process_Result="2" Definite_Value="PASSED" Element_Counter="2" Id_Web_Resource="1" Id_Test="2" />
