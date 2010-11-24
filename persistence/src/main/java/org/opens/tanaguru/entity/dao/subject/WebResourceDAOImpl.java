@@ -54,10 +54,10 @@ public class WebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
         try {
             Query query = entityManager.createQuery("SELECT wr FROM "
                 + getEntityClass().getName() + " wr"
-                + " inner join fetch wr.processResultList prs"
+                + " left join fetch wr.processResultList prs"
                 + " left join fetch prs.remarkList prk"
                 + " left join fetch prk.elementList pr"
-                + " WHERE wr.id = :id ORDER BY prk.id");
+                + " WHERE wr.id = :id");
             query.setParameter("id", key);
             return (WebResource) query.getSingleResult();
         } catch (NoResultException nre) {

@@ -56,7 +56,6 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
     public Collection<ProcessResult> getResultByScopeList(WebResource webresource, Scope scope) {
         Query query = entityManager.createQuery("SELECT pr FROM "
                 + getDefitiniteResultClass().getName() + " pr "
-                + " left join fetch pr.remarkList rl"
                 + " WHERE "+
                 "pr.subject = :webresource AND " +
                 "pr.test.scope = :scope");
