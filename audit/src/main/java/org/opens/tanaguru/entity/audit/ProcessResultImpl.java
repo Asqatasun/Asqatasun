@@ -66,12 +66,12 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     }
 
     @Override
-    public void addAllRemark(Collection<? extends ProcessRemark> remarkList) {
-        if (remarkList == null) {
+    public void addAllRemark(Collection<? extends ProcessRemark> remarkSet) {
+        if (remarkSet == null) {
             return;
         }
 
-        for (ProcessRemark remark : remarkList) {
+        for (ProcessRemark remark : remarkSet) {
             addRemark(remark);
         }
     }
@@ -85,7 +85,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     @Override
     public void addRemark(ProcessRemark remark) {
         remark.setProcessResult(this);
-        this.remarkList.add((ProcessRemarkImpl) remark);
+        remarkList.add((ProcessRemarkImpl) remark);
     }
 
     @Override
@@ -125,7 +125,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.ProcessRemarkImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.SourceCodeRemarkImpl.class)})
-    public Collection<ProcessRemarkImpl> getRemarkList() {
+    public Collection<ProcessRemarkImpl> getRemarkSet() {
         return remarkList;
     }
 
@@ -178,11 +178,11 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     }
 
     @Override
-    public void setRemarkList(Collection<? extends ProcessRemark> remarkList) {
-        for (ProcessRemark processRemark : remarkList) {
+    public void setRemarkSet(Collection<? extends ProcessRemark> remarkSet) {
+        for (ProcessRemark processRemark : remarkSet) {
             processRemark.setProcessResult(this);
         }
-        this.remarkList = (Set<ProcessRemarkImpl>) remarkList;
+        this.remarkList = (Set<ProcessRemarkImpl>) remarkSet;
     }
 
     @Override

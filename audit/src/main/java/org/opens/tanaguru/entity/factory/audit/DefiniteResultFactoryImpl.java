@@ -1,6 +1,6 @@
 package org.opens.tanaguru.entity.factory.audit;
 
-import java.util.List;
+import java.util.Collection;
 import org.opens.tanaguru.entity.audit.DefiniteResult;
 import org.opens.tanaguru.entity.audit.DefiniteResultImpl;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
@@ -30,12 +30,12 @@ public class DefiniteResultFactoryImpl implements DefiniteResultFactory {
     }
 
     public DefiniteResult create(Test test, WebResource subject,
-            TestSolution value, List<ProcessRemark> remarkList) {
+            TestSolution value, Collection<ProcessRemark> remarkSet) {
         DefiniteResult definiteResult = this.create();
         definiteResult.setTest(test);
         definiteResult.setSubject(subject);
         definiteResult.setDefiniteValue(value);
-        definiteResult.addAllRemark(remarkList);
+        definiteResult.addAllRemark(remarkSet);
         return definiteResult;
     }
 }

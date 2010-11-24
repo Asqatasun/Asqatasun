@@ -1,6 +1,7 @@
 package org.opens.tanaguru.service;
 
 
+import java.util.Collection;
 import java.util.List;
 import org.opens.tanaguru.contentadapter.css.CSSOMRule;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
@@ -99,7 +100,7 @@ public interface ProcessRemarkService {
      * @param evidenceElementList
      */
     void addProcessRemark(TestSolution processResult,
-            String messageCode, List<EvidenceElement> evidenceElementList);
+            String messageCode, Collection<EvidenceElement> evidenceElementList);
 
     /**
      *
@@ -117,7 +118,7 @@ public interface ProcessRemarkService {
      * @return
      */
     ProcessRemark createProcessRemark(TestSolution processResult,
-            String messageCode, List<EvidenceElement> evidenceElementList);
+            String messageCode, Collection<EvidenceElement> evidenceElementList);
 
     /**
      * 
@@ -145,7 +146,7 @@ public interface ProcessRemarkService {
      * @return
      *          the list of remarks created by the service
      */
-    List<ProcessRemark> getRemarkList();
+    Collection<ProcessRemark> getRemarkList();
 
     /**
      *
@@ -165,7 +166,7 @@ public interface ProcessRemarkService {
      *
      * @param element
      */
-    void setEvidenceElementList (List<String> element);
+    void setEvidenceElementList (Collection<String> element);
 
     /**
      *

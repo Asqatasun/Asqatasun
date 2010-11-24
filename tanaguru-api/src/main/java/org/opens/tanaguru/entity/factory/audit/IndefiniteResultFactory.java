@@ -5,7 +5,7 @@ import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.subject.WebResource;
 import com.adex.sdk.entity.factory.GenericFactory;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * 
@@ -40,5 +40,5 @@ public interface IndefiniteResultFactory extends
      * @return a new instance of IndefiniteResult
      */
     IndefiniteResult create(Test test, WebResource subject, String value,
-            List<ProcessRemark> remarkList);
+            Collection<ProcessRemark> remarkList);
 }

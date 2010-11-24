@@ -216,7 +216,7 @@ public interface DOMHandler {
      *
      * @return the remarks
      */
-    List<ProcessRemark> getRemarkList();
+    Collection<ProcessRemark> getRemarkList();
 
     /**
      *

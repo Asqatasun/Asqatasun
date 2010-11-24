@@ -18,7 +18,7 @@ public interface ProcessResult extends Entity {
      * @param remarkList
      *            the remark list to add
      */
-    void addAllRemark(Collection<? extends ProcessRemark> remarkList);
+    void addAllRemark(Collection<? extends ProcessRemark> remarkSet);
 
     /**
      *
@@ -62,7 +62,7 @@ public interface ProcessResult extends Entity {
      *
      * @return the remark list
      */
-    Collection<? extends ProcessRemark> getRemarkList();
+    Collection<? extends ProcessRemark> getRemarkSet();
 
     /**
      *
@@ -121,7 +121,7 @@ public interface ProcessResult extends Entity {
      * @param remarkList
      *            the remark list to set
      */
-    void setRemarkList(Collection<? extends ProcessRemark> remarkList);
+    void setRemarkSet(Collection<? extends ProcessRemark> remarkList);
 
     /**
      *

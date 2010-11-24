@@ -4,10 +4,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,10 +55,10 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
         this.document = document;
     }
 
-    protected List<ProcessRemark> remarkList;
+    protected Set<ProcessRemark> remarkSet;
     @Override
-    public List<ProcessRemark> getRemarkList() {
-        return this.remarkList;
+    public Collection<ProcessRemark> getRemarkList() {
+        return this.remarkSet;
     }
 
     List<String> evidenceElementList = new ArrayList<String>();
@@ -67,7 +70,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
     }
 
     @Override
-    public void setEvidenceElementList(List<String> element) {
+    public void setEvidenceElementList(Collection<String> element) {
         evidenceElementList.addAll(element);
     }
 
@@ -135,7 +138,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
     }
 
     private void initialize() {
-        remarkList = new ArrayList<ProcessRemark>();
+        remarkSet = new LinkedHashSet<ProcessRemark>();
         evidenceElementList = new ArrayList<String>();
     }
 
@@ -148,13 +151,13 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
 
     @Override
     public void addProcessRemark(TestSolution processResult, String messageCode) {
-        remarkList.add(processRemarkFactory.create(processResult,messageCode));
+        remarkSet.add(processRemarkFactory.create(processResult,messageCode));
     }
 
     @Override
     public void addSourceCodeRemark(TestSolution processResult, Node node,
             String messageCode, String attributeName) {
-        remarkList.add(createSourceCodeRemark(
+        remarkSet.add(createSourceCodeRemark(
                 processResult,
                 node,
                 messageCode,
@@ -176,7 +179,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
             remark.addElement(element);
             element.setProcessRemark(remark);
         }
-        remarkList.add(remark);
+        remarkSet.add(remark);
     }
 
     @Override
@@ -214,7 +217,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
         } catch (ClassCastException ex) {
             Logger.getLogger(DOMHandlerImpl.class.getName()).log(Level.WARNING, null, ex);
         }
-        remarkList.add(remark);
+        remarkSet.add(remark);
     }
 
     @Override
@@ -370,7 +373,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
             String messageCode, 
             String value,
             String url) {
-        remarkList.add(createConsolidationRemark(
+        remarkSet.add(createConsolidationRemark(
                 processResult,
                 messageCode,
                 value,
@@ -381,8 +384,8 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
     public void addProcessRemark(
             TestSolution processResult,
             String messageCode,
-            List<EvidenceElement> evidenceElementList) {
-        remarkList.add(createProcessRemark(
+            Collection<EvidenceElement> evidenceElementList) {
+        remarkSet.add(createProcessRemark(
                 processResult,
                 messageCode,
                 evidenceElementList));
@@ -392,7 +395,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
     public ProcessRemark createProcessRemark(
             TestSolution processResult,
             String messageCode,
-            List<EvidenceElement> evidenceElementList) {
+            Collection<EvidenceElement> evidenceElementList) {
         ProcessRemark remark = processRemarkFactory.create();
         remark.setIssue(processResult);
         remark.setMessageCode(messageCode);

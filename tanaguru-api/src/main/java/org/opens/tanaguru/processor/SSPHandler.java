@@ -225,7 +225,7 @@ public interface SSPHandler {
      *
      * @return the remark list
      */
-    List<ProcessRemark> getRemarkList();
+    Collection<ProcessRemark> getRemarkList();
 
     /**
      *

@@ -581,7 +581,7 @@ public class DOMHandlerImpl implements DOMHandler {
     }
 
     @Override
-    public List<ProcessRemark> getRemarkList() {
+    public Collection<ProcessRemark> getRemarkList() {
         return processRemarkService.getRemarkList();
     }
 

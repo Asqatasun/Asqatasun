@@ -201,7 +201,7 @@ public class SSPHandlerImpl implements SSPHandler {
     }
 
     @Override
-    public List<ProcessRemark> getRemarkList() {
+    public Collection<ProcessRemark> getRemarkList() {
         return processRemarkService.getRemarkList();
     }
 

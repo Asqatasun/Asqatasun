@@ -1,6 +1,6 @@
 package org.opens.tanaguru.entity.factory.audit;
 
-import java.util.List;
+import java.util.Collection;
 import org.opens.tanaguru.entity.audit.IndefiniteResult;
 import org.opens.tanaguru.entity.audit.IndefiniteResultImpl;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
@@ -30,7 +30,7 @@ public class IndefiniteResultFactoryImpl implements IndefiniteResultFactory {
     }
 
     public IndefiniteResult create(Test test, WebResource subject,
-            String value, List<ProcessRemark> remarkList) {
+            String value, Collection<ProcessRemark> remarkList) {
         IndefiniteResult instance = this.create();
         instance.setTest(test);
         instance.setSubject(subject);

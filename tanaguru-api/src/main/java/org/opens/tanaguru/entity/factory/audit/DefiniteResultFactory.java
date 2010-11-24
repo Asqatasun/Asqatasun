@@ -6,7 +6,7 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.subject.WebResource;
 import com.adex.sdk.entity.factory.GenericFactory;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * 
@@ -38,5 +38,5 @@ public interface DefiniteResultFactory extends GenericFactory<DefiniteResult> {
      * @return a new instance of DefiniteResult
      */
     public DefiniteResult create(Test test, WebResource subject,
-            TestSolution value, List<ProcessRemark> remarkList);
+            TestSolution value, Collection<ProcessRemark> remarkSet);
 }
