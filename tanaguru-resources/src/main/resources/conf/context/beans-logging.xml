@@ -9,11 +9,11 @@
 
     <aop:config>
         <aop:aspect ref="eaLoggerComponent">
-            <!--<aop:pointcut id="servicePointcut" expression="execution(* org.opens.tanaguru.service..*.*(..)) || execution(* org.opens.tanaguru.entity.dao..*.*(..))" />-->
-            <!--<aop:pointcut id="servicePointcut" expression="bean(*DAO) || bean(*Service) || bean(*Component)"/>-->
+            <!--<aop:pointcut id="servicePointcut" expression="execution(* org.opens.tanaguru.service..*.*(..)) || execution(* org.opens.tanaguru.entity.dao..*.*(..))" />
+            <aop:pointcut id="servicePointcut" expression="bean(*DAO) || bean(*Service) || bean(*Component)"/>-->
             <aop:pointcut id="servicePointcut" expression="bean(*DAO) || bean(*Service)"/>
-            <aop:before method="logMethodEntry" pointcut-ref="servicePointcut"/>
-            <aop:after-returning method="logMethodExit" returning="result" pointcut-ref="servicePointcut"/>
+            <!--<aop:before method="logMethodEntry" pointcut-ref="servicePointcut"/>
+            <aop:after-returning method="logMethodExit" returning="result" pointcut-ref="servicePointcut"/>-->
             <aop:after-throwing method="logException" throwing="exception" pointcut-ref="servicePointcut"/>
         </aop:aspect>
     </aop:config>
