@@ -8,6 +8,7 @@
     <bean id="evidenceElementFactory" class="org.opens.tanaguru.entity.factory.audit.EvidenceElementFactoryImpl"/>
     <bean id="evidenceFactory" class="org.opens.tanaguru.entity.factory.audit.EvidenceFactoryImpl"/>
     <bean id="indefiniteResultFactory" class="org.opens.tanaguru.entity.factory.audit.IndefiniteResultFactoryImpl"/>
+    <bean id="levelFactory" class="org.opens.tanaguru.entity.factory.reference.LevelFactoryImpl"/>
     <bean id="processRemarkFactory" class="org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactoryImpl"/>
     <bean id="processResultFactory" class="org.opens.tanaguru.entity.factory.audit.ProcessResultFactoryImpl"/>
     <bean id="scopeFactory" class="org.opens.tanaguru.entity.factory.reference.ScopeFactoryImpl"/>
