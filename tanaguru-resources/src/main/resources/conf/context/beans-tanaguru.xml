@@ -51,6 +51,12 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         <property name="entityDao" ref="scopeDAO"/>
     </bean>
 
+    <bean id="levelDAO" class="org.opens.tanaguru.entity.dao.reference.LevelDAOImpl"/>
+    <bean id="levelDataService" class="org.opens.tanaguru.entity.service.reference.LevelDataServiceImpl">
+        <property name="entityFactory" ref="levelFactory"/>
+        <property name="entityDao" ref="levelDAO"/>
+    </bean>
+
     <bean id="evidenceDAO" class="org.opens.tanaguru.entity.dao.audit.EvidenceDAOImpl"/>
     <bean id="evidenceDataService" class="org.opens.tanaguru.entity.service.audit.EvidenceDataServiceImpl">
         <property name="entityFactory" ref="evidenceFactory"/>

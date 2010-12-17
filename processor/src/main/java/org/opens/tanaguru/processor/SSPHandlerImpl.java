@@ -554,4 +554,14 @@ public class SSPHandlerImpl implements SSPHandler {
         return cssHandler.getCssSelectorNumber();
     }
 
+    @Override
+    public String getMessageCode() {
+        return domHandler.getMessageCode();
+    }
+
+    @Override
+    public void setMessageCode(String messageCode) {
+        domHandler.setMessageCode(messageCode);
+    }
+
 }

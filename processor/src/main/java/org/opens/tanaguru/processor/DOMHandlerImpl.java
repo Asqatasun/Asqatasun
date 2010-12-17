@@ -37,6 +37,8 @@ import org.xml.sax.SAXException;
 
 public class DOMHandlerImpl implements DOMHandler {
 
+    private static final String ATTRIBUTE_MISSING_MSG_CODE = "AttributeMissing";
+    private static final String CHILD_NODE_MISSING_MSG_CODE ="ChildNodeMissing";
     protected Document document;
     private boolean initialized = false;
     protected List<Node> selectedElementList;
@@ -48,6 +50,18 @@ public class DOMHandlerImpl implements DOMHandler {
 //            Pattern.compile("[\\W_]+");
 
     protected ProcessRemarkService processRemarkService;
+
+    /**
+     * The message code defined by the user
+     */
+    private String messageCode;
+    public String getMessageCode() {
+        return messageCode;
+    }
+
+    public void setMessageCode(String messageCode) {
+        this.messageCode = messageCode;
+    }
 
     public DOMHandlerImpl() {
         super();
@@ -77,6 +91,9 @@ public class DOMHandlerImpl implements DOMHandler {
 
     @Override
     public TestSolution checkAttributeExists(String attributeName) {
+        if (messageCode == null) {
+            messageCode = ATTRIBUTE_MISSING_MSG_CODE;
+        }
         Set<TestSolution> resultSet = new HashSet<TestSolution>();
         for (Node workingElement : selectedElementList) {
             TestSolution processResult = TestSolution.PASSED;
@@ -85,7 +102,7 @@ public class DOMHandlerImpl implements DOMHandler {
             if (attribute == null) {
                 processResult = TestSolution.FAILED;
                 addSourceCodeRemark(processResult, workingElement,
-                        "AttributeMissing", attributeName);
+                        messageCode, attributeName);
             }
             resultSet.add(processResult);
         }
@@ -176,6 +193,9 @@ public class DOMHandlerImpl implements DOMHandler {
 
     @Override
     public TestSolution checkChildNodeExists(String childNodeName) {
+        if (messageCode == null) {
+            messageCode = CHILD_NODE_MISSING_MSG_CODE;
+        }
         Set<TestSolution> resultSet = new HashSet<TestSolution>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.PASSED;
@@ -190,7 +210,7 @@ public class DOMHandlerImpl implements DOMHandler {
             }
             if (!found) {
                 result = TestSolution.FAILED;
-                addSourceCodeRemark(result, workingElement, "ChildNodeMissing",
+                addSourceCodeRemark(result, workingElement, messageCode,
                         childNodeName);
             }
             resultSet.add(result);
@@ -608,7 +628,7 @@ public class DOMHandlerImpl implements DOMHandler {
         if (initialized) {
             return;
         }
-
+        messageCode = null;
         XPathFactory xPathfactory = XPathFactory.newInstance();
         xpath = xPathfactory.newXPath();
 

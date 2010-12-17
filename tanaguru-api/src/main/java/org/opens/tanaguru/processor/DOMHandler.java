@@ -452,4 +452,16 @@ public interface DOMHandler {
      * @param processRemarkService
      */
     public void setProcessRemarkService (ProcessRemarkService processRemarkService);
+
+    /**
+     *
+     * @return the message code
+     */
+    public String getMessageCode();
+
+    /**
+     *
+     * @param messageCode
+     */
+    public void setMessageCode(String messageCode);
 }

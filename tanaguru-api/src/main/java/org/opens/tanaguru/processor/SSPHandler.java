@@ -488,4 +488,16 @@ public interface SSPHandler {
      * @return the processRemarkService
      */
     public ProcessRemarkService getProcessRemarkService ();
+
+    /**
+     *
+     * @return the message code
+     */
+    public String getMessageCode();
+
+    /**
+     *
+     * @param messageCode
+     */
+    public void setMessageCode(String messageCode);
 }

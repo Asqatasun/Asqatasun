@@ -304,19 +304,14 @@ public class AuditServiceImpl implements AuditService {
             audit.getSubject().setMark(analyserService.analyse((List<ProcessResult>) audit.getNetResultList()));
         } else if (audit.getSubject() instanceof Site) {
             audit.getSubject().setMark(analyserService.analyse((List<ProcessResult>) audit.getNetResultList()));
-            Logger.getLogger(AuditServiceImpl.class).info("site score  " + audit.getSubject().getMark());
-            Logger.getLogger(AuditServiceImpl.class).info("nombre de composants  " + ((Site)audit.getSubject()).getComponentList().size());
             for (WebResource webresource : ((Site)audit.getSubject()).getComponentList()) {
                 List<ProcessResult> webResourceNetResultList = new ArrayList<ProcessResult>();
-                Logger.getLogger(AuditServiceImpl.class).info("webresource nb of processResult elements  " + webresource.getProcessResultList().size());
                 for (ProcessResult processResult : audit.getNetResultList()) {
                     if (processResult instanceof DefiniteResult && processResult.getSubject().equals(webresource)) {
                         webResourceNetResultList.add(processResult);
                     }
                 }
-                
                 webresource.setMark(analyserService.analyse(webResourceNetResultList));
-                Logger.getLogger(AuditServiceImpl.class).info("page score  " + webresource.getMark());
             }
         }
 
