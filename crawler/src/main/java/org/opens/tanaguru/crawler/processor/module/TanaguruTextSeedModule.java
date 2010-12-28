@@ -33,7 +33,7 @@ import org.springframework.beans.factory.annotation.Required;
  *
  * @author jkowalczyk
  */
-public abstract class TanaguruTextSeedModule extends TanaguruSeedModule implements ReadSource {
+public class TanaguruTextSeedModule extends TanaguruSeedModule implements ReadSource {
 
     private static final long serialVersionUID = 3L;
 
