@@ -1,6 +1,5 @@
 package org.opens.tanaguru.service;
 
-import org.apache.log4j.Logger;
 import org.opens.tanaguru.crawler.Crawler;
 import org.opens.tanaguru.crawler.CrawlerImpl;
 import org.opens.tanaguru.entity.subject.Page;
@@ -8,18 +7,27 @@ import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
 
 /**
- * This is a mock implementation.
+ * Implementation of the crawler service.
  *
  * @author ADEX
  */
 public class CrawlerServiceImpl implements CrawlerService {
 
     private Crawler crawler;
+    public Crawler getCrawler() {
+        return crawler;
+    }
+
+    @Override
+    public void setCrawler(Crawler crawler) {
+        this.crawler = crawler;
+    }
 
     public CrawlerServiceImpl() {
         super();
     }
 
+    @Override
     public Page crawl(Page page) {
         crawler.setPageURL(page.getURL());
         crawler.run();
@@ -34,15 +42,12 @@ public class CrawlerServiceImpl implements CrawlerService {
         return page;
     }
 
-    public void setCrawler(Crawler crawler) {
-        this.crawler = crawler;
-    }
-
     /**
      * Calls the crawler component process then updates the site.
      * @param site the site to crawl
      * @return returns the site after modification
      */
+    @Override
     public Site crawl(Site site) {
         int componentListSize = site.getComponentList().size();
         if (componentListSize == 0) {
@@ -60,10 +65,6 @@ public class CrawlerServiceImpl implements CrawlerService {
         crawler.run();
         ((Site)crawler.getResult()).setAudit(site.getAudit());
         site = (Site) crawler.getResult();
-//        site.addAllChild((Collection<WebResource>) result.getComponentList());
-//        for (WebResource webResource : site.getComponentList()) {
-//            webResource.setAudit(site.getAudit());
-//        }
         // The crawler component gets the webResources AND the associated contents
         if (crawler instanceof CrawlerImpl){
             site.getAudit().addAllContent(

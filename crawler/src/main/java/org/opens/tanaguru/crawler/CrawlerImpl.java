@@ -45,7 +45,7 @@ public class CrawlerImpl implements Crawler {
 
     private WebResource webResource;
     private File currentJobOutputDir;
-    private String heritrixFileName = "tanaguru-crawler-beans.cxml";
+    private String heritrixFileName = "tanaguru-crawler-beans.xml";
     private CrawlJob crawlJob;
     private List<Content> contentList = new ArrayList<Content>();
 
@@ -228,7 +228,7 @@ public class CrawlerImpl implements Crawler {
 
             String c;
             String uri;
-            StringBuffer newContextFile = new StringBuffer();
+            StringBuilder newContextFile = new StringBuilder();
             while ((c = in.readLine()) != null) {
                 if (c.equalsIgnoreCase(urlStrToReplace)) {
                     for (int i=0 ; i<url.length ; i++) {
@@ -429,18 +429,18 @@ public class CrawlerImpl implements Crawler {
                 } else {
                     uri.append("");
                 }
-                String sourceCode = null;
+                StringBuilder sourceCode = new StringBuilder();
                 if (ssp.getSource() != null) {
-                    sourceCode = new String (ssp.getSource());
+                    sourceCode.append(ssp.getSource());
                 }
                 Content htmlContent = contentFactory.createSSP(
                         new Date(),
                         uri.toString(),
-                        sourceCode,
+                        sourceCode.toString(),
                         (Page)retrieveWebResource(ssp.getPage()),
                         ssp.getHttpStatusCode());
                 if (ssp.getCharset() != null) {
-                    StringBuffer charset = new StringBuffer();
+                    StringBuilder charset = new StringBuilder();
                     charset.append(ssp.getCharset());
                     ((SSP)htmlContent).setCharset(charset.toString());
                 }
@@ -454,15 +454,15 @@ public class CrawlerImpl implements Crawler {
                 } else {
                     uri.append("");
                 }
-                String sourceCode = null;
+                StringBuilder sourceCode = new StringBuilder();
                 if (stylesheetContent.getSource() != null) {
-                    sourceCode = new String (stylesheetContent.getSource());
+                    sourceCode.append(stylesheetContent.getSource());
                 }
                 Content cssContent = contentFactory.createStylesheetContent(
                         new Date(),
                         uri.toString(),
                         null,
-                        sourceCode,
+                        sourceCode.toString(),
                         stylesheetContent.getHttpStatusCode());
                 localContentList.add(cssContent);
             } else if (contentToCopy instanceof ImageContent) {
