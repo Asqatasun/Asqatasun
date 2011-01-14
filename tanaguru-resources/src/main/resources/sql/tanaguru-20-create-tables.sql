@@ -85,7 +85,9 @@ CREATE TABLE `CRITERION` (
   PRIMARY KEY  (`Id_Criterion`),
   KEY `FKBCFA1E81DA004892` (`Reference_Id_Reference`),
   KEY `FKBCFA1E81D667448E` (`Theme_Id_Theme`)
-) DEFAULT CHARACTER SET utf8;
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET utf8;
 
 --
 -- Table structure for table `DECISION_LEVEL`
@@ -97,7 +99,9 @@ CREATE TABLE `DECISION_LEVEL` (
   `Description` varchar(255) default NULL,
   `Label` varchar(255) NOT NULL,
   PRIMARY KEY  (`Id_Decision_Level`)
-) DEFAULT CHARACTER SET utf8;
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET utf8;
 
 --
 -- Table structure for table `LEVEL`
@@ -110,7 +114,9 @@ CREATE TABLE `LEVEL` (
   `Label` varchar(255) default NULL,
   `Rank` int(11) default NULL,
   PRIMARY KEY  (`Id_Level`)
-) DEFAULT CHARACTER SET utf8;
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET utf8;
 
 --
 -- Table structure for table `NOMENCLATURE`
@@ -124,7 +130,9 @@ CREATE TABLE `NOMENCLATURE` (
   `Id_Nomenclature_Parent` bigint(20) default NULL,
   PRIMARY KEY  (`Id_Nomenclature`),
   KEY `FKBF856B7795431825` (`Id_Nomenclature_Parent`)
-) DEFAULT CHARACTER SET utf8;
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET utf8;
 
 --
 -- Table structure for table `NOMENCLATURE_ELEMENT`
@@ -137,7 +145,9 @@ CREATE TABLE `NOMENCLATURE_ELEMENT` (
   `Id_Nomenclature` bigint(20) default NULL,
   PRIMARY KEY  (`Id_Nomenclature_Element`),
   KEY `FK44F856145FAB5EF2` (`Id_Nomenclature`)
-) DEFAULT CHARACTER SET utf8;
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET utf8;
 
 --
 -- Table structure for table `EVIDENCE`
@@ -148,7 +158,9 @@ CREATE TABLE `EVIDENCE` (
   `Description` varchar(255) default NULL,
   `Long_Label` varchar(255) default NULL,
   PRIMARY KEY  (`Id_Evidence`)
-) DEFAULT CHARACTER SET utf8;
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET utf8;
 
 --
 -- Table structure for table `EVIDENCE_ELEMENT`
@@ -161,7 +173,9 @@ CREATE TABLE `EVIDENCE_ELEMENT` (
   PRIMARY KEY  (`Id_Evidence_Element`),
   KEY `FK_EVIDENCE_ELEMENT_PROCESS_REMARK` (`PROCESS_REMARK_Id_Process_Remark`),
   KEY `FK_EVIDENCE_ELEMENT_EVIDENCE` (`EVIDENCE_Id_Evidence`)
-) DEFAULT CHARACTER SET utf8;
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET utf8;
 
 --
 -- Table structure for table `PROCESS_REMARK`
@@ -180,7 +194,9 @@ CREATE TABLE `PROCESS_REMARK` (
   `Id_Process_Result` bigint(20) default NULL,
   PRIMARY KEY  (`Id_Process_Remark`),
   KEY `FK1C3EA37045A988AD` (`Id_Process_Result`)
-) DEFAULT CHARACTER SET utf8;
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET utf8;
 
 --
 -- Table structure for table `PROCESS_RESULT`
@@ -204,7 +220,9 @@ CREATE TABLE `PROCESS_RESULT` (
   KEY `FK1C41A80D2E48600` (`Id_Web_Resource`),
   KEY `FK1C41A80DA17A5FA8` (`Id_Test`),
   KEY `FK1C41A80DB6D0E092` (`Id_Audit_Net_Result`)
-) DEFAULT CHARACTER SET utf8;
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET utf8;
 
 --
 -- Table structure for table `REFERENCE`
@@ -217,7 +235,9 @@ CREATE TABLE `REFERENCE` (
   `Url` varchar(255) NOT NULL,
   `Rank` int(11) default NULL,
   PRIMARY KEY  (`Id_Reference`)
-) DEFAULT CHARACTER SET utf8;
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET utf8;
 
 --
 -- Table structure for table `RULE`
@@ -229,7 +249,9 @@ CREATE TABLE `RULE` (
   `Id_Rule_Package` bigint(20) default NULL,
   PRIMARY KEY  (`Id_Rule`),
   KEY `FK268EFCADFA0F1` (`Id_Rule_Package`)
-) DEFAULT CHARACTER SET utf8;
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET utf8;
 
 --
 -- Table structure for table `RULE_PACKAGE`
@@ -239,7 +261,9 @@ CREATE TABLE `RULE_PACKAGE` (
   `Description` varchar(255) default NULL,
   `Package_Name` varchar(255) default NULL,
   PRIMARY KEY  (`Id_Rule_Package`)
-) DEFAULT CHARACTER SET utf8;
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET utf8;
 
 --
 -- Table structure for table `SCOPE`
@@ -251,7 +275,9 @@ CREATE TABLE `SCOPE` (
   `Description` varchar(255) default NULL,
   `Label` varchar(255) NOT NULL,
   PRIMARY KEY  (`Id_Scope`)
-) DEFAULT CHARACTER SET utf8;
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET utf8;
 
 --
 -- Table structure for table `STANDARD_MESSAGE`
@@ -263,7 +289,9 @@ CREATE TABLE `STANDARD_MESSAGE` (
   `Label` varchar(255) default NULL,
   `Text` varchar(255) default NULL,
   PRIMARY KEY  (`Id_Standard_Message`)
-) DEFAULT CHARACTER SET utf8;
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET utf8;
 
 --
 -- Table structure for table `TEST`
@@ -289,7 +317,9 @@ CREATE TABLE `TEST` (
   KEY `FK273C926CCA4C3E` (`Id_Criterion`),
   KEY `FK273C921355BF7C` (`Id_Rule`),
   KEY `FK273C92CCA757AD` (`Id_Decision_Level`)
-) DEFAULT CHARACTER SET utf8;
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET utf8;
 
 --
 -- Table structure for table `THEME`
@@ -302,7 +332,9 @@ CREATE TABLE `THEME` (
   `Label` varchar(255) NOT NULL,
   `Rank` int(11) default NULL,
   PRIMARY KEY  (`Id_Theme`)
-) DEFAULT CHARACTER SET utf8;
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET utf8;
 
 --
 -- Table structure for table `WEB_RESOURCE`
@@ -319,7 +351,9 @@ CREATE TABLE `WEB_RESOURCE` (
   PRIMARY KEY  (`Id_Web_Resource`),
   KEY `FKD9A970B9493EC9C2` (`Id_Audit`),
   KEY `FKD9A970B92F70FF12` (`Id_Web_Resource_Parent`)
-) DEFAULT CHARACTER SET utf8;
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET utf8;
 
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
