@@ -45,7 +45,8 @@ public class CrawlerImpl implements Crawler {
 
     private WebResource webResource;
     private File currentJobOutputDir;
-    private String heritrixFileName = "tanaguru-crawler-beans.xml";
+    private String heritrixSiteFileName = "tanaguru-crawler-beans-site.xml";
+    private String heritrixPageFileName = "tanaguru-crawler-beans-page.xml";
     private CrawlJob crawlJob;
     private List<Content> contentList = new ArrayList<Content>();
 
@@ -124,7 +125,7 @@ public class CrawlerImpl implements Crawler {
     public void setSiteURL(String siteURL) {
         webResource = webResourceFactory.createSite(siteURL);
         String[] siteUrl = {siteURL};
-        this.crawlJob = new CrawlJob(initializeCrawlContext(siteUrl));
+        this.crawlJob = new CrawlJob(initializeCrawlContext(siteUrl, heritrixSiteFileName));
         if (crawlJob.isLaunchable()) {
             crawlJob.checkXML();
         }
@@ -137,7 +138,7 @@ public class CrawlerImpl implements Crawler {
     @Override
     public void setSiteURL(String siteName, String[] siteURL) {
         webResource = webResourceFactory.createSite(siteName);
-        this.crawlJob = new CrawlJob(initializeCrawlContext(siteURL));
+        this.crawlJob = new CrawlJob(initializeCrawlContext(siteURL, heritrixPageFileName));
         if (crawlJob.isLaunchable()) {
             crawlJob.checkXML();
         }
@@ -151,7 +152,7 @@ public class CrawlerImpl implements Crawler {
     public void setPageURL(String pageURL) {
         webResource = webResourceFactory.createPage(pageURL);
         String[] pageUrl = {pageURL};
-        this.crawlJob = new CrawlJob(initializeCrawlContext(pageUrl));
+        this.crawlJob = new CrawlJob(initializeCrawlContext(pageUrl,heritrixPageFileName));
         if (crawlJob.isLaunchable()) {
             crawlJob.checkXML();
         }
@@ -210,7 +211,7 @@ public class CrawlerImpl implements Crawler {
      * This method initialize the heritrix context before starting the crawl
      * @return
      */
-    private File initializeCrawlContext(String[] url) {
+    private File initializeCrawlContext(String[] url, String heritrixFileName) {
         // Create one directory
         currentJobOutputDir = new File(outputDir + "/" + "crawl" + "-" + new Date().getTime());
         if (!currentJobOutputDir.exists()) {
