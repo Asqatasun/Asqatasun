@@ -71,7 +71,7 @@
       ConfigString allows simple, inline specification of a moderate
       number of seeds; see below comment for example of using an
       arbitrarily-large external file. -->
-    <bean id="seeds" class="org.archive.modules.seeds.TextSeedModule">
+    <bean id="seeds" class="org.opens.tanaguru.crawler.processor.module.TanaguruTextSeedModule">
         <property name="textSource">
             <bean class="org.archive.spring.ConfigString">
                 <property name="value">
@@ -96,9 +96,6 @@
                 <!-- ...then ACCEPT those within configured/seed-implied SURT prefixes... -->
                 <bean class="org.archive.modules.deciderules.surt.SurtPrefixedDecideRule">
                     <property name="seedsAsSurtPrefixes" value="true" />
-                    <!--property name="alsoCheckVia" value="true" />
-                    <property name="surtsSourceFile" value="" />
-                    <property name="surtsDumpFile" value="surts.dump" /-->
                 </bean>
 
                 <bean class="org.archive.modules.deciderules.TooManyHopsDecideRule">
@@ -111,20 +108,8 @@
                     <property name="maxSpeculativeHops" value="0" />
                 </bean>
 
-                <!-- ...and REJECT those from a configurable (initially empty) set of URI regexes... -->
-                <bean class="org.archive.modules.deciderules.NotMatchesListRegexDecideRule">
-                    <property name="decision" value="REJECT"/>
-                    <property name="listLogicalOr" value="true" />
-                    <property name="regexList">
-                        <list>
-                            <value>.*(?i)(/|\.htm|\.html|\.php|\.asp|\.aspx|\.jsp|\.do)$</value>
-                        </list>
-                    </property>
-                </bean>
-
                 <bean class="org.archive.modules.deciderules.surt.NotOnDomainsDecideRule">
                     <property name="decision" value="REJECT"/>
-                    <property name="surtsDumpFile" value="/tmp/surts.dump" />
                 </bean>
 
                 <!-- ...and REJECT those with suspicious repeating path-segments... -->
@@ -134,7 +119,22 @@
 
                 <!-- ...and REJECT those with more than threshold number of path-segments... -->
                 <bean class="org.archive.modules.deciderules.TooManyPathSegmentsDecideRule">
-                    <property name="maxPathDepth" value="15" />
+                    <!--<property name="maxPathDepth" value="15" />-->
+                </bean>
+
+                <bean class="org.archive.modules.deciderules.MatchesListRegexDecideRule">
+                    <property name="decision" value="REJECT"/>
+                    <property name="listLogicalOr" value="true" />
+                    <property name="regexList">
+                        <list>
+                            <value>.*(?i)(\.(avi|wmv|mpe?g))$</value>
+                            <value>.*(?i)(\.(rar|zip|tar))$</value>
+                            <value>.*(?i)(\.(doc|xls|odd))$</value>
+                            <value>.*(?i)(\.(swf))$</value>
+                            <value>.*(?i)(\.(js))$</value>
+                            <value>.*(?i)(\.(bmp|gif|jpe?g|png|svg|tiff?))$</value>
+                        </list>
+                    </property>
                 </bean>
 
                 <bean class="org.archive.modules.deciderules.MatchesListRegexDecideRule">
@@ -143,7 +143,6 @@
                     <property name="regexList">
                         <list>
                             <value>.*(?i)(\.css(\?.*)?)$</value>
-                            <!--<value>.*(?i)(\.(bmp|gif|jpe?g|png|svg|tiff?))$</value>-->
                         </list>
                     </property>
                 </bean>
@@ -306,7 +305,7 @@
     <bean id="disposition" class="org.archive.crawler.postprocessor.DispositionProcessor">
         <!-- <property name="delayFactor" value="5.0" /> -->
         <property name="minDelayMs" value="0" />
-        <!-- <property name="respectCrawlDelayUpToSeconds" value="300" /> -->
+        <property name="respectCrawlDelayUpToSeconds" value="2" />
         <property name="maxDelayMs" value="1000" />
         <!-- <property name="maxPerHostBandwidthUsageKbSec" value="0" /> -->
     </bean>
@@ -350,7 +349,7 @@
             <bean class="org.archive.crawler.frontier.precedence.BaseQueuePrecedencePolicy" />
         </property> -->
         <property name="snoozeLongMs" value="0" />
-        <property name="retryDelaySeconds" value="0" />
+        <property name="retryDelaySeconds" value="1" />
         <property name="maxRetries" value="3" />
         <!-- <property name="recoveryDir" value="logs" /> -->
         <!-- <property name="recoveryLogEnabled" value="true" /> -->
