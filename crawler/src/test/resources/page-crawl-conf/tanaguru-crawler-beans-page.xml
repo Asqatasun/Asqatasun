@@ -65,12 +65,7 @@ metadata.description=Basic crawl starting with useful defaults
         <property name="operatorContactUrl" value="[see override above]"/>
         <property name="jobName" value="[see override above]"/>
         <property name="description" value="[see override above]"/>
-      <!-- <property name="operator" value=""/> -->
-      <!-- <property name="operatorFrom" value=""/> -->
-      <!-- <property name="organization" value=""/> -->
-      <!-- <property name="audience" value=""/> -->
-      <!-- <property name="userAgentTemplate"
-             value="Mozilla/5.0 (compatible; heritrix/3.1.1 +http://www.open-s.com)"/> -->
+        <property name="userAgentTemplate" value="Mozilla/5.0 (compatible; tanaguru/Beta5 +@OPERATOR_CONTACT_URL@)"/>
        
     </bean>
  
@@ -360,8 +355,8 @@ metadata.description=Basic crawl starting with useful defaults
     <bean id="disposition" class="org.archive.crawler.postprocessor.DispositionProcessor">
   <!-- <property name="delayFactor" value="5.0" /> -->
         <property name="minDelayMs" value="0" />
-  <!-- <property name="respectCrawlDelayUpToSeconds" value="300" /> -->
-        <property name="maxDelayMs" value="1000" />
+        <property name="respectCrawlDelayUpToSeconds" value="5" />
+        <property name="maxDelayMs" value="10" />
   <!-- <property name="maxPerHostBandwidthUsageKbSec" value="0" /> -->
   
     </bean>

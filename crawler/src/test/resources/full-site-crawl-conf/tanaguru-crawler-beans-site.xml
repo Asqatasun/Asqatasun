@@ -63,8 +63,7 @@
         <property name="operatorContactUrl" value="[see override above]"/>
         <property name="jobName" value="[see override above]"/>
         <property name="description" value="[see override above]"/>
-        <!-- <property name="userAgentTemplate"
-         value="Mozilla/5.0 (compatible; heritrix/3.1.1 +http://www.open-s.com)"/> -->
+        <property name="userAgentTemplate" value="Mozilla/5.0 (compatible; tanaguru/Beta5 +@OPERATOR_CONTACT_URL@)"/>
     </bean>
  
  <!-- SEEDS: crawl starting points 
@@ -268,7 +267,7 @@
                 <!-- ...then verify or trigger prerequisite URIs fetched, allow crawling... -->
                 <ref bean="preconditions"/>
                 <!-- ...fetch if DNS URI... -->
-                <ref bean="fetchDns"/>
+                 <ref bean="fetchDns"/> 
                 <!-- ...fetch if HTTP URI... -->
                 <ref bean="fetchHttp"/>
                 <!-- ...extract oulinks from HTTP headers... -->
@@ -306,7 +305,7 @@
         <!-- <property name="delayFactor" value="5.0" /> -->
         <property name="minDelayMs" value="0" />
         <property name="respectCrawlDelayUpToSeconds" value="2" />
-        <property name="maxDelayMs" value="1000" />
+        <property name="maxDelayMs" value="10" />
         <!-- <property name="maxPerHostBandwidthUsageKbSec" value="0" /> -->
     </bean>
 
@@ -331,8 +330,8 @@
         <property name="maxToeThreads" value="10" />
         <property name="pauseAtStart" value="false" />
         <property name="pauseAtFinish" value="false" />
-        <property name="recorderInBufferBytes" value="2097152" />
-        <property name="recorderOutBufferBytes" value="65536" />
+        <!-- <property name="recorderInBufferBytes" value="2097152" /> -->
+        <!-- <property name="recorderOutBufferBytes" value="65536" /> -->
         <!-- <property name="checkpointerPeriod" value="-1" /> -->
         <!-- <property name="scratchDir" value="scratchs" /> -->
         <!-- <property name="checkpointsDir" value="checkpoints" /> -->
