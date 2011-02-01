@@ -19,13 +19,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriter;
+import org.apache.log4j.Logger;
 import org.archive.io.GzippedInputStream;
-
 import org.archive.io.RecordingInputStream;
 import org.archive.modules.CrawlURI;
 import org.archive.modules.Processor;
@@ -40,6 +38,8 @@ import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
+import org.opens.tanaguru.entity.service.audit.ContentDataService;
+import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.WebResource;
 
@@ -48,14 +48,12 @@ Processor module that convert the results of successful fetches to
 tanaguru-like Web-Resources and Contents.
 @author jkowalczyk
  */
-@SuppressWarnings("unchecked")
 public class TanaguruWriterProcessor extends Processor
         implements ExtractorHTMLListener, ExtractorCSSListener {
 
-    private final Logger logger =
+    private static final int MAX_NB_OF_CONTENT_IN_MEMORY = 0;
+    private static final Logger LOGGER =
             Logger.getLogger(TanaguruWriterProcessor.class.getName());
-    private static final long serialVersionUID = 3L;
-    private WebResourceFactory webResourceFactory;
     private static final String UNREACHABLE_RESOURCE_STR =
             "Unreachable resource ";
     private static final String HTTP_PREFIX = "http";
@@ -63,13 +61,28 @@ public class TanaguruWriterProcessor extends Processor
     private static final String DEFAULT_CHARSET = "UTF-8";
     private static final int HTTP_SUCCESS_RETURN_CODE = 200;
     private static final int BYTE_BUFFER_SIZE = 1000;
-    private static final String DEFAULT_IMG_EXTENSION = "jpg";
-    //    private static final String CHARSET_DEFINITION_START =
-//          "<meta http-equiv=\"content-type\"";
-//    private static final char EQUAL_CHAR = '=';
-//    private static final char DOUBLE_QUOTE_CHAR = '"';
-//    private static final String CHARSET_STRING = "charset";
+    private static final String DEFAULT_IMG_EXTENSION = "jpg";    
+    private int counterBeforeSaveContent = 0;
 
+    private ContentDataService contentDataService;
+    /**
+     * Set the content data service
+     * @param contentDataService
+     */
+    public void setContentDataService(ContentDataService contentDataService) {
+        this.contentDataService = contentDataService;
+    }
+
+    private WebResourceDataService webResourceDataService;
+    /**
+     * set the webresource data service
+     * @param webResourceDataService
+     */
+    public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
+        this.webResourceDataService = webResourceDataService;
+    }
+
+    private WebResourceFactory webResourceFactory;
     /**
      * Set the webResource Factory
      * @param webResourceFactory
@@ -90,7 +103,7 @@ public class TanaguruWriterProcessor extends Processor
 
     public void setContentList(List<Content> contentList) {
         this.contentList = contentList;
-    }
+        }
 
     /**
      * 
@@ -181,14 +194,6 @@ public class TanaguruWriterProcessor extends Processor
         this.htmlRegexp = htmlRegexp;
     }
 
-//    /**
-//     *
-//     * @return the images file pattern
-//     */
-//    private Pattern getImageFilePattern() {
-//        return MatchesFilePatternDecideRule.Preset.IMAGES.getPattern();
-//    }
-
     /**
      * @param name Name of this processor.
      */
@@ -220,7 +225,7 @@ public class TanaguruWriterProcessor extends Processor
                     getContentTypeFromUnreacheableResource(curi.getCanonicalString());
             switch (resourceContentType) {
                 case css:
-                    logger.log(Level.FINEST,
+                    LOGGER.debug(
                             UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
                             + curi.getFetchStatus());
                     Content cssContent = contentFactory.createStylesheetContent(
@@ -232,8 +237,7 @@ public class TanaguruWriterProcessor extends Processor
                     contentList.add(cssContent);
                     break;
                 case html:
-                    logger.log(Level.FINEST,
-                            UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
+                    LOGGER.debug(UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
                             + curi.getFetchStatus());
                     Content htmlContent = contentFactory.createSSP(
                             new Date(),
@@ -244,8 +248,7 @@ public class TanaguruWriterProcessor extends Processor
                     contentList.add(htmlContent);
                     break;
                 case img:
-                    logger.log(Level.FINEST,
-                            UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
+                    LOGGER.debug(UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
                             + curi.getFetchStatus());
                     Content imgContent = contentFactory.createImageContent(
                             new Date(),
@@ -263,8 +266,7 @@ public class TanaguruWriterProcessor extends Processor
             return;
         }
         try {
-            logger.log(Level.FINEST,
-                    "Writing " + curi.getURI() + " : "
+            LOGGER.info("Writing " + curi.getURI() + " : "
                     + curi.getFetchStatus());
             if (curi.getContentType().contains(ContentType.html.getType())
                     && !curi.getURI().contains("robots.txt")) {
@@ -306,6 +308,13 @@ public class TanaguruWriterProcessor extends Processor
                         curi.getFetchStatus());
                 contentList.add(imgContent);
             }
+//            counterBeforeSaveContent++;
+//            if (counterBeforeSaveContent == MAX_NB_OF_CONTENT_IN_MEMORY) {
+//                webResourceDataService.saveOrUpdate(webResourceSet);
+//                webResourceSet.clear();
+//                contentDataService.saveOrUpdate(contentSet);
+//                contentSet.clear();
+//            }
         } catch (IOException e) {
             curi.getNonFatalFailures().add(e);
         }
@@ -331,8 +340,7 @@ public class TanaguruWriterProcessor extends Processor
             resultImageAsRawBytes = baos.toByteArray();
             baos.close();
         } catch (IOException ex) {
-            Logger.getLogger(TanaguruWriterProcessor.class.getName()).
-                    log(Level.SEVERE, null, ex);
+            LOGGER.info(ex.getMessage());
         }
         return resultImageAsRawBytes;
     }
@@ -464,9 +472,9 @@ public class TanaguruWriterProcessor extends Processor
 
         String encoding = detector.getDetectedCharset();
         if (encoding != null) {
-          logger.info("Detected encoding = " + encoding);
+          LOGGER.info("Detected encoding = " + encoding);
         } else {
-          logger.info("No encoding detected.");
+          LOGGER.info("No encoding detected.");
         }
 
         detector.reset();
@@ -475,34 +483,6 @@ public class TanaguruWriterProcessor extends Processor
         } else {
             return DEFAULT_CHARSET;
         }
-        
-//        BufferedReader br = new BufferedReader(new InputStreamReader(is));
-//        String line = null;
-//        try {
-//            while ((line = br.readLine()) != null) {
-//                line = line.trim().toLowerCase();
-//                if (line.startsWith(CHARSET_DEFINITION_START) &&
-//                    line.contains(CHARSET_STRING)) {
-//                    int begin = line.indexOf(EQUAL_CHAR, line.indexOf(CHARSET_STRING))+1;
-//                    int end = -1;
-//                    if (begin != -1) {
-//                        end = line.indexOf(DOUBLE_QUOTE_CHAR, begin);
-//                    }
-//                    if (end != -1 ) {
-//                        String charset = line.substring(begin, end).trim().
-//                                toUpperCase();
-//                        if (!charset.isEmpty() && isValidCharset(charset)) {
-//                            return charset;
-//                        } else {
-//                            return DEFAULT_CHARSET;
-//                        }
-//                    }
-//                }
-//            }
-//        } catch (IOException ex) {
-//            Logger.getLogger(CrawlerImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return DEFAULT_CHARSET;
     }
 
     /**

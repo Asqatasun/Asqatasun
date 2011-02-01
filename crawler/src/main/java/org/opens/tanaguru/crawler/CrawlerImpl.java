@@ -102,6 +102,7 @@ public class CrawlerImpl implements Crawler {
         return webResource.getURL();
     }
 
+    @Override
     public List<Content> getContentListResult() {
         return contentList;
     }

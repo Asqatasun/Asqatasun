@@ -1,7 +1,7 @@
 package org.opens.tanaguru.service;
 
+import org.apache.log4j.Logger;
 import org.opens.tanaguru.crawler.Crawler;
-import org.opens.tanaguru.crawler.CrawlerImpl;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -13,6 +13,7 @@ import org.opens.tanaguru.entity.subject.WebResource;
  */
 public class CrawlerServiceImpl implements CrawlerService {
 
+    private static final Logger LOGGER = Logger.getLogger(CrawlerServiceImpl.class);
     private Crawler crawler;
     public Crawler getCrawler() {
         return crawler;
@@ -33,12 +34,9 @@ public class CrawlerServiceImpl implements CrawlerService {
         crawler.run();
         ((Page)crawler.getResult()).setAudit(page.getAudit());
         page = (Page) crawler.getResult();
-
+        LOGGER.info(crawler.getClass());
         // The crawler component gets the webResources AND the associated contents
-        if (crawler instanceof CrawlerImpl){
-            page.getAudit().addAllContent(
-                    ((CrawlerImpl)crawler).getContentListResult());
-        }
+        page.getAudit().addAllContent(crawler.getContentListResult());
         return page;
     }
 
@@ -66,10 +64,7 @@ public class CrawlerServiceImpl implements CrawlerService {
         ((Site)crawler.getResult()).setAudit(site.getAudit());
         site = (Site) crawler.getResult();
         // The crawler component gets the webResources AND the associated contents
-        if (crawler instanceof CrawlerImpl){
-            site.getAudit().addAllContent(
-                    ((CrawlerImpl)crawler).getContentListResult());
-        }
+        site.getAudit().addAllContent(crawler.getContentListResult());
         return site;
     }
 
