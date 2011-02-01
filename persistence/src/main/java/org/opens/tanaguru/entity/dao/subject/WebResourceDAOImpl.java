@@ -59,6 +59,7 @@ public class WebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
                 + " left join fetch prk.elementList pr"
                 + " WHERE wr.id = :id");
             query.setParameter("id", key);
+//            query.setHint("org.hibernate.cacheable", "true");
             return (WebResource) query.getSingleResult();
         } catch (NoResultException nre) {
             return null;
