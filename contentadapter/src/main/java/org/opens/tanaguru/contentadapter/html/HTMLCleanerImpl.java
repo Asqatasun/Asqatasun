@@ -14,42 +14,41 @@ import org.opens.tanaguru.contentadapter.HTMLCleaner;
 
 public class HTMLCleanerImpl extends AbstractHTMLCleaner implements HTMLCleaner {
     static final String CORRECTOR_NAME = "HTMLCleaner";
+    private static final String XML_ATTRIBUTE = "xmlns:xml";
+    private static final String LANG_ATTRIBUTE = "xml:lang";
 
     public HTMLCleanerImpl() {
         super();
     }
 
+    @Override
     public void run() {
         try {
             HtmlCleaner cleaner = new HtmlCleaner();
-            TagNode node = cleaner.clean(dirtyHTML);
-            // to avoid SAX Fatal Error related to namespace
-            node.removeAttribute("xml:lang");
-            node.removeAttribute("xmlns:xml");
-            // node.removeAttribute("xml:lang");
             CleanerProperties props = cleaner.getProperties();
-
-            //XXX verify each property 
-//            props.setAdvancedXmlEscape(false);
-//            props.setAllowHtmlInsideAttributes(true);
+//            props.setAdvancedXmlEscape(true);
+//            props.setAllowHtmlInsideAttributes(false);
 //            props.setAllowMultiWordAttributes(true);
-//            props.setIgnoreQuestAndExclam(false);
+//            props.setIgnoreQuestAndExclam(true);
 //            props.setNamespacesAware(true);
-            props.setOmitComments(false);
-            props.setOmitDeprecatedTags(false);
-            props.setOmitDoctypeDeclaration(false);
-            props.setOmitHtmlEnvelope(false);
-            props.setOmitUnknownTags(false);
-            props.setOmitXmlDeclaration(false);
 //            props.setRecognizeUnicodeChars(true);
 //            props.setTranslateSpecialEntities(false);
 //            props.setTreatDeprecatedTagsAsContent(false);
 //            props.setTreatUnknownTagsAsContent(false);
-//            props.setUseCdataForScriptAndStyle(false);
 //            props.setUseEmptyElementTags(true);
-
+//            props.setOmitDeprecatedTags(false);
+//            props.setOmitHtmlEnvelope(false);
+//            props.setOmitUnknownTags(false);
+//            props.setOmitXmlDeclaration(false);
+            props.setOmitComments(true);
+            props.setOmitDoctypeDeclaration(false);
+            props.setUseCdataForScriptAndStyle(true);
+            // to avoid SAX Fatal Error related to namespace
+            TagNode node = cleaner.clean(dirtyHTML);
+            node.removeAttribute(LANG_ATTRIBUTE);
+            node.removeAttribute(XML_ATTRIBUTE);
             XmlSerializer serializer = new PrettyXmlSerializer(props);
-            result = serializer.getXmlAsString(node);
+            result = serializer.getAsString(node);
         } catch (IOException ex) {
             Logger.getLogger(HTMLCleanerImpl.class.getName()).log(Level.SEVERE,
                     null, ex);
@@ -57,6 +56,7 @@ public class HTMLCleanerImpl extends AbstractHTMLCleaner implements HTMLCleaner 
         }
     }
 
+    @Override
     public String getCorrectorName() {
         return CORRECTOR_NAME;
     }
