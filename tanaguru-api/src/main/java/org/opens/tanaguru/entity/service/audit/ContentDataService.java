@@ -6,6 +6,7 @@ import org.opens.tanaguru.entity.audit.JavascriptContent;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.StylesheetContent;
 import com.adex.sdk.entity.service.GenericDataService;
+import java.util.List;
 import org.opens.tanaguru.entity.subject.WebResource;
 
 /**
@@ -54,4 +55,20 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @return the {@link StylesheetContent} instance found.
      */
     StylesheetContent findStylesheetContent(Audit audit, String uri);
+
+    /**
+     * 
+     * @param audit
+     * @param start
+     * @param chunkSize
+     * @return
+     */
+    public List<? extends Content> findSSPContentWithRelatedContent(Audit audit, int start, int chunkSize);
+
+    /**
+     *
+     * @param audit
+     * @return
+     */
+    public Long findNumberOfSSPContentFromAudit(Audit audit);
 }

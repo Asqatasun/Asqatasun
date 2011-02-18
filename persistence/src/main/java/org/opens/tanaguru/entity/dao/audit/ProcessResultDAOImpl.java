@@ -5,8 +5,10 @@ import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.ProcessResultImpl;
 import com.adex.sdk.entity.dao.jpa.AbstractJPADAO;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Query;
+import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.DefiniteResultImpl;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Scope;
@@ -63,6 +65,58 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
         query.setParameter("scope", scope);
         Set setItems = new LinkedHashSet(query.getResultList());
         return  setItems;
+    }
+
+    @Override
+    public Long retrieveNumberOfGrossResultFromAudit(Audit audit) {
+        Query query = entityManager.createQuery("SELECT count(pr.id) FROM "
+                + getEntityClass().getName() + " pr "
+                + " WHERE "
+                + " pr.grossResultAudit = :audit");
+        query.setParameter("audit", audit);
+        return  (Long)query.getSingleResult();
+    }
+
+    @Override
+    public Long retrieveNumberOfNetResultFromAudit(Audit audit) {
+        Query query = entityManager.createQuery("SELECT count(pr.id) FROM "
+                + getEntityClass().getName() + " pr "
+                + " WHERE "
+                + " pr.netResultAudit = :audit");
+        query.setParameter("audit", audit);
+        return  (Long)query.getSingleResult();
+    }
+
+    @Override
+    public List<? extends ProcessResult> retrieveGrossResultFromAudit(Audit audit) {
+        Query query = entityManager.createQuery("SELECT pr FROM "
+                + getEntityClass().getName() + " pr "
+                + " WHERE "
+                + " pr.grossResultAudit = :audit");
+        query.setParameter("audit", audit);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<? extends ProcessResult> retrieveNetResultFromAudit(Audit audit) {
+        Query query = entityManager.createQuery("SELECT pr FROM "
+                + getEntityClass().getName() + " pr "
+                + " WHERE "
+                + " pr.netResultAudit = :audit");
+        query.setParameter("audit", audit);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<? extends ProcessResult> retrieveNetResultFromAuditAndWebResource(Audit audit, WebResource webResource) {
+        Query query = entityManager.createQuery("SELECT pr FROM "
+                + getDefitiniteResultClass().getName() + " pr "
+                + " WHERE "
+                + " pr.netResultAudit = :audit AND"
+                + " pr.subject = :webResource");
+        query.setParameter("audit", audit);
+        query.setParameter("webResource", webResource);
+        return query.getResultList();
     }
 
 }

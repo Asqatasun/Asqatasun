@@ -12,11 +12,13 @@ import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import java.util.List;
 import org.apache.log4j.Logger;
-import org.opens.tanaguru.entity.audit.DefiniteResult;
+//import org.opens.tanaguru.entity.audit.DefiniteResult;
 import org.opens.tanaguru.entity.audit.SSP;
+import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 
@@ -28,15 +30,17 @@ public class AuditServiceImpl implements AuditService {
     private AuditDataService auditDataService;
     private ConsolidatorService consolidatorService;
     private ContentAdapterService contentAdapterService;
-    private ContentLoaderService contentLoaderService;
     private CrawlerService crawlerService;
     private ProcessorService processorService;
     private ProcessResultDataService processResultDataService;
     private TestDataService testDataService;
     private WebResourceDataService webResourceDataService;
+    private ContentDataService contentDataService;
 
-    public AuditServiceImpl() {
+    @Autowired
+    public AuditServiceImpl(ContentDataService contentDataService) {
         super();
+        this.contentDataService = contentDataService;
     }
 
     @Override
@@ -160,42 +164,43 @@ public class AuditServiceImpl implements AuditService {
 
     @Override
     public Audit loadContent(Audit audit) {
-        if (!audit.getStatus().equals(AuditStatus.CONTENT_LOADING)) {
-            Logger.getLogger(AuditServiceImpl.class).warn(
-                    "Audit status is "
-                    + audit.getStatus()
-                    + " while "
-                    + AuditStatus.CONTENT_LOADING
-                    + " was required");
-            return audit;
-        }
-
-        audit.addAllContent(contentLoaderService.loadContent(audit.getSubject()));
-
-        boolean hasContent = false;
-        for (Content content : audit.getContentList()) {
-            if (content instanceof SSP) {
-                //We check that some content has been downloaded and has to
-                //be adapted. For the moment we ignore the returned error code @TODO
-                if (!((SSP)content).getSource().isEmpty()) {
-                    hasContent = true;
-                    break;
-                }
-            }
-        }
-        if (hasContent) {
-            audit.setStatus(AuditStatus.CONTENT_ADAPTING);
-        } else {
-            Logger.getLogger(AuditServiceImpl.class).warn("Audit has no content");
-            audit.setStatus(AuditStatus.ERROR);
-        }
-
-        audit = auditDataService.saveOrUpdate(audit);
+//        if (!audit.getStatus().equals(AuditStatus.CONTENT_LOADING)) {
+//            Logger.getLogger(AuditServiceImpl.class).warn(
+//                    "Audit status is "
+//                    + audit.getStatus()
+//                    + " while "
+//                    + AuditStatus.CONTENT_LOADING
+//                    + " was required");
+//            return audit;
+//        }
+//
+//        audit.addAllContent(contentLoaderService.loadContent(audit.getSubject()));
+//
+//        boolean hasContent = false;
+//        for (Content content : audit.getContentList()) {
+//            if (content instanceof SSP) {
+//                //We check that some content has been downloaded and has to
+//                //be adapted. For the moment we ignore the returned error code @TODO
+//                if (!((SSP)content).getSource().isEmpty()) {
+//                    hasContent = true;
+//                    break;
+//                }
+//            }
+//        }
+//        if (hasContent) {
+//            audit.setStatus(AuditStatus.CONTENT_ADAPTING);
+//        } else {
+//            Logger.getLogger(AuditServiceImpl.class).warn("Audit has no content");
+//            audit.setStatus(AuditStatus.ERROR);
+//        }
+//
+//        audit = auditDataService.saveOrUpdate(audit);
         return audit;
     }
 
     @Override
     public Audit adaptContent(Audit audit) {
+        audit.getContentList().clear();
         if (!audit.getStatus().equals(AuditStatus.CONTENT_ADAPTING)) {
             Logger.getLogger(AuditServiceImpl.class).warn(
                     "Audit status is "
@@ -205,24 +210,38 @@ public class AuditServiceImpl implements AuditService {
                     + " was required");
             return audit;
         }
-        audit.setContentList(contentAdapterService.adaptContent((List<Content>) audit.getContentList()));
-
         boolean hasCorrectedDOM = false;
-        for (Content content : audit.getContentList()) {
-            if (content instanceof SSP) {
-                if (!((SSP) content).getDOM().isEmpty()) {
+        Long nbOfContent = contentDataService.findNumberOfSSPContentFromAudit(audit);
+        Long i=new Long(0);
+        while (i.compareTo(nbOfContent)<0) {
+            List<? extends Content> contentList =
+                    contentAdapterService.adaptContent((List<Content>)contentDataService.findSSPContentWithRelatedContent(audit, i.intValue(), 1));
+            for (Content content : contentList) {
+                if (!hasCorrectedDOM && content instanceof SSP && !((SSP) content).getDOM().isEmpty()) {
                     hasCorrectedDOM = true;
-                    break;
                 }
+                contentDataService.saveOrUpdate(content);
             }
+            i++;
         }
+//        audit.setContentList(contentAdapterService.adaptContent((List<Content>) audit.getContentList()));
+
+//        boolean hasCorrectedDOM = false;
+//        for (Content content : audit.getContentList()) {
+//            if (content instanceof SSP) {
+//                if (!((SSP) content).getDOM().isEmpty()) {
+//                    hasCorrectedDOM = true;
+//                    break;
+//                }
+//            }
+//        }
         if (hasCorrectedDOM) {
             audit.setStatus(AuditStatus.PROCESSING);
         } else {
             Logger.getLogger(AuditServiceImpl.class).warn("Audit has no corrected DOM");
             audit.setStatus(AuditStatus.ERROR);
         }
-
+        audit.getContentList().clear();
         audit = auditDataService.saveOrUpdate(audit);
         return audit;
     }
@@ -239,17 +258,25 @@ public class AuditServiceImpl implements AuditService {
             return audit;
         }
 
-        audit.setGrossResultList(processorService.process((List<Content>) audit.getContentList(), (List<Test>) audit.getTestList()));
+        Long nbOfContent = contentDataService.findNumberOfSSPContentFromAudit(audit);
+        Long i=new Long(0);
+        audit.getGrossResultList().clear();
+        while (i.compareTo(nbOfContent)<0) {
+            List<Content> contentList =
+                    contentAdapterService.adaptContent((List<Content>)contentDataService.findSSPContentWithRelatedContent(audit, i.intValue(), 1));
+            audit.setGrossResultList(processorService.process(contentList, (List<Test>) audit.getTestList()));
+            auditDataService.saveOrUpdate(audit);
+            i++;
+            audit.getGrossResultList().clear();
+        }
 
-        if (!audit.getGrossResultList().isEmpty()) {
+        if (processResultDataService.getNumberOfGrossResultFromAudit(audit)>0) {
             audit.setStatus(AuditStatus.CONSOLIDATION);
         } else {
             Logger.getLogger(AuditServiceImpl.class).warn("Audit has no gross result");
             audit.setStatus(AuditStatus.ERROR);
         }
-
-        audit = auditDataService.saveOrUpdate(audit);
-
+        auditDataService.saveOrUpdate(audit);
         return audit;
     }
 
@@ -265,12 +292,9 @@ public class AuditServiceImpl implements AuditService {
             return audit;
         }
 
-        // XXX Chargement explicite des resultats bruts, pour forcer le lazy loading
-//        for (ProcessResult grossResult : audit.getGrossResultList()) {
-//        }
-
+        audit.getNetResultList().clear();
         List<ProcessResult> netResultList = consolidatorService.consolidate(
-                (List<ProcessResult>) audit.getGrossResultList(), (List<Test>) audit.getTestList());
+                (List<ProcessResult>) processResultDataService.getGrossResultFromAudit(audit), (List<Test>) audit.getTestList());
         audit.setNetResultList(netResultList);
 
         if (!audit.getNetResultList().isEmpty()) {
@@ -283,7 +307,7 @@ public class AuditServiceImpl implements AuditService {
             Logger.getLogger(AuditServiceImpl.class).warn("Audit has no net result");
             audit.setStatus(AuditStatus.ERROR);
         }
-
+        audit.getNetResultList().clear();
         audit = auditDataService.saveOrUpdate(audit);
         return audit;
     }
@@ -299,19 +323,19 @@ public class AuditServiceImpl implements AuditService {
                     + " was required");
             return audit;
         }
-
         if (audit.getSubject() instanceof Page) {
-            audit.getSubject().setMark(analyserService.analyse((List<ProcessResult>) audit.getNetResultList()));
+            audit.getSubject().setMark(analyserService.analyse((List<ProcessResult>) processResultDataService.getNetResultFromAudit(audit)));
         } else if (audit.getSubject() instanceof Site) {
-            audit.getSubject().setMark(analyserService.analyse((List<ProcessResult>) audit.getNetResultList()));
+            audit.getSubject().setMark(analyserService.analyse((List<ProcessResult>) processResultDataService.getNetResultFromAudit(audit)));
             for (WebResource webresource : ((Site)audit.getSubject()).getComponentList()) {
-                List<ProcessResult> webResourceNetResultList = new ArrayList<ProcessResult>();
-                for (ProcessResult processResult : audit.getNetResultList()) {
-                    if (processResult instanceof DefiniteResult && processResult.getSubject().equals(webresource)) {
-                        webResourceNetResultList.add(processResult);
-                    }
-                }
+                List<ProcessResult> webResourceNetResultList = (List<ProcessResult>)processResultDataService.getNetResultFromAuditAndWebResource(audit, webresource);
+//                for (ProcessResult processResult : audit.getNetResultList()) {
+//                    if (processResult instanceof DefiniteResult && processResult.getSubject().equals(webresource)) {
+//                        webResourceNetResultList.add(processResult);
+//                    }
+//                }
                 webresource.setMark(analyserService.analyse(webResourceNetResultList));
+                webResourceDataService.saveOrUpdate(webresource);
             }
         }
 
@@ -336,11 +360,6 @@ public class AuditServiceImpl implements AuditService {
     public void setContentAdapterService(
             ContentAdapterService contentAdapterService) {
         this.contentAdapterService = contentAdapterService;
-    }
-
-    public void setContentLoaderService(
-            ContentLoaderService contentLoaderService) {
-        this.contentLoaderService = contentLoaderService;
     }
 
     public void setCrawlerService(CrawlerService crawlerService) {

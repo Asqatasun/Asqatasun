@@ -6,6 +6,8 @@ import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.ContentImpl;
 import com.adex.sdk.entity.dao.jpa.AbstractJPADAO;
+import java.util.List;
+import org.opens.tanaguru.entity.audit.SSPImpl;
 import org.opens.tanaguru.entity.subject.WebResource;
 
 public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
@@ -37,4 +39,26 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
     protected Class<ContentImpl> getEntityClass() {
         return ContentImpl.class;
     }
+
+    @Override
+    public List<Content> retrieveSSPContentWithRelatedContent(Audit audit, int start, int chunkSize){
+        Query query = entityManager.createQuery("SELECT s FROM "
+                + SSPImpl.class.getName() + " s"
+//                + " LEFT JOIN FETCH s.relatedContentSet as r"
+                + " WHERE s.audit = :audit");
+        query = query.setParameter("audit",audit);
+        query = query.setFirstResult(start);
+        query = query.setMaxResults(chunkSize);
+        return query.getResultList();
+    }
+
+    @Override
+    public Long retrieveNumberOfSSPContentFromAudit(Audit audit){
+        Query query = entityManager.createQuery("SELECT count(s.id) FROM "
+                + SSPImpl.class.getName() + " s"
+                + " WHERE s.audit = :audit");
+        query = query.setParameter("audit",audit);
+        return (Long)query.getSingleResult();
+    }
+
 }

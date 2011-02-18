@@ -2,6 +2,8 @@ package org.opens.tanaguru.entity.service.audit;
 
 import com.adex.sdk.entity.service.GenericDataService;
 import java.util.Collection;
+import java.util.List;
+import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Scope;
@@ -38,5 +40,40 @@ public interface ProcessResultDataService extends
     public Collection<ProcessResult> getResultByScopeList(
             WebResource webresource,
             Scope scope);
-    
+
+    /**
+     * 
+     * @param audit
+     * @return
+     */
+    public Long getNumberOfGrossResultFromAudit(Audit audit);
+
+    /**
+     *
+     * @param audit
+     * @return
+     */
+    public Long getNumberOfNetResultFromAudit(Audit audit);
+
+    /**
+     *
+     * @param audit
+     * @return
+     */
+    public List<? extends ProcessResult> getGrossResultFromAudit(Audit audit);
+
+    /**
+     *
+     * @param audit
+     * @return
+     */
+    public List<? extends ProcessResult> getNetResultFromAudit(Audit audit);
+
+    /**
+     * 
+     * @param audit
+     * @param webResource
+     * @return
+     */
+    public List<? extends ProcessResult> getNetResultFromAuditAndWebResource(Audit audit, WebResource webResource);
 }
