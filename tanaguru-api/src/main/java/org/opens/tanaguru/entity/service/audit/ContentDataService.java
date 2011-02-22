@@ -71,4 +71,18 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @return
      */
     public Long findNumberOfSSPContentFromAudit(Audit audit);
+
+    /**
+     *
+     * @param audit
+     * @return
+     */
+    public boolean hasContent(Audit audit);
+
+    /**
+     *
+     * @param audit
+     * @return
+     */
+    public boolean hasAdaptedSSP(Audit audit);
 }

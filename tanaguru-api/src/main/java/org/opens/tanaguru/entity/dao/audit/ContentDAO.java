@@ -43,9 +43,23 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
     public List<? extends Content> retrieveSSPContentWithRelatedContent(Audit audit, int start, int chunkSize);
 
     /**
-     *
+     * 
      * @param audit
      * @return
      */
     public Long retrieveNumberOfSSPContentFromAudit(Audit audit);
+
+    /**
+     *
+     * @param audit
+     * @return
+     */
+    public boolean hasContent(Audit audit);
+
+    /**
+     * 
+     * @param audit
+     * @return
+     */
+    public boolean hasAdaptedSSP(Audit audit);
 }
