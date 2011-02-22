@@ -72,7 +72,7 @@
 
     <bean id="auditService" class="org.opens.tanaguru.service.AuditServiceImpl">
         <property name="crawlerService" ref="crawlerService"/>
-        <property name="contentLoaderService" ref="contentLoaderService"/>
+<!--        <property name="contentLoaderService" ref="contentLoaderService"/>-->
         <property name="contentAdapterService" ref="contentAdapterService"/>
         <property name="processorService" ref="processorService"/>
         <property name="consolidatorService" ref="consolidatorService"/>
