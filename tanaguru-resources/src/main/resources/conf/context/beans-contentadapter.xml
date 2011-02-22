@@ -30,7 +30,7 @@
         <property name="contentAdapterSet">
             <set>
                 <bean class="org.opens.tanaguru.contentadapter.css.CSSContentAdapterImpl">
-                    <property name="downloader" ref="downloaderComponent"/>
+<!--                    <property name="downloader" ref="downloaderComponent"/>-->
                     <property name="parser" ref="cssParserComponent"/>
                     <property name="URLIdentifier" ref="urlIdentifierComponent"/>
                     <property name="contentFactory" ref="contentFactory"/>
