@@ -130,6 +130,7 @@
                             <value>.*(?i)(\.(rar|zip|tar))$</value>
                             <value>.*(?i)(\.(doc|xls|odd))$</value>
                             <value>.*(?i)(\.(swf))$</value>
+                            <value>.*(?i)(\.(xml))$</value>
                             <value>.*(?i)(\.(js))$</value>
                             <value>.*(?i)(\.(bmp|gif|jpe?g|png|svg|tiff?))$</value>
                         </list>
