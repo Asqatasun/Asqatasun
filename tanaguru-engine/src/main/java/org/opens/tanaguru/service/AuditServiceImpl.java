@@ -1,6 +1,5 @@
 package org.opens.tanaguru.service;
 
-import java.util.ArrayList;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.audit.Content;
@@ -12,7 +11,6 @@ import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import java.util.List;
 import org.apache.log4j.Logger;
-//import org.opens.tanaguru.entity.audit.DefiniteResult;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
