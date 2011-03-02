@@ -6,7 +6,9 @@ import javax.persistence.Query;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.entity.subject.WebResourceImpl;
 import com.adex.sdk.entity.dao.jpa.AbstractJPADAO;
+import java.util.List;
 import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.subject.PageImpl;
 
 public class WebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
         implements WebResourceDAO {
@@ -59,12 +61,53 @@ public class WebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
                 + " left join fetch prk.elementList pr"
                 + " WHERE wr.id = :id");
             query.setParameter("id", key);
-//            query.setHint("org.hibernate.cacheable", "true");
             return (WebResource) query.getSingleResult();
         } catch (NoResultException nre) {
             return null;
         }
     }
 
+    @Override
+    public WebResource findByUrlAndParentWebResource(String url, WebResource webResource) {
+        try {
+            Query query = entityManager.createQuery(
+                    "SELECT wr FROM " +
+                    PageImpl.class.getName() + " wr"
+                    + " WHERE wr.url = :url"
+                    + " AND wr.parent =:webResource");
+            query.setParameter("url", url);
+            query.setParameter("webResource", webResource);
+            return (WebResource) query.getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<WebResource> findWebResourceFromItsParent (
+            WebResource webResource,
+            int start,
+            int chunkSize) {
+        Query query = entityManager.createQuery(
+                    "SELECT wr FROM "
+                    + getEntityClass().getName() + " wr"
+                    + " JOIN wr.parent p"
+                    + " WHERE p=:webResource");
+        query.setParameter("webResource", webResource);
+        query.setFirstResult(start);
+        query.setMaxResults(chunkSize);
+        return (List<WebResource>) query.getResultList();
+    }
+
+    @Override
+    public Long findNumberOfChildWebResource(WebResource webResource) {
+        Query query = entityManager.createQuery(
+                    "SELECT count(wr.id) FROM "
+                    + getEntityClass().getName() + " wr"
+                    + " JOIN wr.parent p"
+                    + " WHERE p=:webResource");
+        query.setParameter("webResource", webResource);;
+        return (Long) query.getSingleResult();
+    }
 
 }

@@ -91,6 +91,8 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
     public List<? extends ProcessResult> retrieveGrossResultFromAudit(Audit audit) {
         Query query = entityManager.createQuery("SELECT pr FROM "
                 + getEntityClass().getName() + " pr "
+                + " LEFT JOIN FETCH pr.subject"
+                + " LEFT JOIN FETCH pr.test"
                 + " WHERE "
                 + " pr.grossResultAudit = :audit");
         query.setParameter("audit", audit);
@@ -101,6 +103,7 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
     public List<? extends ProcessResult> retrieveNetResultFromAudit(Audit audit) {
         Query query = entityManager.createQuery("SELECT pr FROM "
                 + getEntityClass().getName() + " pr "
+                + " LEFT JOIN FETCH pr.subject"
                 + " WHERE "
                 + " pr.netResultAudit = :audit");
         query.setParameter("audit", audit);
