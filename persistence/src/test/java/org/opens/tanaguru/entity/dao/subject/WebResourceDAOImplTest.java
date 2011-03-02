@@ -59,11 +59,11 @@ public class WebResourceDAOImplTest extends AbstractDaoTestCase {
 
     public void testRetrieveWebResourceFromItsParent(){
         WebResource parentWr = webresourceDAO.read(Long.valueOf(9));
-        assertEquals(Long.valueOf(3), webresourceDAO.retrieveNumberOfChildWebResource(parentWr));
-        List<WebResource> wrList = webresourceDAO.retrieveWebResourceFromItsParent(parentWr, 0, 1);
+        assertEquals(Long.valueOf(3), webresourceDAO.findNumberOfChildWebResource(parentWr));
+        List<WebResource> wrList = webresourceDAO.findWebResourceFromItsParent(parentWr, 0, 1);
         assertEquals(1, wrList.size());
         assertEquals(Long.valueOf(5), ((WebResource)wrList.iterator().next()).getId());
-        wrList = webresourceDAO.retrieveWebResourceFromItsParent(parentWr, 1, 10);
+        wrList = webresourceDAO.findWebResourceFromItsParent(parentWr, 1, 10);
         assertEquals(2, wrList.size());
         Iterator iter = wrList.iterator();
         assertEquals(Long.valueOf(6), ((WebResource)iter.next()).getId());
