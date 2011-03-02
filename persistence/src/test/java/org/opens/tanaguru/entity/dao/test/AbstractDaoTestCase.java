@@ -10,11 +10,12 @@ import org.dbunit.DBTestCase;
 import org.dbunit.PropertiesBasedJdbcDatabaseTester;
 import org.dbunit.database.DatabaseConfig;
 import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 /**
  *
@@ -30,21 +31,7 @@ public abstract class AbstractDaoTestCase extends DBTestCase {
      * driver JDBC
      */
     private static final String JDBC_DRIVER =
-            "org.hsqldb.jdbcDriver";
-    /**
-     * base de données HSQLDB nommée "database" qui fonctionne en mode mémoire
-     */
-    private static final String DATABASE =
-            "jdbc:hsqldb:file:src/main/resources/hsql-db";
-    /**
-     * utilisateur qui se connecte à la base de données
-     */
-    private static final String USER = "sa";
-    /**
-     * getDataSet mot de passe pour se connecter à la base de données
-     */
-    private static final String PASSWORD = "";
-
+            "com.mysql.jdbc.Driver";
 
     private static final String SPRING_FILE_PATH =
             "../persistence/src/main/resources/conf/context/web-app/application-context.xml";
@@ -62,19 +49,21 @@ public abstract class AbstractDaoTestCase extends DBTestCase {
 
     public AbstractDaoTestCase(String testName) {
         super(testName);
+        ApplicationContext springApplicationContext =
+                new FileSystemXmlApplicationContext(SPRING_FILE_PATH);
+        springBeanFactory = springApplicationContext;
+        DriverManagerDataSource dmds =
+                (DriverManagerDataSource)springBeanFactory.getBean("dataSource");
         System.setProperty(
                 PropertiesBasedJdbcDatabaseTester.DBUNIT_DRIVER_CLASS,
                 JDBC_DRIVER);
         System.setProperty(
                 PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL,
-                DATABASE);
+                dmds.getUrl());
         System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME,
-                USER);
+                dmds.getUsername());
         System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD,
-                PASSWORD);
-        ApplicationContext springApplicationContext = 
-                new FileSystemXmlApplicationContext(SPRING_FILE_PATH);
-        springBeanFactory = springApplicationContext;
+                dmds.getPassword());
     }
 
     /**
@@ -91,10 +80,9 @@ public abstract class AbstractDaoTestCase extends DBTestCase {
      */
     @Override
     protected IDataSet getDataSet() throws Exception {
-        FlatXmlDataSet loadedDataSet = new FlatXmlDataSet(new FileInputStream(
+        FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+        return builder.build(new FileInputStream(
                 getInputDataFileName()));
-        return loadedDataSet;
-
     }
 
     @Override

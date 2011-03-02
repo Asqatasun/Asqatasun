@@ -5,9 +5,12 @@
 
 package org.opens.tanaguru.entity.dao.subject;
 
+import java.util.Iterator;
+import java.util.List;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.dao.audit.AuditDAO;
 import org.opens.tanaguru.entity.dao.test.AbstractDaoTestCase;
+import org.opens.tanaguru.entity.subject.WebResource;
 
 /**
  *
@@ -44,6 +47,27 @@ public class WebResourceDAOImplTest extends AbstractDaoTestCase {
         assertNull(webresourceDAO.findByAuditAndUrl(audit1, URL2));
         assertNull(webresourceDAO.findByAuditAndUrl(audit2, URL2));
         assertNull(webresourceDAO.findByAuditAndUrl(audit3, URL1));
+    }
+
+    public void testFindByUrlAndParentWebResource(){
+        WebResource parentWr = webresourceDAO.read(Long.valueOf(9));
+        WebResource wr = webresourceDAO.findByUrlAndParentWebResource("http://www.open-s.com/", parentWr);
+        assertEquals(Long.valueOf(5), wr.getId());
+        wr = webresourceDAO.findByUrlAndParentWebResource("http://www.open-s.com/testpage", parentWr);
+        assertNull(wr);
+    }
+
+    public void testRetrieveWebResourceFromItsParent(){
+        WebResource parentWr = webresourceDAO.read(Long.valueOf(9));
+        assertEquals(Long.valueOf(3), webresourceDAO.retrieveNumberOfChildWebResource(parentWr));
+        List<WebResource> wrList = webresourceDAO.retrieveWebResourceFromItsParent(parentWr, 0, 1);
+        assertEquals(1, wrList.size());
+        assertEquals(Long.valueOf(5), ((WebResource)wrList.iterator().next()).getId());
+        wrList = webresourceDAO.retrieveWebResourceFromItsParent(parentWr, 1, 10);
+        assertEquals(2, wrList.size());
+        Iterator iter = wrList.iterator();
+        assertEquals(Long.valueOf(6), ((WebResource)iter.next()).getId());
+        assertEquals(Long.valueOf(7), ((WebResource)iter.next()).getId());
     }
 
 }
