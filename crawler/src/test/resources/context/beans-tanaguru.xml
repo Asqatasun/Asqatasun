@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="contentFactory" class="org.opens.tanaguru.entity.factory.audit.ContentFactoryImpl"/>
+    <bean id="contentDAO" class="org.opens.tanaguru.entity.dao.audit.ContentDAOImpl"/>
+    <bean id="contentDataService" class="org.opens.tanaguru.entity.service.audit.ContentDataServiceImpl">
+        <property name="entityFactory" ref="contentFactory"/>
+        <property name="entityDao" ref="contentDAO"/>
+    </bean>
+
+    <bean id="auditFactory" class="org.opens.tanaguru.entity.factory.audit.AuditFactoryImpl"/>
+    <bean id="auditDAO" class="org.opens.tanaguru.entity.dao.audit.AuditDAOImpl"/>
+    <bean id="auditDataService" class="org.opens.tanaguru.entity.service.audit.AuditDataServiceImpl">
+        <property name="entityFactory" ref="auditFactory"/>
+        <property name="entityDao" ref="auditDAO"/>
+    </bean>
+
+    <bean id="webResourceFactory" class="org.opens.tanaguru.entity.factory.subject.WebResourceFactoryImpl"/>
+    <bean id="webResourceDAO" class="org.opens.tanaguru.entity.dao.subject.WebResourceDAOImpl"/>
+    <bean id="webResourceDataService" class="org.opens.tanaguru.entity.service.subject.WebResourceDataServiceImpl">
+        <property name="entityFactory" ref="webResourceFactory"/>
+        <property name="entityDao" ref="webResourceDAO"/>
+    </bean>
+
+</beans>
