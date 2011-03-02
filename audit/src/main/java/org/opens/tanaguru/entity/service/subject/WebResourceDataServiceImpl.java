@@ -1,5 +1,6 @@
 package org.opens.tanaguru.entity.service.subject;
 
+import java.util.List;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -36,16 +37,13 @@ public class WebResourceDataServiceImpl extends AbstractGenericDataService<WebRe
     }
 
     @Override
-    public WebResource findByUrl(String url) {
+    public WebResource getByUrl(String url) {
         return ((WebResourceDAO) entityDao).findByUrl(url);
     }
 
     @Override
     public WebResource read(Long key) {
         WebResource entity = super.read(key);
-//        for (ProcessResult netResult : entity.getProcessResultList()) {
-//            deepLoad(netResult);
-//        }
         if (entity instanceof Site) {
             for (WebResource wr : ((Site)entity).getComponentList()) {
             }
@@ -65,21 +63,35 @@ public class WebResourceDataServiceImpl extends AbstractGenericDataService<WebRe
      * @return
      */
     private String addProtocolToUrl(String url) {
-//        Pattern p = Pattern.compile(windowsPathPattern);
-//        Matcher m = p.matcher(url);
-
         if (!url.startsWith(HTTP_PROTOCOL_PREFIX)
                 && !url.startsWith(HTTPS_PROTOCOL_PREFIX)
                 && !url.startsWith(FILE_PROTOCOL_PREFIX)) {
 
             if (url.startsWith(FILE_PREFIX)) {
-//                    m.find()) {
                 url = FILE_PROTOCOL_PREFIX + url;
             } else {
                 url = HTTP_PROTOCOL_PREFIX + url;
             }
-
         }
         return url;
     }
+
+    @Override
+    public WebResource getByUrlAndParentWebResource(String url, WebResource webResource) {
+        return ((WebResourceDAO) entityDao).findByUrlAndParentWebResource(url, webResource);
+    }
+
+    @Override
+    public List<WebResource> getWebResourceFromItsParent(WebResource webResource, int start, int chunkSize) {
+        return ((WebResourceDAO) entityDao).findWebResourceFromItsParent(
+                webResource,
+                start,
+                chunkSize);
+    }
+
+    @Override
+    public Long getNumberOfChildWebResource(WebResource webResource) {
+        return ((WebResourceDAO) entityDao).findNumberOfChildWebResource(webResource);
+    }
+
 }

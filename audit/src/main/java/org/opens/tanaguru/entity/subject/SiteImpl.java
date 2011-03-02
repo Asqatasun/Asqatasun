@@ -17,7 +17,7 @@ import org.opens.tanaguru.entity.audit.Audit;
 @XmlRootElement
 public class SiteImpl extends WebResourceImpl implements Site, Serializable {
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.MERGE)
     protected Collection<WebResourceImpl> componentList = new ArrayList<WebResourceImpl>();
 
     public SiteImpl() {
@@ -28,12 +28,14 @@ public class SiteImpl extends WebResourceImpl implements Site, Serializable {
         super(url);
     }
 
+    @Override
     public void addAllChild(Collection<WebResource> webResourceList) {
         for (WebResource webResource : webResourceList) {
             addChild(webResource);
         }
     }
 
+    @Override
     public void addChild(WebResource webResource) {
         webResource.setParent(this);
 
@@ -46,6 +48,7 @@ public class SiteImpl extends WebResourceImpl implements Site, Serializable {
         }
     }
 
+    @Override
     public boolean contains(String url) {
         for (WebResourceImpl component : componentList) {
             if (component.getURL().equals(url)) {
@@ -63,6 +66,7 @@ public class SiteImpl extends WebResourceImpl implements Site, Serializable {
         return componentList;
     }
 
+    @Override
     public void setComponentList(Collection<? extends WebResource> componentList) {
         this.componentList = (Collection<WebResourceImpl>) componentList;
     }
@@ -70,9 +74,5 @@ public class SiteImpl extends WebResourceImpl implements Site, Serializable {
     @Override
     public void setAudit(Audit audit) {
         super.setAudit(audit);
-
-//        for (WebResource component : componentList) {
-//            component.setAudit(audit);
-//        }
     }
 }

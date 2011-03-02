@@ -20,6 +20,10 @@ public abstract class RelatedTextContentImpl extends RelatedContentImpl implemen
         super();
     }
 
+    public RelatedTextContentImpl(String uri,SSP ssp) {
+        super(uri, ssp);
+    }
+
     public RelatedTextContentImpl(Date dateOfLoading, String uri) {
         super(dateOfLoading, uri);
     }

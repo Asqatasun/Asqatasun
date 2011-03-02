@@ -27,7 +27,7 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
     @Column(name = "Adapted_Content", length = 400000)
     protected String dom;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.REFRESH)
     @JoinColumn(name = "Id_Page")
     protected PageImpl page;
 
@@ -40,18 +40,23 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
     @Column(name = "Charset")
     protected String charset;
 
-//    @ManyToMany
-//        @JoinTable(name = "CONTENT_RELATIONSHIP", joinColumns =
-//        @JoinColumn(name = "Id_Content_Parent"), inverseJoinColumns =
-//        @JoinColumn(name = "Id_Content_Child"))
-    @ManyToMany(
+    @ManyToMany(cascade = CascadeType.MERGE,
         targetEntity=org.opens.tanaguru.entity.audit.RelatedContentImpl.class,
-        mappedBy="parentContentSet", cascade=CascadeType.MERGE)
+        mappedBy="parentContentSet")
     protected Set<RelatedContentImpl> relatedContentSet =
             new HashSet<RelatedContentImpl>();
 
     public SSPImpl() {
         super();
+    }
+
+    public SSPImpl(String uri) {
+        super(uri);
+    }
+
+    public SSPImpl(String uri, Page page) {
+        super(uri);
+        this.page = (PageImpl) page;
     }
 
     public SSPImpl(Date dateOfLoading, String uri) {
@@ -85,6 +90,7 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
 
     @XmlElementRef(type = org.opens.tanaguru.entity.subject.PageImpl.class)
     @Override
+    @XmlTransient
     public Page getPage() {
         return page;
     }
@@ -113,7 +119,7 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.JavascriptContentImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.StylesheetContentImpl.class)})
-    @XmlTransient
+//    @XmlTransient
     @Override
     public Set<RelatedContentImpl> getRelatedContentSet() {
         return relatedContentSet;

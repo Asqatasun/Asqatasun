@@ -29,7 +29,7 @@ import org.opens.tanaguru.entity.audit.ProcessResultImpl;
 @Table(name = "WEB_RESOURCE")
 public abstract class WebResourceImpl implements WebResource, Serializable {
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "Id_Audit", nullable = true)
     protected AuditImpl audit;
     @Id
@@ -38,7 +38,7 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     protected Long id;
     @Column(name = "Label")
     protected String label;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "Id_Web_Resource_Parent")
     protected SiteImpl parent;
     @Column(name = "Url", nullable = false)
@@ -79,7 +79,7 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     }
 
     @Override
-    @XmlTransient
+//    @XmlTransient
     public Site getParent() {
         return parent;
     }

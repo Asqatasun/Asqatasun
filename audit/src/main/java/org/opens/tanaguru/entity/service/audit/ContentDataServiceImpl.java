@@ -3,6 +3,7 @@ package org.opens.tanaguru.entity.service.audit;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.JavascriptContent;
+import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.StylesheetContent;
 import org.opens.tanaguru.entity.dao.audit.ContentDAO;
@@ -43,14 +44,20 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
     }
 
     @Override
-    public List<? extends Content> findSSPContentWithRelatedContent(Audit audit, int start, int chunkSize){
+    public List<? extends Content> findSSPContentWithRelatedContent(
+            Audit audit,
+            int start,
+            int chunkSize){
         return (List<SSPImpl>)
-                ((ContentDAO) entityDao).retrieveSSPContentWithRelatedContent(audit, start, chunkSize);
+                ((ContentDAO) entityDao).findSSPContentWithRelatedContent(
+                    audit,
+                    start,
+                    chunkSize);
     }
 
     @Override
     public Long findNumberOfSSPContentFromAudit(Audit audit){
-        return ((ContentDAO) entityDao).retrieveNumberOfSSPContentFromAudit(audit);
+        return ((ContentDAO) entityDao).findNumberOfSSPContentFromAudit(audit);
     }
 
     /**
@@ -70,5 +77,69 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
     public boolean hasAdaptedSSP(Audit audit) {
         return ((ContentDAO) entityDao).hasAdaptedSSP(audit);
     }
-    
+
+    @Override
+    public RelatedContent getRelatedContentFromUriWithParentContent(
+            WebResource webResource,
+            String uri) {
+        return ((ContentDAO) entityDao).
+                findRelatedContentFromUriWithParentContent(webResource, uri);
+    }
+
+    @Override
+    public Long getNumberOfOrphanContent(WebResource webResource) {
+        return ((ContentDAO) entityDao).
+                findNumberOfOrphanContentFromWebResource(webResource);
+    }
+
+    @Override
+    public List<Content> getOrphanContentList(
+            WebResource webResource,
+            int start,
+            int chunkSize) {
+        return ((ContentDAO) entityDao).findOrphanContentList(
+                    webResource,
+                    start,
+                    chunkSize);
+    }
+
+    @Override
+    public Long getNumberOfOrphanRelatedContent(WebResource webResource) {
+        return ((ContentDAO) entityDao).
+                findNumberOfOrphanRelatedContentFromWebResource(webResource);
+    }
+
+    @Override
+    public List<Content> getOrphanRelatedContentList(
+            WebResource webResource,
+            int start,
+            int chunkSize) {
+        return ((ContentDAO) entityDao).findOrphanRelatedContentList(
+                    webResource,
+                    start,
+                    chunkSize);
+    }
+
+    @Override
+    public RelatedContent getRelatedContent(WebResource webResource, String uri) {
+        return ((ContentDAO) entityDao).findRelatedContent(webResource, uri);
+    }
+
+    @Override
+    public Long getNumberOfSSPFromWebResource(WebResource webResource) {
+        return ((ContentDAO) entityDao).findNumberOfSSPFromWebResource(webResource);
+    }
+
+    @Override
+    public List<Content> getContentWithRelatedContentFromWebResource(
+            WebResource webResource,
+            int start,
+            int chunkSize) {
+        return ((ContentDAO) entityDao).
+                findContentWithRelatedContentFromWebResource(
+                    webResource,
+                    start,
+                    chunkSize);
+    }
+
 }

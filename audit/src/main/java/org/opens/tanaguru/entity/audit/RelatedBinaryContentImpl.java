@@ -18,6 +18,10 @@ public abstract class RelatedBinaryContentImpl extends RelatedContentImpl implem
         super();
     }
 
+    public RelatedBinaryContentImpl(String uri, SSP ssp) {
+        super(uri, ssp);
+    }
+
     public RelatedBinaryContentImpl(Date dateOfLoading, String uri) {
         super(dateOfLoading, uri);
     }

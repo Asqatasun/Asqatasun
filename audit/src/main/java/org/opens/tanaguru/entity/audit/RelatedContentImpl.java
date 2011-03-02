@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -12,24 +13,29 @@ import javax.persistence.ManyToMany;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
+@XmlRootElement
 public class RelatedContentImpl extends ContentImpl implements
         RelatedContent, Serializable {
 
-    @ManyToMany
-        @JoinTable(name = "CONTENT_RELATIONSHIP", joinColumns =
-        @JoinColumn(name = "Id_Content_Child"), inverseJoinColumns =
-        @JoinColumn(name = "Id_Content_Parent"))
-//    @ManyToMany(
-//        targetEntity=org.opens.tanaguru.entity.audit.SSPImpl.class,
-//        mappedBy="relatedContentSet", cascade=CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.REMOVE)
+    @JoinTable(name = "CONTENT_RELATIONSHIP", joinColumns =
+    @JoinColumn(name = "Id_Content_Child"), inverseJoinColumns =
+    @JoinColumn(name = "Id_Content_Parent"))
     protected Set<ContentImpl> parentContentSet =
             new HashSet<ContentImpl>();
 
     public RelatedContentImpl() {
         super();
+    }
+
+    public RelatedContentImpl(String uri, SSP ssp) {
+        super(uri);
+        if (ssp != null)
+            this.parentContentSet.add((SSPImpl) ssp);
     }
 
     public RelatedContentImpl(Date dateOfLoading, String uri) {

@@ -23,6 +23,10 @@ public class StylesheetContentImpl extends RelatedTextContentImpl implements
         super(dateOfLoading, uri);
     }
 
+    public StylesheetContentImpl(String uri,SSP ssp) {
+        super(uri, ssp);
+    }
+
     public StylesheetContentImpl(Date dateOfLoading, String uri, SSP ssp) {
         super(dateOfLoading, uri, ssp);
     }

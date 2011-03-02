@@ -26,10 +26,10 @@ import javax.xml.bind.annotation.XmlTransient;
 public abstract class ContentImpl implements Content, Serializable {
 
     @ManyToOne
-    @JoinColumn(name = "Id_Audit", nullable = false)
+    @JoinColumn(name = "Id_Audit")
     protected AuditImpl audit;
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "Dt_Loading", nullable = false)
+    @Column(name = "Dt_Loading")
     protected Date dateOfLoading;
     @Id
     @GeneratedValue
@@ -38,10 +38,15 @@ public abstract class ContentImpl implements Content, Serializable {
     @Column(name = "Uri", length = 500, nullable = false)
     protected String uri;
     @Column(name = "Http_Status_Code", nullable = false)
-    protected int httpStatusCode;
+    protected int httpStatusCode = -1;
 
     public ContentImpl() {
         super();
+    }
+
+    public ContentImpl(String uri) {
+        super();
+        this.uri = uri;
     }
 
     public ContentImpl(Date dateOfLoading, String uri) {

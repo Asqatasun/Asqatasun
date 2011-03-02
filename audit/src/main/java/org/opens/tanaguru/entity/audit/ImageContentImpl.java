@@ -19,6 +19,10 @@ public class ImageContentImpl extends RelatedBinaryContentImpl implements
         super();
     }
 
+    public ImageContentImpl(String uri, SSP ssp) {
+        super(uri, ssp);
+    }
+
     public ImageContentImpl(Date dateOfLoading, String uri) {
         super(dateOfLoading, uri);
     }

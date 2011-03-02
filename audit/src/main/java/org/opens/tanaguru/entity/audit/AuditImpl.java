@@ -52,7 +52,7 @@ public class AuditImpl implements Audit, Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "Status")
     protected AuditStatus status = AuditStatus.INITIALISATION;
-    @OneToOne(mappedBy = "audit", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "audit", cascade = CascadeType.REFRESH)
     protected WebResourceImpl subject;
     @ManyToMany
     @JoinTable(name = "AUDIT_TEST", joinColumns =

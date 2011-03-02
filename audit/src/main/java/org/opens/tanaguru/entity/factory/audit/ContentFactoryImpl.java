@@ -6,11 +6,13 @@ import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.ImageContent;
 import org.opens.tanaguru.entity.audit.ImageContentImpl;
 import org.opens.tanaguru.entity.audit.JavascriptContent;
+import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.StylesheetContent;
 import org.opens.tanaguru.entity.subject.Page;
 
 import org.opens.tanaguru.entity.audit.JavascriptContentImpl;
+import org.opens.tanaguru.entity.audit.RelatedContentImpl;
 import org.opens.tanaguru.entity.audit.SSPImpl;
 import org.opens.tanaguru.entity.audit.StylesheetContentImpl;
 
@@ -27,6 +29,16 @@ public class ContentFactoryImpl implements ContentFactory {
     @Override
     public Content create() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public SSP createSSP(String uri) {
+        return new SSPImpl(uri);
+    }
+
+    @Override
+    public SSP createSSP(String uri, Page page) {
+        return new SSPImpl(uri, page);
     }
 
     @Override
@@ -58,6 +70,11 @@ public class ContentFactoryImpl implements ContentFactory {
             SSP ssp,
             String sourceCode) {
         return new StylesheetContentImpl(dateOfLoading, uri, ssp, sourceCode);
+    }
+
+    @Override
+    public StylesheetContent createStylesheetContent(String uri,SSP ssp) {
+        return new StylesheetContentImpl(uri, ssp);
     }
 
     @Override
@@ -107,4 +124,15 @@ public class ContentFactoryImpl implements ContentFactory {
             int httpStatusCode) {
         return new ImageContentImpl(dateOfLoading, uri, ssp, binaryContent, httpStatusCode);
     }
+
+    @Override
+    public ImageContent createImageContent(String uri, SSP ssp) {
+        return new ImageContentImpl(uri, ssp);
+    }
+
+    @Override
+    public RelatedContent createRelatedContent(String uri, SSP ssp) {
+        return new RelatedContentImpl(uri, ssp);
+    }
+
 }
