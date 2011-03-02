@@ -1,47 +1,15 @@
 package org.opens.tanaguru.crawler.processor;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
-import java.nio.charset.Charset;
-import java.nio.charset.UnsupportedCharsetException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Set;
 import java.util.regex.Pattern;
-import javax.imageio.ImageIO;
-import javax.imageio.ImageWriter;
-import org.apache.log4j.Logger;
-import org.archive.io.GzippedInputStream;
 import org.archive.io.RecordingInputStream;
 import org.archive.modules.CrawlURI;
 import org.archive.modules.Processor;
-import org.archive.modules.deciderules.MatchesFilePatternDecideRule;
-import org.archive.modules.extractor.Link;
+import org.archive.modules.deciderules.MatchesListRegexDecideRule;
 import org.archive.net.UURI;
-import org.mozilla.universalchardet.UniversalDetector;
-import org.opens.tanaguru.crawler.ContentType;
+import org.opens.tanaguru.crawler.ContentWriter;
 import org.opens.tanaguru.crawler.extractor.listener.ExtractorCSSListener;
 import org.opens.tanaguru.crawler.extractor.listener.ExtractorHTMLListener;
-import org.opens.tanaguru.entity.audit.Content;
-import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
-import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
-import org.opens.tanaguru.entity.service.audit.ContentDataService;
-import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
-import org.opens.tanaguru.entity.subject.Page;
-import org.opens.tanaguru.entity.subject.WebResource;
 
 /**
 Processor module that convert the results of successful fetches to
@@ -51,104 +19,45 @@ tanaguru-like Web-Resources and Contents.
 public class TanaguruWriterProcessor extends Processor
         implements ExtractorHTMLListener, ExtractorCSSListener {
 
-    private static final int MAX_NB_OF_CONTENT_IN_MEMORY = 0;
-    private static final Logger LOGGER =
-            Logger.getLogger(TanaguruWriterProcessor.class.getName());
-    private static final String UNREACHABLE_RESOURCE_STR =
-            "Unreachable resource ";
+    private static final long serialVersionUID = -4411002064139498785L;
     private static final String HTTP_PREFIX = "http";
     private static final String HTTPS_PREFIX = "https";
-    private static final String DEFAULT_CHARSET = "UTF-8";
     private static final int HTTP_SUCCESS_RETURN_CODE = 200;
-    private static final int BYTE_BUFFER_SIZE = 1000;
-    private static final String DEFAULT_IMG_EXTENSION = "jpg";    
-    private int counterBeforeSaveContent = 0;
 
-    private ContentDataService contentDataService;
-    /**
-     * Set the content data service
-     * @param contentDataService
-     */
-    public void setContentDataService(ContentDataService contentDataService) {
-        this.contentDataService = contentDataService;
+    private ExtractorCSSListener extractorCSSListener;
+    public ExtractorCSSListener getExtractorCSSListener() {
+        return extractorCSSListener;
     }
 
-    private WebResourceDataService webResourceDataService;
-    /**
-     * set the webresource data service
-     * @param webResourceDataService
-     */
-    public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
-        this.webResourceDataService = webResourceDataService;
+    public void setExtractorCSSListener(ExtractorCSSListener extractorCSSListener) {
+        this.extractorCSSListener = extractorCSSListener;
     }
 
-    private WebResourceFactory webResourceFactory;
-    /**
-     * Set the webResource Factory
-     * @param webResourceFactory
-     */
-    public void setWebResourceFactory(WebResourceFactory webResourceFactory) {
-        this.webResourceFactory = webResourceFactory;
-    }
-    private ContentFactory contentFactory;
-
-    /**
-     * Set the content factory 
-     * @param contentFactory
-     */
-    public void setContentFactory(ContentFactory contentFactory) {
-        this.contentFactory = contentFactory;
-    }
-    private List<Content> contentList = new ArrayList<Content>();
-
-    public void setContentList(List<Content> contentList) {
-        this.contentList = contentList;
-        }
-
-    /**
-     * 
-     * @return the list of contents
-     */
-    public List<Content> getContentList() {
-        return contentList;
+    private ExtractorHTMLListener extractorHTMLListener;
+    public ExtractorHTMLListener getExtractorHTMLListener() {
+        return extractorHTMLListener;
     }
 
-    private Set<WebResource> webResourceSet = new HashSet<WebResource>();
-    /**
-     *
-     * @return the list of webResources
-     */
-    public Set<WebResource> getWebResourceSet() {
-        return webResourceSet;
+    public void setExtractorHTMLListener(ExtractorHTMLListener extractorListener) {
+        this.extractorHTMLListener = extractorListener;
     }
 
-    public void setWebResourceSet(Set<WebResource> webResourceSet) {
-        this.webResourceSet = webResourceSet;
+    private ContentWriter contentWriter;
+    public ContentWriter getContentWriter() {
+        return contentWriter;
     }
 
-    private Map<String, Collection<String>> contentRelationShipMap =
-            Collections.synchronizedMap(
-            new HashMap<String, Collection<String>>());
-    public void setContentRelationShipMap(
-            Map<String, Collection<String>> contentRelationShipMap) {
-        this.contentRelationShipMap = contentRelationShipMap;
+    public void setContentWriter(ContentWriter contentWriter) {
+        this.contentWriter = contentWriter;
     }
 
-    private Map<String, Collection<String>> cssContentRelationShipMap =
-            Collections.synchronizedMap(
-            new LinkedHashMap<String, Collection<String>>());
-    public void setCssContentRelationShipMap(
-            Map<String, Collection<String>> cssContentRelationShipMap) {
-        this.cssContentRelationShipMap = cssContentRelationShipMap;
+    private MatchesListRegexDecideRule matchesListRegexDecideRule;
+    public MatchesListRegexDecideRule getMatchesListRegexDecideRule() {
+        return matchesListRegexDecideRule;
     }
-    
-    /**
-     *
-     * @return the list of webResources
-     */
-    public Map<String, Collection<String>> getContentRelationShipMap() {
-        associateExtractedCSSContentWithParents();
-        return contentRelationShipMap;
+
+    public void setMatchesListRegexDecideRule(MatchesListRegexDecideRule matchesListRegexDecideRule) {
+        this.matchesListRegexDecideRule = matchesListRegexDecideRule;
     }
     private Pattern cssFilePattern;
 
@@ -156,7 +65,7 @@ public class TanaguruWriterProcessor extends Processor
      *
      * @return the css File Pattern
      */
-    private Pattern getCssFilePattern() {
+    public Pattern getCssFilePattern() {
         if (cssFilePattern == null) {
             cssFilePattern = Pattern.compile(cssRegexp);
         }
@@ -177,7 +86,7 @@ public class TanaguruWriterProcessor extends Processor
      * 
      * @return the html File Pattern
      */
-    private Pattern getHtmlFilePattern() {
+    public Pattern getHtmlFilePattern() {
         if (htmlFilePattern == null) {
             htmlFilePattern = Pattern.compile(htmlRegexp);
         }
@@ -221,147 +130,15 @@ public class TanaguruWriterProcessor extends Processor
         }
 
         if (curi.getFetchStatus() != HTTP_SUCCESS_RETURN_CODE) {
-            ContentType resourceContentType =
-                    getContentTypeFromUnreacheableResource(curi.getCanonicalString());
-            switch (resourceContentType) {
-                case css:
-                    LOGGER.debug(
-                            UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
-                            + curi.getFetchStatus());
-                    Content cssContent = contentFactory.createStylesheetContent(
-                            new Date(),
-                            curi.getURI(),
-                            null,
-                            null,
-                            curi.getFetchStatus());
-                    contentList.add(cssContent);
-                    break;
-                case html:
-                    LOGGER.debug(UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
-                            + curi.getFetchStatus());
-                    Content htmlContent = contentFactory.createSSP(
-                            new Date(),
-                            curi.getURI(),
-                            null,
-                            null,
-                            curi.getFetchStatus());
-                    contentList.add(htmlContent);
-                    break;
-                case img:
-                    LOGGER.debug(UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
-                            + curi.getFetchStatus());
-                    Content imgContent = contentFactory.createImageContent(
-                            new Date(),
-                            curi.getURI(),
-                            null,
-                            null,
-                            curi.getFetchStatus());
-                    contentList.add(imgContent);
-                    break;
-                case misc:
-                    break;
-                default:
-                    break;
-            }
+            contentWriter.computeAndPersistUnsuccessfullFetchedResource(curi);
             return;
         }
+
         try {
-            LOGGER.info("Writing " + curi.getURI() + " : "
-                    + curi.getFetchStatus());
-            if (curi.getContentType().contains(ContentType.html.getType())
-                    && !curi.getURI().contains("robots.txt")) {
-                WebResource webResource = webResourceFactory.createPage(curi.getURI());
-                webResourceSet.add(webResource);
-                String charset = extractCharset(recis.getContentReplayInputStream());
-                String sourceCode = convertSourceCodeIntoUtf8(recis, charset);
-                Content htmlContent = contentFactory.createSSP(
-                        null,
-                        curi.getURI(),
-                        sourceCode,
-                        (Page) webResource,
-                        curi.getFetchStatus());
-                ((SSP)htmlContent).setCharset(charset);
-                contentList.add(htmlContent);
-            } else if (curi.getContentType().contains(ContentType.css.getType())) {
-               boolean compressed = GzippedInputStream.
-                       isCompressedStream(recis.getContentReplayInputStream());
-               String cssCode = null;
-               if (compressed) {
-                   cssCode = "";
-               } else {
-                   cssCode = recis.getReplayCharSequence().toString();
-               }
-               Content cssContent = contentFactory.createStylesheetContent(
-                        null,
-                        curi.getURI(),
-                        null,
-                        cssCode,
-                        curi.getFetchStatus());
-                contentList.add(cssContent);
-            } else if (curi.getContentType().contains(ContentType.img.getType())) {
-                Content imgContent = contentFactory.createImageContent(
-                        null,
-                        curi.getURI(),
-                        null,
-                        getImageContent(recis.getContentReplayInputStream(),
-                        getImageExtension(curi.getURI())),
-                        curi.getFetchStatus());
-                contentList.add(imgContent);
-            }
-//            counterBeforeSaveContent++;
-//            if (counterBeforeSaveContent == MAX_NB_OF_CONTENT_IN_MEMORY) {
-//                webResourceDataService.saveOrUpdate(webResourceSet);
-//                webResourceSet.clear();
-//                contentDataService.saveOrUpdate(contentSet);
-//                contentSet.clear();
-//            }
+            contentWriter.computeAndPersistSuccessfullFetchedResource(curi, recis);
         } catch (IOException e) {
             curi.getNonFatalFailures().add(e);
         }
-    }
-
-    /**
-     * Get the raw content of an image
-     * @param is
-     * @param imgExtension
-     * @return
-     */
-    private byte[] getImageContent(InputStream is, String imgExtension) {
-        // O P E N
-        ByteArrayOutputStream baos = new ByteArrayOutputStream(BYTE_BUFFER_SIZE);
-        BufferedImage image = null;
-        byte[] resultImageAsRawBytes = null;
-        try {
-            image = ImageIO.read(is);
-            // W R I T E
-            ImageIO.write(image, imgExtension, baos);
-            // C L O S E
-            baos.flush();
-            resultImageAsRawBytes = baos.toByteArray();
-            baos.close();
-        } catch (IOException ex) {
-            LOGGER.info(ex.getMessage());
-        }
-        return resultImageAsRawBytes;
-    }
-
-    /**
-     * Get an image extension from the image url
-     * @param imageUrl
-     * @return
-     */
-    public String getImageExtension(String imageUrl) {
-        String ext = imageUrl.substring(imageUrl.lastIndexOf('.') + 1);
-        try {
-            java.util.Iterator<ImageWriter> it =
-                    ImageIO.getImageWritersBySuffix(ext);
-            if (it.next() != null) {
-                return ext;
-            }
-        } catch (NoSuchElementException ex) {
-            return DEFAULT_IMG_EXTENSION;
-        }
-        return DEFAULT_IMG_EXTENSION;
     }
 
     /**
@@ -369,21 +146,8 @@ public class TanaguruWriterProcessor extends Processor
      * @param curi
      */
     @Override
-    public void computeResource(CrawlURI curi) {
-        Collection<String> relatedLinkToHtml = new HashSet<String>();
-        String url = null;
-        for (Link link : curi.getOutLinks()) {
-            url = link.getDestination().toString();
-            relatedLinkToHtml.add(url);
-            if (contentRelationShipMap.containsKey(url)) {
-                contentRelationShipMap.get(url).add(curi.getURI());
-            } else {
-                Collection<String> relatedHtmlToLink = new HashSet<String>();
-                relatedHtmlToLink.add(curi.getURI());
-                contentRelationShipMap.put(url, relatedHtmlToLink);
-            }
-        }
-        contentRelationShipMap.put(curi.getURI(), relatedLinkToHtml);
+    public synchronized void computeResource(CrawlURI curi) {
+        extractorHTMLListener.computeResource(curi);
     }
 
     /**
@@ -394,135 +158,8 @@ public class TanaguruWriterProcessor extends Processor
      * @param curi
      */
     @Override
-    public void computeCSSResource(CrawlURI curi) {
-        Collection<String> relatedChildToParent = new HashSet<String>();
-        String url;
-        for (Link link : curi.getOutLinks()) {
-            url = link.getDestination().toString();
-            relatedChildToParent.add(url);
-        }
-        if (!cssContentRelationShipMap.containsKey(curi.getURI())) {
-            cssContentRelationShipMap.put(curi.getURI(), relatedChildToParent);
-        } else {
-            cssContentRelationShipMap.get(curi.getURI()).addAll(
-                    relatedChildToParent);
-        }
-    }
-
-    /**
-     * At the end of the extraction, we combine contents extracted from a css
-     * with the parent content(s) of this css
-     */
-    private void associateExtractedCSSContentWithParents() {
-
-        for (Map.Entry<String, Collection<String>> e :
-                cssContentRelationShipMap.entrySet()) {
-
-            if (!e.getValue().isEmpty()) {
-                for (Map.Entry<String, Collection<String>> f :
-                        contentRelationShipMap.entrySet()) {
-                    // We test the presence of the css from which css have been
-                    // extracted in the content relationship map collections
-                    if (f.getValue().contains(e.getKey())) {
-                        // we associate the parent content with its new
-                        // children
-                        contentRelationShipMap.get(f.getKey()).addAll(
-                                e.getValue());
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * This methods enables to get the type of resource from its uri.
-     * In case of unreachable resource (404/403 errors), the return content is
-     * a html page. So we can't use the content type of the returned page to
-     * determine the type of the content we try to reach. In this case, we use
-     * the uri extension, based-on regular expressions.
-     * @param uri
-     * @return
-     */
-    private ContentType getContentTypeFromUnreacheableResource(String uri) {
-        if (MatchesFilePatternDecideRule.Preset.IMAGES.getPattern().
-                matcher(uri).matches()) {
-            return ContentType.img;
-        } else if (getHtmlFilePattern().matcher(uri).matches()) {
-            return ContentType.html;
-        } else if (getCssFilePattern().matcher(uri).matches()) {
-            return ContentType.css;
-        }
-        return ContentType.misc;
-    }
-
-    /**
-     * This method extracts the charset from the html source code.
-     * If the charset is not specified, it is set to UTF-8 by default
-     * @param is
-     * @return
-     */
-    public String extractCharset(InputStream is)  throws java.io.IOException {
-        byte[] buf = new byte[4096];
-        UniversalDetector detector = new UniversalDetector(null);
-        int nread;
-        while ((nread = is.read(buf)) > 0 && !detector.isDone()) {
-          detector.handleData(buf, 0, nread);
-        }
-        detector.dataEnd();
-
-        String encoding = detector.getDetectedCharset();
-        if (encoding != null) {
-          LOGGER.info("Detected encoding = " + encoding);
-        } else {
-          LOGGER.info("No encoding detected.");
-        }
-
-        detector.reset();
-        if (encoding != null && isValidCharset(encoding)) {
-            return encoding;
-        } else {
-            return DEFAULT_CHARSET;
-        }
-    }
-
-    /**
-     * This methods tests if a charset is valid regarding the charset nio API.
-     * @param charset
-     * @return
-     */
-    private boolean isValidCharset(String charset) {
-        try {
-            Charset.forName(charset);
-        } catch (UnsupportedCharsetException e) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * This method converts the sourceCode into UTF-8 charset to ensure the
-     * charset compatibility with the source and the charset used for the
-     * persistence.
-     * @param recis
-     * @param charset
-     * @return
-     * @throws IOException
-     */
-    private String convertSourceCodeIntoUtf8 (
-            RecordingInputStream recis,
-            String charset) throws IOException {
-        if (!charset.equalsIgnoreCase(DEFAULT_CHARSET)) {
-            Charset utf8charset = Charset.forName(DEFAULT_CHARSET);
-            Charset incomingCharset = Charset.forName(charset);
-            ByteBuffer inputBuffer = ByteBuffer.wrap(
-                    recis.getReplayCharSequence(charset).toString().getBytes(charset));
-            CharBuffer data = incomingCharset.decode(inputBuffer);
-            ByteBuffer outputBuffer = utf8charset.encode(data);
-            byte[] outputData = outputBuffer.array();
-            return new String(outputData);
-        } else {
-            return recis.getReplayCharSequence(charset).toString();
-        }
+    public synchronized void computeCSSResource(CrawlURI curi) {
+        this.extractorCSSListener.computeCSSResource(curi);
     }
 
 }

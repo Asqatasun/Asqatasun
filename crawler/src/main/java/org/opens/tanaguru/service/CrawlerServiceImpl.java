@@ -1,7 +1,15 @@
 package org.opens.tanaguru.service;
 
+import java.util.List;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.crawler.Crawler;
+import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.audit.Content;
+import org.opens.tanaguru.entity.audit.RelatedContent;
+import org.opens.tanaguru.entity.audit.SSP;
+import org.opens.tanaguru.entity.service.audit.AuditDataService;
+import org.opens.tanaguru.entity.service.audit.ContentDataService;
+import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -14,11 +22,36 @@ import org.opens.tanaguru.entity.subject.WebResource;
 public class CrawlerServiceImpl implements CrawlerService {
 
     private static final Logger LOGGER = Logger.getLogger(CrawlerServiceImpl.class);
-    private Crawler crawler;
-    public Crawler getCrawler() {
-        return crawler;
+    private ContentDataService contentDataService;
+
+    private WebResourceDataService webResourceDataService;
+    public AuditDataService getAuditDataService() {
+        return auditDataService;
     }
 
+    public void setAuditDataService(AuditDataService auditDataService) {
+        this.auditDataService = auditDataService;
+    }
+
+    public ContentDataService getContentDataService() {
+        return contentDataService;
+    }
+
+    public void setContentDataService(ContentDataService contentDataService) {
+        this.contentDataService = contentDataService;
+    }
+
+    public WebResourceDataService getWebResourceDataService() {
+        return webResourceDataService;
+    }
+
+    public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
+        this.webResourceDataService = webResourceDataService;
+    }
+
+    private AuditDataService auditDataService;
+
+    private Crawler crawler;
     @Override
     public void setCrawler(Crawler crawler) {
         this.crawler = crawler;
@@ -32,11 +65,15 @@ public class CrawlerServiceImpl implements CrawlerService {
     public Page crawl(Page page) {
         crawler.setPageURL(page.getURL());
         crawler.run();
-        ((Page)crawler.getResult()).setAudit(page.getAudit());
+        Audit audit = page.getAudit();
         page = (Page) crawler.getResult();
-        LOGGER.info(crawler.getClass());
-        // The crawler component gets the webResources AND the associated contents
-        page.getAudit().addAllContent(crawler.getContentListResult());
+        page.setAudit(audit);
+        audit.setSubject(page);
+        //the relation from webresource to audit is refresh, the audit has to
+        // be persisted first
+        auditDataService.saveOrUpdate(audit);
+//        webResourceDataService.saveOrUpdate(page);
+        setAuditToContent(page, audit);
         return page;
     }
 
@@ -61,11 +98,36 @@ public class CrawlerServiceImpl implements CrawlerService {
             crawler.setSiteURL(site.getURL(), urlPage);
         }
         crawler.run();
-        ((Site)crawler.getResult()).setAudit(site.getAudit());
+        Audit audit = site.getAudit();
         site = (Site) crawler.getResult();
-        // The crawler component gets the webResources AND the associated contents
-        site.getAudit().addAllContent(crawler.getContentListResult());
+        site.setAudit(audit);
+        audit.setSubject(site);
+        //the relation from webresource to audit is refresh, the audit has to
+        // be persisted first
+        auditDataService.saveOrUpdate(audit);
+        setAuditToContent(site, audit);
         return site;
     }
 
+    private void setAuditToContent(WebResource wr, Audit audit) {
+        Long nbOfContent = contentDataService.getNumberOfSSPFromWebResource(wr);
+        Long i=new Long(0);
+        while (i.compareTo(nbOfContent)<0) {
+            List<? extends Content> contentList =
+                    contentDataService.getContentWithRelatedContentFromWebResource(wr, i.intValue(), 1);
+            for (Content content : contentList) {
+                content.setAudit(audit);
+                contentDataService.saveOrUpdate(content);
+                if (content instanceof SSP) {
+                    for (RelatedContent relatedContent : ((SSP)content).getRelatedContentSet()) {
+                        ((Content)relatedContent).setAudit(audit);
+                        contentDataService.saveOrUpdate((Content)relatedContent);
+                    }
+                }
+            }
+            i++;
+        }
+        webResourceDataService.saveOrUpdate(wr);
+    }
+    
 }

@@ -2,26 +2,27 @@ package org.opens.tanaguru.crawler;
 
 import java.util.logging.Level;
 import org.opens.tanaguru.crawler.processor.TanaguruWriterProcessor;
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.logging.FileHandler;
-import java.util.logging.Handler;
-import org.apache.commons.lang.StringEscapeUtils;
+import java.util.regex.Pattern;
+import org.apache.commons.httpclient.URIException;
 import org.apache.log4j.Logger;
-import org.archive.crawler.framework.CrawlJob;
-import org.archive.modules.Processor;
+import org.archive.io.GzippedInputStream;
+import org.archive.io.RecordingInputStream;
+import org.archive.modules.CrawlURI;
+import org.archive.modules.deciderules.DecideResult;
+import org.archive.modules.deciderules.MatchesFilePatternDecideRule;
+import org.archive.modules.deciderules.MatchesListRegexDecideRule;
+import org.archive.modules.extractor.Link;
+import org.archive.net.UURI;
 import org.archive.net.UURIFactory;
+import org.opens.tanaguru.crawler.extractor.listener.ExtractorCSSListener;
+import org.opens.tanaguru.crawler.extractor.listener.ExtractorHTMLListener;
+import org.opens.tanaguru.crawler.framework.TanaguruCrawlJob;
+import org.opens.tanaguru.crawler.util.CrawlUtils;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.ImageContent;
 import org.opens.tanaguru.entity.audit.RelatedContent;
@@ -29,6 +30,8 @@ import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.StylesheetContent;
 import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
+import org.opens.tanaguru.entity.service.audit.ContentDataService;
+import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -37,18 +40,71 @@ import org.opens.tanaguru.entity.subject.WebResource;
  * 
  * @author ADEX
  */
-public class CrawlerImpl implements Crawler {
+public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSSListener, ContentWriter {
 
-    private static final String urlStrToReplace = "# URLS HERE";
-    private static final int CRAWL_LAUNCHER_RETRY_TIMEOUT = 1000;
-    private static final int CRAWL_LOGGER_TIMEOUT = 2000;
-
-    private WebResource webResource;
-    private File currentJobOutputDir;
+    private static final Logger LOGGER = Logger.getLogger(CrawlerImpl.class);
+        private static final int RETRIEVE_WINDOW = 100;
+    private static final String UNREACHABLE_RESOURCE_STR =
+            "Unreachable resource ";
+    private boolean isPageAlreadyFetched = false;
+    private WebResource mainWebResource;
     private String heritrixSiteFileName = "tanaguru-crawler-beans-site.xml";
     private String heritrixPageFileName = "tanaguru-crawler-beans-page.xml";
-    private CrawlJob crawlJob;
-    private List<Content> contentList = new ArrayList<Content>();
+    private TanaguruCrawlJob crawlJob;
+
+    private MatchesListRegexDecideRule matchesListRegexDecideRule = null;
+    public MatchesListRegexDecideRule getMatchesListRegexDecideRule() {
+        if (matchesListRegexDecideRule == null && crawlJob != null) {
+            matchesListRegexDecideRule = crawlJob.getMatchesListRegexDecideRule();
+        }
+        return matchesListRegexDecideRule;
+    }
+
+    private Pattern cssFilePattern = null;
+    public Pattern getCssFilePattern() {
+        if (cssFilePattern == null && crawlJob != null) {
+            cssFilePattern = crawlJob.getCssFilePattern();
+        }
+        return cssFilePattern;
+    }
+
+    private Pattern htmlFilePattern = null;
+    public Pattern getHtmlFilePattern() {
+        if (htmlFilePattern == null && crawlJob != null) {
+            htmlFilePattern = crawlJob.getHtmlFilePattern();
+        }
+        return htmlFilePattern;
+    }
+
+    private ContentDataService contentDataService;
+
+    public ContentDataService getContentDataService() {
+        return contentDataService;
+    }
+
+    public void setContentDataService(ContentDataService contentDataService) {
+        this.contentDataService = contentDataService;
+    }
+    private WebResourceDataService webResourceDataService;
+
+    public WebResourceDataService getWebResourceDataService() {
+        return webResourceDataService;
+    }
+
+    public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
+        this.webResourceDataService = webResourceDataService;
+    }
+    private WebResourceFactory webResourceFactory;
+
+    @Override
+    public void setWebResourceFactory(WebResourceFactory webResourceFactory) {
+        this.webResourceFactory = webResourceFactory;
+    }
+    private ContentFactory contentFactory;
+
+    public void setContentFactory(ContentFactory contentFactory) {
+        this.contentFactory = contentFactory;
+    }
 
     public CrawlerImpl() {
         super();
@@ -99,23 +155,7 @@ public class CrawlerImpl implements Crawler {
      * @return
      */
     public String getSiteURL() {
-        return webResource.getURL();
-    }
-
-    @Override
-    public List<Content> getContentListResult() {
-        return contentList;
-    }
-
-    private WebResourceFactory webResourceFactory;
-    @Override
-    public void setWebResourceFactory(WebResourceFactory webResourceFactory) {
-        this.webResourceFactory = webResourceFactory;
-    }
-
-    private ContentFactory contentFactory;
-    public void setContentFactory(ContentFactory contentFactory) {
-        this.contentFactory = contentFactory;
+        return mainWebResource.getURL();
     }
 
     /**
@@ -124,9 +164,10 @@ public class CrawlerImpl implements Crawler {
      */
     @Override
     public void setSiteURL(String siteURL) {
-        webResource = webResourceFactory.createSite(siteURL);
+        mainWebResource = webResourceFactory.createSite(siteURL);
+        mainWebResource = webResourceDataService.saveOrUpdate(mainWebResource);
         String[] siteUrl = {siteURL};
-        this.crawlJob = new CrawlJob(initializeCrawlContext(siteUrl, heritrixSiteFileName));
+        this.crawlJob = new TanaguruCrawlJob(siteUrl, heritrixSiteFileName, getOutputDir(), getCrawlConfigFilePath());
         if (crawlJob.isLaunchable()) {
             crawlJob.checkXML();
         }
@@ -138,8 +179,9 @@ public class CrawlerImpl implements Crawler {
      */
     @Override
     public void setSiteURL(String siteName, String[] siteURL) {
-        webResource = webResourceFactory.createSite(siteName);
-        this.crawlJob = new CrawlJob(initializeCrawlContext(siteURL, heritrixPageFileName));
+        mainWebResource = webResourceFactory.createSite(siteName);
+        mainWebResource = webResourceDataService.saveOrUpdate(mainWebResource);
+        this.crawlJob = new TanaguruCrawlJob(siteURL, heritrixPageFileName, getOutputDir(), getCrawlConfigFilePath());
         if (crawlJob.isLaunchable()) {
             crawlJob.checkXML();
         }
@@ -151,460 +193,468 @@ public class CrawlerImpl implements Crawler {
      */
     @Override
     public void setPageURL(String pageURL) {
-        webResource = webResourceFactory.createPage(pageURL);
+        mainWebResource = webResourceFactory.createPage(pageURL);
+        mainWebResource = webResourceDataService.saveOrUpdate(mainWebResource);
         String[] pageUrl = {pageURL};
-        this.crawlJob = new CrawlJob(initializeCrawlContext(pageUrl,heritrixPageFileName));
+        this.crawlJob = new TanaguruCrawlJob(pageUrl, heritrixPageFileName, getOutputDir(), getCrawlConfigFilePath());
         if (crawlJob.isLaunchable()) {
             crawlJob.checkXML();
         }
+        isPageAlreadyFetched = false;
     }
 
     @Override
     public WebResource getResult() {
         crawlJob = null;
-        return webResource;
+        return mainWebResource;
     }
 
     @Override
     public void run() {
-        if (crawlJob.isLaunchable()) {
-            Logger.getLogger(CrawlerImpl.class.getName()).info(
-                    "crawljob is launchable");
-            crawlJob.launch();
-            if (!crawlJob.isRunning()) {
-                try {
-                    Thread.sleep(CRAWL_LAUNCHER_RETRY_TIMEOUT);
-                } catch (InterruptedException ex) {
-                    java.util.logging.Logger.getLogger(
-                            CrawlerImpl.class.getName()).log(Level.SEVERE, null, ex);
+        this.crawlJob.setExtractorCSSListener(this);
+        this.crawlJob.setExtractorHTMLListener(this);
+        this.crawlJob.setContentWriter(this);
+        this.crawlJob.launchCrawlJob();
+        removeOrphanContent();
+    }
+
+    @Override
+    public void computeAndPersistSuccessfullFetchedResource(
+            CrawlURI curi,
+            RecordingInputStream recis) throws IOException{
+        LOGGER.debug("Writing " + curi.getURI() + " : "
+                + curi.getFetchStatus());
+        if (curi.getContentType().contains(ContentType.html.getType())
+                && !curi.getURI().contains("robots.txt")) {
+            WebResource wr =
+                    webResourceDataService.getByUrlAndParentWebResource(
+                    curi.getURI(),
+                    mainWebResource);
+            if (wr == null && mainWebResource instanceof Page) {
+                if (isPageAlreadyFetched) {
+                    return;
+                }
+                wr = mainWebResource;
+                // in case of redirection, we modify the URI of the webresource
+                // to ensure the webresource and its SSP have the same URI.
+                wr.setURL(curi.getURI());
+                isPageAlreadyFetched = true;
+            }
+            // extract data from fetched content and record it to SSP object
+            String charset = CrawlUtils.extractCharset(recis.getContentReplayInputStream());
+            String sourceCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset);
+            Content htmlContent = contentDataService.findSSP(wr, curi.getURI());
+            if (htmlContent != null) {
+                ((SSP) htmlContent).setCharset(charset);
+                ((SSP) htmlContent).setSource(sourceCode);
+                saveAndPersistFetchDataToContent(htmlContent, curi);
+                webResourceDataService.saveOrUpdate(wr);
+            }
+        } else if (curi.getContentType().contains(ContentType.css.getType())) {
+            boolean compressed = GzippedInputStream.isCompressedStream(recis.getContentReplayInputStream());
+            String cssCode = null;
+            if (compressed) {
+                cssCode = "";
+            } else {
+                String charset = CrawlUtils.extractCharset(recis.getContentReplayInputStream());
+                cssCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset);
+            }
+            RelatedContent cssContent = contentDataService.getRelatedContentFromUriWithParentContent(mainWebResource, curi.getURI());
+            if (cssContent != null) {
+                if (cssContent instanceof StylesheetContent) {
+                    LOGGER.debug("Found css from related content already saved " + curi.getURI());
+                    ((StylesheetContent) cssContent).setSource(cssCode);
+                    saveAndPersistFetchDataToContent((Content)cssContent, curi);
+                } else {
+                    LOGGER.debug("Conversion From RelatedContent to Css" + curi.getURI());
+                    StylesheetContent newCssContent = contentFactory.createStylesheetContent(
+                            null,
+                            curi.getURI(),
+                            null,
+                            cssCode,
+                            curi.getFetchStatus());
+                    newCssContent.addAllParentContent(cssContent.getParentContentSet());
+                    deleteRelatedContent(cssContent);
+                    newCssContent.setSource(cssCode);
+                    saveAndPersistFetchDataToContent((Content)newCssContent, curi);
                 }
             }
-        }
-        Logger.getLogger(CrawlerImpl.class.getName()).info(
-                "is crawlJob running? " + crawlJob.isRunning() + " " + this.getSiteURL());
-        while (crawlJob.isRunning()) {
-            try {
-                if (crawlJob.isUnpausable()) {
-                    crawlJob.getCrawlController().getFrontier().run();
+        } else if (curi.getContentType().contains(ContentType.img.getType())) {
+            RelatedContent imgContent = contentDataService.getRelatedContentFromUriWithParentContent(
+                    mainWebResource,
+                    curi.getURI());
+            if (imgContent != null) {
+                if (imgContent instanceof ImageContent) {
+                    LOGGER.debug("Found image from related content already saved " + curi.getURI());
+                    ((ImageContent) imgContent).setContent(CrawlUtils.getImageContent(recis.getContentReplayInputStream(),
+                            CrawlUtils.getImageExtension(curi.getURI())));
+                    saveAndPersistFetchDataToContent((Content)imgContent, curi);
+                } else {
+                    LOGGER.debug("Conversion From RelatedContent to Image" + curi.getURI());
+                    ImageContent newImgContent = contentFactory.createImageContent(
+                            null,
+                            curi.getURI(),
+                            null,
+                            CrawlUtils.getImageContent(recis.getContentReplayInputStream(),
+                            CrawlUtils.getImageExtension(curi.getURI())),
+                            curi.getFetchStatus());
+                    newImgContent.addAllParentContent(imgContent.getParentContentSet());
+                    deleteRelatedContent(imgContent);
+                    newImgContent.setContent(CrawlUtils.getImageContent(recis.getContentReplayInputStream(),
+                            CrawlUtils.getImageExtension(curi.getURI())));
+                    saveAndPersistFetchDataToContent(newImgContent, curi);
                 }
-                Logger.getLogger(CrawlerImpl.class.getName()).info(
-                        "crawljob is running");
-                Thread.sleep(CRAWL_LOGGER_TIMEOUT);
-            } catch (InterruptedException e) {
-                // do nothing
-            }
-        }
-        computeResult();
-        crawlJob.terminate();
-        if (crawlJob.teardown()) {
-            closeCrawlerLogFiles();
-            if (!removeConfigFile(currentJobOutputDir)) {
-            Logger.getLogger(CrawlerImpl.class.getName()).info(
-                        "Configuration Heritrix files cannot be deleted");
             }
         } else {
-            Logger.getLogger(CrawlerImpl.class.getName()).info(
-                        "The crawljob is not teardowned");
+            RelatedContent unknownContent = contentDataService.getRelatedContentFromUriWithParentContent(
+                    mainWebResource,
+                    curi.getURI());
+
+            if (unknownContent != null) {
+                deleteRelatedContent(unknownContent);
+            }
         }
     }
 
-    /**
-     * This method initialize the heritrix context before starting the crawl
-     * @return
-     */
-    private File initializeCrawlContext(String[] url, String heritrixFileName) {
-        // Create one directory
-        currentJobOutputDir = new File(outputDir + "/" + "crawl" + "-" + new Date().getTime());
-        if (!currentJobOutputDir.exists()) {
-            boolean success = currentJobOutputDir.mkdir();
-            if (success) {
-                Logger.getLogger(CrawlerImpl.class.getName()).info(
-                        "Directory: " + currentJobOutputDir + " created");
-            }
-        }
-        BufferedReader in = null;
-        FileWriter fw = null;
-        try {
-            in = new BufferedReader(
-                    new FileReader(crawlConfigFilePath + "/" + heritrixFileName));
-
-            String c;
-            String uri;
-            StringBuilder newContextFile = new StringBuilder();
-            while ((c = in.readLine()) != null) {
-                if (c.equalsIgnoreCase(urlStrToReplace)) {
-                    for (int i=0 ; i<url.length ; i++) {
-                        // first convert the URI in unicode
-                        uri = UURIFactory.getInstance(url[i]).getEscapedURI();
-                        // then escape the URI to be written in a xml file.
-                        newContextFile.append(StringEscapeUtils.escapeXml(uri));
-                        newContextFile.append("\r");
-                    }
+    @Override
+    public void computeAndPersistUnsuccessfullFetchedResource(CrawlURI curi) {
+        ContentType resourceContentType =
+                    getContentTypeFromUnreacheableResource(curi.getCanonicalString());
+        switch (resourceContentType) {
+            case css:
+                LOGGER.info(
+                        UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
+                        + curi.getFetchStatus());
+                RelatedContent relatedContent = contentDataService.getRelatedContent(
+                        mainWebResource,
+                        curi.getURI());
+                saveAndPersistFetchDataToContent((Content)relatedContent, curi);
+                break;
+            case html:
+                LOGGER.info(UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
+                        + curi.getFetchStatus());
+                WebResource wr = null;
+                if (mainWebResource instanceof Site) {
+                    wr =
+                        webResourceDataService.getByUrlAndParentWebResource(
+                        curi.getURI(),
+                        mainWebResource);
                 } else {
-                    newContextFile.append(c);
+                    wr = mainWebResource;
                 }
-                newContextFile.append("\r");
+                Content htmlContent = contentDataService.findSSP(wr, curi.getURI());
+                saveAndPersistFetchDataToContent(htmlContent, curi);
+                break;
+            case img:
+                LOGGER.info(UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
+                        + curi.getFetchStatus());
+                relatedContent = contentDataService.getRelatedContent(
+                        mainWebResource,
+                        curi.getURI());
+                saveAndPersistFetchDataToContent((Content)relatedContent, curi);
+                break;
+            case misc:
+                if (mainWebResource instanceof Site) {
+                    wr =
+                        webResourceDataService.getByUrlAndParentWebResource(
+                        curi.getURI(),
+                        mainWebResource);
+                } else {
+                    wr = mainWebResource;
+                }
+                htmlContent = contentDataService.findSSP(wr, curi.getURI());
+                if (htmlContent != null) {
+                    saveAndPersistFetchDataToContent(htmlContent, curi);
+                } else {
+                    relatedContent = contentDataService.getRelatedContent(
+                        mainWebResource,
+                        curi.getURI());
+                    if (relatedContent != null) {
+                        saveAndPersistFetchDataToContent((Content)relatedContent, curi);
+                    }
+                }
+                LOGGER.debug("MISC" + UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
+                        + curi.getFetchStatus());
+                break;
+            default:
+                LOGGER.debug("UNKNOWN_CONTENT" + UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
+                        + curi.getFetchStatus());
+                break;
+        }
+    }
+    
+    @Override
+    public synchronized void computeResource(CrawlURI curi) {
+        LOGGER.debug("computeResource " + curi.getURI() + " : "
+                + curi.getOutLinks());
+        // We first create a webResource associated with the curi object heritrix is extracting outlinks from.
+        Page page = null;
+//        if (parentWebResource instanceof Page && ((Page)parentWebResource).getURL().equalsIgnoreCase(curi.getURI())) {
+        if (mainWebResource instanceof Page) {
+            if (isPageAlreadyFetched) {
+                return;
             }
-            fw = new FileWriter(currentJobOutputDir.getPath() + "/" + heritrixFileName);
-            fw.write(newContextFile.toString());
-            fw.close();
-            in.close();
-        } catch (IOException ex) {
-            Logger.getLogger(CrawlerImpl.class.getName()).error(ex);
-        } finally {
-            if (in != null) {
-               try {
-                   in.close();
-		} catch (IOException e) {
-                    java.util.logging.Logger.getLogger(
-                            CrawlerImpl.class.getName()).log(
-                            Level.SEVERE, null, e);
-		}
+            // In case of audit of page type, we expect only one webresource and one SSP.
+            // That's why we associate the current parentWebresource with the current curi object
+            LOGGER.debug("createPage in audit page" + curi.getURI());
+            page = (Page) mainWebResource;
+            page = (Page) webResourceDataService.saveOrUpdate(page);
+        } else if (mainWebResource instanceof Site) {
+            // In case of audit of site type, we expect several webresources and SSPs.
+            // These webresouces have to be linked with the parent webresource of site type.
+            LOGGER.debug("createPage in audit site" + curi.getURI());
+            page = webResourceFactory.createPage(curi.getURI());
+            ((Site) mainWebResource).addChild(page);
+//            ((Site) mainWebResource).getComponentList().clear();
+            page = (Page) webResourceDataService.saveOrUpdate(page);
+            ((Site) mainWebResource).getComponentList().clear();
+        }
+        // We create the SSP associated with Page heritrix is extracting outlinks from.
+        checkURIRecordedAsRelatedContent(mainWebResource, curi.getURI());
+        SSP ssp = contentFactory.createSSP(curi.getURI());
+        ssp.setPage(page);
+        // we persist it.
+        LOGGER.debug("persist SSP " + curi.getURI());
+        ssp = (SSP) contentDataService.saveOrUpdate(ssp);
+        // For each oulinks found, we create the appropriate related content object
+        // and link it with the current SSP. To avoid to have 2 related content
+        // with the same URI, we maintain a local map. This case happens when a same
+        // link is found in the same page but with a different type (E as Embed or
+        // L as Link)
+        Set<String> localMap = new HashSet<String>();
+        for (Link link : curi.getOutLinks()) {
+            String linkUrl = link.getDestination().toString();
+            if (!localMap.contains(linkUrl)) {
+                ssp = linkOutlinkWithSSP(link, ssp);
             }
-            if (fw != null) {
-                try {
-                    fw.close();
-		} catch (IOException e) {
-                    java.util.logging.Logger.getLogger(
-                            CrawlerImpl.class.getName()).log(
-                            Level.SEVERE, null, e);
-		}
+            localMap.add(linkUrl);
+        }
+        LOGGER.debug("save SSP " + ssp.getURI() + " with " + ssp.getRelatedContentSet().size() +" elements");
+        // THe relation between a ssp and its related contents is defined as
+        // merge. Thus, the saveorupdate on the ssp object is spread to the related
+        // content objects
+        ssp = (SSP) contentDataService.saveOrUpdate(ssp);
+    }
+
+    /**
+     * In case of css extractred from another css, we combine the child
+     * content with its css parents. Each CSS resource has to be associated with
+     * a HTML content. By keeping this relation, we can combine a child CSS
+     * with the HTML contents combined with its parents.
+     * @param curi
+     */
+    @Override
+    public synchronized void computeCSSResource(CrawlURI curi) {
+        RelatedContent cssContent =
+                contentDataService.getRelatedContentFromUriWithParentContent(
+                mainWebResource,
+                curi.getURI());
+        if (cssContent == null) {
+            return;
+        }
+        UURI localUuri = null;
+        CrawlURI localCuri = null;
+        for (Link link : curi.getOutLinks()) {
+            try {
+                localUuri = UURIFactory.getInstance(link.getDestination().toString());
+            } catch (URIException ex) {
+                java.util.logging.Logger.getLogger(TanaguruWriterProcessor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            localCuri = new CrawlURI(localUuri);
+            if (getMatchesListRegexDecideRule().decisionFor(localCuri).equals(DecideResult.ACCEPT)) {
+                RelatedContent relatedContent = contentDataService.getRelatedContent(
+                        mainWebResource,
+                        localCuri.getURI());
+                if (relatedContent != null) {
+                    relatedContent.addAllParentContent(cssContent.getParentContentSet());
+                } else {
+                    relatedContent = createRelatingContentRegardingExtension(null, localCuri);
+                    for (Content content : cssContent.getParentContentSet()) {
+                        if (content instanceof SSP) {
+                            ((SSP) content).addRelatedContent(relatedContent);
+                        }
+                    }
+                }
+                contentDataService.saveOrUpdate((Content) relatedContent);
             }
         }
-        return new File(currentJobOutputDir.getPath() + "/" + heritrixFileName);
     }
 
     /**
      * 
-     */
-    private void computeResult() {
-        for (Processor processor : crawlJob.getCrawlController().getDispositionChain().getProcessors()) {
-            if (processor instanceof TanaguruWriterProcessor) {
-                contentList =
-                        ((TanaguruWriterProcessor) processor).getContentList();
-                contentDeepCopy(((TanaguruWriterProcessor) processor).getWebResourceSet(),
-                        ((TanaguruWriterProcessor) processor).getContentList());
-                computeContentRelationShip(
-                        ((TanaguruWriterProcessor) processor).getContentRelationShipMap());
-                removeOrphanContent();
-                cleanUpWriterResources((TanaguruWriterProcessor) processor);
-                break;
-            }
-        }
-    }
-
-    /**
-     * This method associates an HTML content with its relative content.
-     * We use the Content list and the content relationship map filled-in
-     * by the TanaguruWriterProcessor to do so.
-     * @param contentRelationShipMap
-     */
-    private void computeContentRelationShip(Map<String, Collection<String>> contentRelationShipMap) {
-        Map<String, Content> tempMap = new HashMap<String, Content>();
-
-        // initialisation of a temporary map to associate an url with its
-        // Content
-        for (Content content : contentList) {
-            tempMap.put(content.getURI(), content);
-        }
-
-        // Let's parse the contentRelationShip Map
-        for (String parentUrl : contentRelationShipMap.keySet()) {
-
-            // Does my local content list contains the url ?
-            // Some types of content (js, swf, pdf) are excluded from the
-            // download but are found by the extractor and so belongs to the
-            // contentRelationShipMap.
-            if (tempMap.containsKey(parentUrl)) {
-
-                // if the content is a SSP, we associate it with its related
-                // contents
-                if (tempMap.get(parentUrl) instanceof SSP) {
-                    SSP localSSP = ((SSP) tempMap.get(parentUrl));
-                    for (String childUrl : contentRelationShipMap.get(parentUrl)) {
-
-                        // We check that the content found by the extractor  has been
-                        // actually downloaded and we only keep related content
-                        // (to avoid to have a relation between 2 SSP)
-                        if (tempMap.containsKey(childUrl)
-                                && (tempMap.get(childUrl)) instanceof RelatedContent) {
-                            localSSP.addRelatedContent(
-                                    (RelatedContent) (tempMap.get(childUrl)));
-                        }
-                    }
-
-                    // if the content is a Related Content (css, images), we
-                    // associate it with its parent SSP
-                } else if (tempMap.get(parentUrl) instanceof RelatedContent) {
-                    RelatedContent localRelatedContent = ((RelatedContent) tempMap.get(parentUrl));
-                    for (String childUrl : contentRelationShipMap.get(parentUrl)) {
-
-                        // We check that the content found by the extractor has been
-                        // actually downloaded and we only keep related content
-                        // (to avoid to have a relation between 2 SSP
-                        if (tempMap.containsKey(childUrl) &&
-                            tempMap.get(childUrl) instanceof SSP) {
-                            localRelatedContent.addParentContent(tempMap.get(childUrl));
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * Clean-up configuration files before leaving
-     * @param file
+     * @param link
+     * @param ssp
      * @return
      */
-    private boolean removeConfigFile(File file) {
-        if (file.exists()) {
-            File[] files = file.listFiles();
-            for (int i = 0; i < files.length; i++) {
-                if (files[i].isDirectory()) {
-                    removeConfigFile(files[i]);
-                } else {
-                    boolean isDeleted = files[i].delete();
-                    if (!isDeleted) {
-                        java.util.logging.Logger.getLogger(
-                            CrawlerImpl.class.getName()).log(Level.SEVERE, null,
-                            "The file " + files[i].getPath() +
-                            " cannot be deleted" );
-                    }
+    private SSP linkOutlinkWithSSP(Link link, SSP ssp) {
+        UURI localUuri = null;
+        CrawlURI localCuri = null;
+        try {
+            localUuri = UURIFactory.getInstance(link.getDestination().toString());
+        } catch (URIException ex) {
+            java.util.logging.Logger.getLogger(
+                    TanaguruWriterProcessor.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        localCuri = new CrawlURI(localUuri);
+        // We use the heritrix matchesListRegexDecideRule to filter "a priori"
+        // the outlinks that will be fetched
+        if (!getMatchesListRegexDecideRule().decisionFor(localCuri).equals(DecideResult.REJECT)
+                && !isUriSSP(mainWebResource, localCuri.getURI())) {
+            // if the current outlink has already been encountered, a related
+            // content has been created and persisted.
+            LOGGER.debug("Computing " + localCuri.getURI() + " outlink");
+            RelatedContent relatedContent = contentDataService.getRelatedContentFromUriWithParentContent(
+                    mainWebResource,
+                    localCuri.getURI());
+            // if the related content has been found in the db, we retrieve the
+            // object and associate it with the current SSP. The relation is
+            // bidirectionnal, so we also associated the SSP with the related
+            // content
+            if (relatedContent != null) {
+                relatedContent.addParentContent(ssp);
+                ssp.addRelatedContent(relatedContent);
+            } else {
+                // in case of the related content hasn't been encountered yet,
+                // we create the appropriate instance regarding its extension
+                // and associate it bidirectionaly with the SSP.
+                relatedContent = createRelatingContentRegardingExtension(ssp, localCuri);
+                if (relatedContent != null) {
+                    ssp.addRelatedContent(relatedContent);
                 }
             }
         }
-        return (file.delete());
+        return ssp;
     }
 
     /**
-     * This methods realized a deep copy of a content object and add the
-     * copied object to the content list.
-     * @param webResourceSet
-     * @param contentListToCopy
+     * This method checks whether a resource has already been persisted as
+     * a related content. If true, the related content and its relations are
+     * deleted.
+     * @param WebResource
+     * @param uri
      */
-    private void contentDeepCopy(Set<WebResource> webResourceSet,
-            List<Content> contentListToCopy){
-        if (webResource instanceof Site) {
-            for (WebResource wr : webResourceSet) {
-                ((Site) webResource).addChild(webResourceDeepCopy(wr));
-            }
-        } else if (webResourceSet.size() == 1) {
-            webResource = webResourceDeepCopy(webResourceSet.iterator().next());
+    private void checkURIRecordedAsRelatedContent(WebResource WebResource, String uri) {
+        RelatedContent relatedContent =
+                contentDataService.getRelatedContentFromUriWithParentContent(WebResource, uri);
+        if (relatedContent != null) {
+            LOGGER.debug("Fake related content Found with URI " + ((Content)relatedContent).getURI());
+            deleteRelatedContent(relatedContent);
         }
-        contentList = contentDeepCopy(contentListToCopy);
     }
 
     /**
-     * This methods realizes a deep copy of a webresource instance
+     * 
+     * @param relatedContent
+     */
+     private void deleteRelatedContent(RelatedContent relatedContent) {
+        LOGGER.debug("Deleting " + ((Content)relatedContent).getURI());
+        relatedContent.getParentContentSet().clear();
+        contentDataService.saveOrUpdate((Content) relatedContent);
+        contentDataService.delete(((Content) relatedContent).getId());
+    }
+
+     /**
+     * This methods checks whether a resource has already been persisted as
+     * a SSP.
      * @param webResource
+     * @param uri
      * @return
      */
-    private WebResource webResourceDeepCopy(WebResource webResource){
-        StringBuilder webResourceUrl = new StringBuilder();
-        webResourceUrl.append(webResource.getURL());
-        WebResource webResourceCopy =
-                webResourceFactory.createPage(webResourceUrl.toString());
-
-        webResourceCopy.setId(webResource.getId());
-        if(webResource.getLabel() != null) {
-            StringBuilder webResourceLabel = new StringBuilder();
-            webResourceLabel.append(webResource.getLabel());
-            webResourceCopy.setLabel(webResourceLabel.toString());
+    private boolean isUriSSP(WebResource webResource, String uri) {
+        Content content = contentDataService.findSSP(webResource, uri);
+        if (content != null) {
+            LOGGER.debug("Is " + content.getURI() +" a recorded SSP ?" +
+                (content != null && content instanceof SSP));
         }
-        return webResourceCopy;
+        return (content != null && content instanceof SSP) ? true : false;
     }
 
     /**
-     * This method realizes a deep copy of a content list and all its elements
-     * @param contentListToCopy
+     * 
+     * @param ssp
+     * @param uri
      * @return
      */
-    private List<Content> contentDeepCopy(List<Content> contentListToCopy){
-        List<Content> localContentList = new ArrayList<Content>();
-        for(Content contentToCopy : contentListToCopy) {
-            if (contentToCopy instanceof SSP) {
-                SSP ssp = (SSP)contentToCopy;
-                StringBuilder uri = new StringBuilder();
-                if (ssp.getURI() != null) {
-                    uri.append(ssp.getURI());
-                } else {
-                    uri.append("");
-                }
-                StringBuilder sourceCode = new StringBuilder();
-                if (ssp.getSource() != null) {
-                    sourceCode.append(ssp.getSource());
-                }
-                Content htmlContent = contentFactory.createSSP(
-                        new Date(),
-                        uri.toString(),
-                        sourceCode.toString(),
-                        (Page)retrieveWebResource(ssp.getPage()),
-                        ssp.getHttpStatusCode());
-                if (ssp.getCharset() != null) {
-                    StringBuilder charset = new StringBuilder();
-                    charset.append(ssp.getCharset());
-                    ((SSP)htmlContent).setCharset(charset.toString());
-                }
-                localContentList.add(htmlContent);
-            } else if (contentToCopy instanceof StylesheetContent) {
-                StylesheetContent stylesheetContent = 
-                        (StylesheetContent)contentToCopy;
-                StringBuilder uri = new StringBuilder();
-                if (stylesheetContent.getURI() != null) {
-                    uri.append(stylesheetContent.getURI());
-                } else {
-                    uri.append("");
-                }
-                StringBuilder sourceCode = new StringBuilder();
-                if (stylesheetContent.getSource() != null) {
-                    sourceCode.append(stylesheetContent.getSource());
-                }
-                Content cssContent = contentFactory.createStylesheetContent(
-                        new Date(),
-                        uri.toString(),
-                        null,
-                        sourceCode.toString(),
-                        stylesheetContent.getHttpStatusCode());
-                localContentList.add(cssContent);
-            } else if (contentToCopy instanceof ImageContent) {
-                ImageContent imageContent = (ImageContent)contentToCopy;
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                try {
-                    if (imageContent.getContent() != null) {
-                        baos.write(imageContent.getContent());
-                    }
-                } catch (IOException ex) {
-                    java.util.logging.Logger.getLogger(
-                            CrawlerImpl.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                byte[] data = baos.toByteArray();
-                StringBuilder uri = new StringBuilder();
-                if (imageContent.getURI() != null) {
-                    uri.append(imageContent.getURI());
-                } else {
-                    uri.append("");
-                }
-                Content imgContent = contentFactory.createImageContent(
-                        new Date(),
-                        uri.toString(),
-                        null,
-                        data,
-                        imageContent.getHttpStatusCode());
-                localContentList.add(imgContent);
-            }
+    private RelatedContent createRelatingContentRegardingExtension(SSP ssp, CrawlURI uri) {
+        ContentType contentType = getContentTypeFromUnreacheableResource(uri.getURI());
+        switch (contentType) {
+            case css:
+                return contentFactory.createStylesheetContent(uri.getURI(), ssp);
+            case img:
+                return contentFactory.createImageContent(uri.getURI(), ssp);
+            case html:
+                return null;
+            case misc:
+            default:
+                return contentFactory.createRelatedContent(uri.getURI(), ssp);
         }
-        return localContentList;
     }
 
     /**
-     * This method enables to retrieve a instance of webResource among the local
-     * set of webResources through its url.s
-     * @param wr
+     * This methods enables to get the type of resource from its uri.
+     * In case of unreachable resource (404/403 errors), the return content is
+     * a html page. So we can't use the content type of the returned page to
+     * determine the type of the content we try to reach. In this case, we use
+     * the uri extension, based-on regular expressions.
+     * @param uri
      * @return
      */
-    private WebResource retrieveWebResource(WebResource wr) {
-        if (wr != null) {
-            if (webResource instanceof Page){
-                if (webResource.getURL().equalsIgnoreCase(wr.getURL())) {
-                    return webResource;
-                }
-            } else if (webResource instanceof Site) {
-                for (WebResource childPage : ((Site)webResource).getComponentList()) {
-                    if (childPage instanceof Page && childPage.getURL().
-                            equalsIgnoreCase(wr.getURL()))  {
-                        return childPage;
-                    }
-                }
-            }
+    private ContentType getContentTypeFromUnreacheableResource(String uri) {
+        if (MatchesFilePatternDecideRule.Preset.IMAGES.getPattern().
+                matcher(uri).matches()) {
+            return ContentType.img;
+        } else if (getHtmlFilePattern().matcher(uri).matches()) {
+            return ContentType.html;
+        } else if (getCssFilePattern().matcher(uri).matches()) {
+            return ContentType.css;
         }
-        return null;
-    }
-
-    /**
-     * This method cleans up the resources created by the TanaguruWriterProcessor
-     * class. All these resources have been copied (to enable the
-     * TanaguruWriterProcessor instance to be garbaged)
-     * @param processor
-     */
-    private void cleanUpWriterResources(TanaguruWriterProcessor processor){
-        processor.getContentList().clear();
-        processor.setContentList(null);
-        processor.getContentRelationShipMap().clear();
-        processor.setContentRelationShipMap(null);
-        processor.setCssContentRelationShipMap(null);
-        processor.getWebResourceSet().clear();
-        processor.setWebResourceSet(null);
-        processor.setWebResourceFactory(null);
-        processor.setContentFactory(null);
+        return ContentType.misc;
     }
 
     // Bug #154 fix
     /**
      * Some resources may have been downloaded by the crawler component but they
      * are not linked with any webresource. They have to be removed from the
-     * contentList. 
+     * contentList.
      */
     @SuppressWarnings("element-type-mismatch")
     private void removeOrphanContent() {
-        List<Content> contentToRemoveList = new ArrayList<Content>();
-        List<RelatedContent> relatedContentToRemoveList =
-                new ArrayList<RelatedContent>();
-        List<RelatedContent> relatedContentList =
-                new ArrayList<RelatedContent>();
-
-        // we search the SSP without webresource
-        for (Content content :contentList) {
-            if (content instanceof SSP && ((SSP)content).getPage() == null) {
-                contentToRemoveList.add(content);
-            } else if (content instanceof RelatedContent) {
-                relatedContentList.add((RelatedContent)content);
+        List<Content> emptyContentSet = null;
+        Integer nbOfContent = contentDataService.getNumberOfOrphanRelatedContent(mainWebResource).intValue();
+        Integer i = 0;
+        Logger.getLogger(CrawlerImpl.class.getName()).debug("remove Orphan related contents  " + nbOfContent + " elements");
+        while (i.compareTo(nbOfContent) < 0) {
+            emptyContentSet = contentDataService.getOrphanRelatedContentList(mainWebResource, 0, RETRIEVE_WINDOW);
+            for (Content content : emptyContentSet) {
+                Logger.getLogger(CrawlerImpl.class.getName()).debug("Removing " + content.getURI() );
+                contentDataService.delete(content.getId());
             }
+            i = i + RETRIEVE_WINDOW;
         }
 
-        // we remove the orphan SSP from the contentList and we remove the
-        // reference of these SSP from the Parent Set of each relatedContent.
-        for (Content content : contentToRemoveList) {
-            contentList.remove(content);
-            for (RelatedContent relatedContent : relatedContentList) {
-                if ((relatedContent).getParentContentSet().contains(content)) {
-                    relatedContent.getParentContentSet().remove(content);
-                }
+        nbOfContent = contentDataService.getNumberOfOrphanContent(mainWebResource).intValue();
+        i = 0;
+        Logger.getLogger(CrawlerImpl.class.getName()).debug("remove Orphan SSPs  " + nbOfContent + " elements");
+        while (i.compareTo(nbOfContent) < 0) {
+            emptyContentSet = contentDataService.getOrphanContentList(mainWebResource, i, RETRIEVE_WINDOW);
+            for (Content content : emptyContentSet) {
+                contentDataService.delete(content.getId());
             }
+            i = i + RETRIEVE_WINDOW;
         }
-
-        // we search the related contents without parent (whose parents were
-        // orphan SSP that are now deleted)
-        for (RelatedContent relatedContent : relatedContentList) {
-            if (relatedContent.getParentContentSet().isEmpty()) {
-                relatedContentToRemoveList.add(relatedContent);
-            }
-        }
-
-        // we remove from the content list the relatedContent without parent
-        for (RelatedContent relatedContent : relatedContentToRemoveList) {
-            if (relatedContent instanceof Content) {
-                contentList.remove((Content)relatedContent);
-            }
-        }
-
     }
 
     /**
-     * Heritrix lets its log files opened at the end of the crawl.
-     * We have to close them "manually".
+     * This methods add the fetch date and the fetch status to a content and
+     * persist it
+     * @param content
+     * @param curi
      */
-    private void closeCrawlerLogFiles() {
-        List<FileHandler> loggerHandlerList = new ArrayList<FileHandler>();
-        for (Handler handler: crawlJob.getJobLogger().getHandlers()) {
-            if (handler instanceof FileHandler) {
-                ((FileHandler)handler).close();
-                loggerHandlerList.add((FileHandler)handler);
-            }
-        }
-        for (FileHandler fileHandler : loggerHandlerList) {
-            crawlJob.getJobLogger().removeHandler(fileHandler);
-        }
+    private void saveAndPersistFetchDataToContent(Content content, CrawlURI curi) {
+        content.setHttpStatusCode(curi.getFetchStatus());
+        content.setDateOfLoading(new Date(curi.getFetchCompletedTime()));
+        contentDataService.saveOrUpdate(content);
     }
 
 }
