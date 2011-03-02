@@ -54,7 +54,7 @@ public abstract class AbstractRuleImplementation implements RuleImplementation {
         for (Map.Entry<WebResource, List<ProcessResult>> entry : grossResultMap.entrySet()) {
             List<ProcessResult> processResultSet = new ArrayList<ProcessResult>();
             for (ProcessResult processResult : entry.getValue()) {
-                if (processResult.getTest().equals(this.test)) {
+                if (processResult.getTest().getCode().equalsIgnoreCase(this.test.getCode())) {
                     processResultSet.add(processResult);
                 }
             }

@@ -19,4 +19,18 @@ public interface AuditDAO extends GenericDAO<Audit, Long> {
      * @return the collection of the audits that have the status
      */
     Collection<Audit> findAll(AuditStatus status);
+
+    /**
+     * 
+     * @param id
+     * @return
+     */
+    Audit findAuditWithWebResource(Long id);
+
+    /**
+     * 
+     * @param id
+     * @return
+     */
+    Audit findAuditWithTest(Long id);
 }

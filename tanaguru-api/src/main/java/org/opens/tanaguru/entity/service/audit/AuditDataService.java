@@ -22,4 +22,19 @@ public interface AuditDataService extends GenericDataService<Audit, Long> {
      * @return the collection of the audits that have the status
      */
     Collection<? extends Audit> findAll(AuditStatus status);
+
+    /**
+     * 
+     * @param id
+     * @return an instance of audit with its subject (instance of webresource)
+     */
+    Audit getAuditWithWebResource(Long id);
+    
+    /**
+     * 
+     * @param id
+     * @return
+     */
+    Audit getAuditWithTest(Long id);
+
 }

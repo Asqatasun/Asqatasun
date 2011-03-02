@@ -7,6 +7,7 @@ import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.StylesheetContent;
 import com.adex.sdk.entity.service.GenericDataService;
 import java.util.List;
+import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.subject.WebResource;
 
 /**
@@ -85,4 +86,79 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @return
      */
     public boolean hasAdaptedSSP(Audit audit);
+
+    /**
+     * 
+     * @param webResource
+     * @param uri
+     * @return
+     */
+    public RelatedContent getRelatedContentFromUriWithParentContent(
+            WebResource webResource,
+            String uri);
+
+    /**
+     *
+     * @param webResource
+     * @return
+     */
+    public Long getNumberOfOrphanContent(WebResource webResource);
+
+    /**
+     *
+     * @param webResource
+     * @param start
+     * @param chunkSize
+     * @return
+     */
+    public List<Content> getOrphanContentList(
+            WebResource webResource,
+            int start,
+            int chunkSize);
+
+    /**
+     *
+     * @param webResource
+     * @return
+     */
+    public Long getNumberOfOrphanRelatedContent(WebResource webResource);
+
+    /**
+     *
+     * @param webResource
+     * @param start
+     * @param chunkSize
+     * @return
+     */
+    public List<Content> getOrphanRelatedContentList(
+            WebResource webResource,
+            int start,
+            int chunkSize);
+
+    /**
+     *
+     * @param webResource
+     * @param uri
+     * @return
+     */
+    public RelatedContent getRelatedContent(WebResource webResource, String uri);
+
+    /**
+     *
+     * @param webResource
+     * @return
+     */
+    public Long getNumberOfSSPFromWebResource(WebResource webResource);
+
+    /**
+     *
+     * @param webResource
+     * @param start
+     * @param chunkSize
+     * @return
+     */
+    public List<Content> getContentWithRelatedContentFromWebResource(
+            WebResource webResource,
+            int start,
+            int chunkSize);
 }

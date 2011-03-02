@@ -1,7 +1,5 @@
 package org.opens.tanaguru.crawler;
 
-import java.util.List;
-import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
 
@@ -48,10 +46,4 @@ public interface Crawler {
      */
     void setPageURL(String pageURL);
 
-    /**
-     *
-     * @return
-     *          the list of crawled contents
-     */
-    List<Content> getContentListResult();
 }

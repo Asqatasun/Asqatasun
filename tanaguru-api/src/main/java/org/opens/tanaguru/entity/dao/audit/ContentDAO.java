@@ -4,6 +4,7 @@ import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.Content;
 import com.adex.sdk.entity.dao.GenericDAO;
 import java.util.List;
+import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.subject.WebResource;
 
 /**
@@ -40,14 +41,17 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      * @param chunkSize
      * @return
      */
-    public List<? extends Content> retrieveSSPContentWithRelatedContent(Audit audit, int start, int chunkSize);
+    public List<? extends Content> findSSPContentWithRelatedContent(
+            Audit audit,
+            int start,
+            int chunkSize);
 
     /**
      * 
      * @param audit
      * @return
      */
-    public Long retrieveNumberOfSSPContentFromAudit(Audit audit);
+    public Long findNumberOfSSPContentFromAudit(Audit audit);
 
     /**
      *
@@ -62,4 +66,81 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      * @return
      */
     public boolean hasAdaptedSSP(Audit audit);
+
+    /**
+     * 
+     * @param webResource
+     * @param uri
+     * @return
+     */
+    public RelatedContent findRelatedContentFromUriWithParentContent(
+            WebResource webResource,
+            String uri);
+
+    /**
+     * 
+     * @param webResource
+     * @param start
+     * @param chunkSize
+     * @return
+     */
+    public List<Content> findOrphanContentList(
+            WebResource webResource,
+            int start,
+            int chunkSize);
+
+    /**
+     * 
+     * @param webResource
+     * @return
+     */
+    public Long findNumberOfOrphanContentFromWebResource(WebResource webResource);
+
+    /**
+     * 
+     * @param webResource
+     * @param start
+     * @param chunkSize
+     * @return
+     */
+    public List<Content> findOrphanRelatedContentList(
+            WebResource webResource,
+            int start,
+            int chunkSize);
+
+    /**
+     *
+     * @param webResource
+     * @return
+     */
+    public Long findNumberOfOrphanRelatedContentFromWebResource(
+            WebResource webResource);
+
+    /**
+     * 
+     * @param webResource
+     * @param uri
+     * @return
+     */
+    public RelatedContent findRelatedContent(WebResource webResource, String uri);
+
+    /**
+     * 
+     * @param webResource
+     * @return
+     */
+    public Long findNumberOfSSPFromWebResource(WebResource webResource);
+
+    /**
+     * 
+     * @param webResource
+     * @param start
+     * @param chunkSize
+     * @return
+     */
+    public List<Content> findContentWithRelatedContentFromWebResource(
+            WebResource webResource,
+            int start,
+            int chunkSize);
+
 }
