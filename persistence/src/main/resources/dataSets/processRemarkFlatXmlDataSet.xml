@@ -1,13 +1,13 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE dataset SYSTEM "src/main/resources/dataSets/test.dtd">
 <dataset>
     
-    <REFERENCE ID_REFERENCE="1" CD_REFERENCE="01" LABEL="Accessiweb 2.1" RANK="1" URL="http://www.braillenet.org/accessibilite/referentiel-aw21/"/>
+    <REFERENCE Id_Reference="1" Cd_Reference="01" Description="" Label="Accessiweb 2.1" Rank="1" Url="http://www.braillenet.org/accessibilite/referentiel-aw21/"/>
 
-    <THEME ID_THEME="1" CD_THEME="01" LABEL="Theme1" RANK="1"/>
-    <THEME ID_THEME="2" CD_THEME="02" LABEL="Theme2" RANK="2"/>
+    <THEME Id_Theme="1" Cd_Theme="01" Label="Theme1" Rank="1"/>
+    <THEME Id_Theme="2" Cd_Theme="02" Label="Theme2" Rank="2"/>
 
-    <CRITERION ID_CRITERION="1" reference_ID_REFERENCE="1" theme_ID_THEME="1" CD_CRITERION="0101" DESCRIPTION="Criterere 1.1" LABEL="1.1" URL="http://www.doc.org/critere1.1" RANK="1"/>
-    <CRITERION ID_CRITERION="2" reference_ID_REFERENCE="1" theme_ID_THEME="2" CD_CRITERION="0102" DESCRIPTION="Criterere 1.2" LABEL="1.2" URL="http://www.doc.org/critere1.2" RANK="2"/>
+    <CRITERION Id_Criterion="1" Reference_Id_Reference="1" Theme_Id_Theme="1" Cd_Criterion="0101" Description="Critere 1.1" Label="1.1" Url="http://www.doc.org/critere1.1" Rank="1"/>
+    <CRITERION Id_Criterion="2" Reference_Id_Reference="1" Theme_Id_Theme="2" Cd_Criterion="0102" Description="Critere 1.2" Label="1.2" Url="http://www.doc.org/critere1.2" Rank="2"/>
 
     <SCOPE Id_Scope="1" Code="page" Description="page" Label="Page" />
     <SCOPE Id_Scope="2" Code="site" Description="site" Label="Site" />
@@ -18,6 +18,10 @@
     <TEST Id_Test="4" Cd_Test="010104" Description="Test 1.1.4" Label="1.1.4" Rank="4" Id_Criterion="2" Id_Scope="1"/>
     <TEST Id_Test="5" Cd_Test="010105" Description="Test 1.1.5" Label="1.1.5" Rank="5" Id_Criterion="1" Id_Scope="1"/>
     <TEST Id_Test="6" Cd_Test="010106" Description="Test 1.1.6" Label="1.1.6" Rank="6" Id_Criterion="2" Id_Scope="1"/>
+    <TEST Id_Test="7" Cd_Test="010107" Description="Test 1.1.7" Label="1.1.7" Rank="7" Id_Criterion="2" Id_Scope="1"/>
+    <TEST Id_Test="8" Cd_Test="010108" Description="Test 1.1.8" Label="1.1.8" Rank="8" Id_Criterion="1" Id_Scope="1"/>
+    <TEST Id_Test="9" Cd_Test="010109" Description="Test 1.1.9" Label="1.1.9" Rank="9" Id_Criterion="2" Id_Scope="1"/>
+    <TEST Id_Test="10" Cd_Test="010110" Description="Test 1.1.10" Label="1.1.10" Rank="10" Id_Criterion="2" Id_Scope="1"/>
 
     <AUDIT Id_Audit="1" Dt_Creation="2010-10-26 13:50:29" Status="COMPLETED"/>
     <AUDIT Id_Audit="2" Dt_Creation="2010-10-26 14:50:29" Status="COMPLETED"/>
@@ -25,17 +29,17 @@
     <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="1" Label="NULL" Url="http://www.open-s.com/1" Id_Audit="1" Mark="50" />
     <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="2" Label="NULL" Url="http://www.open-s.com/2" Id_Audit="2" Mark="75" />
 
-    <PROCESS_RESULT DTYPE="DefiniteResultImpl" Id_Process_Result="1" Definite_Value="NEED_MORE_INFO" Element_Counter="2" Id_Web_Resource="1" Id_Test="1" />
-    <PROCESS_RESULT DTYPE="DefiniteResultImpl" Id_Process_Result="2" Definite_Value="PASSED" Element_Counter="2" Id_Web_Resource="1" Id_Test="2" />
-    <PROCESS_RESULT DTYPE="IndefiniteResultImpl" Id_Process_Result="3" Indefinite_Value="EMPTY" Element_Counter="2" Id_Web_Resource="1" Id_Test="2" />
-    <PROCESS_RESULT DTYPE="DefiniteResultImpl" Id_Process_Result="4" Definite_Value="NEED_MORE_INFO" Element_Counter="2" Id_Web_Resource="1" Id_Test="1" />
-    <PROCESS_RESULT DTYPE="DefiniteResultImpl" Id_Process_Result="5" Definite_Value="PASSED" Element_Counter="2" Id_Web_Resource="1" Id_Test="2" />
-    <PROCESS_RESULT DTYPE="IndefiniteResultImpl" Id_Process_Result="6" Indefinite_Value="EMPTY" Element_Counter="2" Id_Web_Resource="1" Id_Test="2" />
-    <PROCESS_RESULT DTYPE="DefiniteResultImpl" Id_Process_Result="7" Definite_Value="NEED_MORE_INFO" Element_Counter="2" Id_Web_Resource="2" Id_Test="1" />
-    <PROCESS_RESULT DTYPE="DefiniteResultImpl" Id_Process_Result="8" Definite_Value="FAILED" Element_Counter="2" Id_Web_Resource="1" Id_Test="2" />
-    <PROCESS_RESULT DTYPE="IndefiniteResultImpl" Id_Process_Result="9" Indefinite_Value="EMPTY" Element_Counter="2" Id_Web_Resource="1" Id_Test="2" />
-    <PROCESS_RESULT DTYPE="DefiniteResultImpl" Id_Process_Result="10" Definite_Value="FAILED" Element_Counter="2" Id_Web_Resource="1" Id_Test="1" />
-    <PROCESS_RESULT DTYPE="DefiniteResultImpl" Id_Process_Result="11" Definite_Value="NOT_APPLICABLE" Element_Counter="2" Id_Web_Resource="2" Id_Test="2" />
-    <PROCESS_RESULT DTYPE="IndefiniteResultImpl" Id_Process_Result="12" Indefinite_Value="EMPTY" Element_Counter="2" Id_Web_Resource="1" Id_Test="2" />
+    <PROCESS_RESULT DTYPE="DefiniteResultImpl" Id_Process_Result="1" Definite_Value="NEED_MORE_INFO" Element_Counter="2" Id_Web_Resource="1" Id_Test="1" Id_Audit_Net_Result="1" Id_Audit_Gross_Result="1"/>
+    <PROCESS_RESULT DTYPE="DefiniteResultImpl" Id_Process_Result="2" Definite_Value="PASSED" Element_Counter="2" Id_Web_Resource="1" Id_Test="2" Id_Audit_Net_Result="1" Id_Audit_Gross_Result="1"/>
+    <PROCESS_RESULT DTYPE="IndefiniteResultImpl" Id_Process_Result="3" Indefinite_Value="EMPTY" Element_Counter="2" Id_Web_Resource="1" Id_Test="3" Id_Audit_Net_Result="1" Id_Audit_Gross_Result="1"/>
+    <PROCESS_RESULT DTYPE="DefiniteResultImpl" Id_Process_Result="4" Definite_Value="NEED_MORE_INFO" Element_Counter="2" Id_Web_Resource="1" Id_Test="4" Id_Audit_Net_Result="1" Id_Audit_Gross_Result="1"/>
+    <PROCESS_RESULT DTYPE="DefiniteResultImpl" Id_Process_Result="5" Definite_Value="PASSED" Element_Counter="2" Id_Web_Resource="1" Id_Test="5" Id_Audit_Net_Result="1" Id_Audit_Gross_Result="1"/>
+    <PROCESS_RESULT DTYPE="IndefiniteResultImpl" Id_Process_Result="6" Indefinite_Value="EMPTY" Element_Counter="2" Id_Web_Resource="1" Id_Test="6" Id_Audit_Net_Result="1" Id_Audit_Gross_Result="1"/>
+    <PROCESS_RESULT DTYPE="DefiniteResultImpl" Id_Process_Result="7" Definite_Value="NEED_MORE_INFO" Element_Counter="2" Id_Web_Resource="2" Id_Test="1" Id_Audit_Net_Result="2" Id_Audit_Gross_Result="2"/>
+    <PROCESS_RESULT DTYPE="DefiniteResultImpl" Id_Process_Result="8" Definite_Value="FAILED" Element_Counter="2" Id_Web_Resource="1" Id_Test="7" Id_Audit_Net_Result="1" Id_Audit_Gross_Result="1"/>
+    <PROCESS_RESULT DTYPE="IndefiniteResultImpl" Id_Process_Result="9" Indefinite_Value="EMPTY" Element_Counter="2" Id_Web_Resource="1" Id_Test="8" Id_Audit_Net_Result="1" Id_Audit_Gross_Result="1"/>
+    <PROCESS_RESULT DTYPE="DefiniteResultImpl" Id_Process_Result="10" Definite_Value="FAILED" Element_Counter="2" Id_Web_Resource="1" Id_Test="9" Id_Audit_Net_Result="1" Id_Audit_Gross_Result="1"/>
+    <PROCESS_RESULT DTYPE="DefiniteResultImpl" Id_Process_Result="11" Definite_Value="NOT_APPLICABLE" Element_Counter="2" Id_Web_Resource="2" Id_Test="2" Id_Audit_Net_Result="2" Id_Audit_Gross_Result="2"/>
+    <PROCESS_RESULT DTYPE="IndefiniteResultImpl" Id_Process_Result="12" Indefinite_Value="EMPTY" Element_Counter="2" Id_Web_Resource="1" Id_Test="10" Id_Audit_Net_Result="1" Id_Audit_Gross_Result="1"/>
 
 </dataset>
