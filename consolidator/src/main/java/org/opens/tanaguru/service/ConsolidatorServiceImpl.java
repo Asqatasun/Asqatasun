@@ -20,6 +20,7 @@ public class ConsolidatorServiceImpl implements ConsolidatorService {
         super();
     }
 
+    @Override
     public List<ProcessResult> consolidate(List<ProcessResult> grossResultList,
             List<Test> testList) {
         List<ProcessResult> resultList = new ArrayList<ProcessResult>();
@@ -33,6 +34,7 @@ public class ConsolidatorServiceImpl implements ConsolidatorService {
         return resultList;
     }
 
+    @Override
     public void setConsolidator(Consolidator consolidator) {
         this.consolidator = consolidator;
     }
