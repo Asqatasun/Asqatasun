@@ -8,6 +8,7 @@ import java.util.HashSet;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -28,7 +29,7 @@ public class NomenclatureImpl implements Nomenclature, Serializable {
     protected String code;
     @Column(name = "Description")
     protected String description;
-    @OneToMany(mappedBy = "nomenclature", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "nomenclature", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     protected Collection<NomenclatureElementImpl> elementList = new HashSet<NomenclatureElementImpl>();
     @Id
     @GeneratedValue
