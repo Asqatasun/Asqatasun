@@ -21,7 +21,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
         ContentDAO {
 
     private static final int DEFAULT_HTTP_STATUS_VALUE = -1;
-    private static final Integer HTTP_STATUS_OK = new Integer(HttpStatus.SC_OK);
+    private static final Integer HTTP_STATUS_OK = Integer.valueOf(HttpStatus.SC_OK);
     public ContentDAOImpl() {
         super();
     }
@@ -252,7 +252,6 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             WebResource webResource,
             int start,
             int chunkSize) {
-        Integer status = new Integer(DEFAULT_HTTP_STATUS_VALUE);
         if (webResource instanceof Page) {
             Query query = entityManager.createQuery(
                     "SELECT distinct rc FROM "

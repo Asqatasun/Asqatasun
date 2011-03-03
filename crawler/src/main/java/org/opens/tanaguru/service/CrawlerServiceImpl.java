@@ -111,7 +111,7 @@ public class CrawlerServiceImpl implements CrawlerService {
 
     private void setAuditToContent(WebResource wr, Audit audit) {
         Long nbOfContent = contentDataService.getNumberOfSSPFromWebResource(wr);
-        Long i=new Long(0);
+        Long i= Long.valueOf(0);
         while (i.compareTo(nbOfContent)<0) {
             List<? extends Content> contentList =
                     contentDataService.getContentWithRelatedContentFromWebResource(wr, i.intValue(), 1);

@@ -162,7 +162,7 @@ public class AuditServiceImpl implements AuditService {
         }
         boolean hasCorrectedDOM = false;
         Long nbOfContent = contentDataService.findNumberOfSSPContentFromAudit(audit);
-        Long i=new Long(0);
+        Long i = Long.valueOf(0);
         while (i.compareTo(nbOfContent)<0) {
             List<? extends Content> contentList =
                     contentAdapterService.adaptContent((List<Content>)contentDataService.findSSPContentWithRelatedContent(audit, i.intValue(), TREATMENT_WINDOW));
@@ -198,17 +198,15 @@ public class AuditServiceImpl implements AuditService {
         }
 
         Long nbOfContent = contentDataService.findNumberOfSSPContentFromAudit(audit);
-        Long i=new Long(0);
+        Long i=Long.valueOf(0);
         while (i.compareTo(nbOfContent)<0) {
             List<Content> contentList =
                     (List<Content>)contentDataService.findSSPContentWithRelatedContent(audit, i.intValue(), TREATMENT_WINDOW);
             audit.setGrossResultList(processorService.process(contentList, (List<Test>) audit.getTestList()));
             auditDataService.saveOrUpdate(audit);
             i = i + TREATMENT_WINDOW;
-            System.out.println("audit.getGrossResultList()  " + audit.getGrossResultList().size());
             audit.getGrossResultList().clear();
         }
-        System.out.println("processResultDataService.getNumberOfGrossResultFromAudit(audit) " + processResultDataService.getNumberOfGrossResultFromAudit(audit));
         if (processResultDataService.getNumberOfGrossResultFromAudit(audit)>0) {
             audit.setStatus(AuditStatus.CONSOLIDATION);
         } else {
@@ -231,10 +229,8 @@ public class AuditServiceImpl implements AuditService {
                     + " was required");
             return audit;
         }
-        System.out.println("processResultDataService.getGrossResultFromAudit(audit)   " +processResultDataService.getGrossResultFromAudit(audit).size());
         List<ProcessResult> netResultList = consolidatorService.consolidate(
                 (List<ProcessResult>) processResultDataService.getGrossResultFromAudit(audit), (List<Test>) audit.getTestList());
-        System.out.println("netResultList  "  +netResultList.size());
         audit.setNetResultList(netResultList);
         if (!audit.getNetResultList().isEmpty()) {
             audit.setStatus(AuditStatus.ANALYSIS);
@@ -270,7 +266,7 @@ public class AuditServiceImpl implements AuditService {
                     (List<ProcessResult>) processResultDataService.getNetResultFromAudit(audit)));
             Long nbOfContent =
                     webResourceDataService.getNumberOfChildWebResource(parentWebResource);
-            Long i=new Long(0);
+            Long i = Long.valueOf(0);
             List<WebResource> webResourceList = null;
             List<ProcessResult> webResourceNetResultList = null;
             webResourceDataService.saveOrUpdate(parentWebResource);
