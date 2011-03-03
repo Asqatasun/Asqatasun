@@ -44,10 +44,6 @@ public class WebResourceDataServiceImpl extends AbstractGenericDataService<WebRe
     @Override
     public WebResource read(Long key) {
         WebResource entity = super.read(key);
-        if (entity instanceof Site) {
-            for (WebResource wr : ((Site)entity).getComponentList()) {
-            }
-        }
         return entity;
     }
 

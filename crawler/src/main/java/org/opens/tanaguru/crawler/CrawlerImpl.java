@@ -433,7 +433,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         // THe relation between a ssp and its related contents is defined as
         // merge. Thus, the saveorupdate on the ssp object is spread to the related
         // content objects
-        ssp = (SSP) contentDataService.saveOrUpdate(ssp);
+        contentDataService.saveOrUpdate(ssp);
     }
 
     /**
