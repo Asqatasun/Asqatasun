@@ -63,6 +63,7 @@
             <tx:method name="find*" propagation="REQUIRED"/>
             <tx:method name="retrieve*" propagation="REQUIRED"/>
             <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="has*" propagation="REQUIRED"/>
             <tx:method name="delete*" propagation="REQUIRED"/>
             <tx:method name="save*" propagation="REQUIRED"/>
             <tx:method name="test*" propagation="REQUIRED"/>
