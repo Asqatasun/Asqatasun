@@ -12,7 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -20,9 +19,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author ADEX
  */
 @Entity
-@Table(name = "CONTENT", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {
-        "Uri", "Id_Audit"})})
+@Table(name = "CONTENT")
 public abstract class ContentImpl implements Content, Serializable {
 
     @ManyToOne
