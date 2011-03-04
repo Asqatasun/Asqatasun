@@ -70,6 +70,12 @@
         <property name="entityDao" ref="evidenceElementDAO"/>
     </bean>
 
+    <bean id="nomenclatureDAO" class="org.opens.tanaguru.entity.dao.reference.NomenclatureDAOImpl"/>
+    <bean id="nomenclatureDataService" class="org.opens.tanaguru.entity.service.reference.NomenclatureDataServiceImpl">
+        <property name="entityDao" ref="nomenclatureDAO"/>
+        <property name="entityFactory" ref="nomenclatureFactory"/>
+    </bean>
+
     <bean id="auditService" class="org.opens.tanaguru.service.AuditServiceImpl">
         <property name="crawlerService" ref="crawlerService"/>
 <!--        <property name="contentLoaderService" ref="contentLoaderService"/>-->

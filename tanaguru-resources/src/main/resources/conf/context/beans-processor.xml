@@ -42,14 +42,5 @@
         <property name="evidenceDataService" ref="evidenceDataService"/>
         <property name="evidenceElementFactory" ref="evidenceElementFactory"/>
     </bean>
-    <!--<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject"><ref local="imageChecker"/></property>
-        <property name="targetMethod"><value>setUrlIdentifier</value></property>
-        <property name="arguments">
-            <list>
-                <ref bean="urlIdentifierComponent"/>
-            </list>
-        </property>
-    </bean>-->
 
 </beans>

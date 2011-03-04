@@ -6,12 +6,17 @@
 
     
     <bean id="crawlerComponent" class="org.opens.tanaguru.crawler.CrawlerImpl">
-        <property name="webResourceFactory" ref="webResourceFactory"/>
+        <property name="contentDataService" ref="contentDataService"/>
         <property name="contentFactory" ref="contentFactory"/>
+        <property name="webResourceDataService" ref="webResourceDataService"/>
+        <property name="webResourceFactory" ref="webResourceFactory"/>
         <property name="outputDir" value="${heritrixHome}"/>
     </bean>
 
     <bean id="crawlerService" class="org.opens.tanaguru.service.CrawlerServiceImpl">
+        <property name="contentDataService" ref="contentDataService"/>
+        <property name="webResourceDataService" ref="webResourceDataService"/>
+        <property name="auditDataService" ref="auditDataService"/>
         <property name="crawler" ref="crawlerComponent"/>
     </bean>
 

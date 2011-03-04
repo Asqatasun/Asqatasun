@@ -16,22 +16,16 @@
 
     <import resource="../beans-factories.xml"/>
     <import resource="../beans-persistence.xml"/>
-    
     <import resource="../beans-crawler.xml"/>
     <import resource="../beans-contentloader.xml"/>
     <import resource="../beans-contentadapter.xml"/>
     <import resource="../beans-processor.xml"/>
     <import resource="../beans-consolidator.xml"/>
     <import resource="../beans-analyser.xml"/>
-
     <import resource="../beans-ruleimplementationloader.xml"/>
     <import resource="../beans-nomenclatureloader.xml"/>
-
     <import resource="../beans-tanaguru.xml"/>
-
     <import resource="../beans-logging.xml"/>
-
-    <bean id="testDAO" class="org.opens.tanaguru.entity.dao.reference.TestDAOImpl"/>
 
 </beans>
 

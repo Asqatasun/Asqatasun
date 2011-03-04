@@ -83,9 +83,25 @@ metadata.description=Basic crawl starting with useful defaults
                 </property>
             </bean>
         </property>
-<!-- <property name='sourceTagSeeds' value='false'/> -->
     </bean>
- 
+
+    <bean id="matchesListRegexDecideRule" class="org.archive.modules.deciderules.MatchesListRegexDecideRule">
+        <property name="decision" value="REJECT"/>
+        <property name="listLogicalOr" value="true" />
+        <property name="regexList">
+            <list>
+                <value>.*(?i)(\.(avi|wmv|mpe?g))$</value>
+                <value>.*(?i)(\.(rar|zip|tar))$</value>
+                <value>.*(?i)(\.(doc|xls|odd))$</value>
+                <value>.*(?i)(\.(xml))$</value>
+                <value>.*(?i)(\.(txt|conf))$</value>
+                <value>.*(?i)(\.(swf))$</value>
+                <value>.*(?i)(\.(js))$</value>
+                <value>.*(?i)(\.(bmp|gif|jpe?g|png|svg|tiff?))$</value>
+            </list>
+        </property>
+    </bean>
+
  <!-- SCOPE: rules for which discovered URIs to crawl; order is very 
       important because last decision returned other than 'NONE' wins. -->
     <bean id="scope" class="org.archive.modules.deciderules.DecideRuleSequence">
@@ -119,31 +135,7 @@ metadata.description=Basic crawl starting with useful defaults
                     <!--<property name="maxPathDepth" value="15" />-->
                 </bean>
 
-                <bean class="org.archive.modules.deciderules.MatchesListRegexDecideRule">
-                    <property name="decision" value="REJECT"/>
-                    <property name="listLogicalOr" value="true" />
-                    <property name="regexList">
-                        <list>
-                            <value>.*(?i)(\.(avi|wmv|mpe?g))$</value>
-                            <value>.*(?i)(\.(rar|zip|tar))$</value>
-                            <value>.*(?i)(\.(doc|xls|odd))$</value>
-                            <value>.*(?i)(\.(swf))$</value>
-                            <value>.*(?i)(\.(xml))$</value>
-                            <value>.*(?i)(\.(js))$</value>
-                            <value>.*(?i)(\.(bmp|gif|jpe?g|png|svg|tiff?))$</value>
-                        </list>
-                    </property>
-                </bean>
-
-                <bean class="org.archive.modules.deciderules.MatchesListRegexDecideRule">
-                    <property name="decision" value="ACCEPT"/>
-                    <property name="listLogicalOr" value="true" />
-                    <property name="regexList">
-                        <list>
-                            <value>.*(?i)(\.css(\?.*)?)$</value>
-                        </list>
-                    </property>
-                </bean>
+                <ref bean="matchesListRegexDecideRule"/>
 
                 <!-- ...but always ACCEPT those marked as prerequisitee for another URI... -->
                 <bean class="org.archive.modules.deciderules.PrerequisiteAcceptDecideRule">
@@ -313,20 +305,14 @@ metadata.description=Basic crawl starting with useful defaults
     <property name="caseSensitiveFilesystem" value="true"/>
     <property name="path" value="output"/>
  </bean-->
-
-    <bean id="webResourceFactory" class="org.opens.tanaguru.entity.factory.subject.WebResourceFactoryImpl"/>
-
-    <bean id="contentFactory" class="org.opens.tanaguru.entity.factory.audit.ContentFactoryImpl"/>
-
     <bean id="tanaguruWriter" class="org.opens.tanaguru.crawler.processor.TanaguruWriterProcessor">
-        <property name="webResourceFactory" ref="webResourceFactory"/>
-        <property name="contentFactory" ref="contentFactory"/>
         <property name="htmlRegexp">
             <value>.*(?i)(/|\.htm|\.html|\.php|\.asp|\.aspx|\.jsp|\.do)$</value>
         </property>
         <property name="cssRegexp">
             <value>.*(?i)(\.css(\?.*)?)$</value>
         </property>
+        <property name="matchesListRegexDecideRule" ref="matchesListRegexDecideRule"/>
     </bean>
 
  <!--bean id="warcWriter" class="org.archive.modules.writer.WARCWriterProcessor">

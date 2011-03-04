@@ -18,10 +18,21 @@
         <property name="persistenceXmlLocation" value="${persistenceXmlLocation}"/>
         <property name="jpaProperties">
             <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
                 <prop key="hibernate.show_sql">${jpa.showSql}</prop>
+                <prop key="hibernate.cache.use_second_level_cache">true</prop>
+                <prop key="hibernate.cache.use_structured_entries">true</prop>
+                <prop key="hibernate.cache.use_query_cache">true</prop>
+                <prop key="hibernate.generate_statistics">true</prop>
+                <prop key="hibernate.default_batch_fetch_size">500</prop>
+                <prop key="hibernate.max_fetch_depth">3</prop>
+                <prop key="hibernate.jdbc.batch_size">1000</prop>
+                <prop key="hibernate.use_outer_join">true</prop>
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
             </props>
         </property>
     </bean>
+
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource"
           p:driverClassName="${jdbc.driverClassName}"
@@ -43,7 +54,7 @@
         Instruct Spring to perform declarative transaction management
         automatically on annotated classes.
         -->
-    <!-- tx:annotation-driven / -->
+    <tx:annotation-driven />
     <!--
         Activates various annotations to be detected in bean classes: Spring's
         @Required and @Autowired, as well as JSR 250's @PostConstruct,
@@ -57,25 +68,21 @@
         -->
     <!-- aop:aspectj-autoproxy/ -->
     <aop:config>
-        <aop:pointcut id="transactionalMethods" expression="bean(*DAO) || bean(*Service) || bean(eaLoggerComponent)"/>
+        <aop:pointcut id="transactionalMethods" expression="bean(*DAO) || bean(*Service)"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="transactionalMethods"/>
     </aop:config>
 
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="create*" propagation="REQUIRED"/>
+	    <tx:method name="create*" propagation="REQUIRED"/>
+            <tx:method name="retrieve*" propagation="REQUIRED"/>
+            <tx:method name="find*" propagation="REQUIRED"/>
+            <tx:method name="get*" propagation="REQUIRED"/>
+            <tx:method name="has*" propagation="REQUIRED"/>
             <tx:method name="update*" propagation="REQUIRED"/>
             <tx:method name="delete*" propagation="REQUIRED"/>
             <tx:method name="save*" propagation="REQUIRED"/>
-            <tx:method name="init" propagation="REQUIRED"/>
-            <tx:method name="crawl*" propagation="REQUIRED"/>
-            <tx:method name="load*" propagation="REQUIRED"/>
-            <tx:method name="adapt*" propagation="REQUIRED"/>
-            <tx:method name="process*" propagation="REQUIRED"/>
-            <tx:method name="consolidate*" propagation="REQUIRED"/>
-            <tx:method name="analyse*" propagation="REQUIRED"/>
-            <tx:method name="audit*" propagation="REQUIRED"/>
-            <tx:method name="log*" propagation="REQUIRED"/>
+            <tx:method name="test*" propagation="REQUIRED"/>
             <tx:method name="*" propagation="SUPPORTS" read-only="true"/>
         </tx:attributes>
     </tx:advice>

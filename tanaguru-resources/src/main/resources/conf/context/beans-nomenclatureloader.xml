@@ -4,15 +4,10 @@
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="nomenclatureDAO" class="org.opens.tanaguru.entity.dao.reference.NomenclatureDAOImpl"/>
-    <bean id="nomenclatureFactory" class="org.opens.tanaguru.entity.factory.reference.NomenclatureFactoryImpl"/>
-    <bean id="nomenclatureDataService" class="org.opens.tanaguru.entity.service.reference.NomenclatureDataServiceImpl">
-        <property name="entityDao" ref="nomenclatureDAO"/>
-        <property name="entityFactory" ref="nomenclatureFactory"/>
-    </bean>
     <bean id="nomenclatureLoaderComponent" class="org.opens.tanaguru.nomenclatureloader.NomenclatureLoaderImpl">
         <property name="nomenclatureDataService" ref="nomenclatureDataService"/>
     </bean>
+    
     <bean id="nomenclatureLoaderService" class="org.opens.tanaguru.service.NomenclatureLoaderServiceImpl">
         <property name="nomenclatureLoader" ref="nomenclatureLoaderComponent"/>
     </bean>
