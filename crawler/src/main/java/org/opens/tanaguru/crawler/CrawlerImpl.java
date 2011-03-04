@@ -541,8 +541,6 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                 contentDataService.getRelatedContent(WebResource, uri);
         if (relatedContent != null) {
             LOGGER.debug("Fake related content Found with URI " + ((Content)relatedContent).getURI());
-            relatedContent =
-                contentDataService.getRelatedContentFromUriWithParentContent(WebResource, uri);
             deleteRelatedContent(relatedContent);
         }
     }
@@ -553,8 +551,6 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
      */
      private void deleteRelatedContent(RelatedContent relatedContent) {
         LOGGER.debug("Deleting " + ((Content)relatedContent).getURI());
-        relatedContent.getParentContentSet().clear();
-        contentDataService.saveOrUpdate((Content) relatedContent);
         contentDataService.delete(((Content) relatedContent).getId());
     }
 
