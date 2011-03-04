@@ -95,6 +95,7 @@
                 <value>.*(?i)(\.(doc|xls|odd))$</value>
                 <value>.*(?i)(\.(swf))$</value>
                 <value>.*(?i)(\.(xml))$</value>
+                <value>.*(?i)(\.(txt|conf))$</value>
                 <value>.*(?i)(\.(js))$</value>
                 <value>.*(?i)(\.(bmp|gif|jpe?g|png|svg|tiff?))$</value>
             </list>
@@ -138,16 +139,6 @@
                 </bean>
 
                 <ref bean="matchesListRegexDecideRule"/>
-
-                <bean class="org.archive.modules.deciderules.MatchesListRegexDecideRule">
-                    <property name="decision" value="ACCEPT"/>
-                    <property name="listLogicalOr" value="true" />
-                    <property name="regexList">
-                        <list>
-                            <value>.*(?i)(\.css(\?.*)?)$</value>
-                        </list>
-                    </property>
-                </bean>
 
                 <!-- ...but always ACCEPT those marked as prerequisitee for another URI... -->
                 <bean class="org.archive.modules.deciderules.PrerequisiteAcceptDecideRule">
