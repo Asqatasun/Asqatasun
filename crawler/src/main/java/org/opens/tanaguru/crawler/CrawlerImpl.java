@@ -387,8 +387,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
     
     @Override
     public synchronized void computeResource(CrawlURI curi) {
-        LOGGER.debug("computeResource " + curi.getURI() + " : "
-                + curi.getOutLinks());
+        LOGGER.debug("computeResource " + curi.getURI());
         // We first create a webResource associated with the curi object heritrix is extracting outlinks from.
         Page page = null;
 //        if (parentWebResource instanceof Page && ((Page)parentWebResource).getURL().equalsIgnoreCase(curi.getURI())) {
