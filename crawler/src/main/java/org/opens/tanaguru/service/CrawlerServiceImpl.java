@@ -22,6 +22,7 @@ import org.opens.tanaguru.entity.subject.WebResource;
 public class CrawlerServiceImpl implements CrawlerService {
 
     private static final Logger LOGGER = Logger.getLogger(CrawlerServiceImpl.class);
+    private static final int PROCESS_WINDOW = 400;
     private ContentDataService contentDataService;
 
     private WebResourceDataService webResourceDataService;
@@ -114,18 +115,20 @@ public class CrawlerServiceImpl implements CrawlerService {
         Long i= Long.valueOf(0);
         while (i.compareTo(nbOfContent)<0) {
             List<? extends Content> contentList =
-                    contentDataService.getContentWithRelatedContentFromWebResource(wr, i.intValue(), 1);
+                    contentDataService.getContentWithRelatedContentFromWebResource(wr, i.intValue(), PROCESS_WINDOW);
             for (Content content : contentList) {
                 content.setAudit(audit);
                 contentDataService.saveOrUpdate(content);
                 if (content instanceof SSP) {
                     for (RelatedContent relatedContent : ((SSP)content).getRelatedContentSet()) {
-                        ((Content)relatedContent).setAudit(audit);
-                        contentDataService.saveOrUpdate((Content)relatedContent);
+                        if (((Content)relatedContent).getAudit() != null) {
+                            ((Content)relatedContent).setAudit(audit);
+                            contentDataService.saveOrUpdate((Content)relatedContent);
+                        }
                     }
                 }
             }
-            i++;
+            i = i+ PROCESS_WINDOW;
         }
         webResourceDataService.saveOrUpdate(wr);
     }
