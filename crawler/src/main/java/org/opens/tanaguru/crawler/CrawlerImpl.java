@@ -259,7 +259,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                 String charset = CrawlUtils.extractCharset(recis.getContentReplayInputStream());
                 cssCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset);
             }
-            RelatedContent cssContent = contentDataService.getRelatedContentFromUriWithParentContent(mainWebResource, curi.getURI());
+            RelatedContent cssContent = contentDataService.getRelatedContent(mainWebResource, curi.getURI());
             if (cssContent != null) {
                 if (cssContent instanceof StylesheetContent) {
                     LOGGER.debug("Found css from related content already saved " + curi.getURI());
@@ -273,14 +273,16 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                             null,
                             cssCode,
                             curi.getFetchStatus());
+                    cssContent = contentDataService.getRelatedContentFromUriWithParentContent(
+                            mainWebResource,
+                            curi.getURI());
                     newCssContent.addAllParentContent(cssContent.getParentContentSet());
                     deleteRelatedContent(cssContent);
-                    newCssContent.setSource(cssCode);
                     saveAndPersistFetchDataToContent((Content)newCssContent, curi);
                 }
             }
         } else if (curi.getContentType().contains(ContentType.img.getType())) {
-            RelatedContent imgContent = contentDataService.getRelatedContentFromUriWithParentContent(
+            RelatedContent imgContent = contentDataService.getRelatedContent(
                     mainWebResource,
                     curi.getURI());
             if (imgContent != null) {
@@ -298,10 +300,11 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                             CrawlUtils.getImageContent(recis.getContentReplayInputStream(),
                             CrawlUtils.getImageExtension(curi.getURI())),
                             curi.getFetchStatus());
+                    imgContent = contentDataService.getRelatedContentFromUriWithParentContent(
+                            mainWebResource,
+                            curi.getURI());
                     newImgContent.addAllParentContent(imgContent.getParentContentSet());
                     deleteRelatedContent(imgContent);
-                    newImgContent.setContent(CrawlUtils.getImageContent(recis.getContentReplayInputStream(),
-                            CrawlUtils.getImageExtension(curi.getURI())));
                     saveAndPersistFetchDataToContent(newImgContent, curi);
                 }
             }
@@ -309,7 +312,6 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
             RelatedContent unknownContent = contentDataService.getRelatedContentFromUriWithParentContent(
                     mainWebResource,
                     curi.getURI());
-
             if (unknownContent != null) {
                 deleteRelatedContent(unknownContent);
             }
@@ -503,8 +505,8 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                 && !isUriSSP(mainWebResource, localCuri.getURI())) {
             // if the current outlink has already been encountered, a related
             // content has been created and persisted.
-            LOGGER.debug("Computing " + localCuri.getURI() + " outlink");
-            RelatedContent relatedContent = contentDataService.getRelatedContentFromUriWithParentContent(
+//            LOGGER.debug("Computing " + localCuri.getURI() + " outlink");
+            RelatedContent relatedContent = contentDataService.getRelatedContent(
                     mainWebResource,
                     localCuri.getURI());
             // if the related content has been found in the db, we retrieve the
@@ -512,7 +514,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
             // bidirectionnal, so we also associated the SSP with the related
             // content
             if (relatedContent != null) {
-                relatedContent.addParentContent(ssp);
+//                relatedContent.addParentContent(ssp);
                 ssp.addRelatedContent(relatedContent);
             } else {
                 // in case of the related content hasn't been encountered yet,
@@ -536,9 +538,11 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
      */
     private void checkURIRecordedAsRelatedContent(WebResource WebResource, String uri) {
         RelatedContent relatedContent =
-                contentDataService.getRelatedContentFromUriWithParentContent(WebResource, uri);
+                contentDataService.getRelatedContent(WebResource, uri);
         if (relatedContent != null) {
             LOGGER.debug("Fake related content Found with URI " + ((Content)relatedContent).getURI());
+            relatedContent =
+                contentDataService.getRelatedContentFromUriWithParentContent(WebResource, uri);
             deleteRelatedContent(relatedContent);
         }
     }
