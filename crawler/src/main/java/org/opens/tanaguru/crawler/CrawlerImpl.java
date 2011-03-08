@@ -1,6 +1,7 @@
 package org.opens.tanaguru.crawler;
 
 import java.util.logging.Level;
+import org.archive.modules.deciderules.DecideRuleSequence;
 import org.opens.tanaguru.crawler.processor.TanaguruWriterProcessor;
 import java.io.IOException;
 import java.util.Date;
@@ -15,7 +16,6 @@ import org.archive.io.RecordingInputStream;
 import org.archive.modules.CrawlURI;
 import org.archive.modules.deciderules.DecideResult;
 import org.archive.modules.deciderules.MatchesFilePatternDecideRule;
-import org.archive.modules.deciderules.MatchesListRegexDecideRule;
 import org.archive.modules.extractor.Link;
 import org.archive.net.UURI;
 import org.archive.net.UURIFactory;
@@ -52,12 +52,12 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
     private String heritrixPageFileName = "tanaguru-crawler-beans-page.xml";
     private TanaguruCrawlJob crawlJob;
 
-    private MatchesListRegexDecideRule matchesListRegexDecideRule = null;
-    public MatchesListRegexDecideRule getMatchesListRegexDecideRule() {
-        if (matchesListRegexDecideRule == null && crawlJob != null) {
-            matchesListRegexDecideRule = crawlJob.getMatchesListRegexDecideRule();
+    private DecideRuleSequence decideRuleSequence;
+    public DecideRuleSequence getDecideRuleSequence() {
+        if (decideRuleSequence == null && crawlJob != null) {
+            decideRuleSequence = crawlJob.getDecideRuleSequence();
         }
-        return matchesListRegexDecideRule;
+        return decideRuleSequence;
     }
 
     private Pattern cssFilePattern = null;
@@ -462,7 +462,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                 java.util.logging.Logger.getLogger(TanaguruWriterProcessor.class.getName()).log(Level.SEVERE, null, ex);
             }
             localCuri = new CrawlURI(localUuri);
-            if (getMatchesListRegexDecideRule().decisionFor(localCuri).equals(DecideResult.ACCEPT)) {
+            if (getDecideRuleSequence().innerDecide(localCuri).equals(DecideResult.ACCEPT)) {
                 RelatedContent relatedContent = contentDataService.getRelatedContent(
                         mainWebResource,
                         localCuri.getURI());
@@ -500,7 +500,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         localCuri = new CrawlURI(localUuri);
         // We use the heritrix matchesListRegexDecideRule to filter "a priori"
         // the outlinks that will be fetched
-        if (!getMatchesListRegexDecideRule().decisionFor(localCuri).equals(DecideResult.REJECT)
+        if (getDecideRuleSequence().innerDecide(localCuri).equals(DecideResult.ACCEPT)
                 && !isUriSSP(mainWebResource, localCuri.getURI())) {
             // if the current outlink has already been encountered, a related
             // content has been created and persisted.
@@ -655,5 +655,5 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         content.setDateOfLoading(new Date(curi.getFetchCompletedTime()));
         contentDataService.saveOrUpdate(content);
     }
-
+    
 }

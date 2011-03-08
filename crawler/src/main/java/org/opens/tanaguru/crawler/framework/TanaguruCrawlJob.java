@@ -22,7 +22,7 @@ import org.apache.log4j.Logger;
 import org.archive.crawler.framework.CrawlController;
 import org.archive.crawler.framework.CrawlJob;
 import org.archive.crawler.reporting.AlertThreadGroup;
-import org.archive.modules.deciderules.MatchesListRegexDecideRule;
+import org.archive.modules.deciderules.DecideRuleSequence;
 
 import org.archive.net.UURIFactory;
 import org.archive.spring.PathSharingContext;
@@ -47,6 +47,8 @@ public class TanaguruCrawlJob {
 
     private static final Logger LOGGER = Logger.getLogger(CrawlerImpl.class);
     private static final String urlStrToReplace = "# URLS HERE";
+    private static final String WRITER_BEAN_NAME = "tanaguruWriter";
+    private static final String DECIDE_RULE_SEQUENCE_BEAN_NAME = "scope";
     private File currentJobOutputDir;
     private static final int CRAWL_LAUNCHER_RETRY_TIMEOUT = 1000;
     private static final int CRAWL_LOGGER_TIMEOUT = 2000;
@@ -109,6 +111,7 @@ public class TanaguruCrawlJob {
     }
 
     TanaguruWriterProcessor tanaguruWriterProcessor;
+    DecideRuleSequence decideRuleSequence;
 
     public TanaguruCrawlJob(String[] url, String heritrixFileName, String outputDir, String crawlConfigFilePath) {
         this.outputDir = outputDir;
@@ -290,19 +293,21 @@ public class TanaguruCrawlJob {
      */
     private void setListenerToWriter(PathSharingContext ac) {
         tanaguruWriterProcessor =
-                (TanaguruWriterProcessor) ac.getBean("tanaguruWriter");
+                (TanaguruWriterProcessor) ac.getBean(WRITER_BEAN_NAME);
         tanaguruWriterProcessor.setExtractorHTMLListener(extractorHTMLListener);
         tanaguruWriterProcessor.setExtractorCSSListener(extractorCSSListener);
         tanaguruWriterProcessor.setContentWriter(contentWriter);
+        decideRuleSequence =
+                (DecideRuleSequence) ac.getBean(DECIDE_RULE_SEQUENCE_BEAN_NAME);
     }
 
     /**
-     * This method returns the MatchesListRegexDecideRule instance injected to
+     * This method returns the DecideRuleSequence instance injected to
      * the tanaguruWriterProcessor.
      * @return
      */
-    public MatchesListRegexDecideRule getMatchesListRegexDecideRule() {
-        return tanaguruWriterProcessor.getMatchesListRegexDecideRule();
+    public DecideRuleSequence getDecideRuleSequence() {
+        return decideRuleSequence;
     }
 
     /**
@@ -390,7 +395,6 @@ public class TanaguruCrawlJob {
         tanaguruWriterProcessor.setCssRegexp(null);
         tanaguruWriterProcessor.setExtractorHTMLListener(null);
         tanaguruWriterProcessor.setHtmlRegexp(null);
-        tanaguruWriterProcessor.setMatchesListRegexDecideRule(null);
         tanaguruWriterProcessor = null;
     }
 

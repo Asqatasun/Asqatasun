@@ -5,7 +5,6 @@ import java.util.regex.Pattern;
 import org.archive.io.RecordingInputStream;
 import org.archive.modules.CrawlURI;
 import org.archive.modules.Processor;
-import org.archive.modules.deciderules.MatchesListRegexDecideRule;
 import org.archive.net.UURI;
 import org.opens.tanaguru.crawler.ContentWriter;
 import org.opens.tanaguru.crawler.extractor.listener.ExtractorCSSListener;
@@ -51,14 +50,6 @@ public class TanaguruWriterProcessor extends Processor
         this.contentWriter = contentWriter;
     }
 
-    private MatchesListRegexDecideRule matchesListRegexDecideRule;
-    public MatchesListRegexDecideRule getMatchesListRegexDecideRule() {
-        return matchesListRegexDecideRule;
-    }
-
-    public void setMatchesListRegexDecideRule(MatchesListRegexDecideRule matchesListRegexDecideRule) {
-        this.matchesListRegexDecideRule = matchesListRegexDecideRule;
-    }
     private Pattern cssFilePattern;
 
     /**
