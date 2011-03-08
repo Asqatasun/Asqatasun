@@ -161,4 +161,32 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
             WebResource webResource,
             int start,
             int chunkSize);
+
+    /**
+     *
+     * @param webResource
+     * @param start
+     * @param chunkSize
+     * @return
+     */
+    public List<? extends SSP> getSSPList(WebResource webResource,int start,int chunkSize);
+
+    /**
+     *
+     * @param webResource
+     * @return
+     */
+    public Long getNumberOfRelatedContentFromWebResource(WebResource webResource);
+
+    /**
+     *
+     * @param webResource
+     * @param start
+     * @param chunkSize
+     * @return
+     */
+    public List<? extends RelatedContent> getRelatedContentList(
+            WebResource webResource,
+            int start,
+            int chunkSize);
 }

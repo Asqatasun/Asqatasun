@@ -142,4 +142,23 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
                     chunkSize);
     }
 
+    @Override
+    public List<? extends SSP> getSSPList(WebResource webResource, int start, int chunkSize) {
+        return ((ContentDAO) entityDao).findSSPList(webResource, start, chunkSize);
+    }
+
+    @Override
+    public Long getNumberOfRelatedContentFromWebResource(WebResource webResource) {
+        return ((ContentDAO) entityDao).
+                findNumberOfRelatedContentFromWebResource(webResource);
+    }
+
+    @Override
+    public List<? extends RelatedContent> getRelatedContentList(WebResource webResource, int start, int chunkSize) {
+        return ((ContentDAO) entityDao).findRelatedContentList(
+                webResource,
+                start,
+                chunkSize);
+    }
+
 }

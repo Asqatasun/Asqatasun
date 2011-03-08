@@ -5,6 +5,7 @@ import org.opens.tanaguru.entity.audit.Content;
 import com.adex.sdk.entity.dao.GenericDAO;
 import java.util.List;
 import org.opens.tanaguru.entity.audit.RelatedContent;
+import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.subject.WebResource;
 
 /**
@@ -143,4 +144,34 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
             int start,
             int chunkSize);
 
+    /**
+     * 
+     * @param webResource
+     * @param start
+     * @param chunkSize
+     * @return
+     */
+    public List<? extends SSP> findSSPList(
+            WebResource webResource,
+            int start,
+            int chunkSize);
+
+    /**
+     * 
+     * @param webResource
+     * @return
+     */
+    public Long findNumberOfRelatedContentFromWebResource(WebResource webResource);
+
+    /**
+     * 
+     * @param webResource
+     * @param start
+     * @param chunkSize
+     * @return
+     */
+    public List<? extends RelatedContent> findRelatedContentList(
+            WebResource webResource,
+            int start,
+            int chunkSize);
 }

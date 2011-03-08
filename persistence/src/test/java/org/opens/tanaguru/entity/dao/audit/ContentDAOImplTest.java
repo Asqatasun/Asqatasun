@@ -83,13 +83,6 @@ public class ContentDAOImplTest extends AbstractDaoTestCase {
         assertEquals(Long.valueOf(8), ((Content)relatedContent).getId());
     }
 
-    public void testNumberOfSSPFromWebResource() {
-        WebResource wr = webresourceDAO.read(Long.valueOf(1));
-        assertEquals(Long.valueOf(2), contentDAO.findNumberOfSSPFromWebResource(wr));
-        wr = webresourceDAO.read(Long.valueOf(2));
-        assertEquals(Long.valueOf(1), contentDAO.findNumberOfSSPFromWebResource(wr));
-    }
-
     public void testFindContentWithRelatedContentFromWebResource() {
         WebResource wr = webresourceDAO.read(Long.valueOf(8));
         List<Content> contentList = contentDAO.findContentWithRelatedContentFromWebResource(wr, 0, 1);
@@ -100,9 +93,9 @@ public class ContentDAOImplTest extends AbstractDaoTestCase {
 
     public void testFindNumberOfSSPFromWebResource() {
         WebResource wr = webresourceDAO.read(Long.valueOf(1));
-        assertEquals(Long.valueOf(2), contentDAO.findNumberOfSSPFromWebResource(wr));
+        assertEquals(Long.valueOf(0), contentDAO.findNumberOfSSPFromWebResource(wr));
         wr = webresourceDAO.read(Long.valueOf(2));
-        assertEquals(Long.valueOf(1), contentDAO.findNumberOfSSPFromWebResource(wr));
+        assertEquals(Long.valueOf(0), contentDAO.findNumberOfSSPFromWebResource(wr));
         wr = webresourceDAO.read(Long.valueOf(8));
         assertEquals(Long.valueOf(2), contentDAO.findNumberOfSSPFromWebResource(wr));
         wr = webresourceDAO.read(Long.valueOf(12));
@@ -129,9 +122,9 @@ public class ContentDAOImplTest extends AbstractDaoTestCase {
 
     public void testFindNumberOfSSPContentFromAudit(){
         Audit audit = auditDAO.read(Long.valueOf(1));
-        assertEquals(Long.valueOf(2), contentDAO.findNumberOfSSPContentFromAudit(audit));
+        assertEquals(Long.valueOf(0), contentDAO.findNumberOfSSPContentFromAudit(audit));
         audit = auditDAO.read(Long.valueOf(2));
-        assertEquals(Long.valueOf(1), contentDAO.findNumberOfSSPContentFromAudit(audit));
+        assertEquals(Long.valueOf(0), contentDAO.findNumberOfSSPContentFromAudit(audit));
         audit = auditDAO.read(Long.valueOf(3));
         assertEquals(Long.valueOf(2), contentDAO.findNumberOfSSPContentFromAudit(audit));
     }
@@ -139,16 +132,13 @@ public class ContentDAOImplTest extends AbstractDaoTestCase {
     public void testFindSSPContentWithRelatedContent(){
         Audit audit = auditDAO.read(Long.valueOf(1));
         List<? extends Content> contentList = contentDAO.findSSPContentWithRelatedContent(audit, 0, 100);
-        Iterator iter = contentList.iterator();
-        assertEquals(7, contentList.size() +
-                ((SSP)iter.next()).getRelatedContentSet().size() +
-                ((SSP)iter.next()).getRelatedContentSet().size());
+        assertEquals(0, contentList.size());
         audit = auditDAO.read(Long.valueOf(2));
         contentList = contentDAO.findSSPContentWithRelatedContent(audit, 0, 100);
-        assertEquals(2, contentList.size() +
-                ((SSP)contentList.iterator().next()).getRelatedContentSet().size());
-        audit = auditDAO.read(Long.valueOf(1));
+        assertEquals(0, contentList.size());
+        audit = auditDAO.read(Long.valueOf(3));
         contentList = contentDAO.findSSPContentWithRelatedContent(audit, 0, 100);
+        Iterator iter = contentList.iterator();
         iter = contentList.iterator();
         assertEquals(7, contentList.size() +
                 ((SSP)iter.next()).getRelatedContentSet().size() +
@@ -166,6 +156,24 @@ public class ContentDAOImplTest extends AbstractDaoTestCase {
         assertEquals(Long.valueOf(2), contentDAO.find(wr, "http://www.open-s.com/2.html").getId());
         wr = webresourceDAO.read(Long.valueOf(5));
         assertNull(contentDAO.find(wr, "http://www.open-s.com/2.html"));
+    }
+
+    public void testFindSSPList(){
+        WebResource wr = webresourceDAO.read(Long.valueOf(1));
+        assertEquals(Long.valueOf(0),contentDAO.findNumberOfSSPFromWebResource(wr));
+        assertEquals(0, contentDAO.findSSPList(wr, 0, 10).size());
+        wr = webresourceDAO.read(Long.valueOf(8));
+        assertEquals(Long.valueOf(2),contentDAO.findNumberOfSSPFromWebResource(wr));
+        assertEquals(2, contentDAO.findSSPList(wr, 0, 10).size());
+    }
+
+    public void testFindRelatedContentList(){
+        WebResource wr = webresourceDAO.read(Long.valueOf(1));
+        assertEquals(Long.valueOf(0),contentDAO.findNumberOfRelatedContentFromWebResource(wr));
+        assertEquals(0, contentDAO.findRelatedContentList(wr, 0, 10).size());
+        wr = webresourceDAO.read(Long.valueOf(8));
+        assertEquals(Long.valueOf(3),contentDAO.findNumberOfRelatedContentFromWebResource(wr));
+        assertEquals(3, contentDAO.findRelatedContentList(wr, 0, 10).size());
     }
 
 }
