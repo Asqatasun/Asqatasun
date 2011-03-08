@@ -41,7 +41,7 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "Id_Web_Resource_Parent")
     protected SiteImpl parent;
-    @Column(name = "Url", nullable = false)
+    @Column(name = "Url", length=768, nullable = false)
     protected String url;
     @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
     protected Set<ProcessResultImpl> processResultList = new LinkedHashSet<ProcessResultImpl>();

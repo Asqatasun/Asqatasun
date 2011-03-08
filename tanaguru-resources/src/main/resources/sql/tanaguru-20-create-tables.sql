@@ -50,12 +50,12 @@ CREATE TABLE IF NOT EXISTS `CONTENT` (
   `Id_Content` bigint(20) NOT NULL AUTO_INCREMENT,
   `Dt_Loading` datetime DEFAULT NULL,
   `Http_Status_Code` int(11) NOT NULL,
-  `Uri` varchar(500) NOT NULL,
+  `Uri` varchar(768) NOT NULL,
   `Binary_Content` longblob,
   `Adapted_Content` longtext,
   `Source` longtext,
   `Charset` varchar(255) DEFAULT NULL,
-  `Doctype` varchar(500) DEFAULT NULL,
+  `Doctype` varchar(512) DEFAULT NULL,
   `Id_Audit` bigint(20) DEFAULT NULL,
   `Id_Page` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`Id_Content`),
@@ -363,7 +363,7 @@ CREATE TABLE IF NOT EXISTS `WEB_RESOURCE` (
   `Id_Web_Resource` bigint(20) NOT NULL AUTO_INCREMENT,
   `Label` varchar(255) DEFAULT NULL,
   `Mark` float DEFAULT NULL,
-  `Url` varchar(500) NOT NULL,
+  `Url` varchar(768) NOT NULL,
   `Id_Audit` bigint(20) DEFAULT NULL,
   `Id_Web_Resource_Parent` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`Id_Web_Resource`),
@@ -388,7 +388,8 @@ ALTER TABLE `AUDIT_TEST`
 ALTER TABLE `CONTENT`
   ADD CONSTRAINT `FK6382C059A8A177A1` FOREIGN KEY (`Id_Page`) REFERENCES `WEB_RESOURCE` (`Id_Web_Resource`),
   ADD CONSTRAINT `FK6382C059493EC9C2` FOREIGN KEY (`Id_Audit`) REFERENCES `AUDIT` (`Id_Audit`);
-
+CREATE INDEX Uri_Index ON CONTENT (Uri);
+CREATE INDEX DTYPE_Index ON CONTENT (DTYPE);
 --
 -- Contraintes pour la table `CONTENT_RELATIONSHIP`
 --
@@ -460,3 +461,5 @@ ALTER TABLE `TEST`
 ALTER TABLE `WEB_RESOURCE`
   ADD CONSTRAINT `FKD9A970B92F70FF12` FOREIGN KEY (`Id_Web_Resource_Parent`) REFERENCES `WEB_RESOURCE` (`Id_Web_Resource`),
   ADD CONSTRAINT `FKD9A970B9493EC9C2` FOREIGN KEY (`Id_Audit`) REFERENCES `AUDIT` (`Id_Audit`);
+CREATE INDEX Url_Index ON WEB_RESOURCE (Url);
+CREATE INDEX DTYPE_Index ON WEB_RESOURCE (DTYPE);
