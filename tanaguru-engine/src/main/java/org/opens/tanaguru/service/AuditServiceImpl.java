@@ -34,7 +34,7 @@ public class AuditServiceImpl implements AuditService {
     private TestDataService testDataService;
     private WebResourceDataService webResourceDataService;
     private ContentDataService contentDataService;
-    private static final int TREATMENT_WINDOW = 100;
+    private static final int TREATMENT_WINDOW = 50;
 
     @Autowired
     public AuditServiceImpl(ContentDataService contentDataService) {
