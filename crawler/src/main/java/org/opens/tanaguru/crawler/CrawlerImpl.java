@@ -206,6 +206,10 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
     @Override
     public WebResource getResult() {
         crawlJob = null;
+        decideRuleSequence = null;
+        cssFilePattern = null;
+        htmlFilePattern = null;
+        isPageAlreadyFetched = false;
         return mainWebResource;
     }
 
@@ -504,7 +508,6 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                 && !isUriSSP(mainWebResource, localCuri.getURI())) {
             // if the current outlink has already been encountered, a related
             // content has been created and persisted.
-//            LOGGER.debug("Computing " + localCuri.getURI() + " outlink");
             RelatedContent relatedContent = contentDataService.getRelatedContent(
                     mainWebResource,
                     localCuri.getURI());
@@ -538,10 +541,10 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
     private void checkURIRecordedAsRelatedContent(WebResource WebResource, String uri) {
         RelatedContent relatedContent =
                 contentDataService.getRelatedContent(WebResource, uri);
-        if (relatedContent != null) {
-            LOGGER.debug("Fake related content Found with URI " + ((Content)relatedContent).getURI());
-            deleteRelatedContent(relatedContent);
-        }
+            if (relatedContent != null) {
+                LOGGER.debug("Fake related content Found with URI " + ((Content)relatedContent).getURI());
+                deleteRelatedContent(relatedContent);
+            }
     }
 
     /**
