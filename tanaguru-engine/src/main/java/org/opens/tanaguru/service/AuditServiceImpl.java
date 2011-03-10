@@ -1,5 +1,8 @@
 package org.opens.tanaguru.service;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.audit.Content;
@@ -10,6 +13,7 @@ import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import java.util.List;
+import java.util.Set;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
@@ -24,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class AuditServiceImpl implements AuditService {
 
+    private static Logger LOGGER = Logger.getLogger(AuditServiceImpl.class);
     private AnalyserService analyserService;
     private AuditDataService auditDataService;
     private ConsolidatorService consolidatorService;
@@ -34,7 +39,9 @@ public class AuditServiceImpl implements AuditService {
     private TestDataService testDataService;
     private WebResourceDataService webResourceDataService;
     private ContentDataService contentDataService;
-    private static final int TREATMENT_WINDOW = 50;
+    private static final int ANALYSE_TREATMENT_WINDOW = 50;
+    private static final int PROCESSING_TREATMENT_WINDOW = 25;
+    private static final int ADAPTATION_TREATMENT_WINDOW = 200;
 
     @Autowired
     public AuditServiceImpl(ContentDataService contentDataService) {
@@ -105,7 +112,7 @@ public class AuditServiceImpl implements AuditService {
     @Override
     public Audit init(Audit audit) {
         if (audit.getSubject() == null || audit.getTestList().isEmpty()) {
-            Logger.getLogger(AuditServiceImpl.class).warn("Audit is not well initialized");
+            LOGGER.warn("Audit is not well initialized");
             return audit;
         }
         if (audit.getStatus().equals(AuditStatus.INITIALISATION)) {
@@ -118,7 +125,7 @@ public class AuditServiceImpl implements AuditService {
     @Override
     public Audit crawl(Audit audit) {
         if (!audit.getStatus().equals(AuditStatus.CRAWLING)) {
-            Logger.getLogger(AuditServiceImpl.class).warn(
+            LOGGER.warn(
                     "Audit status is "
                     + audit.getStatus()
                     + " while "
@@ -128,9 +135,9 @@ public class AuditServiceImpl implements AuditService {
         }
 
         if (audit.getSubject() instanceof Site) {
-            audit.setSubject(crawlerService.crawl((Site)audit.getSubject()));
+            audit.setSubject(crawlerService.crawl((Site) audit.getSubject()));
         } else if (audit.getSubject() instanceof Page) {
-            audit.setSubject(crawlerService.crawl((Page)audit.getSubject()));
+            audit.setSubject(crawlerService.crawl((Page) audit.getSubject()));
         }
 
         if (contentDataService.hasContent(audit)) {
@@ -152,7 +159,7 @@ public class AuditServiceImpl implements AuditService {
     public Audit adaptContent(Audit audit) {
         audit = auditDataService.read(audit.getId());
         if (!audit.getStatus().equals(AuditStatus.CONTENT_ADAPTING)) {
-            Logger.getLogger(AuditServiceImpl.class).warn(
+            LOGGER.warn(
                     "Audit status is "
                     + audit.getStatus()
                     + " while "
@@ -160,19 +167,65 @@ public class AuditServiceImpl implements AuditService {
                     + " was required");
             return audit;
         }
+
+        // debug tools
+        Date beginProcessDate = null;
+        Date endProcessDate = null;
+        Date endPersistDate = null;
+        Long persistenceDuration = Long.valueOf(0);
+        //
+
         boolean hasCorrectedDOM = false;
         Long nbOfContent = contentDataService.findNumberOfSSPContentFromAudit(audit);
         Long i = Long.valueOf(0);
-        while (i.compareTo(nbOfContent)<0) {
-            List<? extends Content> contentList =
-                    contentAdapterService.adaptContent((List<Content>)contentDataService.findSSPContentWithRelatedContent(audit, i.intValue(), TREATMENT_WINDOW));
-            for (Content content : contentList) {
-                if (!hasCorrectedDOM && content instanceof SSP && !((SSP) content).getDOM().isEmpty()) {
-                    hasCorrectedDOM = true;
-                }
-                contentDataService.saveOrUpdate(content);
+        while (i.compareTo(nbOfContent) < 0) {
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Adapting from " + i + " to " + (i + ADAPTATION_TREATMENT_WINDOW));
+                beginProcessDate = Calendar.getInstance().getTime();
             }
-            i = i +TREATMENT_WINDOW;
+            List<Content> contentList =
+                    (List<Content>) contentDataService.findSSPContentWithRelatedContent(
+                    audit,
+                    i.intValue(),
+                    ADAPTATION_TREATMENT_WINDOW);
+            Set<Content> contentSet = new HashSet<Content>();
+            contentSet.addAll(contentAdapterService.adaptContent(contentList));
+
+            if (LOGGER.isDebugEnabled()) {
+                endProcessDate = Calendar.getInstance().getTime();
+                LOGGER.debug("Adaptation of "
+                        + ADAPTATION_TREATMENT_WINDOW
+                        + " elements took "
+                        + (endProcessDate.getTime() - beginProcessDate.getTime())
+                        + " ms");
+            }
+            contentDataService.saveOrUpdate(contentSet);
+
+            if (LOGGER.isDebugEnabled()) {
+                endPersistDate = Calendar.getInstance().getTime();
+
+                LOGGER.debug("Persist adaptation of "
+                        + ADAPTATION_TREATMENT_WINDOW
+                        + " elements took "
+                        + (endPersistDate.getTime() - endProcessDate.getTime())
+                        + " ms");
+                persistenceDuration = persistenceDuration
+                        + (endPersistDate.getTime() - endProcessDate.getTime());
+            }
+            if (!hasCorrectedDOM) {
+                for (Content content : contentList) {
+                    if (content instanceof SSP && !((SSP) content).getDOM().isEmpty()) {
+                        hasCorrectedDOM = true;
+                        break;
+                    }
+                }
+            }
+            i = i + ADAPTATION_TREATMENT_WINDOW;
+        }
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Application spent "
+                    + persistenceDuration
+                    + " ms to write in Disk while adapting");
         }
         if (hasCorrectedDOM) {
             audit.setStatus(AuditStatus.PROCESSING);
@@ -188,7 +241,7 @@ public class AuditServiceImpl implements AuditService {
     public Audit process(Audit audit) {
         audit = auditDataService.getAuditWithTest(audit.getId());
         if (!audit.getStatus().equals(AuditStatus.PROCESSING)) {
-            Logger.getLogger(AuditServiceImpl.class).warn(
+            LOGGER.warn(
                     "Audit status is "
                     + audit.getStatus()
                     + " while "
@@ -197,22 +250,69 @@ public class AuditServiceImpl implements AuditService {
             return audit;
         }
 
+        // debug tools
+        Date beginProcessDate = null;
+        Date endProcessDate = null;
+        Date endPersistDate = null;
+        Long persistenceDuration = Long.valueOf(0);
+        //
+
         Long nbOfContent = contentDataService.findNumberOfSSPContentFromAudit(audit);
-        Long i=Long.valueOf(0);
-        while (i.compareTo(nbOfContent)<0) {
-            List<Content> contentList =
-                    (List<Content>)contentDataService.findSSPContentWithRelatedContent(audit, i.intValue(), TREATMENT_WINDOW);
-            audit.setGrossResultList(processorService.process(contentList, (List<Test>) audit.getTestList()));
-            auditDataService.saveOrUpdate(audit);
-            i = i + TREATMENT_WINDOW;
-            audit.getGrossResultList().clear();
+        Long i = Long.valueOf(0);
+        List<Content> contentList;
+        Set<ProcessResult> processResultSet = new HashSet<ProcessResult>();
+        while (i.compareTo(nbOfContent) < 0) {
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Processing from " + i + " to " + (i + PROCESSING_TREATMENT_WINDOW));
+                beginProcessDate = Calendar.getInstance().getTime();
+            }
+
+            contentList = (List<Content>) contentDataService.findSSPContentWithRelatedContent(
+                    audit,
+                    i.intValue(),
+                    PROCESSING_TREATMENT_WINDOW);
+            processResultSet.clear();
+            processResultSet.addAll(processorService.process(contentList, (List<Test>) audit.getTestList()));
+            for (ProcessResult processResult : processResultSet) {
+                processResult.setGrossResultAudit(audit);
+            }
+
+            if (LOGGER.isDebugEnabled()) {
+                endProcessDate = Calendar.getInstance().getTime();
+                LOGGER.debug("Processing of "
+                        + PROCESSING_TREATMENT_WINDOW
+                        + " elements took "
+                        + (endProcessDate.getTime() - beginProcessDate.getTime())
+                        + " ms");
+            }
+            processResultDataService.saveOrUpdate(processResultSet);
+            if (LOGGER.isDebugEnabled()) {
+                endPersistDate = Calendar.getInstance().getTime();
+
+                LOGGER.debug("Persist adaptation of "
+                        + ADAPTATION_TREATMENT_WINDOW
+                        + " elements took "
+                        + (endPersistDate.getTime() - endProcessDate.getTime())
+                        + " ms");
+                persistenceDuration = persistenceDuration
+                        + (endPersistDate.getTime() - endProcessDate.getTime());
+            }
+            i = i + PROCESSING_TREATMENT_WINDOW;
         }
-        if (processResultDataService.getNumberOfGrossResultFromAudit(audit)>0) {
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Application spent "
+                    + persistenceDuration
+                    + " ms to write in Disk while processing");
+        }
+
+        if (processResultDataService.getNumberOfGrossResultFromAudit(audit) > 0) {
             audit.setStatus(AuditStatus.CONSOLIDATION);
         } else {
-            Logger.getLogger(AuditServiceImpl.class).warn("Audit has no gross result");
+            LOGGER.error("Audit has no gross result");
             audit.setStatus(AuditStatus.ERROR);
         }
+
         auditDataService.saveOrUpdate(audit);
         return audit;
     }
@@ -221,7 +321,7 @@ public class AuditServiceImpl implements AuditService {
     public Audit consolidate(Audit audit) {
         audit = auditDataService.getAuditWithTest(audit.getId());
         if (!audit.getStatus().equals(AuditStatus.CONSOLIDATION)) {
-            Logger.getLogger(AuditServiceImpl.class).warn(
+            LOGGER.warn(
                     "Audit status is "
                     + audit.getStatus()
                     + " while "
@@ -229,16 +329,45 @@ public class AuditServiceImpl implements AuditService {
                     + " was required");
             return audit;
         }
-        List<ProcessResult> netResultList = consolidatorService.consolidate(
-                (List<ProcessResult>) processResultDataService.getGrossResultFromAudit(audit), (List<Test>) audit.getTestList());
-        audit.setNetResultList(netResultList);
-        if (!audit.getNetResultList().isEmpty()) {
+
+        // debug tools
+        Date beginProcessDate = null;
+        Date endProcessDate = null;
+        Date endPersistDate = null;
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Consolidation");
+            beginProcessDate = Calendar.getInstance().getTime();
+        }
+        Set<ProcessResult> processResultSet = new HashSet<ProcessResult>();
+        processResultSet.addAll(consolidatorService.consolidate(
+                (List<ProcessResult>) processResultDataService.getGrossResultFromAudit(audit),
+                (List<Test>) audit.getTestList()));
+        for (ProcessResult processResult : processResultSet) {
+            processResult.setNetResultAudit(audit);
+        }
+
+        if (!processResultSet.isEmpty()) {
             audit.setStatus(AuditStatus.ANALYSIS);
         } else {
-            Logger.getLogger(AuditServiceImpl.class).warn("Audit has no net result");
+            LOGGER.warn("Audit has no net result");
             audit.setStatus(AuditStatus.ERROR);
         }
+
+        if (LOGGER.isDebugEnabled()) {
+            endProcessDate = Calendar.getInstance().getTime();
+            LOGGER.debug("Consolidation of this audit took"
+                    + (endProcessDate.getTime() - beginProcessDate.getTime())
+                    + " ms");
+        }
+        processResultDataService.saveOrUpdate(processResultSet);
         audit = auditDataService.saveOrUpdate(audit);
+        if (LOGGER.isDebugEnabled()) {
+            endPersistDate = Calendar.getInstance().getTime();
+            LOGGER.debug("Persist Consolidation of the audit took"
+                    + (endPersistDate.getTime() - endProcessDate.getTime())
+                    + " ms");
+        }
         return audit;
     }
 
@@ -246,7 +375,7 @@ public class AuditServiceImpl implements AuditService {
     public Audit analyse(Audit audit) {
         audit = auditDataService.getAuditWithWebResource(audit.getId());
         if (!audit.getStatus().equals(AuditStatus.ANALYSIS)) {
-            Logger.getLogger(AuditServiceImpl.class).warn(
+            LOGGER.warn(
                     "Audit status is "
                     + audit.getStatus()
                     + " while "
@@ -254,42 +383,99 @@ public class AuditServiceImpl implements AuditService {
                     + " was required");
             return audit;
         }
+        // debug tools
+        Date beginProcessDate = null;
+        Date endProcessDate = null;
+        Date endPersistDate = null;
+        Long persistenceDuration = Long.valueOf(0);
+        //
+
+        Logger.getLogger(AuditServiceImpl.class).info("analysing everything");
         WebResource parentWebResource = audit.getSubject();
         if (parentWebResource instanceof Page) {
             parentWebResource.setMark(
                     analyserService.analyse(
                     (List<ProcessResult>) processResultDataService.getNetResultFromAudit(audit)));
-             webResourceDataService.saveOrUpdate(parentWebResource);
+            webResourceDataService.saveOrUpdate(parentWebResource);
         } else if (parentWebResource instanceof Site) {
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Analysing results of scope site");
+                beginProcessDate = Calendar.getInstance().getTime();
+            }
             parentWebResource.setMark(
                     analyserService.analyse(
                     (List<ProcessResult>) processResultDataService.getNetResultFromAudit(audit)));
+            if (LOGGER.isDebugEnabled()) {
+                endProcessDate = Calendar.getInstance().getTime();
+                LOGGER.debug("Analysing results of scope site took "
+                        + (endProcessDate.getTime() - beginProcessDate.getTime())
+                        + " ms");
+            }
+            webResourceDataService.saveOrUpdate(parentWebResource);
+
+            if (LOGGER.isDebugEnabled()) {
+                endPersistDate = Calendar.getInstance().getTime();
+                LOGGER.debug("Persist Analysis results of scope site  "
+                        + (endPersistDate.getTime() - endProcessDate.getTime())
+                        + " ms");
+                persistenceDuration = persistenceDuration
+                        + (endPersistDate.getTime() - endProcessDate.getTime());
+            }
+
             Long nbOfContent =
                     webResourceDataService.getNumberOfChildWebResource(parentWebResource);
             Long i = Long.valueOf(0);
             List<WebResource> webResourceList = null;
             List<ProcessResult> webResourceNetResultList = null;
-            webResourceDataService.saveOrUpdate(parentWebResource);
-            while (i.compareTo(nbOfContent)<0) {
-                webResourceList = webResourceDataService.
-                        getWebResourceFromItsParent(
-                            parentWebResource,
-                            i.intValue(),
-                            TREATMENT_WINDOW);
+            while (i.compareTo(nbOfContent) < 0) {
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Analysing results of scope page from "
+                            + i + " to " + (i + ANALYSE_TREATMENT_WINDOW));
+                    beginProcessDate = Calendar.getInstance().getTime();
+                }
+                webResourceList = webResourceDataService.getWebResourceFromItsParent(
+                        parentWebResource,
+                        i.intValue(),
+                        ANALYSE_TREATMENT_WINDOW);
                 for (WebResource webresource : webResourceList) {
-                    webResourceNetResultList = (List<ProcessResult>)processResultDataService.
-                            getNetResultFromAuditAndWebResource(audit, webresource);
+                    webResourceNetResultList = (List<ProcessResult>) processResultDataService.getNetResultFromAuditAndWebResource(audit, webresource);
                     // In case of webresource with ssp result different from 200,
                     // there is no result to compute to determine the mark,
                     // In this case, the mark is kept as O.
                     if (!webResourceNetResultList.isEmpty()) {
                         webresource.setMark(analyserService.analyse(webResourceNetResultList));
+                        if (LOGGER.isDebugEnabled()) {
+                            endProcessDate = Calendar.getInstance().getTime();
+                            LOGGER.debug("Analysing results of scope page for "
+                                    + ANALYSE_TREATMENT_WINDOW
+                                    + " elements took "
+                                    + (endProcessDate.getTime() - beginProcessDate.getTime())
+                                    + " ms");
+                        }
                         webResourceDataService.saveOrUpdate(webresource);
+                        if (LOGGER.isDebugEnabled()) {
+                            endPersistDate = Calendar.getInstance().getTime();
+
+                            LOGGER.debug("Persist Analysing results of scope page for "
+                                    + ANALYSE_TREATMENT_WINDOW
+                                    + " elements took "
+                                    + (endPersistDate.getTime() - endProcessDate.getTime())
+                                    + " ms");
+                            persistenceDuration = persistenceDuration
+                                    + (endPersistDate.getTime() - endProcessDate.getTime());
+                        }
                     }
                 }
-                i = i +TREATMENT_WINDOW;
+                i = i + ANALYSE_TREATMENT_WINDOW;
             }
         }
+        
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Application spent "
+                    + persistenceDuration
+                    + " ms to write in Disk while analysing");
+        }
+
         audit.setStatus(AuditStatus.COMPLETED);
         audit = auditDataService.saveOrUpdate(audit);
         return audit;
