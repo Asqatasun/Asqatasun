@@ -15,7 +15,7 @@
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="persistenceXmlLocation" value="${persistenceXmlLocation}"/>
+        <property name="persistenceXmlLocation" value="${tgol-persistenceXmlLocation}"/>
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
@@ -33,13 +33,44 @@
         </property>
     </bean>
 
-    <bean id="dataSource"
-          class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-          p:driverClassName="${jdbc.driverClassName}"
-          p:url="${jdbc.url}"
-          p:username="${jdbc.username}"
+<!--     <bean class="org.springframework.jmx.export.MBeanExporter">
+        <property name="autodetect" value="false" />
+        <property name="assembler">
+            <bean id="jmxAssembler"
+                class="org.springframework.jmx.export.assembler.MetadataMBeanInfoAssembler">
+                <property name="attributeSource">
+                    <bean
+                        class="org.springframework.jmx.export.annotation.AnnotationJmxAttributeSource" />
+                </property>
+            </bean>
+        </property>
+        <property name="beans">
+            <map>
+                <entry key="org.hibernate:name=statistics">
+                    <bean class="org.hibernate.jmx.StatisticsService">
+                        <property name="statisticsEnabled" value="true" />
+                        <property name="sessionFactory">
+                            <util:property-path
+                                path="entityManagerFactory.sessionFactory" />
+                        </property>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>-->
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          p:driverClass="${jdbc.driverClassName}"
+          p:jdbcUrl="${jdbc.url}"
+          p:user="${jdbc.username}"
           p:password="${jdbc.password}"
-          />
+          p:idleConnectionTestPeriod="3600"
+          p:initialPoolSize="50"
+          p:maxPoolSize="1000"
+          p:minPoolSize="10"
+          p:acquireIncrement="10"
+          p:debugUnreturnedConnectionStackTraces="true"
+    />
     <!--
         PostProcessors to perform exception translation on @Repository classes (from native
         exceptions such as JPA PersistenceExceptions to Spring's DataAccessException hierarchy).
