@@ -86,23 +86,6 @@ metadata.description=Basic crawl starting with useful defaults
 <!-- <property name='sourceTagSeeds' value='false'/> -->
     </bean>
 
-    <bean id="matchesListRegexDecideRule" class="org.archive.modules.deciderules.MatchesListRegexDecideRule">
-        <property name="decision" value="REJECT"/>
-        <property name="listLogicalOr" value="true" />
-        <property name="regexList">
-            <list>
-                <value>.*(?i)(\.(avi|wmv|mpe?g))$</value>
-                <value>.*(?i)(\.(rar|zip|tar))$</value>
-                <value>.*(?i)(\.(doc|xls|odd))$</value>
-                <value>.*(?i)(\.(xml))$</value>
-                <value>.*(?i)(\.(txt|conf|pdf))$</value>
-                <value>.*(?i)(\.(swf))$</value>
-                <value>.*(?i)(\.(js))$</value>
-                <value>.*(?i)(\.(bmp|gif|jpe?g|png|svg|tiff?))$</value>
-            </list>
-        </property>
-    </bean>
-
  <!-- SCOPE: rules for which discovered URIs to crawl; order is very 
       important because last decision returned other than 'NONE' wins. -->
     <bean id="scope" class="org.archive.modules.deciderules.DecideRuleSequence">
