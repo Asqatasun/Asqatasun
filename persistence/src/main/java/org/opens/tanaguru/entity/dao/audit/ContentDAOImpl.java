@@ -23,6 +23,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
 
     private static final int DEFAULT_HTTP_STATUS_VALUE = -1;
     private static final Integer HTTP_STATUS_OK = Integer.valueOf(HttpStatus.SC_OK);
+
     public ContentDAOImpl() {
         super();
     }
@@ -69,14 +70,17 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             int chunkSize) {
         Query query = entityManager.createQuery("SELECT s FROM "
                 + SSPImpl.class.getName() + " s"
-                + " LEFT JOIN FETCH s.relatedContentSet as r"
                 + " WHERE s.audit = :audit"
                 + " AND s.httpStatusCode =:httpStatusCode");
         query.setParameter("audit", audit);
         query.setParameter("httpStatusCode", HTTP_STATUS_OK);
         query.setFirstResult(start);
         query.setMaxResults(chunkSize);
-        return query.getResultList();
+        List<Content> contentList = query.getResultList();
+        for (Content content : contentList) {
+            ((SSP) content).getRelatedContentSet().size();
+        }
+        return contentList;
     }
 
     @Override
@@ -94,7 +98,8 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
     public boolean hasAdaptedSSP(Audit audit) {
         Query query = entityManager.createQuery("SELECT count(s.id) FROM "
                 + SSPImpl.class.getName() + " s"
-                + " WHERE s.audit = :audit"
+                + " JOIN s.audit as a"
+                + " WHERE a = :audit"
                 + " AND s.dom != null "
                 + " AND s.dom != '' ");
         query.setParameter("audit", audit);
@@ -109,7 +114,8 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
     public boolean hasContent(Audit audit) {
         Query query = entityManager.createQuery("SELECT count(s.id) FROM "
                 + SSPImpl.class.getName() + " s"
-                + " WHERE s.audit = :audit"
+                + " JOIN s.audit as a"
+                + " WHERE a = :audit"
                 + " AND s.source != null "
                 + " AND s.source != '' )");
         query = query.setParameter("audit", audit);
@@ -192,7 +198,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             Query query = entityManager.createQuery(
                     "SELECT distinct s FROM "
                     + SSPImpl.class.getName() + " s"
-                    + " LEFT JOIN FETCH s.page w"
+                    + " JOIN s.page w"
                     + " WHERE w=:webResource"
                     + " AND s.source IS NULL"
                     + " AND s.httpStatusCode=:httpStatusCode");
@@ -205,7 +211,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             Query query = entityManager.createQuery(
                     "SELECT distinct s FROM "
                     + SSPImpl.class.getName() + " s"
-                    + " LEFT JOIN FETCH s.page w"
+                    + " JOIN s.page w"
                     + " JOIN w.parent p"
                     + " WHERE p=:webResource"
                     + " AND s.source IS NULL"
@@ -418,19 +424,23 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
     }
 
     public RelatedContent findRelatedContent(WebResource webResource, String uri) {
-        Query query = entityManager.createQuery(
-                "SELECT distinct rc FROM "
-                + SSPImpl.class.getName() + " s"
-                + " JOIN s.relatedContentSet rc"
-                + " JOIN s.page w"
-                + " WHERE w=:webResource"
-                + " AND rc.uri=:uri");
-        query.setParameter("webResource", webResource);
-        query.setParameter("uri", uri);
-        try {
-            return (RelatedContent) query.getSingleResult();
-        } catch (NoResultException e) {
-            query = entityManager.createQuery(
+        if (webResource instanceof Page) {
+            Query query = entityManager.createQuery(
+                    "SELECT distinct rc FROM "
+                    + SSPImpl.class.getName() + " s"
+                    + " JOIN s.relatedContentSet rc"
+                    + " JOIN s.page w"
+                    + " WHERE w=:webResource"
+                    + " AND rc.uri=:uri");
+            query.setParameter("webResource", webResource);
+            query.setParameter("uri", uri);
+            try {
+                return (RelatedContent) query.getSingleResult();
+            } catch (NoResultException e) {
+                return null;
+            }
+        } else if (webResource instanceof Site) {
+            Query query = entityManager.createQuery(
                     "SELECT distinct rc FROM "
                     + SSPImpl.class.getName() + " s"
                     + " JOIN s.relatedContentSet rc"
@@ -442,10 +452,11 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             query.setParameter("uri", uri);
             try {
                 return (RelatedContent) query.getSingleResult();
-            } catch (NoResultException e2) {
+            } catch (NoResultException e) {
                 return null;
             }
         }
+        return null;
     }
 
     @Override
@@ -453,25 +464,26 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             WebResource webResource,
             int start,
             int chunkSize) {
-        Query query = entityManager.createQuery(
-                "SELECT s FROM "
-                + SSPImpl.class.getName() + " s"
-                + " LEFT JOIN FETCH s.relatedContentSet rc"
-                + " JOIN s.page w"
-                + " WHERE w=:webResource"
-                + " AND s.httpStatusCode =:httpStatusCode");
-        query.setParameter("webResource", webResource);
-        query.setParameter("httpStatusCode", HTTP_STATUS_OK);
-        query.setFirstResult(start);
-        query.setMaxResults(chunkSize);
-        List<Content> contentList = query.getResultList();
-        if (!contentList.isEmpty()) {
-            return contentList;
-        } else {
-            query = entityManager.createQuery(
+        if (webResource instanceof Page) {
+            Query query = entityManager.createQuery(
                     "SELECT s FROM "
                     + SSPImpl.class.getName() + " s"
-                    + " LEFT JOIN FETCH s.relatedContentSet rc"
+                    + " JOIN s.page w"
+                    + " WHERE w=:webResource"
+                    + " AND s.httpStatusCode =:httpStatusCode");
+            query.setParameter("webResource", webResource);
+            query.setParameter("httpStatusCode", HTTP_STATUS_OK);
+            query.setFirstResult(start);
+            query.setMaxResults(chunkSize);
+            List<Content> contentList = query.getResultList();
+            for (Content content : contentList) {
+                ((SSP) content).getRelatedContentSet().size();
+            }
+            return contentList;
+        } else if (webResource instanceof Site) {
+            Query query = entityManager.createQuery(
+                    "SELECT s FROM "
+                    + SSPImpl.class.getName() + " s"
                     + " JOIN s.page w"
                     + " JOIN w.parent p"
                     + " WHERE p=:webResource"
@@ -480,8 +492,12 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             query.setParameter("httpStatusCode", HTTP_STATUS_OK);
             query.setFirstResult(start);
             query.setMaxResults(chunkSize);
-            contentList = query.getResultList();
+            List<Content> contentList = query.getResultList();
+            for (Content content : contentList) {
+                ((SSP) content).getRelatedContentSet().size();
+            }
+            return contentList;
         }
-        return contentList;
+        return null;
     }
 }
