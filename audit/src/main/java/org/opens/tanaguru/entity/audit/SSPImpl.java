@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlElementRef;
@@ -27,7 +28,7 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
     @Column(name = "Adapted_Content", length = 400000)
     protected String dom;
 
-    @ManyToOne(cascade=CascadeType.REFRESH)
+    @ManyToOne
     @JoinColumn(name = "Id_Page")
     protected PageImpl page;
 
@@ -40,9 +41,10 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
     @Column(name = "Charset")
     protected String charset;
 
-    @ManyToMany(cascade = CascadeType.MERGE,
-        targetEntity=org.opens.tanaguru.entity.audit.RelatedContentImpl.class,
-        mappedBy="parentContentSet")
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "CONTENT_RELATIONSHIP", joinColumns =
+    @JoinColumn(name = "Id_Content_Parent"), inverseJoinColumns =
+    @JoinColumn(name = "Id_Content_Child"))
     protected Set<RelatedContentImpl> relatedContentSet =
             new HashSet<RelatedContentImpl>();
 

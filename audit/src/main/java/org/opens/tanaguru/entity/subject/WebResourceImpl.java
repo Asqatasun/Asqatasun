@@ -7,8 +7,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +27,7 @@ import org.opens.tanaguru.entity.audit.ProcessResultImpl;
 @Table(name = "WEB_RESOURCE")
 public abstract class WebResourceImpl implements WebResource, Serializable {
 
-    @OneToOne(cascade = CascadeType.REFRESH)
+    @OneToOne
     @JoinColumn(name = "Id_Audit", nullable = true)
     protected AuditImpl audit;
     @Id
@@ -38,12 +36,12 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     protected Long id;
     @Column(name = "Label")
     protected String label;
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne
     @JoinColumn(name = "Id_Web_Resource_Parent")
     protected SiteImpl parent;
     @Column(name = "Url", length=768, nullable = false)
     protected String url;
-    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "subject")
     protected Set<ProcessResultImpl> processResultList = new LinkedHashSet<ProcessResultImpl>();
     @Column(name = "Mark")
     protected float mark;

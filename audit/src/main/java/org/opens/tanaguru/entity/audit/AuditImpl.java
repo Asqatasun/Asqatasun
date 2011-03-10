@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -32,27 +31,31 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "AUDIT")
 @XmlRootElement
+//@org.hibernate.annotations.Entity(
+//		selectBeforeUpdate = false,
+//		dynamicInsert = true,
+//		dynamicUpdate = true)
 public class AuditImpl implements Audit, Serializable {
 
     @Column(name = "Comment")
     protected String comment;
-    @OneToMany(mappedBy = "audit", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "audit")
     protected List<ContentImpl> contentList = new ArrayList<ContentImpl>();
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     @Column(name = "Dt_Creation")
     protected Date dateOfCreation;
-    @OneToMany(mappedBy = "grossResultAudit", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "grossResultAudit")
     protected List<ProcessResultImpl> grossResultList = new ArrayList<ProcessResultImpl>();
     @Id
     @GeneratedValue
     @Column(name = "Id_Audit")
     protected Long id;
-    @OneToMany(mappedBy = "netResultAudit", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "netResultAudit")
     protected List<ProcessResultImpl> netResultList = new ArrayList<ProcessResultImpl>();
     @Enumerated(EnumType.STRING)
     @Column(name = "Status")
     protected AuditStatus status = AuditStatus.INITIALISATION;
-    @OneToOne(mappedBy = "audit", cascade = CascadeType.REFRESH)
+    @OneToOne(mappedBy = "audit")
     protected WebResourceImpl subject;
     @ManyToMany
     @JoinTable(name = "AUDIT_TEST", joinColumns =

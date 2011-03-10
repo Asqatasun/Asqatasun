@@ -7,8 +7,6 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
@@ -21,10 +19,9 @@ import javax.xml.bind.annotation.XmlTransient;
 public class RelatedContentImpl extends ContentImpl implements
         RelatedContent, Serializable {
 
-    @ManyToMany(cascade = CascadeType.REMOVE)
-    @JoinTable(name = "CONTENT_RELATIONSHIP", joinColumns =
-    @JoinColumn(name = "Id_Content_Child"), inverseJoinColumns =
-    @JoinColumn(name = "Id_Content_Parent"))
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+        targetEntity=org.opens.tanaguru.entity.audit.SSPImpl.class,
+        mappedBy="relatedContentSet")
     protected Set<ContentImpl> parentContentSet =
             new HashSet<ContentImpl>();
 
@@ -54,7 +51,6 @@ public class RelatedContentImpl extends ContentImpl implements
 
     public RelatedContentImpl(Date dateOfLoading, String uri, SSP ssp, int httpStatusCode) {
         super(dateOfLoading, uri, httpStatusCode);
-//        this.ssp = (SSPImpl)ssp;
         if (ssp != null)
             this.parentContentSet.add((SSPImpl) ssp);
     }
