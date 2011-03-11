@@ -435,8 +435,9 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
             beginProcessDate = Calendar.getInstance().getTime();
         }
         Set<String> localMap = new HashSet<String>();
+        String linkUrl = null;
         for (Link link : curi.getOutLinks()) {
-            String linkUrl = link.getDestination().toString();
+            linkUrl = link.getDestination().toString();
             if (!localMap.contains(linkUrl)) {
                 ssp = linkOutlinkWithSSP(link, ssp);
             }
@@ -453,7 +454,8 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         // THe relation between a ssp and its related contents is defined as
         // merge. Thus, the saveorupdate on the ssp object is spread to the related
         // content objects
-        contentDataService.saveOrUpdate(ssp);
+//        contentDataService.saveOrUpdate(ssp);
+        contentDataService.saveContentRelationShip(ssp);
         if (LOGGER.isDebugEnabled()) {
             endPersistDate = Calendar.getInstance().getTime();
             LOGGER.debug("Spent "
@@ -545,6 +547,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                 // and associate it bidirectionaly with the SSP.
                 relatedContent = createRelatingContentRegardingExtension(ssp, localCuri);
                 if (relatedContent != null) {
+                    contentDataService.saveOrUpdate((Content)relatedContent);
                     ssp.addRelatedContent(relatedContent);
                 }
             }
