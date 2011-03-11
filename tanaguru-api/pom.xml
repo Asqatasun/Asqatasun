@@ -33,6 +33,20 @@
             <groupId>org.archive.heritrix</groupId>
             <artifactId>heritrix-modules</artifactId>
             <version>3.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>org.springframework</artifactId>
+                    <groupId>spring-beans</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>org.springframework</artifactId>
+                    <groupId>spring-context</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>org.springframework</artifactId>
+                    <groupId>spring-core</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
