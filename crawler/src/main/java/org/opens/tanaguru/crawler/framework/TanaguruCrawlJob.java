@@ -143,8 +143,6 @@ public class TanaguruCrawlJob {
                 if (crawlJob.isUnpausable()) {
                     crawlJob.getCrawlController().getFrontier().run();
                 }
-                Logger.getLogger(CrawlerImpl.class.getName()).info(
-                        "crawljob is running");
                 Thread.sleep(CRAWL_LOGGER_TIMEOUT);
             } catch (InterruptedException e) {
                 // do nothing

@@ -4,6 +4,7 @@ import java.util.logging.Level;
 import org.archive.modules.deciderules.DecideRuleSequence;
 import org.opens.tanaguru.crawler.processor.TanaguruWriterProcessor;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -43,7 +44,7 @@ import org.opens.tanaguru.entity.subject.WebResource;
 public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSSListener, ContentWriter {
 
     private static final Logger LOGGER = Logger.getLogger(CrawlerImpl.class);
-        private static final int RETRIEVE_WINDOW = 100;
+    private static final int RETRIEVE_WINDOW = 100;
     private static final String UNREACHABLE_RESOURCE_STR =
             "Unreachable resource ";
     private boolean isPageAlreadyFetched = false;
@@ -51,31 +52,30 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
     private String heritrixSiteFileName = "tanaguru-crawler-beans-site.xml";
     private String heritrixPageFileName = "tanaguru-crawler-beans-page.xml";
     private TanaguruCrawlJob crawlJob;
-
     private DecideRuleSequence decideRuleSequence;
+
     public DecideRuleSequence getDecideRuleSequence() {
         if (decideRuleSequence == null && crawlJob != null) {
             decideRuleSequence = crawlJob.getDecideRuleSequence();
         }
         return decideRuleSequence;
     }
-
     private Pattern cssFilePattern = null;
+
     public Pattern getCssFilePattern() {
         if (cssFilePattern == null && crawlJob != null) {
             cssFilePattern = crawlJob.getCssFilePattern();
         }
         return cssFilePattern;
     }
-
     private Pattern htmlFilePattern = null;
+
     public Pattern getHtmlFilePattern() {
         if (htmlFilePattern == null && crawlJob != null) {
             htmlFilePattern = crawlJob.getHtmlFilePattern();
         }
         return htmlFilePattern;
     }
-
     private ContentDataService contentDataService;
 
     public ContentDataService getContentDataService() {
@@ -225,7 +225,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
     @Override
     public void computeAndPersistSuccessfullFetchedResource(
             CrawlURI curi,
-            RecordingInputStream recis) throws IOException{
+            RecordingInputStream recis) throws IOException {
         LOGGER.debug("Writing " + curi.getURI() + " : "
                 + curi.getFetchStatus());
         if (curi.getContentType().contains(ContentType.html.getType())
@@ -268,7 +268,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                 if (cssContent instanceof StylesheetContent) {
                     LOGGER.debug("Found css from related content already saved " + curi.getURI());
                     ((StylesheetContent) cssContent).setSource(cssCode);
-                    saveAndPersistFetchDataToContent((Content)cssContent, curi);
+                    saveAndPersistFetchDataToContent((Content) cssContent, curi);
                 } else {
                     LOGGER.debug("Conversion From RelatedContent to Css" + curi.getURI());
                     StylesheetContent newCssContent = contentFactory.createStylesheetContent(
@@ -282,7 +282,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                             curi.getURI());
                     newCssContent.addAllParentContent(cssContent.getParentContentSet());
                     deleteRelatedContent(cssContent);
-                    saveAndPersistFetchDataToContent((Content)newCssContent, curi);
+                    saveAndPersistFetchDataToContent((Content) newCssContent, curi);
                 }
             }
         } else if (curi.getContentType().contains(ContentType.img.getType())) {
@@ -294,7 +294,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                     LOGGER.debug("Found image from related content already saved " + curi.getURI());
                     ((ImageContent) imgContent).setContent(CrawlUtils.getImageContent(recis.getContentReplayInputStream(),
                             CrawlUtils.getImageExtension(curi.getURI())));
-                    saveAndPersistFetchDataToContent((Content)imgContent, curi);
+                    saveAndPersistFetchDataToContent((Content) imgContent, curi);
                 } else {
                     LOGGER.debug("Conversion From RelatedContent to Image" + curi.getURI());
                     ImageContent newImgContent = contentFactory.createImageContent(
@@ -325,7 +325,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
     @Override
     public void computeAndPersistUnsuccessfullFetchedResource(CrawlURI curi) {
         ContentType resourceContentType =
-                    getContentTypeFromUnreacheableResource(curi.getCanonicalString());
+                getContentTypeFromUnreacheableResource(curi.getCanonicalString());
         switch (resourceContentType) {
             case css:
                 LOGGER.info(
@@ -334,7 +334,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                 RelatedContent relatedContent = contentDataService.getRelatedContent(
                         mainWebResource,
                         curi.getURI());
-                saveAndPersistFetchDataToContent((Content)relatedContent, curi);
+                saveAndPersistFetchDataToContent((Content) relatedContent, curi);
                 break;
             case html:
                 LOGGER.info(UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
@@ -342,9 +342,9 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                 WebResource wr = null;
                 if (mainWebResource instanceof Site) {
                     wr =
-                        webResourceDataService.getByUrlAndParentWebResource(
-                        curi.getURI(),
-                        mainWebResource);
+                            webResourceDataService.getByUrlAndParentWebResource(
+                            curi.getURI(),
+                            mainWebResource);
                 } else {
                     wr = mainWebResource;
                 }
@@ -357,14 +357,14 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                 relatedContent = contentDataService.getRelatedContent(
                         mainWebResource,
                         curi.getURI());
-                saveAndPersistFetchDataToContent((Content)relatedContent, curi);
+                saveAndPersistFetchDataToContent((Content) relatedContent, curi);
                 break;
             case misc:
                 if (mainWebResource instanceof Site) {
                     wr =
-                        webResourceDataService.getByUrlAndParentWebResource(
-                        curi.getURI(),
-                        mainWebResource);
+                            webResourceDataService.getByUrlAndParentWebResource(
+                            curi.getURI(),
+                            mainWebResource);
                 } else {
                     wr = mainWebResource;
                 }
@@ -373,10 +373,10 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                     saveAndPersistFetchDataToContent(htmlContent, curi);
                 } else {
                     relatedContent = contentDataService.getRelatedContent(
-                        mainWebResource,
-                        curi.getURI());
+                            mainWebResource,
+                            curi.getURI());
                     if (relatedContent != null) {
-                        saveAndPersistFetchDataToContent((Content)relatedContent, curi);
+                        saveAndPersistFetchDataToContent((Content) relatedContent, curi);
                     }
                 }
                 LOGGER.debug("MISC" + UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
@@ -388,9 +388,12 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                 break;
         }
     }
-    
+
     @Override
-    public synchronized void computeResource(CrawlURI curi) {
+    public void computeResource(CrawlURI curi) {
+        Date beginProcessDate = null;
+        Date endProcessDate = null;
+        Date endPersistDate = null;
         LOGGER.debug("computeResource " + curi.getURI());
         // We first create a webResource associated with the curi object heritrix is extracting outlinks from.
         Page page = null;
@@ -426,6 +429,11 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         // with the same URI, we maintain a local map. This case happens when a same
         // link is found in the same page but with a different type (E as Embed or
         // L as Link)
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Analysing outlink for  "
+                    + ssp.getURI());
+            beginProcessDate = Calendar.getInstance().getTime();
+        }
         Set<String> localMap = new HashSet<String>();
         for (Link link : curi.getOutLinks()) {
             String linkUrl = link.getDestination().toString();
@@ -434,11 +442,24 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
             }
             localMap.add(linkUrl);
         }
-        LOGGER.debug("save SSP " + ssp.getURI() + " with " + ssp.getRelatedContentSet().size() +" elements");
+        if (LOGGER.isDebugEnabled()) {
+            endProcessDate = Calendar.getInstance().getTime();
+            LOGGER.debug("Save SSP " + ssp.getURI() + " with "
+                    + ssp.getRelatedContentSet().size()
+                    + " elements. Processing took "
+                    + (endProcessDate.getTime() - beginProcessDate.getTime())
+                    + " ms");
+        }
         // THe relation between a ssp and its related contents is defined as
         // merge. Thus, the saveorupdate on the ssp object is spread to the related
         // content objects
         contentDataService.saveOrUpdate(ssp);
+        if (LOGGER.isDebugEnabled()) {
+            endPersistDate = Calendar.getInstance().getTime();
+            LOGGER.debug("Spent "
+                    + (endPersistDate.getTime() - endProcessDate.getTime())
+                    + " ms saving " + ssp.getURI());
+        }
     }
 
     /**
@@ -541,22 +562,22 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
     private void checkURIRecordedAsRelatedContent(WebResource WebResource, String uri) {
         RelatedContent relatedContent =
                 contentDataService.getRelatedContent(WebResource, uri);
-            if (relatedContent != null) {
-                LOGGER.debug("Fake related content Found with URI " + ((Content)relatedContent).getURI());
-                deleteRelatedContent(relatedContent);
-            }
+        if (relatedContent != null) {
+            LOGGER.debug("Fake related content Found with URI " + ((Content) relatedContent).getURI());
+            deleteRelatedContent(relatedContent);
+        }
     }
 
     /**
      * 
      * @param relatedContent
      */
-     private void deleteRelatedContent(RelatedContent relatedContent) {
-        LOGGER.debug("Deleting " + ((Content)relatedContent).getURI());
+    private void deleteRelatedContent(RelatedContent relatedContent) {
+        LOGGER.debug("Deleting " + ((Content) relatedContent).getURI());
         contentDataService.delete(((Content) relatedContent).getId());
     }
 
-     /**
+    /**
      * This methods checks whether a resource has already been persisted as
      * a SSP.
      * @param webResource
@@ -566,8 +587,8 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
     private boolean isUriSSP(WebResource webResource, String uri) {
         Content content = contentDataService.findSSP(webResource, uri);
         if (content != null) {
-            LOGGER.debug("Is " + content.getURI() +" a recorded SSP ?" +
-                (content != null && content instanceof SSP));
+            LOGGER.debug("Is " + content.getURI() + " a recorded SSP ?"
+                    + (content != null && content instanceof SSP));
         }
         return (content != null && content instanceof SSP) ? true : false;
     }
@@ -629,7 +650,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         while (i.compareTo(nbOfContent) < 0) {
             emptyContentSet = contentDataService.getOrphanRelatedContentList(mainWebResource, 0, RETRIEVE_WINDOW);
             for (Content content : emptyContentSet) {
-                Logger.getLogger(CrawlerImpl.class.getName()).debug("Removing " + content.getURI() );
+                Logger.getLogger(CrawlerImpl.class.getName()).debug("Removing " + content.getURI());
                 contentDataService.delete(content.getId());
             }
             i = i + RETRIEVE_WINDOW;
@@ -658,5 +679,4 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         content.setDateOfLoading(new Date(curi.getFetchCompletedTime()));
         contentDataService.saveOrUpdate(content);
     }
-    
 }
