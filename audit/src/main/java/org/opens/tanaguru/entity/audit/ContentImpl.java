@@ -20,6 +20,10 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "CONTENT")
+@org.hibernate.annotations.Entity(
+		selectBeforeUpdate = false,
+		dynamicInsert = true,
+		dynamicUpdate = true)
 public abstract class ContentImpl implements Content, Serializable {
 
     @ManyToOne

@@ -16,10 +16,14 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @XmlRootElement
+@org.hibernate.annotations.Entity(
+		selectBeforeUpdate = false,
+		dynamicInsert = true,
+		dynamicUpdate = true)
 public class RelatedContentImpl extends ContentImpl implements
         RelatedContent, Serializable {
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+    @ManyToMany(cascade = CascadeType.MERGE,
         targetEntity=org.opens.tanaguru.entity.audit.SSPImpl.class,
         mappedBy="relatedContentSet")
     protected Set<ContentImpl> parentContentSet =
