@@ -42,7 +42,7 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      * @param chunkSize
      * @return
      */
-    public List<? extends Content> findSSPContentWithRelatedContent(
+    List<? extends Content> findSSPContentWithRelatedContent(
             Audit audit,
             int start,
             int chunkSize);
@@ -52,21 +52,21 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      * @param audit
      * @return
      */
-    public Long findNumberOfSSPContentFromAudit(Audit audit);
+    Long findNumberOfSSPContentFromAudit(Audit audit);
 
     /**
      *
      * @param audit
      * @return
      */
-    public boolean hasContent(Audit audit);
+    boolean hasContent(Audit audit);
 
     /**
      * 
      * @param audit
      * @return
      */
-    public boolean hasAdaptedSSP(Audit audit);
+    boolean hasAdaptedSSP(Audit audit);
 
     /**
      * 
@@ -74,7 +74,7 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      * @param uri
      * @return
      */
-    public RelatedContent findRelatedContentFromUriWithParentContent(
+    RelatedContent findRelatedContentFromUriWithParentContent(
             WebResource webResource,
             String uri);
 
@@ -85,7 +85,7 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      * @param chunkSize
      * @return
      */
-    public List<Content> findOrphanContentList(
+    List<Content> findOrphanContentList(
             WebResource webResource,
             int start,
             int chunkSize);
@@ -95,7 +95,7 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      * @param webResource
      * @return
      */
-    public Long findNumberOfOrphanContentFromWebResource(WebResource webResource);
+    Long findNumberOfOrphanContentFromWebResource(WebResource webResource);
 
     /**
      * 
@@ -104,7 +104,7 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      * @param chunkSize
      * @return
      */
-    public List<Content> findOrphanRelatedContentList(
+    List<Content> findOrphanRelatedContentList(
             WebResource webResource,
             int start,
             int chunkSize);
@@ -114,7 +114,7 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      * @param webResource
      * @return
      */
-    public Long findNumberOfOrphanRelatedContentFromWebResource(
+    Long findNumberOfOrphanRelatedContentFromWebResource(
             WebResource webResource);
 
     /**
@@ -123,14 +123,14 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      * @param uri
      * @return
      */
-    public RelatedContent findRelatedContent(WebResource webResource, String uri);
+    RelatedContent findRelatedContent(WebResource webResource, String uri);
 
     /**
      * 
      * @param webResource
      * @return
      */
-    public Long findNumberOfSSPFromWebResource(WebResource webResource);
+    Long findNumberOfSSPFromWebResource(WebResource webResource);
 
     /**
      * 
@@ -139,7 +139,7 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      * @param chunkSize
      * @return
      */
-    public List<Content> findContentWithRelatedContentFromWebResource(
+    List<Content> findContentWithRelatedContentFromWebResource(
             WebResource webResource,
             int start,
             int chunkSize);
@@ -151,7 +151,7 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      * @param chunkSize
      * @return
      */
-    public List<? extends SSP> findSSPList(
+    List<? extends SSP> findSSPList(
             WebResource webResource,
             int start,
             int chunkSize);
@@ -161,7 +161,7 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      * @param webResource
      * @return
      */
-    public Long findNumberOfRelatedContentFromWebResource(WebResource webResource);
+    Long findNumberOfRelatedContentFromWebResource(WebResource webResource);
 
     /**
      * 
@@ -170,8 +170,13 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      * @param chunkSize
      * @return
      */
-    public List<? extends RelatedContent> findRelatedContentList(
+    List<? extends RelatedContent> findRelatedContentList(
             WebResource webResource,
             int start,
             int chunkSize);
+
+    /**
+     * 
+     */
+    void saveContentRelationShip(SSP ssp);
 }

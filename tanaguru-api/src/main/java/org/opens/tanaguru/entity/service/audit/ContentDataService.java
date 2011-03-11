@@ -189,4 +189,10 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
             WebResource webResource,
             int start,
             int chunkSize);
+
+    /**
+     * 
+     * @param ssp
+     */
+    public void saveContentRelationShip(SSP ssp);
 }

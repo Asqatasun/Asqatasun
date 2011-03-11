@@ -161,4 +161,9 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
                 chunkSize);
     }
 
+    @Override
+    public void saveContentRelationShip(SSP ssp) {
+        ((ContentDAO) entityDao).saveContentRelationShip(ssp);
+    }
+
 }

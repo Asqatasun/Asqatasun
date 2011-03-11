@@ -23,6 +23,8 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
 
     private static final int DEFAULT_HTTP_STATUS_VALUE = -1;
     private static final Integer HTTP_STATUS_OK = Integer.valueOf(HttpStatus.SC_OK);
+    private static final String INSERT_QUERY =
+            "insert into CONTENT_RELATIONSHIP (Id_Content_Parent, Id_Content_Child) values ";
 
     public ContentDAOImpl() {
         super();
@@ -500,4 +502,30 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
         }
         return null;
     }
+
+    /**
+     * This native query is used to avoid multiple select before insert realized
+     * by hibernate while persisting the content relationship relation.
+     * @param ssp
+     */
+    @Override
+    public void saveContentRelationShip(SSP ssp) {
+        if (!ssp.getRelatedContentSet().isEmpty()) {
+            StringBuilder queryValuesBuilder = new StringBuilder();
+            for (RelatedContent relatedContent : ssp.getRelatedContentSet()) {
+                queryValuesBuilder.append("(");
+                queryValuesBuilder.append(ssp.getId());
+                queryValuesBuilder.append(",");
+                queryValuesBuilder.append(((Content)relatedContent).getId());
+                queryValuesBuilder.append(")");
+                queryValuesBuilder.append(",");
+            }
+            queryValuesBuilder.setCharAt(queryValuesBuilder.length()-1, ';');
+            Query query = entityManager.createNativeQuery(
+                    INSERT_QUERY+
+                    queryValuesBuilder.toString());
+            query.executeUpdate();
+        }
+    }
+
 }
