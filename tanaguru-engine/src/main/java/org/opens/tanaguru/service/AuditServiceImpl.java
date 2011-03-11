@@ -390,7 +390,6 @@ public class AuditServiceImpl implements AuditService {
         Long persistenceDuration = Long.valueOf(0);
         //
 
-        Logger.getLogger(AuditServiceImpl.class).info("analysing everything");
         WebResource parentWebResource = audit.getSubject();
         if (parentWebResource instanceof Page) {
             parentWebResource.setMark(
