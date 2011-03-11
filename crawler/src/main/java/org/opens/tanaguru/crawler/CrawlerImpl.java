@@ -390,7 +390,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
     }
 
     @Override
-    public void computeResource(CrawlURI curi) {
+    public synchronized void computeResource(CrawlURI curi) {
         Date beginProcessDate = null;
         Date endProcessDate = null;
         Date endPersistDate = null;
