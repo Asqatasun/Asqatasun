@@ -27,9 +27,9 @@
         <module>logging</module>
         <!--<module>tanaguru-client</module>
         <module>tanaguru-ws</module>
-        <module>tanaguru-ws-client</module>-->
+        <module>tanaguru-ws-client</module>>
         <module>tanaguru-membership</module>
-        <module>tanaguru-i18n</module>
+        <module>tanaguru-i18n</module-->
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
