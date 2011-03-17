@@ -7,10 +7,10 @@
     <bean id="tempHTMLFileManagerComponent" class="org.opens.tanaguru.contentadapter.html.util.TempHTMLFileManagerImpl">
         <!-- property name="tempFolder" value="${tempFolder}"/ -->
     </bean>
-    <bean id="geckoHTMLCleanerComponent" class="org.opens.tanaguru.contentadapter.html.GeckoHTMLCleanerImpl">
+    <!--bean id="geckoHTMLCleanerComponent" class="org.opens.tanaguru.contentadapter.html.GeckoHTMLCleanerImpl">
         <property name="greHome" value="${greHome}"/>
         <property name="tempHTMLFileManager" ref="tempHTMLFileManagerComponent"/>
-    </bean>
+    </bean-->
 
     <bean id="fluteParser" class="org.w3c.flute.parser.Parser"/>
     <!--bean id="batikParser" class="org.apache.batik.css.parser.Parser"/-->
