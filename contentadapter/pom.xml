@@ -53,8 +53,8 @@
             <groupId>org.eclipse.swt</groupId>
             <artifactId>swt</artifactId>
             <version>3.452</version>
-        </dependency>
-        <dependency-->
+        </dependency-->
+        <dependency>
             <groupId>org.htmlcleaner</groupId>
             <artifactId>htmlcleaner</artifactId>
             <version>2.2</version>
