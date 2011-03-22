@@ -9,7 +9,7 @@ import org.opens.tanaguru.entity.audit.StylesheetContent;
 import org.opens.tanaguru.entity.dao.audit.ContentDAO;
 import com.adex.sdk.entity.service.AbstractGenericDataService;
 import java.util.List;
-import org.opens.tanaguru.entity.audit.SSPImpl;
+import java.util.Set;
 import org.opens.tanaguru.entity.subject.WebResource;
 
 /**
@@ -17,7 +17,8 @@ import org.opens.tanaguru.entity.subject.WebResource;
  * @author ADEX
  * @version 1.0.0
  */
-public class ContentDataServiceImpl extends AbstractGenericDataService<Content, Long> implements ContentDataService {
+public class ContentDataServiceImpl extends AbstractGenericDataService<Content, Long>
+        implements ContentDataService {
 
     public ContentDataServiceImpl() {
         super();
@@ -44,38 +45,13 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
     }
 
     @Override
-    public List<? extends Content> findSSPContentWithRelatedContent(
-            Audit audit,
-            int start,
-            int chunkSize){
-        return (List<SSPImpl>)
-                ((ContentDAO) entityDao).findSSPContentWithRelatedContent(
-                    audit,
-                    start,
-                    chunkSize);
-    }
-
-    @Override
     public Long findNumberOfSSPContentFromAudit(Audit audit){
         return ((ContentDAO) entityDao).findNumberOfSSPContentFromAudit(audit);
     }
 
-    /**
-     *
-     * @param audit
-     * @return
-     */
+    @Override
     public boolean hasContent(Audit audit) {
         return ((ContentDAO) entityDao).hasContent(audit);
-    }
-
-    /**
-     *
-     * @param audit
-     * @return
-     */
-    public boolean hasAdaptedSSP(Audit audit) {
-        return ((ContentDAO) entityDao).hasAdaptedSSP(audit);
     }
 
     @Override
@@ -131,39 +107,56 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
     }
 
     @Override
-    public List<Content> getContentWithRelatedContentFromWebResource(
-            WebResource webResource,
-            int start,
-            int chunkSize) {
-        return ((ContentDAO) entityDao).
-                findContentWithRelatedContentFromWebResource(
-                    webResource,
-                    start,
-                    chunkSize);
-    }
-
-    @Override
-    public List<? extends SSP> getSSPList(WebResource webResource, int start, int chunkSize) {
-        return ((ContentDAO) entityDao).findSSPList(webResource, start, chunkSize);
-    }
-
-    @Override
     public Long getNumberOfRelatedContentFromWebResource(WebResource webResource) {
         return ((ContentDAO) entityDao).
                 findNumberOfRelatedContentFromWebResource(webResource);
     }
 
     @Override
-    public List<? extends RelatedContent> getRelatedContentList(WebResource webResource, int start, int chunkSize) {
-        return ((ContentDAO) entityDao).findRelatedContentList(
-                webResource,
+    public void saveContentRelationShip(SSP ssp, Set<Long> relatedContentIdSet) {
+        ((ContentDAO) entityDao).saveContentRelationShip(ssp, relatedContentIdSet);
+    }
+
+    @Override
+    public void saveAuditToContent(Long idContent, Long idAudit ) {
+        ((ContentDAO) entityDao).saveAuditToContent(idContent, idAudit);
+    }
+
+    @Override
+    public List<Long> getSSPFromWebResource(
+            Long webResourceId,
+            int start,
+            int chunkSize) {
+        return ((ContentDAO) entityDao).getSSPFromWebResource(
+                webResourceId,
                 start,
                 chunkSize);
     }
 
     @Override
-    public void saveContentRelationShip(SSP ssp) {
-        ((ContentDAO) entityDao).saveContentRelationShip(ssp);
+    public List<Long> getRelatedContentFromWebResource(
+            Long webResourceId,
+            int start,
+            int chunkSize) {
+        return ((ContentDAO) entityDao).getRelatedContentFromWebResource(
+                webResourceId,
+                start,
+                chunkSize);
+    }
+
+    @Override
+    public Content readWithRelatedContent(Long id) {
+        return ((ContentDAO) entityDao).readWithRelatedContent(id);
+    }
+
+    @Override
+    public boolean checkSSPExist(String uri, WebResource webResourceParent) {
+        return ((ContentDAO) entityDao).checkSSPExist(uri, webResourceParent);
+    }
+
+    @Override
+    public Long getRelatedContentId(WebResource webResource, String uri) {
+        return ((ContentDAO) entityDao).findRelatedContentId(webResource, uri);
     }
 
 }

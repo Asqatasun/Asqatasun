@@ -7,6 +7,7 @@ import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.StylesheetContent;
 import com.adex.sdk.entity.service.GenericDataService;
 import java.util.List;
+import java.util.Set;
 import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.subject.WebResource;
 
@@ -58,34 +59,18 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
     StylesheetContent findStylesheetContent(Audit audit, String uri);
 
     /**
-     * 
+     *
      * @param audit
-     * @param start
-     * @param chunkSize
      * @return
      */
-    public List<? extends Content> findSSPContentWithRelatedContent(Audit audit, int start, int chunkSize);
+    Long findNumberOfSSPContentFromAudit(Audit audit); //OK
 
     /**
      *
      * @param audit
      * @return
      */
-    public Long findNumberOfSSPContentFromAudit(Audit audit);
-
-    /**
-     *
-     * @param audit
-     * @return
-     */
-    public boolean hasContent(Audit audit);
-
-    /**
-     *
-     * @param audit
-     * @return
-     */
-    public boolean hasAdaptedSSP(Audit audit);
+    boolean hasContent(Audit audit);   //OK
 
     /**
      * 
@@ -93,7 +78,7 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param uri
      * @return
      */
-    public RelatedContent getRelatedContentFromUriWithParentContent(
+    RelatedContent getRelatedContentFromUriWithParentContent(   //OK
             WebResource webResource,
             String uri);
 
@@ -102,7 +87,7 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param webResource
      * @return
      */
-    public Long getNumberOfOrphanContent(WebResource webResource);
+    Long getNumberOfOrphanContent(WebResource webResource);  //OK
 
     /**
      *
@@ -111,7 +96,7 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param chunkSize
      * @return
      */
-    public List<Content> getOrphanContentList(
+    List<Content> getOrphanContentList(   //OK
             WebResource webResource,
             int start,
             int chunkSize);
@@ -121,7 +106,7 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param webResource
      * @return
      */
-    public Long getNumberOfOrphanRelatedContent(WebResource webResource);
+    Long getNumberOfOrphanRelatedContent(WebResource webResource); //OK
 
     /**
      *
@@ -130,7 +115,7 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param chunkSize
      * @return
      */
-    public List<Content> getOrphanRelatedContentList(
+    List<Content> getOrphanRelatedContentList( //OK
             WebResource webResource,
             int start,
             int chunkSize);
@@ -141,58 +126,81 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param uri
      * @return
      */
-    public RelatedContent getRelatedContent(WebResource webResource, String uri);
+    RelatedContent getRelatedContent(WebResource webResource, String uri); //OK
 
     /**
      *
      * @param webResource
      * @return
      */
-    public Long getNumberOfSSPFromWebResource(WebResource webResource);
-
-    /**
-     *
-     * @param webResource
-     * @param start
-     * @param chunkSize
-     * @return
-     */
-    public List<Content> getContentWithRelatedContentFromWebResource(
-            WebResource webResource,
-            int start,
-            int chunkSize);
-
-    /**
-     *
-     * @param webResource
-     * @param start
-     * @param chunkSize
-     * @return
-     */
-    public List<? extends SSP> getSSPList(WebResource webResource,int start,int chunkSize);
+    Long getNumberOfSSPFromWebResource(WebResource webResource); //OK
 
     /**
      *
      * @param webResource
      * @return
      */
-    public Long getNumberOfRelatedContentFromWebResource(WebResource webResource);
-
-    /**
-     *
-     * @param webResource
-     * @param start
-     * @param chunkSize
-     * @return
-     */
-    public List<? extends RelatedContent> getRelatedContentList(
-            WebResource webResource,
-            int start,
-            int chunkSize);
+    Long getNumberOfRelatedContentFromWebResource(WebResource webResource); //OK
 
     /**
      * 
      * @param ssp
+     * @param relatedContentIdSet
      */
-    public void saveContentRelationShip(SSP ssp);
+    void saveContentRelationShip(SSP ssp, Set<Long> relatedContentIdSet); //OK
+
+    /**
+     *
+     * @param idContent
+     * @param idAudit
+     */
+    void saveAuditToContent(Long idContent, Long idAudit );  //OK
+
+    /**
+     *
+     * @param webResourceId
+     * @param start
+     * @param chunkSize
+     * @return
+     */
+    List<Long> getSSPFromWebResource(  //OK
+            Long webResourceId,
+            int start,
+            int chunkSize);
+
+    /**
+     *
+     * @param webResourceId
+     * @param start
+     * @param chunkSize
+     * @return
+     */
+    List<Long> getRelatedContentFromWebResource( //OK
+            Long webResourceId,
+            int start,
+            int chunkSize);
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    Content readWithRelatedContent(Long id); //OK
+
+    /**
+     * 
+     * @param uri
+     * @param webResourceParent
+     * @return
+     */
+    boolean checkSSPExist (String uri, WebResource webResourceParent); //OK
+
+    /**
+     *
+     * @param webResource
+     * @param uri
+     * @return
+     */
+    Long getRelatedContentId(WebResource webResource, String uri); //OK
+
 }

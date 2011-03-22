@@ -4,6 +4,7 @@ import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.Content;
 import com.adex.sdk.entity.dao.GenericDAO;
 import java.util.List;
+import java.util.Set;
 import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -36,18 +37,6 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
     Content find(WebResource webresource, String uri);
 
     /**
-     *
-     * @param audit
-     * @param start
-     * @param chunkSize
-     * @return
-     */
-    List<? extends Content> findSSPContentWithRelatedContent(
-            Audit audit,
-            int start,
-            int chunkSize);
-
-    /**
      * 
      * @param audit
      * @return
@@ -61,12 +50,6 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      */
     boolean hasContent(Audit audit);
 
-    /**
-     * 
-     * @param audit
-     * @return
-     */
-    boolean hasAdaptedSSP(Audit audit);
 
     /**
      * 
@@ -135,48 +118,68 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
     /**
      * 
      * @param webResource
-     * @param start
-     * @param chunkSize
-     * @return
-     */
-    List<Content> findContentWithRelatedContentFromWebResource(
-            WebResource webResource,
-            int start,
-            int chunkSize);
-
-    /**
-     * 
-     * @param webResource
-     * @param start
-     * @param chunkSize
-     * @return
-     */
-    List<? extends SSP> findSSPList(
-            WebResource webResource,
-            int start,
-            int chunkSize);
-
-    /**
-     * 
-     * @param webResource
      * @return
      */
     Long findNumberOfRelatedContentFromWebResource(WebResource webResource);
 
     /**
      * 
-     * @param webResource
+     * @param ssp
+     * @param relatedContentIdSet
+     */
+    void saveContentRelationShip(SSP ssp, Set<Long> relatedContentIdSet);
+    
+    /**
+     * 
+     * @param idContent
+     * @param idAudit
+     */
+    void saveAuditToContent(Long idContent, Long idAudit );
+
+    /**
+     * 
+     * @param webResourceId
      * @param start
      * @param chunkSize
      * @return
      */
-    List<? extends RelatedContent> findRelatedContentList(
-            WebResource webResource,
+    List<Long> getSSPFromWebResource(
+            Long webResourceId,
             int start,
             int chunkSize);
 
     /**
      * 
+     * @param webResourceId
+     * @param start
+     * @param chunkSize
+     * @return
      */
-    void saveContentRelationShip(SSP ssp);
+    List<Long> getRelatedContentFromWebResource(
+            Long webResourceId,
+            int start,
+            int chunkSize);
+
+    /**
+     * 
+     * @param id
+     * @return
+     */
+    Content readWithRelatedContent(Long id);
+
+    /**
+     * 
+     * @param uri
+     * @param webResourceParent
+     * @return
+     */
+    boolean checkSSPExist (String uri, WebResource webResourceParent);
+
+    /**
+     * 
+     * @param webResource
+     * @param uri
+     * @return
+     */
+    Long findRelatedContentId(WebResource webResource, String uri);
 }
