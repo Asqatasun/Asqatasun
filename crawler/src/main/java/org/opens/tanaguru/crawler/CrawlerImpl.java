@@ -1,15 +1,19 @@
 package org.opens.tanaguru.crawler;
 
-import java.util.logging.Level;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import org.archive.modules.deciderules.DecideRuleSequence;
-import org.opens.tanaguru.crawler.processor.TanaguruWriterProcessor;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
+import javax.persistence.PersistenceException;
 import org.apache.commons.httpclient.URIException;
 import org.apache.log4j.Logger;
 import org.archive.io.GzippedInputStream;
@@ -36,6 +40,7 @@ import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.util.MD5Encoder;
 
 /**
  * 
@@ -44,7 +49,7 @@ import org.opens.tanaguru.entity.subject.WebResource;
 public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSSListener, ContentWriter {
 
     private static final Logger LOGGER = Logger.getLogger(CrawlerImpl.class);
-    private static final int RETRIEVE_WINDOW = 100;
+    private static final int RETRIEVE_WINDOW = 1000;
     private static final String UNREACHABLE_RESOURCE_STR =
             "Unreachable resource ";
     private boolean isPageAlreadyFetched = false;
@@ -53,6 +58,8 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
     private String heritrixPageFileName = "tanaguru-crawler-beans-page.xml";
     private TanaguruCrawlJob crawlJob;
     private DecideRuleSequence decideRuleSequence;
+    private Map<String, Long> persistedOutlinksMap = new HashMap<String, Long>();
+    private Map<Long, List<Long>> relatedCssMap = new HashMap<Long, List<Long>>();
 
     public DecideRuleSequence getDecideRuleSequence() {
         if (decideRuleSequence == null && crawlJob != null) {
@@ -171,6 +178,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         if (crawlJob.isLaunchable()) {
             crawlJob.checkXML();
         }
+        persistedOutlinksMap.clear();
     }
 
     /**
@@ -185,6 +193,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         if (crawlJob.isLaunchable()) {
             crawlJob.checkXML();
         }
+        persistedOutlinksMap.clear();
     }
 
     /**
@@ -201,6 +210,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
             crawlJob.checkXML();
         }
         isPageAlreadyFetched = false;
+        persistedOutlinksMap.clear();
     }
 
     @Override
@@ -435,27 +445,43 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
             beginProcessDate = Calendar.getInstance().getTime();
         }
         Set<String> localMap = new HashSet<String>();
+        Set<Long> relatedContentIdSet = new HashSet<Long>();
         String linkUrl = null;
         for (Link link : curi.getOutLinks()) {
             linkUrl = link.getDestination().toString();
             if (!localMap.contains(linkUrl)) {
-                ssp = linkOutlinkWithSSP(link, ssp);
+                Long relatedContentId = linkOutlinkWithSSP(link, ssp);
+                if (relatedContentId != null) {
+                    relatedContentIdSet.add(relatedContentId);
+                    // In case of the related content we associate with the current
+                    // SSP is associated with other related contents (a css called
+                    // by another css for example), we associate all these contents
+                    // with the current SSP.
+                    if (relatedCssMap.containsKey(relatedContentId)){
+                        relatedContentIdSet.addAll(relatedCssMap.get(relatedContentId));
+                    }
+                }
             }
             localMap.add(linkUrl);
         }
         if (LOGGER.isDebugEnabled()) {
             endProcessDate = Calendar.getInstance().getTime();
             LOGGER.debug("Save SSP " + ssp.getURI() + " with "
-                    + ssp.getRelatedContentSet().size()
+                    + relatedContentIdSet.size()
                     + " elements. Processing took "
                     + (endProcessDate.getTime() - beginProcessDate.getTime())
                     + " ms");
+            LOGGER.debug("persistedOutlinksMap contains "+ persistedOutlinksMap.size());
         }
-        // THe relation between a ssp and its related contents is defined as
-        // merge. Thus, the saveorupdate on the ssp object is spread to the related
-        // content objects
-//        contentDataService.saveOrUpdate(ssp);
-        contentDataService.saveContentRelationShip(ssp);
+        try {
+            contentDataService.saveContentRelationShip(ssp, relatedContentIdSet);
+        } catch (PersistenceException e) {
+            LOGGER.warn(e);
+            LOGGER.warn("problem persisting  "+ssp.getURI() + "with ");
+            for (Long id : relatedContentIdSet) {
+                LOGGER.warn("ssp Id : " + ssp.getId() + " relatedContent Id : " + id);
+            }
+        }
         if (LOGGER.isDebugEnabled()) {
             endPersistDate = Calendar.getInstance().getTime();
             LOGGER.debug("Spent "
@@ -474,7 +500,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
     @Override
     public synchronized void computeCSSResource(CrawlURI curi) {
         RelatedContent cssContent =
-                contentDataService.getRelatedContentFromUriWithParentContent(
+                contentDataService.getRelatedContent(
                 mainWebResource,
                 curi.getURI());
         if (cssContent == null) {
@@ -486,24 +512,35 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
             try {
                 localUuri = UURIFactory.getInstance(link.getDestination().toString());
             } catch (URIException ex) {
-                java.util.logging.Logger.getLogger(TanaguruWriterProcessor.class.getName()).log(Level.SEVERE, null, ex);
+                LOGGER.warn(ex);
             }
             localCuri = new CrawlURI(localUuri);
             if (getDecideRuleSequence().innerDecide(localCuri).equals(DecideResult.ACCEPT)) {
-                RelatedContent relatedContent = contentDataService.getRelatedContent(
+                Long relatedContentId = contentDataService.getRelatedContentId(
                         mainWebResource,
                         localCuri.getURI());
-                if (relatedContent != null) {
-                    relatedContent.addAllParentContent(cssContent.getParentContentSet());
+                if (relatedContentId != null) {
+                    if (relatedCssMap.containsKey(((Content)cssContent).getId())) {
+                        relatedCssMap.get(((Content)cssContent).getId()).add
+                                (relatedContentId);
+                    } else {
+                        List<Long> idList = new ArrayList<Long>();
+                        idList.add(relatedContentId);
+                        relatedCssMap.put(((Content)cssContent).getId(), idList);
+                    }
                 } else {
-                    relatedContent = createRelatingContentRegardingExtension(null, localCuri);
-                    for (Content content : cssContent.getParentContentSet()) {
-                        if (content instanceof SSP) {
-                            ((SSP) content).addRelatedContent(relatedContent);
-                        }
+                    RelatedContent relatedContent =
+                            createRelatingContentRegardingExtension(null, localCuri);
+                    contentDataService.saveOrUpdate((Content) relatedContent);
+                    if (relatedCssMap.containsKey(((Content)cssContent).getId())) {
+                        relatedCssMap.get(((Content)cssContent).getId()).add
+                                (((Content)relatedContent).getId());
+                    } else {
+                        List<Long> idList = new ArrayList<Long>();
+                        idList.add(((Content)relatedContent).getId());
+                        relatedCssMap.put(((Content)cssContent).getId(), idList);
                     }
                 }
-                contentDataService.saveOrUpdate((Content) relatedContent);
             }
         }
     }
@@ -514,45 +551,47 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
      * @param ssp
      * @return
      */
-    private SSP linkOutlinkWithSSP(Link link, SSP ssp) {
+    private Long linkOutlinkWithSSP(Link link, SSP ssp) {
         UURI localUuri = null;
         CrawlURI localCuri = null;
         try {
             localUuri = UURIFactory.getInstance(link.getDestination().toString());
         } catch (URIException ex) {
-            java.util.logging.Logger.getLogger(
-                    TanaguruWriterProcessor.class.getName()).
-                    log(Level.SEVERE, null, ex);
+            LOGGER.warn(ex);
         }
         localCuri = new CrawlURI(localUuri);
         // We use the heritrix matchesListRegexDecideRule to filter "a priori"
         // the outlinks that will be fetched
         if (getDecideRuleSequence().innerDecide(localCuri).equals(DecideResult.ACCEPT)
+                && !getHtmlFilePattern().matcher(localCuri.getURI()).matches()
                 && !isUriSSP(mainWebResource, localCuri.getURI())) {
             // if the current outlink has already been encountered, a related
             // content has been created and persisted.
-            RelatedContent relatedContent = contentDataService.getRelatedContent(
-                    mainWebResource,
-                    localCuri.getURI());
-            // if the related content has been found in the db, we retrieve the
-            // object and associate it with the current SSP. The relation is
-            // bidirectionnal, so we also associated the SSP with the related
-            // content
-            if (relatedContent != null) {
-//                relatedContent.addParentContent(ssp);
-                ssp.addRelatedContent(relatedContent);
+            String md5Uri = null;
+            try {
+                md5Uri = MD5Encoder.MD5(localCuri.getURI());
+            } catch (NoSuchAlgorithmException ex) {
+                LOGGER.warn(ex);
+            } catch (UnsupportedEncodingException ex) {
+                LOGGER.warn(ex);
+            }
+            if (persistedOutlinksMap.containsKey(md5Uri)) {
+                return persistedOutlinksMap.get(md5Uri);
             } else {
                 // in case of the related content hasn't been encountered yet,
                 // we create the appropriate instance regarding its extension
                 // and associate it bidirectionaly with the SSP.
-                relatedContent = createRelatingContentRegardingExtension(ssp, localCuri);
+                RelatedContent relatedContent =
+                        createRelatingContentRegardingExtension(ssp, localCuri);
                 if (relatedContent != null) {
                     contentDataService.saveOrUpdate((Content)relatedContent);
-                    ssp.addRelatedContent(relatedContent);
+                    Long id = Long.valueOf(((Content)relatedContent).getId());
+                    persistedOutlinksMap.put(md5Uri, id);
+                    return id;
                 }
             }
         }
-        return ssp;
+        return null;
     }
 
     /**
@@ -563,11 +602,17 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
      * @param uri
      */
     private void checkURIRecordedAsRelatedContent(WebResource WebResource, String uri) {
-        RelatedContent relatedContent =
-                contentDataService.getRelatedContent(WebResource, uri);
-        if (relatedContent != null) {
-            LOGGER.debug("Fake related content Found with URI " + ((Content) relatedContent).getURI());
-            deleteRelatedContent(relatedContent);
+        Long id = contentDataService.getRelatedContentId(WebResource, uri);
+        if (id != null) {
+            LOGGER.debug("Fake related content Found with URI " + uri);
+            contentDataService.delete(id);
+            try {
+                persistedOutlinksMap.remove(MD5Encoder.MD5(uri));
+            } catch (NoSuchAlgorithmException ex) {
+                LOGGER.warn(ex);
+            } catch (UnsupportedEncodingException ex) {
+                LOGGER.warn(ex);
+            }
         }
     }
 
@@ -588,12 +633,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
      * @return
      */
     private boolean isUriSSP(WebResource webResource, String uri) {
-        Content content = contentDataService.findSSP(webResource, uri);
-        if (content != null) {
-            LOGGER.debug("Is " + content.getURI() + " a recorded SSP ?"
-                    + (content != null && content instanceof SSP));
-        }
-        return (content != null && content instanceof SSP) ? true : false;
+        return contentDataService.checkSSPExist(uri, webResource);
     }
 
     /**
@@ -682,4 +722,5 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         content.setDateOfLoading(new Date(curi.getFetchCompletedTime()));
         contentDataService.saveOrUpdate(content);
     }
+
 }

@@ -1,12 +1,11 @@
 package org.opens.tanaguru.service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.crawler.Crawler;
 import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.entity.audit.Content;
-import org.opens.tanaguru.entity.audit.RelatedContent;
-import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
@@ -22,7 +21,7 @@ import org.opens.tanaguru.entity.subject.WebResource;
 public class CrawlerServiceImpl implements CrawlerService {
 
     private static final Logger LOGGER = Logger.getLogger(CrawlerServiceImpl.class);
-    private static final int PROCESS_WINDOW = 100;
+    private static final int PROCESS_WINDOW = 2000;
     private ContentDataService contentDataService;
 
     private WebResourceDataService webResourceDataService;
@@ -110,16 +109,35 @@ public class CrawlerServiceImpl implements CrawlerService {
         return site;
     }
 
-    private void setAuditToContent(WebResource wr, Audit audit) {
+    public void setAuditToContent(WebResource wr, Audit audit) {
         Long nbOfContent = contentDataService.getNumberOfSSPFromWebResource(wr);
         Long i= Long.valueOf(0);
+        Date endProcessDate = null;
+        Date beginProcessDate = null;
+        Date endPersistDate = null;
         LOGGER.debug("Number Of SSP From WebResource " + wr.getURL() + " : " +nbOfContent);
         while (i.compareTo(nbOfContent)<0) {
-            List<? extends SSP> contentList =
-                    contentDataService.getSSPList(wr, i.intValue(), PROCESS_WINDOW);
-            for (Content content : contentList) {
-                content.setAudit(audit);
-                contentDataService.saveOrUpdate(content);
+            if (LOGGER.isDebugEnabled()) {
+                beginProcessDate = Calendar.getInstance().getTime();
+                    LOGGER.debug("Set audit to ssp from  "
+                            + i + " to " + (i + PROCESS_WINDOW));
+            }
+            List<Long> contentIdList =
+                    contentDataService.getSSPFromWebResource(wr.getId(), i.intValue(), PROCESS_WINDOW);
+            if (LOGGER.isDebugEnabled()) {
+                endProcessDate = Calendar.getInstance().getTime();
+                LOGGER.debug("Retrieving  " + PROCESS_WINDOW + " SSP took "
+                        + (endProcessDate.getTime() - beginProcessDate.getTime())
+                        + " ms");
+            }
+            for (Long id : contentIdList) {
+                contentDataService.saveAuditToContent(id, audit.getId());
+            }
+            if (LOGGER.isDebugEnabled()) {
+                endPersistDate = Calendar.getInstance().getTime();
+                LOGGER.debug("Persisting  " + PROCESS_WINDOW + " SSP took "
+                        + (endPersistDate.getTime() - endProcessDate.getTime())
+                        + " ms");
             }
             i = i+ PROCESS_WINDOW;
         }
@@ -127,11 +145,27 @@ public class CrawlerServiceImpl implements CrawlerService {
         LOGGER.debug("Number Of Related Content From WebResource?" + wr.getURL() + " : " + nbOfContent);
         i= Long.valueOf(0);
         while (i.compareTo(nbOfContent)<0) {
-            List<? extends RelatedContent> contentList = 
-                    contentDataService.getRelatedContentList(wr, i.intValue(), PROCESS_WINDOW);
-            for (RelatedContent relatedContent : contentList) {
-                ((Content)relatedContent).setAudit(audit);
-                contentDataService.saveOrUpdate((Content)relatedContent);
+            if (LOGGER.isDebugEnabled()) {
+                beginProcessDate = Calendar.getInstance().getTime();
+                LOGGER.debug("Set audit to relatedContent from  "
+                            + i + " to " + (i + PROCESS_WINDOW));
+            }
+            List<Long> contentIdList =
+                    contentDataService.getRelatedContentFromWebResource(wr.getId(), i.intValue(), PROCESS_WINDOW);
+            if (LOGGER.isDebugEnabled()) {
+                endProcessDate = Calendar.getInstance().getTime();
+                LOGGER.debug("Retrieving  " + PROCESS_WINDOW + " relatedContent took "
+                        + (endProcessDate.getTime() - beginProcessDate.getTime())
+                        + " ms");
+            }
+            for (Long id : contentIdList) {
+                contentDataService.saveAuditToContent(id, audit.getId());
+            }
+            if (LOGGER.isDebugEnabled()) {
+                endPersistDate = Calendar.getInstance().getTime();
+                LOGGER.debug("Persisting  " + PROCESS_WINDOW + " relatedContent took "
+                        + (endPersistDate.getTime() - endProcessDate.getTime())
+                        + " ms");
             }
             i = i+ PROCESS_WINDOW;
         }

@@ -65,6 +65,8 @@
             <tx:method name="delete*" propagation="REQUIRED"/>
             <tx:method name="save*" propagation="REQUIRED"/>
             <tx:method name="test*" propagation="REQUIRED"/>
+            <tx:method name="read*" propagation="REQUIRED"/>
+            <tx:method name="get*" propagation="REQUIRED"/>
             <tx:method name="*" propagation="SUPPORTS" read-only="true"/>
         </tx:attributes>
     </tx:advice>
