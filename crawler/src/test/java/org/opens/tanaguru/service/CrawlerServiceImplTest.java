@@ -146,25 +146,25 @@ public class CrawlerServiceImplTest extends TestCase {
     /**
      * Test the crawl of a site with robots.txt file
      */
-//    public void testCrawl_Site_With_Robots() {
-//        System.out.println("crawl_site_with_robots");
-//        ((CrawlerImpl)crawler).setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
-//        String siteUrl = bundle.getString(ROBOTS_RESTRICTED_CRAWL_URL_KEY);
-//        Site site = webResourceFactory.createSite(siteUrl);
-//        site.setAudit(auditFactory.create());
-//        site = crawlerService.crawl(site);
-//        List<Long> contentListId = contentDataService.getSSPFromWebResource(site.getId(), 0, 10);
-//        List<Content> contentList = new ArrayList<Content>();
-//        for (Long id : contentListId) {
-//            contentList.add(contentDataService.readWithRelatedContent(id));
-//        }
-//        assertEquals(3, contentList.size()+((SSP)contentList.iterator().next()).getRelatedContentSet().size());
-//        Set<String> urlSet = getUrlSet(contentList);
-//        assertTrue(urlSet.contains(siteUrl));
-//        assertTrue(urlSet.contains(siteUrl+PAGE_NAME_LEVEL1));
-//        assertTrue(urlSet.contains(siteUrl+PAGE_NAME_LEVEL2));
-//        assertFalse(urlSet.contains(siteUrl+FORBIDDEN_PAGE_NAME));
-//    }
+    public void testCrawl_Site_With_Robots() {
+        System.out.println("crawl_site_with_robots");
+        ((CrawlerImpl)crawler).setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
+        String siteUrl = bundle.getString(ROBOTS_RESTRICTED_CRAWL_URL_KEY);
+        Site site = webResourceFactory.createSite(siteUrl);
+        site.setAudit(auditFactory.create());
+        site = crawlerService.crawl(site);
+        List<Long> contentListId = contentDataService.getSSPFromWebResource(site.getId(), 0, 10);
+        List<Content> contentList = new ArrayList<Content>();
+        for (Long id : contentListId) {
+            contentList.add(contentDataService.readWithRelatedContent(id));
+        }
+        assertEquals(3, contentList.size()+((SSP)contentList.iterator().next()).getRelatedContentSet().size());
+        Set<String> urlSet = getUrlSet(contentList);
+        assertTrue(urlSet.contains(siteUrl));
+        assertTrue(urlSet.contains(siteUrl+PAGE_NAME_LEVEL1));
+        assertTrue(urlSet.contains(siteUrl+PAGE_NAME_LEVEL2));
+        assertFalse(urlSet.contains(siteUrl+FORBIDDEN_PAGE_NAME));
+    }
 
     private Set<String> getUrlSet(List<Content> contentList) {
         Set<String> urlSet = new HashSet<String>();
