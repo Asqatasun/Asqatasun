@@ -286,8 +286,6 @@
     </bean>
 
     <bean id="tanaguruWriter" class="org.opens.tanaguru.crawler.processor.TanaguruWriterProcessor">
-        <property name="webResourceFactory" ref="webResourceFactory"/>
-        <property name="contentFactory" ref="contentFactory"/>
         <property name="htmlRegexp">
             <value>.*(?i)(/|\.htm|\.html|\.php|\.asp|\.aspx|\.jsp|\.do)$</value>
         </property>
@@ -377,7 +375,7 @@
     <!--  CRAWLLIMITENFORCER: stops crawl when it reaches configured limits -->
     <bean id="crawlLimiter" class="org.archive.crawler.framework.CrawlLimitEnforcer">
         <!-- <property name="maxBytesDownload" value="0" /> -->
-        <!-- <property name="maxDocumentsDownload" value="0" /> -->
+        <property name="maxDocumentsDownload" value="10000" />
         <!-- <property name="maxTimeSeconds" value="0" /> -->
     </bean>
  
