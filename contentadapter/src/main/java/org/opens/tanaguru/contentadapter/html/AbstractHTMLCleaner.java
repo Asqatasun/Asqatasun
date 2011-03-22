@@ -8,22 +8,23 @@ import org.opens.tanaguru.contentadapter.HTMLCleaner;
  */
 public abstract class AbstractHTMLCleaner implements HTMLCleaner {
 
-	protected String dirtyHTML;
-	protected String result;
+    protected String dirtyHTML;
+    protected String result;
 
-	public AbstractHTMLCleaner() {
-		super();
-	}
+    public AbstractHTMLCleaner() {
+        super();
+    }
 
-	public String getDirtyHTML() {
-		return dirtyHTML;
-	}
+    public String getDirtyHTML() {
+        return dirtyHTML;
+    }
 
-	public String getResult() {
-		return result;
-	}
+    public String getResult() {
+        return result;
+    }
 
-	public void setDirtyHTML(String dirtyHTML) {
-		this.dirtyHTML = dirtyHTML;
-	}
+    public void setDirtyHTML(String dirtyHTML) {
+        this.dirtyHTML = dirtyHTML;
+        result= null;
+    }
 }

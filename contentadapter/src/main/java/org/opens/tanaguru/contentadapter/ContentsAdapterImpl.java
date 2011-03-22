@@ -72,7 +72,7 @@ public class ContentsAdapterImpl implements ContentsAdapter {
                 ssp.setAdaptedContent(
                         DocumentCaseInsensitiveAdapter.
                         removeLowerCaseTags(htmlCleaner.getResult()));
-
+                htmlCleaner.setDirtyHTML(null);        
                 if (writeCleanHtmlInFile) {
                     writeCleanDomInFile(ssp);
                 }
