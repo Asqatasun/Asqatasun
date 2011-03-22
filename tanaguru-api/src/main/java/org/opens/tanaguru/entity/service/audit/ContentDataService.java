@@ -63,14 +63,21 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param audit
      * @return
      */
-    Long findNumberOfSSPContentFromAudit(Audit audit); //OK
+    Long findNumberOfSSPContentFromAudit(Audit audit);
+
+    /**
+     * 
+     * @param audit
+     * @return
+     */
+    boolean hasAdaptedSSP(Audit audit);
 
     /**
      *
      * @param audit
      * @return
      */
-    boolean hasContent(Audit audit);   //OK
+    boolean hasContent(Audit audit);
 
     /**
      * 
@@ -78,7 +85,7 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param uri
      * @return
      */
-    RelatedContent getRelatedContentFromUriWithParentContent(   //OK
+    RelatedContent getRelatedContentFromUriWithParentContent(
             WebResource webResource,
             String uri);
 
@@ -87,7 +94,7 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param webResource
      * @return
      */
-    Long getNumberOfOrphanContent(WebResource webResource);  //OK
+    Long getNumberOfOrphanContent(WebResource webResource);
 
     /**
      *
@@ -96,7 +103,7 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param chunkSize
      * @return
      */
-    List<Content> getOrphanContentList(   //OK
+    List<Content> getOrphanContentList(
             WebResource webResource,
             int start,
             int chunkSize);
@@ -106,7 +113,7 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param webResource
      * @return
      */
-    Long getNumberOfOrphanRelatedContent(WebResource webResource); //OK
+    Long getNumberOfOrphanRelatedContent(WebResource webResource);
 
     /**
      *
@@ -115,7 +122,7 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param chunkSize
      * @return
      */
-    List<Content> getOrphanRelatedContentList( //OK
+    List<Content> getOrphanRelatedContentList(
             WebResource webResource,
             int start,
             int chunkSize);
@@ -126,35 +133,35 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param uri
      * @return
      */
-    RelatedContent getRelatedContent(WebResource webResource, String uri); //OK
+    RelatedContent getRelatedContent(WebResource webResource, String uri); 
 
     /**
      *
      * @param webResource
      * @return
      */
-    Long getNumberOfSSPFromWebResource(WebResource webResource); //OK
+    Long getNumberOfSSPFromWebResource(WebResource webResource); 
 
     /**
      *
      * @param webResource
      * @return
      */
-    Long getNumberOfRelatedContentFromWebResource(WebResource webResource); //OK
+    Long getNumberOfRelatedContentFromWebResource(WebResource webResource); 
 
     /**
      * 
      * @param ssp
      * @param relatedContentIdSet
      */
-    void saveContentRelationShip(SSP ssp, Set<Long> relatedContentIdSet); //OK
+    void saveContentRelationShip(SSP ssp, Set<Long> relatedContentIdSet); 
 
     /**
      *
      * @param idContent
      * @param idAudit
      */
-    void saveAuditToContent(Long idContent, Long idAudit );  //OK
+    void saveAuditToContent(Long idContent, Long idAudit );  
 
     /**
      *
@@ -163,7 +170,7 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param chunkSize
      * @return
      */
-    List<Long> getSSPFromWebResource(  //OK
+    List<Long> getSSPFromWebResource(  
             Long webResourceId,
             int start,
             int chunkSize);
@@ -175,7 +182,7 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param chunkSize
      * @return
      */
-    List<Long> getRelatedContentFromWebResource( //OK
+    List<Long> getRelatedContentFromWebResource( 
             Long webResourceId,
             int start,
             int chunkSize);
@@ -185,7 +192,7 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param id
      * @return
      */
-    Content readWithRelatedContent(Long id); //OK
+    Content readWithRelatedContent(Long id); 
 
     /**
      * 
@@ -193,7 +200,7 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param webResourceParent
      * @return
      */
-    boolean checkSSPExist (String uri, WebResource webResourceParent); //OK
+    boolean checkSSPExist (String uri, WebResource webResourceParent); 
 
     /**
      *
@@ -201,6 +208,6 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param uri
      * @return
      */
-    Long getRelatedContentId(WebResource webResource, String uri); //OK
+    Long getRelatedContentId(WebResource webResource, String uri); 
 
 }

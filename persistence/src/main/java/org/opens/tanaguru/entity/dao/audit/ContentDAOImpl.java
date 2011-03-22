@@ -118,6 +118,22 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
     }
 
     @Override
+    public boolean hasAdaptedSSP(Audit audit) {
+        Query query = entityManager.createQuery("SELECT count(s.id) FROM "
+                + SSPImpl.class.getName() + " s"
+                + " JOIN s.audit as a"
+                + " WHERE a = :audit"
+                + " AND s.dom != null "
+                + " AND s.dom != '' ");
+        query.setParameter("audit", audit);
+        if ((Long) query.getSingleResult() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public boolean hasContent(Audit audit) {
         Query query = entityManager.createQuery("SELECT count(s.id) FROM "
                 + SSPImpl.class.getName() + " s"

@@ -50,6 +50,11 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
     }
 
     @Override
+    public boolean hasAdaptedSSP(Audit audit) {
+        return ((ContentDAO) entityDao).hasAdaptedSSP(audit);
+    }
+
+    @Override
     public boolean hasContent(Audit audit) {
         return ((ContentDAO) entityDao).hasContent(audit);
     }

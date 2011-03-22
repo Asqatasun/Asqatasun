@@ -101,6 +101,15 @@ public class ContentDAOImplTest extends AbstractDaoTestCase {
         assertTrue(contentDAO.hasContent(audit));
     }
 
+    public void testHasAdaptedSSP(){
+        Audit audit = auditDAO.read(Long.valueOf(1));
+        assertFalse(contentDAO.hasAdaptedSSP(audit));
+        audit = auditDAO.read(Long.valueOf(2));
+        assertFalse(contentDAO.hasAdaptedSSP(audit));
+        audit = auditDAO.read(Long.valueOf(3));
+        assertTrue(contentDAO.hasAdaptedSSP(audit));
+    }
+
     public void testFindNumberOfSSPContentFromAudit(){
         Audit audit = auditDAO.read(Long.valueOf(1));
         assertEquals(Long.valueOf(0), contentDAO.findNumberOfSSPContentFromAudit(audit));

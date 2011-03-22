@@ -44,12 +44,18 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
     Long findNumberOfSSPContentFromAudit(Audit audit);
 
     /**
+     * 
+     * @param audit
+     * @return
+     */
+    boolean hasAdaptedSSP(Audit audit);
+
+    /**
      *
      * @param audit
      * @return
      */
     boolean hasContent(Audit audit);
-
 
     /**
      * 
