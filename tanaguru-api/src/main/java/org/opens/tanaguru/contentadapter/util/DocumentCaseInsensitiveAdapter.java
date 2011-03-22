@@ -24,7 +24,7 @@ public abstract class DocumentCaseInsensitiveAdapter {
      * @return
      */
     public static String removeLowerCaseTags(String cleanHtml) {
-        StringBuffer newCleanHtml = new StringBuffer();
+        StringBuilder newCleanHtml = new StringBuilder();
         int strPtr=0;
         int tmpPtr=0;
         while (strPtr != cleanHtml.length()){
@@ -61,7 +61,9 @@ public abstract class DocumentCaseInsensitiveAdapter {
                 strPtr++;
             }
         }
-        return newCleanHtml.toString();
+        String result = newCleanHtml.toString();
+        newCleanHtml = null;
+        return result;
     }
 
     /**
@@ -70,7 +72,7 @@ public abstract class DocumentCaseInsensitiveAdapter {
      * @return
      */
     public static String removeUpperCaseTags(String cleanHtml) {
-        StringBuffer newCleanHtml = new StringBuffer();
+        StringBuilder newCleanHtml = new StringBuilder();
         int strPtr=0;
         int tmpPtr=0;
         while (strPtr != cleanHtml.length()){
