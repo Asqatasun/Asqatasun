@@ -23,6 +23,7 @@ public abstract class AbstractJPADAO<E extends Entity, K extends Serializable>
 
     public void create(E entity) {
         entityManager.persist(entity);
+        flushAndCloseEntityManager();
     }
 
     /**
@@ -34,9 +35,7 @@ public abstract class AbstractJPADAO<E extends Entity, K extends Serializable>
         if (entity.getId() == null) {
             return;
         }
-
-        entityManager.refresh(entity);
-        entityManager.remove(entity);
+        flushAndCloseEntityManager();
     }
 
     /**
@@ -68,7 +67,8 @@ public abstract class AbstractJPADAO<E extends Entity, K extends Serializable>
     protected abstract Class<? extends E> getEntityClass();
 
     public E read(K key) {
-        return (E) entityManager.find(getEntityClass(), key);
+        E result = (E) entityManager.find(getEntityClass(), key);
+        return result;
     }
 
     public void refresh(E entity) {
@@ -97,6 +97,19 @@ public abstract class AbstractJPADAO<E extends Entity, K extends Serializable>
     }
 
     public E update(E entity) {
-        return entityManager.merge(entity);
+        E result = entityManager.merge(entity);
+        flushAndCloseEntityManager();
+        return result;
+    }
+
+    /**
+     * Due to memory leaks, the entity manager has to be flushed and closed after
+     * each db operation. All the elements retrieved while the db access keep
+     * a reference to the entity manager and can never be garbaged.
+     * By flushing and closing the entity manager, these objects can be free.
+     */
+    private void flushAndCloseEntityManager(){
+        entityManager.flush();
+        entityManager.close();
     }
 }
