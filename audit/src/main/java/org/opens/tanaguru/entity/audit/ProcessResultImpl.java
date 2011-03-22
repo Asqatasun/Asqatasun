@@ -50,7 +50,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     @ManyToOne
     @JoinColumn(name = "Id_Process_Result_Parent")
     protected ProcessResultImpl parentResult;
-    @OneToMany(mappedBy = "processResult", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "processResult", cascade = {CascadeType.PERSIST})
     protected Set<ProcessRemarkImpl> remarkList = new LinkedHashSet<ProcessRemarkImpl>();
     @ManyToOne
     @JoinColumn(name = "Id_Web_Resource", nullable = false)
