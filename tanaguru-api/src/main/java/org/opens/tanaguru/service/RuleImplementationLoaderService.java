@@ -4,8 +4,8 @@ import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.factory.audit.DefiniteResultFactory;
 import org.opens.tanaguru.entity.factory.audit.IndefiniteResultFactory;
 import org.opens.tanaguru.ruleimplementation.RuleImplementation;
-import org.opens.tanaguru.ruleimplementationloader.RuleImplementationLoader;
 import java.util.Set;
+import org.opens.tanaguru.ruleimplementationloader.RuleImplementationLoaderFactory;
 
 /**
  * 
@@ -21,10 +21,11 @@ public interface RuleImplementationLoaderService {
             IndefiniteResultFactory indefiniteResultFactory);
 
     void setNomenclatureLoaderService(
-            NomenclatureLoaderService nomenclatureService);
-
-    void setRuleImplementationLoader(
-            RuleImplementationLoader ruleImplementationLoader);
+            NomenclatureLoaderService nomenclatureLoaderService);
 
     RuleImplementation loadRuleImplementation(Test test);
+
+    void setArchiveRoot(String archiveRoot);
+
+    void setRuleImplementationLoaderFactory(RuleImplementationLoaderFactory ruleImplementationLoaderFactory);
 }

@@ -14,8 +14,9 @@ public class ProcessorImpl implements Processor {
     private RuleImplementation ruleImplementation;
     private SSPHandler sspHandler;
 
-    public ProcessorImpl() {
+    public ProcessorImpl(SSPHandler sspHandler) {
         super();
+        this.sspHandler = sspHandler;
     }
 
     public ProcessResult getResult() {

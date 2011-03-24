@@ -56,10 +56,17 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
     private WebResource mainWebResource;
     private String heritrixSiteFileName = "tanaguru-crawler-beans-site.xml";
     private String heritrixPageFileName = "tanaguru-crawler-beans-page.xml";
+    private String crawlConfigFilePath;
+    private String outputDir = System.getenv("PWD") + "/output";
+    private Pattern cssFilePattern = null;
     private TanaguruCrawlJob crawlJob;
     private DecideRuleSequence decideRuleSequence;
     private Map<String, Long> persistedOutlinksMap = new HashMap<String, Long>();
     private Map<Long, List<Long>> relatedCssMap = new HashMap<Long, List<Long>>();
+    private ContentDataService contentDataService;
+    private WebResourceDataService webResourceDataService;
+    private WebResourceFactory webResourceFactory;
+    private ContentFactory contentFactory;
 
     public DecideRuleSequence getDecideRuleSequence() {
         if (decideRuleSequence == null && crawlJob != null) {
@@ -67,7 +74,6 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         }
         return decideRuleSequence;
     }
-    private Pattern cssFilePattern = null;
 
     public Pattern getCssFilePattern() {
         if (cssFilePattern == null && crawlJob != null) {
@@ -83,7 +89,6 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         }
         return htmlFilePattern;
     }
-    private ContentDataService contentDataService;
 
     public ContentDataService getContentDataService() {
         return contentDataService;
@@ -92,7 +97,6 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
     public void setContentDataService(ContentDataService contentDataService) {
         this.contentDataService = contentDataService;
     }
-    private WebResourceDataService webResourceDataService;
 
     public WebResourceDataService getWebResourceDataService() {
         return webResourceDataService;
@@ -101,13 +105,11 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
     public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
         this.webResourceDataService = webResourceDataService;
     }
-    private WebResourceFactory webResourceFactory;
 
     @Override
     public void setWebResourceFactory(WebResourceFactory webResourceFactory) {
         this.webResourceFactory = webResourceFactory;
     }
-    private ContentFactory contentFactory;
 
     public void setContentFactory(ContentFactory contentFactory) {
         this.contentFactory = contentFactory;
@@ -116,59 +118,27 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
     public CrawlerImpl() {
         super();
     }
-    /**
-     * 
-     */
-    private String crawlConfigFilePath = "/etc/tanaguru/context/crawler/";
 
-    /**
-     *
-     * @return
-     */
     public String getCrawlConfigFilePath() {
         return this.crawlConfigFilePath;
     }
 
-    /**
-     *
-     * @param crawlConfigFilePath
-     */
     public void setCrawlConfigFilePath(String crawlConfigFilePath) {
         this.crawlConfigFilePath = crawlConfigFilePath;
     }
-    /**
-     *
-     */
-    private String outputDir = System.getenv("PWD") + "/output";
 
-    /**
-     *
-     * @return
-     */
     public String getOutputDir() {
         return this.outputDir;
     }
 
-    /**
-     *
-     * @param outputDir
-     */
     public void setOutputDir(String outputDir) {
         this.outputDir = outputDir;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getSiteURL() {
         return mainWebResource.getURL();
     }
 
-    /**
-     *
-     * @param siteUrl
-     */
     @Override
     public void setSiteURL(String siteURL) {
         mainWebResource = webResourceFactory.createSite(siteURL);
@@ -189,7 +159,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
     public void setSiteURL(String siteName, String[] siteURL) {
         mainWebResource = webResourceFactory.createSite(siteName);
         mainWebResource = webResourceDataService.saveOrUpdate(mainWebResource);
-        this.crawlJob = new TanaguruCrawlJob(siteURL, heritrixPageFileName, getOutputDir(), getCrawlConfigFilePath());
+        this.crawlJob = new TanaguruCrawlJob(siteURL, heritrixPageFileName, outputDir, crawlConfigFilePath);
         if (crawlJob.isLaunchable()) {
             crawlJob.checkXML();
         }
@@ -205,7 +175,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         mainWebResource = webResourceFactory.createPage(pageURL);
         mainWebResource = webResourceDataService.saveOrUpdate(mainWebResource);
         String[] pageUrl = {pageURL};
-        this.crawlJob = new TanaguruCrawlJob(pageUrl, heritrixPageFileName, getOutputDir(), getCrawlConfigFilePath());
+        this.crawlJob = new TanaguruCrawlJob(pageUrl, heritrixPageFileName, outputDir, crawlConfigFilePath);
         if (crawlJob.isLaunchable()) {
             crawlJob.checkXML();
         }
@@ -457,7 +427,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                     // SSP is associated with other related contents (a css called
                     // by another css for example), we associate all these contents
                     // with the current SSP.
-                    if (relatedCssMap.containsKey(relatedContentId)){
+                    if (relatedCssMap.containsKey(relatedContentId)) {
                         relatedContentIdSet.addAll(relatedCssMap.get(relatedContentId));
                     }
                 }
@@ -471,13 +441,13 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                     + " elements. Processing took "
                     + (endProcessDate.getTime() - beginProcessDate.getTime())
                     + " ms");
-            LOGGER.debug("persistedOutlinksMap contains "+ persistedOutlinksMap.size());
+            LOGGER.debug("persistedOutlinksMap contains " + persistedOutlinksMap.size());
         }
         try {
             contentDataService.saveContentRelationShip(ssp, relatedContentIdSet);
         } catch (PersistenceException e) {
             LOGGER.warn(e);
-            LOGGER.warn("problem persisting  "+ssp.getURI() + "with ");
+            LOGGER.warn("problem persisting  " + ssp.getURI() + "with ");
             for (Long id : relatedContentIdSet) {
                 LOGGER.warn("ssp Id : " + ssp.getId() + " relatedContent Id : " + id);
             }
@@ -520,25 +490,23 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                         mainWebResource,
                         localCuri.getURI());
                 if (relatedContentId != null) {
-                    if (relatedCssMap.containsKey(((Content)cssContent).getId())) {
-                        relatedCssMap.get(((Content)cssContent).getId()).add
-                                (relatedContentId);
+                    if (relatedCssMap.containsKey(((Content) cssContent).getId())) {
+                        relatedCssMap.get(((Content) cssContent).getId()).add(relatedContentId);
                     } else {
                         List<Long> idList = new ArrayList<Long>();
                         idList.add(relatedContentId);
-                        relatedCssMap.put(((Content)cssContent).getId(), idList);
+                        relatedCssMap.put(((Content) cssContent).getId(), idList);
                     }
                 } else {
                     RelatedContent relatedContent =
                             createRelatingContentRegardingExtension(null, localCuri);
                     contentDataService.saveOrUpdate((Content) relatedContent);
-                    if (relatedCssMap.containsKey(((Content)cssContent).getId())) {
-                        relatedCssMap.get(((Content)cssContent).getId()).add
-                                (((Content)relatedContent).getId());
+                    if (relatedCssMap.containsKey(((Content) cssContent).getId())) {
+                        relatedCssMap.get(((Content) cssContent).getId()).add(((Content) relatedContent).getId());
                     } else {
                         List<Long> idList = new ArrayList<Long>();
-                        idList.add(((Content)relatedContent).getId());
-                        relatedCssMap.put(((Content)cssContent).getId(), idList);
+                        idList.add(((Content) relatedContent).getId());
+                        relatedCssMap.put(((Content) cssContent).getId(), idList);
                     }
                 }
             }
@@ -584,8 +552,8 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                 RelatedContent relatedContent =
                         createRelatingContentRegardingExtension(ssp, localCuri);
                 if (relatedContent != null) {
-                    contentDataService.saveOrUpdate((Content)relatedContent);
-                    Long id = Long.valueOf(((Content)relatedContent).getId());
+                    contentDataService.saveOrUpdate((Content) relatedContent);
+                    Long id = Long.valueOf(((Content) relatedContent).getId());
                     persistedOutlinksMap.put(md5Uri, id);
                     return id;
                 }
@@ -722,5 +690,4 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         content.setDateOfLoading(new Date(curi.getFetchCompletedTime()));
         contentDataService.saveOrUpdate(content);
     }
-
 }

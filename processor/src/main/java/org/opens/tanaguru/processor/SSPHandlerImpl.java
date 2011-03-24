@@ -48,20 +48,27 @@ public class SSPHandlerImpl implements SSPHandler {
     protected List<ProcessRemark> remarkList;
     protected Map<String, BufferedImage> imageMap;
     private URLIdentifier urlIdentifier;
-    Set<ImageContent> imageOnErrorSet;
-    ProcessRemarkService processRemarkService;
+    private Set<ImageContent> imageOnErrorSet;
+    private ProcessRemarkService processRemarkService;
 
-    public SSPHandlerImpl() {
+    SSPHandlerImpl(NomenclatureLoaderService nomenclatureLoaderService, URLIdentifier urlIdentifier, CSSHandler create, DOMHandler create0, ProcessRemarkService processRemarkService) {
         super();
+        this.nomenclatureLoaderService = nomenclatureLoaderService;
+        this.urlIdentifier = urlIdentifier;
+        this.cssHandler = create;
+        this.domHandler = create0;
+        this.processRemarkService = processRemarkService;
     }
 
     @Override
     public SSPHandler beginSelection() {
         domHandler.beginSelection();
-        if (cssHandler != null) 
+        if (cssHandler != null) {
             cssHandler.beginSelection();
-        if (jsHandler!=null)
+        }
+        if (jsHandler != null) {
             jsHandler.beginSelection();
+        }
 
         selectionExpression = null;
         remarkList = new ArrayList<ProcessRemark>();
@@ -143,9 +150,11 @@ public class SSPHandlerImpl implements SSPHandler {
 
     @Override
     public TestSolution checkRelativeUnitExists(Collection<Integer> blackList) {
-        if (cssHandler != null)
+        if (cssHandler != null) {
             return cssHandler.checkRelativeUnitExists(blackList);
-        else return TestSolution.NOT_APPLICABLE;
+        } else {
+            return TestSolution.NOT_APPLICABLE;
+        }
     }
 
     @Override
@@ -279,15 +288,17 @@ public class SSPHandlerImpl implements SSPHandler {
     }
 
     public SSPHandler selectAllJS() {
-        if (jsHandler != null)
+        if (jsHandler != null) {
             jsHandler.selectAllJS();
+        }
         return this;
     }
 
     @Override
     public SSPHandler selectAllRules() {
-        if (cssHandler != null)
+        if (cssHandler != null) {
             cssHandler.selectAllRules();
+        }
         return this;
     }
 
@@ -341,20 +352,23 @@ public class SSPHandlerImpl implements SSPHandler {
     }
 
     public SSPHandler selectExternalJS() {
-        if (jsHandler!=null)
+        if (jsHandler != null) {
             jsHandler.selectExternalJS();
+        }
         return this;
     }
 
     public SSPHandler selectInlineJS() {
-        if (jsHandler!=null)
+        if (jsHandler != null) {
             jsHandler.selectInlineJS();
+        }
         return this;
     }
 
     public SSPHandler selectLocalJS() {
-        if (jsHandler!=null)
+        if (jsHandler != null) {
             jsHandler.selectLocalJS();
+        }
         return this;
     }
 
@@ -379,10 +393,12 @@ public class SSPHandlerImpl implements SSPHandler {
     public void setSSP(SSP ssp) {
         this.ssp = ssp;
         domHandler.setSSP(ssp);
-        if (cssHandler!=null)
+        if (cssHandler != null) {
             cssHandler.setSSP(ssp);
-        if (jsHandler!=null)
+        }
+        if (jsHandler != null) {
             jsHandler.setSSP(ssp);
+        }
         initializeImageMap();
     }
 
@@ -456,16 +472,16 @@ public class SSPHandlerImpl implements SSPHandler {
 
     @Override
     public SSPHandler keepRulesWithMedia(Collection<String> mediaNames) {
-        if (cssHandler != null)
+        if (cssHandler != null) {
             cssHandler.keepRulesWithMedia(mediaNames);
+        }
         return this;
     }
 
     @Override
     public BufferedImage getImageFromURL(String url) {
         try {
-            return imageMap.get(UURIFactory.getInstance(urlIdentifier.resolve(url)
-                    .toExternalForm()).toString());
+            return imageMap.get(UURIFactory.getInstance(urlIdentifier.resolve(url).toExternalForm()).toString());
         } catch (URIException ex) {
             Logger.getLogger(SSPHandlerImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -473,7 +489,7 @@ public class SSPHandlerImpl implements SSPHandler {
     }
 
     @Override
-    public  TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
+    public TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
             Node attribute,
             Node workingElement,
             TestSolution testSolution,
@@ -486,7 +502,7 @@ public class SSPHandlerImpl implements SSPHandler {
     }
 
     @Override
-    public  TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
+    public TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
             String attributeContent,
             Node workingElement,
             TestSolution testSolution,
@@ -503,26 +519,26 @@ public class SSPHandlerImpl implements SSPHandler {
      * by the crawler component, and the map we initialize here associates
      * the url of the image with the binary image content.
      */
-    private void initializeImageMap(){
-        if (imageMap==null){
+    private void initializeImageMap() {
+        if (imageMap == null) {
             imageMap = new HashMap<String, BufferedImage>();
         }
-        if (imageOnErrorSet==null){
+        if (imageOnErrorSet == null) {
             imageOnErrorSet = new HashSet<ImageContent>();
         }
         imageMap.clear();
-        for(RelatedContent relatedContent : ssp.getRelatedContentSet()){
-            if (relatedContent instanceof ImageContent){
+        for (RelatedContent relatedContent : ssp.getRelatedContentSet()) {
+            if (relatedContent instanceof ImageContent) {
 
                 BufferedImage image;
-                if (((ImageContent) relatedContent).getHttpStatusCode()!= 200 ||
-                        ((ImageContent) relatedContent).getContent()==null){
-                    imageOnErrorSet.add((ImageContent)relatedContent);
+                if (((ImageContent) relatedContent).getHttpStatusCode() != 200
+                        || ((ImageContent) relatedContent).getContent() == null) {
+                    imageOnErrorSet.add((ImageContent) relatedContent);
                 } else {
                     try {
                         image = ImageIO.read(new ByteArrayInputStream(
                                 ((ImageContent) relatedContent).getContent()));
-                        imageMap.put(((Content)relatedContent).getURI(), image);
+                        imageMap.put(((Content) relatedContent).getURI(), image);
                     } catch (IOException ex) {
                         Logger.getLogger(SSPHandlerImpl.class.getName()).
                                 log(Level.SEVERE, null, ex);
@@ -563,5 +579,4 @@ public class SSPHandlerImpl implements SSPHandler {
     public void setMessageCode(String messageCode) {
         domHandler.setMessageCode(messageCode);
     }
-
 }

@@ -27,8 +27,11 @@ public abstract class AbstractContentAdapter implements ContentAdapter {
     protected List<Content> contentList = new ArrayList<Content>();
     protected ContentFactory contentFactory;
 
-    public AbstractContentAdapter() {
+    public AbstractContentAdapter(ContentFactory contentFactory, URLIdentifier urlIdentifier, Downloader downloader) {
         super();
+        this.contentFactory = contentFactory;
+        this.urlIdentifier = urlIdentifier;
+        this.downloader = downloader;
     }
 
     public SSP getSSP() {

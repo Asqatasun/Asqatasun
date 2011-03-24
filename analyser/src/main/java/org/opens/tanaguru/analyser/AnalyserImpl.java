@@ -13,8 +13,9 @@ public class AnalyserImpl implements Analyser {
     private List<ProcessResult> netResultList;
     private float result;
 
-    public AnalyserImpl() {
+    AnalyserImpl(List<ProcessResult> netResultList) {
         super();
+        this.netResultList = netResultList;
     }
 
     public List<ProcessResult> getNetResultList() {
@@ -50,8 +51,8 @@ public class AnalyserImpl implements Analyser {
             }
         }
 
-        float ratioNMI = needMoreInfo / (passed+failed+needMoreInfo);
-        result = ((1-ratioNMI) * passed/(passed+failed) + ratioNMI * needMoreInfo/(passed+failed+needMoreInfo)) *100f;
+        float ratioNMI = needMoreInfo / (passed + failed + needMoreInfo);
+        result = ((1 - ratioNMI) * passed / (passed + failed) + ratioNMI * needMoreInfo / (passed + failed + needMoreInfo)) * 100f;
     }
 
     public void setNetResultList(List<ProcessResult> netResultList) {

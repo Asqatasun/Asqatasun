@@ -26,8 +26,9 @@ public class HTMLParserImpl implements HTMLParser {
     protected XMLReader saxReader;
     protected SSP ssp;
 
-    public HTMLParserImpl() {
+    public HTMLParserImpl(Set<ContentAdapter> contentAdapterSet) {
         super();
+        this.contentAdapterSet = contentAdapterSet;
     }
 
     public Set<ContentAdapter> getContentAdapterSet() {
@@ -49,9 +50,9 @@ public class HTMLParserImpl implements HTMLParser {
         saxReader.setFeature("http://apache.org/xml/features/allow-java-encodings", true);
         saxReader.setFeature("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);
         saxReader.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
-        saxReader.setFeature("http://xml.org/sax/features/validation",false);
+        saxReader.setFeature("http://xml.org/sax/features/validation", false);
         saxReader.setFeature("http://xml.org/sax/features/namespaces", false);
-        saxReader.setFeature("http://apache.org/xml/features/validation/schema",false);
+        saxReader.setFeature("http://apache.org/xml/features/validation/schema", false);
         saxReader.setFeature("http://apache.org/xml/features/continue-after-fatal-error", true);
 
         DOMContentHandlerDecorator contentHandlerDecorator = new DOMContentHandlerDecoratorImpl();

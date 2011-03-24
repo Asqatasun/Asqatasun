@@ -4,43 +4,22 @@
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="domHandlerComponent" class="org.opens.tanaguru.processor.DOMHandlerImpl">
-    </bean>
-
-    <bean id="cssHandlerComponent" class="org.opens.tanaguru.processor.CSSHandlerImpl">
-    </bean>
-
-<!--    <bean id="jsHandlerComponent" class="org.opens.tanaguru.processor.JSHandlerImpl">
-        <property name="processRemarkFactory" ref="processRemarkFactory"/>
-        <property name="sourceCodeRemarkFactory" ref="sourceCodeRemarkFactory"/>
-    </bean>-->
-
-    <bean id="sspHandlerComponent" class="org.opens.tanaguru.processor.SSPHandlerImpl">
-        <property name="DOMHandler" ref="domHandlerComponent"/>
-        <property name="CSSHandler" ref="cssHandlerComponent"/>
-<!--        <property name="JSHandler" ref="jsHandlerComponent"/>-->
-        <property name="nomenclatureLoaderService" ref="nomenclatureLoaderService"/>
-        <property name="processRemarkService" ref="processRemarkService"/>
-        <property name="urlIdentifier" ref="urlIdentifierComponent"/>
-    </bean>
-
-    <bean id="processorComponent" class="org.opens.tanaguru.processor.ProcessorImpl">
-        <property name="SSPHandler" ref="sspHandlerComponent"/>
-    </bean>
+    <bean id="processorFactory" class="org.opens.tanaguru.processor.ProcessorFactoryImpl"/>
 
     <bean id="processorService" class="org.opens.tanaguru.service.ProcessorServiceImpl">
-        <property name="processor" ref="processorComponent"/>
         <property name="ruleImplementationLoaderService" ref="ruleImplementationLoaderService"/>
-    </bean>
 
-    <bean id="imageChecker" class="org.opens.tanaguru.ruleimplementation.ImageChecker" factory-method="getInstance">
-    </bean>
+        <property name="nomenclatureLoaderService" ref="nomenclatureLoaderService"/>
 
-    <bean id="processRemarkService" class="org.opens.tanaguru.service.ProcessRemarkServiceImpl">
         <property name="processRemarkFactory" ref="processRemarkFactory"/>
         <property name="sourceCodeRemarkFactory" ref="sourceCodeRemarkFactory"/>
         <property name="evidenceDataService" ref="evidenceDataService"/>
         <property name="evidenceElementFactory" ref="evidenceElementFactory"/>
+
+        <property name="processorFactory" ref="processorFactory"/>
+        <property name="urlIdentifierFactory" ref="urlIdentifierFactory"/>
     </bean>
+
+    <bean id="imageChecker" class="org.opens.tanaguru.ruleimplementation.ImageChecker" factory-method="getInstance"/>
 
 </beans>

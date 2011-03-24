@@ -16,14 +16,15 @@ import java.util.List;
 public class ContentLoaderImpl implements ContentLoader {
 
     private static final int HTTP_CODE_OK = 200;
-
     private ContentFactory contentFactory;
     private Downloader downloader;
     private List<Content> result;
     private WebResource webResource;
 
-    public ContentLoaderImpl() {
+    ContentLoaderImpl(ContentFactory contentFactory, Downloader downloader) {
         super();
+        this.contentFactory = contentFactory;
+        this.downloader = downloader;
     }
 
     public List<Content> getResult() {

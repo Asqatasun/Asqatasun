@@ -420,7 +420,7 @@ public interface DOMHandler {
      * @param remarkMessage
      * @return
      */
-    public  TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
+    public TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
             Node attribute,
             Node workingElement,
             TestSolution testSolution,
@@ -435,7 +435,7 @@ public interface DOMHandler {
      * @param remarkMessage
      * @return
      */
-    public  TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
+    public TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
             String attributeContent,
             Node workingElement,
             TestSolution testSolution,
@@ -451,7 +451,7 @@ public interface DOMHandler {
      *
      * @param processRemarkService
      */
-    public void setProcessRemarkService (ProcessRemarkService processRemarkService);
+    public void setProcessRemarkService(ProcessRemarkService processRemarkService);
 
     /**
      *

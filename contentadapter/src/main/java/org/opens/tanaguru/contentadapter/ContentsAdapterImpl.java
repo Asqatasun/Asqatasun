@@ -1,5 +1,6 @@
 package org.opens.tanaguru.contentadapter;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,12 +25,21 @@ public class ContentsAdapterImpl implements ContentsAdapter {
     private List<Content> contentList;
     private HTMLCleaner htmlCleaner;
     private HTMLParser htmlParser;
-    private boolean initialized = false;
     private List<Content> result;
     private Boolean writeCleanHtmlInFile = false;
+    private String tempFolderRootPath = "/var/tmp";
 
-    public ContentsAdapterImpl() {
+    ContentsAdapterImpl(List<Content> contentList, boolean writeCleanHtmlInFile, String tempFolderRootPath, HTMLCleaner htmlCleaner, HTMLParser htmlParser) {
         super();
+        this.contentList = contentList;
+        this.writeCleanHtmlInFile = writeCleanHtmlInFile;
+        this.tempFolderRootPath = tempFolderRootPath;
+        this.htmlCleaner = htmlCleaner;
+        this.htmlParser = htmlParser;
+    }
+
+    public void setTempFolderRootPath(String tempFolderRootPath) {
+        this.tempFolderRootPath = tempFolderRootPath;
     }
 
     @Override
@@ -37,19 +47,8 @@ public class ContentsAdapterImpl implements ContentsAdapter {
         return result;
     }
 
-    private void initialize() {
-        if (initialized) {
-            return;
-        }
-
-        htmlParser.setContentAdapterSet(contentAdapterSet);
-        initialized = true;
-    }
-
     @Override
     public void run() {
-        initialize();
-
         result = run(contentList);
     }
 
@@ -58,21 +57,18 @@ public class ContentsAdapterImpl implements ContentsAdapter {
         for (Content content : contentList) {
             // Unreachable resources (404 error) are saved in the list for reports
             // We only handle here the fetched content (HttpStatus=200)
-            if (content instanceof SSP && content.getHttpStatusCode()==200) {
+            if (content instanceof SSP && content.getHttpStatusCode() == 200) {
                 SSP ssp = (SSP) content;
 
-                ssp.setDoctype(DocumentCaseInsensitiveAdapter.
-                        extractDoctypeDeclaration(ssp.getSource()));
+                ssp.setDoctype(DocumentCaseInsensitiveAdapter.extractDoctypeDeclaration(ssp.getSource()));
                 htmlCleaner.setDirtyHTML(
-                        DocumentCaseInsensitiveAdapter.
-                        removeDoctypeDeclaration(ssp.getSource()));
+                        DocumentCaseInsensitiveAdapter.removeDoctypeDeclaration(ssp.getSource()));
 
                 htmlCleaner.run();
 
                 ssp.setAdaptedContent(
-                        DocumentCaseInsensitiveAdapter.
-                        removeLowerCaseTags(htmlCleaner.getResult()));
-                htmlCleaner.setDirtyHTML(null);        
+                        DocumentCaseInsensitiveAdapter.removeLowerCaseTags(htmlCleaner.getResult()));
+                htmlCleaner.setDirtyHTML(null);
                 if (writeCleanHtmlInFile) {
                     writeCleanDomInFile(ssp);
                 }
@@ -120,7 +116,7 @@ public class ContentsAdapterImpl implements ContentsAdapter {
                 fileName = ssp.getURI().substring(lastIndexOfSlash + 1);
             }
             try {
-                FileWriter fw = new FileWriter("/var/tmp/" + htmlCleaner.getCorrectorName()
+                FileWriter fw = new FileWriter(tempFolderRootPath + File.separator + htmlCleaner.getCorrectorName()
                         + '-' + new Date().getTime() + '-' + fileName);
                 fw.write(ssp.getDOM());
                 fw.close();
@@ -133,5 +129,4 @@ public class ContentsAdapterImpl implements ContentsAdapter {
     public void setWriteCleanHtmlInFile(Boolean writeCleanHtmlInFile) {
         this.writeCleanHtmlInFile = writeCleanHtmlInFile;
     }
-
 }

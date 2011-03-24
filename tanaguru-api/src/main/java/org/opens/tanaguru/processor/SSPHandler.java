@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import org.opens.tanaguru.contentadapter.util.URLIdentifier;
 
 import org.w3c.dom.Node;
 
@@ -11,6 +12,7 @@ import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.service.NomenclatureLoaderService;
 import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
@@ -20,7 +22,7 @@ import org.opens.tanaguru.service.ProcessRemarkService;
  * @author ADEX
  * @version 1.0.0
  */
-public interface SSPHandler {
+public interface SSPHandler {// TODO Write javadoc
 
     /**
      *
@@ -251,7 +253,7 @@ public interface SSPHandler {
      */
     boolean isSelectedElementsEmpty();
 
-   /**
+    /**
      *
      * @param attributeName
      *            the name of the attribute to filter
@@ -445,7 +447,7 @@ public interface SSPHandler {
      * @param remarkMessage
      * @return
      */
-    public  TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
+    public TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
             Node attribute,
             Node workingElement,
             TestSolution testSolution,
@@ -460,7 +462,7 @@ public interface SSPHandler {
      * @param remarkMessage
      * @return
      */
-    public  TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
+    public TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
             String attributeContent,
             Node workingElement,
             TestSolution testSolution,
@@ -481,13 +483,13 @@ public interface SSPHandler {
      * 
      * @param processRemarkService
      */
-    public void setProcessRemarkService (ProcessRemarkService processRemarkService);
+    public void setProcessRemarkService(ProcessRemarkService processRemarkService);
 
     /**
      * 
      * @return the processRemarkService
      */
-    public ProcessRemarkService getProcessRemarkService ();
+    public ProcessRemarkService getProcessRemarkService();
 
     /**
      *
@@ -500,4 +502,14 @@ public interface SSPHandler {
      * @param messageCode
      */
     public void setMessageCode(String messageCode);
+
+    void setNomenclatureLoaderService(NomenclatureLoaderService nomenclatureLoaderService);
+
+    void setUrlIdentifier(URLIdentifier urlIdentifier);
+
+    void setCSSHandler(CSSHandler cssHandler);
+
+    void setDOMHandler(DOMHandler domHandler);
+
+    void setJSHandler(JSHandler jsHandler);
 }

@@ -2,7 +2,6 @@ package org.opens.tanaguru.ruleimplementationloader;
 
 import org.opens.tanaguru.ruleimplementation.RuleImplementation;
 import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.logging.Level;
@@ -19,8 +18,11 @@ public class RuleImplementationLoaderImpl implements RuleImplementationLoader {
     private String className;
     private RuleImplementation result;
 
-    public RuleImplementationLoaderImpl() {
+    RuleImplementationLoaderImpl(String archiveRoot, String ruleArchiveName, String ruleClassName) {
         super();
+        this.archiveRoot = archiveRoot;
+        this.archiveName = ruleArchiveName;
+        this.className = ruleClassName;
     }
 
     @Override
@@ -70,17 +72,8 @@ public class RuleImplementationLoaderImpl implements RuleImplementationLoader {
                     new URL[]{rulesPackagesRootURL}, this.getClass().getClassLoader());
             return (RuleImplementation) Class.forName(className, true,
                     classLoader).newInstance();
-        } catch (InstantiationException ex) {
-            Logger.getLogger(RuleImplementationLoaderImpl.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException(ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(RuleImplementationLoaderImpl.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException(ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(RuleImplementationLoaderImpl.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException(ex);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(RuleImplementationLoaderImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(RuleImplementationLoaderImpl.class.getName()).log(Level.SEVERE, "archiveRoot=" + archiveRoot + ", archiveName=" + archiveName + ", className=" + className, ex);
             throw new RuntimeException(ex);
         }
     }

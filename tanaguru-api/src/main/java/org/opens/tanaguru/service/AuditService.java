@@ -10,6 +10,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlTransient
 public interface AuditService {// TODO Write javadoc
 
+    void add(AuditServiceListener listener);
+
+    void remove(AuditServiceListener listener);
+
     Audit adaptContent(Audit audit);
 
     Audit analyse(Audit audit);

@@ -4,13 +4,14 @@
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="downloaderComponent" class="org.opens.tanaguru.contentloader.DownloaderImpl"/>
-<!--    <bean id="contentLoaderComponent" class="org.opens.tanaguru.contentloader.ContentLoaderImpl">
-        <property name="downloader" ref="downloaderComponent"/>
-        <property name="contentFactory" ref="contentFactory"/>
-    </bean>
+    <bean id="downloaderFactory" class="org.opens.tanaguru.contentloader.DownloaderFactoryImpl"/>
+
+    <!--bean id="contentLoaderFactory" class="org.opens.tanaguru.contentloader.ContentLoaderFactoryImpl"/>
+
     <bean id="contentLoaderService" class="org.opens.tanaguru.service.ContentLoaderServiceImpl">
-        <property name="contentsLoader" ref="contentLoaderComponent"/>
-    </bean>-->
+        <property name="contentFactory" ref="contentFactory"/>
+        <property name="contentLoaderFactory" ref="contentLoaderFactory"/>
+        <property name="downloaderFactory" ref="downloaderFactory"/>
+    </bean-->
 
 </beans>

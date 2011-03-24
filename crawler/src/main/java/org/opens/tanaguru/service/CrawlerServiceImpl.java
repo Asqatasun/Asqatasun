@@ -5,7 +5,10 @@ import java.util.Date;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.crawler.Crawler;
+import org.opens.tanaguru.crawler.CrawlerFactory;
 import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.factory.audit.ContentFactory;
+import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
@@ -23,8 +26,26 @@ public class CrawlerServiceImpl implements CrawlerService {
     private static final Logger LOGGER = Logger.getLogger(CrawlerServiceImpl.class);
     private static final int PROCESS_WINDOW = 2000;
     private ContentDataService contentDataService;
-
     private WebResourceDataService webResourceDataService;
+    private ContentFactory contentFactory;
+    private WebResourceFactory webResourceFactory;
+    private String outputDir;
+    private String crawlConfigFilePath;
+    private AuditDataService auditDataService;
+    private CrawlerFactory crawlerFactory;
+
+    public CrawlerServiceImpl() {
+        super();
+    }
+
+    public void setCrawlConfigFilePath(String crawlConfigFilePath) {
+        this.crawlConfigFilePath = crawlConfigFilePath;
+    }
+
+    public String getCrawlConfigFilePath() {
+        return crawlConfigFilePath;
+    }
+
     public AuditDataService getAuditDataService() {
         return auditDataService;
     }
@@ -49,20 +70,15 @@ public class CrawlerServiceImpl implements CrawlerService {
         this.webResourceDataService = webResourceDataService;
     }
 
-    private AuditDataService auditDataService;
-
-    private Crawler crawler;
     @Override
-    public void setCrawler(Crawler crawler) {
-        this.crawler = crawler;
-    }
-
-    public CrawlerServiceImpl() {
-        super();
+    public void setCrawlerFactory(CrawlerFactory crawlerFactory) {
+        this.crawlerFactory = crawlerFactory;
     }
 
     @Override
     public Page crawl(Page page) {
+        Crawler crawler = crawlerFactory.create(webResourceFactory, webResourceDataService, contentFactory, contentDataService, outputDir, crawlConfigFilePath);
+
         crawler.setPageURL(page.getURL());
         crawler.run();
         Audit audit = page.getAudit();
@@ -84,15 +100,17 @@ public class CrawlerServiceImpl implements CrawlerService {
      */
     @Override
     public Site crawl(Site site) {
+        Crawler crawler = crawlerFactory.create(webResourceFactory, webResourceDataService, contentFactory, contentDataService, outputDir, crawlConfigFilePath);
+
         int componentListSize = site.getComponentList().size();
         if (componentListSize == 0) {
             crawler.setSiteURL(site.getURL());
         } else {
             String[] urlPage = new String[componentListSize];
             Object[] webresourceTab = site.getComponentList().toArray();
-            for (int i=0;i<componentListSize;i++) {
+            for (int i = 0; i < componentListSize; i++) {
                 if (webresourceTab[i] instanceof WebResource) {
-                    urlPage[i] = ((WebResource)webresourceTab[i]).getURL();
+                    urlPage[i] = ((WebResource) webresourceTab[i]).getURL();
                 }
             }
             crawler.setSiteURL(site.getURL(), urlPage);
@@ -111,16 +129,16 @@ public class CrawlerServiceImpl implements CrawlerService {
 
     public void setAuditToContent(WebResource wr, Audit audit) {
         Long nbOfContent = contentDataService.getNumberOfSSPFromWebResource(wr);
-        Long i= Long.valueOf(0);
+        Long i = Long.valueOf(0);
         Date endProcessDate = null;
         Date beginProcessDate = null;
         Date endPersistDate = null;
-        LOGGER.debug("Number Of SSP From WebResource " + wr.getURL() + " : " +nbOfContent);
-        while (i.compareTo(nbOfContent)<0) {
+        LOGGER.debug("Number Of SSP From WebResource " + wr.getURL() + " : " + nbOfContent);
+        while (i.compareTo(nbOfContent) < 0) {
             if (LOGGER.isDebugEnabled()) {
                 beginProcessDate = Calendar.getInstance().getTime();
-                    LOGGER.debug("Set audit to ssp from  "
-                            + i + " to " + (i + PROCESS_WINDOW));
+                LOGGER.debug("Set audit to ssp from  "
+                        + i + " to " + (i + PROCESS_WINDOW));
             }
             List<Long> contentIdList =
                     contentDataService.getSSPFromWebResource(wr.getId(), i.intValue(), PROCESS_WINDOW);
@@ -139,16 +157,16 @@ public class CrawlerServiceImpl implements CrawlerService {
                         + (endPersistDate.getTime() - endProcessDate.getTime())
                         + " ms");
             }
-            i = i+ PROCESS_WINDOW;
+            i = i + PROCESS_WINDOW;
         }
         nbOfContent = contentDataService.getNumberOfRelatedContentFromWebResource(wr);
         LOGGER.debug("Number Of Related Content From WebResource?" + wr.getURL() + " : " + nbOfContent);
-        i= Long.valueOf(0);
-        while (i.compareTo(nbOfContent)<0) {
+        i = Long.valueOf(0);
+        while (i.compareTo(nbOfContent) < 0) {
             if (LOGGER.isDebugEnabled()) {
                 beginProcessDate = Calendar.getInstance().getTime();
                 LOGGER.debug("Set audit to relatedContent from  "
-                            + i + " to " + (i + PROCESS_WINDOW));
+                        + i + " to " + (i + PROCESS_WINDOW));
             }
             List<Long> contentIdList =
                     contentDataService.getRelatedContentFromWebResource(wr.getId(), i.intValue(), PROCESS_WINDOW);
@@ -167,9 +185,33 @@ public class CrawlerServiceImpl implements CrawlerService {
                         + (endPersistDate.getTime() - endProcessDate.getTime())
                         + " ms");
             }
-            i = i+ PROCESS_WINDOW;
+            i = i + PROCESS_WINDOW;
         }
         webResourceDataService.saveOrUpdate(wr);
     }
-    
+
+    @Override
+    public void setWebResourceFactory(WebResourceFactory webResourceFactory) {
+        this.webResourceFactory = webResourceFactory;
+    }
+
+    @Override
+    public void setContentFactory(ContentFactory contentFactory) {
+        this.contentFactory = contentFactory;
+    }
+
+    @Override
+    public void setOutputDir(String outputDir) {
+        this.outputDir = outputDir;
+    }
+
+    @Override
+    public ContentFactory getContentFactory() {
+        return contentFactory;
+    }
+
+    @Override
+    public String getOutputDir() {
+        return outputDir;
+    }
 }

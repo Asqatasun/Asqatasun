@@ -4,15 +4,14 @@
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="ruleImplementationLoaderComponent" class="org.opens.tanaguru.ruleimplementationloader.RuleImplementationLoaderImpl">
-        <property name="archiveRoot" value="${ruleArchiveRoot}"/>
-    </bean>
+    <bean id="ruleImplementationLoaderFactory" class="org.opens.tanaguru.ruleimplementationloader.RuleImplementationLoaderFactoryImpl"/>
 
     <bean id="ruleImplementationLoaderService" class="org.opens.tanaguru.service.RuleImplementationLoaderServiceImpl">
-        <property name="ruleImplementationLoader" ref="ruleImplementationLoaderComponent"/>
+        <property name="ruleImplementationLoaderFactory" ref="ruleImplementationLoaderFactory"/>
         <property name="definiteResultFactory" ref="definiteResultFactory"/>
         <property name="indefiniteResultFactory" ref="indefiniteResultFactory"/>
         <property name="nomenclatureLoaderService" ref="nomenclatureLoaderService"/>
+        <property name="archiveRoot" value="${ruleArchiveRoot}"/>
     </bean>
 
 </beans>

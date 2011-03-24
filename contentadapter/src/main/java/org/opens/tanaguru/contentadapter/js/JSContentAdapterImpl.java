@@ -17,6 +17,9 @@ import org.xml.sax.SAXException;
 
 import com.thoughtworks.xstream.XStream;
 import java.util.HashSet;
+import org.opens.tanaguru.contentadapter.util.URLIdentifier;
+import org.opens.tanaguru.contentloader.Downloader;
+import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.helpers.LocatorImpl;
 
@@ -47,8 +50,8 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
     /**
      * Default constructor.
      */
-    public JSContentAdapterImpl() {
-        super();
+    public JSContentAdapterImpl(ContentFactory contentFactory, URLIdentifier urlIdentifier, Downloader downloader) {
+        super(contentFactory, urlIdentifier, downloader);
     }
 
     /**

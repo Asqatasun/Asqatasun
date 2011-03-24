@@ -22,8 +22,11 @@ public class ConsolidatorImpl implements Consolidator {
     private RuleImplementation ruleImplementation;
     private ProcessRemarkService processRemarkService;
 
-    public ConsolidatorImpl() {
+    ConsolidatorImpl(List<ProcessResult> grossResultList, RuleImplementation ruleImplementation, ProcessRemarkService processRemarkService) {
         super();
+        this.grossResultList = grossResultList;
+        this.ruleImplementation = ruleImplementation;
+        this.processRemarkService = processRemarkService;
     }
 
     public List<ProcessResult> getGrossResultList() {

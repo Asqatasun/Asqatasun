@@ -1,6 +1,5 @@
 package org.opens.tanaguru.service;
 
-
 import java.util.Collection;
 import java.util.List;
 import org.opens.tanaguru.contentadapter.css.CSSOMRule;
@@ -27,12 +26,12 @@ public interface ProcessRemarkService {
      * @param document
      * @param adaptedContent
      */
-    void initializeService (Document document, String adaptedContent);
+    void initializeService(Document document, String adaptedContent);
 
     /**
      *
      */
-    void initializeService ();
+    void initializeService();
 
     /**
      *
@@ -156,17 +155,17 @@ public interface ProcessRemarkService {
      */
     EvidenceElement getEvidenceElement(String evidenceCode, String evidenceValue);
 
-        /**
+    /**
      *
      * @param element
      */
-    void addEvidenceElement (String element);
+    void addEvidenceElement(String element);
 
     /**
      *
      * @param element
      */
-    void setEvidenceElementList (Collection<String> element);
+    void setEvidenceElementList(Collection<String> element);
 
     /**
      *
@@ -179,5 +178,4 @@ public interface ProcessRemarkService {
      * @return
      */
     EvidenceDataService getEvidenceDataService();
-
 }

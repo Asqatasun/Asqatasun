@@ -1,9 +1,9 @@
 package org.opens.tanaguru.service;
 
 import java.util.List;
-import org.opens.tanaguru.analyser.Analyser;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import javax.xml.bind.annotation.XmlTransient;
+import org.opens.tanaguru.analyser.AnalyserFactory;
 
 /**
  * 
@@ -19,9 +19,5 @@ public interface AnalyserService {// TODO Write javadoc
      */
     float analyse(List<ProcessResult> netResultList);
 
-    /**
-     * 
-     * @param analyser
-     */
-    void setAnalyser(Analyser analyser);
+    void setAnalyserFactory(AnalyserFactory analyserFactory);
 }

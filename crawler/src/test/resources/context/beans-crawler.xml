@@ -4,19 +4,20 @@
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="crawlerComponent" class="org.opens.tanaguru.crawler.CrawlerImpl">
-        <property name="contentDataService" ref="contentDataService"/>
-        <property name="contentFactory" ref="contentFactory"/>
-        <property name="webResourceDataService" ref="webResourceDataService"/>
-        <property name="webResourceFactory" ref="webResourceFactory"/>
-        <property name="outputDir" value="/tmp"/>
-    </bean>
+    <bean id="crawlerFactory" class="org.opens.tanaguru.crawler.CrawlerFactoryImpl"/>
 
     <bean id="crawlerService" class="org.opens.tanaguru.service.CrawlerServiceImpl">
-        <property name="contentDataService" ref="contentDataService"/>
-        <property name="webResourceDataService" ref="webResourceDataService"/>
         <property name="auditDataService" ref="auditDataService"/>
-        <property name="crawler" ref="crawlerComponent"/>
+        <property name="webResourceDataService" ref="webResourceDataService"/>
+        <property name="contentDataService" ref="contentDataService"/>
+
+        <property name="webResourceFactory" ref="webResourceFactory"/>
+        <property name="contentFactory" ref="contentFactory"/>
+        
+        <property name="outputDir" value="/var/tmp/tanaguru"/>
+        <property name="crawlConfigFilePath" value="/etc/tanaguru/context/crawler/"/>
+
+        <property name="crawlerFactory" ref="crawlerFactory"/>
     </bean>
 
 </beans>

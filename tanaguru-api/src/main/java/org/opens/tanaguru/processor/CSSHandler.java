@@ -57,5 +57,5 @@ public interface CSSHandler {
      *
      * @param processRemarkService
      */
-    public void setProcessRemarkService (ProcessRemarkService processRemarkService);
+    public void setProcessRemarkService(ProcessRemarkService processRemarkService);
 }

@@ -18,6 +18,7 @@
         <module>crawler</module>
         <module>contentloader</module>
         <module>contentadapter</module>
+        <module>commons-processing</module>
         <module>processor</module>
         <module>consolidator</module>
         <module>analyser</module>

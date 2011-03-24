@@ -19,11 +19,10 @@ import org.w3c.flute.parser.TokenMgrError;
 public class CSSParserImpl extends AbstractContentParser implements CSSParser {
 
     private CSSOMStyleSheet result;
-
     /**
-     * The parser (needed to be injected by spring)
+     * The parser (needed to be injected by spring)// TODO Update javadoc
      */
-    private Parser parser = null;
+    private Parser parser = new org.w3c.flute.parser.Parser();
 
     public CSSParserImpl() {
         super();
@@ -51,7 +50,7 @@ public class CSSParserImpl extends AbstractContentParser implements CSSParser {
         } catch (IOException ex) {
             Logger.getLogger(CSSParserImpl.class.getName()).log(Level.SEVERE,
                     null, ex);
-        } catch (StringIndexOutOfBoundsException ex ) {
+        } catch (StringIndexOutOfBoundsException ex) {
             Logger.getLogger(CSSParserImpl.class.getName()).log(Level.SEVERE,
                     null, ex);
         } catch (TokenMgrError err) {
@@ -70,8 +69,8 @@ public class CSSParserImpl extends AbstractContentParser implements CSSParser {
         try {
             String rsrc = resource.getResource();
             InputSource is = new InputSource(new StringReader(rsrc));
-            
-            CSSOMDocumentHandlerForImport handler = 
+
+            CSSOMDocumentHandlerForImport handler =
                     new CSSOMDocumentHandlerForImport((CSSResource) resource);
 
             parser.setDocumentHandler(handler);
@@ -86,7 +85,7 @@ public class CSSParserImpl extends AbstractContentParser implements CSSParser {
             Logger.getLogger(CSSParserImpl.class.getName()).log(Level.SEVERE,
                     null, ex);
             return null;
-        }  catch (StringIndexOutOfBoundsException ex ) {
+        } catch (StringIndexOutOfBoundsException ex) {
             Logger.getLogger(CSSParserImpl.class.getName()).log(Level.SEVERE,
                     null, ex);
             return null;
@@ -97,13 +96,8 @@ public class CSSParserImpl extends AbstractContentParser implements CSSParser {
         }
     }
 
-    public void setParser(Parser parser){
-        this.parser = parser;
-    }
-
     @Override
     public CSSOMStyleSheet getResult() {
         return result;
     }
-
 }

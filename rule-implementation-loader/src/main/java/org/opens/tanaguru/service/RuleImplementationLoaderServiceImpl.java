@@ -7,18 +7,19 @@ import org.opens.tanaguru.ruleimplementation.RuleImplementation;
 import org.opens.tanaguru.ruleimplementationloader.RuleImplementationLoader;
 import java.util.HashSet;
 import java.util.Set;
+import org.opens.tanaguru.ruleimplementationloader.RuleImplementationLoaderFactory;
 
 /**
  * 
  * @author ADEX
  */
-public class RuleImplementationLoaderServiceImpl implements
-        RuleImplementationLoaderService {
+public class RuleImplementationLoaderServiceImpl implements RuleImplementationLoaderService {
 
     private DefiniteResultFactory definiteResultFactory;
     private IndefiniteResultFactory indefiniteResultFactory;
     private NomenclatureLoaderService nomenclatureLoaderService;
-    private RuleImplementationLoader ruleImplementationLoader;
+    private String archiveRoot;
+    private RuleImplementationLoaderFactory ruleImplementationLoaderFactory;
 
     public RuleImplementationLoaderServiceImpl() {
         super();
@@ -34,6 +35,19 @@ public class RuleImplementationLoaderServiceImpl implements
     }
 
     @Override
+    public RuleImplementation loadRuleImplementation(Test test) {
+        RuleImplementationLoader ruleImplementationLoader = ruleImplementationLoaderFactory.create(archiveRoot, test.getRuleArchiveName(), test.getRuleClassName());
+        ruleImplementationLoader.run();
+        RuleImplementation ruleImplementation = ruleImplementationLoader.getResult();
+        ruleImplementation.setTest(test);
+        ruleImplementation.setDefiniteResultFactory(definiteResultFactory);
+        ruleImplementation.setIndefiniteResultFactory(indefiniteResultFactory);
+        ruleImplementation.setNomenclatureLoaderService(nomenclatureLoaderService);
+
+        return ruleImplementation;
+    }
+
+    @Override
     public void setDefiniteResultFactory(
             DefiniteResultFactory definiteResultFactory) {
         this.definiteResultFactory = definiteResultFactory;
@@ -46,29 +60,15 @@ public class RuleImplementationLoaderServiceImpl implements
     }
 
     @Override
-    public void setNomenclatureLoaderService(
-            NomenclatureLoaderService nomenclatureService) {
+    public void setNomenclatureLoaderService(NomenclatureLoaderService nomenclatureService) {
         this.nomenclatureLoaderService = nomenclatureService;
     }
 
-    @Override
-    public void setRuleImplementationLoader(
-            RuleImplementationLoader ruleImplementationLoader) {
-        this.ruleImplementationLoader = ruleImplementationLoader;
+    public void setArchiveRoot(String archiveRoot) {
+        this.archiveRoot = archiveRoot;
     }
 
-    @Override
-    public RuleImplementation loadRuleImplementation(Test test) {
-        ruleImplementationLoader.setArchiveName(test.getRuleArchiveName());
-        ruleImplementationLoader.setClassName(test.getRuleClassName());
-        ruleImplementationLoader.run();
-
-        RuleImplementation ruleImplementation = ruleImplementationLoader.getResult();
-        ruleImplementation.setTest(test);
-        ruleImplementation.setDefiniteResultFactory(definiteResultFactory);
-        ruleImplementation.setIndefiniteResultFactory(indefiniteResultFactory);
-        ruleImplementation.setNomenclatureLoaderService(nomenclatureLoaderService);
-
-        return ruleImplementation;
+    public void setRuleImplementationLoaderFactory(RuleImplementationLoaderFactory ruleImplementationLoaderFactory) {
+        this.ruleImplementationLoaderFactory = ruleImplementationLoaderFactory;
     }
 }

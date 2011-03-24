@@ -76,17 +76,43 @@
         <property name="entityFactory" ref="nomenclatureFactory"/>
     </bean>
 
-    <bean id="auditService" class="org.opens.tanaguru.service.AuditServiceImpl">
+
+    <bean id="auditServiceThreadQueue" class="org.opens.tanaguru.service.AuditServiceThreadQueueImpl">
+        <property name="pageAuditExecutionListMax" value="9"/>
+        <property name="siteAuditExecutionListMax" value="3"/>
+
         <property name="crawlerService" ref="crawlerService"/>
 <!--        <property name="contentLoaderService" ref="contentLoaderService"/>-->
         <property name="contentAdapterService" ref="contentAdapterService"/>
         <property name="processorService" ref="processorService"/>
         <property name="consolidatorService" ref="consolidatorService"/>
         <property name="analyserService" ref="analyserService"/>
+
+        <property name="auditDataService" ref="auditDataService"/>
+        <property name="webResourceDataService" ref="webResourceDataService"/>
+        <property name="contentDataService" ref="contentDataService"/>
+        <property name="processResultDataService" ref="processResultDataService"/>
+
+        <property name="auditServiceThreadFactory" ref="auditServiceThreadFactory"/>
+    </bean>
+    <bean id="auditServiceThreadFactory" class="org.opens.tanaguru.service.AuditServiceThreadFactoryImpl"/>
+
+    <bean id="auditService" class="org.opens.tanaguru.service.AuditServiceImpl">
         <property name="auditDataService" ref="auditDataService"/>
         <property name="webResourceDataService" ref="webResourceDataService"/>
         <property name="testDataService" ref="testDataService"/>
+        <property name="contentDataService" ref="contentDataService"/>
         <property name="processResultDataService" ref="processResultDataService"/>
+
+        <property name="crawlerService" ref="crawlerService"/>
+<!--        <property name="contentLoaderService" ref="contentLoaderService"/>-->
+        <property name="contentAdapterService" ref="contentAdapterService"/>
+        <property name="processorService" ref="processorService"/>
+        <property name="consolidatorService" ref="consolidatorService"/>
+        <property name="analyserService" ref="analyserService"/>
+
+        <property name="auditServiceThreadQueue" ref="auditServiceThreadQueue"/>
+        <property name="auditServiceThreadFactory" ref="auditServiceThreadFactory"/>
     </bean>
 
 </beans>

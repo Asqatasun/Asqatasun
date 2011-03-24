@@ -3,14 +3,18 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-
-    <bean id="consolidatorComponent" class="org.opens.tanaguru.consolidator.ConsolidatorImpl">
-        <property name="processRemarkService" ref="processRemarkService"/>
-    </bean>
+    
+    <bean id="consolidatorFactory" class="org.opens.tanaguru.consolidator.ConsolidatorFactoryImpl"/>
 
     <bean id="consolidatorService" class="org.opens.tanaguru.service.ConsolidatorServiceImpl">
-        <property name="consolidator" ref="consolidatorComponent"/>
         <property name="ruleImplementationLoaderService" ref="ruleImplementationLoaderService"/>
+
+        <property name="processRemarkFactory" ref="processRemarkFactory"/>
+        <property name="sourceCodeRemarkFactory" ref="sourceCodeRemarkFactory"/>
+        <property name="evidenceDataService" ref="evidenceDataService"/>
+        <property name="evidenceElementFactory" ref="evidenceElementFactory"/>
+
+        <property name="consolidatorFactory" ref="consolidatorFactory"/>
     </bean>
 
 </beans>

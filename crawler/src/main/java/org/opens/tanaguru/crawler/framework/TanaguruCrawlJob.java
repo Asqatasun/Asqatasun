@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.opens.tanaguru.crawler.framework;
 
 import java.io.BufferedReader;
@@ -53,71 +52,51 @@ public class TanaguruCrawlJob {
     private static final int CRAWL_LAUNCHER_RETRY_TIMEOUT = 1000;
     private static final int CRAWL_LOGGER_TIMEOUT = 2000;
     private String outputDir = System.getenv("PWD") + "/output";
-    /**
-     *
-     * @return
-     */
-    public String getOutputDir() {
-        return this.outputDir;
-    }
-
-    /**
-     *
-     * @param outputDir
-     */
-    public void setOutputDir(String outputDir) {
-        this.outputDir = outputDir;
-    }
-
     private CrawlJob crawlJob;
-    public CrawlJob getCrawlJob() {
-        return crawlJob;
-    }
-
-    /**
-     *
-     */
     private String crawlConfigFilePath = "/etc/tanaguru/context/crawler/";
-
-    /**
-     *
-     * @return
-     */
-    public String getCrawlConfigFilePath() {
-        return this.crawlConfigFilePath;
-    }
-
-    /**
-     *
-     * @param crawlConfigFilePath
-     */
-    public void setCrawlConfigFilePath(String crawlConfigFilePath) {
-        this.crawlConfigFilePath = crawlConfigFilePath;
-    }
-
     private ContentWriter contentWriter;
-    public void setContentWriter(ContentWriter contentWriter) {
-        this.contentWriter = contentWriter;
-    }
-    
     private ExtractorCSSListener extractorCSSListener;
-    public void setExtractorCSSListener(ExtractorCSSListener extractorCSSListener) {
-        this.extractorCSSListener = extractorCSSListener;
-    }
-
     private ExtractorHTMLListener extractorHTMLListener;
-    public void setExtractorHTMLListener(ExtractorHTMLListener extractorHTMLListener) {
-        this.extractorHTMLListener = extractorHTMLListener;
-    }
-
-    TanaguruWriterProcessor tanaguruWriterProcessor;
-    DecideRuleSequence decideRuleSequence;
+    private TanaguruWriterProcessor tanaguruWriterProcessor;
+    private DecideRuleSequence decideRuleSequence;
 
     public TanaguruCrawlJob(String[] url, String heritrixFileName, String outputDir, String crawlConfigFilePath) {
         this.outputDir = outputDir;
         this.crawlConfigFilePath = crawlConfigFilePath;
         File configFile = initializeCrawlContext(url, heritrixFileName);
         crawlJob = new CrawlJob(configFile);
+    }
+
+    public String getOutputDir() {
+        return this.outputDir;
+    }
+
+    public void setOutputDir(String outputDir) {
+        this.outputDir = outputDir;
+    }
+
+    public CrawlJob getCrawlJob() {
+        return crawlJob;
+    }
+
+    public String getCrawlConfigFilePath() {
+        return this.crawlConfigFilePath;
+    }
+
+    public void setCrawlConfigFilePath(String crawlConfigFilePath) {
+        this.crawlConfigFilePath = crawlConfigFilePath;
+    }
+
+    public void setContentWriter(ContentWriter contentWriter) {
+        this.contentWriter = contentWriter;
+    }
+
+    public void setExtractorCSSListener(ExtractorCSSListener extractorCSSListener) {
+        this.extractorCSSListener = extractorCSSListener;
+    }
+
+    public void setExtractorHTMLListener(ExtractorHTMLListener extractorHTMLListener) {
+        this.extractorHTMLListener = extractorHTMLListener;
     }
 
     /**
@@ -162,10 +141,6 @@ public class TanaguruCrawlJob {
         }
     }
 
-    /**
-     * 
-     * @param crawlJob
-     */
     private void launchHeritrixCrawlJob() {
         if (crawlJob.isProfile()) {
             throw new IllegalArgumentException("Can't launch profile" + this);
@@ -238,6 +213,8 @@ public class TanaguruCrawlJob {
         BufferedReader in = null;
         FileWriter fw = null;
         try {
+            Logger.getLogger(CrawlerImpl.class.getName()).info(
+                    "crawlConfigFilePath: " + crawlConfigFilePath + " for copy");
             in = new BufferedReader(
                     new FileReader(crawlConfigFilePath + "/" + heritrixFileName));
 
@@ -326,18 +303,11 @@ public class TanaguruCrawlJob {
         return tanaguruWriterProcessor.getCssFilePattern();
     }
 
-    /**
-     *
-     * @return
-     */
     public boolean isLaunchable() {
         return getCrawlJob().isLaunchable();
     }
 
-    /**
-     * 
-     */
-    public void checkXML(){
+    public void checkXML() {
         getCrawlJob().checkXML();
     }
 
@@ -382,7 +352,7 @@ public class TanaguruCrawlJob {
         }
     }
 
-   /**
+    /**
      * This method cleans up the resources created by the TanaguruWriterProcessor
      * class to enable the TanaguruWriterProcessor instance to be garbaged
      * @param processor
@@ -395,5 +365,4 @@ public class TanaguruCrawlJob {
         tanaguruWriterProcessor.setHtmlRegexp(null);
         tanaguruWriterProcessor = null;
     }
-
 }
