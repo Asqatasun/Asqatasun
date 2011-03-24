@@ -1,5 +1,6 @@
-package org.opens.tanaguru.service;
+package org.opens.tanaguru.processing;
 
+import org.opens.tanaguru.service.ProcessRemarkService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
@@ -29,7 +30,6 @@ import org.opens.tanaguru.entity.factory.audit.EvidenceElementFactory;
 import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
 import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.entity.service.audit.EvidenceDataService;
-import org.opens.tanaguru.processor.DOMHandlerImpl;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -37,31 +37,37 @@ import org.w3c.flute.parser.selectors.ClassConditionImpl;
 import org.w3c.flute.parser.selectors.ConditionalSelectorImpl;
 import org.w3c.flute.parser.selectors.DescendantSelectorImpl;
 
-
 /**
  * 
  * @author jkowalczyk
  */
-public class ProcessRemarkServiceImpl implements ProcessRemarkService{
+public class ProcessRemarkServiceImpl implements ProcessRemarkService {
 
     private static final String CSS_SELECTOR_EVIDENCE = "Css-Selector";
     private static final String START_COMMENT_OCCURENCE = "<!--";
     private static final String END_COMMENT_OCCURENCE = "-->";
-
     private XPath xpath = XPathFactory.newInstance().newXPath();
     Document document;
-//    @Override
+
+    public ProcessRemarkServiceImpl(ProcessRemarkFactory processRemarkFactory, SourceCodeRemarkFactory sourceCodeRemarkFactory, EvidenceElementFactory evidenceElementFactory, EvidenceDataService evidenceDataService) {
+        super();
+        this.processRemarkFactory = processRemarkFactory;
+        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
+        this.evidenceElementFactory = evidenceElementFactory;
+        this.evidenceDataService = evidenceDataService;
+    }
+
     public void setDocument(Document document) {
         this.document = document;
     }
-
     protected Set<ProcessRemark> remarkSet;
+
     @Override
     public Collection<ProcessRemark> getRemarkList() {
         return this.remarkSet;
     }
-
     List<String> evidenceElementList = new ArrayList<String>();
+
     @Override
     public void addEvidenceElement(String element) {
         if (!evidenceElementList.contains(element)) {
@@ -73,8 +79,8 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
     public void setEvidenceElementList(Collection<String> element) {
         evidenceElementList.addAll(element);
     }
-
     protected ProcessRemarkFactory processRemarkFactory;
+
     public ProcessRemarkFactory getProcessRemarkFactory() {
         return processRemarkFactory;
     }
@@ -82,8 +88,8 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
     public void setProcessRemarkFactory(ProcessRemarkFactory processRemarkFactory) {
         this.processRemarkFactory = processRemarkFactory;
     }
-
     protected SourceCodeRemarkFactory sourceCodeRemarkFactory;
+
     public SourceCodeRemarkFactory getSourceCodeRemarkFactory() {
         return sourceCodeRemarkFactory;
     }
@@ -91,8 +97,8 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
     public void setSourceCodeRemarkFactory(SourceCodeRemarkFactory sourceCodeRemarkFactory) {
         this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
     }
-
     protected EvidenceElementFactory evidenceElementFactory;
+
     @Override
     public EvidenceElementFactory getEvidenceElementFactory() {
         return evidenceElementFactory;
@@ -101,8 +107,8 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
     public void setEvidenceElementFactory(EvidenceElementFactory evidenceElementFactory) {
         this.evidenceElementFactory = evidenceElementFactory;
     }
-
     protected EvidenceDataService evidenceDataService;
+
     @Override
     public EvidenceDataService getEvidenceDataService() {
         return evidenceDataService;
@@ -111,10 +117,8 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
     public void setEvidenceDataService(EvidenceDataService evidenceDataService) {
         this.evidenceDataService = evidenceDataService;
     }
-
     protected Map<Integer, String> sourceCodeWithLine =
             new TreeMap<Integer, String>();
-
     /**
      * Local map of evidence to avoid multiple access to database
      */
@@ -124,7 +128,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
     @Override
     public void initializeService(Document document, String adaptedContent) {
         if (document != null) {
-            this.document=document;
+            this.document = document;
         }
         if (adaptedContent != null) {
             initializeSourceCodeMap(adaptedContent);
@@ -146,12 +150,12 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
     public ProcessRemark createProcessRemark(
             TestSolution processResult,
             String messageCode) {
-        return processRemarkFactory.create(processResult,messageCode);
+        return processRemarkFactory.create(processResult, messageCode);
     }
 
     @Override
     public void addProcessRemark(TestSolution processResult, String messageCode) {
-        remarkSet.add(processRemarkFactory.create(processResult,messageCode));
+        remarkSet.add(processRemarkFactory.create(processResult, messageCode));
     }
 
     @Override
@@ -199,13 +203,10 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
         try {
             String selectorValue = "";
             if (rule.getSelectors().get(0).getSelector() instanceof ConditionalSelectorImpl) {
-                selectorValue = ((ClassConditionImpl)
-                    ((ConditionalSelectorImpl)rule.getSelectors().get(0).getSelector())
-                    .getCondition()).getValue();
+                selectorValue = ((ClassConditionImpl) ((ConditionalSelectorImpl) rule.getSelectors().get(0).getSelector()).getCondition()).getValue();
             } else if (rule.getSelectors().get(0).getSelector() instanceof ConditionalSelectorImpl) {
-                selectorValue = 
-                    ((DescendantSelectorImpl)rule.getSelectors().get(0).getSelector())
-                    .getSimpleSelector().toString();
+                selectorValue =
+                        ((DescendantSelectorImpl) rule.getSelectors().get(0).getSelector()).getSimpleSelector().toString();
             }
             if (selectorValue != null) {
                 EvidenceElement cssSelectorEvidenceElement = evidenceElementFactory.create();
@@ -215,7 +216,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
                 remark.addElement(cssSelectorEvidenceElement);
             }
         } catch (ClassCastException ex) {
-            Logger.getLogger(DOMHandlerImpl.class.getName()).log(Level.WARNING, null, ex);
+            Logger.getLogger(ProcessRemarkServiceImpl.class.getName()).log(Level.WARNING, null, ex);
         }
         remarkSet.add(remark);
     }
@@ -235,7 +236,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
      * @param node
      * @return
      */
-    private int searchNodeLineNumber(Node node){
+    private int searchNodeLineNumber(Node node) {
         int nodeIndex = getNodeIndex(node);
         int lineNumber = 0;
         boolean found = false;
@@ -248,20 +249,20 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
             while (index != -1) {
                 codeLine = sourceCodeWithLine.get(myLineNumber).toLowerCase();
                 int characterPositionOri = index;
-                index = codeLine.indexOf("<"+node.getNodeName().toLowerCase()+">",
+                index = codeLine.indexOf("<" + node.getNodeName().toLowerCase() + ">",
                         index);
                 if (index == -1) {
-                    index = codeLine.indexOf("<"+node.getNodeName().toLowerCase()+" ",
+                    index = codeLine.indexOf("<" + node.getNodeName().toLowerCase() + " ",
                             characterPositionOri);
                 }
                 int startCommentIndex = codeLine.indexOf(
                         START_COMMENT_OCCURENCE, characterPositionOri);
                 int endCommentIndex = codeLine.indexOf(
                         END_COMMENT_OCCURENCE, characterPositionOri);
-                if (index != -1 ) { // if an occurence of the tag is found
-                    if (!isWithinComment &&
-                        !(startCommentIndex != -1 && index>startCommentIndex ) &&
-                        !(endCommentIndex != -1 && index<endCommentIndex )) { // if a comment is not currently opened or a comment is found on the current line and the occurence is not within
+                if (index != -1) { // if an occurence of the tag is found
+                    if (!isWithinComment
+                            && !(startCommentIndex != -1 && index > startCommentIndex)
+                            && !(endCommentIndex != -1 && index < endCommentIndex)) { // if a comment is not currently opened or a comment is found on the current line and the occurence is not within
                         if (nodeIndex == 0) {
                             found = true;
                             lineNumber = myLineNumber;
@@ -293,7 +294,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
      */
     private int getNodeIndex(Node node) {
         try {
-            XPathExpression xPathExpression = xpath.compile("//"+node.getNodeName().toUpperCase());
+            XPathExpression xPathExpression = xpath.compile("//" + node.getNodeName().toUpperCase());
             Object result = xPathExpression.evaluate(document,
                     XPathConstants.NODESET);
             NodeList nodeList = (NodeList) result;
@@ -304,7 +305,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
                 }
             }
         } catch (XPathExpressionException ex) {
-            Logger.getLogger(DOMHandlerImpl.class.getName()).log(Level.SEVERE,
+            Logger.getLogger(ProcessRemarkServiceImpl.class.getName()).log(Level.SEVERE,
                     null, ex);
             throw new RuntimeException(ex);
         }
@@ -327,7 +328,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
                 lineNumber++;
             }
         } catch (IOException ex) {
-            Logger.getLogger(DOMHandlerImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProcessRemarkServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -342,7 +343,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
     @Override
     public SourceCodeRemark createSourceCodeRemark(
             TestSolution processResult,
-            Node node, 
+            Node node,
             String messageCode,
             String elementName) {
         SourceCodeRemark remark = sourceCodeRemarkFactory.create();
@@ -354,7 +355,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
         evidenceElement.setProcessRemark(remark);
         evidenceElement.setValue(elementName);
         evidenceElement.setEvidence(getEvidence(DEFAULT_EVIDENCE));
-        for (String attr  : evidenceElementList) {
+        for (String attr : evidenceElementList) {
             if (node.getAttributes().getNamedItem(attr) != null) {
                 EvidenceElement evidenceElementSup = evidenceElementFactory.create();
                 evidenceElementSup.setProcessRemark(remark);
@@ -370,7 +371,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
     @Override
     public void addConsolidationRemark(
             TestSolution processResult,
-            String messageCode, 
+            String messageCode,
             String value,
             String url) {
         remarkSet.add(createConsolidationRemark(
@@ -409,7 +410,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
     @Override
     public ProcessRemark createConsolidationRemark(
             TestSolution processResult,
-            String messageCode, 
+            String messageCode,
             String value,
             String url) {
         ProcessRemark remark = processRemarkFactory.create();
@@ -448,5 +449,4 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService{
             return evidence;
         }
     }
-
 }
