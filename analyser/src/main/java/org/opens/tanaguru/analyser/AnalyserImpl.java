@@ -3,6 +3,7 @@ package org.opens.tanaguru.analyser;
 import java.util.List;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.subject.WebResource;
 
 /**
  * 
@@ -57,5 +58,15 @@ public class AnalyserImpl implements Analyser {
 
     public void setNetResultList(List<ProcessResult> netResultList) {
         this.netResultList = netResultList;
+    }
+
+    @Override
+    public void setWebResource(WebResource webResource) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public WebResource getWebResource() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

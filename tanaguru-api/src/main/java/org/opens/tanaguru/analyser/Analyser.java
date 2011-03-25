@@ -2,6 +2,7 @@ package org.opens.tanaguru.analyser;
 
 import java.util.List;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.subject.WebResource;
 
 /**
  * 
@@ -13,6 +14,7 @@ public interface Analyser {
      *
      * @return the net result list
      */
+    @Deprecated
     List<ProcessResult> getNetResultList();
 
     /**
@@ -30,5 +32,17 @@ public interface Analyser {
      *
      * @param netResultList the result list to set
      */
+    @Deprecated
     void setNetResultList(List<ProcessResult> netResultList);
+
+    /**
+     * 
+     * @param webResource
+     */
+    void setWebResource(WebResource webResource);
+
+    /**
+     * 
+     */
+    WebResource getWebResource();
 }

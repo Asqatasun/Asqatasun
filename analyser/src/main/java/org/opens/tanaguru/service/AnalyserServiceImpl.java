@@ -4,6 +4,7 @@ import java.util.List;
 import org.opens.tanaguru.analyser.Analyser;
 import org.opens.tanaguru.analyser.AnalyserFactory;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.subject.WebResource;
 
 /**
  * 
@@ -25,5 +26,20 @@ public class AnalyserServiceImpl implements AnalyserService {
 
     public void setAnalyserFactory(AnalyserFactory analyserFactory) {
         this.analyserFactory = analyserFactory;
+    }
+
+    @Override
+    public void analyse(WebResource webResource) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void addAnalyserFactory(AnalyserFactory analyserFactory) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setAnalyser(Analyser analyser) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

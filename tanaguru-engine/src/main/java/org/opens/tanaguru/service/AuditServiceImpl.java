@@ -190,6 +190,10 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
     public void setAuditDataService(AuditDataService auditDataService) {
         this.auditDataService = auditDataService;
     }
+    
+    public AuditDataService getAuditDataService() {
+        return this.auditDataService;
+    }
 
     public void setConsolidatorService(ConsolidatorService consolidatorService) {
         this.consolidatorService = consolidatorService;

@@ -40,14 +40,23 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
     private static final int CONSOLIDATION_TREATMENT_WINDOW = 50;
     protected Audit audit;
     private final AuditDataService auditDataService;
+    public AuditDataService getAuditDataService() {
+        return auditDataService;
+    }
     private final ContentDataService contentDataService;
     private final ProcessResultDataService processResultDataService;
     private final WebResourceDataService webResourceDataService;
+    public WebResourceDataService getWebResourceDataService() {
+        return webResourceDataService;
+    }
     private final CrawlerService crawlerService;
     private final ContentAdapterService contentAdapterService;
     private final ProcessorService processorService;
     private final ConsolidatorService consolidatorService;
     private final AnalyserService analyserService;
+    public AnalyserService getAnalyserService() {
+        return analyserService;
+    }
     private Set<AuditServiceThreadListener> listeners;
 
     public AuditServiceThreadImpl(AuditDataService auditDataService, ContentDataService contentDataService, ProcessResultDataService processResultDataService, WebResourceDataService webResourceDataService, CrawlerService crawlerService, ContentAdapterService contentAdapterService, ProcessorService processorService, ConsolidatorService consolidatorService, AnalyserService analyserService, Audit audit) {

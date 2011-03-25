@@ -6,6 +6,7 @@ package org.opens.tanaguru.analyser;
 
 import java.util.List;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.subject.WebResource;
 
 /**
  *
@@ -15,5 +16,10 @@ public class AnalyserFactoryImpl implements AnalyserFactory {// TODO Write javad
 
     public Analyser create(List<ProcessResult> netResultList) {
         return new AnalyserImpl(netResultList);
+    }
+
+    @Override
+    public Analyser create(WebResource webResource) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
