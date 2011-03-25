@@ -14,8 +14,8 @@
         <property name="webResourceFactory" ref="webResourceFactory"/>
         <property name="contentFactory" ref="contentFactory"/>
         
-        <property name="outputDir" value="/var/tmp/tanaguru"/>
-        <property name="crawlConfigFilePath" value="/etc/tanaguru/context/crawler/"/>
+        <property name="outputDir" value="/tmp"/>
+<!--        <property name="crawlConfigFilePath" value="../"/>-->
 
         <property name="crawlerFactory" ref="crawlerFactory"/>
     </bean>

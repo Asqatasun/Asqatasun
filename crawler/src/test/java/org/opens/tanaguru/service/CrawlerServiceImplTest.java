@@ -11,17 +11,13 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 import junit.framework.TestCase;
-import org.opens.tanaguru.crawler.Crawler;
-import org.opens.tanaguru.crawler.CrawlerFactory;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.factory.audit.AuditFactory;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
-import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.springframework.beans.factory.BeanFactory;
@@ -55,7 +51,6 @@ public class CrawlerServiceImplTest extends TestCase {
     protected BeanFactory springBeanFactory;
     private static final String SPRING_FILE_PATH =
             "../crawler/src/test/resources/context/application-context.xml";
-    private Crawler crawler;
 
     public CrawlerServiceImplTest(String testName) {
         super(testName);
@@ -72,10 +67,6 @@ public class CrawlerServiceImplTest extends TestCase {
         auditDataService = (AuditDataService) springBeanFactory.getBean("auditDataService");
         auditFactory = (AuditFactory) springBeanFactory.getBean("auditFactory");
         webResourceFactory = (WebResourceFactory) springBeanFactory.getBean("webResourceFactory");
-        CrawlerFactory crawlerFactory = (CrawlerFactory) springBeanFactory.getBean("crawlerFactory");
-        WebResourceDataService webResourceDataService = (WebResourceDataService) springBeanFactory.getBean("webResourceDataService");
-        ContentFactory contentFactory = (ContentFactory) springBeanFactory.getBean("contentFactory");
-        crawler = crawlerFactory.create(webResourceFactory, webResourceDataService, contentFactory, contentDataService, crawlerService.getOutputDir(), crawlerService.getCrawlConfigFilePath());
     }
 
     @Override
@@ -144,7 +135,7 @@ public class CrawlerServiceImplTest extends TestCase {
      */
     public void testCrawl_Site_With_Robots() {
         System.out.println("crawl_site_with_robots");
-        crawler.setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
+        crawlerService.setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
         String siteUrl = bundle.getString(ROBOTS_RESTRICTED_CRAWL_URL_KEY);
         Site site = webResourceFactory.createSite(siteUrl);
         site.setAudit(auditFactory.create());
