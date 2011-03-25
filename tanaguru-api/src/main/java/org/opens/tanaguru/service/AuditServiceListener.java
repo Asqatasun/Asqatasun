@@ -13,4 +13,6 @@ import org.opens.tanaguru.entity.audit.Audit;
 public interface AuditServiceListener {// TODO Write javadoc
 
     void auditCompleted(Audit audit);
+
+    void auditCrashed(Audit audit, Throwable exception);
 }

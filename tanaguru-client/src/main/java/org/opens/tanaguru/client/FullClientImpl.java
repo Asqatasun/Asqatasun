@@ -72,4 +72,9 @@ public class FullClientImpl implements AuditServiceListener {
     public void auditCompleted(Audit audit) {
         System.out.println("fin iteration (id): " + audit.getId());
     }
+
+    @Override
+    public void auditCrashed(Audit audit, Throwable exception) {
+        System.out.println("crash (id+message): " + audit.getId() + " " + exception.getMessage());
+    }
 }

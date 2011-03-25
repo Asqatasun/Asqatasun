@@ -11,4 +11,6 @@ package org.opens.tanaguru.service;
 public interface AuditServiceThreadListener {// TODO Write javadoc
 
     void auditCompleted(AuditServiceThread thread);
+
+    void auditCrashed(AuditServiceThread aThis, Throwable exception);
 }

@@ -40,12 +40,14 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
     private static final int CONSOLIDATION_TREATMENT_WINDOW = 50;
     protected Audit audit;
     private final AuditDataService auditDataService;
+
     public AuditDataService getAuditDataService() {
         return auditDataService;
     }
     private final ContentDataService contentDataService;
     private final ProcessResultDataService processResultDataService;
     private final WebResourceDataService webResourceDataService;
+
     public WebResourceDataService getWebResourceDataService() {
         return webResourceDataService;
     }
@@ -54,6 +56,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
     private final ProcessorService processorService;
     private final ConsolidatorService consolidatorService;
     private final AnalyserService analyserService;
+
     public AnalyserService getAnalyserService() {
         return analyserService;
     }
@@ -95,14 +98,18 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
 
     @Override
     public void run() {
-        init();
-        crawl();
-        loadContent();
-        adaptContent();
-        process();
-        consolidate();
-        analyse();
-        fireAuditCompleted();
+        try {
+            init();
+            crawl();
+            loadContent();
+            adaptContent();
+            process();
+            consolidate();
+            analyse();
+            fireAuditCompleted();
+        } catch (Throwable t) {
+            fireAuditException(t);
+        }
     }
 
     public void init() {
@@ -544,6 +551,15 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         }
         for (AuditServiceThreadListener listener : listeners) {
             listener.auditCompleted(this);
+        }
+    }
+
+    private void fireAuditException(Throwable t) {
+        if (listeners == null) {
+            return;
+        }
+        for (AuditServiceThreadListener listener : listeners) {
+            listener.auditCrashed(this, t);
         }
     }
 }

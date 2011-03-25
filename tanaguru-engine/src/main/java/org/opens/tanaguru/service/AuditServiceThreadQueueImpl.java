@@ -190,6 +190,16 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
         processWaitQueue();
     }
 
+    @Override
+    public void auditCrashed(AuditServiceThread thread, Throwable exception) {
+        if (!pageAuditExecutionList.remove(thread)) {
+            siteAuditExecutionList.remove(thread);
+        }
+        fireAuditCrashed(thread.getAudit(), exception);
+        thread.remove(this);
+        processWaitQueue();
+    }
+
     public void processWaitQueue() {
         processPageAuditWaitQueue();
         processSiteAuditWaitQueue();
@@ -201,6 +211,15 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
         }
         for (AuditServiceListener listener : listeners) {
             listener.auditCompleted(audit);
+        }
+    }
+
+    private void fireAuditCrashed(Audit audit, Throwable exception) {
+        if (listeners == null) {
+            return;
+        }
+        for (AuditServiceListener listener : listeners) {
+            listener.auditCrashed(audit, exception);
         }
     }
 }

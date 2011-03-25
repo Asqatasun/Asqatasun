@@ -190,7 +190,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
     public void setAuditDataService(AuditDataService auditDataService) {
         this.auditDataService = auditDataService;
     }
-    
+
     public AuditDataService getAuditDataService() {
         return this.auditDataService;
     }
@@ -237,6 +237,16 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
         }
         for (AuditServiceListener listener : listeners) {
             listener.auditCompleted(audit);
+        }
+    }
+
+    @Override
+    public void auditCrashed(Audit audit, Throwable exception) {
+        if (listeners == null) {
+            return;
+        }
+        for (AuditServiceListener listener : listeners) {
+            listener.auditCrashed(audit, exception);
         }
     }
 }
