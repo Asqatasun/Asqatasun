@@ -15,7 +15,7 @@
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="persistenceXmlLocation" value="${tgol-persistenceXmlLocation}"/>
+        <property name="persistenceXmlLocation" value="${persistenceXmlLocation}"/>
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
