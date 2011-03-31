@@ -334,10 +334,9 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
                     + RelatedContentImpl.class.getName() + " rc"
                     + " JOIN rc.parentContentSet s"
                     + " JOIN s.page w"
-                    + " JOIN w.parent p"
-                    + " WHERE p=:webResource"
+                    + " WHERE w.parent.id=:idWebResource"
                     + " AND rc.httpStatusCode =:httpStatusCode");
-            query.setParameter("webResource", webResource);
+            query.setParameter("idWebResource", webResource.getId());
             query.setParameter("httpStatusCode", DEFAULT_HTTP_STATUS_VALUE);
             query.setFirstResult(start);
             query.setMaxResults(chunkSize);
@@ -365,10 +364,9 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
                     "SELECT count(distinct s.id) FROM "
                     + SSPImpl.class.getName() + " s"
                     + " JOIN s.page w"
-                    + " JOIN w.parent p"
-                    + " WHERE p=:webResource"
+                    + " WHERE w.parent.id=:idWebResource"
                     + " AND s.httpStatusCode !=:httpStatusCode");
-            query.setParameter("webResource", webResource);
+            query.setParameter("idWebResource", webResource.getId());
             query.setParameter("httpStatusCode", DEFAULT_HTTP_STATUS_VALUE);
             return (Long) query.getSingleResult();
         }
@@ -394,10 +392,9 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
                     + SSPImpl.class.getName() + " s"
                     + " JOIN s.relatedContentSet rc"
                     + " JOIN s.page w"
-                    + " JOIN w.parent p"
-                    + " WHERE p=:webResource"
+                    + " WHERE w.parent.id=:idWebResource"
                     + " AND s.httpStatusCode !=:httpStatusCode");
-            query.setParameter("webResource", webResource);
+            query.setParameter("idWebResource", webResource.getId());
             query.setParameter("httpStatusCode", DEFAULT_HTTP_STATUS_VALUE);
             return (Long) query.getSingleResult();
         }
@@ -435,10 +432,9 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
                     + SSPImpl.class.getName() + " s"
                     + " JOIN s.relatedContentSet rc"
                     + " JOIN s.page w"
-                    + " JOIN w.parent p"
-                    + " WHERE p=:webResource"
+                    + " WHERE w.parent.id=:idWebResource"
                     + " AND rc.uri=:uri");
-            query.setParameter("webResource", webResource);
+            query.setParameter("idWebResource", webResource.getId());
             query.setParameter("uri", uri);
             try {
                 return (RelatedContent) query.getSingleResult();
