@@ -225,7 +225,6 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
                     + SSPImpl.class.getName() + " s"
                     + " JOIN s.page w"
                     + " WHERE w=:webResource"
-                    + " AND s.source IS NULL"
                     + " AND s.httpStatusCode=:httpStatusCode");
             query.setParameter("webResource", webResource);
             query.setParameter("httpStatusCode", DEFAULT_HTTP_STATUS_VALUE);
@@ -237,7 +236,6 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
                     + " JOIN s.page w"
                     + " JOIN w.parent p"
                     + " WHERE p=:webResource"
-                    + " AND s.source IS NULL"
                     + " AND s.httpStatusCode=:httpStatusCode");
             query.setParameter("webResource", webResource);
             query.setParameter("httpStatusCode", DEFAULT_HTTP_STATUS_VALUE);
@@ -257,7 +255,6 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
                     + SSPImpl.class.getName() + " s"
                     + " JOIN s.page w"
                     + " WHERE w=:webResource"
-                    + " AND s.source IS NULL"
                     + " AND s.httpStatusCode=:httpStatusCode");
             query.setParameter("webResource", webResource);
             query.setParameter("httpStatusCode", DEFAULT_HTTP_STATUS_VALUE);
@@ -271,7 +268,6 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
                     + " JOIN s.page w"
                     + " JOIN w.parent p"
                     + " WHERE p=:webResource"
-                    + " AND s.source IS NULL"
                     + " AND s.httpStatusCode=:httpStatusCode");
             query.setParameter("webResource", webResource);
             query.setParameter("httpStatusCode", DEFAULT_HTTP_STATUS_VALUE);
@@ -294,7 +290,6 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
                     + " JOIN rc.parentContentSet s"
                     + " JOIN s.page w"
                     + " WHERE w=:webResource"
-                    + " AND rc.source IS NULL"
                     + " AND rc.httpStatusCode =:httpStatusCode");
             query.setParameter("webResource", webResource);
             query.setParameter("httpStatusCode", DEFAULT_HTTP_STATUS_VALUE);
@@ -307,7 +302,6 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
                     + " JOIN s.page w"
                     + " JOIN w.parent p"
                     + " WHERE p=:webResource"
-                    + " AND rc.source IS NULL"
                     + " AND rc.httpStatusCode =:httpStatusCode");
             query.setParameter("webResource", webResource);
             query.setParameter("httpStatusCode", DEFAULT_HTTP_STATUS_VALUE);
@@ -328,10 +322,9 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
                     + " JOIN rc.parentContentSet s"
                     + " JOIN s.page w"
                     + " WHERE w=:webResource"
-                    + " AND rc.source IS NULL"
-                    + " AND rc.httpStatusCode !=:httpStatusCode");
+                    + " AND rc.httpStatusCode =:httpStatusCode");
             query.setParameter("webResource", webResource);
-            query.setParameter("httpStatusCode", HTTP_STATUS_OK);
+            query.setParameter("httpStatusCode", DEFAULT_HTTP_STATUS_VALUE);
             query.setFirstResult(start);
             query.setMaxResults(chunkSize);
             return (List<Content>) query.getResultList();
@@ -343,10 +336,9 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
                     + " JOIN s.page w"
                     + " JOIN w.parent p"
                     + " WHERE p=:webResource"
-                    + " AND rc.source IS NULL"
-                    + " AND rc.httpStatusCode !=:httpStatusCode");
+                    + " AND rc.httpStatusCode =:httpStatusCode");
             query.setParameter("webResource", webResource);
-            query.setParameter("httpStatusCode", HTTP_STATUS_OK);
+            query.setParameter("httpStatusCode", DEFAULT_HTTP_STATUS_VALUE);
             query.setFirstResult(start);
             query.setMaxResults(chunkSize);
             List<Content> contentList = (List<Content>) query.getResultList();
