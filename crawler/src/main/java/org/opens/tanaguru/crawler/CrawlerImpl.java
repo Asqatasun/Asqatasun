@@ -591,6 +591,13 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
     private void deleteRelatedContent(RelatedContent relatedContent) {
         LOGGER.debug("Deleting " + ((Content) relatedContent).getURI());
         contentDataService.delete(((Content) relatedContent).getId());
+        try {
+            persistedOutlinksMap.remove(MD5Encoder.MD5(((Content) relatedContent).getURI()));
+        } catch (NoSuchAlgorithmException ex) {
+            LOGGER.warn(ex);
+        } catch (UnsupportedEncodingException ex) {
+            LOGGER.warn(ex);
+        }
     }
 
     /**
