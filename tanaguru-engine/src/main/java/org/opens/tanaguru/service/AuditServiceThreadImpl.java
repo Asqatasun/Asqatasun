@@ -393,10 +393,17 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         processResultSet.addAll(consolidatorService.consolidate(
                 (List<ProcessResult>) processResultDataService.getGrossResultFromAudit(audit),
                 (List<Test>) audit.getTestList()));
+        // To avoid errors with processResult of Site Type in case of page audit
+        Set<ProcessResult> resultToRemoveSet = new HashSet<ProcessResult>();
         for (ProcessResult processResult : processResultSet) {
+            if (processResult.getId() == null) {
+                resultToRemoveSet.add(processResult);
+            }
             processResult.setNetResultAudit(audit);
         }
-
+        for (ProcessResult resultToRemove : resultToRemoveSet) {
+            processResultSet.remove(resultToRemove);
+        }
         if (!processResultSet.isEmpty()) {
             audit.setStatus(AuditStatus.ANALYSIS);
         } else {
