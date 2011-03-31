@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.lang.StringUtils;
 import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.audit.RelatedContentImpl;
 import org.opens.tanaguru.entity.audit.SSP;
@@ -56,7 +58,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             +" FROM CONTENT ssp"
             +" INNER JOIN WEB_RESOURCE page ON ssp.Id_Page=page.Id_Web_Resource"
             +" WHERE ssp.DTYPE='SSPImpl'"
-            +" AND ssp.Uri=:uri"
+            +" AND ssp.Uri like binary :uri"
             +" AND (page.Id_Web_Resource =:idWebResource OR page.Id_Web_Resource_Parent =:idWebResource)";
     private static final String FIND_RELATED_CONTENT_ID_QUERY =
             "SELECT relatedContent.Id_Content FROM CONTENT relatedContent "
@@ -65,7 +67,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             +" INNER JOIN WEB_RESOURCE page on ssp.Id_Page=page.Id_Web_Resource"
             +" WHERE relatedContent.DTYPE<>'SSPImpl'"
             +" AND (page.Id_Web_Resource =:idWebResource OR page.Id_Web_Resource_Parent =:idWebResource)"
-            +" AND relatedContent.Uri=:uri";
+            +" AND relatedContent.Uri like binary :uri";
 
     public ContentDAOImpl() {
         super();
@@ -84,6 +86,14 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             return (Content) query.getSingleResult();
         } catch (NoResultException nre) {
             return null;
+        } catch (NonUniqueResultException nure) {
+            List<Content> queryResult = query.getResultList();
+            for (Content content : queryResult) {
+                if (StringUtils.equals(content.getURI(),uri)) {
+                    return content;
+                }
+            }
+            return null;
         }
     }
 
@@ -97,6 +107,14 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
         try {
             return (Content) query.getSingleResult();
         } catch (NoResultException nre) {
+            return null;
+        } catch (NonUniqueResultException nure) {
+            List<Content> queryResult = query.getResultList();
+            for (Content content : queryResult) {
+                if (StringUtils.equals(content.getURI(),uri)) {
+                    return content;
+                }
+            }
             return null;
         }
     }
@@ -179,7 +197,23 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
                 return (RelatedContent) query.getSingleResult();
             } catch (NoResultException e2) {
                 return null;
+            } catch (NonUniqueResultException nure) {
+                List<RelatedContent> queryResult = query.getResultList();
+                for (RelatedContent rc : queryResult) {
+                    if (StringUtils.equals(((Content)rc).getURI(),uri)) {
+                        return rc;
+                    }
+                }
+                return null;
             }
+        } catch (NonUniqueResultException nure) {
+            List<RelatedContent> queryResult = query.getResultList();
+            for (RelatedContent rc : queryResult) {
+                if (StringUtils.equals(((Content)rc).getURI(),uri)) {
+                    return rc;
+                }
+            }
+            return null;
         }
     }
 
@@ -387,12 +421,20 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
                     + " JOIN s.relatedContentSet rc"
                     + " JOIN s.page w"
                     + " WHERE w=:webResource"
-                    + " AND rc.uri=:uri");
+                    + " AND rc.uri LIKE :uri");
             query.setParameter("webResource", webResource);
             query.setParameter("uri", uri);
             try {
                 return (RelatedContent) query.getSingleResult();
             } catch (NoResultException e) {
+                return null;
+            } catch (NonUniqueResultException nure) {
+                List<RelatedContent> queryResult = query.getResultList();
+                for (RelatedContent rc : queryResult) {
+                    if (StringUtils.equals(((Content)rc).getURI(),uri)) {
+                        return rc;
+                    }
+                }
                 return null;
             }
         } else if (webResource instanceof Site) {
@@ -409,6 +451,14 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             try {
                 return (RelatedContent) query.getSingleResult();
             } catch (NoResultException e) {
+                return null;
+            } catch (NonUniqueResultException nure) {
+                List<RelatedContent> queryResult = query.getResultList();
+                for (RelatedContent rc : queryResult) {
+                    if (StringUtils.equals(((Content)rc).getURI(),uri)) {
+                        return rc;
+                    }
+                }
                 return null;
             }
         }
