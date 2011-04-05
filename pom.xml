@@ -35,7 +35,7 @@
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <applicationVersion>1.0.0</applicationVersion>
+        <applicationVersion>1.0-SNAPSHOT</applicationVersion>
         <applicationGroupId>org.opens</applicationGroupId>
     </properties>
     <dependencyManagement>
