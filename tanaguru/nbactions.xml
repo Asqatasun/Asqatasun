@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>run</actionName>
+            <goals>
+                <goal>process-classes</goal>
+                <goal>org.codehaus.mojo:exec-maven-plugin:1.1.1:exec</goal>
+            </goals>
+            <properties>
+                <exec.classpathScope>runtime</exec.classpathScope>
+                <exec.workingdir>/home/jkowalczyk/Documents/Sources/TanaguruEngine/Trunk/tanaguru/src/main/resources</exec.workingdir>
+                <exec.args>-Djava.util.logging.config.file=logs/logging.properties -Xms512m -Xmx2048m -classpath %classpath org.opens.tanaguru.cli.Tanaguru http://www.open-s.com /tmp/bou</exec.args>
+                <exec.executable>java</exec.executable>
+            </properties>
+        </action>
+        <action>
+            <actionName>debug</actionName>
+            <goals>
+                <goal>process-classes</goal>
+                <goal>org.codehaus.mojo:exec-maven-plugin:1.1.1:exec</goal>
+            </goals>
+            <properties>
+                <exec.classpathScope>runtime</exec.classpathScope>
+                <exec.workingdir>/home/jkowalczyk/Documents/Sources/TanaguruEngine/Trunk/tanaguru/src/main/resources</exec.workingdir>
+                <exec.args>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -Djava.util.logging.config.file=logs/logging.properties -Xms512m -Xmx2048m -classpath %classpath org.opens.tanaguru.cli.Tanaguru http://www.open-s.com /tmp/bou</exec.args>
+                <jpda.listen>true</jpda.listen>
+                <exec.executable>java</exec.executable>
+            </properties>
+        </action>
+        <action>
+            <actionName>profile</actionName>
+            <goals>
+                <goal>process-classes</goal>
+                <goal>org.codehaus.mojo:exec-maven-plugin:1.1.1:exec</goal>
+            </goals>
+            <properties>
+                <exec.args>${profiler.args} -Djava.util.logging.config.file=logs/logging.properties -Xms512m -Xmx2048m -classpath %classpath org.opens.tanaguru.cli.Tanaguru http://www.open-s.com /tmp/bou</exec.args>
+                <exec.workingdir>/home/jkowalczyk/Documents/Sources/TanaguruEngine/Trunk/tanaguru/src/main/resources</exec.workingdir>
+                <profiler.action>profile</profiler.action>
+                <exec.executable>${profiler.java}</exec.executable>
+            </properties>
+        </action>
+    </actions>
