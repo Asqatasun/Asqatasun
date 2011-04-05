@@ -1,9 +1,15 @@
-<?xml version="1.0"?><project xmlns:pom="http://maven.apache.org/POM/4.0.0">
+<?xml version="1.0"?>
+<project xmlns:pom="http://maven.apache.org/POM/4.0.0">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.opens</groupId>
+    <parent>
+        <groupId>org.opens</groupId>
+        <artifactId>tanguru-all</artifactId>
+        <version>1.0</version>
+    </parent>
+    <groupId>${applicationGroupId}</groupId>
     <artifactId>audit</artifactId>
     <name>audit</name>
-    <version>1.0-SNAPSHOT</version>
+    <version>${applicationVersion}</version>
     <url>http://www.tanaguru.org</url>
     <build>
         <plugins>
@@ -27,18 +33,10 @@
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
-            <version>2.5</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.2</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>3.4.0.GA</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
