@@ -18,6 +18,7 @@ import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.audit.SSP;
+import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
@@ -396,10 +397,12 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         // To avoid errors with processResult of Site Type in case of page audit
         Set<ProcessResult> resultToRemoveSet = new HashSet<ProcessResult>();
         for (ProcessResult processResult : processResultSet) {
-            if (processResult.getId() == null) {
+            if (processResult.getTest().getScope().getCode().equalsIgnoreCase("site")
+                    && processResult.getSubject() instanceof Page) {
                 resultToRemoveSet.add(processResult);
+            } else {
+                processResult.setNetResultAudit(audit);
             }
-            processResult.setNetResultAudit(audit);
         }
         for (ProcessResult resultToRemove : resultToRemoveSet) {
             processResultSet.remove(resultToRemove);
