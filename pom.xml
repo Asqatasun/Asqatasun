@@ -32,10 +32,13 @@
         <module>tanaguru-ws-client</module>>
         <module>tanaguru-membership</module>
         <module>tanaguru-i18n</module-->
-    </modules>
+    <module>tanaguru-rules</module>
+  </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <applicationVersion>1.0-SNAPSHOT</applicationVersion>
+        <springVersion>3.0.5.RELEASE</springVersion>
+        <heritrixVersion>3.0.0</heritrixVersion>
         <applicationGroupId>org.opens</applicationGroupId>
     </properties>
     <dependencyManagement>
@@ -130,58 +133,58 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
-                <version>3.0.5.RELEASE</version>
+                <version>${springVersion}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-aop</artifactId>
-                <version>3.0.5.RELEASE</version>
+                <version>${springVersion}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>3.0.5.RELEASE</version>
+                <version>${springVersion}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context-support</artifactId>
-                <version>3.0.5.RELEASE</version>
+                <version>${springVersion}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-tx</artifactId>
-                <version>3.0.5.RELEASE</version>
+                <version>${springVersion}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-orm</artifactId>
-                <version>3.0.5.RELEASE</version>
+                <version>${springVersion}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-beans</artifactId>
-                <version>3.0.5.RELEASE</version>
+                <version>${springVersion}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-instrument</artifactId>
-                <version>3.0.5.RELEASE</version>
+                <version>${springVersion}</version>
             </dependency>
             <dependency>
                 <groupId>org.archive.heritrix</groupId>
                 <artifactId>heritrix-commons</artifactId>
-                <version>3.0.0</version>
+                <version>${heritrixVersion}</version>
             </dependency>
             <dependency>
                 <groupId>org.archive.heritrix</groupId>
                 <artifactId>heritrix-engine</artifactId>
-                <version>3.0.0</version>
+                <version>${heritrixVersion}</version>
             </dependency>
             <dependency>
                 <groupId>org.archive.heritrix</groupId>
                 <artifactId>heritrix-modules</artifactId>
-                <version>3.0.0</version>
-<!--                <exclusions>
+                <version>${heritrixVersion}</version>
+                <exclusions>
                     <exclusion>
                         <artifactId>org.springframework</artifactId>
                         <groupId>spring-beans</groupId>
@@ -194,7 +197,7 @@
                         <artifactId>org.springframework</artifactId>
                         <groupId>spring-core</groupId>
                     </exclusion>
-                </exclusions>-->
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.mozilla</groupId>
@@ -248,4 +251,18 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <repositories>
+        <repository>
+            <id>internetArchiveWebteamBuilds</id>
+            <name>Internet Archive Webteam Builds</name>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <url>http://builds.archive.org:8080/maven2</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
 </project>
