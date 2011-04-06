@@ -14,15 +14,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <descriptors>
@@ -45,81 +36,81 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>${applicationGroupId}</groupId>
             <artifactId>tanaguru-engine</artifactId>
-            <version>${project.version}</version>
+            <version>${applicationVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>${applicationGroupId}</groupId>
             <artifactId>tanaguru-resources</artifactId>
-            <version>${project.version}</version>
+            <version>${applicationVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>${applicationGroupId}</groupId>
             <artifactId>persistence</artifactId>
-            <version>${project.version}</version>
+            <version>${applicationVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>${applicationGroupId}</groupId>
             <artifactId>nomenclatureloader</artifactId>
-            <version>${project.version}</version>
+            <version>${applicationVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>${applicationGroupId}</groupId>
             <artifactId>rule-implementation-loader</artifactId>
-            <version>${project.version}</version>
+            <version>${applicationVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>${applicationGroupId}</groupId>
             <artifactId>crawler</artifactId>
-            <version>${project.version}</version>
+            <version>${applicationVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>${applicationGroupId}</groupId>
             <artifactId>contentloader</artifactId>
-            <version>${project.version}</version>
+            <version>${applicationVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>${applicationGroupId}</groupId>
             <artifactId>contentadapter</artifactId>
-            <version>${project.version}</version>
+            <version>${applicationVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>${applicationGroupId}</groupId>
             <artifactId>processor</artifactId>
-            <version>${project.version}</version>
+            <version>${applicationVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>${applicationGroupId}</groupId>
             <artifactId>consolidator</artifactId>
-            <version>${project.version}</version>
+            <version>${applicationVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>${applicationGroupId}</groupId>
             <artifactId>analyser</artifactId>
-            <version>${project.version}</version>
+            <version>${applicationVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>${applicationGroupId}</groupId>
             <artifactId>tanaguru-api</artifactId>
-            <version>${project.version}</version>
+            <version>${applicationVersion}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>${applicationGroupId}</groupId>
             <artifactId>logging</artifactId>
-            <version>${project.version}</version>
+            <version>${applicationVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>

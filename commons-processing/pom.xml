@@ -11,24 +11,11 @@
     <name>commons-processing</name>
     <version>${applicationVersion}</version>
     <url>http://www.tanaguru.org</url>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>${applicationGroupId}</groupId>
             <artifactId>tanaguru-api</artifactId>
-            <version>${project.version}</version>
+            <version>${applicationVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.milyn</groupId>
