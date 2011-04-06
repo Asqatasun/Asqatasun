@@ -32,7 +32,6 @@
         <module>tanaguru-ws-client</module>>
         <module>tanaguru-membership</module>
         <module>tanaguru-i18n</module-->
-    <module>tanaguru-rules</module>
   </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
