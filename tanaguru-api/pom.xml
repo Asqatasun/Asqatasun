@@ -22,7 +22,7 @@
             <artifactId>sac</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.archive.heritrix</groupId>
+            <groupId>${heritrixGroupId}</groupId>
             <artifactId>heritrix-modules</artifactId>
         </dependency>
         <dependency>

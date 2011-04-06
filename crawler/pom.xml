@@ -49,41 +49,41 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
+            <groupId>${springGroupId}</groupId>
             <artifactId>spring-core</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
+            <groupId>${springGroupId}</groupId>
             <artifactId>spring-aop</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
+            <groupId>${springGroupId}</groupId>
             <artifactId>spring-context</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
+            <groupId>${springGroupId}</groupId>
             <artifactId>spring-context-support</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
+            <groupId>${springGroupId}</groupId>
             <artifactId>spring-tx</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
+            <groupId>${springGroupId}</groupId>
             <artifactId>spring-orm</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.archive.heritrix</groupId>
+            <groupId>${heritrixGroupId}</groupId>
             <artifactId>heritrix-commons</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.archive.heritrix</groupId>
+            <groupId>${heritrixGroupId}</groupId>
             <artifactId>heritrix-engine</artifactId>
         </dependency>
         <dependency>

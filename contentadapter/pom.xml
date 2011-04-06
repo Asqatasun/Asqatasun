@@ -13,7 +13,7 @@
     <url>http://www.tanaguru.org</url>
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>${applicationGroupId}</groupId>
             <artifactId>tanaguru-api</artifactId>
             <version>${applicationVersion}</version>
         </dependency>

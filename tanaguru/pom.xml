@@ -114,12 +114,12 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
+            <groupId>${springGroupId}</groupId>
             <artifactId>spring-tx</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
+            <groupId>${springGroupId}</groupId>
             <artifactId>spring-orm</artifactId>
             <scope>runtime</scope>
         </dependency>

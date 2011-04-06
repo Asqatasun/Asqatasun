@@ -1,10 +1,15 @@
-<?xml version="1.0"?><project xmlns:pom="http://maven.apache.org/POM/4.0.0">
+<?xml version="1.0"?>
+<project xmlns:pom="http://maven.apache.org/POM/4.0.0">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.opens</groupId>
+    <parent>
+        <groupId>org.opens</groupId>
+        <artifactId>tanguru-all</artifactId>
+        <version>1.0</version>
+    </parent>
+    <groupId>${applicationGroupId}</groupId>
     <artifactId>tanaguru-client</artifactId>
-    <packaging>jar</packaging>>
     <name>tanaguru-client</name>
-    <version>1.0-SNAPSHOT</version>
+    <version>${applicationVersion}</version>
     <url>http://www.tanaguru.org</url>
     <build>
         <plugins>
@@ -19,7 +24,6 @@
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.2-beta-5</version>
                 <configuration>
                     <descriptors>
                         <descriptor>src/main/assembly/descriptor.xml</descriptor>
@@ -41,211 +45,127 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>org.opens</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>tanaguru-engine</artifactId>
             <version>${project.version}</version>
+<!--            <scope>runtime</scope>-->
         </dependency>
         <dependency>
-            <groupId>org.opens</groupId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>tanaguru-resources</artifactId>
+            <version>${project.version}</version>
+<!--            <scope>runtime</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>persistence</artifactId>
             <version>${project.version}</version>
+<!--            <scope>runtime</scope>-->
         </dependency>
         <dependency>
-            <groupId>org.opens</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>nomenclatureloader</artifactId>
             <version>${project.version}</version>
+<!--            <scope>runtime</scope>-->
         </dependency>
         <dependency>
-            <groupId>org.opens</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>rule-implementation-loader</artifactId>
             <version>${project.version}</version>
+<!--            <scope>runtime</scope>-->
         </dependency>
         <dependency>
-            <groupId>org.opens</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>crawler</artifactId>
             <version>${project.version}</version>
+<!--            <scope>runtime</scope>-->
         </dependency>
         <dependency>
-            <groupId>org.opens</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>contentloader</artifactId>
             <version>${project.version}</version>
+<!--            <scope>runtime</scope>-->
         </dependency>
         <dependency>
-            <groupId>org.opens</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>contentadapter</artifactId>
             <version>${project.version}</version>
+<!--            <scope>runtime</scope>-->
         </dependency>
         <dependency>
-            <groupId>org.opens</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>processor</artifactId>
             <version>${project.version}</version>
+<!--            <scope>runtime</scope>-->
         </dependency>
         <dependency>
-            <groupId>org.opens</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>consolidator</artifactId>
             <version>${project.version}</version>
+<!--            <scope>runtime</scope>-->
         </dependency>
         <dependency>
-            <groupId>org.opens</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>analyser</artifactId>
             <version>${project.version}</version>
+<!--            <scope>runtime</scope>-->
         </dependency>
         <dependency>
-            <groupId>org.opens</groupId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>tanaguru-api</artifactId>
+            <version>${project.version}</version>
+<!--            <scope>compile</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>logging</artifactId>
             <version>${project.version}</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-            <version>3.0.5.RELEASE</version>
+            <groupId>${springGroupId}</groupId>
+            <artifactId>spring-tx</artifactId>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
+            <groupId>${springGroupId}</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>3.0.5.RELEASE</version>
+            <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
+<!--        <dependency>
+            <groupId>${springGroupId}</groupId>
             <artifactId>spring-instrument</artifactId>
-            <version>3.0.5.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-instrument-tomcat</artifactId>
-            <version>3.0.5.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>3.0.5.RELEASE</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-	            <artifactId>spring-core</artifactId>
-	        </exclusion>
-	        <exclusion>
-                    <groupId>org.springframework</groupId>
-	            <artifactId>spring-beans</artifactId>
-	        </exclusion>
-	        <exclusion>
-                    <groupId>org.springframework</groupId>
-	            <artifactId>spring-context</artifactId>
-	        </exclusion>
-	        <exclusion>
-                    <groupId>org.springframework</groupId>
-	            <artifactId>spring-context-support</artifactId>
-	        </exclusion>
-	        <exclusion>
-                    <groupId>org.springframework</groupId>
-	            <artifactId>context</artifactId>
-	        </exclusion>
-	        <exclusion>
-                    <groupId>org.springframework.security</groupId>
-	            <artifactId>ldap</artifactId>
-	        </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-web</artifactId>
-                </exclusion>
-	        <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-aop</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework.security</groupId>
-	            <artifactId>spring-security-web</artifactId>
-	        </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-	            <artifactId>spring-jdbc</artifactId>
-	        </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-	            <artifactId>spring-tx</artifactId>
-	        </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-	            <artifactId>spring-expression</artifactId>
-	        </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-	            <artifactId>spring-test</artifactId>
-	        </exclusion>
-	    </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jsp-api</artifactId>
-            <version>2.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>taglibs</groupId>
-            <artifactId>standard</artifactId>
-            <version>1.1.2</version>
-        </dependency>
+            <scope>runtime</scope>
+        </dependency>-->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>3.4.0.GA</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.4.2</version>
-<!--            <scope>runtime</scope>-->
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>xerces</groupId>
             <artifactId>xercesImpl</artifactId>
-            <version>2.9.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.0.1</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore</artifactId>
-            <version>4.0.1</version>
-            <scope>compile</scope>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-c3p0</artifactId>
-            <version>3.3.2.GA</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.9</version>
-<!--            <scope>runtime</scope>-->
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-ehcache</artifactId>
-            <version>3.3.2.GA</version>
-<!--            <scope>runtime</scope>-->
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
     <properties>

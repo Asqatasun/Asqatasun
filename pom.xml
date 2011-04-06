@@ -35,10 +35,12 @@
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <applicationVersion>1.0-SNAPSHOT</applicationVersion>
-        <springVersion>3.0.5.RELEASE</springVersion>
-        <heritrixVersion>3.0.0</heritrixVersion>
         <applicationGroupId>org.opens</applicationGroupId>
+        <applicationVersion>1.0-SNAPSHOT</applicationVersion>
+        <springGroupId>org.springframework</springGroupId>
+        <springVersion>3.0.5.RELEASE</springVersion>
+        <heritrixGroupId>org.archive.heritrix</heritrixGroupId>
+        <heritrixVersion>3.0.0</heritrixVersion>
     </properties>
     <build>
         <plugins>
@@ -150,70 +152,70 @@
                 <version>1.6.2</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework</groupId>
+                <groupId>${springGroupId}</groupId>
                 <artifactId>spring-core</artifactId>
                 <version>${springVersion}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework</groupId>
+                <groupId>${springGroupId}</groupId>
                 <artifactId>spring-aop</artifactId>
                 <version>${springVersion}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework</groupId>
+                <groupId>${springGroupId}</groupId>
                 <artifactId>spring-context</artifactId>
                 <version>${springVersion}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework</groupId>
+                <groupId>${springGroupId}</groupId>
                 <artifactId>spring-context-support</artifactId>
                 <version>${springVersion}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework</groupId>
+                <groupId>${springGroupId}</groupId>
                 <artifactId>spring-tx</artifactId>
                 <version>${springVersion}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework</groupId>
+                <groupId>${springGroupId}</groupId>
                 <artifactId>spring-orm</artifactId>
                 <version>${springVersion}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework</groupId>
+                <groupId>${springGroupId}</groupId>
                 <artifactId>spring-beans</artifactId>
                 <version>${springVersion}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework</groupId>
+                <groupId>${springGroupId}</groupId>
                 <artifactId>spring-instrument</artifactId>
                 <version>${springVersion}</version>
             </dependency>
             <dependency>
-                <groupId>org.archive.heritrix</groupId>
+                <groupId>${heritrixGroupId}</groupId>
                 <artifactId>heritrix-commons</artifactId>
                 <version>${heritrixVersion}</version>
             </dependency>
             <dependency>
-                <groupId>org.archive.heritrix</groupId>
+                <groupId>${heritrixGroupId}</groupId>
                 <artifactId>heritrix-engine</artifactId>
                 <version>${heritrixVersion}</version>
             </dependency>
             <dependency>
-                <groupId>org.archive.heritrix</groupId>
+                <groupId>${heritrixGroupId}</groupId>
                 <artifactId>heritrix-modules</artifactId>
                 <version>${heritrixVersion}</version>
                 <exclusions>
                     <exclusion>
-                        <artifactId>org.springframework</artifactId>
+                        <artifactId>${springGroupId}</artifactId>
                         <groupId>spring-beans</groupId>
                     </exclusion>
                     <exclusion>
-                        <artifactId>org.springframework</artifactId>
+                        <artifactId>${springGroupId}</artifactId>
                         <groupId>spring-context</groupId>
                     </exclusion>
                     <exclusion>
-                        <artifactId>org.springframework</artifactId>
+                        <artifactId>${springGroupId}</artifactId>
                         <groupId>spring-core</groupId>
                     </exclusion>
                 </exclusions>
