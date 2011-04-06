@@ -32,7 +32,7 @@
         <module>tanaguru-ws-client</module>>
         <module>tanaguru-membership</module>
         <module>tanaguru-i18n</module-->
-  </modules>
+    </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <applicationVersion>1.0-SNAPSHOT</applicationVersion>
@@ -40,6 +40,26 @@
         <heritrixVersion>3.0.0</heritrixVersion>
         <applicationGroupId>org.opens</applicationGroupId>
     </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+<!--            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>-->
+        </plugins>
+    </build>
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -247,6 +267,11 @@
                 <groupId>xerces</groupId>
                 <artifactId>xercesImpl</artifactId>
                 <version>2.9.1</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>3.2.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
