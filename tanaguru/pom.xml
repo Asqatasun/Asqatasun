@@ -20,7 +20,7 @@
                         <descriptor>src/main/resources/descriptor.xml</descriptor>
                     </descriptors>
                     <outputDirectory>target</outputDirectory>
-                    <finalName>tanaguru</finalName>
+                    <finalName>tanaguru-${applicationVersion}.i386</finalName>
                 </configuration>
                 <executions>
                     <execution>
