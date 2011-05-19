@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `EVIDENCE` (
 
 CREATE TABLE IF NOT EXISTS `EVIDENCE_ELEMENT` (
   `Id_Evidence_Element` bigint(20) NOT NULL AUTO_INCREMENT,
-  `Element_Value` varchar(1000) NOT NULL,
+  `Element_Value` varchar(2000) NOT NULL,
   `EVIDENCE_Id_Evidence` bigint(20) DEFAULT NULL,
   `PROCESS_REMARK_Id_Process_Remark` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`Id_Evidence_Element`),
