@@ -47,7 +47,7 @@
         </property>
         <property name="arguments">
             <list>
-                <value>${version}</value>
+                <value>${detector-version}</value>
             </list>
         </property>
     </bean>
