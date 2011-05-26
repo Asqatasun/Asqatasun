@@ -14,6 +14,16 @@
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
           p:location="conf/context/tanaguru.conf" />
 
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>conf/context/tanaguru.conf</value>
+                <value>conf/context/language-detection.conf</value>
+            </list>
+        </property>
+    </bean>
+
     <import resource="classpath:conf/context/beans-factories.xml"/>
     <import resource="classpath:conf/context/beans-persistence.xml"/>
     <import resource="classpath:conf/context/beans-crawler.xml"/>
