@@ -87,6 +87,10 @@ public class LanguageDetector {
             boolean isTextTruncated = false;
             if (text.length() > MAX_SIZE_TEXT) {
                 text = text.substring(0, MAX_SIZE_TEXT).trim();
+                //to avoid the split of an encoded character
+                if (text.charAt(text.length()-2) == '%') {
+                    text=text.substring(0, text.length()-2);
+                }
                 isTextTruncated = true;
             }
             URL url = new URL(serviceUrl + version + textKey + text + userKey);
