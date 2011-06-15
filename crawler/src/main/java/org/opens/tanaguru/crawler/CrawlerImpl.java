@@ -182,7 +182,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
             CrawlURI curi,
             RecordingInputStream recis) throws IOException {
         LOGGER.debug("Writing " + curi.getURI() + " : "
-                + curi.getFetchStatus() + " " + curi.getContentDigestString() + " " + curi.getContentType());
+                + curi.getFetchStatus() + " " + curi.getContentType() + " " + curi.getFetchDuration() + "ms");
         if (curi.getContentType().contains(ContentType.html.getType())
                 && !curi.getURI().contains("robots.txt")) {
             LOGGER.debug("Found Html " + curi.getURI());
