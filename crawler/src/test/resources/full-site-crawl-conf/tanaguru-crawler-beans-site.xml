@@ -63,7 +63,7 @@
         <property name="operatorContactUrl" value="[see override above]"/>
         <property name="jobName" value="[see override above]"/>
         <property name="description" value="[see override above]"/>
-        <property name="userAgentTemplate" value="Mozilla/5.0 (compatible; tanaguru/Beta5 +@OPERATOR_CONTACT_URL@)"/>
+        <property name="userAgentTemplate" value="Mozilla/5.0 (compatible; tanaguru +@OPERATOR_CONTACT_URL@)"/>
     </bean>
  
  <!-- SEEDS: crawl starting points 
@@ -230,7 +230,7 @@
     <bean id="extractorHttp" class="org.archive.modules.extractor.ExtractorHTTP">
     </bean>
 
-    <bean id="extractorHtml" class="org.opens.tanaguru.crawler.extractor.TanaguruExtractorHTML">
+    <bean id="extractorHtml" class="org.archive.modules.extractor.ExtractorHTML">
         <property name="extractJavascript" value="false" />
   <!-- <property name="extractValueAttributes" value="true" /> -->
   <!-- <property name="ignoreFormActionUrls" value="false" /> -->
@@ -240,19 +240,9 @@
   <!-- <property name="maxElementLength" value="1024" /> -->
   <!-- <property name="maxAttributeNameLength" value="1024" /> -->
   <!-- <property name="maxAttributeValueLength" value="16384" /> -->
-        <property name="extractorHTMLListenerSet">
-            <set>
-                <ref bean="tanaguruWriter"/>
-            </set>
-        </property>
     </bean>
 
-    <bean id="extractorCss" class="org.opens.tanaguru.crawler.extractor.TanaguruExtractorCSS">
-        <property name="extractorCSSListenerSet">
-            <set>
-                <ref bean="tanaguruWriter"/>
-            </set>
-        </property>
+    <bean id="extractorCss" class="org.archive.modules.extractor.ExtractorCSS">
     </bean>
 
  <!--bean id="extractorJs" class="org.archive.modules.extractor.ExtractorJS">

@@ -8,6 +8,7 @@ import org.opens.tanaguru.contentadapter.ContentAdapterFactory;
 import org.opens.tanaguru.contentadapter.util.URLIdentifier;
 import org.opens.tanaguru.contentloader.Downloader;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
+import org.opens.tanaguru.entity.service.audit.ContentDataService;
 
 /**
  *
@@ -15,5 +16,17 @@ import org.opens.tanaguru.entity.factory.audit.ContentFactory;
  */
 public interface CSSContentAdapterFactory extends ContentAdapterFactory {// TODO Write javadoc
 
-    CSSContentAdapter create(ContentFactory contentFactory, URLIdentifier urlIdentifier, Downloader downloader);
+    /**
+     * 
+     * @param contentFactory
+     * @param urlIdentifier
+     * @param downloader
+     * @param contentDataService
+     * @return
+     */
+    CSSContentAdapter create(
+            ContentFactory contentFactory,
+            URLIdentifier urlIdentifier,
+            Downloader downloader,
+            ContentDataService contentDataService);
 }

@@ -3,10 +3,12 @@ package org.opens.tanaguru.entity.dao.audit;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.Content;
 import com.adex.sdk.entity.dao.GenericDAO;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.audit.SSP;
+import org.opens.tanaguru.entity.audit.StylesheetContent;
 import org.opens.tanaguru.entity.subject.WebResource;
 
 /**
@@ -41,7 +43,7 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      * @param audit
      * @return
      */
-    Long findNumberOfSSPContentFromAudit(Audit audit);
+     Long findNumberOfSSPContentFromAudit(Audit audit);
 
     /**
      * 
@@ -56,16 +58,6 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      * @return
      */
     boolean hasContent(Audit audit);
-
-    /**
-     * 
-     * @param webResource
-     * @param uri
-     * @return
-     */
-    RelatedContent findRelatedContentFromUriWithParentContent(
-            WebResource webResource,
-            String uri);
 
     /**
      * 
@@ -105,14 +97,6 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      */
     Long findNumberOfOrphanRelatedContentFromWebResource(
             WebResource webResource);
-
-    /**
-     * 
-     * @param webResource
-     * @param uri
-     * @return
-     */
-    RelatedContent findRelatedContent(WebResource webResource, String uri);
 
     /**
      * 
@@ -175,17 +159,21 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
 
     /**
      * 
-     * @param uri
-     * @param webResourceParent
+     * @param audit
      * @return
      */
-    boolean checkSSPExist (String uri, WebResource webResourceParent);
+    Collection<StylesheetContent> findExternalStylesheetFromAudit(Audit audit);
 
     /**
      * 
-     * @param webResource
-     * @param uri
+     * @param audit
      * @return
      */
-    Long findRelatedContentId(WebResource webResource, String uri);
+    Collection<RelatedContent> findRelatedContentFromAudit(Audit audit);
+
+    /**
+     * 
+     * @param relatedContentId
+     */
+    void deleteContentRelationShip(Long relatedContentId);
 }

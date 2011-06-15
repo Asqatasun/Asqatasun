@@ -7,6 +7,7 @@ package org.opens.tanaguru.contentadapter;
 import org.opens.tanaguru.contentadapter.util.URLIdentifier;
 import org.opens.tanaguru.contentloader.Downloader;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
+import org.opens.tanaguru.entity.service.audit.ContentDataService;
 
 /**
  *
@@ -14,5 +15,5 @@ import org.opens.tanaguru.entity.factory.audit.ContentFactory;
  */
 public interface ContentAdapterFactory {// TODO Write javadoc
 
-    ContentAdapter create(ContentFactory contentFactory, URLIdentifier urlIdentifier, Downloader downloader);
+    ContentAdapter create(ContentFactory contentFactory, URLIdentifier urlIdentifier, Downloader downloader, ContentDataService contentDataService);
 }

@@ -37,19 +37,6 @@ public class ContentDAOImplTest extends AbstractDaoTestCase {
                 springBeanFactory.getBean("contentDAO");
     }
 
-    public void testFindRelatedContentFromUriWithParentContent() {
-        WebResource wr = webresourceDAO.read(Long.valueOf(1));
-        RelatedContent relatedContent = contentDAO.findRelatedContentFromUriWithParentContent(wr, "http://www.open-s.com/css.css");
-        assertTrue(relatedContent instanceof StylesheetContent);
-        assertEquals(Long.valueOf(3), ((Content)relatedContent).getId());
-        assertEquals(2,relatedContent.getParentContentSet().size());
-        wr = webresourceDAO.read(Long.valueOf(2));
-        relatedContent = contentDAO.findRelatedContentFromUriWithParentContent(wr, "http://www.open-s.com/css.css");
-        assertNotNull(relatedContent);
-        assertEquals(Long.valueOf(8), ((Content)relatedContent).getId());
-        assertEquals(1,relatedContent.getParentContentSet().size());
-    }
-
     public void testFindOrphanContentList() {
         WebResource wr = webresourceDAO.read(Long.valueOf(1));
         assertEquals(Long.valueOf(2), contentDAO.findNumberOfOrphanContentFromWebResource(wr));
@@ -63,22 +50,6 @@ public class ContentDAOImplTest extends AbstractDaoTestCase {
         assertEquals(1, contentList.size());
         contentList = contentDAO.findOrphanRelatedContentList(wr, 0, 10);
         assertEquals(1, contentList.size());
-    }
-
-    public void testFindRelatedContent() {
-        WebResource wr = webresourceDAO.read(Long.valueOf(1));
-        RelatedContent relatedContent = contentDAO.findRelatedContent(wr, "http://www.open-s.com/css.css");
-        assertTrue(relatedContent instanceof StylesheetContent);
-        assertEquals(Long.valueOf(3), ((Content)relatedContent).getId());
-        relatedContent = contentDAO.findRelatedContent(wr, "http://www.open-s.com/image.jpg");
-        assertTrue(relatedContent instanceof ImageContent);
-        assertEquals(Long.valueOf(4), ((Content)relatedContent).getId());
-        relatedContent = contentDAO.findRelatedContent(wr, "http://www.open-s.com/unknown");
-        assertEquals(Long.valueOf(5), ((Content)relatedContent).getId());
-        wr = webresourceDAO.read(Long.valueOf(2));
-        relatedContent = contentDAO.findRelatedContentFromUriWithParentContent(wr, "http://www.open-s.com/css.css");
-        assertNotNull(relatedContent);
-        assertEquals(Long.valueOf(8), ((Content)relatedContent).getId());
     }
 
     public void testFindNumberOfSSPFromWebResource() {
@@ -108,15 +79,6 @@ public class ContentDAOImplTest extends AbstractDaoTestCase {
         assertFalse(contentDAO.hasAdaptedSSP(audit));
         audit = auditDAO.read(Long.valueOf(3));
         assertTrue(contentDAO.hasAdaptedSSP(audit));
-    }
-
-    public void testFindNumberOfSSPContentFromAudit(){
-        Audit audit = auditDAO.read(Long.valueOf(1));
-        assertEquals(Long.valueOf(0), contentDAO.findNumberOfSSPContentFromAudit(audit));
-        audit = auditDAO.read(Long.valueOf(2));
-        assertEquals(Long.valueOf(0), contentDAO.findNumberOfSSPContentFromAudit(audit));
-        audit = auditDAO.read(Long.valueOf(3));
-        assertEquals(Long.valueOf(2), contentDAO.findNumberOfSSPContentFromAudit(audit));
     }
 
     public void testFind() {

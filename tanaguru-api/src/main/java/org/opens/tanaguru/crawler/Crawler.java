@@ -49,13 +49,34 @@ public interface Crawler {// TODO Write javadoc
      */
     void setPageURL(String pageURL);
 
+
+    /**
+     *
+     * @param contentFactory
+     */
     void setContentFactory(ContentFactory contentFactory);
 
+    /**
+     *
+     * @param contentDataService
+     */
     void setContentDataService(ContentDataService contentDataService);
 
+    /**
+     *
+     * @param webResourceDataService
+     */
     void setWebResourceDataService(WebResourceDataService webResourceDataService);
 
+    /**
+     *
+     * @param outputDir
+     */
     void setOutputDir(String outputDir);
 
+    /**
+     * 
+     * @param crawlConfigFilePath
+     */
     void setCrawlConfigFilePath(String crawlConfigFilePath);
 }

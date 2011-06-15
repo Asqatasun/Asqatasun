@@ -6,6 +6,7 @@ import org.opens.tanaguru.entity.audit.JavascriptContent;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.StylesheetContent;
 import com.adex.sdk.entity.service.GenericDataService;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import org.opens.tanaguru.entity.audit.RelatedContent;
@@ -28,15 +29,6 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      */
     JavascriptContent findJavascriptContent(Audit audit, String uri);
 
-    /**
-     *
-     * @param audit
-     *            the audit to use as a reference.
-     * @param uri
-     *            the uri to find.
-     * @return the {@link SSP} instance found
-     */
-    SSP findSSP(Audit audit, String uri);
 
     /**
      *
@@ -47,16 +39,6 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @return the {@link SSP} instance found
      */
     SSP findSSP(WebResource webresource, String uri);
-
-    /**
-     *
-     * @param audit
-     *            the audit to use as a reference.
-     * @param uri
-     *            the uri to find.
-     * @return the {@link StylesheetContent} instance found.
-     */
-    StylesheetContent findStylesheetContent(Audit audit, String uri);
 
     /**
      *
@@ -78,16 +60,6 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @return
      */
     boolean hasContent(Audit audit);
-
-    /**
-     * 
-     * @param webResource
-     * @param uri
-     * @return
-     */
-    RelatedContent getRelatedContentFromUriWithParentContent(
-            WebResource webResource,
-            String uri);
 
     /**
      *
@@ -126,14 +98,6 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
             WebResource webResource,
             int start,
             int chunkSize);
-
-    /**
-     *
-     * @param webResource
-     * @param uri
-     * @return
-     */
-    RelatedContent getRelatedContent(WebResource webResource, String uri); 
 
     /**
      *
@@ -196,18 +160,21 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
 
     /**
      * 
-     * @param uri
-     * @param webResourceParent
+     * @param audit
      * @return
      */
-    boolean checkSSPExist (String uri, WebResource webResourceParent); 
+    Collection<StylesheetContent> getExternalStylesheetFromAudit(Audit audit);
 
     /**
      *
-     * @param webResource
-     * @param uri
+     * @param audit
      * @return
      */
-    Long getRelatedContentId(WebResource webResource, String uri); 
+    Collection<RelatedContent> getRelatedContentFromAudit(Audit audit);
 
+    /**
+     * 
+     * @param relatedContentId
+     */
+    void deleteContentRelationShip(Long relatedContentId);
 }

@@ -7,6 +7,7 @@ package org.opens.tanaguru.contentadapter.css;
 import org.opens.tanaguru.contentadapter.util.URLIdentifier;
 import org.opens.tanaguru.contentloader.Downloader;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
+import org.opens.tanaguru.entity.service.audit.ContentDataService;
 
 /**
  *
@@ -14,7 +15,14 @@ import org.opens.tanaguru.entity.factory.audit.ContentFactory;
  */
 public class CSSContentAdapterFactoryImpl implements CSSContentAdapterFactory {
 
-    public CSSContentAdapter create(ContentFactory contentFactory, URLIdentifier urlIdentifier, Downloader downloader) {
-        return new CSSContentAdapterImpl(contentFactory, urlIdentifier, downloader, CSSParserFactory.create());
+    @Override
+    public CSSContentAdapter create(ContentFactory contentFactory, URLIdentifier urlIdentifier, Downloader downloader, ContentDataService contentDataService) {
+        return new CSSContentAdapterImpl(contentFactory, urlIdentifier, downloader, CSSParserFactory.create(), contentDataService);
     }
+
+//    @Override
+//    public ContentAdapter create(ContentFactory contentFactory, URLIdentifier urlIdentifier, Downloader downloader) {
+//        throw new UnsupportedOperationException("Not supported yet.");
+//    }
+
 }

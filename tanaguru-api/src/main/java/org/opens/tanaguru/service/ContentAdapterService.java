@@ -11,6 +11,7 @@ import org.opens.tanaguru.contentadapter.HTMLParserFactory;
 import org.opens.tanaguru.contentadapter.util.URLIdentifierFactory;
 import org.opens.tanaguru.contentloader.DownloaderFactory;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
+import org.opens.tanaguru.entity.service.audit.ContentDataService;
 
 /**
  * 
@@ -38,17 +39,51 @@ public interface ContentAdapterService {// TODO Write javadoc
      */
     void setWriteCleanHtmlInFile(boolean writeCleanHtmlInFile);
 
+    /**
+     * 
+     * @param tempFolderRootPath
+     */
     void setTempFolderRootPath(String tempFolderRootPath);
 
+    /**
+     *
+     * @param contentsAdapterFactory
+     */
     void setContentsAdapterFactory(ContentsAdapterFactory contentsAdapterFactory);
 
+    /**
+     *
+     * @param htmlCleanerFactory
+     */
     void setHtmlCleanerFactory(HTMLCleanerFactory htmlCleanerFactory);
 
+    /**
+     *
+     * @param htmlParserFactory
+     */
     void setHtmlParserFactory(HTMLParserFactory htmlParserFactory);
 
+    /**
+     *
+     * @param contentAdapterFactorySet
+     */
     void setContentAdapterFactorySet(Set<ContentAdapterFactory> contentAdapterFactorySet);
 
+    /**
+     *
+     * @param urlIdentifierFactory
+     */
     void setUrlIdentifierFactory(URLIdentifierFactory urlIdentifierFactory);
 
+    /**
+     *
+     * @param downloaderFactory
+     */
     void setDownloaderFactory(DownloaderFactory downloaderFactory);
+
+    /**
+     *
+     * @param contentDataService
+     */
+    void setContentDataService(ContentDataService contentDataService);
 }

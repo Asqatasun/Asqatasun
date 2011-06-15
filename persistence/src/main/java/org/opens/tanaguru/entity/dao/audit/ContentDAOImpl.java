@@ -8,6 +8,8 @@ import org.opens.tanaguru.entity.audit.ContentImpl;
 import com.adex.sdk.entity.dao.jpa.AbstractJPADAO;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.NoResultException;
@@ -18,17 +20,21 @@ import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.audit.RelatedContentImpl;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.SSPImpl;
+import org.opens.tanaguru.entity.audit.StylesheetContent;
+import org.opens.tanaguru.entity.audit.StylesheetContentImpl;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
 
 public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
         ContentDAO {
-
+    
     private static final int DEFAULT_HTTP_STATUS_VALUE = -1;
     private static final Integer HTTP_STATUS_OK = Integer.valueOf(HttpStatus.SC_OK);
     private static final String INSERT_QUERY =
             "insert into CONTENT_RELATIONSHIP (Id_Content_Parent, Id_Content_Child) values ";
+    private static final String DELETE_CONTENT_RELATIONSHIP_QUERY =
+            "delete from CONTENT_RELATIONSHIP WHERE Id_Content_Child=:idContentChild ";
     private static final String UPDATE_QUERY =
             "update CONTENT set Id_Audit=:idAudit  WHERE Id_Content=:idContent ";
     private static final String SELECT_SSP_QUERY =
@@ -53,21 +59,6 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             +" GROUP BY relatedContent2.Id_Content"
             +" ORDER BY relatedContent2.Id_Content"
             +" LIMIT :start , :chunkSize ";
-    private static final String CHECK_SSP_EXISTENCE_QUERY =
-            "SELECT Id_Content "
-            +" FROM CONTENT ssp"
-            +" INNER JOIN WEB_RESOURCE page ON ssp.Id_Page=page.Id_Web_Resource"
-            +" WHERE ssp.DTYPE='SSPImpl'"
-            +" AND ssp.Uri like binary :uri"
-            +" AND (page.Id_Web_Resource =:idWebResource OR page.Id_Web_Resource_Parent =:idWebResource)";
-    private static final String FIND_RELATED_CONTENT_ID_QUERY =
-            "SELECT relatedContent.Id_Content FROM CONTENT relatedContent "
-            +" INNER JOIN CONTENT_RELATIONSHIP relatedContent1 on relatedContent.Id_Content=relatedContent1.Id_Content_Child"
-            +" INNER JOIN CONTENT ssp on relatedContent1.Id_Content_Parent=ssp.Id_Content"
-            +" INNER JOIN WEB_RESOURCE page on ssp.Id_Page=page.Id_Web_Resource"
-            +" WHERE relatedContent.DTYPE<>'SSPImpl'"
-            +" AND (page.Id_Web_Resource =:idWebResource OR page.Id_Web_Resource_Parent =:idWebResource)"
-            +" AND relatedContent.Uri like binary :uri";
 
     public ContentDAOImpl() {
         super();
@@ -164,56 +155,6 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             return true;
         } else {
             return false;
-        }
-    }
-
-    @Override
-    public RelatedContent findRelatedContentFromUriWithParentContent(
-            WebResource webResource,
-            String uri) {
-        Query query = entityManager.createQuery(
-                "SELECT distinct rc FROM "
-                + RelatedContentImpl.class.getName() + " rc"
-                + " LEFT JOIN FETCH rc.parentContentSet s"
-                + " JOIN s.page w"
-                + " WHERE w=:webResource"
-                + " AND rc.uri=:uri");
-        query.setParameter("webResource", webResource);
-        query.setParameter("uri", uri);
-        try {
-            return (RelatedContent) query.getSingleResult();
-        } catch (NoResultException e) {
-            query = entityManager.createQuery(
-                    "SELECT distinct rc FROM "
-                    + RelatedContentImpl.class.getName() + " rc"
-                    + " LEFT JOIN FETCH rc.parentContentSet s"
-                    + " JOIN s.page w"
-                    + " JOIN w.parent p"
-                    + " WHERE p=:webResource"
-                    + " AND rc.uri=:uri");
-            query.setParameter("webResource", webResource);
-            query.setParameter("uri", uri);
-            try {
-                return (RelatedContent) query.getSingleResult();
-            } catch (NoResultException e2) {
-                return null;
-            } catch (NonUniqueResultException nure) {
-                List<RelatedContent> queryResult = query.getResultList();
-                for (RelatedContent rc : queryResult) {
-                    if (StringUtils.equals(((Content)rc).getURI(),uri)) {
-                        return rc;
-                    }
-                }
-                return null;
-            }
-        } catch (NonUniqueResultException nure) {
-            List<RelatedContent> queryResult = query.getResultList();
-            for (RelatedContent rc : queryResult) {
-                if (StringUtils.equals(((Content)rc).getURI(),uri)) {
-                    return rc;
-                }
-            }
-            return null;
         }
     }
 
@@ -402,55 +343,26 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
     }
 
     @Override
-    public RelatedContent findRelatedContent(WebResource webResource, String uri) {
-        if (webResource instanceof Page) {
+    public Collection<StylesheetContent> findExternalStylesheetFromAudit(Audit audit) {
+        Set<StylesheetContent> externalCssSet = new HashSet<StylesheetContent>();
+        if (audit != null) {
             Query query = entityManager.createQuery(
-                    "SELECT distinct rc FROM "
-                    + SSPImpl.class.getName() + " s"
-                    + " JOIN s.relatedContentSet rc"
-                    + " JOIN s.page w"
-                    + " WHERE w=:webResource"
-                    + " AND rc.uri LIKE :uri");
-            query.setParameter("webResource", webResource);
-            query.setParameter("uri", uri);
+                    "SELECT distinct sc FROM "
+                    + StylesheetContentImpl.class.getName() + " sc"
+                    + " WHERE sc.audit=:audit "
+                    + " AND sc.uri not LIKE :inlineUrl "
+                    + " AND sc.httpStatusCode != :httpStatusCode");
+            query.setParameter("audit", audit);
+            query.setParameter("inlineUrl", "%#tanaguru-css-%");
+            query.setParameter("httpStatusCode", DEFAULT_HTTP_STATUS_VALUE);
             try {
-                return (RelatedContent) query.getSingleResult();
+                externalCssSet.addAll(query.getResultList());
+                return externalCssSet;
             } catch (NoResultException e) {
-                return null;
-            } catch (NonUniqueResultException nure) {
-                List<RelatedContent> queryResult = query.getResultList();
-                for (RelatedContent rc : queryResult) {
-                    if (StringUtils.equals(((Content)rc).getURI(),uri)) {
-                        return rc;
-                    }
-                }
-                return null;
-            }
-        } else if (webResource instanceof Site) {
-            Query query = entityManager.createQuery(
-                    "SELECT distinct rc FROM "
-                    + SSPImpl.class.getName() + " s"
-                    + " JOIN s.relatedContentSet rc"
-                    + " JOIN s.page w"
-                    + " WHERE w.parent.id=:idWebResource"
-                    + " AND rc.uri=:uri");
-            query.setParameter("idWebResource", webResource.getId());
-            query.setParameter("uri", uri);
-            try {
-                return (RelatedContent) query.getSingleResult();
-            } catch (NoResultException e) {
-                return null;
-            } catch (NonUniqueResultException nure) {
-                List<RelatedContent> queryResult = query.getResultList();
-                for (RelatedContent rc : queryResult) {
-                    if (StringUtils.equals(((Content)rc).getURI(),uri)) {
-                        return rc;
-                    }
-                }
-                return null;
+                return externalCssSet;
             }
         }
-        return null;
+        return externalCssSet;
     }
 
     /**
@@ -567,48 +479,30 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
         }
     }
 
-    /**
-     * Due to performance reasons, a sql native query is used to check whether
-     * a given uri is associated with a ssp or not. 
-     * @param webResourceParent
-     * @param uri
-     * @return
-     */
     @Override
-    public boolean checkSSPExist(String uri, WebResource webResourceParent) {
-        Query query = entityManager.createNativeQuery(CHECK_SSP_EXISTENCE_QUERY);
-        query.setParameter("idWebResource", webResourceParent.getId());
-        query.setParameter("uri", uri);
+    public Collection<RelatedContent> findRelatedContentFromAudit(Audit audit) {
+        Set<RelatedContent> relatedContentSet = new HashSet<RelatedContent>();
+        Query query = entityManager.createQuery(
+                "SELECT distinct rc FROM "
+                + RelatedContentImpl.class.getName() + " rc"
+                + " WHERE rc.audit=:audit");
+        query.setParameter("audit", audit);
         try {
-            query.getSingleResult();
-            flushAndCloseEntityManager();
-            return true;
+            relatedContentSet.addAll(query.getResultList());
+            return relatedContentSet;
         } catch (NoResultException nre) {
-            return false;
+            return relatedContentSet;
         }
     }
 
-    /**
-     * Due to performance reasons, a sql native query is used to retrieve the id
-     * of a related content given its url and its parent web resource
-     * @param webResourceParent
-     * @param uri
-     * @return
-     */
     @Override
-    public Long findRelatedContentId(WebResource webResourceParent, String uri) {
-        Query query = entityManager.createNativeQuery(FIND_RELATED_CONTENT_ID_QUERY);
-        query.setParameter("idWebResource", webResourceParent.getId());
-        query.setParameter("uri", uri);
-        // to avoid the "distinct", we retrieve a list as result and only return
-        // the first element if the collection is not empty
-        List<BigInteger> resultList = (List<BigInteger>)query.getResultList();
-        if (resultList.isEmpty()) {
-            flushAndCloseEntityManager();
-            return null;
-        } else {
-            flushAndCloseEntityManager();
-            return Long.valueOf(resultList.get(0).intValue());
+    public void deleteContentRelationShip(Long relatedContentId) {
+        Query query = entityManager.createNativeQuery(DELETE_CONTENT_RELATIONSHIP_QUERY);
+        query.setParameter("idContentChild", relatedContentId);
+        try {
+            query.executeUpdate();
+        } catch (NoResultException nre) {
+            // do nothing
         }
     }
 

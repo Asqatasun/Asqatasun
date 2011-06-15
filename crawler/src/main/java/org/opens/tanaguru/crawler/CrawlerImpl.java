@@ -1,31 +1,16 @@
 package org.opens.tanaguru.crawler;
 
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-import org.archive.modules.deciderules.DecideRuleSequence;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
-import javax.persistence.PersistenceException;
-import org.apache.commons.httpclient.URIException;
 import org.apache.log4j.Logger;
 import org.archive.io.GzippedInputStream;
 import org.archive.io.RecordingInputStream;
 import org.archive.modules.CrawlURI;
-import org.archive.modules.deciderules.DecideResult;
 import org.archive.modules.deciderules.MatchesFilePatternDecideRule;
-import org.archive.modules.extractor.Link;
-import org.archive.net.UURI;
-import org.archive.net.UURIFactory;
-import org.opens.tanaguru.crawler.extractor.listener.ExtractorCSSListener;
-import org.opens.tanaguru.crawler.extractor.listener.ExtractorHTMLListener;
 import org.opens.tanaguru.crawler.framework.TanaguruCrawlJob;
 import org.opens.tanaguru.crawler.util.CrawlUtils;
 import org.opens.tanaguru.entity.audit.Content;
@@ -40,13 +25,12 @@ import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
-import org.opens.tanaguru.util.MD5Encoder;
 
 /**
  * 
  * @author ADEX
  */
-public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSSListener, ContentWriter {
+public class CrawlerImpl implements Crawler, ContentWriter {
 
     private static final Logger LOGGER = Logger.getLogger(CrawlerImpl.class);
     private static final int RETRIEVE_WINDOW = 1000;
@@ -54,26 +38,18 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
             "Unreachable resource ";
     private boolean isPageAlreadyFetched = false;
     private WebResource mainWebResource;
+    private SSP lastFetchedSSP;
     private String heritrixSiteFileName = "tanaguru-crawler-beans-site.xml";
     private String heritrixPageFileName = "tanaguru-crawler-beans-page.xml";
     private String crawlConfigFilePath;
     private String outputDir = System.getenv("PWD") + "/output";
     private Pattern cssFilePattern = null;
     private TanaguruCrawlJob crawlJob;
-    private DecideRuleSequence decideRuleSequence;
-    private Map<String, Long> persistedOutlinksMap = new HashMap<String, Long>();
-    private Map<Long, List<Long>> relatedCssMap = new HashMap<Long, List<Long>>();
+    private Set<Long> relatedContentSet = new HashSet<Long>();
     private ContentDataService contentDataService;
     private WebResourceDataService webResourceDataService;
     private WebResourceFactory webResourceFactory;
     private ContentFactory contentFactory;
-
-    public DecideRuleSequence getDecideRuleSequence() {
-        if (decideRuleSequence == null && crawlJob != null) {
-            decideRuleSequence = crawlJob.getDecideRuleSequence();
-        }
-        return decideRuleSequence;
-    }
 
     public Pattern getCssFilePattern() {
         if (cssFilePattern == null && crawlJob != null) {
@@ -94,6 +70,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         return contentDataService;
     }
 
+    @Override
     public void setContentDataService(ContentDataService contentDataService) {
         this.contentDataService = contentDataService;
     }
@@ -102,6 +79,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         return webResourceDataService;
     }
 
+    @Override
     public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
         this.webResourceDataService = webResourceDataService;
     }
@@ -111,6 +89,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         this.webResourceFactory = webResourceFactory;
     }
 
+    @Override
     public void setContentFactory(ContentFactory contentFactory) {
         this.contentFactory = contentFactory;
     }
@@ -123,6 +102,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         return this.crawlConfigFilePath;
     }
 
+    @Override
     public void setCrawlConfigFilePath(String crawlConfigFilePath) {
         this.crawlConfigFilePath = crawlConfigFilePath;
     }
@@ -131,6 +111,7 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         return this.outputDir;
     }
 
+    @Override
     public void setOutputDir(String outputDir) {
         this.outputDir = outputDir;
     }
@@ -148,7 +129,6 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         if (crawlJob.isLaunchable()) {
             crawlJob.checkXML();
         }
-        persistedOutlinksMap.clear();
     }
 
     /**
@@ -163,7 +143,6 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
         if (crawlJob.isLaunchable()) {
             crawlJob.checkXML();
         }
-        persistedOutlinksMap.clear();
     }
 
     /**
@@ -180,13 +159,11 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
             crawlJob.checkXML();
         }
         isPageAlreadyFetched = false;
-        persistedOutlinksMap.clear();
     }
 
     @Override
     public WebResource getResult() {
         crawlJob = null;
-        decideRuleSequence = null;
         cssFilePattern = null;
         htmlFilePattern = null;
         isPageAlreadyFetched = false;
@@ -195,8 +172,6 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
 
     @Override
     public void run() {
-        this.crawlJob.setExtractorCSSListener(this);
-        this.crawlJob.setExtractorHTMLListener(this);
         this.crawlJob.setContentWriter(this);
         this.crawlJob.launchCrawlJob();
         removeOrphanContent();
@@ -207,32 +182,36 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
             CrawlURI curi,
             RecordingInputStream recis) throws IOException {
         LOGGER.debug("Writing " + curi.getURI() + " : "
-                + curi.getFetchStatus());
+                + curi.getFetchStatus() + " " + curi.getContentDigestString() + " " + curi.getContentType());
         if (curi.getContentType().contains(ContentType.html.getType())
                 && !curi.getURI().contains("robots.txt")) {
-            WebResource wr =
-                    webResourceDataService.getByUrlAndParentWebResource(
-                    curi.getURI(),
-                    mainWebResource);
-            if (wr == null && mainWebResource instanceof Page) {
-                if (isPageAlreadyFetched) {
+            LOGGER.debug("Found Html " + curi.getURI());
+            Page page = null;
+            if (mainWebResource instanceof Page) {
+                if (!isPageAlreadyFetched) {
+                    page = (Page)mainWebResource;
+                    // in case of redirection, we modify the URI of the webresource
+                    // to ensure the webresource and its SSP have the same URI.
+                    page.setURL(curi.getURI());
+                    isPageAlreadyFetched = true;
+                }else {
                     return;
                 }
-                wr = mainWebResource;
-                // in case of redirection, we modify the URI of the webresource
-                // to ensure the webresource and its SSP have the same URI.
-                wr.setURL(curi.getURI());
-                isPageAlreadyFetched = true;
+            } else {
+                page = webResourceDataService.createPage(curi.getURI());
+                page.setParent((Site)mainWebResource);
             }
             // extract data from fetched content and record it to SSP object
             String charset = CrawlUtils.extractCharset(recis.getContentReplayInputStream());
             String sourceCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset);
-            Content htmlContent = contentDataService.findSSP(wr, curi.getURI());
-            if (htmlContent != null) {
-                ((SSP) htmlContent).setCharset(charset);
-                ((SSP) htmlContent).setSource(sourceCode);
-                saveAndPersistFetchDataToContent(htmlContent, curi);
-                webResourceDataService.saveOrUpdate(wr);
+            SSP ssp = contentFactory.createSSP(curi.getURI());
+            ssp.setPage(page);
+            if (ssp != null) {
+                ssp.setCharset(charset);
+                ssp.setSource(sourceCode);
+                webResourceDataService.saveOrUpdate(page);
+                ssp = (SSP)saveAndPersistFetchDataToContent(ssp, curi);
+                lastFetchedSSP = ssp;
             }
         } else if (curi.getContentType().contains(ContentType.css.getType())) {
             boolean compressed = GzippedInputStream.isCompressedStream(recis.getContentReplayInputStream());
@@ -243,62 +222,38 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                 String charset = CrawlUtils.extractCharset(recis.getContentReplayInputStream());
                 cssCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset);
             }
-            RelatedContent cssContent = contentDataService.getRelatedContent(mainWebResource, curi.getURI());
-            if (cssContent != null) {
-                if (cssContent instanceof StylesheetContent) {
-                    LOGGER.debug("Found css from related content already saved " + curi.getURI());
-                    ((StylesheetContent) cssContent).setSource(cssCode);
-                    saveAndPersistFetchDataToContent((Content) cssContent, curi);
-                } else {
-                    LOGGER.debug("Conversion From RelatedContent to Css" + curi.getURI());
-                    StylesheetContent newCssContent = contentFactory.createStylesheetContent(
+              LOGGER.debug("Found css " + curi.getURI() + " last fetched ssp "  + lastFetchedSSP.getURI());
+              StylesheetContent newCssContent = contentFactory.createStylesheetContent(
                             null,
                             curi.getURI(),
                             null,
                             cssCode,
                             curi.getFetchStatus());
-                    cssContent = contentDataService.getRelatedContentFromUriWithParentContent(
-                            mainWebResource,
-                            curi.getURI());
-                    newCssContent.addAllParentContent(cssContent.getParentContentSet());
-                    deleteRelatedContent(cssContent);
-                    saveAndPersistFetchDataToContent((Content) newCssContent, curi);
-                }
-            }
+              // A relatedContent has to be linked to a SSP.
+              // At this step, we don't know the relation between
+              // SSP and relatedContent but we have to link this relatedContent to any
+              // (the last) ssp to associate this relatedContent with the current
+              // crawl
+              
+              StylesheetContent returnedCssContent = (StylesheetContent)
+                      saveAndPersistFetchDataToContent((Content) newCssContent, curi);
+              persistContentRelationShip(lastFetchedSSP, returnedCssContent);
         } else if (curi.getContentType().contains(ContentType.img.getType())) {
-            RelatedContent imgContent = contentDataService.getRelatedContent(
-                    mainWebResource,
-                    curi.getURI());
-            if (imgContent != null) {
-                if (imgContent instanceof ImageContent) {
-                    LOGGER.debug("Found image from related content already saved " + curi.getURI());
-                    ((ImageContent) imgContent).setContent(CrawlUtils.getImageContent(recis.getContentReplayInputStream(),
-                            CrawlUtils.getImageExtension(curi.getURI())));
-                    saveAndPersistFetchDataToContent((Content) imgContent, curi);
-                } else {
-                    LOGGER.debug("Conversion From RelatedContent to Image" + curi.getURI());
-                    ImageContent newImgContent = contentFactory.createImageContent(
+            LOGGER.debug("Found Image" + curi.getURI());
+            ImageContent newImgContent = contentFactory.createImageContent(
                             null,
                             curi.getURI(),
-                            null,
+                            lastFetchedSSP,
                             CrawlUtils.getImageContent(recis.getContentReplayInputStream(),
                             CrawlUtils.getImageExtension(curi.getURI())),
                             curi.getFetchStatus());
-                    imgContent = contentDataService.getRelatedContentFromUriWithParentContent(
-                            mainWebResource,
-                            curi.getURI());
-                    newImgContent.addAllParentContent(imgContent.getParentContentSet());
-                    deleteRelatedContent(imgContent);
-                    saveAndPersistFetchDataToContent(newImgContent, curi);
-                }
-            }
+            ImageContent returnedImgContent =
+                    (ImageContent)saveAndPersistFetchDataToContent(newImgContent, curi);
+            persistContentRelationShip(lastFetchedSSP, returnedImgContent);
         } else {
-            RelatedContent unknownContent = contentDataService.getRelatedContentFromUriWithParentContent(
-                    mainWebResource,
-                    curi.getURI());
-            if (unknownContent != null) {
-                deleteRelatedContent(unknownContent);
-            }
+            LOGGER.debug("Trashed content " + curi.getURI() + " of type " + curi.getContentType());
+            // do nothing, we ignore the fetched content when we cannot
+            // categorize it
         }
     }
 
@@ -311,324 +266,48 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
                 LOGGER.info(
                         UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
                         + curi.getFetchStatus());
-                RelatedContent relatedContent = contentDataService.getRelatedContent(
-                        mainWebResource,
-                        curi.getURI());
-                saveAndPersistFetchDataToContent((Content) relatedContent, curi);
+                StylesheetContent newCssContent = contentFactory.createStylesheetContent(
+                            null,
+                            curi.getURI(),
+                            lastFetchedSSP,
+                            null,
+                            curi.getFetchStatus());
+                saveAndPersistFetchDataToContent((Content) newCssContent, curi);
                 break;
+            case misc:
             case html:
                 LOGGER.info(UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
                         + curi.getFetchStatus());
-                WebResource wr = null;
-                if (mainWebResource instanceof Site) {
-                    wr =
-                            webResourceDataService.getByUrlAndParentWebResource(
-                            curi.getURI(),
-                            mainWebResource);
+                Page page = null;
+                if (mainWebResource instanceof Page) {
+                    page = (Page)mainWebResource;
+                // in case of redirection, we modify the URI of the webresource
+                // to ensure the webresource and its SSP have the same URI.
+                    page.setURL(curi.getURI());
                 } else {
-                    wr = mainWebResource;
+                    page = webResourceDataService.createPage(curi.getURI());
+                    page.setParent((Site)mainWebResource);
                 }
-                Content htmlContent = contentDataService.findSSP(wr, curi.getURI());
-                saveAndPersistFetchDataToContent(htmlContent, curi);
+                SSP ssp = contentFactory.createSSP(curi.getURI());
+                ssp.setPage(page);
+                webResourceDataService.saveOrUpdate(page);
+                saveAndPersistFetchDataToContent(ssp, curi);
                 break;
             case img:
                 LOGGER.info(UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
                         + curi.getFetchStatus());
-                relatedContent = contentDataService.getRelatedContent(
-                        mainWebResource,
-                        curi.getURI());
-                saveAndPersistFetchDataToContent((Content) relatedContent, curi);
-                break;
-            case misc:
-                if (mainWebResource instanceof Site) {
-                    wr =
-                            webResourceDataService.getByUrlAndParentWebResource(
+                ImageContent newImgContent = contentFactory.createImageContent(
+                            null,
                             curi.getURI(),
-                            mainWebResource);
-                } else {
-                    wr = mainWebResource;
-                }
-                htmlContent = contentDataService.findSSP(wr, curi.getURI());
-                if (htmlContent != null) {
-                    saveAndPersistFetchDataToContent(htmlContent, curi);
-                } else {
-                    relatedContent = contentDataService.getRelatedContent(
-                            mainWebResource,
-                            curi.getURI());
-                    if (relatedContent != null) {
-                        saveAndPersistFetchDataToContent((Content) relatedContent, curi);
-                    }
-                }
-                LOGGER.debug("MISC" + UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
-                        + curi.getFetchStatus());
+                            lastFetchedSSP,
+                            null,
+                            curi.getFetchStatus());
+                saveAndPersistFetchDataToContent(newImgContent, curi);
                 break;
             default:
                 LOGGER.debug("UNKNOWN_CONTENT" + UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
                         + curi.getFetchStatus());
                 break;
-        }
-    }
-
-    @Override
-    public synchronized void computeResource(CrawlURI curi) {
-        Date beginProcessDate = null;
-        Date endProcessDate = null;
-        Date endPersistDate = null;
-        LOGGER.debug("computeResource " + curi.getURI());
-        // We first create a webResource associated with the curi object heritrix is extracting outlinks from.
-        Page page = null;
-//        if (parentWebResource instanceof Page && ((Page)parentWebResource).getURL().equalsIgnoreCase(curi.getURI())) {
-        if (mainWebResource instanceof Page) {
-            if (isPageAlreadyFetched) {
-                return;
-            }
-            // In case of audit of page type, we expect only one webresource and one SSP.
-            // That's why we associate the current parentWebresource with the current curi object
-            LOGGER.debug("createPage in audit page" + curi.getURI());
-            page = (Page) mainWebResource;
-            page = (Page) webResourceDataService.saveOrUpdate(page);
-        } else if (mainWebResource instanceof Site) {
-            // In case of audit of site type, we expect several webresources and SSPs.
-            // These webresouces have to be linked with the parent webresource of site type.
-            LOGGER.debug("createPage in audit site" + curi.getURI());
-            page = webResourceFactory.createPage(curi.getURI());
-            ((Site) mainWebResource).addChild(page);
-//            ((Site) mainWebResource).getComponentList().clear();
-            page = (Page) webResourceDataService.saveOrUpdate(page);
-            ((Site) mainWebResource).getComponentList().clear();
-        }
-        // We create the SSP associated with Page heritrix is extracting outlinks from.
-        checkURIRecordedAsRelatedContent(mainWebResource, curi.getURI());
-        SSP ssp = contentFactory.createSSP(curi.getURI());
-        ssp.setPage(page);
-        // we persist it.
-        LOGGER.debug("persist SSP " + curi.getURI());
-        ssp = (SSP) contentDataService.saveOrUpdate(ssp);
-        // For each oulinks found, we create the appropriate related content object
-        // and link it with the current SSP. To avoid to have 2 related content
-        // with the same URI, we maintain a local map. This case happens when a same
-        // link is found in the same page but with a different type (E as Embed or
-        // L as Link)
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Analysing outlink for  "
-                    + ssp.getURI());
-            beginProcessDate = Calendar.getInstance().getTime();
-        }
-        Set<String> localMap = new HashSet<String>();
-        Set<Long> relatedContentIdSet = new HashSet<Long>();
-        String linkUrl = null;
-        for (Link link : curi.getOutLinks()) {
-            linkUrl = link.getDestination().toString();
-            if (!localMap.contains(linkUrl)) {
-                Long relatedContentId = linkOutlinkWithSSP(link, ssp);
-                if (relatedContentId != null) {
-                    relatedContentIdSet.add(relatedContentId);
-                    // In case of the related content we associate with the current
-                    // SSP is associated with other related contents (a css called
-                    // by another css for example), we associate all these contents
-                    // with the current SSP.
-                    if (relatedCssMap.containsKey(relatedContentId)) {
-                        relatedContentIdSet.addAll(relatedCssMap.get(relatedContentId));
-                    }
-                }
-            }
-            localMap.add(linkUrl);
-        }
-        if (LOGGER.isDebugEnabled()) {
-            endProcessDate = Calendar.getInstance().getTime();
-            LOGGER.debug("Save SSP " + ssp.getURI() + " with "
-                    + relatedContentIdSet.size()
-                    + " elements. Processing took "
-                    + (endProcessDate.getTime() - beginProcessDate.getTime())
-                    + " ms");
-            LOGGER.debug("persistedOutlinksMap contains " + persistedOutlinksMap.size());
-        }
-        try {
-            contentDataService.saveContentRelationShip(ssp, relatedContentIdSet);
-        } catch (PersistenceException e) {
-            LOGGER.warn(e);
-            LOGGER.warn("problem persisting  " + ssp.getURI() + "with ");
-            for (Long id : relatedContentIdSet) {
-                LOGGER.warn("ssp Id : " + ssp.getId() + " relatedContent Id : " + id);
-            }
-        }
-        if (LOGGER.isDebugEnabled()) {
-            endPersistDate = Calendar.getInstance().getTime();
-            LOGGER.debug("Spent "
-                    + (endPersistDate.getTime() - endProcessDate.getTime())
-                    + " ms saving " + ssp.getURI());
-        }
-    }
-
-    /**
-     * In case of css extractred from another css, we combine the child
-     * content with its css parents. Each CSS resource has to be associated with
-     * a HTML content. By keeping this relation, we can combine a child CSS
-     * with the HTML contents combined with its parents.
-     * @param curi
-     */
-    @Override
-    public synchronized void computeCSSResource(CrawlURI curi) {
-        RelatedContent cssContent =
-                contentDataService.getRelatedContent(
-                mainWebResource,
-                curi.getURI());
-        if (cssContent == null) {
-            return;
-        }
-        UURI localUuri = null;
-        CrawlURI localCuri = null;
-        for (Link link : curi.getOutLinks()) {
-            try {
-                localUuri = UURIFactory.getInstance(link.getDestination().toString());
-            } catch (URIException ex) {
-                LOGGER.warn(ex);
-            }
-            localCuri = new CrawlURI(localUuri);
-            if (getDecideRuleSequence().innerDecide(localCuri).equals(DecideResult.ACCEPT)) {
-                Long relatedContentId = contentDataService.getRelatedContentId(
-                        mainWebResource,
-                        localCuri.getURI());
-                if (relatedContentId != null) {
-                    if (relatedCssMap.containsKey(((Content) cssContent).getId())) {
-                        relatedCssMap.get(((Content) cssContent).getId()).add(relatedContentId);
-                    } else {
-                        List<Long> idList = new ArrayList<Long>();
-                        idList.add(relatedContentId);
-                        relatedCssMap.put(((Content) cssContent).getId(), idList);
-                    }
-                } else {
-                    RelatedContent relatedContent =
-                            createRelatingContentRegardingExtension(null, localCuri);
-                    contentDataService.saveOrUpdate((Content) relatedContent);
-                    if (relatedCssMap.containsKey(((Content) cssContent).getId())) {
-                        relatedCssMap.get(((Content) cssContent).getId()).add(((Content) relatedContent).getId());
-                    } else {
-                        List<Long> idList = new ArrayList<Long>();
-                        idList.add(((Content) relatedContent).getId());
-                        relatedCssMap.put(((Content) cssContent).getId(), idList);
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * 
-     * @param link
-     * @param ssp
-     * @return
-     */
-    private Long linkOutlinkWithSSP(Link link, SSP ssp) {
-        UURI localUuri = null;
-        CrawlURI localCuri = null;
-        try {
-            localUuri = UURIFactory.getInstance(link.getDestination().toString());
-        } catch (URIException ex) {
-            LOGGER.warn(ex);
-        }
-        localCuri = new CrawlURI(localUuri);
-        // We use the heritrix matchesListRegexDecideRule to filter "a priori"
-        // the outlinks that will be fetched
-        if (getDecideRuleSequence().innerDecide(localCuri).equals(DecideResult.ACCEPT)
-                && !getHtmlFilePattern().matcher(localCuri.getURI()).matches()
-                && !isUriSSP(mainWebResource, localCuri.getURI())) {
-            // if the current outlink has already been encountered, a related
-            // content has been created and persisted.
-            String md5Uri = null;
-            try {
-                md5Uri = MD5Encoder.MD5(localCuri.getURI());
-            } catch (NoSuchAlgorithmException ex) {
-                LOGGER.warn(ex);
-            } catch (UnsupportedEncodingException ex) {
-                LOGGER.warn(ex);
-            }
-            if (persistedOutlinksMap.containsKey(md5Uri)) {
-                return persistedOutlinksMap.get(md5Uri);
-            } else {
-                // in case of the related content hasn't been encountered yet,
-                // we create the appropriate instance regarding its extension
-                // and associate it bidirectionaly with the SSP.
-                RelatedContent relatedContent =
-                        createRelatingContentRegardingExtension(ssp, localCuri);
-                if (relatedContent != null) {
-                    contentDataService.saveOrUpdate((Content) relatedContent);
-                    Long id = Long.valueOf(((Content) relatedContent).getId());
-                    persistedOutlinksMap.put(md5Uri, id);
-                    return id;
-                }
-            }
-        }
-        return null;
-    }
-
-    /**
-     * This method checks whether a resource has already been persisted as
-     * a related content. If true, the related content and its relations are
-     * deleted.
-     * @param WebResource
-     * @param uri
-     */
-    private void checkURIRecordedAsRelatedContent(WebResource WebResource, String uri) {
-        Long id = contentDataService.getRelatedContentId(WebResource, uri);
-        if (id != null) {
-            LOGGER.debug("Fake related content Found with URI " + uri);
-            contentDataService.delete(id);
-            try {
-                persistedOutlinksMap.remove(MD5Encoder.MD5(uri));
-            } catch (NoSuchAlgorithmException ex) {
-                LOGGER.warn(ex);
-            } catch (UnsupportedEncodingException ex) {
-                LOGGER.warn(ex);
-            }
-        }
-    }
-
-    /**
-     * 
-     * @param relatedContent
-     */
-    private void deleteRelatedContent(RelatedContent relatedContent) {
-        LOGGER.debug("Deleting " + ((Content) relatedContent).getURI());
-        contentDataService.delete(((Content) relatedContent).getId());
-        try {
-            persistedOutlinksMap.remove(MD5Encoder.MD5(((Content) relatedContent).getURI()));
-        } catch (NoSuchAlgorithmException ex) {
-            LOGGER.warn(ex);
-        } catch (UnsupportedEncodingException ex) {
-            LOGGER.warn(ex);
-        }
-    }
-
-    /**
-     * This methods checks whether a resource has already been persisted as
-     * a SSP.
-     * @param webResource
-     * @param uri
-     * @return
-     */
-    private boolean isUriSSP(WebResource webResource, String uri) {
-        return contentDataService.checkSSPExist(uri, webResource);
-    }
-
-    /**
-     * 
-     * @param ssp
-     * @param uri
-     * @return
-     */
-    private RelatedContent createRelatingContentRegardingExtension(SSP ssp, CrawlURI uri) {
-        ContentType contentType = getContentTypeFromUnreacheableResource(uri.getURI());
-        switch (contentType) {
-            case css:
-                return contentFactory.createStylesheetContent(uri.getURI(), ssp);
-            case img:
-                return contentFactory.createImageContent(uri.getURI(), ssp);
-            case html:
-                return null;
-            case misc:
-            default:
-                return contentFactory.createRelatedContent(uri.getURI(), ssp);
         }
     }
 
@@ -692,9 +371,22 @@ public class CrawlerImpl implements Crawler, ExtractorHTMLListener, ExtractorCSS
      * @param content
      * @param curi
      */
-    private void saveAndPersistFetchDataToContent(Content content, CrawlURI curi) {
+    private Content saveAndPersistFetchDataToContent(Content content, CrawlURI curi) {
         content.setHttpStatusCode(curi.getFetchStatus());
         content.setDateOfLoading(new Date(curi.getFetchCompletedTime()));
-        contentDataService.saveOrUpdate(content);
+        Content returnedContent = contentDataService.saveOrUpdate(content);
+        return returnedContent;
     }
+
+    /**
+     * 
+     * @param ssp
+     * @param relatedContent
+     */
+    private void persistContentRelationShip(SSP ssp, RelatedContent relatedContent) {
+        relatedContentSet.clear();
+        relatedContentSet.add(((Content)relatedContent).getId());
+        contentDataService.saveContentRelationShip(ssp, relatedContentSet);
+    }
+
 }

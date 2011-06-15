@@ -3,10 +3,13 @@ package org.opens.tanaguru.service;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.crawler.Crawler;
 import org.opens.tanaguru.crawler.CrawlerFactory;
 import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.audit.Content;
+import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
@@ -25,60 +28,118 @@ public class CrawlerServiceImpl implements CrawlerService {
 
     private static final Logger LOGGER = Logger.getLogger(CrawlerServiceImpl.class);
     private static final int PROCESS_WINDOW = 2000;
-    private ContentDataService contentDataService;
-    private WebResourceDataService webResourceDataService;
-    private ContentFactory contentFactory;
-    private WebResourceFactory webResourceFactory;
-    private String outputDir;
+    /**
+     * The path of the crawl configuration file
+     */
     private String crawlConfigFilePath;
-    private AuditDataService auditDataService;
-    private CrawlerFactory crawlerFactory;
-
-    public CrawlerServiceImpl() {
-        super();
-    }
-
+    @Override
     public void setCrawlConfigFilePath(String crawlConfigFilePath) {
         this.crawlConfigFilePath = crawlConfigFilePath;
     }
 
+    @Override
     public String getCrawlConfigFilePath() {
         return crawlConfigFilePath;
     }
 
+    /**
+     * The auditDataService instance
+     */
+    private AuditDataService auditDataService;
+    @Override
     public AuditDataService getAuditDataService() {
         return auditDataService;
     }
 
+    @Override
     public void setAuditDataService(AuditDataService auditDataService) {
         this.auditDataService = auditDataService;
     }
 
+    /**
+     * The contentDataService instance
+     */
+    private ContentDataService contentDataService;
     public ContentDataService getContentDataService() {
         return contentDataService;
     }
 
+    @Override
     public void setContentDataService(ContentDataService contentDataService) {
         this.contentDataService = contentDataService;
     }
 
+    /**
+     * The webResourceDataService instance
+     */
+    private WebResourceDataService webResourceDataService;
+    @Override
     public WebResourceDataService getWebResourceDataService() {
         return webResourceDataService;
     }
 
+    @Override
     public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
         this.webResourceDataService = webResourceDataService;
     }
 
+    /**
+     * The crawler factory instance
+     */
+    private CrawlerFactory crawlerFactory;
     @Override
     public void setCrawlerFactory(CrawlerFactory crawlerFactory) {
         this.crawlerFactory = crawlerFactory;
     }
 
+    /**
+     * The webResource factory instance
+     */
+    private WebResourceFactory webResourceFactory;
+    @Override
+    public void setWebResourceFactory(WebResourceFactory webResourceFactory) {
+        this.webResourceFactory = webResourceFactory;
+    }
+
+    /**
+     * The content factory instance
+     */
+    private ContentFactory contentFactory;
+    @Override
+    public ContentFactory getContentFactory() {
+        return contentFactory;
+    }
+
+    @Override
+    public void setContentFactory(ContentFactory contentFactory) {
+        this.contentFactory = contentFactory;
+    }
+
+    /**
+     * The output directory needed by heritrix to create temporary files
+     * during the crawl.
+     */
+    private String outputDir;
+    @Override
+    public String getOutputDir() {
+        return outputDir;
+    }
+
+    @Override
+    public void setOutputDir(String outputDir) {
+        this.outputDir = outputDir;
+    }
+
+    /**
+     * Default constructor
+     */
+    public CrawlerServiceImpl() {
+        super();
+    }
+
     @Override
     public Page crawl(Page page) {
-        Crawler crawler = crawlerFactory.create(webResourceFactory, webResourceDataService, contentFactory, contentDataService, outputDir, crawlConfigFilePath);
-
+        Crawler crawler = getCrawlerInstance();
         crawler.setPageURL(page.getURL());
         crawler.run();
         Audit audit = page.getAudit();
@@ -88,8 +149,8 @@ public class CrawlerServiceImpl implements CrawlerService {
         //the relation from webresource to audit is refresh, the audit has to
         // be persisted first
         auditDataService.saveOrUpdate(audit);
-//        webResourceDataService.saveOrUpdate(page);
         setAuditToContent(page, audit);
+        removeSummerRomance(page, audit);
         return page;
     }
 
@@ -100,7 +161,7 @@ public class CrawlerServiceImpl implements CrawlerService {
      */
     @Override
     public Site crawl(Site site) {
-        Crawler crawler = crawlerFactory.create(webResourceFactory, webResourceDataService, contentFactory, contentDataService, outputDir, crawlConfigFilePath);
+        Crawler crawler = getCrawlerInstance();
 
         int componentListSize = site.getComponentList().size();
         if (componentListSize == 0) {
@@ -124,10 +185,36 @@ public class CrawlerServiceImpl implements CrawlerService {
         // be persisted first
         auditDataService.saveOrUpdate(audit);
         setAuditToContent(site, audit);
+        removeSummerRomance(site, audit);
         return site;
     }
 
-    public void setAuditToContent(WebResource wr, Audit audit) {
+    /**
+     * 
+     * @param crawlParameters
+     * @return
+     */
+    @Override
+    public WebResource crawl(Audit audit) {
+        Crawler crawler = getCrawlerInstance();
+        crawler.run();
+        WebResource webResource = crawler.getResult();
+        webResource.setAudit(audit);
+        audit.setSubject(webResource);
+        auditDataService.saveOrUpdate(audit);
+        setAuditToContent(webResource, audit);
+        removeSummerRomance(webResource, audit);
+        return webResource;
+    }
+
+    /**
+     * This method created the relation between the fetched contents and the
+     * current audit.
+     * 
+     * @param wr
+     * @param audit
+     */
+    private void setAuditToContent(WebResource wr, Audit audit) {
         Long nbOfContent = contentDataService.getNumberOfSSPFromWebResource(wr);
         Long i = Long.valueOf(0);
         Date endProcessDate = null;
@@ -190,28 +277,38 @@ public class CrawlerServiceImpl implements CrawlerService {
         webResourceDataService.saveOrUpdate(wr);
     }
 
-    @Override
-    public void setWebResourceFactory(WebResourceFactory webResourceFactory) {
-        this.webResourceFactory = webResourceFactory;
+    /**
+     * During the crawl, Webresources and Contents are created. Contents can
+     * be of 2 types : SSP or relatedContent. A SSP is linked to a webResource and
+     * a relatedContent is linked to a SSP. The relation between a ssp and a 
+     * relatedContent is not known when fetching. So we need to link all the 
+     * relatedContent to any SSP to be able to link them to the current audit.
+     * At the end of the crawl, after the creation of the relation between a content 
+     * and an audit, we can "clean" this fake relation.
+     *
+     * This method were supposed to be called removedFakeRelation but thanks to
+     * the scottish guy, this method is now called removerSummerRomance.
+     * @param webResource
+     * @param audit
+     */
+    private void removeSummerRomance(WebResource webResource, Audit audit){
+        Set<RelatedContent> relatedContentSet =
+                (Set<RelatedContent>)contentDataService.getRelatedContentFromAudit(audit);
+        for (RelatedContent relatedContent : relatedContentSet) {
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug(" deleteContentRelationShip between of " + ((Content)relatedContent).getURI());
+                contentDataService.deleteContentRelationShip(((Content)relatedContent).getId());
+            }
+        }
     }
 
-    @Override
-    public void setContentFactory(ContentFactory contentFactory) {
-        this.contentFactory = contentFactory;
+    /**
+     * 
+     * @return
+     *       a crawler instance.
+     */
+    private Crawler getCrawlerInstance() {
+        return crawlerFactory.create(webResourceFactory, webResourceDataService, contentFactory, contentDataService, outputDir, crawlConfigFilePath);
     }
-
-    @Override
-    public void setOutputDir(String outputDir) {
-        this.outputDir = outputDir;
-    }
-
-    @Override
-    public ContentFactory getContentFactory() {
-        return contentFactory;
-    }
-
-    @Override
-    public String getOutputDir() {
-        return outputDir;
-    }
+    
 }

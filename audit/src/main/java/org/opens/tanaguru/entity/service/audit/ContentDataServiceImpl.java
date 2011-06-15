@@ -8,6 +8,7 @@ import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.StylesheetContent;
 import org.opens.tanaguru.entity.dao.audit.ContentDAO;
 import com.adex.sdk.entity.service.AbstractGenericDataService;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -30,25 +31,15 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
     }
 
     @Override
-    public SSP findSSP(Audit audit, String uri) {
-        return (SSP) ((ContentDAO) entityDao).find(audit, uri);
-    }
-
-    @Override
     public SSP findSSP(WebResource webresource, String uri) {
         return (SSP) ((ContentDAO) entityDao).find(webresource, uri);
-    }
-
-    @Override
-    public StylesheetContent findStylesheetContent(Audit audit, String uri) {
-        return (StylesheetContent) ((ContentDAO) entityDao).find(audit, uri);
     }
 
     @Override
     public Long findNumberOfSSPContentFromAudit(Audit audit){
         return ((ContentDAO) entityDao).findNumberOfSSPContentFromAudit(audit);
     }
-
+    
     @Override
     public boolean hasAdaptedSSP(Audit audit) {
         return ((ContentDAO) entityDao).hasAdaptedSSP(audit);
@@ -57,14 +48,6 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
     @Override
     public boolean hasContent(Audit audit) {
         return ((ContentDAO) entityDao).hasContent(audit);
-    }
-
-    @Override
-    public RelatedContent getRelatedContentFromUriWithParentContent(
-            WebResource webResource,
-            String uri) {
-        return ((ContentDAO) entityDao).
-                findRelatedContentFromUriWithParentContent(webResource, uri);
     }
 
     @Override
@@ -99,11 +82,6 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
                     webResource,
                     start,
                     chunkSize);
-    }
-
-    @Override
-    public RelatedContent getRelatedContent(WebResource webResource, String uri) {
-        return ((ContentDAO) entityDao).findRelatedContent(webResource, uri);
     }
 
     @Override
@@ -155,13 +133,17 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
     }
 
     @Override
-    public boolean checkSSPExist(String uri, WebResource webResourceParent) {
-        return ((ContentDAO) entityDao).checkSSPExist(uri, webResourceParent);
+    public Collection<StylesheetContent> getExternalStylesheetFromAudit(Audit audit) {
+        return ((ContentDAO) entityDao).findExternalStylesheetFromAudit(audit);
     }
 
     @Override
-    public Long getRelatedContentId(WebResource webResource, String uri) {
-        return ((ContentDAO) entityDao).findRelatedContentId(webResource, uri);
+    public Collection<RelatedContent> getRelatedContentFromAudit(Audit audit) {
+        return ((ContentDAO) entityDao).findRelatedContentFromAudit(audit);
     }
 
+    @Override
+    public void deleteContentRelationShip(Long relatedContentId) {
+        ((ContentDAO) entityDao).deleteContentRelationShip(relatedContentId);
+    }
 }

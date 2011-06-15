@@ -20,6 +20,7 @@ import java.util.HashSet;
 import org.opens.tanaguru.contentadapter.util.URLIdentifier;
 import org.opens.tanaguru.contentloader.Downloader;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
+import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.helpers.LocatorImpl;
 
@@ -50,8 +51,8 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
     /**
      * Default constructor.
      */
-    public JSContentAdapterImpl(ContentFactory contentFactory, URLIdentifier urlIdentifier, Downloader downloader) {
-        super(contentFactory, urlIdentifier, downloader);
+    public JSContentAdapterImpl(ContentFactory contentFactory, URLIdentifier urlIdentifier, Downloader downloader, ContentDataService contentDataService) {
+        super(contentFactory, urlIdentifier, downloader, contentDataService);
     }
 
     /**
@@ -195,15 +196,15 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
             if (src != null) {
                 isExternalJS = true;
 
-                String externalResourceAbsolutePath = urlIdentifier.resolve(src).toExternalForm();
+                String externalResourceAbsolutePath = getUrlIdentifier().resolve(src).toExternalForm();
 
-                downloader.setURL(externalResourceAbsolutePath);
-                downloader.run();
+                getDownloader().setURL(externalResourceAbsolutePath);
+                getDownloader().run();
 
                 // TODO Enlever ce commentaire qui ajoute ressource script pour l'association à l'audit et ainsi la persister.
 //                contentList.add(contentFactory.createStylesheetContent(new Date(), externalResourceAbsolutePath, ssp, downloader.getResult()));
 
-                resource = new JSResourceImpl(downloader.getResult(), locator.getLineNumber(),
+                resource = new JSResourceImpl(getDownloader().getResult(), locator.getLineNumber(),
                         new ExternalRsrc());
                 // localJS
             } else {

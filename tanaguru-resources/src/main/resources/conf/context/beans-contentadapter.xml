@@ -25,6 +25,7 @@
         </property>
         <property name="urlIdentifierFactory" ref="urlIdentifierFactory"/>
         <property name="downloaderFactory" ref="downloaderFactory"/>
+        <property name="contentDataService" ref="contentDataService"/>
     </bean>
 
 </beans>
