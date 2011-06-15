@@ -89,7 +89,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
         audit.setTestList(testList);
         audit.setStatus(AuditStatus.CRAWLING);
 
-        auditServiceThreadQueue.addPageAudit(audit);
+        auditServiceThreadQueue.addSiteAudit(audit);
         return audit;
     }
 
@@ -107,7 +107,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
         audit.setTestList(testList);
         audit.setStatus(AuditStatus.CRAWLING);
 
-        auditServiceThreadQueue.addSiteAudit(audit);
+        auditServiceThreadQueue.addPageAudit(audit);
         return audit;
     }
 

@@ -18,7 +18,6 @@ import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
@@ -155,7 +154,6 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
 
     public void adaptContent() {
         audit = auditDataService.getAuditWithWebResource(audit.getId());
-//        audit = auditDataService.read(audit.getId());
         if (!audit.getStatus().equals(AuditStatus.CONTENT_ADAPTING)) {
             LOGGER.warn(
                     "Audit status is "
