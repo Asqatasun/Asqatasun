@@ -88,8 +88,12 @@ public class LanguageDetector {
             if (text.length() > MAX_SIZE_TEXT) {
                 text = text.substring(0, MAX_SIZE_TEXT).trim();
                 //to avoid the split of an encoded character
-                if (text.charAt(text.length()-2) == '%') {
+                if (text.charAt(text.length()-1) == '%') {
+                    text=text.substring(0, text.length()-1);
+                } else if (text.charAt(text.length()-2) == '%') {
                     text=text.substring(0, text.length()-2);
+                } else if (text.charAt(text.length()-3) == '%') {
+                    text=text.substring(0, text.length()-3);
                 }
                 isTextTruncated = true;
             }
