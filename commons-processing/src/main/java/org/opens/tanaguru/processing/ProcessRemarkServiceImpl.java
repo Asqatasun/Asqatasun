@@ -204,7 +204,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             String selectorValue = "";
             if (rule.getSelectors().get(0).getSelector() instanceof ConditionalSelectorImpl) {
                 selectorValue = ((ClassConditionImpl) ((ConditionalSelectorImpl) rule.getSelectors().get(0).getSelector()).getCondition()).getValue();
-            } else if (rule.getSelectors().get(0).getSelector() instanceof ConditionalSelectorImpl) {
+            } else if (rule.getSelectors().get(0).getSelector() instanceof DescendantSelectorImpl) {
                 selectorValue =
                         ((DescendantSelectorImpl) rule.getSelectors().get(0).getSelector()).getSimpleSelector().toString();
             }
