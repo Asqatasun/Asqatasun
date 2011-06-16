@@ -80,8 +80,10 @@ public class NomenclatureImpl implements Nomenclature, Serializable {
     public Collection<Integer> getIntegerValueList() {
         Collection<Integer> values = new HashSet<Integer>();
         for (NomenclatureElement element : elementList) {
-            NomenclatureCssUnit cssUnitElement = (NomenclatureCssUnit) element;
-            values.add(cssUnitElement.getCssShortValue());
+            if (element instanceof NomenclatureCssUnit) {
+                NomenclatureCssUnit cssUnitElement = (NomenclatureCssUnit) element;
+                values.add(cssUnitElement.getCssShortValue());
+            }
         }
         return values;
     }
