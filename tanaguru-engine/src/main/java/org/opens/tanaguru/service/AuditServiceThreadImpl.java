@@ -16,7 +16,6 @@ import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
@@ -76,6 +75,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         this.audit = audit;
     }
 
+    @Override
     public Audit getAudit() {
         return audit;
     }
@@ -112,6 +112,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         }
     }
 
+    @Override
     public void init() {
         if (audit.getSubject() == null || audit.getTestList().isEmpty()) {
             LOGGER.warn("Audit is not well initialized");
@@ -123,6 +124,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         }
     }
 
+    @Override
     public void crawl() {
         if (!audit.getStatus().equals(AuditStatus.CRAWLING)) {
             LOGGER.warn(
@@ -149,6 +151,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         audit = auditDataService.saveOrUpdate(audit);
     }
 
+    @Override
     public void loadContent() {
     }
 
@@ -221,16 +224,9 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
             for (Content content : contentSet) {
                 contentDataService.saveOrUpdate(content);
                 if (content instanceof SSP) {
-                    // this clean up is due to memory leak caused by the reference
-                    // of each relatedContent to the Audit.
-                    for (RelatedContent relatedContent : ((SSP) content).getRelatedContentSet()) {
-                        ((Content) relatedContent).setAudit(null);
-                    }
-                    ((SSP) content).getRelatedContentSet().clear();
                     if (!hasCorrectedDOM && !((SSP) content).getDOM().isEmpty()) {
                         hasCorrectedDOM = true;
                     }
-                    ((SSP) content).setDOM(null);
                 }
             }
             contentSet.clear();
@@ -261,6 +257,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         audit = auditDataService.saveOrUpdate(audit);
     }
 
+    @Override
     public void process() {
         audit = auditDataService.getAuditWithTest(audit.getId());
         if (!audit.getStatus().equals(AuditStatus.PROCESSING)) {
@@ -367,6 +364,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         auditDataService.saveOrUpdate(audit);
     }
 
+    @Override
     public void consolidate() {
         audit = auditDataService.getAuditWithTest(audit.getId());
         if (!audit.getStatus().equals(AuditStatus.CONSOLIDATION)) {
@@ -443,6 +441,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         }
     }
 
+    @Override
     public void analyse() {
         audit = auditDataService.getAuditWithWebResource(audit.getId());
         if (!audit.getStatus().equals(AuditStatus.ANALYSIS)) {
