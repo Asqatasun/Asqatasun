@@ -83,7 +83,7 @@ public interface ProcessRemarkService {
      * @param attrName
      */
     void addCssCodeRemark(TestSolution processResult,
-            CSSOMRule rule, String messageCode, String attrName);
+            CSSOMRule rule, String messageCode, String attrName, String fileName);
 
     /**
      *
