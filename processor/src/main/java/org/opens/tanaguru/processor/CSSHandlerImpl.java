@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import org.opens.tanaguru.contentadapter.css.CSSOMDeclaration;
 import org.opens.tanaguru.contentadapter.css.CSSOMRule;
-import org.opens.tanaguru.contentadapter.css.CSSOMStyleSheet;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -16,25 +15,30 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.apache.commons.httpclient.HttpStatus;
+import org.opens.tanaguru.contentadapter.css.CSSOMStyleSheet;
+import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.audit.StylesheetContent;
 import org.opens.tanaguru.service.ProcessRemarkService;
 import org.w3c.css.sac.LexicalUnit;
 
+/**
+ * 
+ * @author jkowalczyk
+ */
 public class CSSHandlerImpl implements CSSHandler {
 
     private boolean initialized = false;
-//    protected ProcessRemarkFactory processRemarkFactory;
-//    private Collection<ProcessRemark> remarkList;
     private Collection<CSSOMRule> selectedRuleList;
-//    protected SourceCodeRemarkFactory sourceCodeRemarkFactory;
     protected SSP ssp;
-    private Set<CSSOMStyleSheet> styleSet;
+    private Map<String, CSSOMStyleSheet> styleMap;
     private Map<String, Set<CSSOMRule>> rulesByMedia ;
-    private final String CSS_ON_ERROR = "CSS_ON_ERROR";
+    private static final String CSS_ON_ERROR = "CSS_ON_ERROR";
+    private static final String INLINE_CSS_URL_FORMAT = "#tanaguru-css-";
+    private static final String INLINE_CSS = "inline";
     Set<StylesheetContent> cssOnErrorSet;
-    private static int  HTTP_OK_STATUS_CODE = 200;
     private static final String BAD_UNIT_TYPE_MSG_CODE = "BadUnitType";
     private static final String UNTESTED_RESOURCE_MSG_CODE = "UnTestedResource";
 
@@ -53,14 +57,13 @@ public class CSSHandlerImpl implements CSSHandler {
 
     private void addSourceCodeRemark(TestSolution processResult,
             CSSOMRule rule, String messageCode, String attrName) {// XXX
-        processRemarkService.addCssCodeRemark(processResult, rule, messageCode, attrName);
+        processRemarkService.addCssCodeRemark(processResult, rule, messageCode, attrName, getFileNameFromCssomRule(rule));
     }
 
     public CSSHandler beginSelection(){
         initialize();
         selectedRuleList = new HashSet<CSSOMRule>();
         processRemarkService.initializeService(null, null);
-//        remarkList = new ArrayList<ProcessRemark>();
         return this;
     }
 
@@ -123,45 +126,37 @@ public class CSSHandlerImpl implements CSSHandler {
         XStream xstream = new XStream();
         for (RelatedContent relatedContent : ssp.getRelatedContentSet()){
             if (relatedContent instanceof StylesheetContent){
-                if (((StylesheetContent)relatedContent).getHttpStatusCode() == HTTP_OK_STATUS_CODE &&
+                if (((StylesheetContent)relatedContent).getHttpStatusCode() == HttpStatus.SC_OK &&
                         ((StylesheetContent)relatedContent).getAdaptedContent() != null &&
                         !((StylesheetContent)relatedContent).getAdaptedContent().equalsIgnoreCase(CSS_ON_ERROR) ){
-                    styleSet.add(
-                        (CSSOMStyleSheet) xstream.fromXML(
-                        ((StylesheetContent)relatedContent).getAdaptedContent()));
+                    if (((Content)relatedContent).getURI().contains(INLINE_CSS_URL_FORMAT)) {
+                        styleMap.put(((Content)relatedContent).getURI() ,
+                            (CSSOMStyleSheet) xstream.fromXML(
+                            ((StylesheetContent)relatedContent).getAdaptedContent()));
+                    } else {
+                        styleMap.put(((Content)relatedContent).getURI() ,
+                            (CSSOMStyleSheet) xstream.fromXML(
+                            ((StylesheetContent)relatedContent).getAdaptedContent()));
+                    }
                 } else{
                     addStylesheetOnError((StylesheetContent)relatedContent);
                 }
             }
         }
-        rulesByMedia = setRulesByMedia(styleSet);
+        rulesByMedia = setRulesByMedia(styleMap.values());
         initialized = true;
     }
 
     public CSSHandler selectAllRules() {
-        if (styleSet == null) {
+        if (styleMap == null) {
             return this;
         }
 
-        for (CSSOMStyleSheet style : styleSet) {
+        for (CSSOMStyleSheet style : styleMap.values()) {
             selectedRuleList.addAll(style.getRules());
         }
         return this;
     }
-
-//    public void setProcessRemarkFactory(
-//            ProcessRemarkFactory processRemarkFactory) {
-//        this.processRemarkFactory = processRemarkFactory;
-//    }
-//
-//    public void setRemarkList(Collection<ProcessRemark> remarkList) {
-//        this.remarkList = remarkList;
-//    }
-//
-//    public void setSourceCodeRemarkFactory(
-//            SourceCodeRemarkFactory sourceCodeRemarkFactory) {
-//        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
-//    }
 
     public void setSSP(SSP ssp) {
         this.ssp = ssp;
@@ -183,7 +178,7 @@ public class CSSHandlerImpl implements CSSHandler {
     }
 
     private HashMap<String, Set<CSSOMRule>> setRulesByMedia
-            (Set<CSSOMStyleSheet> styleSet)  {
+            (Collection<CSSOMStyleSheet> styleSet)  {
 
         HashMap<String, Set<CSSOMRule>> rules =
                 new HashMap<String, Set<CSSOMRule>>();
@@ -251,15 +246,27 @@ public class CSSHandlerImpl implements CSSHandler {
      * with a css
      */
     private void initializeStyleSet(){
-        if (styleSet==null){
-            styleSet = new HashSet<CSSOMStyleSheet>();
+        if (styleMap==null){
+            styleMap = new HashMap<String, CSSOMStyleSheet>();
         }
-        styleSet.clear();
+        styleMap.clear();
     }
 
     @Override
     public int getCssSelectorNumber() {
         return selectedRuleList.size();
+    }
+
+    private String getFileNameFromCssomRule(CSSOMRule cssomRule) {
+        for (Map.Entry<String, CSSOMStyleSheet> entry : styleMap.entrySet()) {
+            if (entry.getValue().getRules().contains(cssomRule)) {
+                if (entry.getKey().contains(INLINE_CSS_URL_FORMAT)) {
+                    return INLINE_CSS;
+                }
+                return entry.getKey();
+            }
+        }
+        return "";
     }
 
 }

@@ -20,6 +20,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import org.opens.tanaguru.contentadapter.css.CSSOMDeclaration;
 import org.opens.tanaguru.contentadapter.css.CSSOMRule;
 import org.opens.tanaguru.entity.audit.Evidence;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
@@ -30,12 +31,15 @@ import org.opens.tanaguru.entity.factory.audit.EvidenceElementFactory;
 import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
 import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.entity.service.audit.EvidenceDataService;
+import org.w3c.css.sac.ConditionalSelector;
+import org.w3c.css.sac.DescendantSelector;
+import org.w3c.css.sac.ElementSelector;
+import org.w3c.css.sac.Selector;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.flute.parser.selectors.ClassConditionImpl;
-import org.w3c.flute.parser.selectors.ConditionalSelectorImpl;
-import org.w3c.flute.parser.selectors.DescendantSelectorImpl;
+import org.w3c.flute.parser.selectors.IdConditionImpl;
 
 /**
  * 
@@ -44,6 +48,7 @@ import org.w3c.flute.parser.selectors.DescendantSelectorImpl;
 public class ProcessRemarkServiceImpl implements ProcessRemarkService {
 
     private static final String CSS_SELECTOR_EVIDENCE = "Css-Selector";
+    private static final String CSS_FILENAME_EVIDENCE = "Css-Filename";
     private static final String START_COMMENT_OCCURENCE = "<!--";
     private static final String END_COMMENT_OCCURENCE = "-->";
     private XPath xpath = XPathFactory.newInstance().newXPath();
@@ -188,7 +193,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
 
     @Override
     public void addCssCodeRemark(TestSolution processResult,
-            CSSOMRule rule, String messageCode, String attrName) {// XXX
+            CSSOMRule rule, String messageCode, String attrName, String fileName) {// XXX
         SourceCodeRemark remark = sourceCodeRemarkFactory.create();
         remark.setIssue(processResult);
         remark.setMessageCode(messageCode);
@@ -201,19 +206,20 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         evidenceElement.setEvidence(getEvidence(DEFAULT_EVIDENCE));
         remark.addElement(evidenceElement);
         try {
-            String selectorValue = "";
-            if (rule.getSelectors().get(0).getSelector() instanceof ConditionalSelectorImpl) {
-                selectorValue = ((ClassConditionImpl) ((ConditionalSelectorImpl) rule.getSelectors().get(0).getSelector()).getCondition()).getValue();
-            } else if (rule.getSelectors().get(0).getSelector() instanceof DescendantSelectorImpl) {
-                selectorValue =
-                        ((DescendantSelectorImpl) rule.getSelectors().get(0).getSelector()).getSimpleSelector().toString();
-            }
+            String selectorValue = computeSelector(rule);
             if (selectorValue != null) {
                 EvidenceElement cssSelectorEvidenceElement = evidenceElementFactory.create();
                 cssSelectorEvidenceElement.setProcessRemark(remark);
                 cssSelectorEvidenceElement.setValue(selectorValue);
                 cssSelectorEvidenceElement.setEvidence(getEvidence(CSS_SELECTOR_EVIDENCE));
                 remark.addElement(cssSelectorEvidenceElement);
+            }
+            if (fileName != null) {
+                EvidenceElement fileNameEvidenceElement = evidenceElementFactory.create();
+                fileNameEvidenceElement.setProcessRemark(remark);
+                fileNameEvidenceElement.setValue(fileName);
+                fileNameEvidenceElement.setEvidence(getEvidence(CSS_FILENAME_EVIDENCE));
+                remark.addElement(fileNameEvidenceElement);
             }
         } catch (ClassCastException ex) {
             Logger.getLogger(ProcessRemarkServiceImpl.class.getName()).log(Level.WARNING, null, ex);
@@ -449,4 +455,66 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             return evidence;
         }
     }
+
+    private String computeSelector(CSSOMRule rule) {
+        StringBuilder selectorValue = new StringBuilder();
+        Selector selector = rule.getSelectors().get(0).getSelector();
+        CSSOMDeclaration cssomDeclaration = null;
+        if (rule.getSelectors().get(0).getOwnerDeclaration() != null) {
+            cssomDeclaration = rule.getSelectors().get(0).getOwnerDeclaration().get(0);
+        }
+        if (selector instanceof DescendantSelector) {
+            selectorValue.append(computeDescendantSelector((DescendantSelector)selector));
+        } else if  (selector instanceof ConditionalSelector) {
+            selectorValue.append(computeConditionalSelector((ConditionalSelector)selector));
+        } else {
+            selectorValue.append(computeElementSelector(selector, cssomDeclaration));
+        }
+        return selectorValue.toString();
+    }
+
+    private String computeDescendantSelector(DescendantSelector ds) {
+        StringBuilder selectorValue = new StringBuilder();
+        if (ds != null) {
+            System.out.println(ds.getAncestorSelector());
+            System.out.println(ds.getSimpleSelector());
+            if (ds.getAncestorSelector() != null && ds.getAncestorSelector() instanceof DescendantSelector) {
+                selectorValue.append(computeDescendantSelector((DescendantSelector)ds.getAncestorSelector()));
+            } else if (ds.getAncestorSelector() != null && ds.getAncestorSelector() instanceof ConditionalSelector) {
+                selectorValue.append(computeConditionalSelector((ConditionalSelector)ds.getAncestorSelector()));
+            }
+            if (ds.getSimpleSelector() != null && ds.getSimpleSelector() instanceof ConditionalSelector) {
+                selectorValue.append(computeConditionalSelector((ConditionalSelector)ds.getSimpleSelector()));
+            }
+            else if(ds.getSimpleSelector() != null && ds.getSimpleSelector() instanceof ElementSelector) {
+                selectorValue.append(computeElementSelector(ds.getSimpleSelector(), null));
+            } 
+        }
+        return selectorValue.toString();
+    }
+
+    private String computeConditionalSelector(ConditionalSelector cs) {
+         StringBuilder selectorValue = new StringBuilder();
+        if (cs.getCondition() instanceof IdConditionImpl) {
+            selectorValue.append("#");
+            selectorValue.append(((IdConditionImpl)cs.getCondition()).getValue());
+            selectorValue.append(' ');
+        } else if (cs.getCondition() instanceof ClassConditionImpl) {
+            selectorValue.append(".");
+            selectorValue.append(((ClassConditionImpl)cs.getCondition()).getValue());
+            selectorValue.append(' ');
+        }
+         return selectorValue.toString();
+    }
+
+    private String computeElementSelector(Selector es, CSSOMDeclaration cssomDeclaration) {
+         StringBuilder selectorValue = new StringBuilder();
+        if (es instanceof ElementSelector) {
+            selectorValue.append(' ');
+            selectorValue.append(((ElementSelector)es).getLocalName());
+            selectorValue.append(' ');
+        }
+         return selectorValue.toString();
+    }
+
 }
