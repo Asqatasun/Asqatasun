@@ -19,7 +19,6 @@ import org.opens.tanaguru.contentadapter.util.InlineRsrc;
 import org.opens.tanaguru.contentadapter.util.LocalRsrc;
 import org.opens.tanaguru.contentadapter.util.URLIdentifier;
 import org.opens.tanaguru.contentloader.Downloader;
-import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.StylesheetContent;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
@@ -109,24 +108,22 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
                 StylesheetContent cssContent =
                         getStylesheetFromResource(r.getResource());
                 adaptContent(cssContent, r);
-                cssContent.setAudit(getSSP().getAudit());
-                getSSP().addRelatedContent(cssContent);
+                getContentDataService().saveOrUpdate(cssContent);
             }
         }
         // At the end of the document we link each external css that are
         // already fetched and that have been encountered in the SSP to the SSP.
         LOGGER.debug("Found " + relatedExternalCssSet.size() + 
                 " external css in "+ getSSP().getURI());
-        Set<Long> relatedExternalCssIdSet = new HashSet<Long>();
         for (StylesheetContent cssContent : relatedExternalCssSet) {
             if (cssContent.getAdaptedContent() == null) {
                 cssContent.setAdaptedContent(CSS_ON_ERROR);
             }
-            relatedExternalCssIdSet.add(cssContent.getId());
             LOGGER.debug("Create relation between "+getSSP().getURI() +
                     " and " + cssContent.getURI());
+            getSSP().addRelatedContent(cssContent);
+            getContentDataService().saveOrUpdate(cssContent);
         }
-        persistContentRelationShip(getSSP(), relatedExternalCssIdSet);
     }
 
     /**
@@ -485,12 +482,4 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         }
     }
 
-    /**
-     *
-     * @param ssp
-     * @param relatedContent
-     */
-    private void persistContentRelationShip(SSP ssp, Set<Long> relatedContentIdSet) {
-        getContentDataService().saveContentRelationShip(ssp, relatedContentIdSet);
-    }
 }

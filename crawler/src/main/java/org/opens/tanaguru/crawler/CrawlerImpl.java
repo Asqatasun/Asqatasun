@@ -186,34 +186,15 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         if (curi.getContentType().contains(ContentType.html.getType())
                 && !curi.getURI().contains("robots.txt")) {
             LOGGER.debug("Found Html " + curi.getURI());
-            Page page = null;
-            if (mainWebResource instanceof Page) {
-                if (!isPageAlreadyFetched) {
-                    page = (Page)mainWebResource;
-                    // in case of redirection, we modify the URI of the webresource
-                    // to ensure the webresource and its SSP have the same URI.
-                    page.setURL(curi.getURI());
-                    isPageAlreadyFetched = true;
-                }else {
-                    return;
-                }
-            } else {
-                page = webResourceDataService.createPage(curi.getURI());
-                page.setParent((Site)mainWebResource);
-            }
+
             // extract data from fetched content and record it to SSP object
             String charset = CrawlUtils.extractCharset(recis.getContentReplayInputStream());
             String sourceCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset);
-            SSP ssp = contentFactory.createSSP(curi.getURI());
-            ssp.setPage(page);
-            if (ssp != null) {
-                ssp.setCharset(charset);
-                ssp.setSource(sourceCode);
-                webResourceDataService.saveOrUpdate(page);
-                ssp = (SSP)saveAndPersistFetchDataToContent(ssp, curi);
-                lastFetchedSSP = ssp;
-            }
+            lastFetchedSSP = saveWebResourceAndSSPFromFetchedPage(curi, charset, sourceCode);
+
         } else if (curi.getContentType().contains(ContentType.css.getType())) {
+            LOGGER.debug("Found css " + curi.getURI() + " last fetched ssp " + lastFetchedSSP.getURI());
+            
             boolean compressed = GzippedInputStream.isCompressedStream(recis.getContentReplayInputStream());
             String cssCode = null;
             if (compressed) {
@@ -222,34 +203,15 @@ public class CrawlerImpl implements Crawler, ContentWriter {
                 String charset = CrawlUtils.extractCharset(recis.getContentReplayInputStream());
                 cssCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset);
             }
-              LOGGER.debug("Found css " + curi.getURI() + " last fetched ssp "  + lastFetchedSSP.getURI());
-              StylesheetContent newCssContent = contentFactory.createStylesheetContent(
-                            null,
-                            curi.getURI(),
-                            null,
-                            cssCode,
-                            curi.getFetchStatus());
-              // A relatedContent has to be linked to a SSP.
-              // At this step, we don't know the relation between
-              // SSP and relatedContent but we have to link this relatedContent to any
-              // (the last) ssp to associate this relatedContent with the current
-              // crawl
-              
-              StylesheetContent returnedCssContent = (StylesheetContent)
-                      saveAndPersistFetchDataToContent((Content) newCssContent, curi);
-              persistContentRelationShip(lastFetchedSSP, returnedCssContent);
+            saveStylesheetFromFetchedCss(curi, cssCode);
+            
         } else if (curi.getContentType().contains(ContentType.img.getType())) {
             LOGGER.debug("Found Image" + curi.getURI());
-            ImageContent newImgContent = contentFactory.createImageContent(
-                            null,
-                            curi.getURI(),
-                            lastFetchedSSP,
-                            CrawlUtils.getImageContent(recis.getContentReplayInputStream(),
-                            CrawlUtils.getImageExtension(curi.getURI())),
-                            curi.getFetchStatus());
-            ImageContent returnedImgContent =
-                    (ImageContent)saveAndPersistFetchDataToContent(newImgContent, curi);
-            persistContentRelationShip(lastFetchedSSP, returnedImgContent);
+
+            byte[] rawImage = CrawlUtils.getImageContent(recis.getContentReplayInputStream(),
+                    CrawlUtils.getImageExtension(curi.getURI()));
+            saveRawImageFromFetchedImage(curi, rawImage);
+            
         } else {
             LOGGER.debug("Trashed content " + curi.getURI() + " of type " + curi.getContentType());
             // do nothing, we ignore the fetched content when we cannot
@@ -262,53 +224,102 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         ContentType resourceContentType =
                 getContentTypeFromUnreacheableResource(curi.getCanonicalString());
         switch (resourceContentType) {
+            case misc:
+            case html:
+                LOGGER.info(
+                        UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
+                        + curi.getFetchStatus());
+                
+                saveWebResourceAndSSPFromFetchedPage(curi, null, null);
+                break;
+                
             case css:
                 LOGGER.info(
                         UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
                         + curi.getFetchStatus());
-                StylesheetContent newCssContent = contentFactory.createStylesheetContent(
-                            null,
-                            curi.getURI(),
-                            lastFetchedSSP,
-                            null,
-                            curi.getFetchStatus());
-                saveAndPersistFetchDataToContent((Content) newCssContent, curi);
+                
+                saveStylesheetFromFetchedCss(curi, null);
                 break;
-            case misc:
-            case html:
-                LOGGER.info(UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
-                        + curi.getFetchStatus());
-                Page page = null;
-                if (mainWebResource instanceof Page) {
-                    page = (Page)mainWebResource;
-                // in case of redirection, we modify the URI of the webresource
-                // to ensure the webresource and its SSP have the same URI.
-                    page.setURL(curi.getURI());
-                } else {
-                    page = webResourceDataService.createPage(curi.getURI());
-                    page.setParent((Site)mainWebResource);
-                }
-                SSP ssp = contentFactory.createSSP(curi.getURI());
-                ssp.setPage(page);
-                webResourceDataService.saveOrUpdate(page);
-                saveAndPersistFetchDataToContent(ssp, curi);
-                break;
+
             case img:
                 LOGGER.info(UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
                         + curi.getFetchStatus());
-                ImageContent newImgContent = contentFactory.createImageContent(
-                            null,
-                            curi.getURI(),
-                            lastFetchedSSP,
-                            null,
-                            curi.getFetchStatus());
-                saveAndPersistFetchDataToContent(newImgContent, curi);
+
+                saveRawImageFromFetchedImage(curi, null);
                 break;
+
             default:
                 LOGGER.debug("UNKNOWN_CONTENT" + UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
                         + curi.getFetchStatus());
                 break;
         }
+    }
+
+    /**
+     * 
+     * @param curi
+     * @param charset
+     * @param sourceCode
+     * @return
+     */
+    private SSP saveWebResourceAndSSPFromFetchedPage(CrawlURI curi, String charset, String sourceCode) {
+
+        Page page = null;
+        if (mainWebResource instanceof Page) {
+            if (!isPageAlreadyFetched) {
+                page = (Page) mainWebResource;
+                // in case of redirection, we modify the URI of the webresource
+                // to ensure the webresource and its SSP have the same URI.
+                page.setURL(curi.getURI());
+                isPageAlreadyFetched = true;
+            } else {
+                return null;
+            }
+        } else {
+            page = webResourceDataService.createPage(curi.getURI());
+            page.setParent((Site) mainWebResource);
+        }
+        SSP ssp = contentFactory.createSSP(curi.getURI());
+        ssp.setPage(page);
+        ssp.setCharset(charset);
+        ssp.setSource(sourceCode);
+        webResourceDataService.saveOrUpdate(page);
+        ssp = (SSP) saveAndPersistFetchDataToContent(ssp, curi);
+        return ssp;
+    }
+
+    /**
+     *
+     * @param curi
+     * @param charset
+     * @param cssCode
+     */
+    private void saveStylesheetFromFetchedCss(CrawlURI curi, String cssCode) {
+        StylesheetContent newCssContent = contentFactory.createStylesheetContent(
+                null,
+                curi.getURI(),
+                null,
+                cssCode,
+                curi.getFetchStatus());
+        // A relatedContent has to be linked to a SSP.
+        // At this step, we don't know the relation between
+        // SSP and relatedContent but we have to link this relatedContent to any
+        // (the last) ssp to associate this relatedContent with the current
+        // crawl
+        StylesheetContent returnedCssContent = (StylesheetContent) saveAndPersistFetchDataToContent((Content) newCssContent, curi);
+        persistContentRelationShip(lastFetchedSSP, returnedCssContent);
+    }
+
+    private void saveRawImageFromFetchedImage(CrawlURI curi, byte[] rawImage) {
+        ImageContent newImgContent = contentFactory.createImageContent(
+                    null,
+                    curi.getURI(),
+                    null,
+                    rawImage,
+                    curi.getFetchStatus());
+        ImageContent returnedImgContent =
+                    (ImageContent) saveAndPersistFetchDataToContent(newImgContent, curi);
+        persistContentRelationShip(lastFetchedSSP, returnedImgContent);
     }
 
     /**
@@ -385,8 +396,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
      */
     private void persistContentRelationShip(SSP ssp, RelatedContent relatedContent) {
         relatedContentSet.clear();
-        relatedContentSet.add(((Content)relatedContent).getId());
+        relatedContentSet.add(((Content) relatedContent).getId());
         contentDataService.saveContentRelationShip(ssp, relatedContentSet);
     }
-
 }

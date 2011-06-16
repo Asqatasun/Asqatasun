@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.xml.bind.annotation.XmlElementRef;
@@ -23,9 +22,10 @@ import javax.xml.bind.annotation.XmlTransient;
 public class RelatedContentImpl extends ContentImpl implements
         RelatedContent, Serializable {
 
-    @ManyToMany(cascade = CascadeType.MERGE,
+    @ManyToMany(
         targetEntity=org.opens.tanaguru.entity.audit.SSPImpl.class,
         mappedBy="relatedContentSet")
+    @org.hibernate.annotations.Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     protected Set<ContentImpl> parentContentSet =
             new HashSet<ContentImpl>();
 

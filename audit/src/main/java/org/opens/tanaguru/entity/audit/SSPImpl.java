@@ -41,7 +41,8 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
     @Column(name = "Charset")
     protected String charset;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany
+    @org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.PERSIST, org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinTable(name = "CONTENT_RELATIONSHIP", joinColumns =
     @JoinColumn(name = "Id_Content_Parent"), inverseJoinColumns =
     @JoinColumn(name = "Id_Content_Child"))
