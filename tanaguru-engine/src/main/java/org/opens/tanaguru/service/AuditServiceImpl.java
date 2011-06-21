@@ -10,6 +10,7 @@ import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import java.util.List;
 import java.util.Set;
+import org.opens.tanaguru.contentadapter.AdaptationListener;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
@@ -34,6 +35,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
     private AuditServiceThreadFactory auditServiceThreadFactory;
     private AuditServiceThreadQueue auditServiceThreadQueue;
     private Set<AuditServiceListener> listeners;
+    private AdaptationListener adaptationListener = null;
 
     @Autowired
     public AuditServiceImpl(ContentDataService contentDataService) {
@@ -73,7 +75,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
         audit.setSubject(page);
         audit.setTestList(testList);
         audit.setStatus(AuditStatus.CRAWLING);
-
+        
         auditServiceThreadQueue.addPageAudit(audit);
         return audit;
     }
@@ -113,7 +115,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
 
     @Override
     public Audit audit(Audit audit) {
-        AuditServiceThread auditServiceThread = auditServiceThreadFactory.create(auditDataService, contentDataService, processResultDataService, webResourceDataService, crawlerService, contentAdapterService, processorService, consolidatorService, analyserService, audit);
+        AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit, adaptationListener);
         auditServiceThread.run();
         audit = auditServiceThread.getAudit();
         return audit;
@@ -121,7 +123,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
 
     @Override
     public Audit init(Audit audit) {
-        AuditServiceThread auditServiceThread = auditServiceThreadFactory.create(auditDataService, contentDataService, processResultDataService, webResourceDataService, crawlerService, contentAdapterService, processorService, consolidatorService, analyserService, audit);
+        AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit, null);
         auditServiceThread.init();
         audit = auditServiceThread.getAudit();
         return audit;
@@ -129,7 +131,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
 
     @Override
     public Audit crawl(Audit audit) {
-        AuditServiceThread auditServiceThread = auditServiceThreadFactory.create(auditDataService, contentDataService, processResultDataService, webResourceDataService, crawlerService, contentAdapterService, processorService, consolidatorService, analyserService, audit);
+        AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit, null);
         auditServiceThread.crawl();
         audit = auditServiceThread.getAudit();
         return audit;
@@ -137,7 +139,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
 
     @Override
     public Audit loadContent(Audit audit) {
-        AuditServiceThread auditServiceThread = auditServiceThreadFactory.create(auditDataService, contentDataService, processResultDataService, webResourceDataService, crawlerService, contentAdapterService, processorService, consolidatorService, analyserService, audit);
+        AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit, null);
         auditServiceThread.loadContent();
         audit = auditServiceThread.getAudit();
         return audit;
@@ -145,7 +147,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
 
     @Override
     public Audit adaptContent(Audit audit) {
-        AuditServiceThread auditServiceThread = auditServiceThreadFactory.create(auditDataService, contentDataService, processResultDataService, webResourceDataService, crawlerService, contentAdapterService, processorService, consolidatorService, analyserService, audit);
+        AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit, adaptationListener);
         auditServiceThread.adaptContent();
         audit = auditServiceThread.getAudit();
         return audit;
@@ -153,7 +155,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
 
     @Override
     public Audit process(Audit audit) {
-        AuditServiceThread auditServiceThread = auditServiceThreadFactory.create(auditDataService, contentDataService, processResultDataService, webResourceDataService, crawlerService, contentAdapterService, processorService, consolidatorService, analyserService, audit);
+        AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit, null);
         auditServiceThread.process();
         audit = auditServiceThread.getAudit();
         return audit;
@@ -161,7 +163,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
 
     @Override
     public Audit consolidate(Audit audit) {
-        AuditServiceThread auditServiceThread = auditServiceThreadFactory.create(auditDataService, contentDataService, processResultDataService, webResourceDataService, crawlerService, contentAdapterService, processorService, consolidatorService, analyserService, audit);
+        AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit, null);
         auditServiceThread.consolidate();
         audit = auditServiceThread.getAudit();
         return audit;
@@ -169,10 +171,25 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
 
     @Override
     public Audit analyse(Audit audit) {
-        AuditServiceThread auditServiceThread = auditServiceThreadFactory.create(auditDataService, contentDataService, processResultDataService, webResourceDataService, crawlerService, contentAdapterService, processorService, consolidatorService, analyserService, audit);
+        AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit, null);
         auditServiceThread.analyse();
         audit = auditServiceThread.getAudit();
         return audit;
+    }
+
+    private AuditServiceThread getInitialisedAuditServiceThread(Audit audit, AdaptationListener adaptationListener) {
+        return auditServiceThreadFactory.create(
+                auditDataService,
+                contentDataService,
+                processResultDataService,
+                webResourceDataService,
+                crawlerService,
+                contentAdapterService,
+                processorService,
+                consolidatorService,
+                analyserService,
+                audit,
+                adaptationListener);
     }
 
     public void setAnalyserService(AnalyserService analyserService) {
@@ -224,6 +241,11 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
     public void setWebResourceDataService(
             WebResourceDataService webResourceDAOService) {
         this.webResourceDataService = webResourceDAOService;
+    }
+
+    public void setAdaptationListener(
+            AdaptationListener adaptationListener) {
+        this.adaptationListener = adaptationListener;
     }
 
     @Override

@@ -92,7 +92,7 @@
         <property name="webResourceDataService" ref="webResourceDataService"/>
         <property name="contentDataService" ref="contentDataService"/>
         <property name="processResultDataService" ref="processResultDataService"/>
-
+        <property name="adaptationListener" ref="adaptationListener"/>
         <property name="auditServiceThreadFactory" ref="auditServiceThreadFactory"/>
     </bean>
     <bean id="auditServiceThreadFactory" class="org.opens.tanaguru.service.AuditServiceThreadFactoryImpl"/>
@@ -110,6 +110,7 @@
         <property name="processorService" ref="processorService"/>
         <property name="consolidatorService" ref="consolidatorService"/>
         <property name="analyserService" ref="analyserService"/>
+        <property name="adaptationListener" ref="adaptationListener"/>
 
         <property name="auditServiceThreadQueue" ref="auditServiceThreadQueue"/>
         <property name="auditServiceThreadFactory" ref="auditServiceThreadFactory"/>

@@ -8,7 +8,14 @@
     <bean id="htmlCleanerFactory" class="org.opens.tanaguru.contentadapter.html.HTMLCleanerFactoryImpl"/>
     <bean id="htmlParserFactory" class="org.opens.tanaguru.contentadapter.html.HTMLParserFactoryImpl"/>
     <bean id="urlIdentifierFactory" class="org.opens.tanaguru.contentadapter.util.URLIdentifierFactoryImpl"/>
-    
+    <bean id="externalCSSRetriever" class="org.opens.tanaguru.contentadapter.css.ExternalCSSRetrieverImpl"/>
+    <alias name="externalCSSRetriever" alias="adaptationListener"/>
+
+    <bean id="cssContentAdapterFactory" class="org.opens.tanaguru.contentadapter.css.CSSContentAdapterFactoryImpl">
+        <property name="externalCSSRetriever">
+            <ref local="externalCSSRetriever"/>
+        </property>
+    </bean>
     <bean id="contentAdapterService" class="org.opens.tanaguru.service.ContentAdapterServiceImpl">
         <property name="contentFactory" ref="contentFactory"/>
 
@@ -20,7 +27,7 @@
         <property name="htmlParserFactory" ref="htmlParserFactory"/>
         <property name="contentAdapterFactorySet">
             <set>
-                <bean id="cssContentAdapterFactory" class="org.opens.tanaguru.contentadapter.css.CSSContentAdapterFactoryImpl"/>
+                <ref local="cssContentAdapterFactory"/>
             </set>
         </property>
         <property name="urlIdentifierFactory" ref="urlIdentifierFactory"/>

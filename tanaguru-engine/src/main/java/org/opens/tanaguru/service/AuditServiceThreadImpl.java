@@ -4,6 +4,8 @@
  */
 package org.opens.tanaguru.service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -11,7 +13,9 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
 import org.apache.log4j.Logger;
+import org.opens.tanaguru.contentadapter.AdaptationListener;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.audit.Content;
@@ -25,6 +29,7 @@ import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.util.MD5Encoder;
 
 /**
  *
@@ -52,6 +57,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
     }
     private final CrawlerService crawlerService;
     private final ContentAdapterService contentAdapterService;
+    private final AdaptationListener adaptationListener;
     private final ProcessorService processorService;
     private final ConsolidatorService consolidatorService;
     private final AnalyserService analyserService;
@@ -61,7 +67,32 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
     }
     private Set<AuditServiceThreadListener> listeners;
 
-    public AuditServiceThreadImpl(AuditDataService auditDataService, ContentDataService contentDataService, ProcessResultDataService processResultDataService, WebResourceDataService webResourceDataService, CrawlerService crawlerService, ContentAdapterService contentAdapterService, ProcessorService processorService, ConsolidatorService consolidatorService, AnalyserService analyserService, Audit audit) {
+    /**
+     * 
+     * @param auditDataService
+     * @param contentDataService
+     * @param processResultDataService
+     * @param webResourceDataService
+     * @param crawlerService
+     * @param contentAdapterService
+     * @param processorService
+     * @param consolidatorService
+     * @param analyserService
+     * @param audit
+     * @param adaptationListener
+     */
+    public AuditServiceThreadImpl(
+            AuditDataService auditDataService,
+            ContentDataService contentDataService,
+            ProcessResultDataService processResultDataService,
+            WebResourceDataService webResourceDataService,
+            CrawlerService crawlerService,
+            ContentAdapterService contentAdapterService,
+            ProcessorService processorService,
+            ConsolidatorService consolidatorService,
+            AnalyserService analyserService,
+            Audit audit,
+            AdaptationListener adaptationListener) {
         super();
         this.auditDataService = auditDataService;
         this.contentDataService = contentDataService;
@@ -73,6 +104,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         this.consolidatorService = consolidatorService;
         this.analyserService = analyserService;
         this.audit = audit;
+        this.adaptationListener = adaptationListener;
     }
 
     @Override
@@ -181,6 +213,10 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         Long webResourceId = audit.getSubject().getId();
         List<Long> contentIdList = new ArrayList<Long>();
         List<Content> contentList = new ArrayList<Content>();
+        // Some actions have to be realized when the adaptation starts
+        if (adaptationListener != null) {
+            adaptationListener.adaptationStarted(audit);
+        }
         while (i.compareTo(nbOfContent) < 0) {
             if (LOGGER.isDebugEnabled()) {
                 beginProcessDate = Calendar.getInstance().getTime();
@@ -195,7 +231,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
                     ADAPTATION_TREATMENT_WINDOW);
             contentList.clear();
             for (Long id : contentIdList) {
-                Content content = contentDataService.readWithRelatedContent(id);
+                Content content = contentDataService.read(id);
                 if (content != null) {
                     contentList.add(content);
                 }
@@ -222,12 +258,22 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
             }
 
             for (Content content : contentSet) {
-                contentDataService.saveOrUpdate(content);
+//                contentDataService.saveOrUpdate(content);
                 if (content instanceof SSP) {
-                    if (!hasCorrectedDOM && !((SSP) content).getDOM().isEmpty()) {
-                        hasCorrectedDOM = true;
+                    if (!((SSP) content).getDOM().isEmpty()) {
+                        if (!hasCorrectedDOM) {
+                            hasCorrectedDOM = true;
+                        }
+                        try {
+                            ((SSP) content).setSource(MD5Encoder.MD5(((SSP) content).getSource()));
+                        } catch (NoSuchAlgorithmException ex) {
+                            LOGGER.warn(ex);
+                        } catch (UnsupportedEncodingException ex) {
+                            LOGGER.warn(ex);
+                        }
                     }
                 }
+                contentDataService.saveOrUpdate(content);
             }
             contentSet.clear();
             contentList.clear();
@@ -253,6 +299,10 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         } else {
             Logger.getLogger(AuditServiceImpl.class).warn("Audit has no corrected DOM");
             audit.setStatus(AuditStatus.ERROR);
+        }
+        // Some actions have to be realized when the adaptation is completed
+        if (adaptationListener != null) {
+            adaptationListener.adaptationCompleted(audit);
         }
         audit = auditDataService.saveOrUpdate(audit);
     }

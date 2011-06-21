@@ -11,8 +11,8 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
+import org.opens.tanaguru.contentadapter.AdaptationListener;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
@@ -24,7 +24,7 @@ import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
  * @author enzolalay
  */
 public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, AuditServiceThreadListener {
-
+    private static Logger LOGGER = Logger.getLogger(AuditServiceThreadQueueImpl.class);
     private AuditDataService auditDataService;
     private ContentDataService contentDataService;
     private ProcessResultDataService processResultDataService;
@@ -35,6 +35,7 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
     private ConsolidatorService consolidatorService;
     private AnalyserService analyserService;
     private AuditServiceThreadFactory auditServiceThreadFactory;
+    private AdaptationListener adaptationListener;
     private Queue<Audit> pageAuditWaitQueue = new ConcurrentLinkedQueue<Audit>();
     private Queue<Audit> siteAuditWaitQueue = new ConcurrentLinkedQueue<Audit>();
     private List<AuditServiceThread> pageAuditExecutionList = new Vector<AuditServiceThread>();
@@ -48,15 +49,28 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
         super();
     }
 
+    @Override
     public void setPageAuditExecutionListMax(int max) {
         this.pageAuditExecutionListMax = max;
     }
 
+    @Override
     public void setSiteAuditExecutionListMax(int max) {
         this.siteAuditExecutionListMax = max;
     }
 
-    public AuditServiceThreadQueueImpl(AuditDataService auditDataService, ContentDataService contentDataService, ProcessResultDataService processResultDataService, WebResourceDataService webResourceDataService, CrawlerService crawlerService, ContentAdapterService contentAdapterService, ProcessorService processorService, ConsolidatorService consolidatorService, AnalyserService analyserService, AuditServiceThreadFactory auditServiceThreadFactory) {
+    public AuditServiceThreadQueueImpl(
+            AuditDataService auditDataService,
+            ContentDataService contentDataService,
+            ProcessResultDataService processResultDataService,
+            WebResourceDataService webResourceDataService,
+            CrawlerService crawlerService,
+            ContentAdapterService contentAdapterService,
+            ProcessorService processorService,
+            ConsolidatorService consolidatorService,
+            AnalyserService analyserService,
+            AuditServiceThreadFactory auditServiceThreadFactory,
+            AdaptationListener adaptationListener) {
         super();
         this.auditDataService = auditDataService;
         this.contentDataService = contentDataService;
@@ -68,6 +82,11 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
         this.consolidatorService = consolidatorService;
         this.analyserService = analyserService;
         this.auditServiceThreadFactory = auditServiceThreadFactory;
+        this.adaptationListener = adaptationListener;
+    }
+
+    public void setAdaptationListener(AdaptationListener adaptationListener) {
+        this.adaptationListener = adaptationListener;
     }
 
     public void setAnalyserService(AnalyserService analyserService) {
@@ -110,6 +129,7 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
         this.webResourceDataService = webResourceDataService;
     }
 
+    @Override
     public void add(AuditServiceListener listener) {
         if (listeners == null) {
             listeners = new HashSet<AuditServiceListener>();
@@ -125,6 +145,7 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
         listeners.remove(listener);
     }
 
+    @Override
     public synchronized void addPageAudit(Audit audit) {
         pageAuditWaitQueue.offer(audit);
         processPageAuditWaitQueue();
@@ -141,12 +162,23 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
                     try {
                         Thread.sleep(10);
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(AuditServiceThreadQueueImpl.class.getName()).log(Level.SEVERE, null, ex);
+                        LOGGER.error(ex);
                     }
                 }
                 lastToken = token.longValue();
             }
-            AuditServiceThread auditServiceThread = auditServiceThreadFactory.create(auditDataService, contentDataService, processResultDataService, webResourceDataService, crawlerService, contentAdapterService, processorService, consolidatorService, analyserService, pageAuditWaitQueue.poll());
+            AuditServiceThread auditServiceThread = auditServiceThreadFactory.create(
+                    auditDataService,
+                    contentDataService,
+                    processResultDataService,
+                    webResourceDataService,
+                    crawlerService,
+                    contentAdapterService,
+                    processorService,
+                    consolidatorService,
+                    analyserService,
+                    pageAuditWaitQueue.poll(),
+                    adaptationListener);
             auditServiceThread.add(this);
             pageAuditExecutionList.add(auditServiceThread);
             new Thread(auditServiceThread).start();
@@ -169,18 +201,30 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
                     try {
                         Thread.sleep(10);
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(AuditServiceThreadQueueImpl.class.getName()).log(Level.SEVERE, null, ex);
+                        LOGGER.error(ex);
                     }
                 }
                 lastToken = token.longValue();
             }
-            AuditServiceThread auditServiceThread = auditServiceThreadFactory.create(auditDataService, contentDataService, processResultDataService, webResourceDataService, crawlerService, contentAdapterService, processorService, consolidatorService, analyserService, siteAuditWaitQueue.poll());
+            AuditServiceThread auditServiceThread = auditServiceThreadFactory.create(
+                    auditDataService,
+                    contentDataService,
+                    processResultDataService,
+                    webResourceDataService,
+                    crawlerService,
+                    contentAdapterService,
+                    processorService,
+                    consolidatorService,
+                    analyserService,
+                    siteAuditWaitQueue.poll(),
+                    adaptationListener);
             auditServiceThread.add(this);
             siteAuditExecutionList.add(auditServiceThread);
             new Thread(auditServiceThread).start();
         }
     }
 
+    @Override
     public void auditCompleted(AuditServiceThread thread) {
         if (!pageAuditExecutionList.remove(thread)) {
             siteAuditExecutionList.remove(thread);
@@ -200,6 +244,7 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
         processWaitQueue();
     }
 
+    @Override
     public void processWaitQueue() {
         processPageAuditWaitQueue();
         processSiteAuditWaitQueue();

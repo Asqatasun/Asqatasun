@@ -44,8 +44,6 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             +" WHERE ssp.DTYPE = \'SSPImpl\'"
             +" AND (page.Id_Web_Resource =:idWebResource OR page.Id_Web_Resource_Parent =:idWebResource)"
             +" AND ssp.Http_Status_Code <> -1"
-            +" GROUP BY ssp.Id_Content"
-            +" ORDER BY ssp.Id_Content"
             +" LIMIT :start , :chunkSize ";
     private static final String SELECT_RELATED_CONTENT_QUERY =
             "SELECT relatedContent2.Id_Content "
@@ -56,8 +54,6 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             +" WHERE ssp.DTYPE='SSPImpl'"
             +" AND (page.Id_Web_Resource =:idWebResource OR page.Id_Web_Resource_Parent =:idWebResource)"
             +" AND ssp.Http_Status_Code<>-1"
-            +" GROUP BY relatedContent2.Id_Content"
-            +" ORDER BY relatedContent2.Id_Content"
             +" LIMIT :start , :chunkSize ";
 
     public ContentDAOImpl() {
@@ -347,7 +343,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
         Set<StylesheetContent> externalCssSet = new HashSet<StylesheetContent>();
         if (audit != null) {
             Query query = entityManager.createQuery(
-                    "SELECT distinct sc FROM "
+                    "SELECT sc FROM "
                     + StylesheetContentImpl.class.getName() + " sc"
                     + " WHERE sc.audit=:audit "
                     + " AND sc.uri not LIKE :inlineUrl "

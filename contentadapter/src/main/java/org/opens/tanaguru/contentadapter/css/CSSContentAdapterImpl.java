@@ -53,6 +53,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
     private boolean cssOnError = false;
     private Set<StylesheetContent> relatedExternalCssSet =
             new HashSet<StylesheetContent>();
+    private ExternalCSSRetriever externalCSSRetriever;
     private Set<StylesheetContent> externalCssSet =
             new HashSet<StylesheetContent>();
     private int internalCssCounter = 1;
@@ -70,8 +71,10 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
             URLIdentifier urlIdentifier,
             Downloader downloader,
             CSSParser cssParser,
-            ContentDataService contentDataService) {
+            ContentDataService contentDataService,
+            ExternalCSSRetriever externalCSSRetriever) {
         super(contentFactory, urlIdentifier, downloader, contentDataService);
+        this.externalCSSRetriever = externalCSSRetriever;
         this.parser = cssParser;
     }
 
@@ -98,6 +101,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
     @Override
     @SuppressWarnings("element-type-mismatch")
     public void endDocument() throws SAXException {
+        Set<Long> relatedCssIdSet = new HashSet<Long>();
         if (resource != null) {
             resource.addAllResource(cssVector);
 
@@ -108,7 +112,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
                 StylesheetContent cssContent =
                         getStylesheetFromResource(r.getResource());
                 adaptContent(cssContent, r);
-                getContentDataService().saveOrUpdate(cssContent);
+                relatedCssIdSet.add(getContentDataService().saveOrUpdate(cssContent).getId());
             }
         }
         // At the end of the document we link each external css that are
@@ -121,9 +125,10 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
             }
             LOGGER.debug("Create relation between "+getSSP().getURI() +
                     " and " + cssContent.getURI());
-            getSSP().addRelatedContent(cssContent);
+            relatedCssIdSet.add(cssContent.getId());
             getContentDataService().saveOrUpdate(cssContent);
         }
+        getContentDataService().saveContentRelationShip(getSSP(), relatedCssIdSet);
     }
 
     /**
@@ -239,7 +244,8 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         // The list of external resources for a given audit is retrieved once.
         // This list is not supposed to increase at this step.
         if (externalCssSet.isEmpty()) {
-            externalCssSet.addAll(getContentDataService().getExternalStylesheetFromAudit(getSSP().getAudit()));
+            LOGGER.debug("Starting retrieving external stylesheet " + externalCSSRetriever.getClass() + "  " +getSSP().getURI());
+            externalCssSet.addAll(externalCSSRetriever.getExternalCSS(getSSP()));
             for (StylesheetContent sc : externalCssSet) {
                 LOGGER.debug("The external stylesheet " + sc.getURI() + " has been retrieved");
             }
@@ -458,7 +464,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
                 200);
         cssContent.setAudit(getSSP().getAudit());
         internalCssCounter++;
-        getSSP().addRelatedContent(cssContent);
+//        getSSP().addRelatedContent(cssContent);
         return cssContent;
     }
 
@@ -471,7 +477,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
      */
     private void adaptContent(StylesheetContent stylesheetContent, Resource resource) {
         if (stylesheetContent.getAdaptedContent() == null
-                && resource.getResource() != null) {
+                && resource.getResource() != null && !resource.getResource().isEmpty()) {
             parser.setResource(resource);
             parser.run();
             if (parser.getResult() != null) {

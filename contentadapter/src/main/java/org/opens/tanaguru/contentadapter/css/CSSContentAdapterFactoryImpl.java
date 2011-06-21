@@ -15,14 +15,31 @@ import org.opens.tanaguru.entity.service.audit.ContentDataService;
  */
 public class CSSContentAdapterFactoryImpl implements CSSContentAdapterFactory {
 
+    private ExternalCSSRetriever externalCSSRetriever;
+
     @Override
-    public CSSContentAdapter create(ContentFactory contentFactory, URLIdentifier urlIdentifier, Downloader downloader, ContentDataService contentDataService) {
-        return new CSSContentAdapterImpl(contentFactory, urlIdentifier, downloader, CSSParserFactory.create(), contentDataService);
+    public CSSContentAdapter create(
+            ContentFactory contentFactory,
+            URLIdentifier urlIdentifier,
+            Downloader downloader,
+            ContentDataService contentDataService) {
+        return new CSSContentAdapterImpl(
+                contentFactory,
+                urlIdentifier,
+                downloader,
+                CSSParserFactory.create(),
+                contentDataService,
+                getExternalCSSRetriever());
     }
 
-//    @Override
-//    public ContentAdapter create(ContentFactory contentFactory, URLIdentifier urlIdentifier, Downloader downloader) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
+    @Override
+    public ExternalCSSRetriever getExternalCSSRetriever() {
+        return externalCSSRetriever;
+    }
+
+    @Override
+    public void setExternalCSSRetriever(ExternalCSSRetriever externalCSSRetriever) {
+        this.externalCSSRetriever = externalCSSRetriever;
+    }
 
 }
