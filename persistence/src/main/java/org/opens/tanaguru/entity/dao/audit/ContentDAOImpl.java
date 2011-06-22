@@ -16,6 +16,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.hibernate.exception.ConstraintViolationException;
 import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.audit.RelatedContentImpl;
 import org.opens.tanaguru.entity.audit.SSP;
@@ -28,15 +30,16 @@ import org.opens.tanaguru.entity.subject.WebResource;
 
 public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
         ContentDAO {
-    
+
+    private static final Logger LOGGER = Logger.getLogger(ContentDAOImpl.class);
     private static final int DEFAULT_HTTP_STATUS_VALUE = -1;
     private static final Integer HTTP_STATUS_OK = Integer.valueOf(HttpStatus.SC_OK);
     private static final String INSERT_QUERY =
-            "insert into CONTENT_RELATIONSHIP (Id_Content_Parent, Id_Content_Child) values ";
+            "INSERT IGNORE INTO CONTENT_RELATIONSHIP (Id_Content_Parent, Id_Content_Child) values ";
     private static final String DELETE_CONTENT_RELATIONSHIP_QUERY =
-            "delete from CONTENT_RELATIONSHIP WHERE Id_Content_Child=:idContentChild ";
+            "DELETE FROM CONTENT_RELATIONSHIP WHERE Id_Content_Child=:idContentChild ";
     private static final String UPDATE_QUERY =
-            "update CONTENT set Id_Audit=:idAudit  WHERE Id_Content=:idContent ";
+            "UPDATE CONTENT SET Id_Audit=:idAudit WHERE Id_Content=:idContent ";
     private static final String SELECT_SSP_QUERY =
             "SELECT ssp.Id_Content"
             +" FROM CONTENT ssp"
@@ -382,8 +385,14 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             Query query = entityManager.createNativeQuery(
                     INSERT_QUERY+
                     queryValuesBuilder.toString());
-            query.executeUpdate();
-            flushAndCloseEntityManager();
+            try {
+                query.executeUpdate();
+                flushAndCloseEntityManager();
+            } catch (ConstraintViolationException micve) {
+                LOGGER.warn(micve.getMessage());
+            } finally {
+                flushAndCloseEntityManager();
+            }
         }
     }
 

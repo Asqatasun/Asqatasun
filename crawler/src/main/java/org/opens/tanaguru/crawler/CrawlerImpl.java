@@ -190,7 +190,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
             // extract data from fetched content and record it to SSP object
             String charset = CrawlUtils.extractCharset(recis.getContentReplayInputStream());
             String sourceCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset);
-            lastFetchedSSP = saveWebResourceAndSSPFromFetchedPage(curi, charset, sourceCode);
+            lastFetchedSSP = saveWebResourceFromFetchedPage(curi, charset, sourceCode, true);
 
         } else if (curi.getContentType().contains(ContentType.css.getType())) {
             LOGGER.debug("Found css " + curi.getURI() + " last fetched ssp " + lastFetchedSSP.getURI());
@@ -230,7 +230,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
                         UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
                         + curi.getFetchStatus());
                 
-                saveWebResourceAndSSPFromFetchedPage(curi, null, null);
+                saveWebResourceFromFetchedPage(curi, null, null, false);
                 break;
                 
             case css:
@@ -260,9 +260,14 @@ public class CrawlerImpl implements Crawler, ContentWriter {
      * @param curi
      * @param charset
      * @param sourceCode
+     * @param successfullFetch
      * @return
      */
-    private SSP saveWebResourceAndSSPFromFetchedPage(CrawlURI curi, String charset, String sourceCode) {
+    private SSP saveWebResourceFromFetchedPage(
+            CrawlURI curi,
+            String charset,
+            String sourceCode,
+            boolean successfullFetch) {
 
         Page page = null;
         if (mainWebResource instanceof Page) {
@@ -271,14 +276,37 @@ public class CrawlerImpl implements Crawler, ContentWriter {
                 // in case of redirection, we modify the URI of the webresource
                 // to ensure the webresource and its SSP have the same URI.
                 page.setURL(curi.getURI());
-                isPageAlreadyFetched = true;
+                if (successfullFetch) {
+                    isPageAlreadyFetched = true;
+                    return saveAndCreateSSPFromPage(curi, charset, page, sourceCode);
+                } else {
+                    return lastFetchedSSP;
+                }
             } else {
-                return null;
+                // in case of one page audit, when a SSP have already been fetched
+                // we don't create SSP anymore. 
+                return lastFetchedSSP;
             }
         } else {
             page = webResourceDataService.createPage(curi.getURI());
             page.setParent((Site) mainWebResource);
+            return saveAndCreateSSPFromPage(curi, charset, page, sourceCode);
         }
+    }
+
+    /**
+     * 
+     * @param curi
+     * @param charset
+     * @param page
+     * @param sourceCode
+     * @return
+     */
+    private SSP saveAndCreateSSPFromPage(
+            CrawlURI curi,
+            String charset,
+            Page page,
+            String sourceCode) {
         SSP ssp = contentFactory.createSSP(curi.getURI());
         ssp.setPage(page);
         ssp.setCharset(charset);
