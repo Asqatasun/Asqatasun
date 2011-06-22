@@ -104,7 +104,7 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param webResource
      * @return
      */
-    Long getNumberOfSSPFromWebResource(WebResource webResource); 
+    Long getNumberOfSSPFromWebResource(WebResource webResource, int httpStatusCode);
 
     /**
      *
@@ -136,6 +136,7 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      */
     List<Long> getSSPFromWebResource(  
             Long webResourceId,
+            int httpStatusCode,
             int start,
             int chunkSize);
 

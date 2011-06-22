@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 import junit.framework.TestCase;
+import org.apache.http.HttpStatus;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.SSP;
@@ -86,7 +87,7 @@ public class CrawlerServiceImplTest extends TestCase {
         Site site = webResourceFactory.createSite(siteUrl);
         site.setAudit(auditFactory.create());
         site = crawlerService.crawl(site);
-        List<Long> contentListId = contentDataService.getSSPFromWebResource(site.getId(), 0, 10);
+        List<Long> contentListId = contentDataService.getSSPFromWebResource(site.getId(), HttpStatus.SC_OK, 0, 10);
         List<Content> contentList = new ArrayList<Content>();
         for (Long id : contentListId) {
             Content content = contentDataService.readWithRelatedContent(id);
@@ -115,7 +116,7 @@ public class CrawlerServiceImplTest extends TestCase {
         Page page = webResourceFactory.createPage(siteUrl);
         page.setAudit(auditFactory.create());
         page = crawlerService.crawl(page);
-        List<Long> contentListId = contentDataService.getSSPFromWebResource(page.getId(), 0, 10);
+        List<Long> contentListId = contentDataService.getSSPFromWebResource(page.getId(), HttpStatus.SC_OK, 0, 10);
         System.out.println("contentListId  " + contentListId.size());
         List<Content> contentList = new ArrayList<Content>();
         for (Long id : contentListId) {
@@ -140,7 +141,7 @@ public class CrawlerServiceImplTest extends TestCase {
         Site site = webResourceFactory.createSite(siteUrl);
         site.setAudit(auditFactory.create());
         site = crawlerService.crawl(site);
-        List<Long> contentListId = contentDataService.getSSPFromWebResource(site.getId(), 0, 10);
+        List<Long> contentListId = contentDataService.getSSPFromWebResource(site.getId(), HttpStatus.SC_OK, 0, 10);
         List<Content> contentList = new ArrayList<Content>();
         for (Long id : contentListId) {
             contentList.add(contentDataService.readWithRelatedContent(id));

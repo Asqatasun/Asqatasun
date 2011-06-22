@@ -6,11 +6,9 @@
 package org.opens.tanaguru.entity.dao.audit;
 
 import java.util.List;
+import org.apache.http.HttpStatus;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.Content;
-import org.opens.tanaguru.entity.audit.ImageContent;
-import org.opens.tanaguru.entity.audit.RelatedContent;
-import org.opens.tanaguru.entity.audit.StylesheetContent;
 import org.opens.tanaguru.entity.dao.subject.WebResourceDAO;
 import org.opens.tanaguru.entity.dao.test.AbstractDaoTestCase;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -54,13 +52,15 @@ public class ContentDAOImplTest extends AbstractDaoTestCase {
 
     public void testFindNumberOfSSPFromWebResource() {
         WebResource wr = webresourceDAO.read(Long.valueOf(1));
-        assertEquals(Long.valueOf(0), contentDAO.findNumberOfSSPFromWebResource(wr));
+        assertEquals(Long.valueOf(0), contentDAO.findNumberOfSSPFromWebResource(wr, HttpStatus.SC_OK));
         wr = webresourceDAO.read(Long.valueOf(2));
-        assertEquals(Long.valueOf(0), contentDAO.findNumberOfSSPFromWebResource(wr));
+        assertEquals(Long.valueOf(0), contentDAO.findNumberOfSSPFromWebResource(wr, HttpStatus.SC_OK));
         wr = webresourceDAO.read(Long.valueOf(8));
-        assertEquals(Long.valueOf(2), contentDAO.findNumberOfSSPFromWebResource(wr));
+        assertEquals(Long.valueOf(1), contentDAO.findNumberOfSSPFromWebResource(wr,HttpStatus.SC_OK));
+        assertEquals(Long.valueOf(0), contentDAO.findNumberOfSSPFromWebResource(wr,HttpStatus.SC_BAD_GATEWAY));
+        assertEquals(Long.valueOf(2), contentDAO.findNumberOfSSPFromWebResource(wr,-1));
         wr = webresourceDAO.read(Long.valueOf(12));
-        assertEquals(Long.valueOf(0), contentDAO.findNumberOfSSPFromWebResource(wr));
+        assertEquals(Long.valueOf(0), contentDAO.findNumberOfSSPFromWebResource(wr,HttpStatus.SC_OK));
     }
 
     public void testHasContent(){

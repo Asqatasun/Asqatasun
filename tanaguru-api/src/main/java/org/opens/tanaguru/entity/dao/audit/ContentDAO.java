@@ -103,7 +103,7 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      * @param webResource
      * @return
      */
-    Long findNumberOfSSPFromWebResource(WebResource webResource);
+    Long findNumberOfSSPFromWebResource(WebResource webResource, int httpStatusCode);
 
     /**
      * 
@@ -135,6 +135,7 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      */
     List<Long> getSSPFromWebResource(
             Long webResourceId,
+            int httpStatusCode,
             int start,
             int chunkSize);
 

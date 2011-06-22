@@ -215,7 +215,9 @@ public class CrawlerServiceImpl implements CrawlerService {
      * @param audit
      */
     private void setAuditToContent(WebResource wr, Audit audit) {
-        Long nbOfContent = contentDataService.getNumberOfSSPFromWebResource(wr);
+        // httpStatusCode = -1 means all.
+        int httpStatusCode = -1;
+        Long nbOfContent = contentDataService.getNumberOfSSPFromWebResource(wr, httpStatusCode);
         Long i = Long.valueOf(0);
         Date endProcessDate = null;
         Date beginProcessDate = null;
@@ -228,7 +230,7 @@ public class CrawlerServiceImpl implements CrawlerService {
                         + i + " to " + (i + PROCESS_WINDOW));
             }
             List<Long> contentIdList =
-                    contentDataService.getSSPFromWebResource(wr.getId(), i.intValue(), PROCESS_WINDOW);
+                    contentDataService.getSSPFromWebResource(wr.getId(), httpStatusCode, i.intValue(), PROCESS_WINDOW);
             if (LOGGER.isDebugEnabled()) {
                 endProcessDate = Calendar.getInstance().getTime();
                 LOGGER.debug("Retrieving  " + PROCESS_WINDOW + " SSP took "

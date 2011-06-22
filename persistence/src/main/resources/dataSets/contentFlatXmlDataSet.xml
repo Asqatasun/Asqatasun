@@ -22,7 +22,7 @@
     <CONTENT DTYPE="RelatedContentImpl"     Id_Content="6" Uri="http://www.open-s.com/unknown" Http_Status_Code="-1" Id_Audit="1"/>
     <CONTENT DTYPE="SSPImpl"                Id_Content="7" Uri="http://www.open-s.com/2.html" Id_Page="2" Http_Status_Code="-1" Id_Audit="2"/>
     <CONTENT DTYPE="StylesheetContentImpl"  Id_Content="8" Uri="http://www.open-s.com/css.css" Http_Status_Code="-1" Id_Audit="2"/>
-    <CONTENT DTYPE="SSPImpl"                Id_Content="9" Uri="http://www.open-s.com/1.html" Source="blabla" Adapted_Content="blabla" Id_Page="9" Http_Status_Code="200" Id_Audit="3"/>
+    <CONTENT DTYPE="SSPImpl"                Id_Content="9" Uri="http://www.open-s.com/1.html" Source="blabla" Adapted_Content="blabla" Id_Page="9" Http_Status_Code="404" Id_Audit="3"/>
     <CONTENT DTYPE="SSPImpl"                Id_Content="10" Uri="http://www.open-s.com/2.html" Id_Page="10" Http_Status_Code="200" Id_Audit="3"/>
     <CONTENT DTYPE="StylesheetContentImpl"  Id_Content="11" Uri="http://www.open-s.com/css.css" Http_Status_Code="200" Id_Audit="3"/>
     <CONTENT DTYPE="ImageContentImpl"       Id_Content="12" Uri="http://www.open-s.com/image.jpg" Http_Status_Code="200" Id_Audit="3"/>

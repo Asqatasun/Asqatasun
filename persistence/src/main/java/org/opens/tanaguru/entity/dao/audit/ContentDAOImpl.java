@@ -45,9 +45,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             +" FROM CONTENT ssp"
             +" INNER JOIN WEB_RESOURCE page ON ssp.Id_Page = page.Id_Web_Resource"
             +" WHERE ssp.DTYPE = \'SSPImpl\'"
-            +" AND (page.Id_Web_Resource =:idWebResource OR page.Id_Web_Resource_Parent =:idWebResource)"
-            +" AND ssp.Http_Status_Code <> -1"
-            +" LIMIT :start , :chunkSize ";
+            +" AND (page.Id_Web_Resource =:idWebResource OR page.Id_Web_Resource_Parent =:idWebResource)";
     private static final String SELECT_RELATED_CONTENT_QUERY =
             "SELECT relatedContent2.Id_Content "
             +" FROM CONTENT ssp"
@@ -58,7 +56,10 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             +" AND (page.Id_Web_Resource =:idWebResource OR page.Id_Web_Resource_Parent =:idWebResource)"
             +" AND ssp.Http_Status_Code<>-1"
             +" LIMIT :start , :chunkSize ";
-
+    private static final String LIMIT_OPTION = " LIMIT :start , :chunkSize ";
+    private static final String HTTP_STATUS_EQUAL_OPTION = " AND ssp.Http_Status_Code = :httpStatusCode";
+    private static final String HTTP_STATUS_NOT_EQUAL_OPTION = " AND ssp.Http_Status_Code != :httpStatusCode";
+    
     public ContentDAOImpl() {
         super();
     }
@@ -288,29 +289,33 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
     }
 
     @Override
-    public Long findNumberOfSSPFromWebResource(WebResource webResource) {
-        if (webResource instanceof Page) {
-            Query query = entityManager.createQuery(
-                    "SELECT count(distinct s.id) FROM "
-                    + SSPImpl.class.getName() + " s"
-                    + " JOIN s.page w"
-                    + " WHERE w=:webResource"
-                    + " AND s.httpStatusCode !=:httpStatusCode");
-            query.setParameter("webResource", webResource);
-            query.setParameter("httpStatusCode", DEFAULT_HTTP_STATUS_VALUE);
-            return (Long) query.getSingleResult();
-        } else if (webResource instanceof Site) {
-            Query query = entityManager.createQuery(
-                    "SELECT count(distinct s.id) FROM "
-                    + SSPImpl.class.getName() + " s"
-                    + " JOIN s.page w"
-                    + " WHERE w.parent.id=:idWebResource"
-                    + " AND s.httpStatusCode !=:httpStatusCode");
+    public Long findNumberOfSSPFromWebResource(WebResource webResource, int httpStatusCode) {
+        if (webResource != null) {
+            StringBuilder strb = new StringBuilder();
+            strb.append("SELECT count(distinct s.id) FROM ");
+            strb.append(SSPImpl.class.getName());
+            strb.append(" s");
+            strb.append(" JOIN s.page w");
+            System.out.println("webResource  " + webResource.getClass());
+            if (webResource instanceof Page) {
+                System.out.println("je rentre la");
+                strb.append(" WHERE w.id=:idWebResource");
+            } else if (webResource instanceof Site) {
+                System.out.println("ou plutot ici");
+                strb.append(" WHERE w.parent.id=:idWebResource");
+            }
+            if (httpStatusCode != -1) {
+                strb.append(" AND s.httpStatusCode=:httpStatusCode");
+            } else {
+                strb.append(" AND s.httpStatusCode!=:httpStatusCode");
+            }
+            Query query = entityManager.createQuery(strb.toString());
             query.setParameter("idWebResource", webResource.getId());
-            query.setParameter("httpStatusCode", DEFAULT_HTTP_STATUS_VALUE);
+            query.setParameter("httpStatusCode", httpStatusCode);
             return (Long) query.getSingleResult();
+        } else {
+            return Long.valueOf(0);
         }
-        return Long.valueOf(0);
     }
 
     @Override
@@ -422,11 +427,21 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
     @Override
     public List<Long> getSSPFromWebResource(
             Long webResourceId,
+            int httpStatusCode,
             int start,
             int chunkSize) {
         if (webResourceId != null) {
-            Query query = entityManager.createNativeQuery(SELECT_SSP_QUERY);
+            StringBuilder strb = new StringBuilder();
+            strb.append(SELECT_SSP_QUERY);
+            if (httpStatusCode != -1) {
+               strb.append(HTTP_STATUS_EQUAL_OPTION);
+            } else {
+                strb.append(HTTP_STATUS_NOT_EQUAL_OPTION);
+            }
+            strb.append(LIMIT_OPTION);
+            Query query = entityManager.createNativeQuery(strb.toString());
             query.setParameter("idWebResource", webResourceId);
+            query.setParameter("httpStatusCode", httpStatusCode);
             query.setParameter("start", start);
             query.setParameter("chunkSize", chunkSize);
             List<Long> idList = new ArrayList<Long>();

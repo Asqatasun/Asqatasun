@@ -85,8 +85,8 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
     }
 
     @Override
-    public Long getNumberOfSSPFromWebResource(WebResource webResource) {
-        return ((ContentDAO) entityDao).findNumberOfSSPFromWebResource(webResource);
+    public Long getNumberOfSSPFromWebResource(WebResource webResource, int httpStatusCode) {
+        return ((ContentDAO) entityDao).findNumberOfSSPFromWebResource(webResource, httpStatusCode);
     }
 
     @Override
@@ -108,10 +108,12 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
     @Override
     public List<Long> getSSPFromWebResource(
             Long webResourceId,
+            int httpStatusCode,
             int start,
             int chunkSize) {
         return ((ContentDAO) entityDao).getSSPFromWebResource(
                 webResourceId,
+                httpStatusCode,
                 start,
                 chunkSize);
     }

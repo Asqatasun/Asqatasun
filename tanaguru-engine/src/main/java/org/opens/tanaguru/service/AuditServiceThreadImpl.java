@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
+import org.apache.commons.httpclient.HttpStatus;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.contentadapter.AdaptationListener;
 import org.opens.tanaguru.entity.audit.Audit;
@@ -208,9 +208,9 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         //
 
         boolean hasCorrectedDOM = false;
-        Long nbOfContent = contentDataService.findNumberOfSSPContentFromAudit(audit);
         Long i = Long.valueOf(0);
         Long webResourceId = audit.getSubject().getId();
+        Long nbOfContent = contentDataService.getNumberOfSSPFromWebResource(audit.getSubject(), HttpStatus.SC_OK);
         List<Long> contentIdList = new ArrayList<Long>();
         List<Content> contentList = new ArrayList<Content>();
         // Some actions have to be realized when the adaptation starts
@@ -227,8 +227,12 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
             contentIdList =
                     contentDataService.getSSPFromWebResource(
                     webResourceId,
+                    HttpStatus.SC_OK,
                     i.intValue(),
                     ADAPTATION_TREATMENT_WINDOW);
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Retrieved " +contentIdList.size() + " Ids ");
+            }
             contentList.clear();
             for (Long id : contentIdList) {
                 Content content = contentDataService.read(id);
@@ -244,7 +248,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
                     }
                 }
                 endRetrieveDate = Calendar.getInstance().getTime();
-                LOGGER.debug("Retrieving  " + ADAPTATION_TREATMENT_WINDOW + " SSP took "
+                LOGGER.debug("Retrieving  " + contentList.size() + " SSP took "
                         + (endRetrieveDate.getTime() - beginProcessDate.getTime())
                         + " ms and working on " + length + " characters");
             }
@@ -252,13 +256,12 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
             contentSet.addAll(contentAdapterService.adaptContent(contentList));
             if (LOGGER.isDebugEnabled()) {
                 endProcessDate = Calendar.getInstance().getTime();
-                LOGGER.debug("Adapting  " + ADAPTATION_TREATMENT_WINDOW + " SSP took "
+                LOGGER.debug("Adapting  " + contentList.size() + " SSP took "
                         + (endProcessDate.getTime() - endRetrieveDate.getTime())
                         + " ms " + contentSet.size());
             }
 
             for (Content content : contentSet) {
-//                contentDataService.saveOrUpdate(content);
                 if (content instanceof SSP) {
                     if (!((SSP) content).getDOM().isEmpty()) {
                         if (!hasCorrectedDOM) {
@@ -275,16 +278,16 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
                 }
                 contentDataService.saveOrUpdate(content);
             }
-            contentSet.clear();
-            contentList.clear();
             if (LOGGER.isDebugEnabled()) {
                 endPersistDate = Calendar.getInstance().getTime();
-                LOGGER.debug("Persisting  " + ADAPTATION_TREATMENT_WINDOW + " SSP took "
+                LOGGER.debug("Persisting  " + contentSet.size() + " SSP took "
                         + (endPersistDate.getTime() - endProcessDate.getTime())
                         + " ms");
                 persistenceDuration = persistenceDuration
                         + (endPersistDate.getTime() - endProcessDate.getTime());
             }
+            contentSet.clear();
+            contentList.clear();
             i = i + ADAPTATION_TREATMENT_WINDOW;
             // explicit call of the Gc
             System.gc();
@@ -328,9 +331,9 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         Long persistenceDuration = Long.valueOf(0);
         //
 
-        Long nbOfContent = contentDataService.findNumberOfSSPContentFromAudit(audit);
         Long i = Long.valueOf(0);
         Long webResourceId = audit.getSubject().getId();
+        Long nbOfContent = contentDataService.getNumberOfSSPFromWebResource(audit.getSubject(), HttpStatus.SC_OK);
         List<Long> contentIdList = new ArrayList<Long>();
         List<Content> contentList = new ArrayList<Content>();
         Set<ProcessResult> processResultSet = new HashSet<ProcessResult>();
@@ -343,6 +346,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
             contentIdList =
                     contentDataService.getSSPFromWebResource(
                     webResourceId,
+                    HttpStatus.SC_OK,
                     i.intValue(),
                     PROCESSING_TREATMENT_WINDOW);
             contentList.clear();
