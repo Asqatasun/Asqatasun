@@ -476,8 +476,6 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     private String computeDescendantSelector(DescendantSelector ds) {
         StringBuilder selectorValue = new StringBuilder();
         if (ds != null) {
-            System.out.println(ds.getAncestorSelector());
-            System.out.println(ds.getSimpleSelector());
             if (ds.getAncestorSelector() != null && ds.getAncestorSelector() instanceof DescendantSelector) {
                 selectorValue.append(computeDescendantSelector((DescendantSelector)ds.getAncestorSelector()));
             } else if (ds.getAncestorSelector() != null && ds.getAncestorSelector() instanceof ConditionalSelector) {

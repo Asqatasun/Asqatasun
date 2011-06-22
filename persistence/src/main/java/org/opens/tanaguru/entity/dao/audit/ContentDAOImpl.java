@@ -296,12 +296,9 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             strb.append(SSPImpl.class.getName());
             strb.append(" s");
             strb.append(" JOIN s.page w");
-            System.out.println("webResource  " + webResource.getClass());
             if (webResource instanceof Page) {
-                System.out.println("je rentre la");
                 strb.append(" WHERE w.id=:idWebResource");
             } else if (webResource instanceof Site) {
-                System.out.println("ou plutot ici");
                 strb.append(" WHERE w.parent.id=:idWebResource");
             }
             if (httpStatusCode != -1) {
