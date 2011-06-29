@@ -41,7 +41,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
     private static final int ANALYSE_TREATMENT_WINDOW = 50;
     private static final int PROCESSING_TREATMENT_WINDOW = 25;
     private static final int ADAPTATION_TREATMENT_WINDOW = 25;
-    private static final int CONSOLIDATION_TREATMENT_WINDOW = 50;
+    private static final int CONSOLIDATION_TREATMENT_WINDOW = 1000;
     protected Audit audit;
     private final AuditDataService auditDataService;
 
@@ -187,6 +187,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
     public void loadContent() {
     }
 
+    @Override
     public void adaptContent() {
         audit = auditDataService.getAuditWithWebResource(audit.getId());
         if (!audit.getStatus().equals(AuditStatus.CONTENT_ADAPTING)) {
@@ -440,10 +441,50 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
             LOGGER.debug("Consolidation");
             beginProcessDate = Calendar.getInstance().getTime();
         }
+        if (audit.getSubject() instanceof Page) {
+            consolidate((List<ProcessResult>) processResultDataService.
+                    getGrossResultFromAudit(audit), (List<Test>)audit.getTestList());
+            if (LOGGER.isDebugEnabled()) {
+                endProcessDate = Calendar.getInstance().getTime();
+                LOGGER.debug("Consolidating took " + (endProcessDate.getTime()-beginProcessDate.getTime()) + " ms");
+            }
+        } else if (audit.getSubject() instanceof Site) {
+            List<Test> testList = new ArrayList<Test>();
+            for (Test test : audit.getTestList()) {
+                testList.add(test);
+
+                List<ProcessResult> prList= (List<ProcessResult>) processResultDataService.
+                        getGrossResultFromAuditAndTest(audit, test);
+                consolidate(prList, testList);
+            }
+            if (LOGGER.isDebugEnabled()) {
+                endProcessDate = Calendar.getInstance().getTime();
+                LOGGER.debug("Consolidating took " + (endProcessDate.getTime()-beginProcessDate.getTime()) + " ms");
+            }
+        }
+        audit = auditDataService.saveOrUpdate(audit);
+        if (LOGGER.isDebugEnabled()) {
+            endPersistDate = Calendar.getInstance().getTime();
+            LOGGER.debug("Persisting Consolidation of the audit took"
+                    + (endPersistDate.getTime() - endProcessDate.getTime())
+                    + " ms");
+        }
+    }
+
+    private void consolidate(List<ProcessResult> prList, List<Test> testList) {
         Set<ProcessResult> processResultSet = new HashSet<ProcessResult>();
+        if (LOGGER.isDebugEnabled()) {
+            if (testList.size() == 1) {
+                LOGGER.debug("Consolidate " + prList.size() +
+                        " elements for test "  + testList.iterator().next().getCode());
+            } else {
+                LOGGER.debug("Consolidate " + prList.size() +
+                        " elements for " + testList.size()+ " tests ");
+            }
+        }
         processResultSet.addAll(consolidatorService.consolidate(
-                (List<ProcessResult>) processResultDataService.getGrossResultFromAudit(audit),
-                (List<Test>) audit.getTestList()));
+                prList,
+                testList));
         // To avoid errors with processResult of Site Type in case of page audit
         Set<ProcessResult> resultToRemoveSet = new HashSet<ProcessResult>();
         for (ProcessResult processResult : processResultSet) {
@@ -463,13 +504,6 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
             LOGGER.warn("Audit has no net result");
             audit.setStatus(AuditStatus.ERROR);
         }
-
-        if (LOGGER.isDebugEnabled()) {
-            endProcessDate = Calendar.getInstance().getTime();
-            LOGGER.debug("Consolidation of this audit took"
-                    + (endProcessDate.getTime() - beginProcessDate.getTime())
-                    + " ms");
-        }
         Iterator<ProcessResult> iter = processResultSet.iterator();
         Set<ProcessResult> processResultSubset = new HashSet<ProcessResult>();
         int i = 0;
@@ -479,20 +513,15 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
             if (i % CONSOLIDATION_TREATMENT_WINDOW == 0) {
                 if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug("Persisting Consolidation from " + i + " to "
-                            + CONSOLIDATION_TREATMENT_WINDOW);
+                            + (i+CONSOLIDATION_TREATMENT_WINDOW));
                 }
                 processResultDataService.saveOrUpdate(processResultSubset);
                 processResultSubset.clear();
             }
         }
         processResultDataService.saveOrUpdate(processResultSubset);
-        audit = auditDataService.saveOrUpdate(audit);
-        if (LOGGER.isDebugEnabled()) {
-            endPersistDate = Calendar.getInstance().getTime();
-            LOGGER.debug("Persisting Consolidation of the audit took"
-                    + (endPersistDate.getTime() - endProcessDate.getTime())
-                    + " ms");
-        }
+        testList.clear();
+        System.gc();
     }
 
     @Override
@@ -623,4 +652,5 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
             listener.auditCrashed(this, t);
         }
     }
+
 }

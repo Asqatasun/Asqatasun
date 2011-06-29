@@ -7,6 +7,7 @@ import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Scope;
+import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.subject.WebResource;
 
@@ -25,7 +26,7 @@ public interface ProcessResultDataService extends
      * @param theme
      * @return
      */
-    public int getResultByThemeCount(
+    int getResultByThemeCount(
             WebResource webresource,
             TestSolution testSolution,
             Theme theme);
@@ -37,7 +38,7 @@ public interface ProcessResultDataService extends
      * @param scope
      * @return
      */
-    public Collection<ProcessResult> getResultByScopeList(
+    Collection<ProcessResult> getResultByScopeList(
             WebResource webresource,
             Scope scope);
 
@@ -46,28 +47,35 @@ public interface ProcessResultDataService extends
      * @param audit
      * @return
      */
-    public Long getNumberOfGrossResultFromAudit(Audit audit);
+    Long getNumberOfGrossResultFromAudit(Audit audit);
 
     /**
      *
      * @param audit
      * @return
      */
-    public Long getNumberOfNetResultFromAudit(Audit audit);
+    Long getNumberOfNetResultFromAudit(Audit audit);
 
     /**
      *
      * @param audit
      * @return
      */
-    public List<? extends ProcessResult> getGrossResultFromAudit(Audit audit);
+    List<? extends ProcessResult> getGrossResultFromAudit(Audit audit);
 
     /**
      *
      * @param audit
      * @return
      */
-    public List<? extends ProcessResult> getNetResultFromAudit(Audit audit);
+    List<? extends ProcessResult> getGrossResultFromAuditAndTest(Audit audit, Test test);
+
+    /**
+     *
+     * @param audit
+     * @return
+     */
+    List<? extends ProcessResult> getNetResultFromAudit(Audit audit);
 
     /**
      * 
@@ -75,5 +83,5 @@ public interface ProcessResultDataService extends
      * @param webResource
      * @return
      */
-    public List<? extends ProcessResult> getNetResultFromAuditAndWebResource(Audit audit, WebResource webResource);
+    List<? extends ProcessResult> getNetResultFromAuditAndWebResource(Audit audit, WebResource webResource);
 }

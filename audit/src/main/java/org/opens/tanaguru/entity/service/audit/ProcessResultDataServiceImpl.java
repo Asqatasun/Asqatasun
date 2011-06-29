@@ -8,6 +8,7 @@ import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.dao.audit.ProcessResultDAO;
 import org.opens.tanaguru.entity.reference.Scope;
+import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.subject.WebResource;
 
@@ -54,4 +55,10 @@ public class ProcessResultDataServiceImpl extends AbstractGenericDataService<Pro
     public List<? extends ProcessResult> getNetResultFromAuditAndWebResource(Audit audit, WebResource webResource) {
         return ((ProcessResultDAO) entityDao).retrieveNetResultFromAuditAndWebResource(audit, webResource);
     }
+    
+    @Override
+    public List<? extends ProcessResult> getGrossResultFromAuditAndTest(Audit audit, Test test) {
+        return ((ProcessResultDAO) entityDao).retrieveGrossResultFromAuditAndTest(audit, test);
+    }
+
 }

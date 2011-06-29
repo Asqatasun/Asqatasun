@@ -7,6 +7,7 @@ import java.util.List;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Scope;
+import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.subject.WebResource;
 
@@ -25,7 +26,7 @@ public interface ProcessResultDAO extends GenericDAO<ProcessResult, Long> {
      * @param theme
      * @return
      */
-    public int getResultByThemeCount(
+    int getResultByThemeCount(
             WebResource webresource,
             TestSolution testSolution,
             Theme theme);
@@ -37,7 +38,7 @@ public interface ProcessResultDAO extends GenericDAO<ProcessResult, Long> {
      * @param scope
      * @return
      */
-    public Collection<ProcessResult> getResultByScopeList(
+    Collection<ProcessResult> getResultByScopeList(
             WebResource webresource,
             Scope scope);
 
@@ -46,28 +47,28 @@ public interface ProcessResultDAO extends GenericDAO<ProcessResult, Long> {
      * @param audit
      * @return
      */
-    public Long retrieveNumberOfGrossResultFromAudit(Audit audit);
+    Long retrieveNumberOfGrossResultFromAudit(Audit audit);
 
     /**
      *
      * @param audit
      * @return
      */
-    public Long retrieveNumberOfNetResultFromAudit(Audit audit);
+    Long retrieveNumberOfNetResultFromAudit(Audit audit);
 
     /**
      *
      * @param audit
      * @return
      */
-    public List<? extends ProcessResult> retrieveGrossResultFromAudit(Audit audit);
+    List<? extends ProcessResult> retrieveGrossResultFromAudit(Audit audit);
 
     /**
      *
      * @param audit
      * @return
      */
-    public List<? extends ProcessResult> retrieveNetResultFromAudit(Audit audit);
+    List<? extends ProcessResult> retrieveNetResultFromAudit(Audit audit);
 
     /**
      * 
@@ -75,6 +76,18 @@ public interface ProcessResultDAO extends GenericDAO<ProcessResult, Long> {
      * @param webResource
      * @return
      */
-    public List<? extends ProcessResult> retrieveNetResultFromAuditAndWebResource(Audit audit, WebResource webResource);
+    List<? extends ProcessResult> retrieveNetResultFromAuditAndWebResource(
+            Audit audit,
+            WebResource webResource);
+
+    /**
+     *
+     * @param audit
+     * @param test
+     * @return
+     */
+    List<? extends ProcessResult> retrieveGrossResultFromAuditAndTest(
+            Audit audit,
+            Test test);
 
 }

@@ -12,6 +12,7 @@ import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.DefiniteResultImpl;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Scope;
+import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.subject.WebResource;
 
@@ -119,6 +120,20 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
                 + " pr.subject = :webResource");
         query.setParameter("audit", audit);
         query.setParameter("webResource", webResource);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<? extends ProcessResult> retrieveGrossResultFromAuditAndTest(Audit audit, Test test) {
+        Query query = entityManager.createQuery("SELECT pr FROM "
+                + getEntityClass().getName() + " pr "
+                + " LEFT JOIN FETCH pr.subject"
+                + " LEFT JOIN FETCH pr.test as t"
+                + " WHERE "
+                + " pr.grossResultAudit = :audit"
+                + " AND t=:test");
+        query.setParameter("audit", audit);
+        query.setParameter("test", test);
         return query.getResultList();
     }
 
