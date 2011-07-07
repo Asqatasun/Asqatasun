@@ -456,6 +456,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
                 List<ProcessResult> prList= (List<ProcessResult>) processResultDataService.
                         getGrossResultFromAuditAndTest(audit, test);
                 consolidate(prList, testList);
+		testList.clear();
             }
             if (LOGGER.isDebugEnabled()) {
                 endProcessDate = Calendar.getInstance().getTime();
