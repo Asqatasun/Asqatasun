@@ -520,7 +520,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
             }
         }
         processResultDataService.saveOrUpdate(processResultSubset);
-        testList.clear();
+        processResultSubset.clear();
         System.gc();
     }
 
