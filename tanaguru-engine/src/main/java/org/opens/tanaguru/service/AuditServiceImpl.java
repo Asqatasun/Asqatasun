@@ -11,8 +11,10 @@ import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import java.util.List;
 import java.util.Set;
 import org.opens.tanaguru.contentadapter.AdaptationListener;
+import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
+import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -32,6 +34,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
     private TestDataService testDataService;
     private WebResourceDataService webResourceDataService;
     private ContentDataService contentDataService;
+    private ParameterDataService parameterDataService;
     private AuditServiceThreadFactory auditServiceThreadFactory;
     private AuditServiceThreadQueue auditServiceThreadQueue;
     private Set<AuditServiceListener> listeners;
@@ -66,37 +69,45 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
     }
 
     @Override
-    public Audit auditPage(String pageUrl, String[] testCodeList) {
+    public Audit auditPage(String pageUrl, String[] testCodeList, Set<Parameter> paramSet) {
         Page page = webResourceDataService.createPage(pageUrl);
 
         List<Test> testList = testDataService.findAllByCode(testCodeList);
+
+        // the paramSet has to be persisted
+        parameterDataService.saveOrUpdate(paramSet);
 
         Audit audit = auditDataService.create();
         audit.setSubject(page);
         audit.setTestList(testList);
         audit.setStatus(AuditStatus.CRAWLING);
+        audit.setParameterSet(paramSet);
         
         auditServiceThreadQueue.addPageAudit(audit);
         return audit;
     }
 
     @Override
-    public Audit auditSite(String siteUrl, String[] testCodeList) {
+    public Audit auditSite(String siteUrl, String[] testCodeList, Set<Parameter> paramSet) {
         Site site = webResourceDataService.createSite(siteUrl);
 
         List<Test> testList = testDataService.findAllByCode(testCodeList);
+
+        // the paramSet has to be persisted
+        parameterDataService.saveOrUpdate(paramSet);
 
         Audit audit = auditDataService.create();
         audit.setSubject(site);
         audit.setTestList(testList);
         audit.setStatus(AuditStatus.CRAWLING);
+        audit.setParameterSet(paramSet);
 
         auditServiceThreadQueue.addSiteAudit(audit);
         return audit;
     }
 
     @Override
-    public Audit auditSite(String siteUrl, String[] pageUrlList, String[] testCodeList) {
+    public Audit auditSite(String siteUrl, String[] pageUrlList, String[] testCodeList, Set<Parameter> paramSet) {
         Site site = webResourceDataService.createSite(siteUrl);
         for (String pageUrl : pageUrlList) {
             site.addChild(webResourceDataService.createPage(pageUrl));
@@ -104,11 +115,15 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
 
         List<Test> testList = testDataService.findAllByCode(testCodeList);
 
+        // the paramSet has to be persisted
+        parameterDataService.saveOrUpdate(paramSet);
+        
         Audit audit = auditDataService.create();
         audit.setSubject(site);
         audit.setTestList(testList);
         audit.setStatus(AuditStatus.CRAWLING);
-
+        audit.setParameterSet(paramSet);
+        
         auditServiceThreadQueue.addPageAudit(audit);
         return audit;
     }
@@ -246,6 +261,10 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
     public void setAdaptationListener(
             AdaptationListener adaptationListener) {
         this.adaptationListener = adaptationListener;
+    }
+
+    public void setParameterDataService(ParameterDataService parameterDataService) {
+        this.parameterDataService = parameterDataService;
     }
 
     @Override

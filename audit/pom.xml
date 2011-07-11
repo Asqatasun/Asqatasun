@@ -11,10 +11,23 @@
     <name>audit</name>
     <version>${applicationVersion}</version>
     <url>http://www.tanaguru.org</url>
+    <repositories>
+        <repository>
+            <url>http://download.java.net/maven/2/</url>
+            <id>hibernate-persistence</id>
+            <layout>default</layout>
+            <name>Repository for library Library[hibernate-persistence]</name>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>${applicationGroupId}</groupId>
             <artifactId>reference</artifactId>
+            <version>${applicationVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>${applicationGroupId}</groupId>
+            <artifactId>parameterization</artifactId>
             <version>${applicationVersion}</version>
         </dependency>
         <dependency>
@@ -25,6 +38,27 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <scope>compile</scope>
+            <version>3.3.2.GA</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate</artifactId>
+            <version>3.2.5.ga</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>ejb3-persistence</artifactId>
+            <version>1.0.1.GA</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.sql</groupId>
+            <artifactId>jdbc-stdext</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>jta</artifactId>
+            <version>1.0.1B</version>
         </dependency>
     </dependencies>
     <properties>

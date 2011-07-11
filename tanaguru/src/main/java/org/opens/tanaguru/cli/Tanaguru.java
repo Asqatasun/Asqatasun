@@ -12,9 +12,13 @@ import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ProcessRemarkDataService;
 import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
+import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
+import org.opens.tanaguru.entity.service.parameterization.ParameterElementDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -39,6 +43,8 @@ public class Tanaguru implements AuditServiceListener {
     private WebResourceDataService webResourceDataService = null;
     private ProcessResultDataService processResultDataService = null;
     private ProcessRemarkDataService processRemarkDataService = null;
+    private ParameterDataService parameterDataService = null;
+    private ParameterElementDataService parameterElementDataService = null;
     
     public static void main(String[] args) {
         if (args != null && args.length == 2 && args[0] != null && args[1] != null) {
@@ -59,6 +65,8 @@ public class Tanaguru implements AuditServiceListener {
         analyserService = (AnalyserService) springBeanFactory.getBean("analyserService");
         processResultDataService = (ProcessResultDataService) springBeanFactory.getBean("processResultDataService");
         processRemarkDataService = (ProcessRemarkDataService) springBeanFactory.getBean("processRemarkDataService");
+        parameterDataService = (ParameterDataService) springBeanFactory.getBean("parameterDataService");
+        parameterElementDataService = (ParameterElementDataService) springBeanFactory.getBean("parameterElementDataService");
         auditService.add(this);
         Properties props = new Properties();
         try {
@@ -66,13 +74,13 @@ public class Tanaguru implements AuditServiceListener {
         } catch (IOException ex) {
             Logger.getLogger(Tanaguru.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        Set<Parameter> paramSet = parameterDataService.getDefaultParameterSet();
         String[] pageUrlList = urlTab.split(";");
         String[] testCodeList = props.getProperty("testCodeList").split(";");
         if (pageUrlList.length > 1) {
-            auditService.auditSite("site:" + pageUrlList[0], pageUrlList, testCodeList);
+            auditService.auditSite("site:" + pageUrlList[0], pageUrlList, testCodeList, paramSet);
         } else {
-            auditService.auditPage(pageUrlList[0], testCodeList);
+            auditService.auditPage(pageUrlList[0], testCodeList, paramSet);
         }
     }
 
@@ -121,7 +129,22 @@ public class Tanaguru implements AuditServiceListener {
 
     @Override
     public void auditCrashed(Audit audit, Throwable exception) {
-        System.out.println("crash (id+message): " + audit.getId() + " " + exception.getMessage());
+        exception.printStackTrace();
+        System.out.println("crash (id+message): " + audit.getId() + " " + exception.fillInStackTrace());
+    }
+
+    /**
+     * The default parameter set embeds a depth value that corresponds to the
+     * site audit. We need here to replace this parameter by a parameter value
+     * equals to 0.
+     * @return
+     */
+    private Set<Parameter> getAuditPageParameterSet() {
+         ParameterElement parameterElement = parameterElementDataService.getParameterElement("DEPTH");
+         Parameter depthParameter = parameterDataService.getParameter(parameterElement, "0");
+         Set<Parameter> auditPageParamSet = parameterDataService.updateParameter(
+                 parameterDataService.getDefaultParameterSet(), depthParameter);
+         return auditPageParamSet;
     }
 
 }

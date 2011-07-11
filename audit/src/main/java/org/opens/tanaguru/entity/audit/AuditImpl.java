@@ -2,8 +2,8 @@ package org.opens.tanaguru.entity.audit;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,7 +16,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.TestImpl;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -27,16 +26,15 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.parameterization.ParameterImpl;
 
 @Entity
 @Table(name = "AUDIT")
 @XmlRootElement
-//@org.hibernate.annotations.Entity(
-//		selectBeforeUpdate = false,
-//		dynamicInsert = true,
-//		dynamicUpdate = true)
 public class AuditImpl implements Audit, Serializable {
 
+    private static final long serialVersionUID = -9109080857144047795L;
     @Column(name = "Comment")
     protected String comment;
     @OneToMany(mappedBy = "audit")
@@ -62,7 +60,12 @@ public class AuditImpl implements Audit, Serializable {
     @JoinColumn(name = "Id_Audit"), inverseJoinColumns =
     @JoinColumn(name = "Id_Test"))
     protected List<TestImpl> testList = new ArrayList<TestImpl>();
-
+    @ManyToMany
+    @JoinTable(name = "AUDIT_PARAMETER", joinColumns =
+    @JoinColumn(name = "Id_Audit"), inverseJoinColumns =
+    @JoinColumn(name = "Id_Parameter"))
+    protected List<ParameterImpl> parameterSet = new ArrayList<ParameterImpl>();
+    
     public AuditImpl() {
         super();
     }
@@ -237,4 +240,20 @@ public class AuditImpl implements Audit, Serializable {
     public void setTestList(List<? extends Test> testList) {
         this.testList = (List<TestImpl>) testList;
     }
+
+    @Override
+    public void setParameterSet(Collection<? extends Parameter> parameterSet){
+        this.parameterSet.addAll((Collection<ParameterImpl>)parameterSet);
+    }
+    
+    @Override
+    public void addParameter(Parameter parameter){
+        this.parameterSet.add((ParameterImpl)parameter);
+    }
+
+    @Override
+    public Collection<? extends Parameter> getParameterSet() {
+        return parameterSet;
+    }
+
 }
