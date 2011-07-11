@@ -3,7 +3,9 @@ package org.opens.tanaguru.entity.audit;
 import java.util.Date;
 
 import com.adex.sdk.entity.Entity;
+import java.util.Collection;
 import java.util.List;
+import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.subject.WebResource;
 
@@ -173,4 +175,22 @@ public interface Audit extends Entity {
      *            the test list to set
      */
     void setTestList(List<? extends Test> testList);
+
+    /**
+     * 
+     * @param parameterSet
+     */
+    void setParameterSet(Collection<? extends Parameter> parameterSet);
+
+    /**
+     * 
+     * @return
+     */
+    Collection<? extends Parameter> getParameterSet();
+
+    /**
+     * 
+     * @param parameter
+     */
+    void addParameter(Parameter parameter);
 }
