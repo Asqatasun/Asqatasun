@@ -7,7 +7,7 @@ INSERT IGNORE INTO `PARAMETER_FAMILY` (`Id_Parameter_Family`, `Cd_Parameter_Fami
 
 INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_Element`, `Id_Parameter_Family`, `Long_Label`, `Short_Label`) VALUES
 (1, 'MAX_DOCUMENTS', 1, 'Maximum number of downloaded pages', 'max pages'),
-(2, 'EXCLUSION_REGEX', 1, 'Regulard expression to exclude urls', 'exclusion regex'),
+(2, 'EXCLUSION_REGEXP', 1, 'Regulard expression to exclude urls', 'exclusion regex'),
 (3, 'DEPTH', 1, 'Maximum depth of the crawl', 'max depth'),
 (4, 'MAX_DURATION', 1, 'Maximum duration of the crawl', 'max duration');
 
