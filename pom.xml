@@ -27,6 +27,7 @@
         <module>tanaguru-resources</module>
         <module>logging</module>
         <module>tanaguru</module>
+        <module>parameterization</module>
         <!--<module>tanaguru-client</module>
         <module>tanaguru-ws</module>
         <module>tanaguru-ws-client</module>>
