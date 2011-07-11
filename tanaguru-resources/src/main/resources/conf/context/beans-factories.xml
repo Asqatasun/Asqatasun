@@ -12,6 +12,9 @@
     <bean id="indefiniteResultFactory" class="org.opens.tanaguru.entity.factory.audit.IndefiniteResultFactoryImpl"/>
     <bean id="levelFactory" class="org.opens.tanaguru.entity.factory.reference.LevelFactoryImpl"/>
     <bean id="nomenclatureFactory" class="org.opens.tanaguru.entity.factory.reference.NomenclatureFactoryImpl"/>
+    <bean id="parameterFactory" class="org.opens.tanaguru.entity.factory.parameterization.ParameterFactoryImpl"/>
+    <bean id="parameterElementFactory" class="org.opens.tanaguru.entity.factory.parameterization.ParameterElementFactoryImpl"/>
+    <bean id="parameterFamilyFactory" class="org.opens.tanaguru.entity.factory.parameterization.ParameterFamilyFactoryImpl"/>
     <bean id="processRemarkFactory" class="org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactoryImpl"/>
     <bean id="processResultFactory" class="org.opens.tanaguru.entity.factory.audit.ProcessResultFactoryImpl"/>
     <bean id="scopeFactory" class="org.opens.tanaguru.entity.factory.reference.ScopeFactoryImpl"/>

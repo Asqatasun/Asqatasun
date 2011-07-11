@@ -76,6 +76,23 @@
         <property name="entityFactory" ref="nomenclatureFactory"/>
     </bean>
 
+    <bean id="parameterDAO" class="org.opens.tanaguru.entity.dao.parameterization.ParameterDAOImpl"/>
+    <bean id="parameterDataService" class="org.opens.tanaguru.entity.service.parameterization.ParameterDataServiceImpl">
+        <property name="entityDao" ref="parameterDAO"/>
+        <property name="entityFactory" ref="parameterFactory"/>
+    </bean>
+
+    <bean id="parameterElementDAO" class="org.opens.tanaguru.entity.dao.parameterization.ParameterElementDAOImpl"/>
+    <bean id="parameterElementDataService" class="org.opens.tanaguru.entity.service.parameterization.ParameterElementDataServiceImpl">
+        <property name="entityDao" ref="parameterElementDAO"/>
+        <property name="entityFactory" ref="parameterElementFactory"/>
+    </bean>
+
+    <bean id="parameterFamilyDAO" class="org.opens.tanaguru.entity.dao.parameterization.ParameterFamilyDAOImpl"/>
+    <bean id="parameterFamilyDataService" class="org.opens.tanaguru.entity.service.parameterization.ParameterFamilyDataServiceImpl">
+        <property name="entityDao" ref="parameterFamilyDAO"/>
+        <property name="entityFactory" ref="parameterFamilyFactory"/>
+    </bean>
 
     <bean id="auditServiceThreadQueue" class="org.opens.tanaguru.service.AuditServiceThreadQueueImpl">
         <property name="pageAuditExecutionListMax" value="9"/>
@@ -111,7 +128,7 @@
         <property name="consolidatorService" ref="consolidatorService"/>
         <property name="analyserService" ref="analyserService"/>
         <property name="adaptationListener" ref="adaptationListener"/>
-
+        <property name="parameterDataService" ref="parameterDataService"/>
         <property name="auditServiceThreadQueue" ref="auditServiceThreadQueue"/>
         <property name="auditServiceThreadFactory" ref="auditServiceThreadFactory"/>
     </bean>

@@ -370,9 +370,80 @@ CREATE TABLE IF NOT EXISTS `WEB_RESOURCE` (
   KEY `FKD9A970B92F70FF12` (`Id_Web_Resource_Parent`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
---
--- Contraintes pour les tables exportées
---
+
+-- -----------------------------------------------------
+-- Table `PARAMETER_FAMILY`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `PARAMETER_FAMILY` (
+  `Id_Parameter_Family` BIGINT NOT NULL AUTO_INCREMENT,
+  `Cd_Parameter_Family` VARCHAR(255) NOT NULL ,
+  `Description` VARCHAR(255) NULL ,
+  `Long_Label` VARCHAR(255) NULL ,
+  `Short_Label` VARCHAR(255) NULL ,
+  PRIMARY KEY (`Id_Parameter_Family`),
+  UNIQUE INDEX `Cd_Parameter_Family_UNIQUE` (`Cd_Parameter_Family` ASC)
+)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `PARAMETER_ELEMENT`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `PARAMETER_ELEMENT` (
+  `Id_Parameter_Element` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `Cd_Parameter_Element` VARCHAR(255) NOT NULL ,
+  `Id_Parameter_Family` BIGINT(20) NOT NULL ,
+  `Short_Label` VARCHAR(255) NULL ,
+  `Long_Label` VARCHAR(255) NULL ,
+  PRIMARY KEY (`Id_Parameter_Element`) ,
+  INDEX `fk_PARAMETER_ELEMENT_PARAMETER` (`Id_Parameter_Family` ASC) ,
+  UNIQUE INDEX `Cd_Parameter_Element_UNIQUE` (`Cd_Parameter_Element` ASC) ,
+  CONSTRAINT `fk_PARAMETER_ELEMENT_PARAMETER`
+    FOREIGN KEY (`Id_Parameter_Family` )
+    REFERENCES `PARAMETER_FAMILY` (`Id_Parameter_Family` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+-- -----------------------------------------------------
+-- Table `PARAMETER`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `PARAMETER` (
+  `Id_Parameter` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `Parameter_Value` VARCHAR(1000) NOT NULL ,
+  `Id_Parameter_Element` BIGINT(20) NOT NULL ,
+  `Is_Default` BIT NULL DEFAULT 0 ,
+  PRIMARY KEY (`Id_Parameter`) ,
+  INDEX `fk_PARAMETER_PARAMETER_ELEMENT` (`Id_Parameter_Element` ASC) ,
+  CONSTRAINT `fk_PARAMETER_PARAMETER_ELEMENT`
+    FOREIGN KEY (`Id_Parameter_Element` )
+    REFERENCES `PARAMETER_ELEMENT` (`Id_Parameter_Element` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+-- -----------------------------------------------------
+-- Table `AUDIT_PARAMETER_VALUE`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `AUDIT_PARAMETER` (
+  `Id_Audit` BIGINT(20) NOT NULL ,
+  `Id_Parameter` BIGINT(20) NOT NULL ,
+  INDEX `fk_AUDIT_PARAMETER_AUDIT` (`Id_Audit` ASC) ,
+  INDEX `fk_AUDIT_PARAMETER_PARAMETER` (`Id_Parameter` ASC) ,
+  CONSTRAINT `fk_AUDIT_PARAMETER_AUDIT`
+    FOREIGN KEY (`Id_Audit` )
+    REFERENCES `AUDIT` (`Id_Audit` )
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_AUDIT_PARAMETER_PARAMETER`
+    FOREIGN KEY (`Id_Parameter` )
+    REFERENCES `PARAMETER` (`Id_Parameter` )
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 --
 -- Contraintes pour la table `AUDIT_TEST`
