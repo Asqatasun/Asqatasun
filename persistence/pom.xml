@@ -33,6 +33,11 @@
             <version>${applicationVersion}</version>
         </dependency>
         <dependency>
+            <groupId>${applicationGroupId}</groupId>
+            <artifactId>parameterization</artifactId>
+            <version>${applicationVersion}</version>
+        </dependency>
+        <dependency>
             <groupId>com.adex</groupId>
             <artifactId>commons-entity-jpa</artifactId>
             <version>${project.version}</version>
