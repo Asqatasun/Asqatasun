@@ -32,5 +32,11 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     <bean id="pageDAO" class="org.opens.tanaguru.entity.dao.subject.PageDAOImpl"/>
 
     <bean id="siteDAO" class="org.opens.tanaguru.entity.dao.subject.SiteDAOImpl"/>
+    
+    <bean id="parameterDAO" class="org.opens.tanaguru.entity.dao.parameterization.ParameterDAOImpl"/>
+
+    <bean id="parameterElementDAO" class="org.opens.tanaguru.entity.dao.parameterization.ParameterElementDAOImpl"/>
+
+    <bean id="parameterFamilyDAO" class="org.opens.tanaguru.entity.dao.parameterization.ParameterFamilyDAOImpl"/>
 
 </beans>

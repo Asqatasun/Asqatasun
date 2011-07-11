@@ -34,7 +34,7 @@ public abstract class AbstractDaoTestCase extends DBTestCase {
             "com.mysql.jdbc.Driver";
 
     private static final String SPRING_FILE_PATH =
-            "../persistence/src/main/resources/conf/context/web-app/application-context.xml";
+            "../persistence/src/main/resources/conf/context/unit-test-context.xml";
 
     private String inputDataFileName = "";
     public String getInputDataFileName() {

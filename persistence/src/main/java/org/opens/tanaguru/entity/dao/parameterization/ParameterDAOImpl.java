@@ -1,0 +1,121 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package org.opens.tanaguru.entity.dao.parameterization;
+
+import com.adex.sdk.entity.dao.jpa.AbstractJPADAO;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.Query;
+import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.audit.AuditImpl;
+import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.parameterization.ParameterElement;
+import org.opens.tanaguru.entity.parameterization.ParameterFamily;
+import org.opens.tanaguru.entity.parameterization.ParameterImpl;
+
+/**
+ *
+ * @author jkowalczyk
+ */
+public class ParameterDAOImpl extends AbstractJPADAO<Parameter, Long> implements
+        ParameterDAO {
+
+    @Override
+    protected Class<? extends Parameter> getEntityClass() {
+        return ParameterImpl.class;
+    }
+
+    @Override
+    public Set<Parameter> findParameterSet(ParameterFamily parameterFamily, Audit audit) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    /**
+     * The database has to contain only one default parameter value for a given
+     * parameter element. The control is made on application-side. The first
+     * encountered default value is considered as the default value.
+     *
+     * @return
+     *      the default parameter set.
+     */
+    @Override
+    public Set<Parameter> findDefaultParameterSet() {
+        Set<Parameter> paramSet = new LinkedHashSet<Parameter>();
+        Set<String> paramElementSet = new HashSet<String>();
+        Query query = entityManager.createQuery("SELECT p FROM "
+                + getEntityClass().getName() + " p"
+                + " WHERE p.isDefaultParameterValue = :isDefault");
+        query.setParameter("isDefault", true);
+        try {
+            for (Parameter parameter : (List<Parameter>)query.getResultList()) {
+                String paramElement = parameter.getParameterElement().getParameterElementCode();
+                if (!paramElementSet.contains(paramElement)) {
+                    paramSet.add(parameter);
+                }
+                paramElementSet.add(paramElement);
+            }
+            return paramSet;
+        } catch (NoResultException nre) {
+            return paramSet;
+        }
+    }
+
+    @Override
+    public Set<Parameter> findParameterSetFromAudit(Audit audit) {
+        if (audit != null) {
+            Query query = entityManager.createQuery("SELECT a FROM "
+                    + AuditImpl.class.getName() + " a"
+                    + " WHERE a.id = :idAudit");
+            query.setParameter("idAudit", audit.getId());
+            try {
+                audit = (Audit)(query.getSingleResult());
+                Set<Parameter> paramSet = new HashSet<Parameter>();
+                paramSet.addAll(audit.getParameterSet());
+                return paramSet;
+            } catch (NoResultException nre) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Parameter findParameter(ParameterElement parameterElement, String parameterValue) {
+        Query query = entityManager.createQuery("SELECT p FROM "
+                + getEntityClass().getName() + " p"
+                + " WHERE p.parameterElement = :parameterElement"
+                + " AND p.parameterValue = :parameterValue");
+        query.setParameter("parameterElement", parameterElement);
+        query.setParameter("parameterValue", parameterValue);
+        try {
+            return (Parameter)(query.getSingleResult());
+        } catch (NoResultException nre) {
+            return null;
+        }
+    }
+
+    @Override
+    public Parameter findDefaultParameter(ParameterElement parameterElement) {
+        Query query = entityManager.createQuery("SELECT p FROM "
+                + getEntityClass().getName() + " p"
+                + " WHERE p.isDefaultParameterValue = :isDefault"
+                + " AND p.parameterElement = :parameterElement");
+        query.setParameter("isDefault", true);
+        query.setParameter("parameterElement", parameterElement);
+        try {
+            return (Parameter)query.getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        } catch (NonUniqueResultException nure) {
+            return (Parameter)query.getResultList().iterator().next();
+        }
+    }
+
+}
