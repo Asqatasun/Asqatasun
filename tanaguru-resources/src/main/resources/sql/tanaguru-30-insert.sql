@@ -12,10 +12,10 @@ INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_El
 (4, 'MAX_DURATION', 1, 'Maximum duration of the crawl', 'max duration');
 
 INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
-(1, '0', b'1'),
+(1, '50000', b'1'),
 (2, '', b'1'),
 (3, '20', b'1'),
 (3, '0', b'0'),
-(4, '0', b'1');
+(4, '604800', b'1');
 
 SET foreign_key_checks=1;
