@@ -11,7 +11,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import org.apache.commons.httpclient.HttpStatus;
-
 import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -82,6 +81,8 @@ public class LanguageDetector {
     }
 
     public LanguageDetectionResult detectLanguage(String text) {
+        BufferedReader reader = null;
+        InputStreamReader inputStreamReader = null;
         try {
             text = java.net.URLEncoder.encode(text, UTF8_ENCODING_KEY);
             boolean isTextTruncated = false;
@@ -103,7 +104,8 @@ public class LanguageDetector {
             connection.addRequestProperty(refererKey, refererValue);
             String line;
             StringBuilder builder = new StringBuilder();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            inputStreamReader = new InputStreamReader(connection.getInputStream());
+            reader = new BufferedReader(inputStreamReader);
             while ((line = reader.readLine()) != null) {
                 builder.append(line);
             }
@@ -125,13 +127,24 @@ public class LanguageDetector {
             }
             return null;
         } catch (MalformedURLException ex) {
-            LOGGER.error(null, ex);
+            LOGGER.warn(null, ex);
         } catch (IOException ex) {
-            LOGGER.error(null, ex);
+            LOGGER.warn(null, ex);
         } catch (JSONException ex) {
-            LOGGER.error(null, ex);
+            LOGGER.warn(null, ex);
         } catch (Exception ex) {
-            LOGGER.error(null, ex);
+            LOGGER.warn(null, ex);
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+                if (inputStreamReader != null) {
+                    inputStreamReader.close();
+                }
+            } catch (IOException ex) {
+                LOGGER.warn(ex);
+            }
         }
         return null;
     }

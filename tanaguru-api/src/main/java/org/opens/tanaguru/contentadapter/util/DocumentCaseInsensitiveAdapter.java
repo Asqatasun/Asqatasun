@@ -62,7 +62,6 @@ public abstract class DocumentCaseInsensitiveAdapter {
             }
         }
         String result = newCleanHtml.toString();
-        newCleanHtml = null;
         return result;
     }
 
