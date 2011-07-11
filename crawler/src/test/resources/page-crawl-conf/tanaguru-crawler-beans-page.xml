@@ -53,8 +53,6 @@ metadata.description=Basic crawl starting with useful defaults
             <props>
                 <prop key="seeds.textSource.value">
 
-# URLS HERE
-
                 </prop>
             </props>
         </property>
@@ -95,7 +93,7 @@ metadata.description=Basic crawl starting with useful defaults
                 <bean class="org.archive.modules.deciderules.RejectDecideRule">
                 </bean>
 
-                <bean class="org.archive.modules.deciderules.TooManyHopsDecideRule">
+                <bean id="tooManyHopsDecideRule" class="org.archive.modules.deciderules.TooManyHopsDecideRule">
                     <property name="maxHops" value="0" />
                 </bean>
 
@@ -119,7 +117,7 @@ metadata.description=Basic crawl starting with useful defaults
                     <!--<property name="maxPathDepth" value="15" />-->
                 </bean>
 
-                <bean class="org.archive.modules.deciderules.MatchesListRegexDecideRule">
+                <bean id="matchesListRegexDecideRule" class="org.archive.modules.deciderules.MatchesListRegexDecideRule">
                     <property name="decision" value="REJECT"/>
                     <property name="listLogicalOr" value="true" />
                     <property name="regexList">
@@ -393,8 +391,8 @@ metadata.description=Basic crawl starting with useful defaults
  <!--  CRAWLLIMITENFORCER: stops crawl when it reaches configured limits -->
     <bean id="crawlLimiter" class="org.archive.crawler.framework.CrawlLimitEnforcer">
   <!-- <property name="maxBytesDownload" value="0" /> -->
-  <!-- <property name="maxDocumentsDownload" value="0" /> -->
-  <!-- <property name="maxTimeSeconds" value="0" /> -->
+    <property name="maxDocumentsDownload" value="0" />
+    <property name="maxTimeSeconds" value="0" />
     </bean>
  
  <!-- CHECKPOINTSERVICE: checkpointing assistance -->

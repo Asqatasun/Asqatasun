@@ -24,4 +24,25 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         <property name="entityDao" ref="webResourceDAO"/>
     </bean>
 
+    <bean id="parameterFactory" class="org.opens.tanaguru.entity.factory.parameterization.ParameterFactoryImpl"/>
+    <bean id="parameterDAO" class="org.opens.tanaguru.entity.dao.parameterization.ParameterDAOImpl"/>
+    <bean id="parameterDataService" class="org.opens.tanaguru.entity.service.parameterization.ParameterDataServiceImpl">
+        <property name="entityFactory" ref="parameterFactory"/>
+        <property name="entityDao" ref="parameterDAO"/>
+    </bean>
+
+    <bean id="parameterElementFactory" class="org.opens.tanaguru.entity.factory.parameterization.ParameterElementFactoryImpl"/>
+    <bean id="parameterElementDAO" class="org.opens.tanaguru.entity.dao.parameterization.ParameterElementDAOImpl"/>
+    <bean id="parameterElementDataService" class="org.opens.tanaguru.entity.service.parameterization.ParameterElementDataServiceImpl">
+        <property name="entityFactory" ref="parameterElementFactory"/>
+        <property name="entityDao" ref="parameterElementDAO"/>
+    </bean>
+
+    <bean id="parameterFamilyFactory" class="org.opens.tanaguru.entity.factory.parameterization.ParameterFamilyFactoryImpl"/>
+    <bean id="parameterFamilyDAO" class="org.opens.tanaguru.entity.dao.parameterization.ParameterFamilyDAOImpl"/>
+    <bean id="parameterFamilyDataService" class="org.opens.tanaguru.entity.service.parameterization.ParameterFamilyDataServiceImpl">
+        <property name="entityFactory" ref="parameterFamilyFactory"/>
+        <property name="entityDao" ref="parameterFamilyDAO"/>
+    </bean>
+
 </beans>
