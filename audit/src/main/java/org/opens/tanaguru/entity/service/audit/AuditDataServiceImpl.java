@@ -19,6 +19,7 @@ public class AuditDataServiceImpl extends AbstractGenericDataService<Audit, Long
         super();
     }
 
+    @Override
     public Audit create(Date date) {
         return ((AuditFactory) entityFactory).create(date);
     }
@@ -29,6 +30,7 @@ public class AuditDataServiceImpl extends AbstractGenericDataService<Audit, Long
         }
     }
 
+    @Override
     public Collection<? extends Audit> findAll(AuditStatus status) {
         return ((AuditDAO) entityDao).findAll(status);
     }

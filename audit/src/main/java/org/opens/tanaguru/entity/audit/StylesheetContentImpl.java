@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class StylesheetContentImpl extends RelatedTextContentImpl implements
         StylesheetContent, Serializable {
 
+    private static final long serialVersionUID = -5894544378761102815L;
     public StylesheetContentImpl() {
         super();
     }

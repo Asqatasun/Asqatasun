@@ -27,6 +27,7 @@ import org.opens.tanaguru.entity.audit.ProcessResultImpl;
 @Table(name = "WEB_RESOURCE")
 public abstract class WebResourceImpl implements WebResource, Serializable {
 
+    private static final long serialVersionUID = 5534153976635867531L;
     @OneToOne
     @JoinColumn(name = "Id_Audit", nullable = true)
     protected AuditImpl audit;
@@ -77,7 +78,6 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     }
 
     @Override
-//    @XmlTransient
     public Site getParent() {
         return parent;
     }
@@ -127,6 +127,7 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void setProcessResultList(Collection<? extends ProcessResult> processResultList) {
         this.processResultList = (HashSet<ProcessResultImpl>) processResultList;
     }
@@ -143,4 +144,5 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
             addProcessResult(processResult);
         }
     }
+
 }

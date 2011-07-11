@@ -15,6 +15,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class IndefiniteResultImpl extends ProcessResultImpl implements
         IndefiniteResult, Serializable {
 
+    private static final long serialVersionUID = -9026725317465914229L;
+    
     @Column(name = "Indefinite_Value", length = 400000)
     protected String indefiniteValue;
 

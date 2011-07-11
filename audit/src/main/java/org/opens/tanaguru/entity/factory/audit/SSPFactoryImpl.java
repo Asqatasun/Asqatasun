@@ -16,16 +16,20 @@ public class SSPFactoryImpl implements SSPFactory {
         super();
     }
 
+    @Override
     public SSP create() {
         return new SSPImpl();
     }
 
+    @Override
     public SSP create(Date dateOfLoading, String uri) {
         return new SSPImpl(dateOfLoading, uri);
     }
 
+    @Override
     public SSP create(Date dateOfLoading, String uri, String sourceCode,
             Page page) {
         return new SSPImpl(dateOfLoading, uri, sourceCode, page);
     }
+    
 }

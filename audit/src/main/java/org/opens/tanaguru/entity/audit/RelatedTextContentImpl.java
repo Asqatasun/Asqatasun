@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 public abstract class RelatedTextContentImpl extends RelatedContentImpl implements
         TextContent, RelatedContent, Serializable {
 
+    private static final long serialVersionUID = -8312398273757492821L;
     @Column(name = "Source", length = 400000)
     protected String source = null;
 

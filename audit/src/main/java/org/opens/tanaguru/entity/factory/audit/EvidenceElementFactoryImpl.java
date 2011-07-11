@@ -14,11 +14,14 @@ public class EvidenceElementFactoryImpl implements
         super();
     }
 
+    @Override
     public EvidenceElement create() {
         return new EvidenceElementImpl();
     }
 
+    @Override
     public EvidenceElement create(String value) {
         return new EvidenceElementImpl(value);
     }
+
 }

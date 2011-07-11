@@ -17,6 +17,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class DefiniteResultImpl extends ProcessResultImpl implements
         DefiniteResult, Serializable {
 
+    private static final long serialVersionUID = -6932621013333884500L;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "Definite_Value")
     protected TestSolution definiteValue;

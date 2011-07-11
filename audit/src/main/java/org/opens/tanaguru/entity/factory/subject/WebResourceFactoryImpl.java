@@ -12,19 +12,23 @@ import org.opens.tanaguru.entity.subject.WebResource;
  */
 public class WebResourceFactoryImpl implements WebResourceFactory {
 
-	public WebResourceFactoryImpl() {
-		super();
-	}
+    public WebResourceFactoryImpl() {
+        super();
+    }
 
-	public WebResource create() {
-		return new PageImpl();
-	}
+    @Override
+    public WebResource create() {
+        return new PageImpl();
+    }
 
-	public Page createPage(String pageURL) {
-		return new PageImpl(pageURL);
-	}
+    @Override
+    public Page createPage(String pageURL) {
+        return new PageImpl(pageURL);
+    }
 
-	public Site createSite(String siteURL) {
-		return new SiteImpl(siteURL);
-	}
+    @Override
+    public Site createSite(String siteURL) {
+        return new SiteImpl(siteURL);
+    }
+
 }

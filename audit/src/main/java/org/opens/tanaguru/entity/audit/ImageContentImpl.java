@@ -15,6 +15,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ImageContentImpl extends RelatedBinaryContentImpl implements
         ImageContent, Serializable {
 
+    private static final long serialVersionUID = -8278714163202499868L;
+    
     public ImageContentImpl() {
         super();
     }

@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 public class SSPImpl extends ContentImpl implements SSP, Serializable {
 
+    private static final long serialVersionUID = -7889349852989199094L;
     @Column(name = "Adapted_Content", length = 400000)
     protected String dom;
 

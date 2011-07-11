@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class SourceCodeRemarkImpl extends ProcessRemarkImpl implements
         SourceCodeRemark {
 
+    private static final long serialVersionUID = -4590947355988767670L;
     @Column(name = "Character_Position")
     protected int characterPosition;
     @Column(name = "Line_Number")

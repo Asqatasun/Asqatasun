@@ -16,15 +16,19 @@ public class ProcessResultFactoryImpl implements ProcessResultFactory {
         super();
     }
 
+    @Override
     public ProcessResult create() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public DefiniteResult createDefiniteResult() {
         return new DefiniteResultImpl();
     }
 
+    @Override
     public IndefiniteResult createIndefiniteResult() {
         return new IndefiniteResultImpl();
     }
+
 }

@@ -15,6 +15,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class JavascriptContentImpl extends RelatedTextContentImpl implements
         JavascriptContent, Serializable {
 
+    private static final long serialVersionUID = 4803044035116287774L;
+
     public JavascriptContentImpl() {
         super();
     }

@@ -16,6 +16,7 @@ import org.opens.tanaguru.entity.audit.Audit;
 @XmlRootElement
 public class SiteImpl extends WebResourceImpl implements Site, Serializable {
 
+    private static final long serialVersionUID = -5472991643021548362L;
     @OneToMany(mappedBy = "parent")
     protected Collection<WebResourceImpl> componentList = new ArrayList<WebResourceImpl>();
 
@@ -61,11 +62,13 @@ public class SiteImpl extends WebResourceImpl implements Site, Serializable {
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.subject.SiteImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.subject.PageImpl.class)})
+    @Override
     public Collection<WebResourceImpl> getComponentList() {
         return componentList;
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void setComponentList(Collection<? extends WebResource> componentList) {
         this.componentList = (Collection<WebResourceImpl>) componentList;
     }

@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class RelatedContentImpl extends ContentImpl implements
         RelatedContent, Serializable {
 
+    private static final long serialVersionUID = 4167575969739916971L;
     @ManyToMany(
         targetEntity=org.opens.tanaguru.entity.audit.SSPImpl.class,
         mappedBy="relatedContentSet")

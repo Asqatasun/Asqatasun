@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 		dynamicUpdate = true)
 public abstract class ContentImpl implements Content, Serializable {
 
+    private static final long serialVersionUID = -8672816298160346526L;
     @ManyToOne
     @JoinColumn(name = "Id_Audit")
     protected AuditImpl audit;

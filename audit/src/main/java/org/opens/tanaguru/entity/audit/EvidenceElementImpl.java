@@ -21,7 +21,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 public class EvidenceElementImpl implements EvidenceElement,
         Serializable {
-
+    
+    private static final long serialVersionUID = 5494394934902604527L;
     @Id
     @GeneratedValue
     @Column(name = "Id_Evidence_Element")

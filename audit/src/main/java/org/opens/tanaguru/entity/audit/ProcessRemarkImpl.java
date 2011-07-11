@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 public class ProcessRemarkImpl implements ProcessRemark, Serializable {
 
+    private static final long serialVersionUID = -8309768143794126739L;
     @Id
     @GeneratedValue
     @Column(name = "Id_Process_Remark")

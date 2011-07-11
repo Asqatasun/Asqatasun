@@ -14,11 +14,14 @@ public class AuditFactoryImpl implements AuditFactory {
         super();
     }
 
+    @Override
     public Audit create() {
         return new AuditImpl(new Date());
     }
 
+    @Override
     public Audit create(Date dateOfCreation) {
         return new AuditImpl(dateOfCreation);
     }
+    
 }

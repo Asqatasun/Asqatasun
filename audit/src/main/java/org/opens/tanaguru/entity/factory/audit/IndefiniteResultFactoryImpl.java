@@ -17,10 +17,12 @@ public class IndefiniteResultFactoryImpl implements IndefiniteResultFactory {
         super();
     }
 
+    @Override
     public IndefiniteResult create() {
         return new IndefiniteResultImpl();
     }
 
+    @Override
     public IndefiniteResult create(Test test, WebResource subject, String value) {
         IndefiniteResult instance = this.create();
         instance.setTest(test);
@@ -29,6 +31,7 @@ public class IndefiniteResultFactoryImpl implements IndefiniteResultFactory {
         return instance;
     }
 
+    @Override
     public IndefiniteResult create(Test test, WebResource subject,
             String value, Collection<ProcessRemark> remarkList) {
         IndefiniteResult instance = this.create();
@@ -38,4 +41,5 @@ public class IndefiniteResultFactoryImpl implements IndefiniteResultFactory {
         instance.addAllRemark(remarkList);
         return instance;
     }
+
 }

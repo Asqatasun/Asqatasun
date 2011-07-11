@@ -18,10 +18,12 @@ public class DefiniteResultFactoryImpl implements DefiniteResultFactory {
         super();
     }
 
+    @Override
     public DefiniteResult create() {
         return new DefiniteResultImpl();
     }
 
+    @Override
     public DefiniteResult create(Test test, WebResource subject) {
         DefiniteResult definiteResult = this.create();
         definiteResult.setTest(test);
@@ -29,6 +31,7 @@ public class DefiniteResultFactoryImpl implements DefiniteResultFactory {
         return definiteResult;
     }
 
+    @Override
     public DefiniteResult create(Test test, WebResource subject,
             TestSolution value, Collection<ProcessRemark> remarkSet) {
         DefiniteResult definiteResult = this.create();
@@ -38,4 +41,5 @@ public class DefiniteResultFactoryImpl implements DefiniteResultFactory {
         definiteResult.addAllRemark(remarkSet);
         return definiteResult;
     }
+
 }

@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class PageImpl extends WebResourceImpl implements Page, Serializable {
 
+    private static final long serialVersionUID = 4535008822069775295L;
+    
     public PageImpl() {
         super();
     }

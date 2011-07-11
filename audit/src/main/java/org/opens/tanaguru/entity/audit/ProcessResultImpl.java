@@ -35,6 +35,7 @@ import org.opens.tanaguru.entity.subject.WebResourceImpl;
         "Id_Audit_Net_Result"})})
 public abstract class ProcessResultImpl implements ProcessResult, Serializable {
 
+    private static final long serialVersionUID = -6016677895001819904L;
     @OneToMany(mappedBy = "parentResult", cascade = CascadeType.ALL)
     protected List<ProcessResultImpl> childResultList = new ArrayList<ProcessResultImpl>();
     @ManyToOne

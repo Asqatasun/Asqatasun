@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class EvidenceImpl implements Evidence, Serializable {
 
+    private static final long serialVersionUID = -5891443605163793783L;
     @Column(name = "Cd_Evidence")
     protected String code;
     @Column(name = "Description")
