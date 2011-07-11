@@ -52,7 +52,6 @@
         <property name="properties">
             <props>
                 <prop key="seeds.textSource.value">
-# URLS HERE
                 </prop>
             </props>
         </property>
@@ -96,8 +95,8 @@
                     <property name="seedsAsSurtPrefixes" value="true" />
                 </bean>
 
-                <bean class="org.archive.modules.deciderules.TooManyHopsDecideRule">
-                    <property name="maxHops" value="300" />
+                <bean id="tooManyHopsDecideRule" class="org.archive.modules.deciderules.TooManyHopsDecideRule">
+                    <property name="maxHops" value="20"/>
                 </bean>
 
                 <!-- ...but ACCEPT those more than a configured link-hop-count from start... -->
@@ -120,7 +119,7 @@
                     <!--<property name="maxPathDepth" value="15" />-->
                 </bean>
 
-                <bean class="org.archive.modules.deciderules.MatchesListRegexDecideRule">
+                <bean id="matchesListRegexDecideRule" class="org.archive.modules.deciderules.MatchesListRegexDecideRule">
                     <property name="decision" value="REJECT"/>
                     <property name="listLogicalOr" value="true" />
                     <property name="regexList">
@@ -186,7 +185,6 @@
             <ref bean="costAssignmentPolicy" />
         </property> -->
     </bean>
-
     <!-- assembled into ordered CandidateChain bean -->
     <bean id="candidateProcessors" class="org.archive.modules.CandidateChain">
         <property name="processors">
@@ -249,6 +247,7 @@
  </bean>
  <bean id="extractorSwf" class="org.archive.modules.extractor.ExtractorSWF">
  </bean-->
+
  <!-- assembled into ordered FetchChain bean -->
     <bean id="fetchProcessors" class="org.archive.modules.FetchChain">
         <property name="processors">
@@ -365,8 +364,8 @@
     <!--  CRAWLLIMITENFORCER: stops crawl when it reaches configured limits -->
     <bean id="crawlLimiter" class="org.archive.crawler.framework.CrawlLimitEnforcer">
         <!-- <property name="maxBytesDownload" value="0" /> -->
-        <property name="maxDocumentsDownload" value="10000" />
-        <!-- <property name="maxTimeSeconds" value="0" /> -->
+        <property name="maxDocumentsDownload" value="0" />
+        <property name="maxTimeSeconds" value="0" />
     </bean>
  
     <!-- CHECKPOINTSERVICE: checkpointing assistance -->

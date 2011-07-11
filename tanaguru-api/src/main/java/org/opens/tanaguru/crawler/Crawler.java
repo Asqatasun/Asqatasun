@@ -5,12 +5,13 @@ import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
+import org.opens.tanaguru.parameterization.Parametrable;
 
 /**
  * 
  * @author ADEX
  */
-public interface Crawler {// TODO Write javadoc
+public interface Crawler extends Parametrable {
 
     /**
      * 
@@ -79,4 +80,5 @@ public interface Crawler {// TODO Write javadoc
      * @param crawlConfigFilePath
      */
     void setCrawlConfigFilePath(String crawlConfigFilePath);
+    
 }

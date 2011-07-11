@@ -6,16 +6,25 @@ package org.opens.tanaguru.crawler.framework;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.log4j.Logger;
 import org.archive.crawler.framework.CrawlController;
@@ -29,7 +38,11 @@ import org.opens.tanaguru.crawler.CrawlerImpl;
 import org.opens.tanaguru.crawler.extractor.listener.ExtractorCSSListener;
 import org.opens.tanaguru.crawler.extractor.listener.ExtractorHTMLListener;
 import org.opens.tanaguru.crawler.processor.TanaguruWriterProcessor;
+import org.opens.tanaguru.crawler.util.CrawlConfigurationUtils;
+import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.springframework.beans.BeansException;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 /**
  * This class embeds a heritrix CrawlJob object and deals with the instanciation,
@@ -44,16 +57,6 @@ import org.springframework.beans.BeansException;
 public class TanaguruCrawlJob {
 
     private static final Logger LOGGER = Logger.getLogger(CrawlerImpl.class);
-    private static final String URL_STR = "# URLS HERE";
-//    private static final String EXCLUSION_REGEX_STR = "# EXCLUSION_REGEX_ADDITION";
-//    private static final String CRAWL_DEPTH_STR = "# CRAWL_DEPTH";
-//    private static final String MAX_DOC_CRAWL_STR = "# MAX_DOCUMENTS_CRAWL";
-//    private static final String MAX_DURATION_CRAWL_STR = "# MAX_DURATION_CRAWL";
-//    private static final String OPEN_MAX_DOCUMENTS_TAG = "<property name=\"maxDocumentsDownload\" value=\"";
-//    private static final String OPEN_MAX_DURATION_TAG = "<property name=\"maxTimeSeconds\" value=\"";
-//    private static final String END_MAX_TAG = "\"/>";
-//    private static final String OPEN_VALUE_TAG = "<value>";
-//    private static final String END_VALUE_TAG = "</value>";
     private static final String WRITER_BEAN_NAME = "tanaguruWriter";
     private static final String DECIDE_RULE_SEQUENCE_BEAN_NAME = "scope";
     private File currentJobOutputDir;
@@ -68,19 +71,25 @@ public class TanaguruCrawlJob {
     private TanaguruWriterProcessor tanaguruWriterProcessor;
     private DecideRuleSequence decideRuleSequence;
 
-    public TanaguruCrawlJob(String[] url, String heritrixFileName, String outputDir, String crawlConfigFilePath) {
+    /**
+     * 
+     * @param url
+     * @param heritrixFileName
+     * @param outputDir
+     * @param crawlConfigFilePath
+     * @param paramSet
+     */
+    public TanaguruCrawlJob(
+            String[] url,
+            String heritrixFileName,
+            String outputDir,
+            String crawlConfigFilePath,
+            Set<Parameter> paramSet) {
         this.outputDir = outputDir;
         this.crawlConfigFilePath = crawlConfigFilePath;
-        File configFile = initializeCrawlContext(url, heritrixFileName);
+        File configFile = initializeCrawlContext(url, paramSet, heritrixFileName);
         crawlJob = new CrawlJob(configFile);
     }
-
-//    public TanaguruCrawlJob(String heritrixFileName, String outputDir, String crawlConfigFilePath) {
-//        this.outputDir = outputDir;
-//        this.crawlConfigFilePath = crawlConfigFilePath;
-//        File configFile = initializeCrawlContextWithParameters(crawlParameters, heritrixFileName);
-//        crawlJob = new CrawlJob(configFile);
-//    }
 
     public String getOutputDir() {
         return this.outputDir;
@@ -211,82 +220,42 @@ public class TanaguruCrawlJob {
         }
     }
 
-//    private File initializeCrawlContextWithParameters(CrawlParameters crawlParameters, String heritrixFileName) {
-//        buildOutputDirectory();
-//        BufferedReader in = null;
-//        FileWriter fw = null;
-//        try {
-//            Logger.getLogger(CrawlerImpl.class.getName()).info(
-//                    "crawlConfigFilePath: " + crawlConfigFilePath + " for copy");
-//            in = new BufferedReader(
-//                    new FileReader(crawlConfigFilePath + "/" + heritrixFileName));
-//
-//            String c;
-//            StringBuilder newContextFile = new StringBuilder();
-//            while ((c = in.readLine()) != null) {
-//                setOptionToFile(c, crawlParameters, newContextFile);
-//            }
-//            fw = new FileWriter(currentJobOutputDir.getPath() + "/" + heritrixFileName);
-//            fw.write(newContextFile.toString());
-//            fw.close();
-//            in.close();
-//        } catch (IOException ex) {
-//            Logger.getLogger(CrawlerImpl.class.getName()).error(ex);
-//        } finally {
-//            if (in != null) {
-//                try {
-//                    in.close();
-//                } catch (IOException ex) {
-//                    LOGGER.error(ex);
-//                }
-//            }
-//            if (fw != null) {
-//                try {
-//                    fw.close();
-//                } catch (IOException ex) {
-//                    LOGGER.error(ex);
-//                }
-//            }
-//        }
-//        return new File(currentJobOutputDir.getPath() + "/" + heritrixFileName);
-//    }
-
     /**
-     * This method initialize the heritrix context before starting the crawl
+     * 
+     * @param url
+     * @param crawlParameterSet
+     * @param heritrixFileName
      * @return
      */
-    private File initializeCrawlContext(String[] url, String heritrixFileName) {
+    private File initializeCrawlContext(String[] url, Set<Parameter> crawlParameterSet, String heritrixFileName) {
         buildOutputDirectory();
         BufferedReader in = null;
         FileWriter fw = null;
         try {
             Logger.getLogger(CrawlerImpl.class.getName()).info(
                     "crawlConfigFilePath: " + crawlConfigFilePath + " for copy");
-            in = new BufferedReader(
-                    new FileReader(crawlConfigFilePath + "/" + heritrixFileName));
+            String filepath = crawlConfigFilePath + "/" + heritrixFileName;
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            Document doc = docBuilder.parse(filepath);
+            doc = setOptionToDocument(url, crawlParameterSet, doc);
+            //write the content into xml file
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            String resultFileName = currentJobOutputDir.getPath() + "/" + heritrixFileName;
+            StreamResult result =  new StreamResult(new File(resultFileName));
+            transformer.transform(source, result);
 
-            String c;
-            String uri;
-            StringBuilder newContextFile = new StringBuilder();
-            while ((c = in.readLine()) != null) {
-                if (c.equalsIgnoreCase(URL_STR)) {
-                    for (int i = 0; i < url.length; i++) {
-                        // first convert the URI in unicode
-                        uri = UURIFactory.getInstance(url[i]).getEscapedURI();
-                        // then escape the URI to be written in a xml file.
-                        newContextFile.append(StringEscapeUtils.escapeXml(uri));
-                        newContextFile.append("\r");
-                    }
-                } else {
-                    newContextFile.append(c);
-                }
-                newContextFile.append("\r");
-            }
-            fw = new FileWriter(currentJobOutputDir.getPath() + "/" + heritrixFileName);
-            fw.write(newContextFile.toString());
-            fw.close();
-            in.close();
         } catch (IOException ex) {
+            Logger.getLogger(CrawlerImpl.class.getName()).error(ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(CrawlerImpl.class.getName()).error(ex);
+        }  catch (SAXException ex) {
+            Logger.getLogger(CrawlerImpl.class.getName()).error(ex);
+        } catch (TransformerConfigurationException ex) {
+            Logger.getLogger(CrawlerImpl.class.getName()).error(ex);
+        } catch (TransformerException ex) {
             Logger.getLogger(CrawlerImpl.class.getName()).error(ex);
         } finally {
             if (in != null) {
@@ -307,6 +276,10 @@ public class TanaguruCrawlJob {
         return new File(currentJobOutputDir.getPath() + "/" + heritrixFileName);
     }
 
+    /**
+     * Create the output directory used to copy temporary files needed by
+     * Heritrix.
+     */
     private void buildOutputDirectory() {
         // Create one directory
         currentJobOutputDir = new File(outputDir + "/" + "crawl" + "-" + new Date().getTime());
@@ -319,49 +292,34 @@ public class TanaguruCrawlJob {
         }
     }
 
-//    private void setOptionToFile(String line, CrawlParameters crawlParameters, StringBuilder strb) {
-//        if (line.contains(URL_STR)) {
-//            Set<String> urlSet = crawlParameters.getUrlSet();
-//            String uri = null;
-//            for (String url : urlSet) {
-//                try {
-//                    // first convert the URI in unicode
-//                    uri = UURIFactory.getInstance(url).getEscapedURI();
-//                } catch (URIException ex) {
-//                    java.util.logging.Logger.getLogger(
-//                            TanaguruCrawlJob.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                // then escape the URI to be written in a xml file.
-//                strb.append(StringEscapeUtils.escapeXml(uri));
-//                strb.append("\r");
-//            }
-//        } else if (line.contains(EXCLUSION_REGEX_STR)) {
-//            Set<String> regexExclusionSet = crawlParameters.getRegexPatternExclusionSet();
-//            for (String regex : regexExclusionSet) {
-//                strb.append(OPEN_VALUE_TAG);
-//                strb.append(regex);
-//                strb.append(END_VALUE_TAG);
-//                strb.append("\r");
-//            }
-//        } else if (line.contains(CRAWL_DEPTH_STR)) {
-//            strb.append(line.replace(CRAWL_DEPTH_STR, crawlParameters.getDepth().toString()));
-//        } else if (line.contains(MAX_DOC_CRAWL_STR)) {
-//            if (crawlParameters.getMaxNumberOfPages() != -1) {
-//                strb.append(OPEN_MAX_DOCUMENTS_TAG);
-//                strb.append(crawlParameters.getMaxNumberOfPages().toString());
-//                strb.append(END_MAX_TAG);
-//            }
-//        } else if (line.contains(MAX_DURATION_CRAWL_STR)) {
-//            if (crawlParameters.getMaxCrawlDuration() != -1) {
-//                strb.append(OPEN_MAX_DURATION_TAG);
-//                strb.append(crawlParameters.getMaxCrawlDuration().toString());
-//                strb.append(END_MAX_TAG);
-//            }
-//        } else {
-//            strb.append(line);
-//        }
-//        strb.append("\r");
-//    }
+    /**
+     * 
+     * @param url
+     * @param crawlParameterSet
+     * @param fileContent
+     * @return
+     * @throws IOException
+     */
+    private Document setOptionToDocument(String[] url, Set<Parameter> crawlParameterSet, Document doc)
+            throws IOException{
+
+        doc.getFirstChild();
+        String uriTmp;
+        StringBuilder urlList = new StringBuilder();
+        CrawlConfigurationUtils ccu = CrawlConfigurationUtils.getInstance();
+        for (int i = 0; i < url.length; i++) {
+            // first convert the URI in unicode
+            uriTmp = UURIFactory.getInstance(url[i]).getEscapedURI();
+            // then escape the URI to be written in a xml file.
+            urlList.append(StringEscapeUtils.escapeXml(uriTmp));
+            urlList.append("\r");
+        }
+        doc = ccu.modifyValue(ccu.getUrlModifier(), doc, urlList.toString());
+        for (Parameter parameter : crawlParameterSet) {
+            doc = ccu.modifyHeritrixParameter(doc, parameter);
+        }
+        return doc;
+    }
 
     /**
      * This methods sets the appropriate listeners to the tanaguruWriterProcessor
@@ -468,4 +426,5 @@ public class TanaguruCrawlJob {
         tanaguruWriterProcessor.setHtmlRegexp(null);
         tanaguruWriterProcessor = null;
     }
+
 }

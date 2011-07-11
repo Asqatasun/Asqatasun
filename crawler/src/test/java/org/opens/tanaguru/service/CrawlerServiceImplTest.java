@@ -12,13 +12,20 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import junit.framework.TestCase;
 import org.apache.http.HttpStatus;
+import org.opens.tanaguru.crawler.util.CrawlConfigurationUtils;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.factory.audit.AuditFactory;
 import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
+import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.parameterization.ParameterElement;
+import org.opens.tanaguru.entity.parameterization.ParameterFamily;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
+import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
+import org.opens.tanaguru.entity.service.parameterization.ParameterElementDataService;
+import org.opens.tanaguru.entity.service.parameterization.ParameterFamilyDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.springframework.beans.factory.BeanFactory;
@@ -49,6 +56,10 @@ public class CrawlerServiceImplTest extends TestCase {
     private AuditFactory auditFactory;
     private ContentDataService contentDataService;
     private AuditDataService auditDataService;
+    private ParameterFamilyDataService parameterFamilyDataService;
+    private ParameterElementDataService parameterElementDataService;
+    private ParameterDataService parameterDataService;
+    CrawlConfigurationUtils ccu = CrawlConfigurationUtils.getInstance();
     protected BeanFactory springBeanFactory;
     private static final String SPRING_FILE_PATH =
             "../crawler/src/test/resources/context/application-context.xml";
@@ -68,6 +79,9 @@ public class CrawlerServiceImplTest extends TestCase {
         auditDataService = (AuditDataService) springBeanFactory.getBean("auditDataService");
         auditFactory = (AuditFactory) springBeanFactory.getBean("auditFactory");
         webResourceFactory = (WebResourceFactory) springBeanFactory.getBean("webResourceFactory");
+        parameterDataService = (ParameterDataService) springBeanFactory.getBean("parameterDataService");
+        parameterElementDataService = (ParameterElementDataService) springBeanFactory.getBean("parameterElementDataService");
+        parameterFamilyDataService = (ParameterFamilyDataService) springBeanFactory.getBean("parameterFamilyDataService");
     }
 
     @Override
@@ -75,17 +89,17 @@ public class CrawlerServiceImplTest extends TestCase {
         super.tearDown();
     }
 
-    /**
-     * * Test the crawl of a site without robots.txt file
-     */
-    public void testCrawl_Site() {
-        System.out.println("crawl_full_site");
-        crawlerService.setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
-        String siteUrl = bundle.getString(FULL_SITE_CRAWL_URL_KEY);
+    private List<Content> initialiseAndLaunchCrawl (
+            String siteUrl,
+            String crawlParam1,
+            String crawlParam2,
+            String crawlParam3,
+            String crawlParam4) {
         Audit audit = auditFactory.create(new Date());
+        audit.setParameterSet(setCrawlParameters(crawlParam1, crawlParam2, crawlParam3, crawlParam4));
         auditDataService.saveOrUpdate(audit);
         Site site = webResourceFactory.createSite(siteUrl);
-        site.setAudit(auditFactory.create());
+        site.setAudit(audit);
         site = crawlerService.crawl(site);
         List<Long> contentListId = contentDataService.getSSPFromWebResource(site.getId(), HttpStatus.SC_OK, 0, 10);
         List<Content> contentList = new ArrayList<Content>();
@@ -95,9 +109,72 @@ public class CrawlerServiceImplTest extends TestCase {
                 contentList.add(content);
             }
         }
-        for (Content content : contentList) {
-            System.out.println("content  " + content.getURI() + " code " + content.getHttpStatusCode());
-        }
+        return contentList;
+    }
+
+    public void testCrawl_SiteWithDepthLevel0Option() {
+        System.out.println("crawl_full_site_With_Depth_Level0_Option");
+        crawlerService.setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
+        String siteUrl = bundle.getString(FULL_SITE_CRAWL_URL_KEY);
+        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "0", "", "", "");
+        assertEquals(1, contentList.size());
+        Set<String> urlSet = getUrlSet(contentList);
+        assertTrue(urlSet.contains(siteUrl));
+    }
+
+    public void testCrawl_SiteWithDepthLevel1Option() {
+        System.out.println("crawl_full_site_With_Depth_Level0_Option");
+        crawlerService.setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
+        String siteUrl = bundle.getString(FULL_SITE_CRAWL_URL_KEY);
+        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "1", "", "", "");
+        assertEquals(3, contentList.size());
+        Set<String> urlSet = getUrlSet(contentList);
+        assertTrue(urlSet.contains(siteUrl));
+        assertTrue(urlSet.contains(siteUrl + PAGE_NAME_LEVEL1));
+        assertTrue(urlSet.contains(siteUrl + FORBIDDEN_PAGE_NAME));
+    }
+    
+    public void testCrawl_SiteWithRegexpExclusionOption() {
+        System.out.println("crawl_full_site_With_Regexp_Exclusion_Option");
+        crawlerService.setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
+        String siteUrl = bundle.getString(FULL_SITE_CRAWL_URL_KEY);
+        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "4", ".html", "", "");
+        assertEquals(1, contentList.size());
+        Set<String> urlSet = getUrlSet(contentList);
+        assertTrue(urlSet.contains(siteUrl));
+    }
+    
+    public void testCrawl_SiteWithRegexpExclusionOption2() {
+        System.out.println("crawl_full_site_With_Regexp_Exclusion_Option2");
+        crawlerService.setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
+        String siteUrl = bundle.getString(FULL_SITE_CRAWL_URL_KEY);
+        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "4", "robot", "", "");
+        assertEquals(3, contentList.size());
+        Set<String> urlSet = getUrlSet(contentList);
+        assertTrue(urlSet.contains(siteUrl));
+        assertTrue(urlSet.contains(siteUrl + PAGE_NAME_LEVEL1));
+        assertTrue(urlSet.contains(siteUrl + PAGE_NAME_LEVEL2));
+    }
+
+    public void testCrawl_SiteWithRegexpExclusionOption3() {
+        System.out.println("crawl_full_site_With_Regexp_Exclusion_Option3");
+        crawlerService.setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
+        String siteUrl = bundle.getString(FULL_SITE_CRAWL_URL_KEY);
+        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "4", "robot;page-2", "", "");
+        assertEquals(2, contentList.size());
+        Set<String> urlSet = getUrlSet(contentList);
+        assertTrue(urlSet.contains(siteUrl));
+        assertTrue(urlSet.contains(siteUrl + PAGE_NAME_LEVEL1));
+    }
+
+    /**
+     * * Test the crawl of a site without robots.txt file
+     */
+    public void testCrawl_Site() {
+        System.out.println("crawl_full_site");
+        crawlerService.setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
+        String siteUrl = bundle.getString(FULL_SITE_CRAWL_URL_KEY);
+        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "3", "", "", "");
         assertEquals(4, contentList.size());
         Set<String> urlSet = getUrlSet(contentList);
         assertTrue(urlSet.contains(siteUrl));
@@ -114,13 +191,13 @@ public class CrawlerServiceImplTest extends TestCase {
         crawlerService.setCrawlConfigFilePath(PAGE_CRAWL_CONF_FILE_PATH);
         String siteUrl = bundle.getString(FULL_SITE_CRAWL_URL_KEY);
         Page page = webResourceFactory.createPage(siteUrl);
-        page.setAudit(auditFactory.create());
+        Audit audit  = auditFactory.create();
+        page.setAudit(audit);
+        audit.setParameterSet(setCrawlParameters("3", "", "", ""));
         page = crawlerService.crawl(page);
         List<Long> contentListId = contentDataService.getSSPFromWebResource(page.getId(), HttpStatus.SC_OK, 0, 10);
-        System.out.println("contentListId  " + contentListId.size());
         List<Content> contentList = new ArrayList<Content>();
         for (Long id : contentListId) {
-            System.out.println("id " + id + " " + contentDataService.read(id).getHttpStatusCode());
             contentList.add(contentDataService.readWithRelatedContent(id));
         }
         assertEquals(1, contentList.size());
@@ -138,14 +215,7 @@ public class CrawlerServiceImplTest extends TestCase {
         System.out.println("crawl_site_with_robots");
         crawlerService.setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
         String siteUrl = bundle.getString(ROBOTS_RESTRICTED_CRAWL_URL_KEY);
-        Site site = webResourceFactory.createSite(siteUrl);
-        site.setAudit(auditFactory.create());
-        site = crawlerService.crawl(site);
-        List<Long> contentListId = contentDataService.getSSPFromWebResource(site.getId(), HttpStatus.SC_OK, 0, 10);
-        List<Content> contentList = new ArrayList<Content>();
-        for (Long id : contentListId) {
-            contentList.add(contentDataService.readWithRelatedContent(id));
-        }
+        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "3", "", "", "");
         assertEquals(3, contentList.size() + ((SSP) contentList.iterator().next()).getRelatedContentSet().size());
         Set<String> urlSet = getUrlSet(contentList);
         assertTrue(urlSet.contains(siteUrl));
@@ -161,6 +231,46 @@ public class CrawlerServiceImplTest extends TestCase {
         }
         return urlSet;
     }
+
+    private Set<Parameter> setCrawlParameters(String depth, String regexp, String maxDuration, String maxDocuments) {
+        Set<Parameter> crawlParameters = new HashSet<Parameter>();
+        ParameterFamily pf = parameterFamilyDataService.create();
+        pf.setParameterFamilyCode("CRAWLER");
+        parameterFamilyDataService.saveOrUpdate(pf);
+        //DEPTH
+        ParameterElement ped = parameterElementDataService.create(pf);
+        ped.setParameterElementCode("DEPTH");
+        parameterElementDataService.saveOrUpdate(ped);
+
+        Parameter pedValue= parameterDataService.getParameter(ped, depth);
+        crawlParameters.add(pedValue);
+
+        //EXCLUSION_REGEX
+        ParameterElement peer = parameterElementDataService.create(pf);
+        peer.setParameterElementCode("EXCLUSION_REGEX");
+        parameterElementDataService.saveOrUpdate(peer);
+
+        Parameter peerValue= parameterDataService.getParameter(peer, regexp);
+        crawlParameters.add(peerValue);
+
+        //MAX_DURATION
+        ParameterElement pemdu = parameterElementDataService.create(pf);
+        pemdu.setParameterElementCode("MAX_DURATION");
+        parameterElementDataService.saveOrUpdate(pemdu);
+
+        Parameter pemduValue= parameterDataService.getParameter(pemdu, maxDuration);
+        crawlParameters.add(pemduValue);
+
+        //MAX_DOCUMENTS
+        ParameterElement pemdo = parameterElementDataService.create(pf);
+        pemdo.setParameterElementCode("MAX_DOCUMENTS");
+        parameterElementDataService.saveOrUpdate(pemdo);
+
+        Parameter pemdoValue= parameterDataService.getParameter(pemdo, maxDocuments);
+        crawlParameters.add(pemdoValue);
+        parameterDataService.saveOrUpdate(crawlParameters);
+        return crawlParameters;
+    }
 //    /**
 //     * Test of crawl method, of class CrawlerServiceImpl.
 //     */
@@ -171,4 +281,5 @@ public class CrawlerServiceImplTest extends TestCase {
 //        Site expResult = null;
 //        Site result = instance.crawl(site);
 //    }
+
 }

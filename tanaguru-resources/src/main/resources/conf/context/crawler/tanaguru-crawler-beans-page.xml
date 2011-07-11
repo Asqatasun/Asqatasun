@@ -52,9 +52,6 @@ metadata.description=Basic crawl starting with useful defaults
         <property name="properties">
             <props>
                 <prop key="seeds.textSource.value">
-
-# URLS HERE
-
                 </prop>
             </props>
         </property>
@@ -94,7 +91,7 @@ metadata.description=Basic crawl starting with useful defaults
                 <bean class="org.archive.modules.deciderules.RejectDecideRule">
                 </bean>
 
-                <bean class="org.archive.modules.deciderules.TooManyHopsDecideRule">
+                <bean id="tooManyHopsDecideRule" class="org.archive.modules.deciderules.TooManyHopsDecideRule">
                     <property name="maxHops" value="0" />
                 </bean>
 
@@ -118,7 +115,7 @@ metadata.description=Basic crawl starting with useful defaults
                     <!--<property name="maxPathDepth" value="15" />-->
                 </bean>
 
-                <bean class="org.archive.modules.deciderules.MatchesListRegexDecideRule">
+                <bean id="matchesListRegexDecideRule" class="org.archive.modules.deciderules.MatchesListRegexDecideRule">
                     <property name="decision" value="REJECT"/>
                     <property name="listLogicalOr" value="true" />
                     <property name="regexList">
@@ -220,28 +217,12 @@ metadata.description=Basic crawl starting with useful defaults
   <!-- <property name="maxLengthBytes" value="0" /> -->
         <property name="timeoutSeconds" value="10" />
   <!-- <property name="maxFetchKBSec" value="0" /> -->
-  <!-- <property name="defaultEncoding" value="ISO-8859-1" /> -->
+   <property name="defaultEncoding" value="UTF-8" />
   <!-- <property name="shouldFetchBodyRule"> 
         <bean class="org.archive.modules.deciderules.AcceptDecideRule"/>
        </property> -->
         <property name="soTimeoutMs" value="10000" />
-  <!-- <property name="sendIfModifiedSince" value="true" /> -->
-  <!-- <property name="sendIfNoneMatch" value="true" /> -->
-  <!-- <property name="sendConnectionClose" value="true" /> -->
-  <!-- <property name="sendReferer" value="false" /> -->
-  <!-- <property name="sendRange" value="false" /> -->
-  <!-- <property name="ignoreCookies" value="true" /> --> 
-  <!-- <property name="sslTrustLevel" value="OPEN" /> -->
-  <!-- <property name="acceptHeaders"> 
-        <list>
-        </list>
-       </property>
-  -->
-  <!-- <property name="httpBindAddress" value="" /> -->
-  <!-- <property name="httpProxyHost" value="" /> -->
-  <!-- <property name="httpProxyPort" value="0" /> -->
         <property name="digestContent" value="false" />
-  <!-- <property name="digestAlgorithm" value="sha1" /> -->
     </bean>
 
     <bean id="extractorHttp" class="org.archive.modules.extractor.ExtractorHTTP">
@@ -295,11 +276,6 @@ metadata.description=Basic crawl starting with useful defaults
   
  <!-- DISPOSITION CHAIN -->
  <!-- processors declared as named beans -->
-
- <!--bean id="mirrorWriter" class="org.archive.modules.writer.MirrorWriterProcessor">
-    <property name="caseSensitiveFilesystem" value="true"/>
-    <property name="path" value="output"/>
- </bean-->
     <bean id="tanaguruWriter" class="org.opens.tanaguru.crawler.processor.TanaguruWriterProcessor">
         <property name="htmlRegexp">
             <value>.*(?i)(/|\.htm|\.html|\.php|\.asp|\.aspx|\.jsp|\.do)$</value>
@@ -308,27 +284,6 @@ metadata.description=Basic crawl starting with useful defaults
             <value>.*(?i)(\.css(\?.*)?)$</value>
         </property>
     </bean>
-
- <!--bean id="warcWriter" class="org.archive.modules.writer.WARCWriterProcessor">
-   <property name="compress" value="true" /--> 
-  <!-- <property name="prefix" value="IAH" /> -->
-  <!-- <property name="suffix" value="${HOSTNAME}" /> -->
-  <!-- <property name="maxFileSizeBytes" value="1000000000" /> -->
-  <!-- <property name="poolMaxActive" value="1" /> -->
-  <!-- <property name="poolMaxWaitMs" value="300000" /> -->
-  <!-- <property name="skipIdenticalDigests" value="false" /> -->
-  <!-- <property name="maxTotalBytesToWrite" value="0" /> -->
-  <!-- <property name="directory" value="." /> -->
-   <!--property name="storePaths">
-        <list>
-         <value>output</value>
-        </list>
-       </property> 
-   <property name="writeRequests" value="false" />
-   <property name="writeMetadata" value="false" /-->
-  <!-- <property name="writeRevisitForIdenticalDigests" value="true" /> -->
-  <!-- <property name="writeRevisitForNotModified" value="true" /> -->
- <!--/bean-->
 
     <bean id="candidates" class="org.archive.crawler.postprocessor.CandidatesProcessor">
   <!-- <property name="seedsRedirectNewSeeds" value="true" /> -->
@@ -412,8 +367,8 @@ metadata.description=Basic crawl starting with useful defaults
  <!--  CRAWLLIMITENFORCER: stops crawl when it reaches configured limits -->
     <bean id="crawlLimiter" class="org.archive.crawler.framework.CrawlLimitEnforcer">
   <!-- <property name="maxBytesDownload" value="0" /> -->
-  <!-- <property name="maxDocumentsDownload" value="0" /> -->
-  <!-- <property name="maxTimeSeconds" value="0" /> -->
+        <property name="maxDocumentsDownload" value="0" />
+        <property name="maxTimeSeconds" value="0" />
     </bean>
  
  <!-- CHECKPOINTSERVICE: checkpointing assistance -->

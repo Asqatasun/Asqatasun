@@ -20,6 +20,7 @@ import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.StylesheetContent;
 import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
+import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
@@ -36,29 +37,34 @@ public class CrawlerImpl implements Crawler, ContentWriter {
     private static final int RETRIEVE_WINDOW = 1000;
     private static final String UNREACHABLE_RESOURCE_STR =
             "Unreachable resource ";
+    private static final String HERITRIX_SITE_FILE_NAME = "tanaguru-crawler-beans-site.xml";
+    private static final String HERITRIX_PAGE_FILE_NAME = "tanaguru-crawler-beans-page.xml";
+
+    /**
+     * This boolean is used to determine whether a page has already been fetched
+     * in case of 1 page audit.
+     */
     private boolean isPageAlreadyFetched = false;
+    /**
+     * This webResource is the main webResource of the audit. In case of site
+     * audit, this webresource is the Site instance from which all the Page instances
+     * are linked.
+     */
     private WebResource mainWebResource;
     private SSP lastFetchedSSP;
-    private String heritrixSiteFileName = "tanaguru-crawler-beans-site.xml";
-    private String heritrixPageFileName = "tanaguru-crawler-beans-page.xml";
-    private String crawlConfigFilePath;
-    private String outputDir = System.getenv("PWD") + "/output";
-    private Pattern cssFilePattern = null;
-    private TanaguruCrawlJob crawlJob;
-    private Set<Long> relatedContentSet = new HashSet<Long>();
-    private ContentDataService contentDataService;
-    private WebResourceDataService webResourceDataService;
-    private WebResourceFactory webResourceFactory;
-    private ContentFactory contentFactory;
 
+    private TanaguruCrawlJob crawlJob;
+    private Set<Long> relatedContentSetTemp = new HashSet<Long>();
+    
+    private Pattern cssFilePattern = null;
     public Pattern getCssFilePattern() {
         if (cssFilePattern == null && crawlJob != null) {
             cssFilePattern = crawlJob.getCssFilePattern();
         }
         return cssFilePattern;
     }
-    private Pattern htmlFilePattern = null;
 
+    private Pattern htmlFilePattern = null;
     public Pattern getHtmlFilePattern() {
         if (htmlFilePattern == null && crawlJob != null) {
             htmlFilePattern = crawlJob.getHtmlFilePattern();
@@ -66,6 +72,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         return htmlFilePattern;
     }
 
+    private ContentDataService contentDataService;
     public ContentDataService getContentDataService() {
         return contentDataService;
     }
@@ -75,6 +82,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         this.contentDataService = contentDataService;
     }
 
+    private WebResourceDataService webResourceDataService;
     public WebResourceDataService getWebResourceDataService() {
         return webResourceDataService;
     }
@@ -84,20 +92,19 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         this.webResourceDataService = webResourceDataService;
     }
 
+    private WebResourceFactory webResourceFactory;
     @Override
     public void setWebResourceFactory(WebResourceFactory webResourceFactory) {
         this.webResourceFactory = webResourceFactory;
     }
 
+    private ContentFactory contentFactory;
     @Override
     public void setContentFactory(ContentFactory contentFactory) {
         this.contentFactory = contentFactory;
     }
 
-    public CrawlerImpl() {
-        super();
-    }
-
+    private String crawlConfigFilePath = null;
     public String getCrawlConfigFilePath() {
         return this.crawlConfigFilePath;
     }
@@ -107,6 +114,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         this.crawlConfigFilePath = crawlConfigFilePath;
     }
 
+    private String outputDir = System.getenv("PWD") + "/output";
     public String getOutputDir() {
         return this.outputDir;
     }
@@ -114,6 +122,25 @@ public class CrawlerImpl implements Crawler, ContentWriter {
     @Override
     public void setOutputDir(String outputDir) {
         this.outputDir = outputDir;
+    }
+
+    private Set<Parameter> paramSet = null;
+    @Override
+    public Set<Parameter> getParameterSet() {
+        return paramSet;
+    }
+
+    @Override
+    public void setParameterSet(Set<Parameter> paramSet) {
+        if (this.paramSet == null) {
+            this.paramSet = paramSet;
+        } else {
+            this.paramSet.addAll(paramSet);
+        }
+    }
+
+    public CrawlerImpl() {
+        super();
     }
 
     public String getSiteURL() {
@@ -125,7 +152,12 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         mainWebResource = webResourceFactory.createSite(siteURL);
         mainWebResource = webResourceDataService.saveOrUpdate(mainWebResource);
         String[] siteUrl = {siteURL};
-        this.crawlJob = new TanaguruCrawlJob(siteUrl, heritrixSiteFileName, getOutputDir(), getCrawlConfigFilePath());
+        this.crawlJob = new TanaguruCrawlJob(
+                siteUrl,
+                HERITRIX_SITE_FILE_NAME,
+                getOutputDir(),
+                getCrawlConfigFilePath(),
+                paramSet);
         if (crawlJob.isLaunchable()) {
             crawlJob.checkXML();
         }
@@ -139,7 +171,12 @@ public class CrawlerImpl implements Crawler, ContentWriter {
     public void setSiteURL(String siteName, String[] siteURL) {
         mainWebResource = webResourceFactory.createSite(siteName);
         mainWebResource = webResourceDataService.saveOrUpdate(mainWebResource);
-        this.crawlJob = new TanaguruCrawlJob(siteURL, heritrixPageFileName, outputDir, crawlConfigFilePath);
+        this.crawlJob = new TanaguruCrawlJob(
+                siteURL,
+                HERITRIX_PAGE_FILE_NAME,
+                outputDir,
+                crawlConfigFilePath,
+                paramSet);
         if (crawlJob.isLaunchable()) {
             crawlJob.checkXML();
         }
@@ -154,7 +191,12 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         mainWebResource = webResourceFactory.createPage(pageURL);
         mainWebResource = webResourceDataService.saveOrUpdate(mainWebResource);
         String[] pageUrl = {pageURL};
-        this.crawlJob = new TanaguruCrawlJob(pageUrl, heritrixPageFileName, outputDir, crawlConfigFilePath);
+        this.crawlJob = new TanaguruCrawlJob(
+                pageUrl,
+                HERITRIX_PAGE_FILE_NAME,
+                outputDir,
+                crawlConfigFilePath,
+                paramSet);
         if (crawlJob.isLaunchable()) {
             crawlJob.checkXML();
         }
@@ -423,8 +465,9 @@ public class CrawlerImpl implements Crawler, ContentWriter {
      * @param relatedContent
      */
     private void persistContentRelationShip(SSP ssp, RelatedContent relatedContent) {
-        relatedContentSet.clear();
-        relatedContentSet.add(((Content) relatedContent).getId());
-        contentDataService.saveContentRelationShip(ssp, relatedContentSet);
+        relatedContentSetTemp.clear();
+        relatedContentSetTemp.add(((Content) relatedContent).getId());
+        contentDataService.saveContentRelationShip(ssp, relatedContentSetTemp);
     }
+
 }

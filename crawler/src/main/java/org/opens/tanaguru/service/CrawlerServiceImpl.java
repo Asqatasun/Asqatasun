@@ -2,6 +2,7 @@ package org.opens.tanaguru.service;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.apache.log4j.Logger;
@@ -12,6 +13,7 @@ import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
+import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
@@ -139,10 +141,10 @@ public class CrawlerServiceImpl implements CrawlerService {
 
     @Override
     public Page crawl(Page page) {
-        Crawler crawler = getCrawlerInstance();
+        Audit audit = page.getAudit();
+        Crawler crawler = getCrawlerInstance((List<Parameter>)audit.getParameterSet());
         crawler.setPageURL(page.getURL());
         crawler.run();
-        Audit audit = page.getAudit();
         page = (Page) crawler.getResult();
         page.setAudit(audit);
         audit.setSubject(page);
@@ -161,7 +163,8 @@ public class CrawlerServiceImpl implements CrawlerService {
      */
     @Override
     public Site crawl(Site site) {
-        Crawler crawler = getCrawlerInstance();
+        Audit audit = site.getAudit();
+        Crawler crawler = getCrawlerInstance((List<Parameter>)audit.getParameterSet());
 
         int componentListSize = site.getComponentList().size();
         if (componentListSize == 0) {
@@ -177,7 +180,6 @@ public class CrawlerServiceImpl implements CrawlerService {
             crawler.setSiteURL(site.getURL(), urlPage);
         }
         crawler.run();
-        Audit audit = site.getAudit();
         site = (Site) crawler.getResult();
         site.setAudit(audit);
         audit.setSubject(site);
@@ -196,7 +198,7 @@ public class CrawlerServiceImpl implements CrawlerService {
      */
     @Override
     public WebResource crawl(Audit audit) {
-        Crawler crawler = getCrawlerInstance();
+        Crawler crawler = getCrawlerInstance((List<Parameter>)audit.getParameterSet());
         crawler.run();
         WebResource webResource = crawler.getResult();
         webResource.setAudit(audit);
@@ -309,8 +311,17 @@ public class CrawlerServiceImpl implements CrawlerService {
      * @return
      *       a crawler instance.
      */
-    private Crawler getCrawlerInstance() {
-        return crawlerFactory.create(webResourceFactory, webResourceDataService, contentFactory, contentDataService, outputDir, crawlConfigFilePath);
+    private Crawler getCrawlerInstance(List<Parameter> paramList) {
+        Set<Parameter> paramSet = new HashSet<Parameter>();
+        paramSet.addAll(paramList);
+        return crawlerFactory.create(
+                webResourceFactory,
+                webResourceDataService,
+                contentFactory,
+                contentDataService,
+                paramSet,
+                outputDir,
+                crawlConfigFilePath);
     }
-    
+
 }
