@@ -27,18 +27,22 @@ public class DefiniteResultImpl extends ProcessResultImpl implements
         super();
     }
 
+    @Override
     public TestSolution getDefiniteValue() {
         return definiteValue;
     }
 
+    @Override
     public Object getValue() {
         return getDefiniteValue();
     }
 
+    @Override
     public void setDefiniteValue(TestSolution definiteValue) {
         this.definiteValue = definiteValue;
     }
 
+    @Override
     public void setValue(Object value) {
         setDefiniteValue((TestSolution) value);
     }

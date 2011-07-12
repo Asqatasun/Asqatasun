@@ -30,7 +30,7 @@ public class EvidenceElementImpl implements EvidenceElement,
     @ManyToOne
     @JoinColumn(name = "EVIDENCE_Id_Evidence")
     protected EvidenceImpl evidence;
-    @Column(name = "Element_Value", length = 5000, nullable = false)
+    @Column(name = "Element_Value", nullable = false, length = 4096)
     protected String value;
     @ManyToOne
     @JoinColumn(name = "PROCESS_REMARK_Id_Process_Remark")

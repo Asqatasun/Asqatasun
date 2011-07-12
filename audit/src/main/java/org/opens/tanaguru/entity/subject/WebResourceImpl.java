@@ -40,7 +40,7 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     @ManyToOne
     @JoinColumn(name = "Id_Web_Resource_Parent")
     protected SiteImpl parent;
-    @Column(name = "Url", length=768, nullable = false)
+    @Column(name = "Url", length=2048, nullable = false)
     protected String url;
     @OneToMany(mappedBy = "subject")
     protected Set<ProcessResultImpl> processResultList = new LinkedHashSet<ProcessResultImpl>();

@@ -11,10 +11,10 @@ public abstract class RelatedTextContentImpl extends RelatedContentImpl implemen
         TextContent, RelatedContent, Serializable {
 
     private static final long serialVersionUID = -8312398273757492821L;
-    @Column(name = "Source", length = 400000)
+    @Column(name = "Source", length = 16777215)
     protected String source = null;
 
-    @Column(name = "Adapted_Content", length = 400000)
+    @Column(name = "Adapted_Content", length = 16777215)
     protected String adaptedContent = null;
 
     public RelatedTextContentImpl() {
@@ -43,14 +43,17 @@ public abstract class RelatedTextContentImpl extends RelatedContentImpl implemen
         this.source = source;
     }
 
+    @Override
     public String getSource() {
         return source;
     }
 
+    @Override
     public void setSource(String source) {
         this.source = source;
     }
 
+    @Override
     public String getAdaptedContent() {
         return adaptedContent;
     }

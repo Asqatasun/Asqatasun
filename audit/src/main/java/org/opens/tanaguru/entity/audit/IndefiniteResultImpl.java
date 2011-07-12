@@ -17,7 +17,7 @@ public class IndefiniteResultImpl extends ProcessResultImpl implements
 
     private static final long serialVersionUID = -9026725317465914229L;
     
-    @Column(name = "Indefinite_Value")
+    @Column(name = "Indefinite_Value", length = 4096)
     protected String indefiniteValue;
 
     public IndefiniteResultImpl() {
@@ -27,10 +27,12 @@ public class IndefiniteResultImpl extends ProcessResultImpl implements
     /**
      * @return the indefiniteValue
      */
+    @Override
     public String getIndefiniteValue() {
         return indefiniteValue;
     }
 
+    @Override
     public Object getValue() {
         return getIndefiniteValue();
     }
@@ -39,10 +41,12 @@ public class IndefiniteResultImpl extends ProcessResultImpl implements
      * @param indefiniteValue
      *            the indefiniteValue to set
      */
+    @Override
     public void setIndefiniteValue(String indefiniteValue) {
         this.indefiniteValue = indefiniteValue;
     }
 
+    @Override
     public void setValue(Object value) {
         setIndefiniteValue((String) value);
     }

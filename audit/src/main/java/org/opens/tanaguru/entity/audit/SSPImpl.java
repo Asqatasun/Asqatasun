@@ -10,7 +10,6 @@ import org.opens.tanaguru.entity.subject.PageImpl;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -26,14 +25,14 @@ import javax.xml.bind.annotation.XmlTransient;
 public class SSPImpl extends ContentImpl implements SSP, Serializable {
 
     private static final long serialVersionUID = -7889349852989199094L;
-    @Column(name = "Adapted_Content")
+    @Column(name = "Adapted_Content", length = 16777215)
     protected String dom;
 
     @ManyToOne
     @JoinColumn(name = "Id_Page")
     protected PageImpl page;
 
-    @Column(name = "Source")
+    @Column(name = "Source", length = 16777215)
     protected String source;
 
     @Column(name = "Doctype", length = 512)

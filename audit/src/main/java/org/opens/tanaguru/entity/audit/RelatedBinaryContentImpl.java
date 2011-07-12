@@ -50,10 +50,12 @@ public abstract class RelatedBinaryContentImpl extends RelatedContentImpl implem
         this.binaryContent = ArrayUtils.toObject(binaryContent);
     }
 
+    @Override
     public byte[] getContent() {
         return ArrayUtils.toPrimitive(binaryContent);
     }
 
+    @Override
     public void setContent(byte[] binaryContent) {
         this.binaryContent = ArrayUtils.toObject(binaryContent);
     }
