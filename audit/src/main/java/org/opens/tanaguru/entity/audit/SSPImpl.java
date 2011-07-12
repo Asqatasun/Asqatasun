@@ -26,14 +26,14 @@ import javax.xml.bind.annotation.XmlTransient;
 public class SSPImpl extends ContentImpl implements SSP, Serializable {
 
     private static final long serialVersionUID = -7889349852989199094L;
-    @Column(name = "Adapted_Content", length = 400000)
+    @Column(name = "Adapted_Content")
     protected String dom;
 
     @ManyToOne
     @JoinColumn(name = "Id_Page")
     protected PageImpl page;
 
-    @Column(name = "Source", length = 400000)
+    @Column(name = "Source")
     protected String source;
 
     @Column(name = "Doctype", length = 512)
