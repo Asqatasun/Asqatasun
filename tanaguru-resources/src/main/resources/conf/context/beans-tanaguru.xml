@@ -4,131 +4,47 @@
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="auditDAO" class="org.opens.tanaguru.entity.dao.audit.AuditDAOImpl"/>
-    <bean id="auditDataService" class="org.opens.tanaguru.entity.service.audit.AuditDataServiceImpl">
-        <property name="entityFactory" ref="auditFactory"/>
-        <property name="entityDao" ref="auditDAO"/>
-    </bean>
-
-    <bean id="webResourceDAO" class="org.opens.tanaguru.entity.dao.subject.WebResourceDAOImpl"/>
-    <bean id="webResourceDataService" class="org.opens.tanaguru.entity.service.subject.WebResourceDataServiceImpl">
-        <property name="entityFactory" ref="webResourceFactory"/>
-        <property name="entityDao" ref="webResourceDAO"/>
-    </bean>
-
-    <bean id="testDAO" class="org.opens.tanaguru.entity.dao.reference.TestDAOImpl"/>
-    <bean id="testDataService" class="org.opens.tanaguru.entity.service.reference.TestDataServiceImpl">
-        <property name="entityFactory" ref="testFactory"/>
-        <property name="entityDao" ref="testDAO"/>
-    </bean>
-
-    <bean id="themeDAO" class="org.opens.tanaguru.entity.dao.reference.ThemeDAOImpl"/>
-    <bean id="themeDataService" class="org.opens.tanaguru.entity.service.reference.ThemeDataServiceImpl">
-        <property name="entityFactory" ref="themeFactory"/>
-        <property name="entityDao" ref="themeDAO"/>
-    </bean>
-
-    <bean id="contentDAO" class="org.opens.tanaguru.entity.dao.audit.ContentDAOImpl"/>
-    <bean id="contentDataService" class="org.opens.tanaguru.entity.service.audit.ContentDataServiceImpl">
-        <property name="entityFactory" ref="contentFactory"/>
-        <property name="entityDao" ref="contentDAO"/>
-    </bean>
-
-    <bean id="processResultDAO" class="org.opens.tanaguru.entity.dao.audit.ProcessResultDAOImpl"/>
-    <bean id="processResultDataService" class="org.opens.tanaguru.entity.service.audit.ProcessResultDataServiceImpl">
-        <property name="entityFactory" ref="processResultFactory"/>
-        <property name="entityDao" ref="processResultDAO"/>
-    </bean>
-
-    <bean id="processRemarkDAO" class="org.opens.tanaguru.entity.dao.audit.ProcessRemarkDAOImpl"/>
-    <bean id="processRemarkDataService" class="org.opens.tanaguru.entity.service.audit.ProcessRemarkDataServiceImpl">
-        <property name="entityFactory" ref="processRemarkFactory"/>
-        <property name="entityDao" ref="processRemarkDAO"/>
-    </bean>
-
-    <bean id="scopeDAO" class="org.opens.tanaguru.entity.dao.reference.ScopeDAOImpl"/>
-    <bean id="scopeDataService" class="org.opens.tanaguru.entity.service.reference.ScopeDataServiceImpl">
-        <property name="entityFactory" ref="scopeFactory"/>
-        <property name="entityDao" ref="scopeDAO"/>
-    </bean>
-
-    <bean id="levelDAO" class="org.opens.tanaguru.entity.dao.reference.LevelDAOImpl"/>
-    <bean id="levelDataService" class="org.opens.tanaguru.entity.service.reference.LevelDataServiceImpl">
-        <property name="entityFactory" ref="levelFactory"/>
-        <property name="entityDao" ref="levelDAO"/>
-    </bean>
-
-    <bean id="evidenceDAO" class="org.opens.tanaguru.entity.dao.audit.EvidenceDAOImpl"/>
-    <bean id="evidenceDataService" class="org.opens.tanaguru.entity.service.audit.EvidenceDataServiceImpl">
-        <property name="entityFactory" ref="evidenceFactory"/>
-        <property name="entityDao" ref="evidenceDAO"/>
-    </bean>
-
-    <bean id="evidenceElementDAO" class="org.opens.tanaguru.entity.dao.audit.EvidenceElementDAOImpl"/>
-    <bean id="evidenceElementDataService" class="org.opens.tanaguru.entity.service.audit.EvidenceElementDataServiceImpl">
-        <property name="entityFactory" ref="evidenceElementFactory"/>
-        <property name="entityDao" ref="evidenceElementDAO"/>
-    </bean>
-
-    <bean id="nomenclatureDAO" class="org.opens.tanaguru.entity.dao.reference.NomenclatureDAOImpl"/>
-    <bean id="nomenclatureDataService" class="org.opens.tanaguru.entity.service.reference.NomenclatureDataServiceImpl">
-        <property name="entityDao" ref="nomenclatureDAO"/>
-        <property name="entityFactory" ref="nomenclatureFactory"/>
-    </bean>
-
-    <bean id="parameterDAO" class="org.opens.tanaguru.entity.dao.parameterization.ParameterDAOImpl"/>
-    <bean id="parameterDataService" class="org.opens.tanaguru.entity.service.parameterization.ParameterDataServiceImpl">
-        <property name="entityDao" ref="parameterDAO"/>
-        <property name="entityFactory" ref="parameterFactory"/>
-    </bean>
-
-    <bean id="parameterElementDAO" class="org.opens.tanaguru.entity.dao.parameterization.ParameterElementDAOImpl"/>
-    <bean id="parameterElementDataService" class="org.opens.tanaguru.entity.service.parameterization.ParameterElementDataServiceImpl">
-        <property name="entityDao" ref="parameterElementDAO"/>
-        <property name="entityFactory" ref="parameterElementFactory"/>
-    </bean>
-
-    <bean id="parameterFamilyDAO" class="org.opens.tanaguru.entity.dao.parameterization.ParameterFamilyDAOImpl"/>
-    <bean id="parameterFamilyDataService" class="org.opens.tanaguru.entity.service.parameterization.ParameterFamilyDataServiceImpl">
-        <property name="entityDao" ref="parameterFamilyDAO"/>
-        <property name="entityFactory" ref="parameterFamilyFactory"/>
-    </bean>
-
     <bean id="auditServiceThreadQueue" class="org.opens.tanaguru.service.AuditServiceThreadQueueImpl">
+        <!-- audit limit parameters -->
         <property name="pageAuditExecutionListMax" value="9"/>
         <property name="siteAuditExecutionListMax" value="3"/>
-
+        <!-- services injection -->
         <property name="crawlerService" ref="crawlerService"/>
 <!--        <property name="contentLoaderService" ref="contentLoaderService"/>-->
         <property name="contentAdapterService" ref="contentAdapterService"/>
         <property name="processorService" ref="processorService"/>
         <property name="consolidatorService" ref="consolidatorService"/>
         <property name="analyserService" ref="analyserService"/>
-
+        <!-- data services injection -->
         <property name="auditDataService" ref="auditDataService"/>
         <property name="webResourceDataService" ref="webResourceDataService"/>
         <property name="contentDataService" ref="contentDataService"/>
         <property name="processResultDataService" ref="processResultDataService"/>
+        <!-- adaptation listener injection -->
         <property name="adaptationListener" ref="adaptationListener"/>
+        <!-- audit service thread injection -->
         <property name="auditServiceThreadFactory" ref="auditServiceThreadFactory"/>
     </bean>
     <bean id="auditServiceThreadFactory" class="org.opens.tanaguru.service.AuditServiceThreadFactoryImpl"/>
 
     <bean id="auditService" class="org.opens.tanaguru.service.AuditServiceImpl">
-        <property name="auditDataService" ref="auditDataService"/>
-        <property name="webResourceDataService" ref="webResourceDataService"/>
-        <property name="testDataService" ref="testDataService"/>
-        <property name="contentDataService" ref="contentDataService"/>
-        <property name="processResultDataService" ref="processResultDataService"/>
-
+        <!-- services injection -->
         <property name="crawlerService" ref="crawlerService"/>
 <!--        <property name="contentLoaderService" ref="contentLoaderService"/>-->
         <property name="contentAdapterService" ref="contentAdapterService"/>
         <property name="processorService" ref="processorService"/>
         <property name="consolidatorService" ref="consolidatorService"/>
         <property name="analyserService" ref="analyserService"/>
-        <property name="adaptationListener" ref="adaptationListener"/>
+        <!-- data services injection -->
+        <property name="auditDataService" ref="auditDataService"/>
+        <property name="webResourceDataService" ref="webResourceDataService"/>
+        <property name="testDataService" ref="testDataService"/>
+        <property name="contentDataService" ref="contentDataService"/>
+        <property name="processResultDataService" ref="processResultDataService"/>
         <property name="parameterDataService" ref="parameterDataService"/>
+        <!-- adaptation listener injection -->
+        <property name="adaptationListener" ref="adaptationListener"/>
+        <!-- audit service thread injection -->
         <property name="auditServiceThreadQueue" ref="auditServiceThreadQueue"/>
         <property name="auditServiceThreadFactory" ref="auditServiceThreadFactory"/>
     </bean>
