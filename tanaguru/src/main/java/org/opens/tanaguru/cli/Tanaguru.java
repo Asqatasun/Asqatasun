@@ -3,6 +3,7 @@ package org.opens.tanaguru.cli;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -75,12 +76,13 @@ public class Tanaguru implements AuditServiceListener {
             Logger.getLogger(Tanaguru.class.getName()).log(Level.SEVERE, null, ex);
         }
         Set<Parameter> paramSet = parameterDataService.getDefaultParameterSet();
-        String[] pageUrlList = urlTab.split(";");
-        String[] testCodeList = props.getProperty("testCodeList").split(";");
-        if (pageUrlList.length > 1) {
-            auditService.auditSite("site:" + pageUrlList[0], pageUrlList, testCodeList, paramSet);
+        String[] pageUrlTab = urlTab.split(";");
+        List<String> pageUrlList = new ArrayList<String>();
+        pageUrlList.addAll(Arrays.asList(pageUrlTab));
+        if (pageUrlList.size() > 1) {
+            auditService.auditSite("site:" + pageUrlList.get(0), pageUrlList, paramSet);
         } else {
-            auditService.auditPage(pageUrlList[0], testCodeList, paramSet);
+            auditService.auditPage(pageUrlList.get(0), paramSet);
         }
     }
 
