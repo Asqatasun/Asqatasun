@@ -2,26 +2,39 @@
 <dataset>
     
     <REFERENCE Id_Reference="1" Cd_Reference="01" Description="" Label="Accessiweb 2.1" Rank="1" Url="http://www.braillenet.org/accessibilite/referentiel-aw21/"/>
+    <REFERENCE Id_Reference="2" Cd_Reference="02" Description="" Label="Accessiweb 2.2" Rank="2" Url="http://www.braillenet.org/accessibilite/referentiel-aw21/"/>
 
     <THEME Id_Theme="1" Cd_Theme="01" Label="Theme1" Rank="1"/>
     <THEME Id_Theme="2" Cd_Theme="02" Label="Theme2" Rank="2"/>
+    <THEME Id_Theme="3" Cd_Theme="03" Label="Theme3" Rank="3"/>
 
     <CRITERION Id_Criterion="1" Reference_Id_Reference="1" Theme_Id_Theme="1" Cd_Criterion="0101" Description="Critere 1.1" Label="1.1" Url="http://www.doc.org/critere1.1" Rank="1"/>
     <CRITERION Id_Criterion="2" Reference_Id_Reference="1" Theme_Id_Theme="2" Cd_Criterion="0102" Description="Critere 1.2" Label="1.2" Url="http://www.doc.org/critere1.2" Rank="2"/>
+    <CRITERION Id_Criterion="3" Reference_Id_Reference="2" Theme_Id_Theme="3" Cd_Criterion="0103" Description="Critere 1.3" Label="1.3" Url="http://www.doc.org/critere1.3" Rank="3"/>
+    <CRITERION Id_Criterion="4" Reference_Id_Reference="2" Theme_Id_Theme="3" Cd_Criterion="0104" Description="Critere 1.4" Label="1.4" Url="http://www.doc.org/critere1.4" Rank="4"/>
 
     <SCOPE Id_Scope="1" Code="page" Description="page" Label="Page" />
     <SCOPE Id_Scope="2" Code="site" Description="site" Label="Site" />
+    
+    <LEVEL Id_Level="1" Cd_Level="Bz" Description="Level1" Label="Level1" Rank="1"/>
+    <LEVEL Id_Level="2" Cd_Level="Ar" Description="Level2" Label="Level2" Rank="2"/>
+    <LEVEL Id_Level="3" Cd_Level="Or" Description="Level3" Label="Level3" Rank="3"/>
 
-    <TEST Id_Test="1" Cd_Test="010101" Description="Test 1.1.1" Label="1.1.1" Rank="1" Id_Criterion="1" Id_Scope="2"/>
-    <TEST Id_Test="2" Cd_Test="010102" Description="Test 1.1.2" Label="1.1.2" Rank="2" Id_Criterion="2" Id_Scope="1"/>
-    <TEST Id_Test="3" Cd_Test="010103" Description="Test 1.1.3" Label="1.1.3" Rank="3" Id_Criterion="1" Id_Scope="2"/>
-    <TEST Id_Test="4" Cd_Test="010104" Description="Test 1.1.4" Label="1.1.4" Rank="4" Id_Criterion="2" Id_Scope="1"/>
-    <TEST Id_Test="5" Cd_Test="010105" Description="Test 1.1.5" Label="1.1.5" Rank="5" Id_Criterion="1" Id_Scope="1"/>
-    <TEST Id_Test="6" Cd_Test="010106" Description="Test 1.1.6" Label="1.1.6" Rank="6" Id_Criterion="2" Id_Scope="1"/>
-    <TEST Id_Test="7" Cd_Test="010107" Description="Test 1.1.7" Label="1.1.7" Rank="7" Id_Criterion="2" Id_Scope="1"/>
-    <TEST Id_Test="8" Cd_Test="010108" Description="Test 1.1.8" Label="1.1.8" Rank="8" Id_Criterion="1" Id_Scope="1"/>
-    <TEST Id_Test="9" Cd_Test="010109" Description="Test 1.1.9" Label="1.1.9" Rank="9" Id_Criterion="2" Id_Scope="1"/>
-    <TEST Id_Test="10" Cd_Test="010110" Description="Test 1.1.10" Label="1.1.10" Rank="10" Id_Criterion="2" Id_Scope="1"/>
+    <TEST Id_Test="1" Cd_Test="10101" Description="Test 1.1.1" Label="1.1.1" Rank="1" Id_Criterion="1" Id_Scope="2" Id_Level="1"/>
+    <TEST Id_Test="2" Cd_Test="10102" Description="Test 1.1.2" Label="1.1.2" Rank="2" Id_Criterion="2" Id_Scope="1" Id_Level="1"/>
+    <TEST Id_Test="3" Cd_Test="10103" Description="Test 1.1.3" Label="1.1.3" Rank="3" Id_Criterion="1" Id_Scope="2" Id_Level="1"/>
+    <TEST Id_Test="4" Cd_Test="10104" Description="Test 1.1.4" Label="1.1.4" Rank="4" Id_Criterion="2" Id_Scope="1" Id_Level="1"/>
+    <TEST Id_Test="5" Cd_Test="10105" Description="Test 1.1.5" Label="1.1.5" Rank="5" Id_Criterion="1" Id_Scope="1" Id_Level="1"/>
+    <TEST Id_Test="6" Cd_Test="10106" Description="Test 1.1.6" Label="1.1.6" Rank="6" Id_Criterion="2" Id_Scope="1" Id_Level="1"/>
+    <TEST Id_Test="7" Cd_Test="10107" Description="Test 1.1.7" Label="1.1.7" Rank="7" Id_Criterion="2" Id_Scope="1" Id_Level="2"/>
+    <TEST Id_Test="8" Cd_Test="10108" Description="Test 1.1.8" Label="1.1.8" Rank="8" Id_Criterion="1" Id_Scope="1" Id_Level="2"/>
+    <TEST Id_Test="9" Cd_Test="10109" Description="Test 1.1.9" Label="1.1.9" Rank="9" Id_Criterion="2" Id_Scope="1" Id_Level="2"/>
+    <TEST Id_Test="10" Cd_Test="10110" Description="Test 1.1.10" Label="1.1.10" Rank="10" Id_Criterion="2" Id_Scope="1" Id_Level="1"/>
+    <TEST Id_Test="11" Cd_Test="10111" Description="Test 1.1.11" Label="1.1.11" Rank="11" Id_Criterion="3" Id_Scope="1" Id_Level="1"/>
+    <TEST Id_Test="12" Cd_Test="10112" Description="Test 1.1.12" Label="1.1.12" Rank="12" Id_Criterion="3" Id_Scope="1" Id_Level="1"/>
+    <TEST Id_Test="13" Cd_Test="10113" Description="Test 1.1.13" Label="1.1.13" Rank="13" Id_Criterion="3" Id_Scope="1" Id_Level="1"/>
+    <TEST Id_Test="14" Cd_Test="10114" Description="Test 1.1.14" Label="1.1.14" Rank="14" Id_Criterion="4" Id_Scope="1" Id_Level="2"/>
+    <TEST Id_Test="15" Cd_Test="10115" Description="Test 1.1.15" Label="1.1.15" Rank="15" Id_Criterion="4" Id_Scope="1" Id_Level="2"/>
 
     <AUDIT Id_Audit="1" Dt_Creation="2010-10-26 13:50:29" Status="COMPLETED"/>
     <AUDIT Id_Audit="2" Dt_Creation="2010-10-26 14:50:29" Status="COMPLETED"/>
