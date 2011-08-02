@@ -25,16 +25,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AuditServiceImpl implements AuditService, AuditServiceListener {
 
     private AnalyserService analyserService;
-    private AuditDataService auditDataService;
     private ConsolidatorService consolidatorService;
     private ContentAdapterService contentAdapterService;
     private CrawlerService crawlerService;
     private ProcessorService processorService;
+
+    private AuditDataService auditDataService;
     private ProcessResultDataService processResultDataService;
     private TestDataService testDataService;
     private WebResourceDataService webResourceDataService;
     private ContentDataService contentDataService;
     private ParameterDataService parameterDataService;
+    
     private AuditServiceThreadFactory auditServiceThreadFactory;
     private AuditServiceThreadQueue auditServiceThreadQueue;
     private Set<AuditServiceListener> listeners;
@@ -46,6 +48,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
         this.contentDataService = contentDataService;
     }
 
+    @Override
     public void add(AuditServiceListener listener) {
         if (listeners == null) {
             listeners = new HashSet<AuditServiceListener>();
@@ -53,6 +56,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
         listeners.add(listener);
     }
 
+    @Override
     public void remove(AuditServiceListener listener) {
         if (listeners == null) {
             return;
@@ -69,10 +73,10 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
     }
 
     @Override
-    public Audit auditPage(String pageUrl, String[] testCodeList, Set<Parameter> paramSet) {
+    public Audit auditPage(String pageUrl, Set<Parameter> paramSet) {
         Page page = webResourceDataService.createPage(pageUrl);
 
-        List<Test> testList = testDataService.findAllByCode(testCodeList);
+        List<Test> testList = testDataService.getTestListFromParamSet(paramSet);
 
         // the paramSet has to be persisted
         parameterDataService.saveOrUpdate(paramSet);
@@ -88,10 +92,10 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
     }
 
     @Override
-    public Audit auditSite(String siteUrl, String[] testCodeList, Set<Parameter> paramSet) {
+    public Audit auditSite(String siteUrl, Set<Parameter> paramSet) {
         Site site = webResourceDataService.createSite(siteUrl);
 
-        List<Test> testList = testDataService.findAllByCode(testCodeList);
+        List<Test> testList = testDataService.getTestListFromParamSet(paramSet);
 
         // the paramSet has to be persisted
         parameterDataService.saveOrUpdate(paramSet);
@@ -107,13 +111,13 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
     }
 
     @Override
-    public Audit auditSite(String siteUrl, String[] pageUrlList, String[] testCodeList, Set<Parameter> paramSet) {
+    public Audit auditSite(String siteUrl, List<String> pageUrlList, Set<Parameter> paramSet) {
         Site site = webResourceDataService.createSite(siteUrl);
         for (String pageUrl : pageUrlList) {
             site.addChild(webResourceDataService.createPage(pageUrl));
         }
 
-        List<Test> testList = testDataService.findAllByCode(testCodeList);
+        List<Test> testList = testDataService.getTestListFromParamSet(paramSet);
 
         // the paramSet has to be persisted
         parameterDataService.saveOrUpdate(paramSet);
@@ -290,4 +294,5 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
             listener.auditCrashed(audit, exception);
         }
     }
+
 }

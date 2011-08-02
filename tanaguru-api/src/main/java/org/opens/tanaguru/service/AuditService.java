@@ -1,5 +1,6 @@
 package org.opens.tanaguru.service;
 
+import java.util.List;
 import java.util.Set;
 import org.opens.tanaguru.entity.audit.Audit;
 import javax.xml.bind.annotation.XmlTransient;
@@ -66,26 +67,24 @@ public interface AuditService {
      * @param paramSet
      * @return
      */
-    Audit auditPage(String pageUrl, String[] testCodeList, Set<Parameter> paramSet);
+    Audit auditPage(String pageUrl, Set<Parameter> paramSet);
 
     /**
      *
      * @param siteUrl
-     * @param testCodeList
      * @param paramSet
      * @return
      */
-    Audit auditSite(String siteUrl, String[] testCodeList, Set<Parameter> paramSet);
+    Audit auditSite(String siteUrl, Set<Parameter> paramSet);
 
     /**
      *
      * @param siteUrl
      * @param pageUrlList
-     * @param testCodeList
      * @param paramSet
      * @return
      */
-    Audit auditSite(String siteUrl, String[] pageUrlList, String[] testCodeList, Set<Parameter> paramSet);
+    Audit auditSite(String siteUrl, List<String> pageUrlList, Set<Parameter> paramSet);
 
     /**
      *
