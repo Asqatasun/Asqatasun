@@ -52,35 +52,37 @@ public class ParameterDataServiceImpl extends AbstractGenericDataService<Paramet
     }
 
     @Override
-    public Set<Parameter> updateParameterSet(Set<Parameter> paramSet, Set<Parameter> paramsToUpdate) {
-        Set<Parameter> paramToRemove = new HashSet<Parameter>();
-        Set<String> paramElementToRemove = new HashSet<String>();
-        for (Parameter parameter : paramsToUpdate) {
-            paramElementToRemove.add(parameter.getParameterElement().getParameterElementCode());
-        }
+    public Set<Parameter> updateParameterSet(final Set<Parameter> paramSet, final Set<Parameter> paramsToUpdate) {
+        Set<Parameter> paramToReturn = new HashSet<Parameter>();
         for (Parameter parameter : paramSet){
-            if (paramElementToRemove.contains(parameter.getParameterElement().getParameterElementCode())){
-                paramToRemove.add(parameter);
+            boolean found = false;
+            for (Parameter paramToUpdate : paramsToUpdate) {
+              if (parameter.getParameterElement().getParameterElementCode().equals(
+                    paramToUpdate.getParameterElement().getParameterElementCode())) {
+                  paramToReturn.add(paramToUpdate);
+                  found = true;
+                  break;
+              }
+            }
+            if (!found) {
+                paramToReturn.add(parameter);
             }
         }
-        paramSet.removeAll(paramToRemove);
-        paramSet.addAll(paramsToUpdate);
-        return paramSet;
+        return paramToReturn;
     }
 
     @Override
-    public Set<Parameter> updateParameter(Set<Parameter> paramSet, Parameter paramToUpdate) {
-        Parameter paramToRemove = null;
+    public Set<Parameter> updateParameter(final Set<Parameter> paramSet, final Parameter paramToUpdate) {
+        Set<Parameter> paramToReturn = new HashSet<Parameter>();
         for (Parameter parameter : paramSet) {
             if (parameter.getParameterElement().getParameterElementCode().equals(
                     paramToUpdate.getParameterElement().getParameterElementCode())) {
-                paramToRemove = parameter;
-                break;
+                paramToReturn.add(paramToUpdate);
+            } else {
+                paramToReturn.add(parameter);
             }
         }
-        paramSet.remove(paramToRemove);
-        paramSet.add(paramToUpdate);
-        return paramSet;
+        return paramToReturn;
     }
 
     @Override

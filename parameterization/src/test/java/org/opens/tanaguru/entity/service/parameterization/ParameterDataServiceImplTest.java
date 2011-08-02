@@ -47,7 +47,7 @@ public class ParameterDataServiceImplTest extends TestCase {
             paramToUpdate.add(getParameter(PARAM_FAMILY, PARAM_ELEMENT+String.valueOf(i), String.valueOf(i+10)));
         }
         assertEquals(3, paramToUpdate.size());
-        pds.updateParameterSet(paramSet, paramToUpdate);
+        paramSet = pds.updateParameterSet(paramSet, paramToUpdate);
         for (Parameter param : paramSet) {
             int length = param.getParameterElement().getParameterElementCode().length();
             int index = Integer.valueOf(param.getParameterElement().getParameterElementCode().substring(length-1, length)).intValue();
@@ -67,7 +67,7 @@ public class ParameterDataServiceImplTest extends TestCase {
             paramSet.add(getParameter(PARAM_FAMILY, PARAM_ELEMENT+String.valueOf(i), String.valueOf(i)));
         }
         assertEquals(5, paramSet.size());
-        pds.updateParameter(paramSet, getParameter(PARAM_FAMILY, PARAM_ELEMENT+String.valueOf(3), String.valueOf(13)));
+        paramSet = pds.updateParameter(paramSet, getParameter(PARAM_FAMILY, PARAM_ELEMENT+String.valueOf(3), String.valueOf(13)));
         for (Parameter param : paramSet) {
             if (param.getParameterElement().getParameterElementCode().equalsIgnoreCase(PARAM_ELEMENT+String.valueOf(3))) {
                 assertEquals(13, Integer.valueOf(param.getValue()).intValue());
