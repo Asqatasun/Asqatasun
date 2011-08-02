@@ -11,5 +11,18 @@ import com.adex.sdk.entity.dao.GenericDAO;
  */
 public interface ReferenceDAO extends GenericDAO<Reference, Long> {
 
-	Collection<Reference> retrieveAllByCode(String code);
+    /**
+     * 
+     * @param code
+     * @return
+     */
+    Collection<Reference> retrieveAllByCode(String code);
+
+    /**
+     *
+     * @param code
+     * @return
+     */
+    Reference retrieveByCode(String code);
+
 }

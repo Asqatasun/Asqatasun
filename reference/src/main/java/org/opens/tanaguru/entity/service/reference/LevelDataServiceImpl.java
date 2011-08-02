@@ -2,6 +2,7 @@ package org.opens.tanaguru.entity.service.reference;
 
 import org.opens.tanaguru.entity.reference.Level;
 import com.adex.sdk.entity.service.AbstractGenericDataService;
+import org.opens.tanaguru.entity.dao.reference.LevelDAO;
 
 /**
  * 
@@ -12,4 +13,10 @@ public class LevelDataServiceImpl extends AbstractGenericDataService<Level, Long
     public LevelDataServiceImpl() {
         super();
     }
+
+    @Override
+    public Level getByCode(String code) {
+        return ((LevelDAO)entityDao).retrieveByCode(code);
+    }
+
 }

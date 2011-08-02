@@ -1,8 +1,8 @@
 package org.opens.tanaguru.entity.service.reference;
 
-import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Reference;
 import com.adex.sdk.entity.service.AbstractGenericDataService;
+import org.opens.tanaguru.entity.dao.reference.ReferenceDAO;
 
 /**
  * 
@@ -20,4 +20,10 @@ public class ReferenceDataServiceImpl extends AbstractGenericDataService<Referen
         Reference entity = super.read(key);
         return entity;
     }
+
+    @Override
+    public Reference getByCode(String code) {
+        return ((ReferenceDAO)entityDao).retrieveByCode(code);
+    }
+
 }

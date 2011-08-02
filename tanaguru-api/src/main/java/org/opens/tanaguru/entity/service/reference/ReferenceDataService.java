@@ -10,4 +10,12 @@ import com.adex.sdk.entity.service.GenericDataService;
  */
 public interface ReferenceDataService extends
 		GenericDataService<Reference, Long> {
+    /**
+     *
+     * @param code
+     *            the code to find from
+     * @return the found reference
+     */
+    Reference getByCode(String code);
+
 }

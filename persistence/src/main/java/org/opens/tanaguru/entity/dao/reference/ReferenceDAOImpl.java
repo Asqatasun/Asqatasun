@@ -24,4 +24,13 @@ public class ReferenceDAOImpl extends AbstractJPADAO<Reference, Long> implements
         query.setParameter("code", code);
         return query.getResultList();
     }
+
+    @Override
+    public Reference retrieveByCode(String code) {
+        Query query = entityManager.createQuery("SELECT r FROM "
+                + getEntityClass().getName() + " r WHERE r.code = :code");
+        query.setParameter("code", code);
+        return (Reference)query.getSingleResult();
+    }
+
 }

@@ -1,6 +1,5 @@
 package org.opens.tanaguru.entity.dao.reference;
 
-import java.util.Collection;
 import org.opens.tanaguru.entity.reference.Level;
 import com.adex.sdk.entity.dao.GenericDAO;
 
@@ -11,5 +10,11 @@ import com.adex.sdk.entity.dao.GenericDAO;
  */
 public interface LevelDAO extends GenericDAO<Level, Long> {
 
-	Collection<Level> retrieveAllByCode(String code);
+    /**
+     * 
+     * @param code
+     * @return
+     */
+    Level retrieveByCode(String code);
+
 }

@@ -1,11 +1,13 @@
 package org.opens.tanaguru.entity.service.reference;
 
-import org.opens.tanaguru.entity.reference.Theme;
 import com.adex.sdk.entity.service.AbstractGenericDataService;
+import java.util.Collection;
+import org.opens.tanaguru.entity.reference.Criterion;
+import org.opens.tanaguru.entity.reference.Theme;
 
 /**
  * 
- * @author ADEX
+ * @author jkowalczyk
  */
 public class ThemeDataServiceImpl extends AbstractGenericDataService<Theme, Long> implements ThemeDataService {
 
@@ -18,4 +20,16 @@ public class ThemeDataServiceImpl extends AbstractGenericDataService<Theme, Long
         Theme entity = super.read(key);
         return entity;
     }
+
+    @Override
+    public Collection<? extends Theme> findAll() {
+        Collection<? extends Theme> themeList = super.findAll() ;
+        for (Theme theme : themeList) {
+            for (Criterion cr : theme.getCriterionList()) {
+                cr.getReference();
+            }
+        }
+        return themeList;
+    }
+
 }
