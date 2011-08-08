@@ -419,12 +419,14 @@ public class TanaguruCrawlJob {
      * @param processor
      */
     private void cleanUpWriterResources(PathSharingContext ac) {
-        tanaguruWriterProcessor.setExtractorCSSListener(null);
-        tanaguruWriterProcessor.setContentWriter(null);
-        tanaguruWriterProcessor.setCssRegexp(null);
-        tanaguruWriterProcessor.setExtractorHTMLListener(null);
-        tanaguruWriterProcessor.setHtmlRegexp(null);
-        tanaguruWriterProcessor = null;
+        if (tanaguruWriterProcessor != null) {
+            tanaguruWriterProcessor.setExtractorCSSListener(null);
+            tanaguruWriterProcessor.setContentWriter(null);
+            tanaguruWriterProcessor.setCssRegexp(null);
+            tanaguruWriterProcessor.setExtractorHTMLListener(null);
+            tanaguruWriterProcessor.setHtmlRegexp(null);
+            tanaguruWriterProcessor = null;
+        }
     }
 
 }
