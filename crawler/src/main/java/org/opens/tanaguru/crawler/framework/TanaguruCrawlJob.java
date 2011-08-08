@@ -25,7 +25,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import org.apache.commons.lang.StringEscapeUtils;
+//import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.log4j.Logger;
 import org.archive.crawler.framework.CrawlController;
 import org.archive.crawler.framework.CrawlJob;
@@ -311,7 +311,8 @@ public class TanaguruCrawlJob {
             // first convert the URI in unicode
             uriTmp = UURIFactory.getInstance(url[i]).getEscapedURI();
             // then escape the URI to be written in a xml file.
-            urlList.append(StringEscapeUtils.escapeXml(uriTmp));
+//            urlList.append(StringEscapeUtils.escapeXml(uriTmp));
+            urlList.append(uriTmp);
             urlList.append("\r");
         }
         doc = ccu.modifyValue(ccu.getUrlModifier(), doc, urlList.toString());
