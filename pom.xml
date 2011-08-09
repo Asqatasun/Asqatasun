@@ -37,7 +37,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <applicationGroupId>org.opens</applicationGroupId>
-        <applicationVersion>1.0-SNAPSHOT</applicationVersion>
+        <applicationVersion>1.3.0-RC1</applicationVersion>
         <springGroupId>org.springframework</springGroupId>
         <springVersion>3.0.5.RELEASE</springVersion>
         <heritrixGroupId>org.archive.heritrix</heritrixGroupId>
