@@ -67,6 +67,7 @@
             <includes>
                 <include>tanaguru-10-create-user-and-base.sql</include>
                 <include>tanaguru-20-create-tables.sql</include>
+                <include>tanaguru-30-insert.sql</include>
                 <include>tanaguru-delete-all-audit.sql</include>
             </includes>
             <fileMode>666</fileMode>
