@@ -24,18 +24,21 @@
         </property>
     </bean>
 
-    <import resource="classpath:conf/context/beans-factories.xml"/>
-    <import resource="classpath:conf/context/beans-persistence.xml"/>
-    <import resource="classpath:conf/context/beans-crawler.xml"/>
-    <import resource="classpath:conf/context/beans-contentloader.xml"/>
-    <import resource="classpath:conf/context/beans-contentadapter.xml"/>
-    <import resource="classpath:conf/context/beans-processor.xml"/>
-    <import resource="classpath:conf/context/beans-consolidator.xml"/>
     <import resource="classpath:conf/context/beans-analyser.xml"/>
-    <import resource="classpath:conf/context/beans-ruleimplementationloader.xml"/>
-    <import resource="classpath:conf/context/beans-nomenclatureloader.xml"/>
-    <import resource="classpath:conf/context/beans-tanaguru.xml"/>
+    <import resource="classpath:conf/context/beans-audit.xml"/>
+    <import resource="classpath:conf/context/beans-consolidator.xml"/>
+    <import resource="classpath:conf/context/beans-contentadapter.xml"/>
+    <import resource="classpath:conf/context/beans-contentloader.xml"/>
+    <import resource="classpath:conf/context/beans-crawler.xml"/>
+    <import resource="classpath:conf/context/beans-factories.xml"/>
     <import resource="classpath:conf/context/beans-logging.xml"/>
+    <import resource="classpath:conf/context/beans-nomenclatureloader.xml"/>
+    <import resource="classpath:conf/context/beans-parameters.xml"/>
+    <import resource="classpath:conf/context/beans-persistence.xml"/>
+    <import resource="classpath:conf/context/beans-processor.xml"/>
+    <import resource="classpath:conf/context/beans-reference.xml"/>
+    <import resource="classpath:conf/context/beans-ruleimplementationloader.xml"/>
+    <import resource="classpath:conf/context/beans-tanaguru.xml"/>
 
 
 </beans>

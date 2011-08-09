@@ -38,6 +38,9 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 public class Tanaguru implements AuditServiceListener {
 
     private static final String APPLICATION_CONTEXT_FILE_PATH = "conf/context/application-context.xml";
+    private static final String AW21_REF_CODE = "AW21";
+    private static final String LEVEL_PARAMETER_ELEMENT_CODE = "LEVEL";
+
     private AuditService auditService = null;
     private AnalyserService analyserService = null;
     private AuditDataService auditDataService = null;
@@ -48,8 +51,8 @@ public class Tanaguru implements AuditServiceListener {
     private ParameterElementDataService parameterElementDataService = null;
     
     public static void main(String[] args) {
-        if (args != null && args.length == 2 && args[0] != null && args[1] != null) {
-            new Tanaguru().run(args[0], args[1]);
+        if (args != null && args.length == 3 && args[0] != null && args[1] != null && args[2] != null) {
+            new Tanaguru().run(args[0], args[1], args[2]);
         }
     }
 
@@ -57,7 +60,7 @@ public class Tanaguru implements AuditServiceListener {
         super();
     }
 
-    public void run(String urlTab, String tanaguruHome) {
+    public void run(String urlTab, String tanaguruHome, String auditLevel) {
         ApplicationContext springApplicationContext = new FileSystemXmlApplicationContext(tanaguruHome+"/"+APPLICATION_CONTEXT_FILE_PATH);
         BeanFactory springBeanFactory = springApplicationContext;
         auditService = (AuditService) springBeanFactory.getBean("auditService");
@@ -75,7 +78,10 @@ public class Tanaguru implements AuditServiceListener {
         } catch (IOException ex) {
             Logger.getLogger(Tanaguru.class.getName()).log(Level.SEVERE, null, ex);
         }
+        ParameterElement levelParameterElement = parameterElementDataService.getParameterElement(LEVEL_PARAMETER_ELEMENT_CODE);
+        Parameter levelParameter = parameterDataService.getParameter(levelParameterElement, AW21_REF_CODE+";"+auditLevel);
         Set<Parameter> paramSet = parameterDataService.getDefaultParameterSet();
+        paramSet = parameterDataService.updateParameter(paramSet, levelParameter);
         String[] pageUrlTab = urlTab.split(";");
         List<String> pageUrlList = new ArrayList<String>();
         pageUrlList.addAll(Arrays.asList(pageUrlTab));

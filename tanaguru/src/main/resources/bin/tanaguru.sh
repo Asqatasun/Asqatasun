@@ -62,6 +62,7 @@ Usage : ./bin/tanaguru.sh [OPTIONS] [URL...]
 OPTIONS:
    -h      Show this message
    -O      Path of the output result file
+   -l      Audit Level (Default Silver, can be set to Or(Gold Level), Ar(Silver Level) or Bz (Bronze Level)
 
 ARGUMENTS:
    URL : from 1 to 10 Url separated by blank. Each url has to start with 'http://'
@@ -73,7 +74,12 @@ EOF
 # options extractions
 #####################
 RESULT_PATH_DIR=
-while getopts "O:h" OPTION
+AUDIT_LEVEL=Ar
+GOLD_LEVEL=Or
+SILVER_LEVEL=Ar
+BRONZE_LEVEL=Bz
+
+while getopts "O:l:h" OPTION
 do
     case $OPTION in
         h)
@@ -83,6 +89,9 @@ do
 	O)
           RESULT_PATH_DIR=$OPTARG
 	  ;;
+        l)
+          AUDIT_LEVEL=$OPTARG
+          ;;
         *)
           usage
           exit 1
@@ -97,6 +106,12 @@ if [ ! -z $RESULT_PATH_DIR ] && [ ! -d $RESULT_PATH_DIR  ]; then
     exit 1
 fi
 
+if [ "$AUDIT_LEVEL" != "$GOLD_LEVEL" ] && [ "$AUDIT_LEVEL" != "$SILVER_LEVEL" ] && [ "$AUDIT_LEVEL" != "$BRONZE_LEVEL" ]; then
+    echo "The level $AUDIT_LEVEL is invalid"
+    usage
+    exit 1
+fi
+
 if [ ! -z $RESULT_PATH_DIR ] && [ ! -w $RESULT_PATH_DIR  ]; then
     echo ""
     echo "The output directory is not writable."
@@ -107,12 +122,37 @@ fi
 if [ $# -lt 1 ] ; then
     usage
     exit 1
-elif [ ! -z $RESULT_PATH_DIR ] && [ $# -gt 12 ] ; then
+elif [ ! -z $RESULT_PATH_DIR ] && [ -z $AUDIT_LEVEL ] && [ $# -gt 12 ] ; then
     echo ""
     echo "Too many Urls"
     usage
     exit 1
-elif [ -z $RESULT_PATH_DIR ] && [ $# -gt 10 ] ; then
+elif [ ! -z $RESULT_PATH_DIR ] && [ -z $AUDIT_LEVEL ] && [ $# -lt 3 ] ; then
+    echo ""
+    echo "Too few Urls"
+    usage
+    exit 1
+elif [ -z $RESULT_PATH_DIR ] && [ ! -z $AUDIT_LEVEL ] && [ $# -gt 12 ] ; then
+    echo ""
+    echo "Too many Urls"
+    usage
+    exit 1
+elif [ -z $RESULT_PATH_DIR ] && [ ! -z $AUDIT_LEVEL ] && [ $# -lt 3 ] ; then
+    echo ""
+    echo "Too few Urls"
+    usage
+    exit 1
+elif [ ! -z $RESULT_PATH_DIR ] && [ ! -z $AUDIT_LEVEL ] && [ $# -gt 14 ] ; then
+    echo ""
+    echo "Too many Urls"
+    usage
+    exit 1
+elif [ ! -z $RESULT_PATH_DIR ] && [ ! -z $AUDIT_LEVEL ] && [ $# -lt 5 ] ; then
+    echo ""
+    echo "Too few Urls"
+    usage
+    exit 1
+elif [ -z $RESULT_PATH_DIR ] && [ -z $AUDIT_LEVEL ] && [ $# -gt 10 ] ; then
     echo ""
     echo "Too many Urls"
     usage
@@ -120,17 +160,31 @@ elif [ -z $RESULT_PATH_DIR ] && [ $# -gt 10 ] ; then
 else
     index=1
     for i in $*; do
-        if [ -z $RESULT_PATH_DIR ] && [ $(echo $i | sed 's%http://%%') != $i ] ; then
+        if [ -z $RESULT_PATH_DIR ] && [ -z $AUDIT_LEVEL ] && [ $(echo $i | sed 's%http://%%') != $i ] ; then
 	    URL_ARGS=$i';'$URL_ARGS
-        elif [ ! -z $RESULT_PATH_DIR ] && [ $index -gt 2 ] && [ $(echo $i | sed 's%http://%%') != $i ] ; then
+        elif [ ! -z $RESULT_PATH_DIR ] && [ ! -z $AUDIT_LEVEL ] && [ $index -gt 4 ] && [ $(echo $i | sed 's%http://%%') != $i ] ; then
 	    URL_ARGS=$i';'$URL_ARGS
-	elif [ -z $RESULT_PATH_DIR ] ; then
-            echo ""
+        elif [ ! -z $RESULT_PATH_DIR ] && [ -z $AUDIT_LEVEL ] && [ $index -gt 2 ] && [ $(echo $i | sed 's%http://%%') != $i ] ; then
+	    URL_ARGS=$i';'$URL_ARGS
+        elif [ -z $RESULT_PATH_DIR ] && [ ! -z $AUDIT_LEVEL ] && [ $index -gt 2 ] && [ $(echo $i | sed 's%http://%%') != $i ] ; then
+	    URL_ARGS=$i';'$URL_ARGS
+	elif [ -z $RESULT_PATH_DIR ] && [ -z $AUDIT_LEVEL ] ; then
+            echo "1"
 	    echo "The Url $i does not start with 'http://'"
             usage
             exit 1
-	elif [ ! -z $RESULT_PATH_DIR ] && [ $index -gt 2 ] ; then
-            echo ""
+	elif [ ! -z $RESULT_PATH_DIR ] && [ ! -z $AUDIT_LEVEL ] && [ $index -gt 4 ] ; then
+            echo "2"
+	    echo "The Url $i does not start with 'http://'"
+            usage
+            exit 1
+	elif [ ! -z $RESULT_PATH_DIR ] && [  -z $AUDIT_LEVEL ] && [ $index -gt 2 ] ; then
+            echo "3"
+	    echo "The Url $i does not start with 'http://'"
+            usage
+            exit 1
+	elif [ -z $RESULT_PATH_DIR ] && [ ! -z $AUDIT_LEVEL ] && [ $index -gt 2 ] ; then
+            echo "4"
 	    echo "The Url $i does not start with 'http://'"
             usage
             exit 1
@@ -151,10 +205,10 @@ if [ ! -z $RESULT_PATH_DIR ] ; then
     file=${file#file:///}
     file=${file%%/*}
 
-    $LAUNCH_TANAGURU $URL_ARGS $TANAGURU_PATH  > $RESULT_PATH_DIR/$file-$DATE_SUFFIX.txt
+    $LAUNCH_TANAGURU $URL_ARGS $TANAGURU_PATH $AUDIT_LEVEL > $RESULT_PATH_DIR/$file-$DATE_SUFFIX.txt
     echo "see @ $RESULT_PATH_DIR/$file-$DATE_SUFFIX.txt for results"
     exit 0
 else
-    $LAUNCH_TANAGURU $URL_ARGS $TANAGURU_PATH
+    $LAUNCH_TANAGURU $URL_ARGS $TANAGURU_PATH $AUDIT_LEVEL
     exit 0
 fi
