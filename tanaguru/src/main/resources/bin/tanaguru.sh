@@ -74,7 +74,10 @@ EOF
 # options extractions
 #####################
 RESULT_PATH_DIR=
-AUDIT_LEVEL=Ar
+
+#####################
+# authorized level values
+#####################
 GOLD_LEVEL=Or
 SILVER_LEVEL=Ar
 BRONZE_LEVEL=Bz
@@ -106,7 +109,7 @@ if [ ! -z $RESULT_PATH_DIR ] && [ ! -d $RESULT_PATH_DIR  ]; then
     exit 1
 fi
 
-if [ "$AUDIT_LEVEL" != "$GOLD_LEVEL" ] && [ "$AUDIT_LEVEL" != "$SILVER_LEVEL" ] && [ "$AUDIT_LEVEL" != "$BRONZE_LEVEL" ]; then
+if [ ! -z $AUDIT_LEVEL ] && [ "$AUDIT_LEVEL" != "$GOLD_LEVEL" ] && [ "$AUDIT_LEVEL" != "$SILVER_LEVEL" ] && [ "$AUDIT_LEVEL" != "$BRONZE_LEVEL" ]; then
     echo "The level $AUDIT_LEVEL is invalid"
     usage
     exit 1
@@ -193,6 +196,10 @@ else
     done;
 fi
 
+##################
+# SET DEFAULT LEVEL
+##################
+AUDIT_LEVEL=Ar
 
 ##################
 # LAUNCH_TANAGURU
