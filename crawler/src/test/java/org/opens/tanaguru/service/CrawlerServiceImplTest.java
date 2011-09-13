@@ -104,7 +104,7 @@ public class CrawlerServiceImplTest extends TestCase {
         List<Long> contentListId = contentDataService.getSSPFromWebResource(site.getId(), HttpStatus.SC_OK, 0, 10);
         List<Content> contentList = new ArrayList<Content>();
         for (Long id : contentListId) {
-            Content content = contentDataService.readWithRelatedContent(id);
+            Content content = contentDataService.readWithRelatedContent(id, false);
             if (content != null) {
                 contentList.add(content);
             }
@@ -198,7 +198,7 @@ public class CrawlerServiceImplTest extends TestCase {
         List<Long> contentListId = contentDataService.getSSPFromWebResource(page.getId(), HttpStatus.SC_OK, 0, 10);
         List<Content> contentList = new ArrayList<Content>();
         for (Long id : contentListId) {
-            contentList.add(contentDataService.readWithRelatedContent(id));
+            contentList.add(contentDataService.readWithRelatedContent(id, false));
         }
         assertEquals(1, contentList.size());
         Set<String> urlSet = getUrlSet(contentList);

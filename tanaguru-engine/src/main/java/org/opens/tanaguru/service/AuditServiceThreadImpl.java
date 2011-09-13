@@ -352,7 +352,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
                     PROCESSING_TREATMENT_WINDOW);
             contentList.clear();
             for (Long id : contentIdList) {
-                Content content = contentDataService.readWithRelatedContent(id);
+                Content content = contentDataService.readWithRelatedContent(id, true);
                 if (content != null) {
                     contentList.add(content);
                 }

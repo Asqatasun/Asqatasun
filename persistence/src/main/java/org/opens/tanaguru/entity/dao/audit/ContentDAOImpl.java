@@ -64,6 +64,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
         super();
     }
 
+    @Override
     public Content find(Audit audit, String uri) {
         Query query = entityManager.createQuery("SELECT c FROM "
                 + getEntityClass().getName() + " c"
@@ -88,6 +89,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
         }
     }
 
+    @Override
     public Content find(WebResource page, String uri) {
         Query query = entityManager.createQuery("SELECT c FROM "
                 + getEntityClass().getName() + " c"
@@ -474,10 +476,11 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
     /**
      * 
      * @param id
+     * @param isFetchParameters
      * @return
      */
     @Override
-    public Content readWithRelatedContent(Long id) {
+    public Content readWithRelatedContent(Long id, boolean isFetchParameters) {
         Query query = entityManager.createQuery("SELECT c FROM "
                 + getEntityClass().getName() + " c"
                 + " WHERE c.id = :id"
@@ -488,6 +491,10 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             Content content = (Content)query.getSingleResult();
             if (content instanceof SSP) {
                 ((SSP)content).getRelatedContentSet().size();
+                if (isFetchParameters) {
+                    Audit audit = ((SSP)content).getAudit();
+                    audit.getParameterSet().size();
+                }
             }
             flushAndCloseEntityManager();
             return content;

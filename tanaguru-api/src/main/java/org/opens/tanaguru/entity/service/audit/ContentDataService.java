@@ -153,11 +153,12 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
             int chunkSize);
 
     /**
-     *
+     * 
      * @param id
+     * @param isFetchParameters
      * @return
      */
-    Content readWithRelatedContent(Long id); 
+    Content readWithRelatedContent(Long id,  boolean isFetchParameters);
 
     /**
      * 

@@ -154,9 +154,10 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
     /**
      * 
      * @param id
+     * @param isFetchParameters
      * @return
      */
-    Content readWithRelatedContent(Long id);
+    Content readWithRelatedContent(Long id, boolean isFetchParameters);
 
     /**
      * 

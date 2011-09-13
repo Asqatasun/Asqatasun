@@ -130,8 +130,8 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
     }
 
     @Override
-    public Content readWithRelatedContent(Long id) {
-        return ((ContentDAO) entityDao).readWithRelatedContent(id);
+    public Content readWithRelatedContent(Long id, boolean isFetchParameters) {
+        return ((ContentDAO) entityDao).readWithRelatedContent(id, isFetchParameters);
     }
 
     @Override
