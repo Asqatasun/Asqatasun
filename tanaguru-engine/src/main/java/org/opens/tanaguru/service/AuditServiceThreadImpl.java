@@ -44,6 +44,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
     private static final int CONSOLIDATION_TREATMENT_WINDOW = 1000;
     protected Audit audit;
     private final AuditDataService auditDataService;
+    private boolean isAuditOnline = true;
 
     public AuditDataService getAuditDataService() {
         return auditDataService;
@@ -92,7 +93,8 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
             ConsolidatorService consolidatorService,
             AnalyserService analyserService,
             Audit audit,
-            AdaptationListener adaptationListener) {
+            AdaptationListener adaptationListener,
+            boolean isAuditOnline) {
         super();
         this.auditDataService = auditDataService;
         this.contentDataService = contentDataService;
@@ -105,6 +107,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         this.analyserService = analyserService;
         this.audit = audit;
         this.adaptationListener = adaptationListener;
+        this.isAuditOnline = isAuditOnline;
     }
 
     @Override
@@ -132,8 +135,9 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
     public void run() {
         try {
             init();
-            crawl();
-            loadContent();
+            if (isAuditOnline) {
+                crawl();
+            }
             adaptContent();
             process();
             consolidate();
@@ -151,7 +155,11 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
             return;
         }
         if (audit.getStatus().equals(AuditStatus.INITIALISATION)) {
-            audit.setStatus(AuditStatus.CRAWLING);
+            if (isAuditOnline) {
+                audit.setStatus(AuditStatus.CRAWLING);
+            } else {
+                audit.setStatus(AuditStatus.CONTENT_ADAPTING);
+            }
             audit = auditDataService.saveOrUpdate(audit);
         }
     }
@@ -207,7 +215,6 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         Date endPersistDate = null;
         Long persistenceDuration = Long.valueOf(0);
         //
-
         boolean hasCorrectedDOM = false;
         Long i = Long.valueOf(0);
         Long webResourceId = audit.getSubject().getId();
@@ -449,18 +456,28 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
                 LOGGER.debug("Consolidating took " + (endProcessDate.getTime()-beginProcessDate.getTime()) + " ms");
             }
         } else if (audit.getSubject() instanceof Site) {
-            List<Test> testList = new ArrayList<Test>();
-            for (Test test : audit.getTestList()) {
-                testList.add(test);
+            if (contentDataService.getNumberOfSSPFromWebResource(audit.getSubject(), HttpStatus.SC_OK) > 20) {
+                List<Test> testList = new ArrayList<Test>();
+                for (Test test : audit.getTestList()) {
+                    testList.add(test);
 
+                    List<ProcessResult> prList= (List<ProcessResult>) processResultDataService.
+                            getGrossResultFromAuditAndTest(audit, test);
+                    consolidate(prList, testList);
+                    testList.clear();
+                }
+                if (LOGGER.isDebugEnabled()) {
+                    endProcessDate = Calendar.getInstance().getTime();
+                    LOGGER.debug("Consolidating took " + (endProcessDate.getTime()-beginProcessDate.getTime()) + " ms");
+                }
+            } else {
                 List<ProcessResult> prList= (List<ProcessResult>) processResultDataService.
-                        getGrossResultFromAuditAndTest(audit, test);
-                consolidate(prList, testList);
-                testList.clear();
-            }
-            if (LOGGER.isDebugEnabled()) {
-                endProcessDate = Calendar.getInstance().getTime();
-                LOGGER.debug("Consolidating took " + (endProcessDate.getTime()-beginProcessDate.getTime()) + " ms");
+                            getGrossResultFromAudit(audit);
+                consolidate(prList, (List<Test>)audit.getTestList());
+                if (LOGGER.isDebugEnabled()) {
+                    endProcessDate = Calendar.getInstance().getTime();
+                    LOGGER.debug("Consolidating took " + (endProcessDate.getTime()-beginProcessDate.getTime()) + " ms");
+                }
             }
         }
         audit = auditDataService.saveOrUpdate(audit);

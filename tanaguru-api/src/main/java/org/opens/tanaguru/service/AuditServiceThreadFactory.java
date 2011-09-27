@@ -30,6 +30,7 @@ public interface AuditServiceThreadFactory {// TODO Write javadoc
      * @param analyserService
      * @param audit
      * @param adaptationListener
+     * @param isAuditOnline
      * @return
      */
     AuditServiceThread create(AuditDataService auditDataService, 
@@ -42,5 +43,6 @@ public interface AuditServiceThreadFactory {// TODO Write javadoc
             ConsolidatorService consolidatorService,
             AnalyserService analyserService,
             Audit audit,
-            AdaptationListener adaptationListener);
+            AdaptationListener adaptationListener,
+            boolean isAuditOnline);
 }

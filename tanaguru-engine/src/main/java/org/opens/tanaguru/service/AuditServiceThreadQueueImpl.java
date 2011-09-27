@@ -42,7 +42,7 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
     private List<AuditServiceThread> siteAuditExecutionList = new Vector<AuditServiceThread>();
     private int pageAuditExecutionListMax = 3;
     private int siteAuditExecutionListMax = 3;
-    private Set<AuditServiceListener> listeners;
+        private Set<AuditServiceListener> listeners;
     private Long lastToken = 0L;
 
     public AuditServiceThreadQueueImpl() {
@@ -152,37 +152,25 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
     }
 
     private synchronized void processPageAuditWaitQueue() {
-        if (pageAuditWaitQueue.peek() == null) {
-            return;
-        }
-        if (pageAuditExecutionList.size() < pageAuditExecutionListMax) {
-            synchronized (lastToken) {
-                Long token = new Date().getTime();
-                while (token - lastToken < 10) {
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException ex) {
-                        LOGGER.error(ex);
-                    }
-                }
-                lastToken = token.longValue();
-            }
-            AuditServiceThread auditServiceThread = auditServiceThreadFactory.create(
-                    auditDataService,
-                    contentDataService,
-                    processResultDataService,
-                    webResourceDataService,
-                    crawlerService,
-                    contentAdapterService,
-                    processorService,
-                    consolidatorService,
-                    analyserService,
-                    pageAuditWaitQueue.poll(),
-                    adaptationListener);
-            auditServiceThread.add(this);
-            pageAuditExecutionList.add(auditServiceThread);
-            new Thread(auditServiceThread).start();
-        }
+        processAuditWaiQueue(
+                pageAuditWaitQueue,
+                pageAuditExecutionList,
+                pageAuditExecutionListMax,
+                true);
+    }
+
+    @Override
+    public synchronized void addPageUploadAudit(Audit audit) {
+        pageAuditWaitQueue.offer(audit);
+        processPageUploadAuditWaitQueue();
+    }
+
+    private synchronized void processPageUploadAuditWaitQueue() {
+        processAuditWaiQueue(
+                pageAuditWaitQueue,
+                pageAuditExecutionList,
+                pageAuditExecutionListMax,
+                false);
     }
 
     public synchronized void addSiteAudit(Audit audit) {
@@ -191,10 +179,21 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
     }
 
     private synchronized void processSiteAuditWaitQueue() {
-        if (siteAuditWaitQueue.peek() == null) {
+        processAuditWaiQueue(
+                siteAuditWaitQueue,
+                siteAuditExecutionList,
+                siteAuditExecutionListMax,
+                true);
+    }
+
+    private synchronized void processAuditWaiQueue(Queue<Audit> auditWaitQueue,
+            List<AuditServiceThread> auditExecutionList,
+            int auditExecutionListMax,
+            boolean isAuditOnline) {
+        if (auditWaitQueue.peek() == null) {
             return;
         }
-        if (siteAuditExecutionList.size() < siteAuditExecutionListMax) {
+        if (auditExecutionList.size() < auditExecutionListMax) {
             synchronized (lastToken) {
                 Long token = new Date().getTime();
                 while (token - lastToken < 10) {
@@ -216,10 +215,11 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
                     processorService,
                     consolidatorService,
                     analyserService,
-                    siteAuditWaitQueue.poll(),
-                    adaptationListener);
+                    auditWaitQueue.poll(),
+                    adaptationListener,
+                    isAuditOnline);
             auditServiceThread.add(this);
-            siteAuditExecutionList.add(auditServiceThread);
+            auditExecutionList.add(auditServiceThread);
             new Thread(auditServiceThread).start();
         }
     }
@@ -247,6 +247,7 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
     @Override
     public void processWaitQueue() {
         processPageAuditWaitQueue();
+        processPageUploadAuditWaitQueue();
         processSiteAuditWaitQueue();
     }
 

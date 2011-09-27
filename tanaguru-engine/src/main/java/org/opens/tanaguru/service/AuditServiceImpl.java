@@ -9,13 +9,18 @@ import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import javax.persistence.PersistenceException;
 import org.opens.tanaguru.contentadapter.AdaptationListener;
+import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
+import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.util.FileNaming;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -27,6 +32,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
     private AnalyserService analyserService;
     private ConsolidatorService consolidatorService;
     private ContentAdapterService contentAdapterService;
+    private ContentLoaderService contentLoaderService;
     private CrawlerService crawlerService;
     private ProcessorService processorService;
 
@@ -88,6 +94,56 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
         audit.setParameterSet(paramSet);
         
         auditServiceThreadQueue.addPageAudit(audit);
+        return audit;
+    }
+    
+    @Override
+    public Audit auditPageUpload(Map<String, String> fileMap, Set<Parameter> paramSet) {
+        WebResource mainWebResource;
+        if (fileMap.size() > 1) {
+            mainWebResource = webResourceDataService.createSite(
+                    FileNaming.addProtocolToUrl(fileMap.keySet().iterator().next()));
+            // the webresource instance needs to be persisted first.
+            webResourceDataService.saveOrUpdate(mainWebResource);
+            for (String pageUrl : fileMap.keySet()) {
+                Page page = webResourceDataService.createPage(pageUrl);
+                ((Site)mainWebResource).addChild(page);
+                webResourceDataService.saveOrUpdate(page);
+            }
+        } else {
+            mainWebResource = webResourceDataService.createPage(fileMap.keySet().iterator().next());
+            // the webresource instance needs to be persisted first.
+            webResourceDataService.saveOrUpdate(mainWebResource);
+        }
+        //call the load content service to convert files into SSP and link it
+        //to the appropriate webResource
+        List<Content> contentList = contentLoaderService.loadContent(mainWebResource, fileMap);
+        // retrieve the list of tests from the parameters
+        List<Test> testList = testDataService.getTestListFromParamSet(paramSet);
+
+        // the paramSet has to be persisted
+        parameterDataService.saveOrUpdate(paramSet);
+
+        Audit audit = auditDataService.create();
+        audit.setSubject(mainWebResource);
+        audit.setTestList(testList);
+        audit.setStatus(AuditStatus.CONTENT_ADAPTING);
+        audit.setParameterSet(paramSet);
+        auditDataService.saveOrUpdate(audit);
+        mainWebResource.setAudit(audit);
+        // the webresource needs to be persisted a second time because of the
+        // relation with the audit
+        webResourceDataService.saveOrUpdate(mainWebResource);
+        for (Content content : contentList) {
+            content.setAudit(audit);
+            try {
+            contentDataService.saveOrUpdate(content);
+            } catch (PersistenceException pe){
+                audit.setStatus(AuditStatus.ERROR);
+                break;
+            }
+        }
+        auditServiceThreadQueue.addPageUploadAudit(audit);
         return audit;
     }
 
@@ -196,7 +252,15 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
         return audit;
     }
 
-    private AuditServiceThread getInitialisedAuditServiceThread(Audit audit, AdaptationListener adaptationListener) {
+    /**
+     *
+     * @param audit
+     * @param adaptationListener
+     * @return
+     */
+    private AuditServiceThread getInitialisedAuditServiceThread(
+            Audit audit,
+            AdaptationListener adaptationListener) {
         return auditServiceThreadFactory.create(
                 auditDataService,
                 contentDataService,
@@ -208,7 +272,8 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
                 consolidatorService,
                 analyserService,
                 audit,
-                adaptationListener);
+                adaptationListener,
+                true);
     }
 
     public void setAnalyserService(AnalyserService analyserService) {
@@ -238,6 +303,11 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
     public void setContentAdapterService(
             ContentAdapterService contentAdapterService) {
         this.contentAdapterService = contentAdapterService;
+    }
+
+    public void setContentLoaderService(
+            ContentLoaderService contentLoaderService) {
+        this.contentLoaderService = contentLoaderService;
     }
 
     public void setCrawlerService(CrawlerService crawlerService) {

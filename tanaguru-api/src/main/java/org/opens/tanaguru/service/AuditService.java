@@ -1,6 +1,7 @@
 package org.opens.tanaguru.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.opens.tanaguru.entity.audit.Audit;
 import javax.xml.bind.annotation.XmlTransient;
@@ -68,6 +69,14 @@ public interface AuditService {
      * @return
      */
     Audit auditPage(String pageUrl, Set<Parameter> paramSet);
+
+    /**
+     * 
+     * @param fileMap
+     * @param paramSet
+     * @return
+     */
+    Audit auditPageUpload(Map<String, String> fileMap, Set<Parameter> paramSet);
 
     /**
      *

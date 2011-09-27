@@ -29,7 +29,8 @@ public class AuditServiceThreadFactoryImpl implements AuditServiceThreadFactory 
             ConsolidatorService consolidatorService,
             AnalyserService analyserService,
             Audit audit,
-            AdaptationListener adaptationListener) {
+            AdaptationListener adaptationListener,
+            boolean isAuditOnline) {
         return new AuditServiceThreadImpl(
                 auditDataService,
                 contentDataService,
@@ -41,6 +42,7 @@ public class AuditServiceThreadFactoryImpl implements AuditServiceThreadFactory 
                 consolidatorService,
                 analyserService,
                 audit,
-                adaptationListener);
+                adaptationListener,
+                isAuditOnline);
     }
 }
