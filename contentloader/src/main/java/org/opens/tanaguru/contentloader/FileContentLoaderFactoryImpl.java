@@ -6,7 +6,7 @@ import org.opens.tanaguru.entity.service.audit.ContentDataService;
 
 /**
  * 
- * @author ADEX
+ * @author jkowalczyk
  */
 public class FileContentLoaderFactoryImpl implements ContentLoaderFactory {
 
