@@ -9,16 +9,16 @@ import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
 import java.util.Date;
 import java.util.List;
+import org.apache.commons.httpclient.HttpStatus;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.util.FileNaming;
 
 /**
  * 
- * @author ADEX
+ * @author jkowalczyk
  */
 public class FileContentLoaderImpl implements ContentLoader {
 
-    private static final int HTTP_CODE_OK = 200;
     private ContentFactory contentFactory;
     private Map<String, String> fileMap;
     private List<Content> result;
@@ -40,19 +40,22 @@ public class FileContentLoaderImpl implements ContentLoader {
         this.fileMap = fileMap;
     }
 
+    @Override
     public List<Content> getResult() {
         return result;
     }
 
+    @Override
     public WebResource getWebResource() {
         return webResource;
     }
 
+    @Override
     public void run() {
         result = run(webResource);
     }
 
-    private List<Content> run(WebResource webResource) {// TODO Handle exceptions like 404, 403, 500, ...
+    private List<Content> run(WebResource webResource) {
         List<Content> localResult = new ArrayList<Content>();
         if (webResource instanceof Page) {
             Content content = contentFactory.createSSP(
@@ -60,7 +63,7 @@ public class FileContentLoaderImpl implements ContentLoader {
                     webResource.getURL(),
                     fileMap.get(FileNaming.removeFilePrefix(webResource.getURL())),
                     (Page) webResource,
-                    HTTP_CODE_OK);
+                    HttpStatus.SC_OK);
             localResult.add(content);
         }
         if (webResource instanceof Site) {
