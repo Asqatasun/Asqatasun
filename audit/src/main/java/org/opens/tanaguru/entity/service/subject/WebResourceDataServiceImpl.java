@@ -8,6 +8,7 @@ import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
 import org.opens.tanaguru.entity.dao.subject.WebResourceDAO;
 import com.adex.sdk.entity.service.AbstractGenericDataService;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.util.FileNaming;
 
 /**
  * 
@@ -16,19 +17,13 @@ import org.opens.tanaguru.entity.audit.ProcessResult;
 public class WebResourceDataServiceImpl extends AbstractGenericDataService<WebResource, Long> implements
         WebResourceDataService {
 
-    private final String HTTP_PROTOCOL_PREFIX = "http://";
-    private final String HTTPS_PROTOCOL_PREFIX = "https://";
-    private final String FILE_PROTOCOL_PREFIX = "file://";
-    private final String FILE_PREFIX = "/";
-//    private final String windowsPathPattern = " ^([a-zA-Z]:) \\{1} | ((\\{1}) [^\\] ([^/:*?&lt;&gt;&quot;|]*(?&lt;![ ])))+)$" ;
-
     public WebResourceDataServiceImpl() {
         super();
     }
 
     @Override
     public Page createPage(String url) {
-        return ((WebResourceFactory) entityFactory).createPage(addProtocolToUrl(url));
+        return ((WebResourceFactory) entityFactory).createPage(FileNaming.addProtocolToUrl(url));
     }
 
     @Override
@@ -51,25 +46,6 @@ public class WebResourceDataServiceImpl extends AbstractGenericDataService<WebRe
         for (ProcessResult childResult : processResult.getChildResultList()) {
             deepLoad(childResult);
         }
-    }
-
-    /**
-     * This method add the protocol to the url if the protocol is missing
-     * @param url
-     * @return
-     */
-    private String addProtocolToUrl(String url) {
-        if (!url.startsWith(HTTP_PROTOCOL_PREFIX)
-                && !url.startsWith(HTTPS_PROTOCOL_PREFIX)
-                && !url.startsWith(FILE_PROTOCOL_PREFIX)) {
-
-            if (url.startsWith(FILE_PREFIX)) {
-                url = FILE_PROTOCOL_PREFIX + url;
-            } else {
-                url = HTTP_PROTOCOL_PREFIX + url;
-            }
-        }
-        return url;
     }
 
     @Override
