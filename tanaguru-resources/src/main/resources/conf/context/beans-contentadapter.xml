@@ -11,6 +11,8 @@
     <bean id="externalCSSRetriever" class="org.opens.tanaguru.contentadapter.css.ExternalCSSRetrieverImpl"/>
     <alias name="externalCSSRetriever" alias="adaptationListener"/>
 
+    <bean id="downloaderFactory" class="org.opens.tanaguru.contentloader.DownloaderFactoryImpl"/>
+
     <bean id="cssContentAdapterFactory" class="org.opens.tanaguru.contentadapter.css.CSSContentAdapterFactoryImpl">
         <property name="externalCSSRetriever">
             <ref local="externalCSSRetriever"/>

@@ -4,13 +4,21 @@
  */
 package org.opens.tanaguru.contentloader;
 
+import java.util.Map;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 
 /**
  *
  * @author enzolalay
  */
-public interface ContentLoaderFactory {// TODO Write javadoc
+public interface ContentLoaderFactory {
 
-    ContentLoader create(ContentFactory contentFactory, Downloader downloader);
+    /**
+     * 
+     * @param contentFactory
+     * @param downloader
+     * @param fileMap
+     * @return
+     */
+    ContentLoader create(ContentFactory contentFactory, Downloader downloader, Map<String, String> fileMap);
 }
