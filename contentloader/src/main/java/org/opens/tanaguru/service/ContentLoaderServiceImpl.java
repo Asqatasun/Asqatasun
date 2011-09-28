@@ -30,7 +30,7 @@ public class ContentLoaderServiceImpl implements ContentLoaderService {
         contentLoader.run();
         return contentLoader.getResult();
     }
-    
+
     @Override
     public List<Content> loadContent(WebResource webResource, Map<String, String> fileMap) {
         ContentLoader contentLoader = contentLoaderFactory.create(contentFactory, null, fileMap);
@@ -51,7 +51,7 @@ public class ContentLoaderServiceImpl implements ContentLoaderService {
 
     @Override
     public void setDownloaderFactory(DownloaderFactory downloaderFactory) {
-        //DO NOTHING HERE
+        this.downloaderFactory = downloaderFactory;
     }
 
 }
