@@ -17,6 +17,12 @@
             <artifactId>tanaguru-api</artifactId>
             <version>${applicationVersion}</version>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <scope>compile</scope>
+            <version>3.3.2.GA</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
