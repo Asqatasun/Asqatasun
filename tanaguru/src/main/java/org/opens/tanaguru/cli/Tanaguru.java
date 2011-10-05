@@ -136,7 +136,7 @@ public class Tanaguru implements AuditServiceListener {
     }
 
     @Override
-    public void auditCrashed(Audit audit, Throwable exception) {
+    public void auditCrashed(Audit audit, Exception exception) {
         exception.printStackTrace();
         System.out.println("crash (id+message): " + audit.getId() + " " + exception.fillInStackTrace());
     }
