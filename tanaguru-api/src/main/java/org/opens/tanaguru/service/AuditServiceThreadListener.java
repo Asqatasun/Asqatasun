@@ -12,5 +12,5 @@ public interface AuditServiceThreadListener {// TODO Write javadoc
 
     void auditCompleted(AuditServiceThread thread);
 
-    void auditCrashed(AuditServiceThread aThis, Throwable exception);
+    void auditCrashed(AuditServiceThread aThis, Exception exception);
 }

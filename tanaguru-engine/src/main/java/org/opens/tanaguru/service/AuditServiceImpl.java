@@ -356,7 +356,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
     }
 
     @Override
-    public void auditCrashed(Audit audit, Throwable exception) {
+    public void auditCrashed(Audit audit, Exception exception) {
         if (listeners == null) {
             return;
         }

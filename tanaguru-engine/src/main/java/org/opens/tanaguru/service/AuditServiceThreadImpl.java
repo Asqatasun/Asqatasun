@@ -143,8 +143,8 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
             consolidate();
             analyse();
             fireAuditCompleted();
-        } catch (Throwable t) {
-            fireAuditException(t);
+        } catch (Exception e) {
+            fireAuditException(e);
         }
     }
 
@@ -662,12 +662,12 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         }
     }
 
-    private void fireAuditException(Throwable t) {
+    private void fireAuditException(Exception e) {
         if (listeners == null) {
             return;
         }
         for (AuditServiceThreadListener listener : listeners) {
-            listener.auditCrashed(this, t);
+            listener.auditCrashed(this, e);
         }
     }
 

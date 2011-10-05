@@ -235,7 +235,7 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
     }
 
     @Override
-    public void auditCrashed(AuditServiceThread thread, Throwable exception) {
+    public void auditCrashed(AuditServiceThread thread, Exception exception) {
         if (!pageAuditExecutionList.remove(thread)) {
             siteAuditExecutionList.remove(thread);
         }
@@ -260,7 +260,7 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
         }
     }
 
-    private void fireAuditCrashed(Audit audit, Throwable exception) {
+    private void fireAuditCrashed(Audit audit, Exception exception) {
         if (listeners == null) {
             return;
         }
