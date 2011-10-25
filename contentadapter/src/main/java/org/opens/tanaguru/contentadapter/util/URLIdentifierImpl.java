@@ -2,9 +2,9 @@ package org.opens.tanaguru.contentadapter.util;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import org.apache.log4j.Logger;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public class URLIdentifierImpl implements URLIdentifier {
 
@@ -15,25 +15,27 @@ public class URLIdentifierImpl implements URLIdentifier {
         super();
     }
 
+    @Override
     public URL getAbsolutePath() {
         return absolutePath;
     }
 
+    @Override
     public URL getUrl() {
         return url;
     }
 
+    @Override
     public URL resolve(String path) {
         try {
             absolutePath = new URL(url, path);
-            return absolutePath;
         } catch (MalformedURLException ex) {
-            Logger.getLogger(URLIdentifierImpl.class.getName()).log(
-                    Level.SEVERE, null, ex);
-            throw new RuntimeException(ex);
+            Logger.getLogger(this.getClass()).error("Url : " +url + " Path : " + path + " " +ex);
         }
+        return absolutePath;
     }
 
+    @Override
     public void setUrl(URL url) {
         this.url = url;
     }
