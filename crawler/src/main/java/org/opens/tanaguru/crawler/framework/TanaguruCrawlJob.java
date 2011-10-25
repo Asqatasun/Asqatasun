@@ -56,7 +56,7 @@ import org.xml.sax.SAXException;
  */
 public class TanaguruCrawlJob {
 
-    private static final Logger LOGGER = Logger.getLogger(CrawlerImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(TanaguruCrawlJob.class);
     private static final String WRITER_BEAN_NAME = "tanaguruWriter";
     private static final String DECIDE_RULE_SEQUENCE_BEAN_NAME = "scope";
     private File currentJobOutputDir;
@@ -128,8 +128,7 @@ public class TanaguruCrawlJob {
      */
     public void launchCrawlJob() {
         if (crawlJob.isLaunchable()) {
-            Logger.getLogger(CrawlerImpl.class.getName()).info(
-                    "crawljob is launchable");
+            LOGGER.debug("crawljob is launchable");
             launchHeritrixCrawlJob();
             if (!crawlJob.isRunning()) {
                 try {
@@ -139,8 +138,7 @@ public class TanaguruCrawlJob {
                 }
             }
         }
-        Logger.getLogger(CrawlerImpl.class.getName()).info(
-                "is crawlJob running? " + crawlJob.isRunning());
+        LOGGER.info("CrawlJob is running? " + crawlJob.isRunning());
         while (crawlJob.isRunning()) {
             try {
                 if (crawlJob.isUnpausable()) {
@@ -156,11 +154,11 @@ public class TanaguruCrawlJob {
         if (crawlJob.teardown()) {
             closeCrawlerLogFiles();
             if (!removeConfigFile(currentJobOutputDir)) {
-                Logger.getLogger(CrawlerImpl.class.getName()).info(
+                LOGGER.warn(
                         "Configuration Heritrix files cannot be deleted");
             }
         } else {
-            Logger.getLogger(CrawlerImpl.class.getName()).info(
+            LOGGER.warn(
                     "The crawljob is not teardowned");
         }
     }
@@ -232,12 +230,18 @@ public class TanaguruCrawlJob {
         BufferedReader in = null;
         FileWriter fw = null;
         try {
-            Logger.getLogger(CrawlerImpl.class.getName()).info(
+            LOGGER.debug(
                     "crawlConfigFilePath: " + crawlConfigFilePath + " for copy");
             String filepath = crawlConfigFilePath + "/" + heritrixFileName;
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
             Document doc = docBuilder.parse(filepath);
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("filepath : "+filepath);
+                for (Parameter param : crawlParameterSet) {
+                    LOGGER.debug(param.getParameterElement().getParameterElementCode() + " "+ param.getValue());
+                }
+            }
             doc = setOptionToDocument(url, crawlParameterSet, doc);
             //write the content into xml file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -248,15 +252,15 @@ public class TanaguruCrawlJob {
             transformer.transform(source, result);
 
         } catch (IOException ex) {
-            Logger.getLogger(CrawlerImpl.class.getName()).error(ex);
+            LOGGER.error(ex);
         } catch (ParserConfigurationException ex) {
-            Logger.getLogger(CrawlerImpl.class.getName()).error(ex);
+            LOGGER.error(ex);
         }  catch (SAXException ex) {
-            Logger.getLogger(CrawlerImpl.class.getName()).error(ex);
+            LOGGER.error(ex);
         } catch (TransformerConfigurationException ex) {
-            Logger.getLogger(CrawlerImpl.class.getName()).error(ex);
+            LOGGER.error(ex);
         } catch (TransformerException ex) {
-            Logger.getLogger(CrawlerImpl.class.getName()).error(ex);
+            LOGGER.error(ex);
         } finally {
             if (in != null) {
                 try {
@@ -286,8 +290,7 @@ public class TanaguruCrawlJob {
         if (!currentJobOutputDir.exists()) {
             boolean success = currentJobOutputDir.mkdir();
             if (success) {
-                Logger.getLogger(CrawlerImpl.class.getName()).info(
-                        "Directory: " + currentJobOutputDir + " created");
+                LOGGER.debug("Directory: " + currentJobOutputDir + " created");
             }
         }
     }

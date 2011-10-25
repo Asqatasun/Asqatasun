@@ -268,7 +268,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         switch (resourceContentType) {
             case misc:
             case html:
-                LOGGER.info(
+                LOGGER.debug(
                         UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
                         + curi.getFetchStatus());
                 
@@ -276,7 +276,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
                 break;
                 
             case css:
-                LOGGER.info(
+                LOGGER.debug(
                         UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
                         + curi.getFetchStatus());
                 
@@ -284,7 +284,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
                 break;
 
             case img:
-                LOGGER.info(UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
+                LOGGER.debug(UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
                         + curi.getFetchStatus());
 
                 saveRawImageFromFetchedImage(curi, null);
