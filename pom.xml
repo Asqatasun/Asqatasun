@@ -4,7 +4,7 @@
     <groupId>org.opens</groupId>
     <artifactId>tanguru-all</artifactId>
     <packaging>pom</packaging>
-    <version>${applicationVersion}</version>
+    <version>1.4.0</version>
     <name>tanaguru-all</name>
     <url>http://www.tanaguru.org</url>
     <modules>
