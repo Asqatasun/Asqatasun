@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanguru-all</artifactId>
-        <version>1.0</version>
+        <version>1.5.0</version>
     </parent>
     <groupId>${applicationGroupId}</groupId>
     <artifactId>analyser</artifactId>

@@ -4,7 +4,7 @@
     <groupId>org.opens</groupId>
     <artifactId>tanguru-all</artifactId>
     <packaging>pom</packaging>
-    <version>1.0</version>
+    <version>1.5.0</version>
     <name>tanaguru-all</name>
     <url>http://www.tanaguru.org</url>
     <modules>
@@ -28,16 +28,11 @@
         <module>logging</module>
         <module>tanaguru</module>
         <module>parameterization</module>
-        <!--<module>tanaguru-client</module>
-        <module>tanaguru-ws</module>
-        <module>tanaguru-ws-client</module>>
-        <module>tanaguru-membership</module>
-        <module>tanaguru-i18n</module-->
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <applicationGroupId>org.opens</applicationGroupId>
-        <applicationVersion>1.0-SNAPSHOT</applicationVersion>
+        <applicationVersion>1.5.0-SNAPSHOT</applicationVersion>
         <springGroupId>org.springframework</springGroupId>
         <springVersion>3.0.5.RELEASE</springVersion>
         <heritrixGroupId>org.archive.heritrix</heritrixGroupId>
@@ -270,11 +265,6 @@
                 <groupId>xerces</groupId>
                 <artifactId>xercesImpl</artifactId>
                 <version>2.9.1</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-collections</groupId>
-                <artifactId>commons-collections</artifactId>
-                <version>3.2.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
