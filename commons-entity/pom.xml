@@ -6,11 +6,11 @@
         <artifactId>tanguru-all</artifactId>
         <version>1.5.0</version>
     </parent>
-    <groupId>com.adex</groupId>
+    <groupId>${applicationGroupId}</groupId>
     <artifactId>commons-entity</artifactId>
     <name>commons-entity</name>
     <version>${applicationVersion}</version>
-    <url>http://www.adex.fr</url>
+    <url>http://www.tanaguru.org</url>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
