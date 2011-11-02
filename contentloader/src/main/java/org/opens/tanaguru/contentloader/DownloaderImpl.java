@@ -1,3 +1,24 @@
+/*
+ * Tanaguru - Automated webpage assessment
+ * Copyright (C) 2008-2011  Open-S Company
+ *
+ * This file is part of Tanaguru.
+ *
+ * Tanaguru is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact us by mail: open-s AT open-s DOT com
+ */
 package org.opens.tanaguru.contentloader;
 
 import java.io.BufferedReader;
@@ -5,7 +26,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.UnknownHostException;
-
 
 import javax.net.ssl.SSLPeerUnverifiedException;
 import org.apache.http.client.HttpClient;
@@ -16,6 +36,10 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.log4j.Logger;
 
+/**
+ * 
+ * @author jkowalczyk
+ */
 public class DownloaderImpl implements Downloader {
 
     protected String result;
@@ -23,7 +47,6 @@ public class DownloaderImpl implements Downloader {
     private final String HTTP_PROTOCOL_PREFIX = "http://";
     private final String HTTPS_PROTOCOL_PREFIX = "https://";
     private final String FILE_PROTOCOL_PREFIX = "file:/";
-//    private final String unreachableUrl = "Unreachable Url : ";
 
     public DownloaderImpl() {
         super();
@@ -32,13 +55,14 @@ public class DownloaderImpl implements Downloader {
     private String load(String url) {
         BufferedReader in = null;
         try {
-            StringBuffer urlContent = new StringBuffer();
+            StringBuilder urlContent = new StringBuilder();
             String thisLine;
             URL u = new URL(url);
             in = new BufferedReader(new InputStreamReader(u.openStream()));
             while ((thisLine = in.readLine()) != null) {
                 //Correction of #34 bug
-                urlContent.append(thisLine + "\r");
+                urlContent.append(thisLine);
+                urlContent.append("\r");
             }
             return urlContent.toString();
         } catch (IOException ex) {
