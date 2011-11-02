@@ -1,3 +1,24 @@
+/*
+ * Tanaguru - Automated webpage assessment
+ * Copyright (C) 2008-2011  Open-S Company
+ *
+ * This file is part of Tanaguru.
+ *
+ * Tanaguru is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact us by mail: open-s AT open-s DOT com
+ */
 package org.opens.tanaguru.processor;
 
 import java.awt.image.BufferedImage;
@@ -35,6 +56,10 @@ import org.opens.tanaguru.entity.reference.Nomenclature;
 import org.opens.tanaguru.ruleimplementation.RuleHelper;
 import org.opens.tanaguru.service.NomenclatureLoaderService;
 
+/**
+ * 
+ * @author jkowalczyk
+ */
 public class SSPHandlerImpl implements SSPHandler {
 
     protected CSSHandler cssHandler;
@@ -372,14 +397,17 @@ public class SSPHandlerImpl implements SSPHandler {
         return this;
     }
 
+    @Override
     public void setCSSHandler(CSSHandler cssHandler) {
         this.cssHandler = cssHandler;
     }
 
+    @Override
     public void setDOMHandler(DOMHandler domHandler) {
         this.domHandler = domHandler;
     }
 
+    @Override
     public void setJSHandler(JSHandler jsHandler) {
         this.jsHandler = jsHandler;
     }

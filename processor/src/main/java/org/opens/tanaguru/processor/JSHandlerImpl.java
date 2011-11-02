@@ -1,9 +1,28 @@
+/*
+ * Tanaguru - Automated webpage assessment
+ * Copyright (C) 2008-2011  Open-S Company
+ *
+ * This file is part of Tanaguru.
+ *
+ * Tanaguru is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact us by mail: open-s AT open-s DOT com
+ */
 package org.opens.tanaguru.processor;
 
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.audit.SourceCodeRemark;
-import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
 import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.contentadapter.js.JSResource;
@@ -18,7 +37,7 @@ import org.opens.tanaguru.entity.audit.RelatedContent;
 
 /**
  * 
- * @author ADEX
+ * @author jkowalczyk
  */
 public class JSHandlerImpl implements JSHandler {
 
@@ -38,16 +57,7 @@ public class JSHandlerImpl implements JSHandler {
         this.ssp = ssp;
     }
 
-//    private void addSourceCodeRemark(TestSolution processResult,
-//            JSResource jsResource, String messageCode, String attrName) {
-//        SourceCodeRemark remark = sourceCodeRemarkFactory.create();
-//        remark.setIssue(processResult);
-//        remark.setMessageCode(messageCode);
-//        remark.setLineNumber(jsResource.getLineNumber());
-//        // remark.setCharacterPosition(index + 1);
-//        remark.setTarget(attrName);
-//    }
-
+    @Override
     public JSHandler beginSelection() {
         initialize();
 
@@ -60,6 +70,7 @@ public class JSHandlerImpl implements JSHandler {
         return processRemarkFactory;
     }
 
+    @Override
     public Collection<ProcessRemark> getRemarkList() {
         return remarkList;
     }
@@ -68,6 +79,7 @@ public class JSHandlerImpl implements JSHandler {
         return sourceCodeRemarkFactory;
     }
 
+    @Override
     public SSP getSSP() {
         return ssp;
     }
@@ -92,11 +104,13 @@ public class JSHandlerImpl implements JSHandler {
         initialized = true;
     }
 
+    @Override
     public JSHandler selectAllJS() {
         selectedJSList = javaScriptSet;
         return this;
     }
 
+    @Override
     public JSHandler selectExternalJS() {
         Collection<JSResource> externalJsList = new ArrayList<JSResource>();
         for (JSResource jsResource : javaScriptSet) {
@@ -109,6 +123,7 @@ public class JSHandlerImpl implements JSHandler {
         return this;
     }
 
+    @Override
     public JSHandler selectInlineJS() {
         Collection<JSResource> inlineJsList = new ArrayList<JSResource>();
         for (JSResource jsResource : javaScriptSet) {
@@ -121,6 +136,7 @@ public class JSHandlerImpl implements JSHandler {
         return this;
     }
 
+    @Override
     public JSHandler selectLocalJS() {
         Collection<JSResource> localJsList = new ArrayList<JSResource>();
         for (JSResource jsResource : javaScriptSet) {
@@ -133,22 +149,27 @@ public class JSHandlerImpl implements JSHandler {
         return this;
     }
 
+    @Override
     public void setProcessRemarkFactory(
             ProcessRemarkFactory processRemarkFactory) {
         this.processRemarkFactory = processRemarkFactory;
     }
 
+    @Override
     public void setRemarkList(Collection<ProcessRemark> remarkList) {
         this.remarkList = remarkList;
     }
 
+    @Override
     public void setSourceCodeRemarkFactory(
             SourceCodeRemarkFactory sourceCodeRemarkFactory) {
         this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
     }
 
+    @Override
     public void setSSP(SSP ssp) {
         this.ssp = ssp;
         initialized = false;
     }
+
 }

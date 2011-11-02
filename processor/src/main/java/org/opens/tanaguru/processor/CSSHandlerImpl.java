@@ -1,3 +1,24 @@
+/*
+ * Tanaguru - Automated webpage assessment
+ * Copyright (C) 2008-2011  Open-S Company
+ *
+ * This file is part of Tanaguru.
+ *
+ * Tanaguru is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact us by mail: open-s AT open-s DOT com
+ */
 package org.opens.tanaguru.processor;
 
 import java.util.Collection;
@@ -43,6 +64,7 @@ public class CSSHandlerImpl implements CSSHandler {
     private static final String UNTESTED_RESOURCE_MSG_CODE = "UnTestedResource";
 
     protected ProcessRemarkService processRemarkService;
+    @Override
     public void setProcessRemarkService(ProcessRemarkService processRemarkService) {
         this.processRemarkService = processRemarkService;
     }
@@ -60,6 +82,7 @@ public class CSSHandlerImpl implements CSSHandler {
         processRemarkService.addCssCodeRemark(processResult, rule, messageCode, attrName, getFileNameFromCssomRule(rule));
     }
 
+    @Override
     public CSSHandler beginSelection(){
         initialize();
         selectedRuleList = new HashSet<CSSOMRule>();
@@ -67,6 +90,7 @@ public class CSSHandlerImpl implements CSSHandler {
         return this;
     }
 
+    @Override
     public TestSolution checkRelativeUnitExists(Collection<Integer> blacklist) {
         Set<TestSolution> resultSet = new HashSet<TestSolution>();
         for (CSSOMRule workingRule : selectedRuleList) {
@@ -113,6 +137,7 @@ public class CSSHandlerImpl implements CSSHandler {
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
 
+    @Override
     public Collection<ProcessRemark> getRemarkList() {
         return processRemarkService.getRemarkList();
     }
@@ -147,6 +172,7 @@ public class CSSHandlerImpl implements CSSHandler {
         initialized = true;
     }
 
+    @Override
     public CSSHandler selectAllRules() {
         if (styleMap == null) {
             return this;
@@ -158,6 +184,7 @@ public class CSSHandlerImpl implements CSSHandler {
         return this;
     }
 
+    @Override
     public void setSSP(SSP ssp) {
         this.ssp = ssp;
         initialized = false;
