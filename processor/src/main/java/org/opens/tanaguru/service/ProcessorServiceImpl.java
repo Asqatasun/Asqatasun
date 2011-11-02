@@ -56,6 +56,7 @@ public class ProcessorServiceImpl implements ProcessorService {
         super();
     }
 
+    @Override
     public List<ProcessResult> process(List<Content> contentList, List<Test> testList) {
         List<ProcessResult> processResultList = new ArrayList<ProcessResult>();
 
@@ -80,31 +81,39 @@ public class ProcessorServiceImpl implements ProcessorService {
         this.ruleImplementationLoaderService = ruleImplementationLoaderService;
     }
 
+    @Override
     public void setNomenclatureLoaderService(NomenclatureLoaderService nomenclatureLoaderService) {
         this.nomenclatureLoaderService = nomenclatureLoaderService;
     }
 
+    @Override
     public void setEvidenceDataService(EvidenceDataService evidenceDataService) {
         this.evidenceDataService = evidenceDataService;
     }
 
+    @Override
     public void setEvidenceElementFactory(EvidenceElementFactory evidenceElementFactory) {
         this.evidenceElementFactory = evidenceElementFactory;
     }
 
+    @Override
     public void setProcessRemarkFactory(ProcessRemarkFactory processRemarkFactory) {
         this.processRemarkFactory = processRemarkFactory;
     }
 
+    @Override
     public void setSourceCodeRemarkFactory(SourceCodeRemarkFactory sourceCodeRemarkFactory) {
         this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
     }
 
+    @Override
     public void setProcessorFactory(ProcessorFactory processorFactory) {
         this.processorFactory = processorFactory;
     }
 
+    @Override
     public void setUrlIdentifierFactory(URLIdentifierFactory urlIdentifierFactory) {
         this.urlIdentifierFactory = urlIdentifierFactory;
     }
+
 }
