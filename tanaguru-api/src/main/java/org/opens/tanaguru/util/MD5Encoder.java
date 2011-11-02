@@ -1,3 +1,24 @@
+/*
+ * Tanaguru - Automated webpage assessment
+ * Copyright (C) 2008-2011  Open-S Company
+ *
+ * This file is part of Tanaguru.
+ *
+ * Tanaguru is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact us by mail: open-s AT open-s DOT com
+ */
 package org.opens.tanaguru.util;
 
 import java.io.UnsupportedEncodingException;
@@ -10,11 +31,19 @@ import java.security.NoSuchAlgorithmException;
  */
 public class MD5Encoder {
 
+    private static final String MD5 = "MD5";
+    private static final String UTF_8_ENCODING = "UTF-8";
+
     /**
      * Default private constructor
      */
     private MD5Encoder() {}
 
+    /**
+     * 
+     * @param data
+     * @return
+     */
     private static String convertToHex(byte[] data) {
         StringBuilder buf = new StringBuilder();
         for (int i = 0; i < data.length; i++) {
@@ -34,11 +63,19 @@ public class MD5Encoder {
         return md5;
     }
 
+    /**
+     * Converts a given string as a MD5 encoded string.
+     * 
+     * @param text
+     * @return
+     * @throws NoSuchAlgorithmException
+     * @throws UnsupportedEncodingException
+     */
     public static String MD5(String text)
             throws NoSuchAlgorithmException, UnsupportedEncodingException {
         MessageDigest md;
-        md = MessageDigest.getInstance("MD5");
-        md.update(text.getBytes("UTF-8"), 0, text.length());
+        md = MessageDigest.getInstance(MD5);
+        md.update(text.getBytes(UTF_8_ENCODING), 0, text.length());
         return convertToHex(md.digest());
     }
 }

@@ -1,7 +1,27 @@
+/*
+ * Tanaguru - Automated webpage assessment
+ * Copyright (C) 2008-2011  Open-S Company
+ *
+ * This file is part of Tanaguru.
+ *
+ * Tanaguru is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact us by mail: open-s AT open-s DOT com
+ */
 package org.opens.tanaguru.ruleimplementation;
 
 import java.util.ArrayList;
-import org.opens.tanaguru.processor.*;
 
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.reference.Test;
@@ -12,6 +32,7 @@ import org.opens.tanaguru.service.NomenclatureLoaderService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
@@ -19,8 +40,7 @@ import org.opens.tanaguru.service.ProcessRemarkService;
  * {@link RuleImplementation} classes. It encapsulates common algorithms of
  * {@link RuleImplementation} operations.
  * 
- * @author ADEX
- * @version 1.0.0
+ * @author jkowalczyk
  */
 public abstract class AbstractRuleImplementation implements RuleImplementation {
 
@@ -47,6 +67,7 @@ public abstract class AbstractRuleImplementation implements RuleImplementation {
      *            the gross result map used for consolidation.
      * @return the net result list from the consolidation operation.
      */
+    @Override
     public List<ProcessResult> consolidate(
             Map<WebResource, List<ProcessResult>> grossResultMap,
             ProcessRemarkService processRemarkService) {
@@ -79,6 +100,7 @@ public abstract class AbstractRuleImplementation implements RuleImplementation {
             Map<WebResource, List<ProcessResult>> grossResultMap,
             ProcessRemarkService processRemarkService);
 
+    @Override
     public Test getTest() {
         return test;
     }
@@ -94,6 +116,7 @@ public abstract class AbstractRuleImplementation implements RuleImplementation {
      *            the SSP handler to use.
      * @return the result of the processing.
      */
+    @Override
     public ProcessResult process(SSPHandler sspHandler) {
         return processImpl(sspHandler);
     }
@@ -101,7 +124,7 @@ public abstract class AbstractRuleImplementation implements RuleImplementation {
     /**
      * This is the method that has to be implemented by concrete
      * {@link RuleImplementation} classes for processing operation. This method
-     * should exectue the processing of one page, through the SSP handler. It is
+     * should execute the processing of one page, through the SSP handler. It is
      * called by the main process method and is integrated into the common
      * algorithm.
      *
@@ -111,21 +134,25 @@ public abstract class AbstractRuleImplementation implements RuleImplementation {
      */
     protected abstract ProcessResult processImpl(SSPHandler sspHandler);
 
+    @Override
     public void setDefiniteResultFactory(
             DefiniteResultFactory definiteResultFactory) {
         this.definiteResultFactory = definiteResultFactory;
     }
 
+    @Override
     public void setIndefiniteResultFactory(
             IndefiniteResultFactory indefiniteResultFactory) {
         this.indefiniteResultFactory = indefiniteResultFactory;
     }
 
+    @Override
     public void setNomenclatureLoaderService(
             NomenclatureLoaderService nomenclatureLoaderService) {
         this.nomenclatureLoaderService = nomenclatureLoaderService;
     }
 
+    @Override
     public void setTest(Test test) {
         this.test = test;
     }

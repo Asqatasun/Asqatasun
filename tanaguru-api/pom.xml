@@ -13,7 +13,7 @@
     <url>http://www.tanaguru.org</url>
     <dependencies>
         <dependency>
-            <groupId>com.adex</groupId>
+            <groupId>${applicationGroupId}</groupId>
             <artifactId>commons-entity</artifactId>
             <version>${project.version}</version>
         </dependency>
