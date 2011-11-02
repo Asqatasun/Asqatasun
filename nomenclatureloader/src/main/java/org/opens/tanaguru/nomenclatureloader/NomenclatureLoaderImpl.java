@@ -1,3 +1,24 @@
+/*
+ * Tanaguru - Automated webpage assessment
+ * Copyright (C) 2008-2011  Open-S Company
+ *
+ * This file is part of Tanaguru.
+ *
+ * Tanaguru is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact us by mail: open-s AT open-s DOT com
+ */
 package org.opens.tanaguru.nomenclatureloader;
 
 import org.opens.tanaguru.entity.reference.Nomenclature;
@@ -5,36 +26,41 @@ import org.opens.tanaguru.entity.service.reference.NomenclatureDataService;
 
 /**
  * 
- * @author ADEX
+ * @author jkowalczyk
  */
 public class NomenclatureLoaderImpl implements NomenclatureLoader {
 
-	private String code;
-	private NomenclatureDataService nomenclatureDataService;
-	private Nomenclature result;
+    private String code;
+    private NomenclatureDataService nomenclatureDataService;
+    private Nomenclature result;
 
-	public NomenclatureLoaderImpl() {
-		super();
-	}
+    public NomenclatureLoaderImpl() {
+        super();
+    }
 
-	public String getCode() {
-		return code;
-	}
+    @Override
+    public String getCode() {
+        return code;
+    }
 
-	public Nomenclature getResult() {
-		return result;
-	}
+    @Override
+    public Nomenclature getResult() {
+        return result;
+    }
 
-	public void run() {
-		result = nomenclatureDataService.findByCode(code);
-	}
+    @Override
+    public void run() {
+        result = nomenclatureDataService.findByCode(code);
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    @Override
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public void setNomenclatureDataService(
-			NomenclatureDataService nomenclatureDataService) {
-		this.nomenclatureDataService = nomenclatureDataService;
-	}
+    public void setNomenclatureDataService(
+            NomenclatureDataService nomenclatureDataService) {
+        this.nomenclatureDataService = nomenclatureDataService;
+    }
+
 }
