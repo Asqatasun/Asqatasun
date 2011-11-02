@@ -1,6 +1,23 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Tanaguru - Automated webpage assessment
+ * Copyright (C) 2008-2011  Open-S Company
+ *
+ * This file is part of Tanaguru.
+ *
+ * Tanaguru is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact us by mail: open-s AT open-s DOT com
  */
 package org.opens.tanaguru.crawler.framework;
 
@@ -25,7 +42,6 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-//import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.log4j.Logger;
 import org.archive.crawler.framework.CrawlController;
 import org.archive.crawler.framework.CrawlJob;
@@ -34,7 +50,6 @@ import org.archive.modules.deciderules.DecideRuleSequence;
 import org.archive.net.UURIFactory;
 import org.archive.spring.PathSharingContext;
 import org.opens.tanaguru.crawler.ContentWriter;
-import org.opens.tanaguru.crawler.CrawlerImpl;
 import org.opens.tanaguru.crawler.extractor.listener.ExtractorCSSListener;
 import org.opens.tanaguru.crawler.extractor.listener.ExtractorHTMLListener;
 import org.opens.tanaguru.crawler.processor.TanaguruWriterProcessor;
@@ -45,13 +60,15 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 /**
+ * <p>
  * This class embeds a heritrix CrawlJob object and deals with the instanciation,
  * the launch, the stop and the clean-up. Between the instanciation and the launch
  * some listeners have to be set to the TanaguruWriterProcessor component.
  * That explains the rewrite of the CrawlJob launch method.
  * At the end of the process, the files opened by Heritrix while the process
  * are properly closed and the listeners of the TanaguruWriterProcessor are unset.
- *
+ * </p>
+ * 
  * @author jkowalczyk
  */
 public class TanaguruCrawlJob {

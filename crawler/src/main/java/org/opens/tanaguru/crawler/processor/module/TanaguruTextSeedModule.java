@@ -1,8 +1,24 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Tanaguru - Automated webpage assessment
+ * Copyright (C) 2008-2011  Open-S Company
+ *
+ * This file is part of Tanaguru.
+ *
+ * Tanaguru is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact us by mail: open-s AT open-s DOT com
  */
-
 package org.opens.tanaguru.crawler.processor.module;
 
 import java.io.BufferedReader;
@@ -60,6 +76,7 @@ public class TanaguruTextSeedModule extends TanaguruSeedModule implements ReadSo
      * (including nonseed lines mixed in).
      * @see org.archive.modules.seeds.SeedModule#announceSeeds()
      */
+    @Override
     public void announceSeeds() {
         BufferedReader reader = new BufferedReader(textSource.obtainReader());
         try {
@@ -84,7 +101,7 @@ public class TanaguruTextSeedModule extends TanaguruSeedModule implements ReadSo
                     RegexLineIterator.ENTRY);
 
         while (iter.hasNext()) {
-            s = (String) iter.next();
+            s = iter.next();
             if(Character.isLetterOrDigit(s.charAt(0))) {
                 // consider a likely URI
                 seedLine(s);
@@ -138,6 +155,7 @@ public class TanaguruTextSeedModule extends TanaguruSeedModule implements ReadSo
      *
      * @see org.archive.modules.seeds.SeedModule#actOn(java.io.File)
      */
+    @Override
     public void actOn(File f) {
         BufferedReader reader = null;
         try {
@@ -187,6 +205,7 @@ public class TanaguruTextSeedModule extends TanaguruSeedModule implements ReadSo
         publishAddedSeed(curi);
     }
 
+    @Override
     public Reader obtainReader() {
         return textSource.obtainReader();
     }
