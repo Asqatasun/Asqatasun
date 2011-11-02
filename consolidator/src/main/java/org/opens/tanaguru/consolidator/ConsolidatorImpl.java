@@ -1,3 +1,24 @@
+/*
+ * Tanaguru - Automated webpage assessment
+ * Copyright (C) 2008-2011  Open-S Company
+ *
+ * This file is part of Tanaguru.
+ *
+ * Tanaguru is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact us by mail: open-s AT open-s DOT com
+ */
 package org.opens.tanaguru.consolidator;
 
 import java.util.ArrayList;
@@ -11,7 +32,7 @@ import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
  * 
- * @author ADEX
+ * @author jkowalczyk
  */
 public class ConsolidatorImpl implements Consolidator {
 
@@ -22,21 +43,33 @@ public class ConsolidatorImpl implements Consolidator {
     private RuleImplementation ruleImplementation;
     private ProcessRemarkService processRemarkService;
 
-    ConsolidatorImpl(List<ProcessResult> grossResultList, RuleImplementation ruleImplementation, ProcessRemarkService processRemarkService) {
+    /**
+     *
+     * @param grossResultList
+     * @param ruleImplementation
+     * @param processRemarkService
+     */
+    ConsolidatorImpl(
+            List<ProcessResult> grossResultList,
+            RuleImplementation ruleImplementation,
+            ProcessRemarkService processRemarkService) {
         super();
         this.grossResultList = grossResultList;
         this.ruleImplementation = ruleImplementation;
         this.processRemarkService = processRemarkService;
     }
 
+    @Override
     public List<ProcessResult> getGrossResultList() {
         return grossResultList;
     }
 
+    @Override
     public List<ProcessResult> getResult() {
         return result;
     }
 
+    @Override
     public RuleImplementation getRuleImplementation() {
         return ruleImplementation;
     }
@@ -76,22 +109,27 @@ public class ConsolidatorImpl implements Consolidator {
         initialized = true;
     }
 
+    @Override
     public void run() {
         initialize();
 
         result = ruleImplementation.consolidate(groupedProcessResultMap, processRemarkService);
     }
 
+    @Override
     public void setGrossResultList(List<ProcessResult> grossResultList) {
         this.grossResultList = grossResultList;
         initialized = false;
     }
 
+    @Override
     public void setRuleImplementation(RuleImplementation ruleImplementation) {
         this.ruleImplementation = ruleImplementation;
     }
 
+    @Override
     public void setProcessRemarkService(ProcessRemarkService processRemarkService) {
         this.processRemarkService = processRemarkService;
     }
+
 }
