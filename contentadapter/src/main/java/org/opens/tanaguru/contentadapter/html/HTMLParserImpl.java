@@ -1,3 +1,24 @@
+/*
+ * Tanaguru - Automated webpage assessment
+ * Copyright (C) 2008-2011  Open-S Company
+ *
+ * This file is part of Tanaguru.
+ *
+ * Tanaguru is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact us by mail: open-s AT open-s DOT com
+ */
 package org.opens.tanaguru.contentadapter.html;
 
 import org.opens.tanaguru.contentadapter.ContentAdapter;
@@ -19,6 +40,10 @@ import org.xml.sax.helpers.XMLReaderFactory;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.contentadapter.HTMLParser;
 
+/**
+ * 
+ * @author jkowalczyk
+ */
 public class HTMLParserImpl implements HTMLParser {
 
     protected Set<ContentAdapter> contentAdapterSet = new HashSet<ContentAdapter>();
@@ -31,10 +56,12 @@ public class HTMLParserImpl implements HTMLParser {
         this.contentAdapterSet = contentAdapterSet;
     }
 
+    @Override
     public Set<ContentAdapter> getContentAdapterSet() {
         return contentAdapterSet;
     }
 
+    @Override
     public SSP getSSP() {
         return ssp;
     }
@@ -63,6 +90,7 @@ public class HTMLParserImpl implements HTMLParser {
         initialized = true;
     }
 
+    @Override
     public void run() {
         try {
             initialize();
@@ -86,11 +114,14 @@ public class HTMLParserImpl implements HTMLParser {
         }
     }
 
+    @Override
     public void setContentAdapterSet(Set<ContentAdapter> contentAdapterSet) {
         this.contentAdapterSet = contentAdapterSet;
     }
 
+    @Override
     public void setSSP(SSP ssp) {
         this.ssp = ssp;
     }
+
 }

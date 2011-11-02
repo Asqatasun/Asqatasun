@@ -1,3 +1,24 @@
+/*
+ * Tanaguru - Automated webpage assessment
+ * Copyright (C) 2008-2011  Open-S Company
+ *
+ * This file is part of Tanaguru.
+ *
+ * Tanaguru is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact us by mail: open-s AT open-s DOT com
+ */
 package org.opens.tanaguru.contentadapter.html.util;
 
 import java.util.HashSet;
@@ -9,7 +30,7 @@ import org.xml.sax.SAXException;
 
 /**
  * 
- * @author ADEX
+ * @author jkowalczyk
  */
 public class DOMContentHandlerDecoratorImpl implements
         DOMContentHandlerDecorator {
@@ -21,10 +42,12 @@ public class DOMContentHandlerDecoratorImpl implements
         this.contentHandlerSet = new HashSet<ContentHandler>();
     }
 
+    @Override
     public void addContentHandler(ContentHandler contentHandler) {
         contentHandlerSet.add(contentHandler);
     }
 
+    @Override
     public void characters(char[] ch, int start, int length)
             throws SAXException {
         for (ContentHandler contentHandler : contentHandlerSet) {
@@ -32,12 +55,14 @@ public class DOMContentHandlerDecoratorImpl implements
         }
     }
 
+    @Override
     public void endDocument() throws SAXException {
         for (ContentHandler contentHandler : contentHandlerSet) {
             contentHandler.endDocument();
         }
     }
 
+    @Override
     public void endElement(String uri, String localName, String qName)
             throws SAXException {
         for (ContentHandler contentHandler : contentHandlerSet) {
@@ -45,16 +70,19 @@ public class DOMContentHandlerDecoratorImpl implements
         }
     }
 
+    @Override
     public void endPrefixMapping(String prefix) throws SAXException {
         for (ContentHandler contentHandler : contentHandlerSet) {
             contentHandler.endPrefixMapping(prefix);
         }
     }
 
+    @Override
     public Set<ContentHandler> getContentHandlerSet() {
         return contentHandlerSet;
     }
 
+    @Override
     public void ignorableWhitespace(char[] ch, int start, int length)
             throws SAXException {
         for (ContentHandler contentHandler : contentHandlerSet) {
@@ -62,6 +90,7 @@ public class DOMContentHandlerDecoratorImpl implements
         }
     }
 
+    @Override
     public void processingInstruction(String target, String data)
             throws SAXException {
         for (ContentHandler contentHandler : contentHandlerSet) {
@@ -69,32 +98,38 @@ public class DOMContentHandlerDecoratorImpl implements
         }
     }
 
+    @Override
     public void removeContentHandler(ContentHandler contentHandler) {
         contentHandlerSet.remove(contentHandler);
     }
 
+    @Override
     public void setContentHandlerSet(Set<ContentHandler> contentHandlerSet) {
         this.contentHandlerSet = contentHandlerSet;
     }
 
+    @Override
     public void setDocumentLocator(Locator locator) {
         for (ContentHandler contentHandler : contentHandlerSet) {
             contentHandler.setDocumentLocator(locator);
         }
     }
 
+    @Override
     public void skippedEntity(String name) throws SAXException {
         for (ContentHandler contentHandler : contentHandlerSet) {
             contentHandler.skippedEntity(name);
         }
     }
 
+    @Override
     public void startDocument() throws SAXException {
         for (ContentHandler contentHandler : contentHandlerSet) {
             contentHandler.startDocument();
         }
     }
 
+    @Override
     public void startElement(String uri, String localName, String qName,
             Attributes atts) throws SAXException {
         for (ContentHandler contentHandler : contentHandlerSet) {
@@ -102,10 +137,12 @@ public class DOMContentHandlerDecoratorImpl implements
         }
     }
 
+    @Override
     public void startPrefixMapping(String prefix, String uri)
             throws SAXException {
         for (ContentHandler contentHandler : contentHandlerSet) {
             contentHandler.startPrefixMapping(prefix, uri);
         }
     }
+
 }

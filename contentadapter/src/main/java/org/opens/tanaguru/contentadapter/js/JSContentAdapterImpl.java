@@ -1,3 +1,24 @@
+/*
+ * Tanaguru - Automated webpage assessment
+ * Copyright (C) 2008-2011  Open-S Company
+ *
+ * This file is part of Tanaguru.
+ *
+ * Tanaguru is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact us by mail: open-s AT open-s DOT com
+ */
 package org.opens.tanaguru.contentadapter.js;
 
 import org.opens.tanaguru.contentadapter.ContentParser;
@@ -25,7 +46,7 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.helpers.LocatorImpl;
 
 /**
- * @author ADEX
+ * @author jkowalczyk
  * 
  *         XML SAX ContentHandler implementation for Resource Adaptation.
  * 
@@ -61,6 +82,7 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
      * @param end
      * @see org.xml.sax.ContentHandler#characters(char[], int, int)
      */
+    @Override
     public void characters(char[] ch, int start, int end) throws SAXException {
 
         if (isLocalJS) {
@@ -75,6 +97,7 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
      * @throws SAXException
      * @see org.xml.sax.ContentHandler#endDocument()
      */
+    @Override
     public void endDocument() throws SAXException {
 
         if (resource != null) {
@@ -95,6 +118,7 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
      * @see org.xml.sax.ContentHandler#endElement(java.lang.String,
      *      java.lang.String, java.lang.String)
      */
+    @Override
     public void endElement(String nameSpaceURI, String localName, String rawName)
             throws SAXException {
 
@@ -115,10 +139,12 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
      * @param prefixe
      * @see org.xml.sax.ContentHandler#endPrefixMapping(java.lang.String)
      */
+    @Override
     public void endPrefixMapping(String prefix) throws SAXException {
         // Not used
     }
 
+    @Override
     public String getAdaptation() {
         return new XStream().toXML(jsSet);
     }
@@ -129,6 +155,7 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
      * @param end
      * @see org.xml.sax.ContentHandler#ignorableWhitespace(char[], int, int)
      */
+    @Override
     public void ignorableWhitespace(char[] ch, int start, int end)
             throws SAXException {
         // Not used
@@ -141,15 +168,18 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
      * @see org.xml.sax.ContentHandler#processingInstruction(java.lang.String,
      *      java.lang.String)
      */
+    @Override
     public void processingInstruction(String target, String data)
             throws SAXException {
         // XXX Not used
     }
 
+    @Override
     public void setDocumentLocator(Locator locator) {
         this.locator = locator;
     }
 
+    @Override
     public void setParser(ContentParser parser) {
         if (parser instanceof JSParser) {
             this.parser = (JSParser) parser;
@@ -159,6 +189,7 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
     /**
      * @see org.xml.sax.ContentHandler#skippedEntity(java.lang.String)
      */
+    @Override
     public void skippedEntity(String arg0) throws SAXException {
         // XXX Not used
     }
@@ -169,6 +200,7 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
      * @throws SAXException
      * @see org.xml.sax.ContentHandler#startDocument()
      */
+    @Override
     public void startDocument() throws SAXException {
         buffer = new StringBuffer();
         jsVector = new HashSet();
@@ -185,6 +217,7 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
      * @see org.xml.sax.ContentHandler#startElement(java.lang.String,
      *      java.lang.String, java.lang.String, org.xml.sax.Attributes)
      */
+    @Override
     public void startElement(String nameSpaceURI, String localName,
             String rawName, Attributes attributs) throws SAXException {
 
@@ -243,8 +276,10 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
      * @see org.xml.sax.ContentHandler#startPrefixMapping(java.lang.String,
      *      java.lang.String)
      */
+    @Override
     public void startPrefixMapping(String prefix, String URI)
             throws SAXException {
         // Not used
     }
+
 }

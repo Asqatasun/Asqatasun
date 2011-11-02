@@ -1,3 +1,24 @@
+/*
+ * Tanaguru - Automated webpage assessment
+ * Copyright (C) 2008-2011  Open-S Company
+ *
+ * This file is part of Tanaguru.
+ *
+ * Tanaguru is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact us by mail: open-s AT open-s DOT com
+ */
 package org.opens.tanaguru.contentadapter.css;
 
 import java.util.ArrayList;
@@ -13,12 +34,11 @@ import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
 import org.w3c.flute.parser.selectors.SelectorFactoryImpl;
 import org.opens.tanaguru.contentadapter.Resource;
-import org.opens.tanaguru.contentadapter.RsrcLocator;
 import org.w3c.css.sac.SelectorFactory;
 
 /**
- * 
- * @author ADEX refer to org.w3c.css.sac.DocumentHandler javadoc
+ * Refer to org.w3c.css.sac.DocumentHandler javadoc.
+ * @author jkowalczyk
  */
 public class CSSOMDocumentHandlerImpl implements DocumentHandler {
 
@@ -37,30 +57,36 @@ public class CSSOMDocumentHandlerImpl implements DocumentHandler {
         this.rsrc = rsrc;
     }
 
+    @Override
     public void comment(String arg0) throws CSSException {
         // Not used
     }
 
+    @Override
     public void endDocument(InputSource arg0) throws CSSException {
         // pop the rule list and the style sheet nodes
         getNodeStack().pop();
         nodeRoot = getNodeStack().pop();
     }
 
+    @Override
     public void endFontFace() throws CSSException {
         getNodeStack().pop();
         nodeRoot = getNodeStack().pop();
     }
 
+    @Override
     public void endMedia(SACMediaList arg0) throws CSSException {
         currentMediaList = null;
     }
 
+    @Override
     public void endPage(String arg0, String arg1) throws CSSException {
         getNodeStack().pop();
         nodeRoot = getNodeStack().pop();
     }
 
+    @Override
     public void endSelector(SelectorList arg0) throws CSSException {
 
         getNodeStack().pop();
@@ -176,20 +202,24 @@ public class CSSOMDocumentHandlerImpl implements DocumentHandler {
         return styleSheet;
     }
 
+    @Override
     public void ignorableAtRule(String arg0) throws CSSException {
         // Not used
     }
 
+    @Override
     public void importStyle(String arg0, SACMediaList arg1, String arg2)
             throws CSSException {
         // Not used
     }
 
+    @Override
     public void namespaceDeclaration(String arg0, String arg1)
             throws CSSException {
         // Not used
     }
 
+    @Override
     public void property(String property, LexicalUnit propertyValue,
             boolean arg2) throws CSSException {
         ((List<CSSOMDeclarationImpl>) getNodeStack().peek()).add(
@@ -204,6 +234,7 @@ public class CSSOMDocumentHandlerImpl implements DocumentHandler {
         this.nodeStack = nodeStack;
     }
 
+    @Override
     public void startDocument(InputSource arg0) throws CSSException {
 
         if (getNodeStack().empty()) {
@@ -217,6 +248,7 @@ public class CSSOMDocumentHandlerImpl implements DocumentHandler {
         }
     }
 
+    @Override
     public void startFontFace() throws CSSException {
         List<CSSOMSelector> selectors = new ArrayList<CSSOMSelector>();
         List<CSSOMDeclaration> declarations = new ArrayList<CSSOMDeclaration>();
@@ -245,10 +277,12 @@ public class CSSOMDocumentHandlerImpl implements DocumentHandler {
         getNodeStack().push(declarations);
     }
 
+    @Override
     public void startMedia(SACMediaList mediaList) throws CSSException {
         currentMediaList = mediaList;
     }
 
+    @Override
     public void startPage(String arg0, String arg1) throws CSSException {
 
         List<CSSOMSelector> selectors = new ArrayList<CSSOMSelector>();
@@ -278,6 +312,7 @@ public class CSSOMDocumentHandlerImpl implements DocumentHandler {
         getNodeStack().push(declarations);
     }
 
+    @Override
     public void startSelector(SelectorList selectorList) throws CSSException {
         List<CSSOMSelector> selectors = new ArrayList<CSSOMSelector>();
         List<CSSOMDeclaration> declarations = new ArrayList<CSSOMDeclaration>();

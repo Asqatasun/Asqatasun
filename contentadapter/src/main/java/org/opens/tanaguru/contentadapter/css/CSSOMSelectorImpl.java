@@ -1,28 +1,50 @@
+/*
+ * Tanaguru - Automated webpage assessment
+ * Copyright (C) 2008-2011  Open-S Company
+ *
+ * This file is part of Tanaguru.
+ *
+ * Tanaguru is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact us by mail: open-s AT open-s DOT com
+ */
 package org.opens.tanaguru.contentadapter.css;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.w3c.css.sac.AttributeCondition;
-import org.w3c.css.sac.CharacterDataSelector;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.Condition;
 import org.w3c.css.sac.ConditionalSelector;
-import org.w3c.css.sac.ContentCondition;
 import org.w3c.css.sac.DescendantSelector;
 import org.w3c.css.sac.ElementSelector;
 import org.w3c.css.sac.LangCondition;
 import org.w3c.css.sac.NegativeCondition;
-import org.w3c.css.sac.NegativeSelector;
-import org.w3c.css.sac.PositionalCondition;
-import org.w3c.css.sac.ProcessingInstructionSelector;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SiblingSelector;
 import org.w3c.css.sac.SimpleSelector;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author jkowalczyk
+ */
 public class CSSOMSelectorImpl implements CSSOMSelector, Serializable {
+    
+    private static final long serialVersionUID = -4323664539702833202L;
 
     private List<CSSOMDeclaration> ownerDeclaration = new ArrayList<CSSOMDeclaration>();
     private Selector selector;

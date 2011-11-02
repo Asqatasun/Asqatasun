@@ -1,3 +1,24 @@
+/*
+ * Tanaguru - Automated webpage assessment
+ * Copyright (C) 2008-2011  Open-S Company
+ *
+ * This file is part of Tanaguru.
+ *
+ * Tanaguru is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact us by mail: open-s AT open-s DOT com
+ */
 package org.opens.tanaguru.contentadapter.util;
 
 import org.opens.tanaguru.contentadapter.Resource;
@@ -7,7 +28,7 @@ import java.util.Set;
 
 /**
  * 
- * @author ADEX
+ * @author jkowalczyk
  */
 public abstract class AbstractResource implements Resource {
 
@@ -30,27 +51,34 @@ public abstract class AbstractResource implements Resource {
         this.resourceSet = new HashSet();
     }
 
+    @Override
     public void addAllResource(Set resourceSet) {
         this.resourceSet.addAll(resourceSet);
     }
 
+    @Override
     public int getLineNumber() {
         return lineNumber;
     }
 
+    @Override
     public String getResource() {
         return resource;
     }
 
+    @Override
     public Set getResourceSet() {
         return resourceSet;
     }
 
+    @Override
     public RsrcLocator getRsrcLocator() {
         return location;
     }
 
+    @Override
     public void setResource(String resource) {
         this.resource = resource;
     }
+
 }
