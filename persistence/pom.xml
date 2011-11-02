@@ -38,9 +38,9 @@
             <version>${applicationVersion}</version>
         </dependency>
         <dependency>
-            <groupId>com.adex</groupId>
+            <groupId>${applicationGroupId}</groupId>
             <artifactId>commons-entity-jpa</artifactId>
-            <version>${project.version}</version>
+            <version>${applicationVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.dbunit</groupId>
