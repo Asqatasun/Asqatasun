@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.opens</groupId>
+        <artifactId>tanaguru</artifactId>
+        <version>1.5.0</version>
+    </parent>
+    <groupId>${engineGroupId}</groupId>
+    <artifactId>engine</artifactId>
+    <packaging>pom</packaging>
+    <version>${engineVersion}</version>
+    <name>engine</name>
+    <url>http://www.tanaguru.org</url>
+    <modules>
+        <module>commons-entity</module>
+        <module>commons-entity-jpa</module>
+        <module>tanaguru-api</module>
+        <module>reference</module>
+        <module>audit</module>
+        <module>rule-implementation-loader</module>
+        <module>nomenclatureloader</module>
+        <module>crawler</module>
+        <module>contentloader</module>
+        <module>contentadapter</module>
+        <module>commons-processing</module>
+        <module>processor</module>
+        <module>consolidator</module>
+        <module>analyser</module>
+        <module>persistence</module>
+        <module>tanaguru-engine</module>
+        <module>tanaguru-resources</module>
+        <module>logging</module>
+        <module>parameterization</module>
+        <module>statistics</module>
+        <module>tanaguru-i18n</module>
+    </modules>
+</project>
