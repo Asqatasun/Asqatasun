@@ -1,4 +1,0 @@
-User-agent: *
-
-# Files
-Disallow: /page-access-restricted-by-robots.html
