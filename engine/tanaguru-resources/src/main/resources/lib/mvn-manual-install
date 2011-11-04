@@ -1,0 +1,7 @@
+mvn install:install-file -DgroupId=org.htmlcleaner -DartifactId=htmlcleaner -Dversion=2.2 -Dpackaging=jar -Dfile=htmlcleaner-2.2.jar
+mvn install:install-file -DgroupId=org.mozilla.xpcom -DartifactId=mozillaglue -Dversion=1.9.0.17 -Dpackaging=jar -Dfile=MozillaGlue-1.9.0.17.jar
+mvn install:install-file -DgroupId=org.mozilla.interfaces -DartifactId=mozillaInterfaces -Dversion=1.9.0.17 -Dpackaging=jar -Dfile=MozillaInterfaces-1.9.0.17.jar
+mvn install:install-file -DgroupId=org.mozilla.interfaces -DartifactId=mozillaInterfaces-src -Dversion=1.9.0.17 -Dpackaging=jar -Dfile=MozillaInterfaces-src-1.9.0.17.jar
+mvn install:install-file -DgroupId=org.eclipse.swt -DartifactId=swt -Dversion=3.452 -Dpackaging=jar -Dfile=swt-3.452.jar
+mvn install:install-file -DgroupId=org.jvnet.jax-ws-commons.spring -DartifactId=jaxws-spring -Dversion=1.8 -Dpackaging=jar -Dfile=jaxws-spring-1.8.jar
+mvn install:install-file -DgroupId=org.seleniumhq.selenium.server -DartifactId=selenium-server -Dversion=1.0.3 -Dpackaging=jar -Dfile=selenium-server.jar

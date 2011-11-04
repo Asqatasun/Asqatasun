@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="auditServiceThreadQueue" class="org.opens.tanaguru.service.AuditServiceThreadQueueImpl">
+        <!-- audit limit parameters -->
+        <property name="pageAuditExecutionListMax" value="9"/>
+        <property name="siteAuditExecutionListMax" value="3"/>
+        <!-- services injection -->
+        <property name="crawlerService" ref="crawlerService"/>
+<!--        <property name="contentLoaderService" ref="contentLoaderService"/>-->
+        <property name="contentAdapterService" ref="contentAdapterService"/>
+        <property name="processorService" ref="processorService"/>
+        <property name="consolidatorService" ref="consolidatorService"/>
+        <property name="analyserService" ref="analyserService"/>
+        <!-- data services injection -->
+        <property name="auditDataService" ref="auditDataService"/>
+        <property name="webResourceDataService" ref="webResourceDataService"/>
+        <property name="contentDataService" ref="contentDataService"/>
+        <property name="processResultDataService" ref="processResultDataService"/>
+        <!-- adaptation listener injection -->
+        <property name="adaptationListener" ref="adaptationListener"/>
+        <!-- audit service thread injection -->
+        <property name="auditServiceThreadFactory" ref="auditServiceThreadFactory"/>
+    </bean>
+
+    <bean id="auditServiceThreadFactory" class="org.opens.tanaguru.service.AuditServiceThreadFactoryImpl"/>
+
+    <bean id="auditService" class="org.opens.tanaguru.service.AuditServiceImpl">
+        <!-- services injection -->
+        <property name="crawlerService" ref="crawlerService"/>
+        <property name="contentLoaderService" ref="contentLoaderService"/>
+        <property name="contentAdapterService" ref="contentAdapterService"/>
+        <property name="processorService" ref="processorService"/>
+        <property name="consolidatorService" ref="consolidatorService"/>
+        <property name="analyserService" ref="analyserService"/>
+        <!-- data services injection -->
+        <property name="auditDataService" ref="auditDataService"/>
+        <property name="webResourceDataService" ref="webResourceDataService"/>
+        <property name="testDataService" ref="testDataService"/>
+        <property name="contentDataService" ref="contentDataService"/>
+        <property name="processResultDataService" ref="processResultDataService"/>
+        <property name="parameterDataService" ref="parameterDataService"/>
+        <!-- adaptation listener injection -->
+        <property name="adaptationListener" ref="adaptationListener"/>
+        <!-- audit service thread injection -->
+        <property name="auditServiceThreadQueue" ref="auditServiceThreadQueue"/>
+        <property name="auditServiceThreadFactory" ref="auditServiceThreadFactory"/>
+    </bean>
+
+</beans>
