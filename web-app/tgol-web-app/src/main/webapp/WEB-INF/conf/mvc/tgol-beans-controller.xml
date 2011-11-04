@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:component-scan
+        base-package="org.opens.tgol.controller"/>
+
+    <bean id="homeController" class="org.opens.tgol.controller.HomeController">
+        <property name="authorizedProductForTrend">
+            <list>
+                <value>AXS_DOMAIN</value>
+                <value>SEO_DOMAIN</value>
+                <value>AXS_READONLY</value>
+                <value>SEO_READONLY</value>
+            </list>
+        </property>
+        <property name="actionHandler" ref="contractActionHandler"/>
+    </bean>
+
+    <bean id="pageListController" class="org.opens.tgol.controller.PageListController">
+        <property name="authorizedPageSizeList">
+            <list>
+                <value>10</value>
+                <value>25</value>
+                <value>50</value>
+                <value>100</value>
+                <value>250</value>
+                <value>1000</value>
+                <value>-1</value>
+            </list>
+        </property>
+        <property name="authorizedScopeForPageList">
+            <list>
+                <value>DOMAIN</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="auditResultController" class="org.opens.tgol.controller.AuditResultController">
+        <property name="parametersToDisplay">
+            <map>
+                <entry key="LEVEL">
+                    <value>level</value>
+                </entry>
+                <entry key="DATA_TABLE_MARKER">
+                    <value>data-table</value>
+                </entry>
+            </map>
+        </property>
+        <property name="authorizedScopeForPageList">
+            <list>
+                <value>DOMAIN</value>
+            </list>
+        </property>
+        <property name="actionHandler" ref="resultActionHandler"/>
+    </bean>
+
+    <bean id="auditSynthesisController" class="org.opens.tgol.controller.AuditSynthesisController">
+        <property name="nbOfDisplayedFailedTest" value="5"/>
+        <property name="nbOfDisplayedFailedPages" value="10"/>
+        <property name="parametersToDisplay">
+            <map>
+                <entry key="LEVEL">
+                    <value>level</value>
+                </entry>
+                <entry key="DEPTH">
+                    <value>depth</value>
+                </entry>
+                <entry key="MAX_DURATION">
+                    <value>max-duration</value>
+                </entry>
+                <entry key="MAX_DOCUMENTS">
+                    <value>max-documents</value>
+                </entry>
+                <entry key="EXCLUSION_REGEXP">
+                    <value>exclusion-regexp</value>
+                </entry>
+                <entry key="DATA_TABLE_MARKER">
+                    <value>data-table</value>
+                </entry>
+            </map>
+        </property>
+        <property name="authorizedScopeForSynthesis">
+            <list>
+                <value>DOMAIN</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="auditSetUpController" class="org.opens.tgol.controller.AuditSetUpController">
+        <property name="siteParametersMap">
+            <map>
+                <entry key="level-parameters">
+                    <list>
+                        <ref bean="levelParamBuilder"/>
+                    </list>
+                </entry>
+                <entry key="crawl-parameters">
+                    <list>
+                        <ref bean="depthParamBuilder"/>
+                        <ref bean="maxDurationParamBuilder"/>
+                        <ref bean="maxDocumentsParamBuilder"/>
+                        <ref bean="exclusionRegexpParamBuilder"/>
+                    </list>
+                </entry>
+            </map>
+        </property>
+        <property name="pageParametersMap">
+            <map>
+                <entry key="level-parameters">
+                    <list>
+                        <ref bean="levelParamBuilder"/>
+                    </list>
+                </entry>
+                <entry key="marker-parameters">
+                    <list>
+<!--                        <ref bean="presentationTableParam"/>-->
+                        <ref bean="dataTableParamBuilder"/>
+                    </list>
+                </entry>
+            </map>
+        </property>
+        <property name="auditPageSetUpValidator">
+            <ref bean="auditPageSetUpFormValidator"/>
+        </property>
+        <property name="auditSiteSetUpValidator">
+            <ref bean="auditSiteSetUpFormValidator"/>
+        </property>
+    </bean>
+    
+    <bean id="auditExportResultController" class="org.opens.tgol.controller.AuditExportResultController">
+        <property name="parametersToDisplay">
+            <map>
+                <entry key="LEVEL">
+                    <value>level</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+</beans>

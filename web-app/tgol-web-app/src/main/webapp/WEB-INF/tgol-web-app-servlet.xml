@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <!-- spring mvc imports -->
+    <import resource="conf/mvc/tgol-beans-controller.xml"/>
+    <import resource="conf/mvc/tgol-beans-form.xml"/>
+    <import resource="conf/mvc/tgol-beans-handler.xml"/>
+    <import resource="conf/mvc/tgol-beans-i18n.xml"/>
+    <import resource="conf/mvc/tgol-beans-locale.xml"/>
+    <import resource="conf/mvc/tgol-beans-presentation.xml"/>
+    <import resource="conf/mvc/tgol-beans-resolver.xml"/>
+    <import resource="conf/mvc/tgol-beans-utils.xml"/>
+    <import resource="conf/mvc/tgol-beans-validator.xml"/>
+    
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
+
+    <!-- export function imports -->
+    <import resource="conf/export/tgol-beans-color.xml"/>
+    <import resource="conf/export/tgol-beans-columns.xml"/>
+    <import resource="conf/export/tgol-beans-expression.xml"/>
+    <import resource="conf/export/tgol-beans-format.xml"/>
+    <import resource="conf/export/tgol-beans-layout.xml"/>
+    <import resource="conf/export/tgol-beans-service.xml"/>
+    <import resource="conf/export/tgol-beans-style.xml"/>
+
+</beans>

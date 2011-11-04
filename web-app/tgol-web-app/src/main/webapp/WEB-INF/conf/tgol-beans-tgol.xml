@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="tgsiContractDAO" class="org.opens.tgol.entity.dao.contract.ContractDAOImpl"/>
+    <bean id="tgsiContractDataService" class="org.opens.tgol.entity.service.contract.ContractDataServiceImpl">
+        <property name="entityFactory" ref="tgsiContractFactory"/>
+        <property name="entityDao" ref="tgsiContractDAO"/>
+    </bean>
+    <bean id="tgsiActDAO" class="org.opens.tgol.entity.dao.contract.ActDAOImpl"/>
+    <bean id="tgsiActDataService" class="org.opens.tgol.entity.service.contract.ActDataServiceImpl">
+        <property name="entityFactory" ref="tgsiActFactory"/>
+        <property name="entityDao" ref="tgsiActDAO"/>
+    </bean>
+
+    <bean id="tgsiUserDAO" class="org.opens.tgol.entity.dao.user.UserDAOImpl"/>
+    <bean id="tgsiUserDataService" class="org.opens.tgol.entity.service.user.UserDataServiceImpl">
+        <property name="entityFactory" ref="tgsiUserFactory"/>
+        <property name="entityDao" ref="tgsiUserDAO"/>
+    </bean>
+    <bean id="tgsiRoleDAO" class="org.opens.tgol.entity.dao.user.RoleDAOImpl"/>
+    <bean id="tgsiRoleDataService" class="org.opens.tgol.entity.service.user.RoleDataServiceImpl">
+        <property name="entityFactory" ref="tgsiRoleFactory"/>
+        <property name="entityDao" ref="tgsiRoleDAO"/>
+    </bean>
+
+    <bean id="tgsiProductDAO" class="org.opens.tgol.entity.dao.product.ProductDAOImpl"/>
+    <bean id="tgsiProductDataService" class="org.opens.tgol.entity.service.product.ProductDataServiceImpl">
+        <property name="entityFactory" ref="tgsiProductFactory"/>
+        <property name="entityDao" ref="tgsiProductDAO"/>
+    </bean>
+
+    <bean id="tgsiScopeDAO" class="org.opens.tgol.entity.dao.product.ScopeDAOImpl"/>
+    <bean id="tgsiScopeDataService" class="org.opens.tgol.entity.service.product.ScopeDataServiceImpl">
+        <property name="entityFactory" ref="tgsiScopeFactory"/>
+        <property name="entityDao" ref="tgsiScopeDAO"/>
+    </bean>
+
+    <bean id="statisticsDAO" class="org.opens.tgol.entity.dao.statistics.StatisticsDAOImpl"/>
+
+</beans>

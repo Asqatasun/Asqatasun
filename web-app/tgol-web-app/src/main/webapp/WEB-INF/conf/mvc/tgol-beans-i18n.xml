@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <!--
+    Internationalization beans
+    -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>access-denied-page-I18N</value>
+                <value>account-settings-page-I18N</value>
+                <value>adapting-error-page-I18N</value>
+                <value>audit-in-progress-page-I18N</value>
+                <value>audit-set-up-I18N</value>
+                <value>change-password-page-I18N</value>
+                <value>contract-page-I18N</value>
+                <value>export-audit-format-error-page-I18N</value>
+                <value>evidence-elements-I18N</value>
+                <value>forgotten-password-page-I18N</value>
+                <value>forgotten-password-confirmation-page-I18N</value>
+                <value>graph-I18N</value>
+                <value>home-page-I18N</value>
+                <value>loading-error-page-I18N</value>
+                <value>login-page-I18N</value>
+                <value>level-I18N</value>
+                <value>max-file-size-error-page-I18N</value>
+                <value>oups-page-I18N</value>
+                <value>page-list-page-I18N</value>
+                <value>parameters-I18N</value>
+                <value>quota-by-ip-exceeded-page-I18N</value>
+                <value>quota-exceeded-page-I18N</value>
+                <value>result-page-I18N</value>
+                <value>referential-I18N</value>
+                <value>rule-I18N</value>
+                <value>rule-error-I18N</value>
+                <value>rule-result-I18N</value>
+                <value>sign-up-page-I18N</value>
+                <value>sign-up-confirmation-page-I18N</value>
+                <value>synthesis-site-page-I18N</value>
+                <value>theme-I18N</value>
+	    </list>
+	</property>
+    </bean>
+
+</beans>
