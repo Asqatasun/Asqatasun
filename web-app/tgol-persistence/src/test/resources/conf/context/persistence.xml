@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0"
+      xmlns="http://java.sun.com/xml/ns/persistence"
+      xmlns:xsi="http://www.w3.com/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+      http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+    <persistence-unit name="tanaguruPU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <non-jta-data-source>jdbc/tanaguruDS</non-jta-data-source>
+        <class>org.opens.tgol.entity.user.UserImpl</class>
+        <class>org.opens.tgol.entity.user.RoleImpl</class>
+        <class>org.opens.tgol.entity.contract.ContractImpl</class>
+        <class>org.opens.tgol.entity.contract.ActImpl</class>
+        <class>org.opens.tgol.entity.product.ProductImpl</class>
+        <class>org.opens.tgol.entity.product.RestrictionImpl</class>
+        <class>org.opens.tgol.entity.product.RestrictionElementImpl</class>
+        <class>org.opens.tgol.entity.product.TgsiScopeImpl</class>
+        <class>org.opens.tanaguru.entity.subject.WebResourceImpl</class>
+        <class>org.opens.tanaguru.entity.subject.SiteImpl</class>
+        <class>org.opens.tanaguru.entity.subject.PageImpl</class>
+        <class>org.opens.tanaguru.entity.audit.AuditImpl</class>
+        <class>org.opens.tanaguru.entity.reference.CriterionImpl</class>
+        <class>org.opens.tanaguru.entity.reference.DecisionLevelImpl</class>
+        <class>org.opens.tanaguru.entity.reference.LevelImpl</class>
+        <class>org.opens.tanaguru.entity.reference.NomenclatureCssUnitImpl</class>
+        <class>org.opens.tanaguru.entity.reference.NomenclatureElementImpl</class>
+        <class>org.opens.tanaguru.entity.reference.NomenclatureImpl</class>
+        <class>org.opens.tanaguru.entity.reference.ReferenceImpl</class>
+        <class>org.opens.tanaguru.entity.reference.RuleImpl</class>
+        <class>org.opens.tanaguru.entity.reference.RulePackageImpl</class>
+        <class>org.opens.tanaguru.entity.reference.ScopeImpl</class>
+        <class>org.opens.tanaguru.entity.reference.StandardMessageImpl</class>
+        <class>org.opens.tanaguru.entity.reference.TestImpl</class>
+        <class>org.opens.tanaguru.entity.reference.ThemeImpl</class>
+        <class>org.opens.tanaguru.entity.audit.ProcessResultImpl</class>
+        <class>org.opens.tanaguru.entity.audit.DefiniteResultImpl</class>
+        <class>org.opens.tanaguru.entity.audit.IndefiniteResultImpl</class>
+        <class>org.opens.tanaguru.entity.audit.ContentImpl</class>
+        <class>org.opens.tanaguru.entity.audit.ProcessRemarkImpl</class>
+        <class>org.opens.tanaguru.entity.audit.EvidenceElementImpl</class>
+        <class>org.opens.tanaguru.entity.audit.EvidenceImpl</class>
+        <class>org.opens.tanaguru.entity.parameterization.ParameterImpl</class>
+        <class>org.opens.tanaguru.entity.parameterization.ParameterElementImpl</class>
+        <class>org.opens.tanaguru.entity.parameterization.ParameterFamilyImpl</class>
+        <class>org.opens.tgol.presentation.data.FailedPageInfo</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+        </properties>
+    </persistence-unit>
+</persistence>

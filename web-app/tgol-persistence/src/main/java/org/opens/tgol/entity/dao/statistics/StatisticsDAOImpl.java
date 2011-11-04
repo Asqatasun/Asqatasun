@@ -1,0 +1,718 @@
+/*
+ * Tanaguru - Automated webpage assessment
+ * Copyright (C) 2008-2011  Open-S Company
+ *
+ * This file is part of Tanaguru.
+ *
+ * Tanaguru is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact us by mail: open-s AT open-s DOT com
+ */
+package org.opens.tgol.entity.dao.statistics;
+
+import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
+import org.opens.tgol.presentation.data.FailedPageInfo;
+import org.opens.tgol.util.HttpStatusCodeFamily;
+import org.opens.tgol.presentation.data.FailedTestInfo;
+import org.opens.tgol.presentation.data.FailedThemeInfo;
+import org.opens.tgol.presentation.data.PageResult;
+import org.opens.tgol.presentation.factory.FailedPageInfoFactory;
+import org.opens.tgol.presentation.factory.FailedTestInfoFactory;
+import org.opens.tgol.presentation.factory.FailedThemeInfoFactory;
+import org.opens.tgol.presentation.factory.PageResultFactory;
+import java.math.BigInteger;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.reference.Theme;
+import org.opens.tanaguru.entity.subject.WebResource;
+
+/**
+ *
+ * @author jkowalczyk
+ */
+public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Long>
+        implements StatisticsDAO {
+
+    private static final String SELECT_STR = "SELECT ";
+    private static final char COMA_CHAR = ',';
+    private static final String NB_PASSED_STR = "Nb_Passed";
+    private static final String NB_FAILED_STR = "Nb_Failed";
+    private static final String NB_NMI_STR = "Nb_Nmi";
+    private static final String NB_NA_STR = "Nb_Na";
+    private static final String THEME_STATISTICS_TABLE_STR = "ts.";
+    private static final String ID_THEME_FIELD_STR = "th.Id_Theme";
+
+    private static final String RETRIEVE_COUNT_BY_RESULT_TYPE_AND_THEME_QUERY = 
+            " FROM THEME_STATISTICS as ts, "
+            + "WEB_RESOURCE_STATISTICS as wrs "
+            + "WHERE ts.Id_Web_Resource_Statistics=wrs.Id_Web_Resource_Statistics "
+            + "AND wrs.Id_Web_Resource=:idWebResource "
+            + "AND wrs.Id_Audit=:idAudit "
+            + "AND ts.Id_Theme=:idTheme";
+
+    private static final String RETRIEVE_COUNT_BY_RESULT_TYPE_AND_WEB_RESOURCE =
+            " FROM WEB_RESOURCE_STATISTICS "
+            + "WHERE Id_Web_Resource=:idWebResource "
+            + "AND Id_Audit=:idAudit";
+
+    private static final String TOP_N_BY_THEME_AND_RESULT_TYPE_QUERY =
+            " FROM THEME_STATISTICS as ts, "
+            + "THEME as th, "
+            + "WEB_RESOURCE_STATISTICS as wrs "
+            + "WHERE ts.Id_Web_Resource_Statistics=wrs.Id_Web_Resource_Statistics "
+            + "AND wrs.Id_Web_Resource=:idWebResource "
+            + "AND wrs.Id_Audit=:idAudit "
+            + "AND th.Id_Theme=ts.Id_Theme ";
+
+    private static final String FAILED_OCCURRENCES_STR = " wrs.Nb_Failed_Occurrences ";
+    private static final String INVALID_TEST_STR = " wrs.Nb_Invalid_Test ";
+    private static final String ORDER_BY_STR = " ORDER BY ";
+    private static final String DESC_STR = " DESC ";
+    private static final String ASC_STR = " ASC ";
+    private static final String PARAMETRABLE_LIMIT_STR = " LIMIT :nbOfResult ";
+    private static final String PARAMETRABLE_WINDOW_STR = ",:window ";
+    private static final String URL_FIELD_STR = " w.Url ";
+    private static final String ID_WEB_RESOURCE_FIELD_STR = " w.Id_Web_Resource ";
+
+    private static final String TOP_N_INVALID_URL_QUERY =
+            " FROM WEB_RESOURCE_STATISTICS as wrs, "
+            + "WEB_RESOURCE as w "
+            + "WHERE wrs.Id_Audit=:idAudit "
+            + "AND wrs.Id_Web_Resource=w.Id_Web_Resource "
+            + "AND w.DTYPE=\'PageImpl\' ";
+
+    private static final String TEST_LABEL_FIELD_STR ="t.Label";
+    private static final String TEST_CODE_FIELD_STR ="t.Cd_Test";
+    private static final String TEST_STATISTICS_TABLE_STR = "ts.";
+    private static final String TOP_N_BY_TEST_AND_RESULT_TYPE_QUERY = 
+            " FROM TEST_STATISTICS as ts, "
+            + "TEST as t, "
+            + "WEB_RESOURCE_STATISTICS as wrs "
+            + "WHERE ts.Id_Web_Resource_Statistics=wrs.Id_Web_Resource_Statistics "
+            + "AND wrs.Id_Web_Resource=:idWebResource "
+            + "AND wrs.Id_Audit=:idAudit "
+            + "AND ts.Id_Test=t.Id_Test ";
+
+    private static final String MARK_FIELD_STR = " Mark ";
+    private static final String RAW_MARK_FIELD_STR = " Raw_Mark ";
+    private static final String RETRIEVE_MARK_QUERY =
+            " FROM WEB_RESOURCE_STATISTICS "
+            + "WHERE Id_Web_Resource=:idWebResource "
+            + "AND Id_Audit=:idAudit ";
+
+    private static final String WEB_RESOURCE_STAT_COUNT =
+            " count(Id_Web_Resource_Statistics) ";
+            
+    private static final String RETRIEVE_PAGES_HTTP_STATUS_CODE =
+            " FROM WEB_RESOURCE_STATISTICS as wrs, "
+            + "WEB_RESOURCE as w "
+            + "WHERE wrs.Id_Audit=:idAudit "
+            + "AND w.Id_Web_Resource=wrs.Id_Web_Resource "
+            + "AND (wrs.Http_Status_Code like :httpStatusCode";
+
+    private static final String EXTRA_HTTP_STATUS_CODE_CONDITION =
+             " OR wrs.Http_Status_Code like :extraHttpStatusCode )";
+
+    private static final String CONTAINING_VALUE_CONDITION = 
+             " AND w.Url like :containingValue ";
+
+    @Override
+    protected Class<? extends WebResourceStatistics> getEntityClass() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    /**
+     * Native sql query :
+     * SELECT ts.$testSolution FROM THEME_STATISTICS as ts,
+     *       WEB_RESOURCE_STATISTICS as wrs
+     *       WHERE ts.Id_Web_Resource_Statistics=wrs.Id_Web_Resource_Statistics
+     *       AND wrs.Id_Web_Resource=:idWebResource
+     *       AND wrs.Id_Audit=:idAudit
+     *       AND ts.Id_Theme=:idTheme";
+     *
+     * where $testSolution is computed on the fly for the given the testSolution
+     * passed in argument.
+     *
+     * @param webResource
+     * @param audit
+     * @param testSolution
+     * @param theme
+     * @return
+     *      the number of elements for a given result type and theme
+     */
+    @Override
+    public Long findResultCountByResultTypeAndTheme(
+            WebResource webResource,
+            Audit audit,
+            TestSolution testSolution,
+            Theme theme) {
+        StringBuilder queryString = new StringBuilder();
+        queryString.append(SELECT_STR);
+        queryString.append(THEME_STATISTICS_TABLE_STR);
+        queryString = selectNbField(queryString, testSolution);
+        queryString.append(RETRIEVE_COUNT_BY_RESULT_TYPE_AND_THEME_QUERY);
+        Query query = entityManager.createNativeQuery(queryString.toString());
+        query.setParameter("idWebResource", webResource.getId());
+        query.setParameter("idAudit", audit.getId());
+        query.setParameter("idTheme", theme.getId());
+        try {
+            return ((Integer)query.getSingleResult()).longValue();
+        } catch (NoResultException e) {
+            return Long.valueOf(0);
+        }
+    }
+
+    /**
+     * Native sql query :
+     * SELECT th.Id_Theme, ts.$testSolution
+     * FROM THEME_STATISTICS as ts, THEME as th, WEB_RESOURCE_STATISTICS as wrs
+     *        WHERE ts.Id_Web_Resource_Statistics=wrs.Id_Web_Resource_Statistics
+     *        AND wrs.Id_Web_Resource=:idWebResource
+     *        AND wrs.Id_Audit=:idAudit
+     *        AND th.Id_Theme=ts.Id_Theme
+     *        ORDER BY $testSolution
+     *        LIMIT :nbOfResult;
+     * where $testSolution is computed on the fly for the given the testSolution
+     * passed in argument.
+     *
+     * @param webResource
+     * @param audit
+     * @param testSolution
+     * @param nbOfResult
+     * @return
+     *      a collection of initialised failedThemeInfo instances
+     */
+    @Override
+    public Collection<? extends Object> findResultCountByResultTypeAndTheme(
+            WebResource webResource,
+            Audit audit,
+            TestSolution testSolution,
+            int nbOfResult) {
+        StringBuilder queryString = new StringBuilder();
+        queryString.append(SELECT_STR);
+        queryString.append(ID_THEME_FIELD_STR);
+        queryString.append(COMA_CHAR);
+        queryString.append(THEME_STATISTICS_TABLE_STR);
+        queryString = selectNbField(queryString, testSolution);
+        queryString.append(TOP_N_BY_THEME_AND_RESULT_TYPE_QUERY);
+        queryString.append(ORDER_BY_STR);
+        queryString = selectNbField(queryString, testSolution);
+        queryString.append(DESC_STR);
+        queryString.append(PARAMETRABLE_LIMIT_STR);
+        Query query = entityManager.createNativeQuery(queryString.toString());
+        query.setParameter("idWebResource", webResource.getId());
+        query.setParameter("idAudit", audit.getId());
+        query.setParameter("nbOfResult", nbOfResult);
+        Set<FailedThemeInfo> failedThemeInfoSet = new LinkedHashSet<FailedThemeInfo>();
+        List<Object[]> result = null;
+        try {
+            result = (List<Object[]>)query.getResultList();
+        } catch (NoResultException nre) {
+            return failedThemeInfoSet;
+        }
+        for (Object[] obj : result) {
+            FailedThemeInfo fti = FailedThemeInfoFactory.getInstance().getFailedThemeInfo(((BigInteger)obj[0]).longValue(),
+                    ((Integer)obj[1]).longValue());
+            failedThemeInfoSet.add(fti);
+        }
+        return failedThemeInfoSet;
+    }
+
+    /**
+     * Native sql query :
+     * SELECT t.Cd_Test, t.Label, ts.$testSolution
+     * FROM TEST_STATISTICS as ts,
+     *       TEST as t,
+     *       WEB_RESOURCE_STATISTICS as wrs
+     *       WHERE ts.Id_Web_Resource_Statistics=wrs.Id_Web_Resource_Statistics
+     *       AND wrs.Id_Web_Resource=:idWebResource
+     *       AND wrs.Id_Audit=:idAudit
+     *       AND ts.Id_Test=t.Id_Test ;
+     * 
+     * where $testSolution is computed on the fly for the given the testSolution
+     * passed in argument.
+     *
+     * @param webResource
+     * @param audit
+     * @param nbOfResult
+     * @return
+     *       a collection of initialised failedTestInfo instances
+     */
+    @Override
+    public Collection<FailedTestInfo> findFailedTestByOccurrence(
+            WebResource webResource,
+            Audit audit,
+            int nbOfResult) {
+        StringBuilder queryString = new StringBuilder();
+        queryString.append(SELECT_STR);
+        queryString.append(TEST_CODE_FIELD_STR);
+        queryString.append(COMA_CHAR);
+        queryString.append(TEST_LABEL_FIELD_STR);
+        queryString.append(COMA_CHAR);
+        queryString.append(TEST_STATISTICS_TABLE_STR);
+        queryString = selectNbField(queryString, TestSolution.FAILED);
+        queryString.append(TOP_N_BY_TEST_AND_RESULT_TYPE_QUERY);
+        queryString.append(ORDER_BY_STR);
+        queryString = selectNbField(queryString, TestSolution.FAILED);
+        queryString.append(DESC_STR);
+        queryString.append(PARAMETRABLE_LIMIT_STR);
+        Query query = entityManager.createNativeQuery(queryString.toString());
+        query.setParameter("idWebResource", webResource.getId());
+        query.setParameter("idAudit", audit.getId());
+        query.setParameter("nbOfResult", nbOfResult);
+        Set<FailedTestInfo> failedTestInfoSet = new LinkedHashSet<FailedTestInfo>();
+        List<Object[]> result=  null;
+        try {
+            result = (List<Object[]>)query.getResultList();
+        } catch (NoResultException e) {
+            return failedTestInfoSet;
+        }
+        for (Object[] obj : result) {
+            if ((Integer)obj[2] > 0) {
+                FailedTestInfo fti = FailedTestInfoFactory.getInstance().getFailedTestInfo((String)obj[0], (String)obj[1], ((Integer)obj[2]).longValue());
+                failedTestInfoSet.add(fti);
+            }            
+        }
+        return failedTestInfoSet;
+    }
+
+    /**
+     * Native sql query :
+     * SELECT $testSolution
+     * FROM WEB_RESOURCE_STATISTICS
+     *        WHERE Id_Web_Resource=:idWebResource
+     *        AND Id_Audit=:idAudit";
+     * 
+     * where $testSolution is computed on the fly for the given the testSolution
+     * passed in argument.
+     * 
+     * @param webResource
+     * @param audit
+     * @param testSolution
+     * @return
+     *      the number of elements for a given testSolution.
+     */
+    @Override
+    public Long findResultCountByResultType(
+            WebResource webResource,
+            Audit audit, 
+            TestSolution testSolution) {
+        StringBuilder queryString = new StringBuilder();
+        queryString.append(SELECT_STR);
+        queryString = selectNbField(queryString, testSolution);
+        queryString.append(RETRIEVE_COUNT_BY_RESULT_TYPE_AND_WEB_RESOURCE);
+        Query query = entityManager.createNativeQuery(queryString.toString());
+        query.setParameter("idWebResource", webResource.getId());
+        query.setParameter("idAudit", audit.getId());
+        try {
+            return ((Integer)query.getSingleResult()).longValue();
+        } catch (NoResultException e) {
+            return Long.valueOf(0);
+        }
+    }
+
+    /**
+     * Native sql query :
+     * SELECT w.Url, w.Id_Web_Resource, wrs.Nb_Invalid_Test, wrs.Nb_Failed_Occurrences
+     * FROM WEB_RESOURCE_STATISTICS as wrs,
+     *       WEB_RESOURCE as w
+     *       WHERE wrs.Id_Audit=:idAudit
+     *       AND wrs.Id_Web_Resource=w.Id_Web_Resource
+     *       AND w.DTYPE=\'PageImpl\' ;
+     *       ORDER BY wrs.Nb_Invalid_Test DESC, wrs.Nb_Failed_Occurrences DESC
+     *       LIMIT :nbOfResult;
+     * 
+     * @param webResource
+     * @param audit
+     * @param nbOfResults
+     * @return
+     *      a collection of initialised FailedPageInfoImpl instances sorted by test.
+     */
+    @Override
+    public Collection<FailedPageInfo> findFailedWebResourceSortedByTest(
+            WebResource webResource,
+            Audit audit,
+            int nbOfResults) {
+        StringBuilder queryString = new StringBuilder();
+        queryString.append(SELECT_STR);
+        queryString.append(URL_FIELD_STR);
+        queryString.append(COMA_CHAR);
+        queryString.append(ID_WEB_RESOURCE_FIELD_STR);
+        queryString.append(COMA_CHAR);
+        queryString.append(INVALID_TEST_STR);
+        queryString.append(COMA_CHAR);
+        queryString.append(FAILED_OCCURRENCES_STR);
+        queryString.append(TOP_N_INVALID_URL_QUERY);
+        queryString.append(ORDER_BY_STR);
+        queryString.append(INVALID_TEST_STR);
+        queryString.append(DESC_STR);
+        queryString.append(COMA_CHAR);
+        queryString.append(FAILED_OCCURRENCES_STR);
+        queryString.append(DESC_STR);
+        queryString.append(PARAMETRABLE_LIMIT_STR);
+        Query query = entityManager.createNativeQuery(queryString.toString());
+        query.setParameter("idAudit", audit.getId());
+        query.setParameter("nbOfResult", nbOfResults);
+        Set<FailedPageInfo> failedPageInfoSet = new LinkedHashSet<FailedPageInfo>();
+        List<Object[]> result = null;
+        try {
+            result = (List<Object[]>)query.getResultList();
+        } catch (NoResultException e) {
+            return failedPageInfoSet;
+        }
+        for (Object[] obj : result) {
+            FailedPageInfo fti = FailedPageInfoFactory.getInstance().getFailedPageInfo(
+                    (String)obj[0],
+                    ((BigInteger)obj[1]).longValue(),
+                    ((Integer)obj[2]).longValue(),
+                    ((Integer)obj[3]).longValue());
+            failedPageInfoSet.add(fti);
+        }
+        return failedPageInfoSet;
+    }
+
+    /**
+     * Native sql query :
+     * SELECT w.Url, w.Id_Web_Resource, wrs.Nb_Failed_Occurrences, wrs.Nb_Invalid_Test
+     * FROM WEB_RESOURCE_STATISTICS as wrs,
+     *       WEB_RESOURCE as w
+     *       WHERE wrs.Id_Audit=:idAudit
+     *       AND wrs.Id_Web_Resource=w.Id_Web_Resource
+     *       AND w.DTYPE=\'PageImpl\' ;
+     *       ORDER BY wrs.Nb_Failed_Occurrences DESC, wrs.Nb_Invalid_Test DESC
+     *       LIMIT :nbOfResult;
+     *
+     *
+     * @param webResource
+     * @param audit
+     * @param nbOfResults
+     * @return
+     *      a collection of initialised FailedPageInfoImpl instances sorted by
+     *      number of occurrences.
+     */
+    @Override
+    public Collection<FailedPageInfo> findFailedWebResourceSortedByOccurrence(
+            WebResource webResource,
+            Audit audit,
+            int nbOfResults) {
+        StringBuilder queryString = new StringBuilder();
+        queryString.append(SELECT_STR);
+        queryString.append(URL_FIELD_STR);
+        queryString.append(COMA_CHAR);
+        queryString.append(ID_WEB_RESOURCE_FIELD_STR);
+        queryString.append(COMA_CHAR);
+        queryString.append(FAILED_OCCURRENCES_STR);
+        queryString.append(COMA_CHAR);
+        queryString.append(INVALID_TEST_STR);
+        queryString.append(TOP_N_INVALID_URL_QUERY);
+        queryString.append(ORDER_BY_STR);
+        queryString.append(FAILED_OCCURRENCES_STR);
+        queryString.append(DESC_STR);
+        queryString.append(COMA_CHAR);
+        queryString.append(INVALID_TEST_STR);
+        queryString.append(DESC_STR);
+        queryString.append(PARAMETRABLE_LIMIT_STR);
+        Query query = entityManager.createNativeQuery(queryString.toString());
+        query.setParameter("idAudit", audit.getId());
+        query.setParameter("nbOfResult", nbOfResults);
+        Set<FailedPageInfo> failedPageInfoSet = new LinkedHashSet<FailedPageInfo>();
+        List<Object[]> result = null;
+        try {
+            result = (List<Object[]>)query.getResultList();
+        } catch (NoResultException e) {
+            return failedPageInfoSet;
+        }
+        for (Object[] obj : result) {
+            FailedPageInfo fti = FailedPageInfoFactory.getInstance().getFailedPageInfo(
+                    (String)obj[0],
+                    ((BigInteger)obj[1]).longValue(),
+                    ((Integer)obj[3]).longValue(),
+                    ((Integer)obj[2]).longValue());
+            failedPageInfoSet.add(fti);
+        }
+        return failedPageInfoSet;
+    }
+
+    /**
+     * Native sql query :
+     * SELECT Mark
+     * FROM WEB_RESOURCE_STATISTICS
+     *       WHERE Id_Web_Resource=:idWebResource
+     *       AND Id_Audit=:idAudit ;
+     *
+     * @param idWebResource
+     * @param audit
+     * @return
+     *      the mark for given audit and webresource
+     */
+    @Override
+    public Float findWeightedMarkByWebResourceAndAudit(Long idWebResource, Audit audit) {
+        StringBuilder queryString = new StringBuilder();
+        queryString.append(SELECT_STR);
+        queryString.append(MARK_FIELD_STR);
+        queryString.append(RETRIEVE_MARK_QUERY);
+        Query query = entityManager.createNativeQuery(queryString.toString());
+        query.setParameter("idWebResource", idWebResource);
+        query.setParameter("idAudit", audit.getId());
+        try {
+            return ((Float)query.getSingleResult());
+        } catch (NoResultException e) {
+            return Float.valueOf(0);
+        }
+    }
+    
+    /**
+     * Native sql query :
+     * SELECT Raw_Mark
+     * FROM WEB_RESOURCE_STATISTICS
+     *       WHERE Id_Web_Resource=:idWebResource
+     *       AND Id_Audit=:idAudit ;
+     *
+     * @param idWebResource
+     * @param audit
+     * @return
+     *      the mark for given audit and webresource
+     */
+    @Override
+    public Float findRawMarkByWebResourceAndAudit(Long idWebResource, Audit audit) {
+        StringBuilder queryString = new StringBuilder();
+        queryString.append(SELECT_STR);
+        queryString.append(RAW_MARK_FIELD_STR);
+        queryString.append(RETRIEVE_MARK_QUERY);
+        Query query = entityManager.createNativeQuery(queryString.toString());
+        query.setParameter("idWebResource", idWebResource);
+        query.setParameter("idAudit", audit.getId());
+        try {
+            return ((Float)query.getSingleResult());
+        } catch (NoResultException e) {
+            return Float.valueOf(0);
+        }
+    }
+
+    /**
+     * Native sql query :
+     * SELECT count(Id_Web_Resource_Statistics)
+     * FROM WEB_RESOURCE_STATISTICS as wrs, WEB_RESOURCE as w 
+     *       WHERE wrs.Id_Audit=:idAudit 
+     *       AND wrs.Id_Web_Resource=w.Id_Web_Resource 
+     *       AND wrs.Http_Status_Code like :httpStatusCode
+     *       AND w.Url like %:containingValue%;
+     *
+     * The condition applied on the web resource is optionnal, depending on
+     * if the given sequence is not null or empty
+     *
+     * @param idAudit
+     * @param httpStatusCode
+     * @param containingValue
+     * @return
+     *      the number of webresource for given audit, webresource and http return
+     *      status code.
+     */
+    @Override
+    public Long findWebResourceCountByAuditAndHttpStatusCode(
+            Long idAudit,
+            HttpStatusCodeFamily httpStatusCode,
+            String containingValue) {
+        boolean hasContainingValue = false;
+        if (containingValue != null && !containingValue.isEmpty()) {
+           hasContainingValue = true;
+        }
+        StringBuilder queryString = new StringBuilder();
+        queryString.append(SELECT_STR);
+        queryString.append(WEB_RESOURCE_STAT_COUNT);
+        queryString.append(RETRIEVE_PAGES_HTTP_STATUS_CODE);
+        // the 4xx and 5xx and displayed together. To enable this we need to
+        // add the 'like '%5%' constraints on the request in the case of a
+        // HttpStatusCodeFamily.CODE4xx instance is passed as argument.
+        if (httpStatusCode.equals(HttpStatusCodeFamily.f4xx)) {
+            queryString.append(EXTRA_HTTP_STATUS_CODE_CONDITION);
+        } else {
+            queryString.append(')');
+        }
+        if (hasContainingValue) {
+            queryString.append(CONTAINING_VALUE_CONDITION);
+        }
+
+        Query query = entityManager.createNativeQuery(queryString.toString());
+        
+        query.setParameter("httpStatusCode", httpStatusCode.getCode() + "%");
+        if (httpStatusCode.equals(HttpStatusCodeFamily.f4xx)) {
+            query.setParameter("extraHttpStatusCode", HttpStatusCodeFamily.f5xx.getCode() + "%");
+        }
+        query.setParameter("idAudit", idAudit);
+        if (hasContainingValue) {
+            query.setParameter("containingValue", "%"+containingValue+"%");
+        }
+        try {
+            return (((BigInteger)query.getSingleResult()).longValue());
+        } catch (NoResultException e) {
+            return Long.valueOf(0);
+        }
+    }
+
+    /**
+     * Native sql query :
+     * SELECT w.Url, wrs.Mark, wrs.Id_Web_Resource, wrs.Http_Status_Code
+     * FROM WEB_RESOURCE_STATISTICS as wrs, WEB_RESOURCE as w
+     *       WHERE wrs.Id_Audit=:idAudit
+     *       AND wrs.Id_Web_Resource=w.Id_Web_Resource
+     *       AND wrs.Http_Status_Code like :httpStatusCode
+     *       AND w.Url like %:containingValue%;
+     *       ORDER BY $orderValue
+     *       $sortDirection
+     *       LIMIT :nbOfResult,:window 
+     *
+     * The condition applied on the web resource is optional, depending on
+     * if the given sequence is not null or empty
+     *
+     * The $orderValue can be set to "wrs.Mark" (if "mark" is passed as argument),
+     * to "wrs.Http_Status_Code" (if "httpStatusCode is passed as arguement) and
+     * to "w.Url" (default value).
+     *
+     * The $sortDirection can be to DESC (if "2" is passed as argument) or ASC
+     * (default value).
+     *
+     * The limitation is disables when window is set to -1.
+     *
+     * @param idAudit
+     * @param httpStatusCode
+     * @param nbOfResult
+     * @param window
+     * @param sortDirection
+     * @param sortCriterion
+     * @param containingValue
+     * @return
+     */
+    @Override
+    public Collection<?extends Object> findWebResourceByAuditAndHttpStatusCode(
+            Long idAudit,
+            HttpStatusCodeFamily httpStatusCode,
+            int nbOfResult,
+            int window,
+            int sortDirection,
+            String sortCriterion,
+            String containingValue) {
+        boolean hasContainingValue = false;
+        if (containingValue != null && !containingValue.isEmpty()) {
+           hasContainingValue = true;
+        }
+        StringBuilder queryString = new StringBuilder();
+        queryString.append(SELECT_STR);
+        queryString.append(URL_FIELD_STR);
+        queryString.append(COMA_CHAR);
+        queryString.append("wrs.Mark");
+        queryString.append(COMA_CHAR);
+        queryString.append("wrs.Raw_Mark");
+        queryString.append(COMA_CHAR);
+        queryString.append("wrs.Id_Web_Resource");
+        queryString.append(COMA_CHAR);
+        queryString.append("wrs.Http_Status_Code");
+        queryString.append(RETRIEVE_PAGES_HTTP_STATUS_CODE);
+        // the 4xx and 5xx and displayed together. To enable this we need to
+        // add the 'like '%5%' constraints on the request in the case of a
+        // HttpStatusCodeFamily.CODE4xx instance is passed as argument.
+        if (httpStatusCode.equals(HttpStatusCodeFamily.f4xx)) {
+            queryString.append(EXTRA_HTTP_STATUS_CODE_CONDITION);
+        } else {
+            queryString.append(')');
+        }
+        if (hasContainingValue) {
+            queryString.append(CONTAINING_VALUE_CONDITION);
+        }
+        queryString.append(ORDER_BY_STR);
+        if (sortCriterion.equalsIgnoreCase("mark")) {
+            queryString.append("wrs.Mark");
+        } else if (sortCriterion.equalsIgnoreCase("httpStatusCode")) {
+            queryString.append("wrs.Http_Status_Code");
+        } else {
+            queryString.append(URL_FIELD_STR);
+        }
+        if (sortDirection == 2) {
+            queryString.append(DESC_STR);
+        } else {
+            queryString.append(ASC_STR);
+        }
+        if (window != -1) {
+            queryString.append(PARAMETRABLE_LIMIT_STR);
+            queryString.append(PARAMETRABLE_WINDOW_STR);
+        }
+
+        Query query = entityManager.createNativeQuery(queryString.toString());
+        query.setParameter("httpStatusCode", httpStatusCode.getCode() + "%");
+        if (httpStatusCode.equals(HttpStatusCodeFamily.f4xx)) {
+            query.setParameter("extraHttpStatusCode", HttpStatusCodeFamily.f5xx.getCode() + "%");
+        }
+        query.setParameter("idAudit", idAudit);
+        if (window != -1) {
+            query.setParameter("nbOfResult", nbOfResult);
+            query.setParameter("window", window);
+        }
+        if (hasContainingValue) {
+            query.setParameter("containingValue", "%"+containingValue+"%");
+        }
+        Set<PageResult> failedPageInfoSet = new LinkedHashSet<PageResult>();
+        List<Object[]> result = null;
+        try {
+            result = (List<Object[]>)query.getResultList();
+        } catch (NoResultException e) {
+            return failedPageInfoSet;
+        }
+        for (Object[] obj : result) {
+            PageResult fti = PageResultFactory.getInstance().getPageResult(
+                    (String)obj[0],
+                    ((Float)obj[1]), //weighted mark
+                    ((Float)obj[2]), // raw mark
+                    ((BigInteger)obj[3]).longValue(), //webresource Id
+                    ((Integer)obj[4]).toString()); // http status code
+            failedPageInfoSet.add(fti);
+        }
+        return failedPageInfoSet;
+    }
+
+    /**
+     * This method returns the appropriate native sql field for a given 
+     * testSolution.
+     *
+     * @param queryString
+     * @param testSolution
+     * @return
+     */
+    private StringBuilder selectNbField(
+            StringBuilder queryString,
+            TestSolution testSolution) {
+        switch (testSolution) {
+            case PASSED:
+                queryString.append(NB_PASSED_STR);
+                break;
+            case FAILED:
+                queryString.append(NB_FAILED_STR);
+                break;
+            case NEED_MORE_INFO:
+                queryString.append(NB_NMI_STR);
+                break;
+            case NOT_APPLICABLE:
+                queryString.append(NB_NA_STR);
+                break;
+        }
+        return queryString;
+    }
+
+}
