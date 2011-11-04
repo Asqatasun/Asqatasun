@@ -141,7 +141,6 @@
             </c:otherwise>
             </c:choose>
         </div><!--  id="meta-border" -->
-
         <%@include file="template/footer.jsp" %>
     </body>
 </html>

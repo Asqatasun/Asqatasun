@@ -26,7 +26,6 @@
                 </div>
             </div>
         </div><!--  id="meta-border" -->
-
         <%@include file="template/footer.jsp" %>
     </body>
 </html>

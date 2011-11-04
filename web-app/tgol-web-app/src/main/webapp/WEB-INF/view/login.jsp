@@ -92,9 +92,7 @@
             </div>
             </c:if>
         </div>
-        <div id="ft">
-            &copy; <a href="http://www.Open-S.com/">Open-S</a>
-        </div>
+        <%@include file="template/footer.jsp" %>
     </body>
 </html>
 

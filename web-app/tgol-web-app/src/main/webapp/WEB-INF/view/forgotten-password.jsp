@@ -61,7 +61,6 @@
 
             </form:form>
         </div><!--  id="meta-border" -->
-
         <%@include file="template/footer.jsp" %>
     </body>
 </html>

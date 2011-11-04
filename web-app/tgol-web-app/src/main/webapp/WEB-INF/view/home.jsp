@@ -78,11 +78,7 @@
                 </div><!-- class="yui3-g" -->
             </c:forEach>
         </div>
-        <div class="yui3-g" id="ft">
-            <div class="yui3-u">
-                &copy; <a href="http://www.Open-S.com/">Open-S</a>
-            </div>
-        </div>
+        <%@include file="template/footer.jsp" %>
     </body>
 </html>
 
