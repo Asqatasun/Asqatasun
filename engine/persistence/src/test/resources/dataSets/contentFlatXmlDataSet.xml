@@ -1,0 +1,44 @@
+<!DOCTYPE dataset SYSTEM "src/test/resources/dataSets/test.dtd">
+<dataset>
+    
+    <AUDIT Id_Audit="1" Dt_Creation="2010-10-26 13:50:29" Status="COMPLETED"/>
+    <AUDIT Id_Audit="2" Dt_Creation="2010-10-26 14:50:29" Status="COMPLETED"/>
+    <AUDIT Id_Audit="3" Dt_Creation="2010-10-26 14:50:29" Status="COMPLETED"/>
+
+    <WEB_RESOURCE DTYPE="SiteImpl" Id_Web_Resource="1" Label="NULL" Url="http://www.mock-url1.org/" Id_Audit="1" Mark="50" />
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="2" Label="NULL" Url="http://www.mock-url2.org/" Id_Audit="2" Mark="50" />
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="5" Label="NULL" Url="http://www.mock-url2.org/" Mark="50" Id_Web_Resource_Parent="1"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="6" Label="NULL" Url="http://www.mock-url4.org/" Mark="75" Id_Web_Resource_Parent="1"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="7" Label="NULL" Url="http://www.mock-url5.org/" Mark="51" Id_Web_Resource_Parent="1"/>
+    <WEB_RESOURCE DTYPE="SiteImpl" Id_Web_Resource="8" Label="NULL" Url="http://www.mock-url1.org/" Id_Audit="3" Mark="50" />
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="9" Label="NULL" Url="http://www.mock-url2.org/" Mark="50" Id_Web_Resource_Parent="8"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="10" Label="NULL" Url="http://www.mock-url4.org/" Mark="75" Id_Web_Resource_Parent="8"/>
+
+    <CONTENT DTYPE="SSPImpl"                Id_Content="1" Uri="http://www.mock-url.org/1.html" Id_Page="5" Http_Status_Code="-1" Id_Audit="1"/>
+    <CONTENT DTYPE="SSPImpl"                Id_Content="2" Uri="http://www.mock-url.org/2.html" Id_Page="6" Http_Status_Code="-1" Id_Audit="1"/>
+    <CONTENT DTYPE="StylesheetContentImpl"  Id_Content="3" Uri="http://www.mock-url.org/css.css" Http_Status_Code="-1" Id_Audit="1"/>
+    <CONTENT DTYPE="ImageContentImpl"       Id_Content="4" Uri="http://www.mock-url.org/image.jpg" Http_Status_Code="-1" Id_Audit="1"/>
+    <CONTENT DTYPE="RelatedContentImpl"     Id_Content="5" Uri="http://www.mock-url.org/unknown" Http_Status_Code="-1" Id_Audit="1"/>
+    <CONTENT DTYPE="RelatedContentImpl"     Id_Content="6" Uri="http://www.mock-url.org/unknown" Http_Status_Code="-1" Id_Audit="1"/>
+    <CONTENT DTYPE="SSPImpl"                Id_Content="7" Uri="http://www.mock-url.org/2.html" Id_Page="2" Http_Status_Code="-1" Id_Audit="2"/>
+    <CONTENT DTYPE="StylesheetContentImpl"  Id_Content="8" Uri="http://www.mock-url.org/css.css" Http_Status_Code="-1" Id_Audit="2"/>
+    <CONTENT DTYPE="SSPImpl"                Id_Content="9" Uri="http://www.mock-url.org/1.html" Source="blabla" Adapted_Content="blabla" Id_Page="9" Http_Status_Code="404" Id_Audit="3"/>
+    <CONTENT DTYPE="SSPImpl"                Id_Content="10" Uri="http://www.mock-url.org/2.html" Id_Page="10" Http_Status_Code="200" Id_Audit="3"/>
+    <CONTENT DTYPE="StylesheetContentImpl"  Id_Content="11" Uri="http://www.mock-url.org/css.css" Http_Status_Code="200" Id_Audit="3"/>
+    <CONTENT DTYPE="ImageContentImpl"       Id_Content="12" Uri="http://www.mock-url.org/image.jpg" Http_Status_Code="200" Id_Audit="3"/>
+    <CONTENT DTYPE="RelatedContentImpl"     Id_Content="13" Uri="http://www.mock-url.org/unknown" Http_Status_Code="200" Id_Audit="3"/>
+    <CONTENT DTYPE="RelatedContentImpl"     Id_Content="14" Uri="http://www.mock-url.org/unknown" Http_Status_Code="200" Id_Audit="3"/>
+
+    <CONTENT_RELATIONSHIP Id_Content_Parent="1" Id_Content_Child="3"/>
+    <CONTENT_RELATIONSHIP Id_Content_Parent="1" Id_Content_Child="4"/>
+    <CONTENT_RELATIONSHIP Id_Content_Parent="1" Id_Content_Child="5"/>
+    <CONTENT_RELATIONSHIP Id_Content_Parent="2" Id_Content_Child="3"/>
+    <CONTENT_RELATIONSHIP Id_Content_Parent="2" Id_Content_Child="4"/>
+    <CONTENT_RELATIONSHIP Id_Content_Parent="7" Id_Content_Child="8"/>
+    <CONTENT_RELATIONSHIP Id_Content_Parent="9" Id_Content_Child="11"/>
+    <CONTENT_RELATIONSHIP Id_Content_Parent="9" Id_Content_Child="12"/>
+    <CONTENT_RELATIONSHIP Id_Content_Parent="9" Id_Content_Child="13"/>
+    <CONTENT_RELATIONSHIP Id_Content_Parent="10" Id_Content_Child="11"/>
+    <CONTENT_RELATIONSHIP Id_Content_Parent="10" Id_Content_Child="12"/>
+
+</dataset>

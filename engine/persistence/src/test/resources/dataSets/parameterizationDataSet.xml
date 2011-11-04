@@ -1,0 +1,37 @@
+<!DOCTYPE dataset SYSTEM "src/test/resources/dataSets/test.dtd">
+<dataset>
+    
+    <AUDIT Id_Audit="1" Dt_Creation="2010-10-26 13:50:29" Status="COMPLETED"/>
+    <AUDIT Id_Audit="2" Dt_Creation="2010-10-26 14:50:29" Status="COMPLETED"/>
+    <AUDIT Id_Audit="3" Dt_Creation="2010-10-26 15:50:29" Status="COMPLETED"/>
+    <AUDIT Id_Audit="4" Dt_Creation="2010-10-26 16:50:29" Status="COMPLETED"/>
+    <AUDIT Id_Audit="5" Dt_Creation="2010-10-26 17:50:29" Status="COMPLETED"/>
+
+    <AUDIT_PARAMETER Id_Audit="1" Id_Parameter="1"/>
+    <AUDIT_PARAMETER Id_Audit="1" Id_Parameter="5"/>
+
+    <AUDIT_PARAMETER Id_Audit="2" Id_Parameter="2"/>
+    <AUDIT_PARAMETER Id_Audit="2" Id_Parameter="6"/>
+
+    <AUDIT_PARAMETER Id_Audit="3" Id_Parameter="3"/>
+    <AUDIT_PARAMETER Id_Audit="3" Id_Parameter="7"/>
+
+    <AUDIT_PARAMETER Id_Audit="4" Id_Parameter="4"/>
+    <AUDIT_PARAMETER Id_Audit="4" Id_Parameter="8"/>
+
+    <PARAMETER Id_Parameter="1" Id_Parameter_Element="1" Parameter_Value="1" Is_Default="1"/>
+    <PARAMETER Id_Parameter="2" Id_Parameter_Element="1" Parameter_Value="2" Is_Default="0"/>
+    <PARAMETER Id_Parameter="3" Id_Parameter_Element="1" Parameter_Value="3" Is_Default="0"/>
+    <PARAMETER Id_Parameter="4" Id_Parameter_Element="1" Parameter_Value="4" Is_Default="0"/>
+    <PARAMETER Id_Parameter="5" Id_Parameter_Element="2" Parameter_Value="5" Is_Default="1"/>
+    <PARAMETER Id_Parameter="6" Id_Parameter_Element="2" Parameter_Value="6" Is_Default="1"/>
+    <PARAMETER Id_Parameter="7" Id_Parameter_Element="2" Parameter_Value="7" Is_Default="0"/>
+    <PARAMETER Id_Parameter="8" Id_Parameter_Element="2" Parameter_Value="8" Is_Default="0"/>
+
+    <PARAMETER_ELEMENT Id_Parameter_Element="1" Cd_Parameter_Element="PARAM_EL_1" Id_Parameter_Family="1"/>
+    <PARAMETER_ELEMENT Id_Parameter_Element="2" Cd_Parameter_Element="PARAM_EL_2" Id_Parameter_Family="1"/>
+
+    <PARAMETER_FAMILY Id_Parameter_Family="1" Cd_Parameter_Family="PARAM_FAM_1"/>
+    <PARAMETER_FAMILY Id_Parameter_Family="2" Cd_Parameter_Family="PARAM_FAM_2"/>
+
+</dataset>
