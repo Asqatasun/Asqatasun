@@ -1,42 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.opens</groupId>
-    <artifactId>tanguru-all</artifactId>
+    <artifactId>tanaguru</artifactId>
     <packaging>pom</packaging>
     <version>1.5.0</version>
-    <name>tanaguru-all</name>
+    <name>tanaguru</name>
     <url>http://www.tanaguru.org</url>
     <modules>
-        <module>commons-entity</module>
-        <module>commons-entity-jpa</module>
-        <module>tanaguru-api</module>
-        <module>reference</module>
-        <module>audit</module>
-        <module>rule-implementation-loader</module>
-        <module>nomenclatureloader</module>
-        <module>crawler</module>
-        <module>contentloader</module>
-        <module>contentadapter</module>
-        <module>commons-processing</module>
-        <module>processor</module>
-        <module>consolidator</module>
-        <module>analyser</module>
-        <module>persistence</module>
-        <module>tanaguru-engine</module>
-        <module>tanaguru-resources</module>
-        <module>logging</module>
-        <module>tanaguru</module>
-        <module>parameterization</module>
+        <module>engine</module>
+        <module>web-app</module>
+        <module>testing-tools</module>
+        <module>cli</module>
+<!--        <module>ws</module>-->
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <applicationGroupId>org.opens</applicationGroupId>
-        <applicationVersion>1.5.0-SNAPSHOT</applicationVersion>
+        <engineGroupId>org.opens</engineGroupId>
+        <engineVersion>1.5.0-SNAPSHOT</engineVersion>
+        <webappGroupId>org.opens</webappGroupId>
+        <webappVersion>1.5.0-SNAPSHOT</webappVersion>
+        <testingToolsGroupId>org.opens</testingToolsGroupId>
+        <testingToolsVersion>1.0.0-SNAPSHOT</testingToolsVersion>
+        <tanaguruCliGroupId>org.opens</tanaguruCliGroupId>
+        <tanaguruCliVersion>1.5.0-SNAPSHOT</tanaguruCliVersion>
         <springGroupId>org.springframework</springGroupId>
         <springVersion>3.0.5.RELEASE</springVersion>
         <heritrixGroupId>org.archive.heritrix</heritrixGroupId>
         <heritrixVersion>3.0.0</heritrixVersion>
+        <hibernateGroupId>org.hibernate</hibernateGroupId>
+        <httpcomponentsGroupId>org.apache.httpcomponents</httpcomponentsGroupId>
     </properties>
     <build>
         <plugins>
@@ -60,25 +55,63 @@
     </build>
     <dependencyManagement>
         <dependencies>
+
+            <!-- mysql connector dependencies -->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>5.1.15</version>
             </dependency>
+
+            <!-- junit dependencies -->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>3.8.2</version>
             </dependency>
+
+            <!-- hibernate dependencies -->
             <dependency>
-                <groupId>org.hibernate</groupId>
+                <groupId>${hibernateGroupId}</groupId>
+                <artifactId>hibernate</artifactId>
+                <version>3.2.5.ga</version>
+            </dependency>
+            <dependency>
+                <groupId>${hibernateGroupId}</groupId>
+                <artifactId>ejb3-persistence</artifactId>
+                <version>1.0.1.GA</version>
+            </dependency>
+            <dependency>
+                <groupId>${hibernateGroupId}</groupId>
+                <artifactId>hibernate-c3p0</artifactId>
+                <version>3.3.2.GA</version>
+            </dependency>
+            <dependency>
+                <groupId>${hibernateGroupId}</groupId>
+                <artifactId>hibernate-ehcache</artifactId>
+                <version>3.3.2.GA</version>
+            </dependency>
+            <dependency>
+                <groupId>${hibernateGroupId}</groupId>
                 <artifactId>hibernate-entitymanager</artifactId>
                 <version>3.4.0.GA</version>
             </dependency>
             <dependency>
-                <groupId>commons-lang</groupId>
-                <artifactId>commons-lang</artifactId>
-                <version>2.6</version>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-jmx</artifactId>
+                <version>3.3.2.GA</version>
+            </dependency>
+
+            <!-- javax dependencies -->
+            <dependency>
+                <groupId>javax.sql</groupId>
+                <artifactId>jdbc-stdext</artifactId>
+                <version>2.0</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.transaction</groupId>
+                <artifactId>jta</artifactId>
+                <version>1.1</version>
             </dependency>
             <dependency>
                 <groupId>javax.persistence</groupId>
@@ -86,25 +119,43 @@
                 <version>1.0</version>
             </dependency>
             <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>1.4.3</version>
+            </dependency>
+
+            <!-- commons dependencies -->
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.6</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>3.2.1</version>
+            </dependency>
+            
+            <dependency>
                 <groupId>org.milyn</groupId>
                 <artifactId>flute</artifactId>
                 <version>1.3</version>
             </dependency>
-            <dependency>
-                <groupId>batik</groupId>
-                <artifactId>batik-css</artifactId>
-                <version>1.6-1</version>
-            </dependency>
+            
             <dependency>
                 <groupId>com.thoughtworks.xstream</groupId>
                 <artifactId>xstream</artifactId>
                 <version>1.3.1</version>
             </dependency>
+
+            <!-- htmlCleaner dependencies -->
             <dependency>
                 <groupId>org.htmlcleaner</groupId>
                 <artifactId>htmlcleaner</artifactId>
                 <version>2.2</version>
             </dependency>
+
+            <!-- log4j dependencies -->
             <dependency>
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
@@ -132,21 +183,30 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+
+            <!-- 
+                 httpcomponents dependencies. Due to heritrix, these librairies
+                 cannot be upgraded up to 4.0.1
+            -->
             <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
+                <groupId>${httpcomponentsGroupId}</groupId>
                 <artifactId>httpclient</artifactId>
-                <version>4.1.1</version>
+                <version>4.0.1</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
+                <groupId>${httpcomponentsGroupId}</groupId>
                 <artifactId>httpcore</artifactId>
-                <version>4.1</version>
+                <version>4.0.1</version>
             </dependency>
+
+            <!-- aspectj dependencies -->
             <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjweaver</artifactId>
-                <version>1.6.2</version>
+                <version>1.6.8</version>
             </dependency>
+            
+            <!-- spring dependencies -->
             <dependency>
                 <groupId>${springGroupId}</groupId>
                 <artifactId>spring-core</artifactId>
@@ -166,6 +226,12 @@
                 <groupId>${springGroupId}</groupId>
                 <artifactId>spring-context-support</artifactId>
                 <version>${springVersion}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>${springGroupId}</groupId>
+                        <artifactId>spring-jdbc</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>${springGroupId}</groupId>
@@ -184,9 +250,111 @@
             </dependency>
             <dependency>
                 <groupId>${springGroupId}</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>${springVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>${springGroupId}</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${springVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>${springGroupId}</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${springVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>${springGroupId}</groupId>
                 <artifactId>spring-instrument</artifactId>
                 <version>${springVersion}</version>
             </dependency>
+            <dependency>
+                <groupId>${springGroupId}</groupId>
+                <artifactId>spring-instrument-tomcat</artifactId>
+                <version>${springVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>${springVersion}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>${springGroupId}</groupId>
+                        <artifactId>spring-core</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>${springGroupId}</groupId>
+                        <artifactId>spring-beans</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>${springGroupId}</groupId>
+                        <artifactId>spring-context</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>${springGroupId}</groupId>
+                        <artifactId>spring-context-support</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>${springGroupId}</groupId>
+                        <artifactId>context</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.springframework.security</groupId>
+                        <artifactId>ldap</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>${springGroupId}</groupId>
+                        <artifactId>spring-web</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>${springGroupId}</groupId>
+                        <artifactId>spring-aop</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.springframework.security</groupId>
+                        <artifactId>spring-security-web</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>${springGroupId}</groupId>
+                        <artifactId>spring-jdbc</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>${springGroupId}</groupId>
+                        <artifactId>spring-tx</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>${springGroupId}</groupId>
+                        <artifactId>spring-expression</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>${springGroupId}</groupId>
+                        <artifactId>spring-test</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-config</artifactId>
+                <version>${springVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>${springVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-taglibs</artifactId>
+                <version>${springVersion}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>${springGroupId}</groupId>
+                        <artifactId>spring-context-support</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            
+            <!-- heritrix dependencies -->
             <dependency>
                 <groupId>${heritrixGroupId}</groupId>
                 <artifactId>heritrix-commons</artifactId>
@@ -216,11 +384,14 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+            
             <dependency>
                 <groupId>org.mozilla</groupId>
                 <artifactId>juniversalchardet</artifactId>
                 <version>1.0</version>
             </dependency>
+
+            <!-- slf4j dependencies -->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
@@ -231,6 +402,8 @@
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>1.5.0</version>
             </dependency>
+
+            <!-- dbunit and hsqldb dependencies -->
             <dependency>
                 <groupId>org.dbunit</groupId>
                 <artifactId>dbunit</artifactId>
@@ -241,34 +414,200 @@
                 <artifactId>hsqldb</artifactId>
                 <version>1.8.0.10</version>
             </dependency>
-            <dependency>
-                <groupId>commons-collections</groupId>
-                <artifactId>commons-collections</artifactId>
-                <version>3.2.1</version>
-            </dependency>
+
+            <!-- sac dependencies -->
             <dependency>
                 <groupId>org.w3c.css</groupId>
                 <artifactId>sac</artifactId>
                 <version>1.3</version>
             </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-c3p0</artifactId>
-                <version>3.3.2.GA</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-ehcache</artifactId>
-                <version>3.3.2.GA</version>
-            </dependency>
+
+            <!-- xerces dependencies-->
             <dependency>
                 <groupId>xerces</groupId>
                 <artifactId>xercesImpl</artifactId>
                 <version>2.9.1</version>
             </dependency>
+
+            <!-- owasp dependencies -->
+            <dependency>
+                <groupId>org.owasp.esapi</groupId>
+                <artifactId>esapi</artifactId>
+                <version>2.0.1</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.owasp.antisamy</groupId>
+                        <artifactId>antisamy</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-httpclient</groupId>
+                        <artifactId>commons-httpclient</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-beanutils</groupId>
+                        <artifactId>commons-beanutils</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-beanutils</groupId>
+                        <artifactId>commons-beanutils-core</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-collections</groupId>
+                        <artifactId>commons-collections</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-digester</groupId>
+                        <artifactId>commons-digester</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-configuration</groupId>
+                        <artifactId>commons-configuration</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>xalan</groupId>
+                        <artifactId>xalan</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>xerces</groupId>
+                        <artifactId>xml-apis</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>xerces</groupId>
+                        <artifactId>xmlParserAPIs</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>xerces</groupId>
+                        <artifactId>xercesImpl</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>xom</groupId>
+                        <artifactId>xom</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- web dependencies -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jsp-api</artifactId>
+                <version>2.0</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>1.1.2</version>
+            </dependency>
+            <dependency>
+                <groupId>taglibs</groupId>
+                <artifactId>standard</artifactId>
+                <version>1.1.2</version>
+            </dependency>
+
+            <!-- graphics dependencies (cewolf, jfreechart, jcommon) -->
+            <dependency>
+                <groupId>cewolf</groupId>
+                <artifactId>cewolf</artifactId>
+                <version>1.1.4</version>
+            </dependency>
+            <dependency>
+                <groupId>jfreechart</groupId>
+                <artifactId>jfreechart</artifactId>
+                <version>1.0.12</version>
+            </dependency>
+            <dependency>
+                <groupId>jcommon</groupId>
+                <artifactId>jcommon</artifactId>
+                <version>1.0.15</version>
+            </dependency>
+
+            <!-- batik dependencies -->
+            <dependency>
+                <groupId>batik</groupId>
+                <artifactId>batik-svggen</artifactId>
+                <version>1.6-1</version>
+            </dependency>
+            <dependency>
+                <groupId>batik</groupId>
+                <artifactId>batik-css</artifactId>
+                <version>1.6-1</version>
+            </dependency>
+
+            <!-- displaytag dependencies -->
+            <dependency>
+                <groupId>displaytag</groupId>
+                <artifactId>displaytag</artifactId>
+                <version>1.2</version>
+            </dependency>
+
+            <!-- jasper et dynamicJasper dependencies -->
+            <dependency>
+                <groupId>net.sf.jasperreports</groupId>
+                <artifactId>jasperreports</artifactId>
+                <version>3.7.1</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-collections</groupId>
+                        <artifactId>commons-collections</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-beanutils</groupId>
+                        <artifactId>commons-beanutils</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>ar.com.fdvs</groupId>
+                <artifactId>DynamicJasper</artifactId>
+                <version>3.1.2</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>jasperreports</groupId>
+                        <artifactId>jasperreports</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.jasperreports</groupId>
+                <artifactId>jasperreports-fonts</artifactId>
+                <version>4.0.0</version>
+            </dependency>
+
+            <!-- tika dependencies -->
+            <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-parsers</artifactId>
+            <version>0.9</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-httpclient</groupId>
+                    <artifactId>commons-httpclient</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>cglib</groupId>
+                    <artifactId>cglib</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>asm</groupId>
+                    <artifactId>asm</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
         </dependencies>
     </dependencyManagement>
+
     <repositories>
+
+        <!-- internet archive repository needed for heritrix dependencies -->
         <repository>
             <id>internetArchiveWebteamBuilds</id>
             <name>Internet Archive Webteam Builds</name>
@@ -281,5 +620,34 @@
             <url>http://builds.archive.org:8080/maven2</url>
             <layout>default</layout>
         </repository>
+
+        <!-- sakai project repository needed for -->
+        <repository>
+            <id>sakaiProject </id>
+            <name>Sakai Project webteam</name>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <url>http://source.sakaiproject.org/maven2/</url>
+            <layout>default</layout>
+        </repository>
+
+        <!-- dynamicJasper repository needed for dynamicJasper dependencies -->
+        <repository>
+            <id>djmaven2</id>
+            <url>http://www.fdvs.com.ar/djmaven2</url>
+            <name>DynamicJasper public Repository</name>
+        </repository>
+
+        <repository>
+            <id>java.net2</id>
+            <name>Repository hosting the jee6 artifacts</name>
+            <url>http://download.java.net/maven/2</url>
+        </repository>
+
     </repositories>
+
 </project>
