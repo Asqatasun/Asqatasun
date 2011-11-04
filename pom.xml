@@ -11,9 +11,9 @@
     <url>http://www.tanaguru.org</url>
     <modules>
         <module>engine</module>
-        <module>web-app</module>
+<!--        <module>web-app</module>
         <module>testing-tools</module>
-        <module>cli</module>
+        <module>cli</module>-->
 <!--        <module>ws</module>-->
     </modules>
     <properties>
