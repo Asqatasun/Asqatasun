@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.opens</groupId>
+        <artifactId>tanaguru</artifactId>
+        <version>1.5.0</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+    <groupId>${testingToolsGroupId}</groupId>
+    <artifactId>tgol-testing-tools</artifactId>
+    <name>tgol-testing-tools</name>
+    <version>${testingToolsVersion}</version>
+    <url>http://www.tanaguru.org</url>
+    <dependencies>
+        <dependency>
+            <groupId>${engineGroupId}</groupId>
+            <artifactId>tanaguru-api</artifactId>
+            <version>${engineVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium.client-drivers</groupId>
+            <artifactId>selenium-java-client-driver</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium.server</groupId>
+            <artifactId>selenium-server</artifactId>
+            <version>1.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+            <version>1.6</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+    </dependencies>
+</project>

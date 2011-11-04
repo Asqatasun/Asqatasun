@@ -1,0 +1,3 @@
+Dufour;http://www.dufour-yachts.com/index.php?id=17&no_cache=1
+Bavaria;http://www.bavariayachts.com/
+Elan-Marine;http://www.elan-marine.com/pc.asp?xpath=&xpathid=&lang=eng
