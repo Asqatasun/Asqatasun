@@ -31,10 +31,9 @@ import java.util.Set;
 
 /**
  * 
+ * @author jkowalczyk
  * @param <E>
  * @param <K>
- * @author ADEX
- * @version 1.0.0
  */
 public interface GenericDataService<E extends Entity, K extends Serializable> {
 
