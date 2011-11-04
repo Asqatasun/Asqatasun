@@ -1,0 +1,58 @@
+/*
+ * Tanaguru - Automated webpage assessment
+ * Copyright (C) 2008-2011  Open-S Company
+ *
+ * This file is part of Tanaguru.
+ *
+ * Tanaguru is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact us by mail: open-s AT open-s DOT com
+ */
+package org.opens.tanaguru.entity.reference;
+
+import org.opens.tanaguru.entity.service.reference.NomenclatureCssUnit;
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.xml.bind.annotation.XmlRootElement;
+
+/**
+ * 
+ * @author jkowalczyk
+ */
+@Entity
+@XmlRootElement
+public class NomenclatureCssUnitImpl extends NomenclatureElementImpl implements
+		NomenclatureCssUnit, Serializable {
+
+	@Column(name = "shortValue")
+	protected int cssShortValue;
+
+	public NomenclatureCssUnitImpl() {
+		super();
+	}
+
+	public NomenclatureCssUnitImpl(int cssShortValue, String cssStringValue) {
+		super(cssStringValue);
+		this.cssShortValue = cssShortValue;
+	}
+
+	public int getCssShortValue() {
+		return cssShortValue;
+	}
+
+	public void setCssShortValue(int cssShortValue) {
+		this.cssShortValue = cssShortValue;
+	}
+}
