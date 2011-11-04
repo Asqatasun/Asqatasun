@@ -1,0 +1,38 @@
+#set($class.package = 'org.opens.tanaguru.webapp.test')
+#set($testPrefix = 'Test')
+#set($name = $model.name.replace('-', '_'))
+#set($test = $model.test.replace('.', '_'))
+#set($class.name = "t$name$testPrefix")
+
+package $class.package;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.webapp.test.data.KrashtestResult;
+
+public class $class.name extends AbstractTanaguruOnlineTest {
+
+    private String siteName = "$model.name";
+    private String[] url = {"$model.url"};
+    private String testName = "$model.test";
+
+    /**
+     * Default constructor
+     */
+    public $class.name (){
+        super();
+    }
+
+    public void test$test$model.result () {
+        String response = launchTanaguru(siteName, url);
+        String krashtestResult = computeWebappResult(response);
+        if (krashtestResult.equals(KrashtestResult.SUCCESS.toString())) {
+            String functionnalResult = computeWebappResult(
+                response, testName);
+            TestSolution testSolution = TestSolution.$model.result;
+            assertEquals(testSolution.toString(), functionnalResult);
+        } else {
+            assertEquals(KrashtestResult.SUCCESS.toString(),
+                    krashtestResult.toString());
+        }
+    }
+
+}
