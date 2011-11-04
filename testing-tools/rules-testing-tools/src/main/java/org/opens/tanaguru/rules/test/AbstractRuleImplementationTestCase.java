@@ -34,10 +34,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriter;
+import org.apache.log4j.Logger;
 import org.dbunit.DBTestCase;
 import org.dbunit.PropertiesBasedJdbcDatabaseTester;
 import org.dbunit.database.DatabaseConfig;
@@ -46,8 +45,6 @@ import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.opens.tanaguru.contentadapter.util.URLIdentifier;
 import org.opens.tanaguru.contentadapter.util.URLIdentifierFactory;
-import org.opens.tanaguru.contentloader.DownloaderImpl;
-import org.opens.tanaguru.crawler.processor.TanaguruWriterProcessor;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.ProcessResult;
@@ -70,8 +67,8 @@ import org.opens.tanaguru.service.ConsolidatorService;
 import org.opens.tanaguru.service.ContentAdapterService;
 import org.opens.tanaguru.service.ContentLoaderService;
 import org.opens.tanaguru.service.ProcessorService;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
@@ -79,9 +76,9 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
  */
 public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
 
-    private String applicationContextFilePath =
-            "src/main/resources/context/application-context.xml";
-    private BeanFactory springBeanFactory;
+    private static final Logger LOGGER = Logger.getLogger(AbstractRuleImplementationTestCase.class);
+    private String applicationContextFilePath = "context/application-context.xml";
+    private ApplicationContext applicationContext;
     private TestFactory testFactory;
     private ContentLoaderService contentLoaderService;
     private ContentAdapterService contentAdapterService;
@@ -122,10 +119,6 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         return testcasesFilePath;
     }
 
-    public void setTestcasesFilePath(String testcasesFilePath) {
-        this.testcasesFilePath = testcasesFilePath;
-    }
-
     /**
      * driver JDBC
      */
@@ -150,12 +143,19 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         return inputDataFileName;
     }
 
-    public void setInputDataFileName(String inputDataFileName) {
-        this.inputDataFileName = inputDataFileName;
-    }
-
-    public AbstractRuleImplementationTestCase(String testName) {
+    /**
+     * 
+     * @param testName
+     * @param inputDataFileName
+     * @param testcasesFilePath
+     */
+    public AbstractRuleImplementationTestCase(
+            String testName,
+            String inputDataFileName,
+            String testcasesFilePath) {
         super(testName);
+        this.testcasesFilePath = testcasesFilePath;
+        this.inputDataFileName = inputDataFileName;
         initialize();
         setUpRuleImplementationClassName();
         setUpWebResourceMap();
@@ -166,24 +166,24 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
 
     private void initialize() {
         initializePath();
-        springBeanFactory = new FileSystemXmlApplicationContext(applicationContextFilePath);
+        applicationContext = new ClassPathXmlApplicationContext(applicationContextFilePath);
 
-        webResourceFactory = (WebResourceFactory) springBeanFactory.getBean("webResourceFactory");
-        contentFactory = (ContentFactory) springBeanFactory.getBean("contentFactory");
-        parameterFactory = (ParameterFactory) springBeanFactory.getBean("parameterFactory");
-        parameterElementFactory = (ParameterElementFactory) springBeanFactory.getBean("parameterElementFactory");
-        parameterFamilyFactory = (ParameterFamilyFactory) springBeanFactory.getBean("parameterFamilyFactory");
-        auditFactory = (AuditFactory) springBeanFactory.getBean("auditFactory");
+        webResourceFactory = (WebResourceFactory) applicationContext.getBean("webResourceFactory");
+        contentFactory = (ContentFactory) applicationContext.getBean("contentFactory");
+        parameterFactory = (ParameterFactory) applicationContext.getBean("parameterFactory");
+        parameterElementFactory = (ParameterElementFactory) applicationContext.getBean("parameterElementFactory");
+        parameterFamilyFactory = (ParameterFamilyFactory) applicationContext.getBean("parameterFamilyFactory");
+        auditFactory = (AuditFactory) applicationContext.getBean("auditFactory");
 
-        urlIdentifier = ((URLIdentifierFactory) springBeanFactory.getBean("urlIdentifierFactory")).create();
-        testFactory = (TestFactory) springBeanFactory.getBean("testFactory");
+        urlIdentifier = ((URLIdentifierFactory) applicationContext.getBean("urlIdentifierFactory")).create();
+        testFactory = (TestFactory) applicationContext.getBean("testFactory");
 
-        contentLoaderService = (ContentLoaderService) springBeanFactory.getBean("contentLoaderService");
-        contentAdapterService = (ContentAdapterService) springBeanFactory.getBean("contentAdapterService");
+        contentLoaderService = (ContentLoaderService) applicationContext.getBean("contentLoaderService");
+        contentAdapterService = (ContentAdapterService) applicationContext.getBean("contentAdapterService");
 
-        processorService = (ProcessorService) springBeanFactory.getBean("processorService");
+        processorService = (ProcessorService) applicationContext.getBean("processorService");
 
-        consolidatorService = (ConsolidatorService) springBeanFactory.getBean("consolidatorService");
+        consolidatorService = (ConsolidatorService) applicationContext.getBean("consolidatorService");
     }
 
     private void setUpDatabase() {
@@ -222,8 +222,11 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         test.setRuleClassName(ruleImplementationClassName);
         testList.add(test);
         URL src = null;
+        LOGGER.info("setUpClass()");
         for (WebResource webResource : webResourceMap.values()) {
+            LOGGER.info("webResource.getURL() " + webResource.getURL());
             contentMap.put(webResource, contentLoaderService.loadContent(webResource));
+            LOGGER.info(((SSP)contentMap.get(webResource).get(0)).getDOM());
             if (relatedContentMap.get(webResource) != null) {
                 for (String contentUrl : relatedContentMap.get(webResource)) {
                     if (contentMap.get(webResource).get(0) instanceof SSP) {
@@ -232,7 +235,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
                             src = new URL(ssp.getURI());
                             urlIdentifier.setUrl(src);
                         } catch (MalformedURLException ex) {
-                            Logger.getLogger(AbstractRuleImplementationTestCase.class.getName()).log(Level.SEVERE, null, ex);
+                            LOGGER.error(ex);
                         }
                         urlIdentifier.setUrl(src);
                         String relatedContentUrl =
@@ -301,12 +304,10 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         }
         return null;
     }
-
+    
     private void initializePath() {
         testcasesFilePath =
                 "file://" + System.getenv("PWD") + "/" + testcasesFilePath;
-        applicationContextFilePath =
-                "file://" + System.getenv("PWD") + "/" + applicationContextFilePath;
     }
 
     private byte[] getBinaryImage(String imgUrl) {
@@ -315,7 +316,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         try {
             url = new URL(imgUrl);
         } catch (MalformedURLException ex) {
-            Logger.getLogger(AbstractRuleImplementationTestCase.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex);
         }
         BufferedImage image = null;
         byte[] resultImageAsRawBytes = null;
@@ -328,7 +329,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
             resultImageAsRawBytes = baos.toByteArray();
             baos.close();
         } catch (IOException ex) {
-            Logger.getLogger(TanaguruWriterProcessor.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex);
         }
         return resultImageAsRawBytes;
     }
@@ -365,7 +366,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
             }
             return urlContent.toString();
         } catch (IOException ex) {
-            Logger.getLogger(DownloaderImpl.class.getName()).log(Level.SEVERE, ex.getMessage());
+            LOGGER.error(ex);
             return "";
         } finally {
             try {
@@ -373,7 +374,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
                     in.close();
                 }
             } catch (IOException ex) {
-                Logger.getLogger(DownloaderImpl.class.getName()).log(Level.SEVERE, ex.getMessage());
+                LOGGER.error(ex);
                 throw new RuntimeException(ex);
             }
         }

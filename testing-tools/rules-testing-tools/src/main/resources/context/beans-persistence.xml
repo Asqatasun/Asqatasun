@@ -12,7 +12,7 @@
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="persistenceXmlLocation" value="../tanaguru-rules-testing-tools/src/main/resources/context/persistence.xml"/>
+        <property name="persistenceXmlLocation" value="classpath:context/persistence.xml"/>
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.show_sql">false</prop>

@@ -12,18 +12,18 @@
 
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-          p:location="../tanaguru-rules-testing-tools/src/main/resources/context/language-detection.conf" />
+          p:location="classpath:context/language-detection.conf" />
 
-    <import resource="beans-factories.xml"/>
-    <import resource="beans-persistence.xml"/>
+    <import resource="classpath:context/beans-factories.xml"/>
+    <import resource="classpath:context/beans-persistence.xml"/>
 
-    <import resource="beans-contentloader.xml"/>
-    <import resource="beans-contentadapter.xml"/>
-    <import resource="beans-processor.xml"/>
-    <import resource="beans-consolidator.xml"/>
+    <import resource="classpath:context/beans-contentloader.xml"/>
+    <import resource="classpath:context/beans-contentadapter.xml"/>
+    <import resource="classpath:context/beans-processor.xml"/>
+    <import resource="classpath:context/beans-consolidator.xml"/>
 
-    <import resource="beans-ruleimplementationloader.xml"/>
-    <import resource="beans-nomenclatureloader.xml"/>
+    <import resource="classpath:context/beans-ruleimplementationloader.xml"/>
+    <import resource="classpath:context/beans-nomenclatureloader.xml"/>
 
     <bean id="testDAO" class="org.opens.tanaguru.entity.dao.reference.TestDAOImpl"/>
 
