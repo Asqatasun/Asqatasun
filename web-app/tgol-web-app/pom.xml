@@ -282,20 +282,8 @@
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
-                                    <executable>/usr/bin/ssh</executable>
-                                    <commandlineArgs>lamu.open-s.com /root/bin/tomcat-my-stop-remove-tgol-webapp.sh</commandlineArgs>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>tomcat-start</id>
-                                <phase>install</phase>
-                                <!-- WARNING: this stanza *MUST* be after the scp stanza -->
-                                <goals>
-                                    <goal>exec</goal>
-                                </goals>
-                                <configuration>
-                                    <executable>/usr/bin/ssh</executable>
-                                    <commandlineArgs>lamu.open-s.com /root/bin/tomcat-my-start.sh</commandlineArgs>
+                                    <executable>/bin/sh</executable>
+                                    <commandlineArgs>/root/bin/restart-tg-instance.sh</commandlineArgs>
                                 </configuration>
                             </execution>
                         </executions>
