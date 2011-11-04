@@ -19,9 +19,9 @@
         <module>maven-kbcsv-plugin</module>
         <module>maven-testgenerator-plugin</module>
         <module>tgol-testing-tools</module>
-        <module>tgol-test-kbaccess-campaign</module>
+<!--        <module>tgol-test-kbaccess-campaign</module>
         <module>tgol-test-krash-offline</module>
         <module>tgol-test-krash-online</module>
-        <module>tgol-test-krash-online-multipage</module>
+        <module>tgol-test-krash-online-multipage</module>-->
     </modules>
 </project>
