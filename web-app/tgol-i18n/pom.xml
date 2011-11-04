@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.opens</groupId>
+        <artifactId>tanaguru</artifactId>
+        <version>1.5.0</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+    <groupId>${webappGroupId}</groupId>
+    <artifactId>tgol-i18n</artifactId>
+    <version>${webappVersion}</version>
+    <name>tgol-i18n</name>
+    <url>http://www.tanaguru.org</url>
+</project>
