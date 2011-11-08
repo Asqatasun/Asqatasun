@@ -25,7 +25,7 @@ import org.opens.tgol.command.ChangePasswordCommand;
 import org.opens.tgol.command.ForgottenPasswordCommand;
 import org.opens.tgol.emailsender.EmailSender;
 import org.opens.tgol.entity.user.User;
-import org.opens.tgol.util.ExposablePropertyPlaceholderConfigurer;
+import org.opens.tgol.util.webapp.ExposablePropertyPlaceholderConfigurer;
 import org.opens.tgol.util.TgolKeyStore;
 import org.opens.tgol.util.TgolTokenHelper;
 import org.opens.tgol.validator.ChangePasswordFormValidator;

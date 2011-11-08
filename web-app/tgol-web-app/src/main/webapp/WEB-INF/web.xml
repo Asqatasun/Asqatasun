@@ -35,7 +35,7 @@
     <!-- This listener is set to access properties from the jsp-->
     <listener>
         <listener-class>
-            org.opens.tgol.util.ConfigPropertiesExposerListener
+            org.opens.tgol.util.webapp.ConfigPropertiesExposerListener
         </listener-class>
     </listener>
 
