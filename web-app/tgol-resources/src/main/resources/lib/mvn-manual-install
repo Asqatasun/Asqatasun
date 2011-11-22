@@ -1,3 +1,1 @@
 mvn install:install-file -DgroupId=cewolf -DartifactId=cewolf -Dversion=1.1.4 -Dpackaging=jar -Dfile=cewolf-1.1.4.jar
-mvn install:install-file -DgroupId=jcommon -DartifactId=jcommon -Dversion=1.0.15 -Dpackaging=jar -Dfile=jcommon-1.0.15.jar
-mvn install:install-file -DgroupId=jfreechart -DartifactId=jfreechart -Dversion=1.0.12 -Dpackaging=jar -Dfile=jfreechart-1.0.12.jar
