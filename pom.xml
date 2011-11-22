@@ -10,8 +10,8 @@
     <name>tanaguru</name>
     <url>http://www.tanaguru.org</url>
     <modules>
-        <module>engine</module>
-<!--        <module>web-app</module>
+<!--        <module>engine</module>
+        <module>web-app</module>
         <module>testing-tools</module>
         <module>cli</module>-->
 <!--        <module>ws</module>-->
@@ -386,9 +386,9 @@
             </dependency>
             
             <dependency>
-                <groupId>org.mozilla</groupId>
+                <groupId>com.googlecode.juniversalchardet</groupId>
                 <artifactId>juniversalchardet</artifactId>
-                <version>1.0</version>
+                <version>1.0.3</version>
             </dependency>
 
             <!-- slf4j dependencies -->
