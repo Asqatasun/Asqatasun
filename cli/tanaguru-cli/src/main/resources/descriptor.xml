@@ -121,6 +121,14 @@
             <outputDirectory>/install-web-app/sql-management/Passwdmd5</outputDirectory>
         </fileSet>
         <fileSet>
+            <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/runtime-lib</directory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+            <fileMode>666</fileMode>
+            <outputDirectory>/install-web-app/lib</outputDirectory>
+        </fileSet>
+        <fileSet>
             <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/token-master-key-encryptor</directory>
             <includes>
                 <include>**/*</include>
