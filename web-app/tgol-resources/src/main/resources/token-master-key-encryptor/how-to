@@ -1,3 +1,0 @@
-copy the ESAPI.properties and the validation.properties files to a known path
-java -classpath esapi-2.0.1.jar:log4j-1.2.15.jar:servlet-api-2.5-6.1.14.jar:commons-fileupload-1.2.jar -Dorg.owasp.esapi.resources="$PATH" org.owasp.esapi.reference.crypto.JavaEncryptor
-add the generated Encryptor.MasterKey and Encryptor.MasterSalt to your ESAPI.properties file.
