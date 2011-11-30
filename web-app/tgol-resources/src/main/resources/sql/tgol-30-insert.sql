@@ -36,12 +36,12 @@ The period is expressed in seconds and the format is \"nb_of_acts/period\"'),
 (8, 'ACT_LIFETIME','This restriction determines the lifetime of each associated with the contract');
 
 INSERT IGNORE INTO `TGSI_RESTRICTION` (`Id_Restriction_Element`, `Restriction_Value`) VALUES
-(1, 1, '5'),
-(2, 2, '5/3600'),
-(3, 3, '100'),
-(4, 3, '10000'),
-(5, 3, '20000'),
-(6, 4, 'Seo'),
+(1, '5'),
+(2, '5/3600'),
+(3, '100'),
+(3, '10000'),
+(3, '20000'),
+(4, 'Seo'),
 (8, '-1'),
 (8, '5'),
 (8, '30'),
