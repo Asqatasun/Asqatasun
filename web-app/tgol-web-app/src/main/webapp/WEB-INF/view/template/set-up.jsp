@@ -102,7 +102,7 @@
                             <div class="yui3-u-3-4">
                                 <div class="set-up-value">
                             <c:choose>
-                                <c:when test="${function:instanceOf(parameter.formField, 'com.opens.tgol.form.SelectFormField')}">
+                                <c:when test="${function:instanceOf(parameter.formField, 'org.opens.tgol.form.SelectFormField')}">
                                     <form:select id="${i18nKey}" path="auditParameter[${code}]">
                                     <c:forEach items="${parameter.formField.selectElementMap}" var="group">
                                     <optgroup label="<spring:message code="${group.key}"/>">
