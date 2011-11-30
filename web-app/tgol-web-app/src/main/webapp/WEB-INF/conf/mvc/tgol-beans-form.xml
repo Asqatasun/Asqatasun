@@ -40,7 +40,7 @@
         <property name="i18nKey" value="Bz"/>
         <property name="errorI18nKey" value="Bz-error"/>
         <property name="default" value="false"/>
-        <property name="enabled" value="true"/>
+        <property name="enabled" value="false"/>
     </bean>
 
     <bean id="seoSilverSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
@@ -48,7 +48,7 @@
         <property name="i18nKey" value="Ar"/>
         <property name="errorI18nKey" value="Ar-error"/>
         <property name="default" value="false"/>
-        <property name="enabled" value="true"/>
+        <property name="enabled" value="false"/>
     </bean>
 
     <bean id="seoGoldSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
@@ -56,7 +56,7 @@
         <property name="i18nKey" value="Or"/>
         <property name="errorI18nKey" value="Or-error"/>
         <property name="default" value="false"/>
-        <property name="enabled" value="true"/>
+        <property name="enabled" value="false"/>
     </bean>
 
     <!-- WCGA 2.0 select elements -->
