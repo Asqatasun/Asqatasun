@@ -161,6 +161,7 @@ public class AuditExportResultController extends AuditDataHandlerController {
                         webResource,
                         getPageScope(),
                         hasSourceCodeWithDoctype,
+                        false, // no detailed results
                         getLocaleResolver().resolveLocale(request));
             try {
                 exportService.export(

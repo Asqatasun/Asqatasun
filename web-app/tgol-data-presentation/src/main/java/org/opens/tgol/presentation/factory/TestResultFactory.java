@@ -94,11 +94,13 @@ public final class TestResultFactory {
      * 
      * @param processResult
      * @param hasSourceCodeADoctype
+     * @param hasResultDetails
      * @return
      */
     public TestResult getTestResult(
             ProcessResult processResult,
-            boolean hasSourceCodeWithDoctype) {
+            boolean hasSourceCodeWithDoctype,
+            boolean hasResultDetails) {
         TestResult testResult = new TestResultImpl(hasSourceCodeWithDoctype);
         testResult.setTestUrl(processResult.getTest().getDescription());
         testResult.setTestShortLabel(processResult.getTest().getLabel());
@@ -117,7 +119,9 @@ public final class TestResultFactory {
         } catch (MissingResourceException mre) {
             Logger.getLogger(this.getClass()).warn(mre);
         }
-        setRemarkInfosMap(testResult, processResult);
+        if (hasResultDetails) {
+            setRemarkInfosMap(testResult, processResult);
+        }
         return testResult;
     }
     
@@ -126,12 +130,14 @@ public final class TestResultFactory {
      * @param webresource
      * @param scope
      * @param hasSourceCodeADoctype
+     * @param hasResultDetails
      * @return
      */
     public Map<Theme, List<TestResult>> getTestResultSortedByThemeMap(
             WebResource webresource,
             Scope scope,
-            boolean hasSourceCodeWithDoctype) {
+            boolean hasSourceCodeWithDoctype,
+            boolean hasResultDetails) {
         // Map that associates a list of results with a theme
         Map<Theme, List<TestResult>> testResultMap =
                 new LinkedHashMap<Theme, List<TestResult>>();
@@ -143,7 +149,8 @@ public final class TestResultFactory {
             if (processResult instanceof DefiniteResult) {
                 TestResult testResult = getTestResult(
                         processResult,
-                        hasSourceCodeWithDoctype);
+                        hasSourceCodeWithDoctype,
+                        hasResultDetails);
                 Theme theme =
                         processResult.getTest().getCriterion().getTheme();
                 if (testResultMap.containsKey(theme)) {
@@ -163,12 +170,15 @@ public final class TestResultFactory {
      * @param webresource
      * @param scope
      * @param hasSourceCodeWithDoctype
+     * @param hasResultDetails
+     * @param locale
      * @return
      */
     public List<TestResult> getTestResultList(
             WebResource webresource,
             Scope scope,
             boolean hasSourceCodeWithDoctype,
+            boolean hasResultDetails,
             Locale locale) {
         // Map that associates a list of results with a theme
         List<TestResult> testResultList = new LinkedList<TestResult>();
@@ -180,7 +190,8 @@ public final class TestResultFactory {
             if (processResult instanceof DefiniteResult) {
                 TestResult testResult = getTestResult(
                         processResult,
-                        hasSourceCodeWithDoctype);
+                        hasSourceCodeWithDoctype,
+                        hasResultDetails);
                 testResultList.add(testResult);
             }
         }

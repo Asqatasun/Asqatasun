@@ -159,7 +159,7 @@ public class AuditResultController extends AuditDataHandlerController {
     private String prepareSuccessfullSiteData(Site site, Model model) {
         hasSourceCodeWithDoctype = false;
         model.addAttribute(TgolKeyStore.TEST_RESULT_LIST_KEY,
-                TestResultFactory.getInstance().getTestResultSortedByThemeMap(site, getSiteScope(), hasSourceCodeWithDoctype));
+                TestResultFactory.getInstance().getTestResultSortedByThemeMap(site, getSiteScope(), hasSourceCodeWithDoctype, true));
         
         model.addAttribute(TgolKeyStore.BREAD_CRUMB_KEY,
                 buildSiteResultBreadCrumb(
@@ -210,7 +210,7 @@ public class AuditResultController extends AuditDataHandlerController {
         if (hasSSP) {
             model.addAttribute(TgolKeyStore.SOURCE_CODE_KEY,highlightSourceCode(ssp));
             model.addAttribute(TgolKeyStore.TEST_RESULT_LIST_KEY,
-                TestResultFactory.getInstance().getTestResultSortedByThemeMap(page, getPageScope(), hasSourceCodeWithDoctype));
+                TestResultFactory.getInstance().getTestResultSortedByThemeMap(page, getPageScope(), hasSourceCodeWithDoctype, true));
         }
         model.addAttribute(TgolKeyStore.STATUS_KEY, computeAuditStatus(audit));
         model.addAttribute(TgolKeyStore.RESULT_ACTION_LIST_KEY, actionHandler.getActionList("EXPORT"));
