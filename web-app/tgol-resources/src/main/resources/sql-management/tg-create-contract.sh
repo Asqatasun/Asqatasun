@@ -3,6 +3,9 @@
 # 20111102 mfaure
 
 # For Getopts: very first ":" for error managing, then a ":" after each option requiring an argument
+DbUser=
+DbUserPasswd=
+DbName=
 
 while getopts ":l:w:u:p:" opt; do
   case $opt in
@@ -23,7 +26,7 @@ if [ -z "$SiteLabel" ] || [ -z "$URL" ] || [ -z "$UserId" ] || [ -z "$ProductId"
 	exit 0
 fi
 
-mysql -u $db_user -p$db_user_passwd $db_name -e "
+mysql -u $DbUser -p$DbUserPasswd $DbName -e "
 insert into TGSI_CONTRACT (Label, Url, Begin_Date, End_Date, USER_Id_User, PRODUCT_Id_Product) values (\"$SiteLabel\", \"$URL\", date(now()),
 date_add(date(now()), interval 1 year), \"$UserId\", \"$ProductId\");
 "
