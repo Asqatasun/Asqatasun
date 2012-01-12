@@ -213,15 +213,17 @@ metadata.description=Basic crawl starting with useful defaults
   <!-- <property name="digestAlgorithm" value="sha1" /> -->
     </bean>
 
-    <bean id="fetchHttp" class="org.archive.modules.fetcher.FetchHTTP">
+    <bean id="fetchHttp" class="org.opens.tanaguru.crawler.framework.TanaguruFetchHTTP">
   <!-- <property name="maxLengthBytes" value="0" /> -->
         <property name="timeoutSeconds" value="10" />
   <!-- <property name="maxFetchKBSec" value="0" /> -->
-   <property name="defaultEncoding" value="UTF-8" />
+        <property name="defaultEncoding" value="UTF-8" />
   <!-- <property name="shouldFetchBodyRule"> 
         <bean class="org.archive.modules.deciderules.AcceptDecideRule"/>
        </property> -->
         <property name="soTimeoutMs" value="10000" />
+        <property name="httpProxyHost" value="" />
+        <property name="httpProxyPort" value="0" />
         <property name="digestContent" value="false" />
     </bean>
 

@@ -53,6 +53,20 @@
         <property name="elementName" value="prop"/>
     </bean>
 
+    <bean id="proxyHostModifier" class="org.opens.tanaguru.crawler.util.HeritrixAttributeValueModifierAndEraser">
+        <property name="attributeName" value="name"/>
+        <property name="attributeValue" value="httpProxyHost"/>
+        <property name="idBeanParent" value="fetchHttp"/>
+        <property name="elementName" value="property"/>
+    </bean>
+
+    <bean id="proxyPortModifier" class="org.opens.tanaguru.crawler.util.HeritrixAttributeValueModifierAndEraser">
+        <property name="attributeName" value="name"/>
+        <property name="attributeValue" value="httpProxyPort"/>
+        <property name="idBeanParent" value="fetchHttp"/>
+        <property name="elementName" value="property"/>
+    </bean>
+
     <bean id="crawlConfigurationUtils" class="org.opens.tanaguru.crawler.util.CrawlConfigurationUtils" factory-method="getInstance">
         <property name="parameterModifierMap">
             <map>
@@ -60,6 +74,8 @@
                 <entry key="MAX_DOCUMENTS" value-ref="maxDocumentsModifier"/>
                 <entry key="MAX_DURATION" value-ref="maxDurationModifier"/>
                 <entry key="EXCLUSION_REGEXP" value-ref="exclusionRegexpModifier"/>
+                <entry key="PROXY_HOST" value-ref="proxyHostModifier"/>
+                <entry key="PROXY_PORT" value-ref="proxyPortModifier"/>
             </map>
         </property>
         <property name="urlModifier">
