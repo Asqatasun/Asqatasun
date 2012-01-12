@@ -28,6 +28,7 @@ import org.apache.log4j.Logger;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
 
 /**
  *
@@ -35,6 +36,7 @@ import org.apache.commons.lang.StringEscapeUtils;
  */
 public final class TgolHighlighter {
 
+    private static final Logger LOGGER = Logger.getLogger(TgolHighlighter.class);
     private static final String BEGIN_LINE_STR_OF_HIGHLIGHTED_CODE =
             "<li class=\"li";
     private static final char CARRIAGE_RETURN_CHAR = '\n';
@@ -51,6 +53,7 @@ public final class TgolHighlighter {
     private static final String HIGHLIGHTER_SOCKET_TIMEOUT = "http.socket.timeout";
     private static final String HIGHLIGHTER_CONNECTION_TIMEOUT =
             "http.connection.timeout";
+    private static final int TIMEOUT = 3000;
 
     private String highlighterUrl;
     public String getHighlighterUrl() {
@@ -59,6 +62,24 @@ public final class TgolHighlighter {
 
     public void setHighlighterUrl(String highlighterUrl) {
         this.highlighterUrl = highlighterUrl;
+    }
+
+    private String httpProxyHost;
+    public String getProxyHost() {
+        return httpProxyHost;
+    }
+
+    public void setProxyHost(String httpProxyHost) {
+        this.httpProxyHost = httpProxyHost;
+    }
+
+    private String httpProxyPort;
+    public String getProxyPort() {
+        return httpProxyPort;
+    }
+
+    public void setProxyPort(String httpProxyPort) {
+        this.httpProxyPort = httpProxyPort;
     }
 
     /**
@@ -113,9 +134,10 @@ public final class TgolHighlighter {
         source.append(sourceCode);
         HttpClient httpclient = new HttpClient();
         httpclient.getParams().setParameter(
-            HIGHLIGHTER_SOCKET_TIMEOUT, Integer.valueOf(10000));
+            HIGHLIGHTER_SOCKET_TIMEOUT, TIMEOUT);
+        httpclient = setProxy(httpclient);
         httpclient.getParams().setParameter(
-            HIGHLIGHTER_CONNECTION_TIMEOUT, Integer.valueOf(10000));
+            HIGHLIGHTER_CONNECTION_TIMEOUT, TIMEOUT);
         PostMethod post = new PostMethod(highlighterUrl);
         //Geshi needs 3 parameters to process :
         // the "submit" parameter to emulate the form validation
@@ -162,6 +184,25 @@ public final class TgolHighlighter {
     private String addReturnChariotToHighlightedSourceCode (String sourceCode) {
         return sourceCode.replaceAll(BEGIN_LINE_STR_OF_HIGHLIGHTED_CODE,
                 CARRIAGE_RETURN_CHAR+BEGIN_LINE_STR_OF_HIGHLIGHTED_CODE);
+    }
+
+    /**
+     *
+     * @param httpClient
+     * @return
+     */
+    private HttpClient setProxy (HttpClient httpClient) {
+        if (StringUtils.isNotEmpty(httpProxyHost) && StringUtils.isNotEmpty(httpProxyPort)) {
+            try {
+                httpClient.getHostConfiguration().setProxy(httpProxyHost, Integer.valueOf(httpProxyPort));
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Calling highlighter with proxy parameters " + httpProxyHost + " : " + httpProxyPort);
+                }
+            } catch (NumberFormatException nfe) {
+                Logger.getLogger(this.getClass()).warn("Incorrect value of proxy Port : "+ httpProxyPort);
+            }
+        }
+        return httpClient;
     }
 
 }
