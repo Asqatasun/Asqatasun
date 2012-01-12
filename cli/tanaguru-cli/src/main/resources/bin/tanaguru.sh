@@ -52,6 +52,7 @@ LAUNCH_TANAGURU="$JAVA_HOME/bin/java $JAVA_OPTS "
 
 ##################
 # usage function
+# TO DO : add options to configure proxy
 ##################
 usage()
 {
