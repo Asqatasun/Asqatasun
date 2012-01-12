@@ -48,7 +48,7 @@ import org.opens.tgol.report.service.exception.NotSupportedExportFormatException
  * 
  * @author jkowalczyk
  */
-public class ExportService {
+public final class ExportService {
 
     private static final Logger LOGGER = Logger.getLogger(ExportService.class);
     private static final String REPORT_BASE_FILE_NAME="Report_";
