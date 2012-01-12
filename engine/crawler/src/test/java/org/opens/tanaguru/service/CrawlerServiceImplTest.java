@@ -111,9 +111,11 @@ public class CrawlerServiceImplTest extends TestCase {
             String crawlParam1,
             String crawlParam2,
             String crawlParam3,
-            String crawlParam4) {
+            String crawlParam4,
+            String crawlParam5,
+            String crawlParam6) {
         Audit audit = auditFactory.create(new Date());
-        audit.setParameterSet(setCrawlParameters(crawlParam1, crawlParam2, crawlParam3, crawlParam4));
+        audit.setParameterSet(setCrawlParameters(crawlParam1, crawlParam2, crawlParam3, crawlParam4, crawlParam5, crawlParam6));
         auditDataService.saveOrUpdate(audit);
         Site site = webResourceFactory.createSite(siteUrl);
         site.setAudit(audit);
@@ -133,7 +135,7 @@ public class CrawlerServiceImplTest extends TestCase {
         System.out.println("crawl_full_site_With_Depth_Level0_Option");
         crawlerService.setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
         String siteUrl = bundle.getString(FULL_SITE_CRAWL_URL_KEY);
-        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "0", "", "", "");
+        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "0", "", "", "", "", "");
         assertEquals(1, contentList.size());
         Set<String> urlSet = getUrlSet(contentList);
         assertTrue(urlSet.contains(siteUrl));
@@ -143,19 +145,19 @@ public class CrawlerServiceImplTest extends TestCase {
         System.out.println("crawl_full_site_With_Depth_Level0_Option");
         crawlerService.setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
         String siteUrl = bundle.getString(FULL_SITE_CRAWL_URL_KEY);
-        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "1", "", "", "");
+        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "1", "", "", "", "", "");
         assertEquals(3, contentList.size());
         Set<String> urlSet = getUrlSet(contentList);
         assertTrue(urlSet.contains(siteUrl));
         assertTrue(urlSet.contains(siteUrl + PAGE_NAME_LEVEL1));
         assertTrue(urlSet.contains(siteUrl + FORBIDDEN_PAGE_NAME));
     }
-    
+
     public void testCrawl_SiteWithRegexpExclusionOption() {
         System.out.println("crawl_full_site_With_Regexp_Exclusion_Option");
         crawlerService.setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
         String siteUrl = bundle.getString(FULL_SITE_CRAWL_URL_KEY);
-        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "4", ".html", "", "");
+        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "4", ".html", "", "", "", "");
         assertEquals(1, contentList.size());
         Set<String> urlSet = getUrlSet(contentList);
         assertTrue(urlSet.contains(siteUrl));
@@ -165,7 +167,7 @@ public class CrawlerServiceImplTest extends TestCase {
         System.out.println("crawl_full_site_With_Regexp_Exclusion_Option2");
         crawlerService.setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
         String siteUrl = bundle.getString(FULL_SITE_CRAWL_URL_KEY);
-        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "4", "robot", "", "");
+        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "4", "robot", "", "", "", "");
         assertEquals(3, contentList.size());
         Set<String> urlSet = getUrlSet(contentList);
         assertTrue(urlSet.contains(siteUrl));
@@ -177,7 +179,7 @@ public class CrawlerServiceImplTest extends TestCase {
         System.out.println("crawl_full_site_With_Regexp_Exclusion_Option3");
         crawlerService.setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
         String siteUrl = bundle.getString(FULL_SITE_CRAWL_URL_KEY);
-        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "4", "robot;page-2", "", "");
+        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "4", "robot;page-2", "", "", "", "");
         assertEquals(2, contentList.size());
         Set<String> urlSet = getUrlSet(contentList);
         assertTrue(urlSet.contains(siteUrl));
@@ -191,7 +193,7 @@ public class CrawlerServiceImplTest extends TestCase {
         System.out.println("crawl_full_site");
         crawlerService.setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
         String siteUrl = bundle.getString(FULL_SITE_CRAWL_URL_KEY);
-        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "3", "", "", "");
+        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "3", "", "", "", "", "");
         assertEquals(4, contentList.size());
         Set<String> urlSet = getUrlSet(contentList);
         assertTrue(urlSet.contains(siteUrl));
@@ -210,7 +212,7 @@ public class CrawlerServiceImplTest extends TestCase {
         Page page = webResourceFactory.createPage(siteUrl);
         Audit audit  = auditFactory.create();
         page.setAudit(audit);
-        audit.setParameterSet(setCrawlParameters("3", "", "", ""));
+        audit.setParameterSet(setCrawlParameters("3", "", "", "", "", ""));
         page = crawlerService.crawl(page);
         List<Long> contentListId = contentDataService.getSSPFromWebResource(page.getId(), HttpStatus.SC_OK, 0, 10);
         List<Content> contentList = new ArrayList<Content>();
@@ -232,7 +234,7 @@ public class CrawlerServiceImplTest extends TestCase {
         System.out.println("crawl_site_with_robots");
         crawlerService.setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
         String siteUrl = bundle.getString(ROBOTS_RESTRICTED_CRAWL_URL_KEY);
-        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "3", "", "", "");
+        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "3", "", "", "", "","");
         assertEquals(3, contentList.size() + ((SSP) contentList.iterator().next()).getRelatedContentSet().size());
         Set<String> urlSet = getUrlSet(contentList);
         assertTrue(urlSet.contains(siteUrl));
@@ -249,7 +251,7 @@ public class CrawlerServiceImplTest extends TestCase {
         return urlSet;
     }
 
-    private Set<Parameter> setCrawlParameters(String depth, String regexp, String maxDuration, String maxDocuments) {
+    private Set<Parameter> setCrawlParameters(String depth, String regexp, String maxDuration, String maxDocuments, String proxyHost, String proxyPort) {
         Set<Parameter> crawlParameters = new HashSet<Parameter>();
         ParameterFamily pf = parameterFamilyDataService.create();
         pf.setParameterFamilyCode("CRAWLER");
@@ -286,6 +288,25 @@ public class CrawlerServiceImplTest extends TestCase {
         Parameter pemdoValue= parameterDataService.getParameter(pemdo, maxDocuments);
         crawlParameters.add(pemdoValue);
         parameterDataService.saveOrUpdate(crawlParameters);
+        
+        //PROXY_HOST
+        ParameterElement peph = parameterElementDataService.create(pf);
+        peph.setParameterElementCode("PROXY_HOST");
+        parameterElementDataService.saveOrUpdate(peph);
+
+        Parameter pephValue= parameterDataService.getParameter(peph, proxyHost);
+        crawlParameters.add(pephValue);
+        parameterDataService.saveOrUpdate(crawlParameters);
+
+        //PROXY_PORT
+        ParameterElement pept = parameterElementDataService.create(pf);
+        pept.setParameterElementCode("PROXY_PORT");
+        parameterElementDataService.saveOrUpdate(pept);
+
+        Parameter peptValue= parameterDataService.getParameter(pept, proxyPort);
+        crawlParameters.add(peptValue);
+        parameterDataService.saveOrUpdate(crawlParameters);
+
         return crawlParameters;
     }
 //    /**

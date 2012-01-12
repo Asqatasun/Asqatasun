@@ -32,34 +32,34 @@ import org.w3c.dom.Node;
  *
  * @author jkowalczyk
  */
-public class HeritrixAttributeValueModifier extends HeritrixConfigurationModifier{
+public class HeritrixAttributeValueModifierAndEraser extends HeritrixConfigurationModifier{
 
-    private static final Logger LOGGER = Logger.getLogger(HeritrixAttributeValueModifier.class);
+    private static final Logger LOGGER = Logger.getLogger(HeritrixAttributeValueModifierAndEraser.class);
     private static final String DEFAULT_ATTRIBUTE_NAME = "value";
 
-    public HeritrixAttributeValueModifier(){
+    public HeritrixAttributeValueModifierAndEraser(){
         super();
     }
 
     @Override
     public Document modifyDocument(Document document, String value) {
-        if (value == null || value.isEmpty()) {
-            return document;
-        }
         try {
             Node parentNode = getNodeFromXpath(document);
             NamedNodeMap attr = parentNode.getAttributes();
             Node nodeAttr = attr.getNamedItem(DEFAULT_ATTRIBUTE_NAME);
             if (StringUtils.isNotEmpty(value)) {
                 nodeAttr.setTextContent(value);
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Update " + getAttributeValue() +" attribute of bean "+getIdBeanParent()+ " with value "+ value);
+                }
             } else {
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Delete " + getAttributeValue() +" attribute of bean "+getIdBeanParent()+ " because of null or empty value ");
+                }
                 parentNode.getParentNode().removeChild(parentNode);
             }
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Update " + getAttributeValue() +" attribute of bean "+getIdBeanParent()+ " with value "+ value);
-            }
         } catch (XPathExpressionException ex) {
-            LOGGER.warn(ex);
+            Logger.getLogger(HeritrixParameterValueModifier.class.getName()).warn(ex);
         }
         return document;
     }

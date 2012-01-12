@@ -51,11 +51,19 @@ public abstract class HeritrixConfigurationModifier {
     }
     
     private String attributeValue = null;
+    public String getAttributeValue() {
+        return attributeValue;
+    }
+    
     public void setAttributeValue(String attributeValue) {
         this.attributeValue = attributeValue;
     }
 
     private String idBeanParent = null;
+    public String getIdBeanParent() {
+        return idBeanParent;
+    }
+    
     public void setIdBeanParent(String idBeanParent) {
         this.idBeanParent = idBeanParent;
     }

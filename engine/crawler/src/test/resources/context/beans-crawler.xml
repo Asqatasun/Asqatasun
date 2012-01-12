@@ -14,7 +14,7 @@
         <property name="webResourceFactory" ref="webResourceFactory"/>
         <property name="contentFactory" ref="contentFactory"/>
         
-        <property name="outputDir" value="/tmp"/>
+        <property name="outputDir" value="/home/jkowalczyk"/>
 <!--        <property name="crawlConfigFilePath" value="../"/>-->
 
         <property name="crawlerFactory" ref="crawlerFactory"/>
@@ -73,7 +73,6 @@
                 <entry key="DEPTH" value-ref="depthModifier"/>
                 <entry key="MAX_DOCUMENTS" value-ref="maxDocumentsModifier"/>
                 <entry key="MAX_DURATION" value-ref="maxDurationModifier"/>
-                <entry key="EXCLUSION_REGEX" value-ref="exclusionRegexpModifier"/>
                 <entry key="EXCLUSION_REGEX" value-ref="exclusionRegexpModifier"/>
                 <entry key="PROXY_HOST" value-ref="proxyHostModifier"/>
                 <entry key="PROXY_PORT" value-ref="proxyPortModifier"/>

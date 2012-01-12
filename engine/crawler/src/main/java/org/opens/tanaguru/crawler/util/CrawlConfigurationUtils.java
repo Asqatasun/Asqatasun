@@ -51,7 +51,7 @@ public class CrawlConfigurationUtils {
     }
 
     public Document modifyValue (HeritrixConfigurationModifier hcm, Document document, String value) {
-        if (hcm != null && value != null && !value.isEmpty() && !value.equals("-1")) {
+        if (hcm != null && !value.equals("-1")) {
             return hcm.modifyDocument(document, value);
         } else {
             return document;

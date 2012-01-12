@@ -38,6 +38,9 @@ public class HeritrixParameterValueModifier extends HeritrixConfigurationModifie
 
     @Override
     public Document modifyDocument(Document document, String value) {
+        if (value == null || value.isEmpty()) {
+            return document;
+        }
         try {
             Node node = getNodeFromXpath(document);
             node.setTextContent(value);

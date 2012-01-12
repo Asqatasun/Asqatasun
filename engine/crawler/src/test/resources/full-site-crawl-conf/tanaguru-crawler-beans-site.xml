@@ -225,6 +225,8 @@
         <property name="defaultEncoding" value="UTF-8" />
         <property name="soTimeoutMs" value="10000" />
         <property name="digestContent" value="false" />
+        <property name="httpProxyHost" value="" />
+        <property name="httpProxyPort" value="0" />
     </bean>
 
     <bean id="extractorHttp" class="org.archive.modules.extractor.ExtractorHTTP">
