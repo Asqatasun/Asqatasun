@@ -22,6 +22,7 @@
 package org.opens.tanaguru.crawler.util;
 
 import javax.xml.xpath.XPathExpressionException;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -42,9 +43,14 @@ public class HeritrixAttributeValueModifier extends HeritrixConfigurationModifie
     @Override
     public Document modifyDocument(Document document, String value) {
         try {
-            NamedNodeMap attr = getNodeFromXpath(document).getAttributes();
+            Node parentNode = getNodeFromXpath(document);
+            NamedNodeMap attr = parentNode.getAttributes();
             Node nodeAttr = attr.getNamedItem(DEFAULT_ATTRIBUTE_NAME);
-            nodeAttr.setTextContent(value);
+            if (StringUtils.isNotEmpty(value)) {
+                nodeAttr.setTextContent(value);
+            } else {
+                parentNode.getParentNode().removeChild(parentNode);
+            }
         } catch (XPathExpressionException ex) {
             Logger.getLogger(HeritrixParameterValueModifier.class.getName()).warn(ex);
         }

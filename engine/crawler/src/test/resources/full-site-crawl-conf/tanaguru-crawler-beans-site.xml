@@ -218,7 +218,7 @@
         <property name="digestContent" value="false" />
     </bean>
 
-    <bean id="fetchHttp" class="org.archive.modules.fetcher.FetchHTTP">
+    <bean id="fetchHttp" class="org.opens.tanaguru.crawler.framework.TanaguruFetchHTTP">
         <!-- <property name="maxLengthBytes" value="0" /> -->
         <property name="timeoutSeconds" value="10" />
         <!-- <property name="maxFetchKBSec" value="0" /> -->

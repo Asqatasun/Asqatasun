@@ -40,6 +40,20 @@
         <property name="idBeanParent" value="crawlLimiter"/>
         <property name="elementName" value="property"/>
     </bean>
+    
+    <bean id="proxyHostModifier" class="org.opens.tanaguru.crawler.util.HeritrixAttributeValueModifier">
+        <property name="attributeName" value="name"/>
+        <property name="attributeValue" value="httpProxyHost"/>
+        <property name="idBeanParent" value="fetchHttp"/>
+        <property name="elementName" value="property"/>
+    </bean>
+    
+    <bean id="proxyPortModifier" class="org.opens.tanaguru.crawler.util.HeritrixAttributeValueModifier">
+        <property name="attributeName" value="name"/>
+        <property name="attributeValue" value="httpProxyPort"/>
+        <property name="idBeanParent" value="fetchHttp"/>
+        <property name="elementName" value="property"/>
+    </bean>
 
     <bean id="exclusionRegexpModifier" class="org.opens.tanaguru.crawler.util.HeritrixRegexpParameterValueModifier">
         <property name="xpathExpression" value="//list[ancestor::property/@name='regexList' and ancestor::bean/@id='matchesListRegexDecideRule']"/>
@@ -60,6 +74,9 @@
                 <entry key="MAX_DOCUMENTS" value-ref="maxDocumentsModifier"/>
                 <entry key="MAX_DURATION" value-ref="maxDurationModifier"/>
                 <entry key="EXCLUSION_REGEX" value-ref="exclusionRegexpModifier"/>
+                <entry key="EXCLUSION_REGEX" value-ref="exclusionRegexpModifier"/>
+                <entry key="PROXY_HOST" value-ref="proxyHostModifier"/>
+                <entry key="PROXY_PORT" value-ref="proxyPortModifier"/>
             </map>
         </property>
         <property name="urlModifier">
