@@ -41,14 +41,9 @@ public class TanaguruFetchHTTP extends FetchHTTP{
 
     /**
      * 
-     * @param url
-     * @param heritrixFileName
-     * @param outputDir
-     * @param crawlConfigFilePath
-     * @param paramSet
      */
     public TanaguruFetchHTTP() {
         super();
-    }   
+    }
 
 }
