@@ -29,6 +29,7 @@ import org.opens.tgol.util.HttpStatusCodeFamily;
 import org.opens.tgol.util.TgolKeyStore;
 import org.opens.tgol.voter.restriction.RestrictionHandler;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -37,6 +38,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.httpclient.URIException;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.archive.net.UURIFactory;
 import org.opens.tanaguru.entity.audit.Audit;
@@ -62,6 +64,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AuditLauncherController extends AuditDataHandlerController {
 
     private static final Logger LOGGER = Logger.getLogger(AuditLauncherController.class);
+    private static String PROXY_HOST_PARAM_KEY="PROXY_HOST";
+    private static String PROXY_PORT_PARAM_KEY="PROXY_PORT";
+    private static String DEPTH_PARAM_KEY="DEPTH";
+    private static String MAX_DOCUMENT_PARAM_KEY="MAX_DOCUMENTS";
+    private static String DEPTH_PAGE_PARAM_VALUE="0";
     private String groupePagesName = "";
     /**
      * The TanaguruOrchestrator instance needed to launch the audit process
@@ -103,6 +110,36 @@ public class AuditLauncherController extends AuditDataHandlerController {
      */
     Set<Parameter> auditPageParamSet = null;
 
+    private String httpProxyHost;
+    public String getProxyHost() {
+        return httpProxyHost;
+    }
+
+    public void setProxyHost(String httpProxyHost) {
+        this.httpProxyHost = httpProxyHost;
+    }
+
+    private String httpProxyPort;
+    public String getProxyPort() {
+        return httpProxyPort;
+    }
+
+    public void setProxyPort(String httpProxyPort) {
+        this.httpProxyPort = httpProxyPort;
+    }
+
+    /**
+     * Multiple Url can be set through a unique String separated by ;
+     */
+    private List<String> proxyExclusionUrlList = new ArrayList<String>();
+    public List<String> getProxyExclusionUrlList() {
+        return proxyExclusionUrlList;
+    }
+
+    public void setProxyExclusionUrl(String proxyExclusionUrl) {
+        proxyExclusionUrlList.addAll(Arrays.asList(proxyExclusionUrl.split(";")));
+    }
+
     public AuditLauncherController() {
         super();
     }
@@ -140,7 +177,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
                     contract,
                     contract.getUrl(),
                     getClientIpAddress(),
-                    getUserParamSet(auditSetUpCommand, contract.getId(), -1));
+                    getUserParamSet(auditSetUpCommand, contract.getId(), -1, contract.getUrl()));
             model.addAttribute(TgolKeyStore.TESTED_URL_KEY, contract.getUrl());
             model.addAttribute(TgolKeyStore.BREAD_CRUMB_KEY, buildBreadCrumb(Long.valueOf(contractId)));
             return TgolKeyStore.AUDIT_IN_PROGRESS_VIEW_NAME;
@@ -214,7 +251,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
                 urlCounter++;
             }
         }
-        Set<Parameter> paramSet = getUserParamSet(auditSetUpCommand, contract.getId(), trueUrl.size());
+        Set<Parameter> paramSet = getUserParamSet(auditSetUpCommand, contract.getId(), trueUrl.size(), trueUrl.get(0));
         if (trueUrl.size() == 1) {
             LOGGER.debug("Launch " + trueUrl.get(0) + " audit in page mode");
             return tanaguruExecutor.auditPage(
@@ -244,7 +281,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
             final Contract contract,
             final AuditSetUpCommand auditSetUpCommand) {
         Map<String, String> fileMap = auditSetUpCommand.getFileMap();
-        Set<Parameter> paramSet = getUserParamSet(auditSetUpCommand, contract.getId(), fileMap.size());
+        Set<Parameter> paramSet = getUserParamSet(auditSetUpCommand, contract.getId(), fileMap.size(), null);
         return tanaguruExecutor.auditPageUpload(
                 contract,
                 fileMap,
@@ -296,9 +333,11 @@ public class AuditLauncherController extends AuditDataHandlerController {
      * override some of them in case of contract restriction.
      * @param auditSetUpCommand
      * @param contractId
+     * @param nbOfPages
+     * @param url
      * @return
      */
-    private Set<Parameter> getUserParamSet(AuditSetUpCommand auditSetUpCommand, Long contractId, int nbOfPages) {
+    private Set<Parameter> getUserParamSet(AuditSetUpCommand auditSetUpCommand, Long contractId, int nbOfPages, String url) {
         Set<Parameter> paramSet = getDefaultParamSet();
         Set<Parameter> userParamSet = new HashSet<Parameter>();
         if (auditSetUpCommand != null) {
@@ -325,6 +364,63 @@ public class AuditLauncherController extends AuditDataHandlerController {
             }
             paramSet = getParameterDataService().updateParameterSet(paramSet, userParamSet);
         }
+        paramSet = setProxyParameters(paramSet, url);
+        return paramSet;
+    }
+
+    /**
+     * 
+     * @param paramSet
+     * @param url
+     */
+    private Set<Parameter> setProxyParameters(Set<Parameter> paramSet, String url) {
+        if ((StringUtils.isEmpty(httpProxyHost) && StringUtils.isEmpty(httpProxyPort))) {
+            return paramSet;
+        }
+        for (String urlExclusion : proxyExclusionUrlList) {
+            if (StringUtils.isNotEmpty(urlExclusion) && url.contains(urlExclusion)) {
+                return paramSet;
+            }
+        }
+        if (StringUtils.isEmpty(url)){
+            return paramSet;
+        }
+        try {
+            Integer.valueOf(httpProxyPort);
+        } catch (NumberFormatException nfe) {
+            LOGGER.warn("Incorrect value of proxy Port : "+ httpProxyPort +". Proxy parameters are ignored");
+            return paramSet;
+        }
+        Set<Parameter> proxyParamSet = new HashSet<Parameter>();
+        ParameterElement proxyHostParameterElement =
+                parameterElementDataService.getParameterElement(PROXY_HOST_PARAM_KEY);
+        ParameterElement proxyPortParameterElement =
+                parameterElementDataService.getParameterElement(PROXY_PORT_PARAM_KEY);
+        Parameter proxyHostParameter = getParameterDataService().getParameter(proxyHostParameterElement, httpProxyHost);
+        Parameter proxyPortParameter = getParameterDataService().getParameter(proxyPortParameterElement, httpProxyPort);
+        proxyParamSet.add(proxyHostParameter);
+        proxyParamSet.add(proxyPortParameter);
+        LOGGER.debug("paramSet.size() " + paramSet.size());
+        LOGGER.debug("proxyParamSet " + proxyParamSet.size());
+        for (Parameter param: paramSet) {
+            if (param.getParameterElement().getParameterElementCode().equals(PROXY_HOST_PARAM_KEY)) {
+                LOGGER.debug(param.getValue());
+            } else if (param.getParameterElement().getParameterElementCode().equals(PROXY_PORT_PARAM_KEY)) {
+                LOGGER.debug(param.getValue());
+            }
+        }
+        paramSet = getParameterDataService().updateParameterSet(paramSet, proxyParamSet);
+        LOGGER.debug("after update paramSet.size() " + paramSet.size());
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Audit is set to use proxy with parameters " + httpProxyHost + " : " + httpProxyPort);
+        }
+        for (Parameter param: paramSet) {
+            if (param.getParameterElement().getParameterElementCode().equals(PROXY_HOST_PARAM_KEY)) {
+                LOGGER.debug(param.getValue());
+            } else if (param.getParameterElement().getParameterElementCode().equals(PROXY_PORT_PARAM_KEY)) {
+                LOGGER.debug(param.getValue());
+            } 
+        }
         return paramSet;
     }
 
@@ -337,9 +433,9 @@ public class AuditLauncherController extends AuditDataHandlerController {
     private Set<Parameter> getAuditPageParameterSet(int nbOfPages) {
         if (auditPageParamSet == null) {
             Set<Parameter> paramSet = new HashSet<Parameter>();
-            ParameterElement depthParameterElement = parameterElementDataService.getParameterElement("DEPTH");
-            ParameterElement maxDocParameterElement = parameterElementDataService.getParameterElement("MAX_DOCUMENTS");
-            Parameter depthParameter = getParameterDataService().getParameter(depthParameterElement, "0");
+            ParameterElement depthParameterElement = parameterElementDataService.getParameterElement(DEPTH_PARAM_KEY);
+            ParameterElement maxDocParameterElement = parameterElementDataService.getParameterElement(MAX_DOCUMENT_PARAM_KEY);
+            Parameter depthParameter = getParameterDataService().getParameter(depthParameterElement, DEPTH_PAGE_PARAM_VALUE);
             Parameter maxDocParameter = getParameterDataService().getParameter(maxDocParameterElement, String.valueOf(nbOfPages));
             paramSet.add(depthParameter);
             paramSet.add(maxDocParameter);

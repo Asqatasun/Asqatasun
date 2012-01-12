@@ -217,12 +217,14 @@
         <property name="digestContent" value="false" />
     </bean>
 
-    <bean id="fetchHttp" class="org.archive.modules.fetcher.FetchHTTP">
+    <bean id="fetchHttp" class="org.opens.tanaguru.crawler.framework.TanaguruFetchHTTP">
         <!-- <property name="maxLengthBytes" value="0" /> -->
-        <property name="timeoutSeconds" value="10" />
+        <property name="timeoutSeconds" value="5" />
         <!-- <property name="maxFetchKBSec" value="0" /> -->
         <property name="defaultEncoding" value="UTF-8" />
-        <property name="soTimeoutMs" value="10000" />
+        <property name="soTimeoutMs" value="5000" />
+        <property name="httpProxyHost" value="" />
+        <property name="httpProxyPort" value="" />
         <property name="digestContent" value="false" />
     </bean>
 

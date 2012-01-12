@@ -8,15 +8,22 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
-    <bean id="exportService" class="org.opens.tgol.report.service.ExportService" factory-method="getInstance">
-        <property name="exportFormatMap">
+    <bean id="exportService" class="org.opens.tgol.report.service.ExportService" factory-method="getInstance"/>
+
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="exportService"/>
+        </property>
+        <property name="targetMethod">
+            <value>setExportFormatMap</value>
+        </property>
+        <property name="arguments">
             <map>
                 <entry key="ods">
                     <ref bean="odsFormat"/>
                 </entry>
             </map>
         </property>
-        
-     </bean>
+    </bean>
 
 </beans>

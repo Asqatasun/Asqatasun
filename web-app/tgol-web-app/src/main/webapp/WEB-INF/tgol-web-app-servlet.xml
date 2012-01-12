@@ -7,6 +7,21 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
+    <bean id="exposedPropertiesConfigurer" class="org.opens.tgol.util.webapp.ExposablePropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>file:///etc/tgol/tgol.conf</value>
+                <value>file:///etc/tgol/google-code.properties</value>
+                <value>file:///etc/tgol/language-detection.conf</value>
+                <value>file:///etc/tgol/sign-up-mail.properties</value>
+                <value>file:///etc/tgol/ESAPI.properties</value>
+            </list>
+        </property>
+        <property name="fileEncoding">
+            <value>UTF-8</value>
+        </property>
+    </bean>
+
     <!-- spring mvc imports -->
     <import resource="conf/mvc/tgol-beans-controller.xml"/>
     <import resource="conf/mvc/tgol-beans-form.xml"/>
@@ -17,9 +32,9 @@
     <import resource="conf/mvc/tgol-beans-resolver.xml"/>
     <import resource="conf/mvc/tgol-beans-utils.xml"/>
     <import resource="conf/mvc/tgol-beans-validator.xml"/>
-    
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
 
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
+    
     <!-- export function imports -->
     <import resource="conf/export/tgol-beans-color.xml"/>
     <import resource="conf/export/tgol-beans-columns.xml"/>

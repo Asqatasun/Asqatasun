@@ -213,7 +213,7 @@ metadata.description=Basic crawl starting with useful defaults
   <!-- <property name="digestAlgorithm" value="sha1" /> -->
     </bean>
 
-    <bean id="fetchHttp" class="org.archive.modules.fetcher.FetchHTTP">
+    <bean id="fetchHttp" class="org.opens.tanaguru.crawler.framework.TanaguruFetchHTTP">
   <!-- <property name="maxLengthBytes" value="0" /> -->
         <property name="timeoutSeconds" value="10" />
   <!-- <property name="maxFetchKBSec" value="0" /> -->
@@ -235,8 +235,8 @@ metadata.description=Basic crawl starting with useful defaults
        </property>
   -->
   <!-- <property name="httpBindAddress" value="" /> -->
-  <!-- <property name="httpProxyHost" value="" /> -->
-  <!-- <property name="httpProxyPort" value="0" /> -->
+        <property name="httpProxyHost" value="" />
+        <property name="httpProxyPort" value="" />
         <property name="digestContent" value="false" />
   <!-- <property name="digestAlgorithm" value="sha1" /> -->
     </bean>

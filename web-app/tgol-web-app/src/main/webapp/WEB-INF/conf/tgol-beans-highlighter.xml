@@ -7,6 +7,8 @@
 
     <bean class="org.opens.tgol.util.TgolHighlighter" factory-method="getInstance">
         <property name="highlighterUrl" value="${highlighterLocation}" />
+        <property name="proxyHost" value="${proxyHost}"/>
+        <property name="proxyPort" value="${proxyPort}"/>
     </bean>
 
 </beans>

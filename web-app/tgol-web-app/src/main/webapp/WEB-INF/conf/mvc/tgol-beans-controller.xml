@@ -143,4 +143,10 @@
         </property>
     </bean>
 
+    <bean id="auditLauncherController" class="org.opens.tgol.controller.AuditLauncherController">
+        <property name="proxyHost" value="${proxyHost}"/>
+        <property name="proxyPort" value="${proxyPort}"/>
+        <property name="proxyExclusionUrl" value="${proxyExclusionUrl}"/>
+    </bean>
+
 </beans>
