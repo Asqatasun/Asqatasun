@@ -41,14 +41,14 @@
         <property name="elementName" value="property"/>
     </bean>
     
-    <bean id="proxyHostModifier" class="org.opens.tanaguru.crawler.util.HeritrixAttributeValueModifier">
+    <bean id="proxyHostModifier" class="org.opens.tanaguru.crawler.util.HeritrixAttributeValueModifierAndEraser">
         <property name="attributeName" value="name"/>
         <property name="attributeValue" value="httpProxyHost"/>
         <property name="idBeanParent" value="fetchHttp"/>
         <property name="elementName" value="property"/>
     </bean>
     
-    <bean id="proxyPortModifier" class="org.opens.tanaguru.crawler.util.HeritrixAttributeValueModifier">
+    <bean id="proxyPortModifier" class="org.opens.tanaguru.crawler.util.HeritrixAttributeValueModifierAndEraser">
         <property name="attributeName" value="name"/>
         <property name="attributeValue" value="httpProxyPort"/>
         <property name="idBeanParent" value="fetchHttp"/>
