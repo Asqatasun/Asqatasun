@@ -215,13 +215,13 @@ metadata.description=Basic crawl starting with useful defaults
 
     <bean id="fetchHttp" class="org.opens.tanaguru.crawler.framework.TanaguruFetchHTTP">
   <!-- <property name="maxLengthBytes" value="0" /> -->
-        <property name="timeoutSeconds" value="10" />
+        <property name="timeoutSeconds" value="5" />
   <!-- <property name="maxFetchKBSec" value="0" /> -->
   <!-- <property name="defaultEncoding" value="ISO-8859-1" /> -->
   <!-- <property name="shouldFetchBodyRule"> 
         <bean class="org.archive.modules.deciderules.AcceptDecideRule"/>
        </property> -->
-        <property name="soTimeoutMs" value="10000" />
+        <property name="soTimeoutMs" value="5000" />
   <!-- <property name="sendIfModifiedSince" value="true" /> -->
   <!-- <property name="sendIfNoneMatch" value="true" /> -->
   <!-- <property name="sendConnectionClose" value="true" /> -->
