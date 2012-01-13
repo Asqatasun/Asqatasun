@@ -1,6 +1,6 @@
                    ------------------------------
                              Tanaguru
-                            Version 1.0.0
+                            Version 1.4.2-RC1
                   ------------------------------
 
 1. Web Resources
@@ -41,6 +41,9 @@ that can be found at :
 
         http://www.tanaguru.org/content/installation
 
+4. Content of the version
+================
+#Feature 249 : Allow Tanaguru to be used behind a web proxy (https://dev.tanaguru.org/redmine/issues/249)
 
 Have Fun
 Tanaguru team
