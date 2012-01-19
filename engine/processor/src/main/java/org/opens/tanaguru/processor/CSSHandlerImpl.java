@@ -241,7 +241,7 @@ public class CSSHandlerImpl implements CSSHandler {
             case LexicalUnit.SAC_POINT:
                 return "pt";
             case LexicalUnit.SAC_CENTIMETER:
-                return "in";
+                return "cm";
             case LexicalUnit.SAC_PICA:
                 return "pc";
             default:
