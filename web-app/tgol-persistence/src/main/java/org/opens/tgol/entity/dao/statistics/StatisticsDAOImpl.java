@@ -638,8 +638,10 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
             queryString.append(CONTAINING_VALUE_CONDITION);
         }
         queryString.append(ORDER_BY_STR);
-        if (sortCriterion.equalsIgnoreCase("mark")) {
+        if (sortCriterion.equalsIgnoreCase("weightedMark")) {
             queryString.append("wrs.Mark");
+        } else if (sortCriterion.equalsIgnoreCase("rawMark")) {
+            queryString.append("wrs.Raw_Mark");
         } else if (sortCriterion.equalsIgnoreCase("httpStatusCode")) {
             queryString.append("wrs.Http_Status_Code");
         } else {
