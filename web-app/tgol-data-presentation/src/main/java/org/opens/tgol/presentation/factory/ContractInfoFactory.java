@@ -78,7 +78,6 @@ public class ContractInfoFactory {
         contractInfo = setLastActInfo(contract, contractInfo);
         
         contractInfo = setAuditResultTrend(contract, contractInfo);
-
         return contractInfo;
     }
 
@@ -92,6 +91,7 @@ public class ContractInfoFactory {
         contractInfo.setLabel(contract.getLabel());
         contractInfo.setUrl(contract.getUrl());
         contractInfo.setId(contract.getId().intValue());
+        contractInfo.setIsActRunning(!actDataService.getRunningActsByContract(contract).isEmpty());
         return contractInfo;
     }
 

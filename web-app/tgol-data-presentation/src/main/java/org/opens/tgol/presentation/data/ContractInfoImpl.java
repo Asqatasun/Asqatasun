@@ -107,4 +107,15 @@ public class ContractInfoImpl implements ContractInfo {
         this.siteAuditProgression = siteAuditProgression;
     }
 
+    private boolean isActRunning;
+    @Override
+    public boolean getIsActRunning() {
+        return isActRunning;
+    }
+
+    @Override
+    public void setIsActRunning(boolean isActRunning) {
+        this.isActRunning = isActRunning;
+    }
+
 }
