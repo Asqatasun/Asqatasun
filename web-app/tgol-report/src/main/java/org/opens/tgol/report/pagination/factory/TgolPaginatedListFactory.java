@@ -44,7 +44,7 @@ public final class TgolPaginatedListFactory {
     /*
      * Sort criterion values
      */
-    private String default2xxSortCriterion = "mark";
+    private String default2xxSortCriterion = "rawMark";
     /**
      *
      * @return
@@ -69,6 +69,15 @@ public final class TgolPaginatedListFactory {
      */
     public String getUrlSortCriterion() {
         return urlSortCriterion;
+    }
+    
+    private String weightedMarkSortCriterion = "weightedMark";
+    /**
+     *
+     * @return
+     */
+    public String getWeightedMarkCriterion() {
+        return weightedMarkSortCriterion;
     }
 
     /*
