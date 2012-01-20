@@ -44,7 +44,7 @@ var toggle_url = function(event) {
   // element, then apply the slideToggle effect
   // to toggle element to hide/display.
   $(this).toggleClass('expanded');
-  $('.toggle-url').slideToggle('slow');
+  $('.toggle-url').toggle('fast');
 };
 
 var toggle_parameters = function(event) {
@@ -53,7 +53,7 @@ var toggle_parameters = function(event) {
     // element, then apply the slideToggle effect
     // to toggle element to hide/display.
     $(this).toggleClass('expanded');
-    $('.toggle-parameters').slideToggle('slow');
+    $('.toggle-parameters').toggle('fast');
 };
 
 var toggle_display_parameters = function(event) {
@@ -62,7 +62,7 @@ var toggle_display_parameters = function(event) {
     // element, then apply the slideToggle effect
     // to toggle element to hide/display.
     $(this).toggleClass('expanded');
-    $('.toggle-display-parameters').slideToggle('slow');
+    $('.toggle-display-parameters').toggle('fast');
 };
 
 var remove_focus = function() {
