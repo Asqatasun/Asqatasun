@@ -155,4 +155,16 @@ public interface ContractInfo {
      */
     void setSiteAuditProgression(AuditProgressionEnum siteAuditProgression);
 
+    /**
+     *
+     * @return
+     *      whether an act is currently running on this contract
+     */
+    boolean getIsActRunning();
+
+    /**
+     * @param isActRunning
+     */
+    void setIsActRunning(boolean isActRunning);
+
 }
