@@ -23,6 +23,7 @@ package org.opens.tgol.entity.decorator.tanaguru.subject;
 
 import org.opens.tgol.util.HttpStatusCodeFamily;
 import java.util.Collection;
+import java.util.List;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -133,6 +134,20 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
     Collection<ProcessResult> getProcessResultListByWebResourceAndScope(
             WebResource webResource,
             Scope scope);
+    
+    /**
+     * 
+     * @param webResource
+     * @param scope
+     * @param themeList
+     * @param testSolutionList
+     * @return
+     */
+    Collection<ProcessResult> getProcessResultListByWebResourceAndScope(
+            WebResource webResource,
+            Scope scope,
+            String theme,
+            String testSolution);
 
 
     /**
