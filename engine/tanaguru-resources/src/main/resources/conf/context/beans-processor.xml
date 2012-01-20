@@ -57,20 +57,6 @@
             <ref local="languageDetector"/>
         </property>
         <property name="targetMethod">
-            <value>setUserKey</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <value>${user-key}</value>
-            </list>
-        </property>
-    </bean>
-
-    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject">
-            <ref local="languageDetector"/>
-        </property>
-        <property name="targetMethod">
             <value>setTextKey</value>
         </property>
         <property name="arguments">
@@ -85,11 +71,11 @@
             <ref local="languageDetector"/>
         </property>
         <property name="targetMethod">
-            <value>setRefererKey</value>
+            <value>setProxyHost</value>
         </property>
         <property name="arguments">
             <list>
-                <value>${referer-key}</value>
+                <value>${proxyHost}</value>
             </list>
         </property>
     </bean>
@@ -99,11 +85,11 @@
             <ref local="languageDetector"/>
         </property>
         <property name="targetMethod">
-            <value>setRefererValue</value>
+            <value>setProxyPort</value>
         </property>
         <property name="arguments">
             <list>
-                <value>${referer-value}</value>
+                <value>${proxyPort}</value>
             </list>
         </property>
     </bean>
