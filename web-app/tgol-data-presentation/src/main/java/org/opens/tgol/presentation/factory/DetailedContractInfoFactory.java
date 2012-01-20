@@ -27,6 +27,7 @@ import org.opens.tgol.entity.product.ScopeEnum;
 import org.opens.tgol.presentation.data.DetailedContractInfo;
 import org.opens.tgol.presentation.data.DetailedContractInfoImpl;
 import java.util.Collection;
+import org.opens.tgol.entity.product.Restriction;
 
 /**
  *
@@ -34,28 +35,14 @@ import java.util.Collection;
  */
 public final class DetailedContractInfoFactory extends ContractInfoFactory {
 
-    /**
-     * The maximum number of acts associated with each Contract.
-     */
-    private int nbMaxActInfo = 5;
-
-    public int getNbMaxActInfo() {
-        return nbMaxActInfo;
+    private String nbMaxActRestrictionCode;
+    public String getNbMaxActRestrictionCode() {
+        return nbMaxActRestrictionCode;
     }
 
-    public void setNbMaxActInfo(int nbMaxActInfo) {
-        this.nbMaxActInfo = nbMaxActInfo;
+    public void setNbMaxActRestrictionCode(String nbMaxActRestrictionCode) {
+        this.nbMaxActRestrictionCode = nbMaxActRestrictionCode;
     }
-
-//    private ContractActionHandler contractActionHandler;
-//    public ContractActionHandler getContractActionHandler() {
-//        return contractActionHandler;
-//    }
-//
-//    @Autowired
-//    public void setContractActionHandler(ContractActionHandler contractActionHandler) {
-//        this.contractActionHandler = contractActionHandler;
-//    }
 
     /**
      * The unique shared instance of DetailedContractInfoFactory
@@ -78,16 +65,9 @@ public final class DetailedContractInfoFactory extends ContractInfoFactory {
         DetailedContractInfo detailedContractInfo = new DetailedContractInfoImpl();
 
         detailedContractInfo = (DetailedContractInfoImpl) setBasicContractInfo(contract, detailedContractInfo);
-
         detailedContractInfo.setContractCreationDate(contract.getBeginDate());
-
         detailedContractInfo = (DetailedContractInfoImpl) setAuditResultTrend(contract, detailedContractInfo);
-
-//        detailedContractInfo.setContractActionList(contractActionHandler.getActionList(contract));
-//                setActionAccessibility(contract.getProduct(), detailedContractInfo);
-
         detailedContractInfo = (DetailedContractInfoImpl) setLastActInfo(contract, detailedContractInfo);
-
         detailedContractInfo = setNLastActInfo(contract, detailedContractInfo);
         
         return detailedContractInfo;
@@ -102,7 +82,8 @@ public final class DetailedContractInfoFactory extends ContractInfoFactory {
      */
     protected DetailedContractInfo setNLastActInfo(Contract contract, DetailedContractInfo detailedContractInfo) {
         int nb0fAct = getActDataService().getNumberOfAct(contract);
-        if (nb0fAct > nbMaxActInfo) {
+        int nbMaxActInfo = getMaxAuthorizedNumberOfActByContract(contract);
+        if (nbMaxActInfo > 0 && nb0fAct > nbMaxActInfo) {
             nb0fAct = nbMaxActInfo;
         }
         detailedContractInfo.setNumberOfAct(nb0fAct);
@@ -114,6 +95,15 @@ public final class DetailedContractInfoFactory extends ContractInfoFactory {
         detailedContractInfo.setSiteActInfoSet(ActInfoFactory.getInstance().getActInfoSet(
                 getActDataService().getActsByContract(contract, -1, 1, ScopeEnum.DOMAIN, true)));
         return detailedContractInfo;
+    }
+
+    private int getMaxAuthorizedNumberOfActByContract (Contract contract) {
+        for (Restriction restriction : contract.getRestrictionSet())  {
+            if (restriction.getRestrictionElement().getCode().equals(nbMaxActRestrictionCode)) {
+                return Integer.valueOf(restriction.getValue());
+            }
+        }
+        return -1;
     }
 
 }
