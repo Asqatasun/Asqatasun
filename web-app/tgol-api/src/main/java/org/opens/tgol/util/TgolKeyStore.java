@@ -92,6 +92,9 @@ public final class TgolKeyStore {
     public static final String EXPORT_AUDIT_FORMAT_ERROR_URL = "/export-audit-format-error";
     public static final String EXPORT_AUDIT_FORMAT_ERROR_CONTRACT_URL =
             CONTRACT_URL+EXPORT_AUDIT_FORMAT_ERROR_URL;
+    public static final String SOURCE_CODE_URL = "/source-code-page";
+    public static final String SOURCE_CODE_CONTRACT_URL =
+            CONTRACT_URL+SOURCE_CODE_URL;
 
     /* view name keys */
     public static final String DISPATCH_VIEW_REDIRECT_NAME = "dispatch-redirect";
@@ -146,13 +149,16 @@ public final class TgolKeyStore {
             "export-audit-format-error";
     public static final String EXPORT_AUDIT_FORMAT_ERROR_VIEW_REDIRECT_NAME =
             "export-audit-format-error-redirect";
+    public static final String SOURCE_CODE_PAGE_VIEW_NAME = "source-code-page";
 
     /* data model keys */
     public static final String AUDIT_SET_UP_COMMAND_KEY = "auditSetUpCommand";
     public static final String FORGOTTEN_PASSWORD_COMMAND_KEY = "forgottenPasswordCommand";
     public static final String CHANGE_PASSWORD_COMMAND_KEY = "changePasswordCommand";
+    public static final String AUDIT_RESULT_SORT_COMMAND_KEY="auditResultSortCommand";
     public static final String AUTHENTICATED_USER_KEY = "authenticatedUser";
     public static final String WEBRESOURCE_ID_KEY = "wr";
+    public static final String PARENT_WEBRESOURCE_ID_KEY = "pwr";
     public static final String EXPORT_FORMAT_KEY = "format";
     public static final String ACT_ID_KEY = "act";
     public static final String CONTRACT_ID_KEY = "cr";
@@ -169,7 +175,6 @@ public final class TgolKeyStore {
     public static final String LOCALE_KEY = "locale";
     public static final String TEST_RESULT_LIST_KEY ="testResultMap";
     public static final String SOURCE_CODE_KEY = "sourceCode";
-    public static final String RUNNING_ACT = "isActRunning";
     public static final String CONTRACT_ACTION_LIST_KEY = "contractActionList";
     public static final String RESULT_ACTION_LIST_KEY = "resultActionList";
     public static final String DISPLAY_RESULT_TREND_KEY = "displayResultTrend";
@@ -202,9 +207,11 @@ public final class TgolKeyStore {
     public static final String ERROR_PAGES_COUNT_KEY = "errorPagesCount";
     public static final String AUTHORIZED_PAGE_SIZE_KEY = "authorizedPageSize";
     public static final String AUTHORIZED_SORT_CRITERION_KEY = "authorizedSortCriterion";
+    public static final String AUTHORIZED_SCOPE_FOR_PAGE_LIST = "authorizedScopeForPageList";
     public static final String USER_SIGN_UP_COMMAND_KEY = "userSignUpCommand";
     public static final String IS_CONTRACT_EXPIRED_KEY = "isContractExpired";
     public static final String PARAMETERS_MAP_KEY = "parametersMap";
+    public static final String AUDIT_RESULT_SORT_FIELD_LIST_KEY="resultSortFormField";
     public static final String AUDIT_PARAM_SET_KEY = "auditParamSet";
     public static final String DEFAULT_PARAM_SET_KEY = "defaultParamSet";
     public static final String ACCOUNT_DATA_UPDATED_KEY = "accountDataUpdated";
@@ -214,6 +221,7 @@ public final class TgolKeyStore {
     public static final String INVALID_CHANGE_PASSWORD_URL_KEY = "invalidChangePasswordUrl";
     public static final String EXPANDED_KEY = "expanded";
     public static final String EXPANDED_VALUE = "expanded";
+    public static final String CONTRACT_NAME_KEY = "contractName";
 
     /* role keys */
     public static final String ROLE_GUEST_KEY = "ROLE_GUEST";
