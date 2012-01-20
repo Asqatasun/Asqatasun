@@ -1,10 +1,10 @@
 USE tanaguru;
 
-INSERT INTO `TGSI_ROLE` (`Id_Role`, `Role_Name`) VALUES
+INSERT IGNORE INTO `TGSI_ROLE` (`Id_Role`, `Role_Name`) VALUES
 (1, 'ROLE_GUEST'),
 (2, 'ROLE_USER');
 
-INSERT INTO `TGSI_ROLE` (`Id_Role`, `Role_Name`, `ROLE_Id_Role`) VALUES
+INSERT IGNORE INTO `TGSI_ROLE` (`Id_Role`, `Role_Name`, `ROLE_Id_Role`) VALUES
 (3, 'ROLE_ADMIN', '2');
 
 INSERT IGNORE INTO `TGSI_SCOPE` (`Id_Scope`, `Code`, `Label`) VALUES
@@ -14,7 +14,7 @@ INSERT IGNORE INTO `TGSI_SCOPE` (`Id_Scope`, `Code`, `Label`) VALUES
 (4, 'FILE', 'File'),
 (5, 'GROUPOFFILES', 'Group of files');
 
-INSERT INTO `TGSI_PRODUCT` (`Id_Product`, `Code`, `Label`, `SCOPE_Id_Scope`) VALUES
+INSERT IGNORE INTO `TGSI_PRODUCT` (`Id_Product`, `Code`, `Label`, `SCOPE_Id_Scope`) VALUES
 (1, 'AXS_PAGES', 'Audit Pages Axs', '1'),
 (2, 'AXS_DOMAIN', 'Audit Domain Axs', '2'),
 (3, 'AXS_READONLY', 'Audit Read Only Axs', '1'),
@@ -33,7 +33,8 @@ The period is expressed in seconds and the format is \"nb_of_acts/period\"'),
 (5, 'DEPTH', 'This restriction limits the depth of the crawl'),
 (6, 'MAX_DURATION', 'This restriction limits the duration of the crawl'),
 (7, 'EXCLUSION_REGEXP', 'This restriction applies an exclusion rule on crawled Urls'),
-(8, 'ACT_LIFETIME','This restriction determines the lifetime of each associated with the contract');
+(8, 'ACT_LIFETIME','This restriction determines the lifetime of each associated with the contract'),
+(9, 'NB_OF_AUDIT_TO_DISPLAY','This restriction determines the number of audit results that can be displayed on the contract page') ;
 
 INSERT IGNORE INTO `TGSI_RESTRICTION` (`Id_Restriction_Element`, `Restriction_Value`) VALUES
 (1, '5'),
