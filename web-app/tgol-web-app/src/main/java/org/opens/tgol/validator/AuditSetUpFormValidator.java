@@ -119,11 +119,15 @@ public class AuditSetUpFormValidator implements Validator {
         AuditSetUpFormField asuff;
         for (Map.Entry<String, String> entry : auditSetUpCommand.getAuditParameter().entrySet()) {
             asuff = auditSetUpFormFieldMap.get(entry.getKey());
-            if (!asuff.getFormField().checkParameters(entry.getValue())){
-                // the auditParameter[] key is due to object mapping of the form
-                // management of Spring mvc. Each field is mapped with a method
-                // of the mapped object. In this case, the returned object of the method
-                // is a map. 
+            try {
+                if (!asuff.getFormField().checkParameters(entry.getValue())){
+                    // the auditParameter[] key is due to object mapping of the form
+                    // management of Spring mvc. Each field is mapped with a method
+                    // of the mapped object. In this case, the returned object of the method
+                    // is a map.
+                    errors.rejectValue("auditParameter["+entry.getKey()+"]", asuff.getFormField().getErrorI18nKey());
+                }
+            }catch (NumberFormatException nfe) {
                 errors.rejectValue("auditParameter["+entry.getKey()+"]", asuff.getFormField().getErrorI18nKey());
             }
         }
@@ -141,7 +145,7 @@ public class AuditSetUpFormValidator implements Validator {
         Metadata metadata = new Metadata();
         MimeTypes mimeTypes = TikaConfig.getDefaultConfig().getMimeRepository();
         String mime = null;
-        
+
         for (int i=0;i<auditSetUpCommand.getFileInputList().length;i++ ) {
             try {
                 CommonsMultipartFile cmf = auditSetUpCommand.getFileInputList()[i];
