@@ -6,8 +6,8 @@
 
     <bean id="auditServiceThreadQueue" class="org.opens.tanaguru.service.AuditServiceThreadQueueImpl">
         <!-- audit limit parameters -->
-        <property name="pageAuditExecutionListMax" value="9"/>
-        <property name="siteAuditExecutionListMax" value="3"/>
+        <property name="pageAuditExecutionListMax" value="${maxSimultaneousAuditPage}"/>
+        <property name="siteAuditExecutionListMax" value="${maxSimultaneousAuditSite}"/>
         <!-- services injection -->
         <property name="crawlerService" ref="crawlerService"/>
 <!--        <property name="contentLoaderService" ref="contentLoaderService"/>-->
