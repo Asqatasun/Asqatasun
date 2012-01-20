@@ -10,19 +10,21 @@
  *   page-specific stuff
 */
 
-/*
- * Utils
- * ==============================================
-*/
-
-.clearfix {height:1%}
+/* =clearfix
+ -------------------------------------------------- */
+/* http://nicolasgallagher.com/micro-clearfix-hack/ */
+/* For modern browsers */
+.clearfix:before,
 .clearfix:after {
-    content:".";
-    height:0;
-    line-height:0;
-    display:block;
-    visibility:hidden;
+    content:"";
+    display:table;
+}
+.clearfix:after {
     clear:both;
+}
+/* For IE 6/7 (trigger hasLayout) */
+.clearfix {
+    zoom:1;
 }
 /* =awesome buttons
  -------------------------------------------------- */
@@ -89,27 +91,129 @@ input.large.awesome {
 .red.awesome:hover							{ background-color: #872300; }
 .magenta.awesome, .magenta.awesome:visited		{ background-color: #a9014b; }
 .magenta.awesome:hover							{ background-color: #630030; }
-.orange.awesome, .orange.awesome:visited		{ background-color: #ff5c00; }
+.orange.awesome, .orange.awesome:visited		
 .orange.awesome:hover							{ background-color: #d45500; }
 .yellow.awesome, .yellow.awesome:visited		{ background-color: #ffb515; }
 .yellow.awesome:hover							{ background-color: #fc9200; }
-
+.btn.orange, .btn.orange:visited{
+    background-color: #ff5c00;
+}
+btn.orange:hover {
+    background-color: #d45500;
+}
+/*
+ * Override Bootstap
+ * ==============================================
+ */
+.actions {
+    border-top : none;
+    background: none;
+    margin-bottom: 0;
+}
+.topbar {
+    height: 45px;
+    position: absolute;
+}
+.container-fluid {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+}
+.container{
+    background: #FFFFFF;
+    margin-top: 45px;
+    padding: 10px;
+}
+.well{
+    background-color: #FFFFFF;
+}
+#tgm-result-page .sidebar {
+    left: 100px;
+    position: fixed;
+    top: 100px;
+    background: #FFFFFF;
+    -moz-border-radius: 10px 10px 10px 10px;
+}
+.topbar .container {
+    background: #222222;
+    background-image: -moz-linear-gradient(center top , #333333, #222222);
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+}
+.topbar div > ul a, .nav a {
+    color:#FFFFFF;
+}
+.topbar div > ul a:hover, .nav a:hover  {
+    color:#BFBFBF;
+}
+.breadcrumb {}
+.breadcrumb .divider:after {
+    content: ">";
+}
+.help-block,
+form .clearfix.error .help-block{
+    color : #404040;
+    font-weight: normal;
+    font-size: 11px;
+}
+form .clearfix.error input, form .clearfix.error textarea {
+    color : #404040;
+}
+.alert-message.block-message .alert-actions {
+    margin-top: 25px;
+}
+li  {
+    color:#404040;
+}
+.inputs-list:first-child {
+    padding-top: 0;
+}
+element.style {
+    padding-left: 18px;
+}
+.inputs-list:first-child {
+    padding-top: 0;
+}
+.inputs-list {
+    padding-left: 18px;
+}
+.alert-message a {
+    color: #1A1A8B;
+    font-weight: normal;
+}
+.alert-message .alert-actions a {
+    color: #404040;
+    font-weight: normal;
+}
+.topbar div > ul.secondary-nav, .nav.secondary-nav {
+    margin-right : -15px;
+}
+.topbar h3 a, .topbar .brand {
+    margin-left: -5px;
+    padding: 6px 0 0 0 ;
+}
+input, textarea, select {
+    color : #404040;
+}
 /*
  * HTML tags
  * ==============================================
-*/
-
+ */
 a {color:#1A1A8B;}
 
 a img:link {text-decoration: none;}
 a:link img {text-decoration: none;}
 
-h1 {color:#8E0000; font-size: 182%;}
+h1 {
+    color:#8E0000;
+    font-size: 182%;
+/*    margin-left: 1em;*/
+}
 h2 {
     font-size: 161.6%;
     color: #333;
  }
-
 code {
     font-family: monospace;
     font-weight: bold;
@@ -125,19 +229,33 @@ caption {
 }
 
 table {
-    width: 96%;
+/*    width: 96%;
     margin-left: 2%;
-    margin-right: 2%;
+    margin-right: 2%;*/
 }
-
+legend {
+    font-size: 123.1%;
+    font-weight: bold;
+    padding-left: 10px;
+    margin-left : 15px;
+    padding-right: 10px;
+    padding-left : 10px;
+}
+fieldset {
+    border: 1px solid #D0D0D0;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    margin-top: 1em;
+}
+fieldset legend {
+    padding-left: 10px;
+}
+/*dl dt, dl dd {
+    display : inline-block;
+}*/
 /*
- * Classes
- * ==============================================
-*/
-
-/* Classes: grade
+ * Classes: grade
  * ------------------------------------------------- */
-
 .grade-a {
     font-weight: bold;
     color:#3BA94C;
@@ -166,48 +284,11 @@ table {
     color: #000000;
     font-size: small;
 }
+
 /* Classes: links
  * ------------------------------------------------- */
 .link-underline a {text-decoration: none;}
 .link-underline a:hover {text-decoration: underline;}
-
-/* Classes: errors
- * ------------------------------------------------- */
-.error {
-    font-weight: bold;
-    color: #ff0000;
-}
-
-.errorblock{
-    color: #000;
-    background-color: #FFFFEE;
-    border: 1px solid #ff2200;
-    margin:0px 0px 16px 0px;
-    padding: 8px;
-}
-
-.errorfield{
-    padding: 2px 0pt 0px;
-    width : 50%;
-    margin-bottom: 1em;
-    border: 2px inset #ff2200;
-}
-
-/* Classes: tables
- * ------------------------------------------------- */
-.data-table-list th {
-    font-size: 100%;
-    font-weight: bold;
-}
-
-.odd td,
-.row-odd td {
-    background-color: #F3F3F3;
-}
-.even td,
-.row-even td {
-    background-color: #FAFAFA;
-}
 
 /* Classes: misc
  * ------------------------------------------------- */
@@ -217,178 +298,275 @@ table {
     left:-19000px;
     position: absolute;
 }
-
+.mandatory {
+    color : red;
+}
 
 /*
  * Layout
  * ==============================================
-*/
-
+ */
 html {
-    background: #C0D8E1 url(../Images/background-gradient.png) repeat-x;
+/*    background: #C0D8E1 url(../Images/background-gradient.png) repeat-x;*/
+/*    background: #B8CEE5;*/
 }
-
-body.tgm {
-    margin:auto;
-    width: 960px;
+body {
+    background: url("../Images/background-gradient.png") repeat-x scroll 0 0 #C0D8E1;
 }
-
-#meta-border {
-    background: white;
-    border: solid 1px silver;
-    margin: 0.5em 0 5em;
-    padding: 0.5em 0.5em 2em;
-    -moz-border-radius:10px;
-    -webkit-border-radius:10px;
-    border-radius:10px;
+.no-bg-container {
+    background : none;
 }
-/* Content Margin Left */
-.cml {
-    margin-left: 1em;
-}
-/* Content Margin Right */
-.cmr {
-    margin-right: 1em;
-}
-/* Content Margin Top */
-.cmt {
-    margin-top: 1em;
-}
-
 /*
  * Header
  * ==============================================
-*/
+ */
 #hd {
     width: 100%;
     margin: 0.5em 0 0 0;
 }
-
-#login-box {
-    text-align: right;
-}
-
 #logout-icon {
     vertical-align: bottom;
     padding-right : 1em;
 }
-#sign-up {
-    padding-right : 1.5em;
-}
-
-/*
-* Body
-* ==============================================
-*/
 
 /*
  * Footer
  * ==============================================
-*/
-#ft {
-    width: 100%;
-    margin: 5em 0em 0.5em;
+ */
+footer {
+    padding-top: 0;
     text-align: center;
+    margin-bottom: 20px;
+    margin-top: 50px;
+    border-top : none;
+}
+#footer-upper {
+    background-color: #f8f8f8;
+    padding-top: 17px;
+}
+#footer-down {
+    margin-top: 17px;
 }
 
 /*
- * Page : contract
+ * Lang-box
  * ==============================================
-*/
-#act-list-table .col01 {
-    text-align: left;
-}
-#act-list-table .col02 { /* date */
-    padding-right: 2em;
-    text-align: left;
-    width: 9em;
-}
-#act-list-table .col03 { /* mark */
-    padding-right: 2em;
+ */
+#lang-box {
     text-align: right;
-    width: 2em;
+    margin-top: 0.5em;
 }
-#act-list-table .col04 { /* weighted mark */
-    padding-right: 2em;
-    text-align: right;
-    width: 3em;
+.lang-flag {
+    margin-top: 0.25em;
 }
-#act-list-table .col05 { /* scope */
-    padding-left: 2em;
-    text-align: left;
-    width: 8em;
+#logo-box {
+    margin-left: 0;
 }
-#act-list-table .col06 { /* status */
-    padding-left: 2em;
-    text-align: left;
-    width: 2em;
+/*
+ * Page: error-pages (template)
+ * ==============================================
+ */
+#error-result-meta li {
+    list-style: none;
 }
-#act-list-table .col07 { /* detailed result link */
-    padding-left: 2em;
-    text-align: left;
-    width: 7em;
+.main-logo {
+    text-align: center;
 }
+#error-loading-explanation {
+    margin-top: 2em;
+}
+
 /*
  * Page: login
  * ==============================================
-*/
-#login-user,
-#login-pwd,
-#login-submit {
-    margin: 1em 0;
+ */
+#tgm-login .container{
+    background: none;
+    margin-top : 0;
 }
-
-#login-user-label,
-#login-pwd-label {
+#tgm-login h1 {
+    margin-bottom: -5px;
+    margin-top: 70px;
+}
+#tgm-login footer {
+    margin-top: 120px
+}
+#login-main-row{
+    margin-top: 2em;
+}
+#login-main-row .alert-message.error {
+    padding: 4px;
+    width: 270px;
+}
+#login-form .actions {
+    margin-top: 0;
+    padding-top: 0;
+}
+#login-form fieldset {
+    margin: 0;
+    padding: 0;
+}
+#login-form .help-block {
+    width: 270px;
     text-align: right;
-    vertical-align: middle;
 }
-
-#login-user-input div,
-#login-pwd-input div {
-    padding-left: 0.3em;
+#login-form form {
+    padding-left: 0;
 }
-
-#login-user-input input,
-#login-pwd-input input {
-    width: 15em;
+#login-demo {
+    margin-top : 3em;
+    margin-bottom: 7em;
+    width : 255px;
 }
-
-#login-submit-button {
-    margin: 1em 0 0 46em
+#login-demo p {
+    font-weight: bold;
 }
-#login-box img {
-    vertical-align: middle;
+#login-sign-up {
+    width: 270px;
+}
+#login-demo input {
+    width: 100%;
+}
+#login-demo-form {
+    margin : 2em;
+}
+#login-sign-up a{
+    text-align: center;
+    width: 100%;
+    padding-right: 0;
+}
+#login-logo {
+    margin-bottom: 3em;
+}
+#login-submit input{
+    width : 30%;
+}
+/*
+ * Page: sign-up
+ * ==============================================
+ */
+ #tgm-sign-up .container {
+     margin-top: 0;
+     background: none;
+}
+.sign-up-field {
+    margin-bottom: 1em;
+}
+#sign-up-submit input{
+    width : 30%;
 }
 
 /*
- * Page: home user
+ * Page: sign-up-confirmation
  * ==============================================
-*/
-.one-project {
-    width: 90%;
-    margin: auto;
+ */
+#tgm-sign-up-confirmation .container{
+    background: none;
+    margin-top : 0;
+}
+
+/*
+ * Page: forgotten-password
+ * ==============================================
+ */
+#tgm-forgotten-password .container{
+    background: none;
+    margin-top : 0;
+}
+#forgotten-password-submit {
+    padding-top: 0;
+}
+#forgotten-password-form {
+    margin-top: 1em;
+}
+#forgotten-password-field{
     margin-bottom: 1em;
-    padding-bottom: 0.3em;
+}
+#forgotten-password-email {
+    margin-bottom: 1em;
+}
+#forgotten-password-label {
+    font-size: 123.1%;
+    font-weight: bold;
+    float : none;
+}
+#forgotten-password-field input {
+    margin-top: 1em;
+}
+#forgotten-password-submit input[type=submit] {
+    width: 150px;
+    margin-right: 1em;
+}
+#forgotten-password-form-general-error{
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+/*
+ * Page: forgotten-password-confirmation
+ * ==============================================
+ */
+#tgm-forgotten-password-confirmation .container{
+    background: none;
+    margin-top : 0;
+}
+
+/*
+ * Page: account-settings
+ * ==============================================
+ */
+#tgm-account-settings .container {}
+.account-settings-field {
+    margin-bottom: 1em;
+}
+.account-settings-field input {
+    width : 60%;
+}
+#account-settings-form fieldset {
+    margin-bottom: 0;
+}
+#change-password-link {
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+/*
+ * Page: change-password
+ * ==============================================
+ */
+#tgm-change-password .container {}
+.change-password-field {
+    margin-bottom: 1em;
+}
+#change-password-form-submit {
+    padding-top: 0;
+}
+.not-authentified {
+    background: none;
+    margin-top : 0;
+}
+/*
+ * Page: home (contract-list)
+ * ==============================================
+ */
+#tgm-home .container {}
+.one-project {
+    margin-top: 1em;
+    padding-bottom: 1em;
     border-bottom: 1px dotted silver;
 }
-
-.project-screenshot {
-    float: left;
-    margin: 0 15px 0 0;
+.one-project-last {
+    margin-top: 1em;
+    padding-bottom: 1em;
 }
-
-.project-name {
-    margin:0 0 0.5em 0;
-}
-
 .project-score {
     font-size: 300%;
     font-weight: bold;
     text-align: right;
     margin-bottom: 0.3em;
+    margin-top: 0.3em;
 }
-
 .project-fail {
     font-size: 182%;
     font-weight: bold;
@@ -396,54 +574,30 @@ body.tgm {
     margin-bottom: 0.3em;
     margin-top: 0.3em;
 }
-
-.one-project .project-score {
-    vertical-align: bottom;
-}
-
 .project-status.running {
     padding-left: 20px;
     background: 0 50% url(../Images/gears-running.png) no-repeat;
 }
-.project-parameters {
-    margin-top: 0.5em;
-}
-.project-parameters-label {
-    font-weight: normal;
-    margin-left: 2em;
-    margin-bottom: 0em;
-    margin-top: 0.5em;
-}
-.project-parameters-value {
-    margin-left: 0em;
-    font-weight: bold;
+.running-audit {
+    margin-left: 1em;
+    vertical-align: middle;
 }
 /*
- * Page: panel (my projects)
+ * Page : contract
  * ==============================================
-*/
-.my-project-layout {
-    width:90%;
-    margin:auto;
-}
+ */
+#tgm-project .container {}
 #audit-actions {
-    margin-top: 1em;
+    margin-top : 1em;
 }
 #audit-actions td {
+    border-top: medium none;
     width: 12em;
     vertical-align: top;
-}
-.project-meta-info{
-    padding-left : 4em;
-}
-.action-button{
-    display: inline-block;
-    text-align: left;
 }
 #audit-actions a:hover img {
     text-decoration: none;
 }
-
 #audit-actions img {
     border: solid 1px silver;
     -moz-border-radius:5px;
@@ -463,49 +617,167 @@ body.tgm {
         rgb(228,228,228) 61%,
         rgb(251,251,251) 81%
         );
-
-
 }
-
-/*
- * Page: audit 10 pages
- * ==============================================
-*/
-.url-label, .file-label {
+.action-button{
+    display: inline-block;
+    text-align: left;
+}
+#contract-last-audit {
+    margin-bottom: 1em;
+}
+#act-list-table .col01 {
+    text-align: left;
+}
+#act-list-table .col02 { /* date */
+    text-align: left;
+}
+#act-list-table .col03 { /* mark */
     text-align: right;
-    margin-bottom: 0.7em;
-    padding-right: 1em;
-    padding-top: 0.3em;
 }
-.url-input {}
-input.url-field {
-    width : 50%;
+#act-list-table .col04 { /* weighted mark */
+    text-align: right;
 }
-input.file-input {
-    width : 50%;
+#act-list-table .col05 { /* scope */
+    text-align: left;
 }
-#input-submit{
-     margin-top : 1em;
+#act-list-table .col06 { /* status */
+    text-align: left;
 }
-#tgm-audit-level{
-    margin: 2em 0 0 0;
-}
-/*
- * Meta results (=result-meta)
- * -------------------------------------------------
-*/
-.theme {
-    border-top: 1px solid silver;
-    padding-top: 1em;
+#act-list-table .col07 { /* detailed result link */
+    text-align: left;
 }
 
 /*
- * Synthesis results
- * ----------------------------------------------
-*/
-#synthesis-result .thumbnail {
-    padding : 0 0 0 0em;
+ * Page : set-up template
+ * ==============================================
+ */
+#audit-set-up-form {}
+.toggle-master-url, .toggle-master-parameters,.toggle-master-display-parameters {
+    background-image: url(../Images/plus.png);
+    background-repeat: no-repeat;
+}
+.toggle-master-url, .toggle-master-display-parameters {
+    padding-left: 2.5em;
+    background-position: 1px;
+}
+.toggle-master-parameters{
+    padding-left: 1.5em;
+    background-position: 0px 1px;
+}
+#audit-set-up-form input[type="file"] {
+    margin-right: 6em;
+}
+#audit-set-up-form .alert-message {
+    margin-left : 10px;
+}
+.input .alert-message.error {
+    display :inline-block;
+    margin-top : 0.5em;
+    margin-bottom : 0;
+}
+input[type="text"]:focus{
+    -moz-appearance: textfield;
+    color: black;
+    background-color: #ffffe1;
+}
+.expanded {
+  background-image: url(../Images/minus.png);
+}
+.parameters-legend {
+    font-size: 123.1%;
+    font-weight: bold;
+    padding-left: 10px;
+    margin-left : 15px;
+    padding-right: 10px;
+    padding-left : 10px;
+}
+.decorated-fieldset {
+    border: 1px solid #D0D0D0;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    margin-top: 1em;
+}
+.fieldset-info{
+    padding-top: 0em;
+}
+.file-input .alert-message {
+    margin-left: 2em;
+}
+#audit-set-up-form-submit {}
+/*
+ * Page : audit-page-set-up
+ * ==============================================
+ */
+#tgm-page-set-up .container{}
+#tgm-page-set-up .alert-message {}
+
+/*
+ * Page : audit-site-set-up
+ * ==============================================
+ */
+#tgm-site-set-up .container{}
+#tgm-site-set-up .alert-message {}
+
+/*
+ * Page : audit-upload-set-up
+ * ==============================================
+ */
+#tgm-upload-page-set-up .container{}
+#tgm-upload-page-set-up .alert-message {}
+
+/*
+ * Page : pie-chart (graph template)
+ * ==============================================
+ */
+#tgm-piechart {
+    margin: -1.5em 0 0;
     text-align: center;
+    width: 100%;
+}
+#tgm-piechart2 {
+    margin: -30px 0 0 0;
+    text-align: center;
+}
+#result-synthetized-text {
+    margin: 2em  0 0;
+    text-align: center;
+    border-collapse: separate;
+}
+#result-synthetized-text .col01 {
+    text-align: left;
+    vertical-align: middle;
+    font-weight: bold;
+}
+#result-synthetized-text .col02 {
+    text-align: right;
+}
+.chart-object {
+    border: medium none;
+    color: black;
+}
+
+/*
+ * Page : synthesis (template)
+ * ==============================================
+ */
+ #synthesis-action-list {
+     margin-left: 0;
+     margin-top: 2em;
+}
+#synthesis-action-list li{
+    list-style: none;
+    margin-top: 1em;
+    margin-left : 0;
+    width : 140px;
+}
+.audit-nb-of-pages {
+    font-size: 150%;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 0.5em;
+    margin-top: 1em;
+    vertical-align: middle;
 }
 .audit-score {
     font-size: 400%;
@@ -514,67 +786,70 @@ input.file-input {
     margin-bottom: 0.3em;
     vertical-align: bottom;
 }
-.weighted-mark-label {
-    font-size: 25%;
-    color : black;
+.passed {
+    background: url(http://asset.open-s.com/Corporate/TGOL/Images/ico-passed.png) 5px 50% no-repeat;
+    padding-left: 2em;
+    color:green;
 }
-.audit-weighted-score {
-    font-size: 33%;
+.failed {
+    background: url(http://asset.open-s.com/Corporate/TGOL/Images/ico-failed.png) 5px 50% no-repeat;
+    padding-left: 2em;
+    color:red;
 }
-.audit-nb-of-pages {
-    font-size: 150%;
-    font-weight: bold;
-    text-align: left;
-    margin-bottom: 0.3em;
-    vertical-align: middle;
+.nmi {
+    background: url(http://asset.open-s.com/Corporate/TGOL/Images/ico-nmi.png) 5px 50% no-repeat;
+/*    background: url(http://asset.open-s.com/Corporate/TGOL/Images/ico-nmi-2.ico) 5px 50% no-repeat;*/
+    padding-left: 2em;
+/*    color:#F89406;*/
+    color : #3B57BD;
 }
-#result-synthetized-text .col01 {
-    padding-top: 0.2em;
-    width: 50%;
-    text-align: left;
-    vertical-align: middle;
+.na {
+    padding-left: 2em;
+    color: #6e6e6e;
 }
-#result-synthetized-text .col02 {
-    padding-top : 0.2em;
-    padding-right : 8em;
+#audit-result-synthesis-actions {
     text-align: right;
 }
-#tgm-piechart {
-    width : 100%;
-    margin: -1.5em 0 0 0;
-    text-align: center;
+#audit-result-synthesis-actions li {
+    list-style: none;
 }
-#graphical-synthesis-result{
-    margin : 2em 0 0 0;
+#audit-result-synthesis-actions img {
+    vertical-align: middle;
 }
-#result-synthetized-text {
-    text-align: center;
-    width : 100%;
-    margin: -1.5em 0 0 3.5em;
+#synthesis-meta-data {
+/*    margin-top: -5px;*/
 }
-#result-synthetized-text th td{
-    padding: 0.2em 0 0 0;
+#synthesis-score {
+/*    text-align: right;
+    margin-top: 0.9em;*/
 }
-
-#synthesis-result .project-fail {
-    text-align: left;
+.project-parameters {
+    margin-top: 1em;
 }
-
+.project-parameters li{
+    list-style: none;
+}
+.project-parameters ul{
+    margin-left: 0;
+}
+.project-parameters-label {
+    font-weight : bold;
+}
+.project-parameters-value {
+    font-weight : normal;
+}
+.option-console {
+    margin-top : 1em;
+    margin-bottom : 0;
+}
 /*
  * Page : synthesis-site
  * ==============================================
-*/
-#synthesis-action-list li{
-    list-style: none;
-}
+ */
+
 #tgm-synthesis-site h2 {
     border-bottom: 1px dotted silver;
-}
-.top5-table .row-odd td {
-    background-color: #F3F3F3;
-}
-.top5-table .row-even td {
-    background-color: #FAFAFA;
+    margin-bottom: 1em;
 }
 #top5-failed-url-by-test td[headers=nbOfInvalidTestTop5FailedUrlByTest],
 #top5-failed-url-by-test th[id=nbOfInvalidTestTop5FailedUrlByTest],
@@ -623,97 +898,305 @@ input.file-input {
 #top5-failed-test-by-page .col03 {
     text-align: left;
 }
+#synthesis-result .project-fail {
+    text-align: left;
+}
+
+/*
+ * Page : score (template)
+ * ----------------------------------------------
+ */
+.weighted-mark-label {
+    color : black;
+}
+#score-formula {
+    color : black;
+}
+
+/*
+ * Page : page-list (template)
+ * ----------------------------------------------
+ */
+#page-list-table th {
+    text-align: center;
+}
+#page-list-table td[headers=pieRepartition] {
+    text-align: center;
+}
+#page-list-table td[headers=mark] {
+    text-align: right;
+}
+#page-list-table object { border:0; }
+
+#page-list-table td[headers=url] {
+    word-wrap: break-word;
+    max-width:750px;
+}
+#page-list-table .col01 {
+    text-align: left;
+}
+#page-list-table .col02 {
+    text-align: right;
+    width: 10em;
+}
+#page-list-table .col03 { /* nb of elements */
+    text-align: right;
+    width: 10em;
+}
+
+/*
+ * Page : page-list
+ * ----------------------------------------------
+ */
+#tgm-page-list {}
+#tgm-page-list h2 {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+/*
+ * Page : page-list-xxx
+ * ----------------------------------------------
+ */
+#tgm-page-list-f2xx,
+#tgm-page-list-f3xx,
+#tgm-page-list-f4xx {}
+.result-items{
+    font-size: 123.1%;
+    padding-bottom: 1em;
+}
+th.order1:after {
+/*    content: '  \2191';  unicode equivalent to &uarr; See http://blog.csdn.net/cheng5128/archive/2009/07/28/4613813.aspx */
+}
+
+th.order2:after {
+/*    content: '  \2193';  unicode equivalent to &darr; http://blog.csdn.net/cheng5128/archive/2009/07/28/4613813.aspx */
+}
+#display-options-update input[type=submit] {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+#display-results-options-update {
+    padding-top : 0;
+}
+#page-list-f2xx .col01,
+#page-list-f3xx .col01,
+#page-list-f4xx .col01{ /* URL */
+    text-align: left;
+    word-wrap: break-word;
+    max-width: 750px;
+}
+#page-list-f2xx .col02{ /* Mark */
+    text-align: right;
+    width: 10em;
+}
+#page-list-f2xx .col03{ /* Weighted Mark */
+    text-align: right;
+    width: 10em;
+}
+#page-list-f2xx .col04{ /* link to detailed result */
+    text-align: right;
+    width: 10em;
+}
+#page-list-f3xx .col02,
+#page-list-f4xx .col02{ /* Http Status Code */
+    text-align: right;
+    width: 10em;
+}
+.page-links{
+    font-size: 123.1%;
+    text-align: center;
+    padding-bottom: 1em;
+}
+#pagination-empty-list {
+    font-size: 123.1%;
+    text-align: left;
+    padding-bottom: 1em;
+}
+
+.pagination-prev {
+    font-size: 123.1%;
+    text-align: center;
+    padding-bottom: 1em;
+    padding-right: 1em;
+}
+.pagination-next {
+    font-size: 123.1%;
+    text-align: center;
+    padding-bottom: 1em;
+    padding-left: 1em;
+    position : absolute;
+    width: auto;
+}
+#display-options-form fieldset {
+/*    border: 1px solid #D0D0D0;*/
+}
+/* threshold :
+< 1280px: display options as row under the h1
+> 1280px: display options on the right
+
+/* --------------------------------------------------------------------
+	Moins de 480px (téléphones)
+-------------------------------------------------------------------- */
+@media only screen and (min-width:1680px) {
+    .option-console {
+        position: fixed;
+        top : 45px;
+        right : 0;
+        -moz-border-radius: 4px 4px 4px 4px;
+        -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+        background-color: #F5F5F5;
+        background-image: -moz-linear-gradient(center top , #FFFFFF, #F5F5F5);
+    }
+    .option-console {
+        margin-top : 0;
+    }
+    .option-console fieldset {
+        border : none;
+        margin-bottom: 0;
+    }
+    .option-console legend {
+        margin-bottom : 10px;
+    }
+    .option-console input,
+    .option-console textarea,
+    .option-console select {
+        width: 140px;
+    }
+    .option-console .actions {
+        padding-top : 0;
+        margin-top : 0;
+        margin-bottom: 0;
+    }
+    .option-console .row {
+        margin-left: 0;
+    }
+    .option-console .row > .offset1 {
+        margin-left : 20px;
+    }
+    .option-console .row > [class*="span"] {
+        display : block;
+        float : none;
+        margin-left: 0;
+        width : none;
+    }
+    .option-console .span1,
+    .option-console .span2,
+    .option-console .span3,
+    .option-console .span4,
+    .option-console .span5,
+    .option-console .span6,
+    .option-console .span7,
+    .option-console .span8,
+    .option-console .span9 {
+        width : auto;
+    }
+}
+/*@media only screen and (min-width:1920px) {
+    #display-results-options {
+        position: fixed;
+        top : 60px;
+        right : 80px;
+        background: #FFFFFF;
+        -moz-border-radius: 10px 10px 10px 10px;
+    }
+}*/
+
 /*
  * Page: audit results -> one page
  * ==============================================
  */
-#synthesis-result {
-    margin: 0;
-}
 #result-detailed th {
     background-color: rgb(255,255,204);
 }
-.passed {
-    background: url(http://asset.open-s.com/Corporate/TGOL/Images/ico-passed.png) 5px 50% no-repeat;
-    padding-left: 2em;
-    color:green;
-}
-.failed {
-    background: url(http://asset.open-s.com/Corporate/TGOL/Images/ico-failed.png) 5px 50% no-repeat;
-    padding-left: 2em;
-    color:red;
-}
-.nmi {
-    background: url(http://asset.open-s.com/Corporate/TGOL/Images/ico-nmi.png) 5px 50% no-repeat;
-    padding-left: 2em;
-}
-.na {
-    padding-left: 2em;
-    color: #6e6e6e;
-}
-#score-formula {
-    font-size: 25%;
-    font-weight: normal;
-}
 
 /*
- * Actions for the audit
+ * page : result-page
  * ----------------------------------------------
-*/
-#audit-result-actions {
-    text-align: right;
+ */
+#audit-result-menu-actions {
+    text-align: left;
+    margin-left: 20px;
 }
-#audit-result-actions li {
+audit-result-menu-actions a {
+    margin-right: 1em;
+}
+#audit-result-menu-actions li {
     list-style: none;
 }
-#audit-result-actions img {vertical-align: middle;}
+#audit-result-menu-actions img {
+    vertical-align: middle;
+}
 
 /*
- * tables with audit results
+ * page : detailed-result (template)
  * ----------------------------------------------
-*/
-.result-table .row-odd td {
+ */
+.theme {
+    border-top: 1px solid silver;
+    margin: 1em 0;
+    padding-top: 0.5em;
+}
+.rule-general-result,
+.rule-general-result-last{
+    margin-top: 0;
+    padding-bottom: 1em;
+    padding-top: 0.5em;
+    line-height: 18px;
+    vertical-align: top;
+}
+.rule-general-result-last{
+    border-bottom: none;
+    margin-bottom: 1em;
+}
+.rule-general-result-last select,
+.rule-general-result select{
+    width: 140px;
+}
+#audit-result-menu-actions ul {
+    margin : 0;
+}
+.odd {
     background-color: #F3F3F3;
 }
-.result-table .row-even td {
+.even {
     background-color: #FAFAFA;
 }
-.result-table h5 {
-    font-size: 100%;
-    font-weight: bold;
+.zebra-striped .odd {
+    background-color: transparent;
+}
+.zebra-striped .even {
+    background-color: transparent;
+}
+#synthesis {
+    margin-bottom: 1em;
+}
+#work-done {
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 .result-table process-remarks {
     font-size: 110%;
 }
 .rule-id {
-    width: 5%;
     text-align: center;
 }
 .rule-label {}
 .rule-label ul {
     margin: 0.25em 0 0.25em 3em;
 }
-.rule-result {
-    width: 15%;
-}
-.rule-failed-count {
-    width: 12%;
-}
+.rule-result {}
+.rule-failed-count {}
 .rule-level {
-    width: 7%;
     text-align: center;
 }
-.rule-details {
-    width: 7%;
-}
+.rule-details {}
 .audit-parameters-compact, .test-result-compact {
     cursor: pointer;
 }
-
-/*
- * tables presenting excerpts for detailed results
- * ----------------------------------------------
-*/
+.test-result-detailed {
+    margin-bottom: 3em;
+}
 .test-result-detailed h5 {
     margin: 0.5em 0;
 }
@@ -722,10 +1205,10 @@ input.file-input {
     margin-left: 2em;
 }
 .test-result-detailed table th, .test-result-detailed table td {
-    border-bottom: dotted 1px gray;
+/*    border-bottom: dotted 1px gray;*/
 }
 .test-result-detailed table th {
-    background-color: #cff;
+/*    background-color: #cff;*/
 }
 .test-result-detailed td {
     /* selecteur pas assez précis pour specifier le padding*/
@@ -751,28 +1234,6 @@ input.file-input {
 #site-audit-history {
     margin-top:1.5em;
 }
-
-/*
- *tables presenting excepts for detailed results (by page)
- * --------------------------------------------------
- */
-#page-list-table th {
-    text-align: center;
-}
-#page-list-table td[headers=pieRepartition] {
-    text-align: center;
-}
-#page-list-table td[headers=mark] {
-    text-align: right;
-}
-#page-list-table .row-odd td {
-    background-color: #F3F3F3;
-}
-#page-list-table .row-even td {
-    background-color: #FAFAFA;
-}
-
-#page-list-table object { border:0; }
 
 /*
  * tables presenting excerpts for detailed results (by rule)
@@ -912,247 +1373,4 @@ input.file-input {
 }
 .html4strict span.xtra { 
     display:block;
-}
-
-/*
- * Page: listing all tested pages (scope=site)
- * body id=tgm-page-list
- * ==============================================
-*/
-#page-list-table td[headers=url] {
-    word-wrap: break-word;
-    max-width:750px;
-}
-#page-list-table .col01 {
-    text-align: left;
-}
-#page-list-table .col02 { 
-    text-align: right;
-    width: 10em;
-}
-#page-list-table .col03 { /* nb of elements */
-    text-align: right;
-    width: 10em;
-}
-
-/*
- * Page: listing of pages 2xx
- * body id=tgm-page-list-2xx
- * ==============================================
-*/
-th.order1:after {
-/*    content: '  \2191';  unicode equivalent to &uarr; See http://blog.csdn.net/cheng5128/archive/2009/07/28/4613813.aspx */
-}
-
-th.order2:after {
-/*    content: '  \2193';  unicode equivalent to &darr; http://blog.csdn.net/cheng5128/archive/2009/07/28/4613813.aspx */
-}
-
-#display-options fieldset {
-    border: solid 1px #d0d0d0;
-    padding: 0.5em;
-    padding-top: 1em;
-}
-#display-options-sort-url,
-#display-options-page-size,
-#display-options-sort {
-    float: left;
-    clear: both;
-    margin: 0 0 0.5em 0;
-}
-#display-options-update {
-    float: right;
-    margin: 0 0 0.5em 0;
-}
-#display-options-update input[type=submit] {
-    width: 12em;
-}
-
-#page-list-2xx .col01,
-#page-list-3xx .col01,
-#page-list-4xx .col01{ /* URL */
-    text-align: left;
-    word-wrap: break-word;
-    max-width: 750px;
-}
-#page-list-2xx .col02{ /* Mark */
-    text-align: right;
-    width: 10em;
-}
-#page-list-2xx .col03{ /* Weighted Mark */
-    text-align: right;
-    width: 10em;
-}
-#page-list-2xx .col04{ /* link to detailed result */
-    text-align: right;
-    width: 10em;
-}
-#page-list-3xx .col02,
-#page-list-4xx .col02{ /* Http Status Code */
-    text-align: right;
-    width: 10em;
-}
-.page-links{
-    font-size: 123.1%;
-    text-align: center;
-    padding-bottom: 1em;
-}
-#pagination-empty-list {
-    font-size: 123.1%;
-    text-align: left;
-    padding-bottom: 1em;
-}
-
-.pagination-prev {
-    font-size: 123.1%;
-    text-align: center;
-    padding-bottom: 1em;
-    padding-right: 1em;
-}
-.pagination-next {
-    font-size: 123.1%;
-    text-align: center;
-    padding-bottom: 1em;
-    padding-left: 1em;
-}
-.result-items{
-    font-size: 123.1%;
-    padding-bottom: 1em;
-}
-/*
- * Page: Sign up page & account setting page
- * body id=tgm-sign-up-page & id=tgm-account-settings-page
- * ==============================================
-*/
-.mandatory {
-    color:red;
-}
-#mandatory-elements-message{
-    font-size: 85%;
-    padding-bottom: 2em;
-    padding-left: 1em;
-}
-.sign-up-field,
-.account-settings-field,
-.forgotten-password-field,
-.change-password-field {
-    width : 100%;
-    margin-bottom: 1em;
-}
-.sign-up-field input,
-.account-settings-field input,
-.change-password-field input{
-    width : 40%;
-}
-.forgotten-password-field input {
-    width : 100%;
-    margin-top: 1em;
-}
-.sign-up-field .errorfield,
-.account-settings-field .errorfield,
-.forgotten-password-field .errorfield,
-.change-password-field .errorfield{
-    margin-bottom: 0em;
-}
-.sign-up-label,
-.account-settings-label,
-.change-password-label{
-    text-align: right;
-    padding-right: 2em;
-}
-.forgotten-password-label {
-    text-align: left;
-    font-size: 123.1%;
-    font-weight: bold;
-}
-.sign-up-rule,
-.account-settings-rule,
-.forgotten-password-rule,
-.change-password-rule{
-    font-size: 77%;
-    font-weight: normal;
-}
-#forgottenPasswordCommand{
-    margin-top: 2em;
-}
-.forgotten-password-buttons{
-    text-align: center;
-}
-.forgotten-password-buttons #input-cancel {
-    margin-left: 2em;
-}
-.forgotten-password-buttons #input-submit {
-    margin-right: 2em;
-}
-/*
- * Page: audit-set-up page
- * body id=tgm-audit-set-up-page
- * ==============================================
-*/
-.parameters-legend{
-    font-size: 123.1%;
-    font-weight: bold;
-}
-#audit-set-up fieldset {
-    border: 1px solid #D0D0D0;
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: 0.5em;
-}
-.fieldset-info{
-    padding-top: 1em;
-}
-.set-up-label {
-    text-align: right;
-    padding-right: 1em;
-    padding-top: 0.3em;
-}
-.set-up-value {
-    width : 100%;
-    margin-bottom: 1em;
-}
-.set-up-value input{
-    width : 60%;
-}
-.set-up-value .errorfield{
-    margin-bottom: 0;
-}
-.set-up-explanation {
-    font-size: 77%;
-}
-.set-up-rule{
-    font-size: 77%;
-}
-.toggle-master-url, .toggle-master-parameters,.toggle-master-display-parameters {
-  background-image: url(../Images/plus.png);
-  background-repeat: no-repeat;
-}
-
-.toggle-master-url, .toggle-master-display-parameters {
-    padding-left: 2.5em;
-    background-position: 1px;
-}
-
-.toggle-master-parameters{
-    padding-left: 1.5em;
-    background-position: 0px 1px;
-}
-
-input[type="text"]:focus{
-    -moz-appearance: textfield;
-    color: black;
-    background-color: #ffffe1;
-}
-.message-positif {
-	padding: 1em;
-	text-align: center;
-	font-size: 100%; /* 16px */
-	font-weight: bold;
-	color:black;
-	background: #ffd;
-	border: solid 1px #ff0;
-}
-
-.expanded {
-  background-image: url(../Images/minus.png);
 }
