@@ -124,26 +124,34 @@ public final class TestResultFactory {
         }
         return testResult;
     }
-    
-    /**
-     * This methods prepare test results to be displayed
-     * @param webresource
-     * @param scope
-     * @param hasSourceCodeADoctype
-     * @param hasResultDetails
-     * @return
-     */
+
     public Map<Theme, List<TestResult>> getTestResultSortedByThemeMap(
             WebResource webresource,
             Scope scope,
+            boolean hasSourceCodeWithDoctype,
+            boolean hasResultDetails,
+            String theme,
+            String testSolution){
+        List<ProcessResult> netResultList = (List<ProcessResult>)
+                webResourceDataService.
+                getProcessResultListByWebResourceAndScope(webresource, scope, theme, testSolution);
+        return prepareThemeResultMap(netResultList, hasSourceCodeWithDoctype, hasResultDetails);
+    }
+
+    /**
+     * 
+     * @param netResultList
+     * @param hasSourceCodeWithDoctype
+     * @param hasResultDetails
+     * @return
+     */
+    private Map<Theme, List<TestResult>> prepareThemeResultMap(
+            List<ProcessResult> netResultList,
             boolean hasSourceCodeWithDoctype,
             boolean hasResultDetails) {
         // Map that associates a list of results with a theme
         Map<Theme, List<TestResult>> testResultMap =
                 new LinkedHashMap<Theme, List<TestResult>>();
-        List<ProcessResult> netResultList = (List<ProcessResult>)
-                webResourceDataService.
-                getProcessResultListByWebResourceAndScope(webresource, scope);
         sortCollection(netResultList);
         for (ProcessResult processResult : netResultList) {
             if (processResult instanceof DefiniteResult) {
@@ -163,6 +171,25 @@ public final class TestResultFactory {
             }
         }
         return testResultMap;
+    }
+
+    /**
+     * This methods prepare test results to be displayed
+     * @param webresource
+     * @param scope
+     * @param hasSourceCodeADoctype
+     * @param hasResultDetails
+     * @return
+     */
+    public Map<Theme, List<TestResult>> getTestResultSortedByThemeMap(
+            WebResource webresource,
+            Scope scope,
+            boolean hasSourceCodeWithDoctype,
+            boolean hasResultDetails) {
+        List<ProcessResult> netResultList = (List<ProcessResult>)
+                webResourceDataService.
+                getProcessResultListByWebResourceAndScope(webresource, scope);
+        return prepareThemeResultMap(netResultList, hasSourceCodeWithDoctype, hasResultDetails);
     }
 
     /**
