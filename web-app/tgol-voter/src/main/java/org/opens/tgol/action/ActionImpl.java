@@ -60,6 +60,17 @@ public class ActionImpl implements Action {
         this.actionI81NCode = actionI81NCode;
     }
 
+    private String actionAltI81NCode;
+    @Override
+    public String getActionAltI81NCode() {
+        return this.actionAltI81NCode;
+    }
+
+    @Override
+    public void setActionAltI81NCode(String actionAltI81NCode) {
+        this.actionAltI81NCode = actionAltI81NCode;
+    }
+
     private String actionUrl;
     @Override
     public String getActionUrl() {
