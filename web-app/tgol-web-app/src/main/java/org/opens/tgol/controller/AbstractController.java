@@ -29,6 +29,7 @@ import org.opens.tgol.presentation.factory.DetailedContractInfoFactory;
 import org.opens.tgol.util.TgolKeyStore;
 import java.util.Calendar;
 import java.util.Collection;
+import org.opens.tgol.exception.ForbiddenUserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -140,7 +141,11 @@ public abstract class AbstractController {
      * @return
      */
     protected boolean isContractExpired(Contract contract) {
-        return (Calendar.getInstance().getTime().after(contract.getEndDate())) ? true:false;
+        try {
+            return (Calendar.getInstance().getTime().after(contract.getEndDate())) ? true:false;
+        } catch (NullPointerException npe) {
+            throw new ForbiddenUserException(getCurrentUser());
+        }
     }
 
     /**

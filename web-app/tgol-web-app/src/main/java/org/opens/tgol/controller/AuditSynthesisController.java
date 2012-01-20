@@ -44,6 +44,8 @@ import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tgol.exception.ForbiddenUserException;
+import org.opens.tgol.exception.LostInSpaceException;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -117,8 +119,9 @@ public class AuditSynthesisController extends AuditDataHandlerController {
                     Contract contract = getActDataService().
                             getActFromWebResource(webResource).getContract();
                     model.addAttribute(
-                            TgolKeyStore.BREAD_CRUMB_KEY,
-                            buildAuditSynthesisBreadCrumb(null, wrId, contract));
+                            TgolKeyStore.CONTRACT_ID_KEY,contract.getId());
+                    model.addAttribute(
+                            TgolKeyStore.CONTRACT_NAME_KEY,contract.getLabel());
                     model.addAttribute(TgolKeyStore.WEBRESOURCE_ID_KEY, webResourceId);
                     return prepareSynthesisSiteData(
                             (Site) webResource,
@@ -126,11 +129,10 @@ public class AuditSynthesisController extends AuditDataHandlerController {
                             getLocaleResolver().resolveLocale(request));
                 }
             } catch (IOException e) {
-                LOGGER.error(e.getMessage());
-                return TgolKeyStore.OUPS_VIEW_REDIRECT_NAME;
+                throw new LostInSpaceException(e, user);
             }
         } else {
-            return TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
+            throw new ForbiddenUserException(user);
         }
     }
 
@@ -173,26 +175,4 @@ public class AuditSynthesisController extends AuditDataHandlerController {
         return TgolKeyStore.SYNTHESIS_SITE_VIEW_NAME;
     }
 
-    /**
-     * This methods builds the breadcrumb for audit synthesis page.
-     * My Project - Project Name
-     * @param contractId
-     * @param webResourceId
-     * @return
-     */
-    public static Map<String, String> buildAuditSynthesisBreadCrumb(
-            Long contractId,
-            Long webResourceId,
-            Contract contract) {
-        Map<String, String> breadCrumb = HomeController.buildBreadCrumb();
-        StringBuilder urlBuilder = new StringBuilder();
-        urlBuilder.append(TgolKeyStore.CONTRACT_URL);
-        urlBuilder.append(TgolKeyStore.HTML_EXTENSION_KEY);
-        urlBuilder.append("?");
-        urlBuilder.append(TgolKeyStore.CONTRACT_ID_KEY);
-        urlBuilder.append("=");
-        urlBuilder.append(contract.getId());
-        breadCrumb.put(urlBuilder.toString(), contract.getLabel());
-        return breadCrumb;
-    }
 }

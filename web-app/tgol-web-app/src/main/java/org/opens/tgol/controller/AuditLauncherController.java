@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -48,6 +47,7 @@ import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.entity.service.parameterization.ParameterElementDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
+import org.opens.tgol.exception.LostInSpaceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -171,7 +171,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
             AuditSetUpCommand auditSetUpCommand = (AuditSetUpCommand) request.getSession().getAttribute(TgolKeyStore.AUDIT_SET_UP_COMMAND_KEY);
             request.getSession().removeAttribute(TgolKeyStore.AUDIT_SET_UP_COMMAND_KEY);
             if (auditSetUpCommand != null && !auditSetUpCommand.isAuditSite()) {
-                return preparePageAudit(auditSetUpCommand, model, request);
+                return preparePageAudit(auditSetUpCommand, model);
             }
             tanaguruExecutor.auditSite(
                     contract,
@@ -179,7 +179,9 @@ public class AuditLauncherController extends AuditDataHandlerController {
                     getClientIpAddress(),
                     getUserParamSet(auditSetUpCommand, contract.getId(), -1, contract.getUrl()));
             model.addAttribute(TgolKeyStore.TESTED_URL_KEY, contract.getUrl());
-            model.addAttribute(TgolKeyStore.BREAD_CRUMB_KEY, buildBreadCrumb(Long.valueOf(contractId)));
+            model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
+            model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
+            model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
             return TgolKeyStore.AUDIT_IN_PROGRESS_VIEW_NAME;
         }
     }
@@ -190,13 +192,11 @@ public class AuditLauncherController extends AuditDataHandlerController {
      * message is displayed
      * @param auditSetUpCommand
      * @param model
-     * @param request
      * @return
      */
     private String preparePageAudit(
             AuditSetUpCommand auditSetUpCommand,
-            Model model,
-            HttpServletRequest request) {
+            Model model) {
         Audit audit = null;
         // if the form is correct, we launch the audit
         if (auditSetUpCommand.getUrlList().isEmpty()) {
@@ -209,12 +209,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
                     auditSetUpCommand);
         }
         if (audit.getStatus() != AuditStatus.COMPLETED) {
-            String errorViewName = prepareFailedAuditData(audit, model);
-            if (!isGuestUser()) {
-                model.addAttribute(TgolKeyStore.BREAD_CRUMB_KEY, buildBreadCrumb(
-                        Long.valueOf(auditSetUpCommand.getContractId())));
-            }
-            return errorViewName;
+            return prepareFailedAuditData(audit,model);
         }
         model.addAttribute(TgolKeyStore.WEBRESOURCE_ID_KEY, audit.getSubject().getId());
         if (audit.getSubject() instanceof Site) {
@@ -224,7 +219,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
         } else if (audit.getSubject() instanceof Page) {
             return TgolKeyStore.RESULT_PAGE_VIEW_REDIRECT_NAME;
         }
-        return TgolKeyStore.OUPS_VIEW_REDIRECT_NAME;
+        throw new LostInSpaceException(getCurrentUser());
     }
 
     /**
@@ -309,23 +304,6 @@ public class AuditLauncherController extends AuditDataHandlerController {
         } else {
             return url;
         }
-    }
-
-    /**
-     * This methods build the breadcrumb for the audit form pages for an
-     * authenticated user
-     * @param contractId
-     * @return
-     */
-    protected Map<String, String> buildBreadCrumb(Long contractId) {
-        Map<String, String> breadCrumb = new LinkedHashMap<String, String>();
-        breadCrumb.put(
-                TgolKeyStore.HOME_URL + TgolKeyStore.HTML_EXTENSION_KEY,
-                TgolKeyStore.MY_PROJECT_KEY);
-        breadCrumb.put(
-                TgolKeyStore.CONTRACT_URL + TgolKeyStore.HTML_EXTENSION_KEY + "?" + TgolKeyStore.CONTRACT_ID_KEY + "=" + contractId,
-                getContractDataService().read(Long.valueOf(contractId)).getLabel());
-        return breadCrumb;
     }
 
     /**

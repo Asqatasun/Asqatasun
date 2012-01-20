@@ -26,7 +26,6 @@ import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.user.User;
 import org.opens.tgol.util.TgolKeyStore;
 import java.io.IOException;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
@@ -49,9 +48,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class PageListController extends AuditDataHandlerController{
 
     private static final Logger LOGGER = Logger.getLogger(PageListController.class);
-
-    private static final String AUDIT_SYNTHESIS_H1_KEY = "synthesisSite.h1";
-    private static final String PAGE_LIST_H1_KEY = "pageList.h1";
 
     public PageListController() {
         super();
@@ -114,11 +110,9 @@ public class PageListController extends AuditDataHandlerController{
                 return TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
             }
             try {
-                model.addAttribute(TgolKeyStore.BREAD_CRUMB_KEY,
-                            buildPageListBreadCrumb(
-                                null,
-                                webResource.getId(),
-                                retrieveContractFromWebResource(webResource)));
+                Contract currentContract = retrieveContractFromWebResource(webResource);
+                model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY,currentContract.getLabel());
+                model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY,currentContract.getId());
                 return this.preparePageListData((Site)webResource, model);
             } catch (Exception e) {
                 LOGGER.error(e.getMessage());
@@ -126,15 +120,12 @@ public class PageListController extends AuditDataHandlerController{
             }
         } else {
             boolean isAuthorizedScopeForPageList = isAuthorizedScopeForPageList(webResource);
-            model.addAttribute(TgolKeyStore.BREAD_CRUMB_KEY,
-                        buildPageListxxxBreadCrumb(
-                            null,
-                            webResource.getId(),
-                            retrieveContractFromWebResource(webResource),
-                            isAuthorizedScopeForPageList));
+            Contract currentContract = retrieveContractFromWebResource(webResource);
+            model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY,currentContract.getLabel());
+            model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY,currentContract.getId());
             // when this page is displayed from a group of pages audit, it has
             // to indicate the audit number. So we add an attribute that can be
-            // user in the jsp
+            // used in the jsp
             if (!isAuthorizedScopeForPageList) {
                 model.addAttribute(
                     TgolKeyStore.AUDIT_NUMBER_KEY,true);
@@ -182,6 +173,7 @@ public class PageListController extends AuditDataHandlerController{
         getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getUrlSortCriterion());
         if (status.equalsIgnoreCase(HttpStatusCodeFamily.f2xx.name())) {
             getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getDefault2xxSortCriterion());
+            getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getWeightedMarkCriterion());
             return HttpStatusCodeFamily.f2xx;
         } else if (status.equalsIgnoreCase(HttpStatusCodeFamily.f3xx.name())) {
             getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getDefault3xxSortCriterion());
@@ -206,61 +198,6 @@ public class PageListController extends AuditDataHandlerController{
                 idAudit,
                 hpcf,
                 null).intValue();
-    }
-
-    /**
-     * This methods builds the breadcrumb for page list page.
-     * My Project - Project Name - Synthesis - Page list
-     * @param contractId
-     * @param webResourceId
-     * @return
-     */
-    public static Map<String, String> buildPageListBreadCrumb(
-            Long contractId,
-            Long webResourceId,
-            Contract contract) {
-        Map<String, String> breadCrumb = AuditSynthesisController.
-                buildAuditSynthesisBreadCrumb(contractId, webResourceId, contract);
-        StringBuilder urlBuilder = new StringBuilder();
-        urlBuilder.append(TgolKeyStore.AUDIT_SYNTHESIS_CONTRACT_URL);
-        urlBuilder.append(TgolKeyStore.HTML_EXTENSION_KEY);
-        urlBuilder.append("?");
-        urlBuilder.append(TgolKeyStore.WEBRESOURCE_ID_KEY);
-        urlBuilder.append("=");
-        urlBuilder.append(webResourceId);
-        breadCrumb.put(
-                urlBuilder.toString(),
-                AUDIT_SYNTHESIS_H1_KEY+";"+webResourceId);
-        return breadCrumb;
-    }
-    /**
-     * This methods builds the breadcrumb for page list page.
-     * My Project - Project Name - Synthesis - Page list for authorised scope
-     * My Project - Project Name for unauthorised scope
-     * @param contractId
-     * @param webResourceId
-     * @return
-     */
-    public static Map<String, String> buildPageListxxxBreadCrumb(
-            Long contractId,
-            Long webResourceId,
-            Contract contract,
-            boolean isAuthorizedScopeForPageList) {
-        Map<String, String> breadCrumb;
-        if (isAuthorizedScopeForPageList) {
-            breadCrumb = PageListController.buildPageListBreadCrumb(contractId, webResourceId, contract);
-            StringBuilder urlBuilder = new StringBuilder();
-            urlBuilder.append(TgolKeyStore.PAGE_LIST_CONTRACT_URL);
-            urlBuilder.append(TgolKeyStore.HTML_EXTENSION_KEY);
-            urlBuilder.append("?");
-            urlBuilder.append(TgolKeyStore.WEBRESOURCE_ID_KEY);
-            urlBuilder.append("=");
-            urlBuilder.append(webResourceId);
-            breadCrumb.put(urlBuilder.toString(),PAGE_LIST_H1_KEY);
-        } else {
-            breadCrumb = AuditSynthesisController.buildAuditSynthesisBreadCrumb(contractId, webResourceId, contract);
-        }
-        return breadCrumb;
     }
 
 }

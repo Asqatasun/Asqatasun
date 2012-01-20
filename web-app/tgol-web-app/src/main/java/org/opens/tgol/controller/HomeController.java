@@ -24,7 +24,6 @@ package org.opens.tgol.controller;
 import org.opens.tgol.action.voter.ActionHandler;
 import org.opens.tgol.presentation.factory.ContractInfoFactory;
 import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.service.contract.ActDataService;
 import org.opens.tgol.entity.user.User;
 import org.opens.tgol.presentation.data.ContractInfo;
 import org.opens.tgol.util.TgolKeyStore;
@@ -37,6 +36,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.opens.tgol.form.builder.FormFieldBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -57,14 +57,13 @@ public class HomeController extends AbstractController {
     /**
      * The actDataService instance needed to launch the audit process
      */
-    private ActDataService actDataService;
-    @Autowired
-    public final void setActDataService(ActDataService actDataService) {
-        this.actDataService = actDataService;
-    }
+//    private ActDataService actDataService;
+//    @Autowired
+//    public final void setActDataService(ActDataService actDataService) {
+//        this.actDataService = actDataService;
+//    }
 
     private LocaleResolver localeResolver;
-
     @Autowired
     public final void setLocaleResolver(LocaleResolver localeResolver) {
         this.localeResolver = localeResolver;
@@ -86,6 +85,11 @@ public class HomeController extends AbstractController {
 
     public void setActionHandler(ActionHandler contractActionHandler) {
         this.actionHandler = contractActionHandler;
+    }
+
+    private List<FormFieldBuilder> formFieldBuilderList;
+    public void setFormFieldBuilderList(List<FormFieldBuilder> formFieldBuilderList) {
+        this.formFieldBuilderList = formFieldBuilderList;
     }
 
     public HomeController() {
@@ -124,7 +128,6 @@ public class HomeController extends AbstractController {
         User user = getCurrentUser();
         model.addAttribute(TgolKeyStore.LOCALE_KEY,localeResolver.resolveLocale(request));
         model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY,user);
-        model.addAttribute(TgolKeyStore.RUNNING_ACT, doesCurrentUserHaveARunningAct(user));
         Contract currentContract = getContractDataService().read(contractId);
         // add the action list to the view
         model.addAttribute(TgolKeyStore.CONTRACT_ACTION_LIST_KEY, actionHandler.getActionList(currentContract));
@@ -160,23 +163,6 @@ public class HomeController extends AbstractController {
             contractInfoSet.add(ContractInfoFactory.getInstance().getContractInfo(contract));
         }
         return contractInfoSet;
-    }
-
-    /**
-     * This methods checks whether the authenticated user of the current session
-     * has an act still running (an audit of site type for example)
-     * @param user
-     * @return
-     */
-    private boolean doesCurrentUserHaveARunningAct(User user) {
-        boolean isAuditRunning = false;
-        for (Contract contract : user.getContractSet()){
-            if (!actDataService.getRunningActsByContract(contract).isEmpty()) {
-                isAuditRunning = true;
-                break;
-            }
-        }
-        return isAuditRunning;
     }
 
     /**

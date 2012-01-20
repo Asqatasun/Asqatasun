@@ -21,7 +21,6 @@
  */
 package org.opens.tgol.controller;
 
-import org.opens.tgol.command.factory.AuditSetUpCommandFactory;
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
@@ -53,6 +52,8 @@ import org.opens.tanaguru.entity.service.reference.TestDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tgol.exception.ForbiddenPageException;
+import org.opens.tgol.exception.ForbiddenUserException;
 import org.opens.tgol.report.pagination.factory.TgolPaginatedListFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -179,7 +180,6 @@ public abstract class AuditDataHandlerController extends AbstractController {
         this.parameterDataService = parameterDataService;
         // the audit Set up factory needs to be initialised with the unique instance
         // of ParameterDataServiceDecorator
-        AuditSetUpCommandFactory.setParameterDataService(parameterDataService);
         setDefaultParamSet(parameterDataService);
     }
 
@@ -265,8 +265,11 @@ public abstract class AuditDataHandlerController extends AbstractController {
      *      true if the user is allowed to display the result, false otherwise.
      */
     protected boolean isUserAllowedToDisplayResult(User user, WebResource webResource) {
-        if (webResource == null || user == null) {
-            return false;
+        if (webResource == null) {
+            throw new ForbiddenPageException(getCurrentUser());
+        }
+        if (user == null) {
+            throw new ForbiddenUserException(getCurrentUser());
         }
         try {
             Act act= actDataService.getActFromWebResource(webResource);
@@ -274,7 +277,7 @@ public abstract class AuditDataHandlerController extends AbstractController {
                     act.getContract().getUser().getId()) == 0) {
                 return true;
             }
-            return false;
+            throw new ForbiddenUserException(getCurrentUser());
         } catch (NoResultException e) {
             if (webResource.getParent() != null) {
                 Act act= actDataService.getActFromWebResource(webResource.getParent());
@@ -283,7 +286,7 @@ public abstract class AuditDataHandlerController extends AbstractController {
                     return true;
                 }
             }
-            return false;
+            throw new ForbiddenUserException(getCurrentUser());
         }
     }
 
@@ -299,10 +302,13 @@ public abstract class AuditDataHandlerController extends AbstractController {
      */
     protected boolean isUserAllowedToDisplaySetUpPage(Contract contract) {
         if (contract == null) {
-            return false;
+            throw new ForbiddenUserException(getCurrentUser());
         }
         User user = getCurrentUser();
-        return contract.getUser().getId().equals(user.getId())? true : false;
+        if (!contract.getUser().getId().equals(user.getId())) {
+            throw new ForbiddenUserException(getCurrentUser());
+        }
+        return true;
     }
 
     /**
@@ -347,19 +353,21 @@ public abstract class AuditDataHandlerController extends AbstractController {
      * This method determines which page to display when an error occured
      * while processing
      * @param audit
+     * @param model
+     * @param contract
      * @return
      */
     protected String prepareFailedAuditData(Audit audit, Model model) {
-        String returnViewName = TgolKeyStore.OUPS_VIEW_REDIRECT_NAME;
+        String returnViewName = TgolKeyStore.OUPS_VIEW_NAME;
         model.addAttribute(TgolKeyStore.AUDIT_URL_KEY,
                 audit.getSubject().getURL());
         model.addAttribute(TgolKeyStore.AUDIT_DATE_KEY,
                 audit.getDateOfCreation());
         String status = this.computeAuditStatus(audit);
         if (status.equalsIgnoreCase(TgolKeyStore.ERROR_LOADING_KEY)) {
-            returnViewName = TgolKeyStore.LOADING_ERROR_REDIRECT_NAME;
+            returnViewName = TgolKeyStore.LOADING_ERROR_VIEW_NAME;
         } else if (status.equalsIgnoreCase(TgolKeyStore.ERROR_ADAPTING_KEY)) {
-            returnViewName = TgolKeyStore.ADAPTING_ERROR_REDIRECT_NAME;
+            returnViewName = TgolKeyStore.ADAPTING_ERROR_VIEW_NAME;
         }
         return returnViewName;
     }

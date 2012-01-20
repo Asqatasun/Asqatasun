@@ -29,12 +29,10 @@ import org.opens.tgol.util.TgolKeyStore;
 import org.opens.tgol.form.parameterization.AuditSetUpFormField;
 import org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl;
 import org.opens.tgol.validator.AuditSetUpFormValidator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -189,10 +187,10 @@ public class AuditSetUpController extends AuditDataHandlerController{
             boolean isAuditSite,
             boolean isUploadAudit) {
         model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
-        model.addAttribute(TgolKeyStore.BREAD_CRUMB_KEY, buildBreadCrumb(contract));
-        Map<String, List<AuditSetUpFormField>> parametersMapCopy = AuditSetUpCommandFactory.getParametersMapCopy(contract, parametersMap);
+        model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
+        Map<String, List<AuditSetUpFormField>> parametersMapCopy = AuditSetUpCommandFactory.getInstance().getParametersMapCopy(contract, parametersMap);
         model.addAttribute(TgolKeyStore.PARAMETERS_MAP_KEY, parametersMapCopy);
-        AuditSetUpCommand asuc = AuditSetUpCommandFactory.getInitialisedAuditCommand(
+        AuditSetUpCommand asuc = AuditSetUpCommandFactory.getInstance().getInitialisedAuditCommand(
                 contract,
                 parametersMapCopy,
                 isAuditSite,
@@ -223,18 +221,16 @@ public class AuditSetUpController extends AuditDataHandlerController{
         // We check whether the form is valid
         Map<String, List<AuditSetUpFormField>> parametersMap;
         if (auditSetUpCommand.isAuditSite()) {
-            parametersMap = AuditSetUpCommandFactory.getParametersMapCopy(contract, siteFormFieldBuilderMap);
+            parametersMap = AuditSetUpCommandFactory.getInstance().getParametersMapCopy(contract, siteFormFieldBuilderMap);
             auditSiteSetUpValidator.setAuditSetUpFormFieldMap(parametersMap);
             auditSiteSetUpValidator.validate(auditSetUpCommand, result);
-//            parametersMap = siteParametersMap;
         } else {
             // in case of page upload audit, needs to converts the files to a
             // map before the tanaguru service is called
             auditSetUpCommand.convertFilesToMap();
-            parametersMap = AuditSetUpCommandFactory.getParametersMapCopy(contract, pageFormFieldBuilderMap);
+            parametersMap = AuditSetUpCommandFactory.getInstance().getParametersMapCopy(contract, pageFormFieldBuilderMap);
             auditPageSetUpValidator.setAuditSetUpFormFieldMap(parametersMap);
             auditPageSetUpValidator.validate(auditSetUpCommand, result);
-//            parametersMap = pageParametersMap;
         }
         // If the form has some errors, we display it again with errors' details
         if (result.hasErrors()) {
@@ -263,17 +259,16 @@ public class AuditSetUpController extends AuditDataHandlerController{
             Contract contract,
             AuditSetUpCommand auditSetUpCommand,
             Map<String, List<AuditSetUpFormField>> parametersMap) {
+        model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
         model.addAttribute(TgolKeyStore.EXPANDED_KEY, TgolKeyStore.EXPANDED_VALUE);
         model.addAttribute(TgolKeyStore.AUDIT_SET_UP_COMMAND_KEY,
                 auditSetUpCommand);
-        Logger.getLogger(this.getClass()).info(parametersMap.hashCode() + " " + parametersMap.values().iterator().next().hashCode()  + "  " + parametersMap.values().iterator().next().iterator().next().hashCode());
         model.addAttribute(TgolKeyStore.PARAMETERS_MAP_KEY, parametersMap);
-        Logger.getLogger(this.getClass()).info(model.asMap().get(TgolKeyStore.PARAMETERS_MAP_KEY).hashCode() + " " );
         // if the user is authenticated, the url of the form is under
         // /home/contract/. To display error pages, we need to precise the
         // backward relative path and to add the breadCrumb.
         if (!isGuestUser()) {
-            model.addAttribute(TgolKeyStore.BREAD_CRUMB_KEY, buildBreadCrumb(contract));
+            model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
         }
         if (auditSetUpCommand.isAuditSite()) {
         return TgolKeyStore.AUDIT_SITE_SET_UP_VIEW_NAME;
@@ -282,23 +277,6 @@ public class AuditSetUpController extends AuditDataHandlerController{
                 TgolKeyStore.AUDIT_UPLOAD_SET_UP_VIEW_NAME :
                 TgolKeyStore.AUDIT_PAGE_SET_UP_VIEW_NAME;
         }
-    }
-
-    /**
-     * This methods build the breadcrumb for the audit form pages for an
-     * authenticated user
-     * @param contractId
-     * @return
-     */
-    protected Map<String, String> buildBreadCrumb(Contract contract) {
-        Map<String, String> breadCrumb = new LinkedHashMap<String, String>();
-        breadCrumb.put(
-                TgolKeyStore.HOME_URL + TgolKeyStore.HTML_EXTENSION_KEY,
-                TgolKeyStore.MY_PROJECT_KEY);
-        breadCrumb.put(
-                TgolKeyStore.CONTRACT_URL + TgolKeyStore.HTML_EXTENSION_KEY + "?" + TgolKeyStore.CONTRACT_ID_KEY + "=" + contract.getId(),
-                contract.getLabel());
-        return breadCrumb;
     }
 
 }

@@ -28,13 +28,11 @@ import org.opens.tgol.presentation.factory.TestResultFactory;
 import org.opens.tgol.util.TgolHighlighter;
 import org.opens.tgol.util.TgolKeyStore;
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.logging.Level;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
@@ -42,13 +40,20 @@ import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tgol.command.AuditResultSortCommand;
+import org.opens.tgol.command.factory.AuditResultSortCommandFactory;
+import org.opens.tgol.exception.ForbiddenUserException;
+import org.opens.tgol.form.FormField;
+import org.opens.tgol.form.builder.FormFieldBuilder;
+import org.opens.tgol.presentation.data.AuditStatistics;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 
 /** 
  *
@@ -60,9 +65,11 @@ public class AuditResultController extends AuditDataHandlerController {
     private static final Logger LOGGER = Logger.getLogger(AuditResultController.class);
 
     private boolean hasSourceCodeWithDoctype = false;
-    
-    private static final String PAGE_LIST_H1_XXX_KEY = "pageList.f2xx.h1";
-    private static final String PAGE_LIST_H1_XXX_WITH_EXT_KEY = "pageList.f2xx.forTheAudit.h1";
+
+    List<FormFieldBuilder> sortFormFieldBuilderList;
+    public final void setFormFieldBuilderList(final List<FormFieldBuilder> formFieldBuilderList) {
+        this.sortFormFieldBuilderList = formFieldBuilderList;
+    }
 
     private ActionHandler actionHandler;
     public ActionHandler getActionHandler() {
@@ -71,6 +78,24 @@ public class AuditResultController extends AuditDataHandlerController {
 
     public void setActionHandler(ActionHandler contractActionHandler) {
         this.actionHandler = contractActionHandler;
+    }
+
+    private String themeSortKey;
+    public String getThemeSortKey() {
+        return themeSortKey;
+    }
+
+    public void setThemeSortKey(String themeSortKey) {
+        this.themeSortKey = themeSortKey;
+    }
+
+    private String testResultSortKey;
+    public String getTestResultSortKey() {
+        return testResultSortKey;
+    }
+
+    public void setTestResultSortKey(String testResultSortKey) {
+        this.testResultSortKey = testResultSortKey;
     }
 
     public AuditResultController() {
@@ -87,36 +112,93 @@ public class AuditResultController extends AuditDataHandlerController {
     public String displayAuditResultFromContract(
             @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
             HttpServletRequest request,
+            Model model) {
+        return dispatchDisplayResultRequest(Long.valueOf(webresourceId), null, model, request);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    @Secured(TgolKeyStore.ROLE_USER_KEY)
+    protected String submitForm(
+            @ModelAttribute(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY) AuditResultSortCommand auditResultSortCommand,
+            BindingResult result,
+            Model model,
+            HttpServletRequest request) {
+
+        return dispatchDisplayResultRequest(
+                auditResultSortCommand.getWebResourceId(),
+                auditResultSortCommand,
+                model,
+                request);
+    }
+
+    @RequestMapping(value=TgolKeyStore.SOURCE_CODE_CONTRACT_URL, method=RequestMethod.GET)
+    @Secured(TgolKeyStore.ROLE_USER_KEY)
+    public String displaySourceCodeFromContract(
+            @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
+            HttpServletRequest request,
             HttpServletResponse response,
             Model model) {
         User user = getCurrentUser();
         model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY,user);
+        WebResource webResource = getWebResourceDataService().ligthRead(Long.valueOf(webresourceId));
+        if (isUserAllowedToDisplayResult(user,webResource) && webResource instanceof Page) {
+            Page page = (Page)webResource;
+            hasSourceCodeWithDoctype = false;
+            boolean hasSSP = true;
+            SSP ssp = null;
+            try {
+                ssp = getContentDataService().findSSP(page, page.getURL());
+            } catch (NoResultException nre) {
+                hasSSP = false;
+            }
+            if (hasSSP) {
+                model.addAttribute(TgolKeyStore.SOURCE_CODE_KEY,highlightSourceCode(ssp));
+                addAuditStatisticsToModel(webResource, model);
+            }
+            return TgolKeyStore.SOURCE_CODE_PAGE_VIEW_NAME;
+        } else {
+            throw new ForbiddenUserException(getCurrentUser());
+        }
+    }
+
+    private String dispatchDisplayResultRequest(
+            Long webResourceId,
+            AuditResultSortCommand auditResultSortCommand,
+            Model model,
+            HttpServletRequest request) {
+        User user = getCurrentUser();
+        model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY,user);
         //We first check that the current user is allowed to display the result
         //of this audit
-        Long wrId = Long.valueOf(webresourceId);
-        WebResource webResource = getWebResourceDataService().ligthRead(wrId);
+        WebResource webResource = getWebResourceDataService().ligthRead(webResourceId);
         if (isUserAllowedToDisplayResult(user,webResource)) {
-            if (webResource != null) {
-                this.callGc(webResource);
-                // If the Id given in argument correspond to a webResource,
-                // data are retrieved to be prepared and displayed
-                return prepareSuccessfullAuditData(
-                        webResource,
-                        model,
-                        getLocaleResolver().resolveLocale(request));
+            this.callGc(webResource);
+            // If the Id given in argument correspond to a webResource,
+            // data are retrieved to be prepared and displayed
+            addAuditStatisticsToModel(webResource, model);
+            AuditStatistics auditStatistics = ((AuditStatistics)model.asMap().get(TgolKeyStore.STATISTICS_KEY));
+            String referentialParameter = auditStatistics.getParametersMap().get("referential");
+            AuditResultSortCommand asuc;
+            List<FormField> formFieldList;
+            if (auditResultSortCommand == null) {
+                formFieldList = AuditResultSortCommandFactory.getInstance().
+                    getFormFieldBuilderCopy(referentialParameter, sortFormFieldBuilderList);
+                asuc = AuditResultSortCommandFactory.getInstance().getInitialisedAuditResultSortCommand(
+                            webResourceId,
+                            formFieldList);
             } else {
-                // If the Id given in argument does not correspond to any
-                // webresource, a 404 page is returned
-                try {
-                    response.sendError(HttpStatus.SC_NOT_FOUND);
-                } catch (IOException ex) {
-                    java.util.logging.Logger.getLogger(
-                        AuditResultController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                return null;
+                formFieldList = AuditResultSortCommandFactory.getInstance().
+                    getFormFieldBuilderCopy(referentialParameter, sortFormFieldBuilderList, auditResultSortCommand);
+                asuc = auditResultSortCommand;
             }
+            model.addAttribute(TgolKeyStore.AUDIT_RESULT_SORT_FIELD_LIST_KEY, formFieldList);
+            model.addAttribute(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY, asuc);
+            return prepareSuccessfullAuditData(
+                    webResource,
+                    model,
+                    getLocaleResolver().resolveLocale(request));
         } else {
-            return TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
+            throw new ForbiddenUserException(getCurrentUser());
         }
     }
 
@@ -134,12 +216,9 @@ public class AuditResultController extends AuditDataHandlerController {
             Model model,
             Locale locale) {
         model.addAttribute(TgolKeyStore.LOCALE_KEY,locale);
-
         if (webResource instanceof Site) {
-            addAuditStatisticsToModel(webResource, model);
             return prepareSuccessfullSiteData((Site)webResource, model);
         } else if (webResource instanceof Page) {
-            addAuditStatisticsToModel(webResource, model);
             //In case of display page result page, we need all data related with
             // the page, that's why a deepRead is needed
             WebResource fullWebResource =
@@ -158,14 +237,20 @@ public class AuditResultController extends AuditDataHandlerController {
      */
     private String prepareSuccessfullSiteData(Site site, Model model) {
         hasSourceCodeWithDoctype = false;
+        AuditResultSortCommand asuc = ((AuditResultSortCommand)model.asMap().get(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY));
         model.addAttribute(TgolKeyStore.TEST_RESULT_LIST_KEY,
-                TestResultFactory.getInstance().getTestResultSortedByThemeMap(site, getSiteScope(), hasSourceCodeWithDoctype, true));
-        
-        model.addAttribute(TgolKeyStore.BREAD_CRUMB_KEY,
-                buildSiteResultBreadCrumb(
-                    null,
-                    site.getId(),
-                    retrieveContractFromWebResource(site)));
+                TestResultFactory.getInstance().getTestResultSortedByThemeMap(
+                            site,
+                            getSiteScope(),
+                            hasSourceCodeWithDoctype,
+                            true,
+                            asuc.getSortOptionMap().get(themeSortKey),
+                            asuc.getSortOptionMap().get(testResultSortKey)));
+        // Attributes for breadcrumb
+        Contract contract = retrieveContractFromWebResource(site);
+        model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
+        model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
+        model.addAttribute(TgolKeyStore.RESULT_ACTION_LIST_KEY, actionHandler.getActionList("EXPORT"));
         return TgolKeyStore.RESULT_SITE_VIEW_NAME;
     }
 
@@ -184,16 +269,9 @@ public class AuditResultController extends AuditDataHandlerController {
         if (audit == null) {
             return TgolKeyStore.OUPS_VIEW_REDIRECT_NAME;
         }
+        Contract contract = retrieveContractFromWebResource(page);
         if (!audit.getStatus().equals(AuditStatus.COMPLETED)) {
-            String errorViewName = prepareFailedAuditData(audit, model);
-            if (!isGuestUser()) {
-                model.addAttribute(TgolKeyStore.BREAD_CRUMB_KEY,
-                    buildPageResultBreadCrumb(
-                        null,
-                        page.getId(),
-                        retrieveContractFromWebResource(page)));
-            }
-            return errorViewName;
+            return prepareFailedAuditData(audit, model);
         }
         hasSourceCodeWithDoctype = false;
         boolean hasSSP = true;
@@ -209,16 +287,28 @@ public class AuditResultController extends AuditDataHandlerController {
 
         if (hasSSP) {
             model.addAttribute(TgolKeyStore.SOURCE_CODE_KEY,highlightSourceCode(ssp));
+            AuditResultSortCommand asuc = ((AuditResultSortCommand)model.asMap().get(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY));
             model.addAttribute(TgolKeyStore.TEST_RESULT_LIST_KEY,
-                TestResultFactory.getInstance().getTestResultSortedByThemeMap(page, getPageScope(), hasSourceCodeWithDoctype, true));
+                TestResultFactory.getInstance().getTestResultSortedByThemeMap(
+                    page,
+                    getPageScope(),
+                    hasSourceCodeWithDoctype,
+                    true,
+                    asuc.getSortOptionMap().get(themeSortKey),
+                    asuc.getSortOptionMap().get(testResultSortKey)));
         }
         model.addAttribute(TgolKeyStore.STATUS_KEY, computeAuditStatus(audit));
         model.addAttribute(TgolKeyStore.RESULT_ACTION_LIST_KEY, actionHandler.getActionList("EXPORT"));
-        model.addAttribute(TgolKeyStore.BREAD_CRUMB_KEY,
-                buildPageResultBreadCrumb(
-                    null,
-                    page.getId(),
-                    retrieveContractFromWebResource(page)));
+        // Attributes for breadcrumb
+        model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
+        model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
+        Long parentWrId= getWebResourceDataService().getParentWebResourceId(page.getId());
+        boolean isAuthorizedScopeForPageList = false;
+        if (parentWrId != null) {
+            isAuthorizedScopeForPageList= isAuthorizedScopeForPageList(getWebResourceDataService().ligthRead(parentWrId));
+            model.addAttribute(TgolKeyStore.PARENT_WEBRESOURCE_ID_KEY, parentWrId);
+        }
+        model.addAttribute(TgolKeyStore.AUTHORIZED_SCOPE_FOR_PAGE_LIST, isAuthorizedScopeForPageList);
         return TgolKeyStore.RESULT_PAGE_VIEW_NAME;
     }
 
@@ -252,69 +342,6 @@ public class AuditResultController extends AuditDataHandlerController {
             LOGGER.warn(ex.getMessage());
             return "";
         }
-    }
-
-    /**
-     * This methods builds the breadcrumb for one result page of site audit.
-     * My Project - Project Name -Synthesis - Page List - auditResult
-     * @param contractId
-     * @param webResourceId
-     * @return
-     */
-    private Map<String, String> buildPageResultBreadCrumb(Long contractId, Long webResourceId, Contract contract) {
-        Map<String, String> breadCrumb = null;
-        Long parentWrId= getWebResourceDataService().getParentWebResourceId(webResourceId);
-        if (parentWrId != null) {
-            boolean isAuthorizedScopeForPageList= isAuthorizedScopeForPageList(getWebResourceDataService().ligthRead(parentWrId));
-            breadCrumb = PageListController.buildPageListxxxBreadCrumb(
-                    contractId,
-                    parentWrId,
-                    contract,
-                    isAuthorizedScopeForPageList);
-            StringBuilder urlBuilder = new StringBuilder();
-            urlBuilder.append(TgolKeyStore.PAGE_LIST_CONTRACT_URL);
-            urlBuilder.append(TgolKeyStore.HTML_EXTENSION_KEY);
-            urlBuilder.append("?");
-            urlBuilder.append(TgolKeyStore.WEBRESOURCE_ID_KEY);
-            urlBuilder.append("=");
-            urlBuilder.append(parentWrId);
-            urlBuilder.append("&amp;");
-            urlBuilder.append(TgolKeyStore.STATUS_KEY);
-            urlBuilder.append("=f2xx");
-            if (isAuthorizedScopeForPageList) {
-                breadCrumb.put(urlBuilder.toString(),PAGE_LIST_H1_XXX_KEY);
-            } else {
-                breadCrumb.put(urlBuilder.toString(),PAGE_LIST_H1_XXX_WITH_EXT_KEY+";"+parentWrId);
-            }
-        } else {
-            breadCrumb = HomeController.buildBreadCrumb();
-            StringBuilder urlBuilder = new StringBuilder();
-            urlBuilder.append(TgolKeyStore.CONTRACT_URL);
-            urlBuilder.append(TgolKeyStore.HTML_EXTENSION_KEY);
-            urlBuilder.append("?");
-            urlBuilder.append(TgolKeyStore.CONTRACT_ID_KEY);
-            urlBuilder.append("=");
-            urlBuilder.append(contract.getId());
-            breadCrumb.put(urlBuilder.toString(),contract.getLabel());
-        }
-        return breadCrumb;
-    }
-
-    /**
-     * This methods builds the breadcrumb for one result page of site audit.
-     * My Project - Project Name -Synthesis - auditResult
-     * @param contractId
-     * @param webResourceId
-     * @return
-     */
-    private Map<String, String> buildSiteResultBreadCrumb(
-            Long contractId,
-            Long webResourceId,
-            Contract contract) {
-        return PageListController.buildPageListBreadCrumb(
-                contractId,
-                webResourceId,
-                contract);
     }
 
 }

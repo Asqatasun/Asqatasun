@@ -34,9 +34,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.MessageFormat;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.Locale;
-import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
@@ -120,11 +118,14 @@ public class ForgottenOrChangePasswordController extends AbstractController {
                 return TgolKeyStore.ACCESS_DENIED_VIEW_REDIRECT_NAME;
             } else {
                 model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
-                model.addAttribute(TgolKeyStore.BREAD_CRUMB_KEY, buildBreadCrumb());
             }
         } else {
             User user = getUserDataService().getUserFromEmail(email);
-            if (!TgolTokenHelper.getInstance().checkUserToken(user, token)) {
+            try {
+                if (!TgolTokenHelper.getInstance().checkUserToken(user, token)) {
+                    model.addAttribute(TgolKeyStore.INVALID_CHANGE_PASSWORD_URL_KEY, true);
+                }
+            } catch (ArrayIndexOutOfBoundsException aioobe) {
                 model.addAttribute(TgolKeyStore.INVALID_CHANGE_PASSWORD_URL_KEY, true);
             }
         }
@@ -211,7 +212,6 @@ public class ForgottenOrChangePasswordController extends AbstractController {
         updateUserPassword(changePasswordCommand);
         if (getCurrentUser() != null) {
             model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
-            model.addAttribute(TgolKeyStore.BREAD_CRUMB_KEY, buildBreadCrumb());
         }
         return TgolKeyStore.CHANGE_PASSWORD_VIEW_NAME;
     }
@@ -258,7 +258,6 @@ public class ForgottenOrChangePasswordController extends AbstractController {
         if (changePasswordCommand.getNewPassword() != null &&
             getCurrentUser() != null) {
             model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
-            model.addAttribute(TgolKeyStore.BREAD_CRUMB_KEY, buildBreadCrumb());
         }
         model.addAttribute(TgolKeyStore.CHANGE_PASSWORD_COMMAND_KEY,
                 changePasswordCommand);
@@ -310,26 +309,12 @@ public class ForgottenOrChangePasswordController extends AbstractController {
      */
     private User updateUserPassword(ChangePasswordCommand changePasswordCommand) throws Exception {
         User user = getUserDataService().getUserFromEmail(changePasswordCommand.getUserEmail());
+        Logger.getLogger(this.getClass()).info(changePasswordCommand.getUserEmail());
+        Logger.getLogger(this.getClass()).info(user);
+        Logger.getLogger(this.getClass()).info(changePasswordCommand.getNewPassword());
         user.setPassword(MD5Encoder.MD5(changePasswordCommand.getNewPassword()));
         getUserDataService().saveOrUpdate(user);
         return user;
-    }
-
-    /**
-     * This methods builds the breadcrumb for the change password page for an
-     * authenticated user
-     * @param contractId
-     * @return
-     */
-    protected Map<String, String> buildBreadCrumb() {
-        Map<String, String> breadCrumb = new LinkedHashMap<String, String>();
-        breadCrumb.put(
-                TgolKeyStore.HOME_URL + TgolKeyStore.HTML_EXTENSION_KEY,
-                TgolKeyStore.MY_PROJECT_KEY);
-        breadCrumb.put(
-                TgolKeyStore.ACCOUNT_SETTINGS_URL + TgolKeyStore.HTML_EXTENSION_KEY,
-                TgolKeyStore.ACCOUNT_SETTINGS_KEY);
-        return breadCrumb;
     }
 
 }
