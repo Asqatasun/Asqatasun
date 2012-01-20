@@ -24,11 +24,15 @@ package org.opens.tanaguru.ruleimplementation;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
+import java.net.Proxy;
+import java.net.SocketAddress;
 import java.net.URL;
 import java.net.URLConnection;
-import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,12 +43,31 @@ import org.json.JSONObject;
 public class LanguageDetector {
 
     private static final Logger LOGGER = Logger.getLogger(LanguageDetector.class);
-    private static final String RESPONSE_STATUS_KEY = "responseStatus";
-    private static final String RESPONSE_DATA_KEY = "responseData";
     private static final String LANGUAGE_KEY = "language";
+    private static final String DATA_KEY = "data";
+    private static final String DETECTIONS_KEY = "detections";
     private static final String IS_RELIABLE_KEY = "isReliable";
+    private static final String CONFIDENCE_KEY = "confidence";
     private static final String UTF8_ENCODING_KEY = "UTF-8";
-    private static final int MAX_SIZE_TEXT = 1700;
+    private static final int MAX_SIZE_TEXT = 3000;
+
+    private String proxyPort;
+    public String getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(String proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    private String proxyHost;
+    public String getProxyHost() {
+        return proxyPort;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
 
     private String serviceUrl;
     public void setServiceUrl(String serviceUrl) {
@@ -56,24 +79,9 @@ public class LanguageDetector {
         this.version = version;
     }
 
-    private String userKey;
-    public void setUserKey(String userKey) {
-        this.userKey = userKey;
-    }
-
     private String textKey;
     public void setTextKey(String textKey) {
         this.textKey = textKey;
-    }
-
-    private String refererKey;
-    public void setRefererKey(String refererKey) {
-        this.refererKey = refererKey;
-    }
-
-    private String refererValue;
-    public void setRefererValue(String refererValue) {
-        this.refererValue = refererValue;
     }
 
     /**
@@ -115,10 +123,18 @@ public class LanguageDetector {
                 }
                 isTextTruncated = true;
             }
-            URL url = new URL(serviceUrl + version + textKey + text + userKey);
+            URL url = new URL(serviceUrl + version + textKey + text);
             LOGGER.debug("Json url request " +url.toString());
-            URLConnection connection = url.openConnection();
-            connection.addRequestProperty(refererKey, refererValue);
+            URLConnection connection = null;
+            if (!StringUtils.isEmpty(proxyHost) && !StringUtils.isEmpty(proxyPort)) {
+                LOGGER.debug("Launch request through proxy with values " +proxyHost + " : " +proxyPort);
+                SocketAddress sa = new InetSocketAddress(proxyHost,Integer.valueOf(proxyPort));
+                Proxy proxy = new Proxy(Proxy.Type.HTTP, sa);
+                connection = url.openConnection(proxy);
+            } else {
+                LOGGER.debug("Launch direct");
+                connection = url.openConnection();
+            }
             String line;
             StringBuilder builder = new StringBuilder();
             inputStreamReader = new InputStreamReader(connection.getInputStream());
@@ -128,21 +144,18 @@ public class LanguageDetector {
             }
             reader.close();
             JSONObject json = new JSONObject(builder.toString());
-            LOGGER.debug("Json response status " +json.get(RESPONSE_STATUS_KEY));
-            if (json.get(RESPONSE_STATUS_KEY).equals(HttpStatus.SC_OK)) {
-                JSONObject jsonResponse = (JSONObject) json.get(RESPONSE_DATA_KEY);
-                LOGGER.debug("Confidence detection result " +jsonResponse.get("confidence").toString());
-                // if the text is truncated, the result is seen as unreliable
-                // coz' the test is done on a part of the text.
-                if (isTextTruncated) {
-                    return new LanguageDetectionResult(jsonResponse.get(LANGUAGE_KEY).toString(),
-                        false);
-                } else {
-                    return new LanguageDetectionResult(jsonResponse.get(LANGUAGE_KEY).toString(),
-                        Boolean.valueOf(jsonResponse.get(IS_RELIABLE_KEY).toString()));
-                }
+            JSONObject jdata = (JSONObject) json.get(DATA_KEY);
+            JSONArray jdetections = (JSONArray) jdata.get(DETECTIONS_KEY);
+            JSONObject langObject = extractBestResultObject(jdetections);
+            // if the text is truncated, the result is seen as unreliable
+            // coz' the test is done on a part of the text.
+            if (isTextTruncated) {
+                return new LanguageDetectionResult(langObject.get(LANGUAGE_KEY).toString(),
+                    false);
+            } else {
+                return new LanguageDetectionResult(((JSONObject)jdetections.get(0)).get(LANGUAGE_KEY).toString(),
+                    Boolean.valueOf(((JSONObject)jdetections.get(0)).get(IS_RELIABLE_KEY).toString()));
             }
-            return null;
         } catch (MalformedURLException ex) {
             LOGGER.warn(null, ex);
         } catch (IOException ex) {
@@ -164,6 +177,27 @@ public class LanguageDetector {
             }
         }
         return null;
+    }
+
+    /**
+     * Multiple results are returned in a tab format. This method parses the
+     * different results and keeps the best regarding the relevancy value.
+     * @param jdetections
+     * @return
+     */
+    private JSONObject extractBestResultObject(JSONArray jdetections) throws JSONException {
+        JSONObject result = null;
+        double bestRelevancy = -1;
+        for (int i=0; i<jdetections.length();i++) {
+            LOGGER.info(" bestRelevancy " + bestRelevancy);
+            LOGGER.info("((JSONObject)jdetections.get(i)).getDouble(CONFIDENCE_KEY) " + ((JSONObject)jdetections.get(i)).getDouble(CONFIDENCE_KEY));
+            LOGGER.info("((JSONObject)jdetections.get(i)).get(LANGUAGE_KEY) " + ((JSONObject)jdetections.get(i)).get(LANGUAGE_KEY));
+            if (((JSONObject)jdetections.get(i)).getDouble(CONFIDENCE_KEY) > bestRelevancy) {
+                result = (JSONObject)jdetections.get(i);
+                bestRelevancy = ((JSONObject)jdetections.get(i)).getDouble(CONFIDENCE_KEY);
+            }
+        }
+        return result;
     }
 
 }
