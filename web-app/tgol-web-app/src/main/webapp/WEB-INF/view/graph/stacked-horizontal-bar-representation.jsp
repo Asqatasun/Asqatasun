@@ -32,7 +32,7 @@
                         <cewolf:param name="itemLabelColor" value="#FFFFFF"/>
                     </cewolf:chartpostprocessor>
                     <cewolf:chartpostprocessor id="stackedBarChartSeriesPaint">
-			<cewolf:param name="0" value='<%= new String("#FC575E")%>'/>
+			<cewolf:param name="0" value='<%= new String("#C43C35")%>'/>
                     </cewolf:chartpostprocessor>
                 </cewolf:chart>
                 <cewolf:imgurl

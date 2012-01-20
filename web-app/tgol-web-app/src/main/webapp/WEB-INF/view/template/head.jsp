@@ -4,20 +4,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta http-equiv="Author" content="Open-S.com // Matthieu Faure" lang="fr" />
-    <title>
-        ${pageTitle}
-    </title>
-    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.2.0/build/cssreset/reset-min.css&amp;3.2.0/build/cssgrids/grids-min.css&amp;3.2.0/build/cssfonts/fonts-min.css&amp;3.2.0/build/cssbase/base-min.css" />
+    <meta charset="utf-8"/>
+    <title>${pageTitle}</title>
+    <meta name="description" content="${pageMetaDescription}"/>
+    <meta name="author" content="Open-S.com"/>
+    <!-- Le styles -->
+    <link rel="stylesheet" href="<c:url value="/Css/bootstrap-min.css"/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value="/Css/tgm.css"/>" />
     <link rel="icon" type="image/ico" href="<c:url value="/Images/tanaguru.ico"/>" />
     <c:if test="${addWebSnapr == 'true'}">
         <script type="text/javascript" src="http://www.websnapr.com/js/websnapr.js"></script>
-    </c:if>
-    <c:if test="${addJQueryLib == 'true'}">
-<!--        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-        <script type="text/javascript" src="<c:url value="/Js/jquery.uniform.min.js"/>"></script>
-        <link rel="stylesheet" href="<c:url value="/Css/uniform.default.css"/>" type="text/css" media="screen" charset="utf-8" />-->
     </c:if>
 </head>

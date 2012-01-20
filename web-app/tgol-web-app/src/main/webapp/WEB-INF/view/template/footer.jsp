@@ -3,9 +3,11 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-        <div id="ft">
-            &copy; 2009-2011 <a href="http://www.Open-S.com/">Open-S</a> - <fmt:message key="footer.poweredBy"/> <a href="http://www.tanaguru.org/">Tanaguru</a> - <fmt:message key="footer.availableUnder"/> <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU AGPL v3</a>
-        </div>
+        <footer>
+            <div id="footer-down">
+                &copy; 2009-2011 <a href="http://www.Open-S.com/">Open-S</a> - <fmt:message key="footer.poweredBy"/> <a href="http://www.tanaguru.org/">Tanaguru</a> - <fmt:message key="footer.availableUnder"/> <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU AGPL v3</a>
+            </div>
+        </footer>
         <c:if test="${not empty configProperties['google-analytics-code']}">
         <script type="text/javascript">
             var _gaq = _gaq || [];
@@ -17,4 +19,4 @@
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
             })();
         </script>
-        </c:if>
+        </c:if>       

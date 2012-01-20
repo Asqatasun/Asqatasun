@@ -4,6 +4,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+            <div class="row">
+                <div class="span14 offset2">
                     <p class="process-remarks">
                         <fmt:message  key="${remarkInfosItem.messageCode}">
                         <c:if test='${remarkInfosItem.remarkTarget != null}'>
@@ -21,8 +23,8 @@
                                 <c:forEach var="evidenceElement" items="${childRemarkItem}">
                                     <c:choose>
                                         <c:when test="${evidenceElement.key == 'Line-Number'}">
-                                            <a href="#line${evidenceElement.value}">
-                                                <fmt:message key="${evidenceElement.key}"/> ${evidenceElement.value}
+                                            <a href="<c:url value="/home/contract/source-code-page.html?wr=${param.wr}#line${evidenceElement.value}"/>" target="_blank">
+                                                <fmt:message key="${evidenceElement.key}"/> ${evidenceElement.value} <fmt:message key="evidenceElement.newWindow"/>
                                             </a>
                                         </c:when>
                                         <c:otherwise>
@@ -34,3 +36,5 @@
                             </c:forEach>
                         </ul>
                     </c:if>
+                </div>
+            </div>

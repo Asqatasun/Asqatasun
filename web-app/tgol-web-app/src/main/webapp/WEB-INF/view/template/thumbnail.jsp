@@ -3,8 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-                <div class="yui3-u-1-${proportion}">
-                    <div class="thumbnail ${cml}" >
+                <div class="${proportion} ${offset}">
+                    <div class="thumbnail" >
                         <c:choose>
                             <c:when test="${url != '' && scope != 'GROUPOFFILES' && scope != 'FILE'}">
                         <script type="text/javascript">wsr_snapshot('${url}', '5ozSGth2h9n7', '${size}');</script>

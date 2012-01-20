@@ -3,10 +3,19 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" lang="${pageContext.response.locale}">
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<!DOCTYPE html>
+<c:choose>
+    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
+        <c:set var="lang">
+            ${fn:substringBefore(pageContext.response.locale, "_")}
+        </c:set>
+    </c:when>
+    <c:otherwise>
+        <c:set var="lang" value="${pageContext.response.locale}"/>
+    </c:otherwise>
+</c:choose>
+<html lang="${lang}">
     <c:set var="pageTitle" scope="page">
         <spring:message code="account-settings.pageTitle"/>
         <spring:hasBindErrors name="userSignUpCommand">
@@ -14,112 +23,101 @@
         </spring:hasBindErrors>
     </c:set>
     <%@include file="template/head.jsp" %>
-    <body id="tgm-account-settings-page" class="tgm">
-        <div id="meta-border">
-            <c:set var="displayLogoutLink" scope="page" value="true"/>
-            <%@include file="template/header-utils.jsp" %>
+    <body id="tgm-account-settings">
+        <%@include file="template/header-utils.jsp" %>
+        <div class="container">
             <c:set var="pageName" scope="page">
                 <fmt:message key="account-settings.h1"/>
             </c:set>
-            <%@include file="template/breadcrumb.jsp" %>
-            <div class="yui3-g">
-                <div class="yui3-u-1">
+            <ul class="breadcrumb">
+                <li><a href="<c:url value="/home.html"/>"><fmt:message key="home.h1"/></a> <span class="divider"></span></li>
+                <li class="active">${pageName}</li>
+            </ul>
+            <div class="row">
+                <div class="span16">
                     <h1>${pageName}</h1>
-                    <c:if test="${accountDataUpdated == 'true'}">
-                    <p class="message-positif cml cmr">
-                        <fmt:message key="account-settings.accountDataUpdated"/>
-                    </p>
+                </div>
+                <c:if test="${accountDataUpdated == 'true'}">
+                <div class="span14 offset1">
+                    <div class="alert-message block-message success">
+                        <p><fmt:message key="account-settings.accountDataUpdated"/></p>
+                    </div>
+                </div>
                 </c:if>
-                </div>
-            </div>
-            <c:set var="email" scope="page">
-                <spring:message code="account-settings.email"/>
-            </c:set>
-            <c:set var="lastName" scope="page">
-                <spring:message code="account-settings.lastName"/>
-            </c:set>
-            <c:set var="firstName" scope="page">
-                <spring:message code="account-settings.firstName"/>
-            </c:set>
-            <c:set var="phoneNumber" scope="page">
-                <spring:message code="account-settings.phoneNumber"/>
-            </c:set>
-            <form:form method="post" modelAttribute="userSignUpCommand" acceptCharset="UTF-8" enctype="UTF-8">
-                <div class="yui3-g">
-                    <div class="yui3-u-1">
-                        <form:errors path="generalErrorMsg" cssClass="errorblock" element="div"/>
-                    </div>
-                </div>
-                <div class="yui3-g">
-                    <div class="yui3-u-1-4">
-                        <div class="account-settings-label">
-                            <label id="account-settings-last-name" for="lastName">${lastName}</label>
-                        </div>
-                    </div>
-                    <div class="yui3-u-3-4">
-                        <div class="account-settings-field" >
-                            <form:input path="lastName" cssErrorClass="errorfield"/>
-                            <form:errors path="lastName" cssClass="error" />
-                        </div>
-                    </div>
-                </div>
-                <div class="yui3-g">
-                    <div class="yui3-u-1-4">
-                        <div class="account-settings-label">
-                            <label id="account-settings-email-first-name" for="firstName">${firstName}</label>
-                        </div>
-                    </div>
-                    <div class="yui3-u-3-4">
-                        <div class="account-settings-field" >
-                            <form:input path="firstName" cssErrorClass="errorfield"/>
-                            <form:errors path="firstName" cssClass="error" />
-                        </div>
-                    </div>
-                </div>
-                <div class="yui3-g">
-                    <div class="yui3-u-1-4">
-                        <div class="account-settings-label">
-                            <label id="account-settings-email" for="email">${email}</label>
-                        </div>
-                    </div>
-                    <div class="yui3-u-3-4">
-                        <div class="account-settings-field" >
-                            <form:input path="email" cssErrorClass="errorfield" readonly="true"/>
-                            <form:errors path="email" cssClass="error" /><br/>
-                            <span class="account-settings-rule">
-                                <spring:message code="account-settings.email-rule"/>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="yui3-g">
-                    <div class="yui3-u-1-4">
-                        <div class="account-settings-label">
-                            <label id="account-settings-phone-number" for="phoneNumber">${phoneNumber}</label>
-                        </div>
-                    </div>
-                    <div class="yui3-u-3-4">
-                        <div class="account-settings-field" >
-                            <form:input path="phoneNumber" cssErrorClass="errorfield"/>
-                            <form:errors path="phoneNumber" cssClass="error" />
-                        </div>
-                    </div>
-                </div>
-                <div class="yui3-g">
-                    <div class="yui3-u-1-4"></div>
-                    <div class="yui3-u-3-4 cmt">
-                        <a class="cml cmr cmt" href="<c:url value="/change-password.html?email=${userSignUpCommand.email}&amp;token=authenticated"/>"><fmt:message key="account-settings.changePassword"/></a>
-                    </div>
-                </div>
-                <div class="yui3-g">
-                    <div class="yui3-u-2-3"></div>
-                    <div class="yui3-u-1-3">
-                        <button type="submit" id="input-submit" class="red awesome"><spring:message code="account-settings.saveChanges"/> &raquo;</button>
-                    </div>
-                </div><!-- class="yui3-g" -->
-
-            </form:form>
-        </div><!--  id="meta-border" -->
+                <c:set var="email" scope="page">
+                    <spring:message code="account-settings.email"/>
+                </c:set>
+                <c:set var="lastName" scope="page">
+                    <spring:message code="account-settings.lastName"/>
+                </c:set>
+                <c:set var="firstName" scope="page">
+                    <spring:message code="account-settings.firstName"/>
+                </c:set>
+                <c:set var="phoneNumber" scope="page">
+                    <spring:message code="account-settings.phoneNumber"/>
+                </c:set>
+                <div class="span14 offset1">
+                    <div id="account-settings-form">
+                        <form:form method="post" modelAttribute="userSignUpCommand" acceptCharset="UTF-8" enctype="application/x-www-form-urlencoded">
+                            <spring:hasBindErrors name="userSignUpCommand">
+                            <div id="sign-up-form-general-error">
+                                <form:errors path="generalErrorMsg" cssClass="alert-message block-message error" element="div"/>
+                            </div>
+                            </spring:hasBindErrors>
+                            <c:set var="lastNameError"><form:errors path="lastName"/></c:set>
+                            <c:if test="${not empty lastNameError}">
+                                <c:set var="lastNameErrorClass" value="error"/>
+                            </c:if>
+                            <div class="clearfix ${lastNameErrorClass}">
+                                <label id="account-settings-last-name" for="lastName">${lastName}</label>
+                                <div class="input account-settings-field" >
+                                    <form:input path="lastName" cssErrorClass="xlarge error" cssClass="xlarge"/>
+                                    <form:errors path="lastName" cssClass="alert-message error" />
+                                </div>
+                            </div><!-- class="clearfix"-->
+                            <c:set var="firstNameError"><form:errors path="firstName"/></c:set>
+                            <c:if test="${not empty firstNameError}">
+                                <c:set var="firstNameErrorClass" value="error"/>
+                            </c:if>
+                            <div class="clearfix ${firstNameErrorClass}">
+                                <label id="account-settings-email-first-name" for="firstName">${firstName}</label>
+                                <div class="input account-settings-field" >
+                                    <form:input path="firstName" cssErrorClass="xlarge error" cssClass="xlarge"/>
+                                    <form:errors path="firstName" cssClass="alert-message error" />
+                                </div>
+                            </div><!-- class="clearfix"-->
+                            <div class="clearfix">
+                                <label id="account-settings-email" for="email">${email}</label>
+                                <div class="input account-settings-field" >
+                                    <form:input path="email" cssErrorClass="xlarge error" cssClass="xlarge uneditable-input" readonly="true"/>
+                                    <form:errors path="email" cssClass="alert-message error" />
+                                    <span class="help-block">
+                                        <spring:message code="account-settings.email-rule"/>
+                                    </span>
+                                </div>
+                            </div><!-- class="clearfix"-->
+                            <c:set var="phoneNumberError"><form:errors path="phoneNumber"/></c:set>
+                            <c:if test="${not empty phoneNumberError}">
+                                <c:set var="phoneNumberErrorClass" value="error"/>
+                            </c:if>
+                            <div class="clearfix ${phoneNumberErrorClass}">
+                                <label id="account-settings-phone-number" for="phoneNumber">${phoneNumber}</label>
+                                <div class="input account-settings-field">
+                                    <form:input path="phoneNumber" cssErrorClass="xlarge error" cssClass="xlarge"/>
+                                    <form:errors path="phoneNumber" cssClass="alert-message error" />
+                                </div>
+                            </div><!-- class="clearfix"-->
+                            <div id="change-password-link" class="actions">
+                                <a class="btn large" href="<c:url value="/change-password.html?email=${userSignUpCommand.email}&amp;token=authenticated"/>"><fmt:message key="account-settings.changePassword"/></a>
+                            </div>
+                            <div id="account-settings-form-submit" class="actions">
+                                <input class="btn primary" type="submit" value="<spring:message code="account-settings.saveChanges"/> &raquo;"/>
+                            </div>
+                        </form:form>
+                    </div><!-- id="account-settings-form" -->
+                </div><!-- class="span14 offset1" -->
+            </div><!-- class="row" -->
+        </div><!-- class="container" -->
         <%@include file="template/footer.jsp" %>
     </body>
 </html>

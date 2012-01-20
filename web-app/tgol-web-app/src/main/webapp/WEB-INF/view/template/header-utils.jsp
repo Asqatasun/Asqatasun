@@ -9,14 +9,14 @@
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Set"%>
 
-            <div class="yui3-g clearfix">
-                <div class="yui3-u-1-4">
-                    <a href="<c:url value="/dispatch.html"/>" title="<fmt:message key="home.home"/>">
-                        <img src="<c:url value="/Images/Logo-Tanaguru.com-75dpi-210x95-white.png"/>" alt="<fmt:message key="home.home"/>" />
+        <div class="topbar">
+            <div class="fill">
+                <div class="container">
+                    <a class="brand" href="<c:url value="/dispatch.html"/>" title="<fmt:message key="home.home"/>">
+                        <img src="<c:url value="/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>" alt="<fmt:message key="home.home"/>" />
                     </a>
-                </div>
-                <div class="yui3-u-3-4" id="login-box">
-                    <c:if test="${authenticatedUser != null && authenticatedUser.email1 != 'guest'}">
+                    <ul class="nav secondary-nav">
+                        <c:if test="${authenticatedUser != null && authenticatedUser.email1 != 'guest'}">
                     <c:choose>
                         <c:when test='${authenticatedUser.firstName != null && authenticatedUser.name != null}'>
                             <c:set var="userName" scope="page" value="${authenticatedUser.firstName} ${authenticatedUser.name}"/>
@@ -30,44 +30,37 @@
                     </c:choose>
                     <c:choose>
                         <c:when test="${configProperties['enable-account-settings'] == 'true'}">
-                        <fmt:message key="home.hello"/> <a href="<c:url value="/account-settings.html"/>">${userName}</a>,
+                        <li>
+                            <a href="<c:url value="/account-settings.html"/>">${userName}</a>
+                        </li>
                         </c:when>
                         <c:otherwise>
-                        <fmt:message key="home.hello"/> <a href="#">${userName}</a>,
+                        <li>
+                            <a href="#">${userName}</a>
+                        </li>
                         </c:otherwise>
                     </c:choose>
                     </c:if>
                     <c:if test="${displayLogoutLink != 'false' && authenticatedUser != null}">
-                        <a href="<c:url value="/j_spring_security_logout"/>" id="logout"><fmt:message key="home.logout"/></a> <img src="<c:url value="/Images/icon-logout.png"/>" alt="" id="logout-icon"/>
+                        <li>
+                            <div>
+                                <a href="<c:url value="/j_spring_security_logout"/>" id="logout">
+                                    <fmt:message key="home.logout"/>
+                                    <img src="<c:url value="/Images/icon-logout.png"/>" alt="" id="logout-icon"/>
+                                </a>
+                            </div>
+                        </li>
                     </c:if>
                     <c:if test="${configProperties['enable-sign-up'] == 'true'}">
                     <c:if test="${displaySignUpLink == 'true'}">
-                        <a href="<c:url value="/sign-up.html"/>" id="sign-up"><fmt:message key="login.sign-up"/></a>
+                        <li>
+                            <a href="<c:url value="/sign-up.html"/>" id="sign-up"><fmt:message key="login.sign-up"/></a>
+                        </li>
                     </c:if>
                     </c:if>
-                    <%
-                        // SORRRRRYYY !!!!!!!!!!!!!!!!
-                        StringBuffer strBuffer = new StringBuffer();
-                        HttpServletRequest servletRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-                        strBuffer.append("?");
-                        Set set = servletRequest.getParameterMap().entrySet();
-                        // Get an iterator
-                        Iterator i = set.iterator();
-                        while(i.hasNext()) {
-                            Map.Entry me = (Map.Entry)i.next();
-                            if (!me.getKey().toString().equalsIgnoreCase("lang")) {
-                                strBuffer.append(me.getKey());
-                                strBuffer.append("=");
-                                strBuffer.append(((String[])me.getValue())[0]);
-                                strBuffer.append("&amp;");
-                            }
-                        }
-                    %>
-                    <a href="<%out.print(strBuffer.toString());%>lang=en" title="Switch to english" lang="en">
-                        <img src="<c:url value="/Images/en-flag.gif"/>" alt="Switch to english" />
-                    </a>
-                    <a href="<%out.print(strBuffer.toString());%>lang=fr" title="Passer en français" lang="fr">
-                        <img src="<c:url value="/Images/fr-flag.gif"/>" alt="Passer en français" />
-                    </a>
-                </div>
-            </div>
+                    <c:set var="isInTopBar" scope="page" value="true"/>
+                    <%@include file="lang-box.jsp" %>
+                    </ul><!--class="nav secondary-nav"-->
+                </div><!-- class="container" -->
+            </div><!-- class="fill" -->
+        </div><!-- class="topbar" -->

@@ -45,29 +45,38 @@
                         <c:set var="markGrade" scope="page" value="grade-f"/>
                     </c:when>
                 </c:choose>
-
-                <div class=" ${scoreClass} ${markGrade}">
+            <c:set var="spanClass" scope="page" value="span2"/>
+            <c:if test="${addSpanToDiv != 'true'}">
+                <c:set var="spanClass" scope="page" value=""/>
+            </c:if>
+                <div class="${spanClass} ${scoreClass} ${markGrade}">
                     ${mark}%
-                    <c:if test="${displayWeightedMark == 'true'}">
-                        <span class="weighted-mark-label"> <fmt:message key="resultPage.weightedMark"/> </span>
-                        <span class="${weightedScoreClass} ${weightedMarkGrade}">${weightedMark}%</span>
-                    </c:if>
-                    <c:if test="${hasProgressInfo == 'true'}">
-                        <c:choose>
-                            <c:when test="${progressValue == 'PROGRESS'}">
-                                <img src="<c:url value="/Images/increase-narrow.png"/>" alt="<fmt:message key="score-increase"/>" title="<fmt:message key="score-increase"/>" class="score-progression"/>
-                            </c:when>
-                            <c:when test="${progressValue == 'REGRESS'}">
-                                <img src="<c:url value="/Images/decrease-narrow.png"/>" alt="<fmt:message key="score-decrease"/>" title="<fmt:message key="score-decrease"/>" class="score-progression"/>
-                            </c:when>
-                            <c:when test="${progressValue == 'STABLE'}">
-                                <img src="<c:url value="/Images/stable-narrow.png"/>" alt="<fmt:message key="score-stable"/>" title="<fmt:message key="score-stable"/>" class="score-progression"/>
-                            </c:when>
-                        </c:choose>
-                    </c:if>
-                    <c:if test="${hasScoreFormulaLink == 'true'}">
-                    <p id="score-formula">
-                        <a href="<fmt:message key="resultPage.scoreFormulaLinkURL"/>"><fmt:message key="resultPage.scoreFormulaLinkText"/></a>
-                    </p>
-                    </c:if>
                 </div>
+            <c:if test="${displayWeightedMark == 'true'}">
+                <span class="weighted-mark-label"> <fmt:message key="resultPage.weightedMark"/> </span>
+                <span class="${weightedScoreClass} ${weightedMarkGrade}">${weightedMark}%</span>
+                <c:if test="${hasScoreFormulaLink == 'true'}">
+                <span id="score-formula">
+                    <a href="<fmt:message key="resultPage.scoreFormulaLinkURL"/>"><fmt:message key="resultPage.scoreFormulaLinkText"/></a>
+                </span>
+                </c:if>
+            </c:if>
+            <c:if test="${hasProgressInfo == 'true'}">
+                <c:choose>
+                <c:when test="${progressValue == 'PROGRESS'}">
+                <div class="span1">
+                    <img src="<c:url value="/Images/increase-narrow.png"/>" alt="<fmt:message key="score-increase"/>" title="<fmt:message key="score-increase"/>" class="score-progression"/>
+                </div>
+                </c:when>
+                <c:when test="${progressValue == 'REGRESS'}">
+                <div class="span1">
+                    <img src="<c:url value="/Images/decrease-narrow.png"/>" alt="<fmt:message key="score-decrease"/>" title="<fmt:message key="score-decrease"/>" class="score-progression"/>
+                </div>
+                </c:when>
+                <c:when test="${progressValue == 'STABLE'}">
+                <div class="span1">
+                    <img src="<c:url value="/Images/stable-narrow.png"/>" alt="<fmt:message key="score-stable"/>" title="<fmt:message key="score-stable"/>" class="score-progression"/>
+                </div>
+                </c:when>
+                </c:choose>
+            </c:if>

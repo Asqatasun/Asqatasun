@@ -26,7 +26,7 @@
                     </cewolf:data>
                     <cewolf:chartpostprocessor id="pieSeriesPaint">
                         <cewolf:param name="0" value='<%= new String("#EDFF9F")%>'/>
-                        <cewolf:param name="1" value='<%= new String("#FF575E")%>'/>
+                        <cewolf:param name="1" value='<%= new String("#C43C35")%>'/>
                         <cewolf:param name="2" value='<%= new String("#8DD5E7")%>'/>
                         <cewolf:param name="3" value='<%= new String("#CCCCCC")%>'/>
                     </cewolf:chartpostprocessor>
