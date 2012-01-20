@@ -39,7 +39,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -49,21 +48,29 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
  */
 public final class AuditSetUpCommandFactory {
 
-    private static final Logger LOGGER = Logger.getLogger(AuditSetUpCommandFactory.class);
-    private static ParameterDataServiceDecorator parameterDataService;
-    public static ParameterDataServiceDecorator getParameterDataService() {
+    private ParameterDataServiceDecorator parameterDataService;
+    public ParameterDataServiceDecorator getParameterDataService() {
         return parameterDataService;
     }
 
     @Autowired
-    public static void setParameterDataService(ParameterDataServiceDecorator parameterDataService) {
-        AuditSetUpCommandFactory.parameterDataService = parameterDataService;
+    public void setParameterDataService(ParameterDataServiceDecorator parameterDataService) {
+        this.parameterDataService = parameterDataService;
     }
+
+    private static AuditSetUpCommandFactory auditSetUpCommandFactory;
 
     /**
      * Factory has default constructor
      */
     private AuditSetUpCommandFactory(){}
+
+    public static synchronized AuditSetUpCommandFactory getInstance() {
+        if (auditSetUpCommandFactory == null) {
+            auditSetUpCommandFactory = new AuditSetUpCommandFactory();
+        }
+        return auditSetUpCommandFactory;
+    }
     
     /**
      * Return a initialised auditCommand object for the given contract. This object
@@ -74,7 +81,7 @@ public final class AuditSetUpCommandFactory {
      * @param auditSite
      * @return
      */
-    public static AuditSetUpCommand getInitialisedAuditCommand (
+    public AuditSetUpCommand getInitialisedAuditCommand (
             Contract contract,
             Map<String, List<AuditSetUpFormField>> parametersMap,
             boolean isAuditSite,
@@ -110,7 +117,7 @@ public final class AuditSetUpCommandFactory {
                     }
                 }
                 if (isAuditSite) {
-                    lastUserValue = AuditSetUpCommandFactory.getParameterDataService().
+                    lastUserValue = parameterDataService.
                             getLastParameterValueFromUser(contract.getId(), ap.getParameterElement(), ScopeEnum.DOMAIN);
                     if (lastUserValue != null && !lastUserValue.equalsIgnoreCase(defaultValue)) {
                         // we override the auditParameter with the last user value
@@ -134,7 +141,7 @@ public final class AuditSetUpCommandFactory {
         return auditSetUpCommand;
     }
 
-    private static CommonsMultipartFile[] getGroupOfFileInput(Contract contract) {
+    private CommonsMultipartFile[] getGroupOfFileInput(Contract contract) {
         CommonsMultipartFile[] groupOfFileInput = new CommonsMultipartFile[AuditSetUpCommand.DEFAULT_LIST_SIZE];
         return (contract.getUser() == null) ? null : groupOfFileInput;
     }
@@ -146,7 +153,7 @@ public final class AuditSetUpCommandFactory {
      * @param contractId
      * @return
      */
-    private static List<String> getGroupOfPagesUrl(Contract contract, boolean isGuestUser) {
+    private List<String> getGroupOfPagesUrl(Contract contract, boolean isGuestUser) {
         User user = contract.getUser();
         List<String> groupOfPagesUrl = new LinkedList<String>();
         if (user == null) {
@@ -175,7 +182,7 @@ public final class AuditSetUpCommandFactory {
      * @param restrictionSet
      * @return
      */
-    public static Map<String, List<AuditSetUpFormField>> getParametersMapCopy(
+    public Map<String, List<AuditSetUpFormField>> getParametersMapCopy(
             Contract contract,
             Map<String, List<AuditSetUpFormFieldBuilderImpl>> auditSetUpFormFieldBuilderMap) {
 
@@ -204,7 +211,7 @@ public final class AuditSetUpCommandFactory {
      * @param ap
      * @param restrictionSet
      */
-    private static void applyRestrictionToAuditSetUpFormField(
+    private void applyRestrictionToAuditSetUpFormField(
             AuditSetUpFormField ap,
             Set<? extends Restriction> restrictionSet) {
         if (ap.getFormField() instanceof NumericalFormField) {
@@ -246,7 +253,7 @@ public final class AuditSetUpCommandFactory {
      * @param restrictionCode
      * @return
      */
-    private static Restriction getRestrictionFromContractRestrictionSet(
+    private Restriction getRestrictionFromContractRestrictionSet(
             Set<? extends Restriction> restrictionSet,
             String restrictionCode) {
         for (Restriction restriction : restrictionSet) {
