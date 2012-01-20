@@ -214,6 +214,11 @@
             <groupId>batik</groupId>
             <artifactId>batik-svggen</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.googlecode.htmlcompressor</groupId>
+            <artifactId>htmlcompressor</artifactId>
+            <version>1.5.2</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

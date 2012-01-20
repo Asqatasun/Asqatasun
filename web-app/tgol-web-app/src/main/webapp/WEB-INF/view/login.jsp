@@ -1,3 +1,5 @@
+<%@taglib uri="http://htmlcompressor.googlecode.com/taglib/compressor" prefix="compress" %>
+<compress:html>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@page pageEncoding="UTF-8"%>
 <%@page language="java"%>
@@ -120,3 +122,4 @@
         <%@include file="template/footer.jsp" %>
     </body>
 </html>
+</compress:html>
