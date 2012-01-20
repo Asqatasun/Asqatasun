@@ -26,6 +26,7 @@ import java.util.Collection;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.entity.subject.WebResourceImpl;
@@ -43,6 +44,24 @@ public class TgolWebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
     private static final String JOIN_PROCESS_RESULT =" JOIN r.processResultList pr";
     private static final String JOIN_TEST =" JOIN pr.test t";
 
+    private String selectAllThemeKey;
+    public String getSelectAllThemeKey() {
+        return selectAllThemeKey;
+    }
+
+    public void setSelectAllThemeKey(String selectAllThemeKey) {
+        this.selectAllThemeKey = selectAllThemeKey;
+    }
+
+    private String selectAllTestResultKey;
+    public String getSelectAllTestResultKey() {
+        return selectAllTestResultKey;
+    }
+
+    public void setSelectAllTestResultKey(String selectAllTestResultKey) {
+        this.selectAllTestResultKey = selectAllTestResultKey;
+    }
+    
     /**
      * Default constructor
      */
@@ -124,6 +143,55 @@ public class TgolWebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
                 + " AND s = :scope");
         query.setParameter("webResource", webResource);
         query.setParameter("scope", scope);
+        try {
+            return query.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public Collection<ProcessResult> retrieveProcessResultListByWebResourceAndScope(
+            WebResource webResource,
+            Scope scope,
+            String theme,
+            String testSolution) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT distinct(pr) FROM ");
+        sb.append(getEntityClass().getName());
+        sb.append(" r");
+        sb.append(JOIN_PROCESS_RESULT);
+        sb.append(" LEFT JOIN FETCH pr.remarkList pk");
+        sb.append(" LEFT JOIN FETCH pk.elementList el");
+        sb.append(" JOIN pr.test t");
+        sb.append(" JOIN pr.test.criterion.theme th");
+        sb.append(" JOIN t.scope s");
+        sb.append(" WHERE r=:webResource");
+        sb.append(" AND s = :scope ");
+        if (theme != null && 
+                !theme.isEmpty() &&
+                    !theme.equals(selectAllThemeKey)) {
+            sb.append("AND (th.code = :theme)");
+        }
+        if (testSolution != null && 
+                !testSolution.isEmpty() &&
+                    !testSolution.equals(selectAllTestResultKey)) {
+            sb.append(" AND (pr.definiteValue = :testSolution) ");
+        }
+
+        Query query = entityManager.createQuery(sb.toString());
+        query.setParameter("webResource", webResource);
+        query.setParameter("scope", scope);
+        if (theme != null &&
+                !theme.isEmpty() &&
+                    !theme.equals(selectAllThemeKey)) {
+            query.setParameter("theme", theme);
+        }
+        if (testSolution != null &&
+                !testSolution.isEmpty() &&
+                    !testSolution.equals(selectAllTestResultKey)) {
+            query.setParameter("testSolution", TestSolution.valueOf(testSolution));
+        }
         try {
             return query.getResultList();
         } catch (NoResultException e) {
