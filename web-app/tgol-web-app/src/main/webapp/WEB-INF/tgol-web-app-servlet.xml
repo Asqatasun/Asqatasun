@@ -23,6 +23,7 @@
     </bean>
 
     <!-- spring mvc imports -->
+    <import resource="conf/mvc/tgol-beans-command-factories.xml"/>
     <import resource="conf/mvc/tgol-beans-controller.xml"/>
     <import resource="conf/mvc/tgol-beans-form.xml"/>
     <import resource="conf/mvc/tgol-beans-handler.xml"/>

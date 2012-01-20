@@ -20,6 +20,14 @@
             </list>
         </property>
         <property name="actionHandler" ref="contractActionHandler"/>
+<!--        <property name="displayOptionFields">
+            <list>
+                <ref bean="displayContractOrderSelectFormFieldBuilder"/>
+                <ref bean="displayContractElementSelectFormFieldBuilder"/>
+                <ref bean="exclusionRegexpContractFormFieldBuilder"/>
+                <ref bean="inclusionRegexpContractFormFieldBuilder"/>
+            </list>
+        </property>-->
     </bean>
 
     <bean id="pageListController" class="org.opens.tgol.controller.PageListController">
@@ -58,6 +66,15 @@
             </list>
         </property>
         <property name="actionHandler" ref="resultActionHandler"/>
+        <property name="formFieldBuilderList">
+            <list>
+                <ref bean="aw21ThemeSelectThemeSelectFormFieldBuilder"/>
+                <ref bean="seoThemeSelectThemeSelectFormFieldBuilder"/>
+                <ref bean="testResultSelectThemeSelectFormFieldBuilder"/>
+            </list>
+        </property>
+        <property name="themeSortKey" value="theme"/>
+        <property name="testResultSortKey" value="test-result"/>
     </bean>
 
     <bean id="auditSynthesisController" class="org.opens.tgol.controller.AuditSynthesisController">
@@ -132,7 +149,7 @@
             <ref bean="auditSiteSetUpFormValidator"/>
         </property>
     </bean>
-    
+
     <bean id="auditExportResultController" class="org.opens.tgol.controller.AuditExportResultController">
         <property name="parametersToDisplay">
             <map>

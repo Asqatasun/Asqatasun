@@ -14,9 +14,30 @@
         </property>
     </bean>
 
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.opens.tgol.exception.ForbiddenUserException">access-denied</prop>
+                <prop key="org.opens.tgol.exception.ForbiddenPageException">access-denied</prop>
+                <prop key="org.opens.tgol.exception.ForbiddenAuditException">access-denied</prop>
+                <prop key="org.opens.tgol.exception.LostInSpaceException">oups</prop>
+            </props>
+        </property>
+        <property name="defaultStatusCode">
+            <value>404</value>
+        </property>
+        <property name="statusCodes">
+            <props>
+                <prop key="access-denied">403</prop>
+                <prop key="oups">200</prop>
+            </props>
+        </property>
+    </bean>
+
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <!-- one of the properties available; the maximum file size in bytes 104857600 = 100Mbytes -->
+         <!--one of the properties available; the maximum file size in bytes 104857600 = 100Mbytes-->
         <property name="maxUploadSize" value="104857600"/>
+        <!--<property name="maxUploadSize" value="1048576"/>-->
     </bean>
 
     <!-- Exception resolvers

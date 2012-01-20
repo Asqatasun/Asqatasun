@@ -158,15 +158,46 @@
     <bean id="exportOdsAction" class="org.opens.tgol.action.ActionImpl">
         <property name="actionCode" value="EXPORT_ODS"/>
         <property name="actionI81NCode" value="resultPage.odsExport"/>
+        <property name="actionAltI81NCode" value="resultPage.odsExportAlt"/>
         <property name="actionUrl" value="/home/contract/export-audit-result.html?format=ods"/>
         <property name="disabledActionImageUrl" value="/Images/ods_export.png"/>
         <property name="enabledActionImageUrl" value="/Images/ods_export.png"/>
+    </bean>
+
+    <bean id="exportXlsAction" class="org.opens.tgol.action.ActionImpl">
+        <property name="actionCode" value="EXPORT_XLS"/>
+        <property name="actionI81NCode" value="resultPage.xlsExport"/>
+        <property name="actionAltI81NCode" value="resultPage.xlsExportAlt"/>
+        <property name="actionUrl" value="#"/>
+        <property name="disabledActionImageUrl" value="/Images/xls_export.png"/>
+        <property name="enabledActionImageUrl" value="/Images/xls_export.png"/>
+    </bean>
+
+    <bean id="exportCsvAction" class="org.opens.tgol.action.ActionImpl">
+        <property name="actionCode" value="EXPORT_CSV"/>
+        <property name="actionI81NCode" value="resultPage.csvExport"/>
+        <property name="actionAltI81NCode" value="resultPage.csvExportAlt"/>
+        <property name="actionUrl" value="#"/>
+        <property name="disabledActionImageUrl" value="/Images/csv_export.png"/>
+        <property name="enabledActionImageUrl" value="/Images/csv_export.png"/>
+    </bean>
+
+    <bean id="exportPdfAction" class="org.opens.tgol.action.ActionImpl">
+        <property name="actionCode" value="EXPORT_PDF"/>
+        <property name="actionI81NCode" value="resultPage.pdfExport"/>
+        <property name="actionAltI81NCode" value="resultPage.pdfExportAlt"/>
+        <property name="actionUrl" value="#"/>
+        <property name="disabledActionImageUrl" value="/Images/pdf_export.png"/>
+        <property name="enabledActionImageUrl" value="/Images/pdf_export.png"/>
     </bean>
 
     <bean id="exportVoter" class="org.opens.tgol.action.voter.ActionVoterImpl">
         <property name="actionEnableMap">
             <map>
                 <entry key="EXPORT_ODS" value="true"/>
+                <entry key="EXPORT_PDF" value="false"/>
+<!--                <entry key="EXPORT_XLS" value="false"/>-->
+                <entry key="EXPORT_CSV" value="false"/>
             </map>
         </property>
         <property name="code" value="EXPORT"/>
@@ -176,6 +207,9 @@
     <property name="actionList">
             <list>
                 <ref bean="exportOdsAction"/>
+<!--                <ref bean="exportXlsAction"/>-->
+                <ref bean="exportCsvAction"/>
+                <ref bean="exportPdfAction"/>
             </list>
         </property>
         <property name="actionAccessibilityVoterMap">
