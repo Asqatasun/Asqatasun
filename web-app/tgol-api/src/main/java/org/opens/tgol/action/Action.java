@@ -57,18 +57,31 @@ public interface Action {
      */
     void setActionCode(String contractActionCode);
 
-        /**
+    /**
      *
      * @return
-     *      the contract action I18n code
+     *      the contract I18n code
      */
     String getActionI81NCode();
 
     /**
      *
+     * @param ationI81NCode
+     */
+
+    void setActionI81NCode(String actionI81NCode);
+    /**
+     *
+     * @return
+     *      the action title I18n code
+     */
+    String getActionAltI81NCode();
+
+    /**
+     *
      * @param contractActionI81NCode
      */
-    void setActionI81NCode(String contractActionI81NCode);
+    void setActionAltI81NCode(String actionTitleI81NCode);
 
     /**
      *
