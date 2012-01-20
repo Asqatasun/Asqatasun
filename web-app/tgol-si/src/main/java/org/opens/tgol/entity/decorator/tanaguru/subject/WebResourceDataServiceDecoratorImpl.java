@@ -162,6 +162,20 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
     }
 
     @Override
+    public Collection<ProcessResult> getProcessResultListByWebResourceAndScope(
+            WebResource webResource,
+            Scope scope,
+            String theme,
+            String testSolution) {
+        return ((TgolWebResourceDAO)entityDao).
+                retrieveProcessResultListByWebResourceAndScope(
+                    webResource,
+                    scope,
+                    theme,
+                    testSolution);
+    }
+
+    @Override
     public Long getResultCountByResultTypeAndTheme(
             WebResource webResource,
             Audit audit,
