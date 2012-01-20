@@ -34,6 +34,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import junit.framework.TestCase;
+import org.opens.tgol.exception.ForbiddenUserException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -94,24 +95,69 @@ public class AuditSetUpControllerTest extends TestCase {
 
         // the contract is not associated with the current user. The access is denied
         initSecurityContextHolderContext("test2@test.com");
-        returnedView = asuc.displayPageAuditSetUp("1", null, null, model);
-        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-        returnedView = asuc.displayPageAuditSetUp("2", null, null, model);
-        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-        returnedView = asuc.displayPageAuditSetUp("3", null, null, model);
-        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-        returnedView = asuc.displayPageAuditSetUp("4", null, null, model);
-        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-        returnedView = asuc.displayPageAuditSetUp("5", null, null, model);
-        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-        returnedView = asuc.displayPageAuditSetUp("6", null, null, model);
-        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-        returnedView = asuc.displayPageAuditSetUp("7", null, null, model);
-        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-        returnedView = asuc.displayPageAuditSetUp("8", null, null, model);
-        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-        returnedView = asuc.displayPageAuditSetUp("9", null, null, model);
-        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
+        try {
+            returnedView = asuc.displayPageAuditSetUp("1", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenUserException fue) {
+            assertTrue(true);
+        }
+//        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
+        try {
+            returnedView = asuc.displayPageAuditSetUp("2", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenUserException fue) {
+            assertTrue(true);
+        }
+//        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
+        try {
+            returnedView = asuc.displayPageAuditSetUp("3", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenUserException fue) {
+            assertTrue(true);
+        }
+//        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
+        try {
+            returnedView = asuc.displayPageAuditSetUp("4", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenUserException fue) {
+            assertTrue(true);
+        }
+//        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
+        try {
+            returnedView = asuc.displayPageAuditSetUp("5", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenUserException fue) {
+            assertTrue(true);
+        }
+//        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
+        try {
+            returnedView = asuc.displayPageAuditSetUp("6", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenUserException fue) {
+            assertTrue(true);
+        }
+//        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
+        try {
+            returnedView = asuc.displayPageAuditSetUp("7", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenUserException fue) {
+            assertTrue(true);
+        }
+//        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
+        try {
+            returnedView = asuc.displayPageAuditSetUp("8", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenUserException fue) {
+            assertTrue(true);
+        }
+//        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
+        try {
+            returnedView = asuc.displayPageAuditSetUp("9", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenUserException fue) {
+            assertTrue(true);
+        }
+//        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
     }
 
     public void testDisplaySiteAuditSetUp() {
@@ -257,22 +303,62 @@ public class AuditSetUpControllerTest extends TestCase {
         
         // the contracts are not associated with the current user. The access is denied
         initSecurityContextHolderContext("test2@test.com");
-        returnedView = asuc.displaySiteAuditSetUp("1", null, null, model);
-        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-        returnedView = asuc.displaySiteAuditSetUp("2", null, null, model);
-        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-        returnedView = asuc.displaySiteAuditSetUp("3", null, null, model);
-        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-        returnedView = asuc.displaySiteAuditSetUp("4", null, null, model);
-        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-        returnedView = asuc.displaySiteAuditSetUp("5", null, null, model);
-        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-        returnedView = asuc.displaySiteAuditSetUp("6", null, null, model);
-        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-        returnedView = asuc.displaySiteAuditSetUp("7", null, null, model);
-        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-        returnedView = asuc.displaySiteAuditSetUp("8", null, null, model);
-        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
+        try {
+            returnedView = asuc.displaySiteAuditSetUp("1", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenUserException fue) {
+            assertTrue(true);
+        }
+//        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
+        try {
+            returnedView = asuc.displaySiteAuditSetUp("2", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenUserException fue) {
+            assertTrue(true);
+        }
+//        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
+        try {
+            returnedView = asuc.displaySiteAuditSetUp("3", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenUserException fue) {
+            assertTrue(true);
+        }
+//        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
+        try {
+            returnedView = asuc.displaySiteAuditSetUp("4", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenUserException fue) {
+            assertTrue(true);
+        }
+//        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
+        try {
+            returnedView = asuc.displaySiteAuditSetUp("5", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenUserException fue) {
+            assertTrue(true);
+        }
+//        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
+        try {
+            returnedView = asuc.displaySiteAuditSetUp("6", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenUserException fue) {
+            assertTrue(true);
+        }
+//        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
+        try {
+            returnedView = asuc.displaySiteAuditSetUp("7", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenUserException fue) {
+            assertTrue(true);
+        }
+//        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
+        try {
+            returnedView = asuc.displaySiteAuditSetUp("8", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenUserException fue) {
+            assertTrue(true);
+        }
+//        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
     }
 
     private void initTgsiContext(){
