@@ -129,6 +129,7 @@ public class ActionImpl implements Action {
         action.setDisabledActionImageUrl(this.disabledActionImageUrl);
         action.setEnabledActionImageUrl(this.enabledActionImageUrl);
         action.setCssSelector(cssSelector);
+        action.setActionAltI81NCode(this.actionAltI81NCode);
         return action;
     }
 
