@@ -46,9 +46,9 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.opens.maven.plugins</groupId>
+                <groupId>${testingToolsGroupId}</groupId>
                 <artifactId>maven-kbcsv-plugin</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${testingToolsVersion}</version>
                 <executions>
                     <execution>
                         <id>generate-csv</id>
@@ -64,9 +64,9 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.opens.maven.plugins</groupId>
+                <groupId>${testingToolsGroupId}</groupId>
                 <artifactId>maven-testgenerator-plugin</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${testingToolsVersion}</version>
                 <executions>
                     <execution>
                         <id>generate-tests</id>
