@@ -64,13 +64,13 @@
                                         <c:forEach var="action" items="${resultActionList}" varStatus="pAction">
                                             <c:choose>
                                                 <c:when test="${action.isActionEnabled == 'false'}">
-                                        <a href="<c:url value="${action.actionUrl}&amp;wr=${param.wr}"/>" class="btn disabled primary" title="<fmt:message key="${action.ActionAltI81NCode}"/>">
+                                        <a href="<c:url value="${action.actionUrl}&amp;wr=${param.wr}"/>" class="btn disabled primary" title="<fmt:message key="${action.actionAltI81NCode}"/>">
                                             <fmt:message key="${action.actionI81NCode}"/>
                                         </a>
                                                 </c:when>
                                                 <c:otherwise>
                                                 <!-- the url actions already have a parameter (export type for example-->
-                                        <a href="<c:url value="${action.actionUrl}&amp;wr=${param.wr}"/>" class="btn primary" title="<fmt:message key="${action.ActionAltI81NCode}"/>">
+                                        <a href="<c:url value="${action.actionUrl}&amp;wr=${param.wr}"/>" class="btn primary" title="<fmt:message key="${action.actionAltI81NCode}"/>">
                                             <fmt:message key="${action.actionI81NCode}"/>
                                         </a>
                                                 </c:otherwise>
