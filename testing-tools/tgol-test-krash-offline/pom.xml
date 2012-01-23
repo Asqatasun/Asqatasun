@@ -16,7 +16,7 @@
     <url>http://www.tanaguru.org</url>
     <build>
         <plugins>
-<!--            <plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.2</version>
@@ -44,7 +44,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>
             <plugin>
                 <groupId>${testingToolsGroupId}</groupId>
                 <artifactId>maven-testgenerator-plugin</artifactId>
