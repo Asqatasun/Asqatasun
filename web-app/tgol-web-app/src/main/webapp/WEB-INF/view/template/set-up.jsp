@@ -190,7 +190,7 @@
                         </fieldset>
                         </c:forEach>
                         <div id="audit-set-up-form-submit" class="actions">
-                            <input type="submit" value="<fmt:message key="auditSetUp.launchAudit"/>" class="large awesome orange"/>
+                            <input id="input-submit" type="submit" value="<fmt:message key="auditSetUp.launchAudit"/>" class="large awesome orange"/>
                         </div>
                     </form:form>
                 </div> <!-- id="audit-set-up-form"-->
