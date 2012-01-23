@@ -108,74 +108,74 @@ public class LanguageDetector {
     public LanguageDetectionResult detectLanguage(String text) {
         BufferedReader reader = null;
         InputStreamReader inputStreamReader = null;
-        try {
-            text = java.net.URLEncoder.encode(text, UTF8_ENCODING_KEY);
-            boolean isTextTruncated = false;
-            if (text.length() > MAX_SIZE_TEXT) {
-                text = text.substring(0, MAX_SIZE_TEXT).trim();
-                //to avoid the split of an encoded character
-                if (text.charAt(text.length()-1) == '%') {
-                    text=text.substring(0, text.length()-1);
-                } else if (text.charAt(text.length()-2) == '%') {
-                    text=text.substring(0, text.length()-2);
-                } else if (text.charAt(text.length()-3) == '%') {
-                    text=text.substring(0, text.length()-3);
-                }
-                isTextTruncated = true;
-            }
-            URL url = new URL(serviceUrl + version + textKey + text);
-            LOGGER.debug("Json url request " +url.toString());
-            URLConnection connection = null;
-            if (!StringUtils.isEmpty(proxyHost) && !StringUtils.isEmpty(proxyPort)) {
-                LOGGER.debug("Launch request through proxy with values " +proxyHost + " : " +proxyPort);
-                SocketAddress sa = new InetSocketAddress(proxyHost,Integer.valueOf(proxyPort));
-                Proxy proxy = new Proxy(Proxy.Type.HTTP, sa);
-                connection = url.openConnection(proxy);
-            } else {
-                LOGGER.debug("Launch direct");
-                connection = url.openConnection();
-            }
-            String line;
-            StringBuilder builder = new StringBuilder();
-            inputStreamReader = new InputStreamReader(connection.getInputStream());
-            reader = new BufferedReader(inputStreamReader);
-            while ((line = reader.readLine()) != null) {
-                builder.append(line);
-            }
-            reader.close();
-            JSONObject json = new JSONObject(builder.toString());
-            JSONObject jdata = (JSONObject) json.get(DATA_KEY);
-            JSONArray jdetections = (JSONArray) jdata.get(DETECTIONS_KEY);
-            JSONObject langObject = extractBestResultObject(jdetections);
-            // if the text is truncated, the result is seen as unreliable
-            // coz' the test is done on a part of the text.
-            if (isTextTruncated) {
-                return new LanguageDetectionResult(langObject.get(LANGUAGE_KEY).toString(),
-                    false);
-            } else {
-                return new LanguageDetectionResult(((JSONObject)jdetections.get(0)).get(LANGUAGE_KEY).toString(),
-                    Boolean.valueOf(((JSONObject)jdetections.get(0)).get(IS_RELIABLE_KEY).toString()));
-            }
-        } catch (MalformedURLException ex) {
-            LOGGER.warn(null, ex);
-        } catch (IOException ex) {
-            LOGGER.warn(null, ex);
-        } catch (JSONException ex) {
-            LOGGER.warn(null, ex);
-        } catch (Exception ex) {
-            LOGGER.warn(null, ex);
-        } finally {
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-                if (inputStreamReader != null) {
-                    inputStreamReader.close();
-                }
-            } catch (IOException ex) {
-                LOGGER.warn(ex);
-            }
-        }
+//        try {
+//            text = java.net.URLEncoder.encode(text, UTF8_ENCODING_KEY);
+//            boolean isTextTruncated = false;
+//            if (text.length() > MAX_SIZE_TEXT) {
+//                text = text.substring(0, MAX_SIZE_TEXT).trim();
+//                //to avoid the split of an encoded character
+//                if (text.charAt(text.length()-1) == '%') {
+//                    text=text.substring(0, text.length()-1);
+//                } else if (text.charAt(text.length()-2) == '%') {
+//                    text=text.substring(0, text.length()-2);
+//                } else if (text.charAt(text.length()-3) == '%') {
+//                    text=text.substring(0, text.length()-3);
+//                }
+//                isTextTruncated = true;
+//            }
+//            URL url = new URL(serviceUrl + version + textKey + text);
+//            LOGGER.debug("Json url request " +url.toString());
+//            URLConnection connection = null;
+//            if (!StringUtils.isEmpty(proxyHost) && !StringUtils.isEmpty(proxyPort)) {
+//                LOGGER.debug("Launch request through proxy with values " +proxyHost + " : " +proxyPort);
+//                SocketAddress sa = new InetSocketAddress(proxyHost,Integer.valueOf(proxyPort));
+//                Proxy proxy = new Proxy(Proxy.Type.HTTP, sa);
+//                connection = url.openConnection(proxy);
+//            } else {
+//                LOGGER.debug("Launch direct");
+//                connection = url.openConnection();
+//            }
+//            String line;
+//            StringBuilder builder = new StringBuilder();
+//            inputStreamReader = new InputStreamReader(connection.getInputStream());
+//            reader = new BufferedReader(inputStreamReader);
+//            while ((line = reader.readLine()) != null) {
+//                builder.append(line);
+//            }
+//            reader.close();
+//            JSONObject json = new JSONObject(builder.toString());
+//            JSONObject jdata = (JSONObject) json.get(DATA_KEY);
+//            JSONArray jdetections = (JSONArray) jdata.get(DETECTIONS_KEY);
+//            JSONObject langObject = extractBestResultObject(jdetections);
+//            // if the text is truncated, the result is seen as unreliable
+//            // coz' the test is done on a part of the text.
+//            if (isTextTruncated) {
+//                return new LanguageDetectionResult(langObject.get(LANGUAGE_KEY).toString(),
+//                    false);
+//            } else {
+//                return new LanguageDetectionResult(((JSONObject)jdetections.get(0)).get(LANGUAGE_KEY).toString(),
+//                    Boolean.valueOf(((JSONObject)jdetections.get(0)).get(IS_RELIABLE_KEY).toString()));
+//            }
+//        } catch (MalformedURLException ex) {
+//            LOGGER.warn(null, ex);
+//        } catch (IOException ex) {
+//            LOGGER.warn(null, ex);
+//        } catch (JSONException ex) {
+//            LOGGER.warn(null, ex);
+//        } catch (Exception ex) {
+//            LOGGER.warn(null, ex);
+//        } finally {
+//            try {
+//                if (reader != null) {
+//                    reader.close();
+//                }
+//                if (inputStreamReader != null) {
+//                    inputStreamReader.close();
+//                }
+//            } catch (IOException ex) {
+//                LOGGER.warn(ex);
+//            }
+//        }
         return null;
     }
 
