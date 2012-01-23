@@ -22,10 +22,6 @@
     </c:set>
     <%@include file="template/head.jsp" %>
     <body id="tgm-access-denied">
-        ${exception.user.email1}
-        ${exception.user.name}
-        ${exception.class}
-        ${exception}
         <%@include file="template/header-utils.jsp" %>
         <div class="container no-bg-container">
             <div class="row">
