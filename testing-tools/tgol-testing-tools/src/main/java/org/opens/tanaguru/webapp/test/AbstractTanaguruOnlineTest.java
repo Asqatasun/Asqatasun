@@ -111,10 +111,10 @@ public abstract class AbstractTanaguruOnlineTest extends SeleneseTestCase {
         ResourceBundle parametersBundle = ResourceBundle.getBundle(BUNDLE_NAME);
         resultFilePath = parametersBundle.getString(RESULT_PATH_KEY);
         userConfigFilePath = parametersBundle.getString(USER_CONFIG_PATH_KEY);
-        hostLocation = parametersBundle.getString(HOST_LOCATION_KEY);
-        loginUrl = parametersBundle.getString(LOGIN_URL_KEY);
         userFieldName = parametersBundle.getString(USER_FIELD_NAME_KEY);
         passwordFieldName = parametersBundle.getString(PASSWORD_FIELD_NAME_KEY);
+        browserName = parametersBundle.getString(BROWSER_NAME_KEY);
+        fieldName = parametersBundle.getString(FIELD_NAME_KEY);
         PropertiesConfiguration config = null;
         try {
             config = new PropertiesConfiguration(userConfigFilePath);
@@ -125,10 +125,10 @@ public abstract class AbstractTanaguruOnlineTest extends SeleneseTestCase {
         }
         user = config.getString(USER_KEY);
         password = config.getString(PASSWORD_KEY);
-        fieldName = parametersBundle.getString(FIELD_NAME_KEY);
-        formUrl = parametersBundle.getString(FORM_URL_KEY);
-        logoutUrl = parametersBundle.getString(LOGOUT_URL_KEY);
-        browserName = parametersBundle.getString(BROWSER_NAME_KEY);
+        hostLocation = config.getString(HOST_LOCATION_KEY);
+        loginUrl = config.getString(LOGIN_URL_KEY);
+        formUrl = config.getString(FORM_URL_KEY);
+        logoutUrl = config.getString(LOGOUT_URL_KEY);
     }
 
     /**
