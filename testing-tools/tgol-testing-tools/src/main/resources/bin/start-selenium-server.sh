@@ -13,7 +13,7 @@ JAVA_HOME=/usr/lib/jvm/java-6-sun
 #######################
 SELENIUM_JAR_PATH=$HOME/.m2/repository/org/seleniumhq/selenium/server/selenium-server/1.0.3/selenium-server-1.0.3.jar
 
-if [! -f $SELENIUM_JAR_PATH ]; then
+if [ ! -f $SELENIUM_JAR_PATH ]; then
   echo $SELENIUM_JAR_PATH
   echo "Selenium Jar 1.0.3 is not install in maven repository"
   exit 0
