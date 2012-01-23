@@ -184,13 +184,13 @@ public abstract class AbstractTanaguruOnlineTest extends SeleneseTestCase {
             indexFrom = indexFrom+RULE_RESULT_EXPRESSION.length();
             int indexTo = bodyText.indexOf(DOUBLE_QUOTE_CHAR, indexFrom);
             String result = bodyText.substring(indexFrom, indexTo);
-            if (result.equalsIgnoreCase(PASSED_KEY)) {
+            if (result.contains(PASSED_KEY)) {
                 return TestSolution.PASSED.name();
-            } else if (result.equalsIgnoreCase(FAILED_KEY)) {
+            } else if (result.contains(FAILED_KEY)) {
                 return TestSolution.FAILED.name();
-            } else if (result.equalsIgnoreCase(NMI_KEY)) {
+            } else if (result.contains(NMI_KEY)) {
                 return TestSolution.NEED_MORE_INFO.name();
-            } else if (result.equalsIgnoreCase(NA_KEY)) {
+            } else if (result.contains(NA_KEY)) {
                 return TestSolution.NOT_APPLICABLE.name();
             } else {
                 return RULE_NOT_YET_IMPLEMENTED;
