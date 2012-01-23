@@ -173,13 +173,11 @@
                                         <span class="help-block">
                                         <c:choose>
                                             <c:when test="${function:instanceOf(parameter.formField, 'org.opens.tgol.form.NumericalFormField')}">
-                                                bou
                                                 <fmt:message key="${i18nKey}-rule">
                                                     <fmt:param>${parameter.formField.maxValue}</fmt:param>
                                                 </fmt:message>
                                             </c:when>
                                             <c:otherwise>
-                                                bou1
                                                 <fmt:message key="${i18nKey}-rule"/>
                                             </c:otherwise>
                                         </c:choose><!-- test="instanceof NumericalFormField"-->
