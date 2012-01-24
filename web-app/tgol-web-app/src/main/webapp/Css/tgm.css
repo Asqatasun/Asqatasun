@@ -850,6 +850,7 @@ input[type="text"]:focus{
 #tgm-synthesis-site h2 {
     border-bottom: 1px dotted silver;
     margin-bottom: 1em;
+    margin-top: 1em;
 }
 #top5-failed-url-by-test td[headers=nbOfInvalidTestTop5FailedUrlByTest],
 #top5-failed-url-by-test th[id=nbOfInvalidTestTop5FailedUrlByTest],
