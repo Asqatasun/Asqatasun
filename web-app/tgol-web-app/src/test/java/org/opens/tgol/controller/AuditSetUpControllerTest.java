@@ -237,9 +237,7 @@ public class AuditSetUpControllerTest extends TestCase {
 
         // The contract 5 is of DOMAIN type. The set-up page for a site audit
         // is allowed
-        System.out.println("avant erreur");
         returnedView = asuc.displaySiteAuditSetUp("5", null, null, model);
-        System.out.println("apres erreur");
         assertEquals(true, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
         assertEquals(TgolKeyStore.AUDIT_SITE_SET_UP_VIEW_NAME, returnedView);
         assertEquals("http://www.test5.com", model.asMap().get(TgolKeyStore.URL_KEY));
