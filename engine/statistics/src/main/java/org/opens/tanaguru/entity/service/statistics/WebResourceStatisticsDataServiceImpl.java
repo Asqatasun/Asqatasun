@@ -24,6 +24,7 @@ package org.opens.tanaguru.entity.service.statistics;
 import org.opens.tanaguru.entity.dao.statistics.WebResourceStatisticsDAO;
 import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 
 /**
@@ -54,6 +55,12 @@ public class WebResourceStatisticsDataServiceImpl extends AbstractGenericDataSer
     public Integer getHttpStatusCodeByWebResource(Long webresourceId) {
         return ((WebResourceStatisticsDAO) entityDao).
                 findHttpStatusCodeByWebResource(webresourceId);
+    }
+
+    @Override
+    public WebResourceStatistics getWebResourceStatisticsByWebResource(WebResource webResource) {
+        return ((WebResourceStatisticsDAO) entityDao).
+                findWebResourceStatisticsByWebResource(webResource);
     }
 
 }

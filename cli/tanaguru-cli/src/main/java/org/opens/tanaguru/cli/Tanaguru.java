@@ -41,6 +41,7 @@ import org.opens.tanaguru.entity.service.audit.ProcessRemarkDataService;
 import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterElementDataService;
+import org.opens.tanaguru.entity.service.statistics.WebResourceStatisticsDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -63,9 +64,9 @@ public class Tanaguru implements AuditServiceListener {
     private static final String LEVEL_PARAMETER_ELEMENT_CODE = "LEVEL";
 
     private AuditService auditService = null;
-    private AnalyserService analyserService = null;
     private AuditDataService auditDataService = null;
     private WebResourceDataService webResourceDataService = null;
+    private WebResourceStatisticsDataService webResourceStatisticsDataService = null;
     private ProcessResultDataService processResultDataService = null;
     private ProcessRemarkDataService processRemarkDataService = null;
     private ParameterDataService parameterDataService = null;
@@ -87,7 +88,7 @@ public class Tanaguru implements AuditServiceListener {
         auditService = (AuditService) springBeanFactory.getBean("auditService");
         auditDataService = (AuditDataService) springBeanFactory.getBean("auditDataService");
         webResourceDataService = (WebResourceDataService) springBeanFactory.getBean("webResourceDataService");
-        analyserService = (AnalyserService) springBeanFactory.getBean("analyserService");
+        webResourceStatisticsDataService = (WebResourceStatisticsDataService) springBeanFactory.getBean("webResourceStatisticsDataService");
         processResultDataService = (ProcessResultDataService) springBeanFactory.getBean("processResultDataService");
         processRemarkDataService = (ProcessRemarkDataService) springBeanFactory.getBean("processRemarkDataService");
         parameterDataService = (ParameterDataService) springBeanFactory.getBean("parameterDataService");
@@ -109,7 +110,7 @@ public class Tanaguru implements AuditServiceListener {
         if (pageUrlList.size() > 1) {
             auditService.auditSite("site:" + pageUrlList.get(0), pageUrlList, paramSet);
         } else {
-            auditService.auditPage(pageUrlList.get(0), paramSet);
+            auditService.auditPage(pageUrlList.get(0), getAuditPageParameterSet(paramSet));
         }
     }
 
@@ -119,7 +120,8 @@ public class Tanaguru implements AuditServiceListener {
         List<ProcessResult> processResultList = (List<ProcessResult>) processResultDataService.getNetResultFromAudit(audit);
         System.out.println("Audit terminated with success at " + audit.getDateOfCreation());
         System.out.println("");
-        System.out.println("Audit Mark : " + Float.valueOf(analyserService.analyse(processResultList)).intValue() + "%");
+        System.out.println("RawMark : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getRawMark() + "%");
+        System.out.println("WeightedMark : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getMark() + "%");
         if (audit.getSubject() instanceof Site) {
             int numberOfChildWebResource = webResourceDataService.getNumberOfChildWebResource(audit.getSubject()).intValue();
             for (int i = 0; i < numberOfChildWebResource; i++) {
@@ -142,7 +144,8 @@ public class Tanaguru implements AuditServiceListener {
                 prList.add(netResult);
             }
         }
-        System.out.println("Mark : " + Float.valueOf(analyserService.analyse(prList)).intValue() + "%");
+        System.out.println("RawMark : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getRawMark() + "%");
+        System.out.println("WeightedMark : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getMark() + "%");
         for (ProcessResult result : prList) {
             System.out.println(result.getTest().getCode() + ": " + result.getValue());
             Set<ProcessRemark> processRemarkList = (Set<ProcessRemark>) processRemarkDataService.findAllByProcessResult(result);
@@ -168,11 +171,11 @@ public class Tanaguru implements AuditServiceListener {
      * equals to 0.
      * @return
      */
-    private Set<Parameter> getAuditPageParameterSet() {
+    private Set<Parameter> getAuditPageParameterSet(Set<Parameter> defaultParameterSet) {
          ParameterElement parameterElement = parameterElementDataService.getParameterElement("DEPTH");
          Parameter depthParameter = parameterDataService.getParameter(parameterElement, "0");
          Set<Parameter> auditPageParamSet = parameterDataService.updateParameter(
-                 parameterDataService.getDefaultParameterSet(), depthParameter);
+                 defaultParameterSet, depthParameter);
          return auditPageParamSet;
     }
 

@@ -112,4 +112,23 @@ public class WebResourceStatisticsDAOImpl extends AbstractJPADAO<WebResourceStat
         }
     }
 
+    @Override
+    public WebResourceStatistics findWebResourceStatisticsByWebResource(WebResource webResource) {
+        if (webResource == null) {
+            return null;
+        }
+        Query query = entityManager.createQuery(
+                "SELECT s FROM "
+                + getEntityClass().getName() + " s"
+                + " WHERE s.webResource=:webResource");
+        query.setParameter("webResource", webResource);
+        try {
+            return (WebResourceStatistics)query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        } catch (NullPointerException e) {
+            return null;
+        }
+    }
+
 }

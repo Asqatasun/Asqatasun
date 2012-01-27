@@ -65,4 +65,11 @@ public interface WebResourceStatisticsDAO extends GenericDAO<WebResourceStatisti
      */
     Integer findHttpStatusCodeByWebResource(Long webresourceId);
 
+    /**
+     *
+     * @param webresourceId
+     * @return
+     */
+    WebResourceStatistics findWebResourceStatisticsByWebResource(WebResource webReesource);
+
 }
