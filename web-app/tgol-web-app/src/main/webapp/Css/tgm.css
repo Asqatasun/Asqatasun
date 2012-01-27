@@ -850,6 +850,7 @@ input[type="text"]:focus{
 #tgm-synthesis-site h2 {
     border-bottom: 1px dotted silver;
     margin-bottom: 1em;
+    margin-top: 1em;
 }
 #top5-failed-url-by-test td[headers=nbOfInvalidTestTop5FailedUrlByTest],
 #top5-failed-url-by-test th[id=nbOfInvalidTestTop5FailedUrlByTest],
@@ -984,7 +985,7 @@ th.order2:after {
 #page-list-f4xx .col01{ /* URL */
     text-align: left;
     word-wrap: break-word;
-    max-width: 750px;
+    max-width: 600px;
 }
 #page-list-f2xx .col02{ /* Mark */
     text-align: right;
