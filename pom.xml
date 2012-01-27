@@ -19,13 +19,13 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <engineGroupId>org.opens</engineGroupId>
-        <engineVersion>1.5.0-SNAPSHOT</engineVersion>
+        <engineVersion>1.5.0-RC2</engineVersion>
         <webappGroupId>org.opens</webappGroupId>
-        <webappVersion>1.5.0-SNAPSHOT</webappVersion>
+        <webappVersion>1.5.0-RC2</webappVersion>
         <testingToolsGroupId>org.opens</testingToolsGroupId>
-        <testingToolsVersion>1.0.0-SNAPSHOT</testingToolsVersion>
+        <testingToolsVersion>1.5.0-RC2</testingToolsVersion>
         <tanaguruCliGroupId>org.opens</tanaguruCliGroupId>
-        <tanaguruCliVersion>1.5.0-SNAPSHOT</tanaguruCliVersion>
+        <tanaguruCliVersion>1.5.0-RC2</tanaguruCliVersion>
         <springGroupId>org.springframework</springGroupId>
         <springVersion>3.0.5.RELEASE</springVersion>
         <heritrixGroupId>org.archive.heritrix</heritrixGroupId>

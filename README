@@ -1,6 +1,6 @@
                    ------------------------------
                              Tanaguru
-                            Version 1.5.0
+                            Version 1.5.2-RC2
                   ------------------------------
 
 1. Web Resources
@@ -59,7 +59,11 @@ that can be found at :
 
 6. Content of the version 
 =========================
-
+Bug #236 : Add a licence file (https://dev.tanaguru.org/redmine/issues/236)
+Feature #254 : Evolution of the web-application interface to use the bootstrap UI toolkit (https://dev.tanaguru.org/redmine/issues/254)
+Feature #255 : Add a console to sort results in the result page (https://dev.tanaguru.org/redmine/issues/255)
+Feature #256 : Display all the audits of a contract in the contract page (https://dev.tanaguru.org/redmine/issues/256)
+Feature #257 : Add an indicator to indicate that an audit is running for a given contract (https://dev.tanaguru.org/redmine/issues/257)
 
 
 Have Fun
