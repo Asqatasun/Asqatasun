@@ -19,7 +19,7 @@ while getopts ":l:w:u:" opt; do
 done
 
 if [ -z "$UserId" ]; then
-        echo "Usage $0 -u <UserId> "
+        echo "Usage $0 -l <SiteLabel> -w <FQDN-url> -u <UserId> "
         exit -1
 fi
 
