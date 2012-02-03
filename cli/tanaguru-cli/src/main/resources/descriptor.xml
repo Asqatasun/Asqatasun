@@ -106,6 +106,9 @@
             <includes>
                 <include>tg-create-user.sh</include>
                 <include>tg-create-contract.sh</include>
+		<include>tg-create-contract-agence.sh</include>
+                <include>tg-create-contract-site.sh</include>
+                <include>tg-create-contract-upload.sh</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install-web-app/sql-management</outputDirectory>
