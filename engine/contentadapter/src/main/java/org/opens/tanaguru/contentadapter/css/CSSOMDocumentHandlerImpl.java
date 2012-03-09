@@ -222,11 +222,20 @@ public class CSSOMDocumentHandlerImpl implements DocumentHandler {
     @Override
     public void property(String property, LexicalUnit propertyValue,
             boolean arg2) throws CSSException {
-        ((List<CSSOMDeclarationImpl>) getNodeStack().peek()).add(
-                new CSSOMDeclarationImpl(
-                    property,
-                    getLexicalValue(propertyValue),
-                    propertyValue.getLexicalUnitType()));
+        boolean hasNextLexicalUnit = true;
+        LexicalUnit currentLexicalUnit = propertyValue;
+        while (hasNextLexicalUnit) {
+            ((List<CSSOMDeclarationImpl>) getNodeStack().peek()).add(
+                    new CSSOMDeclarationImpl(
+                        property,
+                        getLexicalValue(currentLexicalUnit),
+                        currentLexicalUnit.getLexicalUnitType()));
+            if (currentLexicalUnit.getNextLexicalUnit() != null) {
+                currentLexicalUnit = currentLexicalUnit.getNextLexicalUnit();
+            } else {
+                hasNextLexicalUnit = false;
+            }
+        }
 
     }
 
