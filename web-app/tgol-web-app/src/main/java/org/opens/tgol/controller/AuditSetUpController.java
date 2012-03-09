@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -75,6 +76,13 @@ public class AuditSetUpController extends AuditDataHandlerController{
         this.auditPageSetUpValidator = auditPageSetUpValidator;
     }
 
+    private AuditLauncherController auditLauncherController;
+    
+    @Autowired
+    public void setAuditLauncherController(AuditLauncherController auditLauncherController) {
+        this.auditLauncherController = auditLauncherController;
+    }
+    
     public AuditSetUpController() {
         super();
     }
@@ -243,8 +251,8 @@ public class AuditSetUpController extends AuditDataHandlerController{
                     parametersMap);
         }
         model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, auditSetUpCommand.getContractId());
-        request.getSession().setAttribute(TgolKeyStore.AUDIT_SET_UP_COMMAND_KEY, auditSetUpCommand);
-        return TgolKeyStore.LAUNCH_AUDIT_REDIRECT_NAME;
+        model.addAttribute(TgolKeyStore.AUDIT_SET_UP_COMMAND_KEY, auditSetUpCommand);
+        return auditLauncherController.launchAudit(auditSetUpCommand, model);
     }
 
     /**

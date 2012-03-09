@@ -21,7 +21,6 @@
  */
 package org.opens.tgol.controller;
 
-import org.opens.tgol.command.AuditSetUpCommand;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.product.Restriction;
 import org.opens.tgol.orchestrator.TanaguruOrchestrator;
@@ -35,7 +34,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -47,14 +45,11 @@ import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.entity.service.parameterization.ParameterElementDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
+import org.opens.tgol.command.AuditSetUpCommand;
 import org.opens.tgol.exception.LostInSpaceException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /** 
  *
@@ -145,19 +140,15 @@ public class AuditLauncherController extends AuditDataHandlerController {
     }
 
     /**
-     * This methods enables an authenticated user to launch an audit and deals with
-     * the breadcrumb
+     * This methods enables an authenticated user to launch an audit.
      * @param contractId
      * @param model
      * @return
      */
-    @RequestMapping(value = TgolKeyStore.LAUNCH_AUDIT_CONTRACT_URL, method = RequestMethod.GET)
-    @Secured(TgolKeyStore.ROLE_GUEST_KEY)
     public String launchAudit(
-            @RequestParam(TgolKeyStore.CONTRACT_ID_KEY) String contractId,
-            Model model,
-            HttpServletRequest request) {
-        Contract contract = getContractDataService().read(Long.valueOf(contractId));
+            AuditSetUpCommand auditSetUpCommand,
+            Model model) {
+        Contract contract = getContractDataService().read(auditSetUpCommand.getContractId());
         if (isContractExpired(contract)) {
             return displayContractView(contract, model);
         } else {
@@ -167,9 +158,6 @@ public class AuditLauncherController extends AuditDataHandlerController {
             if (!checkResult.equalsIgnoreCase(TgolKeyStore.ACT_ALLOWED)) {
                 return checkResult;
             }
-            // the parameter is retrieved through the session due to the redirection
-            AuditSetUpCommand auditSetUpCommand = (AuditSetUpCommand) request.getSession().getAttribute(TgolKeyStore.AUDIT_SET_UP_COMMAND_KEY);
-            request.getSession().removeAttribute(TgolKeyStore.AUDIT_SET_UP_COMMAND_KEY);
             if (auditSetUpCommand != null && !auditSetUpCommand.isAuditSite()) {
                 return preparePageAudit(auditSetUpCommand, model);
             }
@@ -197,7 +185,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
     private String preparePageAudit(
             AuditSetUpCommand auditSetUpCommand,
             Model model) {
-        Audit audit = null;
+        Audit audit;
         // if the form is correct, we launch the audit
         if (auditSetUpCommand.getUrlList().isEmpty()) {
             audit = launchUploadAudit(
