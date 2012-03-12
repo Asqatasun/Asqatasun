@@ -21,27 +21,15 @@
  */
 package org.opens.tanaguru.processor;
 
-import java.util.Collection;
-
+import com.thoughtworks.xstream.XStream;
+import java.util.*;
+import java.util.regex.Pattern;
+import org.apache.commons.httpclient.HttpStatus;
 import org.opens.tanaguru.contentadapter.css.CSSOMDeclaration;
 import org.opens.tanaguru.contentadapter.css.CSSOMRule;
-import org.opens.tanaguru.entity.audit.ProcessRemark;
-import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.ruleimplementation.RuleHelper;
-import com.thoughtworks.xstream.XStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import org.apache.commons.httpclient.HttpStatus;
 import org.opens.tanaguru.contentadapter.css.CSSOMStyleSheet;
-import org.opens.tanaguru.entity.audit.Content;
-import org.opens.tanaguru.entity.audit.EvidenceElement;
-import org.opens.tanaguru.entity.audit.RelatedContent;
-import org.opens.tanaguru.entity.audit.StylesheetContent;
+import org.opens.tanaguru.entity.audit.*;
+import org.opens.tanaguru.ruleimplementation.RuleHelper;
 import org.opens.tanaguru.service.ProcessRemarkService;
 import org.w3c.css.sac.LexicalUnit;
 
@@ -59,9 +47,11 @@ public class CSSHandlerImpl implements CSSHandler {
     private static final String CSS_ON_ERROR = "CSS_ON_ERROR";
     private static final String INLINE_CSS_URL_FORMAT = "#tanaguru-css-";
     private static final String INLINE_CSS = "inline";
-    Set<StylesheetContent> cssOnErrorSet;
+    private Set<StylesheetContent> cssOnErrorSet;
     private static final String BAD_UNIT_TYPE_MSG_CODE = "BadUnitType";
     private static final String UNTESTED_RESOURCE_MSG_CODE = "UnTestedResource";
+    private static final Pattern NON_ZERO_VALUE_PATTERN =
+              Pattern.compile("0+\\.0+[a-zA-Z]*|0+[a-zA-Z]*");
 
     protected ProcessRemarkService processRemarkService;
     @Override
@@ -98,14 +88,17 @@ public class CSSHandlerImpl implements CSSHandler {
             TestSolution processResult = TestSolution.PASSED;
             for (CSSOMDeclaration declaration : declarations) {
                 int unit = declaration.getUnit();
-                for (int blackListedUnit : blacklist) {
-                    if (unit == blackListedUnit) {
-                        processResult = TestSolution.FAILED;
-                        resultSet.add(processResult);
-                        addSourceCodeRemark(processResult, workingRule,
-                                BAD_UNIT_TYPE_MSG_CODE,
-                                getLexicalStringFromValue(unit));
-                        break;
+                String value = declaration.getValue();
+                if (value != null && !NON_ZERO_VALUE_PATTERN.matcher(value).matches()) {
+                    for (int blackListedUnit : blacklist) {
+                        if (unit == blackListedUnit) {
+                            processResult = TestSolution.FAILED;
+                            resultSet.add(processResult);
+                            addSourceCodeRemark(processResult, workingRule,
+                                    BAD_UNIT_TYPE_MSG_CODE,
+                                    getLexicalStringFromValue(unit));
+                            break;
+                        }
                     }
                 }
             }
