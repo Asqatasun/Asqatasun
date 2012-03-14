@@ -8,13 +8,31 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Set"%>
+            <c:choose>
+                <c:when test="${not empty configProperties['cdnUrl']}">
+                    <c:set var="tgLogoUrl" value="${configProperties['cdnUrl']}/Images/Logo-Tanaguru.com-75dpi-210x95-transp.png"/>
+                    <c:set var="enFlagUrl"value="${configProperties['cdnUrl']}/Images/en-flag2.jpeg"/>
+                    <c:set var="frFlagUrl" value="${configProperties['cdnUrl']}/Images/fr-flag2.jpeg"/>
+                </c:when>
+                <c:otherwise>
+                    <c:set var="tgLogoUrl">
+                        <c:url value="/Images/Logo-Tanaguru.com-75dpi-210x95-transp.png"/>  
+                    </c:set>
+                    <c:set var="enFlagUrl">
+                        <c:url value="/Images/en-flag2.jpeg"/>
+                    </c:set>
+                    <c:set var="frFlagUrl">
+                        <c:url value="/Images/fr-flag2.jpeg"/>
+                    </c:set>
+                </c:otherwise>
+            </c:choose>
             <c:if test="${isInNotAuthentifiedView == 'true'}">
             <div id="lang-box" class="row">
                 <c:set var="offset" value="12"/>
                 <c:if test="${addLogo == 'true'}">
                 <div id="logo-box" class="span4">
                     <a href="<c:url value="/dispatch.html"/>" title="<fmt:message key="home.home"/>">
-                        <img src="<c:url value="/Images/Logo-Tanaguru.com-75dpi-210x95-transp.png"/>" alt="" />
+                        <img src="${tgLogoUrl}" alt="" />
                     </a>
                 </div>
                 <c:set var="offset" value="8"/>
@@ -43,14 +61,14 @@
                         <li class="lang-flag">
                     </c:if>
                             <a href="<%out.print(strBuffer.toString());%>lang=en" title="Switch to english" lang="en">
-                                <img src="<c:url value="/Images/en-flag2.jpeg"/>" alt="Switch to english" />
+                                <img src="${enFlagUrl}" alt="Switch to english" />
                             </a>
                     <c:if test="${isInTopBar == 'true'}">
                         </li>
                         <li class="lang-flag">
                     </c:if>
                             <a href="<%out.print(strBuffer.toString());%>lang=fr" title="Passer en français" lang="fr">
-                                <img src="<c:url value="/Images/fr-flag2.jpeg"/>" alt="Passer en français" />
+                                <img src="${frFlagUrl}" alt="Passer en français" />
                             </a>
                     <c:if test="${isInTopBar == 'true'}">
                         </li>

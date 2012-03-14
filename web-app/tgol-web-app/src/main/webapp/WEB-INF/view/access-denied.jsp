@@ -16,6 +16,24 @@
         <c:set var="lang" value="${pageContext.response.locale}"/>
     </c:otherwise>
 </c:choose>
+<c:choose>
+    <c:when test="${not empty configProperties['cdnUrl']}">
+        <c:set var="accessDenied1ImgUrl" value="${configProperties['cdnUrl']}/Images/icon-logout.png"/>
+        <c:set var="accessDenied2ImgUrl" value="${configProperties['cdnUrl']}/Images/access_denied2.JPG"/>
+        <c:set var="creativeCommonLogoUrl" value="${configProperties['cdnUrl']}/Images/creative_common_logo.png"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="accessDenied1ImgUrl">
+            <c:url value="/Images/access_denied1.jpg"/>  
+        </c:set>
+        <c:set var="accessDenied2ImgUrl">
+            <c:url value="/Images/access_denied2.JPG"/>  
+        </c:set>
+        <c:set var="creativeCommonLogoUrl">
+            <c:url value="/Images/creative_common_logo.png"/>
+        </c:set>
+    </c:otherwise>
+</c:choose>
 <html lang="${lang}">
     <c:set var="pageTitle" scope="page">
         <spring:message code="accessDeniedPage.pageTitle"/>
@@ -43,20 +61,20 @@
             <c:when test="${fn:contains(sessionId, 'A')}">
             <div class="row">
                 <div class="span16 main-logo">
-                    <img src="<c:url value="/Images/access_denied2.JPG"/>" alt=""/>
+                    <img src="${accessDenied2ImgUrl}" alt=""/>
                 </div><!-- class="span16 main-logo" -->
             </div><!-- class="row" -->
             </c:when>
             <c:otherwise>
             <div class="row">
                 <div class="span16 main-logo">
-                    <img src="<c:url value="/Images/access_denied1.jpg"/>" alt=""/>
+                    <img src="${accessDenied2ImgUrl}" alt=""/>
                 </div><!-- class="span16 main-logo" -->
             </div><!-- class="row" -->
             <div class="row">
                 <div class="span4 offset10">
                     <a title="Creative Commons Attribution 3.0 License" href="http://creativecommons.org/licenses/by/3.0/">
-                        <img src="<c:url value="/Images/creative_common_logo.png"/>" alt="License"/>
+                        <img src="${creativeCommonLogoUrl}" alt="License"/>
                     </a>
                     <a title="Flickr: Galerie de Yung Grasshopper" href="http://www.flickr.com/photos/yung-grasshopper/with/5196300452/">Yung Grasshopper</a>
                 </div><!-- class="span4 offset9" -->

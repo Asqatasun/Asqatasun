@@ -16,6 +16,28 @@
         <c:set var="lang" value="${pageContext.response.locale}"/>
     </c:otherwise>
 </c:choose>
+<c:choose>
+    <c:when test="${not empty configProperties['cdnUrl']}">
+        <c:set var="oupsImg1Url" value="${configProperties['cdnUrl']}/Images/oups1.jpg"/>
+        <c:set var="oupsImg2Url" value="${configProperties['cdnUrl']}/Images/oups2.jpg"/>
+        <c:set var="oupsImg3Url" value="${configProperties['cdnUrl']}/Images/oups3.jpg"/>
+        <c:set var="creativeCommonLogoUrl" value="${configProperties['cdnUrl']}/Images/creative_common_logo.png"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="oupsImg1Url">
+            <c:url value="/Images/oups1.jpg"/>  
+        </c:set>
+        <c:set var="oupsImg2Url">
+            <c:url value="/Images/oups2.jpg"/>  
+        </c:set>
+        <c:set var="oupsImg3Url">
+            <c:url value="/Images/oups3.jpg"/>  
+        </c:set>
+        <c:set var="creativeCommonLogoUrl">
+            <c:url value="/Images/creative_common_logo.png"/>
+        </c:set>
+    </c:otherwise>
+</c:choose>
 <html lang="${lang}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="oups.pageTitle"/>
@@ -44,13 +66,13 @@
             <c:when test="${fn:contains(sessionId, 'A')}">
             <div class="row">
                 <div class="span16 main-logo">
-                    <img src="<c:url value="/Images/oups1.jpg"/>" alt=""/>
+                    <img src="${oupsImg1Url}" alt=""/>
                 </div><!-- class="span16 main-logo" -->
             </div><!-- class="row" -->
             <div class="row">
                 <div class="span4 offset9">
                     <a title="Creative Commons Attribution 3.0 License" href="http://creativecommons.org/licenses/by/3.0/">
-                        <img src="<c:url value="/Images/creative_common_logo.png"/>" alt="License"/>
+                        <img src="${creativeCommonLogoUrl}" alt="License"/>
                     </a>
                     <a title="Flickr: Galerie de Be holder" href="http://www.flickr.com/photos/14192845@N03/">Be holder</a>
                 </div><!-- class="span4 offset9" -->
@@ -59,13 +81,13 @@
             <c:when test="${fn:contains(sessionId, '1')}">
             <div class="row">
                 <div class="span16 main-logo">
-                    <img src="<c:url value="/Images/oups2.jpg"/>" alt=""/>
+                    <img src="${oupsImg2Url}" alt=""/>
                 </div><!-- class="span16 main-logo" -->
             </div><!-- class="row" -->
             <div class="row">
                 <div class="span4 offset9">
                     <a title="Creative Commons Attribution 3.0 License" href="http://creativecommons.org/licenses/by/3.0/">
-                        <img src="<c:url value="/Images/creative_common_logo.png"/>" alt="License"/>
+                        <img src="${creativeCommonLogoUrl}" alt="License"/>
                     </a>
                     <a title="Flickr: Galerie de Dr Case" href="http://www.flickr.com/photos/14192845@N03/">Dr Case</a>
                 </div><!-- class="span4 offset9" -->
@@ -74,13 +96,13 @@
             <c:otherwise>
             <div class="row">
                 <div class="span16 main-logo">
-                    <img src="<c:url value="/Images/oups3.jpg"/>" alt=""/>
+                    <img src="${oupsImg3Url}" alt=""/>
                 </div><!-- class="span16 main-logo" -->
             </div><!-- class="row" -->
             <div class="row">
                 <div class="span4 offset9">
                     <a title="Creative Commons Attribution 3.0 License" href="http://creativecommons.org/licenses/by/3.0/">
-                        <img src="<c:url value="/Images/creative_common_logo.png"/>" alt="License"/>
+                        <img src="${creativeCommonLogoUrl}" alt="License"/>
                     </a>
                     <a title="Flickr: Galerie de OliBac" href="http://www.flickr.com/photos/olibac/">OliBac</a>
                 </div><!-- class="span4 offset9" -->

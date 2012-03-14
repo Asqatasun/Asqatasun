@@ -19,11 +19,20 @@
         <c:set var="lang" value="${pageContext.response.locale}"/>
     </c:otherwise>
 </c:choose>
+<c:choose>
+    <c:when test="${not empty configProperties['cdnUrl']}">
+        <c:set var="gearImgUrl" value="${configProperties['cdnUrl']}/Images/gear.png"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="gearImgUrl">
+            <c:url value="/Images/gear.png"/>  
+        </c:set>
+    </c:otherwise>
+</c:choose>
 <html lang="${lang}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="home.pageTitle"/>
     </c:set>
-    <c:set var="addWebSnapr" scope="page" value="true"/>
     <%@include file="template/head.jsp" %>
     <body id="tgm-home">
         <%@include file="template/header-utils.jsp" %>
@@ -56,7 +65,7 @@
                             <h2 class="project-name">
                                 <a href="home/contract.html?cr=${contract.id}">${contract.label}</a>
                                 <c:if test="${contract.isActRunning == 'true'}">
-                                <img src="<c:url value="/Images/gear.png"/>" title="<fmt:message key="home.actRunning"/>" alt="<fmt:message key="home.actRunning"/>" class="running-audit"/>
+                                <img src="${gearImgUrl}" title="<fmt:message key="home.actRunning"/>" alt="<fmt:message key="home.actRunning"/>" class="running-audit"/>
                                 </c:if>
                             </h2>
                             <div class="project-url"><a href="${contract.url}">${contract.url}</a></div>

@@ -9,10 +9,16 @@
     <meta name="description" content="${pageMetaDescription}"/>
     <meta name="author" content="Open-S.com"/>
     <!-- Le styles -->
+<c:choose>
+    <c:when test="${not empty configProperties['cdnUrl']}">
+    <link rel="stylesheet" href="${configProperties['cdnUrl']}/Css/bootstrap-min.css"/>
+    <link rel="stylesheet" type="text/css" href="${configProperties['cdnUrl']}/Css/tgm.css"/>
+    <link rel="icon" type="image/ico" href="${configProperties['cdnUrl']}/Images/tanaguru.ico" />
+    </c:when>
+    <c:otherwise>
     <link rel="stylesheet" href="<c:url value="/Css/bootstrap-min.css"/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value="/Css/tgm.css"/>" />
-    <link rel="icon" type="image/ico" href="<c:url value="/Images/tanaguru.ico"/>" />
-    <c:if test="${addWebSnapr == 'true'}">
-        <script type="text/javascript" src="http://www.websnapr.com/js/websnapr.js"></script>
-    </c:if>
+    <link rel="icon" type="image/ico" href="<c:url value="/Images/tanaguru.ico"/>" />    
+    </c:otherwise>
+</c:choose>
 </head>

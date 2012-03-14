@@ -26,7 +26,6 @@
             </fmt:param>
         </fmt:message>
     </c:set>
-    <c:set var="addWebSnapr" scope="page" value="true"/>
     <%@include file="template/head.jsp" %>
     <body id="tgm-source-code">
         <%@include file="template/header-utils.jsp" %>

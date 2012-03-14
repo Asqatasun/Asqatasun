@@ -34,7 +34,7 @@
 .awesome,
 .awesome:visited {
     border: 0 none;
-    background: #222 url(http://asset.open-s.com/Corporate/TGOL/Images/alert-overlay.png) repeat-x;
+    background: #222 url(../Images/alert-overlay.png) repeat-x;
     display: inline-block;
     padding: 5px 10px 6px;
     color: #fff;
@@ -787,17 +787,17 @@ input[type="text"]:focus{
     vertical-align: bottom;
 }
 .passed {
-    background: url(http://asset.open-s.com/Corporate/TGOL/Images/ico-passed.png) 5px 50% no-repeat;
+    background: url(../Images/ico-passed.png) 5px 50% no-repeat;
     padding-left: 2em;
     color:green;
 }
 .failed {
-    background: url(http://asset.open-s.com/Corporate/TGOL/Images/ico-failed.png) 5px 50% no-repeat;
+    background: url(../Images/ico-failed.png) 5px 50% no-repeat;
     padding-left: 2em;
     color:red;
 }
 .nmi {
-    background: url(http://asset.open-s.com/Corporate/TGOL/Images/ico-nmi.png) 5px 50% no-repeat;
+    background: url(../Images/ico-nmi.png) 5px 50% no-repeat;
 /*    background: url(http://asset.open-s.com/Corporate/TGOL/Images/ico-nmi-2.ico) 5px 50% no-repeat;*/
     padding-left: 2em;
 /*    color:#F89406;*/

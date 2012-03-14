@@ -17,6 +17,20 @@
         <c:set var="lang" value="${pageContext.response.locale}"/>
     </c:otherwise>
 </c:choose>
+<c:choose>
+    <c:when test="${not empty configProperties['cdnUrl']}">
+        <c:set var="loadingErrorImgUrl" value="${configProperties['cdnUrl']}/Images/error_loading.jpg"/>
+        <c:set var="creativeCommonLogoUrl" value="${configProperties['cdnUrl']}/Images/creative_common_logo.png"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="loadingErrorImgUrl">
+            <c:url value="/Images/error_loading.jpg"/>  
+        </c:set>
+        <c:set var="creativeCommonLogoUrl">
+            <c:url value="/Images/creative_common_logo.png"/>
+        </c:set>
+    </c:otherwise>
+</c:choose>
 <html lang="${lang}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="errorLoadingPage.pageTitle"/>
@@ -49,13 +63,13 @@
             </div><!-- class="row" -->
             <div class="row">
                 <div class="span16 main-logo">
-                    <img src="<c:url value="/Images/error_loading.jpg"/>" alt=""/>
+                    <img src="${loadingErrorImgUrl}" alt=""/>
                 </div><!-- class="span16 main-logo" -->
             </div><!-- class="row" -->
             <div class="row">
                 <div class="span4 offset10">
                     <a title="Creative Commons Attribution 3.0 License" href="http://creativecommons.org/licenses/by/3.0/">
-                        <img src="<c:url value="/Images/creative_common_logo.png"/>" alt="License"/>
+                        <img src="${creativeCommonLogoUrl}" alt="License"/>
                     </a>
                     <a title="Flickr: Galerie de ABC Archives" href="http://www.flickr.com/photos/abcarchives/">ABC Archives</a>
                 </div><!-- class="span4 offset9" -->

@@ -18,6 +18,23 @@
         <c:set var="lang" value="${pageContext.response.locale}"/>
     </c:otherwise>
 </c:choose>
+<c:set var="imgName" scope="request">
+    <fmt:message key="contract.historicSampleImgName"/>
+</c:set>
+<c:choose>
+    <c:when test="${not empty configProperties['cdnUrl']}">
+        <c:set var="gearImgUrl" value="${configProperties['cdnUrl']}/Images/gear.png"/>
+        <c:set var="historicSampleImgUrl" value="${configProperties['cdnUrl']}/Images/${imgName}"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="gearImgUrl">
+            <c:url value="/Images/gear.png"/>  
+        </c:set>
+        <c:set var="historicSampleImgUrl">
+            <c:url value="/Images/${imgName}"/>
+        </c:set>
+    </c:otherwise>
+</c:choose>
 <html lang="${lang}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="contract.pageTitle">
@@ -26,7 +43,6 @@
             </fmt:message>
         </fmt:message>
     </c:set>
-    <c:set var="addWebSnapr" scope="page" value="true"/>
     <%@include file="template/head.jsp" %>
     <body id="tgm-project">
         <%@include file="template/header-utils.jsp" %>
@@ -41,7 +57,7 @@
                     <h1>
                         ${detailedContractInfo.label}
                         <c:if test="${detailedContractInfo.isActRunning == 'true'}">
-                        <img src="<c:url value="/Images/gear.png"/>" title="<fmt:message key="home.actRunning"/>" alt="<fmt:message key="home.actRunning"/>" class="running-audit"/>
+                        <img src="${gearImgUrl}" title="<fmt:message key="home.actRunning"/>" alt="<fmt:message key="home.actRunning"/>" class="running-audit"/>
                         </c:if>
                     </h1>
                 </div><!-- class="span16" -->
@@ -74,12 +90,32 @@
                                     <div class="action-button">
                                 <c:choose>
                                     <c:when test="${contractAction.isActionEnabled == 'false'}">
-                                        <img src="<c:url value="${contractAction.disabledActionImageUrl}"/>" alt="" /><br/>
+                                        <c:choose>
+                                            <c:when test="${not empty configProperties['cdnUrl']}">
+                                                <c:set var="contractActionImgUrl" value="${configProperties['cdnUrl']}${contractAction.disabledActionImageUrl}"/>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:set var="contractActionImgUrl">
+                                                    <c:url value="${contractAction.disabledActionImageUrl}"/>
+                                                </c:set>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <img src="${contractActionImgUrl}" alt="" /><br/>
                                         <fmt:message key="${contractAction.actionI81NCode}"/> (<fmt:message key="contract.disabled"/>)
                                     </c:when>
                                     <c:otherwise>
+                                        <c:choose>
+                                            <c:when test="${not empty configProperties['cdnUrl']}">
+                                                <c:set var="contractActionImgUrl" value="${configProperties['cdnUrl']}${contractAction.enabledActionImageUrl}"/>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:set var="contractActionImgUrl">
+                                                    <c:url value="${contractAction.enabledActionImageUrl}"/>
+                                                </c:set>
+                                            </c:otherwise>
+                                        </c:choose>
                                         <a href="<c:url value="${contractAction.actionUrl}?cr=${contractIdValue}"/>">
-                                            <img src="<c:url value="${contractAction.enabledActionImageUrl}"/>" alt="" /><br/>
+                                            <img src="${contractActionImgUrl}" alt="" /><br/>
                                             <fmt:message key="${contractAction.actionI81NCode}"/>
                                         </a>
                                     </c:otherwise>
@@ -129,7 +165,7 @@
                             <c:set var="imgName" scope="request">
                                 <fmt:message key="contract.historicSampleImgName"/>
                             </c:set>
-                    <img id="site-audit-history" src="<c:url value="/Images/${imgName}"/>" alt="<fmt:message key="contract.historicSampleImgAltAndTitle"/>" title="<fmt:message key="contract.historicSampleImgAltAndTitle"/>"/>
+                    <img id="site-audit-history" src="${historicSampleImgUrl}" alt="<fmt:message key="contract.historicSampleImgAltAndTitle"/>" title="<fmt:message key="contract.historicSampleImgAltAndTitle"/>"/>
                         </c:otherwise>
                     </c:choose>
                 </div><!-- class="span15 offset1" -->

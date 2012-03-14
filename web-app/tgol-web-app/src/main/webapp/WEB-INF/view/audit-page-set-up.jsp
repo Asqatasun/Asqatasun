@@ -17,6 +17,20 @@
         <c:set var="lang" value="${pageContext.response.locale}"/>
     </c:otherwise>
 </c:choose>
+<c:choose>
+    <c:when test="${not empty configProperties['cdnUrl']}">
+        <c:set var="jqueryUrl" value="${configProperties['cdnUrl']}/Js/jquery.min.js"/>
+        <c:set var="auditSetUpJsUrl" value="${configProperties['cdnUrl']}/Js/audit-set-up.js"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="jqueryUrl">
+            <c:url value="/Js/access_denied1.jpg"/>  
+        </c:set>
+        <c:set var="auditSetUpJsUrl">
+            <c:url value="/Js/audit-set-up.js"/>
+        </c:set>
+    </c:otherwise>
+</c:choose>
 <html lang="${lang}">
     <c:set var="pageTitle" scope="page">
         <spring:message code="auditSetUpPage.pageTitle"/>
@@ -43,8 +57,8 @@
                 <%@include file="template/set-up.jsp" %>
             </div><!-- class="row" -->
         </div><!-- class="container" -->
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-        <script type="text/javascript" src="<c:url value="/Js/audit-set-up.js"/>"></script>
+        <script type="text/javascript" src="${jqueryUrl}"></script>
+        <script type="text/javascript" src="${auditSetUpJsUrl}"></script>
         <%@include file="template/footer.jsp" %>
     </body>
 </html>

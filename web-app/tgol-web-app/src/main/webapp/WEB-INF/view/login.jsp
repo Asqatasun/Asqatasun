@@ -25,6 +25,20 @@
         <c:set var="lang" value="${pageContext.response.locale}"/>
     </c:otherwise>
 </c:choose>
+<c:choose>
+    <c:when test="${not empty configProperties['cdnUrl']}">
+        <c:set var="tgLogo1Url" value="${configProperties['cdnUrl']}/Images/Logo-Tanaguru-G-w500-h600-75dpi-bgTransp.png"/>
+        <c:set var="tgLogo2Url" value="${configProperties['cdnUrl']}/Images/Logo-tanaguru.com-black-w140px-h63px-bgTransp.png"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="tgLogo1Url">
+            <c:url value="/Images/Logo-Tanaguru-G-w500-h600-75dpi-bgTransp.png"/>  
+        </c:set>
+        <c:set var="tgLogo2Url">
+            <c:url value="/Images/Logo-tanaguru.com-black-w140px-h63px-bgTransp.png"/>  
+        </c:set>
+    </c:otherwise>
+</c:choose>
 <html lang="${lang}">
     <c:if test="${not empty param.error}">
         <c:choose>
@@ -57,12 +71,12 @@
             <div id="login-main-row" class="row">
                 <div class="span6">
                     <div id="login-logo">
-                        <img src="<c:url value="/Images/Logo-Tanaguru-G-w500-h600-75dpi-bgTransp.png"/>" alt="" />
+                        <img src="${tgLogo1Url}" alt="" />
                     </div>
                 </div>
                 <div class="span7 offset3">
                     <h1>
-                        <img src="<c:url value="/Images/Logo-tanaguru.com-black-w140px-h63px-bgTransp.png"/>" alt="Tanaguru.com" />
+                        <img src="${tgLogo2Url}" alt="Tanaguru.com" />
                     </h1>
                     <c:if test="${not empty errorOnPage}">
                     <div class="alert-message error">

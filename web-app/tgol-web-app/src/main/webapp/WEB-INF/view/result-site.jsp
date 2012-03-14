@@ -17,6 +17,24 @@
         <c:set var="lang" value="${pageContext.response.locale}"/>
     </c:otherwise>
 </c:choose>
+<c:choose>
+    <c:when test="${not empty configProperties['cdnUrl']}">
+        <c:set var="jqueryUrl" value="${configProperties['cdnUrl']}/Js/jquery.min.js"/>
+        <c:set var="auditResultJsUrl" value="${configProperties['cdnUrl']}/Js/audit-result.js"/>
+        <c:set var="auditSetUpJsUrl" value="${configProperties['cdnUrl']}/Js/audit-set-up.js"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="jqueryUrl">
+            <c:url value="/Js/access_denied1.jpg"/>  
+        </c:set>
+        <c:set var="auditResultJsUrl">
+            <c:url value="/Js/audit-result.js"/>
+        </c:set>
+        <c:set var="auditSetUpJsUrl">
+            <c:url value="/Js/audit-set-up.js"/>
+        </c:set>
+    </c:otherwise>
+</c:choose>
 <html lang="${lang}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="resultSite.pageTitle">
@@ -25,7 +43,6 @@
             </fmt:param>
         </fmt:message>
     </c:set>
-    <c:set var="addWebSnapr" scope="page" value="true"/>
     <%@include file="template/head.jsp" %>
     <body id="tgm-result-site">
         <%@include file="template/header-utils.jsp" %>
@@ -73,9 +90,9 @@
             <c:set var="scope" scope="request" value="site"/>
             <c:import url="template/detailed-result.jsp" />
         </div><!-- class="container"-->
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-        <script type="text/javascript" src="http://asset.open-s.com/Corporate/TGOL/Js/audit-result.js"></script>
-        <script type="text/javascript" src="http://asset.open-s.com/Corporate/TGOL/Js/audit-set-up.js"></script>
+        <script type="text/javascript" src="${jqueryUrl}"></script>
+        <script type="text/javascript" src="${auditResultJsUrl}"></script>
+        <script type="text/javascript" src="${auditSetUpJsUrl}"></script>
         <%@include file="template/footer.jsp" %>
     </body>
 </html>

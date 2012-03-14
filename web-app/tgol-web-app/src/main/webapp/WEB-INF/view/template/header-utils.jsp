@@ -9,11 +9,25 @@
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Set"%>
 
+        <c:choose>
+            <c:when test="${not empty configProperties['cdnUrl']}">
+                <c:set var="tgLogoUrl" value="${configProperties['cdnUrl']}/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>
+                <c:set var="logoutLogoUrl" value="${configProperties['cdnUrl']}/Images/icon-logout.png"/>
+            </c:when>
+            <c:otherwise>
+                <c:set var="tgLogoUrl">
+                    <c:url value="/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>  
+                </c:set>
+                <c:set var="logoutLogoUrl">
+                    <c:url value="/Images/icon-logout.png"/>  
+                </c:set>
+            </c:otherwise>
+        </c:choose>
         <div class="topbar">
             <div class="fill">
                 <div class="container">
                     <a class="brand" href="<c:url value="/dispatch.html"/>" title="<fmt:message key="home.home"/>">
-                        <img src="<c:url value="/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>" alt="<fmt:message key="home.home"/>" />
+                        <img src="${tgLogoUrl}" alt="<fmt:message key="home.home"/>" />
                     </a>
                     <ul class="nav secondary-nav">
                         <c:if test="${authenticatedUser != null && authenticatedUser.email1 != 'guest'}">
@@ -46,7 +60,7 @@
                             <div>
                                 <a href="<c:url value="/j_spring_security_logout"/>" id="logout">
                                     <fmt:message key="home.logout"/>
-                                    <img src="<c:url value="/Images/icon-logout.png"/>" alt="" id="logout-icon"/>
+                                    <img src="${logoutLogoUrl}" alt="" id="logout-icon"/>
                                 </a>
                             </div>
                         </li>

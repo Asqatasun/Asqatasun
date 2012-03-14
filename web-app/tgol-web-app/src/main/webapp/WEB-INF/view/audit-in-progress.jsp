@@ -16,6 +16,20 @@
         <c:set var="lang" value="${pageContext.response.locale}"/>
     </c:otherwise>
 </c:choose>
+<c:choose>
+    <c:when test="${not empty configProperties['cdnUrl']}">
+        <c:set var="auditInProgressImgUrl" value="${configProperties['cdnUrl']}/Images/work-in-progress.jpg"/>
+        <c:set var="creativeCommonLogoUrl" value="${configProperties['cdnUrl']}/Images/creative_common_logo.png"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="auditInProgressImgUrl">
+            <c:url value="/Images/work-in-progress.jpg"/>  
+        </c:set>
+        <c:set var="creativeCommonLogoUrl">
+            <c:url value="/Images/creative_common_logo.png"/>
+        </c:set>
+    </c:otherwise>
+</c:choose>
 <html lang="${lang}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="auditInProgress.pageTitle">
