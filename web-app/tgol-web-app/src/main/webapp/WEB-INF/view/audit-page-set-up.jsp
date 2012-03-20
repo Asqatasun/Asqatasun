@@ -24,7 +24,7 @@
     </c:when>
     <c:otherwise>
         <c:set var="jqueryUrl">
-            <c:url value="/Js/access_denied1.jpg"/>  
+            <c:url value="/Js/jquery.min.js"/>  
         </c:set>
         <c:set var="auditSetUpJsUrl">
             <c:url value="/Js/audit-set-up.js"/>

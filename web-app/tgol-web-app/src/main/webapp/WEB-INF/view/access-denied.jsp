@@ -18,7 +18,7 @@
 </c:choose>
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="accessDenied1ImgUrl" value="${configProperties['cdnUrl']}/Images/icon-logout.png"/>
+        <c:set var="accessDenied1ImgUrl" value="${configProperties['cdnUrl']}/Images/access_denied2.jpg"/>
         <c:set var="accessDenied2ImgUrl" value="${configProperties['cdnUrl']}/Images/access_denied2.JPG"/>
         <c:set var="creativeCommonLogoUrl" value="${configProperties['cdnUrl']}/Images/creative_common_logo.png"/>
     </c:when>
