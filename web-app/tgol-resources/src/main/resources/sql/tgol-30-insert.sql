@@ -22,7 +22,13 @@ INSERT IGNORE INTO `TGSI_PRODUCT` (`Id_Product`, `Code`, `Label`, `SCOPE_Id_Scop
 (5, 'SEO_DOMAIN', 'Audit Domain Seo', '2'),
 (6, 'SEO_READONLY', 'Audit Read Only Seo', '1'),
 (7, 'AXS_UPLOAD', 'Audit Upload Axs', '5'),
-(8, 'SEO_UPLOAD', 'Audit Upload Seo', '5');
+(8, 'SEO_UPLOAD', 'Audit Upload Seo', '5'),
+(9, 'AXS_PAGES_UPLOAD', 'Audit Upload Axs', '1'),
+(10, 'SEO_PAGES_UPLOAD', 'Audit Upload Seo', '1'),
+(11, 'AXS_DOMAIN_ONLY', 'Audit Upload Axs', '2'),
+(12, 'SEO_DOMAIN_ONLY', 'Audit Upload Seo', '2'),
+(13, 'AXS_PAGES_DOMAIN_UPLOAD', 'Audit Upload Axs', '2'),
+(14, 'SEO_PAGES_DOMAIN_UPLOAD', 'Audit Upload Seo', '2');
 
 INSERT IGNORE INTO `TGSI_RESTRICTION_ELEMENT` (`Id_Restriction_Element`, `Cd_Restriction_Element`, `Description`) VALUES
 (1, 'ACT_LIMITATION', 'The act limitation unit is the number of acts'),
@@ -46,4 +52,8 @@ INSERT IGNORE INTO `TGSI_RESTRICTION` (`Id_Restriction_Element`, `Restriction_Va
 (8, '-1'),
 (8, '5'),
 (8, '30'),
-(8, '365');
+(8, '365'),
+(9, '5'),
+(9, '10'),
+(9, '50'),
+(9, '100');
