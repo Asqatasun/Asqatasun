@@ -46,7 +46,7 @@
     <bean id="axsDomain" class="org.opens.tgol.action.voter.ActionVoterImpl">
         <property name="actionEnableMap">
             <map>
-                <entry key="PAGE_AUDIT" value="false"/>
+                <entry key="PAGE_AUDIT" value="true"/>
                 <entry key="SITE_AUDIT" value="true"/>
                 <entry key="UPLOAD_AUDIT" value="false"/>
             </map>
@@ -57,7 +57,7 @@
     <bean id="seoDomain" class="org.opens.tgol.action.voter.ActionVoterImpl">
         <property name="actionEnableMap">
             <map>
-                <entry key="PAGE_AUDIT" value="false"/>
+                <entry key="PAGE_AUDIT" value="true"/>
                 <entry key="SITE_AUDIT" value="true"/>
                 <entry key="UPLOAD_AUDIT" value="false"/>
             </map>
