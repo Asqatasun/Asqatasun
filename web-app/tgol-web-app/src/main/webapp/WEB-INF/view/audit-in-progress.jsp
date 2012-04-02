@@ -74,13 +74,13 @@
             </div><!-- class="row" -->
             <div class="row">
                 <div class="span16 main-logo">
-                    <img src="<c:url value="/Images/work-in-progress.jpg"/>" alt=""/>
+                    <img src="${auditInProgressImgUrl}" alt=""/>
                 </div><!-- class="span16 main-logo" -->
             </div><!-- class="row" -->
             <div class="row">
                 <div class="span4 offset11">
                     <a title="Creative Commons Attribution 3.0 License" href="http://creativecommons.org/licenses/by/3.0/">
-                        <img src="<c:url value="/Images/creative_common_logo.png"/>" alt="License"/>
+                        <img src="${creativeCommonLogoUrl}" alt="License"/>
                     </a>
                     <a title="Flickr: Galerie de blumpy" href="http://www.flickr.com/photos/blumpy/">blumpy</a>
                 </div><!-- class="span4 offset9" -->
