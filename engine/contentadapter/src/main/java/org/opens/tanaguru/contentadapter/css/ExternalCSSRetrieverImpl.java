@@ -43,6 +43,8 @@ public class ExternalCSSRetrieverImpl implements ExternalCSSRetriever, Adaptatio
     private Map<Long, Collection<StylesheetContent>> externalCssMap =
             new HashMap<Long, Collection<StylesheetContent>>();
 
+    private static final String CSS_ON_ERROR = "CSS_ON_ERROR";
+    
     private ContentDataService contentDataService;
 
     @Autowired
@@ -72,6 +74,7 @@ public class ExternalCSSRetrieverImpl implements ExternalCSSRetriever, Adaptatio
 
     @Override
     public void adaptationCompleted(Audit audit) {
+        checkAllExternalCssHaveBeenAdapted(audit);
         removeExternalCSS(audit);
     }
 
@@ -104,4 +107,24 @@ public class ExternalCSSRetrieverImpl implements ExternalCSSRetriever, Adaptatio
         }
     }
 
+    /**
+     * At the end of the adaptation, if some css haven't been encountered for any 
+     * reason, 
+     *
+     * @param audit
+     */
+    private void checkAllExternalCssHaveBeenAdapted(Audit audit) {
+        Collection<StylesheetContent> externalStyleSheet = externalCssMap.get(audit.getId());
+        for (StylesheetContent stylesheetContent : externalStyleSheet) {
+            if (stylesheetContent.getAdaptedContent() == null || stylesheetContent.getAdaptedContent().isEmpty()) {
+                stylesheetContent.setAdaptedContent(CSS_ON_ERROR);
+                contentDataService.saveOrUpdate(stylesheetContent);
+                if (LOGGER.isDebugEnabled()) {
+                   LOGGER.debug(stylesheetContent.getURI() + " hasn't been adapted"
+                           + "for any reason and is set on error");
+                }
+            }
+        }
+    }
+    
 }

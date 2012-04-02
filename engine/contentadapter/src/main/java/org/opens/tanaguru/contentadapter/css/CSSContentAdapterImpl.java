@@ -26,6 +26,7 @@ import java.util.Date;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
 import org.apache.commons.httpclient.URIException;
 import org.apache.log4j.Logger;
 import org.archive.net.UURIFactory;
@@ -72,6 +73,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
     private Locator locator;
     private CSSParser parser;
     private String currentLocalResourcePath;
+    private String baseResourcePath;
     private boolean cssOnError = false;
     private Set<StylesheetContent> relatedExternalCssSet =
             new HashSet<StylesheetContent>();
@@ -79,7 +81,8 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
     private Set<StylesheetContent> externalCssSet =
             new HashSet<StylesheetContent>();
     private int internalCssCounter = 1;
-
+    private boolean hasBaseTag = false;
+    
     /**
      * Constructor
      * @param contentFactory
@@ -286,6 +289,23 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
     public void startElement(String nameSpaceURI, String localName,
             String rawName, Attributes attributs) throws SAXException {
         buffer.setLength(0);
+        
+        if (HtmlTags.BASE.equalsIgnoreCase(rawName)) {
+            for (int i = 0; i < attributs.getLength(); i++) {
+                String attrValue = attributs.getValue(i);
+                String attrName = attributs.getQName(i);
+                if (HtmlNodeAttr.HREF.equalsIgnoreCase(attrName)) {
+                    hasBaseTag = true;
+                    baseResourcePath = attrValue;
+                }
+            }
+        }
+        
+        if (!hasBaseTag) {
+            currentLocalResourcePath = getUrlIdentifier().resolve(".").toExternalForm();
+        } else {
+            currentLocalResourcePath = baseResourcePath;
+        }
 
         // localCSS
         if (HtmlTags.STYLE.equalsIgnoreCase(rawName)) {
@@ -293,8 +313,8 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
             resource = new CSSResourceImpl(null, locator.getLineNumber(),
                     new LocalRsrc());
             buffer.delete(0, buffer.capacity());
-            currentLocalResourcePath = getUrlIdentifier().resolve(".").toExternalForm();
         }
+        
         // externalCSS
         if (HtmlNodeAttr.LINK.equalsIgnoreCase(rawName)) {
 
@@ -306,12 +326,10 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
                     || (type != null && type.contains("text/css"))) {
                 // resolve the css relative path to its absolute path and add it
                 // to the external css links collection
-                String cssRelativePath = attributs.getValue(HtmlNodeAttr.HREF);
-                if (cssRelativePath != null) {
-                    currentLocalResourcePath = getUrlIdentifier().resolve(".").toExternalForm();
-                    getExternalResourceAndAdapt(cssRelativePath,
-                            getListOfMediaFromAttributeValue(attributs.getValue(HtmlNodeAttr.MEDIA)),
-                            false);
+                String path = attributs.getValue(HtmlNodeAttr.HREF);
+                if (path != null) {
+                    getExternalResourceAndAdapt(path,
+                            getListOfMediaFromAttributeValue(attributs.getValue(HtmlNodeAttr.MEDIA)));
                 }
             }
         }
@@ -326,7 +344,6 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
                     String cssString = rawName + "{" + attrValue + "}";
                     resource = new CSSResourceImpl(cssString, locator.getLineNumber(), new InlineRsrc());
                     cssVector.add(resource);
-                    currentLocalResourcePath = getUrlIdentifier().resolve(".").toExternalForm();
                 } else {
                     resource = null;
                 }
@@ -383,18 +400,16 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
      * if the download has failed
      * @param cssRelativePath
      * @param sacMediaList
-     * @param importedFromCss
      * @return
      */
     private boolean getExternalResourceAndAdapt(String cssRelativePath,
-            SACMediaList sacMediaList, boolean importedFromCss) {
+            SACMediaList sacMediaList) {
 
-        String cssAbsolutePath = null;
         StringBuilder rawCss = new StringBuilder();
-        cssAbsolutePath = getUrlIdentifier().resolve(cssRelativePath).toExternalForm();
+        String cssAbsolutePath = null;
 
         try {
-            cssAbsolutePath = UURIFactory.getInstance(cssAbsolutePath).toString();
+            cssAbsolutePath = buildPath(cssRelativePath, currentLocalResourcePath);
         } catch (URIException ex) {
             LOGGER.error(ex.getMessage());
         }
@@ -403,7 +418,9 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         // set of relatedExternalCssSet (needed to create the relation between the
         // SSP and the css at the end of the adaptation)
         for (StylesheetContent stylesheetContent : externalCssSet) {
-            if (stylesheetContent.getURI().contains(cssAbsolutePath)) {
+            LOGGER.debug("stylesheetContent.getURI() :  " + 
+                        stylesheetContent.getURI());
+            if (stylesheetContent.getURI().equals(cssAbsolutePath)) {
                 if (stylesheetContent.getAdaptedContent() == null) {
                     rawCss.append(stylesheetContent.getSource());
                     Resource localResource = null;
@@ -450,27 +467,17 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
                     return;
                 }
 
-                if (!importedStyles.isEmpty()) // for each imported resource found within an inline resource
-                {
+                if (!importedStyles.isEmpty()) {// for each imported resource found within an inline resource
                     for (CSSImportedStyle cssImportedStyle : importedStyles) {
-
-                        //build the resource path
-                        //If the path is relative, build in it from the path of the
-                        // current resource
-                        String resourcePath = cssImportedStyle.getPath();
-                        if (!resourcePath.startsWith(HTTP_PREFIX)
-                                && !resourcePath.startsWith(WWW_PREFIX)
-                                && !resourcePath.startsWith("/")) {
-
-                            resourcePath = path
-                                    + cssImportedStyle.getPath();
+                        try {
+                            // create an instance of resource and download the content
+                            getExternalResourceAndAdapt(
+                                buildPath(cssImportedStyle.getPath(), path),
+                                cssImportedStyle.getSACMediaList());
+                        } catch (URIException ex) {
+                            java.util.logging.Logger.getLogger(CSSContentAdapterImpl.class.getName()).log(Level.SEVERE, null, ex);
                         }
-
-                        // create an instance of resource and download the content
-                        getExternalResourceAndAdapt(
-                                resourcePath,
-                                cssImportedStyle.getSACMediaList(), true);
-                    }
+                   }
                 }
                 importedStyles.clear();
             }
@@ -486,7 +493,6 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
                 200);
         cssContent.setAudit(getSSP().getAudit());
         internalCssCounter++;
-//        getSSP().addRelatedContent(cssContent);
         return cssContent;
     }
 
@@ -510,4 +516,27 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         }
     }
 
+    /**
+     * Build the resource path. If the path is relative, build in it from the 
+     * path of the current resource
+     * 
+     * @param path
+     * @param base
+     * @return 
+     */
+    private String buildPath(String path, String base) throws URIException {
+        if (path.startsWith(HTTP_PREFIX)
+                || path.startsWith(WWW_PREFIX)) {
+            return UURIFactory.getInstance(path).toString();
+        }
+        StringBuilder strb = new StringBuilder();
+        strb.append(base);
+        if (path.startsWith("/") && base.endsWith("/")) {
+            strb.append(path.substring(1));
+        } else {
+            strb.append(path);
+        }
+        return UURIFactory.getInstance(strb.toString()).toString();
+    }
+        
 }
