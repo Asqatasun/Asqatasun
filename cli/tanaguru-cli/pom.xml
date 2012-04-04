@@ -6,13 +6,13 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>1.5.0</version>
+        <version>1.5.1</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>${tanaguruCliGroupId}</groupId>
+    <groupId>org.opens</groupId>
     <artifactId>tanaguru-cli</artifactId>
     <name>tanaguru-cli</name>
-    <version>${tanaguruCliVersion}</version>
+    <version>1.5.1</version>
     <url>http://www.tanaguru.org</url>
     <build>
         <plugins>
@@ -23,7 +23,7 @@
                         <descriptor>src/main/resources/descriptor.xml</descriptor>
                     </descriptors>
                     <outputDirectory>target</outputDirectory>
-                    <finalName>tanaguru-${engineVersion}.i386</finalName>
+                    <finalName>tanaguru-1.5.1.i386</finalName>
                 </configuration>
                 <executions>
                     <execution>
@@ -39,81 +39,81 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>tanaguru-engine</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>tanaguru-resources</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>persistence</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>nomenclatureloader</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>rule-implementation-loader</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>crawler</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>contentloader</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>contentadapter</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>processor</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>consolidator</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>analyser</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>tanaguru-api</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>logging</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
