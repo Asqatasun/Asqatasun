@@ -4,28 +4,28 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>1.5.0</version>
+        <version>1.5.1</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>${engineGroupId}</groupId>
+    <groupId>org.opens</groupId>
     <artifactId>statistics</artifactId>
     <name>statistics</name>
-    <version>${engineVersion}</version>
+    <version>1.5.1</version>
     <url>http://www.tanaguru.org</url>
     <dependencies>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>tanaguru-api</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
         </dependency>
         <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>audit</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
         </dependency>
     </dependencies>
 </project>
