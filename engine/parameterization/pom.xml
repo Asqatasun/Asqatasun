@@ -4,19 +4,19 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>1.5.0</version>
+        <version>1.5.1</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>${engineGroupId}</groupId>
+    <groupId>org.opens</groupId>
     <artifactId>parameterization</artifactId>
     <name>parameterization</name>
-    <version>${engineVersion}</version>
+    <version>1.5.1</version>
     <url>http://www.tanaguru.org</url>
     <dependencies>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>reference</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
         </dependency>
     </dependencies>
 </project>
