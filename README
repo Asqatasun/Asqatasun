@@ -1,6 +1,6 @@
                    ------------------------------
                              Tanaguru
-                            Version 1.5.0
+                            Version 1.5.1
                   ------------------------------
 
 1. Web Resources
@@ -59,6 +59,15 @@ that can be found at :
 
 6. Content of the version 
 =========================
+
+---------------------------------------------------------------------------------------------------------------------------------------
+Version 1.5.1 : 
+Bug #325 : The upload module doesn't work when the Proxy properties (ProxyPort and ProxyPort) are set
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+Version 1.5.0 : 
+
 Bug #236 : Add a licence file (https://dev.tanaguru.org/redmine/issues/236)
 Feature #254 : Evolution of the web-application interface to use the bootstrap UI toolkit (https://dev.tanaguru.org/redmine/issues/254)
 Feature #255 : Add a console to sort results in the result page (https://dev.tanaguru.org/redmine/issues/255)
