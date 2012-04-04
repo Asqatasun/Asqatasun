@@ -352,6 +352,12 @@ public class AuditLauncherController extends AuditDataHandlerController {
      * @param url
      */
     private Set<Parameter> setProxyParameters(Set<Parameter> paramSet, String url) {
+	// Bug #325 : if the url is null, in the case of an upload audit for example, 
+        // the parameters are not modified.
+        if (StringUtils.isEmpty(url)){
+            return paramSet;
+        }
+
         if ((StringUtils.isEmpty(httpProxyHost) && StringUtils.isEmpty(httpProxyPort))) {
             return paramSet;
         }
@@ -359,9 +365,6 @@ public class AuditLauncherController extends AuditDataHandlerController {
             if (StringUtils.isNotEmpty(urlExclusion) && url.contains(urlExclusion)) {
                 return paramSet;
             }
-        }
-        if (StringUtils.isEmpty(url)){
-            return paramSet;
         }
         try {
             Integer.valueOf(httpProxyPort);
