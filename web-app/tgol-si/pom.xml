@@ -6,24 +6,24 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>1.5.0</version>
+        <version>1.5.1</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>${webappGroupId}</groupId>
+    <groupId>org.opens</groupId>
     <artifactId>tgol-si</artifactId>
-    <version>${webappVersion}</version>
+    <version>1.5.1</version>
     <name>tgol-si</name>
     <url>http://www.tanaguru.org</url>
     <dependencies>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>audit</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
         </dependency>
         <dependency>
-            <groupId>${webappGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>tgol-api</artifactId>
-            <version>${webappVersion}</version>
+            <version>1.5.1</version>
         </dependency>
         <dependency>
             <groupId>javax.persistence</groupId>
