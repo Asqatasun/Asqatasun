@@ -6,60 +6,60 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>1.5.0</version>
+        <version>1.5.1</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>${testingToolsGroupId}</groupId>
+    <groupId>org.opens</groupId>
     <artifactId>rules-testing-tools</artifactId>
     <packaging>jar</packaging>
-    <version>${testingToolsVersion}</version>
+    <version>1.5.1</version>
     <name>rules-testing-tools</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>tanaguru-api</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>nomenclatureloader</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>rule-implementation-loader</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>persistence</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>crawler</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>contentloader</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>contentadapter</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>processor</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>consolidator</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
         </dependency>
         <dependency>
             <groupId>${springGroupId}</groupId>
