@@ -6,13 +6,13 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>1.5.0</version>
+        <version>1.5.1</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>${engineGroupId}</groupId>
+    <groupId>org.opens</groupId>
     <artifactId>contentloader</artifactId>
     <name>contentloader</name>
-    <version>${engineVersion}</version>
+    <version>1.5.1</version>
     <url>http://www.tanaguru.org</url>
     <dependencies>
         <dependency>
@@ -26,9 +26,9 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>tanaguru-api</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
         </dependency>
     </dependencies>
 </project>
