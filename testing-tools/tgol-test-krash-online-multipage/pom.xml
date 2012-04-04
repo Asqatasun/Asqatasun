@@ -6,13 +6,13 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>1.5.0</version>
+        <version>1.5.1</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>${testingToolsGroupId}</groupId>
+    <groupId>org.opens</groupId>
     <artifactId>tgol-test-krash-online-multipage</artifactId>
     <packaging>jar</packaging>
-    <version>${testingToolsVersion}</version>
+    <version>1.5.1</version>
     <name>tgol-test-krash-online-multipage</name>
     <url>http://www.tanaguru.org</url>
     <build>
@@ -47,9 +47,9 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>${testingToolsGroupId}</groupId>
+                <groupId>org.opens</groupId>
                 <artifactId>maven-testgenerator-plugin</artifactId>
-                <version>${testingToolsVersion}</version>
+                <version>1.5.1</version>
                 <executions>
                     <execution>
                         <id>generate-tests</id>
@@ -69,15 +69,15 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>${testingToolsGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>tgol-testing-tools</artifactId>
-            <version>${testingToolsVersion}</version>
+            <version>1.5.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>tanaguru-api</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
