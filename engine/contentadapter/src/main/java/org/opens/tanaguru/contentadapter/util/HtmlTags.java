@@ -30,5 +30,6 @@ public abstract class HtmlTags {
     public final static String LINK = "link";
     public final static String SCRIPT = "script";
     public final static String STYLE = "style";
+    public final static String BASE = "base";
 
 }
