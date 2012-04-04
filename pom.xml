@@ -10,22 +10,22 @@
     <name>tanaguru</name>
     <url>http://www.tanaguru.org</url>
     <modules>
-<!--        <module>engine</module>
-        <module>web-app</module>
+        <module>engine</module>
         <module>testing-tools</module>
-        <module>cli</module>-->
+	<module>web-app</module>
+        <module>cli</module>
 <!--        <module>ws</module>-->
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <engineGroupId>org.opens</engineGroupId>
+<!--        <engineGroupId>org.opens</engineGroupId>
         <engineVersion>1.5.1</engineVersion>
         <webappGroupId>org.opens</webappGroupId>
         <webappVersion>1.5.1</webappVersion>
         <testingToolsGroupId>org.opens</testingToolsGroupId>
         <testingToolsVersion>1.5.1</testingToolsVersion>
         <tanaguruCliGroupId>org.opens</tanaguruCliGroupId>
-        <tanaguruCliVersion>1.5.1</tanaguruCliVersion>
+        <tanaguruCliVersion>1.5.1</tanaguruCliVersion>-->
         <springGroupId>org.springframework</springGroupId>
         <springVersion>3.0.5.RELEASE</springVersion>
         <heritrixGroupId>org.archive.heritrix</heritrixGroupId>
