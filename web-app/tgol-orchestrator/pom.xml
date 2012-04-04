@@ -6,19 +6,19 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>1.5.0</version>
+        <version>1.5.1</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>${webappGroupId}</groupId>
+    <groupId>org.opens</groupId>
     <artifactId>tgol-orchestrator</artifactId>
-    <version>${webappVersion}</version>
+    <version>1.5.1</version>
     <name>tgol-orchestrator</name>
     <url>http://www.tanaguru.org</url>
     <dependencies>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>org.opens</groupId>
             <artifactId>tgol-api</artifactId>
-            <version>${engineVersion}</version>
+            <version>1.5.1</version>
         </dependency>
     </dependencies>
 </project>
