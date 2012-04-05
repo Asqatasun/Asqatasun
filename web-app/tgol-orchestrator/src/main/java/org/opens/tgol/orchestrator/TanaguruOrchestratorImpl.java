@@ -21,6 +21,18 @@
  */
 package org.opens.tgol.orchestrator;
 
+import java.util.AbstractMap.SimpleImmutableEntry;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Future;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
+import org.apache.log4j.Logger;
+import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.audit.AuditStatus;
+import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.service.AuditService;
+import org.opens.tanaguru.service.AuditServiceListener;
 import org.opens.tgol.emailsender.EmailSender;
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.contract.ActStatus;
@@ -30,24 +42,6 @@ import org.opens.tgol.entity.product.Scope;
 import org.opens.tgol.entity.product.ScopeEnum;
 import org.opens.tgol.entity.service.contract.ActDataService;
 import org.opens.tgol.entity.service.product.ScopeDataService;
-import org.opens.tgol.entity.user.User;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import org.apache.log4j.Logger;
-import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.entity.audit.AuditStatus;
-import org.opens.tanaguru.entity.parameterization.Parameter;
-import org.opens.tanaguru.service.AuditService;
-import org.opens.tanaguru.service.AuditServiceListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
@@ -55,19 +49,20 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  *
  * @author jkowalczyk
  */
-public class TanaguruOrchestratorImpl
-        implements TanaguruOrchestrator, ActThreadListener, ActThreadMaster, AuditServiceListener {
+public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
 
     private static final Logger LOGGER = Logger.getLogger(TanaguruOrchestratorImpl.class);
     private AuditService auditService;
     private ActDataService actDataService;
     private ActFactory actFactory;
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
-    private Collection<ActThreadListener> actThreadListenerSet = new HashSet<ActThreadListener>();
-    private Map<ScopeEnum, Scope> scopeMap = new HashMap<ScopeEnum, Scope>();
-    private Map<Audit, Long> auditExecutionList = new ConcurrentHashMap<Audit, Long>();
-    private Map<Long, Audit> auditCompletedList = new ConcurrentHashMap<Long, Audit>();
-    private Map<Long, AbstractMap.SimpleImmutableEntry<Audit, Exception>> auditCrashedList = new HashMap<Long, AbstractMap.SimpleImmutableEntry<Audit, Exception>>();
+    private Map<ScopeEnum, Scope> scopeMap = new EnumMap<ScopeEnum, Scope>(ScopeEnum.class);
+    private void initializeScopeMap(ScopeDataService ScopeDataService) {
+        for (Scope scope : ScopeDataService.findAll()) {
+            scopeMap.put(scope.getCode(), scope);
+        }
+    }
+    
     private EmailSender emailSender;
     /*
      * keys to send the user an email at the end of an audit.
@@ -77,29 +72,72 @@ public class TanaguruOrchestratorImpl
     private static final String ERROR_SUBJECT_KEY =  "error-subject";
     private static final String URL_TO_REPLACE =  "#webresourceUrl";
     private static final String PROJECT_NAME_TO_REPLACE =  "#projectName";
+    private static final String PROJECT_URL_TO_REPLACE =  "#projectUrl";
     private static final String SUCCESS_MSG_CONTENT_KEY =  "success-content";
-    private static final String ERROR_MSG_CONTENT_KEY =  "error-content";
-    private static final String URL_PARAM = "?wr=";
-    private ResourceBundle emailContentResourceBundle = ResourceBundle.getBundle("email-content-I18N");
-    private String webresourceUrlPrefix;
-    public String getWebresourceUrlPrefix() {
-        return webresourceUrlPrefix;
+    private static final String SITE_ERROR_MSG_CONTENT_KEY =  "site-error-content";
+    private static final String PAGE_ERROR_MSG_CONTENT_KEY =  "page-error-content";
+    private static final String BUNDLE_NAME = "email-content-I18N";
+    private static final int DEFAULT_AUDIT_DELAY = 30000;
+
+    private String webappUrl;
+    public String getWebappUrl() {
+        return webappUrl;
     }
 
-    public void setWebresourceUrlPrefix(String webresourceUrlPrefix) {
-        this.webresourceUrlPrefix = webresourceUrlPrefix;
+    public void setWebappUrl(String webappUrl) {
+        this.webappUrl = webappUrl;
     }
     
-    @Override
-    public void setActThreadListenerSet(Collection<ActThreadListener> actThreadListenerSet) {
-        this.actThreadListenerSet = actThreadListenerSet;
+    private String siteResultUrlSuffix;
+    public String getSiteResultUrlSuffix() {
+        return siteResultUrlSuffix;
     }
 
-    @Override
-    public void addActThreadListener(ActThreadListener actThreadListener) {
-        this.actThreadListenerSet.add(actThreadListener);
+    public void setSiteResultUrlSuffix(String siteResultUrlSuffix) {
+        this.siteResultUrlSuffix = siteResultUrlSuffix;
+    }
+    
+    private String pageResultUrlSuffix;
+    public String getPageResultUrlSuffix() {
+        return pageResultUrlSuffix;
     }
 
+    public void setPageResultUrlSuffix(String pageResultUrlSuffix) {
+        this.pageResultUrlSuffix = pageResultUrlSuffix;
+    }
+    
+    private String groupResultUrlSuffix;
+    public String getGroupResultUrlSuffix() {
+        return groupResultUrlSuffix;
+    }
+
+    public void setGroupResultUrlSuffix(String groupResultUrlSuffix) {
+        this.groupResultUrlSuffix = groupResultUrlSuffix;
+    }
+    
+    private String contractUrlSuffix;
+    public String getContractUrlSuffix() {
+        return contractUrlSuffix;
+    }
+
+    public void setContractUrlSuffix(String contractUrlSuffix) {
+        this.contractUrlSuffix = contractUrlSuffix;
+    }
+    
+    private int delay = DEFAULT_AUDIT_DELAY;
+    public int getDelay() {
+        return delay;
+    }
+
+    public void setDelay(int delay) {
+        this.delay = delay;
+    }
+    
+    private List<String> emailSentToUserExclusionList = new ArrayList<String>();
+    public void setEmailSentToUserExclusionRawList(String emailSentToUserExclusionRawList) {
+        this.emailSentToUserExclusionList.addAll(Arrays.asList(emailSentToUserExclusionRawList.split(";")));
+    }
+    
     @Autowired
     public TanaguruOrchestratorImpl(
             AuditService auditService,
@@ -109,7 +147,6 @@ public class TanaguruOrchestratorImpl
             ThreadPoolTaskExecutor threadPoolTaskExecutor,
             EmailSender emailSender) {
         this.auditService = auditService;
-        this.auditService.add(this);
         this.actDataService = actDataService;
         this.actFactory = actFactory;
         initializeScopeMap(scopeDataService);
@@ -122,8 +159,9 @@ public class TanaguruOrchestratorImpl
             Contract contract,
             String pageUrl,
             String clientIp,
-            Set<Parameter> parameterSet) {
-        LOGGER.debug("auditPage ");
+            Set<Parameter> parameterSet, 
+            Locale locale) {
+        LOGGER.info("auditPage ");
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("pageUrl " + pageUrl);
             for (Parameter param : parameterSet) {
@@ -131,26 +169,16 @@ public class TanaguruOrchestratorImpl
                         param.getParameterElement().getParameterElementCode());
             }
         }
-        Date beginDate = new Date();
-        Act act = actFactory.createAct(beginDate, contract);
-        act.setScope(scopeMap.get(ScopeEnum.PAGE));
-        act.setClientIp(clientIp);
-        Audit audit = auditService.auditPage(
-                pageUrl,
-                parameterSet);
-        try {
-            audit = waitForAuditToComplete(audit);
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
-        act.setEndDate(new Date());
-        act.setWebResource(audit.getSubject());
-        if (audit.getStatus().equals(AuditStatus.COMPLETED)) {
-            act.setStatus(ActStatus.COMPLETED);
-        } else {
-            act.setStatus(ActStatus.ERROR);
-        }
-        actDataService.saveOrUpdate(act);
+        Act act = createAct(contract, ScopeEnum.PAGE, clientIp);
+        AuditTimeoutThread auditPageThread =
+                new AuditPageThread(
+                    pageUrl, 
+                    auditService, 
+                    act, 
+                    parameterSet, 
+                    locale,
+                    delay);
+        Audit audit = submitAuditAndLaunch(auditPageThread, act);
         return audit;
     }
 
@@ -159,8 +187,9 @@ public class TanaguruOrchestratorImpl
             Contract contract,
             Map<String, String> fileMap,
             String clientIp,
-            Set<Parameter> parameterSet) {
-        LOGGER.debug("auditPage Upload");
+            Set<Parameter> parameterSet, 
+            Locale locale) {
+        LOGGER.info("auditPage Upload");
         if (LOGGER.isDebugEnabled()) {
             for (String str : fileMap.values()) {
                 LOGGER.debug("files " + str);
@@ -170,30 +199,21 @@ public class TanaguruOrchestratorImpl
                         param.getParameterElement().getParameterElementCode());
             }
         }
-        Date beginDate = new Date();
-        Act act = actFactory.createAct(beginDate, contract);
+        Act act;
         if (fileMap.size()>1) {
-            act.setScope(scopeMap.get(ScopeEnum.GROUPOFFILES));
+            act = createAct(contract, ScopeEnum.GROUPOFFILES, clientIp);
         } else {
-            act.setScope(scopeMap.get(ScopeEnum.FILE));
+            act = createAct(contract, ScopeEnum.FILE, clientIp);
         }
-        act.setClientIp(clientIp);
-        Audit audit = auditService.auditPageUpload(
-                fileMap,
-                parameterSet);
-        try {
-            audit = waitForAuditToComplete(audit);
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
-        act.setEndDate(new Date());
-        act.setWebResource(audit.getSubject());
-        if (audit.getStatus().equals(AuditStatus.COMPLETED)) {
-            act.setStatus(ActStatus.COMPLETED);
-        } else {
-            act.setStatus(ActStatus.ERROR);
-        }
-        actDataService.saveOrUpdate(act);
+        AuditTimeoutThread auditPageUploadThread =
+                new AuditPageUploadThread(
+                    fileMap, 
+                    auditService, 
+                    act, 
+                    parameterSet, 
+                    locale,
+                    delay);
+        Audit audit = submitAuditAndLaunch(auditPageUploadThread, act);
         return audit;
     }
 
@@ -202,7 +222,8 @@ public class TanaguruOrchestratorImpl
             Contract contract,
             String siteUrl,
             String clientIp,
-            Set<Parameter> parameterSet) {
+            Set<Parameter> parameterSet, 
+            Locale locale) {
         LOGGER.info("auditSite");
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("siteUrl " + siteUrl);
@@ -212,45 +233,14 @@ public class TanaguruOrchestratorImpl
             }
         }
         Act act = createAct(contract, ScopeEnum.DOMAIN, clientIp);
-        AuditSiteThread auditSiteThread =
+        AuditThread auditSiteThread =
                 new AuditSiteThread(
-                siteUrl,
-                null,
-                auditService,
-                this,
-                act,
-                parameterSet);
-        auditSiteThread.add(this);
+                    siteUrl,
+                    auditService,
+                    act,
+                    parameterSet, 
+                    locale);
         threadPoolTaskExecutor.submit(auditSiteThread);
-        return;
-    }
-
-    @Override
-    public void auditSiteBg(
-            Contract contract,
-            String siteUrl,
-            final List<String> pageUrlList,
-            String clientIp,
-            Set<Parameter> parameterSet) {
-        LOGGER.info("auditGroupOfPagesInBg");
-        if (LOGGER.isDebugEnabled()) {
-            for (Parameter param : parameterSet) {
-                LOGGER.debug("param " + param.getValue() + " "+
-                        param.getParameterElement().getParameterElementCode());
-            }
-        }
-        Act act = createAct(contract, ScopeEnum.GROUPOFPAGES, clientIp);
-        AuditSiteThread auditSiteThread =
-                new AuditSiteThread(
-                siteUrl,
-                pageUrlList,
-                auditService,
-                this,
-                act,
-                parameterSet);
-        auditSiteThread.add(this);
-        threadPoolTaskExecutor.submit(auditSiteThread);
-        return;
     }
 
     @Override
@@ -259,7 +249,8 @@ public class TanaguruOrchestratorImpl
             String siteUrl,
             final List<String> pageUrlList,
             String clientIp,
-            Set<Parameter> parameterSet) {
+            Set<Parameter> parameterSet, 
+            Locale locale) {
         LOGGER.info("auditGroupOfPages");
         if (LOGGER.isDebugEnabled()) {
             for (String str :pageUrlList) {
@@ -271,119 +262,137 @@ public class TanaguruOrchestratorImpl
             }
         }
         Act act = createAct(contract, ScopeEnum.GROUPOFPAGES, clientIp);
-        Audit audit = auditService.auditSite(
-                siteUrl,
-                pageUrlList,
-                parameterSet);
-        try {
-            try {
-                audit = waitForAuditToComplete(audit);
-            } catch (Exception ex) {
-                Logger.getLogger(this.getClass()).error(ex);
-            }
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
-        act.setEndDate(new Date());
-        act.setWebResource(audit.getSubject());
-        if (audit.getStatus().equals(AuditStatus.COMPLETED)) {
-            act.setStatus(ActStatus.COMPLETED);
-        } else {
-            act.setStatus(ActStatus.ERROR);
-        }
-        actDataService.saveOrUpdate(act);
+        AuditTimeoutThread auditPageThread = 
+                new AuditGroupOfPagesThread(
+                    siteUrl, 
+                    pageUrlList, 
+                    auditService, 
+                    act, 
+                    parameterSet, 
+                    locale,
+                    delay);
+        Audit audit = submitAuditAndLaunch(auditPageThread, act);
         return audit;
-    }
-
-    @Override
-    public boolean isAuditRunning(Contract contract) {
-        return !actDataService.getRunningActsByContract(contract).isEmpty();
-    }
-
-    @Override
-    public boolean isAuditRunning(User user) {
-        for (Contract contract : user.getContractSet()) {
-            if (!actDataService.getRunningActsByContract(contract).isEmpty()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public void onActTerminated(Act act, Audit audit) {
-        LOGGER.info("act is terminated");
-        Date endDate = new Date();
-        act.setEndDate(endDate);
-        if (audit.getStatus().equals(AuditStatus.COMPLETED)) {
-            act.setStatus(ActStatus.COMPLETED);
-        } else {
-            act.setStatus(ActStatus.ERROR);
-        }
-        actDataService.saveOrUpdate(act);
-        LOGGER.info("actThreadListenerSet.size()  " + actThreadListenerSet.size());
-        LOGGER.info("actThreadListenerSet.isEmpty()  " + actThreadListenerSet.isEmpty());
-        for (ActThreadListener actThreadListener : actThreadListenerSet) {
-            actThreadListener.onActTerminated(act, audit);
-        }
-        sendEmail(act);
-    }
-
-    private void sendEmail(Act act) {
-        String emailFrom = emailContentResourceBundle.getString(RECIPIENT_KEY);
-        Set<String> emailToSet = new HashSet<String>();
-        emailToSet.add(act.getContract().getUser().getEmail1());
-        if (act.getStatus().equals(ActStatus.COMPLETED)) {
-            String emailSubject = emailContentResourceBundle.getString(SUCCESS_SUBJECT_KEY);
-            StringBuilder emailMessage = new StringBuilder();
-            emailMessage.append(computeSuccessfulMessageOnActTerminated(act.getWebResource().getId(), act.getContract().getLabel()));
-            emailSender.sendEmail(emailFrom, emailToSet, emailSubject, emailMessage.toString());
-        } else if (act.getStatus().equals(ActStatus.ERROR)) {
-            String emailSubject = emailContentResourceBundle.getString(ERROR_SUBJECT_KEY);
-            StringBuilder emailMessage = new StringBuilder();
-            emailMessage.append(computeFailureMessageOnActTerminated(act.getWebResource().getId(), act.getContract().getLabel()));
-            emailSender.sendEmail(emailFrom, emailToSet, emailSubject, emailMessage.toString());
-        }
-        
-    }
-
-    /**
-     *
-     * @param webResourceId
-     * @param contractLabel
-     * @return
-     */
-    private String computeSuccessfulMessageOnActTerminated(
-            Long webResourceId,
-            String contractLabel) {
-        String messageContent =
-                    emailContentResourceBundle.getString(SUCCESS_MSG_CONTENT_KEY).
-                    replaceAll(URL_TO_REPLACE, webresourceUrlPrefix+URL_PARAM+webResourceId);
-        return messageContent.replaceAll(PROJECT_NAME_TO_REPLACE, contractLabel);
     }
 
     /**
      * 
-     * @param webResourceId
-     * @param contractLabel
-     * @return
+     * @param auditTimeoutThread
+     * @param act
+     * @return 
      */
-    private String computeFailureMessageOnActTerminated(
-            Long webResourceId,
-            String contractLabel) {
-        String messageContent =
-                    emailContentResourceBundle.getString(ERROR_MSG_CONTENT_KEY).
-                    replaceAll(URL_TO_REPLACE, webresourceUrlPrefix+URL_PARAM+webResourceId);
-        return messageContent.replaceAll(PROJECT_NAME_TO_REPLACE, contractLabel);
-    }
-
-    @Override
-    public void onActExecution(Act act) {
-        for (ActThreadListener actThreadListener : actThreadListenerSet) {
-            actThreadListener.onActExecution(act);
+    private Audit submitAuditAndLaunch(AuditTimeoutThread auditTimeoutThread, Act act) {
+        synchronized (auditTimeoutThread) {
+            Future submitedThread = threadPoolTaskExecutor.submit(auditTimeoutThread);
+            while (submitedThread!=null && !submitedThread.isDone()) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                    LOGGER.error("", ex);
+                }
+                if (auditTimeoutThread.isDurationExceedsDelay()) {
+                    LOGGER.debug("Audit Duration ExceedsDelay. The audit result "
+                            + "is now managed in an asynchronous way.");
+                    break;
+                }
+            }
+            return auditTimeoutThread.getAudit();
         }
     }
 
+    private void sendEmail(Act act, Locale locale) {
+        LOGGER.debug("c'est quoi ce delire");
+        String emailTo = act.getContract().getUser().getEmail1();
+        if (this.emailSentToUserExclusionList.contains(emailTo)) {
+            LOGGER.debug("Email not set cause user " + emailTo + " belongs to "
+                    + "exlusion list");
+            return;
+        }
+        LOGGER.debug("c'est quoi ce delire 2 " +locale.getLanguage());
+        ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME, locale);
+        LOGGER.debug("c'est quoi ce delire  3 " );
+        String emailFrom = bundle.getString(RECIPIENT_KEY);
+        Set<String> emailToSet = new HashSet<String>();
+        emailToSet.add(emailTo);
+        if (act.getStatus().equals(ActStatus.COMPLETED)) {
+            String emailSubject = bundle.getString(SUCCESS_SUBJECT_KEY).replaceAll(PROJECT_NAME_TO_REPLACE, act.getContract().getLabel());
+            StringBuilder emailMessage = new StringBuilder();
+            emailMessage.append(computeSuccessfulMessageOnActTerminated(act, bundle));
+            emailSender.sendEmail(emailFrom, emailToSet, emailSubject, emailMessage.toString());
+            LOGGER.debug("success email sent to " + emailTo);
+        } else if (act.getStatus().equals(ActStatus.ERROR)) {
+            String emailSubject = bundle.getString(ERROR_SUBJECT_KEY).replaceAll(PROJECT_NAME_TO_REPLACE, act.getContract().getLabel());
+            StringBuilder emailMessage = new StringBuilder();
+            emailMessage.append(computeFailureMessageOnActTerminated(act, bundle));
+            emailSender.sendEmail(emailFrom, emailToSet, emailSubject, emailMessage.toString());
+            LOGGER.debug("error email sent " + emailTo);
+        }
+     }
+
+    /**
+     *
+     * @param act
+     * @param bundle
+     * @return
+     */
+    private String computeSuccessfulMessageOnActTerminated(Act act, ResourceBundle bundle) {
+        String messageContent =
+                    bundle.getString(SUCCESS_MSG_CONTENT_KEY).
+                    replaceAll(URL_TO_REPLACE, buildResultUrl(act));
+        return messageContent.replaceAll(PROJECT_NAME_TO_REPLACE, act.getContract().getLabel());
+    }
+
+    /**
+     * 
+     * @param act
+     * @param bundle
+     * @return
+     */
+    private String computeFailureMessageOnActTerminated(Act act, ResourceBundle bundle) {
+        String messageContent;
+        if (act.getScope().getCode().equals(ScopeEnum.DOMAIN)) {
+            messageContent = bundle.getString(SITE_ERROR_MSG_CONTENT_KEY);
+        } else {
+            messageContent = bundle.getString(PAGE_ERROR_MSG_CONTENT_KEY);
+            messageContent = messageContent.replaceAll(PROJECT_URL_TO_REPLACE, buildContractUrl(act.getContract()));
+        }
+        messageContent = messageContent.replaceAll(URL_TO_REPLACE, buildResultUrl(act));
+        return messageContent.replaceAll(PROJECT_NAME_TO_REPLACE, act.getContract().getLabel());
+    }
+
+    /**
+     * 
+     * @param act
+     * @return 
+     */
+    private String buildResultUrl (Act act) {
+        StringBuilder strb = new StringBuilder();
+        strb.append(webappUrl);
+        ScopeEnum scope = act.getScope().getCode();
+        if (scope.equals(ScopeEnum.DOMAIN)) {
+            strb.append(siteResultUrlSuffix);
+        } else if (scope.equals(ScopeEnum.GROUPOFPAGES) || scope.equals(ScopeEnum.GROUPOFFILES)) {
+            strb.append(groupResultUrlSuffix);
+        } else if (scope.equals(ScopeEnum.FILE) || scope.equals(ScopeEnum.PAGE)) {
+            strb.append(pageResultUrlSuffix);
+        }
+        strb.append(act.getWebResource().getId());
+        return strb.toString();
+    }
+    
+    /**
+     * 
+     * @param act
+     * @return 
+     */
+    private String buildContractUrl (Contract contract) {
+        StringBuilder strb = new StringBuilder();
+        strb.append(webappUrl);
+        strb.append(contractUrlSuffix);
+        strb.append(contract.getId());
+        return strb.toString();
+    }
+    
     /**
      * This method initializes an act instance and persists it.
      * @param contract
@@ -400,152 +409,122 @@ public class TanaguruOrchestratorImpl
         return act;
     }
 
-    private void initializeScopeMap(ScopeDataService ScopeDataService) {
-        for (Scope scope : ScopeDataService.findAll()) {
-            scopeMap.put(scope.getCode(), scope);
-        }
-    }
+    /**
+     * 
+     */
+    private abstract class AuditThread implements Runnable, AuditServiceListener {
 
-    private Audit waitForAuditToComplete(Audit audit) throws Exception {
-        LOGGER.debug("WAIT FOR AUDIT TO COMPLETE:" + audit + "," + audit.getSubject().getURL() + "," + (long) (audit.getDateOfCreation().getTime() / 1000));
-        Long token = new Date().getTime();
-        this.auditExecutionList.put(audit, token);
-        while (!this.auditCompletedList.containsKey(token) && !this.auditCrashedList.containsKey(token)) {
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException ex) {
-                LOGGER.error("", ex);
-            }
+        private AuditService auditService;
+        public AuditService getAuditService() {
+            return auditService;
         }
-        if ((audit = this.auditCompletedList.get(token)) != null) {
-            this.auditCompletedList.remove(token);
+
+        public void setAuditService(AuditService auditService) {
+            this.auditService = auditService;
+        }
+        
+        private Set<Parameter> parameterSet = new HashSet<Parameter>();
+        public Set<Parameter> getParameterSet() {
+            return parameterSet;
+        }
+
+        public void setParameterSet(Set<Parameter> parameterSet) {
+            this.parameterSet = parameterSet;
+        }
+        
+        private Act currentAct;
+        public Act getCurrentAct() {
+            return currentAct;
+        }
+
+        public void setCurrentAct(Act currentAct) {
+            this.currentAct = currentAct;
+        }
+        
+        private Map<Audit, Long> auditExecutionList = new ConcurrentHashMap<Audit, Long>();
+        public Map<Audit, Long> getAuditExecutionList() {
+            return auditExecutionList;
+        }
+
+        public void setAuditExecutionList(Map<Audit, Long> auditExecutionList) {
+            this.auditExecutionList = auditExecutionList;
+        }
+        
+        private Map<Long, Audit> auditCompletedList = new ConcurrentHashMap<Long, Audit>();
+        public Map<Long, Audit> getAuditCompletedList() {
+            return auditCompletedList;
+        }
+
+        public void setAuditCompletedList(Map<Long, Audit> auditCompletedList) {
+            this.auditCompletedList = auditCompletedList;
+        }
+        
+        private Map<Long, AbstractMap.SimpleImmutableEntry<Audit, Exception>> auditCrashedList = new HashMap<Long, AbstractMap.SimpleImmutableEntry<Audit, Exception>>();
+        public Map<Long, SimpleImmutableEntry<Audit, Exception>> getAuditCrashedList() {
+            return auditCrashedList;
+        }
+
+        public void setAuditCrashedList(Map<Long, SimpleImmutableEntry<Audit, Exception>> auditCrashedList) {
+            this.auditCrashedList = auditCrashedList;
+        }
+
+        private Date startDate;
+        public Date getStartDate() {
+            return startDate;
+        }
+
+        public void setStartDate(Date startDate) {
+            this.startDate = startDate;
+        }
+        
+        private Audit audit = null;
+        public Audit getAudit() {
             return audit;
         }
-        throw this.auditCrashedList.get(token).getValue();
-    }
 
-    @Override
-    public void auditCompleted(Audit audit) {
-        LOGGER.debug("AUDIT COMPLETED:" + audit + "," + audit.getSubject().getURL() + "," + (long) (audit.getDateOfCreation().getTime() / 1000));
-        Audit auditCompleted = null;
-        for (Audit auditRunning : this.auditExecutionList.keySet()) {
-            if (auditRunning.getSubject().getURL().equals(audit.getSubject().getURL())
-                    && (long) (auditRunning.getDateOfCreation().getTime() / 1000) == (long) (audit.getDateOfCreation().getTime() / 1000)) {
-                auditCompleted = auditRunning;
-                break;
-            }
+        public void setAudit(Audit audit) {
+            this.audit = audit;
         }
-        if (auditCompleted != null) {
-            Long token = this.auditExecutionList.get(auditCompleted);
-            this.auditExecutionList.remove(auditCompleted);
-            this.auditCompletedList.put(token, audit);
-        }
-    }
-
-    @Override
-    public void auditCrashed(Audit audit, Exception exception) {
-        LOGGER.error("AUDIT CRASHED:" + audit + "," + audit.getSubject().getURL() + "," + (long) (audit.getDateOfCreation().getTime() / 1000), exception);
-        Audit auditCrashed = null;
-        for (Audit auditRunning : this.auditExecutionList.keySet()) {
-            if (auditRunning.getSubject().getURL().equals(audit.getSubject().getURL())
-                    && (long) (auditRunning.getDateOfCreation().getTime() / 1000) == (long) (audit.getDateOfCreation().getTime() / 1000)) {
-                auditCrashed = auditRunning;
-                break;
-            }
-        }
-        if (auditCrashed != null) {
-            Long token = this.auditExecutionList.get(auditCrashed);
-            this.auditExecutionList.remove(auditCrashed);
-            this.auditCrashedList.put(token, new AbstractMap.SimpleImmutableEntry<Audit, Exception>(audit, exception));
-        }
-    }
-
-    private class AuditSiteThread implements Runnable, AuditServiceListener {
-
-        private String siteUrl;
-        private List<String> pageUrlList = new ArrayList<String>();
-        private AuditService auditService;
-        private ActThreadListener auditSiteThreadListener;
-        private Set<Parameter> parameterSet = new HashSet<Parameter>();
-        private Act currentAct;
-        private Map<Audit, Long> auditExecutionList = new ConcurrentHashMap<Audit, Long>();
-        private Map<Long, Audit> auditCompletedList = new ConcurrentHashMap<Long, Audit>();
-        private Map<Long, AbstractMap.SimpleImmutableEntry<Audit, Exception>> auditCrashedList = new HashMap<Long, AbstractMap.SimpleImmutableEntry<Audit, Exception>>();
-        private Set<AuditServiceListener> listeners;
-
-        public void add(AuditServiceListener listener) {
-            if (this.listeners == null) {
-                this.listeners = new HashSet<AuditServiceListener>();
-            }
-            this.listeners.add(listener);
+        
+        private Locale locale = null;
+        public Locale getLocale() {
+            return locale;
         }
 
-        public void remove(AuditServiceListener listener) {
-            if (this.listeners == null) {
-                return;
-            }
-            this.listeners.remove(listener);
+        public void setLocale(Locale locale) {
+            this.locale = locale;
         }
-
-        public AuditSiteThread(
-                String siteUrl,
-                List<String> pageUrlList,
+        
+        public AuditThread(
                 AuditService auditService,
-                ActThreadListener auditSiteThreadListener,
                 Act act,
-                Set<Parameter> parameterSet) {
-            this.siteUrl = siteUrl;
-            if (pageUrlList != null) {
-                this.pageUrlList.addAll(pageUrlList);
-            }
+                Set<Parameter> parameterSet, 
+                Locale locale) {
             if (parameterSet != null) {
                 this.parameterSet.addAll(parameterSet);
             }
             this.auditService = auditService;
-            this.auditSiteThreadListener = auditSiteThreadListener;
             this.currentAct = act;
+            this.locale = locale;
+            startDate = act.getBeginDate();
         }
-
+        
         @Override
         public void run() {
-            this.auditService.add(this);
-            Audit audit = null;
-            this.auditSiteThreadListener.onActExecution(this.currentAct);
-            if (pageUrlList != null) {
-                audit = this.auditService.auditSite(
-                        this.siteUrl,
-                        this.pageUrlList,
-                        this.parameterSet);
-            } else {
-                audit = this.auditService.auditSite(
-                        this.siteUrl,
-                        this.parameterSet);
-            }
-            audit = this.waitForAuditToComplete(audit);
-            this.auditService.remove(this);
-            this.currentAct.setWebResource(audit.getSubject());
-            this.auditSiteThreadListener.onActTerminated(this.currentAct, audit);
+            this.getAuditService().add(this);
+            Audit currentAudit = launchAudit();
+            currentAudit = this.waitForAuditToComplete(currentAudit);
+            this.getAuditService().remove(this);
+            this.getCurrentAct().setWebResource(currentAudit.getSubject());
+            onActTerminated(this.getCurrentAct(), currentAudit);
         }
-
-        private Audit waitForAuditToComplete(Audit audit) {
-            LOGGER.debug("WAIT FOR AUDIT TO COMPLETE:" + audit + "," + audit.getSubject().getURL() + "," + (long) (audit.getDateOfCreation().getTime() / 1000));
-            Long token = new Date().getTime();
-            this.auditExecutionList.put(audit, token);
-            while (!this.auditCompletedList.containsKey(token) && !this.auditCrashedList.containsKey(token)) {
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException ex) {
-                    LOGGER.error("", ex);
-                }
-            }
-            if ((audit = this.auditCompletedList.get(token)) != null) {
-                this.auditCompletedList.remove(token);
-                return audit;
-            }
-            fireAuditCrashed(this.auditCrashedList.get(token).getKey(), this.auditCrashedList.get(token).getValue());
-            return null;
-        }
-
+        
+        /**
+         * 
+         * @return 
+         */
+        public abstract Audit launchAudit();
+        
         @Override
         public void auditCompleted(Audit audit) {
             LOGGER.debug("AUDIT COMPLETED:" + audit + "," + audit.getSubject().getURL() + "," + (long) (audit.getDateOfCreation().getTime() / 1000));
@@ -582,13 +561,223 @@ public class TanaguruOrchestratorImpl
             }
         }
 
-        private void fireAuditCrashed(Audit audit, Exception exception) {
-            if (this.listeners == null) {
-                return;
+        protected Audit waitForAuditToComplete(Audit audit) {
+            LOGGER.debug("WAIT FOR AUDIT TO COMPLETE:" + audit + "," + audit.getSubject().getURL() + "," + (long) (audit.getDateOfCreation().getTime() / 1000));
+            Long token = new Date().getTime();
+            this.getAuditExecutionList().put(audit, token);
+            while (!this.getAuditCompletedList().containsKey(token) && !this.getAuditCrashedList().containsKey(token)) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                    LOGGER.error("", ex);
+                }
             }
-            for (AuditServiceListener listener : this.listeners) {
-                listener.auditCrashed(audit, exception);
+            if ((audit = this.getAuditCompletedList().get(token)) != null) {
+                this.getAuditCompletedList().remove(token);
+                return audit;
             }
+            auditCrashed(this.getAuditCrashedList().get(token).getKey(), this.getAuditCrashedList().get(token).getValue());
+            return null;
+        }
+        
+//        @Override
+        protected void onActTerminated(Act act, Audit audit) {
+            LOGGER.debug("act is terminated");
+            this.audit = audit;
+            Date endDate = new Date();
+            act.setEndDate(endDate);
+            if (audit.getStatus().equals(AuditStatus.COMPLETED)) {
+                act.setStatus(ActStatus.COMPLETED);
+            } else {
+                act.setStatus(ActStatus.ERROR);
+            }
+            actDataService.saveOrUpdate(act);
         }
     }
+    
+    /**
+     * Inner class in charge of launching a site audit in a thread. At the end 
+     * the audit, an email has to be sent to the user with the audit info.
+     */
+    private class AuditSiteThread extends AuditThread {
+
+        private String siteUrl;
+        
+        public AuditSiteThread(
+                String siteUrl,
+                AuditService auditService,
+                Act act,
+                Set<Parameter> parameterSet, 
+                Locale locale) {
+            super(auditService, act, parameterSet, locale);
+            this.siteUrl = siteUrl;
+        }
+
+        @Override
+        public Audit launchAudit() {
+            Audit audit = this.getAuditService().auditSite(
+                        this.siteUrl,
+                        this.getParameterSet());
+            return audit;
+        }
+        
+        @Override
+        protected void onActTerminated(Act act, Audit audit) {
+            super.onActTerminated(act, audit);
+            sendEmail(act, getLocale());
+            LOGGER.info("site audit terminated");
+        }
+
+    }
+
+    /**
+     * Abstract Inner class in charge of launching an audit in a thread. This 
+     * thread has to expose the current audit as an attribute. If the
+     * audit is not terminated in a given delay, this attribute returns null and
+     * an email has to be sent to inform the user.
+     */
+    private abstract class AuditTimeoutThread extends AuditThread {
+        
+        private boolean isAuditTerminatedAfterTimeout = false;
+        public boolean isAuditTerminatedAfterTimeout() {
+            return isAuditTerminatedAfterTimeout;
+        }
+
+        public void setAuditTerminatedAfterTimeout(boolean isAuditTerminatedBeforeTimeout) {
+            this.isAuditTerminatedAfterTimeout = isAuditTerminatedBeforeTimeout;
+        }
+        
+        private int delay = DEFAULT_AUDIT_DELAY;
+        
+        public AuditTimeoutThread (
+                AuditService auditService,
+                Act act,
+                Set<Parameter> parameterSet, 
+                Locale locale,
+                int delay) {
+            super(auditService, act, parameterSet, locale);
+            this.delay = delay;
+        }
+
+        @Override
+        protected void onActTerminated(Act act, Audit audit) {
+            super.onActTerminated(act, audit);
+            if (isAuditTerminatedAfterTimeout()) {
+                sendEmail(act, getLocale());
+            }
+        }
+
+        public boolean isDurationExceedsDelay() {
+            long currentDuration = new Date().getTime() - getStartDate().getTime();
+            if (currentDuration > delay) {
+                LOGGER.debug("Audit Duration has exceeded synchronous delay " + delay);
+                isAuditTerminatedAfterTimeout = true;
+                return true;
+            }
+            return false;
+        }
+
+    }
+    
+    /**
+     * 
+     */
+    private class AuditGroupOfPagesThread extends AuditTimeoutThread {
+
+        private String siteUrl;
+        private List<String> pageUrlList = new ArrayList<String>();
+        
+        public AuditGroupOfPagesThread(
+                String siteUrl,
+                List<String> pageUrlList,
+                AuditService auditService,
+                Act act,
+                Set<Parameter> parameterSet, 
+                Locale locale,
+                int delay) {
+            super(auditService, act, parameterSet, locale, delay);
+            this.siteUrl = siteUrl;
+            if (pageUrlList != null) {
+                this.pageUrlList.addAll(pageUrlList);
+            }
+        }
+
+        @Override
+        public Audit launchAudit() {
+            Audit audit = null;
+            if (CollectionUtils.isNotEmpty(this.pageUrlList)) {
+                audit = this.getAuditService().auditSite(
+                        this.siteUrl,
+                        this.pageUrlList,
+                        this.getParameterSet());
+            }
+            return audit;
+        }
+
+    }
+    
+    /**
+     * Inner class in charge of launching a page audit in a thread.
+     */
+    private class AuditPageThread extends AuditTimeoutThread {
+
+        private String pageUrl;
+        
+        public AuditPageThread(
+                String pageUrl,
+                AuditService auditService,
+                Act act,
+                Set<Parameter> parameterSet,
+                Locale locale,
+                int delay) {
+            super(auditService, act, parameterSet, locale, delay);
+            this.pageUrl = pageUrl;
+        }
+
+        @Override
+        public Audit launchAudit() {
+            Audit audit = null;
+            if (this.pageUrl != null) {
+                audit = this.getAuditService().auditPage(
+                        this.pageUrl,
+                        this.getParameterSet());
+            }
+            return audit;
+        }
+        
+    }
+    
+    /**
+     * Inner class in charge of launching a upload pages audit in a thread.
+     */
+    private class AuditPageUploadThread extends AuditTimeoutThread {
+
+        Map<String, String> pageMap = new HashMap<String, String>();
+        
+        public AuditPageUploadThread(
+                Map<String, String> pageMap,
+                AuditService auditService,
+                Act act,
+                Set<Parameter> parameterSet, 
+                Locale locale,
+                int delay) {
+            super(auditService, act, parameterSet, locale, delay);
+            if (pageMap != null) {
+                this.pageMap.putAll(pageMap);
+            }
+        }
+
+        @Override
+        public Audit launchAudit() {
+            Audit audit = null;
+            if (MapUtils.isNotEmpty(pageMap)) {
+                audit = this.getAuditService().auditPageUpload(
+                        this.pageMap,
+                        this.getParameterSet());
+            }
+            return audit;
+        }
+        
+    }
+
 }

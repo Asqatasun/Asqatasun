@@ -164,6 +164,7 @@
         <property name="proxyHost" value="${proxyHost}"/>
         <property name="proxyPort" value="${proxyPort}"/>
         <property name="proxyExclusionUrl" value="${proxyExclusionUrl}"/>
+        <property name="emailSentToUserExclusionRawList" value="${emailSentToUserExclusionList}"/>
     </bean>
 
 </beans>

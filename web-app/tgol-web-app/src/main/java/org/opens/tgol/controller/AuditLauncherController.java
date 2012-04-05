@@ -21,19 +21,7 @@
  */
 package org.opens.tgol.controller;
 
-import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.product.Restriction;
-import org.opens.tgol.orchestrator.TanaguruOrchestrator;
-import org.opens.tgol.util.HttpStatusCodeFamily;
-import org.opens.tgol.util.TgolKeyStore;
-import org.opens.tgol.voter.restriction.RestrictionHandler;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -46,7 +34,13 @@ import org.opens.tanaguru.entity.service.parameterization.ParameterElementDataSe
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tgol.command.AuditSetUpCommand;
+import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.entity.product.Restriction;
 import org.opens.tgol.exception.LostInSpaceException;
+import org.opens.tgol.orchestrator.TanaguruOrchestrator;
+import org.opens.tgol.util.HttpStatusCodeFamily;
+import org.opens.tgol.util.TgolKeyStore;
+import org.opens.tgol.voter.restriction.RestrictionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -135,6 +129,11 @@ public class AuditLauncherController extends AuditDataHandlerController {
         proxyExclusionUrlList.addAll(Arrays.asList(proxyExclusionUrl.split(";")));
     }
 
+    private List<String> emailSentToUserExclusionList = new ArrayList<String>();
+    public void setEmailSentToUserExclusionRawList(String emailSentToUserExclusionRawList) {
+        this.emailSentToUserExclusionList.addAll(Arrays.asList(emailSentToUserExclusionRawList.split(";")));
+    }
+    
     public AuditLauncherController() {
         super();
     }
@@ -142,11 +141,13 @@ public class AuditLauncherController extends AuditDataHandlerController {
     /**
      * This methods enables an authenticated user to launch an audit.
      * @param contractId
+     * @param locale
      * @param model
      * @return
      */
     public String launchAudit(
-            AuditSetUpCommand auditSetUpCommand,
+            final AuditSetUpCommand auditSetUpCommand,
+            final Locale locale,
             Model model) {
         Contract contract = getContractDataService().read(auditSetUpCommand.getContractId());
         if (isContractExpired(contract)) {
@@ -159,13 +160,15 @@ public class AuditLauncherController extends AuditDataHandlerController {
                 return checkResult;
             }
             if (auditSetUpCommand != null && !auditSetUpCommand.isAuditSite()) {
-                return preparePageAudit(auditSetUpCommand, model);
+                return preparePageAudit(auditSetUpCommand, contract, locale, model);
             }
             tanaguruExecutor.auditSite(
                     contract,
                     contract.getUrl(),
                     getClientIpAddress(),
-                    getUserParamSet(auditSetUpCommand, contract.getId(), -1, contract.getUrl()));
+                    getUserParamSet(auditSetUpCommand, contract.getId(),-1,contract.getUrl()),
+                    locale
+                    );
             model.addAttribute(TgolKeyStore.TESTED_URL_KEY, contract.getUrl());
             model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
             model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
@@ -179,22 +182,35 @@ public class AuditLauncherController extends AuditDataHandlerController {
      * values populated by the user. In case of audit failure, an appropriate
      * message is displayed
      * @param auditSetUpCommand
+     * @param contract
+     * @param locale
      * @param model
      * @return
      */
     private String preparePageAudit(
-            AuditSetUpCommand auditSetUpCommand,
+            final AuditSetUpCommand auditSetUpCommand,
+            final Contract contract,
+            final Locale locale,
             Model model) {
         Audit audit;
+        boolean isPageAudit = true;
         // if the form is correct, we launch the audit
         if (auditSetUpCommand.getUrlList().isEmpty()) {
-            audit = launchUploadAudit(
-                    getContractDataService().read(auditSetUpCommand.getContractId()),
-                    auditSetUpCommand);
+            audit = launchUploadAudit(contract, auditSetUpCommand, locale);
+            isPageAudit = false;
         } else {
-            audit = launchPageAudit(
-                    getContractDataService().read(auditSetUpCommand.getContractId()),
-                    auditSetUpCommand);
+            audit = launchPageAudit(contract,auditSetUpCommand, locale);
+        }
+        if (audit == null) {
+            model.addAttribute(TgolKeyStore.TESTED_URL_KEY, contract.getUrl());
+            model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
+            model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
+            model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
+            model.addAttribute(TgolKeyStore.IS_PAGE_AUDIT_KEY, isPageAudit);
+            if (!emailSentToUserExclusionList.contains(contract.getUser().getEmail1())) {
+                model.addAttribute(TgolKeyStore.IS_USER_NOTIFIED_KEY, true);
+            }
+            return TgolKeyStore.GREEDY_AUDIT_VIEW_NAME;
         }
         if (audit.getStatus() != AuditStatus.COMPLETED) {
             return prepareFailedAuditData(audit,model);
@@ -213,12 +229,15 @@ public class AuditLauncherController extends AuditDataHandlerController {
     /**
      * This method launches the audit process using the tanaguru orchestrator
      * bean
-     * @param url
+     * @param contract
+     * @param auditSetUpCommand
+     * @param locale
      * @return
      */
     private Audit launchPageAudit(
             final Contract contract,
-            final AuditSetUpCommand auditSetUpCommand) {
+            final AuditSetUpCommand auditSetUpCommand,
+            final Locale locale) {
         int urlCounter = 0;
         // 10 String are received from the form even if these String are empty.
         // We sort the string and only keep the not empty ones.
@@ -241,7 +260,8 @@ public class AuditLauncherController extends AuditDataHandlerController {
                     contract,
                     trueUrl.get(0),
                     getClientIpAddress(),
-                    paramSet);
+                    paramSet, 
+                    locale);
         } else if (trueUrl.size() > 1) {
             String[] finalUrlTab = new String[trueUrl.size()];
             for (int i = 0; i < trueUrl.size(); i++) {
@@ -254,22 +274,32 @@ public class AuditLauncherController extends AuditDataHandlerController {
                     groupePagesName,
                     trueUrl,
                     getClientIpAddress(),
-                    paramSet);
+                    paramSet, 
+                    locale);
         } else {
             return null;
         }
     }
 
+    /**
+     * 
+     * @param contract
+     * @param auditSetUpCommand
+     * @param locale
+     * @return 
+     */
     private Audit launchUploadAudit(
             final Contract contract,
-            final AuditSetUpCommand auditSetUpCommand) {
+            final AuditSetUpCommand auditSetUpCommand, 
+            final Locale locale) {
         Map<String, String> fileMap = auditSetUpCommand.getFileMap();
         Set<Parameter> paramSet = getUserParamSet(auditSetUpCommand, contract.getId(), fileMap.size(), null);
         return tanaguruExecutor.auditPageUpload(
                 contract,
                 fileMap,
                 getClientIpAddress(),
-                paramSet);
+                paramSet, 
+                locale);
     }
 
     /**

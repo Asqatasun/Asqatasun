@@ -21,18 +21,18 @@
  */
 package org.opens.tgol.controller;
 
-import org.opens.tgol.command.AuditSetUpCommand;
-import org.opens.tgol.command.factory.AuditSetUpCommandFactory;
-import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.product.ScopeEnum;
-import org.opens.tgol.util.TgolKeyStore;
-import org.opens.tgol.form.parameterization.AuditSetUpFormField;
-import org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl;
-import org.opens.tgol.validator.AuditSetUpFormValidator;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.opens.tgol.command.AuditSetUpCommand;
+import org.opens.tgol.command.factory.AuditSetUpCommandFactory;
+import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.entity.product.ScopeEnum;
+import org.opens.tgol.form.parameterization.AuditSetUpFormField;
+import org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl;
+import org.opens.tgol.util.TgolKeyStore;
+import org.opens.tgol.validator.AuditSetUpFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -252,7 +252,7 @@ public class AuditSetUpController extends AuditDataHandlerController{
         }
         model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, auditSetUpCommand.getContractId());
         model.addAttribute(TgolKeyStore.AUDIT_SET_UP_COMMAND_KEY, auditSetUpCommand);
-        return auditLauncherController.launchAudit(auditSetUpCommand, model);
+        return auditLauncherController.launchAudit(auditSetUpCommand, getLocaleResolver().resolveLocale(request), model);
     }
 
     /**

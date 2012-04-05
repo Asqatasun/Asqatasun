@@ -21,13 +21,13 @@
  */
 package org.opens.tgol.orchestrator;
 
-import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.user.User;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tgol.entity.contract.Contract;
 
 /**
  *
@@ -39,94 +39,64 @@ public interface TanaguruOrchestrator {
      *
      * @param contract
      * @param pageUrl
-     * @param testCodeList
      * @param ipClient
      * @param paramSet
+     * @param locale
      * @return
      */
     Audit auditPage(
             Contract contract,
             String pageUrl,
-//            String[] testCodeList,
             String clientIp,
-            Set<Parameter> paramSet);
+            Set<Parameter> paramSet, 
+            Locale locale);
     
     /**
      *
      * @param contract
-     * @param pageUrl
-     * @param testCodeList
+     * @param fileMap
      * @param ipClient
      * @param paramSet
+     * @param locale
      * @return
      */
     Audit auditPageUpload(
             Contract contract,
             Map <String, String> fileMap,
             String clientIp,
-            Set<Parameter> paramSet);
+            Set<Parameter> paramSet, 
+            Locale locale);
 
     /**
      *
      * @param contract
      * @param siteUrl
-     * @param testCodeList
      * @param ipClient
      * @param paramSet
+     * @param locale
      */
     void auditSite(
             Contract contract,
             String siteUrl,
-//            String[] testCodeList,
             String clientIp,
-            Set<Parameter> paramSet);
+            Set<Parameter> paramSet, 
+            Locale locale);
 
     /**
      *
      * @param contract
      * @param siteUrl
-     * @param pageUrlList
-     * @param testCodeList
      * @param ipClient
      * @param paramSet
+     * @param locale
      * @return
      */
     Audit auditSite(
             Contract contract,
             String siteUrl,
             List<String> pageUrlList,
-//            String[] testCodeList,
             String clientIp,
-            Set<Parameter> paramSet);
+            Set<Parameter> paramSet, 
+            Locale locale);
     
-    /**
-     * 
-     * @param contract
-     * @param siteUrl
-     * @param pageUrlList
-     * @param testCodeList
-     * @param paramSet
-     */
-    void auditSiteBg(
-            Contract contract,
-            String siteUrl,
-            List<String> pageUrlList,
-//            String[] testCodeList,
-            String clientIp,
-            Set<Parameter> paramSet);
-
-    /**
-     *
-     * @param contrat
-     * @return
-     */
-    boolean isAuditRunning(Contract contrat);
-
-    /**
-     * 
-     * @param contrat
-     * @return
-     */
-    boolean isAuditRunning(User contrat);
-
 }

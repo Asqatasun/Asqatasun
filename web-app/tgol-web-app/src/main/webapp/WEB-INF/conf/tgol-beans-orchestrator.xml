@@ -13,7 +13,13 @@
            http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
     <bean id="tanaguruOrchestrator" class="org.opens.tgol.orchestrator.TanaguruOrchestratorImpl">
-        <property name="webresourceUrlPrefix" value="${webresourceUrlPrefix}"/>
+        <property name="webappUrl" value="${web-app-url}"/>
+        <property name="siteResultUrlSuffix" value="home/contract/audit-synthesis.html?wr="/>
+        <property name="groupResultUrlSuffix" value="home/contract/page-list.html?status=f2xx&amp;wr="/>
+        <property name="pageResultUrlSuffix" value="home/contract/audit-result.html?wr="/>
+        <property name="contractUrlSuffix" value="home/contract.html?cr="/>
+        <property name="delay" value="${synchronousAuditDelay}"/>
+        <property name="emailSentToUserExclusionRawList" value="${emailSentToUserExclusionList}"/>
     </bean>
 
     <bean class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor"

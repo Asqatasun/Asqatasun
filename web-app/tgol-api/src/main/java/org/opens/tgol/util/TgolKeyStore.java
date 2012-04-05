@@ -117,8 +117,8 @@ public final class TgolKeyStore {
     public static final String AUDIT_UPLOAD_SET_UP_VIEW_NAME = "audit-upload-set-up";
     public static final String AUDIT_PAGE_SET_UP_REDIRECT_NAME =
             "audit-page-set-up-redirect";
-    public static final String LAUNCH_AUDIT_REDIRECT_NAME="launch-audit-redirect";
     public static final String AUDIT_IN_PROGRESS_VIEW_NAME = "audit-in-progress";
+    public static final String GREEDY_AUDIT_VIEW_NAME = "greedy-audit";
     public static final String EXPORT_VIEW_NAME = "export-";
     public static final String RESULT_PAGE_VIEW_NAME = "result-page";
     public static final String RESULT_PAGE_VIEW_REDIRECT_NAME =
@@ -222,6 +222,8 @@ public final class TgolKeyStore {
     public static final String EXPANDED_KEY = "expanded";
     public static final String EXPANDED_VALUE = "expanded";
     public static final String CONTRACT_NAME_KEY = "contractName";
+    public static final String IS_PAGE_AUDIT_KEY = "isPageAudit";
+    public static final String IS_USER_NOTIFIED_KEY = "isUserNotified";
 
     /* role keys */
     public static final String ROLE_GUEST_KEY = "ROLE_GUEST";
