@@ -301,16 +301,13 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
     }
 
     private void sendEmail(Act act, Locale locale) {
-        LOGGER.debug("c'est quoi ce delire");
         String emailTo = act.getContract().getUser().getEmail1();
         if (this.emailSentToUserExclusionList.contains(emailTo)) {
             LOGGER.debug("Email not set cause user " + emailTo + " belongs to "
                     + "exlusion list");
             return;
         }
-        LOGGER.debug("c'est quoi ce delire 2 " +locale.getLanguage());
         ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME, locale);
-        LOGGER.debug("c'est quoi ce delire  3 " );
         String emailFrom = bundle.getString(RECIPIENT_KEY);
         Set<String> emailToSet = new HashSet<String>();
         emailToSet.add(emailTo);
