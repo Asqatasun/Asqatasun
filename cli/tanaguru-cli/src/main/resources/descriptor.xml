@@ -147,13 +147,13 @@
             <fileMode>666</fileMode>
             <outputDirectory>/install-web-app/geshi</outputDirectory>
         </fileSet>
-        <fileSet>
+<!--        <fileSet>
             <directory>${basedir}/../../web-app/tgol-web-app/target</directory>
             <includes>
                 <include>*.war</include>
             </includes>
             <fileMode>666</fileMode>
             <outputDirectory>/install-web-app/</outputDirectory>
-        </fileSet>
+        </fileSet> -->
     </fileSets>
 </assembly>

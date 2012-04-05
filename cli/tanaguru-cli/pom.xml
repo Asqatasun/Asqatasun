@@ -6,13 +6,13 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>1.5.0</version>
+        <version>1.6.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>${tanaguruCliGroupId}</groupId>
+    <groupId>org.opens</groupId>
     <artifactId>tanaguru-cli</artifactId>
     <name>tanaguru-cli</name>
-    <version>${tanaguruCliVersion}</version>
+    <version>1.6.0-SNAPSHOT</version>
     <url>http://www.tanaguru.org</url>
     <build>
         <plugins>
@@ -80,6 +80,12 @@
             <version>${engineVersion}</version>
             <scope>runtime</scope>
         </dependency>
+<!--        <dependency>
+            <groupId>${engineGroupId}</groupId>
+            <artifactId>scenarioloader</artifactId>
+            <version>${engineVersion}</version>
+            <scope>runtime</scope>
+        </dependency>-->
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>contentadapter</artifactId>
