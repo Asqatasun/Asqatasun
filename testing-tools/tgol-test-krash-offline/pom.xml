@@ -6,13 +6,13 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>1.5.0</version>
+        <version>1.6.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>${testingToolsGroupId}</groupId>
+    <groupId>org.opens</groupId>
     <artifactId>tgol-test-krash-offline</artifactId>
     <name>tgol-test-krash-offline</name>
-    <version>${testingToolsVersion}</version>
+    <version>1.6.0-SNAPSHOT</version>
     <url>http://www.tanaguru.org</url>
     <build>
         <plugins>
@@ -29,10 +29,10 @@
                         </goals>
                         <configuration>
                             <executable>/bin/sh</executable>
-                            <commandlineArgs>/root/bin/selenium-my-restart.sh</commandlineArgs>
+                            <commandlineArgs>/home/jkowalczyk/bou.sh</commandlineArgs>
                         </configuration>
                     </execution>
-                    <execution>
+<!--                    <execution>
                         <id>tomcat-restart</id>
                         <phase>install</phase>
                         <goals>
@@ -42,7 +42,7 @@
                             <executable>/usr/bin/ssh</executable>
                             <commandlineArgs>lamu.open-s.com /root/bin/tomcat-my-restart.sh</commandlineArgs>
                         </configuration>
-                    </execution>
+                    </execution>-->
                 </executions>
             </plugin>
             <plugin>
