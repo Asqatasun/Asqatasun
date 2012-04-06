@@ -29,10 +29,10 @@
                         </goals>
                         <configuration>
                             <executable>/bin/sh</executable>
-                            <commandlineArgs>/home/jkowalczyk/bou.sh</commandlineArgs>
+                            <commandlineArgs>/root/bin/selenium-my-restart.sh</commandlineArgs>
                         </configuration>
                     </execution>
-<!--                    <execution>
+                    <execution>
                         <id>tomcat-restart</id>
                         <phase>install</phase>
                         <goals>
@@ -42,7 +42,7 @@
                             <executable>/usr/bin/ssh</executable>
                             <commandlineArgs>lamu.open-s.com /root/bin/tomcat-my-restart.sh</commandlineArgs>
                         </configuration>
-                    </execution>-->
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
