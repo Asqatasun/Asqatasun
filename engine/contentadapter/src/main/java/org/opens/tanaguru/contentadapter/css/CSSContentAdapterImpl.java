@@ -63,6 +63,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
     private static final Logger LOGGER = Logger.getLogger(CSSContentAdapterImpl.class);
     private static final String HTTP_PREFIX = "http";
     private static final String WWW_PREFIX = "www";
+    private static final String FILE_PREFIX = "file";
     private static final String CSS_ON_ERROR = "CSS_ON_ERROR";
     private static final String URI_PREFIX = "#tanaguru-css-";
     private StringBuffer buffer;
@@ -417,6 +418,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         // associated resource from the fetched Stylesheet and we populate the
         // set of relatedExternalCssSet (needed to create the relation between the
         // SSP and the css at the end of the adaptation)
+        LOGGER.debug("cssAbsolutePath  "  + cssAbsolutePath);
         for (StylesheetContent stylesheetContent : externalCssSet) {
             LOGGER.debug("stylesheetContent.getURI() :  " + 
                         stylesheetContent.getURI());
@@ -526,7 +528,8 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
      */
     private String buildPath(String path, String base) throws URIException {
         if (path.startsWith(HTTP_PREFIX)
-                || path.startsWith(WWW_PREFIX)) {
+                || path.startsWith(WWW_PREFIX) 
+                || path.startsWith(FILE_PREFIX)) {
             return UURIFactory.getInstance(path).toString();
         }
         StringBuilder strb = new StringBuilder();
