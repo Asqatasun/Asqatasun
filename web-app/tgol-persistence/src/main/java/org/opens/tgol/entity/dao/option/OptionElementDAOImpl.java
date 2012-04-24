@@ -19,26 +19,26 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.entity.dao.product;
+package org.opens.tgol.entity.dao.option;
 
 import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.opens.tgol.entity.product.RestrictionElement;
-import org.opens.tgol.entity.product.RestrictionElementImpl;
+import org.opens.tgol.entity.option.OptionElement;
+import org.opens.tgol.entity.option.OptionElementImpl;
 
 /**
  *
  * @author jkowalczyk
  */
-public class RestrictionElementDAOImpl extends AbstractJPADAO<RestrictionElement, Long>
-        implements RestrictionElementDAO {
+public class OptionElementDAOImpl extends AbstractJPADAO<OptionElement, Long>
+        implements OptionElementDAO {
 
-    public RestrictionElementDAOImpl() {
+    public OptionElementDAOImpl() {
         super();
     }
 
     @Override
-    protected Class<? extends RestrictionElement> getEntityClass() {
-        return RestrictionElementImpl.class;
+    protected Class<? extends OptionElement> getEntityClass() {
+        return OptionElementImpl.class;
     }
 
 }

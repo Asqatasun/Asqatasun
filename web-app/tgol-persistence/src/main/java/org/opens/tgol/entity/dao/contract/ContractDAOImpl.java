@@ -21,14 +21,14 @@
  */
 package org.opens.tgol.entity.dao.contract;
 
+import java.util.Collection;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.contract.ContractImpl;
 import org.opens.tgol.entity.product.Product;
 import org.opens.tgol.entity.user.User;
-import java.util.Collection;
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
 
 /**
  *
@@ -75,12 +75,17 @@ public class ContractDAOImpl extends AbstractJPADAO<Contract, Long>
         try {
             Query query = entityManager.createQuery("SELECT c FROM "
                     + getEntityClass().getName() + " c"
-                    + " LEFT JOIN FETCH c.restrictionSet r"
+                    + " LEFT JOIN FETCH c.optionSet o"
                     + " WHERE c.id = :id");
             query.setParameter("id", id);
             query.setHint(CACHEABLE_OPTION, true);
             Contract contract = (Contract) query.getSingleResult();
-            contract.getRestrictionSet().size();
+            // to ensure the options associated with the contract is 
+            // retrieved
+            contract.getOptionSet().size();
+            // to ensure the product and all its options associated with 
+            // the contract is retrieved
+            contract.getProduct().getOptionSet().size();
             return contract;
         } catch (NoResultException nre) {
             return null;
