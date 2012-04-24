@@ -22,7 +22,7 @@
 package org.opens.tgol.voter.restriction;
 
 import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.product.Restriction;
+import org.opens.tgol.entity.option.Option;
 
 /**
  *
@@ -30,6 +30,6 @@ import org.opens.tgol.entity.product.Restriction;
  */
 public interface RestrictionVoter {
 
-    String checkRestriction(Contract contract, Restriction restriction, String clientIp);
+    String checkRestriction(Contract contract, Option option, String clientIp);
 
 }
