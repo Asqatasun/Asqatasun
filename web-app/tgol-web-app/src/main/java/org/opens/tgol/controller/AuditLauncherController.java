@@ -35,7 +35,7 @@ import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tgol.command.AuditSetUpCommand;
 import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.product.Restriction;
+import org.opens.tgol.entity.option.Option;
 import org.opens.tgol.exception.LostInSpaceException;
 import org.opens.tgol.orchestrator.TanaguruOrchestrator;
 import org.opens.tgol.util.HttpStatusCodeFamily;
@@ -308,7 +308,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
      * @return
      */
     private String extractGroupNameFromUrl(String url) {
-        int fromIndex = 0;
+        int fromIndex;
         if (url.startsWith(TgolKeyStore.HTTP_PREFIX)) {
             fromIndex = TgolKeyStore.HTTP_PREFIX.length();
         } else if (url.startsWith(TgolKeyStore.HTTPS_PREFIX)) {
@@ -346,13 +346,13 @@ public class AuditLauncherController extends AuditDataHandlerController {
             }
             paramSet = getParameterDataService().updateParameterSet(paramSet, userParamSet);
         } else {
-            Set<? extends Restriction> restrictionSet =
-                    getContractDataService().read(contractId).getRestrictionSet();
+            Set<? extends Option> optionSet =
+                    getContractDataService().read(contractId).getOptionSet();
             for (Parameter param : paramSet) {
-                for (Restriction restriction : restrictionSet) {
-                    if (restriction.getRestrictionElement().getCode().
+                for (Option option : optionSet) {
+                    if (option.getOptionElement().getCode().
                             equalsIgnoreCase(param.getParameterElement().getParameterElementCode())) {
-                        param = getParameterDataService().getParameter(param.getParameterElement(), restriction.getValue());
+                        param = getParameterDataService().getParameter(param.getParameterElement(), option.getValue());
                         break;
                     }
                 }

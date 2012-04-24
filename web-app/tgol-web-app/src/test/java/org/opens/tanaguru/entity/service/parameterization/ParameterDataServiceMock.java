@@ -61,6 +61,16 @@ public class ParameterDataServiceMock implements ParameterDataServiceDecorator {
         //other level parameter
         addParameter(false, "ref2;level2", levelParameterElement, otherValuesParamSet);
 
+        // Level parameters duplicated to deal with the activation mechanism 
+        // of selectElement
+        ParameterElement levelInitialyDisabledParameterElement = new ParameterElementImpl();
+        levelInitialyDisabledParameterElement.setParameterElementCode("LEVEL_INITIALY_DISABLED");
+        // default level parameter
+        addParameter(true, "ref1;level1", levelInitialyDisabledParameterElement, defaultParamSet);
+        addParameter(true, "ref1;level1", levelInitialyDisabledParameterElement, defaultParamSetWithUserRestriction);
+        //other level parameter
+        addParameter(false, "ref2;level2", levelInitialyDisabledParameterElement, otherValuesParamSet);
+        
         //depth parameters
         ParameterElement depthParameterElement = new ParameterElementImpl();
         depthParameterElement.setParameterElementCode("DEPTH");
@@ -133,6 +143,19 @@ public class ParameterDataServiceMock implements ParameterDataServiceDecorator {
         List<Set<Parameter>> paramSetListForUser8 = new LinkedList<Set<Parameter>>();
         paramSetListForUser8.add(otherValuesParamSet);
         paramSetByContractId.put(Long.valueOf(8), paramSetListForUser8);
+        
+        List<Set<Parameter>> paramSetListForUser10 = new LinkedList<Set<Parameter>>();
+        paramSetListForUser10.add(otherValuesParamSet);
+        paramSetByContractId.put(Long.valueOf(10), paramSetListForUser10);
+        
+        List<Set<Parameter>> paramSetListForUser11 = new LinkedList<Set<Parameter>>();
+        paramSetListForUser11.add(otherValuesParamSet);
+        paramSetByContractId.put(Long.valueOf(11), paramSetListForUser11);
+        
+        List<Set<Parameter>> paramSetListForUser12 = new LinkedList<Set<Parameter>>();
+        paramSetListForUser12.add(otherValuesParamSet);
+        paramSetByContractId.put(Long.valueOf(12), paramSetListForUser12);
+        
     }
 
     private Parameter addParameter (

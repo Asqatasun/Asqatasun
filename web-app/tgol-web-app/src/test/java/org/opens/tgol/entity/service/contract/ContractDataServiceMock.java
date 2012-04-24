@@ -25,10 +25,10 @@ import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.contract.ContractImpl;
 import org.opens.tgol.entity.product.Product;
 import org.opens.tgol.entity.product.ProductImpl;
-import org.opens.tgol.entity.product.Restriction;
-import org.opens.tgol.entity.product.RestrictionElement;
-import org.opens.tgol.entity.product.RestrictionElementImpl;
-import org.opens.tgol.entity.product.RestrictionImpl;
+import org.opens.tgol.entity.option.Option;
+import org.opens.tgol.entity.option.OptionElement;
+import org.opens.tgol.entity.option.OptionElementImpl;
+import org.opens.tgol.entity.option.OptionImpl;
 import org.opens.tgol.entity.product.Scope;
 import org.opens.tgol.entity.product.ScopeEnum;
 import org.opens.tgol.entity.product.TgsiScopeImpl;
@@ -63,29 +63,36 @@ public class ContractDataServiceMock implements ContractDataService {
         Scope domainScope = new TgsiScopeImpl();
         domainScope.setCode(ScopeEnum.DOMAIN);
         product.setScope(domainScope);
-        addContract(Long.valueOf(1), "Test Contract 1", "http://www.test1.com", null, null, user, product);
-        addContract(Long.valueOf(2), "Test Contract 2", "http://www.test2.com", null, null, user, product);
-        addContract(Long.valueOf(3), "Test Contract 3", "http://www.test3.com", "FORBIDDEN_REFERENTIAL", "Seo", user, product);
-        addContract(Long.valueOf(4), "Test Contract 4", "http://www.test4.com", "FORBIDDEN_REFERENTIAL", "Seo;AW21", user, product);
-        addContract(Long.valueOf(5), "Test Contract 5", "http://www.test5.com", "MAX_DOCUMENTS", "2", user, product);
-        addContract(Long.valueOf(6), "Test Contract 6", "http://www.test6.com", "MAX_DURATION", "20", user, product);
-        addContract(Long.valueOf(7), "Test Contract 7", "http://www.test7.com", "DEPTH", "5", user, product);
-        addContract(Long.valueOf(8), "Test Contract 8", "http://www.test8.com", "EXCLUSION_REGEXP", "test_expression", user, product);
+        addContract(Long.valueOf(1), "Test Contract 1", "http://www.test1.com", null, null, false, user, product);
+        addContract(Long.valueOf(2), "Test Contract 2", "http://www.test2.com", null, null, false, user, product);
+        addContract(Long.valueOf(3), "Test Contract 3", "http://www.test3.com", "FORBIDDEN_REFERENTIAL", "Seo", true, user, product);
+        addContract(Long.valueOf(4), "Test Contract 4", "http://www.test4.com", "FORBIDDEN_REFERENTIAL", "Seo;AW21", true, user, product);
+        addContract(Long.valueOf(5), "Test Contract 5", "http://www.test5.com", "MAX_DOCUMENTS", "2", true, user, product);
+        addContract(Long.valueOf(6), "Test Contract 6", "http://www.test6.com", "MAX_DURATION", "20", true, user, product);
+        addContract(Long.valueOf(7), "Test Contract 7", "http://www.test7.com", "DEPTH", "5", true, user, product);
+        addContract(Long.valueOf(8), "Test Contract 8", "http://www.test8.com", "EXCLUSION_REGEXP", "test_expression", true, user, product);
+        Contract contract = addContract(Long.valueOf(10), "Test Contract 10", "http://www.test10.com", "AUTHORIZED_REFERENTIAL", "AW21", false, user, product);
+        addOptionToContract(contract,"DEFAULT_LEVEL", "Seo;Bz", false);
+        contract = addContract(Long.valueOf(11), "Test Contract 11", "http://www.test11.com", "AUTHORIZED_REFERENTIAL", "Seo", false, user, product);
+        addOptionToContract(contract,"DEFAULT_LEVEL", "Seo;Ar", false);
+        contract = addContract(Long.valueOf(12), "Test Contract 12", "http://www.test12.com", "AUTHORIZED_REFERENTIAL", "Seo;AW21", false, user, product);
+        addOptionToContract(contract,"DEFAULT_LEVEL", "AW21;Or", false);
         product = new ProductImpl();
         product.setCode("GROUPOFPAGES");
         product.setId(Long.valueOf(2));
         domainScope = new TgsiScopeImpl();
         domainScope.setCode(ScopeEnum.GROUPOFPAGES);
         product.setScope(domainScope);
-        addContract(Long.valueOf(9), "Test Contract 9", "http://www.test9.com", null, null, user, product);
+        addContract(Long.valueOf(9), "Test Contract 9", "http://www.test9.com", null, null, false, user, product);
     }
 
-    private void addContract(
+    private Contract addContract(
             Long id,
             String label,
             String url,
-            String restrictionElementCode,
-            String restrictionValue,
+            String optionElementCode,
+            String optionValue,
+            boolean isOptionRestriction,
             User user,
             Product product) {
         Contract contract = new ContractImpl();
@@ -94,17 +101,35 @@ public class ContractDataServiceMock implements ContractDataService {
         contract.setUrl(url);
         contract.setUser(user);
         contract.setProduct(product);
-        if (restrictionValue != null && restrictionElementCode != null) {
-            RestrictionElement restrictionElement = new RestrictionElementImpl();
-            Restriction restriction = new RestrictionImpl();
-            restrictionElement.setCode(restrictionElementCode);
-            restriction.setRestrictionElement(restrictionElement);
-            restriction.setValue(restrictionValue);
-            contract.addRestriction(restriction);
+        if (optionValue != null && optionElementCode != null) {
+            OptionElement optionElement = new OptionElementImpl();
+            optionElement.setIsRestriction(isOptionRestriction);
+            Option option = new OptionImpl();
+            optionElement.setCode(optionElementCode);
+            option.setOptionElement(optionElement);
+            option.setValue(optionValue);
+            contract.addOption(option);
         }
         contractMap.put(id, contract);
+        return contract;
     }
 
+    private void addOptionToContract(
+            Contract contract,
+            String optionElementCode,
+            String optionValue,
+            boolean isOptionRestriction) {
+        if (optionValue != null && optionElementCode != null) {
+            OptionElement optionElement = new OptionElementImpl();
+            optionElement.setIsRestriction(isOptionRestriction);
+            Option option = new OptionImpl();
+            optionElement.setCode(optionElementCode);
+            option.setOptionElement(optionElement);
+            option.setValue(optionValue);
+            contract.addOption(option);
+        }
+    }
+    
     @Override
     public Collection<Contract> getAllContractsByUser(User user) {
         throw new UnsupportedOperationException("Not supported yet.");

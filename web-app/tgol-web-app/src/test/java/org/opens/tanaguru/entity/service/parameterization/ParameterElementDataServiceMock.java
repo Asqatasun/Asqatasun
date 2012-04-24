@@ -43,6 +43,9 @@ public class ParameterElementDataServiceMock implements ParameterElementDataServ
         ParameterElement levelParameterElement = new ParameterElementImpl();
         levelParameterElement.setParameterElementCode("LEVEL");
         paramElemMap.put("LEVEL", levelParameterElement);
+        ParameterElement levelInitialyDisabledParameterElement = new ParameterElementImpl();
+        levelInitialyDisabledParameterElement.setParameterElementCode("LEVEL_INITIALY_DISABLED");
+        paramElemMap.put("LEVEL_INITIALY_DISABLED", levelInitialyDisabledParameterElement);
         ParameterElement depthParameterElement = new ParameterElementImpl();
         depthParameterElement.setParameterElementCode("DEPTH");
         paramElemMap.put("DEPTH", depthParameterElement);

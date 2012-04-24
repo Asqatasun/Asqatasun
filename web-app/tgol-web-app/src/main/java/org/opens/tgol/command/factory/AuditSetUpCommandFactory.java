@@ -21,10 +21,13 @@
  */
 package org.opens.tgol.command.factory;
 
+import java.util.*;
+import org.apache.commons.lang.StringUtils;
 import org.opens.tgol.command.AuditSetUpCommand;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
-import org.opens.tgol.entity.product.Restriction;
+import org.opens.tgol.entity.option.Option;
+import org.opens.tgol.entity.option.OptionImpl;
 import org.opens.tgol.entity.product.ScopeEnum;
 import org.opens.tgol.entity.user.User;
 import org.opens.tgol.form.NumericalFormField;
@@ -33,12 +36,6 @@ import org.opens.tgol.form.SelectFormField;
 import org.opens.tgol.form.TextualFormField;
 import org.opens.tgol.form.parameterization.AuditSetUpFormField;
 import org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -179,7 +176,8 @@ public final class AuditSetUpCommandFactory {
      * default value. Otherwise we populate the parameters with the last one
      * set by the user.
      *
-     * @param restrictionSet
+     * @param contract
+     * @param auditSetUpFormFieldBuilderMap
      * @return
      */
     public Map<String, List<AuditSetUpFormField>> getParametersMapCopy(
@@ -195,11 +193,14 @@ public final class AuditSetUpCommandFactory {
             }
             initialisedSetUpFormFielMap.put(entry.getKey(), setUpFormFieldList);
         }
-        Set<? extends Restriction> restrictionSet = contract.getRestrictionSet();
-        if (!restrictionSet.isEmpty()) {
+        // Options can be applied to contract AND product
+        Set<OptionImpl> optionSet = new HashSet<OptionImpl>();
+        optionSet.addAll((Set<OptionImpl>) contract.getOptionSet());
+        optionSet.addAll((Set<OptionImpl>) contract.getProduct().getOptionSet());
+        if (!optionSet.isEmpty()) {
             for (List<AuditSetUpFormField> apl : initialisedSetUpFormFielMap.values()) {
                 for (AuditSetUpFormField ap : apl) {
-                    applyRestrictionToAuditSetUpFormField(ap, restrictionSet);
+                    applyRestrictionToAuditSetUpFormField(ap, optionSet);
                 }
             }
         }
@@ -209,59 +210,130 @@ public final class AuditSetUpCommandFactory {
     /**
      *
      * @param ap
-     * @param restrictionSet
+     * @param optionSet
      */
     private void applyRestrictionToAuditSetUpFormField(
             AuditSetUpFormField ap,
-            Set<? extends Restriction> restrictionSet) {
+            Set<? extends Option> optionSet) {
         if (ap.getFormField() instanceof NumericalFormField) {
-            Restriction restriction = getRestrictionFromContractRestrictionSet(
-                    restrictionSet,
+            Option option = getOptionFromContractOptionSet(
+                    optionSet,
                     ap.getParameterElement().getParameterElementCode());
-            if (restriction != null) {
-                ((NumericalFormField) ap.getFormField()).setMaxValue(restriction.getValue());
-                ((NumericalFormField) ap.getFormField()).setValue(restriction.getValue());
+            if (option != null) {
+                ((NumericalFormField) ap.getFormField()).setMaxValue(option.getValue());
+                ((NumericalFormField) ap.getFormField()).setValue(option.getValue());
             }
         } else if (ap.getFormField() instanceof SelectFormField) {
-            SelectFormField sff = ((SelectFormField) ap.getFormField());
-            Restriction restriction = getRestrictionFromContractRestrictionSet(
-                    restrictionSet,
-                    sff.getRestrictionCode());
-            if (restriction != null) {
-                String[] restrictionValues = restriction.getValue().split(";");
-                for (int i = 0; i < restrictionValues.length; i++) {
-                    List<SelectElement> sel =
-                            sff.getSelectElementMap().get(restrictionValues[i]);
-                    for (SelectElement se : sel) {
-                        se.setEnabled(false);
-                    }
-                }
-            }
+            activateSelectFormField((SelectFormField) ap.getFormField(), optionSet);
         } else if (ap.getFormField() instanceof TextualFormField) {
-            Restriction restriction = getRestrictionFromContractRestrictionSet(
-                    restrictionSet,
+            Option option = getOptionFromContractOptionSet(
+                    optionSet,
                     ap.getParameterElement().getParameterElementCode());
-            if (restriction != null) {
-                ((TextualFormField) ap.getFormField()).setValue(restriction.getValue());
+            if (option != null) {
+                ((TextualFormField) ap.getFormField()).setValue(option.getValue());
             }
         }
     }
 
     /**
      *
-     * @param restrictionSet
-     * @param restrictionCode
+     * @param optionSet
+     * @param optionCode
      * @return
      */
-    private Restriction getRestrictionFromContractRestrictionSet(
-            Set<? extends Restriction> restrictionSet,
-            String restrictionCode) {
-        for (Restriction restriction : restrictionSet) {
-            if (StringUtils.equals(restrictionCode, restriction.getRestrictionElement().getCode())) {
-                return restriction;
+    private Option getOptionFromContractOptionSet(
+            Set<? extends Option> optionSet,
+            String optionCode) {
+        for (Option option : optionSet) {
+            if (StringUtils.equals(optionCode, option.getOptionElement().getCode())) {
+                return option;
             }
         }
         return null;
+    }
+
+    /**
+     * This method enables/disables a select form field element regarding the 
+     * activation / restriction strategy. 
+     * If a SelectFormField is set as enabled by default and has a set 
+     * restrictionCode, it can be disabled.
+     * If a SelectFormField is set as disabled by default and has a set 
+     * activationCode, it can be enabled. 
+     * 
+     * @param selectFormField 
+     * @param optionSet
+     */
+    private void activateSelectFormField(SelectFormField sff, Set<? extends Option> optionSet) {
+        boolean enableElements = true;
+        Option option = null;
+        if (StringUtils.isNotEmpty(sff.getRestrictionCode())) {
+            option = getOptionFromContractOptionSet(
+                optionSet,
+                sff.getRestrictionCode());
+            enableElements = false;
+        } else if (StringUtils.isNotEmpty(sff.getActivationCode())) {
+            option = getOptionFromContractOptionSet(
+                optionSet,
+                sff.getActivationCode());
+        }
+        if (option != null) {
+            String[] optionValues = option.getValue().split(";");
+            boolean isSelectFormFieldHasDefault = false;
+            for (int i = 0; i < optionValues.length; i++) {
+                List<SelectElement> sel =
+                        sff.getSelectElementMap().get(optionValues[i]);
+                for (SelectElement se : sel) {
+                    se.setEnabled(enableElements);
+                    if (!isSelectFormFieldHasDefault) {
+                        isSelectFormFieldHasDefault = setSelectElementAsDefault(se, optionSet);
+                    }
+                }
+            }
+            if (!isSelectFormFieldHasDefault) {
+                setFirstSelectElementAsDefault(sff.getSelectElementMap());
+            }
+        }
+    }
+ 
+    /**
+     * 
+     * @param selectElement
+     * @param optionSet
+     * @return 
+     */
+    private boolean setSelectElementAsDefault(SelectElement selectElement, Set<? extends Option> optionSet)  {
+        Option option = getOptionFromContractOptionSet(
+                optionSet,
+                selectElement.getDefaultCode());
+        if (option == null) {
+            return false;
+        }
+        if (selectElement.getEnabled() && 
+                StringUtils.equals(option.getValue(), selectElement.getValue())){
+            selectElement.setDefault(true);
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * When no SelectElement is Defined as default, we set the first element 
+     * as default.
+     * 
+     * @param sel 
+     */
+    private void setFirstSelectElementAsDefault(Map<String, List<SelectElement>> selElementMap) {
+        boolean firstEnabledElementEncountered = false;
+        for(List<SelectElement> seList : selElementMap.values()) {
+            for (SelectElement se : seList) {
+                if (!firstEnabledElementEncountered && se.getEnabled()) {
+                    se.setDefault(true);
+                    firstEnabledElementEncountered = true;
+                } else {
+                    se.setDefault(false);
+                }
+            }
+        }
     }
 
 }

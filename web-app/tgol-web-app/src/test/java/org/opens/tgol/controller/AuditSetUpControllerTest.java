@@ -34,6 +34,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import junit.framework.TestCase;
+import org.apache.commons.lang.StringUtils;
 import org.opens.tgol.exception.ForbiddenUserException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -181,13 +182,20 @@ public class AuditSetUpControllerTest extends TestCase {
         for (List<AuditSetUpFormField> asuffList : ((Map<String, List<AuditSetUpFormField>>)model.asMap().get(TgolKeyStore.PARAMETERS_MAP_KEY)).values()){
             for (AuditSetUpFormField asuff : asuffList) {
                 if (asuff.getFormField() instanceof SelectFormField) {
-                    List<SelectElement> seoSelectElementList = ((SelectFormField)asuff.getFormField()).getSelectElementMap().get("Seo");
-                    for (SelectElement se : seoSelectElementList) {
-                        assertEquals(true, se.getEnabled());
-                    }
-                    List<SelectElement> aw21SelectElementList = ((SelectFormField)asuff.getFormField()).getSelectElementMap().get("AW21");
-                    for (SelectElement se : aw21SelectElementList) {
-                        assertEquals(true, se.getEnabled());
+                    // a select form is set up with a restriction option. Initialy
+                        // all the select elements are enabled
+                    SelectFormField selectFormField= ((SelectFormField)asuff.getFormField());
+                    if (StringUtils.equals(selectFormField.getRestrictionCode(), "FORBIDDEN_REFERENTIAL")) {
+                        if (asuff.getFormField() instanceof SelectFormField) {
+                            List<SelectElement> seoSelectElementList = selectFormField.getSelectElementMap().get("Seo");
+                            for (SelectElement se : seoSelectElementList) {
+                                assertEquals(true, se.getEnabled());
+                            }
+                            List<SelectElement> aw21SelectElementList = selectFormField.getSelectElementMap().get("AW21");
+                            for (SelectElement se : aw21SelectElementList) {
+                                assertEquals(true, se.getEnabled());
+                            }
+                        }
                     }
                 }
             }
@@ -202,13 +210,28 @@ public class AuditSetUpControllerTest extends TestCase {
         for (List<AuditSetUpFormField> asuffList : ((Map<String, List<AuditSetUpFormField>>)model.asMap().get(TgolKeyStore.PARAMETERS_MAP_KEY)).values()){
             for (AuditSetUpFormField asuff : asuffList) {
                 if (asuff.getFormField() instanceof SelectFormField) {
-                    List<SelectElement> seoSelectElementList = ((SelectFormField)asuff.getFormField()).getSelectElementMap().get("Seo");
-                    for (SelectElement se : seoSelectElementList) {
-                        assertEquals(false, se.getEnabled());
-                    }
-                    List<SelectElement> aw21SelectElementList = ((SelectFormField)asuff.getFormField()).getSelectElementMap().get("AW21");
-                    for (SelectElement se : aw21SelectElementList) {
-                        assertEquals(true, se.getEnabled());
+                    // a select form is set up with a restriction option. Initialy
+                    // all the select elements are enabled
+                    SelectFormField selectFormField= ((SelectFormField)asuff.getFormField());
+                    if (StringUtils.equals(selectFormField.getRestrictionCode(), "FORBIDDEN_REFERENTIAL")) {
+                        List<SelectElement> seoSelectElementList = selectFormField.getSelectElementMap().get("Seo");
+                        for (SelectElement se : seoSelectElementList) {
+                            assertEquals(false, se.getEnabled());
+                            System.out.println("se " + se.getValue());
+                            assertEquals(false, se.getDefault());
+                        }
+                        List<SelectElement> aw21SelectElementList = selectFormField.getSelectElementMap().get("AW21");
+                        for (SelectElement se : aw21SelectElementList) {
+                            assertEquals(true, se.getEnabled());
+                            // for this contract, no DEFAULT_LEVEL option is set.
+                            // The behaviour is to apply the default value to 
+                            // first element of the SelectFormField
+                            if (se.getValue().equals("AW21;Bz")) {
+                                assertEquals(true, se.getDefault());
+                            } else {
+                                assertEquals(false, se.getDefault());
+                            }
+                        }
                     }
                 }
             }
@@ -223,13 +246,24 @@ public class AuditSetUpControllerTest extends TestCase {
         for (List<AuditSetUpFormField> asuffList : ((Map<String, List<AuditSetUpFormField>>)model.asMap().get(TgolKeyStore.PARAMETERS_MAP_KEY)).values()){
             for (AuditSetUpFormField asuff : asuffList) {
                 if (asuff.getFormField() instanceof SelectFormField) {
-                    List<SelectElement> seoSelectElementList = ((SelectFormField)asuff.getFormField()).getSelectElementMap().get("Seo");
-                    for (SelectElement se : seoSelectElementList) {
-                        assertEquals(false, se.getEnabled());
-                    }
-                    List<SelectElement> aw21SelectElementList = ((SelectFormField)asuff.getFormField()).getSelectElementMap().get("AW21");
-                    for (SelectElement se : aw21SelectElementList) {
-                        assertEquals(false, se.getEnabled());
+                    // a select form is set up with a restriction option. Initialy
+                    // all the select elements are enabled
+                    SelectFormField selectFormField= ((SelectFormField)asuff.getFormField());
+                    if (StringUtils.equals(selectFormField.getRestrictionCode(), "FORBIDDEN_REFERENTIAL")) {
+                        List<SelectElement> seoSelectElementList = selectFormField.getSelectElementMap().get("Seo");
+                        for (SelectElement se : seoSelectElementList) {
+                            assertEquals(false, se.getEnabled());
+                            System.out.println("se.getValue() "  + se.getValue());
+                            
+                            assertEquals(false, se.getDefault());
+                        }
+                        List<SelectElement> aw21SelectElementList = selectFormField.getSelectElementMap().get("AW21");
+                        for (SelectElement se : aw21SelectElementList) {
+                            // In this case all the elements are disables by restriction.
+                            // No Element is defined as default
+                            assertEquals(false, se.getEnabled());
+                            assertEquals(false, se.getDefault());
+                        }
                     }
                 }
             }
@@ -295,6 +329,103 @@ public class AuditSetUpControllerTest extends TestCase {
             }
         }
 
+        // The contract 10 is of DOMAIN type. The set-up page for a site audit 
+        // is allowed with AW21 activated and Seo disabled
+        returnedView = asuc.displaySiteAuditSetUp("10", null, null, model);
+        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
+        assertEquals(TgolKeyStore.AUDIT_SITE_SET_UP_VIEW_NAME, returnedView);
+        assertEquals("http://www.test10.com", model.asMap().get(TgolKeyStore.URL_KEY));
+        for (List<AuditSetUpFormField> asuffList : ((Map<String, List<AuditSetUpFormField>>)model.asMap().get(TgolKeyStore.PARAMETERS_MAP_KEY)).values()){
+            for (AuditSetUpFormField asuff : asuffList) {
+                if (asuff.getFormField() instanceof SelectFormField) {
+                    SelectFormField selectFormField= ((SelectFormField)asuff.getFormField());
+                    // a select form is set up with an activation option. Initialy
+                    // all the select elements are disabled
+                    if (StringUtils.equals(selectFormField.getActivationCode(), "AUTHORIZED_REFERENTIAL")) {
+                        List<SelectElement> seoSelectElementList = ((SelectFormField)asuff.getFormField()).getSelectElementMap().get("Seo");
+                        for (SelectElement se : seoSelectElementList) {
+                            assertEquals(false, se.getEnabled());
+                            assertEquals(false, se.getDefault());
+                        }
+                        List<SelectElement> aw21SelectElementList = ((SelectFormField)asuff.getFormField()).getSelectElementMap().get("AW21");
+                        for (SelectElement se : aw21SelectElementList) {
+                            assertEquals(true, se.getEnabled());
+                            // the DEFAULT_LEVEL option is applied on an SelectElement
+                            // which is disabled. So the default value is to 
+                            // the first enabled SelectElement encountered
+                            if (se.getValue().equals("AW21;Bz")) {
+                                assertEquals(true, se.getDefault());
+                            } else {
+                                assertEquals(false, se.getDefault());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        // The contract 11 is of DOMAIN type. The set-up page for a site audit 
+        // is allowed with AW21 activated and Seo disabled
+        returnedView = asuc.displaySiteAuditSetUp("11", null, null, model);
+        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
+        assertEquals(TgolKeyStore.AUDIT_SITE_SET_UP_VIEW_NAME, returnedView);
+        assertEquals("http://www.test11.com", model.asMap().get(TgolKeyStore.URL_KEY));
+        for (List<AuditSetUpFormField> asuffList : ((Map<String, List<AuditSetUpFormField>>)model.asMap().get(TgolKeyStore.PARAMETERS_MAP_KEY)).values()){
+            for (AuditSetUpFormField asuff : asuffList) {
+                if (asuff.getFormField() instanceof SelectFormField) {
+                    SelectFormField selectFormField= ((SelectFormField)asuff.getFormField());
+                    if (StringUtils.equals(selectFormField.getActivationCode(), "AUTHORIZED_REFERENTIAL")) {
+                        List<SelectElement> seoSelectElementList = selectFormField.getSelectElementMap().get("Seo");
+                        for (SelectElement se : seoSelectElementList) {
+                            assertEquals(true, se.getEnabled());
+                            // The DEFAULT_LEVEL is set to "Seo;Ar"
+                            if (se.getValue().equals("Seo;Ar")) {
+                                assertEquals(true, se.getDefault());
+                            } else {
+                                assertEquals(false, se.getDefault());
+                            }
+                        }
+                        List<SelectElement> aw21SelectElementList = selectFormField.getSelectElementMap().get("AW21");
+                        for (SelectElement se : aw21SelectElementList) {
+                            assertEquals(false, se.getEnabled());
+                            assertEquals(false, se.getDefault());
+                        }
+                    }
+                }
+            }
+        }
+        
+        // The contract 12 is of DOMAIN type. The set-up page for a site audit 
+        // is allowed with AW21 activated and Seo enabled
+        returnedView = asuc.displaySiteAuditSetUp("12", null, null, model);
+        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
+        assertEquals(TgolKeyStore.AUDIT_SITE_SET_UP_VIEW_NAME, returnedView);
+        assertEquals("http://www.test12.com", model.asMap().get(TgolKeyStore.URL_KEY));
+        for (List<AuditSetUpFormField> asuffList : ((Map<String, List<AuditSetUpFormField>>)model.asMap().get(TgolKeyStore.PARAMETERS_MAP_KEY)).values()){
+            for (AuditSetUpFormField asuff : asuffList) {
+                if (asuff.getFormField() instanceof SelectFormField) {
+                    SelectFormField selectFormField= ((SelectFormField)asuff.getFormField());
+                    if (StringUtils.equals(selectFormField.getActivationCode(), "AUTHORIZED_REFERENTIAL")) {
+                        List<SelectElement> seoSelectElementList = selectFormField.getSelectElementMap().get("Seo");
+                        for (SelectElement se : seoSelectElementList) {
+                            assertEquals(true, se.getEnabled());
+                            assertEquals(false, se.getDefault());
+                        }
+                        List<SelectElement> aw21SelectElementList = selectFormField.getSelectElementMap().get("AW21");
+                        for (SelectElement se : aw21SelectElementList) {
+                            assertEquals(true, se.getEnabled());
+                            // The DEFAULT_OPTION is set to the AW21;Or selectElement
+                            if (se.getValue().equals("AW21;Or")) {
+                                assertEquals(true, se.getDefault());
+                            } else {
+                                assertEquals(false, se.getDefault());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
         // the contract has a GROUPOFPAGES scope.The access is denied
         returnedView = asuc.displaySiteAuditSetUp("9", null, null, model);
         assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
