@@ -21,12 +21,12 @@
  */
 package org.opens.tgol.entity.contract;
 
-import org.opens.tanaguru.sdk.entity.Entity;
-import org.opens.tgol.entity.product.Product;
-import org.opens.tgol.entity.product.Restriction;
-import org.opens.tgol.entity.user.User;
 import java.util.Date;
 import java.util.Set;
+import org.opens.tanaguru.sdk.entity.Entity;
+import org.opens.tgol.entity.option.Option;
+import org.opens.tgol.entity.product.Product;
+import org.opens.tgol.entity.user.User;
 
 /**
  *
@@ -160,19 +160,19 @@ public interface Contract extends Entity {
         /**
      *
      * @return
-     *      the set of the restrictions associated with the offer
+     *      the set of the options associated with the offer
      */
-    Set<? extends Restriction> getRestrictionSet();
+    Set<? extends Option> getOptionSet();
 
     /**
      *
-     * @param restriction
+     * @param option
      */
-    void addRestriction (Restriction restriction);
+    void addOption (Option option);
 
     /**
      *
-     * @param restrictionSet
+     * @param optionSet
      */
-    void addAllRestriction (Set<? extends Restriction> restrictionSet);
+    void addAllOption (Set<? extends Option> optionSet);
 }

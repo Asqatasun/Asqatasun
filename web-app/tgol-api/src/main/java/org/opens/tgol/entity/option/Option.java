@@ -19,61 +19,40 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.entity.product;
+package org.opens.tgol.entity.option;
 
 import org.opens.tanaguru.sdk.entity.Entity;
-import org.opens.tgol.entity.contract.Contract;
-import java.util.Set;
 
 /**
  *
  * @author jkowalczyk
  */
-public interface Restriction extends Entity {
+public interface Option extends Entity {
 
     /**
      *
      * @return
-     *      the restriction code
+     *      the option code
      */
-    RestrictionElement getRestrictionElement();
+    OptionElement getOptionElement();
 
     /**
      *
      * @param code
      */
-    void setRestrictionElement(RestrictionElement restrictionElement);
+    void setOptionElement(OptionElement OptionElement);
 
     /**
      *
      * @return
-     *      the restriction value
+     *      the Option value
      */
     String getValue();
 
     /**
      *
-     * @param restrictionValue
+     * @param OptionValue
      */
-    void setValue(String restrictionValue);
-
-    /**
-     *
-     * @return
-     *      the set of the products associated with the restriction
-     */
-    Set<? extends Contract> getContractSet();
-
-    /**
-     *
-     * @param product
-     */
-    void addContract (Contract contract);
-
-    /**
-     *
-     * @param productSet
-     */
-    void addAllContract (Set<? extends Contract> contractSet);
+    void setValue(String OptionValue);
 
 }

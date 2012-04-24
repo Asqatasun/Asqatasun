@@ -21,9 +21,10 @@
  */
 package org.opens.tgol.entity.product;
 
+import java.util.Set;
 import org.opens.tanaguru.sdk.entity.Entity;
 import org.opens.tgol.entity.contract.Contract;
-import java.util.Set;
+import org.opens.tgol.entity.option.Option;
 
 /**
  *
@@ -105,74 +106,23 @@ public interface Product extends Entity {
      */
     Set<? extends Contract> getContractSet();
 
-//    /**
-//     *
-//     * @return
-//     *      the functionality associated with the offer
-//     */
-//    Functionality getFunctionality();
-//
-//    /**
-//     *
-//     * @param functionality
-//     */
-//    void setFunctionality (Functionality functionality);
+    /**
+     *
+     * @return
+     *      the set of the options associated with the offer
+     */
+    Set<? extends Option> getOptionSet();
 
-//    /**
-//     *
-//     * @return
-//     *      the set of the restrictions associated with the offer
-//     */
-//    Set<? extends Restriction> getRestrictionSet();
-//
-//    /**
-//     *
-//     * @param restriction
-//     */
-//    void addRestriction (Restriction restriction);
-//
-//    /**
-//     *
-//     * @param restrictionSet
-//     */
-//    void addAllRestriction (Set<? extends Restriction> restrictionSet);
-//
-//    /**
-//     *
-//     * @return
-//     *      the set of the scopes associated with the offer
-//     */
-//    Set<? extends Scope> getScopeSet();
-//
-//    /**
-//     *
-//     * @param scope
-//     */
-//    void addScope (Scope scope);
-//
-//    /**
-//     *
-//     * @param scopeSet
-//     */
-//    void addAllScope (Set<? extends Scope> scopeSet);
-//
-//    /**
-//     *
-//     * @return
-//     *      the set of the acts associated with the product
-//     */
-//    Set<? extends Act> getActSet();
-//
-//    /**
-//     *
-//     * @param scope
-//     */
-//    void addAct (Act act);
-//
-//    /**
-//     *
-//     * @param actSet
-//     */
-//    void addAllAct (Set<? extends Act> actSet);
+    /**
+     *
+     * @param restriction
+     */
+    void addOption (Option option);
+
+    /**
+     *
+     * @param optionSet
+     */
+    void addAllOption (Set<? extends Option> optionSet);
 
 }

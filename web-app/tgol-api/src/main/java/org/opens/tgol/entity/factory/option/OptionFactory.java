@@ -19,13 +19,25 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.entity.factory.product;
+package org.opens.tgol.entity.factory.option;
 
 import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
-import org.opens.tgol.entity.product.RestrictionElement;
+import org.opens.tgol.entity.option.Option;
+import org.opens.tgol.entity.option.OptionElement;
 
 /**
  *
  * @author jkowalczyk
  */
-public interface RestrictionElementFactory extends GenericFactory<RestrictionElement> {}
+public interface OptionFactory extends GenericFactory<Option> {
+
+    /**
+     * 
+     * @param optionElement
+     * @param value
+     * @return
+     *      an initialized instance of option
+     */
+    Option createOption(OptionElement optionElement, String value);
+
+}

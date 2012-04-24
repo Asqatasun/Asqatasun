@@ -53,8 +53,24 @@ public interface SelectFormField extends FormField {
      * 
      * @return
      *      the code of the user restriction associated with this selector field.
-     *      This restriction can disabled some elements.
+     *      This restriction can disabled some elements when they are initially 
+     *      in an enabled state.
      */
     String getRestrictionCode();
+    
+    /**
+     *
+     * @param activationCode
+     */
+    void setActivationCode(String activationCode);
+
+    /**
+     * 
+     * @return
+     *      the code of the activation option associated with this selector field.
+     *      This restriction can enabled some elements when they are initially 
+     *      in a disabled state.
+     */
+    String getActivationCode();
 
 }

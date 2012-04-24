@@ -22,10 +22,10 @@
 package org.opens.tgol.entity.service.product;
 
 import org.opens.tanaguru.sdk.entity.service.GenericDataService;
-import org.opens.tgol.entity.product.Restriction;
+import org.opens.tgol.entity.product.Product;
 
 /**
  *
  * @author jkowalczyk
  */
-public interface RestrictionDataService extends GenericDataService<Restriction, Long> {}
+public interface ProductDataService extends GenericDataService<Product, Long> {}

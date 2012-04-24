@@ -29,19 +29,6 @@ public interface SelectElement extends FormField {
 
     /**
      *
-     * @param value
-     */
-    void setValue(String value);
-
-    /**
-     * 
-     * @return
-     *      the value of the select element
-     */
-    String getValue();
-
-    /**
-     *
      * @param isEnabled
      */
     void setEnabled(boolean isEnabled);
@@ -65,4 +52,17 @@ public interface SelectElement extends FormField {
      *      whether the element is the default value
      */
     boolean getDefault();
+    
+    /**
+     * 
+     * @param defaultCode
+     */
+    void setDefaultCode(String defaultCode);
+
+    /**
+     *
+     * @return
+     *      the code that enables to set the element as default.
+     */
+    String getDefaultCode();
 }

@@ -19,13 +19,13 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.entity.dao.product;
+package org.opens.tgol.entity.dao.option;
 
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
-import org.opens.tgol.entity.product.Restriction;
+import org.opens.tgol.entity.option.OptionElement;
 
 /**
  *
  * @author jkowalczyk
  */
-public interface RestrictionDAO extends GenericDAO<Restriction, Long> {}
+public interface OptionElementDAO extends GenericDAO<OptionElement, Long> {}

@@ -19,13 +19,51 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.entity.service.product;
+package org.opens.tgol.entity.option;
 
-import org.opens.tanaguru.sdk.entity.service.GenericDataService;
-import org.opens.tgol.entity.product.Product;
+import org.opens.tanaguru.sdk.entity.Entity;
 
 /**
  *
  * @author jkowalczyk
  */
-public interface OfferDataService extends GenericDataService<Product, Long> {}
+public interface OptionElement extends Entity {
+
+    /**
+     *
+     * @return
+     *      the option code
+     */
+    String getCode();
+
+    /**
+     *
+     * @param code
+     */
+    void setCode(String code);
+
+    /**
+     * 
+     * @return
+     */
+    String getDescription();
+
+    /**
+     * 
+     * @param string
+     */
+    void setDescription(String description);
+    
+    /**
+     * 
+     * @return 
+     */
+    boolean isRestriction();
+
+    /**
+     * 
+     * @param isRestriction 
+     */
+    void setIsRestriction(boolean isRestriction);
+
+}

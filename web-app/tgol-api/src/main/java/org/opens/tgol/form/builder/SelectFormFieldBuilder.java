@@ -21,9 +21,9 @@
  */
 package org.opens.tgol.form.builder;
 
-import org.opens.tgol.form.*;
 import java.util.List;
 import java.util.Map;
+import org.opens.tgol.form.SelectElement;
 
 /**
  *
@@ -58,5 +58,18 @@ public interface SelectFormFieldBuilder extends FormFieldBuilder {
      * @param restrictionCode
      */
     void setRestrictionCode(String restrictionCode);
+    
+    /**
+     *
+     * @return
+     *      the activation option code that has to be set to each instance of SelectFormField
+     */
+    String getActivationCode();
+    
+    /**
+     * Sets the activation option code that has to be set to each instance of SelectFormField
+     * @param activationCode
+     */
+    void setActivationCode(String activationCode);
 
 }

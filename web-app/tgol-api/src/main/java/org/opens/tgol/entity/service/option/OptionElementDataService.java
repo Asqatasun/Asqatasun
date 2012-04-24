@@ -19,49 +19,13 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.form.builder;
+package org.opens.tgol.entity.service.option;
+
+import org.opens.tanaguru.sdk.entity.service.GenericDataService;
+import org.opens.tgol.entity.option.OptionElement;
 
 /**
  *
  * @author jkowalczyk
  */
-public interface SelectElementBuilder extends FormFieldBuilder {
-
-    /**
-     * Sets whether each instance SelectElement is enabled
-     * @param isEnabled
-     */
-    void setEnabled(boolean isEnabled);
-
-    /**
-     * 
-     * @return
-     */
-    boolean getEnabled();
-    
-    /**
-     * Sets the option code that enables to set the element as default
-     * @param defaultCode
-     */
-    void setDefaultCode(String defaultCode);
-
-    /**
-     * 
-     * @return
-     */
-    String getDefaultCode();
-    
-    /**
-     * Sets whether each instance of SelectElement is the default among all the
-     * selectElement of the SelectFormField
-     * @param isEnabled
-     */
-    void setDefault(boolean isDefault);
-
-    /**
-     * 
-     * @return
-     */
-    boolean getDefault();
-
-}
+public interface OptionElementDataService extends GenericDataService<OptionElement, Long> {}
