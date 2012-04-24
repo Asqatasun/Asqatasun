@@ -13,6 +13,7 @@
                 <entry key="level-parameters">
                     <list>
                         <ref bean="levelParamBuilder"/>
+                        <ref bean="levelInitialyDisabledParamBuilder"/>
                     </list>
                 </entry>
                 <entry key="crawl-parameters">
@@ -30,6 +31,7 @@
                 <entry key="level-parameters">
                     <list>
                         <ref bean="levelParamBuilder"/>
+                        <ref bean="levelInitialyDisabledParamBuilder"/>
                     </list>
                 </entry>
             </map>
