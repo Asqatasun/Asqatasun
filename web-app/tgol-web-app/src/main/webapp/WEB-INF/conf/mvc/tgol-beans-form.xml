@@ -14,24 +14,30 @@
         <property name="value" value="AW21;Bz"/>
         <property name="i18nKey" value="Bz"/>
         <property name="errorI18nKey" value="Bz-error"/>
+        <property name="defaultCode" value="DEFAULT_LEVEL"/>
+<!--    Default values
         <property name="default" value="false"/>
-        <property name="enabled" value="true"/>
+        <property name="enabled" value="false"/>-->
     </bean>
 
     <bean id="aw21SilverSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="AW21;Ar"/>
         <property name="i18nKey" value="Ar"/>
         <property name="errorI18nKey" value="Ar-error"/>
-        <property name="default" value="true"/>
-        <property name="enabled" value="true"/>
+        <property name="defaultCode" value="DEFAULT_LEVEL"/>
+<!--    Default values
+        <property name="default" value="false"/>
+        <property name="enabled" value="false"/>-->
     </bean>
 
     <bean id="aw21GoldSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="AW21;Or"/>
         <property name="i18nKey" value="Or"/>
         <property name="errorI18nKey" value="Or-error"/>
+        <property name="defaultCode" value="DEFAULT_LEVEL"/>
+        <!--    Default values
         <property name="default" value="false"/>
-        <property name="enabled" value="true"/>
+        <property name="enabled" value="false"/>-->
     </bean>
 
     <!-- Seo select elements -->
@@ -39,59 +45,65 @@
         <property name="value" value="Seo;Bz"/>
         <property name="i18nKey" value="Bz"/>
         <property name="errorI18nKey" value="Bz-error"/>
+        <property name="defaultCode" value="DEFAULT_LEVEL"/>
+        <!--    Default values
         <property name="default" value="false"/>
-        <property name="enabled" value="false"/>
+        <property name="enabled" value="false"/>-->
     </bean>
 
     <bean id="seoSilverSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Seo;Ar"/>
         <property name="i18nKey" value="Ar"/>
         <property name="errorI18nKey" value="Ar-error"/>
+        <property name="defaultCode" value="DEFAULT_LEVEL"/>
+<!--    Default values
         <property name="default" value="false"/>
-        <property name="enabled" value="false"/>
+        <property name="enabled" value="false"/>-->
     </bean>
 
     <bean id="seoGoldSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Seo;Or"/>
         <property name="i18nKey" value="Or"/>
         <property name="errorI18nKey" value="Or-error"/>
+        <property name="defaultCode" value="DEFAULT_LEVEL"/>
+<!--    Default values
         <property name="default" value="false"/>
-        <property name="enabled" value="false"/>
+        <property name="enabled" value="false"/>-->
     </bean>
 
     <!-- WCGA 2.0 select elements -->
-    <bean id="wcag20ASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+<!--    <bean id="wcag20ASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="WCAG20;A"/>
         <property name="i18nKey" value="A"/>
         <property name="errorI18nKey" value="A-error"/>
         <property name="default" value="false"/>
-        <property name="enabled" value="false"/>
-    </bean>
+        <property name="enabled" value="true"/>
+    </bean>-->
 
-    <bean id="wcag20AASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+<!--    <bean id="wcag20AASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="WCAG20;AA"/>
         <property name="i18nKey" value="AA"/>
         <property name="errorI18nKey" value="AA-error"/>
         <property name="default" value="false"/>
-        <property name="enabled" value="false"/>
-    </bean>
+        <property name="enabled" value="true"/>
+    </bean>-->
 
-    <bean id="wcag20AAASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+<!--    <bean id="wcag20AAASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="WCAG20;AAA"/>
         <property name="i18nKey" value="AAA"/>
         <property name="errorI18nKey" value="AAA-error"/>
         <property name="default" value="false"/>
-        <property name="enabled" value="false"/>
-    </bean>
+        <property name="enabled" value="true"/>
+    </bean>-->
 
     <!-- WCGA 2.0 select elements -->
-    <bean id="rgaaSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+<!--    <bean id="rgaaSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="RGAA2.1;RGAA"/>
         <property name="i18nKey" value="RGAA"/>
         <property name="errorI18nKey" value="RGAA-error"/>
         <property name="default" value="false"/>
-        <property name="enabled" value="false"/>
-    </bean>
+        <property name="enabled" value="true"/>
+    </bean>-->
 
     <bean id="levelSelectFormFieldBuilder" class="org.opens.tgol.form.builder.SelectFormFieldBuilderImpl">
         <property name="i18nKey" value="level"/>
@@ -112,21 +124,22 @@
                         <ref local="seoGoldSelectElementBuilder"/>
                     </list>
                 </entry>
-                <entry key="WCAG20">
+<!--                <entry key="WCAG20">
                     <list>
                         <ref local="wcag20ASelectElementBuilder"/>
                         <ref local="wcag20AASelectElementBuilder"/>
                         <ref local="wcag20AAASelectElementBuilder"/>
                     </list>
-                </entry>
-                <entry key="RGAA21">
+                </entry>-->
+<!--                <entry key="RGAA21">
                     <list>
                         <ref local="rgaaSelectElementBuilder"/>
                     </list>
-                </entry>
+                </entry>-->
             </map>
         </property>
-        <property name="restrictionCode" value="FORBIDDEN_REFERENTIAL"/>
+<!--        <property name="optionCode" value="FORBIDDEN_REFERENTIAL"/>-->
+        <property name="activationCode" value="AUTHORIZED_REFERENTIAL"/>
     </bean>
 
     <bean id="levelParamBuilder" class="org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
