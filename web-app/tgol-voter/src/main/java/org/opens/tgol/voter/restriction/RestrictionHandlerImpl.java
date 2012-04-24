@@ -21,11 +21,11 @@
  */
 package org.opens.tgol.voter.restriction;
 
-import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.product.Restriction;
-import org.opens.tgol.util.TgolKeyStore;
 import java.util.Map;
 import java.util.Set;
+import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.entity.option.Option;
+import org.opens.tgol.util.TgolKeyStore;
 
 /**
  *
@@ -42,14 +42,14 @@ public class RestrictionHandlerImpl implements RestrictionHandler {
     @Override
     public synchronized String checkRestriction(Contract contract, String clientIp) {
         String decision = TgolKeyStore.ACT_ALLOWED;
-        Set<Restriction> restrictionSet = (Set<Restriction>) contract.getRestrictionSet();
-        if (contract.getRestrictionSet().isEmpty()) {
+        Set<Option> optionSet = (Set<Option>) contract.getOptionSet();
+        if (optionSet.isEmpty()) {
             return decision;
         }
-        for (Restriction restriction : restrictionSet) {
-            RestrictionVoter restrictionVoter = chooseRestrictionVoter(restriction);
+        for (Option option : optionSet) {
+            RestrictionVoter restrictionVoter = chooseRestrictionVoter(option);
             if (restrictionVoter != null) {
-                decision = restrictionVoter.checkRestriction(contract, restriction, clientIp);
+                decision = restrictionVoter.checkRestriction(contract, option, clientIp);
             }
             if (!decision.equalsIgnoreCase(TgolKeyStore.ACT_ALLOWED)) {
                 break;
@@ -58,9 +58,15 @@ public class RestrictionHandlerImpl implements RestrictionHandler {
         return decision;
     }
 
-    private RestrictionVoter chooseRestrictionVoter(Restriction restriction) {
-        String restrictionElementCode = restriction.getRestrictionElement().getCode();
-        if (restrictionVoterMap.containsKey(restrictionElementCode)) {
+    /**
+     * 
+     * @param option
+     * @return 
+     */
+    private RestrictionVoter chooseRestrictionVoter(Option option) {
+        String restrictionElementCode = option.getOptionElement().getCode();
+        if (option.getOptionElement().isRestriction() && 
+                restrictionVoterMap.containsKey(restrictionElementCode)) {
             return restrictionVoterMap.get(restrictionElementCode);
         }
         return null;
