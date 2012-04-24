@@ -8,10 +8,10 @@
         <class>org.opens.tgol.entity.user.RoleImpl</class>
         <class>org.opens.tgol.entity.contract.ContractImpl</class>
         <class>org.opens.tgol.entity.contract.ActImpl</class>
+        <class>org.opens.tgol.entity.option.OptionImpl</class>
+        <class>org.opens.tgol.entity.option.OptionElementImpl</class>
         <class>org.opens.tgol.entity.product.ProductImpl</class>
         <class>org.opens.tgol.entity.product.TgsiScopeImpl</class>
-        <class>org.opens.tgol.entity.product.RestrictionImpl</class>
-        <class>org.opens.tgol.entity.product.RestrictionElementImpl</class>
         <!-- tanaguru classes-->
         <class>org.opens.tanaguru.entity.reference.CriterionImpl</class>
         <class>org.opens.tanaguru.entity.reference.DecisionLevelImpl</class>
