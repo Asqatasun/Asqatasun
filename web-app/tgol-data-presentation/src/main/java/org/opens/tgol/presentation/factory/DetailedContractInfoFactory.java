@@ -21,13 +21,13 @@
  */
 package org.opens.tgol.presentation.factory;
 
+import java.util.Collection;
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.entity.option.Option;
 import org.opens.tgol.entity.product.ScopeEnum;
 import org.opens.tgol.presentation.data.DetailedContractInfo;
 import org.opens.tgol.presentation.data.DetailedContractInfoImpl;
-import java.util.Collection;
-import org.opens.tgol.entity.product.Restriction;
 
 /**
  *
@@ -97,10 +97,15 @@ public final class DetailedContractInfoFactory extends ContractInfoFactory {
         return detailedContractInfo;
     }
 
+    /**
+     * 
+     * @param contract
+     * @return 
+     */
     private int getMaxAuthorizedNumberOfActByContract (Contract contract) {
-        for (Restriction restriction : contract.getRestrictionSet())  {
-            if (restriction.getRestrictionElement().getCode().equals(nbMaxActRestrictionCode)) {
-                return Integer.valueOf(restriction.getValue());
+        for (Option option : contract.getOptionSet())  {
+            if (option.getOptionElement().getCode().equals(nbMaxActRestrictionCode)) {
+                return Integer.valueOf(option.getValue());
             }
         }
         return -1;

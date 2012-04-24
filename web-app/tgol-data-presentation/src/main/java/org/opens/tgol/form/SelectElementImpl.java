@@ -54,4 +54,15 @@ public class SelectElementImpl extends FormFieldImpl implements SelectElement{
         return true;
     }
 
+    private String defaultCode=null;
+    @Override
+    public void setDefaultCode(String defaultCode) {
+        this.defaultCode = defaultCode;
+    }
+
+    @Override
+    public String getDefaultCode() {
+        return defaultCode;
+    }
+
 }

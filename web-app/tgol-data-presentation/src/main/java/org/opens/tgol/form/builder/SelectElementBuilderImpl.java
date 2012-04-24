@@ -25,7 +25,7 @@ import org.opens.tgol.form.SelectElement;
 import org.opens.tgol.form.SelectElementImpl;
 
 /**
- *
+ * 
  * @author jkowalczyk
  */
 public class SelectElementBuilderImpl extends FormFieldBuilderImpl
@@ -42,11 +42,12 @@ public class SelectElementBuilderImpl extends FormFieldBuilderImpl
         formField.setI18nKey(getI18nKey());
         formField.setValue(getValue());
         formField.setDefault(isDefault);
+        formField.setDefaultCode(defaultCode);
         formField.setEnabled(isEnabled);
         return formField;
     }
 
-    private boolean isEnabled = true;
+    private boolean isEnabled = false;
     @Override
     public void setEnabled(boolean isEnabled) {
         this.isEnabled = isEnabled;
@@ -57,7 +58,7 @@ public class SelectElementBuilderImpl extends FormFieldBuilderImpl
         return this.isEnabled;
     }
 
-    private boolean isDefault = true;
+    private boolean isDefault = false;
     @Override
     public void setDefault(boolean isDefault) {
         this.isDefault = isDefault;
@@ -66,6 +67,17 @@ public class SelectElementBuilderImpl extends FormFieldBuilderImpl
     @Override
     public boolean getDefault() {
         return this.isDefault;
+    }
+
+    String defaultCode = null;
+    @Override
+    public void setDefaultCode(String defaultCode) {
+        this.defaultCode = defaultCode;
+    }
+
+    @Override
+    public String getDefaultCode() {
+        return defaultCode;
     }
 
 }

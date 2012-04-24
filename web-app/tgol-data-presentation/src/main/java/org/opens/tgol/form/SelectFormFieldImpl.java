@@ -61,4 +61,15 @@ public class SelectFormFieldImpl extends FormFieldImpl implements SelectFormFiel
         this.restrictionCode = restrictionCode;
     }
 
+    private String activationCode;
+    @Override
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
+    }
+
+    @Override
+    public String getActivationCode() {
+        return activationCode;
+    }
+
 }

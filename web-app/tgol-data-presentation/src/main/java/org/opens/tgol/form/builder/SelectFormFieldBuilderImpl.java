@@ -21,13 +21,13 @@
  */
 package org.opens.tgol.form.builder;
 
-import org.opens.tgol.form.SelectElement;
-import org.opens.tgol.form.SelectFormField;
-import org.opens.tgol.form.SelectFormFieldImpl;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import org.opens.tgol.form.SelectElement;
+import org.opens.tgol.form.SelectFormField;
+import org.opens.tgol.form.SelectFormFieldImpl;
 
 /**
  *
@@ -47,6 +47,7 @@ public class SelectFormFieldBuilderImpl extends FormFieldBuilderImpl
         formField.setI18nKey(getI18nKey());
         formField.setValue(getValue());
         formField.setRestrictionCode(restrictionCode);
+        formField.setActivationCode(activationCode);
         formField.setSelectElementMap(getSelectElementMap());
         return formField;
     }
@@ -70,7 +71,7 @@ public class SelectFormFieldBuilderImpl extends FormFieldBuilderImpl
         return selectElementMap;
     }
 
-    private String restrictionCode;
+    private String restrictionCode = null;
     @Override
     public String getRestrictionCode() {
         return restrictionCode;
@@ -79,6 +80,17 @@ public class SelectFormFieldBuilderImpl extends FormFieldBuilderImpl
     @Override
     public void setRestrictionCode(String restrictionCode) {
         this.restrictionCode = restrictionCode;
+    }
+
+    private String activationCode = null;
+    @Override
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    @Override
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
     }
 
 }
