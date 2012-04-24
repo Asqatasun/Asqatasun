@@ -21,30 +21,19 @@
  */
 package org.opens.tgol.entity.contract;
 
-import org.opens.tgol.entity.product.Product;
-import org.opens.tgol.entity.product.ProductImpl;
-import org.opens.tgol.entity.product.Restriction;
-import org.opens.tgol.entity.product.RestrictionImpl;
-import org.opens.tgol.entity.user.User;
-import org.opens.tgol.entity.user.UserImpl;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.opens.tgol.entity.option.Option;
+import org.opens.tgol.entity.option.OptionImpl;
+import org.opens.tgol.entity.product.Product;
+import org.opens.tgol.entity.product.ProductImpl;
+import org.opens.tgol.entity.user.User;
+import org.opens.tgol.entity.user.UserImpl;
 
 /**
  *
@@ -95,10 +84,10 @@ public class ContractImpl implements Contract, Serializable {
     private Set<ActImpl> actSet = new LinkedHashSet<ActImpl>();
 
     @ManyToMany
-        @JoinTable(name = "TGSI_CONTRACT_RESTRICTION", joinColumns =
+        @JoinTable(name = "TGSI_CONTRACT_OPTION", joinColumns =
         @JoinColumn(name = "CONTRACT_Id_Contract"), inverseJoinColumns =
-        @JoinColumn(name = "RESTRICTION_Id_Restriction"))
-    Set<RestrictionImpl> restrictionSet = new HashSet<RestrictionImpl>();
+        @JoinColumn(name = "OPTION_Id_Option"))
+    Set<OptionImpl> optionSet = new HashSet<OptionImpl>();
 
     @Override
     public Long getId() {
@@ -230,22 +219,18 @@ public class ContractImpl implements Contract, Serializable {
     }
 
     @Override
-    public Set<RestrictionImpl> getRestrictionSet() {
-        return restrictionSet;
+    public Set<OptionImpl> getOptionSet() {
+        return optionSet;
     }
 
     @Override
-    public void addRestriction(Restriction restriction) {
-        restriction.addContract(this);
-        restrictionSet.add((RestrictionImpl)restriction);
+    public void addOption(Option option) {
+        optionSet.add((OptionImpl)option);
     }
 
     @Override
-    public void addAllRestriction(Set<? extends Restriction> restrictionSet) {
-        for (Restriction restriction : restrictionSet) {
-            restriction.addContract(this);
-        }
-        this.restrictionSet.addAll((Set<RestrictionImpl>)restrictionSet);
+    public void addAllOption(Set<? extends Option> optionSet) {
+        this.optionSet.addAll((Set<OptionImpl>)optionSet);
     }
 
 }

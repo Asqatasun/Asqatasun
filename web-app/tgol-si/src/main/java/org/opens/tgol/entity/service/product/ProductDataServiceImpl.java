@@ -29,6 +29,6 @@ import org.opens.tgol.entity.product.Product;
  * @author jkowalczyk
  */
 public class ProductDataServiceImpl extends AbstractGenericDataService<Product, Long>
-        implements OfferDataService {
+        implements ProductDataService {
     
 }

@@ -19,20 +19,20 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.entity.factory.product;
+package org.opens.tgol.entity.factory.option;
 
-import org.opens.tgol.entity.product.RestrictionElement;
-import org.opens.tgol.entity.product.RestrictionElementImpl;
+import org.opens.tgol.entity.option.OptionElement;
+import org.opens.tgol.entity.option.OptionElementImpl;
 
 /**
  *
  * @author jkowalczyk
  */
-public class RestrictionElementFactoryImpl implements RestrictionElementFactory {
+public class OptionElementFactoryImpl implements OptionElementFactory {
 
     @Override
-    public RestrictionElement create() {
-        return new RestrictionElementImpl();
+    public OptionElement create() {
+        return new OptionElementImpl();
     }
 
 }

@@ -19,16 +19,33 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.entity.service.product;
+package org.opens.tgol.entity.factory.option;
 
-import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import org.opens.tgol.entity.product.RestrictionElement;
+import java.util.Set;
+import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.entity.option.Option;
+import org.opens.tgol.entity.option.OptionElement;
+import org.opens.tgol.entity.option.OptionImpl;
 
 /**
  *
  * @author jkowalczyk
  */
-public class RestrictionElementDataServiceImpl extends AbstractGenericDataService<RestrictionElement, Long>
-        implements RestrictionElementDataService {
-    
+public class OptionFactoryImpl implements OptionFactory {
+
+    @Override
+    public Option createOption(
+            OptionElement OptionElement,
+            String OptionValue) {
+        Option option = create();
+        option.setOptionElement(OptionElement);
+        option.setValue(OptionValue);
+        return option;
+    }
+
+    @Override
+    public Option create() {
+        return new OptionImpl();
+    }
+
 }

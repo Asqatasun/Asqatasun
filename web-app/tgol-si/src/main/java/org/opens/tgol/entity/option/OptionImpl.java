@@ -19,14 +19,10 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.entity.product;
+package org.opens.tgol.entity.option;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -34,22 +30,23 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author jkowalczyk
  */
 @Entity
-@Table(name = "TGSI_RESTRICTION_ELEMENT")
+@Table(name = "TGSI_OPTION")
 @XmlRootElement
-public class RestrictionElementImpl implements RestrictionElement, Serializable {
+public class OptionImpl implements Option, Serializable {
 
     private static final long serialVersionUID = 866337625495716065L;
     
     @Id
     @GeneratedValue
-    @Column(name = "Id_Restriction_Element")
+    @Column(name = "Id_Option")
     private Long id;
 
-    @Column(name = "Cd_Restriction_Element")
-    private String code;
+    @ManyToOne
+    @JoinColumn(name = "OPTION_ELEMENT_Id_Option_Element")
+    private OptionElementImpl optionElement;
 
-    @Column(name = "Description")
-    private String description;
+    @Column(name = "Option_Value")
+    private String value;
 
     @Override
     public Long getId() {
@@ -62,23 +59,23 @@ public class RestrictionElementImpl implements RestrictionElement, Serializable 
     }
 
     @Override
-    public String getCode() {
-        return code;
+    public OptionElement getOptionElement() {
+        return optionElement;
     }
 
     @Override
-    public void setCode(String code) {
-        this.code = code;
+    public void setOptionElement(OptionElement optionElement) {
+        this.optionElement = (OptionElementImpl)optionElement;
     }
 
     @Override
-    public String getDescription() {
-        return description;
+    public String getValue() {
+        return value;
     }
 
     @Override
-    public void setDescription(String description) {
-        this.description = description;
+    public void setValue(String value) {
+        this.value = value;
     }
 
 }

@@ -21,21 +21,15 @@
  */
 package org.opens.tgol.entity.product;
 
-import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.contract.ContractImpl;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.entity.contract.ContractImpl;
+import org.opens.tgol.entity.option.Option;
+import org.opens.tgol.entity.option.OptionImpl;
 
 /**
  *
@@ -82,11 +76,11 @@ public class ProductImpl implements Product, Serializable {
 //        @JoinColumn(name = "SCOPE_Id_Scope"))
 //    Set<TgsiScopeImpl> scopeSet = new HashSet<TgsiScopeImpl>();
 
-//    @ManyToMany
-//        @JoinTable(name = "PRODUCT_RESTRICTION", joinColumns =
-//        @JoinColumn(name = "PRODUCT_Id_Product"), inverseJoinColumns =
-//        @JoinColumn(name = "RESTRICTION_Id_Restriction"))
-//    Set<RestrictionImpl> restrictionSet = new HashSet<RestrictionImpl>();
+    @ManyToMany
+        @JoinTable(name = "TGSI_PRODUCT_OPTION", joinColumns =
+        @JoinColumn(name = "PRODUCT_Id_Product"), inverseJoinColumns =
+        @JoinColumn(name = "OPTION_Id_Option"))
+    Set<OptionImpl> optionSet = new HashSet<OptionImpl>();
 
     @Override
     public Long getId() {
@@ -157,71 +151,19 @@ public class ProductImpl implements Product, Serializable {
         this.scope = (TgsiScopeImpl)scope;
     }
 
-//    @Override
-//    public Functionality getFunctionality() {
-//        return functionality;
-//    }
-//
-//    @Override
-//    public void setFunctionality(Functionality functionality) {
-//        this.functionality = (FunctionalityImpl)functionality;
-//    }
-//
-//    @Override
-//    public Set<RestrictionImpl> getRestrictionSet() {
-//        return restrictionSet;
-//    }
-//
-//    @Override
-//    public void addRestriction(Restriction restriction) {
-//        restriction.addProduct(this);
-//        restrictionSet.add((RestrictionImpl)restriction);
-//    }
-//
-//    @Override
-//    public void addAllRestriction(Set<? extends Restriction> restrictionSet) {
-//        for (Restriction restriction : restrictionSet) {
-//            restriction.addProduct(this);
-//        }
-//        this.restrictionSet.addAll((Set<RestrictionImpl>)restrictionSet);
-//    }
-//
-//    @Override
-//    public Set<TgsiScopeImpl> getScopeSet() {
-//        return scopeSet;
-//    }
-//
-//    @Override
-//    public void addScope(Scope scope) {
-//        scope.addProduct(this);
-//        scopeSet.add((TgsiScopeImpl)scope);
-//    }
-//
-//    @Override
-//    public void addAllScope(Set<? extends Scope> scopeSet) {
-//        for (Scope scope : scopeSet) {
-//            scope.addProduct(this);
-//        }
-//        this.scopeSet.addAll((Set<TgsiScopeImpl>)scopeSet);;
-//    }
-//
-//    @Override
-//    public Set<ActImpl> getActSet() {
-//        return actSet;
-//    }
-//
-//    @Override
-//    public void addAct(Act act) {
-//        act.setProduct(this);
-//        actSet.add((ActImpl)act);
-//    }
-//
-//    @Override
-//    public void addAllAct(Set<? extends Act> actSet) {
-//        for (Act act : actSet) {
-//            act.setProduct(this);
-//        }
-//        this.actSet.addAll((Set<ActImpl>)actSet);
-//    }
+    @Override
+    public Set<OptionImpl> getOptionSet() {
+        return optionSet;
+    }
+
+    @Override
+    public void addOption(Option option) {
+        optionSet.add((OptionImpl)option);
+    }
+
+    @Override
+    public void addAllOption(Set<? extends Option> optionSet) {
+        this.optionSet.addAll((Set<OptionImpl>)optionSet);
+    }
 
 }
