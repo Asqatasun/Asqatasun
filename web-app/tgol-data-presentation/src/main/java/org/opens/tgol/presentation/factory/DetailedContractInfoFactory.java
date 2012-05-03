@@ -35,6 +35,8 @@ import org.opens.tgol.presentation.data.DetailedContractInfoImpl;
  */
 public final class DetailedContractInfoFactory extends ContractInfoFactory {
 
+    private static int NB_MAX_DISPLAYED_ACT = 100;
+    
     private String nbMaxActRestrictionCode;
     public String getNbMaxActRestrictionCode() {
         return nbMaxActRestrictionCode;
@@ -108,7 +110,7 @@ public final class DetailedContractInfoFactory extends ContractInfoFactory {
                 return Integer.valueOf(optionElement.getValue());
             }
         }
-        return -1;
+        return NB_MAX_DISPLAYED_ACT;
     }
 
 }
