@@ -229,5 +229,6 @@
 
     <bean id="auditSetUpCommandFactory" class="org.opens.tgol.command.factory.AuditSetUpCommandFactory" factory-method="getInstance">
         <property name="parameterDataService" ref="parameterDataService"/>
+        <property name="contractDataService" ref="contractDataService"/>
     </bean>
 </beans>

@@ -7,12 +7,12 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <bean id="parameterElementDataService" class="org.opens.tanaguru.entity.service.parameterization.ParameterElementDataServiceMock"/>
-    <bean id="parameterDataService" class="org.opens.tanaguru.entity.service.parameterization.ParameterDataServiceMock"/>
+    <bean id="parameterElementDataService" class="org.opens.tanaguru.entity.service.parameterization.MockParameterElementDataService"/>
+    <bean id="parameterDataService" class="org.opens.tanaguru.entity.service.parameterization.MockParameterDataService"/>
 
-    <bean id="userDataService" class="org.opens.tgol.entity.service.user.UserDataServiceMock"/>
+    <bean id="userDataService" class="org.opens.tgol.entity.service.user.MockUserDataService"/>
 
-    <bean id="contractDataService" class="org.opens.tgol.entity.service.contract.ContractDataServiceMock">
+    <bean id="contractDataService" class="org.opens.tgol.entity.service.contract.MockContractDataService">
         <property name="userDataService" ref="userDataService"/>
     </bean>
 
