@@ -21,12 +21,12 @@
  */
 package org.opens.tgol.presentation.data;
 
-import org.opens.tgol.entity.product.ScopeEnum;
-import org.opens.tgol.util.TgolEscapeUrl;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.opens.tanaguru.entity.reference.Theme;
+import org.opens.tgol.entity.contract.ScopeEnum;
+import org.opens.tgol.util.TgolEscapeUrl;
 
 /**
  * This class handles displayable audit statistics data

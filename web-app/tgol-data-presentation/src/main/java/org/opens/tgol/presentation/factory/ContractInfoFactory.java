@@ -21,15 +21,16 @@
  */
 package org.opens.tgol.presentation.factory;
 
+import java.util.Calendar;
+import java.util.Collection;
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.product.ScopeEnum;
+import org.opens.tgol.entity.contract.ScopeEnum;
 import org.opens.tgol.entity.service.contract.ActDataService;
+import org.opens.tgol.entity.service.contract.ContractDataService;
 import org.opens.tgol.presentation.data.AuditProgressionEnum;
 import org.opens.tgol.presentation.data.ContractInfo;
 import org.opens.tgol.presentation.data.ContractInfoImpl;
-import java.util.Calendar;
-import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -46,6 +47,16 @@ public class ContractInfoFactory {
     @Autowired
     public void setActDataService(ActDataService actDataService) {
         this.actDataService = actDataService;
+    }
+    
+    private ContractDataService contractDataService;
+    public ContractDataService getContractDataService() {
+        return contractDataService;
+    }
+
+    @Autowired
+    public void setContractDataService(ContractDataService contractDataService) {
+        this.contractDataService = contractDataService;
     }
 
     /**
@@ -89,7 +100,7 @@ public class ContractInfoFactory {
      */
     protected ContractInfo setBasicContractInfo(Contract contract, ContractInfo contractInfo) {
         contractInfo.setLabel(contract.getLabel());
-        contractInfo.setUrl(contract.getUrl());
+        contractInfo.setUrl(contractDataService.getUrlFromContractOption(contract));
         contractInfo.setId(contract.getId().intValue());
         contractInfo.setIsActRunning(!actDataService.getRunningActsByContract(contract).isEmpty());
         return contractInfo;

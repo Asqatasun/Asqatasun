@@ -21,21 +21,31 @@
  */
 package org.opens.tgol.form.parameterization.builder;
 
+import org.apache.log4j.Logger;
+import org.opens.tanaguru.entity.parameterization.ParameterElement;
+import org.opens.tanaguru.entity.service.parameterization.ParameterElementDataService;
+import org.opens.tgol.entity.option.Option;
+import org.opens.tgol.entity.service.option.OptionDataService;
 import org.opens.tgol.form.FormField;
 import org.opens.tgol.form.builder.AbstractGenericFormFieldBuilder;
 import org.opens.tgol.form.parameterization.AuditSetUpFormField;
 import org.opens.tgol.form.parameterization.AuditSetUpFormFieldImpl;
-import org.apache.log4j.Logger;
-import org.opens.tanaguru.entity.parameterization.ParameterElement;
-import org.opens.tanaguru.entity.service.parameterization.ParameterElementDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- *
+ * That builder is a specific FormField Builder dedicated to create the
+ * audit set-up forms and bind them with audit parameters. 
+ * 
  * @author jkowalczyk
  */
 public class AuditSetUpFormFieldBuilderImpl implements AuditSetUpFormFieldBuilder {
 
+    private ParameterElementDataService parameterElementDataService;
+    @Autowired
+    public void setParameterElementDataService(ParameterElementDataService parameterElementDataService) {
+        this.parameterElementDataService = parameterElementDataService;
+    }
+    
     private ParameterElement parameterElement;
     @Override
     public ParameterElement getParameterElement() {
@@ -68,21 +78,31 @@ public class AuditSetUpFormFieldBuilderImpl implements AuditSetUpFormFieldBuilde
         this.formFieldBuilder = formFieldBuilder;
     }
 
-    private ParameterElementDataService parameterElementDataService;
+    private OptionDataService optionDataService;
     @Autowired
-    public void setParameterElementDataService(ParameterElementDataService parameterElementDataService) {
-        this.parameterElementDataService = parameterElementDataService;
+    public void setOptionDataService(OptionDataService optionDataService) {
+        this.optionDataService = optionDataService;
+    }
+    
+    private Option option;
+    @Override
+    public Option getOption() {
+        return option;
     }
 
-    private String restrictionCode;
     @Override
-    public String getRestrictionCode() {
-        return restrictionCode;
-    }
-
-    @Override
-    public void setRestrictionCode(String restrictionCode) {
-        this.restrictionCode = restrictionCode;
+    public void setOptionCode(String optionCode) {
+        option = optionDataService.getOption(optionCode);
+        if (option == null) {
+            Logger.getLogger(this.getClass()).fatal("The option Code "
+                    + option
+                    + " does not exist in database");
+            try {
+              System.exit(0);
+            } finally {
+                System.exit(1);
+            }
+        }
     }
 
     @Override

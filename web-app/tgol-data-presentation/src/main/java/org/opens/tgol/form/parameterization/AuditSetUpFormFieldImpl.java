@@ -21,9 +21,10 @@
  */
 package org.opens.tgol.form.parameterization;
 
+import org.opens.tanaguru.entity.parameterization.ParameterElement;
+import org.opens.tgol.entity.option.Option;
 import org.opens.tgol.form.FormField;
 import org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl;
-import org.opens.tanaguru.entity.parameterization.ParameterElement;
 
 /**
  *
@@ -34,7 +35,7 @@ public class AuditSetUpFormFieldImpl implements AuditSetUpFormField {
     public AuditSetUpFormFieldImpl(AuditSetUpFormFieldBuilderImpl auditSetUpFormFieldBuilder) {
         this.parameterElement = auditSetUpFormFieldBuilder.getParameterElement();
         this.formField = auditSetUpFormFieldBuilder.getFormField();
-        this.restrictionCode = auditSetUpFormFieldBuilder.getRestrictionCode();
+        this.option = auditSetUpFormFieldBuilder.getOption();
     }
 
     private ParameterElement parameterElement;
@@ -59,15 +60,15 @@ public class AuditSetUpFormFieldImpl implements AuditSetUpFormField {
         this.formField = formField;
     }
 
-    private String restrictionCode;
+    private Option option;
     @Override
-    public String getRestrictionCode() {
-        return restrictionCode;
+    public Option getOption() {
+        return option;
     }
     
     @Override
-    public void setRestrictionCode(String restrictionCode) {
-        this.restrictionCode = restrictionCode;
+    public void setOption(Option option) {
+        this.option = option;
     }
 
 }
