@@ -27,7 +27,6 @@ import javax.persistence.Query;
 import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.contract.ContractImpl;
-import org.opens.tgol.entity.product.Product;
 import org.opens.tgol.entity.user.User;
 
 /**
@@ -60,32 +59,24 @@ public class ContractDAOImpl extends AbstractJPADAO<Contract, Long>
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public Collection<Contract> findAllContractsByProduct(Product product) {
-        Query query = entityManager.createQuery("SELECT c FROM "
-                + getEntityClass().getName() + " c"
-                + " WHERE c.product = :product");
-        query.setParameter("product", product);
-        query.setHint(CACHEABLE_OPTION, "true");
-        return query.getResultList();
-    }
-
-    @Override
     public Contract read(Long id) {
         try {
             Query query = entityManager.createQuery("SELECT c FROM "
                     + getEntityClass().getName() + " c"
-                    + " LEFT JOIN FETCH c.optionSet o"
+                    + " LEFT JOIN FETCH c.optionElementSet o"
+                    + " LEFT JOIN FETCH c.functionalitySet f"
+                    + " LEFT JOIN FETCH c.referentialSet f"
+                    + " LEFT JOIN FETCH c.scenarioSet f"
                     + " WHERE c.id = :id");
             query.setParameter("id", id);
             query.setHint(CACHEABLE_OPTION, true);
             Contract contract = (Contract) query.getSingleResult();
             // to ensure the options associated with the contract is 
             // retrieved
-            contract.getOptionSet().size();
-            // to ensure the product and all its options associated with 
-            // the contract is retrieved
-            contract.getProduct().getOptionSet().size();
+            contract.getOptionElementSet().size();
+            contract.getFunctionalitySet().size();
+            contract.getScenarioSet().size();
+            contract.getReferentialSet().size();
             return contract;
         } catch (NoResultException nre) {
             return null;

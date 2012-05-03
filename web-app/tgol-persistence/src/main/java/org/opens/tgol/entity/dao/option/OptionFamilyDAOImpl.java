@@ -21,42 +21,24 @@
  */
 package org.opens.tgol.entity.dao.option;
 
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.Query;
 import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.opens.tgol.entity.option.Option;
-import org.opens.tgol.entity.option.OptionImpl;
+import org.opens.tgol.entity.option.OptionFamily;
+import org.opens.tgol.entity.option.OptionFamilyImpl;
 
 /**
  *
  * @author jkowalczyk
  */
-public class OptionDAOImpl extends AbstractJPADAO<Option, Long>
-        implements OptionDAO {
+public class OptionFamilyDAOImpl extends AbstractJPADAO<OptionFamily, Long>
+        implements OptionFamilyDAO {
 
-    public OptionDAOImpl() {
+    public OptionFamilyDAOImpl() {
         super();
     }
 
     @Override
-    protected Class<? extends Option> getEntityClass() {
-        return OptionImpl.class;
-    }
-
-    @Override
-    public Option findOptionFromCode(String optionCode) {
-        Query query = entityManager.createQuery("SELECT o FROM "
-                + getEntityClass().getName() + " a"
-                + " WHERE o.optionCode = :optionCode");
-        query.setParameter("parameterElementCode", optionCode);
-        try {
-            return (Option) query.getSingleResult();
-        } catch (NoResultException nre) {
-            return null;
-        } catch (NonUniqueResultException nure) {
-            return null;
-        }
+    protected Class<? extends OptionFamily> getEntityClass() {
+        return OptionFamilyImpl.class;
     }
 
 }

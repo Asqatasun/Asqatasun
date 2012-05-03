@@ -21,16 +21,16 @@
  */
 package org.opens.tgol.entity.dao.tanaguru.parameterization;
 
-import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.opens.tgol.entity.contract.Act;
-import org.opens.tgol.entity.contract.ActImpl;
-import org.opens.tgol.entity.contract.ActStatus;
-import org.opens.tgol.entity.product.ScopeEnum;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.entity.parameterization.ParameterImpl;
+import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.opens.tgol.entity.contract.Act;
+import org.opens.tgol.entity.contract.ActImpl;
+import org.opens.tgol.entity.contract.ActStatus;
+import org.opens.tgol.entity.contract.ScopeEnum;
 
 /**
  *
