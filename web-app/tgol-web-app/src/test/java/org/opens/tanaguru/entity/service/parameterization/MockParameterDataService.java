@@ -21,29 +21,20 @@
  */
 package org.opens.tanaguru.entity.service.parameterization;
 
-import org.opens.tgol.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
-import org.opens.tgol.entity.product.ScopeEnum;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.entity.parameterization.Parameter;
-import org.opens.tanaguru.entity.parameterization.ParameterElement;
-import org.opens.tanaguru.entity.parameterization.ParameterElementImpl;
-import org.opens.tanaguru.entity.parameterization.ParameterFamily;
-import org.opens.tanaguru.entity.parameterization.ParameterImpl;
+import org.opens.tanaguru.entity.parameterization.*;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
+import org.opens.tgol.entity.contract.ScopeEnum;
+import org.opens.tgol.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
 
 /**
- *
+ * General mock environment for Parameters. 
+ * 
  * @author jkowalczyk
  */
-public class ParameterDataServiceMock implements ParameterDataServiceDecorator {
+public class MockParameterDataService implements ParameterDataServiceDecorator {
 
     Set<Parameter> paramElemSet = new HashSet<Parameter>();
     Map<Long, List<Set<Parameter>>> paramSetByContractId = new HashMap<Long, List<Set<Parameter>>>();
@@ -51,15 +42,26 @@ public class ParameterDataServiceMock implements ParameterDataServiceDecorator {
     Set<Parameter> defaultParamSetWithUserRestriction = new HashSet<Parameter>();
     Set<Parameter> otherValuesParamSet = new HashSet<Parameter>();
 
-    public ParameterDataServiceMock(){
-        // Level parameters
-        ParameterElement levelParameterElement = new ParameterElementImpl();
-        levelParameterElement.setParameterElementCode("LEVEL");
-        // default level parameter
-        addParameter(true, "ref1;level1", levelParameterElement, defaultParamSet);
-        addParameter(true, "ref1;level1", levelParameterElement, defaultParamSetWithUserRestriction);
-        //other level parameter
-        addParameter(false, "ref2;level2", levelParameterElement, otherValuesParamSet);
+    ParameterElementDataService parameterElementDataService = 
+            new MockParameterElementDataService();
+    
+    public MockParameterDataService(){
+        ParameterElement numericalFormFieldParameterElement1 = parameterElementDataService.getParameterElement("NUMERICAL_FORMFIELD_1");
+        addParameter(true, "50", numericalFormFieldParameterElement1, defaultParamSet);
+        // Have a look to the MockContractDataService. Each contract is associated
+        // with a param Set. 
+        List<Set<Parameter>> paramSetListForUser1 = new LinkedList<Set<Parameter>>();
+        paramSetListForUser1.add(defaultParamSet);
+        paramSetByContractId.put(Long.valueOf(1), paramSetListForUser1);
+        
+//        // Level parameters
+//        ParameterElement levelParameterElement = new ParameterElementImpl();
+//        levelParameterElement.setParameterElementCode("LEVEL");
+//        // default level parameter
+//        addParameter(true, "ref1;level1", levelParameterElement, defaultParamSet);
+//        addParameter(true, "ref1;level1", levelParameterElement, defaultParamSetWithUserRestriction);
+//        //other level parameter
+//        addParameter(false, "ref2;level2", levelParameterElement, otherValuesParamSet);
 
         // Level parameters duplicated to deal with the activation mechanism 
         // of selectElement
@@ -107,10 +109,10 @@ public class ParameterDataServiceMock implements ParameterDataServiceDecorator {
         // other exclusion regexp parameter
         addParameter(false, "expression1;expression2", exlusionRegexpParameterElement, otherValuesParamSet);
 
-        List<Set<Parameter>> paramSetListForUser1 = new LinkedList<Set<Parameter>>();
-        paramSetListForUser1.add(defaultParamSet);
-        paramSetListForUser1.add(otherValuesParamSet);
-        paramSetByContractId.put(Long.valueOf(1), paramSetListForUser1);
+//        List<Set<Parameter>> paramSetListForUser1 = new LinkedList<Set<Parameter>>();
+//        paramSetListForUser1.add(defaultParamSet);
+//        paramSetListForUser1.add(otherValuesParamSet);
+//        paramSetByContractId.put(Long.valueOf(1), paramSetListForUser1);
 
         List<Set<Parameter>> paramSetListForUser2 = new LinkedList<Set<Parameter>>();
         paramSetListForUser2.add(otherValuesParamSet);
@@ -205,7 +207,7 @@ public class ParameterDataServiceMock implements ParameterDataServiceDecorator {
 
     @Override
     public Set<Parameter> getParameterSetFromAudit(Audit audit) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new HashSet<Parameter>();
     }
 
     @Override

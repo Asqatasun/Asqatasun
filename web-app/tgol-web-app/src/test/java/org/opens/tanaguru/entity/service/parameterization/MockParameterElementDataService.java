@@ -32,32 +32,37 @@ import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
 
 /**
- *
+ * Parameter elements bank for test. All the parameters defined
+ * 
  * @author jkowalczyk
  */
-public class ParameterElementDataServiceMock implements ParameterElementDataService {
+public class MockParameterElementDataService implements ParameterElementDataService {
 
     Map<String, ParameterElement> paramElemMap = new HashMap<String, ParameterElement>();
 
-    public ParameterElementDataServiceMock(){
-        ParameterElement levelParameterElement = new ParameterElementImpl();
-        levelParameterElement.setParameterElementCode("LEVEL");
-        paramElemMap.put("LEVEL", levelParameterElement);
-        ParameterElement levelInitialyDisabledParameterElement = new ParameterElementImpl();
-        levelInitialyDisabledParameterElement.setParameterElementCode("LEVEL_INITIALY_DISABLED");
-        paramElemMap.put("LEVEL_INITIALY_DISABLED", levelInitialyDisabledParameterElement);
-        ParameterElement depthParameterElement = new ParameterElementImpl();
-        depthParameterElement.setParameterElementCode("DEPTH");
-        paramElemMap.put("DEPTH", depthParameterElement);
-        ParameterElement maxDocumentsParameterElement = new ParameterElementImpl();
-        maxDocumentsParameterElement.setParameterElementCode("MAX_DOCUMENTS");
-        paramElemMap.put("MAX_DOCUMENTS", maxDocumentsParameterElement);
-        ParameterElement maxDurationParameterElement = new ParameterElementImpl();
-        maxDurationParameterElement.setParameterElementCode("MAX_DURATION");
-        paramElemMap.put("MAX_DURATION", maxDurationParameterElement);
-        ParameterElement exlusionRegexpParameterElement = new ParameterElementImpl();
-        exlusionRegexpParameterElement.setParameterElementCode("EXCLUSION_REGEXP");
-        paramElemMap.put("EXCLUSION_REGEXP", exlusionRegexpParameterElement);
+    public MockParameterElementDataService(){
+//        ParameterElement levelParameterElement = new ParameterElementImpl();
+//        levelParameterElement.setParameterElementCode("LEVEL");
+//        paramElemMap.put("LEVEL", levelParameterElement);
+//        ParameterElement levelInitialyDisabledParameterElement = new ParameterElementImpl();
+//        levelInitialyDisabledParameterElement.setParameterElementCode("LEVEL_INITIALY_DISABLED");
+//        paramElemMap.put("LEVEL_INITIALY_DISABLED", levelInitialyDisabledParameterElement);
+//        ParameterElement depthParameterElement = new ParameterElementImpl();
+//        depthParameterElement.setParameterElementCode("DEPTH");
+//        paramElemMap.put("DEPTH", depthParameterElement);
+//        ParameterElement maxDocumentsParameterElement = new ParameterElementImpl();
+//        maxDocumentsParameterElement.setParameterElementCode("MAX_DOCUMENTS");
+//        paramElemMap.put("MAX_DOCUMENTS", maxDocumentsParameterElement);
+//        ParameterElement maxDurationParameterElement = new ParameterElementImpl();
+//        maxDurationParameterElement.setParameterElementCode("MAX_DURATION");
+//        paramElemMap.put("MAX_DURATION", maxDurationParameterElement);
+//        ParameterElement exlusionRegexpParameterElement = new ParameterElementImpl();
+//        exlusionRegexpParameterElement.setParameterElementCode("EXCLUSION_REGEXP");
+//        paramElemMap.put("EXCLUSION_REGEXP", exlusionRegexpParameterElement);
+//        
+        ParameterElement numericalFormFieldParameterElement1 = new ParameterElementImpl();
+        numericalFormFieldParameterElement1.setParameterElementCode("NUMERICAL_FORMFIELD_1");
+        paramElemMap.put("NUMERICAL_FORMFIELD_1", numericalFormFieldParameterElement1);
     }
 
     @Override

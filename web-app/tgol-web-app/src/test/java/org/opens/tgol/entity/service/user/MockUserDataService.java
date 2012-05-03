@@ -34,10 +34,10 @@ import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
  *
  * @author jkowalczyk
  */
-public class UserDataServiceMock implements UserDataService {
+public class MockUserDataService implements UserDataService {
     Map<String, User> userMap = new HashMap<String, User>();
 
-    public UserDataServiceMock() {
+    public MockUserDataService() {
         User user = new UserImpl();
         user.setAccountActivation(true);
         user.setEmail1("test1@test.com");
@@ -69,7 +69,7 @@ public class UserDataServiceMock implements UserDataService {
 
     @Override
     public User create() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new UserImpl();
     }
 
     @Override
@@ -109,7 +109,7 @@ public class UserDataServiceMock implements UserDataService {
 
     @Override
     public User saveOrUpdate(User e) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return e;
     }
 
     @Override
@@ -131,7 +131,5 @@ public class UserDataServiceMock implements UserDataService {
     public User update(User e) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
-    
 
 }
