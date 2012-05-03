@@ -21,11 +21,11 @@
  */
 package org.opens.tgol.orchestrator;
 
+import org.opens.tanaguru.service.AuditService;
 import org.opens.tgol.emailsender.EmailSender;
 import org.opens.tgol.entity.factory.contract.ActFactory;
 import org.opens.tgol.entity.service.contract.ActDataService;
-import org.opens.tgol.entity.service.product.ScopeDataService;
-import org.opens.tanaguru.service.AuditService;
+import org.opens.tgol.entity.service.contract.ScopeDataService;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**

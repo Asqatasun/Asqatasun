@@ -34,14 +34,10 @@ import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.service.AuditService;
 import org.opens.tanaguru.service.AuditServiceListener;
 import org.opens.tgol.emailsender.EmailSender;
-import org.opens.tgol.entity.contract.Act;
-import org.opens.tgol.entity.contract.ActStatus;
-import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.entity.contract.*;
 import org.opens.tgol.entity.factory.contract.ActFactory;
-import org.opens.tgol.entity.product.Scope;
-import org.opens.tgol.entity.product.ScopeEnum;
 import org.opens.tgol.entity.service.contract.ActDataService;
-import org.opens.tgol.entity.service.product.ScopeDataService;
+import org.opens.tgol.entity.service.contract.ScopeDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
