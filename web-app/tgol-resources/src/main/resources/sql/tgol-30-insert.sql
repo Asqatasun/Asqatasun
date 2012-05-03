@@ -14,44 +14,35 @@ INSERT IGNORE INTO `TGSI_SCOPE` (`Id_Scope`, `Code`, `Label`) VALUES
 (4, 'FILE', 'File'),
 (5, 'GROUPOFFILES', 'Group of files');
 
-INSERT IGNORE INTO `TGSI_PRODUCT` (`Id_Product`, `Code`, `Label`, `SCOPE_Id_Scope`) VALUES
-(1, 'AW_PAGES', 'Audit Pages Accessiweb', '1'),
-(2, 'AW_DOMAIN', 'Audit Domain Accessiweb', '2'),
-(3, 'AW_READONLY', 'Audit Read Only Accessiweb', '1'),
-(4, 'SEO_PAGES', 'Audit Pages Seo', '1'),
-(5, 'SEO_DOMAIN', 'Audit Domain Seo', '2'),
-(6, 'SEO_READONLY', 'Audit Read Only Seo', '1'),
-(7, 'AW_UPLOAD', 'Audit Upload Accessiweb', '5'),
-(8, 'SEO_UPLOAD', 'Audit Upload Seo', '5'),
-(9, 'AW_PAGES_UPLOAD', 'Audit Pages Upload Accessiweb', '1'),
-(10, 'SEO_PAGES_UPLOAD', 'Audit Pages Upload Seo', '1'),
-(11, 'AW_DOMAIN_ONLY', 'Audit Domain Only Accessiweb', '2'),
-(12, 'SEO_DOMAIN_ONLY', 'Audit Domain Only Seo', '2'),
-(13, 'AW_PAGES_DOMAIN_UPLOAD', 'Audit Pages Domain Upload Accessiweb', '2'),
-(14, 'SEO_PAGES_DOMAIN_UPLOAD', 'Audit Pages Domain Upload Seo', '2'), 
-(15, 'AW_SEO_PAGES', 'Audit Pages Accessiweb Seo', '1'), 
-(16, 'AW_SEO_DOMAIN', 'Audit Domain Accessiweb Seo', '2'), 
-(17, 'AW_SEO_UPLOAD', 'Audit Upload Accessiweb Seo', '5'), 
-(18, 'AW_SEO_READONLY', 'Audit Read Only Accessiweb Seo', '1'), 
-(19, 'AW_SEO_PAGES_DOMAIN_UPLOAD', 'Audit Pages Domain Upload Accessiweb Seo', '2'), 
-(20, 'AW_SEO_PAGES_UPLOAD', 'Audit Pages Upload Accessiweb Seo', '1'), 
-(21, 'AW_SEO_DOMAIN_ONLY', 'Audit Domain Only Accessiweb Seo', '2'); 
+INSERT IGNORE INTO `TGSI_FUNCTIONALITY` (`Id_Functionality`, `Code`, `Label`, `Description`) VALUES
+(1, 'PAGES', 'Audit Pages (Up to 10)', ''),
+(2, 'DOMAIN', 'Audit Domain ', ''),
+(3, 'UPLOAD', 'Audit Upload', '');
 
-INSERT IGNORE INTO `TGSI_OPTION_ELEMENT` (`Id_Option_Element`, `Cd_Option_Element`, `Description`, `Is_Restriction`) VALUES
-(1, 'ACT_LIMITATION', 'The act limitation unit is the number of acts', b'1'),
+INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Id_Referential`, `Code`, `Label`) VALUES
+(1, 'AW21', 'Accessiweb 2.1 referential'), 
+(2, 'Seo', 'Seo referential');
+
+INSERT IGNORE INTO `TGSI_OPTION_FAMILY` (`Id_Option_Family`, `Code`, `Label`) VALUES
+(1, 'CRAWL', ''),
+(2, 'ACT_RESTRICTION', ''),
+(3, 'ACT_MANAGEMENT', ''),
+(4, 'CONTRACT_MANAGEMENT', '');
+
+INSERT IGNORE INTO `TGSI_OPTION` (`Id_Option`, `Code`, `Description`, `Is_Restriction`, OPTION_FAMILY_Id_Option_Family) VALUES
+(1, 'ACT_LIMITATION', 'The act limitation unit is the number of acts', b'1', 2),
 (2, 'ACT_BY_IP_LIMITATION', 'The act by ip limitation unit is the number of acts in a period for a given ip.
-The period is expressed in seconds and the format is \"nb_of_acts/period\"', b'1'),
-(3, 'MAX_DOCUMENTS', 'This restriction limits the max number of crawled documents',b'1'),
-(4, 'FORDIDDEN_REFERENTIAL', 'This restriction forbids the access to a referential', b'1'),
-(5, 'DEPTH', 'This restriction limits the depth of the crawl', b'1'),
-(6, 'MAX_DURATION', 'This restriction limits the duration of the crawl', b'1'),
-(7, 'EXCLUSION_REGEXP', 'This restriction applies an exclusion rule on crawled Urls', b'1'),
-(8, 'ACT_LIFETIME','This restriction determines the lifetime of each associated with the contract', b'1'),
-(9, 'NB_OF_AUDIT_TO_DISPLAY','This restriction determines the number of audit results that can be displayed on the contract page', b'1'),
-(10, 'AUTHORIZED_REFERENTIAL','This option determines whether a referential is accessible or not', b'0'),
-(11, 'DEFAULT_LEVEL','This option determines which level is selected by default', b'0') ;
+The period is expressed in seconds and the format is \"nb_of_acts/period\"', b'1', 2),
+(3, 'MAX_DOCUMENTS', 'This restriction limits the max number of crawled documents',b'1', 1),
+(4, 'FORDIDDEN_REFERENTIAL', 'This restriction forbids the access to a referential', b'1', 1),
+(5, 'DEPTH', 'This restriction limits the depth of the crawl', b'1', 1),
+(6, 'MAX_DURATION', 'This restriction limits the duration of the crawl', b'1', 1),
+(7, 'EXCLUSION_REGEXP', 'This restriction applies an exclusion rule on crawled Urls', b'1', 1),
+(8, 'ACT_LIFETIME','This restriction determines the lifetime of each associated with the contract', b'1', 3),
+(9, 'NB_OF_AUDIT_TO_DISPLAY','This restriction determines the number of audit results that can be displayed on the contract page', b'1', 4), 
+(10,'DOMAIN', 'Domain associated with a contract', b'1', 4);
 
-INSERT IGNORE INTO `TGSI_OPTION` (`Id_Option`,`OPTION_ELEMENT_Id_Option_Element`, `Option_Value`) VALUES
+INSERT IGNORE INTO `TGSI_OPTION_ELEMENT` (`Id_Option_Element`,`OPTION_Id_Option`, `Value`) VALUES
 (1, 1, '5'),
 (2, 2, '5/3600'),
 (3, 3, '100'),
@@ -65,76 +56,4 @@ INSERT IGNORE INTO `TGSI_OPTION` (`Id_Option`,`OPTION_ELEMENT_Id_Option_Element`
 (11, 9, '5'),
 (12, 9, '10'),
 (13, 9, '50'),
-(14, 9, '100'),
-(15, 10, 'Aw21'),
-(16, 10, 'Seo'),
-(17, 10, 'Aw21;Seo'),
-(18, 11, 'AW21;Ar'),
-(19, 11, 'Seo;Ar');
-
-INSERT IGNORE INTO `tanaguru`.`TGSI_PRODUCT_OPTION` (`OPTION_Id_Option` ,`PRODUCT_Id_Product`)VALUES 
-('15', '1'),
-('15', '2'),
-('15', '3'),
-('16', '4'),
-('16', '5'),
-('16', '6'),
-('15', '7'),
-('16', '8'),
-('15', '9'),
-('16', '10'),
-('15', '11'),
-('16', '12'),
-('15', '13'),
-('16', '14'),
-('17', '15'),
-('17', '16'),
-('17', '17'),
-('17', '18'),
-('17', '19'),
-('17', '20'),
-('17', '21'),
-('18', '1'),
-('18', '2'),
-('18', '3'),
-('19', '4'),
-('19', '5'),
-('19', '6'),
-('18', '7'),
-('19', '8'),
-('18', '9'),
-('19', '10'),
-('18', '11'),
-('19', '12'),
-('18', '13'),
-('19', '14'),
-('18', '15'),
-('18', '16'),
-('18', '17'),
-('18', '18'),
-('18', '19'),
-('18', '20'),
-('18', '21');
-
-INSERT IGNORE INTO `TGSI_CONTRACT` (`Id_Contract`, `Label`, `Url`, `Begin_Date`, `End_Date`, `Renewal_Date`, `Price`, `USER_Id_User`, `PRODUCT_Id_Product`) VALUES
-(1, 'AW_PAGES', 'http://www.tanaguru.com/', '2012-02-24 00:00:00', '2013-02-24 00:00:00', NULL, NULL, 1, 1),
-(2, 'AW_DOMAIN', 'http://www.tanaguru.com/', '2012-02-24 00:00:00', '2013-02-24 00:00:00', NULL, NULL, 1, 2),
-(3, 'AW_READONLY', 'http://www.tanaguru.com/', '2012-02-24 00:00:00', '2013-02-24 00:00:00', NULL, NULL, 1, 3),
-(4, 'SEO_PAGES', 'http://www.tanaguru.com/', '2012-02-24 17:16:03', '2013-02-24 17:16:06', NULL, NULL, 1, 4),
-(6, 'SEO_DOMAIN', 'http://www.tanaguru.com/', '2012-04-05 10:50:23', '2013-04-05 10:50:27', NULL, NULL, 3, 5),
-(7, 'SEO_READONLY', 'http://www.tanaguru.com/', '2012-04-05 10:52:44', '2013-04-05 10:52:44', NULL, NULL, 4, 6),
-(8, 'AW_UPLOAD', 'http://www.tanaguru.com/', '2012-02-24 00:00:00', '2013-02-24 00:00:00', NULL, NULL, 1, 7),
-(9, 'SEO_UPLOAD', 'http://www.tanaguru.com/', '2012-02-24 00:00:00', '2013-02-24 00:00:00', NULL, NULL, 1, 8),
-(10, 'AW_PAGES_UPLOAD', 'http://www.tanaguru.com/', '2012-02-24 00:00:00', '2013-02-24 00:00:00', NULL, NULL, 1, 9),
-(11, 'SEO_PAGES_UPLOAD', 'http://www.tanaguru.com/', '2012-02-24 17:16:03', '2013-02-24 17:16:06', NULL, NULL, 1, 10),
-(12, 'AW_DOMAIN_ONLY', 'http://www.tanaguru.com/', '2012-04-05 10:50:23', '2013-04-05 10:50:27', NULL, NULL, 3, 11),
-(13, 'SEO_DOMAIN_ONLY', 'http://www.tanaguru.com/', '2012-04-05 10:52:44', '2013-04-05 10:52:44', NULL, NULL, 4, 12),
-(14, 'AW_PAGES_DOMAIN_UPLOAD', 'http://www.tanaguru.com/', '2012-04-05 10:52:44', '2013-04-05 10:52:44', NULL, NULL, 4, 13),
-(15, 'SEO_PAGES_DOMAIN_UPLOAD', 'http://www.tanaguru.com/', '2012-04-05 10:52:44', '2013-04-05 10:52:44', NULL, NULL, 4, 14),
-(16, 'AW_SEO_PAGES', 'http://www.tanaguru.com/', '2012-04-05 10:52:44', '2013-04-05 10:52:44', NULL, NULL, 4, 15),
-(17, 'AW_SEO_DOMAIN', 'http://www.tanaguru.com/', '2012-04-05 10:52:44', '2013-04-05 10:52:44', NULL, NULL, 4, 16),
-(18, 'AW_SEO_UPLOAD', 'http://www.tanaguru.com/', '2012-04-05 10:52:44', '2013-04-05 10:52:44', NULL, NULL, 4, 17),
-(19, 'AW_SEO_READONLY', 'http://www.tanaguru.com/', '2012-04-05 10:52:44', '2013-04-05 10:52:44', NULL, NULL, 4, 18),
-(20, 'AW_SEO_PAGES_DOMAIN_UPLOAD', 'http://www.tanaguru.com/', '2012-04-05 10:52:44', '2013-04-05 10:52:44', NULL, NULL, 4, 19),
-(21, 'AW_SEO_PAGES_UPLOAD', 'http://www.tanaguru.com/', '2012-04-05 10:52:44', '2013-04-05 10:52:44', NULL, NULL, 4, 20),
-(22, 'AW_SEO_DOMAIN_ONLY', 'http://www.tanaguru.com/', '2012-04-05 10:52:44', '2013-04-05 10:52:44', NULL, NULL, 4, 21);
+(14, 9, '100');

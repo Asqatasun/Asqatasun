@@ -18,7 +18,8 @@ CREATE  TABLE IF NOT EXISTS `TGSI_ROLE` (
     FOREIGN KEY (`ROLE_Id_Role` )
     REFERENCES `TGSI_ROLE` (`Id_Role` )
     ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
@@ -49,7 +50,8 @@ CREATE  TABLE IF NOT EXISTS `TGSI_USER` (
     FOREIGN KEY (`ROLE_Id_Role` )
     REFERENCES `TGSI_ROLE` (`Id_Role` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
@@ -63,29 +65,24 @@ CREATE  TABLE IF NOT EXISTS `TGSI_SCOPE` (
   `Code` VARCHAR(255) NOT NULL DEFAULT 'PAGE',
   `Label` VARCHAR(255) NOT NULL DEFAULT 'Page',
   PRIMARY KEY (`Id_Scope`) ,
-  UNIQUE INDEX `UNIQUE_INDEX_TGSI_SCOPE_Code` (`Code` ASC) )
+  UNIQUE INDEX `UNIQUE_INDEX_TGSI_SCOPE_Code` (`Code` ASC) 
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
 
 -- -----------------------------------------------------
--- Table `TGSI_PRODUCT`
+-- Table `TGSI_FUNCTIONALITY`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `TGSI_PRODUCT` (
-  `Id_Product` bigint(20) NOT NULL AUTO_INCREMENT ,
-  `Code` VARCHAR(255) NOT NULL ,
+CREATE  TABLE IF NOT EXISTS `TGSI_FUNCTIONALITY` (
+  `Id_Functionality` bigint(20) NOT NULL AUTO_INCREMENT ,
+  `Code` VARCHAR(45) NOT NULL ,
   `Label` VARCHAR(255) NULL ,
-  `Description` VARCHAR(1000) NULL ,
-  `SCOPE_Id_Scope` bigint(20) NOT NULL ,
-  PRIMARY KEY (`Id_Product`) ,
-  UNIQUE INDEX `UNIQUE_INDEX_TGSI_PRODUCT_Code` (`Code` ASC) ,
-  INDEX `INDEX_TGSI_PRODUCT_SCOPE_Id_Scope` (`SCOPE_Id_Scope` ASC) ,
-  CONSTRAINT `FK_TGSI_PRODUCT_TGSI_SCOPE`
-    FOREIGN KEY (`SCOPE_Id_Scope` )
-    REFERENCES `TGSI_SCOPE` (`Id_Scope` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `Description` VARCHAR(2048) NULL ,
+  PRIMARY KEY (`Id_Functionality`) ,
+  UNIQUE INDEX `UNIQUE_INDEX_TGSI_FUNCTIONALITY_Code` (`Code` ASC) 
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
@@ -96,27 +93,19 @@ COLLATE = utf8_general_ci;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `TGSI_CONTRACT` (
   `Id_Contract` bigint(20) NOT NULL AUTO_INCREMENT ,
-  `Label` VARCHAR(2048) NOT NULL ,
-  `Url` VARCHAR(2048) NOT NULL ,
+  `Label` VARCHAR(255) NOT NULL ,
   `Begin_Date` DATETIME NOT NULL ,
   `End_Date` DATETIME NOT NULL ,
   `Renewal_Date` DATETIME NULL ,
   `Price` FLOAT ZEROFILL NULL ,
   `USER_Id_User` bigint(20) NOT NULL ,
-  `PRODUCT_Id_Product` bigint(20) NOT NULL ,
   PRIMARY KEY (`Id_Contract`) ,
-  INDEX `INDEX_TGSI_CONTRACT_PRODUCT_Id_Product` (`PRODUCT_Id_Product` ASC) ,
-  INDEX `INDEX_TGSI_CONTRACT_Url` (`Url` ASC) ,
-  CONSTRAINT `FK_TGSI_CONTRACT_TGSI_PRODUCT`
-    FOREIGN KEY (`PRODUCT_Id_Product` )
-    REFERENCES `TGSI_PRODUCT` (`Id_Product` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `FK_CONTRACT_USER`
+  CONSTRAINT `FK_TGSI_CONTRACT_TGSI_USER`
     FOREIGN KEY (`USER_Id_User` )
     REFERENCES `TGSI_USER` (`Id_User` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
@@ -145,11 +134,11 @@ CREATE  TABLE IF NOT EXISTS `TGSI_ACT` (
     FOREIGN KEY (`SCOPE_Id_Scope`)
     REFERENCES `TGSI_SCOPE` (`Id_Scope`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
-
 
 -- -----------------------------------------------------
 -- Table `TGSI`.`TGSI_ACT_WEB_RESOURCE`
@@ -169,6 +158,42 @@ CREATE TABLE IF NOT EXISTS `TGSI_ACT_WEB_RESOURCE` (
     FOREIGN KEY (`WEB_RESOURCE_Id_Web_Resource` )
     REFERENCES `WEB_RESOURCE` (`Id_Web_Resource` )
     ON DELETE CASCADE
+    ON UPDATE NO ACTION
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+-- -----------------------------------------------------
+-- Table `TGSI_OPTION_FAMILY`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `TGSI_OPTION_FAMILY` (
+  `Id_Option_Family` bigint(20) NOT NULL AUTO_INCREMENT ,
+  `Code` VARCHAR(45) NOT NULL ,
+  `Label` VARCHAR(255) NULL ,
+  `Description` VARCHAR(2048) NULL,
+  PRIMARY KEY (`Id_Option_Family`) ,
+  UNIQUE INDEX `UNIQUE_INDEX_TGSI_OPTION_FAMILY_Code` (`Code` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+-- -----------------------------------------------------
+-- Table `TGSI_OPTION`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `TGSI_OPTION` (
+  `Id_Option` bigint(20) NOT NULL AUTO_INCREMENT ,
+  `Code` VARCHAR(45) NOT NULL ,
+  `Label` VARCHAR(255) NULL ,
+  `Description` VARCHAR(2048) NULL ,
+  `Is_Restriction` bit(1) DEFAULT b'1',
+  `OPTION_FAMILY_Id_Option_Family` bigint(20) NOT NULL ,
+  PRIMARY KEY (`Id_Option`) ,
+  UNIQUE INDEX `UNIQUE_INDEX_TGSI_OPTION_Code` (`Code` ASC), 
+  CONSTRAINT `FK_TGSI_OPTION_TGSI_OPTION_FAMILY`
+    FOREIGN KEY (`OPTION_FAMILY_Id_Option_Family` )
+    REFERENCES `TGSI_OPTION_FAMILY` (`Id_Option_Family` )
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -177,27 +202,34 @@ COLLATE = utf8_general_ci;
 -- -----------------------------------------------------
 -- Table `TGSI_OPTION_ELEMENT`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `TGSI_OPTION_ELEMENT` (
+CREATE TABLE IF NOT EXISTS `TGSI_OPTION_ELEMENT` (
   `Id_Option_Element` bigint(20) NOT NULL AUTO_INCREMENT ,
-  `Cd_Option_Element` VARCHAR(255) NOT NULL ,
-  `Description` VARCHAR(1000) NULL ,
-  `Is_Restriction` bit(1) DEFAULT b'1',
+  `OPTION_Id_Option` bigint(20) NOT NULL ,
+  `Value` VARCHAR(255) NULL ,
   PRIMARY KEY (`Id_Option_Element`) ,
-  UNIQUE INDEX `UNIQUE_INDEX_TGSI_OPTION_ELEMENT_Cd_Option_Element` (`Cd_Option_Element` ASC))
+  UNIQUE INDEX `INDEX_UNIQUE_PAIR` (`OPTION_Id_Option`, `Value`),
+  CONSTRAINT `FK_TGSI_OPTION_ELEMENT_TGSI_OPTION`
+    FOREIGN KEY (`OPTION_Id_Option` )
+    REFERENCES `TGSI_OPTION` (`Id_Option` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
 -- -----------------------------------------------------
--- Table `TGSI_OPTION`
+-- Table `TGSI_CONTRACT_OPTION_ELEMENT`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `TGSI_OPTION` (
-  `Id_Option` bigint(20) NOT NULL AUTO_INCREMENT ,
+CREATE TABLE IF NOT EXISTS `TGSI_CONTRACT_OPTION_ELEMENT` (
   `OPTION_ELEMENT_Id_Option_Element` bigint(20) NOT NULL ,
-  `Option_Value` VARCHAR(255) NULL ,
-  PRIMARY KEY (`Id_Option`) ,
-  INDEX `INDEX_TGSI_OPTION_OPTION_ELEMENT_Id_Option_Element` (`OPTION_ELEMENT_Id_Option_Element` ASC) ,
-  CONSTRAINT `FK_TGSI_OPTION_TGSI_OPTION_ELEMENT`
+  `CONTRACT_Id_Contract` bigint(20) NOT NULL ,
+  UNIQUE INDEX `INDEX_UNIQUE_PAIR` (`OPTION_ELEMENT_Id_Option_Element`, `CONTRACT_Id_Contract`),
+  CONSTRAINT `FK_TGSI_CONTRACT_OPTION_ELEMENT_TGSI_CONTRACT`
+    FOREIGN KEY (`CONTRACT_Id_Contract` )
+    REFERENCES `TGSI_CONTRACT` (`Id_Contract` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK_TGSI_CONTRACT_OPTION_ELEMENT_TGSI_OPTION_ELEMENT`
     FOREIGN KEY (`OPTION_ELEMENT_Id_Option_Element` )
     REFERENCES `TGSI_OPTION_ELEMENT` (`Id_Option_Element` )
     ON DELETE NO ACTION
@@ -207,49 +239,88 @@ DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
 -- -----------------------------------------------------
--- Table `TGSI_PRODUCT_OPTION`
+-- Table `TGSI_CONTRACT_FUNCTIONALITY`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `TGSI_CONTRACT_OPTION` (
-  `OPTION_Id_Option` bigint(20) NOT NULL ,
+CREATE TABLE IF NOT EXISTS `TGSI_CONTRACT_FUNCTIONALITY` (
   `CONTRACT_Id_Contract` bigint(20) NOT NULL ,
-  INDEX `INDEX_TGSI_CONTRACT_OPTION_CONTRACT_Id_Contract` (`CONTRACT_Id_Contract` ASC) ,
-  INDEX `INDEX_TGSI_CONTRACT_OPTION_OPTION_Id_Option` (`OPTION_Id_Option` ASC) ,
-  UNIQUE INDEX `INDEX_UNIQUE_PAIR` (`OPTION_Id_Option`, `CONTRACT_Id_Contract`),
-  CONSTRAINT `FK_TGSI_CONTRACT_OPTION_TGSI_CONTRACT`
+  `FUNCTIONALITY_Id_Functionality` bigint(20) NOT NULL ,
+  INDEX `INDEX_TGSI_CONTRACT_FUNCTIONALITY_CONTRACT_Id_Contract` (`CONTRACT_Id_Contract` ASC) ,
+  INDEX `INDEX_TGSI_CONTRACT_FUNCTIONALITY_FUNCTIONALITY_Id_Functionality` (`FUNCTIONALITY_Id_Functionality` ASC) ,
+  UNIQUE INDEX `INDEX_UNIQUE_PAIR` (`FUNCTIONALITY_Id_Functionality`, `CONTRACT_Id_Contract`),
+  CONSTRAINT `FK_TGSI_CONTRACT_FUNCTIONALITY_TGSI_CONTRACT`
     FOREIGN KEY (`CONTRACT_Id_Contract` )
     REFERENCES `TGSI_CONTRACT` (`Id_Contract` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `FK_TGSI_CONTRACT_OPTION_TGSI_OPTION`
-    FOREIGN KEY (`OPTION_Id_Restriction` )
-    REFERENCES `TGSI_OPTION` (`Id_Option` )
+  CONSTRAINT `FK_TGSI_CONTRACT_FUNCTIONALITY_TGSI_FUNCTIONALITY`
+    FOREIGN KEY (`FUNCTIONALITY_Id_Functionality` )
+    REFERENCES `TGSI_FUNCTIONALITY` (`Id_Functionality` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
 -- -----------------------------------------------------
--- Table `TGSI_PRODUCT_OPTION`
+-- Table `TGSI_REFERENTIAL`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `TGSI_PRODUCT_OPTION` (
-  `OPTION_Id_Option` bigint(20) NOT NULL ,
-  `PRODUCT_Id_Product` bigint(20) NOT NULL ,
-  INDEX `INDEX_TGSI_PRODUCT_OPTION_PRODUCT_Id_Product` (`PRODUCT_Id_Product` ASC) ,
-  INDEX `INDEX_TGSI_PRODUCT_OPTION_OPTION_Id_Option` (`OPTION_Id_Option` ASC) ,
-  UNIQUE INDEX `INDEX_UNIQUE_PAIR` (`OPTION_Id_Option`, `PRODUCT_Id_Product`),
-  CONSTRAINT `FK_TGSI_PRODUCT_OPTION_TGSI_PRODUCT`
-    FOREIGN KEY (`PRODUCT_Id_Product` )
-    REFERENCES `TGSI_PRODUCT` (`Id_Product` )
+CREATE TABLE IF NOT EXISTS `TGSI_REFERENTIAL` (
+  `Id_Referential` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Code` varchar(45) NOT NULL,
+  `Label` varchar(255) DEFAULT NULL,
+  `Description` varchar(2048) DEFAULT NULL,
+  PRIMARY KEY (`Id_Referential`),
+  UNIQUE INDEX `UNIQUE_INDEX_TGSI_REFERENTIAL_Code` (`Code` ASC)
+) 
+ENGINE=InnoDB 
+DEFAULT CHARSET=utf8 
+COLLATE = utf8_general_ci;
+
+-- -----------------------------------------------------
+-- Table `TGSI_CONTRACT_REFERENTIAL`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `TGSI_CONTRACT_REFERENTIAL` (
+  `CONTRACT_Id_Contract` bigint(20) NOT NULL ,
+  `REFERENTIAL_Id_Referential` bigint(20) NOT NULL ,
+  INDEX `INDEX_TGSI_CONTRACT_REFERENTIAL_CONTRACT_Id_Contract` (`CONTRACT_Id_Contract` ASC) ,
+  INDEX `INDEX_TGSI_CONTRACT_REFERENTIAL_REFERENTIAL_Id_Referential` (`REFERENTIAL_Id_Referential` ASC) ,
+  UNIQUE INDEX `INDEX_UNIQUE_PAIR` (`REFERENTIAL_Id_Referential`, `CONTRACT_Id_Contract`),
+  CONSTRAINT `FK_TGSI_CONTRACT_REFERENTIAL_TGSI_CONTRACT`
+    FOREIGN KEY (`CONTRACT_Id_Contract` )
+    REFERENCES `TGSI_CONTRACT` (`Id_Contract` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `FK_TGSI_PRODUCT_OPTION_TGSI_OPTION`
-    FOREIGN KEY (`OPTION_Id_Option` )
-    REFERENCES `TGSI_OPTION` (`Id_Option` )
+  CONSTRAINT `FK_TGSI_CONTRACT_REFERENTIAL_TGSI_REFERENTIAL`
+    FOREIGN KEY (`REFERENTIAL_Id_Referential` )
+    REFERENCES `TGSI_REFERENTIAL` (`Id_Referential` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
+    ON UPDATE NO ACTION
+) 
+ENGINE=InnoDB 
+DEFAULT CHARSET=utf8 
+COLLATE = utf8_general_ci;
+
+-- -----------------------------------------------------
+-- Table `TGSI_SCENARIO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `TGSI_SCENARIO` (
+  `Id_Scenario` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Date_Of_Creation` DATETIME NOT NULL ,
+  `Label` varchar(255) NOT NULL,
+  `Content` mediumtext NOT NULL,
+  `Description` varchar(255) DEFAULT NULL,
+  `CONTRACT_Id_Contract` bigint(20) NOT NULL, 
+  PRIMARY KEY (`Id_Scenario`), 
+  INDEX `INDEX_TGSI_SCENARIO_CONTRACT_Id_Contract` (`CONTRACT_Id_Contract` ASC),
+  CONSTRAINT `FK_TGSI_SCENARIO_TGSI_CONTRACT`
+    FOREIGN KEY (`CONTRACT_Id_Contract` )
+    REFERENCES `TGSI_CONTRACT` (`Id_Contract` )
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION
+) 
+ENGINE=InnoDB 
+DEFAULT CHARSET=utf8 
 COLLATE = utf8_general_ci;
 
 SET SQL_MODE=@OLD_SQL_MODE;
