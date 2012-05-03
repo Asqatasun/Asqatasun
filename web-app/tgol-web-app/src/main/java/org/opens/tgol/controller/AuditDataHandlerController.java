@@ -21,23 +21,7 @@
  */
 package org.opens.tgol.controller;
 
-import org.opens.tgol.entity.contract.Act;
-import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
-import org.opens.tgol.entity.decorator.tanaguru.subject.WebResourceDataServiceDecorator;
-import org.opens.tgol.entity.service.contract.ActDataService;
-import org.opens.tgol.entity.user.User;
-import org.opens.tgol.presentation.data.AuditStatistics;
-import org.opens.tgol.presentation.factory.AuditStatisticsFactory;
-import org.opens.tgol.util.HttpStatusCodeFamily;
-import org.opens.tgol.util.TgolKeyStore;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import org.displaytag.pagination.PaginatedList;
@@ -49,12 +33,21 @@ import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.reference.ScopeDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
-import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tgol.entity.contract.Act;
+import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
+import org.opens.tgol.entity.decorator.tanaguru.subject.WebResourceDataServiceDecorator;
+import org.opens.tgol.entity.service.contract.ActDataService;
+import org.opens.tgol.entity.user.User;
 import org.opens.tgol.exception.ForbiddenPageException;
 import org.opens.tgol.exception.ForbiddenUserException;
+import org.opens.tgol.presentation.data.AuditStatistics;
+import org.opens.tgol.presentation.factory.AuditStatisticsFactory;
 import org.opens.tgol.report.pagination.factory.TgolPaginatedListFactory;
+import org.opens.tgol.util.HttpStatusCodeFamily;
+import org.opens.tgol.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -216,11 +209,8 @@ public abstract class AuditDataHandlerController extends AbstractController {
     }
 
     protected boolean isAuthorizedScopeForPageList(WebResource webResource) {
-        if (webResource instanceof Page) {
-            return false;
-        }
         String scope = getActDataService().getActFromWebResource(webResource).getScope().getCode().name();
-        return (authorizedScopeForPageList.contains(scope))? true : false;
+        return authorizedScopeForPageList.contains(scope) ? true : false;
     }
 
     @Autowired
@@ -288,27 +278,6 @@ public abstract class AuditDataHandlerController extends AbstractController {
             }
             throw new ForbiddenUserException(getCurrentUser());
         }
-    }
-
-    /**
-     * This methods checks whether the current user is allowed to display the
-     * audit set-up for a given contract. To do so, we verify that the contract
-     * belongs to the current user.
-     * 
-     * @param user
-     * @param webresourceId
-     * @return
-     *      true if the user is allowed to display the result, false otherwise.
-     */
-    protected boolean isUserAllowedToDisplaySetUpPage(Contract contract) {
-        if (contract == null) {
-            throw new ForbiddenUserException(getCurrentUser());
-        }
-        User user = getCurrentUser();
-        if (!contract.getUser().getId().equals(user.getId())) {
-            throw new ForbiddenUserException(getCurrentUser());
-        }
-        return true;
     }
 
     /**

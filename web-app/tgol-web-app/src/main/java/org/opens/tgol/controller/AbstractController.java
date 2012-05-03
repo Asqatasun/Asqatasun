@@ -21,6 +21,7 @@
  */
 package org.opens.tgol.controller;
 
+import java.text.SimpleDateFormat;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.service.contract.ContractDataService;
 import org.opens.tgol.entity.service.user.UserDataService;
@@ -163,7 +164,6 @@ public abstract class AbstractController {
                     DetailedContractInfoFactory.getInstance().getDetailedContractInfo(contract));
         model.addAttribute(TgolKeyStore.IS_CONTRACT_EXPIRED_KEY,
                 isContractExpired(contract));
-        model.addAttribute(TgolKeyStore.BREAD_CRUMB_KEY, HomeController.buildBreadCrumb());
         return TgolKeyStore.CONTRACT_VIEW_NAME;
     }
 

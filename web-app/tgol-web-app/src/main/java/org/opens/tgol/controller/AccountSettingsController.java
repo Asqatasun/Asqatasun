@@ -21,11 +21,11 @@
  */
 package org.opens.tgol.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import org.opens.tgol.command.UserSignUpCommand;
 import org.opens.tgol.entity.user.User;
 import org.opens.tgol.util.TgolKeyStore;
 import org.opens.tgol.validator.SignUpFormValidator;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,7 +61,6 @@ public class AccountSettingsController extends AbstractController {
     public String setAccountSettingsPagePage(Model model) {
         model.addAttribute(TgolKeyStore.USER_SIGN_UP_COMMAND_KEY,
                 getInitialisedUserSignUpCommand());
-        model.addAttribute(TgolKeyStore.BREAD_CRUMB_KEY, HomeController.buildBreadCrumb());
         model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
         return TgolKeyStore.ACCOUNT_SETTINGS_VIEW_NAME;
     }
@@ -95,7 +94,6 @@ public class AccountSettingsController extends AbstractController {
         }
         updateUserData(userSignUpCommand);
         model.addAttribute(TgolKeyStore.ACCOUNT_DATA_UPDATED_KEY, true);
-        model.addAttribute(TgolKeyStore.BREAD_CRUMB_KEY, HomeController.buildBreadCrumb());
         model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
         return TgolKeyStore.ACCOUNT_SETTINGS_VIEW_NAME;
     }

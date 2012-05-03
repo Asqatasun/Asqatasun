@@ -22,11 +22,6 @@
 package org.opens.tgol.controller;
 
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
-import org.opens.tgol.entity.user.User;
-import org.opens.tgol.presentation.data.AuditStatistics;
-import org.opens.tgol.presentation.data.TestResult;
-import org.opens.tgol.presentation.factory.TestResultFactory;
-import org.opens.tgol.util.TgolKeyStore;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -40,8 +35,14 @@ import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tgol.entity.user.User;
+import org.opens.tgol.exception.ForbiddenUserException;
+import org.opens.tgol.presentation.data.AuditStatistics;
+import org.opens.tgol.presentation.data.TestResult;
+import org.opens.tgol.presentation.factory.TestResultFactory;
 import org.opens.tgol.report.service.ExportService;
 import org.opens.tgol.report.service.exception.NotSupportedExportFormatException;
+import org.opens.tgol.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -92,8 +93,13 @@ public class AuditExportResultController extends AuditDataHandlerController {
         User user = getCurrentUser();
         //We first check that the current user is allowed to display the result
         //of this audit
-        Long wrId = Long.valueOf(webresourceId);
-        WebResource webResource = getWebResourceDataService().ligthRead(wrId);
+        Long webResourceIdValue;
+        try {
+            webResourceIdValue = Long.valueOf(webresourceId);
+        } catch (NumberFormatException nfe) {
+            throw new ForbiddenUserException(getCurrentUser());
+        }
+        WebResource webResource = getWebResourceDataService().ligthRead(webResourceIdValue);
         if (isUserAllowedToDisplayResult(user,webResource) || (webResource!=null && webResource instanceof Site) ) {
             if (webResource != null) {
                 // If the Id given in argument correspond to a webResource,
@@ -147,7 +153,7 @@ public class AuditExportResultController extends AuditDataHandlerController {
         model.addAttribute(TgolKeyStore.LOCALE_KEY,locale);
         boolean hasSourceCodeWithDoctype = false;
         if (webResource instanceof Page) {
-            SSP ssp = null;
+            SSP ssp;
             try {
                 ssp = getContentDataService().findSSP(webResource, webResource.getURL());
                 if (ssp.getDoctype() != null && !ssp.getDoctype().trim().isEmpty()) {

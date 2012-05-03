@@ -35,7 +35,8 @@ import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tgol.command.AuditSetUpCommand;
 import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.option.Option;
+import org.opens.tgol.entity.contract.ScopeEnum;
+import org.opens.tgol.entity.option.OptionElement;
 import org.opens.tgol.exception.LostInSpaceException;
 import org.opens.tgol.orchestrator.TanaguruOrchestrator;
 import org.opens.tgol.util.HttpStatusCodeFamily;
@@ -53,6 +54,7 @@ import org.springframework.ui.Model;
 public class AuditLauncherController extends AuditDataHandlerController {
 
     private static final Logger LOGGER = Logger.getLogger(AuditLauncherController.class);
+    private static String LEVEL_PARAM_KEY="LEVEL";
     private static String PROXY_HOST_PARAM_KEY="PROXY_HOST";
     private static String PROXY_PORT_PARAM_KEY="PROXY_PORT";
     private static String DEPTH_PARAM_KEY="DEPTH";
@@ -159,17 +161,20 @@ public class AuditLauncherController extends AuditDataHandlerController {
             if (!checkResult.equalsIgnoreCase(TgolKeyStore.ACT_ALLOWED)) {
                 return checkResult;
             }
-            if (auditSetUpCommand != null && !auditSetUpCommand.isAuditSite()) {
-                return preparePageAudit(auditSetUpCommand, contract, locale, model);
+            ScopeEnum auditScope = auditSetUpCommand.getScope();
+            if (auditScope.equals(ScopeEnum.PAGE) ||
+                    auditScope.equals(ScopeEnum.FILE)) {
+                return preparePageAudit(auditSetUpCommand, contract, locale, auditScope,model);
             }
+            String url = getContractDataService().getUrlFromContractOption(contract);
             tanaguruExecutor.auditSite(
                     contract,
-                    contract.getUrl(),
+                    url,
                     getClientIpAddress(),
-                    getUserParamSet(auditSetUpCommand, contract.getId(),-1,contract.getUrl()),
+                    getUserParamSet(auditSetUpCommand, contract.getId(),-1,url),
                     locale
                     );
-            model.addAttribute(TgolKeyStore.TESTED_URL_KEY, contract.getUrl());
+            model.addAttribute(TgolKeyStore.TESTED_URL_KEY, url);
             model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
             model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
             model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
@@ -181,9 +186,10 @@ public class AuditLauncherController extends AuditDataHandlerController {
      * This methods controls the validity of the form and launch an audit with
      * values populated by the user. In case of audit failure, an appropriate
      * message is displayed
-     * @param auditSetUpCommand
+     * @param pageAuditSetUpCommand
      * @param contract
      * @param locale
+     * @param auditScope
      * @param model
      * @return
      */
@@ -191,18 +197,21 @@ public class AuditLauncherController extends AuditDataHandlerController {
             final AuditSetUpCommand auditSetUpCommand,
             final Contract contract,
             final Locale locale,
+            final ScopeEnum auditScope,
             Model model) {
         Audit audit;
         boolean isPageAudit = true;
         // if the form is correct, we launch the audit
-        if (auditSetUpCommand.getUrlList().isEmpty()) {
+        if (auditScope.equals(ScopeEnum.FILE)) {
             audit = launchUploadAudit(contract, auditSetUpCommand, locale);
             isPageAudit = false;
         } else {
             audit = launchPageAudit(contract,auditSetUpCommand, locale);
         }
+        // if the audit lasted more than expected, we return a "audit in progress"
+        // page and send an email when it's ready
         if (audit == null) {
-            model.addAttribute(TgolKeyStore.TESTED_URL_KEY, contract.getUrl());
+            model.addAttribute(TgolKeyStore.TESTED_URL_KEY, getContractDataService().getUrlFromContractOption(contract));
             model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
             model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
             model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
@@ -337,7 +346,11 @@ public class AuditLauncherController extends AuditDataHandlerController {
         Set<Parameter> paramSet = getDefaultParamSet();
         Set<Parameter> userParamSet = new HashSet<Parameter>();
         if (auditSetUpCommand != null) {
-            if (!auditSetUpCommand.isAuditSite()) {
+            
+            // The default parameter set corresponds to a site audit
+            // If the launched audit is of any other type, we retrieve another 
+            // parameter set 
+            if (!auditSetUpCommand.getScope().equals(ScopeEnum.DOMAIN)) {
                 paramSet = getParameterDataService().updateParameterSet(paramSet, getAuditPageParameterSet(nbOfPages));
             }
             for (Map.Entry<String, String> entry : auditSetUpCommand.getAuditParameter().entrySet()) {
@@ -346,13 +359,13 @@ public class AuditLauncherController extends AuditDataHandlerController {
             }
             paramSet = getParameterDataService().updateParameterSet(paramSet, userParamSet);
         } else {
-            Set<? extends Option> optionSet =
-                    getContractDataService().read(contractId).getOptionSet();
+            Set<? extends OptionElement> optionElementSet =
+                    getContractDataService().read(contractId).getOptionElementSet();
             for (Parameter param : paramSet) {
-                for (Option option : optionSet) {
-                    if (option.getOptionElement().getCode().
+                for (OptionElement optionElement : optionElementSet) {
+                    if (optionElement.getOption().getCode().
                             equalsIgnoreCase(param.getParameterElement().getParameterElementCode())) {
-                        param = getParameterDataService().getParameter(param.getParameterElement(), option.getValue());
+                        param = getParameterDataService().getParameter(param.getParameterElement(), optionElement.getValue());
                         break;
                     }
                 }
@@ -361,9 +374,24 @@ public class AuditLauncherController extends AuditDataHandlerController {
             paramSet = getParameterDataService().updateParameterSet(paramSet, userParamSet);
         }
         paramSet = setProxyParameters(paramSet, url);
+        paramSet = setLevelParameter(paramSet, auditSetUpCommand.getLevel());
         return paramSet;
     }
 
+    /**
+     * 
+     * @param paramSet
+     * @param url
+     * @return 
+     */
+    private Set<Parameter> setLevelParameter(Set<Parameter> paramSet, String level) {
+        ParameterElement levelParameterElement =
+                parameterElementDataService.getParameterElement(LEVEL_PARAM_KEY);
+        Parameter levelParameter = getParameterDataService().getParameter(levelParameterElement, level);
+        paramSet = getParameterDataService().updateParameter(paramSet, levelParameter);
+        return paramSet;
+    }
+    
     /**
      * 
      * @param paramSet

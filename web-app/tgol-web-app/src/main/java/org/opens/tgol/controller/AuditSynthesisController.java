@@ -108,7 +108,12 @@ public class AuditSynthesisController extends AuditDataHandlerController {
             Model model) {
         User user = getCurrentUser();
         model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, user);
-        Long wrId = Long.valueOf(webResourceId);
+        Long wrId;
+        try {
+            wrId = Long.valueOf(webResourceId);
+        } catch (NumberFormatException nfe) {
+            throw new ForbiddenUserException(user);
+        }
         WebResource webResource = getWebResourceDataService().ligthRead(
                 Long.valueOf(wrId));
         if (isUserAllowedToDisplayResult(user, webResource)) {

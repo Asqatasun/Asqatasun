@@ -98,6 +98,15 @@ public class AuditResultController extends AuditDataHandlerController {
         this.testResultSortKey = testResultSortKey;
     }
 
+    private String referentialCode = "referential";
+    public String getReferentialCode() {
+        return referentialCode;
+    }
+
+    public void setReferentialCode(String referentialCode) {
+        this.referentialCode = referentialCode;
+    }
+    
     public AuditResultController() {
         super();
     }
@@ -113,7 +122,13 @@ public class AuditResultController extends AuditDataHandlerController {
             @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
             HttpServletRequest request,
             Model model) {
-        return dispatchDisplayResultRequest(Long.valueOf(webresourceId), null, model, request);
+        Long webResourceIdValue;
+        try {
+            webResourceIdValue = Long.valueOf(webresourceId);
+        } catch (NumberFormatException nfe) {
+            throw new ForbiddenUserException(getCurrentUser());
+        }
+        return dispatchDisplayResultRequest(webResourceIdValue, null, model, request);
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -123,7 +138,6 @@ public class AuditResultController extends AuditDataHandlerController {
             BindingResult result,
             Model model,
             HttpServletRequest request) {
-
         return dispatchDisplayResultRequest(
                 auditResultSortCommand.getWebResourceId(),
                 auditResultSortCommand,
@@ -140,7 +154,12 @@ public class AuditResultController extends AuditDataHandlerController {
             Model model) {
         User user = getCurrentUser();
         model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY,user);
-        WebResource webResource = getWebResourceDataService().ligthRead(Long.valueOf(webresourceId));
+        WebResource webResource;
+        try {
+            webResource = getWebResourceDataService().ligthRead(Long.valueOf(webresourceId));
+        } catch (NumberFormatException nfe) {
+            throw new ForbiddenUserException(user);
+        }
         if (isUserAllowedToDisplayResult(user,webResource) && webResource instanceof Page) {
             Page page = (Page)webResource;
             hasSourceCodeWithDoctype = false;
@@ -161,6 +180,16 @@ public class AuditResultController extends AuditDataHandlerController {
         }
     }
 
+    /**
+     * Regarding the page type, this method collects data, set them up and 
+     * display the appropriate result page.
+     * 
+     * @param webResourceId
+     * @param auditResultSortCommand
+     * @param model
+     * @param request
+     * @return 
+     */
     private String dispatchDisplayResultRequest(
             Long webResourceId,
             AuditResultSortCommand auditResultSortCommand,
@@ -171,28 +200,18 @@ public class AuditResultController extends AuditDataHandlerController {
         //We first check that the current user is allowed to display the result
         //of this audit
         WebResource webResource = getWebResourceDataService().ligthRead(webResourceId);
+        // If the Id given in argument correspond to a webResource,
+            // data are retrieved to be prepared and displayed
         if (isUserAllowedToDisplayResult(user,webResource)) {
             this.callGc(webResource);
-            // If the Id given in argument correspond to a webResource,
-            // data are retrieved to be prepared and displayed
+           
+            // first we add statistics meta-data to model 
             addAuditStatisticsToModel(webResource, model);
-            AuditStatistics auditStatistics = ((AuditStatistics)model.asMap().get(TgolKeyStore.STATISTICS_KEY));
-            String referentialParameter = auditStatistics.getParametersMap().get("referential");
-            AuditResultSortCommand asuc;
-            List<FormField> formFieldList;
-            if (auditResultSortCommand == null) {
-                formFieldList = AuditResultSortCommandFactory.getInstance().
-                    getFormFieldBuilderCopy(referentialParameter, sortFormFieldBuilderList);
-                asuc = AuditResultSortCommandFactory.getInstance().getInitialisedAuditResultSortCommand(
-                            webResourceId,
-                            formFieldList);
-            } else {
-                formFieldList = AuditResultSortCommandFactory.getInstance().
-                    getFormFieldBuilderCopy(referentialParameter, sortFormFieldBuilderList, auditResultSortCommand);
-                asuc = auditResultSortCommand;
-            }
-            model.addAttribute(TgolKeyStore.AUDIT_RESULT_SORT_FIELD_LIST_KEY, formFieldList);
-            model.addAttribute(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY, asuc);
+            
+            // The page is displayed with sort option. Form needs to be set up
+            prepareDataForSortConsole(webResourceId, auditResultSortCommand, model);
+            
+            // Data need to be prepared regarding the audit type
             return prepareSuccessfullAuditData(
                     webResource,
                     model,
@@ -203,6 +222,36 @@ public class AuditResultController extends AuditDataHandlerController {
     }
 
     /**
+     * This method prepares the data to be displayed in the sort 
+     * (referential, theme, result types) console of the result page.
+     */
+    private void prepareDataForSortConsole(
+            Long webResourceId, 
+            AuditResultSortCommand auditResultSortCommand, 
+            Model model) {
+        // Meta-statistics have been added to the method previously
+        String referentialParameter = 
+                    ((AuditStatistics)model.asMap().get(TgolKeyStore.STATISTICS_KEY)).
+                        getParametersMap().get(referentialCode);
+        AuditResultSortCommand asuc;
+        List<FormField> formFieldList;
+        if (auditResultSortCommand == null) {
+            formFieldList = AuditResultSortCommandFactory.getInstance().
+                getFormFieldBuilderCopy(referentialParameter, sortFormFieldBuilderList);
+            asuc = AuditResultSortCommandFactory.getInstance().getInitialisedAuditResultSortCommand(
+                        webResourceId,
+                        formFieldList);
+        } else {
+            formFieldList = AuditResultSortCommandFactory.getInstance().
+                getFormFieldBuilderCopy(referentialParameter, sortFormFieldBuilderList, auditResultSortCommand);
+            asuc = auditResultSortCommand;
+        }
+        model.addAttribute(TgolKeyStore.AUDIT_RESULT_SORT_FIELD_LIST_KEY, formFieldList);
+        model.addAttribute(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY, asuc);
+    }
+    
+    /**
+     * Regarding the audit type, collect data needed by the view.
      * 
      * @param webResource
      * @param model
@@ -229,7 +278,7 @@ public class AuditResultController extends AuditDataHandlerController {
     }
 
     /**
-     * This methods handles audit data in case of the audit is
+     * This methods handles audit data in case of the audit is of site type
      * @param site
      * @param model
      * @return
@@ -255,7 +304,7 @@ public class AuditResultController extends AuditDataHandlerController {
     }
 
     /**
-     *
+     * This methods handles audit data in case of the audit is of page type
      * @param page
      * @param model
      * @return

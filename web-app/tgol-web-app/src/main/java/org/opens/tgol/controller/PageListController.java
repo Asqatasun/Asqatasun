@@ -21,10 +21,6 @@
  */
 package org.opens.tgol.controller;
 
-import org.opens.tgol.util.HttpStatusCodeFamily;
-import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.user.User;
-import org.opens.tgol.util.TgolKeyStore;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +28,11 @@ import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.entity.user.User;
 import org.opens.tgol.report.pagination.factory.TgolPaginatedListFactory;
+import org.opens.tgol.util.HttpStatusCodeFamily;
+import org.opens.tgol.util.TgolKeyStore;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,6 +80,8 @@ public class PageListController extends AuditDataHandlerController{
         if (isUserAllowedToDisplayResult(user,webResource)) {
             return pageLinkDispatcher(request, webResource, model);
         } else {
+            // this block can never be reached. the "isUserAllowedToDisplayResult"
+            // method returns true or throws an exception
             return TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
         }
     }

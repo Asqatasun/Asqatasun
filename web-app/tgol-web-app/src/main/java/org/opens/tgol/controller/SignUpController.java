@@ -21,23 +21,23 @@
  */
 package org.opens.tgol.controller;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import javax.servlet.http.HttpServletRequest;
+import org.opens.tanaguru.util.MD5Encoder;
 import org.opens.tgol.command.UserSignUpCommand;
 import org.opens.tgol.emailsender.EmailSender;
 import org.opens.tgol.entity.service.user.RoleDataService;
 import org.opens.tgol.entity.user.Role;
 import org.opens.tgol.entity.user.User;
 import org.opens.tgol.util.TgolKeyStore;
-import org.opens.tgol.validator.SignUpFormValidator;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import javax.servlet.http.HttpServletRequest;
-import org.opens.tanaguru.util.MD5Encoder;
 import org.opens.tgol.util.webapp.ExposablePropertyPlaceholderConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,10 +49,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class SignUpController extends AbstractController {
 
-    private static final String EMAIL_FROM_KEY="emailFrom";
-    private static final String EMAIL_TO_KEY="emailTo";
-    private static final String EMAIL_SUBJECT_KEY="emailSubject";
-    private static final String EMAIL_CONTENT_KEY="emailContent";
+    public static final String EMAIL_FROM_KEY="emailFrom";
+    public static final String EMAIL_TO_KEY="emailTo";
+    public static final String EMAIL_SUBJECT_KEY="emailSubject";
+    public static final String EMAIL_CONTENT_KEY="emailContent";
     private static final String URL_KEY="#urlToTest";
     private static final String EMAIL_KEY="#email";
     private static final String FIRST_NAME_KEY="#firstName";
@@ -60,9 +60,9 @@ public class SignUpController extends AbstractController {
     private static final Long USER_ROLE_ID=Long.valueOf("2");
     private static final String PHONE_NUMBER_KEY="#phoneNumber";
 
-    private SignUpFormValidator signUpFormValidator;
+    private Validator signUpFormValidator;
     @Autowired
-    public final void setSignUpFormValidator(SignUpFormValidator signUpFormValidator) {
+    public final void setSignUpFormValidator(Validator signUpFormValidator) {
         this.signUpFormValidator = signUpFormValidator;
     }
 
@@ -127,10 +127,10 @@ public class SignUpController extends AbstractController {
         if (result.hasErrors()) {
             return displayFormWithErrors(
                     model,
-                    userSignUpCommand,
-                    request);
+                    userSignUpCommand);
         }
-        sendEmailInscription(createAndSaveUserFromFromData(userSignUpCommand));
+        User user = createAndSaveUserFromFromData(userSignUpCommand);
+        sendEmailInscription(user);
         return TgolKeyStore.SIGN_UP_CONFIRMATION_VIEW_REDIRECT_NAME;
     }
 
@@ -143,7 +143,7 @@ public class SignUpController extends AbstractController {
     public String setUpSignUpConfirmationPage(Model model) {
         model.addAttribute(TgolKeyStore.USER_SIGN_UP_COMMAND_KEY,
                 new UserSignUpCommand());
-         return TgolKeyStore.SIGN_UP_CONFIRMATION_VIEW_NAME;
+        return TgolKeyStore.SIGN_UP_CONFIRMATION_VIEW_NAME;
     }
 
     /**
@@ -155,9 +155,7 @@ public class SignUpController extends AbstractController {
      */
     private String displayFormWithErrors(
             Model model,
-            UserSignUpCommand userSignUpCommand,
-            HttpServletRequest request) {
-        
+            UserSignUpCommand userSignUpCommand) {
         model.addAttribute(TgolKeyStore.USER_SIGN_UP_COMMAND_KEY,
                 userSignUpCommand);
         return TgolKeyStore.SIGN_UP_VIEW_NAME;
