@@ -26,9 +26,6 @@
     <bean id="roleDAO" class="org.opens.tgol.entity.dao.user.RoleDAOImpl"/>
     <bean id="roleFactory" class="org.opens.tgol.entity.factory.user.RoleFactoryImpl"/>
 
-    <bean id="productDAO" class="org.opens.tgol.entity.dao.product.ProductDAOImpl"/>
-    <bean id="productFactory" class="org.opens.tgol.entity.factory.product.ProductFactoryImpl"/>
-
     <bean id="webResourceFactory" class="org.opens.tanaguru.entity.factory.subject.WebResourceFactoryImpl"/>
     <bean id="webResourceDAO" class="org.opens.tanaguru.entity.dao.subject.WebResourceDAOImpl"/>
 
