@@ -16,7 +16,6 @@
     <name>tgol-web-app</name>
     <url>http://www.tanaguru.org</url>
     <dependencies>
-
         <!-- tgol dependencies-->
         <dependency>
             <groupId>${webappGroupId}</groupId>
@@ -166,6 +165,12 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>3.1.0.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
 
         <!-- hibernate dependencies -->
         <dependency>
@@ -218,6 +223,11 @@
             <groupId>com.googlecode.htmlcompressor</groupId>
             <artifactId>htmlcompressor</artifactId>
             <version>1.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+<!--            <version>1.8.0.10</version>-->
         </dependency>
     </dependencies>
     <build>
