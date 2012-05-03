@@ -21,13 +21,13 @@
  */
 package org.opens.tgol.command;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import org.opens.tanaguru.crawler.util.CrawlUtils;
+import org.opens.tgol.command.helper.UploadAuditSetUpCommandHelper;
+import org.opens.tgol.entity.contract.ScopeEnum;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 /**
@@ -38,37 +38,7 @@ public class AuditSetUpCommand implements Serializable {
 
     private static final long serialVersionUID = -5390331731974450559L;
     public static final int DEFAULT_LIST_SIZE = 10;
-    /**
-     * Local Map to deal with uploaded files with the same name
-     */
-    private Map<String, Integer> fileNameCounterMap = new HashMap<String, Integer>();
-    private Map<String, String> auditParameter = new HashMap<String, String>();
-
-    public Map<String, String> getAuditParameter() {
-        return auditParameter;
-    }
-
-    public void addAuditParameterEntry(String key, String value) {
-        auditParameter.put(key, value);
-    }
-    private Long contractId;
-
-    public Long getContractId() {
-        return contractId;
-    }
-
-    public void setContractId(Long contractId) {
-        this.contractId = contractId;
-    }
-    private boolean isDefaultParamSet;
-
-    public boolean isDefaultParamSet() {
-        return isDefaultParamSet;
-    }
-
-    public void setIsDefaultParamSet(boolean isDefaultParamSet) {
-        this.isDefaultParamSet = isDefaultParamSet;
-    }
+    
     /**
      * General error message in case of invalid form
      */
@@ -77,9 +47,74 @@ public class AuditSetUpCommand implements Serializable {
     public String getGeneralErrorMsg() {
         return generalErrorMsg;
     }
+    
+    /**
+     * The map that handles the audit parameters (except the level parameter)
+     */
+    private Map<String, String> auditParameterMap = new HashMap<String, String>();
+    public Map<String, String> getAuditParameter() {
+        return auditParameterMap;
+    }
+
+    public void setAuditParameter(String key, String value) {
+        auditParameterMap.put(key, value);
+    }
+    
+    public void addAuditParameterEntry(String key, String value) {
+        auditParameterMap.put(key, value);
+    }
 
     /**
-     * List of urls to test
+     * The id of the current contract
+     */
+    private Long contractId;
+    public Long getContractId() {
+        return contractId;
+    }
+
+    public void setContractId(Long contractId) {
+        this.contractId = contractId;
+    }
+
+    /**
+     * Flag that indicates if this AuditSetUpCommand instance is set-up with 
+     * the default parameter set (Usefull to display a specific message).
+     */
+    private boolean isDefaultParamSet;
+    public boolean isDefaultParamSet() {
+        return isDefaultParamSet;
+    }
+
+    public void setDefaultParamSet(boolean isDefaultParamSet) {
+        this.isDefaultParamSet = isDefaultParamSet;
+    }
+
+    /**
+     * Value of the level;
+     */
+    private String level;
+    public String getLevel() {
+        return level;
+    }
+    
+    public void setLevel(String level) {
+        this.level=level;
+    }
+    
+    /**
+     * Value of the level;
+     */
+    private ScopeEnum scope;
+    public ScopeEnum getScope() {
+        return scope;
+    }
+    
+    public void setScope(ScopeEnum scope) {
+        this.scope = scope;
+    }
+    
+    /**
+     * List of urls to test (only needed when scope = ScopeEnum.PAGES)
      */
     private List<String> urlList = new LinkedList<String>();
     public List<String> getUrlList() {
@@ -92,21 +127,19 @@ public class AuditSetUpCommand implements Serializable {
             this.urlList.add(new String());
         }
     }
-
+    
     /**
-     * Map of uploaded files
+     * Map of uploaded files (only needed when scope = ScopeEnum.UPLOAD)
      */
-    private Map<String, String> fileMap = new HashMap<String, String>();
-
     public Map<String, String> getFileMap() {
-        return fileMap;
+        return UploadAuditSetUpCommandHelper.convertFilesToMap(fileInputList);
     }
 
     /**
      * Tab of CommonsMultipartFile filled-in by the user
+     * (only needed when scope = ScopeEnum.UPLOAD)
      */
     private CommonsMultipartFile[] fileInputList = null;
-
     public CommonsMultipartFile[] getFileInputList() {
         if (fileInputList == null) {
             fileInputList = new CommonsMultipartFile[DEFAULT_LIST_SIZE];
@@ -117,80 +150,10 @@ public class AuditSetUpCommand implements Serializable {
     public void setFileInputList(final CommonsMultipartFile[] fileInputList) {
         this.fileInputList = fileInputList.clone();
     }
-
-    /**
-     * boolean that indicates if the audit scope is of site.
-     */
-    private boolean auditSite = false;
-
-    public boolean isAuditSite() {
-        return auditSite;
-    }
-
-    public void setAuditSite(boolean auditSite) {
-        this.auditSite = auditSite;
-    }
-
-    /**
-     * boolean that indicates if the audit target is online or uploaded.
-     */
-    private boolean uploadAudit = false;
-
-    public boolean isUploadAudit() {
-        return uploadAudit;
-    }
-
-    public void setUploadAudit(boolean uploadAudit) {
-        this.uploadAudit = uploadAudit;
-    }
-
+    
     /**
      * Default constructor
      */
-    public AuditSetUpCommand() {
-    }
-
-    /**
-     * This method converts the uploaded files into a map where the key is the
-     * file name and the value is the file content.
-     */
-    public void convertFilesToMap() {
-        CommonsMultipartFile tmpMultiFile;
-        String tmpCharset;
-        for (int i = 0; i < getFileInputList().length; i++) {
-            tmpMultiFile = getFileInputList()[i];
-            try {
-                if (tmpMultiFile != null && !tmpMultiFile.isEmpty() && tmpMultiFile.getInputStream() != null) {
-                    tmpCharset = CrawlUtils.extractCharset(tmpMultiFile.getInputStream());
-                    fileMap.put(
-                            getFileName(tmpMultiFile.getOriginalFilename()),
-                            tmpMultiFile.getFileItem().getString(tmpCharset));
-                }
-            } catch (IOException e) {}
-        }
-    }
-
-    /**
-     * This method formats the file name of the uploaded file (prefix by "/")
-     * and suffix files with the same name with an index.
-     *
-     * @param originalFileName
-     * @return
-     */
-    private String getFileName(String originalFileName){
-        StringBuilder fileName = new StringBuilder();
-        fileName.append('/');
-        if (fileNameCounterMap.containsKey(originalFileName)){
-            fileNameCounterMap.put(originalFileName, Integer.valueOf(fileNameCounterMap.get(originalFileName)+1));
-            fileName.append(originalFileName);
-            fileName.append('_');
-            fileName.append(fileNameCounterMap.get(originalFileName));
-            return fileName.toString();
-        } else {
-            fileNameCounterMap.put(originalFileName, Integer.valueOf(1));
-            fileName.append(originalFileName);
-            return fileName.toString();
-        }
-    }
+    public AuditSetUpCommand() {}
 
 }

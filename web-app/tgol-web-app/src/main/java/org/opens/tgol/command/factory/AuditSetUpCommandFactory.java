@@ -21,21 +21,23 @@
  */
 package org.opens.tgol.command.factory;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.opens.tanaguru.entity.parameterization.ParameterElement;
+import org.opens.tanaguru.entity.service.parameterization.ParameterElementDataService;
 import org.opens.tgol.command.AuditSetUpCommand;
 import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.entity.contract.ScopeEnum;
 import org.opens.tgol.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
-import org.opens.tgol.entity.option.Option;
-import org.opens.tgol.entity.option.OptionImpl;
-import org.opens.tgol.entity.product.ScopeEnum;
+import org.opens.tgol.entity.service.contract.ContractDataService;
 import org.opens.tgol.entity.user.User;
 import org.opens.tgol.form.NumericalFormField;
-import org.opens.tgol.form.SelectElement;
 import org.opens.tgol.form.SelectFormField;
-import org.opens.tgol.form.TextualFormField;
 import org.opens.tgol.form.parameterization.AuditSetUpFormField;
-import org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl;
+import org.opens.tgol.form.parameterization.helper.AuditSetUpFormFieldHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -45,6 +47,28 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
  */
 public final class AuditSetUpCommandFactory {
 
+    /**
+     * The code that identified the level Parameter
+     */
+    private String levelParameterCode = "LEVEL";
+    public String getLevelParameterCode() {
+        return levelParameterCode;
+    }
+
+    public void setLevelParameterCode(String levelParameterCode) {
+        this.levelParameterCode = levelParameterCode;
+    }
+    
+    /**
+     * 
+     */
+    public ParameterElement getLevelParameterElement() {
+        return parameterElementDataService.getParameterElement(levelParameterCode);
+    }
+
+    /**
+     * 
+     */
     private ParameterDataServiceDecorator parameterDataService;
     public ParameterDataServiceDecorator getParameterDataService() {
         return parameterDataService;
@@ -54,13 +78,43 @@ public final class AuditSetUpCommandFactory {
     public void setParameterDataService(ParameterDataServiceDecorator parameterDataService) {
         this.parameterDataService = parameterDataService;
     }
+    
+    /**
+     * 
+     */
+    private ParameterElementDataService parameterElementDataService;
+    public ParameterElementDataService getParameterElementDataService() {
+        return parameterElementDataService;
+    }
 
+    @Autowired
+    public void setParameterElementDataService(ParameterElementDataService parameterElementDataService) {
+        this.parameterElementDataService = parameterElementDataService;
+    }
+    
+    /**
+     * 
+     */
+    private ContractDataService contractDataService;
+    public ContractDataService getContractDataService() {
+        return contractDataService;
+    }
+
+    @Autowired
+    public void setContractDataService(ContractDataService contractDataService) {
+        this.contractDataService = contractDataService;
+    }
+    
+    /**
+     * The static instance 
+     */
     private static AuditSetUpCommandFactory auditSetUpCommandFactory;
 
     /**
      * Factory has default constructor
      */
-    private AuditSetUpCommandFactory(){}
+    private AuditSetUpCommandFactory() {
+    }
 
     public static synchronized AuditSetUpCommandFactory getInstance() {
         if (auditSetUpCommandFactory == null) {
@@ -68,89 +122,160 @@ public final class AuditSetUpCommandFactory {
         }
         return auditSetUpCommandFactory;
     }
-    
+
     /**
-     * Return a initialised auditCommand object for the given contract. This object
-     * handles the last values selected by the user
-     * 
+     *
+     * @param contract
+     * @param optionalFormFieldMap
+     * @return
+     */
+    public AuditSetUpCommand getPageAuditSetUpCommand(
+            Contract contract,
+            List<SelectFormField> levelFormFieldList,
+            Map<String, List<AuditSetUpFormField>> optionalFormFieldMap) {
+        AuditSetUpCommand pageAuditSetUpCommand = new AuditSetUpCommand();
+        pageAuditSetUpCommand.setScope(ScopeEnum.PAGE);
+        pageAuditSetUpCommand.setUrlList(getGroupOfPagesUrl(contract));
+        setUpAuditSetUpCommand(
+                pageAuditSetUpCommand,
+                contract,
+                levelFormFieldList,
+                optionalFormFieldMap,
+                false);
+        return pageAuditSetUpCommand;
+    }
+
+    /**
+     *
+     * @param contract
+     * @param levelFormFieldList
+     * @param optionalFormFieldMap
+     * @return
+     */
+    public AuditSetUpCommand getUploadAuditSetUpCommand(
+            Contract contract,
+            List<SelectFormField> levelFormFieldList,
+            Map<String, List<AuditSetUpFormField>> optionalFormFieldMap) {
+        AuditSetUpCommand uploadAuditSetUpCommand = new AuditSetUpCommand();
+        uploadAuditSetUpCommand.setScope(ScopeEnum.FILE);
+        uploadAuditSetUpCommand.setFileInputList(getGroupOfFileInput(contract));
+        setUpAuditSetUpCommand(
+                uploadAuditSetUpCommand,
+                contract,
+                levelFormFieldList,
+                optionalFormFieldMap,
+                false);
+        return uploadAuditSetUpCommand;
+    }
+
+    /**
+     *
+     * @param contract
+     * @param levelFormFieldList
+     * @param optionalFormFieldMap
+     * @return
+     */
+    public AuditSetUpCommand getSiteAuditSetUpCommand(
+            Contract contract,
+            List<SelectFormField> levelFormFieldList,
+            Map<String, List<AuditSetUpFormField>> optionalFormFieldMap) {
+        AuditSetUpCommand siteAuditSetUpCommand = new AuditSetUpCommand();
+        siteAuditSetUpCommand.setScope(ScopeEnum.DOMAIN);
+        setUpAuditSetUpCommand(
+                siteAuditSetUpCommand,
+                contract,
+                levelFormFieldList,
+                optionalFormFieldMap,
+                true);
+        return siteAuditSetUpCommand;
+    }
+
+    /**
+     * Return a initialised auditCommand object for the given contract. This
+     * object contains a map that associates a Parameter and a value (handled by
+     * the AuditSetUpFormField). Each value is preset regarding the
+     *
      * @param contract
      * @param auditSetUpFormFieldList
      * @param auditSite
      * @return
      */
-    public AuditSetUpCommand getInitialisedAuditCommand (
+    private synchronized void setUpAuditSetUpCommand(
+            AuditSetUpCommand auditSetUpCommand,
             Contract contract,
-            Map<String, List<AuditSetUpFormField>> parametersMap,
-            boolean isAuditSite,
-            boolean isUploadAudit,
-            boolean isGuestUser) {
-        AuditSetUpCommand auditSetUpCommand = new AuditSetUpCommand();
-        auditSetUpCommand.setAuditSite(isAuditSite);
-        auditSetUpCommand.setUploadAudit(isUploadAudit);
+            List<SelectFormField> levelFormFieldList,
+            Map<String, List<AuditSetUpFormField>> optionalFormFieldMap,
+            boolean isAuditSite) {
+
+        // the auditSetCommand instance handles the id of the current contract
+        auditSetUpCommand.setContractId(contract.getId());
+
         boolean isDefaultSet = true;
         if (!isAuditSite) {
-            if (isUploadAudit) {
-                auditSetUpCommand.setFileInputList(getGroupOfFileInput(contract));
-            } else {
-                auditSetUpCommand.setUrlList(getGroupOfPagesUrl(contract, isGuestUser));
-            }
-            // the default set is about site audit. If the audit is a page audit
-            // by defintion, the parameter set is not default
+            // the default parameter corresponds by default to the site audit 
+            // parameter set. If the audit is a page audit by definition, 
+            // the parameter set is not set as default
             isDefaultSet = false;
         }
-        auditSetUpCommand.setContractId(contract.getId());
-        String defaultValue;
-        String lastUserValue;
-        for (List<AuditSetUpFormField> apl : parametersMap.values()) {
+
+        // Set-up the audit level value to the auditSetUpCommand instance
+        auditSetUpCommand.setLevel(
+                extractLevelValueFromAuditSetUpFormFieldList(contract, isAuditSite, levelFormFieldList));
+        
+        // We set here the default value for each AuditSetUpFormField
+        // If the parameter associated with the AuditSetUpFormField defines 
+        // a different value as the default one, we override it 
+        for (List<AuditSetUpFormField> apl : optionalFormFieldMap.values()) {
             for (AuditSetUpFormField ap : apl) {
-                defaultValue = getParameterDataService().
-                        getDefaultParameter(ap.getParameterElement()).getValue();
-                // override default value in case of NumericalFormField if the
-                // max value, set by restriction is inferior to the default value
-                if (ap.getFormField() instanceof NumericalFormField) {
-                    String maxValue = ((NumericalFormField)ap.getFormField()).getMaxValue();
-                    if (Integer.valueOf(maxValue).compareTo(Integer.valueOf(defaultValue))<0){
-                        defaultValue = maxValue;
-                    }
-                }
-                if (isAuditSite) {
-                    lastUserValue = parameterDataService.
-                            getLastParameterValueFromUser(contract.getId(), ap.getParameterElement(), ScopeEnum.DOMAIN);
-                    if (lastUserValue != null && !lastUserValue.equalsIgnoreCase(defaultValue)) {
-                        // we override the auditParameter with the last user value
-                        auditSetUpCommand.addAuditParameterEntry(
-                                ap.getParameterElement().getParameterElementCode(),
-                                lastUserValue);
-                        isDefaultSet = false;
-                    } else {
-                        auditSetUpCommand.addAuditParameterEntry(
-                                ap.getParameterElement().getParameterElementCode(),
-                                defaultValue);
-                    }
-                } else {
-                    auditSetUpCommand.addAuditParameterEntry(
-                            ap.getParameterElement().getParameterElementCode(),
-                            defaultValue);
-                }
+                
+                // We retrieve the default value of the Parameter associated 
+                // with the AuditSetUpFormField
+                String defaultValue = getParameterDataService().
+                    getDefaultParameter(ap.getParameterElement()).getValue();
+                Logger.getLogger(this.getClass()).debug(
+                        "defaultValue  "  + defaultValue + "for param " + ap.getParameterElement().getParameterElementCode());
+
+                String paramValue = getValueOfParamOfAuditSetUpFormField(
+                        contract, 
+                        defaultValue, 
+                        ap, 
+                        isAuditSite);
+                Logger.getLogger(this.getClass()).debug("paramValue  "  + paramValue);
+                // The auditSetUpCommand instance handles a map to bind each field
+                // This map has to be set-up with the value of the Parameter and 
+                // each parameter is identified throug the key with the 
+                // ParameterElement code.
+                auditSetUpCommand.addAuditParameterEntry(
+                        ap.getParameterElement().getParameterElementCode(),
+                        paramValue);
+                
+                // if from the set of options, one is different from the default
+                // a flag is set. 
+                isDefaultSet = isDefaultSet && StringUtils.equals(defaultValue, paramValue);
             }
         }
-        auditSetUpCommand.setIsDefaultParamSet(isDefaultSet);
-        return auditSetUpCommand;
+        auditSetUpCommand.setDefaultParamSet(isDefaultSet);
     }
 
+    /**
+     *
+     * @param contract
+     * @return
+     */
     private CommonsMultipartFile[] getGroupOfFileInput(Contract contract) {
         CommonsMultipartFile[] groupOfFileInput = new CommonsMultipartFile[AuditSetUpCommand.DEFAULT_LIST_SIZE];
         return (contract.getUser() == null) ? null : groupOfFileInput;
     }
 
     /**
-     * This methods prepares the String table passed to the jsp that handles
-     * the URL filled-in by the user. Depending the status of the user
+     * This methods prepares the String table passed to the jsp that handles the
+     * URL filled-in by the user. Depending the status of the user
      * (authenticated or guest), the table is pre-populated.
+     *
      * @param contractId
      * @return
      */
-    private List<String> getGroupOfPagesUrl(Contract contract, boolean isGuestUser) {
+    private List<String> getGroupOfPagesUrl(Contract contract) {
         User user = contract.getUser();
         List<String> groupOfPagesUrl = new LinkedList<String>();
         if (user == null) {
@@ -161,179 +286,97 @@ public final class AuditSetUpCommandFactory {
         }
         // When the form is displayed for an authenticated user, it is
         // pre-populated with the Url recorded with the contract.
-        if (contract.getUrl() != null && !contract.getUrl().isEmpty()
-                && !isGuestUser) {
-            groupOfPagesUrl.set(0, contract.getUrl());
+        String url = contractDataService.getUrlFromContractOption(contract);
+        if (!StringUtils.isEmpty(url)) {
+            groupOfPagesUrl.set(0, url);
         }
         return groupOfPagesUrl;
     }
 
     /**
-     * Set up the parameters for the given contract.
-     * We use the contract to retrieve the parameters of the last audit.
-     * If these parameters are identical to the default one, or if this audit is
-     * first audit for the contract, we populate each parameter value with the
-     * default value. Otherwise we populate the parameters with the last one
-     * set by the user.
-     *
-     * @param contract
-     * @param auditSetUpFormFieldBuilderMap
-     * @return
-     */
-    public Map<String, List<AuditSetUpFormField>> getParametersMapCopy(
-            Contract contract,
-            Map<String, List<AuditSetUpFormFieldBuilderImpl>> auditSetUpFormFieldBuilderMap) {
-
-        // Copy the audit setup form field map from the builders
-        Map<String, List<AuditSetUpFormField>> initialisedSetUpFormFielMap = new HashMap<String, List<AuditSetUpFormField>>();
-        for (Map.Entry<String, List<AuditSetUpFormFieldBuilderImpl>> entry : auditSetUpFormFieldBuilderMap.entrySet()) {
-            List<AuditSetUpFormField> setUpFormFieldList = new LinkedList<AuditSetUpFormField>();
-            for (AuditSetUpFormFieldBuilderImpl seb : entry.getValue()) {
-                setUpFormFieldList.add(seb.build());
-            }
-            initialisedSetUpFormFielMap.put(entry.getKey(), setUpFormFieldList);
-        }
-        // Options can be applied to contract AND product
-        Set<OptionImpl> optionSet = new HashSet<OptionImpl>();
-        optionSet.addAll((Set<OptionImpl>) contract.getOptionSet());
-        optionSet.addAll((Set<OptionImpl>) contract.getProduct().getOptionSet());
-        if (!optionSet.isEmpty()) {
-            for (List<AuditSetUpFormField> apl : initialisedSetUpFormFielMap.values()) {
-                for (AuditSetUpFormField ap : apl) {
-                    applyRestrictionToAuditSetUpFormField(ap, optionSet);
-                }
-            }
-        }
-        return initialisedSetUpFormFielMap;
-    }
-
-    /**
-     *
-     * @param ap
-     * @param optionSet
-     */
-    private void applyRestrictionToAuditSetUpFormField(
-            AuditSetUpFormField ap,
-            Set<? extends Option> optionSet) {
-        if (ap.getFormField() instanceof NumericalFormField) {
-            Option option = getOptionFromContractOptionSet(
-                    optionSet,
-                    ap.getParameterElement().getParameterElementCode());
-            if (option != null) {
-                ((NumericalFormField) ap.getFormField()).setMaxValue(option.getValue());
-                ((NumericalFormField) ap.getFormField()).setValue(option.getValue());
-            }
-        } else if (ap.getFormField() instanceof SelectFormField) {
-            activateSelectFormField((SelectFormField) ap.getFormField(), optionSet);
-        } else if (ap.getFormField() instanceof TextualFormField) {
-            Option option = getOptionFromContractOptionSet(
-                    optionSet,
-                    ap.getParameterElement().getParameterElementCode());
-            if (option != null) {
-                ((TextualFormField) ap.getFormField()).setValue(option.getValue());
-            }
-        }
-    }
-
-    /**
-     *
-     * @param optionSet
-     * @param optionCode
-     * @return
-     */
-    private Option getOptionFromContractOptionSet(
-            Set<? extends Option> optionSet,
-            String optionCode) {
-        for (Option option : optionSet) {
-            if (StringUtils.equals(optionCode, option.getOptionElement().getCode())) {
-                return option;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * This method enables/disables a select form field element regarding the 
-     * activation / restriction strategy. 
-     * If a SelectFormField is set as enabled by default and has a set 
-     * restrictionCode, it can be disabled.
-     * If a SelectFormField is set as disabled by default and has a set 
-     * activationCode, it can be enabled. 
+     * The way to set and retrieve the referential and the level is always the 
+     * same, regardless the auditType.
      * 
-     * @param selectFormField 
-     * @param optionSet
-     */
-    private void activateSelectFormField(SelectFormField sff, Set<? extends Option> optionSet) {
-        boolean enableElements = true;
-        Option option = null;
-        if (StringUtils.isNotEmpty(sff.getRestrictionCode())) {
-            option = getOptionFromContractOptionSet(
-                optionSet,
-                sff.getRestrictionCode());
-            enableElements = false;
-        } else if (StringUtils.isNotEmpty(sff.getActivationCode())) {
-            option = getOptionFromContractOptionSet(
-                optionSet,
-                sff.getActivationCode());
-        }
-        if (option != null) {
-            String[] optionValues = option.getValue().split(";");
-            boolean isSelectFormFieldHasDefault = false;
-            for (int i = 0; i < optionValues.length; i++) {
-                List<SelectElement> sel =
-                        sff.getSelectElementMap().get(optionValues[i]);
-                for (SelectElement se : sel) {
-                    se.setEnabled(enableElements);
-                    if (!isSelectFormFieldHasDefault) {
-                        isSelectFormFieldHasDefault = setSelectElementAsDefault(se, optionSet);
-                    }
-                }
-            }
-            if (!isSelectFormFieldHasDefault) {
-                setFirstSelectElementAsDefault(sff.getSelectElementMap());
-            }
-        }
-    }
- 
-    /**
-     * 
-     * @param selectElement
-     * @param optionSet
      * @return 
      */
-    private boolean setSelectElementAsDefault(SelectElement selectElement, Set<? extends Option> optionSet)  {
-        Option option = getOptionFromContractOptionSet(
-                optionSet,
-                selectElement.getDefaultCode());
-        if (option == null) {
-            return false;
+    private String extractLevelValueFromAuditSetUpFormFieldList(
+            Contract contract, 
+            boolean isSiteAudit, 
+            List<SelectFormField> levelFormFieldList) {
+        ParameterElement levelParameterElement = getLevelParameterElement();
+        // We retrieve the default value of the Parameter associated 
+        // with the level ParameterElement
+        String defaultValue = getParameterDataService().
+                    getDefaultParameter(levelParameterElement).getValue();
+        if (isSiteAudit) {
+            String lastUserValue = retrieveParameterValueFromLastAudit(contract, levelParameterElement);
+            if (!StringUtils.equals(lastUserValue, defaultValue)) {
+                // we override the auditParameter with the last user value
+                defaultValue = lastUserValue;
+            }
         }
-        if (selectElement.getEnabled() && 
-                StringUtils.equals(option.getValue(), selectElement.getValue())){
-            selectElement.setDefault(true);
-            return true;
-        }
-        return false;
+        // If the level is overidden from the parameters of the last audit, 
+        // we need to update the UI elements regarding this value (set this 
+        // element as default)
+        AuditSetUpFormFieldHelper.selectDefaultLevelFromLevelValue(levelFormFieldList, defaultValue);
+        return defaultValue;
     }
     
     /**
-     * When no SelectElement is Defined as default, we set the first element 
-     * as default.
+     * The default value of a Parameter associated with an AuditSetUpFormField 
+     * can be modified for two reasons : 
+     *  - the FormField is a NumericalFormField
+     *  - At least on site audit has been launched previously
      * 
-     * @param sel 
+     * @param contract
+     * @param defaultValue
+     * @param ap
+     * @param isAuditSite
+     * @return 
+     *      a boolean that indicates whether the added parameter value is the 
+     *      default value
      */
-    private void setFirstSelectElementAsDefault(Map<String, List<SelectElement>> selElementMap) {
-        boolean firstEnabledElementEncountered = false;
-        for(List<SelectElement> seList : selElementMap.values()) {
-            for (SelectElement se : seList) {
-                if (!firstEnabledElementEncountered && se.getEnabled()) {
-                    se.setDefault(true);
-                    firstEnabledElementEncountered = true;
-                } else {
-                    se.setDefault(false);
-                }
+    private String getValueOfParamOfAuditSetUpFormField(
+            Contract contract,
+            String defaultValue,
+            AuditSetUpFormField ap,
+            boolean isAuditSite) {
+
+        // override default value in case of NumericalFormField if the
+        // its default max value is inferior to the default value of the parameter. 
+        // The parameter value is reduced to the value of the field (to respect
+        // its bounds)
+        if (ap.getFormField() instanceof NumericalFormField) {
+            String maxValue = ((NumericalFormField) ap.getFormField()).getMaxValue();
+            if (Integer.valueOf(maxValue).compareTo(Integer.valueOf(defaultValue)) < 0) {
+                defaultValue = maxValue;
             }
         }
+
+        // In case of site audit, we retrieve the last value filled-in 
+        // by the user for the parameter. Let's consider this as a 
+        // user preference management. 
+        if (isAuditSite) {
+            String lastUserValue = retrieveParameterValueFromLastAudit(contract, ap.getParameterElement());
+            if (lastUserValue!= null && !StringUtils.equals(lastUserValue, defaultValue)) {
+                // we override the auditParameter with the last user value
+                return lastUserValue;
+            }
+        } 
+        return defaultValue;
+    }
+    
+    /**
+     * 
+     * @param contract
+     * @param parameterElement
+     * @return 
+     */
+    private String retrieveParameterValueFromLastAudit (
+            Contract contract, 
+            ParameterElement parameterElement) {
+        return parameterDataService.getLastParameterValueFromUser(contract.getId(), parameterElement, ScopeEnum.DOMAIN);
+        
     }
 
 }
