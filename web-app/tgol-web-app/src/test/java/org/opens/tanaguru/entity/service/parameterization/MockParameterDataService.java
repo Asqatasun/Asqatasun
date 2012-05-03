@@ -23,7 +23,10 @@ package org.opens.tanaguru.entity.service.parameterization;
 
 import java.util.*;
 import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.entity.parameterization.*;
+import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.parameterization.ParameterElement;
+import org.opens.tanaguru.entity.parameterization.ParameterFamily;
+import org.opens.tanaguru.entity.parameterization.ParameterImpl;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
 import org.opens.tgol.entity.contract.ScopeEnum;
@@ -46,117 +49,16 @@ public class MockParameterDataService implements ParameterDataServiceDecorator {
             new MockParameterElementDataService();
     
     public MockParameterDataService(){
-        ParameterElement numericalFormFieldParameterElement1 = parameterElementDataService.getParameterElement("NUMERICAL_FORMFIELD_1");
-        addParameter(true, "50", numericalFormFieldParameterElement1, defaultParamSet);
+        
+        ParameterElement textualFormFieldParameterElement = parameterElementDataService.getParameterElement("TEXTUAL_FORMFIELD");
+        ParameterElement levelParameterElement = parameterElementDataService.getParameterElement("LEVEL");
+        addParameter(true, "50", textualFormFieldParameterElement, defaultParamSet);
+        addParameter(true, "MockRef;MockLevel", levelParameterElement, defaultParamSet);
         // Have a look to the MockContractDataService. Each contract is associated
         // with a param Set. 
         List<Set<Parameter>> paramSetListForUser1 = new LinkedList<Set<Parameter>>();
         paramSetListForUser1.add(defaultParamSet);
         paramSetByContractId.put(Long.valueOf(1), paramSetListForUser1);
-        
-//        // Level parameters
-//        ParameterElement levelParameterElement = new ParameterElementImpl();
-//        levelParameterElement.setParameterElementCode("LEVEL");
-//        // default level parameter
-//        addParameter(true, "ref1;level1", levelParameterElement, defaultParamSet);
-//        addParameter(true, "ref1;level1", levelParameterElement, defaultParamSetWithUserRestriction);
-//        //other level parameter
-//        addParameter(false, "ref2;level2", levelParameterElement, otherValuesParamSet);
-
-        // Level parameters duplicated to deal with the activation mechanism 
-        // of selectElement
-        ParameterElement levelInitialyDisabledParameterElement = new ParameterElementImpl();
-        levelInitialyDisabledParameterElement.setParameterElementCode("LEVEL_INITIALY_DISABLED");
-        // default level parameter
-        addParameter(true, "ref1;level1", levelInitialyDisabledParameterElement, defaultParamSet);
-        addParameter(true, "ref1;level1", levelInitialyDisabledParameterElement, defaultParamSetWithUserRestriction);
-        //other level parameter
-        addParameter(false, "ref2;level2", levelInitialyDisabledParameterElement, otherValuesParamSet);
-        
-        //depth parameters
-        ParameterElement depthParameterElement = new ParameterElementImpl();
-        depthParameterElement.setParameterElementCode("DEPTH");
-        // default depth parameter
-        addParameter(true, "10", depthParameterElement, defaultParamSet);
-        addParameter(true, "10", depthParameterElement, defaultParamSetWithUserRestriction);
-        //other level parameter
-        addParameter(false, "5", depthParameterElement, otherValuesParamSet);
-
-        // max documents parameters
-        ParameterElement maxDocumentsParameterElement = new ParameterElementImpl();
-        maxDocumentsParameterElement.setParameterElementCode("MAX_DOCUMENTS");
-        // default max documents parameter
-        addParameter(true, "1000", maxDocumentsParameterElement, defaultParamSet);
-        addParameter(false, "2", maxDocumentsParameterElement, defaultParamSetWithUserRestriction);
-        //other max documents parameter
-        addParameter(false, "5", maxDocumentsParameterElement, otherValuesParamSet);
-
-        // max duration parameters
-        ParameterElement maxDurationParameterElement = new ParameterElementImpl();
-        maxDurationParameterElement.setParameterElementCode("MAX_DURATION");
-        // default max duration parameter
-        addParameter(true, "10000", maxDurationParameterElement, defaultParamSet);
-        addParameter(true, "10000", maxDurationParameterElement, defaultParamSetWithUserRestriction);
-        // other max duration parameter
-        addParameter(false, "100", maxDurationParameterElement, otherValuesParamSet);
-
-        // exclusion regexp parameters
-        ParameterElement exlusionRegexpParameterElement = new ParameterElementImpl();
-        exlusionRegexpParameterElement.setParameterElementCode("EXCLUSION_REGEXP");
-        // default exclusion regexp parameter
-        addParameter(true, "", exlusionRegexpParameterElement, defaultParamSet);
-        addParameter(true, "", exlusionRegexpParameterElement, defaultParamSetWithUserRestriction);
-        // other exclusion regexp parameter
-        addParameter(false, "expression1;expression2", exlusionRegexpParameterElement, otherValuesParamSet);
-
-//        List<Set<Parameter>> paramSetListForUser1 = new LinkedList<Set<Parameter>>();
-//        paramSetListForUser1.add(defaultParamSet);
-//        paramSetListForUser1.add(otherValuesParamSet);
-//        paramSetByContractId.put(Long.valueOf(1), paramSetListForUser1);
-
-        List<Set<Parameter>> paramSetListForUser2 = new LinkedList<Set<Parameter>>();
-        paramSetListForUser2.add(otherValuesParamSet);
-        paramSetListForUser2.add(defaultParamSet);
-        paramSetByContractId.put(Long.valueOf(2), paramSetListForUser2);
-
-        List<Set<Parameter>> paramSetListForUser3 = new LinkedList<Set<Parameter>>();
-        paramSetListForUser3.add(defaultParamSet);
-        paramSetListForUser3.add(otherValuesParamSet);
-        paramSetByContractId.put(Long.valueOf(3), paramSetListForUser3);
-
-        List<Set<Parameter>> paramSetListForUser4 = new LinkedList<Set<Parameter>>();
-        paramSetListForUser4.add(defaultParamSet);
-        paramSetListForUser4.add(otherValuesParamSet);
-        paramSetByContractId.put(Long.valueOf(4), paramSetListForUser4);
-
-        List<Set<Parameter>> paramSetListForUser5 = new LinkedList<Set<Parameter>>();
-        paramSetListForUser5.add(defaultParamSet);
-        paramSetListForUser5.add(defaultParamSetWithUserRestriction);
-        paramSetByContractId.put(Long.valueOf(5), paramSetListForUser5);
-
-        List<Set<Parameter>> paramSetListForUser6 = new LinkedList<Set<Parameter>>();
-        paramSetListForUser6.add(otherValuesParamSet);
-        paramSetByContractId.put(Long.valueOf(6), paramSetListForUser6);
-
-        List<Set<Parameter>> paramSetListForUser7 = new LinkedList<Set<Parameter>>();
-        paramSetListForUser7.add(otherValuesParamSet);
-        paramSetByContractId.put(Long.valueOf(7), paramSetListForUser7);
-
-        List<Set<Parameter>> paramSetListForUser8 = new LinkedList<Set<Parameter>>();
-        paramSetListForUser8.add(otherValuesParamSet);
-        paramSetByContractId.put(Long.valueOf(8), paramSetListForUser8);
-        
-        List<Set<Parameter>> paramSetListForUser10 = new LinkedList<Set<Parameter>>();
-        paramSetListForUser10.add(otherValuesParamSet);
-        paramSetByContractId.put(Long.valueOf(10), paramSetListForUser10);
-        
-        List<Set<Parameter>> paramSetListForUser11 = new LinkedList<Set<Parameter>>();
-        paramSetListForUser11.add(otherValuesParamSet);
-        paramSetByContractId.put(Long.valueOf(11), paramSetListForUser11);
-        
-        List<Set<Parameter>> paramSetListForUser12 = new LinkedList<Set<Parameter>>();
-        paramSetListForUser12.add(otherValuesParamSet);
-        paramSetByContractId.put(Long.valueOf(12), paramSetListForUser12);
         
     }
 

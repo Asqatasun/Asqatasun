@@ -126,7 +126,7 @@ public class AuditSetUpController extends AuditDataHandlerController{
 
     /**
      * This map binds the audit set-up view with the functionality code that 
-     * allows to access if. It is used to ensure the displayed set-up view
+     * allows to access. It is used to ensure the displayed set-up view
      * is authorised regarding the contract functionalities.
      */
     Map<String, String> viewFunctionalityBindingMap;
@@ -242,7 +242,7 @@ public class AuditSetUpController extends AuditDataHandlerController{
         try { 
             contractIdValue = Long.valueOf(contractId);
         } catch (NumberFormatException nfe) {
-            throw new ForbiddenUserException(getCurrentUser());
+            throw new ForbiddenPageException(getCurrentUser());
         }
         Contract contract  = getContractDataService().read(contractIdValue);
         if (isUserAllowedToDisplaySetUpPage(contract, viewName)) {
@@ -308,11 +308,11 @@ public class AuditSetUpController extends AuditDataHandlerController{
             Contract contract, 
             String viewName) {
         if (contract == null) {
-            throw new ForbiddenUserException(getCurrentUser());
+            throw new ForbiddenPageException(getCurrentUser());
         }
         User user = getCurrentUser();
         if (!contract.getUser().getId().equals(user.getId())) {
-            throw new ForbiddenUserException(user);
+            throw new ForbiddenPageException(user);
         }
         Collection<String> functionalitySet = getAuthorisedFunctionalityCodeFromContract(contract);
         if (!functionalitySet.contains(viewFunctionalityBindingMap.get(viewName))) {

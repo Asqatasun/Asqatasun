@@ -37,6 +37,8 @@ import org.opens.tgol.entity.service.contract.MockContractDataService;
 import org.opens.tgol.entity.service.user.MockUserDataService;
 import org.opens.tgol.entity.service.user.UserDataService;
 import org.opens.tgol.entity.user.User;
+import org.opens.tgol.exception.ForbiddenPageException;
+import org.opens.tgol.form.FormField;
 import org.opens.tgol.form.builder.*;
 import org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl;
 import org.opens.tgol.mock.MockAuthenticationDetails;
@@ -50,16 +52,10 @@ import org.springframework.ui.Model;
  */
 public class AuditSetUpControllerTest extends TestCase {
 
-//    private static final String SPRING_FILE_PATH =
-//            "src/test/resources/unit-test-context.xml";
     private AuditSetUpController instance;
-    private ParameterElementDataService parameterElementDataService;
             
     public AuditSetUpControllerTest(String testName) {
         super(testName);
-//        ApplicationContext springApplicationContext =
-//                new FileSystemXmlApplicationContext(SPRING_FILE_PATH);
-//        springBeanFactory = springApplicationContext;
     }
 
     @Override
@@ -77,510 +73,161 @@ public class AuditSetUpControllerTest extends TestCase {
         ((MockContractDataService)contractDataService).setUserDataService(userDataService);
         instance.setContractDataService(contractDataService);
         
+        // the AuditSetUpController needs a map to be set-up to determine whether
+        // a user is allowed to display a set-up form regarding the functionalities
+        // of the contract
+        
+        Map<String, String> viewFunctionalityBindingMap =  new HashMap<String, String>();
+        // The contracts are initialised with a functionality whose code is 
+        // FUNCTIONALITY1. We allow all the audit set-up forms for this 
+        // functionality by populating the viewFunctionalityBindingMap
+        viewFunctionalityBindingMap.put("audit-upload-set-up", "FUNCTIONALITY1");
+        viewFunctionalityBindingMap.put("audit-site-set-up", "FUNCTIONALITY1");
+        viewFunctionalityBindingMap.put("audit-page-set-up", "FUNCTIONALITY1");
+        instance.setViewFunctionalityBindingMap(viewFunctionalityBindingMap);
+
+        // The Controller needs a list of AuditSetUpFormFieldBuilder that 
+        // deal with the referential and level selection
+        instance.setReferentialAndLevelFormFieldBuilderList(buildMockRefAndLevelSelectFormFieldList());
+        
+        instance.setPageOptionFormFieldBuilderMap(buildMockOptionAuditSetUpFormFieldList());
+        instance.setSiteOptionFormFieldBuilderMap(buildMockOptionAuditSetUpFormFieldList());
+        instance.setUploadOptionFormFieldBuilderMap(buildMockOptionAuditSetUpFormFieldList());
+        
         ParameterDataServiceDecorator parameterDataService =  new MockParameterDataService();
         instance.setParameterDataService(parameterDataService);
         
-        parameterElementDataService = 
-                new MockParameterElementDataService();
-        
+        // The AuditSetUpCommandFactory factory needs to be initialised with 
+        // parameterDataService instance and contractDataService
         AuditSetUpCommandFactory.getInstance().setParameterDataService(parameterDataService);
+        AuditSetUpCommandFactory.getInstance().setParameterElementDataService(new MockParameterElementDataService());
         AuditSetUpCommandFactory.getInstance().setContractDataService(contractDataService);
         
+        // initialise the context with the user identified by the email 
+        // "test1@test.com" seen as authenticated
         MockAuthenticationDetails.initSecurityContextHolder("test1@test.com");
-        
-        buildParametersMap();
     }
     
     public void testDisplayPageAuditSetUp() {
         MockAuthenticationDetails.initSecurityContextHolder("test1@test.com");        
         Model model = new ExtendedModelMap();
 
-        // The contract 1 is of DOMAIN type. The set-up page for a page audit
-        // is allowed
-//        String returnedView = instance.displayPageAuditSetUp("1", null, null, model);
-//        assertEquals(TgolKeyStore.AUDIT_PAGE_SET_UP_VIEW_NAME, returnedView);
-//        assertEquals("test1@test.com", ((User)model.asMap().get(TgolKeyStore.AUTHENTICATED_USER_KEY)).getEmail1());
-//        assertEquals("http://www.test1.com", model.asMap().get(TgolKeyStore.URL_KEY));
-//        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
+        String returnedView = instance.displayPageAuditSetUp("1", null, null, model);
+        assertEquals(TgolKeyStore.AUDIT_PAGE_SET_UP_VIEW_NAME, returnedView);
+        assertEquals("test1@test.com", ((User)model.asMap().get(TgolKeyStore.AUTHENTICATED_USER_KEY)).getEmail1());
+        assertEquals("http://www.test1.com", model.asMap().get(TgolKeyStore.URL_KEY));
+        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
+        
+        returnedView = instance.displaySiteAuditSetUp("1", null, null, model);
+        assertEquals(TgolKeyStore.AUDIT_SITE_SET_UP_VIEW_NAME, returnedView);
+        assertEquals("test1@test.com", ((User)model.asMap().get(TgolKeyStore.AUTHENTICATED_USER_KEY)).getEmail1());
+        assertEquals("http://www.test1.com", model.asMap().get(TgolKeyStore.URL_KEY));
+        assertEquals(true, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
+        
+        returnedView = instance.displayUploadAuditSetUp("1", null, null, model);
+        assertEquals(TgolKeyStore.AUDIT_UPLOAD_SET_UP_VIEW_NAME, returnedView);
+        assertEquals("test1@test.com", ((User)model.asMap().get(TgolKeyStore.AUTHENTICATED_USER_KEY)).getEmail1());
+        assertEquals("http://www.test1.com", model.asMap().get(TgolKeyStore.URL_KEY));
+        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
 
-//        // The contract 2 is of DOMAIN type. The set-up page for a site audit
-//        // is allowed. For a group of pages audit, the default parameter set attribute
-//        // is always set to false due to DEPTH and MAX_DOCUMENTS parameters
-//        // modifications
-//        returnedView = instance.displayPageAuditSetUp("2", null, null, model);
-//        assertEquals("test1@test.com", ((User)model.asMap().get(TgolKeyStore.AUTHENTICATED_USER_KEY)).getEmail1());
-//        assertEquals("http://www.test2.com", model.asMap().get(TgolKeyStore.URL_KEY));
-//        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
-//        assertEquals(returnedView, TgolKeyStore.AUDIT_PAGE_SET_UP_VIEW_NAME);
-//
-//        // the contract has a GROUPOFPAGES scope.The access is denied
-//        returnedView = instance.displayPageAuditSetUp("9", null, null, model);
-//        assertEquals("test1@test.com", ((User)model.asMap().get(TgolKeyStore.AUTHENTICATED_USER_KEY)).getEmail1());
-//        assertEquals("http://www.test9.com", model.asMap().get(TgolKeyStore.URL_KEY));
-//        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
-//        assertEquals(returnedView, TgolKeyStore.AUDIT_PAGE_SET_UP_VIEW_NAME);
-//        
-//        // the contract is not associated with the current user. The access is denied
-//        MockAuthenticationDetails.initSecurityContextHolder("test2@test.com");
-//        try {
-//            instance.displayPageAuditSetUp("1", null, null, model);
-//            assertTrue(false);
-//        } catch (ForbiddenUserException fue) {
-//            assertTrue(true);
-//        }
-////        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-//        try {
-//            instance.displayPageAuditSetUp("2", null, null, model);
-//            assertTrue(false);
-//        } catch (ForbiddenUserException fue) {
-//            assertTrue(true);
-//        }
-////        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-//        try {
-//            instance.displayPageAuditSetUp("3", null, null, model);
-//            assertTrue(false);
-//        } catch (ForbiddenUserException fue) {
-//            assertTrue(true);
-//        }
-////        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-//        try {
-//            instance.displayPageAuditSetUp("4", null, null, model);
-//            assertTrue(false);
-//        } catch (ForbiddenUserException fue) {
-//            assertTrue(true);
-//        }
-////        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-//        try {
-//            instance.displayPageAuditSetUp("5", null, null, model);
-//            assertTrue(false);
-//        } catch (ForbiddenUserException fue) {
-//            assertTrue(true);
-//        }
-////        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-//        try {
-//            instance.displayPageAuditSetUp("6", null, null, model);
-//            assertTrue(false);
-//        } catch (ForbiddenUserException fue) {
-//            assertTrue(true);
-//        }
-////        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-//        try {
-//            instance.displayPageAuditSetUp("7", null, null, model);
-//            assertTrue(false);
-//        } catch (ForbiddenUserException fue) {
-//            assertTrue(true);
-//        }
-////        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-//        try {
-//            instance.displayPageAuditSetUp("8", null, null, model);
-//            assertTrue(false);
-//        } catch (ForbiddenUserException fue) {
-//            assertTrue(true);
-//        }
-////        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-//        try {
-//            instance.displayPageAuditSetUp("9", null, null, model);
-//            assertTrue(false);
-//        } catch (ForbiddenUserException fue) {
-//            assertTrue(true);
-//        }
-//        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
+        // the contract Id cannot be converted as a Long. An exception is caught
+        try {
+            instance.displaySiteAuditSetUp("Not a number", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenPageException fue) {
+            assertTrue(true);
+        }
+        try {
+            instance.displayPageAuditSetUp("Not a number", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenPageException fue) {
+            assertTrue(true);
+        }
+        try {
+            instance.displayUploadAuditSetUp("Not a number", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenPageException fue) {
+            assertTrue(true);
+        }
+        
+        // the functionality associated with the contract is not allowed 
+        // regarding the viewFunctionalityBindingMap. An exception is caught
+        try {
+            instance.displayPageAuditSetUp("2", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenPageException fue) {
+            assertTrue(true);
+        }
+        try {
+            instance.displaySiteAuditSetUp("2", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenPageException fue) {
+            assertTrue(true);
+        }
+        try {
+            instance.displayUploadAuditSetUp("2", null, null, model);
+            assertTrue(false);
+        } catch (ForbiddenPageException fue) {
+            assertTrue(true);
+        }
+     
+        // TO DO : write test to control the integrity of data of the AuditSetUpCommand
+        // regarding the option/functionality rules
+        
     }
-
-//    public void testDisplaySiteAuditSetUp() {
-//        
-//        Model model = new ExtendedModelMap();
-//        
-//        // The contract 1 is of DOMAIN type. The set-up page for a site audit
-//        // is allowed
-//        String returnedView = instance.displaySiteAuditSetUp("1", null, null, model);
-//        assertEquals(TgolKeyStore.AUDIT_SITE_SET_UP_VIEW_NAME, returnedView);
-//        assertEquals("test1@test.com", ((User)model.asMap().get(TgolKeyStore.AUTHENTICATED_USER_KEY)).getEmail1());
-//        assertEquals("http://www.test1.com", model.asMap().get(TgolKeyStore.URL_KEY));
-//        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
-//
-//        // The contract 2 is of DOMAIN type. The set-up page for a site audit
-//        // is allowed
-//        returnedView = instance.displaySiteAuditSetUp("2", null, null, model);
-//        assertEquals(true, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
-//        assertEquals("http://www.test2.com", model.asMap().get(TgolKeyStore.URL_KEY));
-//        assertEquals(TgolKeyStore.AUDIT_SITE_SET_UP_VIEW_NAME, returnedView);
-//        for (List<AuditSetUpFormField> asuffList : ((Map<String, List<AuditSetUpFormField>>)model.asMap().get(TgolKeyStore.PARAMETERS_MAP_KEY)).values()){
-//            for (AuditSetUpFormField asuff : asuffList) {
-//                if (asuff.getFormField() instanceof SelectFormField) {
-//                    // a select form is set up with a restriction option. Initialy
-//                        // all the select elements are enabled
-//                    SelectFormField selectFormField= ((SelectFormField)asuff.getFormField());
-//                    if (StringUtils.equals(selectFormField.getRestrictionCode(), "FORBIDDEN_REFERENTIAL")) {
-//                        if (asuff.getFormField() instanceof SelectFormField) {
-//                            List<SelectElement> seoSelectElementList = selectFormField.getSelectElementMap().get("Seo");
-//                            for (SelectElement se : seoSelectElementList) {
-//                                assertEquals(true, se.getEnabled());
-//                            }
-//                            List<SelectElement> aw21SelectElementList = selectFormField.getSelectElementMap().get("AW21");
-//                            for (SelectElement se : aw21SelectElementList) {
-//                                assertEquals(true, se.getEnabled());
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//
-//        // The contract 3 is of DOMAIN type. The set-up page for a site audit
-//        // is allowed
-//        returnedView = instance.displaySiteAuditSetUp("3", null, null, model);
-//        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
-//        assertEquals(TgolKeyStore.AUDIT_SITE_SET_UP_VIEW_NAME, returnedView);
-//        assertEquals("http://www.test3.com", model.asMap().get(TgolKeyStore.URL_KEY));
-//        for (List<AuditSetUpFormField> asuffList : ((Map<String, List<AuditSetUpFormField>>)model.asMap().get(TgolKeyStore.PARAMETERS_MAP_KEY)).values()){
-//            for (AuditSetUpFormField asuff : asuffList) {
-//                if (asuff.getFormField() instanceof SelectFormField) {
-//                    // a select form is set up with a restriction option. Initialy
-//                    // all the select elements are enabled
-//                    SelectFormField selectFormField= ((SelectFormField)asuff.getFormField());
-//                    if (StringUtils.equals(selectFormField.getRestrictionCode(), "FORBIDDEN_REFERENTIAL")) {
-//                        List<SelectElement> seoSelectElementList = selectFormField.getSelectElementMap().get("Seo");
-//                        for (SelectElement se : seoSelectElementList) {
-//                            assertEquals(false, se.getEnabled());
-//                            assertEquals(false, se.getDefault());
-//                        }
-//                        List<SelectElement> aw21SelectElementList = selectFormField.getSelectElementMap().get("AW21");
-//                        for (SelectElement se : aw21SelectElementList) {
-//                            assertEquals(true, se.getEnabled());
-//                            // for this contract, no DEFAULT_LEVEL option is set.
-//                            // The behaviour is to apply the default value to 
-//                            // first element of the SelectFormField
-//                            if (se.getValue().equals("AW21;Bz")) {
-//                                assertEquals(true, se.getDefault());
-//                            } else {
-//                                assertEquals(false, se.getDefault());
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//
-//        // The contract 4 is of DOMAIN type. The set-up page for a site audit
-//        // is allowed
-//        returnedView = instance.displaySiteAuditSetUp("4", null, null, model);
-//        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
-//        assertEquals(TgolKeyStore.AUDIT_SITE_SET_UP_VIEW_NAME, returnedView);
-//        assertEquals("http://www.test4.com", model.asMap().get(TgolKeyStore.URL_KEY));
-//        for (List<AuditSetUpFormField> asuffList : ((Map<String, List<AuditSetUpFormField>>)model.asMap().get(TgolKeyStore.PARAMETERS_MAP_KEY)).values()){
-//            for (AuditSetUpFormField asuff : asuffList) {
-//                if (asuff.getFormField() instanceof SelectFormField) {
-//                    // a select form is set up with a restriction option. Initialy
-//                    // all the select elements are enabled
-//                    SelectFormField selectFormField= ((SelectFormField)asuff.getFormField());
-//                    if (StringUtils.equals(selectFormField.getRestrictionCode(), "FORBIDDEN_REFERENTIAL")) {
-//                        List<SelectElement> seoSelectElementList = selectFormField.getSelectElementMap().get("Seo");
-//                        for (SelectElement se : seoSelectElementList) {
-//                            assertEquals(false, se.getEnabled());
-//                            assertEquals(false, se.getDefault());
-//                        }
-//                        List<SelectElement> aw21SelectElementList = selectFormField.getSelectElementMap().get("AW21");
-//                        for (SelectElement se : aw21SelectElementList) {
-//                            // In this case all the elements are disables by restriction.
-//                            // No Element is defined as default
-//                            assertEquals(false, se.getEnabled());
-//                            assertEquals(false, se.getDefault());
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//
-//        // The contract 5 is of DOMAIN type. The set-up page for a site audit
-//        // is allowed
-//        returnedView = instance.displaySiteAuditSetUp("5", null, null, model);
-//        assertEquals(true, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
-//        assertEquals(TgolKeyStore.AUDIT_SITE_SET_UP_VIEW_NAME, returnedView);
-//        assertEquals("http://www.test5.com", model.asMap().get(TgolKeyStore.URL_KEY));
-//        for (List<AuditSetUpFormField> asuffList : ((Map<String, List<AuditSetUpFormField>>)model.asMap().get(TgolKeyStore.PARAMETERS_MAP_KEY)).values()){
-//            for (AuditSetUpFormField asuff : asuffList) {
-//                if (asuff.getParameterElement().getParameterElementCode().equals("MAX_DOCUMENTS")
-//                        && asuff.getFormField() instanceof NumericalFormField) {
-//                    assertEquals("2",((NumericalFormField)asuff.getFormField()).getMaxValue());
-//                }
-//            }
-//        }
-//
-//        // The contract 6 is of DOMAIN type. The set-up page for a site audit
-//        // is allowed
-//        returnedView = instance.displaySiteAuditSetUp("6", null, null, model);
-//        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
-//        assertEquals(TgolKeyStore.AUDIT_SITE_SET_UP_VIEW_NAME, returnedView);
-//        assertEquals("http://www.test6.com", model.asMap().get(TgolKeyStore.URL_KEY));
-//        for (List<AuditSetUpFormField> asuffList : ((Map<String, List<AuditSetUpFormField>>)model.asMap().get(TgolKeyStore.PARAMETERS_MAP_KEY)).values()){
-//            for (AuditSetUpFormField asuff : asuffList) {
-//                if (asuff.getParameterElement().getParameterElementCode().equals("MAX_DURATION")
-//                        && asuff.getFormField() instanceof NumericalFormField) {
-//                    assertEquals("20",((NumericalFormField)asuff.getFormField()).getMaxValue());
-//                }
-//            }
-//        }
-//
-//        // The contract 7 is of DOMAIN type. The set-up page for a site audit
-//        // is allowed
-//        returnedView = instance.displaySiteAuditSetUp("7", null, null, model);
-//        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
-//        assertEquals(TgolKeyStore.AUDIT_SITE_SET_UP_VIEW_NAME, returnedView);
-//        assertEquals("http://www.test7.com", model.asMap().get(TgolKeyStore.URL_KEY));
-//        for (List<AuditSetUpFormField> asuffList : ((Map<String, List<AuditSetUpFormField>>)model.asMap().get(TgolKeyStore.PARAMETERS_MAP_KEY)).values()){
-//            for (AuditSetUpFormField asuff : asuffList) {
-//                if (asuff.getParameterElement().getParameterElementCode().equals("DEPTH")
-//                        && asuff.getFormField() instanceof NumericalFormField) {
-//                    assertEquals("5",((NumericalFormField)asuff.getFormField()).getMaxValue());
-//                }
-//            }
-//        }
-//
-//        // The contract 8 is of DOMAIN type. The set-up page for a site audit
-//        // is allowed
-//        returnedView = instance.displaySiteAuditSetUp("8", null, null, model);
-//        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
-//        assertEquals(TgolKeyStore.AUDIT_SITE_SET_UP_VIEW_NAME, returnedView);
-//        assertEquals("http://www.test8.com", model.asMap().get(TgolKeyStore.URL_KEY));
-//        for (List<AuditSetUpFormField> asuffList : ((Map<String, List<AuditSetUpFormField>>)model.asMap().get(TgolKeyStore.PARAMETERS_MAP_KEY)).values()){
-//            for (AuditSetUpFormField asuff : asuffList) {
-//                if (asuff.getParameterElement().getParameterElementCode().equals("EXCLUSION_REGEXP")
-//                        && asuff.getFormField() instanceof TextualFormField) {
-//                    assertEquals("test_expression",((TextualFormField)asuff.getFormField()).getValue());
-//                }
-//            }
-//        }
-//
-//        // The contract 10 is of DOMAIN type. The set-up page for a site audit 
-//        // is allowed with AW21 activated and Seo disabled
-//        returnedView = instance.displaySiteAuditSetUp("10", null, null, model);
-//        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
-//        assertEquals(TgolKeyStore.AUDIT_SITE_SET_UP_VIEW_NAME, returnedView);
-//        assertEquals("http://www.test10.com", model.asMap().get(TgolKeyStore.URL_KEY));
-//        for (List<AuditSetUpFormField> asuffList : ((Map<String, List<AuditSetUpFormField>>)model.asMap().get(TgolKeyStore.PARAMETERS_MAP_KEY)).values()){
-//            for (AuditSetUpFormField asuff : asuffList) {
-//                if (asuff.getFormField() instanceof SelectFormField) {
-//                    SelectFormField selectFormField= ((SelectFormField)asuff.getFormField());
-//                    // a select form is set up with an activation option. Initialy
-//                    // all the select elements are disabled
-//                    if (StringUtils.equals(selectFormField.getActivationCode(), "AUTHORIZED_REFERENTIAL")) {
-//                        List<SelectElement> seoSelectElementList = ((SelectFormField)asuff.getFormField()).getSelectElementMap().get("Seo");
-//                        for (SelectElement se : seoSelectElementList) {
-//                            assertEquals(false, se.getEnabled());
-//                            assertEquals(false, se.getDefault());
-//                        }
-//                        List<SelectElement> aw21SelectElementList = ((SelectFormField)asuff.getFormField()).getSelectElementMap().get("AW21");
-//                        for (SelectElement se : aw21SelectElementList) {
-//                            assertEquals(true, se.getEnabled());
-//                            // the DEFAULT_LEVEL option is applied on an SelectElement
-//                            // which is disabled. So the default value is to 
-//                            // the first enabled SelectElement encountered
-//                            if (se.getValue().equals("AW21;Bz")) {
-//                                assertEquals(true, se.getDefault());
-//                            } else {
-//                                assertEquals(false, se.getDefault());
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        
-//        // The contract 11 is of DOMAIN type. The set-up page for a site audit 
-//        // is allowed with AW21 activated and Seo disabled
-//        returnedView = instance.displaySiteAuditSetUp("11", null, null, model);
-//        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
-//        assertEquals(TgolKeyStore.AUDIT_SITE_SET_UP_VIEW_NAME, returnedView);
-//        assertEquals("http://www.test11.com", model.asMap().get(TgolKeyStore.URL_KEY));
-//        for (List<AuditSetUpFormField> asuffList : ((Map<String, List<AuditSetUpFormField>>)model.asMap().get(TgolKeyStore.PARAMETERS_MAP_KEY)).values()){
-//            for (AuditSetUpFormField asuff : asuffList) {
-//                if (asuff.getFormField() instanceof SelectFormField) {
-//                    SelectFormField selectFormField= ((SelectFormField)asuff.getFormField());
-//                    if (StringUtils.equals(selectFormField.getActivationCode(), "AUTHORIZED_REFERENTIAL")) {
-//                        List<SelectElement> seoSelectElementList = selectFormField.getSelectElementMap().get("Seo");
-//                        for (SelectElement se : seoSelectElementList) {
-//                            assertEquals(true, se.getEnabled());
-//                            // The DEFAULT_LEVEL is set to "Seo;Ar"
-//                            if (se.getValue().equals("Seo;Ar")) {
-//                                assertEquals(true, se.getDefault());
-//                            } else {
-//                                assertEquals(false, se.getDefault());
-//                            }
-//                        }
-//                        List<SelectElement> aw21SelectElementList = selectFormField.getSelectElementMap().get("AW21");
-//                        for (SelectElement se : aw21SelectElementList) {
-//                            assertEquals(false, se.getEnabled());
-//                            assertEquals(false, se.getDefault());
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        
-//        // The contract 12 is of DOMAIN type. The set-up page for a site audit 
-//        // is allowed with AW21 activated and Seo enabled
-//        returnedView = instance.displaySiteAuditSetUp("12", null, null, model);
-//        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
-//        assertEquals(TgolKeyStore.AUDIT_SITE_SET_UP_VIEW_NAME, returnedView);
-//        assertEquals("http://www.test12.com", model.asMap().get(TgolKeyStore.URL_KEY));
-//        for (List<AuditSetUpFormField> asuffList : ((Map<String, List<AuditSetUpFormField>>)model.asMap().get(TgolKeyStore.PARAMETERS_MAP_KEY)).values()){
-//            for (AuditSetUpFormField asuff : asuffList) {
-//                if (asuff.getFormField() instanceof SelectFormField) {
-//                    SelectFormField selectFormField= ((SelectFormField)asuff.getFormField());
-//                    if (StringUtils.equals(selectFormField.getActivationCode(), "AUTHORIZED_REFERENTIAL")) {
-//                        List<SelectElement> seoSelectElementList = selectFormField.getSelectElementMap().get("Seo");
-//                        for (SelectElement se : seoSelectElementList) {
-//                            assertEquals(true, se.getEnabled());
-//                            assertEquals(false, se.getDefault());
-//                        }
-//                        List<SelectElement> aw21SelectElementList = selectFormField.getSelectElementMap().get("AW21");
-//                        for (SelectElement se : aw21SelectElementList) {
-//                            assertEquals(true, se.getEnabled());
-//                            // The DEFAULT_OPTION is set to the AW21;Or selectElement
-//                            if (se.getValue().equals("AW21;Or")) {
-//                                assertEquals(true, se.getDefault());
-//                            } else {
-//                                assertEquals(false, se.getDefault());
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        
-//        // the contract has a GROUPOFPAGES scope.The access is denied
-//        returnedView = instance.displaySiteAuditSetUp("9", null, null, model);
-//        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-//        
-//        // the contracts are not associated with the current user. The access is denied
-//        MockAuthenticationDetails.initSecurityContextHolder("test2@test.com");
-//        try {
-//            instance.displaySiteAuditSetUp("1", null, null, model);
-//            assertTrue(false);
-//        } catch (ForbiddenUserException fue) {
-//            assertTrue(true);
-//        }
-////        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-//        try {
-//            instance.displaySiteAuditSetUp("2", null, null, model);
-//            assertTrue(false);
-//        } catch (ForbiddenUserException fue) {
-//            assertTrue(true);
-//        }
-////        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-//        try {
-//            instance.displaySiteAuditSetUp("3", null, null, model);
-//            assertTrue(false);
-//        } catch (ForbiddenUserException fue) {
-//            assertTrue(true);
-//        }
-////        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-//        try {
-//            instance.displaySiteAuditSetUp("4", null, null, model);
-//            assertTrue(false);
-//        } catch (ForbiddenUserException fue) {
-//            assertTrue(true);
-//        }
-////        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-//        try {
-//            instance.displaySiteAuditSetUp("5", null, null, model);
-//            assertTrue(false);
-//        } catch (ForbiddenUserException fue) {
-//            assertTrue(true);
-//        }
-////        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-//        try {
-//            instance.displaySiteAuditSetUp("6", null, null, model);
-//            assertTrue(false);
-//        } catch (ForbiddenUserException fue) {
-//            assertTrue(true);
-//        }
-////        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-//        try {
-//            instance.displaySiteAuditSetUp("7", null, null, model);
-//            assertTrue(false);
-//        } catch (ForbiddenUserException fue) {
-//            assertTrue(true);
-//        }
-////        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-//        try {
-//            instance.displaySiteAuditSetUp("8", null, null, model);
-//            assertTrue(false);
-//        } catch (ForbiddenUserException fue) {
-//            assertTrue(true);
-//        }
-////        assertEquals(TgolKeyStore.ACCESS_DENIED_VIEW_NAME, returnedView);
-//    }
 
     /**
-     * The AuditSetUpController handles 2 parameters map, one for the page audit,
-     * and another for the site audit. For each audit type, the map contains 
-     * a key that will be associated with a fieldset in the view and a collection
-     * of FormFieldBuilder that corresponds to the elements of the fieldset.
-     * Each builder embed a mechanism to be automatically associated with a 
-     * Parameter when the audit is launched. The value of each form field corresponds
-     * to the default value of the associated parameter. 
-     * In the case of textField elements, values can be bounded by contract's options.
      * 
+     * @return 
      */
-    private void buildParametersMap() {
+    private Map<String, List<AuditSetUpFormFieldBuilderImpl>> buildMockOptionAuditSetUpFormFieldList() {
         
-        Map<String, List<AuditSetUpFormFieldBuilderImpl>> pageParametersMap = 
-                new HashMap<String, List<AuditSetUpFormFieldBuilderImpl>>();
-        List<AuditSetUpFormFieldBuilderImpl> auditSetUpFormFieldBuilderList = 
-                new ArrayList<AuditSetUpFormFieldBuilderImpl>();
-        
-        auditSetUpFormFieldBuilderList.add(createAuditSetUpFormFieldBuilder("NUMERICAL_FORMFIELD_1"));
-        
-        pageParametersMap.put("formElements1", auditSetUpFormFieldBuilderList);
-        
-//        instance.setPageParametersMap(pageParametersMap);
-    }
-    
-    private AuditSetUpFormFieldBuilderImpl createAuditSetUpFormFieldBuilder(
-            String parameterCode)  {
-        AuditSetUpFormFieldBuilderImpl auditSetUpFormFieldBuilderImpl = 
-                new AuditSetUpFormFieldBuilderImpl();
-        auditSetUpFormFieldBuilderImpl.setParameterElementDataService(parameterElementDataService);
-        auditSetUpFormFieldBuilderImpl.setParameterCode(parameterCode);
-        auditSetUpFormFieldBuilderImpl.setFormFieldBuilder(createNumericalFormFieldBuilder());
-        return auditSetUpFormFieldBuilderImpl;
-    }
- 
-    private TextualFormFieldBuilderImpl createTextualFormFieldBuilder() {
-        TextualFormFieldBuilderImpl textualFormFieldBuilder = new TextualFormFieldBuilderImpl();
-        return textualFormFieldBuilder;
-    }
-    
-    private NumericalFormFieldBuilderImpl createNumericalFormFieldBuilder() {
-        NumericalFormFieldBuilderImpl numericalFormFieldBuilder = new NumericalFormFieldBuilderImpl();
-        numericalFormFieldBuilder.setMinValue("0");
-        numericalFormFieldBuilder.setMaxValue("100");
-        return numericalFormFieldBuilder;
-    }
-    
-    private SelectFormFieldBuilderImpl createSelectFormFieldBuilder() {
-        SelectFormFieldBuilderImpl selectFormFieldBuilder = new SelectFormFieldBuilderImpl();
-//        selectFormFieldBuilder.getActivationCode()
-        return selectFormFieldBuilder;
-    }
+        AbstractGenericFormFieldBuilder<? extends FormField> mockFormFieldBuilder = 
+                new TextualFormFieldBuilderImpl();
 
-    private SelectElementBuilderImpl createSelectElementBuilder(
-            String value, 
-            String i18nKey, 
-            String errorI18nKey, 
-            String defaultCode, 
-            boolean isEnabled, 
-            boolean isDefault) {
-        SelectElementBuilderImpl selectElementBuilder = new SelectElementBuilderImpl();
-        selectElementBuilder.setI18nKey(i18nKey);
-        selectElementBuilder.setValue(value);
-        selectElementBuilder.setErrorI18nKey(errorI18nKey);
-        selectElementBuilder.setDefaultCode(defaultCode);
-        selectElementBuilder.setDefault(isDefault);
-        selectElementBuilder.setEnabled(isEnabled);
-        return selectElementBuilder;
+        AuditSetUpFormFieldBuilderImpl mockAuditSetUpFormFieldBuilder = 
+                new AuditSetUpFormFieldBuilderImpl();
+        mockAuditSetUpFormFieldBuilder.setFormFieldBuilder(mockFormFieldBuilder);
+        mockAuditSetUpFormFieldBuilder.setParameterElementDataService(new MockParameterElementDataService());
+        // to fit with the mock of the ParameterElementDataService
+        mockAuditSetUpFormFieldBuilder.setParameterCode("TEXTUAL_FORMFIELD");
+                
+        List<AuditSetUpFormFieldBuilderImpl> mockAuditSetUpFormFieldBuilderList = 
+                new ArrayList<AuditSetUpFormFieldBuilderImpl>();
+        mockAuditSetUpFormFieldBuilderList.add(mockAuditSetUpFormFieldBuilder);
+                
+        Map<String, List<AuditSetUpFormFieldBuilderImpl>> mockOptionAuditSetUpFormFieldList = 
+                new HashMap<String, List<AuditSetUpFormFieldBuilderImpl>>();
+        mockOptionAuditSetUpFormFieldList.put("Option1", mockAuditSetUpFormFieldBuilderList);
+        return mockOptionAuditSetUpFormFieldList;
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    private List<SelectFormFieldBuilderImpl> buildMockRefAndLevelSelectFormFieldList(){
+        
+        SelectElementBuilder mockSelectElementBuilder = new SelectElementBuilderImpl();
+        mockSelectElementBuilder.setValue("MockRef;MockLevel");
+        
+        // the mock select Element list
+        List<SelectElementBuilder> selectElementBuilderList = new ArrayList<SelectElementBuilder>();
+        selectElementBuilderList.add(mockSelectElementBuilder);
+        
+        Map<String,List<SelectElementBuilder>> selectElementBuilderMap = 
+                new HashMap<String,List<SelectElementBuilder>>();
+        
+        selectElementBuilderMap.put("REFERENTIAL1", selectElementBuilderList);
+
+        SelectFormFieldBuilderImpl selectFormFieldBuilder =  new SelectFormFieldBuilderImpl();
+        selectFormFieldBuilder.setSelectElementBuilderMap(selectElementBuilderMap);
+        
+        List<SelectFormFieldBuilderImpl> mockSelectRefFormFieldList = 
+                new ArrayList<SelectFormFieldBuilderImpl>();
+        mockSelectRefFormFieldList.add(selectFormFieldBuilder);
+        
+        return mockSelectRefFormFieldList;
     }
     
 }

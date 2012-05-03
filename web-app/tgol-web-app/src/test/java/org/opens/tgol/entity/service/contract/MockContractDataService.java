@@ -51,37 +51,15 @@ public class MockContractDataService implements ContractDataService {
     public MockContractDataService(){}
 
     private void initialiseContractMap(User user) {
-        Functionality functionality = new FunctionalityImpl();
-        functionality.setCode("DOMAIN");
-        functionality.setId(Long.valueOf(1));
-//        Scope domainScope = new TgsiScopeImpl();
-//        domainScope.setCode(ScopeEnum.DOMAIN);
-//        functionality.setScope(domainScope);
-        addContract(Long.valueOf(1), "Test Contract 1", "http://www.test1.com", null, null, false, user, functionality);
-        addContract(Long.valueOf(2), "Test Contract 2", "http://www.test2.com", null, null, false, user, functionality);
-        addContract(Long.valueOf(3), "Test Contract 3", "http://www.test3.com", "FORBIDDEN_REFERENTIAL", "Seo", true, user, functionality);
-        addContract(Long.valueOf(4), "Test Contract 4", "http://www.test4.com", "FORBIDDEN_REFERENTIAL", "Seo;AW21", true, user, functionality);
-        addContract(Long.valueOf(5), "Test Contract 5", "http://www.test5.com", "MAX_DOCUMENTS", "2", true, user, functionality);
-        addContract(Long.valueOf(6), "Test Contract 6", "http://www.test6.com", "MAX_DURATION", "20", true, user, functionality);
-        addContract(Long.valueOf(7), "Test Contract 7", "http://www.test7.com", "DEPTH", "5", true, user, functionality);
-        addContract(Long.valueOf(8), "Test Contract 8", "http://www.test8.com", "EXCLUSION_REGEXP", "test_expression", true, user, functionality);
+        Functionality functionality1 = new FunctionalityImpl();
+        functionality1.setCode("FUNCTIONALITY1");
+        functionality1.setId(Long.valueOf(1));
+        addContract(Long.valueOf(1), "Test Contract 1", "http://www.test1.com", null, null, false, user, functionality1);
         
-        Contract contract = addContract(Long.valueOf(10), "Test Contract 10", "http://www.test10.com", "AUTHORIZED_REFERENTIAL", "AW21", false, user, functionality);
-        addOptionToContract(contract,"DEFAULT_LEVEL", "Seo;Bz", false);
-        
-        contract = addContract(Long.valueOf(11), "Test Contract 11", "http://www.test11.com", "AUTHORIZED_REFERENTIAL", "Seo", false, user, functionality);
-        addOptionToContract(contract,"DEFAULT_LEVEL", "Seo;Ar", false);
-        
-        contract = addContract(Long.valueOf(12), "Test Contract 12", "http://www.test12.com", "AUTHORIZED_REFERENTIAL", "Seo;AW21", false, user, functionality);
-        addOptionToContract(contract,"DEFAULT_LEVEL", "AW21;Or", false);
-        
-        functionality = new FunctionalityImpl();
-        functionality.setCode("GROUPOFPAGES");
-        functionality.setId(Long.valueOf(2));
-//        domainScope = new TgsiScopeImpl();
-//        domainScope.setCode(ScopeEnum.GROUPOFPAGES);
-//        functionality.setScope(domainScope);
-        addContract(Long.valueOf(9), "Test Contract 9", "http://www.test9.com", null, null, false, user, functionality);
+        Functionality functionality2 = new FunctionalityImpl();
+        functionality2.setCode("FUNCTIONALITY2");
+        functionality2.setId(Long.valueOf(2));
+        addContract(Long.valueOf(2), "Test Contract 2", "http://www.test2.com", null, null, false, user, functionality2);
     }
 
     private Contract addContract(
@@ -201,6 +179,11 @@ public class MockContractDataService implements ContractDataService {
 
     @Override
     public String getUrlFromContractOption(Contract contract) {
+        for (OptionElement oe : contractMap.get(contract.getId()).getOptionElementSet()) {
+            if (oe.getOption().getCode().equalsIgnoreCase("DOMAIN")) {
+                return oe.getValue();
+            }
+        }
         return "";
     }
 
