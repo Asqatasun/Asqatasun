@@ -58,7 +58,7 @@ public class ActionVoterImpl implements ActionVoter {
         for (Action action : this.actionList) {
             actionCode = action.getActionCode();
             if (actionEnableMap.containsKey(actionCode)) {
-                action.setIsActionEnabled(actionEnableMap.get(actionCode));
+                action.setActionEnabled(actionEnableMap.get(actionCode));
             }
         }
     }

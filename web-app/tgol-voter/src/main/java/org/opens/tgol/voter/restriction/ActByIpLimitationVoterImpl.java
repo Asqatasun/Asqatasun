@@ -24,7 +24,7 @@ package org.opens.tgol.voter.restriction;
 import java.util.Calendar;
 import java.util.Date;
 import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.option.Option;
+import org.opens.tgol.entity.option.OptionElement;
 import org.opens.tgol.entity.service.contract.ActDataService;
 import org.opens.tgol.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +43,8 @@ public class ActByIpLimitationVoterImpl implements RestrictionVoter {
     }
 
     @Override
-    public String checkRestriction(Contract contract, Option option, String clientIp) {
-        String[] limitationValues = option.getValue().split("/");
+    public String checkRestriction(Contract contract, OptionElement optionElement, String clientIp) {
+        String[] limitationValues = optionElement.getValue().split("/");
         int nbOfAct = Integer.valueOf(limitationValues[0]);
         int period = Integer.valueOf(limitationValues[1]);
         Date now = Calendar.getInstance().getTime();

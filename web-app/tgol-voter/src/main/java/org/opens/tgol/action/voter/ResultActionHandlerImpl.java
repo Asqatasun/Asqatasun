@@ -26,6 +26,7 @@ import org.opens.tgol.action.ActionImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.opens.tgol.action.builder.ActionBuilder;
 
 /**
  *
@@ -44,20 +45,19 @@ public class ResultActionHandlerImpl implements ActionHandler {
         this.actionAccessibilityVoterMap = actionAccessibilityVoterMap;
     }
 
-    private List<Action> actionList;
+    private List<ActionBuilder> actionBuilderList;
 
-    public final void setActionList(List<Action> actionList) {
-        this.actionList = actionList;
-
+    public final void setActionBuilderList(List<ActionBuilder> actionBuilderList) {
+        this.actionBuilderList = actionBuilderList;
     }
 
     @SuppressWarnings("unchecked")
     public List<Action> getActionList() {
-        List<Action> actionListCopy = new ArrayList<Action>();
-        for (Action action : actionList) {
-            actionListCopy.add((Action) ((ActionImpl)action).clone());
+        List<Action> actionList = new ArrayList<Action>();
+        for (ActionBuilder actionBuilder : actionBuilderList) {
+            actionList.add(actionBuilder.build());
         }
-        return actionListCopy;
+        return actionList;
     }
 
     private boolean isVoterInitialised = false;

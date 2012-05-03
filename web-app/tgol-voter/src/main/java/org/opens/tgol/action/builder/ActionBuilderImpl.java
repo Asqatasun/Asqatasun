@@ -19,24 +19,38 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.action;
+package org.opens.tgol.action.builder;
+
+import org.opens.tgol.action.Action;
+import org.opens.tgol.action.ActionImpl;
 
 /**
- *
+ * The ActionBuilder interface contains the same methods as the Action interface
+ * All these attribute are set by injection. Then the build method returns 
+ * a fresh instance of Action.
+ * 
  * @author jkowalczyk
  */
-public class ActionImpl implements Action {
+public class ActionBuilderImpl implements ActionBuilder{
 
-    // By default an action is disabled. 
-    private boolean isActionEnabled = false;
-    @Override
-    public boolean getActionEnabled() {
-        return isActionEnabled;
-    }
+    /**
+     * Default constructor
+     */
+    public ActionBuilderImpl(){}
 
     @Override
-    public void setActionEnabled(boolean isActionEnabled) {
-        this.isActionEnabled = isActionEnabled;
+    public Action build() {
+        Action action = new ActionImpl();
+        action.setActionCode(this.actionCode);
+        action.setActionI81NCode(this.actionI81NCode);
+        action.setActionUrl(this.actionUrl);
+        action.setDisabledActionImageUrl(this.disabledActionImageUrl);
+        action.setEnabledActionImageUrl(this.enabledActionImageUrl);
+        action.setCssSelector(cssSelector);
+        action.setActionAltI81NCode(this.actionAltI81NCode);
+        // By default an action is disabled
+        action.setActionEnabled(false);
+        return action;
     }
 
     private String actionCode;
@@ -115,10 +129,5 @@ public class ActionImpl implements Action {
     public void setCssSelector(String cssSelector) {
         this.cssSelector = cssSelector;
     }
-
-    @Override
-    public void doProcess() {
-    //  do nothing here;
-    }
-
+    
 }

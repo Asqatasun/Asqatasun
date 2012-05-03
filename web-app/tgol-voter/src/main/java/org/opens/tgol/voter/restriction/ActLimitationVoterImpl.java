@@ -22,7 +22,7 @@
 package org.opens.tgol.voter.restriction;
 
 import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.option.Option;
+import org.opens.tgol.entity.option.OptionElement;
 import org.opens.tgol.entity.service.contract.ActDataService;
 import org.opens.tgol.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +41,8 @@ public class ActLimitationVoterImpl implements RestrictionVoter {
     }
 
     @Override
-    public String checkRestriction(Contract contract, Option option, String clientIp) {
-        int nbOfAct = Integer.valueOf(option.getValue());
+    public String checkRestriction(Contract contract, OptionElement optionElement, String clientIp) {
+        int nbOfAct = Integer.valueOf(optionElement.getValue());
         if (nbOfAct <= actDataService.getNumberOfAct(contract)) {
             return TgolKeyStore.ACT_QUOTA_EXCEEDED;
         }

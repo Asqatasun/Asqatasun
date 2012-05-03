@@ -21,13 +21,14 @@
  */
 package org.opens.tgol.action.voter;
 
-import org.opens.tgol.action.Action;
-import org.opens.tgol.action.ActionImpl;
-import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.product.Product;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
+import org.apache.commons.lang.StringUtils;
+import org.opens.tgol.action.Action;
+import org.opens.tgol.action.builder.ActionBuilder;
+import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.entity.functionality.Functionality;
 
 /**
  *
@@ -35,89 +36,57 @@ import java.util.Map;
  */
 public class ContractActionHandlerImpl implements ActionHandler {
 
-    private Map<String, ActionVoter> actionAccessibilityVoterMap;
+    private List<ActionBuilder> actionBuilderList;
 
-    public Map<String, ActionVoter> getActionAccessibilityVoterMap() {
-        return actionAccessibilityVoterMap;
-    }
-
-    public void setActionAccessibilityVoterMap(
-            Map<String, ActionVoter> actionAccessibilityVoterMap) {
-        this.actionAccessibilityVoterMap = actionAccessibilityVoterMap;
-    }
-
-    private List<Action> actionList;
-
-    public final void setActionList(List<Action> actionList) {
-        this.actionList = actionList;
+    public final void setActionBuilderList(List<ActionBuilder> actionBuilderList) {
+        this.actionBuilderList = actionBuilderList;
 
     }
 
     @SuppressWarnings("unchecked")
     public List<Action> getActionList() {
-        List<Action> actionListCopy = new ArrayList<Action>();
-        for (Action action : actionList) {
-            actionListCopy.add((Action) ((ActionImpl)action).clone());
+        List<Action> actionList = new ArrayList<Action>();
+        for (ActionBuilder actionBuilder : actionBuilderList) {
+            actionList.add(actionBuilder.build());
         }
-        return actionListCopy;
-    }
-
-    private boolean isVoterInitialised = false;
-//    public boolean isVoterInitialised() {
-//        return isVoterInitialised;
-//    }
-//
-//    public void setIsVoterInitialised(boolean isVoterInitialised) {
-//        this.isVoterInitialised = isVoterInitialised;
-//    }
-    
-//    public void setIsVoterInitialised(boolean isVoterInitialised) {
-//        this.isVoterInitialised = isVoterInitialised;
-//    }
-
-    /**
-     * This method initialises each voter with a copy of the contractAction
-     * collection. Each voter, regarding its configuration will enable/disable
-     * each action.
-     */
-    protected void initialiseVoter() {
-        if (!isVoterInitialised) {
-            for (ActionVoter cav : actionAccessibilityVoterMap.values()) {
-                List<Action> cal = getActionList();
-                cav.initialize(cal);
-            }
-            isVoterInitialised = true;
-        }
+        return actionList;
     }
 
     @Override
     public synchronized List<Action> getActionList(
             Object object) {
-        initialiseVoter();
         if (! (object instanceof Contract)) {
             return null;
         }
-        Product product = ((Contract)object).getProduct();
-        ActionVoter actionAccessibilityVoter = chooseActionAccessibilityVoter(product);
-        List<Action> userContractActionList = new ArrayList<Action>();
-        if (actionAccessibilityVoter != null) {
-            userContractActionList = actionAccessibilityVoter.getActionList();
+        List<Action> userContractActionList = getActionList();
+        Set<? extends Functionality> functionalitySet = 
+                ((Contract)object).getFunctionalitySet();
+        for (Action action : userContractActionList) {
+            activateAction(action, functionalitySet);
         }
         return userContractActionList;
     }
 
     /**
+     * If the code handled by the action corresponds to one Functionality 
+     * associated with the contract, this action is enabled. Otherwise, the action
+     * is disabled
      * 
-     * @param product
+     * @param action
+     * @param functionalitySet
      * @return
      *      the ContractActionVoter regarding the product
      */
-    private ActionVoter chooseActionAccessibilityVoter(Product product) {
-        String productCode = product.getCode();
-        if (actionAccessibilityVoterMap.containsKey(productCode)) {
-            return actionAccessibilityVoterMap.get(productCode);
+    private void activateAction(
+            Action action,
+            Set<? extends Functionality> functionalitySet) {
+        for (Functionality functionality : functionalitySet) {
+            if (StringUtils.equals(action.getActionCode(), functionality.getCode())) {
+                action.setActionEnabled(true);
+                return;
+            }
         }
-        return null;
+        action.setActionEnabled(false);
     }
     
 }
