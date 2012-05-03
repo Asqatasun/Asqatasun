@@ -5,7 +5,20 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="function" uri="http://tagutils"%>
-            <c:if test="${auditSetUpCommand.auditSite != 'true'}">
+
+            <c:choose>
+                <c:when test="${auditSetUpCommand.scope == 'DOMAIN'}">
+                    <c:set var="action" scope="page" value="site"/>
+                </c:when>
+                <c:when test="${auditSetUpCommand.scope == 'PAGE'}">
+                    <c:set var="action" scope="page" value="page"/>
+                </c:when>
+                <c:when test="${auditSetUpCommand.scope == 'FILE'}">
+                    <c:set var="action" scope="page" value="upload"/>
+                </c:when>
+            </c:choose>
+                
+            <c:if test="${action != 'site'}">
             <div class="span14 offset1">
                 <div id="mandatory-elements-message" class="alert-message block-message warning">
                     <spring:message code="sign-up.mandatoryElementsMessage"/>
@@ -21,17 +34,11 @@
                         </div>
                         </spring:hasBindErrors>
                         <div>
-                            <form:hidden path="auditSite"/>
-                            <form:hidden path="uploadAudit"/>
                             <form:hidden path="contractId"/>
+                            <form:hidden path="scope"/>
                         </div>
                     <c:choose>
-                        <c:when test="${auditSetUpCommand.auditSite == 'true'}">
-                        <div>
-                        <form:hidden path="urlList"/>
-                        </div>
-                        </c:when>
-                        <c:when test="${not empty auditSetUpCommand.urlList}">
+                        <c:when test="${action == 'page'}">
                         <fieldset>
                             <legend><spring:message code="auditSetUp.enterUrl"/></legend>
                             <c:forEach items="${auditSetUpCommand.urlList}" varStatus="pUrlIndex">
@@ -67,7 +74,7 @@
                             </c:forEach>
                         </fieldset>
                         </c:when>
-                        <c:otherwise>
+                        <c:when test="${action == 'upload'}">
                         <fieldset>
                             <legend><spring:message code="auditSetUp.enterFile"/></legend>
                             <c:forEach items="${auditSetUpCommand.fileInputList}" varStatus="pFileInput">
@@ -77,7 +84,7 @@
                                 <c:set var="fileLabel" scope="page">
                                     <fmt:message key="auditSetUp.file"/> ${pFileInput.index+1}
                                 </c:set>
-                                <c:set var="fileIndexError"><form:errors path="urlList[${pFileInput.index}]"/></c:set>
+                                <c:set var="fileIndexError"><form:errors path="fileInputList[${pFileInput.index}]"/></c:set>
                                 <c:choose>
                                     <c:when test="${not empty fileIndexError}">
                                         <c:set var="fileIndexErrorClass" value="error"/>
@@ -105,7 +112,7 @@
                             </div>
                             </c:forEach>
                         </fieldset>
-                        </c:otherwise>
+                        </c:when>
                     </c:choose>
                         <spring:hasBindErrors name="auditSetUpCommand">
                             <c:set var="expanded" scope="page" value="_expanded"/>
@@ -113,6 +120,52 @@
                         <h2 class="_toggle-master-parameters ${expanded}">
                             <fmt:message key="auditSetUp.formTitle"/>
                         </h2>
+                        <fieldset class="_toggle-parameters ">
+                            <legend><fmt:message key="level-parameters"/></legend>
+                        <c:set var="fieldsetInfo" scope="page">
+                            <spring:message code="level-parameters-info"/>
+                        </c:set>
+                        <c:if test="${fieldsetInfo != ''}">
+                            <div class="alert-message warning">
+                                <p class="fieldset-info">${fieldsetInfo}</p>
+                            </div>
+                        </c:if>
+                        <c:forEach var="level" items="${levelList}" >
+                            <c:set var="i18nKey" scope="page" value="${level.i18nKey}"/>
+                            <c:set var="code" scope="page" value="LEVEL"/>
+                            <div class="clearfix">
+                                <label id="set-up-${i18nKey}" for="${i18nKey}"><fmt:message key="${i18nKey}"/></label>
+                                <div class="set-up-value input">
+                                    <form:select id="${i18nKey}" path="level" cssErrorClass="xlarge error" cssClass="xlarge">
+                                        <c:forEach items="${level.selectElementMap}" var="group">
+                                            <optgroup label="<spring:message code="${group.key}"/>">
+                                                <c:forEach items="${group.value}" var="level">
+                                                <c:choose>
+                                                    <c:when test="${level.default == 'true'}">
+                                                        <c:set var="selected" scope="page" value="selected=\"selected\""/>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <c:set var="selected" scope="page" value=""/>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <c:choose>
+                                                    <c:when test="${level.enabled == 'false'}">
+                                                        <c:set var="disabled" scope="page" value="disabled=\"disabled\""/>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <c:set var="disabled" scope="page" value=""/>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <option value="${level.value}" ${selected} ${disabled}><spring:message code="${level.i18nKey}"/></option>
+                                                </c:forEach><!-- for each element of a referentiel -->
+                                            </optgroup>
+                                        </c:forEach>
+                                    </form:select>
+                                    <form:errors path="level" cssClass="alert-message error" /><br/>
+                                </div>
+                            </div>
+                        </fieldset>    
+                        </c:forEach>
                         <c:forEach var="entry" items="${parametersMap}">
                         <fieldset class="_toggle-parameters ">
                             <legend><fmt:message key="${entry.key}"/></legend>

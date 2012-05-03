@@ -89,7 +89,7 @@
                                 <td>
                                     <div class="action-button">
                                 <c:choose>
-                                    <c:when test="${contractAction.isActionEnabled == 'false'}">
+                                    <c:when test="${contractAction.actionEnabled == 'false'}">
                                         <c:choose>
                                             <c:when test="${not empty configProperties['cdnUrl']}">
                                                 <c:set var="contractActionImgUrl" value="${configProperties['cdnUrl']}${contractAction.disabledActionImageUrl}"/>

@@ -63,7 +63,7 @@
                                     <div id="audit-result-menu-actions" class="clearfix">
                                         <c:forEach var="action" items="${resultActionList}" varStatus="pAction">
                                             <c:choose>
-                                                <c:when test="${action.isActionEnabled == 'false'}">
+                                                <c:when test="${action.actionEnabled == 'false'}">
                                                     <a href="<c:url value="${action.actionUrl}&amp;wr=${param.wr}"/>" class="btn disabled primary" title="<fmt:message key="${action.actionAltI81NCode}"/> (<fmt:message key="contract.disabled"/>)">
                                             <fmt:message key="${action.actionI81NCode}"/>
                                         </a>
