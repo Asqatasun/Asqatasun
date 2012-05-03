@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2012  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -19,56 +19,53 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.form.parameterization;
+package org.opens.tgol.entity.functionality;
 
-import org.opens.tanaguru.entity.parameterization.ParameterElement;
-import org.opens.tgol.entity.option.Option;
-import org.opens.tgol.form.FormField;
+import org.opens.tanaguru.sdk.entity.Entity;
 
 /**
  *
  * @author jkowalczyk
  */
-public interface AuditSetUpFormField {
+public interface Functionality extends Entity {
 
     /**
      *
      * @return
-     *      the parameter element associated with the audit set-up form field
+     *      the code associated with the functionality
      */
-    ParameterElement getParameterElement();
+    String getCode();
 
     /**
      *
-     * @param parameterCode
+     * @param code
      */
-    void setParameterElement(ParameterElement parameterElement);
+    void setCode(String code);
+    
+    /**
+     *
+     * @return
+     *      the label describing the functionality
+     */
+    String getLabel();
+
+    /**
+     *
+     * @param label
+     */
+    void setLabel(String label);
 
     /**
      *
      * @return
-     *      the form field
+     *      the description associated with the functionality
      */
-    FormField getFormField();
-
+    String getDescription();
 
     /**
      * 
-     * @param formField
+     * @param description
      */
-    void setFormField(FormField formField);
-
-    /**
-     *
-     * @return
-     *      the option
-     */
-    Option getOption();
-
-    /**
-     *
-     * @param option
-     */
-    void setOption(Option option);
+    void setDescription(String description);
 
 }

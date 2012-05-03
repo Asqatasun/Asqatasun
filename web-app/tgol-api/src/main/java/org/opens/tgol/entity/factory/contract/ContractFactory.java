@@ -21,11 +21,15 @@
  */
 package org.opens.tgol.entity.factory.contract;
 
+import java.util.Date;
+import java.util.Set;
 import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
 import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.product.Product;
+import org.opens.tgol.entity.functionality.Functionality;
+import org.opens.tgol.entity.option.OptionElement;
+import org.opens.tgol.entity.referential.Referential;
+import org.opens.tgol.entity.scenario.Scenario;
 import org.opens.tgol.entity.user.User;
-import java.util.Date;
 
 /**
  *
@@ -34,15 +38,19 @@ import java.util.Date;
 public interface ContractFactory extends GenericFactory<Contract> {
 
     /**
-     *
-     * @param beginDatedate
+     * 
+     * @param label
+     * @param beginDate
      * @param endDate
      * @param renewalDate
      * @param price
-     * @param offer
+     * @param functionalitySet
+     * @param optionSet
+     * @param referentialSet
+     * @param scenarioSet
      * @param user
-     * @return
-     *      an initialized instance of Contract
+     * @return 
+     *      an initialised instance of Contract
      */
     Contract createContract(
             String label,
@@ -50,7 +58,10 @@ public interface ContractFactory extends GenericFactory<Contract> {
             Date endDate,
             Date renewalDate,
             Float price,
-            Product offer,
+            Set<? extends Functionality> functionalitySet,
+            Set<? extends OptionElement> optionSet,
+            Set<? extends Referential> referentialSet,
+            Set<? extends Scenario> scenarioSet,
             User user);
 
 }

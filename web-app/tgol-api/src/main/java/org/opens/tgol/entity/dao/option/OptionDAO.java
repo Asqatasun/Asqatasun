@@ -28,4 +28,14 @@ import org.opens.tgol.entity.option.Option;
  *
  * @author jkowalczyk
  */
-public interface OptionDAO extends GenericDAO<Option, Long> {}
+public interface OptionDAO extends GenericDAO<Option, Long> {
+
+    /**
+     *
+     * @param optionCode
+     * @return
+     *      the option instance given its code.
+     */
+    Option findOptionFromCode (String optionCode);
+
+}

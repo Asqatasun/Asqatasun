@@ -28,4 +28,13 @@ import org.opens.tgol.entity.option.Option;
  *
  * @author jkowalczyk
  */
-public interface OptionDataService extends GenericDataService<Option, Long> {}
+public interface OptionDataService extends GenericDataService<Option, Long> {
+
+    /**
+     * Retrieve a option from its code
+     *
+     * @param optionCode
+     * @return
+     */
+    Option getOption(String optionCode);
+}

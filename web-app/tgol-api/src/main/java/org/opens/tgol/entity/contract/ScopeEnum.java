@@ -19,33 +19,18 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.entity.factory.option;
-
-import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
-import org.opens.tgol.entity.option.Option;
-import org.opens.tgol.entity.option.OptionFamily;
+package org.opens.tgol.entity.contract;
 
 /**
  *
  * @author jkowalczyk
  */
-public interface OptionFactory extends GenericFactory<Option> {
+public enum ScopeEnum {
 
-    /**
-     * 
-     * @param optionFamily
-     * @param code
-     * @param label
-     * @param description
-     * @param isRestriction
-     * @return 
-     *      an initialised instance of option
-     */        
-    Option createOption(
-            OptionFamily optionFamily, 
-            String code, 
-            String label, 
-            String description, 
-            boolean isRestriction);
+    DOMAIN,
+    PAGE,
+    FILE,
+    GROUPOFFILES,
+    GROUPOFPAGES;
 
 }

@@ -19,33 +19,15 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.entity.factory.option;
+package org.opens.tgol.entity.factory.scenario;
 
 import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
-import org.opens.tgol.entity.option.Option;
-import org.opens.tgol.entity.option.OptionFamily;
+import org.opens.tgol.entity.scenario.Scenario;
 
 /**
  *
  * @author jkowalczyk
  */
-public interface OptionFactory extends GenericFactory<Option> {
-
-    /**
-     * 
-     * @param optionFamily
-     * @param code
-     * @param label
-     * @param description
-     * @param isRestriction
-     * @return 
-     *      an initialised instance of option
-     */        
-    Option createOption(
-            OptionFamily optionFamily, 
-            String code, 
-            String label, 
-            String description, 
-            boolean isRestriction);
+public interface ScenarioFactory extends GenericFactory<Scenario> {
 
 }

@@ -21,12 +21,12 @@
  */
 package org.opens.tgol.entity.dao.contract;
 
+import java.util.Collection;
+import java.util.Date;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.product.ScopeEnum;
-import java.util.Collection;
-import java.util.Date;
+import org.opens.tgol.entity.contract.ScopeEnum;
 
 /**
  *

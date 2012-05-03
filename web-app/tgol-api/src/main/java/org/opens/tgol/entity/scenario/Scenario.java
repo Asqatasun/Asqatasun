@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2012  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -19,56 +19,73 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.form.parameterization;
+package org.opens.tgol.entity.scenario;
 
-import org.opens.tanaguru.entity.parameterization.ParameterElement;
-import org.opens.tgol.entity.option.Option;
-import org.opens.tgol.form.FormField;
+import java.util.Date;
+import org.opens.tanaguru.sdk.entity.Entity;
+import org.opens.tgol.entity.contract.Contract;
 
 /**
  *
  * @author jkowalczyk
  */
-public interface AuditSetUpFormField {
-
+public interface Scenario extends Entity {
+    
     /**
-     *
-     * @return
-     *      the parameter element associated with the audit set-up form field
+     * 
      */
-    ParameterElement getParameterElement();
-
+    Date getDateOfCreation();
+    
     /**
-     *
-     * @param parameterCode
+     * 
+     * @param dateOfCreation
      */
-    void setParameterElement(ParameterElement parameterElement);
-
+    void setDateOfCreation(Date dateOfCreation);
+    
     /**
-     *
-     * @return
-     *      the form field
+     * 
      */
-    FormField getFormField();
-
+    String getLabel();
+    
+    /**
+     * 
+     * @param label 
+     */
+    void setLabel(String label);
+    
+    /**
+     * 
+     * @return 
+     */
+    String getContent();
+    
+    /**
+     * 
+     * @param content 
+     */
+    void setContent(String content);
+    
+    /**
+     * 
+     * @return 
+     */
+    String getDescription();
+    
+    /**
+     * 
+     * @param description 
+     */
+    void setDescription(String description);
+    
+    /**
+     * 
+     * @return 
+     */
+    Contract getContract();
 
     /**
      * 
-     * @param formField
+     * @param contract 
      */
-    void setFormField(FormField formField);
-
-    /**
-     *
-     * @return
-     *      the option
-     */
-    Option getOption();
-
-    /**
-     *
-     * @param option
-     */
-    void setOption(Option option);
-
+    void setContract(Contract contract);
 }

@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2012  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -19,56 +19,25 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.form.parameterization;
+package org.opens.tgol.entity.factory.option;
 
-import org.opens.tanaguru.entity.parameterization.ParameterElement;
-import org.opens.tgol.entity.option.Option;
-import org.opens.tgol.form.FormField;
+import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
+import org.opens.tgol.entity.option.OptionFamily;
 
 /**
  *
  * @author jkowalczyk
  */
-public interface AuditSetUpFormField {
-
-    /**
-     *
-     * @return
-     *      the parameter element associated with the audit set-up form field
-     */
-    ParameterElement getParameterElement();
-
-    /**
-     *
-     * @param parameterCode
-     */
-    void setParameterElement(ParameterElement parameterElement);
-
-    /**
-     *
-     * @return
-     *      the form field
-     */
-    FormField getFormField();
-
+public interface OptionFamilyFactory extends GenericFactory<OptionFamily> {
 
     /**
      * 
-     * @param formField
-     */
-    void setFormField(FormField formField);
-
-    /**
-     *
+     * @param code
+     * @param label
+     * @param description
      * @return
-     *      the option
+     *      an initialised instance of optionFamily
      */
-    Option getOption();
-
-    /**
-     *
-     * @param option
-     */
-    void setOption(Option option);
+    OptionFamily createOptionFamily(String code, String label, String description);
 
 }

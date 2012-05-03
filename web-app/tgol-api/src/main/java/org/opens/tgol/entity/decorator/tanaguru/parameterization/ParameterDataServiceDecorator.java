@@ -21,9 +21,9 @@
  */
 package org.opens.tgol.entity.decorator.tanaguru.parameterization;
 
-import org.opens.tgol.entity.product.ScopeEnum;
 import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
+import org.opens.tgol.entity.contract.ScopeEnum;
 
 /**
  *

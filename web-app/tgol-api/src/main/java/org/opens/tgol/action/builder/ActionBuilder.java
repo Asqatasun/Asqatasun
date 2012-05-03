@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2012  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -19,31 +19,23 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.action;
+package org.opens.tgol.action.builder;
+
+import org.opens.tgol.action.Action;
 
 /**
  *
  * @author jkowalczyk
  */
-public interface Action {
-
+public interface ActionBuilder {
+    
     /**
-     *
+     * 
      * @return
-     *      whether the action is enabled or not
+     *      a set instance of action
      */
-    boolean getActionEnabled();
-
-    /**
-     * @param isActionEnabled
-     */
-    void setActionEnabled(boolean isActionEnabled);
-
-    /**
-     * do some treatment
-     */
-    void doProcess();
-
+    Action build();
+    
     /**
      *
      * @return
@@ -133,5 +125,5 @@ public interface Action {
      * @param cssSelector
      */
     void setCssSelector(String cssSelector);
-
+    
 }

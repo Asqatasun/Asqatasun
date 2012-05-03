@@ -21,10 +21,10 @@
  */
 package org.opens.tgol.entity.dao.tanaguru.parameterization;
 
-import org.opens.tgol.entity.product.ScopeEnum;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
+import org.opens.tgol.entity.contract.ScopeEnum;
 
 /**
  *

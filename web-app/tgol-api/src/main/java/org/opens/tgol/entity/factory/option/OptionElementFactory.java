@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2012  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -22,10 +22,21 @@
 package org.opens.tgol.entity.factory.option;
 
 import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
+import org.opens.tgol.entity.option.Option;
 import org.opens.tgol.entity.option.OptionElement;
 
 /**
  *
  * @author jkowalczyk
  */
-public interface OptionElementFactory extends GenericFactory<OptionElement> {}
+public interface OptionElementFactory extends GenericFactory<OptionElement> {
+
+    /**
+     * 
+     * @param option
+     * @param value
+     * @return 
+     *      an initialised instance of optionElement
+     */
+    OptionElement createOptionElement(Option option, String value);
+}

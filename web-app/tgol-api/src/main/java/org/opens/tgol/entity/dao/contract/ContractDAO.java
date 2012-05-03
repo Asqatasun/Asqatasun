@@ -21,11 +21,11 @@
  */
 package org.opens.tgol.entity.dao.contract;
 
-import org.opens.tgol.entity.user.User;
+import java.util.Collection;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.product.Product;
-import java.util.Collection;
+import org.opens.tgol.entity.option.OptionElement;
+import org.opens.tgol.entity.user.User;
 
 /**
  *
@@ -40,12 +40,5 @@ public interface ContractDAO extends GenericDAO<Contract, Long> {
      *      the collection of contracts for a given user
      */
     Collection<Contract> findAllContractsByUser(User user);
-
-    /**
-     *
-     * @param product
-     * @return
-     */
-    Collection<Contract> findAllContractsByProduct(Product product);
-
+    
 }

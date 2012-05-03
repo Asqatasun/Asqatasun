@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2012  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -34,25 +34,60 @@ public interface Option extends Entity {
      * @return
      *      the option code
      */
-    OptionElement getOptionElement();
+    String getCode();
 
     /**
      *
      * @param code
      */
-    void setOptionElement(OptionElement OptionElement);
+    void setCode(String code);
 
     /**
-     *
+     * 
      * @return
-     *      the Option value
      */
-    String getValue();
+    String getLabel();
 
     /**
-     *
-     * @param OptionValue
+     * 
+     * @param string
      */
-    void setValue(String OptionValue);
+    void setLabel(String label);
+    
+    /**
+     * 
+     * @return
+     */
+    String getDescription();
+
+    /**
+     * 
+     * @param string
+     */
+    void setDescription(String description);
+    
+    /**
+     * 
+     * @return 
+     */
+    boolean isRestriction();
+
+    /**
+     * 
+     * @param isRestriction 
+     */
+    void setIsRestriction(boolean isRestriction);
+    
+    /**
+     * 
+     * @return 
+     */
+    OptionFamily getOptionFamily();
+    
+    /**
+     * 
+     * @param optionFamily 
+     */
+    void setOptionFamily(OptionFamily optionFamily);
 
 }

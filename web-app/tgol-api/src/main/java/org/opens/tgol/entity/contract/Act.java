@@ -21,10 +21,9 @@
  */
 package org.opens.tgol.entity.contract;
 
-import org.opens.tanaguru.sdk.entity.Entity;
-import org.opens.tgol.entity.product.Scope;
 import java.util.Date;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.sdk.entity.Entity;
 
 /**
  *

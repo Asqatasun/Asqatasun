@@ -19,33 +19,13 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.entity.factory.option;
+package org.opens.tgol.entity.service.option;
 
-import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
-import org.opens.tgol.entity.option.Option;
+import org.opens.tanaguru.sdk.entity.service.GenericDataService;
 import org.opens.tgol.entity.option.OptionFamily;
 
 /**
  *
  * @author jkowalczyk
  */
-public interface OptionFactory extends GenericFactory<Option> {
-
-    /**
-     * 
-     * @param optionFamily
-     * @param code
-     * @param label
-     * @param description
-     * @param isRestriction
-     * @return 
-     *      an initialised instance of option
-     */        
-    Option createOption(
-            OptionFamily optionFamily, 
-            String code, 
-            String label, 
-            String description, 
-            boolean isRestriction);
-
-}
+public interface OptionFamilyDataService extends GenericDataService<OptionFamily, Long> {}

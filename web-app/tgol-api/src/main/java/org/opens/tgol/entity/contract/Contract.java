@@ -24,8 +24,10 @@ package org.opens.tgol.entity.contract;
 import java.util.Date;
 import java.util.Set;
 import org.opens.tanaguru.sdk.entity.Entity;
-import org.opens.tgol.entity.option.Option;
-import org.opens.tgol.entity.product.Product;
+import org.opens.tgol.entity.functionality.Functionality;
+import org.opens.tgol.entity.option.OptionElement;
+import org.opens.tgol.entity.referential.Referential;
+import org.opens.tgol.entity.scenario.Scenario;
 import org.opens.tgol.entity.user.User;
 
 /**
@@ -89,19 +91,6 @@ public interface Contract extends Entity {
     /**
      *
      * @return
-     *          the Url associated with the contract
-     */
-    String getUrl();
-
-    /**
-     * 
-     * @param url
-     */
-    void setUrl(String url);
-
-    /**
-     *
-     * @return
      *      the price of the contract
      */
     Float getPrice();
@@ -128,19 +117,6 @@ public interface Contract extends Entity {
     /**
      *
      * @return
-     *      the related product associated with the contract
-     */
-    Product getProduct();
-
-    /**
-     * 
-     * @param product
-     */
-    void setProduct(Product product);
-
-    /**
-     *
-     * @return
      *      the set of the acts associated with the contract
      */
     Set<? extends Act> getActSet();
@@ -160,19 +136,76 @@ public interface Contract extends Entity {
         /**
      *
      * @return
-     *      the set of the options associated with the offer
+     *      the set of the option elements associated with the offer
      */
-    Set<? extends Option> getOptionSet();
+    Set<? extends OptionElement> getOptionElementSet();
 
     /**
      *
-     * @param option
+     * @param optionElement
      */
-    void addOption (Option option);
+    void addOptionElement (OptionElement optionElement);
 
     /**
      *
-     * @param optionSet
+     * @param optionElementSet
      */
-    void addAllOption (Set<? extends Option> optionSet);
+    void addAllOptionElement (Set<? extends OptionElement> optionElementSet);
+    
+    /**
+     *
+     * @return
+     *      the set of functionality associated with the contract
+     */
+    Set<? extends Functionality> getFunctionalitySet();
+
+    /**
+     * 
+     * @param functionality
+     */
+    void addFunctionality(Functionality functionality);
+    
+    /**
+     * 
+     * @param functionality
+     */
+    void addAllFunctionality(Set<? extends Functionality> functionalitySet);
+    
+    /**
+     *
+     * @return
+     *      the set of references associated with the contract
+     */
+    Set<? extends Referential> getReferentialSet();
+
+    /**
+     * 
+     * @param reference
+     */
+    void addReferential(Referential referential);
+    
+    /**
+     * 
+     * @param reference
+     */
+    void addAllReferential(Set<? extends Referential> referentialSet);
+    
+    /**
+     *
+     * @return
+     *      the set of scenarios associated with the contract
+     */
+    Set<? extends Scenario> getScenarioSet();
+
+    /**
+     * 
+     * @param reference
+     */
+    void addScenario(Scenario Scenario);
+    
+    /**
+     * 
+     * @param reference
+     */
+    void addAllScenario(Set<? extends Scenario> scenarioSet);
 }

@@ -21,10 +21,10 @@
  */
 package org.opens.tgol.presentation.data;
 
-import org.opens.tgol.entity.product.ScopeEnum;
 import java.util.Date;
 import java.util.Map;
 import org.opens.tanaguru.entity.reference.Theme;
+import org.opens.tgol.entity.contract.ScopeEnum;
 
 /**
  * This interface defines the audit statistics data

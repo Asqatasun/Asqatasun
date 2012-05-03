@@ -21,11 +21,10 @@
  */
 package org.opens.tgol.entity.service.contract;
 
+import java.util.Collection;
 import org.opens.tanaguru.sdk.entity.service.GenericDataService;
 import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.product.Product;
 import org.opens.tgol.entity.user.User;
-import java.util.Collection;
 
 /**
  *
@@ -40,12 +39,15 @@ public interface ContractDataService extends GenericDataService<Contract, Long> 
      *      the collection of contracts for a given user
      */
     Collection<Contract> getAllContractsByUser(User user);
-
+    
     /**
-     *
-     * @param product
-     * @return
+     * The Url associated with the contract is an option. We need to iterate 
+     * through the options of the contract to retrieve the one that handles 
+     * the Url. If this option is missing, an empty String is returned.
+     * 
+     * @param contract
+     * @return 
      */
-    Collection<Contract> getAllContractsByProduct(Product product);
+    String getUrlFromContractOption(Contract contract);
 
 }
