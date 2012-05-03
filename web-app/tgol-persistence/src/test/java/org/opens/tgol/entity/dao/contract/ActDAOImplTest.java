@@ -23,7 +23,6 @@ package org.opens.tgol.entity.dao.contract;
 
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.dao.product.ScopeDAO;
 import org.opens.tgol.entity.dao.test.AbstractDaoTestCase;
 import org.opens.tgol.entity.factory.contract.ActFactory;
 import org.opens.tgol.entity.factory.contract.ContractFactory;
@@ -36,9 +35,13 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.opens.tanaguru.entity.dao.subject.WebResourceDAO;
+import org.opens.tanaguru.entity.dao.subject.WebResourceDAOImpl;
 import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
+import org.opens.tanaguru.entity.factory.subject.WebResourceFactoryImpl;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tgol.entity.factory.contract.ActFactoryImpl;
+import org.opens.tgol.entity.factory.contract.ContractFactoryImpl;
 
 /**
  *

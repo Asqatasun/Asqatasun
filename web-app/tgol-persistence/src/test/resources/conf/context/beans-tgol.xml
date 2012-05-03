@@ -9,6 +9,17 @@
     <bean id="contractFactory" class="org.opens.tgol.entity.factory.contract.ContractFactoryImpl"/>
     <bean id="actDAO" class="org.opens.tgol.entity.dao.contract.ActDAOImpl"/>
     <bean id="actFactory" class="org.opens.tgol.entity.factory.contract.ActFactoryImpl"/>
+    <bean id="scopeDAO" class="org.opens.tgol.entity.dao.contract.ScopeDAOImpl"/>
+    <bean id="scopeFactory" class="org.opens.tgol.entity.factory.contract.ScopeFactoryImpl"/>
+
+    <bean id="functionalityDAO" class="org.opens.tgol.entity.dao.functionality.FunctionalityDAOImpl"/>
+    <bean id="functionalityFactory" class="org.opens.tgol.entity.factory.functionality.FunctionalityFactoryImpl"/>
+    
+    <bean id="scenarioDAO" class="org.opens.tgol.entity.dao.scenario.ScenarioDAOImpl"/>
+    <bean id="scenarioFactory" class="org.opens.tgol.entity.factory.scenario.ScenarioFactoryImpl"/>
+    
+    <bean id="referentialDAO" class="org.opens.tgol.entity.dao.referential.ReferentialDAOImpl"/>
+    <bean id="referentialFactory" class="org.opens.tgol.entity.factory.referential.ReferentialFactoryImpl"/>
 
     <bean id="userDAO" class="org.opens.tgol.entity.dao.user.UserDAOImpl"/>
     <bean id="userFactory" class="org.opens.tgol.entity.factory.user.UserFactoryImpl"/>
@@ -17,8 +28,6 @@
 
     <bean id="productDAO" class="org.opens.tgol.entity.dao.product.ProductDAOImpl"/>
     <bean id="productFactory" class="org.opens.tgol.entity.factory.product.ProductFactoryImpl"/>
-    <bean id="scopeDAO" class="org.opens.tgol.entity.dao.product.ScopeDAOImpl"/>
-    <bean id="scopeFactory" class="org.opens.tgol.entity.factory.product.ScopeFactoryImpl"/>
 
     <bean id="webResourceFactory" class="org.opens.tanaguru.entity.factory.subject.WebResourceFactoryImpl"/>
     <bean id="webResourceDAO" class="org.opens.tanaguru.entity.dao.subject.WebResourceDAOImpl"/>

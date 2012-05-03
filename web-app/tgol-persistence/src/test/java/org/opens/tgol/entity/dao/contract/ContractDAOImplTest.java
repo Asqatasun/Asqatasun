@@ -21,14 +21,23 @@
  */
 package org.opens.tgol.entity.dao.contract;
 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.dao.product.ProductDAO;
 import org.opens.tgol.entity.dao.test.AbstractDaoTestCase;
 import org.opens.tgol.entity.dao.user.UserDAO;
+import org.opens.tgol.entity.dao.user.UserDAOImpl;
 import org.opens.tgol.entity.factory.contract.ContractFactory;
-import org.opens.tgol.entity.product.Product;
+import org.opens.tgol.entity.factory.contract.ContractFactoryImpl;
+import org.opens.tgol.entity.functionality.Functionality;
+import org.opens.tgol.entity.functionality.FunctionalityImpl;
+import org.opens.tgol.entity.option.OptionElementImpl;
+import org.opens.tgol.entity.referential.ReferentialImpl;
+import org.opens.tgol.entity.scenario.ScenarioImpl;
+import org.opens.tgol.entity.service.contract.ContractDataService;
+import org.opens.tgol.entity.service.contract.ContractDataServiceImpl;
 import org.opens.tgol.entity.user.User;
-import java.util.Date;
 
 /**
  *
@@ -43,8 +52,8 @@ public class ContractDAOImplTest extends AbstractDaoTestCase {
 
     private ContractDAO contractDAO;
     private UserDAO userDAO;
-    private ProductDAO productDAO;
     private ContractFactory contractFactory;
+    private ContractDataService contractDataService;
 
     public ContractDAOImplTest(String testName) {
         super(testName);
@@ -53,12 +62,12 @@ public class ContractDAOImplTest extends AbstractDaoTestCase {
                 springBeanFactory.getBean("contractDAO");
         userDAO = (UserDAO)
                 springBeanFactory.getBean("userDAO");
-        productDAO = (ProductDAO)
-                springBeanFactory.getBean("productDAO");
         contractFactory = (ContractFactory)
                 springBeanFactory.getBean("contractFactory");
+        contractDataService = new ContractDataServiceImpl();
+        contractDataService.setEntityDao(contractDAO);
     }
-
+    
     /**
      * Test of findAllContractsByUser method, of class ContractDAOImpl.
      */
@@ -75,28 +84,35 @@ public class ContractDAOImplTest extends AbstractDaoTestCase {
      */
     public void testRead() {
         System.out.println("read");
+        
         Contract contract = contractDAO.read(Long.valueOf(1));
         assertNotNull(contract);
-        assertEquals("http://www.contract2.com/", contract.getUrl());
-        assertEquals("Test1", contract.getUser().getName());
-        assertEquals("AuditAxs", contract.getProduct().getLabel());
+        assertEquals("http://www.contract1.com/", contractDataService.getUrlFromContractOption(contract));
+        assertEquals(Long.valueOf("1"), contract.getUser().getId());
+        Set<String> functionalityCodeSet = new HashSet<String>();
+        for (Functionality functionality : contract.getFunctionalitySet()) {
+            functionalityCodeSet.add(functionality.getCode());
+        }
+        assertTrue(functionalityCodeSet.contains("PAGES_AUDIT"));
+        assertTrue(!functionalityCodeSet.contains("SITE_AUDIT"));
+        assertEquals(1, contract.getReferentialSet().size());
+        assertTrue(contract.getScenarioSet().isEmpty());
+        
+        contract = contractDAO.read(Long.valueOf(2));
+        assertNotNull(contract);
+        assertEquals("http://www.contract2.com/", contractDataService.getUrlFromContractOption(contract));
+        assertEquals(Long.valueOf("1"), contract.getUser().getId());
+        functionalityCodeSet = new HashSet<String>();
+        for (Functionality functionality : contract.getFunctionalitySet()) {
+            functionalityCodeSet.add(functionality.getCode());
+        }
+        assertTrue(functionalityCodeSet.contains("PAGES_AUDIT"));
+        assertTrue(functionalityCodeSet.contains("SITE_AUDIT"));
+        assertEquals(2, contract.getReferentialSet().size());
+        assertEquals(2, contract.getScenarioSet().size());
+        
         contract = contractDAO.read(Long.valueOf(3));
         assertNull(contract);
-    }
-
-    /**
-     * Test of findAllContractsByUser method, of class ContractDAOImpl.
-     */
-    public void testFindAllContractsByProduct() {
-        System.out.println("findAllContractsByProduct");
-        Product product = productDAO.read(Long.valueOf(1));
-        assertEquals(1, contractDAO.findAllContractsByProduct(product).size());
-        assertEquals("http://www.contract1.com/",
-                contractDAO.findAllContractsByProduct(product).iterator().next().getUrl());
-        product = productDAO.read(Long.valueOf(2));
-        assertEquals(1, contractDAO.findAllContractsByProduct(product).size());
-        assertEquals("http://www.contract2.com/",
-                contractDAO.findAllContractsByProduct(product).iterator().next().getUrl());
     }
 
     /**
@@ -106,14 +122,22 @@ public class ContractDAOImplTest extends AbstractDaoTestCase {
         System.out.println("saveOrUpdate");
         Date beginDate = new Date();
         Date endDate = new Date();
+        Date renewalDate = new Date();
         int nbOfContract = contractDAO.findAll().size();
+        Set<FunctionalityImpl> functionalitySet = new HashSet<FunctionalityImpl>();
+        Set<OptionElementImpl> optionElementSet = new HashSet<OptionElementImpl>();
+        Set<ReferentialImpl> referenceSet = new HashSet<ReferentialImpl>();
+        Set<ScenarioImpl> scenarioSet = new HashSet<ScenarioImpl>();
         Contract contract = contractFactory.createContract(
                 "Contract-test",
                 beginDate,
                 endDate,
-                null,
+                renewalDate,
                 Float.valueOf(200),
-                null,
+                functionalitySet,
+                optionElementSet,
+                referenceSet,
+                scenarioSet,
                 null);
         contractDAO.saveOrUpdate(contract);
         assertEquals(nbOfContract+1, contractDAO.findAll().size());

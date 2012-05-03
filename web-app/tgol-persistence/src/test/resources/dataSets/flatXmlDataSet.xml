@@ -12,11 +12,33 @@
     <TGSI_SCOPE Id_Scope="1" Code="DOMAIN" Label="Site"/>
     <TGSI_SCOPE Id_Scope="2" Code="PAGE" Label="Page"/>
 
-    <TGSI_PRODUCT Id_Product="1" Label="AuditSeo" SCOPE_Id_Scope="1" />
-    <TGSI_PRODUCT Id_Product="2" Label="AuditAxs" SCOPE_Id_Scope="2" />
+    <TGSI_REFERENTIAL Id_Referential="1" Code="REF1" Label="Referential 1"/>
+    <TGSI_REFERENTIAL Id_Referential="2" Code="REF2" Label="Referential 2"/>
+    
+    <TGSI_FUNCTIONALITY Id_Functionality="1" Code="PAGES_AUDIT" Label="Pages audit functionality"/>
+    <TGSI_FUNCTIONALITY Id_Functionality="2" Code="SITE_AUDIT" Label="Site audit functionality" />
 
-    <TGSI_CONTRACT Id_Contract="1" Label="Contract1" Begin_Date="2011-01-01 00:00:00" End_Date="2012-01-01 23:59:59" USER_Id_User="1" Url="http://www.contract2.com/" Price="1000000.32" PRODUCT_Id_Product="2"/>
-    <TGSI_CONTRACT Id_Contract="2" Label="Contract2" Begin_Date="2011-01-01 13:50:29" End_Date="2011-06-30 23:59:59" USER_Id_User="1" Url="http://www.contract1.com/" PRODUCT_Id_Product="1"/>
+    <TGSI_CONTRACT Id_Contract="1" Label="Contract1" Begin_Date="2011-01-01 00:00:00" End_Date="2012-01-01 23:59:59" USER_Id_User="1" Price="1000000.32" />
+    <TGSI_CONTRACT Id_Contract="2" Label="Contract2" Begin_Date="2011-01-01 13:50:29" End_Date="2011-06-30 23:59:59" USER_Id_User="1"/>
+
+    <TGSI_CONTRACT_FUNCTIONALITY CONTRACT_Id_Contract="1" FUNCTIONALITY_Id_Functionality="1"/>
+    <TGSI_CONTRACT_FUNCTIONALITY CONTRACT_Id_Contract="2" FUNCTIONALITY_Id_Functionality="1"/>
+    <TGSI_CONTRACT_FUNCTIONALITY CONTRACT_Id_Contract="2" FUNCTIONALITY_Id_Functionality="2"/>
+    
+    <TGSI_CONTRACT_REFERENTIAL CONTRACT_Id_Contract="1" REFERENTIAL_Id_REFERENTIAL="1"/>
+    <TGSI_CONTRACT_REFERENTIAL CONTRACT_Id_Contract="2" REFERENTIAL_Id_REFERENTIAL="1"/>
+    <TGSI_CONTRACT_REFERENTIAL CONTRACT_Id_Contract="2" REFERENTIAL_Id_REFERENTIAL="2"/>
+    
+    <TGSI_SCENARIO Id_Scenario="1" Date_Of_Creation="2011-01-01 00:00:00" Label="My Scenario 1" Content="Scenario Content" CONTRACT_Id_Contract="2"/>
+    <TGSI_SCENARIO Id_Scenario="2" Date_Of_Creation="2011-01-01 00:00:00" Label="My Scenario 2" Content="Scenario Content" CONTRACT_Id_Contract="2"/>
+    
+    <TGSI_OPTION_FAMILY Id_Option_Family="1" Code="DOMAIN" Label="" Description=""/>
+    <TGSI_OPTION Id_Option="1" Code="DOMAIN" Is_Restriction="false" OPTION_FAMILY_Id_Option_Family="1"/>
+    <TGSI_OPTION_ELEMENT Id_Option_Element="1" OPTION_Id_Option="1" Value="http://www.contract1.com/"/>
+    <TGSI_OPTION_ELEMENT Id_Option_Element="2" OPTION_Id_Option="1" Value="http://www.contract2.com/"/>
+    
+    <TGSI_CONTRACT_OPTION_ELEMENT CONTRACT_Id_Contract="1" OPTION_ELEMENT_Id_Option_Element="1"/>
+    <TGSI_CONTRACT_OPTION_ELEMENT CONTRACT_Id_Contract="2" OPTION_ELEMENT_Id_Option_Element="2"/>
 
     <TGSI_ACT Id_Act="1" Begin_Date="2011-01-01 00:00:00" End_Date="2011-01-01 01:00:00" CONTRACT_Id_Contract="1" Status="COMPLETED" Scope_Id_Scope="1" Client_Ip="127.0.0.1"/>
     <TGSI_ACT Id_Act="2" Begin_Date="2011-01-01 00:00:01" End_Date="2011-01-01 01:00:01" CONTRACT_Id_Contract="1" Status="COMPLETED" Scope_Id_Scope="1" Client_Ip="127.0.0.1"/>
