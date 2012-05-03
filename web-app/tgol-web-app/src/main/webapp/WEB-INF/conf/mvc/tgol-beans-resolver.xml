@@ -21,6 +21,8 @@
                 <prop key="org.opens.tgol.exception.ForbiddenPageException">access-denied</prop>
                 <prop key="org.opens.tgol.exception.ForbiddenAuditException">access-denied</prop>
                 <prop key="org.opens.tgol.exception.LostInSpaceException">oups</prop>
+                <prop key="org.springframework.web.bind.MissingServletRequestParameterException">access-denied</prop>
+                <prop key="org.springframework.web.method.annotation.support.MethodArgumentNotValidException">access-denied</prop>
             </props>
         </property>
         <property name="defaultStatusCode">

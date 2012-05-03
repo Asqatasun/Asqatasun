@@ -21,255 +21,24 @@
         </property>
     </bean>
 
-    <bean id="awPages" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="true"/>
-                <entry key="SITE_AUDIT" value="false"/>
-                <entry key="UPLOAD_AUDIT" value="false"/>
-            </map>
-        </property>
-        <property name="code" value="AW_PAGES"/>
-    </bean>
-
-    <bean id="awDomain" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="true"/>
-                <entry key="SITE_AUDIT" value="true"/>
-                <entry key="UPLOAD_AUDIT" value="false"/>
-            </map>
-        </property>
-        <property name="code" value="AW_DOMAIN"/>
-    </bean>
-
-    <bean id="awReadOnly" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="false"/>
-                <entry key="SITE_AUDIT" value="false"/>
-                <entry key="UPLOAD_AUDIT" value="false"/>
-            </map>
-        </property>
-        <property name="code" value="AW_READONLY"/>
-    </bean>
-
-    <bean id="awUpload" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="false"/>
-                <entry key="SITE_AUDIT" value="false"/>
-                <entry key="UPLOAD_AUDIT" value="true"/>
-            </map>
-        </property>
-        <property name="code" value="AW_UPLOAD"/>
-    </bean>
-    
-    <bean id="awPagesUpload" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="true"/>
-                <entry key="SITE_AUDIT" value="false"/>
-                <entry key="UPLOAD_AUDIT" value="true"/>
-            </map>
-        </property>
-        <property name="code" value="AW_PAGES_UPLOAD"/>
-    </bean>
-
-    <bean id="awDomainOnly" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="false"/>
-                <entry key="SITE_AUDIT" value="true"/>
-                <entry key="UPLOAD_AUDIT" value="false"/>
-            </map>
-        </property>
-        <property name="code" value="AW_DOMAIN_ONLY"/>
-    </bean>
-
-    <bean id="awPagesDomainUpload" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="true"/>
-                <entry key="SITE_AUDIT" value="true"/>
-                <entry key="UPLOAD_AUDIT" value="true"/>
-            </map>
-        </property>
-        <property name="code" value="AW_PAGES_DOMAIN_UPLOAD"/>
-    </bean>
-
-    <bean id="seoPages" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="true"/>
-                <entry key="SITE_AUDIT" value="false"/>
-                <entry key="UPLOAD_AUDIT" value="false"/>
-            </map>
-        </property>
-        <property name="code" value="SEO_PAGES"/>
-    </bean>
-
-    <bean id="seoDomain" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="true"/>
-                <entry key="SITE_AUDIT" value="true"/>
-                <entry key="UPLOAD_AUDIT" value="false"/>
-            </map>
-        </property>
-        <property name="code" value="SEO_DOMAIN"/>
-    </bean>
-
-    <bean id="seoReadOnly" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="false"/>
-                <entry key="SITE_AUDIT" value="false"/>
-                <entry key="UPLOAD_AUDIT" value="false"/>
-            </map>
-        </property>
-        <property name="code" value="SEO_READONLY"/>
-    </bean>
-
-    <bean id="seoUpload" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="false"/>
-                <entry key="SITE_AUDIT" value="false"/>
-                <entry key="UPLOAD_AUDIT" value="true"/>
-            </map>
-        </property>
-        <property name="code" value="SEO_UPLOAD"/>
-    </bean>
-
-    <bean id="seoPagesUpload" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="true"/>
-                <entry key="SITE_AUDIT" value="false"/>
-                <entry key="UPLOAD_AUDIT" value="true"/>
-            </map>
-        </property>
-        <property name="code" value="SEO_PAGES_UPLOAD"/>
-    </bean>
-
-    <bean id="seoDomainOnly" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="false"/>
-                <entry key="SITE_AUDIT" value="true"/>
-                <entry key="UPLOAD_AUDIT" value="false"/>
-            </map>
-        </property>
-        <property name="code" value="SEO_DOMAIN_ONLY"/>
-    </bean>
-
-    <bean id="seoPagesDomainUpload" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="true"/>
-                <entry key="SITE_AUDIT" value="true"/>
-                <entry key="UPLOAD_AUDIT" value="true"/>
-            </map>
-        </property>
-        <property name="code" value="SEO_PAGES_DOMAIN_UPLOAD"/>
-    </bean>
-    
-    <bean id="awSeoPages" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="true"/>
-                <entry key="SITE_AUDIT" value="false"/>
-                <entry key="UPLOAD_AUDIT" value="false"/>
-            </map>
-        </property>
-        <property name="code" value="AW_SEO_PAGES"/>
-    </bean>
-
-    <bean id="awSeoDomain" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="true"/>
-                <entry key="SITE_AUDIT" value="true"/>
-                <entry key="UPLOAD_AUDIT" value="false"/>
-            </map>
-        </property>
-        <property name="code" value="AW_SEO_DOMAIN"/>
-    </bean>
-
-    <bean id="awSeoReadOnly" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="false"/>
-                <entry key="SITE_AUDIT" value="false"/>
-                <entry key="UPLOAD_AUDIT" value="false"/>
-            </map>
-        </property>
-        <property name="code" value="AW_SEO_READONLY"/>
-    </bean>
-
-    <bean id="awSeoUpload" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="false"/>
-                <entry key="SITE_AUDIT" value="false"/>
-                <entry key="UPLOAD_AUDIT" value="true"/>
-            </map>
-        </property>
-        <property name="code" value="AW_SEO_UPLOAD"/>
-    </bean>
-
-    <bean id="awSeoPagesUpload" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="true"/>
-                <entry key="SITE_AUDIT" value="false"/>
-                <entry key="UPLOAD_AUDIT" value="true"/>
-            </map>
-        </property>
-        <property name="code" value="AW_SEO_PAGES_UPLOAD"/>
-    </bean>
-
-    <bean id="awSeoDomainOnly" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="false"/>
-                <entry key="SITE_AUDIT" value="true"/>
-                <entry key="UPLOAD_AUDIT" value="false"/>
-            </map>
-        </property>
-        <property name="code" value="AW_SEO_DOMAIN_ONLY"/>
-    </bean>
-
-    <bean id="awSeoPagesDomainUpload" class="org.opens.tgol.action.voter.ActionVoterImpl">
-        <property name="actionEnableMap">
-            <map>
-                <entry key="PAGE_AUDIT" value="true"/>
-                <entry key="SITE_AUDIT" value="true"/>
-                <entry key="UPLOAD_AUDIT" value="true"/>
-            </map>
-        </property>
-        <property name="code" value="AW_SEO_PAGES_DOMAIN_UPLOAD"/>
-    </bean>
-
-    <bean id="auditPageAction" class="org.opens.tgol.action.ActionImpl">
-        <property name="actionCode" value="PAGE_AUDIT"/>
+    <bean id="auditPageActionBuilder" class="org.opens.tgol.action.builder.ActionBuilderImpl">
+        <property name="actionCode" value="PAGES"/>
         <property name="actionI81NCode" value="contract.launchPages"/>
         <property name="actionUrl" value="/home/contract/audit-page-set-up.html"/>
         <property name="disabledActionImageUrl" value="/Images/Audit-10-pages-forbidden.png"/>
         <property name="enabledActionImageUrl" value="/Images/Audit-10-pages.png"/>
     </bean>
 
-    <bean id="auditSiteAction" class="org.opens.tgol.action.ActionImpl">
-        <property name="actionCode" value="SITE_AUDIT"/>
+    <bean id="auditSiteActionBuilder" class="org.opens.tgol.action.builder.ActionBuilderImpl">
+        <property name="actionCode" value="DOMAIN"/>
         <property name="actionI81NCode" value="contract.launchFullSite"/>
         <property name="actionUrl" value="/home/contract/audit-site-set-up.html"/>
         <property name="disabledActionImageUrl" value="/Images/Audit-full-site-forbidden.png"/>
         <property name="enabledActionImageUrl" value="/Images/Audit-full-site.png"/>
     </bean>
 
-    <bean id="auditUploadAction" class="org.opens.tgol.action.ActionImpl">
-        <property name="actionCode" value="UPLOAD_AUDIT"/>
+    <bean id="auditUploadActionBuilder" class="org.opens.tgol.action.builder.ActionBuilderImpl">
+        <property name="actionCode" value="UPLOAD"/>
         <property name="actionI81NCode" value="contract.launchUpload"/>
         <property name="actionUrl" value="/home/contract/audit-upload-set-up.html"/>
         <property name="disabledActionImageUrl" value="/Images/Audit-10-pages-forbidden.png"/>
@@ -277,41 +46,16 @@
     </bean>
 
     <bean id="contractActionHandler" class="org.opens.tgol.action.voter.ContractActionHandlerImpl">
-        <property name="actionList">
+        <property name="actionBuilderList">
             <list>
-                <ref bean="auditPageAction"/>
-                <ref bean="auditSiteAction"/>
-                <ref bean="auditUploadAction"/>
+                <ref bean="auditPageActionBuilder"/>
+                <ref bean="auditSiteActionBuilder"/>
+                <ref bean="auditUploadActionBuilder"/>
             </list>
-        </property>
-        <property name="actionAccessibilityVoterMap">
-            <map>
-                <entry key="AW_PAGES" value-ref="awPages"/>
-                <entry key="AW_DOMAIN" value-ref="awDomain"/>
-                <entry key="AW_READONLY" value-ref="awReadOnly"/>
-                <entry key="AW_UPLOAD" value-ref="awUpload"/>
-                <entry key="AW_PAGES_UPLOAD" value-ref="awPagesUpload"/>
-                <entry key="AW_DOMAIN_ONLY" value-ref="awDomainOnly"/>
-                <entry key="AW_PAGES_DOMAIN_UPLOAD" value-ref="awPagesDomainUpload"/>
-                <entry key="SEO_PAGES" value-ref="seoPages"/>
-                <entry key="SEO_DOMAIN" value-ref="seoDomain"/>
-                <entry key="SEO_READONLY" value-ref="seoReadOnly"/>
-                <entry key="SEO_UPLOAD" value-ref="seoUpload"/>
-                <entry key="SEO_PAGES_UPLOAD" value-ref="seoPagesUpload"/>
-                <entry key="SEO_DOMAIN_ONLY" value-ref="seoDomainOnly"/>
-                <entry key="SEO_PAGES_DOMAIN_UPLOAD" value-ref="seoPagesDomainUpload"/>
-                <entry key="AW_SEO_PAGES" value-ref="awSeoPages"/>
-                <entry key="AW_SEO_DOMAIN" value-ref="awSeoDomain"/>
-                <entry key="AW_SEO_READONLY" value-ref="awSeoReadOnly"/>
-                <entry key="AW_SEO_UPLOAD" value-ref="awSeoUpload"/>
-                <entry key="AW_SEO_PAGES_UPLOAD" value-ref="awSeoPagesUpload"/>
-                <entry key="AW_SEO_DOMAIN_ONLY" value-ref="awSeoDomainOnly"/>
-                <entry key="AW_SEO_PAGES_DOMAIN_UPLOAD" value-ref="awSeoPagesDomainUpload"/>
-            </map>
         </property>
     </bean>
 
-    <bean id="exportOdsAction" class="org.opens.tgol.action.ActionImpl">
+    <bean id="exportOdsActionBuilder" class="org.opens.tgol.action.builder.ActionBuilderImpl">
         <property name="actionCode" value="EXPORT_ODS"/>
         <property name="actionI81NCode" value="resultPage.odsExport"/>
         <property name="actionAltI81NCode" value="resultPage.odsExportAlt"/>
@@ -320,7 +64,7 @@
         <property name="enabledActionImageUrl" value="/Images/ods_export.png"/>
     </bean>
 
-    <bean id="exportXlsAction" class="org.opens.tgol.action.ActionImpl">
+    <bean id="exportXlsActionBuilder" class="org.opens.tgol.action.builder.ActionBuilderImpl">
         <property name="actionCode" value="EXPORT_XLS"/>
         <property name="actionI81NCode" value="resultPage.xlsExport"/>
         <property name="actionAltI81NCode" value="resultPage.xlsExportAlt"/>
@@ -329,7 +73,7 @@
         <property name="enabledActionImageUrl" value="/Images/xls_export.png"/>
     </bean>
 
-    <bean id="exportCsvAction" class="org.opens.tgol.action.ActionImpl">
+    <bean id="exportCsvActionBuilder" class="org.opens.tgol.action.builder.ActionBuilderImpl">
         <property name="actionCode" value="EXPORT_CSV"/>
         <property name="actionI81NCode" value="resultPage.csvExport"/>
         <property name="actionAltI81NCode" value="resultPage.csvExportAlt"/>
@@ -338,7 +82,7 @@
         <property name="enabledActionImageUrl" value="/Images/csv_export.png"/>
     </bean>
 
-    <bean id="exportPdfAction" class="org.opens.tgol.action.ActionImpl">
+    <bean id="exportPdfActionBuilder" class="org.opens.tgol.action.builder.ActionBuilderImpl">
         <property name="actionCode" value="EXPORT_PDF"/>
         <property name="actionI81NCode" value="resultPage.pdfExport"/>
         <property name="actionAltI81NCode" value="resultPage.pdfExportAlt"/>
@@ -360,12 +104,12 @@
     </bean>
 
     <bean id="resultActionHandler" class="org.opens.tgol.action.voter.ResultActionHandlerImpl">
-    <property name="actionList">
+    <property name="actionBuilderList">
             <list>
-                <ref bean="exportOdsAction"/>
-<!--                <ref bean="exportXlsAction"/>-->
-                <ref bean="exportCsvAction"/>
-                <ref bean="exportPdfAction"/>
+                <ref bean="exportOdsActionBuilder"/>
+<!--                <ref bean="exportXlsActionBuilder"/>-->
+                <ref bean="exportCsvActionBuilder"/>
+                <ref bean="exportPdfActionBuilder"/>
             </list>
         </property>
         <property name="actionAccessibilityVoterMap">

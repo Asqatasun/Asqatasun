@@ -5,14 +5,23 @@
        http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <!-- si controller -->
-    <bean id="tgsiContractFactory" class="org.opens.tgol.entity.factory.contract.ContractFactoryImpl"/>
-    <bean id="tgsiActFactory" class="org.opens.tgol.entity.factory.contract.ActFactoryImpl"/>
+    <!-- si factories -->
 
-    <bean id="tgsiUserFactory" class="org.opens.tgol.entity.factory.user.UserFactoryImpl"/>
-    <bean id="tgsiRoleFactory" class="org.opens.tgol.entity.factory.user.RoleFactoryImpl"/>
+    <bean id="contractFactory" class="org.opens.tgol.entity.factory.contract.ContractFactoryImpl"/>
+    <bean id="actFactory" class="org.opens.tgol.entity.factory.contract.ActFactoryImpl"/>
+    <bean id="tgsiScopeFactory" class="org.opens.tgol.entity.factory.contract.ScopeFactoryImpl"/>
+    
+    <bean id="userFactory" class="org.opens.tgol.entity.factory.user.UserFactoryImpl"/>
+    <bean id="roleFactory" class="org.opens.tgol.entity.factory.user.RoleFactoryImpl"/>
 
-    <bean id="tgsiProductFactory" class="org.opens.tgol.entity.factory.product.ProductFactoryImpl"/>
-    <bean id="tgsiScopeFactory" class="org.opens.tgol.entity.factory.product.ScopeFactoryImpl"/>
+    <bean id="tgsiFuntionalityFactory" class="org.opens.tgol.entity.factory.functionality.FunctionalityFactoryImpl"/>
+    
+    <bean id="optionFamilyFactory" class="org.opens.tgol.entity.factory.option.OptionFamilyFactoryImpl"/>
+    <bean id="optionElementFactory" class="org.opens.tgol.entity.factory.option.OptionElementFactoryImpl"/>
+    <bean id="optionFactory" class="org.opens.tgol.entity.factory.option.OptionFactoryImpl"/>
+    
+    <bean id="referentialFactory" class="org.opens.tgol.entity.factory.referential.ReferentialFactoryImpl"/>
+
+    <bean id="scenarioFactory" class="org.opens.tgol.entity.factory.scenario.ScenarioFactoryImpl"/>
 
 </beans>

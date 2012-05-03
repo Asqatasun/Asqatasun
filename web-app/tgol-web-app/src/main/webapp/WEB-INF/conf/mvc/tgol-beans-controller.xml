@@ -11,12 +11,9 @@
         base-package="org.opens.tgol.controller"/>
 
     <bean id="homeController" class="org.opens.tgol.controller.HomeController">
-        <property name="authorizedProductForTrend">
+        <property name="authorizedFunctionalityForTrend">
             <list>
-                <value>AXS_DOMAIN</value>
-                <value>SEO_DOMAIN</value>
-                <value>AXS_READONLY</value>
-                <value>SEO_READONLY</value>
+                <value>DOMAIN</value>
             </list>
         </property>
         <property name="actionHandler" ref="contractActionHandler"/>
@@ -110,13 +107,11 @@
     </bean>
     
     <bean id="auditSetUpController" class="org.opens.tgol.controller.AuditSetUpController">
-        <property name="siteParametersMap">
+        <property name="referentialAndLevelFormFieldBuilderList">
+            <ref bean="levelSelectFormFieldBuilder"/>
+        </property>
+        <property name="siteOptionFormFieldBuilderMap">
             <map>
-                <entry key="level-parameters">
-                    <list>
-                        <ref bean="levelParamBuilder"/>
-                    </list>
-                </entry>
                 <entry key="crawl-parameters">
                     <list>
                         <ref bean="depthParamBuilder"/>
@@ -127,16 +122,19 @@
                 </entry>
             </map>
         </property>
-        <property name="pageParametersMap">
+        <property name="pageOptionFormFieldBuilderMap">
             <map>
-                <entry key="level-parameters">
-                    <list>
-                        <ref bean="levelParamBuilder"/>
-                    </list>
-                </entry>
                 <entry key="marker-parameters">
                     <list>
-<!--                        <ref bean="presentationTableParam"/>-->
+                        <ref bean="dataTableParamBuilder"/>
+                    </list>
+                </entry>
+            </map>
+        </property>
+        <property name="uploadOptionFormFieldBuilderMap">
+            <map>
+                <entry key="marker-parameters">
+                    <list>
                         <ref bean="dataTableParamBuilder"/>
                     </list>
                 </entry>
@@ -147,6 +145,22 @@
         </property>
         <property name="auditSiteSetUpValidator">
             <ref bean="auditSiteSetUpFormValidator"/>
+        </property>
+        <property name="auditUploadSetUpValidator">
+            <ref bean="auditUploadSetUpFormValidator"/>
+        </property>
+        <property name="viewFunctionalityBindingMap">
+            <map>
+                <entry key="audit-page-set-up">
+                    <value>PAGES</value>
+                </entry>    
+                <entry key="audit-site-set-up">
+                    <value>DOMAIN</value>
+                </entry>    
+                <entry key="audit-upload-set-up">
+                    <value>UPLOAD</value>
+                </entry>    
+            </map>
         </property>
     </bean>
 
@@ -165,6 +179,12 @@
         <property name="proxyPort" value="${proxyPort}"/>
         <property name="proxyExclusionUrl" value="${proxyExclusionUrl}"/>
         <property name="emailSentToUserExclusionRawList" value="${emailSentToUserExclusionList}"/>
+    </bean>
+
+    <bean id="signUpController" class="org.opens.tgol.controller.SignUpController">
+        <property name="signUpFormValidator">
+            <ref bean="signUpFormValidator"/>
+        </property>
     </bean>
 
 </beans>

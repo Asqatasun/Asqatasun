@@ -22,6 +22,7 @@
         <property name="persistenceXmlLocation" value="${tgol-persistenceXmlLocation}"/>
         <property name="jpaProperties">
             <props>
+<!--                <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>-->
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
                 <prop key="hibernate.show_sql">${jpa.showSql}</prop>
                 <prop key="hibernate.cache.use_second_level_cache">true</prop>

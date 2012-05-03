@@ -8,10 +8,10 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
-    <!-- Définition d'un validateur -->
     <bean id="signUpFormValidator" class="org.opens.tgol.validator.SignUpFormValidator" />
     <bean id="auditSiteSetUpFormValidator" class="org.opens.tgol.validator.AuditSetUpFormValidator" />
-    <bean id="auditPageSetUpFormValidator" class="org.opens.tgol.validator.AuditSetUpFormValidator" >
+    <bean id="auditPageSetUpFormValidator" class="org.opens.tgol.validator.PageAuditSetUpFormValidator" />
+    <bean id="auditUploadSetUpFormValidator" class="org.opens.tgol.validator.UploadAuditSetUpFormValidator" >
         <property name="maxFileSize" value="2097152"/>
         <property name="authorizedMimeType">
             <list>

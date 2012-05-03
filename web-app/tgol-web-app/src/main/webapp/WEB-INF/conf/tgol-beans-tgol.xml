@@ -5,38 +5,64 @@
        http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="tgsiContractDAO" class="org.opens.tgol.entity.dao.contract.ContractDAOImpl"/>
-    <bean id="tgsiContractDataService" class="org.opens.tgol.entity.service.contract.ContractDataServiceImpl">
-        <property name="entityFactory" ref="tgsiContractFactory"/>
-        <property name="entityDao" ref="tgsiContractDAO"/>
+    <bean id="contractDAO" class="org.opens.tgol.entity.dao.contract.ContractDAOImpl"/>
+    <bean id="contractDataService" class="org.opens.tgol.entity.service.contract.ContractDataServiceImpl">
+        <property name="entityFactory" ref="contractFactory"/>
+        <property name="entityDao" ref="contractDAO"/>
     </bean>
-    <bean id="tgsiActDAO" class="org.opens.tgol.entity.dao.contract.ActDAOImpl"/>
-    <bean id="tgsiActDataService" class="org.opens.tgol.entity.service.contract.ActDataServiceImpl">
-        <property name="entityFactory" ref="tgsiActFactory"/>
-        <property name="entityDao" ref="tgsiActDAO"/>
+    
+    <bean id="actDAO" class="org.opens.tgol.entity.dao.contract.ActDAOImpl"/>
+    <bean id="actDataService" class="org.opens.tgol.entity.service.contract.ActDataServiceImpl">
+        <property name="entityFactory" ref="actFactory"/>
+        <property name="entityDao" ref="actDAO"/>
     </bean>
-
-    <bean id="tgsiUserDAO" class="org.opens.tgol.entity.dao.user.UserDAOImpl"/>
-    <bean id="tgsiUserDataService" class="org.opens.tgol.entity.service.user.UserDataServiceImpl">
-        <property name="entityFactory" ref="tgsiUserFactory"/>
-        <property name="entityDao" ref="tgsiUserDAO"/>
-    </bean>
-    <bean id="tgsiRoleDAO" class="org.opens.tgol.entity.dao.user.RoleDAOImpl"/>
-    <bean id="tgsiRoleDataService" class="org.opens.tgol.entity.service.user.RoleDataServiceImpl">
-        <property name="entityFactory" ref="tgsiRoleFactory"/>
-        <property name="entityDao" ref="tgsiRoleDAO"/>
-    </bean>
-
-    <bean id="tgsiProductDAO" class="org.opens.tgol.entity.dao.product.ProductDAOImpl"/>
-    <bean id="tgsiProductDataService" class="org.opens.tgol.entity.service.product.ProductDataServiceImpl">
-        <property name="entityFactory" ref="tgsiProductFactory"/>
-        <property name="entityDao" ref="tgsiProductDAO"/>
-    </bean>
-
-    <bean id="tgsiScopeDAO" class="org.opens.tgol.entity.dao.product.ScopeDAOImpl"/>
-    <bean id="tgsiScopeDataService" class="org.opens.tgol.entity.service.product.ScopeDataServiceImpl">
+    
+    <bean id="tgsiScopeDAO" class="org.opens.tgol.entity.dao.contract.ScopeDAOImpl"/>
+    <bean id="tgsiScopeDataService" class="org.opens.tgol.entity.service.contract.ScopeDataServiceImpl">
         <property name="entityFactory" ref="tgsiScopeFactory"/>
         <property name="entityDao" ref="tgsiScopeDAO"/>
+    </bean>
+
+    <bean id="userDAO" class="org.opens.tgol.entity.dao.user.UserDAOImpl"/>
+    <bean id="userDataService" class="org.opens.tgol.entity.service.user.UserDataServiceImpl">
+        <property name="entityFactory" ref="userFactory"/>
+        <property name="entityDao" ref="userDAO"/>
+    </bean>
+    
+    <bean id="roleDAO" class="org.opens.tgol.entity.dao.user.RoleDAOImpl"/>
+    <bean id="roleDataService" class="org.opens.tgol.entity.service.user.RoleDataServiceImpl">
+        <property name="entityFactory" ref="roleFactory"/>
+        <property name="entityDao" ref="roleDAO"/>
+    </bean>
+
+    <bean id="optionFamilyDAO" class="org.opens.tgol.entity.dao.option.OptionFamilyDAOImpl"/>
+    <bean id="optionFamilyDataService" class="org.opens.tgol.entity.service.option.OptionFamilyDataServiceImpl">
+        <property name="entityFactory" ref="optionFamilyFactory"/>
+        <property name="entityDao" ref="optionFamilyDAO"/>
+    </bean>
+    
+    <bean id="optionDAO" class="org.opens.tgol.entity.dao.option.OptionDAOImpl"/>
+    <bean id="optionDataService" class="org.opens.tgol.entity.service.option.OptionDataServiceImpl">
+        <property name="entityFactory" ref="optionFactory"/>
+        <property name="entityDao" ref="optionDAO"/>
+    </bean>
+    
+    <bean id="optionElementDAO" class="org.opens.tgol.entity.dao.option.OptionElementDAOImpl"/>
+    <bean id="optionElementDataService" class="org.opens.tgol.entity.service.option.OptionElementDataServiceImpl">
+        <property name="entityFactory" ref="optionElementFactory"/>
+        <property name="entityDao" ref="optionElementDAO"/>
+    </bean>
+    
+    <bean id="referentialDAO" class="org.opens.tgol.entity.dao.referential.ReferentialDAOImpl"/>
+    <bean id="referentialDataService" class="org.opens.tgol.entity.service.referential.ReferentialDataServiceImpl">
+        <property name="entityFactory" ref="referentialFactory"/>
+        <property name="entityDao" ref="referentialDAO"/>
+    </bean>
+    
+    <bean id="scenarioDAO" class="org.opens.tgol.entity.dao.scenario.ScenarioDAOImpl"/>
+    <bean id="scenarioDataService" class="org.opens.tgol.entity.service.scenario.ScenarioDataServiceImpl">
+        <property name="entityFactory" ref="scenarioFactory"/>
+        <property name="entityDao" ref="scenarioDAO"/>
     </bean>
 
     <bean id="statisticsDAO" class="org.opens.tgol.entity.dao.statistics.StatisticsDAOImpl"/>
