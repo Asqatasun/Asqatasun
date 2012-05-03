@@ -313,12 +313,12 @@ public final class AuditSetUpCommandFactory {
             if (!StringUtils.equals(lastUserValue, defaultValue)) {
                 // we override the auditParameter with the last user value
                 defaultValue = lastUserValue;
+                // If the level is overidden from the parameters of the last audit, 
+                // we need to update the UI elements regarding this value (set this 
+                // element as default)
+                AuditSetUpFormFieldHelper.selectDefaultLevelFromLevelValue(levelFormFieldList, defaultValue);
             }
         }
-        // If the level is overidden from the parameters of the last audit, 
-        // we need to update the UI elements regarding this value (set this 
-        // element as default)
-        AuditSetUpFormFieldHelper.selectDefaultLevelFromLevelValue(levelFormFieldList, defaultValue);
         return defaultValue;
     }
     
