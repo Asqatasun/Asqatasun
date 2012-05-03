@@ -21,6 +21,7 @@
  */
 package org.opens.tgol.entity.factory.option;
 
+import org.opens.tgol.entity.option.Option;
 import org.opens.tgol.entity.option.OptionElement;
 import org.opens.tgol.entity.option.OptionElementImpl;
 
@@ -33,6 +34,14 @@ public class OptionElementFactoryImpl implements OptionElementFactory {
     @Override
     public OptionElement create() {
         return new OptionElementImpl();
+    }
+
+    @Override
+    public OptionElement createOptionElement(Option option, String value) {
+        OptionElement optionElement = new OptionElementImpl();
+        optionElement.setOption(option);
+        optionElement.setValue(value);
+        return optionElement;
     }
 
 }

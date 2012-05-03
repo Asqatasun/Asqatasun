@@ -21,11 +21,15 @@
  */
 package org.opens.tgol.entity.factory.contract;
 
+import java.util.Date;
+import java.util.Set;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.contract.ContractImpl;
-import org.opens.tgol.entity.product.Product;
+import org.opens.tgol.entity.functionality.Functionality;
+import org.opens.tgol.entity.option.OptionElement;
+import org.opens.tgol.entity.referential.Referential;
+import org.opens.tgol.entity.scenario.Scenario;
 import org.opens.tgol.entity.user.User;
-import java.util.Date;
 
 /**
  *
@@ -40,14 +44,20 @@ public class ContractFactoryImpl implements ContractFactory {
             Date endDate,
             Date renewalDate,
             Float price,
-            Product product,
+            Set<? extends Functionality> functionalitySet, 
+            Set<? extends OptionElement> optionElementSet, 
+            Set<? extends Referential> referentialSet, 
+            Set<? extends Scenario> ScenarioSet, 
             User user) {
         Contract contract = create();
         contract.setLabel(label);
         contract.setBeginDate(beginDate);
         contract.setEndDate(endDate);
         contract.setRenewalDate(renewalDate);
-        contract.setProduct(product);
+        contract.addAllFunctionality(functionalitySet);
+        contract.addAllOptionElement(optionElementSet);
+        contract.addAllReferential(referentialSet);
+        contract.addAllScenario(ScenarioSet);
         contract.setPrice(price);
         return contract;
     }

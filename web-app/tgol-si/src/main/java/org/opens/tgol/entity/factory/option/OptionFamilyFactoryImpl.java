@@ -21,35 +21,27 @@
  */
 package org.opens.tgol.entity.factory.option;
 
-import org.opens.tgol.entity.option.Option;
 import org.opens.tgol.entity.option.OptionFamily;
-import org.opens.tgol.entity.option.OptionImpl;
+import org.opens.tgol.entity.option.OptionFamilyImpl;
 
 /**
  *
  * @author jkowalczyk
  */
-public class OptionFactoryImpl implements OptionFactory {
+public class OptionFamilyFactoryImpl implements OptionFamilyFactory {
 
     @Override
-    public Option create() {
-        return new OptionImpl();
+    public OptionFamily create() {
+        return new OptionFamilyImpl();
     }
 
     @Override
-    public Option createOption(
-            OptionFamily optionFamily, 
-            String code, 
-            String label, 
-            String description, 
-            boolean isRestriction) {
-        Option option = new OptionImpl();
-        option.setCode(code);
-        option.setDescription(description);
-        option.setLabel(label);
-        option.setOptionFamily(optionFamily);
-        option.setIsRestriction(isRestriction);
-        return option;
+    public OptionFamily createOptionFamily(String code, String label, String description) {
+        OptionFamily optionFamily = new OptionFamilyImpl();
+        optionFamily.setCode(code);
+        optionFamily.setDescription(description);
+        optionFamily.setLabel(label);
+        return optionFamily;
     }
 
 }

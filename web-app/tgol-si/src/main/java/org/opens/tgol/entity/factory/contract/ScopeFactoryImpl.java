@@ -19,37 +19,29 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.entity.factory.option;
+package org.opens.tgol.entity.factory.contract;
 
-import org.opens.tgol.entity.option.Option;
-import org.opens.tgol.entity.option.OptionFamily;
-import org.opens.tgol.entity.option.OptionImpl;
+import org.opens.tgol.entity.contract.Scope;
+import org.opens.tgol.entity.contract.ScopeEnum;
+import org.opens.tgol.entity.contract.TgsiScopeImpl;
 
 /**
  *
  * @author jkowalczyk
  */
-public class OptionFactoryImpl implements OptionFactory {
+public class ScopeFactoryImpl implements ScopeFactory {
 
     @Override
-    public Option create() {
-        return new OptionImpl();
+    public Scope createScope(ScopeEnum scopeCode) {
+        Scope scope = create();
+        scope.setLabel(scopeCode.name());
+        scope.setCode(scopeCode);
+        return scope;
     }
 
     @Override
-    public Option createOption(
-            OptionFamily optionFamily, 
-            String code, 
-            String label, 
-            String description, 
-            boolean isRestriction) {
-        Option option = new OptionImpl();
-        option.setCode(code);
-        option.setDescription(description);
-        option.setLabel(label);
-        option.setOptionFamily(optionFamily);
-        option.setIsRestriction(isRestriction);
-        return option;
+    public Scope create() {
+        return new TgsiScopeImpl();
     }
-
+    
 }

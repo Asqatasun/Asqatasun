@@ -21,12 +21,13 @@
  */
 package org.opens.tgol.entity.service.contract;
 
+import java.util.Collection;
+import org.apache.commons.lang.StringUtils;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.dao.contract.ContractDAO;
-import org.opens.tgol.entity.product.Product;
+import org.opens.tgol.entity.option.OptionElement;
 import org.opens.tgol.entity.user.User;
-import java.util.Collection;
 
 /**
  *
@@ -35,16 +36,21 @@ import java.util.Collection;
 public class ContractDataServiceImpl extends AbstractGenericDataService<Contract, Long>
         implements ContractDataService {
 
+    private static final String URL_OPTION_NAME = "DOMAIN";
+    
     @Override
     public Collection<Contract> getAllContractsByUser(User user) {
         return ((ContractDAO) entityDao).findAllContractsByUser(user);
     }
 
-    @Override
-    public Collection<Contract> getAllContractsByProduct(Product product) {
-        return ((ContractDAO) entityDao).findAllContractsByProduct(product);
+    @Override 
+    public String getUrlFromContractOption(Contract contract) {
+        for (OptionElement optionElement : ((ContractDAO) entityDao).read(contract.getId()).getOptionElementSet()) {
+            if (StringUtils.equals(URL_OPTION_NAME, optionElement.getOption().getCode())) {
+                return optionElement.getValue();
+            }
+        }
+        return "";
     }
-
-    
 
 }

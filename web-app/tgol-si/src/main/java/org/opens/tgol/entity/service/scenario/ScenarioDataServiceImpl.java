@@ -19,37 +19,16 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.entity.factory.option;
+package org.opens.tgol.entity.service.scenario;
 
-import org.opens.tgol.entity.option.Option;
-import org.opens.tgol.entity.option.OptionFamily;
-import org.opens.tgol.entity.option.OptionImpl;
+import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.opens.tgol.entity.scenario.Scenario;
 
 /**
  *
  * @author jkowalczyk
  */
-public class OptionFactoryImpl implements OptionFactory {
-
-    @Override
-    public Option create() {
-        return new OptionImpl();
-    }
-
-    @Override
-    public Option createOption(
-            OptionFamily optionFamily, 
-            String code, 
-            String label, 
-            String description, 
-            boolean isRestriction) {
-        Option option = new OptionImpl();
-        option.setCode(code);
-        option.setDescription(description);
-        option.setLabel(label);
-        option.setOptionFamily(optionFamily);
-        option.setIsRestriction(isRestriction);
-        return option;
-    }
-
+public class ScenarioDataServiceImpl extends AbstractGenericDataService<Scenario, Long>
+        implements ScenarioDataService {
+    
 }

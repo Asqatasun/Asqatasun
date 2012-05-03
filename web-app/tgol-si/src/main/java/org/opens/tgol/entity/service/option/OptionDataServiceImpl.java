@@ -19,37 +19,22 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.entity.factory.option;
+package org.opens.tgol.entity.service.option;
 
+import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.opens.tgol.entity.dao.option.OptionDAO;
 import org.opens.tgol.entity.option.Option;
-import org.opens.tgol.entity.option.OptionFamily;
-import org.opens.tgol.entity.option.OptionImpl;
 
 /**
  *
  * @author jkowalczyk
  */
-public class OptionFactoryImpl implements OptionFactory {
-
+public class OptionDataServiceImpl extends AbstractGenericDataService<Option, Long>
+        implements OptionDataService {
+    
     @Override
-    public Option create() {
-        return new OptionImpl();
+    public Option getOption(String optionCode) {
+        return ((OptionDAO) entityDao).findOptionFromCode(optionCode);
     }
-
-    @Override
-    public Option createOption(
-            OptionFamily optionFamily, 
-            String code, 
-            String label, 
-            String description, 
-            boolean isRestriction) {
-        Option option = new OptionImpl();
-        option.setCode(code);
-        option.setDescription(description);
-        option.setLabel(label);
-        option.setOptionFamily(optionFamily);
-        option.setIsRestriction(isRestriction);
-        return option;
-    }
-
+    
 }

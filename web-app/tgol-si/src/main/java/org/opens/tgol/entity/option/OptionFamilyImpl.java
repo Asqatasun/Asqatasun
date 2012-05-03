@@ -30,23 +30,23 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author jkowalczyk
  */
 @Entity
-@Table(name = "TGSI_OPTION_ELEMENT")
+@Table(name = "TGSI_OPTION_FAMILY")
 @XmlRootElement
-public class OptionElementImpl implements OptionElement, Serializable {
+public class OptionFamilyImpl implements OptionFamily, Serializable {
 
-    private static final long serialVersionUID = 866337625495716065L;
-    
     @Id
     @GeneratedValue
-    @Column(name = "Id_Option_Element")
+    @Column(name = "Id_Option_Family")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "OPTION_Id_Option")
-    private OptionImpl option;
+    @Column(name = "Code")
+    private String code;
     
-    @Column(name = "Value")
-    private String value;
+    @Column(name = "Label")
+    private String label;
+    
+    @Column(name = "Description")
+    private String description;
 
     @Override
     public Long getId() {
@@ -59,23 +59,33 @@ public class OptionElementImpl implements OptionElement, Serializable {
     }
 
     @Override
-    public Option getOption() {
-        return option;
+    public String getCode() {
+        return code;
     }
 
     @Override
-    public void setOption(Option option) {
-        this.option = ((OptionImpl)option);
-    }
-    
-    @Override
-    public String getValue() {
-        return value;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @Override
-    public void setValue(String value) {
-        this.value = value;
+    public String getLabel() {
+        return label;
+    }
+
+    @Override
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    @Override
+    public String getDescription() {
+        return description ;
+    }
+
+    @Override
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }

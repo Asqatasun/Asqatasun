@@ -19,44 +19,46 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.entity.option;
+package org.opens.tgol.entity.scenario;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.entity.contract.ContractImpl;
 
 /**
  *
  * @author jkowalczyk
  */
 @Entity
-@Table(name = "TGSI_OPTION")
+@Table(name = "TGSI_SCENARIO")
 @XmlRootElement
-public class OptionImpl implements Option, Serializable {
+public class ScenarioImpl implements Scenario, Serializable {
 
-    private static final long serialVersionUID = 866337625495716065L;
-    
     @Id
     @GeneratedValue
-    @Column(name = "Id_Option")
+    @Column(name = "Id_Scenario")
     private Long id;
 
-    @Column(name = "Code")
-    private String code;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Column(name = "Date_Of_Creation")
+    private Date dateOfCreation;
     
     @Column(name = "Label")
     private String label;
     
+    @Column(name = "Content", length = 16777215)
+    private String content;
+
     @Column(name = "Description")
     private String description;
 
-    @Column(name = "Is_Restriction")
-    private boolean isRestriction;
-    
     @ManyToOne
-    @JoinColumn(name = "OPTION_FAMILY_Id_Option_Family")
-    private OptionFamilyImpl optionFamily;
-    
+    @JoinColumn(name = "CONTRACT_Id_Contract", nullable = false)
+    private ContractImpl contract;
+
     @Override
     public Long getId() {
         return id;
@@ -68,15 +70,25 @@ public class OptionImpl implements Option, Serializable {
     }
 
     @Override
-    public String getCode() {
-        return code;
+    public Date getDateOfCreation() {
+        return dateOfCreation;
     }
 
     @Override
-    public void setCode(String code) {
-        this.code = code;
+    public void setDateOfCreation(Date dateOfCreation) {
+        this.dateOfCreation = dateOfCreation;
     }
     
+    @Override
+    public String getContent() {
+        return content;
+    }
+
+    @Override
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     @Override
     public String getLabel() {
         return label;
@@ -96,25 +108,15 @@ public class OptionImpl implements Option, Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public Contract getContract() {
+        return contract;
+    }
     
     @Override
-    public boolean isRestriction() {
-        return isRestriction;
+    public void setContract(Contract contract) {
+        this.contract = ((ContractImpl)contract);
     }
 
-    @Override
-    public void setIsRestriction(boolean isRestriction) {
-        this.isRestriction = isRestriction;
-    }
-
-    @Override
-    public OptionFamily getOptionFamily() {
-        return optionFamily;
-    }
-
-    @Override
-    public void setOptionFamily(OptionFamily optionFamily) {
-        this.optionFamily = (OptionFamilyImpl)optionFamily;
-    }
-    
 }

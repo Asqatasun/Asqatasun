@@ -21,15 +21,15 @@
  */
 package org.opens.tgol.entity.decorator.tanaguru.parameterization;
 
-import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import org.opens.tgol.entity.dao.tanaguru.parameterization.TgolParameterDAO;
-import org.opens.tgol.entity.product.ScopeEnum;
 import java.util.Set;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.entity.parameterization.ParameterFamily;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
+import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.opens.tgol.entity.contract.ScopeEnum;
+import org.opens.tgol.entity.dao.tanaguru.parameterization.TgolParameterDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

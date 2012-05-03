@@ -19,10 +19,16 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.entity.option;
+package org.opens.tgol.entity.contract;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -30,23 +36,23 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author jkowalczyk
  */
 @Entity
-@Table(name = "TGSI_OPTION_ELEMENT")
+@Table(name = "TGSI_SCOPE")
 @XmlRootElement
-public class OptionElementImpl implements OptionElement, Serializable {
+public class TgsiScopeImpl implements Scope, Serializable {
 
-    private static final long serialVersionUID = 866337625495716065L;
+    private static final long serialVersionUID = -986936354821552963L;
     
     @Id
     @GeneratedValue
-    @Column(name = "Id_Option_Element")
+    @Column(name = "Id_Scope")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "OPTION_Id_Option")
-    private OptionImpl option;
-    
-    @Column(name = "Value")
-    private String value;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "Code")
+    private ScopeEnum code = ScopeEnum.GROUPOFPAGES;
+
+    @Column(name = "Label")
+    private String label;
 
     @Override
     public Long getId() {
@@ -59,23 +65,23 @@ public class OptionElementImpl implements OptionElement, Serializable {
     }
 
     @Override
-    public Option getOption() {
-        return option;
+    public ScopeEnum getCode() {
+        return code;
     }
 
     @Override
-    public void setOption(Option option) {
-        this.option = ((OptionImpl)option);
-    }
-    
-    @Override
-    public String getValue() {
-        return value;
+    public void setCode(ScopeEnum code) {
+        this.code = code;
     }
 
     @Override
-    public void setValue(String value) {
-        this.value = value;
+    public String getLabel() {
+        return label;
+    }
+
+    @Override
+    public void setLabel(String label) {
+        this.label = label;
     }
 
 }

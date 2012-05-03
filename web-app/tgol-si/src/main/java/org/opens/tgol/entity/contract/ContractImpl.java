@@ -28,10 +28,14 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.opens.tgol.entity.option.Option;
-import org.opens.tgol.entity.option.OptionImpl;
-import org.opens.tgol.entity.product.Product;
-import org.opens.tgol.entity.product.ProductImpl;
+import org.opens.tgol.entity.functionality.Functionality;
+import org.opens.tgol.entity.functionality.FunctionalityImpl;
+import org.opens.tgol.entity.option.OptionElement;
+import org.opens.tgol.entity.option.OptionElementImpl;
+import org.opens.tgol.entity.referential.Referential;
+import org.opens.tgol.entity.referential.ReferentialImpl;
+import org.opens.tgol.entity.scenario.Scenario;
+import org.opens.tgol.entity.scenario.ScenarioImpl;
 import org.opens.tgol.entity.user.User;
 import org.opens.tgol.entity.user.UserImpl;
 
@@ -66,9 +70,6 @@ public class ContractImpl implements Contract, Serializable {
     @Column(name = "Renewal_Date")
     private Date renewalDate;
 
-    @Column(name = "Url")
-    private String url;
-
     @Column(name = "Price")
     private Float price;
 
@@ -76,18 +77,29 @@ public class ContractImpl implements Contract, Serializable {
     @JoinColumn(name = "USER_Id_User")
     private UserImpl user;
 
-    @ManyToOne
-    @JoinColumn(name = "PRODUCT_Id_Product")
-    private ProductImpl product;
-
     @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL)
     private Set<ActImpl> actSet = new LinkedHashSet<ActImpl>();
+    
+    @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL)
+    private Set<ScenarioImpl> scenarioSet = new LinkedHashSet<ScenarioImpl>();
+    
+    @ManyToMany
+        @JoinTable(name = "TGSI_CONTRACT_FUNCTIONALITY", joinColumns =
+        @JoinColumn(name = "CONTRACT_Id_Contract"), inverseJoinColumns =
+        @JoinColumn(name = "FUNCTIONALITY_Id_Functionality"))
+    private Set<FunctionalityImpl> functionalitySet = new HashSet<FunctionalityImpl>();
 
     @ManyToMany
-        @JoinTable(name = "TGSI_CONTRACT_OPTION", joinColumns =
+        @JoinTable(name = "TGSI_CONTRACT_OPTION_ELEMENT", joinColumns =
         @JoinColumn(name = "CONTRACT_Id_Contract"), inverseJoinColumns =
-        @JoinColumn(name = "OPTION_Id_Option"))
-    Set<OptionImpl> optionSet = new HashSet<OptionImpl>();
+        @JoinColumn(name = "OPTION_ELEMENT_Id_Option_Element"))
+    Set<OptionElementImpl> optionElementSet = new HashSet<OptionElementImpl>();
+    
+    @ManyToMany
+        @JoinTable(name = "TGSI_CONTRACT_REFERENTIAL", joinColumns =
+        @JoinColumn(name = "CONTRACT_Id_Contract"), inverseJoinColumns =
+        @JoinColumn(name = "REFERENTIAL_Id_Referential"))
+    Set<ReferentialImpl> referentialSet = new HashSet<ReferentialImpl>();
 
     @Override
     public Long getId() {
@@ -164,16 +176,6 @@ public class ContractImpl implements Contract, Serializable {
     }
 
     @Override
-    public String getUrl() {
-        return url;
-    }
-
-    @Override
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    @Override
     public Float getPrice() {
         return price;
     }
@@ -194,16 +196,6 @@ public class ContractImpl implements Contract, Serializable {
     }
 
     @Override
-    public Product getProduct() {
-        return product;
-    }
-
-    @Override
-    public void setProduct(Product product) {
-        this.product = (ProductImpl)product;
-    }
-
-    @Override
     public Set<? extends Act> getActSet() {
         return actSet;
     }
@@ -219,18 +211,63 @@ public class ContractImpl implements Contract, Serializable {
     }
 
     @Override
-    public Set<OptionImpl> getOptionSet() {
-        return optionSet;
+    public Set<OptionElementImpl> getOptionElementSet() {
+        return optionElementSet;
     }
 
     @Override
-    public void addOption(Option option) {
-        optionSet.add((OptionImpl)option);
+    public void addOptionElement(OptionElement option) {
+        optionElementSet.add((OptionElementImpl)option);
     }
 
     @Override
-    public void addAllOption(Set<? extends Option> optionSet) {
-        this.optionSet.addAll((Set<OptionImpl>)optionSet);
+    public void addAllOptionElement(Set<? extends OptionElement> optionElementSet) {
+        this.optionElementSet.addAll((Set<OptionElementImpl>)optionElementSet);
+    }
+
+    @Override
+    public Set<FunctionalityImpl> getFunctionalitySet() {
+        return functionalitySet;
+    }
+
+    @Override
+    public void addFunctionality(Functionality functionality) {
+        this.functionalitySet.add((FunctionalityImpl)functionality);
+    }
+
+    @Override
+    public void addAllFunctionality(Set<? extends Functionality> functionalitySet) {
+        this.functionalitySet.addAll((Set<FunctionalityImpl>)functionalitySet);
+    }
+    
+    @Override
+    public Set<ReferentialImpl> getReferentialSet() {
+        return referentialSet;
+    }
+
+    @Override
+    public void addReferential(Referential referential) {
+        this.referentialSet.add((ReferentialImpl)referential);
+    }
+
+    @Override
+    public void addAllReferential(Set<? extends Referential> referentialSet) {
+        this.referentialSet.addAll((Set<ReferentialImpl>)referentialSet);
+    }
+    
+    @Override
+    public Set<ScenarioImpl> getScenarioSet() {
+        return scenarioSet;
+    }
+
+    @Override
+    public void addScenario(Scenario scenario) {
+        this.scenarioSet.add((ScenarioImpl)scenario);
+    }
+
+    @Override
+    public void addAllScenario(Set<? extends Scenario> scenarioSet) {
+        this.scenarioSet.addAll((Set<ScenarioImpl>)scenarioSet);
     }
 
 }
