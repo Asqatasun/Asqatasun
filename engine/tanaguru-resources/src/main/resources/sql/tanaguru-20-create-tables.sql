@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `CONTENT` (
   `Dt_Loading` datetime DEFAULT NULL,
   `Http_Status_Code` int(11) NOT NULL,
   `Uri` varchar(2048) NOT NULL,
-  `Binary_Content` longblob,
+  `Binary_Content` mediumblob,
   `Adapted_Content` mediumtext,
   `Source` mediumtext,
   `Charset` varchar(255) DEFAULT NULL,
