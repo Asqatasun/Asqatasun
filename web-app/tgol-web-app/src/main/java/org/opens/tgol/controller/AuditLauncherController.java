@@ -358,6 +358,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
                 userParamSet.add(param);
             }
             paramSet = getParameterDataService().updateParameterSet(paramSet, userParamSet);
+            paramSet = setLevelParameter(paramSet, auditSetUpCommand.getLevel());
         } else {
             Set<? extends OptionElement> optionElementSet =
                     getContractDataService().read(contractId).getOptionElementSet();
@@ -374,7 +375,6 @@ public class AuditLauncherController extends AuditDataHandlerController {
             paramSet = getParameterDataService().updateParameterSet(paramSet, userParamSet);
         }
         paramSet = setProxyParameters(paramSet, url);
-        paramSet = setLevelParameter(paramSet, auditSetUpCommand.getLevel());
         return paramSet;
     }
 
