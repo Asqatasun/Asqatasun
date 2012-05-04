@@ -19,11 +19,11 @@ INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_El
 (9, 'PROXY_PORT', 1, 'proxy port', 'proxy port');
 
 INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
-(1, '50000', b'1'),
+(1, '50000', b'0'),
 (2, '', b'1'),
 (3, '20', b'1'),
 (3, '0', b'0'),
-(4, '604800', b'1'),
+(4, '604800', b'0'),
 (5, 'Seo;Or', b'0'),
 (5, 'Seo;Ar', b'0'),
 (5, 'Seo;Bz', b'0'),
@@ -31,11 +31,12 @@ INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_D
 (5, 'AW21;Bz', b'0'),
 (5, 'AW21;Or', b'0'),
 (1, '100', b'0'),
-(1, '10000', b'0'),
+(1, '10000', b'1'),
 (1, '20000', b'0'),
 (6, '', b'1'),
 (7, '', b'1'),
 (8, '', b'1'),
-(9, '', b'1');
+(9, '', b'1'), 
+(4, '86400', b'1'),
 
 SET foreign_key_checks=1;
