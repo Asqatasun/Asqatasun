@@ -106,7 +106,7 @@
     </bean>
 
     <bean id="maxDurationFormFieldBuilder" class="org.opens.tgol.form.builder.NumericalFormFieldBuilderImpl">
-        <property name="maxValue" value="604800"/>
+        <property name="maxValue" value="86400"/>
         <property name="minValue" value="1"/>
         <property name="i18nKey" value="max-duration"/>
         <property name="errorI18nKey" value="max-duration-error"/>
