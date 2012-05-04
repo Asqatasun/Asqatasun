@@ -37,6 +37,6 @@ INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_D
 (7, '', b'1'),
 (8, '', b'1'),
 (9, '', b'1'), 
-(4, '86400', b'1'),
+(4, '86400', b'1');
 
 SET foreign_key_checks=1;
