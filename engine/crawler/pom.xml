@@ -6,13 +6,13 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>1.6.0-SNAPSHOT</version>
+        <version>1.5.2-RC1</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>crawler</artifactId>
     <name>crawler</name>
-    <version>1.6.0-SNAPSHOT</version>
+    <version>1.5.2-RC1</version>
     <url>http://www.tanaguru.org</url>
     <dependencies>
         <dependency>
