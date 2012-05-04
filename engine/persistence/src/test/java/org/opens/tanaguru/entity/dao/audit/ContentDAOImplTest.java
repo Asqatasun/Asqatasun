@@ -23,6 +23,7 @@ package org.opens.tanaguru.entity.dao.audit;
 
 import java.util.List;
 import org.apache.http.HttpStatus;
+import org.dbunit.operation.DatabaseOperation;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.dao.subject.WebResourceDAO;
@@ -49,6 +50,7 @@ public class ContentDAOImplTest extends AbstractDaoTestCase {
                 springBeanFactory.getBean("auditDAO");
         contentDAO = (ContentDAO)
                 springBeanFactory.getBean("contentDAO");
+        setTeardownOperationValue(DatabaseOperation.DELETE);
     }
 
     public void testFindOrphanContentList() {

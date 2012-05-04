@@ -14,10 +14,6 @@
        http://jax-ws.dev.java.net/spring/core http://jax-ws.dev.java.net/spring/core.xsd
        http://jax-ws.dev.java.net/spring/servlet http://jax-ws.dev.java.net/spring/servlet.xsd">
     
-    <bean id="propertyConfigurer"
-          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-          p:location="file:///etc/tanaguru-test/tanaguru-test.conf"/>
-
     <import resource="beans-tanaguru.xml"/>
     <import resource="beans-persistence.xml"/>
     

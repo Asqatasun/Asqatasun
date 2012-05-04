@@ -26,6 +26,27 @@
     <AUDIT Id_Audit="1" Dt_Creation="2010-10-26 13:50:29" Status="COMPLETED"/>
     <AUDIT Id_Audit="2" Dt_Creation="2010-10-26 14:50:29" Status="COMPLETED"/>
 
+    <AUDIT_TEST Id_Audit="1" Id_Test="1"/>
+    <AUDIT_TEST Id_Audit="1" Id_Test="2"/>
+    <AUDIT_TEST Id_Audit="1" Id_Test="3"/>
+    <AUDIT_TEST Id_Audit="1" Id_Test="4"/>
+    <AUDIT_TEST Id_Audit="1" Id_Test="5"/>
+    <AUDIT_TEST Id_Audit="1" Id_Test="6"/>
+    <AUDIT_TEST Id_Audit="1" Id_Test="7"/>
+    <AUDIT_TEST Id_Audit="1" Id_Test="8"/>
+    <AUDIT_TEST Id_Audit="1" Id_Test="9"/>
+    <AUDIT_TEST Id_Audit="1" Id_Test="10"/>
+    <AUDIT_TEST Id_Audit="2" Id_Test="1"/>
+    <AUDIT_TEST Id_Audit="2" Id_Test="2"/>
+    <AUDIT_TEST Id_Audit="2" Id_Test="3"/>
+    <AUDIT_TEST Id_Audit="2" Id_Test="4"/>
+    <AUDIT_TEST Id_Audit="2" Id_Test="5"/>
+    <AUDIT_TEST Id_Audit="2" Id_Test="6"/>
+    <AUDIT_TEST Id_Audit="2" Id_Test="7"/>
+    <AUDIT_TEST Id_Audit="2" Id_Test="8"/>
+    <AUDIT_TEST Id_Audit="2" Id_Test="9"/>
+    <AUDIT_TEST Id_Audit="2" Id_Test="10"/>
+
     <WEB_RESOURCE DTYPE="SiteImpl" Id_Web_Resource="1" Label="NULL" Url="http://www.mock-url1.org/" Id_Audit="1" Mark="50" />
     <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="2" Label="NULL" Url="http://www.mock-url2.org/" Id_Audit="2" Mark="50" />
     <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="5" Label="NULL" Url="http://www.mock-url2.org/" Mark="50" Id_Web_Resource_Parent="1"/>

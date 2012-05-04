@@ -27,6 +27,7 @@ import org.dbunit.DBTestCase;
 import org.dbunit.PropertiesBasedJdbcDatabaseTester;
 import org.dbunit.database.DatabaseConfig;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.ReplacementDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.springframework.beans.factory.BeanFactory;
@@ -67,6 +68,24 @@ public abstract class AbstractDaoTestCase extends DBTestCase {
         this.inputDataFileName = inputDataFileName;
     }
 
+    private DatabaseOperation setUpOperationValue = DatabaseOperation.CLEAN_INSERT;
+    public DatabaseOperation getSetUpOperationValue() {
+        return setUpOperationValue;
+    }
+    
+    public void setSetUpOperationValue(DatabaseOperation setUpOperationValue) {
+        this.setUpOperationValue = setUpOperationValue;
+    }
+    
+    private DatabaseOperation teardownOperationValue = DatabaseOperation.NONE;
+    public DatabaseOperation getTeardownOperationValue() {
+        return teardownOperationValue;
+    }
+
+    public void setTeardownOperationValue(DatabaseOperation teardownOperationValue) {
+        this.teardownOperationValue = teardownOperationValue;
+    }
+    
     protected BeanFactory springBeanFactory;
 
     public AbstractDaoTestCase(String testName) {
@@ -103,18 +122,20 @@ public abstract class AbstractDaoTestCase extends DBTestCase {
     @Override
     protected IDataSet getDataSet() throws Exception {
         FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
-        return builder.build(new FileInputStream(
-                getInputDataFileName()));
+        ReplacementDataSet dataSet = new ReplacementDataSet(builder.build(new FileInputStream(
+                getInputDataFileName())));
+        dataSet.addReplacementObject("[NULL]", null);
+        return dataSet;
     }
 
     @Override
     protected DatabaseOperation getSetUpOperation() throws Exception {
-        return DatabaseOperation.CLEAN_INSERT;
+        return setUpOperationValue;
     }
 
     @Override
     protected DatabaseOperation getTearDownOperation() throws Exception {
-        return DatabaseOperation.NONE;
+        return teardownOperationValue;
     }
 
 }
