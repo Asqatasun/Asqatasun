@@ -37,7 +37,7 @@ public abstract class RelatedBinaryContentImpl extends RelatedContentImpl implem
         BinaryContent, RelatedContent, Serializable {
 
     private static final long serialVersionUID = -7599830018001646757L;
-    @Column(name = "Binary_Content", length=4000000, columnDefinition="longblob")
+    @Column(name = "Binary_Content", length=4000000)
     protected Byte[] binaryContent;
 
     public RelatedBinaryContentImpl() {
