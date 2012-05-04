@@ -49,7 +49,7 @@ public abstract class AbstractDaoTestCase extends DBTestCase {
      * driver JDBC
      */
     private static final String JDBC_DRIVER =
-            "com.mysql.jdbc.Driver";
+            "org.hsqldb.jdbcDriver";
 
     private static final String SPRING_FILE_PATH =
             "../persistence/src/test/resources/conf/context/unit-test-context.xml";
