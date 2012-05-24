@@ -137,8 +137,6 @@ public class AuditServiceThreadQueueImplTest extends TestCase {
         instance.addPageAudit(auditCommand);
         
         // Verify behavior.
-                System.out.println(auditServiceThreadFactory.hashCode());
-        System.out.println(auditServiceThread.hashCode());
         EasyMock.verify(auditServiceThreadFactory);
         EasyMock.verify(auditServiceThread);
     }
@@ -166,8 +164,6 @@ public class AuditServiceThreadQueueImplTest extends TestCase {
         instance.addScenarioAudit(auditCommand);
 
         // Verify behavior.
-        System.out.println(auditServiceThreadFactory.hashCode());
-        System.out.println(auditServiceThread.hashCode());
         EasyMock.verify(auditServiceThread);
         EasyMock.verify(auditServiceThreadFactory);
     }
@@ -195,8 +191,6 @@ public class AuditServiceThreadQueueImplTest extends TestCase {
         instance.addPageUploadAudit(auditCommand);
         
         // Verify behavior.
-                System.out.println(auditServiceThreadFactory.hashCode());
-        System.out.println(auditServiceThread.hashCode());
         EasyMock.verify(auditServiceThreadFactory);
         EasyMock.verify(auditServiceThread);
     }
@@ -223,8 +217,6 @@ public class AuditServiceThreadQueueImplTest extends TestCase {
         instance.addSiteAudit(auditCommand);
         
         // Verify behavior.
-                System.out.println(auditServiceThreadFactory.hashCode());
-        System.out.println(auditServiceThread.hashCode());
         EasyMock.verify(auditServiceThread);
         EasyMock.verify(auditServiceThreadFactory);
     }
