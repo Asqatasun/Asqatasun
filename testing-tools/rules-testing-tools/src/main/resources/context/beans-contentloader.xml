@@ -6,11 +6,9 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     <bean id="downloaderFactory" class="org.opens.tanaguru.contentloader.DownloaderFactoryImpl"/>
 
     <bean id="contentLoaderFactory" class="org.opens.tanaguru.contentloader.ContentLoaderFactoryImpl"/>
+    
+    <bean id="dateFactory" class="org.opens.tanaguru.contentloader.DateFactoryImpl"/>
 
-    <bean id="contentLoaderService" class="org.opens.tanaguru.service.ContentLoaderServiceImpl">
-        <property name="contentFactory" ref="contentFactory"/>
-        <property name="contentLoaderFactory" ref="contentLoaderFactory"/>
-        <property name="downloaderFactory" ref="downloaderFactory"/>
-    </bean>
+    <bean id="contentLoaderService" class="org.opens.tanaguru.service.ContentLoaderServiceImpl"/>
 
 </beans>
