@@ -21,8 +21,9 @@
  */
 package org.opens.tanaguru.service;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
 import org.easymock.EasyMock;
 import org.opens.tanaguru.service.command.AuditCommand;
 
@@ -114,7 +115,7 @@ public class AuditServiceThreadQueueImplTest extends TestCase {
         assertEquals(0, instance.getListeners().size());
     }
 
-        /**
+    /**
      * Test of addPageAudit method, of class AuditServiceThreadQueueImpl.
      */
     public void testAddPageAudit() {
@@ -127,7 +128,6 @@ public class AuditServiceThreadQueueImplTest extends TestCase {
         
         // Create the mock instance
         AuditServiceThread auditServiceThread = createMockAuditServiceThread(instance);
-                EasyMock.createMock(AuditServiceThread.class);
         
         // Create the mock instance
         AuditServiceThreadFactory auditServiceThreadFactory = 
@@ -135,6 +135,14 @@ public class AuditServiceThreadQueueImplTest extends TestCase {
         
         instance.setAuditServiceThreadFactory(auditServiceThreadFactory);
         instance.addPageAudit(auditCommand);
+        
+        // sleep to make sure the auditServiceThread is started and thus avoid
+        // an unexpected error
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(AuditServiceThreadQueueImplTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         // Verify behavior.
         EasyMock.verify(auditServiceThreadFactory);
@@ -154,7 +162,6 @@ public class AuditServiceThreadQueueImplTest extends TestCase {
         
         // Create the mock instance
         AuditServiceThread auditServiceThread = createMockAuditServiceThread(instance);
-                EasyMock.createMock(AuditServiceThread.class);
         
         // Create the mock instance
         AuditServiceThreadFactory auditServiceThreadFactory = 
@@ -163,6 +170,14 @@ public class AuditServiceThreadQueueImplTest extends TestCase {
         instance.setAuditServiceThreadFactory(auditServiceThreadFactory);
         instance.addScenarioAudit(auditCommand);
 
+        // sleep to make sure the auditServiceThread is started and thus avoid
+        // an unexpected error
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(AuditServiceThreadQueueImplTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         // Verify behavior.
         EasyMock.verify(auditServiceThread);
         EasyMock.verify(auditServiceThreadFactory);
@@ -181,7 +196,6 @@ public class AuditServiceThreadQueueImplTest extends TestCase {
         
         // Create the mock instance
         AuditServiceThread auditServiceThread = createMockAuditServiceThread(instance);
-                EasyMock.createMock(AuditServiceThread.class);
         
         // Create the mock instance
         AuditServiceThreadFactory auditServiceThreadFactory = 
@@ -189,6 +203,14 @@ public class AuditServiceThreadQueueImplTest extends TestCase {
         
         instance.setAuditServiceThreadFactory(auditServiceThreadFactory);
         instance.addPageUploadAudit(auditCommand);
+        
+        // sleep to make sure the auditServiceThread is started and thus avoid
+        // an unexpected error
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(AuditServiceThreadQueueImplTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         // Verify behavior.
         EasyMock.verify(auditServiceThreadFactory);
@@ -207,7 +229,6 @@ public class AuditServiceThreadQueueImplTest extends TestCase {
         
         // Create the mock instance
         AuditServiceThread auditServiceThread = createMockAuditServiceThread(instance);
-                EasyMock.createMock(AuditServiceThread.class);
         
         // Create the mock instance
         AuditServiceThreadFactory auditServiceThreadFactory = 
@@ -215,6 +236,14 @@ public class AuditServiceThreadQueueImplTest extends TestCase {
         
         instance.setAuditServiceThreadFactory(auditServiceThreadFactory);
         instance.addSiteAudit(auditCommand);
+        
+        // sleep to make sure the auditServiceThread is started and thus avoid
+        // an unexpected error
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(AuditServiceThreadQueueImplTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         // Verify behavior.
         EasyMock.verify(auditServiceThread);
@@ -261,11 +290,11 @@ public class AuditServiceThreadQueueImplTest extends TestCase {
         // the current instance of AuditServiceThreadQueueImpl is recorded 
         // as listener
         auditServiceThread.add(instance);
-        EasyMock.expectLastCall();
+        EasyMock.expectLastCall().once();
         
         // The thread is launched
         auditServiceThread.run();
-        EasyMock.expectLastCall();
+        EasyMock.expectLastCall().once();
         
         // Set mock AuditServiceThread into testing mode.
         EasyMock.replay(auditServiceThread);
