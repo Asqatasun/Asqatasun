@@ -584,25 +584,31 @@
 
             <!-- tika dependencies -->
             <dependency>
-            <groupId>org.apache.tika</groupId>
-            <artifactId>tika-parsers</artifactId>
-            <version>0.9</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-httpclient</groupId>
-                    <artifactId>commons-httpclient</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>asm</groupId>
-                    <artifactId>asm</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+                <groupId>org.apache.tika</groupId>
+                <artifactId>tika-parsers</artifactId>
+                <version>0.9</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-httpclient</groupId>
+                        <artifactId>commons-httpclient</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>cglib</groupId>
+                        <artifactId>cglib</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>asm</groupId>
+                        <artifactId>asm</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
         
+            <!-- EasyMock --> 
+            <dependency>
+                <groupId>org.easymock</groupId>
+                <artifactId>easymock</artifactId>
+                <version>3.1</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
