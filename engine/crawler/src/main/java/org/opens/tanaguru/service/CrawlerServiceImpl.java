@@ -21,26 +21,19 @@
  */
 package org.opens.tanaguru.service;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.crawler.Crawler;
 import org.opens.tanaguru.crawler.CrawlerFactory;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.RelatedContent;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
-import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
-import org.opens.tanaguru.entity.subject.Page;
-import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Implementation of the crawler service.
@@ -51,30 +44,13 @@ public class CrawlerServiceImpl implements CrawlerService {
 
     private static final Logger LOGGER = Logger.getLogger(CrawlerServiceImpl.class);
     private static final int PROCESS_WINDOW = 2000;
-    /**
-     * The path of the crawl configuration file
-     */
-    private String crawlConfigFilePath;
-    @Override
-    public void setCrawlConfigFilePath(String crawlConfigFilePath) {
-        this.crawlConfigFilePath = crawlConfigFilePath;
-    }
-
-    @Override
-    public String getCrawlConfigFilePath() {
-        return crawlConfigFilePath;
-    }
 
     /**
      * The auditDataService instance
      */
     private AuditDataService auditDataService;
     @Override
-    public AuditDataService getAuditDataService() {
-        return auditDataService;
-    }
-
-    @Override
+    @Autowired
     public void setAuditDataService(AuditDataService auditDataService) {
         this.auditDataService = auditDataService;
     }
@@ -88,6 +64,7 @@ public class CrawlerServiceImpl implements CrawlerService {
     }
 
     @Override
+    @Autowired
     public void setContentDataService(ContentDataService contentDataService) {
         this.contentDataService = contentDataService;
     }
@@ -102,6 +79,7 @@ public class CrawlerServiceImpl implements CrawlerService {
     }
 
     @Override
+    @Autowired
     public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
         this.webResourceDataService = webResourceDataService;
     }
@@ -111,46 +89,9 @@ public class CrawlerServiceImpl implements CrawlerService {
      */
     private CrawlerFactory crawlerFactory;
     @Override
+    @Autowired
     public void setCrawlerFactory(CrawlerFactory crawlerFactory) {
         this.crawlerFactory = crawlerFactory;
-    }
-
-    /**
-     * The webResource factory instance
-     */
-    private WebResourceFactory webResourceFactory;
-    @Override
-    public void setWebResourceFactory(WebResourceFactory webResourceFactory) {
-        this.webResourceFactory = webResourceFactory;
-    }
-
-    /**
-     * The content factory instance
-     */
-    private ContentFactory contentFactory;
-    @Override
-    public ContentFactory getContentFactory() {
-        return contentFactory;
-    }
-
-    @Override
-    public void setContentFactory(ContentFactory contentFactory) {
-        this.contentFactory = contentFactory;
-    }
-
-    /**
-     * The output directory needed by heritrix to create temporary files
-     * during the crawl.
-     */
-    private String outputDir;
-    @Override
-    public String getOutputDir() {
-        return outputDir;
-    }
-
-    @Override
-    public void setOutputDir(String outputDir) {
-        this.outputDir = outputDir;
     }
 
     /**
@@ -161,20 +102,10 @@ public class CrawlerServiceImpl implements CrawlerService {
     }
 
     @Override
-    public Page crawl(Page page) {
-        Audit audit = page.getAudit();
+    public WebResource crawlPage(Audit audit, String pageUrl) {
         Crawler crawler = getCrawlerInstance((List<Parameter>)audit.getParameterSet());
-        crawler.setPageURL(page.getURL());
-        crawler.run();
-        page = (Page) crawler.getResult();
-        page.setAudit(audit);
-        audit.setSubject(page);
-        //the relation from webresource to audit is refresh, the audit has to
-        // be persisted first
-        auditDataService.saveOrUpdate(audit);
-        setAuditToContent(page, audit);
-        removeSummerRomance(page, audit);
-        return page;
+        crawler.setPageURL(pageUrl);
+        return crawl(crawler, audit);
     }
 
     /**
@@ -183,52 +114,90 @@ public class CrawlerServiceImpl implements CrawlerService {
      * @return returns the site after modification
      */
     @Override
-    public Site crawl(Site site) {
-        Audit audit = site.getAudit();
+    public WebResource crawlSite(Audit audit, String siteUrl) {
         Crawler crawler = getCrawlerInstance((List<Parameter>)audit.getParameterSet());
-
-        int componentListSize = site.getComponentList().size();
-        if (componentListSize == 0) {
-            crawler.setSiteURL(site.getURL());
-        } else {
-            String[] urlPage = new String[componentListSize];
-            Object[] webresourceTab = site.getComponentList().toArray();
-            for (int i = 0; i < componentListSize; i++) {
-                if (webresourceTab[i] instanceof WebResource) {
-                    urlPage[i] = ((WebResource) webresourceTab[i]).getURL();
-                }
-            }
-            crawler.setSiteURL(site.getURL(), urlPage);
-        }
+        crawler.setSiteURL(siteUrl);
+        return crawl(crawler, audit);
+    }
+    
+    @Override
+    public WebResource crawlGroupOfPages(Audit audit, String siteUrl, List<String> urlList) {
+        Crawler crawler = getCrawlerInstance((List<Parameter>)audit.getParameterSet());
+        crawler.setSiteURL(siteUrl, urlList);
+        return crawl(crawler, audit);
+    }
+    
+    /**
+     * 
+     * @param crawler
+     * @param audit
+     * @return 
+     */
+    private WebResource crawl(Crawler crawler, Audit audit) {
         crawler.run();
-        site = (Site) crawler.getResult();
-        site.setAudit(audit);
-        audit.setSubject(site);
+        WebResource wr = crawler.getResult();
+        wr.setAudit(audit);
+        audit.setSubject(wr);
         //the relation from webresource to audit is refresh, the audit has to
         // be persisted first
         auditDataService.saveOrUpdate(audit);
-        setAuditToContent(site, audit);
-        removeSummerRomance(site, audit);
-        return site;
+        setAuditToContent(wr, audit);
+        removeSummerRomance(wr, audit);
+        return wr;
     }
+           
+//    /**
+//     * Calls the crawler component process then updates the site.
+//     * @param site the site to crawl
+//     * @return returns the site after modification
+//     */
+//    @Override
+//    public Site crawl(Site site) {
+//        Audit audit = site.getAudit();
+//        Crawler crawler = getCrawlerInstance((List<Parameter>)audit.getParameterSet());
+//
+//        int componentListSize = site.getComponentList().size();
+//        if (componentListSize == 0) {
+//            crawler.setSiteURL(site.getURL());
+//        } else {
+//            String[] urlPage = new String[componentListSize];
+//            Object[] webresourceTab = site.getComponentList().toArray();
+//            for (int i = 0; i < componentListSize; i++) {
+//                if (webresourceTab[i] instanceof WebResource) {
+//                    urlPage[i] = ((WebResource) webresourceTab[i]).getURL();
+//                }
+//            }
+//            crawler.setSiteURL(site.getURL(), urlPage);
+//        }
+//        crawler.run();
+//        site = (Site) crawler.getResult();
+//        site.setAudit(audit);
+//        audit.setSubject(site);
+//        //the relation from webresource to audit is refresh, the audit has to
+//        // be persisted first
+//        auditDataService.saveOrUpdate(audit);
+//        setAuditToContent(site, audit);
+//        removeSummerRomance(site, audit);
+//        return site;
+//    }
 
-    /**
-     * 
-     * @param crawlParameters
-     * @return
-     */
-    @Override
-    public WebResource crawl(Audit audit) {
-        Crawler crawler = getCrawlerInstance((List<Parameter>)audit.getParameterSet());
-        crawler.run();
-        WebResource webResource = crawler.getResult();
-        webResource.setAudit(audit);
-        audit.setSubject(webResource);
-        auditDataService.saveOrUpdate(audit);
-        setAuditToContent(webResource, audit);
-        removeSummerRomance(webResource, audit);
-        return webResource;
-    }
+//    /**
+//     * 
+//     * @param crawlParameters
+//     * @return
+//     */
+//    @Override
+//    public WebResource crawl(Audit audit) {
+//        Crawler crawler = getCrawlerInstance((List<Parameter>)audit.getParameterSet());
+//        crawler.run();
+//        WebResource webResource = crawler.getResult();
+//        webResource.setAudit(audit);
+//        audit.setSubject(webResource);
+//        auditDataService.saveOrUpdate(audit);
+////        setAuditToContent(webResource, audit);
+//        removeSummerRomance(webResource, audit);
+//        return webResource;
+//    }
 
     /**
      * This method created the relation between the fetched contents and the
@@ -335,14 +304,7 @@ public class CrawlerServiceImpl implements CrawlerService {
     private Crawler getCrawlerInstance(List<Parameter> paramList) {
         Set<Parameter> paramSet = new HashSet<Parameter>();
         paramSet.addAll(paramList);
-        return crawlerFactory.create(
-                webResourceFactory,
-                webResourceDataService,
-                contentFactory,
-                contentDataService,
-                paramSet,
-                outputDir,
-                crawlConfigFilePath);
+        return crawlerFactory.create(paramSet);
     }
 
 }

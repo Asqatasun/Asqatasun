@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -97,14 +98,14 @@ public class TanaguruCrawlJob {
      * @param paramSet
      */
     public TanaguruCrawlJob(
-            String[] url,
+            Collection<String> urlList,
             String heritrixFileName,
             String outputDir,
             String crawlConfigFilePath,
             Set<Parameter> paramSet) {
         this.outputDir = outputDir;
         this.crawlConfigFilePath = crawlConfigFilePath;
-        File configFile = initializeCrawlContext(url, paramSet, heritrixFileName);
+        File configFile = initializeCrawlContext(urlList, paramSet, heritrixFileName);
         crawlJob = new CrawlJob(configFile);
     }
 
@@ -242,7 +243,7 @@ public class TanaguruCrawlJob {
      * @param heritrixFileName
      * @return
      */
-    private File initializeCrawlContext(String[] url, Set<Parameter> crawlParameterSet, String heritrixFileName) {
+    private File initializeCrawlContext(Collection<String> urlList, Set<Parameter> crawlParameterSet, String heritrixFileName) {
         buildOutputDirectory();
         BufferedReader in = null;
         FileWriter fw = null;
@@ -259,7 +260,7 @@ public class TanaguruCrawlJob {
                     LOGGER.debug(param.getParameterElement().getParameterElementCode() + " "+ param.getValue());
                 }
             }
-            doc = setOptionToDocument(url, crawlParameterSet, doc);
+            doc = setOptionToDocument(urlList, crawlParameterSet, doc);
             //write the content into xml file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
@@ -320,22 +321,22 @@ public class TanaguruCrawlJob {
      * @return
      * @throws IOException
      */
-    private Document setOptionToDocument(String[] url, Set<Parameter> crawlParameterSet, Document doc)
+    private Document setOptionToDocument(Collection<String> urlList, Set<Parameter> crawlParameterSet, Document doc)
             throws IOException{
 
         doc.getFirstChild();
         String uriTmp;
-        StringBuilder urlList = new StringBuilder();
+        StringBuilder urls = new StringBuilder();
         CrawlConfigurationUtils ccu = CrawlConfigurationUtils.getInstance();
-        for (int i = 0; i < url.length; i++) {
+        for (String url : urlList) {
             // first convert the URI in unicode
-            uriTmp = UURIFactory.getInstance(url[i]).getEscapedURI();
+            uriTmp = UURIFactory.getInstance(url).getEscapedURI();
             // then escape the URI to be written in a xml file.
 //            urlList.append(StringEscapeUtils.escapeXml(uriTmp));
-            urlList.append(uriTmp);
-            urlList.append("\r");
+            urls.append(uriTmp);
+            urls.append("\r");
         }
-        doc = ccu.modifyValue(ccu.getUrlModifier(), doc, urlList.toString());
+        doc = ccu.modifyValue(ccu.getUrlModifier(), doc, urls.toString());
         for (Parameter parameter : crawlParameterSet) {
             doc = ccu.modifyHeritrixParameter(doc, parameter);
         }

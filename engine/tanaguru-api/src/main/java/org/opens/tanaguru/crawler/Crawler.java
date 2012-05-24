@@ -21,11 +21,11 @@
  */
 package org.opens.tanaguru.crawler;
 
+import java.util.Collection;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
-import org.opens.tanaguru.entity.subject.WebResource;
-import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
+import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.parameterization.Parametrable;
 
 /**
@@ -48,12 +48,6 @@ public interface Crawler extends Parametrable {
 
     /**
      *
-     * @param webResourceFactory
-     */
-    void setWebResourceFactory(WebResourceFactory webResourceFactory);
-
-    /**
-     *
      * @param webResourceURL
      */
     void setSiteURL(String webResourceURL);
@@ -63,7 +57,7 @@ public interface Crawler extends Parametrable {
      * @param siteName
      * @param webResourceURL
      */
-    void setSiteURL(String siteName, String[] webResourceURL);
+    void setSiteURL(String siteName, Collection<String> webResourceURL);
 
     /**
      *

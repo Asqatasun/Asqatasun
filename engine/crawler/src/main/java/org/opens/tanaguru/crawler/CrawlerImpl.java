@@ -22,6 +22,8 @@
 package org.opens.tanaguru.crawler;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -39,7 +41,6 @@ import org.opens.tanaguru.entity.audit.ImageContent;
 import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.StylesheetContent;
-import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
@@ -113,12 +114,6 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         this.webResourceDataService = webResourceDataService;
     }
 
-    private WebResourceFactory webResourceFactory;
-    @Override
-    public void setWebResourceFactory(WebResourceFactory webResourceFactory) {
-        this.webResourceFactory = webResourceFactory;
-    }
-
     private ContentFactory contentFactory;
     @Override
     public void setContentFactory(ContentFactory contentFactory) {
@@ -170,11 +165,12 @@ public class CrawlerImpl implements Crawler, ContentWriter {
 
     @Override
     public void setSiteURL(String siteURL) {
-        mainWebResource = webResourceFactory.createSite(siteURL);
+        mainWebResource = webResourceDataService.createSite(siteURL);
         mainWebResource = webResourceDataService.saveOrUpdate(mainWebResource);
-        String[] siteUrl = {siteURL};
+        Collection<String> urlList = new ArrayList<String>();
+        urlList.add(siteURL);
         this.crawlJob = new TanaguruCrawlJob(
-                siteUrl,
+                urlList,
                 HERITRIX_SITE_FILE_NAME,
                 getOutputDir(),
                 getCrawlConfigFilePath(),
@@ -189,8 +185,8 @@ public class CrawlerImpl implements Crawler, ContentWriter {
      * @param siteUrl
      */
     @Override
-    public void setSiteURL(String siteName, String[] siteURL) {
-        mainWebResource = webResourceFactory.createSite(siteName);
+    public void setSiteURL(String siteName, Collection<String> siteURL) {
+        mainWebResource = webResourceDataService.createSite(siteName);
         mainWebResource = webResourceDataService.saveOrUpdate(mainWebResource);
         this.crawlJob = new TanaguruCrawlJob(
                 siteURL,
@@ -209,11 +205,12 @@ public class CrawlerImpl implements Crawler, ContentWriter {
      */
     @Override
     public void setPageURL(String pageURL) {
-        mainWebResource = webResourceFactory.createPage(pageURL);
+        mainWebResource = webResourceDataService.createPage(pageURL);
         mainWebResource = webResourceDataService.saveOrUpdate(mainWebResource);
-        String[] pageUrl = {pageURL};
+        Collection<String> urlList = new ArrayList<String>();
+        urlList.add(pageURL);
         this.crawlJob = new TanaguruCrawlJob(
-                pageUrl,
+                urlList,
                 HERITRIX_PAGE_FILE_NAME,
                 outputDir,
                 crawlConfigFilePath,

@@ -22,11 +22,7 @@
 package org.opens.tanaguru.crawler;
 
 import java.util.Set;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
-import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
 import org.opens.tanaguru.entity.parameterization.Parameter;
-import org.opens.tanaguru.entity.service.audit.ContentDataService;
-import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 
 /**
  *
@@ -36,22 +32,21 @@ public interface CrawlerFactory {
 
     /**
      * 
-     * @param webResourceFactory
-     * @param webResourceDataService
-     * @param contentFactory
-     * @param contentDataService
+     * @param crawlConfigFilePath 
+     */
+    void setCrawlConfigFilePath(String crawlConfigFilePath);
+
+    /**
+     * The output directory needed by heritrix to create temporary files
+     * during the crawl.
+     */
+    void setOutputDir(String outputDir);
+    
+    /**
+     * 
      * @param paramSet
-     * @param outputDir
-     * @param crawlConfigFilePath
      * @return
      *      an initialised implementation of the crawler interface
      */
-    Crawler create(
-            WebResourceFactory webResourceFactory,
-            WebResourceDataService webResourceDataService,
-            ContentFactory contentFactory,
-            ContentDataService contentDataService,
-            Set<Parameter> paramSet,
-            String outputDir,
-            String crawlConfigFilePath);
+    Crawler create(Set<Parameter> paramSet);
 }

@@ -23,10 +23,10 @@ package org.opens.tanaguru.crawler;
 
 import java.util.Set;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
-import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -34,18 +34,48 @@ import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
  */
 public class CrawlerFactoryImpl implements CrawlerFactory {
 
+    private ContentDataService contentDataService;
+    @Autowired
+    public void setContentDataService(ContentDataService contentDataService) {
+        this.contentDataService = contentDataService;
+    }
+
+    private ContentFactory contentFactory;
+    @Autowired
+    public void setContentFactory(ContentFactory contentFactory) {
+        this.contentFactory = contentFactory;
+    }
+    
+    private WebResourceDataService webResourceDataService;
+    @Autowired
+    public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
+        this.webResourceDataService = webResourceDataService;
+    }
+    
+    /**
+     * The path of the crawl configuration file
+     */
+    private String crawlConfigFilePath;
     @Override
-    public Crawler create(WebResourceFactory webResourceFactory, 
-            WebResourceDataService webResourceDataService,
-            ContentFactory contentFactory,
-            ContentDataService contentDataService,
-            Set<Parameter> paramSet, 
-            String outputDir,
-            String crawlConfigFilePath) {
+    public void setCrawlConfigFilePath(String crawlConfigFilePath) {
+        this.crawlConfigFilePath = crawlConfigFilePath;
+    }
+
+    /**
+     * The output directory needed by heritrix to create temporary files
+     * during the crawl.
+     */
+    private String outputDir;
+    @Override
+    public void setOutputDir(String outputDir) {
+        this.outputDir = outputDir;
+    }
+    
+    @Override
+    public Crawler create(Set<Parameter> paramSet) {
         Crawler crawler = new CrawlerImpl();
-        crawler.setWebResourceFactory(webResourceFactory);
-        crawler.setContentFactory(contentFactory);
         crawler.setWebResourceDataService(webResourceDataService);
+        crawler.setContentFactory(contentFactory);
         crawler.setContentDataService(contentDataService);
         crawler.setOutputDir(outputDir);
         crawler.setParameterSet(paramSet);
