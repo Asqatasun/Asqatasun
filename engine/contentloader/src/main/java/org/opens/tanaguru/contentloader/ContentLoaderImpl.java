@@ -22,13 +22,13 @@
 package org.opens.tanaguru.contentloader;
 
 import java.util.ArrayList;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
+import java.util.List;
 import org.opens.tanaguru.entity.audit.Content;
+import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
-import java.util.Date;
-import java.util.List;
+import org.opens.tanaguru.util.factory.DateFactory;
 
 /**
  * 
@@ -38,24 +38,38 @@ public class ContentLoaderImpl implements ContentLoader {
 
     private static final int HTTP_CODE_OK = 200;
     private ContentFactory contentFactory;
+    private DateFactory dateFactory;
     private Downloader downloader;
     private List<Content> result;
     private WebResource webResource;
+    @Override
+    public void setWebResource(WebResource webResource) {
+        this.webResource = webResource;
+    }
 
-    ContentLoaderImpl(ContentFactory contentFactory, Downloader downloader) {
+    /**
+     * Constructor
+     * 
+     * @param contentFactory
+     * @param downloader
+     * @param dateFactory 
+     */
+    ContentLoaderImpl(
+            ContentFactory contentFactory, 
+            Downloader downloader, 
+            DateFactory dateFactory) {
         super();
         this.contentFactory = contentFactory;
         this.downloader = downloader;
+        this.dateFactory = dateFactory;
     }
 
+    @Override
     public List<Content> getResult() {
         return result;
     }
 
-    public WebResource getWebResource() {
-        return webResource;
-    }
-
+    @Override
     public void run() {
         result = run(webResource);
     }
@@ -68,7 +82,7 @@ public class ContentLoaderImpl implements ContentLoader {
             downloader.run();
             String stringContent = downloader.getResult();
             Content content = contentFactory.createSSP(
-                    new Date(),
+                    dateFactory.createDate(),
                     webResource.getURL(),
                     stringContent,
                     (Page) webResource,
@@ -85,15 +99,4 @@ public class ContentLoaderImpl implements ContentLoader {
         return localResult;
     }
 
-    public void setContentFactory(ContentFactory contentFactory) {
-        this.contentFactory = contentFactory;
-    }
-
-    public void setDownloader(Downloader downloader) {
-        this.downloader = downloader;
-    }
-
-    public void setWebResource(WebResource webResource) {
-        this.webResource = webResource;
-    }
 }

@@ -30,5 +30,16 @@
             <artifactId>tanaguru-api</artifactId>
             <version>${engineVersion}</version>
         </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.opens</groupId>
+            <artifactId>audit</artifactId>
+            <version>${engineVersion}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

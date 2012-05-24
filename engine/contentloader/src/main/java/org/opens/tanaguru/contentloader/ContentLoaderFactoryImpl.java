@@ -23,6 +23,7 @@ package org.opens.tanaguru.contentloader;
 
 import java.util.Map;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
+import org.opens.tanaguru.util.factory.DateFactory;
 
 /**
  *
@@ -31,7 +32,15 @@ import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 public class ContentLoaderFactoryImpl implements ContentLoaderFactory {
 
     @Override
-    public ContentLoader create(ContentFactory contentFactory, Downloader downloader, Map<String, String> fileMap) {
-        return new ContentLoaderImpl(contentFactory, downloader);
+    public ContentLoader create(
+            ContentFactory contentFactory, 
+            Downloader downloader, 
+            DateFactory dateFactory,
+            Map<String, String> fileMap) {
+        
+        return new ContentLoaderImpl(
+                contentFactory, 
+                downloader, 
+                dateFactory);
     }
 }
