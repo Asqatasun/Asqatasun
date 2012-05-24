@@ -21,7 +21,7 @@
  */
 package org.opens.tanaguru.service;
 
-import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.service.command.AuditCommand;
 
 /**
  *
@@ -43,21 +43,39 @@ public interface AuditServiceThreadQueue {// TODO Write javadoc
 
     /**
      *
-     * @param audit
+     * @param max
      */
-    void addPageAudit(Audit audit);
+    void setScenarioAuditExecutionListMax(int max);
+
+    /**
+     *
+     * @param max
+     */
+    void setUploadAuditExecutionListMax(int max);
 
     /**
      *
      * @param audit
      */
-    void addPageUploadAudit(Audit audit);
+    void addPageAudit(AuditCommand auditCommand);
 
     /**
      *
      * @param audit
      */
-    void addSiteAudit(Audit audit);
+    void addScenarioAudit(AuditCommand auditCommand);
+
+    /**
+     *
+     * @param audit
+     */
+    void addPageUploadAudit(AuditCommand auditCommand);
+
+    /**
+     *
+     * @param audit
+     */
+    void addSiteAudit(AuditCommand auditCommand);
 
     /**
      *

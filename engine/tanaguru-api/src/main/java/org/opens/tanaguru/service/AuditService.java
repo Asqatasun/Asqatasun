@@ -52,6 +52,34 @@ public interface AuditService {
      * @param audit
      * @return
      */
+    Audit init(Audit audit);
+
+    /**
+     *
+     * @param audit
+     * @return
+     */
+    Audit crawl(Audit audit);
+
+    /**
+     *
+     * @param audit
+     * @return
+     */
+    Audit loadContent(Audit audit);
+
+    /**
+     *
+     * @param audit
+     * @return
+     */
+    Audit loadScenario(Audit audit);
+
+    /**
+     *
+     * @param audit
+     * @return
+     */
     Audit adaptContent(Audit audit);
 
     /**
@@ -80,7 +108,7 @@ public interface AuditService {
      * @param audit
      * @return
      */
-    Audit crawl(Audit audit);
+    Audit process(Audit audit);
 
     /**
      *
@@ -90,6 +118,14 @@ public interface AuditService {
      * @return
      */
     Audit auditPage(String pageUrl, Set<Parameter> paramSet);
+
+    /**
+     * 
+     * @param scenarionFile
+     * @param paramSet
+     * @return
+     */
+    Audit auditScenario(String scenarioName, String scenarionFile, Set<Parameter> paramSet);
 
     /**
      * 
@@ -115,26 +151,5 @@ public interface AuditService {
      * @return
      */
     Audit auditSite(String siteUrl, List<String> pageUrlList, Set<Parameter> paramSet);
-
-    /**
-     *
-     * @param audit
-     * @return
-     */
-    Audit loadContent(Audit audit);
-
-    /**
-     *
-     * @param audit
-     * @return
-     */
-    Audit process(Audit audit);
-
-    /**
-     *
-     * @param audit
-     * @return
-     */
-    Audit init(Audit audit);
 
 }

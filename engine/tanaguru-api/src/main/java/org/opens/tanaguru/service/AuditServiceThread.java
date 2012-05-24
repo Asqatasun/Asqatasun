@@ -43,12 +43,17 @@ public interface AuditServiceThread extends Runnable {
     /**
      *
      */
-    void crawl();
+//    void crawl();
 
     /**
      *
      */
     void loadContent();
+
+    /**
+     *
+     */
+//    void loadScenario();
 
     /**
      *
