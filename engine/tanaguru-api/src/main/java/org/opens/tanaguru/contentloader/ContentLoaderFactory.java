@@ -23,6 +23,7 @@ package org.opens.tanaguru.contentloader;
 
 import java.util.Map;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
+import org.opens.tanaguru.util.factory.DateFactory;
 
 /**
  *
@@ -34,6 +35,7 @@ public interface ContentLoaderFactory {
      * 
      * @param contentFactory
      * @param downloader
+     * @param dateFactory
      * @param fileMap
      * @return
      *      an instance of ContentLoader
@@ -41,6 +43,7 @@ public interface ContentLoaderFactory {
     ContentLoader create(
             ContentFactory contentFactory,
             Downloader downloader,
+            DateFactory dateFactory,
             Map<String, String> fileMap);
 
 }

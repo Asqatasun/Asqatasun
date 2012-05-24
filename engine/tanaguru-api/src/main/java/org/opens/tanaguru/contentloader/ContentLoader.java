@@ -24,7 +24,6 @@ package org.opens.tanaguru.contentloader;
 import java.util.List;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.subject.WebResource;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 
 /**
  * 
@@ -40,28 +39,10 @@ public interface ContentLoader {
 
     /**
      *
-     * @return
-     */
-    WebResource getWebResource();
-
-    /**
-     *
      */
     void run();
 
-    /**
-     *
-     * @param contentFactory
-     */
-    void setContentFactory(ContentFactory contentFactory);
-
-    /**
-     * 
-     * @param downloader
-     */
-    void setDownloader(Downloader downloader);
-
-    /**
+   /**
      * 
      * @param webResource
      */
