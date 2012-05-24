@@ -8,46 +8,14 @@
         <!-- audit limit parameters -->
         <property name="pageAuditExecutionListMax" value="${maxSimultaneousAuditPage}"/>
         <property name="siteAuditExecutionListMax" value="${maxSimultaneousAuditSite}"/>
-        <!-- services injection -->
-        <property name="crawlerService" ref="crawlerService"/>
-<!--        <property name="contentLoaderService" ref="contentLoaderService"/>-->
-        <property name="contentAdapterService" ref="contentAdapterService"/>
-        <property name="processorService" ref="processorService"/>
-        <property name="consolidatorService" ref="consolidatorService"/>
-        <property name="analyserService" ref="analyserService"/>
-        <!-- data services injection -->
-        <property name="auditDataService" ref="auditDataService"/>
-        <property name="webResourceDataService" ref="webResourceDataService"/>
-        <property name="contentDataService" ref="contentDataService"/>
-        <property name="processResultDataService" ref="processResultDataService"/>
-        <!-- adaptation listener injection -->
-        <property name="adaptationListener" ref="adaptationListener"/>
-        <!-- audit service thread injection -->
-        <property name="auditServiceThreadFactory" ref="auditServiceThreadFactory"/>
+<!--        <property name="siteAuditExecutionListMax" value="${maxSimultaneousAuditSite}"/>
+        <property name="siteAuditExecutionListMax" value="${maxSimultaneousAuditSite}"/>-->
     </bean>
 
     <bean id="auditServiceThreadFactory" class="org.opens.tanaguru.service.AuditServiceThreadFactoryImpl"/>
 
-    <bean id="auditService" class="org.opens.tanaguru.service.AuditServiceImpl">
-        <!-- services injection -->
-        <property name="crawlerService" ref="crawlerService"/>
-        <property name="contentLoaderService" ref="contentLoaderService"/>
-        <property name="contentAdapterService" ref="contentAdapterService"/>
-        <property name="processorService" ref="processorService"/>
-        <property name="consolidatorService" ref="consolidatorService"/>
-        <property name="analyserService" ref="analyserService"/>
-        <!-- data services injection -->
-        <property name="auditDataService" ref="auditDataService"/>
-        <property name="webResourceDataService" ref="webResourceDataService"/>
-        <property name="testDataService" ref="testDataService"/>
-        <property name="contentDataService" ref="contentDataService"/>
-        <property name="processResultDataService" ref="processResultDataService"/>
-        <property name="parameterDataService" ref="parameterDataService"/>
-        <!-- adaptation listener injection -->
-        <property name="adaptationListener" ref="adaptationListener"/>
-        <!-- audit service thread injection -->
-        <property name="auditServiceThreadQueue" ref="auditServiceThreadQueue"/>
-        <property name="auditServiceThreadFactory" ref="auditServiceThreadFactory"/>
-    </bean>
+    <bean id="auditService" class="org.opens.tanaguru.service.AuditServiceImpl"/>
+
+    <bean id="auditCommandFactory" class="org.opens.tanaguru.service.command.factory.AuditCommandFactoryImpl"/>
 
 </beans>
