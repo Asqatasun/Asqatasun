@@ -6,12 +6,12 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>1.5.2-RC1</version>
+        <version>1.5.2</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>tgol-report</artifactId>
-    <version>1.5.2-RC1</version>
+    <version>1.5.2</version>
     <name>tgol-report</name>
     <url>http://www.tanaguru.org</url>
     <dependencies>
