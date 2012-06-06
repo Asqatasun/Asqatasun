@@ -1,4 +1,4 @@
-use tanaguru;
+use $DATABASE_NAME;
 
 -- -----------------------------------------------------
 -- Add unique pair index on TGSI_ACT_WEB_RESOURCE TABLE
