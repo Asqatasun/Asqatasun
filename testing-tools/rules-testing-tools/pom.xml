@@ -6,13 +6,13 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>1.5.2-RC1</version>
+        <version>1.5.2</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>rules-testing-tools</artifactId>
     <packaging>jar</packaging>
-    <version>1.5.2-RC1</version>
+    <version>1.5.2</version>
     <name>rules-testing-tools</name>
     <url>http://maven.apache.org</url>
     <dependencies>
