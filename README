@@ -1,6 +1,6 @@
                    ------------------------------
                              Tanaguru
-                            Version 1.5.2-RC1
+                            Version 1.5.2
                   ------------------------------
 
 1. Web Resources
@@ -48,6 +48,14 @@ For detailed installation instructions, please refer to the wiki documentation
 that can be found at :
 
         http://www.tanaguru.org/content/installation
+
+Important : 
+
+If you upgrade from a previous version, you need to execute the mysql update script
+called "tgol-40-upgrade-model.sql" embedded in the tgol-resources sub-project. 
+This script is also embedded in the tar.gz in the install folder.
+This script needs to be set-up with the name of the database.
+
 
 5. Configuration
 ================

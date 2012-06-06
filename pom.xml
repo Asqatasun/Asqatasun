@@ -6,7 +6,7 @@
     <groupId>org.opens</groupId>
     <artifactId>tanaguru</artifactId>
     <packaging>pom</packaging>
-    <version>1.5.2-RC1</version>
+    <version>1.5.2</version>
     <name>tanaguru</name>
     <url>http://www.tanaguru.org</url>
     <modules>
@@ -19,13 +19,13 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <engineGroupId>org.opens</engineGroupId>
-        <engineVersion>1.5.2-RC1</engineVersion>
+        <engineVersion>1.5.2</engineVersion>
         <webappGroupId>org.opens</webappGroupId>
-        <webappVersion>1.5.2-RC1</webappVersion>
+        <webappVersion>1.5.2</webappVersion>
         <testingToolsGroupId>org.opens</testingToolsGroupId>
-        <testingToolsVersion>1.5.2-RC1</testingToolsVersion>
+        <testingToolsVersion>1.5.2</testingToolsVersion>
         <tanaguruCliGroupId>org.opens</tanaguruCliGroupId>
-        <tanaguruCliVersion>1.5.2-RC1</tanaguruCliVersion>
+        <tanaguruCliVersion>1.5.2</tanaguruCliVersion>
         <springGroupId>org.springframework</springGroupId>
         <springVersion>3.0.5.RELEASE</springVersion>
         <heritrixGroupId>org.archive.heritrix</heritrixGroupId>
