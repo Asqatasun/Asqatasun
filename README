@@ -53,7 +53,7 @@ Important :
 
 If you upgrade from a previous version, you need to execute the mysql update script
 called "tgol-40-upgrade-model.sql" embedded in the tgol-resources sub-project. 
-This script is also embedded in the tar.gz in the install folder.
+This script is also embedded in the tar.gz in the "install-web-app/sql" folder.
 This script needs to be set-up with the name of the database.
 
 
