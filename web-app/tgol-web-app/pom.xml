@@ -131,7 +131,11 @@
             <artifactId>logging</artifactId>
             <version>${engineVersion}</version>
         </dependency>
-
+	<dependency>
+            <groupId>${engineGroupId}</groupId>
+            <artifactId>scenarioloader</artifactId>
+            <version>${engineVersion}</version>
+        </dependency>
         <!-- spring dependencies -->
         <dependency>
             <groupId>org.springframework</groupId>
