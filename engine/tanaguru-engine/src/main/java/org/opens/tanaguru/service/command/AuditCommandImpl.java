@@ -143,7 +143,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
      * @param testDataService
      * @param parameterDataService
      * @param webResourceDataService
-     * @param contentDataService
+     * @param contentList
      * @param processResultDataService
      * @param contentAdapterService
      * @param processorService
@@ -430,8 +430,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
                         new StringBuilder("Processing from ")
                             .append(i)
                             .append(TO_LOGGER_STR)
-                            .append(i)
-                            .append(PROCESSING_TREATMENT_WINDOW).toString());
+                            .append(i+PROCESSING_TREATMENT_WINDOW).toString());
                 beginProcessDate = Calendar.getInstance().getTime();
             }
             List<Content> contentList = retrieveContentList(

@@ -144,11 +144,29 @@ public class AuditCommandFactoryImplTest extends TestCase {
      * Test of create method, of class AuditCommandFactoryImpl.
      */
     public void testCreate_3args_1() {
-        System.out.println("create PageAuditCommand");
+        System.out.println("create PageAuditCommand with crawler");
         String url = "";
         Set<Parameter> paramSet = null;
         boolean isSite = false;
+        auditCommandFactory.setAuditPageWithCrawler(true);
+        AuditCommand result = this.auditCommandFactory.create(url, paramSet, isSite);
+        assertTrue(result instanceof PageAuditCrawlerCommandImpl);
         
+        EasyMock.verify(mockAuditDataService);
+        EasyMock.verify(mockTestDataService);
+        EasyMock.verify(mockParameterDataService);
+        EasyMock.verify(mockAudit);
+    }
+    
+    /**
+     * Test of create method, of class AuditCommandFactoryImpl.
+     */
+    public void testCreate_3args_1_2() {
+        System.out.println("create PageAuditCommand without crawler");
+        String url = "";
+        Set<Parameter> paramSet = null;
+        boolean isSite = false;
+        auditCommandFactory.setAuditPageWithCrawler(false);
         AuditCommand result = this.auditCommandFactory.create(url, paramSet, isSite);
         assertTrue(result instanceof PageAuditCommandImpl);
         
@@ -197,12 +215,32 @@ public class AuditCommandFactoryImplTest extends TestCase {
     /**
      * Test of create method, of class AuditCommandFactoryImpl.
      */
-    public void testCreate_3args_3() {
-        System.out.println("create GroupOfPagesAuditCommand");
+    public void testCreate_3args_3_1() {
+        System.out.println("create GroupOfPagesAuditCommand with crawler");
         String siteUrl = "";
         List<String> pageUrlList = null;
         Set<Parameter> paramSet = null;
         
+        auditCommandFactory.setAuditPageWithCrawler(true);
+        AuditCommand result = this.auditCommandFactory.create(siteUrl, pageUrlList, paramSet);
+        assertTrue(result instanceof GroupOfPagesCrawlerAuditCommandImpl);
+        
+        EasyMock.verify(mockAuditDataService);
+        EasyMock.verify(mockTestDataService);
+        EasyMock.verify(mockParameterDataService);
+        EasyMock.verify(mockAudit);
+    }
+    
+    /**
+     * Test of create method, of class AuditCommandFactoryImpl.
+     */
+    public void testCreate_3args_3_2() {
+        System.out.println("create GroupOfPagesAuditCommand without crawler");
+        String siteUrl = "";
+        List<String> pageUrlList = null;
+        Set<Parameter> paramSet = null;
+        
+        auditCommandFactory.setAuditPageWithCrawler(false);
         AuditCommand result = this.auditCommandFactory.create(siteUrl, pageUrlList, paramSet);
         assertTrue(result instanceof GroupOfPagesAuditCommandImpl);
         

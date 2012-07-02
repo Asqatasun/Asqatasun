@@ -23,6 +23,7 @@ package org.opens.tanaguru.service;
 
 import java.util.HashSet;
 import java.util.Set;
+import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.service.command.AuditCommand;
 
@@ -85,7 +86,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
 
     @Override
     public void run() {
-//        try {
+        try {
             init();
             loadContent();
             adaptContent();
@@ -93,9 +94,9 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
             consolidate();
             analyse();
             fireAuditCompleted();
-//        } catch (Exception e) {
-//            fireAuditException(e);
-//        }
+        } catch (Exception e) {
+            fireAuditException(e);
+        }
     }
 
     @Override

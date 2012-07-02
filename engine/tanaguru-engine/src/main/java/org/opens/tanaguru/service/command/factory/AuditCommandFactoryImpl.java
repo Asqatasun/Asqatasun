@@ -25,6 +25,7 @@ package org.opens.tanaguru.service.command.factory;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.apache.log4j.Logger;
 import org.opens.tanaguru.contentadapter.AdaptationListener;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
@@ -127,6 +128,12 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
         this.adaptationListener = adaptationListener;
     }
     
+    private boolean auditPageWithCrawler = false;
+    public void setAuditPageWithCrawler(boolean auditPageWithCrawler) {
+        Logger.getLogger(this.getClass()).info("AuditPageWithCrawler " + auditPageWithCrawler);
+        this.auditPageWithCrawler = auditPageWithCrawler;
+    }
+    
     @Override
     public AuditCommand create(String url, Set<Parameter> paramSet, boolean isSite) {
         if (isSite) {
@@ -145,6 +152,22 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
                     consolidatorService, 
                     analyserService, 
                     adaptationListener);
+        } else if (auditPageWithCrawler) {
+            return new PageAuditCrawlerCommandImpl(
+                    url, 
+                    paramSet, 
+                    auditDataService, 
+                    testDataService, 
+                    parameterDataService, 
+                    webResourceDataService, 
+                    contentDataService, 
+                    processResultDataService, 
+                    crawlerService,
+                    contentAdapterService, 
+                    processorService, 
+                    consolidatorService, 
+                    analyserService, 
+                    adaptationListener);
         } else {
             return new PageAuditCommandImpl(
                     url, 
@@ -155,7 +178,7 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
                     webResourceDataService, 
                     contentDataService, 
                     processResultDataService, 
-                    crawlerService, 
+                    scenarioLoaderService,
                     contentAdapterService, 
                     processorService, 
                     consolidatorService, 
@@ -185,7 +208,8 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
 
     @Override
     public AuditCommand create(String siteUrl, List<String> pageUrlList, Set<Parameter> paramSet) {
-        return new GroupOfPagesAuditCommandImpl(
+        if (auditPageWithCrawler) {
+            return new GroupOfPagesCrawlerAuditCommandImpl(
                 siteUrl, 
                 pageUrlList, 
                 paramSet, 
@@ -195,12 +219,30 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
                 webResourceDataService, 
                 contentDataService, 
                 processResultDataService, 
-                crawlerService, 
+                crawlerService,
                 contentAdapterService, 
                 processorService, 
                 consolidatorService, 
                 analyserService, 
                 adaptationListener);
+        } else {
+            return new GroupOfPagesAuditCommandImpl(
+                siteUrl, 
+                pageUrlList, 
+                paramSet, 
+                auditDataService, 
+                testDataService, 
+                parameterDataService, 
+                webResourceDataService, 
+                contentDataService, 
+                processResultDataService, 
+                scenarioLoaderService,
+                contentAdapterService, 
+                processorService, 
+                consolidatorService, 
+                analyserService, 
+                adaptationListener);
+        }
     }
 
     @Override

@@ -24,6 +24,7 @@ package org.opens.tanaguru.service.command;
 
 import java.util.Set;
 import org.opens.tanaguru.contentadapter.AdaptationListener;
+import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
@@ -31,17 +32,17 @@ import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
+import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.service.*;
+import org.opens.tanaguru.util.http.HttpRequestHandler;
+import org.opens.webdriver.builder.ScenarioBuilder;
 
 /**
  *
  * @author jkowalczyk
  */
-public class PageAuditCommandImpl extends CrawlAuditCommandImpl {
+public class PageAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
 
-    /**
-     * The url of the tested page
-     */
     private String pageUrl;
     
     /**
@@ -60,6 +61,7 @@ public class PageAuditCommandImpl extends CrawlAuditCommandImpl {
      * @param analyserService
      * @param adaptationListener
      * @param crawlerService 
+     * @param crawlConfigFilePath
      */
     public PageAuditCommandImpl(
             String pageUrl,
@@ -70,7 +72,7 @@ public class PageAuditCommandImpl extends CrawlAuditCommandImpl {
             WebResourceDataService webResourceDataService, 
             ContentDataService contentDataService, 
             ProcessResultDataService processResultDataService, 
-            CrawlerService crawlerService, 
+            ScenarioLoaderService scenarioLoaderService,
             ContentAdapterService contentAdapterService, 
             ProcessorService processorService, 
             ConsolidatorService consolidatorService, 
@@ -83,7 +85,7 @@ public class PageAuditCommandImpl extends CrawlAuditCommandImpl {
               webResourceDataService, 
               contentDataService, 
               processResultDataService, 
-              crawlerService, 
+              scenarioLoaderService,
               contentAdapterService, 
               processorService, 
               consolidatorService, 
@@ -91,10 +93,24 @@ public class PageAuditCommandImpl extends CrawlAuditCommandImpl {
               adaptationListener);
         this.pageUrl = pageUrl;
     }
-    
+
     @Override
-    public void callCrawlerService() {
-        getCrawlerService().crawlPage(getAudit(), pageUrl);
+    public void init() {
+        if (HttpRequestHandler.getInstance().isUrlAccessible(pageUrl)) {
+            setScenario(ScenarioBuilder.buildScenario(pageUrl));
+            setScenarioName(pageUrl);
+            setIsPage(true);
+            super.init();
+        } else {
+            createEmptyWebResource(pageUrl);
+            setStatusToAudit(AuditStatus.ERROR);
+        }
+    }
+    
+    private void createEmptyWebResource(String url) {
+        Page page = getWebResourceDataService().createPage(pageUrl);
+        getAudit().setSubject(page);
+        getWebResourceDataService().saveOrUpdate(page);
     }
 
 }

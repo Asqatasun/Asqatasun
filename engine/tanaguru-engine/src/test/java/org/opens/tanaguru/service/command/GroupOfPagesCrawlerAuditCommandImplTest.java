@@ -31,13 +31,13 @@ import org.opens.tanaguru.service.CrawlerService;
  *
  * @author jkowalczyk
  */
-public class GroupOfPagesAuditCommandImplTest extends AuditCommandTestCase {
+public class GroupOfPagesCrawlerAuditCommandImplTest extends AuditCommandTestCase {
     
     private String siteUrl = "My Group of Pages site Name";
     private List<String> urlList = new ArrayList<String>();
     private CrawlerService mockCrawlerService;
     
-    public GroupOfPagesAuditCommandImplTest(String testName) {
+    public GroupOfPagesCrawlerAuditCommandImplTest(String testName) {
         super(testName);
     }
     
@@ -65,22 +65,23 @@ public class GroupOfPagesAuditCommandImplTest extends AuditCommandTestCase {
                 .once();
         EasyMock.replay(mockCrawlerService);
         
-        GroupOfPagesAuditCommandImpl groupOfPagesAuditCommand = new GroupOfPagesAuditCommandImpl(
-                siteUrl, 
-                urlList,
-                null, 
-                mockAuditDataService, 
-                mockTestDataService, 
-                mockParameterDataService, 
-                mockWebResourceDataService, 
-                mockContentDataService, 
-                mockProcessResultDataService, 
-                mockCrawlerService, 
-                mockContentAdapterService, 
-                mockProcessorService, 
-                mockConsolidatorService, 
-                mockAnalyserService, 
-                mockAdaptationListener);
+        GroupOfPagesCrawlerAuditCommandImpl groupOfPagesAuditCommand = 
+                new GroupOfPagesCrawlerAuditCommandImpl(
+                    siteUrl, 
+                    urlList,
+                    null, 
+                    mockAuditDataService, 
+                    mockTestDataService, 
+                    mockParameterDataService, 
+                    mockWebResourceDataService, 
+                    mockContentDataService, 
+                    mockProcessResultDataService, 
+                    mockCrawlerService, 
+                    mockContentAdapterService, 
+                    mockProcessorService, 
+                    mockConsolidatorService, 
+                    mockAnalyserService, 
+                    mockAdaptationListener);
         
         groupOfPagesAuditCommand.callCrawlerService();
         

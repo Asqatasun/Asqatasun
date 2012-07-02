@@ -22,6 +22,7 @@
 
 package org.opens.tanaguru.service.command;
 
+import java.util.List;
 import java.util.Set;
 import org.opens.tanaguru.contentadapter.AdaptationListener;
 import org.opens.tanaguru.entity.parameterization.Parameter;
@@ -37,28 +38,21 @@ import org.opens.tanaguru.service.*;
  *
  * @author jkowalczyk
  */
-public class ScenarioAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
-
+public class GroupOfPagesCrawlerAuditCommandImpl extends CrawlAuditCommandImpl {
+    
     /**
-     * 
-     * @param scenarioName
-     * @param scenario
-     * @param paramSet
-     * @param auditDataService
-     * @param testDataService
-     * @param parameterDataService
-     * @param webResourceDataService
-     * @param contentDataService
-     * @param processResultDataService
-     * @param contentAdapterService
-     * @param processorService
-     * @param consolidatorService
-     * @param analyserService
-     * @param adaptationListener 
+     * The URL that identifies the list of pages to test
      */
-    public ScenarioAuditCommandImpl(
-            String scenarioName,
-            String scenario,
+    private String siteUrl;
+    
+    /**
+     * The list of URLs to test
+     */
+    private List<String> pageUrlList;
+    
+    public GroupOfPagesCrawlerAuditCommandImpl(
+            String siteUrl, 
+            List<String> pageUrlList,
             Set<Parameter> paramSet,
             AuditDataService auditDataService, 
             TestDataService testDataService, 
@@ -66,7 +60,7 @@ public class ScenarioAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
             WebResourceDataService webResourceDataService,
             ContentDataService contentDataService, 
             ProcessResultDataService processResultDataService, 
-            ScenarioLoaderService scenarioLoaderService, 
+            CrawlerService crawlerService,
             ContentAdapterService contentAdapterService, 
             ProcessorService processorService, 
             ConsolidatorService consolidatorService, 
@@ -79,15 +73,23 @@ public class ScenarioAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
               webResourceDataService, 
               contentDataService, 
               processResultDataService, 
-              scenarioLoaderService,
+              crawlerService, 
               contentAdapterService, 
               processorService, 
               consolidatorService, 
               analyserService, 
               adaptationListener);
-        setScenario(scenario);
-        setScenarioName(scenarioName);
-        setIsPage(false);
+        this.siteUrl = siteUrl;
+        this.pageUrlList = pageUrlList;
+    }
+    
+    public void init() {
+        
+    }
+    
+    @Override
+    public void callCrawlerService() {
+        getCrawlerService().crawlGroupOfPages(getAudit(), siteUrl, pageUrlList);
     }
 
 }

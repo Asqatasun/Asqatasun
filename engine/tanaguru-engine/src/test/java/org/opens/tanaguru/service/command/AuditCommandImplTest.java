@@ -25,19 +25,15 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import junit.framework.TestCase;
+
 import org.apache.commons.httpclient.HttpStatus;
-import org.easymock.EasyMock;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import static org.easymock.EasyMock.*;
 import org.opens.tanaguru.contentadapter.AdaptationListener;
-import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.parameterization.Parameter;
-import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
@@ -98,10 +94,10 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         AuditDataService result = instance.getAuditDataService();
         assertEquals(mockAuditDataService, result);
         
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockParameterDataService);
-        EasyMock.verify(mockAudit);
+        verify(mockAuditDataService);
+        verify(mockTestDataService);
+        verify(mockParameterDataService);
+        verify(mockAudit);
     }
 
     /**
@@ -117,10 +113,10 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         TestDataService result = instance.getTestDataService();
         assertEquals(mockTestDataService, result);
         
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockParameterDataService);
-        EasyMock.verify(mockAudit);
+        verify(mockAuditDataService);
+        verify(mockTestDataService);
+        verify(mockParameterDataService);
+        verify(mockAudit);
     }
 
     /**
@@ -136,10 +132,10 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         ParameterDataService result = instance.getParameterDataService();
         assertEquals(mockParameterDataService, result);
         
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockParameterDataService);
-        EasyMock.verify(mockAudit);
+        verify(mockAuditDataService);
+        verify(mockTestDataService);
+        verify(mockParameterDataService);
+        verify(mockAudit);
     }
 
     /**
@@ -155,10 +151,10 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         WebResourceDataService result = instance.getWebResourceDataService();
         assertEquals(mockWebResourceDataService, result);
         
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockParameterDataService);
-        EasyMock.verify(mockAudit);
+        verify(mockAuditDataService);
+        verify(mockTestDataService);
+        verify(mockParameterDataService);
+        verify(mockAudit);
     }
 
     /**
@@ -174,10 +170,10 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         ContentDataService result = instance.getContentDataService();
         assertEquals(mockContentDataService, result);
         
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockParameterDataService);
-        EasyMock.verify(mockAudit);
+        verify(mockAuditDataService);
+        verify(mockTestDataService);
+        verify(mockParameterDataService);
+        verify(mockAudit);
     }
 
     /**
@@ -193,10 +189,10 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         ProcessResultDataService result = instance.getProcessResultDataService();
         assertEquals(mockProcessResultDataService, result);
         
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockParameterDataService);
-        EasyMock.verify(mockAudit);
+        verify(mockAuditDataService);
+        verify(mockTestDataService);
+        verify(mockParameterDataService);
+        verify(mockAudit);
     }
 
     /**
@@ -212,10 +208,10 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         ContentAdapterService result = instance.getContentAdapterService();
         assertEquals(mockContentAdapterService, result);
         
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockParameterDataService);
-        EasyMock.verify(mockAudit);
+        verify(mockAuditDataService);
+        verify(mockTestDataService);
+        verify(mockParameterDataService);
+        verify(mockAudit);
     }
 
     /**
@@ -231,10 +227,10 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         ProcessorService result = instance.getProcessorService();
         assertEquals(mockProcessorService, result);
         
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockParameterDataService);
-        EasyMock.verify(mockAudit);
+        verify(mockAuditDataService);
+        verify(mockTestDataService);
+        verify(mockParameterDataService);
+        verify(mockAudit);
     }
 
     /**
@@ -250,10 +246,10 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         ConsolidatorService result = instance.getConsolidatorService();
         assertEquals(mockConsolidatorService, result);
         
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockParameterDataService);
-        EasyMock.verify(mockAudit);
+        verify(mockAuditDataService);
+        verify(mockTestDataService);
+        verify(mockParameterDataService);
+        verify(mockAudit);
     }
 
     /**
@@ -269,10 +265,10 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         AnalyserService result = instance.getAnalyserService();
         assertEquals(mockAnalyserService, result);
         
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockParameterDataService);
-        EasyMock.verify(mockAudit);
+        verify(mockAuditDataService);
+        verify(mockTestDataService);
+        verify(mockParameterDataService);
+        verify(mockAudit);
     }
 
     /**
@@ -288,10 +284,10 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         AdaptationListener result = instance.getAdaptationListener();
         assertEquals(mockAdaptationListener, result);
         
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockParameterDataService);
-        EasyMock.verify(mockAudit);
+        verify(mockAuditDataService);
+        verify(mockTestDataService);
+        verify(mockParameterDataService);
+        verify(mockAudit);
     }
 
     /**
@@ -302,78 +298,78 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         mockInitialisationCalls(false);
 
-        WebResource mockWr = EasyMock.createMock(WebResource.class);
+        WebResource mockWr = createMock(WebResource.class);
         
-        EasyMock.expect(mockAudit.getId()).andReturn(Long.valueOf(1)).once();
-        EasyMock.expect(mockAuditDataService.getAuditWithWebResource(Long.valueOf(1))).andReturn(mockAudit).once();
-        EasyMock.expect(mockAudit.getStatus()).andReturn(AuditStatus.CONTENT_ADAPTING).once();
-        EasyMock.expect(mockAudit.getSubject()).andReturn(mockWr).times(2);
-        EasyMock.expect(mockWr.getId()).andReturn(Long.valueOf(1)).once();
+        expect(mockAudit.getId()).andReturn(Long.valueOf(1)).once();
+        expect(mockAuditDataService.getAuditWithWebResource(Long.valueOf(1))).andReturn(mockAudit).once();
+        expect(mockAudit.getStatus()).andReturn(AuditStatus.CONTENT_ADAPTING).once();
+        expect(mockAudit.getSubject()).andReturn(mockWr).times(2);
+        expect(mockWr.getId()).andReturn(Long.valueOf(1)).once();
         
-        EasyMock.expect(mockContentDataService.getNumberOfSSPFromWebResource(
+        expect(mockContentDataService.getNumberOfSSPFromWebResource(
                 mockWr, 
                 HttpStatus.SC_OK)).andReturn(Long.valueOf(49)).once();
         
         List<Long> longList = new ArrayList<Long>(25);
-        EasyMock.expect(mockContentDataService.getSSPFromWebResource(
+        expect(mockContentDataService.getSSPFromWebResource(
                 Long.valueOf(1), 
                 HttpStatus.SC_OK,
                 0, 
                 AuditCommandImpl.ADAPTATION_TREATMENT_WINDOW)).andReturn(longList).once();
         
-        EasyMock.expect(mockContentDataService.getSSPFromWebResource(
+        expect(mockContentDataService.getSSPFromWebResource(
                 Long.valueOf(1), 
                 HttpStatus.SC_OK,
                 AuditCommandImpl.ADAPTATION_TREATMENT_WINDOW, 
                 AuditCommandImpl.ADAPTATION_TREATMENT_WINDOW)).andReturn(longList).once();
         
         // the adaptContent must return at least one non empty SSP
-        SSP mockSSP = EasyMock.createMock(SSP.class);
-        EasyMock.expect(mockSSP.getDOM()).andReturn("Not Empty String").times(3);
-        EasyMock.expect(mockSSP.getSource()).andReturn("Not Empty String").times(2);
+        SSP mockSSP = createMock(SSP.class);
+        expect(mockSSP.getDOM()).andReturn("Not Empty String").times(3);
+        expect(mockSSP.getSource()).andReturn("Not Empty String").times(2);
         try {
             mockSSP.setSource(MD5Encoder.MD5("Not Empty String"));
-            EasyMock.expectLastCall().times(2);
+            expectLastCall().times(2);
         } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(AuditCommandImplTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(this.getClass()).error(ex);
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(AuditCommandImplTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(this.getClass()).error(ex);
         }
         List<Content> mockAdaptedContentList = new ArrayList<Content>();
         mockAdaptedContentList.add(mockSSP);
         
-        EasyMock.expect(mockContentAdapterService.adaptContent(new ArrayList<Content>())).
+        expect(mockContentAdapterService.adaptContent(new ArrayList<Content>())).
                 andReturn(mockAdaptedContentList).times(2);
         
-        EasyMock.expect(mockContentDataService.saveOrUpdate(mockSSP)).
+        expect(mockContentDataService.saveOrUpdate(mockSSP)).
                 andReturn(mockSSP).times(2);
         
         mockAudit.setStatus(AuditStatus.PROCESSING);
-        EasyMock.expectLastCall().once();
+        expectLastCall().once();
         
-        EasyMock.expect(mockAuditDataService.saveOrUpdate(mockAudit)).andReturn(mockAudit).once();
+        expect(mockAuditDataService.saveOrUpdate(mockAudit)).andReturn(mockAudit).once();
         
-        EasyMock.replay(mockAudit);
-        EasyMock.replay(mockWr);
-        EasyMock.replay(mockAuditDataService);
-        EasyMock.replay(mockContentDataService);
-        EasyMock.replay(mockContentAdapterService);
-        EasyMock.replay(mockTestDataService);
-        EasyMock.replay(mockParameterDataService);
-        EasyMock.replay(mockSSP);
+        replay(mockAudit);
+        replay(mockWr);
+        replay(mockAuditDataService);
+        replay(mockContentDataService);
+        replay(mockContentAdapterService);
+        replay(mockTestDataService);
+        replay(mockParameterDataService);
+        replay(mockSSP);
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
         
         instance.adaptContent();
 
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockContentDataService);
-        EasyMock.verify(mockContentAdapterService);
-        EasyMock.verify(mockParameterDataService);
-        EasyMock.verify(mockAudit);
-        EasyMock.verify(mockWr);
-        EasyMock.verify(mockSSP);
+        verify(mockAuditDataService);
+        verify(mockTestDataService);
+        verify(mockContentDataService);
+        verify(mockContentAdapterService);
+        verify(mockParameterDataService);
+        verify(mockAudit);
+        verify(mockWr);
+        verify(mockSSP);
     }
 
     /**

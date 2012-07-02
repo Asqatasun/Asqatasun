@@ -158,37 +158,41 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
 
     @Override
     public Audit loadScenario(Audit audit) {
-        AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit);
-        auditServiceThread.loadContent();
-        return auditServiceThread.getAudit();
+        AuditCommand auditCommand = auditCommandFactory.create(null, null, true);
+        auditCommand.setAudit(audit);
+        return audit;
     }
 
     @Override
     public Audit adaptContent(Audit audit) {
-        AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit);
-        auditServiceThread.adaptContent();
-        return auditServiceThread.getAudit();
+        AuditCommand auditCommand = auditCommandFactory.create(null, null, true);
+        auditCommand.setAudit(audit);
+        auditCommand.adaptContent();
+        return audit;
     }
 
     @Override
     public Audit process(Audit audit) {
-        AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit);
-        auditServiceThread.process();
-        return auditServiceThread.getAudit();
+        AuditCommand auditCommand = auditCommandFactory.create(null, null, true);
+        auditCommand.setAudit(audit);
+        auditCommand.process();
+        return audit;
     }
 
     @Override
     public Audit consolidate(Audit audit) {
-        AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit);
-        auditServiceThread.consolidate();
-        return auditServiceThread.getAudit();
+        AuditCommand auditCommand = auditCommandFactory.create(null, null, true);
+        auditCommand.setAudit(audit);
+        auditCommand.consolidate();
+        return audit;
     }
 
     @Override
     public Audit analyse(Audit audit) {
-        AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit);
-        auditServiceThread.analyse();
-        return auditServiceThread.getAudit();
+        AuditCommand auditCommand = auditCommandFactory.create(null, null, true);
+        auditCommand.setAudit(audit);
+        auditCommand.analyse();
+        return audit;
     }
 
     /**

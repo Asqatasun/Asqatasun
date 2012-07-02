@@ -19,16 +19,13 @@
  * 
  *  Contact us by mail: open-s AT open-s DOT com
  */
+
 package org.opens.tanaguru.service.command;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import javax.persistence.PersistenceException;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.contentadapter.AdaptationListener;
 import org.opens.tanaguru.entity.audit.AuditStatus;
-import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
@@ -36,54 +33,71 @@ import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
-import org.opens.tanaguru.entity.subject.Page;
-import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.service.*;
-import org.opens.tanaguru.util.FileNaming;
 
 /**
  *
  * @author jkowalczyk
  */
-public class UploadAuditCommandImpl extends AuditCommandImpl {
-
-    private static final Logger LOGGER = Logger.getLogger(UploadAuditCommandImpl.class);
+public abstract class AbstractScenarioAuditCommandImpl extends AuditCommandImpl {
     
     /**
-     * The map that contains the files to test identified by 
+     * Logger
      */
-    private Map<String, String> fileMap;
-
-    /**
-     * The contentLoaderService
-     */
-    private ContentLoaderService contentLoaderService;
+    private static final Logger LOGGER = Logger.getLogger(AbstractScenarioAuditCommandImpl.class);
     
     /**
-     *
-     * @param fileMap
-     * @param paramSet
-     * @param auditDataService
-     * @param testDataService
-     * @param parameterDataService
-     * @param webResourceDataService
+     * The scenario loader Service instance
      */
-    public UploadAuditCommandImpl(
-            Map<String, String> fileMap,
+    private ScenarioLoaderService scenarioLoaderService;
+    public ScenarioLoaderService getScenarioLoaderService() {
+        return scenarioLoaderService;
+    }
+    
+    /**
+     * The scenario file
+     */
+    private String scenario;
+    public String getScenario() {
+        return scenario;
+    }
+
+    public void setScenario(String scenario) {
+        this.scenario = scenario;
+    }
+    
+    /**
+     * The scenario file
+     */
+    private String scenarioName;
+    public String getScenarioName() {
+        return scenarioName;
+    }
+
+    public void setScenarioName(String scenarioName) {
+        this.scenarioName = scenarioName;
+    }
+    
+    private boolean isPage = false;
+    public void setIsPage(boolean isPage) {
+        this.isPage = isPage;
+    }
+    
+    public AbstractScenarioAuditCommandImpl(
             Set<Parameter> paramSet,
-            AuditDataService auditDataService,
-            TestDataService testDataService,
+            AuditDataService auditDataService, 
+            TestDataService testDataService, 
             ParameterDataService parameterDataService,
             WebResourceDataService webResourceDataService,
-            ContentDataService contentDataService,
+            ContentDataService contentDataService, 
             ProcessResultDataService processResultDataService, 
-            ContentLoaderService contentLoaderService, 
+            ScenarioLoaderService scenarioLoaderService,
             ContentAdapterService contentAdapterService, 
             ProcessorService processorService, 
             ConsolidatorService consolidatorService, 
             AnalyserService analyserService, 
-            AdaptationListener adaptationListener)  {
+            AdaptationListener adaptationListener) {
         super(paramSet, 
               auditDataService, 
               testDataService, 
@@ -96,63 +110,50 @@ public class UploadAuditCommandImpl extends AuditCommandImpl {
               consolidatorService, 
               analyserService, 
               adaptationListener);
-        this.fileMap = fileMap;
-        this.contentLoaderService = contentLoaderService;
+        this.scenarioLoaderService = scenarioLoaderService;
     }
 
     @Override
     public void init() {
-        setStatusToAudit(AuditStatus.CONTENT_LOADING);
+        setStatusToAudit(AuditStatus.SCENARIO_LOADING);
     }
-
+    
     @Override
     public void loadContent() {
-        if (!getAudit().getStatus().equals(AuditStatus.CONTENT_LOADING) || fileMap.isEmpty()) {
+        if (!getAudit().getStatus().equals(AuditStatus.SCENARIO_LOADING) || scenario.isEmpty()) {
             LOGGER.warn(
                     new StringBuilder("Audit Status is ")
                     .append(getAudit().getStatus())
                     .append(" while ")
-                    .append(AuditStatus.CONTENT_LOADING)
+                    .append(AuditStatus.SCENARIO_LOADING)
                     .append(" was required ").toString());
             setStatusToAudit(AuditStatus.ERROR);
             return;
         }
-        createWebResources();
-        //call the load content service to convert files into SSP and link it
-        //to the appropriate webResource
-        List<Content> contentList = contentLoaderService.loadContent(getAudit().getSubject(), fileMap);
-        for (Content content : contentList) {
-            content.setAudit(getAudit());
-            try {
-                getContentDataService().saveOrUpdate(content);
-            } catch (PersistenceException pe) {
-                getAudit().setStatus(AuditStatus.ERROR);
-                break;
-            }
-        }
+        // the returned content list is already persisted and associated with
+        // the current audit
+        scenarioLoaderService.loadScenario(createWebResource(), scenario);
         setStatusToAudit(AuditStatus.CONTENT_ADAPTING);
     }
     
-    private void createWebResources() {
+    /**
+     * Create the main webResource attached to the audit and then
+     * passed to the scenario loader service
+     * 
+     * @return 
+     *      a Site instance
+     */
+    private WebResource createWebResource() {
         WebResource webResource;
-        if (fileMap.size() > 1) {
-            webResource = getWebResourceDataService().createSite(
-                    FileNaming.addProtocolToUrl(fileMap.keySet().iterator().next()));
-            getWebResourceDataService().saveOrUpdate(webResource);
-            for (String pageUrl : fileMap.keySet()) {
-                Page page = getWebResourceDataService().createPage(pageUrl);
-                ((Site) webResource).addChild(page);
-                getWebResourceDataService().saveOrUpdate(page);
-            }
+        if (isPage) {
+            webResource = getWebResourceDataService().createPage(scenarioName);
         } else {
-            webResource = getWebResourceDataService().
-                    createPage(fileMap.keySet().iterator().next());
+            webResource = getWebResourceDataService().createSite(scenarioName);
         }
-        // the webresource needs to be persisted a second time because of the
-        // relation with the audit
         webResource.setAudit(getAudit());
         getWebResourceDataService().saveOrUpdate(webResource);
         getAudit().setSubject(webResource);
+        return webResource;
     }
 
 }

@@ -29,12 +29,12 @@ import org.opens.tanaguru.service.CrawlerService;
  *
  * @author jkowalczyk
  */
-public class PageAuditCommandImplTest extends AuditCommandTestCase {
+public class PageAuditCrawlerCommandImplTest extends AuditCommandTestCase {
     
     private String pageUrl = "My page";
     private CrawlerService mockCrawlerService;
     
-    public PageAuditCommandImplTest(String testName) {
+    public PageAuditCrawlerCommandImplTest(String testName) {
         super(testName);
     }
     
@@ -62,7 +62,7 @@ public class PageAuditCommandImplTest extends AuditCommandTestCase {
                 .once();
         EasyMock.replay(mockCrawlerService);
         
-        PageAuditCommandImpl pageAuditCommand = new PageAuditCommandImpl(
+        PageAuditCrawlerCommandImpl pageAuditCommand = new PageAuditCrawlerCommandImpl(
                 pageUrl, 
                 null, 
                 mockAuditDataService, 

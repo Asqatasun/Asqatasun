@@ -33,22 +33,13 @@ import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.service.*;
+import org.opens.webdriver.builder.ScenarioBuilder;
 
 /**
  *
  * @author jkowalczyk
  */
-public class GroupOfPagesAuditCommandImpl extends CrawlAuditCommandImpl {
-    
-    /**
-     * The URL that identifies the list of pages to test
-     */
-    private String siteUrl;
-    
-    /**
-     * The list of URLs to test
-     */
-    private List<String> pageUrlList;
+public class GroupOfPagesAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
     
     public GroupOfPagesAuditCommandImpl(
             String siteUrl, 
@@ -60,7 +51,7 @@ public class GroupOfPagesAuditCommandImpl extends CrawlAuditCommandImpl {
             WebResourceDataService webResourceDataService,
             ContentDataService contentDataService, 
             ProcessResultDataService processResultDataService, 
-            CrawlerService crawlerService,
+            ScenarioLoaderService scenarioLoaderService,
             ContentAdapterService contentAdapterService, 
             ProcessorService processorService, 
             ConsolidatorService consolidatorService, 
@@ -73,19 +64,15 @@ public class GroupOfPagesAuditCommandImpl extends CrawlAuditCommandImpl {
               webResourceDataService, 
               contentDataService, 
               processResultDataService, 
-              crawlerService, 
+              scenarioLoaderService, 
               contentAdapterService, 
               processorService, 
               consolidatorService, 
               analyserService, 
               adaptationListener);
-        this.siteUrl = siteUrl;
-        this.pageUrlList = pageUrlList;
+        setScenario(ScenarioBuilder.buildScenario(pageUrlList));
+        setScenarioName(siteUrl);
+        setIsPage(false);
     }
     
-    @Override
-    public void callCrawlerService() {
-        getCrawlerService().crawlGroupOfPages(getAudit(), siteUrl, pageUrlList);
-    }
-
 }
