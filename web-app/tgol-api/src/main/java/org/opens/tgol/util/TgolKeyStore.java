@@ -54,6 +54,18 @@ public final class TgolKeyStore {
     public static final String AUDIT_UPLOAD_SET_UP_URL = "/audit-upload-set-up";
     public static final String AUDIT_UPLOAD_SET_UP_CONTRACT_URL =
             CONTRACT_URL+AUDIT_UPLOAD_SET_UP_URL;
+    public static final String AUDIT_SCENARIO_SET_UP_URL = "/audit-scenario-set-up";
+    public static final String AUDIT_SCENARIO_SET_UP_CONTRACT_URL =
+            CONTRACT_URL+AUDIT_SCENARIO_SET_UP_URL;
+    public static final String AUDIT_SCENARIO_MANAGEMENT_URL = "/scenario-management";
+    public static final String AUDIT_SCENARIO_MANAGEMENT_CONTRACT_URL =
+            CONTRACT_URL+AUDIT_SCENARIO_MANAGEMENT_URL;
+    public static final String DOWNLOAD_SCENARIO_URL = "/download-scenario";
+    public static final String DOWNLOAD_SCENARIO_URL_CONTRACT_URL =
+            CONTRACT_URL+DOWNLOAD_SCENARIO_URL;
+    public static final String DELETE_SCENARIO_URL = "/delete-scenario";
+    public static final String DELETE_SCENARIO_URL_CONTRACT_URL =
+            CONTRACT_URL+DELETE_SCENARIO_URL;
     public static final String LAUNCH_AUDIT_URL = "/launch-audit";
     public static final String LAUNCH_AUDIT_CONTRACT_URL =
             CONTRACT_URL+LAUNCH_AUDIT_URL;
@@ -115,6 +127,9 @@ public final class TgolKeyStore {
     public static final String AUDIT_SITE_SET_UP_VIEW_NAME = "audit-site-set-up";
     public static final String AUDIT_PAGE_SET_UP_VIEW_NAME = "audit-page-set-up";
     public static final String AUDIT_UPLOAD_SET_UP_VIEW_NAME = "audit-upload-set-up";
+    public static final String AUDIT_SCENARIO_SET_UP_VIEW_NAME = "audit-scenario-set-up";
+    public static final String SCENARIO_MANAGEMENT_VIEW_NAME = "scenario-management";
+    public static final String SCENARIO_MANAGEMENT_VIEW_REDIRECT_NAME = "scenario-management-redirect";
     public static final String AUDIT_PAGE_SET_UP_REDIRECT_NAME =
             "audit-page-set-up-redirect";
     public static final String AUDIT_IN_PROGRESS_VIEW_NAME = "audit-in-progress";
@@ -153,6 +168,7 @@ public final class TgolKeyStore {
 
     /* data model keys */
     public static final String AUDIT_SET_UP_COMMAND_KEY = "auditSetUpCommand";
+    public static final String ADD_SCENARIO_COMMAND_KEY = "addScenarioCommand";
     public static final String FORGOTTEN_PASSWORD_COMMAND_KEY = "forgottenPasswordCommand";
     public static final String CHANGE_PASSWORD_COMMAND_KEY = "changePasswordCommand";
     public static final String AUDIT_RESULT_SORT_COMMAND_KEY="auditResultSortCommand";
@@ -162,6 +178,7 @@ public final class TgolKeyStore {
     public static final String EXPORT_FORMAT_KEY = "format";
     public static final String ACT_ID_KEY = "act";
     public static final String CONTRACT_ID_KEY = "cr";
+    public static final String SCENARIO_ID_KEY = "sc";
     public static final String AUDIT_URL_KEY = "auditUrl";
     public static final String LEVEL_LIST_KEY = "levelList";
     public static final String RESULT_PAGE_NAME_KEY = "result-page-name";
@@ -224,6 +241,11 @@ public final class TgolKeyStore {
     public static final String CONTRACT_NAME_KEY = "contractName";
     public static final String IS_PAGE_AUDIT_KEY = "isPageAudit";
     public static final String IS_USER_NOTIFIED_KEY = "isUserNotified";
+    public static final String SCENARIO_LIST_KEY = "scenarioList";
+    public static final String NEW_SCENARIO_NAME_KEY = "newScenarioName";
+    public static final String DELETED_SCENARIO_NAME_KEY = "deletedScenarioName";
+    public static final String SCENARIO_NAME_KEY = "scenarioName";
+    public static final String SCENARIO_KEY = "scenario";
 
     /* role keys */
     public static final String ROLE_GUEST_KEY = "ROLE_GUEST";
