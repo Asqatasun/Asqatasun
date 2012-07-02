@@ -259,6 +259,7 @@
     Label CDATA #IMPLIED
     Mark CDATA #IMPLIED
     Url CDATA #REQUIRED
+    Rank CDATA #REQUIRED
     Id_Audit CDATA #IMPLIED
     Id_Web_Resource_Parent CDATA #IMPLIED
 >
