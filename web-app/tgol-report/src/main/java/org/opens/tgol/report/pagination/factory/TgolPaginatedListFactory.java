@@ -21,13 +21,13 @@
  */
 package org.opens.tgol.report.pagination.factory;
 
-import org.opens.tgol.entity.decorator.tanaguru.subject.WebResourceDataServiceDecorator;
-import org.opens.tgol.util.HttpStatusCodeFamily;
 import java.util.Collection;
 import org.apache.log4j.Logger;
 import org.displaytag.pagination.PaginatedList;
 import org.displaytag.properties.SortOrderEnum;
+import org.opens.tgol.entity.decorator.tanaguru.subject.WebResourceDataServiceDecorator;
 import org.opens.tgol.report.pagination.TgolPaginatedListImpl;
+import org.opens.tgol.util.HttpStatusCodeFamily;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -44,7 +44,7 @@ public final class TgolPaginatedListFactory {
     /*
      * Sort criterion values
      */
-    private String default2xxSortCriterion = "rawMark";
+    private String default2xxSortCriterion = "rank";
     /**
      *
      * @return
@@ -78,6 +78,15 @@ public final class TgolPaginatedListFactory {
      */
     public String getWeightedMarkCriterion() {
         return weightedMarkSortCriterion;
+    }
+    
+    private String rankCriterion = "rank";
+    /**
+     *
+     * @return
+     */
+    public String getRankCriterion() {
+        return rankCriterion;
     }
 
     /*
