@@ -44,6 +44,14 @@
         <property name="disabledActionImageUrl" value="/Images/Audit-10-pages-forbidden.png"/>
         <property name="enabledActionImageUrl" value="/Images/Audit-10-pages.png"/>
     </bean>
+    
+    <bean id="auditScenarioActionBuilder" class="org.opens.tgol.action.builder.ActionBuilderImpl">
+        <property name="actionCode" value="SCENARIO"/>
+        <property name="actionI81NCode" value="contract.launchScenario"/>
+        <property name="actionUrl" value="/home/contract/scenario-management.html"/>
+        <property name="disabledActionImageUrl" value="/Images/bobine.png"/>
+        <property name="enabledActionImageUrl" value="/Images/bobine.png"/>
+    </bean>
 
     <bean id="contractActionHandler" class="org.opens.tgol.action.voter.ContractActionHandlerImpl">
         <property name="actionBuilderList">
@@ -51,6 +59,7 @@
                 <ref bean="auditPageActionBuilder"/>
                 <ref bean="auditSiteActionBuilder"/>
                 <ref bean="auditUploadActionBuilder"/>
+                <ref bean="auditScenarioActionBuilder"/>
             </list>
         </property>
     </bean>
@@ -77,7 +86,7 @@
         <property name="actionCode" value="EXPORT_CSV"/>
         <property name="actionI81NCode" value="resultPage.csvExport"/>
         <property name="actionAltI81NCode" value="resultPage.csvExportAlt"/>
-        <property name="actionUrl" value="#"/>
+        <property name="actionUrl" value="/home/contract/export-audit-result.html?format=csv"/>
         <property name="disabledActionImageUrl" value="/Images/csv_export.png"/>
         <property name="enabledActionImageUrl" value="/Images/csv_export.png"/>
     </bean>
@@ -86,7 +95,7 @@
         <property name="actionCode" value="EXPORT_PDF"/>
         <property name="actionI81NCode" value="resultPage.pdfExport"/>
         <property name="actionAltI81NCode" value="resultPage.pdfExportAlt"/>
-        <property name="actionUrl" value="#"/>
+        <property name="actionUrl" value="/home/contract/export-audit-result.html?format=pdf"/>
         <property name="disabledActionImageUrl" value="/Images/pdf_export.png"/>
         <property name="enabledActionImageUrl" value="/Images/pdf_export.png"/>
     </bean>
@@ -95,9 +104,9 @@
         <property name="actionEnableMap">
             <map>
                 <entry key="EXPORT_ODS" value="true"/>
-                <entry key="EXPORT_PDF" value="false"/>
+                <entry key="EXPORT_PDF" value="true"/>
 <!--                <entry key="EXPORT_XLS" value="false"/>-->
-                <entry key="EXPORT_CSV" value="false"/>
+                <entry key="EXPORT_CSV" value="true"/>
             </map>
         </property>
         <property name="code" value="EXPORT"/>

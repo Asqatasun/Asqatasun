@@ -35,6 +35,7 @@
     <import resource="classpath:conf/context/beans-ruleimplementationloader.xml"/>
     <import resource="classpath:conf/context/beans-statistics.xml"/>
     <import resource="classpath:conf/context/beans-tanaguru.xml"/>
+    <import resource="classpath:conf/context/beans-scenarioloader.xml"/>
 
     <!-- tgol imports -->
     <import resource="tgol-beans-decorator.xml"/>

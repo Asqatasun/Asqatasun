@@ -14,6 +14,7 @@
         <property name="authorizedFunctionalityForTrend">
             <list>
                 <value>DOMAIN</value>
+                <value>SCENARIO</value>
             </list>
         </property>
         <property name="actionHandler" ref="contractActionHandler"/>
@@ -42,6 +43,7 @@
         <property name="authorizedScopeForPageList">
             <list>
                 <value>DOMAIN</value>
+                <value>SCENARIO</value>
             </list>
         </property>
     </bean>
@@ -102,6 +104,7 @@
         <property name="authorizedScopeForSynthesis">
             <list>
                 <value>DOMAIN</value>
+                <value>SCENARIO</value>
             </list>
         </property>
     </bean>
@@ -112,6 +115,11 @@
         </property>
         <property name="siteOptionFormFieldBuilderMap">
             <map>
+                <entry key="marker-parameters">
+                    <list>
+                        <ref bean="dataTableParamBuilder"/>
+                    </list>
+                </entry>
                 <entry key="crawl-parameters">
                     <list>
                         <ref bean="depthParamBuilder"/>
@@ -149,6 +157,9 @@
         <property name="auditUploadSetUpValidator">
             <ref bean="auditUploadSetUpFormValidator"/>
         </property>
+<!--        <property name="auditScenarioSetUpValidator">
+            <ref bean="auditScenarioSetUpFormValidator"/>
+        </property>-->
         <property name="viewFunctionalityBindingMap">
             <map>
                 <entry key="audit-page-set-up">
@@ -159,11 +170,36 @@
                 </entry>    
                 <entry key="audit-upload-set-up">
                     <value>UPLOAD</value>
-                </entry>    
+                </entry>
             </map>
         </property>
     </bean>
-
+    
+    <bean id="auditScenarioController" class="org.opens.tgol.controller.AuditScenarioController">
+        <property name="referentialAndLevelFormFieldBuilderList">
+            <ref bean="levelSelectFormFieldBuilder"/>
+        </property>
+        <property name="scenarioOptionFormFieldBuilderMap">
+            <map>
+                <entry key="marker-parameters">
+                    <list>
+                        <ref bean="dataTableParamBuilder"/>
+                    </list>
+                </entry>
+            </map>
+        </property>
+        <property name="viewFunctionalityBindingMap">
+            <map>
+                <entry key="audit-scenario-set-up">
+                    <value>SCENARIO</value>
+                </entry>
+            </map>
+        </property>
+        <property name="auditSiteSetUpValidator">
+            <ref bean="auditSiteSetUpFormValidator"/>
+        </property>
+    </bean>
+    
     <bean id="auditExportResultController" class="org.opens.tgol.controller.AuditExportResultController">
         <property name="parametersToDisplay">
             <map>

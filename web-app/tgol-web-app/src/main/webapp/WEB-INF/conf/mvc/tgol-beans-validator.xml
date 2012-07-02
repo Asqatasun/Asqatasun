@@ -20,6 +20,23 @@
             </list>
         </property>
     </bean>
+    <bean id="addScenarioFormValidator" class="org.opens.tgol.validator.AddScenarioFormValidator" >
+        <property name="maxFileSize" value="2097152"/>
+        <property name="authorizedMimeType">
+            <list>
+                <value>text/plain</value>
+            </list>
+        </property>
+    </bean>
+<!--    <bean id="uploadScenarioFormValidator" class="org.opens.tgol.validator.UploadScenarioSetUpFormValidator" >
+        <property name="maxFileSize" value="2097152"/>
+        <property name="authorizedMimeType">
+            <list>
+                <value>text/html</value>
+                <value>application/xhtml+xml</value>
+            </list>
+        </property>
+    </bean>-->
     <bean id="forgottenPasswordFormValidator" class="org.opens.tgol.validator.ForgottenPasswordFormValidator"/>
     <bean id="changePasswordFormValidator" class="org.opens.tgol.validator.ChangePasswordFormValidator"/>
 
