@@ -22,6 +22,12 @@
                 <entry key="ods">
                     <ref bean="odsFormat"/>
                 </entry>
+                <entry key="csv">
+                    <ref bean="csvFormat"/>
+                </entry>
+                <entry key="pdf">
+                    <ref bean="pdfFormat"/>
+                </entry>
             </map>
         </property>
     </bean>

@@ -15,5 +15,19 @@
         <property name="fileExtension" value=".ods"/>
         <property name="fileType" value="application/vnd.oasis.opendocument.spreadsheet"/>
     </bean>
+    
+    <bean id="csvFormat" class="org.opens.tgol.report.format.ExportFormatImpl">
+        <property name="exporterClassName" value="net.sf.jasperreports.engine.export.JRCsvExporter"/>
+<!--        <property name="exporterClassName" value="net.sf.jasperreports.engine.export.JRXlsExporter"/>-->
+        <property name="fileExtension" value=".csv"/>
+        <property name="fileType" value="text/csv"/>
+    </bean>
+    
+    <bean id="pdfFormat" class="org.opens.tgol.report.format.ExportFormatImpl">
+        <property name="exporterClassName" value="net.sf.jasperreports.engine.export.JRPdfExporter"/>
+<!--        <property name="exporterClassName" value="net.sf.jasperreports.engine.export.JRXlsExporter"/>-->
+        <property name="fileExtension" value=".pdf"/>
+        <property name="fileType" value="application/pdf"/>
+    </bean>
 
 </beans>
