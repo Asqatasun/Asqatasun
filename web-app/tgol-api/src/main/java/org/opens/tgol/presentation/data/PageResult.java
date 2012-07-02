@@ -105,4 +105,15 @@ public interface PageResult {
      */
     void setId(Long id);
 
+    /**
+     * 
+     * @return 
+     */
+    int getRank();
+    
+    /**
+     * 
+     * @param rank 
+     */
+    void setRank(int rank);
 }
