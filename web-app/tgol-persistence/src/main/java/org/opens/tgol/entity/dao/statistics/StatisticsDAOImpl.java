@@ -570,7 +570,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
 
     /**
      * Native sql query :
-     * SELECT w.Url, wrs.Mark, wrs.Id_Web_Resource, wrs.Http_Status_Code
+     * SELECT w.Url, w.Rank, wrs.Mark, wrs.Id_Web_Resource, wrs.Http_Status_Code
      * FROM WEB_RESOURCE_STATISTICS as wrs, WEB_RESOURCE as w
      *       WHERE wrs.Id_Audit=:idAudit
      *       AND wrs.Id_Web_Resource=w.Id_Web_Resource
@@ -618,6 +618,8 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         queryString.append(SELECT_STR);
         queryString.append(URL_FIELD_STR);
         queryString.append(COMA_CHAR);
+        queryString.append("w.Rank");
+        queryString.append(COMA_CHAR);
         queryString.append("wrs.Mark");
         queryString.append(COMA_CHAR);
         queryString.append("wrs.Raw_Mark");
@@ -644,6 +646,8 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
             queryString.append("wrs.Raw_Mark");
         } else if (sortCriterion.equalsIgnoreCase("httpStatusCode")) {
             queryString.append("wrs.Http_Status_Code");
+        } else if (sortCriterion.equalsIgnoreCase("rank")) {
+            queryString.append("w.Rank");
         } else {
             queryString.append(URL_FIELD_STR);
         }
@@ -680,10 +684,11 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         for (Object[] obj : result) {
             PageResult fti = PageResultFactory.getInstance().getPageResult(
                     (String)obj[0],
-                    ((Float)obj[1]), //weighted mark
-                    ((Float)obj[2]), // raw mark
-                    ((BigInteger)obj[3]).longValue(), //webresource Id
-                    ((Integer)obj[4]).toString()); // http status code
+                    (Integer)obj[1], // rank
+                    ((Float)obj[2]), //weighted mark
+                    ((Float)obj[3]), // raw mark
+                    ((BigInteger)obj[4]).longValue(), //webresource Id
+                    ((Integer)obj[5]).toString()); // http status code
             failedPageInfoSet.add(fti);
         }
         return failedPageInfoSet;

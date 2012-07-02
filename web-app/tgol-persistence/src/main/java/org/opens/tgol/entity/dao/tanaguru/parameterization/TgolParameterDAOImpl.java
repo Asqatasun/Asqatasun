@@ -55,28 +55,7 @@ public class TgolParameterDAOImpl extends AbstractJPADAO<Parameter, Long>
         if (act == null) {
             return null;
         }
-        StringBuilder queryString = new StringBuilder();
-        queryString.append("SELECT distinct(p.Parameter_Value) FROM"
-                + " TGSI_ACT as a,"
-                + " TGSI_ACT_WEB_RESOURCE as tawr,"
-                + " WEB_RESOURCE as w, "
-                + " AUDIT_PARAMETER as ap, "
-                + " PARAMETER as p, "
-                + " PARAMETER_ELEMENT as pe "
-                + " WHERE a.Id_Act=:idAct"
-                + " AND a.Id_Act=tawr.ACT_Id_Act"
-                + " AND tawr.WEB_RESOURCE_Id_Web_Resource=w.Id_Web_Resource"
-                + " AND w.Id_Audit=ap.Id_Audit"
-                + " AND ap.Id_Parameter=p.Id_Parameter"
-                + " AND p.Id_Parameter_Element=:idParameterElement");
-        Query query = entityManager.createNativeQuery(queryString.toString());
-        query.setParameter("idParameterElement", parameterElement.getId());
-        query.setParameter("idAct", act.getId());
-        try {
-            return ((String)query.getSingleResult()).toString();
-        } catch (NoResultException e) {
-            return null;
-        }
+        return retrieveParameterValueFromParameterElementAndAct(parameterElement, act);
     }
     
     private Act findLastActByContract(Long idContract, ScopeEnum scope) {
@@ -98,5 +77,83 @@ public class TgolParameterDAOImpl extends AbstractJPADAO<Parameter, Long>
             return null;
         }
     }
+    
+    @Override
+    public String findLastParameterValueFromContractAndScenario(
+            Long contract,
+            ParameterElement parameterElement,
+            String scenarioName) {
+        Act act = findLastActByContractAndScenario(contract, scenarioName);
+        if (act == null) {
+            return null;
+        }
+        return retrieveParameterValueFromParameterElementAndAct(parameterElement, act);
+    }
+    
+    /**
+     * 
+     * @param idContract
+     * @param scenarioName
+     * @return 
+     */
+    private Act findLastActByContractAndScenario(Long idContract, String scenarioName) {
+        StringBuilder queryString = new StringBuilder();
+        queryString.append("SELECT a FROM ");
+        queryString.append(ActImpl.class.getName());
+        queryString.append(" a");
+        queryString.append(" left join a.webResource w");
+        queryString.append(" WHERE a.contract.id = :idContract");
+        queryString.append(" AND (a.status = :completedStatus OR a.status = :errorStatus)");
+        queryString.append(" AND a.scope.code =:scope ");
+        queryString.append(" AND w.url=:scenarioName");
+        queryString.append(" ORDER BY a.id DESC");
+        
+        Query query = entityManager.createQuery(queryString.toString());
+        query.setParameter("idContract", idContract);
+        query.setParameter("completedStatus", ActStatus.COMPLETED);
+        query.setParameter("errorStatus", ActStatus.ERROR);
+        query.setParameter("scope", ScopeEnum.SCENARIO);
+        query.setParameter("scenarioName", scenarioName);
+        query.setMaxResults(1);
+        query.setHint(CACHEABLE_OPTION, "true");
+        try {
+            return (Act)query.getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
+    }
 
+    /**
+     * 
+     * @param parameterElement
+     * @param act
+     * @return 
+     */
+    private String retrieveParameterValueFromParameterElementAndAct(
+            ParameterElement parameterElement, 
+            Act act) {
+        StringBuilder queryString = new StringBuilder();
+        queryString.append("SELECT distinct(p.Parameter_Value) FROM");
+        queryString.append(" TGSI_ACT as a,");
+        queryString.append(" TGSI_ACT_WEB_RESOURCE as tawr,");
+        queryString.append(" WEB_RESOURCE as w, ");
+        queryString.append(" AUDIT_PARAMETER as ap, ");
+        queryString.append(" PARAMETER as p, ");
+        queryString.append(" PARAMETER_ELEMENT as pe ");
+        queryString.append(" WHERE a.Id_Act=:idAct");
+        queryString.append(" AND a.Id_Act=tawr.ACT_Id_Act");
+        queryString.append(" AND tawr.WEB_RESOURCE_Id_Web_Resource=w.Id_Web_Resource");
+        queryString.append(" AND w.Id_Audit=ap.Id_Audit");
+        queryString.append(" AND ap.Id_Parameter=p.Id_Parameter");
+        queryString.append(" AND p.Id_Parameter_Element=:idParameterElement");
+        Query query = entityManager.createNativeQuery(queryString.toString());
+        query.setParameter("idParameterElement", parameterElement.getId());
+        query.setParameter("idAct", act.getId());
+        try {
+            return ((String)query.getSingleResult()).toString();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+    
 }
