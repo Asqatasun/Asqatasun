@@ -12,12 +12,14 @@ INSERT IGNORE INTO `TGSI_SCOPE` (`Id_Scope`, `Code`, `Label`) VALUES
 (2, 'DOMAIN', 'Domain'),
 (3, 'PAGE', 'Page'),
 (4, 'FILE', 'File'),
-(5, 'GROUPOFFILES', 'Group of files');
+(5, 'GROUPOFFILES', 'Group of files'), 
+(6, 'SCENARIO', 'Scenario');
 
 INSERT IGNORE INTO `TGSI_FUNCTIONALITY` (`Id_Functionality`, `Code`, `Label`, `Description`) VALUES
 (1, 'PAGES', 'Audit Pages (Up to 10)', ''),
 (2, 'DOMAIN', 'Audit Domain ', ''),
-(3, 'UPLOAD', 'Audit Upload', '');
+(3, 'UPLOAD', 'Audit Upload', ''), 
+(4, 'SCENARIO', 'Audit Scenario', '');
 
 INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Id_Referential`, `Code`, `Label`) VALUES
 (1, 'AW21', 'Accessiweb 2.1 referential'), 
