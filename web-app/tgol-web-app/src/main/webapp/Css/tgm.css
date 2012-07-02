@@ -980,22 +980,25 @@ th.order2:after {
 #display-results-options-update {
     padding-top : 0;
 }
-#page-list-f2xx .col01,
+#page-list-f2xx .col01{
+    text-align: left;
+}
+#page-list-f2xx .col02,
 #page-list-f3xx .col01,
 #page-list-f4xx .col01{ /* URL */
     text-align: left;
     word-wrap: break-word;
     max-width: 600px;
 }
-#page-list-f2xx .col02{ /* Mark */
+#page-list-f2xx .col03{ /* Mark */
     text-align: right;
     width: 10em;
 }
-#page-list-f2xx .col03{ /* Weighted Mark */
+#page-list-f2xx .col04{ /* Weighted Mark */
     text-align: right;
     width: 10em;
 }
-#page-list-f2xx .col04{ /* link to detailed result */
+#page-list-f2xx .col05{ /* link to detailed result */
     text-align: right;
     width: 10em;
 }
@@ -1374,4 +1377,12 @@ audit-result-menu-actions a {
 }
 .html4strict span.xtra { 
     display:block;
+}
+
+
+/*
+    page : scenario management
+*/
+#add-scenario-form .alert-message {
+    margin-left: 10px;
 }
