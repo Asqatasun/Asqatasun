@@ -36,5 +36,9 @@
             <groupId>org.htmlcleaner</groupId>
             <artifactId>htmlcleaner</artifactId>
         </dependency>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+        </dependency>
     </dependencies>
 </project>
