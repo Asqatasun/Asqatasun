@@ -59,6 +59,8 @@ public class AuditLauncherController extends AuditDataHandlerController {
     private static String PROXY_PORT_PARAM_KEY="PROXY_PORT";
     private static String DEPTH_PARAM_KEY="DEPTH";
     private static String MAX_DOCUMENT_PARAM_KEY="MAX_DOCUMENTS";
+    private static String MAX_DURATION_PARAM_KEY="MAX_DURATION";
+    private static String EXCLUSION_URL_LIST_PARAM_KEY="EXCLUSION_REGEXP";
     private static String DEPTH_PAGE_PARAM_VALUE="0";
     private String groupePagesName = "";
     /**
@@ -167,14 +169,27 @@ public class AuditLauncherController extends AuditDataHandlerController {
                 return preparePageAudit(auditSetUpCommand, contract, locale, auditScope,model);
             }
             String url = getContractDataService().getUrlFromContractOption(contract);
-            tanaguruExecutor.auditSite(
+            if (auditScope.equals(ScopeEnum.DOMAIN)) {
+                tanaguruExecutor.auditSite(
                     contract,
                     url,
                     getClientIpAddress(),
                     getUserParamSet(auditSetUpCommand, contract.getId(),-1,url),
                     locale
                     );
-            model.addAttribute(TgolKeyStore.TESTED_URL_KEY, url);
+                model.addAttribute(TgolKeyStore.TESTED_URL_KEY, url);
+            } else if (auditScope.equals(ScopeEnum.SCENARIO)) {
+                tanaguruExecutor.auditScenario(
+                    contract,
+                    auditSetUpCommand.getScenarioName(),
+                    auditSetUpCommand.getScenario(),
+                    getClientIpAddress(),
+                    getUserParamSet(auditSetUpCommand, contract.getId(),-1,url),
+                    locale
+                    );
+                model.addAttribute(TgolKeyStore.SCENARIO_NAME_KEY, auditSetUpCommand.getScenarioName());
+                model.addAttribute(TgolKeyStore.SCENARIO_ID_KEY, auditSetUpCommand.getScenarioId());
+            }
             model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
             model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
             model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
@@ -343,15 +358,18 @@ public class AuditLauncherController extends AuditDataHandlerController {
      * @return
      */
     private Set<Parameter> getUserParamSet(AuditSetUpCommand auditSetUpCommand, Long contractId, int nbOfPages, String url) {
-        Set<Parameter> paramSet = getDefaultParamSet();
+        Set<Parameter> paramSet;
         Set<Parameter> userParamSet = new HashSet<Parameter>();
         if (auditSetUpCommand != null) {
-            
             // The default parameter set corresponds to a site audit
             // If the launched audit is of any other type, we retrieve another 
             // parameter set 
-            if (!auditSetUpCommand.getScope().equals(ScopeEnum.DOMAIN)) {
-                paramSet = getParameterDataService().updateParameterSet(paramSet, getAuditPageParameterSet(nbOfPages));
+            if (auditSetUpCommand.getScope().equals(ScopeEnum.SCENARIO)) {
+                paramSet = getAuditScenarioParameterSet();
+            } else if (!auditSetUpCommand.getScope().equals(ScopeEnum.DOMAIN)) {
+                paramSet = getAuditPageParameterSet(nbOfPages);
+            } else {
+                paramSet = getDefaultParamSet();
             }
             for (Map.Entry<String, String> entry : auditSetUpCommand.getAuditParameter().entrySet()) {
                 Parameter param = getParameterDataService().getParameter(parameterElementMap.get(entry.getKey()), entry.getValue());
@@ -360,6 +378,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
             paramSet = getParameterDataService().updateParameterSet(paramSet, userParamSet);
             paramSet = setLevelParameter(paramSet, auditSetUpCommand.getLevel());
         } else {
+            paramSet = getDefaultParamSet();
             Set<? extends OptionElement> optionElementSet =
                     getContractDataService().read(contractId).getOptionElementSet();
             for (Parameter param : paramSet) {
@@ -466,6 +485,27 @@ public class AuditLauncherController extends AuditDataHandlerController {
             auditPageParamSet = getParameterDataService().updateParameterSet(getDefaultParamSet(), paramSet);
         }
         return auditPageParamSet;
+    }
+    
+    /**
+     * The default parameter set embeds a depth value that corresponds to the
+     * site audit. We need here to replace this parameter by a parameter value
+     * equals to 0.
+     * @return
+     */
+    private Set<Parameter> getAuditScenarioParameterSet() {
+        Set<Parameter> scenarioParamSet = getDefaultParamSet();
+        Set<Parameter> parameterToRemove = new HashSet<Parameter>();
+        for (Parameter param : scenarioParamSet) {
+            if (StringUtils.equals(param.getParameterElement().getParameterElementCode(), DEPTH_PARAM_KEY) ||
+                    StringUtils.equals(param.getParameterElement().getParameterElementCode(), MAX_DOCUMENT_PARAM_KEY) ||
+                    StringUtils.equals(param.getParameterElement().getParameterElementCode(), MAX_DURATION_PARAM_KEY) ||
+                    StringUtils.equals(param.getParameterElement().getParameterElementCode(), EXCLUSION_URL_LIST_PARAM_KEY) ) {
+                parameterToRemove.add(param);
+            }
+        }
+        scenarioParamSet.removeAll(parameterToRemove);
+        return scenarioParamSet;
     }
 
 }

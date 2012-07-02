@@ -32,7 +32,9 @@ import org.opens.tgol.command.AuditSetUpCommand;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.contract.ScopeEnum;
 import org.opens.tgol.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
+import org.opens.tgol.entity.scenario.Scenario;
 import org.opens.tgol.entity.service.contract.ContractDataService;
+import org.opens.tgol.entity.service.scenario.ScenarioDataService;
 import org.opens.tgol.entity.user.User;
 import org.opens.tgol.form.NumericalFormField;
 import org.opens.tgol.form.SelectFormField;
@@ -106,6 +108,19 @@ public final class AuditSetUpCommandFactory {
     }
     
     /**
+     * 
+     */
+    private ScenarioDataService scenarioDataService;
+    public ScenarioDataService getScenarioDataService() {
+        return scenarioDataService;
+    }
+
+    @Autowired
+    public void setScenarioDataService(ScenarioDataService scenarioDataService) {
+        this.scenarioDataService = scenarioDataService;
+    }
+    
+    /**
      * The static instance 
      */
     private static AuditSetUpCommandFactory auditSetUpCommandFactory;
@@ -141,7 +156,7 @@ public final class AuditSetUpCommandFactory {
                 contract,
                 levelFormFieldList,
                 optionalFormFieldMap,
-                false);
+                ScopeEnum.PAGE);
         return pageAuditSetUpCommand;
     }
 
@@ -164,7 +179,7 @@ public final class AuditSetUpCommandFactory {
                 contract,
                 levelFormFieldList,
                 optionalFormFieldMap,
-                false);
+                ScopeEnum.FILE);
         return uploadAuditSetUpCommand;
     }
 
@@ -186,8 +201,35 @@ public final class AuditSetUpCommandFactory {
                 contract,
                 levelFormFieldList,
                 optionalFormFieldMap,
-                true);
+                ScopeEnum.DOMAIN);
         return siteAuditSetUpCommand;
+    }
+    
+    /**
+     *
+     * @param contract
+     * @param levelFormFieldList
+     * @param optionalFormFieldMap
+     * @return
+     */
+    public AuditSetUpCommand getScenarioAuditSetUpCommand(
+            Contract contract,
+            String scenarioId,
+            List<SelectFormField> levelFormFieldList,
+            Map<String, List<AuditSetUpFormField>> optionalFormFieldMap) {
+        AuditSetUpCommand scenarioAuditSetUpCommand = new AuditSetUpCommand();
+        scenarioAuditSetUpCommand.setScope(ScopeEnum.SCENARIO);
+        Scenario scenario= scenarioDataService.read(Long.valueOf(scenarioId));
+        scenarioAuditSetUpCommand.setScenarioName(scenario.getLabel());
+        scenarioAuditSetUpCommand.setScenario(scenario.getContent());
+        scenarioAuditSetUpCommand.setScenarioId(scenario.getId());
+        setUpAuditSetUpCommand(
+                scenarioAuditSetUpCommand,
+                contract,
+                levelFormFieldList,
+                optionalFormFieldMap,
+                ScopeEnum.SCENARIO);
+        return scenarioAuditSetUpCommand;
     }
 
     /**
@@ -205,13 +247,13 @@ public final class AuditSetUpCommandFactory {
             Contract contract,
             List<SelectFormField> levelFormFieldList,
             Map<String, List<AuditSetUpFormField>> optionalFormFieldMap,
-            boolean isAuditSite) {
+            ScopeEnum scope) {
 
         // the auditSetCommand instance handles the id of the current contract
         auditSetUpCommand.setContractId(contract.getId());
 
         boolean isDefaultSet = true;
-        if (!isAuditSite) {
+        if (scope == ScopeEnum.FILE || scope == ScopeEnum.PAGE) {
             // the default parameter corresponds by default to the site audit 
             // parameter set. If the audit is a page audit by definition, 
             // the parameter set is not set as default
@@ -220,7 +262,7 @@ public final class AuditSetUpCommandFactory {
 
         // Set-up the audit level value to the auditSetUpCommand instance
         auditSetUpCommand.setLevel(
-                extractLevelValueFromAuditSetUpFormFieldList(contract, isAuditSite, levelFormFieldList));
+                extractLevelValueFromAuditSetUpFormFieldList(contract, levelFormFieldList, auditSetUpCommand));
         
         // We set here the default value for each AuditSetUpFormField
         // If the parameter associated with the AuditSetUpFormField defines 
@@ -239,7 +281,7 @@ public final class AuditSetUpCommandFactory {
                         contract, 
                         defaultValue, 
                         ap, 
-                        isAuditSite);
+                        auditSetUpCommand);
                 Logger.getLogger(this.getClass()).debug("paramValue  "  + paramValue);
                 // The auditSetUpCommand instance handles a map to bind each field
                 // This map has to be set-up with the value of the Parameter and 
@@ -301,16 +343,19 @@ public final class AuditSetUpCommandFactory {
      */
     private String extractLevelValueFromAuditSetUpFormFieldList(
             Contract contract, 
-            boolean isSiteAudit, 
-            List<SelectFormField> levelFormFieldList) {
+            List<SelectFormField> levelFormFieldList, 
+            AuditSetUpCommand auditSetUpCommand) {
         ParameterElement levelParameterElement = getLevelParameterElement();
         // We retrieve the default value of the Parameter associated 
         // with the level ParameterElement
         String defaultValue = getParameterDataService().
                     getDefaultParameter(levelParameterElement).getValue();
-        if (isSiteAudit) {
-            String lastUserValue = retrieveParameterValueFromLastAudit(contract, levelParameterElement);
-            if (!StringUtils.equals(lastUserValue, defaultValue)) {
+        Logger.getLogger(this.getClass()).info("default level value " + defaultValue);
+        ScopeEnum scope = auditSetUpCommand.getScope();
+        if (scope == ScopeEnum.DOMAIN || scope == ScopeEnum.SCENARIO) {
+            String lastUserValue = retrieveParameterValueFromLastAudit(contract, levelParameterElement, auditSetUpCommand);
+            Logger.getLogger(this.getClass()).info("lastUserValue " + lastUserValue);
+            if (lastUserValue!= null && !StringUtils.equals(lastUserValue, defaultValue)) {
                 // we override the auditParameter with the last user value
                 defaultValue = lastUserValue;
                 // If the level is overidden from the parameters of the last audit, 
@@ -331,7 +376,7 @@ public final class AuditSetUpCommandFactory {
      * @param contract
      * @param defaultValue
      * @param ap
-     * @param isAuditSite
+     * @param auditSetUpCommand
      * @return 
      *      a boolean that indicates whether the added parameter value is the 
      *      default value
@@ -340,7 +385,7 @@ public final class AuditSetUpCommandFactory {
             Contract contract,
             String defaultValue,
             AuditSetUpFormField ap,
-            boolean isAuditSite) {
+            AuditSetUpCommand auditSetUpCommand) {
 
         // override default value in case of NumericalFormField if the
         // its default max value is inferior to the default value of the parameter. 
@@ -356,8 +401,9 @@ public final class AuditSetUpCommandFactory {
         // In case of site audit, we retrieve the last value filled-in 
         // by the user for the parameter. Let's consider this as a 
         // user preference management. 
-        if (isAuditSite) {
-            String lastUserValue = retrieveParameterValueFromLastAudit(contract, ap.getParameterElement());
+        ScopeEnum scope = auditSetUpCommand.getScope();
+        if (scope == ScopeEnum.DOMAIN || scope == ScopeEnum.SCENARIO) {
+            String lastUserValue = retrieveParameterValueFromLastAudit(contract, ap.getParameterElement(), auditSetUpCommand);
             if (lastUserValue!= null && !StringUtils.equals(lastUserValue, defaultValue)) {
                 // we override the auditParameter with the last user value
                 return lastUserValue;
@@ -370,13 +416,23 @@ public final class AuditSetUpCommandFactory {
      * 
      * @param contract
      * @param parameterElement
+     * @param scope
      * @return 
      */
     private String retrieveParameterValueFromLastAudit (
             Contract contract, 
-            ParameterElement parameterElement) {
-        return parameterDataService.getLastParameterValueFromUser(contract.getId(), parameterElement, ScopeEnum.DOMAIN);
-        
+            ParameterElement parameterElement, 
+            AuditSetUpCommand auditSetUpCommand) {
+        ScopeEnum scope = auditSetUpCommand.getScope();
+        if (scope == ScopeEnum.DOMAIN) {
+            return parameterDataService.getLastParameterValueFromUser(contract.getId(), parameterElement, ScopeEnum.DOMAIN);
+        } else if (scope == ScopeEnum.SCENARIO) {      
+            return parameterDataService.getLastParameterValueFromContractAndScenario(
+                    contract.getId(), 
+                    parameterElement, 
+                    auditSetUpCommand.getScenarioName());
+        }
+        return null;
     }
 
 }

@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 import org.opens.tgol.command.helper.UploadAuditSetUpCommandHelper;
 import org.opens.tgol.entity.contract.ScopeEnum;
+import org.opens.tgol.entity.scenario.Scenario;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 /**
@@ -149,6 +150,33 @@ public class AuditSetUpCommand implements Serializable {
 
     public void setFileInputList(final CommonsMultipartFile[] fileInputList) {
         this.fileInputList = fileInputList.clone();
+    }
+    
+    private String scenarioName;
+    public String getScenarioName() {
+        return scenarioName;
+    }
+
+    public void setScenarioName(String scenarioName) {
+        this.scenarioName = scenarioName;
+    }
+    
+    private Long scenarioId;
+    public Long getScenarioId() {
+        return scenarioId;
+    }
+
+    public void setScenarioId(Long scenarioId) {
+        this.scenarioId = scenarioId;
+    }
+    
+    private String scenario;
+    public String getScenario() {
+        return scenario;
+    }
+
+    public void setScenario(String scenario) {
+        this.scenario = scenario;
     }
     
     /**

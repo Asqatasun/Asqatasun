@@ -167,7 +167,7 @@ public class PageListController extends AuditDataHandlerController{
      * @param status
      * @return
      */
-    private HttpStatusCodeFamily getHttpStatusCodeFamily(String status){
+    private HttpStatusCodeFamily getHttpStatusCodeFamily(String status) {
         if (status == null) {
             return null;
         }
@@ -176,6 +176,7 @@ public class PageListController extends AuditDataHandlerController{
         if (status.equalsIgnoreCase(HttpStatusCodeFamily.f2xx.name())) {
             getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getDefault2xxSortCriterion());
             getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getWeightedMarkCriterion());
+            getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getRankCriterion());
             return HttpStatusCodeFamily.f2xx;
         } else if (status.equalsIgnoreCase(HttpStatusCodeFamily.f3xx.name())) {
             getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getDefault3xxSortCriterion());

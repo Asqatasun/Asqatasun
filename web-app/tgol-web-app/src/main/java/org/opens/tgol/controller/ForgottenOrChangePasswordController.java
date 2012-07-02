@@ -1,4 +1,4 @@
-/*
+ /*
  * Tanaguru - Automated webpage assessment
  * Copyright (C) 2008-2011  Open-S Company
  *
