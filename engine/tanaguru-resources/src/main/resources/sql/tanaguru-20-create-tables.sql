@@ -363,6 +363,7 @@ CREATE TABLE IF NOT EXISTS `WEB_RESOURCE` (
   `Label` varchar(255) DEFAULT NULL,
   `Mark` float DEFAULT NULL,
   `Url` varchar(2048) NOT NULL,
+  `Rank` int DEFAULT 0,
   `Id_Audit` bigint(20) DEFAULT NULL,
   `Id_Web_Resource_Parent` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`Id_Web_Resource`),
@@ -542,7 +543,7 @@ COLLATE = utf8_general_ci;
 --
 ALTER TABLE `AUDIT_TEST`
   ADD CONSTRAINT `FK838E6E96A17A5FA8` FOREIGN KEY Id_Test_Index (`Id_Test`) REFERENCES `TEST` (`Id_Test`),
-  ADD CONSTRAINT `FK838E6E96493EC9C2` FOREIGN KEY Id_Audit_Index (`Id_Audit`) REFERENCES `AUDIT` (`Id_Audit`);
+  ADD CONSTRAINT `FK838E6E96493EC9C2` FOREIGN KEY Id_Audit_Index (`Id_Audit`) REFERENCES `AUDIT` (`Id_Audit`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `CONTENT`
@@ -597,9 +598,9 @@ CREATE INDEX Issue_Index ON PROCESS_REMARK (Issue);
 -- Contraintes pour la table `PROCESS_RESULT`
 --
 ALTER TABLE `PROCESS_RESULT`
-  ADD CONSTRAINT `FK1C41A80DB6D0E092` FOREIGN KEY Id_Audit_Net_Result_Index (`Id_Audit_Net_Result`) REFERENCES `AUDIT` (`Id_Audit`),
+  ADD CONSTRAINT `FK1C41A80DB6D0E092` FOREIGN KEY Id_Audit_Net_Result_Index (`Id_Audit_Net_Result`) REFERENCES `AUDIT` (`Id_Audit`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK1C41A80D2E48600` FOREIGN KEY Id_Web_Resource_Index (`Id_Web_Resource`) REFERENCES `WEB_RESOURCE` (`Id_Web_Resource`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK1C41A80D8146180B` FOREIGN KEY Id_Audit_Gross_Result_Index (`Id_Audit_Gross_Result`) REFERENCES `AUDIT` (`Id_Audit`),
+  ADD CONSTRAINT `FK1C41A80D8146180B` FOREIGN KEY Id_Audit_Gross_Result_Index (`Id_Audit_Gross_Result`) REFERENCES `AUDIT` (`Id_Audit`)ON DELETE CASCADE,
   ADD CONSTRAINT `FK1C41A80DA17A5FA8` FOREIGN KEY Id_Test_Index (`Id_Test`) REFERENCES `TEST` (`Id_Test`),
   ADD CONSTRAINT `FK1C41A80DFA349234` FOREIGN KEY Id_Process_Result_Parent_Index (`Id_Process_Result_Parent`) REFERENCES `PROCESS_RESULT` (`Id_Process_Result`);
 CREATE INDEX Definite_Value_Index ON PROCESS_RESULT (Definite_Value);
