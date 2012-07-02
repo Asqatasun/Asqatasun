@@ -51,6 +51,11 @@ public class ParameterDataServiceDecoratorImpl extends AbstractGenericDataServic
     public String getLastParameterValueFromUser(Long idContract, ParameterElement parameterElement, ScopeEnum scope) {
         return ((TgolParameterDAO)entityDao).findLastParameterValueFromUser(idContract, parameterElement, scope);
     }
+    
+    @Override
+    public String getLastParameterValueFromContractAndScenario(Long idContract, ParameterElement parameterElement, String scenarioName) {
+        return ((TgolParameterDAO)entityDao).findLastParameterValueFromContractAndScenario(idContract, parameterElement, scenarioName);
+    }
 
     @Override
     public Parameter create(ParameterElement pe, String string, Audit audit) {
