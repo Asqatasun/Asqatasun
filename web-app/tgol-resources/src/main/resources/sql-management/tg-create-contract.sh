@@ -3,9 +3,9 @@
 # 20111102 mfaure
 
 # For Getopts: very first ":" for error managing, then a ":" after each option requiring an argument
-DbUser=tanaguru
-DbUserPasswd=t4n4guru
-DbName=tanaguruProd
+DbUser=
+DbUserPasswd=
+DbName=
 
 while getopts ":l:w:u:f:r:" opt; do
   case $opt in

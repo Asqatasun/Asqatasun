@@ -1,8 +1,9 @@
 -- -----------------------------------------------------------------
 -- Creation of contract with Url, Functionalities and Referentials
 -- -----------------------------------------------------------------
+use tgTest;
 delimiter |
-CREATE DEFINER=`tanaguru`@`localhost` PROCEDURE `create_contract`(
+CREATE DEFINER=`tgTest`@`localhost` PROCEDURE `create_contract`(
 IN idUser INT, 
 IN label VARCHAR(255), 
 IN url VARCHAR(1024), 
@@ -10,7 +11,8 @@ IN ref1 INT,
 IN ref2 INT, 
 IN funct1 INT, 
 IN funct2 INT, 
-IN funct3 INT)
+IN funct3 INT,
+IN funct4 INT)
 BEGIN
 
   DECLARE v_Id_Option_Element bigint(20);
@@ -58,6 +60,12 @@ BEGIN
     THEN 
         INSERT IGNORE INTO `TGSI_CONTRACT_FUNCTIONALITY` (`CONTRACT_Id_Contract`, `FUNCTIONALITY_Id_Functionality`) VALUES
 	    (contractId,funct3);
+  END IF;
+
+  IF funct4 IS NOT NULL 
+    THEN 
+        INSERT IGNORE INTO `TGSI_CONTRACT_FUNCTIONALITY` (`CONTRACT_Id_Contract`, `FUNCTIONALITY_Id_Functionality`) VALUES
+	    (contractId,funct4);
   END IF;
     
 END  |
