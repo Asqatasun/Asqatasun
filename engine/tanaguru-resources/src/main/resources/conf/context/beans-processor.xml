@@ -123,5 +123,19 @@
             </list>
         </property>
     </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="httpRequestHandler"/>
+        </property>
+        <property name="targetMethod">
+            <value>setProxyExclusionUrl</value>
+        </property>
+        <property name="arguments">
+            <list>
+                <value>${proxyExclusionUrl}</value>
+            </list>
+        </property>
+    </bean>
 
 </beans>

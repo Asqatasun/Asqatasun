@@ -8,14 +8,16 @@
         <!-- audit limit parameters -->
         <property name="pageAuditExecutionListMax" value="${maxSimultaneousAuditPage}"/>
         <property name="siteAuditExecutionListMax" value="${maxSimultaneousAuditSite}"/>
-<!--        <property name="siteAuditExecutionListMax" value="${maxSimultaneousAuditSite}"/>
-        <property name="siteAuditExecutionListMax" value="${maxSimultaneousAuditSite}"/>-->
+        <property name="scenarioAuditExecutionListMax" value="${maxSimultaneousAuditScenario}"/>
+        <property name="uploadAuditExecutionListMax" value="${maxSimultaneousAuditUpload}"/>
     </bean>
 
     <bean id="auditServiceThreadFactory" class="org.opens.tanaguru.service.AuditServiceThreadFactoryImpl"/>
 
     <bean id="auditService" class="org.opens.tanaguru.service.AuditServiceImpl"/>
 
-    <bean id="auditCommandFactory" class="org.opens.tanaguru.service.command.factory.AuditCommandFactoryImpl"/>
+    <bean id="auditCommandFactory" class="org.opens.tanaguru.service.command.factory.AuditCommandFactoryImpl">
+        <property name="auditPageWithCrawler" value="false"/>
+    </bean>
 
 </beans>
