@@ -26,5 +26,9 @@ package org.opens.tgol.entity.contract;
  * @author jkowalczyk
  */
 public enum ActStatus {
-    INITIALISATION, RUNNING, ERROR, COMPLETED;
+    INITIALISATION, 
+    RUNNING, 
+    ERROR, 
+    COMPLETED, 
+    DELETED;
 }

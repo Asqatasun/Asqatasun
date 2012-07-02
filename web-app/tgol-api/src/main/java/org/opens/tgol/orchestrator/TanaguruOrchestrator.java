@@ -99,4 +99,21 @@ public interface TanaguruOrchestrator {
             Set<Parameter> paramSet, 
             Locale locale);
     
+    /**
+     * 
+     * @param contract
+     * @param scenarioName
+     * @param scenario
+     * @param clientIp
+     * @param parameterSet
+     * @param locale 
+     */
+    void auditScenario(
+            Contract contract,
+            String scenarioName,
+            String scenario,
+            String clientIp,
+            Set<Parameter> parameterSet, 
+            Locale locale);
+    
 }

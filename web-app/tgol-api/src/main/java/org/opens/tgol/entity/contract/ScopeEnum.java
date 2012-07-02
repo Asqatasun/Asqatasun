@@ -31,6 +31,7 @@ public enum ScopeEnum {
     PAGE,
     FILE,
     GROUPOFFILES,
+    SCENARIO,
     GROUPOFPAGES;
 
 }
