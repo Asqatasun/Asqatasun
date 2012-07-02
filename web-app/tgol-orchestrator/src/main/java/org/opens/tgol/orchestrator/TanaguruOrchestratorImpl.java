@@ -187,9 +187,6 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             Locale locale) {
         LOGGER.info("auditPage Upload");
         if (LOGGER.isDebugEnabled()) {
-            for (String str : fileMap.values()) {
-                LOGGER.debug("files " + str);
-            }
             for (Parameter param : parameterSet) {
                 LOGGER.debug("param " + param.getValue() + " "+
                         param.getParameterElement().getParameterElementCode());
@@ -238,6 +235,34 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
                     locale);
         threadPoolTaskExecutor.submit(auditSiteThread);
     }
+    
+    @Override
+    public void auditScenario(
+            Contract contract,
+            String scenarioName,
+            String scenario,
+            String clientIp,
+            Set<Parameter> parameterSet, 
+            Locale locale) {
+        LOGGER.info("auditScenario");
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Scenario " + scenario);
+            for (Parameter param : parameterSet) {
+                LOGGER.debug("param " + param.getValue() + " "+
+                        param.getParameterElement().getParameterElementCode());
+            }
+        }
+        Act act = createAct(contract, ScopeEnum.SCENARIO, clientIp);
+        AuditThread auditScenarioThread =
+                new AuditScenarioThread(
+                    scenarioName,
+                    scenario,
+                    auditService,
+                    act,
+                    parameterSet, 
+                    locale);
+        threadPoolTaskExecutor.submit(auditScenarioThread);
+    }
 
     @Override
     public Audit auditSite(
@@ -282,7 +307,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             Future submitedThread = threadPoolTaskExecutor.submit(auditTimeoutThread);
             while (submitedThread!=null && !submitedThread.isDone()) {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(500);
                 } catch (InterruptedException ex) {
                     LOGGER.error("", ex);
                 }
@@ -520,10 +545,10 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         
         @Override
         public void auditCompleted(Audit audit) {
-            LOGGER.debug("AUDIT COMPLETED:" + audit + "," + audit.getSubject().getURL() + "," + (long) (audit.getDateOfCreation().getTime() / 1000));
+            LOGGER.debug("AUDIT COMPLETED:" + audit + "," + audit.getSubject().getURL() + "," + (long) (audit.getDateOfCreation().getTime() / 1000) + audit.getId());
             Audit auditCompleted = null;
             for (Audit auditRunning : this.auditExecutionList.keySet()) {
-                if (auditRunning.getSubject().getURL().equals(audit.getSubject().getURL())
+                if (auditRunning.getId().equals(audit.getId())
                         && (long) (auditRunning.getDateOfCreation().getTime() / 1000) == (long) (audit.getDateOfCreation().getTime() / 1000)) {
                     auditCompleted = auditRunning;
                     break;
@@ -541,7 +566,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             LOGGER.error("AUDIT CRASHED:" + audit + "," + audit.getSubject().getURL() + "," + (long) (audit.getDateOfCreation().getTime() / 1000), exception);
             Audit auditCrashed = null;
             for (Audit auditRunning : this.auditExecutionList.keySet()) {
-                if (auditRunning.getSubject().getURL().equals(audit.getSubject().getURL())
+                if (auditRunning.getId().equals(audit.getId())
                         && (long) (auditRunning.getDateOfCreation().getTime() / 1000) == (long) (audit.getDateOfCreation().getTime() / 1000)) {
                     auditCrashed = auditRunning;
                     break;
@@ -555,12 +580,13 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         }
 
         protected Audit waitForAuditToComplete(Audit audit) {
-            LOGGER.debug("WAIT FOR AUDIT TO COMPLETE:" + audit + "," + audit.getSubject().getURL() + "," + (long) (audit.getDateOfCreation().getTime() / 1000));
+            LOGGER.debug("WAIT FOR AUDIT TO COMPLETE:" + audit + "," + (long) (audit.getDateOfCreation().getTime() / 1000));
             Long token = new Date().getTime();
             this.getAuditExecutionList().put(audit, token);
+            // while the audit is not seen as completed or crashed
             while (!this.getAuditCompletedList().containsKey(token) && !this.getAuditCrashedList().containsKey(token)) {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(500);
                 } catch (InterruptedException ex) {
                     LOGGER.error("", ex);
                 }
@@ -573,7 +599,6 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             return null;
         }
         
-//        @Override
         protected void onActTerminated(Act act, Audit audit) {
             LOGGER.debug("act is terminated");
             this.audit = audit;
@@ -619,6 +644,45 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             super.onActTerminated(act, audit);
             sendEmail(act, getLocale());
             LOGGER.info("site audit terminated");
+        }
+
+    }
+    
+    /**
+     * Inner class in charge of launching a site audit in a thread. At the end 
+     * the audit, an email has to be sent to the user with the audit info.
+     */
+    private class AuditScenarioThread extends AuditThread {
+
+        private String scenarioName;
+        private String scenario;
+        
+        public AuditScenarioThread(
+                String scenarioName,
+                String scenario,
+                AuditService auditService,
+                Act act,
+                Set<Parameter> parameterSet, 
+                Locale locale) {
+            super(auditService, act, parameterSet, locale);
+            this.scenario = scenario;
+            this.scenarioName = scenarioName;
+        }
+
+        @Override
+        public Audit launchAudit() {
+            Audit audit = this.getAuditService().auditScenario(
+                        this.scenarioName,
+                        this.scenario,
+                        this.getParameterSet());
+            return audit;
+        }
+        
+        @Override
+        protected void onActTerminated(Act act, Audit audit) {
+            super.onActTerminated(act, audit);
+            sendEmail(act, getLocale());
+            LOGGER.info("scenario audit terminated");
         }
 
     }
@@ -735,6 +799,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
                         this.pageUrl,
                         this.getParameterSet());
             }
+            Logger.getLogger(this.getClass()).info(audit.getId());
             return audit;
         }
         
