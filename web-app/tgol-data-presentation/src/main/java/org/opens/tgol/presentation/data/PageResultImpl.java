@@ -21,9 +21,9 @@
  */
 package org.opens.tgol.presentation.data;
 
+import java.util.ResourceBundle;
 import org.opens.tgol.util.TgolEscapeUrl;
 import org.opens.tgol.util.TgolKeyStore;
-import java.util.ResourceBundle;
 
 /**
  * This class handles basics displayable data about a page result
@@ -151,10 +151,21 @@ public class PageResultImpl implements PageResult{
         this.rawMark = rawMark;
     }
 
+    private int rank;
+    @Override
+    public int getRank() {
+        return rank;
+    }
+
+    @Override
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+    
     /**
      * Default Constructor
      */
-    public PageResultImpl (String url, Float weightedMark, Float rawMark, Long webResourceId, String httpStatusCode) {
+    public PageResultImpl (String url, Integer rank,Float weightedMark, Float rawMark, Long webResourceId, String httpStatusCode) {
         pageResultUrl = representationBundle.getString(TgolKeyStore.RESULT_PAGE_NAME_KEY)+
                 REQUEST_PARAMETER+
                 webResourceId;
@@ -163,6 +174,7 @@ public class PageResultImpl implements PageResult{
         this.weightedMark = String.valueOf(Float.valueOf(weightedMark).intValue());
         this.rawMark = String.valueOf(Float.valueOf(rawMark).intValue());
         this.httpStatusCode = String.valueOf(httpStatusCode);
+        this.rank = rank;
     }
 
 }

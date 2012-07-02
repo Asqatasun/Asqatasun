@@ -21,10 +21,10 @@
  */
 package org.opens.tgol.presentation.factory;
 
-import org.opens.tgol.presentation.data.PageResult;
-import org.opens.tgol.presentation.data.PageResultImpl;
 import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
+import org.opens.tgol.presentation.data.PageResult;
+import org.opens.tgol.presentation.data.PageResultImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -80,11 +80,12 @@ public class PageResultFactory {
      */
     public PageResult getPageResult(
             String url,
+            Integer rank,
             Float weightedMark,
             Float rawMark,
             Long webResourceId,
             String httpStatusCode){
-        return new PageResultImpl(url, weightedMark, rawMark, webResourceId, httpStatusCode);
+        return new PageResultImpl(url, rank, weightedMark, rawMark, webResourceId, httpStatusCode);
     }
 
 }
