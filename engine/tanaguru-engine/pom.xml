@@ -21,6 +21,11 @@
             <version>${engineVersion}</version>
         </dependency>
         <dependency>
+            <groupId>org.opens.webdriver</groupId>
+            <artifactId>webdriver-tools</artifactId>
+            <version>${engineVersion}</version>
+        </dependency>
+        <dependency>
             <groupId>${hibernateGroupId}</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <scope>compile</scope>
