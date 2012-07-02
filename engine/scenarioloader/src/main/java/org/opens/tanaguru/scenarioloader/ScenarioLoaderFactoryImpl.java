@@ -21,11 +21,12 @@
  */
 package org.opens.tanaguru.scenarioloader;
 
+import org.opens.tanaguru.contentloader.HarFileContentLoaderFactory;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
-import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
-import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
+import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.util.factory.DateFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -34,6 +35,36 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
 
+//    private HarFileContentLoaderFactory harFileContentLoaderFactory;
+//    public HarFileContentLoaderFactory getHarFileContentLoaderFactory() {
+//        return harFileContentLoaderFactory;
+//    }
+//
+//    @Autowired
+//    public void setHarFileContentLoaderFactory(HarFileContentLoaderFactory harFileContentLoaderFactory) {
+//        this.harFileContentLoaderFactory = harFileContentLoaderFactory;
+//    }
+
+    private WebResourceDataService webResourceDataService;
+    public WebResourceDataService getWebResourceDataService() {
+        return webResourceDataService;
+    }
+
+    @Autowired
+    public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
+        this.webResourceDataService = webResourceDataService;
+    }
+    
+    private ContentDataService contentDataService;
+    public ContentDataService getContentDataService() {
+        return contentDataService;
+    }
+
+    @Autowired
+    public void setContentDataService(ContentDataService contentDataService) {
+        this.contentDataService = contentDataService;
+    }
+    
     private ContentFactory contentFactory;
     public ContentFactory getContentFactory() {
         return contentFactory;
@@ -43,44 +74,27 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
     public void setContentFactory(ContentFactory contentFactory) {
         this.contentFactory = contentFactory;
     }
-
-    private ContentDataService contentDataService;
-    @Autowired
-    public void setContentDataService (ContentDataService contentDataService) {
-        this.contentDataService = contentDataService;
-    }
-
-    private WebResourceFactory webResourceFactory;
-    public WebResourceFactory getWebResourceFactory() {
-        return webResourceFactory;
+    
+    private DateFactory dateFactory;
+    public DateFactory getDateFactory() {
+        return dateFactory;
     }
 
     @Autowired
-    public void setWebResourceFactory(WebResourceFactory webResourceFactory) {
-        this.webResourceFactory = webResourceFactory;
-    }
-
-    private WebResourceDataService webResourceDataService;
-    @Autowired
-    public void setWebResourceDataService (WebResourceDataService webResourceDataService) {
-        this.webResourceDataService = webResourceDataService;
-    }
-
-    private AuditDataService auditDataService;
-    @Autowired
-    public void setAuditDataService (AuditDataService auditDataService) {
-        this.auditDataService = auditDataService;
+    public void setDateFactory(DateFactory dateFactory) {
+        this.dateFactory = dateFactory;
     }
 
     @Override
-    public ScenarioLoader create(String scenario) {
-        return new ScenarioLoaderImpl(
-                auditDataService,
-                contentFactory,
-                contentDataService,
-                webResourceFactory,
-                webResourceDataService,
+    public ScenarioLoader create(WebResource mainWebResource, String scenario) {
+        ScenarioLoaderImpl scenarioLoader = new ScenarioLoaderImpl(
+                mainWebResource, 
                 scenario);
+        scenarioLoader.setContentDataService(contentDataService);
+        scenarioLoader.setContentFactory(contentFactory);
+        scenarioLoader.setDateFactory(dateFactory);
+        scenarioLoader.setWebResourceDataService(webResourceDataService);
+        return scenarioLoader;
     }
 
 }

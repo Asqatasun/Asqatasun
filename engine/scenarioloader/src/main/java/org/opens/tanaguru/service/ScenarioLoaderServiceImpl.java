@@ -25,6 +25,7 @@ import java.util.List;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
+import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.scenarioloader.ScenarioLoader;
 import org.opens.tanaguru.scenarioloader.ScenarioLoaderFactory;
@@ -48,6 +49,12 @@ public class ScenarioLoaderServiceImpl implements ScenarioLoaderService {
     public void setContentDataService (ContentDataService contentDataService) {
         this.contentDataService = contentDataService;
     }
+    
+    private WebResourceDataService webResourceDataService;
+    @Autowired
+    public void setWebResourceDataService (WebResourceDataService webResourceDataService) {
+        this.webResourceDataService = webResourceDataService;
+    }
 
     public ScenarioLoaderServiceImpl() {
         super();
@@ -56,14 +63,15 @@ public class ScenarioLoaderServiceImpl implements ScenarioLoaderService {
     @Override
     public List<Content> loadScenario(WebResource webResource, String scenarioFile) {
         Audit audit = webResource.getAudit();
-        ScenarioLoader scenarioLoader = scenarioLoaderFactory.create(scenarioFile);
-        scenarioLoader.setWebResource(webResource);
+        ScenarioLoader scenarioLoader = scenarioLoaderFactory.create(webResource, scenarioFile);
         scenarioLoader.run();
         List<Content> contentList = scenarioLoader.getResult();
         for (Content content : contentList) {
-            content.setAudit(audit);
+//            content.setAudit(audit);
             contentDataService.saveAuditToContent(content.getId(),audit.getId());
         }
+        // Before returning the list of content we save the webResource
+        webResourceDataService.saveOrUpdate(webResource);
         return contentList;
     }
 
