@@ -22,10 +22,9 @@
 package org.opens.tanaguru.service;
 
 import java.util.List;
+import javax.xml.bind.annotation.XmlTransient;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.subject.WebResource;
-import javax.xml.bind.annotation.XmlTransient;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.scenarioloader.ScenarioLoaderFactory;
 
 /**

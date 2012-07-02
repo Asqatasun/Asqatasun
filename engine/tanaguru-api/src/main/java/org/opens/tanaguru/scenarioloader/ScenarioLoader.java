@@ -24,10 +24,6 @@ package org.opens.tanaguru.scenarioloader;
 import java.util.List;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.subject.WebResource;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
-import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
-import org.opens.tanaguru.entity.service.audit.ContentDataService;
-import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 
 /**
  * 
@@ -45,24 +41,6 @@ public interface ScenarioLoader {
      *
      */
     void run();
-
-    /**
-     *
-     * @param contentFactory
-     */
-    void setContentFactory(ContentFactory contentFactory);
-    
-    /**
-     *
-     * @param contentFactory
-     */
-    void setContentDataService(ContentDataService contentDataService);
-
-    /**
-     *
-     * @param contentFactory
-     */
-    void setWebResourceDataService(WebResourceDataService webResourceDataService);
 
     /**
      * 

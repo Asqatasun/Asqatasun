@@ -33,6 +33,7 @@ public enum AuditStatus {
         CONTENT_ADAPTING,
         CONTENT_LOADING,
         CRAWLING,
+        SCENARIO_LOADING,
         ERROR,
         INITIALISATION,
         PROCESSING;
