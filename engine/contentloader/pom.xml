@@ -31,6 +31,16 @@
             <version>${engineVersion}</version>
         </dependency>
         <dependency>
+            <groupId>edu.umass.cs.benchlab.har</groupId>
+            <artifactId>harlib</artifactId>
+            <version>1.0b10</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.umass.cs.benchlab.har</groupId>
+            <artifactId>harlib-jackson</artifactId>
+            <version>1.0b10</version>
+        </dependency>
+        <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
             <scope>test</scope>

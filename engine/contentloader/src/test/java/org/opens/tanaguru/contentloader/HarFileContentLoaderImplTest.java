@@ -85,20 +85,13 @@ public class HarFileContentLoaderImplTest extends TestCase {
                 .andReturn(date)
                 .times(3);
         
-        Page mockPage1 = createMock(Page.class);
-        mockSite.addChild(mockPage1);
-        expectLastCall().once();
-        expect(mockPage1.getURL())
-                .andReturn(PAGE_URL)
-                .once();
-        SSP mockSSP = createMock(SSP.class);
         expect(mockContentFactory.createSSP(
                 date, 
                 PAGE_URL, 
                 contentMap.get(PAGE_URL), 
-                mockPage1, 
+                null, 
                 HttpStatus.SC_OK))
-                        .andReturn(mockSSP)
+                        .andReturn(null)
                         .once();
         
         StylesheetContent mockCss1 = createMock(StylesheetContent.class);
@@ -121,9 +114,7 @@ public class HarFileContentLoaderImplTest extends TestCase {
                         .once();
         
         replay(mockContentFactory);
-        replay(mockSSP);
         replay(mockSite);
-        replay(mockPage1);
         replay(mockDateFactory);
         replay(mockCss1);
         replay(mockCss2);
@@ -136,11 +127,9 @@ public class HarFileContentLoaderImplTest extends TestCase {
 
         instance.run();
         List result = instance.getResult();
-        assertEquals(3, result.size());
+        assertEquals(2, result.size());
         verify(mockContentFactory);
-        verify(mockSSP);
         verify(mockSite);
-        verify(mockPage1);
         verify(mockDateFactory);
         verify(mockCss1);
         verify(mockCss2);
