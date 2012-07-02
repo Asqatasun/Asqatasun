@@ -44,4 +44,15 @@ public interface TgolParameterDAO extends GenericDAO<Parameter, Long> {
             ParameterElement parameterElement,
             ScopeEnum scope);
 
+    /**
+     * 
+     * @param contract
+     * @param parameterElement
+     * @param scenarioName
+     * @return 
+     */
+    String findLastParameterValueFromContractAndScenario(
+            Long contract,
+            ParameterElement parameterElement,
+            String scenarioName);
 }

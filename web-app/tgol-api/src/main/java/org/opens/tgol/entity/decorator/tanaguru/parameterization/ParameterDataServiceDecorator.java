@@ -43,4 +43,11 @@ public interface ParameterDataServiceDecorator extends ParameterDataService {
             ParameterElement parameterElement,
             ScopeEnum scope);
 
+    /**
+     * 
+     */
+    String getLastParameterValueFromContractAndScenario(
+            Long idContract, 
+            ParameterElement parameterElement, 
+            String scenarioName);
 }
