@@ -199,4 +199,9 @@ public class MockParameterDataService implements ParameterDataServiceDecorator {
         }
     }
 
+    @Override
+    public String getLastParameterValueFromContractAndScenario(Long idContract, ParameterElement parameterElement, String scenarioName) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }
