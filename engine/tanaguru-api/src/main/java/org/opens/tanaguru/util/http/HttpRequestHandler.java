@@ -24,6 +24,9 @@ package org.opens.tanaguru.util.http;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpHost;
@@ -56,6 +59,18 @@ public class HttpRequestHandler {
         this.proxyHost = proxyHost;
     }
     
+    /**
+     * Multiple Url can be set through a unique String separated by ;
+     */
+    private List<String> proxyExclusionUrlList = new ArrayList<String>();
+    public List<String> getProxyExclusionUrlList() {
+        return proxyExclusionUrlList;
+    }
+
+    public void setProxyExclusionUrl(String proxyExclusionUrl) {
+        proxyExclusionUrlList.addAll(Arrays.asList(proxyExclusionUrl.split(";")));
+    }
+
     private int connectionTimeout = 3000;
     public void setConnectionTimeout(int connectionTimeout) {
         this.connectionTimeout = connectionTimeout;
@@ -93,7 +108,7 @@ public class HttpRequestHandler {
     }
     
     public int getHttpStatus (String url) {
-        DefaultHttpClient httpclient = getHttpClient();
+        DefaultHttpClient httpclient = getHttpClient(url);
         
         try {
             HttpHead httphead = new HttpHead(url);
@@ -118,7 +133,7 @@ public class HttpRequestHandler {
     }
     
     public String getHttpContent (String url) {
-        DefaultHttpClient httpclient = getHttpClient();
+        DefaultHttpClient httpclient = getHttpClient(url);
         try {
             HttpGet httpget = new HttpGet(url);
             Logger.getLogger(this.getClass()).debug("executing request to retrieve content on " + httpget.getURI());
@@ -141,7 +156,7 @@ public class HttpRequestHandler {
     }
     
     public int getHttpStatusFromGet (String url) {
-        DefaultHttpClient httpclient = getHttpClient();
+        DefaultHttpClient httpclient = getHttpClient(url);
         try {
             HttpGet httpget = new HttpGet(url);
             Logger.getLogger(this.getClass()).debug("executing get request to retrieve status on " + httpget.getURI());
@@ -160,9 +175,15 @@ public class HttpRequestHandler {
         }
     }
     
-    private DefaultHttpClient getHttpClient() {
+    private DefaultHttpClient getHttpClient(String url) {
         DefaultHttpClient httpclient = new DefaultHttpClient();
-        if (StringUtils.isNotEmpty(proxyPort) && StringUtils.isNotEmpty(proxyPort)) {
+        boolean isExcludedUrl=false;
+        for (String excludedUrl : proxyExclusionUrlList) {
+            if (url.contains(excludedUrl)) {
+                isExcludedUrl=true;
+            }
+        }
+        if (StringUtils.isNotEmpty(proxyPort) && StringUtils.isNotEmpty(proxyPort) && !isExcludedUrl) {
             HttpHost proxy = new HttpHost(proxyHost, Integer.valueOf(proxyPort));
             httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
         }
