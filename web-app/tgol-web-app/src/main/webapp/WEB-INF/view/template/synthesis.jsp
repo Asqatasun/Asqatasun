@@ -25,6 +25,9 @@
                         <c:when test="${statistics.auditScope == 'GROUPOFFILES' || statistics.auditScope == 'FILE'}">
                             ${statistics.url}
                         </c:when>
+                        <c:when test="${statistics.auditScope == 'SCENARIO'}">
+                            Scenario <strong>${statistics.url}</strong>
+                        </c:when>
                         <c:otherwise>
                             <a href="${statistics.url}">${statistics.url}</a>
                         </c:otherwise>
@@ -74,7 +77,14 @@
                             <c:if test="${hasSiteScopeTest == 'true'}">
                             <li><a href="<c:url value="/home/contract/audit-result.html?wr=${wr}"/>" class="large awesome blue cmt"><spring:message code="synthesisSite.siteResults"/></a></li>
                             </c:if>
-                            <li><a href="<c:url value="/home/contract/page-list.html?wr=${wr}"/>" class="large awesome blue cmt"><spring:message code="synthesisSite.pageList"/></a></li>
+                            <c:choose>
+                                <c:when test="${statistics.auditScope == 'SCENARIO'}">
+                                    <li><a href="<c:url value="/home/contract/page-list.html?wr=${wr}&amp;status=f2xx"/>" class="large awesome blue cmt"><spring:message code="synthesisSite.pageList"/></a></li>
+                                </c:when>
+                                <c:when test="${statistics.auditScope == 'DOMAIN'}">
+                                    <li><a href="<c:url value="/home/contract/page-list.html?wr=${wr}"/>" class="large awesome blue cmt"><spring:message code="synthesisSite.pageList"/></a></li>
+                                </c:when>
+                            </c:choose>
                         </ul>
                         </c:if>
                     </div>

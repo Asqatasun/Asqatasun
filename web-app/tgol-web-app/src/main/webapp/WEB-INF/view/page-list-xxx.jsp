@@ -144,6 +144,9 @@
                     </form>
                 </div><!-- class="span10 offset1" -->
             </div><!-- class="row" -->
+            <c:set var="rankTitle" scope="page">
+               <fmt:message key="pageList.rankHeader"/>
+            </c:set>
             <c:set var="urlTitle" scope="page">
                <fmt:message key="pageList.urlHeader"/>
             </c:set>
@@ -189,15 +192,16 @@
                 </c:otherwise>
                 </c:choose>
                 <display:caption>${summary}</display:caption>
-                <display:column property="url" autolink="true" title="${urlTitle}" headerClass="col01" class="col01" headerScope="col"/>
+                <display:column property="rank" title="${rankTitle}" headerClass="col01" class="col01" headerScope="col"/>
+                <display:column property="url" autolink="true" title="${urlTitle}" headerClass="col02" class="col02" headerScope="col"/>
             <c:choose>
                 <c:when test="${param.status == 'f2xx'}">
-                    <display:column property="rawMark" title="${rawMarkTitle}" headerClass="col02" class="col02" headerScope="col"/>
-                    <display:column property="weightedMark" title="${weigthedMarkTitle}" headerClass="col03" class="col03" headerScope="col"/>
-                    <display:column property="detailedResultLink" title="${detailedResultTitle}" headerClass="col04" class="col04" headerScope="col"/>
+                    <display:column property="rawMark" title="${rawMarkTitle}" headerClass="col03" class="col03" headerScope="col"/>
+                    <display:column property="weightedMark" title="${weigthedMarkTitle}" headerClass="col04" class="col04" headerScope="col"/>
+                    <display:column property="detailedResultLink" title="${detailedResultTitle}" headerClass="col05" class="col05" headerScope="col"/>
                 </c:when>
                 <c:otherwise>
-                    <display:column property="httpStatusCode" title="${httpStatusCodeTitle}" headerClass="col02" class="col02" headerScope="col"/>
+                    <display:column property="httpStatusCode" title="${httpStatusCodeTitle}" headerClass="col03" class="col03" headerScope="col"/>
                 </c:otherwise>
             </c:choose>
                 </display:table>

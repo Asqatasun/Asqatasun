@@ -16,9 +16,12 @@
                 <c:when test="${auditSetUpCommand.scope == 'FILE'}">
                     <c:set var="action" scope="page" value="upload"/>
                 </c:when>
+                <c:when test="${auditSetUpCommand.scope == 'SCENARIO'}">
+                    <c:set var="action" scope="page" value="scenario"/>
+                </c:when>
             </c:choose>
                 
-            <c:if test="${action != 'site'}">
+            <c:if test="${action != 'site' && action != 'scenario'}">
             <div class="span14 offset1">
                 <div id="mandatory-elements-message" class="alert-message block-message warning">
                     <spring:message code="sign-up.mandatoryElementsMessage"/>
@@ -36,6 +39,11 @@
                         <div>
                             <form:hidden path="contractId"/>
                             <form:hidden path="scope"/>
+                            <c:if test="${action == 'scenario'}">
+                                <form:hidden path="scenario"/>
+                                <form:hidden path="scenarioId"/>
+                                <form:hidden path="scenarioName"/>
+                            </c:if>
                         </div>
                     <c:choose>
                         <c:when test="${action == 'page'}">
