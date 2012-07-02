@@ -20,10 +20,10 @@
  * Contact us by mail: open-s AT open-s DOT com
  */package org.opens.tanaguru.entity.subject;
 
-import org.opens.tanaguru.sdk.entity.Entity;
 import java.util.Collection;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.sdk.entity.Entity;
 
 /**
  * 
@@ -61,6 +61,12 @@ public interface WebResource extends Entity {
      * @return the mark
      */
     float getMark();
+    
+    /**
+     *
+     * @return the rank
+     */
+    int getRank();
 
     /**
      *
@@ -107,6 +113,13 @@ public interface WebResource extends Entity {
      *            the mark to set
      */
     void setMark(float mark);
+    
+    /**
+     *
+     * @param mark
+     *            the rank to set
+     */
+    void setRank(int rank);
 
     /**
      *

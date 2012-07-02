@@ -155,6 +155,8 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         }
     }
 
+    int pageRankCounter = 1;
+
     public CrawlerImpl() {
         super();
     }
@@ -232,6 +234,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
 
     @Override
     public void run() {
+        pageRankCounter = 1;
         this.crawlJob.setContentWriter(this);
         this.crawlJob.launchCrawlJob();
         removeOrphanContent();
@@ -350,6 +353,8 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         } else {
             page = webResourceDataService.createPage(curi.getURI());
             page.setParent((Site) mainWebResource);
+            page.setRank(pageRankCounter);
+            pageRankCounter++;
             return saveAndCreateSSPFromPage(curi, charset, page, sourceCode);
         }
     }

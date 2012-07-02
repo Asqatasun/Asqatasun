@@ -55,22 +55,24 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     private static final long serialVersionUID = 5534153976635867531L;
     @OneToOne
     @JoinColumn(name = "Id_Audit", nullable = true)
-    protected AuditImpl audit;
+    private AuditImpl audit;
     @Id
     @GeneratedValue
     @Column(name = "Id_Web_Resource")
-    protected Long id;
+    private Long id;
     @Column(name = "Label")
-    protected String label;
+    private String label;
     @ManyToOne
     @JoinColumn(name = "Id_Web_Resource_Parent")
-    protected SiteImpl parent;
+    private SiteImpl parent;
     @Column(name = "Url", length=2048, nullable = false)
-    protected String url;
+    private String url;
     @OneToMany(mappedBy = "subject")
-    protected Set<ProcessResultImpl> processResultList = new LinkedHashSet<ProcessResultImpl>();
+    private Set<ProcessResultImpl> processResultList = new LinkedHashSet<ProcessResultImpl>();
     @Column(name = "Mark")
-    protected float mark;
+    private float mark;
+    @Column(name = "Rank", nullable = false)
+    private int rank = 0;
 
     public WebResourceImpl() {
         super();
@@ -95,6 +97,11 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     @Override
     public float getMark() {
         return mark;
+    }
+    
+    @Override
+    public int getRank() {
+        return rank;
     }
 
     @Override
@@ -126,10 +133,15 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     public void setMark(float mark) {
         this.mark = mark;
     }
-
+    
     @Override
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    @Override
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 
     @Override
