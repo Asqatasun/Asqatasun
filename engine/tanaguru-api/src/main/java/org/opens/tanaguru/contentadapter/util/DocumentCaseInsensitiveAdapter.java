@@ -134,11 +134,11 @@ public abstract class DocumentCaseInsensitiveAdapter {
                     return html;
                }
         }
-
+        
         int doctypeEndTagPtr = html.indexOf('>', doctypeBeginTagPtr);
         StringBuilder cleanHtmlWithoutDoctype = new StringBuilder();
         if (doctypeBeginTagPtr > 0) {
-            cleanHtmlWithoutDoctype.append(html, 0, doctypeBeginTagPtr-1);
+            cleanHtmlWithoutDoctype.append(html, 0, doctypeBeginTagPtr);
         }
         cleanHtmlWithoutDoctype.append(
                 html, doctypeEndTagPtr+1, html.length()-1);
