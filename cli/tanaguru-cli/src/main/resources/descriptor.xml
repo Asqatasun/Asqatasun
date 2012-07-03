@@ -76,6 +76,15 @@
         <fileSet>
             <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/sql</directory>
             <includes>
+                <include>tanaguru-10-add_rank_field_to_webresource_table.sql</include>
+                <include>tanaguru-20-foreign_keys-constraints.sql</include>
+            </includes>
+            <fileMode>755</fileMode>
+            <outputDirectory>/install/sql-update</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/sql-update</directory>
+            <includes>
                 <include>tgol-20-create-tables.sql</include>
                 <include>tgol-30-insert.sql</include>
             </includes>
