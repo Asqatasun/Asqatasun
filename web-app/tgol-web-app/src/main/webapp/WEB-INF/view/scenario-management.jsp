@@ -59,7 +59,7 @@
             </div><!-- class="row" -->
             <div class="row">
                 <c:if test="${newScenarioName != null}">
-                <div class="span16 alert-message block-message info">
+                <div class="span15 alert-message block-message info">
                     <fmt:message key="scenarioManagement.addScenarioPositiveMsg">
                         <fmt:param>${newScenarioName}</fmt:param>
                     </fmt:message>

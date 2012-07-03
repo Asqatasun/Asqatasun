@@ -68,7 +68,7 @@
                 <div class="span14 offset1">
                     <div class="alert-message block-message warning">
                         <fmt:message key="auditSetUp.keptLastAuditParameters">
-                            <fmt:param>${url}</fmt:param>
+                            <fmt:param>${scenario.label}</fmt:param>
                         </fmt:message>
                     </div><!-- class="alert-message warning" -->
                 </div><!-- class="span14 offset1" -->
