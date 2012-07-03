@@ -634,8 +634,8 @@ footer {
 #act-list-table .col03 { /* mark */
     text-align: right;
 }
-#act-list-table .col04 { /* weighted mark */
-    text-align: right;
+#act-list-table .col04 { /* referential */
+    text-align: left;
 }
 #act-list-table .col05 { /* scope */
     text-align: left;

@@ -127,5 +127,19 @@ public interface ActInfo {
      * @param status
      */
     public void setStatus(String status);
+    
+    /**
+     * 
+     * @return 
+     * 
+     *      the referential of the current act
+     */
+    public String getReferential();
+    
+    /**
+     * 
+     * @param referential 
+     */
+    public void setReferential(String referential);
 
 }

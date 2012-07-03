@@ -204,7 +204,7 @@
                                 <th id="page-url" scope="col" class="col01"><fmt:message key="contract.pageUrl"/></th>
                                 <th id="date" scope="col" class="col02"><fmt:message key="contract.date"/></th>
                                 <th id="raw-mark" scope="col" class="col03"><fmt:message key="contract.rawMark"/></th>
-                                <th id="weighted-mark" scope="col" class="col04"><fmt:message key="contract.weightedMark"/></th>
+                                <th id="referential" scope="col" class="col04"><fmt:message key="referential"/></th>
                                 <th id="scope" scope="col" class="col05"><fmt:message key="contract.scope"/></th>
                                 <th id="status" scope="col" class="col06"><fmt:message key="contract.status"/></th>
                                 <th id="result-page-url" scope="col" class="col07"><fmt:message key="pageList.pageDetailedResult"/></th>
@@ -241,19 +241,8 @@
                                             </c:otherwise>
                                     </c:choose>
                                 </td>
-                                <td headers="weighted-mark" class="col04">
-                                    <c:choose>
-                                        <c:when test="${actInfo.status == 'COMPLETED'}">
-                                            <c:set var="mark" scope="page" value="${actInfo.weightedMark}"/>
-                                            <c:set var="scoreClass" scope="page" value=""/>
-                                            <c:set var="displayWeightedMark" scope="page" value="false"/>
-                                            <c:set var="addSpanToDiv" scope="page" value="false"/>
-                                    <%@include file="template/score.jsp" %>
-                                        </c:when>
-                                        <c:otherwise>
-                                        <div> -- </div>
-                                        </c:otherwise>
-                                    </c:choose>
+                                <td headers="referential" class="col04">
+                                    <fmt:message key="${actInfo.referential}"/>
                                 </td>
                                 <td headers="scope" class="col05"><fmt:message key="${actInfo.scope}"/></td>
                                 <td headers="status" class="col06"><fmt:message key="${actInfo.status}"/></td>

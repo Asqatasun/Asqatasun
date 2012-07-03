@@ -21,17 +21,20 @@
  */
 package org.opens.tgol.presentation.factory;
 
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import org.apache.commons.lang.StringUtils;
+import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.audit.AuditStatus;
+import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tgol.entity.contract.Act;
+import org.opens.tgol.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
 import org.opens.tgol.entity.decorator.tanaguru.subject.WebResourceDataServiceDecorator;
 import org.opens.tgol.presentation.data.ActInfo;
 import org.opens.tgol.presentation.data.ActInfoImpl;
 import org.opens.tgol.util.TgolKeyStore;
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.entity.audit.AuditStatus;
-import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -50,6 +53,12 @@ public final class ActInfoFactory {
     @Autowired
     public void setWebResourceDataService(WebResourceDataServiceDecorator webResourceDataServiceDecorator) {
         this.webResourceDataService = webResourceDataServiceDecorator;
+    }
+    
+    private ParameterDataServiceDecorator parameterDataService;
+    @Autowired
+    public void setParameterDataService(ParameterDataServiceDecorator parameterDataServiceDecorator) {
+        this.parameterDataService = parameterDataServiceDecorator;
     }
 
     /**
@@ -88,8 +97,9 @@ public final class ActInfoFactory {
             } else {
                 actInfo.setStatus(TgolKeyStore.ERROR_UNKNOWN_KEY);
             }
+            setActInfoReferential(actInfo, audit);
         }
-
+        
         return actInfo;
     }
 
@@ -99,6 +109,15 @@ public final class ActInfoFactory {
             actInfoSet.add(getActInfo(act));
         }
         return actInfoSet;
+    }
+
+    private void setActInfoReferential(ActInfo actInfo, Audit audit) {
+        Set<Parameter> parameterSet = parameterDataService.getParameterSetFromAudit(audit);
+        for (Parameter param : parameterSet) {
+            if (StringUtils.equals(param.getParameterElement().getParameterElementCode(), "LEVEL")) {
+                actInfo.setReferential(param.getValue().split(";")[0]);
+            }
+        }
     }
 
 }

@@ -21,8 +21,8 @@
  */
 package org.opens.tgol.presentation.data;
 
-import org.opens.tgol.util.TgolEscapeUrl;
 import java.util.Date;
+import org.opens.tgol.util.TgolEscapeUrl;
 
 /**
  *
@@ -113,6 +113,17 @@ public class ActInfoImpl implements ActInfo{
     @Override
     public void setStatus(String status){
         this.status = status;
+    }
+
+    private String referential;
+    @Override
+    public String getReferential() {
+        return referential;
+    }
+
+    @Override
+    public void setReferential(String referential) {
+        this.referential = referential;
     }
 
 }
