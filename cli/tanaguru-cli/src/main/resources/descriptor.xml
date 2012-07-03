@@ -83,7 +83,7 @@
             <outputDirectory>/update/sql-update</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/sql-update</directory>
+            <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/sql</directory>
             <includes>
                 <include>tgol-20-create-tables.sql</include>
                 <include>tgol-30-insert.sql</include>
