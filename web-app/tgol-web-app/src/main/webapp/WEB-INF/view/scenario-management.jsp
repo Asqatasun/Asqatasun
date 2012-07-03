@@ -142,7 +142,6 @@
                                 <th id="label" scope="col" class="col01"><fmt:message key="scenarioManagement.label"/></th>
                                 <th id="date" scope="col" class="col02"><fmt:message key="scenarioManagement.date"/></th>
                                 <th id="launch" scope="col" class="col03"><fmt:message key="scenarioManagement.launch"/></th>
-                                <th id="see" scope="col" class="col04"><fmt:message key="scenarioManagement.seeAudit"/></th>
                                 <th id="download" scope="col" class="col05"><fmt:message key="scenarioManagement.download"/></th>
                                 <th id="delete" scope="col" class="col06"><fmt:message key="scenarioManagement.delete"/></th>
                             </tr>
@@ -164,16 +163,6 @@
                                 <td headers="launch" class="col03">
                                     <a href="<c:url value="/home/contract/audit-scenario-set-up.html?cr=${param.cr}&amp;sc=${scenario.id}"/>" title="${launchTitle}">
                                         <fmt:message key="scenarioManagement.launch"/>
-                                    </a>
-                                </td>
-                                <c:set var="seeAuditTitle">
-                                    <fmt:message key="scenarioManagement.seeAuditTitle">
-                                        <fmt:param>${scenario.label}</fmt:param>
-                                    </fmt:message>
-                                </c:set>
-                                <td headers="see" class="col04">
-                                    <a href="<c:url value="/home/contract/show-scenario.html?cr=${param.cr}&amp;sc=${scenario.id}"/>" title="${seeAuditTitle}">
-                                        <fmt:message key="scenarioManagement.seeAudit"/>
                                     </a>
                                 </td>
                                 <c:set var="downloadLinkTitle">
@@ -205,7 +194,6 @@
                 <c:otherwise>
                 <div class="span8">
                     <fmt:message key="scenarioManagement.noScenario"/>
-                    <c:set var="expanded" scope="page" value="_expanded"/>
                 </div><!-- class="span16"-->
                 </c:otherwise>
             </c:choose>
