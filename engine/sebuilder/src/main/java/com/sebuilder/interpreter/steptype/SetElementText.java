@@ -20,11 +20,12 @@ import com.sebuilder.interpreter.StepType;
 import com.sebuilder.interpreter.TestRun;
 import org.openqa.selenium.WebElement;
 
-public class SendKeysToElement implements StepType {
+public class SetElementText implements StepType {
 	@Override
 	public boolean run(TestRun ctx) {
             WebElement webElement = ctx.locator("locator").find(ctx);
             webElement.click();
+            webElement.clear();
             webElement.sendKeys(ctx.string("text"));
             return true;
 	}
