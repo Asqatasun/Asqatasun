@@ -1,9 +1,12 @@
 -- -----------------------------------------------------------------
 -- Creation of contract with Url, Functionalities and Referentials
 -- -----------------------------------------------------------------
-use tgTest;
+use $myDatabaseName;
+
+DROP PROCEDURE IF EXISTS create_contract;
+
 delimiter |
-CREATE DEFINER=`tgTest`@`localhost` PROCEDURE `create_contract`(
+CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `create_contract`(
 IN idUser INT, 
 IN label VARCHAR(255), 
 IN url VARCHAR(1024), 
