@@ -93,7 +93,7 @@
                             </c:if>
                             <c:choose>
                                 <c:when test="${statistics.auditScope == 'SCENARIO'}">
-                                    <li><a href="<c:url value="/home/contract/page-list.html?wr=${wr}&amp;status=f2xx"/>" class="large awesome blue cmt"><spring:message code="synthesisSite.pageList"/></a></li>
+                                    <li><a href="<c:url value="/home/contract/page-list.html?wr=${wr}&amp;status=f2xx&amp;sortDirection=1&amp;sortCriterion=rank"/>" class="large awesome blue cmt"><spring:message code="synthesisSite.pageList"/></a></li>
                                 </c:when>
                                 <c:when test="${statistics.auditScope == 'DOMAIN'}">
                                     <li><a href="<c:url value="/home/contract/page-list.html?wr=${wr}"/>" class="large awesome blue cmt"><spring:message code="synthesisSite.pageList"/></a></li>

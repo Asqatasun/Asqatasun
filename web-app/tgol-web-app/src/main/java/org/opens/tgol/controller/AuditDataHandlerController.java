@@ -369,6 +369,7 @@ public abstract class AuditDataHandlerController extends AbstractController {
         model.addAttribute(TgolKeyStore.AUTHORIZED_PAGE_SIZE_KEY, authorizedPageSize);
         model.addAttribute(TgolKeyStore.AUTHORIZED_SORT_CRITERION_KEY, authorizedSortCriterion);
         setFromToValues(paginatedList, model);
+        addAuditStatisticsToModel(site, model);
         return (returnRedirectView) ? TgolKeyStore.PAGE_LIST_XXX_VIEW_REDIRECT_NAME : TgolKeyStore.PAGE_LIST_XXX_VIEW_NAME;
     }
 

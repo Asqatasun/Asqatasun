@@ -192,18 +192,34 @@
                 </c:otherwise>
                 </c:choose>
                 <display:caption>${summary}</display:caption>
-                <display:column property="rank" title="${rankTitle}" headerClass="col01" class="col01" headerScope="col"/>
-                <display:column property="url" autolink="true" title="${urlTitle}" headerClass="col02" class="col02" headerScope="col"/>
-            <c:choose>
-                <c:when test="${param.status == 'f2xx'}">
-                    <display:column property="rawMark" title="${rawMarkTitle}" headerClass="col03" class="col03" headerScope="col"/>
-                    <display:column property="weightedMark" title="${weigthedMarkTitle}" headerClass="col04" class="col04" headerScope="col"/>
-                    <display:column property="detailedResultLink" title="${detailedResultTitle}" headerClass="col05" class="col05" headerScope="col"/>
-                </c:when>
-                <c:otherwise>
-                    <display:column property="httpStatusCode" title="${httpStatusCodeTitle}" headerClass="col03" class="col03" headerScope="col"/>
-                </c:otherwise>
-            </c:choose>
+                <c:choose>
+                    <c:when test="${statistics.auditScope == 'SCENARIO'}">
+                        <display:column property="rank" title="${rankTitle}" headerClass="rankCol" class="rankCol" headerScope="col"/>
+                        <display:column property="url" autolink="true" title="${urlTitle}" headerClass="urlCol" class="urlCol" headerScope="col"/>
+                        <c:choose>
+                            <c:when test="${param.status == 'f2xx'}">
+                                <display:column property="rawMark" title="${rawMarkTitle}" headerClass="markCol" class="markCol" headerScope="col"/>
+                                <display:column property="detailedResultLink" title="${detailedResultTitle}" headerClass="linkCol" class="linkCol" headerScope="col"/>
+                            </c:when>
+                            <c:otherwise>
+                                <display:column property="httpStatusCode" title="${httpStatusCodeTitle}" headerClass="statusCol" class="statusCol" headerScope="col"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:when>
+                    <c:otherwise>
+                        <display:column property="url" autolink="true" title="${urlTitle}" headerClass="urlCol" class="urlCol" headerScope="col"/>
+                        <c:choose>
+                            <c:when test="${param.status == 'f2xx'}">
+                                <display:column property="rawMark" title="${rawMarkTitle}" headerClass="markCol" class="markCol" headerScope="col"/>
+                                <display:column property="rank" title="${rankTitle}" headerClass="rankCol" class="rankCol" headerScope="col"/>
+                                <display:column property="detailedResultLink" title="${detailedResultTitle}" headerClass="linkCol" class="linkCol" headerScope="col"/>
+                            </c:when>
+                            <c:otherwise>
+                                <display:column property="httpStatusCode" title="${httpStatusCodeTitle}" headerClass="statusCol" class="statusCol" headerScope="col"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:otherwise>
+                </c:choose>    
                 </display:table>
                 </div>
             </div><!-- class="span15 offset1"-->

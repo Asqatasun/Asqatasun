@@ -73,9 +73,17 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <c:choose>
+                                <c:when test="${statistics.auditScope == 'DOMAIN'}">
+                                    <c:set var="pageList2xxUrl" value="?wr=${param.wr}&amp;status=f2xx"/>
+                                </c:when>
+                                <c:when test="${statistics.auditScope == 'SCENARIO'}">
+                                    <c:set var="pageList2xxUrl" value="?wr=${param.wr}&amp;status=f2xx&amp;sortCriterion=rank&amp;sortDirection=1"/>
+                                </c:when>
+                            </c:choose>
                             <tr>
                                 <td class="col01" headers="httpStatus">
-                                    <a href="?wr=${param.wr}&amp;status=f2xx"><fmt:message key="pageList.f2xx"/></a> <fmt:message key="pageList.f2xxDetails"/>
+                                    <a href="${pageList2xxUrl}"><fmt:message key="pageList.f2xx"/></a> <fmt:message key="pageList.f2xxDetails"/>
                                 </td>
                                 <td class="col02" headers="nbOfPages">${auditedPagesCount}</td>
                             </tr>

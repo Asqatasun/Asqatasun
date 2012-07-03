@@ -175,7 +175,7 @@ public class PageListController extends AuditDataHandlerController{
         getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getUrlSortCriterion());
         if (status.equalsIgnoreCase(HttpStatusCodeFamily.f2xx.name())) {
             getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getDefault2xxSortCriterion());
-            getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getWeightedMarkCriterion());
+            getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getUrlSortCriterion());
             getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getRankCriterion());
             return HttpStatusCodeFamily.f2xx;
         } else if (status.equalsIgnoreCase(HttpStatusCodeFamily.f3xx.name())) {

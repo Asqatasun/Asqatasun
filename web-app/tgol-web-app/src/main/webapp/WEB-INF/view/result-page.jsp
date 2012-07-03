@@ -63,7 +63,15 @@
                     </c:set>
                 <li><a href="<c:url value="/home/contract/audit-synthesis.html?wr=${pwr}"/>">${auditSynthesisName}</a> <span class="divider"></span></li>
                 <li><a href="<c:url value="/home/contract/page-list.html?wr=${pwr}"/>"><fmt:message key="pageList.h1"/></a> <span class="divider"></span></li>
-                <li><a href="<c:url value="/home/contract/page-list.html?wr=${pwr}&amp;status=f2xx"/>"><fmt:message key="pageList.f2xx.h1"/></a> <span class="divider"></span></li>
+                <c:choose>
+                    <c:when test="${statistics.auditScope == 'DOMAIN'}">
+                        <c:set var="pageList2xxUrl" value="/home/contract/page-list.html?wr=${pwr}&amp;status=f2xx"/>
+                    </c:when>
+                    <c:when test="${statistics.auditScope == 'SCENARIO'}">
+                        <c:set var="pageList2xxUrl" value="/home/contract/page-list.html?r=${pwr}&amp;status=f2xx&amp;sortCriterion=rank&amp;sortDirection=1"/>
+                    </c:when>
+                </c:choose>
+                <li><a href="<c:url value="${pageList2xxUrl}"/>"><fmt:message key="pageList.f2xx.h1"/></a> <span class="divider"></span></li>
                 </c:if>
                 <li class="active">${pageName}</li>
             </ul>
