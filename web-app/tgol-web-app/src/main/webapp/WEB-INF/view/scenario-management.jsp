@@ -126,7 +126,7 @@
                     <fmt:message key="scenarioManagement.myScenario"/>
                 </h2>
                 <c:if test="${deletedScenarioName != null}">
-                <div class="span16 alert-message block-message info">
+                <div class="span15 alert-message block-message info">
                     <fmt:message key="scenarioManagement.deletedScenarioPositiveMsg">
                         <fmt:param>${deletedScenarioName}</fmt:param>
                     </fmt:message>

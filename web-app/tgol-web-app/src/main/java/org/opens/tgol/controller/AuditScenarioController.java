@@ -198,13 +198,22 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
                     deleteScenario(scenario, contract);
                     model.addAttribute(TgolKeyStore.DELETED_SCENARIO_NAME_KEY, scenario.getLabel());
                     prepareScenarioManagementData(model, contractId);
-                    return TgolKeyStore.SCENARIO_MANAGEMENT_VIEW_REDIRECT_NAME;
+                    return TgolKeyStore.SCENARIO_MANAGEMENT_VIEW_NAME;
                 }
             }
             throw new ForbiddenPageException(getCurrentUser());
         } else {
             throw new ForbiddenPageException(getCurrentUser());
         }
+    }
+    
+    @RequestMapping(value = TgolKeyStore.DELETE_SCENARIO_URL_CONTRACT_URL, method = RequestMethod.POST)
+    public String addScenarioFromDeleteScenarioPage(
+            @ModelAttribute(TgolKeyStore.ADD_SCENARIO_COMMAND_KEY) AddScenarioCommand addScenarioCommand,
+            BindingResult result,
+            Model model,
+            HttpServletRequest request) {
+        return this.addScenario(addScenarioCommand, result, model, request);
     }
 
     @RequestMapping(value = TgolKeyStore.AUDIT_SCENARIO_SET_UP_CONTRACT_URL, method = RequestMethod.GET)
