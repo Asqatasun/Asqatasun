@@ -187,19 +187,34 @@ public class AnalyserImpl implements Analyser {
      * @return
      */
     private WebResourceStatistics computeAuditStatistics (WebResourceStatistics wrStatistics) {
-        wrStatistics.setNbOfPassed(webResourceStatisticsDataService.
+        int nbOfPassed = webResourceStatisticsDataService.
                     getResultCountByResultType(webResource.getId(),
-                    TestSolution.PASSED).intValue());
-        wrStatistics.setNbOfFailed(webResourceStatisticsDataService.
+                    TestSolution.PASSED).intValue();
+        
+        int nbOfFailed = webResourceStatisticsDataService.
                     getResultCountByResultType(webResource.getId(),
-                    TestSolution.FAILED).intValue());
-        wrStatistics.setNbOfInvalidTest(wrStatistics.getNbOfFailed());
-        wrStatistics.setNbOfNmi(webResourceStatisticsDataService.
+                    TestSolution.FAILED).intValue();
+        
+        int nbOfNmi = webResourceStatisticsDataService.
                     getResultCountByResultType(webResource.getId(),
-                    TestSolution.NEED_MORE_INFO).intValue());
-        wrStatistics.setNbOfNa(webResourceStatisticsDataService.
+                    TestSolution.NEED_MORE_INFO).intValue();
+        
+        int nbOfNa = webResourceStatisticsDataService.
                     getResultCountByResultType(webResource.getId(),
-                    TestSolution.NOT_APPLICABLE).intValue());
+                    TestSolution.NOT_APPLICABLE).intValue();
+        // if no test have been processed for any reason, mostly cause the source
+        // code couldn't have been adapted, all theses values are set to -1
+        
+        if (nbOfFailed+nbOfNa+nbOfNmi+nbOfPassed == 0) {
+            nbOfFailed = nbOfNa = nbOfNmi = nbOfPassed = -1;
+        }
+        
+        wrStatistics.setNbOfFailed(nbOfFailed);
+        wrStatistics.setNbOfInvalidTest(nbOfFailed);
+        wrStatistics.setNbOfPassed(nbOfPassed);
+        wrStatistics.setNbOfNmi(nbOfNmi);
+        wrStatistics.setNbOfNa(nbOfNa);
+        
         wrStatistics.setAudit(audit);
         return wrStatistics;
     }
@@ -214,6 +229,11 @@ public class AnalyserImpl implements Analyser {
      */
     public WebResourceStatistics computeMark(WebResourceStatistics wrStatistics) {
         float passed = wrStatistics.getNbOfPassed();
+        // page on error, mark set to -1
+        if (passed == -1) {
+            wrStatistics.setRawMark(Float.valueOf(-1));
+            return wrStatistics;
+        }
         float failed = wrStatistics.getNbOfFailed();
         float needMoreInfo = wrStatistics.getNbOfNmi();
         if (needMoreInfo == 0 && failed ==0 && passed==0) {
@@ -235,6 +255,11 @@ public class AnalyserImpl implements Analyser {
      */
     public WebResourceStatistics computeRawMark(WebResourceStatistics wrStatistics) {
         float passed = wrStatistics.getNbOfPassed();
+        // page on error, mark set to -1
+        if (passed == -1) {
+            wrStatistics.setRawMark(Float.valueOf(-1));
+            return wrStatistics;
+        }
         float failed = wrStatistics.getNbOfFailed();
         if (failed ==0 && passed==0) {
             wrStatistics.setRawMark(Float.valueOf(0));

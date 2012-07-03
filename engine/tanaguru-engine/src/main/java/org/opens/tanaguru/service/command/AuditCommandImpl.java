@@ -26,6 +26,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.contentadapter.AdaptationListener;
 import org.opens.tanaguru.entity.audit.*;
@@ -237,7 +238,8 @@ public abstract class AuditCommandImpl implements AuditCommand {
                                             i, 
                                             ADAPTATION_TREATMENT_WINDOW, 
                                             beginProcessDate, 
-                                            false);
+                                            false, 
+                                            true);
             if (LOGGER.isDebugEnabled()) {
                 endRetrieveDate = Calendar.getInstance().getTime();
             }
@@ -304,7 +306,8 @@ public abstract class AuditCommandImpl implements AuditCommand {
             Long startValue, 
             int windowSize,
             Date beginProcessDate, 
-            boolean getContentWithRelatedContent) {
+            boolean getContentWithRelatedContent, 
+            boolean getContentWithNullDom) {
 
         List<Content> contentList = new ArrayList<Content>();
         
@@ -328,7 +331,11 @@ public abstract class AuditCommandImpl implements AuditCommand {
             } else {
                 content = contentDataService.read(id);
             }
-            if (content != null) {
+            if (content != null && 
+                    ( getContentWithNullDom || 
+                        (!getContentWithNullDom 
+                            && content instanceof SSP 
+                            && StringUtils.isNotEmpty(((SSP)content).getDOM())))) {
                 contentList.add(content);
             }
         }
@@ -438,7 +445,8 @@ public abstract class AuditCommandImpl implements AuditCommand {
                                             i, 
                                             PROCESSING_TREATMENT_WINDOW, 
                                             beginProcessDate, 
-                                            true);
+                                            true, 
+                                            false);
             processResultSet.clear();
             processResultSet.addAll(processorService.process(contentList, (List<Test>) audit.getTestList()));
             for (ProcessResult processResult : processResultSet) {
