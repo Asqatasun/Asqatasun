@@ -1,4 +1,4 @@
-use $DATABASE_NAME;
+use $myDatabaseName;
 
 -- -----------------------------------------------------
 -- Add unique pair index on TGSI_ACT_WEB_RESOURCE TABLE
@@ -282,7 +282,7 @@ SELECT CONTRACT_Id_Contract, RESTRICTION_Id_Restriction FROM TGSI_CONTRACT_RESTR
 -- Creation of relation between contract and Url (through Option)
 -- -----------------------------------------------------------------
 delimiter |
-CREATE DEFINER=`tanaguru`@`localhost` PROCEDURE `create_contract_option_from_restriction`()
+CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `create_contract_option_from_restriction`()
 BEGIN
 
   DECLARE done INT DEFAULT 0;
@@ -308,12 +308,13 @@ END  |
 delimiter ;
 
 call create_contract_option_from_restriction();
+drop procedure create_contract_option_from_restriction;
 
 -- -----------------------------------------------------------------
 -- Creation of relation between contract and Functionality
 -- -----------------------------------------------------------------
 delimiter |
-CREATE DEFINER=`tanaguru`@`localhost` PROCEDURE `create_contract_functionality`()
+CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `create_contract_functionality`()
 BEGIN
 
   DECLARE done INT DEFAULT 0;
@@ -386,12 +387,13 @@ SET done = 0;
 END |
 delimiter ;
 call create_contract_functionality();
+drop procedure create_contract_functionality;
 
 -- -----------------------------------------------------------------
 -- Creation of relation between contract and referential
 -- -----------------------------------------------------------------
 delimiter |
-CREATE DEFINER=`tanaguru`@`localhost` PROCEDURE `create_contract_referential`()
+CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `create_contract_referential`()
 BEGIN
 
   DECLARE done INT DEFAULT 0;
@@ -412,6 +414,7 @@ BEGIN
 END |
 
 call create_contract_referential();
+drop procedure create_contract_referential;
 
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -438,9 +441,6 @@ DROP TABLE TGSI_RESTRICTION;
 TRUNCATE TABLE TGSI_RESTRICTION_ELEMENT;
 DROP TABLE TGSI_RESTRICTION_ELEMENT;
 
-ALTER TABLE CONTENT
-MODIFY Binary_Content MEDIUMBLOB NULL DEFAULT NULL,
-MODIFY Uri    VARCHAR(4096)
+ALTER TABLE CONTENT MODIFY Binary_Content MEDIUMBLOB NULL DEFAULT NULL, MODIFY Uri    VARCHAR(4096);
 
-ALTER TABLE WEB_RESOURCE
-MODIFY Url    VARCHAR(4096)
+ALTER TABLE WEB_RESOURCE MODIFY Url VARCHAR(4096);
