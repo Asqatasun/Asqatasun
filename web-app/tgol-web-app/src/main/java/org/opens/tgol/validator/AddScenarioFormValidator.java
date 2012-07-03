@@ -155,8 +155,12 @@ public class AddScenarioFormValidator implements Validator {
             IO.read(addScenarioCommand.getScenarioContent());
         } catch (JSONException je) {
             errors.rejectValue(SCENARIO_FILE_KEY, INVALID_SCENARIO_MSG_BUNDLE_KEY);
+            errors.rejectValue(GENERAL_ERROR_MSG_KEY,
+                    MANDATORY_FIELD_MSG_BUNDLE_KEY);
         } catch (IOException ex) {
             errors.rejectValue(SCENARIO_FILE_KEY, INVALID_SCENARIO_MSG_BUNDLE_KEY);
+            errors.rejectValue(GENERAL_ERROR_MSG_KEY,
+                    MANDATORY_FIELD_MSG_BUNDLE_KEY);
         }
     }
     

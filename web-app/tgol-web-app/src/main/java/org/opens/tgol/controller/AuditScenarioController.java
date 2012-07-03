@@ -142,8 +142,9 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
         // and the same page with updated data is displayed again
         if (!result.hasErrors()) {
             saveScenario(addScenarioCommand, contract);
-            contract = getContractDataService().read(addScenarioCommand.getContractId());
             model.addAttribute(TgolKeyStore.NEW_SCENARIO_NAME_KEY, addScenarioCommand.getScenarioLabel());
+            prepareScenarioManagementData(model, addScenarioCommand.getContractId().toString());
+            return TgolKeyStore.SCENARIO_MANAGEMENT_VIEW_NAME;
         }
         
         addScenarioListToModel(contract, model);
