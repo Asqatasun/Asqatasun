@@ -6,60 +6,60 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>1.6.0-SNAPSHOT</version>
+        <version>2.0.0-RC1</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>rules-testing-tools</artifactId>
     <packaging>jar</packaging>
-    <version>1.6.0-SNAPSHOT</version>
+    <version>2.0.0-RC1</version>
     <name>rules-testing-tools</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-api</artifactId>
-            <version>${engineVersion}</version>
+            <version>2.0.0-RC1</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>nomenclatureloader</artifactId>
-            <version>${engineVersion}</version>
+            <version>2.0.0-RC1</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>rule-implementation-loader</artifactId>
-            <version>${engineVersion}</version>
+            <version>2.0.0-RC1</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>persistence</artifactId>
-            <version>${engineVersion}</version>
+            <version>2.0.0-RC1</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>crawler</artifactId>
-            <version>${engineVersion}</version>
+            <version>2.0.0-RC1</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>contentloader</artifactId>
-            <version>${engineVersion}</version>
+            <version>2.0.0-RC1</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>contentadapter</artifactId>
-            <version>${engineVersion}</version>
+            <version>2.0.0-RC1</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>processor</artifactId>
-            <version>${engineVersion}</version>
+            <version>2.0.0-RC1</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>consolidator</artifactId>
-            <version>${engineVersion}</version>
+            <version>2.0.0-RC1</version>
         </dependency>
         <dependency>
             <groupId>${springGroupId}</groupId>
