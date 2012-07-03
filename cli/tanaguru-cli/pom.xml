@@ -112,6 +112,12 @@
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
+            <artifactId>scenarioloader</artifactId>
+            <version>${engineVersion}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-api</artifactId>
             <version>${engineVersion}</version>
             <scope>compile</scope>
