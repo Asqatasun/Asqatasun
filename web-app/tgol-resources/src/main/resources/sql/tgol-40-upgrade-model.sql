@@ -412,10 +412,9 @@ BEGIN
 
 
 END |
-
+delimiter ;
 call create_contract_referential();
 drop procedure create_contract_referential;
-
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
