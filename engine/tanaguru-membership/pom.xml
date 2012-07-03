@@ -12,13 +12,13 @@
     <groupId>${engineGroupId}</groupId>
     <artifactId>tanaguru-membership</artifactId>
     <name>tanaguru-membership</name>
-    <version>${engineVersion}</version>
+    <version>2.0.0-RC1</version>
     <url>http://www.tanaguru.org</url>
     <dependencies>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>commons-entity-jpa</artifactId>
-            <version>${engineVersion}</version>
+            <version>2.0.0-RC1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
