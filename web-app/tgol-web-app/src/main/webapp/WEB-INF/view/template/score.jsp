@@ -55,11 +55,11 @@
             <c:if test="${displayWeightedMark == 'true'}">
                 <span class="weighted-mark-label"> <fmt:message key="resultPage.weightedMark"/> </span>
                 <span class="${weightedScoreClass} ${weightedMarkGrade}">${weightedMark}%</span>
-                <c:if test="${hasScoreFormulaLink == 'true'}">
-                <span id="score-formula">
-                    <a href="<fmt:message key="resultPage.scoreFormulaLinkURL"/>"><fmt:message key="resultPage.scoreFormulaLinkText"/></a>
-                </span>
-                </c:if>
+            </c:if>
+            <c:if test="${hasScoreFormulaLink == 'true'}">
+            <span id="score-formula">
+                <a href="<fmt:message key="resultPage.scoreFormulaLinkURL"/>"><fmt:message key="resultPage.scoreFormulaLinkText"/></a>
+            </span>
             </c:if>
             <c:if test="${hasProgressInfo == 'true'}">
                 <c:choose>

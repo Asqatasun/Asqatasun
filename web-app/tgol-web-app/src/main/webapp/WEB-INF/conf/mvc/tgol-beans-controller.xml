@@ -62,6 +62,7 @@
         <property name="authorizedScopeForPageList">
             <list>
                 <value>DOMAIN</value>
+                <value>SCENARIO</value>
             </list>
         </property>
         <property name="actionHandler" ref="resultActionHandler"/>
