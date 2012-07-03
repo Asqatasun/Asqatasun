@@ -6,13 +6,13 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>1.6.0-SNAPSHOT</version>
+        <version>2.0.0-RC1</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>scenarioloader</artifactId>
     <name>scenarioloader</name>
-    <version>1.6.0-SNAPSHOT</version>
+    <version>2.0.0-RC1</version>
     <url>http://www.tanaguru.org</url>
     <build>
         <testResources>
@@ -35,12 +35,12 @@
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-api</artifactId>
-            <version>${engineVersion}</version>
+            <version>2.0.0-RC1</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>crawler</artifactId>
-            <version>${engineVersion}</version>
+            <version>2.0.0-RC1</version>
         </dependency>
         <dependency>
             <groupId>org.easymock</groupId>
@@ -50,7 +50,7 @@
         <dependency>
             <groupId>org.opens.webdriver</groupId>
             <artifactId>webdriver-tools</artifactId>
-            <version>${engineVersion}</version>
+            <version>2.0.0-RC1</version>
         </dependency>
         <dependency>
             <groupId>org.easymock</groupId>
@@ -60,7 +60,7 @@
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>contentloader</artifactId>
-            <version>${engineVersion}</version>
+            <version>2.0.0-RC1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
