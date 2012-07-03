@@ -82,7 +82,11 @@
                             </div>
                             </spring:hasBindErrors>
                             <form:hidden path="contractId"/>
-                            <div class="clearfix">
+                            <c:set var="scenarioLabelError"><form:errors path="scenarioLabel"/></c:set>
+                            <c:if test="${not empty scenarioLabelError}">
+                                <c:set var="scenarioLabelErrorClass" value="error"/>
+                            </c:if>
+                            <div class="clearfix ${scenarioLabelErrorClass}">
                                 <c:set var="scenarioLabel">
                                     <fmt:message key="scenarioManagement.scenarioName"/>
                                 </c:set>
@@ -94,7 +98,11 @@
                                     <form:errors path="scenarioLabel" cssClass="alert-message error" />
                                 </div>
                             </div>
-                            <div class="clearfix">
+                            <c:set var="scenarioFileError"><form:errors path="scenarioFile"/></c:set>
+                            <c:if test="${not empty scenarioFileError}">
+                                <c:set var="scenarioLabelFileClass" value="error"/>
+                            </c:if>
+                            <div class="clearfix ${scenarioLabelFileClass}">
                                 <c:set var="scenarioFile">
                                     <fmt:message key="scenarioManagement.scenarioFile"/>
                                 </c:set>

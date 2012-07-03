@@ -1381,8 +1381,8 @@ audit-result-menu-actions a {
 
 
 /*
-    page : scenario management
+  page : scenario management
 */
-#add-scenario-form .alert-message {
-    margin-left: 10px;
+.scenario-file-input .alert-message {
+    margin-left: 7em;
 }

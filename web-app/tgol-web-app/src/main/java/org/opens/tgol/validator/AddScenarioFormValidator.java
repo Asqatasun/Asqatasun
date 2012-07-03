@@ -54,7 +54,7 @@ public class AddScenarioFormValidator implements Validator {
     protected static final Logger LOGGER = Logger.getLogger(AddScenarioFormValidator.class);
     protected static final String GENERAL_ERROR_MSG_KEY = "generalErrorMsg";
     protected static final String MANDATORY_FIELD_MSG_BUNDLE_KEY =
-            "required.mandatoryField";
+            "scenarioManagement.mandatoryFieldOnError";
     private static final String SCENARIO_FILE_KEY = "scenarioFile";
     private static final String SCENARIO_LABEL_KEY = "scenarioLabel";
     private static final String FILE_SIZE_EXCEEDED_MSG_BUNDLE_KEY =
@@ -134,6 +134,8 @@ public class AddScenarioFormValidator implements Validator {
             scenarioLabelSet.add(scenario.getLabel());
         }
         if (scenarioLabelSet.contains(addScenarioCommand.getScenarioLabel())) {
+            errors.rejectValue(GENERAL_ERROR_MSG_KEY,
+                    MANDATORY_FIELD_MSG_BUNDLE_KEY);
             errors.rejectValue(SCENARIO_LABEL_KEY,
                     SCENARIO_LABEL_EXISTS_MSG_BUNDLE_KEY);
             return false;
@@ -182,23 +184,32 @@ public class AddScenarioFormValidator implements Validator {
             if (cmf.getSize() > maxFileSize) {
                 Long maxFileSizeInMega = maxFileSize / 1000000;
                 String[] arg = {maxFileSizeInMega.toString()};
+                errors.rejectValue(GENERAL_ERROR_MSG_KEY,
+                        MANDATORY_FIELD_MSG_BUNDLE_KEY);
                 errors.rejectValue(SCENARIO_FILE_KEY, FILE_SIZE_EXCEEDED_MSG_BUNDLE_KEY, arg, "{0}");
                 return false;
             } else if (cmf.getSize() > 0) {
                 mime = mimeTypes.detect(new BufferedInputStream(cmf.getInputStream()), metadata).toString();
                 LOGGER.debug("mime  " + mime + "  " + cmf.getOriginalFilename());
                 if (!authorizedMimeType.contains(mime)) {
+                    errors.rejectValue(GENERAL_ERROR_MSG_KEY,
+                        MANDATORY_FIELD_MSG_BUNDLE_KEY);
                     errors.rejectValue(SCENARIO_FILE_KEY, NOT_SCENARIO_MSG_BUNDLE_KEY);
+                    return false;
                 }
             } else {
                 LOGGER.debug("File with size null");
                 errors.rejectValue(GENERAL_ERROR_MSG_KEY,
+                    MANDATORY_FIELD_MSG_BUNDLE_KEY);
+                errors.rejectValue(SCENARIO_FILE_KEY,
                     NO_SCENARIO_UPLOADED_MSG_BUNDLE_KEY);
                 return false;
             }
         } catch (IOException ex) {
             LOGGER.warn(ex);
             errors.rejectValue(SCENARIO_FILE_KEY, NOT_SCENARIO_MSG_BUNDLE_KEY);
+            errors.rejectValue(GENERAL_ERROR_MSG_KEY,
+                    MANDATORY_FIELD_MSG_BUNDLE_KEY);
             return false;
         }
         return true;
