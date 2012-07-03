@@ -30,6 +30,7 @@ if [ -z "$SiteLabel" ] || [ -z "$URL" ] || [ -z "$UserId" ] || [ -z "$Functs" ] 
         echo "     - f1 -> Up to 10 pages Audit"
         echo "     - f2 -> Site Audit "
         echo "     - f3 -> File upload Audit "
+        echo "     - f4 -> Scenario Audit "
         echo "  The \"r\" option represents the referential and can take several values from :"
         echo "     - r1 -> Accessiweb 2.1"
         echo "     - r2 -> Seo "
@@ -52,6 +53,7 @@ done
 funct1=NULL;
 funct2=NULL;
 funct3=NULL;
+funct4=NULL;
 for funct in $Functs;do
    if [ $funct = "f1" ];
      then 
@@ -65,6 +67,10 @@ for funct in $Functs;do
      then 
         funct3=3;
    fi
+   if [ $funct = "f4" ];
+     then 
+        funct4=4;
+   fi
 done   
 
 echo $ref1;
@@ -72,7 +78,8 @@ echo $ref2;
 echo $funct1;
 echo $funct2;
 echo $funct3;
-echo "create_contract($UserId, "$SiteLabel", "$URL", $funct1, $funct2, $funct3, $ref1, $ref2);"
+echo $funct4;
+echo "create_contract($UserId, "$SiteLabel", "$URL", $funct1, $funct2, $funct3, $funct4, $ref1, $ref2);"
 mysql -u $DbUser -p$DbUserPasswd $DbName -e "
-call create_contract($UserId, \"$SiteLabel\", \"$URL\", $ref1, $ref2, $funct1, $funct2, $funct3);
+call create_contract($UserId, \"$SiteLabel\", \"$URL\", $ref1, $ref2, $funct1, $funct2, $funct3, $funct4);
 "
