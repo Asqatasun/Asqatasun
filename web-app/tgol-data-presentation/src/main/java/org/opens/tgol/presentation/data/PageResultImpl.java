@@ -171,8 +171,13 @@ public class PageResultImpl implements PageResult{
                 webResourceId;
         this.id = webResourceId;
         this.url = url;
-        this.weightedMark = String.valueOf(Float.valueOf(weightedMark).intValue());
-        this.rawMark = String.valueOf(Float.valueOf(rawMark).intValue());
+        if (rawMark < 0) {
+            this.weightedMark = "-1";
+            this.rawMark = "-1";
+        } else {
+            this.weightedMark = String.valueOf(Float.valueOf(weightedMark).intValue());
+            this.rawMark = String.valueOf(Float.valueOf(rawMark).intValue());
+        }
         this.httpStatusCode = String.valueOf(httpStatusCode);
         this.rank = rank;
     }

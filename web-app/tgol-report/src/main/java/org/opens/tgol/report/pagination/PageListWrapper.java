@@ -42,6 +42,7 @@ public class PageListWrapper extends TableDecorator {
     private static final String PAGE_DETAILED_RESULT_KEY="pageList.pageDetailedResult";
     private static final String NO_DETAILED_RESULT_KEY="pageList.noDetailedResult";
     private static final String FOR_KEY="pageList.for";
+    private static final String NOT_TESTED = "pageList.notTested";
     private static final char PERCENT_CHAR='%';
 
     /**
@@ -58,11 +59,11 @@ public class PageListWrapper extends TableDecorator {
      */
     public String getRawMark() {
         Object lObject = this.getCurrentRowObject();
-        if (lObject instanceof PageResult){
+        if (lObject instanceof PageResult && !((PageResult)lObject).getRawMark().equalsIgnoreCase("-1")){
             String gradeClass = getGradeClassFromMark(((PageResult)lObject).getRawMark());
             return "<div class=\""+gradeClass+"\"> " + ((PageResult)lObject).getRawMark() + PERCENT_CHAR + " </div>";
         }
-        return "";
+        return getLang(this.getPageContext().getRequest()).getString(NOT_TESTED);
     }
     
     /**
@@ -72,7 +73,7 @@ public class PageListWrapper extends TableDecorator {
      */
     public String getWeightedMark() {
         Object lObject = this.getCurrentRowObject();
-        if (lObject instanceof PageResult){
+        if (lObject instanceof PageResult && !((PageResult)lObject).getWeightedMark().equalsIgnoreCase("-1")){
             String gradeClass = getGradeClassFromMark(((PageResult)lObject).getWeightedMark());
             return "<div class=\""+gradeClass+"\"> " + ((PageResult)lObject).getWeightedMark() + PERCENT_CHAR + " </div>";
         }
@@ -96,7 +97,7 @@ public class PageListWrapper extends TableDecorator {
             url = pageResult.getUrl();
             mark = pageResult.getRawMark();
         }
-        if (Integer.valueOf(mark) != 0 ) {
+        if (Integer.valueOf(mark) > 0 ) {
             return "<a href=\"audit-result.html?wr=" + lId + "\" title=\""+ getTitle(resourceBundle, url)+"\">"+getLink(resourceBundle)+"</a>";
         } else {
             return getNoDetailedResult(resourceBundle);
