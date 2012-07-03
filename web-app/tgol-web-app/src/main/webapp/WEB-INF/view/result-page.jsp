@@ -92,6 +92,7 @@
             <c:set var="hasResultDispatchTitle" scope="request" value="false"/>
             <c:set var="themeRepartitionWidth" scope="request" value="690"/>
             <c:set var="hasPieChartInGraphicalResult" scope="request" value="true"/>
+            <c:set var="addLinkToSourceCode" scope="request" value="true"/>
             <c:import url="template/synthesis.jsp" />
             <c:import url="template/sort-result-console.jsp" />
             <c:set var="displayAlgorithm" scope="request" value="true"/>

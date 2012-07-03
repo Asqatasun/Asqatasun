@@ -33,6 +33,20 @@
                         </c:otherwise>
                     </c:choose>
                         </div>
+                        <c:if test="${addLinkToSourceCode == 'true'}">
+                        <c:set var="sourceCodeLinkTitle" scope="page">
+                            <fmt:message key="resultPage.sourceCodeLinkTitle">
+                                <fmt:param>
+                                    ${statistics.url}
+                                </fmt:param>
+                            </fmt:message>
+                        </c:set>
+                        <div class="page-source-code-link">    
+                            <a href="<c:url value="/home/contract/source-code-page.html?wr=${param.wr}"/>" title="${sourceCodeLinkTitle}" target="_blank">
+                                <fmt:message key="resultPage.sourceCodeLink"/>
+                            </a>
+                        </div>
+                        </c:if>
                         <div class="project-creation-date">
                             <fmt:message key="contract.createdOn"/> : <fmt:formatDate type="date" value="${statistics.date}" dateStyle="long"/> <fmt:formatDate type="time" value="${statistics.date}"/>
                         </div>
@@ -69,7 +83,7 @@
                         <c:set var="weightedMark" scope="page" value="${statistics.weightedMark}"/>
                         <c:set var="scoreClass" scope="page" value="audit-score"/>
                         <c:set var="weightedScoreClass" scope="page" value="audit-weighted-score"/>
-                        <c:set var="displayWeightedMark" scope="page" value="true"/>
+                        <c:set var="displayWeightedMark" scope="page" value="false"/>
                         <c:set var="hasScoreFormulaLink" scope="page" value="true"/>
                         <%@include file="../template/score.jsp" %>
                         <c:if test="${hasPagesListLink == 'true'}">
