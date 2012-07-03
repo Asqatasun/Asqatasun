@@ -34,9 +34,9 @@
     <import resource="classpath:conf/context/beans-processor.xml"/>
     <import resource="classpath:conf/context/beans-reference.xml"/>
     <import resource="classpath:conf/context/beans-ruleimplementationloader.xml"/>
+    <import resource="classpath:conf/context/beans-scenarioloader.xml"/>
     <import resource="classpath:conf/context/beans-statistics.xml"/>
     <import resource="classpath:conf/context/beans-tanaguru.xml"/>
-
 
 </beans>
 

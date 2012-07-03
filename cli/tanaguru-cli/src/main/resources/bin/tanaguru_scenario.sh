@@ -58,7 +58,7 @@ usage()
 {
 cat << EOF
 
-Usage : ./bin/tanaguru.sh [OPTIONS] [URL...]
+Usage : ./bin/tanaguru_scenario.sh [OPTIONS] SCENARIO_FILE_PATH
 
 OPTIONS:
    -h      Show this message
@@ -66,7 +66,7 @@ OPTIONS:
    -l      Audit Level (Default Silver, can be set to Or(Gold Level), Ar(Silver Level) or Bz (Bronze Level)
 
 ARGUMENTS:
-   URL : from 1 to 10 Url separated by blank. Each url has to start with 'http://'
+   SCENARIO_FILE_PATH : The path of the file that handles the scenario
 
 EOF
 }
@@ -126,75 +126,16 @@ fi
 if [ $# -lt 1 ] ; then
     usage
     exit 1
-elif [ ! -z $RESULT_PATH_DIR ] && [ -z $AUDIT_LEVEL ] && [ $# -gt 12 ] ; then
-    echo ""
-    echo "Too many Urls"
-    usage
-    exit 1
-elif [ ! -z $RESULT_PATH_DIR ] && [ -z $AUDIT_LEVEL ] && [ $# -lt 3 ] ; then
-    echo ""
-    echo "Too few Urls"
-    usage
-    exit 1
-elif [ -z $RESULT_PATH_DIR ] && [ ! -z $AUDIT_LEVEL ] && [ $# -gt 12 ] ; then
-    echo ""
-    echo "Too many Urls"
-    usage
-    exit 1
-elif [ -z $RESULT_PATH_DIR ] && [ ! -z $AUDIT_LEVEL ] && [ $# -lt 3 ] ; then
-    echo ""
-    echo "Too few Urls"
-    usage
-    exit 1
-elif [ ! -z $RESULT_PATH_DIR ] && [ ! -z $AUDIT_LEVEL ] && [ $# -gt 14 ] ; then
-    echo ""
-    echo "Too many Urls"
-    usage
-    exit 1
-elif [ ! -z $RESULT_PATH_DIR ] && [ ! -z $AUDIT_LEVEL ] && [ $# -lt 5 ] ; then
-    echo ""
-    echo "Too few Urls"
-    usage
-    exit 1
-elif [ -z $RESULT_PATH_DIR ] && [ -z $AUDIT_LEVEL ] && [ $# -gt 10 ] ; then
-    echo ""
-    echo "Too many Urls"
+elif [ $# -gt 12 ] ; then
     usage
     exit 1
 else
+    SCENARIO_FILE_PATH=$1
     index=1
-    for i in $*; do
-        if [ -z $RESULT_PATH_DIR ] && [ -z $AUDIT_LEVEL ] && [ $(echo $i | sed 's%http://%%') != $i ] ; then
-	    URL_ARGS=$i';'$URL_ARGS
-        elif [ ! -z $RESULT_PATH_DIR ] && [ ! -z $AUDIT_LEVEL ] && [ $index -gt 4 ] && [ $(echo $i | sed 's%http://%%') != $i ] ; then
-	    URL_ARGS=$i';'$URL_ARGS
-        elif [ ! -z $RESULT_PATH_DIR ] && [ -z $AUDIT_LEVEL ] && [ $index -gt 2 ] && [ $(echo $i | sed 's%http://%%') != $i ] ; then
-	    URL_ARGS=$i';'$URL_ARGS
-        elif [ -z $RESULT_PATH_DIR ] && [ ! -z $AUDIT_LEVEL ] && [ $index -gt 2 ] && [ $(echo $i | sed 's%http://%%') != $i ] ; then
-	    URL_ARGS=$i';'$URL_ARGS
-	elif [ -z $RESULT_PATH_DIR ] && [ -z $AUDIT_LEVEL ] ; then
-            echo "1"
-	    echo "The Url $i does not start with 'http://'"
-            usage
-            exit 1
-	elif [ ! -z $RESULT_PATH_DIR ] && [ ! -z $AUDIT_LEVEL ] && [ $index -gt 4 ] ; then
-            echo "2"
-	    echo "The Url $i does not start with 'http://'"
-            usage
-            exit 1
-	elif [ ! -z $RESULT_PATH_DIR ] && [  -z $AUDIT_LEVEL ] && [ $index -gt 2 ] ; then
-            echo "3"
-	    echo "The Url $i does not start with 'http://'"
-            usage
-            exit 1
-	elif [ -z $RESULT_PATH_DIR ] && [ ! -z $AUDIT_LEVEL ] && [ $index -gt 2 ] ; then
-            echo "4"
-	    echo "The Url $i does not start with 'http://'"
-            usage
-            exit 1
-	fi
-	let index+=1
-    done;
+    if [ ! -e $SCENARIO_FILE_PATH ] ; then
+	usage
+        exit 1
+    fi
 fi
 
 ##################
@@ -213,10 +154,10 @@ if [ ! -z $RESULT_PATH_DIR ] ; then
     file=${file#file:///}
     file=${file%%/*}
 
-    $LAUNCH_TANAGURU online $URL_ARGS $TANAGURU_PATH $AUDIT_LEVEL > $RESULT_PATH_DIR/$file-$DATE_SUFFIX.txt
+    $LAUNCH_TANAGURU scenario $SCENARIO_FILE_PATH $TANAGURU_PATH $AUDIT_LEVEL > $RESULT_PATH_DIR/$file-$DATE_SUFFIX.txt
     echo "see @ $RESULT_PATH_DIR/$file-$DATE_SUFFIX.txt for results"
     exit 0
 else
-    $LAUNCH_TANAGURU online $URL_ARGS $TANAGURU_PATH $AUDIT_LEVEL
+    $LAUNCH_TANAGURU scenario $SCENARIO_FILE_PATH $TANAGURU_PATH $AUDIT_LEVEL
     exit 0
 fi
