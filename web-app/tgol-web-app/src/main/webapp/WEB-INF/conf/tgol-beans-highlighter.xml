@@ -9,6 +9,7 @@
         <property name="highlighterUrl" value="${highlighterLocation}" />
         <property name="proxyHost" value="${proxyHost}"/>
         <property name="proxyPort" value="${proxyPort}"/>
+<!--        <property name="timeout" value="10000"/>-->
     </bean>
 
 </beans>

@@ -24,11 +24,11 @@ package org.opens.tgol.util;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import org.apache.log4j.Logger;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -53,7 +53,15 @@ public final class TgolHighlighter {
     private static final String HIGHLIGHTER_SOCKET_TIMEOUT = "http.socket.timeout";
     private static final String HIGHLIGHTER_CONNECTION_TIMEOUT =
             "http.connection.timeout";
-    private static final int TIMEOUT = 3000;
+    
+    private int timeout = 10000;
+    public int getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
+    }
 
     private String highlighterUrl;
     public String getHighlighterUrl() {
@@ -134,10 +142,10 @@ public final class TgolHighlighter {
         source.append(sourceCode);
         HttpClient httpclient = new HttpClient();
         httpclient.getParams().setParameter(
-            HIGHLIGHTER_SOCKET_TIMEOUT, TIMEOUT);
+            HIGHLIGHTER_SOCKET_TIMEOUT, timeout);
         httpclient = setProxy(httpclient);
         httpclient.getParams().setParameter(
-            HIGHLIGHTER_CONNECTION_TIMEOUT, TIMEOUT);
+            HIGHLIGHTER_CONNECTION_TIMEOUT, timeout);
         PostMethod post = new PostMethod(highlighterUrl);
         //Geshi needs 3 parameters to process :
         // the "submit" parameter to emulate the form validation
