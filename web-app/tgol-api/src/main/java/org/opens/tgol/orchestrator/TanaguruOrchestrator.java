@@ -110,8 +110,7 @@ public interface TanaguruOrchestrator {
      */
     void auditScenario(
             Contract contract,
-            String scenarioName,
-            String scenario,
+            Long idScenario, 
             String clientIp,
             Set<Parameter> parameterSet, 
             Locale locale);

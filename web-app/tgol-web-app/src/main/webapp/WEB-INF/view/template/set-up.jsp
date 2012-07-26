@@ -40,7 +40,6 @@
                             <form:hidden path="contractId"/>
                             <form:hidden path="scope"/>
                             <c:if test="${action == 'scenario'}">
-                                <form:hidden path="scenario"/>
                                 <form:hidden path="scenarioId"/>
                                 <form:hidden path="scenarioName"/>
                             </c:if>

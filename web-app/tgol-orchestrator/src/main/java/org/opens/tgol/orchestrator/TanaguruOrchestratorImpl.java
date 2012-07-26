@@ -36,8 +36,10 @@ import org.opens.tanaguru.service.AuditServiceListener;
 import org.opens.tgol.emailsender.EmailSender;
 import org.opens.tgol.entity.contract.*;
 import org.opens.tgol.entity.factory.contract.ActFactory;
+import org.opens.tgol.entity.scenario.Scenario;
 import org.opens.tgol.entity.service.contract.ActDataService;
 import org.opens.tgol.entity.service.contract.ScopeDataService;
+import org.opens.tgol.entity.service.scenario.ScenarioDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
@@ -50,6 +52,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
     private static final Logger LOGGER = Logger.getLogger(TanaguruOrchestratorImpl.class);
     private AuditService auditService;
     private ActDataService actDataService;
+    private ScenarioDataService scenarioDataService;
     private ActFactory actFactory;
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
     private Map<ScopeEnum, Scope> scopeMap = new EnumMap<ScopeEnum, Scope>(ScopeEnum.class);
@@ -140,11 +143,13 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             ActDataService actDataService,
             ActFactory actFactory,
             ScopeDataService scopeDataService,
+            ScenarioDataService scenarioDataService, 
             ThreadPoolTaskExecutor threadPoolTaskExecutor,
             EmailSender emailSender) {
         this.auditService = auditService;
         this.actDataService = actDataService;
         this.actFactory = actFactory;
+        this.scenarioDataService = scenarioDataService;
         initializeScopeMap(scopeDataService);
         this.threadPoolTaskExecutor = threadPoolTaskExecutor;
         this.emailSender = emailSender;
@@ -239,24 +244,26 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
     @Override
     public void auditScenario(
             Contract contract,
-            String scenarioName,
-            String scenario,
+            Long idScenario,
+//            String scenarioName,
+//            String scenario,
             String clientIp,
             Set<Parameter> parameterSet, 
             Locale locale) {
         LOGGER.info("auditScenario");
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Scenario " + scenario);
+            LOGGER.debug("Scenario id " + idScenario);
             for (Parameter param : parameterSet) {
                 LOGGER.debug("param " + param.getValue() + " "+
                         param.getParameterElement().getParameterElementCode());
             }
         }
         Act act = createAct(contract, ScopeEnum.SCENARIO, clientIp);
+        Scenario scenario = scenarioDataService.read(idScenario);
         AuditThread auditScenarioThread =
                 new AuditScenarioThread(
-                    scenarioName,
-                    scenario,
+                    scenario.getLabel(),
+                    scenario.getContent(),
                     auditService,
                     act,
                     parameterSet, 

@@ -26,6 +26,7 @@ import org.opens.tgol.emailsender.EmailSender;
 import org.opens.tgol.entity.factory.contract.ActFactory;
 import org.opens.tgol.entity.service.contract.ActDataService;
 import org.opens.tgol.entity.service.contract.ScopeDataService;
+import org.opens.tgol.entity.service.scenario.ScenarioDataService;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**
@@ -43,6 +44,7 @@ public final class TanaguruOrchestratorFactory {
             AuditService auditService,
             ActDataService actDataService,
             ActFactory actFactory,
+            ScenarioDataService scenarioDataService,
             ScopeDataService scopeDataService,
             ThreadPoolTaskExecutor threadPoolTaskExecutor,
             EmailSender emailSender) {
@@ -51,6 +53,7 @@ public final class TanaguruOrchestratorFactory {
                 actDataService,
                 actFactory,
                 scopeDataService,
+                scenarioDataService,
                 threadPoolTaskExecutor,
                 emailSender);
     }

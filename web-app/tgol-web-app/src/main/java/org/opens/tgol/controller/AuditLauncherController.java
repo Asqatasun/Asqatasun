@@ -37,6 +37,7 @@ import org.opens.tgol.command.AuditSetUpCommand;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.contract.ScopeEnum;
 import org.opens.tgol.entity.option.OptionElement;
+import org.opens.tgol.entity.scenario.Scenario;
 import org.opens.tgol.exception.LostInSpaceException;
 import org.opens.tgol.orchestrator.TanaguruOrchestrator;
 import org.opens.tgol.util.HttpStatusCodeFamily;
@@ -181,8 +182,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
             } else if (auditScope.equals(ScopeEnum.SCENARIO)) {
                 tanaguruExecutor.auditScenario(
                     contract,
-                    auditSetUpCommand.getScenarioName(),
-                    auditSetUpCommand.getScenario(),
+                    auditSetUpCommand.getScenarioId(),
                     getClientIpAddress(),
                     getUserParamSet(auditSetUpCommand, contract.getId(),-1,url),
                     locale

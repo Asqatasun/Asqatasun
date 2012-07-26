@@ -221,7 +221,6 @@ public final class AuditSetUpCommandFactory {
         scenarioAuditSetUpCommand.setScope(ScopeEnum.SCENARIO);
         Scenario scenario= scenarioDataService.read(Long.valueOf(scenarioId));
         scenarioAuditSetUpCommand.setScenarioName(scenario.getLabel());
-        scenarioAuditSetUpCommand.setScenario(scenario.getContent());
         scenarioAuditSetUpCommand.setScenarioId(scenario.getId());
         setUpAuditSetUpCommand(
                 scenarioAuditSetUpCommand,
