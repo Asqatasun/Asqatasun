@@ -96,6 +96,15 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         this.siteResultUrlSuffix = siteResultUrlSuffix;
     }
     
+    private String scenarioResultUrlSuffix;
+    public String getScenarioResultUrlSuffix() {
+        return scenarioResultUrlSuffix;
+    }
+
+    public void setScenarioResultUrlSuffix(String scenarioResultUrlSuffix) {
+        this.scenarioResultUrlSuffix = scenarioResultUrlSuffix;
+    }
+    
     private String pageResultUrlSuffix;
     public String getPageResultUrlSuffix() {
         return pageResultUrlSuffix;
@@ -245,8 +254,6 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
     public void auditScenario(
             Contract contract,
             Long idScenario,
-//            String scenarioName,
-//            String scenario,
             String clientIp,
             Set<Parameter> parameterSet, 
             Locale locale) {
@@ -400,6 +407,8 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             strb.append(groupResultUrlSuffix);
         } else if (scope.equals(ScopeEnum.FILE) || scope.equals(ScopeEnum.PAGE)) {
             strb.append(pageResultUrlSuffix);
+        } else if (scope.equals(ScopeEnum.SCENARIO)) {
+            strb.append(scenarioResultUrlSuffix);
         }
         strb.append(act.getWebResource().getId());
         return strb.toString();
