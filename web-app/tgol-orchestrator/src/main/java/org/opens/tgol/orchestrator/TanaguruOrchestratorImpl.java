@@ -346,16 +346,24 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         String emailFrom = bundle.getString(RECIPIENT_KEY);
         Set<String> emailToSet = new HashSet<String>();
         emailToSet.add(emailTo);
+        StringBuilder projectName = new StringBuilder();
+        projectName.append(act.getContract().getLabel());
+        if (act.getScope().getCode().equals(ScopeEnum.SCENARIO)) {
+            projectName.append(" - ");
+            // the name of the scenario is persisted on engine's side as the URL
+            // of the parent WebResource
+            projectName.append(act.getWebResource().getURL());
+        }
         if (act.getStatus().equals(ActStatus.COMPLETED)) {
-            String emailSubject = bundle.getString(SUCCESS_SUBJECT_KEY).replaceAll(PROJECT_NAME_TO_REPLACE, act.getContract().getLabel());
+            String emailSubject = bundle.getString(SUCCESS_SUBJECT_KEY).replaceAll(PROJECT_NAME_TO_REPLACE, projectName.toString());
             StringBuilder emailMessage = new StringBuilder();
-            emailMessage.append(computeSuccessfulMessageOnActTerminated(act, bundle));
+            emailMessage.append(computeSuccessfulMessageOnActTerminated(act, bundle, projectName.toString()));
             emailSender.sendEmail(emailFrom, emailToSet, emailSubject, emailMessage.toString());
             LOGGER.debug("success email sent to " + emailTo);
         } else if (act.getStatus().equals(ActStatus.ERROR)) {
-            String emailSubject = bundle.getString(ERROR_SUBJECT_KEY).replaceAll(PROJECT_NAME_TO_REPLACE, act.getContract().getLabel());
+            String emailSubject = bundle.getString(ERROR_SUBJECT_KEY).replaceAll(PROJECT_NAME_TO_REPLACE, projectName.toString());
             StringBuilder emailMessage = new StringBuilder();
-            emailMessage.append(computeFailureMessageOnActTerminated(act, bundle));
+            emailMessage.append(computeFailureMessageOnActTerminated(act, bundle, projectName.toString()));
             emailSender.sendEmail(emailFrom, emailToSet, emailSubject, emailMessage.toString());
             LOGGER.debug("error email sent " + emailTo);
         }
@@ -367,11 +375,11 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
      * @param bundle
      * @return
      */
-    private String computeSuccessfulMessageOnActTerminated(Act act, ResourceBundle bundle) {
+    private String computeSuccessfulMessageOnActTerminated(Act act, ResourceBundle bundle, String projectName) {
         String messageContent =
                     bundle.getString(SUCCESS_MSG_CONTENT_KEY).
                     replaceAll(URL_TO_REPLACE, buildResultUrl(act));
-        return messageContent.replaceAll(PROJECT_NAME_TO_REPLACE, act.getContract().getLabel());
+        return messageContent.replaceAll(PROJECT_NAME_TO_REPLACE, projectName);
     }
 
     /**
@@ -380,7 +388,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
      * @param bundle
      * @return
      */
-    private String computeFailureMessageOnActTerminated(Act act, ResourceBundle bundle) {
+    private String computeFailureMessageOnActTerminated(Act act, ResourceBundle bundle, String projectName) {
         String messageContent;
         if (act.getScope().getCode().equals(ScopeEnum.DOMAIN)) {
             messageContent = bundle.getString(SITE_ERROR_MSG_CONTENT_KEY);
@@ -389,7 +397,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             messageContent = messageContent.replaceAll(PROJECT_URL_TO_REPLACE, buildContractUrl(act.getContract()));
         }
         messageContent = messageContent.replaceAll(URL_TO_REPLACE, buildResultUrl(act));
-        return messageContent.replaceAll(PROJECT_NAME_TO_REPLACE, act.getContract().getLabel());
+        return messageContent.replaceAll(PROJECT_NAME_TO_REPLACE, projectName);
     }
 
     /**
