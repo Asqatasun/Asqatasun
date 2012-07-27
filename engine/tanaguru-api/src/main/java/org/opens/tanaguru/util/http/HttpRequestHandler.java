@@ -23,11 +23,15 @@
 package org.opens.tanaguru.util.http;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.URIException;
+import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -40,6 +44,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.params.HttpParams;
 import org.apache.log4j.Logger;
+import org.archive.net.UURIFactory;
 
 /**
  *
@@ -47,6 +52,7 @@ import org.apache.log4j.Logger;
  */
 public class HttpRequestHandler {
     
+    private static final String UTF8_ENCODING_KEY = "UTF-8";
     private static HttpRequestHandler httpRequestHandler; 
     
     private String proxyPort;
@@ -108,20 +114,20 @@ public class HttpRequestHandler {
     }
     
     public int getHttpStatus (String url) {
-        DefaultHttpClient httpclient = getHttpClient(url);
-        
+        String encodedUrl = getEncodedUrl(url);
+        DefaultHttpClient httpclient = getHttpClient(encodedUrl);
         try {
-            HttpHead httphead = new HttpHead(url);
+            HttpHead httphead = new HttpHead(encodedUrl);
             Logger.getLogger(this.getClass()).info("executing head request to retrieve page status on " + httphead.getURI());
             // Create a response handler
             HttpResponse responseBody = httpclient.execute(httphead);
-            Logger.getLogger(this.getClass()).info("received " + responseBody.getStatusLine().getStatusCode() + "from head request");
+            Logger.getLogger(this.getClass()).warn("received " + responseBody.getStatusLine().getStatusCode() + "from head request");
             return Integer.valueOf(responseBody.getStatusLine().getStatusCode());
         } catch (UnknownHostException uhe) {
-            Logger.getLogger(this.getClass()).info("UnknownHostException on " + url);
+            Logger.getLogger(this.getClass()).warn("UnknownHostException on " + encodedUrl);
             return HttpStatus.SC_NOT_FOUND;
         } catch (IOException ioe) {
-            Logger.getLogger(this.getClass()).info("IOException on " + url);
+            Logger.getLogger(this.getClass()).warn("IOException on " + encodedUrl);
             ioe.fillInStackTrace();
             return HttpStatus.SC_NOT_FOUND;
         } finally {
@@ -132,10 +138,11 @@ public class HttpRequestHandler {
         }
     }
     
-    public String getHttpContent (String url) {
-        DefaultHttpClient httpclient = getHttpClient(url);
+    public String getHttpContent (String url) throws URISyntaxException{
+        String encodedUrl = getEncodedUrl(url);
+        DefaultHttpClient httpclient = getHttpClient(encodedUrl);
         try {
-            HttpGet httpget = new HttpGet(url);
+            HttpGet httpget = new HttpGet(encodedUrl);
             Logger.getLogger(this.getClass()).debug("executing request to retrieve content on " + httpget.getURI());
             // Create a response handler
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
@@ -156,9 +163,10 @@ public class HttpRequestHandler {
     }
     
     public int getHttpStatusFromGet (String url) {
-        DefaultHttpClient httpclient = getHttpClient(url);
+        String encodedUrl = getEncodedUrl(url);
+        DefaultHttpClient httpclient = getHttpClient(encodedUrl);
         try {
-            HttpGet httpget = new HttpGet(url);
+            HttpGet httpget = new HttpGet(encodedUrl);
             Logger.getLogger(this.getClass()).debug("executing get request to retrieve status on " + httpget.getURI());
             HttpResponse response = httpclient.execute(httpget);
             Logger.getLogger(this.getClass()).debug("received " + response.getStatusLine().getStatusCode() + "from get request");
@@ -253,4 +261,14 @@ public class HttpRequestHandler {
                 return 1;
         }
     }
+    
+    private String getEncodedUrl(String url) {
+        try {
+            return URIUtil.encodeQuery(url) ;
+        } catch (URIException ue) {
+            Logger.getLogger(this.getClass()).warn("URIException on " + url);
+            return url;
+        }
+    }
+
 }

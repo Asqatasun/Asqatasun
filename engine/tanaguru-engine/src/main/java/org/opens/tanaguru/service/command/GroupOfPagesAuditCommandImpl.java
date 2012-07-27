@@ -22,6 +22,7 @@
 
 package org.opens.tanaguru.service.command;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.opens.tanaguru.contentadapter.AdaptationListener;
@@ -33,6 +34,7 @@ import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.service.*;
+import org.opens.tanaguru.util.FileNaming;
 import org.opens.webdriver.builder.ScenarioBuilder;
 
 /**
@@ -70,7 +72,11 @@ public class GroupOfPagesAuditCommandImpl extends AbstractScenarioAuditCommandIm
               consolidatorService, 
               analyserService, 
               adaptationListener);
-        setScenario(ScenarioBuilder.buildScenario(pageUrlList));
+        List<String> localUrlList = new ArrayList<String>();
+        for (String url : pageUrlList) {
+            localUrlList.add(FileNaming.addProtocolToUrl(url));
+        }
+        setScenario(ScenarioBuilder.buildScenario(localUrlList));
         setScenarioName(siteUrl);
         setIsPage(false);
     }

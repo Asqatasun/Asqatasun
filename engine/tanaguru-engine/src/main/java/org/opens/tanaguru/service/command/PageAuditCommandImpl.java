@@ -34,6 +34,7 @@ import org.opens.tanaguru.entity.service.reference.TestDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.service.*;
+import org.opens.tanaguru.util.FileNaming;
 import org.opens.tanaguru.util.http.HttpRequestHandler;
 import org.opens.webdriver.builder.ScenarioBuilder;
 
@@ -91,7 +92,7 @@ public class PageAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
               consolidatorService, 
               analyserService, 
               adaptationListener);
-        this.pageUrl = pageUrl;
+        this.pageUrl = FileNaming.addProtocolToUrl(pageUrl);
     }
 
     @Override
