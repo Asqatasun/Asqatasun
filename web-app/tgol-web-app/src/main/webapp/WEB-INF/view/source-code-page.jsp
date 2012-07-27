@@ -40,6 +40,12 @@
                     <h1>
                         ${pageName}
                     </h1>
+
+                </div>
+                <div class="span16">
+                    <a href="${sourceCode.characteriticExplanationLink}">
+                        ${sourceCode.characteritic}
+                    </a>
                 </div>
             </div><!-- class="row" -->
             <div class="row">

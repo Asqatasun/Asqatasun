@@ -23,7 +23,7 @@
                 <div class="row">
                     <div class="span16">
                         <h3 id="theme${entry.key.rank}" class="theme">
-                            Theme ${entry.key.rank} : <fmt:message key="${entry.key.code}"/>
+                            <fmt:message key="result.theme"/> ${entry.key.rank} : <fmt:message key="${entry.key.code}"/>
                         </h3>
                     </div><!-- class="span16" -->
                 </div><!-- class="row" -->

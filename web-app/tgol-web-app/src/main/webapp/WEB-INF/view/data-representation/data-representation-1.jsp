@@ -23,8 +23,11 @@
                                 <c:forEach var="evidenceElement" items="${childRemarkItem}">
                                     <c:choose>
                                         <c:when test="${evidenceElement.key == 'Line-Number'}">
-                                            <a href="<c:url value="/home/contract/source-code-page.html?wr=${param.wr}#line${evidenceElement.value}"/>" target="_blank">
-                                                <fmt:message key="${evidenceElement.key}"/> ${evidenceElement.value} <fmt:message key="evidenceElement.newWindow"/>
+                                            <c:set var="lineValueTitle">
+                                                <fmt:message key="${evidenceElement2.key}"/> ${evidenceElement2.value}
+                                            </c:set>
+                                            <a href="<c:url value="/home/contract/source-code-page.html?wr=${param.wr}#line${evidenceElement.value}"/>" target="_blank" title="${lineValueTitle} <fmt:message key="evidenceElement.newWindow"/>">
+                                                ${lineValueTitle}
                                             </a>
                                         </c:when>
                                         <c:otherwise>
