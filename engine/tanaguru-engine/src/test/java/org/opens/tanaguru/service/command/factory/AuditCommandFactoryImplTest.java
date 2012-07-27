@@ -21,6 +21,7 @@
  */
 package org.opens.tanaguru.service.command.factory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -218,7 +219,7 @@ public class AuditCommandFactoryImplTest extends TestCase {
     public void testCreate_3args_3_1() {
         System.out.println("create GroupOfPagesAuditCommand with crawler");
         String siteUrl = "";
-        List<String> pageUrlList = null;
+        List<String> pageUrlList = new ArrayList<String>();
         Set<Parameter> paramSet = null;
         
         auditCommandFactory.setAuditPageWithCrawler(true);
@@ -237,7 +238,7 @@ public class AuditCommandFactoryImplTest extends TestCase {
     public void testCreate_3args_3_2() {
         System.out.println("create GroupOfPagesAuditCommand without crawler");
         String siteUrl = "";
-        List<String> pageUrlList = null;
+        List<String> pageUrlList = new ArrayList<String>();
         Set<Parameter> paramSet = null;
         
         auditCommandFactory.setAuditPageWithCrawler(false);

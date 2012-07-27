@@ -24,6 +24,7 @@ package org.opens.tanaguru.service.command;
 import org.easymock.EasyMock;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.service.CrawlerService;
+import org.opens.tanaguru.util.FileNaming;
 
 /**
  *
@@ -57,7 +58,7 @@ public class PageAuditCrawlerCommandImplTest extends AuditCommandTestCase {
         this.mockInitialisationCalls(true);
         
         mockCrawlerService = EasyMock.createMock(CrawlerService.class);
-        EasyMock.expect(mockCrawlerService.crawlPage(mockAudit, pageUrl)).
+        EasyMock.expect(mockCrawlerService.crawlPage(mockAudit, FileNaming.addProtocolToUrl(pageUrl))).
                 andReturn(EasyMock.createMock(WebResource.class))
                 .once();
         EasyMock.replay(mockCrawlerService);
