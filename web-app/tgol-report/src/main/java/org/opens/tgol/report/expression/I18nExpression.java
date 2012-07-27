@@ -22,12 +22,9 @@
 package org.opens.tgol.report.expression;
 
 import ar.com.fdvs.dj.domain.CustomExpression;
-import org.opens.tgol.report.expression.retriever.KeyRetriever;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.log4j.Logger;
+import org.opens.tgol.report.expression.retriever.KeyRetriever;
 
 /**
  *
@@ -37,7 +34,7 @@ public class I18nExpression implements CustomExpression {
 
     private static final long serialVersionUID = 1174999656431046383L;
 
-    private ResourceBundle resourceBundle = null;
+    private List<ResourceBundle> resourceBundleList = new ArrayList<ResourceBundle>();
     private KeyRetriever keyRetriever = null;
     private boolean escapeHtml = false;
     
@@ -45,21 +42,24 @@ public class I18nExpression implements CustomExpression {
      * Default constructor
      */
     public I18nExpression(
-            String bundleName,
+            List<String> bundleNameList,
             KeyRetriever keyRetriever,
             boolean escapeHtml,
             Locale locale) {
-        if (bundleName != null) {
-            this.resourceBundle = ResourceBundle.getBundle(bundleName, locale);
+        if (bundleNameList != null) {
+            for (String bundleName : bundleNameList) {
+                resourceBundleList.add(ResourceBundle.getBundle(bundleName, locale));
+            }
         }
         this.keyRetriever = keyRetriever;
         this.escapeHtml = escapeHtml;
     }
 
+    @Override
     public Object evaluate(Map fields, Map variables, Map parameters) {
         String key = keyRetriever.retrieveKey(fields, variables, parameters);
-        if (resourceBundle != null) {
-            String i18nValue = resourceBundle.getString(key);
+        if (!resourceBundleList.isEmpty()) {
+            String i18nValue = retrieveI18nValue(key);
             if (escapeHtml) {
                 return StringEscapeUtils.escapeHtml(i18nValue);
             }
@@ -73,4 +73,19 @@ public class I18nExpression implements CustomExpression {
         return String.class.getName();
     }
 
+    /**
+     * Retrieve a i18n among the Collection of resourceBundle associated with
+     * the instance
+     * 
+     * @param key
+     * @return 
+     */
+    private String retrieveI18nValue(String key) {
+        for (ResourceBundle rb: resourceBundleList) {
+            if (rb.containsKey(key)) {
+                return rb.getString(key);
+            }
+        }
+        return key;
+    }
 }

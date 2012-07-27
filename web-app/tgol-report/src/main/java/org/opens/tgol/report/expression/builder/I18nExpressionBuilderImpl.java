@@ -21,9 +21,11 @@
  */
 package org.opens.tgol.report.expression.builder;
 
-import org.opens.tgol.report.expression.retriever.KeyRetriever;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import org.opens.tgol.report.expression.I18nExpression;
+import org.opens.tgol.report.expression.retriever.KeyRetriever;
 
 /**
  *
@@ -31,13 +33,13 @@ import org.opens.tgol.report.expression.I18nExpression;
  */
 public class I18nExpressionBuilderImpl implements AbstractGenericCustomExpressionBuilder<I18nExpression>{
 
-    private String bundleName;
-    public String getBundleName() {
-        return bundleName;
+    private List<String> bundleNameList = new ArrayList<String>();
+    public List<String> getBundleNameList() {
+        return bundleNameList;
     }
 
-    public void setBundleName(String bundleName) {
-        this.bundleName = bundleName;
+    public void setBundleNameList(List<String> bundleNameList) {
+        this.bundleNameList.addAll(bundleNameList);
     }
 
     private KeyRetriever keyRetriever;
@@ -60,7 +62,7 @@ public class I18nExpressionBuilderImpl implements AbstractGenericCustomExpressio
 
     @Override
     public I18nExpression build(Locale locale) {
-        return new I18nExpression(bundleName, keyRetriever, escapeHtml, locale);
+        return new I18nExpression(bundleNameList, keyRetriever, escapeHtml, locale);
     }
 
 }

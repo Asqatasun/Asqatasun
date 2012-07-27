@@ -31,7 +31,11 @@
 
     <!-- I18N EXPRESSIONS -->
     <bean id="themeExpressionBuilder" class="org.opens.tgol.report.expression.builder.I18nExpressionBuilderImpl">
-        <property name="bundleName" value="theme-I18N"/>
+        <property name="bundleNameList">
+            <list>
+                <value>theme-I18N</value>
+            </list>
+        </property>
         <property name="escapeHtml" value="false"/>
         <property name="keyRetriever" ref="themeKeyRetriever"/>
     </bean>
@@ -42,19 +46,32 @@
     </bean>
     
     <bean id="testExpressionBuilder" class="org.opens.tgol.report.expression.builder.I18nExpressionBuilderImpl">
-        <property name="bundleName" value="rule-I18N"/>
+        <property name="bundleNameList">
+            <list>
+                <value>rule-I18N</value>
+                <value>rule-seo-I18N</value>
+            </list>
+        </property>
         <property name="escapeHtml" value="false"/>
         <property name="keyRetriever" ref="testKeyRetriever"/>
     </bean>
 
     <bean id="levelExpressionBuilder" class="org.opens.tgol.report.expression.builder.I18nExpressionBuilderImpl">
-        <property name="bundleName" value="level-I18N"/>
+        <property name="bundleNameList">
+            <list>
+                <value>level-I18N</value>
+            </list>
+        </property>
         <property name="escapeHtml" value="false"/>
         <property name="keyRetriever" ref="levelKeyRetriever"/>
     </bean>
 
     <bean id="resultExpressionBuilder" class="org.opens.tgol.report.expression.builder.I18nExpressionBuilderImpl">
-        <property name="bundleName" value="rule-result-I18N"/>
+        <property name="bundleNameList">
+            <list>
+                <value>rule-result-I18N</value>
+            </list>
+        </property>
         <property name="escapeHtml" value="false"/>
         <property name="keyRetriever" ref="resultKeyRetriever"/>
     </bean>

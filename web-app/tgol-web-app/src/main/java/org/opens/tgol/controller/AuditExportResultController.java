@@ -32,6 +32,7 @@ import net.sf.jasperreports.engine.JRException;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.SSP;
+import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -152,38 +153,41 @@ public class AuditExportResultController extends AuditDataHandlerController {
             HttpServletResponse response) throws NotSupportedExportFormatException {
         model.addAttribute(TgolKeyStore.LOCALE_KEY,locale);
         boolean hasSourceCodeWithDoctype = false;
+        Scope scope = getSiteScope();
         if (webResource instanceof Page) {
             SSP ssp;
+            scope = getPageScope();
             try {
                 ssp = getContentDataService().findSSP(webResource, webResource.getURL());
                 if (ssp.getDoctype() != null && !ssp.getDoctype().trim().isEmpty()) {
                     hasSourceCodeWithDoctype = true;
                 }
             } catch (NoResultException nre) {}
-            AuditStatistics auditStatistics = getAuditStatistics(webResource, model);
-            model.addAttribute(TgolKeyStore.STATISTICS_KEY, getAuditStatistics(webResource, model));
+        }
+        List<TestResult> testResultList = TestResultFactory.getInstance().getTestResultList(
+                    webResource,
+                    scope,
+                    hasSourceCodeWithDoctype,
+                    false, // no detailed results
+                    getLocaleResolver().resolveLocale(request));
 
-            List<TestResult> testResultList = TestResultFactory.getInstance().getTestResultList(
-                        webResource,
-                        getPageScope(),
-                        hasSourceCodeWithDoctype,
-                        false, // no detailed results
-                        getLocaleResolver().resolveLocale(request));
-            try {
-                exportService.export(
-                        response,
-                        webResource.getId(),
-                        auditStatistics,
-                        testResultList,
-                        locale,
-                        exportFormat);
-            } catch (ColumnBuilderException ex) {
-                LOGGER.error(ex);
-            } catch (ClassNotFoundException ex) {
-                LOGGER.error(ex);
-            } catch (JRException ex) {
-                LOGGER.error(ex);
-            }
+        AuditStatistics auditStatistics = getAuditStatistics(webResource, model);
+        model.addAttribute(TgolKeyStore.STATISTICS_KEY, getAuditStatistics(webResource, model));
+
+        try {
+            exportService.export(
+                    response,
+                    webResource.getId(),
+                    auditStatistics,
+                    testResultList,
+                    locale,
+                    exportFormat);
+        } catch (ColumnBuilderException ex) {
+            LOGGER.error(ex);
+        } catch (ClassNotFoundException ex) {
+            LOGGER.error(ex);
+        } catch (JRException ex) {
+            LOGGER.error(ex);
         }
     }
 
