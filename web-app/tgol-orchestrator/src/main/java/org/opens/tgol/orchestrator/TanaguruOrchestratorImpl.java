@@ -394,8 +394,8 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             messageContent = bundle.getString(SITE_ERROR_MSG_CONTENT_KEY);
         } else {
             messageContent = bundle.getString(PAGE_ERROR_MSG_CONTENT_KEY);
-            messageContent = messageContent.replaceAll(PROJECT_URL_TO_REPLACE, buildContractUrl(act.getContract()));
         }
+        messageContent = messageContent.replaceAll(PROJECT_URL_TO_REPLACE, buildContractUrl(act.getContract()));
         messageContent = messageContent.replaceAll(URL_TO_REPLACE, buildResultUrl(act));
         return messageContent.replaceAll(PROJECT_NAME_TO_REPLACE, projectName);
     }
