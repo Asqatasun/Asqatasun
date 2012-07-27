@@ -54,6 +54,7 @@
                             <li><fmt:message key="errorLoadingPage.explanationPageDetail1"/></li>
                             <li><fmt:message key="errorLoadingPage.explanationPageDetail2"/></li>
                             <li><fmt:message key="errorLoadingPage.explanationPageDetail3"/></li>
+                            <li><fmt:message key="errorLoadingPage.explanationPageDetail4"/></li>
                         </ul>
                         <div class="alert-actions">
                             <a href="<c:url value="/dispatch.html" />" class="btn small"><fmt:message key="accessDeniedPage.backToHome"/></a>

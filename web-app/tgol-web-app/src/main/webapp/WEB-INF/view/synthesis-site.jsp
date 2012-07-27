@@ -221,6 +221,7 @@
                                 </fmt:param>
                             </fmt:message>
                         </li>
+                        <li><spring:message code="errorLoadingPage.explanationSiteDetail3"/></li>
                     </ul>
                 </div>
                     </c:when>
