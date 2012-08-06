@@ -22,6 +22,7 @@
 package org.opens.tanaguru.contentadapter.css;
 
 import com.thoughtworks.xstream.XStream;
+import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -303,7 +304,14 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
                 String attrName = attributs.getQName(i);
                 if (HtmlNodeAttr.HREF.equalsIgnoreCase(attrName) && StringUtils.isNotEmpty(attrValue)) {
                     hasBaseTag = true;
-                    baseResourcePath = attrValue;
+                    if (!attrValue.endsWith("/")) {
+                        StringBuilder strb = new StringBuilder();
+                        strb.append(attrValue);
+                        strb.append("/");
+                        baseResourcePath = strb.toString();
+                    } else {
+                        baseResourcePath = attrValue;
+                    }
                     LOGGER.debug("base tag found " + baseResourcePath);
                 }
             }
@@ -469,7 +477,12 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
     }
     
     private StylesheetContent createNewExternalStyleSheet(String cssAbsolutePath) {
-        String cssSourceCode = HttpRequestHandler.getInstance().getHttpContent(cssAbsolutePath);
+        String cssSourceCode = "";
+        try {
+            cssSourceCode = HttpRequestHandler.getInstance().getHttpContent(cssAbsolutePath);
+        } catch (URISyntaxException ex) {
+            java.util.logging.Logger.getLogger(CSSContentAdapterImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
 //        if (StringUtils.isEmpty(cssSourceCode)) {
 //            return null;
 //        }
@@ -567,6 +580,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         if (path.startsWith(HTTP_PREFIX)
                 || path.startsWith(WWW_PREFIX) 
                 || path.startsWith(FILE_PREFIX)) {
+            LOGGER.debug("absolute path " + path + " base " + base);
             return UURIFactory.getInstance(path).toString();
         }
         StringBuilder strb = new StringBuilder();
@@ -576,6 +590,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         } else {
             strb.append(path);
         }
+        LOGGER.debug("absolute path " + path + " base " + base);
         return UURIFactory.getInstance(strb.toString()).toString();
     }
 
