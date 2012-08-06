@@ -5,7 +5,7 @@ use $myDatabaseName;
 -- -----------------------------------------------------
 ALTER TABLE TGSI_ACT_WEB_RESOURCE ADD UNIQUE INDEX `INDEX_UNIQUE_PAIR` (`ACT_Id_Act`, `WEB_RESOURCE_Id_Web_Resource`);
 
--- -----------------------------------------------------
+- -----------------------------------------------------
 -- Table `TGSI_FUNCTIONALITY`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TGSI_FUNCTIONALITY` (
@@ -269,20 +269,21 @@ The period is expressed in seconds and the format is \"nb_of_acts/period\"', b'1
 -- ---------------------------------------------------------------
 -- Copy content of TGSI_RESTRICTION TO TGSI_OPTION
 -- ---------------------------------------------------------------
-INSERT INTO TGSI_OPTION_ELEMENT (Id_Option_Element, OPTION_Id_Option, Value)
+INSERT IGNORE INTO TGSI_OPTION_ELEMENT (Id_Option_Element, OPTION_Id_Option, Value)
 SELECT Id_Restriction, Id_Restriction_Element, Restriction_Value FROM TGSI_RESTRICTION;
 
 -- ---------------------------------------------------------------
 -- Copy content of TGSI_CONTRACT_RESTRICTION TO TGSI_CONTRACT_OPTION_ELEMENT
 -- ---------------------------------------------------------------
-INSERT INTO TGSI_CONTRACT_OPTION_ELEMENT (CONTRACT_Id_Contract, OPTION_ELEMENT_Id_Option_Element)
+INSERT IGNORE INTO TGSI_CONTRACT_OPTION_ELEMENT (CONTRACT_Id_Contract, OPTION_ELEMENT_Id_Option_Element)
 SELECT CONTRACT_Id_Contract, RESTRICTION_Id_Restriction FROM TGSI_CONTRACT_RESTRICTION WHERE RESTRICTION_Id_Restriction != 9 AND RESTRICTION_Id_Restriction != 16;
 
 -- -----------------------------------------------------------------
 -- Creation of relation between contract and Url (through Option)
 -- -----------------------------------------------------------------
+
 delimiter |
-CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `create_contract_option_from_restriction`()
+CREATE DEFINER=`tanaguru`@`localhost` PROCEDURE `create_contract_option_from_restriction`()
 BEGIN
 
   DECLARE done INT DEFAULT 0;
@@ -294,14 +295,17 @@ BEGIN
   DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
 
   OPEN contractWithUrl;
-  REPEAT
+  contract_loop: LOOP
     FETCH contractWithUrl INTO Id_Contract, Url;
+    IF done THEN
+      LEAVE contract_loop;
+    END IF;
     INSERT IGNORE INTO `TGSI_OPTION_ELEMENT` (`OPTION_Id_Option`, `Value`) VALUES
 	(10, Url);	
     select Id_Option_Element into v_Id_Option_Element FROM TGSI_OPTION_ELEMENT toe WHERE toe.OPTION_Id_Option=10 AND toe.Value=Url;
     INSERT IGNORE INTO `TGSI_CONTRACT_OPTION_ELEMENT` (`CONTRACT_Id_Contract`, `OPTION_ELEMENT_Id_Option_Element`) VALUES
 	    (Id_Contract,v_Id_Option_Element);
-  UNTIL done END REPEAT;
+  END LOOP;
   CLOSE contractWithUrl;
 
 END  |
@@ -314,7 +318,7 @@ drop procedure create_contract_option_from_restriction;
 -- Creation of relation between contract and Functionality
 -- -----------------------------------------------------------------
 delimiter |
-CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `create_contract_functionality`()
+CREATE DEFINER=`tanaguru`@`localhost` PROCEDURE `create_contract_functionality`()
 BEGIN
 
   DECLARE done INT DEFAULT 0;
@@ -329,59 +333,74 @@ BEGIN
   DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
 
   OPEN axsPages;
-  REPEAT
+  pages_loop: LOOP
     FETCH axsPages INTO a;
+    IF done THEN
+      LEAVE pages_loop;
+    END IF;
     INSERT IGNORE INTO `TGSI_CONTRACT_FUNCTIONALITY` (`CONTRACT_Id_Contract`, `FUNCTIONALITY_Id_Functionality`) VALUES
 	    (a,1);
-  UNTIL done END REPEAT;
+  END LOOP;
   CLOSE axsPages;
 
 SET done = 0;
 
   OPEN axsDomain;
-  REPEAT
+  domain_loop: LOOP
     FETCH axsDomain INTO a;
+    IF done THEN
+      LEAVE domain_loop;
+    END IF;
     INSERT IGNORE INTO `TGSI_CONTRACT_FUNCTIONALITY` (`CONTRACT_Id_Contract`, `FUNCTIONALITY_Id_Functionality`) VALUES
 	    (a,1);
     INSERT IGNORE INTO `TGSI_CONTRACT_FUNCTIONALITY` (`CONTRACT_Id_Contract`, `FUNCTIONALITY_Id_Functionality`) VALUES
 	    (a,2);
-  UNTIL done END REPEAT;
+  END LOOP;
   CLOSE axsDomain;
 
 SET done = 0;
 
   OPEN axsUpload;
-  REPEAT
+  upload_loop: LOOP
     FETCH axsUpload INTO a;
+    IF done THEN
+      LEAVE upload_loop;
+    END IF;
     INSERT IGNORE INTO `TGSI_CONTRACT_FUNCTIONALITY` (`CONTRACT_Id_Contract`, `FUNCTIONALITY_Id_Functionality`) VALUES
 	    (a,3);
-  UNTIL done END REPEAT;
+  END LOOP;
   CLOSE axsUpload;
 
 SET done = 0;
 
   OPEN axsPagesUpload;
-  REPEAT
+  pages_upload_loop: LOOP
     FETCH axsPagesUpload INTO a;
+    IF done THEN
+      LEAVE pages_upload_loop;
+    END IF;
     INSERT IGNORE INTO `TGSI_CONTRACT_FUNCTIONALITY` (`CONTRACT_Id_Contract`, `FUNCTIONALITY_Id_Functionality`) VALUES
 	    (a,1);
     INSERT IGNORE INTO `TGSI_CONTRACT_FUNCTIONALITY` (`CONTRACT_Id_Contract`, `FUNCTIONALITY_Id_Functionality`) VALUES
 	    (a,3);
-  UNTIL done END REPEAT;
+  END LOOP;
   CLOSE axsPagesUpload;
 
 SET done = 0;
 
   OPEN axsPagesDomainUpload;
-  REPEAT
+  pages_domain_upload: LOOP
     FETCH axsPagesDomainUpload INTO a;
+    IF done THEN
+      LEAVE pages_domain_upload;
+    END IF;
     INSERT IGNORE INTO `TGSI_CONTRACT_FUNCTIONALITY` (`CONTRACT_Id_Contract`, `FUNCTIONALITY_Id_Functionality`) VALUES
 	    (a,1);
     INSERT IGNORE INTO `TGSI_CONTRACT_FUNCTIONALITY` (`CONTRACT_Id_Contract`, `FUNCTIONALITY_Id_Functionality`) VALUES
 	    (a,2);
     INSERT IGNORE INTO `TGSI_CONTRACT_FUNCTIONALITY` (`CONTRACT_Id_Contract`, `FUNCTIONALITY_Id_Functionality`) VALUES
 	    (a,3);
-  UNTIL done END REPEAT;
+  END LOOP;
   CLOSE axsPagesDomainUpload;
 
 END |
@@ -393,7 +412,7 @@ drop procedure create_contract_functionality;
 -- Creation of relation between contract and referential
 -- -----------------------------------------------------------------
 delimiter |
-CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `create_contract_referential`()
+CREATE DEFINER=`tanaguru`@`localhost` PROCEDURE `create_contract_referential`()
 BEGIN
 
   DECLARE done INT DEFAULT 0;
@@ -403,13 +422,15 @@ BEGIN
   DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
 
   OPEN contract;
-  REPEAT
+  contract_loop: LOOP
     FETCH contract INTO a;
+    IF done THEN
+      LEAVE contract_loop;
+    END IF;
     INSERT IGNORE INTO `TGSI_CONTRACT_REFERENTIAL` (`CONTRACT_Id_Contract`, `REFERENTIAL_Id_Referential`) VALUES
 	    (a,1);
-  UNTIL done END REPEAT;
+  END LOOP;
   CLOSE contract;
-
 
 END |
 delimiter ;
