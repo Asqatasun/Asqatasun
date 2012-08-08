@@ -313,6 +313,16 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
                         baseResourcePath = attrValue;
                     }
                     LOGGER.debug("base tag found " + baseResourcePath);
+                    // we test the found baseResourcePath regarding the UURI interface
+                    // to check whether the URL is well-formed. If not, we consider 
+                    // as the browser that the base tag has to be ignored and the
+                    // base is seen as the base of the page.
+                    try {
+                        UURIFactory.getInstance(baseResourcePath);
+                    } catch (URIException ex) {
+                        LOGGER.warn("the base tag " + baseResourcePath + " is malformed. Use base of the URL instead");
+                        hasBaseTag = false;
+                    }
                 }
             }
         }
