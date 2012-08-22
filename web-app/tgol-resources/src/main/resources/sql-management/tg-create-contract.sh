@@ -24,7 +24,8 @@ echo $URL
 echo $Functs 
 echo $Refs
 echo "stop"
-if [ -z "$SiteLabel" ] || [ -z "$URL" ] || [ -z "$UserId" ] || [ -z "$Functs" ] || [ -z "$Refs" ]; then
+
+if [ -z "$SiteLabel" ] || [ -z "$UserId" ] || [ -z "$Functs" ] || [ -z "$Refs" ]; then
 	echo "Usage $0 -l <SiteLabel> -w <FQDN-url> -u <UserId> -f \"[...]\" -r \"[...]\" "
         echo "  The \"f\" option represents the functionalities and can take several values from :"
         echo "     - f1 -> Up to 10 pages Audit"
