@@ -1,5 +1,3 @@
-USE tanaguru;
-
 SET foreign_key_checks=0;
 
 INSERT IGNORE INTO `PARAMETER_FAMILY` (`Id_Parameter_Family`, `Cd_Parameter_Family`, `Description`, `Long_Label`, `Short_Label`) VALUES
