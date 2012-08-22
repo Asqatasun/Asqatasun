@@ -24,6 +24,7 @@ package org.opens.tanaguru.processor;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.httpclient.URIException;
 import org.archive.net.UURIFactory;
 import org.opens.tanaguru.contentadapter.util.URLIdentifier;
@@ -55,6 +57,7 @@ import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.entity.reference.Nomenclature;
 import org.opens.tanaguru.ruleimplementation.RuleHelper;
 import org.opens.tanaguru.service.NomenclatureLoaderService;
+import org.springframework.util.StringUtils;
 
 /**
  * 
@@ -62,6 +65,8 @@ import org.opens.tanaguru.service.NomenclatureLoaderService;
  */
 public class SSPHandlerImpl implements SSPHandler {
 
+    private static String BASE64_IMAGE_PREFIX = "data:image";
+    private static char COMMA = ',';
     protected CSSHandler cssHandler;
     protected DOMHandler domHandler;
     protected JSHandler jsHandler;
@@ -508,12 +513,28 @@ public class SSPHandlerImpl implements SSPHandler {
 
     @Override
     public BufferedImage getImageFromURL(String url) {
-        try {
-            return imageMap.get(UURIFactory.getInstance(urlIdentifier.resolve(url).toExternalForm()).toString());
-        } catch (URIException ex) {
-            Logger.getLogger(SSPHandlerImpl.class.getName()).log(Level.SEVERE, null, ex);
+        // the src attribute of the img tag may embed a base64 image.
+        // The format respects the following scheme: data:[<MIME-type>][;charset=<encoding>][;base64],<data>
+        // We check first whether the url value starts with the "data:image" 
+        // prefix and then we extract the raw data by getting the string value
+        // after the comma.
+        // Bug fix #428 
+        if (url.startsWith(BASE64_IMAGE_PREFIX)) {
+            InputStream in = new ByteArrayInputStream(Base64.decodeBase64(url.substring(url.indexOf(COMMA)+1)));
+            try {
+                return ImageIO.read(in);
+            } catch( IOException e ) {
+                return null;
+            }
+        } else {
+            try {
+                String str = UURIFactory.getInstance(urlIdentifier.resolve(url).toExternalForm()).toString();
+                return imageMap.get(str);
+            } catch (URIException ex) {
+                Logger.getLogger(SSPHandlerImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return null;
         }
-        return null;
     }
 
     @Override
@@ -547,7 +568,7 @@ public class SSPHandlerImpl implements SSPHandler {
      * by the crawler component, and the map we initialize here associates
      * the url of the image with the binary image content.
      */
-    private void initializeImageMap() {
+    public void initializeImageMap() {
         if (imageMap == null) {
             imageMap = new HashMap<String, BufferedImage>();
         }
