@@ -180,7 +180,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
             if (resource != null) {
                 cssVector.add(resource);
                 // search imported resource from the resource
-                getImportedResources(resource, currentLocalResourcePath);
+                getImportedResources(resource, currentLocalResourcePath, null);
             }
             isLocalCSS = false;
             isInlineCSS = false;
@@ -462,7 +462,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
                             locator.getLineNumber(), new ExternalRsrc());
                 }
                 currentLocalResourcePath = getCurrentResourcePath(cssAbsolutePath);
-                getImportedResources(localResource, currentLocalResourcePath);
+                getImportedResources(localResource, currentLocalResourcePath, cssAbsolutePath);
                 adaptContent(stylesheetContent, localResource);
             }
             relatedExternalCssSet.add(stylesheetContent);
@@ -515,7 +515,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
      * @param path
      *          The resource path
      */
-    private void getImportedResources(Resource resource, String path) {
+    private void getImportedResources(Resource resource, String path, String currentResourcePath) {
         Set<CSSImportedStyle> importedStyles =
                 new HashSet<CSSImportedStyle>();
         do {
@@ -532,10 +532,13 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
                 if (!importedStyles.isEmpty()) {// for each imported resource found within an inline resource
                     for (CSSImportedStyle cssImportedStyle : importedStyles) {
                         try {
-                            // create an instance of resource and download the content
-                            getExternalResourceAndAdapt(
-                                buildPath(cssImportedStyle.getPath(), path),
-                                cssImportedStyle.getSACMediaList());
+                            String resourcePath = buildPath(cssImportedStyle.getPath(), path);
+                            if (!StringUtils.equalsIgnoreCase(resourcePath, currentResourcePath)) {
+                                // create an instance of resource and download the content
+                                getExternalResourceAndAdapt(
+                                    resourcePath,
+                                    cssImportedStyle.getSACMediaList());
+                            }
                         } catch (URIException ex) {
                             java.util.logging.Logger.getLogger(CSSContentAdapterImpl.class.getName()).log(Level.SEVERE, null, ex);
                         }
