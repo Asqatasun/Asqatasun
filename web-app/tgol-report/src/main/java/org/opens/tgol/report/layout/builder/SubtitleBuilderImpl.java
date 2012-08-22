@@ -37,7 +37,7 @@ public class SubtitleBuilderImpl implements TitleBuilder {
     private static final char SPACE_KEY = ' ';
 
     private String markKey = "export-report.mark";
-    private String weightedMarkKey = "export-report.weightedMark";
+//    private String weightedMarkKey = "export-report.weightedMark";
     private String refKey = "referential";
     private String levelKey = "level";
     
@@ -104,11 +104,11 @@ public class SubtitleBuilderImpl implements TitleBuilder {
         subTitle.append(auditStatistics.getRawMark());
         subTitle.append(PERCENT_KEY);
         subTitle.append(SEPARATOR_KEY);
-        subTitle.append(bundle.getString(weightedMarkKey));
-        subTitle.append(SPACE_KEY);
-        subTitle.append(auditStatistics.getWeightedMark());
-        subTitle.append(PERCENT_KEY);
-        subTitle.append(SEPARATOR_KEY);
+//        subTitle.append(bundle.getString(weightedMarkKey));
+//        subTitle.append(SPACE_KEY);
+//        subTitle.append(auditStatistics.getWeightedMark());
+//        subTitle.append(PERCENT_KEY);
+//        subTitle.append(SEPARATOR_KEY);
         subTitle.append(getRefAndLevel(auditStatistics, locale));
         return subTitle.toString();
     }
