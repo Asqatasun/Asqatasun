@@ -16,7 +16,7 @@
                 <div class="${proportion} ${offset}">
                     <div class="thumbnail" >
                         <c:choose>
-                            <c:when test="${url != '' && scope != 'GROUPOFFILES' && scope != 'FILE' && 
+                            <c:when test="${url != '' && scope != 'GROUPOFFILES' && scope != 'FILE' && scope != 'SCENARIO' && 
                                             not empty configProperties['snapshotServiceUrl'] && 
                                             not empty configProperties['snapshotServiceUserId']}">
                         <img src="${configProperties['snapshotServiceUrl']}?userId=${configProperties['snapshotServiceUserId']}&q=90&w=${width}&h=${height}&sdx=1024&url=${url}" alt="" /><br/>
