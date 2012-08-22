@@ -83,6 +83,14 @@
             <outputDirectory>/install-web-app/sql</outputDirectory>
         </fileSet>
         <fileSet>
+            <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/installation</directory>
+            <includes>
+                <include>install.sh</include>
+            </includes>
+            <fileMode>755</fileMode>
+            <outputDirectory>/installation</outputDirectory>
+        </fileSet>
+        <fileSet>
             <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/conf</directory>
             <includes>
                 <include>ESAPI.properties</include>
