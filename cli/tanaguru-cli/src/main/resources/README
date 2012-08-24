@@ -1,6 +1,6 @@
                   ------------------------------
                              Tanaguru
-                            Version 1.0.0
+                            Version 1.6.0-SNAPSHOT
                   ------------------------------
 
 1. Web Resources
@@ -33,13 +33,33 @@ discussion. To subscribe, send an empty message to :
 
 	tanaguru-users-fr@lists.adullact.net
 
-3. Installation
-================
+3. Build 
+========
+
+For detailed build instructions, please refer to the wiki documentation
+that can be found at :
+
+        http://www.tanaguru.org/en/content/how-build
+
+4. Installation
+===============
 
 For detailed installation instructions, please refer to the wiki documentation
 that can be found at :
 
         http://www.tanaguru.org/content/installation
+
+5. Configuration
+================
+
+For detailed installation instructions, please refer to the wiki documentation
+that can be found at :
+
+	http://www.tanaguru.org/en/content/configuration
+
+6. Content of the version 
+=========================
+
 
 
 Have Fun
