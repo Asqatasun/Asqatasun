@@ -1,6 +1,6 @@
                   ------------------------------
                              Tanaguru
-                            Version 1.6.0-SNAPSHOT
+                            Version 2.0.0-RC2
                   ------------------------------
 
 1. Web Resources
@@ -59,7 +59,36 @@ that can be found at :
 
 6. Content of the version 
 =========================
+Bugs:
+#446 -> Audit crash on www.letc.fr: infinite loop with @import (https://dev.tanaguru.org/redmine/issues/446)
+#428 -> the getImageFromUrl() method of the SSPHandler implementation can't deal with embedded pictures (https://dev.tanaguru.org/redmine/issues/428)
+#426 -> The snapshot displayed in the synthesis result page in the case of a Scenario Audit is wrong (https://dev.tanaguru.org/redmine/issues/426)
+#424 -> The content of the scenario, present as a hidden field in the audit scenario set-up form, has to be removed (https://dev.tanaguru.org/redmine/issues/424)
+#422 -> Site-audit unable to run -> mail content shrunk (https://dev.tanaguru.org/redmine/issues/422)
+#419 -> Page audit fails if "http://" is missing in the URL (https://dev.tanaguru.org/redmine/issues/419)
+#414 -> .ods Export for SEO doesn't work (https://dev.tanaguru.org/redmine/issues/414)
+#407 -> bad link in email sent for a scenario audit (https://dev.tanaguru.org/redmine/issues/407)
+#404 -> Site audits crash when at least one SSP among the set of SSP hasn't been adapted (https://dev.tanaguru.org/redmine/issues/404)
+#398 -> Audit Options: rename "Accessibility level" into "Level" (https://dev.tanaguru.org/redmine/issues/398)
+#395 -> Parts of <head> deleted by Adapter Component (https://dev.tanaguru.org/redmine/issues/395)
 
+Features:
+#425 -> Add getter/setter to the "timeout" attribute of the TgolHighlighter class to allow to overidde the default value by spring configuration (https://dev.tanaguru.org/redmine/issues/425)
+#418 -> Launch page-audits via webdriver (https://dev.tanaguru.org/redmine/issues/418)
+#408 -> Email sent for a scenario: should include the scenario name (https://dev.tanaguru.org/redmine/issues/408)
+#406 -> Add a link to the source code in the page result page (https://dev.tanaguru.org/redmine/issues/406)
+#405 -> Remove the weighted mark from the different views (https://dev.tanaguru.org/redmine/issues/405)
+#402 -> Add new view to set-up scenario and launch audit (https://dev.tanaguru.org/redmine/issues/402)
+#401 -> Implementation of Har file reader (https://dev.tanaguru.org/redmine/issues/401)
+#400 -> Retrieve external CSS while adapting SSP (if not already retrieved during the crawl) (https://dev.tanaguru.org/redmine/issues/400)
+#399 -> Add a rank field to the WebResource entity (https://dev.tanaguru.org/redmine/issues/399)
+#365 -> Add referential info in the audit list contract info page (https://dev.tanaguru.org/redmine/issues/365)
+#337 -> Evolution of AuditService API to enable to launch a scenario audit (https://dev.tanaguru.org/redmine/issues/337)
+#336 -> Create a new Scenario loader module with an implementation that uses the WebDriver API (https://dev.tanaguru.org/redmine/issues/336)
+#280 -> Export: PDF format (https://dev.tanaguru.org/redmine/issues/280)
+#279 -> Export: CSV format (https://dev.tanaguru.org/redmine/issues/279) 
+#270 -> Audit sites with a given scenario (https://dev.tanaguru.org/redmine/issues/270)
+#269 -> Audit sites with authentication (https://dev.tanaguru.org/redmine/issues/269)
 
 
 Have Fun
