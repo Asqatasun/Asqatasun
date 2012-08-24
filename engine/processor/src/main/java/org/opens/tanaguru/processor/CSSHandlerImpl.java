@@ -289,4 +289,9 @@ public class CSSHandlerImpl implements CSSHandler {
         return "";
     }
 
+    @Override
+    public Collection<CSSOMRule> getSelectedCSSOMRuleList() {
+        return this.selectedRuleList;
+    }
+
 }

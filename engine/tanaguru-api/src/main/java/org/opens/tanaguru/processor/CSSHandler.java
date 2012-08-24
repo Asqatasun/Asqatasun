@@ -25,6 +25,7 @@ import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import java.util.Collection;
+import org.opens.tanaguru.contentadapter.css.CSSOMRule;
 import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
@@ -58,6 +59,12 @@ public interface CSSHandler {
      * @return the current CSSHandler instance
      */
     CSSHandler selectAllRules();
+    
+    /**
+     *
+     * @return the selected CSS rules list
+     */
+    Collection<CSSOMRule> getSelectedCSSOMRuleList();
 
     /**
      *

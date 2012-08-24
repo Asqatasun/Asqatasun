@@ -27,37 +27,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.httpclient.URIException;
 import org.archive.net.UURIFactory;
+import org.opens.tanaguru.contentadapter.css.CSSOMRule;
 import org.opens.tanaguru.contentadapter.util.URLIdentifier;
-import org.opens.tanaguru.entity.audit.Content;
-import org.opens.tanaguru.entity.audit.ImageContent;
-import org.opens.tanaguru.service.ProcessRemarkService;
-
-import org.w3c.dom.Node;
-
-import org.opens.tanaguru.entity.audit.ProcessRemark;
-import org.opens.tanaguru.entity.audit.RelatedContent;
-import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
 import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.entity.reference.Nomenclature;
+import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.ruleimplementation.RuleHelper;
 import org.opens.tanaguru.service.NomenclatureLoaderService;
-import org.springframework.util.StringUtils;
+import org.opens.tanaguru.service.ProcessRemarkService;
+import org.w3c.dom.Node;
 
 /**
  * 
@@ -247,6 +234,11 @@ public class SSPHandlerImpl implements SSPHandler {
     @Override
     public List<Node> getSelectedElementList() {
         return domHandler.getSelectedElementList();
+    }
+    
+    @Override
+    public Collection<CSSOMRule> getSelectedCSSOMRuleList() {
+        return cssHandler.getSelectedCSSOMRuleList();
     }
 
     @Override

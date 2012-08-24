@@ -25,6 +25,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import org.opens.tanaguru.contentadapter.css.CSSOMRule;
 import org.opens.tanaguru.contentadapter.util.URLIdentifier;
 
 import org.w3c.dom.Node;
@@ -252,6 +253,12 @@ public interface SSPHandler {
      * @return the selected element list
      */
     List<Node> getSelectedElementList();
+    
+    /**
+     *
+     * @return the selected CSS rules list
+     */
+    Collection<CSSOMRule> getSelectedCSSOMRuleList();
 
     /**
      *
