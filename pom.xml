@@ -360,6 +360,12 @@
                 <groupId>${heritrixGroupId}</groupId>
                 <artifactId>heritrix-commons</artifactId>
                 <version>${heritrixVersion}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>commons-codec</artifactId>
+                        <groupId>commons-codec</groupId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>${heritrixGroupId}</groupId>
