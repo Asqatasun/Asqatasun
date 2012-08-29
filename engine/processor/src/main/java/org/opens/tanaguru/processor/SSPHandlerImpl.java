@@ -517,7 +517,7 @@ public class SSPHandlerImpl implements SSPHandler {
             InputStream in = new ByteArrayInputStream(Base64.decodeBase64(url.substring(url.indexOf(COMMA)+1)));
             try {
                 return ImageIO.read(in);
-            } catch( IOException e ) {
+            } catch(Exception e ) {
                 Logger.getLogger(SSPHandlerImpl.class.getName()).warn(
                         "the embedded image " + url +"cannot be read");
                 return null;
