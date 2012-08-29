@@ -43,8 +43,8 @@
 
                 </div>
                 <div class="span16">
-                    <a href="<fmt:message key="sourceCode.characteristicExplanationLink"/>">
-                        ${configProperties['generatedHtmlExplanationLink']}
+                    <a href="${configProperties['generatedHtmlExplanationLink']}">
+                        <fmt:message key="sourceCode.characteristic"/>
                     </a>
                 </div>
             </div><!-- class="row" -->
