@@ -445,10 +445,6 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         // set of relatedExternalCssSet (needed to create the relation between the
         // SSP and the css at the end of the adaptation)
         LOGGER.debug("cssAbsolutePath  "  + cssAbsolutePath);
-//        for (StylesheetContent stylesheetContent : externalCssSet) {
-//            LOGGER.debug("stylesheetContent.getURI() :  " + 
-//                        stylesheetContent.getURI());
-//            if (stylesheetContent.getURI().equals(cssAbsolutePath)) {
         StylesheetContent stylesheetContent = getExternalStylesheet(cssAbsolutePath);
         if (stylesheetContent != null) {
             if (stylesheetContent.getAdaptedContent() == null) {
@@ -477,8 +473,6 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
 
     private StylesheetContent getExternalStylesheet(String cssAbsolutePath) {
         for (StylesheetContent stylesheetContent : externalCssSet) {
-            LOGGER.debug("stylesheetContent.getURI() :  " + 
-                        stylesheetContent.getURI());
             if (stylesheetContent.getURI().equals(cssAbsolutePath)) {
                 return stylesheetContent;
             }
@@ -491,11 +485,13 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         try {
             cssSourceCode = HttpRequestHandler.getInstance().getHttpContent(cssAbsolutePath);
         } catch (URISyntaxException ex) {
-            java.util.logging.Logger.getLogger(CSSContentAdapterImpl.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.info("the resource " + cssAbsolutePath + " can't be retrieved");
+            return null;
         }
-//        if (StringUtils.isEmpty(cssSourceCode)) {
-//            return null;
-//        }
+        if (StringUtils.isEmpty(cssSourceCode)) {
+            LOGGER.info("the resource " + cssAbsolutePath + " has an empty content");
+            return null;
+        }
         StylesheetContent cssContent = getContentFactory().createStylesheetContent(
                 new Date(),
                 cssAbsolutePath,
@@ -577,6 +573,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
                 stylesheetContent.setAdaptedContent(new XStream().toXML(parser.getResult()));
             } else {
                 stylesheetContent.setAdaptedContent(CSS_ON_ERROR);
+                Logger.getLogger(this.getClass()).info("An error occured while adapting " + stylesheetContent.getURI());
             }
         }
     }

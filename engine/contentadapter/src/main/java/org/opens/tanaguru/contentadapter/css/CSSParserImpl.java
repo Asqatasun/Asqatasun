@@ -21,13 +21,11 @@
  */
 package org.opens.tanaguru.contentadapter.css;
 
-import org.opens.tanaguru.contentadapter.util.AbstractContentParser;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Set;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
+import org.opens.tanaguru.contentadapter.util.AbstractContentParser;
 import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.Parser;
@@ -66,17 +64,13 @@ public class CSSParserImpl extends AbstractContentParser implements CSSParser {
             parser.parseStyleSheet(is);
             result = handler.getResult();
         } catch (CSSException ex) {
-            Logger.getLogger(CSSParserImpl.class.getName()).log(Level.SEVERE,
-                    null, ex);
+            Logger.getLogger(this.getClass()).warn(ex  + " on " + resource.getRsrcName());
         } catch (IOException ex) {
-            Logger.getLogger(CSSParserImpl.class.getName()).log(Level.SEVERE,
-                    null, ex);
+            Logger.getLogger(this.getClass()).warn(ex  + " on " + resource.getRsrcName());
         } catch (StringIndexOutOfBoundsException ex) {
-            Logger.getLogger(CSSParserImpl.class.getName()).log(Level.SEVERE,
-                    null, ex);
+            Logger.getLogger(this.getClass()).warn(ex  + " on " + resource.getRsrcName());
         } catch (TokenMgrError err) {
-            Logger.getLogger(CSSParserImpl.class.getName()).log(Level.SEVERE,
-                    null, err);
+            Logger.getLogger(this.getClass()).warn(err  + " on " + resource.getRsrcName());
         }
     }
 
@@ -99,20 +93,16 @@ public class CSSParserImpl extends AbstractContentParser implements CSSParser {
 
             return handler.getResult();
         } catch (CSSException ex) {
-            Logger.getLogger(CSSParserImpl.class.getName()).log(Level.SEVERE,
-                    null, ex);
+            Logger.getLogger(this.getClass()).warn(ex  + " on " + resource.getRsrcName());
             return null;
         } catch (IOException ex) {
-            Logger.getLogger(CSSParserImpl.class.getName()).log(Level.SEVERE,
-                    null, ex);
+            Logger.getLogger(this.getClass()).warn(ex  + " on " + resource.getRsrcName());
             return null;
         } catch (StringIndexOutOfBoundsException ex) {
-            Logger.getLogger(CSSParserImpl.class.getName()).log(Level.SEVERE,
-                    null, ex);
+            Logger.getLogger(this.getClass()).warn(ex  + " on " + resource.getRsrcName());  
             return null;
         } catch (TokenMgrError err) {
-            Logger.getLogger(CSSParserImpl.class.getName()).log(Level.SEVERE,
-                    null, err);
+            Logger.getLogger(this.getClass()).warn(err  + " on " + resource.getRsrcName());
             return null;
         }
     }
