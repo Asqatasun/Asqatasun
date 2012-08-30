@@ -13,7 +13,7 @@
     </dependencySets>
     <fileSets>
         <fileSet>
-            <directory>${basedir}/src/main/resources/</directory>
+            <directory>${basedir}/../../</directory>
             <includes>
                 <include>README</include>
             </includes>
