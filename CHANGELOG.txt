@@ -1,5 +1,5 @@
 --------------------------
-Tanaguru 2.0.0-RC2, 2012-08-24
+Tanaguru 2.0.0, 2012-08-30
 --------------------------
 Bugs:
 #446 -> Audit crash on www.letc.fr: infinite loop with @import (https://dev.tanaguru.org/redmine/issues/446)
