@@ -74,6 +74,15 @@
             <outputDirectory>/install</outputDirectory>
         </fileSet>
         <fileSet>
+            <directory>${basedir}/../../engine/tanaguru-resources/src/main/resources/sql-update</directory>
+            <includes>
+                <include>tanaguru-10-add_rank_field_to_webresource_table.sql</include>
+                <include>tanaguru-20-foreign_keys-constraints.sql</include>
+            </includes>
+            <fileMode>755</fileMode>
+            <outputDirectory>/update/sql-update</outputDirectory>
+        </fileSet>
+        <fileSet>
             <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/sql</directory>
             <includes>
                 <include>tgol-20-create-tables.sql</include>
@@ -81,14 +90,6 @@
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install-web-app/sql</outputDirectory>
-        </fileSet>
-        <fileSet>
-            <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/installation</directory>
-            <includes>
-                <include>install.sh</include>
-            </includes>
-            <fileMode>755</fileMode>
-            <outputDirectory>/installation</outputDirectory>
         </fileSet>
         <fileSet>
             <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/conf</directory>
@@ -114,7 +115,7 @@
             <includes>
                 <include>tg-create-user.sh</include>
                 <include>tg-create-contract.sh</include>
-                <include>create-contract-procedure.sh</include>
+                <include>create-contract-procedure.sql</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install-web-app/sql-management</outputDirectory>
