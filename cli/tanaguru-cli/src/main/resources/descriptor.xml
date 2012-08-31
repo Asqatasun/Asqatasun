@@ -113,9 +113,30 @@
         <fileSet>
             <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/sql-management</directory>
             <includes>
+                <include>create-contract-procedure.sql</include>
+		<include>add-remove-functionality-to-contract-procedure.sql</include>
+	        <include>delete-audit-procedure.sql</include>
                 <include>tg-create-user.sh</include>
                 <include>tg-create-contract.sh</include>
-                <include>create-contract-procedure.sql</include>
+	        <include>delete-contract-procedure.sql</include>
+	        <include>tg-add-funct-from-contract-id.sh</include>
+          	<include>tg-add-funct-from-contract-label.sh</include>
+	  	<include>tg-add-funct-from-user-email.sh</include>
+          	<include>tg-add-ref-from-contract-id.sh</include>
+          	<include>tg-add-ref-from-contract-label.sh</include>
+          	<include>tg-add-ref-from-user-email.sh</include>
+          	<include>tg-delete-audit-from-contract.sh</include>
+          	<include>tg-delete-audit-from-id.sh</include>
+          	<include>tg-delete-audit-from-user-email.sh</include>
+          	<include>tg-delete-audit-from-user-id.sh</include>
+          	<include>tg-delete-contract-from-id.sh</include>
+          	<include>tg-delete-contract-from-label-and-user.sh</include>
+          	<include>tg-remove-funct-from-contract-id.sh</include>
+          	<include>tg-remove-funct-from-contract-label.sh</include>
+          	<include>tg-remove-funct-from-user-email.sh</include>
+          	<include>tg-remove-ref-from-contract-id.sh</include>
+          	<include>tg-remove-ref-from-contract-label.sh</include>
+          	<include>tg-remove-ref-from-user-email.sh</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install-web-app/sql-management</outputDirectory>
