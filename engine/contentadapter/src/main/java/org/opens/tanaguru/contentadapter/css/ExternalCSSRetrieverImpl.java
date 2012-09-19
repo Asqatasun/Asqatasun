@@ -90,7 +90,7 @@ public class ExternalCSSRetrieverImpl implements ExternalCSSRetriever, Adaptatio
                 contentDataService.getExternalStylesheetFromAudit(audit));
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Retrieved " + externalCssMap.get(audit.getId()).size()+
-                    " external css  for the audit n° "+ audit.getId());
+                    " external css  for the audit n "+ audit.getId());
         }
     }
 
@@ -125,6 +125,25 @@ public class ExternalCSSRetrieverImpl implements ExternalCSSRetriever, Adaptatio
                 }
             }
         }
+    }
+
+    @Override
+    public void addNewStylesheetContent(SSP ssp, StylesheetContent stylesheetContent) {
+        if (!externalCssMap.containsKey(ssp.getAudit().getId())) {
+            LOGGER.debug(" the local external css Map doesn't contain any entry for"
+                    + "the ssp Id "  + ssp.getAudit().getId());
+            return;
+        }
+        for (StylesheetContent css : externalCssMap.get(ssp.getAudit().getId())) {
+            if (stylesheetContent.getURI().equals(css.getURI())) {
+                LOGGER.debug("the css " + stylesheetContent.getURI() + 
+                " already exists in the externalCssMap");
+                return;
+            }
+        }
+        externalCssMap.get(ssp.getAudit().getId()).add(stylesheetContent);
+        LOGGER.debug(stylesheetContent.getURI() + 
+                " has been added to the externalCssMap");
     }
     
 }

@@ -37,5 +37,13 @@ public interface ExternalCSSRetriever {
      *      the collection of external stylesheet for a given ssp.
      */
     Collection<StylesheetContent> getExternalCSS(SSP ssp);
+    
+    /**
+     * Add a new stylesheet instance to the retriever
+     * 
+     * @param ssp 
+     * @param stylesheetContent 
+     */
+    void addNewStylesheetContent(SSP ssp, StylesheetContent stylesheetContent);
 
 }
