@@ -1,4 +1,14 @@
 --------------------------
+Tanaguru 2.0.1, 2012-09-19
+--------------------------
+Bugs:
+#510 -> The externalCssRetriever when a new css is fetched during adaptationThe cssContentAdapter implementation doesn't alert (https://dev.tanaguru.org/redmine/issues/510)
+
+Features:
+#509 ->	Make the different treatment window parameters of the AuditCommand implementation configurable (https://dev.tanaguru.org/redmine/issues/509)
+#506 -> Linkify the URLs (SEO 6.4.1 + SEO 7.6.1) (https://dev.tanaguru.org/redmine/issues/506)
+
+--------------------------
 Tanaguru 2.0.0, 2012-08-30
 --------------------------
 Bugs:
