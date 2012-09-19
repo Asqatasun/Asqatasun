@@ -60,10 +60,30 @@ public abstract class AuditCommandImpl implements AuditCommand {
     public static final String SSP_TOOK_LOGGER_STR = " SSP took ";
     public static final String CONSOLIDATING_TOOK_LOGGER_STR = "Consolidating took ";
     
-    public static final int ANALYSE_TREATMENT_WINDOW = 50;
-    public static final int PROCESSING_TREATMENT_WINDOW = 25;
-    public static final int ADAPTATION_TREATMENT_WINDOW = 25;
-    public static final int CONSOLIDATION_TREATMENT_WINDOW = 1000;
+    public static final int DEFAULT_ANALYSE_TREATMENT_WINDOW = 10;
+    public static final int DEFAULT_PROCESSING_TREATMENT_WINDOW = 4;
+    public static final int DEFAULT_ADAPTATION_TREATMENT_WINDOW = 4;
+    public static final int DEFAULT_CONSOLIDATION_TREATMENT_WINDOW = 200;
+
+    private int adaptationTreatmentWindow = DEFAULT_ADAPTATION_TREATMENT_WINDOW;
+    public void setAdaptationTreatmentWindow(int adaptationTreatmentWindow) {
+        this.adaptationTreatmentWindow = adaptationTreatmentWindow;
+    }
+
+    private int analyseTreatmentWindow = DEFAULT_ANALYSE_TREATMENT_WINDOW;
+    public void setAnalyseTreatmentWindow(int analyseTreatmentWindow) {
+        this.analyseTreatmentWindow = analyseTreatmentWindow;
+    }
+
+    private int consolidationTreatmentWindow = DEFAULT_CONSOLIDATION_TREATMENT_WINDOW;
+    public void setConsolidationTreatmentWindow(int consolidationTreatmentWindow) {
+        this.consolidationTreatmentWindow = consolidationTreatmentWindow;
+    }
+
+    private int processingTreatmentWindow = DEFAULT_PROCESSING_TREATMENT_WINDOW;
+    public void setProcessingTreatmentWindow(int processingTreatmentWindow) {
+        this.processingTreatmentWindow = processingTreatmentWindow;
+    }
     
     private Audit audit;
     @Override
@@ -164,7 +184,11 @@ public abstract class AuditCommandImpl implements AuditCommand {
             ProcessorService processorService, 
             ConsolidatorService consolidatorService, 
             AnalyserService analyserService, 
-            AdaptationListener adaptationListener) {
+            AdaptationListener adaptationListener, 
+            int adaptationTreatmentWindow,
+            int processingTreatmentWindow,
+            int consolidationTreatmentWindow,
+            int analysisTreatmentWindow) {
         this.auditDataService = auditDataService;
         this.testDataService = testDataService;
         this.parameterDataService = parameterDataService;
@@ -176,6 +200,8 @@ public abstract class AuditCommandImpl implements AuditCommand {
         this.consolidatorService = consolidatorService;
         this.analyserService = analyserService;
         this.adaptationListener = adaptationListener;
+        this.adaptationTreatmentWindow = adaptationTreatmentWindow;
+        this.processingTreatmentWindow = processingTreatmentWindow;
         initialiseAudit(paramSet);
     }
     
@@ -231,12 +257,12 @@ public abstract class AuditCommandImpl implements AuditCommand {
                         new StringBuilder("Adapt ssp from  ")
                             .append(i)
                             .append(TO_LOGGER_STR)
-                            .append(i + ADAPTATION_TREATMENT_WINDOW).toString());
+                            .append(i + adaptationTreatmentWindow).toString());
             }
             List<Content> contentList = retrieveContentList(
                                             webResourceId, 
                                             i, 
-                                            ADAPTATION_TREATMENT_WINDOW, 
+                                            adaptationTreatmentWindow, 
                                             beginProcessDate, 
                                             false, 
                                             true);
@@ -271,7 +297,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
                 persistenceDuration = persistenceDuration
                         + (endPersistDate.getTime() - endProcessDate.getTime());
             }
-            i = i + ADAPTATION_TREATMENT_WINDOW;
+            i = i + adaptationTreatmentWindow;
             // explicit call of the Gc
             System.gc();
         }
@@ -437,13 +463,13 @@ public abstract class AuditCommandImpl implements AuditCommand {
                         new StringBuilder("Processing from ")
                             .append(i)
                             .append(TO_LOGGER_STR)
-                            .append(i+PROCESSING_TREATMENT_WINDOW).toString());
+                            .append(i+processingTreatmentWindow).toString());
                 beginProcessDate = Calendar.getInstance().getTime();
             }
             List<Content> contentList = retrieveContentList(
                                             webResourceId, 
                                             i, 
-                                            PROCESSING_TREATMENT_WINDOW, 
+                                            processingTreatmentWindow, 
                                             beginProcessDate, 
                                             true, 
                                             false);
@@ -457,7 +483,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
                 endProcessDate = Calendar.getInstance().getTime();
                 LOGGER.debug(
                         new StringBuilder("Processing of ")
-                            .append(PROCESSING_TREATMENT_WINDOW)
+                            .append(processingTreatmentWindow)
                             .append(" elements took ")
                             .append(endProcessDate.getTime() - beginProcessDate.getTime())
                             .append(MS_LOGGER_STR).toString());
@@ -467,14 +493,14 @@ public abstract class AuditCommandImpl implements AuditCommand {
                 endPersistDate = Calendar.getInstance().getTime();
                 LOGGER.debug(
                         new StringBuilder("Persist processing of ")
-                            .append(PROCESSING_TREATMENT_WINDOW)
+                            .append(processingTreatmentWindow)
                             .append(" elements took ")
                             .append(endPersistDate.getTime() - endProcessDate.getTime())
                             .append(MS_LOGGER_STR).toString());
                 persistenceDuration = persistenceDuration
                         + (endPersistDate.getTime() - endProcessDate.getTime());
             }
-            i = i + PROCESSING_TREATMENT_WINDOW;
+            i = i + processingTreatmentWindow;
             System.gc();
         }
 
@@ -617,13 +643,13 @@ public abstract class AuditCommandImpl implements AuditCommand {
         while (iter.hasNext()) {
             processResultSubset.add(iter.next());
             i++;
-            if (i % CONSOLIDATION_TREATMENT_WINDOW == 0) {
+            if (i % consolidationTreatmentWindow == 0) {
                 if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug(
                             new StringBuilder("Persisting Consolidation from ")
                                 .append(i)
                                 .append(TO_LOGGER_STR)
-                                .append(i+CONSOLIDATION_TREATMENT_WINDOW).toString());
+                                .append(i+consolidationTreatmentWindow).toString());
                 }
                 processResultDataService.saveOrUpdate(processResultSubset);
                 processResultSubset.clear();
@@ -698,13 +724,13 @@ public abstract class AuditCommandImpl implements AuditCommand {
                             new StringBuilder("Analysing results of scope page from ")
                                 .append(i)
                                 .append(TO_LOGGER_STR)
-                                .append(i + ANALYSE_TREATMENT_WINDOW).toString());
+                                .append(i + analyseTreatmentWindow).toString());
                     beginProcessDate = Calendar.getInstance().getTime();
                 }
                 webResourceList = webResourceDataService.getWebResourceFromItsParent(
                         parentWebResource,
                         i.intValue(),
-                        ANALYSE_TREATMENT_WINDOW);
+                        analyseTreatmentWindow);
                 for (WebResource webResource : webResourceList) {
                     if (LOGGER.isDebugEnabled()) {
                         endProcessDate = Calendar.getInstance().getTime();
@@ -728,7 +754,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
                                 + (endPersistDate.getTime() - endProcessDate.getTime());
                     }
                 }
-                i = i + ANALYSE_TREATMENT_WINDOW;
+                i = i + analyseTreatmentWindow;
             }
         }
 

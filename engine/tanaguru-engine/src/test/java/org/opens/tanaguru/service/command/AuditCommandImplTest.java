@@ -315,13 +315,13 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
                 Long.valueOf(1), 
                 HttpStatus.SC_OK,
                 0, 
-                AuditCommandImpl.ADAPTATION_TREATMENT_WINDOW)).andReturn(longList).once();
+                25)).andReturn(longList).once();
         
         expect(mockContentDataService.getSSPFromWebResource(
                 Long.valueOf(1), 
                 HttpStatus.SC_OK,
-                AuditCommandImpl.ADAPTATION_TREATMENT_WINDOW, 
-                AuditCommandImpl.ADAPTATION_TREATMENT_WINDOW)).andReturn(longList).once();
+                25, 
+                25)).andReturn(longList).once();
         
         // the adaptContent must return at least one non empty SSP
         SSP mockSSP = createMock(SSP.class);
@@ -432,7 +432,11 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
                     mockProcessorService, 
                     mockConsolidatorService, 
                     mockAnalyserService, 
-                    mockAdaptationListener);
+                    mockAdaptationListener,
+                    25,
+                    25,
+                    1000,
+                    200);
         }
 
         @Override
