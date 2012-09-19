@@ -81,7 +81,11 @@ public class GroupOfPagesCrawlerAuditCommandImplTest extends AuditCommandTestCas
                     mockProcessorService, 
                     mockConsolidatorService, 
                     mockAnalyserService, 
-                    mockAdaptationListener);
+                    mockAdaptationListener,
+                    5,
+                    5,
+                    5,
+                    5);
         
         groupOfPagesAuditCommand.callCrawlerService();
         

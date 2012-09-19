@@ -76,7 +76,11 @@ public class SiteAuditCommandImplTest extends AuditCommandTestCase {
                 mockProcessorService, 
                 mockConsolidatorService, 
                 mockAnalyserService, 
-                mockAdaptationListener);
+                mockAdaptationListener,
+                5,
+                5,
+                5,
+                5);
         
         siteAuditCommand.callCrawlerService();
         

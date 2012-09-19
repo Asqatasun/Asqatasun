@@ -97,7 +97,11 @@ public abstract class AbstractScenarioAuditCommandImpl extends AuditCommandImpl 
             ProcessorService processorService, 
             ConsolidatorService consolidatorService, 
             AnalyserService analyserService, 
-            AdaptationListener adaptationListener) {
+            AdaptationListener adaptationListener,
+            int adaptationTreatmentWindow,
+            int processingTreatmentWindow,
+            int consolidationTreatmentWindow,
+            int analysisTreatmentWindow) {
         super(paramSet, 
               auditDataService, 
               testDataService, 
@@ -109,7 +113,11 @@ public abstract class AbstractScenarioAuditCommandImpl extends AuditCommandImpl 
               processorService, 
               consolidatorService, 
               analyserService, 
-              adaptationListener);
+              adaptationListener,
+              adaptationTreatmentWindow,
+              processingTreatmentWindow,
+              consolidationTreatmentWindow,
+              analysisTreatmentWindow);
         this.scenarioLoaderService = scenarioLoaderService;
     }
 

@@ -65,7 +65,11 @@ public class SiteAuditCommandImpl extends CrawlAuditCommandImpl {
             ProcessorService processorService, 
             ConsolidatorService consolidatorService, 
             AnalyserService analyserService, 
-            AdaptationListener adaptationListener) {
+            AdaptationListener adaptationListener,
+            int adaptationTreatmentWindow,
+            int processingTreatmentWindow,
+            int consolidationTreatmentWindow,
+            int analysisTreatmentWindow) {
         super(paramSet, 
               auditDataService, 
               testDataService, 
@@ -78,7 +82,11 @@ public class SiteAuditCommandImpl extends CrawlAuditCommandImpl {
               processorService, 
               consolidatorService, 
               analyserService, 
-              adaptationListener);
+              adaptationListener,
+              adaptationTreatmentWindow,
+              processingTreatmentWindow,
+              consolidationTreatmentWindow,
+              analysisTreatmentWindow);
         this.siteUrl = siteUrl;
     }
     

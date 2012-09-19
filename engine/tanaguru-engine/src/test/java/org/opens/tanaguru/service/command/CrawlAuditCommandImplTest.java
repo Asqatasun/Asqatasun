@@ -60,7 +60,7 @@ public class CrawlAuditCommandImplTest extends AuditCommandTestCase {
         EasyMock.replay(mockTestDataService);
         EasyMock.replay(mockParameterDataService);
         
-        CrawlAuditCommandImpl instance = new TestCrawlAuditCommandImpl();
+        CrawlAuditCommandImpl instance = new CrawlAuditCommandImplTest.TestCrawlAuditCommandImpl();
         
         assertEquals(mockCrawlerService, instance.getCrawlerService());
         
@@ -86,7 +86,7 @@ public class CrawlAuditCommandImplTest extends AuditCommandTestCase {
         EasyMock.replay(mockTestDataService);
         EasyMock.replay(mockParameterDataService);
         
-        CrawlAuditCommandImpl instance = new TestCrawlAuditCommandImpl();
+        CrawlAuditCommandImpl instance = new CrawlAuditCommandImplTest.TestCrawlAuditCommandImpl();
         
         instance.init();
 
@@ -117,7 +117,7 @@ public class CrawlAuditCommandImplTest extends AuditCommandTestCase {
         EasyMock.replay(mockParameterDataService);
         EasyMock.replay(mockContentDataService);
         
-        CrawlAuditCommandImpl instance = new TestCrawlAuditCommandImpl();
+        CrawlAuditCommandImpl instance = new CrawlAuditCommandImplTest.TestCrawlAuditCommandImpl();
         instance.loadContent();
         
         EasyMock.verify(mockAudit);
@@ -143,7 +143,11 @@ public class CrawlAuditCommandImplTest extends AuditCommandTestCase {
                     mockProcessorService, 
                     mockConsolidatorService, 
                     mockAnalyserService, 
-                    mockAdaptationListener);
+                    mockAdaptationListener,
+                    5,
+                    5,
+                    5,
+                    5);
         }
 
         @Override

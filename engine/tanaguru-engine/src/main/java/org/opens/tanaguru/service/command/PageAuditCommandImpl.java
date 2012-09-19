@@ -78,7 +78,11 @@ public class PageAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
             ProcessorService processorService, 
             ConsolidatorService consolidatorService, 
             AnalyserService analyserService, 
-            AdaptationListener adaptationListener) {
+            AdaptationListener adaptationListener,
+            int adaptationTreatmentWindow,
+            int processingTreatmentWindow,
+            int consolidationTreatmentWindow,
+            int analysisTreatmentWindow) {
         super(paramSet, 
               auditDataService, 
               testDataService, 
@@ -91,7 +95,11 @@ public class PageAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
               processorService, 
               consolidatorService, 
               analyserService, 
-              adaptationListener);
+              adaptationListener,
+              adaptationTreatmentWindow,
+              processingTreatmentWindow,
+              consolidationTreatmentWindow,
+              analysisTreatmentWindow);
         this.pageUrl = FileNaming.addProtocolToUrl(pageUrl);
     }
 

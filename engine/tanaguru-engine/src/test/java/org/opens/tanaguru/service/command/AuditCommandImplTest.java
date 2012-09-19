@@ -25,9 +25,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.commons.httpclient.HttpStatus;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import static org.easymock.EasyMock.*;
 import org.opens.tanaguru.contentadapter.AdaptationListener;
@@ -75,7 +73,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         mockInitialisationCalls(true);
         
-        AuditCommandImpl instance = new TestAuditCommandImpl();
+        AuditCommandImpl instance = new AuditCommandImplTest.TestAuditCommandImpl();
 
         instance.setAudit(mockAudit);
         assertEquals(mockAudit, instance.getAudit());
@@ -89,7 +87,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         mockInitialisationCalls(true);
         
-        AuditCommandImpl instance = new TestAuditCommandImpl();
+        AuditCommandImpl instance = new AuditCommandImplTest.TestAuditCommandImpl();
         
         AuditDataService result = instance.getAuditDataService();
         assertEquals(mockAuditDataService, result);
@@ -108,7 +106,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         mockInitialisationCalls(true);
         
-        AuditCommandImpl instance = new TestAuditCommandImpl();
+        AuditCommandImpl instance = new AuditCommandImplTest.TestAuditCommandImpl();
         
         TestDataService result = instance.getTestDataService();
         assertEquals(mockTestDataService, result);
@@ -127,7 +125,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         mockInitialisationCalls(true);
         
-        AuditCommandImpl instance = new TestAuditCommandImpl();
+        AuditCommandImpl instance = new AuditCommandImplTest.TestAuditCommandImpl();
 
         ParameterDataService result = instance.getParameterDataService();
         assertEquals(mockParameterDataService, result);
@@ -146,7 +144,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         mockInitialisationCalls(true);
         
-        AuditCommandImpl instance = new TestAuditCommandImpl();
+        AuditCommandImpl instance = new AuditCommandImplTest.TestAuditCommandImpl();
 
         WebResourceDataService result = instance.getWebResourceDataService();
         assertEquals(mockWebResourceDataService, result);
@@ -165,7 +163,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         mockInitialisationCalls(true);
         
-        AuditCommandImpl instance = new TestAuditCommandImpl();
+        AuditCommandImpl instance = new AuditCommandImplTest.TestAuditCommandImpl();
 
         ContentDataService result = instance.getContentDataService();
         assertEquals(mockContentDataService, result);
@@ -184,7 +182,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         mockInitialisationCalls(true);
         
-        AuditCommandImpl instance = new TestAuditCommandImpl();
+        AuditCommandImpl instance = new AuditCommandImplTest.TestAuditCommandImpl();
 
         ProcessResultDataService result = instance.getProcessResultDataService();
         assertEquals(mockProcessResultDataService, result);
@@ -203,7 +201,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         mockInitialisationCalls(true);
         
-        AuditCommandImpl instance = new TestAuditCommandImpl();
+        AuditCommandImpl instance = new AuditCommandImplTest.TestAuditCommandImpl();
 
         ContentAdapterService result = instance.getContentAdapterService();
         assertEquals(mockContentAdapterService, result);
@@ -222,7 +220,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         mockInitialisationCalls(true);
         
-        AuditCommandImpl instance = new TestAuditCommandImpl();
+        AuditCommandImpl instance = new AuditCommandImplTest.TestAuditCommandImpl();
 
         ProcessorService result = instance.getProcessorService();
         assertEquals(mockProcessorService, result);
@@ -241,7 +239,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         mockInitialisationCalls(true);
         
-        AuditCommandImpl instance = new TestAuditCommandImpl();
+        AuditCommandImpl instance = new AuditCommandImplTest.TestAuditCommandImpl();
 
         ConsolidatorService result = instance.getConsolidatorService();
         assertEquals(mockConsolidatorService, result);
@@ -260,7 +258,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         mockInitialisationCalls(true);
 
-        AuditCommandImpl instance = new TestAuditCommandImpl();
+        AuditCommandImpl instance = new AuditCommandImplTest.TestAuditCommandImpl();
 
         AnalyserService result = instance.getAnalyserService();
         assertEquals(mockAnalyserService, result);
@@ -279,7 +277,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         mockInitialisationCalls(true);
         
-        AuditCommandImpl instance = new TestAuditCommandImpl();
+        AuditCommandImpl instance = new AuditCommandImplTest.TestAuditCommandImpl();
 
         AdaptationListener result = instance.getAdaptationListener();
         assertEquals(mockAdaptationListener, result);
@@ -315,13 +313,13 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
                 Long.valueOf(1), 
                 HttpStatus.SC_OK,
                 0, 
-                AuditCommandImpl.ADAPTATION_TREATMENT_WINDOW)).andReturn(longList).once();
+                25)).andReturn(longList).once();
         
         expect(mockContentDataService.getSSPFromWebResource(
                 Long.valueOf(1), 
                 HttpStatus.SC_OK,
-                AuditCommandImpl.ADAPTATION_TREATMENT_WINDOW, 
-                AuditCommandImpl.ADAPTATION_TREATMENT_WINDOW)).andReturn(longList).once();
+                25, 
+                25)).andReturn(longList).once();
         
         // the adaptContent must return at least one non empty SSP
         SSP mockSSP = createMock(SSP.class);
@@ -358,7 +356,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         replay(mockParameterDataService);
         replay(mockSSP);
         
-        AuditCommandImpl instance = new TestAuditCommandImpl();
+        AuditCommandImpl instance = new AuditCommandImplTest.TestAuditCommandImpl();
         
         instance.adaptContent();
 
@@ -432,7 +430,11 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
                     mockProcessorService, 
                     mockConsolidatorService, 
                     mockAnalyserService, 
-                    mockAdaptationListener);
+                    mockAdaptationListener,
+                    25,
+                    25,
+                    1000,
+                    200);
         }
 
         @Override

@@ -67,7 +67,11 @@ public class GroupOfPagesCrawlerAuditCommandImpl extends CrawlAuditCommandImpl {
             ProcessorService processorService, 
             ConsolidatorService consolidatorService, 
             AnalyserService analyserService, 
-            AdaptationListener adaptationListener) {
+            AdaptationListener adaptationListener,
+            int adaptationTreatmentWindow,
+            int processingTreatmentWindow,
+            int consolidationTreatmentWindow,
+            int analysisTreatmentWindow) {
         super(paramSet, 
               auditDataService, 
               testDataService, 
@@ -80,7 +84,11 @@ public class GroupOfPagesCrawlerAuditCommandImpl extends CrawlAuditCommandImpl {
               processorService, 
               consolidatorService, 
               analyserService, 
-              adaptationListener);
+              adaptationListener,
+              adaptationTreatmentWindow,
+              processingTreatmentWindow,
+              consolidationTreatmentWindow,
+              analysisTreatmentWindow);
         this.siteUrl = siteUrl;
         for (String url : pageUrlList) {
             this.pageUrlList.add(FileNaming.addProtocolToUrl(url));

@@ -87,7 +87,11 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
                 mockProcessorService, 
                 mockConsolidatorService, 
                 mockAnalyserService, 
-                mockAdaptationListener);
+                mockAdaptationListener,
+                5,
+                5,
+                5,
+                5);
         instance.init();
 
         EasyMock.verify(mockAudit);
@@ -158,7 +162,11 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
                 mockProcessorService, 
                 mockConsolidatorService, 
                 mockAnalyserService, 
-                mockAdaptationListener);
+                mockAdaptationListener,
+                5,
+                5,
+                5,
+                5);
         
         instance.loadContent();
 
@@ -256,7 +264,11 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
                 mockProcessorService, 
                 mockConsolidatorService, 
                 mockAnalyserService, 
-                mockAdaptationListener);
+                mockAdaptationListener,
+                5,
+                5,
+                5,
+                5);
         
         instance.loadContent();
 

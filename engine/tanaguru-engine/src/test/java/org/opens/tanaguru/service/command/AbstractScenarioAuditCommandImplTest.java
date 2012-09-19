@@ -21,11 +21,11 @@
  */
 package org.opens.tanaguru.service.command;
 
-import org.opens.tanaguru.service.ScenarioLoaderService;
 import static org.easymock.EasyMock.*;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
+import org.opens.tanaguru.service.ScenarioLoaderService;
 
 /**
  *
@@ -67,7 +67,7 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
         replay(mockTestDataService);
         replay(mockParameterDataService);
         
-        AbstractScenarioAuditCommandImpl instance = new TestAbstractScenarioAuditCommandImpl();
+        AbstractScenarioAuditCommandImpl instance = new AbstractScenarioAuditCommandImplTest.TestAbstractScenarioAuditCommandImpl();
         
         instance.init();
 
@@ -110,7 +110,7 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
         replay(mockScenarioLoaderService);
         replay(mockPage);
         
-        AbstractScenarioAuditCommandImpl instance = new TestAbstractScenarioAuditCommandImpl();
+        AbstractScenarioAuditCommandImpl instance = new AbstractScenarioAuditCommandImplTest.TestAbstractScenarioAuditCommandImpl();
         instance.setScenarioName(myUrl);
         instance.setScenario(myScenario);
         instance.setIsPage(true);
@@ -158,7 +158,7 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
         replay(mockScenarioLoaderService);
         replay(mockSite);
         
-        AbstractScenarioAuditCommandImpl instance = new TestAbstractScenarioAuditCommandImpl();
+        AbstractScenarioAuditCommandImpl instance = new AbstractScenarioAuditCommandImplTest.TestAbstractScenarioAuditCommandImpl();
         instance.setScenarioName(myUrl);
         instance.setScenario(myScenario);
         instance.setIsPage(false);
@@ -189,7 +189,11 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
                     mockProcessorService, 
                     mockConsolidatorService, 
                     mockAnalyserService, 
-                    mockAdaptationListener);
+                    mockAdaptationListener,
+                    5,
+                    5,
+                    5,
+                    5);
         }
     }
 }
