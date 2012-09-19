@@ -159,6 +159,14 @@
             <outputDirectory>/install-web-app/lib</outputDirectory>
         </fileSet>
         <fileSet>
+            <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/browser-installation</directory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+            <fileMode>755</fileMode>
+            <outputDirectory>/install-web-app/lib</outputDirectory>
+        </fileSet>
+        <fileSet>
             <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/token-master-key-encryptor</directory>
             <includes>
                 <include>**/*</include>
