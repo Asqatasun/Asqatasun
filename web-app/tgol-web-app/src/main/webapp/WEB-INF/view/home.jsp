@@ -21,7 +21,7 @@
 </c:choose>
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="gearImgUrl" value="${configProperties['cdnUrl']}/Images/gear.png"/>
+        <c:set var="gearImgUrl" value="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/gear.png"/>
     </c:when>
     <c:otherwise>
         <c:set var="gearImgUrl">

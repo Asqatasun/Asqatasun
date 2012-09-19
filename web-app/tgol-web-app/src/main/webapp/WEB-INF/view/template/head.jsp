@@ -11,9 +11,9 @@
     <!-- Le styles -->
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
-    <link rel="stylesheet" href="${configProperties['cdnUrl']}/Css/bootstrap-min.css"/>
-    <link rel="stylesheet" type="text/css" href="${configProperties['cdnUrl']}/Css/tgm.css"/>
-    <link rel="icon" type="image/ico" href="${configProperties['cdnUrl']}/Images/tanaguru.ico" />
+    <link rel="stylesheet" href="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Css/bootstrap-min.css"/>
+    <link rel="stylesheet" type="text/css" href="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Css/tgm.css"/>
+    <link rel="icon" type="image/ico" href="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/tanaguru.ico" />
     </c:when>
     <c:otherwise>
     <link rel="stylesheet" href="<c:url value="/Css/bootstrap-min.css"/>" />

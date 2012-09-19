@@ -24,7 +24,7 @@
                             <c:otherwise>
                                 <c:choose>
                                     <c:when test="${not empty configProperties['cdnUrl']}">
-                                        <c:set var="tgLogoUrl" value="${configProperties['cdnUrl']}/Images/Logo-Tanaguru-G-w${width}-h${height}-75dpi-bgTransp.png"/>
+                                        <c:set var="tgLogoUrl" value="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/Logo-Tanaguru-G-w${width}-h${height}-75dpi-bgTransp.png"/>
                                     </c:when>
                                     <c:otherwise>
                                         <c:set var="tgLogoUrl">

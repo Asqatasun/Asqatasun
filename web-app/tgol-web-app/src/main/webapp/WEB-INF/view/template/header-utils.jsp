@@ -11,8 +11,8 @@
 
         <c:choose>
             <c:when test="${not empty configProperties['cdnUrl']}">
-                <c:set var="tgLogoUrl" value="${configProperties['cdnUrl']}/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>
-                <c:set var="logoutLogoUrl" value="${configProperties['cdnUrl']}/Images/icon-logout.png"/>
+                <c:set var="tgLogoUrl" value="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>
+                <c:set var="logoutLogoUrl" value="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/icon-logout.png"/>
             </c:when>
             <c:otherwise>
                 <c:set var="tgLogoUrl">
