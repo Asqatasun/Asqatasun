@@ -31,7 +31,7 @@ import org.opens.tanaguru.entity.audit.StylesheetContent;
 
 /**
  *
- * @author enzolalay
+ * @author jkowalczyk
  */
 public class ExternalCSSRetrieverMock implements ExternalCSSRetriever {
 
@@ -46,6 +46,11 @@ public class ExternalCSSRetrieverMock implements ExternalCSSRetriever {
             }
         }
         return externalCss;
+    }
+
+    @Override
+    public void addNewStylesheetContent(SSP ssp, StylesheetContent stylesheetContent) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }
