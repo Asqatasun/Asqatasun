@@ -18,9 +18,9 @@
 </c:choose>
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="accessDenied1ImgUrl" value="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/access_denied2.jpg"/>
-        <c:set var="accessDenied2ImgUrl" value="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/access_denied2.JPG"/>
-        <c:set var="creativeCommonLogoUrl" value="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/creative_common_logo.png"/>
+        <c:set var="accessDenied1ImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/access_denied2.jpg"/>
+        <c:set var="accessDenied2ImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/access_denied2.JPG"/>
+        <c:set var="creativeCommonLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/creative_common_logo.png"/>
     </c:when>
     <c:otherwise>
         <c:set var="accessDenied1ImgUrl">

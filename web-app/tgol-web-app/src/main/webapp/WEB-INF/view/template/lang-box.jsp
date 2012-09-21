@@ -10,9 +10,9 @@
 <%@page import="java.util.Set"%>
             <c:choose>
                 <c:when test="${not empty configProperties['cdnUrl']}">
-                    <c:set var="tgLogoUrl" value="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/Logo-Tanaguru.com-75dpi-210x95-transp.png"/>
-                    <c:set var="enFlagUrl"value="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/en-flag2.jpeg"/>
-                    <c:set var="frFlagUrl" value="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/fr-flag2.jpeg"/>
+                    <c:set var="tgLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/Logo-Tanaguru.com-75dpi-210x95-transp.png"/>
+                    <c:set var="enFlagUrl"value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/en-flag2.jpeg"/>
+                    <c:set var="frFlagUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/fr-flag2.jpeg"/>
                 </c:when>
                 <c:otherwise>
                     <c:set var="tgLogoUrl">

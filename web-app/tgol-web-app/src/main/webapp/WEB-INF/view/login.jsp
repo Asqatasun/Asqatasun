@@ -27,8 +27,8 @@
 </c:choose>
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="tgLogo1Url" value="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/Logo-Tanaguru-G-w500-h600-75dpi-bgTransp.png"/>
-        <c:set var="tgLogo2Url" value="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/Logo-tanaguru.com-black-w140px-h63px-bgTransp.png"/>
+        <c:set var="tgLogo1Url" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/Logo-Tanaguru-G-w500-h600-75dpi-bgTransp.png"/>
+        <c:set var="tgLogo2Url" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/Logo-tanaguru.com-black-w140px-h63px-bgTransp.png"/>
     </c:when>
     <c:otherwise>
         <c:set var="tgLogo1Url">

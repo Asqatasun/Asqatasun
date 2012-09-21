@@ -64,9 +64,9 @@
             <c:if test="${hasProgressInfo == 'true'}">
                 <c:choose>
                 <c:when test="${not empty configProperties['cdnUrl']}">
-                    <c:set var="increaseLogoUrl" value="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/increase-narrow.png"/>
-                    <c:set var="decreaseLogoUrl"value="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/decrease-narrow.png"/>
-                    <c:set var="stableLogoUrl" value="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/stable-narrow.png"/>
+                    <c:set var="increaseLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/increase-narrow.png"/>
+                    <c:set var="decreaseLogoUrl"value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/decrease-narrow.png"/>
+                    <c:set var="stableLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/stable-narrow.png"/>
                 </c:when>
                 <c:otherwise>
                     <c:set var="increaseLogoUrl">

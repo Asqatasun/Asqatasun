@@ -19,12 +19,12 @@
                             <c:when test="${url != '' && scope != 'GROUPOFFILES' && scope != 'FILE' && scope != 'SCENARIO' && 
                                             not empty configProperties['snapshotServiceUrl'] && 
                                             not empty configProperties['snapshotServiceUserId']}">
-                        <img src="${configProperties['snapshotServiceUrl']}?userId=${configProperties['snapshotServiceUserId']}&q=90&w=${width}&h=${height}&sdx=1024&url=${url}" alt="" /><br/>
+                        <img src="${pageContext.request.scheme}://${configProperties['snapshotServiceUrl']}?userId=${configProperties['snapshotServiceUserId']}&q=90&w=${width}&h=${height}&sdx=1024&url=${url}" alt="" /><br/>
                             </c:when>
                             <c:otherwise>
                                 <c:choose>
                                     <c:when test="${not empty configProperties['cdnUrl']}">
-                                        <c:set var="tgLogoUrl" value="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/Logo-Tanaguru-G-w${width}-h${height}-75dpi-bgTransp.png"/>
+                                        <c:set var="tgLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/Logo-Tanaguru-G-w${width}-h${height}-75dpi-bgTransp.png"/>
                                     </c:when>
                                     <c:otherwise>
                                         <c:set var="tgLogoUrl">

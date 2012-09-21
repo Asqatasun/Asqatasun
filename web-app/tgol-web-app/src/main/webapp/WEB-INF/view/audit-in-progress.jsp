@@ -18,8 +18,8 @@
 </c:choose>
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="auditInProgressImgUrl" value="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/work-in-progress.jpg"/>
-        <c:set var="creativeCommonLogoUrl" value="$${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/creative_common_logo.png"/>
+        <c:set var="auditInProgressImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/work-in-progress.jpg"/>
+        <c:set var="creativeCommonLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/creative_common_logo.png"/>
     </c:when>
     <c:otherwise>
         <c:set var="auditInProgressImgUrl">
