@@ -22,18 +22,10 @@
 package org.opens.tanaguru.rules.test;
 
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriter;
 import org.apache.log4j.Logger;
@@ -279,16 +271,12 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     protected List<ProcessResult> process(String webResourceKey) {
         System.out.println(this + "::process(\"" + webResourceKey + "\")");
         WebResource webResource = webResourceMap.get(webResourceKey);
-        System.out.println("2  "  + webResource.getURL() + " " +testList.size());
         List<ProcessResult> grossResultList = processorService.process(contentMap.get(webResource), testList);
-        System.out.println("3");
         grossResultMap.put(webResource, grossResultList);
-        System.out.println("4");
         return grossResultList;
     }
 
     protected ProcessResult processPageTest(String webResourceKey) {
-        System.out.println("1");
         return process(webResourceKey).get(0);
     }
 
