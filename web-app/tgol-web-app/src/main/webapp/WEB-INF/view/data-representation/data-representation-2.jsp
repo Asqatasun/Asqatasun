@@ -59,7 +59,7 @@
                                         </c:when>
                                     <td class="r${testCode}-col-${evidenceElement2.key}">
                                         <c:when test="${evidenceElement2.key == 'Url'}">
-                                                <a href="${evidenceElement2.value}">">${evidenceElement2.value}</a>
+                                                <a href="${evidenceElement2.value}">${evidenceElement2.value}</a>
                                         </c:when>
                                     </td>
                                         <c:otherwise>
