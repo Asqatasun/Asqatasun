@@ -167,7 +167,7 @@ public class TgolWebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
         sb.append(" JOIN pr.test.criterion.theme th");
         sb.append(" JOIN t.scope s");
         sb.append(" WHERE r=:webResource");
-        sb.append(" AND s = :scope ");
+        sb.append(" AND (s = :scope or s.id = 3) ");
         if (theme != null && 
                 !theme.isEmpty() &&
                     !theme.equals(selectAllThemeKey)) {
@@ -226,7 +226,7 @@ public class TgolWebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
                 + JOIN_TEST
                 + " JOIN t.scope s"
                 + " WHERE (r.id=:id)"
-                + " AND s = :scope");
+                + " AND (s = :scope or s.id=3)");
         query.setParameter("id", webResource.getId());
         query.setParameter("scope", scope);
         query.setHint(CACHEABLE_OPTION, TRUE);
