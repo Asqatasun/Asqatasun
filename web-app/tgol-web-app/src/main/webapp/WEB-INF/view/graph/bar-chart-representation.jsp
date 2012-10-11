@@ -32,8 +32,8 @@
                         <cewolf:param name="itemLabelColor" value="#FFFFFF"/>
                     </cewolf:chartpostprocessor>
                     <cewolf:chartpostprocessor id="barChartSeriesPaint">
-			<cewolf:param name="0" value='<%= new String("#9FC54E")%>'/>
-                        <cewolf:param name="1" value='<%= new String("#C43C35")%>'/>
+                        <cewolf:param name="0" value='<%= new String("#C43C35")%>'/>
+			<cewolf:param name="1" value='<%= new String("#9FC54E")%>'/>
                         <cewolf:param name="2" value='<%= new String("#4EBAFF")%>'/>
                         <cewolf:param name="3" value='<%= new String("#AAAAAA")%>'/>
                     </cewolf:chartpostprocessor>
