@@ -139,7 +139,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.SourceCodeRemarkImpl.class)})
     public Collection<ProcessRemark> getRemarkSet() {
         if (remarkList instanceof PersistentSet) {
-            return (Collection<ProcessRemark>)(PersistentSet)remarkList;    
+            return (PersistentSet)remarkList;    
         }
         return (Collection<ProcessRemark>)(LinkedHashSet)remarkList;
     }

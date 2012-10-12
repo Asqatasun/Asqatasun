@@ -135,7 +135,7 @@ public class ProcessRemarkImpl implements ProcessRemark, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.EvidenceElementImpl.class)})
     public Collection<EvidenceElement> getElementList() {
         if (elementList instanceof PersistentSet) {
-            return (Collection<EvidenceElement>)(PersistentSet)elementList;
+            return (PersistentSet)elementList;
         }
         return (Collection<EvidenceElement>)(LinkedHashSet)elementList;
     }

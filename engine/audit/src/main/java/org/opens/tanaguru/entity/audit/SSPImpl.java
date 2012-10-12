@@ -141,7 +141,7 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
     @Override
     public Set<RelatedContent> getRelatedContentSet() {
         if (relatedContentSet instanceof PersistentSet) {
-            return (Set<RelatedContent>) (PersistentSet)relatedContentSet;
+            return (PersistentSet)relatedContentSet;
         }
         return (Set<RelatedContent>) (HashSet)relatedContentSet;
     }
