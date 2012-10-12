@@ -31,6 +31,7 @@ import javax.persistence.PersistenceException;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.archive.net.UURI;
 import org.archive.net.UURIFactory;
 import org.opens.tanaguru.contentadapter.ContentParser;
 import org.opens.tanaguru.contentadapter.Resource;
@@ -609,20 +610,38 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
      * @param base
      * @return 
      */
-    private String buildPath(String path, String base) throws URIException {
+    public String buildPath(String path, String base) throws URIException {
         if (path.startsWith(HTTP_PREFIX)
                 || path.startsWith(WWW_PREFIX) 
                 || path.startsWith(FILE_PREFIX)) {
             return UURIFactory.getInstance(path).toString();
         }
         StringBuilder strb = new StringBuilder();
-        strb.append(base);
-        if (path.startsWith("/") && base.endsWith("/")) {
-            strb.append(path.substring(1));
-        } else {
-            strb.append(path);
+        if (path.startsWith("/")) {
+            base = setBaseAsRootOfSite(base);
         }
+        strb.append(base);
+        if (!base.endsWith("/") && !path.startsWith("/")) {
+            strb.append("/");
+        }
+        strb.append(path);
         return UURIFactory.getInstance(strb.toString()).toString();
     }
 
+    /**
+     * 
+     * @param base
+     * @return 
+     */
+    public String setBaseAsRootOfSite(String base) {
+        UURI uri;
+        try {
+            uri = UURIFactory.getInstance(base);
+            return uri.getScheme()+"://"+uri.getHost().toString();
+        } catch (URIException ex) {
+            java.util.logging.Logger.getLogger(CSSContentAdapterImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return base;
+    }
+    
 }
