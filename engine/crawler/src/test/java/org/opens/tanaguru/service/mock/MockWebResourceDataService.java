@@ -100,7 +100,7 @@ public class MockWebResourceDataService implements WebResourceDataService{
     }
 
     @Override
-    public Collection<? extends WebResource> findAll() {
+    public Collection<WebResource> findAll() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

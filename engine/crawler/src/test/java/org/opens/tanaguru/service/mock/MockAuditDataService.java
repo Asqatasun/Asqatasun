@@ -48,7 +48,7 @@ public class MockAuditDataService implements AuditDataService {
     }
 
     @Override
-    public Collection<? extends Audit> findAll(AuditStatus status) {
+    public Collection<Audit> findAll(AuditStatus status) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -88,7 +88,7 @@ public class MockAuditDataService implements AuditDataService {
     }
 
     @Override
-    public Collection<? extends Audit> findAll() {
+    public Collection<Audit> findAll() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
