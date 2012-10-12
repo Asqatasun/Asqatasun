@@ -27,7 +27,7 @@
         <tanaguruCliGroupId>org.opens</tanaguruCliGroupId>
         <tanaguruCliVersion>2.1.0-SNAPSHOT</tanaguruCliVersion>
         <springGroupId>org.springframework</springGroupId>
-        <springVersion>3.0.5.RELEASE</springVersion>
+        <springVersion>3.1.2.RELEASE</springVersion>
         <heritrixGroupId>org.archive.heritrix</heritrixGroupId>
         <heritrixVersion>3.0.0</heritrixVersion>
         <hibernateGroupId>org.hibernate</hibernateGroupId>
@@ -221,6 +221,11 @@
             <dependency>
                 <groupId>${springGroupId}</groupId>
                 <artifactId>spring-context</artifactId>
+                <version>${springVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>${springGroupId}</groupId>
+                <artifactId>spring-jdbc</artifactId>
                 <version>${springVersion}</version>
             </dependency>
             <dependency>
