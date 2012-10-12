@@ -22,18 +22,9 @@
 package org.opens.tanaguru.entity.statistics;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditImpl;
@@ -211,14 +202,16 @@ public class WebResourceStatisticsImpl
     }
 
     @Override
-    public Set<? extends ThemeStatistics> getThemeStatisticsSet() {
-        return themeStatisticsSet;
+    public Set<ThemeStatistics> getThemeStatisticsSet() {
+        return (Set<ThemeStatistics>)(LinkedHashSet)themeStatisticsSet;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public void setThemeStatisticsSet(Set<? extends ThemeStatistics> themeStatisticsSet) {
-        this.themeStatisticsSet.addAll((Collection<? extends ThemeStatisticsImpl>) themeStatisticsSet);
+    public void setThemeStatisticsSet(Set<ThemeStatistics> themeStatisticsSet) {
+        for (ThemeStatistics ts : themeStatisticsSet) {
+            this.themeStatisticsSet.add((ThemeStatisticsImpl)ts);
+        }
     }
 
     @Override
@@ -228,21 +221,22 @@ public class WebResourceStatisticsImpl
     }
 
     @Override
-    public Set<? extends TestStatistics> getTestStatisticsSet() {
-        return this.testStatisticsSet;
+    public Set<TestStatistics> getTestStatisticsSet() {
+        return (Set<TestStatistics>)(LinkedHashSet)testStatisticsSet;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public void setTestStatisticsSet(Set<? extends TestStatistics> testStatisticsSet) {
-        this.testStatisticsSet.addAll((Collection<? extends TestStatisticsImpl>) testStatisticsSet);
+    public void setTestStatisticsSet(Set<TestStatistics> testStatisticsSet) {
+        for (TestStatistics ts : testStatisticsSet) {
+            this.testStatisticsSet.add((TestStatisticsImpl)ts);
+        }
     }
 
     @Override
     public void addTestStatistics(TestStatistics testStatistics) {
         testStatistics.setWebResourceStatistics(this);
         this.testStatisticsSet.add((TestStatisticsImpl) testStatistics);
-
     }
 
     @Override
