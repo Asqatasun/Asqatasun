@@ -58,7 +58,7 @@ public interface SSP extends TextContent {
      * 
      * @return the list of related raw content of the ssp
      */
-    Set<? extends RelatedContent> getRelatedContentSet();
+    Set<RelatedContent> getRelatedContentSet();
 
     /**
      *
@@ -93,7 +93,7 @@ public interface SSP extends TextContent {
      * @param contentList
      *          The content list to add
      */
-    public void addAllRelationContent(Set<? extends RelatedContent> contentList);
+    public void addAllRelationContent(Set<RelatedContent> contentList);
 
     /**
      *

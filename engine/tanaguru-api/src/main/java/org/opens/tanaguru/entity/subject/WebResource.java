@@ -99,13 +99,13 @@ public interface WebResource extends Entity {
      *
      * @return the process result list
      */
-    Collection<? extends ProcessResult> getProcessResultList();
+    Collection<ProcessResult> getProcessResultList();
 
     /**
      *
      * @param processResultList the process result Collection to set
      */
-    void setProcessResultList(Collection<? extends ProcessResult> processResultList);
+    void setProcessResultList(Collection<ProcessResult> processResultList);
 
     /**
      *
@@ -131,6 +131,6 @@ public interface WebResource extends Entity {
      *
      * @param processResultList the process result Collection to add
      */
-    void addAllProcessResult(Collection<? extends ProcessResult> processResultList);
+    void addAllProcessResult(Collection<ProcessResult> processResultList);
 
 }

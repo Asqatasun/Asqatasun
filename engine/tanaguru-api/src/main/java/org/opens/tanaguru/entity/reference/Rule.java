@@ -53,7 +53,7 @@ public interface Rule extends Entity {
      * 
      * @return
      */
-    Collection<? extends Test> getTestList();
+    Collection<Test> getTestList();
 
     /**
      *
@@ -80,6 +80,6 @@ public interface Rule extends Entity {
      * 
      * @param testList
      */
-    void setTestList(Collection<? extends Test> testList);
+    void setTestList(Collection<Test> testList);
 
 }

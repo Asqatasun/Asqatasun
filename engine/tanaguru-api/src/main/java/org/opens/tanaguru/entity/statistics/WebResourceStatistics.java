@@ -108,13 +108,13 @@ public interface WebResourceStatistics extends Entity, ResultCounter {
      * 
      * @return
      */
-    public Set<? extends ThemeStatistics> getThemeStatisticsSet();
+    public Set<ThemeStatistics> getThemeStatisticsSet();
 
     /**
      * 
      * @param themeStatisticsSet
      */
-    public void setThemeStatisticsSet(Set<? extends ThemeStatistics> themeStatisticsSet);
+    public void setThemeStatisticsSet(Set<ThemeStatistics> themeStatisticsSet);
 
     /**
      *
@@ -126,13 +126,13 @@ public interface WebResourceStatistics extends Entity, ResultCounter {
      *
      * @return
      */
-    public Set<? extends TestStatistics> getTestStatisticsSet();
+    public Set<TestStatistics> getTestStatisticsSet();
 
     /**
      *
      * @param themeStatisticsSet
      */
-    public void setTestStatisticsSet(Set<? extends TestStatistics> themeStatisticsSet);
+    public void setTestStatisticsSet(Set<TestStatistics> themeStatisticsSet);
 
     /**
      *

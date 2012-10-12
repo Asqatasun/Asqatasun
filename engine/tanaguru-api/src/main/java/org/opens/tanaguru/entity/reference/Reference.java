@@ -49,7 +49,7 @@ public interface Reference extends Entity, Reorderable {
      *
      * @return the criterion list
      */
-    List<? extends Criterion> getCriterionList();
+    List<Criterion> getCriterionList();
 
     /**
      *
@@ -81,7 +81,7 @@ public interface Reference extends Entity, Reorderable {
      * @param criterionList
      *            the criterion list to set
      */
-    void setCriterionList(List<? extends Criterion> criterionList);
+    void setCriterionList(List<Criterion> criterionList);
 
     /**
      *

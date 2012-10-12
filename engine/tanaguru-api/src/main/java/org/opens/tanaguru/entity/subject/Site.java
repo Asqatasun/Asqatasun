@@ -55,13 +55,13 @@ public interface Site extends WebResource {
      *
      * @return the components
      */
-    Collection<? extends WebResource> getComponentList();
+    Collection<WebResource> getComponentList();
 
     /**
      *
      * @param components
      *            the components to set
      */
-    void setComponentList(Collection<? extends WebResource> components);
+    void setComponentList(Collection<WebResource> components);
 
 }

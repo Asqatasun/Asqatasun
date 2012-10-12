@@ -54,7 +54,7 @@ public interface Nomenclature extends Entity {
      *
      * @return the elements
      */
-    Collection<? extends NomenclatureElement> getElementList();
+    Collection<NomenclatureElement> getElementList();
 
     /**
      *
@@ -105,7 +105,7 @@ public interface Nomenclature extends Entity {
      * @param elements
      *            the elements to set
      */
-    void setElementList(Collection<? extends NomenclatureElement> elements);
+    void setElementList(Collection<NomenclatureElement> elements);
 
     /**
      *

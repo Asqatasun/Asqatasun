@@ -33,14 +33,14 @@ public interface RelatedContent {
      *
      * @return the list of related raw content of the ssp
      */
-    Set<? extends Content> getParentContentSet();
+    Set<Content> getParentContentSet();
 
     /**
      *
      * @param contentList
      *          The content list to add
      */
-    public void addAllParentContent(Set<? extends Content> contentList);
+    public void addAllParentContent(Set<Content> contentList);
 
     /**
      *

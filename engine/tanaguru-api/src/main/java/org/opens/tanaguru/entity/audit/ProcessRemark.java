@@ -104,13 +104,13 @@ public interface ProcessRemark extends Entity {
      *
      * @return the elements
      */
-    Collection<? extends EvidenceElement> getElementList();
+    Collection<EvidenceElement> getElementList();
 
     /**
      *
      * @param elements
      *            the elements to set
      */
-    void setElementList(Collection<? extends EvidenceElement> elements);
+    void setElementList(Collection<EvidenceElement> elements);
 
 }

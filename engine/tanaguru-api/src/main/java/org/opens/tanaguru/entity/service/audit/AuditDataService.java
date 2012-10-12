@@ -46,7 +46,7 @@ public interface AuditDataService extends GenericDataService<Audit, Long> {
      *            the status to find
      * @return the collection of the audits that have the status
      */
-    Collection<? extends Audit> findAll(AuditStatus status);
+    Collection<Audit> findAll(AuditStatus status);
 
     /**
      * 

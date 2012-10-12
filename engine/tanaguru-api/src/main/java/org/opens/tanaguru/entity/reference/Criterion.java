@@ -72,7 +72,7 @@ public interface Criterion extends Entity, Reorderable {
      *
      * @return the tests
      */
-    List<? extends Test> getTestList();
+    List<Test> getTestList();
 
     /**
      *
@@ -113,7 +113,7 @@ public interface Criterion extends Entity, Reorderable {
      * @param tests
      *            the tests to set
      */
-    void setTestList(List<? extends Test> tests);
+    void setTestList(List<Test> tests);
 
     /**
      *

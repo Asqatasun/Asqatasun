@@ -41,7 +41,7 @@ public interface Theme extends Entity, Reorderable {
      *
      * @return the criteria
      */
-    List<? extends Criterion> getCriterionList();
+    List<Criterion> getCriterionList();
 
     /**
      *
@@ -67,7 +67,7 @@ public interface Theme extends Entity, Reorderable {
      * @param criteria
      *            the criteria to set
      */
-    void setCriterionList(List<? extends Criterion> criteria);
+    void setCriterionList(List<Criterion> criteria);
 
     /**
      *
