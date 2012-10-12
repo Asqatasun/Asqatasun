@@ -169,7 +169,7 @@ public class ContentDataServiceMock implements ContentDataService{
     }
 
     @Override
-    public Collection<? extends Content> findAll() {
+    public Collection<Content> findAll() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
