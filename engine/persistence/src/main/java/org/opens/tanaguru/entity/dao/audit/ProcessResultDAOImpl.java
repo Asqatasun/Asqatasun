@@ -110,7 +110,7 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
     }
 
     @Override
-    public List<? extends ProcessResult> retrieveGrossResultFromAudit(Audit audit) {
+    public List<ProcessResult> retrieveGrossResultFromAudit(Audit audit) {
         Query query = entityManager.createQuery("SELECT pr FROM "
                 + getEntityClass().getName() + " pr "
                 + " LEFT JOIN FETCH pr.subject"
@@ -122,7 +122,7 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
     }
 
     @Override
-    public List<? extends ProcessResult> retrieveNetResultFromAudit(Audit audit) {
+    public List<ProcessResult> retrieveNetResultFromAudit(Audit audit) {
         Query query = entityManager.createQuery("SELECT pr FROM "
                 + getEntityClass().getName() + " pr "
                 + " LEFT JOIN FETCH pr.subject"
@@ -133,7 +133,7 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
     }
 
     @Override
-    public List<? extends ProcessResult> retrieveNetResultFromAuditAndWebResource(Audit audit, WebResource webResource) {
+    public List<ProcessResult> retrieveNetResultFromAuditAndWebResource(Audit audit, WebResource webResource) {
         Query query = entityManager.createQuery("SELECT pr FROM "
                 + getDefitiniteResultClass().getName() + " pr "
                 + " WHERE "
@@ -145,7 +145,7 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
     }
 
     @Override
-    public List<? extends ProcessResult> retrieveGrossResultFromAuditAndTest(Audit audit, Test test) {
+    public List<ProcessResult> retrieveGrossResultFromAuditAndTest(Audit audit, Test test) {
         Query query = entityManager.createQuery("SELECT pr FROM "
                 + getEntityClass().getName() + " pr "
                 + " LEFT JOIN FETCH pr.subject"
