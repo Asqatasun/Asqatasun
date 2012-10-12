@@ -21,13 +21,12 @@
  */
 package org.opens.tanaguru.sdk.entity.service;
 
-import org.opens.tanaguru.sdk.entity.Entity;
 import java.io.Serializable;
 import java.util.Collection;
-
-import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
-import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 import java.util.Set;
+import org.opens.tanaguru.sdk.entity.Entity;
+import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
+import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
 
 /**
  * 
@@ -74,7 +73,7 @@ public interface GenericDataService<E extends Entity, K extends Serializable> {
      *
      * @return all instancies of the entity
      */
-    Collection<? extends E> findAll();
+    Collection<E> findAll();
 
     /**
      *
