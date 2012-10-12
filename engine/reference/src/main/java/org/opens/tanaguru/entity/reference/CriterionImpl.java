@@ -24,16 +24,7 @@ package org.opens.tanaguru.entity.reference;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -81,75 +72,94 @@ public class CriterionImpl implements Criterion, Serializable {
         this.description = description;
     }
 
+    @Override
     public void addTest(Test test) {
         test.setCriterion(this);
         this.testList.add((TestImpl) test);
     }
 
+    @Override
     public String getCode() {
         return code;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public String getLabel() {
         return label;
     }
 
+    @Override
     public int getRank() {
         return rank;
     }
 
+    @Override
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.ReferenceImpl.class)
     public Reference getReference() {
         return reference;
     }
 
+    @Override
     @XmlElementWrapper
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.TestImpl.class)
-    public List<TestImpl> getTestList() {
-        return testList;
+    public List<Test> getTestList() {
+        return (ArrayList<Test>)(ArrayList)testList;
     }
 
+    @Override
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.ThemeImpl.class)
     public Theme getTheme() {
         return theme;
     }
 
+    @Override
     public void setCode(String code) {
         this.code = code;
     }
 
+    @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
+    @Override
     public void setLabel(String label) {
         this.label = label;
     }
 
+    @Override
     public void setRank(int rank) {
         this.rank = rank;
     }
 
+    @Override
     public void setReference(Reference reference) {
         this.reference = (ReferenceImpl) reference;
     }
 
-    public void setTestList(List<? extends Test> testList) {
-        this.testList = (List<TestImpl>) testList;
+    @Override
+    public void setTestList(List<Test> testList) {
+        for (Test test : testList) {
+            this.testList.add((TestImpl)test);
+        }
     }
 
+    @Override
     public void setTheme(Theme theme) {
         this.theme = (ThemeImpl) theme;
     }

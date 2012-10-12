@@ -23,14 +23,7 @@ package org.opens.tanaguru.entity.reference;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -66,42 +59,54 @@ public class RulePackageImpl implements RulePackage {
         this.description = description;
     }
 
+    @Override
     public void addRule(Rule rule) {
         rule.setOwningPackage(this);
         this.ruleList.add((RuleImpl) rule);
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public String getPackageName() {
         return packageName;
     }
 
+    @Override
     @XmlElementWrapper
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.RuleImpl.class)
-    public Collection<RuleImpl> getRuleList() {
-        return ruleList;
+    public Collection<Rule> getRuleList() {
+        return (Collection<Rule>) (ArrayList) ruleList;
     }
 
+    @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
+    @Override
     public void setPackageName(String packageName) {
         this.packageName = packageName;
     }
 
-    public void setRuleList(Collection<? extends Rule> ruleList) {
-        this.ruleList = (Collection<RuleImpl>) ruleList;
+    @Override
+    public void setRuleList(Collection<Rule> ruleList) {
+        for (Rule rule : ruleList) {
+            this.ruleList.add((RuleImpl)rule);
+        }
     }
+    
 }

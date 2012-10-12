@@ -23,18 +23,12 @@ package org.opens.tanaguru.entity.reference;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.hibernate.collection.PersistentBag;
 
 /**
  * 
@@ -72,52 +66,69 @@ public class ThemeImpl implements Theme, Serializable {
         this.description = description;
     }
 
+    @Override
     public String getCode() {
         return code;
     }
 
+    @Override
     @XmlElementWrapper
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.CriterionImpl.class)
-    public List<CriterionImpl> getCriterionList() {
-        return criterionList;
+    public List<Criterion> getCriterionList() {
+        if (criterionList instanceof PersistentBag) {
+            return (List<Criterion>) (PersistentBag)criterionList;
+        }
+        return (List<Criterion>) (ArrayList)criterionList;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public String getLabel() {
         return label;
     }
 
+    @Override
     public int getRank() {
         return rank;
     }
 
+    @Override
     public void setCode(String code) {
         this.code = code;
     }
 
-    public void setCriterionList(List<? extends Criterion> criterionList) {
-        this.criterionList = (List<CriterionImpl>) criterionList;
+    @Override
+    public void setCriterionList(List<Criterion> criterionList) {
+        for (Criterion cr : criterionList) {
+            this.criterionList.add((CriterionImpl)cr);
+        }
     }
 
+    @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
+    @Override
     public void setLabel(String label) {
         this.label = label;
     }
 
+    @Override
     public void setRank(int rank) {
         this.rank = rank;
     }

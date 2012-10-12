@@ -21,25 +21,16 @@
  */
 package org.opens.tanaguru.entity.reference;
 
-import org.opens.tanaguru.entity.service.reference.NomenclatureCssUnit;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.hibernate.collection.PersistentBag;
+import org.opens.tanaguru.entity.service.reference.NomenclatureCssUnit;
 
 /**
  * 
@@ -77,15 +68,18 @@ public class NomenclatureImpl implements Nomenclature, Serializable {
         this.code = code;
     }
 
+    @Override
     public void addElement(NomenclatureElement element) {
         element.setNomenclature(this);
         elementList.add((NomenclatureElementImpl) element);
     }
 
+    @Override
     public String getCode() {
         return code;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
@@ -94,14 +88,20 @@ public class NomenclatureImpl implements Nomenclature, Serializable {
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.reference.NomenclatureElementImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.reference.NomenclatureCssUnitImpl.class)})
-    public Collection<NomenclatureElementImpl> getElementList() {
-        return elementList;
+    @Override
+    public Collection<NomenclatureElement> getElementList() {
+        if (elementList instanceof PersistentBag) {
+            return (Collection<NomenclatureElement>) (PersistentBag) elementList;    
+        }
+        return (Collection<NomenclatureElement>) (HashSet) elementList;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public Collection<Integer> getIntegerValueList() {
         Collection<Integer> values = new HashSet<Integer>();
         for (NomenclatureElement element : elementList) {
@@ -113,18 +113,22 @@ public class NomenclatureImpl implements Nomenclature, Serializable {
         return values;
     }
 
+    @Override
     public String getLongLabel() {
         return longLabel;
     }
 
+    @Override
     public Nomenclature getParent() {
         return parent;
     }
 
+    @Override
     public String getShortLabel() {
         return shortLabel;
     }
 
+    @Override
     public Collection<String> getValueList() {
         Collection<String> values = new HashSet<String>();
         for (NomenclatureElement element : elementList) {
@@ -133,32 +137,42 @@ public class NomenclatureImpl implements Nomenclature, Serializable {
         return values;
     }
 
+    @Override
     public void setCode(String code) {
         this.code = code;
     }
 
+    @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
+    @Override
     public void setElementList(
-            Collection<? extends NomenclatureElement> elementList) {
-        this.elementList = (Collection<NomenclatureElementImpl>) elementList;
+            Collection<NomenclatureElement> elementList) {
+        for (NomenclatureElement nomEl : elementList) {
+            this.elementList.add((NomenclatureElementImpl)nomEl);
+        }
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
+    @Override
     public void setLongLabel(String longLabel) {
         this.longLabel = longLabel;
     }
 
+    @Override
     public void setParent(Nomenclature parent) {
         this.parent = (NomenclatureImpl) parent;
     }
 
+    @Override
     public void setShortLabel(String label) {
         this.shortLabel = label;
     }
+
 }
