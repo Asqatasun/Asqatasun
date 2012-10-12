@@ -25,23 +25,9 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
+import org.hibernate.collection.PersistentSet;
 
 /**
  * 
@@ -147,13 +133,18 @@ public class ProcessRemarkImpl implements ProcessRemark, Serializable {
     @XmlElementWrapper
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.EvidenceElementImpl.class)})
-    public Collection<EvidenceElementImpl> getElementList() {
-        return elementList;
+    public Collection<EvidenceElement> getElementList() {
+        if (elementList instanceof PersistentSet) {
+            return (Collection<EvidenceElement>)(PersistentSet)elementList;
+        }
+        return (Collection<EvidenceElement>)(LinkedHashSet)elementList;
     }
 
     @Override
-    public void setElementList(
-            Collection<? extends EvidenceElement> elementList) {
-        this.elementList = (Set<EvidenceElementImpl>) elementList;
+    public void setElementList(Collection<EvidenceElement> elementList) {
+        for (EvidenceElement evEl : elementList) {
+            this.elementList.add((EvidenceElementImpl) elementList);
+        }
     }
+    
 }

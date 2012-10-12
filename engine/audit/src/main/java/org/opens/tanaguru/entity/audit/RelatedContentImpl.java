@@ -89,17 +89,21 @@ public class RelatedContentImpl extends ContentImpl implements
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.SSPImpl.class)})
     @XmlTransient
-    public Set<ContentImpl> getParentContentSet() {
-        return parentContentSet;
+    @Override
+    public Set<Content> getParentContentSet() {
+        return (Set<Content>)(HashSet)parentContentSet;
     }
 
-    public void addAllParentContent(Set<? extends Content> contentList) {
+    @Override
+    public void addAllParentContent(Set<Content> contentList) {
         for (Content content : contentList) {
             addParentContent(content);
         }
     }
 
+    @Override
     public void addParentContent(Content content) {
         this.parentContentSet.add((ContentImpl) content);
     }
+    
 }

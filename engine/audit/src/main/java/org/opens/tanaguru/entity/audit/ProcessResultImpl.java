@@ -22,27 +22,13 @@
 package org.opens.tanaguru.entity.audit;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-
+import java.util.*;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.collection.PersistentSet;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.TestImpl;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -92,7 +78,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     }
 
     @Override
-    public void addAllRemark(Collection<? extends ProcessRemark> remarkSet) {
+    public void addAllRemark(Collection<ProcessRemark> remarkSet) {
         if (remarkSet == null) {
             return;
         }
@@ -119,8 +105,8 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.DefiniteResultImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.IndefiniteResultImpl.class)})
-    public List<ProcessResultImpl> getChildResultList() {
-        return childResultList;
+    public List<ProcessResult> getChildResultList() {
+        return (List<ProcessResult>)(ArrayList)childResultList;
     }
 
     @Override
@@ -151,8 +137,11 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.ProcessRemarkImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.SourceCodeRemarkImpl.class)})
-    public Collection<ProcessRemarkImpl> getRemarkSet() {
-        return remarkList;
+    public Collection<ProcessRemark> getRemarkSet() {
+        if (remarkList instanceof PersistentSet) {
+            return (Collection<ProcessRemark>)(PersistentSet)remarkList;    
+        }
+        return (Collection<ProcessRemark>)(LinkedHashSet)remarkList;
     }
 
     @Override
@@ -176,11 +165,11 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
 
     @Override
     public void setChildResultList(
-            Collection<? extends ProcessResult> childResultList) {
+            Collection<ProcessResult> childResultList) {
         for (ProcessResult processResult : childResultList) {
             processResult.setParentResult(this);
+            this.childResultList.add((ProcessResultImpl)childResultList);
         }
-        this.childResultList = (List<ProcessResultImpl>) childResultList;
     }
 
     @Override
@@ -204,11 +193,11 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     }
 
     @Override
-    public void setRemarkSet(Collection<? extends ProcessRemark> remarkSet) {
+    public void setRemarkSet(Collection<ProcessRemark> remarkSet) {
         for (ProcessRemark processRemark : remarkSet) {
             processRemark.setProcessResult(this);
+            this.remarkList.add((ProcessRemarkImpl)processRemark);
         }
-        this.remarkList = (Set<ProcessRemarkImpl>) remarkSet;
     }
 
     @Override

@@ -22,24 +22,14 @@
 package org.opens.tanaguru.entity.audit;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-
-import org.opens.tanaguru.entity.subject.Page;
-import org.opens.tanaguru.entity.subject.PageImpl;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
+import org.hibernate.collection.PersistentSet;
+import org.opens.tanaguru.entity.subject.Page;
+import org.opens.tanaguru.entity.subject.PageImpl;
 
 /**
  * 
@@ -130,7 +120,7 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
 
     @Override
     public void setPage(Page page) {
-        this.page = (PageImpl) page;
+            this.page = (PageImpl) page;
     }
 
     @Override
@@ -149,14 +139,19 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.StylesheetContentImpl.class)})
 //    @XmlTransient
     @Override
-    public Set<RelatedContentImpl> getRelatedContentSet() {
-        return relatedContentSet;
+    public Set<RelatedContent> getRelatedContentSet() {
+        if (relatedContentSet instanceof PersistentSet) {
+            return (Set<RelatedContent>) (PersistentSet)relatedContentSet;
+        }
+        return (Set<RelatedContent>) (HashSet)relatedContentSet;
     }
 
     @Override
-    public void addAllRelationContent(Set<? extends RelatedContent> contentList) {
+    public void addAllRelationContent(Set<RelatedContent> contentList) {
         for (RelatedContent content : contentList) {
-            addRelatedContent(content);
+            if (content instanceof RelatedContentImpl) {
+                addRelatedContent((RelatedContentImpl)content);
+            }
         }
     }
 

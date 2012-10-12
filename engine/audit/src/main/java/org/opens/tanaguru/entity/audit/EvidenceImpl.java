@@ -89,8 +89,8 @@ public class EvidenceImpl implements Evidence, Serializable {
     @XmlElementWrapper
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.EvidenceElementImpl.class)})
-    public Collection<EvidenceElementImpl> getElementList() {
-        return elementList;
+    public Collection<EvidenceElement> getElementList() {
+        return (Collection<EvidenceElement>)(HashSet)elementList;
     }
 
     @Override
@@ -135,8 +135,10 @@ public class EvidenceImpl implements Evidence, Serializable {
 
     @Override
     public void setElementList(
-            Collection<? extends EvidenceElement> elementList) {
-        this.elementList = (Collection<EvidenceElementImpl>) elementList;
+            Collection<EvidenceElement> elementList) {
+        for (EvidenceElement evEl : elementList) {
+            this.elementList.add((EvidenceElementImpl)evEl);
+        }
     }
 
     @Override

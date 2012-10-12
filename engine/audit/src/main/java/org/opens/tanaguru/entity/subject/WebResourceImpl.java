@@ -159,14 +159,14 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.IndefiniteResultImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.DefiniteResultImpl.class)})
-    public Collection<ProcessResultImpl> getProcessResultList() {
-        return processResultList;
+    public Collection<ProcessResult> getProcessResultList() {
+        return (Collection<ProcessResult>)(LinkedHashSet)processResultList;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public void setProcessResultList(Collection<? extends ProcessResult> processResultList) {
-        this.processResultList = (HashSet<ProcessResultImpl>) processResultList;
+    public void setProcessResultList(Collection<ProcessResult> processResultList) {
+        addAllProcessResult(processResultList);
     }
 
     @Override
@@ -176,7 +176,7 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     }
 
     @Override
-    public void addAllProcessResult(Collection<? extends ProcessResult> processResultList) {
+    public void addAllProcessResult(Collection<ProcessResult> processResultList) {
         for (ProcessResult processResult : processResultList) {
             addProcessResult(processResult);
         }

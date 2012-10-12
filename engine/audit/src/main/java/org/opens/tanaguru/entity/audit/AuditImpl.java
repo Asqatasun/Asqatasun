@@ -25,30 +25,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import org.opens.tanaguru.entity.reference.Test;
-import org.opens.tanaguru.entity.reference.TestImpl;
-import org.opens.tanaguru.entity.subject.WebResource;
-import org.opens.tanaguru.entity.subject.WebResourceImpl;
 import java.util.List;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.hibernate.collection.PersistentBag;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.parameterization.ParameterImpl;
+import org.opens.tanaguru.entity.reference.Test;
+import org.opens.tanaguru.entity.reference.TestImpl;
+import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.entity.subject.WebResourceImpl;
 
 /**
  * 
@@ -100,28 +89,28 @@ public class AuditImpl implements Audit, Serializable {
     }
 
     @Override
-    public void addAllContent(List<? extends Content> contentList) {
+    public void addAllContent(List<Content> contentList) {
         for (Content content : contentList) {
             addContent(content);
         }
     }
 
     @Override
-    public void addAllGrossResult(List<? extends ProcessResult> pageResultList) {
+    public void addAllGrossResult(List<ProcessResult> pageResultList) {
         for (ProcessResult pageResult : pageResultList) {
             addGrossResult(pageResult);
         }
     }
 
     @Override
-    public void addAllNetResult(List<? extends ProcessResult> testResultList) {
+    public void addAllNetResult(List<ProcessResult> testResultList) {
         for (ProcessResult testResult : testResultList) {
             addNetResult(testResult);
         }
     }
 
     @Override
-    public void addAllTest(List<? extends Test> testList) {
+    public void addAllTest(List<Test> testList) {
         for (Test test : testList) {
             addTest(test);
         }
@@ -167,8 +156,8 @@ public class AuditImpl implements Audit, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.SSPImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.JavascriptContentImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.StylesheetContentImpl.class)})
-    public List<ContentImpl> getContentList() {
-        return contentList;
+    public List<Content> getContentList() {
+        return (List<Content>)(ArrayList)contentList;
     }
 
     @Override
@@ -181,8 +170,8 @@ public class AuditImpl implements Audit, Serializable {
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.IndefiniteResultImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.DefiniteResultImpl.class)})
-    public List<ProcessResultImpl> getGrossResultList() {
-        return grossResultList;
+    public List<ProcessResult> getGrossResultList() {
+        return (List<ProcessResult>)(ArrayList)grossResultList;
     }
 
     @Override
@@ -193,8 +182,8 @@ public class AuditImpl implements Audit, Serializable {
     @Override
     @XmlElementWrapper
     @XmlElementRef(type = org.opens.tanaguru.entity.audit.DefiniteResultImpl.class)
-    public List<ProcessResultImpl> getNetResultList() {
-        return netResultList;
+    public List<ProcessResult> getNetResultList() {
+        return (List<ProcessResult>)(ArrayList)netResultList;
     }
 
     @Override
@@ -213,8 +202,11 @@ public class AuditImpl implements Audit, Serializable {
     @Override
     @XmlElementWrapper
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.TestImpl.class)
-    public List<TestImpl> getTestList() {
-        return testList;
+    public List<Test> getTestList() {
+        if (testList instanceof PersistentBag) {
+            return (List<Test>)(PersistentBag)testList;
+        }
+        return (List<Test>)(ArrayList)testList;
     }
 
     @Override
@@ -223,11 +215,11 @@ public class AuditImpl implements Audit, Serializable {
     }
 
     @Override
-    public void setContentList(List<? extends Content> contentList) {
+    public void setContentList(List<Content> contentList) {
         for (Content content : contentList) {
             content.setAudit(this);
+            this.contentList.add((ContentImpl)content);
         }
-        this.contentList = (List<ContentImpl>) contentList;
     }
 
     @Override
@@ -236,11 +228,11 @@ public class AuditImpl implements Audit, Serializable {
     }
 
     @Override
-    public void setGrossResultList(List<? extends ProcessResult> pageResultList) {
+    public void setGrossResultList(List<ProcessResult> pageResultList) {
         for (ProcessResult grossResult : pageResultList) {
             grossResult.setGrossResultAudit(this);
+            this.grossResultList.add((ProcessResultImpl)grossResult);
         }
-        this.grossResultList = (List<ProcessResultImpl>) pageResultList;
     }
 
     @Override
@@ -249,11 +241,11 @@ public class AuditImpl implements Audit, Serializable {
     }
 
     @Override
-    public void setNetResultList(List<? extends ProcessResult> netResultList) {
+    public void setNetResultList(List<ProcessResult> netResultList) {
         for (ProcessResult netResult : netResultList) {
             netResult.setNetResultAudit(this);
+            this.netResultList.add((ProcessResultImpl)netResult);
         }
-        this.netResultList = (List<ProcessResultImpl>) netResultList;
     }
 
     @Override
@@ -262,13 +254,17 @@ public class AuditImpl implements Audit, Serializable {
     }
 
     @Override
-    public void setTestList(List<? extends Test> testList) {
-        this.testList = (List<TestImpl>) testList;
+    public void setTestList(List<Test> testList) {
+        for (Test test : testList) {
+            this.testList.add((TestImpl)test);
+        }
     }
 
     @Override
-    public void setParameterSet(Collection<? extends Parameter> parameterSet){
-        this.parameterSet.addAll((Collection<ParameterImpl>)parameterSet);
+    public void setParameterSet(Collection<Parameter> parameterSet){
+        for(Parameter param: parameterSet) {
+            this.parameterSet.add((ParameterImpl)param);
+        }
     }
     
     @Override
@@ -277,8 +273,23 @@ public class AuditImpl implements Audit, Serializable {
     }
 
     @Override
-    public Collection<? extends Parameter> getParameterSet() {
-        return parameterSet;
+    public Collection<Parameter> getParameterSet() {
+        if (parameterSet instanceof PersistentBag) {
+            return (Collection<Parameter>)(PersistentBag)parameterSet;
+        }
+        return (Collection<Parameter>)(ArrayList)parameterSet;
+    }
+
+    @Override 
+    public boolean equals (Object object) {
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
+        return hash;
     }
 
 }
