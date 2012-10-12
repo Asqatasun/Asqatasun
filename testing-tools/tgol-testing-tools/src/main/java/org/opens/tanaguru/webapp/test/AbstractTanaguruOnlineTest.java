@@ -21,16 +21,18 @@
  */
 package org.opens.tanaguru.webapp.test;
 
-import com.thoughtworks.selenium.SeleneseTestCase;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 
 import java.util.ResourceBundle;
 import java.util.logging.Level;
+import junit.framework.TestCase;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.webapp.test.data.KrashtestResult;
 
@@ -40,7 +42,7 @@ import org.opens.tanaguru.webapp.test.data.KrashtestResult;
  * The test.properties file defines the url and the name of the webapp to test
  * @author jkowalczyk
  */
-public abstract class AbstractTanaguruOnlineTest extends SeleneseTestCase {
+public abstract class AbstractTanaguruOnlineTest extends TestCase {
 
     private static final String LOADING_ERROR_STR_EN =
             "A problem occured while loading the content of the page";
@@ -59,39 +61,50 @@ public abstract class AbstractTanaguruOnlineTest extends SeleneseTestCase {
     private static final String BUNDLE_NAME = "test";
     private static final String RESULT_PATH_KEY = "result_path";
     private static final String USER_CONFIG_PATH_KEY = "user_config_path";
+    private static final String FIREFOX_LOCATION_KEY = "firefox_bin_location";
     private static final String HOST_LOCATION_KEY = "host_location";
+    
     private static final String LOGIN_URL_KEY = "login_url";
     private static final String LOGOUT_URL_KEY = "logout_url";
-    private static final String BROWSER_NAME_KEY = "browser_name";
+    
     private static final String FIELD_NAME_KEY = "field_name";
     private static final String USER_FIELD_NAME_KEY = "user_field_name";
     private static final String PASSWORD_FIELD_NAME_KEY = "password_field_name";
+    
     private static final String USER_KEY = "user";
     private static final String PASSWORD_KEY = "password";
     private static final String FORM_URL_KEY = "form_url";
+    
     private static final String TEXT_EXTENSION = ".txt";
-    private static final String FORM_PAGE_LOAD_TIMER = "1000";
-    private static final String LOGIN_TIMER = "1000";
-    private static final String RESULT_PAGE_LOAD_TIMER = "500000";
     private static final String SUBMIT_BUTTON_NAME = "input-submit";
     private static final String LOGIN_BUTTON_NAME = "Login";
+    private static final String FIREFOX_SYSTEM_PROPERTY = "webdriver.firefox.bin";
+    
     public static final String RULE_NOT_YET_IMPLEMENTED =
             "RULE_NOT_YET_IMPLEMENTED";
+    
     private static final char DOUBLE_QUOTE_CHAR = '"';
     private static final String RULE_RESULT_EXPRESSION = "rule-result ";
+    
     protected String resultFilePath;
     protected String userConfigFilePath;
+    
     protected String hostLocation;
+    protected String firefoxLocation;
+    
     protected String loginUrl;
     protected String logoutUrl;
     protected String formUrl;
-    protected String browserName;
+    
     protected String fieldName;
     protected String userFieldName;
     protected String passwordFieldName;
+    
     protected String user;
     protected String password;
 
+    FirefoxDriver driver;
+    
     /**
      * Default constructor
      */
@@ -101,7 +114,6 @@ public abstract class AbstractTanaguruOnlineTest extends SeleneseTestCase {
 
     @Override
     public void setUp() throws Exception {
-        setUp(hostLocation, browserName);
     }
 
     /**
@@ -113,8 +125,8 @@ public abstract class AbstractTanaguruOnlineTest extends SeleneseTestCase {
         userConfigFilePath = parametersBundle.getString(USER_CONFIG_PATH_KEY);
         userFieldName = parametersBundle.getString(USER_FIELD_NAME_KEY);
         passwordFieldName = parametersBundle.getString(PASSWORD_FIELD_NAME_KEY);
-        browserName = parametersBundle.getString(BROWSER_NAME_KEY);
         fieldName = parametersBundle.getString(FIELD_NAME_KEY);
+        
         PropertiesConfiguration config = null;
         try {
             config = new PropertiesConfiguration(userConfigFilePath);
@@ -123,12 +135,23 @@ public abstract class AbstractTanaguruOnlineTest extends SeleneseTestCase {
                     getLogger(AbstractTanaguruOnlineTest.class.getName()).
                         log(Level.SEVERE, null, ex);
         }
+        
+        hostLocation = config.getString(HOST_LOCATION_KEY);
+        firefoxLocation = config.getString(FIREFOX_LOCATION_KEY);
+        
         user = config.getString(USER_KEY);
         password = config.getString(PASSWORD_KEY);
-        hostLocation = config.getString(HOST_LOCATION_KEY);
-        loginUrl = config.getString(LOGIN_URL_KEY);
-        formUrl = config.getString(FORM_URL_KEY);
-        logoutUrl = config.getString(LOGOUT_URL_KEY);
+        
+        loginUrl = hostLocation + config.getString(LOGIN_URL_KEY);
+        formUrl = hostLocation + config.getString(FORM_URL_KEY);
+        logoutUrl = hostLocation + config.getString(LOGOUT_URL_KEY);
+        
+        System.setProperty(FIREFOX_SYSTEM_PROPERTY, firefoxLocation);
+        
+        if (driver == null) {
+            driver = new FirefoxDriver(new FirefoxProfile());
+        }
+
     }
 
     /**
@@ -138,16 +161,15 @@ public abstract class AbstractTanaguruOnlineTest extends SeleneseTestCase {
      * @return
      */
     protected String launchTanaguru(String siteName, String[] url) {
+        System.out.println("launchTanaguru()   " + formUrl);
         login();
-        selenium.open(formUrl);
+        driver.get(formUrl);
         for (int i=0 ; i<url.length ; i++) {
-            selenium.type(fieldName+i, url[i]);
+            driver.findElementById(fieldName+i).sendKeys(url[i]);
         }
-        selenium.click(SUBMIT_BUTTON_NAME);
-        selenium.waitForPageToLoad(RESULT_PAGE_LOAD_TIMER);
-        String responseBody = selenium.getHtmlSource();
-        selenium.open(logoutUrl);
-        selenium.waitForPageToLoad(FORM_PAGE_LOAD_TIMER);
+        driver.findElementById(SUBMIT_BUTTON_NAME).submit();
+        String responseBody = driver.getPageSource();
+        driver.get(logoutUrl);
         return responseBody;
     }
 
@@ -218,12 +240,14 @@ public abstract class AbstractTanaguruOnlineTest extends SeleneseTestCase {
         }
     }
 
+    /**
+     * 
+     */
     private void login (){
-        selenium.open(loginUrl);
-        selenium.type(userFieldName, user);
-        selenium.type(passwordFieldName, password);
-        selenium.click(LOGIN_BUTTON_NAME);
-        selenium.waitForPageToLoad(LOGIN_TIMER);
+        driver.get(loginUrl);
+        driver.findElementById(userFieldName).sendKeys(user);
+        driver.findElementById(passwordFieldName).sendKeys(password);
+        driver.findElementByName(LOGIN_BUTTON_NAME).submit();
     }
 
 }
