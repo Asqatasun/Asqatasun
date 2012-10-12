@@ -204,7 +204,7 @@ public class AuditImpl implements Audit, Serializable {
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.TestImpl.class)
     public List<Test> getTestList() {
         if (testList instanceof PersistentBag) {
-            return (List<Test>)(PersistentBag)testList;
+            return (PersistentBag)testList;
         }
         return (List<Test>)(ArrayList)testList;
     }
@@ -275,21 +275,9 @@ public class AuditImpl implements Audit, Serializable {
     @Override
     public Collection<Parameter> getParameterSet() {
         if (parameterSet instanceof PersistentBag) {
-            return (Collection<Parameter>)(PersistentBag)parameterSet;
+            return (PersistentBag)parameterSet;
         }
         return (Collection<Parameter>)(ArrayList)parameterSet;
-    }
-
-    @Override 
-    public boolean equals (Object object) {
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
-        return hash;
     }
 
 }
