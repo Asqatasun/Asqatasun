@@ -145,7 +145,7 @@ public class ProcessRemarkImpl implements ProcessRemark, Serializable {
             this.elementSet = new LinkedHashSet<EvidenceElementImpl>();
         }
         for (EvidenceElement evEl : elementList) {
-            this.elementSet.add((EvidenceElementImpl) elementList);
+            this.elementSet.add((EvidenceElementImpl) evEl);
         }
     }
     
