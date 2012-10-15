@@ -22,12 +22,12 @@
 package org.opens.tgol.form.parameterization.builder;
 
 import org.apache.log4j.Logger;
-import org.opens.tanaguru.entity.parameterization.ParameterElement;
-import org.opens.tanaguru.entity.service.parameterization.ParameterElementDataService;
+import org.opens.tgol.entity.option.Option;
+import org.opens.tgol.entity.service.option.OptionDataService;
 import org.opens.tgol.form.FormField;
 import org.opens.tgol.form.builder.AbstractGenericFormFieldBuilder;
-import org.opens.tgol.form.parameterization.AuditSetUpFormField;
-import org.opens.tgol.form.parameterization.AuditSetUpFormFieldImpl;
+import org.opens.tgol.form.parameterization.ContractOptionFormField;
+import org.opens.tgol.form.parameterization.ContractOptionFormFieldImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -36,34 +36,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 
  * @author jkowalczyk
  */
-public class AuditSetUpFormFieldBuilderImpl implements AuditSetUpFormFieldBuilder {
-
-    private ParameterElementDataService parameterElementDataService;
-    @Autowired
-    public void setParameterElementDataService(ParameterElementDataService parameterElementDataService) {
-        this.parameterElementDataService = parameterElementDataService;
-    }
-    
-    private ParameterElement parameterElement;
-    @Override
-    public ParameterElement getParameterElement() {
-        return this.parameterElement;
-    }
-
-    @Override
-    public void setParameterCode(String parameterCode) {
-        parameterElement = parameterElementDataService.getParameterElement(parameterCode);
-        if (parameterElement == null) {
-            Logger.getLogger(this.getClass()).fatal("The parameter Code "
-                    + parameterCode
-                    + " does not exist in database");
-            try {
-              System.exit(0);
-            } finally {
-                System.exit(1);
-            }
-        }
-    }
+public class ContractOptionFormFieldBuilderImpl implements ContractOptionFormFieldBuilder {
 
     private AbstractGenericFormFieldBuilder<? extends FormField> formFieldBuilder;
     @Override
@@ -76,9 +49,36 @@ public class AuditSetUpFormFieldBuilderImpl implements AuditSetUpFormFieldBuilde
         this.formFieldBuilder = formFieldBuilder;
     }
 
+    private OptionDataService optionDataService;
+    @Autowired
+    public void setOptionDataService(OptionDataService optionDataService) {
+        this.optionDataService = optionDataService;
+    }
+
+    private Option option;
     @Override
-    public AuditSetUpFormField build() {
-        return new AuditSetUpFormFieldImpl(this);
+    public Option getOption() {
+        return this.option;
+    }
+
+    @Override
+    public void setOptionCode(String optionCode) {
+        option = optionDataService.getOption(optionCode);
+        if (option == null) {
+            Logger.getLogger(this.getClass()).fatal("The option Code "
+                    + optionCode
+                    + " does not exist in database");
+            try {
+              System.exit(0);
+            } finally {
+                System.exit(1);
+            }
+        }
+    }
+    
+    @Override
+    public ContractOptionFormField build() {
+        return new ContractOptionFormFieldImpl(this);
     }
 
 }

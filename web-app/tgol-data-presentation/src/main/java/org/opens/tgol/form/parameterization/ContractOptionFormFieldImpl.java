@@ -21,30 +21,19 @@
  */
 package org.opens.tgol.form.parameterization;
 
-import org.opens.tanaguru.entity.parameterization.ParameterElement;
+import org.opens.tgol.entity.option.Option;
 import org.opens.tgol.form.FormField;
-import org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilder;
+import org.opens.tgol.form.parameterization.builder.ContractOptionFormFieldBuilder;
 
 /**
  *
  * @author jkowalczyk
  */
-public class AuditSetUpFormFieldImpl implements AuditSetUpFormField {
+public class ContractOptionFormFieldImpl implements ContractOptionFormField {
 
-    public AuditSetUpFormFieldImpl(AuditSetUpFormFieldBuilder auditSetUpFormFieldBuilder) {
-        this.parameterElement = auditSetUpFormFieldBuilder.getParameterElement();
-        this.formField = auditSetUpFormFieldBuilder.getFormField();
-    }
-
-    private ParameterElement parameterElement;
-    @Override
-    public ParameterElement getParameterElement() {
-        return this.parameterElement;
-    }
-
-    @Override
-    public void setParameterElement(ParameterElement parameterElement) {
-        this.parameterElement = parameterElement;
+    public ContractOptionFormFieldImpl(ContractOptionFormFieldBuilder contractOptionFormFieldBuilder) {
+        this.formField = contractOptionFormFieldBuilder.getFormField();
+        this.option = contractOptionFormFieldBuilder.getOption();
     }
 
     private FormField formField;
@@ -57,5 +46,16 @@ public class AuditSetUpFormFieldImpl implements AuditSetUpFormField {
     public void setFormField(FormField formField) {
         this.formField = formField;
     }
+
+    private Option option;
+    @Override
+    public Option getOption() {
+        return option;
+    }
     
+    @Override
+    public void setOption(Option option) {
+        this.option = option;
+    }
+
 }
