@@ -42,7 +42,7 @@ public class DefiniteResultImpl extends ProcessResultImpl implements
 
     @Enumerated(EnumType.STRING)
     @Column(name = "Definite_Value")
-    protected TestSolution definiteValue;
+    private TestSolution definiteValue;
 
     public DefiniteResultImpl() {
         super();

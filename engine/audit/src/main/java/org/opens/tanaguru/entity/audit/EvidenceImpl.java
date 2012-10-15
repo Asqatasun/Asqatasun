@@ -48,17 +48,17 @@ public class EvidenceImpl implements Evidence, Serializable {
 
     private static final long serialVersionUID = -5891443605163793783L;
     @Column(name = "Cd_Evidence")
-    protected String code;
+    private String code;
     @Column(name = "Description")
-    protected String description;
+    private String description;
     @OneToMany(mappedBy = "evidence", cascade = CascadeType.ALL)
-    protected Collection<EvidenceElementImpl> elementList = new HashSet<EvidenceElementImpl>();
+    private Collection<EvidenceElementImpl> elementList = new HashSet<EvidenceElementImpl>();
     @Id
     @GeneratedValue
     @Column(name = "Id_Evidence")
-    protected Long id;
+    private Long id;
     @Column(name = "Long_Label")
-    protected String longLabel;
+    private String longLabel;
 
     public EvidenceImpl() {
         super();

@@ -41,27 +41,27 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
 
     private static final long serialVersionUID = -7889349852989199094L;
     @Column(name = "Adapted_Content", length = 16777215)
-    protected String dom;
+    private String dom;
 
     @ManyToOne
     @JoinColumn(name = "Id_Page")
-    protected PageImpl page;
+    private PageImpl page;
 
     @Column(name = "Source", length = 16777215)
-    protected String source;
+    private String source;
 
     @Column(name = "Doctype", length = 512)
-    protected String doctype;
+    private String doctype;
 
     @Column(name = "Charset")
-    protected String charset;
+    private String charset;
 
     @ManyToMany
     @org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.PERSIST, org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinTable(name = "CONTENT_RELATIONSHIP", joinColumns =
     @JoinColumn(name = "Id_Content_Parent"), inverseJoinColumns =
     @JoinColumn(name = "Id_Content_Child"))
-    protected Set<RelatedContentImpl> relatedContentSet =
+    private Set<RelatedContentImpl> relatedContentSet =
             new HashSet<RelatedContentImpl>();
 
     public SSPImpl() {

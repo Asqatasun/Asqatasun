@@ -52,7 +52,7 @@ public class RelatedContentImpl extends ContentImpl implements
         targetEntity=org.opens.tanaguru.entity.audit.SSPImpl.class,
         mappedBy="relatedContentSet")
     @org.hibernate.annotations.Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    protected Set<ContentImpl> parentContentSet =
+    private Set<ContentImpl> parentContentSet =
             new HashSet<ContentImpl>();
 
     public RelatedContentImpl() {

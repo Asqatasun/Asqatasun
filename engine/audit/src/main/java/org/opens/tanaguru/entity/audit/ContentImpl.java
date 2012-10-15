@@ -50,18 +50,18 @@ public abstract class ContentImpl implements Content, Serializable {
     private static final long serialVersionUID = -8672816298160346526L;
     @ManyToOne
     @JoinColumn(name = "Id_Audit")
-    protected AuditImpl audit;
+    private AuditImpl audit;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "Dt_Loading")
-    protected Date dateOfLoading;
+    private Date dateOfLoading;
     @Id
     @GeneratedValue
     @Column(name = "Id_Content")
-    protected Long id;
+    private Long id;
     @Column(name = "Uri", length = 2048, nullable = false)
-    protected String uri;
+    private String uri;
     @Column(name = "Http_Status_Code", nullable = false)
-    protected int httpStatusCode = -1;
+    private int httpStatusCode = -1;
 
     public ContentImpl() {
         super();

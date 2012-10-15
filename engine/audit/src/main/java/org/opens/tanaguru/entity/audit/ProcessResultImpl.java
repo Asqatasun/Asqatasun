@@ -48,30 +48,30 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
 
     private static final long serialVersionUID = -6016677895001819904L;
     @OneToMany(mappedBy = "parentResult", cascade = CascadeType.ALL)
-    protected List<ProcessResultImpl> childResultList = new ArrayList<ProcessResultImpl>();
+    private List<ProcessResultImpl> childResultList = new ArrayList<ProcessResultImpl>();
     @ManyToOne
     @JoinColumn(name = "Id_Audit_Gross_Result")
-    protected AuditImpl grossResultAudit;
+    private AuditImpl grossResultAudit;
     @Id
     @GeneratedValue
     @Column(name = "Id_Process_Result")
-    protected Long id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "Id_Audit_Net_Result")
-    protected AuditImpl netResultAudit;
+    private AuditImpl netResultAudit;
     @ManyToOne
     @JoinColumn(name = "Id_Process_Result_Parent")
-    protected ProcessResultImpl parentResult;
+    private ProcessResultImpl parentResult;
     @OneToMany(mappedBy = "processResult", cascade = {CascadeType.PERSIST})
-    protected Set<ProcessRemarkImpl> remarkList = new LinkedHashSet<ProcessRemarkImpl>();
+    private Set<ProcessRemarkImpl> remarkList = new LinkedHashSet<ProcessRemarkImpl>();
     @ManyToOne
     @JoinColumn(name = "Id_Web_Resource", nullable = false)
-    protected WebResourceImpl subject;
+    private WebResourceImpl subject;
     @ManyToOne
     @JoinColumn(name = "Id_Test")
-    protected TestImpl test;
+    private TestImpl test;
     @Column(name = "Element_Counter")
-    protected int elementCounter;
+    private int elementCounter;
 
     public ProcessResultImpl() {
         super();

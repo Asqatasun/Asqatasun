@@ -42,21 +42,21 @@ public class ProcessRemarkImpl implements ProcessRemark, Serializable {
     @Id
     @GeneratedValue
     @Column(name = "Id_Process_Remark")
-    protected Long id;
+    private Long id;
     @Enumerated(EnumType.STRING)
     @Column(name = "Issue")
-    protected TestSolution issue;
+    private TestSolution issue;
     @Column(name = "Message_Code")
-    protected String messageCode;
+    private String messageCode;
     @ManyToOne
     @JoinColumn(name = "Id_Process_Result")
-    protected ProcessResultImpl processResult;
+    private ProcessResultImpl processResult;
     @Column(name = "Selected_Element")
-    protected String selectedElement;
+    private String selectedElement;
     @Column(name = "Selection_Expression")
-    protected String selectionExpression;
+    private String selectionExpression;
     @OneToMany(mappedBy = "processRemark", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    protected Set<EvidenceElementImpl> elementList = new LinkedHashSet<EvidenceElementImpl>();
+    private Set<EvidenceElementImpl> elementList = new LinkedHashSet<EvidenceElementImpl>();
 
     public ProcessRemarkImpl() {
         super();

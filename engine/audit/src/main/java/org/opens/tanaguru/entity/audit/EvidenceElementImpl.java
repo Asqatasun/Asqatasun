@@ -47,15 +47,15 @@ public class EvidenceElementImpl implements EvidenceElement,
     @Id
     @GeneratedValue
     @Column(name = "Id_Evidence_Element")
-    protected Long id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "EVIDENCE_Id_Evidence")
-    protected EvidenceImpl evidence;
+    private EvidenceImpl evidence;
     @Column(name = "Element_Value", nullable = false, length = 4096)
-    protected String value;
+    private String value;
     @ManyToOne
     @JoinColumn(name = "PROCESS_REMARK_Id_Process_Remark")
-    protected ProcessRemarkImpl processRemark;
+    private ProcessRemarkImpl processRemark;
 
     public EvidenceElementImpl() {
         super();

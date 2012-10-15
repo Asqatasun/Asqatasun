@@ -37,10 +37,10 @@ public abstract class RelatedTextContentImpl extends RelatedContentImpl implemen
 
     private static final long serialVersionUID = -8312398273757492821L;
     @Column(name = "Source", length = 16777215)
-    protected String source = null;
+    private String source = null;
 
     @Column(name = "Adapted_Content", length = 16777215)
-    protected String adaptedContent = null;
+    private String adaptedContent = null;
 
     public RelatedTextContentImpl() {
         super();

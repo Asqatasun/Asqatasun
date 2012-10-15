@@ -50,35 +50,35 @@ public class AuditImpl implements Audit, Serializable {
 
     private static final long serialVersionUID = -9109080857144047795L;
     @Column(name = "Comment")
-    protected String comment;
+    private String comment;
     @OneToMany(mappedBy = "audit")
-    protected List<ContentImpl> contentList = new ArrayList<ContentImpl>();
+    private List<ContentImpl> contentList = new ArrayList<ContentImpl>();
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     @Column(name = "Dt_Creation")
-    protected Date dateOfCreation;
+    private Date dateOfCreation;
     @OneToMany(mappedBy = "grossResultAudit")
-    protected List<ProcessResultImpl> grossResultList = new ArrayList<ProcessResultImpl>();
+    private List<ProcessResultImpl> grossResultList = new ArrayList<ProcessResultImpl>();
     @Id
     @GeneratedValue
     @Column(name = "Id_Audit")
-    protected Long id;
+    private Long id;
     @OneToMany(mappedBy = "netResultAudit")
-    protected List<ProcessResultImpl> netResultList = new ArrayList<ProcessResultImpl>();
+    private List<ProcessResultImpl> netResultList = new ArrayList<ProcessResultImpl>();
     @Enumerated(EnumType.STRING)
     @Column(name = "Status")
-    protected AuditStatus status = AuditStatus.INITIALISATION;
+    private AuditStatus status = AuditStatus.INITIALISATION;
     @OneToOne(mappedBy = "audit")
-    protected WebResourceImpl subject;
+    private WebResourceImpl subject;
     @ManyToMany
     @JoinTable(name = "AUDIT_TEST", joinColumns =
     @JoinColumn(name = "Id_Audit"), inverseJoinColumns =
     @JoinColumn(name = "Id_Test"))
-    protected List<TestImpl> testList = new ArrayList<TestImpl>();
+    private List<TestImpl> testList = new ArrayList<TestImpl>();
     @ManyToMany
     @JoinTable(name = "AUDIT_PARAMETER", joinColumns =
     @JoinColumn(name = "Id_Audit"), inverseJoinColumns =
     @JoinColumn(name = "Id_Parameter"))
-    protected List<ParameterImpl> parameterSet = new ArrayList<ParameterImpl>();
+    private List<ParameterImpl> parameterSet = new ArrayList<ParameterImpl>();
     
     public AuditImpl() {
         super();

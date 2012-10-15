@@ -39,7 +39,7 @@ public class IndefiniteResultImpl extends ProcessResultImpl implements
     private static final long serialVersionUID = -9026725317465914229L;
     
     @Column(name = "Indefinite_Value", length = 4096)
-    protected String indefiniteValue;
+    private String indefiniteValue;
 
     public IndefiniteResultImpl() {
         super();
