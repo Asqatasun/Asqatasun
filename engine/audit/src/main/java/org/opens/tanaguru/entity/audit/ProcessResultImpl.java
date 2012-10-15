@@ -48,7 +48,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
 
     private static final long serialVersionUID = -6016677895001819904L;
     @OneToMany(mappedBy = "parentResult", cascade = CascadeType.ALL)
-    private Collection<ProcessResultImpl> childResultList = new ArrayList<ProcessResultImpl>();
+    private List<ProcessResultImpl> childResultList = new ArrayList<ProcessResultImpl>();
     @ManyToOne
     @JoinColumn(name = "Id_Audit_Gross_Result")
     private AuditImpl grossResultAudit;
@@ -63,7 +63,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     @JoinColumn(name = "Id_Process_Result_Parent")
     private ProcessResultImpl parentResult;
     @OneToMany(mappedBy = "processResult", cascade = {CascadeType.PERSIST})
-    private Collection<ProcessRemarkImpl> remarkList = new LinkedHashSet<ProcessRemarkImpl>();
+    private Set<ProcessRemarkImpl> remarkList = new LinkedHashSet<ProcessRemarkImpl>();
     @ManyToOne
     @JoinColumn(name = "Id_Web_Resource", nullable = false)
     private WebResourceImpl subject;

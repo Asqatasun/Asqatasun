@@ -22,7 +22,6 @@
 package org.opens.tanaguru.entity.audit;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -62,7 +61,7 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
     @JoinTable(name = "CONTENT_RELATIONSHIP", joinColumns =
     @JoinColumn(name = "Id_Content_Parent"), inverseJoinColumns =
     @JoinColumn(name = "Id_Content_Child"))
-    private Collection<RelatedContentImpl> relatedContentSet =
+    private Set<RelatedContentImpl> relatedContentSet =
             new HashSet<RelatedContentImpl>();
 
     public SSPImpl() {
