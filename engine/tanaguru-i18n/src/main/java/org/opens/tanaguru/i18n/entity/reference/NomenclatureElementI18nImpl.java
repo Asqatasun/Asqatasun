@@ -22,13 +22,7 @@
 package org.opens.tanaguru.i18n.entity.reference;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import org.opens.tanaguru.entity.reference.NomenclatureElement;
 import org.opens.tanaguru.entity.reference.NomenclatureElementImpl;
 import org.opens.tanaguru.i18n.entity.AbstractInternationalizedEntity;
@@ -46,9 +40,9 @@ public class NomenclatureElementI18nImpl extends AbstractInternationalizedEntity
     
     @ManyToOne
     @JoinColumn(name = "Id_Nomenclature_Element")
-    protected NomenclatureElementImpl target;
+    private NomenclatureElementImpl target;
     @Column(name = "Value")
-    protected String value;
+    private String value;
 
     public NomenclatureElementI18nImpl() {
         super();

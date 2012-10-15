@@ -22,16 +22,10 @@
 package org.opens.tanaguru.i18n.entity.reference;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
+import javax.persistence.*;
 import org.opens.tanaguru.entity.reference.DecisionLevel;
 import org.opens.tanaguru.entity.reference.DecisionLevelImpl;
 import org.opens.tanaguru.i18n.entity.AbstractInternationalizedEntity;
-import javax.persistence.Table;
 
 /**
  * 
@@ -45,12 +39,12 @@ public class DecisionLevelI18nImpl extends AbstractInternationalizedEntity<Decis
     private static final long serialVersionUID = 185191862521186630L;
 
     @Column(name = "Description")
-    protected String description;
+    private String description;
     @Column(name = "Label")
-    protected String label;
+    private String label;
     @ManyToOne
     @JoinColumn(name = "Id_Decision_Level")
-    protected DecisionLevelImpl target;
+    private DecisionLevelImpl target;
 
     public DecisionLevelI18nImpl() {
         super();

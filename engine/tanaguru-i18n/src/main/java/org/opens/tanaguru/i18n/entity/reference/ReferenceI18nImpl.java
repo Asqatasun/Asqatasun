@@ -22,13 +22,7 @@
 package org.opens.tanaguru.i18n.entity.reference;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import org.opens.tanaguru.entity.reference.Reference;
 import org.opens.tanaguru.entity.reference.ReferenceImpl;
 import org.opens.tanaguru.i18n.entity.AbstractInternationalizedEntity;
@@ -47,10 +41,10 @@ public class ReferenceI18nImpl extends AbstractInternationalizedEntity<Reference
     @Column(name = "Description")
     private String description;
     @Column(name = "Label")
-    protected String label;
+    private String label;
     @ManyToOne
     @JoinColumn(name = "Id_Reference")
-    protected ReferenceImpl target;
+    private ReferenceImpl target;
 
     public ReferenceI18nImpl() {
         super();

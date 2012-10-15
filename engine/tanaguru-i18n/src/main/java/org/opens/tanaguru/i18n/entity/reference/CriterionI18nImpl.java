@@ -22,13 +22,7 @@
 package org.opens.tanaguru.i18n.entity.reference;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.CriterionImpl;
 import org.opens.tanaguru.i18n.entity.AbstractInternationalizedEntity;
@@ -45,12 +39,12 @@ public class CriterionI18nImpl extends AbstractInternationalizedEntity<Criterion
     private static final long serialVersionUID = 4754216255492410585L;
     
     @Column(name = "Description")
-    protected String description;
+    private String description;
     @Column(name = "Label")
-    protected String label;
+    private String label;
     @ManyToOne
     @JoinColumn(name = "Id_Criterion")
-    protected CriterionImpl target;
+    private CriterionImpl target;
 
     public CriterionI18nImpl() {
         super();

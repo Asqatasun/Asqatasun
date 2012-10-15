@@ -22,16 +22,10 @@
 package org.opens.tanaguru.i18n.entity.reference;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
+import javax.persistence.*;
 import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.reference.ScopeImpl;
 import org.opens.tanaguru.i18n.entity.AbstractInternationalizedEntity;
-import javax.persistence.Table;
 
 /**
  * 
@@ -45,12 +39,12 @@ public class ScopeI18nImpl extends AbstractInternationalizedEntity<Scope>
     private static final long serialVersionUID = 2388461405021686650L;
 
     @Column(name = "Description")
-    protected String description;
+    private String description;
     @Column(name = "Label")
-    protected String label;
+    private String label;
     @ManyToOne
     @JoinColumn(name = "Id_Scope")
-    protected ScopeImpl target;
+    private ScopeImpl target;
 
     public ScopeI18nImpl() {
         super();

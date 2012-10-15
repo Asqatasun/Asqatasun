@@ -22,13 +22,7 @@
 package org.opens.tanaguru.i18n.entity.reference;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import org.opens.tanaguru.entity.reference.Nomenclature;
 import org.opens.tanaguru.entity.reference.NomenclatureImpl;
 import org.opens.tanaguru.i18n.entity.AbstractInternationalizedEntity;
@@ -45,14 +39,14 @@ public class NomenclatureI18nImpl extends AbstractInternationalizedEntity<Nomenc
     private static final long serialVersionUID = -7280669153081145802L;
 
     @Column(name = "Description")
-    protected String description;
+    private String description;
     @Column(name = "Long_Label")
-    protected String longLabel;
+    private String longLabel;
     @Column(name = "Short_Label")
-    protected String shortLabel;
+    private String shortLabel;
     @ManyToOne
     @JoinColumn(name = "Id_Nomenclature")
-    protected NomenclatureImpl target;
+    private NomenclatureImpl target;
 
     public NomenclatureI18nImpl() {
         super();
