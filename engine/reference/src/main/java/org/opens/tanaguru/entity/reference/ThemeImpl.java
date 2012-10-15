@@ -43,7 +43,7 @@ public class ThemeImpl implements Theme, Serializable {
     @Column(name = "Cd_Theme")
     private String code;
     @OneToMany(mappedBy = "theme", cascade = CascadeType.ALL)
-    private Collection<CriterionImpl> criterionList;
+    private List<CriterionImpl> criterionList;
     @Column(name = "Description")
     private String description;
     @Id
