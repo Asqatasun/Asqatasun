@@ -33,6 +33,11 @@ SOFTWARE.
 public class Cookie {
 
     /**
+     * Private constructor : Hide Utility Class Constructor
+     */
+    private Cookie() {}
+    
+    /**
      * Produce a copy of a string in which the characters '+', '%', '=', ';'
      * and control characters are replaced with "%hh". This is a gentle form
      * of URL encoding, attempting to cause as little distortion to the

@@ -63,6 +63,11 @@ public class XML {
     public static final Character SLASH = Character.valueOf('/');
 
     /**
+     * Private constructor : Hide Utility Class Constructor
+     */
+    private XML() {}
+    
+    /**
      * Replace special characters with XML escapes:
      * <pre>
      * &amp; <small>(ampersand)</small> is replaced by &amp;amp;

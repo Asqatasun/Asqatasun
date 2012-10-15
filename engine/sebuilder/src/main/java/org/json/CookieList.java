@@ -34,6 +34,11 @@ import java.util.Iterator;
 public class CookieList {
 
     /**
+     * Private constructor : Hide Utility Class Constructor
+     */
+    private CookieList(){}
+    
+    /**
      * Convert a cookie list into a JSONObject. A cookie list is a sequence
      * of name/value pairs. The names are separated from the values by '='.
      * The pairs are separated by ';'. The names and the values

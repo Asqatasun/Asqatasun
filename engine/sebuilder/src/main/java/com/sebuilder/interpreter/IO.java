@@ -32,6 +32,11 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 public class IO {
 
     /**
+     * Private constructor : Hide Utility Class Constructor
+     */
+    private IO(){}
+    
+    /**
      * @param r A Reader pointing to a JSON stream describing a script.
      * @return A script, ready to run.
      * @throws IOException If anything goes wrong with interpreting the JSON, or

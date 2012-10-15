@@ -37,6 +37,11 @@ import java.util.Iterator;
 public class JSONML {
 
     /**
+     * Private constructor : Hide Utility Class Constructor
+     */
+    private JSONML(){}
+    
+    /**
      * Parse XML values and store them in a JSONArray.
      * @param x       The XMLTokener containing the source string.
      * @param arrayForm true if array form, false if object form.
