@@ -24,14 +24,8 @@ package org.opens.tanaguru.entity.audit;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import java.util.Set;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -52,7 +46,7 @@ public class EvidenceImpl implements Evidence, Serializable {
     @Column(name = "Description")
     private String description;
     @OneToMany(mappedBy = "evidence", cascade = CascadeType.ALL)
-    private Collection<EvidenceElementImpl> elementList = new HashSet<EvidenceElementImpl>();
+    private Set<EvidenceElementImpl> elementList = new HashSet<EvidenceElementImpl>();
     @Id
     @GeneratedValue
     @Column(name = "Id_Evidence")
@@ -90,7 +84,7 @@ public class EvidenceImpl implements Evidence, Serializable {
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.EvidenceElementImpl.class)})
     public Collection<EvidenceElement> getElementList() {
-        return (Collection<EvidenceElement>)(HashSet)elementList;
+        return (HashSet)elementList;
     }
 
     @Override

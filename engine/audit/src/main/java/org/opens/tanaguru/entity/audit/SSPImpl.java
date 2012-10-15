@@ -22,6 +22,7 @@
 package org.opens.tanaguru.entity.audit;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -61,8 +62,7 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
     @JoinTable(name = "CONTENT_RELATIONSHIP", joinColumns =
     @JoinColumn(name = "Id_Content_Parent"), inverseJoinColumns =
     @JoinColumn(name = "Id_Content_Child"))
-    private Set<RelatedContentImpl> relatedContentSet =
-            new HashSet<RelatedContentImpl>();
+    private Set<RelatedContentImpl> relatedContentSet;
 
     public SSPImpl() {
         super();
@@ -139,15 +139,21 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.StylesheetContentImpl.class)})
 //    @XmlTransient
     @Override
-    public Set<RelatedContent> getRelatedContentSet() {
+    public Collection<RelatedContent> getRelatedContentSet() {
         if (relatedContentSet instanceof PersistentSet) {
             return (PersistentSet)relatedContentSet;
         }
-        return (Set<RelatedContent>) (HashSet)relatedContentSet;
+        if (relatedContentSet == null) {
+            relatedContentSet = new HashSet<RelatedContentImpl>();
+        }
+        return (HashSet)relatedContentSet;
     }
 
     @Override
-    public void addAllRelationContent(Set<RelatedContent> contentList) {
+    public void addAllRelationContent(Collection<RelatedContent> contentList) {
+        if (relatedContentSet == null) {
+            relatedContentSet = new HashSet<RelatedContentImpl>();
+        }
         for (RelatedContent content : contentList) {
             if (content instanceof RelatedContentImpl) {
                 addRelatedContent((RelatedContentImpl)content);

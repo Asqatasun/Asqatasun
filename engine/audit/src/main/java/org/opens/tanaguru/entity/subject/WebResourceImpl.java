@@ -21,26 +21,17 @@
  */
 package org.opens.tanaguru.entity.subject;
 
-import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.entity.audit.AuditImpl;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlTransient;
+import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.audit.AuditImpl;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.ProcessResultImpl;
 
@@ -68,7 +59,7 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     @Column(name = "Url", length=2048, nullable = false)
     private String url;
     @OneToMany(mappedBy = "subject")
-    private Set<ProcessResultImpl> processResultList = new LinkedHashSet<ProcessResultImpl>();
+    private Set<ProcessResultImpl> processResultSet;
     @Column(name = "Mark")
     private float mark;
     @Column(name = "Rank", nullable = false)
@@ -160,7 +151,7 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.IndefiniteResultImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.DefiniteResultImpl.class)})
     public Collection<ProcessResult> getProcessResultList() {
-        return (Collection<ProcessResult>)(LinkedHashSet)processResultList;
+        return (LinkedHashSet)processResultSet;
     }
 
     @Override
@@ -171,12 +162,18 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
 
     @Override
     public void addProcessResult(ProcessResult processResult) {
+        if (this.processResultSet == null) {
+            this.processResultSet = new LinkedHashSet<ProcessResultImpl>();
+        }
         processResult.setSubject(this);
-        this.processResultList.add((ProcessResultImpl) processResult);
+        this.processResultSet.add((ProcessResultImpl) processResult);
     }
 
     @Override
     public void addAllProcessResult(Collection<ProcessResult> processResultList) {
+        if (this.processResultSet == null) {
+            this.processResultSet = new LinkedHashSet<ProcessResultImpl>();
+        }
         for (ProcessResult processResult : processResultList) {
             addProcessResult(processResult);
         }

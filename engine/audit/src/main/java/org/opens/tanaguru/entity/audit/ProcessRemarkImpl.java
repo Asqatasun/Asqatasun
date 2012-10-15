@@ -56,7 +56,7 @@ public class ProcessRemarkImpl implements ProcessRemark, Serializable {
     @Column(name = "Selection_Expression")
     private String selectionExpression;
     @OneToMany(mappedBy = "processRemark", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<EvidenceElementImpl> elementList = new LinkedHashSet<EvidenceElementImpl>();
+    private Set<EvidenceElementImpl> elementSet;
 
     public ProcessRemarkImpl() {
         super();
@@ -125,8 +125,11 @@ public class ProcessRemarkImpl implements ProcessRemark, Serializable {
 
     @Override
     public void addElement(EvidenceElement element) {
+        if (elementSet == null) {
+            elementSet = new LinkedHashSet<EvidenceElementImpl>();
+        }
         element.setProcessRemark(this);
-        elementList.add((EvidenceElementImpl) element);
+        elementSet.add((EvidenceElementImpl) element);
     }
 
     @Override
@@ -134,16 +137,19 @@ public class ProcessRemarkImpl implements ProcessRemark, Serializable {
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.EvidenceElementImpl.class)})
     public Collection<EvidenceElement> getElementList() {
-        if (elementList instanceof PersistentSet) {
-            return (PersistentSet)elementList;
+        if (elementSet instanceof PersistentSet) {
+            return (PersistentSet)elementSet;
         }
-        return (Collection<EvidenceElement>)(LinkedHashSet)elementList;
+        return (LinkedHashSet)elementSet;
     }
 
     @Override
     public void setElementList(Collection<EvidenceElement> elementList) {
+        if (this.elementSet == null) {
+            this.elementSet = new LinkedHashSet<EvidenceElementImpl>();
+        }
         for (EvidenceElement evEl : elementList) {
-            this.elementList.add((EvidenceElementImpl) elementList);
+            this.elementSet.add((EvidenceElementImpl) elementList);
         }
     }
     
