@@ -21,19 +21,19 @@
  */
 package org.opens.tanaguru.processor;
 
-import org.opens.tanaguru.entity.audit.ProcessRemark;
-import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
-import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
-import org.opens.tanaguru.contentadapter.js.JSResource;
-import org.opens.tanaguru.contentadapter.RsrcLocator;
 import com.thoughtworks.xstream.XStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import org.opens.tanaguru.contentadapter.RsrcLocator;
+import org.opens.tanaguru.contentadapter.js.JSResource;
 import org.opens.tanaguru.entity.audit.JavascriptContent;
+import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.RelatedContent;
+import org.opens.tanaguru.entity.audit.SSP;
+import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
+import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 
 /**
  * 
@@ -42,12 +42,12 @@ import org.opens.tanaguru.entity.audit.RelatedContent;
 public class JSHandlerImpl implements JSHandler {
 
     private boolean initialized = false;
-    protected Set<JSResource> javaScriptSet;
-    protected ProcessRemarkFactory processRemarkFactory;
-    protected Collection<ProcessRemark> remarkList;
-    protected Collection<JSResource> selectedJSList;
-    protected SourceCodeRemarkFactory sourceCodeRemarkFactory;
-    protected SSP ssp;
+    private Set<JSResource> javaScriptSet;
+    private ProcessRemarkFactory processRemarkFactory;
+    private Collection<ProcessRemark> remarkList;
+    private Collection<JSResource> selectedJSList;
+    private SourceCodeRemarkFactory sourceCodeRemarkFactory;
+    private SSP ssp;
 
     public JSHandlerImpl() {
         super();

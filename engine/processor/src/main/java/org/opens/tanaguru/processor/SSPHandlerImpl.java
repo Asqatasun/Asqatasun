@@ -53,16 +53,16 @@ public class SSPHandlerImpl implements SSPHandler {
 
     private static String BASE64_IMAGE_PREFIX = "data:image";
     private static char COMMA = ',';
-    protected CSSHandler cssHandler;
-    protected DOMHandler domHandler;
-    protected JSHandler jsHandler;
-    protected SSP ssp;
-    protected NomenclatureLoaderService nomenclatureLoaderService;
-    protected SourceCodeRemarkFactory sourceCodeRemarkFactory;
-    protected ProcessRemarkFactory processRemarkFactory;
-    protected String selectionExpression;
-    protected List<ProcessRemark> remarkList;
-    protected Map<String, BufferedImage> imageMap;
+    private CSSHandler cssHandler;
+    private DOMHandler domHandler;
+    private JSHandler jsHandler;
+    private SSP ssp;
+    private NomenclatureLoaderService nomenclatureLoaderService;
+    private SourceCodeRemarkFactory sourceCodeRemarkFactory;
+    private ProcessRemarkFactory processRemarkFactory;
+    private String selectionExpression;
+    private List<ProcessRemark> remarkList;
+    private Map<String, BufferedImage> imageMap;
     private URLIdentifier urlIdentifier;
     private Set<ImageContent> imageOnErrorSet;
     private ProcessRemarkService processRemarkService;
