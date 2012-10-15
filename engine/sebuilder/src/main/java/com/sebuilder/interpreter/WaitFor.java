@@ -22,7 +22,10 @@ package com.sebuilder.interpreter;
  */
 public class WaitFor implements StepType {
 
-    public final Getter getter;
+    private final Getter getter;
+    public Getter getGetter() {
+        return getter;
+    }
 
     public WaitFor(Getter getter) {
         this.getter = getter;

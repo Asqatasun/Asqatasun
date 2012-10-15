@@ -31,11 +31,11 @@ public class ClickElement implements StepType {
     private static final String HREF_ATTR = "href";
     private static final String SUBMIT_TYPE_VALUE = "submit";
     private static final String ANCHOR_KEY = "#";
-    
+
     @Override
     public boolean run(TestRun ctx) {
         WebElement webElement = ctx.locator("locator").find(ctx);
-        ctx.log().info("Click from "  + webElement.getTagName() + " " + webElement.getText());
+        ctx.getLog().info("Click from " + webElement.getTagName() + " " + webElement.getText());
 //        boolean doesClickBringToAnotherPage = doesClickBringToAnotherPage(webElement, ctx.log(), ctx.getDriver().getCurrentUrl());
         webElement.click();
 //        if (doesClickBringToAnotherPage){
@@ -44,7 +44,7 @@ public class ClickElement implements StepType {
 //        }
         return true;
     }
-    
+
     private boolean doesClickBringToAnotherPage(WebElement we, Log log, String currentUrl) {
         String tagName = we.getTagName();
         if (tagName.equalsIgnoreCase(A_TAG)) {
@@ -59,27 +59,27 @@ public class ClickElement implements StepType {
         return false;
     }
 
-    private boolean computeATag (WebElement we, Log log, String currentUrl) {
+    private boolean computeATag(WebElement we, Log log, String currentUrl) {
         String hrefValue = StringUtils.remove(we.getAttribute(HREF_ATTR), currentUrl);
-        log.info("Href value "  + hrefValue);
+        log.info("Href value " + hrefValue);
         if (StringUtils.isNotEmpty(hrefValue) && !hrefValue.startsWith(ANCHOR_KEY)) {
             return true;
         }
         return false;
     }
-    
-    private boolean computeButtonTag (WebElement we) {
+
+    private boolean computeButtonTag(WebElement we) {
         return isElementASubmit(we);
     }
-    
+
     private boolean computeInputTag(WebElement we) {
         return isElementASubmit(we);
     }
-    
+
     private boolean computeLabelTag(WebElement we) {
         return false;
     }
-    
+
     private boolean isElementASubmit(WebElement we) {
         String typeValue = we.getAttribute(TYPE_ATTR);
         if (StringUtils.isNotEmpty(typeValue) && typeValue.equalsIgnoreCase(SUBMIT_TYPE_VALUE)) {
@@ -87,4 +87,5 @@ public class ClickElement implements StepType {
         }
         return false;
     }
+    
 }

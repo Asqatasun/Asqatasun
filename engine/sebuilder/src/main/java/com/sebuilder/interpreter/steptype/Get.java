@@ -22,9 +22,10 @@ public class Get implements StepType {
 
     @Override
     public boolean run(TestRun ctx) {
-        ctx.driver().get(ctx.string("url"));
-        ctx.log().info("Fire New Page From a Get");
+        ctx.getDriver().get(ctx.string("url"));
+        ctx.getLog().info("Fire New Page From a Get");
         ctx.fireNewPage();
         return true;
     }
+    
 }

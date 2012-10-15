@@ -18,7 +18,6 @@ package com.sebuilder.interpreter;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.HashMap;
-import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -86,7 +85,7 @@ public class IO {
                 JSONObject stepO = stepsA.getJSONObject(i);
                 Script.Step step = new Script.Step(getStepTypeOfName(stepO.getString("type")));
                 step.negated = stepO.optBoolean("negated", false);
-                script.steps.add(step);
+                script.addStep(step);
                 JSONArray keysA = stepO.names();
                 for (int j = 0; j < keysA.length(); j++) {
                     String key = keysA.getString(j);
