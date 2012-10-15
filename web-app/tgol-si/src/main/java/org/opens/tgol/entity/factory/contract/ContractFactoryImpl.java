@@ -44,10 +44,10 @@ public class ContractFactoryImpl implements ContractFactory {
             Date endDate,
             Date renewalDate,
             Float price,
-            Set<? extends Functionality> functionalitySet, 
-            Set<? extends OptionElement> optionElementSet, 
-            Set<? extends Referential> referentialSet, 
-            Set<? extends Scenario> ScenarioSet, 
+            Set<Functionality> functionalitySet, 
+            Set<OptionElement> optionElementSet, 
+            Set<Referential> referentialSet, 
+            Set<Scenario> ScenarioSet, 
             User user) {
         Contract contract = create();
         contract.setLabel(label);

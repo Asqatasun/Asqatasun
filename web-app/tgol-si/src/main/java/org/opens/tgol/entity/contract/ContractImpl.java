@@ -22,10 +22,7 @@
 package org.opens.tgol.entity.contract;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.opens.tgol.entity.functionality.Functionality;
@@ -196,8 +193,8 @@ public class ContractImpl implements Contract, Serializable {
     }
 
     @Override
-    public Set<? extends Act> getActSet() {
-        return actSet;
+    public Collection<Act> getActSet() {
+        return (Collection)this.actSet;
     }
 
     @Override
@@ -206,13 +203,17 @@ public class ContractImpl implements Contract, Serializable {
     }
 
     @Override
-    public void addAllAct(Set<? extends Act> actSet) {
-        this.actSet.addAll((Set<ActImpl>)actSet);
+    public void addAllAct(Collection<Act> actSet) {
+        for (Act act : actSet) {
+            if (act instanceof ActImpl) {
+                this.actSet.add((ActImpl)act);
+            }
+        }
     }
 
     @Override
-    public Set<OptionElementImpl> getOptionElementSet() {
-        return optionElementSet;
+    public Collection<OptionElement> getOptionElementSet() {
+        return (Collection)this.optionElementSet;
     }
 
     @Override
@@ -221,13 +222,18 @@ public class ContractImpl implements Contract, Serializable {
     }
 
     @Override
-    public void addAllOptionElement(Set<? extends OptionElement> optionElementSet) {
-        this.optionElementSet.addAll((Set<OptionElementImpl>)optionElementSet);
+    public void addAllOptionElement(Collection<OptionElement> optionElementSet) {
+        this.optionElementSet = new HashSet<OptionElementImpl>();
+        for (OptionElement optionElement : optionElementSet) {
+            if (optionElement instanceof OptionElementImpl) {
+                this.optionElementSet.add((OptionElementImpl)optionElement);
+            }
+        }
     }
 
     @Override
-    public Set<FunctionalityImpl> getFunctionalitySet() {
-        return functionalitySet;
+    public Collection<Functionality> getFunctionalitySet() {
+        return (Collection)this.functionalitySet;
     }
 
     @Override
@@ -236,13 +242,20 @@ public class ContractImpl implements Contract, Serializable {
     }
 
     @Override
-    public void addAllFunctionality(Set<? extends Functionality> functionalitySet) {
-        this.functionalitySet.addAll((Set<FunctionalityImpl>)functionalitySet);
+    public void addAllFunctionality(Collection<Functionality> functionalitySet) {
+        this.functionalitySet = new HashSet<FunctionalityImpl>();
+        for (Functionality funct : functionalitySet) {
+            if (funct instanceof FunctionalityImpl) {
+                this.functionalitySet.add((FunctionalityImpl)funct);
+            }
+        }
     }
     
     @Override
-    public Set<ReferentialImpl> getReferentialSet() {
-        return referentialSet;
+    public Set<Referential> getReferentialSet() {
+        Set<Referential> lReferentialSet = new HashSet<Referential>();
+        lReferentialSet.addAll(this.referentialSet);
+        return lReferentialSet;
     }
 
     @Override
@@ -251,13 +264,18 @@ public class ContractImpl implements Contract, Serializable {
     }
 
     @Override
-    public void addAllReferential(Set<? extends Referential> referentialSet) {
-        this.referentialSet.addAll((Set<ReferentialImpl>)referentialSet);
+    public void addAllReferential(Collection<Referential> referentialSet) {
+        this.referentialSet = new HashSet<ReferentialImpl>();
+        for (Referential ref : referentialSet) {
+            if (ref instanceof ReferentialImpl) {
+                this.referentialSet.add((ReferentialImpl)ref);
+            }
+        }
     }
     
     @Override
-    public Set<ScenarioImpl> getScenarioSet() {
-        return scenarioSet;
+    public Collection<Scenario> getScenarioSet() {
+        return (Collection)this.scenarioSet;
     }
 
     @Override
@@ -266,8 +284,12 @@ public class ContractImpl implements Contract, Serializable {
     }
 
     @Override
-    public void addAllScenario(Set<? extends Scenario> scenarioSet) {
-        this.scenarioSet.addAll((Set<ScenarioImpl>)scenarioSet);
+    public void addAllScenario(Collection<Scenario> scenarioSet) {
+        for (Scenario scenario : scenarioSet) {
+            if (scenario instanceof ScenarioImpl) {
+                this.scenarioSet.add((ScenarioImpl)scenario);
+            }
+        }
     }
 
 }

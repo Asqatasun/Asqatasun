@@ -21,25 +21,17 @@
  */
 package org.opens.tgol.entity.user;
 
-import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.contract.ContractImpl;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.entity.contract.ContractImpl;
 
 /**
  *
@@ -224,25 +216,27 @@ public class UserImpl implements User, Serializable {
     }
 
     @Override
-    public void addAllContracts(Collection<? extends Contract> contractSet) {
+    public void addAllContracts(Collection<Contract> contractSet) {
         for (Contract contract : contractSet) {
             contract.setUser(this);
+            if (contract instanceof ContractImpl) {
+                this.contractSet.add((ContractImpl)contract);
+            }
         }
-        this.contractSet.addAll((Set<ContractImpl>)contractSet);
     }
 
     @Override
     @XmlElementWrapper
     @XmlElementRef(type = org.opens.tgol.entity.contract.ContractImpl.class)
-    public Collection<ContractImpl> getContractSet() {
-        return contractSet;
+    public Collection<Contract> getContractSet() {
+        return (Collection)contractSet;
     }
 
     @Override
     public boolean isAccountActivated() {
         return isAccountActivated;
     }
-
+    
     @Override
     public void setAccountActivation(boolean value) {
         this.isAccountActivated = value;

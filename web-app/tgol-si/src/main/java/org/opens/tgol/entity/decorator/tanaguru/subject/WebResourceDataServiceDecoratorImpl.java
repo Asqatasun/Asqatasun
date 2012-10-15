@@ -21,13 +21,9 @@
  */
 package org.opens.tgol.entity.decorator.tanaguru.subject;
 
-import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import org.opens.tgol.util.HttpStatusCodeFamily;
-import org.opens.tgol.entity.dao.statistics.StatisticsDAO;
-import org.opens.tgol.entity.dao.tanaguru.subject.TgolWebResourceDAO;
-import org.opens.tgol.presentation.data.PageResult;
 import java.util.Collection;
 import java.util.List;
+import org.displaytag.properties.SortOrderEnum;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -37,6 +33,14 @@ import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.opens.tgol.entity.dao.statistics.StatisticsDAO;
+import org.opens.tgol.entity.dao.tanaguru.subject.TgolWebResourceDAO;
+import org.opens.tgol.presentation.data.FailedPageInfo;
+import org.opens.tgol.presentation.data.FailedTestInfo;
+import org.opens.tgol.presentation.data.FailedThemeInfo;
+import org.opens.tgol.presentation.data.PageResult;
+import org.opens.tgol.util.HttpStatusCodeFamily;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -83,7 +87,7 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
     }
 
     @Override
-    public Collection<? extends Object> getFailedWebResourceSortedByTest(
+    public Collection<FailedPageInfo> getFailedWebResourceSortedByTest(
             WebResource webResource,
             Audit audit,
             int nbOfResult) {
@@ -94,7 +98,7 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
     }
 
     @Override
-    public Collection<? extends Object> getFailedWebResourceSortedByOccurrence(
+    public Collection<FailedPageInfo> getFailedWebResourceSortedByOccurrence(
             WebResource webResource,
             Audit audit,
             int nbOfResult) {
@@ -105,7 +109,7 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
     }
 
     @Override
-    public Collection<? extends Object> getFailedTestByOccurrence(
+    public Collection<FailedTestInfo> getFailedTestByOccurrence(
             WebResource webResource,
             Audit audit,
             int nbOfResult) {
@@ -137,7 +141,7 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
     }
 
     @Override
-    public Collection<? extends Object> getResultCountByResultTypeAndTheme(
+    public Collection<FailedThemeInfo> getResultCountByResultTypeAndTheme(
             WebResource webResource,
             Audit audit,
             TestSolution testSolution,
@@ -186,7 +190,7 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
     }
 
     @Override
-    public Collection<? extends Object> getChildUrlList(
+    public Collection<PageResult> getChildUrlList(
             WebResource webResource,
             Audit audit) {
         List<PageResult> pageResultList = (List<PageResult>)
@@ -253,12 +257,12 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
     }
 
     @Override
-    public Collection<? extends Object> getWebResourceListByAuditAndHttpStatusCode(
+    public Collection<PageResult> getWebResourceListByAuditAndHttpStatusCode(
             Long idAudit,
             HttpStatusCodeFamily httpStatusCode,
             int nbOfElements,
             int window,
-            int sortDirection,
+            SortOrderEnum sortDirection,
             String sortCriterion,
             String containingValue) {
         return statisticsDAO.findWebResourceByAuditAndHttpStatusCode(

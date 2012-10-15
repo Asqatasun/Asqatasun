@@ -22,6 +22,8 @@
 package org.opens.tgol.entity.service.option;
 
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.opens.tgol.entity.dao.option.OptionElementDAO;
+import org.opens.tgol.entity.option.Option;
 import org.opens.tgol.entity.option.OptionElement;
 
 /**
@@ -30,5 +32,10 @@ import org.opens.tgol.entity.option.OptionElement;
  */
 public class OptionElementDataServiceImpl extends AbstractGenericDataService<OptionElement, Long>
         implements OptionElementDataService {
+
+    @Override
+    public OptionElement getOptionElementFromValueAndOption(String value, Option option) {
+        return ((OptionElementDAO)this.entityDao).findOptionElementFromValueAndOption(value, option);
+    }
     
 }
