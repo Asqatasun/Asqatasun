@@ -21,7 +21,11 @@
  */
 package org.opens.tgol.entity.dao.option;
 
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.Query;
 import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.opens.tgol.entity.option.Option;
 import org.opens.tgol.entity.option.OptionElement;
 import org.opens.tgol.entity.option.OptionElementImpl;
 
@@ -39,6 +43,29 @@ public class OptionElementDAOImpl extends AbstractJPADAO<OptionElement, Long>
     @Override
     protected Class<? extends OptionElement> getEntityClass() {
         return OptionElementImpl.class;
+    }
+
+    /**
+     * 
+     * @param value
+     * @param option
+     * @return 
+     */
+    @Override
+    public OptionElement findOptionElementFromValueAndOption(String value, Option option) {
+        Query query = entityManager.createQuery("SELECT oe FROM "
+                + getEntityClass().getName() + " oe"
+                + " WHERE oe.value=:value"
+                + " AND oe.option=:option");
+        query.setParameter("value", value);
+        query.setParameter("option", option);
+        try {
+            return (OptionElement) query.getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        } catch (NonUniqueResultException nure) {
+            return null;
+        }    
     }
 
 }

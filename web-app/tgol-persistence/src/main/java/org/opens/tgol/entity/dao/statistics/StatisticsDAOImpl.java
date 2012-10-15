@@ -21,17 +21,6 @@
  */
 package org.opens.tgol.entity.dao.statistics;
 
-import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
-import org.opens.tgol.presentation.data.FailedPageInfo;
-import org.opens.tgol.util.HttpStatusCodeFamily;
-import org.opens.tgol.presentation.data.FailedTestInfo;
-import org.opens.tgol.presentation.data.FailedThemeInfo;
-import org.opens.tgol.presentation.data.PageResult;
-import org.opens.tgol.presentation.factory.FailedPageInfoFactory;
-import org.opens.tgol.presentation.factory.FailedTestInfoFactory;
-import org.opens.tgol.presentation.factory.FailedThemeInfoFactory;
-import org.opens.tgol.presentation.factory.PageResultFactory;
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -39,10 +28,22 @@ import java.util.List;
 import java.util.Set;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import org.displaytag.properties.SortOrderEnum;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Theme;
+import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.opens.tgol.presentation.data.FailedPageInfo;
+import org.opens.tgol.presentation.data.FailedTestInfo;
+import org.opens.tgol.presentation.data.FailedThemeInfo;
+import org.opens.tgol.presentation.data.PageResult;
+import org.opens.tgol.presentation.factory.FailedPageInfoFactory;
+import org.opens.tgol.presentation.factory.FailedTestInfoFactory;
+import org.opens.tgol.presentation.factory.FailedThemeInfoFactory;
+import org.opens.tgol.presentation.factory.PageResultFactory;
+import org.opens.tgol.util.HttpStatusCodeFamily;
 
 /**
  *
@@ -201,7 +202,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
      *      a collection of initialised failedThemeInfo instances
      */
     @Override
-    public Collection<? extends Object> findResultCountByResultTypeAndTheme(
+    public Collection<FailedThemeInfo> findResultCountByResultTypeAndTheme(
             WebResource webResource,
             Audit audit,
             TestSolution testSolution,
@@ -602,12 +603,12 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
      * @return
      */
     @Override
-    public Collection<?extends Object> findWebResourceByAuditAndHttpStatusCode(
+    public Collection<PageResult> findWebResourceByAuditAndHttpStatusCode(
             Long idAudit,
             HttpStatusCodeFamily httpStatusCode,
             int nbOfResult,
             int window,
-            int sortDirection,
+            SortOrderEnum sortDirection,
             String sortCriterion,
             String containingValue) {
         boolean hasContainingValue = false;
@@ -651,7 +652,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         } else {
             queryString.append(URL_FIELD_STR);
         }
-        if (sortDirection == 2) {
+        if (sortDirection.equals(SortOrderEnum.DESCENDING)) {
             queryString.append(DESC_STR);
         } else {
             queryString.append(ASC_STR);

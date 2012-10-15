@@ -27,14 +27,11 @@ import java.util.Set;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.dao.test.AbstractDaoTestCase;
 import org.opens.tgol.entity.dao.user.UserDAO;
-import org.opens.tgol.entity.dao.user.UserDAOImpl;
 import org.opens.tgol.entity.factory.contract.ContractFactory;
-import org.opens.tgol.entity.factory.contract.ContractFactoryImpl;
 import org.opens.tgol.entity.functionality.Functionality;
-import org.opens.tgol.entity.functionality.FunctionalityImpl;
-import org.opens.tgol.entity.option.OptionElementImpl;
-import org.opens.tgol.entity.referential.ReferentialImpl;
-import org.opens.tgol.entity.scenario.ScenarioImpl;
+import org.opens.tgol.entity.option.OptionElement;
+import org.opens.tgol.entity.referential.Referential;
+import org.opens.tgol.entity.scenario.Scenario;
 import org.opens.tgol.entity.service.contract.ContractDataService;
 import org.opens.tgol.entity.service.contract.ContractDataServiceImpl;
 import org.opens.tgol.entity.user.User;
@@ -124,10 +121,10 @@ public class ContractDAOImplTest extends AbstractDaoTestCase {
         Date endDate = new Date();
         Date renewalDate = new Date();
         int nbOfContract = contractDAO.findAll().size();
-        Set<FunctionalityImpl> functionalitySet = new HashSet<FunctionalityImpl>();
-        Set<OptionElementImpl> optionElementSet = new HashSet<OptionElementImpl>();
-        Set<ReferentialImpl> referenceSet = new HashSet<ReferentialImpl>();
-        Set<ScenarioImpl> scenarioSet = new HashSet<ScenarioImpl>();
+        Set<Functionality> functionalitySet = new HashSet<Functionality>();
+        Set<OptionElement> optionElementSet = new HashSet<OptionElement>();
+        Set<Referential> referenceSet = new HashSet<Referential>();
+        Set<Scenario> scenarioSet = new HashSet<Scenario>();
         Contract contract = contractFactory.createContract(
                 "Contract-test",
                 beginDate,
