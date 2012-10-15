@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.hibernate.collection.PersistentBag;
+import org.hibernate.collection.PersistentSet;
 import org.opens.tanaguru.entity.service.reference.NomenclatureCssUnit;
 
 /**
@@ -46,7 +46,7 @@ public class NomenclatureImpl implements Nomenclature, Serializable {
     @Column(name = "Description")
     private String description;
     @OneToMany(mappedBy = "nomenclature", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-    private Collection<NomenclatureElementImpl> elementList = new HashSet<NomenclatureElementImpl>();
+    private Collection<NomenclatureElementImpl> elementList;
     @Id
     @GeneratedValue
     @Column(name = "Id_Nomenclature")
@@ -90,8 +90,8 @@ public class NomenclatureImpl implements Nomenclature, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.reference.NomenclatureCssUnitImpl.class)})
     @Override
     public Collection<NomenclatureElement> getElementList() {
-        if (elementList instanceof PersistentBag) {
-            return (PersistentBag) elementList;    
+        if (elementList instanceof PersistentSet) {
+            return (PersistentSet) elementList;    
         }
         return (Collection<NomenclatureElement>) (HashSet) elementList;
     }
@@ -150,6 +150,9 @@ public class NomenclatureImpl implements Nomenclature, Serializable {
     @Override
     public void setElementList(
             Collection<NomenclatureElement> elementList) {
+        if (this.elementList == null) {
+            this.elementList = new HashSet<NomenclatureElementImpl>();
+        }
         for (NomenclatureElement nomEl : elementList) {
             this.elementList.add((NomenclatureElementImpl)nomEl);
         }

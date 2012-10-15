@@ -22,14 +22,14 @@
 package org.opens.tanaguru.entity.reference;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.hibernate.collection.PersistentBag;
+import org.hibernate.collection.PersistentSet;
 
 /**
  * 
@@ -43,7 +43,7 @@ public class ThemeImpl implements Theme, Serializable {
     @Column(name = "Cd_Theme")
     private String code;
     @OneToMany(mappedBy = "theme", cascade = CascadeType.ALL)
-    private List<CriterionImpl> criterionList;
+    private Set<CriterionImpl> criterionList;
     @Column(name = "Description")
     private String description;
     @Id
@@ -57,7 +57,7 @@ public class ThemeImpl implements Theme, Serializable {
 
     public ThemeImpl() {
         super();
-        criterionList = new ArrayList<CriterionImpl>();
+        criterionList = new HashSet<CriterionImpl>();
     }
 
     public ThemeImpl(String code, String label, String description) {
@@ -75,11 +75,11 @@ public class ThemeImpl implements Theme, Serializable {
     @Override
     @XmlElementWrapper
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.CriterionImpl.class)
-    public List<Criterion> getCriterionList() {
-        if (criterionList instanceof PersistentBag) {
-            return (PersistentBag)criterionList;
+    public Collection<Criterion> getCriterionList() {
+        if (criterionList instanceof PersistentSet) {
+            return (PersistentSet)criterionList;
         }
-        return (List<Criterion>) (ArrayList)criterionList;
+        return (HashSet)criterionList;
     }
 
     @Override
@@ -108,7 +108,7 @@ public class ThemeImpl implements Theme, Serializable {
     }
 
     @Override
-    public void setCriterionList(List<Criterion> criterionList) {
+    public void setCriterionList(Collection<Criterion> criterionList) {
         for (Criterion cr : criterionList) {
             this.criterionList.add((CriterionImpl)cr);
         }
