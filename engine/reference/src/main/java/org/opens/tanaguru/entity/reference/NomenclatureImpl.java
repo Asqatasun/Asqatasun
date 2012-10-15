@@ -91,7 +91,7 @@ public class NomenclatureImpl implements Nomenclature, Serializable {
     @Override
     public Collection<NomenclatureElement> getElementList() {
         if (elementList instanceof PersistentBag) {
-            return (Collection<NomenclatureElement>) (PersistentBag) elementList;    
+            return (PersistentBag) elementList;    
         }
         return (Collection<NomenclatureElement>) (HashSet) elementList;
     }

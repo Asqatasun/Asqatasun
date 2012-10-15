@@ -76,7 +76,7 @@ public class ThemeImpl implements Theme, Serializable {
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.CriterionImpl.class)
     public List<Criterion> getCriterionList() {
         if (criterionList instanceof PersistentBag) {
-            return (List<Criterion>) (PersistentBag)criterionList;
+            return (PersistentBag)criterionList;
         }
         return (List<Criterion>) (ArrayList)criterionList;
     }
