@@ -352,7 +352,7 @@ public class AnalyserImpl implements Analyser {
      * This method extracts a collection of tests for a given audit
      * @return
      */
-    private Collection<? extends Test> extractTestFromAudit() {
+    private Collection<Test> extractTestFromAudit() {
         Audit auditWithTest = auditDataService.getAuditWithTest(this.audit.getId());
         return auditWithTest.getTestList();
     }
