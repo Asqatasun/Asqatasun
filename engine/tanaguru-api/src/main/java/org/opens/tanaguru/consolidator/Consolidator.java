@@ -21,6 +21,7 @@
  */
 package org.opens.tanaguru.consolidator;
 
+import java.util.Collection;
 import java.util.List;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.ruleimplementation.RuleImplementation;
@@ -36,13 +37,13 @@ public interface Consolidator {
      *
      * @return
      */
-    List<ProcessResult> getGrossResultList();
+    Collection<ProcessResult> getGrossResultList();
 
     /**
      *
      * @return
      */
-    List<ProcessResult> getResult();
+    Collection<ProcessResult> getResult();
 
     /**
      *

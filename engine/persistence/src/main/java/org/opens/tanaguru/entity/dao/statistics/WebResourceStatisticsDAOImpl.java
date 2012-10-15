@@ -31,7 +31,7 @@ import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 public class WebResourceStatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Long>
         implements WebResourceStatisticsDAO {
 
-    private static final String JOIN_PROCESS_RESULT =" JOIN r.processResultList pr";
+    private static final String JOIN_PROCESS_RESULT =" JOIN r.processResultSet pr";
 
     @Override
     protected Class<? extends WebResourceStatistics> getEntityClass() {
@@ -80,7 +80,7 @@ public class WebResourceStatisticsDAOImpl extends AbstractJPADAO<WebResourceStat
                 "SELECT count(pk.id) FROM "
                 + getWebResourceEntityClass().getName() + " r"
                 + JOIN_PROCESS_RESULT
-                + " JOIN pr.remarkList pk"
+                + " JOIN pr.remarkSet pk"
                 + " WHERE (r.id=:id OR r.parent.id=:id)"
                 + " AND pr.definiteValue = :value"
                 + " AND pk.issue = :value");

@@ -30,7 +30,7 @@ import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 public class ThemeStatisticsDAOImpl extends AbstractJPADAO<ThemeStatistics, Long>
         implements ThemeStatisticsDAO {
 
-    private static final String JOIN_PROCESS_RESULT =" JOIN r.processResultList pr";
+    private static final String JOIN_PROCESS_RESULT =" JOIN r.processResultSet pr";
     private static final String JOIN_TEST =" JOIN pr.test t";
 
     @Override

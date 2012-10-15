@@ -21,7 +21,7 @@
  */
 package org.opens.tanaguru.entity.audit;
 
-import java.util.Set;
+import java.util.Collection;
 import org.opens.tanaguru.entity.subject.Page;
 
 /**
@@ -58,7 +58,7 @@ public interface SSP extends TextContent {
      * 
      * @return the list of related raw content of the ssp
      */
-    Set<RelatedContent> getRelatedContentSet();
+    Collection<RelatedContent> getRelatedContentSet();
 
     /**
      *
@@ -93,7 +93,7 @@ public interface SSP extends TextContent {
      * @param contentList
      *          The content list to add
      */
-    public void addAllRelationContent(Set<RelatedContent> contentList);
+    public void addAllRelationContent(Collection<RelatedContent> contentList);
 
     /**
      *

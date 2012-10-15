@@ -41,28 +41,28 @@ public interface Audit extends Entity {
      * @param contentList
      *            the content list to add
      */
-    void addAllContent(List<Content> contentList);
+    void addAllContent(Collection<Content> contentList);
 
     /**
      *
      * @param grossResultList
      *            the gross result list to add
      */
-    void addAllGrossResult(List<ProcessResult> grossResultList);
+    void addAllGrossResult(Collection<ProcessResult> grossResultList);
 
     /**
      *
      * @param netResultList
      *            the net result list to add
      */
-    void addAllNetResult(List<ProcessResult> netResultList);
+    void addAllNetResult(Collection<ProcessResult> netResultList);
 
     /**
      *
      * @param testList
      *            the test set to add
      */
-    void addAllTest(List<Test> testList);
+    void addAllTest(Collection<Test> testList);
 
     /**
      *
@@ -109,7 +109,7 @@ public interface Audit extends Entity {
      *
      * @return the content list
      */
-    List<Content> getContentList();
+    Collection<Content> getContentList();
 
     /**
      *
@@ -121,13 +121,13 @@ public interface Audit extends Entity {
      *
      * @return the gross result list
      */
-    List<ProcessResult> getGrossResultList();
+    Collection<ProcessResult> getGrossResultList();
 
     /**
      *
      * @return the net result list
      */
-    List<ProcessResult> getNetResultList();
+    Collection<ProcessResult> getNetResultList();
 
     /**
      *
@@ -145,7 +145,7 @@ public interface Audit extends Entity {
      *
      * @return the test list
      */
-    List<Test> getTestList();
+    Collection<Test> getTestList();
 
     /**
      *
@@ -159,7 +159,7 @@ public interface Audit extends Entity {
      * @param contentList
      *            the content list to set
      */
-    void setContentList(List<Content> contentList);
+    void setContentList(Collection<Content> contentList);
 
     /**
      *
@@ -173,14 +173,14 @@ public interface Audit extends Entity {
      * @param grossResultList
      *            the gross result list to set
      */
-    void setGrossResultList(List<ProcessResult> grossResultList);
+    void setGrossResultList(Collection<ProcessResult> grossResultList);
 
     /**
      *
      * @param netResultList
      *            the net result list to set
      */
-    void setNetResultList(List<ProcessResult> netResultList);
+    void setNetResultList(Collection<ProcessResult> netResultList);
 
     /**
      *
@@ -194,7 +194,7 @@ public interface Audit extends Entity {
      * @param testList
      *            the test list to set
      */
-    void setTestList(List<Test> testList);
+    void setTestList(Collection<Test> testList);
 
     /**
      * 

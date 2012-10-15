@@ -22,6 +22,7 @@
 package org.opens.tanaguru.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import org.opens.tanaguru.consolidator.Consolidator;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.ruleimplementation.RuleImplementation;
@@ -52,8 +53,8 @@ public class ConsolidatorServiceImpl implements ConsolidatorService {
     }
 
     @Override
-    public List<ProcessResult> consolidate(List<ProcessResult> grossResultList,
-            List<Test> testList) {
+    public Collection<ProcessResult> consolidate(Collection<ProcessResult> grossResultList,
+            Collection<Test> testList) {
         List<ProcessResult> resultList = new ArrayList<ProcessResult>();
         for (Test test : testList) {
             RuleImplementation ruleImplementation = ruleImplementationLoaderService.loadRuleImplementation(test);
