@@ -24,27 +24,16 @@ package org.opens.tanaguru.contentloader;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import junit.framework.TestCase;
 import org.apache.commons.pool.impl.GenericObjectPool;
-import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
-import static org.easymock.EasyMock.*;
-import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.audit.StylesheetContent;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
-import org.opens.tanaguru.entity.subject.Page;
-import org.opens.tanaguru.entity.subject.Site;
-import org.opens.tanaguru.util.factory.DateFactory;
 
 /**
  *
  * @author jkowalczyk
  */
-public class HarFileContentLoaderImplTest extends TestCase {
+//public class HarFileContentLoaderImplTest extends TestCase {
+public class HarFileContentLoaderImplTest  {
   
     private Map<String, String> contentMap;
     private static final String PAGE_URL = "http://my.test.org/";
@@ -53,22 +42,22 @@ public class HarFileContentLoaderImplTest extends TestCase {
 
     
     public HarFileContentLoaderImplTest(String testName) {
-        super(testName);
+//        super(testName);
     }
     
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        contentMap = new LinkedHashMap<String, String>();
-        contentMap.put(PAGE_URL, readFile("contents/page1.html"));
-        contentMap.put(CSS_1_URL, readFile("contents/css1.css"));
-        contentMap.put(CSS_2_URL, readFile("contents/css2.css"));
-    }
-    
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
+//    @Override
+//    protected void setUp() throws Exception {
+//        super.setUp();
+//        contentMap = new LinkedHashMap<String, String>();
+//        contentMap.put(PAGE_URL, readFile("contents/page1.html"));
+//        contentMap.put(CSS_1_URL, readFile("contents/css1.css"));
+//        contentMap.put(CSS_2_URL, readFile("contents/css2.css"));
+//    }
+//    
+//    @Override
+//    protected void tearDown() throws Exception {
+//        super.tearDown();
+//    }
 
     /**
      * Test of getResult method, of class HarFileContentLoaderImpl.

@@ -22,11 +22,6 @@
 package org.opens.tanaguru.contentloader;
 
 import junit.framework.TestCase;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
-import org.opens.tanaguru.entity.service.audit.ContentDataService;
-import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
-import org.opens.tanaguru.entity.subject.WebResource;
-import org.opens.tanaguru.util.factory.DateFactory;
 
 /**
  *
