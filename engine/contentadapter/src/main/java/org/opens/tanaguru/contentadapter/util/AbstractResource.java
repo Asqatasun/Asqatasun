@@ -21,10 +21,10 @@
  */
 package org.opens.tanaguru.contentadapter.util;
 
-import org.opens.tanaguru.contentadapter.Resource;
-import org.opens.tanaguru.contentadapter.RsrcLocator;
 import java.util.HashSet;
 import java.util.Set;
+import org.opens.tanaguru.contentadapter.Resource;
+import org.opens.tanaguru.contentadapter.RsrcLocator;
 
 /**
  * 
@@ -32,10 +32,10 @@ import java.util.Set;
  */
 public abstract class AbstractResource implements Resource {
 
-    protected int lineNumber;
-    protected RsrcLocator location;
-    protected String resource;
-    protected Set resourceSet;
+    private int lineNumber;
+    private RsrcLocator location;
+    private String resource;
+    private Set resourceSet;
 
     public AbstractResource() {
         super();

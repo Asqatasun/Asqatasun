@@ -30,7 +30,7 @@ import org.opens.tanaguru.contentadapter.Resource;
  */
 public abstract class AbstractContentParser implements ContentParser {
 
-    protected Resource resource;
+    private Resource resource;
 
     public AbstractContentParser() {
         super();
