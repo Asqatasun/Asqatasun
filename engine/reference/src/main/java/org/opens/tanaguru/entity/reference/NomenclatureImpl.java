@@ -42,22 +42,22 @@ import org.opens.tanaguru.entity.service.reference.NomenclatureCssUnit;
 public class NomenclatureImpl implements Nomenclature, Serializable {
 
     @Column(name = "Cd_Nomenclature")
-    protected String code;
+    private String code;
     @Column(name = "Description")
-    protected String description;
+    private String description;
     @OneToMany(mappedBy = "nomenclature", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-    protected Collection<NomenclatureElementImpl> elementList = new HashSet<NomenclatureElementImpl>();
+    private Collection<NomenclatureElementImpl> elementList = new HashSet<NomenclatureElementImpl>();
     @Id
     @GeneratedValue
     @Column(name = "Id_Nomenclature")
-    protected Long id;
+    private Long id;
     @Column(name = "Long_Label")
-    protected String longLabel;
+    private String longLabel;
     @ManyToOne
     @JoinColumn(name = "Id_Nomenclature_Parent")
-    protected NomenclatureImpl parent;
+    private NomenclatureImpl parent;
     @Column(name = "Short_Label")
-    protected String shortLabel;
+    private String shortLabel;
 
     public NomenclatureImpl() {
         super();

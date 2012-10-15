@@ -40,15 +40,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class DecisionLevelImpl implements DecisionLevel, Serializable {
 
 	@Column(name = "Cd_Decision_Level")
-	protected String code;
+	private String code;
 	@Column(name = "Description")
-	protected String description;
+	private String description;
 	@Id
 	@GeneratedValue
 	@Column(name = "Id_Decision_Level")
-	protected Long id;
+	private Long id;
 	@Column(name = "Label", nullable = false)
-	protected String label;
+	private String label;
 
 	public DecisionLevelImpl() {
 		super();

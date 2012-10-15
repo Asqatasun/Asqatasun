@@ -40,19 +40,19 @@ import org.hibernate.collection.PersistentBag;
 public class ThemeImpl implements Theme, Serializable {
 
     @Column(name = "Cd_Theme")
-    protected String code;
+    private String code;
     @OneToMany(mappedBy = "theme", cascade = CascadeType.ALL)
-    protected List<CriterionImpl> criterionList;
+    private List<CriterionImpl> criterionList;
     @Column(name = "Description")
-    protected String description;
+    private String description;
     @Id
     @GeneratedValue
     @Column(name = "Id_Theme")
-    protected Long id;
+    private Long id;
     @Column(name = "Label", nullable = false)
-    protected String label;
+    private String label;
     @Column(name = "Rank")
-    protected int rank;
+    private int rank;
 
     public ThemeImpl() {
         super();

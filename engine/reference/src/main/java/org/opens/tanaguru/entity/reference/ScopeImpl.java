@@ -40,15 +40,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ScopeImpl implements Scope, Serializable {
 
     @Column(name = "Code")
-    protected String code;
+    private String code;
     @Column(name = "Description")
-    protected String description;
+    private String description;
     @Id
     @GeneratedValue
     @Column(name = "Id_Scope")
-    protected Long id;
+    private Long id;
     @Column(name = "Label", nullable = false)
-    protected String label;
+    private String label;
 
     public ScopeImpl() {
         super();

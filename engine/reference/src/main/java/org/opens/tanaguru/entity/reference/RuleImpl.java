@@ -38,18 +38,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class RuleImpl implements Rule {
 
     @Column(name = "Class_Name", nullable = false)
-    protected String className;
+    private String className;
     @Column(name = "Description")
-    protected String description;
+    private String description;
     @Id
     @GeneratedValue
     @Column(name = "Id_Rule")
-    protected Long id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "Id_Rule_Package")
-    protected RulePackageImpl owningPackage;
+    private RulePackageImpl owningPackage;
     @OneToMany(mappedBy = "rule", cascade = CascadeType.ALL)
-    protected Collection<TestImpl> testList = new ArrayList<TestImpl>();
+    private Collection<TestImpl> testList = new ArrayList<TestImpl>();
 
     public RuleImpl() {
         super();

@@ -38,15 +38,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class RulePackageImpl implements RulePackage {
 
     @Column(name = "Description")
-    protected String description;
+    private String description;
     @Id
     @GeneratedValue
     @Column(name = "Id_Rule_Package")
-    protected Long id;
+    private Long id;
     @Column(name = "Package_Name")
-    protected String packageName;
+    private String packageName;
     @OneToMany(mappedBy = "owningPackage", cascade = CascadeType.ALL)
-    protected Collection<RuleImpl> ruleList;
+    private Collection<RuleImpl> ruleList;
 
     public RulePackageImpl() {
         super();

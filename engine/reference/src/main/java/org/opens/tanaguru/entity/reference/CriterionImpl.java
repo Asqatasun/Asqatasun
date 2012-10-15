@@ -39,27 +39,27 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class CriterionImpl implements Criterion, Serializable {
 
     @Column(name = "Cd_Criterion")
-    protected String code;
+    private String code;
     @Column(name = "Description")
-    protected String description;
+    private String description;
     @Id
     @GeneratedValue
     @Column(name = "Id_Criterion")
-    protected Long id;
+    private Long id;
     @Column(name = "Label")
-    protected String label;
+    private String label;
     @Column(name = "Url")
-    protected String url;
+    private String url;
     @Column(name = "Rank")
-    protected int rank;
+    private int rank;
     @ManyToOne
     @JoinColumn(name = "Reference_Id_Reference")
-    protected ReferenceImpl reference;
+    private ReferenceImpl reference;
     @OneToMany(mappedBy = "criterion", cascade = CascadeType.ALL)
-    protected List<TestImpl> testList = new ArrayList<TestImpl>();
+    private List<TestImpl> testList = new ArrayList<TestImpl>();
     @ManyToOne
     @JoinColumn(name = "Theme_Id_Theme")
-    protected ThemeImpl theme;
+    private ThemeImpl theme;
 
     public CriterionImpl() {
         super();

@@ -40,17 +40,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class LevelImpl implements Level, Serializable {
 
     @Column(name = "Cd_Level")
-    protected String code;
+    private String code;
     @Column(name = "Description")
-    protected String description;
+    private String description;
     @Id
     @GeneratedValue
     @Column(name = "Id_Level")
-    protected Long id;
+    private Long id;
     @Column(name = "Label")
-    protected String label;
+    private String label;
     @Column(name = "Rank")
-    protected int rank;
+    private int rank;
 
     public LevelImpl() {
         super();

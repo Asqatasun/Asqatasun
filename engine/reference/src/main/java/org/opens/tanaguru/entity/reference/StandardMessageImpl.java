@@ -21,15 +21,11 @@
  */
 package org.opens.tanaguru.entity.reference;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * 
+ *
  * @author jkowalczyk
  */
 @Entity
@@ -37,56 +33,56 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class StandardMessageImpl implements StandardMessage {
 
-	@Column(name = "Cd_Standard_Message")
-	protected String code;
-	@Id
-	@GeneratedValue
-	@Column(name = "Id_Standard_Message")
-	protected Long id;
-	@Column(name = "Label")
-	protected String label;
-	@Column(name = "Text")
-	protected String text;
+    @Column(name = "Cd_Standard_Message")
+    private String code;
+    @Id
+    @GeneratedValue
+    @Column(name = "Id_Standard_Message")
+    private Long id;
+    @Column(name = "Label")
+    private String label;
+    @Column(name = "Text")
+    private String text;
 
-	public StandardMessageImpl() {
-		super();
-	}
+    public StandardMessageImpl() {
+        super();
+    }
 
-	public StandardMessageImpl(String code, String text) {
-		this();
-		this.code = code;
-		this.text = text;
-	}
+    public StandardMessageImpl(String code, String text) {
+        this();
+        this.code = code;
+        this.text = text;
+    }
 
-	public String getCode() {
-		return code;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getLabel() {
-		return label;
-	}
+    public String getLabel() {
+        return label;
+    }
 
-	public String getText() {
-		return text;
-	}
+    public String getText() {
+        return text;
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setLabel(String label) {
-		this.label = label;
-	}
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
-	public void setText(String text) {
-		this.text = text;
-	}
+    public void setText(String text) {
+        this.text = text;
+    }
 }
