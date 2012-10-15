@@ -606,7 +606,7 @@ public class JSONArray {
      * @return this.
      */
     public JSONArray put(int value) {
-        this.put(new Integer(value));
+        this.put(Integer.valueOf(value));
         return this;
     }
 
@@ -618,7 +618,7 @@ public class JSONArray {
      * @return this.
      */
     public JSONArray put(long value) {
-        this.put(new Long(value));
+        this.put(Long.valueOf(value));
         return this;
     }
 
@@ -704,7 +704,7 @@ public class JSONArray {
      * @throws JSONException If the index is negative.
      */
     public JSONArray put(int index, int value) throws JSONException {
-        this.put(index, new Integer(value));
+        this.put(index, Integer.valueOf(value));
         return this;
     }
 
@@ -719,7 +719,7 @@ public class JSONArray {
      * @throws JSONException If the index is negative.
      */
     public JSONArray put(int index, long value) throws JSONException {
-        this.put(index, new Long(value));
+        this.put(index, Long.valueOf(value));
         return this;
     }
 
