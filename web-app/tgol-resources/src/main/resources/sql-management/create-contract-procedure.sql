@@ -15,10 +15,12 @@ IN ref2 INT,
 IN funct1 INT, 
 IN funct2 INT, 
 IN funct3 INT,
-IN funct4 INT)
+IN funct4 INT,
+IN maxDoc VARCHAR(5))
 BEGIN
 
   DECLARE v_Id_Option_Element bigint(20);
+  DECLARE v_Id_Option_Element2 bigint(20);
   DECLARE contractId bigint(20);
 
   INSERT INTO TGSI_CONTRACT (Label, Begin_Date, End_Date, USER_Id_User) values (label, date(now()),
@@ -34,6 +36,18 @@ BEGIN
         INSERT IGNORE INTO `TGSI_CONTRACT_OPTION_ELEMENT` (`CONTRACT_Id_Contract`, `OPTION_ELEMENT_Id_Option_Element`) VALUES
 	    (contractId,v_Id_Option_Element);
   END IF;
+  
+  IF maxDoc IS NOT NULL
+    THEN 
+        INSERT IGNORE INTO `TGSI_OPTION_ELEMENT` (`OPTION_Id_Option`, `Value`) VALUES
+            (3, maxDoc);	
+        select Id_Option_Element into v_Id_Option_Element2 FROM TGSI_OPTION_ELEMENT toe WHERE toe.OPTION_Id_Option=3 AND toe.Value=maxDoc;
+    ELSE 
+        select Id_Option_Element into v_Id_Option_Element2 FROM TGSI_OPTION_ELEMENT toe WHERE toe.OPTION_Id_Option=3 AND toe.Value="1000";
+  END IF;
+
+  INSERT IGNORE INTO `TGSI_CONTRACT_OPTION_ELEMENT` (`CONTRACT_Id_Contract`, `OPTION_ELEMENT_Id_Option_Element`) VALUES
+                    (contractId,v_Id_Option_Element2);
 
   IF ref1 IS NOT NULL 
     THEN 
