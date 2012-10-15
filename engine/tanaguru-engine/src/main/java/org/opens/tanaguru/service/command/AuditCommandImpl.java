@@ -474,7 +474,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
                                             true, 
                                             false);
             processResultSet.clear();
-            processResultSet.addAll(processorService.process(contentList, (List<Test>) audit.getTestList()));
+            processResultSet.addAll(processorService.process(contentList, audit.getTestList()));
             for (ProcessResult processResult : processResultSet) {
                 processResult.setGrossResultAudit(audit);
             }
@@ -572,7 +572,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
             } else {
                 List<ProcessResult> prList= (List<ProcessResult>) processResultDataService.
                             getGrossResultFromAudit(audit);
-                consolidate(prList, (List<Test>)audit.getTestList());
+                consolidate(prList, audit.getTestList());
                 if (LOGGER.isDebugEnabled()) {
                     endProcessDate = Calendar.getInstance().getTime();
                     LOGGER.debug(
@@ -597,7 +597,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
      * @param prList
      * @param testList 
      */
-    private void consolidate(List<ProcessResult> prList, List<Test> testList) {
+    private void consolidate(Collection<ProcessResult> prList, Collection<Test> testList) {
         Set<ProcessResult> processResultSet = new HashSet<ProcessResult>();
         if (LOGGER.isDebugEnabled()) {
             if (testList.size() == 1) {
