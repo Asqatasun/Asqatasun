@@ -28,7 +28,6 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
-import org.hibernate.collection.PersistentSet;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.PageImpl;
 
@@ -140,13 +139,10 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
 //    @XmlTransient
     @Override
     public Collection<RelatedContent> getRelatedContentSet() {
-        if (relatedContentSet instanceof PersistentSet) {
-            return (PersistentSet)relatedContentSet;
-        }
         if (relatedContentSet == null) {
             relatedContentSet = new HashSet<RelatedContentImpl>();
         }
-        return (HashSet)relatedContentSet;
+        return (Collection)relatedContentSet;
     }
 
     @Override

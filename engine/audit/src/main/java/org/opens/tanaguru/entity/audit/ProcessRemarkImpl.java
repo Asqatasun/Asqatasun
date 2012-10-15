@@ -27,7 +27,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
-import org.hibernate.collection.PersistentSet;
 
 /**
  * 
@@ -137,10 +136,7 @@ public class ProcessRemarkImpl implements ProcessRemark, Serializable {
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.EvidenceElementImpl.class)})
     public Collection<EvidenceElement> getElementList() {
-        if (elementSet instanceof PersistentSet) {
-            return (PersistentSet)elementSet;
-        }
-        return (LinkedHashSet)elementSet;
+        return (Collection)elementSet;
     }
 
     @Override

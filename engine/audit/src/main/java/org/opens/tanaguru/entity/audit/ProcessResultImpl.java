@@ -115,10 +115,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.DefiniteResultImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.IndefiniteResultImpl.class)})
     public Collection<ProcessResult> getChildResultList() {
-        if (childResultSet instanceof PersistentSet) {
-            return (PersistentSet)childResultSet;
-        }
-        return (HashSet)childResultSet;
+        return (Collection)childResultSet;
     }
 
     @Override
@@ -150,10 +147,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.ProcessRemarkImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.SourceCodeRemarkImpl.class)})
     public Collection<ProcessRemark> getRemarkSet() {
-        if (remarkSet instanceof PersistentSet) {
-            return (PersistentSet)remarkSet;    
-        }
-        return (LinkedHashSet)remarkSet;
+        return (Collection)remarkSet;
     }
 
     @Override

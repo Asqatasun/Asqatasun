@@ -166,10 +166,7 @@ public class AuditImpl implements Audit, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.JavascriptContentImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.StylesheetContentImpl.class)})
     public Collection<Content> getContentList() {
-        if (contentSet instanceof PersistentSet) {
-            return (PersistentSet)contentSet;
-        }
-        return (HashSet)contentSet;
+        return (Collection)contentSet;
     }
 
     @Override
@@ -183,10 +180,7 @@ public class AuditImpl implements Audit, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.IndefiniteResultImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.DefiniteResultImpl.class)})
     public Collection<ProcessResult> getGrossResultList() {
-        if (grossResultSet instanceof PersistentSet) {
-            return (PersistentSet)grossResultSet;
-        }
-        return (HashSet)grossResultSet;
+        return (Collection)grossResultSet;
     }
 
     @Override
@@ -198,7 +192,7 @@ public class AuditImpl implements Audit, Serializable {
     @XmlElementWrapper
     @XmlElementRef(type = org.opens.tanaguru.entity.audit.DefiniteResultImpl.class)
     public Collection<ProcessResult> getNetResultList() {
-        return (HashSet)netResultSet;
+        return (Collection)netResultSet;
     }
 
     @Override
@@ -218,10 +212,7 @@ public class AuditImpl implements Audit, Serializable {
     @XmlElementWrapper
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.TestImpl.class)
     public Collection<Test> getTestList() {
-        if (testSet instanceof PersistentSet) {
-            return (PersistentSet)testSet;
-        }
-        return (HashSet)testSet;
+        return (Collection)testSet;
     }
 
     @Override
@@ -304,10 +295,7 @@ public class AuditImpl implements Audit, Serializable {
 
     @Override
     public Collection<Parameter> getParameterSet() {
-        if (parameterSet instanceof PersistentSet) {
-            return (PersistentSet)parameterSet;
-        }
-        return (HashSet)parameterSet;
+        return (Collection)parameterSet;
     }
 
 }

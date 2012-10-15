@@ -29,7 +29,6 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.hibernate.collection.PersistentSet;
 
 /**
  * 
@@ -76,10 +75,7 @@ public class ThemeImpl implements Theme, Serializable {
     @XmlElementWrapper
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.CriterionImpl.class)
     public Collection<Criterion> getCriterionList() {
-        if (criterionList instanceof PersistentSet) {
-            return (PersistentSet)criterionList;
-        }
-        return (HashSet)criterionList;
+        return (Collection)criterionList;
     }
 
     @Override

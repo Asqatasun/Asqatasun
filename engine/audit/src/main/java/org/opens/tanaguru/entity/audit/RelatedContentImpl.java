@@ -33,7 +33,6 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import org.hibernate.collection.PersistentSet;
 
 /**
  * 
@@ -92,10 +91,7 @@ public class RelatedContentImpl extends ContentImpl implements
     @XmlTransient
     @Override
     public Set<Content> getParentContentSet() {
-        if (parentContentSet instanceof PersistentSet) {
-            return (PersistentSet)parentContentSet;
-        }
-        return (HashSet)parentContentSet;
+        return (Set)parentContentSet;
     }
 
     @Override

@@ -90,10 +90,7 @@ public class NomenclatureImpl implements Nomenclature, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.reference.NomenclatureCssUnitImpl.class)})
     @Override
     public Collection<NomenclatureElement> getElementList() {
-        if (elementList instanceof PersistentSet) {
-            return (PersistentSet) elementList;    
-        }
-        return (Collection<NomenclatureElement>) (HashSet) elementList;
+        return (Collection)elementList;
     }
 
     @Override
