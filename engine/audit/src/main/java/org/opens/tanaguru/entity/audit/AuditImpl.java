@@ -52,18 +52,18 @@ public class AuditImpl implements Audit, Serializable {
     @Column(name = "Comment")
     private String comment;
     @OneToMany(mappedBy = "audit")
-    private List<ContentImpl> contentList = new ArrayList<ContentImpl>();
+    private Collection<ContentImpl> contentList = new ArrayList<ContentImpl>();
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     @Column(name = "Dt_Creation")
     private Date dateOfCreation;
     @OneToMany(mappedBy = "grossResultAudit")
-    private List<ProcessResultImpl> grossResultList = new ArrayList<ProcessResultImpl>();
+    private Collection<ProcessResultImpl> grossResultList = new ArrayList<ProcessResultImpl>();
     @Id
     @GeneratedValue
     @Column(name = "Id_Audit")
     private Long id;
     @OneToMany(mappedBy = "netResultAudit")
-    private List<ProcessResultImpl> netResultList = new ArrayList<ProcessResultImpl>();
+    private Collection<ProcessResultImpl> netResultList = new ArrayList<ProcessResultImpl>();
     @Enumerated(EnumType.STRING)
     @Column(name = "Status")
     private AuditStatus status = AuditStatus.INITIALISATION;
@@ -73,12 +73,12 @@ public class AuditImpl implements Audit, Serializable {
     @JoinTable(name = "AUDIT_TEST", joinColumns =
     @JoinColumn(name = "Id_Audit"), inverseJoinColumns =
     @JoinColumn(name = "Id_Test"))
-    private List<TestImpl> testList = new ArrayList<TestImpl>();
+    private Collection<TestImpl> testList = new ArrayList<TestImpl>();
     @ManyToMany
     @JoinTable(name = "AUDIT_PARAMETER", joinColumns =
     @JoinColumn(name = "Id_Audit"), inverseJoinColumns =
     @JoinColumn(name = "Id_Parameter"))
-    private List<ParameterImpl> parameterSet = new ArrayList<ParameterImpl>();
+    private Collection<ParameterImpl> parameterSet = new ArrayList<ParameterImpl>();
     
     public AuditImpl() {
         super();

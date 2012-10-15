@@ -23,6 +23,7 @@ package org.opens.tanaguru.entity.reference;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
@@ -42,7 +43,7 @@ public class ThemeImpl implements Theme, Serializable {
     @Column(name = "Cd_Theme")
     private String code;
     @OneToMany(mappedBy = "theme", cascade = CascadeType.ALL)
-    private List<CriterionImpl> criterionList;
+    private Collection<CriterionImpl> criterionList;
     @Column(name = "Description")
     private String description;
     @Id

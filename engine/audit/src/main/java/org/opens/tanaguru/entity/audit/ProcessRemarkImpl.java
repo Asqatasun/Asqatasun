@@ -56,7 +56,7 @@ public class ProcessRemarkImpl implements ProcessRemark, Serializable {
     @Column(name = "Selection_Expression")
     private String selectionExpression;
     @OneToMany(mappedBy = "processRemark", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<EvidenceElementImpl> elementList = new LinkedHashSet<EvidenceElementImpl>();
+    private Collection<EvidenceElementImpl> elementList = new LinkedHashSet<EvidenceElementImpl>();
 
     public ProcessRemarkImpl() {
         super();
