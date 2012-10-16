@@ -22,10 +22,21 @@
 package org.opens.tgol.entity.dao.option;
 
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
+import org.opens.tgol.entity.option.Option;
 import org.opens.tgol.entity.option.OptionElement;
 
 /**
  *
  * @author jkowalczyk
  */
-public interface OptionElementDAO extends GenericDAO<OptionElement, Long> {}
+public interface OptionElementDAO extends GenericDAO<OptionElement, Long> {
+
+
+    /**
+     * 
+     * @param value
+     * @param option
+     * @return 
+     */
+    OptionElement findOptionElementFromValueAndOption(String value, Option option);
+}
