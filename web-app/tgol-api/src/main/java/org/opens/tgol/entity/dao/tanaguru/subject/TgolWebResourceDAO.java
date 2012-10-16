@@ -23,11 +23,11 @@ package org.opens.tgol.entity.dao.tanaguru.subject;
 
 
 import java.util.Collection;
-import java.util.List;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
+import org.opens.tgol.presentation.data.PageResult;
 
 
 /**
@@ -89,8 +89,7 @@ public interface TgolWebResourceDAO extends GenericDAO<WebResource, Long> {
      * @param webResource
      * @return
      */
-    Collection<? extends Object> retrieveChildUrlList(
-            WebResource webResource);
+    Collection<PageResult> retrieveChildUrlList(WebResource webResource);
 
     /**
      *

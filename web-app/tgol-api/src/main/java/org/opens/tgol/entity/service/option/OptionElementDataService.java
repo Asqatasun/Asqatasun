@@ -22,10 +22,20 @@
 package org.opens.tgol.entity.service.option;
 
 import org.opens.tanaguru.sdk.entity.service.GenericDataService;
+import org.opens.tgol.entity.option.Option;
 import org.opens.tgol.entity.option.OptionElement;
 
 /**
  *
  * @author jkowalczyk
  */
-public interface OptionElementDataService extends GenericDataService<OptionElement, Long> {}
+public interface OptionElementDataService extends GenericDataService<OptionElement, Long> {
+
+    /**
+     * 
+     * @param value
+     * @param option
+     * @return 
+     */
+    OptionElement getOptionElementFromValueAndOption(String value, Option option);
+}

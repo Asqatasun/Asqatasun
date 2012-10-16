@@ -21,6 +21,7 @@
  */
 package org.opens.tgol.entity.contract;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
 import org.opens.tanaguru.sdk.entity.Entity;
@@ -119,7 +120,7 @@ public interface Contract extends Entity {
      * @return
      *      the set of the acts associated with the contract
      */
-    Set<? extends Act> getActSet();
+    Collection<Act> getActSet();
 
     /**
      *
@@ -131,14 +132,14 @@ public interface Contract extends Entity {
      *
      * @param actSet
      */
-    void addAllAct (Set<? extends Act> actSet);
+    void addAllAct (Collection<Act> actSet);
 
         /**
      *
      * @return
      *      the set of the option elements associated with the offer
      */
-    Set<? extends OptionElement> getOptionElementSet();
+    Collection<OptionElement> getOptionElementSet();
 
     /**
      *
@@ -150,14 +151,14 @@ public interface Contract extends Entity {
      *
      * @param optionElementSet
      */
-    void addAllOptionElement (Set<? extends OptionElement> optionElementSet);
+    void addAllOptionElement (Collection<OptionElement> optionElementSet);
     
     /**
      *
      * @return
      *      the set of functionality associated with the contract
      */
-    Set<? extends Functionality> getFunctionalitySet();
+    Collection<Functionality> getFunctionalitySet();
 
     /**
      * 
@@ -169,14 +170,14 @@ public interface Contract extends Entity {
      * 
      * @param functionality
      */
-    void addAllFunctionality(Set<? extends Functionality> functionalitySet);
+    void addAllFunctionality(Collection<Functionality> functionalitySet);
     
     /**
      *
      * @return
      *      the set of references associated with the contract
      */
-    Set<? extends Referential> getReferentialSet();
+    Collection<Referential> getReferentialSet();
 
     /**
      * 
@@ -188,14 +189,14 @@ public interface Contract extends Entity {
      * 
      * @param reference
      */
-    void addAllReferential(Set<? extends Referential> referentialSet);
+    void addAllReferential(Collection<Referential> referentialSet);
     
     /**
      *
      * @return
      *      the set of scenarios associated with the contract
      */
-    Set<? extends Scenario> getScenarioSet();
+    Collection<Scenario> getScenarioSet();
 
     /**
      * 
@@ -207,5 +208,5 @@ public interface Contract extends Entity {
      * 
      * @param reference
      */
-    void addAllScenario(Set<? extends Scenario> scenarioSet);
+    void addAllScenario(Collection<Scenario> scenarioSet);
 }

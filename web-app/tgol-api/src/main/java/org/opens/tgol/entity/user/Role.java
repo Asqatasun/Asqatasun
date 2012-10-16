@@ -21,8 +21,8 @@
  */
 package org.opens.tgol.entity.user;
 
-import org.opens.tanaguru.sdk.entity.Entity;
 import java.util.Collection;
+import org.opens.tanaguru.sdk.entity.Entity;
 
 /**
  *
@@ -56,14 +56,14 @@ public interface Role extends Entity {
      * @param
      *          the child role set to add
      */
-    void addAllChildRole(Collection<? extends Role> childRoleSet);
+    void addAllChildRole(Collection<Role> childRoleSet);
 
     /**
      * 
      * @return
      *           the child role set of the current role
      */
-    Collection<? extends Role> getChildRoleSet();
+    Collection<Role> getChildRoleSet();
 
     /**
      *

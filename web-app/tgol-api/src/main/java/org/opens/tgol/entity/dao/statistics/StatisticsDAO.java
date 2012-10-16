@@ -21,14 +21,19 @@
  */
 package org.opens.tgol.entity.dao.statistics;
 
-import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
-import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
-import org.opens.tgol.util.HttpStatusCodeFamily;
 import java.util.Collection;
+import org.displaytag.properties.SortOrderEnum;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Theme;
+import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
+import org.opens.tgol.presentation.data.FailedPageInfo;
+import org.opens.tgol.presentation.data.FailedTestInfo;
+import org.opens.tgol.presentation.data.FailedThemeInfo;
+import org.opens.tgol.presentation.data.PageResult;
+import org.opens.tgol.util.HttpStatusCodeFamily;
 
 
 /**
@@ -45,7 +50,7 @@ public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
      * @param nbOfResult
      * @return
      */
-    Collection<? extends Object> findFailedWebResourceSortedByTest(
+    Collection<FailedPageInfo> findFailedWebResourceSortedByTest(
             WebResource webResource,
             Audit audit,
             int nbOfResult);
@@ -56,7 +61,7 @@ public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
      * @param nbOfResult
      * @return
      */
-    Collection<? extends Object> findFailedWebResourceSortedByOccurrence(
+    Collection<FailedPageInfo> findFailedWebResourceSortedByOccurrence(
             WebResource webResource,
             Audit audit,
             int nbOfResult);
@@ -67,7 +72,7 @@ public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
      * @param nbOfResult
      * @return
      */
-    Collection<? extends Object> findFailedTestByOccurrence(
+    Collection<FailedTestInfo> findFailedTestByOccurrence(
             WebResource webResource,
             Audit audit,
             int nbOfResult);
@@ -90,7 +95,7 @@ public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
      * @param nb0fResult
      * @return
      */
-    Collection<? extends Object> findResultCountByResultTypeAndTheme(
+    Collection<FailedThemeInfo> findResultCountByResultTypeAndTheme(
             WebResource webResource,
             Audit audit,
             TestSolution testSolution,
@@ -152,12 +157,12 @@ public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
      * @param containingValue
      * @return
      */
-    Collection<? extends Object> findWebResourceByAuditAndHttpStatusCode(
+    Collection<PageResult> findWebResourceByAuditAndHttpStatusCode(
             Long idAudit,
             HttpStatusCodeFamily httpStatusCode,
             int nbOfElements,
             int windows,
-            int sortDirection,
+            SortOrderEnum sortDirection,
             String sortCriterion,
             String containingValue);
 

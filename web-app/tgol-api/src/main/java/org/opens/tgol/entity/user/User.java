@@ -21,9 +21,9 @@
  */
 package org.opens.tgol.entity.user;
 
-import org.opens.tgol.entity.contract.Contract;
 import java.util.Collection;
 import org.opens.tanaguru.sdk.entity.Entity;
+import org.opens.tgol.entity.contract.Contract;
 
 /**
  *
@@ -119,14 +119,14 @@ public interface User extends Entity {
      * @param
      *          the contracts set to add to a user
      */
-    void addAllContracts(Collection<? extends Contract> contractSet);
+    void addAllContracts(Collection<Contract> contractSet);
 
     /**
      *
      * @return
      *           the list of the user's contracts
      */
-    Collection<? extends Contract> getContractSet();
+    Collection<Contract> getContractSet();
 
     /**
      *

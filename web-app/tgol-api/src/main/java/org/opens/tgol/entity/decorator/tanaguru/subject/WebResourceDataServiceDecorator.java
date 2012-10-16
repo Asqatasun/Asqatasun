@@ -21,9 +21,8 @@
  */
 package org.opens.tgol.entity.decorator.tanaguru.subject;
 
-import org.opens.tgol.util.HttpStatusCodeFamily;
 import java.util.Collection;
-import java.util.List;
+import org.displaytag.properties.SortOrderEnum;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -31,6 +30,11 @@ import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tgol.presentation.data.FailedPageInfo;
+import org.opens.tgol.presentation.data.FailedTestInfo;
+import org.opens.tgol.presentation.data.FailedThemeInfo;
+import org.opens.tgol.presentation.data.PageResult;
+import org.opens.tgol.util.HttpStatusCodeFamily;
 
 /**
  * This interface decorates the WebResourceDataService interface defined in
@@ -54,7 +58,7 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
      * @param nbOfResult
      * @return
      */
-    Collection<? extends Object> getFailedWebResourceSortedByTest(
+    Collection<FailedPageInfo> getFailedWebResourceSortedByTest(
             WebResource webResource, 
             Audit audit,
             int nbOfResult);
@@ -65,7 +69,7 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
      * @param nbOfResult
      * @return
      */
-    Collection<? extends Object> getFailedWebResourceSortedByOccurrence(
+    Collection<FailedPageInfo> getFailedWebResourceSortedByOccurrence(
             WebResource webResource, 
             Audit audit,
             int nbOfResult);
@@ -76,7 +80,7 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
      * @param nbOfResult
      * @return
      */
-    Collection<? extends Object> getFailedTestByOccurrence(
+    Collection<FailedTestInfo> getFailedTestByOccurrence(
             WebResource webResource, 
             Audit audit,
             int nbOfResult);
@@ -112,7 +116,7 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
      * @param testSolution
      * @return
      */
-    Collection<? extends Object> getResultCountByResultTypeAndTheme(
+    Collection<FailedThemeInfo> getResultCountByResultTypeAndTheme(
             WebResource webResource,
             Audit audit,
             TestSolution testSolution,
@@ -168,7 +172,7 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
      * @param webResource
      * @return
      */
-    Collection<? extends Object> getChildUrlList(
+    Collection<PageResult> getChildUrlList(
             WebResource webResource,
             Audit audit);
 
@@ -212,12 +216,12 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
      * @param containingValue
      * @return
      */
-    Collection<? extends Object> getWebResourceListByAuditAndHttpStatusCode(
+    Collection<PageResult> getWebResourceListByAuditAndHttpStatusCode(
             Long idAudit,
             HttpStatusCodeFamily httpStatusCode,
             int nbOfElements,
             int window,
-            int sortDirection,
+            SortOrderEnum sortDirection,
             String sortCriterion,
             String containingValue);
 }

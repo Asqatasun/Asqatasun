@@ -58,10 +58,10 @@ public interface ContractFactory extends GenericFactory<Contract> {
             Date endDate,
             Date renewalDate,
             Float price,
-            Set<? extends Functionality> functionalitySet,
-            Set<? extends OptionElement> optionSet,
-            Set<? extends Referential> referentialSet,
-            Set<? extends Scenario> scenarioSet,
+            Set<Functionality> functionalitySet,
+            Set<OptionElement> optionSet,
+            Set<Referential> referentialSet,
+            Set<Scenario> scenarioSet,
             User user);
 
 }
