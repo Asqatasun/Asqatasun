@@ -197,18 +197,21 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
      * 
      * @param idAudit
      * @param httpStatusCode
+     * @param invalidTestLabel
      * @param containingValue
      * @return
      */
     Long getWebResourceCountByAuditAndHttpStatusCode(
             Long idAudit,
             HttpStatusCodeFamily httpStatusCode,
+            String invalidTestLabel,
             String containingValue);
     
     /**
      * 
      * @param idAudit
      * @param httpStatusCode
+     * @param invalidTestId
      * @param nbOfElements
      * @param window
      * @param sortDirection
@@ -219,6 +222,7 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
     Collection<PageResult> getWebResourceListByAuditAndHttpStatusCode(
             Long idAudit,
             HttpStatusCodeFamily httpStatusCode,
+            String invalidTestLabel,
             int nbOfElements,
             int window,
             SortOrderEnum sortDirection,

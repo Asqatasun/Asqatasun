@@ -138,18 +138,21 @@ public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
      * 
      * @param idAudit
      * @param httpStatusCode
+     * @param invalidTestLabel
      * @param containingValue
      * @return
      */
     Long findWebResourceCountByAuditAndHttpStatusCode(
             Long idAudit,
             HttpStatusCodeFamily httpStatusCode,
+            String invalidTestLabel,
             String containingValue);
 
     /**
      * 
      * @param idAudit
      * @param httpStatusCode
+     * @param invalidTestLabel
      * @param nbOfElements
      * @param windows
      * @param sortDirection
@@ -160,6 +163,7 @@ public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
     Collection<PageResult> findWebResourceByAuditAndHttpStatusCode(
             Long idAudit,
             HttpStatusCodeFamily httpStatusCode,
+            String invalidTestLabel,
             int nbOfElements,
             int windows,
             SortOrderEnum sortDirection,

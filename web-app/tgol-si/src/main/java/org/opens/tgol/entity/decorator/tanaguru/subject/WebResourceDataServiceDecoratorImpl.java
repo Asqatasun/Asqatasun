@@ -249,10 +249,14 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
 
     @Override
     public Long getWebResourceCountByAuditAndHttpStatusCode(
-            Long idAudit, HttpStatusCodeFamily httpStatusCode, String containingValue) {
+            Long idAudit, 
+            HttpStatusCodeFamily httpStatusCode, 
+            String invalidTestLabel,
+            String containingValue) {
         return statisticsDAO.findWebResourceCountByAuditAndHttpStatusCode(
                 idAudit,
                 httpStatusCode,
+                invalidTestLabel,
                 containingValue);
     }
 
@@ -260,6 +264,7 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
     public Collection<PageResult> getWebResourceListByAuditAndHttpStatusCode(
             Long idAudit,
             HttpStatusCodeFamily httpStatusCode,
+            String invalidTestLabel,
             int nbOfElements,
             int window,
             SortOrderEnum sortDirection,
@@ -268,6 +273,7 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
         return statisticsDAO.findWebResourceByAuditAndHttpStatusCode(
                 idAudit,
                 httpStatusCode,
+                invalidTestLabel,
                 nbOfElements,
                 window,
                 sortDirection,

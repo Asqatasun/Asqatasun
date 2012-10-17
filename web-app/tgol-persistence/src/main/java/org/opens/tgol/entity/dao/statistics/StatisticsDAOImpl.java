@@ -122,18 +122,26 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
     private static final String WEB_RESOURCE_STAT_COUNT =
             " count(Id_Web_Resource_Statistics) ";
             
-    private static final String RETRIEVE_PAGES_HTTP_STATUS_CODE =
-            " FROM WEB_RESOURCE_STATISTICS as wrs, "
-            + "WEB_RESOURCE as w "
-            + "WHERE wrs.Id_Audit=:idAudit "
-            + "AND w.Id_Web_Resource=wrs.Id_Web_Resource "
-            + "AND (wrs.Http_Status_Code like :httpStatusCode";
+    private static final String W_WRS_JOINTURE =
+            " FROM WEB_RESOURCE_STATISTICS as wrs "
+            + "LEFT JOIN WEB_RESOURCE as w on (w.Id_Web_Resource=wrs.Id_Web_Resource) ";
 
+    private static final String PR_T_JOINTURE =
+            "LEFT JOIN PROCESS_RESULT as pr on (w.Id_Web_Resource=pr.Id_Web_Resource) "
+            + "LEFT JOIN TEST as t on (pr.Id_Test=t.Id_Test) ";
+
+    private static final String AUDIT_AND_STATUS_CODE_CONDITION = 
+            "WHERE wrs.Id_Audit=:idAudit "
+            + "AND (wrs.Http_Status_Code like :httpStatusCode";
+    
     private static final String EXTRA_HTTP_STATUS_CODE_CONDITION =
              " OR wrs.Http_Status_Code like :extraHttpStatusCode )";
 
     private static final String CONTAINING_VALUE_CONDITION = 
              " AND w.Url like :containingValue ";
+    
+    private static final String INVALID_TEST_CONDITION = 
+             " AND t.Label=:invalidTestLabel AND pr.Definite_Value='FAILED' ";
 
     @Override
     protected Class<? extends WebResourceStatistics> getEntityClass() {
@@ -531,15 +539,24 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
     public Long findWebResourceCountByAuditAndHttpStatusCode(
             Long idAudit,
             HttpStatusCodeFamily httpStatusCode,
+            String invalidTestLabel,
             String containingValue) {
         boolean hasContainingValue = false;
+        boolean hasInvalidTestConstraint = false;
         if (containingValue != null && !containingValue.isEmpty()) {
            hasContainingValue = true;
+        }
+        if (invalidTestLabel != null) {
+            hasInvalidTestConstraint = true;
         }
         StringBuilder queryString = new StringBuilder();
         queryString.append(SELECT_STR);
         queryString.append(WEB_RESOURCE_STAT_COUNT);
-        queryString.append(RETRIEVE_PAGES_HTTP_STATUS_CODE);
+        queryString.append(W_WRS_JOINTURE);
+        if (hasInvalidTestConstraint) {
+            queryString.append(PR_T_JOINTURE);
+        }
+        queryString.append(AUDIT_AND_STATUS_CODE_CONDITION);
         // the 4xx and 5xx and displayed together. To enable this we need to
         // add the 'like '%5%' constraints on the request in the case of a
         // HttpStatusCodeFamily.CODE4xx instance is passed as argument.
@@ -551,7 +568,9 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         if (hasContainingValue) {
             queryString.append(CONTAINING_VALUE_CONDITION);
         }
-
+        if (hasInvalidTestConstraint) {
+            queryString.append(INVALID_TEST_CONDITION);
+        }
         Query query = entityManager.createNativeQuery(queryString.toString());
         
         query.setParameter("httpStatusCode", httpStatusCode.getCode() + "%");
@@ -561,6 +580,9 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         query.setParameter("idAudit", idAudit);
         if (hasContainingValue) {
             query.setParameter("containingValue", "%"+containingValue+"%");
+        }
+        if (hasInvalidTestConstraint) {
+            query.setParameter("invalidTestLabel", invalidTestLabel);
         }
         try {
             return (((BigInteger)query.getSingleResult()).longValue());
@@ -595,6 +617,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
      *
      * @param idAudit
      * @param httpStatusCode
+     * @param idInvalidLabel
      * @param nbOfResult
      * @param window
      * @param sortDirection
@@ -606,14 +629,19 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
     public Collection<PageResult> findWebResourceByAuditAndHttpStatusCode(
             Long idAudit,
             HttpStatusCodeFamily httpStatusCode,
+            String invalidTestLabel,
             int nbOfResult,
             int window,
             SortOrderEnum sortDirection,
             String sortCriterion,
             String containingValue) {
         boolean hasContainingValue = false;
+        boolean hasInvalidTestConstraint = false;
         if (containingValue != null && !containingValue.isEmpty()) {
            hasContainingValue = true;
+        }
+        if (invalidTestLabel != null) {
+            hasInvalidTestConstraint = true;
         }
         StringBuilder queryString = new StringBuilder();
         queryString.append(SELECT_STR);
@@ -628,7 +656,11 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         queryString.append("wrs.Id_Web_Resource");
         queryString.append(COMA_CHAR);
         queryString.append("wrs.Http_Status_Code");
-        queryString.append(RETRIEVE_PAGES_HTTP_STATUS_CODE);
+        queryString.append(W_WRS_JOINTURE);
+        if (hasInvalidTestConstraint) {
+            queryString.append(PR_T_JOINTURE);
+        }
+        queryString.append(AUDIT_AND_STATUS_CODE_CONDITION);
         // the 4xx and 5xx and displayed together. To enable this we need to
         // add the 'like '%5%' constraints on the request in the case of a
         // HttpStatusCodeFamily.CODE4xx instance is passed as argument.
@@ -639,6 +671,9 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         }
         if (hasContainingValue) {
             queryString.append(CONTAINING_VALUE_CONDITION);
+        }
+        if (hasInvalidTestConstraint) {
+            queryString.append(INVALID_TEST_CONDITION);
         }
         queryString.append(ORDER_BY_STR);
         if (sortCriterion.equalsIgnoreCase("weightedMark")) {
@@ -674,6 +709,9 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         }
         if (hasContainingValue) {
             query.setParameter("containingValue", "%"+containingValue+"%");
+        }
+        if (hasInvalidTestConstraint) {
+            query.setParameter("invalidTestLabel", invalidTestLabel);
         }
         Set<PageResult> failedPageInfoSet = new LinkedHashSet<PageResult>();
         List<Object[]> result = null;
