@@ -74,7 +74,7 @@ public class AuditStatisticsFactory {
     private Map<String, Collection<Theme>> fullThemeMapByRef = null;
     @Autowired
     public final void setThemeDataService(ThemeDataService themeDataService) {
-        Collection<? extends Theme> themeList = themeDataService.findAll();
+        Collection<Theme> themeList = themeDataService.findAll();
         if (fullThemeMapByRef == null) {
             fullThemeMapByRef = new HashMap<String, Collection<Theme>>();
         }
