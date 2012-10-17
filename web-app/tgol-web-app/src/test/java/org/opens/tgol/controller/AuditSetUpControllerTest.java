@@ -21,28 +21,35 @@
  */
 package org.opens.tgol.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import junit.framework.TestCase;
-import org.opens.tanaguru.entity.service.parameterization.MockParameterDataService;
-import org.opens.tanaguru.entity.service.parameterization.MockParameterElementDataService;
+import static org.easymock.EasyMock.*;
+import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.entity.service.parameterization.ParameterElementDataService;
 import org.opens.tgol.command.factory.AuditSetUpCommandFactory;
+import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.entity.contract.ScopeEnum;
 import org.opens.tgol.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
+import org.opens.tgol.entity.functionality.Functionality;
+import org.opens.tgol.entity.option.Option;
+import org.opens.tgol.entity.option.OptionElement;
+import org.opens.tgol.entity.referential.Referential;
+import org.opens.tgol.entity.service.contract.ActDataService;
 import org.opens.tgol.entity.service.contract.ContractDataService;
-import org.opens.tgol.entity.service.contract.MockActDataService;
-import org.opens.tgol.entity.service.contract.MockContractDataService;
-import org.opens.tgol.entity.service.user.MockUserDataService;
 import org.opens.tgol.entity.service.user.UserDataService;
 import org.opens.tgol.entity.user.User;
 import org.opens.tgol.exception.ForbiddenPageException;
 import org.opens.tgol.form.FormField;
 import org.opens.tgol.form.builder.*;
 import org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl;
-import org.opens.tgol.mock.MockAuthenticationDetails;
+import org.opens.tgol.security.userdetails.TgolUserDetails;
 import org.opens.tgol.util.TgolKeyStore;
+import org.springframework.security.authentication.AuthenticationDetails;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 
@@ -53,7 +60,26 @@ import org.springframework.ui.Model;
 public class AuditSetUpControllerTest extends TestCase {
 
     private AuditSetUpController instance;
-            
+
+    Authentication mockAuthentication;
+    AuthenticationDetails mockAuthenticationDetails;
+    ActDataService mockActDataService;
+    User mockUser;
+    UserDataService mockUserDataService;
+    Contract mockContract;
+    ContractDataService mockContractDataService;
+    Functionality mockFunctionality;
+    Referential mockReferential;
+    Option mockOption;
+    OptionElement mockOptionElement;
+    
+    ParameterElementDataService mockParameterElementDataService;
+    ParameterElement mockParameterElementLevel;
+    ParameterElement mockParameterElementTextualFormField;
+    Parameter mockParameter1;
+    Parameter mockParameter2;
+    ParameterDataServiceDecorator mockParameterDataService;
+    
     public AuditSetUpControllerTest(String testName) {
         super(testName);
     }
@@ -62,21 +88,344 @@ public class AuditSetUpControllerTest extends TestCase {
     protected void setUp() throws Exception {
         super.setUp();
         instance = new AuditSetUpController();
+        setUpMockActDataService();
+        setUpFormFieldBuilder();
+    }
+    
+    @Override
+    protected void tearDown() throws Exception {
+        if (mockAuthentication != null) {
+            verify(mockAuthentication);
+        }
+        if (mockAuthenticationDetails != null) {
+            verify(mockAuthenticationDetails);
+        }
+        verify(mockActDataService);
+        if (mockUser != null) {
+            verify(mockUser);
+        }
+        if (mockUserDataService != null) {
+            verify(mockUserDataService);
+        }
+        verify(mockContract);
+        verify(mockContractDataService);
+        if (mockFunctionality != null) {
+            verify(mockFunctionality);
+        }
+        if (mockReferential != null) {
+            verify(mockReferential);
+        }
+        if (mockOption != null) {
+            verify(mockOption);
+        }
+        if (mockOptionElement != null) {
+            verify(mockOptionElement);
+        }
+        verify(mockParameterElementDataService);
+        verify(mockParameterElementLevel);
+        verify(mockParameterElementTextualFormField);
+        if (mockParameterDataService != null) {
+            verify(mockParameterDataService);
+        }
+        if (mockParameter1 != null) {
+            verify(mockParameter1);
+        }
+        if (mockParameter2 != null) {
+            verify(mockParameter2);
+        }
+    }
+    
+    public void testDisplayPageAuditPageSetUp() {
+        System.out.println("testDisplayPageAuditPageSetUp");
         
-        instance.setActDataService(new MockActDataService());
+        // set-up
+        setUpMockUserDataServiceAndUser();
+        setUpMockAuthenticationContext();
+        setUpMockContractDataService(2,1,1,"Contract1", 1,1,1,1,1,1,2);
+        setUpViewFunctionalityBindingMap();
+        setUpAuditSetUpCommandFactory();
+        Model model = new ExtendedModelMap();
         
-        UserDataService userDataService = new MockUserDataService();
-        instance.setUserDataService(userDataService);
+        // test
+        String returnedView = instance.displayPageAuditSetUp("1", null, null, model);
         
-        // the AuditSetUpController needs a ContractDataService instance
-        ContractDataService contractDataService = new MockContractDataService(); 
-        ((MockContractDataService)contractDataService).setUserDataService(userDataService);
-        instance.setContractDataService(contractDataService);
+        // assertions
+        assertEquals(TgolKeyStore.AUDIT_PAGE_SET_UP_VIEW_NAME, returnedView);
+        assertEquals("http://www.test1.com", model.asMap().get(TgolKeyStore.URL_KEY));
+        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
+
+        // TO DO : write test to control the integrity of data of the AuditSetUpCommand
+        // regarding the option/functionality rules
         
-        // the AuditSetUpController needs a map to be set-up to determine whether
-        // a user is allowed to display a set-up form regarding the functionalities
-        // of the contract
+    }
+
+    public void testDisplayPageAuditSiteSetUp() {
+        System.out.println("testDisplayPageAuditSiteSetUp");
         
+        // Set-up
+        setUpMockUserDataServiceAndUser();
+        setUpMockAuthenticationContext();
+        setUpMockContractDataService(1,3,1,"Contract1",1,1,1,1,1,1,1);
+        setUpViewFunctionalityBindingMap();
+        setUpAuditSetUpCommandFactory();
+        Model model = new ExtendedModelMap();
+        
+        String returnedView = instance.displaySiteAuditSetUp("1", null, null, model);
+        
+        // assertions
+        assertEquals(TgolKeyStore.AUDIT_SITE_SET_UP_VIEW_NAME, returnedView);
+        assertEquals("http://www.test1.com", model.asMap().get(TgolKeyStore.URL_KEY));
+        assertEquals(true, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
+    }
+    
+    public void testDisplayPageAuditUploadSetUp() {
+        System.out.println("testDisplayPageAuditUploadSetUp"); 
+        
+        // Set-up
+        setUpMockUserDataServiceAndUser();
+        setUpMockAuthenticationContext();
+        setUpMockContractDataService(2,1,1,"Contract1", 1,1,1,1,1,1,1);
+        setUpViewFunctionalityBindingMap();
+        setUpAuditSetUpCommandFactory();
+        Model model = new ExtendedModelMap();
+        
+        // test
+        String returnedView = instance.displayUploadAuditSetUp("1", null, null, model);
+        
+        // assertions
+        assertEquals(TgolKeyStore.AUDIT_UPLOAD_SET_UP_VIEW_NAME, returnedView);
+        assertEquals("http://www.test1.com", model.asMap().get(TgolKeyStore.URL_KEY));
+        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
+    }
+    
+    public void testDisplayPageAuditPageSetUpWithWrongContractId() {
+        System.out.println("testDisplayPageAuditPageSetUpWithWrongContractId");
+        
+        // set-up
+        setUpMockUserDataServiceAndUser();
+        setUpMockContractDataService(0,0,1,"Contract1", 0,0,0,0,1,0,0);
+        
+        // the contract Id cannot be converted as a Long. An exception is caught
+        try {
+            instance.displayPageAuditSetUp("Not a number", null, null, new ExtendedModelMap());
+            assertTrue(false);
+        } catch (ForbiddenPageException fue) {
+            assertTrue(true);
+        }
+    }
+    
+    public void testDisplayPageAuditUploadSetUpWithWrongContractId() {
+        System.out.println("testDisplayPageAuditUploadSetUpWithWrongContractId");
+        
+        // set-up
+        setUpMockUserDataServiceAndUser();
+        setUpMockContractDataService(0,0,1,"Contract1", 0,0,0,0,1,0,0);
+        
+        // the contract Id cannot be converted as a Long. An exception is caught
+        try {
+            instance.displayUploadAuditSetUp("Not a number", null, null, new ExtendedModelMap());
+            assertTrue(false);
+        } catch (ForbiddenPageException fue) {
+            assertTrue(true);
+        }
+    }
+    
+    public void testDisplayPageAuditSiteSetUpWithWrongContractId() {
+        System.out.println("testDisplayPageAuditSiteSetUpWithWrongContractId");
+
+        // set-up
+        setUpMockUserDataServiceAndUser();
+        setUpMockContractDataService(0,0,1,"Contract1", 0,0,0,0,1,0,0);
+        
+        // the contract Id cannot be converted as a Long. An exception is caught
+        try {
+            instance.displaySiteAuditSetUp("Not a number", null, null, new ExtendedModelMap());
+            assertTrue(false);
+        } catch (ForbiddenPageException fue) {
+            assertTrue(true);
+        }
+    }
+    
+    public void testDisplayPageAuditPageSetUpWithUnauthorisedFunctionality() {
+        System.out.println("testDisplayPageAuditPageSetUpWithUnauthorisedFunctionality");
+        
+        setUpMockUserDataServiceAndUser();
+        setUpMockContractDataService(1,0,2,"Contract1", 0,1,0,0,2,1,0);
+        setUpEmptyViewFunctionalityBindingMap();
+        
+        // the functionality associated with the contract is not allowed 
+        // regarding the viewFunctionalityBindingMap. An exception is caught
+        try {
+            instance.displayPageAuditSetUp("2", null, null, new ExtendedModelMap());
+            assertTrue(false);
+        } catch (ForbiddenPageException fue) {
+            assertTrue(true);
+        }
+    }
+    
+    public void testDisplayPageAuditSiteSetUpWithUnauthorisedFunctionality() {
+        System.out.println("testDisplayPageAuditSiteSetUpWithUnauthorisedFunctionality");
+        
+        setUpMockUserDataServiceAndUser();
+        setUpMockContractDataService(1,0,2,"Contract1", 0,1,0,0,2,1,0);
+        setUpEmptyViewFunctionalityBindingMap();
+
+        // the functionality associated with the contract is not allowed 
+        // regarding the viewFunctionalityBindingMap. An exception is caught
+        try {
+            instance.displaySiteAuditSetUp("2", null, null, new ExtendedModelMap());
+            assertTrue(false);
+        } catch (ForbiddenPageException fue) {
+            assertTrue(true);
+        }
+    }
+    
+    public void testDisplayPageAuditUploadSetUpWithUnauthorisedFunctionality() {
+        System.out.println("testDisplayPageAuditUploadSetUpWithUnauthorisedFunctionality");
+        
+        setUpMockUserDataServiceAndUser();
+        setUpMockContractDataService(1,0,2,"Contract1", 0,1,0,0,2,1,0);
+        setUpEmptyViewFunctionalityBindingMap();
+        
+        // the functionality associated with the contract is not allowed 
+        // regarding the viewFunctionalityBindingMap. An exception is caught
+        try {
+            instance.displayUploadAuditSetUp("2", null, null, new ExtendedModelMap());
+            assertTrue(false);
+        } catch (ForbiddenPageException fue) {
+            assertTrue(true);
+        }
+    }
+    
+    private void setUpMockAuthenticationContext(){
+        // initialise the context with the user identified by the email 
+        // "test1@test.com" seen as authenticated
+        
+        Collection<GrantedAuthority> gac = new ArrayList<GrantedAuthority>();
+        TgolUserDetails tud = new TgolUserDetails("test1@test.com", "", true, false, true, true, gac, mockUser);
+        
+        mockAuthentication = createMock(Authentication.class);
+        SecurityContextImpl securityContextImpl = new SecurityContextImpl();
+        securityContextImpl.setAuthentication(mockAuthentication);
+        SecurityContextHolder.setContext(securityContextImpl);
+        
+        expect(mockAuthentication.getName()).andReturn("test1@test.com").anyTimes();
+        expect(mockAuthentication.getPrincipal()).andReturn(tud).anyTimes();
+        expect(mockAuthentication.getAuthorities()).andReturn(null).anyTimes();
+        
+        replay(mockAuthentication);
+        
+        mockAuthenticationDetails = createMock(AuthenticationDetails.class);
+        expect(mockAuthenticationDetails.getContext()).andReturn("test1@test.com").anyTimes();
+        replay(mockAuthenticationDetails);
+    }
+    
+    private void setUpMockActDataService(){
+        mockActDataService = createMock(ActDataService.class);
+        instance.setActDataService(mockActDataService);
+        replay(mockActDataService);
+    }
+    
+    private void setUpMockUserDataServiceAndUser() {
+        mockUser = createMock(User.class);
+
+        expect(mockUser.getId()).andReturn(Long.valueOf(1)).anyTimes();
+        expect(mockUser.getEmail1()).andReturn("test1@test.com").anyTimes();
+        expect(mockUser.getName()).andReturn("").anyTimes();
+        expect(mockUser.getFirstName()).andReturn("").anyTimes();
+        
+        mockUserDataService = createMock(UserDataService.class);
+
+        replay(mockUser);
+        replay(mockUserDataService);
+        instance.setUserDataService(mockUserDataService);
+    }
+    
+    private void setUpMockContractDataService(
+            int getContractUserCount, 
+            int getContractIdCount,
+            int getContractIdValue, 
+            String contractLabel,
+            int getContractLabelCount, 
+            int getFunctionalitySetCount, 
+            int getReferentialSetCount, 
+            int getOptionElementSetCount, 
+            int readContractId, 
+            int getReadContractIdCount, 
+            int getUrlFromContractOption) {
+        
+        mockContract = createMock(Contract.class);
+
+        if (getContractUserCount > 0) {
+            expect(mockContract.getUser()).andReturn(mockUser).times(getContractUserCount);
+        }
+        if (getContractIdCount > 0) {
+            expect(mockContract.getId()).andReturn(Long.valueOf(getContractIdValue)).times(getContractIdCount);
+        }
+        if (getContractLabelCount > 0) {
+            expect(mockContract.getLabel()).andReturn(contractLabel).times(getContractLabelCount);
+        }
+        if (getFunctionalitySetCount > 0) {
+            expect(mockContract.getFunctionalitySet()).andReturn(setUpMockFunctionalitySet()).times(getFunctionalitySetCount);
+        }
+        if (getReferentialSetCount > 0) {
+            expect(mockContract.getReferentialSet()).andReturn(setUpMockReferentialSet()).times(getReferentialSetCount);
+        }
+        if (getOptionElementSetCount > 0) {
+            expect(mockContract.getOptionElementSet()).andReturn(setUpMockOptionElementSet()).times(getOptionElementSetCount);
+        }
+        mockContractDataService = createMock(ContractDataService.class);
+        
+        if (getReadContractIdCount > 0) {
+            expect(mockContractDataService.read(Long.valueOf(readContractId))).andReturn(mockContract).times(getReadContractIdCount);
+        }
+        if (getUrlFromContractOption > 0) {
+            expect(mockContractDataService.getUrlFromContractOption(mockContract)).andReturn("http://www.test1.com").times(getUrlFromContractOption);
+        }
+        replay(mockContract);
+        replay(mockContractDataService);
+        instance.setContractDataService(mockContractDataService);
+    }
+    
+    private Set<Functionality> setUpMockFunctionalitySet() {
+        mockFunctionality = createMock(Functionality.class);
+        expect(mockFunctionality.getCode()).andReturn("FUNCTIONALITY1").anyTimes();
+        Set<Functionality> mockFunctionalitySet = new HashSet<Functionality>();
+        mockFunctionalitySet.add(mockFunctionality);
+        replay(mockFunctionality);
+        return mockFunctionalitySet;
+    }
+    
+    private Set<Referential> setUpMockReferentialSet() {
+        mockReferential = createMock(Referential.class);
+        expect(mockReferential.getCode()).andReturn("").anyTimes();
+        Set<Referential> mockReferentialSet = new HashSet<Referential>();
+        mockReferentialSet.add(mockReferential);
+        replay(mockReferential);
+        return mockReferentialSet;
+    }
+    
+    private Set<OptionElement> setUpMockOptionElementSet() {
+        mockOption = createMock(Option.class);
+        mockOptionElement = createMock(OptionElement.class);
+        expect(mockOptionElement.getOption()).andReturn(mockOption);
+        expect(mockOption.getCode()).andReturn("").anyTimes();
+        
+        Set<OptionElement> mockOptionElementSet = new HashSet<OptionElement>();
+        mockOptionElementSet.add(mockOptionElement);
+        
+        replay(mockOptionElement);
+        replay(mockOption);
+        
+        return mockOptionElementSet;
+    }
+
+    /**
+     * the AuditSetUpController needs a map to be set-up to determine whether
+     * a user is allowed to display a set-up form regarding the functionalities
+     * of the contract
+     */
+    private void setUpViewFunctionalityBindingMap() {
         Map<String, String> viewFunctionalityBindingMap =  new HashMap<String, String>();
         // The contracts are initialised with a functionality whose code is 
         // FUNCTIONALITY1. We allow all the audit set-up forms for this 
@@ -85,97 +434,39 @@ public class AuditSetUpControllerTest extends TestCase {
         viewFunctionalityBindingMap.put("audit-site-set-up", "FUNCTIONALITY1");
         viewFunctionalityBindingMap.put("audit-page-set-up", "FUNCTIONALITY1");
         instance.setViewFunctionalityBindingMap(viewFunctionalityBindingMap);
-
-        // The Controller needs a list of AuditSetUpFormFieldBuilder that 
-        // deal with the referential and level selection
+    }
+    
+    /**
+     * the AuditSetUpController needs a map to be set-up to determine whether
+     * a user is allowed to display a set-up form regarding the functionalities
+     * of the contract
+     */
+    private void setUpEmptyViewFunctionalityBindingMap() {
+        Map<String, String> viewFunctionalityBindingMap =  new HashMap<String, String>();
+        instance.setViewFunctionalityBindingMap(viewFunctionalityBindingMap);
+    }
+     
+    /**
+     * The Controller needs a list of AuditSetUpFormFieldBuilder that 
+     * deal with the referential and level selection
+     */
+    private void setUpFormFieldBuilder() {
         instance.setReferentialAndLevelFormFieldBuilderList(buildMockRefAndLevelSelectFormFieldList());
-        
         instance.setPageOptionFormFieldBuilderMap(buildMockOptionAuditSetUpFormFieldList());
         instance.setSiteOptionFormFieldBuilderMap(buildMockOptionAuditSetUpFormFieldList());
         instance.setUploadOptionFormFieldBuilderMap(buildMockOptionAuditSetUpFormFieldList());
-        
-        ParameterDataServiceDecorator parameterDataService =  new MockParameterDataService();
-        instance.setParameterDataService(parameterDataService);
-        
-        // The AuditSetUpCommandFactory factory needs to be initialised with 
-        // parameterDataService instance and contractDataService
-        AuditSetUpCommandFactory.getInstance().setParameterDataService(parameterDataService);
-        AuditSetUpCommandFactory.getInstance().setParameterElementDataService(new MockParameterElementDataService());
-        AuditSetUpCommandFactory.getInstance().setContractDataService(contractDataService);
-        
-        // initialise the context with the user identified by the email 
-        // "test1@test.com" seen as authenticated
-        MockAuthenticationDetails.initSecurityContextHolder("test1@test.com");
     }
     
-    public void testDisplayPageAuditSetUp() {
-        MockAuthenticationDetails.initSecurityContextHolder("test1@test.com");        
-        Model model = new ExtendedModelMap();
-
-        String returnedView = instance.displayPageAuditSetUp("1", null, null, model);
-        assertEquals(TgolKeyStore.AUDIT_PAGE_SET_UP_VIEW_NAME, returnedView);
-        assertEquals("test1@test.com", ((User)model.asMap().get(TgolKeyStore.AUTHENTICATED_USER_KEY)).getEmail1());
-        assertEquals("http://www.test1.com", model.asMap().get(TgolKeyStore.URL_KEY));
-        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
-        
-        returnedView = instance.displaySiteAuditSetUp("1", null, null, model);
-        assertEquals(TgolKeyStore.AUDIT_SITE_SET_UP_VIEW_NAME, returnedView);
-        assertEquals("test1@test.com", ((User)model.asMap().get(TgolKeyStore.AUTHENTICATED_USER_KEY)).getEmail1());
-        assertEquals("http://www.test1.com", model.asMap().get(TgolKeyStore.URL_KEY));
-        assertEquals(true, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
-        
-        returnedView = instance.displayUploadAuditSetUp("1", null, null, model);
-        assertEquals(TgolKeyStore.AUDIT_UPLOAD_SET_UP_VIEW_NAME, returnedView);
-        assertEquals("test1@test.com", ((User)model.asMap().get(TgolKeyStore.AUTHENTICATED_USER_KEY)).getEmail1());
-        assertEquals("http://www.test1.com", model.asMap().get(TgolKeyStore.URL_KEY));
-        assertEquals(false, model.asMap().get(TgolKeyStore.DEFAULT_PARAM_SET_KEY));
-
-        // the contract Id cannot be converted as a Long. An exception is caught
-        try {
-            instance.displaySiteAuditSetUp("Not a number", null, null, model);
-            assertTrue(false);
-        } catch (ForbiddenPageException fue) {
-            assertTrue(true);
-        }
-        try {
-            instance.displayPageAuditSetUp("Not a number", null, null, model);
-            assertTrue(false);
-        } catch (ForbiddenPageException fue) {
-            assertTrue(true);
-        }
-        try {
-            instance.displayUploadAuditSetUp("Not a number", null, null, model);
-            assertTrue(false);
-        } catch (ForbiddenPageException fue) {
-            assertTrue(true);
-        }
-        
-        // the functionality associated with the contract is not allowed 
-        // regarding the viewFunctionalityBindingMap. An exception is caught
-        try {
-            instance.displayPageAuditSetUp("2", null, null, model);
-            assertTrue(false);
-        } catch (ForbiddenPageException fue) {
-            assertTrue(true);
-        }
-        try {
-            instance.displaySiteAuditSetUp("2", null, null, model);
-            assertTrue(false);
-        } catch (ForbiddenPageException fue) {
-            assertTrue(true);
-        }
-        try {
-            instance.displayUploadAuditSetUp("2", null, null, model);
-            assertTrue(false);
-        } catch (ForbiddenPageException fue) {
-            assertTrue(true);
-        }
-     
-        // TO DO : write test to control the integrity of data of the AuditSetUpCommand
-        // regarding the option/functionality rules
-        
+    /**
+     * The AuditSetUpCommandFactory factory needs to be initialised with 
+     * parameterDataService instance and contractDataService
+     */
+    private void setUpAuditSetUpCommandFactory() {
+        AuditSetUpCommandFactory.getInstance().setParameterDataService(getParameterDataService());
+        AuditSetUpCommandFactory.getInstance().setParameterElementDataService(getParameterElementDataService());
+        AuditSetUpCommandFactory.getInstance().setContractDataService(mockContractDataService);
     }
-
+    
     /**
      * 
      * @return 
@@ -188,10 +479,16 @@ public class AuditSetUpControllerTest extends TestCase {
         AuditSetUpFormFieldBuilderImpl mockAuditSetUpFormFieldBuilder = 
                 new AuditSetUpFormFieldBuilderImpl();
         mockAuditSetUpFormFieldBuilder.setFormFieldBuilder(mockFormFieldBuilder);
-        mockAuditSetUpFormFieldBuilder.setParameterElementDataService(new MockParameterElementDataService());
+
+        ParameterElementDataService parameterElementDataService = 
+                getParameterElementDataService();
+
+        mockAuditSetUpFormFieldBuilder.setParameterElementDataService(
+                parameterElementDataService);
+        
         // to fit with the mock of the ParameterElementDataService
         mockAuditSetUpFormFieldBuilder.setParameterCode("TEXTUAL_FORMFIELD");
-                
+
         List<AuditSetUpFormFieldBuilderImpl> mockAuditSetUpFormFieldBuilderList = 
                 new ArrayList<AuditSetUpFormFieldBuilderImpl>();
         mockAuditSetUpFormFieldBuilderList.add(mockAuditSetUpFormFieldBuilder);
@@ -202,7 +499,65 @@ public class AuditSetUpControllerTest extends TestCase {
         return mockOptionAuditSetUpFormFieldList;
     }
     
+    private ParameterElementDataService getParameterElementDataService() {
+        if (mockParameterElementDataService == null && 
+                mockParameterElementTextualFormField == null && 
+                mockParameterElementLevel == null) {
+            mockParameterElementDataService = createMock(ParameterElementDataService.class);
+            mockParameterElementTextualFormField = createMock(ParameterElement.class);
+            mockParameterElementLevel = createMock(ParameterElement.class);
+            expect(mockParameterElementDataService.getParameterElement("TEXTUAL_FORMFIELD")).andReturn(mockParameterElementTextualFormField).anyTimes();
+            expect(mockParameterElementDataService.getParameterElement("LEVEL")).andReturn(mockParameterElementLevel).anyTimes();
+            expect(mockParameterElementTextualFormField.getParameterElementCode()).andReturn("TEXTUAL_FORMFIELD").anyTimes();
+            expect(mockParameterElementLevel.getParameterElementCode()).andReturn("LEVEL").anyTimes();
+            replay(mockParameterElementDataService);
+            replay(mockParameterElementLevel);
+            replay(mockParameterElementTextualFormField);
+        }
+        return mockParameterElementDataService;
+    }
+    
+    private ParameterDataServiceDecorator getParameterDataService() {
+        if (mockParameterDataService == null) {
+            mockParameter1 =  createMock(Parameter.class);
+            mockParameter2 =  createMock(Parameter.class);
+            expect(mockParameter1.getValue()).andReturn("PARAMETER1").anyTimes();
+            expect(mockParameter2.getValue()).andReturn("PARAMETER2").anyTimes();
+            Set<Parameter> paramSet = new HashSet<Parameter>();
+            paramSet.add(mockParameter1);
+            paramSet.add(mockParameter2);
+            replay(mockParameter1);
+            replay(mockParameter2);
+
+            mockParameterDataService =  createMock(ParameterDataServiceDecorator.class);
+            expect(mockParameterDataService.getDefaultParameterSet()).andReturn(paramSet).anyTimes();
+            expect(mockParameterDataService.getDefaultParameter(mockParameterElementLevel)).andReturn(mockParameter1).anyTimes();
+            expect(mockParameterDataService.getDefaultParameter(mockParameterElementTextualFormField)).andReturn(mockParameter2).anyTimes();
+            expect(mockParameterDataService.getLastParameterValueFromUser(
+                    Long.valueOf(1), 
+                    mockParameterElementLevel, 
+                    ScopeEnum.DOMAIN)).andReturn("PARAMETER1").anyTimes();
+            expect(mockParameterDataService.getLastParameterValueFromUser(
+                    Long.valueOf(2), 
+                    mockParameterElementLevel, 
+                    ScopeEnum.DOMAIN)).andReturn("PARAMETER1").anyTimes();
+            expect(mockParameterDataService.getLastParameterValueFromUser(
+                    Long.valueOf(1), 
+                    mockParameterElementTextualFormField, 
+                    ScopeEnum.DOMAIN)).andReturn("PARAMETER2").anyTimes();
+            expect(mockParameterDataService.getLastParameterValueFromUser(
+                    Long.valueOf(2), 
+                    mockParameterElementTextualFormField, 
+                    ScopeEnum.DOMAIN)).andReturn("PARAMETER2").anyTimes();
+            replay(mockParameterDataService);
+            instance.setParameterDataService(mockParameterDataService);
+        }
+        return mockParameterDataService;
+    }
     /**
+     * The auditSetUp view is set up with an element to select the referential 
+     * and level. This element is enabled only if the contract is set up with 
+     * this referential (code value for this referential is REFERENTIAL1)
      * 
      * @return 
      */
