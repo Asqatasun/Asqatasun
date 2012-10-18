@@ -21,6 +21,7 @@
  */
 package org.opens.tgol.validator;
 
+//import org.opens.tgol.command.UserSignUpCommand;
 import java.util.regex.Pattern;
 import org.opens.tgol.command.CreateUserCommand;
 import org.opens.tgol.command.UserSignUpCommand;
@@ -34,7 +35,7 @@ import org.springframework.validation.Validator;
  *
  * @author jkowalczyk
  */
-public class SignUpFormValidator implements Validator {
+public class CreateUserFormValidator implements Validator {
     
     private static final String GENERAL_ERROR_MSG_KEY = "generalErrorMsg";
     private static final String SITE_URL_KEY = "siteUrl";

@@ -21,14 +21,13 @@
  */
 package org.opens.tgol.validator;
 
-import org.opens.tgol.command.ChangePasswordCommand;
-import org.opens.tgol.entity.service.user.UserDataService;
-import org.opens.tgol.util.TgolPasswordChecker;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.util.MD5Encoder;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.opens.tgol.command.ChangePasswordCommand;
+import org.opens.tgol.entity.user.User;
+import org.opens.tgol.util.TgolPasswordChecker;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -49,20 +48,15 @@ public class ChangePasswordFormValidator implements Validator {
     private static final String CURRENT_PASSWORD_KEY = "currentPassword";
     private static final String NEW_PASSWORD_KEY = "newPassword";
     
-    private UserDataService userDataService;
-    public UserDataService getContractDataService() {
-        return userDataService;
-    }
-
-    @Autowired
-    public void setUserDataService(UserDataService userDataService) {
-        this.userDataService = userDataService;
-    }
-
     @Override
     public void validate(Object target, Errors errors) {
         ChangePasswordCommand changePasswordCommand = (ChangePasswordCommand)target;
-        checkPassword(changePasswordCommand, errors);
+        checkPassword(changePasswordCommand, null,errors);
+    }
+    
+    public void validate(Object target, Errors errors, User currentUser) {
+        ChangePasswordCommand changePasswordCommand = (ChangePasswordCommand)target;
+        checkPassword(changePasswordCommand, currentUser,errors);
     }
 
     /**
@@ -73,6 +67,7 @@ public class ChangePasswordFormValidator implements Validator {
      */
     private boolean checkPassword(
             ChangePasswordCommand changePasswordCommand,
+            User user,
             Errors errors) {
         String currentPassword = changePasswordCommand.getCurrentPassword();
         String newPassword = changePasswordCommand.getNewPassword();
@@ -81,9 +76,8 @@ public class ChangePasswordFormValidator implements Validator {
                 errors.rejectValue(CURRENT_PASSWORD_KEY, MISSING_PASSWORD_KEY);
                 return false;
             } else {
-                String realCurrentPassword = userDataService.getUserFromEmail(changePasswordCommand.getUserEmail()).getPassword();
                 try {
-                    if (!MD5Encoder.MD5(currentPassword).equalsIgnoreCase(realCurrentPassword)) {
+                    if (!MD5Encoder.MD5(currentPassword).equalsIgnoreCase(user.getPassword())) {
                         errors.rejectValue(CURRENT_PASSWORD_KEY, INCORRECT_PASSWORD_KEY);
                         return false;
                     }
