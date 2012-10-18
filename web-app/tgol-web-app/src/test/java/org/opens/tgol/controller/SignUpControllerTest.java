@@ -29,8 +29,11 @@ import javax.servlet.http.HttpServletRequest;
 import junit.framework.TestCase;
 import static org.easymock.EasyMock.*;
 import org.opens.tgol.command.CreateUserCommand;
+import org.opens.tgol.command.factory.CreateUserCommandFactory;
 import org.opens.tgol.emailsender.EmailSender;
+import org.opens.tgol.entity.service.user.RoleDataService;
 import org.opens.tgol.entity.service.user.UserDataService;
+import org.opens.tgol.entity.user.Role;
 import org.opens.tgol.entity.user.User;
 import org.opens.tgol.util.TgolKeyStore;
 import org.opens.tgol.util.webapp.ExposablePropertyPlaceholderConfigurer;
@@ -55,6 +58,8 @@ public class SignUpControllerTest extends TestCase {
     private CreateUserCommand mockInvalidCreateUserCommand;
     private BindingResult mockInvalidBindingResult;
     private BindingResult mockValidBindingResult;
+    Role mockUserRole;
+    RoleDataService mockRoleDataService;
     
     public SignUpControllerTest(String testName) {
         super(testName);
@@ -88,6 +93,12 @@ public class SignUpControllerTest extends TestCase {
         if (mockValidBindingResult != null) {
             verify(mockValidBindingResult);
         }
+        if (mockUserRole != null) {
+            verify(mockUserRole);
+        }
+        if (mockRoleDataService != null) {
+            verify(mockRoleDataService);
+        }
     }
 
     /**
@@ -113,6 +124,7 @@ public class SignUpControllerTest extends TestCase {
     public void testSubmitForm() throws Exception {
         System.out.println("submitForm");
 
+        setUpMockRoleDataService();
         setUpUserDataService();
         setUpMockExposablePropertyPlaceholderConfigurer();
         setUpValidatorAndBindingResult();
@@ -120,8 +132,7 @@ public class SignUpControllerTest extends TestCase {
                 
         // Set up instance dependences
         Model model = new ExtendedModelMap();
-        HttpServletRequest request = null;
-        
+
         // the returned UserSignUpCommand is seen as valid regarding the validator
         // the CONFIRMATION sign-up page is displayed
         String expResult = TgolKeyStore.SIGN_UP_CONFIRMATION_VIEW_REDIRECT_NAME;
@@ -201,7 +212,7 @@ public class SignUpControllerTest extends TestCase {
        expectLastCall();
        mockUser.setAccountActivation(false);
        expectLastCall();
-       mockUser.setRole(null);
+       mockUser.setRole(mockUserRole);
        expectLastCall();
        mockUserDataService = createMock(UserDataService.class);
        expect(mockUserDataService.create()).andReturn(mockUser).anyTimes();
@@ -258,5 +269,19 @@ public class SignUpControllerTest extends TestCase {
        
        instance.setEmailSender(mockEmailSender);
    }
-   
+ 
+   private void setUpMockRoleDataService() {
+        mockRoleDataService = createMock(RoleDataService.class);
+        mockUserRole = createMock(Role.class);
+         
+        expect(mockRoleDataService.read(Long.valueOf(2))).andReturn(mockUserRole).anyTimes();
+        expect(mockRoleDataService.read(Long.valueOf(3))).andReturn(null).anyTimes();
+        expect(mockUserRole.getId()).andReturn(Long.valueOf(2)).anyTimes();
+
+        replay(mockUserRole);        
+        replay(mockRoleDataService);
+        
+        CreateUserCommandFactory.getInstance().setRoleDataService(mockRoleDataService);
+    }
+
 }
