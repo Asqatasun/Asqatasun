@@ -1036,6 +1036,9 @@ th.order2:after {
 #display-options-form fieldset {
 /*    border: 1px solid #D0D0D0;*/
 }
+.open-external-url-icon{
+    float : right;
+}
 /* threshold :
 < 1280px: display options as row under the h1
 > 1280px: display options on the right
@@ -1386,4 +1389,80 @@ audit-result-menu-actions a {
 */
 .scenario-file-input .alert-message {
     margin-left: 7em;
+}
+
+/*
+  page : contract edition management
+*/
+.edit-contract-label {
+    float:inherit;
+}
+.edit-contract-funct {
+    margin-right: 5em;
+}
+.edit-contract-ref {
+    margin-right: 10em;
+}
+.edit-contract-checkbox-block {
+    text-align: center;
+}
+#user-list-table .col01 { /* email */ 
+    text-align: left;
+    width: 10em;
+}
+#user-list-table .col02 { /* last name */
+    text-align: left;
+    width: 10em;
+}
+#user-list-table .col03 { /* first name */
+    text-align: left;
+    width: 10em;
+}
+#user-list-table .col04 { /* activated */
+    text-align: center;
+    width: 5em;
+}
+#user-list-table .col05 { /* modify */
+    text-align: center;
+    width: 5em;
+}
+#user-list-table .col06 { /* delete */
+    text-align: center;
+    width: 10em;
+}
+#user-list-table .col07 { /* manage contracts */
+    text-align: center;
+    width: 17em;
+}
+#user-list-table .col08 { /* delete audits */
+    text-align: center;
+    width: 19em;
+}
+#contract-list-table .col01 { /* label */ 
+    text-align: left;
+    width: 10em;
+}
+#contract-list-table .col02 { /* begin date */
+    text-align: left;
+    width: 10em;
+}
+#contract-list-table .col03 { /* end date */
+    text-align: left;
+    width: 10em;
+}
+#contract-list-table .col04 { /* edit */
+    text-align: center;
+    width: 5em;
+}
+#contract-list-table .col05 { /* delete contract */
+    text-align: center;
+    width: 17em;
+}
+#contract-list-table .col06 { /* delete audits */
+    text-align: center;
+    width: 19em;
+}
+.admin-action {
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
