@@ -21,16 +21,17 @@
  */
 package org.opens.tgol.controller;
 
-import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Collection;
+import org.apache.log4j.Logger;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.service.contract.ContractDataService;
 import org.opens.tgol.entity.service.user.UserDataService;
 import org.opens.tgol.entity.user.User;
-import org.opens.tgol.presentation.factory.DetailedContractInfoFactory;
-import org.opens.tgol.util.TgolKeyStore;
-import java.util.Calendar;
-import java.util.Collection;
 import org.opens.tgol.exception.ForbiddenUserException;
+import org.opens.tgol.presentation.factory.DetailedContractInfoFactory;
+import org.opens.tgol.security.userdetails.TgolUserDetails;
+import org.opens.tgol.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -97,6 +98,7 @@ public abstract class AbstractController {
      *      the name of the current authenticated user
      */
     protected String getAuthenticatedUsername() {
+        Logger.getLogger(this.getClass()).info(SecurityContextHolder.getContext().getAuthentication().getName());
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
@@ -108,10 +110,27 @@ public abstract class AbstractController {
      *      guest, otherwise false.
      */
     protected boolean isGuestUser() {
-        Collection<GrantedAuthority> authorities =
+        Collection<? extends GrantedAuthority> authorities =
                 SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         if (authorities.size() == 1
                 && authorities.iterator().next().getAuthority().equalsIgnoreCase(TgolKeyStore.ROLE_GUEST_KEY)) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * This method determines whether the authenticated user of the current session
+     * is an admin guest
+     * @return
+     *      true if the the authenticated user of the current session is a
+     *      guest, otherwise false.
+     */
+    protected boolean isAdminUser() {
+        Collection<? extends GrantedAuthority> authorities =
+                SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        if (authorities != null && authorities.size() == 1
+                && authorities.iterator().next().getAuthority().equalsIgnoreCase(TgolKeyStore.ROLE_ADMIN_KEY)) {
             return true;
         }
         return false;
@@ -122,7 +141,20 @@ public abstract class AbstractController {
      *
      */
     protected User getCurrentUser() {
-        return userDataService.getUserFromEmail(getAuthenticatedUsername());
+        if (SecurityContextHolder.getContext().getAuthentication() != null && 
+                SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof TgolUserDetails) {
+            return ((TgolUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
+        }
+        return null;
+    }
+    
+    /**
+     * 
+     * @param user 
+     */
+    protected void updateCurrentUser(User user) {
+        TgolUserDetails userDetails = ((TgolUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        userDetails.updateUser(user);
     }
 
     /**

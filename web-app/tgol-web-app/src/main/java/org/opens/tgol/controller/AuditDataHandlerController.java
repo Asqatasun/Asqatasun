@@ -22,6 +22,7 @@
 package org.opens.tgol.controller;
 
 import java.util.*;
+import java.util.regex.Pattern;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import org.displaytag.pagination.PaginatedList;
@@ -218,6 +219,9 @@ public abstract class AuditDataHandlerController extends AbstractController {
         this.localeResolver = localeResolver;
     }
 
+    private String INVALID_TEST_VALUE_CHECKER_REGEXP = "\\d\\d?\\.\\d\\d?\\.\\d\\d?";
+    private Pattern invalidTestValueCheckerPattern = Pattern.compile(INVALID_TEST_VALUE_CHECKER_REGEXP);
+    
     public AuditDataHandlerController() {}
 
     /**
@@ -249,34 +253,31 @@ public abstract class AuditDataHandlerController extends AbstractController {
      * audit result of a given webresource. To do so, we verify that the act
      * associated with the audited webresource belongs to the current user and
      * that the current contract is not expired
-     * @param user
      * @param webresourceId
      * @return
      *      true if the user is allowed to display the result, false otherwise.
      */
-    protected boolean isUserAllowedToDisplayResult(User user, WebResource webResource) {
+    protected boolean isUserAllowedToDisplayResult(WebResource webResource) {
         if (webResource == null) {
-            throw new ForbiddenPageException(getCurrentUser());
+            throw new ForbiddenPageException();
         }
-        if (user == null) {
-            throw new ForbiddenUserException(getCurrentUser());
-        }
+        User user = getCurrentUser();
         try {
             Act act= actDataService.getActFromWebResource(webResource);
-            if (!isContractExpired(act.getContract()) && user.getId().compareTo(
-                    act.getContract().getUser().getId()) == 0) {
+            if (isAdminUser() || (!isContractExpired(act.getContract()) && user.getId().compareTo(
+                    act.getContract().getUser().getId()) == 0)) {
                 return true;
             }
-            throw new ForbiddenUserException(getCurrentUser());
+            throw new ForbiddenUserException();
         } catch (NoResultException e) {
             if (webResource.getParent() != null) {
                 Act act= actDataService.getActFromWebResource(webResource.getParent());
-                if (!isContractExpired(act.getContract()) && user.getId().compareTo(
-                    act.getContract().getUser().getId()) == 0) {
+                if (isAdminUser() || (!isContractExpired(act.getContract()) && user.getId().compareTo(
+                    act.getContract().getUser().getId()) == 0)) {
                     return true;
                 }
             }
-            throw new ForbiddenUserException(getCurrentUser());
+            throw new ForbiddenUserException();
         }
     }
 
@@ -353,6 +354,12 @@ public abstract class AuditDataHandlerController extends AbstractController {
             HttpStatusCodeFamily httpStatusCode,
             HttpServletRequest request,
             boolean returnRedirectView) throws ServletRequestBindingException {
+        
+        String invalidTest = ServletRequestUtils.getStringParameter(request, TgolPaginatedListFactory.INVALID_TEST_PARAM);
+        
+        if (invalidTest != null && !this.invalidTestValueCheckerPattern.matcher(invalidTest).matches()) {
+            throw new ForbiddenPageException();
+        }
 
         PaginatedList paginatedList = TgolPaginatedListFactory.getInstance().getPaginatedList(
                 httpStatusCode,
@@ -361,6 +368,7 @@ public abstract class AuditDataHandlerController extends AbstractController {
                 ServletRequestUtils.getStringParameter(request, TgolPaginatedListFactory.SORT_CRITERION_PARAM),
                 ServletRequestUtils.getStringParameter(request, TgolPaginatedListFactory.PAGE_PARAM),
                 ServletRequestUtils.getStringParameter(request, TgolPaginatedListFactory.SORT_CONTAINING_URL_PARAM),
+                invalidTest,
                 authorizedPageSize,
                 authorizedSortCriterion,
                 site.getAudit().getId());
@@ -391,5 +399,4 @@ public abstract class AuditDataHandlerController extends AbstractController {
         }
     }
 
-    
 }

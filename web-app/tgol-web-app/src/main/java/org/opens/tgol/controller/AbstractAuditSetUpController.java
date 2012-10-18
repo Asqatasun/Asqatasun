@@ -327,7 +327,6 @@ public abstract class AbstractAuditSetUpController extends AuditDataHandlerContr
             AuditSetUpCommand auditSetUpCommand,
             Collection<String> authorisedReferentialList,
             Map<String, List<AuditSetUpFormField>> parametersMap) {
-        model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
         model.addAttribute(TgolKeyStore.EXPANDED_KEY, TgolKeyStore.EXPANDED_VALUE);
         model.addAttribute(TgolKeyStore.AUDIT_SET_UP_COMMAND_KEY,
                 auditSetUpCommand);
@@ -365,7 +364,6 @@ public abstract class AbstractAuditSetUpController extends AuditDataHandlerContr
             case FILE : 
                 return TgolKeyStore.AUDIT_UPLOAD_SET_UP_VIEW_NAME;
         }
-        Logger.getLogger(this.getClass()).info("with error? " );
         return TgolKeyStore.OUPS_VIEW_NAME;
     }
     
@@ -410,7 +408,6 @@ public abstract class AbstractAuditSetUpController extends AuditDataHandlerContr
             Contract contract,
             List<SelectFormField> refAndLevelFormFieldList,
             Map<String, List<AuditSetUpFormField>> optionFormFieldMap) {
-        model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
         model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
         model.addAttribute(TgolKeyStore.URL_KEY, 
                 getContractDataService().getUrlFromContractOption(contract));
@@ -500,7 +497,7 @@ public abstract class AbstractAuditSetUpController extends AuditDataHandlerContr
      * @param optionElementSet 
      */
     protected void applyRestrictionRegardingOption(
-            Set<? extends OptionElement> optionElementSet, 
+            Collection<OptionElement> optionElementSet, 
             Collection<List<AuditSetUpFormField>> setUpFormFielList) {
         if (optionElementSet.isEmpty()) {
             return;

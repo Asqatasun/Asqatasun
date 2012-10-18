@@ -21,26 +21,22 @@
  */
 package org.opens.tgol.controller;
 
-import java.util.*;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.opens.tgol.action.voter.ActionHandler;
-import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.functionality.Functionality;
+import org.opens.tgol.command.ContractSortCommand;
+import org.opens.tgol.command.helper.ContractSortCommandHelper;
 import org.opens.tgol.entity.user.User;
-import org.opens.tgol.exception.ForbiddenPageException;
 import org.opens.tgol.exception.ForbiddenUserException;
-import org.opens.tgol.presentation.data.ContractInfo;
-import org.opens.tgol.presentation.factory.ContractInfoFactory;
+import org.opens.tgol.form.builder.FormFieldBuilder;
 import org.opens.tgol.util.TgolKeyStore;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.LocaleResolver;
 
 
 /** 
@@ -49,21 +45,6 @@ import org.springframework.web.servlet.LocaleResolver;
  */
 @Controller
 public class HomeController extends AbstractController {
-
-    private LocaleResolver localeResolver;
-    @Autowired
-    public final void setLocaleResolver(LocaleResolver localeResolver) {
-        this.localeResolver = localeResolver;
-    }
-
-    private List<String> authorizedFunctionalityForTrend = new ArrayList<String>();
-    public List<String> getAuthorizedFunctionalityForTrend() {
-        return authorizedFunctionalityForTrend;
-    }
-
-    public void setAuthorizedFunctionalityForTrend(List<String> authorizedFunctionalityForTrend) {
-        this.authorizedFunctionalityForTrend = authorizedFunctionalityForTrend;
-    }
 
     private ActionHandler actionHandler;
     public ActionHandler getActionHandler() {
@@ -74,99 +55,49 @@ public class HomeController extends AbstractController {
         this.actionHandler = contractActionHandler;
     }
 
+    List<FormFieldBuilder> displayOptionFieldsBuilderList;
+    public final void setDisplayOptionFieldsBuilderList(final List<FormFieldBuilder> formFieldBuilderList) {
+        this.displayOptionFieldsBuilderList = formFieldBuilderList;
+    }
+    
     public HomeController() {
         super();
     }
 
     @RequestMapping(value=TgolKeyStore.HOME_URL, method=RequestMethod.GET)
-    @Secured(TgolKeyStore.ROLE_USER_KEY)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String displayHomePage(Model model) {
         User user = getCurrentUser();
-        model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY,user);
-        model.addAttribute(TgolKeyStore.CONTRACT_LIST_KEY, prepareContractInfo(user));
+        model.addAttribute(
+                TgolKeyStore.CONTRACT_LIST_KEY, 
+                ContractSortCommandHelper.prepareContractInfo(
+                    user, 
+                    null,
+                    displayOptionFieldsBuilderList,
+                    model));
         return TgolKeyStore.HOME_VIEW_NAME;
     }
 
-    @RequestMapping(value=TgolKeyStore.CONTRACT_URL, method=RequestMethod.GET)
-    @Secured(TgolKeyStore.ROLE_USER_KEY)
-    public String displayContractPage (
-            @RequestParam(TgolKeyStore.CONTRACT_ID_KEY) String contractId,
-            HttpServletRequest request,
-            HttpServletResponse response,
-            Model model) {
-        Long contractIdValue;
-        try {
-            contractIdValue = Long.valueOf(contractId);
-        } catch (NumberFormatException nfe) {
-            throw new ForbiddenPageException(getCurrentUser());
-        }
-        if (!isUserOwnedContract(contractIdValue)) {
-            throw new ForbiddenUserException(getCurrentUser());
-        }
-        return displayContractPage(request, model, contractIdValue);
-    }
-
-    @Secured(TgolKeyStore.ROLE_USER_KEY)
-    private String displayContractPage(
-            HttpServletRequest request,
+    @RequestMapping(value=TgolKeyStore.HOME_URL, method = RequestMethod.POST)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
+    protected String submitForm(
+            @ModelAttribute(TgolKeyStore.CONTRACT_SORT_COMMAND_KEY) ContractSortCommand contractDisplayCommand,
+            BindingResult result,
             Model model,
-            Long contractId) {
+            HttpServletRequest request) {
         User user = getCurrentUser();
-        model.addAttribute(TgolKeyStore.LOCALE_KEY,localeResolver.resolveLocale(request));
-        model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY,user);
-        Contract contract = getContractDataService().read(contractId);
-        if (isContractExpired(contract)) {
-            throw new ForbiddenUserException(getCurrentUser());
+        if (!user.getId().equals(contractDisplayCommand.getUserId())) {
+            throw new ForbiddenUserException();
         }
-        // add the action list to the view
-        model.addAttribute(TgolKeyStore.CONTRACT_ACTION_LIST_KEY, actionHandler.getActionList(contract));
-        if (isContractHasFunctionalityAllowingTrend(contract)) {
-            model.addAttribute(TgolKeyStore.DISPLAY_RESULT_TREND_KEY, true);
-        }
-        return displayContractView(contract, model);
-    }
-
-    /**
-     * We iterate through the list of functionalities associated with the contract
-     * to determine whether a trend has to be displayed. 
-     * @param contract
-     * @return 
-     */
-    private boolean isContractHasFunctionalityAllowingTrend(Contract contract) {
-        for (Functionality functionality : contract.getFunctionalitySet()) {
-            if (authorizedFunctionalityForTrend.contains(functionality.getCode())) {
-                return true;
-            }
-        }
-        return false;
+        // The page is displayed with sort option. Form needs to be set up
+        model.addAttribute(
+                TgolKeyStore.CONTRACT_LIST_KEY, 
+                ContractSortCommandHelper.prepareContractInfo(
+                    user, 
+                    contractDisplayCommand,
+                    displayOptionFieldsBuilderList,
+                    model));
+        return TgolKeyStore.HOME_VIEW_NAME;
     }
     
-    /**
-     * This methods checks whether the given contract belongs to the authenticated
-     * user of the current session
-     * @param contractId
-     * @return
-     */
-    private boolean isUserOwnedContract(Long contractId){
-        for (Contract contract : getCurrentUser().getContractSet()) {
-            if (contract.getId().equals(contractId)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * This methods retrieves and prepare contract info
-     * @param user
-     * @return
-     */
-    private Collection<ContractInfo> prepareContractInfo(User user) {
-        Set<ContractInfo> contractInfoSet = new LinkedHashSet<ContractInfo>();
-        for (Contract contract : user.getContractSet()){
-            contractInfoSet.add(ContractInfoFactory.getInstance().getContractInfo(contract));
-        }
-        return contractInfoSet;
-    }
-
 }

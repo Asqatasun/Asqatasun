@@ -39,27 +39,35 @@ public class DispatchController extends AbstractController{
         super();
     }
 
+    /**
+     * 
+     * @param model
+     * @return 
+     */
     @RequestMapping(value = TgolKeyStore.DISPATCH_URL, method=RequestMethod.GET)
     public String displayMainPage (Model model) {
         if (!isAuthenticated()) {
             return displayLoginPage(model);
-        } else if (isGuestUser()) {
-            return displayFormPage();
         } else {
             return displayHomePage(model);
         }
     }
 
-    @Secured(TgolKeyStore.ROLE_GUEST_KEY)
-    private String displayFormPage() {
-          return TgolKeyStore.AUDIT_PAGE_SET_UP_VIEW_NAME;
-    }
-
-    @Secured(TgolKeyStore.ROLE_USER_KEY)
+    /**
+     * 
+     * @param model
+     * @return 
+     */
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String displayHomePage(Model model) {
         return TgolKeyStore.HOME_VIEW_REDIRECT_NAME;
     }
 
+    /**
+     * 
+     * @param model
+     * @return 
+     */
     public String displayLoginPage(Model model) {
         return TgolKeyStore.LOGIN_VIEW_NAME;
     }

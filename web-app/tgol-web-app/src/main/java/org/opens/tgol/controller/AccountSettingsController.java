@@ -21,12 +21,13 @@
  */
 package org.opens.tgol.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import org.opens.tgol.command.UserSignUpCommand;
+import java.util.ArrayList;
+import java.util.List;
+import org.opens.tgol.command.CreateUserCommand;
 import org.opens.tgol.entity.user.User;
+import org.opens.tgol.exception.ForbiddenPageException;
 import org.opens.tgol.util.TgolKeyStore;
-import org.opens.tgol.validator.SignUpFormValidator;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,14 +40,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author jkowalczyk
  */
 @Controller
-public class AccountSettingsController extends AbstractController {
+public class AccountSettingsController extends AbstractUserAndContractsController {
 
-    private SignUpFormValidator signUpFormValidator;
-    @Autowired
-    public final void setSignUpFormValidator(SignUpFormValidator signUpFormValidator) {
-        this.signUpFormValidator = signUpFormValidator;
+    List<String> forbiddenUserList = new ArrayList<String>();
+    public void setForbiddenUserList(List<String> forbiddenUserList) {
+        this.forbiddenUserList = forbiddenUserList;
     }
-
+    
     public AccountSettingsController() {
         super();
     }
@@ -58,94 +58,60 @@ public class AccountSettingsController extends AbstractController {
      * @return
      */
     @RequestMapping(value = TgolKeyStore.ACCOUNT_SETTINGS_URL, method = RequestMethod.GET)
-    public String setAccountSettingsPagePage(Model model) {
-        model.addAttribute(TgolKeyStore.USER_SIGN_UP_COMMAND_KEY,
-                getInitialisedUserSignUpCommand());
-        model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
-        return TgolKeyStore.ACCOUNT_SETTINGS_VIEW_NAME;
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
+    public String displayAccountSettingsPage(Model model) {
+        User user = getCurrentUser();
+        if (this.forbiddenUserList.contains(user.getEmail1())) {
+            throw new ForbiddenPageException();
+        }
+        return prepateDataAndReturnCreateUserView(
+                model,
+                user,
+                TgolKeyStore.ACCOUNT_SETTINGS_VIEW_NAME);
     }
 
     /**
-     * This methods controls the validity of the form and launch an audit with
-     * values populated by the user. In case of audit failure, an appropriate
-     * message is displayed
-     * @param launchAuditFromContractCommand
+     * This methods controls the validity of the edit user form in case.
+     * If the user tries to modidy its email, or try to desactivate its account
+     * or try to set him as admin where he's not admin, return attack message.
+     * 
+     * @param createUserCommand
      * @param result
      * @param model
-     * @param request
      * @return
      * @throws Exception
      */
-    @RequestMapping(method = RequestMethod.POST)
-    protected String submitForm(
-            @ModelAttribute(TgolKeyStore.USER_SIGN_UP_COMMAND_KEY) UserSignUpCommand userSignUpCommand,
+    @RequestMapping(value = TgolKeyStore.ACCOUNT_SETTINGS_URL,method = RequestMethod.POST)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
+    protected String submitAccountSettingForm(
+            @ModelAttribute(TgolKeyStore.CREATE_USER_COMMAND_KEY) CreateUserCommand createUserCommand,
             BindingResult result,
-            Model model,
-            HttpServletRequest request)
+            Model model)
             throws Exception {
-
-        // We check whether the form is valid
-        signUpFormValidator.validateUpdate(userSignUpCommand, result, getCurrentUser().getEmail1());
-        // If the form has some errors, we display it again with errors' details
-        if (result.hasErrors()) {
-            return displayFormWithErrors(
-                    model,
-                    userSignUpCommand);
-        }
-        updateUserData(userSignUpCommand);
-        model.addAttribute(TgolKeyStore.ACCOUNT_DATA_UPDATED_KEY, true);
-        model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
-        return TgolKeyStore.ACCOUNT_SETTINGS_VIEW_NAME;
-    }
-
-    /**
-     * 
-     * @param model
-     * @param contract
-     * @param launchAuditFromContractCommand
-     * @return
-     */
-    private String displayFormWithErrors(
-            Model model,
-            UserSignUpCommand userSignUpCommand) {
-        model.addAttribute(TgolKeyStore.USER_SIGN_UP_COMMAND_KEY,
-                userSignUpCommand);
-        return TgolKeyStore.ACCOUNT_SETTINGS_VIEW_NAME;
-    }
-
-    /**
-     * 
-     * @param userSignUpCommand
-     * @return
-     * @throws Exception
-     */
-    private UserSignUpCommand getInitialisedUserSignUpCommand() {
-        UserSignUpCommand userSignUpCommand = new UserSignUpCommand();
         User user = getCurrentUser();
-        userSignUpCommand.setEmail(user.getEmail1());
-        userSignUpCommand.setSiteUrl(user.getWebUrl1());
-        userSignUpCommand.setFirstName(user.getFirstName());
-        userSignUpCommand.setLastName(user.getName());
-        userSignUpCommand.setPhoneNumber(user.getPhoneNumber());
-        return userSignUpCommand;
-    }
-
-    /**
-     *
-     * @param userSignUpCommand
-     * @return
-     * @throws Exception
-     */
-    private User updateUserData(UserSignUpCommand userSignUpCommand) throws Exception {
-        User user = getCurrentUser();
-        if (user !=  null) {
-            user.setEmail1(userSignUpCommand.getEmail());
-            user.setFirstName(userSignUpCommand.getFirstName());
-            user.setName(userSignUpCommand.getLastName());
-            user.setPhoneNumber(userSignUpCommand.getPhoneNumber());
-            getUserDataService().saveOrUpdate(user);
+        if (this.forbiddenUserList.contains(user.getEmail1())) {
+            throw new ForbiddenPageException();
         }
-        return user;
+        if (!createUserCommand.getEmail().equals(user.getEmail1()) ||
+                (createUserCommand.getAdmin() && !isUserAdmin(user))) {
+            model.addAttribute(TgolKeyStore.CREATE_USER_ATTACK_COMMAND_KEY, true);
+            return prepateDataAndReturnCreateUserView(
+                model,
+                user,
+                TgolKeyStore.ACCOUNT_SETTINGS_VIEW_NAME);
+        }
+        
+        return submitUpdateUserForm(
+                createUserCommand, 
+                result, 
+                null,
+                model, 
+                user,
+                TgolKeyStore.ACCOUNT_SETTINGS_VIEW_NAME, 
+                TgolKeyStore.ACCOUNT_SETTINGS_VIEW_NAME,
+                false,
+                false,
+                TgolKeyStore.UPDATED_USER_NAME_KEY); 
     }
 
 }

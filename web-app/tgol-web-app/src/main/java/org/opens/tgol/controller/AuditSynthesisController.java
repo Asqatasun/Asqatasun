@@ -21,20 +21,8 @@
  */
 package org.opens.tgol.controller;
 
-import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.user.User;
-import org.opens.tgol.presentation.data.FailedThemeInfo;
-import org.opens.tgol.presentation.data.ResultCounter;
-import org.opens.tgol.presentation.factory.AuditStatisticsFactory;
-import org.opens.tgol.presentation.factory.ResultCounterFactory;
-import org.opens.tgol.util.TgolKeyStore;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
@@ -44,8 +32,15 @@ import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.exception.ForbiddenPageException;
 import org.opens.tgol.exception.ForbiddenUserException;
 import org.opens.tgol.exception.LostInSpaceException;
+import org.opens.tgol.presentation.data.FailedThemeInfo;
+import org.opens.tgol.presentation.data.ResultCounter;
+import org.opens.tgol.presentation.factory.AuditStatisticsFactory;
+import org.opens.tgol.presentation.factory.ResultCounterFactory;
+import org.opens.tgol.util.TgolKeyStore;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -100,23 +95,21 @@ public class AuditSynthesisController extends AuditDataHandlerController {
      * @return
      */
     @RequestMapping(value = TgolKeyStore.AUDIT_SYNTHESIS_CONTRACT_URL, method = RequestMethod.GET)
-    @Secured(TgolKeyStore.ROLE_USER_KEY)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String displayAuditSynthesisFromContract(
             @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webResourceId,
             HttpServletRequest request,
             HttpServletResponse response,
             Model model) {
-        User user = getCurrentUser();
-        model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, user);
         Long wrId;
         try {
             wrId = Long.valueOf(webResourceId);
         } catch (NumberFormatException nfe) {
-            throw new ForbiddenUserException(user);
+            throw new ForbiddenPageException();
         }
         WebResource webResource = getWebResourceDataService().ligthRead(
                 Long.valueOf(wrId));
-        if (isUserAllowedToDisplayResult(user, webResource)) {
+        if (isUserAllowedToDisplayResult(webResource)) {
             try {
                 if (!isAuthorizedScopeForSynthesis(webResource)) {
                     return TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
@@ -134,10 +127,10 @@ public class AuditSynthesisController extends AuditDataHandlerController {
                             getLocaleResolver().resolveLocale(request));
                 }
             } catch (IOException e) {
-                throw new LostInSpaceException(e, user);
+                throw new LostInSpaceException();
             }
         } else {
-            throw new ForbiddenUserException(user);
+            throw new ForbiddenUserException();
         }
     }
 
