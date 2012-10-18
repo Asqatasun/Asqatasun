@@ -65,15 +65,6 @@ public class ChangePasswordCommand  implements Serializable {
         this.confirmNewPassword = confirmNewPassword;
     }
 
-    private String userEmail = null;
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(final String userEmail) {
-        this.userEmail = userEmail;
-    }
-
     /**
      * Default constructor
      */

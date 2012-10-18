@@ -22,17 +22,19 @@
 package org.opens.tgol.command;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  *
  * @author jkowalczyk
  */
-public class AuditResultSortCommand implements Serializable {
+public class ContractSortCommand implements Serializable {
 
-    private static final long serialVersionUID = -6799971556530681226L;
-    
+    private static final long serialVersionUID = -4719256000931005819L;
+
     private Map<String, String> sortOptionMap=new HashMap<String, String>();
     public Map<String, String> getSortOptionMap() {
         return sortOptionMap;
@@ -42,18 +44,27 @@ public class AuditResultSortCommand implements Serializable {
         this.sortOptionMap = sortOptionMap;
     }
 
-    private Long webResourceId;
-    public Long getWebResourceId() {
-        return webResourceId;
+    List<String> optionList = new ArrayList<String>();
+    public List<String> getOptionList() {
+        return optionList;
     }
 
-    public void setWebResourceId(Long webResourceId) {
-        this.webResourceId = webResourceId;
+    public void setOptionList(List<String> optionList) {
+        this.optionList = optionList;
+    }
+
+    private Long userId;
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     /**
      * Default constructor
      */
-    public AuditResultSortCommand() {}    
+    public ContractSortCommand() {}
 
 }

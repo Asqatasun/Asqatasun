@@ -27,7 +27,7 @@ import java.io.Serializable;
  *
  * @author jkowalczyk
  */
-public class UserSignUpCommand  implements Serializable {
+public class CreateUserCommand  implements Serializable {
 
     private static final long serialVersionUID = 8858915339230923340L;
     private static final String HTTP_PREFIX="http://";
@@ -56,18 +56,6 @@ public class UserSignUpCommand  implements Serializable {
         this.email = email;
     }
     
-//    /**
-//     * The company of the subscriber
-//     */
-//    private String company;
-//    public String getCompany() {
-//        return company;
-//    }
-//
-//    public void setCompany(String company) {
-//        this.company = company;
-//    }
-
     /**
      * the last name of the subscriber
      */
@@ -117,7 +105,19 @@ public class UserSignUpCommand  implements Serializable {
     }
     
     /**
-     * A boolean that indicated whether the user account is activated
+     * The password of the subscriber
+     */
+    private boolean admin = false;
+    public boolean getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+    
+    /**
+     * The password of the subscriber
      */
     private boolean activated;
     public boolean getActivated() {
@@ -139,7 +139,7 @@ public class UserSignUpCommand  implements Serializable {
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
-
+    
     /**
      * General error message in case of invalid form
      */
@@ -151,7 +151,7 @@ public class UserSignUpCommand  implements Serializable {
     /**
      * Default constructor
      */
-    public UserSignUpCommand(){
+    public CreateUserCommand(){
         
     }
 
