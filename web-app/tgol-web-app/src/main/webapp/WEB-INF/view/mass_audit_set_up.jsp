@@ -19,6 +19,7 @@
         <c:set var="lang" value="${pageContext.response.locale}"/>
     </c:otherwise>
 </c:choose>
+${pageContext.request.scheme}
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
         <c:set var="gearImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/gear.png"/>
@@ -31,7 +32,7 @@
 </c:choose>
 <html lang="${lang}">
     <c:set var="pageTitle" scope="page">
-        <fmt:message key="home.pageTitle"/>
+        <fmt:message key="mass-audit-set-up.pageTitle"/>
     </c:set>
     <%@include file="template/head.jsp" %>
     <body id="tgm-home">
@@ -39,12 +40,41 @@
         <div class="container">
             <div class="row">
                 <div class="span16">
-                    <h1><fmt:message key="home.h1"/></h1>
+                    <h1><fmt:message key="mass-audit-set-up.h1"/></h1>
                 </div>
             </div>
             <div class="row">
-                <c:import url="template/sort-contract-console.jsp" />
                 <div class="span14 offset1">
+                    <h1><fmt:message key="mass-audit-set-up.selectAuditsToLaunch"/></h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span14 offset1">
+                    <a href="/selectAll"><fmt:message key="mass-audit-set-up.selectAll"/></a>   <a href="/unselectAll"><fmt:message key="mass-audit-set-up.unselectAll"/></a>
+                </div>
+                <div class="span14 offset1">
+                <form:form>
+                    <table class="zebra-striped">
+                        <thead>
+                            <tr>
+                                <th class="contract-col" scope="col"><fmt:message  key="${mass-audit-set-up.contract}"/></th>
+                                <th class="page-audit-col" scope="col"><fmt:message  key="${mass-audit-set-up.page-audit}"/></th>
+                                <th class="site-audit-col" scope="col"><fmt:message  key="${mass-audit-set-up.site-audit}"/></th>
+                                <th class="scenario-audit-col" scope="col"><fmt:message  key="${mass-audit-set-up.scenario-audit}"/></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="contract" items="${contractList}" varStatus="pContractSet">
+                                <tr>
+                                    <td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                    <a href="/selectAll"><fmt:message key="mass-audit-set-up.selectAll"/></a>   <a href="/unselectAll"><fmt:message key="mass-audit-set-up.unselectAll"/></a>
+                    <div id="display-results-options-update" class="actions">
+                        <input type="submit" class="btn" value="<fmt:message key="pageList.update"/>"/>
+                    </div> <!-- class="actions"-->
                 <c:forEach var="contract" items="${contractList}" varStatus="pContractSet">
                     <c:choose>
                         <c:when test="${fn:length(contractList) == pContractSet.index + 1}">
@@ -69,9 +99,7 @@
                                 <img src="${gearImgUrl}" title="<fmt:message key="home.actRunning"/>" alt="<fmt:message key="home.actRunning"/>" class="running-audit"/>
                                 </c:if>
                             </h2>
-                            <c:if test="${not empty contract.url}">
                             <div class="project-url"><a href="${contract.url}">${contract.url}</a></div>
-                            </c:if>
                             <c:choose>
                                 <c:when test='${contract.lastActInfo != null}'>
                                     <div class="project-status"><fmt:message key="home.lastAudit"/> : <fmt:formatDate type="date" value="${contract.lastActInfo.date}" dateStyle="long"/> <fmt:message key="home.at"/> <fmt:formatDate type="time" value="${contract.lastActInfo.date}"/></div>
@@ -116,6 +144,7 @@
                         </c:choose>
                     </div><!-- id="project-index" class="row one-project" -->
                 </c:forEach>
+                    </form:form>
                 </div><!-- class="span14 offset1" -->
             </div><!-- class="row" -->
         </div><!-- class="container" -->

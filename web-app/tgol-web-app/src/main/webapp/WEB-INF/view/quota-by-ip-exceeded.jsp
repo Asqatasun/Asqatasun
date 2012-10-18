@@ -18,8 +18,8 @@
 </c:choose>
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="quotaExceededImgUrl" value="${configProperties['cdnUrl']}/Images/quota_exceeded.jpg"/>
-        <c:set var="creativeCommonLogoUrl" value="${configProperties['cdnUrl']}/Images/creative_common_logo.png"/>
+        <c:set var="quotaExceededImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/quota_exceeded.jpg"/>
+        <c:set var="creativeCommonLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/creative_common_logo.png"/>
     </c:when>
     <c:otherwise>
         <c:set var="quotaExceededImgUrl">

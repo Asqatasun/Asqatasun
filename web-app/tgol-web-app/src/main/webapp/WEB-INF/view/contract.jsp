@@ -23,8 +23,8 @@
 </c:set>
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="gearImgUrl" value="${configProperties['cdnUrl']}/Images/gear.png"/>
-        <c:set var="historicSampleImgUrl" value="${configProperties['cdnUrl']}/Images/${imgName}"/>
+        <c:set var="gearImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/gear.png"/>
+        <c:set var="historicSampleImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/${imgName}"/>
     </c:when>
     <c:otherwise>
         <c:set var="gearImgUrl">
@@ -92,7 +92,7 @@
                                     <c:when test="${contractAction.actionEnabled == 'false'}">
                                         <c:choose>
                                             <c:when test="${not empty configProperties['cdnUrl']}">
-                                                <c:set var="contractActionImgUrl" value="${configProperties['cdnUrl']}${contractAction.disabledActionImageUrl}"/>
+                                                <c:set var="contractActionImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}${contractAction.disabledActionImageUrl}"/>
                                             </c:when>
                                             <c:otherwise>
                                                 <c:set var="contractActionImgUrl">
@@ -106,7 +106,7 @@
                                     <c:otherwise>
                                         <c:choose>
                                             <c:when test="${not empty configProperties['cdnUrl']}">
-                                                <c:set var="contractActionImgUrl" value="${configProperties['cdnUrl']}${contractAction.enabledActionImageUrl}"/>
+                                                <c:set var="contractActionImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}${contractAction.enabledActionImageUrl}"/>
                                             </c:when>
                                             <c:otherwise>
                                                 <c:set var="contractActionImgUrl">

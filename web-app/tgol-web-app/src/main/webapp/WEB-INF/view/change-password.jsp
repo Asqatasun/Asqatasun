@@ -6,6 +6,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec"  %>
 <!DOCTYPE html>
 <c:choose>
     <c:when test="${fn:contains(pageContext.response.locale, '_')}">
@@ -18,22 +19,37 @@
     </c:otherwise>
 </c:choose>
 <html lang="${lang}">
-    <c:set var="pageTitle" scope="page">
-        <spring:message code="change-password.pageTitle"/>
-        <spring:hasBindErrors name="userSignUpCommand">
-                <spring:message code="change-password.errorPageTitle"/>
-        </spring:hasBindErrors>
-    </c:set>
+    <c:choose>
+        <c:when test="${changeUserPasswordFromAdmin == true}">
+            <c:set var="pageTitle" scope="page">
+                <spring:message code="change-password.pageTitleForUser" arguments="${userName}"/>
+                <spring:hasBindErrors name="changePasswordCommand">
+                    <spring:message code="change-password.errorPageTitle"/>
+                </spring:hasBindErrors>
+            </c:set>
+        </c:when>
+        <c:otherwise>
+            <c:set var="pageTitle" scope="page">
+                <spring:message code="change-password.pageTitle"/>
+                <spring:hasBindErrors name="changePasswordCommand">
+                        <spring:message code="change-password.errorPageTitle"/>
+                </spring:hasBindErrors>
+            </c:set>
+        </c:otherwise>
+    </c:choose>
+    <c:set var="authenticated" scope="request" value="false"/>
+    <sec:authorize access="isAuthenticated()">
+        <c:set var="authenticated" scope="request" value="true"/>
+    </sec:authorize>
     <%@include file="template/head.jsp" %>
     <body id="tgm-change-password">
         <c:choose>
-            <c:when test="${authenticatedUser != null}">
+            <c:when test="${authenticated}">
         <c:set var="displayLogoutLink" scope="page" value="true"/>
         <%@include file="template/header-utils.jsp" %>
         <div class="container">
             </c:when>
             <c:otherwise>
-        <c:set var="isInNotAuthentifiedView" scope="page" value="true"/>
         <c:set var="addLogo" scope="page" value="true"/>
         <div class="container not-authentified">
         <%@include file="template/lang-box.jsp" %>
@@ -42,13 +58,30 @@
             <c:set var="pageName" scope="page">
                 <fmt:message key="change-password.h1"/>
             </c:set>
-            <c:if test="${authenticatedUser != null}">
+            <c:choose>
+                <c:when test="${changeUserPasswordFromAdmin}">
+            <ul class="breadcrumb">
+                <li><a href="<c:url value="/home.html"/>"><fmt:message key="home.h1"/></a> <span class="divider"></span></li>
+                <li><a href="<c:url value="/admin.html"/>"><fmt:message key="admin.h1"/></a> <span class="divider"></span></li>
+                <li>
+                    <a href="<c:url value="/admin/edit-user.html?user=${user}"/>">
+                        <fmt:message key="edit-user.h1">
+                            <fmt:param>${userName}</fmt:param>
+                        </fmt:message>
+                    </a> 
+                    <span class="divider"></span>
+                </li>
+                <li class="active">${pageName}</li>
+            </ul>                    
+                </c:when>
+                <c:when test="${authenticated}">
             <ul class="breadcrumb">
                 <li><a href="<c:url value="/home.html"/>"><fmt:message key="home.h1"/></a> <span class="divider"></span></li>
                 <li><a href="<c:url value="/account-settings.html"/>"><fmt:message key="account-settings.h1"/></a> <span class="divider"></span></li>
                 <li class="active">${pageName}</li>
             </ul>
-            </c:if>
+            </c:when>
+            </c:choose>   
             <div class="row">
                 <div class="span16">
                     <h1>${pageName}</h1>
@@ -56,10 +89,10 @@
             </div><!-- class="row" -->
             <c:if test="${passwordModified == 'true'}">
             <div class="row">
-                <div class="span16">
+                <div class="span14 offset1">
                     <div class="alert-message block-message success">
                         <p><fmt:message key="change-password.passwordModified"/></p>
-                        <c:if test="${authenticatedUser == null}">
+                        <c:if test="${not authenticated}">
                         <div class="alert-actions">
                             <a class="btn small " href="<c:url value="/login.html"/>"><fmt:message key="forgotten-password-confirmation.backToLogin"/></a>
                         </div>
@@ -68,10 +101,11 @@
                 </div><!-- class="span16"-->
             </div><!-- class="row"-->
             </c:if>
-            <c:choose>
-            <c:when test="${invalidChangePasswordUrl != 'true'}">
+        <c:choose>
+            <c:when test="${passwordModified && not authenticated}"></c:when>
+            <c:when test="${not invalidChangePasswordUrl}">
             <div class="row">
-            <c:if test="${authenticatedUser != null}">
+            <c:if test="${authenticated && not changeUserPasswordFromAdmin}">
                 <c:set var="currentPassword" scope="page">
                     <spring:message code="change-password.currentPassword"/>
                 </c:set>
@@ -85,17 +119,16 @@
                 <div class="span15 offset1">
                     <div id="change-password-form">
                     <form:form method="post" modelAttribute="changePasswordCommand" acceptCharset="UTF-8" enctype="application/x-www-form-urlencoded">
-                        <form:hidden path="userEmail"/>
-                        <spring:hasBindErrors name="userSignUpCommand">
+                        <spring:hasBindErrors name="changePasswordCommand">
                         <div id="change-password-form-general-error">
                             <form:errors path="generalErrorMsg" cssClass="alert-message block-message error" element="div"/>
                         </div>
                         </spring:hasBindErrors>
-                        <c:if test="${authenticatedUser != null}">
+                        <c:if test="${authenticated && not changeUserPasswordFromAdmin}">
                         <c:set var="currentPasswordError"><form:errors path="currentPassword"/></c:set>
-                        <c:if test="${not empty currentPasswordError}">
-                            <c:set var="currentPasswordErrorClass" value="error"/>
-                        </c:if>
+                            <c:if test="${not empty currentPasswordError}">
+                                <c:set var="currentPasswordErrorClass" value="error"/>
+                            </c:if>
                         <div class="clearfix ${currentPasswordErrorClass}">
                             <label id="change-password-current-password" for="currentPassword">${currentPassword}</label>
                             <div class="change-password-field input">
@@ -149,7 +182,7 @@
                 </div><!-- class="span6" -->
             </div><!-- class="row" -->
             </c:otherwise>
-            </c:choose>
+        </c:choose>
         </div><!-- class="container" -->
         <%@include file="template/footer.jsp" %>
     </body>

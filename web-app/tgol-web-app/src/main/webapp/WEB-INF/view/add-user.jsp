@@ -6,6 +6,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <c:choose>
@@ -18,49 +19,38 @@
         <c:set var="lang" value="${pageContext.response.locale}"/>
     </c:otherwise>
 </c:choose>
-<c:choose>
-    <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/jquery.min.js"/>
-        <c:set var="auditSetUpJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/audit-set-up.js"/>
-    </c:when>
-    <c:otherwise>
-        <c:set var="jqueryUrl">
-            <c:url value="/Js/jquery.min.js"/>  
-        </c:set>
-        <c:set var="auditSetUpJsUrl">
-            <c:url value="/Js/audit-set-up.js"/>
-        </c:set>
-    </c:otherwise>
-</c:choose>
 <html lang="${lang}">
     <c:set var="pageTitle" scope="page">
-        <fmt:message key="auditSetUpSite.pageTitle"/>
-        <spring:hasBindErrors name="auditSetUpCommand">
-            <fmt:message key="auditSetUp.errorPageTitle"/>
-        </spring:hasBindErrors>
+        <fmt:message key="add-user.pageTitle"/>
     </c:set>
     <%@include file="template/head.jsp" %>
-    <body id="tgm-upload-page-set-up">
+    <body id="tgm-home">
         <%@include file="template/header-utils.jsp" %>
         <div class="container">
             <c:set var="pageName" scope="page">
-                <spring:message code="auditSetUpUpload.h1"/>
+                <fmt:message key="add-user.h1"/>
             </c:set>
             <ul class="breadcrumb">
                 <li><a href="<c:url value="/home.html"/>"><fmt:message key="home.h1"/></a> <span class="divider"></span></li>
-                <li><a href="<c:url value="/home/contract.html?cr=${param.cr}"/>">${contractName}</a> <span class="divider"></span></li>
+                <li><a href="<c:url value="/admin.html"/>"><fmt:message key="admin.h1"/></a> <span class="divider"></span></li>
                 <li class="active">${pageName}</li>
             </ul>
             <div class="row">
                 <div class="span16">
-                    <h1><spring:message code="auditSetUpUpload.h1"/></h1>
-                </div><!-- class="span16" -->
-                <%@include file="template/set-up.jsp" %>
-            </div><!-- class="row" -->
-        </div><!-- class="container" -->
-        <script type="text/javascript" src="${jqueryUrl}"></script>
-        <script type="text/javascript" src="${auditSetUpJsUrl}"></script>
-        <%@include file="template/footer.jsp" %>
+                    <h1>${pageName}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <c:set var="addUrlField" scope="request" value="false"/>
+                <c:set var="addAdminField" scope="request" value="true"/>
+                <c:set var="addActivatedField" scope="request" value="true"/>
+                <c:set var="validateButtonName" scope="request">
+                    <fmt:message key="add-user.addUserButton"/> &raquo;
+                </c:set>
+                <%@include file="template/add-user-form.jsp" %>
+            </div>
+        </div><!-- class="container"-->                    
+    <%@include file="template/footer.jsp" %>
     </body>
 </html>
 </compress:html>

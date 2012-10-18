@@ -20,8 +20,8 @@
 </c:choose>
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="jqueryUrl" value="${configProperties['cdnUrl']}/Js/jquery.min.js"/>
-        <c:set var="auditSetUpJsUrl" value="${configProperties['cdnUrl']}/Js/audit-set-up.js"/>
+        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/jquery.min.js"/>
+        <c:set var="auditSetUpJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/audit-set-up.js"/>
     </c:when>
     <c:otherwise>
         <c:set var="jqueryUrl">
@@ -74,7 +74,7 @@
                     </div><!-- id="mandatory-elements-message" class="alert-message block-message warning"-->
                 </div><!-- class="span15 offset1" -->
                 <div class="span15 offset1">
-                    <div id="add-scenario-form _toggle-url">
+                    <div id="add-scenario-form">
                         <form:form modelAttribute="addScenarioCommand" action="" method="post" enctype="multipart/form-data">
                             <spring:hasBindErrors name="addScenarioCommand">
                             <div id="sign-up-form-general-error">
@@ -125,7 +125,7 @@
                 <h2 class="span16">
                     <fmt:message key="scenarioManagement.myScenario"/>
                 </h2>
-                <c:if test="${deletedScenarioName != null}">
+                <c:if test="${not empty deletedScenarioName}">
                 <div class="span15 alert-message block-message info">
                     <fmt:message key="scenarioManagement.deletedScenarioPositiveMsg">
                         <fmt:param>${deletedScenarioName}</fmt:param>
