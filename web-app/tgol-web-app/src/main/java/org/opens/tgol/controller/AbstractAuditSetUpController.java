@@ -228,15 +228,12 @@ public abstract class AbstractAuditSetUpController extends AuditDataHandlerContr
                     asuc = AuditSetUpCommandFactory.getInstance().
                         getUploadAuditSetUpCommand(contract,refAndLevelFormFieldList, optionFormFieldMap);
                     break;
-                case PAGE:
-                case GROUPOFPAGES:
-                    asuc = AuditSetUpCommandFactory.getInstance().
-                        getPageAuditSetUpCommand(contract,refAndLevelFormFieldList, optionFormFieldMap);
-                    break;
                 case SCENARIO:
                     asuc = AuditSetUpCommandFactory.getInstance().
                         getScenarioAuditSetUpCommand(contract, scenarioId,refAndLevelFormFieldList, optionFormFieldMap);
                     break;
+                case PAGE:
+                case GROUPOFPAGES:
                 default:
                     asuc = AuditSetUpCommandFactory.getInstance().
                         getPageAuditSetUpCommand(contract,refAndLevelFormFieldList, optionFormFieldMap);

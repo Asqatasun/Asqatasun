@@ -117,7 +117,6 @@ public class ContractController extends AbstractController {
             HttpServletRequest request,
             Model model,
             Long contractId) {
-        User user = getCurrentUser();
         model.addAttribute(TgolKeyStore.LOCALE_KEY,localeResolver.resolveLocale(request));
         Contract contract = getContractDataService().read(contractId);
         if (isContractExpired(contract)) {
