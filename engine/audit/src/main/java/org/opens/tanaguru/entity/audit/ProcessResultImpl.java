@@ -24,6 +24,7 @@ package org.opens.tanaguru.entity.audit;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
@@ -101,7 +102,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     @Override
     public void addRemark(ProcessRemark remark) {
         if (remarkSet == null) {
-            this.remarkSet = new HashSet<ProcessRemarkImpl>();
+            this.remarkSet = new LinkedHashSet<ProcessRemarkImpl>();
         }
         remark.setProcessResult(this);
         remarkSet.add((ProcessRemarkImpl) remark);
@@ -171,7 +172,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     public void setChildResultList(
             Collection<ProcessResult> childResultList) {
         if (this.childResultSet == null) {
-            this.childResultSet = new HashSet<ProcessResultImpl>();
+            this.childResultSet = new LinkedHashSet<ProcessResultImpl>();
         }
         for (ProcessResult processResult : childResultList) {
             processResult.setParentResult(this);

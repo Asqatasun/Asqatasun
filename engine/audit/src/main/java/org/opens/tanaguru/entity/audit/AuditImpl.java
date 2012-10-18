@@ -289,6 +289,9 @@ public class AuditImpl implements Audit, Serializable {
     
     @Override
     public void addParameter(Parameter parameter){
+        if (this.parameterSet == null) {
+            this.parameterSet = new HashSet<ParameterImpl>();
+        }
         this.parameterSet.add((ParameterImpl)parameter);
     }
 
