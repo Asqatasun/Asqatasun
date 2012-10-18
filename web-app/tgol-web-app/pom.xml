@@ -285,9 +285,9 @@
                         <artifactId>maven-antrun-plugin</artifactId>
                         <executions>
                             <execution>
-                                <phase>deploy</phase>
+                                <phase>install</phase>
                                 <goals>
-                                    <goal>deploy</goal>
+                                    <goal>run</goal>
                                 </goals>
                                 <configuration>
                                     <tasks>
