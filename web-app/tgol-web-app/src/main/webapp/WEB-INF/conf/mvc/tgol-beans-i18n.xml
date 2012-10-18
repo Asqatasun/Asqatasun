@@ -17,10 +17,18 @@
                 <value>access-denied-page-I18N</value>
                 <value>account-settings-page-I18N</value>
                 <value>adapting-error-page-I18N</value>
+                <value>add-contract-I18N</value>
+                <value>add-user-I18N</value>
+                <value>admin-I18N</value>
                 <value>audit-in-progress-page-I18N</value>
                 <value>audit-set-up-I18N</value>
                 <value>change-password-page-I18N</value>
                 <value>contract-page-I18N</value>
+                <value>delete-audits-I18N</value>
+                <value>delete-contract-I18N</value>
+                <value>delete-user-I18N</value>
+                <value>edit-contract-I18N</value>
+                <value>edit-user-I18N</value>
                 <value>export-audit-format-error-page-I18N</value>
                 <value>evidence-elements-I18N</value>
                 <value>footer-I18N</value>
@@ -32,6 +40,8 @@
                 <value>loading-error-page-I18N</value>
                 <value>login-page-I18N</value>
                 <value>level-I18N</value>
+                <value>manage-contracts-I18N</value>
+                <value>mass-audit-set-up-I18N</value>
                 <value>max-file-size-error-page-I18N</value>
                 <value>oups-page-I18N</value>
                 <value>page-list-page-I18N</value>
@@ -47,6 +57,7 @@
                 <value>scenario-management-I18N</value>
                 <value>sign-up-page-I18N</value>
                 <value>sign-up-confirmation-page-I18N</value>
+                <value>sort-contract-console-I18N</value>
                 <value>source-code-page-I18N</value>
                 <value>synthesis-site-page-I18N</value>
                 <value>theme-I18N</value>

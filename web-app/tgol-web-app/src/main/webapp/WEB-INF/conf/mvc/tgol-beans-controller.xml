@@ -11,6 +11,24 @@
         base-package="org.opens.tgol.controller"/>
 
     <bean id="homeController" class="org.opens.tgol.controller.HomeController">
+<!--        <property name="actionHandler" ref="homeActionHandler"/>-->
+        <property name="displayOptionFieldsBuilderList">
+            <list>
+                <ref bean="displayContractElementSelectFormFieldBuilder"/>
+                <ref bean="displayContractOrderSelectFormFieldBuilder"/>
+                <ref bean="inclusionRegexpContractFormFieldBuilder"/>
+                <ref bean="exclusionRegexpContractFormFieldBuilder"/>
+            </list>
+        </property>
+<!--        <property name="exclusionContractSortKey" value="label-exclusion-choice"/>
+        <property name="inclusionContractSortKey" value="label-inclusion-choice"/>
+        <property name="sortByKey" value="sort-by-choice"/>
+        <property name="sortOrderKey" value="order-choice"/>
+        <property name="lastAuditMarkSortValue" value="mark"/>
+        <property name="lastAuditDateSortValue" value="date"/>-->
+    </bean>
+
+    <bean id="contractController" class="org.opens.tgol.controller.ContractController">
         <property name="authorizedFunctionalityForTrend">
             <list>
                 <value>DOMAIN</value>
@@ -18,14 +36,6 @@
             </list>
         </property>
         <property name="actionHandler" ref="contractActionHandler"/>
-<!--        <property name="displayOptionFields">
-            <list>
-                <ref bean="displayContractOrderSelectFormFieldBuilder"/>
-                <ref bean="displayContractElementSelectFormFieldBuilder"/>
-                <ref bean="exclusionRegexpContractFormFieldBuilder"/>
-                <ref bean="inclusionRegexpContractFormFieldBuilder"/>
-            </list>
-        </property>-->
     </bean>
 
     <bean id="pageListController" class="org.opens.tgol.controller.PageListController">
@@ -211,16 +221,86 @@
         </property>
     </bean>
 
-    <bean id="auditLauncherController" class="org.opens.tgol.controller.AuditLauncherController">
-        <property name="proxyHost" value="${proxyHost}"/>
-        <property name="proxyPort" value="${proxyPort}"/>
-        <property name="proxyExclusionUrl" value="${proxyExclusionUrl}"/>
-        <property name="emailSentToUserExclusionRawList" value="${emailSentToUserExclusionList}"/>
+    <bean id="signUpController" class="org.opens.tgol.controller.SignUpController">
+        <property name="createUserFormValidator">
+            <ref bean="createUserFormValidator"/>
+        </property>
+    </bean>
+    
+    <bean id="accountSettingsController" class="org.opens.tgol.controller.AccountSettingsController">
+        <property name="createUserFormValidator">
+            <ref bean="createUserFormValidator"/>
+        </property>
+        <property name="forbiddenUserList">
+            <list>
+                <value>guest</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="userManagementController" class="org.opens.tgol.controller.UserManagementController">
+        <property name="createUserFormValidator">
+            <ref bean="createUserFormValidator"/>
+        </property>
+        <property name="createContractFormValidator">
+            <ref bean="createContractFormValidator"/>
+        </property>
+        <property name="contractOptionFormFieldBuilderMap">
+            <map>
+                <entry key="general-options">
+                    <list>
+                        <ref bean="nbMaxAuditsPerContractOptionBuilder"/>
+                        <ref bean="nbMaxActsToDisplayPerContractOptionBuilder"/>
+                    </list>
+                </entry>
+                <entry key="crawl-options">
+                    <list>
+                        <ref bean="depthOptionBuilder"/>
+                        <ref bean="maxDurationOptionBuilder"/>
+                        <ref bean="maxDocumentsOptionBuilder"/>
+                        <ref bean="exclusionRegexpOptionBuilder"/>
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="contractManagementController" class="org.opens.tgol.controller.ContractManagementController">
+        <property name="createContractFormValidator">
+            <ref bean="createContractFormValidator"/>
+        </property>
+        <property name="displayOptionFieldsBuilderList">
+            <list>
+                <ref bean="displayContractOrderSelectFormFieldBuilder"/>
+                <ref bean="inclusionRegexpContractFormFieldBuilder"/>
+                <ref bean="exclusionRegexpContractFormFieldBuilder"/>
+            </list>
+        </property>
+        <property name="contractOptionFormFieldBuilderMap">
+            <map>
+                <entry key="general-options">
+                    <list>
+                        <ref bean="nbMaxAuditsPerContractOptionBuilder"/>
+                        <ref bean="nbMaxActsToDisplayPerContractOptionBuilder"/>
+                    </list>
+                </entry>
+                <entry key="crawl-options">
+                    <list>
+                        <ref bean="depthOptionBuilder"/>
+                        <ref bean="maxDurationOptionBuilder"/>
+                        <ref bean="maxDocumentsOptionBuilder"/>
+                        <ref bean="exclusionRegexpOptionBuilder"/>
+                    </list>
+                </entry>
+            </map>
+        </property>
     </bean>
 
-    <bean id="signUpController" class="org.opens.tgol.controller.SignUpController">
-        <property name="signUpFormValidator">
-            <ref bean="signUpFormValidator"/>
+    <bean id="forgottenOrChangePasswordController" class="org.opens.tgol.controller.ForgottenOrChangePasswordController">
+        <property name="forbiddenUserList">
+            <list>
+                <value>guest</value>
+            </list>
         </property>
     </bean>
 

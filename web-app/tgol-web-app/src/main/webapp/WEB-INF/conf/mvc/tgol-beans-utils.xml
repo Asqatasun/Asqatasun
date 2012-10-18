@@ -53,4 +53,79 @@
         </property>
     </bean>
 
+    
+    <bean id="contractSortCommandHelper" class="org.opens.tgol.command.helper.ContractSortCommandHelper"/>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="contractSortCommandHelper"/>
+        </property>
+        <property name="targetMethod">
+            <value>setExclusionContractSortKey</value>
+        </property>
+        <property name="arguments">
+            <value>label-exclusion-choice</value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="contractSortCommandHelper"/>
+        </property>
+        <property name="targetMethod">
+            <value>setInclusionContractSortKey</value>
+        </property>
+        <property name="arguments">
+            <value>label-inclusion-choice</value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="contractSortCommandHelper"/>
+        </property>
+        <property name="targetMethod">
+            <value>setSortByKey</value>
+        </property>
+        <property name="arguments">
+            <value>sort-by-choice</value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="contractSortCommandHelper"/>
+        </property>
+        <property name="targetMethod">
+            <value>setSortOrderKey</value>
+        </property>
+        <property name="arguments">
+            <value>order-choice</value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="contractSortCommandHelper"/>
+        </property>
+        <property name="targetMethod">
+            <value>setLastAuditMarkSortValue</value>
+        </property>
+        <property name="arguments">
+            <value>mark</value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="contractSortCommandHelper"/>
+        </property>
+        <property name="targetMethod">
+            <value>setLastAuditDateSortValue</value>
+        </property>
+        <property name="arguments">
+            <value>date</value>
+        </property>
+    </bean>
+    
 </beans>
