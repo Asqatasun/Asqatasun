@@ -29,6 +29,7 @@ import junit.framework.TestCase;
 import static org.easymock.EasyMock.*;
 import org.opens.tgol.command.CreateUserCommand;
 import org.opens.tgol.command.factory.CreateUserCommandFactory;
+import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.service.user.RoleDataService;
 import org.opens.tgol.entity.service.user.UserDataService;
 import org.opens.tgol.entity.user.Role;
@@ -80,8 +81,11 @@ public class UserManagementControllerTest extends TestCase {
         verify(mockUserDataService);
         verify(mockAdminUser);
         verify(mockAdminRole);
-        verify(mockUserRole);        
+        verify(mockUserRole);
         verify(mockRoleDataService);
+        verify(mockUser);
+        verify(mockNewUser);
+        verify(mockAdminUser);
     }
     
     /**
@@ -596,7 +600,7 @@ public class UserManagementControllerTest extends TestCase {
         mockAdminUser = createMock(User.class);
         mockUser = createMock(User.class);
         mockNewUser = createMock(User.class);
-
+        
         expect(mockUserDataService.findAll()).andReturn(userCollection).anyTimes();
         
         expect(mockUserDataService.read(Long.valueOf(4))).andReturn(mockAdminUser).anyTimes();
@@ -693,6 +697,8 @@ public class UserManagementControllerTest extends TestCase {
         expect(mockUser.getId()).andReturn(Long.valueOf(5)).anyTimes();
         expect(mockUser.getRole()).andReturn(mockUserRole).anyTimes();
 
+        expect(mockUser.getContractSet()).andReturn(new ArrayList<Contract>()).anyTimes();
+        
         replay(mockUserDataService);
         replay(mockAdminUser);
         replay(mockUser);
