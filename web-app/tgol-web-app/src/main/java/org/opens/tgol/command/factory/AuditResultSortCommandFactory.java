@@ -24,12 +24,12 @@ package org.opens.tgol.command.factory;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import org.apache.log4j.Logger;
 import org.opens.tgol.command.AuditResultSortCommand;
 import org.opens.tgol.form.FormField;
 import org.opens.tgol.form.SelectElement;
 import org.opens.tgol.form.SelectFormField;
 import org.opens.tgol.form.builder.FormFieldBuilder;
+import org.opens.tgol.form.parameterization.helper.FormFieldHelper;
 
 /**
  *
@@ -142,26 +142,10 @@ public final class AuditResultSortCommandFactory {
                 hasTheme = true;
             }
         }
-        setValueToFormField(initialisedFormFieldList, auditResultSortCommand);
+        FormFieldHelper.setValueToFormField(
+                initialisedFormFieldList, 
+                auditResultSortCommand.getSortOptionMap());
         return initialisedFormFieldList;
-    }
-
-    private void setValueToFormField(List<FormField> formFieldList,
-            AuditResultSortCommand auditResultSortCommand) {
-        for (FormField ff : formFieldList) {
-            if (ff instanceof SelectFormField) {
-                for (Map.Entry<String, List<SelectElement>> entry : ((SelectFormField)ff).getSelectElementMap().entrySet()) {
-                    for (SelectElement se : entry.getValue()) {
-                        se.setDefault(false);
-                        if (auditResultSortCommand.getSortOptionMap().get(entry.getKey()).equals(se.getValue())) {
-                            se.setDefault(true);
-                        }
-                    }
-                }
-            } else {
-                ff.setValue(auditResultSortCommand.getSortOptionMap().get(ff.getI18nKey()));
-            }
-        }
     }
 
 }

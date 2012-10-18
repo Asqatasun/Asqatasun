@@ -293,6 +293,7 @@ public final class AuditSetUpCommandFactory {
                 // if from the set of options, one is different from the default
                 // a flag is set. 
                 isDefaultSet = isDefaultSet && StringUtils.equals(defaultValue, paramValue);
+                Logger.getLogger(this.getClass()).debug("isDefaultSet  "  + isDefaultSet);
             }
         }
         auditSetUpCommand.setDefaultParamSet(isDefaultSet);
