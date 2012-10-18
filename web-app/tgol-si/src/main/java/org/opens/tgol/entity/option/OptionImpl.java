@@ -135,7 +135,7 @@ public class OptionImpl implements Option, Serializable {
             return false;
         }
         final OptionImpl other = (OptionImpl) obj;
-        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+        if (this.id == null || !this.id.equals(other.id)) {
             return false;
         }
         if ((this.code == null) ? (other.code != null) : !this.code.equals(other.code)) {

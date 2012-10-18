@@ -105,7 +105,7 @@ public class ReferentialImpl implements Referential, Serializable {
             return false;
         }
         final ReferentialImpl other = (ReferentialImpl) obj;
-        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+        if (this.id == null || !this.id.equals(other.id)) {
             return false;
         }
         if ((this.code == null) ? (other.code != null) : !this.code.equals(other.code)) {
