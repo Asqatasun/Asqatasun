@@ -306,6 +306,9 @@ public class UserManagementController extends AbstractUserAndContractsController
         if (userToDelete == null || user.getId().equals(userToDelete.getId())) {
             return TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
         }
+        for (Contract contract : userToDelete.getContractSet()) {
+            deleteAllAuditsFromContract(contract);
+        }
         getUserDataService().delete(userToDelete.getId());
         request.getSession().removeAttribute(TgolKeyStore.USER_ID_TO_DELETE_KEY);
         request.getSession().setAttribute(TgolKeyStore.DELETED_USER_NAME_KEY, userToDelete.getEmail1());
