@@ -159,6 +159,9 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
 
     @Override
     public void addRelatedContent(RelatedContent content) {
+        if (relatedContentSet == null) {
+            relatedContentSet = new HashSet<RelatedContentImpl>();
+        }
         this.relatedContentSet.add((RelatedContentImpl) content);
     }
 
