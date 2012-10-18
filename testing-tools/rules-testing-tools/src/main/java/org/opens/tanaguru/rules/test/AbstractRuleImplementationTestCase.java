@@ -91,8 +91,8 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     public List<Test> getTestList() {
         return testList;
     }
-    private Map<WebResource, List<ProcessResult>> grossResultMap = new HashMap<WebResource, List<ProcessResult>>();
-    public Map<WebResource, List<ProcessResult>> getGrossResultMap() {
+    private Map<WebResource, Collection<ProcessResult>> grossResultMap = new HashMap<WebResource, Collection<ProcessResult>>();
+    public Map<WebResource, Collection<ProcessResult>> getGrossResultMap() {
         return grossResultMap;
     }
     
@@ -268,22 +268,22 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         }
     }
 
-    protected List<ProcessResult> process(String webResourceKey) {
+    protected Collection<ProcessResult> process(String webResourceKey) {
         System.out.println(this + "::process(\"" + webResourceKey + "\")");
         WebResource webResource = webResourceMap.get(webResourceKey);
-        List<ProcessResult> grossResultList = processorService.process(contentMap.get(webResource), testList);
+        Collection<ProcessResult> grossResultList = processorService.process(contentMap.get(webResource), testList);
         grossResultMap.put(webResource, grossResultList);
         return grossResultList;
     }
 
     protected ProcessResult processPageTest(String webResourceKey) {
-        return process(webResourceKey).get(0);
+        return process(webResourceKey).iterator().next();
     }
 
     public ProcessResult consolidate(String webResourceKey) {
         System.out.println(this + "::consolidate(\"" + webResourceKey + "\")");
         WebResource webResource = webResourceMap.get(webResourceKey);
-        ProcessResult netResult = consolidatorService.consolidate(grossResultMap.get(webResource), testList).get(0);
+        ProcessResult netResult = consolidatorService.consolidate(grossResultMap.get(webResource), testList).iterator().next();
         netResultMap.put(webResource, netResult);
         return netResult;
     }
@@ -299,7 +299,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
 
     protected ProcessResult getGrossResult(String pageKey, String siteKey) {
         Site site = (Site) webResourceMap.get(siteKey);
-        List<ProcessResult> grossResultList = grossResultMap.get(site);
+        Collection<ProcessResult> grossResultList = grossResultMap.get(site);
         Page page = (Page) webResourceMap.get(pageKey);
         for (ProcessResult grossResult : grossResultList) {
             if (grossResult.getSubject().equals(page)) {

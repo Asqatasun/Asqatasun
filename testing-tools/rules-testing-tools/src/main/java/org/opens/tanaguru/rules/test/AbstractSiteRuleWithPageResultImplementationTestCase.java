@@ -21,7 +21,7 @@
  */
 package org.opens.tanaguru.rules.test;
 
-import java.util.List;
+import java.util.Collection;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.subject.WebResource;
 
@@ -38,10 +38,10 @@ public abstract class AbstractSiteRuleWithPageResultImplementationTestCase exten
         super(testName,inputDataFileName,testcasesFilePath);
     }
     
-    public List<ProcessResult> consolidateWithListAsReturn(String webResourceKey) {
+    public Collection<ProcessResult> consolidateWithListAsReturn(String webResourceKey) {
         System.out.println(this + "::consolidate(\"" + webResourceKey + "\")");
         WebResource webResource = getWebResourceMap().get(webResourceKey);
-        List<ProcessResult> netResultList = getConsolidatorService().consolidate(getGrossResultMap().get(webResource), getTestList());
+        Collection<ProcessResult> netResultList = getConsolidatorService().consolidate(getGrossResultMap().get(webResource), getTestList());
 //        netResultMap.put(webResource, netResult);
         return netResultList;
     }
