@@ -59,6 +59,12 @@
         <property name="entityDao" ref="referentialDAO"/>
     </bean>
     
+    <bean id="functionalityDAO" class="org.opens.tgol.entity.dao.functionality.FunctionalityDAOImpl"/>
+    <bean id="functionalityDataService" class="org.opens.tgol.entity.service.functionality.FunctionalityDataServiceImpl">
+        <property name="entityFactory" ref="tgsiFunctionalityFactory"/>
+        <property name="entityDao" ref="functionalityDAO"/>
+    </bean>
+    
     <bean id="scenarioDAO" class="org.opens.tgol.entity.dao.scenario.ScenarioDAOImpl"/>
     <bean id="scenarioDataService" class="org.opens.tgol.entity.service.scenario.ScenarioDataServiceImpl">
         <property name="entityFactory" ref="scenarioFactory"/>
