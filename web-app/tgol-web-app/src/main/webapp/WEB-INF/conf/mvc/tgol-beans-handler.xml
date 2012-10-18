@@ -128,7 +128,7 @@
         </property>
     </bean>
 
-    <bean id="massAuditActionBuilder" class="org.opens.tgol.action.builder.ActionBuilderImpl">
+<!--    <bean id="massAuditActionBuilder" class="org.opens.tgol.action.builder.ActionBuilderImpl">
         <property name="actionCode" value="MASS_AUDIT"/>
         <property name="actionI81NCode" value="resultPage.pdfExport"/>
         <property name="actionAltI81NCode" value="resultPage.pdfExportAlt"/>
@@ -143,7 +143,7 @@
                 <ref bean="massAuditActionBuilder"/>
             </list>
         </property>
-    </bean>
+    </bean>-->
     
 
 </beans>

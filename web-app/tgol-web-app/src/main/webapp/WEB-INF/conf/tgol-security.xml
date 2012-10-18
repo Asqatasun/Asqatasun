@@ -13,7 +13,7 @@
 
     <http auto-config="true" access-denied-page="/access-denied.html">
 <!--        <intercept-url pattern="/*.html*" requires-channel="https"/>-->
-        <intercept-url pattern="/login.html*" filters="none"/>
+<!--        <intercept-url pattern="/login.html*" filters="none"/>-->
         <intercept-url pattern="/admin.html" access="ROLE_ADMIN"/>
         <intercept-url pattern="/admin/add*" access="ROLE_ADMIN"/>
         <intercept-url pattern="/admin/edit*" access="ROLE_ADMIN"/>
