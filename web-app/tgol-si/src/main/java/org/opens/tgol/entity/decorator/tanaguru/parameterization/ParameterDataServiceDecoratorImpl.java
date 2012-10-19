@@ -21,6 +21,7 @@
  */
 package org.opens.tgol.entity.decorator.tanaguru.parameterization;
 
+import java.util.Collection;
 import java.util.Set;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.parameterization.Parameter;
@@ -95,6 +96,11 @@ public class ParameterDataServiceDecoratorImpl extends AbstractGenericDataServic
     @Override
     public Set<Parameter> updateParameter(Set<Parameter> set, Parameter prmtr) {
         return decoratedParameterDataService.updateParameter(set, prmtr);
+    }
+
+    @Override
+    public Set<Parameter> getParameterSet(ParameterFamily parameterFamily, Collection<Parameter> paramSet) {
+        return decoratedParameterDataService.getParameterSet(parameterFamily, paramSet);
     }
 
 
