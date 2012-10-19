@@ -21,9 +21,12 @@
  */
 package org.opens.tanaguru.entity.service.statistics;
 
+import java.math.BigDecimal;
+import java.util.Collection;
 import org.opens.tanaguru.entity.dao.statistics.WebResourceStatisticsDAO;
 import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 
@@ -41,6 +44,15 @@ public class WebResourceStatisticsDataServiceImpl extends AbstractGenericDataSer
             TestSolution testSolution) {
         return ((WebResourceStatisticsDAO) entityDao).
                 findResultCountByResultType(webresourceId, testSolution);
+    }
+    
+    @Override
+    public BigDecimal getWeightedResultByResultType(
+            Long webresourceId,
+            Collection<Parameter> paramSet,
+            TestSolution testSolution) {
+        return ((WebResourceStatisticsDAO) entityDao).
+                findWeightedResultCountByResultType(webresourceId, paramSet, testSolution);
     }
 
     @Override

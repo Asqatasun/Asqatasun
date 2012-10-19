@@ -3,7 +3,8 @@ SET foreign_key_checks=0;
 INSERT IGNORE INTO `PARAMETER_FAMILY` (`Id_Parameter_Family`, `Cd_Parameter_Family`, `Description`, `Long_Label`, `Short_Label`) VALUES
 (1, 'CRAWL', 'This parameter family handles all the parameters needed by the crawler component', 'crawl parameters', 'crawl params'),
 (2, 'GENERAL', 'This parameter family handles all the general parameters of the audit', 'general parameters', 'gen params'),
-(3, 'RULES', 'This parameter family handles all the parameters needed by the rules', 'rules parameters', 'rules params');
+(3, 'RULES', 'This parameter family handles all the parameters needed by the rules', 'rules parameters', 'rules params'),
+(4, 'TEST_WEIGHT', 'This paramaters handles the test weight potentially overridden by users', 'test weight parameters', 'test weight params');
 
 INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_Element`, `Id_Parameter_Family`, `Long_Label`, `Short_Label`) VALUES
 (1, 'MAX_DOCUMENTS', 1, 'Maximum number of downloaded pages', 'max pages'),
@@ -14,7 +15,35 @@ INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_El
 (6, 'DATA_TABLE_MARKER', 3, 'Data Table HTML marker (id or class)', 'Data table marker'),
 (7, 'PRESENTATION_TABLE_MARKER', 3, 'Presentation Table HTML marker (id or class)', 'Presentation table marker'),
 (8, 'PROXY_HOST', 1, 'proxy host', 'proxy host'),
-(9, 'PROXY_PORT', 1, 'proxy port', 'proxy port');
+(9, 'PROXY_PORT', 1, 'proxy port', 'proxy port'),
+(10, 'Seo-01011', 'Weight of rule Seo-01011 overriden by user',4),
+(11, 'Seo-01012', 'Weight of rule Seo-01011 overriden by user',4),
+(12, 'Seo-01013', 'Weight of rule Seo-01011 overriden by user',4),
+(13, 'Seo-01021', 'Weight of rule Seo-01011 overriden by user',4),
+(14, 'Seo-01031', 'Weight of rule Seo-01011 overriden by user',4),
+(15, 'Seo-01041', 'Weight of rule Seo-01011 overriden by user',4),
+(16, 'Seo-01051', 'Weight of rule Seo-01011 overriden by user',4),
+(17, 'Seo-01061', 'Weight of rule Seo-01011 overriden by user',4),
+(18, 'Seo-02011', 'Weight of rule Seo-01011 overriden by user',4),
+(19, 'Seo-02012', 'Weight of rule Seo-01011 overriden by user',4),
+(20, 'Seo-02013', 'Weight of rule Seo-01011 overriden by user',4),
+(21, 'Seo-03011', 'Weight of rule Seo-01011 overriden by user',4),
+(22, 'Seo-03012', 'Weight of rule Seo-01011 overriden by user',4),
+(23, 'Seo-05011', 'Weight of rule Seo-01011 overriden by user',4),
+(24, 'Seo-05012', 'Weight of rule Seo-01011 overriden by user',4),
+(25, 'Seo-05013', 'Weight of rule Seo-01011 overriden by user',4),
+(26, 'Seo-06011', 'Weight of rule Seo-01011 overriden by user',4),
+(27, 'Seo-06021', 'Weight of rule Seo-01011 overriden by user',4),
+(28, 'Seo-06031', 'Weight of rule Seo-01011 overriden by user',4),
+(29, 'Seo-06041', 'Weight of rule Seo-01011 overriden by user',4),
+(30, 'Seo-06051', 'Weight of rule Seo-01011 overriden by user',4),
+(31, 'Seo-06052', 'Weight of rule Seo-01011 overriden by user',4),
+(32, 'Seo-07011', 'Weight of rule Seo-01011 overriden by user',4),
+(33, 'Seo-07012', 'Weight of rule Seo-01011 overriden by user',4),
+(34, 'Seo-07021', 'Weight of rule Seo-01011 overriden by user',4),
+(35, 'Seo-07051', 'Weight of rule Seo-01011 overriden by user',4),
+(36, 'Seo-07061', 'Weight of rule Seo-01011 overriden by user',4),
+(37, 'Seo-08011', 'Weight of rule Seo-01011 overriden by user',4);
 
 INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
 (1, '50000', b'0'),

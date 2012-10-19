@@ -22,14 +22,8 @@
 package org.opens.tanaguru.entity.reference;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.math.BigDecimal;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -75,6 +69,8 @@ public class TestImpl implements Test, Serializable {
     private ScopeImpl scope;
     @Column(name = "Rule_Design_Url")
     private String ruleDesignUrl;
+    @Column(name = "Weight")
+    private BigDecimal weight;
 
     public TestImpl() {
         super();
@@ -174,6 +170,11 @@ public class TestImpl implements Test, Serializable {
     public String getRuleDesignUrl() {
         return this.ruleDesignUrl;
     }
+    
+    @Override
+    public BigDecimal getWeight() {
+        return this.weight;
+    }
 
     @Override
     public void setCode(String code) {
@@ -200,6 +201,7 @@ public class TestImpl implements Test, Serializable {
         this.id = id;
     }
 
+    @Override
     public void setLabel(String label) {
         this.label = label;
     }
@@ -238,4 +240,10 @@ public class TestImpl implements Test, Serializable {
     public void setRuleDesignUrl(String ruleDesignUrl) {
         this.ruleDesignUrl = ruleDesignUrl;
     }
+    
+    @Override
+    public void setWeight(BigDecimal weight) {
+        this.weight = weight;
+    }
+    
 }

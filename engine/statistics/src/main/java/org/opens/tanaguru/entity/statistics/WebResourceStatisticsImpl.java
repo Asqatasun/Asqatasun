@@ -22,6 +22,7 @@
 package org.opens.tanaguru.entity.statistics;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -65,6 +66,18 @@ public class WebResourceStatisticsImpl
 
     @Column(name="Nb_Na")
     private int nbOfNa=0;
+    
+    @Column(name="Weighted_Passed")
+    private BigDecimal weightedPassed = BigDecimal.ZERO;
+
+    @Column(name="Weighted_Failed")
+    private BigDecimal weightedFailed = BigDecimal.ZERO;
+
+    @Column(name="Weighted_Nmi")
+    private BigDecimal weightedNmi = BigDecimal.ZERO;
+
+    @Column(name="Weighted_Na")
+    private BigDecimal weightedNa = BigDecimal.ZERO;
 
     @Column(name="Nb_Invalid_Test")
     private int nbOfInvalidTest=0;
@@ -247,6 +260,46 @@ public class WebResourceStatisticsImpl
     @Override
     public void setHttpStatusCode(int httpStatusCode) {
         this.httpStatusCode = httpStatusCode;
+    }
+
+    @Override
+    public BigDecimal getWeightedNa() {
+        return weightedNa;
+    }
+
+    @Override
+    public void setWeightedNa(BigDecimal weightedNa) {
+        this.weightedNa = weightedNa;
+    }
+
+    @Override
+    public BigDecimal getWeightedNmi() {
+        return weightedNmi;
+    }
+
+    @Override
+    public void setWeightedNmi(BigDecimal weightedNmi) {
+        this.weightedNmi = weightedNmi;
+    }
+
+    @Override
+    public BigDecimal getWeightedPassed() {
+        return weightedPassed;
+    }
+
+    @Override
+    public void setWeightedPassed(BigDecimal weightedPassed) {
+        this.weightedPassed = weightedPassed;
+    }
+
+    @Override
+    public BigDecimal getWeightedFailed() {
+        return weightedFailed;
+    }
+
+    @Override
+    public void setWeightedFailed(BigDecimal weightedFailed) {
+        this.weightedFailed = weightedFailed;
     }
 
 }

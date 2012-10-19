@@ -21,15 +21,16 @@
  */
 package org.opens.tanaguru.entity.service.parameterization;
 
-import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.dao.parameterization.ParameterDAO;
 import org.opens.tanaguru.entity.factory.parameterization.ParameterFactory;
 import org.opens.tanaguru.entity.parameterization.Parameter;
-import org.opens.tanaguru.entity.dao.parameterization.ParameterDAO;
 import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.entity.parameterization.ParameterFamily;
+import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 
 /**
  *
@@ -54,7 +55,11 @@ public class ParameterDataServiceImpl extends AbstractGenericDataService<Paramet
 
     @Override
     public Set<Parameter> getParameterSet(ParameterFamily parameterFamily, Audit audit) {
-        return ((ParameterDAO) entityDao).findParameterSet(parameterFamily, audit);
+        if (audit.getParameterSet() != null) {
+            return ((ParameterDAO) entityDao).findParametersFromParameterFamily(parameterFamily, audit.getParameterSet());
+        } else {
+            return ((ParameterDAO) entityDao).findParameterSet(parameterFamily, audit);
+        }
     }
 
     @Override
@@ -104,6 +109,11 @@ public class ParameterDataServiceImpl extends AbstractGenericDataService<Paramet
     @Override
     public Parameter getDefaultParameter(ParameterElement parameterElement) {
         return ((ParameterDAO) entityDao).findDefaultParameter(parameterElement);
+    }
+
+    @Override
+    public Set<Parameter> getParameterSet(ParameterFamily parameterFamily, Collection<Parameter> paramSet) {
+        return ((ParameterDAO) entityDao).findParametersFromParameterFamily(parameterFamily, paramSet);
     }
 
 }

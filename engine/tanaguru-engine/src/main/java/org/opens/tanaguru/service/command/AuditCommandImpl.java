@@ -535,7 +535,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
         // debug tools
         Date beginProcessDate = null;
         Date endProcessDate = null;
-        Date endPersistDate = null;
+        Date endPersistDate;
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Consolidation");
@@ -675,20 +675,19 @@ public abstract class AuditCommandImpl implements AuditCommand {
         // debug tools
         Date beginProcessDate = null;
         Date endProcessDate = null;
-        Date endPersistDate = null;
+        Date endPersistDate;
         Long persistenceDuration = Long.valueOf(0);
-        //
 
         WebResource parentWebResource = audit.getSubject();
         if (parentWebResource instanceof Page) {
-            analyserService.analyse(parentWebResource);
+            analyserService.analyse(parentWebResource, audit.getParameterSet());
             webResourceDataService.saveOrUpdate(parentWebResource);
         } else if (parentWebResource instanceof Site) {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Analysing results of scope site");
                 beginProcessDate = Calendar.getInstance().getTime();
             }
-            analyserService.analyse(parentWebResource);
+            analyserService.analyse(parentWebResource, audit.getParameterSet());
             if (LOGGER.isDebugEnabled()) {
                 endProcessDate = Calendar.getInstance().getTime();
                 LOGGER.debug(
@@ -711,7 +710,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
             Long nbOfContent =
                     webResourceDataService.getNumberOfChildWebResource(parentWebResource);
             Long i = Long.valueOf(0);
-            List<WebResource> webResourceList = null;
+            List<WebResource> webResourceList;
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug(
                         new StringBuilder("Analysing ")
@@ -741,7 +740,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
                                     .append(endProcessDate.getTime() - beginProcessDate.getTime())
                                     .append(MS_LOGGER_STR).toString());
                     }
-                    analyserService.analyse(webResource);
+                    analyserService.analyse(webResource,audit.getParameterSet());
                     if (LOGGER.isDebugEnabled()) {
                         endPersistDate = Calendar.getInstance().getTime();
                         LOGGER.debug(

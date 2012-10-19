@@ -21,12 +21,14 @@
  */
 package org.opens.tanaguru.service;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.opens.tanaguru.analyser.Analyser;
 import org.opens.tanaguru.analyser.AnalyserFactory;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.subject.WebResource;
 
 /**
@@ -54,9 +56,9 @@ public class AnalyserServiceImpl implements AnalyserService {
     }
 
     @Override
-    public void analyse(WebResource webResource) {
+    public void analyse(WebResource webResource, Collection<Parameter> paramSet) {
         for (AnalyserFactory analyserFactory : analyserFactorySet) {
-            Analyser analyser = analyserFactory.create(webResource);
+            Analyser analyser = analyserFactory.create(webResource, paramSet);
             analyser.run();
         }
     }

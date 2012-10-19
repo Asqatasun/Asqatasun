@@ -20,21 +20,21 @@
     <LEVEL Id_Level="2" Cd_Level="Ar" Description="Level2" Label="Level2" Rank="2"/>
     <LEVEL Id_Level="3" Cd_Level="Or" Description="Level3" Label="Level3" Rank="3"/>
 
-    <TEST Id_Test="1" Cd_Test="10101" Description="Test 1.1.1" Label="1.1.1" Rank="1" Id_Criterion="1" Id_Scope="2" Id_Level="1"/>
-    <TEST Id_Test="2" Cd_Test="10102" Description="Test 1.1.2" Label="1.1.2" Rank="2" Id_Criterion="2" Id_Scope="1" Id_Level="1"/>
-    <TEST Id_Test="3" Cd_Test="10103" Description="Test 1.1.3" Label="1.1.3" Rank="3" Id_Criterion="1" Id_Scope="2" Id_Level="1"/>
-    <TEST Id_Test="4" Cd_Test="10104" Description="Test 1.1.4" Label="1.1.4" Rank="4" Id_Criterion="2" Id_Scope="1" Id_Level="1"/>
-    <TEST Id_Test="5" Cd_Test="10105" Description="Test 1.1.5" Label="1.1.5" Rank="5" Id_Criterion="1" Id_Scope="1" Id_Level="1"/>
-    <TEST Id_Test="6" Cd_Test="10106" Description="Test 1.1.6" Label="1.1.6" Rank="6" Id_Criterion="2" Id_Scope="1" Id_Level="1"/>
-    <TEST Id_Test="7" Cd_Test="10107" Description="Test 1.1.7" Label="1.1.7" Rank="7" Id_Criterion="2" Id_Scope="1" Id_Level="2"/>
-    <TEST Id_Test="8" Cd_Test="10108" Description="Test 1.1.8" Label="1.1.8" Rank="8" Id_Criterion="1" Id_Scope="1" Id_Level="2"/>
-    <TEST Id_Test="9" Cd_Test="10109" Description="Test 1.1.9" Label="1.1.9" Rank="9" Id_Criterion="2" Id_Scope="1" Id_Level="2"/>
-    <TEST Id_Test="10" Cd_Test="10110" Description="Test 1.1.10" Label="1.1.10" Rank="10" Id_Criterion="2" Id_Scope="1" Id_Level="1"/>
-    <TEST Id_Test="11" Cd_Test="10111" Description="Test 1.1.11" Label="1.1.11" Rank="11" Id_Criterion="3" Id_Scope="1" Id_Level="1"/>
-    <TEST Id_Test="12" Cd_Test="10112" Description="Test 1.1.12" Label="1.1.12" Rank="12" Id_Criterion="3" Id_Scope="1" Id_Level="1"/>
-    <TEST Id_Test="13" Cd_Test="10113" Description="Test 1.1.13" Label="1.1.13" Rank="13" Id_Criterion="3" Id_Scope="1" Id_Level="1"/>
-    <TEST Id_Test="14" Cd_Test="10114" Description="Test 1.1.14" Label="1.1.14" Rank="14" Id_Criterion="4" Id_Scope="1" Id_Level="2"/>
-    <TEST Id_Test="15" Cd_Test="10115" Description="Test 1.1.15" Label="1.1.15" Rank="15" Id_Criterion="4" Id_Scope="1" Id_Level="2"/>
+    <TEST Id_Test="1" Cd_Test="10101" Description="Test 1.1.1" Label="1.1.1" Rank="1" Weight="1.0" Id_Criterion="1" Id_Scope="2" Id_Level="1"/>
+    <TEST Id_Test="2" Cd_Test="10102" Description="Test 1.1.2" Label="1.1.2" Rank="2" Weight="1.0" Id_Criterion="2" Id_Scope="1" Id_Level="1"/>
+    <TEST Id_Test="3" Cd_Test="10103" Description="Test 1.1.3" Label="1.1.3" Rank="3" Weight="1.0" Id_Criterion="1" Id_Scope="2" Id_Level="1"/>
+    <TEST Id_Test="4" Cd_Test="10104" Description="Test 1.1.4" Label="1.1.4" Rank="4" Weight="1.0" Id_Criterion="2" Id_Scope="1" Id_Level="1"/>
+    <TEST Id_Test="5" Cd_Test="10105" Description="Test 1.1.5" Label="1.1.5" Rank="5" Weight="1.0" Id_Criterion="1" Id_Scope="1" Id_Level="1"/>
+    <TEST Id_Test="6" Cd_Test="10106" Description="Test 1.1.6" Label="1.1.6" Rank="6" Weight="1.0" Id_Criterion="2" Id_Scope="1" Id_Level="1"/>
+    <TEST Id_Test="7" Cd_Test="10107" Description="Test 1.1.7" Label="1.1.7" Rank="7" Weight="1.0" Id_Criterion="2" Id_Scope="1" Id_Level="2"/>
+    <TEST Id_Test="8" Cd_Test="10108" Description="Test 1.1.8" Label="1.1.8" Rank="8" Weight="1.0" Id_Criterion="1" Id_Scope="1" Id_Level="2"/>
+    <TEST Id_Test="9" Cd_Test="10109" Description="Test 1.1.9" Label="1.1.9" Rank="9" Weight="1.0" Id_Criterion="2" Id_Scope="1" Id_Level="2"/>
+    <TEST Id_Test="10" Cd_Test="10110" Description="Test 1.1.10" Label="1.1.10" Rank="10" Weight="1.0" Id_Criterion="2" Id_Scope="1" Id_Level="1"/>
+    <TEST Id_Test="11" Cd_Test="10111" Description="Test 1.1.11" Label="1.1.11" Rank="11" Weight="1.0" Id_Criterion="3" Id_Scope="1" Id_Level="1"/>
+    <TEST Id_Test="12" Cd_Test="10112" Description="Test 1.1.12" Label="1.1.12" Rank="12" Weight="1.0" Id_Criterion="3" Id_Scope="1" Id_Level="1"/>
+    <TEST Id_Test="13" Cd_Test="10113" Description="Test 1.1.13" Label="1.1.13" Rank="13" Weight="1.0" Id_Criterion="3" Id_Scope="1" Id_Level="1"/>
+    <TEST Id_Test="14" Cd_Test="10114" Description="Test 1.1.14" Label="1.1.14" Rank="14" Weight="1.0" Id_Criterion="4" Id_Scope="1" Id_Level="2"/>
+    <TEST Id_Test="15" Cd_Test="10115" Description="Test 1.1.15" Label="1.1.15" Rank="15" Weight="1.0" Id_Criterion="4" Id_Scope="1" Id_Level="2"/>
 
     <AUDIT Id_Audit="1" Dt_Creation="2010-10-26 13:50:29" Status="COMPLETED"/>
     <AUDIT Id_Audit="2" Dt_Creation="2010-10-26 14:50:29" Status="COMPLETED"/>

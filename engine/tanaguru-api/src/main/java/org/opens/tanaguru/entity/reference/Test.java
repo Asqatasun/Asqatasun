@@ -21,6 +21,7 @@
  */
 package org.opens.tanaguru.entity.reference;
 
+import java.math.BigDecimal;
 import org.opens.tanaguru.sdk.entity.Entity;
 import org.opens.tanaguru.sdk.entity.Reorderable;
 
@@ -177,4 +178,16 @@ public interface Test extends Entity, Reorderable {
      * @param ruleDesignUrl
      */
     void setRuleDesignUrl(String ruleDesignUrl);
+
+    /**
+     * 
+     * @return 
+     */
+    BigDecimal getWeight();
+    
+    /**
+     * 
+     * @param weight 
+     */
+    void setWeight(BigDecimal weight);
 }

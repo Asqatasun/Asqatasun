@@ -21,8 +21,8 @@
  */
 package org.opens.tanaguru.entity.dao.parameterization;
 
-import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 import org.opens.tanaguru.entity.parameterization.ParameterElement;
+import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 
 /**
  * 
@@ -37,5 +37,5 @@ public interface ParameterElementDAO extends GenericDAO<ParameterElement, Long> 
      *      the parameterElement instance given its code.
      */
     ParameterElement findParameterElementFromCode (String parameterElementCode);
-
+    
 }

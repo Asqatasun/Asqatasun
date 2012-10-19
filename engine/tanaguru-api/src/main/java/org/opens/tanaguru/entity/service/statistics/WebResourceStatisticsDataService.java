@@ -21,8 +21,11 @@
  */
 package org.opens.tanaguru.entity.service.statistics;
 
-import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
+import java.math.BigDecimal;
+import java.util.Collection;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.service.GenericDataService;
 
@@ -41,6 +44,18 @@ public interface WebResourceStatisticsDataService
      */
     Long getResultCountByResultType(
             Long webresourceId,
+            TestSolution testSolution);
+    
+    /**
+     * 
+     * @param webresourceId
+     * @param paramSet
+     * @param testSolution
+     * @return
+     */
+    BigDecimal getWeightedResultByResultType(
+            Long webresourceId,
+            Collection<Parameter> paramSet,
             TestSolution testSolution);
 
     /**

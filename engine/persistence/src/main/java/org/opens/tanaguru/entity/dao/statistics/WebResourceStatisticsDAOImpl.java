@@ -13,11 +13,17 @@
 
 package org.opens.tanaguru.entity.dao.statistics;
 
+import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.SSPImpl;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.reference.Test;
+import org.opens.tanaguru.entity.reference.TestImpl;
 import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
 import org.opens.tanaguru.entity.statistics.WebResourceStatisticsImpl;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -31,7 +37,8 @@ import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 public class WebResourceStatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Long>
         implements WebResourceStatisticsDAO {
 
-    private static final String JOIN_PROCESS_RESULT =" JOIN r.processResultSet pr";
+    private static final String JOIN_PROCESS_RESULT =" LEFT JOIN r.processResultSet pr ";
+    private static final String JOIN_TEST =" LEFT JOIN pr.test t";
 
     @Override
     protected Class<? extends WebResourceStatistics> getEntityClass() {
@@ -45,6 +52,10 @@ public class WebResourceStatisticsDAOImpl extends AbstractJPADAO<WebResourceStat
 
     private Class<? extends SSP> getSspEntityClass() {
         return SSPImpl.class;
+    }
+    
+    private Class<? extends Test> getTestEntityClass() {
+        return TestImpl.class;
     }
 
     @Override
@@ -64,6 +75,30 @@ public class WebResourceStatisticsDAOImpl extends AbstractJPADAO<WebResourceStat
         query.setParameter("value", testSolution);
         try {
             return (Long)query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }  
+    
+    @Override
+    public BigDecimal findWeightedResultCountByResultType(
+            Long webresourceId,
+            Collection<Parameter> paramSet,
+            TestSolution testSolution) {
+        if (webresourceId == null) {
+            return null;
+        }
+        Query query = entityManager.createQuery(
+                "SELECT t FROM "
+                + getWebResourceEntityClass().getName() + " r"
+                + JOIN_PROCESS_RESULT
+                + JOIN_TEST
+                + " WHERE (r.id=:id OR r.parent.id=:id)"
+                + " AND pr.definiteValue = :value");
+        query.setParameter("id", webresourceId);
+        query.setParameter("value", testSolution);
+        try {
+            return computeWeightedCountFromTestList((List<Test>)query.getResultList(), paramSet);
         } catch (NoResultException e) {
             return null;
         }
@@ -129,6 +164,41 @@ public class WebResourceStatisticsDAOImpl extends AbstractJPADAO<WebResourceStat
         } catch (NullPointerException e) {
             return null;
         }
+    }
+
+    /**
+     * 
+     * @param testList
+     * @param paramSet
+     * @return 
+     */
+    private BigDecimal computeWeightedCountFromTestList(
+            List<Test> testList, 
+            Collection<Parameter> paramSet) {
+        BigDecimal weightedCount = BigDecimal.ZERO;
+        for (Test test : testList) {
+            BigDecimal weight = getTestWeightFromParameter(test, paramSet);
+            if (weight == null) {
+                weight = test.getWeight();
+            }
+            weightedCount.add(weight);
+        }
+        return weightedCount;
+    }
+
+    /**
+     * 
+     * @param test
+     * @param paramSet
+     * @return 
+     */
+    private BigDecimal getTestWeightFromParameter(Test test, Collection<Parameter> paramSet) {
+        for (Parameter param : paramSet) {
+            if (param.getParameterElement().getParameterElementCode().equals(test.getCode())) {
+                return BigDecimal.valueOf(Double.valueOf(param.getValue()));
+            }
+        }
+        return null;
     }
 
 }
