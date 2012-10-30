@@ -51,5 +51,9 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${hibernateGroupId}</groupId>
+            <artifactId>hibernate-core</artifactId>
+        </dependency>
     </dependencies>
 </project>

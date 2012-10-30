@@ -19,10 +19,6 @@
             <version>${engineVersion}</version>
         </dependency>
         <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>persistence-api</artifactId>
-        </dependency>
-        <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>audit</artifactId>
             <version>${engineVersion}</version>

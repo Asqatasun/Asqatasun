@@ -74,33 +74,38 @@
             <!-- hibernate dependencies -->
             <dependency>
                 <groupId>${hibernateGroupId}</groupId>
-                <artifactId>hibernate</artifactId>
-                <version>3.2.5.ga</version>
-            </dependency>
-            <dependency>
-                <groupId>${hibernateGroupId}</groupId>
-                <artifactId>ejb3-persistence</artifactId>
-                <version>1.0.1.GA</version>
+                <artifactId>hibernate-core</artifactId>
+                <version>3.6.0.Final</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>slf4j-api</artifactId>
+                        <groupId>org.slf4j</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>slf4j-log4j12</artifactId>
+                        <groupId>org.slf4j</groupId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>${hibernateGroupId}</groupId>
                 <artifactId>hibernate-c3p0</artifactId>
-                <version>3.3.2.GA</version>
+                <version>3.6.0.Final</version>
             </dependency>
             <dependency>
                 <groupId>${hibernateGroupId}</groupId>
                 <artifactId>hibernate-ehcache</artifactId>
-                <version>3.3.2.GA</version>
+                <version>3.6.0.Final</version>
             </dependency>
             <dependency>
                 <groupId>${hibernateGroupId}</groupId>
                 <artifactId>hibernate-entitymanager</artifactId>
-                <version>3.4.0.GA</version>
+                <version>3.6.0.Final</version>
             </dependency>
             <dependency>
-                <groupId>org.hibernate</groupId>
+                <groupId>${hibernateGroupId}</groupId>
                 <artifactId>hibernate-jmx</artifactId>
-                <version>3.3.2.GA</version>
+                <version>3.5.6-Final</version>
             </dependency>
 
             <!-- javax dependencies -->
@@ -114,11 +119,11 @@
                 <artifactId>jta</artifactId>
                 <version>1.1</version>
             </dependency>
-            <dependency>
+<!--            <dependency>
                 <groupId>javax.persistence</groupId>
                 <artifactId>persistence-api</artifactId>
                 <version>1.0</version>
-            </dependency>
+            </dependency>-->
             <dependency>
                 <groupId>javax.mail</groupId>
                 <artifactId>mail</artifactId>
@@ -407,12 +412,12 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>1.5.0</version>
+                <version>1.5.11</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
-                <version>1.5.0</version>
+                <version>1.5.11</version>
             </dependency>
 
             <!-- dbunit and hsqldb dependencies -->
@@ -661,48 +666,18 @@
     </dependencyManagement>
 
     <repositories>
-
-        <!-- internet archive repository needed for heritrix dependencies -->
         <repository>
-            <id>internetArchiveWebteamBuilds</id>
-            <name>Internet Archive Webteam Builds</name>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <url>http://builds.archive.org:8080/maven2</url>
+            <url>http://download.java.net/maven/2/</url>
+            <id>hibernate-persistence</id>
             <layout>default</layout>
+            <name>Repository for library Library[hibernate-persistence]</name>
         </repository>
-
-        <!-- sakai project repository needed for -->
+<!--         dynamicJasper repository needed for dynamicJasper dependencies -->
         <repository>
-            <id>sakaiProject </id>
-            <name>Sakai Project webteam</name>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <url>http://source.sakaiproject.org/maven2/</url>
-            <layout>default</layout>
-        </repository>
-
-        <!-- dynamicJasper repository needed for dynamicJasper dependencies -->
-<!--        <repository>
             <id>djmaven2</id>
-            <url>http://www.fdvs.com.ar/djmaven2</url>
+            <url>http://archiva.fdvs.com.ar/repository/public1/</url>
             <name>DynamicJasper public Repository</name>
-        </repository>-->
-
-        <repository>
-            <id>java.net2</id>
-            <name>Repository hosting the jee6 artifacts</name>
-            <url>http://download.java.net/maven/2</url>
         </repository>
-
     </repositories>
 
 </project>

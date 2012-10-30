@@ -20,13 +20,5 @@
             <artifactId>tanaguru-api</artifactId>
             <version>${engineVersion}</version>
         </dependency>
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>persistence-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${hibernateGroupId}</groupId>
-            <artifactId>hibernate</artifactId>
-        </dependency>
     </dependencies>
 </project>

@@ -21,8 +21,8 @@
             <version>${engineVersion}</version>
         </dependency>
         <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>persistence-api</artifactId>
+            <groupId>${hibernateGroupId}</groupId>
+            <artifactId>hibernate-core</artifactId>
         </dependency>
     </dependencies>
 </project>
