@@ -21,9 +21,13 @@
  */
 package org.opens.tgol.entity.decorator.tanaguru.parameterization;
 
+import java.util.Collection;
+import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tgol.entity.contract.ScopeEnum;
+import org.opens.tgol.entity.option.OptionElement;
+import org.opens.tgol.entity.user.User;
 
 /**
  *
@@ -45,9 +49,20 @@ public interface ParameterDataServiceDecorator extends ParameterDataService {
 
     /**
      * 
+     * @param idContract
+     * @param parameterElement
+     * @param scenarioName
+     * @return 
      */
     String getLastParameterValueFromContractAndScenario(
             Long idContract, 
             ParameterElement parameterElement, 
             String scenarioName);
+    
+    /**
+     * 
+     * @param optionSet
+     * @return 
+     */
+    Collection<Parameter> getParameterSetFromOptionElementSet(Collection<OptionElement> optionElementSet);
 }

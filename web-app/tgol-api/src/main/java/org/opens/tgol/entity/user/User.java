@@ -24,6 +24,7 @@ package org.opens.tgol.entity.user;
 import java.util.Collection;
 import org.opens.tanaguru.sdk.entity.Entity;
 import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.entity.option.OptionElement;
 
 /**
  *
@@ -206,4 +207,22 @@ public interface User extends Entity {
      */
     void setAccountActivation(boolean value);
 
+    /**
+     * 
+     * @return 
+     */
+    Collection<OptionElement> getOptionElementSet();
+
+    /**
+     * 
+     * @param option 
+     */
+    void addOptionElement(OptionElement option);
+
+    /**
+     * 
+     * @param optionElementSet 
+     */
+    void addAllOptionElement(Collection<OptionElement> optionElementSet);
+    
 }

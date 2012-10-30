@@ -38,6 +38,7 @@ public final class TgolKeyStore {
     public static final String LOGOUT_URL = "/logout";
     public static final String HOME_URL = "/home";
     public static final String ACCOUNT_SETTINGS_URL = "/account-settings";
+    public static final String TEST_WEIGHT_URL = "/test-weight";
     public static final String CHANGE_PASSWORD_URL = "/change-password";
     public static final String CHANGE_PASSWORD_CONFIRMATION_URL = "/change-password-confirmation";
     public static final String FORGOTTEN_PASSWORD_URL = "/forgotten-password";
@@ -139,6 +140,7 @@ public final class TgolKeyStore {
     public static final String DELETE_CONTRACT_VIEW_NAME = "delete-contract";
     public static final String HOME_VIEW_REDIRECT_NAME = "home-redirect";
     public static final String ACCOUNT_SETTINGS_VIEW_NAME = "account-settings";
+    public static final String TEST_WEIGHT_VIEW_NAME = "test-weight";
     public static final String CHANGE_PASSWORD_VIEW_NAME = "change-password";
     public static final String CHANGE_PASSWORD_CONFIRMATION_VIEW_NAME = "change-password-confirmation";
     public static final String CHANGE_PASSWORD_CONFIRMATION_VIEW_REDIRECT_NAME = "change-password-confirmation-redirect";
@@ -218,6 +220,7 @@ public final class TgolKeyStore {
     public static final String UPDATED_USER_NAME_KEY = "updatedUserName";
     public static final String UPDATED_CONTRACT_NAME_KEY = "updatedContractName";
     public static final String CONTRACT_ID_KEY = "cr";
+    public static final String REFERENTIAL_CD_KEY = "ref";
     public static final String CONTRACT_TO_DELETE_KEY = "contractToDelete";
     public static final String SCENARIO_ID_KEY = "sc";
     public static final String AUDIT_URL_KEY = "auditUrl";
@@ -232,6 +235,9 @@ public final class TgolKeyStore {
     public static final String PAGE_LIST_KEY = "pageList";
     public static final String LOCALE_KEY = "locale";
     public static final String TEST_RESULT_LIST_KEY ="testResultMap";
+    public static final String TEST_LIST_KEY ="testList";
+    public static final String MODIFIABLE_TEST_WEIGHT_REFS_KEY ="modifiableTestWeightRefs";
+    
     public static final String SOURCE_CODE_KEY = "sourceCode";
     public static final String CONTRACT_ACTION_LIST_KEY = "contractActionList";
     public static final String RESULT_ACTION_LIST_KEY = "resultActionList";
@@ -271,6 +277,8 @@ public final class TgolKeyStore {
     public static final String CREATE_USER_COMMAND_KEY = "createUserCommand";
     public static final String CREATE_CONTRACT_COMMAND_KEY = "createContractCommand";
     public static final String CREATE_USER_ATTACK_COMMAND_KEY = "createUserAttack";
+    public static final String CHANGE_TEST_WEIGHT_COMMAND_KEY ="changeTestWeightCommand";
+    public static final String TEST_WEIGHT_SUCCESSFULLY_UPDATED_KEY="testWeightSuccessfullyUpdated";
     public static final String IS_CONTRACT_EXPIRED_KEY = "isContractExpired";
     public static final String PARAMETERS_MAP_KEY = "parametersMap";
     public static final String OPTIONS_MAP_KEY = "optionsMap";
