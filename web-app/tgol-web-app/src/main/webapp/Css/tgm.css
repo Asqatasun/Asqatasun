@@ -1466,3 +1466,38 @@ audit-result-menu-actions a {
     margin-top: 1em;
     margin-bottom: 1em;
 }
+
+/*
+  page : test weight management
+*/
+#test-weight-mngt .col01 { /* test code */
+    text-align: left;
+    width: 3em;
+}
+#test-weight-mngt .col02 { /* test label */
+    text-align: left;
+}
+#test-weight-mngt .col03 { /* user weight */
+    text-align: right;
+    width: 8em;
+}
+#test-weight-mngt .col04 { /* default weight */
+    text-align: right;
+    width: 8em;
+}
+#navSecondaryLevel {
+    width: 100%; text-align: right;   
+}
+#navSecondaryLevel ul{
+    display: inline-block;
+}
+#change-test-weight-form-general-error {
+    margin-bottom: 2em;
+    margin-top: 1em;
+}
+#test-weight-mngt input { /* user weight input*/
+    text-align: right;
+}
+#changeTestWeightCommand .actions { /* submit button */
+    padding-left: 530px;
+}
