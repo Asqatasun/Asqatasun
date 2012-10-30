@@ -21,19 +21,14 @@
  */
 package org.opens.tgol.charts.data;
 
-import org.opens.tgol.presentation.data.ActInfo;
 import de.laures.cewolf.DatasetProduceException;
 import de.laures.cewolf.DatasetProducer;
 import de.laures.cewolf.tooltips.CategoryToolTipGenerator;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.opens.tgol.presentation.data.ActInfo;
 
 /**
  * This class handles displayable audit statistics data
@@ -57,9 +52,10 @@ public class ActStatistics implements DatasetProducer, CategoryToolTipGenerator 
     }
 
     // index 0 = rawMark ; index 1 = weightedMark
-    private String[] series = {
-        "contract.rawMark",
-        "contract.weightedMark"};
+//    private String[] series = {
+//        "contract.rawMark",
+//        "contract.weightedMark"};
+    private String[] series = {"contract.rawMark"};
     /**
      *
      * @return
@@ -161,7 +157,7 @@ public class ActStatistics implements DatasetProducer, CategoryToolTipGenerator 
         for (ActInfo act : actSet) {
             if (act.getRawMark() != 0 && act.getWeightedMark() != 0) {
                 values[0][actIndex] = act.getRawMark();
-                values[1][actIndex] =act.getWeightedMark();
+//                values[1][actIndex] =act.getWeightedMark();
                 categories[actIndex]=act.getDate();
                 actIndex++;
             }
