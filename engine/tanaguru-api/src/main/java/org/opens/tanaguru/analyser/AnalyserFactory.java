@@ -21,10 +21,9 @@
  */
 package org.opens.tanaguru.analyser;
 
-import java.util.Collection;
 import java.util.List;
+import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.subject.WebResource;
 
 /**
@@ -43,9 +42,9 @@ public interface AnalyserFactory {
     /**
      * 
      * @param webResource
-     * @param paramSet
+     * @param audit
      * @return
      */
-    Analyser create(WebResource webResource, Collection<Parameter> paramSet);
+    Analyser create(WebResource webResource, Audit audit);
 
 }

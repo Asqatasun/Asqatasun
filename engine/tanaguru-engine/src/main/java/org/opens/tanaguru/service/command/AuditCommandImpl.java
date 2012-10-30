@@ -542,8 +542,10 @@ public abstract class AuditCommandImpl implements AuditCommand {
             beginProcessDate = Calendar.getInstance().getTime();
         }
         if (audit.getSubject() instanceof Page) {
-            consolidate((List<ProcessResult>) processResultDataService.
-                    getGrossResultFromAudit(audit), (List<Test>)audit.getTestList());
+            Logger.getLogger(this.getClass()).info(processResultDataService.
+                    getGrossResultFromAudit(audit).getClass());
+            consolidate(processResultDataService.
+                    getGrossResultFromAudit(audit), audit.getTestList());
             if (LOGGER.isDebugEnabled()) {
                 endProcessDate = Calendar.getInstance().getTime();
                 LOGGER.debug(
@@ -557,7 +559,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
                 for (Test test : audit.getTestList()) {
                     testList.add(test);
 
-                    List<ProcessResult> prList= (List<ProcessResult>) processResultDataService.
+                    Collection<ProcessResult> prList= (List<ProcessResult>) processResultDataService.
                             getGrossResultFromAuditAndTest(audit, test);
                     consolidate(prList, testList);
                     testList.clear();
@@ -570,7 +572,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
                                 .append(MS_LOGGER_STR).toString());
                 }
             } else {
-                List<ProcessResult> prList= (List<ProcessResult>) processResultDataService.
+                Collection<ProcessResult> prList= (List<ProcessResult>) processResultDataService.
                             getGrossResultFromAudit(audit);
                 consolidate(prList, audit.getTestList());
                 if (LOGGER.isDebugEnabled()) {
@@ -618,19 +620,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
         processResultSet.addAll(consolidatorService.consolidate(
                 prList,
                 testList));
-        // To avoid errors with processResult of Site Type in case of page audit
-        Set<ProcessResult> resultToRemoveSet = new HashSet<ProcessResult>();
-        for (ProcessResult processResult : processResultSet) {
-            if (processResult.getTest().getScope().getCode().equalsIgnoreCase("site")
-                    && processResult.getSubject() instanceof Page) {
-                resultToRemoveSet.add(processResult);
-            } else {
-                processResult.setNetResultAudit(audit);
-            }
-        }
-        for (ProcessResult resultToRemove : resultToRemoveSet) {
-            processResultSet.remove(resultToRemove);
-        }
+        
         if (!processResultSet.isEmpty()) {
             audit.setStatus(AuditStatus.ANALYSIS);
         } else {
@@ -641,18 +631,23 @@ public abstract class AuditCommandImpl implements AuditCommand {
         Set<ProcessResult> processResultSubset = new HashSet<ProcessResult>();
         int i = 0;
         while (iter.hasNext()) {
-            processResultSubset.add(iter.next());
-            i++;
-            if (i % consolidationTreatmentWindow == 0) {
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug(
-                            new StringBuilder("Persisting Consolidation from ")
-                                .append(i)
-                                .append(TO_LOGGER_STR)
-                                .append(i+consolidationTreatmentWindow).toString());
+            ProcessResult pr = iter.next();
+            // To avoid errors with processResult of Site Type in case of page audit
+            if (!(pr.getTest().getScope().getCode().contains("site") && pr.getSubject() instanceof Page)) {
+                pr.setNetResultAudit(audit);
+                processResultSubset.add(pr);
+                i++;
+                if (i % consolidationTreatmentWindow == 0) {
+                    if (LOGGER.isDebugEnabled()) {
+                        LOGGER.debug(
+                                new StringBuilder("Persisting Consolidation from ")
+                                    .append(i)
+                                    .append(TO_LOGGER_STR)
+                                    .append(i+consolidationTreatmentWindow).toString());
+                    }
+                    processResultDataService.saveOrUpdate(processResultSubset);
+                    processResultSubset.clear();
                 }
-                processResultDataService.saveOrUpdate(processResultSubset);
-                processResultSubset.clear();
             }
         }
         processResultDataService.saveOrUpdate(processResultSubset);
@@ -680,14 +675,14 @@ public abstract class AuditCommandImpl implements AuditCommand {
 
         WebResource parentWebResource = audit.getSubject();
         if (parentWebResource instanceof Page) {
-            analyserService.analyse(parentWebResource, audit.getParameterSet());
+            analyserService.analyse(parentWebResource, audit);
             webResourceDataService.saveOrUpdate(parentWebResource);
         } else if (parentWebResource instanceof Site) {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Analysing results of scope site");
                 beginProcessDate = Calendar.getInstance().getTime();
             }
-            analyserService.analyse(parentWebResource, audit.getParameterSet());
+            analyserService.analyse(parentWebResource, audit);
             if (LOGGER.isDebugEnabled()) {
                 endProcessDate = Calendar.getInstance().getTime();
                 LOGGER.debug(
@@ -740,7 +735,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
                                     .append(endProcessDate.getTime() - beginProcessDate.getTime())
                                     .append(MS_LOGGER_STR).toString());
                     }
-                    analyserService.analyse(webResource,audit.getParameterSet());
+                    analyserService.analyse(webResource,audit);
                     if (LOGGER.isDebugEnabled()) {
                         endPersistDate = Calendar.getInstance().getTime();
                         LOGGER.debug(

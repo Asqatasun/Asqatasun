@@ -176,12 +176,13 @@ public class WebResourceStatisticsDAOImpl extends AbstractJPADAO<WebResourceStat
             List<Test> testList, 
             Collection<Parameter> paramSet) {
         BigDecimal weightedCount = BigDecimal.ZERO;
+
         for (Test test : testList) {
             BigDecimal weight = getTestWeightFromParameter(test, paramSet);
             if (weight == null) {
                 weight = test.getWeight();
             }
-            weightedCount.add(weight);
+            weightedCount = weightedCount.add(weight);
         }
         return weightedCount;
     }

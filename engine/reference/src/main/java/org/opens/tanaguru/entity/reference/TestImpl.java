@@ -69,7 +69,7 @@ public class TestImpl implements Test, Serializable {
     private ScopeImpl scope;
     @Column(name = "Rule_Design_Url")
     private String ruleDesignUrl;
-    @Column(name = "Weight")
+    @Column(name = "Weight", precision=2, scale=1)
     private BigDecimal weight;
 
     public TestImpl() {

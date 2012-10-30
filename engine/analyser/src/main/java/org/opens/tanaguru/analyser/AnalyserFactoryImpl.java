@@ -22,7 +22,9 @@
 package org.opens.tanaguru.analyser;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.parameterization.ParameterFamily;
@@ -100,20 +102,12 @@ public class AnalyserFactoryImpl implements AnalyserFactory {// TODO Write javad
         this.parameterFamilyDataService = parameterFamilyDataService;
     }
 
-    private String testWeightParameterFamilyCode = "TEST_WEIGHT";
-    public String getTestWeightParameterFamilyCode() {
-        return testWeightParameterFamilyCode;
+    private List<String> testWeightParameterFamilyCodeList;
+    public void setTestWeightParameterFamilyCodeList(List<String> testWeightParameterFamilyCodeList) {
+        this.testWeightParameterFamilyCodeList = testWeightParameterFamilyCodeList;
     }
 
-    public void setTestWeightParameterFamilyCode(String testWeightParameterFamilyCode) {
-        this.testWeightParameterFamilyCode = testWeightParameterFamilyCode;
-        setTestWeightParameterFamily(parameterFamilyDataService);
-    }
-    
-    private ParameterFamily testWeightParameterFamily;
-    public final void setTestWeightParameterFamily(ParameterFamilyDataService parameterFamilyDataService) {
-        this.testWeightParameterFamily = parameterFamilyDataService.getParameterFamily(testWeightParameterFamilyCode);
-    }
+    private Collection<ParameterFamily> testWeightParameterFamilySet ;
     
     @Autowired
     public AnalyserFactoryImpl(
@@ -129,20 +123,17 @@ public class AnalyserFactoryImpl implements AnalyserFactory {// TODO Write javad
         this.webResourceStatisticsDataService = webResourceStatisticsDataService;
         this.parameterDataService = parameterDataService;
         this.parameterFamilyDataService = parameterFamilyDataService;
-        setTestWeightParameterFamily(parameterFamilyDataService);
     }
 
     @Override
-    public Analyser create(WebResource webResource, Collection<Parameter> paramSet) {
-        Collection<Parameter> testWeightParamSet = 
-                parameterDataService.getParameterSet(testWeightParameterFamily, paramSet);
+    public Analyser create(WebResource webResource, Audit audit) {
         Analyser analyser = new AnalyserImpl(
                 auditDataService,
                 testStatisticsDataService,
                 themeStatisticsDataService,
                 webResourceStatisticsDataService,
                 webResource,
-                testWeightParamSet);
+                getTestWeightParamSet(audit));
         return analyser;
     }
 
@@ -150,4 +141,26 @@ public class AnalyserFactoryImpl implements AnalyserFactory {// TODO Write javad
     public Analyser create(List<ProcessResult> netResultList) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    /**
+     * 
+     * @param audit
+     * @return 
+     * 
+     *  the collection of test weight parameters for the given audit
+     */
+    private Collection<Parameter> getTestWeightParamSet(Audit audit) {
+        if (testWeightParameterFamilySet == null) {
+            testWeightParameterFamilySet = new HashSet<ParameterFamily>();
+            for (String paramFamilyCode : testWeightParameterFamilyCodeList) {
+                testWeightParameterFamilySet.add(parameterFamilyDataService.getParameterFamily(paramFamilyCode));
+            }
+        }
+        Collection<Parameter> testWeightParamSet = new HashSet<Parameter>();
+        for (ParameterFamily pf : testWeightParameterFamilySet) {
+                testWeightParamSet.addAll(parameterDataService.getParameterSet(pf, audit));
+        }
+        return testWeightParamSet;
+    }
+    
 }
