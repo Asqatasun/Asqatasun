@@ -37,6 +37,8 @@ import org.opens.tgol.command.AuditSetUpCommand;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.contract.ScopeEnum;
 import org.opens.tgol.entity.option.OptionElement;
+import org.opens.tgol.entity.service.option.OptionElementDataService;
+import org.opens.tgol.entity.user.User;
 import org.opens.tgol.exception.LostInSpaceException;
 import org.opens.tgol.orchestrator.TanaguruOrchestrator;
 import org.opens.tgol.util.HttpStatusCodeFamily;
@@ -179,6 +181,40 @@ public class AuditLauncherController extends AuditDataHandlerController {
             emailSentToUserExclusionList.addAll(Arrays.asList(rawList.split(";")));
         }
         return emailSentToUserExclusionList;
+    }
+    
+    /**
+     * The user options that have to be converted as audit parameters
+     */
+    private List<String> userOption;
+    public List<String> getUserOption() {
+        return userOption;
+    }
+
+    public void setUserOption(List<String> userOption) {
+        this.userOption = userOption;
+    }
+
+    /**
+     * The user options that have to be converted as audit parameters and 
+     * that depend on the selected referential
+     */
+    private List<String> userOptionDependingOnReferential;
+    public List<String> getUserOptionDependingOnReferential() {
+        return userOptionDependingOnReferential;
+    }
+
+    public void setUserOptionDependingOnReferential(List<String> userOptionDependingOnReferential) {
+        this.userOptionDependingOnReferential = userOptionDependingOnReferential;
+    }
+    
+    private OptionElementDataService optionElementDataService;
+    public OptionElementDataService getOptionElementDataService() {
+        return optionElementDataService;
+    }
+    @Autowired
+    public void setOptionElementDataService(OptionElementDataService optionElementDataService) {
+        this.optionElementDataService = optionElementDataService;
     }
     
     public AuditLauncherController() {
@@ -356,13 +392,14 @@ public class AuditLauncherController extends AuditDataHandlerController {
             final Contract contract,
             final AuditSetUpCommand auditSetUpCommand, 
             final Locale locale) {
+        
         Map<String, String> fileMap = auditSetUpCommand.getFileMap();
-        Set<Parameter> paramSet = getUserParamSet(auditSetUpCommand, contract.getId(), fileMap.size(), null);
+
         return tanaguruExecutor.auditPageUpload(
                 contract,
                 fileMap,
                 getClientIpAddress(),
-                paramSet, 
+                getUserParamSet(auditSetUpCommand, contract.getId(), fileMap.size(), null),
                 locale);
     }
 
@@ -434,6 +471,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
             paramSet = getParameterDataService().updateParameterSet(paramSet, userParamSet);
         }
         paramSet = setProxyParameters(paramSet, url);
+        paramSet = setUserParameters(paramSet, auditSetUpCommand.getLevel().split(";")[0]);
         return paramSet;
     }
 
@@ -548,4 +586,25 @@ public class AuditLauncherController extends AuditDataHandlerController {
         return scenarioParamSet;
     }
 
+    /**
+     * Some user options have to be converted as parameters and added to the
+     * general audit parameters.
+     * 
+     * @param paramSet
+     * @param referentialKey
+     * @return 
+     */
+    private Set<Parameter> setUserParameters(Set<Parameter> paramSet, String referentialKey) {
+        User user = getCurrentUser();
+        Collection<OptionElement> optionElementSet = new HashSet<OptionElement>();
+        for (String optionFamily : userOptionDependingOnReferential) {
+            optionElementSet.addAll(optionElementDataService.getOptionElementFromUserAndFamilyCode(user, referentialKey+"_"+optionFamily));
+        }
+        for (String optionFamily : userOption) {
+            optionElementSet.addAll(optionElementDataService.getOptionElementFromUserAndFamilyCode(user, optionFamily));
+        }
+        paramSet.addAll(getParameterDataService().getParameterSetFromOptionElementSet(optionElementSet));
+        return paramSet;
+    }
+    
 }

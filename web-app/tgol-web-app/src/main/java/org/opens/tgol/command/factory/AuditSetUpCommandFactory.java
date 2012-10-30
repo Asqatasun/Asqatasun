@@ -260,8 +260,8 @@ public final class AuditSetUpCommandFactory {
         }
 
         // Set-up the audit level value to the auditSetUpCommand instance
-        auditSetUpCommand.setLevel(
-                extractLevelValueFromAuditSetUpFormFieldList(contract, levelFormFieldList, auditSetUpCommand));
+        isDefaultSet = isDefaultSet && 
+                extractAndSetLevelValueFromAuditSetUpFormFieldList(contract, levelFormFieldList, auditSetUpCommand);
         
         // We set here the default value for each AuditSetUpFormField
         // If the parameter associated with the AuditSetUpFormField defines 
@@ -271,10 +271,7 @@ public final class AuditSetUpCommandFactory {
                 
                 // We retrieve the default value of the Parameter associated 
                 // with the AuditSetUpFormField
-                String defaultValue = getParameterDataService().
-                    getDefaultParameter(ap.getParameterElement()).getValue();
-                Logger.getLogger(this.getClass()).debug(
-                        "defaultValue  "  + defaultValue + "for param " + ap.getParameterElement().getParameterElementCode());
+                String defaultValue = getDefaultParameterValue(ap);
 
                 String paramValue = getValueOfParamOfAuditSetUpFormField(
                         contract, 
@@ -341,7 +338,7 @@ public final class AuditSetUpCommandFactory {
      * 
      * @return 
      */
-    private String extractLevelValueFromAuditSetUpFormFieldList(
+    private boolean extractAndSetLevelValueFromAuditSetUpFormFieldList(
             Contract contract, 
             List<SelectFormField> levelFormFieldList, 
             AuditSetUpCommand auditSetUpCommand) {
@@ -350,11 +347,12 @@ public final class AuditSetUpCommandFactory {
         // with the level ParameterElement
         String defaultValue = getParameterDataService().
                     getDefaultParameter(levelParameterElement).getValue();
-        Logger.getLogger(this.getClass()).info("default level value " + defaultValue);
+        Logger.getLogger(this.getClass()).debug("default level value " + defaultValue);
         ScopeEnum scope = auditSetUpCommand.getScope();
+        boolean isDefaultValue = true;
         if (scope == ScopeEnum.DOMAIN || scope == ScopeEnum.SCENARIO) {
             String lastUserValue = retrieveParameterValueFromLastAudit(contract, levelParameterElement, auditSetUpCommand);
-            Logger.getLogger(this.getClass()).info("lastUserValue " + lastUserValue);
+            Logger.getLogger(this.getClass()).debug("lastUserValue " + lastUserValue);
             if (lastUserValue!= null && !StringUtils.equals(lastUserValue, defaultValue)) {
                 // we override the auditParameter with the last user value
                 defaultValue = lastUserValue;
@@ -362,9 +360,11 @@ public final class AuditSetUpCommandFactory {
                 // we need to update the UI elements regarding this value (set this 
                 // element as default)
                 AuditSetUpFormFieldHelper.selectDefaultLevelFromLevelValue(levelFormFieldList, defaultValue);
+                isDefaultValue = false;
             }
         }
-        return defaultValue;
+        auditSetUpCommand.setLevel(defaultValue);
+        return isDefaultValue;
     }
     
     /**
@@ -387,17 +387,6 @@ public final class AuditSetUpCommandFactory {
             AuditSetUpFormField ap,
             AuditSetUpCommand auditSetUpCommand) {
 
-        // override default value in case of NumericalFormField if the
-        // its default max value is inferior to the default value of the parameter. 
-        // The parameter value is reduced to the value of the field (to respect
-        // its bounds)
-        if (ap.getFormField() instanceof NumericalFormField) {
-            String maxValue = ((NumericalFormField) ap.getFormField()).getMaxValue();
-            if (Integer.valueOf(maxValue).compareTo(Integer.valueOf(defaultValue)) < 0) {
-                defaultValue = maxValue;
-            }
-        }
-
         // In case of site audit, we retrieve the last value filled-in 
         // by the user for the parameter. Let's consider this as a 
         // user preference management. 
@@ -409,6 +398,30 @@ public final class AuditSetUpCommandFactory {
                 return lastUserValue;
             }
         } 
+        return defaultValue;
+    }
+    
+    /**
+     * 
+     * @param ap
+     * @return 
+     */
+    private String getDefaultParameterValue(AuditSetUpFormField ap) {
+
+        String defaultValue = getParameterDataService().
+                    getDefaultParameter(ap.getParameterElement()).getValue();
+        Logger.getLogger(this.getClass()).debug(
+                        "defaultValue  "  + defaultValue + "for param " + ap.getParameterElement().getParameterElementCode());
+        // override default value in case of NumericalFormField if the
+        // its default max value is inferior to the default value of the parameter. 
+        // The parameter value is reduced to the value of the field (to respect
+        // its bounds)
+        if (ap.getFormField() instanceof NumericalFormField) {
+            String maxValue = ((NumericalFormField) ap.getFormField()).getMaxValue();
+            if (Integer.valueOf(maxValue).compareTo(Integer.valueOf(defaultValue)) < 0) {
+                defaultValue = maxValue;
+            }
+        }
         return defaultValue;
     }
     

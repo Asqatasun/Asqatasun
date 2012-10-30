@@ -30,7 +30,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.opens.tgol.action.voter.ActionHandler;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.functionality.Functionality;
-import org.opens.tgol.entity.user.User;
 import org.opens.tgol.exception.ForbiddenPageException;
 import org.opens.tgol.exception.ForbiddenUserException;
 import org.opens.tgol.util.TgolKeyStore;

@@ -34,6 +34,7 @@ import org.opens.tgol.emailsender.EmailSender;
 import org.opens.tgol.entity.user.User;
 import org.opens.tgol.exception.ForbiddenPageException;
 import org.opens.tgol.exception.ForbiddenUserException;
+import org.opens.tgol.presentation.menu.SecondaryLevelMenuDisplayer;
 import org.opens.tgol.util.TgolKeyStore;
 import org.opens.tgol.util.TgolTokenHelper;
 import org.opens.tgol.util.webapp.ExposablePropertyPlaceholderConfigurer;
@@ -102,6 +103,12 @@ public class ForgottenOrChangePasswordController extends AbstractController {
         this.forbiddenUserList = forbiddenUserList;
     }
     
+    private SecondaryLevelMenuDisplayer secondaryLevelMenuDisplayer;
+    @Autowired
+    public void setSecondaryLevelMenuDisplayer(SecondaryLevelMenuDisplayer secondaryLevelMenuDisplayer) {
+        this.secondaryLevelMenuDisplayer = secondaryLevelMenuDisplayer;
+    }
+    
     public ForgottenOrChangePasswordController() {
         super();
     }
@@ -119,6 +126,9 @@ public class ForgottenOrChangePasswordController extends AbstractController {
             HttpServletRequest request,
             Model model) {
         model.addAttribute(TgolKeyStore.CHANGE_PASSWORD_FROM_ADMIN_KEY, false);
+        secondaryLevelMenuDisplayer.setModifiableReferentialsForUserToModel(
+                        getCurrentUser(), 
+                        model); 
         return displayChangePasswordView(id, token, model, request);
     }
 
@@ -163,7 +173,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
                     (!currentUser.getId().equals(userId) &&
                     !currentUser.getRole().getRoleName().equals(ROLE_ADMIN_NAME_KEY)) ||
                     forbiddenUserList.contains(currentUser.getEmail1())) {
-                                return TgolKeyStore.ACCESS_DENIED_VIEW_REDIRECT_NAME;
+                return TgolKeyStore.ACCESS_DENIED_VIEW_REDIRECT_NAME;
             } else {
                 if (!currentUser.getId().equals(userId)){
                     user = getUserDataService().read(userId);
@@ -340,7 +350,6 @@ public class ForgottenOrChangePasswordController extends AbstractController {
         if (isrequestFromAdmin) {
             return displayChangePasswordFromAdminPage(user.getId().toString(), request, model);
         } else {
-            
             return displayChangePasswordFromUserPage(user.getId().toString(), request.getParameter("token"), request, model);
         }
     }

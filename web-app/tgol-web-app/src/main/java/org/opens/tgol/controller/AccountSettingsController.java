@@ -21,12 +21,21 @@
  */
 package org.opens.tgol.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import javax.servlet.http.HttpServletRequest;
+import org.opens.tanaguru.entity.reference.Reference;
+import org.opens.tanaguru.entity.reference.Test;
+import org.opens.tanaguru.entity.service.reference.ReferenceDataService;
+import org.opens.tanaguru.entity.service.reference.TestDataService;
+import org.opens.tgol.command.ChangeTestWeightCommand;
 import org.opens.tgol.command.CreateUserCommand;
+import org.opens.tgol.command.factory.ChangeTestWeightCommandFactory;
 import org.opens.tgol.entity.user.User;
 import org.opens.tgol.exception.ForbiddenPageException;
+import org.opens.tgol.presentation.menu.SecondaryLevelMenuDisplayer;
 import org.opens.tgol.util.TgolKeyStore;
+import org.opens.tgol.validator.ChangeTestWeightFormValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +43,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.LocaleResolver;
 
 /** 
  *
@@ -47,12 +58,51 @@ public class AccountSettingsController extends AbstractUserAndContractsControlle
         this.forbiddenUserList = forbiddenUserList;
     }
     
+    private TestDataService testDataService;
+    @Autowired
+    public void setTestDataService(TestDataService testDataService) {
+        this.testDataService = testDataService;
+    }
+    
+    private Map<String, Reference> refMap = new HashMap<String, Reference>();
+    @Autowired
+    public void setReferenceDataService(ReferenceDataService referenceDataService) {
+        for (Reference ref : referenceDataService.findAll()) {
+            refMap.put(ref.getCode(), ref);
+        }
+    }
+
+    private LocaleResolver localeResolver;
+    public LocaleResolver getLocaleResolver() {
+        return localeResolver;
+    }
+    
+    @Autowired
+    public final void setLocaleResolver(LocaleResolver localeResolver) {
+        this.localeResolver = localeResolver;
+    }
+    
+    private ChangeTestWeightFormValidator changeTestWeightFormValidator;
+
+    public final void setChangeTestWeightFormValidator(ChangeTestWeightFormValidator changeTestWeightFormValidator) {
+        this.changeTestWeightFormValidator = changeTestWeightFormValidator;
+    }
+    
+    private SecondaryLevelMenuDisplayer secondaryLevelMenuDisplayer;
+    @Autowired
+    public void setSecondaryLevelMenuDisplayer(SecondaryLevelMenuDisplayer secondaryLevelMenuDisplayer) {
+        this.secondaryLevelMenuDisplayer = secondaryLevelMenuDisplayer;
+    }
+    
+    /**
+     * Constructor
+     */
     public AccountSettingsController() {
         super();
     }
-
+    
     /**
-     * This method displays the one page form for an authenticated user
+     * This method displays the form for an authenticated user
      * @param contractId
      * @param model
      * @return
@@ -64,6 +114,7 @@ public class AccountSettingsController extends AbstractUserAndContractsControlle
         if (this.forbiddenUserList.contains(user.getEmail1())) {
             throw new ForbiddenPageException();
         }
+        secondaryLevelMenuDisplayer.setModifiableReferentialsForUserToModel(user, model);
         return prepateDataAndReturnCreateUserView(
                 model,
                 user,
@@ -71,7 +122,7 @@ public class AccountSettingsController extends AbstractUserAndContractsControlle
     }
 
     /**
-     * This methods controls the validity of the edit user form in case.
+     * This methods controls the validity of the edit user form.
      * If the user tries to modidy its email, or try to desactivate its account
      * or try to set him as admin where he's not admin, return attack message.
      * 
@@ -101,6 +152,8 @@ public class AccountSettingsController extends AbstractUserAndContractsControlle
                 TgolKeyStore.ACCOUNT_SETTINGS_VIEW_NAME);
         }
         
+        secondaryLevelMenuDisplayer.setModifiableReferentialsForUserToModel(user, model);
+        
         return submitUpdateUserForm(
                 createUserCommand, 
                 result, 
@@ -114,4 +167,113 @@ public class AccountSettingsController extends AbstractUserAndContractsControlle
                 TgolKeyStore.UPDATED_USER_NAME_KEY); 
     }
 
+    /**
+     * This method displays the Change Test Weight page for the authentified user.
+     * This page is displayed if and only if the current user owns at least 
+     * one contract on the wished referential. 
+     * 
+     * @param contractId
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = TgolKeyStore.TEST_WEIGHT_URL, method = RequestMethod.GET)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
+    public String displayChangeTestWeight(
+            @RequestParam(TgolKeyStore.REFERENTIAL_CD_KEY) String refCode,
+            HttpServletRequest request,
+            Model model) {
+
+        Reference referential = refMap.get(refCode);
+        if (referential == null || 
+                !secondaryLevelMenuDisplayer.isRequestedReferentialModifiable(refCode)) {
+        }
+
+        List<Test> testList = addTestListAndModifiableRefToModel(referential, model);
+
+        model.addAttribute(TgolKeyStore.CHANGE_TEST_WEIGHT_COMMAND_KEY, 
+                ChangeTestWeightCommandFactory.getInstance().getChangeTestWeightCommand(
+                    getCurrentUser(), 
+                    getLocaleResolver().resolveLocale(request),
+                    testList, 
+                    refCode));
+        return TgolKeyStore.TEST_WEIGHT_VIEW_NAME;
+    }
+    
+    /**
+     * 
+     * @param refCode
+     * @param changeTestWeightCommand
+     * @param result
+     * @param model
+     * @param request
+     * @return
+     * @throws Exception 
+     */
+    @RequestMapping(value = TgolKeyStore.TEST_WEIGHT_URL, method = RequestMethod.POST)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
+    public String submitChangeTestWeight (
+            @RequestParam(TgolKeyStore.REFERENTIAL_CD_KEY) String refCode,
+            @ModelAttribute(TgolKeyStore.CHANGE_TEST_WEIGHT_COMMAND_KEY) ChangeTestWeightCommand changeTestWeightCommand,
+            BindingResult result,
+            Model model,
+            HttpServletRequest request)
+            throws Exception {
+
+        Reference referential = refMap.get(refCode);
+        if (referential == null || 
+                !secondaryLevelMenuDisplayer.isRequestedReferentialModifiable(refCode)) {
+            throw new ForbiddenPageException();
+        }
+
+        // We check whether the form is valid
+        changeTestWeightFormValidator.validate(changeTestWeightCommand, result);
+        // If the form has some errors, we display it again with errors' details
+        addTestListAndModifiableRefToModel(referential, model);
+
+        model.addAttribute(TgolKeyStore.CHANGE_TEST_WEIGHT_COMMAND_KEY, changeTestWeightCommand);
+
+        if (!result.hasErrors()) {
+            ChangeTestWeightCommandFactory.getInstance().updateUserTestWeight(
+                getCurrentUser(),
+                changeTestWeightCommand);
+            model.addAttribute(TgolKeyStore.TEST_WEIGHT_SUCCESSFULLY_UPDATED_KEY, true);
+        }
+
+        return TgolKeyStore.TEST_WEIGHT_VIEW_NAME;
+    }
+    
+    /**
+     * 
+     * @param ref
+     * @param model
+     * @return 
+     */
+    private List<Test> addTestListAndModifiableRefToModel(Reference ref, Model model) {
+        List<Test> testList = testDataService.findAll(ref);
+        sortTestListByCode(testList);
+        model.addAttribute(TgolKeyStore.TEST_LIST_KEY, testList);
+        
+        secondaryLevelMenuDisplayer.setModifiableReferentialsForUserToModel(
+                        getCurrentUser(), 
+                        model);
+
+        return testList;
+    }
+    
+    /**
+     * This method sorts the test list elements regarding their code
+     * 
+     * @param processResultList
+     */
+    private void sortTestListByCode(List<Test> testList) {
+        Collections.sort(testList, new Comparator<Test>() {
+            @Override
+            public int compare(Test t1, Test t2) {
+                return String.CASE_INSENSITIVE_ORDER.compare(
+                        t1.getCode(),
+                        t2.getCode());
+            }
+        });
+    }
+    
 }
