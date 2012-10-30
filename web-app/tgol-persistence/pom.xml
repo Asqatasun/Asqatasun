@@ -19,8 +19,24 @@
             <groupId>${webappGroupId}</groupId>
             <artifactId>tgol-si</artifactId>
             <version>${webappVersion}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
+            <groupId>${engineGroupId}</groupId>
+            <artifactId>persistence</artifactId>
+            <version>${engineVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>${webappGroupId}</groupId>
+            <artifactId>tgol-data-presentation</artifactId>
+            <version>${webappVersion}</version>
+        </dependency>
+<!--        <dependency>
             <groupId>${webappGroupId}</groupId>
             <artifactId>tgol-data-presentation</artifactId>
             <version>${webappVersion}</version>
@@ -31,44 +47,17 @@
             <version>${engineVersion}</version>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-api</artifactId>
-            <version>${engineVersion}</version>
-        </dependency>
+            <groupId>${springGroupId}</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>-->
         <dependency>
             <groupId>org.dbunit</groupId>
             <artifactId>dbunit</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <scope>test</scope>
             <exclusions>
                 <exclusion>
-                    <artifactId>activation</artifactId>
-                    <groupId>javax.activation</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>jms</artifactId>
-                    <groupId>javax.jms</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>jmxri</artifactId>
-                    <groupId>com.sun.jmx</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>jmxtools</artifactId>
-                    <groupId>com.sun.jdmk</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>mail</artifactId>
-                    <groupId>javax.mail</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -83,18 +72,18 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
+            <groupId>${springGroupId}</groupId>
+            <artifactId>spring-context</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
+            <groupId>${springGroupId}</groupId>
+            <artifactId>spring-context-support</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
+            <groupId>hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -103,8 +92,13 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
+            <groupId>${springGroupId}</groupId>
+            <artifactId>spring-orm</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${springGroupId}</groupId>
+            <artifactId>spring-tx</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
