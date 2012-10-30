@@ -22,7 +22,6 @@
 package org.opens.tanaguru.entity.service.audit;
 
 import java.util.Collection;
-import java.util.List;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -63,22 +62,22 @@ public class ProcessResultDataServiceImpl extends AbstractGenericDataService<Pro
     }
 
     @Override
-    public List<ProcessResult> getGrossResultFromAudit(Audit audit) {
+    public Collection<ProcessResult> getGrossResultFromAudit(Audit audit) {
         return ((ProcessResultDAO) entityDao).retrieveGrossResultFromAudit(audit);
     }
 
     @Override
-    public List<ProcessResult> getNetResultFromAudit(Audit audit) {
+    public Collection<ProcessResult> getNetResultFromAudit(Audit audit) {
         return ((ProcessResultDAO) entityDao).retrieveNetResultFromAudit(audit);
     }
 
     @Override
-    public List<ProcessResult> getNetResultFromAuditAndWebResource(Audit audit, WebResource webResource) {
+    public Collection<ProcessResult> getNetResultFromAuditAndWebResource(Audit audit, WebResource webResource) {
         return ((ProcessResultDAO) entityDao).retrieveNetResultFromAuditAndWebResource(audit, webResource);
     }
     
     @Override
-    public List<ProcessResult> getGrossResultFromAuditAndTest(Audit audit, Test test) {
+    public Collection<ProcessResult> getGrossResultFromAuditAndTest(Audit audit, Test test) {
         return ((ProcessResultDAO) entityDao).retrieveGrossResultFromAuditAndTest(audit, test);
     }
 
