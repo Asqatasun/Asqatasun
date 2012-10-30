@@ -22,15 +22,18 @@
 package org.opens.tgol.entity.decorator.tanaguru.parameterization;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.entity.parameterization.ParameterFamily;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
+import org.opens.tanaguru.entity.service.parameterization.ParameterElementDataService;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 import org.opens.tgol.entity.contract.ScopeEnum;
 import org.opens.tgol.entity.dao.tanaguru.parameterization.TgolParameterDAO;
+import org.opens.tgol.entity.option.OptionElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -41,11 +44,14 @@ public class ParameterDataServiceDecoratorImpl extends AbstractGenericDataServic
         implements ParameterDataServiceDecorator{
 
     private ParameterDataService decoratedParameterDataService; // the ParameterDataService instance being decorated
+    private ParameterElementDataService parameterElementDataService; 
 
     @Autowired
     public ParameterDataServiceDecoratorImpl (
-            ParameterDataService decoratedParameterDataService) {
+            ParameterDataService decoratedParameterDataService,
+            ParameterElementDataService parameterElementDataService) {
         this.decoratedParameterDataService = decoratedParameterDataService;
+        this.parameterElementDataService = parameterElementDataService;
     }
 
     @Override
@@ -102,6 +108,19 @@ public class ParameterDataServiceDecoratorImpl extends AbstractGenericDataServic
     public Set<Parameter> getParameterSet(ParameterFamily parameterFamily, Collection<Parameter> paramSet) {
         return decoratedParameterDataService.getParameterSet(parameterFamily, paramSet);
     }
-
+    
+    @Override
+    public Collection<Parameter> getParameterSetFromOptionElementSet(Collection<OptionElement> optionElementSet) {
+        Set<Parameter> paramSet = new HashSet<Parameter>();
+        for (OptionElement optionElement : optionElementSet) {
+            ParameterElement pe = parameterElementDataService.getParameterElement(optionElement.getOption().getCode());
+            if (pe != null) {
+                Parameter p = decoratedParameterDataService.getParameter(pe, optionElement.getValue());
+                p = saveOrUpdate(p);
+                paramSet.add(p);
+            }
+        }
+        return paramSet;
+    }
 
 }

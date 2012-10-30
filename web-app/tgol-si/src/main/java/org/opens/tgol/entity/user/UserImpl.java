@@ -32,6 +32,8 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.contract.ContractImpl;
+import org.opens.tgol.entity.option.OptionElement;
+import org.opens.tgol.entity.option.OptionElementImpl;
 
 /**
  *
@@ -89,6 +91,12 @@ public class UserImpl implements User, Serializable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Collection<ContractImpl> contractSet = new LinkedHashSet<ContractImpl>();
 
+    @ManyToMany
+        @JoinTable(name = "TGSI_USER_OPTION_ELEMENT", joinColumns =
+        @JoinColumn(name = "USER_Id_User"), inverseJoinColumns =
+        @JoinColumn(name = "OPTION_ELEMENT_Id_Option_Element"))
+    Set<OptionElementImpl> optionElementSet = new HashSet<OptionElementImpl>();
+    
     @Override
     public Long getId() {
         return id;
@@ -242,4 +250,24 @@ public class UserImpl implements User, Serializable {
         this.isAccountActivated = value;
     }
 
+    @Override
+    public Collection<OptionElement> getOptionElementSet() {
+        return (Collection)this.optionElementSet;
+    }
+
+    @Override
+    public void addOptionElement(OptionElement option) {
+        optionElementSet.add((OptionElementImpl)option);
+    }
+
+    @Override
+    public void addAllOptionElement(Collection<OptionElement> optionElementSet) {
+        this.optionElementSet = new HashSet<OptionElementImpl>();
+        for (OptionElement optionElement : optionElementSet) {
+            if (optionElement instanceof OptionElementImpl) {
+                this.optionElementSet.add((OptionElementImpl)optionElement);
+            }
+        }
+    }
+    
 }
