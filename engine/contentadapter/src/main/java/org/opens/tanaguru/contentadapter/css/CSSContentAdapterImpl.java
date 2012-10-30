@@ -618,6 +618,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         }
         StringBuilder strb = new StringBuilder();
         if (path.startsWith("/")) {
+            Logger.getLogger(this.getClass()).info("buildPath  " + path);
             base = setBaseAsRootOfSite(base);
         }
         strb.append(base);
@@ -639,6 +640,8 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
             uri = UURIFactory.getInstance(base);
             return uri.getScheme()+"://"+uri.getHost().toString();
         } catch (URIException ex) {
+            java.util.logging.Logger.getLogger(CSSContentAdapterImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex) {
             java.util.logging.Logger.getLogger(CSSContentAdapterImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return base;
