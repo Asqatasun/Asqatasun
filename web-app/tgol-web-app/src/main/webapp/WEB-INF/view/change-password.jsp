@@ -46,8 +46,33 @@
         <c:choose>
             <c:when test="${authenticated}">
         <c:set var="displayLogoutLink" scope="page" value="true"/>
+        <c:if test="${changeUserPasswordFromAdmin}">
+            <c:set var="adminActive" value="true"/>
+        </c:if>
         <%@include file="template/header-utils.jsp" %>
         <div class="container">
+            <c:if test="${not empty modifiableTestWeightRefs}">
+            <div id="navSecondaryLevel">
+                <ul class="pills">
+                    <li class="active">
+                        <a href="<c:url value="/account-settings.html"/>">
+                            <fmt:message key="account-settings.accountSettings"/>
+                        </a>
+                    </li>
+                    <c:forEach items="${modifiableTestWeightRefs}" var="ref">
+                    <li>
+                        <a href="<c:url value="/test-weight.html?ref=${ref}"/>">
+                            <fmt:message key="test-weight.h1">
+                                <fmt:param>
+                                    ${ref}
+                                </fmt:param>
+                            </fmt:message>
+                        </a>
+                    </li>
+                    </c:forEach>
+                </ul>
+            </div>
+            </c:if>
             </c:when>
             <c:otherwise>
         <c:set var="addLogo" scope="page" value="true"/>
@@ -77,6 +102,14 @@
                 <c:when test="${authenticated}">
             <ul class="breadcrumb">
                 <li><a href="<c:url value="/home.html"/>"><fmt:message key="home.h1"/></a> <span class="divider"></span></li>
+                <c:if test="${not empty modifiableTestWeightRefs}">
+                <li>
+                    <a href="<c:url value="/account-settings.html"/>">
+                        <fmt:message key="account-settings.accountSettings"/>
+                    </a>
+                    <span class="divider"></span>
+                </li>
+                </c:if>
                 <li><a href="<c:url value="/account-settings.html"/>"><fmt:message key="account-settings.h1"/></a> <span class="divider"></span></li>
                 <li class="active">${pageName}</li>
             </ul>

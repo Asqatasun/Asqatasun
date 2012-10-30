@@ -21,6 +21,12 @@
         <c:set var="currentUserName" scope="page">
             <sec:authentication property="principal.displayedUserName" />
         </c:set>
+        <c:if test="${accountSettingsActive == 'true'}">
+            <c:set var="accountSettingsActive" scope="page" value=" class=\"active\" "/>
+        </c:if>
+        <c:if test="${adminActive == 'true'}">
+            <c:set var="adminActive" scope="page" value=" class=\"active\" "/>
+        </c:if>
         <div class="topbar">
             <div class="fill">
                 <div class="container">
@@ -29,7 +35,7 @@
                     </a>
                     <ul class="nav secondary-nav">
                         <sec:authorize access="hasRole('ROLE_ADMIN')">
-                        <li>
+                        <li ${adminActive}>
                             <a href="<c:url value="/admin.html"/>">Admin</a>
                         </li>    
                         </sec:authorize>
@@ -37,12 +43,12 @@
                     <c:if test="${currentUserName != 'guest'}">
                     <c:choose>
                         <c:when test="${configProperties['enable-account-settings'] == 'true'}">
-                        <li>
-                            <a href="<c:url value="/account-settings.html"/>">${currentUserName}</a>
+                        <li ${accountSettingsActive}>
+                            <a href="<c:url value="/account-settings.html"/>" title="<fmt:message key="account-settings.accountSettingsLinkTitle"><fmt:param>${currentUserName}</fmt:param></fmt:message>">${currentUserName}</a>
                         </li>
                         </c:when>
                         <c:otherwise>
-                        <li>
+                        <li ${accountSettingsActive}>
                             <a href="#">${currentUserName}</a>
                         </li>
                         </c:otherwise>

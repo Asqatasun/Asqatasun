@@ -25,6 +25,7 @@
     </c:set>
     <%@include file="template/head.jsp" %>
     <body id="tgm-home">
+        <c:set var="adminActive" value="true"/>
         <%@include file="template/header-utils.jsp" %>
         <div class="container">
             <c:set var="pageName" scope="page">

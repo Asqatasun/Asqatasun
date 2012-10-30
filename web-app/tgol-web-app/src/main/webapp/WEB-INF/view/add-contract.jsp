@@ -48,6 +48,7 @@
     </c:choose>
     <%@include file="template/head.jsp" %>
     <body id="tgm-home">
+        <c:set var="adminActive" value="true"/>
         <%@include file="template/header-utils.jsp" %>
         <div class="container">
             <ul class="breadcrumb">

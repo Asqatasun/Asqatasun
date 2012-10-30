@@ -26,13 +26,51 @@
     </c:set>
     <%@include file="template/head.jsp" %>
     <body id="tgm-account-settings">
+        <c:set var="accountSettingsActive" value="true" scope="page"/>
         <%@include file="template/header-utils.jsp" %>
         <div class="container">
+            
+            <c:if test="${not empty modifiableTestWeightRefs}">
+            <div id="navSecondaryLevel">
+                <ul class="pills">
+                    <li class="active">
+                        <a href="<c:url value="/account-settings.html"/>">
+                            <fmt:message key="account-settings.accountSettings"/>
+                        </a>
+                    </li>
+                    <c:forEach items="${modifiableTestWeightRefs}" var="ref">
+                    <li>
+                        <a href="<c:url value="/test-weight.html?ref=${ref}"/>">
+                            <fmt:message key="test-weight.h1">
+                                <fmt:param>
+                                    ${ref}
+                                </fmt:param>
+                            </fmt:message>
+                        </a>
+                    </li>
+                    </c:forEach>
+                </ul>
+            </div>
+            </c:if>
+            
             <c:set var="pageName" scope="page">
                 <fmt:message key="account-settings.h1"/>
             </c:set>
             <ul class="breadcrumb">
-                <li><a href="<c:url value="/home.html"/>"><fmt:message key="home.h1"/></a> <span class="divider"></span></li>
+                <li>
+                    <a href="<c:url value="/home.html"/>">
+                        <fmt:message key="home.h1"/>
+                    </a>
+                    <span class="divider"></span>
+                </li>
+                <c:if test="${not empty modifiableTestWeightRefs}">
+                <li>
+                    <a href="<c:url value="/account-settings.html"/>">
+                        <fmt:message key="account-settings.accountSettings"/>
+                    </a>
+                    <span class="divider"></span>
+                </li>
+                </c:if>
                 <li class="active">${pageName}</li>
             </ul>
             <div class="row">

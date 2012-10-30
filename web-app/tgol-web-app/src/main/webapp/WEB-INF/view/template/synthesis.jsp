@@ -84,7 +84,7 @@
                         <c:set var="scoreClass" scope="page" value="audit-score"/>
                         <c:set var="weightedScoreClass" scope="page" value="audit-weighted-score"/>
                         <c:set var="displayWeightedMark" scope="page" value="false"/>
-                        <c:set var="hasScoreFormulaLink" scope="page" value="true"/>
+                        <c:set var="hasScoreFormulaLink" scope="page" value="false"/>
                         <%@include file="../template/score.jsp" %>
                         <c:if test="${hasPagesListLink == 'true'}">
                         <ul id="synthesis-action-list">
