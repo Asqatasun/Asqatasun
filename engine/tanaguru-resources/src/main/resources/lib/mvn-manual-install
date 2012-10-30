@@ -1,3 +1,5 @@
+#!/bin/sh
+
 mvn install:install-file -DgroupId=org.htmlcleaner -DartifactId=htmlcleaner -Dversion=2.2 -Dpackaging=jar -Dfile=htmlcleaner-2.2.jar
 mvn install:install-file -DgroupId=org.archive -DartifactId=heritrix -Dversion=3.0.0 -Dpackaging=pom -Dfile=heritrix-3.0.0.pom
 mvn install:install-file -DgroupId=org.archive.heritrix -DartifactId=heritrix-commons -Dversion=3.0.0 -Dpackaging=pom -Dfile=heritrix-commons-3.0.0.pom
@@ -12,4 +14,4 @@ mvn install:install-file -DgroupId=org.archive.overlays -DartifactId=archive-ove
 mvn install:install-file -DgroupId=org.archive.overlays -DartifactId=archive-overlay-commons-pool -Dversion=1.3 -Dpackaging=jar -Dfile=archive-overlay-commons-pool-1.3.jar
 mvn install:install-file -DgroupId=edu.umass.cs.benchlab.har -DartifactId=harlib-jackson -Dversion=1.0b10 -Dpackaging=jar -Dfile=harlib-jackson-1.0b10.jar
 mvn install:install-file -DgroupId=edu.umass.cs.benchlab.har -DartifactId=harlib -Dversion=1.0b10 -Dpackaging=jar -Dfile=harlib-1.0b10.jar
-mvn install:install-file -DgroupId=org.seleniumhq.selenium -DartifactId=selenium-remote-driver -Dversion=2.22.0-OPENS -Dpackaging=jar -Dfile=selenium-remote-driver-2.22.0-OPEN-S
+mvn install:install-file -DgroupId=org.seleniumhq.selenium -DartifactId=selenium-remote-driver -Dversion=2.22.0-OPENS -Dpackaging=jar -Dfile=selenium-remote-driver-2.22.0-OPEN-S.jar
