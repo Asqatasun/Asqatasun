@@ -221,6 +221,17 @@
         </property>
     </bean>
 
+    <bean id="auditLauncherController" class="org.opens.tgol.controller.AuditLauncherController">
+        <property name="userOptionDependingOnReferential">
+            <list>
+                <value>TEST_WEIGHT_MANAGEMENT</value>
+            </list>
+        </property>
+        <property name="userOption">
+            <list></list>
+        </property>
+    </bean>
+    
     <bean id="signUpController" class="org.opens.tgol.controller.SignUpController">
         <property name="createUserFormValidator">
             <ref bean="createUserFormValidator"/>
@@ -235,6 +246,9 @@
             <list>
                 <value>guest</value>
             </list>
+        </property>
+        <property name="changeTestWeightFormValidator">
+            <ref bean="changeTestWeightFormValidator"/>
         </property>
     </bean>
     

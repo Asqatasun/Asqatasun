@@ -17,6 +17,8 @@
     <bean id="auditSetUpCommandFactory" class="org.opens.tgol.command.factory.AuditSetUpCommandFactory" factory-method="getInstance"/>
     
     <bean id="auditResultSortCommandFactory" class="org.opens.tgol.command.factory.AuditResultSortCommandFactory" factory-method="getInstance"/>
+    
+    <bean id="changeTestWeightCommandFactory" class="org.opens.tgol.command.factory.ChangeTestWeightCommandFactory" factory-method="getInstance"/>
 
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="targetObject">
@@ -119,6 +121,42 @@
         </property>
         <property name="arguments">
             <ref bean="optionElementDataService"/>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="changeTestWeightCommandFactory"/>
+        </property>
+        <property name="targetMethod">
+            <value>setOptionElementDataService</value>
+        </property>
+        <property name="arguments">
+            <ref bean="optionElementDataService"/>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="changeTestWeightCommandFactory"/>
+        </property>
+        <property name="targetMethod">
+            <value>setOptionDataService</value>
+        </property>
+        <property name="arguments">
+            <ref bean="optionDataService"/>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="changeTestWeightCommandFactory"/>
+        </property>
+        <property name="targetMethod">
+            <value>setUserDataService</value>
+        </property>
+        <property name="arguments">
+            <ref bean="userDataService"/>
         </property>
     </bean>
 

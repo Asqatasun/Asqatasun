@@ -61,6 +61,7 @@
                 <value>source-code-page-I18N</value>
                 <value>synthesis-site-page-I18N</value>
                 <value>theme-I18N</value>
+                <value>test-weight-I18N</value>
 	    </list>
 	</property>
     </bean>

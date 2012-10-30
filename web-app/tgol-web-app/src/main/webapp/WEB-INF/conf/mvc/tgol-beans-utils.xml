@@ -128,4 +128,15 @@
         </property>
     </bean>
     
+    <bean id="secondaryLevelMenuDisplayer" class="org.opens.tgol.presentation.menu.SecondaryLevelMenuDisplayer">
+        <property name="contractDataService">
+            <ref bean="contractDataService"/>
+        </property>
+        <property name="referentialWithModifiableTestWeight">
+            <list>
+                <value>Seo</value>
+            </list>
+        </property>
+    </bean>    
+    
 </beans>

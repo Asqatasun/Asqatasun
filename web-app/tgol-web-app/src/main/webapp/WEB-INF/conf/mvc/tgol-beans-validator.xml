@@ -41,5 +41,6 @@
     </bean>-->
     <bean id="forgottenPasswordFormValidator" class="org.opens.tgol.validator.ForgottenPasswordFormValidator"/>
     <bean id="changePasswordFormValidator" class="org.opens.tgol.validator.ChangePasswordFormValidator"/>
+    <bean id="changeTestWeightFormValidator" class="org.opens.tgol.validator.ChangeTestWeightFormValidator"/>
 
 </beans>
