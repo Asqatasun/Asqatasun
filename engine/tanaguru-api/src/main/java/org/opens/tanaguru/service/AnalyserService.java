@@ -21,13 +21,12 @@
  */
 package org.opens.tanaguru.service;
 
-import java.util.Collection;
 import java.util.List;
 import javax.xml.bind.annotation.XmlTransient;
 import org.opens.tanaguru.analyser.Analyser;
 import org.opens.tanaguru.analyser.AnalyserFactory;
+import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.subject.WebResource;
 
 /**
@@ -48,9 +47,9 @@ public interface AnalyserService {
     /**
      * 
      * @param webResource
-     * @param paramSet
+     * @param audit
      */
-    void analyse(WebResource webResource, Collection<Parameter> paramSet);
+    void analyse(WebResource webResource, Audit audit);
 
     /**
      * 
