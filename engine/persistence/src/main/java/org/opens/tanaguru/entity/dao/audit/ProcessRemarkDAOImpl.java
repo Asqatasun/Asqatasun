@@ -51,7 +51,7 @@ public class ProcessRemarkDAOImpl extends AbstractJPADAO<ProcessRemark, Long>
             ProcessResult processResult) {
         Query query = entityManager.createQuery("SELECT r FROM "
                 + getEntityClass().getName() + " r"
-                + " left join fetch r.elementList e"
+                + " left join fetch r.elementSet e"
                 + " WHERE r.processResult = :processResult");
         query.setParameter("processResult", processResult);
         Set setItems = new LinkedHashSet(query.getResultList());
