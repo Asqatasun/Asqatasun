@@ -55,12 +55,8 @@ public class ParameterDataServiceImpl extends AbstractGenericDataService<Paramet
 
     @Override
     public Set<Parameter> getParameterSet(ParameterFamily parameterFamily, Audit audit) {
-        if (audit.getParameterSet() != null) {
-            return ((ParameterDAO) entityDao).findParametersFromParameterFamily(parameterFamily, audit.getParameterSet());
-        } else {
-            return ((ParameterDAO) entityDao).findParameterSet(parameterFamily, audit);
-        }
-    }
+        return ((ParameterDAO) entityDao).findParameterSet(parameterFamily, audit);
+     }
 
     @Override
     public Set<Parameter> getDefaultParameterSet() {

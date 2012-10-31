@@ -107,4 +107,31 @@ public class ParameterFamilyImpl implements ParameterFamily, Serializable{
         this.shortLabel = shortLabel;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 23 * hash + (this.paramFamilyCode != null ? this.paramFamilyCode.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ParameterFamilyImpl other = (ParameterFamilyImpl) obj;
+        if (this.id == null || !this.id.equals(other.id)) {
+            return false;
+        }
+        if ((this.paramFamilyCode == null) ? (other.paramFamilyCode != null) : !this.paramFamilyCode.equals(other.paramFamilyCode)) {
+            return false;
+        }
+        return true;
+    }
+
+    
 }
