@@ -542,8 +542,6 @@ public abstract class AuditCommandImpl implements AuditCommand {
             beginProcessDate = Calendar.getInstance().getTime();
         }
         if (audit.getSubject() instanceof Page) {
-            Logger.getLogger(this.getClass()).info(processResultDataService.
-                    getGrossResultFromAudit(audit).getClass());
             consolidate(processResultDataService.
                     getGrossResultFromAudit(audit), audit.getTestList());
             if (LOGGER.isDebugEnabled()) {
