@@ -146,6 +146,21 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         this.emailSentToUserExclusionList.addAll(Arrays.asList(emailSentToUserExclusionRawList.split(";")));
     }
     
+//    public TanaguruOrchestratorImpl(BlockingQueue workQueue) {
+//        threadPoolTaskExecutor = new ThreadPoolExecutor(
+//            10, 100, 300L, TimeUnit.SECONDS, workQueue);
+//    }
+//
+//    public TanaguruOrchestratorImpl(int corePoolSize, 
+//                int maximumPoolSize, 
+//                long keepAliveTime, 
+//                BlockingQueue workQueue) {
+//        threadPoolTaskExecutor = new ThreadPoolExecutor(
+//        corePoolSize, maximumPoolSize, 
+//        keepAliveTime, TimeUnit.SECONDS, workQueue);
+//    }
+
+    
     @Autowired
     public TanaguruOrchestratorImpl(
             AuditService auditService,
@@ -604,7 +619,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         }
 
         protected Audit waitForAuditToComplete(Audit audit) {
-            LOGGER.debug("WAIT FOR AUDIT TO COMPLETE:" + audit + "," + (long) (audit.getDateOfCreation().getTime() / 1000));
+            LOGGER.debug("WAIT FOR AUDIT TO COMPLETE:" + audit + "," + audit.getSubject().getURL() + "," +(long) (audit.getDateOfCreation().getTime() / 1000));
             Long token = new Date().getTime();
             this.getAuditExecutionList().put(audit, token);
             // while the audit is not seen as completed or crashed
@@ -823,7 +838,6 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
                         this.pageUrl,
                         this.getParameterSet());
             }
-            Logger.getLogger(this.getClass()).info(audit.getId());
             return audit;
         }
         
