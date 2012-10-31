@@ -115,6 +115,11 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
     @Override
     public void setUp() throws Exception {
     }
+    
+    @Override
+    public void tearDown() throws Exception {
+        driver.close();
+    }
 
     /**
      *
@@ -161,7 +166,7 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
      * @return
      */
     protected String launchTanaguru(String siteName, String[] url) {
-        System.out.println("launchTanaguru()   " + formUrl);
+        System.out.println("testing   " + siteName);
         login();
         driver.get(formUrl);
         for (int i=0 ; i<url.length ; i++) {
