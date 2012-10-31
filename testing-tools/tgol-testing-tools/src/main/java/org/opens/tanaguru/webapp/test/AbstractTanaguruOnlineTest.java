@@ -166,10 +166,10 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
      * @return
      */
     protected String launchTanaguru(String siteName, String[] url) {
-        System.out.println("testing   " + siteName);
         login();
         driver.get(formUrl);
         for (int i=0 ; i<url.length ; i++) {
+            System.out.println("testing   " + url[i]);
             driver.findElementById(fieldName+i).sendKeys(url[i]);
         }
         driver.findElementById(SUBMIT_BUTTON_NAME).submit();
