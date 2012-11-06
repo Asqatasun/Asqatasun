@@ -1,4 +1,3 @@
-USE $tgDatabase;
 
 INSERT IGNORE INTO `TGSI_SCOPE` (`Id_Scope`, `Code`, `Label`) VALUES
 (6, 'SCENARIO', 'Scenario');
