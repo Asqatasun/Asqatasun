@@ -20,7 +20,7 @@
         <c:set var="lang" value="${pageContext.response.locale}"/>
     </c:otherwise>
 </c:choose>
-<c:if test="${user == null && userName == null && not empty userList}">
+<c:if test="${userName == null && not empty userList}">
     <c:set var="multipleUser" value="true"/>
 </c:if>
 <html lang="${lang}">
