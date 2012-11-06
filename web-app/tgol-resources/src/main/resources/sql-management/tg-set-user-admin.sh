@@ -16,10 +16,10 @@ done
 
 if [ -z "$Email" ] ; then
 	echo "Usage $0 -e <Email> "
-        echo "Set given user admin"
+        echo "Set given user administrator privileges"
 	exit 0
 fi
 
 mysql -u $DbUser -p$DbUserPasswd $DbName -e "
-UPDATE TGSI_USER SET ROLE_Id_Role=3 WHERE Email1 like $Email;
+UPDATE TGSI_USER SET ROLE_Id_Role=3 WHERE Email1 like \"$Email\";
 "
