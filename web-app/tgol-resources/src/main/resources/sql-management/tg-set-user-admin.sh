@@ -7,15 +7,15 @@ DbUser=
 DbUserPasswd=
 DbName=
 
-while getopts ":e:" opt; do
+while getopts ":u:" opt; do
   case $opt in
-    e) Email="$OPTARG" ;;
+    u) Email="$OPTARG" ;;
     ?) echo "Unkown option $OPTARG" ;;
   esac
 done
 
 if [ -z "$Email" ] ; then
-	echo "Usage $0 -e <Email> "
+	echo "Usage $0 -u <Email> "
         echo "Set given user administrator privileges"
 	exit 0
 fi
