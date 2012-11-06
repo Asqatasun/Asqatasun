@@ -105,7 +105,7 @@ ALTER TABLE `TGSI_USER` CHANGE `Name` `Name` VARCHAR( 255 ) CHARACTER SET utf8 C
 ALTER TABLE `TGSI_USER` CHANGE `First_Name` `First_Name` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '';
 
 INSERT IGNORE INTO `TGSI_OPTION_FAMILY` (`Id_Option_Family`, `Code`, `Label`) VALUES
-(5, 'TEST_WEIGHT_MANAGEMENT', '');
+(5, 'Seo_TEST_WEIGHT_MANAGEMENT', '');
 
 INSERT IGNORE INTO `TGSI_OPTION` (`Id_Option`, `Code`, `Description`, `Is_Restriction`, OPTION_FAMILY_Id_Option_Family) VALUES
 (11, 'Seo-01011', 'Weight of rule Seo-01011 overriden by user', b'0', 5),
