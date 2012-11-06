@@ -18,7 +18,7 @@
         <property name="persistenceXmlLocation" value="${persistenceXmlLocation}"/>
         <property name="jpaProperties">
             <props>
-                <prop key="hibernate.dialect">org.opens.tanaguru.dialect.TanagururMySQL5InnoDBDialect</prop>
+                <prop key="hibernate.dialect">org.opens.tanaguru.dialect.TanaguruMySQL5InnoDBDialect</prop>
                 <prop key="hibernate.show_sql">${jpa.showSql}</prop>
                 <prop key="hibernate.cache.use_second_level_cache">true</prop>
                 <prop key="hibernate.cache.use_structured_entries">true</prop>
