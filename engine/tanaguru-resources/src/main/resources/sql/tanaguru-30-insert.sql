@@ -4,7 +4,7 @@ INSERT IGNORE INTO `PARAMETER_FAMILY` (`Id_Parameter_Family`, `Cd_Parameter_Fami
 (1, 'CRAWL', 'This parameter family handles all the parameters needed by the crawler component', 'crawl parameters', 'crawl params'),
 (2, 'GENERAL', 'This parameter family handles all the general parameters of the audit', 'general parameters', 'gen params'),
 (3, 'RULES', 'This parameter family handles all the parameters needed by the rules', 'rules parameters', 'rules params'),
-(4, 'TEST_WEIGHT', 'This paramaters handles the test weight potentially overridden by users', 'test weight parameters', 'test weight params');
+(4, 'Seo_TEST_WEIGHT_MANAGEMENT', 'This paramaters handles the test weight potentially overridden by users', 'test weight parameters', 'test weight params');
 
 INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_Element`, `Id_Parameter_Family`, `Long_Label`, `Short_Label`) VALUES
 (1, 'MAX_DOCUMENTS', 1, 'Maximum number of downloaded pages', 'max pages'),

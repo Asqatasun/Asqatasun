@@ -1,4 +1,3 @@
-use $myDatabaseName;
 
 ALTER TABLE TEST ADD Weight numeric(2,1) UNSIGNED NOT NULL DEFAULT '1.0' AFTER RANK;
 ALTER TABLE WEB_RESOURCE_STATISTICS ADD `Weighted_Passed` numeric(7,1) UNSIGNED DEFAULT NULL AFTER Nb_Na;
@@ -10,7 +9,7 @@ DROP PROCEDURE IF EXISTS add_result_weight_to_webresource_statistics;
 
 delimiter |
 
-CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `add_result_weigth_to_webresource_statistics`()
+CREATE PROCEDURE `add_result_weight_to_webresource_statistics`()
 BLOCK1: BEGIN
 
     DECLARE done INT DEFAULT 0;
@@ -50,12 +49,12 @@ END BLOCK1 |
 delimiter ;
 
 call add_result_weight_to_webresource_statistics();
-DROP PROCEDURE IF EXISTS `add_result_weigth_to_webresource_statistics`;
+DROP PROCEDURE IF EXISTS `add_result_weight_to_webresource_statistics`;
 
 -- Add new Parameter elements
 
 INSERT IGNORE INTO `PARAMETER_FAMILY` (`Id_Parameter_Family`, `Cd_Parameter_Family`, `Description`, `Long_Label`, `Short_Label`) VALUES
-(4, 'TEST_WEIGHT', 'This paramaters handles the test weight potentially overridden by users', 'test weight parameters', 'test weight params');
+(4, 'Seo_TEST_WEIGHT_MANAGEMENT', 'This paramaters handles the test weight potentially overridden by users', 'test weight parameters', 'test weight params');
 
 INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_Element`, `Id_Parameter_Family`, `Long_Label`, `Short_Label`) VALUES
 (10, 'Seo-01011', 4, 'Weight of rule Seo-01011 overriden by user', 'Seo-01011 weight'),
