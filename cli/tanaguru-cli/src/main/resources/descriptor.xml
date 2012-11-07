@@ -68,10 +68,17 @@
                 <include>tanaguru-10-create-user-and-base.sql</include>
                 <include>tanaguru-20-create-tables.sql</include>
                 <include>tanaguru-30-insert.sql</include>
-                <include>tanaguru-delete-all-audit.sql</include>
             </includes>
             <fileMode>755</fileMode>
-            <outputDirectory>/install</outputDirectory>
+            <outputDirectory>/install/sql</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/../../engine/tanaguru-resources/src/main/resources/sql-update</directory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+            <fileMode>755</fileMode>
+            <outputDirectory>/install/sql-update</outputDirectory>
         </fileSet>
         <fileSet>
             <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/sql</directory>
@@ -81,6 +88,14 @@
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install-web-app/sql</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/sql-update</directory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+            <fileMode>755</fileMode>
+            <outputDirectory>/install-web-app/sql-update</outputDirectory>
         </fileSet>
         <fileSet>
             <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/installation</directory>
@@ -112,8 +127,8 @@
         <fileSet>
             <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/sql-management</directory>
             <includes>
-                <include>create-contract-procedure.sql</include>
-		<include>add-remove-functionality-to-contract-procedure.sql</include>
+                <include>tg-set-user-admin.sh</include>
+<!--		<include>add-remove-functionality-to-contract-procedure.sql</include>
 	        <include>delete-audit-procedure.sql</include>
                 <include>delete-contract-procedure.sql</include>
                 <include>tg-create-user.sh</include>
@@ -135,7 +150,7 @@
           	<include>tg-remove-funct-from-user-email.sh</include>
           	<include>tg-remove-ref-from-contract-id.sh</include>
           	<include>tg-remove-ref-from-contract-label.sh</include>
-          	<include>tg-remove-ref-from-user-email.sh</include>
+          	<include>tg-remove-ref-from-user-email.sh</include>-->
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install-web-app/sql-management</outputDirectory>

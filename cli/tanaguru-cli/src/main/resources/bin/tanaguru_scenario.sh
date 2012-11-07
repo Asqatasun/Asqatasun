@@ -47,8 +47,8 @@ export JAVA_HOME
 # so the maximum heap size is set to 128M.
 # Set java.awt.headless=true if you work without X11 display
 ##################
-JAVA_OPTS="-Dlog4j.configuration=$TANAGURU_PATH/logs/log4j.properties -Djava.util.logging.config.file=$TANAGURU_PATH/logs/logging.properties -Xms64M  -Xmx128M -classpath $CLASSPATH  org.opens.tanaguru.cli.Tanaguru"
-LAUNCH_TANAGURU="$JAVA_HOME/bin/java $JAVA_OPTS "
+JAVA_OPTS="-Dlog4j.configuration=$TANAGURU_PATH/logs/log4j.properties -Djava.util.logging.config.file=$TANAGURU_PATH/logs/logging.properties -Xms64M  -Xmx128M -classpath $CLASSPATH  "
+JAVA_BIN="$JAVA_HOME/bin/java "
 
 ##################
 # usage function
@@ -64,6 +64,7 @@ OPTIONS:
    -h      Show this message
    -O      Path of the output result file
    -l      Audit Level (Default Silver, can be set to Or(Gold Level), Ar(Silver Level) or Bz (Bronze Level)
+   -f      Path to the firefox bin
 
 ARGUMENTS:
    SCENARIO_FILE_PATH : The path of the file that handles the scenario
@@ -83,7 +84,7 @@ GOLD_LEVEL=Or
 SILVER_LEVEL=Ar
 BRONZE_LEVEL=Bz
 
-while getopts "O:l:h" OPTION
+while getopts "O:l:h:f:" OPTION
 do
     case $OPTION in
         h)
@@ -96,6 +97,9 @@ do
         l)
           AUDIT_LEVEL=$OPTARG
           ;;
+        f)
+          FIREFOX_LOCATION=$OPTARG
+          ;;
         *)
           usage
           exit 1
@@ -106,6 +110,13 @@ done
 if [ ! -z $RESULT_PATH_DIR ] && [ ! -d $RESULT_PATH_DIR  ]; then
     echo ""
     echo "The output directory does not exist. Please create it before launching"
+    usage
+    exit 1
+fi
+
+if [ ! -z $FIREFOX_LOCATION ] && [ ! -f $FIREFOX_LOCATION ]; then
+    echo ""
+    echo "The firefox location does not exist. Please specify a correct path"
     usage
     exit 1
 fi
@@ -126,7 +137,7 @@ fi
 if [ $# -lt 1 ] ; then
     usage
     exit 1
-elif [ $# -gt 12 ] ; then
+elif [ $# -gt 4 ] ; then
     usage
     exit 1
 else
@@ -146,6 +157,9 @@ AUDIT_LEVEL=Ar
 ##################
 # LAUNCH_TANAGURU
 ##################
+if [ -z $FIREFOX_LOCATION ]; then
+    JAVA_OPTS="$JAVA_OPTS -Dwebdriver.firefox.bin=$FIREFOX_LOCATION"
+fi
 if [ ! -z $RESULT_PATH_DIR ] ; then
     DATE_SUFFIX=`date '+%Y%m%d-%Hh%Mm%S'`
     file=${3#http://}
@@ -154,10 +168,10 @@ if [ ! -z $RESULT_PATH_DIR ] ; then
     file=${file#file:///}
     file=${file%%/*}
 
-    $LAUNCH_TANAGURU scenario $SCENARIO_FILE_PATH $TANAGURU_PATH $AUDIT_LEVEL > $RESULT_PATH_DIR/$file-$DATE_SUFFIX.txt
+    $JAVA_BIN $JAVA_OPTS org.opens.tanaguru.cli.Tanaguru scenario $SCENARIO_FILE_PATH $TANAGURU_PATH $AUDIT_LEVEL > $RESULT_PATH_DIR/$file-$DATE_SUFFIX.txt
     echo "see @ $RESULT_PATH_DIR/$file-$DATE_SUFFIX.txt for results"
     exit 0
 else
-    $LAUNCH_TANAGURU scenario $SCENARIO_FILE_PATH $TANAGURU_PATH $AUDIT_LEVEL
+    $JAVA_BIN $JAVA_OPTS org.opens.tanaguru.cli.Tanaguru scenario $SCENARIO_FILE_PATH $TANAGURU_PATH $AUDIT_LEVEL
     exit 0
 fi
