@@ -619,7 +619,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         }
 
         protected Audit waitForAuditToComplete(Audit audit) {
-            LOGGER.debug("WAIT FOR AUDIT TO COMPLETE:" + audit + "," + audit.getSubject().getURL() + "," +(long) (audit.getDateOfCreation().getTime() / 1000));
+            LOGGER.debug("WAIT FOR AUDIT TO COMPLETE:" + audit + "," +(long) (audit.getDateOfCreation().getTime() / 1000));
             Long token = new Date().getTime();
             this.getAuditExecutionList().put(audit, token);
             // while the audit is not seen as completed or crashed
