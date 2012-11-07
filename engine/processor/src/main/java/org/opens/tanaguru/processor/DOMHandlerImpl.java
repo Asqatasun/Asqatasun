@@ -99,6 +99,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     public DOMHandler beginSelection() {
         initialize();
+        messageCode = null;
         selectedElementList = new ArrayList<Node>();
         processRemarkService.initializeService(document, ssp.getDOM());
         return this;
@@ -643,7 +644,6 @@ public class DOMHandlerImpl implements DOMHandler {
         if (initialized) {
             return;
         }
-        messageCode = null;
         XPathFactory xPathfactory = XPathFactory.newInstance();
         xpath = xPathfactory.newXPath();
 
