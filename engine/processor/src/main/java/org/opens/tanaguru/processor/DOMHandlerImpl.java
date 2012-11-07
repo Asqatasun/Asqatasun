@@ -99,6 +99,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     public DOMHandler beginSelection() {
         initialize();
+	messageCode=null;
         selectedElementList = new ArrayList<Node>();
         processRemarkService.initializeService(document, ssp.getDOM());
         return this;
