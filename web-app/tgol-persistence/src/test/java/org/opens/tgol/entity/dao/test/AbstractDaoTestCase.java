@@ -65,7 +65,7 @@ public abstract class AbstractDaoTestCase extends DBTestCase {
 
 
     private static final String SPRING_FILE_PATH =
-            "../tgol-persistence/src/test/resources/conf/context/application-context.xml";
+            "src/test/resources/conf/context/application-context.xml";
 
     private String inputDataFileName = "";
     public String getInputDataFileName() {
