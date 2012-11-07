@@ -34,7 +34,7 @@
                 <c:set var="currentModifiedUserEmail" scope="page" value="${createUserCommand.email}"/>
                 <c:set var="inhibActivateAndAdmin" scope="page" value="false"/>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
-                    <c:if test="${createUserCommand.email eq (fn:replace(fn:replace(authenticatedUserEmail, '&#46;', '.'), '&#64;', '@'))}">
+                    <c:if test="${createUserCommand.email eq (fn:replace(fn:replace(fn:replace(fn:replace(authenticatedUserEmail, '&#46;', '.'), '&#45;','-'),'&#95;','_'),'&#64;', '@'))}">
                         <c:set var="inhibActivateAndAdmin" scope="page" value="true"/>
                     </c:if>
                 </sec:authorize>
