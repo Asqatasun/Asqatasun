@@ -19,7 +19,7 @@
                             <c:when test="${url != '' && scope != 'GROUPOFFILES' && scope != 'FILE' && scope != 'SCENARIO' && 
                                             not empty configProperties['snapshotServiceUrl'] && 
                                             not empty configProperties['snapshotServiceUserId']}">
-                        <img src="${configProperties['snapshotServiceUrl']}?userId=${configProperties['snapshotServiceUserId']}&amp;q=90&amp;w=${width}&amp;h=${height}&amp;sdx=1024&amp;url=${url}" alt="" /><br/>
+                        <img src="${pageContext.request.scheme}://${configProperties['snapshotServiceUrl']}?userId=${configProperties['snapshotServiceUserId']}&amp;q=90&amp;w=${width}&amp;h=${height}&amp;sdx=1024&amp;url=${url}" alt="" /><br/>
                             </c:when>
                             <c:otherwise>
                                 <c:choose>
