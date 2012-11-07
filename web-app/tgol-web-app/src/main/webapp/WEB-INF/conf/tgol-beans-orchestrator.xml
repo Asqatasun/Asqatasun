@@ -24,10 +24,10 @@
     </bean>
 
     <bean class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor"
-        p:corePoolSize="5"
+        p:corePoolSize="50"
         p:daemon="false"
         p:waitForTasksToCompleteOnShutdown="false"
-        p:maxPoolSize="10"
+        p:maxPoolSize="100"
         p:allowCoreThreadTimeOut="false" />
 
 </beans>
