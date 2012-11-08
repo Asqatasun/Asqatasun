@@ -370,7 +370,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
             long length = 0;
             int nbOfResources = 0;
             for (Content content : contentList) {
-                if (((SSP) content).getSource() != null) {
+                if (((SSP) content).getDOM() != null) {
                     length += ((SSP) content).getDOM().length();
                     if (getContentWithRelatedContent) {
                         nbOfResources += ((SSP) content).getRelatedContentSet().size();
