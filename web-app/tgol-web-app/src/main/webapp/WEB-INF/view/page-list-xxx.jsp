@@ -123,7 +123,9 @@
                     <form id="display-options-form" method="get" enctype="application/x-www-form-urlencoded" class="option-console">
                         <input type="hidden" name="wr" value="${param.wr}"/>
                         <input type="hidden" name="status" value="${param.status}"/>
+                        <c:if test="${param.test != null}">
                         <input type="hidden" name="test" value="${param.test}"/>
+                        </c:if>
                         <fieldset>
                             <legend><fmt:message key="pageList.displayOptions"/></legend>
                             <div id="display-options-page-size" class="clearfix">
