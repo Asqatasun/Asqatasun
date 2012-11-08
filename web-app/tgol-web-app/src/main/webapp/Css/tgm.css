@@ -866,6 +866,8 @@ input[type="text"]:focus{
 #top5-failed-url-by-test .col01,
 #top5-failed-url-by-occurrence .col01 {
     text-align: left;
+    max-width: 550px;
+    word-wrap: break-word;
 }
 #top5-failed-url-by-test .col02,
 #top5-failed-url-by-occurrence .col02{
