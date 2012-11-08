@@ -233,7 +233,9 @@ public abstract class AuditCommandImpl implements AuditCommand {
                     .append(WAS_REQUIRED_LOGGER_STR).toString());
             return;
         }
-
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Adapting " + audit.getSubject().getURL());
+        }
         // debug tools
         Date beginProcessDate = null;
         Date endRetrieveDate = null;
@@ -251,15 +253,15 @@ public abstract class AuditCommandImpl implements AuditCommand {
             adaptationListener.adaptationStarted(audit);
         }
         while (i.compareTo(nbOfContent) < 0) {
-            LOGGER.info(
+            if (LOGGER.isDebugEnabled()) {
+                beginProcessDate = Calendar.getInstance().getTime();
+                LOGGER.debug(
                         new StringBuilder("Adapting ssp from  ")
                             .append(i)
                             .append(TO_LOGGER_STR)
                             .append(i + adaptationTreatmentWindow)
                             .append(" for ")
                             .append(audit.getSubject().getURL()).toString());
-            if (LOGGER.isDebugEnabled()) {
-                beginProcessDate = Calendar.getInstance().getTime();
             }
             List<Content> contentList = retrieveContentList(
                                             webResourceId, 
@@ -444,7 +446,9 @@ public abstract class AuditCommandImpl implements AuditCommand {
                     .append(WAS_REQUIRED_LOGGER_STR).toString());
             return;
         }
-
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Processing " + audit.getSubject().getURL());
+        }
         // debug tools
         Date beginProcessDate = null;
         Date endProcessDate = null;
@@ -458,8 +462,8 @@ public abstract class AuditCommandImpl implements AuditCommand {
         Set<ProcessResult> processResultSet = new HashSet<ProcessResult>();
         
         while (i.compareTo(nbOfContent) < 0) {
-            if (LOGGER.isInfoEnabled()) {
-                LOGGER.info(
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug(
                         new StringBuilder("Processing from ")
                             .append(i)
                             .append(TO_LOGGER_STR)
@@ -543,8 +547,10 @@ public abstract class AuditCommandImpl implements AuditCommand {
         Date endProcessDate = null;
         Date endPersistDate;
 
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Consolidating " + audit.getSubject().getURL());
+        }
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Consolidation");
             beginProcessDate = Calendar.getInstance().getTime();
         }
         if (audit.getSubject() instanceof Page) {
@@ -670,6 +676,9 @@ public abstract class AuditCommandImpl implements AuditCommand {
                     .append(AuditStatus.ANALYSIS)
                     .append(WAS_REQUIRED_LOGGER_STR).toString());
             return ;
+        }
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Analysing " + audit.getSubject().getURL());
         }
         // debug tools
         Date beginProcessDate = null;
