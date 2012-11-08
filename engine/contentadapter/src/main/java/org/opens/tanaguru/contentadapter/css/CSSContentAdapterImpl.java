@@ -597,7 +597,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
                 stylesheetContent.setAdaptedContent(new XStream().toXML(parser.getResult()));
             } else {
                 stylesheetContent.setAdaptedContent(CSS_ON_ERROR);
-                Logger.getLogger(this.getClass()).info("An error occured while adapting " + stylesheetContent.getURI());
+                Logger.getLogger(this.getClass()).warn("An error occured while adapting " + stylesheetContent.getURI());
             }
         }
     }
@@ -618,7 +618,6 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         }
         StringBuilder strb = new StringBuilder();
         if (path.startsWith("/")) {
-            Logger.getLogger(this.getClass()).info("buildPath  " + path);
             base = setBaseAsRootOfSite(base);
         }
         strb.append(base);
