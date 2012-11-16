@@ -67,16 +67,16 @@ public class WebResourceStatisticsImpl
     @Column(name="Nb_Na")
     private int nbOfNa=0;
     
-    @Column(name="Weighted_Passed", precision=7, scale=1)
+    @Column(name="Weighted_Passed", precision=10, scale=1)
     private BigDecimal weightedPassed = BigDecimal.ZERO;
 
-    @Column(name="Weighted_Failed", precision=7, scale=1)
+    @Column(name="Weighted_Failed", precision=10, scale=1)
     private BigDecimal weightedFailed = BigDecimal.ZERO;
 
-    @Column(name="Weighted_Nmi", precision=7, scale=1)
+    @Column(name="Weighted_Nmi", precision=10, scale=1)
     private BigDecimal weightedNmi = BigDecimal.ZERO;
 
-    @Column(name="Weighted_Na", precision=7, scale=1)
+    @Column(name="Weighted_Na", precision=10, scale=1)
     private BigDecimal weightedNa = BigDecimal.ZERO;
 
     @Column(name="Nb_Invalid_Test")
