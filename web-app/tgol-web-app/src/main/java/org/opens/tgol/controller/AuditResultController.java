@@ -331,7 +331,6 @@ public class AuditResultController extends AuditDataHandlerController {
         }
 
         if (hasSSP) {
-            model.addAttribute(TgolKeyStore.SOURCE_CODE_KEY,highlightSourceCode(ssp));
             AuditResultSortCommand asuc = ((AuditResultSortCommand)model.asMap().get(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY));
             model.addAttribute(TgolKeyStore.TEST_RESULT_LIST_KEY,
                 TestResultFactory.getInstance().getTestResultSortedByThemeMap(
