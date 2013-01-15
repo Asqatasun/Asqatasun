@@ -88,6 +88,7 @@ public class SiteImpl extends WebResourceImpl implements Site, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.subject.PageImpl.class)})
     @Override
     public Collection<WebResource> getComponentList() {
+        // Bug #540 correction
         return (Collection) componentList;
     }
 
