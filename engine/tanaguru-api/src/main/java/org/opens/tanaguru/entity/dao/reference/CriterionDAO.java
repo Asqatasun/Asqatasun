@@ -23,9 +23,10 @@ package org.opens.tanaguru.entity.dao.reference;
 
 import java.util.Collection;
 import org.opens.tanaguru.entity.reference.Criterion;
-import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
+import org.opens.tanaguru.entity.reference.Level;
 import org.opens.tanaguru.entity.reference.Reference;
 import org.opens.tanaguru.entity.reference.Theme;
+import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 
 /**
  * 
@@ -43,4 +44,12 @@ public interface CriterionDAO extends GenericDAO<Criterion, Long> {
     Collection<Criterion> retrieveAll(String code, Reference reference,
             Theme theme);
 
+    /**
+     * 
+     * @param criterion
+     * @return 
+     *      the level of the criterion
+     */
+    Level findCriterionLevel(Criterion criterion);
+    
 }

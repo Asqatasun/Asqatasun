@@ -21,9 +21,9 @@
  */
 package org.opens.tanaguru.entity.reference;
 
+import java.util.Collection;
 import org.opens.tanaguru.sdk.entity.Entity;
 import org.opens.tanaguru.sdk.entity.Reorderable;
-import java.util.List;
 
 /**
  * 
@@ -72,7 +72,7 @@ public interface Criterion extends Entity, Reorderable {
      *
      * @return the tests
      */
-    List<Test> getTestList();
+    Collection<Test> getTestList();
 
     /**
      *
@@ -113,7 +113,7 @@ public interface Criterion extends Entity, Reorderable {
      * @param tests
      *            the tests to set
      */
-    void setTestList(List<Test> tests);
+    void setTestList(Collection<Test> tests);
 
     /**
      *

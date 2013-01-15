@@ -21,6 +21,8 @@
  */
 package org.opens.tanaguru.entity.dao.reference;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.opens.tanaguru.entity.dao.test.AbstractDaoTestCase;
 import org.opens.tanaguru.entity.reference.Level;
 import org.opens.tanaguru.entity.reference.Reference;
@@ -74,7 +76,10 @@ public class TestDAOImplTest extends AbstractDaoTestCase {
 
     public void testRetrieveAllByReferenceAndLevel() {
         testDAO.setLevelDAO(levelDAO);
-        testDAO.setBronzeIdIndex(1);
+        Map<String, String> bronzeLevelCodeByRefMap =  new HashMap<String, String>();
+        bronzeLevelCodeByRefMap.put("01", "Bz");
+        bronzeLevelCodeByRefMap.put("02", "Bz");
+        testDAO.setBronzeLevelCodeByRefMap(bronzeLevelCodeByRefMap);
         Reference ref = referenceDAO.read(Long.valueOf(1));
         Level level = levelDAO.read(Long.valueOf(1)); // bronze level ref 1
         assertEquals(7,testDAO.retrieveAllByReferenceAndLevel(ref, level).size());

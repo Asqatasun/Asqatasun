@@ -21,12 +21,13 @@
  */
 package org.opens.tanaguru.entity.dao.reference;
 
+import java.util.List;
+import java.util.Map;
 import org.opens.tanaguru.entity.reference.Criterion;
+import org.opens.tanaguru.entity.reference.Level;
 import org.opens.tanaguru.entity.reference.Reference;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
-import java.util.List;
-import org.opens.tanaguru.entity.reference.Level;
 
 /**
  * 
@@ -56,6 +57,13 @@ public interface TestDAO extends GenericDAO<Test, Long> {
      * @return
      */
     List<Test> retrieveAllByCode(String[] codeArray);
+    
+    /**
+     * 
+     * @param criterion
+     * @return 
+     */
+    List<Test> retrieveAllByCriterion(Criterion criterion);
 
     /**
      * 
@@ -73,8 +81,9 @@ public interface TestDAO extends GenericDAO<Test, Long> {
 
     /**
      * 
-     * @param bronzeIdIndex
+     * @param bronzeLevelCodeByRefMap This map handles the bronze level code
+     *      (first level) for each referential
      */
-    void setBronzeIdIndex(int bronzeIdIndex);
+    void setBronzeLevelCodeByRefMap(Map<String, String> bronzeLevelCodeByRefMap);
 
 }

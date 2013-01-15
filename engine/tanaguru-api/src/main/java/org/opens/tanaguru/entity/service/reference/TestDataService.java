@@ -21,13 +21,14 @@
  */
 package org.opens.tanaguru.entity.service.reference;
 
-import org.opens.tanaguru.entity.reference.Reference;
-import org.opens.tanaguru.entity.reference.Test;
-import org.opens.tanaguru.sdk.entity.service.GenericDataService;
 import java.util.List;
 import java.util.Set;
 import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Level;
+import org.opens.tanaguru.entity.reference.Reference;
+import org.opens.tanaguru.entity.reference.Test;
+import org.opens.tanaguru.sdk.entity.service.GenericDataService;
 
 /**
  * 
@@ -49,6 +50,14 @@ public interface TestDataService extends GenericDataService<Test, Long> {
      * @return
      */
     List<Test> findAllByCode(String[] codeArray);
+    
+    /**
+     * 
+     * @param criterion
+     * @return 
+     *      all the tests for the given criterion
+     */
+    List<Test> findAllByCriterion(Criterion criterion);
 
     /**
      *

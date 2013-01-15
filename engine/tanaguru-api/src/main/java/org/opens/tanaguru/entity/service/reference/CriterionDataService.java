@@ -22,6 +22,7 @@
 package org.opens.tanaguru.entity.service.reference;
 
 import org.opens.tanaguru.entity.reference.Criterion;
+import org.opens.tanaguru.entity.reference.Level;
 import org.opens.tanaguru.sdk.entity.service.GenericDataService;
 
 /**
@@ -29,4 +30,15 @@ import org.opens.tanaguru.sdk.entity.service.GenericDataService;
  * @author jkowalczyk
  */
 public interface CriterionDataService extends
-		GenericDataService<Criterion, Long> {}
+		GenericDataService<Criterion, Long> {
+
+
+    /**
+     * 
+     * @param criterion
+     * @return 
+     *      the level of the criterion
+     */
+    Level getCriterionLevel(Criterion criterion);
+
+}

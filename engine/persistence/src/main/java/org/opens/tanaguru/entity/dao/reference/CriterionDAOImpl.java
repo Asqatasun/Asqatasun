@@ -21,13 +21,10 @@
  */
 package org.opens.tanaguru.entity.dao.reference;
 
-import org.opens.tanaguru.entity.reference.Criterion;
-import org.opens.tanaguru.entity.reference.CriterionImpl;
-import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 import java.util.Collection;
 import javax.persistence.Query;
-import org.opens.tanaguru.entity.reference.Reference;
-import org.opens.tanaguru.entity.reference.Theme;
+import org.opens.tanaguru.entity.reference.*;
+import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 
 /**
  * 
@@ -44,6 +41,10 @@ public class CriterionDAOImpl extends AbstractJPADAO<Criterion, Long> implements
     protected Class<CriterionImpl> getEntityClass() {
         return CriterionImpl.class;
     }
+    
+    protected Class<TestImpl> getTestEntityClass() {
+        return TestImpl.class;
+    }
 
     @Override
     public Collection<Criterion> retrieveAll(String code, Reference reference,
@@ -55,6 +56,18 @@ public class CriterionDAOImpl extends AbstractJPADAO<Criterion, Long> implements
         query.setParameter("reference", reference);
         query.setParameter("theme", theme);
         return query.getResultList();
+    }
+
+    @Override
+    public Level findCriterionLevel(Criterion criterion) {
+        Query query = entityManager.createQuery("SELECT t FROM "
+                + getTestEntityClass().getName() + " t "
+                + " JOIN t.criterion cr"
+                + " WHERE cr = :criterion");
+        query.setParameter("criterion", criterion);
+        query.setMaxResults(1);
+        Test test = (Test)query.getSingleResult();
+        return test.getLevel();
     }
 
 }
