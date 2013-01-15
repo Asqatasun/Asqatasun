@@ -21,7 +21,9 @@
  */
 package org.opens.tanaguru.entity.service.reference;
 
+import org.opens.tanaguru.entity.dao.reference.CriterionDAO;
 import org.opens.tanaguru.entity.reference.Criterion;
+import org.opens.tanaguru.entity.reference.Level;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 
 /**
@@ -39,6 +41,11 @@ public class CriterionDataServiceImpl extends AbstractGenericDataService<Criteri
     public Criterion read(Long key) {
         Criterion entity = super.read(key);
         return entity;
+    }
+    
+    @Override
+    public Level getCriterionLevel(Criterion criterion) {
+        return ((CriterionDAO)entityDao).findCriterionLevel(criterion);
     }
 
 }

@@ -21,15 +21,16 @@
  */
 package org.opens.tanaguru.entity.service.reference;
 
-import org.opens.tanaguru.entity.reference.Level;
-import org.opens.tanaguru.entity.reference.Reference;
-import org.opens.tanaguru.entity.reference.Test;
-import org.opens.tanaguru.entity.dao.reference.TestDAO;
-import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 import java.util.List;
 import java.util.Set;
 import org.apache.log4j.Logger;
+import org.opens.tanaguru.entity.dao.reference.TestDAO;
 import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.reference.Criterion;
+import org.opens.tanaguru.entity.reference.Level;
+import org.opens.tanaguru.entity.reference.Reference;
+import org.opens.tanaguru.entity.reference.Test;
+import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 
 /**
  * 
@@ -62,6 +63,11 @@ public class TestDataServiceImpl extends AbstractGenericDataService<Test, Long>
     @Override
     public List<Test> findAll(Reference reference) {
         return ((TestDAO) entityDao).retrieveAll(reference);
+    }
+    
+    @Override
+    public List<Test> findAllByCriterion(Criterion criterion) {
+        return ((TestDAO) entityDao).retrieveAllByCriterion(criterion);
     }
 
     @Override
@@ -96,10 +102,10 @@ public class TestDataServiceImpl extends AbstractGenericDataService<Test, Long>
             }
         }
         List<Test> testList = getAllByReferenceAndLevel(reference, level);
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Retrieved " + testList.size() + " test for the referential "
+//        if (LOGGER.isDebugEnabled()) {
+            LOGGER.error("Retrieved " + testList.size() + " test for the referential "
                 + reference.getLabel() + " and the level " + level.getLabel());
-        }
+//        }
         return testList;
     }
     

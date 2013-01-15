@@ -23,7 +23,7 @@ package org.opens.tanaguru.entity.reference;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -56,7 +56,7 @@ public class CriterionImpl implements Criterion, Serializable {
     @JoinColumn(name = "Reference_Id_Reference")
     private ReferenceImpl reference;
     @OneToMany(mappedBy = "criterion", cascade = CascadeType.ALL)
-    private List<TestImpl> testList = new ArrayList<TestImpl>();
+    private Collection<TestImpl> testList = new ArrayList<TestImpl>();
     @ManyToOne
     @JoinColumn(name = "Theme_Id_Theme")
     private ThemeImpl theme;
@@ -112,8 +112,8 @@ public class CriterionImpl implements Criterion, Serializable {
     @Override
     @XmlElementWrapper
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.TestImpl.class)
-    public List<Test> getTestList() {
-        return (ArrayList<Test>)(ArrayList)testList;
+    public Collection<Test> getTestList() {
+        return (Collection)testList;
     }
 
     @Override
@@ -153,7 +153,7 @@ public class CriterionImpl implements Criterion, Serializable {
     }
 
     @Override
-    public void setTestList(List<Test> testList) {
+    public void setTestList(Collection<Test> testList) {
         for (Test test : testList) {
             this.testList.add((TestImpl)test);
         }
