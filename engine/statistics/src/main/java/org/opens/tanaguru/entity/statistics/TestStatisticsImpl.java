@@ -22,14 +22,7 @@
 package org.opens.tanaguru.entity.statistics;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.TestImpl;
@@ -63,6 +56,15 @@ public class TestStatisticsImpl
     @Column(name="Nb_Na")
     private int nbOfNa=0;
 
+    @Column(name="Nb_Suspected")
+    private int nbOfSuspected=0;
+    
+    @Column(name="Nb_Detected")
+    private int nbOfDetected=0;
+    
+    @Column(name="Nb_Not_Tested")
+    private int nbOfNotTested=0;
+    
     @OneToOne
     @JoinColumn(name = "Id_Test")
     private TestImpl test;
@@ -121,6 +123,36 @@ public class TestStatisticsImpl
         this.nbOfPassed = nbOfPassed;
     }
 
+        @Override
+    public int getNbOfSuspected() {
+        return this.nbOfSuspected;
+    }
+
+    @Override
+    public void setNbOfSuspected(int nbOfSuspected) {
+        this.nbOfSuspected = nbOfSuspected;
+    }
+
+    @Override
+    public int getNbOfDetected() {
+        return this.nbOfDetected;
+    }
+    
+    @Override
+    public void setNbOfDetected(int nbOfDetected) {
+        this.nbOfDetected = nbOfDetected;
+    }
+
+    @Override
+    public int getNbOfNotTested() {
+        return this.nbOfNotTested;
+    }
+
+    @Override
+    public void setNbOfNotTested(int nbOfNotTested) {
+        this.nbOfNotTested = nbOfNotTested;
+    }
+    
     @Override
     public Test getTest() {
         return test;

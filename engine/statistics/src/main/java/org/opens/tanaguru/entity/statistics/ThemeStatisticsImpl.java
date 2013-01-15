@@ -63,6 +63,15 @@ public class ThemeStatisticsImpl
     @Column(name="Nb_Na")
     private int nbOfNa=0;
 
+    @Column(name="Nb_Suspected")
+    private int nbOfSuspected=0;
+    
+    @Column(name="Nb_Detected")
+    private int nbOfDetected=0;
+    
+    @Column(name="Nb_Not_Tested")
+    private int nbOfNotTested=0;
+    
     @OneToOne
     @JoinColumn(name = "Id_Theme")
     private ThemeImpl theme;
@@ -121,6 +130,36 @@ public class ThemeStatisticsImpl
         this.nbOfPassed = nbOfPassed;
     }
 
+        @Override
+    public int getNbOfSuspected() {
+        return this.nbOfSuspected;
+    }
+
+    @Override
+    public void setNbOfSuspected(int nbOfSuspected) {
+        this.nbOfSuspected = nbOfSuspected;
+    }
+
+    @Override
+    public int getNbOfDetected() {
+        return this.nbOfDetected;
+    }
+    
+    @Override
+    public void setNbOfDetected(int nbOfDetected) {
+        this.nbOfDetected = nbOfDetected;
+    }
+
+    @Override
+    public int getNbOfNotTested() {
+        return this.nbOfNotTested;
+    }
+
+    @Override
+    public void setNbOfNotTested(int nbOfNotTested) {
+        this.nbOfNotTested = nbOfNotTested;
+    }
+    
     @Override
     public Theme getTheme() {
         return theme;

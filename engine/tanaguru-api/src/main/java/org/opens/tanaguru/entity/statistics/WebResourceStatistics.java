@@ -140,21 +140,26 @@ public interface WebResourceStatistics extends Entity, ResultCounter {
      * @param themeStatisticsSet
      */
     public void addTestStatistics(TestStatistics testStatistics);
-
+    
     /**
      *
      * @return
-     *      the http status code
      */
-    public int getHttpStatusCode();
+    public Set<CriterionStatistics> getCriterionStatisticsSet();
 
     /**
-     * 
-     * @param httpStatusCode
+     *
+     * @param criterionStatisticsSet
      */
-    public void setHttpStatusCode(int httpStatusCode);
-    
+    public void setCriterionStatisticsSet(Set<CriterionStatistics> criterionStatisticsSet);
+
     /**
+     *
+     * @param themeStatisticsSet
+     */
+    public void addCriterionStatistics(CriterionStatistics criterionStatistics);
+
+        /**
      *
      * @return
      */
@@ -201,5 +206,18 @@ public interface WebResourceStatistics extends Entity, ResultCounter {
      * @param weightedFailed
      */
     public void setWeightedFailed(BigDecimal weightedFailed);
+    
+    /**
+     *
+     * @return
+     *      the http status code
+     */
+    public int getHttpStatusCode();
 
+    /**
+     * 
+     * @param httpStatusCode
+     */
+    public void setHttpStatusCode(int httpStatusCode);
+    
 }

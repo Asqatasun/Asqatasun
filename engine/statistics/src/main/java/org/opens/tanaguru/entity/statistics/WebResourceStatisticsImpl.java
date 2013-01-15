@@ -67,6 +67,15 @@ public class WebResourceStatisticsImpl
     @Column(name="Nb_Na")
     private int nbOfNa=0;
     
+    @Column(name="Nb_Suspected")
+    private int nbOfSuspected=0;
+    
+    @Column(name="Nb_Detected")
+    private int nbOfDetected=0;
+    
+    @Column(name="Nb_Not_Tested")
+    private int nbOfNotTested=0;
+    
     @Column(name="Weighted_Passed", precision=10, scale=1)
     private BigDecimal weightedPassed = BigDecimal.ZERO;
 
@@ -103,6 +112,10 @@ public class WebResourceStatisticsImpl
     @OneToMany(mappedBy = "webResourceStatistics", cascade = {CascadeType.PERSIST})
     protected Set<TestStatisticsImpl> testStatisticsSet =
             new LinkedHashSet<TestStatisticsImpl>();
+    
+    @OneToMany(mappedBy = "webResourceStatistics", cascade = {CascadeType.PERSIST})
+    protected Set<CriterionStatisticsImpl> criterionStatisticsSet =
+            new LinkedHashSet<CriterionStatisticsImpl>();
 
     @Override
     public Long getId() {
@@ -174,6 +187,36 @@ public class WebResourceStatisticsImpl
         this.nbOfPassed = nbOfPassed;
     }
 
+    @Override
+    public int getNbOfSuspected() {
+        return this.nbOfSuspected;
+    }
+
+    @Override
+    public void setNbOfSuspected(int nbOfSuspected) {
+        this.nbOfSuspected = nbOfSuspected;
+    }
+
+    @Override
+    public int getNbOfDetected() {
+        return this.nbOfDetected;
+    }
+    
+    @Override
+    public void setNbOfDetected(int nbOfDetected) {
+        this.nbOfDetected = nbOfDetected;
+    }
+
+    @Override
+    public int getNbOfNotTested() {
+        return this.nbOfNotTested;
+    }
+
+    @Override
+    public void setNbOfNotTested(int nbOfNotTested) {
+        this.nbOfNotTested = nbOfNotTested;
+    }
+    
     @Override
     public int getNbOfFailedOccurences() {
         return nbOfFailedOccurences;
@@ -252,6 +295,25 @@ public class WebResourceStatisticsImpl
         this.testStatisticsSet.add((TestStatisticsImpl) testStatistics);
     }
 
+    
+    @Override
+    public Set<CriterionStatistics> getCriterionStatisticsSet() {
+        return (Set<CriterionStatistics>)(LinkedHashSet)criterionStatisticsSet;
+    }
+
+    @Override
+    public void setCriterionStatisticsSet(Set<CriterionStatistics> criterionStatisticsSet) {
+        for (CriterionStatistics cs : criterionStatisticsSet) {
+            this.criterionStatisticsSet.add((CriterionStatisticsImpl)cs);
+        }
+    }
+
+    @Override
+    public void addCriterionStatistics(CriterionStatistics criterionStatistics) {
+        criterionStatistics.setWebResourceStatistics(this);
+        this.criterionStatisticsSet.add((CriterionStatisticsImpl) criterionStatistics);
+    }
+    
     @Override
     public int getHttpStatusCode() {
         return httpStatusCode;

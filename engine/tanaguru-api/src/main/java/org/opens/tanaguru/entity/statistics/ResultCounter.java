@@ -50,7 +50,7 @@ public interface ResultCounter {
      * @param nbOfNMI
      */
     public void setNbOfNmi(int nbOfNmi);
-
+    
     /**
      *
      * @return
@@ -75,4 +75,38 @@ public interface ResultCounter {
      */
     public void setNbOfFailed(int nbOfFailed);
 
+    /**
+     *
+     * @return
+     */
+    public int getNbOfSuspected();
+    
+    /**
+     *
+     * @param nbOfNMI
+     */
+    public void setNbOfSuspected(int nbOfSuspected);
+    
+    /**
+     *
+     * @return
+     */
+    public int getNbOfDetected();
+    
+    /**
+     * 
+     */
+    public void setNbOfDetected(int nbOfDetected);
+    
+    /**
+     *
+     * @param nbOfNMI
+     */
+    public int getNbOfNotTested();
+    
+    /**
+     * 
+     * @param nbOfNotTested 
+     */
+    public void setNbOfNotTested(int nbOfNotTested);
 }

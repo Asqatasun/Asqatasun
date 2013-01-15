@@ -32,6 +32,8 @@ public enum TestSolution {
 	NEED_MORE_INFO,
 	NOT_APPLICABLE,
 	SUSPECTED_PASSED,
+        NOT_TESTED,
+        DETECTED,
 	PASSED;
 
 }
