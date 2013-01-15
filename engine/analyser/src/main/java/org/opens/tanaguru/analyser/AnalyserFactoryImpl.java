@@ -31,9 +31,13 @@ import org.opens.tanaguru.entity.parameterization.ParameterFamily;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterFamilyDataService;
+import org.opens.tanaguru.entity.service.reference.TestDataService;
+import org.opens.tanaguru.entity.service.statistics.CriterionStatisticsDataService;
 import org.opens.tanaguru.entity.service.statistics.TestStatisticsDataService;
 import org.opens.tanaguru.entity.service.statistics.ThemeStatisticsDataService;
 import org.opens.tanaguru.entity.service.statistics.WebResourceStatisticsDataService;
+import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
+import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -57,6 +61,16 @@ public class AnalyserFactoryImpl implements AnalyserFactory {// TODO Write javad
         this.webResourceStatisticsDataService = webResourceStatisticsDataService;
     }
     
+    private WebResourceDataService webResourceDataService;
+    public WebResourceDataService getWebResourceDataService() {
+        return webResourceDataService;
+    }
+
+    public void setWebResourceDataService(
+            WebResourceDataService webResourceDataService) {
+        this.webResourceDataService = webResourceDataService;
+    }
+    
     private ThemeStatisticsDataService themeStatisticsDataService;
     public ThemeStatisticsDataService getThemeStatisticsDataService() {
         return themeStatisticsDataService;
@@ -75,6 +89,18 @@ public class AnalyserFactoryImpl implements AnalyserFactory {// TODO Write javad
             TestStatisticsDataService testStatisticsDataService) {
     }
     
+    /**
+     * The CriterionStatisticsDataService instance
+     */
+    private CriterionStatisticsDataService criterionStatisticsDataService;
+    public CriterionStatisticsDataService getCriterionStatisticsDataService() {
+        return criterionStatisticsDataService;
+    }
+
+    public void setCriterionStatisticsDataService(
+            CriterionStatisticsDataService criterionStatisticsDataService) {
+    }
+    
     private AuditDataService auditDataService;
     public AuditDataService getAuditDataService() {
         return auditDataService;
@@ -82,6 +108,15 @@ public class AnalyserFactoryImpl implements AnalyserFactory {// TODO Write javad
 
     public void setAuditDataService(AuditDataService auditDataService) {
         this.auditDataService = auditDataService;
+    }
+    
+    private TestDataService testDataService;
+    public TestDataService getTestDataService() {
+        return testDataService;
+    }
+
+    public void setTestElementDataService(TestDataService testDataService) {
+        this.testDataService = testDataService;
     }
     
     private ParameterDataService parameterDataService;
@@ -112,28 +147,42 @@ public class AnalyserFactoryImpl implements AnalyserFactory {// TODO Write javad
     @Autowired
     public AnalyserFactoryImpl(
             AuditDataService auditDataService,
+            WebResourceDataService webResourceDataService,
             TestStatisticsDataService testStatisticsDataService,
             ThemeStatisticsDataService themeStatisticsDataService,
             WebResourceStatisticsDataService webResourceStatisticsDataService, 
+            CriterionStatisticsDataService criterionStatisticsDataService, 
+            TestDataService testDataService,
             ParameterDataService parameterDataService,
             ParameterFamilyDataService parameterFamilyDataService) {
         this.auditDataService = auditDataService;
+        this.webResourceDataService = webResourceDataService;
         this.testStatisticsDataService = testStatisticsDataService;
         this.themeStatisticsDataService = themeStatisticsDataService;
         this.webResourceStatisticsDataService = webResourceStatisticsDataService;
+        this.criterionStatisticsDataService = criterionStatisticsDataService;
+        this.testDataService = testDataService;
         this.parameterDataService = parameterDataService;
         this.parameterFamilyDataService = parameterFamilyDataService;
     }
 
     @Override
     public Analyser create(WebResource webResource, Audit audit) {
+        int nbOfWebResource = 1;
+        if (webResource instanceof Site) {
+            nbOfWebResource = 
+                    webResourceDataService.getNumberOfChildWebResource(webResource).intValue();
+        }
         Analyser analyser = new AnalyserImpl(
                 auditDataService,
+                testDataService,
                 testStatisticsDataService,
                 themeStatisticsDataService,
                 webResourceStatisticsDataService,
+                criterionStatisticsDataService,
                 webResource,
-                getTestWeightParamSet(audit));
+                getTestWeightParamSet(audit), 
+                nbOfWebResource);
         return analyser;
     }
 

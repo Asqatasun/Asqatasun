@@ -46,7 +46,7 @@ public class AnalyserImplTest extends TestCase {
         WebResourceStatisticsDataService webResourceStatisticsDataService =
                 new WebResourceStatisticsDataServiceImpl();
         webResourceStatisticsDataService.setEntityFactory(webResourceStatisticsFactory);
-        AnalyserImpl analyser = new AnalyserImpl(null, null, null, webResourceStatisticsDataService, null, new ArrayList<Parameter>());
+        AnalyserImpl analyser = new AnalyserImpl(null, null, null, null, webResourceStatisticsDataService, null, null, new ArrayList<Parameter>(),1);
 
         WebResourceStatistics wrStats = analyser.getWebResourceStatisticsDataService().create();
         wrStats.setNbOfPassed(89330);
@@ -65,7 +65,7 @@ public class AnalyserImplTest extends TestCase {
         WebResourceStatisticsDataService webResourceStatisticsDataService =
                 new WebResourceStatisticsDataServiceImpl();
         webResourceStatisticsDataService.setEntityFactory(webResourceStatisticsFactory);
-        AnalyserImpl analyser = new AnalyserImpl(null, null, null, webResourceStatisticsDataService, null, new ArrayList<Parameter>());
+        AnalyserImpl analyser = new AnalyserImpl(null, null, null, null, webResourceStatisticsDataService, null, null, new ArrayList<Parameter>(),1);
 
         WebResourceStatistics wrStats = analyser.getWebResourceStatisticsDataService().create();
         wrStats.setNbOfPassed(0);
