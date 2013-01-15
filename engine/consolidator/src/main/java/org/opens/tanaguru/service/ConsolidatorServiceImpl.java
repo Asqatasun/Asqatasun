@@ -57,10 +57,20 @@ public class ConsolidatorServiceImpl implements ConsolidatorService {
             Collection<Test> testList) {
         List<ProcessResult> resultList = new ArrayList<ProcessResult>();
         for (Test test : testList) {
-            RuleImplementation ruleImplementation = ruleImplementationLoaderService.loadRuleImplementation(test);
-            Consolidator consolidator = consolidatorFactory.create(grossResultList, ruleImplementation, ProcessRemarkServiceFactory.create(processRemarkFactory, sourceCodeRemarkFactory, evidenceElementFactory, evidenceDataService));
-            consolidator.run();
-            resultList.addAll(consolidator.getResult());
+            // if the rule archive name is empty, the test is not launched
+            if (test.getRuleArchiveName() != null && !test.getRuleArchiveName().isEmpty() ) {
+                RuleImplementation ruleImplementation = ruleImplementationLoaderService.loadRuleImplementation(test);
+                Consolidator consolidator = consolidatorFactory.create(
+                        grossResultList, 
+                        ruleImplementation, 
+                        ProcessRemarkServiceFactory.create(
+                            processRemarkFactory, 
+                            sourceCodeRemarkFactory, 
+                            evidenceElementFactory, 
+                            evidenceDataService));
+                consolidator.run();
+                resultList.addAll(consolidator.getResult());
+            }
         }
         return resultList;
     }

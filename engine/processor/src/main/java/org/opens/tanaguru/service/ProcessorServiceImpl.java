@@ -60,16 +60,26 @@ public class ProcessorServiceImpl implements ProcessorService {
     public Collection<ProcessResult> process(Collection<Content> contentList, Collection<Test> testList) {
         Collection<ProcessResult> processResultList = new ArrayList<ProcessResult>();
 
-        Processor processor = processorFactory.create(ProcessRemarkServiceFactory.create(processRemarkFactory, sourceCodeRemarkFactory, evidenceElementFactory, evidenceDataService), nomenclatureLoaderService, urlIdentifierFactory.create());
+        Processor processor = processorFactory.create(ProcessRemarkServiceFactory.create(
+                processRemarkFactory, 
+                sourceCodeRemarkFactory, 
+                evidenceElementFactory, 
+                evidenceDataService), 
+                nomenclatureLoaderService, 
+                urlIdentifierFactory.create());
 
         for (Content content : contentList) {
             if (content instanceof SSP) {
                 processor.setSSP((SSP) content);
                 for (Test test : testList) {
-                    RuleImplementation ruleImplementation = ruleImplementationLoaderService.loadRuleImplementation(test);
-                    processor.setRuleImplementation(ruleImplementation);
-                    processor.run();
-                    processResultList.add(processor.getResult());
+                    // if the rule archive name or the rule class name are not 
+                    // set, no test is processed for this rule.
+                    if (test.getRuleArchiveName() != null && !test.getRuleArchiveName().isEmpty()) {
+                        RuleImplementation ruleImplementation = ruleImplementationLoaderService.loadRuleImplementation(test);
+                        processor.setRuleImplementation(ruleImplementation);
+                        processor.run();
+                        processResultList.add(processor.getResult());
+                    }
                 }
             }
         }
