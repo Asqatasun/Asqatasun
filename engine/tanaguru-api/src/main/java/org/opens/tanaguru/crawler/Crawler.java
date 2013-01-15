@@ -96,4 +96,10 @@ public interface Crawler extends Parametrable {
      */
     void setCrawlConfigFilePath(String crawlConfigFilePath);
     
+    /**
+     * 
+     * @param crawlConfigFilePath
+     */
+    void setPersistOnTheFly(boolean persistOnTheFly);
+    
 }

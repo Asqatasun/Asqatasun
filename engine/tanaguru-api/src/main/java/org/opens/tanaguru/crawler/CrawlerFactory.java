@@ -48,5 +48,5 @@ public interface CrawlerFactory {
      * @return
      *      an initialised implementation of the crawler interface
      */
-    Crawler create(Set<Parameter> paramSet);
+    Crawler create(Set<Parameter> paramSet, boolean persistOnTheFly);
 }
