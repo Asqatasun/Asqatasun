@@ -113,6 +113,16 @@ public class ParameterDAOImpl extends AbstractJPADAO<Parameter, Long> implements
             return null;
         }
     }
+    
+    @Override
+    public Parameter findParameter(Audit audit, String parameterElementCode) {
+        for (Parameter param : findParameterSetFromAudit(audit)) {
+            if (param.getParameterElement().getParameterElementCode().equals(parameterElementCode)) {
+                return param;
+            }
+        }
+        return null;
+    }
 
     @Override
     public Parameter findDefaultParameter(ParameterElement parameterElement) {

@@ -53,6 +53,16 @@ public interface ParameterDataService extends GenericDataService<Parameter, Long
      *      a parameter from the parameter element and its value
      */
     Parameter getParameter(ParameterElement parameterElement, String value);
+    
+    /**
+     * 
+     * @param audit
+     * @param parameterElementCode
+     * @return 
+     *      the value of a parameter for a given audit and a given parameter 
+     * element
+     */
+    Parameter getParameter(Audit audit, String parameterElementCode);
 
     /**
      * @param parameterFamily

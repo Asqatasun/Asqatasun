@@ -52,6 +52,11 @@ public class ParameterDataServiceImpl extends AbstractGenericDataService<Paramet
         }
         return parameter;
     }
+    
+    @Override
+    public Parameter getParameter(Audit audit, String parameterElementCode) {
+        return ((ParameterDAO) entityDao).findParameter(audit, parameterElementCode);
+    }
 
     @Override
     public Set<Parameter> getParameterSet(ParameterFamily parameterFamily, Audit audit) {
