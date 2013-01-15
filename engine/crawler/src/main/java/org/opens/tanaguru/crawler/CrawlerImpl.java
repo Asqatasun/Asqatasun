@@ -22,12 +22,7 @@
 package org.opens.tanaguru.crawler;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 import org.archive.io.GzippedInputStream;
@@ -36,11 +31,7 @@ import org.archive.modules.CrawlURI;
 import org.archive.modules.deciderules.MatchesFilePatternDecideRule;
 import org.opens.tanaguru.crawler.framework.TanaguruCrawlJob;
 import org.opens.tanaguru.crawler.util.CrawlUtils;
-import org.opens.tanaguru.entity.audit.Content;
-import org.opens.tanaguru.entity.audit.ImageContent;
-import org.opens.tanaguru.entity.audit.RelatedContent;
-import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.audit.StylesheetContent;
+import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
@@ -155,7 +146,18 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         }
     }
 
-    int pageRankCounter = 1;
+    private boolean persistOnTheFly = true;
+    public boolean isPersistOnTheFly() {
+        return persistOnTheFly;
+    }
+
+    @Override
+    public void setPersistOnTheFly(boolean persistOnTheFly) {
+        this.persistOnTheFly = persistOnTheFly;
+    }
+    
+    
+    int pageRankCounter = 1; // a counter to determine the rank a page is fetched
 
     public CrawlerImpl() {
         super();
@@ -341,7 +343,11 @@ public class CrawlerImpl implements Crawler, ContentWriter {
                 page.setURL(curi.getURI());
                 if (successfullFetch) {
                     isPageAlreadyFetched = true;
-                    return saveAndCreateSSPFromPage(curi, charset, page, sourceCode);
+                    SSP ssp = createSSPFromPage(curi, charset, page, sourceCode);
+                    if (persistOnTheFly) {
+                        persistSSP(ssp, curi, page);
+                    }
+                    return ssp;
                 } else {
                     return lastFetchedSSP;
                 }
@@ -355,7 +361,11 @@ public class CrawlerImpl implements Crawler, ContentWriter {
             page.setParent((Site) mainWebResource);
             page.setRank(pageRankCounter);
             pageRankCounter++;
-            return saveAndCreateSSPFromPage(curi, charset, page, sourceCode);
+            SSP ssp = createSSPFromPage(curi, charset, page, sourceCode);
+            if (persistOnTheFly) {
+                persistSSP(ssp, curi, page);
+            }
+            return ssp;
         }
     }
 
@@ -367,7 +377,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
      * @param sourceCode
      * @return
      */
-    private SSP saveAndCreateSSPFromPage(
+    private SSP createSSPFromPage(
             CrawlURI curi,
             String charset,
             Page page,
@@ -376,9 +386,23 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         ssp.setPage(page);
         ssp.setCharset(charset);
         ssp.setSource(sourceCode);
-        webResourceDataService.saveOrUpdate(page);
-        ssp = (SSP) saveAndPersistFetchDataToContent(ssp, curi);
         return ssp;
+    }
+    
+    /**
+     * 
+     * @param curi
+     * @param charset
+     * @param page
+     * @param sourceCode
+     * @return 
+     */
+    private void persistSSP(
+            SSP ssp,
+            CrawlURI curi,
+            Page page) {
+        webResourceDataService.saveOrUpdate(page);
+        saveAndPersistFetchDataToContent(ssp, curi);
     }
 
     /**
@@ -478,8 +502,10 @@ public class CrawlerImpl implements Crawler, ContentWriter {
     private Content saveAndPersistFetchDataToContent(Content content, CrawlURI curi) {
         content.setHttpStatusCode(curi.getFetchStatus());
         content.setDateOfLoading(new Date(curi.getFetchCompletedTime()));
-        Content returnedContent = contentDataService.saveOrUpdate(content);
-        return returnedContent;
+        if (persistOnTheFly) {
+            content = contentDataService.saveOrUpdate(content);
+        }
+        return content;
     }
 
     /**
@@ -488,6 +514,10 @@ public class CrawlerImpl implements Crawler, ContentWriter {
      * @param relatedContent
      */
     private void persistContentRelationShip(SSP ssp, RelatedContent relatedContent) {
+        if (!persistOnTheFly) {
+            ssp.addRelatedContent(relatedContent);
+            return;
+        }
         relatedContentSetTemp.clear();
         relatedContentSetTemp.add(((Content) relatedContent).getId());
         contentDataService.saveContentRelationShip(ssp, relatedContentSetTemp);

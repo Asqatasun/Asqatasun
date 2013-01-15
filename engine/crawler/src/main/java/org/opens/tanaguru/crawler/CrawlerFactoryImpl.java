@@ -72,13 +72,14 @@ public class CrawlerFactoryImpl implements CrawlerFactory {
     }
     
     @Override
-    public Crawler create(Set<Parameter> paramSet) {
+    public Crawler create(Set<Parameter> paramSet, boolean persistOnTheFly) {
         Crawler crawler = new CrawlerImpl();
         crawler.setWebResourceDataService(webResourceDataService);
         crawler.setContentFactory(contentFactory);
         crawler.setContentDataService(contentDataService);
         crawler.setOutputDir(outputDir);
         crawler.setParameterSet(paramSet);
+        crawler.setPersistOnTheFly(persistOnTheFly);
         crawler.setCrawlConfigFilePath(crawlConfigFilePath);
         return crawler;
     }
