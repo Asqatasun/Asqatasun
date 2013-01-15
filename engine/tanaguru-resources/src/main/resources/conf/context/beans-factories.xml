@@ -23,6 +23,7 @@
     <bean id="scopeFactory" class="org.opens.tanaguru.entity.factory.reference.ScopeFactoryImpl"/>
     <bean id="testFactory" class="org.opens.tanaguru.entity.factory.reference.TestFactoryImpl"/>
     <bean id="themeFactory" class="org.opens.tanaguru.entity.factory.reference.ThemeFactoryImpl"/>
+    <bean id="criterionFactory" class="org.opens.tanaguru.entity.factory.reference.CriterionFactoryImpl"/>
 
     <!-- parameter factories beans -->
     <bean id="parameterFactory" class="org.opens.tanaguru.entity.factory.parameterization.ParameterFactoryImpl"/>
@@ -33,5 +34,6 @@
     <bean id="testStatisticsFactory" class="org.opens.tanaguru.entity.factory.statistics.TestStatisticsFactoryImpl"/>
     <bean id="themeStatisticsFactory" class="org.opens.tanaguru.entity.factory.statistics.ThemeStatisticsFactoryImpl"/>
     <bean id="webResourceStatisticsFactory" class="org.opens.tanaguru.entity.factory.statistics.WebResourceStatisticsFactoryImpl"/>
+    <bean id="criterionStatisticsFactory" class="org.opens.tanaguru.entity.factory.statistics.CriterionStatisticsFactoryImpl"/>
 
 </beans>

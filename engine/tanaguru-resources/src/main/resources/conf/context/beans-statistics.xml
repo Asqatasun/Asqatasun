@@ -21,5 +21,13 @@
         <property name="entityDao" ref="webResourceStatisticsDAO"/>
         <property name="entityFactory" ref="webResourceStatisticsFactory"/>
     </bean>
+    
+    <bean id="criterionStatisticsDAO" class="org.opens.tanaguru.entity.dao.statistics.CriterionStatisticsDAOImpl">
+        <property name="selectAllThemeKey" value="all-theme"/>
+    </bean>
+    <bean id="criterionStatisticsDataService" class="org.opens.tanaguru.entity.service.statistics.CriterionStatisticsDataServiceImpl">
+        <property name="entityDao" ref="criterionStatisticsDAO"/>
+        <property name="entityFactory" ref="criterionStatisticsFactory"/>
+    </bean>
 
 </beans>

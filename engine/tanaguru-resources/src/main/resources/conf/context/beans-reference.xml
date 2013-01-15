@@ -5,9 +5,25 @@
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <bean id="testDAO" class="org.opens.tanaguru.entity.dao.reference.TestDAOImpl">
-        <property name="goldLevelCode" value="Or"/>
-        <property name="silverLevelCode" value="Ar"/>
-        <property name="bronzeIdIndex" value="1"/>
+        <property name="goldLevelCodeList">
+            <list>
+                <value>Or</value>
+                <value>AAA</value>
+            </list>
+        </property>
+        <property name="silverLevelCodeList">
+            <list>
+                <value>Ar</value>
+                <value>AA</value>
+            </list>
+        </property>
+        <property name="bronzeLevelCodeByRefMap">
+            <map>
+                <entry key="AW21" value="Bz"/>
+                <entry key="RGAA22" value="A"/>
+                <entry key="Seo" value="Bz"/>
+            </map>
+        </property>
         <property name="levelDAO" ref="levelDAO"/>
     </bean>
     <bean id="testDataService" class="org.opens.tanaguru.entity.service.reference.TestDataServiceImpl">
@@ -22,6 +38,12 @@
     <bean id="themeDataService" class="org.opens.tanaguru.entity.service.reference.ThemeDataServiceImpl">
         <property name="entityFactory" ref="themeFactory"/>
         <property name="entityDao" ref="themeDAO"/>
+    </bean>
+    
+    <bean id="criterionDAO" class="org.opens.tanaguru.entity.dao.reference.CriterionDAOImpl"/>
+    <bean id="criterionDataService" class="org.opens.tanaguru.entity.service.reference.CriterionDataServiceImpl">
+        <property name="entityFactory" ref="criterionFactory"/>
+        <property name="entityDao" ref="criterionDAO"/>
     </bean>
 
     <bean id="scopeDAO" class="org.opens.tanaguru.entity.dao.reference.ScopeDAOImpl"/>
