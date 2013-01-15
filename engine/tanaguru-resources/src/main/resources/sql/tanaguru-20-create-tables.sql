@@ -453,6 +453,9 @@ CREATE TABLE IF NOT EXISTS `WEB_RESOURCE_STATISTICS` (
   `Nb_Failed` int(11) DEFAULT NULL,
   `Nb_Nmi` int(11) DEFAULT NULL,
   `Nb_Na` int(11) DEFAULT NULL,
+  `Nb_Suspected` int(11) DEFAULT NULL,
+  `Nb_Detected` int(11) DEFAULT NULL,
+  `Nb_Not_Tested` int(11) DEFAULT NULL,
   `Weighted_Passed` numeric(10,1) UNSIGNED DEFAULT NULL,
   `Weighted_Failed` numeric(10,1) UNSIGNED DEFAULT NULL,
   `Weighted_Nmi` numeric(10,1) UNSIGNED DEFAULT NULL,
@@ -489,6 +492,9 @@ CREATE TABLE IF NOT EXISTS `THEME_STATISTICS` (
   `Nb_Failed` int(11) DEFAULT NULL,
   `Nb_Nmi` int(11) DEFAULT NULL,
   `Nb_Na` int(11) DEFAULT NULL,
+  `Nb_Suspected` int(11) DEFAULT NULL,
+  `Nb_Detected` int(11) DEFAULT NULL,
+  `Nb_Not_Tested` int(11) DEFAULT NULL,
   `Id_Theme` bigint(20) DEFAULT NULL,
   `Id_Web_Resource_Statistics` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`Id_Theme_Statistics`),
@@ -510,6 +516,39 @@ DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
 -- -----------------------------------------------------
+-- Table `tanaguru`.`CRITERION_STATISTICS`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CRITERION_STATISTICS` (
+  `Id_Criterion_Statistics` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Nb_Passed` int(11) DEFAULT NULL,
+  `Nb_Failed` int(11) DEFAULT NULL,
+  `Nb_Nmi` int(11) DEFAULT NULL,
+  `Nb_Na` int(11) DEFAULT NULL,
+  `Nb_Suspected` int(11) DEFAULT NULL,
+  `Nb_Detected` int(11) DEFAULT NULL,
+  `Nb_Not_Tested` int(11) DEFAULT NULL,
+  `Criterion_Result` varchar(255) DEFAULT NULL,
+  `Id_Criterion` bigint(20) DEFAULT NULL,
+  `Id_Web_Resource_Statistics` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`Id_Criterion_Statistics`),
+  INDEX `fk_CRITERION_STATISTICS_CRITERION` (`Id_Criterion` ASC) ,
+  CONSTRAINT `fk_CRITERION_STATISTICS_CRITERION`
+    FOREIGN KEY (`Id_Criterion` )
+    REFERENCES `CRITERION` (`Id_Criterion` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  INDEX `fk_CRITERION_STATISTICS_WEB_RESOURCE_STATISTICS` (`Id_Web_Resource_Statistics` ASC) ,
+  CONSTRAINT `fk_CRITERION_STATISTICS_WEB_RESOURCE_STATISTICS`
+    FOREIGN KEY (`Id_Web_Resource_Statistics` )
+    REFERENCES `WEB_RESOURCE_STATISTICS` (`Id_Web_Resource_Statistics` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+-- -----------------------------------------------------
 -- Table `tanaguru`.`TEST_STATISTICS`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TEST_STATISTICS` (
@@ -518,6 +557,9 @@ CREATE TABLE IF NOT EXISTS `TEST_STATISTICS` (
   `Nb_Failed` int(11) DEFAULT NULL,
   `Nb_Nmi` int(11) DEFAULT NULL,
   `Nb_Na` int(11) DEFAULT NULL,
+  `Nb_Suspected` int(11) DEFAULT NULL,
+  `Nb_Detected` int(11) DEFAULT NULL,
+  `Nb_Not_Tested` int(11) DEFAULT NULL,
   `Id_Test` bigint(20) DEFAULT NULL,
   `Id_Web_Resource_Statistics` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`Id_Test_Statistics`),
