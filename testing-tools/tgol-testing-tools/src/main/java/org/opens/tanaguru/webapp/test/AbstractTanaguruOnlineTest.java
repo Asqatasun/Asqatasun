@@ -76,7 +76,7 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
     private static final String FORM_URL_KEY = "form_url";
     
     private static final String TEXT_EXTENSION = ".txt";
-    private static final String SUBMIT_BUTTON_NAME = "input-submit";
+    private static final String SUBMIT_BUTTON_NAME = "launch-audit-submit";
     private static final String LOGIN_BUTTON_NAME = "Login";
     private static final String FIREFOX_SYSTEM_PROPERTY = "webdriver.firefox.bin";
     
