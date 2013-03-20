@@ -1,4 +1,4 @@
-Tanaguru is an enterprise grade [free-libre software](http://www.tanaguru.org/en/content/license-gnu-agpl) for web accessibility assessment.
+[Tanaguru](http://www.tanaguru.org/) is an enterprise grade [free-libre software](http://www.tanaguru.org/en/content/license-gnu-agpl) for web accessibility assessment.
 
 # Features
 
