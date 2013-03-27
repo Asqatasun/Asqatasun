@@ -15,6 +15,12 @@
         <property name="entityFactory" ref="webResourceFactory"/>
         <property name="entityDao" ref="webResourceDAO"/>
     </bean>
+    
+<!--    <bean id="snapshotDAO" class="org.opens.tanaguru.entity.dao.subject.SnapshotDAOImpl"/>
+    <bean id="snapshotDataService" class="org.opens.tanaguru.entity.service.subject.SnapshotDataServiceImpl">
+        <property name="entityFactory" ref="snapshotFactory"/>
+        <property name="entityDao" ref="snapshotDAO"/>
+    </bean>-->
 
     <bean id="contentDAO" class="org.opens.tanaguru.entity.dao.audit.ContentDAOImpl"/>
     <bean id="contentDataService" class="org.opens.tanaguru.entity.service.audit.ContentDataServiceImpl">
@@ -26,6 +32,12 @@
     <bean id="processResultDataService" class="org.opens.tanaguru.entity.service.audit.ProcessResultDataServiceImpl">
         <property name="entityFactory" ref="processResultFactory"/>
         <property name="entityDao" ref="processResultDAO"/>
+    </bean>
+    
+    <bean id="preProcessResultDAO" class="org.opens.tanaguru.entity.dao.audit.PreProcessResultDAOImpl"/>
+    <bean id="preProcessResultDataService" class="org.opens.tanaguru.entity.service.audit.PreProcessResultDataServiceImpl">
+        <property name="entityFactory" ref="preProcessResultFactory"/>
+        <property name="entityDao" ref="preProcessResultDAO"/>
     </bean>
 
     <bean id="processRemarkDAO" class="org.opens.tanaguru.entity.dao.audit.ProcessRemarkDAOImpl"/>

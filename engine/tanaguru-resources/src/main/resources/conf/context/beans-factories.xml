@@ -13,8 +13,10 @@
     <bean id="indefiniteResultFactory" class="org.opens.tanaguru.entity.factory.audit.IndefiniteResultFactoryImpl"/>
     <bean id="processRemarkFactory" class="org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactoryImpl"/>
     <bean id="processResultFactory" class="org.opens.tanaguru.entity.factory.audit.ProcessResultFactoryImpl"/>
+    <bean id="preProcessResultFactory" class="org.opens.tanaguru.entity.factory.audit.PreProcessResultFactoryImpl"/>
     <bean id="sourceCodeRemarkFactory" class="org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactoryImpl"/>
     <bean id="webResourceFactory" class="org.opens.tanaguru.entity.factory.subject.WebResourceFactoryImpl"/>
+<!--    <bean id="snapshotFactory" class="org.opens.tanaguru.entity.factory.subject.SnapshotFactoryImpl"/>-->
 
     <!-- reference factories beans -->
     <bean id="levelFactory" class="org.opens.tanaguru.entity.factory.reference.LevelFactoryImpl"/>
