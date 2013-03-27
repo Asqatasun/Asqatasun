@@ -361,7 +361,7 @@ public class AnalyserImpl implements Analyser {
         }
         float failed = wrStatistics.getNbOfFailed();
         float needMoreInfo = wrStatistics.getNbOfNmi();
-        if (needMoreInfo == 0 && failed ==0 && passed==0) {
+        if (failed ==0 && passed==0) {
             wrStatistics.setMark(Float.valueOf(0));
             return wrStatistics;
         }
@@ -495,7 +495,7 @@ public class AnalyserImpl implements Analyser {
                     - nbOfNa 
                     - nbOfNmi 
                     - nbOfPassed);
-            computeCriterionResult(criterionStatistics, criterionTestListSize);
+            computeCriterionResult(criterionStatistics);
             wrStatistics.addCriterionStatistics(criterionStatistics);
         }
         return wrStatistics;
@@ -522,7 +522,7 @@ public class AnalyserImpl implements Analyser {
             
             int nbOfPassed = testStatisticsDataService.
                     getResultCountByResultTypeAndTest(webResource, TestSolution.PASSED, test).intValue();
-            testStatistics.setNbOfFailed(nbOfPassed);
+            testStatistics.setNbOfPassed(nbOfPassed);
             
             int nbOfNmi = testStatisticsDataService.
                     getResultCountByResultTypeAndTest(webResource, TestSolution.NEED_MORE_INFO, test).intValue();
@@ -585,21 +585,30 @@ public class AnalyserImpl implements Analyser {
     }
 
     /**
+     * This computation is based on the priority of the results : 
+     * - priority 1 : Failed
+     * - priority 2 : NMI
+     * - priority 3 : Not Tested 
+     * - priority 4 : Passed
+     * - priority 5 : NA
+     * 
+     * If at least one of the result type is found regarding the priority 
+     * definition, the criterion result is the result type
      * 
      * @param crs
      * @param criterionTestListSize 
      */
-    private void computeCriterionResult (CriterionStatistics crs, int criterionTestListSize) {
-        if (crs.getNbOfFailed() > 0) {
+    private void computeCriterionResult (CriterionStatistics crs) {
+        if (crs.getNbOfFailed() > 0) {  // at least one test is failed, the criterion is failed
             crs.setCriterionResult(TestSolution.FAILED);
-        } else if (crs.getNbOfNmi() > 0) {
+        } else if (crs.getNbOfNmi() > 0) { // at least one test is nmi and no failed test encountered, the criterion is nmi
             crs.setCriterionResult(TestSolution.NEED_MORE_INFO);
-        } else if (crs.getNbOfPassed() == criterionTestListSize) {
-            crs.setCriterionResult(TestSolution.PASSED);
-        } else if (crs.getNbOfNa() == criterionTestListSize) {
-            crs.setCriterionResult(TestSolution.NOT_APPLICABLE);
-        } else if (crs.getNbOfNotTested() == criterionTestListSize) {
+        } else if (crs.getNbOfNotTested() > 0) {
             crs.setCriterionResult(TestSolution.NOT_TESTED);
+        } else if (crs.getNbOfPassed() > 0) {
+            crs.setCriterionResult(TestSolution.PASSED);
+        } else if (crs.getNbOfNa() > 0) {
+            crs.setCriterionResult(TestSolution.NOT_APPLICABLE);
         } else {
             crs.setCriterionResult(TestSolution.NEED_MORE_INFO);
         }
