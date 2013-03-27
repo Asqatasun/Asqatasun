@@ -1,10 +1,16 @@
 <?xml version="1.0"?><project xmlns:pom="http://maven.apache.org/POM/4.0.0">
     <modelVersion>4.0.0</modelVersion>
+     <parent>
+        <groupId>org.opens</groupId>
+        <artifactId>tanaguru</artifactId>
+        <version>1.6.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
     <groupId>org.opens</groupId>
     <artifactId>tanaguru-ws</artifactId>
     <packaging>war</packaging>
     <name>tanaguru-ws</name>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.6.0-SNAPSHOT</version>
     <url>http://www.tanaguru.org</url>
     <build>
         <plugins>
@@ -119,7 +125,7 @@
         </dependency>
     </dependencies>
     <properties>
-        <netbeans.hint.deploy.server>Tomcat55</netbeans.hint.deploy.server>
+        <netbeans.hint.deploy.server>tomcat6</netbeans.hint.deploy.server>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>

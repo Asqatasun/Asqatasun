@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>2.1.0-SNAPSHOT</version>
+        <version>3.0.0-SNAPSHOT</version>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>engine</artifactId>
     <packaging>pom</packaging>
-    <version>2.1.0-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <name>engine</name>
     <url>http://www.tanaguru.org</url>
     <modules>
@@ -35,6 +35,6 @@
         <module>statistics</module>
         <module>tanaguru-i18n</module>
         <module>scenarioloader</module>
-        <module>sebuilder</module>
+        <module>sebuilder-interpreter-tools</module>
   </modules>
 </project>

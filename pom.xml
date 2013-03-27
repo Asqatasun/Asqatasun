@@ -6,30 +6,30 @@
     <groupId>org.opens</groupId>
     <artifactId>tanaguru</artifactId>
     <packaging>pom</packaging>
-    <version>2.1.0-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <name>tanaguru</name>
     <url>http://www.tanaguru.org</url>
     <modules>
-<!--        <module>engine</module>
-        <module>web-app</module>
-        <module>testing-tools</module>
-        <module>cli</module>-->
+        <module>engine</module><!--
+-->        <module>web-app</module>
+        <module>testing-tools</module><!--
+-->            <module>cli</module>
 <!--        <module>ws</module>-->
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <engineGroupId>org.opens</engineGroupId>
-        <engineVersion>2.1.0-SNAPSHOT</engineVersion>
+        <engineVersion>3.0.0-SNAPSHOT</engineVersion>
         <webappGroupId>org.opens</webappGroupId>
-        <webappVersion>2.1.0-SNAPSHOT</webappVersion>
+        <webappVersion>3.0.0-SNAPSHOT</webappVersion>
         <testingToolsGroupId>org.opens</testingToolsGroupId>
-        <testingToolsVersion>2.1.0-SNAPSHOT</testingToolsVersion>
+        <testingToolsVersion>3.0.0-SNAPSHOT</testingToolsVersion>
         <tanaguruCliGroupId>org.opens</tanaguruCliGroupId>
-        <tanaguruCliVersion>2.1.0-SNAPSHOT</tanaguruCliVersion>
+        <tanaguruCliVersion>3.0.0-SNAPSHOT</tanaguruCliVersion>
         <springGroupId>org.springframework</springGroupId>
         <springVersion>3.1.2.RELEASE</springVersion>
         <heritrixGroupId>org.archive.heritrix</heritrixGroupId>
-        <heritrixVersion>3.0.0</heritrixVersion>
+        <heritrixVersion>3.1.0</heritrixVersion>
         <hibernateGroupId>org.hibernate</hibernateGroupId>
         <httpcomponentsGroupId>org.apache.httpcomponents</httpcomponentsGroupId>
     </properties>
@@ -85,6 +85,14 @@
                         <artifactId>slf4j-log4j12</artifactId>
                         <groupId>org.slf4j</groupId>
                     </exclusion>
+<!--                    <exclusion>
+                        <artifactId>antlr</artifactId>
+                        <groupId>antlr</groupId>
+                    </exclusion>-->
+<!--                    <exclusion>
+                        <artifactId>dom4j</artifactId>
+                        <groupId>dom4j</groupId>
+                    </exclusion>-->
                 </exclusions>
             </dependency>
             <dependency>
@@ -128,8 +136,14 @@
                 <groupId>javax.mail</groupId>
                 <artifactId>mail</artifactId>
                 <version>1.4.3</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>javax.activation</groupId>
+                        <artifactId>activation</artifactId>
+                    </exclusion>
+                </exclusions>   
             </dependency>
-
+            
             <!-- commons dependencies -->
             <dependency>
                 <groupId>commons-lang</groupId>
@@ -141,7 +155,21 @@
                 <artifactId>commons-collections</artifactId>
                 <version>3.2.1</version>
             </dependency>
-            
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.7</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.4</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>1.2.2</version>
+            </dependency>
             <dependency>
                 <groupId>org.milyn</groupId>
                 <artifactId>flute</artifactId>
@@ -156,10 +184,10 @@
 
             <!-- htmlCleaner dependencies -->
             <dependency>
-                <groupId>org.htmlcleaner</groupId>
+                <groupId>net.sourceforge.htmlcleaner</groupId>
                 <artifactId>htmlcleaner</artifactId>
-                <version>2.2</version>
-            </dependency>
+                <version>2.4</version>
+        </dependency>
 
             <!-- log4j dependencies -->
             <dependency>
@@ -191,18 +219,12 @@
             </dependency>
 
             <!-- 
-                 httpcomponents dependencies. Due to heritrix, these librairies
-                 cannot be upgraded up to 4.0.1
+                 httpcomponents dependencies.
             -->
             <dependency>
                 <groupId>${httpcomponentsGroupId}</groupId>
                 <artifactId>httpclient</artifactId>
-                <version>4.1.2</version>
-            </dependency>
-            <dependency>
-                <groupId>${httpcomponentsGroupId}</groupId>
-                <artifactId>httpcore</artifactId>
-                <version>4.1.2</version>
+                <version>4.2.3</version>
             </dependency>
 
             <!-- aspectj dependencies -->
@@ -372,15 +394,149 @@
                 <version>${heritrixVersion}</version>
                 <exclusions>
                     <exclusion>
-                        <artifactId>commons-codec</artifactId>
                         <groupId>commons-codec</groupId>
+                        <artifactId>commons-codec</artifactId>
                     </exclusion>
+                    <exclusion>
+                        <groupId>poi</groupId>
+                        <artifactId>poi</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>poi</groupId>
+                        <artifactId>poi-scratchpad</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-net</groupId>
+                        <artifactId>commons-net</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-io</groupId>                        
+                        <artifactId>commons-io</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-collections</groupId>                        
+                        <artifactId>commons-collections</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>                        
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-lang</groupId>                        
+                        <artifactId>commons-lang</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-cli</groupId>                        
+                        <artifactId>commons-cli</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>net.htmlparser.jericho</groupId>
+                        <artifactId>jericho-html</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.lowagie</groupId>  
+                        <artifactId>itext</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>junit</groupId>  
+                        <artifactId>junit</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>net.java.dev.jets3t</groupId>
+                        <artifactId>jets3t</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.anotherbigidea</groupId>
+                        <artifactId>javaswf</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>joda-time</groupId>
+                        <artifactId>joda-time</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.json</groupId>
+                        <artifactId>json</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.esotericsoftware</groupId>
+                        <artifactId>reflectasm</artifactId>
+                    </exclusion>
+<!--                    <exclusion>
+                        <groupId>org.archive.overlays</groupId>
+                        <artifactId>archive-overlay-commons-httpclient</artifactId>
+                    </exclusion>-->                    
+<!--                    <exclusion>
+                        <groupId>com.esotericsoftware</groupId>
+                        <artifactId>minlog</artifactId>
+                    </exclusion>-->
+<!--                    <exclusion>
+                        <groupId>com.sleepycat</groupId>
+                        <artifactId>je</artifactId>
+                    </exclusion>-->                    
+<!--                    <exclusion>
+                        <groupId>org.dnsjava</groupId>
+                        <artifactId>dnsjava</artifactId>
+                    </exclusion>-->                    
+<!--                    <exclusion>
+                        <groupId>fastutil</groupId>  
+                        <artifactId>fastutil</artifactId>
+                    </exclusion>-->
+<!--                    <exclusion>
+                        <groupId>org.gnu.inet</groupId>
+                        <artifactId>libidn</artifactId>
+                    </exclusion>-->                    
+<!--                    <exclusion>
+                        <groupId>it.unimi.dsi</groupId>
+                        <artifactId>mg4j</artifactId>
+                    </exclusion>-->                    
+<!--                    <exclusion>
+                        <groupId>com.esotericsoftware</groupId>
+                        <artifactId>kryo</artifactId>
+                    </exclusion>-->
+<!--                    <exclusion>
+                        <groupId>com.google.guava</groupId>
+                        <artifactId>guava</artifactId>
+                    </exclusion>-->
+<!--                    <exclusion>
+                        <groupId>net.java.dev.jna</groupId>
+                        <artifactId>jna</artifactId>
+                    </exclusion>-->
                 </exclusions>
             </dependency>
             <dependency>
                 <groupId>${heritrixGroupId}</groupId>
                 <artifactId>heritrix-engine</artifactId>
                 <version>${heritrixVersion}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.mortbay.jetty</groupId>
+                        <artifactId>jetty</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.mortbay.jetty</groupId>
+                        <artifactId>jetty-util</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.mortbay.jetty</groupId>
+                        <artifactId>jetty-sslengine</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.mortbay.jetty</groupId>
+                        <artifactId>servlet-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.restlet</groupId>
+                        <artifactId>org.restlet</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.noelios.restlet</groupId>
+                        <artifactId>com.noelios.restlet</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.noelios.restlet</groupId>
+                        <artifactId>com.noelios.restlet.ext.jetty</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>${heritrixGroupId}</groupId>
@@ -398,6 +554,18 @@
                     <exclusion>
                         <artifactId>${springGroupId}</artifactId>
                         <groupId>spring-core</groupId>
+                    </exclusion>
+<!--                    <exclusion>
+                        <groupId>${heritrixGroupId}</groupId>
+                        <artifactId>heritrix-commons</artifactId>
+                    </exclusion>-->
+                    <exclusion>
+                        <groupId>org.beanshell</groupId>
+                        <artifactId>bsh</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-all</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
@@ -477,6 +645,10 @@
                         <artifactId>commons-digester</artifactId>
                     </exclusion>
                     <exclusion>
+                        <groupId>commons-fileupload</groupId>
+                        <artifactId>commons-fileupload</artifactId>
+                    </exclusion>
+                    <exclusion>
                         <groupId>commons-configuration</groupId>
                         <artifactId>commons-configuration</artifactId>
                     </exclusion>
@@ -500,9 +672,12 @@
                         <groupId>xom</groupId>
                         <artifactId>xom</artifactId>
                     </exclusion>
+                    <exclusion>
+                        <groupId>org.beanshell</groupId>
+                        <artifactId>bsh-core</artifactId>
+                    </exclusion>
                 </exclusions>
             </dependency>
-
             <!-- web dependencies -->
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -526,7 +701,7 @@
             </dependency>
 
             <!-- graphics dependencies (cewolf, jfreechart, jcommon) -->
-            <dependency>
+<!--            <dependency>
                 <groupId>cewolf</groupId>
                 <artifactId>cewolf</artifactId>
                 <version>1.1.4</version>
@@ -540,10 +715,10 @@
                 <groupId>jcommon</groupId>
                 <artifactId>jcommon</artifactId>
                 <version>1.0.15</version>
-            </dependency>
+            </dependency>-->
 
             <!-- batik dependencies -->
-            <dependency>
+<!--            <dependency>
                 <groupId>batik</groupId>
                 <artifactId>batik-svggen</artifactId>
                 <version>1.6-1</version>
@@ -552,15 +727,24 @@
                 <groupId>batik</groupId>
                 <artifactId>batik-css</artifactId>
                 <version>1.6-1</version>
-            </dependency>
+            </dependency>-->
 
             <!-- displaytag dependencies -->
             <dependency>
                 <groupId>displaytag</groupId>
                 <artifactId>displaytag</artifactId>
                 <version>1.2</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>            
+                        <artifactId>jcl104-over-slf4j</artifactId>                        
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-beanutils</groupId>
+                        <artifactId>commons-beanutils</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
-
             <!-- jasper et dynamicJasper dependencies -->
             <dependency>
                 <groupId>net.sf.jasperreports</groupId>
@@ -578,6 +762,30 @@
                     <exclusion>
                         <groupId>commons-logging</groupId>
                         <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>jfreechart</groupId>
+                        <artifactId>jfreechart</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-digester</groupId>
+                        <artifactId>commons-digester</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>jfree</groupId>
+                        <artifactId>jcommon</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>jfree</groupId>
+                        <artifactId>jfreechart</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>eclipse</groupId>
+                        <artifactId>jdtcore</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.lowagie</groupId>
+                        <artifactId>itext</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
@@ -601,9 +809,10 @@
             <!-- tika dependencies -->
             <dependency>
                 <groupId>org.apache.tika</groupId>
-                <artifactId>tika-parsers</artifactId>
-                <version>0.9</version>
-                <exclusions>
+                <artifactId>tika-core</artifactId>
+                <version>1.3</version>
+<!--                <type>jar</type>-->
+<!--                <exclusions>
                     <exclusion>
                         <groupId>commons-httpclient</groupId>
                         <artifactId>commons-httpclient</artifactId>
@@ -616,9 +825,17 @@
                         <groupId>asm</groupId>
                         <artifactId>asm</artifactId>
                     </exclusion>
-                </exclusions>
+                    <exclusion>
+                        <groupId>org.apache.pdfbox</groupId>
+                        <artifactId>pdfbox</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.pdfbox</groupId>
+                        <artifactId>jempbox</artifactId>
+                    </exclusion>
+                </exclusions>-->
             </dependency>
-        
+
             <!-- EasyMock --> 
             <dependency>
                 <groupId>org.easymock</groupId>
@@ -643,16 +860,46 @@
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-java</artifactId>
-                <version>2.22.0</version>
+                <version>2.31.0</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.seleniumhq.selenium</groupId>
+                        <artifactId>selenium-android-driver</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.seleniumhq.selenium</groupId>
+                        <artifactId>selenium-chrome-driver</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.seleniumhq.selenium</groupId>
+                        <artifactId>selenium-htmlunit-driver</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.seleniumhq.selenium</groupId>
+                        <artifactId>selenium-ie-driver</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.seleniumhq.selenium</groupId>
+                        <artifactId>selenium-iphone-driver</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.seleniumhq.selenium</groupId>
+                        <artifactId>selenium-safari-driver</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.seleniumhq.selenium</groupId>
+                        <artifactId>jetty-repacked</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
+
             <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-remote-driver</artifactId>
-                <version>2.22.0-OPENS</version>
+                <groupId>com.saucelabs</groupId>
+                <artifactId>sebuilder-interpreter</artifactId>
+                <version>1.1.0-OPEN-S</version>
             </dependency>
-            
             <!-- harlib api --> 
-            <dependency>
+<!--            <dependency>
                 <groupId>edu.umass.cs.benchlab.har</groupId>
                 <artifactId>harlib</artifactId>
                 <version>1.0b10</version>
@@ -661,22 +908,99 @@
                 <groupId>edu.umass.cs.benchlab.har</groupId>
                 <artifactId>harlib-jackson</artifactId>
                 <version>1.0b10</version>
+            </dependency>-->
+            <!-- html and css parsers -->
+            <dependency>
+                <!-- jsoup HTML parser library @ http://jsoup.org/ -->
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>1.7.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.phloc</groupId>
+                <artifactId>phloc-css</artifactId>
+                <version>3.3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.phloc</groupId>
+                <artifactId>phloc-commons</artifactId>
+                <version>4.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>20090211</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
     <repositories>
         <repository>
+            <url>http://repo1.maven.org/maven2/</url>
+            <id>maven-repos</id>
+            <layout>default</layout>
+            <name>Maven default repos</name>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
             <url>http://download.java.net/maven/2/</url>
             <id>hibernate-persistence</id>
             <layout>default</layout>
             <name>Repository for library Library[hibernate-persistence]</name>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
-<!--         dynamicJasper repository needed for dynamicJasper dependencies -->
         <repository>
             <id>djmaven2</id>
             <url>http://archiva.fdvs.com.ar/repository/public1/</url>
             <name>DynamicJasper public Repository</name>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>phlocRepos</id>
+            <url>http://repo.phloc.com/maven2/</url>
+            <name>phloc repository</name>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>heritrixRepos</id>
+            <url>http://builds.archive.org:8080/maven2/</url>
+            <name>heritrix repository</name>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>saucelabs-repository</id>
+            <url>https://repository-saucelabs.forge.cloudbees.com/release</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
     </repositories>
 

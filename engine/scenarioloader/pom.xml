@@ -6,13 +6,13 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>2.1.0-SNAPSHOT</version>
+        <version>3.0.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>scenarioloader</artifactId>
     <name>scenarioloader</name>
-    <version>2.1.0-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <url>http://www.tanaguru.org</url>
     <build>
         <testResources>
@@ -43,13 +43,18 @@
             <version>${engineVersion}</version>
         </dependency>
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.opens.webdriver</groupId>
-            <artifactId>webdriver-tools</artifactId>
+            <groupId>${engineGroupId}</groupId>
+            <artifactId>sebuilder-interpreter-tools</artifactId>
             <version>${engineVersion}</version>
         </dependency>
         <dependency>

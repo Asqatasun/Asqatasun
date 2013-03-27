@@ -6,24 +6,88 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>2.1.0-SNAPSHOT</version>
+        <version>3.0.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>crawler</artifactId>
     <name>crawler</name>
-    <version>2.1.0-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <url>http://www.tanaguru.org</url>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+<!--            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>false</skipTests>
+                    <systemProperties>
+                        <property>
+                        <name>java.util.logging.config.file</name>
+                        <value>/home/jkowalczyk/Documents/Sources/TanaguruEngine_wc/Trunk/engine/crawler/src/test/resources/logging.properties</value>
+                        </property>
+                    </systemProperties>
+                </configuration>
+                
+            </plugin>-->
+        </plugins>
+    </build>
     <dependencies>
-        <dependency>
+<!--        <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-api</artifactId>
             <version>${engineVersion}</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>audit</artifactId>
             <version>${engineVersion}</version>
+            <scope>compile</scope>
+        </dependency>
+<!--        <dependency>
+            <groupId>${heritrixGroupId}</groupId>
+            <artifactId>heritrix-commons</artifactId>
+            <scope>compile</scope>
+        </dependency>-->
+        <dependency>
+            <groupId>${heritrixGroupId}</groupId>
+            <artifactId>heritrix-engine</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.juniversalchardet</groupId>
+            <artifactId>juniversalchardet</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>${springGroupId}</groupId>
+            <artifactId>spring-context</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <scope>compile</scope>
+        </dependency>
+<!--        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <scope>test</scope>
+        </dependency>-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
@@ -51,7 +115,7 @@
             <artifactId>aspectjweaver</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>${springGroupId}</groupId>
             <artifactId>spring-core</artifactId>
             <scope>compile</scope>
@@ -60,11 +124,6 @@
             <groupId>${springGroupId}</groupId>
             <artifactId>spring-aop</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>${springGroupId}</groupId>
-            <artifactId>spring-context</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${springGroupId}</groupId>
@@ -80,19 +139,7 @@
             <groupId>${springGroupId}</groupId>
             <artifactId>spring-orm</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>${heritrixGroupId}</groupId>
-            <artifactId>heritrix-commons</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${heritrixGroupId}</groupId>
-            <artifactId>heritrix-engine</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.googlecode.juniversalchardet</groupId>
-            <artifactId>juniversalchardet</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
