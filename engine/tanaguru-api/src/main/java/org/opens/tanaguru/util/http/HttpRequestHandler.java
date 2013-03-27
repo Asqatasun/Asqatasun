@@ -23,7 +23,6 @@
 package org.opens.tanaguru.util.http;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -44,7 +43,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.params.HttpParams;
 import org.apache.log4j.Logger;
-import org.archive.net.UURIFactory;
 
 /**
  *
