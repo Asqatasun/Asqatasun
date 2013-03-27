@@ -1,6 +1,40 @@
 -- -----------------------------------------------------------------
 -- Creation of relation between contract and Url (through Option)
 -- -----------------------------------------------------------------
+
+-- -----------------------------------------------------
+-- Table `tanaguru`.`CRITERION_STATISTICS`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CRITERION_STATISTICS` (
+  `Id_Criterion_Statistics` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Nb_Passed` int(11) DEFAULT NULL,
+  `Nb_Failed` int(11) DEFAULT NULL,
+  `Nb_Nmi` int(11) DEFAULT NULL,
+  `Nb_Na` int(11) DEFAULT NULL,
+  `Nb_Suspected` int(11) DEFAULT NULL,
+  `Nb_Detected` int(11) DEFAULT NULL,
+  `Nb_Not_Tested` int(11) DEFAULT NULL,
+  `Criterion_Result` varchar(255) DEFAULT NULL,
+  `Id_Criterion` bigint(20) DEFAULT NULL,
+  `Id_Web_Resource_Statistics` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`Id_Criterion_Statistics`),
+  INDEX `fk_CRITERION_STATISTICS_CRITERION` (`Id_Criterion` ASC) ,
+  CONSTRAINT `fk_CRITERION_STATISTICS_CRITERION`
+    FOREIGN KEY (`Id_Criterion` )
+    REFERENCES `CRITERION` (`Id_Criterion` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  INDEX `fk_CRITERION_STATISTICS_WEB_RESOURCE_STATISTICS` (`Id_Web_Resource_Statistics` ASC) ,
+  CONSTRAINT `fk_CRITERION_STATISTICS_WEB_RESOURCE_STATISTICS`
+    FOREIGN KEY (`Id_Web_Resource_Statistics` )
+    REFERENCES `WEB_RESOURCE_STATISTICS` (`Id_Web_Resource_Statistics` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
 drop procedure if exists create_criterion_statistics;
 delimiter |
 
@@ -128,3 +162,31 @@ ALTER TABLE THEME_STATISTICS ADD `Nb_Not_Tested` int(11) DEFAULT NULL AFTER Nb_D
 ALTER TABLE CRITERION_STATISTICS ADD `Nb_Suspected` int(11) DEFAULT NULL AFTER Nb_Na;
 ALTER TABLE CRITERION_STATISTICS ADD `Nb_Detected` int(11) DEFAULT NULL AFTER Nb_Suspected;
 ALTER TABLE CRITERION_STATISTICS ADD `Nb_Not_Tested` int(11) DEFAULT NULL AFTER Nb_Detected;
+
+ALTER TABLE TEST ADD `No_Process` bit(1) DEFAULT b'1';
+
+--
+-- Structure de la table `PRE_PROCESS_RESULT`
+--
+
+CREATE TABLE IF NOT EXISTS `PRE_PROCESS_RESULT` (
+  `Id_Pre_Process_Result` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Pre_Process_Key` varchar(255) NOT NULL,
+  `Pre_Process_Value` mediumtext DEFAULT NULL,
+  `Id_Audit` bigint(20) NOT NULL,
+  `Id_Web_Resource` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`Id_Pre_Process_Result`),
+  UNIQUE KEY `Key_Wr_Audit` (`Pre_Process_Key`,`Id_Web_Resource`,`Id_Audit`),
+  INDEX `fk_PRE_PROCESS_RESULT_AUDIT` (`Id_Audit` ASC) ,
+  CONSTRAINT `fk_PRE_PROCESS_RESULT_AUDIT`
+    FOREIGN KEY (`Id_Audit` )
+    REFERENCES `AUDIT` (`Id_Audit` )
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  INDEX `fk_PRE_PROCESS_RESULT_WEB_RESOURCE` (`Id_Web_Resource` ASC) ,
+  CONSTRAINT `fk_PRE_PROCESS_RESULT_WEB_RESOURCE`
+    FOREIGN KEY (`Id_Web_Resource` )
+    REFERENCES `WEB_RESOURCE` (`Id_Web_Resource` )
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

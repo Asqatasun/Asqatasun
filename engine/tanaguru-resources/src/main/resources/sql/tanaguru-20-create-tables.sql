@@ -231,6 +231,32 @@ CREATE TABLE IF NOT EXISTS `PROCESS_RESULT` (
   KEY `FK1C41A80DB6D0E092` (`Id_Audit_Net_Result`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Structure de la table `PRE_PROCESS_RESULT`
+--
+
+CREATE TABLE IF NOT EXISTS `PRE_PROCESS_RESULT` (
+  `Id_Pre_Process_Result` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Pre_Process_Key` varchar(255) NOT NULL,
+  `Pre_Process_Value` mediumtext DEFAULT NULL,
+  `Id_Audit` bigint(20) NOT NULL,
+  `Id_Web_Resource` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`Id_Pre_Process_Result`),
+  UNIQUE KEY `Key_Wr_Audit` (`Pre_Process_Key`,`Id_Web_Resource`,`Id_Audit`),
+  INDEX `fk_PRE_PROCESS_RESULT_AUDIT` (`Id_Audit` ASC) ,
+  CONSTRAINT `fk_PRE_PROCESS_RESULT_AUDIT`
+    FOREIGN KEY (`Id_Audit` )
+    REFERENCES `AUDIT` (`Id_Audit` )
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  INDEX `fk_PRE_PROCESS_RESULT_WEB_RESOURCE` (`Id_Web_Resource` ASC) ,
+  CONSTRAINT `fk_PRE_PROCESS_RESULT_WEB_RESOURCE`
+    FOREIGN KEY (`Id_Web_Resource` )
+    REFERENCES `WEB_RESOURCE` (`Id_Web_Resource` )
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
 -- --------------------------------------------------------
 
 --
@@ -324,6 +350,7 @@ CREATE TABLE IF NOT EXISTS `TEST` (
   `Id_Level` bigint(20) DEFAULT NULL,
   `Id_Rule` bigint(20) DEFAULT NULL,
   `Id_Scope` bigint(20) DEFAULT NULL,
+  `No_Process` bit(1) DEFAULT b'1',
   PRIMARY KEY (`Id_Test`),
   KEY `FK273C9250C99824` (`Id_Scope`),
   KEY `FK273C9272343A84` (`Id_Level`),
@@ -367,6 +394,23 @@ CREATE TABLE IF NOT EXISTS `WEB_RESOURCE` (
   KEY `FKD9A970B92F70FF12` (`Id_Web_Resource_Parent`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+
+--
+-- Structure de la table `SNAPSHOT`
+--
+
+--CREATE TABLE IF NOT EXISTS `SNAPSHOT` (
+--  `Id_Snapshot` bigint(20) NOT NULL AUTO_INCREMENT,
+--  `Snapshot_Content` mediumblob,
+--  `Id_Page` bigint(20) DEFAULT NULL,
+--  PRIMARY KEY (`Id_Snapshot`),
+--  INDEX `fk_SNAPSHOT_WEB_RESOURCE` (`Id_Page` ASC) ,
+--  CONSTRAINT `fk_SNAPSHOT_WEB_RESOURCE`
+--    FOREIGN KEY (`Id_Page` )
+--    REFERENCES `WEB_RESOURCE` (`Id_Web_Resource` )
+--    ON DELETE CASCADE
+--    ON UPDATE NO ACTION
+--) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- -----------------------------------------------------
 -- Table `PARAMETER_FAMILY`
