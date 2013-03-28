@@ -21,35 +21,39 @@
  */
 package org.opens.tanaguru.scenarioloader;
 
-import com.sebuilder.interpreter.IO;
-import com.sebuilder.interpreter.NewPageListener;
 import com.sebuilder.interpreter.Script;
+import com.sebuilder.interpreter.factory.ScriptFactory;
+import com.sebuilder.interpreter.factory.TestRunFactory;
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
-import org.apache.tools.ant.filters.StringInputStream;
 import org.json.JSONException;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.opens.tanaguru.contentloader.HarFileContentLoaderFactory;
 import org.opens.tanaguru.crawler.util.CrawlUtils;
+import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.Content;
+import org.opens.tanaguru.entity.audit.PreProcessResult;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
+import org.opens.tanaguru.entity.factory.audit.PreProcessResultFactory;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
+import org.opens.tanaguru.entity.service.audit.PreProcessResultDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.sebuilder.interpreter.NewPageListener;
+import org.opens.tanaguru.sebuilder.interpreter.factory.TgStepTypeFactory;
+import org.opens.tanaguru.sebuilder.interpreter.factory.TgTestRunFactory;
+import org.opens.tanaguru.sebuilder.tools.ProfileFactory;
 import org.opens.tanaguru.util.factory.DateFactory;
-import org.opens.webdriver.tools.ProfileFactory;
 
 /**
  *
@@ -81,6 +85,16 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
 //    public void setHarFileContentLoaderFactory(HarFileContentLoaderFactory harFileContentLoaderFactory) {
 //        this.harFileContentLoaderFactory = harFileContentLoaderFactory;
 //    }
+
+//    private SnapshotDataService snapshotDataService;
+//    public void setSnapshotDataService(SnapshotDataService snapshotDataService) {
+//        this.snapshotDataService = snapshotDataService;
+//    }
+//    
+//    private SnapshotFactory snapshotFactory;
+//    public void setSnapshotFactory(SnapshotFactory snapshotFactory) {
+//        this.snapshotFactory = snapshotFactory;
+//    }    
     
     /**
      * 
@@ -102,6 +116,16 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         this.contentFactory = contentFactory;
     }
     
+    private PreProcessResultDataService preProcessResultDataService;
+    public void setPreProcessResultDataService(PreProcessResultDataService preProcessResultDataService) {
+        this.preProcessResultDataService = preProcessResultDataService;
+    }
+    
+    private PreProcessResultFactory preProcessResultFactory;
+    public void setPreProcessResultFactory(PreProcessResultFactory preProcessResultFactory) {
+        this.preProcessResultFactory = preProcessResultFactory;
+    }
+    
     private DateFactory dateFactory;
     public void setDateFactory(DateFactory dateFactory) {
         this.dateFactory = dateFactory;
@@ -109,13 +133,23 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
     
     List<SSPInfo> sspInfoList = new LinkedList<SSPInfo>();
     
+    private Map<String, String> jsScriptMap;
+    public Map<String, String> getJsScriptMap() {
+        return jsScriptMap;
+    }
+
+    public void setJsScriptMap(Map<String, String> jsScriptMap) {
+        this.jsScriptMap = jsScriptMap;
+    }
+    
+    
     /**
      * The scenario
      */
     private String scenario;
 
     ScenarioLoaderImpl(
-            WebResource webResource,
+            WebResource webResource, 
             String scenario) {
         super();
         this.scenario = scenario;
@@ -124,8 +158,8 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
     }
     
     ScenarioLoaderImpl(
-            WebResource webResource,
-            String scenario, 
+            WebResource webResource, 
+            String scenario,
             HarFileContentLoaderFactory harFileContentLoaderFactory) {
         super();
         this.scenario = scenario;
@@ -139,8 +173,14 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         try {
             LOGGER.info("Launch Scenario "   + scenario );
             FirefoxProfile firefoxProfile = profileFactory.getScenarioProfile();
-            Script script = IO.read(scenario, firefoxProfile);
-            script.addNewPageListener(this);
+            TestRunFactory testRunFactory = new TgTestRunFactory();
+            ((TgTestRunFactory)testRunFactory).addNewPageListener(this);
+            ((TgTestRunFactory)testRunFactory).setFirefoxProfile(firefoxProfile);
+            ((TgTestRunFactory)testRunFactory).setJsScriptMap(jsScriptMap);
+            ScriptFactory scriptFactory = new ScriptFactory();
+            scriptFactory.setTestRunFactory(testRunFactory);
+            scriptFactory.setStepTypeFactory(new TgStepTypeFactory());
+            Script script = scriptFactory.parse(scenario);
             try {
                 if (script.run()) {
                     LOGGER.info(webResource.getURL()  + " succeeded");
@@ -148,11 +188,9 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
                     LOGGER.info(webResource.getURL() + " failed");
                 }
             } catch (RuntimeException re) {
+                LOGGER.info("RuntimeException  ?");
                 LOGGER.warn(re.getMessage());
             }    
-//            for (SSPInfo sspInfo : sspInfoList) {
-//                LOGGER.info(" retrieved  in order " +sspInfo.getUrl());
-//            }
             // Call to the harFileContentLoader to retrieve fetched data
 //            HarFileContentLoader harFileContentLoader = 
 //                    harFileContentLoaderFactory.create(
@@ -167,8 +205,10 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
             // the entry into this map has to be removed.
             profileFactory.shutdownFirefoxProfile(firefoxProfile);
         } catch (IOException ex) {
+            LOGGER.info("IOException  ?");
             LOGGER.warn(ex.getMessage());
         } catch (JSONException ex) {
+            LOGGER.info("JSONException  ?");
             LOGGER.warn(ex.getMessage());
         }
     }
@@ -178,7 +218,12 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
      * @param url
      * @param sourceCode 
      */
-    private void fireNewSSP(String url, String sourceCode) {
+    private void fireNewSSP(
+            String url, 
+            String sourceCode, 
+            byte[] snapshotContent, 
+            Map<String, String> jsScriptMap) {
+
         LOGGER.info("fire New SSP " + url);
         if (StringUtils.isEmpty(sourceCode)) {
             LOGGER.info("Emtpy SSP " + url + " not saved");
@@ -186,19 +231,42 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         }
         String charset = UFT8;
         try {
-            charset = CrawlUtils.extractCharset(new StringInputStream(sourceCode));
+            charset = CrawlUtils.extractCharset(IOUtils.toInputStream(sourceCode));
         } catch (IOException ex) {
             Logger.getLogger(this.getClass()).warn(ex);
         }
+        Page page = getWebResource(url);
         SSP ssp = contentFactory.createSSP(
                 dateFactory.createDate(),
                 url,
                 sourceCode,
-                getWebResource(url),
+                page,
                 HttpStatus.SC_OK);
         ssp.setCharset(charset);
         contentDataService.saveOrUpdate(ssp);
         result.add(ssp);
+        
+//        if (snapshotContent != null) {
+//            Snapshot snapshot = snapshotFactory.create(
+//                    page, 
+//                    snapshotContent);
+//            snapshotDataService.saveOrUpdate(snapshot);
+//        }
+        
+        Audit audit = null;
+        if (page.getAudit() != null) {
+            audit = page.getAudit();
+        } else if (page.getParent().getAudit() != null) {
+            audit = page.getParent().getAudit();
+        }
+        for (Map.Entry<String, String> entry : jsScriptMap.entrySet()) {
+            PreProcessResult ppr = preProcessResultFactory.create(
+                    entry.getKey(), 
+                    entry.getValue(),
+                    audit, 
+                    page);
+            preProcessResultDataService.saveOrUpdate(ppr);
+        }
         
         // XXX : To do, remove these lines if the har file reader is never used
 //        try {
@@ -234,8 +302,12 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
     }
     
     @Override
-    public void fireNewPage(String url, String sourceCode) {
-        fireNewSSP(url, sourceCode);
+    public void fireNewPage(
+            String url, 
+            String sourceCode, 
+            byte[] snapshot, 
+            Map<String, String> jsScriptMap) {
+        fireNewSSP(url, sourceCode, snapshot, jsScriptMap);
     }
 
     /**
@@ -315,16 +387,6 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
             this.url = url;
             this.sourceCode = sourceCode;
         }
-    }
- 
-    private String encodeSourceCodeToUtf8(String sourceCode, String charset) {
-        Charset incoming = Charset.forName(charset);
-        ByteBuffer inputBuffer = ByteBuffer.wrap(sourceCode.getBytes());
-        CharBuffer data = incoming.decode(inputBuffer);
-        Charset utf8charset = Charset.forName(UFT8);
-        ByteBuffer outputBuffer = utf8charset.encode(data);
-        byte[] outputData = outputBuffer.array();
-        return new String(outputData);
     }
 
 }

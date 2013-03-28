@@ -4,13 +4,16 @@
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-<!--    <bean id="harFileContentLoaderFactory" class="org.opens.tanaguru.contentloader.HarFileContentLoaderFactoryImpl"/>-->
-
-    <bean id="scenarioLoaderFactory" class="org.opens.tanaguru.scenarioloader.ScenarioLoaderFactoryImpl"/>
-
+    <bean id="scenarioLoaderFactory" class="org.opens.tanaguru.scenarioloader.ScenarioLoaderFactoryImpl">
+        <property name="jsScriptMap">
+            <map>
+                <entry key="colorExtractor" value="/js/colorExtractor.js"/>
+            </map>
+        </property>
+    </bean>
     <bean id="scenarioLoaderService" class="org.opens.tanaguru.service.ScenarioLoaderServiceImpl"/>
 
-    <bean id="profileFactory" class="org.opens.webdriver.tools.ProfileFactory" factory-method="getInstance"/>
+    <bean id="profileFactory" class="org.opens.tanaguru.sebuilder.tools.ProfileFactory" factory-method="getInstance"/>
 
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="targetObject">

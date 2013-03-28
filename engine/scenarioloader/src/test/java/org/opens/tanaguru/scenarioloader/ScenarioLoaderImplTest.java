@@ -24,11 +24,7 @@ package org.opens.tanaguru.scenarioloader;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import junit.framework.TestCase;
@@ -43,8 +39,8 @@ import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
+import org.opens.tanaguru.sebuilder.tools.ProfileFactory;
 import org.opens.tanaguru.util.factory.DateFactory;
-import org.opens.webdriver.tools.ProfileFactory;
 
 /**
  *

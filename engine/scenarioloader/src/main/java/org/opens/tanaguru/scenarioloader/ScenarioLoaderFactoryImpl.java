@@ -21,13 +21,23 @@
  */
 package org.opens.tanaguru.scenarioloader;
 
-import org.opens.tanaguru.contentloader.HarFileContentLoaderFactory;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
+import org.opens.tanaguru.entity.factory.audit.PreProcessResultFactory;
+import org.opens.tanaguru.entity.factory.subject.SnapshotFactory;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
+import org.opens.tanaguru.entity.service.audit.PreProcessResultDataService;
+import org.opens.tanaguru.entity.service.subject.SnapshotDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.util.factory.DateFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
 /**
  *
@@ -45,6 +55,26 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
 //        this.harFileContentLoaderFactory = harFileContentLoaderFactory;
 //    }
 
+//    private SnapshotDataService snapshotDataService;
+//    public SnapshotDataService getSnapshotDataService() {
+//        return snapshotDataService;
+//    }
+//
+//    @Autowired
+//    public void setSnapshotDataService(SnapshotDataService snapshotDataService) {
+//        this.snapshotDataService = snapshotDataService;
+//    }
+//    
+//    private SnapshotFactory snapshotFactory;
+//    public SnapshotFactory getSnapshotFactory() {
+//        return snapshotFactory;
+//    }
+//
+//    @Autowired
+//    public void setSnapshotFactory(SnapshotFactory snapshotFactory) {
+//        this.snapshotFactory = snapshotFactory;
+//    }
+    
     private WebResourceDataService webResourceDataService;
     public WebResourceDataService getWebResourceDataService() {
         return webResourceDataService;
@@ -75,6 +105,45 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
         this.contentFactory = contentFactory;
     }
     
+    private PreProcessResultDataService preProcessResultDataService;
+    public PreProcessResultDataService getPreProcessResultDataService() {
+        return preProcessResultDataService;
+    }
+
+    @Autowired
+    public void setPreProcessResultDataService(PreProcessResultDataService preProcessResultDataService) {
+        this.preProcessResultDataService = preProcessResultDataService;
+    }
+    
+    private PreProcessResultFactory preProcessResultFactory;
+    public PreProcessResultFactory getPreProcessResultFactory() {
+        return preProcessResultFactory;
+    }
+
+    @Autowired
+    public void setPreProcessResultFactory(PreProcessResultFactory preProcessResultFactory) {
+        this.preProcessResultFactory = preProcessResultFactory;
+    }
+    
+    private Map<String, String> jsScriptMap;
+    public Map<String, String> getJsScriptMap() {
+        return jsScriptMap;
+    }
+
+    public void setJsScriptMap(Map<String, String> jsScriptMap) {
+        if (this.jsScriptMap == null) {
+            this.jsScriptMap = new HashMap<String,String>();
+        }
+        for (Map.Entry<String, String> entry : jsScriptMap.entrySet()) {
+        Resource resource = new ClassPathResource(entry.getValue());
+            try {
+                this.jsScriptMap.put(entry.getKey(), FileUtils.readFileToString(resource.getFile()));
+            } catch (IOException ex) {
+                Logger.getLogger(this.getClass()).warn(ex);
+            }
+        }
+    }
+    
     private DateFactory dateFactory;
     public DateFactory getDateFactory() {
         return dateFactory;
@@ -94,6 +163,11 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
         scenarioLoader.setContentFactory(contentFactory);
         scenarioLoader.setDateFactory(dateFactory);
         scenarioLoader.setWebResourceDataService(webResourceDataService);
+//        scenarioLoader.setSnapshotDataService(snapshotDataService);
+//        scenarioLoader.setSnapshotFactory(snapshotFactory);
+        scenarioLoader.setPreProcessResultFactory(preProcessResultFactory);
+        scenarioLoader.setPreProcessResultDataService(preProcessResultDataService);
+        scenarioLoader.setJsScriptMap(jsScriptMap);
         return scenarioLoader;
     }
 
