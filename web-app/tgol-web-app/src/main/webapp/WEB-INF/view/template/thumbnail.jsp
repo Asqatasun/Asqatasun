@@ -3,23 +3,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-                <c:choose>
-                    <c:when test="${size == 'T'}">
-                        <c:set var="height" value="70"/>
-                        <c:set var="width" value="90"/>
-                    </c:when>
-                    <c:when test="${size == 'S'}">
-                        <c:set var="height" value="150"/>
-                        <c:set var="width" value="200"/>
-                    </c:when>
-                </c:choose>
+<!--                        <img src="<c:url value="/home/contract/wr-snapshot.html?wr=${param.wr}"/>" alt="${url}" /><br/> -->
+                <c:set var="height" value="170"/>
+                <c:set var="width" value="270"/>
                 <div class="${proportion} ${offset}">
                     <div class="thumbnail" >
                         <c:choose>
                             <c:when test="${url != '' && scope != 'GROUPOFFILES' && scope != 'FILE' && scope != 'SCENARIO' && 
-                                            not empty configProperties['snapshotServiceUrl'] && 
-                                            not empty configProperties['snapshotServiceUserId']}">
-                        <img src="${pageContext.request.scheme}://${configProperties['snapshotServiceUrl']}?userId=${configProperties['snapshotServiceUserId']}&amp;q=90&amp;w=${width}&amp;h=${height}&amp;sdx=1024&amp;url=${url}" alt="" /><br/>
+                                            not empty configProperties['snapshotServiceUrl']}">
+<!--                        <img src="${pageContext.request.scheme}://${configProperties['snapshotServiceUrl']}?userId=${configProperties['snapshotServiceUserId']}&amp;q=90&amp;w=${width}&amp;sdx=1024&amp;url=${url}" alt="" /><br/>-->
+                        <img src="${pageContext.request.scheme}://${configProperties['snapshotServiceUrl']}&amp;width=${width}&amp;height=${height}&amp;screen=1024&amp;url=${url}" alt="${url}" /><br/>
                             </c:when>
                             <c:otherwise>
                                 <c:choose>
@@ -32,7 +25,7 @@
                                         </c:set>
                                     </c:otherwise>
                                 </c:choose>
-                        <img src="${tgLogoUrl}" alt="" /><br/>
+                        <img src="${tgLogoUrl}" alt="" class="tg-logo"/><br/>
                             </c:otherwise>
                         </c:choose>
                     </div>

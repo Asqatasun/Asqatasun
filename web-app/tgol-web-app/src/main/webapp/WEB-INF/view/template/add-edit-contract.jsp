@@ -7,12 +7,12 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@taglib uri="http://tagutils" prefix="function" %>
 
-                <div class="span14 offset1">
+                <div class="span16">
                     <div id="mandatory-elements-message" class="alert-message block-message warning">
                         <spring:message code="sign-up.mandatoryElementsMessage"/>
                     </div><!-- id="mandatory-elements-message" class="alert-message block-message warning"-->
                 </div><!-- class="span15 offset1" -->
-                <div class="span14 offset1">
+                <div class="span16">
                     <div id="account-settings-form">
                         <form:form method="post" modelAttribute="createContractCommand" acceptCharset="UTF-8" enctype="application/x-www-form-urlencoded">
                             <spring:hasBindErrors name="createContractCommand">
@@ -140,7 +140,7 @@
                                 <div class="clearfix ${contractOptionErrorClass}">
                                     <label id="set-up-${i18nKey}" for="${i18nKey}"><fmt:message key="${i18nKey}"/></label>
                                     <div class="set-up-value input">
-                                            <form:input id="${i18nKey}" path="optionMap[${code}]" cssErrorClass="error"/>
+                                        <form:input id="${i18nKey}" path="optionMap[${code}]" cssErrorClass="xlarge error" cssClass="xlarge"/>
                                             <form:errors path="optionMap[${code}]" cssClass="alert-message error" /><br/>
                                             <span class="help-block">
                                             <c:choose>
@@ -164,4 +164,4 @@
                             </div>
                         </form:form>
                     </div><!-- id="account-settings-form" -->
-                </div><!-- class="span14 offset1" -->
+                </div><!-- class="span16" -->

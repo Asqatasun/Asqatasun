@@ -6,11 +6,11 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>                
 
-                <div class="span15 offset1">
+                <div class="span16">
                     <div id="mandatory-elements-message" class="alert-message block-message warning">
                         <spring:message code="sign-up.mandatoryElementsMessage"/>
                     </div><!-- id="mandatory-elements-message" class="alert-message block-message warning"-->
-                </div><!-- class="span15 offset1" -->
+                </div><!-- class="span16" -->
                 <c:set var="siteToAudit" scope="page">
                     <spring:message code="sign-up.siteToAudit"/>
                 </c:set>
@@ -38,7 +38,7 @@
                 <c:set var="admin" scope="page">
                     <spring:message code="add-user.admin"/>
                 </c:set>
-                <div class="span15 offset1">
+                <div class="span16">
                     <div id="sign-up-form">
                         <form:form method="post" modelAttribute="createUserCommand" acceptCharset="UTF-8" enctype="application/x-www-form-urlencoded">
                             <spring:hasBindErrors name="createUserCommand">
@@ -155,4 +155,4 @@
                         </div><!-- class="actions" -->
                         </form:form>
                     </div> <!-- id="sign-in-form" -->
-                </div><!-- class="span14 offset1" -->
+                </div><!-- class="span16" -->

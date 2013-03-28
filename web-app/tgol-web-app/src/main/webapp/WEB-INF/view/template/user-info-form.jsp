@@ -38,7 +38,7 @@
                         <c:set var="inhibActivateAndAdmin" scope="page" value="true"/>
                     </c:if>
                 </sec:authorize>
-                <div class="span14 offset1">
+                <div class="span16">
                     <div id="account-settings-form">
                         <form:form method="post" modelAttribute="createUserCommand" acceptCharset="UTF-8" enctype="application/x-www-form-urlencoded">
                             <spring:hasBindErrors name="createUserCommand">
@@ -137,4 +137,4 @@
                             </div>
                         </form:form>
                     </div><!-- id="account-settings-form" -->
-                </div><!-- class="span14 offset1" -->
+                </div><!-- class="span16" -->

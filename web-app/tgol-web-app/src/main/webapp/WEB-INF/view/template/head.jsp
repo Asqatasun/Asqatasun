@@ -11,14 +11,31 @@
     <!-- Le styles -->
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
-    <link rel="stylesheet" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Css/bootstrap-min.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Css/tgm.css"/>
+        <c:if test="${addJqueryUI}">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Css/jquery-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Css/prettify.min.css"/>
+        </c:if>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Css/tgm-min.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Css/font-open-min.css"/>
     <link rel="icon" type="image/ico" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/tanaguru.ico" />
+    <c:set var="modernizrJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/modernizr.min.js" scope="request"/>
     </c:when>
     <c:otherwise>
-    <link rel="stylesheet" href="<c:url value="/Css/bootstrap-min.css"/>" />
-    <link rel="stylesheet" type="text/css" href="<c:url value="/Css/tgm.css"/>" />
+        <c:if test="${addJqueryUI}">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/External-Css/jquery-ui.min.css"/>"/>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/External-Css/prettify.min.css"/>"/>
+        </c:if>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/External-Css/bootstrap.min.css"/>" />
+    <link rel="stylesheet" type="text/css" href="<c:url value="/Css/tgm-min.css"/>" />
+    <link rel="stylesheet" type="text/css" href="<c:url value="/Css/font-open-min.css"/>" />
     <link rel="icon" type="image/ico" href="<c:url value="/Images/tanaguru.ico"/>" />    
+    <c:set var="modernizrJsUrl" scope="request">
+        <c:url value="/External-Js/modernizr.min.js"/>
+    </c:set>
     </c:otherwise>
 </c:choose>
+    <!--[if lte IE 8]>
+    <script type="text/javascript" src="${modernizrJsUrl}"></script>
+    <![endif]-->
 </head>
