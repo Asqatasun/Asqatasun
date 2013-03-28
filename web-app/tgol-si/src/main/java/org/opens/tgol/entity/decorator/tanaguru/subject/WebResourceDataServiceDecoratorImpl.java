@@ -27,6 +27,7 @@ import org.displaytag.properties.SortOrderEnum;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
@@ -164,19 +165,25 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
         return ((TgolWebResourceDAO)entityDao).
                 retrieveProcessResultListByWebResourceAndScope(webResource, scope);
     }
+    
+    @Override
+    public Collection<ProcessResult> getProcessResultListByWebResourceAndCriterion(WebResource webResource, Criterion criterion) {
+        return ((TgolWebResourceDAO)entityDao).
+                retrieveProcessResultListByWebResourceAndCriterion(webResource, criterion);
+    }
 
     @Override
     public Collection<ProcessResult> getProcessResultListByWebResourceAndScope(
             WebResource webResource,
             Scope scope,
             String theme,
-            String testSolution) {
+            Collection<String> testSolutionList) {
         return ((TgolWebResourceDAO)entityDao).
                 retrieveProcessResultListByWebResourceAndScope(
                     webResource,
                     scope,
                     theme,
-                    testSolution);
+                    testSolutionList);
     }
 
     @Override

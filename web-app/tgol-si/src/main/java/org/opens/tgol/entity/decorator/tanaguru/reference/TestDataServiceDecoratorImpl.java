@@ -21,15 +21,16 @@
  */
 package org.opens.tgol.entity.decorator.tanaguru.reference;
 
-import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import org.opens.tgol.entity.dao.tanaguru.reference.TgolTestDAO;
 import java.util.List;
 import java.util.Set;
 import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Level;
 import org.opens.tanaguru.entity.reference.Reference;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
+import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.opens.tgol.entity.dao.tanaguru.reference.TgolTestDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -69,6 +70,11 @@ public class TestDataServiceDecoratorImpl extends AbstractGenericDataService<Tes
     @Override
     public List<Test> getTestListFromParamSet(Set<Parameter> paramSet) {
         return decoratedTestDataService.getTestListFromParamSet(paramSet);
+    }
+
+    @Override
+    public List<Test> findAllByCriterion(Criterion criterion) {
+        return decoratedTestDataService.findAllByCriterion(criterion);
     }
 
 }

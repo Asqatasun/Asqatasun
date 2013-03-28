@@ -123,4 +123,9 @@ public class ParameterDataServiceDecoratorImpl extends AbstractGenericDataServic
         return paramSet;
     }
 
+    @Override
+    public Parameter getParameter(Audit audit, String parameterElementCode) {
+        return decoratedParameterDataService.getParameter(audit, parameterElementCode);
+    }
+
 }
