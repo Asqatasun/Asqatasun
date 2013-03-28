@@ -47,7 +47,7 @@ export JAVA_HOME
 # so the maximum heap size is set to 128M.
 # Set java.awt.headless=true if you work without X11 display
 ##################
-JAVA_OPTS="-Dlog4j.configuration=$TANAGURU_PATH/logs/log4j.properties -Djava.util.logging.config.file=$TANAGURU_PATH/logs/logging.properties -Xms64M  -Xmx128M -classpath $CLASSPATH  "
+JAVA_OPTS="-Dlog4j.configuration=file:$TANAGURU_PATH/logs/log4j.properties -Djava.util.logging.config.file=file:$TANAGURU_PATH/logs/logging.properties -Xms64M  -Xmx128M -classpath $CLASSPATH  "
 JAVA_BIN="$JAVA_HOME/bin/java "
 
 ##################
