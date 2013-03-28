@@ -11,7 +11,6 @@
         base-package="org.opens.tgol.controller"/>
 
     <bean id="homeController" class="org.opens.tgol.controller.HomeController">
-<!--        <property name="actionHandler" ref="homeActionHandler"/>-->
         <property name="displayOptionFieldsBuilderList">
             <list>
                 <ref bean="displayContractElementSelectFormFieldBuilder"/>
@@ -75,12 +74,18 @@
                 <value>SCENARIO</value>
             </list>
         </property>
+        <property name="authorizedRefForCriterionViewList">
+            <list>
+                <value>AW21</value>
+            </list>
+        </property>
         <property name="actionHandler" ref="resultActionHandler"/>
         <property name="formFieldBuilderList">
             <list>
-                <ref bean="aw21ThemeSelectThemeSelectFormFieldBuilder"/>
-                <ref bean="seoThemeSelectThemeSelectFormFieldBuilder"/>
-                <ref bean="testResultSelectThemeSelectFormFieldBuilder"/>
+                <ref bean="aw21ThemeSelectFormFieldBuilder"/>
+                <ref bean="seoThemeSelectFormFieldBuilder"/>
+                <ref bean="rgaa22ThemeSelectFormFieldBuilder"/>
+                <ref bean="testResultCheckboxFormFieldBuilder"/>
             </list>
         </property>
         <property name="themeSortKey" value="theme"/>

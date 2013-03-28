@@ -25,32 +25,40 @@
         <property name="actionCode" value="PAGES"/>
         <property name="actionI81NCode" value="contract.launchPages"/>
         <property name="actionUrl" value="/home/contract/audit-page-set-up.html"/>
-        <property name="disabledActionImageUrl" value="/Images/Audit-10-pages-forbidden.png"/>
-        <property name="enabledActionImageUrl" value="/Images/Audit-10-pages.png"/>
+        <property name="disabledActionImageUrl" value="/Images/Audit_Page_Desactivated.png"/>
+        <property name="enabledActionImageUrl" value="/Images/Audit_Page.png"/>
+<!--        <property name="disabledActionImageUrl" value="/Images/Audit-10-pages-forbidden.png"/>
+        <property name="enabledActionImageUrl" value="/Images/Audit-10-pages.png"/>-->
     </bean>
 
     <bean id="auditSiteActionBuilder" class="org.opens.tgol.action.builder.ActionBuilderImpl">
         <property name="actionCode" value="DOMAIN"/>
         <property name="actionI81NCode" value="contract.launchFullSite"/>
         <property name="actionUrl" value="/home/contract/audit-site-set-up.html"/>
-        <property name="disabledActionImageUrl" value="/Images/Audit-full-site-forbidden.png"/>
-        <property name="enabledActionImageUrl" value="/Images/Audit-full-site.png"/>
+        <property name="disabledActionImageUrl" value="/Images/Audit_Site_Desactivated.png"/>
+        <property name="enabledActionImageUrl" value="/Images/Audit_Site.png"/>
+<!--        <property name="disabledActionImageUrl" value="/Images/Audit-full-site-forbidden.png"/>
+        <property name="enabledActionImageUrl" value="/Images/Audit-full-site.png"/>-->
     </bean>
 
     <bean id="auditUploadActionBuilder" class="org.opens.tgol.action.builder.ActionBuilderImpl">
         <property name="actionCode" value="UPLOAD"/>
         <property name="actionI81NCode" value="contract.launchUpload"/>
         <property name="actionUrl" value="/home/contract/audit-upload-set-up.html"/>
-        <property name="disabledActionImageUrl" value="/Images/Audit-10-pages-forbidden.png"/>
-        <property name="enabledActionImageUrl" value="/Images/Audit-10-pages.png"/>
+        <property name="disabledActionImageUrl" value="/Images/Audit_HorsLigne_Desactivated.png"/>
+        <property name="enabledActionImageUrl" value="/Images/Audit_HorsLigne.png"/>
+<!--        <property name="disabledActionImageUrl" value="/Images/Audit-10-pages-forbidden.png"/>
+        <property name="enabledActionImageUrl" value="/Images/Audit-10-pages.png"/>-->
     </bean>
     
     <bean id="auditScenarioActionBuilder" class="org.opens.tgol.action.builder.ActionBuilderImpl">
         <property name="actionCode" value="SCENARIO"/>
         <property name="actionI81NCode" value="contract.launchScenario"/>
         <property name="actionUrl" value="/home/contract/scenario-management.html"/>
-        <property name="disabledActionImageUrl" value="/Images/bobine.png"/>
-        <property name="enabledActionImageUrl" value="/Images/bobine.png"/>
+<!--        <property name="disabledActionImageUrl" value="/Images/bobine.png"/>
+        <property name="enabledActionImageUrl" value="/Images/bobine.png"/>-->
+        <property name="disabledActionImageUrl" value="/Images/Audit_Scenario_Desactivated.png"/>
+        <property name="enabledActionImageUrl" value="/Images/Audit_Scenario.png"/>
     </bean>
 
     <bean id="contractActionHandler" class="org.opens.tgol.action.voter.ContractActionHandlerImpl">

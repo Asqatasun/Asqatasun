@@ -21,6 +21,7 @@
     <bean id="remarksInfosFactory" class="org.opens.tgol.presentation.factory.RemarkInfosFactory" factory-method="getInstance"/>
     <bean id="resultCounterFactory" class="org.opens.tgol.presentation.factory.ResultCounterFactory" factory-method="getInstance"/>
     <bean id="testResultFactory" class="org.opens.tgol.presentation.factory.TestResultFactory" factory-method="getInstance"/>
+    <bean id="criterionResultFactory" class="org.opens.tgol.presentation.factory.CriterionResultFactory" factory-method="getInstance"/>
     <bean id="tgolPaginatedListFactory" class="org.opens.tgol.report.pagination.factory.TgolPaginatedListFactory" factory-method="getInstance"/>
 
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
@@ -35,6 +36,16 @@
                 <value>NB_OF_AUDIT_TO_DISPLAY</value>
             </list>
         </property>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="testResultFactory"/>
+        </property>
+        <property name="targetMethod">
+            <value>setSelectAllThemeKey</value>
+        </property>
+        <property name="arguments" value="all-theme"/>
     </bean>
 
 </beans>
