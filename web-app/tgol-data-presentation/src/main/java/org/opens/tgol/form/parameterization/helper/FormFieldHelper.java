@@ -21,12 +21,9 @@
  */
 package org.opens.tgol.form.parameterization.helper;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import org.opens.tgol.form.FormField;
-import org.opens.tgol.form.SelectElement;
-import org.opens.tgol.form.SelectFormField;
+import java.util.*;
+import org.apache.commons.collections.CollectionUtils;
+import org.opens.tgol.form.*;
 import org.opens.tgol.form.builder.FormFieldBuilder;
 
 /**
@@ -46,7 +43,7 @@ public final class FormFieldHelper {
      */
     public static void setValueToFormField(
             List<FormField> formFieldList,
-            Map<String, String> formValueMap) {
+            Map<String, Object> formValueMap) {
         for (FormField ff : formFieldList) {
             if (ff instanceof SelectFormField) {
                 for (Map.Entry<String, List<SelectElement>> entry : ((SelectFormField)ff).getSelectElementMap().entrySet()) {
@@ -57,8 +54,24 @@ public final class FormFieldHelper {
                         }
                     }
                 }
+            } else if (ff instanceof CheckboxFormField) {
+                // retrieve the user selection and select the UI elements
+                CheckboxFormField cff = ((CheckboxFormField)ff);
+                Collection<String> selectedValues = new HashSet<String>();
+                if ((formValueMap.get(cff.getCode()) instanceof String[])) {
+                    CollectionUtils.addAll(selectedValues, ((String[])formValueMap.get(cff.getCode())));
+                } else if ((formValueMap.get(cff.getCode()) instanceof String)) {
+                    selectedValues.add(((String)formValueMap.get(cff.getCode())));
+                }
+                for (CheckboxElement  ce : cff.getCheckboxElementList()) {
+                    if(selectedValues.add(ce.getValue())) {
+                        ce.setSelected(true);
+                    } else {
+                        ce.setSelected(false);
+                    }
+                }
             } else {
-                ff.setValue(formValueMap.get(ff.getI18nKey()));
+                ff.setValue(formValueMap.get(ff.getI18nKey()).toString());
             }
         }
     }
@@ -86,7 +99,7 @@ public final class FormFieldHelper {
      */
     public static List<FormField> getFormFieldBuilderCopy(
         List<FormFieldBuilder> formFieldBuilderList,
-        Map<String, String> formValueMap) {
+        Map<String, Object> formValueMap) {
         List<FormField> initialisedFormFieldList = new LinkedList<FormField>();
         for (FormFieldBuilder formFieldBuilder : formFieldBuilderList) {
             initialisedFormFieldList.add(formFieldBuilder.build());
