@@ -55,7 +55,7 @@ public class ContractCreationWithErrorsScenarioTest extends AbstractWebDriverTes
         createNewUser(true);
 
         // go to the management contracts page of the new user
-        driver.findElement(By.xpath(NEW_USER_CONTRACT_MNGT_XPATH_LOCATION)).click();
+        driver.findElement(By.xpath(NEW_USER_CONTRACT_MNGT_XPATH_LOCATION.replaceAll("x",findNewUserRowIndexLocation()))).click();
         //----- At this time the id of the new user appears in an url for the first time
         extractedIdOfNewUser();
         //-----

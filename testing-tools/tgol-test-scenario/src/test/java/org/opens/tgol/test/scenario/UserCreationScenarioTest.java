@@ -30,7 +30,7 @@ import org.openqa.selenium.By;
 public class UserCreationScenarioTest extends AbstractWebDriverTestClass {
 
     private static String IMPOSSIBLE_ACTION = "Impossible action";
-    private static String ADMIN_LINK_TITLE = "Admin";
+
     private static String ADMIN_PAGE_TITLE = "Administration";
     private static String USER_CREATION_SUCCESS_MSG = 
             "The user "+NEW_USER_EMAIL +" has been added with success";
@@ -44,16 +44,16 @@ public class UserCreationScenarioTest extends AbstractWebDriverTestClass {
             "Account not activated.";
     
     private static String ADMIN_USER_DELETE_LINK_XPATH_LOCATION = 
-            "/html/body/div[2]/div[4]/div/table/tbody/tr[2]/td[6]";
+            "//table[@id='user-list-table']/tbody/tr[x]/td[6]";
     
     private static String NEW_USER_EDIT_LINK_XPATH_LOCATION = 
-            "//table[@id='user-list-table']/tbody/tr[3]/td[5]/a/img";
+            "//table[@id='user-list-table']/tbody/tr[x]/td[5]/a/img";
     
     private static String EDIT_USER_FORM_SUBMIT_XPATH_LOCATION = 
             "//div[@id='account-settings-form-submit']/input";
     
     private static String NEW_USER_ACTIVATION_INFO_XPATH_LOCATION = 
-            "/html/body/div[2]/div[4]/div/table/tbody/tr[3]/td[4]";
+            "//table[@id='user-list-table']/tbody/tr[x]/td[4]";
     
     /**
      * 
@@ -61,11 +61,12 @@ public class UserCreationScenarioTest extends AbstractWebDriverTestClass {
     public void testUserCreation() {
 
         loginAsRoot();
-        checkTextPresence(ADMIN_LINK_TITLE);
+
         goToAdminPage();
         checkTextAbscence(NEW_USER_EMAIL);
         checkTextPresence(ADMIN_PAGE_TITLE);
-        if (!driver.findElement(By.xpath(ADMIN_USER_DELETE_LINK_XPATH_LOCATION)).getText().equals(IMPOSSIBLE_ACTION)) {
+        String adminUserDeleteLinkXpath = ADMIN_USER_DELETE_LINK_XPATH_LOCATION.replaceAll("x", findAdminUserRowIndexLocation());
+        if (!driver.findElement(By.xpath(adminUserDeleteLinkXpath)).getText().equals(IMPOSSIBLE_ACTION)) {
             driver.close();
             throw new RuntimeException(ASSERT_TEXT_FAILED);
         }
@@ -77,7 +78,8 @@ public class UserCreationScenarioTest extends AbstractWebDriverTestClass {
         checkTextPresence(NEW_USER_EMAIL);
         checkTextPresence(NEW_USER_NAME);
         checkTextPresence(NEW_USER_FIRST_NAME);
-        if (!driver.findElement(By.xpath(NEW_USER_ACTIVATION_INFO_XPATH_LOCATION)).getText().equals("no")) {
+        String newUserActivationXpath = NEW_USER_ACTIVATION_INFO_XPATH_LOCATION.replaceAll("x", findNewUserRowIndexLocation());
+        if (!driver.findElement(By.xpath(newUserActivationXpath)).getText().equals("no")) {
             driver.close();
             throw new RuntimeException(ASSERT_TEXT_FAILED);
         }
@@ -90,8 +92,9 @@ public class UserCreationScenarioTest extends AbstractWebDriverTestClass {
         loginAsRoot();
         goToAdminPage();
         
+        String newUserEditLinkXpath = NEW_USER_EDIT_LINK_XPATH_LOCATION.replaceAll("x", findNewUserRowIndexLocation());
         // activate the new user
-        driver.findElement(By.xpath(NEW_USER_EDIT_LINK_XPATH_LOCATION)).click();
+        driver.findElement(By.xpath(newUserEditLinkXpath)).click();
         //----- At this time the id of the new user appears in an url for the first time
         extractedIdOfNewUser();
         //-----
@@ -101,7 +104,7 @@ public class UserCreationScenarioTest extends AbstractWebDriverTestClass {
         checkTextPresence(USER_MODIFICATION_SUCCESS_MSG);
         checkTextPresence(NEW_USER_NAME);
         checkTextPresence(NEW_USER_FIRST_NAME);
-        if (!driver.findElement(By.xpath(NEW_USER_ACTIVATION_INFO_XPATH_LOCATION)).getText().equals("yes")) {
+        if (!driver.findElement(By.xpath(newUserActivationXpath)).getText().equals("yes")) {
             driver.close();
             throw new RuntimeException(ASSERT_TEXT_FAILED);
         }
@@ -111,7 +114,6 @@ public class UserCreationScenarioTest extends AbstractWebDriverTestClass {
         
         // The current user is activated but not admin. All the admin resources
         // are inaccessible
-        checkTextAbscence(ADMIN_LINK_TITLE);
         goToAdminPage();
         checkTextPresence(NOT_ALLOWED_MSG);
         goToAddUserPage();
@@ -132,7 +134,6 @@ public class UserCreationScenarioTest extends AbstractWebDriverTestClass {
         logout();
         loginAsNewUser();
 
-        checkTextPresence(ADMIN_LINK_TITLE);
         goToAdminPage();
         checkTextPresence(ADMIN_PAGE_TITLE);
         

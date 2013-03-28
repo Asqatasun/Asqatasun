@@ -26,6 +26,7 @@ import java.util.logging.Level;
 import junit.framework.TestCase;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -54,7 +55,9 @@ public class AbstractWebDriverTestClass extends TestCase {
     protected static String DELETE_USER_FORM_SUBMIT_XPATH_LOCATION = 
             "//div[@class='alert-actions']/form/input";
     protected static String NEW_USER_CONTRACT_MNGT_XPATH_LOCATION = 
-            "//table[@id='user-list-table']/tbody/tr[3]/td[7]/a/img";
+            "//table[@id='user-list-table']/tbody/tr[x]/td[7]/a/img";
+    protected static String USER_TABLE_BODY_XPATH_LOCATION = 
+            "//table[@id='user-list-table']/tbody";
     private static String EDIT_CONTRACT_FORM_SUBMIT_XPATH_LOCATION = 
             "//div[@id='edit-contract-form-submit']/input";
     
@@ -271,6 +274,7 @@ public class AbstractWebDriverTestClass extends TestCase {
      * 
      */
     protected void goToNewContractPage() {
+        System.out.println(contractUrl+newContractId);
         driver.get(contractUrl+newContractId);
     }
     
@@ -278,6 +282,7 @@ public class AbstractWebDriverTestClass extends TestCase {
      * 
      */
     protected void goToAuditPagesSetUpContractPage() {
+        System.out.println(auditPagesSetupUrl+newContractId);
         driver.get(auditPagesSetupUrl+newContractId);
     }
     
@@ -390,6 +395,28 @@ public class AbstractWebDriverTestClass extends TestCase {
      * 
      * @param text 
      */
+    protected void checkElementTextAbsence(String element,String value) {
+        if (driver.findElement(By.xpath(element)).getText().contains(value)) {
+            driver.close();
+            throw new RuntimeException(ASSERT_TEXT_FAILED);
+        }
+    }
+    
+    /**
+     * 
+     * @param text 
+     */
+    protected void checkElementTextPresenceByCssSelector(String element,String value) {
+        if (!driver.findElement(By.cssSelector(element)).getText().contains(value)) {
+            driver.close();
+            throw new RuntimeException(ASSERT_TEXT_FAILED);
+        }
+    }
+    
+    /**
+     * 
+     * @param text 
+     */
     protected void checkTextAbscence(String text) {
         if (driver.findElement(By.tagName(HTML_TAG_NAME)).getText().contains(text)) {
             driver.close();
@@ -454,13 +481,38 @@ public class AbstractWebDriverTestClass extends TestCase {
     protected void createNewContract() {
         createNewUser(true);
         // go to the management contracts page of the new user
-        driver.findElement(By.xpath(NEW_USER_CONTRACT_MNGT_XPATH_LOCATION)).click();
+        
+        driver.findElement(By.xpath(NEW_USER_CONTRACT_MNGT_XPATH_LOCATION.replaceAll("x",findNewUserRowIndexLocation()))).click();
         //----- At this time the id of the new user appears in an url for the first time
         extractedIdOfNewUser();
         goToAddUserContractPage();
         
         editWebElement(LABEL_FIELD_NAME,NEW_CONTRACT_LABEL);
         submitEditUserContract();
+    }
+    
+    protected String findNewUserRowIndexLocation () {
+        WebElement we = driver.findElement(By.xpath(USER_TABLE_BODY_XPATH_LOCATION));
+        if (!StringUtils.equals(we.getTagName(), "tbody")) {
+            throw new RuntimeException();
+        }
+        return String.valueOf(we.findElements(By.tagName("tr")).size());
+    }
+    
+    protected String findAdminUserRowIndexLocation () {
+        WebElement we = driver.findElement(By.xpath(USER_TABLE_BODY_XPATH_LOCATION));
+        if (!StringUtils.equals(we.getTagName(), "tbody")) {
+            throw new RuntimeException();
+        }
+        int rowIndex = 0;
+        for (WebElement wec : we.findElements(By.tagName("tr"))) {
+            rowIndex++;
+            String userName = wec.findElement(By.className("col01")).getText();
+            if (StringUtils.equals(userName, user)) {
+                break;
+            }
+        }
+        return String.valueOf(rowIndex);
     }
     
 }
