@@ -186,14 +186,11 @@ public class AuditResultController extends AuditDataHandlerController {
             Page page = (Page)webResource;
             hasSourceCodeWithDoctype = false;
             boolean hasSSP = true;
-            SSP ssp = null;
             try {
-                ssp = getContentDataService().findSSP(page, page.getURL());
-            } catch (NoResultException nre) {
-                hasSSP = false;
-            }
-            if (hasSSP) {
+                SSP ssp =getContentDataService().findSSP(page, page.getURL());
                 model.addAttribute(TgolKeyStore.SOURCE_CODE_KEY,highlightSourceCode(ssp));
+            } catch (NoResultException nre) {
+                LOGGER.warn("No ssp found for " +page.getURL());
             }
             return TgolKeyStore.SOURCE_CODE_PAGE_VIEW_NAME;
         } else {

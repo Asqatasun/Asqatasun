@@ -269,14 +269,15 @@ public class AuditStatisticsFactory {
             } else if (StringUtils.equalsIgnoreCase(displayScope, TgolKeyStore.CRITERION_DISPLAY_SCOPE_VALUE)) {
                 themeResultCounter = getResultCounterByThemeForCriterion(webResource, theme);
             }
+            if (themeResultCounter != null) {
+                globalResultCounter.setPassedCount(themeResultCounter.getPassedCount() + globalResultCounter.getPassedCount());
+                globalResultCounter.setFailedCount(themeResultCounter.getFailedCount() + globalResultCounter.getFailedCount());
+                globalResultCounter.setNmiCount(themeResultCounter.getNmiCount() + globalResultCounter.getNmiCount());
+                globalResultCounter.setNaCount(themeResultCounter.getNaCount() + globalResultCounter.getNaCount());
+                globalResultCounter.setNtCount(themeResultCounter.getNtCount() + globalResultCounter.getNtCount());
 
-            globalResultCounter.setPassedCount(themeResultCounter.getPassedCount() + globalResultCounter.getPassedCount());
-            globalResultCounter.setFailedCount(themeResultCounter.getFailedCount() + globalResultCounter.getFailedCount());
-            globalResultCounter.setNmiCount(themeResultCounter.getNmiCount() + globalResultCounter.getNmiCount());
-            globalResultCounter.setNaCount(themeResultCounter.getNaCount() + globalResultCounter.getNaCount());
-            globalResultCounter.setNtCount(themeResultCounter.getNtCount() + globalResultCounter.getNtCount());
-
-            counterByThemeMap.put(theme, themeResultCounter);
+                counterByThemeMap.put(theme, themeResultCounter);
+            }
         }
         return counterByThemeMap;
     }

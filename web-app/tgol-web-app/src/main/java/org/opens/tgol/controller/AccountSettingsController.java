@@ -184,10 +184,6 @@ public class AccountSettingsController extends AbstractUserAndContractsControlle
             Model model) {
 
         Reference referential = refMap.get(refCode);
-        if (referential == null || 
-                !secondaryLevelMenuDisplayer.isRequestedReferentialModifiable(refCode)) {
-        }
-
         List<Test> testList = addTestListAndModifiableRefToModel(referential, model);
 
         model.addAttribute(TgolKeyStore.CHANGE_TEST_WEIGHT_COMMAND_KEY, 
