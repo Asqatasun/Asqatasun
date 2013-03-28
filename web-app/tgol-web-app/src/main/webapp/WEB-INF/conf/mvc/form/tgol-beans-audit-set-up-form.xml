@@ -39,6 +39,37 @@
         <property name="default" value="false"/>
         <property name="enabled" value="false"/>-->
     </bean>
+    
+    <!-- RGAA 2.2 select elements -->
+    <bean id="rgaa22ASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="RGAA22;A"/>
+        <property name="i18nKey" value="A"/>
+        <property name="errorI18nKey" value="A-error"/>
+        <property name="defaultCode" value="DEFAULT_LEVEL"/>
+<!--    Default values
+        <property name="default" value="false"/>
+        <property name="enabled" value="false"/>-->
+    </bean>
+    
+    <bean id="rgaa22AASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="RGAA22;AA"/>
+        <property name="i18nKey" value="AA"/>
+        <property name="errorI18nKey" value="AA-error"/>
+        <property name="defaultCode" value="DEFAULT_LEVEL"/>
+<!--    Default values
+        <property name="default" value="false"/>
+        <property name="enabled" value="false"/>-->
+    </bean>
+    
+    <bean id="rgaa22AAASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="RGAA22;AAA"/>
+        <property name="i18nKey" value="AAA"/>
+        <property name="errorI18nKey" value="A-error"/>
+        <property name="defaultCode" value="DEFAULT_LEVEL"/>
+<!--    Default values
+        <property name="default" value="false"/>
+        <property name="enabled" value="false"/>-->
+    </bean>
 
     <!-- Seo select elements -->
     <bean id="seoBronzeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
@@ -81,6 +112,13 @@
                         <ref local="aw21BronzeSelectElementBuilder"/>
                         <ref local="aw21SilverSelectElementBuilder"/>
                         <ref local="aw21GoldSelectElementBuilder"/>
+                    </list>
+                </entry>
+                <entry key="RGAA22">
+                    <list>
+                        <ref local="rgaa22ASelectElementBuilder"/>
+                        <ref local="rgaa22AASelectElementBuilder"/>
+                        <ref local="rgaa22AAASelectElementBuilder"/>
                     </list>
                 </entry>
                 <entry key="Seo">

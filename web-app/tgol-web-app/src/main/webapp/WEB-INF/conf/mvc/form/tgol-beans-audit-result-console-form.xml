@@ -121,7 +121,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="aw21ThemeSelectThemeSelectFormFieldBuilder" class="org.opens.tgol.form.builder.SelectFormFieldBuilderImpl">
+    <bean id="aw21ThemeSelectFormFieldBuilder" class="org.opens.tgol.form.builder.SelectFormFieldBuilderImpl">
         <property name="i18nKey" value="result.theme"/>
         <property name="errorI18nKey" value="result.theme-contract-error"/>
         <property name="value" value="AW21"/>
@@ -221,7 +221,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="seoThemeSelectThemeSelectFormFieldBuilder" class="org.opens.tgol.form.builder.SelectFormFieldBuilderImpl">
+    <bean id="seoThemeSelectFormFieldBuilder" class="org.opens.tgol.form.builder.SelectFormFieldBuilderImpl">
         <property name="i18nKey" value="result.theme"/>
         <property name="errorI18nKey" value="result.theme-error"/>
         <property name="value" value="Seo"/>
@@ -244,61 +244,189 @@
         </property>
     </bean>
 
-    <bean id="allResultSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="all-result"/>
-        <property name="i18nKey" value="result.all-result"/>
-        <property name="errorI18nKey" value="result.all-result-error"/>
+    <bean id="rgaa22AllThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="all-theme"/>
+        <property name="i18nKey" value="result.all-theme"/>
+        <property name="errorI18nKey" value="all-theme-error"/>
         <property name="default" value="true"/>
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="passedSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="PASSED"/>
-        <property name="i18nKey" value="passed"/>
-        <property name="errorI18nKey" value="passed-error"/>
+    <bean id="rgaa22FrameThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="RGAA22-1"/>
+        <property name="i18nKey" value="RGAA22-1-select"/>
+        <property name="errorI18nKey" value="RGAA22-1-select-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="failedSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="FAILED"/>
-        <property name="i18nKey" value="failed"/>
-        <property name="errorI18nKey" value="failed-error"/>
+    <bean id="rgaa22ColorThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="RGAA22-2"/>
+        <property name="i18nKey" value="RGAA22-2-select"/>
+        <property name="errorI18nKey" value="RGAA22-2-select-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="nmiSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="NEED_MORE_INFO"/>
-        <property name="i18nKey" value="nmi"/>
-        <property name="errorI18nKey" value="nmi-error"/>
+    <bean id="rgaa22FormThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="RGAA22-3"/>
+        <property name="i18nKey" value="RGAA22-3-select"/>
+        <property name="errorI18nKey" value="RGAA22-3-select-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="naSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="NOT_APPLICABLE"/>
-        <property name="i18nKey" value="na"/>
-        <property name="errorI18nKey" value="na-error"/>
+    <bean id="rgaa22ImageThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="RGAA22-4"/>
+        <property name="i18nKey" value="RGAA22-4-select"/>
+        <property name="errorI18nKey" value="RGAA22-4-select-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="testResultSelectThemeSelectFormFieldBuilder" class="org.opens.tgol.form.builder.SelectFormFieldBuilderImpl">
-        <property name="i18nKey" value="result.test-result"/>
-        <property name="errorI18nKey" value="result.test-result-error"/>
+    <bean id="rgaa22MultimediaThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="RGAA22-5"/>
+        <property name="i18nKey" value="RGAA22-5-select"/>
+        <property name="errorI18nKey" value="RGAA22-5-select-error"/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+
+    <bean id="rgaa22NavigationThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="RGAA22-6"/>
+        <property name="i18nKey" value="RGAA22-6-select"/>
+        <property name="errorI18nKey" value="RGAA22-6-select-error"/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+
+    <bean id="rgaa22PresentationThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="RGAA22-7"/>
+        <property name="i18nKey" value="RGAA22-7-select"/>
+        <property name="errorI18nKey" value="RGAA22-7-select-error"/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+
+    <bean id="rgaa22ScriptThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="RGAA22-8"/>
+        <property name="i18nKey" value="RGAA22-8-select"/>
+        <property name="errorI18nKey" value="RGAA22-8-select-error"/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+    
+    <bean id="rgaa22StandardThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="RGAA22-9"/>
+        <property name="i18nKey" value="RGAA22-9-select"/>
+        <property name="errorI18nKey" value="RGAA22-9-select-error"/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+    
+    <bean id="rgaa22StructureThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="RGAA22-10"/>
+        <property name="i18nKey" value="RGAA22-10-select"/>
+        <property name="errorI18nKey" value="RGAA22-10-select-error"/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+    
+    <bean id="rgaa22TableThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="RGAA22-11"/>
+        <property name="i18nKey" value="RGAA22-11-select"/>
+        <property name="errorI18nKey" value="RGAA22-11-select-error"/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+    
+    <bean id="rgaa22TextThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="RGAA22-12"/>
+        <property name="i18nKey" value="RGAA22-12-select"/>
+        <property name="errorI18nKey" value="RGAA22-12-select-error"/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+
+    <bean id="rgaa22ThemeSelectFormFieldBuilder" class="org.opens.tgol.form.builder.SelectFormFieldBuilderImpl">
+        <property name="i18nKey" value="result.theme"/>
+        <property name="errorI18nKey" value="result.theme-error"/>
+        <property name="value" value="RGAA22"/>
         <property name="selectElementBuilderMap">
             <map>
-                <entry key="test-result">
+                <entry key="theme">
                     <list>
-                        <ref local="allResultSelectElementBuilder"/>
-                        <ref local="passedSelectElementBuilder"/>
-                        <ref local="failedSelectElementBuilder"/>
-                        <ref local="nmiSelectElementBuilder"/>
-                        <ref local="naSelectElementBuilder"/>
+                        <ref local="rgaa22AllThemeSelectElementBuilder"/>
+                        <ref local="rgaa22FrameThemeSelectElementBuilder"/>
+                        <ref local="rgaa22ColorThemeSelectElementBuilder"/>
+                        <ref local="rgaa22FormThemeSelectElementBuilder"/>
+                        <ref local="rgaa22ImageThemeSelectElementBuilder"/>
+                        <ref local="rgaa22MultimediaThemeSelectElementBuilder"/>
+                        <ref local="rgaa22NavigationThemeSelectElementBuilder"/>
+                        <ref local="rgaa22PresentationThemeSelectElementBuilder"/>
+                        <ref local="rgaa22ScriptThemeSelectElementBuilder"/>
+                        <ref local="rgaa22StandardThemeSelectElementBuilder"/>
+                        <ref local="rgaa22StructureThemeSelectElementBuilder"/>
+                        <ref local="rgaa22TableThemeSelectElementBuilder"/>
+                        <ref local="rgaa22TextThemeSelectElementBuilder"/>
                     </list>
                 </entry>
             </map>
+        </property>
+    </bean>
+
+    <bean id="passedCheckboxElementBuilder" class="org.opens.tgol.form.builder.CheckboxElementBuilderImpl">
+        <property name="value" value="PASSED"/>
+        <property name="i18nKey" value="passed"/>
+        <property name="errorI18nKey" value="passed-error"/>
+        <property name="enabled" value="true"/>
+        <property name="selected" value="true"/>
+    </bean>
+
+    <bean id="failedCheckboxElementBuilder" class="org.opens.tgol.form.builder.CheckboxElementBuilderImpl">
+        <property name="value" value="FAILED"/>
+        <property name="i18nKey" value="failed"/>
+        <property name="errorI18nKey" value="failed-error"/>
+        <property name="enabled" value="true"/>
+        <property name="selected" value="true"/>
+    </bean>
+
+    <bean id="nmiCheckboxElementBuilder" class="org.opens.tgol.form.builder.CheckboxElementBuilderImpl">
+        <property name="value" value="NEED_MORE_INFO"/>
+        <property name="i18nKey" value="nmi"/>
+        <property name="errorI18nKey" value="nmi-error"/>
+        <property name="enabled" value="true"/>
+        <property name="selected" value="true"/>
+    </bean>
+
+    <bean id="naCheckboxElementBuilder" class="org.opens.tgol.form.builder.CheckboxElementBuilderImpl">
+        <property name="value" value="NOT_APPLICABLE"/>
+        <property name="i18nKey" value="na"/>
+        <property name="errorI18nKey" value="na-error"/>
+        <property name="enabled" value="true"/>
+        <property name="selected" value="true"/>
+    </bean>
+    
+    <bean id="ntCheckboxElementBuilder" class="org.opens.tgol.form.builder.CheckboxElementBuilderImpl">
+        <property name="value" value="NOT_TESTED"/>
+        <property name="i18nKey" value="nt"/>
+        <property name="errorI18nKey" value="nt-error"/>
+        <property name="enabled" value="true"/>
+        <property name="selected" value="false"/>
+    </bean>
+
+    <bean id="testResultCheckboxFormFieldBuilder" class="org.opens.tgol.form.builder.CheckboxFormFieldBuilderImpl">
+        <property name="i18nKey" value="result.test-result"/>
+        <property name="errorI18nKey" value="result.test-result-error"/>
+        <property name="code" value="test-result"/>
+        <property name="checkboxElementBuilderList">
+            <list>
+                <ref local="passedCheckboxElementBuilder"/>
+                <ref local="failedCheckboxElementBuilder"/>
+                <ref local="nmiCheckboxElementBuilder"/>
+                <ref local="naCheckboxElementBuilder"/>
+                <ref local="ntCheckboxElementBuilder"/>
+            </list>
         </property>
     </bean>
 
