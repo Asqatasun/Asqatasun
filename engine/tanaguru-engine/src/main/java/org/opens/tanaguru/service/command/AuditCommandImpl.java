@@ -64,6 +64,8 @@ public abstract class AuditCommandImpl implements AuditCommand {
     public static final int DEFAULT_PROCESSING_TREATMENT_WINDOW = 4;
     public static final int DEFAULT_ADAPTATION_TREATMENT_WINDOW = 4;
     public static final int DEFAULT_CONSOLIDATION_TREATMENT_WINDOW = 200;
+    
+    private String referential;
 
     private int adaptationTreatmentWindow = DEFAULT_ADAPTATION_TREATMENT_WINDOW;
     public void setAdaptationTreatmentWindow(int adaptationTreatmentWindow) {
@@ -217,6 +219,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
         audit = auditDataService.create();
         audit.setTestList(testDataService.getTestListFromParamSet(paramSet));
         audit.setParameterSet(paramSet);
+        referential = extractReferentialFromParamSet(paramSet);
         setStatusToAudit(AuditStatus.INITIALISATION);
         return audit;
     }
@@ -233,7 +236,9 @@ public abstract class AuditCommandImpl implements AuditCommand {
                     .append(WAS_REQUIRED_LOGGER_STR).toString());
             return;
         }
-
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Adapting " + audit.getSubject().getURL());
+        }
         // debug tools
         Date beginProcessDate = null;
         Date endRetrieveDate = null;
@@ -250,16 +255,17 @@ public abstract class AuditCommandImpl implements AuditCommand {
         if (adaptationListener != null) {
             adaptationListener.adaptationStarted(audit);
         }
+        
         while (i.compareTo(nbOfContent) < 0) {
-            LOGGER.info(
+            if (LOGGER.isDebugEnabled()) {
+                beginProcessDate = Calendar.getInstance().getTime();
+                LOGGER.debug(
                         new StringBuilder("Adapting ssp from  ")
                             .append(i)
                             .append(TO_LOGGER_STR)
                             .append(i + adaptationTreatmentWindow)
                             .append(" for ")
                             .append(audit.getSubject().getURL()).toString());
-            if (LOGGER.isDebugEnabled()) {
-                beginProcessDate = Calendar.getInstance().getTime();
             }
             List<Content> contentList = retrieveContentList(
                                             webResourceId, 
@@ -271,8 +277,13 @@ public abstract class AuditCommandImpl implements AuditCommand {
             if (LOGGER.isDebugEnabled()) {
                 endRetrieveDate = Calendar.getInstance().getTime();
             }
+            
             Set<Content> contentSet = new HashSet<Content>();
-            contentSet.addAll(contentAdapterService.adaptContent(contentList));
+            // Set the referential to the contentAdapterService due to different
+            // behaviour in the implementation. Has to be removed when accessiweb 2.1
+            // implementations will be based on jsoup.
+            contentSet.addAll(contentAdapterService.adaptContent(contentList, referential));
+            
             if (LOGGER.isDebugEnabled()) {
                 endProcessDate = Calendar.getInstance().getTime();
                 LOGGER.debug(
@@ -370,7 +381,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
             long length = 0;
             int nbOfResources = 0;
             for (Content content : contentList) {
-                if (((SSP) content).getSource() != null) {
+                if (((SSP) content).getDOM() != null) {
                     length += ((SSP) content).getDOM().length();
                     if (getContentWithRelatedContent) {
                         nbOfResources += ((SSP) content).getRelatedContentSet().size();
@@ -444,7 +455,9 @@ public abstract class AuditCommandImpl implements AuditCommand {
                     .append(WAS_REQUIRED_LOGGER_STR).toString());
             return;
         }
-
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Processing " + audit.getSubject().getURL());
+        }
         // debug tools
         Date beginProcessDate = null;
         Date endProcessDate = null;
@@ -458,8 +471,8 @@ public abstract class AuditCommandImpl implements AuditCommand {
         Set<ProcessResult> processResultSet = new HashSet<ProcessResult>();
         
         while (i.compareTo(nbOfContent) < 0) {
-            if (LOGGER.isInfoEnabled()) {
-                LOGGER.info(
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug(
                         new StringBuilder("Processing from ")
                             .append(i)
                             .append(TO_LOGGER_STR)
@@ -543,8 +556,10 @@ public abstract class AuditCommandImpl implements AuditCommand {
         Date endProcessDate = null;
         Date endPersistDate;
 
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Consolidating " + audit.getSubject().getURL());
+        }
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Consolidation");
             beginProcessDate = Calendar.getInstance().getTime();
         }
         if (audit.getSubject() instanceof Page) {
@@ -561,12 +576,14 @@ public abstract class AuditCommandImpl implements AuditCommand {
             if (contentDataService.getNumberOfSSPFromWebResource(audit.getSubject(), HttpStatus.SC_OK) > 20) {
                 List<Test> testList = new ArrayList<Test>();
                 for (Test test : audit.getTestList()) {
-                    testList.add(test);
+                    if (! test.getNoProcess()) { // only consolidate if the process has been launched on the test
+                        testList.add(test);
 
-                    Collection<ProcessResult> prList= (List<ProcessResult>) processResultDataService.
-                            getGrossResultFromAuditAndTest(audit, test);
-                    consolidate(prList, testList);
-                    testList.clear();
+                        Collection<ProcessResult> prList= (List<ProcessResult>) processResultDataService.
+                                getGrossResultFromAuditAndTest(audit, test);
+                        consolidate(prList, testList);
+                        testList.clear();
+                    }
                 }
                 if (LOGGER.isDebugEnabled()) {
                     endProcessDate = Calendar.getInstance().getTime();
@@ -671,6 +688,9 @@ public abstract class AuditCommandImpl implements AuditCommand {
                     .append(WAS_REQUIRED_LOGGER_STR).toString());
             return ;
         }
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Analysing " + audit.getSubject().getURL());
+        }
         // debug tools
         Date beginProcessDate = null;
         Date endProcessDate = null;
@@ -774,5 +794,22 @@ public abstract class AuditCommandImpl implements AuditCommand {
         audit.setStatus(auditStatus);
         audit = auditDataService.saveOrUpdate(audit);
     }
-    
+ 
+    /**
+     * Extract the referential from the LEVEL parameter
+     * 
+     * @param paramSet
+     * @return 
+     */
+    private String extractReferentialFromParamSet(Set<Parameter> paramSet) {
+        if (paramSet != null) {
+            for (Parameter param : paramSet) {
+                if (param.getParameterElement().getParameterElementCode().equals("LEVEL")) {
+                    return param.getValue().split(";")[0];
+                }
+            }
+        }
+        return "";
+    }
+
 }
