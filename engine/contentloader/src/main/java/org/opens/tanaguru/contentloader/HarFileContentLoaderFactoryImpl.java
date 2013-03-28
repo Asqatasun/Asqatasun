@@ -22,8 +22,6 @@
 package org.opens.tanaguru.contentloader;
 
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
-import org.opens.tanaguru.entity.service.audit.ContentDataService;
-import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.util.factory.DateFactory;
 import org.springframework.beans.factory.annotation.Autowired;

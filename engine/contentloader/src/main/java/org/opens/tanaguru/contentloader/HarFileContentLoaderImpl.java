@@ -21,8 +21,8 @@
  */
 package org.opens.tanaguru.contentloader;
 
-import edu.umass.cs.benchlab.har.*;
-import edu.umass.cs.benchlab.har.tools.HarFileReader;
+//import edu.umass.cs.benchlab.har.*;
+//import edu.umass.cs.benchlab.har.tools.HarFileReader;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -30,18 +30,16 @@ import java.util.*;
 import java.util.regex.Pattern;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.io.filefilter.RegexFileFilter;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
-import org.opens.tanaguru.entity.service.audit.ContentDataService;
-import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.util.factory.DateFactory;
 
 /**
- * 
+ * Work in progress, this class is not used for the moment but kept for further
+ * development.
  * @author jkowalczyk
  */
 public class HarFileContentLoaderImpl implements HarFileContentLoader {
@@ -153,7 +151,7 @@ public class HarFileContentLoaderImpl implements HarFileContentLoader {
                 LOGGER.debug("File " + listOfFiles[i].getName());
                 foundSSP = false;
                 currentSSP = null;
-                parse(listOfFiles[i]);
+//                parse(listOfFiles[i]);
             } else if (listOfFiles[i].isDirectory()) {
                 LOGGER.debug("Directory " + listOfFiles[i].getName());
             }
@@ -170,41 +168,29 @@ public class HarFileContentLoaderImpl implements HarFileContentLoader {
      * @param url
      * @param sourceCode 
      */
-    private void fireNewSSP(String url, HarContent content) {
-        LOGGER.info("fire New SSP " + url);
-        if (foundSSP) {
-            LOGGER.info("SSP already found, " + url + " is ignored");
-            return;
-        }
-        int httpStatus = HttpStatus.SC_OK;
-        if (content.getSize() == 0) {
-            LOGGER.info("Emtpy SSP " + url + " saved as 404");
-            httpStatus = HttpStatus.SC_NOT_FOUND;
-        }
-        String sourceCode="";
-        if (!StringUtils.isEmpty(content.getText())) {
-            sourceCode=content.getText();
-        }
-//        Page page = null;
-//        if (webResource instanceof Page) {
-//            if (!StringUtils.equals(url, webResource.getURL())) {
-//                webResource.setURL(url);
-//            }
-//            page = (Page)webResource;
-//        } else if (webResource instanceof Site) {
-//            page = webResourceDataService.createPage(url);
-//            ((Site) webResource).addChild(page);
+//    private void fireNewSSP(String url, HarContent content) {
+//        LOGGER.info("fire New SSP " + url);
+//        if (foundSSP) {
+//            LOGGER.info("SSP already found, " + url + " is ignored");
+//            return;
 //        }
-//        page = (Page) webResourceDataService.saveOrUpdate(page);
-        currentSSP = contentFactory.createSSP(
-                dateFactory.createDate(),
-                url,
-                sourceCode,
-                null,
-                httpStatus);
-//        result.add(content);
-        foundSSP = true;
-    }
+//        int httpStatus = HttpStatus.SC_OK;
+//        if (content.getSize() == 0) {
+//            LOGGER.info("Emtpy SSP " + url + " saved as 404");
+//            httpStatus = HttpStatus.SC_NOT_FOUND;
+//        }
+//        String sourceCode="";
+//        if (!StringUtils.isEmpty(content.getText())) {
+//            sourceCode=content.getText();
+//        }
+//        currentSSP = contentFactory.createSSP(
+//                dateFactory.createDate(),
+//                url,
+//                sourceCode,
+//                null,
+//                httpStatus);
+//        foundSSP = true;
+//    }
 
     /**
      * 
@@ -248,37 +234,35 @@ public class HarFileContentLoaderImpl implements HarFileContentLoader {
      * @return A script, ready to run.
      * @throws IOException If anything goes wrong with interpreting the JSON.
      */
-    private void parse(File file) throws IOException {
-        HarFileReader r = new HarFileReader();
-        HarLog log = r.readHarFile(file);
-        HarEntries entries = log.getEntries();
-        // first of all we check whether the pageTiming values are not null or 
-        // negative which would mean that no content has been retrieved
-        if (!checkPageTiming(log)) {
-            return;
-        }
-        for (HarEntry he : entries.getEntries()) {
-            LOGGER.debug(he.getRequest().getUrl());
-            LOGGER.debug(he.getResponse().getContent().getMimeType());
-            LOGGER.debug(he.getRequest().getMethod());
-            LOGGER.debug(he.getResponse().getStatus());
-            int status = he.getResponse().getStatus();
-//            if (StringUtils.equalsIgnoreCase(he.getRequest().getMethod(), GET_METHOD_KEY)
-//                    && (status == HttpStatus.SC_OK || status == HttpStatus.SC_NOT_MODIFIED)) {
-            if (status == HttpStatus.SC_OK || status == HttpStatus.SC_NOT_MODIFIED) {
-                if (isEntryHtml(he)) {
-                    fireNewSSP(he.getRequest().getUrl(), he.getResponse().getContent());
-                } else if (isEntryCss(he)) {
-                    fireNewRelatedContent(he.getRequest().getUrl(), he.getResponse().getContent().getText());
-                }
-            } else if (isEntryHtml(he)) {
-                fireNewErrorPage(status, he.getRequest().getUrl());
-            }
-        }
-        if (currentSSP != null) {
-            result.add(currentSSP);
-        }
-    }
+//    private void parse(File file) throws IOException {
+//        HarFileReader r = new HarFileReader();
+//        HarLog log = r.readHarFile(file);
+//        HarEntries entries = log.getEntries();
+//        // first of all we check whether the pageTiming values are not null or 
+//        // negative which would mean that no content has been retrieved
+//        if (!checkPageTiming(log)) {
+//            return;
+//        }
+//        for (HarEntry he : entries.getEntries()) {
+//            LOGGER.debug(he.getRequest().getUrl());
+//            LOGGER.debug(he.getResponse().getContent().getMimeType());
+//            LOGGER.debug(he.getRequest().getMethod());
+//            LOGGER.debug(he.getResponse().getStatus());
+//            int status = he.getResponse().getStatus();
+//            if (status == HttpStatus.SC_OK || status == HttpStatus.SC_NOT_MODIFIED) {
+//                if (isEntryHtml(he)) {
+//                    fireNewSSP(he.getRequest().getUrl(), he.getResponse().getContent());
+//                } else if (isEntryCss(he)) {
+//                    fireNewRelatedContent(he.getRequest().getUrl(), he.getResponse().getContent().getText());
+//                }
+//            } else if (isEntryHtml(he)) {
+//                fireNewErrorPage(status, he.getRequest().getUrl());
+//            }
+//        }
+//        if (currentSSP != null) {
+//            result.add(currentSSP);
+//        }
+//    }
 
     /**
      * 
@@ -286,9 +270,9 @@ public class HarFileContentLoaderImpl implements HarFileContentLoader {
      * @return 
      *      whether the current HarEntry is a Html entry
      */
-    private boolean isEntryHtml(HarEntry he) {
-        return StringUtils.equalsIgnoreCase(he.getResponse().getContent().getMimeType(), HTML_MIME_TYPE);
-    }
+//    private boolean isEntryHtml(HarEntry he) {
+//        return StringUtils.equalsIgnoreCase(he.getResponse().getContent().getMimeType(), HTML_MIME_TYPE);
+//    }
     
     /**
      * 
@@ -296,9 +280,9 @@ public class HarFileContentLoaderImpl implements HarFileContentLoader {
      * @return 
      *      whether the current HarEntry is a Css entry
      */
-    private boolean isEntryCss(HarEntry he) {
-        return StringUtils.equalsIgnoreCase(he.getResponse().getContent().getMimeType(), CSS_MIME_TYPE);
-    }
+//    private boolean isEntryCss(HarEntry he) {
+//        return StringUtils.equalsIgnoreCase(he.getResponse().getContent().getMimeType(), CSS_MIME_TYPE);
+//    }
     
     /**
      * This method determines whether some content has been retrieved. To do so
@@ -308,14 +292,14 @@ public class HarFileContentLoaderImpl implements HarFileContentLoader {
      * @return
      *      whether some content has been retrieved
      */
-    private boolean checkPageTiming(HarLog log) {
-        if (log.getPages().getPages().size() == 1) {
-            HarPage hp = log.getPages().getPages().iterator().next();
-            if (hp.getPageTimings().getOnContentLoad() <=0 && 
-                    hp.getPageTimings().getOnLoad() <=0) {
-                return false;
-            }
-        }
-        return true;
-    }
+//    private boolean checkPageTiming(HarLog log) {
+//        if (log.getPages().getPages().size() == 1) {
+//            HarPage hp = log.getPages().getPages().iterator().next();
+//            if (hp.getPageTimings().getOnContentLoad() <=0 && 
+//                    hp.getPageTimings().getOnLoad() <=0) {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
 }

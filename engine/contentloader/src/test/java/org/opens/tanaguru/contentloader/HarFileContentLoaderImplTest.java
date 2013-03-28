@@ -21,12 +21,12 @@
  */
 package org.opens.tanaguru.contentloader;
 
-import java.io.*;
-import java.net.URI;
-import java.net.URISyntaxException;
+//import java.io.*;
+//import java.net.URI;
+//import java.net.URISyntaxException;
 import java.util.Map;
-import org.apache.commons.pool.impl.GenericObjectPool;
-import org.apache.log4j.Logger;
+//import org.apache.commons.pool.impl.GenericObjectPool;
+//import org.apache.log4j.Logger;
 
 /**
  *
@@ -124,36 +124,36 @@ public class HarFileContentLoaderImplTest  {
 //        verify(mockCss2);
 //    }
 
-    /**
-     * 
-     * @param scenarioPath
-     * @return 
-     */
-    private String readFile(String filePath) {
-        try {
-            java.net.URL url = GenericObjectPool.Config.class.getClassLoader().getResource(filePath);
-            BufferedReader in = new BufferedReader(new FileReader(new File(new URI(url.toString()))));
-            String str;
-            StringBuilder file = new StringBuilder();
-            int i=0;
-            try {
-                while ((str = in.readLine()) != null) {
-                    if (i>0) {
-                        file.append('\n');
-                    }
-                    file.append(str);
-                    i++;
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(HarFileContentLoaderImplTest.class.getName()).error(ex);
-            }
-            return file.toString();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(HarFileContentLoaderImplTest.class.getName()).error(ex);
-        } catch (URISyntaxException ex) {
-                Logger.getLogger(HarFileContentLoaderImplTest.class.getName()).error(ex);
-        }
-        return "";
-    }
+//    /**
+//     * 
+//     * @param scenarioPath
+//     * @return 
+//     */
+//    private String readFile(String filePath) {
+//        try {
+//            java.net.URL url = GenericObjectPool.Config.class.getClassLoader().getResource(filePath);
+//            BufferedReader in = new BufferedReader(new FileReader(new File(new URI(url.toString()))));
+//            String str;
+//            StringBuilder file = new StringBuilder();
+//            int i=0;
+//            try {
+//                while ((str = in.readLine()) != null) {
+//                    if (i>0) {
+//                        file.append('\n');
+//                    }
+//                    file.append(str);
+//                    i++;
+//                }
+//            } catch (IOException ex) {
+//                Logger.getLogger(HarFileContentLoaderImplTest.class.getName()).error(ex);
+//            }
+//            return file.toString();
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(HarFileContentLoaderImplTest.class.getName()).error(ex);
+//        } catch (URISyntaxException ex) {
+//                Logger.getLogger(HarFileContentLoaderImplTest.class.getName()).error(ex);
+//        }
+//        return "";
+//    }
     
 }
