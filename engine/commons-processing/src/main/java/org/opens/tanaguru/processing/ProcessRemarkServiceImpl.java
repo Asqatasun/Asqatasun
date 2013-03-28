@@ -21,37 +21,26 @@
  */
 package org.opens.tanaguru.processing;
 
-import org.opens.tanaguru.service.ProcessRemarkService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
+import javax.xml.xpath.*;
+import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
+import org.jsoup.helper.StringUtil;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.opens.tanaguru.contentadapter.css.CSSOMDeclaration;
 import org.opens.tanaguru.contentadapter.css.CSSOMRule;
-import org.opens.tanaguru.entity.audit.Evidence;
-import org.opens.tanaguru.entity.audit.EvidenceElement;
-import org.opens.tanaguru.entity.audit.ProcessRemark;
-import org.opens.tanaguru.entity.audit.SourceCodeRemark;
-import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.entity.factory.audit.EvidenceElementFactory;
 import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
 import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.entity.service.audit.EvidenceDataService;
+import org.opens.tanaguru.service.ProcessRemarkService;
 import org.w3c.css.sac.ConditionalSelector;
 import org.w3c.css.sac.DescendantSelector;
 import org.w3c.css.sac.ElementSelector;
@@ -74,6 +63,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     private static final String END_COMMENT_OCCURENCE = "-->";
     private XPath xpath = XPathFactory.newInstance().newXPath();
     private Document document;
+    private org.jsoup.nodes.Document jsoupDocument;
 
     /**
      * 
@@ -101,14 +91,18 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     public void setDocument(Document document) {
         this.document = document;
     }
-    private Set<ProcessRemark> remarkSet;
-
+    
+    public void setJsoupDocument(org.jsoup.nodes.Document document) {
+        this.jsoupDocument = document;
+    }
+    
+    private Collection<ProcessRemark> remarkSet;
     @Override
     public Collection<ProcessRemark> getRemarkList() {
         return this.remarkSet;
     }
+    
     private List<String> evidenceElementList = new ArrayList<String>();
-
     @Override
     public void addEvidenceElement(String element) {
         if (!evidenceElementList.contains(element)) {
@@ -160,6 +154,8 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     }
     private Map<Integer, String> sourceCodeWithLine =
             new TreeMap<Integer, String>();
+    private Map<Integer, String> rawSourceCodeWithLine =
+            new TreeMap<Integer, String>();
     /**
      * Local map of evidence to avoid multiple access to database
      */
@@ -176,6 +172,17 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         }
         initialize();
     }
+    
+    @Override
+    public void initializeJQueryLikeService(org.jsoup.nodes.Document document, String adaptedContent) {
+        if (document != null) {
+            this.jsoupDocument = document;
+        }
+        if (adaptedContent != null) {
+            initializeRawSourceCodeMap(adaptedContent);
+        }
+        initialize();
+    }
 
     @Override
     public void initializeService() {
@@ -184,7 +191,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
 
     private void initialize() {
         remarkSet = new LinkedHashSet<ProcessRemark>();
-        evidenceElementList = new ArrayList<String>();
+        evidenceElementList = new LinkedList<String>();
     }
 
     @Override
@@ -208,10 +215,43 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
                 messageCode,
                 attributeName));
     }
+    
+    @Override
+    public void addSourceCodeRemarkOnElement(TestSolution processResult, Element element,
+            String messageCode) {
+        remarkSet.add(createSourceCodeRemark(
+                processResult,
+                element,
+                messageCode));
+    }
 
     @Override
-    public void addSourceCodeRemark(TestSolution processResult, Node node,
-            String messageCode, List<EvidenceElement> evidenceElementList) {
+    public void addSourceCodeRemarkOnElement(
+            TestSolution processResult, 
+            Element element,
+            String messageCode, 
+            Collection<EvidenceElement> evidenceElementList) {
+        SourceCodeRemark remark = sourceCodeRemarkFactory.create();
+        remark.setIssue(processResult);
+        remark.setMessageCode(messageCode);
+        if (element != null) {
+            remark.setLineNumber(searchElementLineNumber(element));
+        } else {
+            remark.setLineNumber(-1);
+        }
+        for (EvidenceElement ee : evidenceElementList) {
+            remark.addElement(ee);
+            ee.setProcessRemark(remark);
+        }
+        remarkSet.add(remark);
+    }
+    
+    @Override
+    public void addSourceCodeRemark(
+            TestSolution processResult, 
+            Node node,
+            String messageCode, 
+            Collection<EvidenceElement> evidenceElementList) {
         SourceCodeRemark remark = sourceCodeRemarkFactory.create();
         remark.setIssue(processResult);
         remark.setMessageCode(messageCode);
@@ -243,6 +283,44 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         remark.addElement(evidenceElement);
         try {
             String selectorValue = computeSelector(rule);
+            if (selectorValue != null) {
+                EvidenceElement cssSelectorEvidenceElement = evidenceElementFactory.create();
+                cssSelectorEvidenceElement.setProcessRemark(remark);
+                cssSelectorEvidenceElement.setValue(selectorValue);
+                cssSelectorEvidenceElement.setEvidence(getEvidence(CSS_SELECTOR_EVIDENCE));
+                remark.addElement(cssSelectorEvidenceElement);
+            }
+            if (fileName != null) {
+                EvidenceElement fileNameEvidenceElement = evidenceElementFactory.create();
+                fileNameEvidenceElement.setProcessRemark(remark);
+                fileNameEvidenceElement.setValue(fileName);
+                fileNameEvidenceElement.setEvidence(getEvidence(CSS_FILENAME_EVIDENCE));
+                remark.addElement(fileNameEvidenceElement);
+            }
+        } catch (ClassCastException ex) {
+            Logger.getLogger(ProcessRemarkServiceImpl.class.getName()).log(Level.WARNING, null, ex);
+        }
+        remarkSet.add(remark);
+    }
+    
+    @Override
+    public void addCssCodeRemark(TestSolution processResult,
+            String selectorValue, 
+            String messageCode, 
+            String attrName, 
+            String fileName) {// XXX
+        SourceCodeRemark remark = sourceCodeRemarkFactory.create();
+        remark.setIssue(processResult);
+        remark.setMessageCode(messageCode);
+        // This a fake sourceCode Remark, the line number cannot be found
+        // we use a sourceCodeRemark here to add evidence elements
+        remark.setLineNumber(-1);
+        EvidenceElement evidenceElement = evidenceElementFactory.create();
+        evidenceElement.setProcessRemark(remark);
+        evidenceElement.setValue(attrName);
+        evidenceElement.setEvidence(getEvidence(DEFAULT_EVIDENCE));
+        remark.addElement(evidenceElement);
+        try {
             if (selectorValue != null) {
                 EvidenceElement cssSelectorEvidenceElement = evidenceElementFactory.create();
                 cssSelectorEvidenceElement.setProcessRemark(remark);
@@ -327,6 +405,61 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         }
         return lineNumber;
     }
+    
+    /**
+     * 
+     * @param node
+     * @return
+     */
+    private int searchElementLineNumber(Element element) {
+        int nodeIndex = getElementIndex(element);
+        int lineNumber = 0;
+        boolean found = false;
+        boolean isWithinComment = false;
+        Iterator<Integer> iter = rawSourceCodeWithLine.keySet().iterator();
+        String codeLine;
+        while (iter.hasNext() && !found) {
+            int myLineNumber = iter.next();
+            int index = 0;
+            while (index != -1) {
+                codeLine = rawSourceCodeWithLine.get(myLineNumber).toLowerCase();
+                int characterPositionOri = index;
+                index = codeLine.indexOf("<" + element.nodeName() + ">",
+                        index);
+                if (index == -1) {
+                    index = codeLine.indexOf("<" + element.nodeName() + " ",
+                            characterPositionOri);
+                }
+                int startCommentIndex = codeLine.indexOf(
+                        START_COMMENT_OCCURENCE, characterPositionOri);
+                int endCommentIndex = codeLine.indexOf(
+                        END_COMMENT_OCCURENCE, characterPositionOri);
+                if (index != -1) { // if an occurence of the tag is found
+                    if (!isWithinComment
+                            && !(startCommentIndex != -1 && index > startCommentIndex)
+                            && !(endCommentIndex != -1 && index < endCommentIndex)) { // if a comment is not currently opened or a comment is found on the current line and the occurence is not within
+                        if (nodeIndex == 0) {
+                            found = true;
+                            lineNumber = myLineNumber;
+                            break;
+                        }
+                        nodeIndex--;
+                    }
+                    index += element.nodeName().length();
+                }
+                // if a "start comment" occurence is found on the line,
+                // the boolean isWithinComment is set to true. Thus, while a
+                // "end comment" is not found, all the occurences of the
+                // wanted node will be ignored
+                if (!isWithinComment && startCommentIndex != -1 && endCommentIndex == -1) {
+                    isWithinComment = true;
+                } else if (isWithinComment && endCommentIndex != -1 && startCommentIndex < endCommentIndex) {
+                    isWithinComment = false;
+                }
+            }
+        }
+        return lineNumber;
+    }
 
     /**
      * This methods search the line where the current node is present in
@@ -353,6 +486,23 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         }
         return -1;
     }
+    
+    /**
+     * This methods search the line where the current node is present in
+     * the source code
+     * @param node
+     * @return
+     */
+    private int getElementIndex(Element element) {
+        Elements elements = jsoupDocument.getElementsByTag(element.tagName());
+        for (int i = 0; i < elements.size(); i++) {
+            Element current = elements.get(i);
+            if (current.equals(element)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
     /**
      * 
@@ -367,6 +517,26 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         try {
             while ((line = br.readLine()) != null) {
                 sourceCodeWithLine.put(lineNumber, line);
+                lineNumber++;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(ProcessRemarkServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * 
+     * @param adaptedContent
+     */
+    private void initializeRawSourceCodeMap(String rawSource) {
+        rawSourceCodeWithLine.clear();
+        int lineNumber = 1;
+        StringReader sr = new StringReader(rawSource);
+        BufferedReader br = new BufferedReader(sr);
+        String line;
+        try {
+            while ((line = br.readLine()) != null) {
+                rawSourceCodeWithLine.put(lineNumber, line);
                 lineNumber++;
             }
         } catch (IOException ex) {
@@ -407,6 +577,34 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             }
         }
         remark.addElement(evidenceElement);
+        return remark;
+    }
+    
+    @Override
+    public SourceCodeRemark createSourceCodeRemark(
+            TestSolution processResult,
+            Element element,
+            String messageCode) {
+        SourceCodeRemark remark = sourceCodeRemarkFactory.create();
+        remark.setIssue(processResult);
+        remark.setMessageCode(messageCode);
+        remark.setLineNumber(searchElementLineNumber(element));
+
+        // add default evidence element (i.e element name)
+        remark.addElement(getDefaultEvidenceElement(element));
+        
+        // add snippet evidence element
+        remark.addElement(getSnippetEvidenceElement(element));
+        
+        for (String attr : evidenceElementList) {
+            EvidenceElement evidenceElementSup;
+            if (StringUtils.equalsIgnoreCase(attr, "text")) {
+                evidenceElementSup = getEvidenceElement(attr, element.text());
+            } else {
+                evidenceElementSup = getEvidenceElement(attr, element.attr(attr));
+            }
+            remark.addElement(evidenceElementSup);
+        }
         return remark;
     }
 
@@ -492,6 +690,26 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         }
     }
 
+    @Override
+    public EvidenceElement getDefaultEvidenceElement(Element element) {
+        EvidenceElement defaultEvidenceElement = evidenceElementFactory.create();
+        defaultEvidenceElement.setValue(element.nodeName());
+        defaultEvidenceElement.setEvidence(getEvidence(DEFAULT_EVIDENCE));
+        return defaultEvidenceElement;
+    }
+    
+    @Override
+    public EvidenceElement getSnippetEvidenceElement(Element element) {
+        EvidenceElement snippetEvidenceElement = evidenceElementFactory.create();
+        String elementHtml = StringEscapeUtils.escapeHtml(StringUtil.normaliseWhitespace(element.outerHtml()));
+        if (elementHtml.length() > SNIPPET_MAX_LENGTH) {
+            elementHtml = elementHtml.substring(0, SNIPPET_MAX_LENGTH);
+        }
+        snippetEvidenceElement.setValue(elementHtml);
+        snippetEvidenceElement.setEvidence(getEvidence(SNIPPET_EVIDENCE));
+        return snippetEvidenceElement;
+    }
+    
     private String computeSelector(CSSOMRule rule) {
         StringBuilder selectorValue = new StringBuilder();
         Selector selector = rule.getSelectors().get(0).getSelector();

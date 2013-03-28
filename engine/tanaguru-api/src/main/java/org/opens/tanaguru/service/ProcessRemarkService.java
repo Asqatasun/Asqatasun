@@ -22,7 +22,7 @@
 package org.opens.tanaguru.service;
 
 import java.util.Collection;
-import java.util.List;
+import org.jsoup.nodes.Element;
 import org.opens.tanaguru.contentadapter.css.CSSOMRule;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
@@ -41,6 +41,8 @@ public interface ProcessRemarkService {
 
     public static final String DEFAULT_EVIDENCE = "Element-Name";
     public static final String URL_EVIDENCE = "Url";
+    public static final String SNIPPET_EVIDENCE = "Snippet";
+    public static final int SNIPPET_MAX_LENGTH = 200;
 
     /**
      *
@@ -49,6 +51,13 @@ public interface ProcessRemarkService {
      */
     void initializeService(Document document, String adaptedContent);
 
+    /**
+     * 
+     * @param document
+     * @param adaptedContent 
+     */
+    void initializeJQueryLikeService(org.jsoup.nodes.Document document, String adaptedContent);
+    
     /**
      *
      */
@@ -76,6 +85,25 @@ public interface ProcessRemarkService {
             String messageCode, String elementType, String elementName);
 
     /**
+     * 
+     * @param processResult
+     * @param element
+     * @param messageCode
+     */
+    void addSourceCodeRemarkOnElement(TestSolution processResult, Element element,
+            String messageCode);
+    
+    /**
+     * 
+     * @param processResult
+     * @param element
+     * @param messageCode
+     * @param evidenceElementList
+     */
+    void addSourceCodeRemarkOnElement(TestSolution processResult, Element element,
+            String messageCode, Collection<EvidenceElement> evidenceElementList);
+
+    /**
      *
      * @param processResult
      * @param node
@@ -83,7 +111,7 @@ public interface ProcessRemarkService {
      * @param evidenceElementList
      */
     void addSourceCodeRemark(TestSolution processResult, Node node,
-            String messageCode, List<EvidenceElement> evidenceElementList);
+            String messageCode, Collection<EvidenceElement> evidenceElementList);
 
     /**
      *
@@ -95,6 +123,16 @@ public interface ProcessRemarkService {
      */
     SourceCodeRemark createSourceCodeRemark(TestSolution processResult,
             Node node, String messageCode, String elementName);
+    
+    /**
+     *
+     * @param processResult
+     * @param element
+     * @param messageCode
+     * @return
+     */
+    SourceCodeRemark createSourceCodeRemark(TestSolution processResult,
+            Element element, String messageCode);
 
     /**
      *
@@ -105,6 +143,21 @@ public interface ProcessRemarkService {
      */
     void addCssCodeRemark(TestSolution processResult,
             CSSOMRule rule, String messageCode, String attrName, String fileName);
+    
+    /**
+     *
+     * @param processResult
+     * @param selectorValue
+     * @param messageCode
+     * @param attrName
+     * @param fileName
+     */
+    void addCssCodeRemark(
+            TestSolution processResult,
+            String selectorValue, 
+            String messageCode, 
+            String attrName, 
+            String fileName);
 
     /**
      *
@@ -199,5 +252,19 @@ public interface ProcessRemarkService {
      * @return
      */
     EvidenceDataService getEvidenceDataService();
+    
+    /**
+     * 
+     * @param element
+     * @return 
+     */
+    EvidenceElement getSnippetEvidenceElement(Element element);
 
+    /**
+     * 
+     * @param element
+     * @return 
+     */
+    EvidenceElement getDefaultEvidenceElement(Element element);
+    
 }
