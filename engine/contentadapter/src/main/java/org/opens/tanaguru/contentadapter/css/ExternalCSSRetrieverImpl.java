@@ -44,7 +44,7 @@ public class ExternalCSSRetrieverImpl implements ExternalCSSRetriever, Adaptatio
             new HashMap<Long, Collection<StylesheetContent>>();
 
     private static final String CSS_ON_ERROR = "CSS_ON_ERROR";
-    
+    private boolean persistOnTheFly = true;
     private ContentDataService contentDataService;
 
     @Autowired
@@ -85,9 +85,11 @@ public class ExternalCSSRetrieverImpl implements ExternalCSSRetriever, Adaptatio
      * @param audit
      */
     private void retrieveExternalCSS(Audit audit) {
-        externalCssMap.put(
-                audit.getId(),
-                contentDataService.getExternalStylesheetFromAudit(audit));
+        if (persistOnTheFly) {
+            externalCssMap.put(
+                    audit.getId(),
+                    contentDataService.getExternalStylesheetFromAudit(audit));
+        }
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Retrieved " + externalCssMap.get(audit.getId()).size()+
                     " external css  for the audit n "+ audit.getId());
@@ -118,7 +120,9 @@ public class ExternalCSSRetrieverImpl implements ExternalCSSRetriever, Adaptatio
         for (StylesheetContent stylesheetContent : externalStyleSheet) {
             if (stylesheetContent.getAdaptedContent() == null || stylesheetContent.getAdaptedContent().isEmpty()) {
                 stylesheetContent.setAdaptedContent(CSS_ON_ERROR);
-                contentDataService.saveOrUpdate(stylesheetContent);
+                if (persistOnTheFly) {
+                    contentDataService.saveOrUpdate(stylesheetContent);
+                }
                 if (LOGGER.isDebugEnabled()) {
                    LOGGER.debug(stylesheetContent.getURI() + " hasn't been adapted"
                            + "for any reason and is set on error");
@@ -145,5 +149,5 @@ public class ExternalCSSRetrieverImpl implements ExternalCSSRetriever, Adaptatio
         LOGGER.debug(stylesheetContent.getURI() + 
                 " has been added to the externalCssMap");
     }
-    
+ 
 }

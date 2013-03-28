@@ -40,11 +40,17 @@ public class CSSContentAdapterFactoryImpl implements CSSContentAdapterFactory {
             URLIdentifier urlIdentifier,
             Downloader downloader,
             ContentDataService contentDataService) {
-        return new CSSContentAdapterImpl(
+//        return new CSSContentAdapterImpl(
+//                contentFactory,
+//                urlIdentifier,
+//                downloader,
+//                CSSParserFactory.create(),
+//                contentDataService,
+//                getExternalCSSRetriever());
+        return new CSSJsoupPhlocContentAdapterImpl(
                 contentFactory,
                 urlIdentifier,
                 downloader,
-                CSSParserFactory.create(),
                 contentDataService,
                 getExternalCSSRetriever());
     }
