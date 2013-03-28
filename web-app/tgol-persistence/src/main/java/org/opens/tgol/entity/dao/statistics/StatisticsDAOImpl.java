@@ -58,6 +58,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
     private static final String NB_FAILED_STR = "Nb_Failed";
     private static final String NB_NMI_STR = "Nb_Nmi";
     private static final String NB_NA_STR = "Nb_Na";
+    private static final String NB_NT_STR = "Nb_Not_Tested";
     private static final String THEME_STATISTICS_TABLE_STR = "ts.";
     private static final String ID_THEME_FIELD_STR = "th.Id_Theme";
 
@@ -178,6 +179,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         queryString.append(THEME_STATISTICS_TABLE_STR);
         queryString = selectNbField(queryString, testSolution);
         queryString.append(RETRIEVE_COUNT_BY_RESULT_TYPE_AND_THEME_QUERY);
+        
         Query query = entityManager.createNativeQuery(queryString.toString());
         query.setParameter("idWebResource", webResource.getId());
         query.setParameter("idAudit", audit.getId());
@@ -247,14 +249,15 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
 
     /**
      * Native sql query :
-     * SELECT t.Cd_Test, t.Label, ts.$testSolution
+     * SELECT t.Cd_Test, t.Label, ts.Nb_Failed
      * FROM TEST_STATISTICS as ts,
      *       TEST as t,
      *       WEB_RESOURCE_STATISTICS as wrs
      *       WHERE ts.Id_Web_Resource_Statistics=wrs.Id_Web_Resource_Statistics
      *       AND wrs.Id_Web_Resource=:idWebResource
      *       AND wrs.Id_Audit=:idAudit
-     *       AND ts.Id_Test=t.Id_Test ;
+     *       AND ts.Id_Test=t.Id_Test 
+     *       ORDER BY ts.Nb_Failed DESC;
      * 
      * where $testSolution is computed on the fly for the given the testSolution
      * passed in argument.
@@ -757,8 +760,11 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
             case NOT_APPLICABLE:
                 queryString.append(NB_NA_STR);
                 break;
+            case NOT_TESTED:
+                queryString.append(NB_NT_STR);
+                break;
         }
         return queryString;
     }
-
+    
 }

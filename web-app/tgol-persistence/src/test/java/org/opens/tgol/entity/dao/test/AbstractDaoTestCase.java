@@ -33,6 +33,7 @@ import org.dbunit.operation.DatabaseOperation;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 /**
  *
@@ -65,7 +66,7 @@ public abstract class AbstractDaoTestCase extends DBTestCase {
 
 
     private static final String SPRING_FILE_PATH =
-            "../tgol-persistence/src/test/resources/conf/context/application-context.xml";
+            "src/test/resources/conf/context/application-context.xml";
 
     private String inputDataFileName = "";
     public String getInputDataFileName() {
@@ -80,19 +81,21 @@ public abstract class AbstractDaoTestCase extends DBTestCase {
 
     public AbstractDaoTestCase(String testName) {
         super(testName);
+        ApplicationContext springApplicationContext =
+                new FileSystemXmlApplicationContext(SPRING_FILE_PATH);
+        springBeanFactory = springApplicationContext;
+        DriverManagerDataSource dmds =
+                (DriverManagerDataSource)springBeanFactory.getBean("dataSource");
         System.setProperty(
                 PropertiesBasedJdbcDatabaseTester.DBUNIT_DRIVER_CLASS,
                 JDBC_DRIVER);
         System.setProperty(
                 PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL,
-                DATABASE);
+                dmds.getUrl());
         System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME,
-                USER);
+                dmds.getUsername());
         System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD,
-                PASSWORD);
-        ApplicationContext springApplicationContext = 
-                new FileSystemXmlApplicationContext(SPRING_FILE_PATH);
-        springBeanFactory = springApplicationContext;
+                dmds.getPassword());
     }
 
     /**

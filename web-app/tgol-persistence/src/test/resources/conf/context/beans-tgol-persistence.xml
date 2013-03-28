@@ -15,6 +15,7 @@
         <property name="persistenceXmlLocation" value="src/test/resources/conf/context/persistence.xml"/>
         <property name="jpaProperties">
             <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
                 <prop key="hibernate.show_sql">false</prop>
             </props>
         </property>
@@ -23,11 +24,9 @@
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource"
           p:driverClassName="org.hsqldb.jdbcDriver"
-          p:url="jdbc:hsqldb:file:src/test/resources/hsql-db"
+          p:url="jdbc:hsqldb:mem:mytestdb"
           p:username="sa"
-          p:password=""
-          />
-
+          p:password=""/>
     <!--
         PostProcessors to perform exception translation on @Repository classes (from native
         exceptions such as JPA PersistenceExceptions to Spring's DataAccessException hierarchy).

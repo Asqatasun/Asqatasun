@@ -22,11 +22,13 @@
  */
 package org.opens.tgol.entity.dao.tanaguru.subject;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.entity.subject.WebResourceImpl;
@@ -163,11 +165,34 @@ public class TgolWebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
     }
     
     @Override
+    public Collection<ProcessResult> retrieveProcessResultListByWebResourceAndCriterion(
+            WebResource webResource,
+            Criterion criterion) {
+        Query query = entityManager.createQuery(
+                "SELECT distinct(pr) FROM "
+                + getEntityClass().getName() + " r"
+                + JOIN_PROCESS_RESULT
+                + " LEFT JOIN FETCH pr.remarkSet pk"
+                + " LEFT JOIN FETCH pk.elementSet el"
+                + " JOIN pr.test t"
+                + " JOIN t.criterion c"
+                + " WHERE r=:webResource"
+                + " AND c=:criterion");
+        query.setParameter("webResource", webResource);
+        query.setParameter("criterion", criterion);
+        try {
+            return query.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    @Override
     public Collection<ProcessResult> retrieveProcessResultListByWebResourceAndScope(
             WebResource webResource,
             Scope scope,
             String theme,
-            String testSolution) {
+            Collection<String> testSolutions) {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT distinct(pr) FROM ");
         sb.append(getEntityClass().getName());
@@ -185,10 +210,8 @@ public class TgolWebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
                     !theme.equals(selectAllThemeKey)) {
             sb.append("AND (th.code = :theme)");
         }
-        if (testSolution != null && 
-                !testSolution.isEmpty() &&
-                    !testSolution.equals(selectAllTestResultKey)) {
-            sb.append(" AND (pr.definiteValue = :testSolution) ");
+        if (!testSolutions.isEmpty()) {
+            sb.append(" AND (pr.definiteValue IN (:testSolution)) ");
         }
 
         Query query = entityManager.createQuery(sb.toString());
@@ -200,10 +223,12 @@ public class TgolWebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
                     !theme.equals(selectAllThemeKey)) {
             query.setParameter("theme", theme);
         }
-        if (testSolution != null &&
-                !testSolution.isEmpty() &&
-                    !testSolution.equals(selectAllTestResultKey)) {
-            query.setParameter("testSolution", TestSolution.valueOf(testSolution));
+        if (!testSolutions.isEmpty()) {
+            Collection<TestSolution> solutions = new ArrayList<TestSolution>();
+            for (String solution : testSolutions) {
+                solutions.add(TestSolution.valueOf(solution));
+            }
+            query.setParameter("testSolution", solutions);
         }
         try {
             return query.getResultList();
