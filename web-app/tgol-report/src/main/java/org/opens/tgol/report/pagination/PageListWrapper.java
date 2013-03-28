@@ -63,8 +63,7 @@ public class PageListWrapper extends TableDecorator {
     public String getRawMark() {
         Object lObject = this.getCurrentRowObject();
         if (lObject instanceof PageResult && !((PageResult)lObject).getRawMark().equalsIgnoreCase("-1")){
-            String gradeClass = getGradeClassFromMark(((PageResult)lObject).getRawMark());
-            return "<div class=\""+gradeClass+"\"> " + ((PageResult)lObject).getRawMark() + PERCENT_CHAR + " </div>";
+            return "<div> " + ((PageResult)lObject).getRawMark() + PERCENT_CHAR + " </div>";
         }
         return getResourceBundle(this.getPageContext().getRequest()).getString(NOT_TESTED);
     }
@@ -77,8 +76,7 @@ public class PageListWrapper extends TableDecorator {
     public String getWeightedMark() {
         Object lObject = this.getCurrentRowObject();
         if (lObject instanceof PageResult && !((PageResult)lObject).getWeightedMark().equalsIgnoreCase("-1")){
-            String gradeClass = getGradeClassFromMark(((PageResult)lObject).getWeightedMark());
-            return "<div class=\""+gradeClass+"\"> " + ((PageResult)lObject).getWeightedMark() + PERCENT_CHAR + " </div>";
+            return "<div>" + ((PageResult)lObject).getWeightedMark() + PERCENT_CHAR + " </div>";
         }
         return "";
     }
@@ -224,28 +222,6 @@ public class PageListWrapper extends TableDecorator {
                 resourceBundle.getString(FOR_KEY)+
                 " " +
                 url;
-    }
-
-    /**
-     *
-     * @param mark
-     * @return
-     */
-    private String getGradeClassFromMark(String mark) {
-        int markValue = Integer.valueOf(mark);
-        if (markValue >= 90) {
-            return "grade-a";
-        } else if (markValue < 90 && markValue>=80) {
-            return "grade-b";
-        } else if (markValue<80 && markValue>=70) {
-            return "grade-c";
-        } else if (markValue<70 && markValue>=60) {
-            return "grade-d";
-        } else if (markValue<60 && markValue>=60) {
-            return "grade-e";
-        } else {
-            return "grade-f";
-        }
     }
 
 }

@@ -22,9 +22,9 @@
 package org.opens.tgol.report.expression;
 
 import ar.com.fdvs.dj.domain.CustomExpression;
-import org.opens.tgol.presentation.data.ResultCounter;
 import java.util.Map;
 import org.apache.log4j.Logger;
+import org.opens.tgol.presentation.data.ResultCounter;
 
 /**
  *

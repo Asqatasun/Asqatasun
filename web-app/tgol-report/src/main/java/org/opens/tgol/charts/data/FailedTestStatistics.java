@@ -21,12 +21,10 @@
  */
 package org.opens.tgol.charts.data;
 
-import de.laures.cewolf.DatasetProducer;
-import de.laures.cewolf.links.CategoryItemLinkGenerator;
-import de.laures.cewolf.tooltips.CategoryToolTipGenerator;
-import java.util.*;
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.category.DefaultIntervalCategoryDataset;
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.Map;
+import java.util.ResourceBundle;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tgol.presentation.data.ResultCounter;
 
@@ -34,14 +32,12 @@ import org.opens.tgol.presentation.data.ResultCounter;
  * This class handles displayable audit statistics data
  * @author jkowalczyk
  */
-public class FailedTestStatistics implements
-        DatasetProducer, CategoryToolTipGenerator, CategoryItemLinkGenerator {
+public class FailedTestStatistics {
 
     private static final long serialVersionUID = -6801992004288144815L;
 
     private static final String THEME_BUNDLE_NAME="theme-I18N";
     private static final String RULE_RESULT_BUNDLE_NAME = "rule-result-I18N";
-    private static final String ANCHOR_LINK_PREFIX = "#theme";
     private static final int FAILED_INDEX = 0;
     private static final int MAX_NUMBER_OF_CATEGORIES = 5;
 
@@ -160,76 +156,5 @@ public class FailedTestStatistics implements
         isFailedTestStaticsSet = true;
         setI18NNames();
     }
-
-    /**
-     *
-     * @param params
-     * @return
-     */
-    @Override
-    public Object produceDataset(Map params) {
-        DefaultIntervalCategoryDataset ds = new DefaultIntervalCategoryDataset(
-                series,
-                categories,
-                startValues,
-                endValues);
-        return ds;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String getProducerId() {
-        return "CategoryDataProducer";
-    }
-
-    /**
-     *
-     * @param params
-     * @param since
-     * @return
-     */
-    @Override
-    public boolean hasExpired(Map params, Date since) {
-        return false;
-    }
-
-    /**
-     *
-     * @param cd
-     * @param serieIndex
-     * @param index
-     * @return
-     */
-    @Override
-    public String generateToolTip(CategoryDataset cd, int serieIndex, int index) {
-        return categories[index] +
-                " : " +
-                cd.getValue(serieIndex, index) + 
-                " "+
-                series[serieIndex];
-    }
-
-    /**
-     *
-     * @param o
-     * @param index
-     * @param o1
-     * @return
-     */
-    @Override
-    public String generateLink(Object o, int index, Object o1) {
-        int i = 0;
-        for (i=0;i<categories.length;i++) {
-            if (o1 instanceof String) {
-                if (categories[i].equalsIgnoreCase((String)o1)) {
-                    break;
-                }
-            }
-        }
-        return ANCHOR_LINK_PREFIX+(i+1);
-    }
-
+    
 }

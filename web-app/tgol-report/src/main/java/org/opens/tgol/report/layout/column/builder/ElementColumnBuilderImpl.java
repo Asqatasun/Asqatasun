@@ -22,18 +22,19 @@
 package org.opens.tgol.report.layout.column.builder;
 
 import ar.com.fdvs.dj.domain.CustomExpression;
+import ar.com.fdvs.dj.domain.Style;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilder;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn;
-import ar.com.fdvs.dj.domain.Style;
 import ar.com.fdvs.dj.domain.entities.conditionalStyle.ConditionalStyle;
-import org.opens.tgol.report.expression.builder.AbstractGenericConditionalStyleBuilder;
-import org.opens.tgol.report.expression.builder.AbstractGenericCustomExpressionBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.log4j.Logger;
+import org.opens.tgol.report.expression.builder.AbstractGenericConditionalStyleBuilder;
+import org.opens.tgol.report.expression.builder.AbstractGenericCustomExpressionBuilder;
 
 /**
  *
@@ -167,7 +168,7 @@ public class ElementColumnBuilderImpl implements ElementColumnBuilder{
         if (columnTitleBundleName != null) {
             ResourceBundle bundle = ResourceBundle.getBundle(columnTitleBundleName, locale);
             if (columnTitleKey != null) {
-                columnBuilder.setTitle(bundle.getString(columnTitleKey));
+                columnBuilder.setTitle(StringEscapeUtils.unescapeHtml(bundle.getString(columnTitleKey)));
             }
         }
         if (conditionalStyleBuilderList != null &&

@@ -63,7 +63,7 @@ public class I18nExpression implements CustomExpression {
             if (escapeHtml) {
                 return StringEscapeUtils.escapeHtml(i18nValue);
             }
-            return i18nValue;
+            return StringEscapeUtils.unescapeHtml(i18nValue);
         }
         return key;
     }

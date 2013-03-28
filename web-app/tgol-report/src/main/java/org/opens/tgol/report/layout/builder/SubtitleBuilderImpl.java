@@ -24,6 +24,7 @@ package org.opens.tgol.report.layout.builder;
 import org.opens.tgol.presentation.data.AuditStatistics;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import org.apache.commons.lang.StringEscapeUtils;
 
 /**
  *
@@ -119,13 +120,13 @@ public class SubtitleBuilderImpl implements TitleBuilder {
         ResourceBundle levelValueBundle = ResourceBundle.getBundle(levelValueBundleName, locale);
         ResourceBundle levelBundle = ResourceBundle.getBundle(levelBundleName, locale);
         StringBuilder refAndLevel = new StringBuilder();
-        refAndLevel.append(refBundle.getString(refKey));
+        refAndLevel.append(StringEscapeUtils.unescapeHtml(refBundle.getString(refKey)));
         refAndLevel.append(DOUBLE_DOT_KEY);
-        refAndLevel.append(refValueBundle.getString(auditStatistics.getParametersMap().get(refKey)));
+        refAndLevel.append(StringEscapeUtils.unescapeHtml(refValueBundle.getString(auditStatistics.getParametersMap().get(refKey))));
         refAndLevel.append(SEPARATOR_KEY);
-        refAndLevel.append(levelBundle.getString(levelKey));
+        refAndLevel.append(StringEscapeUtils.unescapeHtml(levelBundle.getString(levelKey)));
         refAndLevel.append(DOUBLE_DOT_KEY);
-        refAndLevel.append(levelValueBundle.getString(auditStatistics.getParametersMap().get(levelKey)));
+        refAndLevel.append(StringEscapeUtils.unescapeHtml(levelValueBundle.getString(auditStatistics.getParametersMap().get(levelKey))));
         return refAndLevel.toString();
     }
 
