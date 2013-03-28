@@ -280,27 +280,83 @@ SELECT CONTRACT_Id_Contract, RESTRICTION_Id_Restriction FROM TGSI_CONTRACT_RESTR
 -- Creation of relation between contract and Url (through Option)
 -- -----------------------------------------------------------------
 delimiter |
-CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `create_contract_option_from_restriction`()
+CREATE PROCEDURE `create_contract_option_from_restriction`()
 BEGIN
 
   DECLARE done INT DEFAULT 0;
-  DECLARE Id_Contract BIGINT(20);
-  DECLARE Url varchar(2048);
-  DECLARE v_Id_Option_Element bigint(20);
-  DECLARE contractWithUrl CURSOR FOR SELECT c.Id_Contract, c.Url FROM TGSI_CONTRACT c WHERE c.Url != '';
+  DECLARE v_Id_Audit bigint(20);
+  DECLARE v_Id_Web_Resource_Statistics bigint(20);
+  DECLARE audits CURSOR FOR SELECT * FROM AUDIT;
+  DECLARE wrs CURSOR FOR SELECT Id_Web_Resource_Statistics, Id_Audit FROM WEB_RESOURCE_STATISTICS;
 
   DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
 
-  OPEN contractWithUrl;
+  OPEN audits ;
   REPEAT
-    FETCH contractWithUrl INTO Id_Contract, Url;
-    INSERT IGNORE INTO `TGSI_OPTION_ELEMENT` (`OPTION_Id_Option`, `Value`) VALUES
-	(10, Url);	
-    select Id_Option_Element into v_Id_Option_Element FROM TGSI_OPTION_ELEMENT toe WHERE toe.OPTION_Id_Option=10 AND toe.Value=Url;
-    INSERT IGNORE INTO `TGSI_CONTRACT_OPTION_ELEMENT` (`CONTRACT_Id_Contract`, `OPTION_ELEMENT_Id_Option_Element`) VALUES
-	    (Id_Contract,v_Id_Option_Element);
+    FETCH wrs INTO v_Id_Web_Resource_Statistics, v_Id_Audit;
+    DECLARE criterions CURSOR ;
+    DECLARE v_Id_Criterion bigint(20);
+    DECLARE done2 INT DEFAULT 0;
+    DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done2 = 1;
+    SELECT DISTINCT(c.Id_Criterion) INTO criterions FROM CRITERION as c 
+            LEFT JOIN TEST as t on (t.Id_Criterion=c.Id_Criterion) 
+            LEFT JOIN AUDIT_TEST as at on (at.Id_Test=t.Id_Test) 
+            LEFT JOIN AUDIT as a on (at.Id_Audit=a.Id_Audit) 
+            WHERE a.Id_Audit=v_Id_Audit AND a.Status='COMPLETED';
+        OPEN criterions ;
+            REPEAT
+                FETCH criterions INTO v_Id_Criterion;
+                DECLARE nb_Passed int(11);
+                DECLARE nb_Failed int(11);
+                DECLARE nb_Nmi int(11);
+                DECLARE nb_Na int(11);
+                DECLARE criterion_result varchar(255);
+
+                SELECT COUNT(pr.Id_ProcessResult) INTO nb_Passed FROM PROCESS_RESULT as pr
+                    LEFT JOIN TEST as t on (t.Id_Test=pr.Id_Test)
+                    LEFT JOIN CRITERION as cr on (t.Id_Criterion=cr.Id_Criterion)
+                        WHERE c.Id_Criterion=v_Id_Criterion 
+                        AND Definite_Value="PASSED";
+                        AND DTYPE="DefiniteResultImpl";
+
+                SELECT COUNT(pr.Id_ProcessResult) INTO nb_Failed FROM PROCESS_RESULT as pr
+                    LEFT JOIN TEST as t on (t.Id_Test=pr.Id_Test)
+                    LEFT JOIN CRITERION as cr on (t.Id_Criterion=cr.Id_Criterion)
+                        WHERE c.Id_Criterion=v_Id_Criterion 
+                        AND Definite_Value="FAILED";
+                        AND DTYPE="DefiniteResultImpl";
+
+                SELECT COUNT(pr.Id_ProcessResult) INTO nb_Nmi FROM PROCESS_RESULT as pr
+                    LEFT JOIN TEST as t on (t.Id_Test=pr.Id_Test)
+                    LEFT JOIN CRITERION as cr on (t.Id_Criterion=cr.Id_Criterion)
+                        WHERE c.Id_Criterion=v_Id_Criterion 
+                        AND Definite_Value="NEED_MORE_INFO";
+                        AND DTYPE="DefiniteResultImpl";
+
+                SELECT COUNT(pr.Id_ProcessResult) INTO nb_Na FROM PROCESS_RESULT as pr
+                    LEFT JOIN TEST as t on (t.Id_Test=pr.Id_Test)
+                    LEFT JOIN CRITERION as cr on (t.Id_Criterion=cr.Id_Criterion)
+                        WHERE c.Id_Criterion=v_Id_Criterion 
+                        AND Definite_Value="NOT_APPLICABLE";
+                        AND DTYPE="DefiniteResultImpl";
+
+                IF nb_Failed > 0 THEN 
+                        SET criterion_result="FAILED";
+                    ELSEIF nb_Nmi > 0 THEN 
+                        SET criterion_result="NEED_MORE_INFO";
+                    ELSEIF nb_Passed > 0 THEN 
+                        SET criterion_result="PASSED";
+                    ELSE 
+                        SET criterion_result="NOT_APPLICABLE";
+                END IF;
+
+                INSERT INTO CRITERION_STATISTICS (`Id_Criterion`, `Id_Web_Resource_Statistics`, `Nb_Passed`, `Nb_Failed`, `Nb_Nmi`,`Nb_Na`,`criterion_reuslt`)
+                VALUES (v_Id_Criterion, v_Id_Web_Resource_Statistics, nb_Passed, nb_Failed, nb_Nmi, nb_Na, criterion_result);
+        UNTIL done2 END REPEAT;
+        CLOSE criterions ;
+
   UNTIL done END REPEAT;
-  CLOSE contractWithUrl;
+  CLOSE audits ;
 
 END  |
 delimiter ;
