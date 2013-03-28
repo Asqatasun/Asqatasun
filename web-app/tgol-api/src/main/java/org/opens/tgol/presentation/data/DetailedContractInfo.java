@@ -44,6 +44,20 @@ public interface DetailedContractInfo extends ContractInfo{
      * @param contractCreationDate
      */
     void setContractCreationDate(Date contractCreationDate);
+    
+    /**
+     *
+     * @return
+     *      the date of expiration of the contract
+     */
+    Date getContractExpirationDate();
+
+    /**
+     * Sets the date of expiration of the contract
+     * 
+     * @param contractExpirationDate
+     */
+    void setContractExpirationDate(Date contractExpirationDate);
 
     /**
      *

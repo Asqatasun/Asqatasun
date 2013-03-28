@@ -36,11 +36,17 @@ public class ResultCounterImpl implements ResultCounter {
     /**
      * Constructor with parameters
      */
-    public ResultCounterImpl (Integer passedCount, Integer failedCount, Integer nmiCount, Integer naCount){
+    public ResultCounterImpl (
+            Integer passedCount, 
+            Integer failedCount, 
+            Integer nmiCount, 
+            Integer naCount, 
+            Integer ntCount){
         this.passedCount = passedCount;
         this.failedCount = failedCount;
         this.nmiCount = nmiCount;
         this.naCount = naCount;
+        this.ntCount = ntCount;
     }
 
     private Integer passedCount = -1;
@@ -74,6 +80,17 @@ public class ResultCounterImpl implements ResultCounter {
     @Override
     public void setNmiCount(Integer nmiCount) {
         this.nmiCount = nmiCount;
+    }
+
+    private Integer ntCount = -1;
+    @Override
+    public Integer getNtCount() {
+        return ntCount;
+    }
+
+    @Override
+    public void setNtCount(Integer ntCount) {
+        this.ntCount = ntCount;
     }
 
     private Integer suspectedPassedCount = -1;

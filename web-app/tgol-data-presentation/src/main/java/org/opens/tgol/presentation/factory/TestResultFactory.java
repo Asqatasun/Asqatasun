@@ -21,32 +21,23 @@
  */
 package org.opens.tgol.presentation.factory;
 
+import java.util.*;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.opens.tanaguru.entity.audit.*;
+import org.opens.tanaguru.entity.factory.audit.ProcessResultFactory;
+import org.opens.tanaguru.entity.reference.Criterion;
+import org.opens.tanaguru.entity.reference.Scope;
+import org.opens.tanaguru.entity.reference.Test;
+import org.opens.tanaguru.entity.reference.Theme;
+import org.opens.tanaguru.entity.service.audit.AuditDataService;
+import org.opens.tanaguru.entity.service.reference.CriterionDataService;
+import org.opens.tanaguru.entity.service.reference.TestDataService;
+import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tgol.entity.decorator.tanaguru.subject.WebResourceDataServiceDecorator;
 import org.opens.tgol.presentation.data.RemarkInfos;
 import org.opens.tgol.presentation.data.TestResult;
 import org.opens.tgol.presentation.data.TestResultImpl;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
-import org.apache.log4j.Logger;
-import org.opens.tanaguru.entity.audit.DefiniteResult;
-import org.opens.tanaguru.entity.audit.EvidenceElement;
-import org.opens.tanaguru.entity.audit.ProcessRemark;
-import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.SourceCodeRemark;
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.entity.reference.Scope;
-import org.opens.tanaguru.entity.reference.Theme;
-import org.opens.tanaguru.entity.subject.WebResource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -56,6 +47,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public final class TestResultFactory {
 
+    private static final String NOT_TESTED_STR = "NOT_TESTED";
+    
     private final ResourceBundle representationBundle =
             ResourceBundle.getBundle(TestResult.REPRESENTATION_BUNDLE_NAME);
 
@@ -64,7 +57,39 @@ public final class TestResultFactory {
     public void setWebResourceDataService(WebResourceDataServiceDecorator webResourceDataServiceDecorator) {
         this.webResourceDataService = webResourceDataServiceDecorator;
     }
+    
+    private AuditDataService auditDataService;
+    @Autowired
+    public void setAuditDataService(AuditDataService auditDataService) {
+        this.auditDataService = auditDataService;
+    }
+    
+    private CriterionDataService criterionDataService;
+    @Autowired
+    public void setCriterionDataService(CriterionDataService criterionDataService) {
+        this.criterionDataService = criterionDataService;
+    }
+    
+    private TestDataService testDataService;
+    @Autowired
+    public void setTestDataService(TestDataService testDataService) {
+        this.testDataService = testDataService;
+    }
+    
+    private ProcessResultFactory processResultFactory;
+    @Autowired
+    public void setProcessResultFactory(ProcessResultFactory processResultFactory) {
+        this.processResultFactory = processResultFactory;
+    }
 
+    private String selectAllThemeKey;
+    public String getSelectAllThemeKey() {
+        return selectAllThemeKey;
+    }
+
+    public void setSelectAllThemeKey(String selectAllThemeKey) {
+        this.selectAllThemeKey = selectAllThemeKey;
+    }
     /**
      * The unique shared instance of TestResultFactory
      */
@@ -93,6 +118,7 @@ public final class TestResultFactory {
     /**
      * 
      * @param processResult
+     * @param test
      * @param hasSourceCodeADoctype
      * @param hasResultDetails
      * @return
@@ -131,11 +157,23 @@ public final class TestResultFactory {
             boolean hasSourceCodeWithDoctype,
             boolean hasResultDetails,
             String theme,
-            String testSolution){
+            Collection<String> testSolutionList){
+
         List<ProcessResult> netResultList = (List<ProcessResult>)
                 webResourceDataService.
-                getProcessResultListByWebResourceAndScope(webresource, scope, theme, testSolution);
-        return prepareThemeResultMap(netResultList, hasSourceCodeWithDoctype, hasResultDetails);
+                getProcessResultListByWebResourceAndScope(webresource, scope, theme, testSolutionList);
+
+        // The not tested tests are not persisted but deduced from the testResultList
+        // If the not_tested solution is requested to be displayed, we add fake
+        // processResult to the current list.
+        if (testSolutionList.contains(NOT_TESTED_STR)) {
+            netResultList.addAll(addNotTestedProcessResult(getTestListFromWebResource(webresource), theme, netResultList));
+        }
+        
+        return prepareThemeResultMap(
+                netResultList, 
+                hasSourceCodeWithDoctype, 
+                hasResultDetails);
     }
 
     /**
@@ -149,10 +187,13 @@ public final class TestResultFactory {
             List<ProcessResult> netResultList,
             boolean hasSourceCodeWithDoctype,
             boolean hasResultDetails) {
+        
         // Map that associates a list of results with a theme
         Map<Theme, List<TestResult>> testResultMap =
                 new LinkedHashMap<Theme, List<TestResult>>();
+
         sortCollection(netResultList);
+        
         for (ProcessResult processResult : netResultList) {
             if (processResult instanceof DefiniteResult) {
                 TestResult testResult = getTestResult(
@@ -161,6 +202,7 @@ public final class TestResultFactory {
                         hasResultDetails);
                 Theme theme =
                         processResult.getTest().getCriterion().getTheme();
+                
                 if (testResultMap.containsKey(theme)) {
                     testResultMap.get(theme).add(testResult);
                 } else {
@@ -173,24 +215,28 @@ public final class TestResultFactory {
         return testResultMap;
     }
 
-    /**
-     * This methods prepare test results to be displayed
-     * @param webresource
-     * @param scope
-     * @param hasSourceCodeADoctype
-     * @param hasResultDetails
-     * @return
-     */
-    public Map<Theme, List<TestResult>> getTestResultSortedByThemeMap(
-            WebResource webresource,
-            Scope scope,
-            boolean hasSourceCodeWithDoctype,
-            boolean hasResultDetails) {
-        List<ProcessResult> netResultList = (List<ProcessResult>)
-                webResourceDataService.
-                getProcessResultListByWebResourceAndScope(webresource, scope);
-        return prepareThemeResultMap(netResultList, hasSourceCodeWithDoctype, hasResultDetails);
-    }
+//    /**
+//     * This methods prepare test results to be displayed
+//     * @param webresource
+//     * @param scope
+//     * @param hasSourceCodeADoctype
+//     * @param hasResultDetails
+//     * @return
+//     */
+//    public Map<Theme, List<TestResult>> getTestResultSortedByThemeMap(
+//            WebResource webresource,
+//            Scope scope,
+//            boolean hasSourceCodeWithDoctype,
+//            boolean hasResultDetails) {
+//        List<ProcessResult> netResultList = (List<ProcessResult>)
+//                webResourceDataService.
+//                getProcessResultListByWebResourceAndScope(webresource, scope);
+//        return prepareThemeResultMap(
+//                netResultList, 
+//                getTestListFromWebResource(webresource),
+//                hasSourceCodeWithDoctype, 
+//                hasResultDetails);
+//    }
 
     /**
      * 
@@ -200,6 +246,7 @@ public final class TestResultFactory {
      * @param hasResultDetails
      * @param locale
      * @return
+     *      the test result list without user filter (used for the export function)
      */
     public List<TestResult> getTestResultList(
             WebResource webresource,
@@ -212,6 +259,13 @@ public final class TestResultFactory {
         List<ProcessResult> netResultList = (List<ProcessResult>)
                 webResourceDataService.
                 getProcessResultListByWebResourceAndScope(webresource, scope);
+        
+        netResultList.addAll(
+                addNotTestedProcessResult(
+                    getTestListFromWebResource(webresource), 
+                    selectAllThemeKey, 
+                    netResultList));
+        
         sortCollection(netResultList);
         for (ProcessResult processResult : netResultList) {
             if (processResult instanceof DefiniteResult) {
@@ -223,6 +277,50 @@ public final class TestResultFactory {
             }
         }
         return testResultList;
+    }
+    
+    /**
+     * 
+     * @param webresource
+     * @param scope
+     * @param hasSourceCodeWithDoctype
+     * @param hasResultDetails
+     * @param locale
+     * @return
+     *      the test result list without user filter (used for the export function)
+     */
+    public Map<Theme, List<TestResult>> getTestResultListFromCriterion(
+            WebResource webresource,
+            boolean hasSourceCodeWithDoctype,
+            Long criterionId) {
+        // Map that associates a list of results with a theme
+        List<TestResult> testResultList = new LinkedList<TestResult>();
+        Criterion crit = criterionDataService.read(criterionId);
+        List<ProcessResult> netResultList = (List<ProcessResult>)
+                webResourceDataService.
+                getProcessResultListByWebResourceAndCriterion(
+                    webresource, 
+                    crit);
+        
+        netResultList.addAll(
+                addNotTestedProcessResult(
+                    testDataService.findAllByCriterion(crit), 
+                    crit.getTheme().getCode(), 
+                    netResultList));
+        
+        sortCollection(netResultList);
+        for (ProcessResult processResult : netResultList) {
+            if (processResult instanceof DefiniteResult) {
+                TestResult testResult = getTestResult(
+                        processResult,
+                        hasSourceCodeWithDoctype,
+                        true);
+                testResultList.add(testResult);
+            }
+        }
+        Map<Theme, List<TestResult>> testResultMap = new HashMap<Theme, List<TestResult>>();
+        testResultMap.put(crit.getTheme(), testResultList);
+        return testResultMap;
     }
 
     /**
@@ -261,6 +359,8 @@ public final class TestResultFactory {
             return TestResult.NEED_MORE_INFO_LOWER;
         } else if (testResult.getResult().equalsIgnoreCase(TestResult.NOT_APPLICABLE)) {
             return TestResult.NOT_APPLICABLE_LOWER;
+        } else if (testResult.getResult().equalsIgnoreCase(TestResult.NOT_TESTED)) {
+            return TestResult.NOT_TESTED_LOWER;
         }
         return null;
     }
@@ -373,6 +473,8 @@ public final class TestResultFactory {
                     testResult.getResultCounter().setNmiCount(testResult.getResultCounter().getNmiCount()+1);
                 }
                 return TestResult.NEED_MORE_INFO_LOWER;
+            case NOT_TESTED:
+                return TestResult.NOT_TESTED_LOWER;
             default:
                 return "";
         }
@@ -456,5 +558,62 @@ public final class TestResultFactory {
         }
         return sortedMap;
     }
+
+    /**
+     * Some tests may have not ProcessResult, but are needed to be displayed
+     * as not tested test. For each test without ProcessResult, we create 
+     * a new ProcessResult with NOT_TESTED as the result. 
+     * 
+     * @param testList
+     * @param themeCode
+     * @param netResultList
+     * @return 
+     */
+    private Collection<ProcessResult> addNotTestedProcessResult(
+            Collection<Test>testList, 
+            String themeCode,
+            List<ProcessResult> netResultList) {
+        
+        Collection<Test> testedTestList = new ArrayList<Test>();
+        for (ProcessResult pr : netResultList) {
+            testedTestList.add(pr.getTest());
+        }
+        
+        Collection<ProcessResult> notTestedProcessResult = new ArrayList<ProcessResult>();
+        
+        for (Test test : testList) {
+            
+            // if the test has no ProcessResult and its theme is part of the user
+            // selection, a NOT_TESTED result ProcessRemark is created
+            if (!testedTestList.contains(test) && (
+                    StringUtils.equalsIgnoreCase(test.getCriterion().getTheme().getCode(), themeCode) ||
+                    themeCode == null || 
+                    StringUtils.equalsIgnoreCase(selectAllThemeKey, themeCode))) {
+                ProcessResult pr = processResultFactory.createDefiniteResult();
+                pr.setTest(test);
+                pr.setValue(TestSolution.NOT_TESTED);
+                notTestedProcessResult.add(pr);
+                pr.setRemarkSet(new ArrayList<ProcessRemark>());
+            }
+        }
+        return notTestedProcessResult;
+    }
+    
+    /**
+     * Return the list of tests for a given webResource. If the webresource has 
+     * a parent, we pass through the parent linked with the audit to retrieve 
+     * the test list.
+     * @param wr
+     * @return 
+     */
+    private Collection<Test> getTestListFromWebResource(WebResource wr) {
+        Audit audit;
+        if (wr.getParent() == null && wr.getAudit() != null) {
+            audit = wr.getAudit();
+        } else {
+            audit = wr.getParent().getAudit();
+        }
+        return auditDataService.getAuditWithTest(audit.getId()).getTestList();
+    } 
 
 }

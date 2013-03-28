@@ -21,28 +21,24 @@
  */
 package org.opens.tgol.presentation.factory;
 
-import org.opens.tgol.entity.decorator.tanaguru.subject.WebResourceDataServiceDecorator;
-import org.opens.tgol.entity.service.contract.ActDataService;
-import org.opens.tgol.presentation.data.AuditStatistics;
-import org.opens.tgol.presentation.data.AuditStatisticsImpl;
-import org.opens.tgol.presentation.data.ResultCounter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import org.apache.commons.lang.StringUtils;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.reference.ThemeDataService;
+import org.opens.tanaguru.entity.service.statistics.CriterionStatisticsDataService;
+import org.opens.tanaguru.entity.statistics.CriterionStatistics;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tgol.entity.decorator.tanaguru.subject.WebResourceDataServiceDecorator;
+import org.opens.tgol.entity.service.contract.ActDataService;
+import org.opens.tgol.presentation.data.AuditStatistics;
+import org.opens.tgol.presentation.data.AuditStatisticsImpl;
+import org.opens.tgol.presentation.data.ResultCounter;
+import org.opens.tgol.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -51,27 +47,33 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class AuditStatisticsFactory {
 
-    private static final String PARAM_SEPARATOR =";";
-
+    private static final String PARAM_SEPARATOR = ";";
     private ActDataService actDataService;
+
     @Autowired
     public void setActDataService(ActDataService actDataService) {
         this.actDataService = actDataService;
     }
-
     private WebResourceDataServiceDecorator webResourceDataService;
+
     @Autowired
     public void setWebResourceDataService(WebResourceDataServiceDecorator webResourceDataServiceDecorator) {
         this.webResourceDataService = webResourceDataServiceDecorator;
     }
-
     private ParameterDataService parameterDataService;
+
     @Autowired
     public void setParameterDataService(ParameterDataService parameterDataService) {
         this.parameterDataService = parameterDataService;
     }
+    private CriterionStatisticsDataService criterionStatisticsDataService;
 
+    @Autowired
+    public void setCriterionStatisticsDataService(CriterionStatisticsDataService criterionStatisticsDataService) {
+        this.criterionStatisticsDataService = criterionStatisticsDataService;
+    }
     private Map<String, Collection<Theme>> fullThemeMapByRef = null;
+
     @Autowired
     public final void setThemeDataService(ThemeDataService themeDataService) {
         Collection<Theme> themeList = themeDataService.findAll();
@@ -96,18 +98,16 @@ public class AuditStatisticsFactory {
             sortThemeList(entry);
         }
     }
-
     private String levelParameter = "LEVEL";
+
     public void setLevelParameter(String levelParameter) {
         this.levelParameter = levelParameter;
     }
-
     private String referentialParameter = "referential";
+
     public String getReferentialParameter() {
         return referentialParameter;
     }
-
-
     /**
      * The unique shared instance of ContractInfoFactory
      */
@@ -116,9 +116,10 @@ public class AuditStatisticsFactory {
     /**
      * Default private constructor
      */
-    protected AuditStatisticsFactory(){}
+    protected AuditStatisticsFactory() {
+    }
 
-    public static synchronized AuditStatisticsFactory getInstance(){
+    public static synchronized AuditStatisticsFactory getInstance() {
         if (auditStatisticsFactory == null) {
             auditStatisticsFactory = new AuditStatisticsFactory();
         }
@@ -134,9 +135,10 @@ public class AuditStatisticsFactory {
      * @param parametersToDisplay
      * @return
      */
-    public AuditStatistics getAuditStatistics (
+    public AuditStatistics getAuditStatistics(
             WebResource webResource,
-            Map<String, String> parametersToDisplay) {
+            Map<String, String> parametersToDisplay,
+            String displayScope) {
         AuditStatistics auditStats = new AuditStatisticsImpl();
         auditStats.setUrl(webResource.getURL());
         Audit audit = null;
@@ -155,64 +157,41 @@ public class AuditStatisticsFactory {
         auditStats.setWeightedMark(markFormatter(webResource, audit, false));
 
         if (webResource instanceof Site) {
-            auditStats.setPageCounter(webResourceDataService.
-                    getChildWebResourceCount(webResource).intValue());
+            auditStats.setPageCounter(webResourceDataService.getChildWebResourceCount(webResource).intValue());
         }
         ResultCounter resultCounter = auditStats.getResultCounter();
-        resultCounter.setPassedCount(
-                    getResultCountByResultType(webResource, audit,
-                    TestSolution.PASSED));
-        resultCounter.setFailedCount(
-                    getResultCountByResultType(webResource, audit,
-                    TestSolution.FAILED));
-        resultCounter.setNmiCount(
-                    getResultCountByResultType(webResource, audit,
-                    TestSolution.NEED_MORE_INFO));
-        resultCounter.setNaCount(
-                    getResultCountByResultType(webResource, audit,
-                    TestSolution.NOT_APPLICABLE));
-        auditStats.setCounterByThemeMap(addCounterByThemeMap(audit,webResource));
+        resultCounter.setPassedCount(0);
+        resultCounter.setFailedCount(0);
+        resultCounter.setNmiCount(0);
+        resultCounter.setNaCount(0);
+        resultCounter.setNtCount(0);
+
+        auditStats.setCounterByThemeMap(addCounterByThemeMap(audit, webResource, resultCounter, displayScope));
         auditStats.setParametersMap(getAuditParameters(audit, parametersToDisplay));
         return auditStats;
     }
 
     /**
-     * Returns the theme for a given id
-     * The collection of themes is loaded on the application startup to avoid
-     * multiple accesses to the database.
-     * 
+     * Returns the theme for a given id The collection of themes is loaded on
+     * the application startup to avoid multiple accesses to the database.
+     *
      * @param id
      * @return
      */
-    public Theme getTheme(Long id){
+    public Theme getTheme(Long id) {
         for (Collection<Theme> entry : fullThemeMapByRef.values()) {
-            for (Theme theme : entry)
-            if (theme.getId().equals(id)) {
-                return theme;
+            for (Theme theme : entry) {
+                if (theme.getId().equals(id)) {
+                    return theme;
+                }
             }
         }
         return null;
     }
 
     /**
-     * 
-     * @param webResource
-     * @param audit
-     * @param testSolution
-     * @return
-     */
-    private Integer getResultCountByResultType(
-            WebResource webResource,
-            Audit audit,
-            TestSolution testSolution) {
-        return webResourceDataService.
-                    getResultCountByResultType(webResource, audit,
-                    testSolution).intValue();
-    }
-
-    /**
-     * Retrieves all the parameters of the audit and prepares the data
-     * depending on the wished displayed parameters of the view.
+     * Retrieves all the parameters of the audit and prepares the data depending
+     * on the wished displayed parameters of the view.
      *
      *
      * @param audit
@@ -221,7 +200,7 @@ public class AuditStatisticsFactory {
      */
     private Map<String, String> getAuditParameters(
             Audit audit,
-            Map<String, String> parametersToDisplay){
+            Map<String, String> parametersToDisplay) {
         Map<String, String> auditParameters = new LinkedHashMap<String, String>();
         Set<Parameter> auditParamSet =
                 parameterDataService.getParameterSetFromAudit(audit);
@@ -230,22 +209,22 @@ public class AuditStatisticsFactory {
         if (auditParamSet.isEmpty()) {
             return auditParameters;
         }
-        for (Map.Entry<String,String> entry : parametersToDisplay.entrySet()) {
+        for (Map.Entry<String, String> entry : parametersToDisplay.entrySet()) {
             for (Parameter param : auditParamSet) {
-                if (entry.getKey().equals(param.getParameterElement().getParameterElementCode())){
+                if (entry.getKey().equals(param.getParameterElement().getParameterElementCode())) {
                     //specific case of level parameter
                     if (entry.getKey().equals(levelParameter)) {
                         String[] refAndLevel = param.getValue().split(PARAM_SEPARATOR);
                         auditParameters.put(
-                            referentialParameter,
-                            refAndLevel[0]);
+                                referentialParameter,
+                                refAndLevel[0]);
                         auditParameters.put(
-                            entry.getValue(),
-                            refAndLevel[1]);
+                                entry.getValue(),
+                                refAndLevel[1]);
                     } else {
                         auditParameters.put(
-                            entry.getValue(),
-                            param.getValue());
+                                entry.getValue(),
+                                param.getValue());
                     }
                 }
             }
@@ -255,6 +234,7 @@ public class AuditStatisticsFactory {
 
     /**
      * This methods converts the mark of the audit as a string
+     *
      * @param webresource
      * @param audit
      * @param isRawMark
@@ -267,39 +247,117 @@ public class AuditStatisticsFactory {
 
     /**
      * Retrieve the number of results by type for each themes of the audit and
-     * populate a map with the Theme as key and a ResultCounter instance as value.
+     * populate a map with the Theme as key and a ResultCounter instance as
+     * value.
+     *
      * @param webResource
      * @param audit
      * @return
      */
-    private Map<Theme, ResultCounter> addCounterByThemeMap (
+    private Map<Theme, ResultCounter> addCounterByThemeMap(
             Audit audit,
-            WebResource webResource) {
+            WebResource webResource,
+            ResultCounter globalResultCounter,
+            String displayScope) {
         Map<Theme, ResultCounter> counterByThemeMap =
                 new LinkedHashMap<Theme, ResultCounter>();
         for (Theme theme : getThemeListFromAudit(audit)) {
-            ResultCounter siteThemeResultCounter = ResultCounterFactory.getInstance().getResultCounter();
-            siteThemeResultCounter.setPassedCount(
-                    webResourceDataService.getResultCountByResultTypeAndTheme(
-                    webResource, audit, TestSolution.PASSED, theme).intValue());
-            siteThemeResultCounter.setFailedCount(
-                    webResourceDataService.getResultCountByResultTypeAndTheme(
-                    webResource, audit, TestSolution.FAILED, theme).intValue());
-            siteThemeResultCounter.setNmiCount(
-                    webResourceDataService.getResultCountByResultTypeAndTheme(
-                    webResource, audit, TestSolution.NEED_MORE_INFO, theme).intValue());
-            siteThemeResultCounter.setNaCount(
-                    webResourceDataService.getResultCountByResultTypeAndTheme(
-                    webResource, audit, TestSolution.NOT_APPLICABLE, theme).intValue());
-            counterByThemeMap.put(theme, siteThemeResultCounter);
+
+            ResultCounter themeResultCounter = null;
+            if (StringUtils.equalsIgnoreCase(displayScope, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE)) {
+                themeResultCounter = getResultCounterByThemeForTest(webResource, audit, theme);
+            } else if (StringUtils.equalsIgnoreCase(displayScope, TgolKeyStore.CRITERION_DISPLAY_SCOPE_VALUE)) {
+                themeResultCounter = getResultCounterByThemeForCriterion(webResource, theme);
+            }
+
+            globalResultCounter.setPassedCount(themeResultCounter.getPassedCount() + globalResultCounter.getPassedCount());
+            globalResultCounter.setFailedCount(themeResultCounter.getFailedCount() + globalResultCounter.getFailedCount());
+            globalResultCounter.setNmiCount(themeResultCounter.getNmiCount() + globalResultCounter.getNmiCount());
+            globalResultCounter.setNaCount(themeResultCounter.getNaCount() + globalResultCounter.getNaCount());
+            globalResultCounter.setNtCount(themeResultCounter.getNtCount() + globalResultCounter.getNtCount());
+
+            counterByThemeMap.put(theme, themeResultCounter);
         }
         return counterByThemeMap;
     }
 
     /**
      *
+     * @param webResource
+     * @param audit
+     * @param theme
      * @return
-     *      the list of themes for a given audit
+     */
+    private ResultCounter getResultCounterByThemeForTest(
+            WebResource webResource,
+            Audit audit,
+            Theme theme) {
+        ResultCounter resultCounter =
+                ResultCounterFactory.getInstance().getResultCounter();
+        resultCounter.setPassedCount(webResourceDataService.getResultCountByResultTypeAndTheme(
+                webResource, audit, TestSolution.PASSED, theme).intValue());
+        resultCounter.setFailedCount(webResourceDataService.getResultCountByResultTypeAndTheme(
+                webResource, audit, TestSolution.FAILED, theme).intValue());
+        resultCounter.setNmiCount(webResourceDataService.getResultCountByResultTypeAndTheme(
+                webResource, audit, TestSolution.NEED_MORE_INFO, theme).intValue());
+        resultCounter.setNaCount(webResourceDataService.getResultCountByResultTypeAndTheme(
+                webResource, audit, TestSolution.NOT_APPLICABLE, theme).intValue());
+        resultCounter.setNtCount(webResourceDataService.getResultCountByResultTypeAndTheme(
+                webResource, audit, TestSolution.NOT_TESTED, theme).intValue());
+        return resultCounter;
+    }
+
+    /**
+     *
+     * @param webResource
+     * @param theme
+     * @return
+     */
+    private ResultCounter getResultCounterByThemeForCriterion(
+            WebResource webResource,
+            Theme theme) {
+        ResultCounter resultCounter =
+                ResultCounterFactory.getInstance().getResultCounter();
+        int passedCount = 0;
+        int failedCount = 0;
+        int nmiCount = 0;
+        int naCount = 0;
+        int ntCount = 0;
+        Collection<CriterionStatistics> csc =
+                criterionStatisticsDataService.getCriterionStatisticsByWebResource(
+                webResource,
+                theme.getCode(),
+                new ArrayList<String>());
+        for (CriterionStatistics cs : csc) {
+            switch (cs.getCriterionResult()) {
+                case FAILED:
+                    failedCount++;
+                    break;
+                case PASSED:
+                    passedCount++;
+                    break;
+                case NEED_MORE_INFO:
+                    nmiCount++;
+                    break;
+                case NOT_APPLICABLE:
+                    naCount++;
+                    break;
+                case NOT_TESTED:
+                    ntCount++;
+                    break;
+            }
+        }
+        resultCounter.setPassedCount(passedCount);
+        resultCounter.setFailedCount(failedCount);
+        resultCounter.setNmiCount(nmiCount);
+        resultCounter.setNaCount(naCount);
+        resultCounter.setNtCount(ntCount);
+        return resultCounter;
+    }
+
+    /**
+     *
+     * @return the list of themes for a given audit
      */
     private Collection<Theme> getThemeListFromAudit(Audit audit) {
         String ref = extractRefFromAuditParameter(audit);
@@ -311,10 +369,11 @@ public class AuditStatisticsFactory {
     }
 
     /**
-     * Extracts the referential value from the LEVEL PARAMETER.
-     * This parameter is specific because two parameters are associated : the
-     * referential and the level. The two values are separated by a ; and the
-     * first value is the referential, the second the level.
+     * Extracts the referential value from the LEVEL PARAMETER. This parameter
+     * is specific because two parameters are associated : the referential and
+     * the level. The two values are separated by a ; and the first value is the
+     * referential, the second the level.
+     *
      * @param audit
      * @return
      */
@@ -334,11 +393,12 @@ public class AuditStatisticsFactory {
 
     /**
      * Sorts the theme list given the theme ranks.
-     * 
+     *
      * @param themeList
      */
-    private void sortThemeList (Collection<Theme> themeList) {
-        Collections.sort((List<Theme>)themeList, new Comparator<Theme>() {
+    private void sortThemeList(Collection<Theme> themeList) {
+        Collections.sort((List<Theme>) themeList, new Comparator<Theme>() {
+
             @Override
             public int compare(Theme t1, Theme t2) {
                 return Integer.valueOf(t1.getRank()).
@@ -346,5 +406,4 @@ public class AuditStatisticsFactory {
             }
         });
     }
-
 }

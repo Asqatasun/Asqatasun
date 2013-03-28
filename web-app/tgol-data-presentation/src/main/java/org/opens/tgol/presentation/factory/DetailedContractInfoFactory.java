@@ -68,6 +68,7 @@ public final class DetailedContractInfoFactory extends ContractInfoFactory {
 
         detailedContractInfo = (DetailedContractInfoImpl) setBasicContractInfo(contract, detailedContractInfo);
         detailedContractInfo.setContractCreationDate(contract.getBeginDate());
+        detailedContractInfo.setContractExpirationDate(contract.getEndDate());
         detailedContractInfo = (DetailedContractInfoImpl) setAuditResultTrend(contract, detailedContractInfo);
         detailedContractInfo = (DetailedContractInfoImpl) setLastActInfo(contract, detailedContractInfo);
         detailedContractInfo = setNLastActInfo(contract, detailedContractInfo);

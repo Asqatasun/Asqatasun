@@ -39,11 +39,13 @@ public interface TestResult {
     static final String PASSED = "PASSED";
     static final String NEED_MORE_INFO = "NEED_MORE_INFO";
     static final String NOT_APPLICABLE = "NOT_APPLICABLE";
+    static final String NOT_TESTED = "NOT_TESTED";
 
     static final String FAILED_LOWER = "failed";
     static final String PASSED_LOWER = "passed";
     static final String NEED_MORE_INFO_LOWER = "nmi";
     static final String NOT_APPLICABLE_LOWER = "na";
+    static final String NOT_TESTED_LOWER = "nt";
 
     static final int TABULAR_REPRESENTATION = 2;
 

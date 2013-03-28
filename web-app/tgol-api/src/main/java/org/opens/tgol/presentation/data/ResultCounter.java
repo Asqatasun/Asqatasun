@@ -79,6 +79,19 @@ public interface ResultCounter {
      * @param naCount
      */
     void setNaCount(Integer naCount);
+    
+    /**
+     *
+     * @return
+     *      the number of na results
+     */
+    Integer getNtCount();
+
+    /**
+     *
+     * @param naCount
+     */
+    void setNtCount(Integer naCount);
 
     /**
      *

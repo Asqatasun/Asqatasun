@@ -55,8 +55,14 @@ public final class ResultCounterFactory {
             Integer passedCount,
             Integer failedCount,
             Integer nmiCount,
-            Integer naCount){
-        return new ResultCounterImpl(passedCount, failedCount, nmiCount, naCount);
+            Integer naCount,
+            Integer ntCount){
+        return new ResultCounterImpl(
+                passedCount, 
+                failedCount, 
+                nmiCount, 
+                naCount, 
+                ntCount);
     }
 
 }

@@ -36,7 +36,6 @@ public class DetailedContractInfoImpl extends ContractInfoImpl implements Detail
     private Collection<ActInfo> siteActInfoSet = new LinkedHashSet<ActInfo>();
 
     private Date contractCreationDate = null;
-
     @Override
     public Date getContractCreationDate() {
         if (contractCreationDate != null){
@@ -50,6 +49,23 @@ public class DetailedContractInfoImpl extends ContractInfoImpl implements Detail
     public void setContractCreationDate(Date contractCreationDate) {
         if (contractCreationDate != null) {
             this.contractCreationDate = new Date(contractCreationDate.getTime());
+        }
+    }
+    
+    private Date contractExpirationDate = null;
+    @Override
+    public Date getContractExpirationDate() {
+        if (contractExpirationDate != null){
+            return new Date(contractExpirationDate.getTime());
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public void setContractExpirationDate(Date contractExpirationDate) {
+        if (contractExpirationDate != null) {
+            this.contractExpirationDate = new Date(contractExpirationDate.getTime());
         }
     }
 
