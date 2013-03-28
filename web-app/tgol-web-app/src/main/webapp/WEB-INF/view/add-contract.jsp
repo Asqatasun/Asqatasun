@@ -47,7 +47,7 @@
         </c:otherwise>
     </c:choose>
     <%@include file="template/head.jsp" %>
-    <body id="tgm-home">
+    <body id="tgm-add-contract">
         <c:set var="adminActive" value="true"/>
         <%@include file="template/header-utils.jsp" %>
         <div class="container">

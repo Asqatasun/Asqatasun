@@ -6,7 +6,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@taglib uri='/WEB-INF/cewolf.tld' prefix='cewolf' %>
 <!DOCTYPE html>
 <c:choose>
     <c:when test="${fn:contains(pageContext.response.locale, '_')}">
@@ -20,15 +19,61 @@
 </c:choose>
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/jquery.min.js"/>
-        <c:set var="auditSetUpJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/audit-set-up.js"/>
+        <!-- external js-->
+        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-1.9.1.min.js"/>
+        <c:set var="d3JsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/d3.v3.min.js" scope="request"/>
+        <c:set var="r2d3JsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/r2d3.v2.min.js" scope="request"/>
+
+        <!-- internal js-->
+        <c:set var="top5FailedThemeGraphJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/synthesis/repartition-by-failed-theme-min.js" scope="request"/>
+        <c:set var="top5FailedThemeGraphIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/synthesis/repartition-by-failed-theme-ie-min.js" scope="request"/>
+        <c:set var="resultPageChartsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/result-page/result-page-charts-min.js" scope="request"/>
+        <c:set var="resultPageChartsIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/result-page/result-page-charts-ie-min.js" scope="request"/>
+        <c:set var="scoreJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/score/score-min.js" scope="request"/>
+        <c:set var="scoreIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/score/score-ie-min.js" scope="request"/>
+        <c:set var="auditParametersDetailsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/expand-collapse/audit-parameters-details-min.js"/>
+        
+        <!-- images --> 
+        <c:set var="goToImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/window-duplicate.png"/>
     </c:when>
     <c:otherwise>
+        <!-- external js-->
         <c:set var="jqueryUrl">
-            <c:url value="/Js/jquery.min.js"/>  
+            <c:url value="/External-Js/jquery-1.9.1.min.js"/>
+        </c:set>        
+        <c:set var="d3JsUrl" scope="request">
+            <c:url value="/External-Js/d3.v3.min.js"/>
+        </c:set> 
+        <c:set var="r2d3JsUrl" scope="request">
+            <c:url value="/External-Js/r2d3.v2.min.js"/>
+        </c:set> 
+        
+        <!-- internal js-->
+        <c:set var="top5FailedThemeGraphJsUrl" scope="request">
+            <c:url value="/Js/synthesis/repartition-by-failed-theme-min.js"/>
+        </c:set> 
+        <c:set var="top5FailedThemeGraphIEJsUrl" scope="request">
+            <c:url value="/Js/ie/synthesis/repartition-by-failed-theme-ie-min.js"/>
+        </c:set> 
+        <c:set var="resultPageChartsIEJsUrl" scope="request">
+            <c:url value="/Js/ie/result-page/result-page-charts-ie-min.js"/>
         </c:set>
-        <c:set var="auditSetUpJsUrl">
-            <c:url value="/Js/audit-set-up.js"/>
+        <c:set var="resultPageChartsJsUrl" scope="request">
+            <c:url value="/Js/result-page/result-page-charts-min.js"/>
+        </c:set>
+        <c:set var="auditParametersDetailsJsUrl">
+            <c:url value="/Js/expand-collapse/audit-parameters-details-min.js"/>
+        </c:set>
+        <c:set var="scoreJsUrl" scope="request">
+            <c:url value="/Js/score/score-min.js"/>
+        </c:set>
+        <c:set var="scoreIEJsUrl" scope="request">
+            <c:url value="/Js/ie/score/score-ie-min.js"/>
+        </c:set>
+        
+        <!-- images --> 
+        <c:set var="goToImgUrl">
+            <c:url value="/Images/window-duplicate.png"/>
         </c:set>
     </c:otherwise>
 </c:choose>
@@ -71,7 +116,7 @@
                 <c:set var="hasGraphics" scope="request" value="true"/>
                 <c:set var="hasPageCounter" scope="request" value="true"/>
                 <c:set var="hasPagesListLink" scope="request" value="true"/>
-                <c:set var="hasResultDispatchTitle" scope="request" value="true"/>
+                <c:set var="hasResultDispatchTitle" scope="request" value="false"/>
                 <c:set var="hasTableAlternative" scope="request" value="false"/>
                 <c:set var="showLegend" scope="request" value="true"/>
                 <c:set var="showAxisLabel" scope="request" value="true"/>
@@ -79,99 +124,153 @@
                 <c:set var="hasPieChartInGraphicalResult" scope="request" value="true"/>
                 <c:import url="template/synthesis.jsp" />
             <div class="row">
-                <div class="span16 offset0">
-                    <h2 id="top5-failed-tests"><fmt:message key="synthesisSite.topx-failed-tests"><fmt:param>${fn:length(failedTestInfoByPageSet)}</fmt:param></fmt:message></h2>
-                </div><!-- class="span16 offset0"-->
-                <div class="span15 offset1">
-                    <table summary="<fmt:message key="synthesisSite.failed-test-by-page"/>" id="top5-failed-test-by-page" class="zebra-striped">
+                <div class="span16 tg-table-title">
+                    <h2 id="top5-failed-tests">
+                        <fmt:message key="synthesisSite.topx-failed-tests">
+                            <fmt:param>
+                                ${fn:length(failedTestInfoByPageSet)}
+                            </fmt:param>
+                        </fmt:message>
+                    </h2>
+                </div><!-- class="span16"-->
+                <div class="span16 tg-table-container">
+                    <table summary="<fmt:message key="synthesisSite.failed-test-by-page"/>" id="top5-failed-test-by-page" class="tg-table">
                         <caption><fmt:message key="synthesisSite.failed-test-by-page"/></caption>
                         <thead>
                             <tr>
-                                <th id="testTop5FailedTestByPage" scope="col" class="col01"><spring:message code="synthesisSite.test"/></th>
-                                <th id="nbOfPagesTop5FailedTestByPage" scope="col" class="col02"><spring:message code="synthesisSite.nbOfPages"/></th>
-                                <th id="urlListTop5FailedTestByPage" scope="col" class="col03"><spring:message code="synthesisSite.urlListCsv"/></th>
+                                <th id="testTop5FailedTestByPage" scope="col" class="tg-textual-column"><spring:message code="synthesisSite.test"/></th>
+                                <th id="urlListTop5FailedTestByPage" scope="col" class="tg-textual-column"><spring:message code="synthesisSite.urlListCsv"/></th>
+                                <th id="nbOfPagesTop5FailedTestByPage" scope="col" class="tg-numerical-column"><spring:message code="synthesisSite.nbOfPages"/></th>
                             </tr>
                         </thead>
                         <tbody>
                         <c:forEach var="failedTestByPageInfo" items="${failedTestInfoByPageSet}" varStatus="pFailedTestInfoByPageSet">
                             <tr>
-                                <td headers="testTop5FailedTestByPage" class="col01">
+                                <td headers="testTop5FailedTestByPage" class="tg-textual-column">
                                     <a href="<spring:message code="${failedTestByPageInfo.testCode}-url"/>">
                                         ${failedTestByPageInfo.testLabel}
                                     </a>
                                 </td>
-                                <td headers="nbOfPagesTop5FailedTestByPage" class="col02">${failedTestByPageInfo.pageCounter}</td>
-                                <td headers="urlListTop5FailedTestByPage" class="col03">
+                                <td headers="urlListTop5FailedTestByPage" class="tg-textual-column">
                                     <a href="<c:url value="/home/contract/page-list.html?wr=${wr}&amp;status=f2xx&amp;sortDirection=2&amp;test=${failedTestByPageInfo.testLabel}"/>">
-                                    <fmt:message key="synthesisSite.getUrlListCsv"><fmt:param>${failedTestByPageInfo.testLabel}</fmt:param></fmt:message>
+                                        <fmt:message key="synthesisSite.getUrlListCsv"><fmt:param>${failedTestByPageInfo.testLabel}</fmt:param></fmt:message>
                                     </a>
-                                    
                                 </td>
+                                <td headers="nbOfPagesTop5FailedTestByPage" class="tg-numerical-column">${failedTestByPageInfo.pageCounter}</td>
                             </tr>
                         </c:forEach>
                         </tbody>
                     </table>
-                </div><!-- class="span15 offset1"-->
-                <div class="span16 offset0">
-                    <h2 id="top5-invalid-theme"><spring:message code="synthesisSite.top5-invalid-theme"/></h2>
-                </div><!-- class="span16 offset0"-->
-                <div id="top5FailedThemeRepresentation" class="span15 offset1">
+                </div><!-- class="span16  tg-table-container"-->
+                <div class="span16 tg-table-title">
+                    <h2 id="top5-invalid-theme">
+                        <spring:message code="synthesisSite.top5-invalid-theme"/>
+                    </h2>
+                </div><!-- class="span16 tg-table-title"-->
+                <div id="top5FailedThemeRepresentation" class="span16">
                     <c:set var="counterByThemeMap" scope="request" value="${top5SortedThemeMap}"/>
                     <c:set var="index" scope="request" value="2"/>
                     <c:import url="graph/stacked-horizontal-bar-representation.jsp"/>
                 </div><!-- class="span15 offset1"-->
-                <div class="span16 offset0">
-                    <h2 id="top5-failed-URL"><fmt:message key="synthesisSite.topx-failed-URL"><fmt:param>${fn:length(failedPageInfoByTestSet)}</fmt:param></fmt:message> <fmt:message key="synthesisSite.sorted-by-test"/></h2>
-                </div><!-- class="span16 offset0"-->
-                <div class="span15 offset1">
-                    <table summary="<spring:message code="synthesisSite.failed-url-by-test"/>" id="top5-failed-url-by-test" class="zebra-striped">
+                <div class="span16 tg-table-title">
+                    <h2 id="top5-failed-URL">
+                        <fmt:message key="synthesisSite.topx-failed-URL">
+                            <fmt:param>
+                                ${fn:length(failedPageInfoByTestSet)}
+                            </fmt:param>
+                        </fmt:message> 
+                        <fmt:message key="synthesisSite.sorted-by-test"/>
+                    </h2>
+                </div><!-- class="span16 tg-table-title"-->
+                <div class="span16 tg-table-container">
+                    <table id="top5-failed-url-by-test" summary="<spring:message code="synthesisSite.failed-url-by-test"/>" class="tg-table">
                         <caption><spring:message code="synthesisSite.failed-url-by-test"/></caption>
                         <thead>
                             <tr>
-                                <th id="pageUrlTop5FailedUrlByTest" scope="col" class="col01"><spring:message code="synthesisSite.pageUrl"/></th>
-                                <th id="nbOfInvalidTestTop5FailedUrlByTest" scope="col" class="col02"><spring:message code="synthesisSite.nbOfInvalidTest"/></th>
-                                <th id="nbOfInvalidOccurrenceTop5FailedUrlByTest" scope="col" class="col03"><spring:message code="synthesisSite.nbOfInvalidOccurrence"/></th>
-                                <th id="resultPageUrlByTest" scope="col" class="col04"><spring:message code="pageList.pageDetailedResult"/></th>
+                                <th id="pageUrlTop5FailedUrlByTest" scope="col" class="tg-textual-column">
+                                    <spring:message code="synthesisSite.pageUrl"/>
+                                </th>
+                                <th id="nbOfInvalidTestTop5FailedUrlByTest" scope="col" class="tg-numerical-column">
+                                    <spring:message code="synthesisSite.nbOfInvalidTest"/>
+                                </th>
+                                <th id="nbOfInvalidOccurrenceTop5FailedUrlByTest" scope="col" class="tg-numerical-column">
+                                    <spring:message code="synthesisSite.nbOfInvalidOccurrence"/>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                         <c:forEach var="failedPageInfo" items="${failedPageInfoByTestSet}" varStatus="pFailedPageInfoByTestSet">
                             <tr>
-                                <td headers="pageUrlTop5FailedUrlByTest" class="col01"><a href="${failedPageInfo.webResourceUrl}">${failedPageInfo.webResourceUrl}</a></td>
-                                <td headers="nbOfInvalidTestTop5FailedUrlByTest" class="col02">${failedPageInfo.failedTestCounter}</td>
-                                <td headers="nbOfInvalidOccurrenceTop5FailedUrlByTest" class="col03">${failedPageInfo.failedOccurrenceCounter}</td>
-                                <td headers="resultPageUrlByTest" class="col04"><a href="<c:url value="/home/contract/audit-result.html?wr=${failedPageInfo.webResourceId}"/>" title="<spring:message code="pageList.pageDetailedResult"/> <spring:message code="pageList.for"/> ${failedPageInfo.webResourceUrl}"><spring:message code="pageList.pageDetailedResult"/></a></td>
+                                <td headers="pageUrlTop5FailedUrlByTest" class="tg-textual-column">
+                                    <span class="open-external-url-icon">
+                                        <a href="${failedPageInfo.webResourceUrl}" title="<fmt:message key="pageList.goTo"/> ${failedPageInfo.webResourceUrl}">
+                                            <img src="${goToImgUrl}" alt="<fmt:message key="pageList.goTo"/> ${failedPageInfo.webResourceUrl}">
+                                        </a>
+                                    </span>
+                                    <a href="<c:url value="/home/contract/audit-result.html?wr=${failedPageInfo.webResourceId}"/>" title="<fmt:message key="pageList.pageDetailedResult"></fmt:message> <fmt:message key="pageList.for"></fmt:message> ${failedPageInfo.webResourceUrl}">
+                                        ${failedPageInfo.webResourceUrl}
+                                    </a>
+                                </td>
+                                <td headers="nbOfInvalidTestTop5FailedUrlByTest" class="tg-numerical-column">
+                                    ${failedPageInfo.failedTestCounter}
+                                </td>
+                                <td headers="nbOfInvalidOccurrenceTop5FailedUrlByTest" class="tg-numerical-column">
+                                    ${failedPageInfo.failedOccurrenceCounter}
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>
                     </table>
-                </div><!-- class="span15 offset1"-->
-                <div class="span16 offset0">
-                    <h2><fmt:message key="synthesisSite.topx-failed-URL"><fmt:param>${fn:length(failedPageInfoByOccurrenceSet)}</fmt:param></fmt:message> <fmt:message key="synthesisSite.sorted-by-occurrence"/></h2>
-                </div><!-- class="span16 offset0"-->
-                <div class="span15 offset1">
-                    <table summary="<fmt:message key="synthesisSite.failed-url-by-occurrence"/>" id="top5-failed-url-by-occurrence" class="zebra-striped">
+                </div><!-- class="span16 tg-table-container"-->
+                <div class="span16 tg-table-title">
+                    <h2>
+                        <fmt:message key="synthesisSite.topx-failed-URL">
+                            <fmt:param>
+                                ${fn:length(failedPageInfoByOccurrenceSet)}
+                            </fmt:param>
+                        </fmt:message> 
+                        <fmt:message key="synthesisSite.sorted-by-occurrence"/></h2>
+                </div><!-- class="span16 tg-table-title"-->
+                <div class="span16 tg-table-container">
+                    <table id="top5-failed-url-by-occurrence" summary="<fmt:message key="synthesisSite.failed-url-by-occurrence"/>" class="tg-table">
                         <caption><fmt:message key="synthesisSite.failed-url-by-occurrence"/></caption>
                         <thead>
                             <tr>
-                                <th id="pageUrlTop5FailedUrlByOccurrence" scope="col" class="col01"><spring:message code="synthesisSite.pageUrl"/></th>
-                                <th id="nbOfInvalidOccurrenceTop5FailedUrlByOccurrence" scope="col" class="col02"><spring:message code="synthesisSite.nbOfInvalidOccurrence"/></th>
-                                <th id="nbOfInvalidTestTop5FailedUrlByOccurrence" scope="col" class="col03"><spring:message code="synthesisSite.nbOfInvalidTest"/></th>
-                                <th id="resultPageUrlByOccurrence" scope="col" class="col04"><spring:message code="pageList.pageDetailedResult"/></th>
+                                <th id="pageUrlTop5FailedUrlByOccurrence" scope="col" class="tg-textual-column">
+                                    <spring:message code="synthesisSite.pageUrl"/>
+                                </th>
+                                <th id="nbOfInvalidOccurrenceTop5FailedUrlByOccurrence" scope="col" class="tg-numerical-column">
+                                    <spring:message code="synthesisSite.nbOfInvalidOccurrence"/>
+                                </th>
+                                <th id="nbOfInvalidTestTop5FailedUrlByOccurrence" scope="col" class="tg-numerical-column">
+                                    <spring:message code="synthesisSite.nbOfInvalidTest"/>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                         <c:forEach var="failedPageInfo" items="${failedPageInfoByOccurrenceSet}" varStatus="pFailedPageInfoByOccurrenceSet">
                             <tr>
-                                <td headers="pageUrlTop5FailedUrlByOccurrence" class="col01"><a href="${failedPageInfo.webResourceUrl}">${failedPageInfo.webResourceUrl}</a></td>
-                                <td headers="nbOfInvalidOccurrenceTop5FailedUrlByOccurrence" class="col02">${failedPageInfo.failedOccurrenceCounter}</td>
-                                <td headers="nbOfInvalidTestTop5FailedUrlByOccurrence" class="col03">${failedPageInfo.failedTestCounter}</td>
-                                <td headers="resultPageUrlByOccurrence" class="col04"><a href="<c:url value="/home/contract/audit-result.html?wr=${failedPageInfo.webResourceId}"/>" title="<spring:message code="pageList.pageDetailedResult"/> <spring:message code="pageList.for"/> ${failedPageInfo.webResourceUrl}"><spring:message code="pageList.pageDetailedResult"/></a></td>
+                                <td headers="pageUrlTop5FailedUrlByOccurrence" class="tg-textual-column">
+                                    <span class="open-external-url-icon">
+                                        <a href="${failedPageInfo.webResourceUrl}" title="<fmt:message key="pageList.goTo"/> ${failedPageInfo.webResourceUrl}">
+                                            <img src="${goToImgUrl}" alt="<fmt:message key="pageList.goTo"/> ${failedPageInfo.webResourceUrl}">
+                                        </a>
+                                    </span>
+                                    <a href="<c:url value="/home/contract/audit-result.html?wr=${failedPageInfo.webResourceId}"/>" title="<fmt:message key="pageList.pageDetailedResult"></fmt:message> <fmt:message key="pageList.for"></fmt:message> ${failedPageInfo.webResourceUrl}">
+                                        ${failedPageInfo.webResourceUrl}
+                                    </a>
+                                </td>
+                                <td headers="nbOfInvalidOccurrenceTop5FailedUrlByOccurrence" class="tg-numerical-column">
+                                    ${failedPageInfo.failedOccurrenceCounter}
+                                </td>
+                                <td headers="nbOfInvalidTestTop5FailedUrlByOccurrence" class="tg-numerical-column">
+                                    ${failedPageInfo.failedTestCounter}
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>
                     </table>
-                </div><!-- class="span15 offset1"-->
+                </div><!-- class="span16 tg-table-container"-->
             </div><!-- class="row"-->
             </c:when>
             <c:otherwise>
@@ -179,7 +278,7 @@
                 <div class="span16 offset0">
                    <spring:message code="${status}"/>
                 </div>
-                <div class="span15 offset1">
+                <div class="span16">
                     <table summary="Audit meta-data" id="result-meta" class="">
                         <caption>Audit meta-data</caption>
                         <tr>
@@ -197,7 +296,7 @@
                 </div>
                 <c:choose>
                     <c:when test="${status == 'ERROR_LOADING'}">
-                <div class="span15 offset1">
+                <div class="span16">
                     <ul>
                         <li><spring:message code="errorLoadingPage.explanationSiteDetail1"/></li>
                         <c:choose>
@@ -231,12 +330,12 @@
                 </div>
                     </c:when>
                     <c:when test="${status == 'ERROR_ADAPTING'}">
-                <div class="span15 offset1">
+                <div class="span16">
                     <spring:message code="errorProcessingPage.message"/>
                 </div>
                     </c:when>
                     <c:otherwise>
-                <div class="span15 offset1">
+                <div class="span16">
                     <spring:message code="oups.message"/>
                 </div>
                     </c:otherwise>
@@ -245,9 +344,27 @@
             </c:otherwise>
         </c:choose>
         </div><!-- class="container"-->
-        <script type="text/javascript" src="${jqueryUrl}"></script>
-        <script type="text/javascript" src="${auditSetUpJsUrl}"></script>
         <%@include file="template/footer.jsp" %>
+        <script type="text/javascript" src="${jqueryUrl}"></script>
+        <script type="text/javascript" src="${auditParametersDetailsJsUrl}"></script>
+        <!--[if lte IE 8]>
+        <script type="text/javascript" src="${r2d3JsUrl}"></script>
+        <script type="text/javascript" src="${scoreIEJsUrl}"></script>
+        <script type="text/javascript" src="${resultPageChartsIEJsUrl}"></script>
+        <script type="text/javascript" src="${top5FailedThemeGraphIEJsUrl}"></script>
+        <![endif]-->
+        <!--[if gt IE 8]>
+        <script type="text/javascript" src="${d3JsUrl}"></script>
+        <script type="text/javascript" src="${scoreJsUrl}"></script>
+        <script type="text/javascript" src="${resultPageChartsJsUrl}"></script>
+        <script type="text/javascript" src="${top5FailedThemeGraphJsUrl}"></script>
+        <!--<![endif]-->
+        <!--[if !IE]><!-->
+        <script type="text/javascript" src="${d3JsUrl}"></script>
+        <script type="text/javascript" src="${scoreJsUrl}"></script>
+        <script type="text/javascript" src="${resultPageChartsJsUrl}"></script>
+        <script type="text/javascript" src="${top5FailedThemeGraphJsUrl}"></script>
+        <!--<![endif]-->
     </body>
 </html>
 </compress:html>

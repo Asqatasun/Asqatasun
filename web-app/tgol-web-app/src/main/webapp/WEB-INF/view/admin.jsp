@@ -58,7 +58,7 @@
         <fmt:message key="admin.pageTitle"/>
     </c:set>
     <%@include file="template/head.jsp" %>
-    <body id="tgm-home">
+    <body id="tgm-admin">
         <c:set var="adminActive" value="true"/>
         <%@include file="template/header-utils.jsp" %>
         <div class="container">
@@ -75,33 +75,33 @@
                 </div>
             </div>
             <div class="row">
-                <h2 class="span16">
+                <h2 class="span16 tg-table-title">
                     <fmt:message key="admin.userList"/>
                 </h2>
             <c:choose>
                 <c:when test="${not empty deletedUserName}">
-                <div class="span14 offset1 alert-message block-message success">
+                <div class="span16 alert-message block-message success">
                     <fmt:message key="admin.deletedUserPositiveMsg">
                         <fmt:param>${deletedUserName}</fmt:param>
                     </fmt:message>
                 </div>
                 </c:when>
                 <c:when test="${not empty updatedUserName}">
-                    <div class="span14 offset1 alert-message block-message success">
+                    <div class="span16 alert-message block-message success">
                     <fmt:message key="admin.updatedUserPositiveMsg">
                         <fmt:param>${updatedUserName}</fmt:param>
                     </fmt:message>
                 </div>
                 </c:when>
                 <c:when test="${not empty addedUserName}">
-                    <div class="span14 offset1 alert-message block-message success">
+                    <div class="span16 alert-message block-message success">
                     <fmt:message key="admin.addedUserPositiveMsg">
                         <fmt:param>${addedUserName}</fmt:param>
                     </fmt:message>
                 </div>
                 </c:when>
                 <c:when test="${not empty addedContractToUserNames && not empty addedContractName}">
-                    <div class="span14 offset1 alert-message block-message success">
+                    <div class="span16 alert-message block-message success">
                     <fmt:message key="admin.addedContractToUsersPositiveMsg">
                         <fmt:param>${addedContractName}</fmt:param>
                         <fmt:param>${addedContractToUserNames}</fmt:param>
@@ -109,7 +109,7 @@
                 </div>
                 </c:when>
                 <c:when test="${not empty deletedUserAudits}">
-                    <div class="span14 offset1 alert-message block-message success">
+                    <div class="span16 alert-message block-message success">
                     <fmt:message key="admin.deletedUserAuditsPositiveMsg">
                         <fmt:param>${deletedUserAudits}</fmt:param>
                     </fmt:message>
@@ -118,7 +118,7 @@
             </c:choose>
             </div>
             <div class="row">
-                <div class="span8 offset1 admin-action">
+                <div class="span12 admin-action">
                     <a class="btn btn-primary" href="<c:url value="/admin/add-user.html"/>">
                         <img src="${addUser}" alt="">
                         <fmt:message key="admin.addUser"/>
@@ -132,8 +132,8 @@
             <div class="row">
             <c:choose>
                 <c:when test="${not empty userList}">
-                <div class="span15 offset1">
-                    <table id="user-list-table" class="zebra-striped" summary="<fmt:message key="admin.userList"/>">
+                <div class="span16 tg-table-container">
+                    <table id="user-list-table" class="tg-table" summary="<fmt:message key="admin.userList"/>">
                         <caption><fmt:message key="admin.userList"/></caption>
                         <thead>
                             <tr>
@@ -201,7 +201,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="span8 offset1 admin-action">
+                <div class="span12 admin-action">
                     <a class="btn btn-primary" href="<c:url value="/admin/add-user.html"/>">
                         <img src="${addUser}" alt="">
                         <fmt:message key="admin.addUser"/>
@@ -213,7 +213,7 @@
                 </div>
                 </c:when>
                 <c:otherwise>
-                <div class="span15 offset1">
+                <div class="span16">
                     <fmt:message key="admin.noUser"/>
                 </div>
                 </c:otherwise>

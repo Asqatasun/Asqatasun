@@ -59,7 +59,7 @@
             <ul class="breadcrumb">
                 <li>
                     <a href="<c:url value="/home.html"/>">
-                        <fmt:message key="home.h1"/>
+                            <fmt:message key="home.h1"/>
                     </a>
                     <span class="divider"></span>
                 </li>
@@ -78,7 +78,7 @@
                     <h1>${pageName}</h1>
                 </div>
                 <c:if test="${updatedUserName != null}">
-                <div class="span14 offset1">
+                <div class="span16">
                     <div class="alert-message block-message success">
                         <p>
                         <fmt:message key="admin.updatedUserPositiveMsg">
@@ -89,7 +89,7 @@
                 </div>
                 </c:if>
                 <c:if test="${createUserAttack == 'true'}">
-                <div class="span14 offset1">
+                <div class="span16">
                     <div class="alert-message block-message warning">
                         <p>
                         <fmt:message key="admin.createUserAttack"/>

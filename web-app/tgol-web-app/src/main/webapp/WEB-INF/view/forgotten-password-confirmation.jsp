@@ -31,7 +31,7 @@
                 </div><!-- class="span16" -->
             </div><!-- class="row" -->
             <div class="row">
-                <div class="span14 offset1">
+                <div class="span16">
                     <div class="alert-message block-message success">
                         <p><fmt:message key="forgotten-password-confirmation.message"><fmt:param value="${url}"/></fmt:message></p>
                         <div class="alert-actions">

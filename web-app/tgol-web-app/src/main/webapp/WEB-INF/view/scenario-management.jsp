@@ -18,20 +18,6 @@
         <c:set var="lang" value="${pageContext.response.locale}"/>
     </c:otherwise>
 </c:choose>
-<c:choose>
-    <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/jquery.min.js"/>
-        <c:set var="auditSetUpJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/audit-set-up.js"/>
-    </c:when>
-    <c:otherwise>
-        <c:set var="jqueryUrl">
-            <c:url value="/Js/jquery.min.js"/>  
-        </c:set>
-        <c:set var="auditSetUpJsUrl">
-            <c:url value="/Js/audit-set-up.js"/>
-        </c:set>
-    </c:otherwise>
-</c:choose>
 <html lang="${lang}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="scenarioManagement.pageTitle">
@@ -39,7 +25,7 @@
         </fmt:message>
     </c:set>
     <%@include file="template/head.jsp" %>
-    <body id="tgm-site-set-up">
+    <body id="tgm-scenario-mngt">
         <%@include file="template/header-utils.jsp" %>
         <div class="container">
             <c:set var="pageName" scope="page">
@@ -65,15 +51,17 @@
                     </fmt:message>
                 </div>
                 </c:if>
-                <h2 class="span16">
-                    <fmt:message key="scenarioManagement.addScenario"/>
-                </h2>
-                <div class="span15 offset1">
+                <div class="span16 tg-table-title">
+                    <h2>
+                        <fmt:message key="scenarioManagement.addScenario"/>
+                    </h2>
+                </div>
+                <div class="span16">
                     <div id="mandatory-elements-message" class="alert-message block-message warning">
                         <spring:message code="sign-up.mandatoryElementsMessage"/>
                     </div><!-- id="mandatory-elements-message" class="alert-message block-message warning"-->
                 </div><!-- class="span15 offset1" -->
-                <div class="span15 offset1">
+                <div class="span16">
                     <div id="add-scenario-form">
                         <form:form modelAttribute="addScenarioCommand" action="" method="post" enctype="multipart/form-data">
                             <spring:hasBindErrors name="addScenarioCommand">
@@ -122,11 +110,13 @@
                 </div><!-- class="span15 offset1"-->
             </div><!-- class="row"-->
             <div class="row">
-                <h2 class="span16">
-                    <fmt:message key="scenarioManagement.myScenario"/>
-                </h2>
+                <div class="span16 tg-table-title">
+                    <h2>
+                        <fmt:message key="scenarioManagement.myScenario"/>
+                    </h2>
+                </div>
                 <c:if test="${not empty deletedScenarioName}">
-                <div class="span15 alert-message block-message info">
+                <div class="span16 alert-message block-message info">
                     <fmt:message key="scenarioManagement.deletedScenarioPositiveMsg">
                         <fmt:param>${deletedScenarioName}</fmt:param>
                     </fmt:message>
@@ -134,8 +124,8 @@
                 </c:if>
             <c:choose>
                 <c:when test="${not empty scenarioList}">
-                    <div class="span15 offset1">
-                    <table id="scenario-list-table" class="zebra-striped" summary="<fmt:message key="scenarioManagement.scenarioList"/>">
+                <div class="span16 tg-table-container">
+                    <table id="scenario-list-table" class="tg-table" summary="<fmt:message key="scenarioManagement.scenarioList"/>">
                         <caption><fmt:message key="auditSetUpScenario.scenarioList"/></caption>
                         <thead>
                             <tr>
@@ -199,8 +189,6 @@
             </c:choose>
             </div><!-- class="row"-->
         </div><!-- class="container"-->                    
-        <script type="text/javascript" src="${jqueryUrl}"></script>
-        <script type="text/javascript" src="${auditSetUpJsUrl}"></script>
     <%@include file="template/footer.jsp" %>
     </body>
 </html>

@@ -20,15 +20,21 @@
 </c:choose>
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/jquery.min.js"/>
-        <c:set var="auditSetUpJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/audit-set-up.js"/>
+        <!-- external js -->
+        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-1.9.1.min.js"/>
+        
+        <!-- internal js -->
+        <c:set var="auditSetUpDetailsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/expand-collapse/audit-set-up-details-min.js"/>
     </c:when>
     <c:otherwise>
+        <!-- external js -->
         <c:set var="jqueryUrl">
-            <c:url value="/Js/jquery.min.js"/>  
+            <c:url value="/External-Js/jquery-1.9.1.min.js"/>
         </c:set>
-        <c:set var="auditSetUpJsUrl">
-            <c:url value="/Js/audit-set-up.js"/>
+        
+        <!-- internal js -->
+        <c:set var="auditSetUpDetailsJsUrl">
+            <c:url value="/Js/expand-collapse/audit-set-up-details-min.js"/>
         </c:set>
     </c:otherwise>
 </c:choose>
@@ -65,7 +71,7 @@
                     </h1>
                 </div><!-- class="span16" -->
                 <c:if test="${defaultParamSet == 'false'}">
-                <div class="span14 offset1">
+                <div class="span16">
                     <div class="alert-message block-message warning">
                         <fmt:message key="auditSetUp.keptLastAuditParameters">
                             <fmt:param>${scenario.label}</fmt:param>
@@ -73,7 +79,7 @@
                     </div><!-- class="alert-message warning" -->
                 </div><!-- class="span14 offset1" -->
                 </c:if>
-                <div class="span14 offset1">
+                <div class="span16">
                     <div class="alert-message block-message info">
                         <p>
                             <fmt:message key="auditSetUpScenario.message">
@@ -81,16 +87,16 @@
                             </fmt:message>
                         </p>
                     </div>
-                </div><!-- class="span14 offset1" -->
+                </div><!-- class="span16" -->
                 <c:set var="postUrl" scope="page">
                     <c:url value="/home/contract/launch-audit-scenario.html?cr=${contractIdValue}&ampsc=${param.sc}"/>
                 </c:set>
                 <%@include file="template/set-up.jsp" %>
             </div><!-- class="row" -->
         </div><!-- class="container"-->
-        <script type="text/javascript" src="${jqueryUrl}"></script>
-        <script type="text/javascript" src="${auditSetUpJsUrl}"></script>
     <%@include file="template/footer.jsp" %>
+    <script type="text/javascript" src="${jqueryUrl}"></script>
+    <script type="text/javascript" src="${auditSetUpDetailsJsUrl}"></script>
     </body>
 </html>
 </compress:html>

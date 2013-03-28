@@ -22,30 +22,21 @@
         <!-- external js -->
         <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-1.9.1.min.js"/>
         <c:set var="jqueryUIUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-ui-1.10.1.custom.min.js"/>
-        <c:set var="d3JsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/d3.v3.min.js" scope="request"/>            
+        <c:set var="d3JsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/d3.v3.min.js" scope="request"/>
         <c:set var="r2d3JsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/r2d3.v2.min.js" scope="request"/>
-        <c:set var="codePrettifierJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/prettify.min.js" scope="request"/>
 
         <!-- internal js -->
         <c:set var="resultPageChartsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/result-page/result-page-charts-min.js" scope="request"/>
-        <c:set var="resultPageChartsIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/result-page/result-page-charts-ie-min.js" scope="request"/>
-        <c:set var="displayExternalImgJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/result-page/add-img-snapshot-min.js" scope="request"/>
-        <c:set var="prettyPrintJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/result-page/pretty-print-min.js" scope="request"/>
-        <c:set var="testDetailsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/expand-collapse/test-details-min.js" scope="page"/>
-        <c:set var="themeDetailsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/expand-collapse/theme-details-min.js" scope="page"/>
-        <c:set var="auditParametersDetailsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/expand-collapse/audit-parameters-details-min.js" scope="page"/>
-        <c:set var="progressBarJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/progress-bar/progress-bar-min.js" scope="page"/>
+        <c:set var="resultPageChartsJsIEUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/result-pageresult-page-charts-ie-min.js" scope="request"/>        
         <c:set var="scoreJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/score/score-min.js" scope="request"/>
-        <c:set var="scoreIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/score/score-ie-min.js" scope="request"/>
+        <c:set var="auditParametersDetailsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/expand-collapse/audit-parameters-details-min.js" scope="page"/>
+        <c:set var="themeDetailsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/expand-collapse/theme-details-min.js" scope="page"/>
+        <c:set var="progressBarJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/progress-bar/progress-bar-min.js" scope="page"/>
 
-        <!-- external images -->
-        <c:set var="testInfoLinkImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/test-info-link.png" scope="request"/>
-        <c:set var="algoLinkImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/algo-link.png" scope="request"/>
-        <c:set var="expandedSmallImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/expanded-s.png" scope="request"/>
+        <!-- external img -->
+        <c:set var="sourceCodeImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/html-source-icon.png" scope="request"/>
         <c:set var="expandedImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/expanded.png" scope="request"/>
         <c:set var="collapsedImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/collapsed.png" scope="request"/>
-        <c:set var="collapsedSmallImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/collapsed-s.png" scope="request"/>
-        <c:set var="sourceCodeImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/html-source-icon.png" scope="request"/>
         <!-- external images -->
         <c:set var="processingImgUrl" scope="request" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/processing.gif"/>
     </c:when>
@@ -59,35 +50,20 @@
         </c:set>
         <c:set var="d3JsUrl" scope="request">
             <c:url value="/External-Js/d3.v3.min.js"/>
-        </c:set> 
-        <c:set var="codePrettifierJsUrl" scope="request">
-            <c:url value="/External-Js/prettify.min.js"/>
-        </c:set> 
+        </c:set>
         <c:set var="r2d3JsUrl" scope="request">
             <c:url value="/External-Js/r2d3.v2.min.js"/>
         </c:set> 
 
         <!-- internal js -->
-        <c:set var="resultPageChartsIEJsUrl" scope="request">
+        <c:set var="resultPageChartsJsIEUrl" scope="request">
             <c:url value="/Js/ie/result-page/result-page-charts-ie-min.js"/>
         </c:set>
         <c:set var="resultPageChartsJsUrl" scope="request">
             <c:url value="/Js/result-page/result-page-charts-min.js"/>
         </c:set>
-        <c:set var="displayExternalImgJsUrl" scope="request">
-            <c:url value="/Js/result-page/add-img-snapshot-min.js"/>
-        </c:set>        
-        <c:set var="prettyPrintJsUrl" scope="request">
-            <c:url value="/Js/result-page/pretty-print-min.js"/>
-        </c:set> 
         <c:set var="scoreJsUrl" scope="request">
             <c:url value="/Js/score/score-min.js"/>
-        </c:set>
-        <c:set var="scoreIEJsUrl" scope="request">
-            <c:url value="/Js/ie/score/score-ie-min.js"/>
-        </c:set>
-        <c:set var="testDetailsJsUrl" scope="page">
-            <c:url value="/Js/expand-collapse/test-details-min.js"/>
         </c:set>
         <c:set var="themeDetailsJsUrl" scope="page">
             <c:url value="/Js/expand-collapse/theme-details-min.js"/>
@@ -99,24 +75,12 @@
             <c:url value="/Js/progress-bar/progress-bar-min.js"/>
         </c:set>
 
-        <!-- external images -->
-        <c:set var="testInfoLinkImg" scope="request">
-            <c:url value="/Images/test-info-link.png"/>
-        </c:set> 
-        <c:set var="algoLinkImg" scope="request">
-            <c:url value="/Images/algo-link.png"/>
-        </c:set> 
+        <!-- external img -->
         <c:set var="expandedImg" scope="request">
             <c:url value="/Images/expanded.png"/>
         </c:set> 
-        <c:set var="expandedSmallImg" scope="request">
-            <c:url value="/Images/expanded-s.png"/>
-        </c:set> 
         <c:set var="collapsedImg" scope="request">
             <c:url value="/Images/collapsed.png"/>
-        </c:set> 
-        <c:set var="collapsedSmallImg" scope="request">
-            <c:url value="/Images/collapsed-s.png"/>
         </c:set> 
         <c:set var="sourceCodeImg" scope="request">
             <c:url value="/Images/html-source-icon.png"/>
@@ -139,7 +103,7 @@
     </c:set>
     <c:if test="${addRelaunchAction}">
         <c:set var="addJqueryUI" scope="request" value="true"/>
-    </c:if>
+    </c:if>        
     <%@include file="template/head.jsp" %>
     <body id="tgm-result-page">
         <%@include file="template/header-utils.jsp" %>
@@ -148,8 +112,8 @@
                 <fmt:message key="resultPage.h1"/>
             </c:set>
             <ul class="breadcrumb">
-            <li><a href="<c:url value="/home.html"/>"><fmt:message key="home.h1"/></a> <span class="divider"></span></li>
-            <li><a href="<c:url value="/home/contract.html?cr=${cr}"/>">${contractName}</a> <span class="divider"></span></li>
+                <li><a href="<c:url value="/home.html"/>"><fmt:message key="home.h1"/></a> <span class="divider"></span></li>
+                <li><a href="<c:url value="/home/contract.html?cr=${cr}"/>">${contractName}</a> <span class="divider"></span></li>
                 <c:if test="${authorizedScopeForPageList == 'true'}">
                     <c:set var="auditSynthesisName" scope="page">
                         <fmt:message key="synthesisSite.h1">
@@ -158,8 +122,8 @@
                             </fmt:param>
                         </fmt:message>
                     </c:set>
-            <li><a href="<c:url value="/home/contract/audit-synthesis.html?wr=${pwr}"/>">${auditSynthesisName}</a> <span class="divider"></span></li>
-            <li><a href="<c:url value="/home/contract/page-list.html?wr=${pwr}"/>"><fmt:message key="pageList.h1"/></a> <span class="divider"></span></li>
+                    <li><a href="<c:url value="/home/contract/audit-synthesis.html?wr=${pwr}"/>">${auditSynthesisName}</a> <span class="divider"></span></li>
+                    <li><a href="<c:url value="/home/contract/page-list.html?wr=${pwr}"/>"><fmt:message key="pageList.h1"/></a> <span class="divider"></span></li>
                     <c:choose>
                         <c:when test="${statistics.auditScope == 'DOMAIN'}">
                             <c:set var="pageList2xxUrl" value="/home/contract/page-list.html?wr=${pwr}&amp;status=f2xx"/>
@@ -168,25 +132,17 @@
                             <c:set var="pageList2xxUrl" value="/home/contract/page-list.html?wr=${pwr}&amp;status=f2xx&amp;sortCriterion=rank&amp;sortDirection=1"/>
                         </c:when>
                     </c:choose>
-            <li><a href="<c:url value="${pageList2xxUrl}"/>"><fmt:message key="pageList.f2xx.h1"/></a> <span class="divider"></span></li>
+                    <li><a href="<c:url value="${pageList2xxUrl}"/>"><fmt:message key="pageList.f2xx.h1"/></a> <span class="divider"></span></li>
                 </c:if>
-            <li class="active">${pageName}</li>
+                <li class="active">${pageName}</li>
             </ul>
             <div id="result-page-title" class="row">
-                <div class="span11">
+                <div class="span8">
                     <h1>
                         ${contractName}
                     </h1>
                 </div>
-<!--                    <div class="span4">
-                    <div>
-                        <fmt:message key="resultPage.h1"/>
-                    </div>
-                    <div>
-                        Scope : page
-                    </div>
-                </div>-->
-                <div class="span4 offset1">
+                <div class="span6 offset2">
                     <c:if test="${addRelaunchAction}">
                     <div id="relaunch-action">
                         <c:set var="postUrl">
@@ -205,17 +161,17 @@
                             <%@include file="template/process-pop-up.jsp" %>
                         </form:form>
                     </div>
-                    </c:if>    
+                    </c:if>
                     <div id="export-actions">
                         <fmt:message key="result.export"/> : 
                         <c:if test="${resultActionList != null && not empty resultActionList}">
                             <c:forEach var="action" items="${resultActionList}" varStatus="pAction">
-                            <c:if test="${pAction.index != 0}">
-                            <span class="action-separator"> / </span>
-                            </c:if>    
                                 <c:choose>
                                     <c:when test="${action.actionEnabled == 'false'}">
                             <span class="export-action">
+                                <c:if test="${pAction.index != 0}">
+                                    /
+                                </c:if>
                                 <a href="<c:url value="${action.actionUrl}&amp;wr=${param.wr}"/>" class="disabled" title="<fmt:message key="${action.actionAltI81NCode}"/> (<fmt:message key="contract.disabled"/>)">
                                     <fmt:message key="${action.actionI81NCode}"/>
                                 </a>
@@ -223,8 +179,11 @@
                                     </c:when>
                                     <c:otherwise>
                             <span class="export-action">
+                                <c:if test="${pAction.index != 0}">
+                                    /
+                                </c:if>
                                 <!-- the url actions already have a parameter (export type for example-->
-                                <a href="<c:url value="${action.actionUrl}&amp;wr=${param.wr}"/>" class="" title="<fmt:message key="${action.actionAltI81NCode}"/>">
+                                <a href="<c:url value="${action.actionUrl}&amp;wr=${param.wr}"/>" title="<fmt:message key="${action.actionAltI81NCode}"/>">
                                     <fmt:message key="${action.actionI81NCode}"/>
                                 </a>
                             </span>
@@ -232,52 +191,43 @@
                                 </c:choose>
                             </c:forEach>
                         </c:if>    
-                    </div>
-                </div>    
+                    </div>  
+                </div>  
             </div><!-- class="row" -->
-        <c:set var="showLegend" scope="request" value="true"/>
-        <c:set var="showAxisLabel" scope="request" value="true"/>
-        <c:set var="hasBarChartLink" scope="request" value="true"/>
-        <c:set var="hasGraphics" scope="request" value="true"/>
-        <c:set var="hasSynthesisTitle" scope="request" value="false"/>
-        <c:set var="hasPageCounter" scope="request" value="false"/>
-        <c:set var="hasPagesListLink" scope="request" value="false"/>
-        <c:set var="hasResultDispatchTitle" scope="request" value="false"/>
-        <c:set var="themeRepartitionWidth" scope="request" value="690"/>
-        <c:set var="hasPieChartInGraphicalResult" scope="request" value="true"/>
-        <c:set var="addLinkToSourceCode" scope="request" value="true"/>
-        <c:import url="template/synthesis.jsp" />
-        <c:import url="template/sort-result-console.jsp" />
-        <c:set var="displayAlgorithm" scope="request" value="true"/>
-        <c:set var="scope" scope="request" value="page"/>
-        <c:set var="counterByThemeMap" scope="request" value="${statistics.counterByThemeMap}"/>
-        <c:set var="addSideBarNav" scope="request" value="true"/>
-        <c:set var="addThemeHeader" scope="request" value="true"/>
-        <c:set var="addMainTitle" scope="request" value="true"/>
-        <c:import url="template/detailed-result.jsp" />
+            <c:set var="showLegend" scope="request" value="true"/>
+            <c:set var="showAxisLabel" scope="request" value="true"/>
+            <c:set var="hasBarChartLink" scope="request" value="true"/>
+            <c:set var="hasGraphics" scope="request" value="true"/>
+            <c:set var="hasSynthesisTitle" scope="request" value="false"/>
+            <c:set var="hasPageCounter" scope="request" value="false"/>
+            <c:set var="hasPagesListLink" scope="request" value="false"/>
+            <c:set var="hasResultDispatchTitle" scope="request" value="false"/>
+            <c:set var="themeRepartitionWidth" scope="request" value="690"/>
+            <c:set var="hasPieChartInGraphicalResult" scope="request" value="true"/>
+            <c:set var="addLinkToSourceCode" scope="request" value="true"/>
+            <c:import url="template/synthesis.jsp" />
+            <c:import url="template/sort-result-console.jsp" />
+            <c:set var="displayAlgorithm" scope="request" value="true"/>
+            <c:set var="scope" scope="request" value="page"/>
+            <c:import url="template/detailed-result-by-criterion.jsp" />
         </div><!-- class="container"-->
         <%@include file="template/footer.jsp" %>
         <script type="text/javascript" src="${jqueryUrl}"></script>
-        <script type="text/javascript" src="${testDetailsJsUrl}"></script>
         <script type="text/javascript" src="${themeDetailsJsUrl}"></script>
-        <script type="text/javascript" src="${displayExternalImgJsUrl}"></script>
-        <script type="text/javascript" src="${codePrettifierJsUrl}"></script>
-        <script type="text/javascript" src="${prettyPrintJsUrl}"></script>
         <script type="text/javascript" src="${auditParametersDetailsJsUrl}"></script>
         <c:if test="${addRelaunchAction}">
-        <script type="text/javascript" src="${jqueryUIUrl}"></script>
-        <script type="text/javascript" src="${progressBarJsUrl}"></script>
+            <script type="text/javascript" src="${jqueryUIUrl}"></script>
+            <script type="text/javascript" src="${progressBarJsUrl}"></script>
         </c:if>
         <!--[if lte IE 8]>
         <script type="text/javascript" src="${r2d3JsUrl}"></script>
-        <script type="text/javascript" src="${scoreIEJsUrl}"></script>
-        <script type="text/javascript" src="${resultPageChartsIEJsUrl}"></script>
+        <script type="text/javascript" src="${resultPageChartsJsIEUrl}"></script>
         <![endif]-->
         <!--[if gt IE 8]>
         <script type="text/javascript" src="${d3JsUrl}"></script>
         <script type="text/javascript" src="${scoreJsUrl}"></script>
         <script type="text/javascript" src="${resultPageChartsJsUrl}"></script>
-        <![endif]-->
+        <!--<![endif]-->
         <!--[if !IE]><!-->
         <script type="text/javascript" src="${d3JsUrl}"></script>
         <script type="text/javascript" src="${scoreJsUrl}"></script>

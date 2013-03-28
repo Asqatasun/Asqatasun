@@ -48,7 +48,7 @@
         </fmt:message>
     </c:set>
     <%@include file="template/head.jsp" %>
-    <body id="tgm-home">
+    <body id="tgm-contracts-mngt">
         <c:set var="adminActive" value="true"/>
         <%@include file="template/header-utils.jsp" %>
         <div class="container">
@@ -67,34 +67,35 @@
                     <h1>${pageName}</h1>
                 </div>
             </div>
+            <c:import url="template/sort-contract-console.jsp" />
             <div class="row">
-                <h2 class="span16">
+                <h2 class="span16 tg-table-title">
                     <fmt:message key="manage-contracts.contractList"/>
                 </h2>
             <c:choose>
                 <c:when test="${deletedContractName != null}">
-                <div class="span14 offset1 alert-message block-message success">
+                <div class="span16 alert-message block-message success">
                     <fmt:message key="manage-contracts.deletedContractPositiveMsg">
                         <fmt:param>${deletedContractName}</fmt:param>
                     </fmt:message>
                 </div>
                 </c:when>
                 <c:when test="${updatedContractName != null}">
-                    <div class="span14 offset1 alert-message block-message success">
+                    <div class="span16 alert-message block-message success">
                     <fmt:message key="manage-contracts.updatedContractPositiveMsg">
                         <fmt:param>${updatedContractName}</fmt:param>
                     </fmt:message>
                 </div>
                 </c:when>
                 <c:when test="${addedContractName != null}">
-                    <div class="span14 offset1 alert-message block-message success">
+                    <div class="span16 alert-message block-message success">
                     <fmt:message key="manage-contracts.addedContractPositiveMsg">
                         <fmt:param>${addedContractName}</fmt:param>
                     </fmt:message>
                 </div>
                 </c:when>
                 <c:when test="${deletedContractAuditsName != null}">
-                    <div class="span14 offset1 alert-message block-message success">
+                    <div class="span16 alert-message block-message success">
                     <fmt:message key="manage-contracts.deletedContractAuditsPositiveMsg">
                         <fmt:param>${deletedContractAuditsName}</fmt:param>
                     </fmt:message>
@@ -103,19 +104,18 @@
             </c:choose>
             </div>
             <div class="row">
-                <div class="span8 offset1 admin-action">
+                <div class="span8 admin-action">
                     <a class="btn btn-primary" href="<c:url value="/admin/manage-contracts/add-contract.html?user=${param.user}"/>">
                         <img src="${addContract}" alt="">
                         <fmt:message key="manage-contracts.addContract"/>
                     </a>
                 </div>
-                <c:import url="template/sort-contract-console.jsp" />
             </div>
             <div class="row">
             <c:choose>
                 <c:when test="${not empty contractList}">
-                <div class="span15 offset1">
-                    <table id="contract-list-table" class="zebra-striped" summary="<fmt:message key="manage-contracts.contractList"/>">
+                <div class="span16 tg-table-container">
+                    <table id="contract-list-table" class="tg-table" summary="<fmt:message key="manage-contracts.contractList"/>">
                         <caption><fmt:message key="manage-contracts.contractList"/></caption>
                         <thead>
                             <tr>
@@ -158,7 +158,7 @@
                     </c:forEach>
                         </tbody>
                     </table>
-                    <div class="span8 offset1 admin-action">
+                    <div class="admin-action">
                         <a class="btn btn-primary" href="<c:url value="/admin/manage-contracts/add-contract.html?user=${param.user}"/>">
                             <img src="${addContract}" alt="">
                             <fmt:message key="manage-contracts.addContract"/>
@@ -167,7 +167,7 @@
                 </div>
                 </c:when>
                 <c:otherwise>
-                <div class="span15 offset1">
+                <div class="span16">
                     <fmt:message key="manage-contracts.noContract"/>
                 </div>
                 </c:otherwise>

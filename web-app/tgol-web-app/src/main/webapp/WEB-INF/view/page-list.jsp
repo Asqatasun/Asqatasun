@@ -5,7 +5,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@taglib uri='/WEB-INF/cewolf.tld' prefix='cewolf' %>
 <!DOCTYPE html>
 <c:choose>
     <c:when test="${fn:contains(pageContext.response.locale, '_')}">
@@ -15,6 +14,46 @@
     </c:when>
     <c:otherwise>
         <c:set var="lang" value="${pageContext.response.locale}"/>
+    </c:otherwise>
+</c:choose>
+<c:choose>
+    <c:when test="${not empty configProperties['cdnUrl']}">
+        <!-- external js-->
+        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-1.9.1.min.js"/>
+        <c:set var="d3JsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/d3.v3.min.js" scope="request"/>
+        <c:set var="r2d3JsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/r2d3.v2.min.js" scope="request"/>
+
+        <!-- internal js-->
+        <c:set var="scoreJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/score/score-min.js" scope="request"/>
+        <c:set var="pageListScoreJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/score/score-page-list-min.js" scope="request"/>
+        <c:set var="scoreIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/score/score-ie-min.js" scope="request"/>
+        <c:set var="pageListScoreIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/score/score-page-list-ie-min.js" scope="request"/>
+    </c:when>
+    <c:otherwise>
+        <!-- external js-->
+        <c:set var="jqueryUrl">
+            <c:url value="/External-Js/jquery-1.9.1.min.js"/>
+        </c:set>
+        <c:set var="d3JsUrl" scope="request">
+            <c:url value="/External-Js/d3.v3.min.js"/>
+        </c:set> 
+        <c:set var="r2d3JsUrl" scope="request">
+            <c:url value="/External-Js/r2d3.v2.min.js"/>
+        </c:set> 
+        
+        <!-- internal js-->
+        <c:set var="scoreJsUrl" scope="request">
+            <c:url value="/Js/score/score-min.js"/>
+        </c:set>
+        <c:set var="pageListScoreJsUrl" scope="request">
+            <c:url value="/Js/score/score-page-list-min.js"/>
+        </c:set>
+        <c:set var="scoreIEJsUrl" scope="request">
+            <c:url value="/Js/ie/score/score-ie-min.js"/>
+        </c:set>
+        <c:set var="pageListScoreIEJsUrl" scope="request">
+            <c:url value="/Js/ie/score/score-page-list-ie-min.js"/>
+        </c:set>
     </c:otherwise>
 </c:choose>
 <html lang="${lang}">
@@ -52,7 +91,7 @@
                     </h1>
                 </div><!-- class="span16"-->
             </div><!-- class="row"-->
-            <c:set var="hasSynthesisTitle" scope="request" value="true"/>
+            <c:set var="hasSynthesisTitle" scope="request" value="false"/>
             <c:set var="hasBarChartLink" scope="request" value="false"/>
             <c:set var="hasGraphics" scope="request" value="false"/>
             <c:set var="hasPageCounter" scope="request" value="true"/>
@@ -60,16 +99,18 @@
             <c:set var="hasResultDispatchTitle" scope="request" value="false"/>
             <c:import url="template/synthesis.jsp" />
             <div class="row">
-                <div class="span16">
-                    <h2 id="page-list"><fmt:message key="pageList.pageList"/></h2>
-                </div><!-- id="span16"-->
-                <div class="span15 offset1">
-                    <table summary="Audit page list" id="page-list-table" class="zebra-striped">
+                <div class="span16 tg-table-title">
+                    <h2 id="page-list">
+                        <fmt:message key="pageList.pageList"/>
+                    </h2>
+                </div><!-- class="span16"-->
+                <div class="span16 tg-table-container">
+                    <table id="page-list-table" summary="Audit page list" class="tg-table">
                         <caption>Audit page list</caption>
                         <thead>
                             <tr>
-                                <th id="httpStatus" class="col01" scope="col"><fmt:message key="pageList.pagesRepartitionHeader"/></th>
-                                <th id="nbOfPages" class="col02" scope="col"><fmt:message key="pageList.nbPagesHeader"/></th>
+                                <th id="httpStatus" class="tg-textual-column" scope="col"><fmt:message key="pageList.pagesRepartitionHeader"/></th>
+                                <th id="nbOfPages" class="tg-numerical-column" scope="col"><fmt:message key="pageList.nbPagesHeader"/></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -82,29 +123,45 @@
                                 </c:when>
                             </c:choose>
                             <tr>
-                                <td class="col01" headers="httpStatus">
+                                <td class="tg-textual-column" headers="httpStatus">
                                     <a href="${pageList2xxUrl}"><fmt:message key="pageList.f2xx"/></a> <fmt:message key="pageList.f2xxDetails"/>
                                 </td>
-                                <td class="col02" headers="nbOfPages">${auditedPagesCount}</td>
+                                <td class="tg-numerical-column" headers="nbOfPages">${auditedPagesCount}</td>
                             </tr>
                             <tr>
-                                <td class="col01" headers="httpStatus">
+                                <td class="tg-textual-column" headers="httpStatus">
                                     <a href="?wr=${param.wr}&amp;status=f3xx"><fmt:message key="pageList.f3xx"/></a> <fmt:message key="pageList.f3xxDetails"/>
                                 </td>
-                                <td class="col02" headers="nbOfPages">${redirectedPagesCount}</td>
+                                <td class="tg-numerical-column" headers="nbOfPages">${redirectedPagesCount}</td>
                             </tr>
                             <tr>
-                                <td class="col01" headers="httpStatus">
+                                <td class="tg-textual-column" headers="httpStatus">
                                     <a href="?wr=${param.wr}&amp;status=f4xx"><fmt:message key="pageList.f4xx"/></a> <fmt:message key="pageList.f4xxDetails"/>
                                 </td>
-                                <td class="col02" headers="nbOfPages">${errorPagesCount}</td>
+                                <td class="tg-numerical-column" headers="nbOfPages">${errorPagesCount}</td>
                             </tr>
                         </tbody>
                     </table>
-                </div><!-- id="span15 offset1"-->
+                </div><!-- id="span16 tg-table-container"-->
             </div><!-- id="row"-->
         </div><!-- class="container"-->
         <%@include file="template/footer.jsp" %>
+        <script type="text/javascript" src="${jqueryUrl}"></script>
+        <!--[if lte IE 8]>
+        <script type="text/javascript" src="${r2d3JsUrl}"></script>
+        <script type="text/javascript" src="${scoreIEJsUrl}"></script>
+        <script type="text/javascript" src="${pageListScoreIEJsUrl}"></script>
+        <![endif]-->
+        <!--[if gt IE 8]>
+        <script type="text/javascript" src="${d3JsUrl}"></script>
+        <script type="text/javascript" src="${scoreJsUrl}"></script>
+        <script type="text/javascript" src="${pageListScoreJsUrl}"></script>
+        <![endif]-->
+        <!--[if !IE]><!-->
+        <script type="text/javascript" src="${d3JsUrl}"></script>
+        <script type="text/javascript" src="${scoreJsUrl}"></script>
+        <script type="text/javascript" src="${pageListScoreJsUrl}"></script>
+        <!--<![endif]-->
     </body>
 </html>
 </compress:html>

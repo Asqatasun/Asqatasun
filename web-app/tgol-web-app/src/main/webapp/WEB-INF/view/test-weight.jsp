@@ -101,7 +101,7 @@
                     <h1>${pageName}</h1>
                 </div>
                 <c:if test="${testWeightSuccessfullyUpdated}">
-                <div class="span15 offset1">
+                <div class="span16">
                     <div id="informative-message" class="alert-message block-message success">
                     <fmt:message key="test-weight.updatedTestWeightPositiveMsg">
                         <fmt:param>${param.ref}</fmt:param>
@@ -109,13 +109,13 @@
                     </div><!-- id="informative-message" class="alert-message block-message warning"-->
                 </div>
                 </c:if>
-                <div class="span15 offset1">
+                <div class="span16">
                     <div id="informative-message" class="alert-message block-message warning">
                         <fmt:message key="test-weight.fillInElementsExplanation"/>
                     </div><!-- id="informative-message" class="alert-message block-message warning"-->
                 </div>
-                <div class="span15 offset1">
-                    <form:form method="post" modelAttribute="changeTestWeightCommand" acceptCharset="UTF-8" enctype="application/x-www-form-urlencoded">    
+                <div class="span16 tg-table-container">
+                    <form:form method="post" modelAttribute="changeTestWeightCommand" acceptCharset="UTF-8" enctype="application/x-www-form-urlencoded">
                     <spring:hasBindErrors name="changeTestWeightCommand">
                     <div id="change-test-weight-form-general-error">
                         <form:errors path="generalErrorMsg" cssClass="alert-message block-message error"/>
@@ -126,7 +126,7 @@
                                 <fmt:param>${param.seo}</fmt:param>   
                             </fmt:message>
                         </c:set>
-                        <table id="test-weight-mngt" summary="${tableSummaryAndCaption}" class="zebra-striped">
+                        <table id="test-weight-mngt" summary="${tableSummaryAndCaption}" class="tg-table">
                             <caption>${tableSummaryAndCaption}</caption>
                                 <thead>
                                     <tr>

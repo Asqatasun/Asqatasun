@@ -24,7 +24,7 @@
         <fmt:message key="add-user.pageTitle"/>
     </c:set>
     <%@include file="template/head.jsp" %>
-    <body id="tgm-home">
+    <body id="tgm-add-user">
         <c:set var="adminActive" value="true"/>
         <%@include file="template/header-utils.jsp" %>
         <div class="container">

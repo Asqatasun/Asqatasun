@@ -49,7 +49,7 @@
         </c:choose>
     </c:set>
     <%@include file="template/head.jsp" %>
-    <body id="tgm-home">
+    <body id="tgm-delete-audits">
         <c:set var="adminActive" value="true"/>
         <%@include file="template/header-utils.jsp" %>
         <div class="container">
@@ -88,7 +88,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="span14 offset1 alert-message block-message warning">
+                <div class="span16 alert-message block-message warning">
                     <c:choose>
                         <c:when test="${userNameToDelete != null}">
                             <fmt:message key="delete-audits.user-deletion-msg">

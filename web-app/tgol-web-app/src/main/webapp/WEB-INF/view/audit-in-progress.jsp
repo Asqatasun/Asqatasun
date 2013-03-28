@@ -63,12 +63,12 @@
                     <a href="<c:url value="/home/contract/scenario-management.html?cr=${param.cr}"/>">
                         <fmt:message key="scenarioManagement.pageTitle">
                             <fmt:param>${contractName}</fmt:param>
-                        </fmt:message>    
+                        </fmt:message>
                     </a> <span class="divider"></span>
                 </li>
                 <li>
                     <a href="<c:url value="/home/contract/audit-scenario-set-up.html?cr=${param.cr}&amp;sc=${sc}"/>">
-                        <fmt:message key="auditSetUpScenario.h1"/>
+                            <fmt:message key="auditSetUpScenario.h1"/>
                     </a> <span class="divider"></span>
                 </li>
                     </c:when>
@@ -86,7 +86,7 @@
                 </div><!-- class="span16" -->
             </div><!-- class="row" -->
             <div class="row">
-                <div class="span14 offset1">
+                <div class="span16">
                     <div class="alert-message block-message success">
                         <p>
                             <fmt:message key="${i18nPrefix}.message">
@@ -97,7 +97,7 @@
                             <a href="<c:url value="/home/contract.html?cr=${param.cr}" />" class="btn small"><fmt:message key="${i18nPrefix}.backOnContract"/></a>
                         </div>
                     </div><!-- alert-message block-message success -->
-                </div><!-- class="span15 offset1" -->
+                </div><!-- class="span16" -->
             </div><!-- class="row" -->
             <div class="row">
                 <div class="span16 main-logo">

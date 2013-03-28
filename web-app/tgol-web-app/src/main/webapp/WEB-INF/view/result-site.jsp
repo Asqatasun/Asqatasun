@@ -4,7 +4,6 @@
 <%@page pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@taglib uri='/WEB-INF/cewolf.tld' prefix='cewolf' %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <c:choose>
@@ -19,13 +18,13 @@
 </c:choose>
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/jquery.min.js"/>
+        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-1.9.1.min.js"/>
         <c:set var="auditResultJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/audit-result.js"/>
         <c:set var="auditSetUpJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/audit-set-up.js"/>
     </c:when>
     <c:otherwise>
         <c:set var="jqueryUrl">
-            <c:url value="/Js/jquery.min.js"/>
+            <c:url value="/External-Js/jquery-1.9.1.min.js"/>
         </c:set>
         <c:set var="auditResultJsUrl">
             <c:url value="/Js/audit-result.js"/>
@@ -90,10 +89,10 @@
             <c:set var="scope" scope="request" value="site"/>
             <c:import url="template/detailed-result.jsp" />
         </div><!-- class="container"-->
+        <%@include file="template/footer.jsp" %>
         <script type="text/javascript" src="${jqueryUrl}"></script>
         <script type="text/javascript" src="${auditResultJsUrl}"></script>
         <script type="text/javascript" src="${auditSetUpJsUrl}"></script>
-        <%@include file="template/footer.jsp" %>
     </body>
 </html>
 </compress:html>

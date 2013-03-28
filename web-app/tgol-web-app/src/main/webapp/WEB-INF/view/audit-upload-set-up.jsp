@@ -20,15 +20,37 @@
 </c:choose>
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/jquery.min.js"/>
-        <c:set var="auditSetUpJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/audit-set-up.js"/>
+        <!-- external js -->
+        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-1.9.1.min.js"/>
+        <c:set var="jqueryUIUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-ui-1.10.1.custom.min.js"/>
+
+        <!-- internal js -->
+        <c:set var="auditSetUpDetailsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/expand-collapse/audit-set-up-details-min.js"/>
+        <c:set var="progressBarJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/progress-bar/progress-bar-min.js"/>
+        
+        <!-- external images -->
+        <c:set var="processingImgUrl" scope="request" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/processing.gif"/>
     </c:when>
     <c:otherwise>
+        <!-- external js -->
         <c:set var="jqueryUrl">
-            <c:url value="/Js/jquery.min.js"/>  
+            <c:url value="/External-Js/jquery-1.9.1.min.js"/>
         </c:set>
-        <c:set var="auditSetUpJsUrl">
-            <c:url value="/Js/audit-set-up.js"/>
+        <c:set var="jqueryUIUrl">
+            <c:url value="/External-Js/jquery-ui-1.10.1.custom.min.js"/>  
+        </c:set>
+        
+        <!-- internal js -->
+        <c:set var="auditSetUpDetailsJsUrl">
+            <c:url value="/Js/expand-collapse/audit-set-up-details-min.js"/>
+        </c:set>
+        <c:set var="progressBarJsUrl">
+            <c:url value="/Js/progress-bar/progress-bar-min.js"/>
+        </c:set>
+        
+        <!-- external images -->
+        <c:set var="processingImgUrl" scope="request">
+            <c:url value="/Images/processing.gif"/>  
         </c:set>
     </c:otherwise>
 </c:choose>
@@ -39,6 +61,7 @@
             <fmt:message key="auditSetUp.errorPageTitle"/>
         </spring:hasBindErrors>
     </c:set>
+    <c:set var="addJqueryUI" scope="request" value="true"/>
     <%@include file="template/head.jsp" %>
     <body id="tgm-upload-page-set-up">
         <%@include file="template/header-utils.jsp" %>
@@ -58,9 +81,11 @@
                 <%@include file="template/set-up.jsp" %>
             </div><!-- class="row" -->
         </div><!-- class="container" -->
-        <script type="text/javascript" src="${jqueryUrl}"></script>
-        <script type="text/javascript" src="${auditSetUpJsUrl}"></script>
         <%@include file="template/footer.jsp" %>
+        <script type="text/javascript" src="${jqueryUrl}"></script>
+        <script type="text/javascript" src="${jqueryUIUrl}"></script>
+        <script type="text/javascript" src="${auditSetUpDetailsJsUrl}"></script>
+        <script type="text/javascript" src="${progressBarJsUrl}"></script>
     </body>
 </html>
 </compress:html>
