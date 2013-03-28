@@ -26,6 +26,7 @@ import org.displaytag.properties.SortOrderEnum;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
@@ -140,6 +141,16 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
             Scope scope);
     
     /**
+     *
+     * @param webResource
+     * @param criterion
+     * @return
+     */
+    Collection<ProcessResult> getProcessResultListByWebResourceAndCriterion(
+            WebResource webResource,
+            Criterion criterion);
+    
+    /**
      * 
      * @param webResource
      * @param scope
@@ -151,7 +162,7 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
             WebResource webResource,
             Scope scope,
             String theme,
-            String testSolution);
+            Collection<String> testSolutionList);
 
 
     /**

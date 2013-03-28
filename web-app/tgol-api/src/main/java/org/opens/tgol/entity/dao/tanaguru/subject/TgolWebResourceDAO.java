@@ -24,6 +24,7 @@ package org.opens.tgol.entity.dao.tanaguru.subject;
 
 import java.util.Collection;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
@@ -69,20 +70,30 @@ public interface TgolWebResourceDAO extends GenericDAO<WebResource, Long> {
     Collection<ProcessResult> retrieveProcessResultListByWebResourceAndScope(
             WebResource webResource,
             Scope scope);
+    
+    /**
+     *
+     * @param webResource
+     * @param criterion
+     * @return
+     */
+    Collection<ProcessResult> retrieveProcessResultListByWebResourceAndCriterion(
+            WebResource webResource,
+            Criterion criterion);
 
     /**
      * 
      * @param webResource
      * @param scope
      * @param theme
-     * @param testSolution
+     * @param testSolutions
      * @return
      */
     Collection<ProcessResult> retrieveProcessResultListByWebResourceAndScope(
             WebResource webResource,
             Scope scope,
             String theme,
-            String testSolution);
+            Collection<String> testSolutions);
 
     /**
      *

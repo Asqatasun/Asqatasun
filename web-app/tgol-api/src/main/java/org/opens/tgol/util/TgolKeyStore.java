@@ -90,9 +90,15 @@ public final class TgolKeyStore {
     public static final String AUDIT_RESULT_URL = "/audit-result";
     public static final String AUDIT_RESULT_CONTRACT_URL =
             CONTRACT_URL+AUDIT_RESULT_URL;
+    public static final String CRITERION_RESULT_URL = "/criterion-result";
+    public static final String CRITERION_RESULT_CONTRACT_URL =
+            CONTRACT_URL+CRITERION_RESULT_URL;
     public static final String EXPORT_AUDIT_RESULT_URL = "/export-audit-result";
     public static final String EXPORT_AUDIT_RESULT_CONTRACT_URL =
             CONTRACT_URL+EXPORT_AUDIT_RESULT_URL;
+    public static final String WEB_RESOURCE_SNAPSHOT_URL = "/wr-snapshot";
+    public static final String WEB_RESOURCE_SNAPSHOT_CONTRACT_URL =
+            CONTRACT_URL+WEB_RESOURCE_SNAPSHOT_URL;
     public static final String AUDIT_SYNTHESIS_URL = "/audit-synthesis";
     public static final String AUDIT_SYNTHESIS_CONTRACT_URL =
             CONTRACT_URL+AUDIT_SYNTHESIS_URL;
@@ -165,6 +171,10 @@ public final class TgolKeyStore {
     public static final String RESULT_PAGE_VIEW_NAME = "result-page";
     public static final String RESULT_PAGE_VIEW_REDIRECT_NAME =
             "result-page-redirect";
+    public static final String RESULT_PAGE_BY_CRITERION_VIEW_NAME = "result-page-by-criterion";
+    public static final String RESULT_PAGE_BY_CRITERION_VIEW_REDIRECT_NAME =
+            "result-page-by-criterion-redirect";
+    public static final String CRITERION_RESULT_VIEW_NAME = "criterion-result-page";
     public static final String RESULT_SITE_VIEW_NAME = "result-site";
     public static final String SYNTHESIS_SITE_VIEW_NAME = "synthesis-site";
     public static final String SYNTHESIS_SITE_VIEW_REDIRECT_NAME =
@@ -201,6 +211,7 @@ public final class TgolKeyStore {
     public static final String AUDIT_RESULT_SORT_COMMAND_KEY="auditResultSortCommand";
     public static final String CONTRACT_SORT_COMMAND_KEY="contractSortCommand";
     public static final String WEBRESOURCE_ID_KEY = "wr";
+    public static final String DISPLAY_SCOPE_KEY = "lvl";
     public static final String PARENT_WEBRESOURCE_ID_KEY = "pwr";
     public static final String EXPORT_FORMAT_KEY = "format";
     public static final String ACT_ID_KEY = "act";
@@ -235,6 +246,8 @@ public final class TgolKeyStore {
     public static final String PAGE_LIST_KEY = "pageList";
     public static final String LOCALE_KEY = "locale";
     public static final String TEST_RESULT_LIST_KEY ="testResultMap";
+    public static final String CRITERION_RESULT_LIST_KEY ="criterionResultMap";
+    public static final String CRITERION_CODE_KEY ="crit";
     public static final String TEST_LIST_KEY ="testList";
     public static final String MODIFIABLE_TEST_WEIGHT_REFS_KEY ="modifiableTestWeightRefs";
     
@@ -302,6 +315,9 @@ public final class TgolKeyStore {
     public static final String DELETED_SCENARIO_NAME_KEY = "deletedScenarioName";
     public static final String SCENARIO_NAME_KEY = "scenarioName";
     public static final String SCENARIO_KEY = "scenario";
+    
+    public static final String CRITERION_DISPLAY_SCOPE_VALUE = "cr";
+    public static final String TEST_DISPLAY_SCOPE_VALUE = "tst";
 
     /* role keys */
     public static final String ROLE_GUEST_KEY = "ROLE_GUEST";
@@ -319,5 +335,7 @@ public final class TgolKeyStore {
     public static final String ACT_QUOTA_EXCEEDED = "actQuotaExceeded";
     public static final String ACT_QUOTA_BY_IP_EXCEEDED = "actQuotaByIpExceeded";
     public static final String ACT_ALLOWED = "actAllowed";
+ 
+    
     
 }
