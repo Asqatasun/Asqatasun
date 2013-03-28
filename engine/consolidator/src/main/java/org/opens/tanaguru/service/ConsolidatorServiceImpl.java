@@ -23,17 +23,17 @@ package org.opens.tanaguru.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import org.opens.tanaguru.consolidator.Consolidator;
-import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.ruleimplementation.RuleImplementation;
 import java.util.List;
+import org.opens.tanaguru.consolidator.Consolidator;
 import org.opens.tanaguru.consolidator.ConsolidatorFactory;
+import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.factory.audit.EvidenceElementFactory;
 import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
 import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.service.audit.EvidenceDataService;
 import org.opens.tanaguru.processing.ProcessRemarkServiceFactory;
+import org.opens.tanaguru.ruleimplementation.RuleImplementation;
 
 /**
  * 
@@ -58,7 +58,7 @@ public class ConsolidatorServiceImpl implements ConsolidatorService {
         List<ProcessResult> resultList = new ArrayList<ProcessResult>();
         for (Test test : testList) {
             // if the rule archive name is empty, the test is not launched
-            if (test.getRuleArchiveName() != null && !test.getRuleArchiveName().isEmpty() ) {
+            if (!test.getNoProcess()) {
                 RuleImplementation ruleImplementation = ruleImplementationLoaderService.loadRuleImplementation(test);
                 Consolidator consolidator = consolidatorFactory.create(
                         grossResultList, 

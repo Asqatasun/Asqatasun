@@ -23,19 +23,14 @@ package org.opens.tanaguru.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import org.opens.tanaguru.contentadapter.util.URLIdentifierFactory;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.factory.audit.EvidenceElementFactory;
-import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
-import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.entity.reference.Test;
-import org.opens.tanaguru.entity.service.audit.EvidenceDataService;
-import org.opens.tanaguru.processing.ProcessRemarkServiceFactory;
 import org.opens.tanaguru.processor.Processor;
 import org.opens.tanaguru.processor.ProcessorFactory;
 import org.opens.tanaguru.ruleimplementation.RuleImplementation;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 
@@ -44,13 +39,24 @@ import org.opens.tanaguru.ruleimplementation.RuleImplementation;
 public class ProcessorServiceImpl implements ProcessorService {
 
     private ProcessorFactory processorFactory;
+    public ProcessorFactory getProcessorFactory() {
+        return processorFactory;
+    }
+
+    @Autowired
+    public void setProcessorFactory(ProcessorFactory processorFactory) {
+        this.processorFactory = processorFactory;
+    }
+    
     private RuleImplementationLoaderService ruleImplementationLoaderService;
-    private NomenclatureLoaderService nomenclatureLoaderService;
-    private ProcessRemarkFactory processRemarkFactory;
-    private SourceCodeRemarkFactory sourceCodeRemarkFactory;
-    private EvidenceElementFactory evidenceElementFactory;
-    private EvidenceDataService evidenceDataService;
-    private URLIdentifierFactory urlIdentifierFactory;
+    public RuleImplementationLoaderService getRuleImplementationLoaderService() {
+        return ruleImplementationLoaderService;
+    }
+    
+    @Autowired
+    public void setRuleImplementationLoaderService(RuleImplementationLoaderService ruleImplementationLoaderService) {
+        this.ruleImplementationLoaderService = ruleImplementationLoaderService;
+    }
 
     public ProcessorServiceImpl() {
         super();
@@ -60,21 +66,13 @@ public class ProcessorServiceImpl implements ProcessorService {
     public Collection<ProcessResult> process(Collection<Content> contentList, Collection<Test> testList) {
         Collection<ProcessResult> processResultList = new ArrayList<ProcessResult>();
 
-        Processor processor = processorFactory.create(ProcessRemarkServiceFactory.create(
-                processRemarkFactory, 
-                sourceCodeRemarkFactory, 
-                evidenceElementFactory, 
-                evidenceDataService), 
-                nomenclatureLoaderService, 
-                urlIdentifierFactory.create());
+        Processor processor = processorFactory.create();
 
         for (Content content : contentList) {
             if (content instanceof SSP) {
                 processor.setSSP((SSP) content);
                 for (Test test : testList) {
-                    // if the rule archive name or the rule class name are not 
-                    // set, no test is processed for this rule.
-                    if (test.getRuleArchiveName() != null && !test.getRuleArchiveName().isEmpty()) {
+                    if (!test.getNoProcess()) {
                         RuleImplementation ruleImplementation = ruleImplementationLoaderService.loadRuleImplementation(test);
                         processor.setRuleImplementation(ruleImplementation);
                         processor.run();
@@ -85,45 +83,6 @@ public class ProcessorServiceImpl implements ProcessorService {
         }
 
         return processResultList;
-    }
-
-    public void setRuleImplementationLoaderService(RuleImplementationLoaderService ruleImplementationLoaderService) {
-        this.ruleImplementationLoaderService = ruleImplementationLoaderService;
-    }
-
-    @Override
-    public void setNomenclatureLoaderService(NomenclatureLoaderService nomenclatureLoaderService) {
-        this.nomenclatureLoaderService = nomenclatureLoaderService;
-    }
-
-    @Override
-    public void setEvidenceDataService(EvidenceDataService evidenceDataService) {
-        this.evidenceDataService = evidenceDataService;
-    }
-
-    @Override
-    public void setEvidenceElementFactory(EvidenceElementFactory evidenceElementFactory) {
-        this.evidenceElementFactory = evidenceElementFactory;
-    }
-
-    @Override
-    public void setProcessRemarkFactory(ProcessRemarkFactory processRemarkFactory) {
-        this.processRemarkFactory = processRemarkFactory;
-    }
-
-    @Override
-    public void setSourceCodeRemarkFactory(SourceCodeRemarkFactory sourceCodeRemarkFactory) {
-        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
-    }
-
-    @Override
-    public void setProcessorFactory(ProcessorFactory processorFactory) {
-        this.processorFactory = processorFactory;
-    }
-
-    @Override
-    public void setUrlIdentifierFactory(URLIdentifierFactory urlIdentifierFactory) {
-        this.urlIdentifierFactory = urlIdentifierFactory;
     }
 
 }

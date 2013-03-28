@@ -71,6 +71,8 @@ public class TestImpl implements Test, Serializable {
     private String ruleDesignUrl;
     @Column(name = "Weight", precision=2, scale=1)
     private BigDecimal weight;
+    @Column(name = "No_Process")
+    private boolean noProcess;
 
     public TestImpl() {
         super();
@@ -175,6 +177,11 @@ public class TestImpl implements Test, Serializable {
     public BigDecimal getWeight() {
         return this.weight;
     }
+    
+    @Override
+    public boolean getNoProcess() {
+        return this.noProcess;
+    }
 
     @Override
     public void setCode(String code) {
@@ -244,6 +251,11 @@ public class TestImpl implements Test, Serializable {
     @Override
     public void setWeight(BigDecimal weight) {
         this.weight = weight;
+    }
+    
+    @Override
+    public void setNoProcess(boolean noProcess) {
+        this.noProcess = noProcess;
     }
  
     @Override

@@ -103,6 +103,12 @@ public interface Test extends Entity, Reorderable {
      * @return the scope
      */
     Scope getScope();
+    
+    /**
+     *
+     * @return whether the test handle a process
+     */
+    boolean getNoProcess();
 
     /**
      *
@@ -190,4 +196,10 @@ public interface Test extends Entity, Reorderable {
      * @param weight 
      */
     void setWeight(BigDecimal weight);
+    
+    /**
+     * 
+     * @param noProcess 
+     */
+    void setNoProcess(boolean noProcess);
 }
