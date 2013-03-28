@@ -117,7 +117,7 @@ public class ContractControllerTest extends TestCase {
     public void testDisplayContractPage_4args() {
         System.out.println("displayContractPage");
         
-        setUpUserDataService(1,1,1,1,2,1,3,1,false);
+        setUpUserDataService(1,1,1,1,3,1,3,1,false);
         setUpContractDataService(1,1);
         setUpActDataService(1,1,2,1,1);
         setUpLocaleResolver(1);
