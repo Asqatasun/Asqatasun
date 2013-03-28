@@ -117,31 +117,4 @@
         <session-timeout>30</session-timeout>
     </session-config>
 
-    <!-- cewolf servlet declaration -->
-    <servlet>
-        <servlet-name>CewolfServlet</servlet-name>
-        <servlet-class>de.laures.cewolf.CewolfRenderer</servlet-class>
-        <!-- sets storage implementation -->
-        <init-param>
-            <param-name>storage</param-name>
-            <param-value>de.laures.cewolf.storage.TransientSessionStorage</param-value>
-        </init-param>
-        <!-- sets overlib.js location relative to webapp -->
-        <init-param>
-            <param-name>overliburl</param-name>
-            <param-value>etc/overlib.js</param-value>
-        </init-param>
-        <!-- turn on or off debugging logging -->
-        <init-param>
-            <param-name>debug</param-name>
-            <param-value>false</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>CewolfServlet</servlet-name>
-        <url-pattern>/cewolf/*</url-pattern>
-    </servlet-mapping>
-
 </web-app>
