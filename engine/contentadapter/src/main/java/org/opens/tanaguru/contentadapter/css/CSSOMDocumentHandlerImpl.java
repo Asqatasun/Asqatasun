@@ -32,13 +32,14 @@ import org.w3c.css.sac.LexicalUnit;
 import org.w3c.css.sac.SACMediaList;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
-import org.w3c.flute.parser.selectors.SelectorFactoryImpl;
+//import org.w3c.flute.parser.selectors.SelectorFactoryImpl;
 import org.opens.tanaguru.contentadapter.Resource;
 import org.w3c.css.sac.SelectorFactory;
 
 /**
  * Refer to org.w3c.css.sac.DocumentHandler javadoc.
  * @author jkowalczyk
+ * @deprecated 
  */
 public class CSSOMDocumentHandlerImpl implements DocumentHandler {
 
@@ -261,12 +262,12 @@ public class CSSOMDocumentHandlerImpl implements DocumentHandler {
     public void startFontFace() throws CSSException {
         List<CSSOMSelector> selectors = new ArrayList<CSSOMSelector>();
         List<CSSOMDeclaration> declarations = new ArrayList<CSSOMDeclaration>();
-        SelectorFactory selectorFactory = new SelectorFactoryImpl();
+//        SelectorFactory selectorFactory = new SelectorFactoryImpl();
 
         // If the namespace URI is not null, a cssException is thrown
-        Selector selector = selectorFactory.
-                createPseudoElementSelector(null, "FontFace");
-        selectors.add(new CSSOMSelectorImpl(selector, declarations));
+//        Selector selector = selectorFactory.
+//                createPseudoElementSelector(null, "FontFace");
+//        selectors.add(new CSSOMSelectorImpl(selector, declarations));
 
         // create the rule and add it to the rule list
         CSSOMRuleImpl rule = new CSSOMRuleImpl(selectors, declarations,
@@ -296,12 +297,12 @@ public class CSSOMDocumentHandlerImpl implements DocumentHandler {
 
         List<CSSOMSelector> selectors = new ArrayList<CSSOMSelector>();
         List<CSSOMDeclaration> declarations = new ArrayList<CSSOMDeclaration>();
-        SelectorFactory selectorFactory = new SelectorFactoryImpl();
+//        SelectorFactory selectorFactory = new SelectorFactoryImpl();
 
         // If the namespace URI is not null, a cssException is thrown
-        Selector selector = selectorFactory.
-                createPseudoElementSelector(null, arg1);
-        selectors.add(new CSSOMSelectorImpl(selector, declarations));
+//        Selector selector = selectorFactory.
+//                createPseudoElementSelector(null, arg1);
+//        selectors.add(new CSSOMSelectorImpl(selector, declarations));
 
         // create the rule and add it to the rule list
         CSSOMRuleImpl rule = new CSSOMRuleImpl(selectors, declarations,

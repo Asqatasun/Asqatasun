@@ -30,6 +30,7 @@ import org.w3c.css.sac.SACMediaList;
 /**
  * 
  * @author jkowalczyk
+ * @deprecated 
  */
 public class CSSOMRuleImpl implements CSSOMRule, Serializable {
 

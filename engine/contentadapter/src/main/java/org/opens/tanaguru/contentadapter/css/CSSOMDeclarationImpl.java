@@ -28,6 +28,7 @@ import java.io.Serializable;
 /**
  * 
  * @author jkowalczyk
+ * @deprecated 
  */
 public class CSSOMDeclarationImpl implements CSSOMDeclaration, Serializable {
 

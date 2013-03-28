@@ -41,6 +41,7 @@ import java.io.Serializable;
 /**
  * 
  * @author jkowalczyk
+ * @deprecated 
  */
 public class CSSOMSelectorImpl implements CSSOMSelector, Serializable {
     

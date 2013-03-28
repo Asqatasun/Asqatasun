@@ -27,6 +27,7 @@ import org.opens.tanaguru.contentadapter.ContentParser;
 /**
  *
  * @author jkowalczyk
+ * @deprecated 
  */
 public interface CSSParser extends ContentParser {
 

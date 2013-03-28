@@ -29,11 +29,12 @@ import org.opens.tanaguru.contentadapter.util.AbstractContentParser;
 import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.Parser;
-import org.w3c.flute.parser.TokenMgrError;
+//import org.w3c.flute.parser.TokenMgrError;
 
 /**
  * 
  * @author jkowalczyk
+ * @deprecated
  */
 public class CSSParserImpl extends AbstractContentParser implements CSSParser {
 
@@ -41,7 +42,9 @@ public class CSSParserImpl extends AbstractContentParser implements CSSParser {
     /**
      * The parser (needed to be injected by spring)// TODO Update javadoc
      */
-    private Parser parser = new org.w3c.flute.parser.Parser();
+//    private Parser parser = new org.w3c.flute.parser.Parser();
+    private Parser parser ;
+//    private Parser parser = new org.apache.batik.css.parser.Parser();
 
     public CSSParserImpl() {
         super();
@@ -69,8 +72,6 @@ public class CSSParserImpl extends AbstractContentParser implements CSSParser {
             Logger.getLogger(this.getClass()).warn(ex  + " on " + getResource().getRsrcName());
         } catch (StringIndexOutOfBoundsException ex) {
             Logger.getLogger(this.getClass()).warn(ex  + " on " + getResource().getRsrcName());
-        } catch (TokenMgrError err) {
-            Logger.getLogger(this.getClass()).warn(err  + " on " + getResource().getRsrcName());
         }
     }
 
@@ -101,10 +102,7 @@ public class CSSParserImpl extends AbstractContentParser implements CSSParser {
         } catch (StringIndexOutOfBoundsException ex) {
             Logger.getLogger(this.getClass()).warn(ex  + " on " + getResource().getRsrcName());  
             return null;
-        } catch (TokenMgrError err) {
-            Logger.getLogger(this.getClass()).warn(err  + " on " + getResource().getRsrcName());
-            return null;
-        }
+        } 
     }
 
     @Override

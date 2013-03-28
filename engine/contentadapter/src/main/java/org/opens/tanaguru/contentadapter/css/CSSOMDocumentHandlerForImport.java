@@ -35,6 +35,7 @@ import org.w3c.css.sac.SelectorList;
 /**
  * Refer to org.w3c.css.sac.DocumentHandler javadoc
  * @author jkowalczyk
+ * @deprecated 
  */
 public class CSSOMDocumentHandlerForImport implements DocumentHandler {
 

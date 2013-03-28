@@ -54,6 +54,7 @@ import org.xml.sax.helpers.LocatorImpl;
  * adapted at the end of the document parse.
  * 
  * @author jkowalczyk
+ * @deprecated 
  */
 public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         CSSContentAdapter, ContentHandler {

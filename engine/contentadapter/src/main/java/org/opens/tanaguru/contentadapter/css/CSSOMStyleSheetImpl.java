@@ -31,6 +31,7 @@ import org.w3c.css.sac.SACMediaList;
 /**
  * 
  * @author jkowalczyk
+ * @deprecated 
  */
 public class CSSOMStyleSheetImpl implements CSSOMStyleSheet, Serializable {
 
