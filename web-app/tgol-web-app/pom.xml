@@ -286,14 +286,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.14</version>
-                <configuration>
-                    <skipTests>true</skipTests>
-                </configuration>
-            </plugin>
-            <plugin>
             <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.2</version>
@@ -308,7 +300,6 @@
                 <executions>
                 <execution>
                     <goals>
-<!--                        <goal>jslint</goal>-->
                         <goal>compress</goal>
                     </goals>
                 </execution>
@@ -318,8 +309,8 @@
                         <exclude>**/*min.js</exclude>
                         <exclude>**/*min.css</exclude>
                     </excludes>
-                    <failOnWarning>false</failOnWarning>
-                    <jswarn>true</jswarn>
+                    <failOnWarning>false</failOnWarning><!--
+                    <jswarn>true</jswarn>-->
 <!--                    <outputDirectory>min</outputDirectory>-->
                 </configuration>
             </plugin>
@@ -371,19 +362,17 @@
                         <executions>
                         <execution>
                             <goals>
-                                <goal>jslint</goal>
                                 <goal>compress</goal>
                             </goals>
                         </execution>
                         </executions>        
                         <configuration>
                             <excludes>
-                                <exclude>**/*.min.js</exclude>
-                                <exclude>**/*.min.css</exclude>
+                                <exclude>**/*min.js</exclude>
+                                <exclude>**/*min.css</exclude>
                             </excludes>
-                            <failOnWarning>true</failOnWarning>
+                            <failOnWarning>false</failOnWarning>
                             <jswarn>true</jswarn>
-                            <outputDirectory>min</outputDirectory>
                         </configuration>
                     </plugin>
 <!--                    <plugin>
