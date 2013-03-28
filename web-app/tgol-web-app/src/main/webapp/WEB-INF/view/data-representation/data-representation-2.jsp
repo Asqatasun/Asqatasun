@@ -5,32 +5,30 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
                 <div class="row">
-                    <div class="span13 offset2">
+                    <div class="span15">
                         <c:set var="msgCode" scope="request" value="${remarkInfosItem.messageCode}"/>
                         <c:choose>
                             <c:when test="${remarkInfosItem.remarkResult == 'nmi'}">
-                        <p id="${testCode}nmi${nmiCounter}" class="process-remarks ${remarkInfosItem.remarkResult}">
+                        <p id="${testCode}nmi${nmiCounter}" class="process-remarks ${remarkInfosItem.remarkResult}-pr">
                             </c:when>
                             <c:when test="${remarkInfosItem.remarkResult == 'failed'}">
-                        <p id="${testCode}failed${failedCounter}" class="process-remarks ${remarkInfosItem.remarkResult}">
+                        <p id="${testCode}failed${failedCounter}" class="process-remarks ${remarkInfosItem.remarkResult}-pr">
                             </c:when>
                             <c:otherwise>
-                        <p class="process-remarks ${remarkInfosItem.remarkResult}">
+                        <p class="process-remarks ${remarkInfosItem.remarkResult}-pr">
                             </c:otherwise>
                         </c:choose>
-                            <strong>
-                                <fmt:message  key="${msgCode}">
-                                <c:if test='${remarkInfosItem.remarkTarget != null}'>
-                                    <c:set var="remarkTarget">
-                                        ${fn:escapeXml(fn:replace(remarkInfosItem.remarkTarget,"&", "&amp;"))}
-                                    </c:set>
-                                    <fmt:param value="${remarkTarget}"></fmt:param>
-                                </c:if>
-                                </fmt:message>
-                            </strong>
+                            <fmt:message  key="${msgCode}">
+                            <c:if test='${remarkInfosItem.remarkTarget != null}'>
+                                <c:set var="remarkTarget">
+                                    ${fn:escapeXml(fn:replace(remarkInfosItem.remarkTarget,"&", "&amp;"))}
+                                </c:set>
+                                <fmt:param value="${remarkTarget}"></fmt:param>
+                            </c:if>
+                            </fmt:message>
                         </p>
                         <c:if test='${not empty remarkInfosItem.evidenceElementList}'>
-                        <table summary="<fmt:message  key="${msgCode}"/>" class="zebra-striped">
+                        <table summary="<fmt:message  key="${msgCode}"/>" class="evidence-elements-table">
                             <caption><fmt:message  key="${msgCode}"/></caption>
                             <!-- First parse of evidence element list to get the table headers (evidencement element key)-->
                             <thead>
@@ -43,12 +41,11 @@
                             <!-- Second parse of evidence element list to get value corresponding to each header of each element list-->
                             <tbody>
                             <c:forEach var="childRemarkItem2" items="${remarkInfosItem.evidenceElementList}">
-
                                 <tr>
                                 <c:forEach var="evidenceElement2" items="${childRemarkItem2}">
                                     <c:choose>
                                         <c:when test="${evidenceElement2.key == 'Line-Number'}">
-                                    <td class="r${testCode}-col-${evidenceElement2.key}">
+                                    <td class="${evidenceElement2.key}">
                                         <c:set var="lineValueTitle">
                                             <fmt:message key="${evidenceElement2.key}"/> ${evidenceElement2.value}
                                         </c:set>
@@ -58,12 +55,40 @@
                                     </td>
                                         </c:when>
                                         <c:when test="${evidenceElement2.key == 'Url'}">
-                                    <td class="r${testCode}-col-${evidenceElement2.key}">
+                                    <td class="${evidenceElement2.key}">
                                         <a href="${evidenceElement2.value}">${evidenceElement2.value}</a>
                                     </td>
                                         </c:when>
+                                        <c:when test="${evidenceElement2.key == 'src' && fn:startsWith(evidenceElement2.value, 'http')}">
+                                    <td class="${evidenceElement2.key}">
+                                        <a href="${evidenceElement2.value}" title="${evidenceElement2.value}">${evidenceElement2.value}</a>
+                                    </td>
+                                        </c:when>
+                                        <c:when test="${evidenceElement2.key == 'Snippet'}">
+                                    <td class="${evidenceElement2.key}">
+                                        <c:set var="snippetCode" scope="page">
+                                            ${evidenceElement2.value}
+                                        </c:set>
+                                        <code class="prettyprint">
+                                            ${snippetCode}
+                                            <c:if test="${!fn:endsWith(snippetCode, '&gt;')}">
+                                                ...
+                                            </c:if>
+                                        </code>
+                                    </td>
+                                        </c:when>
                                         <c:otherwise>
-                                    <td class="r${testCode}-col-${evidenceElement2.key}">${fn:escapeXml(fn:replace(evidenceElement2.value, "&", "&amp;"))}</td>
+                                            <c:set var="evidence" scope="page">
+                                                ${fn:escapeXml(fn:replace(evidenceElement2.value, "&", "&amp;"))}
+                                            </c:set>
+                                            <c:set var="emptyClass" scope="page" value=""/>
+                                            <c:if test="${fn:length(evidence) == 0}">
+                                                <c:set var="evidence" scope="page">
+                                                    <fmt:message  key="empty"/>
+                                                </c:set>
+                                                <c:set var="emptyClass" scope="page" value="empty"/>
+                                            </c:if>
+                                    <td class="${evidenceElement2.key} ${emptyClass}">${evidence}</td>
                                         </c:otherwise>
                                     </c:choose>
                                 </c:forEach>

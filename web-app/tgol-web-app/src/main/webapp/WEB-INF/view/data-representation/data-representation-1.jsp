@@ -5,7 +5,7 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
             <div class="row">
-                <div class="span14 offset2">
+                <div class="span14">
                     <p class="process-remarks">
                         <fmt:message  key="${remarkInfosItem.messageCode}">
                         <c:if test='${remarkInfosItem.remarkTarget != null}'>
@@ -30,6 +30,11 @@
                                                 ${lineValueTitle}
                                             </a>
                                         </c:when>
+                                        <c:when test="${evidenceElement.key == 'Snippet'}">
+                                            <c:set var="snippetContent">
+                                                ${evidenceElement.value}
+                                            </c:set>
+                                        </c:when>
                                         <c:when test="${evidenceElement.key == 'Url'}">
                                                 <a href="${evidenceElement.value}">${evidenceElement.value}</a>
                                         </c:when>
@@ -38,6 +43,9 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </c:forEach>
+                                <c:if test="${snippetContent != null}">
+                                    <pre>${snippetContent}</pre>
+                                </c:if>
                                 </li>
                             </c:forEach>
                         </ul>
