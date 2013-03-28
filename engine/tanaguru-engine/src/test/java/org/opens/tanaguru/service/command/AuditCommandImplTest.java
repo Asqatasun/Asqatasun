@@ -25,9 +25,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.commons.httpclient.HttpStatus;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import static org.easymock.EasyMock.*;
 import org.opens.tanaguru.contentadapter.AdaptationListener;
@@ -338,7 +336,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         List<Content> mockAdaptedContentList = new ArrayList<Content>();
         mockAdaptedContentList.add(mockSSP);
         
-        expect(mockContentAdapterService.adaptContent(new ArrayList<Content>())).
+        expect(mockContentAdapterService.adaptContent(new ArrayList<Content>(),"")).
                 andReturn(mockAdaptedContentList).times(2);
         
         expect(mockContentDataService.saveOrUpdate(mockSSP)).

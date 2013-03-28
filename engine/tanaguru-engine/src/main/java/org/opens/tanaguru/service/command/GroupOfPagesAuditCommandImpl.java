@@ -33,9 +33,9 @@ import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
+import org.opens.tanaguru.sebuilder.tools.ScenarioBuilder;
 import org.opens.tanaguru.service.*;
 import org.opens.tanaguru.util.FileNaming;
-import org.opens.webdriver.builder.ScenarioBuilder;
 
 /**
  *
