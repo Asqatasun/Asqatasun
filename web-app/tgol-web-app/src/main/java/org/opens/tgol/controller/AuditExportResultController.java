@@ -169,8 +169,11 @@ public class AuditExportResultController extends AuditDataHandlerController {
                     false, // no detailed results
                     getLocaleResolver().resolveLocale(request));
 
-        AuditStatistics auditStatistics = getAuditStatistics(webResource, model);
-        model.addAttribute(TgolKeyStore.STATISTICS_KEY, getAuditStatistics(webResource, model));
+        AuditStatistics auditStatistics = getAuditStatistics(
+                    webResource, 
+                    model, 
+                    TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE);
+        model.addAttribute(TgolKeyStore.STATISTICS_KEY, auditStatistics);
 
         try {
             exportService.export(

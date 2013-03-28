@@ -21,13 +21,12 @@
  */
 package org.opens.tgol.command.factory;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import org.opens.tgol.command.AuditResultSortCommand;
-import org.opens.tgol.form.FormField;
-import org.opens.tgol.form.SelectElement;
-import org.opens.tgol.form.SelectFormField;
+import org.opens.tgol.form.*;
 import org.opens.tgol.form.builder.FormFieldBuilder;
 import org.opens.tgol.form.parameterization.helper.FormFieldHelper;
 
@@ -68,8 +67,14 @@ public final class AuditResultSortCommandFactory {
      */
     public AuditResultSortCommand getInitialisedAuditResultSortCommand (
             Long webResourceId,
+            String displayScope, 
+            boolean displayScopeChoice,
             List<FormField> formFieldList) {
+
         AuditResultSortCommand auditResultSortCommand = new AuditResultSortCommand();
+        auditResultSortCommand.setDisplayScope(displayScope);
+        auditResultSortCommand.setDisplayScopeChoice(displayScopeChoice);
+        
         for (FormField ff :formFieldList) {
             if (ff instanceof SelectFormField) {
                 for (Map.Entry<String, List<SelectElement>> entry : ((SelectFormField)ff).getSelectElementMap().entrySet()) {
@@ -79,6 +84,16 @@ public final class AuditResultSortCommandFactory {
                         }
                     }
                 }
+            } else if (ff instanceof CheckboxFormField) {
+                CheckboxFormField cff = ((CheckboxFormField)ff);
+                String code = cff.getCode();
+                List<String> selectedElements = new ArrayList<String>();
+                for (CheckboxElement ce : cff.getCheckboxElementList()) {
+                    if (ce.getEnabled() && ce.getSelected()) {
+                        selectedElements.add(ce.getValue());
+                    }
+                }
+                auditResultSortCommand.getSortOptionMap().put(code, selectedElements.toArray());
             }
         }
         auditResultSortCommand.setWebResourceId(webResourceId);

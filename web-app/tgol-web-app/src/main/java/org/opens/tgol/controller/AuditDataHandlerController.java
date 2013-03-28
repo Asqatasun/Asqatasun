@@ -229,12 +229,12 @@ public abstract class AuditDataHandlerController extends AbstractController {
      * 
      * @param webResource
      * @param model
-     * @param hasResultAction
+     * @param displayScope
      */
-    protected void addAuditStatisticsToModel(WebResource webResource, Model model) {
+    protected void addAuditStatisticsToModel(WebResource webResource, Model model, String displayScope) {
         model.addAttribute(
                 TgolKeyStore.STATISTICS_KEY,
-                getAuditStatistics(webResource, model));
+                getAuditStatistics(webResource, model, displayScope));
     }
 
     /**
@@ -244,8 +244,11 @@ public abstract class AuditDataHandlerController extends AbstractController {
      * @param hasResultAction
      * @return
      */
-    protected AuditStatistics getAuditStatistics(WebResource webResource, Model model){
-        return AuditStatisticsFactory.getInstance().getAuditStatistics(webResource, getParametersToDisplay());
+    protected AuditStatistics getAuditStatistics(WebResource webResource, Model model, String displayScope){
+        return AuditStatisticsFactory.getInstance().getAuditStatistics(
+                webResource, 
+                getParametersToDisplay(),
+                displayScope);
     }
 
     /**
@@ -377,7 +380,7 @@ public abstract class AuditDataHandlerController extends AbstractController {
         model.addAttribute(TgolKeyStore.AUTHORIZED_PAGE_SIZE_KEY, authorizedPageSize);
         model.addAttribute(TgolKeyStore.AUTHORIZED_SORT_CRITERION_KEY, authorizedSortCriterion);
         setFromToValues(paginatedList, model);
-        addAuditStatisticsToModel(site, model);
+        addAuditStatisticsToModel(site, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE);
         return (returnRedirectView) ? TgolKeyStore.PAGE_LIST_XXX_VIEW_REDIRECT_NAME : TgolKeyStore.PAGE_LIST_XXX_VIEW_NAME;
     }
 

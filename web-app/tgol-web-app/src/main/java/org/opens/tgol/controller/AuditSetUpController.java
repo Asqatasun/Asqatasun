@@ -70,7 +70,7 @@ public class AuditSetUpController extends AbstractAuditSetUpController{
                 TgolKeyStore.AUDIT_PAGE_SET_UP_VIEW_NAME, 
                 contractId, 
                 "",
-                getUploadOptionFormFieldBuilderMap(), 
+                getPageOptionFormFieldBuilderMap(), 
                 ScopeEnum.PAGE,
                 model);
     }
@@ -94,7 +94,7 @@ public class AuditSetUpController extends AbstractAuditSetUpController{
                 TgolKeyStore.AUDIT_UPLOAD_SET_UP_VIEW_NAME, 
                 contractId, 
                 "",
-                getPageOptionFormFieldBuilderMap(), 
+                getUploadOptionFormFieldBuilderMap(), 
                 ScopeEnum.FILE,
                 model);
     }
@@ -141,6 +141,9 @@ public class AuditSetUpController extends AbstractAuditSetUpController{
         Contract contract = getContractDataService().read(auditSetUpCommand.getContractId());   
         Map<String, List<AuditSetUpFormField>> formFielMap = null;
         AuditSetUpFormValidator auditSetUpFormValidator = null;
+        if (auditSetUpCommand.getRelaunch()) {
+            return launchAudit(contract, auditSetUpCommand, model, request);
+        }
         switch (auditSetUpCommand.getScope()) {
             case DOMAIN:
                 formFielMap = getFreshAuditSetUpFormFieldMap(

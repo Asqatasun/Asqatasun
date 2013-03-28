@@ -35,12 +35,12 @@ public class ContractSortCommand implements Serializable {
 
     private static final long serialVersionUID = -4719256000931005819L;
 
-    private Map<String, String> sortOptionMap=new HashMap<String, String>();
-    public Map<String, String> getSortOptionMap() {
+    private Map<String, Object> sortOptionMap=new HashMap<String, Object>();
+    public Map<String, Object> getSortOptionMap() {
         return sortOptionMap;
     }
 
-    public void setSortOptionMap(Map<String, String> sortOptionMap) {
+    public void setSortOptionMap(Map<String, Object> sortOptionMap) {
         this.sortOptionMap = sortOptionMap;
     }
 

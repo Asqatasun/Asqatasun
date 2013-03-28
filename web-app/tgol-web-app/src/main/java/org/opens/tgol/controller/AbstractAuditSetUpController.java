@@ -254,12 +254,14 @@ public abstract class AbstractAuditSetUpController extends AuditDataHandlerContr
     
     /**
      * 
+     * @param contract
      * @param auditSetUpCommand
-     * @param result
+     * @param formFielMap
+     * @param auditSetUpFormValidator
      * @param model
+     * @param result
      * @param request
-     * @return
-     * @throws Exception
+     * @return 
      */
     protected String submitForm(
             Contract contract, 
@@ -297,6 +299,32 @@ public abstract class AbstractAuditSetUpController extends AuditDataHandlerContr
                     authorisedReferentialList,
                     formFielMap);
         }
+
+        // If the form is valid, the audit is launched with data from form
+        model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, auditSetUpCommand.getContractId());
+
+        model.addAttribute(TgolKeyStore.AUDIT_SET_UP_COMMAND_KEY, auditSetUpCommand);
+
+        return launchAudit(
+                contract,
+                auditSetUpCommand, 
+                model,
+                request);
+    }
+
+    /**
+     * 
+     * @param contract
+     * @param auditSetUpCommand
+     * @param model
+     * @param request
+     * @return 
+     */
+    protected String launchAudit(
+            Contract contract, 
+            AuditSetUpCommand auditSetUpCommand,
+            Model model, 
+            HttpServletRequest request) {
 
         // If the form is valid, the audit is launched with data from form
         model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, auditSetUpCommand.getContractId());

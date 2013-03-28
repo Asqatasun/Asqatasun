@@ -33,12 +33,12 @@ public class AuditResultSortCommand implements Serializable {
 
     private static final long serialVersionUID = -6799971556530681226L;
     
-    private Map<String, String> sortOptionMap=new HashMap<String, String>();
-    public Map<String, String> getSortOptionMap() {
+    private Map<String, Object> sortOptionMap=new HashMap<String, Object>();
+    public Map<String, Object> getSortOptionMap() {
         return sortOptionMap;
     }
 
-    public void setSortOptionMap(Map<String, String> sortOptionMap) {
+    public void setSortOptionMap(Map<String, Object> sortOptionMap) {
         this.sortOptionMap = sortOptionMap;
     }
 
@@ -49,6 +49,24 @@ public class AuditResultSortCommand implements Serializable {
 
     public void setWebResourceId(Long webResourceId) {
         this.webResourceId = webResourceId;
+    }
+    
+    private String displayScope;
+    public String getDisplayScope() {
+        return this.displayScope;
+    }
+    
+    public void setDisplayScope(String displayScope) {
+        this.displayScope = displayScope;
+    }
+    
+    private boolean displayScopeChoice;
+    public boolean getDisplayScopeChoice() {
+        return this. displayScopeChoice;
+    }
+    
+    public void setDisplayScopeChoice(boolean displayScopeChoice) {
+        this.displayScopeChoice = displayScopeChoice;
     }
 
     /**

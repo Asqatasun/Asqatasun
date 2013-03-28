@@ -144,7 +144,7 @@ public class AuditSynthesisController extends AuditDataHandlerController {
     private String prepareSynthesisSiteData(Site site, Model model, Locale locale) throws IOException {
         model.addAttribute(TgolKeyStore.LOCALE_KEY,locale);
 
-        addAuditStatisticsToModel(site, model);
+        addAuditStatisticsToModel(site, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE);
 
         Audit audit = site.getAudit();
         Map<Theme, ResultCounter> top5SortedThemeMap =

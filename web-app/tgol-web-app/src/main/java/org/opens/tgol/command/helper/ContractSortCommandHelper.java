@@ -116,13 +116,13 @@ public final class ContractSortCommandHelper  {
         List<ContractInfo> contractInfoSet = new LinkedList<ContractInfo>();
         List<String> inclusionSortOccurence;
         if (csc.getSortOptionMap().containsKey(inclusionContractSortKey))  {
-            inclusionSortOccurence = Arrays.asList(csc.getSortOptionMap().get(inclusionContractSortKey).split(";"));
+            inclusionSortOccurence = Arrays.asList(csc.getSortOptionMap().get(inclusionContractSortKey).toString().split(";"));
         } else {
             inclusionSortOccurence = new ArrayList<String>();
         }
         List<String> exclusionSortOccurence;
         if (csc.getSortOptionMap().containsKey(exclusionContractSortKey))  {
-            exclusionSortOccurence = Arrays.asList(csc.getSortOptionMap().get(exclusionContractSortKey).split(";"));
+            exclusionSortOccurence = Arrays.asList(csc.getSortOptionMap().get(exclusionContractSortKey).toString().split(";"));
         } else {
             exclusionSortOccurence = new ArrayList<String>();
         }
@@ -160,9 +160,9 @@ public final class ContractSortCommandHelper  {
                 model);
         List<Contract> contractSet = new LinkedList<Contract>();
         List<String> inclusionSortOccurence = 
-                Arrays.asList(csc.getSortOptionMap().get(inclusionContractSortKey).split(";"));
+                Arrays.asList(csc.getSortOptionMap().get(inclusionContractSortKey).toString().split(";"));
         List<String> exclusionSortOccurence = 
-                Arrays.asList(csc.getSortOptionMap().get(exclusionContractSortKey).split(";"));
+                Arrays.asList(csc.getSortOptionMap().get(exclusionContractSortKey).toString().split(";"));
         for (Contract contract : user.getContractSet()) {
             if (isContractLabelIncluded(inclusionSortOccurence, contract.getLabel()) &&
                     !isContractLabelExcluded(exclusionSortOccurence, contract.getLabel())) {
@@ -213,11 +213,11 @@ public final class ContractSortCommandHelper  {
         @Override
         public int compare(ContractInfo c, ContractInfo c1) {
             if (sortOrder.equals(SortOrderEnum.ASCENDING)) {
-                return c1.getLabel().compareTo(c.getLabel());
+                return c1.getLabel().compareToIgnoreCase(c.getLabel());
             } else if (sortOrder.equals(SortOrderEnum.DESCENDING)){
-                return c.getLabel().compareTo(c1.getLabel());
+                return c.getLabel().compareToIgnoreCase(c1.getLabel());
             }
-            return c1.getLabel().compareTo(c.getLabel());
+            return c1.getLabel().compareToIgnoreCase(c.getLabel());
         }
     }
     
@@ -233,11 +233,11 @@ public final class ContractSortCommandHelper  {
         @Override
         public int compare(Contract c, Contract c1) {
             if (sortOrder.equals(SortOrderEnum.ASCENDING)) {
-                return c1.getLabel().compareTo(c.getLabel());
+                return c1.getLabel().compareToIgnoreCase(c.getLabel());
             } else if (sortOrder.equals(SortOrderEnum.DESCENDING)){
-                return c.getLabel().compareTo(c1.getLabel());
+                return c.getLabel().compareToIgnoreCase(c1.getLabel());
             }
-            return c1.getLabel().compareTo(c.getLabel());
+            return c1.getLabel().compareToIgnoreCase(c.getLabel());
         }
     }
     
@@ -257,7 +257,7 @@ public final class ContractSortCommandHelper  {
                             Integer.valueOf(c.getLastActInfo().getRawMark()));
                 } else if (c1.getLastActInfo() == null 
                         && c.getLastActInfo() == null) {
-                    return c.getLabel().compareTo(c1.getLabel());
+                    return c.getLabel().compareToIgnoreCase(c1.getLabel());
                 } else if (c1.getLastActInfo() == null) {
                     return -1;
                 } else if (c.getLastActInfo() == null) {
@@ -271,7 +271,7 @@ public final class ContractSortCommandHelper  {
                             Integer.valueOf(c1.getLastActInfo().getRawMark()));
                 } else if (c1.getLastActInfo() == null 
                         && c.getLastActInfo() == null) {
-                    return c.getLabel().compareTo(c1.getLabel());
+                    return c.getLabel().compareToIgnoreCase(c1.getLabel());
                 } else if (c1.getLastActInfo() == null) {
                     return -1;
                 } else if (c.getLastActInfo() == null) {
@@ -324,31 +324,25 @@ public final class ContractSortCommandHelper  {
      * @param contractInfoSet
      * @param contractSortCommand 
      */
-    private static void sortContractInfoSetRegardingCommand(
+    public static void sortContractInfoSetRegardingCommand(
             List<ContractInfo> contractInfoSet, 
             ContractSortCommand csc) {
-        String sortByValue = csc.getSortOptionMap().get(sortByKey);
-        // By default if the choice is not alphabetical, the contracts will be
-        // sorted by alphabetical order in the second time. If the choice is 
-        // alphabetical, this value will be overidden with the user value.
-        int alphabeticalSortDirection = 1;
+        String sortByValue = csc.getSortOptionMap().get(sortByKey).toString();
 
         if (StringUtils.equalsIgnoreCase(sortByValue, lastAuditMarkSortValue)) {
             Collections.sort(
                 contractInfoSet, 
                 new ContractInfoMarkSorter(
-                    Integer.valueOf(csc.getSortOptionMap().get(sortOrderKey))));
-        } if (StringUtils.equalsIgnoreCase(sortByValue, lastAuditDateSortValue)) {
+                    Integer.valueOf(csc.getSortOptionMap().get(sortOrderKey).toString())));
+        } else if (StringUtils.equalsIgnoreCase(sortByValue, lastAuditDateSortValue)) {
             Collections.sort(
                 contractInfoSet, 
                 new ContractInfoDateSorter(
-                    Integer.valueOf(csc.getSortOptionMap().get(sortOrderKey))));
+                    Integer.valueOf(csc.getSortOptionMap().get(sortOrderKey).toString())));
         } else {
-            alphabeticalSortDirection = 
-                    Integer.valueOf(csc.getSortOptionMap().get(sortOrderKey));
             Collections.sort(
                 contractInfoSet, 
-                new ContractInfoLabelSorter(alphabeticalSortDirection));
+                new ContractInfoLabelSorter(Integer.valueOf(csc.getSortOptionMap().get(sortOrderKey).toString())));
         }
     }
     
@@ -364,7 +358,7 @@ public final class ContractSortCommandHelper  {
         // sorted by alphabetical order in the second time. If the choice is 
         // alphabetical, this value will be overidden with the user value.
         int alphabeticalSortDirection = 
-                    Integer.valueOf(csc.getSortOptionMap().get(sortOrderKey));
+                    Integer.valueOf(csc.getSortOptionMap().get(sortOrderKey).toString());
         Collections.sort(
                 contractSet, 
                 new ContractLabelSorter(alphabeticalSortDirection));

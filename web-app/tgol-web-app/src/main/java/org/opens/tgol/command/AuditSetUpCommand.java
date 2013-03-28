@@ -169,6 +169,15 @@ public class AuditSetUpCommand implements Serializable {
         this.scenarioId = scenarioId;
     }
     
+    private boolean isRelaunch = false;
+    public boolean getRelaunch() {
+        return isRelaunch;
+    }
+
+    public void setRelaunch(boolean isRelaunch) {
+        this.isRelaunch = isRelaunch;
+    }
+    
     /**
      * Default constructor
      */

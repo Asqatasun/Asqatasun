@@ -467,6 +467,9 @@ public class PageListControllerTest extends TestCase {
         expect(mockWebResourceDataServiceDecorator.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.NOT_APPLICABLE, mockTheme)).
                 andReturn(Long.valueOf(1)).
                 anyTimes();
+        expect(mockWebResourceDataServiceDecorator.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.NOT_TESTED, mockTheme)).
+                andReturn(Long.valueOf(1)).
+                anyTimes();
                 
         Set<Parameter> paramSet = new HashSet<Parameter>();
         Parameter mockParameter=  createMock(Parameter.class);

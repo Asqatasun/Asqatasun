@@ -24,6 +24,7 @@ package org.opens.tgol.command.factory;
 import java.io.Serializable;
 import java.util.*;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.opens.tgol.command.CreateContractCommand;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.functionality.Functionality;
@@ -50,6 +51,9 @@ public class CreateContractCommandFactory  implements Serializable {
     
     public void setReferentialDataService (ReferentialDataService referentialDataService) {
         referentialList = referentialDataService.findAll();
+        for (Referential ref : referentialList) {
+            Logger.getLogger(this.getClass()).error(ref.getCode());
+        }
     }
     
     public void setFunctionalityDataService (FunctionalityDataService funcitonalityDataService) {

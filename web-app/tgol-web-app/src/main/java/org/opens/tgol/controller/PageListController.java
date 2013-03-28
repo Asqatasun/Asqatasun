@@ -155,7 +155,7 @@ public class PageListController extends AuditDataHandlerController{
         model.addAttribute(
                 TgolKeyStore.ERROR_PAGES_COUNT_KEY,
                 getWebResourceCount(site.getAudit().getId(), HttpStatusCodeFamily.f4xx));
-        addAuditStatisticsToModel(site, model);
+        addAuditStatisticsToModel(site, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE);
         return TgolKeyStore.PAGE_LIST_VIEW_NAME;
     }
 
