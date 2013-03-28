@@ -22,8 +22,8 @@
 package org.opens.tanaguru.contentadapter;
 
 import java.util.List;
-import org.opens.tanaguru.entity.audit.Content;
 import java.util.Set;
+import org.opens.tanaguru.entity.audit.Content;
 
 /**
  * 
@@ -71,5 +71,11 @@ public interface ContentsAdapter {
      * @param writeCleanHtmlInFile
      */
     void setWriteCleanHtmlInFile(Boolean writeCleanHtmlInFile);
+    
+    /**
+     * 
+     * @param removeDoctype 
+     */
+    void setRemoveDoctype(Boolean removeDoctype);
 
 }

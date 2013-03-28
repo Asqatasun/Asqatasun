@@ -48,4 +48,22 @@ public interface ContentsAdapterFactory {
             HTMLCleaner htmlCleaner,
             HTMLParser htmlParser);
     
+    /**
+     * Creates an instance of ContentsAdapter
+     *
+     * @param contentList
+     * @param writeCleanHtmlInFile
+     * @param tempFolderRootPath
+     * @param htmlCleaner
+     * @param htmlParser
+     * @return
+     */
+    ContentsAdapter create(
+            List<Content> contentList,
+            boolean writeCleanHtmlInFile,
+            String tempFolderRootPath,
+            HTMLCleaner htmlCleaner,
+            HTMLParser htmlParser, 
+            String ref);
+    
 }
