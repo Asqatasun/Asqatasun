@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
-import org.archive.io.GzippedInputStream;
+import org.archive.io.GzipHeader;
 import org.archive.io.RecordingInputStream;
 import org.archive.modules.CrawlURI;
 import org.archive.modules.deciderules.MatchesFilePatternDecideRule;
@@ -156,7 +156,11 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         this.persistOnTheFly = persistOnTheFly;
     }
     
-    
+    private GzipHeader gzipHeader = new GzipHeader();
+    public GzipHeader getGzipHeader() {
+        return gzipHeader;
+    }
+
     int pageRankCounter = 1; // a counter to determine the rank a page is fetched
 
     public CrawlerImpl() {
@@ -253,19 +257,19 @@ public class CrawlerImpl implements Crawler, ContentWriter {
             LOGGER.debug("Found Html " + curi.getURI());
 
             // extract data from fetched content and record it to SSP object
-            String charset = CrawlUtils.extractCharset(recis.getContentReplayInputStream());
+            String charset = CrawlUtils.extractCharset(recis.getMessageBodyReplayInputStream());
             String sourceCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset);
             lastFetchedSSP = saveWebResourceFromFetchedPage(curi, charset, sourceCode, true);
-
         } else if (curi.getContentType().contains(ContentType.css.getType())) {
             LOGGER.debug("Found css " + curi.getURI() + " last fetched ssp " + lastFetchedSSP.getURI());
             
-            boolean compressed = GzippedInputStream.isCompressedStream(recis.getContentReplayInputStream());
+            boolean compressed = gzipHeader.testGzipMagic(recis.getMessageBodyReplayInputStream());
             String cssCode = null;
             if (compressed) {
                 cssCode = "";
             } else {
-                String charset = CrawlUtils.extractCharset(recis.getContentReplayInputStream());
+                String charset = CrawlUtils.extractCharset(recis.getMessageBodyReplayInputStream());
+//                String charset = CrawlUtils.extractCharset(recis.getContentReplayInputStream());
                 cssCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset);
             }
             saveStylesheetFromFetchedCss(curi, cssCode);
@@ -273,7 +277,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         } else if (curi.getContentType().contains(ContentType.img.getType())) {
             LOGGER.debug("Found Image" + curi.getURI());
 
-            byte[] rawImage = CrawlUtils.getImageContent(recis.getContentReplayInputStream(),
+            byte[] rawImage = CrawlUtils.getImageContent(recis.getMessageBodyReplayInputStream(),
                     CrawlUtils.getImageExtension(curi.getURI()));
             saveRawImageFromFetchedImage(curi, rawImage);
             

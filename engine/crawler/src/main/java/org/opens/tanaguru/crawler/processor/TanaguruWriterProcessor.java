@@ -23,6 +23,7 @@ package org.opens.tanaguru.crawler.processor;
 
 import java.io.IOException;
 import java.util.regex.Pattern;
+import org.apache.log4j.Logger;
 import org.archive.io.RecordingInputStream;
 import org.archive.modules.CrawlURI;
 import org.archive.modules.Processor;
@@ -124,11 +125,17 @@ public class TanaguruWriterProcessor extends Processor
 
     @Override
     protected boolean shouldProcess(CrawlURI curi) {
+        Logger.getLogger(this.getClass()).debug("should process? " + curi.getURI() + " with mime type " + curi.getContentType());
+        if (!curi.getContentType().contains("text/html") && !curi.getContentType().contains("text/css")) {
+            Logger.getLogger(this.getClass()).debug(curi.getURI() + " rejected due to mime type ");
+            return false;
+        }
         return isSuccess(curi);
     }
-
+    
     @Override
     protected void innerProcess(CrawlURI curi) {
+        Logger.getLogger(this.getClass()).debug("inner process? " + curi.getURI() );
         UURI uuri = curi.getUURI(); // Current URI.
 
         // Only http and https schemes are supported.
@@ -160,6 +167,7 @@ public class TanaguruWriterProcessor extends Processor
      */
     @Override
     public synchronized void computeResource(CrawlURI curi) {
+        Logger.getLogger(this.getClass()).debug("compute resource? " + curi.getURI());
         extractorHTMLListener.computeResource(curi);
     }
 

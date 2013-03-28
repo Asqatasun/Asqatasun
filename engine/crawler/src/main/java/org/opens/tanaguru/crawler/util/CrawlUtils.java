@@ -64,14 +64,17 @@ public final class CrawlUtils {
         if (!charset.equalsIgnoreCase(DEFAULT_CHARSET)) {
             Charset utf8charset = Charset.forName(DEFAULT_CHARSET);
             Charset incomingCharset = Charset.forName(charset);
-            ByteBuffer inputBuffer = ByteBuffer.wrap(
-                    recis.getReplayCharSequence(charset).toString().getBytes(charset));
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            recis.getReplayInputStream().readFullyTo(baos);
+            ByteBuffer inputBuffer = ByteBuffer.wrap(baos.toByteArray());
             CharBuffer data = incomingCharset.decode(inputBuffer);
             ByteBuffer outputBuffer = utf8charset.encode(data);
             byte[] outputData = outputBuffer.array();
             return new String(outputData);
         } else {
-            return recis.getReplayCharSequence(charset).toString();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            recis.getReplayInputStream().readFullyTo(baos);
+            return baos.toString(charset);
         }
     }
 

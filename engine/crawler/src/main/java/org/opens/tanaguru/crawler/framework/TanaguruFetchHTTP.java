@@ -35,6 +35,7 @@ public class TanaguruFetchHTTP extends FetchHTTP{
         return super.getHttpProxyPort();
     }
 
+    @Override
     public void setHttpProxyPort(int host) {
         super.setHttpProxyPort(host);
     }
