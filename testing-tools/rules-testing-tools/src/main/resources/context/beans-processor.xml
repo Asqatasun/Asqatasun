@@ -10,8 +10,8 @@
         <property name="entityDao" ref="evidenceDAO"/>
     </bean>
 
-    <bean id="contentDataService" class="org.opens.tanaguru.rules.test.ContentDataServiceMock">
-    </bean>
+    <bean id="contentDataService" class="org.opens.tanaguru.rules.test.ContentDataServiceMock"/>
+    <bean id="preProcessResultDataService" class="org.opens.tanaguru.rules.test.PreProcessResultDataServiceMock"/>
 
     <bean id="auditDAO" class="org.opens.tanaguru.entity.dao.audit.AuditDAOImpl"/>
     <bean id="auditFactory" class="org.opens.tanaguru.entity.factory.audit.AuditFactoryImpl"/>
@@ -22,8 +22,8 @@
 
     <bean id="processorFactory" class="org.opens.tanaguru.processor.ProcessorFactoryImpl"/>
 
-    <bean id="processorService" class="org.opens.tanaguru.service.ProcessorServiceImpl">
-        <property name="ruleImplementationLoaderService" ref="ruleImplementationLoaderService"/>
+    <bean id="processorService" class="org.opens.tanaguru.service.ProcessorServiceImpl"/>
+<!--        <property name="ruleImplementationLoaderService" ref="ruleImplementationLoaderService"/>
 
         <property name="nomenclatureLoaderService" ref="nomenclatureLoaderService"/>
 
@@ -34,7 +34,7 @@
 
         <property name="processorFactory" ref="processorFactory"/>
         <property name="urlIdentifierFactory" ref="urlIdentifierFactory"/>
-    </bean>
+    </bean>-->
 
     <bean id="languageDetector" class="org.opens.tanaguru.ruleimplementation.LanguageDetector" factory-method="getInstance"/>
 

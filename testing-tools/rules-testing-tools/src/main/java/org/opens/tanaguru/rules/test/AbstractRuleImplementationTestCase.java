@@ -147,6 +147,19 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     }
 
     /**
+     * The referential of rules
+     */
+    private String referential;
+    public String getReferential() {
+        return referential;
+    }
+
+    public void setReferential(String referential) {
+        this.referential = referential;
+    }
+    
+    
+    /**
      * 
      * @param testName
      * @param inputDataFileName
@@ -155,10 +168,12 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     public AbstractRuleImplementationTestCase(
             String testName,
             String inputDataFileName,
-            String testcasesFilePath) {
+            String testcasesFilePath, 
+            String referential) {
         super(testName);
         this.testcasesFilePath = testcasesFilePath;
         this.inputDataFileName = inputDataFileName;
+        this.referential = referential;
         initialize();
         setUpRuleImplementationClassName();
         setUpWebResourceMap();
@@ -223,6 +238,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         Test test = testFactory.create();
         test.setCode(this.getName());
         test.setRuleClassName(ruleImplementationClassName);
+        test.setRuleArchiveName("MockArchiveName");
         testList.add(test);
         URL src = null;
         LOGGER.info("setUpClass()");
@@ -264,7 +280,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
                     }
                 }
             }
-            contentMap.put(webResource, contentAdapterService.adaptContent(contentMap.get(webResource)));
+            contentMap.put(webResource, contentAdapterService.adaptContent(contentMap.get(webResource),referential));
         }
     }
 

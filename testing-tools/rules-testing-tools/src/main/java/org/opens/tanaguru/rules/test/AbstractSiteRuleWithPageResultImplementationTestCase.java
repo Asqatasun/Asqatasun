@@ -34,8 +34,9 @@ public abstract class AbstractSiteRuleWithPageResultImplementationTestCase exten
     public AbstractSiteRuleWithPageResultImplementationTestCase(
             String testName,
             String inputDataFileName,
-            String testcasesFilePath) {
-        super(testName,inputDataFileName,testcasesFilePath);
+            String testcasesFilePath, 
+            String referential) {
+        super(testName,inputDataFileName,testcasesFilePath, referential);
     }
     
     public Collection<ProcessResult> consolidateWithListAsReturn(String webResourceKey) {
