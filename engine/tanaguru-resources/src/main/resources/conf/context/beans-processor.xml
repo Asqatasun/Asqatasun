@@ -6,19 +6,7 @@
 
     <bean id="processorFactory" class="org.opens.tanaguru.processor.ProcessorFactoryImpl"/>
 
-    <bean id="processorService" class="org.opens.tanaguru.service.ProcessorServiceImpl">
-        <property name="ruleImplementationLoaderService" ref="ruleImplementationLoaderService"/>
-
-        <property name="nomenclatureLoaderService" ref="nomenclatureLoaderService"/>
-
-        <property name="processRemarkFactory" ref="processRemarkFactory"/>
-        <property name="sourceCodeRemarkFactory" ref="sourceCodeRemarkFactory"/>
-        <property name="evidenceDataService" ref="evidenceDataService"/>
-        <property name="evidenceElementFactory" ref="evidenceElementFactory"/>
-
-        <property name="processorFactory" ref="processorFactory"/>
-        <property name="urlIdentifierFactory" ref="urlIdentifierFactory"/>
-    </bean>
+    <bean id="processorService" class="org.opens.tanaguru.service.ProcessorServiceImpl"/>
 
     <bean id="imageChecker" class="org.opens.tanaguru.ruleimplementation.ImageChecker" factory-method="getInstance"/>
 
