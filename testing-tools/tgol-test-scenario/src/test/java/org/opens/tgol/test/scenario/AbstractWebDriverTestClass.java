@@ -274,7 +274,6 @@ public class AbstractWebDriverTestClass extends TestCase {
      * 
      */
     protected void goToNewContractPage() {
-        System.out.println(contractUrl+newContractId);
         driver.get(contractUrl+newContractId);
     }
     
@@ -282,7 +281,6 @@ public class AbstractWebDriverTestClass extends TestCase {
      * 
      */
     protected void goToAuditPagesSetUpContractPage() {
-        System.out.println(auditPagesSetupUrl+newContractId);
         driver.get(auditPagesSetupUrl+newContractId);
     }
     
