@@ -49,4 +49,30 @@ public class ContentsAdapterFactoryImpl implements ContentsAdapterFactory {
                 htmlParser);
     }
 
+    @Override
+    public ContentsAdapter create(
+            List<Content> contentList, 
+            boolean writeCleanHtmlInFile, 
+            String tempFolderRootPath, 
+            HTMLCleaner htmlCleaner, 
+            HTMLParser htmlParser, 
+            String ref) {
+        
+        // While accessiweb 2.1 rules are not based on jsoup, some specific 
+        // treatment has to be done on the DOM : 
+        // remove the doctype and set tags to upper case
+        
+        boolean removeDoctype = false;
+        if (ref.equals("AW21")) {
+            removeDoctype = true;
+        }
+        return new ContentsAdapterImpl(
+                contentList,
+                writeCleanHtmlInFile,
+                tempFolderRootPath,
+                htmlCleaner,
+                htmlParser, 
+                removeDoctype);
+    }
+
 }

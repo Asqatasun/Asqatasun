@@ -36,7 +36,7 @@ public class HTMLCleanerFactoryImpl implements HTMLCleanerFactory {
 
     @Override
     public HTMLCleaner create() {
-        return new HTMLCleanerImpl();
+        return new HTMLJsoupCleanerImpl();
     }
 
 }

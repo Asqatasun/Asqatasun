@@ -38,7 +38,8 @@ public class HTMLParserFactoryImpl implements HTMLParserFactory {
 
     @Override
     public HTMLParser create(Set<ContentAdapter> contentAdapterSet) {
-        return new HTMLParserImpl(contentAdapterSet);
+//        return new HTMLParserImpl(contentAdapterSet);
+        return new HTMLJsoupParserImpl(contentAdapterSet);
     }
 
 }

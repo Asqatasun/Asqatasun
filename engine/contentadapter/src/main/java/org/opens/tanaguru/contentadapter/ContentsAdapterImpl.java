@@ -24,16 +24,14 @@ package org.opens.tanaguru.contentadapter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.opens.tanaguru.contentadapter.html.AbstractHTMLCleaner;
+import org.opens.tanaguru.contentadapter.html.HTMLCleanerImpl;
+import org.opens.tanaguru.contentadapter.util.DocumentCaseInsensitiveAdapter;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.SSP;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import org.opens.tanaguru.contentadapter.util.DocumentCaseInsensitiveAdapter;
 
 /**
  * 
@@ -49,14 +47,36 @@ public class ContentsAdapterImpl implements ContentsAdapter {
     private List<Content> result;
     private Boolean writeCleanHtmlInFile = false;
     private String tempFolderRootPath = "/var/tmp";
+    private boolean removeDoctype = false;
 
-    ContentsAdapterImpl(List<Content> contentList, boolean writeCleanHtmlInFile, String tempFolderRootPath, HTMLCleaner htmlCleaner, HTMLParser htmlParser) {
+    ContentsAdapterImpl(
+            List<Content> contentList, 
+            boolean writeCleanHtmlInFile, 
+            String tempFolderRootPath, 
+            HTMLCleaner htmlCleaner, 
+            HTMLParser htmlParser) {
         super();
         this.contentList = contentList;
         this.writeCleanHtmlInFile = writeCleanHtmlInFile;
         this.tempFolderRootPath = tempFolderRootPath;
         this.htmlCleaner = htmlCleaner;
         this.htmlParser = htmlParser;
+    }
+    
+    ContentsAdapterImpl(
+            List<Content> contentList, 
+            boolean writeCleanHtmlInFile, 
+            String tempFolderRootPath, 
+            HTMLCleaner htmlCleaner, 
+            HTMLParser htmlParser, 
+            boolean removeDoctype) {
+        super();
+        this.contentList = contentList;
+        this.writeCleanHtmlInFile = writeCleanHtmlInFile;
+        this.tempFolderRootPath = tempFolderRootPath;
+        this.htmlCleaner = htmlCleaner;
+        this.htmlParser = htmlParser;
+        this.removeDoctype = removeDoctype;
     }
 
     public void setTempFolderRootPath(String tempFolderRootPath) {
@@ -82,13 +102,20 @@ public class ContentsAdapterImpl implements ContentsAdapter {
                 SSP ssp = (SSP) content;
 
                 ssp.setDoctype(DocumentCaseInsensitiveAdapter.extractDoctypeDeclaration(ssp.getSource()));
-                htmlCleaner.setDirtyHTML(
-                        DocumentCaseInsensitiveAdapter.removeDoctypeDeclaration(ssp.getSource()));
+                
+                String dirtyHtml;
+                if (removeDoctype) {
+                    dirtyHtml = DocumentCaseInsensitiveAdapter.removeDoctypeDeclaration(ssp.getSource());
+                } else {
+                    dirtyHtml = ssp.getSource();
+                }
+                
+                htmlCleaner.setDirtyHTML(dirtyHtml);
 
                 htmlCleaner.run();
 
-                ssp.setAdaptedContent(
-                        DocumentCaseInsensitiveAdapter.removeLowerCaseTags(htmlCleaner.getResult()));
+                ssp.setAdaptedContent(htmlCleaner.getResult());
+
                 htmlCleaner.setDirtyHTML(null);
                 if (writeCleanHtmlInFile) {
                     writeCleanDomInFile(ssp);
@@ -99,6 +126,12 @@ public class ContentsAdapterImpl implements ContentsAdapter {
 
                 for (ContentAdapter contentAdapter : contentAdapterSet) {
                     localResult.addAll(contentAdapter.getContentList());
+                }
+                if (removeDoctype){
+                    AbstractHTMLCleaner cleaner = new HTMLCleanerImpl();
+                    cleaner.setDirtyHTML(ssp.getAdaptedContent());
+                    cleaner.run();
+                    ssp.setAdaptedContent(DocumentCaseInsensitiveAdapter.removeLowerCaseTags(cleaner.getResult()));
                 }
                 localResult.add(ssp);
             }
@@ -150,6 +183,11 @@ public class ContentsAdapterImpl implements ContentsAdapter {
     @Override
     public void setWriteCleanHtmlInFile(Boolean writeCleanHtmlInFile) {
         this.writeCleanHtmlInFile = writeCleanHtmlInFile;
+    }
+
+    @Override
+    public void setRemoveDoctype(Boolean removeDoctype) {
+        this.removeDoctype = removeDoctype;
     }
 
 }
