@@ -23,7 +23,6 @@ package org.opens.tanaguru.service;
 
 import java.util.List;
 import java.util.Set;
-import org.opens.tanaguru.entity.audit.Content;
 import javax.xml.bind.annotation.XmlTransient;
 import org.opens.tanaguru.contentadapter.ContentAdapterFactory;
 import org.opens.tanaguru.contentadapter.ContentsAdapterFactory;
@@ -31,6 +30,7 @@ import org.opens.tanaguru.contentadapter.HTMLCleanerFactory;
 import org.opens.tanaguru.contentadapter.HTMLParserFactory;
 import org.opens.tanaguru.contentadapter.util.URLIdentifierFactory;
 import org.opens.tanaguru.contentloader.DownloaderFactory;
+import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 
@@ -42,11 +42,12 @@ import org.opens.tanaguru.entity.service.audit.ContentDataService;
 public interface ContentAdapterService {// TODO Write javadoc
 
     /**
-     *
+     * 
      * @param contentList
+     * @param referential
      * @return
      */
-    List<Content> adaptContent(List<Content> contentList);
+    List<Content> adaptContent(List<Content> contentList, String referential);
 
     /**
      *
@@ -107,5 +108,5 @@ public interface ContentAdapterService {// TODO Write javadoc
      * @param contentDataService
      */
     void setContentDataService(ContentDataService contentDataService);
-
+    
 }
