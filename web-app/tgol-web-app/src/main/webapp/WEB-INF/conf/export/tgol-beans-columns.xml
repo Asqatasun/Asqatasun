@@ -66,6 +66,7 @@
                 <ref bean="failedStyleBuilder"/>
                 <ref bean="nmiStyleBuilder"/>
                 <ref bean="naStyleBuilder"/>
+                <ref bean="ntStyleBuilder"/>
             </list>
         </property>
     </bean>

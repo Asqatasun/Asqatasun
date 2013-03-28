@@ -96,6 +96,10 @@
     <bean id="naStyle" parent="numericalStyle">
         <property name="textColor" ref="naColor"/>
     </bean>
+    
+    <bean id="ntStyle" parent="numericalStyle">
+        <property name="textColor" ref="ntColor"/>
+    </bean>
 
     <bean id="zeroStyle" parent="numericalStyle">
         <property name="textColor" ref="thirtyPercentGrey"/>

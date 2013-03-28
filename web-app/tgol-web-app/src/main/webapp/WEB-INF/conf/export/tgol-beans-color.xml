@@ -43,7 +43,8 @@
     </bean>
 
     <!-- na color : black -->
-    <alias name="blackColor" alias="naColor"/>
+    <alias name="thirtyPercentGrey" alias="naColor"/>
+    <alias name="blackColor" alias="ntColor"/>
 
     <!-- header cell color : cyan -->
     <bean id="headerCellColor" class="java.awt.Color">

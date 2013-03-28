@@ -140,6 +140,16 @@
         <property name="conditionalStyleExpressionBuilder" ref="naStyleExpressionBuilder"/>
         <property name="style" ref="naStyle"/>
     </bean>
+    
+    <bean id="ntStyleExpressionBuilder" class="org.opens.tgol.report.expression.builder.ResultStyleExpressionBuilderImpl">
+        <property name="bundleName" value="rule-result-I18N"/>
+        <property name="result" value="nt"/>
+    </bean>
+
+    <bean id="ntStyleBuilder" class="org.opens.tgol.report.expression.builder.ConditionalStyleBuilderImpl">
+        <property name="conditionalStyleExpressionBuilder" ref="ntStyleExpressionBuilder"/>
+        <property name="style" ref="ntStyle"/>
+    </bean>
 
 <!--    <bean id="zeroValueExpressionBuilder" class="org.opens.tgol.report.expression.builder.ResultStyleExpressionBuilderImpl">
         <property name="result" value="0"/>
