@@ -22,6 +22,7 @@
 package org.opens.tanaguru.processor;
 
 import org.opens.tanaguru.contentadapter.util.URLIdentifier;
+import org.opens.tanaguru.entity.service.audit.PreProcessResultDataService;
 import org.opens.tanaguru.service.NomenclatureLoaderService;
 import org.opens.tanaguru.service.ProcessRemarkService;
 
@@ -31,8 +32,18 @@ import org.opens.tanaguru.service.ProcessRemarkService;
  */
 public class SSPHandlerFactory {
 
-    public static SSPHandler create(ProcessRemarkService processRemarkService, NomenclatureLoaderService nomenclatureLoaderService, URLIdentifier urlIdentifier) {
-        return new SSPHandlerImpl(nomenclatureLoaderService, urlIdentifier, CSSHandlerFactory.create(processRemarkService), DOMHandlerFactory.create(processRemarkService), processRemarkService);
+    public static SSPHandler create(
+            ProcessRemarkService processRemarkService, 
+            NomenclatureLoaderService nomenclatureLoaderService, 
+            URLIdentifier urlIdentifier, 
+            PreProcessResultDataService preProcessResultDataService) {
+        return new SSPHandlerImpl(
+                nomenclatureLoaderService, 
+                urlIdentifier, 
+                CSSHandlerFactory.create(processRemarkService), 
+                DOMHandlerFactory.create(processRemarkService), 
+                processRemarkService, 
+                preProcessResultDataService);
     }
 
 }

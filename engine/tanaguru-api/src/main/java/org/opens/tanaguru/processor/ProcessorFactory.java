@@ -21,10 +21,6 @@
  */
 package org.opens.tanaguru.processor;
 
-import org.opens.tanaguru.contentadapter.util.URLIdentifier;
-import org.opens.tanaguru.service.NomenclatureLoaderService;
-import org.opens.tanaguru.service.ProcessRemarkService;
-
 /**
  * Based on the design pattern factory, create instances of Processor
  * @author enzolalay
@@ -32,16 +28,9 @@ import org.opens.tanaguru.service.ProcessRemarkService;
 public interface ProcessorFactory {
 
     /**
-     *
-     * @param processRemarkService
-     * @param nomenclatureLoaderService
-     * @param urlIdentifier
-     * @return
-     *      an instance of Processor
+     * 
+     * @return 
      */
-    Processor create(
-            ProcessRemarkService processRemarkService,
-            NomenclatureLoaderService nomenclatureLoaderService,
-            URLIdentifier urlIdentifier);
+    Processor create();
 
 }

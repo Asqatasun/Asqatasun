@@ -36,6 +36,7 @@ import org.w3c.css.sac.LexicalUnit;
 /**
  * 
  * @author jkowalczyk
+ * @deprecated
  */
 public class CSSHandlerImpl implements CSSHandler {
 

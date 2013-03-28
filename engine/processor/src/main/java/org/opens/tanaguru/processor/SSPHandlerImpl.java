@@ -33,12 +33,13 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.httpclient.URIException;
 import org.apache.log4j.Logger;
 import org.archive.net.UURIFactory;
+import org.jsoup.select.Elements;
 import org.opens.tanaguru.contentadapter.css.CSSOMRule;
 import org.opens.tanaguru.contentadapter.util.URLIdentifier;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
-import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.entity.reference.Nomenclature;
+import org.opens.tanaguru.entity.service.audit.PreProcessResultDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.ruleimplementation.RuleHelper;
 import org.opens.tanaguru.service.NomenclatureLoaderService;
@@ -58,22 +59,38 @@ public class SSPHandlerImpl implements SSPHandler {
     private JSHandler jsHandler;
     private SSP ssp;
     private NomenclatureLoaderService nomenclatureLoaderService;
-    private SourceCodeRemarkFactory sourceCodeRemarkFactory;
     private ProcessRemarkFactory processRemarkFactory;
     private String selectionExpression;
-    private List<ProcessRemark> remarkList;
+//    private List<ProcessRemark> remarkList;
     private Map<String, BufferedImage> imageMap;
     private URLIdentifier urlIdentifier;
     private Set<ImageContent> imageOnErrorSet;
     private ProcessRemarkService processRemarkService;
+    private PreProcessResultDataService preProcessResultDataService;
 
-    SSPHandlerImpl(NomenclatureLoaderService nomenclatureLoaderService, URLIdentifier urlIdentifier, CSSHandler create, DOMHandler create0, ProcessRemarkService processRemarkService) {
+    /**
+     * 
+     * @param nomenclatureLoaderService
+     * @param urlIdentifier
+     * @param create
+     * @param create0
+     * @param processRemarkService 
+     * @param preProcessResultDataService
+     */
+    SSPHandlerImpl(
+            NomenclatureLoaderService nomenclatureLoaderService, 
+            URLIdentifier urlIdentifier, 
+            CSSHandler create, 
+            DOMHandler create0, 
+            ProcessRemarkService processRemarkService, 
+            PreProcessResultDataService preProcessResultDataService) {
         super();
         this.nomenclatureLoaderService = nomenclatureLoaderService;
         this.urlIdentifier = urlIdentifier;
         this.cssHandler = create;
         this.domHandler = create0;
         this.processRemarkService = processRemarkService;
+        this.preProcessResultDataService = preProcessResultDataService;
     }
 
     @Override
@@ -87,7 +104,30 @@ public class SSPHandlerImpl implements SSPHandler {
         }
 
         selectionExpression = null;
-        remarkList = new ArrayList<ProcessRemark>();
+//        remarkList = new LinkedList<ProcessRemark>();
+
+        URL src;
+        try {
+            src = new URL(ssp.getURI());
+            urlIdentifier.setUrl(src);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(SSPHandlerImpl.class.getName()).error(ex);
+        }
+        return this;
+    }
+    
+    @Override
+    public SSPHandler beginJQueryLikeSelection() {
+        domHandler.beginJQueryLikeSelection();
+        if (cssHandler != null) {
+            cssHandler.beginSelection();
+        }
+        if (jsHandler != null) {
+            jsHandler.beginSelection();
+        }
+
+        selectionExpression = null;
+//        remarkList = new ArrayList<ProcessRemark>();
 
         URL src;
         try {
@@ -105,52 +145,8 @@ public class SSPHandlerImpl implements SSPHandler {
     }
 
     @Override
-    public TestSolution checkAttributeValueExpression(String attributeName,
-            String regex) {
-        return domHandler.checkAttributeValueExpression(attributeName, regex);
-    }
-
-    @Override
-    public TestSolution checkAttributeValueLengthLower(String attributeName,
-            int length, TestSolution defaultFailResult) {
-        return domHandler.checkAttributeValueLengthLower(attributeName, length,
-                defaultFailResult);
-    }
-
-    @Override
-    public TestSolution checkAttributeValueNotEmpty(String attributeName) {
-        return domHandler.checkAttributeValueNotEmpty(attributeName);
-    }
-
-    @Override
-    public TestSolution checkAttributeValueIsEmpty(String attributeName) {
-        return domHandler.checkAttributeValueIsEmpty(attributeName);
-    }
-
-    @Override
     public TestSolution checkChildNodeExists(String childNodeName) {
         return domHandler.checkChildNodeExists(childNodeName);
-    }
-
-    @Override
-    public TestSolution checkChildNodeExistsRecursively(String childNodeName) {
-        return domHandler.checkChildNodeExistsRecursively(childNodeName);
-    }
-
-    @Override
-    public TestSolution checkContentNotEmpty() {
-        return domHandler.checkContentNotEmpty();
-    }
-
-    @Override
-    public TestSolution checkEachWithXpath(String expr) {
-        return domHandler.checkEachWithXpath(expr);
-    }
-
-    @Override
-    public TestSolution checkNodeValue(Collection<String> blacklist,
-            Collection<String> whitelist) {
-        return domHandler.checkNodeValue(blacklist, whitelist);
     }
 
     @Override
@@ -174,50 +170,9 @@ public class SSPHandlerImpl implements SSPHandler {
     }
 
     @Override
-    public TestSolution checkTextContentAndAttributeValue(String attributeName,
-            Collection<String> blacklist, Collection<String> whitelist) {
-        return domHandler.checkTextContentAndAttributeValue(attributeName,
-                blacklist, whitelist);
-    }
-
-    @Override
     public TestSolution checkTextContentValue(Collection<String> blacklist,
             Collection<String> whitelist) {
         return domHandler.checkTextContentValue(blacklist, whitelist);
-    }
-
-    @Override
-    public TestSolution checkTextContentValueLengthLower(int length,
-            TestSolution defaultFailResult) {
-        return domHandler.checkTextContentValueLengthLower(length,
-                defaultFailResult);
-    }
-
-    @Override
-    public TestSolution checkTextContentValueNotEmpty() {
-        return domHandler.checkTextContentValueNotEmpty();
-    }
-
-    @Override
-    public DOMHandler excludeNodesWithAttribute(String attributeName) {
-        return domHandler.excludeNodesWithAttribute(attributeName);
-    }
-
-    @Override
-    public SSPHandler excludeNodesWithChildNode(ArrayList<String> childNodeNames) {
-        domHandler.excludeNodesWithChildNode(childNodeNames);
-        return this;
-    }
-
-    @Override
-    public SSPHandler excludeNodesWithChildNode(String childNodeName) {
-        domHandler.excludeNodesWithChildNode(childNodeName);
-        return this;
-    }
-
-    @Override
-    public List<String> getAttributeValues(String attributeName) {
-        return domHandler.getAttributeValues(attributeName);
     }
 
     @Override
@@ -236,6 +191,11 @@ public class SSPHandlerImpl implements SSPHandler {
     }
     
     @Override
+    public Elements getSelectedElements() {
+        return domHandler.getSelectedElements();
+    }
+    
+    @Override
     public Collection<CSSOMRule> getSelectedCSSOMRuleList() {
         return cssHandler.getSelectedCSSOMRuleList();
     }
@@ -243,11 +203,6 @@ public class SSPHandlerImpl implements SSPHandler {
     @Override
     public SSP getSSP() {
         return ssp;
-    }
-
-    @Override
-    public List<String> getTextContentValues() {
-        return domHandler.getTextContentValues();
     }
 
     @Override
@@ -262,48 +217,7 @@ public class SSPHandlerImpl implements SSPHandler {
     }
 
     @Override
-    public SSPHandler keepNodesWithAttributeValueEquals(String attributeName,
-            Collection<String> values) {
-        domHandler.keepNodesWithAttributeValueEquals(attributeName, values);
-        return this;
-    }
-
-    @Override
-    public SSPHandler keepNodesWithAttributeValueNonEmpty(String attributeName) {
-        domHandler.keepNodesWithAttributeValueNonEmpty(attributeName);
-        return this;
-    }
-
-    @Override
-    public SSPHandler keepNodesWithAttributeValueStartingWith(
-            String attributeName, Collection<String> values) {
-        domHandler.keepNodesWithAttributeValueStartingWith(attributeName,
-                values);
-        return this;
-    }
-
-    @Override
-    public SSPHandler keepNodesWithAttributeValueStartingWith(
-            String attributeName, String value) {
-        domHandler.keepNodesWithAttributeValueStartingWith(attributeName, value);
-        return this;
-    }
-
-    @Override
     public SSPHandler keepNodesWithChildNode(String childNodeName) {
-        domHandler.keepNodesWithChildNode(childNodeName);
-        return this;
-    }
-
-    @Override
-    public SSPHandler keepNodesWithoutChildNode(
-            Collection<String> childNodeNames) {
-        domHandler.keepNodesWithoutChildNode(childNodeNames);
-        return this;
-    }
-
-    @Override
-    public SSPHandler keepNodesWithoutChildNode(String childNodeName) {
         domHandler.keepNodesWithChildNode(childNodeName);
         return this;
     }
@@ -324,27 +238,8 @@ public class SSPHandlerImpl implements SSPHandler {
     }
 
     @Override
-    public SSPHandler selectAttributeByName(String attributeName) {
-        domHandler.selectAttributeByName(attributeName);
-        return this;
-    }
-
-    @Override
-    public SSPHandler selectChildNodes(Collection<String> childNodeNames) {
-        domHandler.selectChildNodes(childNodeNames);
-        return this;
-    }
-
-    @Override
     public SSPHandler selectChildNodes(String childNodeName) {
         domHandler.selectChildNodes(childNodeName);
-        return this;
-    }
-
-    @Override
-    public SSPHandler selectChildNodesRecursively(
-            Collection<String> childNodeNames) {
-        domHandler.selectChildNodesRecursively(childNodeNames);
         return this;
     }
 
@@ -363,12 +258,6 @@ public class SSPHandlerImpl implements SSPHandler {
     @Override
     public SSPHandler selectDocumentNodes(String nodeName) {
         domHandler.selectDocumentNodes(nodeName);
-        return this;
-    }
-
-    @Override
-    public SSPHandler selectDocumentNodesWithAttribute(String attributeName) {
-        domHandler.selectDocumentNodesWithAttribute(attributeName);
         return this;
     }
 
@@ -448,6 +337,19 @@ public class SSPHandlerImpl implements SSPHandler {
         selectionExpression = expression;
         return this;
     }
+    
+    /**
+     * http://www.ibm.com/developerworks/library/x-javaxpathapi.html
+     *
+     * @param expr
+     * @return
+     */
+    @Override
+    public SSPHandler domJQuerySelectNodeSet(String expression) {
+        domHandler.jquerySelectNodeSet(expression);
+        selectionExpression = expression;
+        return this;
+    }
 
     @Override
     public TestSolution domCheckNodeValueInNomenclature(String nomenclatureCode, String errorMessage) {
@@ -475,7 +377,7 @@ public class SSPHandlerImpl implements SSPHandler {
                 remark.setSelectionExpression(selectionExpression);
                 remark.selectedElement(nodeValue);
 
-                remarkList.add(remark);
+//                remarkList.add(remark);
             }
         }
 
@@ -615,12 +517,194 @@ public class SSPHandlerImpl implements SSPHandler {
     }
 
     @Override
+    public void setMessageCode(String messageCode) {
+        domHandler.setMessageCode(messageCode);
+    }
+    
+    @Override 
+    public String getPreProcessResult(String key, WebResource page) {
+        return preProcessResultDataService.getPreProcessResultByKeyAndWebResource(key, page);
+    }
+    
+    @Override
+    @Deprecated
+    public TestSolution checkChildNodeExistsRecursively(String childNodeName) {
+        return domHandler.checkChildNodeExistsRecursively(childNodeName);
+    }
+
+    @Override
+    @Deprecated
+    public TestSolution checkContentNotEmpty() {
+        return domHandler.checkContentNotEmpty();
+    }
+
+    @Override
+    @Deprecated
+    public TestSolution checkEachWithXpath(String expr) {
+        return domHandler.checkEachWithXpath(expr);
+    }
+    
+    @Override  
+    @Deprecated
+    public TestSolution checkTextContentAndAttributeValue(String attributeName,
+            Collection<String> blacklist, Collection<String> whitelist) {
+        return domHandler.checkTextContentAndAttributeValue(attributeName,
+                blacklist, whitelist);
+    }
+    
+    @Override
+    @Deprecated
+    public TestSolution checkTextContentValueLengthLower(int length,
+            TestSolution defaultFailResult) {
+        return domHandler.checkTextContentValueLengthLower(length,
+                defaultFailResult);
+    }
+
+    @Override
+    @Deprecated
+    public TestSolution checkTextContentValueNotEmpty() {
+        return domHandler.checkTextContentValueNotEmpty();
+    }
+
+    @Override
+    @Deprecated
+    public DOMHandler excludeNodesWithAttribute(String attributeName) {
+        return domHandler.excludeNodesWithAttribute(attributeName);
+    }
+
+    @Override
+    @Deprecated
+    public SSPHandler excludeNodesWithChildNode(ArrayList<String> childNodeNames) {
+        domHandler.excludeNodesWithChildNode(childNodeNames);
+        return this;
+    }
+
+    @Override
+    @Deprecated
+    public SSPHandler excludeNodesWithChildNode(String childNodeName) {
+        domHandler.excludeNodesWithChildNode(childNodeName);
+        return this;
+    }
+
+    @Override
+    @Deprecated
+    public List<String> getAttributeValues(String attributeName) {
+        return domHandler.getAttributeValues(attributeName);
+    }
+    
+    @Override
+    @Deprecated
+    public List<String> getTextContentValues() {
+        return domHandler.getTextContentValues();
+    }
+    
+    @Override
+    @Deprecated
+    public SSPHandler keepNodesWithAttributeValueEquals(String attributeName,
+            Collection<String> values) {
+        domHandler.keepNodesWithAttributeValueEquals(attributeName, values);
+        return this;
+    }
+
+    @Override
+    @Deprecated
+    public SSPHandler keepNodesWithAttributeValueNonEmpty(String attributeName) {
+        domHandler.keepNodesWithAttributeValueNonEmpty(attributeName);
+        return this;
+    }
+
+    @Override
+    @Deprecated
+    public SSPHandler keepNodesWithAttributeValueStartingWith(
+            String attributeName, Collection<String> values) {
+        domHandler.keepNodesWithAttributeValueStartingWith(attributeName,
+                values);
+        return this;
+    }
+
+    @Override
+    @Deprecated
+    public SSPHandler keepNodesWithAttributeValueStartingWith(
+            String attributeName, String value) {
+        domHandler.keepNodesWithAttributeValueStartingWith(attributeName, value);
+        return this;
+    }
+    
+    @Override
+    @Deprecated
+    public SSPHandler keepNodesWithoutChildNode(
+            Collection<String> childNodeNames) {
+        domHandler.keepNodesWithoutChildNode(childNodeNames);
+        return this;
+    }
+
+    @Override
+    @Deprecated
+    public SSPHandler keepNodesWithoutChildNode(String childNodeName) {
+        domHandler.keepNodesWithChildNode(childNodeName);
+        return this;
+    }
+    
+    @Override
+    @Deprecated
+    public SSPHandler selectAttributeByName(String attributeName) {
+        domHandler.selectAttributeByName(attributeName);
+        return this;
+    }
+
+    @Override
+    @Deprecated
+    public SSPHandler selectChildNodes(Collection<String> childNodeNames) {
+        domHandler.selectChildNodes(childNodeNames);
+        return this;
+    }
+    
+    @Override
+    @Deprecated
+    public SSPHandler selectChildNodesRecursively(
+            Collection<String> childNodeNames) {
+        domHandler.selectChildNodesRecursively(childNodeNames);
+        return this;
+    }
+    
+    @Override
+    @Deprecated
+    public SSPHandler selectDocumentNodesWithAttribute(String attributeName) {
+        domHandler.selectDocumentNodesWithAttribute(attributeName);
+        return this;
+    }
+    
+    @Override
+    @Deprecated
+    public TestSolution checkAttributeValueIsEmpty(String attributeName) {
+        return domHandler.checkAttributeValueIsEmpty(attributeName);
+    }
+
+    @Override
+    @Deprecated
     public String getMessageCode() {
         return domHandler.getMessageCode();
     }
 
     @Override
-    public void setMessageCode(String messageCode) {
-        domHandler.setMessageCode(messageCode);
+    @Deprecated
+    public TestSolution checkNodeValue(Collection<String> blacklist,
+            Collection<String> whitelist) {
+        return domHandler.checkNodeValue(blacklist, whitelist);
     }
+    
+    @Override
+    @Deprecated
+    public TestSolution checkAttributeValueLengthLower(String attributeName,
+            int length, TestSolution defaultFailResult) {
+        return domHandler.checkAttributeValueLengthLower(attributeName, length,
+                defaultFailResult);
+    }
+
+    @Override
+    @Deprecated
+    public TestSolution checkAttributeValueNotEmpty(String attributeName) {
+        return domHandler.checkAttributeValueNotEmpty(attributeName);
+    }
+    
 }
