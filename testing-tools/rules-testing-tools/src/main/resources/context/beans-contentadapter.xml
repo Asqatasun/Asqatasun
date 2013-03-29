@@ -5,11 +5,11 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 
     <bean id="contentsAdapterFactory" class="org.opens.tanaguru.contentadapter.ContentsAdapterFactoryImpl"/>
     <bean id="htmlCleanerFactory" class="org.opens.tanaguru.contentadapter.html.HTMLCleanerFactoryImpl"/>
-    <bean id="htmlParserFactory" class="org.opens.tanaguru.contentadapter.html.HTMLJsoupParserFactoryImpl"/>
+    <bean id="htmlParserFactory" class="org.opens.tanaguru.contentadapter.html.HTMLParserFactoryImpl"/>
     <bean id="urlIdentifierFactory" class="org.opens.tanaguru.contentadapter.util.URLIdentifierFactoryImpl"/>
     <bean id="externalCSSRetriever" class="org.opens.tanaguru.rules.test.ExternalCSSRetrieverMock"/>
 
-    <bean id="cssContentAdapterFactory" class="org.opens.tanaguru.contentadapter.css.CSSJsoupContentAdapterFactoryImpl">
+    <bean id="cssContentAdapterFactory" class="org.opens.tanaguru.contentadapter.css.CSSContentAdapterFactoryImpl">
         <property name="externalCSSRetriever">
             <ref local="externalCSSRetriever"/>
         </property>
