@@ -168,6 +168,9 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
     protected String launchTanaguru(String siteName, String[] url) {
         login();
         driver.get(formUrl);
+        if (url.length>1) {
+            driver.findElementByCssSelector("form#auditSetUpCommand fieldset div.clearfix div.url-input a").click();
+        }
         for (int i=0 ; i<url.length ; i++) {
             System.out.println("testing   " + url[i]);
             driver.findElementById(fieldName+i).sendKeys(url[i]);
