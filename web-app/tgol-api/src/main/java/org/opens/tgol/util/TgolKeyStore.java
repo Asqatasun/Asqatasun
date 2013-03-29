@@ -309,6 +309,7 @@ public final class TgolKeyStore {
     public static final String EXPANDED_VALUE = "expanded";
     public static final String CONTRACT_NAME_KEY = "contractName";
     public static final String IS_PAGE_AUDIT_KEY = "isPageAudit";
+    public static final String IS_GENERATED_HTML_KEY = "isGeneratedHtml";
     public static final String IS_USER_NOTIFIED_KEY = "isUserNotified";
     public static final String SCENARIO_LIST_KEY = "scenarioList";
     public static final String NEW_SCENARIO_NAME_KEY = "newScenarioName";
