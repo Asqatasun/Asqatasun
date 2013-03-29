@@ -43,6 +43,7 @@ import org.opens.tgol.command.AuditResultSortCommand;
 import org.opens.tgol.command.factory.AuditResultSortCommandFactory;
 import org.opens.tgol.command.factory.AuditSetUpCommandFactory;
 import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.entity.contract.ScopeEnum;
 import org.opens.tgol.exception.ForbiddenPageException;
 import org.opens.tgol.exception.ForbiddenUserException;
 import org.opens.tgol.form.FormField;
@@ -189,6 +190,11 @@ public class AuditResultController extends AuditDataHandlerController {
             try {
                 SSP ssp =getContentDataService().findSSP(page, page.getURL());
                 model.addAttribute(TgolKeyStore.SOURCE_CODE_KEY,highlightSourceCode(ssp));
+
+                ScopeEnum scope = getActDataService().getActFromWebResource(webResource).getScope().getCode();
+                if (scope.equals(ScopeEnum.GROUPOFPAGES) || scope.equals(ScopeEnum.PAGE)) {
+                    model.addAttribute(TgolKeyStore.IS_GENERATED_HTML_KEY,true);
+                }
             } catch (NoResultException nre) {
                 LOGGER.warn("No ssp found for " +page.getURL());
             }
