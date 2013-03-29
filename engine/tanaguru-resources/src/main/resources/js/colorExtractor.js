@@ -8,6 +8,12 @@ splitRgb = function(rawRgbValue) {
     var p = rawRgbValue;
     var values;
     var rgbValue={};
+    if (p == '"transparent"') {
+        rgbValue.red = '255';	
+        rgbValue.green = '255';
+        rgbValue.blue = '255';
+        return rgbValue;
+    }
     if (p.indexOf('rgb') > -1) 
         p = p.replace('rgb','');
     if (p.indexOf('(') > -1)	
@@ -21,7 +27,7 @@ splitRgb = function(rawRgbValue) {
     while (p.indexOf('\"') > -1) 
         p = p.replace('\"','');
     if(p.indexOf(';') > -1)
-    	values = p.split(';');	
+    	values = p.split(';');
     rgbValue.red = values[0];	
     rgbValue.green = values[1];
     rgbValue.blue = values[2];    
