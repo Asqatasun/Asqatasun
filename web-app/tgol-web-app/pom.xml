@@ -307,7 +307,7 @@
                 <configuration>
                     <excludes>
                         <exclude>**/*min.js</exclude>
-                        <exclude>**/*min.css</exclude>
+                        <exclude>**/*.css</exclude>
                     </excludes>
                     <failOnWarning>false</failOnWarning><!--
                     <jswarn>true</jswarn>-->
@@ -369,7 +369,7 @@
                         <configuration>
                             <excludes>
                                 <exclude>**/*min.js</exclude>
-                                <exclude>**/*min.css</exclude>
+                                <exclude>**/*.css</exclude>
                             </excludes>
                             <failOnWarning>false</failOnWarning>
                             <jswarn>true</jswarn>

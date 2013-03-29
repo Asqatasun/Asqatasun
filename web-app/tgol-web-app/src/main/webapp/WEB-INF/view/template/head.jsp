@@ -16,8 +16,8 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Css/prettify.min.css"/>
         </c:if>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Css/tgm-min.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Css/font-open-min.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Css/tgm.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Css/font-open.css"/>
     <link rel="icon" type="image/ico" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/tanaguru.ico" />
     <c:set var="modernizrJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/modernizr.min.js" scope="request"/>
     </c:when>
@@ -27,8 +27,8 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/External-Css/prettify.min.css"/>"/>
         </c:if>
     <link rel="stylesheet" type="text/css" href="<c:url value="/External-Css/bootstrap.min.css"/>" />
-    <link rel="stylesheet" type="text/css" href="<c:url value="/Css/tgm-min.css"/>" />
-    <link rel="stylesheet" type="text/css" href="<c:url value="/Css/font-open-min.css"/>" />
+    <link rel="stylesheet" type="text/css" href="<c:url value="/Css/tgm.css"/>" />
+    <link rel="stylesheet" type="text/css" href="<c:url value="/Css/font-open.css"/>" />
     <link rel="icon" type="image/ico" href="<c:url value="/Images/tanaguru.ico"/>" />    
     <c:set var="modernizrJsUrl" scope="request">
         <c:url value="/External-Js/modernizr.min.js"/>
