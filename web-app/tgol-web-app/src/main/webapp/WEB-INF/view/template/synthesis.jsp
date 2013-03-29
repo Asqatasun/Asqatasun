@@ -27,7 +27,7 @@
                             <span class="synthesis-meta-title">Url : </span>${statistics.url}
                         </c:when>
                         <c:when test="${statistics.auditScope == 'SCENARIO'}">
-                            <span class="synthesis-meta-title">Scenario : </span> <strong>${statistics.url}</strong>
+                            <span class="synthesis-meta-title">Scenario : </span> ${statistics.url}
                         </c:when>
                         <c:otherwise>
                             <span class="synthesis-meta-title">Url : </span><a href="${statistics.url}">${statistics.url}</a>
