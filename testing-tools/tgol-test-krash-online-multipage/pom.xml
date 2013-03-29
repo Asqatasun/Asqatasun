@@ -18,35 +18,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.2</version>
-                <executions>
-                    <execution>
-                        <id>campaign-initialization</id>
-                        <phase>generate-test-sources</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>/bin/sh</executable>
-                            <commandlineArgs>/root/bin/selenium-my-restart.sh</commandlineArgs>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>tomcat-restart</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>/bin/sh</executable>
-                            <commandlineArgs>/root/bin/restart-tg-instance.sh</commandlineArgs>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>${testingToolsGroupId}</groupId>
                 <artifactId>maven-testgenerator-plugin</artifactId>
                 <version>${testingToolsVersion}</version>
@@ -78,18 +49,6 @@
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-api</artifactId>
             <version>${engineVersion}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium.client-drivers</groupId>
-            <artifactId>selenium-java-client-driver</artifactId>
-            <version>1.0.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium.server</groupId>
-            <artifactId>selenium-server</artifactId>
-            <version>1.0.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
