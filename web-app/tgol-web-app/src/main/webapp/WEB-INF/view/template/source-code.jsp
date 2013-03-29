@@ -2,9 +2,15 @@
 <%@page pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
-            <h2 id="source-code"><fmt:message key="resultPage.sourceCode"/></h2>
             
+            <c:choose>
+                <c:when test="${isGeneratedHtml}">
+                <h2 id="source-code"><fmt:message key="resultPage.generatedHtmlsourceCode"/></h2>
+                </c:when>
+                <c:otherwise>
+                <h2 id="source-code"><fmt:message key="resultPage.sourceCode"/></h2>
+                </c:otherwise>
+            </c:choose>
             <c:forEach var="testResult" items="${sourceCode}">
                 ${testResult}
             </c:forEach>
