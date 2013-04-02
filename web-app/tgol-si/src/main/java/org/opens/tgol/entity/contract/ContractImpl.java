@@ -74,10 +74,10 @@ public class ContractImpl implements Contract, Serializable {
     @JoinColumn(name = "USER_Id_User")
     private UserImpl user;
 
-    @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "contract")
     private Set<ActImpl> actSet = new LinkedHashSet<ActImpl>();
     
-    @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "contract")
     private Set<ScenarioImpl> scenarioSet = new LinkedHashSet<ScenarioImpl>();
     
     @ManyToMany
