@@ -119,6 +119,7 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
     @Override
     public void tearDown() throws Exception {
         driver.close();
+        driver.quit();
     }
 
     /**
