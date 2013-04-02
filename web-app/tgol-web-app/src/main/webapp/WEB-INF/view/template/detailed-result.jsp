@@ -3,6 +3,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+
             <c:if test="${addSideBarNav}">
             <div class="theme-nav bs-docs-sidebar">
                 <ul class="nav-list bs-docs-sidenav">
@@ -130,16 +132,24 @@
                             <div class="span4">
                                 <ul class="counter-remarks">
                                     <li>
-                                        ${testResult.elementCounter} <fmt:message key="resultPage.testedElements"/>
+                                        <fmt:message key="resultPage.testedElements">
+                                            <fmt:param value="${testResult.elementCounter}"/>
+                                        </fmt:message>
                                     </li>
                                     <c:if test='${testResult.resultCounter.failedCount > 0}'>
                                     <li class="subcounter">
                                     <c:choose>
                                         <c:when test="${testResult.testRepresentation  != 'data-representation/data-representation-1.jsp'}">
-                                        <a href="#${testResult.testCode}failed0">${testResult.resultCounter.failedCount} <fmt:message key="resultPage.failedElements"/></a>
+                                        <a href="#${testResult.testCode}failed0">
+                                            <fmt:message key="resultPage.failedElements">
+                                                <fmt:param value="${testResult.resultCounter.failedCount}"/>
+                                            </fmt:message>
+                                        </a>
                                         </c:when>
                                         <c:otherwise>
-                                        ${testResult.resultCounter.failedCount} <fmt:message key="resultPage.failedElements"/>
+                                            <fmt:message key="resultPage.failedElements">
+                                                <fmt:param value="${testResult.resultCounter.failedCount}"/>
+                                            </fmt:message>
                                         </c:otherwise>
                                     </c:choose>
                                     </li>
@@ -148,22 +158,30 @@
                                     <li class="subcounter">
                                     <c:choose>
                                         <c:when test="${testResult.testRepresentation  != 'data-representation/data-representation-1.jsp'}">
-                                        <a href="#${testResult.testCode}nmi0">${testResult.resultCounter.nmiCount} <fmt:message key="resultPage.nmiElements"/></a>
+                                        <a href="#${testResult.testCode}nmi0">
+                                            <spring:message code="resultPage.nmiElements" arguments="${testResult.resultCounter.nmiCount}"/>
+                                        <a/>        
                                         </c:when>
                                         <c:otherwise>
-                                        ${testResult.resultCounter.nmiCount} <fmt:message key="resultPage.nmiElements"/>
+                                            <fmt:message key="resultPage.nmiElements">
+                                                <fmt:param value="${testResult.resultCounter.nmiCount}"/>
+                                            </fmt:message>
                                         </c:otherwise>
                                     </c:choose>
                                     </li>
                                     </c:if>
                                     <c:if test='${testResult.resultCounter.suspectedPassedCount > 0}'>
                                     <li class="subcounter">
-                                        ${testResult.resultCounter.suspectedPassedCount} <fmt:message key="resultPage.nmiSuspectedPassedElements"/>
+                                        <fmt:message key="resultPage.nmiSuspectedPassedElements">
+                                            <fmt:param value="${testResult.resultCounter.suspectedPassedCount}"/>
+                                        </fmt:message>
                                     </li>
                                     </c:if>
                                     <c:if test='${testResult.resultCounter.suspectedFailedCount > 0}'>
                                     <li class="subcounter">
-                                        ${testResult.resultCounter.suspectedFailedCount} <fmt:message key="resultPage.nmiSuspectedFailedElements"/>
+                                        <fmt:message key="resultPage.nmiSuspectedFailedElements">
+                                            <fmt:param value="${testResult.resultCounter.suspectedFailedCount}"/>
+                                        </fmt:message>
                                     </li>
                                     </c:if>
                                 </ul>
