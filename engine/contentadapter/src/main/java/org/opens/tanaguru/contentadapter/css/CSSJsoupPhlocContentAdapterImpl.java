@@ -28,6 +28,7 @@ import com.phloc.css.decl.CSSMediaQuery;
 import com.phloc.css.decl.CascadingStyleSheet;
 import com.phloc.css.handler.ICSSParseExceptionHandler;
 import com.phloc.css.parser.ParseException;
+import com.phloc.css.parser.TokenMgrError;
 import com.phloc.css.reader.CSSReader;
 import com.thoughtworks.xstream.XStream;
 import java.net.URISyntaxException;
@@ -393,12 +394,17 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
         if (stylesheetContent.getAdaptedContent() == null
                 && resource.getResource() != null && !resource.getResource().trim().isEmpty()) {
             Charset charset = CSSReader.getCharsetDeclaredInCSS(new ByteArrayInputStreamProvider(resource.getResource().getBytes()));
-            Logger.getLogger(this.getClass()).debug("is css valid CSS2 " + 
-                    CSSReader.isValidCSS(resource.getResource(), ECSSVersion.CSS21) + " " + 
-                    stylesheetContent.getURI());
-            Logger.getLogger(this.getClass()).debug("is css valid CSS3 " + 
-                    CSSReader.isValidCSS(resource.getResource(), ECSSVersion.CSS30) + " " + 
-                    stylesheetContent.getURI());
+            try {
+                Logger.getLogger(this.getClass()).debug("is css valid CSS2 " + 
+                        CSSReader.isValidCSS(resource.getResource(), ECSSVersion.CSS21) + " " + 
+                        stylesheetContent.getURI());
+                Logger.getLogger(this.getClass()).debug("is css valid CSS3 " + 
+                        CSSReader.isValidCSS(resource.getResource(), ECSSVersion.CSS30) + " " + 
+                        stylesheetContent.getURI());
+            } catch (TokenMgrError tme) {
+                Logger.getLogger(this.getClass()).debug(resource.getResource() +" is on error, so invalid"); 
+                Logger.getLogger(this.getClass()).debug(tme.getMessage()); 
+            }
             if (charset == null) {
                 charset = Charset.forName("utf-8");
             }
@@ -417,6 +423,8 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
                     }
                 } 
             } catch (IllegalArgumentException iae) {
+                stylesheetContent.setAdaptedContent(CSS_ON_ERROR);
+            } catch (TokenMgrError tme) {
                 stylesheetContent.setAdaptedContent(CSS_ON_ERROR);
             }
         }
@@ -519,6 +527,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
             int column  = extype.currentToken.next.beginColumn;
             this.css.setAdaptedContent(CSS_ON_ERROR+'l'+line+'c'+column);
             Logger.getLogger(this.getClass()).warn("Error on adaptation " + css.getURI());
+            Logger.getLogger(this.getClass()).warn(extype.currentToken.getValue());
             Logger.getLogger(this.getClass()).warn(extype.getMessage());
         }
 
