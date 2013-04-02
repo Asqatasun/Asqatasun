@@ -158,21 +158,16 @@ public final class TestResultFactory {
             boolean hasResultDetails,
             String theme,
             Collection<String> testSolutionList){
-        Logger.getLogger(this.getClass()).error(" before getProcessResultListByWebResourceAndScope");
         List<ProcessResult> netResultList = (List<ProcessResult>)
                 webResourceDataService.
                 getProcessResultListByWebResourceAndScope(webresource, scope, theme, testSolutionList);
-        Logger.getLogger(this.getClass()).error("after  getProcessResultListByWebResourceAndScope");
         // The not tested tests are not persisted but deduced from the testResultList
         // If the not_tested solution is requested to be displayed, we add fake
         // processResult to the current list.
         if (testSolutionList.contains(NOT_TESTED_STR)) {
-            Logger.getLogger(this.getClass()).error("before add manually not tested results");
             netResultList.addAll(addNotTestedProcessResult(getTestListFromWebResource(webresource), theme, netResultList));
-            Logger.getLogger(this.getClass()).error("after add manually not tested results");
         }
         
-        Logger.getLogger(this.getClass()).error("start preparing ThemeResultMap");
         return prepareThemeResultMap(
                 netResultList, 
                 hasSourceCodeWithDoctype, 
@@ -195,11 +190,7 @@ public final class TestResultFactory {
         Map<Theme, List<TestResult>> testResultMap =
                 new LinkedHashMap<Theme, List<TestResult>>();
 
-        Logger.getLogger(this.getClass()).error("start sort netResultList");
         sortCollection(netResultList);
-        Logger.getLogger(this.getClass()).error("after sort netResultList");
-        
-        Logger.getLogger(this.getClass()).error("before extract remaks and evidenceElements for all process Result");
         for (ProcessResult processResult : netResultList) {
             if (processResult instanceof DefiniteResult) {
                 TestResult testResult = getTestResult(
@@ -218,32 +209,8 @@ public final class TestResultFactory {
                 }
             }
         }
-        Logger.getLogger(this.getClass()).error("after extract remaks and evidenceElements for all process Result");
         return testResultMap;
     }
-
-//    /**
-//     * This methods prepare test results to be displayed
-//     * @param webresource
-//     * @param scope
-//     * @param hasSourceCodeADoctype
-//     * @param hasResultDetails
-//     * @return
-//     */
-//    public Map<Theme, List<TestResult>> getTestResultSortedByThemeMap(
-//            WebResource webresource,
-//            Scope scope,
-//            boolean hasSourceCodeWithDoctype,
-//            boolean hasResultDetails) {
-//        List<ProcessResult> netResultList = (List<ProcessResult>)
-//                webResourceDataService.
-//                getProcessResultListByWebResourceAndScope(webresource, scope);
-//        return prepareThemeResultMap(
-//                netResultList, 
-//                getTestListFromWebResource(webresource),
-//                hasSourceCodeWithDoctype, 
-//                hasResultDetails);
-//    }
 
     /**
      * 
@@ -415,7 +382,7 @@ public final class TestResultFactory {
             remark.getElementList()) {
             if (evidenceElement.getEvidence().getCode().
                     equalsIgnoreCase(TestResult.ELEMENT_NAME_KEY)) {
-                return "<code>&lt;"+evidenceElement.getValue().toLowerCase()+"&gt;</code>";
+                return evidenceElement.getValue().toLowerCase();
             }
         }
         return null;
