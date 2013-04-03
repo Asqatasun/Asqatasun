@@ -35,6 +35,7 @@ import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.audit.SSP;
+import org.opens.tanaguru.entity.service.reference.CriterionDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -53,6 +54,7 @@ import org.opens.tgol.presentation.factory.CriterionResultFactory;
 import org.opens.tgol.presentation.factory.TestResultFactory;
 import org.opens.tgol.util.TgolHighlighter;
 import org.opens.tgol.util.TgolKeyStore;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,6 +72,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AuditResultController extends AuditDataHandlerController {
 
     private static final Logger LOGGER = Logger.getLogger(AuditResultController.class);
+    private static final String CRITERION_RESULT_PAGE_KEY="criterion-result";
+    private static final String REFERER_HEADER_KEY="referer";
 
     private boolean hasSourceCodeWithDoctype = false;
 
@@ -130,6 +134,16 @@ public class AuditResultController extends AuditDataHandlerController {
 
     public void setAuthorizedRefForCriterionViewList(List<String> authorizedRefForCriterionViewList) {
         this.authorizedRefForCriterionViewList = authorizedRefForCriterionViewList;
+    }
+    
+    private CriterionDataService criterionDataService;
+    public CriterionDataService getCriterionDataService() {
+        return criterionDataService;
+    }
+
+    @Autowired
+    public void setCriterionDataService(CriterionDataService criterionDataService) {
+        this.criterionDataService = criterionDataService;
     }
     
     public AuditResultController() {
@@ -225,21 +239,26 @@ public class AuditResultController extends AuditDataHandlerController {
         }
         WebResource webResource = getWebResourceDataService().ligthRead(wrId);
         if (webResource != null && webResource instanceof Page && isUserAllowedToDisplayResult(webResource))  {
-//                WebResource fullWebResource =
-//                    getWebResourceDataService().deepRead(webResource.getId());
+                Contract contract = retrieveContractFromWebResource(webResource);
+                // Attributes for breadcrumb
+                model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
+                model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
+                model.addAttribute(TgolKeyStore.URL_KEY, webResource.getURL());
+                model.addAttribute(TgolKeyStore.CRITERION_LABEL_KEY, criterionDataService.read(critId).getLabel());
+                
+                Long parentWrId= getWebResourceDataService().getParentWebResourceId(webResource.getId());
+                boolean isAuthorizedScopeForPageList = false;
+                if (parentWrId != null) {
+                    isAuthorizedScopeForPageList= isAuthorizedScopeForPageList(getWebResourceDataService().ligthRead(parentWrId));
+                    model.addAttribute(TgolKeyStore.PARENT_WEBRESOURCE_ID_KEY, parentWrId);
+                }
+
+                // Add a boolean used to display the breadcrumb. 
+                model.addAttribute(TgolKeyStore.AUTHORIZED_SCOPE_FOR_PAGE_LIST, isAuthorizedScopeForPageList);
+            
                 model.addAttribute(TgolKeyStore.TEST_RESULT_LIST_KEY,
                     TestResultFactory.getInstance().getTestResultListFromCriterion(webResource, false, critId));
                 return TgolKeyStore.CRITERION_RESULT_VIEW_NAME;
-//                        page,
-//                        getPageScope(),
-//                        hasSourceCodeWithDoctype,
-//                        true,
-//                        asuc.getSortOptionMap().get(themeSortKey).toString(),
-//                        getTestResultSortSelection(asuc))); 
-//                return prepareSuccessfullPageData((Page)webResource, model, pr);
-//            } else {
-//                throw new ForbiddenPageException();
-//            }
         } else {
             throw new ForbiddenPageException();
         }
@@ -269,7 +288,7 @@ public class AuditResultController extends AuditDataHandlerController {
         if (isUserAllowedToDisplayResult(webResource)) {
             this.callGc(webResource);
            
-            String displayScope = computeDisplayScope(webResource, auditResultSortCommand);
+            String displayScope = computeDisplayScope(request, auditResultSortCommand);
             
             // first we add statistics meta-data to model 
             addAuditStatisticsToModel(webResource, model, displayScope);
@@ -507,26 +526,18 @@ public class AuditResultController extends AuditDataHandlerController {
      * Extract from the audit parameter the referential. Regarding this value, 
      * the returned page displays results sorted by tests or criterion
      * 
-     * @param webResource
+     * @param request
+     * @param arsc
      * @return 
      */
-    private String computeDisplayScope(WebResource webResource, AuditResultSortCommand arsc) {
+    private String computeDisplayScope(HttpServletRequest request, AuditResultSortCommand arsc) {
+        if (StringUtils.contains(request.getHeader(REFERER_HEADER_KEY), CRITERION_RESULT_PAGE_KEY)) {
+            return TgolKeyStore.CRITERION_DISPLAY_SCOPE_VALUE;
+        }
         if (arsc != null) {
             return arsc.getDisplayScope();
         }
-//        Audit audit = null;
-//        if (webResource.getAudit() != null) {
-//            audit = webResource.getAudit();
-//        } else if (webResource.getParent() != null && webResource.getParent().getAudit() != null) {
-//            audit = webResource.getParent().getAudit();
-//        }
-//        String currentRef = 
-//                getParameterDataService().getParameter(audit, levelParameterCode).getValue().split(";")[0];
-//        if (authorizedRefForCriterionViewList.contains(currentRef)) {
-//            return TgolKeyStore.CRITERION_DISPLAY_SCOPE_VALUE;
-//        } else {
-            return TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE;
-//        }
+        return TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE;
     }
 
 }

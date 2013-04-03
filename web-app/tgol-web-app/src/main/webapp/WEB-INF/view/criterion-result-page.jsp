@@ -75,12 +75,12 @@
 </c:choose>
 <html lang="${lang}">
     <c:set var="pageTitle" scope="page">
-        <fmt:message key="test-result.pageTitle">
+        <fmt:message key="criterionResultPage.pageTitle">
             <fmt:param>
-                ${testResult.testShortLabel}
+                ${criterionLabel}
             </fmt:param>
             <fmt:param>
-                <a href="${url}">${url}</a>
+                ${url}
             </fmt:param>
         </fmt:message>
     </c:set>
@@ -88,27 +88,16 @@
     <body id="tgm-criterion-result-page">
         <%@include file="template/header-utils.jsp" %>
         <div class="container">
-            <c:set var="pageNameBc" scope="page">
-                <fmt:message key="test-result.h1">
-                    <fmt:param>
-                        ${testResult.testShortLabel}
-                    </fmt:param>
-                    <fmt:param>
-                        ${url}
-                    </fmt:param>
-                </fmt:message>
-            </c:set>
             <c:set var="pageName" scope="page">
-                <fmt:message key="test-result.h1">
+                <fmt:message key="criterionResultPage.h1">
                     <fmt:param>
-                        ${testResult.testShortLabel}
+                        ${criterionLabel}
                     </fmt:param>
                     <fmt:param>
                         <a href="${url}">${url}</a>
                     </fmt:param>
                 </fmt:message>
             </c:set>
-            <c:set var="surveyList" scope="page" value="${detailedSurveyList}"/>
             <ul class="breadcrumb">
                 <li><a href="<c:url value="/home.html"/>"><fmt:message key="home.h1"/></a> <span class="divider"></span></li>
                 <li><a href="<c:url value="/home/contract.html?cr=${cr}"/>">${contractName}</a> <span class="divider"></span></li>
@@ -122,23 +111,23 @@
                     </c:set>
                     <li><a href="<c:url value="/home/contract/audit-synthesis.html?wr=${pwr}"/>">${auditSynthesisName}</a> <span class="divider"></span></li>
                     <li><a href="<c:url value="/home/contract/page-list.html?wr=${pwr}"/>"><fmt:message key="pageList.h1"/></a> <span class="divider"></span></li>
-                    <c:choose>
-                        <c:when test="${statistics.auditScope == 'DOMAIN'}">
-                            <c:set var="pageList2xxUrl" value="/home/contract/page-list.html?wr=${pwr}&amp;status=f2xx"/>
-                        </c:when>
-                        <c:when test="${statistics.auditScope == 'SCENARIO'}">
-                            <c:set var="pageList2xxUrl" value="/home/contract/page-list.html?wr=${pwr}&amp;status=f2xx&amp;sortCriterion=rank&amp;sortDirection=1"/>
-                        </c:when>
-                    </c:choose>
-                    <li><a href="<c:url value="${pageList2xxUrl}"/>"><fmt:message key="pageList.f2xx.h1"/></a> <span class="divider"></span></li>
+                    <li><a href="<c:url value="/home/contract/page-list.html?wr=${pwr}&amp;status=f2xx"/>"><fmt:message key="pageList.f2xx.h1"/></a> <span class="divider"></span></li>
                 </c:if>
-                <li class="active">${pageName}</li>
+                <li><a href="<c:url value="/home/contract/audit-result.html?wr=${param.wr}"/>"><fmt:message key="resultPage.h1"/></a> <span class="divider"></span></li>
+                <li class="active">${pageTitle}</li>
             </ul>
             <div class="row">
                 <div class="span16">
                     <h1>
                         ${pageName}
                     </h1>
+                </div>
+            </div><!-- class="row"-->
+            <div class="row">
+                <div class="offset12 span4 back-link">
+                    <a href="<c:url value="/home/contract/audit-result.html?wr=${param.wr}"/>" class="back-link">
+                        <fmt:message key="criterionResultPage.backToAuditResultByCriterion"/>
+                    </a>
                 </div>
             </div><!-- class="row"-->
             <c:set var="counterByThemeMap" scope="request" value="${statistics.counterByThemeMap}"/>

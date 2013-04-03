@@ -95,7 +95,7 @@
 </c:if>
 <html lang="${lang}">
     <c:set var="pageTitle" scope="page">
-        <fmt:message key="resultPage.pageTitle">
+        <fmt:message key="resultPageByCriterion.pageTitle">
             <fmt:param>
                 ${statistics.url}
             </fmt:param>
