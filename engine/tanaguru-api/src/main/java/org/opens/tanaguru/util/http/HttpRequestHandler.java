@@ -136,7 +136,7 @@ public class HttpRequestHandler {
         }
     }
     
-    public String getHttpContent (String url) throws URISyntaxException{
+    public String getHttpContent (String url) throws URISyntaxException, UnknownHostException, IOException {
         String encodedUrl = getEncodedUrl(url);
         DefaultHttpClient httpclient = getHttpClient(encodedUrl);
         try {
@@ -146,10 +146,6 @@ public class HttpRequestHandler {
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
             String responseBody = httpclient.execute(httpget, responseHandler);
             return responseBody.toString();
-        } catch (UnknownHostException uhe) {
-            return "";
-        } catch (IOException ioe) {
-            return "";
         } catch (NullPointerException ioe) {
             return "";
         } finally {
