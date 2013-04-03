@@ -161,7 +161,7 @@
                                             <fmt:message key="resultPage.nmiElements">
                                                 <fmt:param value="${testResult.resultCounter.nmiCount}"/>
                                             </fmt:message>
-                                        <a/>        
+                                        </a>
                                         </c:when>
                                         <c:otherwise>
                                             <fmt:message key="resultPage.nmiElements">
