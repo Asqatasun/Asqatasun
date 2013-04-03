@@ -14,7 +14,9 @@ $(document).ready(function() {
         rule; 
 
     $("#act-list-table tbody tr").each(function (d, i) {
-        if (!isNaN(parseInt($(this).find("[headers=raw-mark]").text(), 10))) {
+        
+        if (!isNaN(parseInt($(this).find("[headers=raw-mark]").text(), 10)) && 
+            $(this).find("[headers=scope]").text() == "site") {
             var value = parseInt($(this).find("[headers=raw-mark]").text(), 10)/100, 
                 myResult = {};
             myResult.label=$(this).find("[headers=date]").text();
@@ -26,10 +28,10 @@ $(document).ready(function() {
     data.reverse(); 
 
     // if not enough data to display show image sample and return 
-//    if (data.length <2) {
+    if (data.length <2) {
 //        $("#site-audit-history-graph-sample").show();
-//        return;
-//    }
+        return;
+    }
     margin = {top: 20, right: 40, bottom: 100, left: 70};
     width = 1000 - margin.left - margin.right;
     height = 300 - margin.top - margin.bottom;
