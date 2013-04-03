@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
+import java.nio.charset.IllegalCharsetNameException;
 import java.util.*;
 import java.util.logging.Level;
 import javax.persistence.PersistenceException;
@@ -263,7 +264,9 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      */
     private boolean getExternalResourceAndAdapt(String path,
             List<String> sacMediaList) {
-
+        if (StringUtils.isEmpty(path.trim())) {
+            return false;
+        }
         // When an external css is found on the html, we start by getting the
         // associated resource from the fetched Stylesheet and we populate the
         // set of relatedExternalCssSet (needed to create the relation between the
@@ -322,22 +325,24 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      */
     private StylesheetContent createNewExternalStyleSheet(String cssAbsolutePath) {
         String cssSourceCode = "";
-        LOGGER.error( cssAbsolutePath );
         try {
             cssSourceCode = HttpRequestHandler.getInstance().getHttpContent(cssAbsolutePath);
         } catch (URISyntaxException ex) {
-            LOGGER.info("the resource " + cssAbsolutePath + " can't be retrieved : URISyntaxException");
-            return null;
+            LOGGER.debug("the resource " + cssAbsolutePath + " can't be retrieved : URISyntaxException");
+            cssSourceCode = CSS_ON_ERROR;
         } catch (UnknownHostException uhe) {
-            LOGGER.info("the resource " + cssAbsolutePath + " can't be retrieved : UnknownHostException");
-            return null;
+            LOGGER.debug("the resource " + cssAbsolutePath + " can't be retrieved : UnknownHostException");
+            cssSourceCode = CSS_ON_ERROR;
         } catch (IOException ioe) {
-            LOGGER.info("the resource " + cssAbsolutePath + " can't be retrieved : IOException");
-            return null;
+            LOGGER.debug("the resource " + cssAbsolutePath + " can't be retrieved : IOException");
+            cssSourceCode = CSS_ON_ERROR;
+        } catch (IllegalCharsetNameException icne) {
+            LOGGER.debug("the resource " + cssAbsolutePath + " can't be retrieved : IllegalCharsetNameException");
+            cssSourceCode = CSS_ON_ERROR;
         }
         if (StringUtils.isEmpty(cssSourceCode)) {
-            LOGGER.info("the resource " + cssAbsolutePath + " has an empty content");
-            return null;
+            LOGGER.debug("the resource " + cssAbsolutePath + " has an empty content");
+            cssSourceCode = CSS_ON_ERROR;
         }
         StylesheetContent cssContent = getContentFactory().createStylesheetContent(
                 new Date(),

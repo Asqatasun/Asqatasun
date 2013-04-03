@@ -25,6 +25,7 @@ package org.opens.tanaguru.util.http;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
+import java.nio.charset.IllegalCharsetNameException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -136,7 +137,11 @@ public class HttpRequestHandler {
         }
     }
     
-    public String getHttpContent (String url) throws URISyntaxException, UnknownHostException, IOException {
+    public String getHttpContent (String url) throws URISyntaxException, UnknownHostException, IOException, IllegalCharsetNameException {
+        if (StringUtils.isEmpty(url)){
+            return "";
+        }
+        
         String encodedUrl = getEncodedUrl(url);
         DefaultHttpClient httpclient = getHttpClient(encodedUrl);
         try {
