@@ -26,10 +26,10 @@ $(document).ready(function() {
     data.reverse(); 
 
     // if not enough data to display show image sample and return 
-    if (data.length <2) {
-        $("#site-audit-history-graph-sample").show();
-        return;
-    }
+//    if (data.length <2) {
+//        $("#site-audit-history-graph-sample").show();
+//        return;
+//    }
     margin = {top: 20, right: 40, bottom: 100, left: 70};
     width = 1000 - margin.left - margin.right;
     height = 300 - margin.top - margin.bottom;

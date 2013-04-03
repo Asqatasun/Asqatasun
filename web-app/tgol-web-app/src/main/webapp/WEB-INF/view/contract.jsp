@@ -214,9 +214,9 @@
             <div class="row"> 
                 <div class="span16">
                     <div id="holder-site-audit-history-graph"></div>
-                    <div id="site-audit-history-graph-sample" style="display : none;">
+<!--                    <div id="site-audit-history-graph-sample" style="display : none;">
                         <img id="site-audit-history" src="${historicSampleImgUrl}" alt="<fmt:message key="contract.historicSampleImgAltAndTitle"/>" title="<fmt:message key="contract.historicSampleImgAltAndTitle"/>"/>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             </c:if>

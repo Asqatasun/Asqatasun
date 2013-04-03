@@ -24,10 +24,10 @@ $(document).ready(function() {
     });
     data.reverse(); 
     // if not enough data to display show image sample and return 
-    if (data.length <2) {
-        $("#site-audit-history-graph-sample").show();
-        return;
-    }
+//    if (data.length <2) {
+//        $("#site-audit-history-graph-sample").show();
+//        return;
+//    }
     margin = {top: 20, right: 30, bottom: 100, left: 50};
     width = 950 - margin.left - margin.right;
     height = 250 - margin.top - margin.bottom;
