@@ -1759,8 +1759,11 @@ input[type="text"]:focus{
     margin-left: 10px;
 }
 .process-remarks {
-    font-family: OpenSansBold;
+    font-family: OpenSansSemibold;
     font-size: 14px;
+}
+.process-remarks code {
+    font-size: 12px;
 }
 .rule-id h4{
     display : inline;
@@ -1990,6 +1993,10 @@ input[type="text"]:focus{
     margin-left: -25px;
     margin-top: -1px;
 }
+.back-link{
+    margin-bottom : 20px;
+    text-align: right;
+}
 /*
  * tables presenting excerpts for detailed results (by rule)
  * --------------------------------------------------
@@ -2046,7 +2053,8 @@ input[type="text"]:focus{
     color: #000020;
 }
 .html4strict {
-    font: 85% monospace;
+    font-size: 85%;
+    font-family: OpensSansLight;
     color: #000066;
     border: 1px solid #d0d0d0;
     background-color: #f0f0f0;
