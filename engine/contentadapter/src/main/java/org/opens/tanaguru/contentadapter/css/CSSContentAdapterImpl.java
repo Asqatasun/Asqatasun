@@ -22,7 +22,9 @@
 package org.opens.tanaguru.contentadapter.css;
 
 import com.thoughtworks.xstream.XStream;
+import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -500,7 +502,13 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         try {
             cssSourceCode = HttpRequestHandler.getInstance().getHttpContent(cssAbsolutePath);
         } catch (URISyntaxException ex) {
-            LOGGER.info("the resource " + cssAbsolutePath + " can't be retrieved");
+            LOGGER.debug("the resource " + cssAbsolutePath + " can't be retrieved : URISyntaxException");
+            return null;
+        } catch (UnknownHostException uhe) {
+            LOGGER.debug("the resource " + cssAbsolutePath + " can't be retrieved : UnknownHostException");
+            return null;
+        } catch (IOException ioe) {
+            LOGGER.debug("the resource " + cssAbsolutePath + " can't be retrieved : IOException");
             return null;
         }
         if (StringUtils.isEmpty(cssSourceCode)) {

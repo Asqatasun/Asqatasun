@@ -31,7 +31,9 @@ import com.phloc.css.parser.ParseException;
 import com.phloc.css.parser.TokenMgrError;
 import com.phloc.css.reader.CSSReader;
 import com.thoughtworks.xstream.XStream;
+import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 import java.util.*;
 import java.util.logging.Level;
@@ -320,10 +322,17 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      */
     private StylesheetContent createNewExternalStyleSheet(String cssAbsolutePath) {
         String cssSourceCode = "";
+        LOGGER.error( cssAbsolutePath );
         try {
             cssSourceCode = HttpRequestHandler.getInstance().getHttpContent(cssAbsolutePath);
         } catch (URISyntaxException ex) {
-            LOGGER.info("the resource " + cssAbsolutePath + " can't be retrieved");
+            LOGGER.info("the resource " + cssAbsolutePath + " can't be retrieved : URISyntaxException");
+            return null;
+        } catch (UnknownHostException uhe) {
+            LOGGER.info("the resource " + cssAbsolutePath + " can't be retrieved : UnknownHostException");
+            return null;
+        } catch (IOException ioe) {
+            LOGGER.info("the resource " + cssAbsolutePath + " can't be retrieved : IOException");
             return null;
         }
         if (StringUtils.isEmpty(cssSourceCode)) {
