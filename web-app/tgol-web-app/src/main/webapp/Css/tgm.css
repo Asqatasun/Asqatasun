@@ -1194,14 +1194,12 @@ input[type="text"]:focus{
      line-height: 18px;  
  }
  #synthesis-action-list {
-     margin-left: 0;
+     margin-left: 10px;
      margin-top: 2em;
+     font-size : 12px;
 }
-#synthesis-action-list li{
-    list-style: none;
-    margin-top: 1em;
-    margin-left : 0;
-    width : 140px;
+#synthesis-action-list .result-page-action {
+    color: #fff;
 }
 .audit-nb-of-pages {
     font-size: 150%;
@@ -1676,6 +1674,9 @@ input[type="text"]:focus{
     .bs-docs-sidenav > li:last-child {
         border-bottom: none;
     }
+}
+#tgm-result-site .separator {
+    margin-top: 30px;
 }
 /*
  * page : detailed-result (template)
