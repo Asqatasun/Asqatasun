@@ -389,7 +389,7 @@ public class AuditResultController extends AuditDataHandlerController {
                             hasSourceCodeWithDoctype,
                             true,
                             asuc.getSortOptionMap().get(themeSortKey).toString(),
-                            ((Collection)asuc.getSortOptionMap().get(testResultSortKey))));
+                            getTestResultSortSelection(asuc)));
         // Attributes for breadcrumb
         Contract contract = retrieveContractFromWebResource(site);
         model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());

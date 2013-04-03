@@ -72,7 +72,12 @@
                                 <c:otherwise>
                                     ${pageCounterLinkTitle}
                                 </c:otherwise>
-                            </c:choose>    
+                            </c:choose>
+                        <c:if test="${hasSiteScopeTest == 'true'}">
+                            <span id="synthesis-action-list">
+                                <a href="<c:url value="/home/contract/audit-result.html?wr=${wr}"/>" class="result-page-action"><spring:message code="synthesisSite.siteResults"/></a></li>
+                            </span>
+                        </c:if>                                        
                         </div>
                         </c:if>
                         <c:if test="${fn:length(statistics.parametersMap) != 0}">
@@ -120,11 +125,6 @@
                     <c:set var="hasScoreFormulaLink" scope="page" value="false"/>
                     <c:set var="spanClass" scope="page" value="span3"/>
                     <%@include file="../template/score.jsp" %>
-                    <c:if test="${hasSiteScopeTest == 'true'}">
-                    <ul id="synthesis-action-list">
-                        <li><a href="<c:url value="/home/contract/audit-result.html?wr=${wr}"/>" class="large awesome blue cmt"><spring:message code="synthesisSite.siteResults"/></a></li>
-                    </ul>
-                    </c:if>
                 </div> <!-- class="row" -->
                 <c:if test="${hasResultDispatchTitle == 'true'}">
                 <div class="row">
