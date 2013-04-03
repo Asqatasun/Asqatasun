@@ -29,6 +29,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.opens.tanaguru.contentadapter.html.AbstractHTMLCleaner;
 import org.opens.tanaguru.contentadapter.html.HTMLCleanerImpl;
+import org.opens.tanaguru.contentadapter.html.HTMLParserImpl;
 import org.opens.tanaguru.contentadapter.util.DocumentCaseInsensitiveAdapter;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.SSP;
@@ -131,7 +132,10 @@ public class ContentsAdapterImpl implements ContentsAdapter {
                     AbstractHTMLCleaner cleaner = new HTMLCleanerImpl();
                     cleaner.setDirtyHTML(ssp.getAdaptedContent());
                     cleaner.run();
+                    HTMLParser parser = new HTMLParserImpl(new HashSet<ContentAdapter>());
                     ssp.setAdaptedContent(DocumentCaseInsensitiveAdapter.removeLowerCaseTags(cleaner.getResult()));
+                    parser.setSSP(ssp);
+                    parser.run();
                 }
                 localResult.add(ssp);
             }
