@@ -407,8 +407,9 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
     private void adaptContent(StylesheetContent stylesheetContent, Resource resource, String currentLocalResourcePath) {
         if (stylesheetContent.getAdaptedContent() == null
                 && resource.getResource() != null && !resource.getResource().trim().isEmpty()) {
-            Charset charset = CSSReader.getCharsetDeclaredInCSS(new ByteArrayInputStreamProvider(resource.getResource().getBytes()));
+            Charset charset = null;
             try {
+                charset = CSSReader.getCharsetDeclaredInCSS(new ByteArrayInputStreamProvider(resource.getResource().getBytes()));
                 Logger.getLogger(this.getClass()).debug("is css valid CSS2 " + 
                         CSSReader.isValidCSS(resource.getResource(), ECSSVersion.CSS21) + " " + 
                         stylesheetContent.getURI());
