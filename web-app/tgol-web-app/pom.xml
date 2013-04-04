@@ -339,7 +339,7 @@
                                 </goals>
                                 <configuration>
                                     <tasks>
-                                        <scp file="${project.build.directory}/${project.build.finalName}.war" todir="${qa.deployPath}" remoteTofile="ROOT.war" keyfile="${qa.keyFile}" passphrase="${qa.passPhrase}" />
+                                        <scp file="${project.build.directory}/${project.build.finalName}.war" todir="${qa.deployPath}" keyfile="${qa.keyFile}" passphrase="${qa.passPhrase}" />
                                         <!-- see also: http://ant.apache.org/manual/Tasks/scp.html -->
                                         <exec executable="/bin/sh">
                                             <arg value="/root/bin/restart-tg-instance.sh"/>
