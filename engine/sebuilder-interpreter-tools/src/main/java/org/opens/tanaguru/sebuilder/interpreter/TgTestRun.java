@@ -202,14 +202,8 @@ public class TgTestRun extends TestRun {
         } catch (InterruptedException ex) {
             Logger.getLogger(TgTestRun.class.getName()).error(ex);
         }
-        String url;
         try {
-            url = getDriver().getCurrentUrl();
-        } catch (UnhandledAlertException uae) {
-            getDriver().switchTo().alert().dismiss();
-            url = getDriver().getCurrentUrl();
-        }
-        if (url != null) {
+            String url = getDriver().getCurrentUrl();
             String sourceCode = getDriver().getPageSource();
 
             Map<String, String> jsScriptResult = executeJsScripts();
@@ -217,6 +211,9 @@ public class TgTestRun extends TestRun {
             for (NewPageListener npl : newPageListeners) {
                 npl.fireNewPage(url, sourceCode, null, jsScriptResult);
             }
+        } catch (UnhandledAlertException uae) {
+            Logger.getLogger(this.getClass()).warn(uae.getMessage());
+            Logger.getLogger(this.getClass()).warn(uae.getAlertText());
         }
     }
 
