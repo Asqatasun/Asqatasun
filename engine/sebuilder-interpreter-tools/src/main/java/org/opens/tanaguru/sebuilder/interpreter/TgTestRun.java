@@ -39,6 +39,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
 /**
@@ -201,13 +202,21 @@ public class TgTestRun extends TestRun {
         } catch (InterruptedException ex) {
             Logger.getLogger(TgTestRun.class.getName()).error(ex);
         }
-        String url = getDriver().getCurrentUrl();
-        String sourceCode = getDriver().getPageSource();
+        String url;
+        try {
+            url = getDriver().getCurrentUrl();
+        } catch (UnhandledAlertException uae) {
+            getDriver().switchTo().alert().dismiss();
+            url = getDriver().getCurrentUrl();
+        }
+        if (url != null) {
+            String sourceCode = getDriver().getPageSource();
 
-        Map<String, String> jsScriptResult = executeJsScripts();
-//        byte[] snapshot = createPageSnapshot();
-        for (NewPageListener npl : newPageListeners) {
-            npl.fireNewPage(url, sourceCode, null, jsScriptResult);
+            Map<String, String> jsScriptResult = executeJsScripts();
+    //        byte[] snapshot = createPageSnapshot();
+            for (NewPageListener npl : newPageListeners) {
+                npl.fireNewPage(url, sourceCode, null, jsScriptResult);
+            }
         }
     }
 
