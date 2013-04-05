@@ -43,6 +43,18 @@ public interface AuditStatistics {
      * @param url
      */
     void setUrl(String url);
+    
+    /**
+     *
+     * @return
+     */
+    String getSnapshotUrl();
+
+    /**
+     *
+     * @param snapshotUrl
+     */
+    void setSnapshotUrl(String snapshotUrl);
 
     /**
      *

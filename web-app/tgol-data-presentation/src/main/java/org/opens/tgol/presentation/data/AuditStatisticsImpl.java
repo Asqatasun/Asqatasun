@@ -55,6 +55,28 @@ public class AuditStatisticsImpl implements AuditStatistics{
     public void setUrl(String url) {
         this.url = TgolEscapeUrl.escapeUrl(url);
     }
+    
+    /**
+     * The url of the checked page
+     */
+    private String snapshotUrl = null;
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String getSnapshotUrl() {
+        return snapshotUrl;
+    }
+
+    /**
+     *
+     * @param url
+     */
+    @Override
+    public void setSnapshotUrl(String snaphostUrl) {
+        this.snapshotUrl = TgolEscapeUrl.escapeUrl(snaphostUrl);
+    }
 
     /**
      * The final mark of the audit

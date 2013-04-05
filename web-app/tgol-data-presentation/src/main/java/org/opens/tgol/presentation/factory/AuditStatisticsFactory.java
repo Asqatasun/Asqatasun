@@ -147,11 +147,13 @@ public class AuditStatisticsFactory {
             auditStats.setDate(audit.getDateOfCreation());
             auditStats.setAuditScope(
                     actDataService.getActFromWebResource(webResource).getScope().getCode());
+            auditStats.setSnapshotUrl(webResource.getURL());
         } else if (webResource.getParent() != null) {
             audit = webResource.getParent().getAudit();
             auditStats.setDate(audit.getDateOfCreation());
             auditStats.setAuditScope(
                     actDataService.getActFromWebResource(webResource.getParent()).getScope().getCode());
+            auditStats.setSnapshotUrl(webResource.getParent().getURL());
         }
         auditStats.setRawMark(markFormatter(webResource, audit, true));
         auditStats.setWeightedMark(markFormatter(webResource, audit, false));

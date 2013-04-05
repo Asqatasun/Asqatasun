@@ -14,7 +14,7 @@
                 </div><!-- class="row"-->
                 </c:if>
                 <div id="synthesis-result" class="row">
-                    <c:set var="url" scope="page" value="${statistics.url}"/>
+                    <c:set var="url" scope="page" value="${statistics.snapshotUrl}"/>
                     <c:set var="scope" scope="page" value="${statistics.auditScope}"/>
                     <c:set var="proportion" scope="page" value="span5"/>
                     <c:set var="offset" scope="page" value="offset0"/>
@@ -24,7 +24,7 @@
                         <div id="project-url">
                     <c:choose>
                         <c:when test="${statistics.auditScope == 'GROUPOFFILES' || statistics.auditScope == 'FILE'}">
-                            <span class="synthesis-meta-title">Url : </span>${statistics.url}
+                            <span class="synthesis-meta-title"><fmt:message key="auditSetUp.file"/> : </span>${statistics.url}
                         </c:when>
                         <c:when test="${statistics.auditScope == 'SCENARIO'}">
                             <span class="synthesis-meta-title">Scenario : </span> ${statistics.url}
