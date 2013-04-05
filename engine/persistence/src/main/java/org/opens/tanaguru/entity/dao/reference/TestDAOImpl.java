@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.opens.tanaguru.entity.reference.*;
 import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
@@ -65,7 +66,9 @@ public class TestDAOImpl extends AbstractJPADAO<Test, Long> implements TestDAO {
         this.levelDAO = levelDAO;
         if (!bronzeLevelCodeByRefMap.isEmpty()) {
             for (Map.Entry<String, String> entry : bronzeLevelCodeByRefMap.entrySet()) {
-                this.bronzeLevelByRefMap.put(entry.getKey(), levelDAO.retrieveByCode(entry.getValue()));
+                try {
+                    this.bronzeLevelByRefMap.put(entry.getKey(), levelDAO.retrieveByCode(entry.getValue()));
+                } catch (NoResultException nre) {}
             }
         }
     }
@@ -77,7 +80,9 @@ public class TestDAOImpl extends AbstractJPADAO<Test, Long> implements TestDAO {
         this.bronzeLevelCodeByRefMap = bronzeLevelCodeByRefMap;
         if (levelDAO != null) {
             for (Map.Entry<String, String> entry : bronzeLevelCodeByRefMap.entrySet()) {
-                this.bronzeLevelByRefMap.put(entry.getKey(), levelDAO.retrieveByCode(entry.getValue()));
+                try {
+                    this.bronzeLevelByRefMap.put(entry.getKey(), levelDAO.retrieveByCode(entry.getValue()));
+                } catch (NoResultException nre) {}
             }
         }
     }
