@@ -23,7 +23,6 @@ package org.opens.tanaguru.rules.test;
 
 import org.opens.tanaguru.contentadapter.HTMLCleaner;
 import org.opens.tanaguru.contentadapter.HTMLCleanerFactory;
-import org.opens.tanaguru.contentadapter.html.HTMLJsoupCleanerImpl;
 
 /**
  *
@@ -33,7 +32,8 @@ public class HTMLCleanerFactoryImpl implements HTMLCleanerFactory {
 
     @Override
     public HTMLCleaner create() {
-        return new HTMLJsoupCleanerImpl();
+//        return new HTMLJsoupCleanerImpl();
+        return new HTMLCorrectorImpl();
     }
 
 }
