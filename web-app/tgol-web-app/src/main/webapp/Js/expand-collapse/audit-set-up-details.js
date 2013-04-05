@@ -19,9 +19,10 @@ $(document).ready(function() {
     });
     masterAuditOption.wrap(toggleOptionLink);
     
+    optionPanel = $('#'+auditOptionAnchorId);
     if (! masterAuditOption.hasClass('on-error')) {
         masterAuditOption.addClass('collapsed');
-        optionPanel = $('#'+auditOptionAnchorId).hide();
+        optionPanel.hide();
     } else {
         masterAuditOption.addClass('expanded');
     }
@@ -53,10 +54,11 @@ $(document).ready(function() {
             'aria-controls': auditInputAnchorId
         });
         masterAuditInput.wrap(toggleInputLink);
+        inputPanel = $('#'+auditInputAnchorId);
 
         if (! masterAuditInput.hasClass('on-error')) {
             masterAuditInput.addClass('collapsed');
-            inputPanel = $('#'+auditInputAnchorId).hide();
+            inputPanel.hide();
         } else {
             masterAuditInput.addClass('expanded');
         }
