@@ -7,7 +7,7 @@
     <bean id="scenarioLoaderFactory" class="org.opens.tanaguru.scenarioloader.ScenarioLoaderFactoryImpl">
         <property name="jsScriptMap">
             <map>
-                <entry key="colorExtractor" value="/js/colorExtractor.js"/>
+<!--                <entry key="colorExtractor" value="/js/colorExtractor.js"/>-->
             </map>
         </property>
     </bean>
