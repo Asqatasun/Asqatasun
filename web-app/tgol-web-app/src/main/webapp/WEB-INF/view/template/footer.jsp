@@ -3,9 +3,14 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+        <c:if test="${not empty configProperties['tanaguruVersion']}">
+            <c:set var="tanaguruVersion">
+                ${configProperties['tanaguruVersion']}
+            </c:set>    
+        </c:if>
         <footer>
             <div id="footer-down">
-                &copy; 2009-2012 <a href="http://www.Open-S.com/">Open-S</a> - <fmt:message key="footer.poweredBy"/> <a href="http://www.tanaguru.org/">Tanaguru</a> - <fmt:message key="footer.availableUnder"/> <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU AGPL v3</a>
+                &copy; 2009-2012 <a href="http://www.Open-S.com/">Open-S</a> - <fmt:message key="footer.poweredBy"/> <a href="http://www.tanaguru.org/">Tanaguru v${tanaguruVersion}</a> - <fmt:message key="footer.availableUnder"/> <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU AGPL v3</a>
             </div>
         </footer>
         <c:if test="${not empty configProperties['google-analytics-code']}">
