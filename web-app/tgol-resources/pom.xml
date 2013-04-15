@@ -23,6 +23,14 @@
                     <exclude>**/sql/*</exclude>
                     <exclude>**/lib/*</exclude>
                     <exclude>**/conf/tgol.conf</exclude>
+                    <exclude>**/conf/*.properties</exclude>
+                    <exclude>**/sql-management/*</exclude>
+                    <exclude>**/sql-update/*</exclude>
+                    <exclude>**/runtime-lib/*</exclude>
+                    <exclude>**/password-encoder/*</exclude>
+                    <exclude>**/installation/*</exclude>
+                    <exclude>**/token-master-key-encryptor/*</exclude>
+                    <exclude>**/browser-installation/*</exclude>
                 </excludes>
             </resource>
         </resources>
