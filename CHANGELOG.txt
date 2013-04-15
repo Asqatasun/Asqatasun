@@ -2,6 +2,7 @@
 Tanaguru 2.1.1, 2013-04-15
 --------------------------
 Bugs:
+#589 -> syntax of web.xml invalid (https://dev.tanaguru.org/redmine/issues/589)
 #588 -> Provide a mechanism to avoid multiple form validation when submitting an audit (https://dev.tanaguru.org/redmine/issues/588)
 #587 -> Downgrade version of commons-collections due to compatibily issue encountered on deployment on Jboss (https://dev.tanaguru.org/redmine/issues/587)
 #540 -> CastException occured while auditing multiple files. (https://dev.tanaguru.org/redmine/issues/540)
