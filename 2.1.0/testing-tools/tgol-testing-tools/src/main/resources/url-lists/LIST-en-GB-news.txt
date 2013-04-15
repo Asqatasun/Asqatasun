@@ -1,0 +1,7 @@
+euronews;http://www.euronews.net/
+Guardians;http://www.guardian.co.uk/
+Times;http://www.timesonline.co.uk/tol/news/
+The-independant;http://www.independent.co.uk/
+Financial-times;http://www.ft.com/home/europe
+BBC;http://www.bbc.co.uk/
+Nature;http://www.nature.com/

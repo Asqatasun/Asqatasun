@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="auditServiceThreadQueue" class="org.opens.tanaguru.service.AuditServiceThreadQueueImpl">
+        <!-- audit limit parameters -->
+        <property name="pageAuditExecutionListMax" value="${maxSimultaneousAuditPage}"/>
+        <property name="siteAuditExecutionListMax" value="${maxSimultaneousAuditSite}"/>
+        <property name="scenarioAuditExecutionListMax" value="${maxSimultaneousAuditScenario}"/>
+        <property name="uploadAuditExecutionListMax" value="${maxSimultaneousAuditUpload}"/>
+    </bean>
+
+    <bean id="auditServiceThreadFactory" class="org.opens.tanaguru.service.AuditServiceThreadFactoryImpl"/>
+
+    <bean id="auditService" class="org.opens.tanaguru.service.AuditServiceImpl"/>
+
+    <bean id="auditCommandFactory" class="org.opens.tanaguru.service.command.factory.AuditCommandFactoryImpl">
+        <property name="auditPageWithCrawler" value="false"/>
+        <property name="adaptationTreatmentWindow" value="4"/>
+        <property name="processingTreatmentWindow" value="4"/>
+        <property name="consolidationTreatmentWindow" value="200"/>
+        <property name="analyseTreatmentWindow" value="10"/>
+    </bean>
+
+</beans>

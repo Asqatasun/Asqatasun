@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.opens</groupId>
+        <artifactId>tanaguru</artifactId>
+        <version>2.1.0</version>
+    </parent>
+    <groupId>org.opens</groupId>
+    <artifactId>testing-tools</artifactId>
+    <packaging>pom</packaging>
+    <version>2.1.0</version>
+    <name>testing-tools</name>
+    <url>http://www.tanaguru.org</url>
+    <modules>
+        <module>rules-testing-tools</module>
+        <module>maven-kbcsv-plugin</module>
+        <module>maven-testgenerator-plugin</module>
+        <module>tgol-testing-tools</module>
+<!--        <module>tgol-test-scenario</module>-->
+<!--        <module>tgol-test-kbaccess-campaign</module>
+        <module>tgol-test-krash-offline</module>
+        <module>tgol-test-krash-online</module>
+        <module>tgol-test-krash-online-multipage</module>-->
+    </modules>
+</project>

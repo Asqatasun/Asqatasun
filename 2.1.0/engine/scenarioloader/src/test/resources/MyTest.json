@@ -1,0 +1,51 @@
+{
+  "seleniumVersion": "2",
+  "formatVersion": 1,
+  "steps": [
+    {
+      "type": "get",
+      "url": "http://my.tanaguru.com/"
+    },
+    {
+      "type": "storePageSource",
+      "variable": ""
+    },
+    {
+      "type": "sendKeysToElement",
+      "locator": {
+        "type": "id",
+        "value": "j_username"
+      },
+      "text": "grom83@gmail.com"
+    },
+    {
+      "type": "sendKeysToElement",
+      "locator": {
+        "type": "id",
+        "value": "j_password"
+      },
+      "text": "T0NY_g059"
+    },
+    {
+      "type": "submitElement",
+      "locator": {
+        "type": "name",
+        "value": "Login"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "link text",
+        "value": "Tanaguru Agence"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "xpath",
+        "value": "//table[@id='audit-actions']//a[.='  Audit pages ']"
+      }
+    }
+  ]
+}

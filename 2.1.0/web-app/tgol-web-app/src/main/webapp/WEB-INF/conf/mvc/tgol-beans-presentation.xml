@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <!-- data presentation factories -->
+    
+    <bean id="actInfoFactory" class="org.opens.tgol.presentation.factory.ActInfoFactory" factory-method="getInstance"/>
+    <bean id="auditStatisticsFactory" class="org.opens.tgol.presentation.factory.AuditStatisticsFactory" factory-method="getInstance"/>
+    <bean id="contractInfoFactory" class="org.opens.tgol.presentation.factory.ContractInfoFactory" factory-method="getInstance"/>
+    <bean id="detailedContractInfoFactory" class="org.opens.tgol.presentation.factory.DetailedContractInfoFactory" factory-method="getInstance"/>
+    <bean id="failedPageInfoFactory" class="org.opens.tgol.presentation.factory.FailedPageInfoFactory" factory-method="getInstance"/>
+    <bean id="failedTestInfoFactory" class="org.opens.tgol.presentation.factory.FailedTestInfoFactory" factory-method="getInstance"/>
+    <bean id="failedThemeInfoFactory" class="org.opens.tgol.presentation.factory.FailedThemeInfoFactory" factory-method="getInstance"/>
+    <bean id="pageResultFactory" class="org.opens.tgol.presentation.factory.PageResultFactory" factory-method="getInstance"/>
+    <bean id="remarksInfosFactory" class="org.opens.tgol.presentation.factory.RemarkInfosFactory" factory-method="getInstance"/>
+    <bean id="resultCounterFactory" class="org.opens.tgol.presentation.factory.ResultCounterFactory" factory-method="getInstance"/>
+    <bean id="testResultFactory" class="org.opens.tgol.presentation.factory.TestResultFactory" factory-method="getInstance"/>
+    <bean id="tgolPaginatedListFactory" class="org.opens.tgol.report.pagination.factory.TgolPaginatedListFactory" factory-method="getInstance"/>
+
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="detailedContractInfoFactory"/>
+        </property>
+        <property name="targetMethod">
+            <value>setNbMaxActRestrictionCode</value>
+        </property>
+        <property name="arguments">
+            <list>
+                <value>NB_OF_AUDIT_TO_DISPLAY</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>

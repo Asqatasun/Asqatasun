@@ -1,0 +1,171 @@
+/*
+ * Tanaguru - Automated webpage assessment
+ * Copyright (C) 2008-2011  Open-S Company
+ *
+ * This file is part of Tanaguru.
+ *
+ * Tanaguru is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact us by mail: open-s AT open-s DOT com
+ */
+package org.opens.tgol.command.factory;
+
+import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.*;
+import org.apache.commons.lang.StringUtils;
+import org.opens.tanaguru.entity.reference.Test;
+import org.opens.tgol.command.ChangeTestWeightCommand;
+import org.opens.tgol.entity.option.Option;
+import org.opens.tgol.entity.option.OptionElement;
+import org.opens.tgol.entity.service.option.OptionDataService;
+import org.opens.tgol.entity.service.option.OptionElementDataService;
+import org.opens.tgol.entity.service.user.UserDataService;
+import org.opens.tgol.entity.user.User;
+
+/**
+ *
+ * @author jkowalczyk
+ */
+public class ChangeTestWeightCommandFactory  implements Serializable {
+
+    private static ChangeTestWeightCommandFactory changeTestWeightCommandFactory;
+    
+    private String optionFamilyCodeStr = "TEST_WEIGHT_MANAGEMENT";
+    public void setOptionFamilyCodeStr(String optionFamilyCodeStr) {
+        this.optionFamilyCodeStr = optionFamilyCodeStr;
+    }
+    
+    private OptionElementDataService optionElementDataService;
+    public OptionElementDataService getOptionElementDataService() {
+        return optionElementDataService;
+    }
+
+    public void setOptionElementDataService(OptionElementDataService optionElementDataService) {
+        this.optionElementDataService = optionElementDataService;
+    }
+    
+    private OptionDataService optionDataService;
+    public OptionDataService getOptionDataService() {
+        return optionDataService;
+    }
+
+    public void setOptionDataService(OptionDataService optionDataService) {
+        this.optionDataService = optionDataService;
+    }
+    
+    private UserDataService userDataService;
+    public UserDataService getUserDataService() {
+        return userDataService;
+    }
+
+    public void setUserDataService(UserDataService userDataService) {
+        this.userDataService = userDataService;
+    }
+    
+    /**
+     * Factory has default constructor
+     */
+    private ChangeTestWeightCommandFactory() {
+    }
+
+    public static synchronized ChangeTestWeightCommandFactory getInstance() {
+        if (changeTestWeightCommandFactory == null) {
+            changeTestWeightCommandFactory = new ChangeTestWeightCommandFactory();
+        }
+        return changeTestWeightCommandFactory;
+    }
+
+    /**
+     * 
+     * @param user
+     * @param locale
+     * @param testList
+     * @param referentialKey
+     * @return 
+     *      an initialised instance of ChangeTestWeightCommand
+     */
+    public ChangeTestWeightCommand getChangeTestWeightCommand(
+            User user, 
+            Locale locale,
+            Collection<Test> testList, 
+            String referentialKey) {
+        Map<String, String> userTestWeight = new HashMap<String, String>();
+        NumberFormat nf = NumberFormat.getNumberInstance(locale);
+        nf.setMinimumFractionDigits(1);
+        nf.setMaximumFractionDigits(1);
+        nf.setMaximumIntegerDigits(1);
+        nf.setMinimumIntegerDigits(1);
+        for (OptionElement oe : optionElementDataService.getOptionElementFromUserAndFamilyCode(user, referentialKey+"_"+optionFamilyCodeStr)) {
+            userTestWeight.put(
+                    oe.getOption().getCode(), 
+                    nf.format(Double.valueOf(oe.getValue())));
+        }
+        for (Test test : testList) {
+            if (!userTestWeight.containsKey(test.getCode())) {
+                userTestWeight.put(test.getCode(), "");
+            }
+        }
+        
+        ChangeTestWeightCommand changeTestWeightCommand = 
+                new ChangeTestWeightCommand();
+        changeTestWeightCommand.setTestWeightMap(userTestWeight);
+        return changeTestWeightCommand;
+    }
+
+    /**
+     * 
+     * @param user
+     * @param changeTestWeightCommand
+     */
+    public void updateUserTestWeight(
+            User user,
+            ChangeTestWeightCommand changeTestWeightCommand) {
+
+        Collection<OptionElement> userOptionElementSet = 
+                optionElementDataService.getOptionElementFromUser(user);
+        // first we need to remove the option elements associated with the user
+        // that are going to be updated
+        Iterator<OptionElement> iter = userOptionElementSet.iterator();
+        // To preserve the unmodified options, we only remove from the current
+        // option element set the one that are overridden by changeTestWeightCommand
+        // testWeightMap.
+        while (iter.hasNext()) {
+            OptionElement oe = iter.next();
+            if (changeTestWeightCommand.getTestWeightMap().containsKey(oe.getOption().getCode()) && 
+                   !StringUtils.isEmpty(changeTestWeightCommand.getTestWeightMap().get(oe.getOption().getCode()))) {
+                iter.remove();
+            }
+        }
+        for (Map.Entry<String, String> entry : changeTestWeightCommand.getTestWeightMap().entrySet()) {
+            if (!StringUtils.isEmpty(entry.getValue())) {
+                String value = entry.getValue().replaceAll(",", ".");
+                Option option = optionDataService.getOption(entry.getKey());
+                OptionElement oe = optionElementDataService.getOptionElementFromValueAndOption(
+                        value, 
+                        option);
+                if (oe == null) {
+                    oe = optionElementDataService.create();
+                    oe.setOption(option);
+                    oe.setValue(value);
+                    optionElementDataService.saveOrUpdate(oe);
+                }
+                userOptionElementSet.add(oe);
+            }
+        }
+        user.addAllOptionElement(userOptionElementSet);
+        userDataService.saveOrUpdate(user);
+    }
+
+}

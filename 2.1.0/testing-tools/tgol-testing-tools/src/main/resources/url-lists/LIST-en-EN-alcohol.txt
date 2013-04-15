@@ -1,0 +1,7 @@
+Martini;http://www.martini.com/
+Smirnoff;https://www.smirnoff.com/index.aspx
+Eristoff;http://www.eristoff.com/ageVerify.aspx
+J&B;http://www.jbscotch.com/
+Label-5;http://www.label-5.com/
+Jack-Daniels;http://www.jackdaniels.com/age.aspx?ReturnUrl=%2fDefault.aspx
+Grants;http://www.grantswhisky.com/

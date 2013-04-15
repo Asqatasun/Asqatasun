@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+    <TGSI_ROLE Id_Role="1" Role_Name="Role1" />
+    <TGSI_ROLE Id_Role="2" Role_Name="Role2" ROLE_Id_Role="1"/>
+    <TGSI_ROLE Id_Role="3" Role_Name="Role3" ROLE_Id_Role="1"/>
+
+    <TGSI_USER Id_User="1" Email1="test1@test.com" Password="FSDFSFQQSFQFS" Name="Test1" Address="1 rue du test" Phone_Number="0612345678" ROLE_Id_Role="1" Activated="false"/>
+    <TGSI_USER Id_User="2" Email1="test2@test.com" Password="dfsdfdsfsddsfqsd" Name="Test2" Address="2 rue du test" Phone_Number="0689123456" ROLE_Id_Role="2" Activated="true"/>
+    <TGSI_USER Id_User="3" Email1="test3@test.com" Password="dfdfsdfdscbvbvcnyjy" Name="Test3" Address="3 rue du test" Phone_Number="0678912345" Activated="true"/>
+
+    <TGSI_SCOPE Id_Scope="1" Code="DOMAIN" Label="Site"/>
+    <TGSI_SCOPE Id_Scope="2" Code="PAGE" Label="Page"/>
+
+    <TGSI_REFERENTIAL Id_Referential="1" Code="REF1" Label="Referential 1"/>
+    <TGSI_REFERENTIAL Id_Referential="2" Code="REF2" Label="Referential 2"/>
+    
+    <TGSI_FUNCTIONALITY Id_Functionality="1" Code="PAGES_AUDIT" Label="Pages audit functionality"/>
+    <TGSI_FUNCTIONALITY Id_Functionality="2" Code="SITE_AUDIT" Label="Site audit functionality" />
+
+    <TGSI_CONTRACT Id_Contract="1" Label="Contract1" Begin_Date="2011-01-01 00:00:00" End_Date="2012-01-01 23:59:59" USER_Id_User="1" Price="1000000.32" />
+    <TGSI_CONTRACT Id_Contract="2" Label="Contract2" Begin_Date="2011-01-01 13:50:29" End_Date="2011-06-30 23:59:59" USER_Id_User="1"/>
+
+    <TGSI_CONTRACT_FUNCTIONALITY CONTRACT_Id_Contract="1" FUNCTIONALITY_Id_Functionality="1"/>
+    <TGSI_CONTRACT_FUNCTIONALITY CONTRACT_Id_Contract="2" FUNCTIONALITY_Id_Functionality="1"/>
+    <TGSI_CONTRACT_FUNCTIONALITY CONTRACT_Id_Contract="2" FUNCTIONALITY_Id_Functionality="2"/>
+    
+    <TGSI_CONTRACT_REFERENTIAL CONTRACT_Id_Contract="1" REFERENTIAL_Id_REFERENTIAL="1"/>
+    <TGSI_CONTRACT_REFERENTIAL CONTRACT_Id_Contract="2" REFERENTIAL_Id_REFERENTIAL="1"/>
+    <TGSI_CONTRACT_REFERENTIAL CONTRACT_Id_Contract="2" REFERENTIAL_Id_REFERENTIAL="2"/>
+    
+    <TGSI_SCENARIO Id_Scenario="1" Date_Of_Creation="2011-01-01 00:00:00" Label="My Scenario 1" Content="Scenario Content" CONTRACT_Id_Contract="2"/>
+    <TGSI_SCENARIO Id_Scenario="2" Date_Of_Creation="2011-01-01 00:00:00" Label="My Scenario 2" Content="Scenario Content" CONTRACT_Id_Contract="2"/>
+    
+    <TGSI_OPTION_FAMILY Id_Option_Family="1" Code="DOMAIN" Label="" Description=""/>
+    <TGSI_OPTION_FAMILY Id_Option_Family="2" Code="USER_OPTION" Label="" Description=""/>
+    <TGSI_OPTION Id_Option="1" Code="DOMAIN" Is_Restriction="false" OPTION_FAMILY_Id_Option_Family="1"/>
+    <TGSI_OPTION Id_Option="2" Code="USER_OPTION1" Is_Restriction="false" OPTION_FAMILY_Id_Option_Family="2"/>
+    <TGSI_OPTION_ELEMENT Id_Option_Element="1" OPTION_Id_Option="1" Value="http://www.contract1.com/"/>
+    <TGSI_OPTION_ELEMENT Id_Option_Element="2" OPTION_Id_Option="1" Value="http://www.contract2.com/"/>
+    <TGSI_OPTION_ELEMENT Id_Option_Element="3" OPTION_Id_Option="2" Value="userOption1"/>
+    <TGSI_OPTION_ELEMENT Id_Option_Element="4" OPTION_Id_Option="2" Value="userOption2"/>
+    <TGSI_OPTION_ELEMENT Id_Option_Element="5" OPTION_Id_Option="2" Value="userOption3"/>
+    
+    <TGSI_CONTRACT_OPTION_ELEMENT CONTRACT_Id_Contract="1" OPTION_ELEMENT_Id_Option_Element="1"/>
+    <TGSI_CONTRACT_OPTION_ELEMENT CONTRACT_Id_Contract="2" OPTION_ELEMENT_Id_Option_Element="2"/>
+    <TGSI_USER_OPTION_ELEMENT USER_Id_User="1" OPTION_ELEMENT_Id_Option_Element="3"/>
+    <TGSI_USER_OPTION_ELEMENT USER_Id_User="1" OPTION_ELEMENT_Id_Option_Element="4"/>
+    <TGSI_USER_OPTION_ELEMENT USER_Id_User="2" OPTION_ELEMENT_Id_Option_Element="5"/>
+
+    <TGSI_ACT Id_Act="1" Begin_Date="2011-01-01 00:00:00" End_Date="2011-01-01 01:00:00" CONTRACT_Id_Contract="1" Status="COMPLETED" Scope_Id_Scope="1" Client_Ip="127.0.0.1"/>
+    <TGSI_ACT Id_Act="2" Begin_Date="2011-01-01 00:00:01" End_Date="2011-01-01 01:00:01" CONTRACT_Id_Contract="1" Status="COMPLETED" Scope_Id_Scope="1" Client_Ip="127.0.0.1"/>
+    <TGSI_ACT Id_Act="3" Begin_Date="2011-01-01 00:00:02" CONTRACT_Id_Contract="1" Status="RUNNING" Scope_Id_Scope="2" Client_Ip="127.0.0.1"/>
+    <TGSI_ACT Id_Act="4" Begin_Date="2011-01-01 00:00:03" CONTRACT_Id_Contract="2" Status="RUNNING" Scope_Id_Scope="2" Client_Ip="127.0.0.1"/>
+    <TGSI_ACT Id_Act="5" Begin_Date="2011-01-01 00:00:04" CONTRACT_Id_Contract="2" Status="RUNNING" Scope_Id_Scope="1" Client_Ip="127.0.0.1"/>
+    <TGSI_ACT Id_Act="6" Begin_Date="2011-01-01 00:00:05" CONTRACT_Id_Contract="2" Status="RUNNING" Scope_Id_Scope="1" Client_Ip="127.0.0.1"/>
+    <TGSI_ACT Id_Act="7" Begin_Date="2011-01-01 00:00:05" End_Date="2011-01-01 01:00:05" CONTRACT_Id_Contract="1" Status="COMPLETED" Scope_Id_Scope="1" Client_Ip="127.0.0.1"/>
+
+    <AUDIT Id_Audit="1" Dt_Creation="2010-10-26 13:50:29" Status="COMPLETED"/>
+    <AUDIT Id_Audit="2" Dt_Creation="2010-10-26 14:50:29" Status="COMPLETED"/>
+    <AUDIT Id_Audit="3" Dt_Creation="2010-10-26 15:50:29" Status="COMPLETED"/>
+    <AUDIT Id_Audit="4" Dt_Creation="2010-10-26 15:50:29" Status="ERROR"/>
+
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="1" Label="NULL" Url="http://www.open-s.com/" Id_Audit="1" Mark="50" Rank="1"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="2" Label="NULL" Url="http://www.open-s.com/" Id_Audit="2" Mark="75" Rank="1"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="3" Label="NULL" Url="http://www.mock-url.com/" Id_Audit="3" Mark="51" Rank="1"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="4" Label="NULL" Url="http://www.mock-url1.com/" Id_Audit="4" Mark="12" Rank="1"/>
+
+    <TGSI_ACT_WEB_RESOURCE ACT_Id_Act="1" WEB_RESOURCE_Id_Web_Resource="1"/>
+    <TGSI_ACT_WEB_RESOURCE ACT_Id_Act="2" WEB_RESOURCE_Id_Web_Resource="2"/>
+    <TGSI_ACT_WEB_RESOURCE ACT_Id_Act="3" WEB_RESOURCE_Id_Web_Resource="3"/>
+    <TGSI_ACT_WEB_RESOURCE ACT_Id_Act="7" WEB_RESOURCE_Id_Web_Resource="4"/>
+
+</dataset>

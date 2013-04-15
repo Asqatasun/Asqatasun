@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:component-scan
+        base-package="org.opens.tgol.controller"/>
+
+    <bean id="homeController" class="org.opens.tgol.controller.HomeController">
+<!--        <property name="actionHandler" ref="homeActionHandler"/>-->
+        <property name="displayOptionFieldsBuilderList">
+            <list>
+                <ref bean="displayContractElementSelectFormFieldBuilder"/>
+                <ref bean="displayContractOrderSelectFormFieldBuilder"/>
+                <ref bean="inclusionRegexpContractFormFieldBuilder"/>
+                <ref bean="exclusionRegexpContractFormFieldBuilder"/>
+            </list>
+        </property>
+<!--        <property name="exclusionContractSortKey" value="label-exclusion-choice"/>
+        <property name="inclusionContractSortKey" value="label-inclusion-choice"/>
+        <property name="sortByKey" value="sort-by-choice"/>
+        <property name="sortOrderKey" value="order-choice"/>
+        <property name="lastAuditMarkSortValue" value="mark"/>
+        <property name="lastAuditDateSortValue" value="date"/>-->
+    </bean>
+
+    <bean id="contractController" class="org.opens.tgol.controller.ContractController">
+        <property name="authorizedFunctionalityForTrend">
+            <list>
+                <value>DOMAIN</value>
+                <value>SCENARIO</value>
+            </list>
+        </property>
+        <property name="actionHandler" ref="contractActionHandler"/>
+    </bean>
+
+    <bean id="pageListController" class="org.opens.tgol.controller.PageListController">
+        <property name="authorizedPageSizeList">
+            <list>
+                <value>10</value>
+                <value>25</value>
+                <value>50</value>
+                <value>100</value>
+                <value>250</value>
+                <value>1000</value>
+                <value>-1</value>
+            </list>
+        </property>
+        <property name="authorizedScopeForPageList">
+            <list>
+                <value>DOMAIN</value>
+                <value>SCENARIO</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="auditResultController" class="org.opens.tgol.controller.AuditResultController">
+        <property name="parametersToDisplay">
+            <map>
+                <entry key="LEVEL">
+                    <value>level</value>
+                </entry>
+                <entry key="DATA_TABLE_MARKER">
+                    <value>data-table</value>
+                </entry>
+            </map>
+        </property>
+        <property name="authorizedScopeForPageList">
+            <list>
+                <value>DOMAIN</value>
+                <value>SCENARIO</value>
+            </list>
+        </property>
+        <property name="actionHandler" ref="resultActionHandler"/>
+        <property name="formFieldBuilderList">
+            <list>
+                <ref bean="aw21ThemeSelectThemeSelectFormFieldBuilder"/>
+                <ref bean="seoThemeSelectThemeSelectFormFieldBuilder"/>
+                <ref bean="testResultSelectThemeSelectFormFieldBuilder"/>
+            </list>
+        </property>
+        <property name="themeSortKey" value="theme"/>
+        <property name="testResultSortKey" value="test-result"/>
+    </bean>
+
+    <bean id="auditSynthesisController" class="org.opens.tgol.controller.AuditSynthesisController">
+        <property name="nbOfDisplayedFailedTest" value="5"/>
+        <property name="nbOfDisplayedFailedPages" value="10"/>
+        <property name="parametersToDisplay">
+            <map>
+                <entry key="LEVEL">
+                    <value>level</value>
+                </entry>
+                <entry key="DEPTH">
+                    <value>depth</value>
+                </entry>
+                <entry key="MAX_DURATION">
+                    <value>max-duration</value>
+                </entry>
+                <entry key="MAX_DOCUMENTS">
+                    <value>max-documents</value>
+                </entry>
+                <entry key="EXCLUSION_REGEXP">
+                    <value>exclusion-regexp</value>
+                </entry>
+                <entry key="DATA_TABLE_MARKER">
+                    <value>data-table</value>
+                </entry>
+            </map>
+        </property>
+        <property name="authorizedScopeForSynthesis">
+            <list>
+                <value>DOMAIN</value>
+                <value>SCENARIO</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="auditSetUpController" class="org.opens.tgol.controller.AuditSetUpController">
+        <property name="referentialAndLevelFormFieldBuilderList">
+            <ref bean="levelSelectFormFieldBuilder"/>
+        </property>
+        <property name="siteOptionFormFieldBuilderMap">
+            <map>
+                <entry key="marker-parameters">
+                    <list>
+                        <ref bean="dataTableParamBuilder"/>
+                    </list>
+                </entry>
+                <entry key="crawl-parameters">
+                    <list>
+                        <ref bean="depthParamBuilder"/>
+                        <ref bean="maxDurationParamBuilder"/>
+                        <ref bean="maxDocumentsParamBuilder"/>
+                        <ref bean="exclusionRegexpParamBuilder"/>
+                    </list>
+                </entry>
+            </map>
+        </property>
+        <property name="pageOptionFormFieldBuilderMap">
+            <map>
+                <entry key="marker-parameters">
+                    <list>
+                        <ref bean="dataTableParamBuilder"/>
+                    </list>
+                </entry>
+            </map>
+        </property>
+        <property name="uploadOptionFormFieldBuilderMap">
+            <map>
+                <entry key="marker-parameters">
+                    <list>
+                        <ref bean="dataTableParamBuilder"/>
+                    </list>
+                </entry>
+            </map>
+        </property>
+        <property name="auditPageSetUpValidator">
+            <ref bean="auditPageSetUpFormValidator"/>
+        </property>
+        <property name="auditSiteSetUpValidator">
+            <ref bean="auditSiteSetUpFormValidator"/>
+        </property>
+        <property name="auditUploadSetUpValidator">
+            <ref bean="auditUploadSetUpFormValidator"/>
+        </property>
+<!--        <property name="auditScenarioSetUpValidator">
+            <ref bean="auditScenarioSetUpFormValidator"/>
+        </property>-->
+        <property name="viewFunctionalityBindingMap">
+            <map>
+                <entry key="audit-page-set-up">
+                    <value>PAGES</value>
+                </entry>    
+                <entry key="audit-site-set-up">
+                    <value>DOMAIN</value>
+                </entry>    
+                <entry key="audit-upload-set-up">
+                    <value>UPLOAD</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="auditScenarioController" class="org.opens.tgol.controller.AuditScenarioController">
+        <property name="referentialAndLevelFormFieldBuilderList">
+            <ref bean="levelSelectFormFieldBuilder"/>
+        </property>
+        <property name="scenarioOptionFormFieldBuilderMap">
+            <map>
+                <entry key="marker-parameters">
+                    <list>
+                        <ref bean="dataTableParamBuilder"/>
+                    </list>
+                </entry>
+            </map>
+        </property>
+        <property name="viewFunctionalityBindingMap">
+            <map>
+                <entry key="audit-scenario-set-up">
+                    <value>SCENARIO</value>
+                </entry>
+            </map>
+        </property>
+        <property name="auditSiteSetUpValidator">
+            <ref bean="auditSiteSetUpFormValidator"/>
+        </property>
+    </bean>
+    
+    <bean id="auditExportResultController" class="org.opens.tgol.controller.AuditExportResultController">
+        <property name="parametersToDisplay">
+            <map>
+                <entry key="LEVEL">
+                    <value>level</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="auditLauncherController" class="org.opens.tgol.controller.AuditLauncherController">
+        <property name="userOptionDependingOnReferential">
+            <list>
+                <value>TEST_WEIGHT_MANAGEMENT</value>
+            </list>
+        </property>
+        <property name="userOption">
+            <list></list>
+        </property>
+    </bean>
+    
+    <bean id="signUpController" class="org.opens.tgol.controller.SignUpController">
+        <property name="createUserFormValidator">
+            <ref bean="createUserFormValidator"/>
+        </property>
+    </bean>
+    
+    <bean id="accountSettingsController" class="org.opens.tgol.controller.AccountSettingsController">
+        <property name="createUserFormValidator">
+            <ref bean="createUserFormValidator"/>
+        </property>
+        <property name="forbiddenUserList">
+            <list>
+                <value>guest</value>
+            </list>
+        </property>
+        <property name="changeTestWeightFormValidator">
+            <ref bean="changeTestWeightFormValidator"/>
+        </property>
+    </bean>
+    
+    <bean id="userManagementController" class="org.opens.tgol.controller.UserManagementController">
+        <property name="createUserFormValidator">
+            <ref bean="createUserFormValidator"/>
+        </property>
+        <property name="createContractFormValidator">
+            <ref bean="createContractFormValidator"/>
+        </property>
+        <property name="contractOptionFormFieldBuilderMap">
+            <map>
+                <entry key="general-options">
+                    <list>
+                        <ref bean="nbMaxAuditsPerContractOptionBuilder"/>
+                        <ref bean="nbMaxActsToDisplayPerContractOptionBuilder"/>
+                    </list>
+                </entry>
+                <entry key="crawl-options">
+                    <list>
+                        <ref bean="depthOptionBuilder"/>
+                        <ref bean="maxDurationOptionBuilder"/>
+                        <ref bean="maxDocumentsOptionBuilder"/>
+                        <ref bean="exclusionRegexpOptionBuilder"/>
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="contractManagementController" class="org.opens.tgol.controller.ContractManagementController">
+        <property name="createContractFormValidator">
+            <ref bean="createContractFormValidator"/>
+        </property>
+        <property name="displayOptionFieldsBuilderList">
+            <list>
+                <ref bean="displayContractOrderSelectFormFieldBuilder"/>
+                <ref bean="inclusionRegexpContractFormFieldBuilder"/>
+                <ref bean="exclusionRegexpContractFormFieldBuilder"/>
+            </list>
+        </property>
+        <property name="contractOptionFormFieldBuilderMap">
+            <map>
+                <entry key="general-options">
+                    <list>
+                        <ref bean="nbMaxAuditsPerContractOptionBuilder"/>
+                        <ref bean="nbMaxActsToDisplayPerContractOptionBuilder"/>
+                    </list>
+                </entry>
+                <entry key="crawl-options">
+                    <list>
+                        <ref bean="depthOptionBuilder"/>
+                        <ref bean="maxDurationOptionBuilder"/>
+                        <ref bean="maxDocumentsOptionBuilder"/>
+                        <ref bean="exclusionRegexpOptionBuilder"/>
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="forgottenOrChangePasswordController" class="org.opens.tgol.controller.ForgottenOrChangePasswordController">
+        <property name="forbiddenUserList">
+            <list>
+                <value>guest</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>

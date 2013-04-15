@@ -1,0 +1,10 @@
+handicap-fr;http://www.handicap.fr/
+festical-handica;http://www.festival-handica.fr/
+handicanal;http://www.handicanal.net/
+discrimination-europe;http://ec.europa.eu/employment_social/fdad/cms/stopdiscrimination?langid=fr
+handicap-international;http://www.handicap-international.fr/
+handicap-org;http://www.handicap.org/
+handicap-zero;http://www.handicapzero.org/
+agefiph;http://www.agefiph.fr/index.php?nav1=accueil
+cecite;http://www.cecite.org/
+gihplr;http://www.gihplr.org/

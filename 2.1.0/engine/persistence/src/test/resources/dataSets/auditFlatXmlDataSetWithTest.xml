@@ -1,0 +1,72 @@
+<!DOCTYPE dataset SYSTEM "src/test/resources/dataSets/test.dtd">
+<dataset>
+
+    <REFERENCE Id_Reference="1" Cd_Reference="01" Description="" Label="Ref 1.0" Rank="1" Url="http://www.mock-ref1.org/"/>
+
+    <THEME Id_Theme="1" Cd_Theme="01" Label="Theme1" Rank="1"/>
+    <THEME Id_Theme="2" Cd_Theme="02" Label="Theme2" Rank="2"/>
+
+    <CRITERION Id_Criterion="1" Reference_Id_Reference="1" Theme_Id_Theme="1" Cd_Criterion="0101" Description="Critere 1.1" Label="1.1" Url="http://www.mock-criterion1.org/" Rank="1"/>
+    <CRITERION Id_Criterion="2" Reference_Id_Reference="1" Theme_Id_Theme="2" Cd_Criterion="0102" Description="Critere 1.2" Label="1.2" Url="http://www.mock-criterion2.org/" Rank="2"/>
+
+    <SCOPE Id_Scope="1" Code="page" Description="page" Label="Page" />
+    <SCOPE Id_Scope="2" Code="site" Description="site" Label="Site" />
+
+    <TEST Id_Test="1" Cd_Test="010101" Description="Test 1.1.1" Label="1.1.1" Rank="1" Id_Criterion="1" Id_Scope="2"/>
+    <TEST Id_Test="2" Cd_Test="010102" Description="Test 1.1.2" Label="1.1.2" Rank="2" Id_Criterion="2" Id_Scope="1"/>
+    <TEST Id_Test="3" Cd_Test="010103" Description="Test 1.1.3" Label="1.1.3" Rank="3" Id_Criterion="1" Id_Scope="2"/>
+    <TEST Id_Test="4" Cd_Test="010104" Description="Test 1.1.4" Label="1.1.4" Rank="4" Id_Criterion="2" Id_Scope="1"/>
+    <TEST Id_Test="5" Cd_Test="010105" Description="Test 1.1.5" Label="1.1.5" Rank="5" Id_Criterion="1" Id_Scope="1"/>
+    <TEST Id_Test="6" Cd_Test="010106" Description="Test 1.1.6" Label="1.1.6" Rank="6" Id_Criterion="2" Id_Scope="1"/>
+    <TEST Id_Test="7" Cd_Test="010107" Description="Test 1.1.7" Label="1.1.7" Rank="7" Id_Criterion="2" Id_Scope="1"/>
+    <TEST Id_Test="8" Cd_Test="010108" Description="Test 1.1.8" Label="1.1.8" Rank="8" Id_Criterion="1" Id_Scope="1"/>
+    <TEST Id_Test="9" Cd_Test="010109" Description="Test 1.1.9" Label="1.1.9" Rank="9" Id_Criterion="2" Id_Scope="1"/>
+    <TEST Id_Test="10" Cd_Test="010110" Description="Test 1.1.10" Label="1.1.10" Rank="10" Id_Criterion="2" Id_Scope="1"/>
+
+    <AUDIT Id_Audit="1" Dt_Creation="2010-10-26 13:50:29" Status="COMPLETED"/>
+    <AUDIT Id_Audit="2" Dt_Creation="2010-10-26 14:50:29" Status="COMPLETED"/>
+
+    <AUDIT_TEST Id_Audit="1" Id_Test="1"/>
+    <AUDIT_TEST Id_Audit="1" Id_Test="2"/>
+    <AUDIT_TEST Id_Audit="1" Id_Test="3"/>
+    <AUDIT_TEST Id_Audit="1" Id_Test="4"/>
+    <AUDIT_TEST Id_Audit="1" Id_Test="5"/>
+    <AUDIT_TEST Id_Audit="1" Id_Test="6"/>
+    <AUDIT_TEST Id_Audit="1" Id_Test="7"/>
+    <AUDIT_TEST Id_Audit="1" Id_Test="8"/>
+    <AUDIT_TEST Id_Audit="1" Id_Test="9"/>
+    <AUDIT_TEST Id_Audit="1" Id_Test="10"/>
+    <AUDIT_TEST Id_Audit="2" Id_Test="1"/>
+    <AUDIT_TEST Id_Audit="2" Id_Test="2"/>
+    <AUDIT_TEST Id_Audit="2" Id_Test="3"/>
+    <AUDIT_TEST Id_Audit="2" Id_Test="4"/>
+    <AUDIT_TEST Id_Audit="2" Id_Test="5"/>
+    <AUDIT_TEST Id_Audit="2" Id_Test="6"/>
+    <AUDIT_TEST Id_Audit="2" Id_Test="7"/>
+    <AUDIT_TEST Id_Audit="2" Id_Test="8"/>
+    <AUDIT_TEST Id_Audit="2" Id_Test="9"/>
+    <AUDIT_TEST Id_Audit="2" Id_Test="10"/>
+
+    <WEB_RESOURCE DTYPE="SiteImpl" Id_Web_Resource="1" Label="NULL" Url="http://www.mock-url1.org/" Id_Audit="1" Mark="50" Rank="0"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="2" Label="NULL" Url="http://www.mock-url2.org/" Id_Audit="2" Mark="50" Rank="1"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="5" Label="NULL" Url="http://www.mock-url2.org/" Mark="50" Id_Web_Resource_Parent="1" Rank="1"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="6" Label="NULL" Url="http://www.mock-url4.org/" Mark="75" Id_Web_Resource_Parent="1" Rank="2"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="7" Label="NULL" Url="http://www.mock-url5.org/" Mark="51" Id_Web_Resource_Parent="1" Rank="3"/>
+
+    <CONTENT DTYPE="SSPImpl"                Id_Content="1" Uri="http://www.mock-url.org/1.html" Id_Page="5" Http_Status_Code="-1"/>
+    <CONTENT DTYPE="SSPImpl"                Id_Content="2" Uri="http://www.mock-url.org/2.html" Id_Page="6" Http_Status_Code="-1"/>
+    <CONTENT DTYPE="StylesheetContentImpl"  Id_Content="3" Uri="http://www.mock-url.org/css1.css" Http_Status_Code="-1"/>
+    <CONTENT DTYPE="ImageContentImpl"       Id_Content="4" Uri="http://www.mock-url.org/image.jpg" Http_Status_Code="-1"/>
+    <CONTENT DTYPE="RelatedContentImpl"     Id_Content="5" Uri="http://www.mock-url.org/unknown" Http_Status_Code="-1"/>
+    <CONTENT DTYPE="RelatedContentImpl"     Id_Content="6" Uri="http://www.mock-url.org/unknown" Http_Status_Code="-1"/>
+    <CONTENT DTYPE="SSPImpl"                Id_Content="7" Uri="http://www.mock-url.org/2.html" Id_Page="2" Http_Status_Code="-1"/>
+    <CONTENT DTYPE="StylesheetContentImpl"  Id_Content="8" Uri="http://www.mock-url1.org/css2.css" Http_Status_Code="-1"/>
+
+    <CONTENT_RELATIONSHIP Id_Content_Parent="1" Id_Content_Child="3"/>
+    <CONTENT_RELATIONSHIP Id_Content_Parent="1" Id_Content_Child="4"/>
+    <CONTENT_RELATIONSHIP Id_Content_Parent="1" Id_Content_Child="5"/>
+    <CONTENT_RELATIONSHIP Id_Content_Parent="2" Id_Content_Child="3"/>
+    <CONTENT_RELATIONSHIP Id_Content_Parent="2" Id_Content_Child="4"/>
+    <CONTENT_RELATIONSHIP Id_Content_Parent="7" Id_Content_Child="8"/>
+
+</dataset>

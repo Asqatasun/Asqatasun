@@ -1,0 +1,167 @@
+/* Tanaguru Manager CSS: tgm.css
+ * 20110110 mfaure
+*/
+
+/*
+ * Utils
+ * ==============================================
+*/
+
+.clearfix {height:1%}
+.clearfix:after {
+    content:".";
+    height:0;
+    line-height:0;
+    display:block;
+    visibility:hidden;
+    clear:both;
+}
+
+/*
+ * HTML tags
+ * ==============================================
+*/
+
+a {color:#1A1A8B;}
+
+a img:link {text-decoration: none;}
+a:link img {text-decoration: none;}
+
+h1 {color:#8E0000; font-size: 182%;}
+
+code {
+    font-family: monospace;
+    font-weight: bold;
+}
+
+th, td {border: none;}
+
+/*
+ * Classes
+ * ==============================================
+*/
+.grade-a {color:#3BA94C;} /* >90% */
+.grade-b {color:#819F44;} /* <90% */
+.grade-c {color:#AC922E;} /* <80% */
+.grade-d {color:#D77B3E;} /* <70% */
+.grade-e {color:#BB4A12;} /* <60% */
+.grade-f {color:#D02D2D;} /* <50% */
+
+.link-underline a {text-decoration: none;}
+.link-underline a:hover {text-decoration: underline;}
+
+/*
+ * Layout
+ * ==============================================
+*/
+
+html {
+    background: #C0D8E1 url(../Images/background-gradient.png) repeat-x;
+}
+
+body.tgm {
+    margin:auto;
+    width: 960px;
+}
+
+#meta-border {
+    background: white;
+    border: solid 1px silver;
+    margin: 0.5em 0 5em;
+    padding: 0.5em 0.5em 2em;
+}
+
+/*
+ * Header
+ * ==============================================
+*/
+#hd {
+    width: 100%;
+    margin: 0.5em 0 0 0;
+}
+
+#login-box {
+    text-align: right;
+}
+
+#logout-icon {
+    vertical-align: bottom;
+}
+
+/*
+* Body
+* ==============================================
+*/
+
+/*
+ * Footer
+ * ==============================================
+*/
+#ft {
+    width: 100%;
+    /*border-top: solid 1px #8F0000;*/
+    margin: 5em 0em 0.5em;
+    /*padding: 0.5em;*/
+    text-align: center;
+}
+
+/*
+ * Page: home client
+ * ==============================================
+*/
+.one-project {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 1em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px dotted silver;
+}
+
+.project-screenshot {
+    float: left;
+    margin: 0 15px 0 0;
+}
+
+.project-name {
+    margin:0 0 0.5em 0;
+}
+
+.project-score {
+    font-size: 300%;
+    font-weight: bold;
+    text-align: right;
+    margin-bottom: 0.3em;
+}
+.one-project .project-score {
+    vertical-align: bottom;
+}
+
+.project-status.running {
+    padding-left: 20px;
+    background: 0 50% url(../Images/gears-running.png) no-repeat;
+}
+
+/*
+ * Page: panel (my project)
+ * ==============================================
+*/
+
+.my-project-layout {
+    width:90%;
+    margin:auto;
+}
+
+#myproject {
+
+}
+
+#audit-actions {
+    margin-top: 1em;
+    width: 80%;
+}
+
+#audit-actions td {
+    text-align: center;
+}
+
+#audit-actions a:hover img {text-decoration: none;}

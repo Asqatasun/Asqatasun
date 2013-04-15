@@ -1,0 +1,82 @@
+                   ------------------------------
+                             Tanaguru
+                            Version 2.1.0
+                  ------------------------------
+
+1. Web Resources
+================
+
+Tanaguru's home page is at:
+
+	http://www.tanaguru.org/
+
+Please be sure to visit this site for information, documentation, news, etc.
+All things about tanaguru are available from there.
+
+The latest version and the sources of Tanaguru can be found at:
+
+	http://www.tanaguru.org/download/
+
+If you think you found a bug in this version, please make sure that it
+hasn't been reported earlier and that it is not just new stuff that is
+still being worked on and obviously not quite finished yet.
+
+Our bugtracker can be found at :
+
+        https://dev.tanaguru.org/redmine/
+
+2. Mailing Lists
+================
+
+We have a mailing lists dedicated to Tanaguru user and development
+discussion. To subscribe, send an empty message to :
+
+	tanaguru-users-fr@lists.adullact.net
+
+3. Build 
+========
+
+For detailed build instructions, please refer to the wiki documentation
+that can be found at :
+
+        http://www.tanaguru.org/en/content/how-build
+
+4. Installation
+===============
+
+For detailed installation instructions, please refer to the wiki documentation
+that can be found at :
+
+        http://www.tanaguru.org/content/installation
+
+5. Configuration
+================
+
+For detailed installation instructions, please refer to the wiki documentation
+that can be found at :
+
+	http://www.tanaguru.org/en/content/configuration
+
+To upgrade from version 2.0.0, please follow the instructions at : 
+
+	http://www.tanaguru.org/en/content/upgrade-20x-210
+
+6. Content of the version 
+=========================
+
+Bugs:
+#516 : site-wide exports: add "page+site" results (https://dev.tanaguru.org/redmine/issues/516)
+#327 : Error on adaptation encountered on some pages of a site audit causes Fatal error in processor component (https://dev.tanaguru.org/redmine/issues/327)
+
+Features:
+#524 -> Provide a UI to override test weights for a given user  (https://dev.tanaguru.org/redmine/issues/524)
+#523 -> Add weight field to the TEST entity and use it to compute the raw mark  (https://dev.tanaguru.org/redmine/issues/523)
+#522 -> Provide a page that lists the pages invalidating a given test  (https://dev.tanaguru.org/redmine/issues/522)
+#520 -> Provide a back office interface  (https://dev.tanaguru.org/redmine/issues/520)
+#515 -> list of pages: change link destination (audit // page itself)  (https://dev.tanaguru.org/redmine/issues/515)
+#514 -> Bar graph on page audit-synthesis: put red at the bottom  (https://dev.tanaguru.org/redmine/issues/514)
+#416 -> Avoid the usage of type wildcard  (https://dev.tanaguru.org/redmine/issues/416)
+#271 -> Add console to the project-page  (https://dev.tanaguru.org/redmine/issues/271)
+
+Have Fun
+Tanaguru team

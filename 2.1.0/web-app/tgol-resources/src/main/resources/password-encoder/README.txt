@@ -1,0 +1,1 @@
+java -jar jacksum.jar -a md5 -q "txt:$USER_PASSORD"

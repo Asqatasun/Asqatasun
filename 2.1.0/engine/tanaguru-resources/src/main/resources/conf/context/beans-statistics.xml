@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="testStatisticsDAO" class="org.opens.tanaguru.entity.dao.statistics.TestStatisticsDAOImpl"/>
+    <bean id="testStatisticsService" class="org.opens.tanaguru.entity.service.statistics.TestStatisticsDataServiceImpl">
+        <property name="entityDao" ref="testStatisticsDAO"/>
+        <property name="entityFactory" ref="testStatisticsFactory"/>
+    </bean>
+
+    <bean id="themeStatisticsDAO" class="org.opens.tanaguru.entity.dao.statistics.ThemeStatisticsDAOImpl"/>
+    <bean id="themeStatisticsDataService" class="org.opens.tanaguru.entity.service.statistics.ThemeStatisticsDataServiceImpl">
+        <property name="entityDao" ref="themeStatisticsDAO"/>
+        <property name="entityFactory" ref="themeStatisticsFactory"/>
+    </bean>
+
+    <bean id="webResourceStatisticsDAO" class="org.opens.tanaguru.entity.dao.statistics.WebResourceStatisticsDAOImpl"/>
+    <bean id="webResourceStatisticsDataService" class="org.opens.tanaguru.entity.service.statistics.WebResourceStatisticsDataServiceImpl">
+        <property name="entityDao" ref="webResourceStatisticsDAO"/>
+        <property name="entityFactory" ref="webResourceStatisticsFactory"/>
+    </bean>
+
+</beans>
