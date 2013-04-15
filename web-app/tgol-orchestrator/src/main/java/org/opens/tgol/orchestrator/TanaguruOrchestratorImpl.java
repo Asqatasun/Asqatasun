@@ -25,8 +25,6 @@ import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.MapUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
@@ -801,7 +799,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         @Override
         public Audit launchAudit() {
             Audit audit = null;
-            if (CollectionUtils.isNotEmpty(this.pageUrlList)) {
+            if (!this.pageUrlList.isEmpty()) {
                 audit = this.getAuditService().auditSite(
                         this.siteUrl,
                         this.pageUrlList,
@@ -866,7 +864,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         @Override
         public Audit launchAudit() {
             Audit audit = null;
-            if (MapUtils.isNotEmpty(pageMap)) {
+            if (!pageMap.isEmpty()) {
                 audit = this.getAuditService().auditPageUpload(
                         this.pageMap,
                         this.getParameterSet());
