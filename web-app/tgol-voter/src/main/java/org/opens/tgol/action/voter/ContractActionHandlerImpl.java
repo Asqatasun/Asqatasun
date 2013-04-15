@@ -22,6 +22,7 @@
 package org.opens.tgol.action.voter;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import org.apache.commons.lang.StringUtils;
@@ -59,7 +60,7 @@ public class ContractActionHandlerImpl implements ActionHandler {
             return null;
         }
         List<Action> userContractActionList = getActionList();
-        Set<? extends Functionality> functionalitySet = 
+        Collection<Functionality> functionalitySet = 
                 ((Contract)object).getFunctionalitySet();
         for (Action action : userContractActionList) {
             activateAction(action, functionalitySet);
@@ -79,7 +80,7 @@ public class ContractActionHandlerImpl implements ActionHandler {
      */
     private void activateAction(
             Action action,
-            Set<? extends Functionality> functionalitySet) {
+            Collection<Functionality> functionalitySet) {
         for (Functionality functionality : functionalitySet) {
             if (StringUtils.equals(action.getActionCode(), functionality.getCode())) {
                 action.setActionEnabled(true);

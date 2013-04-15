@@ -132,6 +132,10 @@ public final class TgolPaginatedListFactory {
      *
      */
     public static final String PAGE_PARAM = "page";
+    /**
+     *
+     */
+    public static final String INVALID_TEST_PARAM = "test";
 
     /**
      * Unique instance of TgolPaginatedListFactory
@@ -185,6 +189,7 @@ public final class TgolPaginatedListFactory {
             String sortCriterion,
             String pageNumber,
             String containingValue,
+            String invalidTestLabel,
             Collection<Integer> authorizedPageSize,
             Collection<String> authorizedSortCriterion,
             long idAudit) {
@@ -194,6 +199,7 @@ public final class TgolPaginatedListFactory {
         int totalNumberOfElements = webResourceDataService.getWebResourceCountByAuditAndHttpStatusCode(
                 idAudit,
                 httpStatusCode,
+                invalidTestLabel,
                 containingValue).intValue();
 
         // we check the parameters of the request and populate the pageResultList object
@@ -213,12 +219,12 @@ public final class TgolPaginatedListFactory {
                 webResourceDataService.getWebResourceListByAuditAndHttpStatusCode(
                 idAudit,
                 httpStatusCode,
+                invalidTestLabel,
                 startElement,
                 paginatedList.getObjectsPerPage(),
-                paginatedList.getSortDirection().getCode(),
+                paginatedList.getSortDirection(),
                 paginatedList.getSortCriterion(),
                 containingValue));
-
         return paginatedList;
     }
 

@@ -18,10 +18,10 @@
 </c:choose>
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="oupsImg1Url" value="${configProperties['cdnUrl']}/Images/oups1.jpg"/>
-        <c:set var="oupsImg2Url" value="${configProperties['cdnUrl']}/Images/oups2.jpg"/>
-        <c:set var="oupsImg3Url" value="${configProperties['cdnUrl']}/Images/oups3.jpg"/>
-        <c:set var="creativeCommonLogoUrl" value="${configProperties['cdnUrl']}/Images/creative_common_logo.png"/>
+        <c:set var="oupsImg1Url" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/oups1.jpg"/>
+        <c:set var="oupsImg2Url" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/oups2.jpg"/>
+        <c:set var="oupsImg3Url" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/oups3.jpg"/>
+        <c:set var="creativeCommonLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/creative_common_logo.png"/>
     </c:when>
     <c:otherwise>
         <c:set var="oupsImg1Url">

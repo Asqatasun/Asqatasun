@@ -22,19 +22,13 @@
 package org.opens.tanaguru.entity.reference;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.math.BigDecimal;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * 
+ *
  * @author jkowalczyk
  */
 @Entity
@@ -43,39 +37,40 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class TestImpl implements Test, Serializable {
 
     @Column(name = "Cd_Test")
-    protected String code;
+    private String code;
     @ManyToOne
     @JoinColumn(name = "Id_Criterion")
-    protected CriterionImpl criterion;
+    private CriterionImpl criterion;
     @ManyToOne
     @JoinColumn(name = "Id_Decision_Level")
-    protected DecisionLevelImpl decisionLevel;
+    private DecisionLevelImpl decisionLevel;
     @Column(name = "Description")
-    protected String description;
+    private String description;
     @Id
     @GeneratedValue
     @Column(name = "Id_Test")
-    protected Long id;
+    private Long id;
     @Column(name = "Label")
-    protected String label;
+    private String label;
     @ManyToOne
     @JoinColumn(name = "Id_Level")
-    protected LevelImpl level;
+    private LevelImpl level;
     @Column(name = "Rank")
-    protected int rank;
+    private int rank;
     @ManyToOne
     @JoinColumn(name = "Id_Rule")
-    protected RuleImpl rule;
+    private RuleImpl rule;
     @Column(name = "Rule_Archive_Name")
-    protected String ruleArchiveName;
+    private String ruleArchiveName;
     @Column(name = "Rule_Class_Name")
-    protected String ruleClassName;
+    private String ruleClassName;
     @ManyToOne
     @JoinColumn(name = "Id_Scope")
-    protected ScopeImpl scope;
+    private ScopeImpl scope;
     @Column(name = "Rule_Design_Url")
-    protected String ruleDesignUrl;
-
+    private String ruleDesignUrl;
+    @Column(name = "Weight", precision=2, scale=1)
+    private BigDecimal weight;
 
     public TestImpl() {
         super();
@@ -88,30 +83,34 @@ public class TestImpl implements Test, Serializable {
         this.description = description;
     }
 
+    @Override
     public String getCode() {
         return this.code;
     }
 
+    @Override
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.CriterionImpl.class)
     public Criterion getCriterion() {
         return this.criterion;
     }
-
+    
+    @Override
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.DecisionLevelImpl.class)
     public DecisionLevel getDecisionLevel() {
         return this.decisionLevel;
     }
 
+    @Override
     public String getDescription() {
         return this.description;
     }
 
     /**
      *
-     * @return
-     * @deprecated
+     * @return @deprecated
      */
     @Deprecated
+    @Override
     public String getFullCode() {
         if (criterion == null) {
             return "";
@@ -124,94 +123,127 @@ public class TestImpl implements Test, Serializable {
                 + this.getCode();
     }
 
+    @Override
     public Long getId() {
         return this.id;
     }
 
+    @Override
     public String getLabel() {
         return this.label;
     }
 
+    @Override
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.LevelImpl.class)
     public Level getLevel() {
         return this.level;
     }
 
+    @Override
     public int getRank() {
         return rank;
     }
 
+    @Override
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.RuleImpl.class)
     public Rule getRule() {
         return this.rule;
     }
 
+    @Override
     public String getRuleArchiveName() {
         return ruleArchiveName;
     }
 
+    @Override
     public String getRuleClassName() {
         return ruleClassName;
     }
 
+    @Override
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.ScopeImpl.class)
     public Scope getScope() {
         return this.scope;
     }
 
+    @Override
     public String getRuleDesignUrl() {
         return this.ruleDesignUrl;
     }
+    
+    @Override
+    public BigDecimal getWeight() {
+        return this.weight;
+    }
 
+    @Override
     public void setCode(String code) {
         this.code = code;
     }
 
+    @Override
     public void setCriterion(Criterion criterion) {
         this.criterion = (CriterionImpl) criterion;
     }
 
+    @Override
     public void setDecisionLevel(DecisionLevel decisionLevel) {
         this.decisionLevel = (DecisionLevelImpl) decisionLevel;
     }
 
+    @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
+    @Override
     public void setLabel(String label) {
         this.label = label;
     }
 
+    @Override
     public void setLevel(Level priority) {
         this.level = (LevelImpl) priority;
     }
 
+    @Override
     public void setRank(int rank) {
         this.rank = rank;
     }
 
+    @Override
     public void setRule(Rule rule) {
         this.rule = (RuleImpl) rule;
     }
 
+    @Override
     public void setRuleArchiveName(String ruleArchiveName) {
         this.ruleArchiveName = ruleArchiveName;
     }
 
+    @Override
     public void setRuleClassName(String ruleClassName) {
         this.ruleClassName = ruleClassName;
     }
 
+    @Override
     public void setScope(Scope scope) {
         this.scope = (ScopeImpl) scope;
     }
 
+    @Override
     public void setRuleDesignUrl(String ruleDesignUrl) {
         this.ruleDesignUrl = ruleDesignUrl;
     }
+    
+    @Override
+    public void setWeight(BigDecimal weight) {
+        this.weight = weight;
+    }
+    
 }

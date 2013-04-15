@@ -57,6 +57,11 @@
                                         </a>
                                     </td>
                                         </c:when>
+                                        <c:when test="${evidenceElement2.key == 'Url'}">
+                                    <td class="r${testCode}-col-${evidenceElement2.key}">
+                                        <a href="${evidenceElement2.value}">${evidenceElement2.value}</a>
+                                    </td>
+                                        </c:when>
                                         <c:otherwise>
                                     <td class="r${testCode}-col-${evidenceElement2.key}">${fn:escapeXml(fn:replace(evidenceElement2.value, "&", "&amp;"))}</td>
                                         </c:otherwise>

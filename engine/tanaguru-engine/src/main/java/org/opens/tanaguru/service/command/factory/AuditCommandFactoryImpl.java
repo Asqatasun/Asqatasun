@@ -134,6 +134,31 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
         this.auditPageWithCrawler = auditPageWithCrawler;
     }
     
+    public static final int ANALYSE_TREATMENT_WINDOW = 10;
+    public static final int PROCESSING_TREATMENT_WINDOW = 4;
+    public static final int ADAPTATION_TREATMENT_WINDOW = 4;
+    public static final int CONSOLIDATION_TREATMENT_WINDOW = 200;
+    
+    private int adaptationTreatmentWindow = ADAPTATION_TREATMENT_WINDOW;
+    public void setAdaptationTreatmentWindow(int adaptationTreatmentWindow) {
+        this.adaptationTreatmentWindow = adaptationTreatmentWindow;
+    }
+
+    private int analyseTreatmentWindow = ANALYSE_TREATMENT_WINDOW;
+    public void setAnalyseTreatmentWindow(int analyseTreatmentWindow) {
+        this.analyseTreatmentWindow = analyseTreatmentWindow;
+    }
+
+    private int consolidationTreatmentWindow = CONSOLIDATION_TREATMENT_WINDOW;
+    public void setConsolidationTreatmentWindow(int consolidationTreatmentWindow) {
+        this.consolidationTreatmentWindow = consolidationTreatmentWindow;
+    }
+
+    private int processingTreatmentWindow = PROCESSING_TREATMENT_WINDOW;
+    public void setProcessingTreatmentWindow(int processingTreatmentWindow) {
+        this.processingTreatmentWindow = processingTreatmentWindow;
+    }
+    
     @Override
     public AuditCommand create(String url, Set<Parameter> paramSet, boolean isSite) {
         if (isSite) {
@@ -151,7 +176,11 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
                     processorService, 
                     consolidatorService, 
                     analyserService, 
-                    adaptationListener);
+                    adaptationListener, 
+                    adaptationTreatmentWindow, 
+                    processingTreatmentWindow, 
+                    consolidationTreatmentWindow, 
+                    analyseTreatmentWindow);
         } else if (auditPageWithCrawler) {
             return new PageAuditCrawlerCommandImpl(
                     url, 
@@ -167,7 +196,11 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
                     processorService, 
                     consolidatorService, 
                     analyserService, 
-                    adaptationListener);
+                    adaptationListener, 
+                    adaptationTreatmentWindow, 
+                    processingTreatmentWindow, 
+                    consolidationTreatmentWindow, 
+                    analyseTreatmentWindow);
         } else {
             return new PageAuditCommandImpl(
                     url, 
@@ -183,7 +216,11 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
                     processorService, 
                     consolidatorService, 
                     analyserService, 
-                    adaptationListener);
+                    adaptationListener, 
+                    adaptationTreatmentWindow, 
+                    processingTreatmentWindow, 
+                    consolidationTreatmentWindow, 
+                    analyseTreatmentWindow);
         }
     }
 
@@ -203,7 +240,11 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
                 processorService, 
                 consolidatorService, 
                 analyserService, 
-                adaptationListener);
+                adaptationListener, 
+                adaptationTreatmentWindow, 
+                processingTreatmentWindow, 
+                consolidationTreatmentWindow, 
+                analyseTreatmentWindow);
     }
 
     @Override
@@ -224,7 +265,11 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
                 processorService, 
                 consolidatorService, 
                 analyserService, 
-                adaptationListener);
+                adaptationListener, 
+                adaptationTreatmentWindow, 
+                processingTreatmentWindow, 
+                consolidationTreatmentWindow, 
+                analyseTreatmentWindow);
         } else {
             return new GroupOfPagesAuditCommandImpl(
                 siteUrl, 
@@ -241,7 +286,11 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
                 processorService, 
                 consolidatorService, 
                 analyserService, 
-                adaptationListener);
+                adaptationListener, 
+                adaptationTreatmentWindow, 
+                processingTreatmentWindow, 
+                consolidationTreatmentWindow, 
+                analyseTreatmentWindow);
         }
     }
 
@@ -262,7 +311,11 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
                 processorService, 
                 consolidatorService, 
                 analyserService, 
-                adaptationListener);
+                adaptationListener, 
+                adaptationTreatmentWindow, 
+                processingTreatmentWindow, 
+                consolidationTreatmentWindow, 
+                analyseTreatmentWindow);
     }
 
 }

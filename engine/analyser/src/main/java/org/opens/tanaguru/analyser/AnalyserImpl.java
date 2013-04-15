@@ -21,6 +21,8 @@
  */
 package org.opens.tanaguru.analyser;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -28,6 +30,7 @@ import java.util.Set;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
@@ -71,6 +74,9 @@ public class AnalyserImpl implements Analyser {
         this.webResourceStatisticsDataService = webResourceStatisticsDataService;
     }
 
+    /**
+     * The ThemeStatisticsDataService instance
+     */
     private ThemeStatisticsDataService themeStatisticsDataService;
     public ThemeStatisticsDataService getThemeStatisticsDataService() {
         return themeStatisticsDataService;
@@ -80,6 +86,9 @@ public class AnalyserImpl implements Analyser {
             ThemeStatisticsDataService themeStatisticsDataService) {
     }
 
+    /**
+     * THe testStatisticsDataService instance
+     */
     private TestStatisticsDataService testStatisticsDataService;
     public TestStatisticsDataService getTestStatisticsDataService() {
         return testStatisticsDataService;
@@ -89,6 +98,9 @@ public class AnalyserImpl implements Analyser {
             TestStatisticsDataService testStatisticsDataService) {
     }
 
+    /**
+     * The auditDataService instance
+     */
     private AuditDataService auditDataService;
     public AuditDataService getAuditDataService() {
         return auditDataService;
@@ -98,17 +110,27 @@ public class AnalyserImpl implements Analyser {
         this.auditDataService = auditDataService;
     }
 
+    /**
+     * the set of audit parameters that handles some overridden values for
+     * test weight (needed to compute the raw mark)
+     */
+    private Collection<Parameter> paramSet;
+
+    private static BigDecimal ZERO = BigDecimal.valueOf(Double.valueOf(0.0));
+    
     public AnalyserImpl(
             AuditDataService auditDataService,
             TestStatisticsDataService testStatisticsDataService,
             ThemeStatisticsDataService themeStatisticsDataService,
             WebResourceStatisticsDataService webResourceStatisticsDataService,
-            WebResource webResource) {
+            WebResource webResource,
+            Collection<Parameter> paramSet) {
         this.auditDataService = auditDataService;
         this.testStatisticsDataService = testStatisticsDataService;
         this.themeStatisticsDataService = themeStatisticsDataService;
         this.webResourceStatisticsDataService = webResourceStatisticsDataService;
         this.setWebResource(webResource);
+        this.paramSet = paramSet;
     }
 
     @Override
@@ -145,7 +167,7 @@ public class AnalyserImpl implements Analyser {
     }
 
     @Override
-    public void setWebResource(WebResource webResource) {
+    public final void setWebResource(WebResource webResource) {
         this.webResource = webResource;
         if (webResource instanceof Site) {
             this.audit = webResource.getAudit();
@@ -202,10 +224,37 @@ public class AnalyserImpl implements Analyser {
         int nbOfNa = webResourceStatisticsDataService.
                     getResultCountByResultType(webResource.getId(),
                     TestSolution.NOT_APPLICABLE).intValue();
+        
+        BigDecimal weightedPassed = webResourceStatisticsDataService.
+                    getWeightedResultByResultType(
+                        webResource.getId(),
+                        paramSet,
+                        TestSolution.PASSED);
+        
+        BigDecimal weightedFailed = webResourceStatisticsDataService.
+                    getWeightedResultByResultType(
+                        webResource.getId(),
+                        paramSet,
+                        TestSolution.FAILED);
+        
+        BigDecimal weightedNa = webResourceStatisticsDataService.
+                    getWeightedResultByResultType(
+                        webResource.getId(),
+                        paramSet,
+                        TestSolution.NOT_APPLICABLE);
+        
+        BigDecimal weightedNmi = webResourceStatisticsDataService.
+                    getWeightedResultByResultType(
+                        webResource.getId(),
+                        paramSet,
+                        TestSolution.NEED_MORE_INFO);
         // if no test have been processed for any reason, mostly cause the source
         // code couldn't have been adapted, all theses values are set to -1
         
         if (nbOfFailed+nbOfNa+nbOfNmi+nbOfPassed == 0) {
+            nbOfFailed = nbOfNa = nbOfNmi = nbOfPassed = -1;
+        }
+        if (weightedFailed.add(weightedNa).add(weightedPassed).add(weightedFailed).equals(BigDecimal.ZERO)) {
             nbOfFailed = nbOfNa = nbOfNmi = nbOfPassed = -1;
         }
         
@@ -214,6 +263,10 @@ public class AnalyserImpl implements Analyser {
         wrStatistics.setNbOfPassed(nbOfPassed);
         wrStatistics.setNbOfNmi(nbOfNmi);
         wrStatistics.setNbOfNa(nbOfNa);
+        wrStatistics.setWeightedFailed(weightedFailed);
+        wrStatistics.setWeightedPassed(weightedPassed);
+        wrStatistics.setWeightedNmi(weightedNmi);
+        wrStatistics.setWeightedNa(weightedNa);
         
         wrStatistics.setAudit(audit);
         return wrStatistics;
@@ -260,12 +313,15 @@ public class AnalyserImpl implements Analyser {
             wrStatistics.setRawMark(Float.valueOf(-1));
             return wrStatistics;
         }
-        float failed = wrStatistics.getNbOfFailed();
-        if (failed ==0 && passed==0) {
+        BigDecimal weightedPassed = wrStatistics.getWeightedPassed();
+        BigDecimal weightedFailed = wrStatistics.getWeightedFailed();
+        if ((weightedFailed.equals(BigDecimal.ZERO) || weightedFailed.equals(ZERO))
+                && (weightedPassed.equals(BigDecimal.ZERO) || weightedPassed.equals(ZERO))) {
             wrStatistics.setRawMark(Float.valueOf(0));
             return wrStatistics;
         }
-        float result = (passed/(passed+failed))*100f;
+
+        float result = weightedPassed.divide(weightedPassed.add(weightedFailed), 4, RoundingMode.HALF_UP).floatValue() *100f;
         wrStatistics.setRawMark(result);
         return wrStatistics;
     }
@@ -352,7 +408,7 @@ public class AnalyserImpl implements Analyser {
      * This method extracts a collection of tests for a given audit
      * @return
      */
-    private Collection<? extends Test> extractTestFromAudit() {
+    private Collection<Test> extractTestFromAudit() {
         Audit auditWithTest = auditDataService.getAuditWithTest(this.audit.getId());
         return auditWithTest.getTestList();
     }

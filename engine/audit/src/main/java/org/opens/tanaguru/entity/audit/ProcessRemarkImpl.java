@@ -25,23 +25,8 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
 
 /**
  * 
@@ -56,21 +41,21 @@ public class ProcessRemarkImpl implements ProcessRemark, Serializable {
     @Id
     @GeneratedValue
     @Column(name = "Id_Process_Remark")
-    protected Long id;
+    private Long id;
     @Enumerated(EnumType.STRING)
     @Column(name = "Issue")
-    protected TestSolution issue;
+    private TestSolution issue;
     @Column(name = "Message_Code")
-    protected String messageCode;
+    private String messageCode;
     @ManyToOne
     @JoinColumn(name = "Id_Process_Result")
-    protected ProcessResultImpl processResult;
+    private ProcessResultImpl processResult;
     @Column(name = "Selected_Element")
-    protected String selectedElement;
+    private String selectedElement;
     @Column(name = "Selection_Expression")
-    protected String selectionExpression;
+    private String selectionExpression;
     @OneToMany(mappedBy = "processRemark", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    protected Set<EvidenceElementImpl> elementList = new LinkedHashSet<EvidenceElementImpl>();
+    private Set<EvidenceElementImpl> elementSet;
 
     public ProcessRemarkImpl() {
         super();
@@ -139,21 +124,29 @@ public class ProcessRemarkImpl implements ProcessRemark, Serializable {
 
     @Override
     public void addElement(EvidenceElement element) {
+        if (elementSet == null) {
+            elementSet = new LinkedHashSet<EvidenceElementImpl>();
+        }
         element.setProcessRemark(this);
-        elementList.add((EvidenceElementImpl) element);
+        elementSet.add((EvidenceElementImpl) element);
     }
 
     @Override
     @XmlElementWrapper
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.EvidenceElementImpl.class)})
-    public Collection<EvidenceElementImpl> getElementList() {
-        return elementList;
+    public Collection<EvidenceElement> getElementList() {
+        return (Collection)elementSet;
     }
 
     @Override
-    public void setElementList(
-            Collection<? extends EvidenceElement> elementList) {
-        this.elementList = (Set<EvidenceElementImpl>) elementList;
+    public void setElementList(Collection<EvidenceElement> elementList) {
+        if (this.elementSet == null) {
+            this.elementSet = new LinkedHashSet<EvidenceElementImpl>();
+        }
+        for (EvidenceElement evEl : elementList) {
+            this.elementSet.add((EvidenceElementImpl) evEl);
+        }
     }
+    
 }

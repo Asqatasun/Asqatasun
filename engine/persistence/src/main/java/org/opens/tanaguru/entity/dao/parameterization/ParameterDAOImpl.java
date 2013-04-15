@@ -21,11 +21,7 @@
  */
 package org.opens.tanaguru.entity.dao.parameterization;
 
-import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
@@ -35,6 +31,7 @@ import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.entity.parameterization.ParameterFamily;
 import org.opens.tanaguru.entity.parameterization.ParameterImpl;
+import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 
 /**
  *
@@ -50,7 +47,7 @@ public class ParameterDAOImpl extends AbstractJPADAO<Parameter, Long> implements
 
     @Override
     public Set<Parameter> findParameterSet(ParameterFamily parameterFamily, Audit audit) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return findParametersFromParameterFamily(parameterFamily, findParameterSetFromAudit(audit));
     }
 
     /**
@@ -132,6 +129,19 @@ public class ParameterDAOImpl extends AbstractJPADAO<Parameter, Long> implements
         } catch (NonUniqueResultException nure) {
             return (Parameter)query.getResultList().iterator().next();
         }
+    }
+    
+    @Override
+    public Set<Parameter> findParametersFromParameterFamily(
+            ParameterFamily parameterFamily, 
+            Collection<Parameter> globalParamSet) {
+        Set<Parameter> paramSet = new HashSet<Parameter>();
+        for (Parameter param : globalParamSet) {
+            if (param.getParameterElement().getParameterFamily().equals(parameterFamily)) {
+                paramSet.add(param);
+            }
+        }
+        return paramSet;
     }
 
 }

@@ -22,24 +22,14 @@
 package org.opens.tanaguru.entity.audit;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-
-import org.opens.tanaguru.entity.subject.Page;
-import org.opens.tanaguru.entity.subject.PageImpl;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
+import org.opens.tanaguru.entity.subject.Page;
+import org.opens.tanaguru.entity.subject.PageImpl;
 
 /**
  * 
@@ -51,28 +41,27 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
 
     private static final long serialVersionUID = -7889349852989199094L;
     @Column(name = "Adapted_Content", length = 16777215)
-    protected String dom;
+    private String dom;
 
     @ManyToOne
     @JoinColumn(name = "Id_Page")
-    protected PageImpl page;
+    private PageImpl page;
 
     @Column(name = "Source", length = 16777215)
-    protected String source;
+    private String source;
 
     @Column(name = "Doctype", length = 512)
-    protected String doctype;
+    private String doctype;
 
     @Column(name = "Charset")
-    protected String charset;
+    private String charset;
 
     @ManyToMany
     @org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.PERSIST, org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinTable(name = "CONTENT_RELATIONSHIP", joinColumns =
     @JoinColumn(name = "Id_Content_Parent"), inverseJoinColumns =
     @JoinColumn(name = "Id_Content_Child"))
-    protected Set<RelatedContentImpl> relatedContentSet =
-            new HashSet<RelatedContentImpl>();
+    private Set<RelatedContentImpl> relatedContentSet;
 
     public SSPImpl() {
         super();
@@ -130,7 +119,7 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
 
     @Override
     public void setPage(Page page) {
-        this.page = (PageImpl) page;
+            this.page = (PageImpl) page;
     }
 
     @Override
@@ -149,19 +138,30 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.StylesheetContentImpl.class)})
 //    @XmlTransient
     @Override
-    public Set<RelatedContentImpl> getRelatedContentSet() {
-        return relatedContentSet;
+    public Collection<RelatedContent> getRelatedContentSet() {
+        if (relatedContentSet == null) {
+            relatedContentSet = new HashSet<RelatedContentImpl>();
+        }
+        return (Collection)relatedContentSet;
     }
 
     @Override
-    public void addAllRelationContent(Set<? extends RelatedContent> contentList) {
+    public void addAllRelationContent(Collection<RelatedContent> contentList) {
+        if (relatedContentSet == null) {
+            relatedContentSet = new HashSet<RelatedContentImpl>();
+        }
         for (RelatedContent content : contentList) {
-            addRelatedContent(content);
+            if (content instanceof RelatedContentImpl) {
+                addRelatedContent((RelatedContentImpl)content);
+            }
         }
     }
 
     @Override
     public void addRelatedContent(RelatedContent content) {
+        if (relatedContentSet == null) {
+            relatedContentSet = new HashSet<RelatedContentImpl>();
+        }
         this.relatedContentSet.add((RelatedContentImpl) content);
     }
 

@@ -22,7 +22,10 @@ package com.sebuilder.interpreter;
  */
 public class Store implements StepType {
 
-    public final Getter getter;
+    private final Getter getter;
+    public Getter getGetter() {
+        return getter;
+    }
 
     public Store(Getter getter) {
         this.getter = getter;
@@ -30,7 +33,8 @@ public class Store implements StepType {
 
     @Override
     public boolean run(TestRun ctx) {
-        ctx.vars.put(ctx.string("variable"), getter.get(ctx));
+        ctx.getVars().put(ctx.string("variable"), getter.get(ctx));
         return true;
     }
+
 }

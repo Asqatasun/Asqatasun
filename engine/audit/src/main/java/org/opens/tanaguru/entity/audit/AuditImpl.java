@@ -22,33 +22,21 @@
 package org.opens.tanaguru.entity.audit;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import org.opens.tanaguru.entity.reference.Test;
-import org.opens.tanaguru.entity.reference.TestImpl;
-import org.opens.tanaguru.entity.subject.WebResource;
-import org.opens.tanaguru.entity.subject.WebResourceImpl;
-import java.util.List;
-import javax.persistence.OneToOne;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.parameterization.ParameterImpl;
+import org.opens.tanaguru.entity.reference.Test;
+import org.opens.tanaguru.entity.reference.TestImpl;
+import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.entity.subject.WebResourceImpl;
 
 /**
  * 
@@ -61,35 +49,35 @@ public class AuditImpl implements Audit, Serializable {
 
     private static final long serialVersionUID = -9109080857144047795L;
     @Column(name = "Comment")
-    protected String comment;
+    private String comment;
     @OneToMany(mappedBy = "audit")
-    protected List<ContentImpl> contentList = new ArrayList<ContentImpl>();
+    private Set<ContentImpl> contentSet;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     @Column(name = "Dt_Creation")
-    protected Date dateOfCreation;
+    private Date dateOfCreation;
     @OneToMany(mappedBy = "grossResultAudit")
-    protected List<ProcessResultImpl> grossResultList = new ArrayList<ProcessResultImpl>();
+    private Set<ProcessResultImpl> grossResultSet;
     @Id
     @GeneratedValue
     @Column(name = "Id_Audit")
-    protected Long id;
+    private Long id;
     @OneToMany(mappedBy = "netResultAudit")
-    protected List<ProcessResultImpl> netResultList = new ArrayList<ProcessResultImpl>();
+    private Set<ProcessResultImpl> netResultSet;
     @Enumerated(EnumType.STRING)
     @Column(name = "Status")
-    protected AuditStatus status = AuditStatus.INITIALISATION;
+    private AuditStatus status = AuditStatus.INITIALISATION;
     @OneToOne(mappedBy = "audit")
-    protected WebResourceImpl subject;
+    private WebResourceImpl subject;
     @ManyToMany
     @JoinTable(name = "AUDIT_TEST", joinColumns =
     @JoinColumn(name = "Id_Audit"), inverseJoinColumns =
     @JoinColumn(name = "Id_Test"))
-    protected List<TestImpl> testList = new ArrayList<TestImpl>();
+    private Set<TestImpl> testSet;
     @ManyToMany
     @JoinTable(name = "AUDIT_PARAMETER", joinColumns =
     @JoinColumn(name = "Id_Audit"), inverseJoinColumns =
     @JoinColumn(name = "Id_Parameter"))
-    protected List<ParameterImpl> parameterSet = new ArrayList<ParameterImpl>();
+    private Set<ParameterImpl> parameterSet;
     
     public AuditImpl() {
         super();
@@ -100,28 +88,28 @@ public class AuditImpl implements Audit, Serializable {
     }
 
     @Override
-    public void addAllContent(List<? extends Content> contentList) {
+    public void addAllContent(Collection<Content> contentList) {
         for (Content content : contentList) {
             addContent(content);
         }
     }
 
     @Override
-    public void addAllGrossResult(List<? extends ProcessResult> pageResultList) {
+    public void addAllGrossResult(Collection<ProcessResult> pageResultList) {
         for (ProcessResult pageResult : pageResultList) {
             addGrossResult(pageResult);
         }
     }
 
     @Override
-    public void addAllNetResult(List<? extends ProcessResult> testResultList) {
+    public void addAllNetResult(Collection<ProcessResult> testResultList) {
         for (ProcessResult testResult : testResultList) {
             addNetResult(testResult);
         }
     }
 
     @Override
-    public void addAllTest(List<? extends Test> testList) {
+    public void addAllTest(Collection<Test> testList) {
         for (Test test : testList) {
             addTest(test);
         }
@@ -130,19 +118,28 @@ public class AuditImpl implements Audit, Serializable {
     @Override
     public void addContent(Content content) {
         content.setAudit(this);
-        this.contentList.add((ContentImpl) content);
+        if (contentSet == null) {
+            contentSet = new HashSet<ContentImpl>();
+        }
+        this.contentSet.add((ContentImpl) content);
     }
 
     @Override
     public void addGrossResult(ProcessResult pageResult) {
         pageResult.setGrossResultAudit(this);
-        grossResultList.add((ProcessResultImpl) pageResult);
+        if (grossResultSet == null) {
+            grossResultSet = new HashSet<ProcessResultImpl>();
+        }
+        grossResultSet.add((ProcessResultImpl) pageResult);
     }
 
     @Override
     public void addNetResult(ProcessResult testResult) {
         testResult.setNetResultAudit(this);
-        netResultList.add((ProcessResultImpl) testResult);
+        if (netResultSet == null) {
+            netResultSet = new HashSet<ProcessResultImpl>();
+        }
+        netResultSet.add((ProcessResultImpl) testResult);
     }
 
     @Override
@@ -153,7 +150,7 @@ public class AuditImpl implements Audit, Serializable {
 
     @Override
     public void addTest(Test test) {
-        this.testList.add((TestImpl) test);
+        this.testSet.add((TestImpl) test);
     }
 
     @Override
@@ -167,8 +164,8 @@ public class AuditImpl implements Audit, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.SSPImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.JavascriptContentImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.StylesheetContentImpl.class)})
-    public List<ContentImpl> getContentList() {
-        return contentList;
+    public Collection<Content> getContentList() {
+        return (Collection)contentSet;
     }
 
     @Override
@@ -181,8 +178,8 @@ public class AuditImpl implements Audit, Serializable {
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.IndefiniteResultImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.DefiniteResultImpl.class)})
-    public List<ProcessResultImpl> getGrossResultList() {
-        return grossResultList;
+    public Collection<ProcessResult> getGrossResultList() {
+        return (Collection)grossResultSet;
     }
 
     @Override
@@ -193,8 +190,8 @@ public class AuditImpl implements Audit, Serializable {
     @Override
     @XmlElementWrapper
     @XmlElementRef(type = org.opens.tanaguru.entity.audit.DefiniteResultImpl.class)
-    public List<ProcessResultImpl> getNetResultList() {
-        return netResultList;
+    public Collection<ProcessResult> getNetResultList() {
+        return (Collection)netResultSet;
     }
 
     @Override
@@ -213,8 +210,8 @@ public class AuditImpl implements Audit, Serializable {
     @Override
     @XmlElementWrapper
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.TestImpl.class)
-    public List<TestImpl> getTestList() {
-        return testList;
+    public Collection<Test> getTestList() {
+        return (Collection)testSet;
     }
 
     @Override
@@ -223,11 +220,14 @@ public class AuditImpl implements Audit, Serializable {
     }
 
     @Override
-    public void setContentList(List<? extends Content> contentList) {
+    public void setContentList(Collection<Content> contentList) {
+        if (this.contentSet == null) {
+            this.contentSet = new HashSet<ContentImpl>();
+        }
         for (Content content : contentList) {
             content.setAudit(this);
+            this.contentSet.add((ContentImpl)content);
         }
-        this.contentList = (List<ContentImpl>) contentList;
     }
 
     @Override
@@ -236,11 +236,14 @@ public class AuditImpl implements Audit, Serializable {
     }
 
     @Override
-    public void setGrossResultList(List<? extends ProcessResult> pageResultList) {
+    public void setGrossResultList(Collection<ProcessResult> pageResultList) {
+        if (this.grossResultSet == null) {
+            this.grossResultSet = new HashSet<ProcessResultImpl>();
+        }
         for (ProcessResult grossResult : pageResultList) {
             grossResult.setGrossResultAudit(this);
+            this.grossResultSet.add((ProcessResultImpl)grossResult);
         }
-        this.grossResultList = (List<ProcessResultImpl>) pageResultList;
     }
 
     @Override
@@ -249,11 +252,14 @@ public class AuditImpl implements Audit, Serializable {
     }
 
     @Override
-    public void setNetResultList(List<? extends ProcessResult> netResultList) {
+    public void setNetResultList(Collection<ProcessResult> netResultList) {
+        if (this.netResultSet == null) {
+            this.netResultSet = new HashSet<ProcessResultImpl>();
+        }
         for (ProcessResult netResult : netResultList) {
             netResult.setNetResultAudit(this);
+            this.netResultSet.add((ProcessResultImpl)netResult);
         }
-        this.netResultList = (List<ProcessResultImpl>) netResultList;
     }
 
     @Override
@@ -262,23 +268,39 @@ public class AuditImpl implements Audit, Serializable {
     }
 
     @Override
-    public void setTestList(List<? extends Test> testList) {
-        this.testList = (List<TestImpl>) testList;
+    public void setTestList(Collection<Test> testList) {
+        if (this.testSet == null) {
+            this.testSet = new HashSet<TestImpl>();
+        }
+        for (Test test : testList) {
+            this.testSet.add((TestImpl)test);
+        }
     }
 
     @Override
-    public void setParameterSet(Collection<? extends Parameter> parameterSet){
-        this.parameterSet.addAll((Collection<ParameterImpl>)parameterSet);
+    public void setParameterSet(Collection<Parameter> parameterSet){
+        if (this.parameterSet == null) {
+            this.parameterSet = new HashSet<ParameterImpl>();
+        }
+        for(Parameter param: parameterSet) {
+            this.parameterSet.add((ParameterImpl)param);
+        }
     }
     
     @Override
     public void addParameter(Parameter parameter){
+        if (this.parameterSet == null) {
+            this.parameterSet = new HashSet<ParameterImpl>();
+        }
         this.parameterSet.add((ParameterImpl)parameter);
     }
 
     @Override
-    public Collection<? extends Parameter> getParameterSet() {
-        return parameterSet;
+    public Collection<Parameter> getParameterSet() {
+        if (this.parameterSet == null) {
+            this.parameterSet = new HashSet<ParameterImpl>();
+        }
+        return (Collection)parameterSet;
     }
 
 }

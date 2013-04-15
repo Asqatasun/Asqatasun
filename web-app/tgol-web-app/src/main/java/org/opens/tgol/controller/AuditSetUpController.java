@@ -21,7 +21,6 @@
  */
 package org.opens.tgol.controller;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -29,9 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.opens.tgol.command.AuditSetUpCommand;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.contract.ScopeEnum;
-import org.opens.tgol.form.SelectFormField;
 import org.opens.tgol.form.parameterization.AuditSetUpFormField;
-import org.opens.tgol.form.parameterization.helper.AuditSetUpFormFieldHelper;
 import org.opens.tgol.util.TgolKeyStore;
 import org.opens.tgol.validator.AuditSetUpFormValidator;
 import org.springframework.security.access.annotation.Secured;
@@ -63,7 +60,7 @@ public class AuditSetUpController extends AbstractAuditSetUpController{
      *      The pages audit set-up form page
      */
     @RequestMapping(value = TgolKeyStore.AUDIT_PAGE_SET_UP_CONTRACT_URL, method = RequestMethod.GET)
-    @Secured(TgolKeyStore.ROLE_USER_KEY)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String displayPageAuditSetUp(
             @RequestParam(TgolKeyStore.CONTRACT_ID_KEY) String contractId,
             HttpServletRequest request,
@@ -87,7 +84,7 @@ public class AuditSetUpController extends AbstractAuditSetUpController{
      *      The pages audit set-up form page
      */
     @RequestMapping(value = TgolKeyStore.AUDIT_UPLOAD_SET_UP_CONTRACT_URL, method = RequestMethod.GET)
-    @Secured(TgolKeyStore.ROLE_USER_KEY)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String displayUploadAuditSetUp(
             @RequestParam(TgolKeyStore.CONTRACT_ID_KEY) String contractId,
             HttpServletRequest request,
@@ -111,7 +108,7 @@ public class AuditSetUpController extends AbstractAuditSetUpController{
      *      The site audit set-up form page
      */
     @RequestMapping(value = TgolKeyStore.AUDIT_SITE_SET_UP_CONTRACT_URL, method = RequestMethod.GET)
-    @Secured(TgolKeyStore.ROLE_USER_KEY)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String displaySiteAuditSetUp(
             @RequestParam(TgolKeyStore.CONTRACT_ID_KEY) String contractId,
             HttpServletRequest request,
@@ -135,7 +132,8 @@ public class AuditSetUpController extends AbstractAuditSetUpController{
      * @return 
      */
     @RequestMapping(method = RequestMethod.POST)
-    protected String submitForm(
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
+    protected String submitAuditSetUpForm(
             @ModelAttribute(TgolKeyStore.AUDIT_SET_UP_COMMAND_KEY) AuditSetUpCommand auditSetUpCommand,
             BindingResult result,
             Model model,

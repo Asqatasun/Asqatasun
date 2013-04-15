@@ -46,12 +46,12 @@ public class NomenclatureElementImpl implements NomenclatureElement,
     @Id
     @GeneratedValue
     @Column(name = "Id_Nomenclature_Element")
-    protected Long id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "Id_Nomenclature")
-    protected NomenclatureImpl nomenclature;
+    private NomenclatureImpl nomenclature;
     @Column(name = "Label", nullable = false)
-    protected String label;
+    private String label;
 
     public NomenclatureElementImpl() {
         super();

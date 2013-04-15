@@ -117,7 +117,7 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
      * @return The pages audit set-up form page
      */
     @RequestMapping(value = TgolKeyStore.AUDIT_SCENARIO_MANAGEMENT_CONTRACT_URL, method = RequestMethod.GET)
-    @Secured(TgolKeyStore.ROLE_USER_KEY)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String displayScenarioManagement(
             @RequestParam(TgolKeyStore.CONTRACT_ID_KEY) String contractId,
             HttpServletRequest request,
@@ -128,6 +128,7 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
     }
 
     @RequestMapping(value = TgolKeyStore.AUDIT_SCENARIO_MANAGEMENT_CONTRACT_URL, method = RequestMethod.POST)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     protected String addScenario(
             @ModelAttribute(TgolKeyStore.ADD_SCENARIO_COMMAND_KEY) AddScenarioCommand addScenarioCommand,
             BindingResult result,
@@ -155,6 +156,7 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
     }
 
     @RequestMapping(value = TgolKeyStore.DOWNLOAD_SCENARIO_URL_CONTRACT_URL, method = RequestMethod.GET)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public void getScenarioFile(
             @RequestParam(TgolKeyStore.CONTRACT_ID_KEY) String contractId,
             @RequestParam(TgolKeyStore.SCENARIO_ID_KEY) String scenarioId,
@@ -185,6 +187,7 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
     }
     
     @RequestMapping(value = TgolKeyStore.DELETE_SCENARIO_URL_CONTRACT_URL, method = RequestMethod.GET)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String deleteScenarioFile(
             @RequestParam(TgolKeyStore.CONTRACT_ID_KEY) String contractId,
             @RequestParam(TgolKeyStore.SCENARIO_ID_KEY) String scenarioId,
@@ -208,6 +211,7 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
     }
     
     @RequestMapping(value = TgolKeyStore.DELETE_SCENARIO_URL_CONTRACT_URL, method = RequestMethod.POST)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String addScenarioFromDeleteScenarioPage(
             @ModelAttribute(TgolKeyStore.ADD_SCENARIO_COMMAND_KEY) AddScenarioCommand addScenarioCommand,
             BindingResult result,
@@ -217,7 +221,7 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
     }
 
     @RequestMapping(value = TgolKeyStore.AUDIT_SCENARIO_SET_UP_CONTRACT_URL, method = RequestMethod.GET)
-    @Secured(TgolKeyStore.ROLE_USER_KEY)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String displayScenarioSetUp(
             @RequestParam(TgolKeyStore.CONTRACT_ID_KEY) String contractId,
             @RequestParam(TgolKeyStore.SCENARIO_ID_KEY) String scenarioId,
@@ -236,6 +240,7 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
     }
 
     @RequestMapping(value = TgolKeyStore.AUDIT_SCENARIO_SET_UP_CONTRACT_URL, method = RequestMethod.POST)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     protected String submitForm(
             @ModelAttribute(TgolKeyStore.ADD_SCENARIO_COMMAND_KEY) AuditSetUpCommand auditSetUpCommand,
             BindingResult result,

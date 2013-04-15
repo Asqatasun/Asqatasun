@@ -24,18 +24,7 @@ package org.opens.tgol.entity.user;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  *
@@ -90,16 +79,18 @@ public class RoleImpl implements Role, Serializable {
     }
 
     @Override
-    public void addAllChildRole(Collection<? extends Role> childRoleSet) {
+    public void addAllChildRole(Collection<Role> childRoleSet) {
         for (Role role : childRoleSet) {
             role.setParentRole(this);
+            if (role instanceof RoleImpl) {
+                this.childRoleSet.add((RoleImpl)role);
+            }
         }
-        this.childRoleSet.addAll((Set<RoleImpl>)childRoleSet);
     }
 
     @Override
-    public Collection<? extends Role> getChildRoleSet() {
-        return childRoleSet;
+    public Collection<Role> getChildRoleSet() {
+        return (Collection)childRoleSet;
     }
 
     @Override

@@ -81,14 +81,14 @@ public interface ProcessResultDAO extends GenericDAO<ProcessResult, Long> {
      * @param audit
      * @return
      */
-    List<? extends ProcessResult> retrieveGrossResultFromAudit(Audit audit);
+    Collection<ProcessResult> retrieveGrossResultFromAudit(Audit audit);
 
     /**
      *
      * @param audit
      * @return
      */
-    List<? extends ProcessResult> retrieveNetResultFromAudit(Audit audit);
+    Collection<ProcessResult> retrieveNetResultFromAudit(Audit audit);
 
     /**
      * 
@@ -96,7 +96,7 @@ public interface ProcessResultDAO extends GenericDAO<ProcessResult, Long> {
      * @param webResource
      * @return
      */
-    List<? extends ProcessResult> retrieveNetResultFromAuditAndWebResource(
+    Collection<ProcessResult> retrieveNetResultFromAuditAndWebResource(
             Audit audit,
             WebResource webResource);
 
@@ -106,7 +106,7 @@ public interface ProcessResultDAO extends GenericDAO<ProcessResult, Long> {
      * @param test
      * @return
      */
-    List<? extends ProcessResult> retrieveGrossResultFromAuditAndTest(
+    Collection<ProcessResult> retrieveGrossResultFromAuditAndTest(
             Audit audit,
             Test test);
 

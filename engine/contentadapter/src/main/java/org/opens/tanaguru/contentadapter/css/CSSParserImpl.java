@@ -54,23 +54,23 @@ public class CSSParserImpl extends AbstractContentParser implements CSSParser {
     public void run() {
         try {
             result = null;
-            String rsrc = resource.getResource();
+            String rsrc = getResource().getResource();
             InputSource is = new InputSource(new StringReader(rsrc));
 
             CSSOMDocumentHandlerImpl handler = new CSSOMDocumentHandlerImpl(
-                    (CSSResource) resource);
+                    (CSSResource) getResource());
 
             parser.setDocumentHandler(handler);
             parser.parseStyleSheet(is);
             result = handler.getResult();
         } catch (CSSException ex) {
-            Logger.getLogger(this.getClass()).warn(ex  + " on " + resource.getRsrcName());
+            Logger.getLogger(this.getClass()).warn(ex  + " on " + getResource().getRsrcName());
         } catch (IOException ex) {
-            Logger.getLogger(this.getClass()).warn(ex  + " on " + resource.getRsrcName());
+            Logger.getLogger(this.getClass()).warn(ex  + " on " + getResource().getRsrcName());
         } catch (StringIndexOutOfBoundsException ex) {
-            Logger.getLogger(this.getClass()).warn(ex  + " on " + resource.getRsrcName());
+            Logger.getLogger(this.getClass()).warn(ex  + " on " + getResource().getRsrcName());
         } catch (TokenMgrError err) {
-            Logger.getLogger(this.getClass()).warn(err  + " on " + resource.getRsrcName());
+            Logger.getLogger(this.getClass()).warn(err  + " on " + getResource().getRsrcName());
         }
     }
 
@@ -82,27 +82,27 @@ public class CSSParserImpl extends AbstractContentParser implements CSSParser {
     @Override
     public Set<CSSImportedStyle> searchImportedStyles() {
         try {
-            String rsrc = resource.getResource();
+            String rsrc = getResource().getResource();
             InputSource is = new InputSource(new StringReader(rsrc));
 
             CSSOMDocumentHandlerForImport handler =
-                    new CSSOMDocumentHandlerForImport((CSSResource) resource);
+                    new CSSOMDocumentHandlerForImport((CSSResource) getResource());
 
             parser.setDocumentHandler(handler);
             parser.parseStyleSheet(is);
 
             return handler.getResult();
         } catch (CSSException ex) {
-            Logger.getLogger(this.getClass()).warn(ex  + " on " + resource.getRsrcName());
+            Logger.getLogger(this.getClass()).warn(ex  + " on " + getResource().getRsrcName());
             return null;
         } catch (IOException ex) {
-            Logger.getLogger(this.getClass()).warn(ex  + " on " + resource.getRsrcName());
+            Logger.getLogger(this.getClass()).warn(ex  + " on " + getResource().getRsrcName());
             return null;
         } catch (StringIndexOutOfBoundsException ex) {
-            Logger.getLogger(this.getClass()).warn(ex  + " on " + resource.getRsrcName());  
+            Logger.getLogger(this.getClass()).warn(ex  + " on " + getResource().getRsrcName());  
             return null;
         } catch (TokenMgrError err) {
-            Logger.getLogger(this.getClass()).warn(err  + " on " + resource.getRsrcName());
+            Logger.getLogger(this.getClass()).warn(err  + " on " + getResource().getRsrcName());
             return null;
         }
     }

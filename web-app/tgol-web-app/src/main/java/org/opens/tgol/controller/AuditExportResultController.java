@@ -36,7 +36,6 @@ import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
-import org.opens.tgol.entity.user.User;
 import org.opens.tgol.exception.ForbiddenUserException;
 import org.opens.tgol.presentation.data.AuditStatistics;
 import org.opens.tgol.presentation.data.TestResult;
@@ -81,7 +80,7 @@ public class AuditExportResultController extends AuditDataHandlerController {
      * @return
      */
     @RequestMapping(value=TgolKeyStore.EXPORT_AUDIT_RESULT_CONTRACT_URL, method=RequestMethod.GET)
-    @Secured(TgolKeyStore.ROLE_USER_KEY)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String exportAuditResultFromContract(
             @RequestParam(value=TgolKeyStore.WEBRESOURCE_ID_KEY, required=false) String webresourceId,
             @RequestParam(value=TgolKeyStore.EXPORT_FORMAT_KEY, required=false) String format,
@@ -91,7 +90,6 @@ public class AuditExportResultController extends AuditDataHandlerController {
         if (format== null || webresourceId == null) {
             return TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
         }
-        User user = getCurrentUser();
         //We first check that the current user is allowed to display the result
         //of this audit
         Long webResourceIdValue;
@@ -101,7 +99,7 @@ public class AuditExportResultController extends AuditDataHandlerController {
             throw new ForbiddenUserException(getCurrentUser());
         }
         WebResource webResource = getWebResourceDataService().ligthRead(webResourceIdValue);
-        if (isUserAllowedToDisplayResult(user,webResource) || (webResource!=null && webResource instanceof Site) ) {
+        if (isUserAllowedToDisplayResult(webResource) || (webResource!=null && webResource instanceof Site) ) {
             if (webResource != null) {
                 // If the Id given in argument correspond to a webResource,
                 // data are retrieved to be prepared and displayed

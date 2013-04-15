@@ -21,14 +21,14 @@
  */
 package org.opens.tanaguru.entity.service.audit;
 
+import java.util.Collection;
+import java.util.Date;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.factory.audit.AuditFactory;
 import org.opens.tanaguru.entity.dao.audit.AuditDAO;
+import org.opens.tanaguru.entity.factory.audit.AuditFactory;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import java.util.Collection;
-import java.util.Date;
 
 /**
  * 
@@ -52,7 +52,7 @@ public class AuditDataServiceImpl extends AbstractGenericDataService<Audit, Long
     }
 
     @Override
-    public Collection<? extends Audit> findAll(AuditStatus status) {
+    public Collection<Audit> findAll(AuditStatus status) {
         return ((AuditDAO) entityDao).findAll(status);
     }
 

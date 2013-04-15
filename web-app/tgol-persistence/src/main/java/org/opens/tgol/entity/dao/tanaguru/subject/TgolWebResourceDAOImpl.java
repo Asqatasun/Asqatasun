@@ -1,4 +1,5 @@
 /*
+/*
  * Tanaguru - Automated webpage assessment
  * Copyright (C) 2008-2011  Open-S Company
  *
@@ -21,7 +22,6 @@
  */
 package org.opens.tgol.entity.dao.tanaguru.subject;
 
-import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 import java.util.Collection;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -30,6 +30,8 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.entity.subject.WebResourceImpl;
+import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.opens.tgol.presentation.data.PageResult;
 
 /**
  * This class implements the TgolWebResourceDAO interface.
@@ -41,9 +43,18 @@ public class TgolWebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
 
     private static final String CACHEABLE_OPTION = "org.hibernate.cacheable";
     private static final String TRUE = "true";
-    private static final String JOIN_PROCESS_RESULT =" JOIN r.processResultList pr";
+    private static final String JOIN_PROCESS_RESULT =" JOIN r.processResultSet pr";
     private static final String JOIN_TEST =" JOIN pr.test t";
 
+    private Long pageAndSiteScopeId = Long.valueOf(3);
+    public Long getPageAndSiteScopeId() {
+        return pageAndSiteScopeId;
+    }
+
+    public void setPageAndSiteScopeId(String pageAndSiteScopeId) {
+        this.pageAndSiteScopeId = Long.valueOf(pageAndSiteScopeId);
+    }
+    
     private String selectAllThemeKey;
     public String getSelectAllThemeKey() {
         return selectAllThemeKey;
@@ -135,14 +146,15 @@ public class TgolWebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
                 "SELECT distinct(pr) FROM "
                 + getEntityClass().getName() + " r"
                 + JOIN_PROCESS_RESULT
-                + " LEFT JOIN FETCH pr.remarkList pk"
-                + " LEFT JOIN FETCH pk.elementList el"
+                + " LEFT JOIN FETCH pr.remarkSet pk"
+                + " LEFT JOIN FETCH pk.elementSet el"
                 + " JOIN pr.test t"
                 + " JOIN t.scope s"
                 + " WHERE (r=:webResource)"
-                + " AND s = :scope");
+                + " AND (s = :scope or s.id = :pageAndSiteScope)");
         query.setParameter("webResource", webResource);
         query.setParameter("scope", scope);
+        query.setParameter("pageAndSiteScope", pageAndSiteScopeId);
         try {
             return query.getResultList();
         } catch (NoResultException e) {
@@ -161,13 +173,13 @@ public class TgolWebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
         sb.append(getEntityClass().getName());
         sb.append(" r");
         sb.append(JOIN_PROCESS_RESULT);
-        sb.append(" LEFT JOIN FETCH pr.remarkList pk");
-        sb.append(" LEFT JOIN FETCH pk.elementList el");
+        sb.append(" LEFT JOIN FETCH pr.remarkSet pk");
+        sb.append(" LEFT JOIN FETCH pk.elementSet el");
         sb.append(" JOIN pr.test t");
         sb.append(" JOIN pr.test.criterion.theme th");
         sb.append(" JOIN t.scope s");
         sb.append(" WHERE r=:webResource");
-        sb.append(" AND s = :scope ");
+        sb.append(" AND (s = :scope or s.id = :pageAndSiteScope) ");
         if (theme != null && 
                 !theme.isEmpty() &&
                     !theme.equals(selectAllThemeKey)) {
@@ -182,6 +194,7 @@ public class TgolWebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
         Query query = entityManager.createQuery(sb.toString());
         query.setParameter("webResource", webResource);
         query.setParameter("scope", scope);
+        query.setParameter("pageAndSiteScope", pageAndSiteScopeId);
         if (theme != null &&
                 !theme.isEmpty() &&
                     !theme.equals(selectAllThemeKey)) {
@@ -200,7 +213,7 @@ public class TgolWebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
     }
 
     @Override
-    public Collection<? extends Object> retrieveChildUrlList(
+    public Collection<PageResult> retrieveChildUrlList(
             WebResource webResource) {
         Query query = entityManager.createQuery(
                 "SELECT NEW  com.opens.tgol.presentation.data.PageResultImpl(r.url, r.mark, r.id) FROM "
@@ -226,8 +239,9 @@ public class TgolWebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
                 + JOIN_TEST
                 + " JOIN t.scope s"
                 + " WHERE (r.id=:id)"
-                + " AND s = :scope");
+                + " AND (s = :scope or s.id = :pageAndSiteScope)");
         query.setParameter("id", webResource.getId());
+        query.setParameter("pageAndSiteScope", pageAndSiteScopeId);
         query.setParameter("scope", scope);
         query.setHint(CACHEABLE_OPTION, TRUE);
         try {

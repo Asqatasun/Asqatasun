@@ -47,9 +47,9 @@ public class OptionDAOImpl extends AbstractJPADAO<Option, Long>
     @Override
     public Option findOptionFromCode(String optionCode) {
         Query query = entityManager.createQuery("SELECT o FROM "
-                + getEntityClass().getName() + " a"
-                + " WHERE o.optionCode = :optionCode");
-        query.setParameter("parameterElementCode", optionCode);
+                + getEntityClass().getName() + " o"
+                + " WHERE o.code = :optionCode");
+        query.setParameter("optionCode", optionCode);
         try {
             return (Option) query.getSingleResult();
         } catch (NoResultException nre) {

@@ -22,7 +22,6 @@
 package org.opens.tgol.form.parameterization;
 
 import org.opens.tanaguru.entity.parameterization.ParameterElement;
-import org.opens.tgol.entity.option.Option;
 import org.opens.tgol.form.FormField;
 import org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilder;
 
@@ -35,7 +34,6 @@ public class AuditSetUpFormFieldImpl implements AuditSetUpFormField {
     public AuditSetUpFormFieldImpl(AuditSetUpFormFieldBuilder auditSetUpFormFieldBuilder) {
         this.parameterElement = auditSetUpFormFieldBuilder.getParameterElement();
         this.formField = auditSetUpFormFieldBuilder.getFormField();
-        this.option = auditSetUpFormFieldBuilder.getOption();
     }
 
     private ParameterElement parameterElement;
@@ -59,16 +57,5 @@ public class AuditSetUpFormFieldImpl implements AuditSetUpFormField {
     public void setFormField(FormField formField) {
         this.formField = formField;
     }
-
-    private Option option;
-    @Override
-    public Option getOption() {
-        return option;
-    }
     
-    @Override
-    public void setOption(Option option) {
-        this.option = option;
-    }
-
 }

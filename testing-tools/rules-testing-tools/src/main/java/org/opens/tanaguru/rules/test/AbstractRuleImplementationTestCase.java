@@ -22,18 +22,10 @@
 package org.opens.tanaguru.rules.test;
 
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriter;
 import org.apache.log4j.Logger;
@@ -84,6 +76,10 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     private ContentAdapterService contentAdapterService;
     private ProcessorService processorService;
     private ConsolidatorService consolidatorService;
+    public ConsolidatorService getConsolidatorService() {
+        return consolidatorService;
+    }
+
     private AuditFactory auditFactory;
     private URLIdentifier urlIdentifier;
     private Map<WebResource, List<Content>> contentMap = new HashMap<WebResource, List<Content>>();
@@ -92,7 +88,14 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         return relatedContentMap;
     }
     private List<Test> testList = new ArrayList<Test>();
-    private Map<WebResource, List<ProcessResult>> grossResultMap = new HashMap<WebResource, List<ProcessResult>>();
+    public List<Test> getTestList() {
+        return testList;
+    }
+    private Map<WebResource, Collection<ProcessResult>> grossResultMap = new HashMap<WebResource, Collection<ProcessResult>>();
+    public Map<WebResource, Collection<ProcessResult>> getGrossResultMap() {
+        return grossResultMap;
+    }
+    
     private Map<WebResource, ProcessResult> netResultMap = new HashMap<WebResource, ProcessResult>();
     private WebResourceFactory webResourceFactory;
     public WebResourceFactory getWebResourceFactory() {
@@ -226,7 +229,8 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         for (WebResource webResource : webResourceMap.values()) {
             LOGGER.info("webResource.getURL() " + webResource.getURL());
             contentMap.put(webResource, contentLoaderService.loadContent(webResource));
-            LOGGER.info(((SSP)contentMap.get(webResource).get(0)).getDOM());
+            
+//            LOGGER.info(((SSP)contentMap.get(webResource).get(0)).getDOM());
             if (relatedContentMap.get(webResource) != null) {
                 for (String contentUrl : relatedContentMap.get(webResource)) {
                     if (contentMap.get(webResource).get(0) instanceof SSP) {
@@ -264,22 +268,22 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         }
     }
 
-    protected List<ProcessResult> process(String webResourceKey) {
+    protected Collection<ProcessResult> process(String webResourceKey) {
         System.out.println(this + "::process(\"" + webResourceKey + "\")");
         WebResource webResource = webResourceMap.get(webResourceKey);
-        List<ProcessResult> grossResultList = processorService.process(contentMap.get(webResource), testList);
+        Collection<ProcessResult> grossResultList = processorService.process(contentMap.get(webResource), testList);
         grossResultMap.put(webResource, grossResultList);
         return grossResultList;
     }
 
     protected ProcessResult processPageTest(String webResourceKey) {
-        return process(webResourceKey).get(0);
+        return process(webResourceKey).iterator().next();
     }
 
     public ProcessResult consolidate(String webResourceKey) {
         System.out.println(this + "::consolidate(\"" + webResourceKey + "\")");
         WebResource webResource = webResourceMap.get(webResourceKey);
-        ProcessResult netResult = consolidatorService.consolidate(grossResultMap.get(webResource), testList).get(0);
+        ProcessResult netResult = consolidatorService.consolidate(grossResultMap.get(webResource), testList).iterator().next();
         netResultMap.put(webResource, netResult);
         return netResult;
     }
@@ -295,7 +299,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
 
     protected ProcessResult getGrossResult(String pageKey, String siteKey) {
         Site site = (Site) webResourceMap.get(siteKey);
-        List<ProcessResult> grossResultList = grossResultMap.get(site);
+        Collection<ProcessResult> grossResultList = grossResultMap.get(site);
         Page page = (Page) webResourceMap.get(pageKey);
         for (ProcessResult grossResult : grossResultList) {
             if (grossResult.getSubject().equals(page)) {
@@ -433,8 +437,11 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
             if (parameterMap.containsKey(entry.getKey())) {
                 audit.addParameter(parameterMap.get(entry.getKey()));
             }
-            if (contentMap.containsKey(entry.getValue())) {
-                ((SSP) contentMap.get(entry.getValue()).iterator().next()).setAudit(audit);
+            if (contentMap.containsKey(entry.getValue()) && !contentMap.get(entry.getValue()).isEmpty()) {
+                Content content = contentMap.get(entry.getValue()).iterator().next();
+                if (content != null && content instanceof SSP) {
+                    ((SSP)content).setAudit(audit);
+                }
             }
         }
     }

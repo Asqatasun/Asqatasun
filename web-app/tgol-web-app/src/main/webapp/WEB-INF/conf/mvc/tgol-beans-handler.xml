@@ -113,7 +113,7 @@
     </bean>
 
     <bean id="resultActionHandler" class="org.opens.tgol.action.voter.ResultActionHandlerImpl">
-    <property name="actionBuilderList">
+        <property name="actionBuilderList">
             <list>
                 <ref bean="exportOdsActionBuilder"/>
 <!--                <ref bean="exportXlsActionBuilder"/>-->
@@ -127,5 +127,23 @@
             </map>
         </property>
     </bean>
+
+<!--    <bean id="massAuditActionBuilder" class="org.opens.tgol.action.builder.ActionBuilderImpl">
+        <property name="actionCode" value="MASS_AUDIT"/>
+        <property name="actionI81NCode" value="resultPage.pdfExport"/>
+        <property name="actionAltI81NCode" value="resultPage.pdfExportAlt"/>
+        <property name="actionUrl" value="/home/mass-audit-set-up.html"/>
+        <property name="disabledActionImageUrl" value="/Images/pdf_export.png"/>
+        <property name="enabledActionImageUrl" value="/Images/pdf_export.png"/>
+    </bean>
+
+    <bean id="homeActionHandler" class="org.opens.tgol.action.voter.HomeActionHandlerImpl">
+        <property name="actionBuilderList">
+            <list>
+                <ref bean="massAuditActionBuilder"/>
+            </list>
+        </property>
+    </bean>-->
+    
 
 </beans>

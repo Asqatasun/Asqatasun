@@ -21,8 +21,9 @@
  */
 package org.opens.tanaguru.entity.service.parameterization;
 
-import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.opens.tanaguru.entity.dao.parameterization.ParameterFamilyDAO;
 import org.opens.tanaguru.entity.parameterization.ParameterFamily;
+import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 
 /**
  *
@@ -33,7 +34,7 @@ public class ParameterFamilyDataServiceImpl extends AbstractGenericDataService<P
 
     @Override
     public ParameterFamily getParameterFamily(String parameterFamilyCode) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return ((ParameterFamilyDAO) entityDao).findParameterFamilyFromCode(parameterFamilyCode);
     }
 
 }

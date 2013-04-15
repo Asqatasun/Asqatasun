@@ -22,16 +22,10 @@
 package org.opens.tanaguru.i18n.entity.reference;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
+import javax.persistence.*;
 import org.opens.tanaguru.entity.reference.Level;
 import org.opens.tanaguru.entity.reference.LevelImpl;
 import org.opens.tanaguru.i18n.entity.AbstractInternationalizedEntity;
-import javax.persistence.Table;
 import org.opens.tanaguru.sdk.entity.i18n.Language;
 
 /**
@@ -46,12 +40,12 @@ public class LevelI18nImpl extends AbstractInternationalizedEntity<Level>
     private static final long serialVersionUID = 8315456347802456004L;
     
     @Column(name = "Description")
-    protected String description;
+    private String description;
     @Column(name = "Label")
-    protected String label;
+    private String label;
     @ManyToOne
     @JoinColumn(name = "Id_Level")
-    protected LevelImpl target;
+    private LevelImpl target;
 
     public LevelI18nImpl() {
         super();

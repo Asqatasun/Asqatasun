@@ -27,8 +27,8 @@
 </c:choose>
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="tgLogo1Url" value="${configProperties['cdnUrl']}/Images/Logo-Tanaguru-G-w500-h600-75dpi-bgTransp.png"/>
-        <c:set var="tgLogo2Url" value="${configProperties['cdnUrl']}/Images/Logo-tanaguru.com-black-w140px-h63px-bgTransp.png"/>
+        <c:set var="tgLogo1Url" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/Logo-Tanaguru-G-w500-h600-75dpi-bgTransp.png"/>
+        <c:set var="tgLogo2Url" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/Logo-tanaguru.com-black-w140px-h63px-bgTransp.png"/>
     </c:when>
     <c:otherwise>
         <c:set var="tgLogo1Url">
@@ -66,7 +66,6 @@
     <%@include file="template/head.jsp" %>
     <body id="tgm-login">
         <div class="container">
-            <c:set var="isInNotAuthentifiedView" scope="page" value="true"/>
             <%@include file="template/lang-box.jsp" %>
             <div id="login-main-row" class="row">
                 <div class="span6">

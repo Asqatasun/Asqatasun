@@ -2,17 +2,12 @@
 <%@page pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@page import="org.springframework.web.context.request.RequestContextHolder" %>
-<%@page import="org.springframework.web.context.request.ServletRequestAttributes" %>
-<%@page import="java.util.Collection" %>
-<%@page import="java.util.Iterator"%>
-<%@page import="java.util.Map"%>
-<%@page import="java.util.Set"%>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec"  %>
 
         <c:choose>
             <c:when test="${not empty configProperties['cdnUrl']}">
-                <c:set var="tgLogoUrl" value="${configProperties['cdnUrl']}/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>
-                <c:set var="logoutLogoUrl" value="${configProperties['cdnUrl']}/Images/icon-logout.png"/>
+                <c:set var="tgLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>
+                <c:set var="logoutLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/icon-logout.png"/>
             </c:when>
             <c:otherwise>
                 <c:set var="tgLogoUrl">
@@ -23,6 +18,15 @@
                 </c:set>
             </c:otherwise>
         </c:choose>
+        <c:set var="currentUserName" scope="page">
+            <sec:authentication property="principal.displayedUserName" />
+        </c:set>
+        <c:if test="${accountSettingsActive == 'true'}">
+            <c:set var="accountSettingsActive" scope="page" value=" class=\"active\" "/>
+        </c:if>
+        <c:if test="${adminActive == 'true'}">
+            <c:set var="adminActive" scope="page" value=" class=\"active\" "/>
+        </c:if>
         <div class="topbar">
             <div class="fill">
                 <div class="container">
@@ -30,48 +34,35 @@
                         <img src="${tgLogoUrl}" alt="<fmt:message key="home.home"/>" />
                     </a>
                     <ul class="nav secondary-nav">
-                        <c:if test="${authenticatedUser != null && authenticatedUser.email1 != 'guest'}">
-                    <c:choose>
-                        <c:when test='${authenticatedUser.firstName != null && authenticatedUser.name != null}'>
-                            <c:set var="userName" scope="page" value="${authenticatedUser.firstName} ${authenticatedUser.name}"/>
-                        </c:when>
-                        <c:when test='${authenticatedUser.name != null}'>
-                            <c:set var="userName" scope="page" value="${authenticatedUser.name}"/>
-                        </c:when>
-                        <c:otherwise>
-                            <c:set var="userName" scope="page" value="${authenticatedUser.email1}"/>
-                        </c:otherwise>
-                    </c:choose>
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
+                        <li ${adminActive}>
+                            <a href="<c:url value="/admin.html"/>">Admin</a>
+                        </li>    
+                        </sec:authorize>
+                    <sec:authorize access="isAuthenticated()">
+                    <c:if test="${currentUserName != 'guest'}">
                     <c:choose>
                         <c:when test="${configProperties['enable-account-settings'] == 'true'}">
-                        <li>
-                            <a href="<c:url value="/account-settings.html"/>">${userName}</a>
+                        <li ${accountSettingsActive}>
+                            <a href="<c:url value="/account-settings.html"/>" title="<fmt:message key="account-settings.accountSettingsLinkTitle"><fmt:param>${currentUserName}</fmt:param></fmt:message>">${currentUserName}</a>
                         </li>
                         </c:when>
                         <c:otherwise>
-                        <li>
-                            <a href="#">${userName}</a>
+                        <li ${accountSettingsActive}>
+                            <a href="#">${currentUserName}</a>
                         </li>
                         </c:otherwise>
                     </c:choose>
                     </c:if>
-                    <c:if test="${displayLogoutLink != 'false' && authenticatedUser != null}">
-                        <li>
-                            <div>
-                                <a href="<c:url value="/j_spring_security_logout"/>" id="logout">
-                                    <fmt:message key="home.logout"/>
-                                    <img src="${logoutLogoUrl}" alt="" id="logout-icon"/>
-                                </a>
-                            </div>
-                        </li>
-                    </c:if>
-                    <c:if test="${configProperties['enable-sign-up'] == 'true'}">
-                    <c:if test="${displaySignUpLink == 'true'}">
-                        <li>
-                            <a href="<c:url value="/sign-up.html"/>" id="sign-up"><fmt:message key="login.sign-up"/></a>
-                        </li>
-                    </c:if>
-                    </c:if>
+                    <li>
+                        <div>
+                            <a href="<c:url value="/j_spring_security_logout"/>" id="logout">
+                                <fmt:message key="home.logout"/>
+                                <img src="${logoutLogoUrl}" alt="" id="logout-icon"/>
+                            </a>
+                        </div>
+                    </li>
+                    </sec:authorize>    
                     <c:set var="isInTopBar" scope="page" value="true"/>
                     <%@include file="lang-box.jsp" %>
                     </ul><!--class="nav secondary-nav"-->

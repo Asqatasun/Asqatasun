@@ -22,7 +22,6 @@
 package org.opens.tgol.form.parameterization;
 
 import org.opens.tanaguru.entity.parameterization.ParameterElement;
-import org.opens.tgol.entity.option.Option;
 import org.opens.tgol.form.FormField;
 
 /**
@@ -57,18 +56,5 @@ public interface AuditSetUpFormField {
      * @param formField
      */
     void setFormField(FormField formField);
-
-    /**
-     *
-     * @return
-     *      the option
-     */
-    Option getOption();
-
-    /**
-     *
-     * @param option
-     */
-    void setOption(Option option);
 
 }

@@ -29,4 +29,5 @@
     <bean id="webResourceFactory" class="org.opens.tanaguru.entity.factory.subject.WebResourceFactoryImpl"/>
     <bean id="webResourceDAO" class="org.opens.tanaguru.entity.dao.subject.WebResourceDAOImpl"/>
 
+    <bean id="optionElementDAO" class="org.opens.tgol.entity.dao.option.OptionElementDAOImpl"/>
 </beans>

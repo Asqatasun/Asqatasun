@@ -44,6 +44,10 @@ public class ForbiddenPageException extends RuntimeException{
         super();
     }
     
+    public ForbiddenPageException(Throwable thrwbl) {
+        super(thrwbl);
+    }
+    
     public ForbiddenPageException(User user) {
         super();
         this.user = user;

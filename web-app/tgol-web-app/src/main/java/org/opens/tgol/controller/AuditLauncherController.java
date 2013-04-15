@@ -37,11 +37,13 @@ import org.opens.tgol.command.AuditSetUpCommand;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.contract.ScopeEnum;
 import org.opens.tgol.entity.option.OptionElement;
-import org.opens.tgol.entity.scenario.Scenario;
+import org.opens.tgol.entity.service.option.OptionElementDataService;
+import org.opens.tgol.entity.user.User;
 import org.opens.tgol.exception.LostInSpaceException;
 import org.opens.tgol.orchestrator.TanaguruOrchestrator;
 import org.opens.tgol.util.HttpStatusCodeFamily;
 import org.opens.tgol.util.TgolKeyStore;
+import org.opens.tgol.util.webapp.ExposablePropertyPlaceholderConfigurer;
 import org.opens.tgol.voter.restriction.RestrictionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,6 +65,11 @@ public class AuditLauncherController extends AuditDataHandlerController {
     private static String MAX_DURATION_PARAM_KEY="MAX_DURATION";
     private static String EXCLUSION_URL_LIST_PARAM_KEY="EXCLUSION_REGEXP";
     private static String DEPTH_PAGE_PARAM_VALUE="0";
+    private static String PROXY_HOST_CONF_KEY="proxyHost";
+    private static String PROXY_PORT_CONF_KEY="proxyPort";
+    private static String PROXY_EXCLUSION_URL_CONF_KEY="proxyExclusionUrl";
+    private static String EMAIL_SENT_TO_USER_EXCLUSION_CONF_KEY="emailSentToUserExclusionList";
+            
     private String groupePagesName = "";
     /**
      * The TanaguruOrchestrator instance needed to launch the audit process
@@ -104,39 +111,110 @@ public class AuditLauncherController extends AuditDataHandlerController {
      */
     Set<Parameter> auditPageParamSet = null;
 
+    private ExposablePropertyPlaceholderConfigurer exposablePropertyPlaceholderConfigurer;
+    @Autowired
+    public final void setExposablePropertyPlaceholderConfigurer(ExposablePropertyPlaceholderConfigurer exposablePropertyPlaceholderConfigurer) {
+        this.exposablePropertyPlaceholderConfigurer = exposablePropertyPlaceholderConfigurer;
+    }
+    
     private String httpProxyHost;
-    public String getProxyHost() {
+    /**
+     * Direct call to the property place holder configurer due to exposition
+     * context
+     * 
+     * @return 
+     */
+    public String getHttpProxyHost() {
+        if (httpProxyHost == null) {
+            httpProxyHost = exposablePropertyPlaceholderConfigurer.getResolvedProps().get(PROXY_HOST_CONF_KEY);
+        }
         return httpProxyHost;
     }
 
-    public void setProxyHost(String httpProxyHost) {
-        this.httpProxyHost = httpProxyHost;
-    }
-
     private String httpProxyPort;
-    public String getProxyPort() {
+    /**
+     * Direct call to the property place holder configurer due to exposition
+     * context
+     * 
+     * @return 
+     */
+    public String getHttpProxyPort() {
+        if (httpProxyPort == null) {
+            httpProxyPort = exposablePropertyPlaceholderConfigurer.getResolvedProps().get(PROXY_PORT_CONF_KEY);
+        }
         return httpProxyPort;
-    }
-
-    public void setProxyPort(String httpProxyPort) {
-        this.httpProxyPort = httpProxyPort;
     }
 
     /**
      * Multiple Url can be set through a unique String separated by ;
      */
-    private List<String> proxyExclusionUrlList = new ArrayList<String>();
+    private List<String> proxyExclusionUrlList;
+    /**
+     * Direct call to the property place holder configurer due to exposition
+     * context
+     * 
+     * @return 
+     */
     public List<String> getProxyExclusionUrlList() {
+        if (proxyExclusionUrlList == null) {
+            String rawList = exposablePropertyPlaceholderConfigurer.getResolvedProps().get(PROXY_EXCLUSION_URL_CONF_KEY);
+            proxyExclusionUrlList = new ArrayList<String>();
+            proxyExclusionUrlList.addAll(Arrays.asList(rawList.split(";")));
+        }
         return proxyExclusionUrlList;
     }
 
-    public void setProxyExclusionUrl(String proxyExclusionUrl) {
-        proxyExclusionUrlList.addAll(Arrays.asList(proxyExclusionUrl.split(";")));
+    /**
+     * 
+     */
+    private List<String> emailSentToUserExclusionList;
+    /**
+     * Direct call to the property place holder configurer due to exposition
+     * context
+     * 
+     * @return 
+     */
+    public List<String> getEmailSentToUserExclusionList() {
+        if (emailSentToUserExclusionList == null) {
+            String rawList = exposablePropertyPlaceholderConfigurer.getResolvedProps().get(EMAIL_SENT_TO_USER_EXCLUSION_CONF_KEY);
+            emailSentToUserExclusionList = new ArrayList<String>();
+            emailSentToUserExclusionList.addAll(Arrays.asList(rawList.split(";")));
+        }
+        return emailSentToUserExclusionList;
+    }
+    
+    /**
+     * The user options that have to be converted as audit parameters
+     */
+    private List<String> userOption;
+    public List<String> getUserOption() {
+        return userOption;
     }
 
-    private List<String> emailSentToUserExclusionList = new ArrayList<String>();
-    public void setEmailSentToUserExclusionRawList(String emailSentToUserExclusionRawList) {
-        this.emailSentToUserExclusionList.addAll(Arrays.asList(emailSentToUserExclusionRawList.split(";")));
+    public void setUserOption(List<String> userOption) {
+        this.userOption = userOption;
+    }
+
+    /**
+     * The user options that have to be converted as audit parameters and 
+     * that depend on the selected referential
+     */
+    private List<String> userOptionDependingOnReferential;
+    public List<String> getUserOptionDependingOnReferential() {
+        return userOptionDependingOnReferential;
+    }
+
+    public void setUserOptionDependingOnReferential(List<String> userOptionDependingOnReferential) {
+        this.userOptionDependingOnReferential = userOptionDependingOnReferential;
+    }
+    
+    private OptionElementDataService optionElementDataService;
+    public OptionElementDataService getOptionElementDataService() {
+        return optionElementDataService;
+    }
+    @Autowired
+    public void setOptionElementDataService(OptionElementDataService optionElementDataService) {
+        this.optionElementDataService = optionElementDataService;
     }
     
     public AuditLauncherController() {
@@ -192,7 +270,6 @@ public class AuditLauncherController extends AuditDataHandlerController {
             }
             model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
             model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
-            model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
             return TgolKeyStore.AUDIT_IN_PROGRESS_VIEW_NAME;
         }
     }
@@ -229,9 +306,8 @@ public class AuditLauncherController extends AuditDataHandlerController {
             model.addAttribute(TgolKeyStore.TESTED_URL_KEY, getContractDataService().getUrlFromContractOption(contract));
             model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
             model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
-            model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
             model.addAttribute(TgolKeyStore.IS_PAGE_AUDIT_KEY, isPageAudit);
-            if (!emailSentToUserExclusionList.contains(contract.getUser().getEmail1())) {
+            if (!getEmailSentToUserExclusionList().contains(contract.getUser().getEmail1())) {
                 model.addAttribute(TgolKeyStore.IS_USER_NOTIFIED_KEY, true);
             }
             return TgolKeyStore.GREEDY_AUDIT_VIEW_NAME;
@@ -316,13 +392,14 @@ public class AuditLauncherController extends AuditDataHandlerController {
             final Contract contract,
             final AuditSetUpCommand auditSetUpCommand, 
             final Locale locale) {
+        
         Map<String, String> fileMap = auditSetUpCommand.getFileMap();
-        Set<Parameter> paramSet = getUserParamSet(auditSetUpCommand, contract.getId(), fileMap.size(), null);
+
         return tanaguruExecutor.auditPageUpload(
                 contract,
                 fileMap,
                 getClientIpAddress(),
-                paramSet, 
+                getUserParamSet(auditSetUpCommand, contract.getId(), fileMap.size(), null),
                 locale);
     }
 
@@ -379,7 +456,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
             paramSet = setLevelParameter(paramSet, auditSetUpCommand.getLevel());
         } else {
             paramSet = getDefaultParamSet();
-            Set<? extends OptionElement> optionElementSet =
+            Collection<OptionElement> optionElementSet =
                     getContractDataService().read(contractId).getOptionElementSet();
             for (Parameter param : paramSet) {
                 for (OptionElement optionElement : optionElementSet) {
@@ -394,6 +471,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
             paramSet = getParameterDataService().updateParameterSet(paramSet, userParamSet);
         }
         paramSet = setProxyParameters(paramSet, url);
+        paramSet = setUserParameters(paramSet, auditSetUpCommand.getLevel().split(";")[0]);
         return paramSet;
     }
 
@@ -417,10 +495,10 @@ public class AuditLauncherController extends AuditDataHandlerController {
      * @param url
      */
     private Set<Parameter> setProxyParameters(Set<Parameter> paramSet, String url) {
-        if ((StringUtils.isEmpty(httpProxyHost) && StringUtils.isEmpty(httpProxyPort))) {
+        if ((StringUtils.isEmpty(getHttpProxyHost()) && StringUtils.isEmpty(getHttpProxyPort()))) {
             return paramSet;
         }
-        for (String urlExclusion : proxyExclusionUrlList) {
+        for (String urlExclusion : getProxyExclusionUrlList()) {
             if (StringUtils.isNotEmpty(urlExclusion) && url.contains(urlExclusion)) {
                 return paramSet;
             }
@@ -429,9 +507,9 @@ public class AuditLauncherController extends AuditDataHandlerController {
             return paramSet;
         }
         try {
-            Integer.valueOf(httpProxyPort);
+            Integer.valueOf(getHttpProxyPort());
         } catch (NumberFormatException nfe) {
-            LOGGER.warn("Incorrect value of proxy Port : "+ httpProxyPort +". Proxy parameters are ignored");
+            LOGGER.warn("Incorrect value of proxy Port : "+ getHttpProxyPort() +". Proxy parameters are ignored");
             return paramSet;
         }
         Set<Parameter> proxyParamSet = new HashSet<Parameter>();
@@ -439,8 +517,8 @@ public class AuditLauncherController extends AuditDataHandlerController {
                 parameterElementDataService.getParameterElement(PROXY_HOST_PARAM_KEY);
         ParameterElement proxyPortParameterElement =
                 parameterElementDataService.getParameterElement(PROXY_PORT_PARAM_KEY);
-        Parameter proxyHostParameter = getParameterDataService().getParameter(proxyHostParameterElement, httpProxyHost);
-        Parameter proxyPortParameter = getParameterDataService().getParameter(proxyPortParameterElement, httpProxyPort);
+        Parameter proxyHostParameter = getParameterDataService().getParameter(proxyHostParameterElement, getHttpProxyHost());
+        Parameter proxyPortParameter = getParameterDataService().getParameter(proxyPortParameterElement, getHttpProxyPort());
         proxyParamSet.add(proxyHostParameter);
         proxyParamSet.add(proxyPortParameter);
         LOGGER.debug("paramSet.size() " + paramSet.size());
@@ -455,7 +533,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
         paramSet = getParameterDataService().updateParameterSet(paramSet, proxyParamSet);
         LOGGER.debug("after update paramSet.size() " + paramSet.size());
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Audit is set to use proxy with parameters " + httpProxyHost + " : " + httpProxyPort);
+            LOGGER.debug("Audit is set to use proxy with parameters " + getHttpProxyHost() + " : " + getHttpProxyPort());
         }
         for (Parameter param: paramSet) {
             if (param.getParameterElement().getParameterElementCode().equals(PROXY_HOST_PARAM_KEY)) {
@@ -508,4 +586,25 @@ public class AuditLauncherController extends AuditDataHandlerController {
         return scenarioParamSet;
     }
 
+    /**
+     * Some user options have to be converted as parameters and added to the
+     * general audit parameters.
+     * 
+     * @param paramSet
+     * @param referentialKey
+     * @return 
+     */
+    private Set<Parameter> setUserParameters(Set<Parameter> paramSet, String referentialKey) {
+        User user = getCurrentUser();
+        Collection<OptionElement> optionElementSet = new HashSet<OptionElement>();
+        for (String optionFamily : userOptionDependingOnReferential) {
+            optionElementSet.addAll(optionElementDataService.getOptionElementFromUserAndFamilyCode(user, referentialKey+"_"+optionFamily));
+        }
+        for (String optionFamily : userOption) {
+            optionElementSet.addAll(optionElementDataService.getOptionElementFromUserAndFamilyCode(user, optionFamily));
+        }
+        paramSet.addAll(getParameterDataService().getParameterSetFromOptionElementSet(optionElementSet));
+        return paramSet;
+    }
+    
 }

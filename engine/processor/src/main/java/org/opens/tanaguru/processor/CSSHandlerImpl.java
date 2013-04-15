@@ -41,7 +41,7 @@ public class CSSHandlerImpl implements CSSHandler {
 
     private boolean initialized = false;
     private Collection<CSSOMRule> selectedRuleList;
-    protected SSP ssp;
+    private SSP ssp;
     private Map<String, CSSOMStyleSheet> styleMap;
     private Map<String, Set<CSSOMRule>> rulesByMedia ;
     private static final String CSS_ON_ERROR = "CSS_ON_ERROR";
@@ -53,7 +53,7 @@ public class CSSHandlerImpl implements CSSHandler {
     private static final Pattern NON_ZERO_VALUE_PATTERN =
               Pattern.compile("0+\\.0+[a-zA-Z]*|0+[a-zA-Z]*");
 
-    protected ProcessRemarkService processRemarkService;
+    private ProcessRemarkService processRemarkService;
     @Override
     public void setProcessRemarkService(ProcessRemarkService processRemarkService) {
         this.processRemarkService = processRemarkService;

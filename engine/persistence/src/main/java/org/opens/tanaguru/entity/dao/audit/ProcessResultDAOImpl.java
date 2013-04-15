@@ -22,20 +22,15 @@
 package org.opens.tanaguru.entity.dao.audit;
 
 import java.util.Collection;
-import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.ProcessResultImpl;
-import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 import javax.persistence.Query;
-import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.entity.audit.DefiniteResultImpl;
-import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 
 /**
  * 
@@ -110,7 +105,7 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
     }
 
     @Override
-    public List<? extends ProcessResult> retrieveGrossResultFromAudit(Audit audit) {
+    public Collection<ProcessResult> retrieveGrossResultFromAudit(Audit audit) {
         Query query = entityManager.createQuery("SELECT pr FROM "
                 + getEntityClass().getName() + " pr "
                 + " LEFT JOIN FETCH pr.subject"
@@ -122,7 +117,7 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
     }
 
     @Override
-    public List<? extends ProcessResult> retrieveNetResultFromAudit(Audit audit) {
+    public Collection<ProcessResult> retrieveNetResultFromAudit(Audit audit) {
         Query query = entityManager.createQuery("SELECT pr FROM "
                 + getEntityClass().getName() + " pr "
                 + " LEFT JOIN FETCH pr.subject"
@@ -133,7 +128,7 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
     }
 
     @Override
-    public List<? extends ProcessResult> retrieveNetResultFromAuditAndWebResource(Audit audit, WebResource webResource) {
+    public Collection<ProcessResult> retrieveNetResultFromAuditAndWebResource(Audit audit, WebResource webResource) {
         Query query = entityManager.createQuery("SELECT pr FROM "
                 + getDefitiniteResultClass().getName() + " pr "
                 + " WHERE "
@@ -145,7 +140,7 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
     }
 
     @Override
-    public List<? extends ProcessResult> retrieveGrossResultFromAuditAndTest(Audit audit, Test test) {
+    public Collection<ProcessResult> retrieveGrossResultFromAuditAndTest(Audit audit, Test test) {
         Query query = entityManager.createQuery("SELECT pr FROM "
                 + getEntityClass().getName() + " pr "
                 + " LEFT JOIN FETCH pr.subject"

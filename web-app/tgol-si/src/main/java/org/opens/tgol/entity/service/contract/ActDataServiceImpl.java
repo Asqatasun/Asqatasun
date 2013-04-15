@@ -21,14 +21,14 @@
  */
 package org.opens.tgol.entity.service.contract;
 
-import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import org.opens.tgol.entity.dao.contract.ActDAO;
-import org.opens.tgol.entity.contract.Act;
-import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.contract.ScopeEnum;
 import java.util.Collection;
 import java.util.Date;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.opens.tgol.entity.contract.Act;
+import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.entity.contract.ScopeEnum;
+import org.opens.tgol.entity.dao.contract.ActDAO;
 
 /**
  *

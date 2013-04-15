@@ -21,26 +21,27 @@
  */
 package org.opens.tgol.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.text.MessageFormat;
+import java.util.*;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.log4j.Logger;
+import org.opens.tanaguru.util.MD5Encoder;
 import org.opens.tgol.command.ChangePasswordCommand;
 import org.opens.tgol.command.ForgottenPasswordCommand;
 import org.opens.tgol.emailsender.EmailSender;
 import org.opens.tgol.entity.user.User;
-import org.opens.tgol.util.webapp.ExposablePropertyPlaceholderConfigurer;
+import org.opens.tgol.exception.ForbiddenPageException;
+import org.opens.tgol.exception.ForbiddenUserException;
+import org.opens.tgol.presentation.menu.SecondaryLevelMenuDisplayer;
 import org.opens.tgol.util.TgolKeyStore;
 import org.opens.tgol.util.TgolTokenHelper;
+import org.opens.tgol.util.webapp.ExposablePropertyPlaceholderConfigurer;
 import org.opens.tgol.validator.ChangePasswordFormValidator;
 import org.opens.tgol.validator.ForgottenPasswordFormValidator;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.text.MessageFormat;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.Set;
-import javax.servlet.http.HttpServletRequest;
-import org.apache.log4j.Logger;
-import org.opens.tanaguru.util.MD5Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -62,7 +63,10 @@ public class ForgottenOrChangePasswordController extends AbstractController {
     private static final String EMAIL_CONTENT_KEY = "forgotten-password.emailContent";
     private static final String BUNDLE_NAME = "forgotten-password-page-I18N";
     private static final String CHANGE_PASSWORD_URL_KEY = "changePasswordUrl";
+    
     private static final String AUTHENTICATED_KEY = "authenticated";
+    
+    private static final String ROLE_ADMIN_NAME_KEY = "ROLE_ADMIN";
 
     private ChangePasswordFormValidator changePasswordFormValidator;
     @Autowired
@@ -94,6 +98,17 @@ public class ForgottenOrChangePasswordController extends AbstractController {
         this.localeResolver = localeResolver;
     }
 
+    List<String> forbiddenUserList = new ArrayList<String>();
+    public void setForbiddenUserList(List<String> forbiddenUserList) {
+        this.forbiddenUserList = forbiddenUserList;
+    }
+    
+    private SecondaryLevelMenuDisplayer secondaryLevelMenuDisplayer;
+    @Autowired
+    public void setSecondaryLevelMenuDisplayer(SecondaryLevelMenuDisplayer secondaryLevelMenuDisplayer) {
+        this.secondaryLevelMenuDisplayer = secondaryLevelMenuDisplayer;
+    }
+    
     public ForgottenOrChangePasswordController() {
         super();
     }
@@ -105,36 +120,101 @@ public class ForgottenOrChangePasswordController extends AbstractController {
      * @return
      */
     @RequestMapping(value = TgolKeyStore.CHANGE_PASSWORD_URL, method = RequestMethod.GET)
-    public String setChangePasswordPage(
-            @RequestParam(TgolKeyStore.EMAIL_KEY) String email,
+    public String displayChangePasswordFromUserPage(
+            @RequestParam(TgolKeyStore.USER_ID_KEY) String id,
             @RequestParam(TgolKeyStore.TOKEN_KEY) String token,
             HttpServletRequest request,
             Model model) {
-        if (email == null ||email.isEmpty() || token == null || token.isEmpty()) {
+        model.addAttribute(TgolKeyStore.CHANGE_PASSWORD_FROM_ADMIN_KEY, false);
+        secondaryLevelMenuDisplayer.setModifiableReferentialsForUserToModel(
+                        getCurrentUser(), 
+                        model); 
+        return displayChangePasswordView(id, token, model, request);
+    }
+
+    @RequestMapping(value = TgolKeyStore.CHANGE_PASSWORD_FROM_ADMIN_URL, method = RequestMethod.GET)
+    @Secured(TgolKeyStore.ROLE_ADMIN_KEY)
+    public String displayChangePasswordFromAdminPage(
+            @RequestParam(TgolKeyStore.USER_ID_KEY) String id,
+            HttpServletRequest request,
+            Model model) {
+        model.addAttribute(TgolKeyStore.CHANGE_PASSWORD_FROM_ADMIN_KEY, true);
+        return displayChangePasswordView(id, AUTHENTICATED_KEY, model, request);
+    }
+    
+    /**
+     * 
+     * @param email
+     * @param token
+     * @param model
+     * @param request
+     * @return 
+     */
+    private String displayChangePasswordView(
+            String id,
+            String token, 
+            Model model,
+            HttpServletRequest request) {
+        Long userId;
+        try {
+            userId = Long.valueOf(id);
+        } catch (NumberFormatException nfe) {
+            throw new ForbiddenUserException();
+        }
+        if (token == null || token.isEmpty()) {
             return TgolKeyStore.ACCESS_DENIED_VIEW_REDIRECT_NAME;
         }
+        User currentUser = getCurrentUser();
+        User user;
+        // if the change password request comes from an authentied user or from
+        // an admin
         if (token.equalsIgnoreCase(AUTHENTICATED_KEY)) {
-            if (getCurrentUser()==null || !getCurrentUser().getEmail1().equalsIgnoreCase(email)) {
+            if (currentUser == null || 
+                    (!currentUser.getId().equals(userId) &&
+                    !currentUser.getRole().getRoleName().equals(ROLE_ADMIN_NAME_KEY)) ||
+                    forbiddenUserList.contains(currentUser.getEmail1())) {
                 return TgolKeyStore.ACCESS_DENIED_VIEW_REDIRECT_NAME;
             } else {
-                model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
+                if (!currentUser.getId().equals(userId)){
+                    user = getUserDataService().read(userId);
+                } else {
+                    user = currentUser;
+                }
             }
+        // the request is submitted through an unauthentified user and the token
+        // has to be checked.
         } else {
-            User user = getUserDataService().getUserFromEmail(email);
+            user = getUserDataService().read(userId);
             try {
+                // if the token is invalid
                 if (!TgolTokenHelper.getInstance().checkUserToken(user, token)) {
                     model.addAttribute(TgolKeyStore.INVALID_CHANGE_PASSWORD_URL_KEY, true);
+                    return TgolKeyStore.CHANGE_PASSWORD_VIEW_NAME;
+                } else {
+                    // if the token is valid but the request comes from the 
+                    // form submission with success
+                    Object passwordModified = model.asMap().get(TgolKeyStore.PASSWORD_MODIFIED_KEY);
+                    if (passwordModified != null && passwordModified instanceof Boolean &&
+                            (Boolean)passwordModified) {
+                        TgolTokenHelper.getInstance().setTokenUsed(token);
+                        return TgolKeyStore.CHANGE_PASSWORD_VIEW_NAME;
+                    }
                 }
             } catch (ArrayIndexOutOfBoundsException aioobe) {
                 model.addAttribute(TgolKeyStore.INVALID_CHANGE_PASSWORD_URL_KEY, true);
+                return TgolKeyStore.CHANGE_PASSWORD_VIEW_NAME;
             }
         }
+        if (user == null) {
+            return TgolKeyStore.ACCESS_DENIED_VIEW_REDIRECT_NAME;
+        }
         ChangePasswordCommand cpc = new ChangePasswordCommand();
-        cpc.setUserEmail(email);
         model.addAttribute(TgolKeyStore.CHANGE_PASSWORD_COMMAND_KEY, cpc);
+        model.addAttribute(TgolKeyStore.USER_NAME_KEY, user.getEmail1());
+        request.getSession().setAttribute(TgolKeyStore.USER_ID_KEY,user.getId());
         return TgolKeyStore.CHANGE_PASSWORD_VIEW_NAME;
     }
-
+    
     /**
      * This method displays the change password page from an authenticated user
      * @param contractId
@@ -142,7 +222,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
      * @return
      */
     @RequestMapping(value = TgolKeyStore.FORGOTTEN_PASSWORD_URL, method = RequestMethod.GET)
-    public String setForgottenPasswordPage(
+    public String displayForgottenPasswordPage(
             Model model) {
         if (getCurrentUser() != null) {
             return TgolKeyStore.ACCESS_DENIED_VIEW_REDIRECT_NAME;
@@ -153,10 +233,11 @@ public class ForgottenOrChangePasswordController extends AbstractController {
     }
 
     /**
-     * This methods controls the validity of the form and launch an audit with
-     * values populated by the user. In case of audit failure, an appropriate
-     * message is displayed
+     * This methods controls the validity of the form and modify the password 
+     * of the wished user
+     * 
      * @param launchAuditFromContractCommand
+     * @param forgottenPasswordCommand
      * @param result
      * @param model
      * @param request
@@ -164,7 +245,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
      * @throws Exception
      */
     @RequestMapping(value = TgolKeyStore.FORGOTTEN_PASSWORD_URL, method = RequestMethod.POST)
-    protected String submitForm(
+    protected String submitForgottenPasswordForm(
             @ModelAttribute(TgolKeyStore.FORGOTTEN_PASSWORD_COMMAND_KEY) ForgottenPasswordCommand forgottenPasswordCommand,
             BindingResult result,
             Model model,
@@ -194,26 +275,83 @@ public class ForgottenOrChangePasswordController extends AbstractController {
      * @throws Exception
      */
     @RequestMapping(value = TgolKeyStore.CHANGE_PASSWORD_URL, method = RequestMethod.POST)
-    protected String changePassword(
+    protected String submitChangePasswordFromUser(
             @ModelAttribute(TgolKeyStore.CHANGE_PASSWORD_COMMAND_KEY) ChangePasswordCommand changePasswordCommand,
             BindingResult result,
             Model model,
             HttpServletRequest request)
             throws Exception {
+        return changePassword(
+                changePasswordCommand, 
+                result, 
+                model, 
+                request,
+                false);
+    }
+    
+    /**
+     * 
+     * @param changePasswordCommand
+     * @param result
+     * @param model
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = TgolKeyStore.CHANGE_PASSWORD_FROM_ADMIN_URL, method = RequestMethod.POST)
+    @Secured(TgolKeyStore.ROLE_ADMIN_KEY)
+    protected String submitChangePasswordFromAdmin(
+            @ModelAttribute(TgolKeyStore.CHANGE_PASSWORD_COMMAND_KEY) ChangePasswordCommand changePasswordCommand,
+            BindingResult result,
+            Model model,
+            HttpServletRequest request)
+            throws Exception {
+        return changePassword(
+                changePasswordCommand, 
+                result, 
+                model, 
+                request,
+                true);
+    }
+    
+    /**
+     * 
+     * @param changePasswordCommand
+     * @param result
+     * @param model
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    protected String changePassword(
+            ChangePasswordCommand changePasswordCommand,
+            BindingResult result,
+            Model model,
+            HttpServletRequest request,
+            boolean isrequestFromAdmin)
+            throws Exception {
+        User user = getUserDataService().read((Long)request.getSession().getAttribute(TgolKeyStore.USER_ID_KEY));
+        if (forbiddenUserList.contains(user.getEmail1())) {
+            throw new ForbiddenPageException();
+        }
         // We check whether the form is valid
-        changePasswordFormValidator.validate(changePasswordCommand, result);
+        changePasswordFormValidator.validate(changePasswordCommand,result,user);
         // If the form has some errors, we display it again with errors' details
         if (result.hasErrors()) {
+            model.addAttribute(TgolKeyStore.USER_NAME_KEY, user.getEmail1());
             return displayChangePasswordFormWithErrors(
                     model,
-                    changePasswordCommand);
+                    changePasswordCommand,
+                    isrequestFromAdmin);
         }
+        request.getSession().removeAttribute(TgolKeyStore.USER_ID_KEY);
         model.addAttribute(TgolKeyStore.PASSWORD_MODIFIED_KEY, true);
-        updateUserPassword(changePasswordCommand);
-        if (getCurrentUser() != null) {
-            model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
+        updateUserPassword(user,changePasswordCommand);
+        if (isrequestFromAdmin) {
+            return displayChangePasswordFromAdminPage(user.getId().toString(), request, model);
+        } else {
+            return displayChangePasswordFromUserPage(user.getId().toString(), request.getParameter("token"), request, model);
         }
-        return TgolKeyStore.CHANGE_PASSWORD_VIEW_NAME;
     }
 
     /**
@@ -222,7 +360,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
      * @return
      */
     @RequestMapping(value = TgolKeyStore.FORGOTTEN_PASSWORD_CONFIRMATION_URL, method = RequestMethod.GET)
-    public String setUpSignUpConfirmationPage(
+    public String displayUpSignUpConfirmationPage(
             Model model,
             HttpServletRequest request) {
         model.addAttribute(TgolKeyStore.URL_KEY, request.getSession().getAttribute(TgolKeyStore.URL_KEY));
@@ -254,13 +392,15 @@ public class ForgottenOrChangePasswordController extends AbstractController {
      */
     private String displayChangePasswordFormWithErrors(
             Model model,
-            ChangePasswordCommand changePasswordCommand) {
-        if (changePasswordCommand.getNewPassword() != null &&
-            getCurrentUser() != null) {
-            model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY, getCurrentUser());
-        }
+            ChangePasswordCommand changePasswordCommand,
+            boolean isrequestFromAdmin) {
         model.addAttribute(TgolKeyStore.CHANGE_PASSWORD_COMMAND_KEY,
                 changePasswordCommand);
+        if (isrequestFromAdmin) {
+            model.addAttribute(TgolKeyStore.CHANGE_PASSWORD_FROM_ADMIN_KEY, true);
+        } else {
+            model.addAttribute(TgolKeyStore.CHANGE_PASSWORD_FROM_ADMIN_KEY, false);
+        }
         return TgolKeyStore.CHANGE_PASSWORD_VIEW_NAME;
     }
 
@@ -290,8 +430,8 @@ public class ForgottenOrChangePasswordController extends AbstractController {
     private String computeReturnedUrl(User user) {
         StringBuilder sb = new StringBuilder();
         sb.append(exposablePropertyPlaceholderConfigurer.getResolvedProps().get(CHANGE_PASSWORD_URL_KEY));
-        sb.append("?email=");
-        sb.append(user.getEmail1());
+        sb.append("?user=");
+        sb.append(user.getId());
         sb.append("&token=");
         try {
             sb.append(URLEncoder.encode(TgolTokenHelper.getInstance().getTokenUser(user), "UTF-8"));
@@ -307,11 +447,9 @@ public class ForgottenOrChangePasswordController extends AbstractController {
      * @return
      * @throws Exception
      */
-    private User updateUserPassword(ChangePasswordCommand changePasswordCommand) throws Exception {
-        User user = getUserDataService().getUserFromEmail(changePasswordCommand.getUserEmail());
-        Logger.getLogger(this.getClass()).info(changePasswordCommand.getUserEmail());
-        Logger.getLogger(this.getClass()).info(user);
-        Logger.getLogger(this.getClass()).info(changePasswordCommand.getNewPassword());
+    private User updateUserPassword(
+            User user,
+            ChangePasswordCommand changePasswordCommand) throws Exception {
         user.setPassword(MD5Encoder.MD5(changePasswordCommand.getNewPassword()));
         getUserDataService().saveOrUpdate(user);
         return user;

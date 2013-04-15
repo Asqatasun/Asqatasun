@@ -21,18 +21,14 @@
  */
 package org.opens.tgol.charts.data;
 
-import org.opens.tgol.presentation.data.ResultCounter;
 import de.laures.cewolf.DatasetProducer;
 import de.laures.cewolf.links.CategoryItemLinkGenerator;
 import de.laures.cewolf.tooltips.CategoryToolTipGenerator;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultIntervalCategoryDataset;
 import org.opens.tanaguru.entity.reference.Theme;
+import org.opens.tgol.presentation.data.ResultCounter;
 
 /**
  * This class handles displayable audit statistics data

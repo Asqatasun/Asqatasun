@@ -22,7 +22,7 @@
 package org.opens.tanaguru.service;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import org.opens.tanaguru.contentadapter.util.URLIdentifierFactory;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.ProcessResult;
@@ -57,8 +57,8 @@ public class ProcessorServiceImpl implements ProcessorService {
     }
 
     @Override
-    public List<ProcessResult> process(List<Content> contentList, List<Test> testList) {
-        List<ProcessResult> processResultList = new ArrayList<ProcessResult>();
+    public Collection<ProcessResult> process(Collection<Content> contentList, Collection<Test> testList) {
+        Collection<ProcessResult> processResultList = new ArrayList<ProcessResult>();
 
         Processor processor = processorFactory.create(ProcessRemarkServiceFactory.create(processRemarkFactory, sourceCodeRemarkFactory, evidenceElementFactory, evidenceDataService), nomenclatureLoaderService, urlIdentifierFactory.create());
 

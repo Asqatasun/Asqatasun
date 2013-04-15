@@ -6,12 +6,12 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>2.0.0</version>
+        <version>2.1.0</version>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>testing-tools</artifactId>
     <packaging>pom</packaging>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
     <name>testing-tools</name>
     <url>http://www.tanaguru.org</url>
     <modules>
@@ -19,6 +19,7 @@
         <module>maven-kbcsv-plugin</module>
         <module>maven-testgenerator-plugin</module>
         <module>tgol-testing-tools</module>
+<!--        <module>tgol-test-scenario</module>-->
 <!--        <module>tgol-test-kbaccess-campaign</module>
         <module>tgol-test-krash-offline</module>
         <module>tgol-test-krash-online</module>

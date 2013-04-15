@@ -21,9 +21,9 @@
  */
 package org.opens.tgol.entity.dao.user;
 
-import org.opens.tgol.entity.user.Role;
-import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 import java.util.Collection;
+import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
+import org.opens.tgol.entity.user.Role;
 
 /**
  *
@@ -31,6 +31,6 @@ import java.util.Collection;
  */
 public interface RoleDAO extends GenericDAO<Role, Long> {
 
-    Collection<? extends Role> findAllChildRole(Long key);
+    Collection<Role> findAllChildRole(Long key);
 
 }

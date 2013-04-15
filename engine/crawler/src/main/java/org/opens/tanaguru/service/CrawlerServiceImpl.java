@@ -103,7 +103,7 @@ public class CrawlerServiceImpl implements CrawlerService {
 
     @Override
     public WebResource crawlPage(Audit audit, String pageUrl) {
-        Crawler crawler = getCrawlerInstance((List<Parameter>)audit.getParameterSet());
+        Crawler crawler = getCrawlerInstance((Set<Parameter>)audit.getParameterSet());
         crawler.setPageURL(pageUrl);
         return crawl(crawler, audit);
     }
@@ -115,14 +115,14 @@ public class CrawlerServiceImpl implements CrawlerService {
      */
     @Override
     public WebResource crawlSite(Audit audit, String siteUrl) {
-        Crawler crawler = getCrawlerInstance((List<Parameter>)audit.getParameterSet());
+        Crawler crawler = getCrawlerInstance((Set<Parameter>)audit.getParameterSet());
         crawler.setSiteURL(siteUrl);
         return crawl(crawler, audit);
     }
     
     @Override
     public WebResource crawlGroupOfPages(Audit audit, String siteUrl, List<String> urlList) {
-        Crawler crawler = getCrawlerInstance((List<Parameter>)audit.getParameterSet());
+        Crawler crawler = getCrawlerInstance((Set<Parameter>)audit.getParameterSet());
         crawler.setSiteURL(siteUrl, urlList);
         return crawl(crawler, audit);
     }
@@ -301,9 +301,7 @@ public class CrawlerServiceImpl implements CrawlerService {
      * @return
      *       a crawler instance.
      */
-    private Crawler getCrawlerInstance(List<Parameter> paramList) {
-        Set<Parameter> paramSet = new HashSet<Parameter>();
-        paramSet.addAll(paramList);
+    private Crawler getCrawlerInstance(Set<Parameter> paramSet) {
         return crawlerFactory.create(paramSet);
     }
 

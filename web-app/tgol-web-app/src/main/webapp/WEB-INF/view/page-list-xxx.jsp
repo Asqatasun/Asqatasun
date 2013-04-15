@@ -18,6 +18,20 @@
         <c:set var="lang" value="${pageContext.response.locale}"/>
     </c:otherwise>
 </c:choose>
+<c:choose> 
+   <c:when test="${not empty configProperties['cdnUrl']}">
+        <c:set var="externalLinkImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/window_duplicate.png"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="externalLinkImgUrl">
+            <c:url value="/Images/window_duplicate.png"/>  
+        </c:set>
+    </c:otherwise>
+</c:choose>
+<c:set var="invalidTestCriterion" value="false"/>
+<c:if test="${not empty param.test}">
+    <c:set var="invalidTestCriterion" value="true"/>
+</c:if>
 <html lang="${lang}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="pageList.${param.status}"/>
@@ -26,6 +40,13 @@
                 ${param.wr}
             </fmt:param>
         </fmt:message>
+        <c:if test="${invalidTestCriterion}">
+            <fmt:message key="pageList.invalidatingTheTest">
+                <fmt:param>
+                    ${param.test}
+                </fmt:param>
+            </fmt:message>
+        </c:if>
     </c:set>
     <%@include file="template/head.jsp" %>
     <body id="tgm-page-list-${param.status}">
@@ -40,6 +61,13 @@
                         ${param.wr}
                     </fmt:param>
                 </fmt:message>
+                <c:if test="${invalidTestCriterion}">
+                    <fmt:message key="pageList.invalidatingTheTest">
+                        <fmt:param>
+                            ${param.test}
+                        </fmt:param>
+                    </fmt:message>
+                </c:if>
             </c:set>
             <ul class="breadcrumb">
                 <li><a href="<c:url value="/home.html"/>"><fmt:message key="home.h1"/></a> <span class="divider"></span></li>
@@ -53,7 +81,9 @@
                     </fmt:message>
                 </c:set>
                 <li><a href="<c:url value="/home/contract/audit-synthesis.html?wr=${param.wr}"/>">${auditSynthesisName}</a> <span class="divider"></span></li>
+                    <c:if test="${not invalidTestCriterion}">
                 <li><a href="<c:url value="/home/contract/page-list.html?wr=${param.wr}"/>"><fmt:message key="pageList.h1"/></a> <span class="divider"></span></li>
+                    </c:if>
                 </c:if>
                 <li class="active">${pageName}</li>
             </ul>
@@ -93,6 +123,9 @@
                     <form id="display-options-form" method="get" enctype="application/x-www-form-urlencoded" class="option-console">
                         <input type="hidden" name="wr" value="${param.wr}"/>
                         <input type="hidden" name="status" value="${param.status}"/>
+			<c:if test="${param.test != null}">
+                        <input type="hidden" name="test" value="${param.test}"/>
+			</c:if>
                         <fieldset>
                             <legend><fmt:message key="pageList.displayOptions"/></legend>
                             <div id="display-options-page-size" class="clearfix">
@@ -126,8 +159,8 @@
                                 <label for="sortDirection"><fmt:message key="pageList.sortDirection"/></label>
                                 <div class="input">
                                     <select name="sortDirection" id="sortDirection">
-                                        <option value="1" <c:if test="${sortDirectionValue == 1}">selected="selected"</c:if>><fmt:message key="pageList.ascending"/></option>
-                                        <option value="2" <c:if test="${sortDirectionValue == 2}">selected="selected"</c:if>><fmt:message key="pageList.descending"/></option>
+                                        <option value="2" <c:if test="${sortDirectionValue == 2}">selected="selected"</c:if>><fmt:message key="pageList.ascending"/></option>
+                                        <option value="1" <c:if test="${sortDirectionValue == 1}">selected="selected"</c:if>><fmt:message key="pageList.descending"/></option>
                                     </select>
                                 </div>
                             </div>
@@ -182,7 +215,7 @@
                 </div>
                 </c:if>
                 <div class="span15 offset1">
-                <display:table id="page-list-${param.status}" name="pageList" sort="external" defaultsort="1" pagesize="${pageList.objectsPerPage}" partialList="true" size="${pageList.fullListSize}" requestURI="" class="zebra-striped" decorator="org.opens.tgol.report.pagination.PageListWrapper" summary="${summary}">
+                <display:table id="page-list-${param.status}" name="pageList" sort="external" defaultsort="2" pagesize="${pageList.objectsPerPage}" partialList="true" size="${pageList.fullListSize}" requestURI="" class="zebra-striped" decorator="org.opens.tgol.report.pagination.PageListWrapper" summary="${summary}">
                 <c:choose>
                 <c:when test="${pageList.objectsPerPage >= 25}">
                     <display:setProperty name="paging.banner.placement" value="both" />
@@ -195,11 +228,10 @@
                 <c:choose>
                     <c:when test="${statistics.auditScope == 'SCENARIO'}">
                         <display:column property="rank" title="${rankTitle}" headerClass="rankCol" class="rankCol" headerScope="col"/>
-                        <display:column property="url" autolink="true" title="${urlTitle}" headerClass="urlCol" class="urlCol" headerScope="col"/>
+                        <display:column property="urlWithPageResultLinkAndExternalLink" title="${urlTitle}" headerClass="urlCol" class="urlCol" headerScope="col"/>
                         <c:choose>
                             <c:when test="${param.status == 'f2xx'}">
                                 <display:column property="rawMark" title="${rawMarkTitle}" headerClass="markCol" class="markCol" headerScope="col"/>
-                                <display:column property="detailedResultLink" title="${detailedResultTitle}" headerClass="linkCol" class="linkCol" headerScope="col"/>
                             </c:when>
                             <c:otherwise>
                                 <display:column property="httpStatusCode" title="${httpStatusCodeTitle}" headerClass="statusCol" class="statusCol" headerScope="col"/>
@@ -207,14 +239,15 @@
                         </c:choose>
                     </c:when>
                     <c:otherwise>
-                        <display:column property="url" autolink="true" title="${urlTitle}" headerClass="urlCol" class="urlCol" headerScope="col"/>
+                        
                         <c:choose>
                             <c:when test="${param.status == 'f2xx'}">
+                                <display:column property="urlWithPageResultLinkAndExternalLink" title="${urlTitle}" headerClass="urlCol" class="urlCol" headerScope="col"/>
                                 <display:column property="rawMark" title="${rawMarkTitle}" headerClass="markCol" class="markCol" headerScope="col"/>
                                 <display:column property="rank" title="${rankTitle}" headerClass="rankCol" class="rankCol" headerScope="col"/>
-                                <display:column property="detailedResultLink" title="${detailedResultTitle}" headerClass="linkCol" class="linkCol" headerScope="col"/>
                             </c:when>
                             <c:otherwise>
+                                <display:column property="urlWithExternalLink" title="${urlTitle}" headerClass="urlCol" class="urlCol" headerScope="col"/>
                                 <display:column property="httpStatusCode" title="${httpStatusCodeTitle}" headerClass="statusCol" class="statusCol" headerScope="col"/>
                             </c:otherwise>
                         </c:choose>

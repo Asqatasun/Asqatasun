@@ -6,13 +6,13 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>2.0.0</version>
+        <version>2.1.0</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>tgol-web-app</artifactId>
     <packaging>war</packaging>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
     <name>tgol-web-app</name>
     <url>http://www.tanaguru.org</url>
     <dependencies>
@@ -30,6 +30,11 @@
         <dependency>
             <groupId>${webappGroupId}</groupId>
             <artifactId>tgol-persistence</artifactId>
+            <version>${webappVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>${webappGroupId}</groupId>
+            <artifactId>tgol-security</artifactId>
             <version>${webappVersion}</version>
         </dependency>
         <dependency>
@@ -131,7 +136,7 @@
             <artifactId>logging</artifactId>
             <version>${engineVersion}</version>
         </dependency>
-	<dependency>
+        <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>scenarioloader</artifactId>
             <version>${engineVersion}</version>
@@ -153,7 +158,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-instrument-tomcat</artifactId>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
         </dependency>
@@ -164,7 +169,7 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
@@ -180,7 +185,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <scope>runtime</scope>
+<!--            <scope>runtime</scope>-->
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -228,10 +233,20 @@
             <artifactId>htmlcompressor</artifactId>
             <version>1.5.2</version>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
+            <artifactId>hsqldb</artifactId>-->
 <!--            <version>1.8.0.10</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymockclassextension</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>
@@ -244,7 +259,7 @@
                 </configuration>
             </plugin>
             <plugin>-->
-                <groupId>org.apache.maven.plugins</groupId>
+            <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
@@ -278,6 +293,9 @@
                                     <tasks>
                                         <scp file="${project.build.directory}/${project.build.finalName}.war" todir="${qa.deployPath}" keyfile="${qa.keyFile}" passphrase="${qa.passPhrase}" />
                                         <!-- see also: http://ant.apache.org/manual/Tasks/scp.html -->
+                                        <exec executable="/bin/sh">
+                                            <arg value="/root/bin/restart-tg-instance.sh"/>
+                                        </exec>
                                     </tasks>
                                 </configuration>
                             </execution>
@@ -290,14 +308,14 @@
                             </dependency>
                         </dependencies>
                     </plugin>
-                    <plugin>
+<!--                    <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
                         <version>1.2</version>
                         <executions>
                             <execution>
                                 <id>tomcat-stop</id>
-                                <phase>verify</phase>
+                                <phase>deploy</phase>
                                 <goals>
                                     <goal>exec</goal>
                                 </goals>
@@ -307,7 +325,7 @@
                                 </configuration>
                             </execution>
                         </executions>
-                    </plugin>
+                    </plugin>-->
                 </plugins>
             </build>
         </profile>

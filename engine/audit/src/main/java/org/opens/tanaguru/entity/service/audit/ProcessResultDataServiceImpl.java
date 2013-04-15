@@ -21,9 +21,7 @@
  */
 package org.opens.tanaguru.entity.service.audit;
 
-import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 import java.util.Collection;
-import java.util.List;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -32,6 +30,7 @@ import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 
 /**
  * 
@@ -63,22 +62,22 @@ public class ProcessResultDataServiceImpl extends AbstractGenericDataService<Pro
     }
 
     @Override
-    public List<? extends ProcessResult> getGrossResultFromAudit(Audit audit) {
+    public Collection<ProcessResult> getGrossResultFromAudit(Audit audit) {
         return ((ProcessResultDAO) entityDao).retrieveGrossResultFromAudit(audit);
     }
 
     @Override
-    public List<? extends ProcessResult> getNetResultFromAudit(Audit audit) {
+    public Collection<ProcessResult> getNetResultFromAudit(Audit audit) {
         return ((ProcessResultDAO) entityDao).retrieveNetResultFromAudit(audit);
     }
 
     @Override
-    public List<? extends ProcessResult> getNetResultFromAuditAndWebResource(Audit audit, WebResource webResource) {
+    public Collection<ProcessResult> getNetResultFromAuditAndWebResource(Audit audit, WebResource webResource) {
         return ((ProcessResultDAO) entityDao).retrieveNetResultFromAuditAndWebResource(audit, webResource);
     }
     
     @Override
-    public List<? extends ProcessResult> getGrossResultFromAuditAndTest(Audit audit, Test test) {
+    public Collection<ProcessResult> getGrossResultFromAuditAndTest(Audit audit, Test test) {
         return ((ProcessResultDAO) entityDao).retrieveGrossResultFromAuditAndTest(audit, test);
     }
 

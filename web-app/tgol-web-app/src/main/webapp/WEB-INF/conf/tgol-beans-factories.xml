@@ -14,7 +14,7 @@
     <bean id="userFactory" class="org.opens.tgol.entity.factory.user.UserFactoryImpl"/>
     <bean id="roleFactory" class="org.opens.tgol.entity.factory.user.RoleFactoryImpl"/>
 
-    <bean id="tgsiFuntionalityFactory" class="org.opens.tgol.entity.factory.functionality.FunctionalityFactoryImpl"/>
+    <bean id="tgsiFunctionalityFactory" class="org.opens.tgol.entity.factory.functionality.FunctionalityFactoryImpl"/>
     
     <bean id="optionFamilyFactory" class="org.opens.tgol.entity.factory.option.OptionFamilyFactoryImpl"/>
     <bean id="optionElementFactory" class="org.opens.tgol.entity.factory.option.OptionElementFactoryImpl"/>

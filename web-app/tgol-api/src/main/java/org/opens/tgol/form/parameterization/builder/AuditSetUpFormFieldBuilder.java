@@ -22,7 +22,6 @@
 package org.opens.tgol.form.parameterization.builder;
 
 import org.opens.tanaguru.entity.parameterization.ParameterElement;
-import org.opens.tgol.entity.option.Option;
 import org.opens.tgol.form.FormField;
 import org.opens.tgol.form.builder.AbstractGenericFormFieldBuilder;
 import org.opens.tgol.form.parameterization.AuditSetUpFormField;
@@ -60,19 +59,6 @@ public interface AuditSetUpFormFieldBuilder {
      * @param formFieldBuilder
      */
     void setFormFieldBuilder(AbstractGenericFormFieldBuilder<? extends FormField> formFieldBuilder);
-
-    /**
-     *
-     * @return
-     *      the restriction code that has to be set to each instance of AuditSetUpFormField
-     */
-    Option getOption();
-
-    /**
-     * Set the restriction code that has to be set to each instance of AuditSetUpFormField
-     * @param restrictionCode
-     */
-    void setOptionCode(String optionCode);
 
     /**
      *

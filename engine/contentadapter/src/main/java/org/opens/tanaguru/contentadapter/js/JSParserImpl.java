@@ -21,7 +21,6 @@
  */
 package org.opens.tanaguru.contentadapter.js;
 
-import org.opens.tanaguru.contentadapter.js.*;
 import org.opens.tanaguru.contentadapter.util.AbstractContentParser;
 
 /**
@@ -43,7 +42,7 @@ public class JSParserImpl extends AbstractContentParser implements JSParser {
 
     @Override
     public void run() {
-        result = (JSResource) resource;
+        result = (JSResource) getResource();
     }
 
 }

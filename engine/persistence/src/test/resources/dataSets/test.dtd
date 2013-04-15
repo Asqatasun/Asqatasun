@@ -233,6 +233,7 @@
     Description CDATA #IMPLIED
     Label CDATA #IMPLIED
     Rank CDATA #IMPLIED
+    Weight CDATA #REQUIRED
     Rule_Archive_Name CDATA #IMPLIED
     Rule_Class_Name CDATA #IMPLIED
     Rule_Design_Url CDATA #IMPLIED

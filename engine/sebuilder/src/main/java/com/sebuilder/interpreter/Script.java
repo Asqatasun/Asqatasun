@@ -34,9 +34,15 @@ import org.openqa.selenium.firefox.FirefoxProfile;
  */
 public class Script {
 
-    ArrayList<Step> steps = new ArrayList<Step>();
+    private ArrayList<Step> steps = new ArrayList<Step>();
+    public ArrayList<Step> getSteps() {
+        return steps;
+    }
+    public void addStep(Step step) {
+        steps.add(step);
+    }
     
-    FirefoxProfile firefoxProfile = new FirefoxProfile();
+    private FirefoxProfile firefoxProfile = new FirefoxProfile();
     public void setFirefoxProfile(FirefoxProfile firefoxProfile) {
         this.firefoxProfile = firefoxProfile;
     }
@@ -144,16 +150,16 @@ public class Script {
         public JSONObject toJSON() throws JSONException {
             JSONObject o = new JSONObject();
             if (type instanceof Assert) {
-                o.put("type", "assert" + ((Assert) type).getter.getClass().getSimpleName());
+                o.put("type", "assert" + ((Assert) type).getGetter().getClass().getSimpleName());
             }
             if (type instanceof Verify) {
-                o.put("type", "verify" + ((Verify) type).getter.getClass().getSimpleName());
+                o.put("type", "verify" + ((Verify) type).getGetter().getClass().getSimpleName());
             }
             if (type instanceof WaitFor) {
-                o.put("type", "waitFor" + ((WaitFor) type).getter.getClass().getSimpleName());
+                o.put("type", "waitFor" + ((WaitFor) type).getGetter().getClass().getSimpleName());
             }
             if (type instanceof Store) {
-                o.put("type", "store" + ((Store) type).getter.getClass().getSimpleName());
+                o.put("type", "store" + ((Store) type).getGetter().getClass().getSimpleName());
             }
             o.put("negated", negated);
             for (Map.Entry<String, String> pe : stringParams.entrySet()) {

@@ -54,7 +54,7 @@ public interface Evidence extends Entity {
      *
      * @return the elements
      */
-    Collection<? extends EvidenceElement> getElementList();
+    Collection<EvidenceElement> getElementList();
 
     /**
      *
@@ -93,7 +93,7 @@ public interface Evidence extends Entity {
      * @param elements
      *            the elements to set
      */
-    void setElementList(Collection<? extends EvidenceElement> elements);
+    void setElementList(Collection<EvidenceElement> elements);
 
     /**
      *

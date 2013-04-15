@@ -73,7 +73,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     private static final String START_COMMENT_OCCURENCE = "<!--";
     private static final String END_COMMENT_OCCURENCE = "-->";
     private XPath xpath = XPathFactory.newInstance().newXPath();
-    Document document;
+    private Document document;
 
     /**
      * 
@@ -101,13 +101,13 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     public void setDocument(Document document) {
         this.document = document;
     }
-    protected Set<ProcessRemark> remarkSet;
+    private Set<ProcessRemark> remarkSet;
 
     @Override
     public Collection<ProcessRemark> getRemarkList() {
         return this.remarkSet;
     }
-    List<String> evidenceElementList = new ArrayList<String>();
+    private List<String> evidenceElementList = new ArrayList<String>();
 
     @Override
     public void addEvidenceElement(String element) {
@@ -120,7 +120,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     public void setEvidenceElementList(Collection<String> element) {
         evidenceElementList.addAll(element);
     }
-    protected ProcessRemarkFactory processRemarkFactory;
+    private ProcessRemarkFactory processRemarkFactory;
 
     public ProcessRemarkFactory getProcessRemarkFactory() {
         return processRemarkFactory;
@@ -129,7 +129,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     public void setProcessRemarkFactory(ProcessRemarkFactory processRemarkFactory) {
         this.processRemarkFactory = processRemarkFactory;
     }
-    protected SourceCodeRemarkFactory sourceCodeRemarkFactory;
+    private SourceCodeRemarkFactory sourceCodeRemarkFactory;
 
     public SourceCodeRemarkFactory getSourceCodeRemarkFactory() {
         return sourceCodeRemarkFactory;
@@ -138,7 +138,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     public void setSourceCodeRemarkFactory(SourceCodeRemarkFactory sourceCodeRemarkFactory) {
         this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
     }
-    protected EvidenceElementFactory evidenceElementFactory;
+    private EvidenceElementFactory evidenceElementFactory;
 
     @Override
     public EvidenceElementFactory getEvidenceElementFactory() {
@@ -148,7 +148,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     public void setEvidenceElementFactory(EvidenceElementFactory evidenceElementFactory) {
         this.evidenceElementFactory = evidenceElementFactory;
     }
-    protected EvidenceDataService evidenceDataService;
+    private EvidenceDataService evidenceDataService;
 
     @Override
     public EvidenceDataService getEvidenceDataService() {
@@ -158,7 +158,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     public void setEvidenceDataService(EvidenceDataService evidenceDataService) {
         this.evidenceDataService = evidenceDataService;
     }
-    protected Map<Integer, String> sourceCodeWithLine =
+    private Map<Integer, String> sourceCodeWithLine =
             new TreeMap<Integer, String>();
     /**
      * Local map of evidence to avoid multiple access to database

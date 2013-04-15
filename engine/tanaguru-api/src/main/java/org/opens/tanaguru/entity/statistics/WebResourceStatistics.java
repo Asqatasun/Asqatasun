@@ -21,6 +21,7 @@
  */
 package org.opens.tanaguru.entity.statistics;
 
+import java.math.BigDecimal;
 import java.util.Set;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -108,13 +109,13 @@ public interface WebResourceStatistics extends Entity, ResultCounter {
      * 
      * @return
      */
-    public Set<? extends ThemeStatistics> getThemeStatisticsSet();
+    public Set<ThemeStatistics> getThemeStatisticsSet();
 
     /**
      * 
      * @param themeStatisticsSet
      */
-    public void setThemeStatisticsSet(Set<? extends ThemeStatistics> themeStatisticsSet);
+    public void setThemeStatisticsSet(Set<ThemeStatistics> themeStatisticsSet);
 
     /**
      *
@@ -126,13 +127,13 @@ public interface WebResourceStatistics extends Entity, ResultCounter {
      *
      * @return
      */
-    public Set<? extends TestStatistics> getTestStatisticsSet();
+    public Set<TestStatistics> getTestStatisticsSet();
 
     /**
      *
      * @param themeStatisticsSet
      */
-    public void setTestStatisticsSet(Set<? extends TestStatistics> themeStatisticsSet);
+    public void setTestStatisticsSet(Set<TestStatistics> themeStatisticsSet);
 
     /**
      *
@@ -152,5 +153,53 @@ public interface WebResourceStatistics extends Entity, ResultCounter {
      * @param httpStatusCode
      */
     public void setHttpStatusCode(int httpStatusCode);
+    
+    /**
+     *
+     * @return
+     */
+    public BigDecimal getWeightedNa();
+
+    /**
+     *
+     * @param weightedNA
+     */
+    public void setWeightedNa(BigDecimal weightedNa);
+
+    /**
+     *
+     * @return
+     */
+    public BigDecimal getWeightedNmi();
+
+    /**
+     *
+     * @param weightedNMI
+     */
+    public void setWeightedNmi(BigDecimal weightedNmi);
+
+    /**
+     *
+     * @return
+     */
+    public BigDecimal getWeightedPassed() ;
+
+    /**
+     *
+     * @param weightedPassed
+     */
+    public void setWeightedPassed(BigDecimal weightedPassed);
+
+    /**
+     *
+     * @return
+     */
+    public BigDecimal getWeightedFailed();
+
+    /**
+     *
+     * @param weightedFailed
+     */
+    public void setWeightedFailed(BigDecimal weightedFailed);
 
 }

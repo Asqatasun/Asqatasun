@@ -21,13 +21,13 @@
  */
 package org.opens.tanaguru.entity.dao.audit;
 
+import java.util.List;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditImpl;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import java.util.List;
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
 
 /**
  * 
@@ -79,7 +79,7 @@ public class AuditDAOImpl extends AbstractJPADAO<Audit, Long> implements
     public Audit findAuditWithTest(Long id) {
         Query query = entityManager.createQuery("SELECT a FROM "
                 + getEntityClass().getName() + " a"
-                + " LEFT JOIN FETCH a.testList"
+                + " LEFT JOIN FETCH a.testSet"
                 + " WHERE a.id = :id");
         query.setParameter("id", id);
         try {

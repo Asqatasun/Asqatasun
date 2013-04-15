@@ -21,9 +21,9 @@
  */
 package org.opens.tgol.controller;
 
-import org.opens.tgol.util.TgolKeyStore;
 import java.util.GregorianCalendar;
 import javax.servlet.http.HttpServletRequest;
+import org.opens.tgol.util.TgolKeyStore;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

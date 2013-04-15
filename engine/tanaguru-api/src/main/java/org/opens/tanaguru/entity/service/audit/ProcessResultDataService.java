@@ -21,9 +21,7 @@
  */
 package org.opens.tanaguru.entity.service.audit;
 
-import org.opens.tanaguru.sdk.entity.service.GenericDataService;
 import java.util.Collection;
-import java.util.List;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -31,6 +29,7 @@ import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.sdk.entity.service.GenericDataService;
 
 /**
  * 
@@ -82,21 +81,21 @@ public interface ProcessResultDataService extends
      * @param audit
      * @return
      */
-    List<? extends ProcessResult> getGrossResultFromAudit(Audit audit);
+    Collection<ProcessResult> getGrossResultFromAudit(Audit audit);
 
     /**
      *
      * @param audit
      * @return
      */
-    List<? extends ProcessResult> getGrossResultFromAuditAndTest(Audit audit, Test test);
+    Collection<ProcessResult> getGrossResultFromAuditAndTest(Audit audit, Test test);
 
     /**
      *
      * @param audit
      * @return
      */
-    List<? extends ProcessResult> getNetResultFromAudit(Audit audit);
+    Collection<ProcessResult> getNetResultFromAudit(Audit audit);
 
     /**
      * 
@@ -104,6 +103,6 @@ public interface ProcessResultDataService extends
      * @param webResource
      * @return
      */
-    List<? extends ProcessResult> getNetResultFromAuditAndWebResource(Audit audit, WebResource webResource);
+    Collection<ProcessResult> getNetResultFromAuditAndWebResource(Audit audit, WebResource webResource);
 
 }

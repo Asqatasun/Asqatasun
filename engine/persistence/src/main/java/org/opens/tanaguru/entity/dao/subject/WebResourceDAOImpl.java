@@ -49,7 +49,7 @@ public class WebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
         Query query = entityManager.createQuery(
                 "SELECT wr FROM " +
                 getEntityClass().getName() + " wr"
-                + " left join fetch wr.processResultList pr"
+                + " left join fetch wr.processResultSet pr"
                 + " WHERE wr.url = :url");
         query.setParameter("url", url);
         try {
@@ -72,7 +72,7 @@ public class WebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
         Query query = entityManager.createQuery(
                 "SELECT wr FROM " +
                 getEntityClass().getName() + " wr"
-                + " left join fetch wr.processResultList pr"
+                + " left join fetch wr.processResultSet pr"
                 + " WHERE wr.url = :url AND wr.audit = :audit");
         query.setParameter("url", url);
         query.setParameter("audit", audit);
@@ -101,9 +101,9 @@ public class WebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
         try {
             Query query = entityManager.createQuery("SELECT wr FROM "
                 + getEntityClass().getName() + " wr"
-                + " left join fetch wr.processResultList prs"
-                + " left join fetch prs.remarkList prk"
-                + " left join fetch prk.elementList pr"
+                + " left join fetch wr.processResultSet prs"
+                + " left join fetch prs.remarkSet prk"
+                + " left join fetch prk.elementSet pr"
                 + " WHERE wr.id = :id");
             query.setParameter("id", key);
             return (WebResource) query.getSingleResult();

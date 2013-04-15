@@ -21,11 +21,40 @@
  */
 package org.opens.tgol.entity.dao.option;
 
+import java.util.Collection;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
+import org.opens.tgol.entity.option.Option;
 import org.opens.tgol.entity.option.OptionElement;
+import org.opens.tgol.entity.user.User;
 
 /**
  *
  * @author jkowalczyk
  */
-public interface OptionElementDAO extends GenericDAO<OptionElement, Long> {}
+public interface OptionElementDAO extends GenericDAO<OptionElement, Long> {
+
+
+    /**
+     * 
+     * @param value
+     * @param option
+     * @return 
+     */
+    OptionElement findOptionElementFromValueAndOption(String value, Option option);
+    
+    /**
+     * 
+     * @param user
+     * @param optionFamilyCode
+     * @return 
+     */
+    Collection<OptionElement> findOptionElementFromUserAndFamilyCode(User user, String optionFamilyCode);
+    
+    /**
+     * 
+     * @param user
+     * @return 
+     */
+    Collection<OptionElement> findOptionElementFromUser(User user);
+    
+}

@@ -28,8 +28,8 @@
                         <cewolf:producer id="actStatistics"/>
                     </cewolf:data>
                     <cewolf:chartpostprocessor id="timeSeriesPaint">
-			<cewolf:param name="0" value='<%= new String("#A0FFA3")%>'/>
-                        <cewolf:param name="1" value='<%= new String("#A0C8FF")%>'/>
+			<cewolf:param name="0" value='<%= new String("#A0C8FF")%>'/>
+                        <cewolf:param name="1" value='<%= new String("#A0FFA3")%>'/>
                     </cewolf:chartpostprocessor>
                 </cewolf:chart>
                 <cewolf:imgurl

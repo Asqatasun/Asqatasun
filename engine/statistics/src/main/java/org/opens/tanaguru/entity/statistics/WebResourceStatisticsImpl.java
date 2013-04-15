@@ -22,18 +22,10 @@
 package org.opens.tanaguru.entity.statistics;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.math.BigDecimal;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditImpl;
@@ -74,6 +66,18 @@ public class WebResourceStatisticsImpl
 
     @Column(name="Nb_Na")
     private int nbOfNa=0;
+    
+    @Column(name="Weighted_Passed", precision=10, scale=1)
+    private BigDecimal weightedPassed = BigDecimal.ZERO;
+
+    @Column(name="Weighted_Failed", precision=10, scale=1)
+    private BigDecimal weightedFailed = BigDecimal.ZERO;
+
+    @Column(name="Weighted_Nmi", precision=10, scale=1)
+    private BigDecimal weightedNmi = BigDecimal.ZERO;
+
+    @Column(name="Weighted_Na", precision=10, scale=1)
+    private BigDecimal weightedNa = BigDecimal.ZERO;
 
     @Column(name="Nb_Invalid_Test")
     private int nbOfInvalidTest=0;
@@ -211,14 +215,16 @@ public class WebResourceStatisticsImpl
     }
 
     @Override
-    public Set<? extends ThemeStatistics> getThemeStatisticsSet() {
-        return themeStatisticsSet;
+    public Set<ThemeStatistics> getThemeStatisticsSet() {
+        return (Set<ThemeStatistics>)(LinkedHashSet)themeStatisticsSet;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public void setThemeStatisticsSet(Set<? extends ThemeStatistics> themeStatisticsSet) {
-        this.themeStatisticsSet.addAll((Collection<? extends ThemeStatisticsImpl>) themeStatisticsSet);
+    public void setThemeStatisticsSet(Set<ThemeStatistics> themeStatisticsSet) {
+        for (ThemeStatistics ts : themeStatisticsSet) {
+            this.themeStatisticsSet.add((ThemeStatisticsImpl)ts);
+        }
     }
 
     @Override
@@ -228,21 +234,22 @@ public class WebResourceStatisticsImpl
     }
 
     @Override
-    public Set<? extends TestStatistics> getTestStatisticsSet() {
-        return this.testStatisticsSet;
+    public Set<TestStatistics> getTestStatisticsSet() {
+        return (Set<TestStatistics>)(LinkedHashSet)testStatisticsSet;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public void setTestStatisticsSet(Set<? extends TestStatistics> testStatisticsSet) {
-        this.testStatisticsSet.addAll((Collection<? extends TestStatisticsImpl>) testStatisticsSet);
+    public void setTestStatisticsSet(Set<TestStatistics> testStatisticsSet) {
+        for (TestStatistics ts : testStatisticsSet) {
+            this.testStatisticsSet.add((TestStatisticsImpl)ts);
+        }
     }
 
     @Override
     public void addTestStatistics(TestStatistics testStatistics) {
         testStatistics.setWebResourceStatistics(this);
         this.testStatisticsSet.add((TestStatisticsImpl) testStatistics);
-
     }
 
     @Override
@@ -253,6 +260,46 @@ public class WebResourceStatisticsImpl
     @Override
     public void setHttpStatusCode(int httpStatusCode) {
         this.httpStatusCode = httpStatusCode;
+    }
+
+    @Override
+    public BigDecimal getWeightedNa() {
+        return weightedNa;
+    }
+
+    @Override
+    public void setWeightedNa(BigDecimal weightedNa) {
+        this.weightedNa = weightedNa;
+    }
+
+    @Override
+    public BigDecimal getWeightedNmi() {
+        return weightedNmi;
+    }
+
+    @Override
+    public void setWeightedNmi(BigDecimal weightedNmi) {
+        this.weightedNmi = weightedNmi;
+    }
+
+    @Override
+    public BigDecimal getWeightedPassed() {
+        return weightedPassed;
+    }
+
+    @Override
+    public void setWeightedPassed(BigDecimal weightedPassed) {
+        this.weightedPassed = weightedPassed;
+    }
+
+    @Override
+    public BigDecimal getWeightedFailed() {
+        return weightedFailed;
+    }
+
+    @Override
+    public void setWeightedFailed(BigDecimal weightedFailed) {
+        this.weightedFailed = weightedFailed;
     }
 
 }

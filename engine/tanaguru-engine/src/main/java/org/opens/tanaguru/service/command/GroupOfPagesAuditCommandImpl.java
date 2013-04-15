@@ -58,7 +58,11 @@ public class GroupOfPagesAuditCommandImpl extends AbstractScenarioAuditCommandIm
             ProcessorService processorService, 
             ConsolidatorService consolidatorService, 
             AnalyserService analyserService, 
-            AdaptationListener adaptationListener) {
+            AdaptationListener adaptationListener,
+            int adaptationTreatmentWindow,
+            int processingTreatmentWindow,
+            int consolidationTreatmentWindow,
+            int analysisTreatmentWindow) {
         super(paramSet, 
               auditDataService, 
               testDataService, 
@@ -71,7 +75,11 @@ public class GroupOfPagesAuditCommandImpl extends AbstractScenarioAuditCommandIm
               processorService, 
               consolidatorService, 
               analyserService, 
-              adaptationListener);
+              adaptationListener,
+              adaptationTreatmentWindow,
+              processingTreatmentWindow,
+              consolidationTreatmentWindow,
+              analysisTreatmentWindow);
         List<String> localUrlList = new ArrayList<String>();
         for (String url : pageUrlList) {
             localUrlList.add(FileNaming.addProtocolToUrl(url));

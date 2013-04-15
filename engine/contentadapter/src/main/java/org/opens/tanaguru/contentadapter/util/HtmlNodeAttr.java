@@ -27,6 +27,11 @@ package org.opens.tanaguru.contentadapter.util;
  */
 public abstract class HtmlNodeAttr {
 
+    /**
+     * Private constructor  : Hide Utility Class Constructor
+     */
+    private HtmlNodeAttr() {}
+    
     public final static String CLASS = "class";
     public final static String HREF = "href";
     public final static String ID = "id";

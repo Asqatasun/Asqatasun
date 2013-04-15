@@ -21,10 +21,11 @@
  */
 package org.opens.tgol.validator;
 
+import java.util.regex.Pattern;
+import org.opens.tgol.command.CreateUserCommand;
 import org.opens.tgol.command.UserSignUpCommand;
 import org.opens.tgol.entity.service.user.UserDataService;
 import org.opens.tgol.util.TgolPasswordChecker;
-import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -85,6 +86,11 @@ public class SignUpFormValidator implements Validator {
         return userDataService;
     }
 
+    private boolean checkSiteUrl = true;
+    public void setCheckSiteUrl(boolean checkSiteUrl) {
+        this.checkSiteUrl = checkSiteUrl;
+    }
+
     @Autowired
     public void setUserDataService(UserDataService userDataService) {
         this.userDataService = userDataService;
@@ -93,7 +99,7 @@ public class SignUpFormValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         boolean hasMandatoryElementWrong = false;
-        UserSignUpCommand userSubscriptionCommand = (UserSignUpCommand)target;
+        CreateUserCommand userSubscriptionCommand = (CreateUserCommand)target;
 
         if (!checkSiteUrl(userSubscriptionCommand, errors)) {
             hasMandatoryElementWrong = true;
@@ -119,7 +125,7 @@ public class SignUpFormValidator implements Validator {
     }
 
     public void validateUpdate(Object target, Errors errors, String currentUserEmail) {
-        UserSignUpCommand userSubscriptionCommand = (UserSignUpCommand)target;
+        CreateUserCommand userSubscriptionCommand = (CreateUserCommand)target;
         if (!currentUserEmail.equalsIgnoreCase(userSubscriptionCommand.getEmail())) {
             checkEmail(userSubscriptionCommand, errors);
         }
@@ -131,7 +137,10 @@ public class SignUpFormValidator implements Validator {
      * @param errors
      * @return
      */
-    private boolean checkSiteUrl(UserSignUpCommand userSubscriptionCommand, Errors errors) {
+    private boolean checkSiteUrl(CreateUserCommand userSubscriptionCommand, Errors errors) {
+        if (!checkSiteUrl) {
+            return true;
+        }
         if (userSubscriptionCommand.getSiteUrl() == null ||
                 userSubscriptionCommand.getSiteUrl().trim().isEmpty()) {
             errors.rejectValue(SITE_URL_KEY, MISSING_URL_KEY);
@@ -153,7 +162,7 @@ public class SignUpFormValidator implements Validator {
      * @return
      */
     private boolean checkEmail(
-            UserSignUpCommand userSubscriptionCommand,
+            CreateUserCommand userSubscriptionCommand,
             Errors errors) {
         if (userSubscriptionCommand.getEmail() == null ||
                 userSubscriptionCommand.getEmail().trim().isEmpty()) {
@@ -179,7 +188,7 @@ public class SignUpFormValidator implements Validator {
      * @return
      */
     private boolean checkPassword(
-            UserSignUpCommand userSubscriptionCommand,
+            CreateUserCommand userSubscriptionCommand,
             Errors errors) {
         String password = userSubscriptionCommand.getPassword();
         if (password == null ||

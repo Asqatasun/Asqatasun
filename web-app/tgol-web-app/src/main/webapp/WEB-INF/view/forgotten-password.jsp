@@ -27,7 +27,6 @@
     <%@include file="template/head.jsp" %>
     <body id="tgm-forgotten-password">
         <div class="container">
-            <c:set var="isInNotAuthentifiedView" scope="page" value="true"/>
             <c:set var="addLogo" scope="page" value="true"/>
             <%@include file="template/lang-box.jsp" %>
             <c:set var="pageName" scope="page">

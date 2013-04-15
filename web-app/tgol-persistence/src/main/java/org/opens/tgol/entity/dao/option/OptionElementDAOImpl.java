@@ -21,9 +21,16 @@
  */
 package org.opens.tgol.entity.dao.option;
 
+import java.util.Collection;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.Query;
 import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.opens.tgol.entity.option.Option;
 import org.opens.tgol.entity.option.OptionElement;
 import org.opens.tgol.entity.option.OptionElementImpl;
+import org.opens.tgol.entity.user.User;
+import org.opens.tgol.entity.user.UserImpl;
 
 /**
  *
@@ -40,5 +47,66 @@ public class OptionElementDAOImpl extends AbstractJPADAO<OptionElement, Long>
     protected Class<? extends OptionElement> getEntityClass() {
         return OptionElementImpl.class;
     }
+    
+    private Class<? extends User> getUserEntityClass() {
+        return UserImpl.class;
+    }
+
+    /**
+     * 
+     * @param value
+     * @param option
+     * @return 
+     */
+    @Override
+    public OptionElement findOptionElementFromValueAndOption(String value, Option option) {
+        Query query = entityManager.createQuery("SELECT oe FROM "
+                + getEntityClass().getName() + " oe"
+                + " WHERE oe.value=:value"
+                + " AND oe.option=:option");
+        query.setParameter("value", value);
+        query.setParameter("option", option);
+        try {
+            return (OptionElement) query.getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        } catch (NonUniqueResultException nure) {
+            return null;
+        }
+    }
+
+    @Override
+    public Collection<OptionElement> findOptionElementFromUserAndFamilyCode(User user, String optionFamilyCode) {
+        Query query = entityManager.createQuery("SELECT distinct(u.optionElementSet) FROM "
+                + getUserEntityClass().getName() + " u"
+                + " LEFT JOIN u.optionElementSet oe"
+                + " WHERE u=:user"
+                + " AND oe.option.optionFamily.code=:optionFamilyCode");
+        query.setParameter("user", user);
+        query.setParameter("optionFamilyCode", optionFamilyCode);
+        try {
+            return (Collection<OptionElement>) query.getResultList();
+        } catch (NoResultException nre) {
+            return null;
+        } catch (NonUniqueResultException nure) {
+            return null;
+        }
+    }
+    
+    @Override
+    public Collection<OptionElement> findOptionElementFromUser(User user) {
+        Query query = entityManager.createQuery("SELECT u.optionElementSet FROM "
+                + getUserEntityClass().getName() + " u"
+                + " WHERE u=:user");
+        query.setParameter("user", user);
+        try {
+            return (Collection<OptionElement>) query.getResultList();
+        } catch (NoResultException nre) {
+            return null;
+        } catch (NonUniqueResultException nure) {
+            return null;
+        }
+    }
+
 
 }

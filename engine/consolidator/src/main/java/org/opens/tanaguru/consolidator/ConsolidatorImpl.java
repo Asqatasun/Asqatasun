@@ -21,13 +21,10 @@
  */
 package org.opens.tanaguru.consolidator;
 
-import java.util.ArrayList;
+import java.util.*;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.ruleimplementation.RuleImplementation;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
@@ -36,10 +33,10 @@ import org.opens.tanaguru.service.ProcessRemarkService;
  */
 public class ConsolidatorImpl implements Consolidator {
 
-    private List<ProcessResult> grossResultList;
+    private Collection<ProcessResult> grossResultList;
     private Map<WebResource, List<ProcessResult>> groupedProcessResultMap;
     private boolean initialized = false;
-    private List<ProcessResult> result;
+    private Collection<ProcessResult> result;
     private RuleImplementation ruleImplementation;
     private ProcessRemarkService processRemarkService;
 
@@ -50,7 +47,7 @@ public class ConsolidatorImpl implements Consolidator {
      * @param processRemarkService
      */
     ConsolidatorImpl(
-            List<ProcessResult> grossResultList,
+            Collection<ProcessResult> grossResultList,
             RuleImplementation ruleImplementation,
             ProcessRemarkService processRemarkService) {
         super();
@@ -60,12 +57,12 @@ public class ConsolidatorImpl implements Consolidator {
     }
 
     @Override
-    public List<ProcessResult> getGrossResultList() {
+    public Collection<ProcessResult> getGrossResultList() {
         return grossResultList;
     }
 
     @Override
-    public List<ProcessResult> getResult() {
+    public Collection<ProcessResult> getResult() {
         return result;
     }
 

@@ -21,13 +21,12 @@
  */
 package org.opens.tanaguru.sdk.entity.service;
 
-import org.opens.tanaguru.sdk.entity.Entity;
 import java.io.Serializable;
 import java.util.Collection;
-
-import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
-import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 import java.util.Set;
+import org.opens.tanaguru.sdk.entity.Entity;
+import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
+import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
 
 /**
  * 
@@ -85,7 +84,7 @@ public abstract class AbstractGenericDataService<E extends Entity, K extends Ser
     }
 
     @Override
-    public Collection<? extends E> findAll() {
+    public Collection<E> findAll() {
         return entityDao.findAll();
     }
 

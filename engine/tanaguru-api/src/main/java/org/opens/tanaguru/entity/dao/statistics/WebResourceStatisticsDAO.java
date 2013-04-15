@@ -21,7 +21,10 @@
  */
 package org.opens.tanaguru.entity.dao.statistics;
 
+import java.math.BigDecimal;
+import java.util.Collection;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
@@ -48,6 +51,18 @@ public interface WebResourceStatisticsDAO extends GenericDAO<WebResourceStatisti
             Long webresourceId,
             TestSolution testSolution);
 
+    /**
+     * 
+     * @param webresourceId
+     * @param paramSet
+     * @param testSolution
+     * @return 
+     */
+    public BigDecimal findWeightedResultCountByResultType(
+            Long webresourceId,
+            Collection<Parameter> paramSet,
+            TestSolution testSolution);
+    
     /**
      * 
      * @param webresourceId

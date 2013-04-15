@@ -36,8 +36,6 @@ import org.opens.tgol.entity.user.User;
 public class ContractDAOImpl extends AbstractJPADAO<Contract, Long>
         implements ContractDAO {
 
-    private static final String CACHEABLE_OPTION="org.hibernate.cacheable";
-
     public ContractDAOImpl() {
         super();
     }
@@ -50,11 +48,14 @@ public class ContractDAOImpl extends AbstractJPADAO<Contract, Long>
     @Override
     @SuppressWarnings("unchecked")
     public Collection<Contract> findAllContractsByUser(User user) {
-        Query query = entityManager.createQuery("SELECT c FROM "
+        Query query = entityManager.createQuery("SELECT distinct(c) FROM "
                 + getEntityClass().getName() + " c"
+                + " LEFT JOIN FETCH c.optionElementSet o"
+                + " LEFT JOIN FETCH c.functionalitySet f"
+                + " LEFT JOIN FETCH c.referentialSet f"
+                + " LEFT JOIN FETCH c.scenarioSet f"
                 + " WHERE c.user = :user");
         query.setParameter("user", user);
-        query.setHint(CACHEABLE_OPTION, "true");
         return query.getResultList();
     }
 
@@ -69,7 +70,6 @@ public class ContractDAOImpl extends AbstractJPADAO<Contract, Long>
                     + " LEFT JOIN FETCH c.scenarioSet f"
                     + " WHERE c.id = :id");
             query.setParameter("id", id);
-            query.setHint(CACHEABLE_OPTION, true);
             Contract contract = (Contract) query.getSingleResult();
             // to ensure the options associated with the contract is 
             // retrieved

@@ -21,7 +21,7 @@
 </c:choose>
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="gearImgUrl" value="${configProperties['cdnUrl']}/Images/gear.png"/>
+        <c:set var="gearImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/gear.png"/>
     </c:when>
     <c:otherwise>
         <c:set var="gearImgUrl">
@@ -43,6 +43,7 @@
                 </div>
             </div>
             <div class="row">
+                <c:import url="template/sort-contract-console.jsp" />
                 <div class="span14 offset1">
                 <c:forEach var="contract" items="${contractList}" varStatus="pContractSet">
                     <c:choose>
@@ -68,7 +69,9 @@
                                 <img src="${gearImgUrl}" title="<fmt:message key="home.actRunning"/>" alt="<fmt:message key="home.actRunning"/>" class="running-audit"/>
                                 </c:if>
                             </h2>
+                            <c:if test="${not empty contract.url}">
                             <div class="project-url"><a href="${contract.url}">${contract.url}</a></div>
+                            </c:if>
                             <c:choose>
                                 <c:when test='${contract.lastActInfo != null}'>
                                     <div class="project-status"><fmt:message key="home.lastAudit"/> : <fmt:formatDate type="date" value="${contract.lastActInfo.date}" dateStyle="long"/> <fmt:message key="home.at"/> <fmt:formatDate type="time" value="${contract.lastActInfo.date}"/></div>

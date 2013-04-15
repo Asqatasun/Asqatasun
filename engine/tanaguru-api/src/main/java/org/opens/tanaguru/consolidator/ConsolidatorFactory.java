@@ -21,7 +21,7 @@
  */
 package org.opens.tanaguru.consolidator;
 
-import java.util.List;
+import java.util.Collection;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.ruleimplementation.RuleImplementation;
 import org.opens.tanaguru.service.ProcessRemarkService;
@@ -41,6 +41,6 @@ public interface ConsolidatorFactory {
      * @param processRemarkService
      * @return
      */
-    Consolidator create(List<ProcessResult> grossResultList, RuleImplementation ruleImplementation, ProcessRemarkService processRemarkService);
+    Consolidator create(Collection<ProcessResult> grossResultList, RuleImplementation ruleImplementation, ProcessRemarkService processRemarkService);
 
 }

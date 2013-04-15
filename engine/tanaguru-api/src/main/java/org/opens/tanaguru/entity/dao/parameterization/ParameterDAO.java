@@ -21,12 +21,13 @@
  */
 package org.opens.tanaguru.entity.dao.parameterization;
 
-import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
+import java.util.Collection;
 import java.util.Set;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.entity.parameterization.ParameterFamily;
+import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 
 /**
  * 
@@ -44,7 +45,7 @@ public interface ParameterDAO extends GenericDAO<Parameter, Long> {
     Parameter findParameter(ParameterElement parameterElement, String value);
 
     /**
-     * 
+     *
      * @param parameterFamily
      * @param audit
      * @return
@@ -74,5 +75,15 @@ public interface ParameterDAO extends GenericDAO<Parameter, Long> {
      *      the default parameter for a given parameterElement
      */
     Parameter findDefaultParameter(ParameterElement parameterElement);
+    
+    /**
+     * 
+     * @param parameterFamily
+     * @param paramSet
+     * @return 
+     */
+    Set<Parameter> findParametersFromParameterFamily(
+            ParameterFamily parameterFamily, 
+            Collection<Parameter> paramSet);
 
 }

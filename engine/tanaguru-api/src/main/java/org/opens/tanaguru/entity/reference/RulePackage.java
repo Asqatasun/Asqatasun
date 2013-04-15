@@ -54,7 +54,7 @@ public interface RulePackage extends Entity {
      *
      * @return the rule list
      */
-    Collection<? extends Rule> getRuleList();
+    Collection<Rule> getRuleList();
 
     /**
      *
@@ -75,6 +75,6 @@ public interface RulePackage extends Entity {
      * @param ruleList
      *            the rule list to set
      */
-    void setRuleList(Collection<? extends Rule> ruleList);
+    void setRuleList(Collection<Rule> ruleList);
 
 }

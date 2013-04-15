@@ -24,8 +24,6 @@ package org.opens.tgol.form.parameterization.builder;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.entity.service.parameterization.ParameterElementDataService;
-import org.opens.tgol.entity.option.Option;
-import org.opens.tgol.entity.service.option.OptionDataService;
 import org.opens.tgol.form.FormField;
 import org.opens.tgol.form.builder.AbstractGenericFormFieldBuilder;
 import org.opens.tgol.form.parameterization.AuditSetUpFormField;
@@ -76,33 +74,6 @@ public class AuditSetUpFormFieldBuilderImpl implements AuditSetUpFormFieldBuilde
     @Override
     public void setFormFieldBuilder(AbstractGenericFormFieldBuilder<? extends FormField> formFieldBuilder) {
         this.formFieldBuilder = formFieldBuilder;
-    }
-
-    private OptionDataService optionDataService;
-    @Autowired
-    public void setOptionDataService(OptionDataService optionDataService) {
-        this.optionDataService = optionDataService;
-    }
-    
-    private Option option;
-    @Override
-    public Option getOption() {
-        return option;
-    }
-
-    @Override
-    public void setOptionCode(String optionCode) {
-        option = optionDataService.getOption(optionCode);
-        if (option == null) {
-            Logger.getLogger(this.getClass()).fatal("The option Code "
-                    + option
-                    + " does not exist in database");
-            try {
-              System.exit(0);
-            } finally {
-                System.exit(1);
-            }
-        }
     }
 
     @Override

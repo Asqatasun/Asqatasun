@@ -37,6 +37,11 @@ public class HTTP {
     public static final String CRLF = "\r\n";
 
     /**
+     * Private constructor : Hide Utility Class Constructor
+     */
+    private HTTP(){}
+    
+    /**
      * Convert an HTTP header string into a JSONObject. It can be a request
      * header or a response header. A request header will contain
      * <pre>{

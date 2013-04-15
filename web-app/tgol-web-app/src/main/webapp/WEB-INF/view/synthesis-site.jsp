@@ -20,8 +20,8 @@
 </c:choose>
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="jqueryUrl" value="${configProperties['cdnUrl']}/Js/jquery.min.js"/>
-        <c:set var="auditSetUpJsUrl" value="${configProperties['cdnUrl']}/Js/audit-set-up.js"/>
+        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/jquery.min.js"/>
+        <c:set var="auditSetUpJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/audit-set-up.js"/>
     </c:when>
     <c:otherwise>
         <c:set var="jqueryUrl">
@@ -101,7 +101,12 @@
                                     </a>
                                 </td>
                                 <td headers="nbOfPagesTop5FailedTestByPage" class="col02">${failedTestByPageInfo.pageCounter}</td>
-                                <td headers="urlListTop5FailedTestByPage" class="col03"><fmt:message key="synthesisSite.getUrlListCsv"><fmt:param>${failedTestByPageInfo.testLabel}</fmt:param></fmt:message></td>
+                                <td headers="urlListTop5FailedTestByPage" class="col03">
+                                    <a href="<c:url value="/home/contract/page-list.html?wr=${wr}&amp;status=f2xx&amp;sortDirection=2&amp;test=${failedTestByPageInfo.testLabel}"/>">
+                                    <fmt:message key="synthesisSite.getUrlListCsv"><fmt:param>${failedTestByPageInfo.testLabel}</fmt:param></fmt:message>
+                                    </a>
+                                    
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>

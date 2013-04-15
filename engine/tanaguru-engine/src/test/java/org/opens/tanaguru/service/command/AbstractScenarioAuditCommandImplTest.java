@@ -189,7 +189,11 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
                     mockProcessorService, 
                     mockConsolidatorService, 
                     mockAnalyserService, 
-                    mockAdaptationListener);
+                    mockAdaptationListener,
+                    5,
+                    5,
+                    5,
+                    5);
         }
     }
 }

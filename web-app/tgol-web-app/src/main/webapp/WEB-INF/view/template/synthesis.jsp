@@ -84,7 +84,7 @@
                         <c:set var="scoreClass" scope="page" value="audit-score"/>
                         <c:set var="weightedScoreClass" scope="page" value="audit-weighted-score"/>
                         <c:set var="displayWeightedMark" scope="page" value="false"/>
-                        <c:set var="hasScoreFormulaLink" scope="page" value="true"/>
+                        <c:set var="hasScoreFormulaLink" scope="page" value="false"/>
                         <%@include file="../template/score.jsp" %>
                         <c:if test="${hasPagesListLink == 'true'}">
                         <ul id="synthesis-action-list">
@@ -93,7 +93,7 @@
                             </c:if>
                             <c:choose>
                                 <c:when test="${statistics.auditScope == 'SCENARIO'}">
-                                    <li><a href="<c:url value="/home/contract/page-list.html?wr=${wr}&amp;status=f2xx&amp;sortDirection=1&amp;sortCriterion=rank"/>" class="large awesome blue cmt"><spring:message code="synthesisSite.pageList"/></a></li>
+                                    <li><a href="<c:url value="/home/contract/page-list.html?wr=${wr}&amp;status=f2xx&amp;sortDirection=2&amp;sortCriterion=rank"/>" class="large awesome blue cmt"><spring:message code="synthesisSite.pageList"/></a></li>
                                 </c:when>
                                 <c:when test="${statistics.auditScope == 'DOMAIN'}">
                                     <li><a href="<c:url value="/home/contract/page-list.html?wr=${wr}"/>" class="large awesome blue cmt"><spring:message code="synthesisSite.pageList"/></a></li>

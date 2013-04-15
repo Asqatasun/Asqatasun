@@ -115,6 +115,18 @@ public class UserSignUpCommand  implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    /**
+     * A boolean that indicated whether the user account is activated
+     */
+    private boolean activated;
+    public boolean getActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
+    }
 
     /**
      * The retyped password of the subscriber

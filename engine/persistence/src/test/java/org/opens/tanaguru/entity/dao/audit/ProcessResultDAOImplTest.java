@@ -21,6 +21,7 @@
  */
 package org.opens.tanaguru.entity.dao.audit;
 
+import java.util.Collection;
 import java.util.List;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.ProcessResult;
@@ -118,7 +119,7 @@ public class ProcessResultDAOImplTest extends AbstractDaoTestCase {
 
     public void testRetrieveNetResultFromAudit(){
         Audit audit = auditDAO.read(Long.valueOf(1));
-        List<? extends ProcessResult> processResultList =
+        Collection<ProcessResult> processResultList =
                 processResultDAO.retrieveNetResultFromAudit(audit);
         assertEquals(10, processResultList.size());
         assertEquals(Long.valueOf(1), ((ProcessResult)processResultList.iterator().next()).getSubject().getId());
@@ -131,7 +132,7 @@ public class ProcessResultDAOImplTest extends AbstractDaoTestCase {
 
     public void testRetrieveGrossResultFromAudit(){
         Audit audit = auditDAO.read(Long.valueOf(1));
-        List<? extends ProcessResult> processResultList =
+        Collection<ProcessResult> processResultList =
                 processResultDAO.retrieveGrossResultFromAudit(audit);
         assertEquals(10, processResultList.size());
         assertEquals(Long.valueOf(1), ((ProcessResult)processResultList.iterator().next()).getSubject().getId());
@@ -145,7 +146,7 @@ public class ProcessResultDAOImplTest extends AbstractDaoTestCase {
     public void testRetrieveGrossResultFromAuditAndWebResource(){
         Audit audit = auditDAO.read(Long.valueOf(1));
         WebResource wr = webresourceDAO.read(Long.valueOf(1));
-        List<? extends ProcessResult> processResultList =
+        Collection<ProcessResult> processResultList =
                 processResultDAO.retrieveNetResultFromAuditAndWebResource(audit, wr);
         assertEquals(6, processResultList.size());
         wr = webresourceDAO.read(Long.valueOf(2));

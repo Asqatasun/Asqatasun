@@ -21,10 +21,10 @@
  */
 package org.opens.tgol.entity.factory.contract;
 
+import java.util.Date;
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.contract.ActImpl;
 import org.opens.tgol.entity.contract.Contract;
-import java.util.Date;
 
 /**
  *

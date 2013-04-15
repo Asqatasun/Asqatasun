@@ -23,37 +23,25 @@ package org.opens.tanaguru.processor;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.Collection;
-
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-
 import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
+import javax.xml.xpath.*;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.exception.IncoherentValueDomainsException;
 import org.opens.tanaguru.ruleimplementation.RuleHelper;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.regex.Pattern;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 import org.opens.tanaguru.service.ProcessRemarkService;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
@@ -64,17 +52,17 @@ public class DOMHandlerImpl implements DOMHandler {
 
     private static final String ATTRIBUTE_MISSING_MSG_CODE = "AttributeMissing";
     private static final String CHILD_NODE_MISSING_MSG_CODE ="ChildNodeMissing";
-    protected Document document;
+    private Document document;
     private boolean initialized = false;
-    protected List<Node> selectedElementList;
-    protected SSP ssp;
-    protected XPath xpath;
-    protected Map<Integer, String> sourceCodeWithLine;
+    private List<Node> selectedElementList;
+    private SSP ssp;
+    private XPath xpath;
+    private Map<Integer, String> sourceCodeWithLine;
     private static final Pattern NON_ALPHANUMERIC_PATTERN =
               Pattern.compile("[^\\p{L}]+");
 //            Pattern.compile("[\\W_]+");
 
-    protected ProcessRemarkService processRemarkService;
+    private ProcessRemarkService processRemarkService;
 
     /**
      * The message code defined by the user
@@ -111,6 +99,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     public DOMHandler beginSelection() {
         initialize();
+	messageCode=null;
         selectedElementList = new ArrayList<Node>();
         processRemarkService.initializeService(document, ssp.getDOM());
         return this;

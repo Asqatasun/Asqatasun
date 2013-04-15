@@ -77,7 +77,11 @@ public class PageAuditCrawlerCommandImplTest extends AuditCommandTestCase {
                 mockProcessorService, 
                 mockConsolidatorService, 
                 mockAnalyserService, 
-                mockAdaptationListener);
+                mockAdaptationListener,
+                5,
+                5,
+                5,
+                5);
         
         pageAuditCommand.callCrawlerService();
         

@@ -24,7 +24,6 @@ package org.opens.tanaguru.entity.subject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlElementRef;
@@ -43,7 +42,7 @@ public class SiteImpl extends WebResourceImpl implements Site, Serializable {
 
     private static final long serialVersionUID = -5472991643021548362L;
     @OneToMany(mappedBy = "parent")
-    protected Collection<WebResourceImpl> componentList = new ArrayList<WebResourceImpl>();
+    private Collection<WebResourceImpl> componentList = new ArrayList<WebResourceImpl>();
 
     public SiteImpl() {
         super();
@@ -88,14 +87,16 @@ public class SiteImpl extends WebResourceImpl implements Site, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.subject.SiteImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.subject.PageImpl.class)})
     @Override
-    public Collection<WebResourceImpl> getComponentList() {
-        return componentList;
+    public Collection<WebResource> getComponentList() {
+        return (Collection)componentList;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public void setComponentList(Collection<? extends WebResource> componentList) {
-        this.componentList = (Collection<WebResourceImpl>) componentList;
+    public void setComponentList(Collection<WebResource> componentList) {
+        for (WebResource wr : componentList) {
+            this.componentList.add((WebResourceImpl)wr);
+        }
     }
 
     @Override

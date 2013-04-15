@@ -21,17 +21,9 @@
  */
 package org.opens.tanaguru.entity.reference;
 
+import java.util.ArrayList;
 import java.util.Collection;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -46,18 +38,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class RuleImpl implements Rule {
 
     @Column(name = "Class_Name", nullable = false)
-    protected String className;
+    private String className;
     @Column(name = "Description")
-    protected String description;
+    private String description;
     @Id
     @GeneratedValue
     @Column(name = "Id_Rule")
-    protected Long id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "Id_Rule_Package")
-    protected RulePackageImpl owningPackage;
+    private RulePackageImpl owningPackage;
     @OneToMany(mappedBy = "rule", cascade = CascadeType.ALL)
-    protected Collection<TestImpl> testList;
+    private Collection<TestImpl> testList = new ArrayList<TestImpl>();
 
     public RuleImpl() {
         super();
@@ -90,27 +82,32 @@ public class RuleImpl implements Rule {
         return getOwningPackage().equals(rule.getOwningPackage()) && getClassName().equals(rule.getClassName()) && getDescription().equals(rule.getDescription());
     }
 
+    @Override
     public String getClassName() {
         return className;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.RulePackageImpl.class)
     public RulePackage getOwningPackage() {
         return owningPackage;
     }
 
+    @Override
     @XmlElementWrapper
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.TestImpl.class)
-    public Collection<TestImpl> getTestList() {
-        return testList;
+    public Collection<Test> getTestList() {
+        return (Collection<Test>)(ArrayList)testList;
     }
 
     @Override
@@ -128,23 +125,31 @@ public class RuleImpl implements Rule {
         return hashCode;
     }
 
+    @Override
     public void setClassName(String className) {
         this.className = className;
     }
 
+    @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
+    @Override
     public void setOwningPackage(RulePackage owningPackage) {
         this.owningPackage = (RulePackageImpl) owningPackage;
     }
 
-    public void setTestList(Collection<? extends Test> testList) {
-        this.testList = (Collection<TestImpl>) testList;
+    @Override
+    public void setTestList(Collection<Test> testList) {
+        for (Test test : testList) {
+            this.testList.add((TestImpl)test);
+        }
     }
+    
 }

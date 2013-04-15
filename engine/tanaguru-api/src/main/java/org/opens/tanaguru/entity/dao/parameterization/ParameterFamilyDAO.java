@@ -21,11 +21,19 @@
  */
 package org.opens.tanaguru.entity.dao.parameterization;
 
-import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 import org.opens.tanaguru.entity.parameterization.ParameterFamily;
+import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 
 /**
  * 
  * @author jkowalczyk
  */
-public interface ParameterFamilyDAO extends GenericDAO<ParameterFamily, Long> {}
+public interface ParameterFamilyDAO extends GenericDAO<ParameterFamily, Long> {
+
+    /**
+     * 
+     * @param parameterFamilyCode
+     * @return 
+     */
+    ParameterFamily findParameterFamilyFromCode(String parameterFamilyCode);
+}

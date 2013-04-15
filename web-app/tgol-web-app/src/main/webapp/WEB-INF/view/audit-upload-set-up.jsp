@@ -20,8 +20,8 @@
 </c:choose>
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="jqueryUrl" value="${configProperties['cdnUrl']}/Js/jquery.min.js"/>
-        <c:set var="auditSetUpJsUrl" value="${configProperties['cdnUrl']}/Js/audit-set-up.js"/>
+        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/jquery.min.js"/>
+        <c:set var="auditSetUpJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/audit-set-up.js"/>
     </c:when>
     <c:otherwise>
         <c:set var="jqueryUrl">

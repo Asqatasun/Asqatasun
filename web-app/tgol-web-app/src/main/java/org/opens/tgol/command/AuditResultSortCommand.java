@@ -33,15 +33,6 @@ public class AuditResultSortCommand implements Serializable {
 
     private static final long serialVersionUID = -6799971556530681226L;
     
-    /**
-     * General error message in case of invalid form
-     */
-    private String generalErrorMsg;
-
-    public String getGeneralErrorMsg() {
-        return generalErrorMsg;
-    }
-
     private Map<String, String> sortOptionMap=new HashMap<String, String>();
     public Map<String, String> getSortOptionMap() {
         return sortOptionMap;

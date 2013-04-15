@@ -46,21 +46,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ReferenceImpl implements Reference, Serializable {
 
     @Column(name = "Cd_Reference")
-    protected String code;
+    private String code;
     @OneToMany(mappedBy = "reference", cascade = CascadeType.ALL)
-    protected List<CriterionImpl> criterionList = new ArrayList<CriterionImpl>();
+    private List<CriterionImpl> criterionList = new ArrayList<CriterionImpl>();
     @Column(name = "Description")
-    protected String description;
+    private String description;
     @Id
     @GeneratedValue
     @Column(name = "Id_Reference")
-    protected Long id;
+    private Long id;
     @Column(name = "Label", nullable = false)
-    protected String label;
+    private String label;
     @Column(name = "Rank")
-    protected int rank;
+    private int rank;
     @Column(name = "Url", nullable = true)
-    protected String url;
+    private String url;
 
     public ReferenceImpl() {
         super();
@@ -73,57 +73,72 @@ public class ReferenceImpl implements Reference, Serializable {
         this.description = description;
     }
 
+    @Override
     public void addCriterion(Criterion criterion) {
         criterion.setReference(this);
         this.criterionList.add((CriterionImpl) criterion);
     }
 
+    @Override
     public String getCode() {
         return code;
     }
 
+    @Override
     @XmlElementWrapper
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.CriterionImpl.class)
-    public List<CriterionImpl> getCriterionList() {
-        return criterionList;
+    public List<Criterion> getCriterionList() {
+        return (ArrayList<Criterion>)(ArrayList)criterionList;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public String getLabel() {
         return label;
     }
 
+    @Override
     public int getRank() {
         return rank;
     }
 
+    @Override
     public void setCode(String code) {
         this.code = code;
     }
 
-    public void setCriterionList(List<? extends Criterion> criterionList) {
-        this.criterionList = (List<CriterionImpl>) criterionList;
+    @Override
+    public void setCriterionList(List<Criterion> criterionList) {
+        for (Criterion cr : criterionList) {
+            this.criterionList.add((CriterionImpl)cr);
+        }
     }
 
+    @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
+    @Override
     public void setLabel(String label) {
         this.label = label;
     }
 
+    @Override
     public void setRank(int rank) {
         this.rank = rank;
     }

@@ -21,12 +21,6 @@
  */
 package org.opens.tgol.controller;
 
-import org.opens.tgol.action.voter.ActionHandler;
-import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.user.User;
-import org.opens.tgol.presentation.factory.TestResultFactory;
-import org.opens.tgol.util.TgolHighlighter;
-import org.opens.tgol.util.TgolKeyStore;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -40,12 +34,18 @@ import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tgol.action.voter.ActionHandler;
 import org.opens.tgol.command.AuditResultSortCommand;
 import org.opens.tgol.command.factory.AuditResultSortCommandFactory;
+import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.exception.ForbiddenPageException;
 import org.opens.tgol.exception.ForbiddenUserException;
 import org.opens.tgol.form.FormField;
 import org.opens.tgol.form.builder.FormFieldBuilder;
 import org.opens.tgol.presentation.data.AuditStatistics;
+import org.opens.tgol.presentation.factory.TestResultFactory;
+import org.opens.tgol.util.TgolHighlighter;
+import org.opens.tgol.util.TgolKeyStore;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -117,7 +117,7 @@ public class AuditResultController extends AuditDataHandlerController {
      * @return
      */
     @RequestMapping(value=TgolKeyStore.AUDIT_RESULT_CONTRACT_URL, method=RequestMethod.GET)
-    @Secured(TgolKeyStore.ROLE_USER_KEY)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String displayAuditResultFromContract(
             @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
             HttpServletRequest request,
@@ -131,9 +131,9 @@ public class AuditResultController extends AuditDataHandlerController {
         return dispatchDisplayResultRequest(webResourceIdValue, null, model, request);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    @Secured(TgolKeyStore.ROLE_USER_KEY)
-    protected String submitForm(
+    @RequestMapping(value=TgolKeyStore.AUDIT_RESULT_CONTRACT_URL, method = RequestMethod.POST)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
+    protected String submitAuditResultSorter(
             @ModelAttribute(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY) AuditResultSortCommand auditResultSortCommand,
             BindingResult result,
             Model model,
@@ -146,21 +146,19 @@ public class AuditResultController extends AuditDataHandlerController {
     }
 
     @RequestMapping(value=TgolKeyStore.SOURCE_CODE_CONTRACT_URL, method=RequestMethod.GET)
-    @Secured(TgolKeyStore.ROLE_USER_KEY)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String displaySourceCodeFromContract(
             @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
             HttpServletRequest request,
             HttpServletResponse response,
             Model model) {
-        User user = getCurrentUser();
-        model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY,user);
         WebResource webResource;
         try {
             webResource = getWebResourceDataService().ligthRead(Long.valueOf(webresourceId));
         } catch (NumberFormatException nfe) {
-            throw new ForbiddenUserException(user);
+            throw new ForbiddenPageException();
         }
-        if (isUserAllowedToDisplayResult(user,webResource) && webResource instanceof Page) {
+        if (isUserAllowedToDisplayResult(webResource) && webResource instanceof Page) {
             Page page = (Page)webResource;
             hasSourceCodeWithDoctype = false;
             boolean hasSSP = true;
@@ -195,14 +193,12 @@ public class AuditResultController extends AuditDataHandlerController {
             AuditResultSortCommand auditResultSortCommand,
             Model model,
             HttpServletRequest request) {
-        User user = getCurrentUser();
-        model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY,user);
         //We first check that the current user is allowed to display the result
         //of this audit
         WebResource webResource = getWebResourceDataService().ligthRead(webResourceId);
         // If the Id given in argument correspond to a webResource,
             // data are retrieved to be prepared and displayed
-        if (isUserAllowedToDisplayResult(user,webResource)) {
+        if (isUserAllowedToDisplayResult(webResource)) {
             this.callGc(webResource);
            
             // first we add statistics meta-data to model 

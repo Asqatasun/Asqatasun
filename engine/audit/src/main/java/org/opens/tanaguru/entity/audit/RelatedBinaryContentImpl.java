@@ -22,7 +22,6 @@
 package org.opens.tanaguru.entity.audit;
 
 import java.io.Serializable;
-
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,7 +37,7 @@ public abstract class RelatedBinaryContentImpl extends RelatedContentImpl implem
 
     private static final long serialVersionUID = -7599830018001646757L;
     @Column(name = "Binary_Content", length=4000000)
-    protected Byte[] binaryContent;
+    private Byte[] binaryContent;
 
     public RelatedBinaryContentImpl() {
         super();

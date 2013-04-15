@@ -38,20 +38,29 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 public class TestRun implements NewPageListener {
 
     private static final int RETRY_MAX_VALUE = 3;
-    HashMap<String, String> vars = new HashMap<String, String>();
-    Script script;
-    int stepIndex = -1;
-    boolean isStepOpenNewPage = false;
-    int retryIndex = 0;
-    FirefoxDriver driver;
+    private HashMap<String, String> vars = new HashMap<String, String>();
+    public HashMap<String, String> getVars() {
+        return vars;
+    }
+    
+    public void addVar(String key, String value) {
+        vars.put(key, value);
+    }
+    
+    private Script script;
+    private int stepIndex = -1;
+    private boolean isStepOpenNewPage = false;
+    private int retryIndex = 0;
+    private FirefoxDriver driver;
+
     public FirefoxDriver getDriver() {
         return driver;
     }
     
-    Log log;
-    FirefoxProfile firefoxProfile;
+    private Log log;
+    private FirefoxProfile firefoxProfile;
 
-    Collection<NewPageListener> newPageListeners;
+    private Collection<NewPageListener> newPageListeners;
     private int foundPageCounter = 0;
 
     // attributes needed by NetExport. Commented in version 1.6.0
@@ -106,7 +115,7 @@ public class TestRun implements NewPageListener {
      * @return True if there is another step to execute.
      */
     public boolean hasNext() {
-        boolean hasNext = stepIndex < script.steps.size() - 1;
+        boolean hasNext = stepIndex < script.getSteps().size() - 1;
         if (!hasNext && driver != null) {
 //            while (!isPageLoaded()) {
             // sleep a second before we close the driver
@@ -137,13 +146,13 @@ public class TestRun implements NewPageListener {
         isStepOpenNewPage = false;
 
         log.debug("Running step " + (stepIndex+2) + ":"
-                + script.steps.get(stepIndex+1).type.toString() + " step.");
+                + script.getSteps().get(stepIndex+1).type.toString() + " step.");
         
         boolean result = false;
         String beforeUrl = null;
         try {
             beforeUrl = driver.getCurrentUrl();
-            result = script.steps.get(stepIndex+1).type.run(this);
+            result = script.getSteps().get(stepIndex+1).type.run(this);
             // wait a second to make sure the page is fully loaded
             Thread.sleep(500);
             if (!isStepOpenNewPage && !StringUtils.equals(beforeUrl, driver.getCurrentUrl())) {
@@ -242,28 +251,14 @@ public class TestRun implements NewPageListener {
      * @return The step that is being/has just been executed.
      */
     public Script.Step currentStep() {
-        return script.steps.get(stepIndex+1);
-    }
-
-    /**
-     * @return The driver instance being used.
-     */
-    public FirefoxDriver driver() {
-        return driver;
+        return script.getSteps().get(stepIndex+1);
     }
 
     /**
      * @return The logger being used.
      */
-    public Log log() {
+    public Log getLog() {
         return log;
-    }
-
-    /**
-     * @return The HashMap of vars.
-     */
-    public HashMap<String, String> vars() {
-        return vars;
     }
 
     /**
@@ -299,7 +294,7 @@ public class TestRun implements NewPageListener {
         }
         // This kind of variable substitution makes for short code, but it's inefficient.
         for (Map.Entry<String, String> v : vars.entrySet()) {
-            l.value = l.value.replace("${" + v.getKey() + "}", v.getValue());
+            l.setValue(l.getValue().replace("${" + v.getKey() + "}", v.getValue()));
         }
         return l;
     }

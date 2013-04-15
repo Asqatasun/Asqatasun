@@ -29,7 +29,6 @@ import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.user.User;
 import org.opens.tgol.report.pagination.factory.TgolPaginatedListFactory;
 import org.opens.tgol.util.HttpStatusCodeFamily;
 import org.opens.tgol.util.TgolKeyStore;
@@ -62,14 +61,12 @@ public class PageListController extends AuditDataHandlerController{
      * @return
      */
     @RequestMapping(value=TgolKeyStore.PAGE_LIST_CONTRACT_URL, method=RequestMethod.GET)
-    @Secured(TgolKeyStore.ROLE_USER_KEY)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String displayPageList(
             HttpServletRequest request,
             HttpServletResponse response,
             Model model) throws Exception {
         String webResourceId = ServletRequestUtils.getStringParameter(request, TgolKeyStore.WEBRESOURCE_ID_KEY);
-        User user = getCurrentUser();
-        model.addAttribute(TgolKeyStore.AUTHENTICATED_USER_KEY,user);
         WebResource webResource;
         try {
             webResource =
@@ -77,7 +74,7 @@ public class PageListController extends AuditDataHandlerController{
         } catch (Exception e) {
             return TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
         }
-        if (isUserAllowedToDisplayResult(user,webResource)) {
+        if (isUserAllowedToDisplayResult(webResource)) {
             return pageLinkDispatcher(request, webResource, model);
         } else {
             // this block can never be reached. the "isUserAllowedToDisplayResult"
@@ -196,10 +193,13 @@ public class PageListController extends AuditDataHandlerController{
      * @return
      *      the number of webresource for a given http status code family
      */
-    private int getWebResourceCount(Long idAudit, HttpStatusCodeFamily hpcf) {
+    private int getWebResourceCount(
+            Long idAudit, 
+            HttpStatusCodeFamily hpcf) {
         return getWebResourceDataService().getWebResourceCountByAuditAndHttpStatusCode(
                 idAudit,
                 hpcf,
+                null,
                 null).intValue();
     }
 

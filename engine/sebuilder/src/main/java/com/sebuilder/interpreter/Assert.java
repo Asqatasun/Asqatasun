@@ -22,7 +22,10 @@ package com.sebuilder.interpreter;
  */
 public class Assert implements StepType {
 
-    public final Getter getter;
+    private final Getter getter;
+    public Getter getGetter() {
+        return getter;
+    }
 
     public Assert(Getter getter) {
         this.getter = getter;

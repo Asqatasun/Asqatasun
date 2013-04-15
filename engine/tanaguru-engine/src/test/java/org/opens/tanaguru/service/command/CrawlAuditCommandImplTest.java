@@ -143,7 +143,11 @@ public class CrawlAuditCommandImplTest extends AuditCommandTestCase {
                     mockProcessorService, 
                     mockConsolidatorService, 
                     mockAnalyserService, 
-                    mockAdaptationListener);
+                    mockAdaptationListener,
+                    5,
+                    5,
+                    5,
+                    5);
         }
 
         @Override

@@ -21,7 +21,7 @@
  */
 package org.opens.tanaguru.service;
 
-import java.util.List;
+import java.util.Collection;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import javax.xml.bind.annotation.XmlTransient;
@@ -46,7 +46,7 @@ public interface ProcessorService {// TODO Write javadoc
      * @param testList
      * @return
      */
-    List<ProcessResult> process(List<Content> contentList, List<Test> testList);
+    Collection<ProcessResult> process(Collection<Content> contentList, Collection<Test> testList);
 
     /**
      *

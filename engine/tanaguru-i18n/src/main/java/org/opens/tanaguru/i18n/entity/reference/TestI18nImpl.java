@@ -22,13 +22,7 @@
 package org.opens.tanaguru.i18n.entity.reference;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.TestImpl;
 import org.opens.tanaguru.i18n.entity.AbstractInternationalizedEntity;
@@ -46,12 +40,12 @@ public class TestI18nImpl extends AbstractInternationalizedEntity<Test>
     private static final long serialVersionUID = -4852117474849964430L;
 
     @Column(name = "Description")
-    protected String description;
+    private String description;
     @Column(name = "Label")
-    protected String label;
+    private String label;
     @ManyToOne
     @JoinColumn(name = "Id_Test")
-    protected TestImpl target;
+    private TestImpl target;
 
     public TestI18nImpl() {
         super();

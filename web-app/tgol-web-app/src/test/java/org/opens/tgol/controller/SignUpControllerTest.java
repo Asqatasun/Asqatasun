@@ -21,15 +21,23 @@
  */
 package org.opens.tgol.controller;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import junit.framework.TestCase;
-import org.opens.tgol.command.UserSignUpCommand;
-import org.opens.tgol.emailsender.MockEmailSender;
-import org.opens.tgol.entity.service.user.MockUserDataService;
-import org.opens.tgol.mock.MockBindingResult;
-import org.opens.tgol.mock.MockFormValidator;
+import static org.easymock.EasyMock.*;
+import org.opens.tgol.command.CreateUserCommand;
+import org.opens.tgol.command.factory.CreateUserCommandFactory;
+import org.opens.tgol.emailsender.EmailSender;
+import org.opens.tgol.entity.service.user.RoleDataService;
+import org.opens.tgol.entity.service.user.UserDataService;
+import org.opens.tgol.entity.user.Role;
+import org.opens.tgol.entity.user.User;
 import org.opens.tgol.util.TgolKeyStore;
-import org.opens.tgol.util.webapp.MockExposablePropertyPlaceholderConfigurer;
+import org.opens.tgol.util.webapp.ExposablePropertyPlaceholderConfigurer;
+import org.opens.tgol.validator.CreateUserFormValidator;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,7 +48,18 @@ import org.springframework.validation.BindingResult;
  */
 public class SignUpControllerTest extends TestCase {
     
-    private SignUpController instance = new SignUpController();
+    private SignUpController instance;
+    private CreateUserFormValidator createUserFormValidator;
+    private UserDataService mockUserDataService;
+    private User mockUser;
+    private EmailSender mockEmailSender;
+    private ExposablePropertyPlaceholderConfigurer mockExposablePropertyPlaceholderConfigurer;
+    private CreateUserCommand mockValidCreateUserCommand;
+    private CreateUserCommand mockInvalidCreateUserCommand;
+    private BindingResult mockInvalidBindingResult;
+    private BindingResult mockValidBindingResult;
+    Role mockUserRole;
+    RoleDataService mockRoleDataService;
     
     public SignUpControllerTest(String testName) {
         super(testName);
@@ -49,16 +68,37 @@ public class SignUpControllerTest extends TestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        instance.setSignUpFormValidator(new MockFormValidator());
-        instance.setUserDataService(new MockUserDataService());
-        instance.setExposablePropertyPlaceholderConfigurer(
-                new MockExposablePropertyPlaceholderConfigurer());
-        instance.setEmailSender(new MockEmailSender());
+        instance = new SignUpController();
     }
     
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
+        
+        if (mockEmailSender != null) {
+            verify(mockEmailSender);
+        }
+        if (mockUserDataService != null) {
+            verify(mockUserDataService);
+        }
+        if (mockUser != null) {
+            verify(mockUser);
+        }
+        if (mockExposablePropertyPlaceholderConfigurer != null) {
+            verify(mockExposablePropertyPlaceholderConfigurer);
+        }
+        if (mockInvalidBindingResult != null) {
+            verify(mockInvalidBindingResult);
+        }
+        if (mockValidBindingResult != null) {
+            verify(mockValidBindingResult);
+        }
+        if (mockUserRole != null) {
+            verify(mockUserRole);
+        }
+        if (mockRoleDataService != null) {
+            verify(mockRoleDataService);
+        }
     }
 
     /**
@@ -66,16 +106,16 @@ public class SignUpControllerTest extends TestCase {
      */
     public void testSetUpSignUpPage() {
         System.out.println("setUpSignUpPage");
+        
         Model model = new ExtendedModelMap();
-        SignUpController instance = new SignUpController();
         String expResult = TgolKeyStore.SIGN_UP_VIEW_NAME;
         String result = instance.setUpSignUpPage(model);
         // the returned view is the sign-up view name
         assertEquals(expResult, result);
         // the model contains a UserSignUpCommand instance to maps the data of
         // the form of the view
-        assertTrue(model.asMap().get(TgolKeyStore.USER_SIGN_UP_COMMAND_KEY) instanceof 
-                UserSignUpCommand);
+        assertTrue(model.asMap().get(TgolKeyStore.CREATE_USER_COMMAND_KEY) instanceof 
+                CreateUserCommand);
     }
 
     /**
@@ -83,28 +123,30 @@ public class SignUpControllerTest extends TestCase {
      */
     public void testSubmitForm() throws Exception {
         System.out.println("submitForm");
-        
+
+        setUpMockRoleDataService();
+        setUpUserDataService();
+        setUpMockExposablePropertyPlaceholderConfigurer();
+        setUpValidatorAndBindingResult();
+        setUpMockEmailSender();
+                
         // Set up instance dependences
-        BindingResult bindingResult = new MockBindingResult() ;
         Model model = new ExtendedModelMap();
-        HttpServletRequest request = null;
-        
+
         // the returned UserSignUpCommand is seen as valid regarding the validator
         // the CONFIRMATION sign-up page is displayed
-        UserSignUpCommand userSignUpCommand = createValidUserSignUpCommand();
         String expResult = TgolKeyStore.SIGN_UP_CONFIRMATION_VIEW_REDIRECT_NAME;
-        String result = instance.submitForm(userSignUpCommand, bindingResult, model, request);
+        String result = instance.submitSignUpForm(mockValidCreateUserCommand, mockValidBindingResult, model);
         assertEquals(expResult, result);
         
         // the returned UserSignUpCommand is seen as invalid regarding the validator
         // the sign-up form is displayed again
-        bindingResult = new MockBindingResult() ;
-        userSignUpCommand = createInvalidUserSignUpCommand();
+        
         expResult = TgolKeyStore.SIGN_UP_VIEW_NAME;
-        result = instance.submitForm(userSignUpCommand, bindingResult, model, request);
+        result = instance.submitSignUpForm(mockInvalidCreateUserCommand, mockInvalidBindingResult, model);
         assertEquals(expResult, result);
-        assertSame(model.asMap().get(TgolKeyStore.USER_SIGN_UP_COMMAND_KEY),
-                userSignUpCommand);
+        assertSame(model.asMap().get(TgolKeyStore.CREATE_USER_COMMAND_KEY),
+                mockInvalidCreateUserCommand);
     }
 
     /**
@@ -119,8 +161,8 @@ public class SignUpControllerTest extends TestCase {
         assertEquals(expResult, result);
         // the model contains a UserSignUpCommand instance to maps the data of
         // the form of the view
-        assertTrue(model.asMap().get(TgolKeyStore.USER_SIGN_UP_COMMAND_KEY) instanceof 
-                UserSignUpCommand);
+        assertTrue(model.asMap().get(TgolKeyStore.CREATE_USER_COMMAND_KEY) instanceof 
+                CreateUserCommand);
     }
 
     /**
@@ -129,12 +171,13 @@ public class SignUpControllerTest extends TestCase {
      * 
      * @return 
      */
-    private UserSignUpCommand createValidUserSignUpCommand() {
-        UserSignUpCommand userSignUpCommand = new UserSignUpCommand();
-        userSignUpCommand.setEmail("test@test.com");
-        userSignUpCommand.setPassword("password");
-        userSignUpCommand.setConfirmPassword("password");
-        return userSignUpCommand;
+    private CreateUserCommand createValidUserSignUpCommand() {  
+        CreateUserCommand createUserCommand = new CreateUserCommand();
+        createUserCommand.setEmail("test@test.com");
+        createUserCommand.setSiteUrl("http://mysite.org");
+        createUserCommand.setPassword("password");
+        createUserCommand.setConfirmPassword("password");
+        return createUserCommand;
     }
     
     /**
@@ -143,8 +186,102 @@ public class SignUpControllerTest extends TestCase {
      * 
      * @return 
      */
-    private UserSignUpCommand createInvalidUserSignUpCommand() {
-        return new UserSignUpCommand();
+    private CreateUserCommand createInvalidUserSignUpCommand() {
+        return new CreateUserCommand();
     }
+ 
     
+   private void setUpUserDataService() {
+       mockUser = createMock(User.class);
+       mockUser.setEmail1("test@test.com");
+       expectLastCall();
+       expect(mockUser.getEmail1()).andReturn("test@test.com").once();
+       mockUser.setWebUrl1("http://mysite.org");
+       expectLastCall();
+       expect(mockUser.getWebUrl1()).andReturn("http://mysite.org").once();
+       mockUser.setFirstName(null);
+       expectLastCall();
+       expect(mockUser.getFirstName()).andReturn(null).once();
+       mockUser.setName(null);
+       expectLastCall();
+       expect(mockUser.getName()).andReturn(null).once();
+       mockUser.setPhoneNumber(null);
+       expectLastCall();
+       expect(mockUser.getPhoneNumber()).andReturn(null).once();
+       mockUser.setPassword("5f4dcc3b5aa765d61d8327deb882cf99");
+       expectLastCall();
+       mockUser.setAccountActivation(false);
+       expectLastCall();
+       mockUser.setRole(mockUserRole);
+       expectLastCall();
+       mockUserDataService = createMock(UserDataService.class);
+       expect(mockUserDataService.create()).andReturn(mockUser).anyTimes();
+       expect(mockUserDataService.getUserFromEmail("test@test.com")).andReturn(mockUser).anyTimes();
+       expect(mockUserDataService.saveOrUpdate(mockUser)).andReturn(mockUser).anyTimes();
+       
+       replay(mockUser);
+       replay(mockUserDataService);
+       
+       instance.setUserDataService(mockUserDataService);
+   }
+
+   private void setUpValidatorAndBindingResult() {
+       mockValidCreateUserCommand = createValidUserSignUpCommand();
+       mockInvalidCreateUserCommand = createInvalidUserSignUpCommand();
+       createUserFormValidator = new CreateUserFormValidator();
+       createUserFormValidator.setUserDataService(mockUserDataService);
+       mockInvalidBindingResult = createMock(BindingResult.class);
+       mockValidBindingResult = createMock(BindingResult.class);
+       createUserFormValidator.validate(mockValidCreateUserCommand, mockValidBindingResult);
+       createUserFormValidator.validate(mockInvalidCreateUserCommand, mockInvalidBindingResult);
+       
+       expectLastCall();
+       expect(mockValidBindingResult.hasErrors()).andReturn(false).once();
+       expect(mockInvalidBindingResult.hasErrors()).andReturn(true).once();
+       
+       replay(mockValidBindingResult);
+       replay(mockInvalidBindingResult);
+       
+       instance.setCreateUserFormValidator(createUserFormValidator);
+   }
+ 
+   private void setUpMockExposablePropertyPlaceholderConfigurer() {
+       mockExposablePropertyPlaceholderConfigurer = createMock(ExposablePropertyPlaceholderConfigurer.class);
+       Map<String, String> props = new HashMap<String, String>();
+       props.put(SignUpController.EMAIL_FROM_KEY, "from@user.com");
+       props.put(SignUpController.EMAIL_TO_KEY, "to@user.com");
+       props.put(SignUpController.EMAIL_SUBJECT_KEY, "subject");
+       props.put(SignUpController.EMAIL_CONTENT_KEY, "content");
+       
+       expect(mockExposablePropertyPlaceholderConfigurer.getResolvedProps()).andReturn(props).times(4);
+       replay(mockExposablePropertyPlaceholderConfigurer);
+       
+       instance.setExposablePropertyPlaceholderConfigurer(mockExposablePropertyPlaceholderConfigurer);
+   }
+   
+   private void setUpMockEmailSender() {
+       mockEmailSender = createMock(EmailSender.class);
+       Set<String> toUserList = new HashSet<String>();
+       toUserList.add("to@user.com");
+       mockEmailSender.sendEmail("from@user.com", toUserList, "subject", "content");
+       expectLastCall();
+       replay(mockEmailSender);
+       
+       instance.setEmailSender(mockEmailSender);
+   }
+ 
+   private void setUpMockRoleDataService() {
+        mockRoleDataService = createMock(RoleDataService.class);
+        mockUserRole = createMock(Role.class);
+         
+        expect(mockRoleDataService.read(Long.valueOf(2))).andReturn(mockUserRole).anyTimes();
+        expect(mockRoleDataService.read(Long.valueOf(3))).andReturn(null).anyTimes();
+        expect(mockUserRole.getId()).andReturn(Long.valueOf(2)).anyTimes();
+
+        replay(mockUserRole);        
+        replay(mockRoleDataService);
+        
+        CreateUserCommandFactory.getInstance().setRoleDataService(mockRoleDataService);
+    }
+
 }

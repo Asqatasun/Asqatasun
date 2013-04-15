@@ -31,8 +31,8 @@ import org.apache.log4j.Logger;
  */
 public class URLIdentifierImpl implements URLIdentifier {
 
-    protected URL absolutePath;
-    protected URL url;
+    private URL absolutePath;
+    private URL url;
 
     public URLIdentifierImpl() {
         super();

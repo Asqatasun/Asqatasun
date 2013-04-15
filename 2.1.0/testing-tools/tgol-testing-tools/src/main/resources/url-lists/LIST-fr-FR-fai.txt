@@ -1,3 +1,0 @@
-Free;http://www.free.fr/adsl/index.html
-Neuf;http://www.sfr.fr/fr/adsl.jsp
-Alice;http://www.aliceadsl.fr/

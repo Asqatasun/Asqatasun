@@ -47,12 +47,12 @@ public class TestByThemeStatistics implements
     private static final String SHORT_LABEL_PREFIX = "Th";
     private static final String THEME_BUNDLE_NAME = "theme-I18N";
     private static final String RULE_RESULT_BUNDLE_NAME = "rule-result-I18N";
-    private static final int PASSED_INDEX = 0;
-    private static final int FAILED_INDEX = 1;
+    private static final int FAILED_INDEX = 0;
+    private static final int PASSED_INDEX = 1;
     private static final int NMI_INDEX = 2;
     private static final int NA_INDEX = 3;
 
-    private String[] series = {"passed", "failed", "nmi", "na"};
+    private String[] series = {"failed", "passed","nmi", "na"};
     /**
      *
      * @return

@@ -31,6 +31,7 @@ import javax.persistence.PersistenceException;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.archive.net.UURI;
 import org.archive.net.UURIFactory;
 import org.opens.tanaguru.contentadapter.ContentParser;
 import org.opens.tanaguru.contentadapter.Resource;
@@ -282,6 +283,10 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
             for (StylesheetContent sc : externalCssSet) {
                 LOGGER.debug("The external stylesheet " + sc.getURI() + " has been retrieved");
             }
+        } else {
+            for (StylesheetContent sc : externalCssSet) {
+                LOGGER.debug("StartDocument : The external stylesheet " + sc.getURI() + " has been retrieved");
+            }
         }
     }
 
@@ -434,7 +439,6 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         StringBuilder rawCss = new StringBuilder();
         String cssAbsolutePath = null;
 
-        LOGGER.debug("before the build  "  + currentLocalResourcePath);
         try {
             cssAbsolutePath = buildPath(cssRelativePath, currentLocalResourcePath);
         } catch (URIException ex) {
@@ -444,7 +448,6 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         // associated resource from the fetched Stylesheet and we populate the
         // set of relatedExternalCssSet (needed to create the relation between the
         // SSP and the css at the end of the adaptation)
-        LOGGER.debug("cssAbsolutePath  "  + cssAbsolutePath);
         StylesheetContent stylesheetContent = getExternalStylesheet(cssAbsolutePath);
         if (stylesheetContent != null) {
             if (stylesheetContent.getAdaptedContent() == null) {
@@ -471,6 +474,12 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         return false;
     }
 
+    /**
+     * Retrieve an external stylesheet. If it has already been encountered, 
+     * return the instance, create a  new one instead.
+     * @param cssAbsolutePath
+     * @return 
+     */
     private StylesheetContent getExternalStylesheet(String cssAbsolutePath) {
         for (StylesheetContent stylesheetContent : externalCssSet) {
             if (stylesheetContent.getURI().equals(cssAbsolutePath)) {
@@ -480,6 +489,11 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         return createNewExternalStyleSheet(cssAbsolutePath);
     }
     
+    /**
+     * 
+     * @param cssAbsolutePath
+     * @return 
+     */
     private StylesheetContent createNewExternalStyleSheet(String cssAbsolutePath) {
         String cssSourceCode = "";
         try {
@@ -500,6 +514,11 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
                 200);
         cssContent.setAudit(getSSP().getAudit());
         externalCssSet.add(cssContent);
+        // Some stylesheet may be retrieved during the adaptation. In this case
+        // these new css are added "manually" to the externalCssRetriever which
+        // is supposed to request the bdd once at the beginning of the adapting
+        // phasis.
+        externalCSSRetriever.addNewStylesheetContent(getSSP(), cssContent);
         return cssContent;
     }
     
@@ -545,6 +564,11 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
         } while (!importedStyles.isEmpty());
     }
 
+    /**
+     * 
+     * @param resource
+     * @return 
+     */
     private StylesheetContent getStylesheetFromResource(String resource) {
         StylesheetContent cssContent = getContentFactory().createStylesheetContent(
                 new Date(),
@@ -573,7 +597,7 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
                 stylesheetContent.setAdaptedContent(new XStream().toXML(parser.getResult()));
             } else {
                 stylesheetContent.setAdaptedContent(CSS_ON_ERROR);
-                Logger.getLogger(this.getClass()).info("An error occured while adapting " + stylesheetContent.getURI());
+                Logger.getLogger(this.getClass()).warn("An error occured while adapting " + stylesheetContent.getURI());
             }
         }
     }
@@ -586,22 +610,40 @@ public class CSSContentAdapterImpl extends AbstractContentAdapter implements
      * @param base
      * @return 
      */
-    private String buildPath(String path, String base) throws URIException {
+    public String buildPath(String path, String base) throws URIException {
         if (path.startsWith(HTTP_PREFIX)
                 || path.startsWith(WWW_PREFIX) 
                 || path.startsWith(FILE_PREFIX)) {
-            LOGGER.debug("absolute path " + path + " base " + base);
             return UURIFactory.getInstance(path).toString();
         }
         StringBuilder strb = new StringBuilder();
-        strb.append(base);
-        if (path.startsWith("/") && base.endsWith("/")) {
-            strb.append(path.substring(1));
-        } else {
-            strb.append(path);
+        if (path.startsWith("/")) {
+            base = setBaseAsRootOfSite(base);
         }
-        LOGGER.debug("absolute path " + path + " base " + base);
+        strb.append(base);
+        if (!base.endsWith("/") && !path.startsWith("/")) {
+            strb.append("/");
+        }
+        strb.append(path);
         return UURIFactory.getInstance(strb.toString()).toString();
     }
 
+    /**
+     * 
+     * @param base
+     * @return 
+     */
+    public String setBaseAsRootOfSite(String base) {
+        UURI uri;
+        try {
+            uri = UURIFactory.getInstance(base);
+            return uri.getScheme()+"://"+uri.getHost().toString();
+        } catch (URIException ex) {
+            java.util.logging.Logger.getLogger(CSSContentAdapterImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex) {
+            java.util.logging.Logger.getLogger(CSSContentAdapterImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return base;
+    }
+    
 }

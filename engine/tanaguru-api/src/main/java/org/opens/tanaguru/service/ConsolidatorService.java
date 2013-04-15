@@ -21,10 +21,10 @@
  */
 package org.opens.tanaguru.service;
 
-import java.util.List;
-import org.opens.tanaguru.entity.audit.ProcessResult;
+import java.util.Collection;
 import javax.xml.bind.annotation.XmlTransient;
 import org.opens.tanaguru.consolidator.ConsolidatorFactory;
+import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.factory.audit.EvidenceElementFactory;
 import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
 import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
@@ -44,8 +44,8 @@ public interface ConsolidatorService {// TODO Write javadoc
      * @param testList
      * @return
      */
-    List<ProcessResult> consolidate(List<ProcessResult> grossResultList,
-            List<Test> testList);
+    Collection<ProcessResult> consolidate(Collection<ProcessResult> grossResultList,
+            Collection<Test> testList);
 
     /**
      * 

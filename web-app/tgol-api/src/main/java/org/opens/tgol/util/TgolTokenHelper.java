@@ -21,9 +21,11 @@
  */
 package org.opens.tgol.util;
 
-import org.opens.tgol.entity.user.User;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.log4j.Logger;
+import org.opens.tgol.entity.user.User;
 import org.owasp.esapi.crypto.CryptoToken;
 import org.owasp.esapi.errors.EncryptionException;
 import org.owasp.esapi.errors.ValidationException;
@@ -51,6 +53,8 @@ public final class TgolTokenHelper {
         this.tokenDurationValidity = tokenDurationValidity;
     }
 
+    private Map<String, Boolean> tokenUsage = new HashMap<String, Boolean>();
+    
     /**
      * The unique instance of TgolTokenHelper
      */
@@ -93,6 +97,7 @@ public final class TgolTokenHelper {
             cryptoToken.setUserAccountName(user.getEmail1());
             cryptoToken.setExpiration(tokenDurationValidity);
             String token = cryptoToken.getToken();
+            tokenUsage.put(token, Boolean.FALSE);
             return token;
         } catch (EncryptionException ex) {
             Logger.getLogger(this.getClass()).warn(ex);
@@ -117,13 +122,36 @@ public final class TgolTokenHelper {
             Logger.getLogger(this.getClass()).warn(ex);
             return false;
         }
+        if (user == null) {
+            Logger.getLogger(this.getClass()).info("user == null");
+            return false;
+        }
         if (!user.getEmail1().equalsIgnoreCase(cryptoToken.getUserAccountName())) {
+            Logger.getLogger(this.getClass()).info(
+                    "!user.getEmail1().equalsIgnoreCase(cryptoToken.getUserAccountName() " 
+                    + user.getEmail1() 
+                    + " " 
+                    + cryptoToken.getUserAccountName());
             return false;
         }
         if (Calendar.getInstance().getTime().after(cryptoToken.getExpirationDate())) {
+            Logger.getLogger(this.getClass()).info(
+                    "Calendar.getInstance().getTime().after(cryptoToken.getExpirationDate() " 
+                    + cryptoToken.getExpirationDate());
+            return false;
+        }
+        if (!tokenUsage.containsKey(token) || 
+            tokenUsage.get(token).booleanValue()) {
+            Logger.getLogger(this.getClass()).info(
+                    "!tokenUsage.containsKey(token) || "
+                    + " tokenUsage.get(token).booleanValue() " );
             return false;
         }
         return true;
+    }
+    
+    public void setTokenUsed(String token) {
+        tokenUsage.put(token,Boolean.TRUE);   
     }
 
 }

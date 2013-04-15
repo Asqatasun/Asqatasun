@@ -30,6 +30,9 @@
                                                 ${lineValueTitle}
                                             </a>
                                         </c:when>
+                                        <c:when test="${evidenceElement.key == 'Url'}">
+                                                <a href="${evidenceElement.value}">${evidenceElement.value}</a>
+                                        </c:when>
                                         <c:otherwise>
                                             <fmt:message key="${evidenceElement.key}"/> ${fn:escapeXml(fn:replace(evidenceElement.value, "&", "&amp;"))}
                                         </c:otherwise>

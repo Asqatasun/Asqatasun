@@ -24,7 +24,6 @@ package org.opens.tgol.form.parameterization.helper;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.opens.tgol.entity.option.OptionElement;
 import org.opens.tgol.form.NumericalFormField;
@@ -57,7 +56,7 @@ public final class AuditSetUpFormFieldHelper {
      */
     public static void applyRestrictionToAuditSetUpFormField(
             AuditSetUpFormField ap,
-            Set<? extends OptionElement> optionElementSet) {
+            Collection<OptionElement> optionElementSet) {
         if (ap.getFormField() instanceof NumericalFormField) {
             OptionElement optionElement = getOptionFromOptionSet(
                     optionElementSet,
@@ -85,7 +84,7 @@ public final class AuditSetUpFormFieldHelper {
      * @return
      */
     private static OptionElement getOptionFromOptionSet(
-            Set<? extends OptionElement> optionElementSet,
+            Collection<OptionElement> optionElementSet,
             String optionCode) {
         
         for (OptionElement optionElement : optionElementSet) {
@@ -108,7 +107,7 @@ public final class AuditSetUpFormFieldHelper {
      */
     private static void activateSelectFormField(
             SelectFormField sff,
-            Set<? extends OptionElement> optionElementSet) {
+            Collection<OptionElement> optionElementSet) {
         boolean enableElements = true;
         OptionElement optionElement = null;
         if (StringUtils.isNotEmpty(sff.getRestrictionCode())) {
@@ -153,7 +152,7 @@ public final class AuditSetUpFormFieldHelper {
      */
     private static boolean setSelectElementAsDefault(
             SelectElement selectElement,
-            Set<? extends OptionElement> optionElementSet) {
+            Collection<OptionElement> optionElementSet) {
         OptionElement optionElement = getOptionFromOptionSet(
                 optionElementSet,
                 selectElement.getDefaultCode());

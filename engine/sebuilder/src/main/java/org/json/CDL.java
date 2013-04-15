@@ -42,6 +42,11 @@ package org.json;
 public class CDL {
 
     /**
+     * Private constructor : Hide Utility Class Constructor
+     */
+    private CDL() {}
+    
+    /**
      * Get the next value. The value can be wrapped in quotes. The value can be
      * empty.
      *

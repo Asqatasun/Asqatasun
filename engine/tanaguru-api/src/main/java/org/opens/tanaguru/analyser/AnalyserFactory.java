@@ -22,6 +22,7 @@
 package org.opens.tanaguru.analyser;
 
 import java.util.List;
+import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.subject.WebResource;
 
@@ -41,7 +42,9 @@ public interface AnalyserFactory {
     /**
      * 
      * @param webResource
+     * @param audit
      * @return
      */
-    Analyser create(WebResource webResource);
+    Analyser create(WebResource webResource, Audit audit);
+
 }

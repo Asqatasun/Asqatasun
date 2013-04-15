@@ -24,14 +24,8 @@ package org.opens.tanaguru.entity.audit;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import java.util.Set;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -48,17 +42,17 @@ public class EvidenceImpl implements Evidence, Serializable {
 
     private static final long serialVersionUID = -5891443605163793783L;
     @Column(name = "Cd_Evidence")
-    protected String code;
+    private String code;
     @Column(name = "Description")
-    protected String description;
+    private String description;
     @OneToMany(mappedBy = "evidence", cascade = CascadeType.ALL)
-    protected Collection<EvidenceElementImpl> elementList = new HashSet<EvidenceElementImpl>();
+    private Set<EvidenceElementImpl> elementList = new HashSet<EvidenceElementImpl>();
     @Id
     @GeneratedValue
     @Column(name = "Id_Evidence")
-    protected Long id;
+    private Long id;
     @Column(name = "Long_Label")
-    protected String longLabel;
+    private String longLabel;
 
     public EvidenceImpl() {
         super();
@@ -89,8 +83,8 @@ public class EvidenceImpl implements Evidence, Serializable {
     @XmlElementWrapper
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.EvidenceElementImpl.class)})
-    public Collection<EvidenceElementImpl> getElementList() {
-        return elementList;
+    public Collection<EvidenceElement> getElementList() {
+        return (HashSet)elementList;
     }
 
     @Override
@@ -135,8 +129,10 @@ public class EvidenceImpl implements Evidence, Serializable {
 
     @Override
     public void setElementList(
-            Collection<? extends EvidenceElement> elementList) {
-        this.elementList = (Collection<EvidenceElementImpl>) elementList;
+            Collection<EvidenceElement> elementList) {
+        for (EvidenceElement evEl : elementList) {
+            this.elementList.add((EvidenceElementImpl)evEl);
+        }
     }
 
     @Override

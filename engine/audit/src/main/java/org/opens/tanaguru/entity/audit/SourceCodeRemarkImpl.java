@@ -36,11 +36,11 @@ public class SourceCodeRemarkImpl extends ProcessRemarkImpl implements
 
     private static final long serialVersionUID = -4590947355988767670L;
     @Column(name = "Character_Position")
-    protected int characterPosition;
+    private int characterPosition;
     @Column(name = "Line_Number")
-    protected int lineNumber;
+    private int lineNumber;
     @Column(name = "Target", length = 5000)
-    protected String target;
+    private String target;
     
     public SourceCodeRemarkImpl() {
         super();

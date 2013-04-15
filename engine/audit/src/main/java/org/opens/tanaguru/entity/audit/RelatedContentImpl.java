@@ -52,7 +52,7 @@ public class RelatedContentImpl extends ContentImpl implements
         targetEntity=org.opens.tanaguru.entity.audit.SSPImpl.class,
         mappedBy="relatedContentSet")
     @org.hibernate.annotations.Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    protected Set<ContentImpl> parentContentSet =
+    private Set<ContentImpl> parentContentSet =
             new HashSet<ContentImpl>();
 
     public RelatedContentImpl() {
@@ -89,17 +89,21 @@ public class RelatedContentImpl extends ContentImpl implements
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.SSPImpl.class)})
     @XmlTransient
-    public Set<ContentImpl> getParentContentSet() {
-        return parentContentSet;
+    @Override
+    public Set<Content> getParentContentSet() {
+        return (Set)parentContentSet;
     }
 
-    public void addAllParentContent(Set<? extends Content> contentList) {
+    @Override
+    public void addAllParentContent(Set<Content> contentList) {
         for (Content content : contentList) {
             addParentContent(content);
         }
     }
 
+    @Override
     public void addParentContent(Content content) {
         this.parentContentSet.add((ContentImpl) content);
     }
+    
 }

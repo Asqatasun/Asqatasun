@@ -33,12 +33,20 @@
     <TGSI_SCENARIO Id_Scenario="2" Date_Of_Creation="2011-01-01 00:00:00" Label="My Scenario 2" Content="Scenario Content" CONTRACT_Id_Contract="2"/>
     
     <TGSI_OPTION_FAMILY Id_Option_Family="1" Code="DOMAIN" Label="" Description=""/>
+    <TGSI_OPTION_FAMILY Id_Option_Family="2" Code="USER_OPTION" Label="" Description=""/>
     <TGSI_OPTION Id_Option="1" Code="DOMAIN" Is_Restriction="false" OPTION_FAMILY_Id_Option_Family="1"/>
+    <TGSI_OPTION Id_Option="2" Code="USER_OPTION1" Is_Restriction="false" OPTION_FAMILY_Id_Option_Family="2"/>
     <TGSI_OPTION_ELEMENT Id_Option_Element="1" OPTION_Id_Option="1" Value="http://www.contract1.com/"/>
     <TGSI_OPTION_ELEMENT Id_Option_Element="2" OPTION_Id_Option="1" Value="http://www.contract2.com/"/>
+    <TGSI_OPTION_ELEMENT Id_Option_Element="3" OPTION_Id_Option="2" Value="userOption1"/>
+    <TGSI_OPTION_ELEMENT Id_Option_Element="4" OPTION_Id_Option="2" Value="userOption2"/>
+    <TGSI_OPTION_ELEMENT Id_Option_Element="5" OPTION_Id_Option="2" Value="userOption3"/>
     
     <TGSI_CONTRACT_OPTION_ELEMENT CONTRACT_Id_Contract="1" OPTION_ELEMENT_Id_Option_Element="1"/>
     <TGSI_CONTRACT_OPTION_ELEMENT CONTRACT_Id_Contract="2" OPTION_ELEMENT_Id_Option_Element="2"/>
+    <TGSI_USER_OPTION_ELEMENT USER_Id_User="1" OPTION_ELEMENT_Id_Option_Element="3"/>
+    <TGSI_USER_OPTION_ELEMENT USER_Id_User="1" OPTION_ELEMENT_Id_Option_Element="4"/>
+    <TGSI_USER_OPTION_ELEMENT USER_Id_User="2" OPTION_ELEMENT_Id_Option_Element="5"/>
 
     <TGSI_ACT Id_Act="1" Begin_Date="2011-01-01 00:00:00" End_Date="2011-01-01 01:00:00" CONTRACT_Id_Contract="1" Status="COMPLETED" Scope_Id_Scope="1" Client_Ip="127.0.0.1"/>
     <TGSI_ACT Id_Act="2" Begin_Date="2011-01-01 00:00:01" End_Date="2011-01-01 01:00:01" CONTRACT_Id_Contract="1" Status="COMPLETED" Scope_Id_Scope="1" Client_Ip="127.0.0.1"/>

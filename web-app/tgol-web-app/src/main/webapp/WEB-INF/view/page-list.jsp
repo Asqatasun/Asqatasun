@@ -78,7 +78,7 @@
                                     <c:set var="pageList2xxUrl" value="?wr=${param.wr}&amp;status=f2xx"/>
                                 </c:when>
                                 <c:when test="${statistics.auditScope == 'SCENARIO'}">
-                                    <c:set var="pageList2xxUrl" value="?wr=${param.wr}&amp;status=f2xx&amp;sortCriterion=rank&amp;sortDirection=1"/>
+                                    <c:set var="pageList2xxUrl" value="?wr=${param.wr}&amp;status=f2xx&amp;sortCriterion=rank&amp;sortDirection=2"/>
                                 </c:when>
                             </c:choose>
                             <tr>

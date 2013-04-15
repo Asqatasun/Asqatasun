@@ -54,6 +54,17 @@ public abstract class ScenarioBuilder {
     private static String header;
     private static String footer;
     
+    /**
+     * Private constructor : Hide Utility Class Constructor
+     */
+    private ScenarioBuilder() {}
+    
+    /**
+     * Build a scenario from a simple Url. 
+     * 
+     * @param url
+     * @return 
+     */
     public static String buildScenario(String url) {
         if (url == null) {
             return null;
@@ -65,6 +76,12 @@ public abstract class ScenarioBuilder {
         return strb.toString();
     }
 
+    /**
+     * Build a scenario from a list of url
+     * 
+     * @param urlList
+     * @return 
+     */
     public static String buildScenario(List<String> urlList) {
         if (urlList == null || urlList.isEmpty()) {
             return null;
@@ -82,6 +99,11 @@ public abstract class ScenarioBuilder {
         return strb.toString();
     }
         
+    /**
+     * Build the header of a scenario
+     * 
+     * @return 
+     */
     private static String buildHeader() {
         if (header == null) {
             StringBuilder strb = new StringBuilder();
@@ -102,7 +124,11 @@ public abstract class ScenarioBuilder {
         return header;
     }
         
-    
+    /**
+     *  Build the footer of a scenario
+     * 
+     * @return 
+     */
     private static String buildFooter() {
         if (footer == null) {
             StringBuilder strb = new StringBuilder();
@@ -113,6 +139,12 @@ public abstract class ScenarioBuilder {
         return footer;
     }
     
+    /**
+     * Build a get step
+     * 
+     * @param url
+     * @return 
+     */
     private static String buildGetStep(String url) {
         StringBuilder strb = new StringBuilder();
         strb.append(LEFT_BRACE);

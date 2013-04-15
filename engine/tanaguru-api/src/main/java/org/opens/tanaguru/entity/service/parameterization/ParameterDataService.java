@@ -21,12 +21,13 @@
  */
 package org.opens.tanaguru.entity.service.parameterization;
 
-import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.sdk.entity.service.GenericDataService;
+import java.util.Collection;
 import java.util.Set;
+import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.entity.parameterization.ParameterFamily;
+import org.opens.tanaguru.sdk.entity.service.GenericDataService;
 
 /**
  * 
@@ -60,6 +61,14 @@ public interface ParameterDataService extends GenericDataService<Parameter, Long
      *      the list of parameters for an audit from a given parameter family
      */
     Set<Parameter> getParameterSet(ParameterFamily parameterFamily, Audit audit);
+    
+    /**
+     * @param parameterFamily
+     * @param audit
+     * @return
+     *      the subset of parameters corresponding to the parameterFamily
+     */
+    Set<Parameter> getParameterSet(ParameterFamily parameterFamily, Collection<Parameter> paramSet);
 
     /**
      * @return

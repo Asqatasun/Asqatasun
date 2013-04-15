@@ -21,10 +21,10 @@
  */
 package org.opens.tanaguru.entity.service.reference;
 
-import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 import java.util.Collection;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Theme;
+import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 
 /**
  * 
@@ -43,8 +43,8 @@ public class ThemeDataServiceImpl extends AbstractGenericDataService<Theme, Long
     }
 
     @Override
-    public Collection<? extends Theme> findAll() {
-        Collection<? extends Theme> themeList = super.findAll() ;
+    public Collection<Theme> findAll() {
+        Collection<Theme> themeList = super.findAll() ;
         for (Theme theme : themeList) {
             for (Criterion cr : theme.getCriterionList()) {
                 cr.getReference();

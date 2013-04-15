@@ -21,19 +21,17 @@
  */
 package org.opens.tgol.entity.dao.user;
 
+import java.util.Collection;
+import javax.persistence.Query;
 import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 import org.opens.tgol.entity.user.Role;
 import org.opens.tgol.entity.user.RoleImpl;
-import java.util.Collection;
-import javax.persistence.Query;
 
 /**
  *
  * @author jkowalczyk
  */
 public class RoleDAOImpl extends AbstractJPADAO<Role, Long> implements RoleDAO {
-
-    private static final String CACHEABLE_OPTION="org.hibernate.cacheable";
 
     public RoleDAOImpl() {
         super();
@@ -45,7 +43,7 @@ public class RoleDAOImpl extends AbstractJPADAO<Role, Long> implements RoleDAO {
     }
 
     @Override
-    public Collection<? extends Role> findAllChildRole(Long key) {
+    public Collection<Role> findAllChildRole(Long key) {
         if (key == null) {
             return null;
         }
@@ -54,27 +52,9 @@ public class RoleDAOImpl extends AbstractJPADAO<Role, Long> implements RoleDAO {
                 + " left join fetch u.childRoleSet cr"
                 + " WHERE r.id = :id");
         query.setParameter("id", key);
-//        query.setHint(CACHEABLE_OPTION, "true");
         Role user = (Role)query.getSingleResult();
         return user.getChildRoleSet();
     }
 
-//    @Override
-//    public Role read(Long key) {
-//        if (key == null) {
-//            return null;
-//        }
-//        try {
-//            Query query = entityManager.createQuery("SELECT r FROM "
-//                    + getEntityClass().getName() + " r"
-//                    + " inner join fetch r.childRoleSet cr"
-//                    + " inner join fetch r.parentRole pr"
-//                    + " WHERE r.id = :id");
-//            query.setParameter("id", key);
-//            return (Role)query.getSingleResult();
-//        } catch (NoResultException e) {
-//            return null;
-//        }
-//    }
 
 }

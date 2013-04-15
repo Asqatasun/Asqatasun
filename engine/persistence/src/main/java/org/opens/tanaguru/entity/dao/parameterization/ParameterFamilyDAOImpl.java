@@ -21,9 +21,12 @@
  */
 package org.opens.tanaguru.entity.dao.parameterization;
 
-import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.Query;
 import org.opens.tanaguru.entity.parameterization.ParameterFamily;
 import org.opens.tanaguru.entity.parameterization.ParameterFamilyImpl;
+import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 
 /**
  *
@@ -35,6 +38,21 @@ public class ParameterFamilyDAOImpl extends AbstractJPADAO<ParameterFamily, Long
     @Override
     protected Class<? extends ParameterFamily> getEntityClass() {
         return ParameterFamilyImpl.class;
+    }
+
+    @Override
+    public ParameterFamily findParameterFamilyFromCode(String parameterFamilyCode) {
+        Query query = entityManager.createQuery("SELECT pf FROM "
+                + getEntityClass().getName() + " pf"
+                + " WHERE pf.paramFamilyCode = :parameterFamilyCode");
+        query.setParameter("parameterFamilyCode", parameterFamilyCode);
+        try {
+            return (ParameterFamily) query.getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        } catch (NonUniqueResultException nure) {
+            return null;
+        }
     }
 
 }

@@ -21,10 +21,10 @@
  */
 package org.opens.tanaguru.entity.audit;
 
-import org.opens.tanaguru.sdk.entity.Entity;
 import java.util.Collection;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.sdk.entity.Entity;
 
 /**
  * 
@@ -37,7 +37,7 @@ public interface ProcessResult extends Entity {
      * @param remarkList
      *            the remark list to add
      */
-    void addAllRemark(Collection<? extends ProcessRemark> remarkSet);
+    void addAllRemark(Collection<ProcessRemark> remarkSet);
 
     /**
      *
@@ -57,7 +57,7 @@ public interface ProcessResult extends Entity {
      *
      * @return the sub result list
      */
-    Collection<? extends ProcessResult> getChildResultList();
+    Collection<ProcessResult> getChildResultList();
 
     /**
      *
@@ -81,7 +81,7 @@ public interface ProcessResult extends Entity {
      *
      * @return the remark list
      */
-    Collection<? extends ProcessRemark> getRemarkSet();
+    Collection<ProcessRemark> getRemarkSet();
 
     /**
      *
@@ -112,7 +112,7 @@ public interface ProcessResult extends Entity {
      * @param subResultList
      *            the sub result list to set
      */
-    void setChildResultList(Collection<? extends ProcessResult> subResultList);
+    void setChildResultList(Collection<ProcessResult> subResultList);
 
     /**
      *
@@ -140,7 +140,7 @@ public interface ProcessResult extends Entity {
      * @param remarkList
      *            the remark list to set
      */
-    void setRemarkSet(Collection<? extends ProcessRemark> remarkList);
+    void setRemarkSet(Collection<ProcessRemark> remarkList);
 
     /**
      *
