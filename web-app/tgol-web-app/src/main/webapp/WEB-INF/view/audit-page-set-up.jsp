@@ -57,9 +57,16 @@
                 <%@include file="template/set-up.jsp" %>
             </div><!-- class="row" -->
         </div><!-- class="container" -->
+        <%@include file="template/footer.jsp" %>
         <script type="text/javascript" src="${jqueryUrl}"></script>
         <script type="text/javascript" src="${auditSetUpJsUrl}"></script>
-        <%@include file="template/footer.jsp" %>
+        <script type="text/javascript">
+            document.getElementById('input-submit').onclick=function () {
+                document.forms["auditSetUpCommand"].submit();
+                $('#input-submit').attr('disabled', 'disabled');
+                setTimeout(function(){$('#input-submit').removeAttr('disabled');},60000);
+            };
+        </script>
     </body>
 </html>
 </compress:html>
