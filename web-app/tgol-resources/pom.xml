@@ -23,6 +23,16 @@
                     <exclude>**/sql/*</exclude>
                     <exclude>**/lib/*</exclude>
                     <exclude>**/conf/tgol.conf</exclude>
+                    <exclude>**/conf/ESAPI.properties</exclude>
+                    <exclude>**/conf/google-code.properties</exclude>
+                    <exclude>**/conf/s.properties</exclude>
+                    <exclude>**/browser-installation/*</exclude>
+                    <exclude>**/sql-management/*</exclude>
+                    <exclude>**/sql-update/*</exclude>
+                    <exclude>**/runtime-lib/*</exclude>
+                    <exclude>**/password-encoder/*</exclude>
+                    <exclude>**/token-master-key-encryptor/*</exclude>
+                    <exclude>**/installation/*</exclude>
                 </excludes>
             </resource>
         </resources>
