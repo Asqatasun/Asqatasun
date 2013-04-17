@@ -25,9 +25,7 @@ import ar.com.fdvs.dj.domain.CustomExpression;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.opens.tgol.presentation.data.RemarkInfos;
 
 /**
@@ -107,8 +105,6 @@ public class ProcessRemarkCsvExtractorExpression implements CustomExpression {
                 }
             }
         }
-        Logger.getLogger(this.getClass()).error(csvExpression.toString());
-        Logger.getLogger(this.getClass()).error(StringEscapeUtils.escapeCsv(csvExpression.toString()));
         return csvExpression.toString();
     }
 
