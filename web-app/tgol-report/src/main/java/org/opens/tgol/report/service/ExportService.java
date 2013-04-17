@@ -25,21 +25,17 @@ import ar.com.fdvs.dj.core.DynamicJasperHelper;
 import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
 import ar.com.fdvs.dj.domain.DynamicReport;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
-import org.opens.tgol.presentation.data.AuditStatistics;
-import org.opens.tgol.report.format.ExportFormat;
 import java.io.ByteArrayOutputStream;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporter;
-import net.sf.jasperreports.engine.JRExporterParameter;
-import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.log4j.Logger;
+import org.opens.tgol.presentation.data.AuditStatistics;
+import org.opens.tgol.report.format.ExportFormat;
 import org.opens.tgol.report.layout.LayoutFactory;
 import org.opens.tgol.report.service.exception.NotSupportedExportFormatException;
 
@@ -97,7 +93,7 @@ public final class ExportService {
         }
         ExportFormat exportFormat = exportFormatMap.get(format);
 
-        DynamicReport dr = LayoutFactory.getInstance().buildReportLayout(locale, auditStatistics);
+        DynamicReport dr = LayoutFactory.getInstance().buildReportLayout(locale, auditStatistics, format);
         // Retrieve our data source
         JRDataSource ds = new JRBeanCollectionDataSource(dataSource);
 

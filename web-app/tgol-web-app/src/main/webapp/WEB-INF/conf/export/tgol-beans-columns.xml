@@ -70,7 +70,14 @@
             </list>
         </property>
     </bean>
-
+    
+    <!-- Test Result details Column -->
+    <bean id="resultDetailsColumnBuilder" parent="baseColumnBuilder">
+        <property name="columnTitleKey" value="export-report.testDetails"/>
+        <property name="style" ref="textualStyle"/>
+        <property name="customExpressionBuilder" ref="resultDetailsExpressionBuilder"/>
+    </bean>
+    
     <!-- Tested elements counter Column -->
 <!--    <bean id="testedElementsColumnBuilder" parent="baseColumnBuilder">
         <property name="columnTitleKey" value="export-report.testedElements"/>

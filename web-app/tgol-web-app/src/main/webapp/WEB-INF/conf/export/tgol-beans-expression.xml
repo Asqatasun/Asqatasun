@@ -76,6 +76,8 @@
         <property name="keyRetriever" ref="resultKeyRetriever"/>
     </bean>
 
+    <bean id="resultDetailsExpressionBuilder" class="org.opens.tgol.report.expression.builder.ProcessRemarkCsvExtractorExpressionBuilderImpl"/>
+
 <!--    <bean id="passedCustomExpressionBuilder" class="org.opens.tgol.report.expression.builder.ResultCounterExpressionBuilderImpl">
         <property name="resultType" value="0"/>  ResultCounterExpression.PASSED_INDEX=0
     </bean>

@@ -23,9 +23,9 @@ package org.opens.tgol.report.layout;
 
 import ar.com.fdvs.dj.domain.DynamicReport;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
+import java.util.Locale;
 import org.opens.tgol.presentation.data.AuditStatistics;
 import org.opens.tgol.report.layout.builder.LayoutBuilder;
-import java.util.Locale;
 
 /**
  *
@@ -61,14 +61,15 @@ public class LayoutFactory {
      * 
      * @param locale
      * @param auditStatistics
+     * @param format
      * @return
      * @throws ColumnBuilderException
      * @throws ClassNotFoundException
      */
-    public DynamicReport buildReportLayout(Locale locale, AuditStatistics auditStatistics)
+    public DynamicReport buildReportLayout(Locale locale, AuditStatistics auditStatistics, String format)
             throws ColumnBuilderException, ClassNotFoundException {
         // Build an empty layout and return it
-        return layoutBuilder.getDynamicReportBuilder(auditStatistics, locale).build();
+        return layoutBuilder.getDynamicReportBuilder(auditStatistics, locale, format).build();
     }
 
 }

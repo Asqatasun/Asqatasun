@@ -25,12 +25,12 @@ import ar.com.fdvs.dj.domain.Style;
 import ar.com.fdvs.dj.domain.builders.DynamicReportBuilder;
 import ar.com.fdvs.dj.domain.builders.FastReportBuilder;
 import ar.com.fdvs.dj.domain.constants.Page;
-import org.opens.tgol.presentation.data.AuditStatistics;
-import org.opens.tgol.report.layout.column.builder.ElementColumnBuilder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import org.opens.tgol.presentation.data.AuditStatistics;
+import org.opens.tgol.report.layout.column.builder.ElementColumnBuilder;
 
 /**
  *
@@ -81,6 +81,15 @@ public class LayoutBuilderImpl implements LayoutBuilder {
 
     public void setColumnBuilderList(List<ElementColumnBuilder> columnBuilderList) {
         this.columnBuilderList = columnBuilderList;
+    }
+    
+    private Map<String, List<ElementColumnBuilder>> formatSpecificColumnBuilderList;
+    public Map<String, List<ElementColumnBuilder>> getFormatSpecificColumnBuilderList() {
+        return formatSpecificColumnBuilderList;
+    }
+
+    public void setFormatSpecificColumnBuilderList(Map<String, List<ElementColumnBuilder>> formatSpecificColumnBuilderList) {
+        this.formatSpecificColumnBuilderList = formatSpecificColumnBuilderList;
     }
 
     private Map<String, String> fieldMap = new HashMap<String, String>();
@@ -154,7 +163,8 @@ public class LayoutBuilderImpl implements LayoutBuilder {
     @Override
     public DynamicReportBuilder getDynamicReportBuilder(
             AuditStatistics auditStatistics,
-            Locale locale) {
+            Locale locale, 
+            String format) {
         DynamicReportBuilder report = new FastReportBuilder();
         report.setTitle(titleBuilder.getTitle(auditStatistics, locale));
         report.setTitleStyle(titleStyle);
@@ -165,6 +175,11 @@ public class LayoutBuilderImpl implements LayoutBuilder {
         }
         for (ElementColumnBuilder ecb : columnBuilderList) {
             report.addColumn(ecb.getElementColumn(locale));
+        }
+        if (formatSpecificColumnBuilderList.containsKey(format)) {
+            for (ElementColumnBuilder ecb : formatSpecificColumnBuilderList.get(format)) {
+                report.addColumn(ecb.getElementColumn(locale));
+            }
         }
         report.setPrintColumnNames(printColumnNames);
         report.setIgnorePagination(ignorePagination);

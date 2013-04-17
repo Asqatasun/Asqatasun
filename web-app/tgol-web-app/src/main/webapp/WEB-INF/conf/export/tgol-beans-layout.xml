@@ -42,6 +42,9 @@
                 <entry key="resultCode">
                     <value>java.lang.String</value>
                 </entry>
+                <entry key="remarkInfosList">
+                    <value>java.util.List</value>
+                </entry>
             </map>
         </property>
         <property name="titleBuilder" ref="titleBuilder"/>
@@ -62,6 +65,15 @@
                 <ref bean="suspectedFailedElementsColumnBuilder"/>-->
 <!--                <ref bean="elementsToCheckColumnBuilder"/>-->
             </list>
+        </property>
+        <property name="formatSpecificColumnBuilderList">
+            <map>
+                <entry key="csv">
+                    <list>
+                        <ref bean="resultDetailsColumnBuilder"/>
+                    </list>
+                </entry>
+            </map>
         </property>
     </bean>
 
