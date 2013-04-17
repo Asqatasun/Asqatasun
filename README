@@ -60,6 +60,25 @@ that can be found at :
 6. Content of the version 
 =========================
 
+Bugs : 
+#538 : The sort contract by mark doesn't work in the contract view (https://dev.tanaguru.org/redmine/issues/538)
+
+Features:
+#590 : Provide a self-structured csv entry that handles ProcessRemarks info and Evidence Elements data (https://dev.tanaguru.org/redmine/issues/590)
+#583 : Use css-phloc as css adapter and parser (https://dev.tanaguru.org/redmine/issues/583)
+#582 : Use jsoup as html adapter (https://dev.tanaguru.org/redmine/issues/582)
+#581 : Create sebuilder-interpreter-tool subproject based on sebuilder-interpreter api
+#580 : Upgrade to Heritrix 3.1.0 version
+#579 : Clean-up dependencies
+#552 : Clean-up SSPHandler and DOMHandler to remove unused primitives
+#551 : Provide a mechanism to avoid to launch tests that return NOT_TESTED as result [OPTIMIZATION]
+#550 : Improve ergonomy of audit result pages
+#549 : Compute criterion results while analysing
+#548 : Introduce the criterionStatistics entity
+#547 : Add an audit result view with criterion results
+#534 : Button "audit again"
+#283 : Separate NMI from Untested
+#163 : Add a "please wait" page after submit and before audit result
 
 
 Have Fun
