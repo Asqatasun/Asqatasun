@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -61,14 +61,15 @@ public class LayoutFactory {
      * 
      * @param locale
      * @param auditStatistics
+     * @param format
      * @return
      * @throws ColumnBuilderException
      * @throws ClassNotFoundException
      */
-    public DynamicReport buildReportLayout(Locale locale, AuditStatistics auditStatistics)
+    public DynamicReport buildReportLayout(Locale locale, AuditStatistics auditStatistics, String format)
             throws ColumnBuilderException, ClassNotFoundException {
         // Build an empty layout and return it
-        return layoutBuilder.getDynamicReportBuilder(auditStatistics, locale).build();
+        return layoutBuilder.getDynamicReportBuilder(auditStatistics, locale, format).build();
     }
 
 }

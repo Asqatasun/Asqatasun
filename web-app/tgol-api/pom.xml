@@ -35,10 +35,6 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>net.sf.jasperreports</groupId>
-            <artifactId>jasperreports</artifactId>
-        </dependency>
-        <dependency>
             <groupId>displaytag</groupId>
             <artifactId>displaytag</artifactId>
             <exclusions>

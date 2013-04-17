@@ -19,30 +19,21 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.report.layout.builder;
+package org.opens.tgol.report.expression.builder;
 
-import ar.com.fdvs.dj.domain.builders.DynamicReportBuilder;
 import java.util.Locale;
-import org.opens.tgol.presentation.data.AuditStatistics;
+import org.opens.tgol.report.expression.ProcessRemarkCsvExtractorExpression;
 
 /**
  *
  * @author jkowalczyk
  */
-public interface LayoutBuilder {
+public class ProcessRemarkCsvExtractorExpressionBuilderImpl 
+    implements AbstractGenericCustomExpressionBuilder<ProcessRemarkCsvExtractorExpression>{
 
-    
-
-    /**
-     * 
-     * @param auditStatistics
-     * @param locale
-     * @param format
-     * @return
-     */
-    public DynamicReportBuilder getDynamicReportBuilder(
-            AuditStatistics auditStatistics,
-            Locale locale,
-            String format);
+    @Override
+    public ProcessRemarkCsvExtractorExpression build(Locale locale) {
+        return new ProcessRemarkCsvExtractorExpression();
+    }
 
 }
