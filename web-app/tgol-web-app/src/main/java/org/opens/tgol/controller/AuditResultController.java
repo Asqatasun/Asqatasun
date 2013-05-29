@@ -508,7 +508,7 @@ public class AuditResultController extends AuditDataHandlerController {
      * @throws IOException
      */
     private String highlightSourceCode(SSP ssp) {
-        if (ssp.getDoctype() != null && !ssp.getDoctype().trim().isEmpty()) {
+        if (StringUtils.isNotBlank(ssp.getDoctype())) {
             hasSourceCodeWithDoctype = true;
         } else {
             hasSourceCodeWithDoctype = false;

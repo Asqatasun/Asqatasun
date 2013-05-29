@@ -22,6 +22,7 @@
 package org.opens.tgol.validator;
 
 import java.util.regex.Pattern;
+import org.apache.commons.validator.routines.UrlValidator;
 import org.opens.tgol.command.CreateUserCommand;
 import org.opens.tgol.command.UserSignUpCommand;
 import org.opens.tgol.entity.service.user.UserDataService;
@@ -59,13 +60,6 @@ public class SignUpFormValidator implements Validator {
             "sign-up.invalidUrl";
     private static final String INVALID_PASSWORD_KEY =
             "sign-up.invalidPassword";
-//    private static final String INVALID_PHONE_KEY =
-//            "sign-up.invalidPhoneNumber";
-
-    // http://stackoverflow.com/questions/161738/what-is-the-best-regular-expression-to-check-if-a-string-is-a-valid-url
-    private static final String URL_CHECKER_REGEXP =
-            "(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
-    private final Pattern urlCheckerPattern = Pattern.compile(URL_CHECKER_REGEXP);
     
     // from http://www.regular-expressions.info/email.html
     private static final String EMAIL_CHECKER_REGEXP =
@@ -146,8 +140,10 @@ public class SignUpFormValidator implements Validator {
             errors.rejectValue(SITE_URL_KEY, MISSING_URL_KEY);
             return false;
         } else {
-            String url = userSubscriptionCommand.getSiteUrl();
-            if (!urlCheckerPattern.matcher(url).matches()) {
+            String url = userSubscriptionCommand.getSiteUrl().trim();
+            String[] schemes = {"http","https"};
+            UrlValidator urlValidator = new UrlValidator (schemes, UrlValidator.ALLOW_2_SLASHES);
+            if (!urlValidator.isValid(url)) {
                 errors.rejectValue(SITE_URL_KEY, INVALID_URL_KEY);
                 return false;
             }

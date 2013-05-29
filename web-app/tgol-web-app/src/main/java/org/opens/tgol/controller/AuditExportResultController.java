@@ -29,6 +29,7 @@ import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRException;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.SSP;
@@ -87,7 +88,7 @@ public class AuditExportResultController extends AuditDataHandlerController {
             HttpServletRequest request,
             HttpServletResponse response,
             Model model) {
-        if (format== null || webresourceId == null) {
+        if (format == null || webresourceId == null) {
             return TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
         }
         //We first check that the current user is allowed to display the result
@@ -99,7 +100,7 @@ public class AuditExportResultController extends AuditDataHandlerController {
             throw new ForbiddenUserException(getCurrentUser());
         }
         WebResource webResource = getWebResourceDataService().ligthRead(webResourceIdValue);
-        if (isUserAllowedToDisplayResult(webResource) || (webResource!=null && webResource instanceof Site) ) {
+        if (isUserAllowedToDisplayResult(webResource) || (webResource != null && webResource instanceof Site) ) {
             if (webResource != null) {
                 // If the Id given in argument correspond to a webResource,
                 // data are retrieved to be prepared and displayed
@@ -157,7 +158,7 @@ public class AuditExportResultController extends AuditDataHandlerController {
             scope = getPageScope();
             try {
                 ssp = getContentDataService().findSSP(webResource, webResource.getURL());
-                if (ssp.getDoctype() != null && !ssp.getDoctype().trim().isEmpty()) {
+                if (StringUtils.isNotBlank(ssp.getDoctype())) {
                     hasSourceCodeWithDoctype = true;
                 }
             } catch (NoResultException nre) {}

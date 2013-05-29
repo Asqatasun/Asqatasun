@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Theme;

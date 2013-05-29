@@ -22,7 +22,7 @@
 package org.opens.tanaguru.crawler.util;
 
 import javax.xml.xpath.XPathExpressionException;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;

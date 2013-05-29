@@ -17,7 +17,7 @@ package org.opens.tanaguru.sebuilder.interpreter.factory;
 
 import com.sebuilder.interpreter.StepType;
 import com.sebuilder.interpreter.factory.StepTypeFactory;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.sebuilder.interpreter.TgStore;
 
 /**

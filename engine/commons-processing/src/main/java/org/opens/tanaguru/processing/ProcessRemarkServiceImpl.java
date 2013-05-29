@@ -28,8 +28,8 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.xpath.*;
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -701,7 +701,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     @Override
     public EvidenceElement getSnippetEvidenceElement(Element element) {
         EvidenceElement snippetEvidenceElement = evidenceElementFactory.create();
-        String elementHtml = StringEscapeUtils.escapeHtml(StringUtil.normaliseWhitespace(element.outerHtml()));
+        String elementHtml = StringEscapeUtils.escapeHtml4(StringUtil.normaliseWhitespace(element.outerHtml()));
         if (elementHtml.length() > SNIPPET_MAX_LENGTH) {
             elementHtml = elementHtml.substring(0, SNIPPET_MAX_LENGTH);
         }

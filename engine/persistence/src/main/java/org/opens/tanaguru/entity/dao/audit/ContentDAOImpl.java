@@ -21,33 +21,20 @@
  */
 package org.opens.tanaguru.entity.dao.audit;
 
-import javax.persistence.Query;
-
-import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.entity.audit.Content;
-import org.opens.tanaguru.entity.audit.ContentImpl;
-import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
+import javax.persistence.Query;
 import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.exception.ConstraintViolationException;
-import org.opens.tanaguru.entity.audit.RelatedContent;
-import org.opens.tanaguru.entity.audit.RelatedContentImpl;
-import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.audit.SSPImpl;
-import org.opens.tanaguru.entity.audit.StylesheetContent;
-import org.opens.tanaguru.entity.audit.StylesheetContentImpl;
+import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 
 /**
  * 

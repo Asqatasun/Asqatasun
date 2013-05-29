@@ -343,7 +343,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
         // We sort the string and only keep the not empty ones.
         List<String> trueUrl = new ArrayList<String>();
         for (String str : auditSetUpCommand.getUrlList()) {
-            if (str != null && !str.isEmpty()) {
+            if (StringUtils.isNotBlank(str)) {
                 try {
                     trueUrl.add(urlCounter, UURIFactory.getInstance(str.trim()).getEscapedURI());
                 } catch (URIException ex) {

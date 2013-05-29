@@ -26,6 +26,7 @@ import java.net.URLEncoder;
 import java.text.MessageFormat;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.util.MD5Encoder;
 import org.opens.tgol.command.ChangePasswordCommand;
@@ -161,7 +162,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
         } catch (NumberFormatException nfe) {
             throw new ForbiddenUserException();
         }
-        if (token == null || token.isEmpty()) {
+        if (StringUtils.isBlank(token)) {
             return TgolKeyStore.ACCESS_DENIED_VIEW_REDIRECT_NAME;
         }
         User currentUser = getCurrentUser();

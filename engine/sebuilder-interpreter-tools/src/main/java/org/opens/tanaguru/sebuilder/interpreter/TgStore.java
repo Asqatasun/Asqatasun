@@ -24,7 +24,7 @@ package org.opens.tanaguru.sebuilder.interpreter;
 import com.sebuilder.interpreter.Getter;
 import com.sebuilder.interpreter.Store;
 import com.sebuilder.interpreter.TestRun;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Generic Store that wraps a getter.

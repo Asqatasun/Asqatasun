@@ -23,6 +23,7 @@ package org.opens.tgol.validator;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.util.MD5Encoder;
 import org.opens.tgol.command.ChangePasswordCommand;
@@ -36,7 +37,7 @@ import org.springframework.validation.Validator;
  * @author jkowalczyk
  */
 public class ChangePasswordFormValidator implements Validator {
-    
+
     private static final String MISSING_PASSWORD_KEY =
             "change-password.missingPassword";
     private static final String PASSWORD_NOT_IDENTICAL_KEY =
@@ -47,16 +48,16 @@ public class ChangePasswordFormValidator implements Validator {
             "change-password.incorrectPassword";
     private static final String CURRENT_PASSWORD_KEY = "currentPassword";
     private static final String NEW_PASSWORD_KEY = "newPassword";
-    
+
     @Override
     public void validate(Object target, Errors errors) {
-        ChangePasswordCommand changePasswordCommand = (ChangePasswordCommand)target;
-        checkPassword(changePasswordCommand, null,errors);
+        ChangePasswordCommand changePasswordCommand = (ChangePasswordCommand) target;
+        checkPassword(changePasswordCommand, null, errors);
     }
-    
+
     public void validate(Object target, Errors errors, User currentUser) {
-        ChangePasswordCommand changePasswordCommand = (ChangePasswordCommand)target;
-        checkPassword(changePasswordCommand, currentUser,errors);
+        ChangePasswordCommand changePasswordCommand = (ChangePasswordCommand) target;
+        checkPassword(changePasswordCommand, currentUser, errors);
     }
 
     /**
@@ -71,21 +72,19 @@ public class ChangePasswordFormValidator implements Validator {
             Errors errors) {
         String currentPassword = changePasswordCommand.getCurrentPassword();
         String newPassword = changePasswordCommand.getNewPassword();
-        if (currentPassword != null) {
-            if (currentPassword.trim().isEmpty()) {
-                errors.rejectValue(CURRENT_PASSWORD_KEY, MISSING_PASSWORD_KEY);
-                return false;
-            } else {
-                try {
-                    if (!MD5Encoder.MD5(currentPassword).equalsIgnoreCase(user.getPassword())) {
-                        errors.rejectValue(CURRENT_PASSWORD_KEY, INCORRECT_PASSWORD_KEY);
-                        return false;
-                    }
-                } catch (NoSuchAlgorithmException ex) {
-                    Logger.getLogger(this.getClass()).warn(ex);
-                } catch (UnsupportedEncodingException ex) {
-                    Logger.getLogger(this.getClass()).warn(ex);
+        if (StringUtils.isBlank(currentPassword)) {
+            errors.rejectValue(CURRENT_PASSWORD_KEY, MISSING_PASSWORD_KEY);
+            return false;
+        } else {
+            try {
+                if (!MD5Encoder.MD5(currentPassword).equalsIgnoreCase(user.getPassword())) {
+                    errors.rejectValue(CURRENT_PASSWORD_KEY, INCORRECT_PASSWORD_KEY);
+                    return false;
                 }
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(this.getClass()).warn(ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(this.getClass()).warn(ex);
             }
         }
         if (!newPassword.equals(changePasswordCommand.getConfirmNewPassword())) {
@@ -102,5 +101,4 @@ public class ChangePasswordFormValidator implements Validator {
     public boolean supports(Class clazz) {
         return ChangePasswordFormValidator.class.isAssignableFrom(clazz);
     }
-
 }

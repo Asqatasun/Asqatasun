@@ -29,7 +29,7 @@ import org.opens.tanaguru.entity.subject.WebResourceImpl;
 import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 import java.util.List;
 import javax.persistence.NonUniqueResultException;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.subject.PageImpl;
 

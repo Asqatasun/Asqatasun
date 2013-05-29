@@ -151,14 +151,19 @@
                 <version>2.6</version>
             </dependency>
             <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.1</version>
+            </dependency>
+            <dependency>
                 <groupId>commons-collections</groupId>
                 <artifactId>commons-collections</artifactId>
-                <version>3.1</version>
+                <version>3.2.1</version>
             </dependency>
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
-                <version>1.7</version>
+                <version>1.8</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
@@ -168,7 +173,12 @@
             <dependency>
                 <groupId>commons-fileupload</groupId>
                 <artifactId>commons-fileupload</artifactId>
-                <version>1.2.2</version>
+                <version>1.3</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-validator</groupId>
+                <artifactId>commons-validator</artifactId>
+                <version>1.4.0</version>    
             </dependency>
             <dependency>
                 <groupId>org.milyn</groupId>
@@ -700,35 +710,6 @@
                 <version>1.1.2</version>
             </dependency>
 
-            <!-- graphics dependencies (cewolf, jfreechart, jcommon) -->
-<!--            <dependency>
-                <groupId>cewolf</groupId>
-                <artifactId>cewolf</artifactId>
-                <version>1.1.4</version>
-            </dependency>
-            <dependency>
-                <groupId>jfreechart</groupId>
-                <artifactId>jfreechart</artifactId>
-                <version>1.0.12</version>
-            </dependency>
-            <dependency>
-                <groupId>jcommon</groupId>
-                <artifactId>jcommon</artifactId>
-                <version>1.0.15</version>
-            </dependency>-->
-
-            <!-- batik dependencies -->
-<!--            <dependency>
-                <groupId>batik</groupId>
-                <artifactId>batik-svggen</artifactId>
-                <version>1.6-1</version>
-            </dependency>
-            <dependency>
-                <groupId>batik</groupId>
-                <artifactId>batik-css</artifactId>
-                <version>1.6-1</version>
-            </dependency>-->
-
             <!-- displaytag dependencies -->
             <dependency>
                 <groupId>displaytag</groupId>
@@ -745,6 +726,14 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+            
+            <!-- highlighter dependency -->
+            <dependency>
+                <groupId>com.uwyn</groupId>
+                <artifactId>jhighlight</artifactId>
+                <version>1.0</version>
+            </dependency>
+            
             <!-- jasper et dynamicJasper dependencies -->
             <dependency>
                 <groupId>net.sf.jasperreports</groupId>
@@ -898,17 +887,7 @@
                 <artifactId>sebuilder-interpreter</artifactId>
                 <version>1.1.0-OPEN-S</version>
             </dependency>
-            <!-- harlib api --> 
-<!--            <dependency>
-                <groupId>edu.umass.cs.benchlab.har</groupId>
-                <artifactId>harlib</artifactId>
-                <version>1.0b10</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.umass.cs.benchlab.har</groupId>
-                <artifactId>harlib-jackson</artifactId>
-                <version>1.0b10</version>
-            </dependency>-->
+            
             <!-- html and css parsers -->
             <dependency>
                 <!-- jsoup HTML parser library @ http://jsoup.org/ -->

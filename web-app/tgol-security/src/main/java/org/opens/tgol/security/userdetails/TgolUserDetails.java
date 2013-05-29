@@ -22,7 +22,7 @@
 package org.opens.tgol.security.userdetails;
 
 import java.util.Collection;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tgol.entity.user.User;
 import org.springframework.security.core.GrantedAuthority;
 

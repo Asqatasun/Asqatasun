@@ -23,7 +23,7 @@
 package org.opens.tanaguru.service.mock;
 
 import java.util.*;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.*;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;

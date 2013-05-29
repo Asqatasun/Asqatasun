@@ -32,7 +32,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import javax.persistence.PersistenceException;
 import org.apache.commons.httpclient.URIException;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.archive.net.UURI;
 import org.archive.net.UURIFactory;

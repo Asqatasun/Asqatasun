@@ -21,6 +21,7 @@
  */
 package org.opens.tgol.validator;
 
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tgol.command.ForgottenPasswordCommand;
 import org.opens.tgol.entity.service.user.UserDataService;
 import org.opens.tgol.entity.user.User;
@@ -67,8 +68,7 @@ public class ForgottenPasswordFormValidator implements Validator {
     private boolean checkEmailExist(
             ForgottenPasswordCommand forgottenPasswordCommand,
             Errors errors) {
-        if (forgottenPasswordCommand.getEmail() == null ||
-                forgottenPasswordCommand.getEmail().trim().isEmpty()) {
+        if (StringUtils.isBlank(forgottenPasswordCommand.getEmail())) {
             errors.rejectValue(GENERAL_ERROR_MSG_KEY,
                     MISSING_EMAIL_KEY);
             return false;

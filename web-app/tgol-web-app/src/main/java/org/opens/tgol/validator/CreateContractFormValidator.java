@@ -22,8 +22,8 @@
 package org.opens.tgol.validator;
 
 import java.util.*;
-import java.util.regex.Pattern;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.validator.routines.UrlValidator;
 import org.opens.tgol.command.CreateContractCommand;
 import org.opens.tgol.entity.user.User;
 import org.opens.tgol.form.parameterization.ContractOptionFormField;
@@ -60,9 +60,9 @@ public class CreateContractFormValidator implements Validator {
     private static final String INVALID_URL_KEY =
             "sign-up.invalidUrl";
 
-    private static final String URL_CHECKER_REGEXP =
-            "(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
-    private final Pattern urlCheckerPattern = Pattern.compile(URL_CHECKER_REGEXP);
+//    private static final String URL_CHECKER_REGEXP =
+//            "(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+//    private final Pattern urlCheckerPattern = Pattern.compile(URL_CHECKER_REGEXP);
     
     private Map<String, ContractOptionFormField> contractOptionFormFieldMap =
             new HashMap<String,ContractOptionFormField>();
@@ -171,11 +171,10 @@ public class CreateContractFormValidator implements Validator {
      * @return
      */
     private boolean checkContractUrl(CreateContractCommand createContractCommand, Errors errors) {
-        if (StringUtils.isEmpty(createContractCommand.getContractUrl().trim()) || 
-                StringUtils.equals(createContractCommand.getContractUrl().trim(), "http://")) {
-            return true;
-        }
-        if (!urlCheckerPattern.matcher(createContractCommand.getContractUrl()).matches()) {
+        String url = createContractCommand.getContractUrl().trim();
+        String[] schemes = {"http","https"};
+        UrlValidator urlValidator = new UrlValidator (schemes, UrlValidator.ALLOW_2_SLASHES);
+        if (!urlValidator.isValid(url)) {
             errors.rejectValue(CONTRACT_URL_KEY, INVALID_URL_KEY);
             return false;
         }
