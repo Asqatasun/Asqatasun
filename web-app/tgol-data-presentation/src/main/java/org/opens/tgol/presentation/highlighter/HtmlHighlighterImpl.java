@@ -39,7 +39,7 @@ public class HtmlHighlighterImpl implements HtmlHighlighter {
     @Override
     public String highlightSourceCode(String doctype, String htmlContent) {
         StringBuilder source = new StringBuilder();
-        if (doctype != null && !doctype.isEmpty()) {
+        if (org.apache.commons.lang3.StringUtils.isNotBlank(doctype)) {
             source.append(doctype.trim().
                     replace(CARRIAGE_RETURN_CHAR, EMPTY_CHAR).
                     replace('\n', EMPTY_CHAR));
