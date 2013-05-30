@@ -29,18 +29,18 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.opens.tgol.presentation.highlighter.HtmlHighlighter;
 
 /**
  *
  * @author jkowalczyk
+ * @Deprecated
  */
-public final class TgolHighlighter {
+public final class TgolHighlighter implements HtmlHighlighter {
 
     private static final Logger LOGGER = Logger.getLogger(TgolHighlighter.class);
     private static final String BEGIN_LINE_STR_OF_HIGHLIGHTED_CODE =
             "<li class=\"li";
-    private static final char CARRIAGE_RETURN_CHAR = '\n';
-    private static final char EMPTY_CHAR = ' ';
     private static final String POST_REQUEST_CONTENT_TYPE_PARAMETER =
             "Content-Type";
     private static final String POST_REQUEST_CONTENT_TYPE_VALUE =
@@ -111,12 +111,25 @@ public final class TgolHighlighter {
         return tgolHighlighter;
     }
 
-    public String highlightSourceCode
-            (String doctype, String adaptedContent) throws IOException {
+    @Override
+    public String highlightSourceCode (String doctype, String adaptedContent) {
         
         StringBuilder highlightedSourceCode = new StringBuilder();
-        highlightedSourceCode.append(
+        try {
+            highlightedSourceCode.append(
                 highlighterHttpRequest(doctype,adaptedContent));
+        } catch (IOException ioe){}
+        return highlightedSourceCode.toString();
+    }
+    
+    @Override
+    public String highlightSourceCode (String adaptedContent)  {
+        
+        StringBuilder highlightedSourceCode = new StringBuilder();
+        try {
+        highlightedSourceCode.append(
+                highlighterHttpRequest(null,adaptedContent));
+        } catch (IOException ioe){}
         return highlightedSourceCode.toString();
     }
 

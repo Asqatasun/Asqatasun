@@ -20,5 +20,9 @@
             <artifactId>tgol-api</artifactId>
             <version>${webappVersion}</version>
         </dependency>
+        <dependency>
+            <groupId>com.uwyn</groupId>
+            <artifactId>jhighlight</artifactId>
+        </dependency>
     </dependencies>
 </project>

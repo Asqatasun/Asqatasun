@@ -17,6 +17,25 @@
         <c:set var="lang" value="${pageContext.response.locale}"/>
     </c:otherwise>
 </c:choose>
+<c:choose>
+    <c:when test="${not empty configProperties['cdnUrl']}">
+        <!-- external js -->
+        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-1.9.1.min.js"/>
+        <!-- internal js -->
+        <c:set var="highlightSelectedLineJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/highlighter/highlight-selected-line-min.js"/>
+    </c:when>
+    <c:otherwise>
+        <!-- external js -->
+        <c:set var="jqueryUrl">
+            <c:url value="/External-Js/jquery-1.9.1.min.js"/>
+        </c:set>
+        
+        <!-- internal js -->
+        <c:set var="highlightSelectedLineJsUrl">
+            <c:url value="/Js/highlighter/highlight-selected-line-min.js"/>
+        </c:set>
+    </c:otherwise>
+</c:choose>
 <html lang="${lang}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="sourceCode.pageTitle">
@@ -54,6 +73,8 @@
             </div><!-- class="row"-->
         </div><!-- class="container"-->
         <%@include file="template/footer.jsp" %>
+        <script type="text/javascript" src="${jqueryUrl}"></script>
+        <script type="text/javascript" src="${highlightSelectedLineJsUrl}"></script>
     </body>
 </html>
 </compress:html>

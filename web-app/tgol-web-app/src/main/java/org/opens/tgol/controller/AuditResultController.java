@@ -52,7 +52,7 @@ import org.opens.tgol.form.builder.FormFieldBuilder;
 import org.opens.tgol.presentation.data.AuditStatistics;
 import org.opens.tgol.presentation.factory.CriterionResultFactory;
 import org.opens.tgol.presentation.factory.TestResultFactory;
-import org.opens.tgol.util.TgolHighlighter;
+import org.opens.tgol.presentation.highlighter.HtmlHighlighter;
 import org.opens.tgol.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -145,6 +145,17 @@ public class AuditResultController extends AuditDataHandlerController {
     public void setCriterionDataService(CriterionDataService criterionDataService) {
         this.criterionDataService = criterionDataService;
     }
+    
+    /**
+     * The Html hightlighter.
+     */
+    private HtmlHighlighter highlighter;
+    
+    @Autowired
+    public void setHtmlHighlighter(HtmlHighlighter highlighter) {
+        this.highlighter = highlighter;
+    }
+    
     
     public AuditResultController() {
         super();
@@ -508,17 +519,12 @@ public class AuditResultController extends AuditDataHandlerController {
      * @throws IOException
      */
     private String highlightSourceCode(SSP ssp) {
-        if (StringUtils.isNotBlank(ssp.getDoctype())) {
+        if (ssp !=null && StringUtils.isNotBlank(ssp.getDoctype()) ) {    
             hasSourceCodeWithDoctype = true;
+            return highlighter.highlightSourceCode(ssp.getDoctype(),ssp.getAdaptedContent());
         } else {
             hasSourceCodeWithDoctype = false;
-        }
-        try {
-            return TgolHighlighter.getInstance().
-                    highlightSourceCode(ssp.getDoctype(), ssp.getAdaptedContent());
-        } catch (IOException ex) {
-            LOGGER.warn(ex.getMessage());
-            return "";
+            return highlighter.highlightSourceCode(ssp.getAdaptedContent());
         }
     }
 
