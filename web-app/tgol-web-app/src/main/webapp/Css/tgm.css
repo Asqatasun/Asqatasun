@@ -117,12 +117,6 @@ body {
     background: -o-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* Opera 11.10+ */
     background: -ms-linear-gradient(top, #F4F4F4 55px,  #F8F8F8 100%); /* IE10+ */
     background: linear-gradient(to bottom, #F4F4F4 55px, #F8F8F8 100%); /* W3C */
-/*    background: -moz-linear-gradient(top, #F2F2F2 55px, #F8F8F8 500px, #F8F8F8 100%);  FF3.6+ 
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F2F2F2), color-stop(500px,#F8F8F8), color-stop(100%,#F8F8F8));  Chrome,Safari4+ 
-    background: -webkit-linear-gradient(top,  #F2F2F2 55px, #F8F8F8 500px, #F8F8F8 100%);  Chrome10+,Safari5.1+ 
-    background: -o-linear-gradient(top, #F2F2F2 55px, #F8F8F8 500px, #F8F8F8 100%);  Opera 11.10+ 
-    background: -ms-linear-gradient(top, #F2F2F2 55px, #F8F8F8 500px, #F8F8F8 100%);  IE10+ 
-    background: linear-gradient(to bottom, #F2F2F2 55px, #F8F8F8 500px, #F8F8F8 100%);  W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F2F2F2', endColorstr='#F8F8F8',GradientType=0 ); /* IE6-9 */
 }
 h1, h2, h3, h4 {
@@ -133,9 +127,9 @@ h1, h2, h3, h4 {
     background: none;
     margin-bottom: 0;
 }
-.topbar .fill{
-    height: 50px;
-    padding-top: 5px;
+.topbar{
+    position :relative;
+    height : 50px;
 }
 .container-fluid {
     padding-left: 1em;
@@ -144,8 +138,6 @@ h1, h2, h3, h4 {
 }
 .container {
     background: transparent;
-    margin-top: 55px;
-    padding: 10px;
 }
 .well{
     background-color: #FFFFFF;
@@ -158,8 +150,6 @@ h1, h2, h3, h4 {
     -moz-border-radius: 10px 10px 10px 10px;
 }
 .topbar .container {
-/*    background: #222222;*/
-/*    background-image: -moz-linear-gradient(center top , #333333, #222222);*/
     padding-top: 0;
     padding-bottom: 0;
     margin-top: 0;
@@ -198,9 +188,7 @@ h1, h2, h3, h4 {
     background-color: #E6E6E6;
     color: #3F3F3F;
     padding: 0 0 0 10px;
-    margin-bottom: 20px;
     margin-top: 20px;
-    
 }
 .breadcrumb > li {
     text-transform: uppercase;
@@ -2043,6 +2031,63 @@ input[type="text"]:focus{
 }
 .r-col-Line-Number {text-align: right;}
 
+/* Source code Highlighter (jhighlight)
+ * ==============================================
+ */
+#source-code-container  {
+    color: rgb(0,0,0); 
+    background-color: white; 
+    font-family: "OpenSansRegular",Arial,sans-serif; 
+    font-size: 10px; 
+    white-space: wrap;
+}
+#source-code-container li span {
+    word-wrap: break-word;
+}
+#source-code-container ol {
+    padding-left : 15px;
+}
+#source-code-container .selected-line {
+    background-color: #FDFE8E;
+}
+#source-code-container .anchor-padding {
+    padding-top : 55px;
+}
+.xml_plain {
+    color: black !important;
+}
+.xml_char_data {
+    color: black !important;
+}
+.xml_tag_symbols {
+    color: black !important;
+}
+.xml_comment {
+    color: rgb(147,147,147); 
+    background-color: rgb(247,247,247);
+}
+.xml_attribute_value {
+    color: blue !important;
+}
+.xml_attribute_name {
+    color: gray !important;; 
+}
+.xml_processing_instruction {
+    color: rgb(0,0,0); 
+}
+.xml_tag_name {
+    color: #006699 !important;
+    font-family: "OpenSansBold",Arial,sans-serif; 
+}
+.xml_rife_tag {
+    color: rgb(0,0,0); 
+    background-color: rgb(228,230,160);
+}
+.xml_rife_name {
+    color: rgb(0,0,196); 
+    background-color: rgb(228,230,160);
+}
+
 /* Source code Highlighter (geshi)
  * ==============================================
  */
@@ -2445,3 +2490,7 @@ input[type="text"]:focus{
     fill: none;
     opacity: 0.5;
 }
+/*
+ * highlighter
+ * ------------------------------------------------- 
+ */
