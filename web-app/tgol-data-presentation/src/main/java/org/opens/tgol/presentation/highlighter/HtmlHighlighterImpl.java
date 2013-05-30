@@ -21,7 +21,6 @@
  */
 package org.opens.tgol.presentation.highlighter;
 
-import org.opens.tgol.presentation.highlighter.HtmlHighlighter;
 import com.uwyn.jhighlight.highlighter.ExplicitStateHighlighter;
 import com.uwyn.jhighlight.renderer.XmlXhtmlRenderer;
 import com.uwyn.jhighlight.tools.StringUtils;
