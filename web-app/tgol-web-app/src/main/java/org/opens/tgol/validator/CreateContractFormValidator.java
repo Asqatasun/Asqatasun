@@ -172,6 +172,9 @@ public class CreateContractFormValidator implements Validator {
      */
     private boolean checkContractUrl(CreateContractCommand createContractCommand, Errors errors) {
         String url = createContractCommand.getContractUrl().trim();
+        if (StringUtils.isBlank(url)) {
+            return true;
+        }
         String[] schemes = {"http","https"};
         UrlValidator urlValidator = new UrlValidator (schemes, UrlValidator.ALLOW_2_SLASHES);
         if (!urlValidator.isValid(url)) {
