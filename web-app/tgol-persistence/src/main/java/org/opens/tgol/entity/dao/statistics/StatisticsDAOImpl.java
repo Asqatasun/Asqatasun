@@ -117,8 +117,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
     private static final String RAW_MARK_FIELD_STR = " Raw_Mark ";
     private static final String RETRIEVE_MARK_QUERY =
             " FROM WEB_RESOURCE_STATISTICS "
-            + "WHERE Id_Web_Resource=:idWebResource "
-            + "AND Id_Audit=:idAudit ";
+            + "WHERE Id_Web_Resource=:idWebResource";
 
     private static final String WEB_RESOURCE_STAT_COUNT =
             " count(Id_Web_Resource_Statistics) ";
@@ -467,8 +466,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
      * Native sql query :
      * SELECT Mark
      * FROM WEB_RESOURCE_STATISTICS
-     *       WHERE Id_Web_Resource=:idWebResource
-     *       AND Id_Audit=:idAudit ;
+     *       WHERE Id_Web_Resource=:idWebResource;
      *
      * @param idWebResource
      * @param audit
@@ -476,14 +474,13 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
      *      the mark for given audit and webresource
      */
     @Override
-    public Float findWeightedMarkByWebResourceAndAudit(Long idWebResource, Audit audit) {
+    public Float findWeightedMarkByWebResourceAndAudit(Long idWebResource) {
         StringBuilder queryString = new StringBuilder();
         queryString.append(SELECT_STR);
         queryString.append(MARK_FIELD_STR);
         queryString.append(RETRIEVE_MARK_QUERY);
         Query query = entityManager.createNativeQuery(queryString.toString());
         query.setParameter("idWebResource", idWebResource);
-        query.setParameter("idAudit", audit.getId());
         try {
             return ((Float)query.getSingleResult());
         } catch (NoResultException e) {
@@ -496,7 +493,6 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
      * SELECT Raw_Mark
      * FROM WEB_RESOURCE_STATISTICS
      *       WHERE Id_Web_Resource=:idWebResource
-     *       AND Id_Audit=:idAudit ;
      *
      * @param idWebResource
      * @param audit
@@ -504,14 +500,13 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
      *      the mark for given audit and webresource
      */
     @Override
-    public Float findRawMarkByWebResourceAndAudit(Long idWebResource, Audit audit) {
+    public Float findRawMarkByWebResourceAndAudit(Long idWebResource) {
         StringBuilder queryString = new StringBuilder();
         queryString.append(SELECT_STR);
         queryString.append(RAW_MARK_FIELD_STR);
         queryString.append(RETRIEVE_MARK_QUERY);
         Query query = entityManager.createNativeQuery(queryString.toString());
         query.setParameter("idWebResource", idWebResource);
-        query.setParameter("idAudit", audit.getId());
         try {
             return ((Float)query.getSingleResult());
         } catch (NoResultException e) {

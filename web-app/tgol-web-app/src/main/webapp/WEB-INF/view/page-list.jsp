@@ -77,11 +77,11 @@
                 <c:set var="auditSynthesisName" scope="page">
                     <fmt:message key="synthesisSite.h1">
                         <fmt:param>
-                            ${param.wr}
+                            ${param.audit}
                         </fmt:param>
                     </fmt:message>
                 </c:set>
-                <li><a href="<c:url value="/home/contract/audit-synthesis.html?wr=${param.wr}"/>">${auditSynthesisName}</a> <span class="divider"></span></li>
+                <li><a href="<c:url value="/home/contract/audit-synthesis.html?audit=${param.audit}"/>">${auditSynthesisName}</a> <span class="divider"></span></li>
                 <li class="active">${pageName}</li>
             </ul>
             <div class="row">
@@ -116,10 +116,10 @@
                         <tbody>
                             <c:choose>
                                 <c:when test="${statistics.auditScope == 'DOMAIN'}">
-                                    <c:set var="pageList2xxUrl" value="?wr=${param.wr}&amp;status=f2xx"/>
+                                    <c:set var="pageList2xxUrl" value="?audit=${param.audit}&amp;status=f2xx"/>
                                 </c:when>
                                 <c:when test="${statistics.auditScope == 'SCENARIO'}">
-                                    <c:set var="pageList2xxUrl" value="?wr=${param.wr}&amp;status=f2xx&amp;sortCriterion=rank&amp;sortDirection=2"/>
+                                    <c:set var="pageList2xxUrl" value="?audit=${param.audit}&amp;status=f2xx&amp;sortCriterion=rank&amp;sortDirection=2"/>
                                 </c:when>
                             </c:choose>
                             <tr>
@@ -130,13 +130,13 @@
                             </tr>
                             <tr>
                                 <td class="tg-textual-column" headers="httpStatus">
-                                    <a href="?wr=${param.wr}&amp;status=f3xx"><fmt:message key="pageList.f3xx"/></a> <fmt:message key="pageList.f3xxDetails"/>
+                                    <a href="?audit=${param.audit}&amp;status=f3xx"><fmt:message key="pageList.f3xx"/></a> <fmt:message key="pageList.f3xxDetails"/>
                                 </td>
                                 <td class="tg-numerical-column" headers="nbOfPages">${redirectedPagesCount}</td>
                             </tr>
                             <tr>
                                 <td class="tg-textual-column" headers="httpStatus">
-                                    <a href="?wr=${param.wr}&amp;status=f4xx"><fmt:message key="pageList.f4xx"/></a> <fmt:message key="pageList.f4xxDetails"/>
+                                    <a href="?audit=${param.audit}&amp;status=f4xx"><fmt:message key="pageList.f4xx"/></a> <fmt:message key="pageList.f4xxDetails"/>
                                 </td>
                                 <td class="tg-numerical-column" headers="nbOfPages">${errorPagesCount}</td>
                             </tr>

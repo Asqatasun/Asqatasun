@@ -36,7 +36,7 @@
                            </fmt:message>
                         </p>
                         <div class="alert-actions">
-                            <a href="<c:url value="/home/contract/audit-result.html?wr=${param.wr}" />"><fmt:message key="exportAuditFormatError.backToAuditResult"/></a>
+                            <a href="<c:url value="/home/contract/audit-result.html?audit=${param.audit}" />"><fmt:message key="exportAuditFormatError.backToAuditResult"/></a>
                         </div><!-- class="alert-actions"-->
                     </div><!-- class="alert-message block-message"-->
                 </div><!-- class="span16" -->

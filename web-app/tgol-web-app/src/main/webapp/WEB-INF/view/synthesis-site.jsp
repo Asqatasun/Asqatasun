@@ -81,7 +81,7 @@
     <c:set var="pageTitle" scope="page">
         <fmt:message key="synthesisSite.pageTitle">
             <fmt:param>
-                ${param.wr}
+                ${param.audit}
             </fmt:param>
         </fmt:message>
     </c:set>
@@ -92,7 +92,7 @@
             <c:set var="pageName" scope="page">
                 <fmt:message key="synthesisSite.h1">
                     <fmt:param>
-                        ${param.wr}
+                        ${param.audit}
                     </fmt:param>
                 </fmt:message>
             </c:set>
@@ -152,7 +152,7 @@
                                     </a>
                                 </td>
                                 <td headers="urlListTop5FailedTestByPage" class="tg-textual-column">
-                                    <a href="<c:url value="/home/contract/page-list.html?wr=${wr}&amp;status=f2xx&amp;sortDirection=2&amp;test=${failedTestByPageInfo.testLabel}"/>">
+                                    <a href="<c:url value="/home/contract/page-list.html?audit=${param.audit}&amp;status=f2xx&amp;sortDirection=2&amp;test=${failedTestByPageInfo.testLabel}"/>">
                                         <fmt:message key="synthesisSite.getUrlListCsv"><fmt:param>${failedTestByPageInfo.testLabel}</fmt:param></fmt:message>
                                     </a>
                                 </td>
@@ -207,7 +207,7 @@
                                             <img src="${goToImgUrl}" alt="<fmt:message key="pageList.goTo"/> ${failedPageInfo.webResourceUrl}">
                                         </a>
                                     </span>
-                                    <a href="<c:url value="/home/contract/audit-result.html?wr=${failedPageInfo.webResourceId}"/>" title="<fmt:message key="pageList.pageDetailedResult"></fmt:message> <fmt:message key="pageList.for"></fmt:message> ${failedPageInfo.webResourceUrl}">
+                                    <a href="<c:url value="/home/contract/page-result.html?wr=${failedPageInfo.webResourceId}"/>" title="<fmt:message key="pageList.pageDetailedResult"></fmt:message> <fmt:message key="pageList.for"></fmt:message> ${failedPageInfo.webResourceUrl}">
                                         ${failedPageInfo.webResourceUrl}
                                     </a>
                                 </td>

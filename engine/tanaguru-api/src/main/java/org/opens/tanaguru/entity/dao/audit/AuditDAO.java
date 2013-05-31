@@ -21,10 +21,10 @@
  */
 package org.opens.tanaguru.entity.dao.audit;
 
+import java.util.Collection;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
-import java.util.Collection;
 
 /**
  * 
@@ -39,13 +39,6 @@ public interface AuditDAO extends GenericDAO<Audit, Long> {
      * @return the collection of the audits that have the status
      */
     Collection<Audit> findAll(AuditStatus status);
-
-    /**
-     * 
-     * @param id
-     * @return
-     */
-    Audit findAuditWithWebResource(Long id);
 
     /**
      * 

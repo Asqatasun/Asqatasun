@@ -203,8 +203,8 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
         List<PageResult> pageResultList = (List<PageResult>)
                 ((TgolWebResourceDAO)entityDao).retrieveChildUrlList(webResource);
         for (PageResult pageResult : pageResultList) {
-            pageResult.setWeightedMark(String.valueOf(getMarkByWebResourceAndAudit(pageResult.getId(), audit, false).intValue()));
-            pageResult.setRawMark(String.valueOf(getMarkByWebResourceAndAudit(pageResult.getId(), audit, true).intValue()));
+            pageResult.setWeightedMark(String.valueOf(getMarkByWebResourceAndAudit(pageResult.getId(), false).intValue()));
+            pageResult.setRawMark(String.valueOf(getMarkByWebResourceAndAudit(pageResult.getId(), true).intValue()));
         }
         return pageResultList;
     }
@@ -232,9 +232,8 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
     @Override
     public Float getMarkByWebResourceAndAudit(
             WebResource webResource,
-            Audit audit,
             boolean isRawMark) {
-        return this.getMarkByWebResourceAndAudit(webResource.getId(),audit, isRawMark);
+        return this.getMarkByWebResourceAndAudit(webResource.getId(), isRawMark);
     }
 
     /**
@@ -245,12 +244,11 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
      */
     private Float getMarkByWebResourceAndAudit(
             Long idWebResource,
-            Audit audit,
             boolean isRawMark) {
         if (isRawMark) {
-            return statisticsDAO.findRawMarkByWebResourceAndAudit(idWebResource,audit);
+            return statisticsDAO.findRawMarkByWebResourceAndAudit(idWebResource);
         } else {
-            return statisticsDAO.findWeightedMarkByWebResourceAndAudit(idWebResource,audit);
+            return statisticsDAO.findWeightedMarkByWebResourceAndAudit(idWebResource);
         }
     }
 

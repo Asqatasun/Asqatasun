@@ -21,7 +21,6 @@
  */
 package org.opens.tgol.controller;
 
-import java.io.IOException;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,11 +30,9 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
-import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.exception.ForbiddenPageException;
 import org.opens.tgol.exception.ForbiddenUserException;
-import org.opens.tgol.exception.LostInSpaceException;
 import org.opens.tgol.presentation.data.FailedThemeInfo;
 import org.opens.tgol.presentation.data.ResultCounter;
 import org.opens.tgol.presentation.factory.AuditStatisticsFactory;
@@ -76,14 +73,14 @@ public class AuditSynthesisController extends AuditDataHandlerController {
         return authorizedScopeForSynthesis;
     }
 
-    public boolean isAuthorizedScopeForSynthesis(WebResource webResource) {
-        if (webResource instanceof Page) {
+    public boolean isAuthorizedScopeForSynthesis(Audit audit) {
+        if (audit.getSubject() instanceof Page) {
             return false;
         }
-        String scope = getActDataService().getActFromWebResource(webResource).getScope().getCode().name();
+        String scope = getActDataService().getActFromAudit(audit).getScope().getCode().name();
         return (authorizedScopeForSynthesis.contains(scope))? true : false;
     }
-
+    
     public AuditSynthesisController() {
         super();
     }
@@ -97,37 +94,30 @@ public class AuditSynthesisController extends AuditDataHandlerController {
     @RequestMapping(value = TgolKeyStore.AUDIT_SYNTHESIS_CONTRACT_URL, method = RequestMethod.GET)
     @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String displayAuditSynthesisFromContract(
-            @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webResourceId,
+            @RequestParam(TgolKeyStore.AUDIT_ID_KEY) String auditId,
             HttpServletRequest request,
             HttpServletResponse response,
             Model model) {
-        Long wrId;
+        Long aId;
         try {
-            wrId = Long.valueOf(webResourceId);
+            aId = Long.valueOf(auditId);
         } catch (NumberFormatException nfe) {
             throw new ForbiddenPageException();
         }
-        WebResource webResource = getWebResourceDataService().ligthRead(
-                Long.valueOf(wrId));
-        if (isUserAllowedToDisplayResult(webResource)) {
-            try {
-                if (!isAuthorizedScopeForSynthesis(webResource)) {
-                    return TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
-                } else {
-                    Contract contract = getActDataService().
-                            getActFromWebResource(webResource).getContract();
-                    model.addAttribute(
-                            TgolKeyStore.CONTRACT_ID_KEY,contract.getId());
-                    model.addAttribute(
-                            TgolKeyStore.CONTRACT_NAME_KEY,contract.getLabel());
-                    model.addAttribute(TgolKeyStore.WEBRESOURCE_ID_KEY, webResourceId);
-                    return prepareSynthesisSiteData(
-                            (Site) webResource,
-                            model,
-                            getLocaleResolver().resolveLocale(request));
-                }
-            } catch (IOException e) {
-                throw new LostInSpaceException();
+        Audit audit = getAuditDataService().read(aId);
+        if (isUserAllowedToDisplayResult(audit)) {
+            if (isAuthorizedScopeForSynthesis(audit)) {
+                Contract contract = retrieveContractFromAudit(audit);
+                model.addAttribute(
+                        TgolKeyStore.CONTRACT_ID_KEY,contract.getId());
+                model.addAttribute(
+                        TgolKeyStore.CONTRACT_NAME_KEY,contract.getLabel());
+                model.addAttribute(TgolKeyStore.AUDIT_ID_KEY, auditId);
+                
+                return prepareSynthesisSiteData(audit, model);
+                
+            } else {
+                throw new ForbiddenPageException();
             }
         } else {
             throw new ForbiddenUserException();
@@ -135,24 +125,26 @@ public class AuditSynthesisController extends AuditDataHandlerController {
     }
 
     /**
-     * This method prepares data for the synthesis page
-     * @param site
+     * This method prepares data for the synthesis page. Only multi pages audit
+     * are considered here
+     * 
+     * @param audit
      * @param model
      * @return
      * @throws IOException
      */
-    private String prepareSynthesisSiteData(Site site, Model model, Locale locale) throws IOException {
-        model.addAttribute(TgolKeyStore.LOCALE_KEY,locale);
-
+    private String prepareSynthesisSiteData(Audit audit, Model model) {
+        // Add this step, we are sure that the audit subject 
+        // is a site, we can trustly cast it
+        Site site = (Site)audit.getSubject();
         addAuditStatisticsToModel(site, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE);
 
-        Audit audit = site.getAudit();
         Map<Theme, ResultCounter> top5SortedThemeMap =
                 new LinkedHashMap<Theme, ResultCounter>();
         @SuppressWarnings("unchecked")
         Collection<FailedThemeInfo> tfiCollection =
                 (Collection<FailedThemeInfo>) getWebResourceDataService().
-                getResultCountByResultTypeAndTheme(site, audit,TestSolution.FAILED, nbOfDisplayedFailedTest);
+                getResultCountByResultTypeAndTheme(site, audit, TestSolution.FAILED, nbOfDisplayedFailedTest);
 
         for (FailedThemeInfo tfi : tfiCollection) {
             ResultCounter failedCounter = ResultCounterFactory.getInstance().getResultCounter();

@@ -103,16 +103,16 @@ public interface ActInfo {
     /**
      *
      * @return
-     *      the id of the webresource associated with the act
+     *      the id of the audit associated with the act
      */
-    public int getWebresourceId();
+    public int getAuditId();
 
     /**
-     * Sets the id of the webresource associated with the act
+     * Sets the id of the audit associated with the act
      *
-     * @param webresourceId
+     * @param auditId
      */
-    public void setWebresourceId(int webresourceId);
+    public void setAuditId(int auditId);
 
     /**
      *

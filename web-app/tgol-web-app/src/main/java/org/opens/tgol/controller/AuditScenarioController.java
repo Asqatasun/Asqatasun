@@ -26,9 +26,9 @@ import java.io.InputStream;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.util.JRStyledTextParser;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tgol.command.AddScenarioCommand;
 import org.opens.tgol.command.AuditSetUpCommand;
 import org.opens.tgol.command.factory.AddScenarioCommandFactory;
@@ -65,7 +65,7 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
     private static String JSON_EXTENSION=".json";
     private static String CONTENT_DISPOSITION="Content-Disposition";
     private static String ATTACHMENT="attachment; filename=";
-    
+    JRStyledTextParser j;
     private AddScenarioFormValidator addScenarioFormValidator;
     public AddScenarioFormValidator getAddScenarioFormValidator() {
         return addScenarioFormValidator;
@@ -84,16 +84,6 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
     @Autowired
     public void setScenarioDataService(ScenarioDataService scenarioDataService) {
         this.scenarioDataService = scenarioDataService;
-    }
-    
-    private AuditDataService auditDataService;
-    public AuditDataService getAuditDataService() {
-        return auditDataService;
-    }
-
-    @Autowired
-    public void setAuditDataService(AuditDataService auditDataService) {
-        this.auditDataService = auditDataService;
     }
     
     private Map<String, List<AuditSetUpFormFieldBuilderImpl>> scenarioOptionFormFieldBuilderMap;
@@ -309,9 +299,9 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
         scenarioDataService.delete(scenario.getId());
         Collection<Act> actCollection = retrieveActCollection(scenario, contract);
         for (Act act : actCollection) {
-            auditDataService.delete(act.getWebResource().getAudit().getId());
+            getAuditDataService().delete(act.getAudit().getId());
             act.setStatus(ActStatus.DELETED);
-            act.setWebResource(null);
+            act.setAudit(null);
             getActDataService().saveOrUpdate(act);
         }
     }
@@ -350,7 +340,7 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
     private Collection<Act> retrieveActCollection(Scenario scenario, Contract contract) {
         Collection<Act> actCollectionFromScenarioAndContract = new HashSet<Act>();
         for (Act act : getActDataService().getActsByContract(contract, -1, 2, ScopeEnum.SCENARIO, true)) {
-            if (StringUtils.equals(scenario.getLabel(), act.getWebResource().getURL())) {
+            if (StringUtils.equals(scenario.getLabel(), act.getAudit().getSubject().getURL())) {
                 actCollectionFromScenarioAndContract.add(act);
             }
         }

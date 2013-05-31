@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,16 +21,14 @@
  */
 package org.opens.tgol.controller;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
@@ -43,16 +41,19 @@ import org.opens.tgol.action.voter.ActionHandler;
 import org.opens.tgol.command.AuditResultSortCommand;
 import org.opens.tgol.command.factory.AuditResultSortCommandFactory;
 import org.opens.tgol.command.factory.AuditSetUpCommandFactory;
+import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.contract.ScopeEnum;
 import org.opens.tgol.exception.ForbiddenPageException;
 import org.opens.tgol.exception.ForbiddenUserException;
+import org.opens.tgol.exception.LostInSpaceException;
 import org.opens.tgol.form.FormField;
 import org.opens.tgol.form.builder.FormFieldBuilder;
 import org.opens.tgol.presentation.data.AuditStatistics;
 import org.opens.tgol.presentation.factory.CriterionResultFactory;
 import org.opens.tgol.presentation.factory.TestResultFactory;
 import org.opens.tgol.presentation.highlighter.HtmlHighlighter;
+import org.opens.tgol.util.HttpStatusCodeFamily;
 import org.opens.tgol.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -156,12 +157,14 @@ public class AuditResultController extends AuditDataHandlerController {
         this.highlighter = highlighter;
     }
     
-    
     public AuditResultController() {
         super();
     }
 
     /**
+     * General router when receive audit-result request.
+     * Regarding the scope of the audit, the returned page may differ.
+     * 
      * @param request
      * @param response
      * @return
@@ -169,6 +172,42 @@ public class AuditResultController extends AuditDataHandlerController {
     @RequestMapping(value=TgolKeyStore.AUDIT_RESULT_CONTRACT_URL, method=RequestMethod.GET)
     @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String displayAuditResultFromContract(
+            @RequestParam(TgolKeyStore.AUDIT_ID_KEY) String auditId,
+            HttpServletRequest request,
+            Model model) {
+        try {
+            Audit audit = getAuditDataService().read(Long.valueOf(auditId));
+            Act act = getActDataService().getActFromAudit(audit);
+            switch (act.getScope().getCode()) {
+                case FILE:
+                case PAGE:
+                    model.addAttribute(TgolKeyStore.WEBRESOURCE_ID_KEY, audit.getSubject().getId());
+                    return TgolKeyStore.RESULT_PAGE_VIEW_REDIRECT_NAME;
+                case DOMAIN:
+                case SCENARIO:
+                    model.addAttribute(TgolKeyStore.AUDIT_ID_KEY, auditId);
+                    return TgolKeyStore.SYNTHESIS_SITE_VIEW_REDIRECT_NAME;
+                case GROUPOFFILES:
+                case GROUPOFPAGES:
+                    model.addAttribute(TgolKeyStore.AUDIT_ID_KEY, auditId);
+                    model.addAttribute(TgolKeyStore.STATUS_KEY, HttpStatusCodeFamily.f2xx.name());
+                    return TgolKeyStore.PAGE_LIST_XXX_VIEW_REDIRECT_NAME;
+                default :
+                    throw new ForbiddenPageException();
+            }
+        } catch (NumberFormatException nfe) {
+            throw new ForbiddenPageException();
+        }
+    }
+    
+    /**
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(value=TgolKeyStore.PAGE_RESULT_CONTRACT_URL, method=RequestMethod.GET)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
+    public String displayPageResultFromContract(
             @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
             HttpServletRequest request,
             Model model) {
@@ -176,14 +215,18 @@ public class AuditResultController extends AuditDataHandlerController {
         try {
             webResourceIdValue = Long.valueOf(webresourceId);
         } catch (NumberFormatException nfe) {
-            throw new ForbiddenUserException(getCurrentUser());
+            throw new ForbiddenPageException();
         }
-        return dispatchDisplayResultRequest(webResourceIdValue, null, model, request);
+        return dispatchDisplayResultRequest(
+                webResourceIdValue, 
+                null, 
+                model, 
+                request);
     }
 
-    @RequestMapping(value=TgolKeyStore.AUDIT_RESULT_CONTRACT_URL, method = RequestMethod.POST)
+    @RequestMapping(value=TgolKeyStore.PAGE_RESULT_CONTRACT_URL, method = RequestMethod.POST)
     @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
-    protected String submitAuditResultSorter(
+    protected String submitPageResultSorter(
             @ModelAttribute(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY) AuditResultSortCommand auditResultSortCommand,
             BindingResult result,
             Model model,
@@ -208,20 +251,20 @@ public class AuditResultController extends AuditDataHandlerController {
         } catch (NumberFormatException nfe) {
             throw new ForbiddenPageException();
         }
-        if (isUserAllowedToDisplayResult(webResource) && webResource instanceof Page) {
+        if (webResource instanceof Site) {
+            throw new ForbiddenPageException();
+        }
+        Audit audit = getAuditFromWebResource(webResource);
+        if (isUserAllowedToDisplayResult(audit)) {
             Page page = (Page)webResource;
             hasSourceCodeWithDoctype = false;
-            boolean hasSSP = true;
-            try {
-                SSP ssp =getContentDataService().findSSP(page, page.getURL());
-                model.addAttribute(TgolKeyStore.SOURCE_CODE_KEY,highlightSourceCode(ssp));
 
-                ScopeEnum scope = getActDataService().getActFromWebResource(webResource).getScope().getCode();
-                if (scope.equals(ScopeEnum.GROUPOFPAGES) || scope.equals(ScopeEnum.PAGE)) {
-                    model.addAttribute(TgolKeyStore.IS_GENERATED_HTML_KEY,true);
-                }
-            } catch (NoResultException nre) {
-                LOGGER.warn("No ssp found for " +page.getURL());
+            SSP ssp =getContentDataService().findSSP(page, page.getURL());
+            model.addAttribute(TgolKeyStore.SOURCE_CODE_KEY,highlightSourceCode(ssp));
+
+            ScopeEnum scope = getActDataService().getActFromAudit(audit).getScope().getCode();
+            if (scope.equals(ScopeEnum.GROUPOFPAGES) || scope.equals(ScopeEnum.PAGE)) {
+                model.addAttribute(TgolKeyStore.IS_GENERATED_HTML_KEY,true);
             }
             return TgolKeyStore.SOURCE_CODE_PAGE_VIEW_NAME;
         } else {
@@ -248,24 +291,23 @@ public class AuditResultController extends AuditDataHandlerController {
         } catch (NumberFormatException nfe) {
             throw new ForbiddenUserException(getCurrentUser());
         }
+        
         WebResource webResource = getWebResourceDataService().ligthRead(wrId);
-        if (webResource != null && webResource instanceof Page && isUserAllowedToDisplayResult(webResource))  {
-                Contract contract = retrieveContractFromWebResource(webResource);
+        if (webResource == null || webResource instanceof Site) {
+            throw new ForbiddenPageException();
+        }
+        Audit audit = getAuditFromWebResource(webResource);
+        if (isUserAllowedToDisplayResult(audit))  {
+                Contract contract = retrieveContractFromAudit(audit);
                 // Attributes for breadcrumb
                 model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
                 model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
                 model.addAttribute(TgolKeyStore.URL_KEY, webResource.getURL());
                 model.addAttribute(TgolKeyStore.CRITERION_LABEL_KEY, criterionDataService.read(critId).getLabel());
-                
-                Long parentWrId= getWebResourceDataService().getParentWebResourceId(webResource.getId());
-                boolean isAuthorizedScopeForPageList = false;
-                if (parentWrId != null) {
-                    isAuthorizedScopeForPageList= isAuthorizedScopeForPageList(getWebResourceDataService().ligthRead(parentWrId));
-                    model.addAttribute(TgolKeyStore.PARENT_WEBRESOURCE_ID_KEY, parentWrId);
-                }
+                model.addAttribute(TgolKeyStore.AUDIT_ID_KEY, audit.getId());
 
                 // Add a boolean used to display the breadcrumb. 
-                model.addAttribute(TgolKeyStore.AUTHORIZED_SCOPE_FOR_PAGE_LIST, isAuthorizedScopeForPageList);
+                model.addAttribute(TgolKeyStore.AUTHORIZED_SCOPE_FOR_PAGE_LIST, isAuthorizedScopeForPageList(audit));
             
                 model.addAttribute(TgolKeyStore.TEST_RESULT_LIST_KEY,
                     TestResultFactory.getInstance().getTestResultListFromCriterion(webResource, false, critId));
@@ -294,22 +336,27 @@ public class AuditResultController extends AuditDataHandlerController {
         //We first check that the current user is allowed to display the result
         //of this audit
         WebResource webResource = getWebResourceDataService().ligthRead(webResourceId);
+        if (webResource == null) {
+            throw new ForbiddenPageException();
+        }
+        Audit audit = getAuditFromWebResource(webResource);
         // If the Id given in argument correspond to a webResource,
             // data are retrieved to be prepared and displayed
-        if (isUserAllowedToDisplayResult(webResource)) {
+        if (isUserAllowedToDisplayResult(audit)) {
             this.callGc(webResource);
-           
+
             String displayScope = computeDisplayScope(request, auditResultSortCommand);
             
             // first we add statistics meta-data to model 
             addAuditStatisticsToModel(webResource, model, displayScope);
-            
+
             // The page is displayed with sort option. Form needs to be set up
             prepareDataForSortConsole(webResourceId, displayScope, auditResultSortCommand, model);
             
             // Data need to be prepared regarding the audit type
             return prepareSuccessfullAuditData(
                     webResource,
+                    audit,
                     model,
                     displayScope,
                     getLocaleResolver().resolveLocale(request));
@@ -359,6 +406,7 @@ public class AuditResultController extends AuditDataHandlerController {
      * Regarding the audit type, collect data needed by the view.
      * 
      * @param webResource
+     * @param audit
      * @param model
      * @param locale
      * @param exportFormat
@@ -367,30 +415,30 @@ public class AuditResultController extends AuditDataHandlerController {
      */
     private String prepareSuccessfullAuditData(
             WebResource webResource,
+            Audit audit,
             Model model,
             String displayScope,
             Locale locale) {
         model.addAttribute(TgolKeyStore.LOCALE_KEY,locale);
         if (webResource instanceof Site) {
-            return prepareSuccessfullSiteData((Site)webResource, model);
+            return prepareSuccessfullSiteData((Site)webResource, audit, model);
         } else if (webResource instanceof Page) {
             //In case of display page result page, we need all data related with
             // the page, that's why a deepRead is needed
-            WebResource fullWebResource =
-                    getWebResourceDataService().deepRead(webResource.getId());
-            return prepareSuccessfullPageData((Page)fullWebResource, model, displayScope);
+            return prepareSuccessfullPageData((Page)webResource, audit, model, displayScope);
         }
-        return TgolKeyStore.OUPS_VIEW_NAME;
+        throw new LostInSpaceException();
     }
 
     /**
      * This methods handles audit data in case of the audit is of site type
      * @param site
+     * @param audit
      * @param model
      * @return
      * @throws IOException
      */
-    private String prepareSuccessfullSiteData(Site site, Model model) {
+    private String prepareSuccessfullSiteData(Site site, Audit audit, Model model) {
         hasSourceCodeWithDoctype = false;
         AuditResultSortCommand asuc = ((AuditResultSortCommand)model.asMap().get(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY));
         model.addAttribute(TgolKeyStore.TEST_RESULT_LIST_KEY,
@@ -401,8 +449,9 @@ public class AuditResultController extends AuditDataHandlerController {
                             true,
                             asuc.getSortOptionMap().get(themeSortKey).toString(),
                             getTestResultSortSelection(asuc)));
+        
         // Attributes for breadcrumb
-        Contract contract = retrieveContractFromWebResource(site);
+        Contract contract = retrieveContractFromAudit(audit);
         model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
         model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
         model.addAttribute(TgolKeyStore.RESULT_ACTION_LIST_KEY, actionHandler.getActionList("EXPORT"));
@@ -410,22 +459,19 @@ public class AuditResultController extends AuditDataHandlerController {
     }
 
     /**
-     * This methods handles audit data in case of the audit is of page type
+     * This methods handles audit data in case of page type audit 
+     * 
      * @param page
-     * @param displayScope
+     * @param audit
      * @param model
+     * @param displayScope
      * @return
      * @throws IOException
      */
-    private String prepareSuccessfullPageData(Page page, Model model, String displayScope) {
-        Audit audit = page.getAudit();
-        if (audit == null && page.getParent() != null) {
-            audit = page.getParent().getAudit();
-        }
-        if (audit == null) {
-            return TgolKeyStore.OUPS_VIEW_REDIRECT_NAME;
-        }
-        Contract contract = retrieveContractFromWebResource(page);
+    private String prepareSuccessfullPageData(Page page, Audit audit, Model model, String displayScope) {
+
+        Contract contract = retrieveContractFromAudit(audit);
+
         if (!audit.getStatus().equals(AuditStatus.COMPLETED)) {
             return prepareFailedAuditData(audit, model);
         }
@@ -434,10 +480,7 @@ public class AuditResultController extends AuditDataHandlerController {
         // The source code has to be hightlighted before the processResult are
         // computed. We need to know if a doctype is present in the page. If true,
         // the line of each process remark has to be increased by 1.
-        SSP ssp = null;
-        try {
-            ssp = getContentDataService().findSSP(page, page.getURL());
-        } catch (NoResultException nre) {
+        if (getContentDataService().findSSP(page, page.getURL()) == null) {
             hasSSP = false;
         }
 
@@ -446,15 +489,10 @@ public class AuditResultController extends AuditDataHandlerController {
         // Attributes for breadcrumb
         model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
         model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
-        Long parentWrId= getWebResourceDataService().getParentWebResourceId(page.getId());
-        boolean isAuthorizedScopeForPageList = false;
-        if (parentWrId != null) {
-            isAuthorizedScopeForPageList= isAuthorizedScopeForPageList(getWebResourceDataService().ligthRead(parentWrId));
-            model.addAttribute(TgolKeyStore.PARENT_WEBRESOURCE_ID_KEY, parentWrId);
-        }
+        model.addAttribute(TgolKeyStore.AUDIT_ID_KEY, audit.getId());
         
         // Add a boolean used to display the breadcrumb. 
-        model.addAttribute(TgolKeyStore.AUTHORIZED_SCOPE_FOR_PAGE_LIST, isAuthorizedScopeForPageList);
+        model.addAttribute(TgolKeyStore.AUTHORIZED_SCOPE_FOR_PAGE_LIST, isAuthorizedScopeForPageList(audit));
         
         // Add a command to relaunch the audit from the result page
         model.addAttribute(TgolKeyStore.AUDIT_SET_UP_COMMAND_KEY, 
@@ -512,7 +550,7 @@ public class AuditResultController extends AuditDataHandlerController {
     }
 
     /**
-     * This methods makes a distant call to the highlighter service and returns
+     * This methods call the highlighter service and returns
      * the highlighted code.
      * @param ssp
      * @return

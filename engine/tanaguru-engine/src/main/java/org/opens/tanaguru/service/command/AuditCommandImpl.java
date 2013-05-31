@@ -226,7 +226,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
     
     @Override
     public void adaptContent() {
-        audit = auditDataService.getAuditWithWebResource(audit.getId());
+        audit = auditDataService.read(audit.getId());
         if (!audit.getStatus().equals(AuditStatus.CONTENT_ADAPTING)) {
             LOGGER.warn(
                     new StringBuilder(AUDIT_STATUS_IS_LOGGER_STR)
@@ -678,7 +678,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
 
     @Override
     public void analyse() {
-        audit = auditDataService.getAuditWithWebResource(audit.getId());
+        audit = auditDataService.read(audit.getId());
         if (!audit.getStatus().equals(AuditStatus.ANALYSIS)) {
             LOGGER.warn(
                     new StringBuilder(AUDIT_STATUS_IS_LOGGER_STR)

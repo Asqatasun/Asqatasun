@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -29,6 +29,7 @@ import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
+import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
 import org.opens.tgol.entity.decorator.tanaguru.subject.WebResourceDataServiceDecorator;
@@ -78,17 +79,28 @@ public final class ActInfoFactory {
         return actInfoFactory;
     }
 
+    /**
+     * 
+     * @param act
+     * @return an ActInfo instance that handles displayable act data
+     * 
+     */
     public ActInfo getActInfo(Act act){
         ActInfoImpl actInfo = new ActInfoImpl();
         actInfo.setDate(act.getEndDate());
-        if (act.getWebResource() != null) {
-            actInfo.setUrl(act.getWebResource().getURL());
-            actInfo.setWebresourceId(Float.valueOf(act.getWebResource().getId()).intValue());
+        if (act.getAudit() != null) {
+            Audit audit = act.getAudit();
+            
+            actInfo.setAuditId(audit.getId().intValue());
+            
             actInfo.setScope(act.getScope().getCode().name());
-            Audit audit = act.getWebResource().getAudit();
+            
+            WebResource wr = audit.getSubject();
+            actInfo.setUrl(wr.getURL());
+            
             if (audit.getStatus().equals(AuditStatus.COMPLETED)) {
-                actInfo.setWeightedMark(webResourceDataService.getMarkByWebResourceAndAudit(act.getWebResource(), audit, false).intValue());
-                actInfo.setRawMark(webResourceDataService.getMarkByWebResourceAndAudit(act.getWebResource(), audit, true).intValue());
+                actInfo.setWeightedMark(webResourceDataService.getMarkByWebResourceAndAudit(wr, false).intValue());
+                actInfo.setRawMark(webResourceDataService.getMarkByWebResourceAndAudit(wr, true).intValue());
                 actInfo.setStatus(TgolKeyStore.COMPLETED_KEY);
             } else if (!contentDataService.hasContent(audit)){
                 actInfo.setStatus(TgolKeyStore.ERROR_LOADING_KEY);
@@ -103,6 +115,12 @@ public final class ActInfoFactory {
         return actInfo;
     }
 
+    /**
+     * 
+     * @param actSet
+     * @return collection of ActInfo instances that handle displayable Act data
+     *  
+     */
     public Collection<ActInfo> getActInfoSet(Collection<Act> actSet){
         Set<ActInfo> actInfoSet = new LinkedHashSet<ActInfo>();
         for (Act act : actSet) {
@@ -111,6 +129,13 @@ public final class ActInfoFactory {
         return actInfoSet;
     }
 
+    /**
+     * Set the referential to the ActInfo regarding the "LEVEL" parameter of the 
+     * audit. This parameter handles level and referential. That's why its value
+     * needs to be split to extract the referential data.
+     * @param actInfo
+     * @param audit 
+     */
     private void setActInfoReferential(ActInfo actInfo, Audit audit) {
         Set<Parameter> parameterSet = parameterDataService.getParameterSetFromAudit(audit);
         for (Parameter param : parameterSet) {

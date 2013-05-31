@@ -105,15 +105,15 @@
                     <c:set var="auditSynthesisName" scope="page">
                         <fmt:message key="synthesisSite.h1">
                             <fmt:param>
-                                ${param.wr}
+                                ${audit}
                             </fmt:param>
                         </fmt:message>
                     </c:set>
-                    <li><a href="<c:url value="/home/contract/audit-synthesis.html?wr=${pwr}"/>">${auditSynthesisName}</a> <span class="divider"></span></li>
-                    <li><a href="<c:url value="/home/contract/page-list.html?wr=${pwr}"/>"><fmt:message key="pageList.h1"/></a> <span class="divider"></span></li>
-                    <li><a href="<c:url value="/home/contract/page-list.html?wr=${pwr}&amp;status=f2xx"/>"><fmt:message key="pageList.f2xx.h1"/></a> <span class="divider"></span></li>
+                    <li><a href="<c:url value="/home/contract/audit-synthesis.html?audit=${audit}"/>">${auditSynthesisName}</a> <span class="divider"></span></li>
+                    <li><a href="<c:url value="/home/contract/page-list.html?audit=${audit}"/>"><fmt:message key="pageList.h1"/></a> <span class="divider"></span></li>
+                    <li><a href="<c:url value="/home/contract/page-list.html?audit=${audit}&amp;status=f2xx"/>"><fmt:message key="pageList.f2xx.h1"/></a> <span class="divider"></span></li>
                 </c:if>
-                <li><a href="<c:url value="/home/contract/audit-result.html?wr=${param.wr}"/>"><fmt:message key="resultPage.h1"/></a> <span class="divider"></span></li>
+                <li><a href="<c:url value="/home/contract/audit-result.html?audit=${audit}"/>"><fmt:message key="resultPage.h1"/></a> <span class="divider"></span></li>
                 <li class="active">${pageTitle}</li>
             </ul>
             <div class="row">
@@ -125,7 +125,7 @@
             </div><!-- class="row"-->
             <div class="row">
                 <div class="offset12 span4 back-link">
-                    <a href="<c:url value="/home/contract/audit-result.html?wr=${param.wr}"/>" class="back-link">
+                    <a href="<c:url value="/home/contract/audit-result.html?audit=${param.audit}"/>" class="back-link">
                         <fmt:message key="criterionResultPage.backToAuditResultByCriterion"/>
                     </a>
                 </div>

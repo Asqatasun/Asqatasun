@@ -23,7 +23,7 @@ package org.opens.tgol.entity.service.contract;
 
 import java.util.Collection;
 import java.util.Date;
-import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.contract.Contract;
@@ -68,13 +68,13 @@ public class ActDataServiceImpl extends AbstractGenericDataService<Act, Long>
     }
 
     @Override
-    public Act getActFromWebResource(WebResource webResource) {
-        return getActFromWebResource(webResource.getId());
+    public Act getActFromAudit(Audit audit) {
+        return getActFromAudit(audit.getId());
     }
     
     @Override
-    public Act getActFromWebResource(Long webResourceId) {
-        return ((ActDAO) entityDao).findActFromWebresource(webResourceId);
+    public Act getActFromAudit(Long auditId) {
+        return ((ActDAO) entityDao).findActFromAudit(auditId);
     }
 
     @Override

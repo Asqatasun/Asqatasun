@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -131,36 +131,37 @@ public class AuditStatisticsFactory {
      * with the URL, the date, the number of components (in case of site audit )
      * and the mark of the audit
      *
-     * @param webResource
+     * @param audit
      * @param parametersToDisplay
+     * @param displayScope
      * @return
      */
     public AuditStatistics getAuditStatistics(
             WebResource webResource,
             Map<String, String> parametersToDisplay,
             String displayScope) {
+        
         AuditStatistics auditStats = new AuditStatisticsImpl();
+        
         auditStats.setUrl(webResource.getURL());
-        Audit audit = null;
-        if (webResource.getAudit() != null) {
-            audit = webResource.getAudit();
-            auditStats.setDate(audit.getDateOfCreation());
-            auditStats.setAuditScope(
-                    actDataService.getActFromWebResource(webResource).getScope().getCode());
-            auditStats.setSnapshotUrl(webResource.getURL());
-        } else if (webResource.getParent() != null) {
-            audit = webResource.getParent().getAudit();
-            auditStats.setDate(audit.getDateOfCreation());
-            auditStats.setAuditScope(
-                    actDataService.getActFromWebResource(webResource.getParent()).getScope().getCode());
-            auditStats.setSnapshotUrl(webResource.getParent().getURL());
-        }
-        auditStats.setRawMark(markFormatter(webResource, audit, true));
-        auditStats.setWeightedMark(markFormatter(webResource, audit, false));
+        auditStats.setSnapshotUrl(webResource.getURL());
+        auditStats.setRawMark(markFormatter(webResource, true));
+        auditStats.setWeightedMark(markFormatter(webResource, false));
 
+        Audit audit;
         if (webResource instanceof Site) {
             auditStats.setPageCounter(webResourceDataService.getChildWebResourceCount(webResource).intValue());
+            audit = webResource.getAudit();
+        } else if (webResource.getParent() != null) {
+            audit = webResource.getParent().getAudit();
+        } else {
+            audit = webResource.getAudit();
         }
+
+        auditStats.setDate(audit.getDateOfCreation());
+        auditStats.setAuditScope(
+                actDataService.getActFromAudit(audit).getScope().getCode());
+
         ResultCounter resultCounter = auditStats.getResultCounter();
         resultCounter.setPassedCount(0);
         resultCounter.setFailedCount(0);
@@ -238,12 +239,14 @@ public class AuditStatisticsFactory {
      * This methods converts the mark of the audit as a string
      *
      * @param webresource
-     * @param audit
+//     * @param audit
      * @param isRawMark
      * @return
      */
-    private String markFormatter(WebResource webresource, Audit audit, boolean isRawMark) {
-        Float mark = webResourceDataService.getMarkByWebResourceAndAudit(webresource, audit, isRawMark);
+    private String markFormatter(
+            WebResource webresource, 
+            boolean isRawMark) {
+        Float mark = webResourceDataService.getMarkByWebResourceAndAudit(webresource, isRawMark);
         return String.valueOf(Float.valueOf(mark).intValue());
     }
 

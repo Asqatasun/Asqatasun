@@ -299,7 +299,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         WebResource mockWr = createMock(WebResource.class);
         
         expect(mockAudit.getId()).andReturn(Long.valueOf(1)).once();
-        expect(mockAuditDataService.getAuditWithWebResource(Long.valueOf(1))).andReturn(mockAudit).once();
+        expect(mockAuditDataService.read(Long.valueOf(1))).andReturn(mockAudit).once();
         expect(mockAudit.getStatus()).andReturn(AuditStatus.CONTENT_ADAPTING).once();
         expect(mockAudit.getSubject()).andReturn(mockWr).times(2);
         expect(mockWr.getId()).andReturn(Long.valueOf(1)).once();

@@ -22,7 +22,7 @@
 package org.opens.tgol.entity.contract;
 
 import java.util.Date;
-import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.sdk.entity.Entity;
 
 /**
@@ -88,14 +88,22 @@ public interface Act extends Entity {
      * @return
      *      the tanaguru's webresource associated with this act
      */
-    WebResource getWebResource();
+//    WebResource getWebResource();
+//
+//    /**
+//     * 
+//     * @param webResource
+//     */
+//    void setWebResource(WebResource webResource);
 
-    /**
-     * 
-     * @param webResource
-     */
-    void setWebResource(WebResource webResource);
-
+    Audit getAudit();
+//
+//    /**
+//     * 
+//     * @param audit
+//     */
+    void setAudit(Audit audit);
+    
     /**
      *
      * @return

@@ -93,15 +93,15 @@ public class ActInfoImpl implements ActInfo{
         this.rawMark = rawMark;
     }
 
-    private int webresourceId;
+    private int auditId;
     @Override
-    public int getWebresourceId() {
-        return webresourceId;
+    public int getAuditId() {
+        return auditId;
     }
 
     @Override
-    public void setWebresourceId(int webresourceId) {
-        this.webresourceId = webresourceId;
+    public void setAuditId(int auditId) {
+        this.auditId = auditId;
     }
 
     private String status;

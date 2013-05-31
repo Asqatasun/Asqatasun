@@ -315,12 +315,13 @@ public class AuditLauncherController extends AuditDataHandlerController {
         if (audit.getStatus() != AuditStatus.COMPLETED) {
             return prepareFailedAuditData(audit,model);
         }
-        model.addAttribute(TgolKeyStore.WEBRESOURCE_ID_KEY, audit.getSubject().getId());
         if (audit.getSubject() instanceof Site) {
             // in case of group of page, we display the list of audited pages
+            model.addAttribute(TgolKeyStore.AUDIT_ID_KEY, audit.getId());
             model.addAttribute(TgolKeyStore.STATUS_KEY, HttpStatusCodeFamily.f2xx);
             return TgolKeyStore.PAGE_LIST_XXX_VIEW_REDIRECT_NAME;
         } else if (audit.getSubject() instanceof Page) {
+            model.addAttribute(TgolKeyStore.WEBRESOURCE_ID_KEY, audit.getSubject().getId());
             return TgolKeyStore.RESULT_PAGE_VIEW_REDIRECT_NAME;
         }
         throw new LostInSpaceException(getCurrentUser());

@@ -22,13 +22,12 @@
 package org.opens.tanaguru.entity.service.subject;
 
 import java.util.List;
+import org.opens.tanaguru.entity.dao.subject.WebResourceDAO;
+import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
-import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
-import org.opens.tanaguru.entity.dao.subject.WebResourceDAO;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.util.FileNaming;
 
 /**
@@ -61,12 +60,6 @@ public class WebResourceDataServiceImpl extends AbstractGenericDataService<WebRe
     public WebResource read(Long key) {
         WebResource entity = super.read(key);
         return entity;
-    }
-
-    protected void deepLoad(ProcessResult processResult) {
-        for (ProcessResult childResult : processResult.getChildResultList()) {
-            deepLoad(childResult);
-        }
     }
 
     @Override

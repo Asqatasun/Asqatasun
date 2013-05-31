@@ -151,7 +151,7 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.IndefiniteResultImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.DefiniteResultImpl.class)})
     public Collection<ProcessResult> getProcessResultList() {
-        return (LinkedHashSet)processResultSet;
+        return (Collection)processResultSet;
     }
 
     @Override

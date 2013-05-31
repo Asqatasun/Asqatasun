@@ -90,6 +90,9 @@ public final class TgolKeyStore {
     public static final String AUDIT_RESULT_URL = "/audit-result";
     public static final String AUDIT_RESULT_CONTRACT_URL =
             CONTRACT_URL+AUDIT_RESULT_URL;
+    public static final String PAGE_RESULT_URL = "/page-result";
+    public static final String PAGE_RESULT_CONTRACT_URL =
+            CONTRACT_URL+PAGE_RESULT_URL;
     public static final String CRITERION_RESULT_URL = "/criterion-result";
     public static final String CRITERION_RESULT_CONTRACT_URL =
             CONTRACT_URL+CRITERION_RESULT_URL;
@@ -211,8 +214,8 @@ public final class TgolKeyStore {
     public static final String AUDIT_RESULT_SORT_COMMAND_KEY="auditResultSortCommand";
     public static final String CONTRACT_SORT_COMMAND_KEY="contractSortCommand";
     public static final String WEBRESOURCE_ID_KEY = "wr";
+    public static final String AUDIT_ID_KEY = "audit";
     public static final String DISPLAY_SCOPE_KEY = "lvl";
-    public static final String PARENT_WEBRESOURCE_ID_KEY = "pwr";
     public static final String EXPORT_FORMAT_KEY = "format";
     public static final String ACT_ID_KEY = "act";
     public static final String USER_ID_KEY = "user";

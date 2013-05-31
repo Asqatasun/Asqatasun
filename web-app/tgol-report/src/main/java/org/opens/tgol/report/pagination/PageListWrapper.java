@@ -149,7 +149,7 @@ public class PageListWrapper extends TableDecorator {
         int lId = pageResult.getId().intValue();
         Integer mark = Integer.valueOf(pageResult.getRawMark());
         if (mark > 0 ) {
-            return "<a href=\"audit-result.html?wr=" + 
+            return "<a href=\"page-result.html?wr=" + 
                     lId + 
                     "\" title=\"" + 
                     getTitle(resourceBundle, pageResult.getUrl())+

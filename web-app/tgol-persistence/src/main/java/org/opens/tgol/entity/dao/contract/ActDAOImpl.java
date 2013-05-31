@@ -21,12 +21,6 @@
  */
 package org.opens.tgol.entity.dao.contract;
 
-import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.opens.tgol.entity.contract.Act;
-import org.opens.tgol.entity.contract.ActImpl;
-import org.opens.tgol.entity.contract.ActStatus;
-import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.contract.ScopeEnum;
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashSet;
@@ -34,6 +28,8 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
 import org.opens.tanaguru.entity.audit.AuditStatus;
+import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.opens.tgol.entity.contract.*;
 
 /**
  *
@@ -129,17 +125,15 @@ public class ActDAOImpl extends AbstractJPADAO<Act, Long> implements ActDAO {
                 + " WHERE a.contract = :contract AND a.status = :runningStatus");
         query.setParameter("contract", contract);
         query.setParameter("runningStatus", ActStatus.RUNNING);
-        query.setHint(CACHEABLE_OPTION, "true");
         return query.getResultList();
     }
 
     @Override
-    public Act findActFromWebresource(Long webResourceId) {
+    public Act findActFromAudit(Long auditId) {
         Query query = entityManager.createQuery("SELECT a FROM "
                 + getEntityClass().getName() + " a"
-                + " WHERE a.webResource.id = :webResourceId");
-        query.setParameter("webResourceId", webResourceId);
-        query.setHint(CACHEABLE_OPTION, "true");
+                + " WHERE a.audit.id = :auditId");
+        query.setParameter("auditId", auditId);
         return (Act)query.getSingleResult();
     }
 
@@ -147,8 +141,7 @@ public class ActDAOImpl extends AbstractJPADAO<Act, Long> implements ActDAO {
     public int findNumberOfActByPeriodAndIp(Contract contract, Date limitDate, String ip) {
         Query query = entityManager.createQuery("SELECT count(a.id) FROM "
                 + getEntityClass().getName() + " a"
-                + " left join a.webResource w"
-                + " left join w.audit au"
+                + " left join a.audit au"
                 + " WHERE a.clientIp = :clientIp"
                 + " AND a.contract = :contract"
                 + " AND (a.status = :completedStatus OR a.status = :errorStatus)"

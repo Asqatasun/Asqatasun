@@ -64,12 +64,12 @@ public class AuditDAOImplTest extends AbstractDaoTestCase {
         assertEquals(0, auditList.size());
     }
 
-    public void testFindAuditWithWebResource() {
-        Audit audit = auditDAO.findAuditWithWebResource(Long.valueOf(1));
+    public void testRead() {
+        Audit audit = auditDAO.read(Long.valueOf(1));
         assertEquals(Long.valueOf(1), audit.getId());
         assertTrue(audit.getSubject() instanceof Site);
         assertEquals(Long.valueOf(1), audit.getSubject().getId());
-        audit = auditDAO.findAuditWithWebResource(Long.valueOf(2));
+        audit = auditDAO.read(Long.valueOf(2));
         assertEquals(Long.valueOf(2), audit.getId());
         assertEquals(Long.valueOf(2), audit.getSubject().getId());
         assertTrue(audit.getSubject() instanceof Page);

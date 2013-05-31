@@ -23,7 +23,7 @@ package org.opens.tgol.entity.service.contract;
 
 import java.util.Collection;
 import java.util.Date;
-import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.sdk.entity.service.GenericDataService;
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.contract.Contract;
@@ -78,19 +78,19 @@ public interface ActDataService extends GenericDataService<Act, Long> {
 
     /**
      * 
-     * @param webresourceId
+     * @param auditId
      * @return
-     *        The act corresponding to the given webresource
+     *        The act corresponding to the given audit
      */
-    Act getActFromWebResource(WebResource webResource);
+    Act getActFromAudit(Audit audit);
 
     /**
      *
-     * @param webresourceId
+     * @param auditId
      * @return
-     *        The act corresponding to the given webresource id
+     *        The act corresponding to the given audit id
      */
-    Act getActFromWebResource(Long webResourceId);
+    Act getActFromAudit(Long auditId);
 
     /**
      * 

@@ -76,10 +76,10 @@ public interface ActDAO extends GenericDAO<Act, Long> {
     
     /**
      * 
-     * @param webresourceId
+     * @param auditId
      * @return
      */
-    Act findActFromWebresource(Long webResourceId);
+    Act findActFromAudit(Long auditId);
 
     /**
      * 

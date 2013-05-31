@@ -53,11 +53,6 @@ public class MockAuditDataService implements AuditDataService {
     }
 
     @Override
-    public Audit getAuditWithWebResource(Long id) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
     public Audit getAuditWithTest(Long id) {
         throw new UnsupportedOperationException("Not supported yet.");
     }

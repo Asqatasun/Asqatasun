@@ -151,6 +151,16 @@ public final class TestResultFactory {
         return testResult;
     }
 
+    /**
+     * 
+     * @param webresource
+     * @param scope
+     * @param hasSourceCodeWithDoctype
+     * @param hasResultDetails
+     * @param theme
+     * @param testSolutionList
+     * @return 
+     */
     public Map<Theme, List<TestResult>> getTestResultSortedByThemeMap(
             WebResource webresource,
             Scope scope,
@@ -158,6 +168,7 @@ public final class TestResultFactory {
             boolean hasResultDetails,
             String theme,
             Collection<String> testSolutionList){
+        
         List<ProcessResult> netResultList = (List<ProcessResult>)
                 webResourceDataService.
                 getProcessResultListByWebResourceAndScope(webresource, scope, theme, testSolutionList);

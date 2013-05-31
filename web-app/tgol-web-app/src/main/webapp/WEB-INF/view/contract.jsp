@@ -271,16 +271,16 @@
                                     </c:if>
                                     <c:choose>
                                         <c:when test="${actInfo.scope == 'PAGE' || actInfo.scope == 'FILE'}">
-                                            <c:set var="resultUrl" scope="page" value="/home/contract/audit-result.html?wr="/>
+                                            <c:set var="resultUrl" scope="page" value="/home/contract/audit-result.html?audit="/>
                                         </c:when>
                                         <c:when test="${actInfo.scope == 'GROUPOFPAGES' || actInfo.scope == 'GROUPOFFILES'}">
-                                            <c:set var="resultUrl" scope="page" value="/home/contract/page-list.html?status=f2xx&amp;wr="/>
+                                            <c:set var="resultUrl" scope="page" value="/home/contract/audit-result.html?audit="/>
                                         </c:when>
                                         <c:otherwise>
-                                            <c:set var="resultUrl" scope="page" value="/home/contract/audit-synthesis.html?wr="/>
+                                            <c:set var="resultUrl" scope="page" value="/home/contract/audit-result.html?audit="/>
                                         </c:otherwise>
                                     </c:choose>
-                                    <a href="<c:url value="${resultUrl}${actInfo.webresourceId}"/>" title="<fmt:message key="pageList.pageDetailedResult"></fmt:message> <fmt:message key="pageList.for"></fmt:message> ${actInfo.url}">
+                                    <a href="<c:url value="${resultUrl}${actInfo.auditId}"/>" title="<fmt:message key="pageList.pageDetailedResult"></fmt:message> <fmt:message key="pageList.for"></fmt:message> ${actInfo.url}">
                                         ${actInfo.url}
                                     </a>
                                 </td>

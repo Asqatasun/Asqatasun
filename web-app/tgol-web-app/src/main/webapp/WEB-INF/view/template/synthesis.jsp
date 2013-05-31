@@ -62,10 +62,10 @@
                                 <c:when test="${hasPagesListLink == 'true'}">
                                 <c:choose>
                                     <c:when test="${statistics.auditScope == 'SCENARIO'}">
-                                        <a href="<c:url value="/home/contract/page-list.html?wr=${wr}&amp;status=f2xx&amp;sortDirection=2&amp;sortCriterion=rank"/>" >${pageCounterLinkTitle}</a>
+                                        <a href="<c:url value="/home/contract/page-list.html?audit=${param.audit}&amp;status=f2xx&amp;sortDirection=2&amp;sortCriterion=rank"/>" >${pageCounterLinkTitle}</a>
                                     </c:when>
                                     <c:when test="${statistics.auditScope == 'DOMAIN'}">
-                                        <a href="<c:url value="/home/contract/page-list.html?wr=${wr}"/>">${pageCounterLinkTitle}</a>
+                                        <a href="<c:url value="/home/contract/page-list.html?audit=${param.audit}"/>">${pageCounterLinkTitle}</a>
                                     </c:when>
                                 </c:choose>
                                 </c:when>

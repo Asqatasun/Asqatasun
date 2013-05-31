@@ -76,6 +76,12 @@ public class ContractInfoFactory {
         return contractInfoFactory;
     }
 
+    /**
+     * 
+     * @param contract
+     * @return an ContractInfo instance that handles displayable contract data
+     * 
+     */
     public ContractInfo getContractInfo(Contract contract){
         ContractInfo contractInfo = new ContractInfoImpl();
 

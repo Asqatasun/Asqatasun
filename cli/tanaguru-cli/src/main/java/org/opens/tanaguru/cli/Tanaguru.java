@@ -120,7 +120,7 @@ public class Tanaguru implements AuditServiceListener {
 
     @Override
     public void auditCompleted(Audit audit) {
-        audit = auditDataService.getAuditWithWebResource(audit.getId());
+        audit = auditDataService.read(audit.getId());
         List<ProcessResult> processResultList = (List<ProcessResult>) processResultDataService.getNetResultFromAudit(audit);
         System.out.println("Audit terminated with success at " + audit.getDateOfCreation());
         System.out.println("");

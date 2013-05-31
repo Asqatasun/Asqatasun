@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2012 Open-S Company
+ * Copyright (C) 2008-2013 Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -24,6 +24,7 @@ package org.opens.tgol.controller;
 import java.util.*;
 import javax.servlet.http.HttpServletResponse;
 import junit.framework.TestCase;
+import org.apache.commons.lang.StringUtils;
 import static org.easymock.EasyMock.*;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -32,8 +33,10 @@ import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Reference;
 import org.opens.tanaguru.entity.reference.Theme;
+import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.reference.ThemeDataService;
+import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.contract.Contract;
@@ -44,6 +47,7 @@ import org.opens.tgol.entity.service.contract.ActDataService;
 import org.opens.tgol.entity.service.user.UserDataService;
 import org.opens.tgol.entity.user.User;
 import org.opens.tgol.exception.ForbiddenPageException;
+import org.opens.tgol.exception.ForbiddenScopeException;
 import org.opens.tgol.presentation.factory.AuditStatisticsFactory;
 import org.opens.tgol.security.userdetails.TgolUserDetails;
 import org.opens.tgol.util.HttpStatusCodeFamily;
@@ -56,7 +60,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.ui.ExtendedModelMap;
-import org.springframework.ui.Model;
 
 /**
  *
@@ -72,15 +75,25 @@ public class PageListControllerTest extends TestCase {
     private Contract mockContract;
     private User mockUser;
     private WebResourceDataServiceDecorator mockWebResourceDataServiceDecorator;
+    private AuditDataService mockAuditDataService;
     private Site mockSite;
+    private Page mockPage;
     private ActDataService mockActDataService;
     private ParameterDataService mockParameterDataService;
     private ThemeDataService mockThemeDataService;
     private Theme mockTheme;
     private Act mockAct;
     private Audit mockAudit;
-    private Scope mockPageScope;
+    private Scope mockGroupOfPagesScope;
     private Scope mockSiteScope;
+    
+    private static final int UNKNOWN_AUDIT_ID = 100;
+    private static final int PAGE_AUDIT_ID = 1;
+    private static final int UNAUTHORIZED_SCOPE_AUDIT_ID = 2;
+    private static final int SITE_AUDIT_GENERAL_PAGE_LIST_ID = 3;
+    private static final int SITE_AUDIT_2XX_PAGE_LIST_ID = 4;
+    private static final int SITE_AUDIT_3XX_PAGE_LIST_ID = 5;
+    private static final int SITE_AUDIT_4XX_PAGE_LIST_ID = 6;
     
     public PageListControllerTest(String testName) {
         super(testName);
@@ -103,6 +116,9 @@ public class PageListControllerTest extends TestCase {
         }
         if (mockSite != null) {
             verify(mockSite);
+        }
+        if (mockPage != null) {
+            verify(mockPage);
         }
         if (mockWebResourceDataServiceDecorator != null) {
             verify(mockWebResourceDataServiceDecorator);
@@ -128,8 +144,8 @@ public class PageListControllerTest extends TestCase {
         if (mockSiteScope != null) {
             verify(mockSiteScope);
         }
-        if (mockPageScope != null) {
-            verify(mockPageScope);
+        if (mockGroupOfPagesScope != null) {
+            verify(mockGroupOfPagesScope);
         }
         if (mockAuthenticationDetails != null) {
             verify(mockAuthenticationDetails);
@@ -137,45 +153,59 @@ public class PageListControllerTest extends TestCase {
         if (mockAuthentication != null) {
             verify(mockAuthentication);
         }
+        if (mockAuditDataService != null) {
+            verify(mockAuditDataService);
+        }
     }
 
     /**
-     * The servlet is supposed to embed the webresource id the page is 
-     * about. If not, the access denied page is returned
+     * The servlet is supposed to embed the audit id the page is 
+     * about. If not, the ForbiddenPageException is caught.
      * @throws Exception 
      */
-    public void testDisplayPageListWithoutWebResourceId() throws Exception {
-        System.out.println("testDisplayPageListWithoutWebResourceId");
+    public void testDisplayPageListWithoutAuditId() throws Exception {
+        System.out.println("testDisplayPageListWithoutAuditId");
         
-        setUpMockUserDataService();
-        
-        MockHttpServletRequest request = new MockHttpServletRequest();
-        HttpServletResponse response = new MockHttpServletResponse();
-        Model model = new ExtendedModelMap();
-        String expResult = TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
         // The servlet is supposed to embed the webresource id the page is 
         // about. If not, the access denied page is returned
-        String result = instance.displayPageList(request, response, model);
-        assertEquals(expResult, result);
+         try {
+            instance.displayPageList(
+                    new MockHttpServletRequest(), 
+                    new MockHttpServletResponse(), 
+                    new ExtendedModelMap());
+            assertTrue(false);
+        } catch (ForbiddenPageException fbe) {
+            assertTrue(
+                    StringUtils.equals(
+                    "org.opens.tgol.exception.AuditParameterMissingException", 
+                    fbe.getCause().toString()));
+        }
     } 
     
     /**
-     * if the id cannot be converted as Long, the access denied page is 
-     * returned.
+     * if the id cannot be converted as Long, the ForbiddenPageException is 
+     * caught.
      * 
      * @throws Exception 
      */
-    public void testDisplayPageListWithWrongWebResourceId() throws Exception {
-        System.out.println("testDisplayPageListWithWrongWebResourceId");
+    public void testDisplayPageListWithWrongAuditId() throws Exception {
+        System.out.println("testDisplayPageListWithWrongAuditId");
 
-        setUpMockUserDataService();
-        
-        HttpServletResponse response = new MockHttpServletResponse();
         MockHttpServletRequest request = new MockHttpServletRequest();
-        request.addParameter(TgolKeyStore.WEBRESOURCE_ID_KEY, "wrongId");
-        String expResult = TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
-        String result = instance.displayPageList(request, response, new ExtendedModelMap());
-        assertEquals(expResult, result);
+        request.addParameter(TgolKeyStore.AUDIT_ID_KEY, "wrongId");
+        try {
+            instance.displayPageList( 
+                    request, 
+                    new MockHttpServletResponse(), 
+                    new ExtendedModelMap());
+            assertTrue(false);
+        } catch (ForbiddenPageException fbe) {
+            assertTrue(
+                    StringUtils.equals(
+                    "java.lang.NumberFormatException: For input string: \"wrongId\"", 
+                    fbe.getCause().toString()));
+            
+        }
     }
     
     /**
@@ -186,20 +216,22 @@ public class PageListControllerTest extends TestCase {
      * 
      * @throws Exception 
      */
-    public void testDisplayPageListWithUnknownWebResourceId() throws Exception {
-        System.out.println("testDisplayPageListWithUnknownWebResourceId");
+    public void testDisplayPageListWithUnknownAuditId() throws Exception {
+        System.out.println("testDisplayPageListWithUnknownAuditId");
         
-        setUpMockWebResourceDataServiceDecorator(1, 100);
-        setUpActDataService(false);
-        setUpMockUserDataService();
-        
-        HttpServletResponse response = new MockHttpServletResponse();
+        setUpMockAuditDataService(UNKNOWN_AUDIT_ID);
+
         MockHttpServletRequest request = new MockHttpServletRequest();
-        request.addParameter(TgolKeyStore.WEBRESOURCE_ID_KEY, "100");
+        request.addParameter(TgolKeyStore.AUDIT_ID_KEY, String.valueOf(UNKNOWN_AUDIT_ID));
         try {
-            instance.displayPageList(request, response, new ExtendedModelMap());
+            instance.displayPageList(
+                    request, 
+                    new MockHttpServletResponse(), 
+                    new ExtendedModelMap());
             assertTrue(false);
         } catch (ForbiddenPageException fbe) {
+            // The auditDataService catch the NoResultException and return null.
+            // Then if the audit is null, a ForbiddenPageException is caught
             assertTrue(true);
         }
     }
@@ -210,46 +242,60 @@ public class PageListControllerTest extends TestCase {
      * 
      * @throws Exception 
      */
-    public void testDisplayPageListWithPageWebResource() throws Exception {
-        System.out.println("testDisplayPageListWithPageWebResource");
-        
-        setUpMockWebResourceDataServiceDecorator(1, 1);
+    public void testDisplayPageListWithPageAudit() throws Exception {
+        System.out.println("testDisplayPageListWithPageAudit");
+
+        // The audit with Id 1 is associated with a Page instance 
+        setUpMockAuditDataService(PAGE_AUDIT_ID);
         setUpMockUserDataService();
         setUpActDataService(false);
         setUpMockAuthenticationContext();
 
         HttpServletResponse response = new MockHttpServletResponse();
         MockHttpServletRequest request = new MockHttpServletRequest();
-        String expResult = TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
-        request.addParameter(TgolKeyStore.WEBRESOURCE_ID_KEY, "1");
-        
-        String result = instance.displayPageList(request, response, new ExtendedModelMap());
-        assertEquals(expResult, result);
+        request.addParameter(TgolKeyStore.AUDIT_ID_KEY, String.valueOf(PAGE_AUDIT_ID));
+        try {
+            instance.displayPageList(request, response, new ExtendedModelMap());
+            assertTrue(false);
+        } catch (ForbiddenPageException fbe) {
+            // The exception is caught when testing if audit.getSubject() is 
+            // an instance of Page
+            assertTrue(true);
+        }
     }
 
     /**
      * The PageList is displayed when the webResource is a Site instance. 
      * A mechanism is implemented into that controller that enables to display
      * the page only when the scope of the act related with the webResource
-     * belongs to a list of authorized scope. In this case the list is set 
-     * as empty, so the page cannot be displayed.
+     * belongs to a list of authorized scope. In this case the list only contains 
+     * DOMAIN as authorized scope, whereas the scope of the audit is 
+     * GROUP_OF_PAGE, so the page cannot be displayed.
      * 
      * @throws Exception 
      */
     public void testDisplayPageListWithUnauthorizedActScope() throws Exception {
         System.out.println("testDisplayPageListWithUnauthorizedActScope");
        
-        setUpMockWebResourceDataServiceDecorator(1, 2);
+        setUpMockAuditDataService(UNAUTHORIZED_SCOPE_AUDIT_ID);
         setUpMockUserDataService();
         setUpActDataService(false);
+        setUpMockAuthenticationContext();
         
         HttpServletResponse response = new MockHttpServletResponse();
         MockHttpServletRequest request = new MockHttpServletRequest();
-        String expResult = TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
-        request.addParameter(TgolKeyStore.WEBRESOURCE_ID_KEY, "2");
+        request.addParameter(TgolKeyStore.AUDIT_ID_KEY, String.valueOf(UNAUTHORIZED_SCOPE_AUDIT_ID));
         
-        String result = instance.displayPageList(request, response, new ExtendedModelMap());
-        assertEquals(expResult, result);
+        List<String> authorizedScopeForPageList = new ArrayList<String>();
+        authorizedScopeForPageList.add("DOMAIN");
+        instance.setAuthorizedScopeForPageList(authorizedScopeForPageList);        
+
+        try {
+            instance.displayPageList(request, response, new ExtendedModelMap());
+            assertTrue(false);
+        } catch (ForbiddenScopeException fbe) {
+            assertTrue(true);
+        }
     }
     
     /**
@@ -263,7 +309,7 @@ public class PageListControllerTest extends TestCase {
     public void testDisplayPageList() throws Exception {
         System.out.println("testDisplayPageList");
         
-        setUpMockWebResourceDataServiceDecorator(1, 2);
+        setUpMockAuditDataService(SITE_AUDIT_GENERAL_PAGE_LIST_ID);
         setUpMockUserDataService();
         setUpActDataService(true);
         setUpMockAuthenticationContext();
@@ -276,10 +322,42 @@ public class PageListControllerTest extends TestCase {
         HttpServletResponse response = new MockHttpServletResponse();
         MockHttpServletRequest request = new MockHttpServletRequest();
         String expResult = TgolKeyStore.PAGE_LIST_VIEW_NAME;
-        request.addParameter(TgolKeyStore.WEBRESOURCE_ID_KEY, "2");
-        
+        request.addParameter(TgolKeyStore.AUDIT_ID_KEY, String.valueOf(SITE_AUDIT_GENERAL_PAGE_LIST_ID));
         String result = instance.displayPageList(request, response, new ExtendedModelMap());
         assertEquals(expResult, result);
+    }
+    
+    /**
+     * The PageList is displayed when the webResource is a Site instance. 
+     * When the request has TgolKeyStore.STATUS_KEY equals to 2xx, 
+     * the returned page list the pages that returned a code 200 when fetched
+     * 
+     * @throws Exception 
+     */
+    public void testDisplay2xxPageList() throws Exception {
+        System.out.println("TO DO : testDisplay2xxPageList");
+    }
+    
+    /**
+     * The PageList is displayed when the webResource is a Site instance. 
+     * When the request has TgolKeyStore.STATUS_KEY equals to 2xx, 
+     * the returned page list the pages that returned a code 200 when fetched
+     * 
+     * @throws Exception 
+     */
+    public void testDisplay3xxPageList() throws Exception {
+        System.out.println("TO DO : testDisplay2xxPageList");
+    }
+    
+    /**
+     * The PageList is displayed when the webResource is a Site instance. 
+     * When the request has TgolKeyStore.STATUS_KEY equals to 2xx, 
+     * the returned page list the pages that returned a code 200 when fetched
+     * 
+     * @throws Exception 
+     */
+    public void testDisplay4xxPageList() throws Exception {
+        System.out.println("TO DO : testDisplay2xxPageList");
     }
  
     /**
@@ -294,6 +372,9 @@ public class PageListControllerTest extends TestCase {
         AuditStatisticsFactory.getInstance().setThemeDataService(mockThemeDataService);
     }
     
+    /**
+     * 
+     */
     private void setUpMockAuthenticationContext(){
         // initialise the context with the user identified by the email 
         // "test1@test.com" seen as authenticated
@@ -313,6 +394,9 @@ public class PageListControllerTest extends TestCase {
         replay(mockAuthenticationDetails);
     }
 
+    /**
+     * Create a user with Id=1, email=test1@test.com and empty name and first name
+     */
     private void setUpMockUserDataService() {
 
         mockUser = createMock(User.class);
@@ -338,9 +422,13 @@ public class PageListControllerTest extends TestCase {
         instance.setUserDataService(mockUserDataService);
     }
     
+    /**
+     * 
+     * @param isActSiteScope 
+     */
     private void setUpActDataService(boolean isActSiteScope) {
         
-        mockPageScope = createMock(Scope.class);
+        mockGroupOfPagesScope = createMock(Scope.class);
         mockSiteScope = createMock(Scope.class);
         mockContract = createMock(Contract.class);
         Collection<Contract> contractSet = new HashSet<Contract>();
@@ -349,7 +437,7 @@ public class PageListControllerTest extends TestCase {
         mockActDataService = createMock(ActDataService.class);
         mockAct = createMock(Act.class);
         
-        expect(mockActDataService.getActFromWebResource(mockSite))
+        expect(mockActDataService.getActFromAudit(mockAudit))
                 .andReturn(mockAct)
                     .anyTimes();
         
@@ -362,9 +450,9 @@ public class PageListControllerTest extends TestCase {
                 .andReturn(mockSiteScope)
                     .anyTimes();
         } else {
-            expect(mockPageScope.getCode()).andReturn(ScopeEnum.PAGE).anyTimes();
+            expect(mockGroupOfPagesScope.getCode()).andReturn(ScopeEnum.GROUPOFPAGES).anyTimes();
             expect(mockAct.getScope())
-                .andReturn(mockPageScope)
+                .andReturn(mockGroupOfPagesScope)
                     .anyTimes();
         }
         GregorianCalendar calendar = new GregorianCalendar();
@@ -390,51 +478,105 @@ public class PageListControllerTest extends TestCase {
         replay(mockAct);
         replay(mockContract);
         replay(mockSiteScope);
-        replay(mockPageScope);
+        replay(mockGroupOfPagesScope);
         
         instance.setActDataService(mockActDataService);
         AuditStatisticsFactory.getInstance().setActDataService(mockActDataService);
     }
     
-    private void setUpMockWebResourceDataServiceDecorator(
-            int getLightReadCounter,
-            int getIdValue) {
+    /**
+     * 
+     * @param getIdValue 
+     */
+    private void setUpMockAuditDataService(int getIdValue) {
+        
+        mockAuditDataService = createMock(AuditDataService.class);
+        mockAudit = createMock(Audit.class);
+        
+        switch (getIdValue) {
+            case PAGE_AUDIT_ID :
+                mockPage = createMock(Page.class);
+                expect(mockAuditDataService.read(Long.valueOf(getIdValue))).andReturn(mockAudit).anyTimes();
+                expect(mockAudit.getSubject()).andReturn(mockPage).once();
+                replay(mockPage);
+                break;
+            case UNAUTHORIZED_SCOPE_AUDIT_ID:
+                mockSite = createMock(Site.class);
+                expect(mockAuditDataService.read(Long.valueOf(getIdValue))).andReturn(mockAudit).anyTimes();
+                expect(mockAudit.getSubject()).andReturn(mockSite).once();
+                replay(mockSite);
+                break;
+            case SITE_AUDIT_GENERAL_PAGE_LIST_ID:
+                mockSite = createMock(Site.class);
+                expect(mockAuditDataService.read(Long.valueOf(getIdValue))).andReturn(mockAudit).anyTimes();
+                expect(mockAudit.getSubject()).andReturn(mockSite).times(2);
+                expect(mockAudit.getId()).andReturn(Long.valueOf(getIdValue)).times(3);
+                // set mock data Service cause the data are all collected
+                setUpMockWebResourceDataServiceDecorator(Long.valueOf(getIdValue));
+                replay(mockSite);
+                break;
+            case SITE_AUDIT_2XX_PAGE_LIST_ID:
+                mockSite = createMock(Site.class);
+                expect(mockAuditDataService.read(Long.valueOf(getIdValue))).andReturn(mockAudit).anyTimes();
+                expect(mockAudit.getSubject()).andReturn(mockSite).times(2);
+                expect(mockAudit.getId()).andReturn(Long.valueOf(getIdValue)).times(3);
+                // set mock data Service cause the data are all collected
+                setUpMockWebResourceDataServiceDecorator(Long.valueOf(getIdValue));
+                replay(mockSite);
+                break;
+            case SITE_AUDIT_3XX_PAGE_LIST_ID:
+                mockSite = createMock(Site.class);
+                expect(mockAuditDataService.read(Long.valueOf(getIdValue))).andReturn(mockAudit).anyTimes();
+                expect(mockAudit.getSubject()).andReturn(mockSite).times(2);
+                expect(mockAudit.getId()).andReturn(Long.valueOf(getIdValue)).times(3);
+                // set mock data Service cause the data are all collected
+                setUpMockWebResourceDataServiceDecorator(Long.valueOf(getIdValue));
+                replay(mockSite);
+                break;
+            case SITE_AUDIT_4XX_PAGE_LIST_ID:
+                mockSite = createMock(Site.class);
+                expect(mockAuditDataService.read(Long.valueOf(getIdValue))).andReturn(mockAudit).anyTimes();
+                expect(mockAudit.getSubject()).andReturn(mockSite).times(2);
+                expect(mockAudit.getId()).andReturn(Long.valueOf(getIdValue)).times(3);
+                // set mock data Service cause the data are all collected
+                setUpMockWebResourceDataServiceDecorator(Long.valueOf(getIdValue));
+                replay(mockSite);
+                break;
+            case UNKNOWN_AUDIT_ID : 
+                expect(mockAuditDataService.read(Long.valueOf(getIdValue))).andReturn(null).anyTimes();
+                break;
+        }
+
+        replay(mockAudit);
+        replay(mockAuditDataService);
+        instance.setAuditDataService(mockAuditDataService);
+    }
+    
+    /**
+     * 
+     */
+    private void setUpMockWebResourceDataServiceDecorator (Long idAudit) {
 
         mockWebResourceDataServiceDecorator = createMock(WebResourceDataServiceDecorator.class);
-        mockSite = createMock(Site.class);
-        mockAudit = createMock(Audit.class);
         mockParameterDataService = createMock(ParameterDataService.class);
-        
-        if (getLightReadCounter > 0) {
-            if (getIdValue == 100) {
-                expect(mockWebResourceDataServiceDecorator.ligthRead(Long.valueOf(getIdValue)))
-                    .andReturn(null)
-                        .times(getLightReadCounter);
-            } else {
-                expect(mockWebResourceDataServiceDecorator.ligthRead(Long.valueOf(getIdValue)))
-                    .andReturn(mockSite)
-                        .times(getLightReadCounter);
-            }
-        }
         
         expect(mockSite.getAudit()).andReturn(mockAudit).anyTimes();
         expect(mockSite.getURL()).andReturn("http://www.test.org").anyTimes();
-        expect(mockAudit.getId()).andReturn(Long.valueOf(1)).anyTimes();
         expect(mockAudit.getDateOfCreation()).andReturn(Calendar.getInstance().getTime()).anyTimes();
         
-        expect(mockWebResourceDataServiceDecorator.getWebResourceCountByAuditAndHttpStatusCode(Long.valueOf(1), HttpStatusCodeFamily.f2xx, null, null)).
+        expect(mockWebResourceDataServiceDecorator.getWebResourceCountByAuditAndHttpStatusCode(idAudit, HttpStatusCodeFamily.f2xx, null, null)).
                 andReturn(Long.valueOf(1)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getWebResourceCountByAuditAndHttpStatusCode(Long.valueOf(1), HttpStatusCodeFamily.f3xx, null, null)).
+        expect(mockWebResourceDataServiceDecorator.getWebResourceCountByAuditAndHttpStatusCode(idAudit, HttpStatusCodeFamily.f3xx, null, null)).
                 andReturn(Long.valueOf(2)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getWebResourceCountByAuditAndHttpStatusCode(Long.valueOf(1), HttpStatusCodeFamily.f4xx, null, null)).
+        expect(mockWebResourceDataServiceDecorator.getWebResourceCountByAuditAndHttpStatusCode(idAudit, HttpStatusCodeFamily.f4xx, null, null)).
                 andReturn(Long.valueOf(3)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getMarkByWebResourceAndAudit(mockSite, mockAudit, false)).
+        expect(mockWebResourceDataServiceDecorator.getMarkByWebResourceAndAudit(mockSite, false)).
                 andReturn(Float.valueOf(55)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getMarkByWebResourceAndAudit(mockSite, mockAudit, true)).
+        expect(mockWebResourceDataServiceDecorator.getMarkByWebResourceAndAudit(mockSite, true)).
                 andReturn(Float.valueOf(75)).
                 anyTimes();
         expect(mockWebResourceDataServiceDecorator.getChildWebResourceCount(mockSite)).
@@ -480,8 +622,6 @@ public class PageListControllerTest extends TestCase {
         paramSet.add(mockParameter);
         expect(mockParameterDataService.getParameterSetFromAudit(mockAudit)).andReturn(paramSet).anyTimes();
         
-        replay(mockSite);
-        replay(mockAudit);
         replay(mockWebResourceDataServiceDecorator);
         replay(mockParameterDataService);
         replay(mockParameter);
@@ -490,6 +630,9 @@ public class PageListControllerTest extends TestCase {
         instance.setWebResourceDataService(mockWebResourceDataServiceDecorator);
     }
     
+    /**
+     * 
+     */
     private void setUpThemeDataService() {
         mockThemeDataService = createMock(ThemeDataService.class);
         

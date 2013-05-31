@@ -62,20 +62,6 @@ public class AuditDAOImpl extends AbstractJPADAO<Audit, Long> implements
     }
 
     @Override
-    public Audit findAuditWithWebResource(Long id) {
-        Query query = entityManager.createQuery("SELECT a FROM "
-                + getEntityClass().getName() + " a"
-                + " LEFT JOIN FETCH a.subject"
-                + " WHERE a.id = :id");
-        query.setParameter("id", id);
-        try {
-            return (Audit)query.getSingleResult();
-        } catch (NoResultException nre) {
-            return null;
-        }
-    }
-
-    @Override
     public Audit findAuditWithTest(Long id) {
         Query query = entityManager.createQuery("SELECT a FROM "
                 + getEntityClass().getName() + " a"

@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -61,9 +61,12 @@ public final class AuditResultSortCommandFactory {
 
     
     /**
+     * 
      * @param webResourceId
-     * @param referenceCode
-     * @return
+     * @param displayScope
+     * @param displayScopeChoice
+     * @param formFieldList
+     * @return 
      */
     public AuditResultSortCommand getInitialisedAuditResultSortCommand (
             Long webResourceId,
@@ -97,13 +100,6 @@ public final class AuditResultSortCommandFactory {
             }
         }
         auditResultSortCommand.setWebResourceId(webResourceId);
-        return auditResultSortCommand;
-    }
-
-    public AuditResultSortCommand getInitialisedAuditResultSortCommand (
-            Long webResourceId,
-            String referenceCode,
-            AuditResultSortCommand auditResultSortCommand) {
         return auditResultSortCommand;
     }
 

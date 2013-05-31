@@ -30,14 +30,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRException;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.subject.Page;
-import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
-import org.opens.tgol.exception.ForbiddenUserException;
+import org.opens.tgol.exception.ForbiddenPageException;
 import org.opens.tgol.presentation.data.AuditStatistics;
 import org.opens.tgol.presentation.data.TestResult;
 import org.opens.tgol.presentation.factory.TestResultFactory;
@@ -76,20 +74,23 @@ public class AuditExportResultController extends AuditDataHandlerController {
     }
 
     /**
+     * The export view is only available for page result
+     * 
      * @param request
      * @param response
      * @return
      */
     @RequestMapping(value=TgolKeyStore.EXPORT_AUDIT_RESULT_CONTRACT_URL, method=RequestMethod.GET)
     @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
-    public String exportAuditResultFromContract(
+    public String exportAuditResultFromContract (
             @RequestParam(value=TgolKeyStore.WEBRESOURCE_ID_KEY, required=false) String webresourceId,
             @RequestParam(value=TgolKeyStore.EXPORT_FORMAT_KEY, required=false) String format,
             HttpServletRequest request,
             HttpServletResponse response,
             Model model) {
+
         if (format == null || webresourceId == null) {
-            return TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
+            throw new ForbiddenPageException();
         }
         //We first check that the current user is allowed to display the result
         //of this audit
@@ -97,36 +98,28 @@ public class AuditExportResultController extends AuditDataHandlerController {
         try {
             webResourceIdValue = Long.valueOf(webresourceId);
         } catch (NumberFormatException nfe) {
-            throw new ForbiddenUserException(getCurrentUser());
+            throw new ForbiddenPageException();
         }
+
         WebResource webResource = getWebResourceDataService().ligthRead(webResourceIdValue);
-        if (isUserAllowedToDisplayResult(webResource) || (webResource != null && webResource instanceof Site) ) {
-            if (webResource != null) {
-                // If the Id given in argument correspond to a webResource,
-                // data are retrieved to be prepared and displayed
-                try {
-                    prepareSuccessfullAuditDataToExport(
-                            webResource,
-                            model,
-                            getLocaleResolver().resolveLocale(request),
-                            format,
-                            request,
-                            response);
-                    return null;
-                } catch (NotSupportedExportFormatException exc) {
-                    model.addAttribute(TgolKeyStore.WEBRESOURCE_ID_KEY, webresourceId);
-                    model.addAttribute(TgolKeyStore.EXPORT_FORMAT_KEY, format);
-                    LOGGER.warn(exc);
-                    return TgolKeyStore.EXPORT_AUDIT_FORMAT_ERROR_VIEW_REDIRECT_NAME;
-                }
-            } else {
-                // If the Id given in argument does not correspond to any
-                // webresource, a 404 page is returned
-                try {
-                    response.sendError(HttpStatus.SC_NOT_FOUND);
-                } catch (IOException ex) {
-                    LOGGER.error(ex);
-                }
+        // if the id of the webresource corresponds to a Site webResource
+        if (isUserAllowedToDisplayResult(getAuditFromWebResource(webResource))) {
+            // If the Id given in argument correspond to a webResource,
+            // data are retrieved to be prepared and displayed
+            try {
+                prepareSuccessfullAuditDataToExport(
+                        webResource,
+                        model,
+                        getLocaleResolver().resolveLocale(request),
+                        format,
+                        request,
+                        response);
+                return null;
+            } catch (NotSupportedExportFormatException exc) {
+                model.addAttribute(TgolKeyStore.WEBRESOURCE_ID_KEY, webresourceId);
+                model.addAttribute(TgolKeyStore.EXPORT_FORMAT_KEY, format);
+                LOGGER.warn(exc);
+                return TgolKeyStore.EXPORT_AUDIT_FORMAT_ERROR_VIEW_REDIRECT_NAME;
             }
         }
         return TgolKeyStore.EXPORT_AUDIT_FORMAT_ERROR_VIEW_REDIRECT_NAME;
@@ -134,7 +127,7 @@ public class AuditExportResultController extends AuditDataHandlerController {
 
     /**
      * 
-     * @param webResource
+     * @param page
      * @param model
      * @param locale
      * @param exportFormat
@@ -150,6 +143,7 @@ public class AuditExportResultController extends AuditDataHandlerController {
             String exportFormat,
             HttpServletRequest request,
             HttpServletResponse response) throws NotSupportedExportFormatException {
+
         model.addAttribute(TgolKeyStore.LOCALE_KEY,locale);
         boolean hasSourceCodeWithDoctype = false;
         Scope scope = getSiteScope();
@@ -167,7 +161,7 @@ public class AuditExportResultController extends AuditDataHandlerController {
                     webResource,
                     scope,
                     hasSourceCodeWithDoctype,
-                    true, // no detailed results
+                    true, // detailed results
                     getLocaleResolver().resolveLocale(request));
 
         AuditStatistics auditStatistics = getAuditStatistics(

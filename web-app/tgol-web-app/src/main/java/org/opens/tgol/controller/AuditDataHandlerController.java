@@ -30,11 +30,11 @@ import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.reference.Scope;
+import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.reference.ScopeDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
-import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.contract.Contract;
@@ -44,6 +44,7 @@ import org.opens.tgol.entity.service.contract.ActDataService;
 import org.opens.tgol.entity.user.User;
 import org.opens.tgol.exception.ForbiddenPageException;
 import org.opens.tgol.exception.ForbiddenUserException;
+import org.opens.tgol.exception.OrphanWebResourceException;
 import org.opens.tgol.presentation.data.AuditStatistics;
 import org.opens.tgol.presentation.factory.AuditStatisticsFactory;
 import org.opens.tgol.report.pagination.factory.TgolPaginatedListFactory;
@@ -134,6 +135,19 @@ public abstract class AuditDataHandlerController extends AbstractController {
         this.webResourceDataService = webResourceDataService;
     }
 
+    /**
+     * The AuditDataService
+     */
+    private AuditDataService auditDataService;
+    public AuditDataService getAuditDataService() {
+        return auditDataService;
+    }
+    
+    @Autowired
+    public void setAuditDataService(AuditDataService auditDataService) {
+        this.auditDataService = auditDataService;
+    }
+    
     private ActDataService actDataService;
     public ActDataService getActDataService() {
         return actDataService;
@@ -209,8 +223,8 @@ public abstract class AuditDataHandlerController extends AbstractController {
         return authorizedScopeForPageList;
     }
 
-    protected boolean isAuthorizedScopeForPageList(WebResource webResource) {
-        String scope = getActDataService().getActFromWebResource(webResource).getScope().getCode().name();
+    protected boolean isAuthorizedScopeForPageList(Audit audit) {
+        String scope = getActDataService().getActFromAudit(audit).getScope().getCode().name();
         return authorizedScopeForPageList.contains(scope) ? true : false;
     }
 
@@ -253,52 +267,51 @@ public abstract class AuditDataHandlerController extends AbstractController {
 
     /**
      * This methods checks whether the current user is allowed to display the
-     * audit result of a given webresource. To do so, we verify that the act
-     * associated with the audited webresource belongs to the current user and
+     * audit result of a given audit. To do so, we verify that the act
+     * associated with the audit belongs to the current user and
      * that the current contract is not expired
-     * @param webresourceId
+     * @param act
      * @return
      *      true if the user is allowed to display the result, false otherwise.
      */
-    protected boolean isUserAllowedToDisplayResult(WebResource webResource) {
-        if (webResource == null) {
+        protected boolean isUserAllowedToDisplayResult(Audit audit) {
+        if (audit == null) {
             throw new ForbiddenPageException();
         }
         User user = getCurrentUser();
-        try {
-            Act act= actDataService.getActFromWebResource(webResource);
-            if (isAdminUser() || (!isContractExpired(act.getContract()) && user.getId().compareTo(
-                    act.getContract().getUser().getId()) == 0)) {
-                return true;
-            }
-            throw new ForbiddenUserException();
-        } catch (NoResultException e) {
-            if (webResource.getParent() != null) {
-                Act act= actDataService.getActFromWebResource(webResource.getParent());
-                if (isAdminUser() || (!isContractExpired(act.getContract()) && user.getId().compareTo(
-                    act.getContract().getUser().getId()) == 0)) {
-                    return true;
-                }
-            }
-            throw new ForbiddenUserException();
+        Contract contract = getActDataService().getActFromAudit(audit).getContract();
+        if (isAdminUser() || (!isContractExpired(contract) && user.getId().compareTo(
+                contract.getUser().getId()) == 0)) {
+            return true;
         }
+        throw new ForbiddenUserException();
     }
-
+        
     /**
-     * @param webResourceId
-     * @return The Contract associated with the given WebResource (through the 
-     * Act associated with the given WebResource.
+     * 
+     * @param webResource
+     * @return an audit for a given webResource
+     */
+    protected Audit getAuditFromWebResource(WebResource webResource) {
+        if (webResource.getAudit() != null) {
+            return webResource.getAudit();
+        } else if (webResource.getParent() != null) {
+            return webResource.getParent().getAudit();
+        }
+        throw new OrphanWebResourceException();
+    }
+    
+    /**
+     * @param audit
+     * @return The Contract associated with the given audit (through the 
+     * Act associated with the given audit).
      *
      */
-    protected Contract retrieveContractFromWebResource(WebResource webResource) {
+    protected Contract retrieveContractFromAudit(Audit audit) {
         Act act = null;
         try {
-            act = getActDataService().getActFromWebResource(webResource);
-        } catch (NoResultException e) {
-            if (webResource!=null && webResource.getParent() != null) {
-                act = getActDataService().getActFromWebResource(webResource.getParent());
-            }
-        }
+            act = getActDataService().getActFromAudit(audit);
+        } catch (NoResultException e) {}
         if (act!= null && act.getContract() != null) {
             return act.getContract();
         }
@@ -352,7 +365,7 @@ public abstract class AuditDataHandlerController extends AbstractController {
      * @return
      */
     protected String preparePageListStatsByHttpStatusCode(
-            Site site,
+            Audit audit,
             Model model,
             HttpStatusCodeFamily httpStatusCode,
             HttpServletRequest request,
@@ -374,13 +387,15 @@ public abstract class AuditDataHandlerController extends AbstractController {
                 invalidTest,
                 authorizedPageSize,
                 authorizedSortCriterion,
-                site.getAudit().getId());
+                audit.getId());
 
         model.addAttribute(TgolKeyStore.PAGE_LIST_KEY, paginatedList);
         model.addAttribute(TgolKeyStore.AUTHORIZED_PAGE_SIZE_KEY, authorizedPageSize);
         model.addAttribute(TgolKeyStore.AUTHORIZED_SORT_CRITERION_KEY, authorizedSortCriterion);
         setFromToValues(paginatedList, model);
-        addAuditStatisticsToModel(site, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE);
+        
+        // don't forge to add audit statistics to model
+//        addAuditStatisticsToModel(audit, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE);
         return (returnRedirectView) ? TgolKeyStore.PAGE_LIST_XXX_VIEW_REDIRECT_NAME : TgolKeyStore.PAGE_LIST_XXX_VIEW_NAME;
     }
 

@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -19,40 +19,17 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tanaguru.entity.service.audit;
-
-import java.util.Collection;
-import java.util.Date;
-import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.entity.audit.AuditStatus;
-import org.opens.tanaguru.sdk.entity.service.GenericDataService;
+package org.opens.tgol.exception;
 
 /**
+ * This exception is thrown when a webResource is not linked to an audit.
  * 
  * @author jkowalczyk
  */
-public interface AuditDataService extends GenericDataService<Audit, Long> {
+public class OrphanWebResourceException extends RuntimeException{
 
-    /**
-     * 
-     * @param date
-     * @return
-     */
-    Audit create(Date date);
-
-    /**
-     *
-     * @param status
-     *            the status to find
-     * @return the collection of the audits that have the status
-     */
-    Collection<Audit> findAll(AuditStatus status);
-
-    /**
-     * 
-     * @param id
-     * @return
-     */
-    Audit getAuditWithTest(Long id);
+    public OrphanWebResourceException() {
+        super();
+    }
 
 }

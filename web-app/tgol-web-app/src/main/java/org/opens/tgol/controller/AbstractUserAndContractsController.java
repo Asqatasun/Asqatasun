@@ -472,8 +472,8 @@ public class AbstractUserAndContractsController extends AbstractController{
     protected void deleteAllAuditsFromContract(Contract contract) {
         Collection<Act> actsByContract = getActDataService().getAllActsByContract(contract);
         for (Act act : actsByContract) {
-            if (act.getWebResource() != null && act.getWebResource().getAudit() != null) {
-                getAuditDataService().delete(act.getWebResource().getAudit().getId());
+            if (act.getAudit() != null) {
+                getAuditDataService().delete(act.getAudit().getId());
             }
             getActDataService().delete(act.getId());
         }

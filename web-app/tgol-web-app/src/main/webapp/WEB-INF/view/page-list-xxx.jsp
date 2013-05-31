@@ -74,7 +74,7 @@
         <fmt:message key="pageList.${param.status}"/>
         <fmt:message key="pageList.forTheAudit">
             <fmt:param>
-                ${param.wr}
+                ${param.audit}
             </fmt:param>
         </fmt:message>
         <c:if test="${invalidTestCriterion}">
@@ -95,7 +95,7 @@
             <c:set var="pageName" scope="page">
                 <fmt:message key="pageList.${param.status}.${forTheAuditExtension}h1">
                     <fmt:param>
-                        ${param.wr}
+                        ${param.audit}
                     </fmt:param>
                 </fmt:message>
                 <c:if test="${invalidTestCriterion}">
@@ -113,13 +113,13 @@
                 <c:set var="auditSynthesisName" scope="page">
                     <fmt:message key="synthesisSite.h1">
                         <fmt:param>
-                            ${param.wr}
+                            ${param.audit}
                         </fmt:param>
                     </fmt:message>
                 </c:set>
-                <li><a href="<c:url value="/home/contract/audit-synthesis.html?wr=${param.wr}"/>">${auditSynthesisName}</a> <span class="divider"></span></li>
+                <li><a href="<c:url value="/home/contract/audit-synthesis.html?audit=${param.audit}"/>">${auditSynthesisName}</a> <span class="divider"></span></li>
                     <c:if test="${not invalidTestCriterion}">
-                <li><a href="<c:url value="/home/contract/page-list.html?wr=${param.wr}"/>"><fmt:message key="pageList.h1"/></a> <span class="divider"></span></li>
+                <li><a href="<c:url value="/home/contract/page-list.html?audit=${param.audit}"/>"><fmt:message key="pageList.h1"/></a> <span class="divider"></span></li>
                     </c:if>
                 </c:if>
                 <li class="active">${pageName}</li>
@@ -163,7 +163,7 @@
                 </div>
                 <div class="span16">
                     <form method="get" enctype="application/x-www-form-urlencoded" class="form-stacked">
-                        <input type="hidden" name="wr" value="${param.wr}"/>
+                        <input type="hidden" name="audit" value="${param.audit}"/>
                         <input type="hidden" name="status" value="${param.status}"/>
                         <c:if test="${param.test != null}">
                         <input type="hidden" name="test" value="${param.test}"/>

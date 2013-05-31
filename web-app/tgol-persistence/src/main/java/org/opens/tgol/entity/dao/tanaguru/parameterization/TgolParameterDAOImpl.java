@@ -101,7 +101,7 @@ public class TgolParameterDAOImpl extends AbstractJPADAO<Parameter, Long>
         queryString.append("SELECT a FROM ");
         queryString.append(ActImpl.class.getName());
         queryString.append(" a");
-        queryString.append(" left join a.webResource w");
+        queryString.append(" left join a.audit.subject w");
         queryString.append(" WHERE a.contract.id = :idContract");
         queryString.append(" AND (a.status = :completedStatus OR a.status = :errorStatus)");
         queryString.append(" AND a.scope.code =:scope ");

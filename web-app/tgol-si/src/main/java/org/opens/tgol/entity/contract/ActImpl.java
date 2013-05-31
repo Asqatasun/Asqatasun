@@ -25,8 +25,8 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.opens.tanaguru.entity.subject.WebResource;
-import org.opens.tanaguru.entity.subject.WebResourceImpl;
+import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.audit.AuditImpl;
 
 /**
  *
@@ -61,10 +61,10 @@ public class ActImpl implements Act, Serializable {
     private ContractImpl contract;
 
     @OneToOne
-        @JoinTable(name = "TGSI_ACT_WEB_RESOURCE", joinColumns =
+        @JoinTable(name = "TGSI_ACT_AUDIT", joinColumns =
         @JoinColumn(name = "ACT_Id_Act"), inverseJoinColumns =
-        @JoinColumn(name = "WEB_RESOURCE_Id_Web_Resource"))
-    private WebResourceImpl webResource;
+        @JoinColumn(name = "AUDIT_Id_Audit"))
+    private AuditImpl audit;
 
     @ManyToOne
     @JoinColumn(name = "SCOPE_Id_Scope", nullable=false)
@@ -140,13 +140,13 @@ public class ActImpl implements Act, Serializable {
     }
 
     @Override
-    public WebResource getWebResource() {
-        return webResource;
+    public Audit getAudit() {
+        return audit;
     }
 
     @Override
-    public void setWebResource(WebResource webresource) {
-        this.webResource = (WebResourceImpl)webresource;
+    public void setAudit(Audit audit) {
+        this.audit = (AuditImpl)audit;
     }
 
     @Override

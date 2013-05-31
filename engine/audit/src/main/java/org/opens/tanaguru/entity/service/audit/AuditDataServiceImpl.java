@@ -25,7 +25,6 @@ import java.util.Collection;
 import java.util.Date;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
-import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.dao.audit.AuditDAO;
 import org.opens.tanaguru.entity.factory.audit.AuditFactory;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
@@ -45,20 +44,9 @@ public class AuditDataServiceImpl extends AbstractGenericDataService<Audit, Long
         return ((AuditFactory) entityFactory).create(date);
     }
 
-    protected void deepLoad(ProcessResult processResult) {
-        for (ProcessResult childResult : processResult.getChildResultList()) {
-            deepLoad(childResult);
-        }
-    }
-
     @Override
     public Collection<Audit> findAll(AuditStatus status) {
         return ((AuditDAO) entityDao).findAll(status);
-    }
-
-    @Override
-    public Audit getAuditWithWebResource(Long id) {
-        return ((AuditDAO) entityDao).findAuditWithWebResource(id);
     }
 
     @Override

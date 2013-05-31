@@ -365,7 +365,8 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             projectName.append(" - ");
             // the name of the scenario is persisted on engine's side as the URL
             // of the parent WebResource
-            projectName.append(act.getWebResource().getURL());
+//            projectName.append(act.getWebResource().getURL());
+            projectName.append(act.getAudit().getSubject().getURL());
         }
         if (act.getStatus().equals(ActStatus.COMPLETED)) {
             String emailSubject = bundle.getString(SUCCESS_SUBJECT_KEY).replaceAll(PROJECT_NAME_TO_REPLACE, projectName.toString());
@@ -431,7 +432,8 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         } else if (scope.equals(ScopeEnum.SCENARIO)) {
             strb.append(scenarioResultUrlSuffix);
         }
-        strb.append(act.getWebResource().getId());
+        strb.append(act.getAudit().getId());
+//        strb.append(act.getWebResource().getId());
         return strb.toString();
     }
     
@@ -570,7 +572,8 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             Audit currentAudit = launchAudit();
             currentAudit = this.waitForAuditToComplete(currentAudit);
             this.getAuditService().remove(this);
-            this.getCurrentAct().setWebResource(currentAudit.getSubject());
+//            this.getCurrentAct().setWebResource(currentAudit.getSubject());
+            this.getCurrentAct().setAudit(currentAudit);
             onActTerminated(this.getCurrentAct(), currentAudit);
         }
         
@@ -600,7 +603,11 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
 
         @Override
         public void auditCrashed(Audit audit, Exception exception) {
-            LOGGER.error("AUDIT CRASHED:" + audit + "," + audit.getSubject().getURL() + "," + (long) (audit.getDateOfCreation().getTime() / 1000), exception);
+            String url = "";
+            if (audit.getSubject() != null) {
+                url = audit.getSubject().getURL();
+            }
+            LOGGER.error("AUDIT CRASHED:" + audit + "," + url + "," + (long) (audit.getDateOfCreation().getTime() / 1000), exception);
             Audit auditCrashed = null;
             for (Audit auditRunning : this.auditExecutionList.keySet()) {
                 if (auditRunning.getId().equals(audit.getId())
@@ -614,6 +621,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
                 this.auditExecutionList.remove(auditCrashed);
                 this.auditCrashedList.put(token, new AbstractMap.SimpleImmutableEntry<Audit, Exception>(audit, exception));
             }
+            onActTerminated(currentAct, audit);
         }
 
         protected Audit waitForAuditToComplete(Audit audit) {
