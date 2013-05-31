@@ -39,7 +39,8 @@ public class HtmlHighlighterImpl implements HtmlHighlighter {
     @Override
     public String highlightSourceCode(String doctype, String htmlContent) {
         StringBuilder source = new StringBuilder();
-        if (org.apache.commons.lang3.StringUtils.isNotBlank(doctype)) {
+        if (org.apache.commons.lang3.StringUtils.isNotBlank(doctype) && 
+                !org.apache.commons.lang3.StringUtils.startsWithIgnoreCase(htmlContent, doctype)) {
             source.append(doctype.trim().
                     replace(CARRIAGE_RETURN_CHAR, EMPTY_CHAR).
                     replace('\n', EMPTY_CHAR));
@@ -47,7 +48,7 @@ public class HtmlHighlighterImpl implements HtmlHighlighter {
         }
         source.append(htmlContent);
         try {
-            return new MyXhtmlRenderer().highlight(htmlContent);
+            return new MyXhtmlRenderer().highlight(source.toString());
         } catch (IOException ioe){
             return "";
         }

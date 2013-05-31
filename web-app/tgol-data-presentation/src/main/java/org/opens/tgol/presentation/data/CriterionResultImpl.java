@@ -31,13 +31,6 @@ import org.opens.tanaguru.entity.reference.Criterion;
  */
 public class CriterionResultImpl implements CriterionResult{
 
-    private boolean hasSourceCodeADoctype = false;
-
-    @Override
-    public boolean hasSourceCodeADoctype() {
-        return hasSourceCodeADoctype;
-    }
-
     private Criterion criterion;
     /**
      *
@@ -182,10 +175,6 @@ public class CriterionResultImpl implements CriterionResult{
      * Default constructor
      */
     public CriterionResultImpl() {
-    }
-
-    public CriterionResultImpl(boolean hasSourceCodeADoctype) {
-        this.hasSourceCodeADoctype = hasSourceCodeADoctype;
     }
 
 }

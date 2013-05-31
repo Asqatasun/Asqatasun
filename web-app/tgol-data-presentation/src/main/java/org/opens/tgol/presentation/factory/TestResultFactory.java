@@ -118,16 +118,14 @@ public final class TestResultFactory {
     /**
      * 
      * @param processResult
-     * @param test
      * @param hasSourceCodeADoctype
      * @param hasResultDetails
      * @return
      */
     public TestResult getTestResult(
             ProcessResult processResult,
-            boolean hasSourceCodeWithDoctype,
             boolean hasResultDetails) {
-        TestResult testResult = new TestResultImpl(hasSourceCodeWithDoctype);
+        TestResult testResult = new TestResultImpl();
         testResult.setTestUrl(processResult.getTest().getDescription());
         testResult.setTestShortLabel(processResult.getTest().getLabel());
         testResult.setTestCode(processResult.getTest().getCode());
@@ -164,7 +162,7 @@ public final class TestResultFactory {
     public Map<Theme, List<TestResult>> getTestResultSortedByThemeMap(
             WebResource webresource,
             Scope scope,
-            boolean hasSourceCodeWithDoctype,
+//            boolean hasSourceCodeWithDoctype,
             boolean hasResultDetails,
             String theme,
             Collection<String> testSolutionList){
@@ -181,7 +179,7 @@ public final class TestResultFactory {
         
         return prepareThemeResultMap(
                 netResultList, 
-                hasSourceCodeWithDoctype, 
+//                hasSourceCodeWithDoctype, 
                 hasResultDetails);
     }
 
@@ -194,7 +192,6 @@ public final class TestResultFactory {
      */
     private Map<Theme, List<TestResult>> prepareThemeResultMap(
             List<ProcessResult> netResultList,
-            boolean hasSourceCodeWithDoctype,
             boolean hasResultDetails) {
         
         // Map that associates a list of results with a theme
@@ -206,7 +203,6 @@ public final class TestResultFactory {
             if (processResult instanceof DefiniteResult) {
                 TestResult testResult = getTestResult(
                         processResult,
-                        hasSourceCodeWithDoctype,
                         hasResultDetails);
                 Theme theme =
                         processResult.getTest().getCriterion().getTheme();
@@ -227,7 +223,6 @@ public final class TestResultFactory {
      * 
      * @param webresource
      * @param scope
-     * @param hasSourceCodeWithDoctype
      * @param hasResultDetails
      * @param locale
      * @return
@@ -236,7 +231,6 @@ public final class TestResultFactory {
     public List<TestResult> getTestResultList(
             WebResource webresource,
             Scope scope,
-            boolean hasSourceCodeWithDoctype,
             boolean hasResultDetails,
             Locale locale) {
         // Map that associates a list of results with a theme
@@ -256,7 +250,6 @@ public final class TestResultFactory {
             if (processResult instanceof DefiniteResult) {
                 TestResult testResult = getTestResult(
                         processResult,
-                        hasSourceCodeWithDoctype,
                         hasResultDetails);
                 testResultList.add(testResult);
             }
@@ -276,7 +269,6 @@ public final class TestResultFactory {
      */
     public Map<Theme, List<TestResult>> getTestResultListFromCriterion(
             WebResource webresource,
-            boolean hasSourceCodeWithDoctype,
             Long criterionId) {
         // Map that associates a list of results with a theme
         List<TestResult> testResultList = new LinkedList<TestResult>();
@@ -298,7 +290,6 @@ public final class TestResultFactory {
             if (processResult instanceof DefiniteResult) {
                 TestResult testResult = getTestResult(
                         processResult,
-                        hasSourceCodeWithDoctype,
                         true);
                 testResultList.add(testResult);
             }
@@ -511,11 +502,7 @@ public final class TestResultFactory {
         // The doctype is added when the result is displayed.
         // When the doctype is not null, each line remark has to be
         // one-line-shifted
-        if (testResult.hasSourceCodeADoctype()) {
-            lineNumber = remark.getLineNumber() + 1;
-        } else {
-            lineNumber = remark.getLineNumber();
-        }
+        lineNumber = remark.getLineNumber();
         return lineNumber;
     }
 

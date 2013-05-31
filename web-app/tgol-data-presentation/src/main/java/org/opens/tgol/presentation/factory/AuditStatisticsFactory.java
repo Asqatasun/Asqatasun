@@ -239,7 +239,6 @@ public class AuditStatisticsFactory {
      * This methods converts the mark of the audit as a string
      *
      * @param webresource
-//     * @param audit
      * @param isRawMark
      * @return
      */

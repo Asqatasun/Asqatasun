@@ -86,9 +86,8 @@ public final class CriterionResultFactory {
      * @return
      */
     public CriterionResult getCriterionResult(
-            CriterionStatistics criterionStatistics,
-            boolean hasSourceCodeWithDoctype) {
-        CriterionResult criterionResult = new CriterionResultImpl(hasSourceCodeWithDoctype);
+            CriterionStatistics criterionStatistics) {
+        CriterionResult criterionResult = new CriterionResultImpl();
         criterionResult.setCriterion(criterionStatistics.getCriterion());
         criterionResult.setCriterionCode(criterionStatistics.getCriterion().getCode());
         criterionResult.setLevelCode(criterionDataService.getCriterionLevel(criterionStatistics.getCriterion()).getCode());
@@ -108,7 +107,6 @@ public final class CriterionResultFactory {
      */
     public Map<Theme, List<CriterionResult>> getCriterionResultSortedByThemeMap(
             WebResource webresource,
-            boolean hasSourceCodeWithDoctype,
             String theme,
             Collection<String> testSolution){
         List<CriterionStatistics> criterionStatList = new ArrayList<CriterionStatistics>();
@@ -117,27 +115,23 @@ public final class CriterionResultFactory {
                     webresource,
                     theme, 
                     testSolution));
-        return prepareThemeResultMap(criterionStatList, hasSourceCodeWithDoctype);
+        return prepareThemeResultMap(criterionStatList);
     }
 
     /**
      * 
      * @param netResultList
-     * @param hasSourceCodeWithDoctype
-     * @param hasResultDetails
      * @return
      */
     private Map<Theme, List<CriterionResult>> prepareThemeResultMap(
-            List<CriterionStatistics> criterionStatList,
-            boolean hasSourceCodeWithDoctype) {
+            List<CriterionStatistics> criterionStatList) {
         // Map that associates a list of results with a theme
         Map<Theme, List<CriterionResult>> criterionResultMap =
                 new LinkedHashMap<Theme, List<CriterionResult>>();
         sortCollection(criterionStatList);
         for (CriterionStatistics crs : criterionStatList) {
                 CriterionResult testResult = getCriterionResult(
-                        crs,
-                        hasSourceCodeWithDoctype);
+                        crs);
                 Theme theme = crs.getCriterion().getTheme();
                 if (criterionResultMap.containsKey(theme)) {
                     criterionResultMap.get(theme).add(testResult);

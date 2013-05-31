@@ -145,22 +145,13 @@ public class AuditExportResultController extends AuditDataHandlerController {
             HttpServletResponse response) throws NotSupportedExportFormatException {
 
         model.addAttribute(TgolKeyStore.LOCALE_KEY,locale);
-        boolean hasSourceCodeWithDoctype = false;
         Scope scope = getSiteScope();
         if (webResource instanceof Page) {
-            SSP ssp;
             scope = getPageScope();
-            try {
-                ssp = getContentDataService().findSSP(webResource, webResource.getURL());
-                if (StringUtils.isNotBlank(ssp.getDoctype())) {
-                    hasSourceCodeWithDoctype = true;
-                }
-            } catch (NoResultException nre) {}
         }
         List<TestResult> testResultList = TestResultFactory.getInstance().getTestResultList(
                     webResource,
                     scope,
-                    hasSourceCodeWithDoctype,
                     true, // detailed results
                     getLocaleResolver().resolveLocale(request));
 

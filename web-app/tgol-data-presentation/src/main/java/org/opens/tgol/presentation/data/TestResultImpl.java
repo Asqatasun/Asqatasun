@@ -31,13 +31,6 @@ import org.opens.tanaguru.entity.reference.Test;
  */
 public class TestResultImpl implements TestResult{
 
-    private boolean hasSourceCodeADoctype = false;
-
-    @Override
-    public boolean hasSourceCodeADoctype() {
-        return hasSourceCodeADoctype;
-    }
-
     private List<RemarkInfos> remarkInfosList = new ArrayList<RemarkInfos>();
 
     /**
@@ -286,10 +279,6 @@ public class TestResultImpl implements TestResult{
      * Default constructor
      */
     public TestResultImpl() {
-    }
-
-    public TestResultImpl(boolean hasSourceCodeADoctype) {
-        this.hasSourceCodeADoctype = hasSourceCodeADoctype;
     }
 
 }

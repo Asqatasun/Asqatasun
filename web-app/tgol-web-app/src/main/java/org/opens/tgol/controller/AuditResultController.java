@@ -76,8 +76,6 @@ public class AuditResultController extends AuditDataHandlerController {
     private static final String CRITERION_RESULT_PAGE_KEY="criterion-result";
     private static final String REFERER_HEADER_KEY="referer";
 
-    private boolean hasSourceCodeWithDoctype = false;
-
     List<FormFieldBuilder> sortFormFieldBuilderList;
     public final void setFormFieldBuilderList(final List<FormFieldBuilder> formFieldBuilderList) {
         this.sortFormFieldBuilderList = formFieldBuilderList;
@@ -257,7 +255,6 @@ public class AuditResultController extends AuditDataHandlerController {
         Audit audit = getAuditFromWebResource(webResource);
         if (isUserAllowedToDisplayResult(audit)) {
             Page page = (Page)webResource;
-            hasSourceCodeWithDoctype = false;
 
             SSP ssp =getContentDataService().findSSP(page, page.getURL());
             model.addAttribute(TgolKeyStore.SOURCE_CODE_KEY,highlightSourceCode(ssp));
@@ -310,7 +307,7 @@ public class AuditResultController extends AuditDataHandlerController {
                 model.addAttribute(TgolKeyStore.AUTHORIZED_SCOPE_FOR_PAGE_LIST, isAuthorizedScopeForPageList(audit));
             
                 model.addAttribute(TgolKeyStore.TEST_RESULT_LIST_KEY,
-                    TestResultFactory.getInstance().getTestResultListFromCriterion(webResource, false, critId));
+                    TestResultFactory.getInstance().getTestResultListFromCriterion(webResource, critId));
                 return TgolKeyStore.CRITERION_RESULT_VIEW_NAME;
         } else {
             throw new ForbiddenPageException();
@@ -439,13 +436,11 @@ public class AuditResultController extends AuditDataHandlerController {
      * @throws IOException
      */
     private String prepareSuccessfullSiteData(Site site, Audit audit, Model model) {
-        hasSourceCodeWithDoctype = false;
         AuditResultSortCommand asuc = ((AuditResultSortCommand)model.asMap().get(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY));
         model.addAttribute(TgolKeyStore.TEST_RESULT_LIST_KEY,
                 TestResultFactory.getInstance().getTestResultSortedByThemeMap(
                             site,
                             getSiteScope(),
-                            hasSourceCodeWithDoctype,
                             true,
                             asuc.getSortOptionMap().get(themeSortKey).toString(),
                             getTestResultSortSelection(asuc)));
@@ -475,14 +470,6 @@ public class AuditResultController extends AuditDataHandlerController {
         if (!audit.getStatus().equals(AuditStatus.COMPLETED)) {
             return prepareFailedAuditData(audit, model);
         }
-        hasSourceCodeWithDoctype = false;
-        boolean hasSSP = true;
-        // The source code has to be hightlighted before the processResult are
-        // computed. We need to know if a doctype is present in the page. If true,
-        // the line of each process remark has to be increased by 1.
-        if (getContentDataService().findSSP(page, page.getURL()) == null) {
-            hasSSP = false;
-        }
 
         model.addAttribute(TgolKeyStore.STATUS_KEY, computeAuditStatus(audit));
         model.addAttribute(TgolKeyStore.RESULT_ACTION_LIST_KEY, actionHandler.getActionList("EXPORT"));
@@ -502,29 +489,23 @@ public class AuditResultController extends AuditDataHandlerController {
                     getParameterDataService().getParameterSetFromAudit(audit)));
         
         if (StringUtils.equalsIgnoreCase(displayScope, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE)) {
-            if (hasSSP) {
-                AuditResultSortCommand asuc = ((AuditResultSortCommand)model.asMap().get(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY));
+            AuditResultSortCommand asuc = ((AuditResultSortCommand)model.asMap().get(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY));
 
-                model.addAttribute(TgolKeyStore.TEST_RESULT_LIST_KEY,
-                    TestResultFactory.getInstance().getTestResultSortedByThemeMap(
-                        page,
-                        getPageScope(),
-                        hasSourceCodeWithDoctype,
-                        true,
-                        asuc.getSortOptionMap().get(themeSortKey).toString(),
-                        getTestResultSortSelection(asuc))); 
-            }
+            model.addAttribute(TgolKeyStore.TEST_RESULT_LIST_KEY,
+                TestResultFactory.getInstance().getTestResultSortedByThemeMap(
+                    page,
+                    getPageScope(),
+                    true,
+                    asuc.getSortOptionMap().get(themeSortKey).toString(),
+                    getTestResultSortSelection(asuc))); 
             return TgolKeyStore.RESULT_PAGE_VIEW_NAME;
         } else {
-            if (hasSSP) {
-                AuditResultSortCommand asuc = ((AuditResultSortCommand)model.asMap().get(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY));
-                model.addAttribute(TgolKeyStore.CRITERION_RESULT_LIST_KEY,
-                    CriterionResultFactory.getInstance().getCriterionResultSortedByThemeMap(
-                        page,
-                        hasSourceCodeWithDoctype,
-                        asuc.getSortOptionMap().get(themeSortKey).toString(),
-                        getTestResultSortSelection(asuc))); 
-            }
+            AuditResultSortCommand asuc = ((AuditResultSortCommand)model.asMap().get(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY));
+            model.addAttribute(TgolKeyStore.CRITERION_RESULT_LIST_KEY,
+                CriterionResultFactory.getInstance().getCriterionResultSortedByThemeMap(
+                    page,
+                    asuc.getSortOptionMap().get(themeSortKey).toString(),
+                    getTestResultSortSelection(asuc))); 
             return TgolKeyStore.RESULT_PAGE_BY_CRITERION_VIEW_NAME;
         }
     }
@@ -558,10 +539,8 @@ public class AuditResultController extends AuditDataHandlerController {
      */
     private String highlightSourceCode(SSP ssp) {
         if (ssp !=null && StringUtils.isNotBlank(ssp.getDoctype()) ) {    
-            hasSourceCodeWithDoctype = true;
             return highlighter.highlightSourceCode(ssp.getDoctype(),ssp.getAdaptedContent());
         } else {
-            hasSourceCodeWithDoctype = false;
             return highlighter.highlightSourceCode(ssp.getAdaptedContent());
         }
     }

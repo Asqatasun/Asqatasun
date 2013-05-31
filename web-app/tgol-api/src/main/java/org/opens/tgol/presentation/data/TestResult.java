@@ -56,12 +56,6 @@ public interface TestResult {
     static final String REPRESENTATION_FILE_SUFFIX = ".jsp";
 
     /**
-     * 
-     * @return
-     */
-    boolean hasSourceCodeADoctype();
-
-    /**
      *
      * @return
      *          the list of remark info for the given test

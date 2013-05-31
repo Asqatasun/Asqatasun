@@ -197,11 +197,11 @@ public class TgTestRun extends TestRun {
         if (newPageListeners == null) {
             return;
         }
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(TgTestRun.class.getName()).error(ex);
-        }
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException ex) {
+//            Logger.getLogger(TgTestRun.class.getName()).error(ex);
+//        }
         try {
             String url = getDriver().getCurrentUrl();
             String sourceCode = getDriver().getPageSource();

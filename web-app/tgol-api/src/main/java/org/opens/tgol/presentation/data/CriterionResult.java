@@ -21,7 +21,6 @@
  */
 package org.opens.tgol.presentation.data;
 
-import java.util.List;
 import org.opens.tanaguru.entity.reference.Criterion;
 
 /**
@@ -52,12 +51,6 @@ public interface CriterionResult {
     static final String REPRESENTATION_FILE_PREFIX =
             "data-representation/data-representation-";
     static final String REPRESENTATION_FILE_SUFFIX = ".jsp";
-
-    /**
-     * 
-     * @return
-     */
-    boolean hasSourceCodeADoctype();
 
     /**
      *
