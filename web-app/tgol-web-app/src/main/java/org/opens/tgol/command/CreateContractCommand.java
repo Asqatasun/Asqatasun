@@ -60,7 +60,7 @@ public class CreateContractCommand  implements Serializable {
     /**
      * the label of the contract
      */
-    private String contractUrl = "http://";
+    private String contractUrl = "";
     public String getContractUrl() {
         return contractUrl;
     }
