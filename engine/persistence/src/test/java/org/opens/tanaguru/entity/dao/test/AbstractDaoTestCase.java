@@ -52,7 +52,7 @@ public abstract class AbstractDaoTestCase extends DBTestCase {
             "org.hsqldb.jdbcDriver";
 
     private static final String SPRING_FILE_PATH =
-            "../persistence/src/test/resources/conf/context/unit-test-context.xml";
+            "src/test/resources/conf/context/unit-test-context.xml";
 
     private String inputDataFilePath = "src/test/resources/dataSets/";
     public String getInputDataFilePath() {

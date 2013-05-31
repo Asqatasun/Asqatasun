@@ -63,9 +63,9 @@ public class CrawlerServiceImplTest extends TestCase {
             "robots-restricted-crawl-url";
     private static final String SITES_URL_BUNDLE_NAME = "sites-url";
     private static final String FULL_SITE_CRAWL_CONF_FILE_PATH =
-            System.getenv("PWD") + "/src/test/resources/full-site-crawl-conf/";
+            "src/test/resources/full-site-crawl-conf/";
     private static final String PAGE_CRAWL_CONF_FILE_PATH =
-            System.getenv("PWD") + "/src/test/resources/page-crawl-conf/";
+            "src/test/resources/page-crawl-conf/";
     private static final String PAGE_NAME_LEVEL1 = "page-1.html";
     private static final String PAGE_NAME_LEVEL2 = "page-2.html";
     private static final String FORBIDDEN_PAGE_NAME = "page-access-forbidden-for-robots.html";
