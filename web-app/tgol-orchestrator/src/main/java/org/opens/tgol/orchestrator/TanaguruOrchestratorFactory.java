@@ -21,6 +21,7 @@
  */
 package org.opens.tgol.orchestrator;
 
+import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.service.AuditService;
 import org.opens.tgol.emailsender.EmailSender;
 import org.opens.tgol.entity.factory.contract.ActFactory;
@@ -43,6 +44,7 @@ public final class TanaguruOrchestratorFactory {
     public static TanaguruOrchestrator create(
             AuditService auditService,
             ActDataService actDataService,
+            AuditDataService auditDataService,
             ActFactory actFactory,
             ScenarioDataService scenarioDataService,
             ScopeDataService scopeDataService,
@@ -50,6 +52,7 @@ public final class TanaguruOrchestratorFactory {
             EmailSender emailSender) {
         return new TanaguruOrchestratorImpl(
                 auditService,
+                auditDataService,
                 actDataService,
                 actFactory,
                 scopeDataService,

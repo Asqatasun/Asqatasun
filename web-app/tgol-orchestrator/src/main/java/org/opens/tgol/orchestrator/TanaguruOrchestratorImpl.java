@@ -21,14 +21,20 @@
  */
 package org.opens.tgol.orchestrator;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.service.AuditService;
 import org.opens.tanaguru.service.AuditServiceListener;
 import org.opens.tgol.emailsender.EmailSender;
@@ -50,6 +56,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
     private static final Logger LOGGER = Logger.getLogger(TanaguruOrchestratorImpl.class);
     private AuditService auditService;
     private ActDataService actDataService;
+    private AuditDataService auditDataService;
     private ScenarioDataService scenarioDataService;
     private ActFactory actFactory;
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
@@ -67,12 +74,20 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
     private static final String RECIPIENT_KEY =  "recipient";
     private static final String SUCCESS_SUBJECT_KEY =  "success-subject";
     private static final String ERROR_SUBJECT_KEY =  "error-subject";
+    private static final String KRASH_SUBJECT_KEY =  "krash-subject";
+    private static final String KRASH_ADMIN_SUBJECT_KEY =  "krash-admin-subject";
     private static final String URL_TO_REPLACE =  "#webresourceUrl";
+    private static final String AUDIT_URL_TO_REPLACE =  "#unknown";
+    private static final String EXCEPTION_TO_REPLACE =  "#exception";
     private static final String PROJECT_NAME_TO_REPLACE =  "#projectName";
+    private static final String USER_EMAIL_TO_REPLACE =  "#emailUser";
     private static final String PROJECT_URL_TO_REPLACE =  "#projectUrl";
+    private static final String HOST_TO_REPLACE =  "#host";
     private static final String SUCCESS_MSG_CONTENT_KEY =  "success-content";
     private static final String SITE_ERROR_MSG_CONTENT_KEY =  "site-error-content";
     private static final String PAGE_ERROR_MSG_CONTENT_KEY =  "page-error-content";
+    private static final String KRASH_MSG_CONTENT_KEY =  "krash-content";
+    private static final String KRASH_ADMIN_MSG_CONTENT_KEY =  "krash-admin-content";
     private static final String BUNDLE_NAME = "email-content-I18N";
     private static final int DEFAULT_AUDIT_DELAY = 30000;
 
@@ -85,24 +100,6 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         this.webappUrl = webappUrl;
     }
     
-    private String siteResultUrlSuffix;
-    public String getSiteResultUrlSuffix() {
-        return siteResultUrlSuffix;
-    }
-
-    public void setSiteResultUrlSuffix(String siteResultUrlSuffix) {
-        this.siteResultUrlSuffix = siteResultUrlSuffix;
-    }
-    
-    private String scenarioResultUrlSuffix;
-    public String getScenarioResultUrlSuffix() {
-        return scenarioResultUrlSuffix;
-    }
-
-    public void setScenarioResultUrlSuffix(String scenarioResultUrlSuffix) {
-        this.scenarioResultUrlSuffix = scenarioResultUrlSuffix;
-    }
-    
     private String pageResultUrlSuffix;
     public String getPageResultUrlSuffix() {
         return pageResultUrlSuffix;
@@ -110,15 +107,6 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
 
     public void setPageResultUrlSuffix(String pageResultUrlSuffix) {
         this.pageResultUrlSuffix = pageResultUrlSuffix;
-    }
-    
-    private String groupResultUrlSuffix;
-    public String getGroupResultUrlSuffix() {
-        return groupResultUrlSuffix;
-    }
-
-    public void setGroupResultUrlSuffix(String groupResultUrlSuffix) {
-        this.groupResultUrlSuffix = groupResultUrlSuffix;
     }
     
     private String contractUrlSuffix;
@@ -144,24 +132,20 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         this.emailSentToUserExclusionList.addAll(Arrays.asList(emailSentToUserExclusionRawList.split(";")));
     }
     
-//    public TanaguruOrchestratorImpl(BlockingQueue workQueue) {
-//        threadPoolTaskExecutor = new ThreadPoolExecutor(
-//            10, 100, 300L, TimeUnit.SECONDS, workQueue);
-//    }
-//
-//    public TanaguruOrchestratorImpl(int corePoolSize, 
-//                int maximumPoolSize, 
-//                long keepAliveTime, 
-//                BlockingQueue workQueue) {
-//        threadPoolTaskExecutor = new ThreadPoolExecutor(
-//        corePoolSize, maximumPoolSize, 
-//        keepAliveTime, TimeUnit.SECONDS, workQueue);
-//    }
-
+    private List<String> krashReportMailList = new ArrayList<String>();
+    public void setKrashReportMailList(String krashReportMailList) {
+        this.krashReportMailList.addAll(Arrays.asList(krashReportMailList.split(";")));
+    }
     
+    private boolean isAllowedToSendKrashReport = true;
+    public void setIsAllowedToSendKrashReport(boolean isAllowedToSendKrashReport) {
+        this.isAllowedToSendKrashReport = isAllowedToSendKrashReport;
+    }
+
     @Autowired
     public TanaguruOrchestratorImpl(
             AuditService auditService,
+            AuditDataService auditDataService,
             ActDataService actDataService,
             ActFactory actFactory,
             ScopeDataService scopeDataService,
@@ -170,6 +154,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             EmailSender emailSender) {
         this.auditService = auditService;
         this.actDataService = actDataService;
+        this.auditDataService = auditDataService;
         this.actFactory = actFactory;
         this.scenarioDataService = scenarioDataService;
         initializeScopeMap(scopeDataService);
@@ -348,7 +333,14 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         }
     }
 
-    private void sendEmail(Act act, Locale locale) {
+    /**
+     * Send an email when an audit terminates
+     * 
+     * @param act
+     * @param locale
+     * @param exception 
+     */
+    private void sendAuditResultEmail(Act act, Locale locale) {
         String emailTo = act.getContract().getUser().getEmail1();
         if (this.emailSentToUserExclusionList.contains(emailTo)) {
             LOGGER.debug("Email not set cause user " + emailTo + " belongs to "
@@ -359,41 +351,89 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         String emailFrom = bundle.getString(RECIPIENT_KEY);
         Set<String> emailToSet = new HashSet<String>();
         emailToSet.add(emailTo);
-        StringBuilder projectName = new StringBuilder();
-        projectName.append(act.getContract().getLabel());
-        if (act.getScope().getCode().equals(ScopeEnum.SCENARIO)) {
-            projectName.append(" - ");
-            // the name of the scenario is persisted on engine's side as the URL
-            // of the parent WebResource
-//            projectName.append(act.getWebResource().getURL());
-            projectName.append(act.getAudit().getSubject().getURL());
-        }
         if (act.getStatus().equals(ActStatus.COMPLETED)) {
-            String emailSubject = bundle.getString(SUCCESS_SUBJECT_KEY).replaceAll(PROJECT_NAME_TO_REPLACE, projectName.toString());
-            StringBuilder emailMessage = new StringBuilder();
-            emailMessage.append(computeSuccessfulMessageOnActTerminated(act, bundle, projectName.toString()));
-            emailSender.sendEmail(emailFrom, emailToSet, emailSubject, emailMessage.toString());
-            LOGGER.debug("success email sent to " + emailTo);
+            sendSuccessfulMessageOnActTerminated(act, bundle, emailFrom, emailToSet, getProjectNameFromAct(act));
         } else if (act.getStatus().equals(ActStatus.ERROR)) {
-            String emailSubject = bundle.getString(ERROR_SUBJECT_KEY).replaceAll(PROJECT_NAME_TO_REPLACE, projectName.toString());
-            StringBuilder emailMessage = new StringBuilder();
-            emailMessage.append(computeFailureMessageOnActTerminated(act, bundle, projectName.toString()));
-            emailSender.sendEmail(emailFrom, emailToSet, emailSubject, emailMessage.toString());
-            LOGGER.debug("error email sent " + emailTo);
+            sendFailureMessageOnActTerminated(act, bundle, emailFrom, emailToSet, getProjectNameFromAct(act));
         }
      }
 
     /**
-     *
+     * 
+     * @param act
+     * @param locale
+     * @param exception 
+     */
+    private void sendKrashAuditEmail(Act act, Locale locale, Exception exception) {
+        ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME, locale);
+        String emailFrom = bundle.getString(RECIPIENT_KEY);
+        String projectName = getProjectNameFromAct(act);
+        
+        if (isAllowedToSendKrashReport && CollectionUtils.isNotEmpty(krashReportMailList)) {
+            Set<String> emailToSet = new HashSet<String>();
+            emailToSet.addAll(krashReportMailList);
+            String host ="";
+            try { 
+                host = InetAddress.getLocalHost().getHostName();
+            } catch (UnknownHostException uhe) {}
+
+            String msgSubject = bundle.getString(KRASH_ADMIN_SUBJECT_KEY);
+            msgSubject = StringUtils.replace(msgSubject, PROJECT_NAME_TO_REPLACE, projectName);
+            msgSubject = StringUtils.replace(msgSubject, HOST_TO_REPLACE, host);
+            
+            String msgContent = bundle.getString(KRASH_ADMIN_MSG_CONTENT_KEY);
+            msgContent = StringUtils.replace(msgContent, PROJECT_NAME_TO_REPLACE, projectName);
+            msgContent = StringUtils.replace(msgContent, USER_EMAIL_TO_REPLACE, act.getContract().getUser().getEmail1());
+            msgContent = StringUtils.replace(msgContent, HOST_TO_REPLACE, host);
+            msgContent = StringUtils.replace(msgContent, EXCEPTION_TO_REPLACE, ExceptionUtils.getStackTrace(exception));
+            if (act.getAudit().getSubject() != null) {
+                msgContent = StringUtils.replace(msgContent, AUDIT_URL_TO_REPLACE, act.getAudit().getSubject().getURL());
+            }
+            LOGGER.info("krash email sent to "+krashReportMailList);
+            sendEmail(emailFrom, emailToSet, msgSubject, msgContent);
+        }
+
+        String emailTo = act.getContract().getUser().getEmail1();
+        if (this.emailSentToUserExclusionList.contains(emailTo)) {
+            LOGGER.debug("Email not set cause user " + emailTo + " belongs to "
+                    + "exlusion list");
+            return;
+        }
+        Set<String> emailToSet = new HashSet<String>();
+        emailToSet.add(emailTo);
+        String msgSubject = bundle.getString(KRASH_SUBJECT_KEY);
+        msgSubject = StringUtils.replace(msgSubject, PROJECT_NAME_TO_REPLACE, projectName);
+        String msgContent = bundle.getString(KRASH_MSG_CONTENT_KEY);
+        msgContent = StringUtils.replace(msgContent, PROJECT_NAME_TO_REPLACE, projectName);
+        msgContent = StringUtils.replace(msgContent, PROJECT_URL_TO_REPLACE, buildContractUrl(act.getContract()));
+        LOGGER.info("krash email sent to [" + emailTo+"]");
+        sendEmail(emailFrom, emailToSet, msgSubject, msgContent);
+    }
+    
+    /**
+     * 
      * @param act
      * @param bundle
-     * @return
+     * @param emailFrom
+     * @param emailTo
+     * @param projectName 
      */
-    private String computeSuccessfulMessageOnActTerminated(Act act, ResourceBundle bundle, String projectName) {
-        String messageContent =
-                    bundle.getString(SUCCESS_MSG_CONTENT_KEY).
-                    replaceAll(URL_TO_REPLACE, buildResultUrl(act));
-        return messageContent.replaceAll(PROJECT_NAME_TO_REPLACE, projectName);
+    private void sendSuccessfulMessageOnActTerminated(
+            Act act,
+            ResourceBundle bundle, 
+            String emailFrom, 
+            Set<String> emailTo, 
+            String projectName) {
+        
+        String emailSubject = bundle.getString(SUCCESS_SUBJECT_KEY).
+                replaceAll(PROJECT_NAME_TO_REPLACE, projectName.toString());
+        
+        String messageContent = bundle.getString(SUCCESS_MSG_CONTENT_KEY);
+        messageContent = messageContent.replaceAll(URL_TO_REPLACE, buildResultUrl(act));
+        messageContent = messageContent.replaceAll(PROJECT_NAME_TO_REPLACE, projectName);
+        
+        LOGGER.debug("success email sent to " + emailTo);
+        sendEmail(emailFrom, emailTo, emailSubject, messageContent);
     }
 
     /**
@@ -402,7 +442,13 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
      * @param bundle
      * @return
      */
-    private String computeFailureMessageOnActTerminated(Act act, ResourceBundle bundle, String projectName) {
+    private void sendFailureMessageOnActTerminated(
+            Act act, 
+            ResourceBundle bundle, 
+            String emailFrom, 
+            Set<String> emailTo,
+            String projectName) {
+        String emailSubject = bundle.getString(ERROR_SUBJECT_KEY).replaceAll(PROJECT_NAME_TO_REPLACE, projectName.toString());
         String messageContent;
         if (act.getScope().getCode().equals(ScopeEnum.DOMAIN)) {
             messageContent = bundle.getString(SITE_ERROR_MSG_CONTENT_KEY);
@@ -411,9 +457,30 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         }
         messageContent = messageContent.replaceAll(PROJECT_URL_TO_REPLACE, buildContractUrl(act.getContract()));
         messageContent = messageContent.replaceAll(URL_TO_REPLACE, buildResultUrl(act));
-        return messageContent.replaceAll(PROJECT_NAME_TO_REPLACE, projectName);
+        messageContent = messageContent.replaceAll(PROJECT_NAME_TO_REPLACE, projectName);
+        LOGGER.debug("failure email sent to " + emailTo);
+        sendEmail(emailFrom, emailTo, emailSubject, messageContent);
     }
-
+    
+    /**
+     * 
+     * @param emailFrom
+     * @param emailToSet
+     * @param emailSubject
+     * @param emailMessage 
+     */
+    private void sendEmail(
+            String emailFrom, 
+            Set<String> emailToSet, 
+            String emailSubject, 
+            String emailMessage) {
+        emailSender.sendEmail(
+                emailFrom, 
+                emailToSet, 
+                emailSubject, 
+                emailMessage.toString());
+    }
+    
     /**
      * 
      * @param act
@@ -422,18 +489,8 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
     private String buildResultUrl (Act act) {
         StringBuilder strb = new StringBuilder();
         strb.append(webappUrl);
-        ScopeEnum scope = act.getScope().getCode();
-        if (scope.equals(ScopeEnum.DOMAIN)) {
-            strb.append(siteResultUrlSuffix);
-        } else if (scope.equals(ScopeEnum.GROUPOFPAGES) || scope.equals(ScopeEnum.GROUPOFFILES)) {
-            strb.append(groupResultUrlSuffix);
-        } else if (scope.equals(ScopeEnum.FILE) || scope.equals(ScopeEnum.PAGE)) {
-            strb.append(pageResultUrlSuffix);
-        } else if (scope.equals(ScopeEnum.SCENARIO)) {
-            strb.append(scenarioResultUrlSuffix);
-        }
+        strb.append(pageResultUrlSuffix);
         strb.append(act.getAudit().getId());
-//        strb.append(act.getWebResource().getId());
         return strb.toString();
     }
     
@@ -465,7 +522,24 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         actDataService.saveOrUpdate(act);
         return act;
     }
-
+    
+    /**
+     * 
+     * @param act
+     * @return 
+     */
+    private String getProjectNameFromAct(Act act) {
+        StringBuilder projectName = new StringBuilder();
+        projectName.append(act.getContract().getLabel());
+        if (act.getScope().getCode().equals(ScopeEnum.SCENARIO)) {
+            projectName.append(" - ");
+            // the name of the scenario is persisted on engine's side as the URL
+            // of the parent WebResource
+            projectName.append(act.getAudit().getSubject().getURL());
+        }
+        return projectName.toString();
+    }
+    
     /**
      * 
      */
@@ -552,6 +626,15 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             this.locale = locale;
         }
         
+        private Exception exception = null;
+        public Exception getException() {
+            return exception;
+        }
+
+        public void setException(Exception exception) {
+            this.exception = exception;
+        }
+        
         public AuditThread(
                 AuditService auditService,
                 Act act,
@@ -572,7 +655,6 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             Audit currentAudit = launchAudit();
             currentAudit = this.waitForAuditToComplete(currentAudit);
             this.getAuditService().remove(this);
-//            this.getCurrentAct().setWebResource(currentAudit.getSubject());
             this.getCurrentAct().setAudit(currentAudit);
             onActTerminated(this.getCurrentAct(), currentAudit);
         }
@@ -620,8 +702,8 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
                 Long token = this.auditExecutionList.get(auditCrashed);
                 this.auditExecutionList.remove(auditCrashed);
                 this.auditCrashedList.put(token, new AbstractMap.SimpleImmutableEntry<Audit, Exception>(audit, exception));
+                this.exception = exception;
             }
-            onActTerminated(currentAct, audit);
         }
 
         protected Audit waitForAuditToComplete(Audit audit) {
@@ -640,12 +722,14 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
                 this.getAuditCompletedList().remove(token);
                 return audit;
             }
-            auditCrashed(this.getAuditCrashedList().get(token).getKey(), this.getAuditCrashedList().get(token).getValue());
+            if ((audit = this.getAuditCrashedList().get(token).getKey()) != null) {
+                this.getAuditCrashedList().remove(token);
+                return audit;
+            }
             return null;
         }
         
         protected void onActTerminated(Act act, Audit audit) {
-            LOGGER.debug("act is terminated");
             this.audit = audit;
             Date endDate = new Date();
             act.setEndDate(endDate);
@@ -654,7 +738,13 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             } else {
                 act.setStatus(ActStatus.ERROR);
             }
-            actDataService.saveOrUpdate(act);
+            act = actDataService.saveOrUpdate(act);
+            if (exception != null) {
+                sendKrashAuditEmail(act, locale, exception);
+                actDataService.delete(act.getId());
+                auditDataService.delete(audit.getId());
+                this.audit = null;
+            }
         }
     }
     
@@ -687,7 +777,9 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         @Override
         protected void onActTerminated(Act act, Audit audit) {
             super.onActTerminated(act, audit);
-            sendEmail(act, getLocale());
+            if (getException() == null) {
+                sendAuditResultEmail(act, getLocale());
+            }
             LOGGER.info("site audit terminated");
         }
 
@@ -726,7 +818,9 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         @Override
         protected void onActTerminated(Act act, Audit audit) {
             super.onActTerminated(act, audit);
-            sendEmail(act, getLocale());
+            if (getException() == null) {
+                sendAuditResultEmail(act, getLocale());
+            }
             LOGGER.info("scenario audit terminated");
         }
 
@@ -764,8 +858,8 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         @Override
         protected void onActTerminated(Act act, Audit audit) {
             super.onActTerminated(act, audit);
-            if (isAuditTerminatedAfterTimeout()) {
-                sendEmail(act, getLocale());
+            if (isAuditTerminatedAfterTimeout() && getException() == null) {
+                sendAuditResultEmail(act, getLocale());
             }
         }
 
