@@ -185,7 +185,7 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
             return;
         }
         if (auditExecutionList.size() < auditExecutionListMax) {
-            synchronized (lastToken) {
+            synchronized (lastToken) {  
                 Long token = new Date().getTime();
                 while (token - lastToken < 10) {
                     try {
@@ -220,8 +220,8 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
     @Override
     public void auditCrashed(AuditServiceThread thread, Exception exception) {
         if (!pageAuditExecutionList.remove(thread) &&
-                scenarioAuditExecutionList.remove(thread) &&
-                    uploadAuditExecutionList.remove(thread)) {
+                !scenarioAuditExecutionList.remove(thread) &&
+                    !uploadAuditExecutionList.remove(thread)) {
             siteAuditExecutionList.remove(thread);
         }
         fireAuditCrashed(thread.getAudit(), exception);
