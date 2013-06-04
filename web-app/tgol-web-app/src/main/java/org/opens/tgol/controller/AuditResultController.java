@@ -34,6 +34,7 @@ import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.service.reference.CriterionDataService;
+import org.opens.tanaguru.entity.service.statistics.CriterionStatisticsDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -143,6 +144,16 @@ public class AuditResultController extends AuditDataHandlerController {
     @Autowired
     public void setCriterionDataService(CriterionDataService criterionDataService) {
         this.criterionDataService = criterionDataService;
+    }
+    
+    private CriterionStatisticsDataService criterionStatisticsDataService;
+    public CriterionStatisticsDataService getCriterionStatisticsDataService() {
+        return criterionStatisticsDataService;
+    }
+
+    @Autowired
+    public void setCriterionStatisticsDataService(CriterionStatisticsDataService criterionStatisticsDataService) {
+        this.criterionStatisticsDataService = criterionStatisticsDataService;
     }
     
     /**
@@ -388,7 +399,7 @@ public class AuditResultController extends AuditDataHandlerController {
             asuc = AuditResultSortCommandFactory.getInstance().getInitialisedAuditResultSortCommand(
                         webResourceId,
                         displayScope,
-                        authorizedRefForCriterionViewList.contains(referentialParameter),
+                        isCriterionViewAccessible(webResourceId, referentialParameter),
                         formFieldList);
         } else {
             formFieldList = AuditResultSortCommandFactory.getInstance().
@@ -397,6 +408,11 @@ public class AuditResultController extends AuditDataHandlerController {
         }
         model.addAttribute(TgolKeyStore.AUDIT_RESULT_SORT_FIELD_LIST_KEY, formFieldList);
         model.addAttribute(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY, asuc);
+    }
+    
+    private boolean isCriterionViewAccessible(Long webResourceId, String referentialParameter) {
+        return authorizedRefForCriterionViewList.contains(referentialParameter) && 
+                criterionStatisticsDataService.getCriterionStatisticsCountByWebResource(webResourceId) > 0;
     }
     
     /**

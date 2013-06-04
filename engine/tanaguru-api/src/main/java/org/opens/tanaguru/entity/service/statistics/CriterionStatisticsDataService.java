@@ -63,11 +63,20 @@ public interface CriterionStatisticsDataService
     /**
      * 
      * @param webResource
-     * @return
+     * @param theme
+     * @param testSolution
+     * @return 
      */
     Collection<CriterionStatistics> getCriterionStatisticsByWebResource(
             WebResource webResource,
             String theme,
             Collection<String> testSolution);
-
+    
+    /**
+     * 
+     * @param webResourceId
+     * @return 
+     */
+    Long getCriterionStatisticsCountByWebResource(Long webResourceId);
+    
 }

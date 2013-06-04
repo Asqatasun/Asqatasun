@@ -66,5 +66,10 @@ public class CriterionStatisticsDataServiceImpl extends AbstractGenericDataServi
                         theme, 
                         testSolution);
     }
+    
+    @Override
+    public Long getCriterionStatisticsCountByWebResource(Long webResourceId) {
+        return ((CriterionStatisticsDAO) entityDao).findCriterionStatisticsCountByWebResource(webResourceId);
+    }
 
 }
