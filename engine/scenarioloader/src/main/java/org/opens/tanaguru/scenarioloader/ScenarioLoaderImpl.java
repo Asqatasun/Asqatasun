@@ -21,6 +21,7 @@
  */
 package org.opens.tanaguru.scenarioloader;
 
+import org.opens.tanaguru.scenarioloader.exception.ScenarioLoaderException;
 import com.sebuilder.interpreter.Script;
 import com.sebuilder.interpreter.factory.ScriptFactory;
 import com.sebuilder.interpreter.factory.TestRunFactory;
@@ -81,11 +82,6 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         this.webResource = webResource;
     }
     
-//    private HarFileContentLoaderFactory harFileContentLoaderFactory;
-//    public void setHarFileContentLoaderFactory(HarFileContentLoaderFactory harFileContentLoaderFactory) {
-//        this.harFileContentLoaderFactory = harFileContentLoaderFactory;
-//    }
-
 //    private SnapshotDataService snapshotDataService;
 //    public void setSnapshotDataService(SnapshotDataService snapshotDataService) {
 //        this.snapshotDataService = snapshotDataService;
@@ -163,7 +159,6 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
             HarFileContentLoaderFactory harFileContentLoaderFactory) {
         super();
         this.scenario = scenario;
-//        this.harFileContentLoaderFactory = harFileContentLoaderFactory;
         this.profileFactory = ProfileFactory.getInstance();
         this.webResource = webResource;
     }
@@ -188,28 +183,16 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
                     LOGGER.info(webResource.getURL() + " failed");
                 }
             } catch (RuntimeException re) {
-                LOGGER.info("RuntimeException  ?");
                 LOGGER.warn(re.getMessage());
+                throw new ScenarioLoaderException(re);
             }    
-            // Call to the harFileContentLoader to retrieve fetched data
-//            HarFileContentLoader harFileContentLoader = 
-//                    harFileContentLoaderFactory.create(
-//                        webResource, 
-//                        profileFactory.getNetExportPath(firefoxProfile));
-//            harFileContentLoader.run();
-//            result.addAll(harFileContentLoader.getResult());
-//            addAdaptedSourceToSSP(harFileContentLoader.getResult());
-            // The profileFactory maintains an internal to associate a profile 
-            // with a generated folder on which the result Har files are written.
-            // When the scenario is terminated and all data have been retrieved
-            // the entry into this map has to be removed.
             profileFactory.shutdownFirefoxProfile(firefoxProfile);
         } catch (IOException ex) {
-            LOGGER.info("IOException  ?");
             LOGGER.warn(ex.getMessage());
+            throw new ScenarioLoaderException(ex);
         } catch (JSONException ex) {
-            LOGGER.info("JSONException  ?");
             LOGGER.warn(ex.getMessage());
+            throw new ScenarioLoaderException(ex);
         }
     }
 
@@ -267,38 +250,6 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
                     page);
             preProcessResultDataService.saveOrUpdate(ppr);
         }
-        
-        // XXX : To do, remove these lines if the har file reader is never used
-//        try {
-//            SSPInfo sspInfo = new SSPInfo(url, new String(sourceCode.getBytes(), charset));
-//            sspInfoList.add(sspInfo);
-//            LOGGER.info("afeter encode " + sspInfo.getSourceCode());
-    //        Page page = null;
-    //        if (webResource instanceof Page) {
-    //            if (!StringUtils.equals(url, webResource.getURL())) {
-    //                webResource.setURL(url);
-    //            }
-    //            page = (Page)webResource;
-    //        } else if (webResource instanceof Site) {
-    //            page = webResourceDataService.createPage(url);
-    //            ((Site) webResource).addChild(page);
-    //        }
-    //        page = (Page) webResourceDataService.saveOrUpdate(page);
-    //        Content content = contentFactory.createSSP(
-    //                dateFactory.createDate(),
-    //                page.getURL(),
-    //                sourceCode,
-    //                page,
-    //                HttpStatus.SC_OK);
-    //        contentDataService.saveOrUpdate(content);
-    //        if (result == null) {
-    //            result = new ArrayList<Content>();
-    //        }
-    //        result.add(content);
-//        } catch (UnsupportedEncodingException ex) {
-//            java.util.logging.Logger.getLogger(ScenarioLoaderImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        
     }
     
     @Override
@@ -309,38 +260,6 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
             Map<String, String> jsScriptMap) {
         fireNewSSP(url, sourceCode, snapshot, jsScriptMap);
     }
-
-    /**
-     * All the SSP are initialised with the raw html extracted from the Har file.
-     * The interpreted HTML has been precedently retrieved from the scenario 
-     * executor. This method is supposed to reassociate the SSP with their 
-     * interpreted HTML. 
-     */
-//    private void addAdaptedSourceToSSP (List<Content> contentList) {
-//        Iterator<SSPInfo> iter = sspInfoList.iterator();
-//        for (Content content : contentList) {
-//            if (content instanceof SSP && iter.hasNext()) {
-//                SSP ssp = (SSP) content;
-//                String uri = ssp.getURI();
-//                LOGGER.info(uri);
-//                if (ssp.getHttpStatusCode() == HttpStatus.SC_OK) {
-//                    Page page = getWebResource(uri);
-//                    String sourceCode = iter.next().getSourceCode();
-//                    try {
-//                        ssp.setCharset(CrawlUtils.extractCharset(new StringInputStream(sourceCode)));
-//                        Logger.getLogger(this.getClass()).info("charset " + ssp.getCharset());
-//                    } catch (IOException ex) {
-//                        ssp.setCharset(UFT8);
-//                    }
-//                    ssp.setSource(encodeSourceCodeToUtf8(sourceCode, ssp.getCharset()));
-//                    ssp.setPage(page);
-//                }
-//            }
-//            Logger.getLogger(this.getClass()).debug("new content added " + content.getURI());
-//            contentDataService.saveOrUpdate(content);
-//            result.add(content);
-//        }
-//    }
 
     private Page getWebResource(String url) {
         Page page = null;
