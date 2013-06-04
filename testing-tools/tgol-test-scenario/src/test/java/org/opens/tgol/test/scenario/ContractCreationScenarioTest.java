@@ -65,7 +65,7 @@ public class ContractCreationScenarioTest extends AbstractWebDriverTestClass {
     /**
      * 
      */
-    public void testContractCreationWithErrors() {
+    public void testContractCreation() {
 
         loginAsRoot();
         createNewContract();

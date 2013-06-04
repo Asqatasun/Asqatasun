@@ -58,13 +58,14 @@ public class ContractCreationWithErrorsScenarioTest extends AbstractWebDriverTes
         driver.findElement(By.xpath(NEW_USER_CONTRACT_MNGT_XPATH_LOCATION.replaceAll("x",findNewUserRowIndexLocation()))).click();
         //----- At this time the id of the new user appears in an url for the first time
         extractedIdOfNewUser();
+        
         //-----
         checkTextPresence("Manage contracts");
         checkTextPresence("Contract list");
         checkTextPresence("Add a contract");
         checkTextPresence("No contracts");
         
-        goToAddContractPage();
+        goToAddUserContractPage();
         checkTextPresence("Add a contract to");
         
         submitEditUserContract();
