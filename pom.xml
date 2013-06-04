@@ -772,10 +772,10 @@
                         <groupId>eclipse</groupId>
                         <artifactId>jdtcore</artifactId>
                     </exclusion>
-                    <exclusion>
+<!--                    <exclusion>
                         <groupId>com.lowagie</groupId>
                         <artifactId>itext</artifactId>
-                    </exclusion>
+                    </exclusion>-->
                 </exclusions>
             </dependency>
             <dependency>
