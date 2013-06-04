@@ -6,12 +6,12 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>3.0.0-SNAPSHOT</version>
+        <version>3.0.0-beta2</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>tgol-persistence</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.0.0-beta2</version>
     <name>tgol-persistence</name>
     <url>http://www.tanaguru.org</url>
     <dependencies>
