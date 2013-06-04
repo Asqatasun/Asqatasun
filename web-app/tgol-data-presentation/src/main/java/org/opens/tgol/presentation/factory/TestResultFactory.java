@@ -501,8 +501,8 @@ public final class TestResultFactory {
         int lineNumber;
         // The doctype is added when the result is displayed.
         // When the doctype is not null, each line remark has to be
-        // one-line-shifted
-        lineNumber = remark.getLineNumber();
+        // one-line-negative-shifted
+        lineNumber = remark.getLineNumber()-1;
         return lineNumber;
     }
 
