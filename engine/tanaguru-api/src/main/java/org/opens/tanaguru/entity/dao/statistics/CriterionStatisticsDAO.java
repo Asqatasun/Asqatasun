@@ -75,5 +75,12 @@ public interface CriterionStatisticsDAO extends GenericDAO<CriterionStatistics, 
             WebResource webResource,
             String theme,
             Collection<String> testSolution);
+    
+    /**
+     * 
+     * @param webResourceId
+     * @return 
+     */
+    Long findCriterionStatisticsCountByWebResource(Long webResourceId);
 
 }

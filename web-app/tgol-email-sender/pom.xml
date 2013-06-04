@@ -6,12 +6,12 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>3.0.0-beta2</version>
+        <version>3.0.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>tgol-email-sender</artifactId>
-    <version>3.0.0-beta2</version>
+    <version>3.0.0-SNAPSHOT</version>
     <name>tgol-email-sender</name>
     <url>http://www.tanaguru.org</url>
     <dependencies>

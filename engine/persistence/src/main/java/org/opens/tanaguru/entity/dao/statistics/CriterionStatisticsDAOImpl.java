@@ -1,14 +1,23 @@
 /*
- * @(#)ThemeStatisticsDAOImpl.java
+ * Tanaguru - Automated webpage assessment
+ * Copyright (C) 2008-2013  Open-S Company
  *
- * Copyright  2011 SAS OPEN-S. All rights reserved.
- * OPEN-S PROPRIETARY/CONFIDENTIAL.  Use is subject to license terms.
+ * This file is part of Tanaguru.
  *
- * This file is  protected by the  intellectual  property rights
- * in  France  and  other  countries, any  applicable  copyrights  or
- * patent rights, and international treaty provisions. No part may be
- * reproduced  in  any  form  by  any  mean  without   prior  written
- * authorization of OPEN-S.
+ * Tanaguru is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact us by mail: open-s AT open-s DOT com
  */
 
 package org.opens.tanaguru.entity.dao.statistics;
@@ -151,6 +160,23 @@ public class CriterionStatisticsDAOImpl extends AbstractJPADAO<CriterionStatisti
             return query.getResultList();
         } catch (NoResultException e) {
             return null;
+        }
+    }
+
+    @Override
+    public Long findCriterionStatisticsCountByWebResource(Long webResourceId) {
+        StringBuilder strb = new StringBuilder();
+        strb.append("SELECT count(cs.id) FROM ");
+        strb.append(getEntityClass().getName());
+        strb.append(" cs ");
+        strb.append(" JOIN cs.webResourceStatistics wrs ");
+        strb.append(" WHERE wrs.webResource.id=:webResourceId ");
+        Query query = entityManager.createQuery(strb.toString());
+        query.setParameter("webResourceId", webResourceId);
+        try {
+            return (Long)query.getSingleResult();
+        } catch (NoResultException e) {
+            return Long.valueOf(0);
         }
     }
 
