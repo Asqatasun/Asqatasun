@@ -92,11 +92,12 @@ public final class ActInfoFactory {
             Audit audit = act.getAudit();
             
             actInfo.setAuditId(audit.getId().intValue());
-            
             actInfo.setScope(act.getScope().getCode().name());
             
             WebResource wr = audit.getSubject();
-            actInfo.setUrl(wr.getURL());
+            if (wr != null) {
+                actInfo.setUrl(wr.getURL());
+            }
             
             if (audit.getStatus().equals(AuditStatus.COMPLETED)) {
                 actInfo.setWeightedMark(webResourceDataService.getMarkByWebResourceAndAudit(wr, false).intValue());
