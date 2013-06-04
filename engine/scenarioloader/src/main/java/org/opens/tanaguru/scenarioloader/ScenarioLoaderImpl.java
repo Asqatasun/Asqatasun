@@ -51,6 +51,7 @@ import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sebuilder.interpreter.NewPageListener;
+import org.opens.tanaguru.sebuilder.interpreter.exception.TestRunException;
 import org.opens.tanaguru.sebuilder.interpreter.factory.TgStepTypeFactory;
 import org.opens.tanaguru.sebuilder.interpreter.factory.TgTestRunFactory;
 import org.opens.tanaguru.sebuilder.tools.ProfileFactory;
@@ -182,6 +183,10 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
                 } else {
                     LOGGER.info(webResource.getURL() + " failed");
                 }
+            } catch (TestRunException tre) {
+                // The TestRunException is caught but not as runtime, to audit
+                // at least page already fetched
+                LOGGER.warn(tre.getMessage());
             } catch (RuntimeException re) {
                 LOGGER.warn(re.getMessage());
                 throw new ScenarioLoaderException(re);

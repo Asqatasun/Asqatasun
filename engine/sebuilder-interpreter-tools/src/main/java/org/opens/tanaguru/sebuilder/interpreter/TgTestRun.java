@@ -41,6 +41,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.opens.tanaguru.sebuilder.interpreter.exception.TestRunException;
 
 /**
  * A single run of a test getScript().
@@ -170,7 +171,7 @@ public class TgTestRun extends TestRun {
             getLog().error(currentStep() + " failed.", e);
 
             reset();
-            throw new RuntimeException(currentStep() + " failed.", e);
+            throw new TestRunException(currentStep() + " failed.", e);
         }
 
         if (!result) {
@@ -180,7 +181,7 @@ public class TgTestRun extends TestRun {
                 return false;
             }
             // In all other cases, we throw an exception to stop the run.
-            RuntimeException e = new RuntimeException(currentStep() + " failed.");
+            RuntimeException e = new TestRunException(currentStep() + " failed.");
             e.fillInStackTrace();
             getLog().error(e);
             reset();
