@@ -273,20 +273,26 @@ public class TanaguruCrawlJob {
 
         } catch (IOException ex) {
             LOGGER.error(ex);
+            throw new CrawlerException(ex);
         } catch (ParserConfigurationException ex) {
             LOGGER.error(ex);
+            throw new CrawlerException(ex);
         }  catch (SAXException ex) {
             LOGGER.error(ex);
+            throw new CrawlerException(ex);
         } catch (TransformerConfigurationException ex) {
             LOGGER.error(ex);
+            throw new CrawlerException(ex);
         } catch (TransformerException ex) {
             LOGGER.error(ex);
+            throw new CrawlerException(ex);
         } finally {
             if (in != null) {
                 try {
                     in.close();
                 } catch (IOException ex) {
                     LOGGER.error(ex);
+                    throw new CrawlerException(ex);
                 }
             }
             if (fw != null) {
@@ -294,6 +300,7 @@ public class TanaguruCrawlJob {
                     fw.close();
                 } catch (IOException ex) {
                     LOGGER.error(ex);
+                    throw new CrawlerException(ex);
                 }
             }
         }
