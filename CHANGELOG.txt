@@ -1,4 +1,109 @@
 --------------------------
+Tanaguru 3.0.0-beta2, 2013-06-04
+--------------------------
+Bugs:
+
+Features:
+#595 : 	Management of Krash audits (https://dev.tanaguru.org/redmine/issues/595)
+#593 :	Link the act entity to the audit instead of the webresource (https://dev.tanaguru.org/redmine/issues/593)
+#592 :	Embed a java library to highlight source code instead of using geshi (https://dev.tanaguru.org/redmine/issues/592)
+#591 :  Upgrade apache commons libraries (https://dev.tanaguru.org/redmine/issues/591)
+
+--------------------------
+Tanaguru 3.0.0-beta1, 2013-04-05
+--------------------------
+
+Bugs : 
+#538 : The sort contract by mark doesn't work in the contract view (https://dev.tanaguru.org/redmine/issues/538)
+
+Features:
+#590 : Provide a self-structured csv entry that handles ProcessRemarks info and Evidence Elements data (https://dev.tanaguru.org/redmine/issues/590)
+#583 : Use css-phloc as css adapter and parser (https://dev.tanaguru.org/redmine/issues/583)
+#582 : Use jsoup as html adapter (https://dev.tanaguru.org/redmine/issues/582)
+#581 : Create sebuilder-interpreter-tool subproject based on sebuilder-interpreter api
+#580 : Upgrade to Heritrix 3.1.0 version
+#579 : Clean-up dependencies
+#552 : Clean-up SSPHandler and DOMHandler to remove unused primitives
+#551 : Provide a mechanism to avoid to launch tests that return NOT_TESTED as result [OPTIMIZATION]
+#550 : Improve ergonomy of audit result pages
+#549 : Compute criterion results while analysing
+#548 : Introduce the criterionStatistics entity
+#547 : Add an audit result view with criterion results
+#534 : Button "audit again"
+#283 : Separate NMI from Untested
+#163 : Add a "please wait" page after submit and before audit result
+
+Tanaguru 2.1.1, 2013-04-15
+--------------------------
+Bugs:
+#589 -> syntax of web.xml invalid (https://dev.tanaguru.org/redmine/issues/589)
+#588 -> Provide a mechanism to avoid multiple form validation when submitting an audit (https://dev.tanaguru.org/redmine/issues/588)
+#587 -> Downgrade version of commons-collections due to compatibily issue encountered on deployment on Jboss (https://dev.tanaguru.org/redmine/issues/587)
+#540 -> CastException occured while auditing multiple files. (https://dev.tanaguru.org/redmine/issues/540)
+
+--------------------------
+Tanaguru 2.1.0, 2012-11-07
+--------------------------
+
+Bugs:
+#516 : site-wide exports: add "page+site" results (https://dev.tanaguru.org/redmine/issues/516)
+#327 : Error on adaptation encountered on some pages of a site audit causes Fatal error in processor component (https://dev.tanaguru.org/redmine/issues/327)
+
+Features:
+#524 -> Provide a UI to override test weights for a given user  (https://dev.tanaguru.org/redmine/issues/524)
+#523 -> Add weight field to the TEST entity and use it to compute the raw mark  (https://dev.tanaguru.org/redmine/issues/523)
+#522 -> Provide a page that lists the pages invalidating a given test  (https://dev.tanaguru.org/redmine/issues/522)
+#520 -> Provide a back office interface  (https://dev.tanaguru.org/redmine/issues/520)
+#515 -> list of pages: change link destination (audit // page itself)  (https://dev.tanaguru.org/redmine/issues/515)
+#514 -> Bar graph on page audit-synthesis: put red at the bottom  (https://dev.tanaguru.org/redmine/issues/514)
+#416 -> Avoid the usage of type wildcard  (https://dev.tanaguru.org/redmine/issues/416)
+#271 -> Add console to the project-page  (https://dev.tanaguru.org/redmine/issues/271)
+
+--------------------------
+Tanaguru 2.0.1, 2012-09-19
+--------------------------
+Bugs:
+#510 -> The externalCssRetriever when a new css is fetched during adaptationThe cssContentAdapter implementation doesn't alert (https://dev.tanaguru.org/redmine/issues/510)
+
+Features:
+#509 ->	Make the different treatment window parameters of the AuditCommand implementation configurable (https://dev.tanaguru.org/redmine/issues/509)
+#506 -> Linkify the URLs (SEO 6.4.1 + SEO 7.6.1) (https://dev.tanaguru.org/redmine/issues/506)
+
+--------------------------
+Tanaguru 2.0.0, 2012-08-30
+--------------------------
+Bugs:
+#446 -> Audit crash on www.letc.fr: infinite loop with @import (https://dev.tanaguru.org/redmine/issues/446)
+#428 -> the getImageFromUrl() method of the SSPHandler implementation can't deal with embedded pictures (https://dev.tanaguru.org/redmine/issues/428)
+#426 -> The snapshot displayed in the synthesis result page in the case of a Scenario Audit is wrong (https://dev.tanaguru.org/redmine/issues/426)
+#424 -> The content of the scenario, present as a hidden field in the audit scenario set-up form, has to be removed (https://dev.tanaguru.org/redmine/issues/424)
+#422 -> Site-audit unable to run -> mail content shrunk (https://dev.tanaguru.org/redmine/issues/422)
+#419 -> Page audit fails if "http://" is missing in the URL (https://dev.tanaguru.org/redmine/issues/419)
+#414 -> .ods Export for SEO doesn't work (https://dev.tanaguru.org/redmine/issues/414)
+#407 -> bad link in email sent for a scenario audit (https://dev.tanaguru.org/redmine/issues/407)
+#404 -> Site audits crash when at least one SSP among the set of SSP hasn't been adapted (https://dev.tanaguru.org/redmine/issues/404)
+#398 -> Audit Options: rename "Accessibility level" into "Level" (https://dev.tanaguru.org/redmine/issues/398)
+#395 -> Parts of <head> deleted by Adapter Component (https://dev.tanaguru.org/redmine/issues/395)
+
+Features:
+#425 -> Add getter/setter to the "timeout" attribute of the TgolHighlighter class to allow to overidde the default value by spring configuration (https://dev.tanaguru.org/redmine/issues/425)
+#418 -> Launch page-audits via webdriver (https://dev.tanaguru.org/redmine/issues/418)
+#408 -> Email sent for a scenario: should include the scenario name (https://dev.tanaguru.org/redmine/issues/408)
+#406 -> Add a link to the source code in the page result page (https://dev.tanaguru.org/redmine/issues/406)
+#405 -> Remove the weighted mark from the different views (https://dev.tanaguru.org/redmine/issues/405)
+#402 -> Add new view to set-up scenario and launch audit (https://dev.tanaguru.org/redmine/issues/402)
+#401 -> Implementation of Har file reader (https://dev.tanaguru.org/redmine/issues/401)
+#400 -> Retrieve external CSS while adapting SSP (if not already retrieved during the crawl) (https://dev.tanaguru.org/redmine/issues/400)
+#399 -> Add a rank field to the WebResource entity (https://dev.tanaguru.org/redmine/issues/399)
+#365 -> Add referential info in the audit list contract info page (https://dev.tanaguru.org/redmine/issues/365)
+#337 -> Evolution of AuditService API to enable to launch a scenario audit (https://dev.tanaguru.org/redmine/issues/337)
+#336 -> Create a new Scenario loader module with an implementation that uses the WebDriver API (https://dev.tanaguru.org/redmine/issues/336)
+#280 -> Export: PDF format (https://dev.tanaguru.org/redmine/issues/280)
+#279 -> Export: CSV format (https://dev.tanaguru.org/redmine/issues/279) 
+#270 -> Audit sites with a given scenario (https://dev.tanaguru.org/redmine/issues/270)
+#269 -> Audit sites with authentication (https://dev.tanaguru.org/redmine/issues/269)
+
+--------------------------
 Tanaguru 1.5.2-RC1, 2012-05-04
 --------------------------
 Bugs:

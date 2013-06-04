@@ -1,6 +1,6 @@
                    ------------------------------
                              Tanaguru
-                            Version 1.5.0
+                            Version 3.0.0-beta2
                   ------------------------------
 
 1. Web Resources
@@ -59,8 +59,13 @@ that can be found at :
 
 6. Content of the version 
 =========================
+Bugs:
 
-
+Features:
+#595 : 	Management of Krash audits (https://dev.tanaguru.org/redmine/issues/595)
+#593 :	Link the act entity to the audit instead of the webresource (https://dev.tanaguru.org/redmine/issues/593)
+#592 :	Embed a java library to highlight source code instead of using geshi (https://dev.tanaguru.org/redmine/issues/592)
+#591 :  Upgrade apache commons libraries (https://dev.tanaguru.org/redmine/issues/591)
 
 Have Fun
 Tanaguru team
