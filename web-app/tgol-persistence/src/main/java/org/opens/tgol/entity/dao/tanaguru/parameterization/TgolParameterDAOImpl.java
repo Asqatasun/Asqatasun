@@ -135,15 +135,13 @@ public class TgolParameterDAOImpl extends AbstractJPADAO<Parameter, Long>
         StringBuilder queryString = new StringBuilder();
         queryString.append("SELECT distinct(p.Parameter_Value) FROM");
         queryString.append(" TGSI_ACT as a,");
-        queryString.append(" TGSI_ACT_WEB_RESOURCE as tawr,");
-        queryString.append(" WEB_RESOURCE as w, ");
+        queryString.append(" TGSI_ACT_AUDIT as taa,");
         queryString.append(" AUDIT_PARAMETER as ap, ");
         queryString.append(" PARAMETER as p, ");
         queryString.append(" PARAMETER_ELEMENT as pe ");
         queryString.append(" WHERE a.Id_Act=:idAct");
-        queryString.append(" AND a.Id_Act=tawr.ACT_Id_Act");
-        queryString.append(" AND tawr.WEB_RESOURCE_Id_Web_Resource=w.Id_Web_Resource");
-        queryString.append(" AND w.Id_Audit=ap.Id_Audit");
+        queryString.append(" AND a.Id_Act=taa.ACT_Id_Act");
+        queryString.append(" AND taa.AUDIT_Id_Audit=ap.Id_Audit");
         queryString.append(" AND ap.Id_Parameter=p.Id_Parameter");
         queryString.append(" AND p.Id_Parameter_Element=:idParameterElement");
         Query query = entityManager.createNativeQuery(queryString.toString());
