@@ -256,7 +256,7 @@
                                             <img src="${goToImgUrl}" alt="<fmt:message key="pageList.goTo"/> ${failedPageInfo.webResourceUrl}">
                                         </a>
                                     </span>
-                                    <a href="<c:url value="/home/contract/audit-result.html?wr=${failedPageInfo.webResourceId}"/>" title="<fmt:message key="pageList.pageDetailedResult"></fmt:message> <fmt:message key="pageList.for"></fmt:message> ${failedPageInfo.webResourceUrl}">
+                                    <a href="<c:url value="/home/contract/page-result.html?wr=${failedPageInfo.webResourceId}"/>" title="<fmt:message key="pageList.pageDetailedResult"></fmt:message> <fmt:message key="pageList.for"></fmt:message> ${failedPageInfo.webResourceUrl}">
                                         ${failedPageInfo.webResourceUrl}
                                     </a>
                                 </td>
