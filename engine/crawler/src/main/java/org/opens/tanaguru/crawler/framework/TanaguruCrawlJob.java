@@ -51,6 +51,7 @@ import org.archive.modules.deciderules.DecideRuleSequence;
 import org.archive.net.UURIFactory;
 import org.archive.spring.PathSharingContext;
 import org.opens.tanaguru.crawler.ContentWriter;
+import org.opens.tanaguru.crawler.exception.CrawlerException;
 import org.opens.tanaguru.crawler.extractor.listener.ExtractorCSSListener;
 import org.opens.tanaguru.crawler.extractor.listener.ExtractorHTMLListener;
 import org.opens.tanaguru.crawler.processor.TanaguruWriterProcessor;
@@ -153,6 +154,7 @@ public class TanaguruCrawlJob {
                     Thread.sleep(CRAWL_LAUNCHER_RETRY_TIMEOUT);
                 } catch (InterruptedException ex) {
                     LOGGER.error(ex);
+                    throw new CrawlerException(ex);
                 }
             }
         }
