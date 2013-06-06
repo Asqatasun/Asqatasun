@@ -76,8 +76,7 @@ public class AbstractWebDriverTestClass extends TestCase {
     protected static final String NEW_USER_PASSWORD = "AabB1234";
     protected static final String NEW_CONTRACT_LABEL = "CONTRACT LABEL";
     
-    private static final String USER_CONFIG_PATH_KEY = "user_config_path";
-    private static final String FIREFOX_LOCATION_KEY = "firefox_bin_location";
+//    private static final String FIREFOX_LOCATION_KEY = "firefox_bin_location";
     
     private static final String LOGIN_URL_KEY = "login_url";
     private static final String LOGOUT_URL_KEY = "logout_url";
@@ -100,7 +99,7 @@ public class AbstractWebDriverTestClass extends TestCase {
     private static final String USER_KEY = "admin_user";
     private static final String HOST_LOCATION_KEY = "host_location";
     private static final String PASSWORD_KEY = "admin_password";
-    private static final String FIREFOX_SYSTEM_PROPERTY = "webdriver.firefox.bin";
+//    private static final String FIREFOX_SYSTEM_PROPERTY = "webdriver.firefox.bin";
     
     /*
      * Context info
@@ -110,8 +109,6 @@ public class AbstractWebDriverTestClass extends TestCase {
         return hostLocation;
     }
 
-    
-    private String userConfigFilePath;
     private String firefoxLocation;
     
     // Url info
@@ -157,44 +154,35 @@ public class AbstractWebDriverTestClass extends TestCase {
      *
      */
     private void initialize(){
+
+        // These parameters has to passed as JVM argument
+        user = System.getProperty(USER_KEY);
+//        System.out.println(user);
+        password = System.getProperty(PASSWORD_KEY);
+//        System.out.println(password);
+        hostLocation = System.getProperty(HOST_LOCATION_KEY);
+//        System.out.println(hostLocation);
+//        firefoxLocation = System.getProperty(FIREFOX_LOCATION_KEY);
+//        System.out.println(firefoxLocation);
+        
         ResourceBundle parametersBundle = ResourceBundle.getBundle(BUNDLE_NAME);
         
         userFieldName = parametersBundle.getString(USER_FIELD_NAME_KEY);
         passwordFieldName = parametersBundle.getString(PASSWORD_FIELD_NAME_KEY);
-        userConfigFilePath = parametersBundle.getString(USER_CONFIG_PATH_KEY);
-        
-        PropertiesConfiguration config = null;
-        
-        try {
-            config = new PropertiesConfiguration(userConfigFilePath);
-        } catch (ConfigurationException ex) {
-            java.util.logging.Logger.
-                    getLogger(AbstractTanaguruOnlineTest.class.getName()).
-                        log(Level.SEVERE, null, ex);
-        }
-        
-        user = config.getString(USER_KEY);
-        password = config.getString(PASSWORD_KEY);
-        
-        hostLocation = config.getString(HOST_LOCATION_KEY);
-        firefoxLocation = config.getString(FIREFOX_LOCATION_KEY);
-        
-        loginUrl = hostLocation + config.getString(LOGIN_URL_KEY);
-        logoutUrl = hostLocation + config.getString(LOGOUT_URL_KEY);
-        adminUrl = hostLocation + config.getString(ADMIN_URL_KEY);
-        addUserUrl = hostLocation + config.getString(ADD_USER_URL_KEY);
-        editUserUrl = hostLocation + config.getString(EDIT_USER_URL_KEY);
-        deleteUserUrl = hostLocation + config.getString(DELETE_USER_URL_KEY);
-        addContractUrl = hostLocation + config.getString(ADD_CONTRACT_URL_KEY);
-        contractUrl = hostLocation + config.getString(CONTRACT_URL_KEY);
-        auditPagesSetupUrl = hostLocation + config.getString(AUDIT_PAGES_URL_KEY);
-        auditSiteSetupUrl = hostLocation + config.getString(AUDIT_SITE_URL_KEY);
-        auditUploadSetupUrl = hostLocation + config.getString(AUDIT_UPLOAD_URL_KEY);
-        auditScenarioSetupUrl = hostLocation + config.getString(AUDIT_SCENARIO_URL_KEY);
-        addUserContractUrl = hostLocation + config.getString(ADD_USER_CONTRACT_URL_KEY);
-        editUserContractUrl = hostLocation + config.getString(EDIT_USER_CONTRACT_URL_KEY);
-        
-        System.setProperty(FIREFOX_SYSTEM_PROPERTY, firefoxLocation);
+        loginUrl = hostLocation + parametersBundle.getString(LOGIN_URL_KEY);
+        logoutUrl = hostLocation + parametersBundle.getString(LOGOUT_URL_KEY);
+        adminUrl = hostLocation + parametersBundle.getString(ADMIN_URL_KEY);
+        addUserUrl = hostLocation + parametersBundle.getString(ADD_USER_URL_KEY);
+        editUserUrl = hostLocation + parametersBundle.getString(EDIT_USER_URL_KEY);
+        deleteUserUrl = hostLocation + parametersBundle.getString(DELETE_USER_URL_KEY);
+        addContractUrl = hostLocation + parametersBundle.getString(ADD_CONTRACT_URL_KEY);
+        contractUrl = hostLocation + parametersBundle.getString(CONTRACT_URL_KEY);
+        auditPagesSetupUrl = hostLocation + parametersBundle.getString(AUDIT_PAGES_URL_KEY);
+        auditSiteSetupUrl = hostLocation + parametersBundle.getString(AUDIT_SITE_URL_KEY);
+        auditUploadSetupUrl = hostLocation + parametersBundle.getString(AUDIT_UPLOAD_URL_KEY);
+        auditScenarioSetupUrl = hostLocation + parametersBundle.getString(AUDIT_SCENARIO_URL_KEY);
+        addUserContractUrl = hostLocation + parametersBundle.getString(ADD_USER_CONTRACT_URL_KEY);
+        editUserContractUrl = hostLocation + parametersBundle.getString(EDIT_USER_CONTRACT_URL_KEY);
         
         if (driver == null) {
             driver = new FirefoxDriver(new FirefoxProfile());
