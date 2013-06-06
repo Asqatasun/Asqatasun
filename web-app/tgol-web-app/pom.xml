@@ -229,20 +229,11 @@
             <groupId>org.apache.tika</groupId>
             <artifactId>tika-core</artifactId>
         </dependency>
-<!--        <dependency>
-            <groupId>batik</groupId>
-            <artifactId>batik-svggen</artifactId>
-        </dependency>-->
         <dependency>
             <groupId>com.googlecode.htmlcompressor</groupId>
             <artifactId>htmlcompressor</artifactId>
             <version>1.5.2</version>
         </dependency>
-<!--        <dependency>
-            <groupId>hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>-->
-<!--            <version>1.8.0.10</version>-->
-<!--        </dependency>-->
 
         <!-- web dependencies -->
         <dependency>
@@ -280,12 +271,6 @@
             <artifactId>easymockclassextension</artifactId>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>
-            <artifactId>tagsoup</artifactId>
-            <groupId>org.ccil.cowan.tagsoup</groupId>
-            <type>pom</type>
-            <version>1.2.1</version>
-        </dependency>-->
     </dependencies>
     <build>
         <plugins>
@@ -313,9 +298,7 @@
                         <exclude>**/*min.js</exclude>
                         <exclude>**/*.css</exclude>
                     </excludes>
-                    <failOnWarning>false</failOnWarning><!--
-                    <jswarn>true</jswarn>-->
-<!--                    <outputDirectory>min</outputDirectory>-->
+                    <failOnWarning>false</failOnWarning>
                 </configuration>
             </plugin>
         </plugins>
@@ -343,11 +326,15 @@
                                 </goals>
                                 <configuration>
                                     <tasks>
-                                        <scp file="${project.build.directory}/${project.build.finalName}.war" todir="${qa.deployPath}" keyfile="${qa.keyFile}" passphrase="${qa.passPhrase}" />
+                                        <scp  file="${project.build.directory}/${project.build.finalName}.war" 
+                                              remoteToDir="${qa.deployPath}" 
+                                              remoteToFile="ROOT.war" 
+                                              keyfile="${qa.keyFile}" 
+                                              passphrase="${qa.passPhrase}" />
                                         <!-- see also: http://ant.apache.org/manual/Tasks/scp.html -->
-                                        <exec executable="/bin/sh">
+<!--                                        <exec executable="/bin/sh">
                                             <arg value="/root/bin/restart-tg-instance.sh"/>
-                                        </exec>
+                                        </exec>-->
                                     </tasks>
                                 </configuration>
                             </execution>
@@ -360,43 +347,6 @@
                             </dependency>
                         </dependencies>
                     </plugin>
-                    <plugin>
-                        <groupId>net.alchim31.maven</groupId>
-                        <artifactId>yuicompressor-maven-plugin</artifactId>
-                        <executions>
-                        <execution>
-                            <goals>
-                                <goal>compress</goal>
-                            </goals>
-                        </execution>
-                        </executions>        
-                        <configuration>
-                            <excludes>
-                                <exclude>**/*min.js</exclude>
-                                <exclude>**/*.css</exclude>
-                            </excludes>
-                            <failOnWarning>false</failOnWarning>
-                            <jswarn>true</jswarn>
-                        </configuration>
-                    </plugin>
-<!--                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <version>1.2</version>
-                        <executions>
-                            <execution>
-                                <id>tomcat-stop</id>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>exec</goal>
-                                </goals>
-                                <configuration>
-                                    <executable>/bin/sh</executable>
-                                    <commandlineArgs>/root/bin/restart-tg-instance.sh</commandlineArgs>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>-->
                 </plugins>
             </build>
         </profile>
