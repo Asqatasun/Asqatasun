@@ -327,8 +327,7 @@
                                 <configuration>
                                     <target>
                                         <scp  file="${project.build.directory}/${project.build.finalName}.war" 
-                                              remoteToDir="${qa.deployPath}" 
-                                              remoteToFile="ROOT.war" 
+                                              todir="${qa.deployPath}/ROOT.war" 
                                               keyfile="${qa.keyFile}" 
                                               passphrase="${qa.passPhrase}" />
                                         <!-- see also: http://ant.apache.org/manual/Tasks/scp.html -->
