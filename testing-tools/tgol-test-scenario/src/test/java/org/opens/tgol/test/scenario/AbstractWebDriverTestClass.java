@@ -22,16 +22,12 @@
 package org.opens.tgol.test.scenario;
 
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import junit.framework.TestCase;
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.opens.tanaguru.webapp.test.AbstractTanaguruOnlineTest;
 
 /**
  *
@@ -76,8 +72,6 @@ public class AbstractWebDriverTestClass extends TestCase {
     protected static final String NEW_USER_PASSWORD = "AabB1234";
     protected static final String NEW_CONTRACT_LABEL = "CONTRACT LABEL";
     
-//    private static final String FIREFOX_LOCATION_KEY = "firefox_bin_location";
-    
     private static final String LOGIN_URL_KEY = "login_url";
     private static final String LOGOUT_URL_KEY = "logout_url";
     private static final String ADD_USER_URL_KEY = "add_user_url";
@@ -99,7 +93,6 @@ public class AbstractWebDriverTestClass extends TestCase {
     private static final String USER_KEY = "admin_user";
     private static final String HOST_LOCATION_KEY = "host_location";
     private static final String PASSWORD_KEY = "admin_password";
-//    private static final String FIREFOX_SYSTEM_PROPERTY = "webdriver.firefox.bin";
     
     /*
      * Context info
@@ -109,8 +102,6 @@ public class AbstractWebDriverTestClass extends TestCase {
         return hostLocation;
     }
 
-    private String firefoxLocation;
-    
     // Url info
     private String loginUrl;
     private String logoutUrl;
@@ -157,13 +148,8 @@ public class AbstractWebDriverTestClass extends TestCase {
 
         // These parameters has to passed as JVM argument
         user = System.getProperty(USER_KEY);
-//        System.out.println(user);
         password = System.getProperty(PASSWORD_KEY);
-//        System.out.println(password);
         hostLocation = System.getProperty(HOST_LOCATION_KEY);
-//        System.out.println(hostLocation);
-//        firefoxLocation = System.getProperty(FIREFOX_LOCATION_KEY);
-//        System.out.println(firefoxLocation);
         
         ResourceBundle parametersBundle = ResourceBundle.getBundle(BUNDLE_NAME);
         
