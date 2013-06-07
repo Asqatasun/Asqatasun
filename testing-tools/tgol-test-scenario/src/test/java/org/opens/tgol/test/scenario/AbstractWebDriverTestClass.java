@@ -191,6 +191,9 @@ public class AbstractWebDriverTestClass extends TestCase {
             if (xvfbDisplay != null) {
                 Logger.getLogger(this.getClass()).info("Setting Xvfb display with value "+xvfbDisplay);
                 ffBinary.setEnvironmentProperty("DISPLAY", xvfbDisplay);
+            } else {
+                Logger.getLogger(this.getClass()).info("System.getProperty(XVFB_DISPLAY_KEY) : "+System.getProperty(XVFB_DISPLAY_KEY));
+                Logger.getLogger(this.getClass()).info("System.getProperty(XVFB_DISPLAY_KEY) : "+System.getProperties());
             }
             driver = new FirefoxDriver(ffBinary,new FirefoxProfile());
         }
