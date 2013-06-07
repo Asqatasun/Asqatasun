@@ -98,7 +98,7 @@ public class KbCsvMojo extends AbstractMojo {
                 
                 String ruleUrl = baseUrl + params[0] + "/" + params[1] + "/";
                 for (int i = 0; i < KB_TEST_RESULTS.length; i++) {
-                    String url = ruleUrl + KB_TEST_RESULTS[i];
+                    String url = ruleUrl + KB_TEST_RESULTS[i]+"/";
 
                     try {
                         for (String result : getUrls(url)) {
