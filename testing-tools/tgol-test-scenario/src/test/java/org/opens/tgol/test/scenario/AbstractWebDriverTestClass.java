@@ -163,14 +163,9 @@ public class AbstractWebDriverTestClass extends TestCase {
 
         // These parameters has to passed as JVM argument
         user = System.getProperty(USER_KEY);
-        Logger.getLogger(this.getClass()).info(System.getProperty(USER_KEY));
         password = System.getProperty(PASSWORD_KEY);
-        Logger.getLogger(this.getClass()).info(System.getProperty(PASSWORD_KEY));
         hostLocation = System.getProperty(HOST_LOCATION_KEY);
-        Logger.getLogger(this.getClass()).info(System.getProperty(HOST_LOCATION_KEY));
         xvfbDisplay = System.getProperty(XVFB_DISPLAY_KEY);
-        Logger.getLogger(this.getClass()).info(System.getProperty(XVFB_DISPLAY_KEY));
-
         
         ResourceBundle parametersBundle = ResourceBundle.getBundle(BUNDLE_NAME);
         
@@ -196,9 +191,6 @@ public class AbstractWebDriverTestClass extends TestCase {
             if (xvfbDisplay != null) {
                 Logger.getLogger(this.getClass()).info("Setting Xvfb display with value "+xvfbDisplay);
                 ffBinary.setEnvironmentProperty("DISPLAY", xvfbDisplay);
-            } else {
-                Logger.getLogger(this.getClass()).info("System.getProperty(XVFB_DISPLAY_KEY) : "+System.getProperty(XVFB_DISPLAY_KEY));
-                Logger.getLogger(this.getClass()).info("System.getProperty(XVFB_DISPLAY_KEY) : "+System.getProperties());
             }
             driver = new FirefoxDriver(ffBinary,new FirefoxProfile());
         }
