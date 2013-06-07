@@ -26,6 +26,7 @@ import junit.framework.TestCase;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
@@ -93,6 +94,7 @@ public class AbstractWebDriverTestClass extends TestCase {
     private static final String USER_KEY = "admin_user";
     private static final String HOST_LOCATION_KEY = "host_location";
     private static final String PASSWORD_KEY = "admin_password";
+    private static final String XVFB_DISPLAY_KEY = "xvfb_display";
     
     /*
      * Context info
@@ -102,7 +104,18 @@ public class AbstractWebDriverTestClass extends TestCase {
         return hostLocation;
     }
 
-    // Url info
+    /**
+     * Xvfb display port value used in headless mode
+     */
+    private String xvfbDisplay;
+    
+    /**
+     * Admin User info 
+     */
+    private String user;
+    private String password;
+    
+    // Application urls used to navigate
     private String loginUrl;
     private String logoutUrl;
     private String adminUrl;
@@ -118,12 +131,13 @@ public class AbstractWebDriverTestClass extends TestCase {
     private String addUserContractUrl;
     private String editUserContractUrl;
     
+    // field names to edit user info and login
     private String userFieldName;
     private String passwordFieldName;
     
-    private String user;
-    private String password;
-
+    /**
+     * The firefox driver
+     */
     FirefoxDriver driver;
     
     private String newUserId;
@@ -150,6 +164,7 @@ public class AbstractWebDriverTestClass extends TestCase {
         user = System.getProperty(USER_KEY);
         password = System.getProperty(PASSWORD_KEY);
         hostLocation = System.getProperty(HOST_LOCATION_KEY);
+        xvfbDisplay = System.getProperty(XVFB_DISPLAY_KEY);
         
         ResourceBundle parametersBundle = ResourceBundle.getBundle(BUNDLE_NAME);
         
@@ -171,7 +186,11 @@ public class AbstractWebDriverTestClass extends TestCase {
         editUserContractUrl = hostLocation + parametersBundle.getString(EDIT_USER_CONTRACT_URL_KEY);
         
         if (driver == null) {
-            driver = new FirefoxDriver(new FirefoxProfile());
+            FirefoxBinary ffBinary = new FirefoxBinary();
+            if (xvfbDisplay != null) {
+                ffBinary.setEnvironmentProperty("DISPLAY", xvfbDisplay);
+            }
+            driver = new FirefoxDriver(ffBinary,new FirefoxProfile());
         }
     }
     
@@ -329,8 +348,8 @@ public class AbstractWebDriverTestClass extends TestCase {
         webElement.clear();
         webElement.sendKeys(elementValue);
     }
-    
-    /**
+     
+   /**
      * 
      * @param elementName
      * @param elementValue 
@@ -347,7 +366,7 @@ public class AbstractWebDriverTestClass extends TestCase {
      */
     protected void checkTextPresence(String text) {
         if (!driver.findElement(By.tagName(HTML_TAG_NAME)).getText().contains(text)) {
-            driver.close();
+            closeDriverProperly();
             throw new RuntimeException(ASSERT_TEXT_PRESENT_FAILED);
         }
     }
@@ -358,7 +377,7 @@ public class AbstractWebDriverTestClass extends TestCase {
      */
     protected void checkElementTextPresence(String element,String value) {
         if (!driver.findElement(By.xpath(element)).getText().contains(value)) {
-            driver.close();
+            closeDriverProperly();
             throw new RuntimeException(ASSERT_TEXT_FAILED);
         }
     }
@@ -369,7 +388,7 @@ public class AbstractWebDriverTestClass extends TestCase {
      */
     protected void checkElementTextAbsence(String element,String value) {
         if (driver.findElement(By.xpath(element)).getText().contains(value)) {
-            driver.close();
+            closeDriverProperly();
             throw new RuntimeException(ASSERT_TEXT_FAILED);
         }
     }
@@ -380,7 +399,7 @@ public class AbstractWebDriverTestClass extends TestCase {
      */
     protected void checkElementTextPresenceByCssSelector(String element,String value) {
         if (!driver.findElement(By.cssSelector(element)).getText().contains(value)) {
-            driver.close();
+            closeDriverProperly();
             throw new RuntimeException(ASSERT_TEXT_FAILED);
         }
     }
@@ -412,6 +431,18 @@ public class AbstractWebDriverTestClass extends TestCase {
      */
     protected void extractedIdOfNewContract() {
         newContractId = driver.getCurrentUrl().substring(driver.getCurrentUrl().indexOf("=")+1);
+    }
+    
+    /**
+     * Close the driver properly and delete enventually the new user to leave
+     * with a proper context
+     */
+    private void closeDriverProperly() {
+        logout();
+        loginAsRoot();
+        deleteNewUser();
+        logout();
+        driver.close();
     }
     
     /**
