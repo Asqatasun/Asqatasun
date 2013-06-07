@@ -22,11 +22,10 @@ public class $class.name extends AbstractTanaguruOnlineTest {
     }
 
     public void test$test$model.result () {
-        String response = launchTanaguru(siteName, url);
+        String response = launchTanaguru(siteName, url, true);
         String krashtestResult = computeWebappResult(response);
         if (krashtestResult.equals(KrashtestResult.SUCCESS.toString())) {
-            String functionnalResult = computeWebappResult(
-                response, testName);
+            String functionnalResult = computeTestResult(testName);
             TestSolution testSolution = TestSolution.$model.result;
             assertEquals(testSolution.toString(), functionnalResult);
         } else {
