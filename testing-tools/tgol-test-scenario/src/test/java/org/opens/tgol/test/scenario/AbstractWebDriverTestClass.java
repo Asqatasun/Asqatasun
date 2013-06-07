@@ -24,6 +24,7 @@ package org.opens.tgol.test.scenario;
 import java.util.ResourceBundle;
 import junit.framework.TestCase;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxBinary;
@@ -91,10 +92,10 @@ public class AbstractWebDriverTestClass extends TestCase {
     private static final String USER_FIELD_NAME_KEY = "user_field_name";
     private static final String PASSWORD_FIELD_NAME_KEY = "password_field_name";
     
-    private static final String USER_KEY = "admin_user";
-    private static final String HOST_LOCATION_KEY = "host_location";
-    private static final String PASSWORD_KEY = "admin_password";
-    private static final String XVFB_DISPLAY_KEY = "xvfb_display";
+    private static final String USER_KEY = "admin.user";
+    private static final String HOST_LOCATION_KEY = "host.location";
+    private static final String PASSWORD_KEY = "admin.password";
+    private static final String XVFB_DISPLAY_KEY = "xvfb.display";
     
     /*
      * Context info
@@ -188,6 +189,7 @@ public class AbstractWebDriverTestClass extends TestCase {
         if (driver == null) {
             FirefoxBinary ffBinary = new FirefoxBinary();
             if (xvfbDisplay != null) {
+                Logger.getLogger(this.getClass()).info("Setting Xvfb display with value "+xvfbDisplay);
                 ffBinary.setEnvironmentProperty("DISPLAY", xvfbDisplay);
             }
             driver = new FirefoxDriver(ffBinary,new FirefoxProfile());
