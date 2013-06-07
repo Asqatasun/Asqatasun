@@ -20,7 +20,7 @@ public class $class.name extends AbstractTanaguruOnlineTest {
 
     public void testWebappResult(){
         assertEquals(KrashtestResult.SUCCESS.toString(), computeWebappResult(
-                launchTanaguru(siteName, url)));
+                launchTanaguru(siteName, url, false)));
     }
 
 }
