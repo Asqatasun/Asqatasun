@@ -163,9 +163,14 @@ public class AbstractWebDriverTestClass extends TestCase {
 
         // These parameters has to passed as JVM argument
         user = System.getProperty(USER_KEY);
+        Logger.getLogger(this.getClass()).info(System.getProperty(USER_KEY));
         password = System.getProperty(PASSWORD_KEY);
+        Logger.getLogger(this.getClass()).info(System.getProperty(PASSWORD_KEY));
         hostLocation = System.getProperty(HOST_LOCATION_KEY);
+        Logger.getLogger(this.getClass()).info(System.getProperty(HOST_LOCATION_KEY));
         xvfbDisplay = System.getProperty(XVFB_DISPLAY_KEY);
+        Logger.getLogger(this.getClass()).info(System.getProperty(XVFB_DISPLAY_KEY));
+
         
         ResourceBundle parametersBundle = ResourceBundle.getBundle(BUNDLE_NAME);
         
