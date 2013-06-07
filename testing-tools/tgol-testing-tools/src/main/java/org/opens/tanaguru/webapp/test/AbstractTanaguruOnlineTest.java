@@ -21,16 +21,10 @@
  */
 package org.opens.tanaguru.webapp.test;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Date;
-
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import junit.framework.TestCase;
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -39,70 +33,86 @@ import org.opens.tanaguru.webapp.test.data.KrashtestResult;
 /**
  * This class uses Selenium to automatically test tanaguru in web
  * application mode.
- * The test.properties file defines the url and the name of the webapp to test
+ * The url of the webapp to test, the user and password to login, the contract id, 
+ * the firefox binary location and the xvfb display value are passed as JVM
+ * arguments
  * @author jkowalczyk
  */
 public abstract class AbstractTanaguruOnlineTest extends TestCase {
 
+    private final Logger LOGGER  = Logger.getLogger(this.getClass());
     private static final String LOADING_ERROR_STR_EN =
             "A problem occured while loading the content of the page";
     private static final String PROCESSING_ERROR_STR_EN =
             "A problem occured while adapting the page";
-    private static final String LOADING_ERROR_STR_FR =
-            "Une erreur est survenue lors du chargement de la page";
-    private static final String PROCESSING_ERROR_STR_FR =
-            "Une erreur est survenue lors de l'adaptation de la page";
-    private static final String PASSED_KEY ="passed";
-    private static final String FAILED_KEY ="failed";
-    private static final String NMI_KEY ="nmi";
-    private static final String NA_KEY ="na";
+    
+    /**
+     * Keys in result page that enable to determine the result of the test
+     */
+    private static final String PASSED_KEY ="Passed";
+    private static final String FAILED_KEY ="Failed";
+    private static final String NMI_KEY ="Need More Information";
+    private static final String NA_KEY ="Not Applicable";
+    private static final String NT_KEY ="Not tested";
     private static final String SUCCESS_STR1 = "tgm-result-page"; // class associated with result page
     private static final String SUCCESS_STR2 = "tgm-page-list-f2xx"; // class associated with page-list-f2xx
-    private static final String BUNDLE_NAME = "test";
-    private static final String RESULT_PATH_KEY = "result_path";
-    private static final String USER_CONFIG_PATH_KEY = "user_config_path";
-    private static final String FIREFOX_LOCATION_KEY = "firefox_bin_location";
-    private static final String HOST_LOCATION_KEY = "host_location";
+        public static final String RULE_NOT_YET_IMPLEMENTED =
+            "RULE_NOT_YET_IMPLEMENTED";
     
+    /**
+     * Parameters keys retrieved through property file
+     */
+    private static final String BUNDLE_NAME = "test";
     private static final String LOGIN_URL_KEY = "login_url";
     private static final String LOGOUT_URL_KEY = "logout_url";
-    
+    private static final String FORM_URL_KEY = "form_url";
     private static final String FIELD_NAME_KEY = "field_name";
     private static final String USER_FIELD_NAME_KEY = "user_field_name";
     private static final String PASSWORD_FIELD_NAME_KEY = "password_field_name";
     
+    /**
+     * Parameters keys passed as JVM arguments
+     */
     private static final String USER_KEY = "user";
     private static final String PASSWORD_KEY = "password";
-    private static final String FORM_URL_KEY = "form_url";
+    private static final String CONTRACT_ID_KEY = "contract.id";
+    private static final String HOST_LOCATION_KEY = "host.location";
+    private static final String XVFB_DISPLAY_KEY = "xvfb.display";
     
-    private static final String TEXT_EXTENSION = ".txt";
+    /**
+     * Submit elements in the page
+     */
     private static final String SUBMIT_BUTTON_NAME = "launch-audit-submit";
     private static final String LOGIN_BUTTON_NAME = "Login";
-    private static final String FIREFOX_SYSTEM_PROPERTY = "webdriver.firefox.bin";
     
-    public static final String RULE_NOT_YET_IMPLEMENTED =
-            "RULE_NOT_YET_IMPLEMENTED";
-    
-    private static final char DOUBLE_QUOTE_CHAR = '"';
-    private static final String RULE_RESULT_EXPRESSION = "rule-result ";
-    
-    protected String resultFilePath;
-    protected String userConfigFilePath;
-    
-    protected String hostLocation;
-    protected String firefoxLocation;
-    
+    // Application urls used to navigate
     protected String loginUrl;
     protected String logoutUrl;
     protected String formUrl;
     
+    // field names to edit user info and login
     protected String fieldName;
     protected String userFieldName;
     protected String passwordFieldName;
     
+    /**
+     * Xvfb display port value used in headless mode
+     */
+    private String xvfbDisplay;
+    /**
+     * User info
+     */
     protected String user;
     protected String password;
-
+    protected String contractId;
+    /**
+     * User info
+     */
+    protected String hostLocation;
+    /**
+     * The firefox driver. The webdriver.firefox.bin is supposed to passed
+     * as JVM argument.
+     */
     FirefoxDriver driver;
     
     /**
@@ -118,6 +128,7 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
     
     @Override
     public void tearDown() throws Exception {
+        driver.get(logoutUrl);
         driver.close();
         driver.quit();
     }
@@ -126,38 +137,29 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
      *
      */
     private void initialize(){
-        ResourceBundle parametersBundle = ResourceBundle.getBundle(BUNDLE_NAME);
-        resultFilePath = parametersBundle.getString(RESULT_PATH_KEY);
-        userConfigFilePath = parametersBundle.getString(USER_CONFIG_PATH_KEY);
-        userFieldName = parametersBundle.getString(USER_FIELD_NAME_KEY);
-        passwordFieldName = parametersBundle.getString(PASSWORD_FIELD_NAME_KEY);
-        fieldName = parametersBundle.getString(FIELD_NAME_KEY);
+        // These parameters has to passed as JVM argument
+        user = System.getProperty(USER_KEY);
+        password = System.getProperty(PASSWORD_KEY);
+        hostLocation = System.getProperty(HOST_LOCATION_KEY);
+        contractId = System.getProperty(CONTRACT_ID_KEY);
+        xvfbDisplay = System.getProperty(XVFB_DISPLAY_KEY);
         
-        PropertiesConfiguration config = null;
-        try {
-            config = new PropertiesConfiguration(userConfigFilePath);
-        } catch (ConfigurationException ex) {
-            java.util.logging.Logger.
-                    getLogger(AbstractTanaguruOnlineTest.class.getName()).
-                        log(Level.SEVERE, null, ex);
-        }
-        
-        hostLocation = config.getString(HOST_LOCATION_KEY);
-        firefoxLocation = config.getString(FIREFOX_LOCATION_KEY);
-        
-        user = config.getString(USER_KEY);
-        password = config.getString(PASSWORD_KEY);
-        
-        loginUrl = hostLocation + config.getString(LOGIN_URL_KEY);
-        formUrl = hostLocation + config.getString(FORM_URL_KEY);
-        logoutUrl = hostLocation + config.getString(LOGOUT_URL_KEY);
-        
-        System.setProperty(FIREFOX_SYSTEM_PROPERTY, firefoxLocation);
+        ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME);
+        userFieldName = bundle.getString(USER_FIELD_NAME_KEY);
+        passwordFieldName = bundle.getString(PASSWORD_FIELD_NAME_KEY);
+        fieldName = bundle.getString(FIELD_NAME_KEY);
+        loginUrl = hostLocation + bundle.getString(LOGIN_URL_KEY);
+        formUrl = hostLocation + bundle.getString(FORM_URL_KEY) + contractId;
+        logoutUrl = hostLocation + bundle.getString(LOGOUT_URL_KEY);
         
         if (driver == null) {
-            driver = new FirefoxDriver(new FirefoxProfile());
+            FirefoxBinary ffBinary = new FirefoxBinary();
+            if (xvfbDisplay != null) {
+                Logger.getLogger(this.getClass()).info("Setting Xvfb display with value " + xvfbDisplay);
+                ffBinary.setEnvironmentProperty("DISPLAY", xvfbDisplay);
+            }
+            driver = new FirefoxDriver(ffBinary, new FirefoxProfile());
         }
-
     }
 
     /**
@@ -166,19 +168,23 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
      * @param url
      * @return
      */
-    protected String launchTanaguru(String siteName, String[] url) {
+    protected String launchTanaguru(String siteName, String[] url, boolean displayAllResult) {
         login();
         driver.get(formUrl);
         if (url.length>1) {
             driver.findElementByCssSelector("form#auditSetUpCommand fieldset div.clearfix div.url-input a").click();
         }
         for (int i=0 ; i<url.length ; i++) {
-            System.out.println("testing   " + url[i]);
+            LOGGER.info("testing   " + url[i]);
             driver.findElementById(fieldName+i).sendKeys(url[i]);
         }
         driver.findElementById(SUBMIT_BUTTON_NAME).submit();
+        if (displayAllResult) {
+            driver.findElementById("sortOptionMaptest-result5").click();
+            driver.findElementByCssSelector("#result-option-console-update input").submit();
+            driver.findElementByCssSelector("#expand-all").click();
+        }
         String responseBody = driver.getPageSource();
-        driver.get(logoutUrl);
         return responseBody;
     }
 
@@ -191,13 +197,12 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
         KrashtestResult webappResult = KrashtestResult.KRASH;
         if (bodyText.contains(SUCCESS_STR1) || bodyText.contains(SUCCESS_STR2)){
             webappResult = KrashtestResult.SUCCESS;
-        } else if (bodyText.contains(LOADING_ERROR_STR_FR) ||
-                bodyText.contains(LOADING_ERROR_STR_EN)) {
+        } else if (bodyText.contains(LOADING_ERROR_STR_EN)) {
             webappResult = KrashtestResult.ERROR_WHILE_LOADING;
-        } else if (bodyText.contains(PROCESSING_ERROR_STR_FR) ||
-                bodyText.contains(PROCESSING_ERROR_STR_EN)) {
+        } else if (bodyText.contains(PROCESSING_ERROR_STR_EN)) {
             webappResult = KrashtestResult.ERROR_WHILE_PROCESSING;
         }
+        LOGGER.info(webappResult.toString());
         return webappResult.toString();
     }
 
@@ -208,44 +213,26 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
      * @param testName
      * @return
      */
-    protected String computeWebappResult(String bodyText, String testName){
-        int indexFrom = bodyText.indexOf(testName);
-        if (indexFrom != -1) {
-            indexFrom = bodyText.indexOf(RULE_RESULT_EXPRESSION, indexFrom);
-            indexFrom = indexFrom+RULE_RESULT_EXPRESSION.length();
-            int indexTo = bodyText.indexOf(DOUBLE_QUOTE_CHAR, indexFrom);
-            String result = bodyText.substring(indexFrom, indexTo);
-            if (result.contains(PASSED_KEY)) {
-                return TestSolution.PASSED.name();
-            } else if (result.contains(FAILED_KEY)) {
-                return TestSolution.FAILED.name();
-            } else if (result.contains(NMI_KEY)) {
-                return TestSolution.NEED_MORE_INFO.name();
-            } else if (result.contains(NA_KEY)) {
-                return TestSolution.NOT_APPLICABLE.name();
-            } else {
-                return RULE_NOT_YET_IMPLEMENTED;
-            }
+    protected String computeTestResult(String testName){
+        LOGGER.info("Searching result for test " + testName);
+        String result= driver.findElementByXPath(
+                "//h4[text()='"
+                +testName+
+                "']/parent::*/parent::*/child::*/img")
+                .getAttribute("alt");
+        LOGGER.info("Found Result " + result);
+        if (result.contains(PASSED_KEY)) {
+            return TestSolution.PASSED.name();
+        } else if (result.contains(FAILED_KEY)) {
+            return TestSolution.FAILED.name();
+        } else if (result.contains(NMI_KEY)) {
+            return TestSolution.NEED_MORE_INFO.name();
+        } else if (result.contains(NA_KEY)) {
+            return TestSolution.NOT_APPLICABLE.name();
+        } else if (result.contains(NT_KEY)) {
+            return TestSolution.NOT_TESTED.name();
         } else {
             return RULE_NOT_YET_IMPLEMENTED;
-        } 
-    }
-
-    /**
-     * This method copies the tanaguru response in a file.
-     * (usefull for debugging)
-     * @param fileName
-     * @param content
-     */
-    private void writeResultInFile(String fileName, String content){
-        try {
-            FileWriter fw = new FileWriter(resultFilePath + fileName
-                    + '-' + new Date().getTime() + TEXT_EXTENSION);
-            fw.write(content);
-            fw.close();
-        } catch (IOException ex) {
-            Logger.getLogger(AbstractTanaguruOnlineTest.class.getName()).
-                    warn(ex.getMessage());
         }
     }
 
