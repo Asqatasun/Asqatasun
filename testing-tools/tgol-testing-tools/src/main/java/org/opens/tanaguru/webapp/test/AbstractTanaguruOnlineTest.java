@@ -129,8 +129,6 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
     @Override
     public void tearDown() throws Exception {
         driver.get(logoutUrl);
-        driver.close();
-        driver.quit();
     }
 
     /**
@@ -152,14 +150,7 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
         formUrl = hostLocation + bundle.getString(FORM_URL_KEY) + contractId;
         logoutUrl = hostLocation + bundle.getString(LOGOUT_URL_KEY);
         
-        if (driver == null) {
-            FirefoxBinary ffBinary = new FirefoxBinary();
-            if (xvfbDisplay != null) {
-                Logger.getLogger(this.getClass()).info("Setting Xvfb display with value " + xvfbDisplay);
-                ffBinary.setEnvironmentProperty("DISPLAY", xvfbDisplay);
-            }
-            driver = new FirefoxDriver(ffBinary, new FirefoxProfile());
-        }
+        driver = WebDriverFactory.getInstance().getFirefoxDriver(xvfbDisplay);
     }
 
     /**
