@@ -54,8 +54,10 @@ import org.opens.tanaguru.sebuilder.interpreter.NewPageListener;
 import org.opens.tanaguru.sebuilder.interpreter.exception.TestRunException;
 import org.opens.tanaguru.sebuilder.interpreter.factory.TgStepTypeFactory;
 import org.opens.tanaguru.sebuilder.interpreter.factory.TgTestRunFactory;
+import org.opens.tanaguru.sebuilder.tools.FirefoxDriverObjectPool;
 import org.opens.tanaguru.sebuilder.tools.ProfileFactory;
 import org.opens.tanaguru.util.factory.DateFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -139,6 +141,14 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         this.jsScriptMap = jsScriptMap;
     }
     
+    private FirefoxDriverObjectPool firefoxDriverObjectPool;
+    public FirefoxDriverObjectPool getFirefoxDriverObjectPool() {
+        return firefoxDriverObjectPool;
+    }
+
+    public void setFirefoxDriverObjectPool(FirefoxDriverObjectPool firefoxDriverObjectPool) {
+        this.firefoxDriverObjectPool = firefoxDriverObjectPool;
+    }
     
     /**
      * The scenario
@@ -167,21 +177,22 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
     @Override
     public void run() {
         try {
-            LOGGER.info("Launch Scenario "   + scenario );
+            LOGGER.debug("Launch Scenario "   + scenario );
             FirefoxProfile firefoxProfile = profileFactory.getScenarioProfile();
             TestRunFactory testRunFactory = new TgTestRunFactory();
             ((TgTestRunFactory)testRunFactory).addNewPageListener(this);
             ((TgTestRunFactory)testRunFactory).setFirefoxProfile(firefoxProfile);
             ((TgTestRunFactory)testRunFactory).setJsScriptMap(jsScriptMap);
+            ((TgTestRunFactory)testRunFactory).setFirefoxDriverObjectPool(firefoxDriverObjectPool);
             ScriptFactory scriptFactory = new ScriptFactory();
             scriptFactory.setTestRunFactory(testRunFactory);
             scriptFactory.setStepTypeFactory(new TgStepTypeFactory());
             Script script = scriptFactory.parse(scenario);
             try {
                 if (script.run()) {
-                    LOGGER.info(webResource.getURL()  + " succeeded");
+                    LOGGER.debug(webResource.getURL()  + " succeeded");
                 } else {
-                    LOGGER.info(webResource.getURL() + " failed");
+                    LOGGER.debug(webResource.getURL() + " failed");
                 }
             } catch (TestRunException tre) {
                 // The TestRunException is caught but not as runtime, to audit
@@ -212,9 +223,9 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
             byte[] snapshotContent, 
             Map<String, String> jsScriptMap) {
 
-        LOGGER.info("fire New SSP " + url);
+        LOGGER.debug("fire New SSP " + url);
         if (StringUtils.isEmpty(sourceCode)) {
-            LOGGER.info("Emtpy SSP " + url + " not saved");
+            LOGGER.debug("Emtpy SSP " + url + " not saved");
             return;
         }
         String charset = UFT8;

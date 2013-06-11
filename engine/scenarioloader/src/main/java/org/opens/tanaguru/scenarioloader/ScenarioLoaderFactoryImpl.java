@@ -32,6 +32,7 @@ import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.audit.PreProcessResultDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.sebuilder.tools.FirefoxDriverObjectPool;
 import org.opens.tanaguru.util.factory.DateFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -42,16 +43,6 @@ import org.springframework.core.io.Resource;
  * @author enzolalay
  */
 public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
-
-//    private HarFileContentLoaderFactory harFileContentLoaderFactory;
-//    public HarFileContentLoaderFactory getHarFileContentLoaderFactory() {
-//        return harFileContentLoaderFactory;
-//    }
-//
-//    @Autowired
-//    public void setHarFileContentLoaderFactory(HarFileContentLoaderFactory harFileContentLoaderFactory) {
-//        this.harFileContentLoaderFactory = harFileContentLoaderFactory;
-//    }
 
 //    private SnapshotDataService snapshotDataService;
 //    public SnapshotDataService getSnapshotDataService() {
@@ -123,6 +114,16 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
         this.preProcessResultFactory = preProcessResultFactory;
     }
     
+    private FirefoxDriverObjectPool firefoxDriverObjectPool;
+    public FirefoxDriverObjectPool getFirefoxDriverObjectPool() {
+        return firefoxDriverObjectPool;
+    }
+
+    @Autowired
+    public void setFirefoxDriverObjectPool(FirefoxDriverObjectPool firefoxDriverObjectPool) {
+        this.firefoxDriverObjectPool = firefoxDriverObjectPool;
+    }
+    
     private Map<String, String> jsScriptMap;
     public Map<String, String> getJsScriptMap() {
         return jsScriptMap;
@@ -161,11 +162,10 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
         scenarioLoader.setContentFactory(contentFactory);
         scenarioLoader.setDateFactory(dateFactory);
         scenarioLoader.setWebResourceDataService(webResourceDataService);
-//        scenarioLoader.setSnapshotDataService(snapshotDataService);
-//        scenarioLoader.setSnapshotFactory(snapshotFactory);
         scenarioLoader.setPreProcessResultFactory(preProcessResultFactory);
         scenarioLoader.setPreProcessResultDataService(preProcessResultDataService);
         scenarioLoader.setJsScriptMap(jsScriptMap);
+        scenarioLoader.setFirefoxDriverObjectPool(firefoxDriverObjectPool);
         return scenarioLoader;
     }
 
