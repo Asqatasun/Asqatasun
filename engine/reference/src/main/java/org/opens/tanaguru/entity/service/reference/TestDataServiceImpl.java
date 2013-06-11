@@ -102,10 +102,10 @@ public class TestDataServiceImpl extends AbstractGenericDataService<Test, Long>
             }
         }
         List<Test> testList = getAllByReferenceAndLevel(reference, level);
-//        if (LOGGER.isDebugEnabled()) {
-            LOGGER.error("Retrieved " + testList.size() + " test for the referential "
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Retrieved " + testList.size() + " test for the referential "
                 + reference.getLabel() + " and the level " + level.getLabel());
-//        }
+        }
         return testList;
     }
     
