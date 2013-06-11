@@ -99,6 +99,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
             + "WEB_RESOURCE as w "
             + "WHERE wrs.Id_Audit=:idAudit "
             + "AND wrs.Id_Web_Resource=w.Id_Web_Resource "
+            + "AND wrs.Http_Status_Code=200 "
             + "AND w.DTYPE=\'PageImpl\' ";
 
     private static final String TEST_LABEL_FIELD_STR ="t.Label";
