@@ -16,38 +16,9 @@
     <url>http://www.tanaguru.org</url>
     <build>
         <plugins>
-<!--            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.2</version>
-                <executions>
-                    <execution>
-                        <id>campaign-initialization</id>
-                        <phase>generate-test-sources</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>/bin/sh</executable>
-                            <commandlineArgs>/root/bin/selenium-my-restart.sh</commandlineArgs>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>tomcat-restart</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>/bin/sh</executable>
-                            <commandlineArgs>/root/bin/restart-tg-instance.sh</commandlineArgs>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>-->
             <plugin>
                 <groupId>${testingToolsGroupId}</groupId>
-                <artifactId>maven-testgenerator-plugin</artifactId>
+                <artifactId>tanaguru-maven-testgenerator-plugin</artifactId>
                 <version>${testingToolsVersion}</version>
                 <executions>
                     <execution>

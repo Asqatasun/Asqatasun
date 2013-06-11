@@ -19,7 +19,7 @@
         <plugins>
             <plugin>
                 <groupId>${testingToolsGroupId}</groupId>
-                <artifactId>maven-testgenerator-plugin</artifactId>
+                <artifactId>tanaguru-maven-testgenerator-plugin</artifactId>
                 <version>${testingToolsVersion}</version>
                 <executions>
                     <execution>

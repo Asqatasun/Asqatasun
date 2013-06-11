@@ -18,7 +18,7 @@
         <plugins>
             <plugin>
                 <groupId>${testingToolsGroupId}</groupId>
-                <artifactId>maven-kbcsv-plugin</artifactId>
+                <artifactId>tanaguru-maven-kbcsv-plugin</artifactId>
                 <version>${testingToolsVersion}</version>
                 <executions>
                     <execution>
@@ -36,7 +36,7 @@
             </plugin>
             <plugin>
                 <groupId>${testingToolsGroupId}</groupId>
-                <artifactId>maven-testgenerator-plugin</artifactId>
+                <artifactId>tanaguru-maven-testgenerator-plugin</artifactId>
                 <version>${testingToolsVersion}</version>
                 <executions>
                     <execution>
