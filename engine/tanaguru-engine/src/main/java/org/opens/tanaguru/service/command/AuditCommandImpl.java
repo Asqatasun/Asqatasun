@@ -213,7 +213,6 @@ public abstract class AuditCommandImpl implements AuditCommand {
      * @return 
      */
     private Audit initialiseAudit (Set<Parameter> paramSet) {
-        Logger.getLogger(this.getClass()).info("initializeAudit");
         // the paramSet has to be persisted
         parameterDataService.saveOrUpdate(paramSet);
         audit = auditDataService.create();
@@ -331,6 +330,9 @@ public abstract class AuditCommandImpl implements AuditCommand {
         // Some actions have to be realized when the adaptation is completed
         if (adaptationListener != null) {
             adaptationListener.adaptationCompleted(audit);
+        }
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info(audit.getSubject().getURL() + " has been adapted");
         }
     }
 
@@ -536,6 +538,9 @@ public abstract class AuditCommandImpl implements AuditCommand {
             LOGGER.error("Audit has no gross result");
             setStatusToAudit(AuditStatus.ERROR);
         }
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info(audit.getSubject().getURL() + " has been processed");
+        }
     }
     
     @Override
@@ -612,6 +617,9 @@ public abstract class AuditCommandImpl implements AuditCommand {
                     new StringBuilder("Persisting Consolidation of the audit took")
                         .append(endPersistDate.getTime() - endProcessDate.getTime())
                         .append(MS_LOGGER_STR).toString());
+        }
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info(audit.getSubject().getURL() + " has been consolidated");
         }
     }
 
@@ -782,7 +790,9 @@ public abstract class AuditCommandImpl implements AuditCommand {
                     .append(persistenceDuration)
                     .append(" ms to write in Disk while analysing").toString());
         }
-
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info(audit.getSubject().getURL() + " has been analysed");
+        }
         setStatusToAudit(AuditStatus.COMPLETED);
     }
     

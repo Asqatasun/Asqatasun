@@ -128,6 +128,9 @@ public abstract class AbstractScenarioAuditCommandImpl extends AuditCommandImpl 
     
     @Override
     public void loadContent() {
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Loading content for " + scenarioName);
+        }
         if (!getAudit().getStatus().equals(AuditStatus.SCENARIO_LOADING) || scenario.isEmpty()) {
             LOGGER.warn(
                     new StringBuilder("Audit Status is ")
@@ -142,6 +145,9 @@ public abstract class AbstractScenarioAuditCommandImpl extends AuditCommandImpl 
         // the current audit
         scenarioLoaderService.loadScenario(createWebResource(), scenario);
         setStatusToAudit(AuditStatus.CONTENT_ADAPTING);
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info(scenarioName +" has been loaded");
+        }
     }
     
     /**

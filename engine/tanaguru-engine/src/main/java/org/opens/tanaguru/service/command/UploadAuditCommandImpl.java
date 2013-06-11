@@ -115,6 +115,9 @@ public class UploadAuditCommandImpl extends AuditCommandImpl {
 
     @Override
     public void loadContent() {
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Loading files content " + fileMap);
+        }
         if (!getAudit().getStatus().equals(AuditStatus.CONTENT_LOADING) || fileMap.isEmpty()) {
             LOGGER.warn(
                     new StringBuilder("Audit Status is ")
@@ -139,6 +142,9 @@ public class UploadAuditCommandImpl extends AuditCommandImpl {
             }
         }
         setStatusToAudit(AuditStatus.CONTENT_ADAPTING);
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info(fileMap +" has been loaded");
+        }
     }
     
     private void createWebResources() {

@@ -23,6 +23,7 @@
 package org.opens.tanaguru.service.command;
 
 import java.util.Set;
+import org.apache.log4j.Logger;
 import org.opens.tanaguru.contentadapter.AdaptationListener;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
@@ -40,6 +41,11 @@ import org.opens.tanaguru.util.FileNaming;
  */
 public class PageAuditCrawlerCommandImpl extends CrawlAuditCommandImpl {
 
+     /**
+     * Logger
+     */
+    private static final Logger LOGGER = Logger.getLogger(PageAuditCrawlerCommandImpl.class);
+    
     /**
      * The url of the tested page
      */
@@ -103,6 +109,9 @@ public class PageAuditCrawlerCommandImpl extends CrawlAuditCommandImpl {
     
     @Override
     public void callCrawlerService() {
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Launching crawler for page " + pageUrl);
+        }
         getCrawlerService().crawlPage(getAudit(), pageUrl);
     }
 
