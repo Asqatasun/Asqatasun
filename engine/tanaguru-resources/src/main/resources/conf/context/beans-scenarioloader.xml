@@ -11,9 +11,41 @@
             </map>
         </property>
     </bean>
+
     <bean id="scenarioLoaderService" class="org.opens.tanaguru.service.ScenarioLoaderServiceImpl"/>
 
     <bean id="profileFactory" class="org.opens.tanaguru.sebuilder.tools.ProfileFactory" factory-method="getInstance"/>
+
+    <bean id="firefoxDriverPoolabelObjectFactory" class="org.opens.tanaguru.sebuilder.tools.FirefoxDriverPoolableObjectFactory">
+        <property name="profileFactory" ref="profileFactory"/>
+        <property name="implicitelyWaitDriverTimeout">
+            <value>2</value>
+        </property>
+        <property name="pageLoadDriverTimeout">
+            <value>5</value>
+        </property>
+    </bean>
+
+    <bean id="firefoxDriverObjectPool" class="org.opens.tanaguru.sebuilder.tools.FirefoxDriverObjectPool">
+        <property name="maxActive">
+            <value>10</value>
+        </property>
+        <property name="minIdle">
+            <value>3</value>
+        </property>
+        <property name="minEvictableIdleTimeMillis">
+             <value>10800000</value> <!-- 3 hours in ms-->
+        </property>
+        <property name="timeBetweenEvictionRunsMillis">
+             <value>10800000</value> <!-- 3 hours in ms-->
+        </property>
+        <property name="whenExhaustedAction">
+             <value>1</value> <!-- WHEN_EXHAUSTED_FAIL= 0;WHEN_EXHAUSTED_BLOCK= 1; WHEN_EXHAUSTED_GROW= 2;-->
+        </property>
+        <property name="setLifo">
+             <value>true</value> 
+        </property>
+    </bean>
 
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="targetObject">

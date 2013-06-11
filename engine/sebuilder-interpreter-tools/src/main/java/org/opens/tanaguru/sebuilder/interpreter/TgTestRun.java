@@ -40,13 +40,15 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.UnhandledAlertException;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.opens.tanaguru.sebuilder.interpreter.exception.TestRunException;
+import org.opens.tanaguru.sebuilder.tools.FirefoxDriverObjectPool;
 
 /**
  * A single run of a test getScript().
  *
- * @author zarkonnen
+ * @author jkowalczyk
  */
 public class TgTestRun extends TestRun {
 
@@ -91,6 +93,26 @@ public class TgTestRun extends TestRun {
         }
     }
     
+    private FirefoxDriver fd;
+    @Override
+    public FirefoxDriver getDriver() {
+        if (firefoxDriverObjectPool != null) {
+            return fd;
+        } else {
+            // keep the ability not to use an object pool
+            return super.getDriver();
+        }
+    }
+    
+    private FirefoxDriverObjectPool firefoxDriverObjectPool;
+    public void setFirefoxDriverObjectPool(FirefoxDriverObjectPool firefoxDriverObjectPool) {
+        this.firefoxDriverObjectPool = firefoxDriverObjectPool;
+    }
+
+    /**
+     * 
+     * @param script 
+     */
     public TgTestRun(Script script) {
         super(script);
     }
@@ -100,7 +122,7 @@ public class TgTestRun extends TestRun {
         setFirefoxProfile(firefoxProfile);
         this.jsScriptMap = jsScriptMap;
     }
-
+    
     /**
      * @return True if there is another step to execute.
      */
@@ -108,14 +130,7 @@ public class TgTestRun extends TestRun {
     public boolean hasNext() {
         boolean hasNext = stepIndex < getScript().getSteps().size() - 1;
         if (!hasNext && getDriver() != null) {
-            try {
-                getLog().debug("Sleep before closing firefoxDriver");
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                getLog().error(ex);
-            }
-            getLog().debug("Closing FirefoxgetDriver().");
-            getDriver().quit();
+            properlyCloseWebDriver();
         }
         return hasNext;
     }
@@ -198,11 +213,6 @@ public class TgTestRun extends TestRun {
         if (newPageListeners == null) {
             return;
         }
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException ex) {
-//            Logger.getLogger(TgTestRun.class.getName()).error(ex);
-//        }
         try {
             String url = getDriver().getCurrentUrl();
             String sourceCode = getDriver().getPageSource();
@@ -275,4 +285,38 @@ public class TgTestRun extends TestRun {
 	return resizedImage.getSubimage(0, 0, 270, 170);
     }
 
+    @Override
+    public void initDriver() {
+        if (firefoxDriverObjectPool != null && getDriver() == null) {
+            getLog().debug("Initialisation FirefoxDriver terminated ");
+            try {
+                fd = firefoxDriverObjectPool.borrowObject();
+            } catch (Exception ex) {
+                getLog().warn("Firefox driver cannot be borrowed due to  " + ex.getMessage());
+            }
+        // if the firefoxDriver object pool is not set, keep the default behaviour
+        } else if (getDriver() == null) {
+            super.initDriver();
+        }
+    }
+ 
+    /**
+     * Properly Returns the WebDriver Object to the pool when finished or
+     * close and quit the driver if the object pool is not used
+     */
+    private void properlyCloseWebDriver() {
+        getLog().debug("Closing Firefox driver.");
+        if (firefoxDriverObjectPool != null && getDriver() != null) {
+            try {
+                //set the blank page before returning the webDriver instance
+                getDriver().get("");
+                firefoxDriverObjectPool.returnObject(getDriver());
+            } catch (Exception ex) {
+                getLog().warn("Firefox driver cannot be returned due to  " + ex.getMessage());
+            }
+        } else {
+            getDriver().close();
+            getDriver().quit();
+        }
+    }
 }

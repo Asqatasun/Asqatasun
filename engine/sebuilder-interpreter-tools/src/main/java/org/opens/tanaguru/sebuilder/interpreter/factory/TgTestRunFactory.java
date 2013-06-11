@@ -30,6 +30,7 @@ import java.util.Collection;
 import java.util.Map;
 import org.opens.tanaguru.sebuilder.interpreter.NewPageListener;
 import org.opens.tanaguru.sebuilder.interpreter.TgTestRun;
+import org.opens.tanaguru.sebuilder.tools.FirefoxDriverObjectPool;
 
 /**
  *
@@ -71,14 +72,20 @@ public class TgTestRunFactory extends TestRunFactory {
             this.newPageListeners.removeAll(newPageListeners);
         }
     }
-    
+
+    private FirefoxDriverObjectPool fdop;
+    public void setFirefoxDriverObjectPool(FirefoxDriverObjectPool fdop) {
+        this.fdop = fdop;
+    }
+
     @Override
     public TestRun createInstance(Script script) {
-        setImplicitelyWaitDriverTimeout(2);
-        setPageLoadDriverTimeout(10);
+//        setImplicitelyWaitDriverTimeout(2);
+//        setPageLoadDriverTimeout(10);
         TgTestRun testRun = new TgTestRun(script);
         testRun.addNewPageListeners(newPageListeners);
         testRun.setJsScriptMap(jsScriptMap);
+        testRun.setFirefoxDriverObjectPool(fdop);
         return testRun;
     }
     
