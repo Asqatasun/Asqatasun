@@ -43,22 +43,12 @@
         </plugins>
     </build>
     <dependencies>
-<!--        <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-api</artifactId>
-            <version>${engineVersion}</version>
-        </dependency>-->
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>audit</artifactId>
             <version>${engineVersion}</version>
             <scope>compile</scope>
         </dependency>
-<!--        <dependency>
-            <groupId>${heritrixGroupId}</groupId>
-            <artifactId>heritrix-commons</artifactId>
-            <scope>compile</scope>
-        </dependency>-->
         <dependency>
             <groupId>${heritrixGroupId}</groupId>
             <artifactId>heritrix-engine</artifactId>
@@ -84,20 +74,15 @@
             <artifactId>commons-lang</artifactId>
             <scope>runtime</scope>
         </dependency>
-<!--        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <scope>test</scope>
-        </dependency>-->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>persistence</artifactId>
             <version>${engineVersion}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -120,31 +105,6 @@
             <artifactId>aspectjweaver</artifactId>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>
-            <groupId>${springGroupId}</groupId>
-            <artifactId>spring-core</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>${springGroupId}</groupId>
-            <artifactId>spring-aop</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>${springGroupId}</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>${springGroupId}</groupId>
-            <artifactId>spring-tx</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>${springGroupId}</groupId>
-            <artifactId>spring-orm</artifactId>
-            <scope>test</scope>
-        </dependency>-->
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>

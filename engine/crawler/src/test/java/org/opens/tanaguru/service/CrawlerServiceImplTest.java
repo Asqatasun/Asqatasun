@@ -21,13 +21,7 @@
  */
 package org.opens.tanaguru.service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 import junit.framework.TestCase;
 import org.apache.http.HttpStatus;
 import org.opens.tanaguru.crawler.CrawlerFactory;
@@ -48,9 +42,6 @@ import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.service.mock.MockAuditDataService;
 import org.opens.tanaguru.service.mock.MockContentDataService;
 import org.opens.tanaguru.service.mock.MockWebResourceDataService;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 /**
  * This class is a functionnal test class of the crawler service.
