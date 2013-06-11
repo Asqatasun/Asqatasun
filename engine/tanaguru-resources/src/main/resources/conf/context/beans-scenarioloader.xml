@@ -42,7 +42,7 @@
         <property name="whenExhaustedAction">
              <value>1</value> <!-- WHEN_EXHAUSTED_FAIL= 0;WHEN_EXHAUSTED_BLOCK= 1; WHEN_EXHAUSTED_GROW= 2;-->
         </property>
-        <property name="setLifo">
+        <property name="lifo">
              <value>true</value> 
         </property>
     </bean>
