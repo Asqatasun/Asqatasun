@@ -42,9 +42,7 @@
                             </fmt:message>
                         </c:set>
                             <span id="page-source-code-link">    
-                                <a href="<c:url value="/home/contract/source-code-page.html?wr=${param.wr}"/>" title="${sourceCodeLinkTitle}" target="_blank" class="result-page-action">
-                                    Code HTML
-                                </a>
+                                <a href="<c:url value="/home/contract/source-code-page.html?wr=${param.wr}"/>" title="${sourceCodeLinkTitle}" target="_blank" class="result-page-action">Code&nbsp;HTML</a>
                             </span>
                         </c:if>
                         </div>
