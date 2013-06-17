@@ -440,16 +440,16 @@ public class ScenarioLoaderImplTest extends TestCase {
         replay(ssp7);
         replay(ssp8);
         
-        ScenarioLoaderImpl instance = new ScenarioLoaderImpl(
-                mockSite,
-                readFile("MyTest.json", true), 
-                harFileContentLoaderFactory);
-        instance.setContentDataService(mockContentDataService);
-        instance.setContentFactory(mockContentFactory);
-        instance.setDateFactory(mockDateFactory);
-        instance.setWebResourceDataService(mockWebResourceDataService);
-        
-        instance.run(); 
+//        ScenarioLoaderImpl instance = new ScenarioLoaderImpl(
+//                mockSite,
+//                readFile("MyTest.json", true), 
+//                harFileContentLoaderFactory);
+//        instance.setContentDataService(mockContentDataService);
+//        instance.setContentFactory(mockContentFactory);
+//        instance.setDateFactory(mockDateFactory);
+//        instance.setWebResourceDataService(mockWebResourceDataService);
+//        
+//        instance.run(); 
         
         verify(mockPage1);
         verify(mockPage2);
