@@ -161,6 +161,8 @@ public class TgTestRun extends TestRun {
         } catch (TimeoutException te) {
             result = true;
             if (!isStepOpenNewPage && !StringUtils.equals(beforeUrl, getDriver().getCurrentUrl())) {
+                getLog().debug(" The page " + getDriver().getCurrentUrl() + " is fired as new page but"
+                    + " is incomplete : " + te.getMessage());
                 fireNewPage();
             }
         } catch (Exception e) {
