@@ -80,8 +80,6 @@ public class TgTestRunFactory extends TestRunFactory {
 
     @Override
     public TestRun createInstance(Script script) {
-//        setImplicitelyWaitDriverTimeout(2);
-//        setPageLoadDriverTimeout(10);
         TgTestRun testRun = new TgTestRun(script);
         testRun.addNewPageListeners(newPageListeners);
         testRun.setJsScriptMap(jsScriptMap);

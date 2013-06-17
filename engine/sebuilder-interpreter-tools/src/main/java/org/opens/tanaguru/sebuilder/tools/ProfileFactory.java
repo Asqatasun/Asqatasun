@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2013  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -47,22 +47,6 @@ public final class ProfileFactory {
     private String netExportPath = ".";
     public void setNetExportPath(String netExportPath) {
         this.netExportPath = netExportPath;
-    }
-    
-    /**
-     * Number of milliseconds to wait after the last page request to declare the page loaded.
-     */
-    private int pageLoadedTimeout = 5000;
-    public void setPageLoadedTimeout(int pageLoadedTimeout) {
-        this.pageLoadedTimeout = pageLoadedTimeout;
-    }
-
-    /**
-     * Number of milliseconds to wait after the page is exported even if not loaded yet.
-     */
-    private int timeout = 5000;
-    public void setTimeout(int timeout) {
-        this.timeout = timeout;
     }
     
     private boolean deleteProfileData = false;
@@ -114,7 +98,7 @@ public final class ProfileFactory {
      * @return 
      */
     public FirefoxProfile getScenarioProfile() {
-        return getProfile();
+        return getProfile(true);
     }
     
     /**
@@ -122,7 +106,7 @@ public final class ProfileFactory {
      * @return 
      */
     public FirefoxProfile getOnlineProfile() {
-        return getProfile();
+        return getProfile(false);
     }
     
     /**
@@ -130,9 +114,9 @@ public final class ProfileFactory {
      * @return 
      *      a set-up Firefox profile
      */
-    private FirefoxProfile getProfile() {
+    private FirefoxProfile getProfile(boolean loadImage) {
         FirefoxProfile firefoxProfile = new FirefoxProfile();
-        setUpPreferences(firefoxProfile);
+        setUpPreferences(firefoxProfile, loadImage);
 //        setUpExtensions(firefoxProfile);
         setUpProxy(firefoxProfile);
         return firefoxProfile;
@@ -166,7 +150,7 @@ public final class ProfileFactory {
      * 
      * @param firefoxProfile 
      */
-    private void setUpPreferences(FirefoxProfile firefoxProfile) {
+    private void setUpPreferences(FirefoxProfile firefoxProfile, boolean loadImage) {
 
         // to have a blank page on start-up
         firefoxProfile.setPreference("browser.startup.page", 0);
@@ -185,8 +169,13 @@ public final class ProfileFactory {
         // to disable the update of search engines
         firefoxProfile.setPreference("browser.search.update", false);
         
-        // To disable the load of images
-        firefoxProfile.setPreference("permissions.default.image", 2);
+        if (loadImage) {
+            // To enable the load of images
+            firefoxProfile.setPreference("permissions.default.image", 1);
+        }else {
+            // To disable the load of images
+            firefoxProfile.setPreference("permissions.default.image", 2);
+        }
     }
  
     /**
@@ -234,11 +223,11 @@ public final class ProfileFactory {
         
         // Number of milliseconds to wait after the last page request to declare the page loaded.
         // We don't wast time
-        firefoxProfile.setPreference("extensions.firebug.netexport.pageLoadedTimeout", pageLoadedTimeout);
+//        firefoxProfile.setPreference("extensions.firebug.netexport.pageLoadedTimeout", pageLoadedTimeout);
 
         // Number of milliseconds to wait after the page is exported even if not loaded yet.
         // Set to zero to switch off this feature.
-        firefoxProfile.setPreference("extensions.firebug.netexport.timeout", timeout);
+//        firefoxProfile.setPreference("extensions.firebug.netexport.timeout", timeout);
 
         //
         firefoxProfile.setPreference("extensions.firebug.netexport.Automation", true);

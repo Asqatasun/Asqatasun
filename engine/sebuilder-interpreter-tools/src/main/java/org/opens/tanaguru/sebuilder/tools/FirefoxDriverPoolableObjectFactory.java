@@ -39,15 +39,6 @@ public class FirefoxDriverPoolableObjectFactory implements PoolableObjectFactory
 
     private static final String DISPLAY_PROPERTY_KEY = "display";
     
-    ProfileFactory profileFactory;
-    public ProfileFactory getProfileFactory() {
-        return profileFactory;
-    }
-    
-    public void setProfileFactory(ProfileFactory profileFactory) {
-        this.profileFactory = profileFactory;
-    }
-    
     private Long implicitelyWaitDriverTimeout;
     public Long getImplicitelyWaitDriverTimeout() {
         return implicitelyWaitDriverTimeout;
@@ -73,7 +64,7 @@ public class FirefoxDriverPoolableObjectFactory implements PoolableObjectFactory
             Logger.getLogger(this.getClass()).info("Setting Xvfb display with value " + System.getProperty(DISPLAY_PROPERTY_KEY));
             ffBinary.setEnvironmentProperty("DISPLAY", System.getProperty(DISPLAY_PROPERTY_KEY));
         }
-        FirefoxDriver fd = new FirefoxDriver(ffBinary, profileFactory.getOnlineProfile());
+        FirefoxDriver fd = new FirefoxDriver(ffBinary, ProfileFactory.getInstance().getScenarioProfile());
         if (this.implicitelyWaitDriverTimeout != null) {
             fd.manage().timeouts().implicitlyWait(this.implicitelyWaitDriverTimeout.longValue(), TimeUnit.SECONDS);
         }

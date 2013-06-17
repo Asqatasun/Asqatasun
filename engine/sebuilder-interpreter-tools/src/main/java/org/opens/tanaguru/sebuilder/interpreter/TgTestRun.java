@@ -36,7 +36,6 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.UnhandledAlertException;
@@ -52,11 +51,8 @@ import org.opens.tanaguru.sebuilder.tools.FirefoxDriverObjectPool;
  */
 public class TgTestRun extends TestRun {
 
-    private static final int RETRY_MAX_VALUE = 3;
-
     private boolean isStepOpenNewPage = false;
-    private int retryIndex = 0;
-    
+
     private Map<String, String> jsScriptMap;
     public Map<String, String> getJsScriptMap() {
         return jsScriptMap;
@@ -162,31 +158,14 @@ public class TgTestRun extends TestRun {
             if (!isStepOpenNewPage && !StringUtils.equals(beforeUrl, getDriver().getCurrentUrl())) {
                 fireNewPage();
             }
-            // for the last step, we need to sleep a while to leave enough time
-            // to netExport to write
         } catch (TimeoutException te) {
             result = true;
             if (!isStepOpenNewPage && !StringUtils.equals(beforeUrl, getDriver().getCurrentUrl())) {
                 fireNewPage();
             }
         } catch (Exception e) {
-            if (e instanceof NoSuchElementException) {
-                getLog().warn(currentStep() + " failed.", e);
-                // if the element is not found we retry it
-                if (retryIndex <= RETRY_MAX_VALUE) {
-                    retryIndex++;
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(TgTestRun.class.getName()).error(ex);
-                    }
-                    next();
-                }
-            }
-            getLog().error(currentStep() + " failed.", e);
-
-            reset();
-            throw new TestRunException(currentStep() + " failed.", e);
+            properlyCloseWebDriver();
+            throw new TestRunException(currentStep() + " failed.", e, currentStep().toString(), stepIndex);
         }
 
         if (!result) {
@@ -196,14 +175,12 @@ public class TgTestRun extends TestRun {
                 return false;
             }
             // In all other cases, we throw an exception to stop the run.
-            RuntimeException e = new TestRunException(currentStep() + " failed.");
+            RuntimeException e = new TestRunException(currentStep() + " failed.", currentStep().toString(), stepIndex);
             e.fillInStackTrace();
             getLog().error(e);
-            reset();
+            properlyCloseWebDriver();
             throw e;
         } else {
-//            stepIndex++;
-            retryIndex = 0;
             return true;
         }
     }

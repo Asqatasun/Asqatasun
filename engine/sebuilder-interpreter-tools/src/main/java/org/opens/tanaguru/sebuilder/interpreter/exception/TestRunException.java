@@ -22,21 +22,37 @@
 
 package org.opens.tanaguru.sebuilder.interpreter.exception;
 
+import java.io.Serializable;
+
 /**
  *
  * @author jkowalczyk
  */
-public class TestRunException extends RuntimeException{
+public class TestRunException extends RuntimeException implements Serializable{
 
-    public TestRunException(String message, Throwable throwable) {
+    private String stepOnError;
+    public String getStepOnError() {
+        return stepOnError;
+    }
+    
+    private int stepOnErrorIndex;
+    public int getStepOnErrorIndex() {
+        return stepOnErrorIndex;
+    }
+    
+    public TestRunException(String message, Throwable throwable, String stepOnError, int stepOnErrorIndex) {
         super(message, throwable);
+        this.stepOnError = stepOnError;
+        this.stepOnErrorIndex = stepOnErrorIndex;
     }
 
-    public TestRunException(String message) {
+    public TestRunException(String message, String stepOnError, int stepOnErrorIndex) {
         super(message);
+        this.stepOnError = stepOnError;
+        this.stepOnErrorIndex = stepOnErrorIndex;
     }
 
-    public TestRunException(Throwable throwable) {
-        super(throwable);
-    }
+//    public TestRunException(Throwable throwable, String stepOnError, int stepOnErrorIndex) {
+//        super(throwable);
+//    }
 }
