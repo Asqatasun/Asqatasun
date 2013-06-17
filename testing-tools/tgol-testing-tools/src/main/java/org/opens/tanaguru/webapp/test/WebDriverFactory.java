@@ -22,6 +22,7 @@
 
 package org.opens.tanaguru.webapp.test;
 
+import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -56,9 +57,9 @@ public class WebDriverFactory {
                 ffBinary.setEnvironmentProperty("DISPLAY", xvfbDisplay);
             }
             ProfileFactory pf = ProfileFactory.getInstance();
-            pf.setTimeout(1000);
-            pf.setPageLoadedTimeout(1000);
             webDriver = new FirefoxDriver(ffBinary, pf.getOnlineProfile());
+            webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+            webDriver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
         }
         return webDriver;
     }
