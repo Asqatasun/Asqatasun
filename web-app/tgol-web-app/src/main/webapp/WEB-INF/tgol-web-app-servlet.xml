@@ -13,13 +13,12 @@
            http://www.springframework.org/schema/mvc 
            http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-    <!-- This annotation is supposed to be defined in the tgol-security.xml file
-    For a reason that I ignore, the annotation are not taken into account and has
-    to be placed here-->
+    <!-- This annotation needs to be defined in the servlet context to be applied
+    at the controller level -->
     <security:global-method-security secured-annotations="enabled"
             access-decision-manager-ref="accessDecisionManager"/>
 
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
+    <mvc:annotation-driven />
 
     <!-- spring mvc imports -->
     <import resource="conf/mvc/tgol-beans-command-factories.xml"/>
