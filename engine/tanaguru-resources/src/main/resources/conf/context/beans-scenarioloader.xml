@@ -17,12 +17,11 @@
     <bean id="profileFactory" class="org.opens.tanaguru.sebuilder.tools.ProfileFactory" factory-method="getInstance"/>
 
     <bean id="firefoxDriverPoolabelObjectFactory" class="org.opens.tanaguru.sebuilder.tools.FirefoxDriverPoolableObjectFactory">
-        <property name="profileFactory" ref="profileFactory"/>
         <property name="implicitelyWaitDriverTimeout">
-            <value>2</value>
+            <value>30</value>
         </property>
         <property name="pageLoadDriverTimeout">
-            <value>5</value>
+            <value>10</value>
         </property>
     </bean>
 
@@ -89,92 +88,4 @@
         </property>
     </bean>
 
-    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject">
-            <ref local="profileFactory"/>
-        </property>
-        <property name="targetMethod">
-            <value>setTimeout</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <value>${browserTimeout}</value>
-            </list>
-        </property>
-    </bean>
-
-<!--    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject">
-            <ref local="profileFactory"/>
-        </property>
-        <property name="targetMethod">
-            <value>setDeleteProfileData</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <value>false</value>
-            </list>
-        </property>
-    </bean>-->
-
-<!--    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject">
-            <ref local="profileFactory"/>
-        </property>
-        <property name="targetMethod">
-            <value>setFirebugVersion</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <value>${firebugVersion}</value>
-            </list>
-        </property>
-    </bean>-->
-    
-<!--    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject">
-            <ref local="profileFactory"/>
-        </property>
-        <property name="targetMethod">
-            <value>setPageLoadedTimeout</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <value>20</value>
-            </list>
-        </property>
-    </bean>-->
-    
-<!--    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject">
-            <ref local="profileFactory"/>
-        </property>
-        <property name="targetMethod">
-            <value>setExtensionPathList</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <list>
-                    <value>${netexportExtensionPath}</value>
-                    <value>${firebugExtensionPath}</value>
-                    <value>${firestarterExtensionPath}</value>
-                </list>
-            </list>
-        </property>
-    </bean>-->
-
-<!--    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject">
-            <ref local="profileFactory"/>
-        </property>
-        <property name="targetMethod">
-            <value>setNetExportPath</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <value>${netexport-path}</value>
-            </list>
-        </property>
-    </bean>-->
-    
 </beans>
