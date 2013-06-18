@@ -98,7 +98,7 @@ public final class ProfileFactory {
      * @return 
      */
     public FirefoxProfile getScenarioProfile() {
-        return getProfile(true);
+        return getProfile(false);
     }
     
     /**
