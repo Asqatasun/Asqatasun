@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2011  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,6 +21,7 @@
  */
 package org.opens.tanaguru.scenarioloader;
 
+import org.opens.tanaguru.scenarioloader.exception.ScenarioLoaderException;
 import com.sebuilder.interpreter.Script;
 import com.sebuilder.interpreter.factory.ScriptFactory;
 import com.sebuilder.interpreter.factory.TestRunFactory;
@@ -34,6 +35,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.json.JSONException;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.opens.tanaguru.contentloader.HarFileContentLoaderFactory;
 import org.opens.tanaguru.crawler.util.CrawlUtils;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.Content;
@@ -47,13 +50,14 @@ import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
-import org.opens.tanaguru.scenarioloader.exception.ScenarioLoaderException;
 import org.opens.tanaguru.sebuilder.interpreter.NewPageListener;
 import org.opens.tanaguru.sebuilder.interpreter.exception.TestRunException;
 import org.opens.tanaguru.sebuilder.interpreter.factory.TgStepTypeFactory;
 import org.opens.tanaguru.sebuilder.interpreter.factory.TgTestRunFactory;
 import org.opens.tanaguru.sebuilder.tools.FirefoxDriverObjectPool;
+import org.opens.tanaguru.sebuilder.tools.ProfileFactory;
 import org.opens.tanaguru.util.factory.DateFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -91,7 +95,12 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
 //        this.snapshotFactory = snapshotFactory;
 //    }    
     
-     private WebResourceDataService webResourceDataService;
+    /**
+     * 
+     */
+    private ProfileFactory profileFactory;
+    
+    private WebResourceDataService webResourceDataService;
     public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
         this.webResourceDataService = webResourceDataService;
     }
@@ -151,17 +160,30 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
             String scenario) {
         super();
         this.scenario = scenario;
+        this.profileFactory = ProfileFactory.getInstance();
         this.webResource = webResource;
     }
     
+    ScenarioLoaderImpl(
+            WebResource webResource, 
+            String scenario,
+            HarFileContentLoaderFactory harFileContentLoaderFactory) {
+        super();
+        this.scenario = scenario;
+        this.profileFactory = ProfileFactory.getInstance();
+        this.webResource = webResource;
+    }
+
     @Override
     public void run() {
         try {
             LOGGER.debug("Launch Scenario "   + scenario );
+            FirefoxProfile firefoxProfile = profileFactory.getScenarioProfile();
             TestRunFactory testRunFactory = new TgTestRunFactory();
             ((TgTestRunFactory)testRunFactory).addNewPageListener(this);
+            ((TgTestRunFactory)testRunFactory).setFirefoxProfile(firefoxProfile);
             ((TgTestRunFactory)testRunFactory).setJsScriptMap(jsScriptMap);
-            ((TgTestRunFactory)testRunFactory).setFirefoxDriverObjectPool(firefoxDriverObjectPool);
+//            ((TgTestRunFactory)testRunFactory).setFirefoxDriverObjectPool(firefoxDriverObjectPool);
             ScriptFactory scriptFactory = new ScriptFactory();
             scriptFactory.setTestRunFactory(testRunFactory);
             scriptFactory.setStepTypeFactory(new TgStepTypeFactory());
@@ -180,6 +202,7 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
                 LOGGER.warn(re.getMessage());
                 throw new ScenarioLoaderException(re);
             }    
+            profileFactory.shutdownFirefoxProfile(firefoxProfile);
         } catch (IOException ex) {
             LOGGER.warn(ex.getMessage());
             throw new ScenarioLoaderException(ex);

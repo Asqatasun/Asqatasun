@@ -83,7 +83,7 @@ public class TgTestRunFactory extends TestRunFactory {
         TgTestRun testRun = new TgTestRun(script);
         testRun.addNewPageListeners(newPageListeners);
         testRun.setJsScriptMap(jsScriptMap);
-        testRun.setFirefoxDriverObjectPool(fdop);
+//        testRun.setFirefoxDriverObjectPool(fdop);
         return testRun;
     }
     
