@@ -114,15 +114,15 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
         this.preProcessResultFactory = preProcessResultFactory;
     }
     
-    private FirefoxDriverObjectPool firefoxDriverObjectPool;
-    public FirefoxDriverObjectPool getFirefoxDriverObjectPool() {
-        return firefoxDriverObjectPool;
-    }
-
-    @Autowired
-    public void setFirefoxDriverObjectPool(FirefoxDriverObjectPool firefoxDriverObjectPool) {
-        this.firefoxDriverObjectPool = firefoxDriverObjectPool;
-    }
+//    private FirefoxDriverObjectPool firefoxDriverObjectPool;
+//    public FirefoxDriverObjectPool getFirefoxDriverObjectPool() {
+//        return firefoxDriverObjectPool;
+//    }
+//
+//    @Autowired
+//    public void setFirefoxDriverObjectPool(FirefoxDriverObjectPool firefoxDriverObjectPool) {
+//        this.firefoxDriverObjectPool = firefoxDriverObjectPool;
+//    }
     
     private Map<String, String> jsScriptMap;
     public Map<String, String> getJsScriptMap() {
@@ -165,7 +165,7 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
         scenarioLoader.setPreProcessResultFactory(preProcessResultFactory);
         scenarioLoader.setPreProcessResultDataService(preProcessResultDataService);
         scenarioLoader.setJsScriptMap(jsScriptMap);
-        scenarioLoader.setFirefoxDriverObjectPool(firefoxDriverObjectPool);
+//        scenarioLoader.setFirefoxDriverObjectPool(firefoxDriverObjectPool);
         return scenarioLoader;
     }
 
