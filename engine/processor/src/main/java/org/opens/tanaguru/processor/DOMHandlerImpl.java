@@ -24,13 +24,12 @@ package org.opens.tanaguru.processor;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.*;
+import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
@@ -52,6 +51,7 @@ import org.xml.sax.SAXException;
  */
 public class DOMHandlerImpl implements DOMHandler {
 
+    private static Logger LOGGER = Logger.getLogger(DOMHandlerImpl.class);
     private static final String ATTRIBUTE_MISSING_MSG_CODE = "AttributeMissing";
     private static final String CHILD_NODE_MISSING_MSG_CODE ="ChildNodeMissing";
     private Document document;
@@ -133,7 +133,17 @@ public class DOMHandlerImpl implements DOMHandler {
             return;
         }
         String html = ssp.getDOM();
+        Date beginDate = null;
+        if (LOGGER.isDebugEnabled()) {
+            beginDate = new Date();
+            LOGGER.debug("Iinitialising Jsoup Document for " + ssp.getURI());
+        }
         jsoupDocument = Jsoup.parse(html, ssp.getURI());
+        if (LOGGER.isDebugEnabled()) {
+            Date endDate = new Date();
+            LOGGER.debug("initialisation of Jsoup Document for " + ssp.getURI() 
+                    + "took "+ (endDate.getTime()-beginDate.getTime()) +"ms");
+        }
         processRemarkService.initializeService(jsoupDocument, ssp.getDOM());
         jsoupDocInitialised = true;
     }
@@ -157,16 +167,13 @@ public class DOMHandlerImpl implements DOMHandler {
             document = builder.parse(new ByteArrayInputStream(ssp.getDOM().getBytes("UTF-8")));
             docInitialised = true;
         } catch (IOException ex) {
-            Logger.getLogger(DOMHandlerImpl.class.getName()).log(Level.SEVERE,
-                    null, ex);
+            LOGGER.error(ssp.getURI() + "cannot be initialised due to "+ex.getMessage());
             throw new RuntimeException(ex);
         } catch (SAXException ex) {
-            Logger.getLogger(DOMHandlerImpl.class.getName()).log(Level.SEVERE,
-                    null, ex);
+            LOGGER.error(ssp.getURI() + "cannot be initialised due to "+ex.getMessage());
             throw new RuntimeException(ex);
         } catch (ParserConfigurationException ex) {
-            Logger.getLogger(DOMHandlerImpl.class.getName()).log(Level.SEVERE,
-                    null, ex);
+            LOGGER.error(ssp.getURI() + "cannot be initialised due to "+ex.getMessage());
             throw new RuntimeException(ex);
         }
         processRemarkService.initializeService(document, ssp.getDOM());
@@ -1104,8 +1111,7 @@ public class DOMHandlerImpl implements DOMHandler {
                     // expr, node.getNodeValue());
                 }
             } catch (XPathExpressionException ex) {
-                Logger.getLogger(DOMHandlerImpl.class.getName()).log(
-                        Level.SEVERE, null, ex);
+                LOGGER.error(ex.getMessage() + " occured requesting " +expr + " on "+ssp.getURI() );
                 throw new RuntimeException(ex);
             }
             resultSet.add(tempResult);
