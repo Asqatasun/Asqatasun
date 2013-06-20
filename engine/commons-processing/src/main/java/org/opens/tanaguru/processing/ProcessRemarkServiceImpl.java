@@ -25,11 +25,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.xpath.*;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -57,6 +56,7 @@ import org.w3c.flute.parser.selectors.IdConditionImpl;
  */
 public class ProcessRemarkServiceImpl implements ProcessRemarkService {
 
+    private static final Logger LOGGER = Logger.getLogger(ProcessRemarkServiceImpl.class);
     private static final String CSS_SELECTOR_EVIDENCE = "Css-Selector";
     private static final String CSS_FILENAME_EVIDENCE = "Css-Filename";
     private static final String START_COMMENT_OCCURENCE = "<!--";
@@ -186,11 +186,22 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
      */
     @Override
     public void initializeService(org.jsoup.nodes.Document document, String adaptedContent) {
+        Date beginDate = null;
+
         if (document != null && jsoupDocument == null) {
             this.jsoupDocument = document;
         }
+        if (LOGGER.isDebugEnabled()) {
+            beginDate = new Date();
+            LOGGER.debug("Initialising source Map by line");
+        }
         if (adaptedContent != null) {
             initializeRawSourceCodeMap(adaptedContent);
+        }
+        if (LOGGER.isDebugEnabled()) {
+            Date endDate = new Date();
+            LOGGER.debug("initialisation of source map by line took " 
+                    + (endDate.getTime()-beginDate.getTime()) +"ms");
         }
         // call the reset service to instanciated local remarks collection
         // and evidence elements collection
@@ -307,7 +318,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
                 remark.addElement(fileNameEvidenceElement);
             }
         } catch (ClassCastException ex) {
-            Logger.getLogger(ProcessRemarkServiceImpl.class.getName()).log(Level.WARNING, null, ex);
+            LOGGER.error(ex.getMessage());
         }
         remarkSet.add(remark);
     }
@@ -345,7 +356,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
                 remark.addElement(fileNameEvidenceElement);
             }
         } catch (ClassCastException ex) {
-            Logger.getLogger(ProcessRemarkServiceImpl.class.getName()).log(Level.WARNING, null, ex);
+            LOGGER.error(ex.getMessage());
         }
         remarkSet.add(remark);
     }
@@ -491,8 +502,8 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
                 }
             }
         } catch (XPathExpressionException ex) {
-            Logger.getLogger(ProcessRemarkServiceImpl.class.getName()).log(Level.SEVERE,
-                    null, ex);
+            LOGGER.error("Error occured while searching index of a node "+
+                    ex.getMessage());
             throw new RuntimeException(ex);
         }
         return -1;
@@ -531,7 +542,8 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
                 lineNumber++;
             }
         } catch (IOException ex) {
-            Logger.getLogger(ProcessRemarkServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error("Error occured while initialize source code map "+
+                    ex.getMessage());
         }
     }
     
@@ -551,7 +563,8 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
                 lineNumber++;
             }
         } catch (IOException ex) {
-            Logger.getLogger(ProcessRemarkServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error("Error occured while initialize raw source code map "+
+                    ex.getMessage());
         }
     }
 
