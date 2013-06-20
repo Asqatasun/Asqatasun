@@ -56,12 +56,12 @@ public interface ProcessRemarkService {
      * @param document
      * @param adaptedContent 
      */
-    void initializeJQueryLikeService(org.jsoup.nodes.Document document, String adaptedContent);
+    void initializeService(org.jsoup.nodes.Document document, String adaptedContent);
     
     /**
      *
      */
-    void initializeService();
+    void resetService();
 
     /**
      *

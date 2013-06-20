@@ -153,9 +153,9 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         this.evidenceDataService = evidenceDataService;
     }
     private Map<Integer, String> sourceCodeWithLine =
-            new TreeMap<Integer, String>();
+            new LinkedHashMap<Integer, String>();
     private Map<Integer, String> rawSourceCodeWithLine =
-            new TreeMap<Integer, String>();
+            new LinkedHashMap<Integer, String>();
     /**
      * Local map of evidence to avoid multiple access to database
      */
@@ -170,26 +170,35 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         if (adaptedContent != null) {
             initializeSourceCodeMap(adaptedContent);
         }
-        initialize();
+        // call the reset service to instanciated local remarks collection
+        // and evidence elements collection
+        resetService();
     }
     
+    /**
+     * The initialisation of the jquery like should be called once for each 
+     * tested SSP. It stores the current document and initialised a map with the
+     * source where each key is the line number. This map is then used to 
+     * retrieve the line number of an element.
+     * 
+     * @param document
+     * @param adaptedContent 
+     */
     @Override
-    public void initializeJQueryLikeService(org.jsoup.nodes.Document document, String adaptedContent) {
-        if (document != null) {
+    public void initializeService(org.jsoup.nodes.Document document, String adaptedContent) {
+        if (document != null && jsoupDocument == null) {
             this.jsoupDocument = document;
         }
         if (adaptedContent != null) {
             initializeRawSourceCodeMap(adaptedContent);
         }
-        initialize();
+        // call the reset service to instanciated local remarks collection
+        // and evidence elements collection
+        resetService();
     }
 
     @Override
-    public void initializeService() {
-        initialize();
-    }
-
-    private void initialize() {
+    public void resetService() {
         remarkSet = new LinkedHashSet<ProcessRemark>();
         evidenceElementList = new LinkedList<String>();
     }
@@ -416,13 +425,14 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         int lineNumber = 0;
         boolean found = false;
         boolean isWithinComment = false;
-        Iterator<Integer> iter = rawSourceCodeWithLine.keySet().iterator();
+        Iterator<Map.Entry<Integer, String>> iter = rawSourceCodeWithLine.entrySet().iterator();
         String codeLine;
         while (iter.hasNext() && !found) {
-            int myLineNumber = iter.next();
+            Map.Entry<Integer, String> entry = iter.next();
+            int myLineNumber = entry.getKey();
             int index = 0;
             while (index != -1) {
-                codeLine = rawSourceCodeWithLine.get(myLineNumber).toLowerCase();
+                codeLine = entry.getValue().toLowerCase();
                 int characterPositionOri = index;
                 index = codeLine.indexOf("<" + element.nodeName() + ">",
                         index);
@@ -525,7 +535,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     }
     
     /**
-     * 
+     * The initialisation should be performed only once.
      * @param adaptedContent
      */
     private void initializeRawSourceCodeMap(String rawSource) {

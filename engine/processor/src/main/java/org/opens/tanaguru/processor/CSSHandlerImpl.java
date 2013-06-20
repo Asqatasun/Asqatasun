@@ -77,7 +77,7 @@ public class CSSHandlerImpl implements CSSHandler {
     public CSSHandler beginSelection(){
         initialize();
         selectedRuleList = new HashSet<CSSOMRule>();
-        processRemarkService.initializeService(null, null);
+        processRemarkService.resetService();
         return this;
     }
 

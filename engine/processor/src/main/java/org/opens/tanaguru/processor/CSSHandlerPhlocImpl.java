@@ -145,7 +145,7 @@ public class CSSHandlerPhlocImpl implements CSSHandler {
     @Override
     public CSSHandler beginSelection() {
         initialize();
-        processRemarkService.initializeService(null, null);
+        processRemarkService.resetService();
         return this;
     }
 

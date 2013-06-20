@@ -56,7 +56,8 @@ public class DOMHandlerImpl implements DOMHandler {
     private static final String CHILD_NODE_MISSING_MSG_CODE ="ChildNodeMissing";
     private Document document;
     private org.jsoup.nodes.Document jsoupDocument;
-    private boolean initialized = false;
+    private boolean docInitialised = false;
+    private boolean jsoupDocInitialised = false;
     private List<Node> selectedElementList;
     private Elements selectedElements;
     private SSP ssp;
@@ -99,30 +100,46 @@ public class DOMHandlerImpl implements DOMHandler {
         initialize();
         messageCode = null;
         selectedElementList = new ArrayList<Node>();
-        processRemarkService.initializeService(document, ssp.getDOM());
+        // reset the processRemark service when beginning a new selection.
+        // means the local collection of processRemark are reset
+        processRemarkService.resetService();
         return this;
     }
     
+    /**
+     * This method should be called at each first selection of a RuleImplementation
+     * to reset all the local collections.
+     * 
+     * @return the current instance 
+     */
     @Override
     public DOMHandler beginJQueryLikeSelection() {
-        initializeJSoup();
         messageCode = null;
+        // reset the local collection of elements
         selectedElementList = new ArrayList<Node>();
-        processRemarkService.initializeJQueryLikeService(jsoupDocument, ssp.getDOM());
+        // reset the processRemark service when beginning a new selection.
+        // means the local collection of processRemark are reset
+        processRemarkService.resetService();
         return this;
     }
 
-    private void initializeJSoup() {
-        if (initialized) {
+    /**
+     * The initialisation of the document is done only once when the SSP is set
+     * to the instance. The Document is created, ready to be traversed, and
+     * the processRemarkService is also initialised with the source. 
+     */
+    private void initializeJSoupDocument() {
+        if (jsoupDocInitialised) {
             return;
         }
         String html = ssp.getDOM();
         jsoupDocument = Jsoup.parse(html, ssp.getURI());
-        initialized = true;
+        processRemarkService.initializeService(jsoupDocument, ssp.getDOM());
+        jsoupDocInitialised = true;
     }
     
     private void initialize() {
-        if (initialized) {
+        if (docInitialised) {
             return;
         }
         XPathFactory xPathfactory = XPathFactory.newInstance();
@@ -138,7 +155,7 @@ public class DOMHandlerImpl implements DOMHandler {
 //            factory.setNamespaceAware(true);
             DocumentBuilder builder = factory.newDocumentBuilder();
             document = builder.parse(new ByteArrayInputStream(ssp.getDOM().getBytes("UTF-8")));
-            initialized = true;
+            docInitialised = true;
         } catch (IOException ex) {
             Logger.getLogger(DOMHandlerImpl.class.getName()).log(Level.SEVERE,
                     null, ex);
@@ -152,6 +169,7 @@ public class DOMHandlerImpl implements DOMHandler {
                     null, ex);
             throw new RuntimeException(ex);
         }
+        processRemarkService.initializeService(document, ssp.getDOM());
     }
     
     @Override
@@ -521,7 +539,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     public void setSSP(SSP ssp) {
         this.ssp = ssp;
-        initialized = false;
+        initializeJSoupDocument();
     }
 
     /**
