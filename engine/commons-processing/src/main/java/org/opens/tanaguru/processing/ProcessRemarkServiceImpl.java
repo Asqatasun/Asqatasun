@@ -370,13 +370,14 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         int lineNumber = 0;
         boolean found = false;
         boolean isWithinComment = false;
-        Iterator<Integer> iter = sourceCodeWithLine.keySet().iterator();
+        Iterator<Map.Entry<Integer, String>> iter = sourceCodeWithLine.entrySet().iterator();
         String codeLine;
         while (iter.hasNext() && !found) {
-            int myLineNumber = iter.next();
+            Map.Entry<Integer, String> entry = iter.next();
+            int myLineNumber = entry.getKey();
             int index = 0;
             while (index != -1) {
-                codeLine = sourceCodeWithLine.get(myLineNumber).toLowerCase();
+                codeLine = entry.getValue().toLowerCase();
                 int characterPositionOri = index;
                 index = codeLine.indexOf("<" + node.getNodeName().toLowerCase() + ">",
                         index);
