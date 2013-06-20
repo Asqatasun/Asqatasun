@@ -59,7 +59,7 @@ public class WebDriverFactory {
             ProfileFactory pf = ProfileFactory.getInstance();
             webDriver = new FirefoxDriver(ffBinary, pf.getOnlineProfile());
             webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-            webDriver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+            webDriver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         }
         return webDriver;
     }
