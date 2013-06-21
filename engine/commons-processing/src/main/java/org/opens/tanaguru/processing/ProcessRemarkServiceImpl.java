@@ -167,7 +167,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         if (document != null) {
             this.document = document;
         }
-        if (adaptedContent != null) {
+        if (adaptedContent != null && sourceCodeWithLine == null) {
             initializeSourceCodeMap(adaptedContent);
         }
         // call the reset service to instanciated local remarks collection
@@ -195,7 +195,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             beginDate = new Date();
             LOGGER.debug("Initialising source Map by line");
         }
-        if (adaptedContent != null) {
+        if (adaptedContent != null && rawSourceCodeWithLine == null) {
             initializeRawSourceCodeMap(adaptedContent);
         }
         if (LOGGER.isDebugEnabled()) {
@@ -527,11 +527,13 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     }
 
     /**
+     * Initialisation of a local map that handles each source code line, 
+     * keyed by the line number
      * 
      * @param adaptedContent
      */
     private void initializeSourceCodeMap(String adaptedContent) {
-        sourceCodeWithLine.clear();
+        sourceCodeWithLine = new LinkedHashMap<Integer, String>();
         int lineNumber = 1;
         StringReader sr = new StringReader(adaptedContent);
         BufferedReader br = new BufferedReader(sr);
@@ -548,11 +550,13 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     }
     
     /**
-     * The initialisation should be performed only once.
+     * Initialisation of a local map that handles each source code line, 
+     * keyed by the line number
+     * 
      * @param adaptedContent
      */
     private void initializeRawSourceCodeMap(String rawSource) {
-        rawSourceCodeWithLine.clear();
+        rawSourceCodeWithLine = new LinkedHashMap<Integer, String>();
         int lineNumber = 1;
         StringReader sr = new StringReader(rawSource);
         BufferedReader br = new BufferedReader(sr);
