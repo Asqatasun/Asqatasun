@@ -26,7 +26,6 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.opens.tanaguru.sebuilder.tools.ProfileFactory;
 
 /**
@@ -59,7 +58,7 @@ public class WebDriverFactory {
             ProfileFactory pf = ProfileFactory.getInstance();
             webDriver = new FirefoxDriver(ffBinary, pf.getOnlineProfile());
             webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-            webDriver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+            webDriver.manage().timeouts().pageLoadTimeout(310, TimeUnit.SECONDS);
         }
         return webDriver;
     }
