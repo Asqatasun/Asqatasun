@@ -61,7 +61,6 @@ public class SSPHandlerImpl implements SSPHandler {
     private NomenclatureLoaderService nomenclatureLoaderService;
     private ProcessRemarkFactory processRemarkFactory;
     private String selectionExpression;
-//    private List<ProcessRemark> remarkList;
     private Map<String, BufferedImage> imageMap;
     private URLIdentifier urlIdentifier;
     private Set<ImageContent> imageOnErrorSet;
@@ -95,7 +94,7 @@ public class SSPHandlerImpl implements SSPHandler {
 
     @Override
     public SSPHandler beginSelection() {
-        domHandler.beginSelection();
+        domHandler.beginXpathSelection();
         if (cssHandler != null) {
             cssHandler.beginSelection();
         }
@@ -117,17 +116,14 @@ public class SSPHandlerImpl implements SSPHandler {
     }
     
     @Override
-    public SSPHandler beginJQueryLikeSelection() {
-        domHandler.beginJQueryLikeSelection();
+    public SSPHandler beginCssLikeSelection() {
+        domHandler.beginCssLikeSelection();
         if (cssHandler != null) {
             cssHandler.beginSelection();
         }
         if (jsHandler != null) {
             jsHandler.beginSelection();
         }
-
-        selectionExpression = null;
-//        remarkList = new ArrayList<ProcessRemark>();
 
         URL src;
         try {
@@ -345,8 +341,8 @@ public class SSPHandlerImpl implements SSPHandler {
      * @return
      */
     @Override
-    public SSPHandler domJQuerySelectNodeSet(String expression) {
-        domHandler.jquerySelectNodeSet(expression);
+    public SSPHandler domCssLikeSelectNodeSet(String expression) {
+        domHandler.cssLikeSelectNodeSet(expression);
         selectionExpression = expression;
         return this;
     }

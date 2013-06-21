@@ -79,14 +79,14 @@ public interface DOMHandler {
      *
      * @return the current SSPHandler instance
      */
-    DOMHandler beginSelection();
+    DOMHandler beginXpathSelection();
     
     /**
      * 
      * @return 
      *      the current SSPHandler instance
      */
-    DOMHandler beginJQueryLikeSelection();
+    DOMHandler beginCssLikeSelection();
 
     /**
      *
@@ -205,7 +205,7 @@ public interface DOMHandler {
      * @param expr
      * @return
      */
-    DOMHandler jquerySelectNodeSet(String expr);
+    DOMHandler cssLikeSelectNodeSet(String expr);
 
     /**
      *

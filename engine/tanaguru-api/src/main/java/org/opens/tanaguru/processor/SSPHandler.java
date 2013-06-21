@@ -43,17 +43,18 @@ import org.w3c.dom.Node;
 public interface SSPHandler {
 
     /**
-     *
+     * Initialise document to allow parsing document with xpath requests
      * @return the current SSPHandler with an empty selection
      */
     SSPHandler beginSelection();
     
     /**
-     *
+     * Initialise document to allow parsing document with css-like requests
+     * 
      * @return the current SSPHandler with an empty selection
      */
-    SSPHandler beginJQueryLikeSelection();
-
+    SSPHandler beginCssLikeSelection();
+    
     /**
      *
      * @param attributeName
@@ -222,7 +223,7 @@ public interface SSPHandler {
      * @param expression
      * @return 
      */
-    SSPHandler domJQuerySelectNodeSet(String expression);
+    SSPHandler domCssLikeSelectNodeSet(String expression);
 
     /**
      *

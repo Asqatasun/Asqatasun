@@ -96,7 +96,7 @@ public class DOMHandlerImpl implements DOMHandler {
     }
 
     @Override
-    public DOMHandler beginSelection() {
+    public DOMHandler beginXpathSelection() {
         initialize();
         messageCode = null;
         selectedElementList = new ArrayList<Node>();
@@ -113,7 +113,7 @@ public class DOMHandlerImpl implements DOMHandler {
      * @return the current instance 
      */
     @Override
-    public DOMHandler beginJQueryLikeSelection() {
+    public DOMHandler beginCssLikeSelection() {
         messageCode = null;
         // reset the local collection of elements
         selectedElementList = new ArrayList<Node>();
@@ -533,7 +533,7 @@ public class DOMHandlerImpl implements DOMHandler {
      * @return
      */
     @Override
-    public DOMHandler jquerySelectNodeSet(String expr) {
+    public DOMHandler cssLikeSelectNodeSet(String expr) {
         selectedElements = jsoupDocument.select(expr);
         return this;
     }
