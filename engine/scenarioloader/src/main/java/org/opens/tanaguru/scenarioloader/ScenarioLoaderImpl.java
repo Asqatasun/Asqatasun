@@ -150,6 +150,16 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         this.firefoxDriverObjectPool = firefoxDriverObjectPool;
     }
     
+    int implicitelyWaitDriverTimeout = -1;
+    public void setImplicitelyWaitDriverTimeout(int implicitelyWaitDriverTimeout) {
+        this.implicitelyWaitDriverTimeout = implicitelyWaitDriverTimeout;
+    }
+
+    int pageLoadDriverTimeout = -1;
+    public void setPageLoadDriverTimeout(int pageLoadDriverTimeout) {
+        this.pageLoadDriverTimeout = pageLoadDriverTimeout;
+    }
+    
     /**
      * The scenario
      */
@@ -179,15 +189,8 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         try {
             LOGGER.debug("Launch Scenario "   + scenario );
             FirefoxProfile firefoxProfile = profileFactory.getScenarioProfile();
-            TestRunFactory testRunFactory = new TgTestRunFactory();
-            ((TgTestRunFactory)testRunFactory).addNewPageListener(this);
-            ((TgTestRunFactory)testRunFactory).setFirefoxProfile(firefoxProfile);
-            ((TgTestRunFactory)testRunFactory).setJsScriptMap(jsScriptMap);
-//            ((TgTestRunFactory)testRunFactory).setFirefoxDriverObjectPool(firefoxDriverObjectPool);
-            ScriptFactory scriptFactory = new ScriptFactory();
-            scriptFactory.setTestRunFactory(testRunFactory);
-            scriptFactory.setStepTypeFactory(new TgStepTypeFactory());
-            Script script = scriptFactory.parse(scenario);
+
+            Script script = getScriptFromScenario(scenario, firefoxProfile);
             try {
                 if (script.run()) {
                     LOGGER.debug(webResource.getURL()  + " succeeded");
@@ -324,4 +327,36 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         }
     }
 
+    /**
+     * 
+     * @param firefoxProfile
+     * @return an initialised instance of TestRunFactory
+     */
+    private TestRunFactory initTestRunFactory (FirefoxProfile firefoxProfile){
+        TgTestRunFactory testRunFactory = new TgTestRunFactory();
+        testRunFactory.addNewPageListener(this);
+        testRunFactory.setFirefoxProfile(firefoxProfile);
+        testRunFactory.setJsScriptMap(jsScriptMap);
+        testRunFactory.setImplicitelyWaitDriverTimeout(implicitelyWaitDriverTimeout);
+        testRunFactory.setPageLoadDriverTimeout(pageLoadDriverTimeout);
+//      ((TgTestRunFactory)testRunFactory).setFirefoxDriverObjectPool(firefoxDriverObjectPool);
+        return testRunFactory;
+    }
+
+    /**
+     * 
+     * @param scenario
+     * @param firefoxProfile
+     * @return an initialised Script ready to be run.
+     * 
+     * @throws IOException
+     * @throws JSONException 
+     */
+    private Script getScriptFromScenario(String scenario, FirefoxProfile firefoxProfile) throws IOException, JSONException {
+        ScriptFactory scriptFactory = new ScriptFactory();
+        scriptFactory.setTestRunFactory(initTestRunFactory(firefoxProfile));
+        scriptFactory.setStepTypeFactory(new TgStepTypeFactory());
+        return scriptFactory.parse(scenario);
+    }
+    
 }

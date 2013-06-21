@@ -10,6 +10,12 @@
 <!--                <entry key="colorExtractor" value="/js/colorExtractor.js"/>-->
             </map>
         </property>
+        <property name="implicitelyWaitDriverTimeout">
+            <value>5</value>
+        </property>
+        <property name="pageLoadDriverTimeout">
+            <value>20</value>
+        </property>
     </bean>
 
     <bean id="scenarioLoaderService" class="org.opens.tanaguru.service.ScenarioLoaderServiceImpl"/>

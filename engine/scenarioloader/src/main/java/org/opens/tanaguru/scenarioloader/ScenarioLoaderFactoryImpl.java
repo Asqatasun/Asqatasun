@@ -153,6 +153,16 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
         this.dateFactory = dateFactory;
     }
 
+    int implicitelyWaitDriverTimeout = -1;
+    public void setImplicitelyWaitDriverTimeout(int implicitelyWaitDriverTimeout) {
+        this.implicitelyWaitDriverTimeout = implicitelyWaitDriverTimeout;
+    }
+
+    int pageLoadDriverTimeout = -1;
+    public void setPageLoadDriverTimeout(int pageLoadDriverTimeout) {
+        this.pageLoadDriverTimeout = pageLoadDriverTimeout;
+    }
+    
     @Override
     public ScenarioLoader create(WebResource mainWebResource, String scenario) {
         ScenarioLoaderImpl scenarioLoader = new ScenarioLoaderImpl(
@@ -165,6 +175,8 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
         scenarioLoader.setPreProcessResultFactory(preProcessResultFactory);
         scenarioLoader.setPreProcessResultDataService(preProcessResultDataService);
         scenarioLoader.setJsScriptMap(jsScriptMap);
+        scenarioLoader.setImplicitelyWaitDriverTimeout(implicitelyWaitDriverTimeout);
+        scenarioLoader.setPageLoadDriverTimeout(pageLoadDriverTimeout);
 //        scenarioLoader.setFirefoxDriverObjectPool(firefoxDriverObjectPool);
         return scenarioLoader;
     }
