@@ -21,10 +21,12 @@
  */
 package org.opens.tanaguru.entity.service.reference;
 
-import org.opens.tanaguru.entity.reference.Nomenclature;
-import org.opens.tanaguru.entity.reference.NomenclatureElement;
+import java.util.HashMap;
+import java.util.Map;
 import org.opens.tanaguru.entity.dao.reference.NomenclatureDAO;
 import org.opens.tanaguru.entity.dao.reference.StandardMessageDAO;
+import org.opens.tanaguru.entity.reference.Nomenclature;
+import org.opens.tanaguru.entity.reference.NomenclatureElement;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 
 /**
@@ -35,6 +37,8 @@ public class NomenclatureDataServiceImpl extends AbstractGenericDataService<Nome
         NomenclatureDataService {
 
     protected StandardMessageDAO standardMessageDao;
+    private Map<String, Nomenclature> nomenclatureMapByCode = 
+            new HashMap<String, Nomenclature>();
 
     public NomenclatureDataServiceImpl() {
         super();
@@ -42,7 +46,13 @@ public class NomenclatureDataServiceImpl extends AbstractGenericDataService<Nome
 
     @Override
     public Nomenclature findByCode(String code) {
-        return ((NomenclatureDAO) entityDao).retrieveByCode(code);
+        if (nomenclatureMapByCode.containsKey(code)) {
+            return nomenclatureMapByCode.get(code);
+        } else {
+            Nomenclature nom = ((NomenclatureDAO) entityDao).retrieveByCode(code);
+            nomenclatureMapByCode.put(code, nom);
+            return nom;
+        }
     }
 
     @Override
