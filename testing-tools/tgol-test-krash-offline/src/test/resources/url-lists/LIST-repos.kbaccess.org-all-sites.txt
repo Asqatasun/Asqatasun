@@ -28,7 +28,6 @@ handicap-org-20100323;http://repos.kbaccess.org/static/fr-FR-handicap/handicap-o
 accessiweb-20100322;http://repos.kbaccess.org/static/fr-FR-accessibilite/accessiweb-20100322/index.html
 lalibre-20100322;http://repos.kbaccess.org/static/fr-BE-news/lalibre-20100322/index.html
 dhnet-20100322;http://repos.kbaccess.org/static/fr-BE-news/dhnet-20100322/index.html
-lameuse-20100322;http://repos.kbaccess.org/static/fr-BE-news/lameuse-20100322/index.html
 lesoir-20100322;http://repos.kbaccess.org/static/fr-BE-news/lesoir-20100322/index.html
 levif-20100322;http://repos.kbaccess.org/static/fr-BE-news/levif-20100322/index.html
 taz-20100322;http://repos.kbaccess.org/static/de-DE-news/taz-20100322/index.html
