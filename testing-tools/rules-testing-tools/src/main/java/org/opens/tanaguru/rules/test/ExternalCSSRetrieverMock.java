@@ -36,10 +36,10 @@ import org.opens.tanaguru.entity.audit.StylesheetContent;
 public class ExternalCSSRetrieverMock implements ExternalCSSRetriever {
 
     private static final String INLINE_CSS_SUFFIX = "#tanaguru-css-";
-
+    Collection<StylesheetContent> externalCss = new HashSet<StylesheetContent>();
+    
     @Override
     public Collection<StylesheetContent> getExternalCSS(SSP ssp) {
-        Collection<StylesheetContent> externalCss = new HashSet<StylesheetContent>();
         for (RelatedContent rc : ssp.getRelatedContentSet()) {
             if (rc instanceof StylesheetContent && !(((Content)rc).getURI().contains(INLINE_CSS_SUFFIX))) {
                 externalCss.add((StylesheetContent)rc);
@@ -50,7 +50,7 @@ public class ExternalCSSRetrieverMock implements ExternalCSSRetriever {
 
     @Override
     public void addNewStylesheetContent(SSP ssp, StylesheetContent stylesheetContent) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        externalCss.add(stylesheetContent);
     }
 
 }
