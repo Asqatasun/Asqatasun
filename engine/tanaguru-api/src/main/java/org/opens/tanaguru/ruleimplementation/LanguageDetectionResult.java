@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,18 +21,23 @@
  */
 package org.opens.tanaguru.ruleimplementation;
 
+import com.cybozu.labs.langdetect.Language;
+import org.apache.commons.lang3.StringUtils;
+
 /**
- * This class handles the detected language and the reliability of the
- * detection.
- * 
- * @author jkowalczyk
+ * This class handles the detected language, its probability and the 
+ * reliability of the detection.
+ *
  */
 public class LanguageDetectionResult {
 
+    private static int MIN_NUMBER_OF_WORDS_TO_BE_RELIABLE = 5;
+    private static double MIN_PROBABILITY_TO_BE_RELIABLE = 0.9;
     /**
      * The detected language
      */
     private String detectedLanguage;
+
     public String getDetectedLanguage() {
         return detectedLanguage;
     }
@@ -40,22 +45,44 @@ public class LanguageDetectionResult {
     public void setDetectedLanguage(String detectedLanguage) {
         this.detectedLanguage = detectedLanguage;
     }
+    /**
+     * The probability of the result
+     */
+    private double probability;
+    /**
+     * The number of words of the tested text
+     */
+    private int numberOfWords = 0;
+
+    private void computeNumberOfWords(String testedText) {
+        String trimmedText = StringUtils.trim(testedText);
+        if (StringUtils.isBlank(trimmedText)) {
+            return;
+        }
+        numberOfWords = trimmedText.split("\\s+").length;
+    }
 
     /**
-     * The reliability of the result
+     *
+     * @param language
+     * @param testedText
      */
-    private boolean isReliable;
+    public LanguageDetectionResult(Language language, String testedText) {
+        this.detectedLanguage = language.lang;
+        this.probability = language.prob;
+        computeNumberOfWords(testedText);
+    }
+
+    /**
+     *
+     * @return whether the detection is reliable regarding its probability and
+     * the number of tested words
+     */
     public boolean isReliable() {
-        return isReliable;
+        if (probability > MIN_PROBABILITY_TO_BE_RELIABLE
+                && numberOfWords > MIN_NUMBER_OF_WORDS_TO_BE_RELIABLE) {
+            return true;
+        }
+        return false;
     }
-
-    public void setIsReliable(boolean isReliable) {
-        this.isReliable = isReliable;
-    }
-
-    public LanguageDetectionResult(String detectedLanguage, boolean isReliable) {
-        this.detectedLanguage = detectedLanguage;
-        this.isReliable = isReliable;
-    }
-    
 }

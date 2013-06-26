@@ -80,5 +80,9 @@
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.cybozu.labs</groupId>
+            <artifactId>langdetect</artifactId>
+        </dependency>
     </dependencies>
 </project>

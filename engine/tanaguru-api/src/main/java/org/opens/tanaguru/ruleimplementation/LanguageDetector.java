@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,175 +21,124 @@
  */
 package org.opens.tanaguru.ruleimplementation;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import com.cybozu.labs.langdetect.Detector;
+import com.cybozu.labs.langdetect.DetectorFactory;
+import com.cybozu.labs.langdetect.LangDetectException;
+import com.cybozu.labs.langdetect.Language;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 /**
- *
- * @author jkowalczyk
+ * Utility class, implementing the singleton pattern, that enables to 
+ * determine the language of some text.
  */
 public class LanguageDetector {
 
     private static final Logger LOGGER = Logger.getLogger(LanguageDetector.class);
-    private static final String LANGUAGE_KEY = "language";
-    private static final String DATA_KEY = "data";
-    private static final String DETECTIONS_KEY = "detections";
-    private static final String IS_RELIABLE_KEY = "isReliable";
-    private static final String CONFIDENCE_KEY = "confidence";
-    private static final String UTF8_ENCODING_KEY = "UTF-8";
-    private static final int MAX_SIZE_TEXT = 3000;
-
-    private String proxyPort;
-    public String getProxyPort() {
-        return proxyPort;
-    }
-
-    public void setProxyPort(String proxyPort) {
-        this.proxyPort = proxyPort;
-    }
-
-    private String proxyHost;
-    public String getProxyHost() {
-        return proxyPort;
-    }
-
-    public void setProxyHost(String proxyHost) {
-        this.proxyHost = proxyHost;
-    }
-
-    private String serviceUrl;
-    public void setServiceUrl(String serviceUrl) {
-        this.serviceUrl = serviceUrl;
-    }
-
-    private String version;
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
-    private String textKey;
-    public void setTextKey(String textKey) {
-        this.textKey = textKey;
-    }
 
     /**
-     * The unique instance of LanguageDetector
+     * The path from where the language profiles can be loaded. By default, 
+     * these profiles are loaded from the profile directory of the jar of the 
+     * lang-detect library
      */
-    private static LanguageDetector languageDetector = null;
+    private String profilePath = "classpath*:profiles/*";
+    public String getProfilePath() {
+        return profilePath;
+    }
+
+    public void setProfilePath(String profilePath) {
+        this.profilePath = profilePath;
+    }
+    
+    /**
+     * The holder that handles the unique instance of LanguageDetector
+     */
+    private static class LanguageDetectorHolder {
+        public static LanguageDetector INSTANCE = new LanguageDetector();
+    }
 
     /**
      * Private constructor
      */
-    private LanguageDetector() {}
-
-    /**
-     * 
-     * @return
-     */
-    public static synchronized LanguageDetector getInstance() {
-        if (languageDetector == null) {
-            languageDetector = new LanguageDetector();
+    private LanguageDetector() {
+        if (LanguageDetectorHolder.INSTANCE != null) {
+            throw new IllegalStateException("Already instantiated");
         }
-        return languageDetector;
+        initProfiles();
     }
 
+    /**
+     *
+     * @return the unique instance of LanguageDetector
+     */
+    public static LanguageDetector getInstance() {
+        return LanguageDetectorHolder.INSTANCE;
+    }
+
+    /**
+     * Perform the detection 
+     * 
+     * @param text to test
+     * @return the detected language
+     */
     public LanguageDetectionResult detectLanguage(String text) {
-        BufferedReader reader = null;
-        InputStreamReader inputStreamReader = null;
-//        try {
-//            text = java.net.URLEncoder.encode(text, UTF8_ENCODING_KEY);
-//            boolean isTextTruncated = false;
-//            if (text.length() > MAX_SIZE_TEXT) {
-//                text = text.substring(0, MAX_SIZE_TEXT).trim();
-//                //to avoid the split of an encoded character
-//                if (text.charAt(text.length()-1) == '%') {
-//                    text=text.substring(0, text.length()-1);
-//                } else if (text.charAt(text.length()-2) == '%') {
-//                    text=text.substring(0, text.length()-2);
-//                } else if (text.charAt(text.length()-3) == '%') {
-//                    text=text.substring(0, text.length()-3);
-//                }
-//                isTextTruncated = true;
-//            }
-//            URL url = new URL(serviceUrl + version + textKey + text);
-//            LOGGER.debug("Json url request " +url.toString());
-//            URLConnection connection = null;
-//            if (!StringUtils.isEmpty(proxyHost) && !StringUtils.isEmpty(proxyPort)) {
-//                LOGGER.debug("Launch request through proxy with values " +proxyHost + " : " +proxyPort);
-//                SocketAddress sa = new InetSocketAddress(proxyHost,Integer.valueOf(proxyPort));
-//                Proxy proxy = new Proxy(Proxy.Type.HTTP, sa);
-//                connection = url.openConnection(proxy);
-//            } else {
-//                LOGGER.debug("Launch direct");
-//                connection = url.openConnection();
-//            }
-//            String line;
-//            StringBuilder builder = new StringBuilder();
-//            inputStreamReader = new InputStreamReader(connection.getInputStream());
-//            reader = new BufferedReader(inputStreamReader);
-//            while ((line = reader.readLine()) != null) {
-//                builder.append(line);
-//            }
-//            reader.close();
-//            JSONObject json = new JSONObject(builder.toString());
-//            JSONObject jdata = (JSONObject) json.get(DATA_KEY);
-//            JSONArray jdetections = (JSONArray) jdata.get(DETECTIONS_KEY);
-//            JSONObject langObject = extractBestResultObject(jdetections);
-//            // if the text is truncated, the result is seen as unreliable
-//            // coz' the test is done on a part of the text.
-//            if (isTextTruncated) {
-//                return new LanguageDetectionResult(langObject.get(LANGUAGE_KEY).toString(),
-//                    false);
-//            } else {
-//                return new LanguageDetectionResult(((JSONObject)jdetections.get(0)).get(LANGUAGE_KEY).toString(),
-//                    Boolean.valueOf(((JSONObject)jdetections.get(0)).get(IS_RELIABLE_KEY).toString()));
-//            }
-//        } catch (MalformedURLException ex) {
-//            LOGGER.warn(null, ex);
-//        } catch (IOException ex) {
-//            LOGGER.warn(null, ex);
-//        } catch (JSONException ex) {
-//            LOGGER.warn(null, ex);
-//        } catch (Exception ex) {
-//            LOGGER.warn(null, ex);
-//        } finally {
-//            try {
-//                if (reader != null) {
-//                    reader.close();
-//                }
-//                if (inputStreamReader != null) {
-//                    inputStreamReader.close();
-//                }
-//            } catch (IOException ex) {
-//                LOGGER.warn(ex);
-//            }
-//        }
+        try {
+            Detector detector = DetectorFactory.create();
+            detector.append(text);
+            Language detectedLanguage =  
+                    extractLangWithHighestProbability(detector.getProbabilities());
+            return new LanguageDetectionResult(detectedLanguage, text);
+        } catch (LangDetectException ex) {
+            LOGGER.warn(ex);
+        }
         return null;
     }
 
     /**
-     * Multiple results are returned in a tab format. This method parses the
-     * different results and keeps the best regarding the relevancy value.
-     * @param jdetections
-     * @return
+     * Multiple results are returned in a list. This method parses the different
+     * results and keeps the best regarding the relevancy value.
+     *
+     * @param languages
+     * @return the language with the highest probability
      */
-    private JSONObject extractBestResultObject(JSONArray jdetections) throws JSONException {
-        JSONObject result = null;
+    private Language extractLangWithHighestProbability(ArrayList<Language> languages) {
         double bestRelevancy = -1;
-        for (int i=0; i<jdetections.length();i++) {
-            LOGGER.info(" bestRelevancy " + bestRelevancy);
-            LOGGER.info("((JSONObject)jdetections.get(i)).getDouble(CONFIDENCE_KEY) " + ((JSONObject)jdetections.get(i)).getDouble(CONFIDENCE_KEY));
-            LOGGER.info("((JSONObject)jdetections.get(i)).get(LANGUAGE_KEY) " + ((JSONObject)jdetections.get(i)).get(LANGUAGE_KEY));
-            if (((JSONObject)jdetections.get(i)).getDouble(CONFIDENCE_KEY) > bestRelevancy) {
-                result = (JSONObject)jdetections.get(i);
-                bestRelevancy = ((JSONObject)jdetections.get(i)).getDouble(CONFIDENCE_KEY);
+        Language langWinner = null;
+        for (Language lang : languages) {
+            if (lang.prob > bestRelevancy) {
+                bestRelevancy = lang.prob;
+                langWinner = lang;
             }
         }
-        return result;
+        return langWinner;
     }
 
+        /**
+     * Initialise the language profiles needed by the detector. This
+     * initialisation has to be performed only once.
+     */
+    private void initProfiles() {
+        PathMatchingResourcePatternResolver resolver = 
+                new PathMatchingResourcePatternResolver();
+        List<String> profiles = new ArrayList<String>();
+        try {
+            for (Resource rs : resolver.getResources(profilePath)) {
+                StringWriter writer = new StringWriter();
+                IOUtils.copy(rs.getInputStream(), writer);
+                profiles.add(writer.toString());
+            }
+            DetectorFactory.loadProfile(profiles);
+        } catch (IOException ex) {
+            LOGGER.warn(ex);
+        } catch (LangDetectException ex) {
+            LOGGER.warn(ex);
+        }
+    }
+    
 }
