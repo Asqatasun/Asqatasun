@@ -21,63 +21,8 @@
     </bean>
 
     <bean id="processorFactory" class="org.opens.tanaguru.processor.ProcessorFactoryImpl"/>
-
     <bean id="processorService" class="org.opens.tanaguru.service.ProcessorServiceImpl"/>
-<!--        <property name="ruleImplementationLoaderService" ref="ruleImplementationLoaderService"/>
-
-        <property name="nomenclatureLoaderService" ref="nomenclatureLoaderService"/>
-
-        <property name="processRemarkFactory" ref="processRemarkFactory"/>
-        <property name="sourceCodeRemarkFactory" ref="sourceCodeRemarkFactory"/>
-        <property name="evidenceDataService" ref="evidenceDataService"/>
-        <property name="evidenceElementFactory" ref="evidenceElementFactory"/>
-
-        <property name="processorFactory" ref="processorFactory"/>
-        <property name="urlIdentifierFactory" ref="urlIdentifierFactory"/>
-    </bean>-->
-
+    
     <bean id="languageDetector" class="org.opens.tanaguru.ruleimplementation.LanguageDetector" factory-method="getInstance"/>
-
-    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject">
-            <ref local="languageDetector"/>
-        </property>
-        <property name="targetMethod">
-            <value>setServiceUrl</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <value>${service-url}</value>
-            </list>
-        </property>
-    </bean>
-
-    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject">
-            <ref local="languageDetector"/>
-        </property>
-        <property name="targetMethod">
-            <value>setVersion</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <value>${detector-version}</value>
-            </list>
-        </property>
-    </bean>
-
-    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject">
-            <ref local="languageDetector"/>
-        </property>
-        <property name="targetMethod">
-            <value>setTextKey</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <value>${text-key}</value>
-            </list>
-        </property>
-    </bean>
 
 </beans>
