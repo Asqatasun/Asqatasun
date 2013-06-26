@@ -15,7 +15,6 @@
         <property name="locations">
             <list>
                 <value>conf/context/tanaguru.conf</value>
-                <value>conf/context/language-detection.conf</value>
             </list>
         </property>
     </bean>
