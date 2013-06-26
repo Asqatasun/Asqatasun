@@ -37,7 +37,7 @@ import org.opens.tanaguru.processor.SSPHandler;
  *  <ul>
  *  <li>selection</li>
  *  <li>check</li>
- *  <li>result computation<li>
+ *  <li>result computation</li>
  *  </ul>
  *  It provides a default implementation for the result computation.<br/>
  *  This class implements the {@link ElementHanlder} interface to handle the selected 
