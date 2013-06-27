@@ -152,10 +152,10 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     public void setEvidenceDataService(EvidenceDataService evidenceDataService) {
         this.evidenceDataService = evidenceDataService;
     }
-    private Map<Integer, String> sourceCodeWithLine =
-            new LinkedHashMap<Integer, String>();
-    private Map<Integer, String> rawSourceCodeWithLine =
-            new LinkedHashMap<Integer, String>();
+    private Map<Integer, String> sourceCodeWithLine = null;
+            
+    private Map<Integer, String> rawSourceCodeWithLine = null;
+            
     /**
      * Local map of evidence to avoid multiple access to database
      */
@@ -591,6 +591,8 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         remark.setMessageCode(messageCode);
 
         remark.setLineNumber(searchNodeLineNumber(node));
+        
+        LOGGER.error(remark.getLineNumber());
         EvidenceElement evidenceElement = evidenceElementFactory.create();
         evidenceElement.setProcessRemark(remark);
         evidenceElement.setValue(elementName);

@@ -99,7 +99,7 @@ public class DOMHandlerImpl implements DOMHandler {
     public DOMHandler beginXpathSelection() {
         initialize();
         messageCode = null;
-        selectedElementList = new ArrayList<Node>();
+        selectedElementList = new LinkedList<Node>();
         // reset the processRemark service when beginning a new selection.
         // means the local collection of processRemark are reset
         processRemarkService.resetService();
@@ -116,7 +116,7 @@ public class DOMHandlerImpl implements DOMHandler {
     public DOMHandler beginCssLikeSelection() {
         messageCode = null;
         // reset the local collection of elements
-        selectedElementList = new ArrayList<Node>();
+        selectedElements = new Elements();
         // reset the processRemark service when beginning a new selection.
         // means the local collection of processRemark are reset
         processRemarkService.resetService();
