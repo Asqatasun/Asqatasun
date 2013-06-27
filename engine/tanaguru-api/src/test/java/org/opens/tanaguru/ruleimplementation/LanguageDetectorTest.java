@@ -23,9 +23,8 @@ package org.opens.tanaguru.ruleimplementation;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import junit.framework.TestCase;
+import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -34,6 +33,8 @@ import org.jsoup.nodes.Document;
  * @author meskoj
  */
 public class LanguageDetectorTest extends TestCase {
+    
+    private static final Logger LOGGER = Logger.getLogger(LanguageDetectorTest.class);
     
     public LanguageDetectorTest(String testName) {
         super(testName);
@@ -60,7 +61,9 @@ public class LanguageDetectorTest extends TestCase {
             doc = Jsoup.parse(new URL("https://af.wikipedia.org/wiki/Suider-Afrika"), 10000);
             assertEquals("af", instance.detectLanguage(doc.text()).getDetectedLanguage());
         } catch (IOException ex) {
-            Logger.getLogger(LanguageDetectorTest.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex);
+        } catch (NullPointerException npe) {
+            LOGGER.error("error while fetching page " + npe);
         }
     }
     
@@ -75,7 +78,9 @@ public class LanguageDetectorTest extends TestCase {
             doc = Jsoup.parse(new URL("http://fr.wikipedia.org/wiki/Accessibilit%C3%A9_du_web"), 10000);
             assertEquals("fr", instance.detectLanguage(doc.text()).getDetectedLanguage());
         } catch (IOException ex) {
-            Logger.getLogger(LanguageDetectorTest.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex);
+        } catch (NullPointerException npe) {
+            LOGGER.error("error while fetching page " + npe);
         }
     }
     
@@ -90,7 +95,9 @@ public class LanguageDetectorTest extends TestCase {
             doc = Jsoup.parse(new URL("http://de.wikipedia.org/wiki/Barrierefreies_Internet"), 10000);
             assertEquals("de", instance.detectLanguage(doc.text()).getDetectedLanguage());
         } catch (IOException ex) {
-            Logger.getLogger(LanguageDetectorTest.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex);
+        } catch (NullPointerException npe) {
+            LOGGER.error("error while fetching page " + npe);
         }
     }
     
@@ -105,7 +112,9 @@ public class LanguageDetectorTest extends TestCase {
             doc = Jsoup.parse(new URL("http://en.wikipedia.org/wiki/Web_accessibility"), 10000);
             assertEquals("en", instance.detectLanguage(doc.text()).getDetectedLanguage());
         } catch (IOException ex) {
-            Logger.getLogger(LanguageDetectorTest.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex);
+        } catch (NullPointerException npe) {
+            LOGGER.error("error while fetching page " + npe);
         }
     }
     
@@ -121,7 +130,9 @@ public class LanguageDetectorTest extends TestCase {
             doc = Jsoup.parse(new URL("http://es.wikipedia.org/wiki/Accesibilidad_web"), 10000);
             assertEquals("es", instance.detectLanguage(doc.text()).getDetectedLanguage());
         } catch (IOException ex) {
-            Logger.getLogger(LanguageDetectorTest.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex);
+        } catch (NullPointerException npe) {
+            LOGGER.error("error while fetching page " + npe);
         }
     }
     
@@ -136,7 +147,9 @@ public class LanguageDetectorTest extends TestCase {
             doc = Jsoup.parse(new URL("http://fa.wikipedia.org/wiki/%D8%AF%D8%B3%D8%AA%D8%B1%D8%B3%DB%8C%E2%80%8C%D9%BE%D8%B0%DB%8C%D8%B1%DB%8C_%D9%88%D8%A8"), 10000);
             assertEquals("fa", instance.detectLanguage(doc.text()).getDetectedLanguage());
         } catch (IOException ex) {
-            Logger.getLogger(LanguageDetectorTest.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex);
+        } catch (NullPointerException npe) {
+            LOGGER.error("error while fetching page " + npe);
         }
     }
     
@@ -151,7 +164,9 @@ public class LanguageDetectorTest extends TestCase {
             doc = Jsoup.parse(new URL("http://he.wikipedia.org/wiki/%D7%A0%D7%92%D7%99%D7%A9%D7%95%D7%AA_%D7%90%D7%99%D7%A0%D7%98%D7%A8%D7%A0%D7%98"), 10000);
             assertEquals("he", instance.detectLanguage(doc.text()).getDetectedLanguage());
         } catch (IOException ex) {
-            Logger.getLogger(LanguageDetectorTest.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex);
+        } catch (NullPointerException npe) {
+            LOGGER.error("error while fetching page " + npe);
         }
     }
     
@@ -166,7 +181,9 @@ public class LanguageDetectorTest extends TestCase {
             doc = Jsoup.parse(new URL("http://ko.wikipedia.org/wiki/%EC%9B%B9_%EC%A0%91%EA%B7%BC%EC%84%B1"), 10000);
             assertEquals("ko", instance.detectLanguage(doc.text()).getDetectedLanguage());
         } catch (IOException ex) {
-            Logger.getLogger(LanguageDetectorTest.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex);
+        } catch (NullPointerException npe) {
+            LOGGER.error("error while fetching page " + npe);
         }
     }
     
@@ -181,7 +198,9 @@ public class LanguageDetectorTest extends TestCase {
             doc = Jsoup.parse(new URL("http://mk.wikipedia.org/wiki/%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%BD%D0%B5%D1%82-%D0%BF%D1%80%D0%B8%D1%81%D1%82%D0%B0%D0%BF%D0%BD%D0%BE%D1%81%D1%82"), 10000);
             assertEquals("mk", instance.detectLanguage(doc.text()).getDetectedLanguage());
         } catch (IOException ex) {
-            Logger.getLogger(LanguageDetectorTest.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex);
+        } catch (NullPointerException npe) {
+            LOGGER.error("error while fetching page " + npe);
         }
     }
     
@@ -196,7 +215,9 @@ public class LanguageDetectorTest extends TestCase {
             doc = Jsoup.parse(new URL("http://pl.wikipedia.org/wiki/Dost%C4%99pno%C5%9B%C4%87_%28WWW%29"), 10000);
             assertEquals("pl", instance.detectLanguage(doc.text()).getDetectedLanguage());
         } catch (IOException ex) {
-            Logger.getLogger(LanguageDetectorTest.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex);
+        } catch (NullPointerException npe) {
+            LOGGER.error("error while fetching page " + npe);
         }
     }
     
@@ -211,7 +232,9 @@ public class LanguageDetectorTest extends TestCase {
             doc = Jsoup.parse(new URL("http://pt.wikipedia.org/wiki/Acessibilidade_Web"), 10000);
             assertEquals("pt", instance.detectLanguage(doc.text()).getDetectedLanguage());
         } catch (IOException ex) {
-            Logger.getLogger(LanguageDetectorTest.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex);
+        } catch (NullPointerException npe) {
+            LOGGER.error("error while fetching page " + npe);
         }
     }
     
@@ -226,7 +249,9 @@ public class LanguageDetectorTest extends TestCase {
             doc = Jsoup.parse(new URL("http://th.wikipedia.org/wiki/%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%AA%E0%B8%B2%E0%B8%A1%E0%B8%B2%E0%B8%A3%E0%B8%96%E0%B9%83%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B8%96%E0%B8%B6%E0%B8%87%E0%B9%80%E0%B8%A7%E0%B9%87%E0%B8%9A"), 10000);
             assertEquals("th", instance.detectLanguage(doc.text()).getDetectedLanguage());
         } catch (IOException ex) {
-            Logger.getLogger(LanguageDetectorTest.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex);
+        } catch (NullPointerException npe) {
+            LOGGER.error("error while fetching page " + npe);
         }
     }
     
@@ -241,7 +266,9 @@ public class LanguageDetectorTest extends TestCase {
             doc = Jsoup.parse(new URL("http://vi.wikipedia.org/wiki/C%C3%B4ng_ngh%E1%BB%87_th%C3%B4ng_tin_ti%E1%BA%BFp_c%E1%BA%ADn"), 10000);
             assertEquals("vi", instance.detectLanguage(doc.text()).getDetectedLanguage());
         } catch (IOException ex) {
-            Logger.getLogger(LanguageDetectorTest.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex);
+        } catch (NullPointerException npe) {
+            LOGGER.error("error while fetching page " + npe);
         }
     }
     
@@ -256,7 +283,9 @@ public class LanguageDetectorTest extends TestCase {
             doc = Jsoup.parse(new URL("http://zh.wikipedia.org/wiki/%E7%B6%B2%E9%A0%81%E8%A6%AA%E5%92%8C%E5%8A%9B"), 10000);
             assertEquals("zh-tw", instance.detectLanguage(doc.text()).getDetectedLanguage());
         } catch (IOException ex) {
-            Logger.getLogger(LanguageDetectorTest.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex);
+        } catch (NullPointerException npe) {
+            LOGGER.error("error while fetching page " + npe);
         }
     }
     
@@ -275,7 +304,9 @@ public class LanguageDetectorTest extends TestCase {
             doc = Jsoup.parse(new URL("http://alpidos.ru/home/"), 100000);
             assertEquals("ru", instance.detectLanguage(doc.text()).getDetectedLanguage());
         } catch (IOException ex) {
-            Logger.getLogger(LanguageDetectorTest.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex);
+        } catch (NullPointerException npe) {
+            LOGGER.error("error while fetching page " + npe);
         }
     }
     
