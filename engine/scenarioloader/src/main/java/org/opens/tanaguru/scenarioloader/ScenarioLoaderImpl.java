@@ -199,7 +199,7 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
                 }
             } catch (TestRunException tre) {
                 // The TestRunException is caught but not as runtime, to audit
-                // at least page already fetched
+                // at least pages already fetched
                 LOGGER.warn(tre.getMessage());
             } catch (RuntimeException re) {
                 LOGGER.warn(re.getMessage());
