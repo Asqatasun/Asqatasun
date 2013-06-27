@@ -35,7 +35,6 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.UnhandledAlertException;
@@ -52,7 +51,6 @@ import org.opens.tanaguru.sebuilder.tools.FirefoxDriverObjectPool;
 public class TgTestRun extends TestRun {
 
     private boolean isStepOpenNewPage = false;
-
     private Map<String, String> jsScriptMap;
     public Map<String, String> getJsScriptMap() {
         return jsScriptMap;
@@ -165,7 +163,13 @@ public class TgTestRun extends TestRun {
                     + " is incomplete : " + te.getMessage());
                 fireNewPage();
             }
+        } catch (UnhandledAlertException uae) {
+            getLog().warn(uae.getMessage());
+            properlyCloseWebDriver();
+            throw new TestRunException(currentStep() + " failed.", uae, currentStep().toString(), stepIndex);
         } catch (Exception e) {
+            getLog().warn(e.getCause());
+            getLog().warn(e.getMessage());
             properlyCloseWebDriver();
             throw new TestRunException(currentStep() + " failed.", e, currentStep().toString(), stepIndex);
         }
@@ -202,8 +206,8 @@ public class TgTestRun extends TestRun {
                 npl.fireNewPage(url, sourceCode, null, jsScriptResult);
             }
         } catch (UnhandledAlertException uae) {
-            Logger.getLogger(this.getClass()).warn(uae.getMessage());
-            Logger.getLogger(this.getClass()).warn(uae.getAlertText());
+            getLog().warn(uae.getMessage());
+            throw new TestRunException(currentStep() + " failed.", uae, currentStep().toString(), stepIndex);
         }
     }
 
@@ -294,8 +298,16 @@ public class TgTestRun extends TestRun {
                 getLog().warn("Firefox driver cannot be returned due to  " + ex.getMessage());
             }
         } else {
-            getDriver().close();
-            getDriver().quit();
+            try {
+                getDriver().close();
+                getDriver().quit();
+            } catch (Exception e) {
+                getLog().warn("An error occured while closing driver."
+                        + " A defunct firefox process may run on the system. "
+                        + " Trying to kill before leaving");
+                getDriver().kill();
+            }
         }
     }
+
 }
