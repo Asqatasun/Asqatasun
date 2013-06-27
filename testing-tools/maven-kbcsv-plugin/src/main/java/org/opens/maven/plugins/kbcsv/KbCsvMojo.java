@@ -21,11 +21,7 @@
  */
 package org.opens.maven.plugins.kbcsv;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -98,7 +94,7 @@ public class KbCsvMojo extends AbstractMojo {
                 
                 String ruleUrl = baseUrl + params[0] + "/" + params[1] + "/";
                 for (int i = 0; i < KB_TEST_RESULTS.length; i++) {
-                    String url = ruleUrl + KB_TEST_RESULTS[i]+"/";
+                    String url = ruleUrl + KB_TEST_RESULTS[i]+"/?lang=en";
 
                     try {
                         for (String result : getUrls(url)) {
