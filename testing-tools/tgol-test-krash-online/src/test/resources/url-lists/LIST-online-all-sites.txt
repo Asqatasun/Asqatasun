@@ -105,7 +105,6 @@ en-Organizational-Development-Consulting-Austin-Charles;http://www.austincharles
 en-Organizational-Development-Consulting-Axia-Limited;http://www.axialtd.com/
 en-Organizational-Development-Consulting-Bachmann-Global-Associates--LLC;http://www.bachmannglobal.com/
 en-Organizational-Development-Consulting-Bavendam-Research-Inc-;http://www.bavendam.com/
-en-Organizational-Development-Consulting-Better-Workplace-Now;http://www.betterworkplacenow.com/
 en-Organizational-Development-Consulting-Bev-Scott-Consulting;http://www.bevscott.com/
 en-Organizational-Development-Consulting-Blue-Edge-Consulting-Ltd;http://www.blueedge.eu.com/
 en-Organizational-Development-Consulting-Bonnell-Associates-Ltd-;http://bonnellassociates.com/
@@ -143,12 +142,10 @@ en-Organizational-Development-Consulting-Dattner-Consulting-LLC;http://www.dattn
 en-Organizational-Development-Consulting-Debora-Bloom-Associates;http://dbloomassociates.com/
 en-Organizational-Development-Consulting-Deltapoint-Ltd-;http://www.strategic-conversation.com.au/
 en-Organizational-Development-Consulting-Derek-Hendrikz;http://www.derekhendrikz.com/
-en-Organizational-Development-Consulting-Design-Management-Alliance;http://www.designmgt.com/
 en-Organizational-Development-Consulting-Detterman-Associates;http://www.detterman.com/
-en-Organizational-Development-Consulting-Development-Strategies-Plus;http://www.development-strategies.biz/youradvantage.html
+en-Organizational-Development-Consulting-Development-Strategies-Plus;http://www.development-strategies.biz/
 en-Organizational-Development-Consulting-DisputEd;http://www.disputed.com/
 en-Organizational-Development-Consulting-Donald-G--Zauderer;http://www.dzauderer.com/
-en-Organizational-Development-Consulting-Dynamic-Teams;http://www.dynamic-teams.com/
 en-Organizational-Development-Consulting-EMERGE-International;http://www.emergeinternational.com/
 en-Organizational-Development-Consulting-Employee-Satisfaction-Surveys;http://www.performanceprograms.com/
 en-Organizational-Development-Consulting-Empower-Management;http://www.empower-inc.com/
@@ -188,7 +185,7 @@ en-Organizational-Development-Consulting-Integrated-Development;http://www.id-on
 en-Organizational-Development-Consulting-Integro-Leadership-Institute;http://www.integroleadership.com/
 en-Organizational-Development-Consulting-International-Leadership-Development-Consortium--Inc-;http://www.ildcinc.com/
 en-Organizational-Development-Consulting-JIGSAW-Training---Consultancy-Services-Limited;http://www.outcomes4u.com/
-en-Organizational-Development-Consulting-Jazz-Impact;http://www.jazz-impact.com/about.shtml
+en-Organizational-Development-Consulting-Jazz-Impact;http://www.jazz-impact.com/
 en-Organizational-Development-Consulting-Jemstone-Consultancy;http://jemstoneconsultancy.co.uk/
 en-Organizational-Development-Consulting-Jethro-Consulting;http://www.jethroconsulting.com/
 en-Organizational-Development-Consulting-Jobie-Dixon;http://www.jobiedixon.com/
@@ -199,7 +196,6 @@ en-Organizational-Development-Consulting-Key-Associates-Inc;http://www.keyassoci
 en-Organizational-Development-Consulting-KnowledgePassion;http://www.knowledgepassion.com/
 en-Organizational-Development-Consulting-LaMarsh---Associates;http://www.lamarsh.com/
 en-Organizational-Development-Consulting-Lasa-Development;http://www.lasadev.com/
-en-Organizational-Development-Consulting-Lawry-Cohen-Consulting;http://www.lawrycohenconsulting.com.au/
 en-Organizational-Development-Consulting-Leadership-Management-Group;http://www.lmgsuccess.com/
 en-Organizational-Development-Consulting-Leading-Resources-Inc-;http://www.leadingresources.com/
 en-Organizational-Development-Consulting-Lean-Learning-Center;http://www.leanlearningcenter.com/
@@ -234,7 +230,6 @@ en-Organizational-Development-Consulting-Next-Level-Performance;http://www.nextl
 en-Organizational-Development-Consulting-Nordli--Wilson-Associates;http://www.nordliwilson.com/
 en-Organizational-Development-Consulting-Northeastern-Consulting--Inc;http://www.northeasternconsulting.com/
 en-Organizational-Development-Consulting-Now-for-Future;http://www.nowforfuture.com/
-en-Organizational-Development-Consulting-Odysseyzone-com;http://www.odysseyzone.com/
 en-Organizational-Development-Consulting-Outward-Focus;http://www.outwardfocus.com/
 en-Organizational-Development-Consulting-PI-Worldwide;http://www.piworldwide.com/
 en-Organizational-Development-Consulting-Patrik-Willot----Management-action-and-advice;http://www.willot.com/
@@ -242,7 +237,6 @@ en-Organizational-Development-Consulting-Performance-by-Design;http://diannehill
 en-Organizational-Development-Consulting-Perspective-Consulting-Group;http://www.perspectiveconsulting.com/
 en-Organizational-Development-Consulting-Peter-Rock-Consulting;http://www.peter-rock.com/
 en-Organizational-Development-Consulting-Polish---Business-Consultancy;http://www.polishinc.com.au/
-en-Organizational-Development-Consulting-Powell---Dyer-Gear-Consulting;http://www.powelldyer-gear.com/
 en-Organizational-Development-Consulting-Power-Charged-Consulting;http://www.power-charged.com/
 en-Organizational-Development-Consulting-PriSim-Business-War-Games;http://www.prisim.com/
 en-Organizational-Development-Consulting-ProSci;http://www.iplabs.com/
@@ -283,7 +277,6 @@ en-Organizational-Development-Consulting-TSO-Communication;http://www.tsocommuni
 en-Organizational-Development-Consulting-TTG-Consultants;http://www.ttgconsultants.com/
 en-Organizational-Development-Consulting-Take-Charge-Consultants;http://www.takechargeinc.com/
 en-Organizational-Development-Consulting-Task-Management-Consulting;http://www.tascconsult.com/
-en-Organizational-Development-Consulting-TeamTrainers-Consulting;http://www.suddenteams.com/
 en-Organizational-Development-Consulting-Teammachine;http://www.teammachine.net/
 en-Organizational-Development-Consulting-The-Baldrige-Management-Model;http://www.baldrige.com/
 en-Organizational-Development-Consulting-The-Booth-Company;http://www.boothco.com/
@@ -365,7 +358,6 @@ en-Handcrafted-furniture-Hearthwoods-Rustic-Furnishings;http://www.hearthwoods.c
 en-Handcrafted-furniture-Heartwood-Industries-Furniture;http://www.heartwoodindustries.com/
 en-Handcrafted-furniture-Hoffman-Woodworking;http://www.hoffmanwoodworking.net/
 en-Handcrafted-furniture-House-Of-Kirk;http://www.cakirk.com/
-en-Handcrafted-furniture-Huffs-Woodworking;http://www.huffswoodworking.com/
 en-Handcrafted-furniture-Hun-s-Furniture;http://members.tripod.com/%7Ehun_s/index.html
 en-Handcrafted-furniture-Iguana-Art---Design;http://www.iguanasite.com/
 en-Handcrafted-furniture-Imapro;http://www.imapro-honduras.com/
@@ -412,27 +404,22 @@ en-Handcrafted-furniture-Rupert-McBain-Furniture;http://www.rupertmcbainfurnitur
 en-Handcrafted-furniture-Rustic-Creations;http://www.everythingrustic.com/
 en-Handcrafted-furniture-Rustic-Designs-by-Don-McAulay-Jr-;http://www.rustic-designs.com/
 en-Handcrafted-furniture-S--Timberlake-Company;http://www.stimberlake.com/
-en-Handcrafted-furniture-Santa-Barbara;http://www.santabarbarafurniture.com/
 en-Handcrafted-furniture-Sassafras-Gallery;http://www.sassafrasgallery.com/
 en-Handcrafted-furniture-Schanz-Furniture;http://www.schanzfurniture.com/
 en-Handcrafted-furniture-Shaker-Furniture;http://www.shaker.net/
 en-Handcrafted-furniture-Shaker-Style-Furnishings;http://www.shakerstyle.com/
 en-Handcrafted-furniture-Shaker-with-a--Mission;http://shakerwithamission.tripod.com/
-en-Handcrafted-furniture-Sidney-Margolis---Handcrafted-Furniture;http://www.sidneymargolis.com/
 en-Handcrafted-furniture-Silver-Lining-Etc-;http://www.silverliningetc.com/
-en-Handcrafted-furniture-Southern-Wood-Shop;http://barney.dreamhost.com/
 en-Handcrafted-furniture-Stan-Pike-Designs;http://www.stanpikedesigns.com/
 en-Handcrafted-furniture-Stanton-Hill-Studios;http://www.stantonhillstudios.com/
 en-Handcrafted-furniture-Stebbinsville-Benchworks;http://www.woodbenches.com/
 en-Handcrafted-furniture-Steckley-Woodcrafts;http://www.steckley.com/
 en-Handcrafted-furniture-Teak-Direct;http://www.teakdirect.com/
-en-Handcrafted-furniture-Teak-Furniture-Collection;http://www.teak-collection.com/
 en-Handcrafted-furniture-The-Heartwood-Joinery;http://www.the-heartwood-joinery.com/
 en-Handcrafted-furniture-The-Wood-Grain;http://adirondackfurniture.com/
 en-Handcrafted-furniture-Vermont-Furniture-Works;http://www.vtfurnitureworks.com/
 en-Handcrafted-furniture-Waconda-Oregon-Wood-Furniture;http://www.wacondafurniture.com/
 en-Handcrafted-furniture-West-Creek-Studio;http://www.westcreekstudio.com/
-en-Handcrafted-furniture-Western-Woodworking;http://westernwood.hypermart.net/
 en-Handcrafted-furniture-Wood-Designs--Inc-;http://www.pegrack.com/
 en-Handcrafted-furniture-Woodchests-com;http://woodchests.com/
 en-Handcrafted-furniture-World-Furniture;http://worldfurniture.co.uk/
@@ -524,7 +511,7 @@ en-Financial-service-accountants-Dutton-Moore;http://www.duttonmoore.co.uk/
 en-Financial-service-accountants-Dyer-Partnership;http://www.dyerpartnership.us/
 en-Financial-service-accountants-Easy-Accountancy;http://www.easyaccountancy.co.uk/
 en-Financial-service-accountants-Ellacotts-LLP;http://www.ellacotts.co.uk/
-en-Financial-service-accountants-Ellis---Co;http://www.ellis-uk.com/content/
+en-Financial-service-accountants-Ellis---Co;http://www.ellis-uk.com/
 en-Financial-service-accountants-First-Capital-Cashflow-plc;http://www.firstcapitalcashflow.co.uk/
 en-Financial-service-accountants-Fitch-Chartered-Accountants;http://www.fitch.tv/
 en-Financial-service-accountants-Fluency-Solutions-Ltd-;http://www.fluencysolutions.com/
@@ -606,7 +593,6 @@ en-Financial-service-accountants-Pin-Point;http://www.pinpointaccountants.co.uk/
 en-Financial-service-accountants-Pink-Accounts;http://www.pink-accounts.co.uk/
 en-Financial-service-accountants-Powdrill---Smith;http://www.powdrillsmith.co.uk/
 en-Financial-service-accountants-Pritchards-Chartered-Accountants;http://www.gpca.co.uk/
-en-Financial-service-accountants-RSM-Bentley-Jennison;http://www.bentley-jennison.co.uk/
 en-Financial-service-accountants-Reilly-McMordie;http://www.reilly-mcmordie.co.uk/
 en-Financial-service-accountants-Richard-Kyte-Associates;http://www.richardkyte.com/
 en-Financial-service-accountants-Rickaby---Co;http://www.rickaby.co.uk/
@@ -701,7 +687,6 @@ en-Business-services-for-media-Flying-Lion-Productions;http://www.flyinglionprod
 en-Business-services-for-media-ForImmediateRelease-net;http://www.forimmediaterelease.net
 en-Business-services-for-media-Future-Events-News-Service;http://www.fens.com/
 en-Business-services-for-media-Geodesic-Solutions;http://www.geodesicsolutions.com/
-en-Business-services-for-media-Go-Travel-News;http://www.gotravelnews.com/
 en-Business-services-for-media-Grafix-USA;http://www.grafix-usa.com/
 en-Business-services-for-media-Graphic-News;http://www.graphicnews.com/
 en-Business-services-for-media-Greek-Window---Athens-Journalistic-Services;http://www.greekwindow.com/
@@ -743,7 +728,6 @@ en-Business-services-for-media-PA-Sport;http://www.pa-sport.com/
 en-Business-services-for-media-PR-Media-Consultants---Paul-Richards;http://www.prmediaconsultants.com
 en-Business-services-for-media-Peak-Uplink;http://www.peakuplink.com/
 en-Business-services-for-media-Podcastmatters;http://www.podcastmatters.co.uk
-en-Business-services-for-media-Power-Up-for-Success;http://www.jerrybellune.com/
 en-Business-services-for-media-PressCard;http://www.presscard.com/
 en-Business-services-for-media-PressCom;http://www.presscom.com/
 en-Business-services-for-media-Pressflex-Magazine-Services;http://www.magazines.pressflex.com/
@@ -828,7 +812,6 @@ en-Airlines-All-Nippon-Airways;http://www.ana.co.jp/
 en-Airlines-American-Airlines;http://www.aa.com/
 en-Airlines-Ansett-Australia;http://www.ansett.com.au/
 en-Airlines-Ariana-Afghan-Airlines;http://www.flyariana.com/
-en-Airlines-Astreus-Airlines;http://www.flystar.com/
 en-Airlines-Atlantic-Airlines;http://www.atlanticairlines.com/
 en-Airlines-Atlantic-Southeast-Airlines;http://www.flyasa.com/
 en-Airlines-Austrian-Airlines;http://www.austrian.com/
@@ -956,7 +939,6 @@ en-Airlines-Transaero-Airlines;http://www.transaero.ru/en/index.html
 en-Airlines-Transwest-Air;http://www.transwestair.com/
 en-Airlines-Turkish-Airlines;http://www.turkishairlines.com/
 en-Airlines-US-Airways;http://www.usairways.com/
-en-Airlines-USA-3000-Airlines;http://www.usa3000airlines.com/index.htm
 en-Airlines-Ukraine-International-Airlines;http://www.ukraine-international.com/
 en-Airlines-United-Airlines;http://www.united.com/
 en-Airlines-VLM-Airlines;http://www.cityjet.com/
@@ -1094,7 +1076,7 @@ CCI-Calais;http://www.cotedopale.cci.fr/
 CCI-Caracassone;http://www.carcassonne.cci.fr/
 CCI-Chalon-en-Champagne;http://www.chalonsenchampagne.cci.fr/
 CCI-Cherbourg;http://www.cherbourg-cotentin.cci.fr/
-CCI-Clermont;http://www.clermont-fd.cci.fr/
+CCI-Clermont;www.puy-de-dome.cci.fr/
 CCI-Cognac;http://www.cognac.cci.fr/
 CCI-Colmar;http://www.colmar.cci.fr/
 CCI-Dieppe;http://www.dieppe.cci.fr/
@@ -1206,15 +1188,15 @@ nord-pas-de-calais;http://www.nordpasdecalais.fr/
 picardie;http://www.picardie.fr/
 haute-normandie;http://www.hautenormandie.fr/
 basse-normandie;http://www.cr-basse-normandie.fr/
-bretagne;http://www.bretagne.fr/internet/jcms/j_6/accueil
+bretagne;http://www.bretagne.fr/
 pays-de-loire;http://www.paysdelaloire.fr/
-centre;http://www.regioncentre.fr/jahia/Jahia/
+centre;http://www.regioncentre.fr/
 alsace;http://www.region-alsace.eu/
 aquitaine;http://aquitaine.fr/?lang=fr
 corse;http://www.corse.fr/
 limousin;http://www.region-limousin.fr/
-lorraine;http://www.lorraine.eu/jahia/Jahia/site/e-internet/
-poitou-charentes;http://www.poitou-charentes.fr/accueil.html
+lorraine;http://www.lorraine.eu
+poitou-charentes;http://www.poitou-charentes.fr/
 rhones-alpes;http://www.rhonealpes.fr/
 franche-comte;http://www.franche-comte.fr/
 ile-de-france;http://www.iledefrance.fr/
@@ -1297,7 +1279,7 @@ Wall-Street-Journal;http://europe.wsj.com/home-page
 NewsWeek;http://www.thedailybeast.com/newsweek.html
 News-Scientist;http://www.newscientist.com/
 dourfestival;http://www.dourfestival.be/
-rockwerchter;http://www.rockwerchter.be/fr/home/
+rockwerchter;http://www.rockwerchter.be/fr
 pukkelpop;http://www.pukkelpop.be/
 botanique;http://www.botanique.be/
 IAE-Toulouse;http://www.iae-toulouse.fr/
@@ -1425,7 +1407,7 @@ cg-29;http://www.cg29.fr/
 cg-30-gard;http://www.gard.fr/
 cg-31-garonne;http://www.haute-garonne.fr/
 cg-32;http://www.cg32.fr/
-cg-33-gironde;http://www.cg33.fr/cg33/jcms/c_5217/accueil
+cg-33-gironde;http://www.gironde.fr/
 cg-34-herault;http://www.herault.fr/
 cg-35;http://www.ille-et-vilaine.fr/
 cg-36;http://www.indre.fr
@@ -1436,7 +1418,7 @@ cg-40;http://www.cg40.fr/
 cg-41;http://www.cg41.fr/jahia/
 cg-42;http://www.loire.fr/display.jsp?id=j_4149
 cg-43;http://www.cg43.fr/
-cg-44;http://www.loire-atlantique.fr/cg44/jcms/c_11663/page-d-accueil
+cg-44;http://www.loire-atlantique.fr/
 cg-45;http://www.loiret.com/cgloiret/
 cg-46;http://www.cg46.fr/
 cg-47;http://www.cg47.fr/
@@ -1498,7 +1480,6 @@ ecommerce-pixmania;http://www.pixmania.com/fr/fr/home.html?sess=1dd6d5d0de589217
 ecommerce-rue-du-commerce;http://www.rueducommerce.fr/home/index.htm
 ecommerce-ldlc;http://www.ldlc.com/
 ecommerce-topachat;http://www.topachat.com/accueil/index.php
-ecommerce-surcouf;http://www.surcouf.com/
 ecommerce-cdiscount;http://www.cdiscount.com/home/default.asp
 ecommerce-grosbill;http://www.grosbill.com/
 ecommerce-magma;http://www.magma.fr/
@@ -1541,7 +1522,7 @@ transport-lyon;http://www.tcl.fr/
 peugeot;http://www.peugeot.fr/Accueil/
 renault;http://www.renault.fr/
 citroen;http://www.citroen.fr/home/
-heuliez;http://www.heuliez.com/fr/
+heuliez;http://www.heuliez.com/
 fiat;http://www.fiat.fr/
 mercedes-benz;http://www.mercedes-benz.fr
 bmw;http://www.bmw.fr/fr/fr/
@@ -1556,7 +1537,7 @@ harley-davidson;http://www.harley-davidson.com/fr_FR/Content/Pages/home.html
 yamaha-motor;http://www.yamaha-motor.fr/
 suzuki;http://www.suzuki.fr/
 mini;http://www.mini.fr/fr/fr/general/homepage/index.jsp
-saab;http://www.saab.fr/fr/fr/start#/home/
+saab;http://www.saab.fr/
 volvocars;http://www.volvocars.com/fr/Pages/default.aspx
 ford;http://www.ford.fr/
 lada;http://www.lada.fr/
@@ -1585,7 +1566,7 @@ Pavillon-de-la-Faune;http://www.pavillondelafaune.com/
 Bioparc;http://www.bioparc.ca/
 Exploramer;http://www.exploramer.qc.ca/
 Zoo-St-Edouard;http://www.betes.com/
-Parc-Safari;http://www.parcsafari.com/accueil.php
+Parc-Safari;http://www.parcsafari.com/
 Biodome;http://www.biodome.qc.ca/
 EcoMuseum;http://www.ecomuseum.ca/
 Zoo-sauvage-St-Felicien;http://www.borealie.org/index_hiver_en.php
@@ -1713,7 +1694,6 @@ banque-de-france;http://www.banque-france.fr/
 hsbc;http://www.hsbc.fr/1/2/
 smc;http://www.smc.fr/
 laposte;https://www.labanquepostale.fr/index.html
-banque-de-bretagne;http://www.bdbretagne.com/site
 credit-du-nord;https://www.credit-du-nord.fr/
 credit-foncier;http://www.creditfoncier.fr/editorial/Home_Particuliers.html
 banque-populaire;http://www.banquepopulaire.fr/
@@ -1754,13 +1734,12 @@ Montbazillac;http://www.chateau-monbazillac.com/
 Gigondas;http://www.gigondas-vin.com/
 Vin-de-Bandol;http://www.vinsdebandol.com/
 Guigal;http://www.guigal.com/
-Hospices-de-Beaunes;http://www.hospices-de-beaune.com/fr/hospices/
+Hospices-de-Beaunes;http://www.hospices-de-beaune.com/
 Rhum-3Riviere;http://www.rhum-de-martinique.com/troisrivieres/index.asp
 Rhum-Charette;http://www.rhum-charrette.com/
 Rhum-Dillon;http://www.rhums-dillon.com/
 Puech-Haut;http://www.chateau-puech-haut.com/Default.aspx
 Daumas-Gassac;http://www.daumas-gassac.com/
-Universite-Nice;http://portail.unice.fr/jahia/Jahia/
 Universite-Marseille;http://www.univ-mrs.fr/
 Universite-Aix-Marseille-I;http://www.univ-provence.fr/
 Universite-Aix-Marseille-II;http://www.univmed.fr/
@@ -1773,7 +1752,7 @@ Universite-Toulouse-I;http://www.univ-tlse1.fr/jsp/fiche_accueil.jsp?CODE_RUBRIQ
 Universite-Toulouse-II;http://www.univ-tlse2.fr/
 Universite-Toulouse-III;http://www.ups-tlse.fr/
 Universite-Bordeaux-I;http://www.u-bordeaux1.fr/
-Universite-Bordeaux-II;http://www.u-bordeaux2.fr/index.jsp
+Universite-Bordeaux-II;http://www.univ-bordeauxsegalen.fr/
 Universite-Bordeaux-III;http://www.u-bordeaux3.fr/fr/index.html
 Universite-Bordeaux-IV;http://www.u-bordeaux4.fr/accueil/
 Universite-Rennes-I;http://www.univ-rennes1.fr/
@@ -1877,7 +1856,7 @@ Port-Marseille;http://www.marseille-port.fr/
 accessiweb;http://www.accessiweb.org/
 braillenet;http://www.braillenet.org/
 Alcoolier-Martini;http://www.martini.com/
-Alcoolier-Smirnoff;https://www.smirnoff.com/index.aspx
+Alcoolier-Smirnoff;http://www.smirnoff.com/
 Alcoolier-Eristoff;http://www.eristoff.com/ageVerify.aspx
 Alcoolier-JB-scotch;http://www.jbscotch.com/
 Alcoolier-Label-5;http://www.label-5.com/
@@ -1989,7 +1968,7 @@ RCL;http://www.rclens.fr/site/prehome/
 LOSC;http://www.losc.fr/
 ACA;http://www.acarlesavignon.fr/
 Stade-Brestois29;http://www.sb29.com/
-SMC;http://www.smcaen.fr/accueil.html
+SMC;http://www.smcaen.fr/
 FC-Lorient;http://www.fclweb.fr/home
 MHSC;http://www.mhscfoot.com/accueil
 Stade-Rennais;http://www.staderennais.com/index.php
