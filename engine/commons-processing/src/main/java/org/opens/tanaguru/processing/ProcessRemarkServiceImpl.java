@@ -591,8 +591,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         remark.setMessageCode(messageCode);
 
         remark.setLineNumber(searchNodeLineNumber(node));
-        
-        LOGGER.error(remark.getLineNumber());
+
         EvidenceElement evidenceElement = evidenceElementFactory.create();
         evidenceElement.setProcessRemark(remark);
         evidenceElement.setValue(elementName);
