@@ -21,9 +21,11 @@
  */
 package org.opens.tanaguru.entity.service.reference;
 
+import java.util.HashMap;
+import java.util.Map;
+import org.opens.tanaguru.entity.dao.reference.LevelDAO;
 import org.opens.tanaguru.entity.reference.Level;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import org.opens.tanaguru.entity.dao.reference.LevelDAO;
 
 /**
  *
@@ -31,13 +33,20 @@ import org.opens.tanaguru.entity.dao.reference.LevelDAO;
  */
 public class LevelDataServiceImpl extends AbstractGenericDataService<Level, Long> implements LevelDataService {
 
+    private Map<String, Level> levelMap = new HashMap<String,Level>();
+    
     public LevelDataServiceImpl() {
         super();
     }
 
     @Override
     public Level getByCode(String code) {
-        return ((LevelDAO)entityDao).retrieveByCode(code);
+        if (levelMap.containsKey(code)) {
+            return levelMap.get(code);
+        }
+        Level level = ((LevelDAO)entityDao).retrieveByCode(code);
+        levelMap.put(code, level);
+        return level;
     }
 
 }

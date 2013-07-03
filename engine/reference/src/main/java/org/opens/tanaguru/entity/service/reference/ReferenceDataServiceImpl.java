@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,9 +21,11 @@
  */
 package org.opens.tanaguru.entity.service.reference;
 
+import java.util.HashMap;
+import java.util.Map;
+import org.opens.tanaguru.entity.dao.reference.ReferenceDAO;
 import org.opens.tanaguru.entity.reference.Reference;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import org.opens.tanaguru.entity.dao.reference.ReferenceDAO;
 
 /**
  * 
@@ -32,6 +34,8 @@ import org.opens.tanaguru.entity.dao.reference.ReferenceDAO;
 public class ReferenceDataServiceImpl extends AbstractGenericDataService<Reference, Long> implements
         ReferenceDataService {
 
+    private Map<String, Reference> referenceMap = new HashMap<String,Reference>();
+    
     public ReferenceDataServiceImpl() {
         super();
     }
@@ -44,7 +48,12 @@ public class ReferenceDataServiceImpl extends AbstractGenericDataService<Referen
 
     @Override
     public Reference getByCode(String code) {
-        return ((ReferenceDAO)entityDao).retrieveByCode(code);
+        if (referenceMap.containsKey(code)) {
+            return referenceMap.get(code);
+        }
+        Reference reference = ((ReferenceDAO)entityDao).retrieveByCode(code);
+        referenceMap.put(code, reference);
+        return reference;
     }
 
 }

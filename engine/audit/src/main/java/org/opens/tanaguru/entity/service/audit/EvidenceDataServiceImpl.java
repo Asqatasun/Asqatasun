@@ -21,9 +21,10 @@
  */
 package org.opens.tanaguru.entity.service.audit;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.opens.tanaguru.entity.audit.Evidence;
 import org.opens.tanaguru.entity.dao.audit.EvidenceDAO;
-import org.opens.tanaguru.entity.dao.reference.StandardMessageDAO;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 
 /**
@@ -33,7 +34,7 @@ import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 public class EvidenceDataServiceImpl extends AbstractGenericDataService<Evidence, Long> implements
         EvidenceDataService {
 
-    protected StandardMessageDAO standardMessageDao;
+    private Map<String, Evidence> evidenceMap = new HashMap<String, Evidence>();
 
     public EvidenceDataServiceImpl() {
         super();
@@ -41,7 +42,12 @@ public class EvidenceDataServiceImpl extends AbstractGenericDataService<Evidence
 
     @Override
     public Evidence findByCode(String code) {
-        return ((EvidenceDAO) entityDao).retrieveByCode(code);
+        if (evidenceMap.containsKey(code)) {
+            return evidenceMap.get(code);
+        }
+        Evidence evidence = ((EvidenceDAO) entityDao).retrieveByCode(code);
+        evidenceMap.put(code, evidence);
+        return evidence;
     }
 
 }
