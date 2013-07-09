@@ -70,7 +70,7 @@ public class LanguageDetector {
         if (LanguageDetectorHolder.INSTANCE != null) {
             throw new IllegalStateException("Already instantiated");
         }
-        initProfiles();
+//        initProfiles();
     }
 
     /**
@@ -88,15 +88,15 @@ public class LanguageDetector {
      * @return the detected language
      */
     public LanguageDetectionResult detectLanguage(String text) {
-        try {
-            Detector detector = DetectorFactory.create();
-            detector.append(text);
-            Language detectedLanguage =  
-                    extractLangWithHighestProbability(detector.getProbabilities());
-            return new LanguageDetectionResult(detectedLanguage, text);
-        } catch (LangDetectException ex) {
-            LOGGER.warn(ex);
-        }
+//        try {
+//            Detector detector = DetectorFactory.create();
+//            detector.append(text);
+//            Language detectedLanguage =  
+//                    extractLangWithHighestProbability(detector.getProbabilities());
+//            return new LanguageDetectionResult(detectedLanguage, text);
+//        } catch (LangDetectException ex) {
+//            LOGGER.warn(ex);
+//        }
         return null;
     }
 
