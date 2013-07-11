@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -89,8 +89,6 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
         return listeners;
     }
     
-    private Long lastToken = 0L;
-
     private AuditServiceThreadFactory auditServiceThreadFactory;
 
     @Autowired
@@ -185,56 +183,51 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
             return;
         }
         if (auditExecutionList.size() < auditExecutionListMax) {
-            synchronized (lastToken) {  
-                Long token = new Date().getTime();
-                while (token - lastToken < 10) {
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException ex) {
-                        LOGGER.error(ex);
-                    }
-                }
-                lastToken = token.longValue();
-            }
             AuditCommand auditCommand = auditWaitQueue.poll();
+            LOGGER.debug("auditCommand polled");
             AuditServiceThread auditServiceThread = auditServiceThreadFactory.create(auditCommand);
-
+            LOGGER.debug("AuditServiceThread created from auditCommand");
             auditServiceThread.add(this);
             auditExecutionList.add(auditServiceThread);
             new Thread(auditServiceThread).start();
+            LOGGER.debug("AuditServiceThread started");
+        } else {
+            LOGGER.debug("Execution requested but max simultaneous execution reached");
         }
     }
 
     @Override
     public void auditCompleted(AuditServiceThread thread) {
-        if (!pageAuditExecutionList.remove(thread) &&
-                !scenarioAuditExecutionList.remove(thread) && 
-                    !uploadAuditExecutionList.remove(thread)) {
-            siteAuditExecutionList.remove(thread);
-        }
         fireAuditCompleted(thread.getAudit());
         thread.remove(this);
-        processWaitQueue();
+        if (pageAuditExecutionList.remove(thread)) {
+            processPageAuditWaitQueue();
+        } else if (scenarioAuditExecutionList.remove(thread)) {
+            processScenarioAuditWaitQueue();
+        } else if (uploadAuditExecutionList.remove(thread)) {
+            processPageUploadAuditWaitQueue();
+        } else {
+            siteAuditExecutionList.remove(thread);
+        }
     }
 
     @Override
     public void auditCrashed(AuditServiceThread thread, Exception exception) {
-        if (!pageAuditExecutionList.remove(thread) &&
-                !scenarioAuditExecutionList.remove(thread) &&
-                    !uploadAuditExecutionList.remove(thread)) {
-            siteAuditExecutionList.remove(thread);
-        }
         fireAuditCrashed(thread.getAudit(), exception);
         thread.remove(this);
-        processWaitQueue();
+        if (pageAuditExecutionList.remove(thread)) {
+            processPageAuditWaitQueue();
+        } else if (scenarioAuditExecutionList.remove(thread)) {
+            processScenarioAuditWaitQueue();
+        } else if (uploadAuditExecutionList.remove(thread)) {
+            processPageUploadAuditWaitQueue();
+        } else {
+            siteAuditExecutionList.remove(thread);
+        }
     }
 
     @Override
     public void processWaitQueue() {
-        processPageAuditWaitQueue();
-        processPageUploadAuditWaitQueue();
-        processScenarioAuditWaitQueue();
-        processSiteAuditWaitQueue();
     }
 
     private void fireAuditCompleted(Audit audit) {

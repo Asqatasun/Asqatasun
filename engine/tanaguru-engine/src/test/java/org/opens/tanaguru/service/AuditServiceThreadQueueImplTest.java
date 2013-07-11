@@ -21,6 +21,8 @@
  */
 package org.opens.tanaguru.service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import junit.framework.TestCase;
@@ -140,6 +142,65 @@ public class AuditServiceThreadQueueImplTest extends TestCase {
         // an unexpected error
         try {
             Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(AuditServiceThreadQueueImplTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        // Verify behavior.
+        EasyMock.verify(auditServiceThreadFactory);
+        EasyMock.verify(auditServiceThread);
+    }
+    
+    /**
+     * Test of addPageAudit method, of class AuditServiceThreadQueueImpl.
+     */
+    public void testAddPageAuditWithConcurrentAccessAndMaxSizeReached() {
+        System.out.println("addPageAuditWithConcurrentAccessAndMaxSizeReached");
+        
+        int numberOfSimultaneousRequestedCommand = 1000;
+
+        // the tested instance
+        AuditServiceThreadQueueImpl instance = new AuditServiceThreadQueueImpl();
+        
+        Collection<AuditCommand> auditCommands = new ArrayList<AuditCommand>();
+        for(int i=0;i<numberOfSimultaneousRequestedCommand;i++) {
+            AuditCommand auditCommand = EasyMock.createMock(AuditCommand.class);
+            auditCommands.add(auditCommand);
+        }
+
+        // Create the mock instance
+        AuditServiceThread auditServiceThread = createMockAuditServiceThreadWithFireCompleted(instance, auditCommands.size());
+        
+        // Create the mock instance
+        AuditServiceThreadFactory auditServiceThreadFactory = 
+                createMockAuditServiceThreadFactoryWithMultipleCommand(auditCommands, auditServiceThread);
+        
+        instance.setAuditServiceThreadFactory(auditServiceThreadFactory);
+        
+        for (AuditCommand auditCommand : auditCommands) {
+            instance.addPageAudit(auditCommand);
+        }
+
+        // sleep to make sure the auditServiceThread is started and thus avoid
+        // an unexpected error
+        try {
+            Thread.sleep(5);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(AuditServiceThreadQueueImplTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for(int i=0;i<numberOfSimultaneousRequestedCommand;i++) {
+            instance.auditCompleted(auditServiceThread);
+            // sleep for last audit blocked in queue be executed
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(AuditServiceThreadQueueImplTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        // sleep for last audit blocked in queue be executed
+        try {
+            Thread.sleep(10);
         } catch (InterruptedException ex) {
             Logger.getLogger(AuditServiceThreadQueueImplTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -275,8 +336,6 @@ public class AuditServiceThreadQueueImplTest extends TestCase {
      * Create a set-up AuditServiceThread instance
      * 
      * @param instance
-     * @param mockScenario
-     * @param fileMap
      * @return 
      */
     private AuditServiceThread createMockAuditServiceThread (
@@ -295,6 +354,46 @@ public class AuditServiceThreadQueueImplTest extends TestCase {
         // The thread is launched
         auditServiceThread.run();
         EasyMock.expectLastCall().once();
+        
+        // Set mock AuditServiceThread into testing mode.
+        EasyMock.replay(auditServiceThread);
+        
+        return auditServiceThread;
+    }
+    
+    /**
+     * Create a set-up AuditServiceThread instance
+     * 
+     * @param instance
+     * @param mockScenario
+     * @param fileMap
+     * @return 
+     */
+    private AuditServiceThread createMockAuditServiceThreadWithFireCompleted (
+            AuditServiceThreadQueueImpl instance, 
+            int auditServiceThreadCallCounter) {
+        
+        // Create the mock instance
+        AuditServiceThread auditServiceThread = 
+                EasyMock.createMock(AuditServiceThread.class);
+        
+        // Set expectations on mock AuditServiceThread
+        // the current instance of AuditServiceThreadQueueImpl is recorded 
+        // as listener
+        auditServiceThread.add(instance);
+        EasyMock.expectLastCall().times(auditServiceThreadCallCounter);
+        
+        // The thread is launched
+        auditServiceThread.run();
+        EasyMock.expectLastCall().times(auditServiceThreadCallCounter);
+        
+        // When first audit finished, fireCompleted called to launch audit 
+        // blocked in queue.
+        EasyMock.expect(auditServiceThread.getAudit()).andReturn(null)
+                .times(auditServiceThreadCallCounter);
+        
+        auditServiceThread.remove(instance);
+        EasyMock.expectLastCall().times(auditServiceThreadCallCounter);
         
         // Set mock AuditServiceThread into testing mode.
         EasyMock.replay(auditServiceThread);
@@ -321,6 +420,32 @@ public class AuditServiceThreadQueueImplTest extends TestCase {
         EasyMock.expect(auditServiceThreadFactory.create(auditCommand)).
                 andReturn(auditServiceThread).once();
         
+        // Set mock AuditServiceThreadFactory into testing mode.
+        EasyMock.replay(auditServiceThreadFactory);
+        
+        return auditServiceThreadFactory;
+    }
+    
+    /**
+     * 
+     * @param audit
+     * @param auditServiceThread
+     * @return 
+     */
+    private AuditServiceThreadFactory createMockAuditServiceThreadFactoryWithMultipleCommand (
+            Collection<AuditCommand> auditCommands, 
+            AuditServiceThread auditServiceThread) {
+        
+        // Create the mock instance
+        AuditServiceThreadFactory auditServiceThreadFactory = 
+                EasyMock.createMock(AuditServiceThreadFactory.class);
+        
+        for (AuditCommand auditCommand : auditCommands) {
+            // an auditServiceThread instance is create by the factory with the 
+            // audit passed as argument. This thread is then launched
+            EasyMock.expect(auditServiceThreadFactory.create(auditCommand)).
+                    andReturn(auditServiceThread).once();
+        }
         // Set mock AuditServiceThreadFactory into testing mode.
         EasyMock.replay(auditServiceThreadFactory);
         
