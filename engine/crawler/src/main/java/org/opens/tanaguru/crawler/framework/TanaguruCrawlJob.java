@@ -25,14 +25,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
-import java.util.logging.Level;
 import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -44,7 +39,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.apache.log4j.Logger;
+import org.archive.crawler.event.CrawlStateEvent;
 import org.archive.crawler.framework.CrawlController;
+import org.archive.crawler.framework.CrawlController.State;
 import org.archive.crawler.framework.CrawlJob;
 import org.archive.crawler.reporting.AlertThreadGroup;
 import org.archive.modules.deciderules.DecideRuleSequence;
@@ -58,6 +55,7 @@ import org.opens.tanaguru.crawler.processor.TanaguruWriterProcessor;
 import org.opens.tanaguru.crawler.util.CrawlConfigurationUtils;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationListener;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -73,14 +71,12 @@ import org.xml.sax.SAXException;
  * 
  * @author jkowalczyk
  */
-public class TanaguruCrawlJob {
+public class TanaguruCrawlJob implements ApplicationListener<CrawlStateEvent>{
 
     private static final Logger LOGGER = Logger.getLogger(TanaguruCrawlJob.class);
     private static final String WRITER_BEAN_NAME = "tanaguruWriter";
     private static final String DECIDE_RULE_SEQUENCE_BEAN_NAME = "scope";
     private File currentJobOutputDir;
-    private static final int CRAWL_LAUNCHER_RETRY_TIMEOUT = 1000;
-    private static final int CRAWL_LOGGER_TIMEOUT = 2000;
     private String outputDir = System.getenv("PWD") + "/output";
     private CrawlJob crawlJob;
     private String crawlConfigFilePath = "/etc/tanaguru/context/crawler/";
@@ -149,26 +145,14 @@ public class TanaguruCrawlJob {
         if (crawlJob.isLaunchable()) {
             LOGGER.debug("crawljob is launchable");
             launchHeritrixCrawlJob();
-            if (!crawlJob.isRunning()) {
+            synchronized (this) {
                 try {
-                    Thread.sleep(CRAWL_LAUNCHER_RETRY_TIMEOUT);
-                } catch (InterruptedException ex) {
-                    LOGGER.error(ex);
-                    throw new CrawlerException(ex);
-                }
+                    this.wait();
+                } catch (InterruptedException e) {}
+                crawlJob.getJobContext().getApplicationListeners().remove(this);
             }
         }
-        LOGGER.info("CrawlJob is running? " + crawlJob.isRunning());
-        while (crawlJob.isRunning()) {
-            try {
-                if (crawlJob.isUnpausable()) {
-                    crawlJob.getCrawlController().getFrontier().run();
-                }
-                Thread.sleep(CRAWL_LOGGER_TIMEOUT);
-            } catch (InterruptedException e) {
-                // do nothing
-            }
-        }
+
         cleanUpWriterResources(crawlJob.getJobContext());
         crawlJob.terminate();
         if (crawlJob.teardown()) {
@@ -190,29 +174,36 @@ public class TanaguruCrawlJob {
 
         CrawlController cc = crawlJob.getCrawlController();
         if (cc != null && cc.hasStarted()) {
-            crawlJob.getJobLogger().log(Level.SEVERE, "Can't relaunch previously-launched assembled job");
+            LOGGER.error("Can't relaunch previously-launched assembled job");
             return;
         }
 
         crawlJob.validateConfiguration();
         if (!crawlJob.hasValidApplicationContext()) {
-            crawlJob.getJobLogger().log(Level.SEVERE, "Can't launch problem configuration");
+            LOGGER.error("Can't launch problem configuration");
             return;
         }
+        LOGGER.debug("Job validated");
+        
         setListenerToWriter(crawlJob.getJobContext());
         AlertThreadGroup alertThreadGroup = new AlertThreadGroup(crawlJob.getShortName());
         alertThreadGroup.addLogger(crawlJob.getJobLogger());
         Thread launcher = new Thread(alertThreadGroup, crawlJob.getShortName() + " launchthread") {
 
+            @Override
             public void run() {
+                // the start context has to be done in the thread to access 
+                // the logger set to the Runnable object
                 startContext(crawlJob);
                 CrawlController cc = crawlJob.getCrawlController();
+                LOGGER.debug("Request crawl start");
                 if (cc != null) {
                     cc.requestCrawlStart();
+                    LOGGER.debug(cc.getState());
+                    LOGGER.debug("crawl start requested");
                 }
             }
         };
-        crawlJob.getJobLogger().log(Level.INFO, "Job launched");
         launcher.start();
     }
 
@@ -220,14 +211,17 @@ public class TanaguruCrawlJob {
      * Start the context, catching and reporting any BeansExceptions.
      */
     private void startContext(CrawlJob crawlJob) {
+        LOGGER.debug("Starting context");
         PathSharingContext ac = crawlJob.getJobContext();
+        ac.addApplicationListener(this);
         try {
             ac.start();
         } catch (BeansException be) {
+            LOGGER.warn(be.getMessage());
             ac.close();
             ac = null;
         } catch (Exception e) {
-            crawlJob.getJobLogger().log(Level.SEVERE, e.getClass().getSimpleName() + ": " + e.getMessage(), e);
+            LOGGER.warn(e.getMessage());
             try {
                 ac.close();
             } catch (Exception e2) {
@@ -236,6 +230,7 @@ public class TanaguruCrawlJob {
                 ac = null;
             }
         }
+        LOGGER.debug("Context started");
     }
 
     /**
@@ -340,8 +335,6 @@ public class TanaguruCrawlJob {
         for (String url : urlList) {
             // first convert the URI in unicode
             uriTmp = UURIFactory.getInstance(url).getEscapedURI();
-            // then escape the URI to be written in a xml file.
-//            urlList.append(StringEscapeUtils.escapeXml(uriTmp));
             urls.append(uriTmp);
             urls.append("\r");
         }
@@ -457,6 +450,30 @@ public class TanaguruCrawlJob {
             tanaguruWriterProcessor.setExtractorHTMLListener(null);
             tanaguruWriterProcessor.setHtmlRegexp(null);
             tanaguruWriterProcessor = null;
+        }
+    }
+
+    @Override
+    public void onApplicationEvent(CrawlStateEvent e) {
+        LOGGER.debug("CrawlJob changes state to "+e.getState());
+        if (e.getState().equals(State.FINISHED)) {
+            synchronized (this) {
+                notify();
+            }
+        } else if (e.getState().equals(State.PAUSED)) {
+            manuallyRunCrawlJob();
+        } else if (e.getState().equals(State.RUNNING)) {
+            LOGGER.info("crawljob is running");
+        }
+    }
+
+    /**
+     * In some cases, the crawljob state is set to PAUSE after initialisation.
+     * In this case, the run needs to be force
+     */
+    private void manuallyRunCrawlJob() {
+        if (crawlJob.isRunning() && crawlJob.isUnpausable()) {
+            crawlJob.getCrawlController().getFrontier().run();
         }
     }
 
