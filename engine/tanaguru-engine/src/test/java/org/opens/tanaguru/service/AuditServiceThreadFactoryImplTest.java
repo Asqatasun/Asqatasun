@@ -23,12 +23,7 @@ package org.opens.tanaguru.service;
 
 import junit.framework.TestCase;
 import org.easymock.EasyMock;
-import org.opens.tanaguru.contentadapter.AdaptationListener;
 import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.entity.service.audit.AuditDataService;
-import org.opens.tanaguru.entity.service.audit.ContentDataService;
-import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
-import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.service.command.AuditCommand;
 
 /**
@@ -37,19 +32,6 @@ import org.opens.tanaguru.service.command.AuditCommand;
  */
 public class AuditServiceThreadFactoryImplTest extends TestCase {
     
-    private AuditDataService mockAuditDataService;
-    private ContentDataService mockContentDataService;
-    private ProcessResultDataService mockProcessResultDataService;
-    private WebResourceDataService mockWebResourceDataService;
-    private CrawlerService mockCrawlerService;
-    private ContentLoaderService mockContentLoaderService;
-    private ScenarioLoaderService mockScenarioLoaderService;
-    private ContentAdapterService mockContentAdapterService;
-    private ProcessorService mockProcessorService;
-    private ConsolidatorService mockConsolidatorService;
-    private AnalyserService mockAnalyserService;
-    private AdaptationListener mockAdaptationListener;
-    
     public AuditServiceThreadFactoryImplTest(String testName) {
         super(testName);
     }
@@ -57,18 +39,6 @@ public class AuditServiceThreadFactoryImplTest extends TestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        mockAuditDataService = EasyMock.createMock(AuditDataService.class);
-        mockContentDataService = EasyMock.createMock(ContentDataService.class);
-        mockProcessResultDataService = EasyMock.createMock(ProcessResultDataService.class);
-        mockWebResourceDataService = EasyMock.createMock(WebResourceDataService.class);
-        mockCrawlerService = EasyMock.createMock(CrawlerService.class);
-        mockContentLoaderService = EasyMock.createMock(ContentLoaderService.class);
-        mockScenarioLoaderService = EasyMock.createMock(ScenarioLoaderService.class);
-        mockContentAdapterService = EasyMock.createMock(ContentAdapterService.class);
-        mockProcessorService = EasyMock.createMock(ProcessorService.class);
-        mockConsolidatorService = EasyMock.createMock(ConsolidatorService.class);
-        mockAnalyserService = EasyMock.createMock(AnalyserService.class);
-        mockAdaptationListener = EasyMock.createMock(AdaptationListener.class);
     }
     
     @Override
@@ -109,18 +79,6 @@ public class AuditServiceThreadFactoryImplTest extends TestCase {
     
     private AuditServiceThreadFactoryImpl initiliseAuditServiceThreadFactory() {
         AuditServiceThreadFactoryImpl instance = new AuditServiceThreadFactoryImpl();
-//        instance.setAdaptationListener(mockAdaptationListener);
-//        instance.setAnalyserService(mockAnalyserService);
-//        instance.setAuditDataService(mockAuditDataService);
-//        instance.setConsolidatorService(mockConsolidatorService);
-//        instance.setContentAdapterService(mockContentAdapterService);
-//        instance.setContentDataService(mockContentDataService);
-//        instance.setContentLoaderService(mockContentLoaderService);
-//        instance.setCrawlerService(mockCrawlerService);
-//        instance.setProcessResultDataService(mockProcessResultDataService);
-//        instance.setProcessorService(mockProcessorService);
-//        instance.setScenarioLoaderService(mockScenarioLoaderService);
-//        instance.setWebResourceDataService(mockWebResourceDataService);
         return instance;
     }
 }

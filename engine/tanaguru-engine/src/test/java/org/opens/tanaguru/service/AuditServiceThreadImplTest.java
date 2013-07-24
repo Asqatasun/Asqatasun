@@ -21,22 +21,10 @@
  */
 package org.opens.tanaguru.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import junit.framework.TestCase;
 import org.easymock.EasyMock;
-import org.opens.tanaguru.contentadapter.AdaptationListener;
 import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.entity.audit.AuditImpl;
-import org.opens.tanaguru.entity.audit.AuditStatus;
-import org.opens.tanaguru.entity.reference.Test;
-import org.opens.tanaguru.entity.reference.TestImpl;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
-import org.opens.tanaguru.entity.service.audit.ContentDataService;
-import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
-import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
-import org.opens.tanaguru.entity.subject.PageImpl;
-import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.service.command.AuditCommand;
 
 /**

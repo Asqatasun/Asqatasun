@@ -32,7 +32,6 @@ import org.opens.tanaguru.entity.service.reference.TestDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.service.command.AuditCommand;
 import org.opens.tanaguru.service.command.factory.AuditCommandFactory;
-import org.opens.tanaguru.service.command.factory.AuditCommandFactoryImpl;
 
 /**
  *
