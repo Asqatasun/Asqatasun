@@ -41,6 +41,8 @@ public class SourceCodeRemarkImpl extends ProcessRemarkImpl implements
     private int lineNumber;
     @Column(name = "Target", length = 5000)
     private String target;
+    @Column(name = "Snippet", length = 16777215)
+    private String snippet;
     
     public SourceCodeRemarkImpl() {
         super();
@@ -74,6 +76,16 @@ public class SourceCodeRemarkImpl extends ProcessRemarkImpl implements
     @Override
     public void setTarget(String target) {
         this.target = target;
+    }
+
+    @Override
+    public String getSnippet() {
+        return snippet;
+    }
+
+    @Override
+    public void setSnippet(String snippet) {
+        this.snippet = snippet;
     }
 
 }

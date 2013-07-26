@@ -1,7 +1,3 @@
--- -----------------------------------------------------------------
--- Creation of relation between contract and Url (through Option)
--- -----------------------------------------------------------------
-
 -- -----------------------------------------------------
 -- Table `tanaguru`.`CRITERION_STATISTICS`
 -- -----------------------------------------------------
@@ -186,3 +182,20 @@ CREATE TABLE IF NOT EXISTS `PRE_PROCESS_RESULT` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_Element`, `Id_Parameter_Family`, `Long_Label`, `Short_Label`) VALUES
+(38, 'DECORATIVE_IMAGE_MARKER', 3, 'Decorative image HTML marker (id or class)', 'Decorative image marker'),
+(39, 'INFORMATIVE_IMAGE_MARKER', 3, 'Informative image HTML marker (id or class)', 'Informative image marker');
+
+INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
+(5, 'AW22;Ar', b'1'),
+(5, 'AW22;Bz', b'0'),
+(5, 'AW22;Or', b'0'),
+(38, '', b'1'),
+(39, '', b'1');
+
+UPDATE `PARAMETER` SET `Is_Default` = b'0' WHERE `Parameter_Value`='AW21;Ar';
+
+ALTER IGNORE TABLE PROCESS_REMARK ADD `Snippet` mediumtext NULL AFTER Target;
+ALTER IGNORE TABLE EVIDENCE_ELEMENT MODIFY `Element_Value` mediumtext NOT NULL;

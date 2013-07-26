@@ -44,6 +44,12 @@ public interface SourceCodeRemark extends ProcessRemark {
      * @return the target
      */
     String getTarget();
+    
+    /**
+     *
+     * @return the snippet
+     */
+    String getSnippet();
 
     /**
      *
@@ -65,5 +71,12 @@ public interface SourceCodeRemark extends ProcessRemark {
      *            the target to set
      */
     void setTarget(String target);
+    
+    /**
+     *
+     * @param snippet
+     *            the snippet to set
+     */
+    void setSnippet(String snippet);
 
 }
