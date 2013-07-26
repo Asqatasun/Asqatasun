@@ -113,8 +113,8 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     public Map<String, WebResource> getWebResourceMap() {
         return webResourceMap;
     }
-    private Map<String, Parameter> parameterMap = new HashMap<String, Parameter>();
-    public Map<String, Parameter> getParameterMap() {
+    private Map<String, Collection<Parameter>> parameterMap = new HashMap<String, Collection<Parameter>>();
+    public Map<String, Collection<Parameter>> getParameterMap() {
         return parameterMap;
     }
     private String testcasesFilePath = "";
@@ -435,6 +435,13 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         return DatabaseOperation.NONE;
     }
 
+    /**
+     * 
+     * @param familyValue
+     * @param elementValue
+     * @param value
+     * @return 
+     */
     protected Parameter createParameter(String familyValue, String elementValue, String value) {
         ParameterFamily parameterFamily = parameterFamilyFactory.create();
         parameterFamily.setParameterFamilyCode(familyValue);
@@ -446,12 +453,34 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         parameter.setParameterElement(parameterElement);
         return parameter;
     }
+    
+    /**
+     * 
+     * @param familyValue
+     * @param elementValue
+     * @param value
+     * @return 
+     */
+    protected void addParameterToParameterMap(String sspIdentifier, Parameter parameter) {
+        if (parameterMap.containsKey(sspIdentifier)) {
+            parameterMap.get(sspIdentifier).add(parameter);
+        } else {
+            Collection<Parameter> params = new ArrayList<Parameter>();
+            params.add(parameter);
+            parameterMap.put(sspIdentifier, params);
+        }
+    }
 
+    /**
+     * 
+     */
     private void associateParameterToSSP() {
         for (Map.Entry<String, WebResource> entry : webResourceMap.entrySet()) {
             Audit audit = auditFactory.create();
             if (parameterMap.containsKey(entry.getKey())) {
-                audit.addParameter(parameterMap.get(entry.getKey()));
+                for (Parameter param : parameterMap.get(entry.getKey())) {
+                    audit.addParameter(param);
+                }
             }
             if (contentMap.containsKey(entry.getValue()) && !contentMap.get(entry.getValue()).isEmpty()) {
                 Content content = contentMap.get(entry.getValue()).iterator().next();
