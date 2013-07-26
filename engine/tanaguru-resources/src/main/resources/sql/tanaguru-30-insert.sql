@@ -43,7 +43,9 @@ INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_El
 (34, 'Seo-07021', 4, 'Weight of rule Seo-07021 overriden by user', 'Seo-07021 weight'),
 (35, 'Seo-07051', 4, 'Weight of rule Seo-07051 overriden by user', 'Seo-07051 weight'),
 (36, 'Seo-07061', 4, 'Weight of rule Seo-07061 overriden by user', 'Seo-07061 weight'),
-(37, 'Seo-08011', 4, 'Weight of rule Seo-08011 overriden by user', 'Seo-08011 weight');
+(37, 'Seo-08011', 4, 'Weight of rule Seo-08011 overriden by user', 'Seo-08011 weight'), 
+(38, 'DECORATIVE_IMAGE_MARKER', 3, 'Decorative image HTML marker (id or class)', 'Decorative image marker'),
+(39, 'INFORMATIVE_IMAGE_MARKER', 3, 'Informative image HTML marker (id or class)', 'Informative image marker');
 
 INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
 (1, '50000', b'0'),
@@ -54,7 +56,7 @@ INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_D
 (5, 'Seo;Or', b'0'),
 (5, 'Seo;Ar', b'0'),
 (5, 'Seo;Bz', b'0'),
-(5, 'AW21;Ar', b'1'),
+(5, 'AW21;Ar', b'0'),
 (5, 'AW21;Bz', b'0'),
 (5, 'AW21;Or', b'0'),
 (1, '100', b'0'),
@@ -64,6 +66,11 @@ INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_D
 (7, '', b'1'),
 (8, '', b'1'),
 (9, '', b'1'), 
-(4, '86400', b'1');
+(4, '86400', b'1'), 
+(5, 'AW22;Ar', b'1'),
+(5, 'AW22;Bz', b'0'),
+(5, 'AW22;Or', b'0'), 
+(38, '', b'1')
+(39, '', b'1');
 
 SET foreign_key_checks=1;
