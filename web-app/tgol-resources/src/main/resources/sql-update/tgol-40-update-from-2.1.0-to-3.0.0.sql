@@ -57,3 +57,6 @@ delimiter ;
 call populate_tgsi_act_audit();
 drop procedure populate_tgsi_act_audit;
 drop table `TGSI_ACT_WEB_RESOURCE`;
+
+INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Id_Referential`, `Code`, `Label`) VALUES
+(4, 'AW22', 'Accessiweb 2.2 referential') ;

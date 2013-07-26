@@ -24,7 +24,8 @@ INSERT IGNORE INTO `TGSI_FUNCTIONALITY` (`Id_Functionality`, `Code`, `Label`, `D
 INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Id_Referential`, `Code`, `Label`) VALUES
 (1, 'AW21', 'Accessiweb 2.1 referential'), 
 (2, 'Seo', 'Seo referential'),
-(3, 'RGAA22', 'Rgaa 2.2 referential');
+(3, 'RGAA22', 'Rgaa 2.2 referential'), 
+(4, 'AW22', 'Accessiweb 2.2 referential') ;
 
 INSERT IGNORE INTO `TGSI_OPTION_FAMILY` (`Id_Option_Family`, `Code`, `Label`) VALUES
 (1, 'CRAWL', ''),
