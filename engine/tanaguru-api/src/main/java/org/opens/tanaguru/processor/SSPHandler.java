@@ -112,7 +112,7 @@ public interface SSPHandler {
      *
      * @return the page of the ssp used
      */
-    public WebResource getPage();
+    WebResource getPage();
 
     /**
      *
@@ -251,7 +251,7 @@ public interface SSPHandler {
      * @param URL
      * @return
      */
-    public BufferedImage getImageFromURL(String URL);
+    BufferedImage getImageFromURL(String URL);
 
     /**
      * This method checks whether an attribute only contains non alphanumeric
@@ -262,7 +262,7 @@ public interface SSPHandler {
      * @param remarkMessage
      * @return
      */
-    public TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
+    TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
             Node attribute,
             Node workingElement,
             TestSolution testSolution,
@@ -277,7 +277,7 @@ public interface SSPHandler {
      * @param remarkMessage
      * @return
      */
-    public TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
+    TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
             String attributeContent,
             Node workingElement,
             TestSolution testSolution,
@@ -287,30 +287,30 @@ public interface SSPHandler {
      * This method return the number of selected elements
      * @return
      */
-    public int getSelectedElementNumber();
+    int getSelectedElementNumber();
 
     /**
      * @return the number of css selectors
      */
-    public int getCssSelectorNumber();
+    int getCssSelectorNumber();
 
     /**
      * 
      * @param processRemarkService
      */
-    public void setProcessRemarkService(ProcessRemarkService processRemarkService);
+    void setProcessRemarkService(ProcessRemarkService processRemarkService);
 
     /**
      * 
      * @return the processRemarkService
      */
-    public ProcessRemarkService getProcessRemarkService();
+    ProcessRemarkService getProcessRemarkService();
 
     /**
      *
      * @param messageCode
      */
-    public void setMessageCode(String messageCode);
+    void setMessageCode(String messageCode);
 
     /**
      *
