@@ -58,13 +58,6 @@
             <version>${webappVersion}</version>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>${webappGroupId}</groupId>
-            <artifactId>tgol-i18n</artifactId>
-            <version>${webappVersion}</version>
-            <scope>runtime</scope>
-        </dependency>
-
         <!-- tanaguru dependencies-->
         <dependency>
             <groupId>${engineGroupId}</groupId>
@@ -141,6 +134,33 @@
             <artifactId>scenarioloader</artifactId>
             <version>${engineVersion}</version>
         </dependency>
+        
+        <!-- rules dependencies-->
+        <dependency>
+            <groupId>${rulesGroupId}</groupId>
+            <artifactId>accessiweb2.1</artifactId>
+            <version>${rulesVersion}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${rulesGroupId}</groupId>
+            <artifactId>accessiweb2.2</artifactId>
+            <version>${rulesVersion}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${rulesGroupId}</groupId>
+            <artifactId>rgaa2.2</artifactId>
+            <version>${rulesVersion}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${rulesGroupId}</groupId>
+            <artifactId>seo</artifactId>
+            <version>${rulesVersion}</version>
+            <scope>runtime</scope>
+        </dependency>
+        
         <!-- spring dependencies -->
         <dependency>
             <groupId>org.springframework</groupId>
