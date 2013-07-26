@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.*;
 import javax.xml.xpath.*;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -256,12 +257,16 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         remark.setMessageCode(messageCode);
         if (element != null) {
             remark.setLineNumber(searchElementLineNumber(element));
+            remark.setTarget(element.nodeName());
+            remark.setSnippet(getSnippetFromElement(element));
         } else {
             remark.setLineNumber(-1);
         }
-        for (EvidenceElement ee : evidenceElementList) {
-            remark.addElement(ee);
-            ee.setProcessRemark(remark);
+        if (CollectionUtils.isNotEmpty(evidenceElementList)) {
+            for (EvidenceElement ee : evidenceElementList) {
+                remark.addElement(ee);
+                ee.setProcessRemark(remark);
+            }
         }
         remarkSet.add(remark);
     }
@@ -575,7 +580,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     @Override
     public EvidenceElement getEvidenceElement(String evidenceCode, String evidenceValue) {
         EvidenceElement evidenceElement = evidenceElementFactory.create();
-        evidenceElement.setValue(evidenceValue);
+        evidenceElement.setValue(StringUtils.trim(evidenceValue));
         evidenceElement.setEvidence(getEvidence(evidenceCode));
         return evidenceElement;
     }
@@ -618,13 +623,8 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         remark.setIssue(processResult);
         remark.setMessageCode(messageCode);
         remark.setLineNumber(searchElementLineNumber(element));
-
-        // add default evidence element (i.e element name)
-        remark.addElement(getDefaultEvidenceElement(element));
-        
-        // add snippet evidence element
-        remark.addElement(getSnippetEvidenceElement(element));
-        
+        remark.setTarget(element.nodeName());
+        remark.setSnippet(getSnippetFromElement(element));
         for (String attr : evidenceElementList) {
             EvidenceElement evidenceElementSup;
             if (StringUtils.equalsIgnoreCase(attr, "text")) {
@@ -718,25 +718,13 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             return evidence;
         }
     }
-
-    @Override
-    public EvidenceElement getDefaultEvidenceElement(Element element) {
-        EvidenceElement defaultEvidenceElement = evidenceElementFactory.create();
-        defaultEvidenceElement.setValue(element.nodeName());
-        defaultEvidenceElement.setEvidence(getEvidence(DEFAULT_EVIDENCE));
-        return defaultEvidenceElement;
-    }
     
-    @Override
-    public EvidenceElement getSnippetEvidenceElement(Element element) {
-        EvidenceElement snippetEvidenceElement = evidenceElementFactory.create();
+    private String getSnippetFromElement(Element element) {
         String elementHtml = StringEscapeUtils.escapeHtml4(StringUtil.normaliseWhitespace(element.outerHtml()));
         if (elementHtml.length() > SNIPPET_MAX_LENGTH) {
-            elementHtml = elementHtml.substring(0, SNIPPET_MAX_LENGTH);
+            return elementHtml.substring(0, SNIPPET_MAX_LENGTH);
         }
-        snippetEvidenceElement.setValue(elementHtml);
-        snippetEvidenceElement.setEvidence(getEvidence(SNIPPET_EVIDENCE));
-        return snippetEvidenceElement;
+        return "";
     }
     
     private String computeSelector(CSSOMRule rule) {
