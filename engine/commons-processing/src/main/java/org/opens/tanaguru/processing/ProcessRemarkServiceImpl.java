@@ -724,7 +724,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         if (elementHtml.length() > SNIPPET_MAX_LENGTH) {
             return elementHtml.substring(0, SNIPPET_MAX_LENGTH);
         }
-        return "";
+        return elementHtml;
     }
     
     private String computeSelector(CSSOMRule rule) {
