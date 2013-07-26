@@ -31,25 +31,25 @@ import java.util.List;
  */
 public abstract class ScenarioBuilder {
 
-    private static String SELENIUM_VERSION_KEY="\"seleniumVersion\"";
-    private static String SELENIUM_VERSION_VALUE="\"2\"";
+    private static final String SELENIUM_VERSION_KEY="\"seleniumVersion\"";
+    private static final String SELENIUM_VERSION_VALUE="\"2\"";
 
-    private static String FORMAT_VERSION_KEY="\"formatVersion\"";
-    private static String FORMAT_VERSION_VALUE="1";
+    private static final String FORMAT_VERSION_KEY="\"formatVersion\"";
+    private static final String FORMAT_VERSION_VALUE="1";
     
-    private static String STEPS_KEY="\"steps\"";
+    private static final String STEPS_KEY="\"steps\"";
     
-    private static String TYPE_KEY="\"type\"";
-    private static String URL_KEY="\"url\"";
-    private static String GET_TYPE="\"get\"";
+    private static final String TYPE_KEY="\"type\"";
+    private static final String URL_KEY="\"url\"";
+    private static final String GET_TYPE="\"get\"";
     
-    private static char LEFT_SQUARE_BRACKET = '[';
-    private static char RIGHT_SQUARE_BRACKET = ']';
-    private static char COMMA = ',';
-    private static char COLON = ':';
-    private static char LEFT_BRACE = '{';
-    private static char RIGHT_BRACE = '}';
-    private static char DOUBLE_QUOTE = '"';
+    private static final char LEFT_SQUARE_BRACKET = '[';
+    private static final char RIGHT_SQUARE_BRACKET = ']';
+    private static final char COMMA = ',';
+    private static final char COLON = ':';
+    private static final char LEFT_BRACE = '{';
+    private static final char RIGHT_BRACE = '}';
+    private static final char DOUBLE_QUOTE = '"';
     
     private static String header;
     private static String footer;
@@ -104,7 +104,7 @@ public abstract class ScenarioBuilder {
      * 
      * @return 
      */
-    private static String buildHeader() {
+    private static final String buildHeader() {
         if (header == null) {
             StringBuilder strb = new StringBuilder();
             strb.append(LEFT_BRACE);
@@ -129,7 +129,7 @@ public abstract class ScenarioBuilder {
      * 
      * @return 
      */
-    private static String buildFooter() {
+    private static final String buildFooter() {
         if (footer == null) {
             StringBuilder strb = new StringBuilder();
             strb.append(RIGHT_SQUARE_BRACKET);
@@ -145,7 +145,7 @@ public abstract class ScenarioBuilder {
      * @param url
      * @return 
      */
-    private static String buildGetStep(String url) {
+    private static final String buildGetStep(String url) {
         StringBuilder strb = new StringBuilder();
         strb.append(LEFT_BRACE);
         strb.append(TYPE_KEY);

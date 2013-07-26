@@ -21,10 +21,11 @@
  */
 package org.opens.tanaguru.scenarioloader;
 
-import org.opens.tanaguru.scenarioloader.exception.ScenarioLoaderException;
 import com.sebuilder.interpreter.Script;
+import com.sebuilder.interpreter.Step;
 import com.sebuilder.interpreter.factory.ScriptFactory;
 import com.sebuilder.interpreter.factory.TestRunFactory;
+import com.sebuilder.interpreter.steptype.Get;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -50,6 +51,7 @@ import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.scenarioloader.exception.ScenarioLoaderException;
 import org.opens.tanaguru.sebuilder.interpreter.NewPageListener;
 import org.opens.tanaguru.sebuilder.interpreter.exception.TestRunException;
 import org.opens.tanaguru.sebuilder.interpreter.factory.TgStepTypeFactory;
@@ -57,7 +59,6 @@ import org.opens.tanaguru.sebuilder.interpreter.factory.TgTestRunFactory;
 import org.opens.tanaguru.sebuilder.tools.FirefoxDriverObjectPool;
 import org.opens.tanaguru.sebuilder.tools.ProfileFactory;
 import org.opens.tanaguru.util.factory.DateFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -70,6 +71,11 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
     private List<Content> result = new ArrayList<Content>();
     private int pageRank = 1;
 
+    private static final int SCENARIO_IMPLICITELY_WAIT_TIMEOUT = 60;
+
+    /** The script factory instance */
+    private ScriptFactory scriptFactory = new ScriptFactory();
+    
     @Override
     public List<Content> getResult() {
         return result;
@@ -188,7 +194,16 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
     public void run() {
         try {
             LOGGER.debug("Launch Scenario "   + scenario );
-            FirefoxProfile firefoxProfile = profileFactory.getScenarioProfile();
+            FirefoxProfile firefoxProfile;
+            if (isScenarioOnlyLoadPage(scenario)) {
+                LOGGER.debug("Audit page script");
+                firefoxProfile = profileFactory.getOnlineProfile();
+            } else {
+                LOGGER.debug("Scenario script, images are loaded and implicitly "
+                        + "wait timeout set");
+                implicitelyWaitDriverTimeout = SCENARIO_IMPLICITELY_WAIT_TIMEOUT;
+                firefoxProfile = profileFactory.getScenarioProfile();
+            }
 
             Script script = getScriptFromScenario(scenario, firefoxProfile);
             try {
@@ -337,7 +352,9 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         testRunFactory.addNewPageListener(this);
         testRunFactory.setFirefoxProfile(firefoxProfile);
         testRunFactory.setJsScriptMap(jsScriptMap);
-        testRunFactory.setImplicitelyWaitDriverTimeout(implicitelyWaitDriverTimeout);
+        if (implicitelyWaitDriverTimeout != -1) {
+            testRunFactory.setImplicitelyWaitDriverTimeout(implicitelyWaitDriverTimeout);
+        }
         testRunFactory.setPageLoadDriverTimeout(pageLoadDriverTimeout);
 //      ((TgTestRunFactory)testRunFactory).setFirefoxDriverObjectPool(firefoxDriverObjectPool);
         return testRunFactory;
@@ -353,10 +370,28 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
      * @throws JSONException 
      */
     private Script getScriptFromScenario(String scenario, FirefoxProfile firefoxProfile) throws IOException, JSONException {
-        ScriptFactory scriptFactory = new ScriptFactory();
         scriptFactory.setTestRunFactory(initTestRunFactory(firefoxProfile));
         scriptFactory.setStepTypeFactory(new TgStepTypeFactory());
         return scriptFactory.parse(scenario);
+    }
+ 
+    /**
+     * Parse the steps of the scenarion to determine whether it only contains 
+     * Get steps. 
+     * 
+     * @param scenario
+     * @return
+     * @throws IOException
+     * @throws JSONException 
+     */
+    private boolean isScenarioOnlyLoadPage(String scenario)  throws IOException, JSONException{
+        Script script = scriptFactory.parse(scenario);
+        for (Step step : script.getSteps()) {
+            if (!(step.getType() instanceof Get)) {
+                return false;
+            }
+        }
+        return true;
     }
     
 }
