@@ -30,30 +30,29 @@ import org.opens.tanaguru.entity.reference.Test;
  */
 public interface TestResult {
 
-    static final String ELEMENT_NAME_KEY = "Element-Name";
-    static final String LINE_NUMBER_KEY = "Line-Number";
-    static final String REPRESENTATION_SUFFIX_KEY = "-representation-index";
-    static final String REPRESENTATION_ORDER_SUFFIX_KEY = "-representation-order";
+    String ELEMENT_NAME_KEY = "Element-Name";
+    String LINE_NUMBER_KEY = "Line-Number";
+    String REPRESENTATION_SUFFIX_KEY = "-representation-index";
+    String REPRESENTATION_ORDER_SUFFIX_KEY = "-representation-order";
 
-    static final String FAILED = "FAILED";
-    static final String PASSED = "PASSED";
-    static final String NEED_MORE_INFO = "NEED_MORE_INFO";
-    static final String NOT_APPLICABLE = "NOT_APPLICABLE";
-    static final String NOT_TESTED = "NOT_TESTED";
+    String FAILED = "FAILED";
+    String PASSED = "PASSED";
+    String NEED_MORE_INFO = "NEED_MORE_INFO";
+    String NOT_APPLICABLE = "NOT_APPLICABLE";
+    String NOT_TESTED = "NOT_TESTED";
 
-    static final String FAILED_LOWER = "failed";
-    static final String PASSED_LOWER = "passed";
-    static final String NEED_MORE_INFO_LOWER = "nmi";
-    static final String NOT_APPLICABLE_LOWER = "na";
-    static final String NOT_TESTED_LOWER = "nt";
+    String FAILED_LOWER = "failed";
+    String PASSED_LOWER = "passed";
+    String NEED_MORE_INFO_LOWER = "nmi";
+    String NOT_APPLICABLE_LOWER = "na";
+    String NOT_TESTED_LOWER = "nt";
 
-    static final int TABULAR_REPRESENTATION = 2;
+    int TABULAR_REPRESENTATION = 2;
 
-    static final String REPRESENTATION_BUNDLE_NAME = "representation";
+    String REPRESENTATION_BUNDLE_NAME = "representation";
 
-    static final String REPRESENTATION_FILE_PREFIX =
-            "data-representation/data-representation-";
-    static final String REPRESENTATION_FILE_SUFFIX = ".jsp";
+    String REPRESENTATION_FILE_PREFIX ="data-representation/data-representation-";
+    String REPRESENTATION_FILE_SUFFIX = ".jsp";
 
     /**
      *

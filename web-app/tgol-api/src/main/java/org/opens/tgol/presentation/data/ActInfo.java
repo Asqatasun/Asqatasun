@@ -35,98 +35,98 @@ public interface ActInfo {
      * @return
      *      the date of the act
      */
-    public Date getDate();
+    Date getDate();
 
     /**
      * Sets the date of the act
      *
      * @param date
      */
-    public void setDate(Date date);
+    void setDate(Date date);
 
     /**
      *
      * @return
      *      the Url of the act
      */
-    public String getUrl();
+    String getUrl();
 
     /**
      * Sets the Url of the act
      *
      * @param url
      */
-    public void setUrl(String url);
+    void setUrl(String url);
 
     /**
      *
      * @return
      *      the scope of the act
      */
-    public String getScope();
+    String getScope();
 
     /**
      * Sets the scope of the act
      *
      * @param scope
      */
-    public void setScope(String scope);
+    void setScope(String scope);
 
     /**
      *
      * @return
      *      the weighted mark of the act
      */
-    public int getWeightedMark();
+    int getWeightedMark();
 
     /**
      * Sets the weighted act of the act
      * 
      * @param weightedMark
      */
-    public void setWeightedMark(int weightedMark);
+    void setWeightedMark(int weightedMark);
 
     /**
      *
      * @return
      *      the raw mark of the act
      */
-    public int getRawMark();
+    int getRawMark();
 
     /**
      * Sets the raw mark of the act
      * 
      * @param rawMark
      */
-    public void setRawMark(int rawMark);
+    void setRawMark(int rawMark);
 
     /**
      *
      * @return
      *      the id of the audit associated with the act
      */
-    public int getAuditId();
+    int getAuditId();
 
     /**
      * Sets the id of the audit associated with the act
      *
      * @param auditId
      */
-    public void setAuditId(int auditId);
+    void setAuditId(int auditId);
 
     /**
      *
      * @return
      *      the status of the act
      */
-    public String getStatus();
+    String getStatus();
 
     /**
      * Sets the status of the act
      * 
      * @param status
      */
-    public void setStatus(String status);
+    void setStatus(String status);
     
     /**
      * 
@@ -134,12 +134,12 @@ public interface ActInfo {
      * 
      *      the referential of the current act
      */
-    public String getReferential();
+    String getReferential();
     
     /**
      * 
      * @param referential 
      */
-    public void setReferential(String referential);
+    void setReferential(String referential);
 
 }
