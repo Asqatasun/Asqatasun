@@ -195,7 +195,15 @@
                             <c:forEach var="remarkInfosItem" items="${testResult.remarkInfosList}">
                                 <c:set var="remarkInfosItem" scope="request" value="${remarkInfosItem}"/>
                                 <c:set var="testCode" scope="request" value="${testResult.testCode}"/>
-                                <c:import url="${testResult.testRepresentation}"/>
+                                <c:choose>
+                                    <c:when test="${testResult.testRepresentation != null}">
+                                        <c:import url="${testResult.testRepresentation}"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:import url="data-representation/data-representation-2.jsp"/>
+                                    </c:otherwise>
+                                </c:choose>
+                                
                                 <c:if test="${remarkInfosItem.remarkResult == 'nmi'}">
                                     <c:set var="nmiCounter" scope="request" value="${nmiCounter + 1}"/>
                                 </c:if>
