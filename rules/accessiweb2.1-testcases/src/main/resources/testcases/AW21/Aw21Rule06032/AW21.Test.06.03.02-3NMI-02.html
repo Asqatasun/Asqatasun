@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<title>AW21 Test.6.3.2 NMI 02</title>
+</head>
+<body>
+<div>
+
+	<p class="test-detail">
+            <span lang="fr">Chaque intitulé de lien image (contenu de l'attribut alt ou contenu entre &lt;object&gt;&lt;/object&gt;) est-il explicite hors contexte (hors cas particulier) ? </span>
+	</p>
+
+        <p class="test-detail">
+            <a href="fake-link.htm" title="cliquez ici">
+                <img src="fake.jpg" alt="unpredictable content pertinence"/>
+            </a>
+        </p>
+
+        <p class="test-detail">
+            <a href="fake-link.htm" title="cliquez ici">
+                <object data="fake-data.png">
+                    unpredictable content pertinence
+                </object>
+            </a>
+        </p>
+
+	<p class="test-explanation">NMI : The image link belongs to the image link blacklist but the context may precise the link function and destination. A warning is thrown</p>
+
+</div>
+</body>
+</html>

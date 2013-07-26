@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>rgaa22 Test.03111 NMI 01</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>rgaa22 Test.03111 NMI 01</h1>
+
+            <div class="test-detail" lang="fr">
+                Absence d’élément de formulaire sans étiquette associée
+            </div>
+
+            <div class="testcase">
+                <form action="mock_action">
+                    <p>
+                        <input id="password1" name="field" type="password" title="input title"/>
+                        <input id="text1" name="field" type="text" title="input title"/>
+                        <input id="file1" name="field" type="file" title="input title"/>
+                        <input id="checkbox1" name="field" type="checkbox" title="input title"/>
+                        <input id="radio1" name="field" type="radio" title="input title"/>
+                        <select id="select1" title="select title">
+                            <option value="option1">Option 1</option>
+                            <option value="option2">Option 2</option>
+                        </select>
+                        <label for="textarea1">Textarea label</label>
+                        <textarea id="textarea1" cols="100" title="textarea title" rows="4"></textarea>
+                        <input name="submit" type="submit" value="Action" />
+                    </p>
+                </form>
+            </div>
+
+            <div class="test-explanation">
+                NMI : All the fill-in form elements have no associated label and their title need a human check.
+                One element has an id and a label.
+            </div>
+        </div>
+    </body>
+</html>

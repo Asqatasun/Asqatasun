@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Aw22 Test.1.2.3 NMI 06</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>Aw22 Test.1.2.3 NMI 06</h1>
+
+            <div class="test-detail">
+                For each applet image (applet tag) that does not convey information and that has an alt attribute, is the content of this attribute empty (alt="")?
+            </div>
+
+            <div class="testcase">
+                <applet code="mock1.class" alt="">
+                    Java mock applet 1.
+                </applet>
+                <applet class="class-decorative-applet" code="mock2.class" alt="">
+                    Java mock applet 2.
+                </applet>
+            </div>
+
+            <div class="test-explanation">
+                NMI : One applet is found on the page and is not identified by marker.
+                The other applet is marked as decorative and has an empty alt 
+                attribute.
+            </div>
+        </div>
+    </body>
+</html>

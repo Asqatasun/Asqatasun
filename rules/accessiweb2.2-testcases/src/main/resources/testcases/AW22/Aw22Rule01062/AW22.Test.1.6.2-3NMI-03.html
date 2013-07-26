@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Aw22 Test.1.6.2 NMI 03</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>Aw22 Test.1.6.2 NMI 03</h1>
+
+            <div class="test-detail">
+                Does each object image that conveys information (object tag with the attribute type="image/..."), that requires a detailed description, pass one of the conditions below?<ul><li> Between &lt;object&gt; and &lt;/object&gt; there is a reference to a detailed description available on the page</li><li>An adjacent link (via a url or an anchor) allowing to access to the content of the detailed description is available</li></ul>
+            </div>
+
+            <div class="testcase">
+                <object data="mock_image1.gif" type="image/gif">
+                    Some text.
+                </object>
+                <object id="id-informative-object" data="mock_image2.gif" type="image/gif">
+                    Some other text.
+                </object>
+                <object class="class-decorative-object" data="mock_image3.gif" type="image/gif">
+                    Decorative object.
+                </object>
+            </div>
+
+            <div class="test-explanation">
+                NMI : 3 &lt;object&gt; are found on the page. The second is identified
+                as informative by marker usage.
+                The last &lt;object&gt; is identified as decorative by marker usage,
+                it is out of scope.
+            </div>
+        </div>
+    </body>
+</html>

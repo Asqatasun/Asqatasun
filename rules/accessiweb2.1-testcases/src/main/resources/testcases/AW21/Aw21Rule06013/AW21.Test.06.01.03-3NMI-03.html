@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>AW21 Test.6.1.3 NMI 03</title>
+    </head>
+    <body>
+        <div>
+
+            <p class="test-detail">
+                <span lang="fr">Test 6.1.3 : Pour chaque lien de type zone cliquable (contenu de l'attribut alt d'une balise area) le contexte du lien permet-il d'en comprendre la fonction et la destination (hors cas particuliers) ?</span>
+            </p>
+
+            <h1>
+                <map id="fake-map">
+                    <area href="fake-link.html" title="-->;*" alt="-->;*"/>
+                </map>
+            </h1>
+
+            <p class="test-explanation">NMI : The text link only contains non alphanumeric characters but the context may precise the link function and destination. A warning is thrown</p>
+
+        </div>
+    </body>
+</html>

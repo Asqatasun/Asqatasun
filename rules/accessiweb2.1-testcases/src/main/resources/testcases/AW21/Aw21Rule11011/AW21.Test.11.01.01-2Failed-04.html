@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>AW21 Test.11.01.1 Failed 04</title>
+</head>
+<body>
+<div>
+
+	<h1>AW21 Test.11.01.1 Failed 04</h1>
+
+	<p class="test-detail">
+		<span>
+                    Does each form field (input tag of type text, password, checkbox, radio, file, or textarea and select tags), pass one of the conditions below? <ul> <li> The form field has a title attribute</li> <li> A label (label tag) is associated with the form field</li> </ul>
+                </span>
+	</p>
+
+	<div class="testcase">
+            <form action="http://fake-action.html" method="post">
+                <p>
+                    <input type="radio" id="radio"/>
+                    <input type="submit" value="Send"/> <input type="reset"/>
+                </p>
+            </form>
+	</div>
+
+	<p class="test-explanation">
+           Failed: All the form field have neither a title attribute nor an associated label tag
+        </p>
+
+</div>
+</body>
+</html>

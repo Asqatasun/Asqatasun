@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Aw22 Test.1.6.2 NMI 02</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>Aw22 Test.1.6.2 NMI 02</h1>
+
+            <div class="test-detail">
+                Does each object image that conveys information (object tag with the attribute type="image/..."), that requires a detailed description, pass one of the conditions below?<ul><li> Between &lt;object&gt; and &lt;/object&gt; there is a reference to a detailed description available on the page</li><li>An adjacent link (via a url or an anchor) allowing to access to the content of the detailed description is available</li></ul>
+            </div>
+
+            <div class="testcase">
+                <object id="id-informative-object" data="mock_image.gif" type="image/gif">
+                    Some text can be added here.
+                </object>
+            </div>
+
+            <div class="test-explanation">
+                NMI : One &lt;object&gt; element has been found on the page.
+                It is identified as informative by marker usage.
+            </div>
+        </div>
+    </body>
+</html>

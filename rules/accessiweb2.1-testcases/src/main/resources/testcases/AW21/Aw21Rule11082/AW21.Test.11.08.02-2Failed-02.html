@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>AW21 Test.11.08.2 Failed 01</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>AW21 Test.11.08.2 Failed 01</h1>
+
+            <p class="test-detail">
+                <span lang="en">
+                    In each selection list (select tag), does each list item grouping (optgroup tag) have a label attribute?
+                </span>
+            </p>
+
+            <p>
+                <select name="ComOS">
+                    <option selected="false" label="none" value="none">None</option>
+                    <optgroup label="PortMaster 3">
+                        <option label="3.7.1" value="pm3_3.7.1">PortMaster 3 with ComOS 3.7.1</option>
+                        <option label="3.7" value="pm3_3.7">PortMaster 3 with ComOS 3.7</option>
+                        <option label="3.5" value="pm3_3.5">PortMaster 3 with ComOS 3.5</option>
+                    </optgroup>
+                    <optgroup>
+                        <option label="3.7" value="pm2_3.7">PortMaster 2 with ComOS 3.7</option>
+                        <option label="3.5" value="pm2_3.5">PortMaster 2 with ComOS 3.5</option>
+                    </optgroup>
+                    <optgroup label="IRX">
+                        <option label="3.7R" value="IRX_3.7R">IRX with ComOS 3.7R</option>
+                        <option label="3.5R" value="IRX_3.5R">IRX with ComOS 3.5R</option>
+                    </optgroup>
+                </select>
+            </p>
+            <p>
+                <optgroup label="PortMaster 2">
+                        <option label="3.7R" value="IRX_3.7R">IRX with ComOS 3.7R</option>
+                        <option label="3.5R" value="IRX_3.5R">IRX with ComOS 3.5R</option>
+                </optgroup>
+            </p>
+            <p class="test-explanation">
+                    Failed: t least on optgroup tag in a select tag has no label attribute. The optgroup without label is not within a select tag. It is ignored
+            </p>
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>rgaa22 Test.04021 Failed 02</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>rgaa22 Test.04021 Failed 02</h1>
+
+            <div class="test-detail" lang="fr">
+                Pertinence de l’alternative textuelle aux images liens
+            </div>
+
+            <div id="testcase1" class="testcase">
+                <p>The alternative of the button link is empty</p>
+                <button type="button">
+                    <div>   </div>
+                    <img alt="" src="mock-img.jpg"/>
+                    <div>   </div>
+                </button>
+            </div>
+            
+            <div id="testcase2" class="testcase">
+                <p>The alternative of the button link only contains not-alphanumerical characters</p>
+                <button type="submit"> 
+                    <span>*-+''{}</span>
+                    <img alt="!<<-(-_" src="mock-img.jpg"/>
+                    <abbr title="plus">+</abbr>
+                </button>
+            </div>
+            
+            <div id="testcase3" class="testcase">
+                <p>The alternative of the button link belongs to a blacklist</p>
+                <button type="submit">
+                    En 
+                    <img alt="savoir" src="mock-img.jpg"/>
+                    plus
+                </button>
+            </div>
+            
+            <div id="testcase4" class="testcase">
+                <p>The alternative of the button link belongs to a blacklist</p>
+                <button type="submit">
+                    En savoir 
+                    <img alt="plus" src="mock-img.jpg"/>
+                </button>
+            </div>
+
+            <div class="test-explanation">
+                Failed : The alternative of the button links of the page are not pertinent
+            </div>
+        </div>
+    </body>
+</html>

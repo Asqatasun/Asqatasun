@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Aw22 Test.1.2.2 NA 07</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>Aw22 Test.1.2.2 NA 07</h1>
+
+            <div class="test-detail">
+                For each non clickable area (area tag without href attribute), that does not convey information, and that has an alt attribute, is the content of this attribute empty (alt="")?
+            </div>
+
+            <div class="testcase">
+                <map id="mock-map">
+                    <area role="role-decorative-area" alt=""/>
+                </map>
+            </div>
+
+            <div class="test-explanation">
+                NA : All the &lt;area&gt; of the page are marked as decorative and
+                their alt attribute is empty but the map is not associated with 
+                an image
+            </div>
+        </div>
+    </body>
+</html>

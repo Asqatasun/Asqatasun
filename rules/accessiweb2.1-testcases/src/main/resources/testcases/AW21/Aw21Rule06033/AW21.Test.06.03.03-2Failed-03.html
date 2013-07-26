@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<title>AW21 Test.6.3.3 Failed 03</title>
+</head>
+<body>
+<div>
+
+	<p class="test-detail">
+            <span lang="fr">Chaque intitulé de lien de type zone cliquable (contenu de l'attribut alt d'une balise area) est-il explicite hors contexte (hors cas particulier) ? </span>
+	</p>
+
+        <area href="fake-link.html" title="-->;*" alt="-->;*"/>
+
+        <map id="fake-map">
+            <area href="fake-link.html" title="-->;*"
+                  alt="-->;*"/>
+        </map>
+
+
+	<p class="test-explanation">Failed : The link text only contains non alphanumeric characters (whatever the context). We can deduce it is not pertinent</p>
+
+</div>
+</body>
+</html>

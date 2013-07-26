@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>AW1 Test.1.3.4 Failed 05</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>AW1 Test.1.3.4 Failed 05</h1>
+
+            <div class="test-detail">
+                For each applet image (applet tag) that conveys information and that has an alt attribute, is the content of this attribute relevant (except in special cases)?
+            </div>
+
+            <div class="testcase">
+                <applet code="mock1.class" alt="" class="class-informative-applet">
+                    Java mock applet 1.
+                </applet>
+                <applet code="mock2.class" alt="Informative applet alternative" class="class-informative-applet">
+                    Java mock applet 2.
+                </applet>
+                <applet code="mock3.class" alt="mock3.class" >
+                    Java mock applet 3.
+                </applet>
+                <a href="mock-link.html" title="Composite link">
+                    Composite link
+                    <applet code="mock4.class" alt="not identified applet alternative">
+                        Java mock composite link applet.
+                    </applet>
+                </a>
+                <applet code="mock5.class" alt="captcha">
+                    Java mock captcha applet.
+                </applet>
+                <a href="mock-link.html">
+                    <applet code="mock6.class" alt="applet within link">
+                        Java mock link applet.
+                    </applet>
+                </a>
+                <applet code="mock7.class" alt="" class="class-decorative-applet">
+                    Java mock applet 7.
+                </applet>
+            </div>
+
+            <div class="test-explanation">
+                Failed : Two &lt;applet&gt; are identified by marker. One has an empty
+                alt attribute, the other needs a human check. 
+                The third &lt;applet&gt; is not identified by marker and the value of its 
+                alt attribute is contained in the src attribute. It is suspected failed.
+                The fourth &lt;applet&gt; is a composite link, it is part of the scope 
+                and the pertinence of the its alt attribute needs to be 
+                humanly check.
+                The fifth &lt;applet&gt; is seen as a captcha, it is out of scope.
+                The sixth &lt;applet&gt; is within a link, it is out of scope.
+                The seventh &lt;applet&gt; is identified as decorative by marker usage.
+            </div>
+        </div>
+    </body>
+</html>

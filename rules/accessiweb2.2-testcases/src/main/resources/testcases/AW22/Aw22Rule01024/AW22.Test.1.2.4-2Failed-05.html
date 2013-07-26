@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Aw22 Test.1.2.4 Failed 04</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>Aw22 Test.1.2.4 Failed 04</h1>
+
+            <div class="test-detail">
+                For each object image (object tag with the attribute type="image/...") that does not convey information, is the text alternative between <object> and </object> empty?
+            </div>
+
+            <div class="testcase">
+                <object id="id-decorative-object" data="mock_image1.gif" type="image/gif">
+                    Not empty alternative
+                </object>
+                <a href="mock-link.html">
+                    <object data="mock_image2.gif" type="image/gif">
+                        Any text here
+                    </object>
+                </a>
+                <object class="class-informative-object" data="mock_image3.gif" type="image/gif">
+                    Any text here
+                </object>
+            </div>
+
+            <div class="test-explanation">
+                Failed : One object of the page is marked as decorative and
+                the text alternative between &lt;object&gt; and &lt;/object&gt;
+                is not empty.
+                The other object are either in a link, or marked as informative. 
+                They are all out of scope.
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Aw22 Test.5.7.3 NMI 06</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>Aw22 Test.5.7.3 NMI 06</h1>
+
+            <div class="test-detail">
+                Does each header (th) tag that is not applied to the whole column pass the conditions below? 
+                <ul> 
+                    <li> The header does not have a scope attribute</li>
+                    <li> The header has a unique id attribute</li>
+                </ul>
+            </div>
+            
+            <div class="testcase">
+                <table class="class-data-table">
+                    <tbody>
+                        <tr>
+                            <th>Header 1 table 1</th>
+                            <th>Header 2 table 1</th>
+                        </tr>
+                        <tr>
+                            <td>Value 1</td>
+                            <td>Value 2</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table id="table-test">
+                    <tr>
+                        <th>Header 1 table 2</th>
+                        <td>Value 1 table 2</td>
+                    </tr>
+                    <tr>
+                        <th>Header 2 </th>
+                        <td>Value 2</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="test-explanation">
+                NMI : The page contains one table with headers identified as data 
+                table by marker and one with headers not identified as data table
+            </div>
+        </div>
+    </body>
+</html>

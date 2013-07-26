@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>rgaa22 Test.03051 Failed 01</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>rgaa22 Test.03051 Failed 01</h1>
+
+            <div class="test-detail" lang="fr">
+                Absence d’élément fieldset sans élément legend
+            </div>
+
+            <div class="testcase">
+                <form action="mock_action">
+                    <fieldset id="fieldset1">
+                        <input name="field" type="text"/>
+                        <input name="submit" type="submit" value="Action" />
+                    </fieldset>
+                    <fieldset id="fieldset2">
+                        <legend>Fieldset legend</legend>
+                        <input name="field" type="text"/>
+                        <input name="submit" type="submit" value="Action" />
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="test-explanation">Passed : Some fieldsets of the page don't have a legend</div>
+        </div>
+    </body>
+</html>

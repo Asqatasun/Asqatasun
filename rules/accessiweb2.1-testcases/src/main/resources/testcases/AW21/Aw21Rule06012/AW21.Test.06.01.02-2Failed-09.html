@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>AW21 Test.6.1.2 Failed 09</title>
+    </head>
+    <body>
+        <div>
+
+            <p class="test-detail">
+                <span lang="fr">Test 6.1.2 : Pour chaque lien image (contenu de l'attribut alt ou texte entre <object> et </object>) le contexte du lien permet-il d'en comprendre la fonction et la destination (hors cas particuliers) ?</span>
+            </p>
+
+            <a href="fake-link.htm" title="cliquez ici">
+                <object data="fake-data.png">
+                    cliquez ici
+                </object>
+            </a>
+
+            <p class="test-explanation">Failed : The image link belongs to the image link blacklist and is identical to the title attribute (in this case, this attribute defines the context). We can deduce it is not pertinent</p>
+
+        </div>
+    </body>
+</html>

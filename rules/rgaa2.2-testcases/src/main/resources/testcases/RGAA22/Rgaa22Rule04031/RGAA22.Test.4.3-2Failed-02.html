@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>rgaa22 Test.04031 Failed 02</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>rgaa22 Test.04031 Failed 02</h1>
+
+            <div class="test-detail" lang="fr">
+                Pertinence de l’alternative textuelle aux zones cliquables ou aux boutons graphiques
+            </div>
+
+            <div id="testcase1" class="testcase">
+                <p>The alt attribute is empty</p>
+                <input type="image" alt="   "></input>
+            </div>
+            
+            <div id="testcase2" class="testcase">
+                <p>The alt attribute only contains non alphanumerical characters</p>
+                <input type="image" alt=" ,;!:;-+/=}])°^_`  "></input>
+            </div>
+            
+            <div id="testcase3" class="testcase">
+                <p>The alt attribute belongs to a blacklist</p>
+                <img src="img/mock-img3.jpg" alt="" usemap="#mymap3"/>
+                <input type="image" alt=" Cliquez ici ... "></input>
+            </div>
+
+            <div class="test-explanation">
+                Failed : The textual alternatives of the graphical buttons are not pertinent
+            </div>
+        </div>
+    </body>
+</html>

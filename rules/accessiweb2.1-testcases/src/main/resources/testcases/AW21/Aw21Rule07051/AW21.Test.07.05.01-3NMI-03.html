@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <title>AW21 Test.7.5.1 NMI 03</title>
+</head>
+<body>
+<div>
+
+	<h1>AW21 Test.7.5.1 NMI 03</h1>
+
+	<p class="test-detail">
+            Does each script initiating a change of context pass one of the conditions below?
+            <ul>
+                <li> The user is warned by a text about the script action and the kind of change before it is activated</li>
+                <li> The change of context is initiated by an explicit button (input of type submit or button) </li>
+                <li> The change of context is initiated by an explicit link</li>
+            </ul>
+	</p>
+
+	<div class="testcase">
+            <form action="http://somesite.com/prog/component-select" method="post">
+                <p>
+                <select multiple="multiple" size="4" name="component-select">
+                    <option selected="selected" value="Component_1_a">Component_1</option>
+                    <option selected="selected" value="Component_1_b">Component_2</option>
+                    <option>Component_3</option>
+                    <option>Component_4</option>
+                    <option>Component_5</option>
+                    <option>Component_6</option>
+                    <option>Component_7</option>
+                </select>
+                </p>
+            </form>
+	</div>
+
+	<p class="test-explanation">
+            NMI : A script that potentially changes the context is detected
+        </p>
+
+</div>
+</body>
+</html>

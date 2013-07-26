@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Aw22 Test.5.2.2 Passed 02</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>Aw22 Test.5.2.2 Passed 02</h1>
+
+            <div class="test-detail">
+                For each layout table (table tag) with a summary attribute, is the content of this attribute empty (summary=")?
+            </div>
+
+            <div class="testcase">
+                <table class="class-presentation-table" summary="">
+                </table>
+                <table id="id-data-table" summary="Summary of data table">
+                </table>
+            </div>
+            
+            <div class="test-explanation">
+                Passed : A table identified as a presentation table by marker
+                has an empty summary attribute.
+                The second table is identified as a data table, it is out of 
+                scope.
+            </div>
+        </div>
+    </body>
+</html>

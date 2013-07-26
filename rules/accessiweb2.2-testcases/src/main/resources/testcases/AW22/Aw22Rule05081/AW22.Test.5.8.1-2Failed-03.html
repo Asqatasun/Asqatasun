@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Aw22 Test.5.8.1 Failed 03</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>Aw22 Test.5.8.1 Failed 03</h1>
+
+            <div class="test-detail">
+                Does each layout table (table tag) pass the conditions below? 
+                <ul> 
+                    <li> The layout table (table tag) does not have any caption, th, thead, tfoot tags</li>
+                    <li> The cells of the layout table (td tag) have no scope, headers, colgroup, axis attributes.</li> 
+                </ul>
+            </div>
+
+            <div class="testcase">
+                <table id="id-presentation-table">
+                    <thead>Thead Forbidden for presentation table</thead>
+                </table>
+            </div>
+            
+            <div class="test-explanation">
+                Failed : The table is identified as presentation table by marker
+                usage and has data table markup
+            </div>
+        </div>
+    </body>
+</html>

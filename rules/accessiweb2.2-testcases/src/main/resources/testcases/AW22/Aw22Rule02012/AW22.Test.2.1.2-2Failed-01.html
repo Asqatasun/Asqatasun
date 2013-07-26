@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+    <head>
+        <title>AW22 Test.2.1.2 Failed 01</title>
+    </head>
+
+    <body>
+        <div>
+
+            <h1>AW22 Test.2.1.2 Failed 01</h1>
+
+            <p class="test-detail">
+                <span lang="fr">Chaque cadre (balise iframe) a-t-il un attribut title ?</span>
+            </p>
+
+            <div class="testcase">
+                <iframe src="mock-iframe1.html">
+                </iframe>
+                <iframe src="mock-iframe2.html" title="Mock Iframe 2">
+                </iframe>
+            </div>
+
+            <p class="test-explanation">Failed : One iframe tag has an no title attribute</p>
+
+        </div>
+    </body>
+</html>
