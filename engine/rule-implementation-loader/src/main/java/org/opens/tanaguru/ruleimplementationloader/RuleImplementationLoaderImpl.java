@@ -21,12 +21,9 @@
  */
 package org.opens.tanaguru.ruleimplementationloader;
 
-import org.opens.tanaguru.ruleimplementation.RuleImplementation;
-import java.io.File;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
+import org.opens.tanaguru.ruleimplementation.RuleImplementation;
 
 /**
  * 
@@ -88,13 +85,14 @@ public class RuleImplementationLoaderImpl implements RuleImplementationLoader {
 
     private RuleImplementation loadClass(String className, String archiveName, String archiveRoot) {
         try {
-            URL rulesPackagesRootURL = new File(archiveRoot + File.separator + archiveName + ".jar").toURI().toURL();
-            URLClassLoader classLoader = new URLClassLoader(
-                    new URL[]{rulesPackagesRootURL}, this.getClass().getClassLoader());
-            return (RuleImplementation) Class.forName(className, true,
-                    classLoader).newInstance();
+            Logger.getLogger(this.getClass()).debug("Loading " + className + " rule");
+            return (RuleImplementation) Class.forName(className).newInstance();
         } catch (Exception ex) {
-            Logger.getLogger(RuleImplementationLoaderImpl.class.getName()).log(Level.SEVERE, "archiveRoot=" + archiveRoot + ", archiveName=" + archiveName + ", className=" + className, ex);
+            Logger.getLogger(this.getClass()).error(
+                    "archiveRoot=" + archiveRoot + ", "
+                        + "archiveName=" + archiveName + ", "
+                        + "className=" + className, 
+                    ex);
             throw new RuntimeException(ex);
         }
     }
