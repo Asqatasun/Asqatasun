@@ -134,9 +134,13 @@ public final class TestResultFactory {
         testResult.setResultCode(setResultToLowerCase(processResult, testResult));
         testResult.setRuleDesignUrl(processResult.getTest().getRuleDesignUrl());
         testResult.setResultCounter(ResultCounterFactory.getInstance().getResultCounter());
-        testResult.setTestRepresentation(Integer.valueOf(representationBundle.
-                getString(testResult.getTestCode()+TestResult.REPRESENTATION_SUFFIX_KEY)));
         testResult.setTest(processResult.getTest());
+        try {
+            testResult.setTestRepresentation(Integer.valueOf(representationBundle.
+                getString(testResult.getTestCode()+TestResult.REPRESENTATION_SUFFIX_KEY)));
+        } catch (MissingResourceException mre) {
+            Logger.getLogger(this.getClass()).warn(mre);
+        }
         try {
             testResult.setTestEvidenceRepresentationOrder(representationBundle.
                 getString(testResult.getTestCode()+TestResult.REPRESENTATION_ORDER_SUFFIX_KEY));
@@ -465,13 +469,7 @@ public final class TestResultFactory {
             TestResult testResult,
             RemarkInfos currentRemarkInfos,
             ProcessRemark remark) {
-        Map <String, String> elementMap = new HashMap<String, String>();
-        if (remark instanceof SourceCodeRemark) {
-            int lineNumber = computeLineNumber(testResult,(SourceCodeRemark)remark);
-            if (lineNumber > 0) {
-                elementMap.put(TestResult.LINE_NUMBER_KEY, String.valueOf(lineNumber));
-            }
-        }
+        Map <String, String> elementMap = new LinkedHashMap<String, String>();
         for (EvidenceElement evidenceElement : remark.getElementList()) {
             if (!evidenceElement.getEvidence().getCode().
                     equalsIgnoreCase(TestResult.ELEMENT_NAME_KEY)) {
@@ -480,8 +478,18 @@ public final class TestResultFactory {
                         evidenceElement.getValue());
             }
         }
+        if (remark instanceof SourceCodeRemark) {
+            if (!((SourceCodeRemark)remark).getSnippet().isEmpty()) {
+                elementMap.put(TestResult.SNIPPET, ((SourceCodeRemark)remark).getSnippet());
+            }
+            int lineNumber = computeLineNumber((SourceCodeRemark)remark);
+            if (lineNumber > 0) {
+                elementMap.put(TestResult.LINE_NUMBER_KEY, String.valueOf(lineNumber));
+            }
+        }
         // Has to be removerd when decide to generalise to all representations
-        if (testResult.getTestRepresentationType() == TestResult.TABULAR_REPRESENTATION) {
+        if (testResult.getTestRepresentationType() != 0 &&
+                testResult.getTestRepresentationType() == TestResult.TABULAR_REPRESENTATION) {
             elementMap = sortEvidenceElementMap(testResult,elementMap);
         }
         if (!elementMap.isEmpty()) {
@@ -492,11 +500,9 @@ public final class TestResultFactory {
     /**
      *
      * @param remark
-     * @param testResult
      * @return
      */
     private int computeLineNumber(
-            TestResult testResult,
             SourceCodeRemark remark) {
         int lineNumber;
         // The doctype is added when the result is displayed.
