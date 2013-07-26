@@ -23,7 +23,6 @@
         <module>tgol-voter</module>
         <module>tgol-report</module>
         <module>tgol-security</module>
-        <module>tgol-i18n</module>
         <module>tgol-web-app</module>
   </modules>
 </project>
