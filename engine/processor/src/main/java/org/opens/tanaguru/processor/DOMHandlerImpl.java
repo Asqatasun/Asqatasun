@@ -184,7 +184,7 @@ public class DOMHandlerImpl implements DOMHandler {
         if (messageCode == null) {
             messageCode = ATTRIBUTE_MISSING_MSG_CODE;
         }
-        Set<TestSolution> resultSet = new HashSet<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
         for (Node workingElement : selectedElementList) {
             TestSolution processResult = TestSolution.PASSED;
             Node attribute = workingElement.getAttributes().getNamedItem(
@@ -204,7 +204,7 @@ public class DOMHandlerImpl implements DOMHandler {
         if (messageCode == null) {
             messageCode = CHILD_NODE_MISSING_MSG_CODE;
         }
-        Set<TestSolution> resultSet = new HashSet<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.PASSED;
             NodeList childNodes = workingElement.getChildNodes();
@@ -259,7 +259,7 @@ public class DOMHandlerImpl implements DOMHandler {
             blacklist = new ArrayList<String>();
         }
 
-        Set<TestSolution> resultSet = new HashSet<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
         for (Node workingElement : selectedElementList) {
 
             TestSolution result = TestSolution.NEED_MORE_INFO;
@@ -312,7 +312,7 @@ public class DOMHandlerImpl implements DOMHandler {
             blacklist = new ArrayList<String>();
         }
 
-        Set<TestSolution> resultSet = new HashSet<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.NEED_MORE_INFO;
             boolean isInBlackList = false;
@@ -546,6 +546,9 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     public void setSSP(SSP ssp) {
         this.ssp = ssp;
+        // when a new ssp is set to the handler, the doc needs to be 
+        // reinitialised.
+        jsoupDocInitialised = false;
         initializeJSoupDocument();
     }
 
@@ -645,7 +648,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public TestSolution checkAttributeValueIsEmpty(String attributeName) {
-        Set<TestSolution> resultSet = new HashSet<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.PASSED;
             Node attribute = workingElement.getAttributes().getNamedItem(
@@ -858,7 +861,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Deprecated
     public TestSolution checkTextContentValueLengthLower(int length,
             TestSolution defaultFailResult) {
-        Set<TestSolution> resultSet = new HashSet<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.PASSED;
             String textContent = workingElement.getTextContent();
@@ -876,7 +879,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public TestSolution checkTextContentValueNotEmpty() {
-        Set<TestSolution> resultSet = new HashSet<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.PASSED;
             if (workingElement.getTextContent().length() == 0) {
@@ -976,7 +979,7 @@ public class DOMHandlerImpl implements DOMHandler {
             blacklist = new ArrayList<String>();
         }
 
-        Set<TestSolution> resultSet = new HashSet<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.NEED_MORE_INFO;
             boolean isInWhiteList = false;
@@ -1054,7 +1057,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public TestSolution checkChildNodeExistsRecursively(String childNodeName) {
-        Set<TestSolution> resultSet = new HashSet<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.PASSED;
             boolean found = false;
@@ -1078,7 +1081,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public TestSolution checkContentNotEmpty() {
-        Set<TestSolution> resultSet = new HashSet<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.PASSED;
             if (workingElement.getTextContent().trim().isEmpty()
@@ -1097,7 +1100,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public TestSolution checkEachWithXpath(String expr) {
-        Set<TestSolution> resultSet = new HashSet<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
         for (Node node : selectedElementList) {
             TestSolution tempResult = TestSolution.PASSED;
             try {
@@ -1122,7 +1125,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public TestSolution checkAttributeValueNotEmpty(String attributeName) {
-        Set<TestSolution> resultSet = new HashSet<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.PASSED;
             Node attribute = workingElement.getAttributes().getNamedItem(
@@ -1153,7 +1156,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Deprecated
     public TestSolution checkAttributeValueLengthLower(String attributeName,
             int length, TestSolution defaultFailResult) {
-        Set<TestSolution> resultSet = new HashSet<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.PASSED;
             String textContent = workingElement.getTextContent();
