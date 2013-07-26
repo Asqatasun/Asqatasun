@@ -32,11 +32,6 @@ import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 public interface ElementChecker {
     
     /**
-     * Returned key when an attribute requested as evidence element is missing
-     */
-    public static String ABSENT_ATTRIBUTE_VALUE = "attribute-absent";
-    
-    /**
      * Perform the check operation. The instance of {@link ElementHandler} 
      * received as a parameter is used to retrieve elements the test is about
      * and the instance of {@link TestSolutionHandler} received 
