@@ -479,7 +479,7 @@ public final class TestResultFactory {
             }
         }
         if (remark instanceof SourceCodeRemark) {
-            if (!((SourceCodeRemark)remark).getSnippet().isEmpty()) {
+            if (StringUtils.isNotBlank(((SourceCodeRemark)remark).getSnippet())){
                 elementMap.put(TestResult.SNIPPET, ((SourceCodeRemark)remark).getSnippet());
             }
             int lineNumber = computeLineNumber((SourceCodeRemark)remark);
