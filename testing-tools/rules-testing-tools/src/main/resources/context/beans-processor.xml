@@ -23,6 +23,4 @@
     <bean id="processorFactory" class="org.opens.tanaguru.processor.ProcessorFactoryImpl"/>
     <bean id="processorService" class="org.opens.tanaguru.service.ProcessorServiceImpl"/>
     
-    <bean id="languageDetector" class="org.opens.tanaguru.ruleimplementation.LanguageDetector" factory-method="getInstance"/>
-
 </beans>
