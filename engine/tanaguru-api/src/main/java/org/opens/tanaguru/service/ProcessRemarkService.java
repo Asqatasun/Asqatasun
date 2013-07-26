@@ -253,18 +253,4 @@ public interface ProcessRemarkService {
      */
     EvidenceDataService getEvidenceDataService();
     
-    /**
-     * 
-     * @param element
-     * @return 
-     */
-    EvidenceElement getSnippetEvidenceElement(Element element);
-
-    /**
-     * 
-     * @param element
-     * @return 
-     */
-    EvidenceElement getDefaultEvidenceElement(Element element);
-    
 }
