@@ -121,7 +121,7 @@ public abstract class AbstractPageRuleDefaultImplementation extends AbstractPage
      * @return the result of the processing.
      */
     protected ProcessResult computeResult(SSPHandler sspHandler, TestSolutionHandler testSolutionHandler) {
-        return prepareDefiniteResult(testSolutionHandler.getTestSolutions(), sspHandler, elements.size());
+        return prepareDefiniteResult(testSolutionHandler.getTestSolution(), sspHandler, elements.size());
     }
     
     /**
@@ -137,7 +137,7 @@ public abstract class AbstractPageRuleDefaultImplementation extends AbstractPage
      * @return the result of the processing.
      */
     protected ProcessResult computeResult(SSPHandler sspHandler, TestSolutionHandler testSolutionHandler, int elementCounter) {
-        return prepareDefiniteResult(testSolutionHandler.getTestSolutions(), sspHandler, elementCounter);
+        return prepareDefiniteResult(testSolutionHandler.getTestSolution(), sspHandler, elementCounter);
     }
     
     /**
@@ -186,37 +186,47 @@ public abstract class AbstractPageRuleDefaultImplementation extends AbstractPage
     }
 
     @Override
-    public void addElement(Element element) {
-        elements.add(element);
+    public void add(Element element) {
+        if (!elements.contains(element)) {
+            elements.add(element);
+        }
     }
     
     @Override
-    public void removeElement(Element element) {
+    public void remove(Element element) {
         elements.remove(element);
     }
     
     @Override
-    public void addElements(Elements elements) {
-        this.elements.addAll(elements);
+    public void addAll(Elements elements) {
+        for (Element el : elements) {
+            add(el);
+        }
     }
 
     @Override
-    public void removeElements(Elements elements) {
-        elements.removeAll(elements);
+    public void removeAll(Elements elements) {
+        this.elements.removeAll(elements);
     }
     
     @Override
-    public void cleanElements() {
+    public void removeAll(ElementHandler elementHandler) {
+        elements.removeAll(elementHandler.get());
+    }
+    
+    @Override
+    public ElementHandler clean() {
         elements.clear();
+        return this;
     }
     
     @Override
-    public Elements getElements() {
+    public Elements get() {
         return elements;
     }
     
     @Override
-    public boolean isElementsEmpty() {
+    public boolean isEmpty() {
         return elements.isEmpty();
     }
     
@@ -227,7 +237,7 @@ public abstract class AbstractPageRuleDefaultImplementation extends AbstractPage
     
     @Override
     public void addTestSolutions(Collection<TestSolution> testSolutions) {
-        testSolutions.addAll(testSolutions);
+        this.testSolutions.addAll(testSolutions);
     }
     
     @Override
@@ -236,8 +246,8 @@ public abstract class AbstractPageRuleDefaultImplementation extends AbstractPage
     }
     
     @Override    
-    public Collection<TestSolution> getTestSolutions() {
-        return testSolutions;
+    public TestSolution getTestSolution() {
+        return RuleHelper.synthesizeTestSolutionCollection(testSolutions);
     }
 
 }

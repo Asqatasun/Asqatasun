@@ -55,6 +55,13 @@ public interface TestSolutionHandler {
      * @return all the collected {link @TestSolution}
      * 
      */
-    Collection<TestSolution> getTestSolutions();
+//    Collection<TestSolution> getTestSolutions();
+    
+    /**
+     * 
+     * @return the computed testSolution regarding the locale collection of
+     *      testSolution
+     */
+    TestSolution getTestSolution();
     
 }

@@ -35,46 +35,54 @@ public interface ElementHandler {
      * 
      * @param element 
      */
-    void addElement(Element element);
+    void add(Element element);
     
     /**
-     * remove an element to the collection
+     * remove an element from the collection
      * 
      * @param element 
      */
-    void removeElement(Element element);
+    void remove(Element element);
     
     /**
      * Add elements to the collection
      * 
      * @param elements 
      */
-    void addElements(Elements elements);
+    void addAll(Elements elements);
     
     /**
-     * Remove elements to the collection
+     * Remove elements from the collection
      * 
      * @param elements 
      */
-    void removeElements(Elements elements);
+    void removeAll(Elements elements);
+    
+    /**
+     * Remove elements from the collection
+     * 
+     * @param elements 
+     */
+    void removeAll(ElementHandler elementHandler);
     
     /**
      * Clean the collection of element
+     * @return the current instance of ElementHandler
      */
-    void cleanElements();
+    ElementHandler clean();
     
     /**
      * 
      * @return all the collected elements
      * 
      */
-    Elements getElements();
+    Elements get();
     
     /**
      * 
      * @return whether the collection of elements is empty
      * 
      */
-    boolean isElementsEmpty();
+    boolean isEmpty();
     
 }

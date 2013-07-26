@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -29,7 +29,6 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 /**
  * This class is a utility class
  *
- * @author jkowalczyk
  */
 public abstract class RuleHelper {
 
@@ -108,5 +107,5 @@ public abstract class RuleHelper {
         }
         return TestSolution.NOT_APPLICABLE;
     }
-
+    
 }
