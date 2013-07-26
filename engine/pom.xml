@@ -33,7 +33,7 @@
         <module>logging</module>
         <module>parameterization</module>
         <module>statistics</module>
-        <module>tanaguru-i18n</module>
+<!--        <module>tanaguru-i18n</module>-->
         <module>scenarioloader</module>
         <module>sebuilder-interpreter-tools</module>
   </modules>
