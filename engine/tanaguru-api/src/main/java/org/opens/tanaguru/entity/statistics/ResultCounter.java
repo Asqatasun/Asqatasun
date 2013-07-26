@@ -31,82 +31,82 @@ public interface ResultCounter {
      *
      * @return
      */
-    public int getNbOfNa();
+    int getNbOfNa();
 
     /**
      *
      * @param nbOfNA
      */
-    public void setNbOfNa(int nbOfNa) ;
+    void setNbOfNa(int nbOfNa) ;
 
     /**
      *
      * @return
      */
-    public int getNbOfNmi();
+    int getNbOfNmi();
 
     /**
      *
      * @param nbOfNMI
      */
-    public void setNbOfNmi(int nbOfNmi);
+    void setNbOfNmi(int nbOfNmi);
     
     /**
      *
      * @return
      */
-    public int getNbOfPassed() ;
+    int getNbOfPassed() ;
 
     /**
      *
      * @param nbOfPassed
      */
-    public void setNbOfPassed(int nbOfPassed);
+    void setNbOfPassed(int nbOfPassed);
 
     /**
      *
      * @return
      */
-    public int getNbOfFailed();
+    int getNbOfFailed();
 
     /**
      *
      * @param nbOfFailed
      */
-    public void setNbOfFailed(int nbOfFailed);
+    void setNbOfFailed(int nbOfFailed);
 
     /**
      *
      * @return
      */
-    public int getNbOfSuspected();
+    int getNbOfSuspected();
     
     /**
      *
      * @param nbOfNMI
      */
-    public void setNbOfSuspected(int nbOfSuspected);
+    void setNbOfSuspected(int nbOfSuspected);
     
     /**
      *
      * @return
      */
-    public int getNbOfDetected();
+    int getNbOfDetected();
     
     /**
      * 
      */
-    public void setNbOfDetected(int nbOfDetected);
+    void setNbOfDetected(int nbOfDetected);
     
     /**
      *
      * @param nbOfNMI
      */
-    public int getNbOfNotTested();
+    int getNbOfNotTested();
     
     /**
      * 
      * @param nbOfNotTested 
      */
-    public void setNbOfNotTested(int nbOfNotTested);
+    void setNbOfNotTested(int nbOfNotTested);
 }

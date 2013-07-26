@@ -37,187 +37,187 @@ public interface WebResourceStatistics extends Entity, ResultCounter {
      *
      * @return
      */
-    public Audit getAudit();
+    Audit getAudit();
 
     /**
      *
      * @param audit
      */
-    public void setAudit(Audit audit);
+    void setAudit(Audit audit);
 
     /**
      *
      * @return
      */
-    public Float getMark();
+    Float getMark();
 
     /**
      *
      * @param mark
      */
-    public void setMark(Float mark);
+    void setMark(Float mark);
 
     /**
      *
      * @return
      */
-    public Float getRawMark();
+    Float getRawMark();
 
     /**
      *
      * @param mark
      */
-    public void setRawMark(Float rawMark);
+    void setRawMark(Float rawMark);
 
     /**
      *
      * @return
      */
-    public int getNbOfFailedOccurences();
+    int getNbOfFailedOccurences();
 
     /**
      *
      * @param nbOfFailedOccurences
      */
-    public void setNbOfFailedOccurences(int nbOfFailedOccurences);
+    void setNbOfFailedOccurences(int nbOfFailedOccurences);
 
     /**
      *
      * @return
      */
-    public int getNbOfInvalidTest();
+    int getNbOfInvalidTest();
 
     /**
      *
      * @param nbOfInvalidTest
      */
-    public void setNbOfInvalidTest(int nbOfInvalidTest) ;
+    void setNbOfInvalidTest(int nbOfInvalidTest) ;
 
     /**
      *
      * @return
      */
-    public WebResource getWebResource();
+    WebResource getWebResource();
 
     /**
      * 
      * @param page
      */
-    public void setWebResource(WebResource webResource);
+    void setWebResource(WebResource webResource);
 
     /**
      * 
      * @return
      */
-    public Set<ThemeStatistics> getThemeStatisticsSet();
+    Set<ThemeStatistics> getThemeStatisticsSet();
 
     /**
      * 
      * @param themeStatisticsSet
      */
-    public void setThemeStatisticsSet(Set<ThemeStatistics> themeStatisticsSet);
+    void setThemeStatisticsSet(Set<ThemeStatistics> themeStatisticsSet);
 
     /**
      *
      * @param themeStatisticsSet
      */
-    public void addThemeStatistics(ThemeStatistics themeStatistics);
+    void addThemeStatistics(ThemeStatistics themeStatistics);
 
     /**
      *
      * @return
      */
-    public Set<TestStatistics> getTestStatisticsSet();
+    Set<TestStatistics> getTestStatisticsSet();
 
     /**
      *
      * @param themeStatisticsSet
      */
-    public void setTestStatisticsSet(Set<TestStatistics> themeStatisticsSet);
+    void setTestStatisticsSet(Set<TestStatistics> themeStatisticsSet);
 
     /**
      *
      * @param themeStatisticsSet
      */
-    public void addTestStatistics(TestStatistics testStatistics);
+    void addTestStatistics(TestStatistics testStatistics);
     
     /**
      *
      * @return
      */
-    public Set<CriterionStatistics> getCriterionStatisticsSet();
+    Set<CriterionStatistics> getCriterionStatisticsSet();
 
     /**
      *
      * @param criterionStatisticsSet
      */
-    public void setCriterionStatisticsSet(Set<CriterionStatistics> criterionStatisticsSet);
+    void setCriterionStatisticsSet(Set<CriterionStatistics> criterionStatisticsSet);
 
     /**
      *
      * @param themeStatisticsSet
      */
-    public void addCriterionStatistics(CriterionStatistics criterionStatistics);
+    void addCriterionStatistics(CriterionStatistics criterionStatistics);
 
         /**
      *
      * @return
      */
-    public BigDecimal getWeightedNa();
+    BigDecimal getWeightedNa();
 
     /**
      *
      * @param weightedNA
      */
-    public void setWeightedNa(BigDecimal weightedNa);
+    void setWeightedNa(BigDecimal weightedNa);
 
     /**
      *
      * @return
      */
-    public BigDecimal getWeightedNmi();
+    BigDecimal getWeightedNmi();
 
     /**
      *
      * @param weightedNMI
      */
-    public void setWeightedNmi(BigDecimal weightedNmi);
+    void setWeightedNmi(BigDecimal weightedNmi);
 
     /**
      *
      * @return
      */
-    public BigDecimal getWeightedPassed() ;
+    BigDecimal getWeightedPassed() ;
 
     /**
      *
      * @param weightedPassed
      */
-    public void setWeightedPassed(BigDecimal weightedPassed);
+    void setWeightedPassed(BigDecimal weightedPassed);
 
     /**
      *
      * @return
      */
-    public BigDecimal getWeightedFailed();
+    BigDecimal getWeightedFailed();
 
     /**
      *
      * @param weightedFailed
      */
-    public void setWeightedFailed(BigDecimal weightedFailed);
+    void setWeightedFailed(BigDecimal weightedFailed);
     
     /**
      *
      * @return
      *      the http status code
      */
-    public int getHttpStatusCode();
+    int getHttpStatusCode();
 
     /**
      * 
      * @param httpStatusCode
      */
-    public void setHttpStatusCode(int httpStatusCode);
+    void setHttpStatusCode(int httpStatusCode);
     
 }
