@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <project xmlns:pom="http://maven.apache.org/POM/4.0.0">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
+     <parent>
         <groupId>org.opens</groupId>
-        <artifactId>rules</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <artifactId>tanaguru</artifactId>
+        <version>3.0.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>accessiweb2.2</artifactId>
