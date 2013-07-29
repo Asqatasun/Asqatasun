@@ -59,7 +59,7 @@ public class DownloaderImpl implements Downloader {
             StringBuilder urlContent = new StringBuilder();
             String thisLine;
             URL u = new URL(url);
-            in = new BufferedReader(new InputStreamReader(u.openStream(), Charset.defaultCharset()));
+            in = new BufferedReader(new InputStreamReader(u.openStream(), Charset.forName("UTF-8")));
             while ((thisLine = in.readLine()) != null) {
                 //Correction of #34 bug
                 urlContent.append(thisLine);
