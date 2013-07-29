@@ -385,6 +385,10 @@ public final class TestResultFactory {
      * @return
      */
     private String extractRemarkTarget(ProcessRemark remark) {
+        if (remark instanceof SourceCodeRemark 
+                && StringUtils.isNotBlank(((SourceCodeRemark)remark).getTarget())) {
+            return ((SourceCodeRemark)remark).getTarget();
+        }
         for (EvidenceElement evidenceElement :
             remark.getElementList()) {
             if (evidenceElement.getEvidence().getCode().
