@@ -34,6 +34,7 @@ import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.reference.CriterionDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.sdk.entity.Entity;
 import org.opens.tgol.entity.decorator.tanaguru.subject.WebResourceDataServiceDecorator;
 import org.opens.tgol.presentation.data.RemarkInfos;
 import org.opens.tgol.presentation.data.TestResult;
@@ -470,7 +471,7 @@ public final class TestResultFactory {
             RemarkInfos currentRemarkInfos,
             ProcessRemark remark) {
         Map <String, String> elementMap = new LinkedHashMap<String, String>();
-        for (EvidenceElement evidenceElement : remark.getElementList()) {
+        for (EvidenceElement evidenceElement : sortEvidenceElementSet(remark.getElementList())) {
             if (!evidenceElement.getEvidence().getCode().
                     equalsIgnoreCase(TestResult.ELEMENT_NAME_KEY)) {
                 elementMap.put(
@@ -497,6 +498,26 @@ public final class TestResultFactory {
         }
     }
 
+    /**
+     * This method sorts the evidence elements in ascending order
+     * @param processResultList
+     */
+    private List<EvidenceElement> sortEvidenceElementSet(Collection<EvidenceElement> eeSet) {
+        List<EvidenceElement> evidenceElementList = new ArrayList<EvidenceElement>();
+        evidenceElementList.addAll(eeSet);
+        Collections.sort(evidenceElementList, new Comparator<EvidenceElement>() {
+            @Override
+            public int compare(EvidenceElement o1, EvidenceElement o2) {
+                if (o1.getId() < o2.getId()) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            }
+        });
+        return evidenceElementList;
+    }
+    
     /**
      *
      * @param remark
@@ -592,6 +613,24 @@ public final class TestResultFactory {
             audit = wr.getParent().getAudit();
         }
         return auditDataService.getAuditWithTest(audit.getId()).getTestList();
-    } 
+    }
+
+    /**
+     * Inner class to sort entities by Id
+     */
+    private static class EntityComparator implements Comparator<Entity> {
+
+        public EntityComparator() {
+        }
+
+        @Override
+        public int compare(Entity o1, Entity o2) {
+            if (o1.getId() < o2.getId()) {
+                return -1;
+            } else {
+                return 1;
+            }
+        }
+    }
 
 }
