@@ -52,6 +52,8 @@ public class Rgaa22Rule03091 extends AbstractPageRuleWithSelectorAndCheckerImple
                 true, 
                 // no comparison with other attributes
                 null, 
+                // no extension comparison with blacklist
+                null, 
                 //  message associated with element when not pertinent
                 NOT_PERTINENT_OPTGROUP_LABEL_MSG, 
                 //  message associated with element when pertinence cannot be determined
