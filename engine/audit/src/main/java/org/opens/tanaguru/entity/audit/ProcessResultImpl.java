@@ -203,7 +203,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     @Override
     public void setRemarkSet(Collection<ProcessRemark> remarkSet) {
         if (this.remarkSet == null) {
-            this.remarkSet = new HashSet<ProcessRemarkImpl>();
+            this.remarkSet = new LinkedHashSet<ProcessRemarkImpl>();
         }
         for (ProcessRemark processRemark : remarkSet) {
             processRemark.setProcessResult(this);
