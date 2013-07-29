@@ -88,6 +88,11 @@
                                                 </c:set>
                                                 <c:set var="emptyClass" scope="page" value="empty"/>
                                             </c:if>
+                                            <c:if test="${evidence == 'attribute-absent'}">
+                                                <c:set var="evidence" scope="page">
+                                                    <fmt:message  key="${evidence}"/>
+                                                </c:set>
+                                            </c:if>
                                     <td class="${evidenceElement2.key} ${emptyClass}">${evidence}</td>
                                         </c:otherwise>
                                     </c:choose>
