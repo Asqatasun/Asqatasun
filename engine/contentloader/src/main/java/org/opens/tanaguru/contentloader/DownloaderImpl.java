@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.nio.charset.Charset;
 
 import javax.net.ssl.SSLPeerUnverifiedException;
 import org.apache.http.client.HttpClient;
@@ -58,7 +59,7 @@ public class DownloaderImpl implements Downloader {
             StringBuilder urlContent = new StringBuilder();
             String thisLine;
             URL u = new URL(url);
-            in = new BufferedReader(new InputStreamReader(u.openStream()));
+            in = new BufferedReader(new InputStreamReader(u.openStream(), Charset.defaultCharset()));
             while ((thisLine = in.readLine()) != null) {
                 //Correction of #34 bug
                 urlContent.append(thisLine);
