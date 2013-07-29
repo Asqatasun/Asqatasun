@@ -38,7 +38,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
  */
 public class PageListWrapper extends TableDecorator {
 
-    private static final String I18N_FILE_KEY = "page-list-page-I18N";
+    private static final String I18N_FILE_KEY = "i18n/page-list-page-I18N";
     private static final String PAGE_DETAILED_RESULT_KEY="pageList.pageDetailedResult";
     private static final String NO_DETAILED_RESULT_KEY="pageList.noDetailedResult";
     private static final String GO_TO_KEY="pageList.goTo";

@@ -82,11 +82,11 @@
     </bean>
 
     <bean id="subtitleBuilder" class="org.opens.tgol.report.layout.builder.SubtitleBuilderImpl">
-        <property name="bundleName" value="export-report-I18N"/>
-        <property name="levelValueBundleName" value="level-I18N"/>
-        <property name="refValueBundleName" value="referential-I18N"/>
-        <property name="refBundleName" value="parameters-I18N"/>
-        <property name="levelBundleName" value="parameters-I18N"/>
+        <property name="bundleName" value="i18n/export-report-I18N"/>
+        <property name="levelValueBundleName" value="i18n/level-I18N"/>
+        <property name="refValueBundleName" value="i18n/referential-I18N"/>
+        <property name="refBundleName" value="i18n/parameters-I18N"/>
+        <property name="levelBundleName" value="i18n/parameters-I18N"/>
         <property name="levelParamKey" value="LEVEL"/>
     </bean>
 

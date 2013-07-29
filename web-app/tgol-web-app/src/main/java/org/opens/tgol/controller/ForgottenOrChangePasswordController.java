@@ -62,7 +62,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
     private static final String EMAIL_FROM_KEY = "forgotten-password.emailFrom";
     private static final String EMAIL_SUBJECT_KEY = "forgotten-password.emailSubject";
     private static final String EMAIL_CONTENT_KEY = "forgotten-password.emailContent";
-    private static final String BUNDLE_NAME = "forgotten-password-page-I18N";
+    private static final String BUNDLE_NAME = "i18n/forgotten-password-page-I18N";
     private static final String CHANGE_PASSWORD_URL_KEY = "changePasswordUrl";
     
     private static final String AUTHENTICATED_KEY = "authenticated";

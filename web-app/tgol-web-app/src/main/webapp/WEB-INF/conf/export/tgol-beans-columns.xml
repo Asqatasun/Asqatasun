@@ -11,7 +11,7 @@
     <!-- base column -->
     <bean id="baseColumnBuilder" class="org.opens.tgol.report.layout.column.builder.ElementColumnBuilderImpl">
         <property name="columnWidth" value="70"/>
-        <property name="columnTitleBundleName" value="export-report-I18N"/>
+        <property name="columnTitleBundleName" value="i18n/export-report-I18N"/>
         <property name="headerStyle" ref="headerStyle"/>
     </bean>
     

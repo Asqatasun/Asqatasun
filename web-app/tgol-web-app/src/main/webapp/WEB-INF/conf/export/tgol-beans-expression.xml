@@ -33,7 +33,10 @@
     <bean id="themeExpressionBuilder" class="org.opens.tgol.report.expression.builder.I18nExpressionBuilderImpl">
         <property name="bundleNameList">
             <list>
-                <value>theme-I18N</value>
+                <value>i18n/theme-rgaa22-I18N</value>
+                <value>i18n/theme-aw22-I18N</value>
+                <value>i18n/theme-aw21-I18N</value>
+                <value>i18n/theme-seo-I18N</value>
             </list>
         </property>
         <property name="escapeHtml" value="false"/>
@@ -48,8 +51,10 @@
     <bean id="testExpressionBuilder" class="org.opens.tgol.report.expression.builder.I18nExpressionBuilderImpl">
         <property name="bundleNameList">
             <list>
-                <value>rule-I18N</value>
-                <value>rule-seo-I18N</value>
+                <value>i18n/rule-rgaa22-I18N</value>
+                <value>i18n/rule-aw22-I18N</value>
+                <value>i18n/rule-aw21-I18N</value>
+                <value>i18n/rule-seo-I18N</value>
             </list>
         </property>
         <property name="escapeHtml" value="false"/>
@@ -59,7 +64,7 @@
     <bean id="levelExpressionBuilder" class="org.opens.tgol.report.expression.builder.I18nExpressionBuilderImpl">
         <property name="bundleNameList">
             <list>
-                <value>level-I18N</value>
+                <value>i18n/level-I18N</value>
             </list>
         </property>
         <property name="escapeHtml" value="false"/>
@@ -69,7 +74,7 @@
     <bean id="resultExpressionBuilder" class="org.opens.tgol.report.expression.builder.I18nExpressionBuilderImpl">
         <property name="bundleNameList">
             <list>
-                <value>rule-result-I18N</value>
+                <value>i18n/rule-result-I18N</value>
             </list>
         </property>
         <property name="escapeHtml" value="false"/>
@@ -104,7 +109,7 @@
 
     <!-- STYLE EXPRESSIONS -->
     <bean id="failedStyleExpressionBuilder" class="org.opens.tgol.report.expression.builder.ResultStyleExpressionBuilderImpl">
-        <property name="bundleName" value="rule-result-I18N"/>
+        <property name="bundleName" value="i18n/rule-result-I18N"/>
         <property name="result" value="failed"/>
     </bean>
 
@@ -114,7 +119,7 @@
     </bean>
 
     <bean id="passedStyleExpressionBuilder" class="org.opens.tgol.report.expression.builder.ResultStyleExpressionBuilderImpl">
-        <property name="bundleName" value="rule-result-I18N"/>
+        <property name="bundleName" value="i18n/rule-result-I18N"/>
         <property name="result" value="passed"/>
     </bean>
 
@@ -124,7 +129,7 @@
     </bean>
 
     <bean id="nmiStyleExpressionBuilder" class="org.opens.tgol.report.expression.builder.ResultStyleExpressionBuilderImpl">
-        <property name="bundleName" value="rule-result-I18N"/>
+        <property name="bundleName" value="i18n/rule-result-I18N"/>
         <property name="result" value="nmi"/>
     </bean>
 
@@ -134,7 +139,7 @@
     </bean>
 
     <bean id="naStyleExpressionBuilder" class="org.opens.tgol.report.expression.builder.ResultStyleExpressionBuilderImpl">
-        <property name="bundleName" value="rule-result-I18N"/>
+        <property name="bundleName" value="i18n/rule-result-I18N"/>
         <property name="result" value="na"/>
     </bean>
 
@@ -144,7 +149,7 @@
     </bean>
     
     <bean id="ntStyleExpressionBuilder" class="org.opens.tgol.report.expression.builder.ResultStyleExpressionBuilderImpl">
-        <property name="bundleName" value="rule-result-I18N"/>
+        <property name="bundleName" value="i18n/rule-result-I18N"/>
         <property name="result" value="nt"/>
     </bean>
 

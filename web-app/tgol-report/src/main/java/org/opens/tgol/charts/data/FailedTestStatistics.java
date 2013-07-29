@@ -36,8 +36,8 @@ public class FailedTestStatistics {
 
     private static final long serialVersionUID = -6801992004288144815L;
 
-    private static final String THEME_BUNDLE_NAME="theme-I18N";
-    private static final String RULE_RESULT_BUNDLE_NAME = "rule-result-I18N";
+    private static final String THEME_BUNDLE_NAME="i18n/theme-I18N";
+    private static final String RULE_RESULT_BUNDLE_NAME = "i18n/rule-result-I18N";
     private static final int FAILED_INDEX = 0;
     private static final int MAX_NUMBER_OF_CATEGORIES = 5;
 

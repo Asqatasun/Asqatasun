@@ -88,7 +88,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
     private static final String PAGE_ERROR_MSG_CONTENT_KEY =  "page-error-content";
     private static final String KRASH_MSG_CONTENT_KEY =  "krash-content";
     private static final String KRASH_ADMIN_MSG_CONTENT_KEY =  "krash-admin-content";
-    private static final String BUNDLE_NAME = "email-content-I18N";
+    private static final String BUNDLE_NAME = "i18n/email-content-I18N";
     private static final int DEFAULT_AUDIT_DELAY = 30000;
 
     private String webappUrl;
