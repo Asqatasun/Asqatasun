@@ -128,25 +128,9 @@ public final class LangRulesHandler {
     }
 
     /**
-     * The unique instance of LangRulesHandler (singleton pattern)
-     */
-    private static LangRulesHandler langRulesHandler;
-
-    /**
      * Default private constructor
      */
-    private LangRulesHandler() {}
-
-    /**
-     * 
-     * @return
-     */
-    public static synchronized LangRulesHandler getInstance() {
-        if (langRulesHandler == null) {
-            langRulesHandler = new LangRulesHandler();
-        }
-        return langRulesHandler;
-    }
+    public LangRulesHandler() {}
 
     /**
      *

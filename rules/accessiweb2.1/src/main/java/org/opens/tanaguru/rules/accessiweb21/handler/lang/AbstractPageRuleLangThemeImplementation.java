@@ -30,11 +30,10 @@ import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
 public abstract class AbstractPageRuleLangThemeImplementation
         extends AbstractPageRuleImplementation {
 
-    protected LangRulesHandler langRulesHandler;
+    protected LangRulesHandler langRulesHandler = new LangRulesHandler();
 
     public AbstractPageRuleLangThemeImplementation() {
         super();
-        langRulesHandler = LangRulesHandler.getInstance();
     }
 
     @Override

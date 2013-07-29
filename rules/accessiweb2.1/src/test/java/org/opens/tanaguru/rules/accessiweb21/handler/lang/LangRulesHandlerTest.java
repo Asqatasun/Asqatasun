@@ -98,7 +98,7 @@ public class LangRulesHandlerTest extends TestCase {
     }
 
     public void testIsLangWellDeclared() {
-        LangRulesHandler lrh = LangRulesHandler.getInstance();
+        LangRulesHandler lrh = new LangRulesHandler();
         assertFalse(lrh.isLangWellDeclared(""));
         assertFalse(lrh.isLangWellDeclared("   "));
         assertTrue(lrh.isLangWellDeclared("en-en"));

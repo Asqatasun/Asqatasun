@@ -43,11 +43,6 @@ public final class ListRulesHandler {
             "//P[count(descendant::BR)>1 and (count(descendant::*)=count(descendant::BR))]";
 
     /**
-     * The unique instance of LinkRulesHandler (singleton pattern)
-     */
-    private static ListRulesHandler listRulesHandler;
-
-    /**
      * The SSPHandler
      */
     private SSPHandler sspHandler;
@@ -74,18 +69,7 @@ public final class ListRulesHandler {
     /**
      * Default private constructor
      */
-    private ListRulesHandler(){}
-
-    /**
-     * 
-     * @return
-     */
-    public static synchronized ListRulesHandler getInstance() {
-        if (listRulesHandler == null){
-            listRulesHandler = new ListRulesHandler();
-        }
-        return listRulesHandler;
-    }
+    public ListRulesHandler(){}
 
     /**
      * 

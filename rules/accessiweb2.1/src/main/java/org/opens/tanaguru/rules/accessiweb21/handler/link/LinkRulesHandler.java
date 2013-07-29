@@ -119,7 +119,7 @@ public final class LinkRulesHandler {
     /**
      * The unique instance of LinkRulesHandler (singleton pattern)
      */
-    private static LinkRulesHandler linkRulesHandler;
+//    private static LinkRulesHandler linkRulesHandler;
 
     private int elementCounter = 0;
     public int getElementCounter() {
@@ -184,18 +184,18 @@ public final class LinkRulesHandler {
     /**
      * Default private constructor
      */
-    private LinkRulesHandler(){}
+    public LinkRulesHandler(){}
 
-    /**
-     * 
-     * @return
-     */
-    public static synchronized LinkRulesHandler getInstance() {
-        if (linkRulesHandler == null){
-            linkRulesHandler = new LinkRulesHandler();
-        }
-        return linkRulesHandler;
-    }
+//    /**
+//     * 
+//     * @return
+//     */
+//    public static synchronized LinkRulesHandler getInstance() {
+//        if (linkRulesHandler == null){
+//            linkRulesHandler = new LinkRulesHandler();
+//        }
+//        return linkRulesHandler;
+//    }
 
     /**
      *

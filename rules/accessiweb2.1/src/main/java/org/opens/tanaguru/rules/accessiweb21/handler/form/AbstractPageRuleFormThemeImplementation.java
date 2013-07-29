@@ -30,11 +30,10 @@ import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
 public abstract class AbstractPageRuleFormThemeImplementation
         extends AbstractPageRuleImplementation {
 
-    protected FormRulesHandler formRulesHandler;
+    protected FormRulesHandler formRulesHandler = new FormRulesHandler();
 
     public AbstractPageRuleFormThemeImplementation() {
         super();
-        formRulesHandler = FormRulesHandler.getInstance();
     }
 
     @Override

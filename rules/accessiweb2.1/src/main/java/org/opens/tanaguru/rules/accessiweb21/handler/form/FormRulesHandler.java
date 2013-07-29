@@ -102,11 +102,6 @@ public final class FormRulesHandler {
             "//LABEL[TEXTAREA] | " +
             "//LABEL[SELECT]";
 
-    /**
-     * The unique instance of LinkRulesHandler (singleton pattern)
-     */
-    private static FormRulesHandler formRulesHandler;
-
     private int elementCounter = 0;
     public int getElementCounter() {
         return elementCounter;
@@ -141,19 +136,8 @@ public final class FormRulesHandler {
     /**
      * Default private constructor
      */
-    private FormRulesHandler(){
+    public FormRulesHandler(){
 
-    }
-
-    /**
-     * 
-     * @return
-     */
-    public static synchronized FormRulesHandler getInstance() {
-        if (formRulesHandler == null){
-            formRulesHandler = new FormRulesHandler();
-        }
-        return formRulesHandler;
     }
 
     /**

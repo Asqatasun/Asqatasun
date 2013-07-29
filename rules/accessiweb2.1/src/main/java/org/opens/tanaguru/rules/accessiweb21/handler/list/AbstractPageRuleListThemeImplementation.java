@@ -30,11 +30,10 @@ import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
 public abstract class AbstractPageRuleListThemeImplementation
         extends AbstractPageRuleImplementation {
 
-    protected ListRulesHandler listRulesHandler;
+    protected ListRulesHandler listRulesHandler = new ListRulesHandler();
 
     public AbstractPageRuleListThemeImplementation() {
         super();
-        listRulesHandler = ListRulesHandler.getInstance();
     }
 
     @Override
