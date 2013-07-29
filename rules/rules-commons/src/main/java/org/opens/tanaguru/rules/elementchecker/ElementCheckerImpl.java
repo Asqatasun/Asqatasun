@@ -161,6 +161,18 @@ public abstract class ElementCheckerImpl implements ElementChecker {
     }
     
     /**
+     * Add a processRemark
+     * 
+     * @param testSolution
+     * @param messageCode 
+     */
+    protected void addProcessRemark (
+            TestSolution testSolution, 
+            String messageCode) {
+        processRemarkService.addProcessRemark(testSolution, messageCode);
+    }
+    
+    /**
      * Returns the default evidence Element Collection with an additionnal 
      * info when a sourceCodeRemark is created
      * 

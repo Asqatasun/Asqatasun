@@ -73,7 +73,7 @@ public class Rgaa22Rule03111 extends AbstractPageRuleDefaultImplementation {
                         true, 
                         // no attribute to compare with   
                         null, 
-                        // no comparison with black list
+                        // no extension comparison with blacklist
                         null, 
                         // not pertinent message code   
                         FORM_ELEMENT_WITHOUT_LABEL_MSG, 
@@ -135,6 +135,7 @@ public class Rgaa22Rule03111 extends AbstractPageRuleDefaultImplementation {
             SSPHandler sspHandler, 
             ElementHandler elementHandler, 
             TestSolutionHandler testSolutionHandler) {
+        super.check(sspHandler, elementHandler, testSolutionHandler);
         
         // if the page have no form elements, the test is not applicable
         if (elementHandler.isEmpty()) {

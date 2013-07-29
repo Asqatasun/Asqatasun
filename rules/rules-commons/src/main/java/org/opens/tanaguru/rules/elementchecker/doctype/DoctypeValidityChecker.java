@@ -67,10 +67,8 @@ public class DoctypeValidityChecker extends NomenclatureBasedElementChecker {
                 ! doesDoctypeBelongToNom(doctype, CASE_SENSITIVE_DOCTYPE_NOM, true)){
 
             testSolutionHandler.addTestSolution(TestSolution.FAILED);
-            sspHandler.getProcessRemarkService().resetService();
-            sspHandler.getProcessRemarkService().addProcessRemark(
-                    TestSolution.FAILED,
-                    INVALID_DOCTYPE_MSG);
+            addProcessRemark(TestSolution.FAILED,INVALID_DOCTYPE_MSG);
+            
         } else {
             testSolutionHandler.addTestSolution(TestSolution.PASSED);
         }

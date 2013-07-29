@@ -82,6 +82,9 @@ public abstract class AbstractPageRuleWithSelectorAndCheckerImplementation
             SSPHandler sspHandler, 
             ElementHandler selectionHandler, 
             TestSolutionHandler testSolutionHandler) {
+        
+        super.check(sspHandler, selectionHandler, testSolutionHandler);
+        
         if (elementChecker instanceof NomenclatureBasedElementChecker) {
             ((NomenclatureBasedElementChecker)elementChecker).
                 setNomenclatureLoaderService(nomenclatureLoaderService);

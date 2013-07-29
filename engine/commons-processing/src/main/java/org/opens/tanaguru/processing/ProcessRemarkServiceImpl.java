@@ -211,6 +211,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
 
     @Override
     public void resetService() {
+        LOGGER.debug("Service is reset");
         remarkSet = new LinkedHashSet<ProcessRemark>();
         evidenceElementList = new LinkedList<String>();
     }

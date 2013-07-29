@@ -98,7 +98,10 @@ public abstract class AbstractPageRuleDefaultImplementation extends AbstractPage
      * This method defines a check operation . The instance of 
      * {@link SSPHandler} received as a parameter concerns only one page. 
      * The check operation may create TestSolutions handled by the 
-     * testSolutionHandler
+     * testSolutionHandler. By default this method reset the processRemark 
+     * service to clean-up local collection of remarks before collecting new one.
+     * Classes that override this class HAVE to make an explicit call to 
+     * super.check(...) OR reset the service.
      *
      * @param sspHandler
      *            the SSP handler to use.
@@ -108,7 +111,9 @@ public abstract class AbstractPageRuleDefaultImplementation extends AbstractPage
      *            the testSolutionHandler that handles the computed TestSolutions.
      * @return the result of the processing.
      */
-    abstract protected void check(SSPHandler sspHandler, ElementHandler selectionHandler, TestSolutionHandler testSolutionHandler);
+    protected void check(SSPHandler sspHandler, ElementHandler selectionHandler, TestSolutionHandler testSolutionHandler) {
+        sspHandler.getProcessRemarkService().resetService();
+    }
     
     /**
      * This method computes the {@link DefiniteResult} of the test from the

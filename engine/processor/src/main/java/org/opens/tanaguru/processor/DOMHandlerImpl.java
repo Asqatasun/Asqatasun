@@ -114,12 +114,8 @@ public class DOMHandlerImpl implements DOMHandler {
      */
     @Override
     public DOMHandler beginCssLikeSelection() {
-        messageCode = null;
         // reset the local collection of elements
         selectedElements = new Elements();
-        // reset the processRemark service when beginning a new selection.
-        // means the local collection of processRemark are reset
-        processRemarkService.resetService();
         return this;
     }
 

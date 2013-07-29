@@ -70,10 +70,7 @@ public class DoctypePositionChecker extends ElementCheckerImpl {
                  StringUtils.indexOfIgnoreCase(sourcePage,DOCTYPE_KEY, indexOfHtmlTag) != -1) {
              
              testSolutionHandler.addTestSolution(TestSolution.FAILED);
-             getProcessRemarkService().resetService();
-             getProcessRemarkService().addProcessRemark(
-                    TestSolution.FAILED, 
-                    BAD_DOCTYPE_LOCATION_MSG);
+             addProcessRemark(TestSolution.FAILED, BAD_DOCTYPE_LOCATION_MSG);
              
          } else {
              

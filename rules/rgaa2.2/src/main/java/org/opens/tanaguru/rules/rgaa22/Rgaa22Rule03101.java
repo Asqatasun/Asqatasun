@@ -70,6 +70,8 @@ public class Rgaa22Rule03101 extends AbstractPageRuleDefaultImplementation {
                         true, 
                         // no attribute to compare with
                         null, 
+                        // no extension comparison with blacklist
+                        null, 
                         // not pertinent message code
                         FORM_ELEMENT_WITHOUT_IDENTIFIER_MSG, 
                         // check pertinence message code
@@ -112,6 +114,8 @@ public class Rgaa22Rule03101 extends AbstractPageRuleDefaultImplementation {
             SSPHandler sspHandler, 
             ElementHandler elementHandler, 
             TestSolutionHandler testSolutionHandler) {
+        super.check(sspHandler, elementHandler, testSolutionHandler);
+        
         // if the page have no form elements, the test is not applicable
         if (elementHandler.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);

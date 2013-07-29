@@ -74,10 +74,8 @@ public abstract class AbstractPageRuleWithCheckerImplementation
             SSPHandler sspHandler, 
             ElementHandler selectionHandler, 
             TestSolutionHandler testSolutionHandler) {
-        // reseting the service before starting the check.
-        // Usually the reset is done with the first selection, but in this
-        // case, no selection is done.
-        sspHandler.getProcessRemarkService().resetService();
+        super.check(sspHandler, selectionHandler, testSolutionHandler);
+        
         if (elementChecker instanceof NomenclatureBasedElementChecker) {
             ((NomenclatureBasedElementChecker)elementChecker).
                     setNomenclatureLoaderService(nomenclatureLoaderService);

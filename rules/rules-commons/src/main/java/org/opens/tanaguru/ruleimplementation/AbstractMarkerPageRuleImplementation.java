@@ -152,6 +152,9 @@ public class AbstractMarkerPageRuleImplementation
             SSPHandler sspHandler, 
             ElementHandler selectionHandler, 
             TestSolutionHandler testSolutionHandler) {
+        
+        super.check(sspHandler, selectionHandler, testSolutionHandler);
+        
         if (!selectionWithMarkerHandler.isEmpty()) {
             setServicesToChecker(markerElementChecker);
             markerElementChecker.check(
