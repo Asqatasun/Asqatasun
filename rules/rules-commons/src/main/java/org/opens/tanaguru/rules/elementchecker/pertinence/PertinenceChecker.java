@@ -157,7 +157,8 @@ public abstract class PertinenceChecker extends NomenclatureBasedElementChecker 
             Logger.getLogger(this.getClass()).debug("Checker "+ec.getClass() + 
                     "returned " + checkerSolution);
 
-            if (checkerSolution.equals(notPertinentSolution)) {
+            if (checkerSolution.equals(notPertinentSolution) || 
+                    checkerSolution.equals(TestSolution.NOT_APPLICABLE))  {
                 return checkerSolution;
             }
         }
