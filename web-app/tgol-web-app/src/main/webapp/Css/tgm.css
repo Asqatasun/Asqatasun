@@ -1883,7 +1883,7 @@ input[type="text"]:focus{
 .empty{
     font-style:italic;
 }
-.src img {
+.src.iconify {
     width: 150px;
     height: auto;
 }

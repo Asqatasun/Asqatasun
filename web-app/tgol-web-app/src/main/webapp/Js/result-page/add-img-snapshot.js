@@ -15,6 +15,9 @@ $(document).ready(function() {
         }, '</>');
         $this.empty();
         $this.append(img);
+        if ($this.width()>150 || $this.width()>150) {
+            $this.addClass('iconify');
+        }
     }); 
     
 });
