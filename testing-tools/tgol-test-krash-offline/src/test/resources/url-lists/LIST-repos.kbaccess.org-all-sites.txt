@@ -75,7 +75,6 @@ natural-net-20100323;http://repos.kbaccess.org/static/fr-FR-gallerie-AW-2008/nat
 carac-20100323;http://repos.kbaccess.org/static/fr-FR-gallerie-AW-2008/carac-20100323/index.html
 handicap-charentes-maritime-20100323;http://repos.kbaccess.org/static/fr-FR-gallerie-AW-2008/handicap-charentes-maritime-20100323/index.html
 El-Mundo-Deportivo-20100322;http://repos.kbaccess.org/static/es-ES-news/El-Mundo-Deportivo-20100322/index.html
-El-Periodico-20100322;http://repos.kbaccess.org/static/es-ES-news/El-Periodico-20100322/index.html
 La-Razon-20100322;http://repos.kbaccess.org/static/es-ES-news/La-Razon-20100322/index.html
 El-Correo-20100322;http://repos.kbaccess.org/static/es-ES-news/El-Correo-20100322/index.html
 Cambio16-20100322;http://repos.kbaccess.org/static/es-ES-news/Cambio16-20100322/index.html
