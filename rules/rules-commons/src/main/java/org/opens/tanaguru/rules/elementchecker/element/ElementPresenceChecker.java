@@ -251,11 +251,10 @@ public class ElementPresenceChecker extends ElementCheckerImpl {
             if (StringUtils.isNotBlank(messageCodeOnElementDetected)) {
                 
                 for (Element el : elements) {
-                    getProcessRemarkService().addSourceCodeRemarkOnElement(
-                        detectedSolution, 
-                        el, 
-                        messageCodeOnElementDetected,
-                        getEvidenceElementCollection(el, getEeAttributeNameList()));
+                    addSourceCodeRemark(
+                            detectedSolution, 
+                            el, 
+                            messageCodeOnElementDetected);
                 }
                 
             }

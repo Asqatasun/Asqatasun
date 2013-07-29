@@ -158,11 +158,12 @@ public class TextElementEndsWithChecker extends NomenclatureBasedElementChecker
         }
         for (String extension : extensions) {
             if (StringUtils.endsWithIgnoreCase(elementText, extension)) {
-                 getProcessRemarkService().addSourceCodeRemarkOnElement(
+                
+                addSourceCodeRemark(
                     detectedSolution,
                     element,
-                    textEndsWithMessageCode,
-                    getEvidenceElementCollection(element, getEeAttributeNameList()));
+                    textEndsWithMessageCode);
+
                 return detectedSolution;
             }
         }

@@ -212,11 +212,11 @@ public class ChildElementPresenceChecker extends ElementCheckerImpl {
                 testSolution = setTestSolution(testSolution, detectedSolution);
                 
                 if (StringUtils.isNotBlank(messageCodeOnElementDetected)) {
-                    getProcessRemarkService().addSourceCodeRemarkOnElement(
-                        detectedSolution,
-                        el, 
-                        messageCodeOnElementDetected, 
-                        getEvidenceElementCollection(el, getEeAttributeNameList()));
+                    
+                    addSourceCodeRemark(
+                            detectedSolution,
+                            el, 
+                            messageCodeOnElementDetected);
                 }
                 
             } else {
@@ -224,11 +224,11 @@ public class ChildElementPresenceChecker extends ElementCheckerImpl {
                 testSolution = setTestSolution(testSolution, notDetectedSolution);
                 
                 if (StringUtils.isNotBlank(messageCodeOnElementNotDetected)) {
-                    getProcessRemarkService().addSourceCodeRemarkOnElement(
-                        notDetectedSolution,
-                        el, 
-                        messageCodeOnElementNotDetected,
-                        getEvidenceElementCollection(el, getEeAttributeNameList()));
+                    
+                    addSourceCodeRemark(
+                            notDetectedSolution,
+                            el, 
+                            messageCodeOnElementNotDetected);
                 }
 
             }

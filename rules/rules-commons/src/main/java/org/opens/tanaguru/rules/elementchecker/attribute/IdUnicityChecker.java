@@ -105,11 +105,11 @@ public class IdUnicityChecker extends ElementCheckerImpl {
                 getIdPresenceCounter(sspHandler, el.id()) > 1) {
                 testSolution = TestSolution.FAILED;
                 if (StringUtils.isNotBlank(messageCodeOnIdNotUnique)) {
-                    getProcessRemarkService().addSourceCodeRemarkOnElement(
+                    
+                    addSourceCodeRemark(
                         TestSolution.FAILED, 
                         el, 
-                        messageCodeOnIdNotUnique,
-                        getEvidenceElementCollection(el, getEeAttributeNameList()));
+                        messageCodeOnIdNotUnique);
                 }
             }
         }

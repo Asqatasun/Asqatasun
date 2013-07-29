@@ -286,11 +286,7 @@ public class LangDeclarationValidityChecker extends NomenclatureBasedElementChec
         }
         evidenceElementList.add(getEvidenceElement(EXTRACTED_TEXT_EE, testedText));
         
-        getProcessRemarkService().addSourceCodeRemarkOnElement(
-                testSolution,
-                element,
-                message,
-                evidenceElementList);
+        addSourceCodeRemark(testSolution, element, message, evidenceElementList);
     }
     
     /**
@@ -310,11 +306,7 @@ public class LangDeclarationValidityChecker extends NomenclatureBasedElementChec
 
         evidenceElementList.add(getEvidenceElement(LANGUAGE_EE, extractedLang));
         
-        getProcessRemarkService().addSourceCodeRemarkOnElement(
-                testSolution,
-                element,
-                message,
-                evidenceElementList);
+        addSourceCodeRemark(testSolution, element, message, evidenceElementList);
     }
    
 }

@@ -157,7 +157,7 @@ public class AbstractDetectionPageRuleImplementation
     @Override
     protected void check(SSPHandler sspHandler, ElementHandler selectionHandler, TestSolutionHandler testSolutionHandler) {
         ElementPresenceChecker epc = getElementPresenceChecker();
-       epc.check(sspHandler, selectionHandler, testSolutionHandler);
+        epc.check(sspHandler, selectionHandler, testSolutionHandler);
     }
 
     /**

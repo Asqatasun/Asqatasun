@@ -124,11 +124,10 @@ public class AttributePresenceChecker extends ElementCheckerImpl {
                 testSolution = setTestSolution(testSolution, notDetectedSolution);
                 
                 if (StringUtils.isNotBlank(messageCodeOnAttrNotDetected)) {
-                    getProcessRemarkService().addSourceCodeRemarkOnElement(
+                    addSourceCodeRemark(
                         notDetectedSolution, 
                         el, 
-                        messageCodeOnAttrNotDetected,
-                        getEvidenceElementCollection(el, getEeAttributeNameList()));
+                        messageCodeOnAttrNotDetected);
                     
                 }
                 
@@ -136,11 +135,10 @@ public class AttributePresenceChecker extends ElementCheckerImpl {
                 
                 testSolution = setTestSolution(testSolution, detectedSolution);
                 
-                getProcessRemarkService().addSourceCodeRemarkOnElement(
+                addSourceCodeRemark(
                         detectedSolution, 
                         el, 
-                        messageCodeOnAttrDetected,
-                        getEvidenceElementCollection(el, getEeAttributeNameList()));
+                        messageCodeOnAttrDetected);
                 
             }
         }

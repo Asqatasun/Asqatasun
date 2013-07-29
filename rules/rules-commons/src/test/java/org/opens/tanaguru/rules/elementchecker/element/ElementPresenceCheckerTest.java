@@ -268,8 +268,7 @@ public class ElementPresenceCheckerTest extends TestCase{
             mockProcessRemarkService.addSourceCodeRemarkOnElement(
                     solution, 
                     el, 
-                    message, 
-                    null);
+                    message);
             EasyMock.expectLastCall().once();
         }
         EasyMock.replay(mockProcessRemarkService);

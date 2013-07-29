@@ -133,11 +133,10 @@ public class TextElementOnlyContainsNonAlphanumericalCharactersChecker
         
         if (NON_ALPHANUMERIC_PATTERN.matcher(elementText).matches()) {
             
-            getProcessRemarkService().addSourceCodeRemarkOnElement(
+            addSourceCodeRemark(
                 detectedSolution,
                 element,
-                textOnlyContainsNacMsgCode, 
-                getEvidenceElementCollection(element, getEeAttributeNameList()));
+                textOnlyContainsNacMsgCode);
             
             return detectedSolution;
             

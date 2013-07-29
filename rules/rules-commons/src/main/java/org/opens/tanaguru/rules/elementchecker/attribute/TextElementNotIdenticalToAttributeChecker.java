@@ -160,11 +160,10 @@ public class TextElementNotIdenticalToAttributeChecker extends ElementCheckerImp
         
         if (StringUtils.contains(otherAttributeContent, elementText)) {
             
-            getProcessRemarkService().addSourceCodeRemarkOnElement(
+            addSourceCodeRemark(
                 detectedSolution,
                 element,
-                textElementIdenticalToAttributeValueMessageCode, 
-                getEvidenceElementCollection(element, getEeAttributeNameList()));
+                textElementIdenticalToAttributeValueMessageCode);
 
             return detectedSolution;
             

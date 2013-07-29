@@ -166,23 +166,14 @@ public abstract class TextEmptinessChecker extends ElementCheckerImpl {
 
                 if (StringUtils.isNotBlank(messageCodeOnTextEmpty)) {
                     
-                    getProcessRemarkService().addSourceCodeRemarkOnElement(
-                        textEmptySolution, 
-                        el, 
-                        messageCodeOnTextEmpty,
-                        getEvidenceElementCollection(el, getEeAttributeNameList()));
+                    addSourceCodeRemark(textEmptySolution, el, messageCodeOnTextEmpty);
                     
                 }
                 
             } else if (StringUtils.isNotBlank(messageCodeOnTextNotEmpty)) {
-
-                testSolution = setTestSolution(testSolution, textNotEmptySolution);
                 
-                getProcessRemarkService().addSourceCodeRemarkOnElement(
-                        textNotEmptySolution, 
-                        el, 
-                        messageCodeOnTextNotEmpty,
-                        getEvidenceElementCollection(el, getEeAttributeNameList()));
+                testSolution = setTestSolution(testSolution, textNotEmptySolution);
+                addSourceCodeRemark(textNotEmptySolution, el, messageCodeOnTextNotEmpty);
                 
             }
         }

@@ -166,11 +166,10 @@ public abstract class PertinenceChecker extends NomenclatureBasedElementChecker 
         // if the test at this step is not failed, create a NMI ProcessRemark
         // for a manual check
         Element el = elementHandler.get().first();
-        getProcessRemarkService().addSourceCodeRemarkOnElement(
+        addSourceCodeRemark(
                 TestSolution.NEED_MORE_INFO,
                 el,
-                manualCheckMessage, 
-                getEvidenceElementCollection(el, getEeAttributeNameList()));
+                manualCheckMessage);
 
         return TestSolution.NEED_MORE_INFO;
     }

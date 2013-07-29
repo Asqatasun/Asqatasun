@@ -105,6 +105,62 @@ public abstract class ElementCheckerImpl implements ElementChecker {
             TestSolutionHandler testSolutionHandler);
 
     /**
+     * Add a sourceCodeRemark on the given element
+     * 
+     * @param testSolution
+     * @param element
+     * @param messageCode 
+     */
+    protected void addSourceCodeRemark (
+            TestSolution testSolution, 
+            Element element, 
+            String messageCode) {
+        Collection<EvidenceElement> eeCol = 
+                getEvidenceElementCollection(element, eeAttributeNameList);
+        if (CollectionUtils.isNotEmpty(eeCol)) {
+            processRemarkService.addSourceCodeRemarkOnElement(
+                        testSolution, 
+                        element, 
+                        messageCode,
+                        eeCol);
+        } else {
+            processRemarkService.addSourceCodeRemarkOnElement(
+                        testSolution, 
+                        element, 
+                        messageCode);
+        }
+    }
+    
+    /**
+     * Add a sourceCodeRemark on the given element with a preset evidence element
+     * collection
+     * 
+     * @param testSolution
+     * @param element
+     * @param messageCode 
+     * @param evidenceElementList
+     */
+    protected void addSourceCodeRemark (
+            TestSolution testSolution, 
+            Element element, 
+            String messageCode, 
+            Collection<EvidenceElement> evidenceElementList) {
+        
+        if (CollectionUtils.isNotEmpty(evidenceElementList)) {
+            processRemarkService.addSourceCodeRemarkOnElement(
+                        testSolution, 
+                        element, 
+                        messageCode,
+                        evidenceElementList);
+        } else {
+            processRemarkService.addSourceCodeRemarkOnElement(
+                        testSolution, 
+                        element, 
+                        messageCode);
+        }
+    }
+    
+    /**
      * Returns the default evidence Element Collection with an additionnal 
      * info when a sourceCodeRemark is created
      * 
