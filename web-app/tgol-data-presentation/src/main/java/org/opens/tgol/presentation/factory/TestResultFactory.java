@@ -385,16 +385,15 @@ public final class TestResultFactory {
      * @return
      */
     private String extractRemarkTarget(ProcessRemark remark) {
-        if (remark instanceof SourceCodeRemark 
-                && StringUtils.isNotBlank(((SourceCodeRemark)remark).getTarget())) {
-            return ((SourceCodeRemark)remark).getTarget();
-        }
-        for (EvidenceElement evidenceElement :
-            remark.getElementList()) {
+        for (EvidenceElement evidenceElement : remark.getElementList()) {
             if (evidenceElement.getEvidence().getCode().
                     equalsIgnoreCase(TestResult.ELEMENT_NAME_KEY)) {
                 return evidenceElement.getValue().toLowerCase();
             }
+        }
+        if (remark instanceof SourceCodeRemark 
+                && StringUtils.isNotBlank(((SourceCodeRemark)remark).getTarget())) {
+            return ((SourceCodeRemark)remark).getTarget();
         }
         return null;
     }
