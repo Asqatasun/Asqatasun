@@ -569,8 +569,10 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         String line;
         try {
             while ((line = br.readLine()) != null) {
-                rawSourceCodeWithLine.put(lineNumber, line);
-                lineNumber++;
+                if (StringUtils.isNotBlank(line)) {
+                    rawSourceCodeWithLine.put(lineNumber, line);
+                    lineNumber++;
+                }
             }
         } catch (IOException ex) {
             LOGGER.error("Error occured while initialize raw source code map "+
