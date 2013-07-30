@@ -380,7 +380,11 @@ public final class TestResultFactory {
     }
 
     /**
-     *
+     * If an evidence element is created with Element_Name code, the value of 
+     * the target is the value of the evidence element.
+     * Instead, the target attribute of the SourceCodeRemark is returned when 
+     * it exists.
+     * 
      * @param remark
      * @return
      */
