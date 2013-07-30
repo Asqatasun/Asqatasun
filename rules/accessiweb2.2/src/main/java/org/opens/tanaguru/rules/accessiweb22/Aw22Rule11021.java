@@ -23,7 +23,8 @@ package org.opens.tanaguru.rules.accessiweb22;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.FORM_LABEL_CSS_LIKE_QUERY;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.LABEL_WITHIN_FORM_CSS_LIKE_QUERY;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
 
 /**
@@ -41,14 +42,16 @@ public class Aw22Rule11021 extends AbstractDetectionPageRuleImplementation {
      */
     public Aw22Rule11021 () {
         super(
-                new SimpleElementSelector(FORM_LABEL_CSS_LIKE_QUERY),
+                new SimpleElementSelector(LABEL_WITHIN_FORM_CSS_LIKE_QUERY),
                 // solution when at least one element is found
                 TestSolution.NEED_MORE_INFO,
                 // solution when no element is found
                 TestSolution.NOT_APPLICABLE,
                 // manual check message
                 MANUAL_CHECK_ON_ELEMENTS_MSG,
-                null
+                null, 
+                // evidence element
+                TEXT_ELEMENT2
             );
     }
 

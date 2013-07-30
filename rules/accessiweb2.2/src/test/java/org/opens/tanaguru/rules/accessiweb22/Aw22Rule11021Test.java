@@ -85,9 +85,12 @@ public class Aw22Rule11021Test extends Aw22RuleImplementationTestCase {
         SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
         assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
         assertEquals(RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.FORM_ELEMENT, processRemark.getTarget());
+        assertEquals(HtmlElementStore.LABEL_ELEMENT, processRemark.getTarget());
         // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        assertEquals(1,processRemark.getElementList().size());
+        assertEquals("Field1", processRemark.getElementList().iterator().next().getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, processRemark.getElementList().
+                iterator().next().getEvidence().getCode());
 
         
         //----------------------------------------------------------------------
@@ -103,9 +106,12 @@ public class Aw22Rule11021Test extends Aw22RuleImplementationTestCase {
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
         assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
         assertEquals(RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.FORM_ELEMENT, processRemark.getTarget());
+        assertEquals(HtmlElementStore.LABEL_ELEMENT, processRemark.getTarget());
         // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        assertEquals(1,processRemark.getElementList().size());
+        assertEquals("Field1", processRemark.getElementList().iterator().next().getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, processRemark.getElementList().
+                iterator().next().getEvidence().getCode());
         
         
         //----------------------------------------------------------------------
@@ -121,9 +127,12 @@ public class Aw22Rule11021Test extends Aw22RuleImplementationTestCase {
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
         assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
         assertEquals(RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.FORM_ELEMENT, processRemark.getTarget());
+        assertEquals(HtmlElementStore.LABEL_ELEMENT, processRemark.getTarget());
         // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        assertEquals(1,processRemark.getElementList().size());
+        assertEquals("Field1", processRemark.getElementList().iterator().next().getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, processRemark.getElementList().
+                iterator().next().getEvidence().getCode());
         
         
         //----------------------------------------------------------------------
@@ -139,9 +148,12 @@ public class Aw22Rule11021Test extends Aw22RuleImplementationTestCase {
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
         assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
         assertEquals(RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.FORM_ELEMENT, processRemark.getTarget());
+        assertEquals(HtmlElementStore.LABEL_ELEMENT, processRemark.getTarget());
         // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        assertEquals(1,processRemark.getElementList().size());
+        assertEquals("Field1", processRemark.getElementList().iterator().next().getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, processRemark.getElementList().
+                iterator().next().getEvidence().getCode());
         
         
         //----------------------------------------------------------------------

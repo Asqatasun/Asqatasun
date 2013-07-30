@@ -19,7 +19,9 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
+import java.util.Iterator;
 import java.util.LinkedHashSet;
+import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -67,17 +69,32 @@ public class Aw22Rule11031Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("AW22.Test.11.3.1-3NMI-01");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+        assertEquals(2, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(2, processResult.getRemarkSet().size());
+        Iterator<ProcessRemark> iter = processResult.getRemarkSet().iterator();
+        
+        SourceCodeRemark processRemark = (SourceCodeRemark)iter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
         assertEquals(RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.FORM_ELEMENT, processRemark.getTarget());
+        assertEquals(HtmlElementStore.LABEL_ELEMENT, processRemark.getTarget());
         // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        assertEquals(1,processRemark.getElementList().size());
+        assertEquals("Field1", processRemark.getElementList().iterator().next().getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, processRemark.getElementList().
+                iterator().next().getEvidence().getCode());
+        
+        processRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG, processRemark.getMessageCode());
+        assertEquals(HtmlElementStore.LABEL_ELEMENT, processRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(1,processRemark.getElementList().size());
+        assertEquals("Field2", processRemark.getElementList().iterator().next().getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, processRemark.getElementList().
+                iterator().next().getEvidence().getCode());
                
         
         //----------------------------------------------------------------------

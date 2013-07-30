@@ -107,19 +107,19 @@ public final class CssLikeQueryStore {
                     + "input[type=text][id] , "
                     + "input[type=radio][id]";
     public static final String FORM_ELEMENT_WITH_TITLE_CSS_LIKE_QUERY = 
-                    "textarea[id][title] , "
-                    + "select[id][title] , "
-                    + "input[type=password][id][title] , "
-                    + "input[type=checkbox][id][title] , "
-                    + "input[type=file][id][title] , "
-                    + "input[type=text][id][title] , "
-                    + "input[type=radio][id][title]";
+                    "textarea[title] , "
+                    + "select[title] , "
+                    + "input[type=password][title] , "
+                    + "input[type=checkbox][title] , "
+                    + "input[type=file][title] , "
+                    + "input[type=text][title] , "
+                    + "input[type=radio][title]";
     public static final String FORM_TEXT_INPUT_CSS_LIKE_QUERY = 
                     "form:has(textarea) , "
                     + "form:has(input[type=password]) , "
                     + "form:has(input[type=text])";
-    public static final String FORM_LABEL_CSS_LIKE_QUERY=
-                    "form:has("+ FORM_ELEMENT_CSS_LIKE_QUERY +"):has(label)"; 
+    public static final String LABEL_WITHIN_FORM_CSS_LIKE_QUERY=
+                    "form:has("+ FORM_ELEMENT_CSS_LIKE_QUERY +") label"; 
     public static final String FORM_LABEL_WITH_INNER_FORM_ELEMENT_CSS_LIKE_QUERY=
                     "form label:has(input[type=text]) , "
                     + "form label:has(input[type=password]) , "
