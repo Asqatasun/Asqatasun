@@ -149,15 +149,38 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     /**
      * The referential of rules
      */
-    private String referential;
-    public String getReferential() {
-        return referential;
+    private boolean upperCaseTags = false;
+    public boolean getUpperCaseTags() {
+        return upperCaseTags;
     }
 
-    public void setReferential(String referential) {
-        this.referential = referential;
+    public void setUpperCaseTags(boolean upperCaseTags) {
+        this.upperCaseTags = upperCaseTags;
     }
     
+    /**
+     * 
+     * @param testName
+     * @param inputDataFileName
+     * @param testcasesFilePath
+     * @param upperCaseTags
+     */
+    public AbstractRuleImplementationTestCase(
+            String testName,
+            String inputDataFileName,
+            String testcasesFilePath, 
+            boolean upperCaseTags) {
+        super(testName);
+        this.testcasesFilePath = testcasesFilePath;
+        this.inputDataFileName = inputDataFileName;
+        this.upperCaseTags = upperCaseTags;
+        initialize();
+        setUpRuleImplementationClassName();
+        setUpWebResourceMap();
+        setUpClass();
+        setUpParameterMap();
+        setUpDatabase();
+    }
     
     /**
      * 
@@ -168,12 +191,10 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     public AbstractRuleImplementationTestCase(
             String testName,
             String inputDataFileName,
-            String testcasesFilePath, 
-            String referential) {
+            String testcasesFilePath) {
         super(testName);
         this.testcasesFilePath = testcasesFilePath;
         this.inputDataFileName = inputDataFileName;
-        this.referential = referential;
         initialize();
         setUpRuleImplementationClassName();
         setUpWebResourceMap();
@@ -202,6 +223,11 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         processorService = (ProcessorService) applicationContext.getBean("processorService");
 
         consolidatorService = (ConsolidatorService) applicationContext.getBean("consolidatorService");
+        if (upperCaseTags) {
+            HTMLCleanerFactoryImpl htmlCleanerFactory = 
+                    (HTMLCleanerFactoryImpl) applicationContext.getBean("htmlCleanerFactory");
+            htmlCleanerFactory.setRemoveLowerCaseTags(upperCaseTags);
+        }
     }
 
     private void setUpDatabase() {
@@ -246,7 +272,6 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
             LOGGER.info("webResource.getURL() " + webResource.getURL());
             contentMap.put(webResource, contentLoaderService.loadContent(webResource));
             
-//            LOGGER.info(((SSP)contentMap.get(webResource).get(0)).getDOM());
             if (relatedContentMap.get(webResource) != null) {
                 for (String contentUrl : relatedContentMap.get(webResource)) {
                     if (contentMap.get(webResource).get(0) instanceof SSP) {
@@ -280,7 +305,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
                     }
                 }
             }
-            contentMap.put(webResource, contentAdapterService.adaptContent(contentMap.get(webResource),referential));
+            contentMap.put(webResource, contentAdapterService.adaptContent(contentMap.get(webResource),""));
         }
     }
 

@@ -32,9 +32,11 @@ public class HTMLCorrectorImpl implements HTMLCleaner {
 
     private String dirtyHTML;
     private String result;
+    private boolean upperCaseTags;
 
-    public HTMLCorrectorImpl() {
+    public HTMLCorrectorImpl(boolean upperCaseTags) {
         super();
+        this.upperCaseTags = upperCaseTags;
     }
 
     @Override
@@ -49,7 +51,11 @@ public class HTMLCorrectorImpl implements HTMLCleaner {
 
     @Override
     public void run() {
-        result = DocumentCaseInsensitiveAdapter.removeLowerCaseTags(dirtyHTML);
+        if (upperCaseTags) {
+            result = DocumentCaseInsensitiveAdapter.removeLowerCaseTags(dirtyHTML);
+        } else {
+            result = dirtyHTML;
+        }
     }
 
     @Override

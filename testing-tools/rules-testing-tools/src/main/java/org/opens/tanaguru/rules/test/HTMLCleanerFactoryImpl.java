@@ -30,10 +30,15 @@ import org.opens.tanaguru.contentadapter.HTMLCleanerFactory;
  */
 public class HTMLCleanerFactoryImpl implements HTMLCleanerFactory {
 
+    private boolean removeLowerCaseTags;
+    public void setRemoveLowerCaseTags(boolean removeLowerCaseTags) {
+        this.removeLowerCaseTags = removeLowerCaseTags;
+    }
+    
     @Override
     public HTMLCleaner create() {
 //        return new HTMLJsoupCleanerImpl();
-        return new HTMLCorrectorImpl();
+        return new HTMLCorrectorImpl(removeLowerCaseTags);
     }
 
 }
