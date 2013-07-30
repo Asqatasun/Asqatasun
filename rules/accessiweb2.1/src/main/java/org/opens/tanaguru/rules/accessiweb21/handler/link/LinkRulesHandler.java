@@ -620,7 +620,7 @@ public final class LinkRulesHandler {
             sspHandler.beginSelection().domXPathSelectNodeSet(xPathExpression);
         }
 
-        TestSolution testSolution = TestSolution.NOT_APPLICABLE;
+        Collection<TestSolution> testSolutions = new ArrayList<TestSolution>();
         // We first search the identical links in the node selected set
         Set<List<Node>> identicalLinkSet = searchIdenticalNodes(
                 sspHandler.getSelectedElementList(), hasTitleAttribute);
@@ -637,7 +637,6 @@ public final class LinkRulesHandler {
                             equalsIgnoreCase(
                             nodeList.get(i).getAttributes().getNamedItem(NodeAndAttributeKeyStore.HREF_ATTR).getTextContent().trim())) {
                         identicalTarget = false;
-                        testSolution = expectedTestSolution;
                         break;
                     }
                 }
@@ -651,15 +650,20 @@ public final class LinkRulesHandler {
                                 remarkMessage,
                                 buildTextContentFromNodeElements(node));
                     }
-                } else if (expectedTestSolution== TestSolution.FAILED) {
-                    testSolution = TestSolution.PASSED;
-                } else {
-                    testSolution = expectedTestSolution;
+                    testSolutions.add(expectedTestSolution);
+                // if the expected solution is failed, the result is decidable
+                // so the inverse solution of failed is passed
+                } else if (expectedTestSolution.equals(TestSolution.FAILED)) {
+                    testSolutions.add(TestSolution.PASSED);
+                // if the expected solution is nmi, the result is not decidable
+                // so the inverse solution of failed is still nmi
+                } else if (expectedTestSolution.equals(TestSolution.NEED_MORE_INFO)) {
+                    testSolutions.add(TestSolution.NEED_MORE_INFO);
                 }
             }
         }
         processRemarkList.addAll(sspHandler.getRemarkList());
-        return testSolution;
+        return RuleHelper.synthesizeTestSolutionCollection(testSolutions);
     }
 
     /**
