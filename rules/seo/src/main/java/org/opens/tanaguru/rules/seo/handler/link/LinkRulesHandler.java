@@ -125,11 +125,6 @@ public final class LinkRulesHandler {
     public static final String COMPOSITE_LINK_OBJECT_NODE =
         "descendant::object[normalize-space(string(.))] and @href";
 
-    /**
-     * The unique instance of LinkRulesHandler (singleton pattern)
-     */
-    private static LinkRulesHandler linkRulesHandler;
-
     private int elementCounter = 0;
     public int getElementCounter() {
         return elementCounter;
@@ -193,18 +188,7 @@ public final class LinkRulesHandler {
     /**
      * Default private constructor
      */
-    private LinkRulesHandler(){}
-
-    /**
-     * 
-     * @return
-     */
-    public static synchronized LinkRulesHandler getInstance() {
-        if (linkRulesHandler == null){
-            linkRulesHandler = new LinkRulesHandler();
-        }
-        return linkRulesHandler;
-    }
+    public LinkRulesHandler(){}
 
     /**
      *
@@ -232,7 +216,7 @@ public final class LinkRulesHandler {
                  remarkMessage);
 
         if (!testSolution.equals(expectedTestSolution) || sspHandler.getRemarkList().isEmpty() ){
-            Set<TestSolution> resultSet = new HashSet<TestSolution>();
+            Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
             for (Node workingElement : sspHandler.getSelectedElementList()) {
                 TestSolution result = TestSolution.NEED_MORE_INFO;
                 String nodeContent = buildTextContentFromNodeElements(workingElement);
@@ -270,7 +254,7 @@ public final class LinkRulesHandler {
         elementCounter += sspHandler.getSelectedElementNumber();
         // If the content of the tested attribute is not empty
         if (testSolution != TestSolution.FAILED){
-            Set<TestSolution> resultSet = new HashSet<TestSolution>();
+            Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
             for (Node workingElement : sspHandler.getSelectedElementList()) {
                 TestSolution result = TestSolution.NEED_MORE_INFO;
                 Node testedAttribute = workingElement.getAttributes().
@@ -523,7 +507,7 @@ public final class LinkRulesHandler {
      */
     public List<Node> keepTagsWithContent(List<Node> nodeList) {
         List<Node> myNodeList = new ArrayList<Node>();
-        int textCounter = 0;
+        int textCounter;
         for (Node node : nodeList) {
             textCounter=0;
             for (int i =0 ; i<node.getChildNodes().getLength();i++) {
@@ -719,7 +703,7 @@ public final class LinkRulesHandler {
         // the couple messageCode/defaultEvidence value is used to do so.
 
         evidenceElementList.add(processRemarkService.getEvidenceElement(
-                processRemarkService.getEvidenceDataService().findByCode(processRemarkService.DEFAULT_EVIDENCE).getCode(),
+                processRemarkService.getEvidenceDataService().findByCode(ProcessRemarkService.DEFAULT_EVIDENCE).getCode(),
                 linkTextValue+linkTitleAttrValue));
 
         processRemarkService.addSourceCodeRemark(
@@ -796,7 +780,7 @@ public final class LinkRulesHandler {
     }
 
     private TestSolution checkAttributeValueNotEmpty(String attributeName) {
-        Collection<TestSolution> resultSet = new HashSet<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
         for (Node workingElement : sspHandler.getSelectedElementList()) {
             TestSolution result = TestSolution.PASSED;
             Node attribute = workingElement.getAttributes().getNamedItem(

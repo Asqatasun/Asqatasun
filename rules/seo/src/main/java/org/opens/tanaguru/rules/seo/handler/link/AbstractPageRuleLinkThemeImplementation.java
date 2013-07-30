@@ -24,11 +24,10 @@ import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
 public abstract class AbstractPageRuleLinkThemeImplementation
         extends AbstractPageRuleImplementation {
 
-    protected LinkRulesHandler linkRulesHandler;
+    protected LinkRulesHandler linkRulesHandler = new LinkRulesHandler();
 
     public AbstractPageRuleLinkThemeImplementation() {
         super();
-        linkRulesHandler = LinkRulesHandler.getInstance();
     }
 
     @Override
