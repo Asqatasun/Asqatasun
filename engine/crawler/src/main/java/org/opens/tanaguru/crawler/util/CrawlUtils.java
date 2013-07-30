@@ -65,7 +65,7 @@ public final class CrawlUtils {
             Charset utf8charset = Charset.forName(DEFAULT_CHARSET);
             Charset incomingCharset = Charset.forName(charset);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            recis.getReplayInputStream().readFullyTo(baos);
+            recis.getReplayInputStream().readContentTo(baos);
             ByteBuffer inputBuffer = ByteBuffer.wrap(baos.toByteArray());
             CharBuffer data = incomingCharset.decode(inputBuffer);
             ByteBuffer outputBuffer = utf8charset.encode(data);
@@ -73,7 +73,7 @@ public final class CrawlUtils {
             return new String(outputData);
         } else {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            recis.getReplayInputStream().readFullyTo(baos);
+            recis.getReplayInputStream().readContentTo(baos);
             return baos.toString(charset);
         }
     }
@@ -150,10 +150,9 @@ public final class CrawlUtils {
     public static byte[] getImageContent(InputStream is, String imgExtension) {
         // O P E N
         ByteArrayOutputStream baos = new ByteArrayOutputStream(BYTE_BUFFER_SIZE);
-        BufferedImage image = null;
         byte[] resultImageAsRawBytes = null;
         try {
-            image = ImageIO.read(is);
+            BufferedImage image = ImageIO.read(is);
             // W R I T E
             ImageIO.write(image, imgExtension, baos);
             // C L O S E

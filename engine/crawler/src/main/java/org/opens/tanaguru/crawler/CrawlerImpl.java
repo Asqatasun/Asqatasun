@@ -264,7 +264,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
             LOGGER.debug("Found css " + curi.getURI() + " last fetched ssp " + lastFetchedSSP.getURI());
             
             boolean compressed = gzipHeader.testGzipMagic(recis.getMessageBodyReplayInputStream());
-            String cssCode = null;
+            String cssCode;
             if (compressed) {
                 cssCode = "";
             } else {
@@ -338,7 +338,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
             String sourceCode,
             boolean successfullFetch) {
 
-        Page page = null;
+        Page page;
         if (mainWebResource instanceof Page) {
             if (!isPageAlreadyFetched) {
                 page = (Page) mainWebResource;
@@ -472,7 +472,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
      */
     @SuppressWarnings("element-type-mismatch")
     private void removeOrphanContent() {
-        List<Content> emptyContentSet = null;
+        List<Content> emptyContentSet;
         Integer nbOfContent = contentDataService.getNumberOfOrphanRelatedContent(mainWebResource).intValue();
         Integer i = 0;
         Logger.getLogger(CrawlerImpl.class.getName()).debug("remove Orphan related contents  " + nbOfContent + " elements");
