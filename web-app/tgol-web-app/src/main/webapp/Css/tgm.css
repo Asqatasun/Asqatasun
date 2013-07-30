@@ -1883,9 +1883,9 @@ input[type="text"]:focus{
 .empty{
     font-style:italic;
 }
-.src.iconify {
-    width: 150px;
-    height: auto;
+.src img {
+    max-width: 150px;
+    max-height: 150px;
 }
 .Snippet {
 /*    width: 100px;*/
