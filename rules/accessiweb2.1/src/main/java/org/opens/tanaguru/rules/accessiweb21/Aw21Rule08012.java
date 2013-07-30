@@ -54,7 +54,10 @@ public class Aw21Rule08012 extends AbstractPageRuleImplementation {
      */
     @Override
     protected ProcessResult processImpl(SSPHandler sspHandler) {
-
+        // explicit reset call to the ProcessRemark service, cause the rule
+        // doesn't make any selection an DOM.
+        sspHandler.getProcessRemarkService().resetService();
+        
         Nomenclature caseSensitiveDocytpeDeclarations =
                 nomenclatureLoaderService.loadByCode(CASE_SENSITIVE_DOCTYPE_NOM);
         Nomenclature caseUnsensitiveDocytpeDeclarations =

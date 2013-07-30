@@ -42,7 +42,7 @@ public class Aw21Rule08011 extends AbstractPageRuleImplementation {
     public Aw21Rule08011() {
         super();
     }
-
+ 
     /**
      *
      * @param sspHandler
@@ -50,6 +50,10 @@ public class Aw21Rule08011 extends AbstractPageRuleImplementation {
      */
     @Override
     protected ProcessResult processImpl(SSPHandler sspHandler) {
+        // explicit reset call to the ProcessRemark service, cause the rule
+        // doesn't make any selection an DOM.
+        sspHandler.getProcessRemarkService().resetService();
+        
         List<ProcessRemark> processRemarkList =  new ArrayList<ProcessRemark>();
         TestSolution testSolution = TestSolution.PASSED;
         String doctype = sspHandler.getSSP().getDoctype();
