@@ -19,58 +19,32 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.opens.tanaguru.entity.audit.ProcessRemark;
-import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.TITLE_WITHIN_HEAD_CSS_LIKE_QUERY;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.TITLE_TAG_MISSING_MSG;
 
 /**
  *
  * @author jkowalczyk
  */
-public class SeoRule06011 extends AbstractPageRuleImplementation {
-
-    private static final String MESSAGE_CODE = "TitleTagMissing";
-    private static final String SELECTION_EXPR = "head title";
-
+public class SeoRule06011 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
+    
     /**
-     *
+     * Default constructor
      */
-    public SeoRule06011() {
-        super();
-    }
-
-    /**
-     *
-     * @param sspHandler
-     * @return
-     */
-    @Override
-    protected ProcessResult processImpl(SSPHandler sspHandler) {
-        List<ProcessRemark> processRemarkList = new ArrayList<ProcessRemark>();
-        sspHandler.beginCssLikeSelection().domCssLikeSelectNodeSet(SELECTION_EXPR);
-
-        TestSolution testSolution = null;
-
-        if (sspHandler.getSelectedElementList() != null
-                && sspHandler.getSelectedElementList().size() == 1) {
-            testSolution = TestSolution.PASSED;
-        } else {
-            testSolution = TestSolution.FAILED;
-            processRemarkList.add(sspHandler.getProcessRemarkService().createProcessRemark(
-                    TestSolution.FAILED,
-                    MESSAGE_CODE));
-        }
-
-        ProcessResult processResult = definiteResultFactory.create(
-                test,
-                sspHandler.getPage(),
-                testSolution,
-                processRemarkList);
-
-        return processResult;
+    public SeoRule06011(){
+        super(
+                new SimpleElementSelector(TITLE_WITHIN_HEAD_CSS_LIKE_QUERY), 
+                
+                new ElementPresenceChecker(
+                    true, 
+                    TestSolution.PASSED, 
+                    TestSolution.FAILED, 
+                    null, 
+                    TITLE_TAG_MISSING_MSG)
+            );
     }
 }

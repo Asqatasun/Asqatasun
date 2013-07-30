@@ -53,19 +53,18 @@ public class SeoRule05011 extends AbstractPageRuleLinkThemeImplementation{
     @Override
     protected ProcessResult processImpl(SSPHandler sspHandler) {
         super.processImpl(sspHandler);
-        Set<TestSolution> resultSet = new HashSet<TestSolution>();
         List<ProcessRemark> processRemarkList = new ArrayList<ProcessRemark>();
 
-        resultSet.add(linkRulesHandler.checkContextPertinence(
+        TestSolution testSolution = linkRulesHandler.checkContextPertinence(
                 XPATH_EXPR,
                 TestSolution.FAILED,
                 LinkRulesHandler.UNEXPLICIT_LINK_OUT_OF_CONTEXT,
-                processRemarkList));
+                processRemarkList);
 
         ProcessResult processResult = definiteResultFactory.create(
                 test,
                 sspHandler.getPage(),
-                RuleHelper.synthesizeTestSolutionCollection(resultSet),
+                testSolution,
                 processRemarkList);
         processResult.setElementCounter(linkRulesHandler.getElementCounter());
 

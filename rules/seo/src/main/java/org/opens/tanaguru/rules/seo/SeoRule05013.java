@@ -20,9 +20,8 @@
 package org.opens.tanaguru.rules.seo;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -55,7 +54,7 @@ public class SeoRule05013 extends AbstractPageRuleLinkThemeImplementation{
     @Override
     protected ProcessResult processImpl(SSPHandler sspHandler) {
         super.processImpl(sspHandler);
-        Set<TestSolution> resultSet = new HashSet<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
         List<ProcessRemark> processRemarkList = new ArrayList<ProcessRemark>();
 
         sspHandler.beginSelection().domXPathSelectNodeSet(XPATH_EXPR);
