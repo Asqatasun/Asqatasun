@@ -10,31 +10,6 @@ INSERT IGNORE INTO `SCOPE` (`Id_Scope`, `Code`, `Description`, `Label`) VALUES
 
 
 --
--- Dumping data for table `STANDARD_MESSAGE`
---
-INSERT IGNORE INTO `STANDARD_MESSAGE` (`Id_Standard_Message`, `Cd_Standard_Message`, `Label`, `Text`) VALUES
-(1, 'AttributeMissing', NULL, 'The attribute is missing'),
-(2, 'BlackListedValue', NULL, 'The value is blacklisted'),
-(3, 'VerifyValue', NULL, 'The value needs verification'),
-(4, 'ChildNodeMissing', NULL, 'The child node is missing'),
-(5, 'ValueEmpty', NULL, 'The value is empty'),
-(6, 'NotMatchExpression', NULL, 'Regular expression not match'),
-(7, 'LengthTooLong', NULL, 'Length too long'),
-(8, 'AccessKeyNotMatch', NULL, 'AccessKey not match'),
-(9, 'BadUnitType', NULL, 'Bad unit type'),
-(10, 'InvalidLanguageCode', NULL, 'Invalid language code'),
-(11, 'DeprecatedRepresentationTagFound', NULL, 'Deprecated tag found : {0} at line {1}'),
-(12, 'DecorativeImageWithNotEmptyAltAttribute', NULL, 'A decorative image with a not empty alt attribute has been found'),
-(13, 'NotPertinentAltAttribute', NULL, 'The alt attribute of the tag is not pertinent'),
-(14, 'HeaderTagNotHierarchicallyWelldefined', NULL, 'The hierarchy between the title (h tags) of the page is not pertinent'),
-(15, 'TitleTagMissing', NULL, 'Title tag is missing'),
-(16, 'H1TagMissing', NULL, 'H1 tag is missing'),
-(17, 'LinkContentMissing', NULL, 'Link content is missing'),
-(18, 'TitleTagNotRelevant', NULL, 'Title tag is not relevant'),
-(19, 'DoctypeMissing', NULL, 'The doctype declaration is missing'),
-(20, 'WrongDoctypeDeclaration', NULL, 'The doctype declaration is not recommended by the W3C');
-
---
 -- Dumping data for table `EVIDENCE`
 --
 INSERT IGNORE INTO `EVIDENCE` (`Id_Evidence`, `Cd_Evidence`, `Description`, `Long_Label`) VALUES
@@ -65,9 +40,9 @@ INSERT IGNORE INTO `EVIDENCE` (`Id_Evidence`, `Cd_Evidence`, `Description`, `Lon
 (25, 'longdesc', NULL, NULL),
 (26, 'summary', NULL, NULL),
 (1000, 'Url', NULL, NULL),
-(1001, 'Title', NULL, NULL),
 (1002, 'H1', NULL, NULL),
 (1003, 'MetaDescription', NULL, NULL);
+
 
 --
 -- Dumping data for table `NOMENCLATURE`

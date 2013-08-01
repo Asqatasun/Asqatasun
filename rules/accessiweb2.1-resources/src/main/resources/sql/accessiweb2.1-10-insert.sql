@@ -480,7 +480,7 @@ INSERT IGNORE INTO `TEST` (`Id_Test`, `Cd_Test`, `Description`, `Label`, `Rank`,
 (302, 'Aw21-13171', 'http://www.braillenet.org/accessibilite/referentiel-aw21/liste-deploye.php#consultation', '13.17.1', 2131701, '1.0', 'accessiweb2.1', 'org.opens.tanaguru.rules.accessiweb21.Aw21Rule13171', 133, NULL, 1, NULL, 1, 'http://www.tanaguru.org/en/content/aw21-rule-13-17-1', b'1'),
 (303, 'Aw21-13172', 'http://www.braillenet.org/accessibilite/referentiel-aw21/liste-deploye.php#consultation', '13.17.2', 2131702, '1.0', 'accessiweb2.1', 'org.opens.tanaguru.rules.accessiweb21.Aw21Rule13172', 133, NULL, 1, NULL, 1, 'http://www.tanaguru.org/en/content/aw21-rule-13-17-2', b'1'),
 (304, 'Aw21-09014', 'http://www.braillenet.org/accessibilite/referentiel-aw21/liste-deploye.php#structure', '9.1.4', 2090104, '1.0', 'accessiweb2.1', 'org.opens.tanaguru.rules.accessiweb21.Aw21Rule09014', 68, NULL, 1, NULL, 1, 'http://www.tanaguru.org/en/content/aw21-rule-9-1-4', b'1'),
-(305, 'Aw21-13015', 'http://www.braillenet.org/accessibilite/referentiel-aw21/liste-deploye.php#consultation', '13.1.5', 2130105, '1.0', 'accessiweb2.1', 'org.opens.tanaguru.rules.accessiweb21.Aw21Rule13015', 117, NULL, 1, NULL, 1, 'http://www.tanaguru.org/en/content/aw21-rule-13-1-5', b'1'), 
+(305, 'Aw21-13015', 'http://www.braillenet.org/accessibilite/referentiel-aw21/liste-deploye.php#consultation', '13.1.5', 2130105, '1.0', 'accessiweb2.1', 'org.opens.tanaguru.rules.accessiweb21.Aw21Rule13015', 117, NULL, 1, NULL, 1, 'http://www.tanaguru.org/en/content/aw21-rule-13-1-5', b'1');
 
 
 UPDATE TEST SET `No_Process`=b'0' WHERE 

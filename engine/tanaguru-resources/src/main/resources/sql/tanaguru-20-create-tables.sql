@@ -298,13 +298,8 @@ CREATE TABLE IF NOT EXISTS `TEST` (
   `Id_Rule` bigint(20) DEFAULT NULL,
   `Id_Scope` bigint(20) DEFAULT NULL,
   `No_Process` bit(1) DEFAULT b'1',
-  PRIMARY KEY (`Id_Test`),
-  KEY `FK273C9250C99824` (`Id_Scope`),
-  KEY `FK273C9272343A84` (`Id_Level`),
-  KEY `FK273C926CCA4C3E` (`Id_Criterion`),
-  KEY `FK273C921355BF7C` (`Id_Rule`),
-  KEY `FK273C92CCA757AD` (`Id_Decision_Level`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`Id_Test`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -676,7 +671,6 @@ ALTER TABLE `RULE`
 --
 ALTER TABLE `TEST`
   ADD CONSTRAINT `FK273C92CCA757AD` FOREIGN KEY Id_Decision_Level_Index (`Id_Decision_Level`) REFERENCES `DECISION_LEVEL` (`Id_Decision_Level`),
-  ADD CONSTRAINT `FK273C921355BF7C` FOREIGN KEY Id_Rule_Index (`Id_Rule`) REFERENCES `RULE` (`Id_Rule`),
   ADD CONSTRAINT `FK273C9250C99824` FOREIGN KEY Id_Scope_Index (`Id_Scope`) REFERENCES `SCOPE` (`Id_Scope`),
   ADD CONSTRAINT `FK273C926CCA4C3E` FOREIGN KEY Id_Criterion_Index (`Id_Criterion`) REFERENCES `CRITERION` (`Id_Criterion`),
   ADD CONSTRAINT `FK273C9272343A84` FOREIGN KEY Id_Level_Index (`Id_Level`) REFERENCES `LEVEL` (`Id_Level`);
