@@ -65,7 +65,7 @@ function drawScore(selection,
     if (addText) {
         if (tanaguruMeterXOffset !== null && tanaguruMeterYOffset !== null) {
             donutSvg.append("text")
-                .attr("text-anchor", "top")
+                .attr("text-anchor", "start")
                 .attr("x", tanaguruMeterXOffset)
                 .attr("y", tanaguruMeterYOffset)
                 .attr("dy", ".35em")
