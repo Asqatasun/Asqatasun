@@ -180,7 +180,7 @@
                                     <div class="set-up-value input">
                                         <form:select id="${i18nKey}" path="level" cssErrorClass="xlarge error" cssClass="xlarge">
                                             <c:forEach items="${level.selectElementMap}" var="group">
-                                                <optgroup label="<spring:message code="${group.key}"/>">
+                                                <optgroup label="<spring:message code="${group.key}-optgroup"/>">
                                                     <c:forEach items="${group.value}" var="level">
                                                     <c:choose>
                                                         <c:when test="${level.default == 'true'}">
