@@ -57,9 +57,6 @@ public class TestImpl implements Test, Serializable {
     private LevelImpl level;
     @Column(name = "Rank")
     private int rank;
-    @ManyToOne
-    @JoinColumn(name = "Id_Rule")
-    private RuleImpl rule;
     @Column(name = "Rule_Archive_Name")
     private String ruleArchiveName;
     @Column(name = "Rule_Class_Name")
@@ -147,12 +144,6 @@ public class TestImpl implements Test, Serializable {
     }
 
     @Override
-    @XmlElementRef(type = org.opens.tanaguru.entity.reference.RuleImpl.class)
-    public Rule getRule() {
-        return this.rule;
-    }
-
-    @Override
     public String getRuleArchiveName() {
         return ruleArchiveName;
     }
@@ -221,11 +212,6 @@ public class TestImpl implements Test, Serializable {
     @Override
     public void setRank(int rank) {
         this.rank = rank;
-    }
-
-    @Override
-    public void setRule(Rule rule) {
-        this.rule = (RuleImpl) rule;
     }
 
     @Override

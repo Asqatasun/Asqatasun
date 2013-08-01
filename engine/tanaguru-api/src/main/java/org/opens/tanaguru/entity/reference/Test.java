@@ -79,13 +79,6 @@ public interface Test extends Entity, Reorderable {
      */
     String getRuleDesignUrl();
 
-    /**
-     *
-     * @return the rule
-     * @deprecated
-     */
-     Rule getRule();
-
      /**
       *
       * @return
@@ -151,14 +144,6 @@ public interface Test extends Entity, Reorderable {
      *            the level to set
      */
     void setLevel(Level level);
-
-    /**
-     *
-     * @param rule
-     *            the rule to set
-     * @deprecated
-     */
-    void setRule(Rule rule);
 
     /**
      * 

@@ -10,8 +10,6 @@
         <class>org.opens.tanaguru.entity.reference.NomenclatureElementImpl</class>
         <class>org.opens.tanaguru.entity.reference.NomenclatureImpl</class>
         <class>org.opens.tanaguru.entity.reference.ReferenceImpl</class>
-        <class>org.opens.tanaguru.entity.reference.RuleImpl</class>
-        <class>org.opens.tanaguru.entity.reference.RulePackageImpl</class>
         <class>org.opens.tanaguru.entity.reference.ScopeImpl</class>
         <class>org.opens.tanaguru.entity.reference.StandardMessageImpl</class>
         <class>org.opens.tanaguru.entity.reference.TestImpl</class>

@@ -240,7 +240,6 @@
     Id_Criterion CDATA #IMPLIED
     Id_Decision_Level CDATA #IMPLIED
     Id_Level CDATA #IMPLIED
-    Id_Rule CDATA #IMPLIED
     Id_Scope CDATA #IMPLIED
     No_Process CDATA #IMPLIED
 >
