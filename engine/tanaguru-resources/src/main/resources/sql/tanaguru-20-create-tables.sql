@@ -660,11 +660,6 @@ ALTER TABLE `PROCESS_RESULT`
   ADD CONSTRAINT `FK1C41A80DFA349234` FOREIGN KEY Id_Process_Result_Parent_Index (`Id_Process_Result_Parent`) REFERENCES `PROCESS_RESULT` (`Id_Process_Result`);
 CREATE INDEX Definite_Value_Index ON PROCESS_RESULT (Definite_Value);
 
---
--- Contraintes pour la table `RULE`
---
-ALTER TABLE `RULE`
-  ADD CONSTRAINT `FK268EFCADFA0F1` FOREIGN KEY Id_Rule_Package_Index (`Id_Rule_Package`) REFERENCES `RULE_PACKAGE` (`Id_Rule_Package`);
 
 --
 -- Contraintes pour la table `TEST`
