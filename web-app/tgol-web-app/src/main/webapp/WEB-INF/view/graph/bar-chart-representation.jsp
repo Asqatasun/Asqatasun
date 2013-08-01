@@ -33,7 +33,7 @@
                             </c:forEach>
                         </tr>
                         <tr>
-                            <th id="serie4" <fmt:message key="na"/>><fmt:message key="na"/></th>
+                            <th id="serie4" title="<fmt:message key="na"/>"><fmt:message key="na"/></th>
                             <c:forEach var="entry" items="${counterByThemeMap}">    
                             <td headers="serie4 category${entry.key.rank}">${entry.value.naCount}</td>
                             </c:forEach>
