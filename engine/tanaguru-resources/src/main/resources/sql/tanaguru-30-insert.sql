@@ -70,7 +70,7 @@ INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_D
 (5, 'AW22;Ar', b'1'),
 (5, 'AW22;Bz', b'0'),
 (5, 'AW22;Or', b'0'), 
-(38, '', b'1')
+(38, '', b'1'),
 (39, '', b'1');
 
 SET foreign_key_checks=1;
