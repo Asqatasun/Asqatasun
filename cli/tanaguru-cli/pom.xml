@@ -80,12 +80,6 @@
             <version>${engineVersion}</version>
             <scope>runtime</scope>
         </dependency>
-<!--        <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>scenarioloader</artifactId>
-            <version>${engineVersion}</version>
-            <scope>runtime</scope>
-        </dependency>-->
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>contentadapter</artifactId>
@@ -126,6 +120,30 @@
             <groupId>${engineGroupId}</groupId>
             <artifactId>logging</artifactId>
             <version>${engineVersion}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${rulesGroupId}</groupId>
+            <artifactId>accessiweb2.1</artifactId>
+            <version>${rulesVersion}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${rulesGroupId}</groupId>
+            <artifactId>accessiweb2.2</artifactId>
+            <version>${rulesVersion}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${rulesGroupId}</groupId>
+            <artifactId>rgaa2.2</artifactId>
+            <version>${rulesVersion}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${rulesGroupId}</groupId>
+            <artifactId>seo</artifactId>
+            <version>${rulesVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
