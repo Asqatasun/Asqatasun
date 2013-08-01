@@ -84,7 +84,7 @@
                             <c:set var="refCode" scope="page">
                                 ${statistics.parametersMap["referential"]}
                             </c:set>
-                            <span class="synthesis-meta-value">${refCode}</span>
+                            <span class="synthesis-meta-value"><spring:message code="${refCode}"/></span>
                         </div>
                         <div id="audit-level">
                             <span class="synthesis-meta-title"><spring:message code="level"/> : </span>
