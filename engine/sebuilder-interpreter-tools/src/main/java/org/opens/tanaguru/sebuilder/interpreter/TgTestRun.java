@@ -147,18 +147,18 @@ public class TgTestRun extends TestRun {
                 + getScript().getSteps().get(stepIndex+1).getType().toString() + " step.");
         
         boolean result = false;
-        String beforeUrl = null;
+        String previousUrl = null;
         try {
-            beforeUrl = getDriver().getCurrentUrl();
+            previousUrl = getDriver().getCurrentUrl();
             result = getScript().getSteps().get(++stepIndex).getType().run(this);
             // wait a second to make sure the page is fully loaded
-            Thread.sleep(500);
-            if (!isStepOpenNewPage && !StringUtils.equals(beforeUrl, getDriver().getCurrentUrl())) {
+            Thread.sleep(1000);
+            if (!isStepOpenNewPage && !StringUtils.equals(previousUrl, getDriver().getCurrentUrl())) {
                 fireNewPage();
             }
         } catch (TimeoutException te) {
             result = true;
-            if (!isStepOpenNewPage && !StringUtils.equals(beforeUrl, getDriver().getCurrentUrl())) {
+            if (!isStepOpenNewPage && !StringUtils.equals(previousUrl, getDriver().getCurrentUrl())) {
                 getLog().debug(" The page " + getDriver().getCurrentUrl() + " is fired as new page but"
                     + " is incomplete : " + te.getMessage());
                 fireNewPage();
