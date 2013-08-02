@@ -68,7 +68,8 @@ INSERT IGNORE INTO `NOMENCLATURE` (`Id_Nomenclature`, `Cd_Nomenclature`, `Descri
 (16, 'DeprecatedRepresentationAttributesWithExceptions', NULL, NULL, NULL, NULL),
 (17, 'RecommendedDoctypeDeclarations', NULL, NULL, NULL, NULL),
 (18, 'XhtmlDoctypeDeclarations', NULL, NULL, NULL, NULL), 
-(19, 'RecommendedCaseInsensitiveDoctypeDeclarations', NULL, NULL, NULL, NULL);
+(19, 'RecommendedCaseInsensitiveDoctypeDeclarations', NULL, NULL, NULL, NULL), 
+(20, 'DeprecatedRepresentationTagsV2', NULL, NULL, NULL, NULL);
 
 --
 -- Dumping data for table `NOMENCLATURE_ELEMENT`
@@ -881,7 +882,16 @@ INSERT IGNORE INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `
 ('NomenclatureElementImpl', 805, 'eka', NULL, 10),
 ('NomenclatureElementImpl', 806, 'tha', NULL, 10),
 ('NomenclatureElementImpl', 807, 'aus', NULL, 10),
-('NomenclatureElementImpl', 808, '<!DOCTYPE html>', NULL, 19);
+('NomenclatureElementImpl', 808, '<!DOCTYPE html>', NULL, 19), 
+('NomenclatureElementImpl', 809, 'basefont', NULL, 11),
+('NomenclatureElementImpl', 810, 'blink', NULL, 11),
+('NomenclatureElementImpl', 811, 'center', NULL, 11),
+('NomenclatureElementImpl', 812, 'font', NULL, 11),
+('NomenclatureElementImpl', 813, 'marquee', NULL, 11),
+('NomenclatureElementImpl', 814, 's', NULL, 11),
+('NomenclatureElementImpl', 815, 'strike', NULL, 11),
+('NomenclatureElementImpl', 816, 'tt', NULL, 11),
+('NomenclatureElementImpl', 817, 'u', NULL, 11),;
 
 
 SET foreign_key_checks=1;

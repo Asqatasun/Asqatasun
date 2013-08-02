@@ -22,7 +22,9 @@
 
 package org.opens.tanaguru.rules.elementselector;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.springframework.util.CollectionUtils;
@@ -35,11 +37,25 @@ import org.springframework.util.CollectionUtils;
  */
 public class MultipleElementSelector implements ElementSelector{
 
+    private static final char COMMA = ',';
+
     /* The css queries used to retrieve Elements */
     private Collection<String> cssQueryList;
+    public void addCssQuery(String cssQuery) {
+        if (cssQueryList == null) {
+            cssQueryList = new ArrayList<String>();
+        }
+        cssQueryList.add(cssQuery);
+    }
 
     /**
-     * Default constructor
+     * Constructor
+     */
+    public MultipleElementSelector() {
+    }
+    
+    /**
+     * constructor
      * @param cssQuery 
      */
     public MultipleElementSelector(String... cssQueryList) {
@@ -48,9 +64,20 @@ public class MultipleElementSelector implements ElementSelector{
 
     @Override
     public void selectElements(SSPHandler sspHandler, ElementHandler selectionHandler) {
+        StringBuilder query = new StringBuilder();
+        boolean isFirst = true;
         for (String cssQuery : cssQueryList) {
+            if (isFirst) {
+                isFirst = false;
+            } else {
+                query.append(COMMA);
+            }
+            query.append(cssQuery);
+        }
+        System.out.println(query.toString());
+        if (StringUtils.isNotBlank(query.toString())) {
             selectionHandler.addAll(sspHandler.beginCssLikeSelection().
-                    domCssLikeSelectNodeSet(cssQuery).getSelectedElements());
+                    domCssLikeSelectNodeSet(query.toString()).getSelectedElements());
         }
     }
 

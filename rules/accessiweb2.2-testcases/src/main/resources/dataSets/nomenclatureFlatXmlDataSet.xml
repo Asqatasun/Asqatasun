@@ -11,7 +11,7 @@
     <NOMENCLATURE Id_Nomenclature="8" Cd_Nomenclature="PossibleImageTags" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
     <NOMENCLATURE Id_Nomenclature="9" Cd_Nomenclature="RelativeCssUnits" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
     <NOMENCLATURE Id_Nomenclature="10" Cd_Nomenclature="ValidLanguageCode" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
-    <NOMENCLATURE Id_Nomenclature="11" Cd_Nomenclature="DeprecatedRepresentationTags" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
+    <NOMENCLATURE Id_Nomenclature="11" Cd_Nomenclature="DeprecatedRepresentationTagsV2" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
     <NOMENCLATURE Id_Nomenclature="12" Cd_Nomenclature="UnexplicitPageTitle" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
     <NOMENCLATURE Id_Nomenclature="13" Cd_Nomenclature="ImageFileExtensions" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
     <NOMENCLATURE Id_Nomenclature="14" Cd_Nomenclature="MediaListNotAcceptingRelativeUnits" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
@@ -202,15 +202,15 @@
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="179" Label="pa"  Id_Nomenclature="10"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="180" Label="ie"  Id_Nomenclature="10"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="181" Label="lo"  Id_Nomenclature="10"/>
-    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="182" Label="BASEFONT"  Id_Nomenclature="11"/>
-    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="183" Label="CENTER"  Id_Nomenclature="11"/>
-    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="184" Label="DIR"  Id_Nomenclature="11"/>
-    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="185" Label="FONT"  Id_Nomenclature="11"/>
-    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="186" Label="ISINDEX"  Id_Nomenclature="11"/>
-    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="187" Label="MENU"  Id_Nomenclature="11"/>
-    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="188" Label="S"  Id_Nomenclature="11"/>
-    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="189" Label="STRIKE"  Id_Nomenclature="11"/>
-    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="190" Label="U"  Id_Nomenclature="11"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="182" Label="basefont"  Id_Nomenclature="11"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="183" Label="blink"  Id_Nomenclature="11"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="184" Label="center"  Id_Nomenclature="11"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="185" Label="font"  Id_Nomenclature="11"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="186" Label="marquee"  Id_Nomenclature="11"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="187" Label="s"  Id_Nomenclature="11"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="188" Label="strike"  Id_Nomenclature="11"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="189" Label="tt"  Id_Nomenclature="11"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="190" Label="u"  Id_Nomenclature="11"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="191" Label=""  Id_Nomenclature="12"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="192" Label="Bienvenue dans Adobe GoLive 6"  Id_Nomenclature="12"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="193" Label="Page title"  Id_Nomenclature="12"/>

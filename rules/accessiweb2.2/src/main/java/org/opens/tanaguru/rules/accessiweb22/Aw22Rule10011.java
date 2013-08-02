@@ -19,7 +19,13 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.reference.Nomenclature;
+import org.opens.tanaguru.processor.SSPHandler;
+import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.rules.elementselector.MultipleElementSelector;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.DEPRECATED_REPRESENTATION_TAG_MSG;
 
 /**
  * Implementation of the rule 10.1.1 of the referential Accessiweb 2.2.
@@ -28,13 +34,36 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-10-1-1"> 10.1.1 rule specification</a>
  *
  */
-public class Aw22Rule10011 extends AbstractNotTestedRuleImplementation {
+public class Aw22Rule10011 extends AbstractDetectionPageRuleImplementation {
 
+    private static final String DEPREC_TAG_NOM = "DeprecatedRepresentationTagsV2";
     /**
-     *
+     * Default constructor
      */
-    public Aw22Rule10011() {
-        super();
+    public Aw22Rule10011 () {
+        super(
+                new MultipleElementSelector(),
+                // solution when at least one element is found
+                TestSolution.FAILED,
+                // solution when no element is found
+                TestSolution.PASSED,
+                // manual check message
+                DEPRECATED_REPRESENTATION_TAG_MSG,
+                null
+            );
     }
 
+    @Override
+    protected void select(SSPHandler sspHandler, ElementHandler selectionHandler) {
+        // retrieve element from the nomenclature
+        Nomenclature deprecatedHtmlTags = nomenclatureLoaderService.
+                loadByCode(DEPREC_TAG_NOM);
+        // add each element of the nomenclature to the selector
+        MultipleElementSelector mes = (MultipleElementSelector)getElementSelector();
+        for (String deprecatedTag  : deprecatedHtmlTags.getValueList()) {
+            mes.addCssQuery(deprecatedTag.toLowerCase());
+        }
+        super.select(sspHandler, selectionHandler);
+    }
+    
 }

@@ -204,6 +204,10 @@ public final class RemarkMessageStore {
             "HeaderTagNotHierarchicallyWelldefined";
     public static final String H1_TAG_MISSING_MSG = "H1TagMissing";
     
+    // structuration of information
+    public static final String DEPRECATED_REPRESENTATION_TAG_MSG =
+            "DeprecatedRepresentationTagFound";
+
     /**
      * Private constructor. This class handles keys and must not be instantiated
      */

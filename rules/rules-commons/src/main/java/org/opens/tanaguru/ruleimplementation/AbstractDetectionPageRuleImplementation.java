@@ -62,6 +62,9 @@ public class AbstractDetectionPageRuleImplementation
      * The elementSelector used by the rule
      */
     private ElementSelector elementSelector;
+    public ElementSelector getElementSelector() {
+        return elementSelector;
+    }
     
     /**
      * Constructor
