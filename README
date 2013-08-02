@@ -1,6 +1,6 @@
                    ------------------------------
                              Tanaguru
-                            Version 1.5.0
+                            Version 3.0.0-beta3
                   ------------------------------
 
 1. Web Resources
@@ -59,8 +59,9 @@ that can be found at :
 
 6. Content of the version 
 =========================
+Bugs : 
 
-
+#596: Only consider pages with Http status code equals to 200 in the Top 10 of invalid URLs tables of the synthesis page (https://dev.tanaguru.org/redmine/issues/595)
 
 Have Fun
 Tanaguru team
