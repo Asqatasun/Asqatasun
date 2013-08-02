@@ -86,7 +86,7 @@
                 <include>accessiweb2.2-insert.sql</include>
             </includes>
             <fileMode>755</fileMode>
-            <outputDirectory>/install/sql-rules</outputDirectory>
+            <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
         <fileSet>
             <directory>${basedir}/../../rules/rgaa2.2-resources/src/main/resources/sql</directory>

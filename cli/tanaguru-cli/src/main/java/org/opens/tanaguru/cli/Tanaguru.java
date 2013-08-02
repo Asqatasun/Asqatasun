@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,8 +21,17 @@
  */
 package org.opens.tanaguru.cli;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
+import java.util.logging.Level;
+import org.apache.commons.cli.*;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
@@ -53,8 +62,34 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 public class Tanaguru implements AuditServiceListener {
 
     private static final String APPLICATION_CONTEXT_FILE_PATH = "conf/context/application-context.xml";
-    private static final String AW21_REF_CODE = "AW21";
+    
+    private static final String PAGE_AUDIT = "Page";
+    private static final String SCENARIO_AUDIT = "Scenario";
+    private static final String FILE_AUDIT = "File";
+    private static final String SITE_AUDIT = "File";
+    
+    private static final String AW21_REF = "AW21";
+    private static final String AW22_REF = "AW22";
+    private static final String RGAA22_REF = "RGAA22";
+    private static final String SEO_REF = "Seo";
+    private static String REF = AW22_REF;
+    
+    private static final String BRONZE_LEVEL = "Bz";
+    private static final String A_LEVEL = "A";
+    private static final String SILVER_LEVEL = "Ar";
+    private static final String AA_LEVEL = "AA";
+    private static final String GOLD_LEVEL = "Or";
+    private static final String AAA_LEVEL = "AAA";
+    private static String LEVEL = SILVER_LEVEL;
+    
     private static final String LEVEL_PARAMETER_ELEMENT_CODE = "LEVEL";
+    
+    private static final Options OPTIONS = createOptions();
+    
+    private static String AUDIT_TYPE = PAGE_AUDIT;
+    
+    private static String TANAGURU_HOME;
+    
     private AuditService auditService = null;
     private AuditDataService auditDataService = null;
     private WebResourceDataService webResourceDataService = null;
@@ -63,32 +98,111 @@ public class Tanaguru implements AuditServiceListener {
     private ProcessRemarkDataService processRemarkDataService = null;
     private ParameterDataService parameterDataService = null;
     private ParameterElementDataService parameterElementDataService = null;
-
+ 
     public static void main(String[] args) {
         if (args == null) {
             return;
         }
+        TANAGURU_HOME = System.getenv("TANAGURU_PATH");
+        CommandLineParser clp = new BasicParser();
+        try {
+            CommandLine cl = clp.parse(OPTIONS, args);
+            if (cl.hasOption("h")) {
+                printUsage();
+                return;
+            }
+            if (cl.hasOption("f")) {
+                String ffPath = cl.getOptionValue("f");
+                if (isValidPath(ffPath, "f", false)) {
+                    System.setProperty("webdriver.firefox.bin", ffPath);
+                } else {
+                    printUsage();
+                    return;
+                }
+            }
+            if (cl.hasOption("r")) {
+                String ref = cl.getOptionValue("r");
+                if (isValidReferential(ref)) {
+                    REF = ref;
+                } else {
+                    printUsage();
+                    return;
+                }
+            }
+            if (cl.hasOption("l")) {
+                String level = cl.getOptionValue("l");
+                if (isValidLevel(level)) {
+                    LEVEL = level;
+                } else {
+                    printUsage();
+                    return;
+                }
+            }
+            if (cl.hasOption("o")) {
+                String outputDir = cl.getOptionValue("o");
+                if (isValidPath(outputDir, "o", true)) {
+                    try {
+                        System.setOut(new PrintStream(outputDir));
+                    } catch (FileNotFoundException ex) {
+                        printUsage();
+                        return;
+                    }
+                } else {
+                    printUsage();
+                    return;
+                }
+            }
+            if (cl.hasOption("t")) {
+                String auditType = cl.getOptionValue("t");
+                if (!isValidAuditType(auditType)) {
+                    printUsage();
+                    return;
+                } else {
+                    AUDIT_TYPE = auditType;
+                }
+            }
+            if (AUDIT_TYPE.equalsIgnoreCase(PAGE_AUDIT)) {
+                if (!isValidPageUrl(cl)) {
+                    printUsage();
+                } else {
+                    new Tanaguru().runAuditOnline(cl.getArgs(),TANAGURU_HOME, REF, LEVEL);
+                }
+            } else if (AUDIT_TYPE.equalsIgnoreCase(SCENARIO_AUDIT)) {
+                if (!isValidScenarioPath(cl)) {
+                    printUsage();
+                } else {
+                    new Tanaguru().runAuditScenario(cl.getArgs()[0],TANAGURU_HOME, REF, LEVEL);
+                }
+            } else if (AUDIT_TYPE.equalsIgnoreCase(FILE_AUDIT)) {
+                if (!isValidFilePath(cl)) {
+                    printUsage();
+                } else {
+                    new Tanaguru().runAuditUpload(cl.getArgs(),TANAGURU_HOME, REF, LEVEL);
+                }
+            } else if (AUDIT_TYPE.equalsIgnoreCase(SITE_AUDIT)) {
+                if (!isValidSiteUrl(cl)) {
+                    printUsage();
+                } else {
 
-        if (args[0].equals("online") && args.length == 4 ) {
-            new Tanaguru().runAuditOnline(args[1], args[2], args[3]);
-        } else if (args[0].equals("upload") && args.length == 4) {
-            new Tanaguru().runAuditUpload(args[1], args[2], args[3]);
-        } else if (args[0].equals("scenario") && args.length == 4) {
-            new Tanaguru().runAuditScenario(args[1], args[2], args[3]);
+                }
+            }
+        } catch (ParseException ex) {
+            java.util.logging.Logger.getLogger(Tanaguru.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     public Tanaguru() {
         super();
     }
 
-    public void runAuditOnline(String urlTab, String tanaguruHome, String auditLevel) {
+    public void runAuditOnline(String[] urlTab, String tanaguruHome, String ref, String level) {
         Logger.getLogger(this.getClass()).info("runAuditOnline");
         initServices(tanaguruHome);
 
-        Set<Parameter> paramSet = getParameterSetFromAuditLevel(auditLevel);
+        Set<Parameter> paramSet = getParameterSetFromAuditLevel(ref, level);
 
-        List<String> pageUrlList = extractUrlListFromParameter(urlTab);
+        List<String> pageUrlList = Arrays.asList(urlTab);
 
         if (pageUrlList.size() > 1) {
             auditService.auditSite("site:" + pageUrlList.get(0), pageUrlList, paramSet);
@@ -97,24 +211,35 @@ public class Tanaguru implements AuditServiceListener {
         }
     }
 
-    public void runAuditScenario(String scenarioFilePath, String tanaguruHome, String auditLevel) {
+    public void runAuditScenario(String scenarioFilePath, String tanaguruHome, String ref, String level) {
         initServices(tanaguruHome);
 
-        Set<Parameter> paramSet = getParameterSetFromAuditLevel(auditLevel);
+        Set<Parameter> paramSet = getParameterSetFromAuditLevel(ref, level);
         System.out.println(scenarioFilePath);
         File scenarioFile = new File(scenarioFilePath);
-        System.out.println("scenarioFileUrl.toString() " + scenarioFile.getPath());
-        auditService.auditScenario(scenarioFile.getName(), readFile(scenarioFile), paramSet);
+        try {
+            auditService.auditScenario(scenarioFile.getName(), readFile(scenarioFile), paramSet);
+        } catch (IOException ex) {
+            System.out.println("Unreadable scenario file");
+            System.exit(0);
+        }
     }
     
-    public void runAuditUpload(String uploadFilePath, String tanaguruHome, String auditLevel) {
+    public void runAuditUpload(String[] uploadFilePath, String tanaguruHome, String ref, String level) {
         initServices(tanaguruHome);
 
-        Set<Parameter> paramSet = getParameterSetFromAuditLevel(auditLevel);
+        Set<Parameter> paramSet = getParameterSetFromAuditLevel(ref, level);
 
         Map<String, String> fileMap = new HashMap<String, String>();
-        File uploadFile = new File(uploadFilePath);
-        fileMap.put(uploadFile.getName(), readFile(uploadFile));
+        for (String file : Arrays.asList(uploadFilePath)) {
+            File uploadFile = new File(file);
+            try {
+               fileMap.put(uploadFile.getName(), readFile(uploadFile));
+            } catch (IOException ex) {
+                System.out.println("Unreadable upload file");
+                System.exit(0);
+            }
+        }
         auditService.auditPageUpload(fileMap, paramSet);
     }
 
@@ -213,9 +338,18 @@ public class Tanaguru implements AuditServiceListener {
      * @param auditLevel
      * @return 
      */
-    private Set<Parameter> getParameterSetFromAuditLevel(String auditLevel) {
+    private Set<Parameter> getParameterSetFromAuditLevel(String ref, String level) {
+        if (ref.equalsIgnoreCase(RGAA22_REF)) {
+            if (level.equalsIgnoreCase(BRONZE_LEVEL)) {
+                level=A_LEVEL;
+            } else if (level.equalsIgnoreCase(SILVER_LEVEL)) {
+                level=AA_LEVEL;
+            } else if (level.equalsIgnoreCase(GOLD_LEVEL)) {
+                level=AAA_LEVEL;
+            }
+        }
         ParameterElement levelParameterElement = parameterElementDataService.getParameterElement(LEVEL_PARAMETER_ELEMENT_CODE);
-        Parameter levelParameter = parameterDataService.getParameter(levelParameterElement, AW21_REF_CODE + ";" + auditLevel);
+        Parameter levelParameter = parameterDataService.getParameter(levelParameterElement, ref + ";" + level);
         Set<Parameter> paramSet = parameterDataService.getDefaultParameterSet();
         return parameterDataService.updateParameter(paramSet, levelParameter);
     }
@@ -237,28 +371,220 @@ public class Tanaguru implements AuditServiceListener {
      * @param scenarioPath
      * @return 
      */
-    private String readFile(File file) {
-        try {
-            BufferedReader in = new BufferedReader(new FileReader(file));
-            String str;
-            StringBuilder fileContent = new StringBuilder();
-            int i=0;
-            try {
-                while ((str = in.readLine()) != null) {
-                    if (i>0) {
-                        fileContent.append('\n');
-                    }
-                    fileContent.append(str);
-                    i++;
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(this.getClass()).error(ex);
+    private String readFile(File file) throws IOException {
+        return FileUtils.readFileToString(file);
+    }
+
+    /**
+     * Create the tanaguru command line interface options
+     * @return the options to launch tanaguru cli
+     */
+    private static Options createOptions() {
+        Options options = new Options();
+        
+        options.addOption(OptionBuilder.withLongOpt("help")
+                             .withDescription("Show this message.")
+                             .hasArg(false)
+                             .isRequired(false)
+                             .create("h"));
+        
+        options.addOption(OptionBuilder.withLongOpt("output")
+                             .withDescription("Path to the output result file.")
+                             .hasArg()
+                             .isRequired(false)
+                             .create("o"));
+        
+        options.addOption(OptionBuilder.withLongOpt("firefox-bin")
+                             .withDescription("Path to the firefox bin.")
+                             .hasArg()
+                             .isRequired(false)
+                             .create("f"));
+        
+        options.addOption(OptionBuilder.withLongOpt("referential")
+                             .withDescription("Referential : \n"
+                + "- \"AW22\" for Accessiweb 2.2 (default)\n"
+                + "- \"AW21\" for Accessiweb 2.1 \n"
+                + "- \"RGA22\" for Rgaa 2.2\n"
+                + "- \"Seo\" for Seo")
+                             .hasArg()
+                             .isRequired(false)
+                             .create("r"));
+        
+        options.addOption(OptionBuilder.withLongOpt("level")
+                             .withDescription("Level :\n"
+                + "- \"Or\" for Gold level or AAA level, \n"
+                + "- \"Ar\" for Silver level or AA level (default), \n"
+                + "- \"Bz\" for Bronze level or A level")
+                             .hasArg()
+                             .isRequired(false)
+                             .create("l"));
+        
+        options.addOption(OptionBuilder.withLongOpt("audit-type")
+                             .withDescription("Audit type :\n"
+                + "- \"Page\" for page audit (default)\n"
+                + "- \"File\" for file audit \n"
+                + "- \"Scenario\" for scenario audit \n"
+                + "- \"Site\" for site audit")
+                             .hasArg()
+                             .isRequired(false)
+                             .create("t"));
+
+        return options;
+    }
+    
+    /**
+     * Print usage
+     */
+    private static void printUsage() {
+        HelpFormatter formatter = new HelpFormatter();
+        formatter.printHelp("./bin/tanaguru.sh [OPTIONS]... [URL OR FILE]...\n", OPTIONS);
+    }
+
+    /**
+     * 
+     * @param path
+     * @param option
+     * @param testWritable
+     * @return whether the given path is valid for the given argument
+     */
+    private static boolean isValidPath(String path, String option, boolean testWritable) {
+        File file = FileUtils.getFile(path);
+        if (file.exists() && file.canExecute() && file.canRead()) {
+            if (!testWritable) {
+                return true;
+            } else if (file.canWrite()) {
+                return true;
             }
-            return fileContent.toString();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(this.getClass()).error(ex);
         }
-        return "";
+        System.out.println("\n"+path + " is an invalid path for " + option + " option.\n");
+        return false;
+    }
+    
+    /**
+     * 
+     * @param path
+     * @param argument
+     * @param testWritable
+     * @return whether the given referential is valid
+     */
+    private static boolean isValidReferential(String ref) {
+        if (StringUtils.equals(ref, AW21_REF) || 
+                StringUtils.equals(ref, AW21_REF) ||
+                StringUtils.equals(ref, RGAA22_REF) ||
+                StringUtils.equals(ref, SEO_REF) ) {
+            return true;
+        }
+        System.out.println("\nThe referential \"" + ref + "\" doesn't exist.\n");
+        return false;
+    }
+    
+    /**
+     * 
+     * @param path
+     * @param argument
+     * @param testWritable
+     * @return whether the given level is valid
+     */
+    private static boolean isValidLevel(String level) {
+        if (StringUtils.equals(level, BRONZE_LEVEL) || 
+                StringUtils.equals(level, SILVER_LEVEL) ||
+                StringUtils.equals(level, GOLD_LEVEL)) {
+            return true;
+        }
+        System.out.println("\nThe level \"" + level + "\" doesn't exist.\n");
+        return false;
+    }
+    
+    /**
+     * 
+     * @param path
+     * @param argument
+     * @param testWritable
+     * @return whether the given level is valid
+     */
+    private static boolean isValidAuditType(String auditType) {
+        if (StringUtils.equalsIgnoreCase(auditType,PAGE_AUDIT) || 
+                StringUtils.equalsIgnoreCase(auditType, FILE_AUDIT) ||
+                StringUtils.equalsIgnoreCase(auditType, SITE_AUDIT) ||
+                StringUtils.equalsIgnoreCase(auditType, SCENARIO_AUDIT)) {
+            return true;
+        }
+        System.out.println("\nThe audit type \"" + auditType + "\" doesn't exist.\n");
+        return false;
+    }
+    
+    /**
+     * 
+     * @param path
+     * @param argument
+     * @param testWritable
+     * @return whether the given level is valid
+     */
+    private static boolean isValidPageUrl( CommandLine cl) {
+        if (cl.getArgList().isEmpty()) {
+            System.out.println("\nPlease specify at least one URL\n");
+            return false;
+        }
+        for (int i=0;i<cl.getArgs().length;i++) {
+            try {
+                URL url = new URL(cl.getArgs()[i]);
+            } catch (MalformedURLException ex) {
+                System.out.println("\nThe URL "+ cl.getArgs()[i]+ " is malformed\n");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isValidSiteUrl( CommandLine cl) {
+        if (cl.getArgList().isEmpty()) {
+            System.out.println("\nPlease specify at least one URL\n");
+            return false;
+        }
+        if (cl.getArgList().size() > 1) {
+            System.out.println("\nOnly one URL is expected\n");
+            return false;
+        }
+        try {
+            URL url = new URL(cl.getArgs()[0]);
+        } catch (MalformedURLException ex) {
+            System.out.println("\nThe URL "+ cl.getArgs()[0]+ " is malformed\n");
+            return false;
+        }
+
+        return true;
+    }
+    
+    private static boolean isValidFilePath( CommandLine cl) {
+        if (cl.getArgList().isEmpty()) {
+            System.out.println("\nPlease specify at least one file\n");
+            return false;
+        }
+        for (int i=0;i<cl.getArgs().length;i++) {
+            File file = FileUtils.getFile(cl.getArgs()[i]);
+            if (!file.canRead()) {
+                System.out.println("\nThe file "+ file.getAbsolutePath() +" is unreadable.\n");
+            return false;
+            }
+        }
+        return true;
+    }
+    
+    private static boolean isValidScenarioPath( CommandLine cl) {
+        if (cl.getArgList().isEmpty()) {
+            System.out.println("\nPlease specify at least one scenario\n");
+            return false;
+        }
+        if (cl.getArgList().size() > 1) {
+            System.out.println("\nOnly one scenario is expected\n");
+            return false;
+        }
+        File scenario = FileUtils.getFile(cl.getArgs()[0]);
+        if (!scenario.canRead()) {
+            System.out.println("\nThe scenario file is unreadable.\n");
+            return false;
+        }
+        return true;
     }
 
 }
