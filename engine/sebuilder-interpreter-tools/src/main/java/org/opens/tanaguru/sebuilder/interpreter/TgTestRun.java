@@ -33,6 +33,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.OutputType;
@@ -152,7 +154,7 @@ public class TgTestRun extends TestRun {
             previousUrl = getDriver().getCurrentUrl();
             result = getScript().getSteps().get(++stepIndex).getType().run(this);
             // wait a second to make sure the page is fully loaded
-            Thread.sleep(1000);
+            Thread.sleep(500);
             if (!isStepOpenNewPage && !StringUtils.equals(previousUrl, getDriver().getCurrentUrl())) {
                 fireNewPage();
             }
@@ -198,6 +200,11 @@ public class TgTestRun extends TestRun {
         }
         try {
             String url = getDriver().getCurrentUrl();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                throw new TestRunException(currentStep() + " failed.", ex, currentStep().toString(), stepIndex);
+            }
             String sourceCode = getDriver().getPageSource();
 
             Map<String, String> jsScriptResult = executeJsScripts();
