@@ -30,6 +30,8 @@ public final class RemarkMessageStore {
     // general 
     public static final String MANUAL_CHECK_ON_ELEMENTS_MSG = 
             "ManualCheckOnElements";
+    public static final String NO_PATTERN_DETECTED_MSG = 
+            "NoPatternDetected";
     public static final String TITLE_ATTR_MISSING_MSG = "TitleAttributeMissing";
     public static final String ID_MISSING_MSG = "IdMissing";
     public static final String ID_NOT_UNIQUE_MSG = "IdNotUnique";
@@ -187,9 +189,13 @@ public final class RemarkMessageStore {
     public static final String MALFORMED_LANGUAGE_DECLARATION_MSG =
             "MalformedLanguage";
 
-    // mandatory elements 
+    // links
     public static final String EMPTY_LINK_MSG = "EmptyLink";
 
+    // scripts
+    public static final String CONTEXT_CHANGED_SCRIPT_MSG = 
+            "ContextChangedScriptDetected";
+            
     /**
      * Private constructor. This class handles keys and must not be instantiated
      */

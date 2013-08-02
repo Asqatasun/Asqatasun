@@ -164,10 +164,18 @@ public final class CssLikeQueryStore {
     public static final String HTML_WITH_LANG_CSS_LIKE_QUERY = 
                     "html[lang], html[xml:lang]";
     
-    // Mandatory elements css-like queries
+    // Links css-like queries
     public static final String NOT_ANCHOR_LINK_CSS_LIKE_QUERY = 
                     "a:not([name]):not([id])";
     
+    // Scripts css-like queries
+    public static final String CHANGE_CONTEXT_SCRIPT_CSS_LIKE_QUERY = 
+                    "select[onchange], "
+                    + "form:has(select)"
+                    +      ":not(:has(button))"
+                    +      ":not(:has(input[type=submit]))"
+                    +      ":not(:has(input[type=button]))"
+                    +      ":not(:has(input[type=reset]))";
     /**
      * Private constructor. This class handles keys and must not be instanciated
      */

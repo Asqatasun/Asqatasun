@@ -20,7 +20,12 @@
 
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.CHANGE_CONTEXT_SCRIPT_CSS_LIKE_QUERY;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CONTEXT_CHANGED_SCRIPT_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NO_PATTERN_DETECTED_MSG;
 
 /**
  * Implementation of the rule 7.5.1 of the referential Accessiweb 2.2.
@@ -28,16 +33,24 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/aw22-rule-7-5-1">the rule 7.5.1 design page.</a>
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-7-5-1"> 7.5.1 rule specification</a>
  *
- * @author jkowalczyk
  */
 
-public class Aw22Rule07051 extends AbstractNotTestedRuleImplementation {
+public class Aw22Rule07051 extends AbstractDetectionPageRuleImplementation {
 
     /**
      * Default constructor
      */
     public Aw22Rule07051 () {
-        super();
+        super(
+                new SimpleElementSelector(CHANGE_CONTEXT_SCRIPT_CSS_LIKE_QUERY),
+                // solution when at least one element is found
+                TestSolution.NEED_MORE_INFO,
+                // solution when no element is found
+                TestSolution.NEED_MORE_INFO,
+                // manual check message
+                CONTEXT_CHANGED_SCRIPT_MSG,
+                NO_PATTERN_DETECTED_MSG
+            );
     }
 
 }
