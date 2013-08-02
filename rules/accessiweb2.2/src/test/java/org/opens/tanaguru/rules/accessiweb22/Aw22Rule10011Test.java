@@ -88,7 +88,7 @@ public class Aw22Rule10011Test extends Aw22RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
+        assertEquals(12, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
@@ -96,7 +96,7 @@ public class Aw22Rule10011Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.10.1.1-2Failed-01");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+        assertEquals(13, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
@@ -115,7 +115,7 @@ public class Aw22Rule10011Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.10.1.1-2Failed-02");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+        assertEquals(13, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
@@ -134,7 +134,7 @@ public class Aw22Rule10011Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.10.1.1-2Failed-03");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+        assertEquals(13, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
@@ -153,7 +153,7 @@ public class Aw22Rule10011Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.10.1.1-2Failed-04");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+        assertEquals(13, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
@@ -172,7 +172,7 @@ public class Aw22Rule10011Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.10.1.1-2Failed-05");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+        assertEquals(13, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
@@ -191,7 +191,7 @@ public class Aw22Rule10011Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.10.1.1-2Failed-06");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+        assertEquals(13, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
@@ -210,7 +210,7 @@ public class Aw22Rule10011Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.10.1.1-2Failed-07");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+        assertEquals(13, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
@@ -229,7 +229,7 @@ public class Aw22Rule10011Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.10.1.1-2Failed-08");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+        assertEquals(13, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
@@ -248,7 +248,7 @@ public class Aw22Rule10011Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.10.1.1-2Failed-09");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+        assertEquals(13, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
