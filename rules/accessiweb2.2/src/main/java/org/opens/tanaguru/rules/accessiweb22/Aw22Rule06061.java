@@ -45,7 +45,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.EMPTY_LINK_MS
  */
 public class Aw22Rule06061 extends AbstractPageRuleDefaultImplementation {
     
-    ElementHandler emptyLinks = new ElementHandlerImpl();
+    ElementHandler emptyLinksHandler = new ElementHandlerImpl();
     
     /**
      * Default constructor
@@ -62,7 +62,7 @@ public class Aw22Rule06061 extends AbstractPageRuleDefaultImplementation {
         for (Element el : elementHandler.get()) {
             if (StringUtils.isBlank(el.text()) && 
                     el.getElementsByAttributeValueMatching(ALT_ATTR, "^(?=\\s*\\S).*$").isEmpty()) {
-                emptyLinks.add(el);
+                emptyLinksHandler.add(el);
             }
         }
     }
@@ -77,7 +77,7 @@ public class Aw22Rule06061 extends AbstractPageRuleDefaultImplementation {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;
         }
-        if (emptyLinks.isEmpty()) {
+        if (emptyLinksHandler.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.PASSED);
             return;
         }
@@ -87,6 +87,6 @@ public class Aw22Rule06061 extends AbstractPageRuleDefaultImplementation {
                         EMPTY_LINK_MSG, 
                         null, 
                         HREF_ATTR);
-        ec.check(sspHandler, selectionHandler, testSolutionHandler);
+        ec.check(sspHandler, emptyLinksHandler, testSolutionHandler);
     }
 }
