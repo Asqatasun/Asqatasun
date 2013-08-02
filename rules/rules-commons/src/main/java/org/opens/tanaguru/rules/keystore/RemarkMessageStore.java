@@ -172,7 +172,6 @@ public final class RemarkMessageStore {
     
     // mandatory elements 
     public static final String TITLE_TAG_MISSING_MSG = "TitleTagMissing";
-    public static final String H1_TAG_MISSING_MSG = "H1TagMissing";
     public static final String LANG_ATTRIBUTE_MISSING_ON_HTML_TAG_MSG =
             "LangAttributeMissingOnHtml";
     public static final String LANG_ATTRIBUTE_MISSING_ON_WHOLE_PAGE_MSG =
@@ -203,6 +202,7 @@ public final class RemarkMessageStore {
     // structuration of information
     public static final String HEADER_NOT_HIERARCHICALLY_WELL_DEFINED_MSG =
             "HeaderTagNotHierarchicallyWelldefined";
+    public static final String H1_TAG_MISSING_MSG = "H1TagMissing";
     
     /**
      * Private constructor. This class handles keys and must not be instantiated

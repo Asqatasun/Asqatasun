@@ -23,7 +23,7 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.H1_ELEMENT;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.H1_TAG_MISSING_MSG;
 
 /**
  * Implementation of the rule 9.1.1 of the referential Accessiweb 2.2.
@@ -46,8 +46,7 @@ public class Aw22Rule09011 extends AbstractDetectionPageRuleImplementation {
                 TestSolution.FAILED,
                 null,
                 // manual check message
-                MANUAL_CHECK_ON_ELEMENTS_MSG
-                
+                H1_TAG_MISSING_MSG
             );
     }
 

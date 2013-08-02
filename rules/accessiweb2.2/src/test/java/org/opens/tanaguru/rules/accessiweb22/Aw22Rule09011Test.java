@@ -21,8 +21,11 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
+import org.opens.tanaguru.entity.audit.ProcessRemark;
+import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
  *
@@ -58,14 +61,58 @@ public class Aw22Rule09011Test extends Aw22RuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
-        assertEquals(TestSolution.PASSED,
-                processPageTest("AW22.Test.9.1.1-1Passed-01").getValue());
-        assertEquals(TestSolution.PASSED,
-                processPageTest("AW22.Test.9.1.1-1Passed-02").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.9.1.1-2Failed-01").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.9.1.1-2Failed-02").getValue());
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-01------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult = processPageTest("AW22.Test.9.1.1-1Passed-01");
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-02------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.9.1.1-1Passed-02");
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-01------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.9.1.1-2Failed-01");
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        assertTrue(processResult.getRemarkSet().iterator().next() instanceof ProcessRemark);
+        assertEquals(RemarkMessageStore.H1_TAG_MISSING_MSG, 
+                processResult.getRemarkSet().iterator().next().getMessageCode());
+        
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-02------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.9.1.1-2Failed-02");
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        assertTrue(processResult.getRemarkSet().iterator().next() instanceof ProcessRemark);
+        assertEquals(RemarkMessageStore.H1_TAG_MISSING_MSG, 
+                processResult.getRemarkSet().iterator().next().getMessageCode());
     }
 
     @Override
