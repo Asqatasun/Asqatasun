@@ -306,6 +306,7 @@
     <EVIDENCE Id_Evidence="21" Cd_Evidence="text" Description="NULL" Long_Label="NULL" />
     <EVIDENCE Id_Evidence="22" Cd_Evidence="longdesc" Description="NULL" Long_Label="NULL" />
     <EVIDENCE Id_Evidence="23" Cd_Evidence="summary" Description="NULL" Long_Label="NULL" />
-
+    <EVIDENCE Id_Evidence="24" Cd_Evidence="Previous-H-Tag-Index2" Description="NULL" Long_Label="NULL" />
+    <EVIDENCE Id_Evidence="25" Cd_Evidence="First-H-Tag-Index2" Description="NULL" Long_Label="NULL" />
 
 </dataset>

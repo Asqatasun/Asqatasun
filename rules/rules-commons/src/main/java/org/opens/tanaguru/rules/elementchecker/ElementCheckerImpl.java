@@ -144,6 +144,38 @@ public abstract class ElementCheckerImpl implements ElementChecker {
             TestSolution testSolution, 
             Element element, 
             String messageCode, 
+            EvidenceElement evidenceElement) {
+        
+        if (evidenceElement != null) {
+            Collection<EvidenceElement> evidenceElementList = 
+                    new ArrayList<EvidenceElement>();
+            evidenceElementList.add(evidenceElement);
+            processRemarkService.addSourceCodeRemarkOnElement(
+                        testSolution, 
+                        element, 
+                        messageCode,
+                        evidenceElementList);
+        } else {
+            processRemarkService.addSourceCodeRemarkOnElement(
+                        testSolution, 
+                        element, 
+                        messageCode);
+        }
+    }
+    
+    /**
+     * Add a sourceCodeRemark on the given element with a preset evidence element
+     * collection
+     * 
+     * @param testSolution
+     * @param element
+     * @param messageCode 
+     * @param evidenceElementList
+     */
+    protected void addSourceCodeRemark (
+            TestSolution testSolution, 
+            Element element, 
+            String messageCode, 
             Collection<EvidenceElement> evidenceElementList) {
         
         if (CollectionUtils.isNotEmpty(evidenceElementList)) {
@@ -216,7 +248,7 @@ public abstract class ElementCheckerImpl implements ElementChecker {
      * @return an evidenceElement 
      */
     protected EvidenceElement getEvidenceElement(String evidenceKey, String evidenceValue) {
-        return processRemarkService.getEvidenceElement(evidenceValue, evidenceValue);
+        return processRemarkService.getEvidenceElement(evidenceKey, evidenceValue);
     }
 
     /**

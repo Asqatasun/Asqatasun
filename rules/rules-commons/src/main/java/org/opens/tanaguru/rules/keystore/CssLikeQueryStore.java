@@ -180,6 +180,10 @@ public final class CssLikeQueryStore {
     // Consultation css-like queries
     public static final String META_WITH_REFRESH_CSS_LIKE_QUERY = 
                 "meta[http-equiv=refresh][content*=url]";
+    
+    // Structuration of information css-like queries
+    public static final String HEADINGS_CSS_LIKE_QUERY = 
+                "h1, h2, h3, h4, h5, h6";
             
     /**
      * Private constructor. This class handles keys and must not be instanciated

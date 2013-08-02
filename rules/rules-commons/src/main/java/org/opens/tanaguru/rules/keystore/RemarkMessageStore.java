@@ -199,6 +199,11 @@ public final class RemarkMessageStore {
     // consultation 
     public static final String NOT_IMMEDIATE_REDIRECT_VIA_META_MSG = 
             "NotImmediateRedirectionViaMeta";
+    
+    // structuration of information
+    public static final String HEADER_NOT_HIERARCHICALLY_WELL_DEFINED_MSG =
+            "HeaderTagNotHierarchicallyWelldefined";
+    
     /**
      * Private constructor. This class handles keys and must not be instantiated
      */

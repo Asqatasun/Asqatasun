@@ -26,8 +26,8 @@ package org.opens.tanaguru.rules.keystore;
  */
 public final class EvidenceStore {
 
-    public static final String PREVIOUS_H_TAG_INDEX_EE = "Previous-H-Tag-Index";
-    public static final String FIRST_H_TAG_INDEX_EE = "First-H-Tag-Index";
+    public static final String PREVIOUS_H_TAG_INDEX_EE = "Previous-H-Tag-Index2";
+    public static final String FIRST_H_TAG_INDEX_EE = "First-H-Tag-Index2";
     public static final String LANGUAGE_EE = "Language";
     public static final String DETECTED_LANGUAGE_EE = "Detected-Language";
     public static final String EXTRACTED_TEXT_EE = "Extracted-Text";

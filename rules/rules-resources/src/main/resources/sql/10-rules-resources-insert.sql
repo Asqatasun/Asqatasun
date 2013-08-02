@@ -39,6 +39,8 @@ INSERT IGNORE INTO `EVIDENCE` (`Id_Evidence`, `Cd_Evidence`, `Description`, `Lon
 (24, 'data', NULL, NULL),
 (25, 'longdesc', NULL, NULL),
 (26, 'summary', NULL, NULL),
+(27, 'Previous-H-Tag-Index2', NULL, NULL),
+(28, 'First-H-Tag-Index2', NULL, NULL),
 (1000, 'Url', NULL, NULL),
 (1002, 'H1', NULL, NULL),
 (1003, 'MetaDescription', NULL, NULL);

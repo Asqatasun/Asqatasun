@@ -20,7 +20,10 @@
 
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.opens.tanaguru.rules.elementchecker.headings.HeadingsHierarchyChecker;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.HEADINGS_CSS_LIKE_QUERY;
 
 /**
  * Implementation of the rule 9.1.2 of the referential Accessiweb 2.2.
@@ -28,16 +31,17 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/aw22-rule-9-1-2">the rule 9.1.2 design page.</a>
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-9-1-2"> 9.1.2 rule specification</a>
  *
- * @author jkowalczyk
  */
-
-public class Aw22Rule09012 extends AbstractNotTestedRuleImplementation {
+public class Aw22Rule09012 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
     /**
      * Default constructor
      */
-    public Aw22Rule09012 () {
-        super();
+    public Aw22Rule09012() {
+        super(
+                new SimpleElementSelector(HEADINGS_CSS_LIKE_QUERY), 
+                new HeadingsHierarchyChecker()
+            );
     }
 
 }
