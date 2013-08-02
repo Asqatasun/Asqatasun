@@ -164,6 +164,10 @@ public final class CssLikeQueryStore {
     public static final String HTML_WITH_LANG_CSS_LIKE_QUERY = 
                     "html[lang], html[xml:lang]";
     
+    // Mandatory elements css-like queries
+    public static final String NOT_ANCHOR_LINK_CSS_LIKE_QUERY = 
+                    "a:not([name]):not([id])";
+    
     /**
      * Private constructor. This class handles keys and must not be instanciated
      */

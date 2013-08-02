@@ -19,7 +19,22 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.StringUtils;
+import org.jsoup.nodes.Element;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.processor.SSPHandler;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleDefaultImplementation;
+import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
+import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
+import org.opens.tanaguru.rules.elementchecker.ElementChecker;
+import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
+import org.opens.tanaguru.rules.elementselector.ElementSelector;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.HREF_ATTR;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.NOT_ANCHOR_LINK_CSS_LIKE_QUERY;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.EMPTY_LINK_MSG;
 
 /**
  * Implementation of the rule 6.6.1 of the referential Accessiweb 2.2.
@@ -28,12 +43,50 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-6-6-1"> 6.6.1 rule specification</a>
  *
  */
-public class Aw22Rule06061 extends AbstractNotTestedRuleImplementation {
-
+public class Aw22Rule06061 extends AbstractPageRuleDefaultImplementation {
+    
+    ElementHandler emptyLinks = new ElementHandlerImpl();
+    
     /**
      * Default constructor
      */
     public Aw22Rule06061 () {
         super();
+    }
+
+    @Override
+    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
+        ElementSelector elementsSelector = 
+                new SimpleElementSelector(NOT_ANCHOR_LINK_CSS_LIKE_QUERY);
+        elementsSelector.selectElements(sspHandler, elementHandler);
+        for (Element el : elementHandler.get()) {
+            if (StringUtils.isBlank(el.text()) && 
+                    el.getElementsByAttributeValueMatching(ALT_ATTR, "^(?=\\s*\\S).*$").isEmpty()) {
+                emptyLinks.add(el);
+            }
+        }
+    }
+
+    @Override
+    protected void check(
+            SSPHandler sspHandler, 
+            ElementHandler selectionHandler, 
+            TestSolutionHandler testSolutionHandler) {
+        super.check(sspHandler, selectionHandler, testSolutionHandler);
+        if (selectionHandler.isEmpty()) {
+            testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
+            return;
+        }
+        if (emptyLinks.isEmpty()) {
+            testSolutionHandler.addTestSolution(TestSolution.PASSED);
+            return;
+        }
+        ElementChecker ec= new ElementPresenceChecker(
+                        TestSolution.FAILED,
+                        TestSolution.PASSED,
+                        EMPTY_LINK_MSG, 
+                        null, 
+                        HREF_ATTR);
+        ec.check(sspHandler, selectionHandler, testSolutionHandler);
     }
 }

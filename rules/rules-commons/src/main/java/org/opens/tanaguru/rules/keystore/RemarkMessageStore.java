@@ -187,6 +187,9 @@ public final class RemarkMessageStore {
     public static final String MALFORMED_LANGUAGE_DECLARATION_MSG =
             "MalformedLanguage";
 
+    // mandatory elements 
+    public static final String EMPTY_LINK_MSG = "EmptyLink";
+
     /**
      * Private constructor. This class handles keys and must not be instantiated
      */
