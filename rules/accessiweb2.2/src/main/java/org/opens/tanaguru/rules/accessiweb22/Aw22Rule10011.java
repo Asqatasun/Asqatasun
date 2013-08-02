@@ -19,6 +19,7 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
+import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Nomenclature;
 import org.opens.tanaguru.processor.SSPHandler;
@@ -53,6 +54,17 @@ public class Aw22Rule10011 extends AbstractDetectionPageRuleImplementation {
             );
     }
 
+    @Override
+    protected ProcessResult processImpl(SSPHandler sspHandler) {
+        select(sspHandler, this);
+        check(sspHandler, this, this);
+        return computeResult(
+                sspHandler, 
+                this, 
+                sspHandler.domCssLikeSelectNodeSet("*").getSelectedElementNumber()); 
+                // number of elements is the total number of tags of the page
+    }
+    
     @Override
     protected void select(SSPHandler sspHandler, ElementHandler selectionHandler) {
         // retrieve element from the nomenclature
