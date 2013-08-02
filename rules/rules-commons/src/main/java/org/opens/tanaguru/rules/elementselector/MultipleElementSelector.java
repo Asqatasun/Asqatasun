@@ -37,8 +37,6 @@ import org.springframework.util.CollectionUtils;
  */
 public class MultipleElementSelector implements ElementSelector{
 
-    private static final char COMMA = ',';
-
     /* The css queries used to retrieve Elements */
     private Collection<String> cssQueryList;
     public void addCssQuery(String cssQuery) {
@@ -64,20 +62,9 @@ public class MultipleElementSelector implements ElementSelector{
 
     @Override
     public void selectElements(SSPHandler sspHandler, ElementHandler selectionHandler) {
-        StringBuilder query = new StringBuilder();
-        boolean isFirst = true;
         for (String cssQuery : cssQueryList) {
-            if (isFirst) {
-                isFirst = false;
-            } else {
-                query.append(COMMA);
-            }
-            query.append(cssQuery);
-        }
-        System.out.println(query.toString());
-        if (StringUtils.isNotBlank(query.toString())) {
-            selectionHandler.addAll(sspHandler.beginCssLikeSelection().
-                    domCssLikeSelectNodeSet(query.toString()).getSelectedElements());
+            selectionHandler.addAll(sspHandler.
+                    domCssLikeSelectNodeSet(cssQuery).getSelectedElements());
         }
     }
 
