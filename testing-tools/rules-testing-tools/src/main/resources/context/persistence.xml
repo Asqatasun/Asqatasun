@@ -9,11 +9,9 @@
         <class>org.opens.tanaguru.entity.reference.CriterionImpl</class>
         <class>org.opens.tanaguru.entity.reference.DecisionLevelImpl</class>
         <class>org.opens.tanaguru.entity.reference.LevelImpl</class>
-        <class>org.opens.tanaguru.entity.reference.RuleImpl</class>
         <class>org.opens.tanaguru.entity.reference.ScopeImpl</class>
         <class>org.opens.tanaguru.entity.reference.ReferenceImpl</class>
         <class>org.opens.tanaguru.entity.reference.ThemeImpl</class>
-        <class>org.opens.tanaguru.entity.reference.RulePackageImpl</class>
 
         <class>org.opens.tanaguru.entity.audit.ContentImpl</class>
         <class>org.opens.tanaguru.entity.audit.ProcessResultImpl</class>
