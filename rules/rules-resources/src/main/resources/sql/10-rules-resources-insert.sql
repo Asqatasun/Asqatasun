@@ -883,15 +883,15 @@ INSERT IGNORE INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `
 ('NomenclatureElementImpl', 806, 'tha', NULL, 10),
 ('NomenclatureElementImpl', 807, 'aus', NULL, 10),
 ('NomenclatureElementImpl', 808, '<!DOCTYPE html>', NULL, 19), 
-('NomenclatureElementImpl', 809, 'basefont', NULL, 11),
-('NomenclatureElementImpl', 810, 'blink', NULL, 11),
-('NomenclatureElementImpl', 811, 'center', NULL, 11),
-('NomenclatureElementImpl', 812, 'font', NULL, 11),
-('NomenclatureElementImpl', 813, 'marquee', NULL, 11),
-('NomenclatureElementImpl', 814, 's', NULL, 11),
-('NomenclatureElementImpl', 815, 'strike', NULL, 11),
-('NomenclatureElementImpl', 816, 'tt', NULL, 11),
-('NomenclatureElementImpl', 817, 'u', NULL, 11),;
+('NomenclatureElementImpl', 809, 'basefont', NULL, 20),
+('NomenclatureElementImpl', 810, 'blink', NULL, 20),
+('NomenclatureElementImpl', 811, 'center', NULL, 20),
+('NomenclatureElementImpl', 812, 'font', NULL, 20),
+('NomenclatureElementImpl', 813, 'marquee', NULL, 20),
+('NomenclatureElementImpl', 814, 's', NULL, 20),
+('NomenclatureElementImpl', 815, 'strike', NULL, 20),
+('NomenclatureElementImpl', 816, 'tt', NULL, 20),
+('NomenclatureElementImpl', 817, 'u', NULL, 20);
 
 
 SET foreign_key_checks=1;
