@@ -21,9 +21,14 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
+import java.util.Iterator;
+import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
+import org.opens.tanaguru.rules.keystore.HtmlElementStore;
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
  *
@@ -43,30 +48,30 @@ public class Aw22Rule07051Test extends Aw22RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-//        getWebResourceMap().put("AW22.Test.07.05.01-3NMI-01",
-//                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-01.html"));
-//        getWebResourceMap().put("AW22.Test.07.05.01-3NMI-02",
-//                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-02.html"));
-//       getWebResourceMap().put("AW22.Test.07.05.01-3NMI-03",
-//                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-03.html"));
-//       getWebResourceMap().put("AW22.Test.07.05.01-3NMI-04",
-//                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-04.html"));
-//       getWebResourceMap().put("AW22.Test.07.05.01-3NMI-05",
-//                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-05.html"));
-//       getWebResourceMap().put("AW22.Test.07.05.01-3NMI-06",
-//                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-06.html"));
-//       getWebResourceMap().put("AW22.Test.07.05.01-3NMI-07",
-//                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-07.html"));
-//       getWebResourceMap().put("AW22.Test.07.05.01-3NMI-08",
-//                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-08.html"));
+        getWebResourceMap().put("AW22.Test.07.05.01-3NMI-01",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-01.html"));
+        getWebResourceMap().put("AW22.Test.07.05.01-3NMI-02",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-02.html"));
+       getWebResourceMap().put("AW22.Test.07.05.01-3NMI-03",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-03.html"));
+       getWebResourceMap().put("AW22.Test.07.05.01-3NMI-04",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-04.html"));
+       getWebResourceMap().put("AW22.Test.07.05.01-3NMI-05",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-05.html"));
+       getWebResourceMap().put("AW22.Test.07.05.01-3NMI-06",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-06.html"));
+       getWebResourceMap().put("AW22.Test.07.05.01-3NMI-07",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-07.html"));
+       getWebResourceMap().put("AW22.Test.07.05.01-3NMI-08",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-08.html"));
        getWebResourceMap().put("AW22.Test.07.05.01-3NMI-09",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-09.html"));
@@ -74,73 +79,190 @@ public class Aw22Rule07051Test extends Aw22RuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
-//        ProcessResult processResult =
-//                processPageTest("AW22.Test.07.05.01-3NMI-01");
-//        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-//        assertNull(processResult.getRemarkSet());
-//
-//        processResult = processPageTest("AW22.Test.07.05.01-3NMI-02");
-//        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-//        assertEquals(Aw22Rule07051.ERROR_MESSAGE_CODE,
-//                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-//        assertEquals(1, processResult.getRemarkSet().size());
-//
-//        processResult = processPageTest("AW22.Test.07.05.01-3NMI-03");
-//        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-//        assertEquals(Aw22Rule07051.ERROR_MESSAGE_CODE,
-//                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-//        assertEquals(1, processResult.getRemarkSet().size());
-//
-//        processResult = processPageTest("AW22.Test.07.05.01-3NMI-04");
-//        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-//        assertEquals(Aw22Rule07051.ERROR_MESSAGE_CODE,
-//                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-//        assertEquals(1, processResult.getRemarkSet().size());
-//
-//        processResult = processPageTest("AW22.Test.07.05.01-3NMI-05");
-//        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-//        assertNull(processResult.getRemarkSet());
-//
-//        processResult = processPageTest("AW22.Test.07.05.01-3NMI-06");
-//        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-//        assertNull(processResult.getRemarkSet());
-//
-//        processResult = processPageTest("AW22.Test.07.05.01-3NMI-07");
-//        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-//        assertNull(processResult.getRemarkSet());
-//
-//        processResult = processPageTest("AW22.Test.07.05.01-3NMI-08");
-//        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-//        assertNull(processResult.getRemarkSet());
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-01---------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult =
+                processPageTest("AW22.Test.07.05.01-3NMI-01");
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        assertTrue(processResult.getRemarkSet().iterator().next() instanceof ProcessRemark);
+        assertEquals(RemarkMessageStore.NO_PATTERN_DETECTED_MSG, 
+                processResult.getRemarkSet().iterator().next().getMessageCode());
 
-        ProcessResult processResult = processPageTest("AW22.Test.07.05.01-3NMI-09");
-        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
-//        assertEquals(Aw22Rule07051.ERROR_MESSAGE_CODE,
-//                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-//        assertEquals(1, processResult.getRemarkSet().size());
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-02---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.07.05.01-3NMI-02");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        Iterator<ProcessRemark> iter = processResult.getRemarkSet().iterator();
+        
+        SourceCodeRemark processRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.CONTEXT_CHANGED_SCRIPT_MSG, processRemark.getMessageCode());
+        assertEquals(HtmlElementStore.SELECT_ELEMENT, processRemark.getTarget());
+        // check number of evidence elements and their value
+        assertNull(processRemark.getElementList());
+
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-03---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.07.05.01-3NMI-03");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        
+        processRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.CONTEXT_CHANGED_SCRIPT_MSG, processRemark.getMessageCode());
+        assertEquals(HtmlElementStore.FORM_ELEMENT, processRemark.getTarget());
+        // check number of evidence elements and their value
+        assertNull(processRemark.getElementList());
+
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-04---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.07.05.01-3NMI-04");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        
+        processRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.CONTEXT_CHANGED_SCRIPT_MSG, processRemark.getMessageCode());
+        assertEquals(HtmlElementStore.SELECT_ELEMENT, processRemark.getTarget());
+        // check number of evidence elements and their value
+        assertNull(processRemark.getElementList());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-05---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.07.05.01-3NMI-05");
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        assertTrue(processResult.getRemarkSet().iterator().next() instanceof ProcessRemark);
+        assertEquals(RemarkMessageStore.NO_PATTERN_DETECTED_MSG, 
+                processResult.getRemarkSet().iterator().next().getMessageCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-06---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.07.05.01-3NMI-06");
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        assertTrue(processResult.getRemarkSet().iterator().next() instanceof ProcessRemark);
+        assertEquals(RemarkMessageStore.NO_PATTERN_DETECTED_MSG, 
+                processResult.getRemarkSet().iterator().next().getMessageCode());
+
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-07---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.07.05.01-3NMI-07");
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        assertTrue(processResult.getRemarkSet().iterator().next() instanceof ProcessRemark);
+        assertEquals(RemarkMessageStore.NO_PATTERN_DETECTED_MSG, 
+                processResult.getRemarkSet().iterator().next().getMessageCode());
+
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-08---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.07.05.01-3NMI-08");
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        assertTrue(processResult.getRemarkSet().iterator().next() instanceof ProcessRemark);
+        assertEquals(RemarkMessageStore.NO_PATTERN_DETECTED_MSG, 
+                processResult.getRemarkSet().iterator().next().getMessageCode());
+
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-09---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.07.05.01-3NMI-09");
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(2, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        
+        processRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.CONTEXT_CHANGED_SCRIPT_MSG, processRemark.getMessageCode());
+        assertEquals(HtmlElementStore.FORM_ELEMENT, processRemark.getTarget());
+        // check number of evidence elements and their value
+        assertNull(processRemark.getElementList());
+        
+        processRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.CONTEXT_CHANGED_SCRIPT_MSG, processRemark.getMessageCode());
+        assertEquals(HtmlElementStore.SELECT_ELEMENT, processRemark.getTarget());
+        // check number of evidence elements and their value
+        assertNull(processRemark.getElementList());
 
 
     }
 
     @Override
     protected void setConsolidate() {
-//        assertEquals(TestSolution.NEED_MORE_INFO,
-//                consolidate("AW22.Test.07.05.01-3NMI-01").getValue());
-//        assertEquals(TestSolution.NEED_MORE_INFO,
-//                consolidate("AW22.Test.07.05.01-3NMI-02").getValue());
-//        assertEquals(TestSolution.NEED_MORE_INFO,
-//                consolidate("AW22.Test.07.05.01-3NMI-03").getValue());
-//        assertEquals(TestSolution.NEED_MORE_INFO,
-//                consolidate("AW22.Test.07.05.01-3NMI-04").getValue());
-//        assertEquals(TestSolution.NEED_MORE_INFO,
-//                consolidate("AW22.Test.07.05.01-3NMI-05").getValue());
-//        assertEquals(TestSolution.NEED_MORE_INFO,
-//                consolidate("AW22.Test.07.05.01-3NMI-06").getValue());
-//        assertEquals(TestSolution.NEED_MORE_INFO,
-//                consolidate("AW22.Test.07.05.01-3NMI-07").getValue());
-//        assertEquals(TestSolution.NEED_MORE_INFO,
-//                consolidate("AW22.Test.07.05.01-3NMI-08").getValue());
-        assertEquals(TestSolution.NOT_TESTED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.07.05.01-3NMI-01").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.07.05.01-3NMI-02").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.07.05.01-3NMI-03").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.07.05.01-3NMI-04").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.07.05.01-3NMI-05").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.07.05.01-3NMI-06").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.07.05.01-3NMI-07").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.07.05.01-3NMI-08").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW22.Test.07.05.01-3NMI-09").getValue());
     }
 
