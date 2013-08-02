@@ -19,11 +19,16 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
+import java.util.LinkedHashSet;
 import org.opens.tanaguru.rules.accessiweb22.Aw22Rule13012;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
+import org.opens.tanaguru.rules.keystore.AttributeStore;
+import org.opens.tanaguru.rules.keystore.HtmlElementStore;
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
  * Unit test class for the implementation of the rule 13.1.2 of the referential Accessiweb 2.2.
@@ -47,15 +52,15 @@ public class Aw22Rule13012Test extends Aw22RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-//        getWebResourceMap().put("AW22.Test.13.1.2-1Passed-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "AW22/Aw22Rule13012/AW22.Test.13.1.2-1Passed-01.html"));
-//        getWebResourceMap().put("AW22.Test.13.1.2-2Failed-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "AW22/Aw22Rule13012/AW22.Test.13.1.2-2Failed-01.html"));
-//        getWebResourceMap().put("AW22.Test.13.1.2-4NA-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "AW22/Aw22Rule13012/AW22.Test.13.1.2-4NA-01.html"));
+        getWebResourceMap().put("AW22.Test.13.1.2-1Passed-01",
+              getWebResourceFactory().createPage(
+              getTestcasesFilePath() + "AW22/Aw22Rule13012/AW22.Test.13.1.2-1Passed-01.html"));
+        getWebResourceMap().put("AW22.Test.13.1.2-2Failed-01",
+              getWebResourceFactory().createPage(
+              getTestcasesFilePath() + "AW22/Aw22Rule13012/AW22.Test.13.1.2-2Failed-01.html"));
+        getWebResourceMap().put("AW22.Test.13.1.2-4NA-01",
+              getWebResourceFactory().createPage(
+              getTestcasesFilePath() + "AW22/Aw22Rule13012/AW22.Test.13.1.2-4NA-01.html"));
         getWebResourceMap().put("AW22.Test.13.1.2-4NA-02",
               getWebResourceFactory().createPage(
               getTestcasesFilePath() + "AW22/Aw22Rule13012/AW22.Test.13.1.2-4NA-02.html"));
@@ -63,29 +68,70 @@ public class Aw22Rule13012Test extends Aw22RuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
-//        assertEquals(TestSolution.PASSED,
-//                processPageTest("AW22.Test.13.1.2-1Passed-01").getValue());
-//        
-//        ProcessResult processResult = processPageTest("AW22.Test.13.1.2-2Failed-01");
-//        assertEquals(TestSolution.FAILED, processResult.getValue());
-//        assertEquals(Aw22Rule13012.ERROR_MESSAGE,
-//                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-//        assertEquals(TestSolution.NOT_APPLICABLE,
-//                processPageTest("AW22.Test.13.1.2-4NA-01").getValue());
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-01------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult =
+                processPageTest("AW22.Test.13.1.2-1Passed-01");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
         
-        assertEquals(TestSolution.NOT_TESTED,
-                processPageTest("AW22.Test.13.1.2-4NA-02").getValue());
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-01------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.13.1.2-2Failed-01");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.NOT_IMMEDIATE_REDIRECT_VIA_META_MSG, processRemark.getMessageCode());
+        assertEquals(HtmlElementStore.META_ELEMENT, processRemark.getTarget());
+        // check number of evidence elements and their value
+        assertNull(processRemark.getElementList());
+
+        
+        //----------------------------------------------------------------------
+        //------------------------------4NA-01----------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.13.1.2-4NA-01");
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------4NA-02----------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.13.1.2-4NA-02");
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
     }
 
     @Override
     protected void setConsolidate() {
-//        assertEquals(TestSolution.PASSED,
-//                consolidate("AW22.Test.13.1.2-1Passed-01").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                consolidate("AW22.Test.13.1.2-2Failed-01").getValue());
-//        assertEquals(TestSolution.NOT_APPLICABLE,
-//                consolidate("AW22.Test.13.1.2-4NA-01").getValue());
-        assertEquals(TestSolution.NOT_TESTED,
+        assertEquals(TestSolution.PASSED,
+                consolidate("AW22.Test.13.1.2-1Passed-01").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.13.1.2-2Failed-01").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.13.1.2-4NA-01").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("AW22.Test.13.1.2-4NA-02").getValue());
     }
 

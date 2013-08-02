@@ -176,6 +176,11 @@ public final class CssLikeQueryStore {
                     +      ":not(:has(input[type=submit]))"
                     +      ":not(:has(input[type=button]))"
                     +      ":not(:has(input[type=reset]))";
+    
+    // Consultation css-like queries
+    public static final String META_WITH_REFRESH_CSS_LIKE_QUERY = 
+                "meta[http-equiv=refresh][content*=url]";
+            
     /**
      * Private constructor. This class handles keys and must not be instanciated
      */

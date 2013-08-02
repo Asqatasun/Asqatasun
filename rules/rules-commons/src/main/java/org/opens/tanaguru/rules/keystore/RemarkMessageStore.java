@@ -195,7 +195,10 @@ public final class RemarkMessageStore {
     // scripts
     public static final String CONTEXT_CHANGED_SCRIPT_MSG = 
             "ContextChangedScriptDetected";
-            
+    
+    // consultation 
+    public static final String NOT_IMMEDIATE_REDIRECT_VIA_META_MSG = 
+            "NotImmediateRedirectionViaMeta";
     /**
      * Private constructor. This class handles keys and must not be instantiated
      */

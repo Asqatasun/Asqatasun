@@ -55,6 +55,7 @@ public final class HtmlElementStore {
     public static final String INPUT_ELEMENT = HTML.Tag.INPUT.toString();
     public static final String LABEL_ELEMENT = "label";
     public static final String LEGEND_ELEMENT = "legend";
+    public static final String META_ELEMENT = HTML.Tag.META.toString();
     public static final String OBJECT_ELEMENT = HTML.Tag.OBJECT.toString();
     public static final String OPTION_ELEMENT = HTML.Tag.OPTION.toString();
     public static final String OPTGROUP_ELEMENT = "optgroup";
