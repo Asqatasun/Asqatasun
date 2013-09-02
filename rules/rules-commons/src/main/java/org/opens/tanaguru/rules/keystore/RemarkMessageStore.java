@@ -207,6 +207,10 @@ public final class RemarkMessageStore {
     // structuration of information
     public static final String DEPRECATED_REPRESENTATION_TAG_MSG =
             "DeprecatedRepresentationTagFound";
+    
+    // structuration of information
+    public static final String DETECTED_TAG_MSG =
+            "DetectedTag";
 
     /**
      * Private constructor. This class handles keys and must not be instantiated

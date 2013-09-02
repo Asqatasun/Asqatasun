@@ -20,7 +20,12 @@
 
 package org.opens.tanaguru.rules.rgaa22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.opens.tanaguru.rules.elementselector.ElementSelector;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.H1_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.H1_TAG_MISSING_MSG;
 
 /**
  * Implementation of the rule 10.1 of the referential RGAA 2.2.
@@ -30,13 +35,27 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule10011 extends AbstractNotTestedRuleImplementation {
+public class Rgaa22Rule10011 extends AbstractDetectionPageRuleImplementation {
 
+    /** The element selector */
+    private static final ElementSelector ELEMENT_SELECTOR = 
+            new SimpleElementSelector(H1_ELEMENT);
+    
     /**
      * Default constructor
      */
     public Rgaa22Rule10011 () {
-        super();
+        super(
+                ELEMENT_SELECTOR,
+                // solution when at least one element is found
+                TestSolution.PASSED,
+                // solution when no element is found
+                TestSolution.FAILED,
+                // detected tag message
+                null,
+                // manual check message
+                H1_TAG_MISSING_MSG
+            );
     }
 
 }

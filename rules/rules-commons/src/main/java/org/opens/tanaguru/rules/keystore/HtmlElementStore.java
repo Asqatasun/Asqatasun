@@ -33,6 +33,8 @@ public final class HtmlElementStore {
     public static final String ACRONYM_ELEMENT = "acronym";
     public static final String APPLET_ELEMENT = HTML.Tag.APPLET.toString();
     public static final String AREA_ELEMENT = HTML.Tag.AREA.toString();
+    public static final String BGSOUND_ELEMENT = "bgsound";
+    public static final String BLINK_ELEMENT = "blink";
     public static final String BODY_ELEMENT = HTML.Tag.BODY.toString();
     public static final String BUTTON_ELEMENT = "button";
     public static final String CAPTION_ELEMENT = HTML.Tag.CAPTION.toString();
@@ -56,6 +58,7 @@ public final class HtmlElementStore {
     public static final String LABEL_ELEMENT = "label";
     public static final String LEGEND_ELEMENT = "legend";
     public static final String META_ELEMENT = HTML.Tag.META.toString();
+    public static final String MARQUEE_ELEMENT = "marquee";
     public static final String OBJECT_ELEMENT = HTML.Tag.OBJECT.toString();
     public static final String OPTION_ELEMENT = HTML.Tag.OPTION.toString();
     public static final String OPTGROUP_ELEMENT = "optgroup";

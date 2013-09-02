@@ -20,7 +20,14 @@
 
 package org.opens.tanaguru.rules.rgaa22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
+import org.opens.tanaguru.rules.elementselector.ElementSelector;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.TITLE_WITHIN_HEAD_CSS_LIKE_QUERY;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.TITLE_TAG_MISSING_MSG;
+
 
 /**
  * Implementation of the rule 9.6 of the referential RGAA 2.2.
@@ -30,13 +37,30 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule09061 extends AbstractNotTestedRuleImplementation {
+public class Rgaa22Rule09061 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
+    /** The element selector */
+    private static final ElementSelector ELEMENT_SELECTOR = 
+            new SimpleElementSelector(TITLE_WITHIN_HEAD_CSS_LIKE_QUERY);
+    
+    /** The element checker */
+    private static final ElementPresenceChecker ELEMENT_CHECKER = 
+            new ElementPresenceChecker(
+                    true, 
+                    TestSolution.PASSED, 
+                    TestSolution.FAILED, 
+                    null, 
+                    TITLE_TAG_MISSING_MSG
+            );
+    
     /**
      * Default constructor
      */
     public Rgaa22Rule09061 () {
-        super();
+        super(
+                ELEMENT_SELECTOR,
+                ELEMENT_CHECKER
+            );
     }
 
 }
