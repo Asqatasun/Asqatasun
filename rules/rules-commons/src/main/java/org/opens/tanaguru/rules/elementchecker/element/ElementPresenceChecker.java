@@ -251,10 +251,7 @@ public class ElementPresenceChecker extends ElementCheckerImpl {
             if (StringUtils.isNotBlank(messageCodeOnElementDetected)) {
                 
                 for (Element el : elements) {
-                    addSourceCodeRemark(
-                            detectedSolution, 
-                            el, 
-                            messageCodeOnElementDetected);
+                    createSourceCodeRemark(detectedSolution, el, messageCodeOnElementDetected);
                 }
                 
             }
@@ -270,4 +267,7 @@ public class ElementPresenceChecker extends ElementCheckerImpl {
         testSolutionHandler.addTestSolution(checkResult);
     }
 
+    protected void createSourceCodeRemark(TestSolution testSolution, Element element, String message) {
+        addSourceCodeRemark(testSolution, element, message);
+    }
 }

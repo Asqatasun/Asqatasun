@@ -102,7 +102,7 @@ public class Aw22Rule10011Test extends Aw22RuleImplementationTestCase {
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.DEPRECATED_REPRESENTATION_TAG_MSG, processRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG, processRemark.getMessageCode());
         assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals("basefont", processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
@@ -121,7 +121,7 @@ public class Aw22Rule10011Test extends Aw22RuleImplementationTestCase {
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.DEPRECATED_REPRESENTATION_TAG_MSG, processRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG, processRemark.getMessageCode());
         assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals("center", processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
@@ -140,7 +140,7 @@ public class Aw22Rule10011Test extends Aw22RuleImplementationTestCase {
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.DEPRECATED_REPRESENTATION_TAG_MSG, processRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG, processRemark.getMessageCode());
         assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals("blink", processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
@@ -159,7 +159,7 @@ public class Aw22Rule10011Test extends Aw22RuleImplementationTestCase {
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.DEPRECATED_REPRESENTATION_TAG_MSG, processRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG, processRemark.getMessageCode());
         assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals("font", processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
@@ -178,7 +178,7 @@ public class Aw22Rule10011Test extends Aw22RuleImplementationTestCase {
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.DEPRECATED_REPRESENTATION_TAG_MSG, processRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG, processRemark.getMessageCode());
         assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals("tt", processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
@@ -197,7 +197,7 @@ public class Aw22Rule10011Test extends Aw22RuleImplementationTestCase {
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.DEPRECATED_REPRESENTATION_TAG_MSG, processRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG, processRemark.getMessageCode());
         assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals("marquee", processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
@@ -216,7 +216,7 @@ public class Aw22Rule10011Test extends Aw22RuleImplementationTestCase {
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.DEPRECATED_REPRESENTATION_TAG_MSG, processRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG, processRemark.getMessageCode());
         assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals("s", processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
@@ -235,7 +235,7 @@ public class Aw22Rule10011Test extends Aw22RuleImplementationTestCase {
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.DEPRECATED_REPRESENTATION_TAG_MSG, processRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG, processRemark.getMessageCode());
         assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals("strike", processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
@@ -254,7 +254,7 @@ public class Aw22Rule10011Test extends Aw22RuleImplementationTestCase {
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.DEPRECATED_REPRESENTATION_TAG_MSG, processRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG, processRemark.getMessageCode());
         assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals("u", processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());

@@ -63,27 +63,27 @@ public abstract class AbstractPageRuleWithSelectorAndCheckerImplementation
      * Perform the selection using the {@link ElementSelector}
      * 
      * @param sspHandler
-     * @param selectionHandler 
+     * @param elementHandler 
      */
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler selectionHandler) {
-        elementSelector.selectElements(sspHandler, selectionHandler);
+    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
+        elementSelector.selectElements(sspHandler, elementHandler);
     }
 
     /**
      * Perform the check using the {@link ElementChecker}
      * 
      * @param sspHandler
-     * @param selectionHandler 
+     * @param elementHandler 
      * @param testSolutionHandler
      */
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler selectionHandler, 
+            ElementHandler elementHandler, 
             TestSolutionHandler testSolutionHandler) {
         
-        super.check(sspHandler, selectionHandler, testSolutionHandler);
+        super.check(sspHandler, elementHandler, testSolutionHandler);
         
         if (elementChecker instanceof NomenclatureBasedElementChecker) {
             ((NomenclatureBasedElementChecker)elementChecker).
@@ -91,7 +91,7 @@ public abstract class AbstractPageRuleWithSelectorAndCheckerImplementation
         }
         elementChecker.check(
             sspHandler, 
-            selectionHandler, 
+            elementHandler, 
             testSolutionHandler);
     }
 

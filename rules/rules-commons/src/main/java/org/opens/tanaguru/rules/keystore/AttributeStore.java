@@ -52,6 +52,8 @@ public final class AttributeStore {
     public static final String TITLE_ATTR = HTML.Attribute.TITLE.toString();
     public static final String USEMAP_ATTR = HTML.Attribute.USEMAP.toString();
     public static final String VALUE_ATTR = HTML.Attribute.VALUE.toString();
+    public static final String WIDTH_ATTR = HTML.Attribute.WIDTH.toString();
+    public static final String HEIGHT_ATTR = HTML.Attribute.HEIGHT.toString();
     public static final String XML_LANG_ATTR = "xml:lang";
     
     /**

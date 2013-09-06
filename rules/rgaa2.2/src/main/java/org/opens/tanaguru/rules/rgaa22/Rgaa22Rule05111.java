@@ -20,7 +20,14 @@
 
 package org.opens.tanaguru.rules.rgaa22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.opens.tanaguru.rules.elementselector.ElementSelector;
+import org.opens.tanaguru.rules.elementselector.MultipleElementSelector;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.APPLET_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.OBJECT_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
 
 /**
  * Implementation of the rule 5.11 of the referential RGAA 2.2.
@@ -30,13 +37,27 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule05111 extends AbstractNotTestedRuleImplementation {
+public class Rgaa22Rule05111 extends AbstractDetectionPageRuleImplementation {
 
+    /** The element selector */
+    private static final ElementSelector ELEMENT_SELECTOR = 
+            new MultipleElementSelector(APPLET_ELEMENT, OBJECT_ELEMENT);
+    
     /**
      * Default constructor
      */
     public Rgaa22Rule05111 () {
-        super();
+        super(
+                ELEMENT_SELECTOR,
+                // solution when at least one element is found
+                TestSolution.NEED_MORE_INFO,
+                // solution when no element is found
+                TestSolution.NOT_APPLICABLE,
+                // manual check message
+                MANUAL_CHECK_ON_ELEMENTS_MSG,
+                null, 
+                TEXT_ELEMENT2
+            );
     }
 
 }

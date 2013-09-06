@@ -20,6 +20,8 @@
     <NOMENCLATURE Id_Nomenclature="17" Cd_Nomenclature="RecommendedDoctypeDeclarations" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
     <NOMENCLATURE Id_Nomenclature="18" Cd_Nomenclature="XhtmlDoctypeDeclarations" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
     <NOMENCLATURE Id_Nomenclature="19" Cd_Nomenclature="RecommendedCaseInsensitiveDoctypeDeclarations" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
+    <NOMENCLATURE Id_Nomenclature="20" Cd_Nomenclature="DeprecatedRepresentationTagsV2" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
+    <NOMENCLATURE Id_Nomenclature="21" Cd_Nomenclature="DeprecatedRepresentationAttributesV2" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
 
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="1" Label="reset"  Id_Nomenclature="1"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2" Label="submit"  Id_Nomenclature="1"/>
@@ -245,7 +247,7 @@
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="222" Label="precedent"  Id_Nomenclature="7"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="223" Label="précédent"  Id_Nomenclature="7"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="224" Label="previous"  Id_Nomenclature="7"/>
-    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="225" Label="align"  Id_Nomenclature="15"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="225" Label="align"  Id_Nomenclature="15"/>   
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="226" Label="alink"  Id_Nomenclature="15"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="227" Label="background"  Id_Nomenclature="15"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="228" Label="basefont"  Id_Nomenclature="15"/>
@@ -281,13 +283,31 @@
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="258" Label="&lt;!DOCTYPE svg:svg PUBLIC &quot;-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN&quot; &quot;http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd&quot;&gt;"  Id_Nomenclature="18"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="259" Label="&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML Basic 1.0//EN&quot; &quot;http://www.w3.org/TR/xhtml-basic/xhtml-basic10.dtd&quot;&gt;" Id_Nomenclature="18"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="260" Label="&lt;!DOCTYPE html&gt;" Id_Nomenclature="19"/>
-
-
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="261" Label="basefont"  Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="262" Label="blink"  Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="263" Label="center"  Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="264" Label="font"  Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="265" Label="marquee"  Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="266" Label="s"  Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="267" Label="strike"  Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="268" Label="tt"  Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="269" Label="u"  Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="270" Label="align"  Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="271" Label="alink"  Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="272" Label="background"  Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="273" Label="basefont"  Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="274" Label="bgcolor"  Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="275" Label="border"  Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="277" Label="color"  Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="278" Label="link"  Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="279" Label="text"  Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="280" Label="vlink"  Id_Nomenclature="21"/>
+    
     <EVIDENCE Id_Evidence="1" Cd_Evidence="Element-Name" Description="NULL" Long_Label="NULL" />
     <EVIDENCE Id_Evidence="2" Cd_Evidence="src" Description="NULL" Long_Label="NULL" />
     <EVIDENCE Id_Evidence="3" Cd_Evidence="Css-Selector" Description="NULL" Long_Label="NULL" />
-    <EVIDENCE Id_Evidence="4" Cd_Evidence="Previous-H-Tag-Index" Description="NULL" Long_Label="NULL" />
-    <EVIDENCE Id_Evidence="5" Cd_Evidence="First-H-Tag-Index" Description="NULL" Long_Label="NULL" />
+    <EVIDENCE Id_Evidence="4" Cd_Evidence="Previous-H-Tag-Index2" Description="NULL" Long_Label="NULL" />
+    <EVIDENCE Id_Evidence="5" Cd_Evidence="First-H-Tag-Index2" Description="NULL" Long_Label="NULL" />
     <EVIDENCE Id_Evidence="6" Cd_Evidence="Node" Description="NULL" Long_Label="NULL" />
     <EVIDENCE Id_Evidence="7" Cd_Evidence="href" Description="NULL" Long_Label="NULL" />
     <EVIDENCE Id_Evidence="8" Cd_Evidence="Link-Title-Attribut" Description="NULL" Long_Label="NULL" />

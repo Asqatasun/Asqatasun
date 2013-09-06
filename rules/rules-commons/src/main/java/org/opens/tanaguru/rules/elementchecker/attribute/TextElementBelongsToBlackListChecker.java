@@ -49,6 +49,7 @@ public class TextElementBelongsToBlackListChecker extends NomenclatureBasedEleme
      * nomenclature elements prefixed and suffixed by non alphanumeric pattern
      */
     private Collection<Pattern> blackListPatternCollection;
+    
     public Collection<Pattern> getBlackListPatternCollection() {
         if (blackListPatternCollection == null) {
             blackListPatternCollection = new ArrayList<Pattern>();

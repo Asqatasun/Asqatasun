@@ -588,7 +588,8 @@ Cd_Test='AW22-11132' OR
 Cd_Test='AW22-11141' OR 
 Cd_Test='AW22-11142' OR 
 Cd_Test='AW22-11151' OR
-Cd_Test='AW22-13012';
+Cd_Test='AW22-13012' OR ;
+Cd_Test='AW22-10012' ;
 
 
 SET foreign_key_checks=1;

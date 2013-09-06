@@ -62,12 +62,12 @@ public class TextPertinenceChecker extends PertinenceChecker {
                         null));
         }
 
-        // The second check consists in verifying the element content does not only
-        // contains non alphanumerical characters
+        // The second check consists in verifying the element content 
+        // does not belong to a blacklist 
         if (StringUtils.isNotBlank(blacklistNameToCompareWith)) {
             addChecker(new TextElementBelongsToBlackListChecker(
-                        notPertinentMessageCode, 
-                        blacklistNameToCompareWith));
+                        blacklistNameToCompareWith, 
+                        notPertinentMessageCode));
         }
         
         // The third check consists in verifying the element content does not only

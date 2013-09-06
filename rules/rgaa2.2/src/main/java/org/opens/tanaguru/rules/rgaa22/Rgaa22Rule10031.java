@@ -20,7 +20,10 @@
 
 package org.opens.tanaguru.rules.rgaa22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.opens.tanaguru.rules.elementchecker.headings.HeadingsHierarchyChecker;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.HEADINGS_CSS_LIKE_QUERY;
 
 /**
  * Implementation of the rule 10.3 of the referential RGAA 2.2.
@@ -30,13 +33,16 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule10031 extends AbstractNotTestedRuleImplementation {
+public class Rgaa22Rule10031 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa22Rule10031 () {
-        super();
+        super(
+                new SimpleElementSelector(HEADINGS_CSS_LIKE_QUERY), 
+                new HeadingsHierarchyChecker()
+            );
     }
 
 }

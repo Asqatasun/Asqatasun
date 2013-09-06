@@ -34,6 +34,7 @@ public final class EvidenceStore {
     public static final String LINK_TITLE_ATTR_EE = "Link-Title-Attribut";
     public static final String LINK_TEXT_EE = "Link-Text";
     public static final String LINK_HREF_ATTR_EE = "Link-Href-Attribut";
+    public static final String TARGETTED_ELEMENT_FROM_SCOPE_EE = "Element-Name";
     
     /**
      * private constructor. This class handles keys and must not be instanciated

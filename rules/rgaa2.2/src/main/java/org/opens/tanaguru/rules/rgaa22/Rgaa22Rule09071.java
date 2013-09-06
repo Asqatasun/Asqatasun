@@ -20,7 +20,12 @@
 
 package org.opens.tanaguru.rules.rgaa22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.opens.tanaguru.rules.elementchecker.pertinence.TextPertinenceChecker;
+import org.opens.tanaguru.rules.elementselector.ElementSelector;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TITLE_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NOT_PERTINENT_TITLE_MSG;
 
 /**
  * Implementation of the rule 9.7 of the referential RGAA 2.2.
@@ -30,13 +35,29 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule09071 extends AbstractNotTestedRuleImplementation {
+public class Rgaa22Rule09071 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
+    /* The selector */
+    private static final ElementSelector ELEMENT_SELECTOR = 
+            new SimpleElementSelector(TITLE_ELEMENT);
+    
+    /* Title blacklisted nomenclature */
+    private static final String TITLE_BLACKLIST_NOM = "UnexplicitPageTitle";
+    
     /**
      * Default constructor
      */
     public Rgaa22Rule09071 () {
-        super();
+        super(
+                ELEMENT_SELECTOR,
+                new TextPertinenceChecker(
+                    true, 
+                    null, 
+                    TITLE_BLACKLIST_NOM, 
+                    NOT_PERTINENT_TITLE_MSG, 
+                    null
+                )
+            );
     }
 
 }

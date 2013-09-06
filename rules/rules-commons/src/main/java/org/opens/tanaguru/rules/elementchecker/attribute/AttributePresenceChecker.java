@@ -64,7 +64,12 @@ public class AttributePresenceChecker extends ElementCheckerImpl {
     private String messageCodeOnAttrNotDetected;
     
     /**
-     * Default constructor 
+     * This flag determines whether each source code remark have to be related 
+     * with the element or the attribute itself. Default is false
+     */
+    private boolean createSourceCodeRemarkOnAttribute = false;
+    
+    /**
      * 
      * @param attributeName
      * @param detectedSolution
@@ -88,6 +93,36 @@ public class AttributePresenceChecker extends ElementCheckerImpl {
         
         this.notDetectedSolution = notDetectedSolution;
         this.messageCodeOnAttrNotDetected = messageCodeOnAttrNotDetected;
+    }
+    
+    /**
+     * 
+     * @param attributeName
+     * @param detectedSolution
+     * @param notDetectedSolution
+     * @param messageCodeOnAttrDetected
+     * @param messageCodeOnAttrNotDetected
+     * @param createSourceCodeRemarkOnAttribute
+     * @param eeAttributeNameList 
+     */
+    public AttributePresenceChecker(
+            String attributeName, 
+            TestSolution detectedSolution,
+            TestSolution notDetectedSolution,
+            String messageCodeOnAttrDetected, 
+            String messageCodeOnAttrNotDetected, 
+            boolean createSourceCodeRemarkOnAttribute, 
+            String...eeAttributeNameList) {
+        super(eeAttributeNameList);
+        this.attributeName = attributeName;
+        
+        this.detectedSolution = detectedSolution;
+        this.messageCodeOnAttrDetected = messageCodeOnAttrDetected;
+        
+        this.notDetectedSolution = notDetectedSolution;
+        this.messageCodeOnAttrNotDetected = messageCodeOnAttrNotDetected;
+        
+        this.createSourceCodeRemarkOnAttribute = createSourceCodeRemarkOnAttribute;
     }
     
     @Override
@@ -124,10 +159,7 @@ public class AttributePresenceChecker extends ElementCheckerImpl {
                 testSolution = setTestSolution(testSolution, notDetectedSolution);
                 
                 if (StringUtils.isNotBlank(messageCodeOnAttrNotDetected)) {
-                    addSourceCodeRemark(
-                        notDetectedSolution, 
-                        el, 
-                        messageCodeOnAttrNotDetected);
+                    createSourceCodeRemark(notDetectedSolution, el, messageCodeOnAttrNotDetected);
                     
                 }
                 
@@ -135,11 +167,8 @@ public class AttributePresenceChecker extends ElementCheckerImpl {
                 
                 testSolution = setTestSolution(testSolution, detectedSolution);
                 
-                addSourceCodeRemark(
-                        detectedSolution, 
-                        el, 
-                        messageCodeOnAttrDetected);
-                
+                createSourceCodeRemark(detectedSolution, el, messageCodeOnAttrDetected);
+
             }
         }
         
@@ -147,4 +176,25 @@ public class AttributePresenceChecker extends ElementCheckerImpl {
         
     }
 
+    /**
+     * 
+     * @param testSolution
+     * @param element
+     * @param message 
+     */
+    private void createSourceCodeRemark (TestSolution testSolution, Element element, String message) {
+        if (createSourceCodeRemarkOnAttribute) {
+            addSourceCodeRemarkOnAttribute(
+                    testSolution, 
+                    element, 
+                    message, 
+                    attributeName);
+        } else {
+            addSourceCodeRemark(
+                    testSolution, 
+                    element, 
+                    message);
+        }
+    }
+    
 }

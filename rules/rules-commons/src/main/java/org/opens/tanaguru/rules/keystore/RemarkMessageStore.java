@@ -35,6 +35,7 @@ public final class RemarkMessageStore {
     public static final String TITLE_ATTR_MISSING_MSG = "TitleAttributeMissing";
     public static final String ID_MISSING_MSG = "IdMissing";
     public static final String ID_NOT_UNIQUE_MSG = "IdNotUnique";
+    public static final String NOT_PERTINENT_TITLE_MSG = "NotPertinentTitle";
 
     // doctype
     public static final String DOCTYPE_MISSING_MSG = "DoctypeMissing";
@@ -205,8 +206,11 @@ public final class RemarkMessageStore {
     public static final String H1_TAG_MISSING_MSG = "H1TagMissing";
     
     // structuration of information
-    public static final String DEPRECATED_REPRESENTATION_TAG_MSG =
-            "DeprecatedRepresentationTagFound";
+    public static final String PRESENTATION_TAG_DETECTED_MSG =
+            "PresentationTagFound";
+    public static final String PRESENTATION_ATTR_DETECTED_MSG =
+            "PresentationAttrFound";
+    
     
     // structuration of information
     public static final String DETECTED_TAG_MSG =

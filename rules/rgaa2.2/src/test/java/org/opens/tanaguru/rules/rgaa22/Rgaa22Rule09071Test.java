@@ -44,49 +44,35 @@ public class Rgaa22Rule09071Test extends Rgaa22RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-//        getWebResourceMap().put("Rgaa22.Test.9.7-1Passed-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "RGAA22/Rgaa22Rule09071/RGAA22.Test.9.7-1Passed-01.html"));
-//        getWebResourceMap().put("Rgaa22.Test.9.7-2Failed-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "RGAA22/Rgaa22Rule09071/RGAA22.Test.9.7-2Failed-01.html"));
-//        getWebResourceMap().put("Rgaa22.Test.9.7-3NMI-01",
-//                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "RGAA22/Rgaa22Rule09071/RGAA22.Test.9.7-3NMI-01.html"));
-//        getWebResourceMap().put("Rgaa22.Test.9.7-4NA-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "RGAA22/Rgaa22Rule09071/RGAA22.Test.9.7-4NA-01.html"));
-        getWebResourceMap().put("Rgaa22.Test.9.7-5NT-01",
+        getWebResourceMap().put("Rgaa22.Test.9.7-2Failed-01",
+              getWebResourceFactory().createPage(
+              getTestcasesFilePath() + "RGAA22/Rgaa22Rule09071/RGAA22.Test.9.7-2Failed-01.html"));
+        getWebResourceMap().put("Rgaa22.Test.9.7-3NMI-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule09071/RGAA22.Test.9.7-5NT-01.html"));
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule09071/RGAA22.Test.9.7-3NMI-01.html"));
+        getWebResourceMap().put("Rgaa22.Test.9.7-4NA-01",
+              getWebResourceFactory().createPage(
+              getTestcasesFilePath() + "RGAA22/Rgaa22Rule09071/RGAA22.Test.9.7-4NA-01.html"));
     }
 
     @Override
     protected void setProcess() {
-//        assertEquals(TestSolution.PASSED,
-//                processPageTest("Rgaa22.Test.9.7-1Passed-01").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                processPageTest("Rgaa22.Test.9.7-2Failed-01").getValue());
-//        assertEquals(TestSolution.NEED_MORE_INFO,
-//                processPageTest("Rgaa22.Test.9.7-3NMI-01").getValue());
-//        assertEquals(TestSolution.NOT_APPLICABLE,
-//                processPageTest("Rgaa22.Test.9.7-4NA-01").getValue());
-        assertEquals(TestSolution.NOT_TESTED,
-                processPageTest("Rgaa22.Test.9.7-5NT-01").getValue());
+        assertEquals(TestSolution.FAILED,   
+                processPageTest("Rgaa22.Test.9.7-2Failed-01").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                processPageTest("Rgaa22.Test.9.7-3NMI-01").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                processPageTest("Rgaa22.Test.9.7-4NA-01").getValue());
     }
 
     @Override
     protected void setConsolidate() {
-//        assertEquals(TestSolution.PASSED,
-//                consolidate("Rgaa22.Test.9.7-1Passed-01").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                consolidate("Rgaa22.Test.9.7-2Failed-01").getValue());
-//        assertEquals(TestSolution.NEED_MORE_INFO,
-//                consolidate("Rgaa22.Test.9.7-3NMI-01").getValue());
-//        assertEquals(TestSolution.NOT_APPLICABLE,
-//                consolidate("Rgaa22.Test.9.7-4NA-01").getValue());
-        assertEquals(TestSolution.NOT_TESTED,
-                consolidate("Rgaa22.Test.9.7-5NT-01").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("Rgaa22.Test.9.7-2Failed-01").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Rgaa22.Test.9.7-3NMI-01").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("Rgaa22.Test.9.7-4NA-01").getValue());
     }
 
 }

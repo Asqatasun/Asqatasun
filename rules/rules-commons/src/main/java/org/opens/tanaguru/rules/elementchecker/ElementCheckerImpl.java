@@ -35,6 +35,7 @@ import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.*;
+import org.opens.tanaguru.rules.keystore.EvidenceStore;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import org.opens.tanaguru.service.ProcessRemarkService;
 
@@ -160,6 +161,35 @@ public abstract class ElementCheckerImpl implements ElementChecker {
                         testSolution, 
                         element, 
                         messageCode);
+        }
+    }
+    
+    /**
+     * Add a sourceCodeRemark on the given element with a preset evidence element
+     * collection
+     * 
+     * @param testSolution
+     * @param element
+     * @param messageCode 
+     * @param attributeName
+     */
+    protected void addSourceCodeRemarkOnAttribute (
+            TestSolution testSolution, 
+            Element element, 
+            String messageCode, 
+            String attributeName) {
+        
+        if (attributeName != null) {
+            Collection<EvidenceElement> evidenceElementList = 
+                    new ArrayList<EvidenceElement>();
+            EvidenceElement ee = getEvidenceElement(
+                    EvidenceStore.TARGETTED_ELEMENT_FROM_SCOPE_EE, attributeName);
+            evidenceElementList.add(ee);
+            processRemarkService.addSourceCodeRemarkOnElement(
+                        testSolution, 
+                        element, 
+                        messageCode,
+                        evidenceElementList);
         }
     }
     

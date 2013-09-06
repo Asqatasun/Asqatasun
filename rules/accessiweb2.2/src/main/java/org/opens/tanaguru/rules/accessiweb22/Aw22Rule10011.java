@@ -26,7 +26,7 @@ import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.rules.elementselector.MultipleElementSelector;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.DEPRECATED_REPRESENTATION_TAG_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG;
 
 /**
  * Implementation of the rule 10.1.1 of the referential Accessiweb 2.2.
@@ -38,6 +38,8 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.DEPRECATED_RE
 public class Aw22Rule10011 extends AbstractDetectionPageRuleImplementation {
 
     private static final String DEPREC_TAG_NOM = "DeprecatedRepresentationTagsV2";
+    
+    
     /**
      * Default constructor
      */
@@ -49,7 +51,7 @@ public class Aw22Rule10011 extends AbstractDetectionPageRuleImplementation {
                 // solution when no element is found
                 TestSolution.PASSED,
                 // manual check message
-                DEPRECATED_REPRESENTATION_TAG_MSG,
+                PRESENTATION_TAG_DETECTED_MSG,
                 null
             );
     }
@@ -64,7 +66,7 @@ public class Aw22Rule10011 extends AbstractDetectionPageRuleImplementation {
                 sspHandler.domCssLikeSelectNodeSet("*").getSelectedElementNumber()); 
                 // number of elements is the total number of tags of the page
     }
-    
+
     @Override
     protected void select(SSPHandler sspHandler, ElementHandler selectionHandler) {
         // retrieve element from the nomenclature

@@ -184,7 +184,11 @@ public final class CssLikeQueryStore {
     // Structuration of information css-like queries
     public static final String HEADINGS_CSS_LIKE_QUERY = 
                 "h1, h2, h3, h4, h5, h6";
-            
+    
+    // Elements with attributes (minus element exceptions)
+    public static final String ELEMENT_WITH_WITDH_ATTR_NOT_IMG = ":not(img)[width]";
+    public static final String ELEMENT_WITH_HEIGHT_ATTR_NOT_IMG =":not(img)[height]";
+    
     /**
      * Private constructor. This class handles keys and must not be instanciated
      */
