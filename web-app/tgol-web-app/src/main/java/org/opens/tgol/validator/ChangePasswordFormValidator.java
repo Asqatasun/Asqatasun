@@ -72,19 +72,21 @@ public class ChangePasswordFormValidator implements Validator {
             Errors errors) {
         String currentPassword = changePasswordCommand.getCurrentPassword();
         String newPassword = changePasswordCommand.getNewPassword();
-        if (StringUtils.isBlank(currentPassword)) {
-            errors.rejectValue(CURRENT_PASSWORD_KEY, MISSING_PASSWORD_KEY);
-            return false;
-        } else {
-            try {
-                if (!MD5Encoder.MD5(currentPassword).equalsIgnoreCase(user.getPassword())) {
-                    errors.rejectValue(CURRENT_PASSWORD_KEY, INCORRECT_PASSWORD_KEY);
-                    return false;
+        if (currentPassword != null) {
+            if (StringUtils.isBlank(currentPassword)) {
+                errors.rejectValue(CURRENT_PASSWORD_KEY, MISSING_PASSWORD_KEY);
+                return false;
+            } else {
+                try {
+                    if (!MD5Encoder.MD5(currentPassword).equalsIgnoreCase(user.getPassword())) {
+                        errors.rejectValue(CURRENT_PASSWORD_KEY, INCORRECT_PASSWORD_KEY);
+                        return false;
+                    }
+                } catch (NoSuchAlgorithmException ex) {
+                    Logger.getLogger(this.getClass()).warn(ex);
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(this.getClass()).warn(ex);
                 }
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(this.getClass()).warn(ex);
-            } catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(this.getClass()).warn(ex);
             }
         }
         if (!newPassword.equals(changePasswordCommand.getConfirmNewPassword())) {
