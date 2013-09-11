@@ -172,18 +172,21 @@ public final class TestResultFactory {
             String theme,
             Collection<String> testSolutionList){
         
-        List<ProcessResult> netResultList = (List<ProcessResult>)
+        List<ProcessResult> effectiveNetResultList = (List<ProcessResult>)
                 webResourceDataService.
                 getProcessResultListByWebResourceAndScope(webresource, scope, theme, testSolutionList);
         // The not tested tests are not persisted but deduced from the testResultList
         // If the not_tested solution is requested to be displayed, we add fake
         // processResult to the current list.
         if (testSolutionList.contains(NOT_TESTED_STR)) {
-            netResultList.addAll(addNotTestedProcessResult(getTestListFromWebResource(webresource), theme, netResultList));
+            List<ProcessResult> netResultList = (List<ProcessResult>)
+                webResourceDataService.
+                getProcessResultListByWebResourceAndScope(webresource, scope);
+            effectiveNetResultList.addAll(addNotTestedProcessResult(getTestListFromWebResource(webresource), theme, netResultList));
         }
         
         return prepareThemeResultMap(
-                netResultList, 
+                effectiveNetResultList, 
 //                hasSourceCodeWithDoctype, 
                 hasResultDetails);
     }
