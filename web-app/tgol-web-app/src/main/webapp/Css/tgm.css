@@ -1748,8 +1748,8 @@ input[type="text"]:focus{
     margin-left: 10px;
 }
 .process-remarks {
-    font-family: OpenSansSemibold;
-    font-size: 14px;
+/*    font-family: OpenSansSemibold;*/
+    font-size: 13px;
 }
 .process-remarks code {
     font-size: 12px;
@@ -1826,8 +1826,8 @@ input[type="text"]:focus{
     margin: 0.5em 0;
 }
 .test-result-detailed table {
-    width: 95%;
-    margin-left: 2em;
+    width: 98%;
+/*    margin-left: 2em;*/
 }
 .test-result-detailed table th, .test-result-detailed table td {
 /*    border-bottom: dotted 1px gray;*/
@@ -1922,6 +1922,8 @@ input[type="text"]:focus{
 .evidence-elements-table td {
     border-top: none;
     border-bottom : #E6E6E6 solid 1px;
+    max-width: 350px;
+    word-wrap : break-word;
 }
 .evidence-elements-table tbody tr:nth-child(2n) td, 
 .evidence-elements-table tbody tr:nth-child(2n) th {
