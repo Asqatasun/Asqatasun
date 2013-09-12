@@ -20,9 +20,10 @@
 package org.opens.tanaguru.rules.accessiweb22;
 
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleDefaultImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
@@ -42,7 +43,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.LANG_ATTRIBUT
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-8-3-1"> 8.3.1 rule specification</a>
  *
  */
-public class Aw22Rule08031 extends AbstractPageRuleDefaultImplementation {
+public class Aw22Rule08031 extends AbstractPageRuleMarkupImplementation {
 
     /** the elements with a lang attribute */
     private ElementHandler elementWithLang = new ElementHandlerImpl();
@@ -57,7 +58,7 @@ public class Aw22Rule08031 extends AbstractPageRuleDefaultImplementation {
     }
     
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
+    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
         ElementSelector selector = new SimpleElementSelector(HTML_WITH_LANG_CSS_LIKE_QUERY);
         selector.selectElements(sspHandler, elementHandler);
         if (!elementHandler.isEmpty()) {
@@ -107,7 +108,7 @@ public class Aw22Rule08031 extends AbstractPageRuleDefaultImplementation {
      * 
      * @param elementHandler 
      */
-    private void removeElementWithParentWithLangAttr(ElementHandler elementHandler) {
+    private void removeElementWithParentWithLangAttr(ElementHandler<Element> elementHandler) {
         ElementHandler elementWithParentWithLang = new ElementHandlerImpl();
         for (Element el : elementHandler.get()) {
             if (isElementHasParentWithLang(el)) {

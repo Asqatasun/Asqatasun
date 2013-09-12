@@ -92,7 +92,7 @@ public class Aw22Rule05051 extends AbstractMarkerPageRuleImplementation {
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
+    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
         super.select(sspHandler, elementHandler);
         // once tables selected, we extract the caption child element of each 
         // to make the control

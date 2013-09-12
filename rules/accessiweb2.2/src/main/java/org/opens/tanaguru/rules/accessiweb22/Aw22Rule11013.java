@@ -23,7 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleDefaultImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
@@ -44,10 +44,10 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.INVALID_LABEL
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-11-1-3"> 11.1.3 rule specification</a>
  *
  */
-public class Aw22Rule11013 extends AbstractPageRuleDefaultImplementation {
+public class Aw22Rule11013 extends AbstractPageRuleMarkupImplementation {
 
     /** The explicit label elements */
-    private ElementHandler explicitLabelElements = new ElementHandlerImpl();
+    private ElementHandler<Element> explicitLabelElements = new ElementHandlerImpl();
 
     /**
      * Default constructor
@@ -73,7 +73,7 @@ public class Aw22Rule11013 extends AbstractPageRuleDefaultImplementation {
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler elementHandler, 
+            ElementHandler<Element> elementHandler, 
             TestSolutionHandler testSolutionHandler) {
         super.check(sspHandler, elementHandler, testSolutionHandler);
         

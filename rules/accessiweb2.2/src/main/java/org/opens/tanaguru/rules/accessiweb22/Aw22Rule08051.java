@@ -43,10 +43,10 @@ public class Aw22Rule08051 extends AbstractPageRuleWithSelectorAndCheckerImpleme
                 new SimpleElementSelector(TITLE_WITHIN_HEAD_CSS_LIKE_QUERY), 
                 
                 new ElementPresenceChecker(
-                    true, 
-                    TestSolution.PASSED, 
-                    TestSolution.FAILED, 
-                    null, 
+                    true,
+                    TestSolution.PASSED,
+                    TestSolution.FAILED,
+                    null,
                     TITLE_TAG_MISSING_MSG)
             );
     }

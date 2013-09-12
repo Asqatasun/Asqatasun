@@ -101,7 +101,7 @@ public class Aw22Rule05081 extends AbstractMarkerPageRuleImplementation {
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
+    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
         super.select(sspHandler, elementHandler);
         
         if (elementHandler.isEmpty() && getSelectionWithMarkerHandler().isEmpty()) {
@@ -125,7 +125,7 @@ public class Aw22Rule05081 extends AbstractMarkerPageRuleImplementation {
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler elementHandler, 
+            ElementHandler<Element> elementHandler, 
             TestSolutionHandler testSolutionHandler) {
         super.check(sspHandler, elementHandler, testSolutionHandler);
         ElementChecker ec;
@@ -168,7 +168,7 @@ public class Aw22Rule05081 extends AbstractMarkerPageRuleImplementation {
      * @param elementHandlerWithoutDataTableMarkup
      */
     private void extractTableWithDataTableMarkup(
-                ElementHandler elementHandler, 
+                ElementHandler<Element> elementHandler, 
                 ElementHandler elementHandlerWithoutDataTableMarkup) {
         
         Elements elementsWithMarkup = new Elements();

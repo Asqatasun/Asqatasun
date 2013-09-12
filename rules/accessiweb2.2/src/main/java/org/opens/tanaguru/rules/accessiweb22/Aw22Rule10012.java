@@ -24,18 +24,18 @@ import java.util.Map;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Nomenclature;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleDefaultImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
 import org.opens.tanaguru.rules.elementchecker.element.ElementWithAttributePresenceChecker;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_ATTR_DETECTED_MSG;
-import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.ELEMENT_WITH_WITDH_ATTR_NOT_IMG;
-import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.ELEMENT_WITH_HEIGHT_ATTR_NOT_IMG;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.WIDTH_ATTR;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.HEIGHT_ATTR;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.WIDTH_ATTR;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.ELEMENT_WITH_HEIGHT_ATTR_NOT_IMG;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.ELEMENT_WITH_WITDH_ATTR_NOT_IMG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_ATTR_DETECTED_MSG;
 import org.opens.tanaguru.rules.utils.CssLikeSelectorBuilder;
 
 /**
@@ -45,7 +45,7 @@ import org.opens.tanaguru.rules.utils.CssLikeSelectorBuilder;
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-10-1-1"> 10.1.2 rule specification</a>
  *
  */
-public class Aw22Rule10012 extends AbstractPageRuleDefaultImplementation {
+public class Aw22Rule10012 extends AbstractPageRuleMarkupImplementation {
 
     private static final String PRESENTATION_ATTR_NOM = "DeprecatedRepresentationAttributes";
     

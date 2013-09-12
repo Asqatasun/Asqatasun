@@ -21,7 +21,7 @@ package org.opens.tanaguru.rules.accessiweb22;
 
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleDefaultImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
@@ -41,7 +41,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.ID_NOT_UNIQUE
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-11-1-2"> 11.1.2 rule specification</a>
  *
  */
-public class Aw22Rule11012 extends AbstractPageRuleDefaultImplementation {
+public class Aw22Rule11012 extends AbstractPageRuleMarkupImplementation {
 
     /**
      * Default constructor
