@@ -21,7 +21,6 @@ package org.opens.tanaguru.rules.accessiweb22;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;

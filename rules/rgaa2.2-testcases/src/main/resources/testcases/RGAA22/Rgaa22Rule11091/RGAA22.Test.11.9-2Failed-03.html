@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>rgaa22 Test.11091 Failed 02</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>rgaa22 Test.11091 Failed 03</h1>
+
+            <div class="test-detail">
+                Pertinence du titre du tableau de données
+            </div>
+            
+            <div class="testcase">
+                <table class="class-data-table">
+                    <caption>!:;,--><--  </caption>
+                </table>
+                <table class="class-data-table">
+                    <caption>Caption of data table</caption>
+                </table>
+                <table>
+                    <caption> </caption>
+                </table>
+                <table>
+                    <caption>Caption of unidentified table </caption>
+                </table>
+            </div>    
+            
+            <div class="test-explanation">
+                Failed : 4 Tables are found on the page :
+                <ul>
+                    <li>
+                        The first is identified as data table by marker usage 
+                        and has not pertinent caption
+                    </li>
+                    <li>
+                        The second is identified as data table by marker usage 
+                        but the pertinence of its caption cannot be deduced
+                    </li>
+                    <li>
+                        The third is not identified as data table but its caption
+                        is not pertinent
+                    </li>
+                    <li>
+                        The fourth is not identified as data table and the
+                        its caption cannot be deduced
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

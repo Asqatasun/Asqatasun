@@ -21,6 +21,7 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
+import static junit.framework.Assert.assertEquals;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
 
@@ -43,51 +44,48 @@ public class Aw22Rule08061Test extends Aw22RuleImplementationTestCase {
     @Override
     protected void setUpWebResourceMap() {
         getWebResourceMap().put("AW22.Test.8.6.1-2Failed-01",
+              getWebResourceFactory().createPage(
+              getTestcasesFilePath() + "AW22/Aw22Rule08061/AW22.Test.8.6.1-2Failed-01.html"));
+        getWebResourceMap().put("AW22.Test.8.6.1-2Failed-02",
+              getWebResourceFactory().createPage(
+              getTestcasesFilePath() + "AW22/Aw22Rule08061/AW22.Test.8.6.1-2Failed-02.html"));
+        getWebResourceMap().put("AW22.Test.8.6.1-2Failed-03",
+              getWebResourceFactory().createPage(
+              getTestcasesFilePath() + "AW22/Aw22Rule08061/AW22.Test.8.6.1-2Failed-03.html"));
+        getWebResourceMap().put("AW22.Test.8.6.1-3NMI-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule08061/AW22.Test.8.6.1-2Failed-01.html"));
-
-//        getWebResourceMap().put("AW22.Test.8.6.1-2Failed-02",
-//                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "AW22/Aw22Rule08061/AW22.Test.8.6.1-2Failed-02.html"));
-//
-//        getWebResourceMap().put("AW22.Test.8.6.1-2Failed-03",
-//                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "AW22/Aw22Rule08061/AW22.Test.8.6.1-2Failed-03.html"));
-//
-//        getWebResourceMap().put("AW22.Test.8.6.1-3NMI-01",
-//                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "AW22/Aw22Rule08061/AW22.Test.8.6.1-3NMI-01.html"));
-//
-//        getWebResourceMap().put("AW22.Test.8.6.1-4NA-01",
-//                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "AW22/Aw22Rule08061/AW22.Test.8.6.1-4NA-01.html"));
+                getTestcasesFilePath() + "AW22/Aw22Rule08061/AW22.Test.8.6.1-3NMI-01.html"));
+        getWebResourceMap().put("AW22.Test.8.6.1-4NA-01",
+              getWebResourceFactory().createPage(
+              getTestcasesFilePath() + "AW22/Aw22Rule08061/AW22.Test.8.6.1-4NA-01.html"));
     }
 
     @Override
     protected void setProcess() {
-        assertEquals(TestSolution.NOT_TESTED,
+        assertEquals(TestSolution.FAILED,   
                 processPageTest("AW22.Test.8.6.1-2Failed-01").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                processPageTest("AW22.Test.8.6.1-2Failed-02").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                processPageTest("AW22.Test.8.6.1-2Failed-03").getValue());
-//        assertEquals(TestSolution.NEED_MORE_INFO,
-//                processPageTest("AW22.Test.8.6.1-3NMI-01").getValue());
-//        assertEquals(TestSolution.NOT_APPLICABLE,
-//                processPageTest("AW22.Test.8.6.1-4NA-01").getValue());
+        assertEquals(TestSolution.FAILED,   
+                processPageTest("AW22.Test.8.6.1-2Failed-02").getValue());
+        assertEquals(TestSolution.FAILED,   
+                processPageTest("AW22.Test.8.6.1-2Failed-03").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                processPageTest("AW22.Test.8.6.1-3NMI-01").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                processPageTest("AW22.Test.8.6.1-4NA-01").getValue());
     }
 
     @Override
     protected void setConsolidate() {
-        assertEquals(TestSolution.NOT_TESTED,
+        assertEquals(TestSolution.FAILED,
                 consolidate("AW22.Test.8.6.1-2Failed-01").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                consolidate("AW22.Test.8.6.1-2Failed-02").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                consolidate("AW22.Test.8.6.1-2Failed-03").getValue());
-//        assertEquals(TestSolution.NEED_MORE_INFO,
-//                consolidate("AW22.Test.8.6.1-3NMI-01").getValue());
-//        assertEquals(TestSolution.NOT_APPLICABLE,
-//                consolidate("AW22.Test.8.6.1-4NA-01").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.8.6.1-2Failed-02").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.8.6.1-2Failed-03").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.8.6.1-3NMI-01").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.8.6.1-4NA-01").getValue());
     }
+
 }

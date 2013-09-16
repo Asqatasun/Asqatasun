@@ -20,7 +20,18 @@
 
 package org.opens.tanaguru.rules.rgaa22;
 
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
 import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.rules.elementchecker.element.ChildElementPresenceChecker;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import org.opens.tanaguru.rules.keystore.HtmlElementStore;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TABLE_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
+import static org.opens.tanaguru.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CAPTION_MISSING_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_TABLE_WITHOUT_CAPTION_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_TABLE_WITH_CAPTION_MSG;
 
 /**
  * Implementation of the rule 11.7 of the referential RGAA 2.2.
@@ -30,13 +41,49 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule11071 extends AbstractNotTestedRuleImplementation {
+public class Rgaa22Rule11071 extends AbstractMarkerPageRuleImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa22Rule11071 () {
-        super();
+        super(
+                new SimpleElementSelector(TABLE_ELEMENT), 
+
+                // the data tables are part of the scope
+                DATA_TABLE_MARKER,
+
+                // the presentation tables are not part of the scope
+                PRESENTATION_TABLE_MARKER,
+
+                // checker for elements identified by marker
+                new ChildElementPresenceChecker(
+                    HtmlElementStore.CAPTION_ELEMENT, 
+                    // the child element is supposed to appear at least once
+                    Integer.valueOf(1),
+                    // passed when child element is found
+                    TestSolution.PASSED, 
+                    // failed when child element is not found
+                    TestSolution.FAILED, 
+                    // no message created when child element is found
+                    null, 
+                    // message associated with element when child element is not found
+                    CAPTION_MISSING_MSG),
+                
+                // checker for elements not identified by marker
+                new ChildElementPresenceChecker(
+                    HtmlElementStore.CAPTION_ELEMENT, 
+                    // the child element is supposed to appear at least once
+                    Integer.valueOf(1),
+                    // nmi when attribute is found
+                    TestSolution.NEED_MORE_INFO, 
+                    // nmi when attribute is not found
+                    TestSolution.NEED_MORE_INFO, 
+                    // message associated with element when child element is found
+                    CHECK_NATURE_OF_TABLE_WITH_CAPTION_MSG, 
+                    // message associated with element when child element is not found
+                    CHECK_NATURE_OF_TABLE_WITHOUT_CAPTION_MSG)
+            );
     }
 
 }

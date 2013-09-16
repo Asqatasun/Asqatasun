@@ -20,7 +20,15 @@
 
 package org.opens.tanaguru.rules.rgaa22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TABLE_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
+import static org.opens.tanaguru.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_LINEARISED_CONTENT_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_TABLE_AND_LINEARISED_CONTENT_MSG;
 
 /**
  * Implementation of the rule 11.6 of the referential RGAA 2.2.
@@ -30,13 +38,41 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule11061 extends AbstractNotTestedRuleImplementation {
+public class Rgaa22Rule11061 extends AbstractMarkerPageRuleImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa22Rule11061 () {
-        super();
+        super(
+                new SimpleElementSelector(TABLE_ELEMENT),
+
+                // the presentation tables are part of the scope
+                PRESENTATION_TABLE_MARKER,
+                
+                // the data tables are not part of the scope
+                DATA_TABLE_MARKER,
+
+                // checker for elements identified by marker
+                new ElementPresenceChecker(
+                    // nmi when element is found
+                    TestSolution.NEED_MORE_INFO, 
+                    // na when element is not found
+                    TestSolution.NOT_APPLICABLE, 
+                    // message associated with each found element
+                    CHECK_LINEARISED_CONTENT_MSG, 
+                    null),
+                
+                // checker for elements not identified by marker
+                new ElementPresenceChecker(
+                    // nmi when element is found
+                    TestSolution.NEED_MORE_INFO, 
+                    // na when element is not found
+                    TestSolution.NOT_APPLICABLE, 
+                    CHECK_NATURE_OF_TABLE_AND_LINEARISED_CONTENT_MSG,
+                    // message associated with each found element
+                    null)
+            );
     }
 
 }
