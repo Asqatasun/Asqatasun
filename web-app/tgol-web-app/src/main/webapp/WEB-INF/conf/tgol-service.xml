@@ -9,7 +9,6 @@
             <list>
                 <value>file:///etc/tgol/tgol.conf</value>
                 <value>file:///etc/tgol/google-code.properties</value>
-                <value>file:///etc/tgol/language-detection.conf</value>
                 <value>file:///etc/tgol/sign-up-mail.properties</value>
                 <value>file:///etc/tgol/ESAPI.properties</value>
             </list>
