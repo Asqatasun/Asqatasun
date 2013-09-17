@@ -152,6 +152,7 @@
             <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/sql-management</directory>
             <includes>
                 <include>tg-set-user-admin.sh</include>
+                <include>tg-create-user.sh</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install/web-app/sql-management</outputDirectory>
