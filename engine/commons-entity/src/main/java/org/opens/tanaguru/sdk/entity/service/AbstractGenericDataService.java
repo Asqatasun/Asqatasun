@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -23,7 +23,6 @@ package org.opens.tanaguru.sdk.entity.service;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Set;
 import org.opens.tanaguru.sdk.entity.Entity;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
@@ -79,7 +78,7 @@ public abstract class AbstractGenericDataService<E extends Entity, K extends Ser
     }
 
     @Override
-    public void delete(Set<E> entitySet) {
+    public void delete(Collection<E> entitySet) {
         entityDao.delete(entitySet);
     }
 
@@ -115,7 +114,7 @@ public abstract class AbstractGenericDataService<E extends Entity, K extends Ser
      * @return
      */
     @Override
-    public Set<E> saveOrUpdate(Set<E> entitySet) {
+    public Collection<E> saveOrUpdate(Collection<E> entitySet) {
         return entityDao.saveOrUpdate(entitySet);
     }
 

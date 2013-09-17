@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2013  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -159,7 +159,7 @@ public class MockContentDataService implements ContentDataService {
     }
 
     @Override
-    public void delete(Set<Content> entitySet) {
+    public void delete(Collection<Content> entitySet) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -182,7 +182,7 @@ public class MockContentDataService implements ContentDataService {
     }
 
     @Override
-    public Set<Content> saveOrUpdate(Set<Content> entitySet) {
+    public Collection<Content> saveOrUpdate(Collection<Content> entitySet) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

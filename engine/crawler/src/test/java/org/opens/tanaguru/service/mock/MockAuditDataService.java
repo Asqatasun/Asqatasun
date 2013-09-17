@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2013  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -25,7 +25,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
@@ -78,7 +77,7 @@ public class MockAuditDataService implements AuditDataService {
     }
 
     @Override
-    public void delete(Set<Audit> entitySet) {
+    public void delete(Collection<Audit> entitySet) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -101,7 +100,7 @@ public class MockAuditDataService implements AuditDataService {
     }
 
     @Override
-    public Set<Audit> saveOrUpdate(Set<Audit> entitySet) {
+    public Collection<Audit> saveOrUpdate(Collection<Audit> entitySet) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

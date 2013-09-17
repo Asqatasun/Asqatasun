@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2013  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -22,7 +22,10 @@
 
 package org.opens.tanaguru.service.mock;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.*;
@@ -95,7 +98,7 @@ public class MockWebResourceDataService implements WebResourceDataService{
     }
 
     @Override
-    public void delete(Set<WebResource> entitySet) {
+    public void delete(Collection<WebResource> entitySet) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -118,7 +121,7 @@ public class MockWebResourceDataService implements WebResourceDataService{
     }
 
     @Override
-    public Set<WebResource> saveOrUpdate(Set<WebResource> entitySet) {
+    public Collection<WebResource> saveOrUpdate(Collection<WebResource> entitySet) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

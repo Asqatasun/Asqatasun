@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -22,10 +22,9 @@
 package org.opens.tanaguru.sdk.entity.dao.jpa;
 
 import java.io.Serializable;
-
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -84,7 +83,7 @@ public abstract class AbstractJPADAO<E extends Entity, K extends Serializable>
     }
 
     @Override
-    public void delete(Set<E> entitySet) {
+    public void delete(Collection<E> entitySet) {
         for (E entity : entitySet) {
             delete(entity);
         }
@@ -120,8 +119,8 @@ public abstract class AbstractJPADAO<E extends Entity, K extends Serializable>
     }
 
     @Override
-    public Set<E> saveOrUpdate(Set<E> entitySet) {
-        Set<E> resultSet = new HashSet<E>();
+    public Collection<E> saveOrUpdate(Collection<E> entitySet) {
+        Collection<E> resultSet = new HashSet<E>();
         for (E entity : entitySet) {
             resultSet.add(saveOrUpdate(entity));
         }
