@@ -119,10 +119,8 @@ public class TextElementBelongsToBlackListChecker extends NomenclatureBasedEleme
             String blackListNomName,
             TestSolution detectedSolution,
             String textBelongsToBlackListMessageCode) {
-        super();
-        this.blackListNomName = blackListNomName;
+        this(blackListNomName,textBelongsToBlackListMessageCode);
         this.detectedSolution = detectedSolution;
-        this.textBelongsToBlackListMessageCode = textBelongsToBlackListMessageCode;
     }
     
     /**
@@ -137,10 +135,8 @@ public class TextElementBelongsToBlackListChecker extends NomenclatureBasedEleme
             TestSolution detectedSolution,
             String textBelongsToBlackListMessageCode,
             String... eeAttributeNameList) {
-        super(eeAttributeNameList);
-        this.blackListNomName = blackListNomName;
+        this(blackListNomName,textBelongsToBlackListMessageCode,eeAttributeNameList);
         this.detectedSolution = detectedSolution;
-        this.textBelongsToBlackListMessageCode = textBelongsToBlackListMessageCode;
     }
 
     @Override

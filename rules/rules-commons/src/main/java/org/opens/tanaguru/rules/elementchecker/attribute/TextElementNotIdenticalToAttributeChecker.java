@@ -96,11 +96,8 @@ public class TextElementNotIdenticalToAttributeChecker extends ElementCheckerImp
             String attributeNameToCompareWith, 
             TestSolution detectedSolution,
             String textElementIdenticalToAttributeValueMessageCode) {
-        super();
-        this.attributeNameToCompareWith = attributeNameToCompareWith;
+        this(attributeNameToCompareWith,textElementIdenticalToAttributeValueMessageCode);
         this.detectedSolution = detectedSolution;
-        this.textElementIdenticalToAttributeValueMessageCode = 
-                textElementIdenticalToAttributeValueMessageCode;
     }
     
     /**
@@ -115,11 +112,8 @@ public class TextElementNotIdenticalToAttributeChecker extends ElementCheckerImp
             TestSolution detectedSolution,
             String textElementIdenticalToAttributeValueMessageCode, 
             String... eeAttributeNameList) {
-        super(eeAttributeNameList);
-        this.attributeNameToCompareWith = attributeNameToCompareWith;
+        this(attributeNameToCompareWith, textElementIdenticalToAttributeValueMessageCode, eeAttributeNameList);
         this.detectedSolution = detectedSolution;
-        this.textElementIdenticalToAttributeValueMessageCode = 
-                textElementIdenticalToAttributeValueMessageCode;
     }
     
     @Override

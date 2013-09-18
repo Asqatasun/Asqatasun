@@ -22,6 +22,8 @@
 
 package org.opens.tanaguru.rules.elementchecker.attribute;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -45,9 +47,9 @@ public class AttributeEmptinessChecker extends TextEmptinessChecker {
      * @param messageCodeOnAttrNotDetected
      */
     public AttributeEmptinessChecker(
-            String attributeName, 
-            String messageCodeOnAttrEmpty, 
-            String messageCodeOnAttrNotEmpty) {
+            @Nonnull String attributeName, 
+            @Nullable String messageCodeOnAttrEmpty, 
+            @Nullable String messageCodeOnAttrNotEmpty) {
         super(messageCodeOnAttrEmpty, messageCodeOnAttrNotEmpty);
         this.attributeName = attributeName;
     }
@@ -61,9 +63,9 @@ public class AttributeEmptinessChecker extends TextEmptinessChecker {
      * @param eeAttributeNameList 
      */
     public AttributeEmptinessChecker(
-            String attributeName, 
-            String messageCodeOnAttrEmpty, 
-            String messageCodeOnAttrNotEmpty, 
+            @Nonnull String attributeName, 
+            @Nullable String messageCodeOnAttrEmpty, 
+            @Nullable String messageCodeOnAttrNotEmpty, 
             String... eeAttributeNameList) {
         super(messageCodeOnAttrEmpty, messageCodeOnAttrNotEmpty, eeAttributeNameList);
         this.attributeName = attributeName;
@@ -79,11 +81,11 @@ public class AttributeEmptinessChecker extends TextEmptinessChecker {
      * @param messageCodeOnAttrNotDetected
      */
     public AttributeEmptinessChecker(
-            String attributeName, 
-            TestSolution attrEmptySolution,
-            TestSolution attrNotEmptySolution,
-            String messageCodeOnAttrEmpty, 
-            String messageCodeOnAttrNotEmpty) {
+            @Nonnull String attributeName, 
+            @Nonnull TestSolution attrEmptySolution,
+            @Nonnull TestSolution attrNotEmptySolution,
+            @Nullable String messageCodeOnAttrEmpty, 
+            @Nullable String messageCodeOnAttrNotEmpty) {
         super(
                 attrEmptySolution,
                 attrNotEmptySolution,
@@ -103,11 +105,11 @@ public class AttributeEmptinessChecker extends TextEmptinessChecker {
      * @param eeAttributeNameList 
      */
     public AttributeEmptinessChecker(
-            String attributeName, 
-            TestSolution attrEmptySolution,
-            TestSolution attrNotEmptySolution,
-            String messageCodeOnAttrEmpty, 
-            String messageCodeOnAttrNotEmpty, 
+            @Nonnull String attributeName, 
+            @Nonnull TestSolution attrEmptySolution,
+            @Nonnull TestSolution attrNotEmptySolution,
+            @Nullable String messageCodeOnAttrEmpty, 
+            @Nullable String messageCodeOnAttrNotEmpty, 
             String... eeAttributeNameList) {
         super(
                 attrEmptySolution,
