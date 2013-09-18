@@ -22,6 +22,7 @@
 package org.opens.tanaguru.service.command;
 
 import org.easymock.EasyMock;
+import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.service.CrawlerService;
 import org.opens.tanaguru.util.FileNaming;
@@ -55,7 +56,7 @@ public class PageAuditCrawlerCommandImplTest extends AuditCommandTestCase {
     public void testCallCrawlerService() {
         System.out.println("callCrawlerService");
 
-        this.mockInitialisationCalls(true);
+        mockInitialisationCalls(true, AuditStatus.CRAWLING);
         
         mockCrawlerService = EasyMock.createMock(CrawlerService.class);
         EasyMock.expect(mockCrawlerService.crawlPage(mockAudit, FileNaming.addProtocolToUrl(pageUrl))).
@@ -65,23 +66,26 @@ public class PageAuditCrawlerCommandImplTest extends AuditCommandTestCase {
         
         PageAuditCrawlerCommandImpl pageAuditCommand = new PageAuditCrawlerCommandImpl(
                 pageUrl, 
-                null, 
-                mockAuditDataService, 
-                mockTestDataService, 
-                mockParameterDataService, 
-                mockWebResourceDataService, 
-                mockContentDataService, 
-                mockProcessResultDataService, 
-                mockCrawlerService, 
-                mockContentAdapterService, 
-                mockProcessorService, 
-                mockConsolidatorService, 
-                mockAnalyserService, 
-                mockAdaptationListener,
-                5,
-                5,
-                5,
-                5);
+                null);
+        pageAuditCommand.setAuditDataService(mockAuditDataService);
+        pageAuditCommand.setTestDataService(mockTestDataService);
+        pageAuditCommand.setParameterDataService(mockParameterDataService);
+        pageAuditCommand.setWebResourceDataService(mockWebResourceDataService);
+        pageAuditCommand.setContentDataService(mockContentDataService);
+        pageAuditCommand.setProcessResultDataService(mockProcessResultDataService);
+        pageAuditCommand.setPreProcessResultDataService(mockPreProcessResultDataService);
+        pageAuditCommand.setContentAdapterService(mockContentAdapterService);
+        pageAuditCommand.setProcessorService(mockProcessorService);
+        pageAuditCommand.setConsolidatorService(mockConsolidatorService);
+        pageAuditCommand.setAnalyserService(mockAnalyserService);
+        pageAuditCommand.setAdaptationListener(mockAdaptationListener);
+        pageAuditCommand.setCrawlerService(mockCrawlerService);
+        pageAuditCommand.setAdaptationTreatmentWindow(5);
+        pageAuditCommand.setProcessingTreatmentWindow(5);
+        pageAuditCommand.setConsolidationTreatmentWindow(5);
+        pageAuditCommand.setAnalyseTreatmentWindow(5);
+        
+        pageAuditCommand.init();
         
         pageAuditCommand.callCrawlerService();
         

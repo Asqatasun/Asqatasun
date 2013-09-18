@@ -50,6 +50,10 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             "INSERT IGNORE INTO CONTENT_RELATIONSHIP (Id_Content_Parent, Id_Content_Child) values ";
     private static final String DELETE_CONTENT_RELATIONSHIP_QUERY =
             "DELETE FROM CONTENT_RELATIONSHIP WHERE Id_Content_Child=:idContentChild ";
+    private static final String DELETE_RELATED_CONTENT_QUERY =
+            "DELETE FROM CONTENT WHERE "
+            + "Id_Content in (SELECT Id_Content_Child FROM CONTENT_RELATIONSHIP WHERE Id_Content_Parent=:idContent) "
+            + "AND DTYPE not like \'SSPImpl\'";
     private static final String UPDATE_QUERY =
             "UPDATE CONTENT SET Id_Audit=:idAudit WHERE Id_Content=:idContent ";
     private static final String SELECT_SSP_QUERY =
@@ -535,6 +539,17 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
     public void deleteContentRelationShip(Long relatedContentId) {
         Query query = entityManager.createNativeQuery(DELETE_CONTENT_RELATIONSHIP_QUERY);
         query.setParameter("idContentChild", relatedContentId);
+        try {
+            query.executeUpdate();
+        } catch (NoResultException nre) {
+            // do nothing
+        }
+    }
+    
+    @Override
+    public void deleteRelatedContentFromContent(Content content) {
+        Query query = entityManager.createNativeQuery(DELETE_RELATED_CONTENT_QUERY);
+        query.setParameter("idContent", content.getId());
         try {
             query.executeUpdate();
         } catch (NoResultException nre) {

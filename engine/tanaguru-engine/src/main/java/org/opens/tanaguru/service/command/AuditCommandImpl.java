@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2013  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -34,6 +34,7 @@ import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
+import org.opens.tanaguru.entity.service.audit.PreProcessResultDataService;
 import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
@@ -104,30 +105,56 @@ public abstract class AuditCommandImpl implements AuditCommand {
     public AuditDataService getAuditDataService() {
         return auditDataService;
     }
+    public void setAuditDataService(AuditDataService auditDataService) {
+        this.auditDataService = auditDataService;
+    }
 
-    private TestDataService testDataService;    
+    private TestDataService testDataService;
     public TestDataService getTestDataService() {
         return testDataService;
+    }
+    public void setTestDataService(TestDataService testDataService) {
+        this.testDataService = testDataService;
     }
     
     private ParameterDataService parameterDataService;
     public ParameterDataService getParameterDataService() {
         return parameterDataService;
     }
+    public void setParameterDataService(ParameterDataService parameterDataService) {
+        this.parameterDataService = parameterDataService;
+    }
     
     private WebResourceDataService webResourceDataService;
     public WebResourceDataService getWebResourceDataService() {
         return webResourceDataService;
+    }
+    public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
+        this.webResourceDataService = webResourceDataService;
     }
     
     private ContentDataService contentDataService;
     public ContentDataService getContentDataService() {
         return contentDataService;
     }
+    public void setContentDataService(ContentDataService contentDataService) {
+        this.contentDataService = contentDataService;
+    }
     
     private ProcessResultDataService processResultDataService;
     public ProcessResultDataService getProcessResultDataService() {
         return processResultDataService;
+    }
+    public void setProcessResultDataService(ProcessResultDataService processResultDataService) {
+        this.processResultDataService = processResultDataService;
+    }
+    
+    private PreProcessResultDataService preProcessResultDataService;
+    public PreProcessResultDataService getPreProcessResultDataService() {
+        return preProcessResultDataService;
+    }
+    public void setPreProcessResultDataService(PreProcessResultDataService preProcessResultDataService) {
+        this.preProcessResultDataService = preProcessResultDataService;
     }
     
     // The services
@@ -136,21 +163,33 @@ public abstract class AuditCommandImpl implements AuditCommand {
     public ContentAdapterService getContentAdapterService() {
         return contentAdapterService;
     }
+    public void setContentAdapterService(ContentAdapterService contentAdapterService) {
+        this.contentAdapterService = contentAdapterService;
+    }
 
     private ProcessorService processorService;
     public ProcessorService getProcessorService() {
         return processorService;
+    }
+    public void setProcessorService(ProcessorService processorService) {
+        this.processorService = processorService;
     }
     
     private ConsolidatorService consolidatorService;
     public ConsolidatorService getConsolidatorService() {
         return consolidatorService;
     }
+    public void setConsolidatorService(ConsolidatorService consolidatorService) {
+        this.consolidatorService = consolidatorService;
+    }
     
     private AnalyserService analyserService;
     public AnalyserService getAnalyserService() {
         return analyserService;
     }
+    public void setAnalyserService(AnalyserService analyserService) {
+        this.analyserService = analyserService;
+    }    
 
     // The listeners
     
@@ -158,53 +197,26 @@ public abstract class AuditCommandImpl implements AuditCommand {
     public AdaptationListener getAdaptationListener() {
         return adaptationListener;
     }
+    public void setAdaptationListener(AdaptationListener adaptationListener) {
+        this.adaptationListener = adaptationListener;
+    }
     
+    // the options
+    private boolean cleanUpRelatedContent = true;
+    public void setCleanUpRelatedContent(boolean cleanUpRelatedContent) {
+        this.cleanUpRelatedContent = cleanUpRelatedContent;
+    }
+    /**
+     * The audit parameters
+     */
+    private Set<Parameter> paramSet;
+
     /**
      * 
-     * @param paramSet
-     * @param auditDataService
-     * @param testDataService
-     * @param parameterDataService
-     * @param webResourceDataService
-     * @param contentList
-     * @param processResultDataService
-     * @param contentAdapterService
-     * @param processorService
-     * @param consolidatorService
-     * @param analyserService
-     * @param adaptationListener 
+     * @param paramSet 
      */
-    public AuditCommandImpl(
-            Set<Parameter> paramSet,
-            AuditDataService auditDataService, 
-            TestDataService testDataService, 
-            ParameterDataService parameterDataService,
-            WebResourceDataService webResourceDataService,
-            ContentDataService contentDataService, 
-            ProcessResultDataService processResultDataService, 
-            ContentAdapterService contentAdapterService, 
-            ProcessorService processorService, 
-            ConsolidatorService consolidatorService, 
-            AnalyserService analyserService, 
-            AdaptationListener adaptationListener, 
-            int adaptationTreatmentWindow,
-            int processingTreatmentWindow,
-            int consolidationTreatmentWindow,
-            int analysisTreatmentWindow) {
-        this.auditDataService = auditDataService;
-        this.testDataService = testDataService;
-        this.parameterDataService = parameterDataService;
-        this.webResourceDataService = webResourceDataService;
-        this.contentDataService = contentDataService;
-        this.processResultDataService = processResultDataService;
-        this.contentAdapterService = contentAdapterService;
-        this.processorService = processorService;
-        this.consolidatorService = consolidatorService;
-        this.analyserService = analyserService;
-        this.adaptationListener = adaptationListener;
-        this.adaptationTreatmentWindow = adaptationTreatmentWindow;
-        this.processingTreatmentWindow = processingTreatmentWindow;
-        initialiseAudit(paramSet);
+    public AuditCommandImpl(Set<Parameter> paramSet) {
+        this.paramSet = paramSet;
     }
     
     /**
@@ -212,7 +224,8 @@ public abstract class AuditCommandImpl implements AuditCommand {
      * @param paramSet
      * @return 
      */
-    private Audit initialiseAudit (Set<Parameter> paramSet) {
+    @Override
+    public void init() {
         // the paramSet has to be persisted
         parameterDataService.saveOrUpdate(paramSet);
         audit = auditDataService.create();
@@ -220,7 +233,6 @@ public abstract class AuditCommandImpl implements AuditCommand {
         audit.setParameterSet(paramSet);
         referential = extractReferentialFromParamSet(paramSet);
         setStatusToAudit(AuditStatus.INITIALISATION);
-        return audit;
     }
     
     @Override
@@ -794,6 +806,35 @@ public abstract class AuditCommandImpl implements AuditCommand {
             LOGGER.info(audit.getSubject().getURL() + " has been analysed");
         }
         setStatusToAudit(AuditStatus.COMPLETED);
+        if (cleanUpRelatedContent) {
+            cleanUpTestData(audit);
+        }
+    }
+    
+    /**
+     * 
+     * @param audit 
+     */
+    private void cleanUpTestData(Audit audit) {
+        Long i = Long.valueOf(0);
+        Long webResourceId = audit.getSubject().getId();
+        Long nbOfContent = contentDataService.getNumberOfSSPFromWebResource(audit.getSubject(), HttpStatus.SC_OK);
+        while (i.compareTo(nbOfContent) < 0) {
+            List<Content> contentList = retrieveContentList(
+                        webResourceId, 
+                        i, 
+                        processingTreatmentWindow, 
+                        Calendar.getInstance().getTime(), 
+                        true, 
+                        true);
+            for (Content content : contentList) {
+                if (content instanceof SSP) {
+                    contentDataService.deleteRelatedContentFromContent(content);
+                }
+            }
+            i = i + processingTreatmentWindow;
+        }
+        preProcessResultDataService.cleanUpAllPreProcessResultByAudit(audit);
     }
     
     /**

@@ -24,6 +24,7 @@ package org.opens.tanaguru.service.command;
 import java.util.ArrayList;
 import java.util.List;
 import org.easymock.EasyMock;
+import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.service.CrawlerService;
 
@@ -57,7 +58,7 @@ public class GroupOfPagesCrawlerAuditCommandImplTest extends AuditCommandTestCas
     public void testCallCrawlerService() {
         System.out.println("callCrawlerService");
 
-        this.mockInitialisationCalls(true);
+        mockInitialisationCalls(true, AuditStatus.CRAWLING);
         
         mockCrawlerService = EasyMock.createMock(CrawlerService.class);
         EasyMock.expect(mockCrawlerService.crawlGroupOfPages(mockAudit, siteUrl, urlList)).
@@ -69,24 +70,27 @@ public class GroupOfPagesCrawlerAuditCommandImplTest extends AuditCommandTestCas
                 new GroupOfPagesCrawlerAuditCommandImpl(
                     siteUrl, 
                     urlList,
-                    null, 
-                    mockAuditDataService, 
-                    mockTestDataService, 
-                    mockParameterDataService, 
-                    mockWebResourceDataService, 
-                    mockContentDataService, 
-                    mockProcessResultDataService, 
-                    mockCrawlerService, 
-                    mockContentAdapterService, 
-                    mockProcessorService, 
-                    mockConsolidatorService, 
-                    mockAnalyserService, 
-                    mockAdaptationListener,
-                    5,
-                    5,
-                    5,
-                    5);
+                    null);
+        groupOfPagesAuditCommand.setAuditDataService(mockAuditDataService);
+        groupOfPagesAuditCommand.setTestDataService(mockTestDataService);
+        groupOfPagesAuditCommand.setParameterDataService(mockParameterDataService);
+        groupOfPagesAuditCommand.setWebResourceDataService(mockWebResourceDataService);
+        groupOfPagesAuditCommand.setContentDataService(mockContentDataService);
+        groupOfPagesAuditCommand.setProcessResultDataService(mockProcessResultDataService);
+        groupOfPagesAuditCommand.setPreProcessResultDataService(mockPreProcessResultDataService);
+        groupOfPagesAuditCommand.setContentAdapterService(mockContentAdapterService);
+        groupOfPagesAuditCommand.setProcessorService(mockProcessorService);
+        groupOfPagesAuditCommand.setConsolidatorService(mockConsolidatorService);
+        groupOfPagesAuditCommand.setAnalyserService(mockAnalyserService);
+        groupOfPagesAuditCommand.setAdaptationListener(mockAdaptationListener);
+        groupOfPagesAuditCommand.setCrawlerService(mockCrawlerService);
+        groupOfPagesAuditCommand.setAdaptationTreatmentWindow(5);
+        groupOfPagesAuditCommand.setProcessingTreatmentWindow(5);
+        groupOfPagesAuditCommand.setConsolidationTreatmentWindow(5);
+        groupOfPagesAuditCommand.setAnalyseTreatmentWindow(5);
         
+        groupOfPagesAuditCommand.init();
+
         groupOfPagesAuditCommand.callCrawlerService();
         
         EasyMock.verify(mockCrawlerService);

@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2013  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -71,7 +71,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
     public void testSetGetAudit() {
         System.out.println("getAudit");
         
-        mockInitialisationCalls(true);
+        mockInitialisationCalls(true, null);
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
 
@@ -85,7 +85,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
     public void testGetAuditDataService() {
         System.out.println("getAuditDataService");
         
-        mockInitialisationCalls(true);
+        mockInitialisationCalls(true, null);
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
         
@@ -104,7 +104,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
     public void testGetTestDataService() {
         System.out.println("getTestDataService");
         
-        mockInitialisationCalls(true);
+        mockInitialisationCalls(true, null);
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
         
@@ -123,7 +123,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
     public void testGetParameterDataService() {
         System.out.println("getParameterDataService");
         
-        mockInitialisationCalls(true);
+        mockInitialisationCalls(true, null);
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
 
@@ -142,7 +142,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
     public void testGetWebResourceDataService() {
         System.out.println("getWebResourceDataService");
         
-        mockInitialisationCalls(true);
+        mockInitialisationCalls(true, null);
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
 
@@ -161,7 +161,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
     public void testGetContentDataService() {
         System.out.println("getContentDataService");
         
-        mockInitialisationCalls(true);
+        mockInitialisationCalls(true, null);
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
 
@@ -180,7 +180,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
     public void testGetProcessResultDataService() {
         System.out.println("getProcessResultDataService");
         
-        mockInitialisationCalls(true);
+        mockInitialisationCalls(true, null);
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
 
@@ -199,7 +199,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
     public void testGetContentAdapterService() {
         System.out.println("getContentAdapterService");
         
-        mockInitialisationCalls(true);
+        mockInitialisationCalls(true, null);
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
 
@@ -218,7 +218,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
     public void testGetProcessorService() {
         System.out.println("getProcessorService");
         
-        mockInitialisationCalls(true);
+        mockInitialisationCalls(true, null);
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
 
@@ -237,7 +237,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
     public void testGetConsolidatorService() {
         System.out.println("getConsolidatorService");
         
-        mockInitialisationCalls(true);
+        mockInitialisationCalls(true, null);
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
 
@@ -256,7 +256,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
     public void testGetAnalyserService() {
         System.out.println("getAnalyserService");
         
-        mockInitialisationCalls(true);
+        mockInitialisationCalls(true, null);
 
         AuditCommandImpl instance = new TestAuditCommandImpl();
 
@@ -275,7 +275,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
     public void testGetAdaptationListener() {
         System.out.println("getAdaptationListener");
         
-        mockInitialisationCalls(true);
+        mockInitialisationCalls(true, null);
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
 
@@ -294,7 +294,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
     public void testAdaptContent() {
         System.out.println("adaptContent");
         
-        mockInitialisationCalls(false);
+        mockInitialisationCalls(false, null);
 
         WebResource mockWr = createMock(WebResource.class);
         
@@ -418,29 +418,30 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
     public class TestAuditCommandImpl extends AuditCommandImpl {
 
         public TestAuditCommandImpl() {
-            super(
-                    null, 
-                    mockAuditDataService, 
-                    mockTestDataService, 
-                    mockParameterDataService, 
-                    mockWebResourceDataService, 
-                    mockContentDataService, 
-                    mockProcessResultDataService, 
-                    mockContentAdapterService, 
-                    mockProcessorService, 
-                    mockConsolidatorService, 
-                    mockAnalyserService, 
-                    mockAdaptationListener,
-                    25,
-                    25,
-                    1000,
-                    200);
+            super(null);
+            setAuditDataService(mockAuditDataService);
+            setTestDataService(mockTestDataService);
+            setParameterDataService(mockParameterDataService);
+            setWebResourceDataService(mockWebResourceDataService);
+            setContentDataService(mockContentDataService);
+            setProcessResultDataService(mockProcessResultDataService);
+            setPreProcessResultDataService(mockPreProcessResultDataService);
+            setContentAdapterService(mockContentAdapterService);
+            setProcessorService(mockProcessorService);
+            setConsolidatorService(mockConsolidatorService);
+            setAnalyserService(mockAnalyserService);
+            setAdaptationListener(mockAdaptationListener);
+            setAdaptationTreatmentWindow(25);
+            setProcessingTreatmentWindow(25);
+            setConsolidationTreatmentWindow(1000);
+            setAnalyseTreatmentWindow(200);
+            init();
         }
 
-        @Override
-        public void init() {
-            throw new UnsupportedOperationException("Not supported yet.");
-        }
+//        @Override
+//        public void init() {
+//            throw new UnsupportedOperationException("Not supported yet.");
+//        }
 
         @Override
         public void loadContent() {

@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2013  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -23,15 +23,7 @@
 package org.opens.tanaguru.service.command;
 
 import java.util.Set;
-import org.opens.tanaguru.contentadapter.AdaptationListener;
 import org.opens.tanaguru.entity.parameterization.Parameter;
-import org.opens.tanaguru.entity.service.audit.AuditDataService;
-import org.opens.tanaguru.entity.service.audit.ContentDataService;
-import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
-import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
-import org.opens.tanaguru.entity.service.reference.TestDataService;
-import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
-import org.opens.tanaguru.service.*;
 
 /**
  *
@@ -59,40 +51,8 @@ public class ScenarioAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
     public ScenarioAuditCommandImpl(
             String scenarioName,
             String scenario,
-            Set<Parameter> paramSet,
-            AuditDataService auditDataService, 
-            TestDataService testDataService, 
-            ParameterDataService parameterDataService,
-            WebResourceDataService webResourceDataService,
-            ContentDataService contentDataService, 
-            ProcessResultDataService processResultDataService, 
-            ScenarioLoaderService scenarioLoaderService, 
-            ContentAdapterService contentAdapterService, 
-            ProcessorService processorService, 
-            ConsolidatorService consolidatorService, 
-            AnalyserService analyserService, 
-            AdaptationListener adaptationListener,
-            int adaptationTreatmentWindow,
-            int processingTreatmentWindow,
-            int consolidationTreatmentWindow,
-            int analysisTreatmentWindow) {
-        super(paramSet, 
-              auditDataService, 
-              testDataService, 
-              parameterDataService, 
-              webResourceDataService, 
-              contentDataService, 
-              processResultDataService, 
-              scenarioLoaderService,
-              contentAdapterService, 
-              processorService, 
-              consolidatorService, 
-              analyserService, 
-              adaptationListener,
-              adaptationTreatmentWindow,
-              processingTreatmentWindow,
-              consolidationTreatmentWindow,
-              analysisTreatmentWindow);
+            Set<Parameter> paramSet) {
+        super(paramSet);
         setScenario(scenario);
         setScenarioName(scenarioName);
         setIsPage(false);

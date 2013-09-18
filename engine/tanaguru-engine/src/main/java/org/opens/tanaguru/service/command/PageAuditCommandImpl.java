@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2013  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -23,18 +23,10 @@
 package org.opens.tanaguru.service.command;
 
 import java.util.Set;
-import org.opens.tanaguru.contentadapter.AdaptationListener;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.parameterization.Parameter;
-import org.opens.tanaguru.entity.service.audit.AuditDataService;
-import org.opens.tanaguru.entity.service.audit.ContentDataService;
-import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
-import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
-import org.opens.tanaguru.entity.service.reference.TestDataService;
-import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.sebuilder.tools.ScenarioBuilder;
-import org.opens.tanaguru.service.*;
 import org.opens.tanaguru.util.FileNaming;
 import org.opens.tanaguru.util.http.HttpRequestHandler;
 
@@ -49,62 +41,18 @@ public class PageAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
     /**
      * 
      * @param pageUrl
-     * @param paramSet
-     * @param auditDataService
-     * @param testDataService
-     * @param parameterDataService
-     * @param webResourceDataService
-     * @param contentDataService
-     * @param processResultDataService
-     * @param contentAdapterService
-     * @param processorService
-     * @param consolidatorService
-     * @param analyserService
-     * @param adaptationListener
-     * @param crawlerService 
-     * @param crawlConfigFilePath
+     * @param paramSet 
      */
     public PageAuditCommandImpl(
             String pageUrl,
-            Set<Parameter> paramSet,
-            AuditDataService auditDataService, 
-            TestDataService testDataService, 
-            ParameterDataService parameterDataService,
-            WebResourceDataService webResourceDataService, 
-            ContentDataService contentDataService, 
-            ProcessResultDataService processResultDataService, 
-            ScenarioLoaderService scenarioLoaderService,
-            ContentAdapterService contentAdapterService, 
-            ProcessorService processorService, 
-            ConsolidatorService consolidatorService, 
-            AnalyserService analyserService, 
-            AdaptationListener adaptationListener,
-            int adaptationTreatmentWindow,
-            int processingTreatmentWindow,
-            int consolidationTreatmentWindow,
-            int analysisTreatmentWindow) {
-        super(paramSet, 
-              auditDataService, 
-              testDataService, 
-              parameterDataService, 
-              webResourceDataService, 
-              contentDataService, 
-              processResultDataService, 
-              scenarioLoaderService,
-              contentAdapterService, 
-              processorService, 
-              consolidatorService, 
-              analyserService, 
-              adaptationListener,
-              adaptationTreatmentWindow,
-              processingTreatmentWindow,
-              consolidationTreatmentWindow,
-              analysisTreatmentWindow);
+            Set<Parameter> paramSet) {
+        super(paramSet);
         this.pageUrl = FileNaming.addProtocolToUrl(pageUrl);
     }
 
     @Override
     public void init() {
+        super.init();
         if (HttpRequestHandler.getInstance().isUrlAccessible(pageUrl)) {
             setScenario(ScenarioBuilder.buildScenario(pageUrl));
             setScenarioName(pageUrl);

@@ -21,18 +21,13 @@
  */
 package org.opens.tanaguru.entity.service.audit;
 
-import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.entity.audit.Content;
-import org.opens.tanaguru.entity.audit.JavascriptContent;
-import org.opens.tanaguru.entity.audit.RelatedContent;
-import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.audit.StylesheetContent;
-import org.opens.tanaguru.entity.dao.audit.ContentDAO;
-import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import org.opens.tanaguru.entity.audit.*;
+import org.opens.tanaguru.entity.dao.audit.ContentDAO;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 
 /**
  * 
@@ -168,4 +163,10 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
     public void deleteContentRelationShip(Long relatedContentId) {
         ((ContentDAO) entityDao).deleteContentRelationShip(relatedContentId);
     }
+    
+    @Override
+    public void deleteRelatedContentFromContent(Content content) {
+        ((ContentDAO) entityDao).deleteRelatedContentFromContent(content);
+    }
+
 }

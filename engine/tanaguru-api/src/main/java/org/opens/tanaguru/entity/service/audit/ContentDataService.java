@@ -199,5 +199,11 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param relatedContentId
      */
     void deleteContentRelationShip(Long relatedContentId);
+    
+    /**
+     * 
+     * @param content 
+     */
+    void deleteRelatedContentFromContent(Content content);
 
 }

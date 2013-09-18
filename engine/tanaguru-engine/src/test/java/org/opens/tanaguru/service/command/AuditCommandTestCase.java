@@ -33,6 +33,7 @@ import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
+import org.opens.tanaguru.entity.service.audit.PreProcessResultDataService;
 import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
@@ -55,6 +56,7 @@ public abstract class AuditCommandTestCase extends TestCase{
     public WebResourceDataService mockWebResourceDataService;
     public ContentDataService mockContentDataService;
     public ProcessResultDataService mockProcessResultDataService;
+    public PreProcessResultDataService mockPreProcessResultDataService;
     public ContentAdapterService mockContentAdapterService;
     public ProcessorService mockProcessorService;
     public ConsolidatorService mockConsolidatorService;
@@ -74,6 +76,7 @@ public abstract class AuditCommandTestCase extends TestCase{
         mockWebResourceDataService = EasyMock.createMock(WebResourceDataService.class); 
         mockContentDataService = EasyMock.createMock(ContentDataService.class);
         mockProcessResultDataService = EasyMock.createMock(ProcessResultDataService.class);
+        mockPreProcessResultDataService = EasyMock.createMock(PreProcessResultDataService.class);
         mockContentAdapterService = EasyMock.createMock(ContentAdapterService.class);
         mockProcessorService = EasyMock.createMock(ProcessorService.class);
         mockConsolidatorService = EasyMock.createMock(ConsolidatorService.class);
@@ -81,7 +84,14 @@ public abstract class AuditCommandTestCase extends TestCase{
         mockAdaptationListener = EasyMock.createMock(AdaptationListener.class);
     }
     
-    protected void mockInitialisationCalls(boolean isMockInReplayMode) {
+    /**
+     * 
+     * @param isMockInReplayMode
+     * @param expectedAuditStatus 
+     */
+    protected void mockInitialisationCalls(
+            boolean isMockInReplayMode,
+            AuditStatus expectedAuditStatus) {
         Set<Parameter> nullParameterSet = null ;
         EasyMock.expect(mockParameterDataService.saveOrUpdate(nullParameterSet)).andReturn(nullParameterSet).once();
         
@@ -98,8 +108,12 @@ public abstract class AuditCommandTestCase extends TestCase{
         EasyMock.expectLastCall().once();
         mockAudit.setStatus(AuditStatus.INITIALISATION);
         EasyMock.expectLastCall().once();
-        
         EasyMock.expect(mockAuditDataService.saveOrUpdate(mockAudit)).andReturn(mockAudit).once();
+        if (expectedAuditStatus != null) {
+            mockAudit.setStatus(expectedAuditStatus);
+            EasyMock.expectLastCall().once();
+            EasyMock.expect(mockAuditDataService.saveOrUpdate(mockAudit)).andReturn(mockAudit).once();
+        }
         
         if (isMockInReplayMode) {
             EasyMock.replay(mockAudit);

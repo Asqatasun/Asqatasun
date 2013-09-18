@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2013  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -24,16 +24,10 @@ package org.opens.tanaguru.service.command;
 
 import java.util.Set;
 import org.apache.log4j.Logger;
-import org.opens.tanaguru.contentadapter.AdaptationListener;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.parameterization.Parameter;
-import org.opens.tanaguru.entity.service.audit.AuditDataService;
-import org.opens.tanaguru.entity.service.audit.ContentDataService;
-import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
-import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
-import org.opens.tanaguru.entity.service.reference.TestDataService;
-import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
-import org.opens.tanaguru.service.*;
+import org.opens.tanaguru.service.AuditServiceImpl;
+import org.opens.tanaguru.service.CrawlerService;
 
 /**
  *
@@ -53,46 +47,21 @@ public abstract class CrawlAuditCommandImpl extends AuditCommandImpl {
     public CrawlerService getCrawlerService() {
         return crawlerService;
     }
-    
-    public CrawlAuditCommandImpl(
-            Set<Parameter> paramSet,
-            AuditDataService auditDataService, 
-            TestDataService testDataService, 
-            ParameterDataService parameterDataService,
-            WebResourceDataService webResourceDataService,
-            ContentDataService contentDataService, 
-            ProcessResultDataService processResultDataService, 
-            CrawlerService crawlerService,
-            ContentAdapterService contentAdapterService, 
-            ProcessorService processorService, 
-            ConsolidatorService consolidatorService, 
-            AnalyserService analyserService, 
-            AdaptationListener adaptationListener,
-            int adaptationTreatmentWindow,
-            int processingTreatmentWindow,
-            int consolidationTreatmentWindow,
-            int analysisTreatmentWindow) {
-        super(paramSet, 
-              auditDataService, 
-              testDataService, 
-              parameterDataService, 
-              webResourceDataService, 
-              contentDataService, 
-              processResultDataService, 
-              contentAdapterService, 
-              processorService, 
-              consolidatorService, 
-              analyserService, 
-              adaptationListener,
-              adaptationTreatmentWindow,
-              processingTreatmentWindow,
-              consolidationTreatmentWindow,
-              analysisTreatmentWindow);
+    public void setCrawlerService(CrawlerService crawlerService) {
         this.crawlerService = crawlerService;
+    }
+    
+    /**
+     * 
+     * @param paramSet 
+     */
+    public CrawlAuditCommandImpl(Set<Parameter> paramSet) {
+        super(paramSet);
     }
     
     @Override
     public void init() {
+        super.init();
         setStatusToAudit(AuditStatus.CRAWLING);
     }
     

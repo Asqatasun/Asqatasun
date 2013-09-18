@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2013  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -24,15 +24,7 @@ package org.opens.tanaguru.service.command;
 
 import java.util.Set;
 import org.apache.log4j.Logger;
-import org.opens.tanaguru.contentadapter.AdaptationListener;
 import org.opens.tanaguru.entity.parameterization.Parameter;
-import org.opens.tanaguru.entity.service.audit.AuditDataService;
-import org.opens.tanaguru.entity.service.audit.ContentDataService;
-import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
-import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
-import org.opens.tanaguru.entity.service.reference.TestDataService;
-import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
-import org.opens.tanaguru.service.*;
 
 /**
  *
@@ -52,47 +44,12 @@ public class SiteAuditCommandImpl extends CrawlAuditCommandImpl {
     
     /**
      * 
-     * @param paramSet
-     * @param auditDataService
-     * @param testDataService 
-     * @param webResourceDataService 
+     * @param siteUrl
+     * @param paramSet 
      */
-    public SiteAuditCommandImpl(
-            String siteUrl,
-            Set<Parameter> paramSet,
-            AuditDataService auditDataService, 
-            TestDataService testDataService, 
-            ParameterDataService parameterDataService,
-            WebResourceDataService webResourceDataService, 
-            ContentDataService contentDataService,
-            ProcessResultDataService processResultDataService, 
-            CrawlerService crawlerService,
-            ContentAdapterService contentAdapterService, 
-            ProcessorService processorService, 
-            ConsolidatorService consolidatorService, 
-            AnalyserService analyserService, 
-            AdaptationListener adaptationListener,
-            int adaptationTreatmentWindow,
-            int processingTreatmentWindow,
-            int consolidationTreatmentWindow,
-            int analysisTreatmentWindow) {
-        super(paramSet, 
-              auditDataService, 
-              testDataService, 
-              parameterDataService, 
-              webResourceDataService, 
-              contentDataService, 
-              processResultDataService, 
-              crawlerService, 
-              contentAdapterService, 
-              processorService, 
-              consolidatorService, 
-              analyserService, 
-              adaptationListener,
-              adaptationTreatmentWindow,
-              processingTreatmentWindow,
-              consolidationTreatmentWindow,
-              analysisTreatmentWindow);
+    public SiteAuditCommandImpl(String siteUrl, Set<Parameter> paramSet) {
+        super(paramSet);
+        
         this.siteUrl = siteUrl;
     }
     

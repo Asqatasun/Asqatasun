@@ -21,13 +21,11 @@
  */
 package org.opens.tanaguru.service.command;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 import org.easymock.EasyMock;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.audit.Content;
+import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.service.ContentLoaderService;
@@ -61,7 +59,7 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
     public void testInit() {
         System.out.println("init");
         
-        mockInitialisationCalls(false);
+        mockInitialisationCalls(false, null);
         
         mockAudit.setStatus(AuditStatus.CONTENT_LOADING);
         EasyMock.expectLastCall().once();
@@ -73,26 +71,7 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
         EasyMock.replay(mockTestDataService);
         EasyMock.replay(mockParameterDataService);
         
-        UploadAuditCommandImpl instance = new UploadAuditCommandImpl(
-                new HashMap<String, String>(), 
-                null, 
-                mockAuditDataService, 
-                mockTestDataService, 
-                mockParameterDataService, 
-                mockWebResourceDataService, 
-                mockContentDataService, 
-                mockProcessResultDataService, 
-                mockContentLoaderService, 
-                mockContentAdapterService, 
-                mockProcessorService, 
-                mockConsolidatorService, 
-                mockAnalyserService, 
-                mockAdaptationListener,
-                5,
-                5,
-                5,
-                5);
-        instance.init();
+        getInstance(new HashMap<String, String>(), null);
 
         EasyMock.verify(mockAudit);
         EasyMock.verify(mockAuditDataService);
@@ -106,7 +85,7 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
     public void testLoadContent1() {
         System.out.println("LoadContent with 1 file");
         
-        mockInitialisationCalls(false);
+        mockInitialisationCalls(false, AuditStatus.CONTENT_LOADING);
         
         Map<String, String> fileMap = new HashMap<String, String>();
         fileMap.put("My File Name", "MyFileContent");
@@ -148,25 +127,7 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
         EasyMock.replay(mockContentLoaderService);
         EasyMock.replay(mockPage);
         
-        UploadAuditCommandImpl instance = new UploadAuditCommandImpl(
-                fileMap, 
-                null, 
-                mockAuditDataService, 
-                mockTestDataService, 
-                mockParameterDataService, 
-                mockWebResourceDataService, 
-                mockContentDataService, 
-                mockProcessResultDataService, 
-                mockContentLoaderService, 
-                mockContentAdapterService, 
-                mockProcessorService, 
-                mockConsolidatorService, 
-                mockAnalyserService, 
-                mockAdaptationListener,
-                5,
-                5,
-                5,
-                5);
+        UploadAuditCommandImpl instance = getInstance(fileMap, null);
         
         instance.loadContent();
 
@@ -185,7 +146,7 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
     public void testLoadContent2() {
         System.out.println("LoadContent with several file");
         
-        mockInitialisationCalls(false);
+        mockInitialisationCalls(false, AuditStatus.CONTENT_LOADING);
         
         Map<String, String> fileMap = new LinkedHashMap<String, String>();
         fileMap.put("file:///My File Name1", "MyFileContent1");
@@ -250,26 +211,8 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
         EasyMock.replay(mockPage1);
         EasyMock.replay(mockPage2);
         
-        UploadAuditCommandImpl instance = new UploadAuditCommandImpl(
-                fileMap, 
-                null, 
-                mockAuditDataService, 
-                mockTestDataService, 
-                mockParameterDataService, 
-                mockWebResourceDataService, 
-                mockContentDataService, 
-                mockProcessResultDataService, 
-                mockContentLoaderService, 
-                mockContentAdapterService, 
-                mockProcessorService, 
-                mockConsolidatorService, 
-                mockAnalyserService, 
-                mockAdaptationListener,
-                5,
-                5,
-                5,
-                5);
-        
+        UploadAuditCommandImpl instance = getInstance(fileMap, null);
+
         instance.loadContent();
 
         EasyMock.verify(mockAudit);
@@ -282,5 +225,37 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
         EasyMock.verify(mockPage1);
         EasyMock.verify(mockPage2);
     }
-    
+ 
+    /**
+     * 
+     * @param fileMap
+     * @param paramSet
+     * @return 
+     */
+    private UploadAuditCommandImpl getInstance(Map<String,String> fileMap, Set<Parameter> paramSet) {
+        UploadAuditCommandImpl instance = new UploadAuditCommandImpl(
+                fileMap, 
+                paramSet);
+        instance.setAuditDataService(mockAuditDataService);
+        instance.setTestDataService(mockTestDataService);
+        instance.setParameterDataService(mockParameterDataService);
+        instance.setWebResourceDataService(mockWebResourceDataService);
+        instance.setContentDataService(mockContentDataService);
+        instance.setProcessResultDataService(mockProcessResultDataService);
+        instance.setPreProcessResultDataService(mockPreProcessResultDataService);
+        instance.setContentAdapterService(mockContentAdapterService);
+        instance.setProcessorService(mockProcessorService);
+        instance.setConsolidatorService(mockConsolidatorService);
+        instance.setAnalyserService(mockAnalyserService);
+        instance.setAdaptationListener(mockAdaptationListener);
+        instance.setContentLoaderService(mockContentLoaderService);
+        instance.setAdaptationTreatmentWindow(5);
+        instance.setProcessingTreatmentWindow(5);
+        instance.setConsolidationTreatmentWindow(5);
+        instance.setAnalyseTreatmentWindow(5); 
+        
+        instance.init();
+
+        return instance;
+    }
 }

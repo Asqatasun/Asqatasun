@@ -72,7 +72,7 @@ public class PreProcessResultDAOImpl extends AbstractJPADAO<PreProcessResult, Lo
 
     @Override
     public void deleteAllPreProcessResultByAudit(Audit audit) {
-        Query query = entityManager.createQuery("SELECT ppr.preProcessValue FROM "
+        Query query = entityManager.createQuery("SELECT ppr FROM "
                 + getEntityClass().getName() + " ppr "
                 + " WHERE "
                 + " ppr.audit = :audit");
@@ -84,7 +84,7 @@ public class PreProcessResultDAOImpl extends AbstractJPADAO<PreProcessResult, Lo
 
     @Override
     public void deleteAllPreProcessResultByWebResource(WebResource webResource) {
-        Query query = entityManager.createQuery("SELECT ppr.preProcessValue FROM "
+        Query query = entityManager.createQuery("SELECT ppr FROM "
                 + getEntityClass().getName() + " ppr "
                 + " WHERE "
                 + " ppr.subject = :webResource");

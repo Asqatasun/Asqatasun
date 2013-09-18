@@ -198,5 +198,11 @@ public interface ContentDAO extends GenericDAO<Content, Long> {
      * @param relatedContentId
      */
     void deleteContentRelationShip(Long relatedContentId);
+    
+    /**
+     * 
+     * @param content
+     */
+    void deleteRelatedContentFromContent(Content content) ;
 
 }

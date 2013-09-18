@@ -21,11 +21,11 @@
  */
 package org.opens.tanaguru.service.command;
 
-import org.opens.tanaguru.service.ScenarioLoaderService;
 import static org.easymock.EasyMock.*;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
+import org.opens.tanaguru.service.ScenarioLoaderService;
 
 /**
  *
@@ -43,7 +43,7 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
     protected void setUp() throws Exception {
         super.setUp();
         mockScenarioLoaderService = createMock(ScenarioLoaderService.class);
-        this.mockInitialisationCalls(false);
+        mockInitialisationCalls(false, null);
     }
     
     @Override
@@ -89,10 +89,17 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
         Page mockPage = createMock(Page.class);
         mockPage.setAudit(mockAudit);
         expectLastCall().once();
-
+        
+        mockAudit.setStatus(AuditStatus.SCENARIO_LOADING);
+        expectLastCall().once();
+        
+        expect(mockAuditDataService.saveOrUpdate(mockAudit)).andReturn(mockAudit).once();
+        
         expect(mockAudit.getStatus()).andReturn(AuditStatus.SCENARIO_LOADING).once();
+        
         mockAudit.setSubject(mockPage);
         expectLastCall().once();
+        
         expect(mockScenarioLoaderService.loadScenario(mockPage, myScenario)).andReturn(null).once();
         
         mockAudit.setStatus(AuditStatus.CONTENT_ADAPTING);
@@ -114,6 +121,7 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
         instance.setScenarioName(myUrl);
         instance.setScenario(myScenario);
         instance.setIsPage(true);
+        instance.init();
         instance.loadContent();
         
         verify(mockAudit);
@@ -138,15 +146,22 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
         mockSite.setAudit(mockAudit);
         expectLastCall().once();
 
+        mockAudit.setStatus(AuditStatus.SCENARIO_LOADING);
+        expectLastCall().once();
+        
+        expect(mockAuditDataService.saveOrUpdate(mockAudit)).andReturn(mockAudit).once();
+        
         expect(mockAudit.getStatus()).andReturn(AuditStatus.SCENARIO_LOADING).once();
+        
         mockAudit.setSubject(mockSite);
         expectLastCall().once();
+        
         expect(mockScenarioLoaderService.loadScenario(mockSite, myScenario)).andReturn(null).once();
         
         mockAudit.setStatus(AuditStatus.CONTENT_ADAPTING);
         expectLastCall().once();
-        
         expect(mockAuditDataService.saveOrUpdate(mockAudit)).andReturn(mockAudit).once();
+        
         expect(mockWebResourceDataService.createSite(myUrl)).andReturn(mockSite).once();
         expect(mockWebResourceDataService.saveOrUpdate(mockSite)).andReturn(mockSite).once();
         
@@ -162,6 +177,7 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
         instance.setScenarioName(myUrl);
         instance.setScenario(myScenario);
         instance.setIsPage(false);
+        instance.init();
         instance.loadContent();
         
         verify(mockAudit);
@@ -176,24 +192,25 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
     public class TestAbstractScenarioAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
 
         public TestAbstractScenarioAuditCommandImpl() {
-            super(
-                    null, 
-                    mockAuditDataService, 
-                    mockTestDataService, 
-                    mockParameterDataService, 
-                    mockWebResourceDataService, 
-                    mockContentDataService, 
-                    mockProcessResultDataService, 
-                    mockScenarioLoaderService,
-                    mockContentAdapterService, 
-                    mockProcessorService, 
-                    mockConsolidatorService, 
-                    mockAnalyserService, 
-                    mockAdaptationListener,
-                    5,
-                    5,
-                    5,
-                    5);
+            super(null);
+            setAuditDataService(mockAuditDataService);
+            setTestDataService(mockTestDataService);
+            setParameterDataService(mockParameterDataService);
+            setWebResourceDataService(mockWebResourceDataService);
+            setContentDataService(mockContentDataService);
+            setProcessResultDataService(mockProcessResultDataService);
+            setPreProcessResultDataService(mockPreProcessResultDataService);
+            setScenarioLoaderService(mockScenarioLoaderService);
+            setContentAdapterService(mockContentAdapterService);
+            setProcessorService(mockProcessorService);
+            setConsolidatorService(mockConsolidatorService);
+            setAnalyserService(mockAnalyserService);
+            setAdaptationListener(mockAdaptationListener);
+            setAdaptationTreatmentWindow(5);
+            setProcessingTreatmentWindow(5);
+            setConsolidationTreatmentWindow(5);
+            setAnalyseTreatmentWindow(5);
         }
+        
     }
 }

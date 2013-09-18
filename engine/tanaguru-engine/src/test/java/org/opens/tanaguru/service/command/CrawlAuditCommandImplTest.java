@@ -41,7 +41,7 @@ public class CrawlAuditCommandImplTest extends AuditCommandTestCase {
     protected void setUp() throws Exception {
         super.setUp();
         mockCrawlerService = EasyMock.createMock(CrawlerService.class);
-        this.mockInitialisationCalls(false);
+        mockInitialisationCalls(false, null);
     }
     
     @Override
@@ -55,19 +55,19 @@ public class CrawlAuditCommandImplTest extends AuditCommandTestCase {
     public void testGetCrawlerService() {
         System.out.println("getCrawlerService");
         
-        EasyMock.replay(mockAudit);
-        EasyMock.replay(mockAuditDataService);
-        EasyMock.replay(mockTestDataService);
-        EasyMock.replay(mockParameterDataService);
+//        EasyMock.replay(mockAudit);
+//        EasyMock.replay(mockAuditDataService);
+//        EasyMock.replay(mockTestDataService);
+//        EasyMock.replay(mockParameterDataService);
         
         CrawlAuditCommandImpl instance = new TestCrawlAuditCommandImpl();
         
         assertEquals(mockCrawlerService, instance.getCrawlerService());
         
-        EasyMock.verify(mockAudit);
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockParameterDataService);
+//        EasyMock.verify(mockAudit);
+//        EasyMock.verify(mockAuditDataService);
+//        EasyMock.verify(mockTestDataService);
+//        EasyMock.verify(mockParameterDataService);
     }
 
     /**
@@ -102,6 +102,10 @@ public class CrawlAuditCommandImplTest extends AuditCommandTestCase {
     public void testLoadContent() {
         System.out.println("loadContent");
         
+        mockAudit.setStatus(AuditStatus.CRAWLING);
+        EasyMock.expectLastCall().once();
+        
+        EasyMock.expect(mockAuditDataService.saveOrUpdate(mockAudit)).andReturn(mockAudit).once();
         EasyMock.expect(mockAudit.getStatus()).andReturn(AuditStatus.CRAWLING).once();
         
         EasyMock.expect(mockContentDataService.hasContent(mockAudit)).andReturn(true).once();
@@ -118,6 +122,7 @@ public class CrawlAuditCommandImplTest extends AuditCommandTestCase {
         EasyMock.replay(mockContentDataService);
         
         CrawlAuditCommandImpl instance = new TestCrawlAuditCommandImpl();
+        instance.init();
         instance.loadContent();
         
         EasyMock.verify(mockAudit);
@@ -130,24 +135,24 @@ public class CrawlAuditCommandImplTest extends AuditCommandTestCase {
     public class TestCrawlAuditCommandImpl extends CrawlAuditCommandImpl {
 
         public TestCrawlAuditCommandImpl() {
-            super(
-                    null, 
-                    mockAuditDataService, 
-                    mockTestDataService, 
-                    mockParameterDataService, 
-                    mockWebResourceDataService, 
-                    mockContentDataService, 
-                    mockProcessResultDataService, 
-                    mockCrawlerService,
-                    mockContentAdapterService, 
-                    mockProcessorService, 
-                    mockConsolidatorService, 
-                    mockAnalyserService, 
-                    mockAdaptationListener,
-                    5,
-                    5,
-                    5,
-                    5);
+            super(null);
+            setAuditDataService(mockAuditDataService);
+            setTestDataService(mockTestDataService);
+            setParameterDataService(mockParameterDataService);
+            setWebResourceDataService(mockWebResourceDataService);
+            setContentDataService(mockContentDataService);
+            setProcessResultDataService(mockProcessResultDataService);
+            setPreProcessResultDataService(mockPreProcessResultDataService);
+            setContentAdapterService(mockContentAdapterService);
+            setProcessorService(mockProcessorService);
+            setConsolidatorService(mockConsolidatorService);
+            setAnalyserService(mockAnalyserService);
+            setAdaptationListener(mockAdaptationListener);
+            setCrawlerService(mockCrawlerService);
+            setAdaptationTreatmentWindow(5);
+            setProcessingTreatmentWindow(5);
+            setConsolidationTreatmentWindow(5);
+            setAnalyseTreatmentWindow(5);
         }
 
         @Override

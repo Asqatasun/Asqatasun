@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2013  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -22,6 +22,7 @@
 package org.opens.tanaguru.service.command;
 
 import org.easymock.EasyMock;
+import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.service.CrawlerService;
 
@@ -54,7 +55,7 @@ public class SiteAuditCommandImplTest extends AuditCommandTestCase {
     public void testCallCrawlerService() {
         System.out.println("callCrawlerService");
 
-        this.mockInitialisationCalls(true);
+        mockInitialisationCalls(true, AuditStatus.CRAWLING);
         
         mockCrawlerService = EasyMock.createMock(CrawlerService.class);
         EasyMock.expect(mockCrawlerService.crawlSite(mockAudit, siteUrl)).
@@ -64,24 +65,27 @@ public class SiteAuditCommandImplTest extends AuditCommandTestCase {
         
         SiteAuditCommandImpl siteAuditCommand = new SiteAuditCommandImpl(
                 siteUrl, 
-                null, 
-                mockAuditDataService, 
-                mockTestDataService, 
-                mockParameterDataService, 
-                mockWebResourceDataService, 
-                mockContentDataService, 
-                mockProcessResultDataService, 
-                mockCrawlerService, 
-                mockContentAdapterService, 
-                mockProcessorService, 
-                mockConsolidatorService, 
-                mockAnalyserService, 
-                mockAdaptationListener,
-                5,
-                5,
-                5,
-                5);
+                null);
+        siteAuditCommand.setAuditDataService(mockAuditDataService);
+        siteAuditCommand.setTestDataService(mockTestDataService);
+        siteAuditCommand.setParameterDataService(mockParameterDataService);
+        siteAuditCommand.setWebResourceDataService(mockWebResourceDataService);
+        siteAuditCommand.setContentDataService(mockContentDataService);
+        siteAuditCommand.setProcessResultDataService(mockProcessResultDataService);
+        siteAuditCommand.setPreProcessResultDataService(mockPreProcessResultDataService);
+        siteAuditCommand.setContentAdapterService(mockContentAdapterService);
+        siteAuditCommand.setProcessorService(mockProcessorService);
+        siteAuditCommand.setConsolidatorService(mockConsolidatorService);
+        siteAuditCommand.setAnalyserService(mockAnalyserService);
+        siteAuditCommand.setAdaptationListener(mockAdaptationListener);
+        siteAuditCommand.setCrawlerService(mockCrawlerService);
+        siteAuditCommand.setAdaptationTreatmentWindow(5);
+        siteAuditCommand.setProcessingTreatmentWindow(5);
+        siteAuditCommand.setConsolidationTreatmentWindow(5);
+        siteAuditCommand.setAnalyseTreatmentWindow(5); 
         
+        siteAuditCommand.init();
+
         siteAuditCommand.callCrawlerService();
         
         EasyMock.verify(mockCrawlerService);
