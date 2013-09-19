@@ -12,15 +12,4 @@
     <version>1.0.0-SNAPSHOT</version>
     <name>accessiweb2.1-i18n</name>
     <url>http://www.tanaguru.org</url>
-    <dependencies>
-        <dependency>
-            <groupId>${testingToolsGroupId}</groupId>
-            <artifactId>rules-testing-tools</artifactId>
-            <version>${testingToolsVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-    </dependencies>
 </project>
