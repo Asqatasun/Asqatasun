@@ -42,6 +42,9 @@ public abstract class RuleHelper {
         boolean hasPassed = false;
         boolean hasFailed = false;
         boolean hasNMI = false;
+        if (testSolutionCollection.size() == 1 && testSolutionCollection.iterator().next().equals(TestSolution.NOT_TESTED)) {
+            return TestSolution.NOT_TESTED;
+        }
         for (TestSolution result : testSolutionCollection) {
             switch (result) {
                 case PASSED:
