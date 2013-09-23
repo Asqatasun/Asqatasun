@@ -144,10 +144,10 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
         // Not used
     }
 
-    @Override
-    public String getAdaptation() {
-        return new XStream().toXML(jsSet);
-    }
+//    @Override
+//    public String getAdaptation() {
+//        return new XStream().toXML(jsSet);
+//    }
 
     /**
      * @param ch

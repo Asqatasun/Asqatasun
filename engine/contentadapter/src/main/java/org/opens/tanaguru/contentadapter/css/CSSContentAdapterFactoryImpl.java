@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -40,13 +40,6 @@ public class CSSContentAdapterFactoryImpl implements CSSContentAdapterFactory {
             URLIdentifier urlIdentifier,
             Downloader downloader,
             ContentDataService contentDataService) {
-//        return new CSSContentAdapterImpl(
-//                contentFactory,
-//                urlIdentifier,
-//                downloader,
-//                CSSParserFactory.create(),
-//                contentDataService,
-//                getExternalCSSRetriever());
         return new CSSJsoupPhlocContentAdapterImpl(
                 contentFactory,
                 urlIdentifier,

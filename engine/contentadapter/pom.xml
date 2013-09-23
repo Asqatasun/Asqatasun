@@ -20,10 +20,6 @@
             <artifactId>tanaguru-api</artifactId>
             <version>${engineVersion}</version>
         </dependency>
-<!--        <dependency>
-            <groupId>org.milyn</groupId>
-            <artifactId>flute</artifactId>
-        </dependency>-->
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
@@ -32,11 +28,6 @@
             <groupId>net.sourceforge.htmlcleaner</groupId>
             <artifactId>htmlcleaner</artifactId>
         </dependency>
-<!--        <dependency>
-            <groupId>net.sf.jtidy</groupId>
-            <artifactId>jtidy</artifactId>
-            <version>r938</version>
-        </dependency>-->
         <dependency>
             <groupId>com.phloc</groupId>
             <artifactId>phloc-commons</artifactId>
@@ -50,14 +41,6 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-        </dependency>-->
     </dependencies>
     <repositories>
         <repository>

@@ -36,13 +36,6 @@ public interface ContentAdapter {
     /**
      *
      * @return
-     *      the result of the adaptation
-     */
-    String getAdaptation();
-
-    /**
-     *
-     * @return
      *      the list of content
      */
     List<Content> getContentList();

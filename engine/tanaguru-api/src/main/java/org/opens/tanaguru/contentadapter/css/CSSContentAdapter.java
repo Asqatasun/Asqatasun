@@ -21,10 +21,15 @@
  */
 package org.opens.tanaguru.contentadapter.css;
 
-import org.opens.tanaguru.contentadapter.*;
+import org.opens.tanaguru.contentadapter.ContentAdapter;
 
 /**
  * 
  * @author jkowalczyk
  */
-public interface CSSContentAdapter extends ContentAdapter {}
+public interface CSSContentAdapter extends ContentAdapter {
+    
+    static final String INLINE_CSS_PREFIX = "#tanaguru-inline-";
+    static final String LOCALE_CSS_PREFIX = "#tanaguru-locale-";
+    
+}

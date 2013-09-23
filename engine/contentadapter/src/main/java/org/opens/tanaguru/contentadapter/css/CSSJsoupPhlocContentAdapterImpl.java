@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,6 +21,7 @@
  */
 package org.opens.tanaguru.contentadapter.css;
 
+import com.phloc.commons.charset.CCharset;
 import com.phloc.commons.io.streamprovider.ByteArrayInputStreamProvider;
 import com.phloc.css.ECSSVersion;
 import com.phloc.css.decl.CSSImportRule;
@@ -30,7 +31,9 @@ import com.phloc.css.handler.ICSSParseExceptionHandler;
 import com.phloc.css.parser.ParseException;
 import com.phloc.css.parser.TokenMgrError;
 import com.phloc.css.reader.CSSReader;
+import com.phloc.css.tools.MediaQueryTools;
 import com.thoughtworks.xstream.XStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
@@ -38,9 +41,11 @@ import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.util.*;
 import java.util.logging.Level;
+import javax.annotation.Nullable;
 import javax.persistence.PersistenceException;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.httpclient.URIException;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.archive.net.UURI;
@@ -66,23 +71,21 @@ import org.opens.tanaguru.util.http.HttpRequestHandler;
  * @author jkowalczyk
  */
 public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter implements
-        CSSContentAdapter{
+        CSSContentAdapter {
 
     private static final Logger LOGGER = Logger.getLogger(CSSJsoupPhlocContentAdapterImpl.class);
     private static final String HTTP_PREFIX = "http";
-    private static final String WWW_PREFIX = "www";
-    private static final String FILE_PREFIX = "file:";
     private static final String CSS_ON_ERROR = "CSS_ON_ERROR";
-    private static final String URI_PREFIX = "#tanaguru-css-";
-    private Set<CSSOMStyleSheet> cssSet;
+
     private String currentLocalResourcePath;
-    private boolean cssOnError = false;
     private Set<StylesheetContent> relatedExternalCssSet =
             new HashSet<StylesheetContent>();
     private ExternalCSSRetriever externalCSSRetriever;
     private Set<StylesheetContent> externalCssSet =
             new HashSet<StylesheetContent>();
-    private int internalCssCounter = 1;
+
+    private int inlineCssCounter;
+    private int localeCssCounter;
     
     private Collection<Element> inlineCssElements;
     private Collection<Element> localeCssElements;
@@ -100,6 +103,8 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
         this.localeCssElements = localeCssElements;
     }
     
+    private URLIdentifier urlIdentifier;
+    
     /**
      * Constructor
      * @param contentFactory
@@ -115,15 +120,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
             ExternalCSSRetriever externalCSSRetriever) {
         super(contentFactory, urlIdentifier, downloader, contentDataService);
         this.externalCSSRetriever = externalCSSRetriever;
-    }
-
-    @Override
-    public String getAdaptation() {
-        if (cssOnError) {
-            return (CSS_ON_ERROR);
-        } else {
-            return new XStream().toXML(cssSet);
-        }
+        this.urlIdentifier = urlIdentifier;
     }
 
     /**
@@ -137,9 +134,13 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      * 
      */
     public void adaptContent() {
+        Logger.getLogger(this.getClass()).debug("initContext()");
         initContext();
+        Logger.getLogger(this.getClass()).debug("adaptInlineCSS()");
         adaptInlineCSS();
+        Logger.getLogger(this.getClass()).debug("adaptLocaleCSS()");
         adaptLocaleCSS();
+        Logger.getLogger(this.getClass()).debug("adaptExternalCss()");
         adaptExternalCss();
     }
     
@@ -167,17 +168,20 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
         Set<Long> relatedCssIdSet = new HashSet<Long>();
 
         for (Element el : localeCssElements) {
-            List<String> sacMediaList = getListOfMediaFromAttributeValue(el.attr("media"));
-            CSSResource cssResource;
-            String rawCss = addMediaToRawCss(el.data(), sacMediaList);
-            if (!StringUtils.isEmpty(StringUtils.trim(rawCss))) {
+            Resource cssResource;
+            String rawCss = el.data();
+            if (!StringUtils.isBlank(rawCss)) {
                 cssResource = new CSSResourceImpl(
                         rawCss, 
                         0, 
                         new LocalRsrc());
                 StylesheetContent cssContent =
-                        getStylesheetFromResource(cssResource.getResource());
-                adaptContent(cssContent, cssResource, getCurrentResourcePath(el.baseUri()));
+                        getStylesheetFromLocaleResource(cssResource.getResource());
+                adaptContent(
+                        cssContent, 
+                        cssResource, 
+                        getCurrentResourcePath(el.baseUri()), 
+                        getListOfMediaFromAttributeValue(el));
                 relatedCssIdSet.add(getContentDataService().saveOrUpdate(cssContent).getId());
             }
         }
@@ -192,25 +196,28 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
 
         for (Element el : inlineCssElements) {
             String attributeValue = el.attr("style");
-            if (StringUtils.isEmpty(StringUtils.trim(attributeValue))) {
-                CSSResource cssResource = new CSSResourceImpl(
+            if (StringUtils.isNotBlank(attributeValue)) {
+                Resource cssResource = new CSSResourceImpl(
                         el.nodeName()+"{"+attributeValue +"}", 
                         0, 
                         new InlineRsrc());
                 StylesheetContent cssContent =
-                        getStylesheetFromResource(cssResource.getResource());
-                adaptContent(cssContent, cssResource, getCurrentResourcePath(el.baseUri()));
+                        getStylesheetFromInlineResource(cssResource.getResource());
+                adaptContent(cssContent, cssResource, getCurrentResourcePath(el.baseUri()), null);
                 relatedCssIdSet.add(getContentDataService().saveOrUpdate(cssContent).getId());
             }
         }
         getContentDataService().saveContentRelationShip(getSSP(), relatedCssIdSet);
     }
     
+    /**
+     * Adapt the external css. 
+     */
     private void adaptExternalCss() {
         for (Element el : externalCssElements) {
-            List<String> sacMediaList = getListOfMediaFromAttributeValue(el.attr("media"));
+            List<CSSMediaQuery> mediaList = getListOfMediaFromAttributeValue(el);
             String resourcePath = el.attr("abs:href");
-            getExternalResourceAndAdapt(resourcePath, sacMediaList);
+            getExternalResourceAndAdapt(resourcePath, mediaList);
         }
         Set<Long> relatedCssIdSet = new HashSet<Long>();
         // At the end of the document we link each external css that are
@@ -244,27 +251,31 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      * @param mediaAttribute
      * @return
      */
-    private List<String> getListOfMediaFromAttributeValue(String mediaAttribute) {
-        List<String> mediaTypeList = new ArrayList<String>();
-        if (mediaAttribute == null || StringUtils.isEmpty(StringUtils.trim(mediaAttribute)) ) {
+    private List<CSSMediaQuery> getListOfMediaFromAttributeValue(Element element) {
+        String mediaAttribute = element.attr("media");
+        List<CSSMediaQuery> mediaTypeList = new ArrayList<CSSMediaQuery>();
+        if (mediaAttribute == null || StringUtils.isBlank(mediaAttribute) ) {
             return mediaTypeList;
         } else {
-            String localMedia = mediaAttribute.replaceAll("\\s", "");
-            CollectionUtils.addAll(mediaTypeList, localMedia.split(","));
-            return mediaTypeList;
+            mediaTypeList.addAll(MediaQueryTools.parseToMediaQuery (
+                    mediaAttribute, 
+                    CCharset.CHARSET_UTF_8_OBJ, 
+                    ECSSVersion.CSS30));
         }
+        return mediaTypeList;
     }
 
     /**
      * Downloads an external resource and returns a Resource instance or null
      * if the download has failed
-     * @param cssRelativePath
-     * @param sacMediaList
+     * @param path
+     * @param mediaAttributeValue
      * @return
      */
-    private boolean getExternalResourceAndAdapt(String path,
-            List<String> sacMediaList) {
-        if (StringUtils.isEmpty(path.trim())) {
+    private boolean getExternalResourceAndAdapt(
+            String path, 
+            @Nullable List<CSSMediaQuery> mediaList) {
+        if (StringUtils.isBlank(path)) {
             return false;
         }
         // When an external css is found on the html, we start by getting the
@@ -276,11 +287,15 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
             if (stylesheetContent.getAdaptedContent() == null) {
                 Resource localResource;
                 localResource = new CSSResourceImpl(
-                            addMediaToRawCss(stylesheetContent.getSource(), sacMediaList),
+                            stylesheetContent.getSource(),
                             0, 
                             new ExternalRsrc());
                 currentLocalResourcePath = getCurrentResourcePath(path);
-                adaptContent(stylesheetContent, localResource, currentLocalResourcePath);
+                adaptContent(
+                        stylesheetContent, 
+                        localResource, 
+                        currentLocalResourcePath,
+                        mediaList);
             }
             relatedExternalCssSet.add(stylesheetContent);
             LOGGER.debug("encountered external css :  " + 
@@ -310,6 +325,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      * @return 
      */
     private StylesheetContent getExternalStylesheet(String cssAbsolutePath) {
+        cssAbsolutePath = urlIdentifier.resolve(cssAbsolutePath).toExternalForm();
         for (StylesheetContent stylesheetContent : externalCssSet) {
             if (stylesheetContent.getURI().equals(cssAbsolutePath)) {
                 return stylesheetContent;
@@ -324,7 +340,8 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      * @return 
      */
     private StylesheetContent createNewExternalStyleSheet(String cssAbsolutePath) {
-        String cssSourceCode = "";
+        LOGGER.debug("createNewExternalStyleSheet "  +cssAbsolutePath);
+        String cssSourceCode;
         try {
             cssSourceCode = HttpRequestHandler.getInstance().getHttpContent(cssAbsolutePath);
         } catch (URISyntaxException ex) {
@@ -335,15 +352,21 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
             cssSourceCode = CSS_ON_ERROR;
         } catch (IOException ioe) {
             LOGGER.debug("the resource " + cssAbsolutePath + " can't be retrieved : IOException");
-            cssSourceCode = CSS_ON_ERROR;
+            try {
+                cssSourceCode = FileUtils.readFileToString(new File(cssAbsolutePath));
+            } catch (IOException ioe2) {
+                LOGGER.debug("the resource " + cssAbsolutePath + " can't be retrieved : IOException");
+                cssSourceCode = CSS_ON_ERROR;
+            }
         } catch (IllegalCharsetNameException icne) {
             LOGGER.debug("the resource " + cssAbsolutePath + " can't be retrieved : IllegalCharsetNameException");
             cssSourceCode = CSS_ON_ERROR;
         }
-        if (StringUtils.isEmpty(cssSourceCode)) {
+        if (StringUtils.isBlank(cssSourceCode)) {
             LOGGER.debug("the resource " + cssAbsolutePath + " has an empty content");
             cssSourceCode = CSS_ON_ERROR;
         }
+
         StylesheetContent cssContent = getContentFactory().createStylesheetContent(
                 new Date(),
                 cssAbsolutePath,
@@ -369,15 +392,11 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      *          The resource path
      */
     private void getImportedResources(CSSImportRule cssImportRule, String currentLocalResourcePath) {
-        List<String> sacMediaList = new ArrayList<String>();
-        for (CSSMediaQuery md : cssImportRule.getAllMediaQueries()) {
-            sacMediaList.add(md.getMedium());
-        }
         String resourcePath = cssImportRule.getLocation().getURI();
         if (resourcePath.startsWith("/") || !resourcePath.startsWith(HTTP_PREFIX)) {
             resourcePath = currentLocalResourcePath + resourcePath;
         }
-        getExternalResourceAndAdapt(resourcePath, sacMediaList);
+        getExternalResourceAndAdapt(resourcePath, cssImportRule.getAllMediaQueries());
     }
 
     /**
@@ -385,15 +404,32 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      * @param resource
      * @return 
      */
-    private StylesheetContent getStylesheetFromResource(String resource) {
+    private StylesheetContent getStylesheetFromLocaleResource(String resource) {
+        localeCssCounter++;
         StylesheetContent cssContent = getContentFactory().createStylesheetContent(
                 new Date(),
-                getSSP().getURI() + URI_PREFIX + internalCssCounter,
+                getSSP().getURI() + LOCALE_CSS_PREFIX + localeCssCounter,
                 getSSP(),
                 resource,
                 200);
         cssContent.setAudit(getSSP().getAudit());
-        internalCssCounter++;
+        return cssContent;
+    }
+    
+    /**
+     * 
+     * @param resource
+     * @return 
+     */
+    private StylesheetContent getStylesheetFromInlineResource(String resource) {
+        inlineCssCounter++;
+        StylesheetContent cssContent = getContentFactory().createStylesheetContent(
+                new Date(),
+                getSSP().getURI() + INLINE_CSS_PREFIX + inlineCssCounter,
+                getSSP(),
+                resource,
+                200);
+        cssContent.setAudit(getSSP().getAudit());
         return cssContent;
     }
 
@@ -403,10 +439,17 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      * 
      * @param stylesheetContent
      * @param resource
+     * @param currentLocalResourcePath
+     * @param mediaAttributeValue
+     * 
      */
-    private void adaptContent(StylesheetContent stylesheetContent, Resource resource, String currentLocalResourcePath) {
+    private void adaptContent(
+            StylesheetContent stylesheetContent, 
+            Resource resource, 
+            String currentLocalResourcePath, 
+            @Nullable List<CSSMediaQuery> mediaList) {
         if (stylesheetContent.getAdaptedContent() == null
-                && resource.getResource() != null && !resource.getResource().trim().isEmpty()) {
+                && resource.getResource() != null && StringUtils.isNotBlank(resource.getResource())) {
             Charset charset = null;
             try {
                 charset = CSSReader.getCharsetDeclaredInCSS(new ByteArrayInputStreamProvider(resource.getResource().getBytes()));
@@ -432,6 +475,9 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
                 // if an exception has been caught, the adapted content attribute 
                 // has been set to "on error" and so is not null
                 if (stylesheetContent.getAdaptedContent() == null) {
+                    if (CollectionUtils.isNotEmpty(mediaList)) {
+                        aCSS = MediaQueryTools.getWrappedInMediaQuery (aCSS,mediaList);
+                    }
                     stylesheetContent.setAdaptedContent(new XStream().toXML(aCSS));
                     for (CSSImportRule cssImportRule : aCSS.getAllImportRules()) {
                         getImportedResources(cssImportRule, currentLocalResourcePath);
@@ -443,32 +489,6 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
                 stylesheetContent.setAdaptedContent(CSS_ON_ERROR);
             }
         }
-    }
-
-    /**
-     * Build the resource path. If the path is relative, build in it from the 
-     * path of the current resource
-     * 
-     * @param path
-     * @param base
-     * @return 
-     */
-    public String buildPath(String path, String base) throws URIException {
-        if (path.startsWith(HTTP_PREFIX)
-                || path.startsWith(WWW_PREFIX) 
-                || path.startsWith(FILE_PREFIX)) {
-            return UURIFactory.getInstance(path).toString();
-        }
-        StringBuilder strb = new StringBuilder();
-        if (path.startsWith("/")) {
-            base = setBaseAsRootOfSite(base);
-        }
-        strb.append(base);
-        if (!base.endsWith("/") && !path.startsWith("/")) {
-            strb.append("/");
-        }
-        strb.append(path);
-        return UURIFactory.getInstance(strb.toString()).toString();
     }
 
     /**
@@ -490,41 +510,6 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
     }
     
     /**
-     * The media value is added as inline media specification as the media cannot
-     * be set a priori and add a posteriori
-     * 
-     * @param css
-     * @param mediaList
-     * @return 
-     */
-    private String addMediaToRawCss(String css, List<String> mediaList) {
-        // remove the "all" media, in this case, all rules are considered as
-        // normal rules
-        Iterator<String> iter = mediaList.iterator();
-        while (iter.hasNext()) {
-            if (StringUtils.equalsIgnoreCase(iter.next().trim(), "all")) {
-                iter.remove();
-            }
-        }
-        if (mediaList.isEmpty()) {
-            return css;
-        }
-        StringBuilder strb = new StringBuilder();
-        Iterator<String> mediaIter = mediaList.iterator();
-        strb.append("@media ");
-        while (mediaIter.hasNext()) {
-            strb.append(mediaIter.next());
-            if (mediaIter.hasNext()) {
-                strb.append(", ");
-            }
-        }
-        strb.append(" { ");
-        strb.append(css);
-        strb.append(" } ");
-        return strb.toString();
-    }
-
-    /**
      * Inner class to handle exception encountered while parse the css. 
      * The adapted content is set as "ON ERROR" and extra info are added (line 
      * and column position where the problem occured.
@@ -541,7 +526,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
             int line  = extype.currentToken.next.beginLine;
             int column  = extype.currentToken.next.beginColumn;
             this.css.setAdaptedContent(CSS_ON_ERROR+'l'+line+'c'+column);
-            Logger.getLogger(this.getClass()).warn("Error on adaptation " + css.getURI());
+            Logger.getLogger(this.getClass()).warn("Error on adaptation " + css.getURI() + " "+css.getSource());
             Logger.getLogger(this.getClass()).warn(extype.currentToken.getValue());
             Logger.getLogger(this.getClass()).warn(extype.getMessage());
         }
