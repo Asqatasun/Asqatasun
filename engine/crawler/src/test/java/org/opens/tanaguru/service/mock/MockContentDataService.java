@@ -200,5 +200,10 @@ public class MockContentDataService implements ContentDataService {
     public Content update(Content entity) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public void deleteRelatedContentFromContent(Content content) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
 }
