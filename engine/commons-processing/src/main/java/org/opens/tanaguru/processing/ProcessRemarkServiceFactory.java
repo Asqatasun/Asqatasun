@@ -21,11 +21,11 @@
  */
 package org.opens.tanaguru.processing;
 
-import org.opens.tanaguru.service.ProcessRemarkService;
 import org.opens.tanaguru.entity.factory.audit.EvidenceElementFactory;
 import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
 import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.entity.service.audit.EvidenceDataService;
+import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
  *

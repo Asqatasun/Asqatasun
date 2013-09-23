@@ -275,6 +275,28 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     @Override
     public void addSourceCodeRemark(
             TestSolution processResult, 
+            String targetValue,
+            String messageCode, 
+            Collection<EvidenceElement> evidenceElementList) {
+        
+        SourceCodeRemark remark = sourceCodeRemarkFactory.create();
+        remark.setIssue(processResult);
+        remark.setMessageCode(messageCode);
+        remark.setTarget(targetValue);
+        remark.setLineNumber(-1);
+
+        if (CollectionUtils.isNotEmpty(evidenceElementList)) {
+            for (EvidenceElement ee : evidenceElementList) {
+                remark.addElement(ee);
+                ee.setProcessRemark(remark);
+            }
+        }
+        remarkSet.add(remark);
+    }
+    
+    @Override
+    public void addSourceCodeRemark(
+            TestSolution processResult, 
             Node node,
             String messageCode, 
             Collection<EvidenceElement> evidenceElementList) {

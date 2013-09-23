@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -64,25 +64,36 @@ public interface ProcessRemarkService {
     void resetService();
 
     /**
-     *
+     * @deprecated
+     * 
      * @param processResult
      * @param node
      * @param messageCode
      * @param elementName
      */
-    void addSourceCodeRemark(TestSolution processResult, Node node,
-            String messageCode, String elementName);
+    @Deprecated
+    void addSourceCodeRemark(
+            TestSolution processResult, 
+            Node node,
+            String messageCode, 
+            String elementName);
 
     /**
-     *
+     * @deprecated
+     * 
      * @param processResult
      * @param node
      * @param messageCode
      * @param elementType
      * @param elementName
      */
-    void addSourceCodeRemark(TestSolution processResult, Node node,
-            String messageCode, String elementType, String elementName);
+    @Deprecated
+    void addSourceCodeRemark(
+            TestSolution processResult, 
+            Node node,
+            String messageCode, 
+            String elementType, 
+            String elementName);
 
     /**
      * 
@@ -90,7 +101,9 @@ public interface ProcessRemarkService {
      * @param element
      * @param messageCode
      */
-    void addSourceCodeRemarkOnElement(TestSolution processResult, Element element,
+    void addSourceCodeRemarkOnElement(
+            TestSolution processResult, 
+            Element element,
             String messageCode);
     
     /**
@@ -100,29 +113,54 @@ public interface ProcessRemarkService {
      * @param messageCode
      * @param evidenceElementList
      */
-    void addSourceCodeRemarkOnElement(TestSolution processResult, Element element,
-            String messageCode, Collection<EvidenceElement> evidenceElementList);
+    void addSourceCodeRemarkOnElement(
+            TestSolution processResult, 
+            Element element,
+            String messageCode, 
+            Collection<EvidenceElement> evidenceElementList);
 
     /**
-     *
+     * 
+     * @param processResult
+     * @param targetValue
+     * @param messageCode
+     * @param evidenceElementList 
+     */
+    void addSourceCodeRemark(
+            TestSolution processResult, 
+            String targetValue,
+            String messageCode, 
+            Collection<EvidenceElement> evidenceElementList);
+    
+    /**
+     * @deprecated 
+     * 
      * @param processResult
      * @param node
      * @param messageCode
      * @param evidenceElementList
      */
-    void addSourceCodeRemark(TestSolution processResult, Node node,
-            String messageCode, Collection<EvidenceElement> evidenceElementList);
+    @Deprecated
+    void addSourceCodeRemark(
+            TestSolution processResult, 
+            Node node,
+            String messageCode, 
+            Collection<EvidenceElement> evidenceElementList);
 
     /**
-     *
+     * @deprecated
      * @param processResult
      * @param node
      * @param messageCode
      * @param elementName
      * @return
      */
-    SourceCodeRemark createSourceCodeRemark(TestSolution processResult,
-            Node node, String messageCode, String elementName);
+    @Deprecated
+    SourceCodeRemark createSourceCodeRemark(
+            TestSolution processResult,
+            Node node, 
+            String messageCode, 
+            String elementName);
     
     /**
      *
@@ -131,16 +169,19 @@ public interface ProcessRemarkService {
      * @param messageCode
      * @return
      */
-    SourceCodeRemark createSourceCodeRemark(TestSolution processResult,
-            Element element, String messageCode);
+    SourceCodeRemark createSourceCodeRemark(
+            TestSolution processResult,
+            Element element, 
+            String messageCode);
 
     /**
-     *
+     * @deprecated
      * @param processResult
      * @param rule
      * @param messageCode
      * @param attrName
      */
+    @Deprecated
     void addCssCodeRemark(TestSolution processResult,
             CSSOMRule rule, String messageCode, String attrName, String fileName);
     
@@ -172,8 +213,10 @@ public interface ProcessRemarkService {
      * @param messageCode
      * @param evidenceElementList
      */
-    void addProcessRemark(TestSolution processResult,
-            String messageCode, Collection<EvidenceElement> evidenceElementList);
+    void addProcessRemark(
+            TestSolution processResult,
+            String messageCode, 
+            Collection<EvidenceElement> evidenceElementList);
 
     /**
      *
@@ -190,8 +233,10 @@ public interface ProcessRemarkService {
      * @param evidenceElementList
      * @return
      */
-    ProcessRemark createProcessRemark(TestSolution processResult,
-            String messageCode, Collection<EvidenceElement> evidenceElementList);
+    ProcessRemark createProcessRemark(
+            TestSolution processResult,
+            String messageCode, 
+            Collection<EvidenceElement> evidenceElementList);
 
     /**
      * 
@@ -200,8 +245,11 @@ public interface ProcessRemarkService {
      * @param value
      * @param url
      */
-    void addConsolidationRemark(TestSolution processResult,
-            String messageCode, String value, String url);
+    void addConsolidationRemark(
+            TestSolution processResult,
+            String messageCode, 
+            String value, 
+            String url);
 
     /**
      *
@@ -211,8 +259,11 @@ public interface ProcessRemarkService {
      * @param url
      * @return
      */
-    ProcessRemark createConsolidationRemark(TestSolution processResult,
-            String messageCode, String value, String url);
+    ProcessRemark createConsolidationRemark(
+            TestSolution processResult,
+            String messageCode, 
+            String value, 
+            String url);
 
     /**
      *
