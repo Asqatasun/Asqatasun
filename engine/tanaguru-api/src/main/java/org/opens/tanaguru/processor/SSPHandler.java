@@ -21,15 +21,17 @@
  */
 package org.opens.tanaguru.processor;
 
+import com.phloc.css.decl.CascadingStyleSheet;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import org.jsoup.select.Elements;
-import org.opens.tanaguru.contentadapter.css.CSSOMRule;
 import org.opens.tanaguru.contentadapter.util.URLIdentifier;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.SSP;
+import org.opens.tanaguru.entity.audit.StylesheetContent;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.service.NomenclatureLoaderService;
@@ -91,14 +93,6 @@ public interface SSPHandler {
 
     /**
      *
-     * @param blackList
-     *            the black listed units
-     * @return result of the checking
-     */
-    TestSolution checkRelativeUnitExists(Collection<Integer> blackList);
-
-    /**
-     *
      * @param blacklist
      *            the list of prevented values
      * @param whitelist
@@ -134,12 +128,6 @@ public interface SSPHandler {
     
     /**
      *
-     * @return the selected CSS rules list
-     */
-    Collection<CSSOMRule> getSelectedCSSOMRuleList();
-
-    /**
-     *
      * @return the SSP
      */
     SSP getSSP();
@@ -165,18 +153,6 @@ public interface SSPHandler {
      * @return the current DOMHandler instance
      */
     SSPHandler keepNodesWithChildNode(String childNodeName);
-
-    /**
-     *
-     * @return the current SSPHandler with all CSS rules
-     */
-    SSPHandler selectAllRules();
-
-    /**
-     *
-     * @return the current SSPHandler with a set of CSS rules
-     */
-    SSPHandler keepRulesWithMedia(Collection<String> mediaNames);
 
     /**
      *
@@ -290,11 +266,6 @@ public interface SSPHandler {
     int getSelectedElementNumber();
 
     /**
-     * @return the number of css selectors
-     */
-    int getCssSelectorNumber();
-
-    /**
      * 
      * @param processRemarkService
      */
@@ -349,6 +320,19 @@ public interface SSPHandler {
      * @return 
      */
     String getPreProcessResult(String key, WebResource page);
+    
+    
+    /**
+     *
+     * @return the selected CSS rules list
+     */
+    Map<String,CascadingStyleSheet> getStyleSheetMap();
+    
+    /**
+     *
+     * @return the selected CSS rules list
+     */
+    Collection<StylesheetContent> getStyleSheetOnError();
     
     /**
      * @deprecated

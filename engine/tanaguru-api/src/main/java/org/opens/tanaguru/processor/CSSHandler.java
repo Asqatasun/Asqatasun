@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,11 +21,12 @@
  */
 package org.opens.tanaguru.processor;
 
+import com.phloc.css.decl.CascadingStyleSheet;
+import java.util.Collection;
+import java.util.Map;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.audit.TestSolution;
-import java.util.Collection;
-import org.opens.tanaguru.contentadapter.css.CSSOMRule;
+import org.opens.tanaguru.entity.audit.StylesheetContent;
 import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
@@ -42,48 +43,28 @@ public interface CSSHandler {
 
     /**
      *
-     * @param blacklist
-     *            the list of prevented values
-     * @return the result of the check processing
-     */
-    TestSolution checkRelativeUnitExists(Collection<Integer> blacklist);
-
-    /**
-     *
      * @return a collection of ProcessRemark
      */
     Collection<ProcessRemark> getRemarkList();
 
     /**
      *
-     * @return the current CSSHandler instance
+     * @return the selected CSS rules list
      */
-    CSSHandler selectAllRules();
+    Map<String,CascadingStyleSheet> getStyleSheetMap();
     
     /**
      *
-     * @return the selected CSS rules list
+     * @return the CSS generating an error when adapting and that can't be tested
      */
-    Collection<CSSOMRule> getSelectedCSSOMRuleList();
-
-    /**
-     *
-     * @return the current CSSHandler instance
-     */
-    CSSHandler keepRulesWithMedia(Collection<String> mediaNames);
-
+    Collection<StylesheetContent> getStyleSheetOnError();
+    
     /**
      *
      * @param ssp
      *            the SSP so set
      */
     void setSSP(SSP ssp);
-
-    /**
-     * This method return the number of css selectors
-     * @return
-     */
-    public int getCssSelectorNumber();
 
     /**
      *
