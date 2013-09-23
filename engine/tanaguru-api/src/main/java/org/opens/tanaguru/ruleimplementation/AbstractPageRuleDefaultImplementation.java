@@ -23,8 +23,6 @@ package org.opens.tanaguru.ruleimplementation;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.opens.tanaguru.entity.audit.DefiniteResult;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -33,34 +31,25 @@ import org.opens.tanaguru.processor.SSPHandler;
 /**
  * This class should be overriden by concrete {@link RuleImplementation} classes
  * which implement tests with page scope. The process implementation
- * is divided into 3 commons actions when testing a page : 
+ * is divided into 2 commons actions when testing a page : 
  *  <ul>
- *  <li>selection</li>
- *  <li>check</li>
+ *  <li>selectionAndCheck</li>
  *  <li>result computation</li>
  *  </ul>
  *  It provides a default implementation for the result computation.<br/>
- *  This class implements the {@link ElementHanlder} interface to handle the selected 
- *  elements of the selections and the {@link TestSolutionHanlder} to handle results
+ *  This class implements the {@link TestSolutionHanlder} to handle results
  *  of the checks. <br/>
- *  The concrete implementation may need to use local instances of {@link ElementHanlder}
- *  implementation when multiple selection is needed.
  * 
  * @author jkowalczyk
  */
 public abstract class AbstractPageRuleDefaultImplementation extends AbstractPageRuleImplementation 
-    implements ElementHandler, TestSolutionHandler{
+    implements TestSolutionHandler {
 
     /**
      * The testSolution of the elementary checks used to compute the final
      * result of the test
      */
     Collection<TestSolution> testSolutions = new ArrayList<TestSolution>();
-    
-    /**
-     * The elements implied by the test
-     */
-    private Elements elements = new Elements();
     
     /**
      * Default constructor
@@ -77,43 +66,26 @@ public abstract class AbstractPageRuleDefaultImplementation extends AbstractPage
      */
     @Override
     protected ProcessResult processImpl(SSPHandler sspHandler) {
-        select(sspHandler, this);
-        check(sspHandler, this, this);
+        selectAndCheck(sspHandler, this);
         return computeResult(sspHandler, this);
     }
     
     /**
-     * This method defines a select operation . The instance of 
+     * This method combines the select and the check operations. The instance of 
      * {@link SSPHandler} received as a parameter concerns only one page. 
      *
      * @param sspHandler
      *            the SSP handler to use.
-     * @param elementHandler
-     *            the selectionHandler that handles the selected elements of the DOM.
-     * @return the result of the processing.
-     */
-    abstract protected void select(SSPHandler sspHandler, ElementHandler elementHandler);
-    
-    /**
-     * This method defines a check operation . The instance of 
-     * {@link SSPHandler} received as a parameter concerns only one page. 
-     * The check operation may create TestSolutions handled by the 
-     * testSolutionHandler. By default this method reset the processRemark 
-     * service to clean-up local collection of remarks before collecting new one.
-     * Classes that override this class HAVE to make an explicit call to 
-     * super.check(...) OR reset the service.
-     *
-     * @param sspHandler
-     *            the SSP handler to use.
-     * @param elementHandler
-     *            the selectionHandler that handles the selected elements of the DOM.
      * @param testSolutionHandler
      *            the testSolutionHandler that handles the computed TestSolutions.
-     * @return the result of the processing.
      */
-    protected void check(SSPHandler sspHandler, ElementHandler selectionHandler, TestSolutionHandler testSolutionHandler) {
-        sspHandler.getProcessRemarkService().resetService();
-    }
+    abstract protected void selectAndCheck(SSPHandler sspHandler, TestSolutionHandler testSolutionHandler);
+    
+    /**
+     * 
+     * @return The total number of elements implied by test.
+     */
+    abstract protected int getSelectionSize();
     
     /**
      * This method computes the {@link DefiniteResult} of the test from the
@@ -126,7 +98,7 @@ public abstract class AbstractPageRuleDefaultImplementation extends AbstractPage
      * @return the result of the processing.
      */
     protected ProcessResult computeResult(SSPHandler sspHandler, TestSolutionHandler testSolutionHandler) {
-        return prepareDefiniteResult(testSolutionHandler.getTestSolution(), sspHandler, elements.size());
+        return prepareDefiniteResult(testSolutionHandler.getTestSolution(), sspHandler, getSelectionSize());
     }
     
     /**
@@ -190,51 +162,6 @@ public abstract class AbstractPageRuleDefaultImplementation extends AbstractPage
                 elementCounter);
     }
 
-    @Override
-    public void add(Element element) {
-        if (!elements.contains(element)) {
-            elements.add(element);
-        }
-    }
-    
-    @Override
-    public void remove(Element element) {
-        elements.remove(element);
-    }
-    
-    @Override
-    public void addAll(Elements elements) {
-        for (Element el : elements) {
-            add(el);
-        }
-    }
-
-    @Override
-    public void removeAll(Elements elements) {
-        this.elements.removeAll(elements);
-    }
-    
-    @Override
-    public void removeAll(ElementHandler elementHandler) {
-        elements.removeAll(elementHandler.get());
-    }
-    
-    @Override
-    public ElementHandler clean() {
-        elements.clear();
-        return this;
-    }
-    
-    @Override
-    public Elements get() {
-        return elements;
-    }
-    
-    @Override
-    public boolean isEmpty() {
-        return elements.isEmpty();
-    }
-    
     @Override
     public void addTestSolution(TestSolution testSolution) {
         testSolutions.add(testSolution);
