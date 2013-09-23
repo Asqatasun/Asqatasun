@@ -21,17 +21,12 @@
  */
 package org.opens.tanaguru.entity.service.audit;
 
-import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.entity.audit.Content;
-import org.opens.tanaguru.entity.audit.JavascriptContent;
-import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.audit.StylesheetContent;
-import org.opens.tanaguru.sdk.entity.service.GenericDataService;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-import org.opens.tanaguru.entity.audit.RelatedContent;
+import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.sdk.entity.service.GenericDataService;
 
 /**
  * 
