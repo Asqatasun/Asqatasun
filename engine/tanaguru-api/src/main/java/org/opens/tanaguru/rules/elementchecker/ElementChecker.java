@@ -45,7 +45,7 @@ public interface ElementChecker {
      */
     void check (
             SSPHandler sspHandler, 
-            ElementHandler selectionHandler, 
+            ElementHandler elementHandler, 
             TestSolutionHandler testSolutionHandler);
     
 }

@@ -22,6 +22,7 @@
 
 package org.opens.tanaguru.rules.elementselector;
 
+import org.jsoup.nodes.Element;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 
@@ -40,6 +41,6 @@ public interface ElementSelector {
      * @param elementHandler
      *  
      */
-    void selectElements(SSPHandler sspHandler, ElementHandler elementHandler);
+    void selectElements(SSPHandler sspHandler, ElementHandler<Element> elementHandler);
     
 }

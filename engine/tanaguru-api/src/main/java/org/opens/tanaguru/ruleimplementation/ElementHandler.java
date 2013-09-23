@@ -21,49 +21,48 @@
  */
 package org.opens.tanaguru.ruleimplementation;
 
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import java.util.Collection;
 
 /**
  * Common interface to deal with selected DOM elements
  * 
  */
-public interface ElementHandler {
+public interface ElementHandler<E> {
     
     /**
      * Add an element to the collection
      * 
      * @param element 
      */
-    void add(Element element);
+    void add(E element);
     
     /**
      * remove an element from the collection
      * 
      * @param element 
      */
-    void remove(Element element);
+    void remove(E element);
     
     /**
      * Add elements to the collection
      * 
      * @param elements 
      */
-    void addAll(Elements elements);
+    void addAll(Collection<E> elements);
     
     /**
      * Remove elements from the collection
      * 
      * @param elements 
      */
-    void removeAll(Elements elements);
+    void removeAll(Collection<E> elements);
     
     /**
      * Remove elements from the collection
      * 
      * @param elements 
      */
-    void removeAll(ElementHandler elementHandler);
+    void removeAll(ElementHandler<E> elementHandler);
     
     /**
      * Clean the collection of element
@@ -76,7 +75,7 @@ public interface ElementHandler {
      * @return all the collected elements
      * 
      */
-    Elements get();
+    Collection<E> get();
     
     /**
      * 
