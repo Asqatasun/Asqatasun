@@ -65,8 +65,8 @@ public class SiteAuditCommandImplTest extends AuditCommandTestCase {
         
         SiteAuditCommandImpl siteAuditCommand = new SiteAuditCommandImpl(
                 siteUrl, 
-                null);
-        siteAuditCommand.setAuditDataService(mockAuditDataService);
+                null,
+                mockAuditDataService);
         siteAuditCommand.setTestDataService(mockTestDataService);
         siteAuditCommand.setParameterDataService(mockParameterDataService);
         siteAuditCommand.setWebResourceDataService(mockWebResourceDataService);

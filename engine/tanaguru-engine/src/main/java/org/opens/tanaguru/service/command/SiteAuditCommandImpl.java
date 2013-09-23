@@ -25,6 +25,7 @@ package org.opens.tanaguru.service.command;
 import java.util.Set;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.service.audit.AuditDataService;
 
 /**
  *
@@ -45,10 +46,14 @@ public class SiteAuditCommandImpl extends CrawlAuditCommandImpl {
     /**
      * 
      * @param siteUrl
-     * @param paramSet 
+     * @param paramSet
+     * @param auditDataService 
      */
-    public SiteAuditCommandImpl(String siteUrl, Set<Parameter> paramSet) {
-        super(paramSet);
+    public SiteAuditCommandImpl(
+            String siteUrl, 
+            Set<Parameter> paramSet,
+            AuditDataService auditDataService) {
+        super(paramSet, auditDataService);
         
         this.siteUrl = siteUrl;
     }

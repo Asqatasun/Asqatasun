@@ -418,8 +418,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
     public class TestAuditCommandImpl extends AuditCommandImpl {
 
         public TestAuditCommandImpl() {
-            super(null);
-            setAuditDataService(mockAuditDataService);
+            super(null, mockAuditDataService);
             setTestDataService(mockTestDataService);
             setParameterDataService(mockParameterDataService);
             setWebResourceDataService(mockWebResourceDataService);

@@ -26,6 +26,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.service.AuditServiceImpl;
 import org.opens.tanaguru.service.CrawlerService;
 
@@ -53,10 +54,13 @@ public abstract class CrawlAuditCommandImpl extends AuditCommandImpl {
     
     /**
      * 
-     * @param paramSet 
+     * @param paramSet
+     * @param auditDataService 
      */
-    public CrawlAuditCommandImpl(Set<Parameter> paramSet) {
-        super(paramSet);
+    public CrawlAuditCommandImpl(
+            Set<Parameter> paramSet,
+            AuditDataService auditDataService) {
+        super(paramSet, auditDataService);
     }
     
     @Override

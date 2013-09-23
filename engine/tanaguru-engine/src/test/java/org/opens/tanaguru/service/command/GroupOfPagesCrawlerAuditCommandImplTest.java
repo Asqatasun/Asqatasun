@@ -70,8 +70,8 @@ public class GroupOfPagesCrawlerAuditCommandImplTest extends AuditCommandTestCas
                 new GroupOfPagesCrawlerAuditCommandImpl(
                     siteUrl, 
                     urlList,
-                    null);
-        groupOfPagesAuditCommand.setAuditDataService(mockAuditDataService);
+                    null,
+                    mockAuditDataService);
         groupOfPagesAuditCommand.setTestDataService(mockTestDataService);
         groupOfPagesAuditCommand.setParameterDataService(mockParameterDataService);
         groupOfPagesAuditCommand.setWebResourceDataService(mockWebResourceDataService);

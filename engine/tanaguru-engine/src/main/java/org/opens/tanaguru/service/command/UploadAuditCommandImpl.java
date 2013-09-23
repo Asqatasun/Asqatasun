@@ -29,6 +29,7 @@ import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -63,10 +64,14 @@ public class UploadAuditCommandImpl extends AuditCommandImpl {
     /**
      * 
      * @param fileMap
-     * @param paramSet 
+     * @param paramSet
+     * @param auditDataService 
      */
-    public UploadAuditCommandImpl(Map<String, String> fileMap, Set<Parameter> paramSet) {
-        super(paramSet);
+    public UploadAuditCommandImpl(
+            Map<String, String> fileMap, 
+            Set<Parameter> paramSet,
+            AuditDataService auditDataService) {
+        super(paramSet, auditDataService);
         
         this.fileMap = fileMap;
     }

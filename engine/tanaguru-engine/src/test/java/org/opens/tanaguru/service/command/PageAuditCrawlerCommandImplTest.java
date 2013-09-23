@@ -66,8 +66,8 @@ public class PageAuditCrawlerCommandImplTest extends AuditCommandTestCase {
         
         PageAuditCrawlerCommandImpl pageAuditCommand = new PageAuditCrawlerCommandImpl(
                 pageUrl, 
-                null);
-        pageAuditCommand.setAuditDataService(mockAuditDataService);
+                null,
+                mockAuditDataService);
         pageAuditCommand.setTestDataService(mockTestDataService);
         pageAuditCommand.setParameterDataService(mockParameterDataService);
         pageAuditCommand.setWebResourceDataService(mockWebResourceDataService);

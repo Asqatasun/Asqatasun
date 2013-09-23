@@ -24,6 +24,7 @@ package org.opens.tanaguru.service.command;
 
 import java.util.Set;
 import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.service.audit.AuditDataService;
 
 /**
  *
@@ -36,23 +37,14 @@ public class ScenarioAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
      * @param scenarioName
      * @param scenario
      * @param paramSet
-     * @param auditDataService
-     * @param testDataService
-     * @param parameterDataService
-     * @param webResourceDataService
-     * @param contentDataService
-     * @param processResultDataService
-     * @param contentAdapterService
-     * @param processorService
-     * @param consolidatorService
-     * @param analyserService
-     * @param adaptationListener 
+     * @param auditDataService 
      */
     public ScenarioAuditCommandImpl(
             String scenarioName,
             String scenario,
-            Set<Parameter> paramSet) {
-        super(paramSet);
+            Set<Parameter> paramSet, 
+            AuditDataService auditDataService) {
+        super(paramSet, auditDataService);
         setScenario(scenario);
         setScenarioName(scenarioName);
         setIsPage(false);

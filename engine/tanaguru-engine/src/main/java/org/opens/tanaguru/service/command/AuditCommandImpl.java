@@ -212,11 +212,15 @@ public abstract class AuditCommandImpl implements AuditCommand {
     private Set<Parameter> paramSet;
 
     /**
-     * 
      * @param paramSet 
+     * @param auditDataService
      */
-    public AuditCommandImpl(Set<Parameter> paramSet) {
+    public AuditCommandImpl(
+            Set<Parameter> paramSet,
+            AuditDataService auditDataService) {
         this.paramSet = paramSet;
+        this.auditDataService = auditDataService;
+        audit = auditDataService.create();
     }
     
     /**
@@ -228,7 +232,6 @@ public abstract class AuditCommandImpl implements AuditCommand {
     public void init() {
         // the paramSet has to be persisted
         parameterDataService.saveOrUpdate(paramSet);
-        audit = auditDataService.create();
         audit.setTestList(testDataService.getTestListFromParamSet(paramSet));
         audit.setParameterSet(paramSet);
         referential = extractReferentialFromParamSet(paramSet);
@@ -841,7 +844,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
      * Set a new status to the audit instance and persist it
      * @param auditStatus 
      */
-    public void setStatusToAudit(AuditStatus auditStatus) {
+    public final void setStatusToAudit(AuditStatus auditStatus) {
         audit.setStatus(auditStatus);
         audit = auditDataService.saveOrUpdate(audit);
     }

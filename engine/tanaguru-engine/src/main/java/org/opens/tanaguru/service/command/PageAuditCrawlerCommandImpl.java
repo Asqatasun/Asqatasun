@@ -25,6 +25,7 @@ package org.opens.tanaguru.service.command;
 import java.util.Set;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.util.FileNaming;
 
 /**
@@ -46,13 +47,15 @@ public class PageAuditCrawlerCommandImpl extends CrawlAuditCommandImpl {
     /**
      * 
      * @param pageUrl
-     * @param paramSet 
+     * @param paramSet
+     * @param auditDataService 
      */
     public PageAuditCrawlerCommandImpl(
                 String pageUrl,
-                Set<Parameter> paramSet) {
+                Set<Parameter> paramSet,
+                AuditDataService auditDataService) {
         
-        super(paramSet);
+        super(paramSet, auditDataService);
         
         this.pageUrl = FileNaming.addProtocolToUrl(pageUrl);
     }

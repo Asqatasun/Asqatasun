@@ -26,6 +26,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.service.ScenarioLoaderService;
 
@@ -82,10 +83,13 @@ public abstract class AbstractScenarioAuditCommandImpl extends AuditCommandImpl 
     
     /**
      * 
-     * @param paramSet 
+     * @param paramSet
+     * @param auditDataService 
      */
-    public AbstractScenarioAuditCommandImpl(Set<Parameter> paramSet) {
-        super(paramSet);
+    public AbstractScenarioAuditCommandImpl(
+                Set<Parameter> paramSet,
+                AuditDataService auditDataService) {
+        super(paramSet, auditDataService);
     }
 
     @Override

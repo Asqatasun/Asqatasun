@@ -175,17 +175,20 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
     @Override
     public AuditCommand create(String url, Set<Parameter> paramSet, boolean isSite) {
         if (isSite) {
-            SiteAuditCommandImpl auditCommand = new SiteAuditCommandImpl(url, paramSet);
+            SiteAuditCommandImpl auditCommand = 
+                    new SiteAuditCommandImpl(url, paramSet, auditDataService);
             initCommandServices(auditCommand);
             auditCommand.setCrawlerService(crawlerService);
             return auditCommand;
         } else if (auditPageWithCrawler) {
-            PageAuditCrawlerCommandImpl auditCommand = new PageAuditCrawlerCommandImpl(url, paramSet);
+            PageAuditCrawlerCommandImpl auditCommand = 
+                    new PageAuditCrawlerCommandImpl(url, paramSet, auditDataService);
             initCommandServices(auditCommand);
             auditCommand.setCrawlerService(crawlerService);
             return auditCommand;
         } else {
-            PageAuditCommandImpl auditCommand = new PageAuditCommandImpl(url, paramSet);
+            PageAuditCommandImpl auditCommand = 
+                    new PageAuditCommandImpl(url, paramSet, auditDataService);
             initCommandServices(auditCommand);
             auditCommand.setScenarioLoaderService(scenarioLoaderService);
             return auditCommand;
@@ -194,7 +197,8 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
 
     @Override
     public AuditCommand create(Map<String, String> fileMap, Set<Parameter> paramSet) {
-        UploadAuditCommandImpl auditCommand = new UploadAuditCommandImpl(fileMap, paramSet);
+        UploadAuditCommandImpl auditCommand = 
+                new UploadAuditCommandImpl(fileMap, paramSet, auditDataService);
         initCommandServices(auditCommand);
         auditCommand.setContentLoaderService(contentLoaderService);
         return auditCommand;
@@ -208,7 +212,8 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
                 new GroupOfPagesCrawlerAuditCommandImpl(
                     siteUrl, 
                     pageUrlList, 
-                    paramSet);
+                    paramSet,
+                    auditDataService);
             initCommandServices(auditCommand);
             auditCommand.setCrawlerService(crawlerService);
             return auditCommand;
@@ -217,7 +222,8 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
                 new GroupOfPagesAuditCommandImpl(
                     siteUrl, 
                     pageUrlList, 
-                    paramSet);
+                    paramSet,
+                    auditDataService);
             initCommandServices(auditCommand);
             auditCommand.setScenarioLoaderService(scenarioLoaderService);
             return auditCommand;
@@ -227,7 +233,7 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
     @Override
     public AuditCommand create(String scenarioName, String scenario, Set<Parameter> paramSet) {
         ScenarioAuditCommandImpl auditCommand = 
-                new ScenarioAuditCommandImpl(scenarioName, scenario, paramSet );
+                new ScenarioAuditCommandImpl(scenarioName, scenario, paramSet, auditDataService);
         initCommandServices(auditCommand);
         auditCommand.setScenarioLoaderService(scenarioLoaderService);
         return auditCommand;
@@ -242,7 +248,7 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
         auditCommand.setAdaptationTreatmentWindow(adaptationTreatmentWindow);
         auditCommand.setAnalyseTreatmentWindow(analyseTreatmentWindow);
         auditCommand.setAnalyserService(analyserService);
-        auditCommand.setAuditDataService(auditDataService);
+//        auditCommand.setAuditDataService(auditDataService);
         auditCommand.setCleanUpRelatedContent(cleanUpRelatedContent);
         auditCommand.setConsolidationTreatmentWindow(consolidationTreatmentWindow);
         auditCommand.setConsolidatorService(consolidatorService);

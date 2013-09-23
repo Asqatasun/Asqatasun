@@ -25,6 +25,7 @@ package org.opens.tanaguru.service.command;
 import java.util.Set;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.sebuilder.tools.ScenarioBuilder;
 import org.opens.tanaguru.util.FileNaming;
@@ -41,24 +42,26 @@ public class PageAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
     /**
      * 
      * @param pageUrl
-     * @param paramSet 
+     * @param paramSet
+     * @param auditDataService 
      */
     public PageAuditCommandImpl(
             String pageUrl,
-            Set<Parameter> paramSet) {
-        super(paramSet);
+            Set<Parameter> paramSet,
+            AuditDataService auditDataService) {
+        super(paramSet, auditDataService);
         this.pageUrl = FileNaming.addProtocolToUrl(pageUrl);
     }
 
     @Override
     public void init() {
-        super.init();
         if (HttpRequestHandler.getInstance().isUrlAccessible(pageUrl)) {
             setScenario(ScenarioBuilder.buildScenario(pageUrl));
             setScenarioName(pageUrl);
             setIsPage(true);
             super.init();
         } else {
+            super.init();
             createEmptyWebResource(pageUrl);
             setStatusToAudit(AuditStatus.ERROR);
         }

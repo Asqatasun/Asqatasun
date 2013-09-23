@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.sebuilder.tools.ScenarioBuilder;
 import org.opens.tanaguru.util.FileNaming;
 
@@ -39,14 +40,16 @@ public class GroupOfPagesAuditCommandImpl extends AbstractScenarioAuditCommandIm
      * 
      * @param siteUrl
      * @param pageUrlList
-     * @param paramSet 
+     * @param paramSet
+     * @param auditDataService 
      */
     public GroupOfPagesAuditCommandImpl(
                 String siteUrl, 
                 List<String> pageUrlList,
-                Set<Parameter> paramSet) {
+                Set<Parameter> paramSet,
+                AuditDataService auditDataService) {
         
-        super(paramSet);
+        super(paramSet,auditDataService);
 
         List<String> localUrlList = new ArrayList<String>();
         for (String url : pageUrlList) {

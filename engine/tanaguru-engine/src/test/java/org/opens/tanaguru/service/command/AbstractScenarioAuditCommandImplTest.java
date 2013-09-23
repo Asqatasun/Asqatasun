@@ -192,8 +192,7 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
     public class TestAbstractScenarioAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
 
         public TestAbstractScenarioAuditCommandImpl() {
-            super(null);
-            setAuditDataService(mockAuditDataService);
+            super(null, mockAuditDataService);
             setTestDataService(mockTestDataService);
             setParameterDataService(mockParameterDataService);
             setWebResourceDataService(mockWebResourceDataService);

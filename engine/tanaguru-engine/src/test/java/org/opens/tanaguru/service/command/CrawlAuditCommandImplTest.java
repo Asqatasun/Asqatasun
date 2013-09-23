@@ -135,8 +135,7 @@ public class CrawlAuditCommandImplTest extends AuditCommandTestCase {
     public class TestCrawlAuditCommandImpl extends CrawlAuditCommandImpl {
 
         public TestCrawlAuditCommandImpl() {
-            super(null);
-            setAuditDataService(mockAuditDataService);
+            super(null, mockAuditDataService);
             setTestDataService(mockTestDataService);
             setParameterDataService(mockParameterDataService);
             setWebResourceDataService(mockWebResourceDataService);

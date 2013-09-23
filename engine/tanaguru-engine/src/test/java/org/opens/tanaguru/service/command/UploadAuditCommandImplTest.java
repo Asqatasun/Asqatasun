@@ -235,8 +235,8 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
     private UploadAuditCommandImpl getInstance(Map<String,String> fileMap, Set<Parameter> paramSet) {
         UploadAuditCommandImpl instance = new UploadAuditCommandImpl(
                 fileMap, 
-                paramSet);
-        instance.setAuditDataService(mockAuditDataService);
+                paramSet,
+                mockAuditDataService);
         instance.setTestDataService(mockTestDataService);
         instance.setParameterDataService(mockParameterDataService);
         instance.setWebResourceDataService(mockWebResourceDataService);
