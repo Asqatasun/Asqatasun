@@ -23,7 +23,6 @@ package org.opens.tanaguru.service;
 
 import java.util.Collection;
 import org.jsoup.nodes.Element;
-import org.opens.tanaguru.contentadapter.css.CSSOMRule;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.SourceCodeRemark;
@@ -173,17 +172,6 @@ public interface ProcessRemarkService {
             TestSolution processResult,
             Element element, 
             String messageCode);
-
-    /**
-     * @deprecated
-     * @param processResult
-     * @param rule
-     * @param messageCode
-     * @param attrName
-     */
-    @Deprecated
-    void addCssCodeRemark(TestSolution processResult,
-            CSSOMRule rule, String messageCode, String attrName, String fileName);
     
     /**
      *

@@ -33,23 +33,15 @@ import org.apache.log4j.Logger;
 import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.opens.tanaguru.contentadapter.css.CSSOMDeclaration;
-import org.opens.tanaguru.contentadapter.css.CSSOMRule;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.entity.factory.audit.EvidenceElementFactory;
 import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
 import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.entity.service.audit.EvidenceDataService;
 import org.opens.tanaguru.service.ProcessRemarkService;
-import org.w3c.css.sac.ConditionalSelector;
-import org.w3c.css.sac.DescendantSelector;
-import org.w3c.css.sac.ElementSelector;
-import org.w3c.css.sac.Selector;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.flute.parser.selectors.ClassConditionImpl;
-import org.w3c.flute.parser.selectors.IdConditionImpl;
 
 /**
  * 
@@ -315,42 +307,6 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         remarkSet.add(remark);
     }
 
-    @Override
-    public void addCssCodeRemark(TestSolution processResult,
-            CSSOMRule rule, String messageCode, String attrName, String fileName) {// XXX
-        SourceCodeRemark remark = sourceCodeRemarkFactory.create();
-        remark.setIssue(processResult);
-        remark.setMessageCode(messageCode);
-        // This a fake sourceCode Remark, the line number cannot be found
-        // we use a sourceCodeRemark here to add evidence elements
-        remark.setLineNumber(-1);
-        EvidenceElement evidenceElement = evidenceElementFactory.create();
-        evidenceElement.setProcessRemark(remark);
-        evidenceElement.setValue(attrName);
-        evidenceElement.setEvidence(getEvidence(DEFAULT_EVIDENCE));
-        remark.addElement(evidenceElement);
-        try {
-            String selectorValue = computeSelector(rule);
-            if (selectorValue != null) {
-                EvidenceElement cssSelectorEvidenceElement = evidenceElementFactory.create();
-                cssSelectorEvidenceElement.setProcessRemark(remark);
-                cssSelectorEvidenceElement.setValue(selectorValue);
-                cssSelectorEvidenceElement.setEvidence(getEvidence(CSS_SELECTOR_EVIDENCE));
-                remark.addElement(cssSelectorEvidenceElement);
-            }
-            if (fileName != null) {
-                EvidenceElement fileNameEvidenceElement = evidenceElementFactory.create();
-                fileNameEvidenceElement.setProcessRemark(remark);
-                fileNameEvidenceElement.setValue(fileName);
-                fileNameEvidenceElement.setEvidence(getEvidence(CSS_FILENAME_EVIDENCE));
-                remark.addElement(fileNameEvidenceElement);
-            }
-        } catch (ClassCastException ex) {
-            LOGGER.error(ex.getMessage());
-        }
-        remarkSet.add(remark);
-    }
-    
     @Override
     public void addCssCodeRemark(TestSolution processResult,
             String selectorValue, 
@@ -750,65 +706,6 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             return elementHtml.substring(0, SNIPPET_MAX_LENGTH);
         }
         return elementHtml;
-    }
-    
-    private String computeSelector(CSSOMRule rule) {
-        StringBuilder selectorValue = new StringBuilder();
-        Selector selector = rule.getSelectors().get(0).getSelector();
-        CSSOMDeclaration cssomDeclaration = null;
-        if (rule.getSelectors().get(0).getOwnerDeclaration() != null) {
-            cssomDeclaration = rule.getSelectors().get(0).getOwnerDeclaration().get(0);
-        }
-        if (selector instanceof DescendantSelector) {
-            selectorValue.append(computeDescendantSelector((DescendantSelector)selector));
-        } else if  (selector instanceof ConditionalSelector) {
-            selectorValue.append(computeConditionalSelector((ConditionalSelector)selector));
-        } else {
-            selectorValue.append(computeElementSelector(selector, cssomDeclaration));
-        }
-        return selectorValue.toString();
-    }
-
-    private String computeDescendantSelector(DescendantSelector ds) {
-        StringBuilder selectorValue = new StringBuilder();
-        if (ds != null) {
-            if (ds.getAncestorSelector() != null && ds.getAncestorSelector() instanceof DescendantSelector) {
-                selectorValue.append(computeDescendantSelector((DescendantSelector)ds.getAncestorSelector()));
-            } else if (ds.getAncestorSelector() != null && ds.getAncestorSelector() instanceof ConditionalSelector) {
-                selectorValue.append(computeConditionalSelector((ConditionalSelector)ds.getAncestorSelector()));
-            }
-            if (ds.getSimpleSelector() != null && ds.getSimpleSelector() instanceof ConditionalSelector) {
-                selectorValue.append(computeConditionalSelector((ConditionalSelector)ds.getSimpleSelector()));
-            }
-            else if(ds.getSimpleSelector() != null && ds.getSimpleSelector() instanceof ElementSelector) {
-                selectorValue.append(computeElementSelector(ds.getSimpleSelector(), null));
-            } 
-        }
-        return selectorValue.toString();
-    }
-
-    private String computeConditionalSelector(ConditionalSelector cs) {
-         StringBuilder selectorValue = new StringBuilder();
-        if (cs.getCondition() instanceof IdConditionImpl) {
-            selectorValue.append("#");
-            selectorValue.append(((IdConditionImpl)cs.getCondition()).getValue());
-            selectorValue.append(' ');
-        } else if (cs.getCondition() instanceof ClassConditionImpl) {
-            selectorValue.append(".");
-            selectorValue.append(((ClassConditionImpl)cs.getCondition()).getValue());
-            selectorValue.append(' ');
-        }
-         return selectorValue.toString();
-    }
-
-    private String computeElementSelector(Selector es, CSSOMDeclaration cssomDeclaration) {
-         StringBuilder selectorValue = new StringBuilder();
-        if (es instanceof ElementSelector) {
-            selectorValue.append(' ');
-            selectorValue.append(((ElementSelector)es).getLocalName());
-            selectorValue.append(' ');
-        }
-         return selectorValue.toString();
     }
 
 }
