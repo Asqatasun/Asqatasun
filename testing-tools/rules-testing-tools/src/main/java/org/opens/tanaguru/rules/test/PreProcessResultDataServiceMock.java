@@ -24,7 +24,7 @@ package org.opens.tanaguru.rules.test;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
+import javax.persistence.NoResultException;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.PreProcessResult;
 import org.opens.tanaguru.entity.audit.RelatedContent;
@@ -44,7 +44,8 @@ public class PreProcessResultDataServiceMock implements PreProcessResultDataServ
 
     @Override
     public String getPreProcessResultByKeyAndWebResource(String key, WebResource webresource) {
-        return "[{\"isHidden\"=false, \"color\"=\"rgb(0, 0, 0)\", \"path\"=\"#kba-release\", \"fontSize\"=\"13px\", \"fontWeight\"=\"normal\", \"luminosity\"=\"8.15\", \"bgcolor\"=\"rgb(255, 124, 30)\"}, {\"isHidden\"=false, \"fontWeight\"=\"normal\", \"color\"=\"rgb(0, 0, 0)\", \"path\"=\"#identification > form:nth-of-type(1) > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(1) > td:nth-of-type(1)\", \"fontSize\"=\"11.05px\", \"luminosity\"=\"20.43\", \"bgcolor\"=\"rgb(255, 255, 204)\"}, {\"isHidden\"=false, \"color\"=\"rgb(0, 0, 238)\", \"path\"=\"#identification > form:nth-of-type(1) > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(1) > td:nth-of-type(1) > a:nth-of-type(1)\", \"fontSize\"=\"11.05px\", \"luminosity\"=9.14, \"fontWeight\"=\"normal\", \"bgcolor\"=\"rgb(255, 255, 204)\"}, {\"isHidden\"=\"false\", \"color\"=\"rgb(0, 0, 0)\", \"path\"=\"#identification > form:nth-of-type(1) > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(2) > td:nth-of-type(1) > label:nth-of-type(1)\", \"fontWeight\"=\"normal\", \"fontSize\"=\"11.05px\", \"luminosity\"=\"20.43\", \"bgcolor\"=\"rgb(255, 255, 204)\"}]";
+        throw new NoResultException();
+//        return "[{\"isHidden\"=false, \"color\"=\"rgb(0, 0, 0)\", \"path\"=\"#kba-release\", \"fontSize\"=\"13px\", \"fontWeight\"=\"normal\", \"luminosity\"=\"8.15\", \"bgcolor\"=\"rgb(255, 124, 30)\"}, {\"isHidden\"=false, \"fontWeight\"=\"normal\", \"color\"=\"rgb(0, 0, 0)\", \"path\"=\"#identification > form:nth-of-type(1) > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(1) > td:nth-of-type(1)\", \"fontSize\"=\"11.05px\", \"luminosity\"=\"20.43\", \"bgcolor\"=\"rgb(255, 255, 204)\"}, {\"isHidden\"=false, \"color\"=\"rgb(0, 0, 238)\", \"path\"=\"#identification > form:nth-of-type(1) > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(1) > td:nth-of-type(1) > a:nth-of-type(1)\", \"fontSize\"=\"11.05px\", \"luminosity\"=9.14, \"fontWeight\"=\"normal\", \"bgcolor\"=\"rgb(255, 255, 204)\"}, {\"isHidden\"=\"false\", \"color\"=\"rgb(0, 0, 0)\", \"path\"=\"#identification > form:nth-of-type(1) > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(2) > td:nth-of-type(1) > label:nth-of-type(1)\", \"fontWeight\"=\"normal\", \"fontSize\"=\"11.05px\", \"luminosity\"=\"20.43\", \"bgcolor\"=\"rgb(255, 255, 204)\"}]";
     }
 
     @Override
@@ -83,7 +84,7 @@ public class PreProcessResultDataServiceMock implements PreProcessResultDataServ
     }
 
     @Override
-    public void delete(Set<PreProcessResult> entitySet) {
+    public void delete(Collection<PreProcessResult> entitySet) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -103,7 +104,7 @@ public class PreProcessResultDataServiceMock implements PreProcessResultDataServ
     }
 
     @Override
-    public Set<PreProcessResult> saveOrUpdate(Set<PreProcessResult> entitySet) {
+    public Collection<PreProcessResult> saveOrUpdate(Collection<PreProcessResult> entitySet) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

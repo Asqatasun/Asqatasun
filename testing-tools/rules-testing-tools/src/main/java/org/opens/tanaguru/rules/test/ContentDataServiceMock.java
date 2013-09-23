@@ -21,17 +21,8 @@
  */
 package org.opens.tanaguru.rules.test;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.entity.audit.Content;
-import org.opens.tanaguru.entity.audit.JavascriptContent;
-import org.opens.tanaguru.entity.audit.RelatedContent;
-import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.audit.StylesheetContent;
+import java.util.*;
+import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
@@ -164,7 +155,7 @@ public class ContentDataServiceMock implements ContentDataService{
     }
 
     @Override
-    public void delete(Set<Content> entitySet) {
+    public void delete(Collection<Content> entitySet) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -189,7 +180,7 @@ public class ContentDataServiceMock implements ContentDataService{
     }
 
     @Override
-    public Set<Content> saveOrUpdate(Set<Content> entitySet) {
+    public Collection<Content> saveOrUpdate(Collection<Content> entitySet) {
         return null;
     }
 
@@ -206,6 +197,11 @@ public class ContentDataServiceMock implements ContentDataService{
     @Override
     public Content update(Content entity) {
         return null;
+    }
+
+    @Override
+    public void deleteRelatedContentFromContent(Content content) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

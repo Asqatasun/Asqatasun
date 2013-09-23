@@ -28,6 +28,7 @@ import java.net.URL;
 import java.util.*;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriter;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 import org.dbunit.DBTestCase;
 import org.dbunit.PropertiesBasedJdbcDatabaseTester;
@@ -353,6 +354,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     private void initializePath() {
         testcasesFilePath =
                 "file://" + System.getenv("PWD") + "/" + testcasesFilePath;
+        testcasesFilePath = FilenameUtils.normalize(testcasesFilePath);
     }
 
     private byte[] getBinaryImage(String imgUrl) {
