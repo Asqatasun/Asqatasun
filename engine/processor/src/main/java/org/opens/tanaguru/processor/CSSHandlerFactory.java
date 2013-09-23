@@ -27,10 +27,15 @@ import org.opens.tanaguru.service.ProcessRemarkService;
  *
  * @author jkowalczyk
  */
-public class CSSHandlerFactory {// TODO Write javadoc
+public class CSSHandlerFactory {
 
+    /**
+     * 
+     * @param processRemarkService
+     * @return an instance of CssHandler
+     */
     public static CSSHandler create(ProcessRemarkService processRemarkService) {
-        CSSHandler cssHandler = new CSSHandlerPhlocImpl();
+        CSSHandler cssHandler = new CSSHandlerImpl();
         cssHandler.setProcessRemarkService(processRemarkService);
         return cssHandler;
     }

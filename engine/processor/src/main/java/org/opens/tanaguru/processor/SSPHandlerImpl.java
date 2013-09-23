@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,6 +21,7 @@
  */
 package org.opens.tanaguru.processor;
 
+import com.phloc.css.decl.CascadingStyleSheet;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -34,7 +35,6 @@ import org.apache.commons.httpclient.URIException;
 import org.apache.log4j.Logger;
 import org.archive.net.UURIFactory;
 import org.jsoup.select.Elements;
-import org.opens.tanaguru.contentadapter.css.CSSOMRule;
 import org.opens.tanaguru.contentadapter.util.URLIdentifier;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
@@ -157,15 +157,6 @@ public class SSPHandlerImpl implements SSPHandler {
     }
 
     @Override
-    public TestSolution checkRelativeUnitExists(Collection<Integer> blackList) {
-        if (cssHandler != null) {
-            return cssHandler.checkRelativeUnitExists(blackList);
-        } else {
-            return TestSolution.NOT_APPLICABLE;
-        }
-    }
-
-    @Override
     public TestSolution checkTextContentValue(Collection<String> blacklist,
             Collection<String> whitelist) {
         return domHandler.checkTextContentValue(blacklist, whitelist);
@@ -189,11 +180,6 @@ public class SSPHandlerImpl implements SSPHandler {
     @Override
     public Elements getSelectedElements() {
         return domHandler.getSelectedElements();
-    }
-    
-    @Override
-    public Collection<CSSOMRule> getSelectedCSSOMRuleList() {
-        return cssHandler.getSelectedCSSOMRuleList();
     }
 
     @Override
@@ -221,14 +207,6 @@ public class SSPHandlerImpl implements SSPHandler {
     public SSPHandler selectAllJS() {
         if (jsHandler != null) {
             jsHandler.selectAllJS();
-        }
-        return this;
-    }
-
-    @Override
-    public SSPHandler selectAllRules() {
-        if (cssHandler != null) {
-            cssHandler.selectAllRules();
         }
         return this;
     }
@@ -349,7 +327,7 @@ public class SSPHandlerImpl implements SSPHandler {
 
     @Override
     public TestSolution domCheckNodeValueInNomenclature(String nomenclatureCode, String errorMessage) {
-        Set<TestSolution> resultSet = new HashSet<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
 
         Nomenclature nomenclature = nomenclatureLoaderService.loadByCode(nomenclatureCode);
 
@@ -392,14 +370,6 @@ public class SSPHandlerImpl implements SSPHandler {
      */
     public void setSelectionExpression(String selectionExpression) {
         this.selectionExpression = selectionExpression;
-    }
-
-    @Override
-    public SSPHandler keepRulesWithMedia(Collection<String> mediaNames) {
-        if (cssHandler != null) {
-            cssHandler.keepRulesWithMedia(mediaNames);
-        }
-        return this;
     }
 
     @Override
@@ -508,11 +478,6 @@ public class SSPHandlerImpl implements SSPHandler {
     }
 
     @Override
-    public int getCssSelectorNumber() {
-        return cssHandler.getCssSelectorNumber();
-    }
-
-    @Override
     public void setMessageCode(String messageCode) {
         domHandler.setMessageCode(messageCode);
     }
@@ -520,6 +485,16 @@ public class SSPHandlerImpl implements SSPHandler {
     @Override 
     public String getPreProcessResult(String key, WebResource page) {
         return preProcessResultDataService.getPreProcessResultByKeyAndWebResource(key, page);
+    }
+    
+    @Override
+    public Map<String, CascadingStyleSheet> getStyleSheetMap() {
+        return cssHandler.getStyleSheetMap();
+    }
+
+    @Override
+    public Collection<StylesheetContent> getStyleSheetOnError() {
+        return cssHandler.getStyleSheetOnError();
     }
     
     @Override
@@ -702,5 +677,5 @@ public class SSPHandlerImpl implements SSPHandler {
     public TestSolution checkAttributeValueNotEmpty(String attributeName) {
         return domHandler.checkAttributeValueNotEmpty(attributeName);
     }
-    
+
 }
