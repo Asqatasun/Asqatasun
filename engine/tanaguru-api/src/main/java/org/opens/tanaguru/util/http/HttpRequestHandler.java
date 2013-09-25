@@ -29,20 +29,19 @@ import java.nio.charset.IllegalCharsetNameException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.apache.commons.httpclient.Header;
+import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.URIException;
+import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.methods.HeadMethod;
+import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHost;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpHead;
 import org.apache.http.conn.params.ConnRoutePNames;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
-import org.apache.http.params.HttpParams;
 import org.apache.log4j.Logger;
 
 /**
@@ -51,8 +50,14 @@ import org.apache.log4j.Logger;
  */
 public class HttpRequestHandler {
     
-    private static final String UTF8_ENCODING_KEY = "UTF-8";
-    private static HttpRequestHandler httpRequestHandler; 
+    private static final Logger LOGGER  = Logger.getLogger(HttpRequestHandler.class);
+//    private static final String UTF8_ENCODING_KEY = "UTF-8";
+    /**
+     * The holder that handles the unique instance of LanguageDetector
+     */
+    private static class HttpRequestHandlerHolder {
+        public static HttpRequestHandler INSTANCE = new HttpRequestHandler();
+    }
     
     private String proxyPort;
     public void setProxyPort(String proxyPort) {
@@ -76,23 +81,27 @@ public class HttpRequestHandler {
         proxyExclusionUrlList.addAll(Arrays.asList(proxyExclusionUrl.split(";")));
     }
 
-    private int connectionTimeout = 3000;
+    private int connectionTimeout = 20000;
     public void setConnectionTimeout(int connectionTimeout) {
         this.connectionTimeout = connectionTimeout;
     }
     
-    private int socketTimeout = 3000;
+    private int socketTimeout = 20000;
     public void setSocketTimeout(int socketTimeout) {
         this.socketTimeout = socketTimeout;
     }
     
-    private HttpRequestHandler() {}
+    /**
+     * Private constructor, singleton pattern
+     */
+    private HttpRequestHandler() {
+        if (HttpRequestHandlerHolder.INSTANCE != null) {
+            throw new IllegalStateException("Already instantiated");
+        }
+    }
     
     public static synchronized HttpRequestHandler getInstance() {
-        if (httpRequestHandler == null) {
-            httpRequestHandler = new HttpRequestHandler();
-        }
-        return httpRequestHandler;
+        return HttpRequestHandlerHolder.INSTANCE;
     }
 
     public boolean isUrlAccessible (String url) {
@@ -114,26 +123,31 @@ public class HttpRequestHandler {
     
     public int getHttpStatus (String url) {
         String encodedUrl = getEncodedUrl(url);
-        DefaultHttpClient httpclient = getHttpClient(encodedUrl);
+        HttpClient httpClient = getHttpClient(encodedUrl);
+        HeadMethod head = new HeadMethod(encodedUrl);
         try {
-            HttpHead httphead = new HttpHead(encodedUrl);
-            Logger.getLogger(this.getClass()).info("executing head request to retrieve page status on " + httphead.getURI());
-            // Create a response handler
-            HttpResponse responseBody = httpclient.execute(httphead);
-            Logger.getLogger(this.getClass()).warn("received " + responseBody.getStatusLine().getStatusCode() + "from head request");
-            return Integer.valueOf(responseBody.getStatusLine().getStatusCode());
+            LOGGER.debug("executing head request to retrieve page status on " + head.getURI());
+            int status = httpClient.executeMethod(head);
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("received " + status + " from head request");
+                for (Header h : head.getResponseHeaders()) {
+                    LOGGER.debug("header : " + h.toExternalForm());
+                }
+            }
+            
+            return status;
         } catch (UnknownHostException uhe) {
-            Logger.getLogger(this.getClass()).warn("UnknownHostException on " + encodedUrl);
+            LOGGER.warn("UnknownHostException on " + encodedUrl);
             return HttpStatus.SC_NOT_FOUND;
         } catch (IOException ioe) {
-            Logger.getLogger(this.getClass()).warn("IOException on " + encodedUrl);
+            LOGGER.warn("IOException on " + encodedUrl);
             ioe.fillInStackTrace();
             return HttpStatus.SC_NOT_FOUND;
         } finally {
             // When HttpClient instance is no longer needed,
             // shut down the connection manager to ensure
             // immediate deallocation of all system resources
-            httpclient.getConnectionManager().shutdown();
+            head.releaseConnection();
         }
     }
     
@@ -143,47 +157,56 @@ public class HttpRequestHandler {
         }
         
         String encodedUrl = getEncodedUrl(url);
-        DefaultHttpClient httpclient = getHttpClient(encodedUrl);
+        HttpClient httpClient = getHttpClient(encodedUrl);
+        GetMethod get = new GetMethod(encodedUrl);
         try {
-            HttpGet httpget = new HttpGet(encodedUrl);
-            Logger.getLogger(this.getClass()).debug("executing request to retrieve content on " + httpget.getURI());
-            // Create a response handler
-            ResponseHandler<String> responseHandler = new BasicResponseHandler();
-            String responseBody = httpclient.execute(httpget, responseHandler);
-            return responseBody.toString();
+            LOGGER.debug("executing request to retrieve content on " + get.getURI());
+            int status = httpClient.executeMethod(get);
+            if (status == HttpStatus.SC_OK) {
+                byte[] responseBody = get.getResponseBody();
+                return new String(responseBody);
+            }
         } catch (NullPointerException ioe) {
             return "";
         } finally {
             // When HttpClient instance is no longer needed,
             // shut down the connection manager to ensure
             // immediate deallocation of all system resources
-            httpclient.getConnectionManager().shutdown();
+            get.releaseConnection();
+            return "";
         }
     }
     
     public int getHttpStatusFromGet (String url) {
         String encodedUrl = getEncodedUrl(url);
-        DefaultHttpClient httpclient = getHttpClient(encodedUrl);
+        HttpClient httpClient = getHttpClient(encodedUrl);
+        GetMethod get = new GetMethod(encodedUrl);
         try {
-            HttpGet httpget = new HttpGet(encodedUrl);
-            Logger.getLogger(this.getClass()).debug("executing get request to retrieve status on " + httpget.getURI());
-            HttpResponse response = httpclient.execute(httpget);
-            Logger.getLogger(this.getClass()).debug("received " + response.getStatusLine().getStatusCode() + "from get request");
-            return response.getStatusLine().getStatusCode();
+            LOGGER.debug("executing get request to retrieve status on " + get.getURI());
+            int status = httpClient.executeMethod(get);
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("received " + status + " from get request");
+                for (Header h : get.getResponseHeaders()) {
+                    LOGGER.debug("header : " + h.toExternalForm());
+                }
+            }
+            return status;
         } catch (UnknownHostException uhe) {
+            LOGGER.warn("UnknownHostException on " + encodedUrl);
             return HttpStatus.SC_NOT_FOUND;
         } catch (IOException ioe) {
+            LOGGER.warn("IOException on " + encodedUrl);
             return HttpStatus.SC_NOT_FOUND;
         }finally {
             // When HttpClient instance is no longer needed,
             // shut down the connection manager to ensure
             // immediate deallocation of all system resources
-            httpclient.getConnectionManager().shutdown();
+            get.releaseConnection();
         }
     }
     
-    private DefaultHttpClient getHttpClient(String url) {
-        DefaultHttpClient httpclient = new DefaultHttpClient();
+    private HttpClient getHttpClient(String url) {
+        HttpClient httpclient = new HttpClient();
         boolean isExcludedUrl=false;
         for (String excludedUrl : proxyExclusionUrlList) {
             if (url.contains(excludedUrl)) {
@@ -198,7 +221,7 @@ public class HttpRequestHandler {
         return httpclient;
     }
     
-    private void setTimeouts(HttpParams params) {
+    private void setTimeouts(HttpClientParams params) {
         params.setIntParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 
             connectionTimeout);
         params.setIntParameter(CoreConnectionPNames.SO_TIMEOUT, socketTimeout);
@@ -265,7 +288,7 @@ public class HttpRequestHandler {
         try {
             return URIUtil.encodeQuery(url) ;
         } catch (URIException ue) {
-            Logger.getLogger(this.getClass()).warn("URIException on " + url);
+            LOGGER.warn("URIException on " + url);
             return url;
         }
     }
