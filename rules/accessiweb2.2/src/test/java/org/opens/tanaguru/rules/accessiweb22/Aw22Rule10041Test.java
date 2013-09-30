@@ -22,10 +22,17 @@
 package org.opens.tanaguru.rules.accessiweb22;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
+import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
+import org.opens.tanaguru.rules.keystore.EvidenceStore;
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
  *
@@ -184,6 +191,22 @@ public class Aw22Rule10041Test extends Aw22RuleImplementationTestCase {
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "AW22/Aw22Rule10041/AW22.Test.10.4.1-2Failed-06_8.html"));
 
+        getWebResourceMap().put("AW22.Test.10.4.1-2Failed-07_1",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule10041/AW22.Test.10.4.1-2Failed-07_1.html"));
+        getWebResourceMap().put("AW22.Test.10.4.1-2Failed-07_2",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule10041/AW22.Test.10.4.1-2Failed-07_2.html"));
+        getWebResourceMap().put("AW22.Test.10.4.1-2Failed-07_3",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule10041/AW22.Test.10.4.1-2Failed-07_3.html"));
+        getWebResourceMap().put("AW22.Test.10.4.1-2Failed-07_4",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule10041/AW22.Test.10.4.1-2Failed-07_4.html"));
+        getWebResourceMap().put("AW22.Test.10.4.1-2Failed-07_5",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule10041/AW22.Test.10.4.1-2Failed-07_5.html"));
+        
         getWebResourceMap().put("AW22.Test.10.4.1-3NMI-01",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "AW22/Aw22Rule10041/AW22.Test.10.4.1-3NMI-01.html"));
@@ -240,134 +263,1198 @@ public class Aw22Rule10041Test extends Aw22RuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-01_1").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-01_2").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                processPageTest("AW22.Test.10.4.1-2Failed-01_3").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-01_4").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-01_5").getValue());
-
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-02_1").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-02_2").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-02_3").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-02_4").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-02_5").getValue());
-
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-03_1").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-03_2").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-03_3").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-03_4").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-03_5").getValue());
-
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-04_1").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-04_2").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-04_3").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-04_4").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-04_5").getValue());
-
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-05_1").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-05_2").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-05_3").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-05_4").getValue());
-        assertEquals(TestSolution.FAILED,
-                processPageTest("AW22.Test.10.4.1-2Failed-05_5").getValue());
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-01------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult = processPageTest("AW22.Test.10.4.1-1Passed-01");
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
         
-        ProcessResult processResult = processPageTest("AW22.Test.10.4.1-2Failed-06_1");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
         
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-02------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-1Passed-02");
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-03------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-1Passed-03");
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-04------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-1Passed-04");
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-05------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-1Passed-05");
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-06------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-1Passed-06");
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-07------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-1Passed-07");
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-08------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-1Passed-08");
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-09------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-1Passed-09");
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-10------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-1Passed-10");
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-01_1----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-01_1");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("pt",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        Iterator<EvidenceElement> iter = processRemark.getElementList().iterator();
+        EvidenceElement ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "AW22.Test.10.4.1-2Failed-01_1.css"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-01_2----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-01_2");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("pt",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "AW22.Test.10.4.1-2Failed-01_2_1.css"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-01_3----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-01_3");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("pt",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "AW22.Test.10.4.1-2Failed-01_3.css"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-01_4----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-01_4");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("pt",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-01_5----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-01_5");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("pt",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-02_1----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-02_1");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("pc",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-02_2----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-02_2");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("pc",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-02_3----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-02_3");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("pc",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-02_4----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-02_4");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("pc",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-02_5----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-02_5");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("pc",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-03_1----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-03_1");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("mm",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-03_2----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-03_2");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("mm",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-03_3----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-03_3");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("mm",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-03_4----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-03_4");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("mm",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-03_5----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-03_5");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("mm",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-04_1----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-04_1");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("cm",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-04_2----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-04_2");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("cm",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-04_3----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-04_3");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("cm",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-04_4----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-04_4");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("cm",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-04_5----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-04_5");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("cm",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-05_1----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-05_1");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("in",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-05_2----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-05_2");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("in",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-05_3----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-05_3");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("in",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-05_4----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-05_4");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("in",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-05_5----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-05_5");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("in",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-06_1----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-06_1");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("pt",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "AW22.Test.10.4.1-2Failed-06_1.css"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-06_2----------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.10.4.1-2Failed-06_2");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
-        
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("pt",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "AW22.Test.10.4.1-2Failed-06_2.css"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-06_3----------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.10.4.1-2Failed-06_3");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
-        
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("pt",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "AW22.Test.10.4.1-2Failed-06_3.css"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-06_4----------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.10.4.1-2Failed-06_4");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
-        
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("pt",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "AW22.Test.10.4.1-2Failed-06_4.css"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-06_5----------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.10.4.1-2Failed-06_5");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
-        
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("pt",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "AW22.Test.10.4.1-2Failed-06_5.css"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-06_6----------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.10.4.1-2Failed-06_6");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
-        
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("pt",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "AW22.Test.10.4.1-2Failed-06_6.css"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-06_7----------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.10.4.1-2Failed-06_7");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
-        
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("pt",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "AW22.Test.10.4.1-2Failed-06_7.css"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-06_8----------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.10.4.1-2Failed-06_8");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(Integer.valueOf(4), Integer.valueOf(processResult.getRemarkSet().size()));
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(4, processResult.getRemarkSet().size());
+        Iterator<SourceCodeRemark> pIter = ((LinkedHashSet)processResult.getRemarkSet()).iterator();
+        processRemark = pIter.next();
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("in",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "AW22.Test.10.4.1-2Failed-06_8.css"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+        processRemark = pIter.next();
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("mm",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "AW22.Test.10.4.1-2Failed-06_8.css"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+        processRemark = pIter.next();
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("cm",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "AW22.Test.10.4.1-2Failed-06_8.css"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+        processRemark = pIter.next();
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("pt",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("h1",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "AW22.Test.10.4.1-2Failed-06_8.css"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
         
-        assertEquals(TestSolution.PASSED,
-                processPageTest("AW22.Test.10.4.1-1Passed-01").getValue());
-        assertEquals(TestSolution.PASSED,
-                processPageTest("AW22.Test.10.4.1-1Passed-02").getValue());
-        assertEquals(TestSolution.PASSED,
-                processPageTest("AW22.Test.10.4.1-1Passed-03").getValue());
-        assertEquals(TestSolution.PASSED,
-                processPageTest("AW22.Test.10.4.1-1Passed-04").getValue());
-        assertEquals(TestSolution.PASSED,
-                processPageTest("AW22.Test.10.4.1-1Passed-05").getValue());
-        assertEquals(TestSolution.PASSED,
-                processPageTest("AW22.Test.10.4.1-1Passed-06").getValue());
-        assertEquals(TestSolution.PASSED,
-                processPageTest("AW22.Test.10.4.1-1Passed-07").getValue());
-        assertEquals(TestSolution.PASSED,
-                processPageTest("AW22.Test.10.4.1-1Passed-08").getValue());
-        assertEquals(TestSolution.PASSED,
-                processPageTest("AW22.Test.10.4.1-1Passed-09").getValue());
-        assertEquals(TestSolution.PASSED,
-                processPageTest("AW22.Test.10.4.1-1Passed-10").getValue());
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-07_1----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-07_1");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("in",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("div",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "inline"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
 
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("AW22.Test.10.4.1-4NA-01").getValue());
 
-        // the error caused by the example is thrown when the used css parser
-        // is flute. With other parsers the error is not encountered and the 
-        // test is passed
-//        assertEquals(TestSolution.NEED_MORE_INFO,
-//                processPageTest("AW22.Test.10.4.1-3NMI-01").getValue());
-        assertEquals(TestSolution.PASSED,
-                processPageTest("AW22.Test.10.4.1-3NMI-01").getValue());
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-07_2----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-07_2");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("pt",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("div",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "inline"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-07_3----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-07_3");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("mm",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("div",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "inline"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-07_4----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-07_4");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("cm",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("div",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "inline"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-07_5----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-2Failed-07_5");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.BAD_UNIT_TYPE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("pc",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        iter = processRemark.getElementList().iterator();
+        ee = iter.next();
+        assertEquals("div",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = iter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "inline"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-1-----------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.10.4.1-4NA-01");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
     }
 
     @Override
     protected void setConsolidate() {
+        assertEquals(TestSolution.PASSED,
+                consolidate("AW22.Test.10.4.1-1Passed-01").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("AW22.Test.10.4.1-1Passed-02").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("AW22.Test.10.4.1-1Passed-03").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("AW22.Test.10.4.1-1Passed-04").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("AW22.Test.10.4.1-1Passed-05").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("AW22.Test.10.4.1-1Passed-06").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("AW22.Test.10.4.1-1Passed-07").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("AW22.Test.10.4.1-1Passed-08").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("AW22.Test.10.4.1-1Passed-09").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("AW22.Test.10.4.1-1Passed-10").getValue());
+        
         assertEquals(TestSolution.FAILED,
                 consolidate("AW22.Test.10.4.1-2Failed-01_1").getValue());
         assertEquals(TestSolution.FAILED,
                 consolidate("AW22.Test.10.4.1-2Failed-01_2").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                consolidate("AW22.Test.10.4.1-2Failed-01_3").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.10.4.1-2Failed-01_3").getValue());
         assertEquals(TestSolution.FAILED,
                 consolidate("AW22.Test.10.4.1-2Failed-01_4").getValue());
         assertEquals(TestSolution.FAILED,
@@ -434,34 +1521,20 @@ public class Aw22Rule10041Test extends Aw22RuleImplementationTestCase {
         assertEquals(TestSolution.FAILED,
                 consolidate("AW22.Test.10.4.1-2Failed-06_8").getValue());
 
-        assertEquals(TestSolution.PASSED,
-                consolidate("AW22.Test.10.4.1-1Passed-01").getValue());
-        assertEquals(TestSolution.PASSED,
-                consolidate("AW22.Test.10.4.1-1Passed-02").getValue());
-        assertEquals(TestSolution.PASSED,
-                consolidate("AW22.Test.10.4.1-1Passed-03").getValue());
-        assertEquals(TestSolution.PASSED,
-                consolidate("AW22.Test.10.4.1-1Passed-04").getValue());
-        assertEquals(TestSolution.PASSED,
-                consolidate("AW22.Test.10.4.1-1Passed-05").getValue());
-        assertEquals(TestSolution.PASSED,
-                consolidate("AW22.Test.10.4.1-1Passed-06").getValue());
-        assertEquals(TestSolution.PASSED,
-                consolidate("AW22.Test.10.4.1-1Passed-07").getValue());
-        assertEquals(TestSolution.PASSED,
-                consolidate("AW22.Test.10.4.1-1Passed-08").getValue());
-        assertEquals(TestSolution.PASSED,
-                consolidate("AW22.Test.10.4.1-1Passed-09").getValue());
-        assertEquals(TestSolution.PASSED,
-                consolidate("AW22.Test.10.4.1-1Passed-10").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.10.4.1-2Failed-07_1").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.10.4.1-2Failed-07_2").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.10.4.1-2Failed-07_3").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.10.4.1-2Failed-07_4").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.10.4.1-2Failed-07_5").getValue());
+        
 
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("AW22.Test.10.4.1-4NA-01").getValue());
-
-        assertEquals(TestSolution.PASSED,
-                consolidate("AW22.Test.10.4.1-3NMI-01").getValue());
-//        assertEquals(TestSolution.NEED_MORE_INFO,
-//                consolidate("AW22.Test.10.4.1-3NMI-01").getValue());
     }
 
 }

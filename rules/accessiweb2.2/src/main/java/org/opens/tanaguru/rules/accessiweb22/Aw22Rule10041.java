@@ -19,43 +19,20 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.opens.tanaguru.entity.audit.DefiniteResult;
-import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.entity.reference.Nomenclature;
-import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleCssImplementation;
+import org.opens.tanaguru.rules.csschecker.ForbiddenUnitChecker;
 
 /**
+ * Implementation of the rule 10.4.1 of the referential Accessiweb 2.2.
+ * <br/>
+ * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/aw22-rule-10-4-1">the rule 10.4.1 design page.</a>
+ * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-10-4-1"> 10.4.1 rule specification</a>
  *
- * @author jkowalczyk
  */
-public class Aw22Rule10041 extends AbstractPageRuleImplementation {
+public class Aw22Rule10041 extends AbstractPageRuleCssImplementation {
 
     public Aw22Rule10041() {
-        super();
-    }
-
-    @Override
-    protected ProcessResult processImpl(SSPHandler sspHandler) {
-
-        Nomenclature blacklist = 
-                nomenclatureLoaderService.loadByCode("RelativeCssUnits");
-
-        Nomenclature mediaList =
-                nomenclatureLoaderService.loadByCode("MediaListNotAcceptingRelativeUnits");
-
-        TestSolution checkResult = sspHandler.beginSelection().
-                keepRulesWithMedia(mediaList.getValueList()).
-                checkRelativeUnitExists(blacklist.getIntegerValueList());
-
-        DefiniteResult result = definiteResultFactory.create(
-                test,
-                sspHandler.getPage(),
-                checkResult,
-                sspHandler.getRemarkList());
-        result.setElementCounter(sspHandler.getCssSelectorNumber());
-        return result;
+        super(new ForbiddenUnitChecker(),"MediaListNotAcceptingRelativeUnits");
     }
 
 }
