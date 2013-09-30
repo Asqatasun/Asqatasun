@@ -144,7 +144,7 @@ public abstract class PertinenceChecker extends NomenclatureBasedElementChecker 
      */
     protected TestSolution checkPertinence(
             SSPHandler sspHandler,
-            ElementHandler elementHandler) {
+            ElementHandler<Element> elementHandler) {
         
         TestSolutionHandler testSolutionHandler = new TestSolutionHandlerImpl();
         
@@ -165,7 +165,7 @@ public abstract class PertinenceChecker extends NomenclatureBasedElementChecker 
 
         // if the test at this step is not failed, create a NMI ProcessRemark
         // for a manual check
-        Element el = elementHandler.get().first();
+        Element el = (Element)elementHandler.get().iterator().next();
         addSourceCodeRemark(
                 TestSolution.NEED_MORE_INFO,
                 el,

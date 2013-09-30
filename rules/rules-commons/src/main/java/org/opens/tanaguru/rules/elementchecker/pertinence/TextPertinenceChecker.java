@@ -22,6 +22,7 @@
 
 package org.opens.tanaguru.rules.elementchecker.pertinence;
 
+import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.elementchecker.attribute.TextElementBelongsToBlackListChecker;
@@ -46,8 +47,8 @@ public class TextPertinenceChecker extends PertinenceChecker {
      */
     public TextPertinenceChecker(
             boolean checkEmptiness,
-            String attributeNameToCompare,
-            String blacklistNameToCompareWith,
+            @Nullable String attributeNameToCompare,
+            @Nullable String blacklistNameToCompareWith,
             String notPertinentMessageCode,
             String manualCheckMessage) {
         super(manualCheckMessage);
@@ -97,8 +98,8 @@ public class TextPertinenceChecker extends PertinenceChecker {
      */
     public TextPertinenceChecker(
             boolean checkEmptiness,
-            String attributeNameToCompare,
-            String blacklistNameToCompareWith,
+            @Nullable String attributeNameToCompare,
+            @Nullable String blacklistNameToCompareWith,
             String notPertinentMessageCode,
             String manualCheckMessage,
             String... eeAttributeNameList) {
@@ -119,8 +120,8 @@ public class TextPertinenceChecker extends PertinenceChecker {
         // contains non alphanumerical characters
         if (StringUtils.isNotBlank(blacklistNameToCompareWith)) {
             addChecker(new TextElementBelongsToBlackListChecker(
-                        notPertinentMessageCode, 
                         blacklistNameToCompareWith, 
+                        notPertinentMessageCode, 
                         eeAttributeNameList));
         }
         
@@ -176,9 +177,9 @@ public class TextPertinenceChecker extends PertinenceChecker {
         // contains non alphanumerical characters
         if (StringUtils.isNotBlank(blacklistNameToCompareWith)) {
             addChecker(new TextElementBelongsToBlackListChecker(
-                        notPertinentMessageCode, 
-                        notPertinentSolution,
                         blacklistNameToCompareWith,
+                        notPertinentSolution,
+                        notPertinentMessageCode, 
                         eeAttributeNameList));
         }
         

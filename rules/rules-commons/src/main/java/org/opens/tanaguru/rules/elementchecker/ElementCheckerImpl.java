@@ -34,6 +34,7 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
+import org.opens.tanaguru.rules.keystore.AttributeStore;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.*;
 import org.opens.tanaguru.rules.keystore.EvidenceStore;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;
@@ -46,6 +47,16 @@ import org.opens.tanaguru.service.ProcessRemarkService;
  */
 public abstract class ElementCheckerImpl implements ElementChecker {
 
+    /** Max size of evidence element of text type */
+    private static final int MAX_TEXT_EE_SIZE = 200;
+    /** colon character */
+    private static final String COLON_CHAR = ":";
+    /** minus character */
+    private static final String MINUS_CHAR = "-";
+    /** Absolute URL prefix */
+    private static final String ABS_URL_PREFIX = "abs:";
+    
+    
     /**
      * the collection of attributes name used to collect evidenceElement
      */
@@ -88,10 +99,10 @@ public abstract class ElementCheckerImpl implements ElementChecker {
     @Override
     public void check (
             SSPHandler sspHandler, 
-            ElementHandler selectionHandler, 
+            ElementHandler elementHandler, 
             TestSolutionHandler testSolutionHandler) {
         this.processRemarkService = sspHandler.getProcessRemarkService();
-        doCheck(sspHandler, selectionHandler.get(), testSolutionHandler);
+        doCheck(sspHandler, (Elements)elementHandler.get(), testSolutionHandler);
     }
     
     /**
@@ -262,12 +273,25 @@ public abstract class ElementCheckerImpl implements ElementChecker {
      */
     protected EvidenceElement getEvidenceElement(Element element, String attr) {
         EvidenceElement extraEe;
-        if (isElementTextRequested(attr)) {
-            extraEe = processRemarkService.getEvidenceElement(attr, element.text());
-        } else if (isAttributeExternalResource(attr)) {
-            extraEe = processRemarkService.getEvidenceElement(attr, buildAttributeContent(element, attr, true));
+        String attrEE;
+        // specific control with xml:lang attribute due to the ':' character
+        if (StringUtils.equalsIgnoreCase(attr, AttributeStore.XML_LANG_ATTR)) {
+            attrEE = StringUtils.replace(attr, ":", "-");
         } else {
-            extraEe = processRemarkService.getEvidenceElement(attr, buildAttributeContent(element, attr, false));
+            attrEE = attr;
+        }
+        if (isElementTextRequested(attr)) {
+            extraEe = processRemarkService.getEvidenceElement(
+                    attrEE, 
+                    StringUtils.substring(element.text(), 0, MAX_TEXT_EE_SIZE));
+        } else if (isAttributeExternalResource(attr)) {
+            extraEe = processRemarkService.getEvidenceElement(
+                    attrEE, 
+                    buildAttributeContent(element, attr, true));
+        } else {
+            extraEe = processRemarkService.getEvidenceElement(
+                    attrEE, 
+                    buildAttributeContent(element, attr, false));
         }
         return extraEe;
     }
@@ -278,6 +302,9 @@ public abstract class ElementCheckerImpl implements ElementChecker {
      * @return an evidenceElement 
      */
     protected EvidenceElement getEvidenceElement(String evidenceKey, String evidenceValue) {
+        if (StringUtils.equalsIgnoreCase(evidenceKey, AttributeStore.XML_LANG_ATTR)) {
+            evidenceKey = StringUtils.replace(evidenceKey, COLON_CHAR, MINUS_CHAR);
+        }
         return processRemarkService.getEvidenceElement(evidenceKey, evidenceValue);
     }
 
@@ -315,7 +342,8 @@ public abstract class ElementCheckerImpl implements ElementChecker {
             boolean isExternalResource) {
         if (!element.hasAttr(attributeName)) {
             return ABSENT_ATTRIBUTE_VALUE;
-        } else if (isExternalResource && !element.attr("abs:"+attributeName).isEmpty()) {
+        } else if (isExternalResource && 
+                !element.attr(ABS_URL_PREFIX + attributeName).isEmpty()) {
             return element.absUrl(attributeName).trim();
         } else {
             return element.attr(attributeName).trim();
