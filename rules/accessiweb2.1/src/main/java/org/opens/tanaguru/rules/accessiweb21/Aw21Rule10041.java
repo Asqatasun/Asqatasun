@@ -19,10 +19,12 @@
  */
 package org.opens.tanaguru.rules.accessiweb21;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import org.opens.tanaguru.entity.audit.DefiniteResult;
+import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.entity.reference.Nomenclature;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
 
@@ -38,23 +40,14 @@ public class Aw21Rule10041 extends AbstractPageRuleImplementation {
 
     @Override
     protected ProcessResult processImpl(SSPHandler sspHandler) {
-
-        Nomenclature blacklist = 
-                nomenclatureLoaderService.loadByCode("RelativeCssUnits");
-
-        Nomenclature mediaList =
-                nomenclatureLoaderService.loadByCode("MediaListNotAcceptingRelativeUnits");
-
-        TestSolution checkResult = sspHandler.beginSelection().
-                keepRulesWithMedia(mediaList.getValueList()).
-                checkRelativeUnitExists(blacklist.getIntegerValueList());
-
+        TestSolution testSolution = TestSolution.NOT_TESTED;
+        Collection<ProcessRemark> remarkList = new ArrayList<ProcessRemark>();
         DefiniteResult result = definiteResultFactory.create(
                 test,
-                sspHandler.getPage(),
-                checkResult,
-                sspHandler.getRemarkList());
-        result.setElementCounter(sspHandler.getCssSelectorNumber());
+                sspHandler.getSSP().getPage(),
+                testSolution,
+                remarkList);
+        
         return result;
     }
 
