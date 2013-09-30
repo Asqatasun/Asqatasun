@@ -89,11 +89,12 @@ public class LanguageDetector {
      */
     public LanguageDetectionResult detectLanguage(String text) {
         try {
-            Detector detector = DetectorFactory.create();
+            Detector detector = DetectorFactory.create(0.15);
             detector.append(text);
+            ArrayList<Language> languages = detector.getProbabilities();
             Language detectedLanguage =  
-                    extractLangWithHighestProbability(detector.getProbabilities());
-            return new LanguageDetectionResult(detectedLanguage, text);
+                    extractLangWithHighestProbability(languages);
+            return new LanguageDetectionResult(detectedLanguage, text, languages.size()>1);
         } catch (LangDetectException ex) {
             LOGGER.warn(ex);
         }
@@ -127,6 +128,7 @@ public class LanguageDetector {
         PathMatchingResourcePatternResolver resolver = 
                 new PathMatchingResourcePatternResolver();
         List<String> profiles = new ArrayList<String>();
+        DetectorFactory.setSeed(0L);
         try {
             for (Resource rs : resolver.getResources(profilePath)) {
                 StringWriter writer = new StringWriter();

@@ -31,8 +31,9 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class LanguageDetectionResult {
 
-    private static final int MIN_NUMBER_OF_WORDS_TO_BE_RELIABLE = 5;
-    private static final double MIN_PROBABILITY_TO_BE_RELIABLE = 0.9;
+    private static final int MIN_NUMBER_OF_WORDS_TO_BE_RELIABLE = 20;
+    private static final double MIN_PROBABILITY_TO_BE_RELIABLE = 0.99;
+    
     /**
      * The detected language
      */
@@ -45,6 +46,20 @@ public class LanguageDetectionResult {
     public void setDetectedLanguage(String detectedLanguage) {
         this.detectedLanguage = detectedLanguage;
     }
+    
+    /**
+     * The detected language
+     */
+    private boolean isMultipleLanguage;
+
+    public boolean isMultipleLanguage() {
+        return isMultipleLanguage;
+    }
+
+    public void setMultipleLanguage(boolean isMultipleLanguage) {
+        this.isMultipleLanguage = isMultipleLanguage;
+    }
+    
     /**
      * The probability of the result
      */
@@ -66,10 +81,12 @@ public class LanguageDetectionResult {
      *
      * @param language
      * @param testedText
+     * @param isMultipleLanguage
      */
-    public LanguageDetectionResult(Language language, String testedText) {
+    public LanguageDetectionResult(Language language, String testedText, boolean isMultipleLanguage) {
         this.detectedLanguage = language.lang;
         this.probability = language.prob;
+        this.isMultipleLanguage = isMultipleLanguage;
         computeNumberOfWords(testedText);
     }
 
@@ -80,9 +97,18 @@ public class LanguageDetectionResult {
      */
     public boolean isReliable() {
         if (probability > MIN_PROBABILITY_TO_BE_RELIABLE
-                && numberOfWords > MIN_NUMBER_OF_WORDS_TO_BE_RELIABLE) {
+                && numberOfWords >= MIN_NUMBER_OF_WORDS_TO_BE_RELIABLE) {
             return true;
         }
         return false;
     }
+ 
+    /**
+     * 
+     * @return whether the tested text is seen as a short text
+     */
+    public boolean isShorText() {
+        return numberOfWords < MIN_NUMBER_OF_WORDS_TO_BE_RELIABLE;
+    }
+
 }
