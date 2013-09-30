@@ -21,6 +21,7 @@
  */
 package org.opens.tanaguru.ruleimplementation;
 
+import javax.annotation.Nonnull;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
 import org.opens.tanaguru.rules.elementchecker.NomenclatureBasedElementChecker;
@@ -35,7 +36,7 @@ import org.opens.tanaguru.rules.elementchecker.NomenclatureBasedElementChecker;
  * </p>
  */
 public abstract class AbstractPageRuleWithCheckerImplementation 
-        extends AbstractPageRuleDefaultImplementation {
+        extends AbstractPageRuleMarkupImplementation {
 
     /** The elementChecker used by the rule */
     private ElementChecker elementChecker;
@@ -46,7 +47,7 @@ public abstract class AbstractPageRuleWithCheckerImplementation
      * @param elementCheckerKey 
      */
     public AbstractPageRuleWithCheckerImplementation(
-            ElementChecker elementChecker) {
+            @Nonnull ElementChecker elementChecker) {
         super();
         this.elementChecker = elementChecker;
     }   

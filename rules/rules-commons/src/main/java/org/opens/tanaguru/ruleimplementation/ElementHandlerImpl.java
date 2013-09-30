@@ -21,6 +21,7 @@
  */
 package org.opens.tanaguru.ruleimplementation;
 
+import java.util.Collection;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -30,7 +31,7 @@ import org.jsoup.select.Elements;
  * operations on it.
  * 
  */
-public class ElementHandlerImpl implements ElementHandler {
+public class ElementHandlerImpl implements ElementHandler<Element> {
 
     /**
      * Default constructor
@@ -64,7 +65,7 @@ public class ElementHandlerImpl implements ElementHandler {
      * {@inheritDoc}
      */
     @Override
-    public void addAll(Elements elements) {
+    public void addAll(Collection<Element> elements) {
         for (Element el : elements) {
             add(el);
         }
@@ -74,7 +75,7 @@ public class ElementHandlerImpl implements ElementHandler {
      * {@inheritDoc}
      */
     @Override
-    public void removeAll(Elements elements) {
+    public void removeAll(Collection<Element> elements) {
         this.elements.removeAll(elements);
     }
     
@@ -82,7 +83,7 @@ public class ElementHandlerImpl implements ElementHandler {
      * {@inheritDoc}
      */
     @Override
-    public void removeAll(ElementHandler elementHandler) {
+    public void removeAll(ElementHandler<Element> elementHandler) {
         this.elements.removeAll(elementHandler.get());
     }
     
@@ -110,5 +111,5 @@ public class ElementHandlerImpl implements ElementHandler {
     public boolean isEmpty() {
         return elements.isEmpty();
     }
-    
+
 }

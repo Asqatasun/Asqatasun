@@ -22,6 +22,7 @@ package org.opens.tanaguru.ruleimplementation;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import javax.annotation.Nonnull;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
@@ -54,12 +55,12 @@ import static org.opens.tanaguru.rules.keystore.AttributeStore.ROLE_ATTR;
  * </p>
  * 
  */
-public class AbstractMarkerPageRuleImplementation
-        extends AbstractPageRuleDefaultImplementation {
+public abstract class AbstractMarkerPageRuleImplementation
+        extends AbstractPageRuleMarkupImplementation {
 
     /** The elements identified with the markers */
-    private ElementHandler selectionWithMarkerHandler = new ElementHandlerImpl();
-    public ElementHandler getSelectionWithMarkerHandler() {
+    private ElementHandler<Element> selectionWithMarkerHandler = new ElementHandlerImpl();
+    public ElementHandler<Element> getSelectionWithMarkerHandler() {
         return selectionWithMarkerHandler;
     }
     
@@ -108,11 +109,11 @@ public class AbstractMarkerPageRuleImplementation
      * @param elementChecker
      */
     public AbstractMarkerPageRuleImplementation(
-            ElementSelector elementSelector, 
-            String markerCode,
-            String inverseMarkerCode,
-            ElementChecker markerElementChecker,
-            ElementChecker elementChecker) {
+            @Nonnull ElementSelector elementSelector, 
+            @Nonnull String markerCode,
+            @Nonnull String inverseMarkerCode,
+            @Nonnull ElementChecker markerElementChecker,
+            @Nonnull ElementChecker elementChecker) {
         super();
         this.markerCode = markerCode;
         this.inverseMarkerCode = inverseMarkerCode;
@@ -141,7 +142,7 @@ public class AbstractMarkerPageRuleImplementation
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
+    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
         elementSelector.selectElements(sspHandler, elementHandler);
         extractMarkerListFromAuditParameter(sspHandler);
         sortMarkerElements(elementHandler);
@@ -150,7 +151,7 @@ public class AbstractMarkerPageRuleImplementation
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler selectionHandler, 
+            ElementHandler<Element> selectionHandler, 
             TestSolutionHandler testSolutionHandler) {
         
         super.check(sspHandler, selectionHandler, testSolutionHandler);
@@ -210,7 +211,7 @@ public class AbstractMarkerPageRuleImplementation
      * 
      * @param nodeList 
      */
-    private void sortMarkerElements(ElementHandler elementHandler) {
+    private void sortMarkerElements(ElementHandler<Element> elementHandler) {
         if ((CollectionUtils.isEmpty(markerList) && CollectionUtils.isEmpty(inverseMarkerList)) 
                 || elementHandler.isEmpty()) {
             return;
