@@ -55,6 +55,9 @@ public class Aw22Rule06052Test extends Aw22RuleImplementationTestCase {
         getWebResourceMap().put("AW22.Test.6.5.2-3NMI-01",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "AW22/Aw22Rule06052/AW22.Test.6.5.2-3NMI-01.html"));
+        getWebResourceMap().put("AW22.Test.6.5.2-3NMI-02",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06052/AW22.Test.6.5.2-3NMI-02.html"));
         getWebResourceMap().put("AW22.Test.6.5.2-4NA-01",
               getWebResourceFactory().createPage(
               getTestcasesFilePath() + "AW22/Aw22Rule06052/AW22.Test.6.5.2-4NA-01.html"));
@@ -88,6 +91,28 @@ public class Aw22Rule06052Test extends Aw22RuleImplementationTestCase {
         
         
         //----------------------------------------------------------------------
+        //------------------------------3NMI-02---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.6.5.2-3NMI-02");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG, processRemark.getMessageCode());
+        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(1, processRemark.getElementList().size());
+        ee = processRemark.getElementList().iterator().next();
+        assertTrue(StringUtils.contains(ee.getValue(), "mock-image.jpg"));
+        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
         //------------------------------4NA-01---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.6.5.2-4NA-01");
@@ -115,6 +140,8 @@ public class Aw22Rule06052Test extends Aw22RuleImplementationTestCase {
     protected void setConsolidate() {
         assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW22.Test.6.5.2-3NMI-01").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.6.5.2-3NMI-02").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("AW22.Test.6.5.2-4NA-01").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,

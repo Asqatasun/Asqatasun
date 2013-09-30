@@ -32,7 +32,9 @@ public final class CssLikeQueryStore {
     public static final String IMG_WITH_ALT_NOT_IN_LINK_CSS_LIKE_QUERY=
             "img[alt]:not(a img)"; 
     public static final String IMG_NOT_IN_LINK_CSS_LIKE_QUERY="img:not(a img)"; 
-    public static final String IMG_WITH_ISMAP_ATTR_CSS_LIKE_QUERY="img[ismap]"; 
+    public static final String IMG_WITH_ISMAP_ATTR_CSS_LIKE_QUERY=
+                    "img[ismap] , "
+                    +"input[type=image][ismap]"; 
     public static final String IMG_WITH_ALT_WITHOUT_LONGDESC_CSS_LIKE_QUERY=
                     "img[alt]:not([longdesc])"; 
     public static final String APPLET_WITH_ALT_CSS_LIKE_QUERY=
@@ -149,14 +151,14 @@ public final class CssLikeQueryStore {
 
     // Lang css-like queries
     public static final String ELEMENT_WITH_LANG_ATTR_CSS_LIKE_QUERY = 
-                    "body[lang], body *[lang], body[xml:lang], body *[xml:lang]";
+                    "html [lang], html [xml:lang]";
     public static final String ELEMENT_WITHOUT_LANG_ATTR_CSS_LIKE_QUERY = 
-                      "body *:not(:matchesOwn(^\\s*$)):not([lang]):not([xml:lang]), "
-                    + "body *[alt]:not([alt~=^\\s*$]):not([lang]):not([xml:lang]), "
-                    + "body *[title]:not([title~=^\\s*$]):not([lang]):not([xml:lang]), "
-                    + "body *[summary]:not([summary~=^\\s*$]):not([lang]):not([xml:lang])"
-                    + "body *[content]:not([content~=^\\s*$]):not([lang]):not([xml:lang])"
-                    + "body *[value]:not([value~=^\\s*$]):not([lang]):not([xml:lang])";
+                      "html *:not(:matchesOwn(^\\s*$)):not([lang]):not([xml:lang]), "
+                    + "html *[alt]:not([alt~=^\\s*$]):not([lang]):not([xml:lang]), "
+                    + "html *[title]:not([title~=^\\s*$]):not([lang]):not([xml:lang]), "
+                    + "html *[summary]:not([summary~=^\\s*$]):not([lang]):not([xml:lang])"
+                    + "html *[content]:not([content~=^\\s*$]):not([lang]):not([xml:lang])"
+                    + "hmtl *[value]:not([value~=^\\s*$]):not([lang]):not([xml:lang])";
 
     // Mandatory elements css-like queries
     public static final String TITLE_WITHIN_HEAD_CSS_LIKE_QUERY = 
@@ -167,6 +169,10 @@ public final class CssLikeQueryStore {
     // Links css-like queries
     public static final String NOT_ANCHOR_LINK_CSS_LIKE_QUERY = 
                     "a:not([name]):not([id])";
+    public static final String TEXT_LINK_CSS_LIKE_QUERY = 
+                    "a:not(:has(*))";
+    public static final String IMAGE_LINK_CSS_LIKE_QUERY = 
+                    "a:has(img))";
     
     // Scripts css-like queries
     public static final String CHANGE_CONTEXT_SCRIPT_CSS_LIKE_QUERY = 
