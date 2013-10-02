@@ -51,6 +51,12 @@ public interface SSPHandler {
     SSPHandler beginSelection();
     
     /**
+     * Initialise document to allow parsing css selectors
+     * @return the current SSPHandler with an empty selection
+     */
+    SSPHandler beginCssSelection();
+    
+    /**
      * Initialise document to allow parsing document with css-like requests
      * 
      * @return the current SSPHandler with an empty selection

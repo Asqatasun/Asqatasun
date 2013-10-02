@@ -95,20 +95,11 @@ public class SSPHandlerImpl implements SSPHandler {
     @Override
     public SSPHandler beginSelection() {
         domHandler.beginXpathSelection();
-        if (cssHandler != null) {
-            cssHandler.beginSelection();
-        }
-        if (jsHandler != null) {
-            jsHandler.beginSelection();
-        }
 
         selectionExpression = null;
-//        remarkList = new LinkedList<ProcessRemark>();
 
-        URL src;
         try {
-            src = new URL(ssp.getURI());
-            urlIdentifier.setUrl(src);
+            urlIdentifier.setUrl(new URL(ssp.getURI()));
         } catch (MalformedURLException ex) {
             Logger.getLogger(SSPHandlerImpl.class.getName()).error(ex);
         }
@@ -118,19 +109,19 @@ public class SSPHandlerImpl implements SSPHandler {
     @Override
     public SSPHandler beginCssLikeSelection() {
         domHandler.beginCssLikeSelection();
-        if (cssHandler != null) {
-            cssHandler.beginSelection();
-        }
-        if (jsHandler != null) {
-            jsHandler.beginSelection();
-        }
-
-        URL src;
+        
         try {
-            src = new URL(ssp.getURI());
-            urlIdentifier.setUrl(src);
+            urlIdentifier.setUrl(new URL(ssp.getURI()));
         } catch (MalformedURLException ex) {
             Logger.getLogger(SSPHandlerImpl.class.getName()).error(ex);
+        }
+        return this;
+    }
+    
+    @Override
+    public SSPHandler beginCssSelection() {
+        if (cssHandler != null) {
+            cssHandler.beginSelection();
         }
         return this;
     }

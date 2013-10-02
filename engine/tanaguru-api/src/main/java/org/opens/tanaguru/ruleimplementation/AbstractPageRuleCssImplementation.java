@@ -99,7 +99,7 @@ public abstract class AbstractPageRuleCssImplementation
         
         cssChecker.setNomenclatureLoaderService(nomenclatureLoaderService);
 
-        for (Map.Entry<String,CascadingStyleSheet> entry : sspHandler.beginCssLikeSelection().getStyleSheetMap().entrySet()) {
+        for (Map.Entry<String,CascadingStyleSheet> entry : sspHandler.beginCssSelection().getStyleSheetMap().entrySet()) {
             cssChecker.check(
                     sspHandler, 
                     entry.getKey(),
@@ -110,7 +110,7 @@ public abstract class AbstractPageRuleCssImplementation
 
         if (!sspHandler.getStyleSheetOnError().isEmpty()) {
             addCssOnErrorRemarks(
-                    sspHandler.beginSelection().getStyleSheetOnError(), 
+                    sspHandler.beginCssSelection().getStyleSheetOnError(), 
                     testSolutionHandler, 
                     sspHandler.getProcessRemarkService());
         }
