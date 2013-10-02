@@ -39,7 +39,6 @@ import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHost;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.log4j.Logger;
@@ -51,7 +50,7 @@ import org.apache.log4j.Logger;
 public class HttpRequestHandler {
     
     private static final Logger LOGGER  = Logger.getLogger(HttpRequestHandler.class);
-//    private static final String UTF8_ENCODING_KEY = "UTF-8";
+
     /**
      * The holder that handles the unique instance of LanguageDetector
      */
@@ -162,18 +161,26 @@ public class HttpRequestHandler {
         try {
             LOGGER.debug("executing request to retrieve content on " + get.getURI());
             int status = httpClient.executeMethod(get);
+            LOGGER.debug("received " + status + " from get request");
             if (status == HttpStatus.SC_OK) {
+                LOGGER.debug("status == HttpStatus.SC_OK " );
+                
                 byte[] responseBody = get.getResponseBody();
                 return new String(responseBody);
+            } else {
+                LOGGER.debug("status != HttpStatus.SC_OK " );
+                return "";
             }
+            
         } catch (NullPointerException ioe) {
+            LOGGER.debug("NullPointerException");
             return "";
         } finally {
             // When HttpClient instance is no longer needed,
             // shut down the connection manager to ensure
             // immediate deallocation of all system resources
             get.releaseConnection();
-            return "";
+            LOGGER.debug("finally");
         }
     }
     
