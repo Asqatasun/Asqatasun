@@ -106,7 +106,7 @@ public final class ProfileFactory {
      * @return 
      */
     public FirefoxProfile getOnlineProfile() {
-        return getProfile(false);
+        return getProfile(true);
     }
     
     /**
