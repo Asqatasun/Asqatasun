@@ -80,11 +80,10 @@ public class ElementPresenceCheckerTest extends TestCase{
                      Charset.defaultCharset().displayName());
         } catch (IOException ex) {
         }
-
         ElementHandler elementHandler = new ElementHandlerImpl();
         elementHandler.addAll(doc.select(HtmlElementStore.DIV_ELEMENT));
         
-        initMockContext(elementHandler.get(), TestSolution.FAILED, "detected");
+        initMockContext((Elements) elementHandler.get(), TestSolution.FAILED, "detected");
 
         TestSolutionHandler testSolutionHandler = new TestSolutionHandlerImpl();
         
@@ -174,7 +173,7 @@ public class ElementPresenceCheckerTest extends TestCase{
         ElementHandler elementHandler = new ElementHandlerImpl();
         elementHandler.addAll(doc.select(HtmlElementStore.DIV_ELEMENT));
         
-        initMockContext(elementHandler.get(), TestSolution.FAILED, "detected");
+        initMockContext((Elements)elementHandler.get(), TestSolution.FAILED, "detected");
 
         TestSolutionHandler testSolutionHandler = new TestSolutionHandlerImpl();
         
@@ -204,7 +203,7 @@ public class ElementPresenceCheckerTest extends TestCase{
         ElementHandler elementHandler = new ElementHandlerImpl();
         elementHandler.addAll(doc.select(HtmlElementStore.DIV_ELEMENT));
         
-        initMockContext(elementHandler.get(), TestSolution.NEED_MORE_INFO, "detected");
+        initMockContext((Elements)elementHandler.get(), TestSolution.NEED_MORE_INFO, "detected");
 
         TestSolutionHandler testSolutionHandler = new TestSolutionHandlerImpl();
         

@@ -27,8 +27,9 @@ import java.nio.charset.Charset;
 import org.easymock.EasyMock;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import static org.junit.Assert.assertTrue;
 import org.junit.*;
-import static org.junit.Assert.*;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
@@ -78,7 +79,7 @@ public class CaptchaElementSelectorTest {
 
         initMockContext(doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         elementHandler.addAll(doc.select(HtmlElementStore.IMG_ELEMENT));
         CaptchaElementSelector instance = 
                 new CaptchaElementSelector(elementHandler);
@@ -106,7 +107,7 @@ public class CaptchaElementSelectorTest {
 
         initMockContext(doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         elementHandler.addAll(doc.select(HtmlElementStore.IMG_ELEMENT));
         CaptchaElementSelector instance = 
                 new CaptchaElementSelector(elementHandler);
@@ -134,7 +135,7 @@ public class CaptchaElementSelectorTest {
 
         initMockContext(doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         elementHandler.addAll(doc.select(HtmlElementStore.IMG_ELEMENT));
         CaptchaElementSelector instance = 
                 new CaptchaElementSelector(elementHandler);
@@ -162,7 +163,7 @@ public class CaptchaElementSelectorTest {
 
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         CaptchaElementSelector instance = 
                 new CaptchaElementSelector(
                     new SimpleElementSelector(HtmlElementStore.IMG_ELEMENT));
@@ -190,7 +191,7 @@ public class CaptchaElementSelectorTest {
 
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         CaptchaElementSelector instance = 
                 new CaptchaElementSelector(
                     new SimpleElementSelector(HtmlElementStore.IMG_ELEMENT));

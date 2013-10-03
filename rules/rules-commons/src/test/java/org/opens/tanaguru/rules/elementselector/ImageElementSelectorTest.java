@@ -28,6 +28,7 @@ import junit.framework.TestCase;
 import org.easymock.EasyMock;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.junit.*;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.processor.SSPHandler;
@@ -80,7 +81,7 @@ public class ImageElementSelectorTest extends TestCase{
 
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -108,7 +109,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -136,7 +137,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -164,7 +165,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -192,7 +193,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -221,7 +222,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -250,7 +251,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -279,7 +280,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -308,7 +309,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -336,7 +337,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -364,7 +365,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -392,7 +393,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -420,7 +421,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -449,7 +450,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -478,7 +479,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -507,7 +508,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -535,7 +536,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -563,7 +564,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -591,7 +592,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -619,7 +620,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -647,7 +648,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -675,7 +676,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -703,7 +704,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -731,7 +732,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -759,7 +760,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -787,7 +788,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -815,7 +816,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -844,7 +845,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -873,7 +874,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -902,7 +903,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -931,7 +932,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -960,7 +961,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -989,7 +990,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -1018,7 +1019,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -1047,7 +1048,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -1076,7 +1077,7 @@ public class ImageElementSelectorTest extends TestCase{
         
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT, 
@@ -1105,7 +1106,7 @@ public class ImageElementSelectorTest extends TestCase{
 
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     new SimpleElementSelector(HtmlElementStore.IMG_ELEMENT), 
@@ -1133,7 +1134,7 @@ public class ImageElementSelectorTest extends TestCase{
 
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     new SimpleElementSelector(HtmlElementStore.IMG_ELEMENT));
@@ -1160,7 +1161,7 @@ public class ImageElementSelectorTest extends TestCase{
 
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         ImageElementSelector instance = 
                 new ImageElementSelector(
                     HtmlElementStore.IMG_ELEMENT);
