@@ -24,7 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleDefaultImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
@@ -45,7 +45,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.EMPTY_LINK_MS
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule06161 extends AbstractPageRuleDefaultImplementation {
+public class Rgaa22Rule06161 extends AbstractPageRuleMarkupImplementation {
     
     ElementHandler emptyLinksHandler = new ElementHandlerImpl();
 
@@ -57,7 +57,7 @@ public class Rgaa22Rule06161 extends AbstractPageRuleDefaultImplementation {
     }
     
      @Override
-    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
+    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
         ElementSelector elementsSelector = 
                 new SimpleElementSelector(NOT_ANCHOR_LINK_CSS_LIKE_QUERY);
         elementsSelector.selectElements(sspHandler, elementHandler);

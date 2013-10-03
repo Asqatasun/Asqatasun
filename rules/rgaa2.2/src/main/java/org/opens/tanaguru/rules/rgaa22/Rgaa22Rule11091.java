@@ -33,10 +33,10 @@ import static org.opens.tanaguru.rules.keystore.HtmlElementStore.CAPTION_ELEMENT
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
 import static org.opens.tanaguru.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
 import static org.opens.tanaguru.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_CAPTION_PERTINENCE_FOR_DATA_TABLE_MSG;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_TABLE_AND_CAPTION_PERTINENCE_MSG;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_TABLE_FOR_NOT_PERTINENT_CAPTION_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NOT_PERTINENT_CAPTION_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_CAPTION_PERTINENCE_FOR_DATA_TABLE_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_TABLE_FOR_NOT_PERTINENT_CAPTION_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_TABLE_AND_CAPTION_PERTINENCE_MSG;
 
 /**
  * Implementation of the rule 11.9 of the referential RGAA 2.2.
@@ -96,7 +96,7 @@ public class Rgaa22Rule11091 extends AbstractMarkerPageRuleImplementation {
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
+    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
         super.select(sspHandler, elementHandler);
         // once tables selected, we extract the caption child element of each 
         // to make the control

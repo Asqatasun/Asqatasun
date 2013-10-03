@@ -25,7 +25,7 @@ import java.util.Map;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Nomenclature;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleDefaultImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
@@ -34,9 +34,9 @@ import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
 import org.opens.tanaguru.rules.elementchecker.element.ElementWithAttributePresenceChecker;
 import org.opens.tanaguru.rules.elementselector.MultipleElementSelector;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
-import org.opens.tanaguru.rules.utils.CssLikeSelectorBuilder;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_ATTR_DETECTED_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG;
+import org.opens.tanaguru.rules.utils.CssLikeSelectorBuilder;
 
 /**
  * Implementation of the rule 7.8 of the referential RGAA 2.2.
@@ -46,7 +46,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule07081 extends AbstractPageRuleDefaultImplementation {
+public class Rgaa22Rule07081 extends AbstractPageRuleMarkupImplementation {
 
     private static final String PRESENTATION_TAG_NOM = "DeprecatedRepresentationTagsV2";
     private static final String PRESENTATION_ATTR_NOM = "DeprecatedRepresentationAttributesV2";
