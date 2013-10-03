@@ -68,7 +68,7 @@ public class InputFormElementWithInplicitLabelSelector implements ElementSelecto
      */
     private Elements getElements (SSPHandler sspHandler) {
         if (formElementHandler != null) {
-            return formElementHandler.get();
+            return (Elements)formElementHandler.get();
         } else {
             return sspHandler.beginCssLikeSelection().
                 domCssLikeSelectNodeSet(FORM_ELEMENT_CSS_LIKE_QUERY).

@@ -82,7 +82,7 @@ public class CaptchaElementSelector implements ElementSelector {
      *
      * @param elements
      */
-    public void extractCaptchaElements(ElementHandler selectionHandler) {
+    public void extractCaptchaElements(ElementHandler<Element> selectionHandler) {
         if (selectionHandler.isEmpty()) {
             return;
         }

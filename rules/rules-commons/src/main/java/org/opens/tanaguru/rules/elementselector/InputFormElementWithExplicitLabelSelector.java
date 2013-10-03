@@ -21,9 +21,9 @@
  */
 package org.opens.tanaguru.rules.elementselector;
 
+import java.util.Collection;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.FOR_ATTR;
@@ -37,7 +37,7 @@ import org.opens.tanaguru.rules.utils.CssLikeSelectorBuilder;
 public class InputFormElementWithExplicitLabelSelector implements ElementSelector {
 
     /** the pre-selected input form elements */
-    private ElementHandler formElementHandler;
+    private ElementHandler<Element> formElementHandler;
     
     /**
      * Default constructor
@@ -67,7 +67,7 @@ public class InputFormElementWithExplicitLabelSelector implements ElementSelecto
      * @param sspHandler
      * @return the elements implied by the test
      */
-    private Elements getElements (SSPHandler sspHandler) {
+    private Collection<Element> getElements (SSPHandler sspHandler) {
         if (formElementHandler != null) {
             return formElementHandler.get();
         } else {

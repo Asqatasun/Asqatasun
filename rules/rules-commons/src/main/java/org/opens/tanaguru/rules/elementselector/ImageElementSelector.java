@@ -110,7 +110,7 @@ public class ImageElementSelector extends SimpleElementSelector {
      * 
      * @param elementHandler 
      */
-    private void excludeLinksFromSelection(ElementHandler elementHandler) {
+    private void excludeLinksFromSelection(ElementHandler<Element> elementHandler) {
         if (!excludeCompositeLink && !excludeImageLink) {
             return;
         }

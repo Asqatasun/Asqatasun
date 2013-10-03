@@ -22,6 +22,7 @@
 
 package org.opens.tanaguru.rules.elementselector;
 
+import org.jsoup.nodes.Element;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 
@@ -31,7 +32,7 @@ import org.opens.tanaguru.ruleimplementation.ElementHandler;
  * 
  * @author jkowalczyk
  */
-public class SimpleElementSelector implements ElementSelector{
+public class SimpleElementSelector implements ElementSelector {
 
     /* The css-like query used to retrieve Elements */
     private String cssLikeQuery;
@@ -53,7 +54,7 @@ public class SimpleElementSelector implements ElementSelector{
     }
 
     @Override
-    public void selectElements(SSPHandler sspHandler, ElementHandler selectionHandler) {
+    public void selectElements(SSPHandler sspHandler, ElementHandler<Element> selectionHandler) {
         if (cssLikeQuery != null) {
             selectionHandler.addAll(
                     sspHandler.beginCssLikeSelection().

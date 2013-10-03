@@ -70,7 +70,7 @@ public class AreaElementSelector extends SimpleElementSelector {
     }
     
     @Override
-    public void selectElements(SSPHandler sspHandler, ElementHandler elementHandler) {
+    public void selectElements(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
         super.selectElements(sspHandler, elementHandler);
         if (elementHandler.isEmpty()) {
             return;
