@@ -71,7 +71,7 @@ public class Rgaa22Rule02071Test extends Rgaa22RuleImplementationTestCase {
 //                processPageTest("Rgaa22.Test.2.7-3NMI-01").getValue());
 //        assertEquals(TestSolution.NOT_APPLICABLE,
 //                processPageTest("Rgaa22.Test.2.7-4NA-01").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("Rgaa22.Test.2.7-5NT-01").getValue());
     }
 
@@ -85,7 +85,7 @@ public class Rgaa22Rule02071Test extends Rgaa22RuleImplementationTestCase {
 //                consolidate("Rgaa22.Test.2.7-3NMI-01").getValue());
 //        assertEquals(TestSolution.NOT_APPLICABLE,
 //                consolidate("Rgaa22.Test.2.7-4NA-01").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa22.Test.2.7-5NT-01").getValue());
     }
 
