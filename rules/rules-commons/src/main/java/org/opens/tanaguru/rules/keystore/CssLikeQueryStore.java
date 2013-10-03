@@ -30,7 +30,7 @@ public final class CssLikeQueryStore {
     public static final String IMG_WITHOUT_ALT_CSS_LIKE_QUERY="img:not([alt])"; 
     public static final String IMG_WITH_ALT_CSS_LIKE_QUERY="img[alt]"; 
     public static final String IMG_WITH_ALT_NOT_IN_LINK_CSS_LIKE_QUERY=
-            "img[alt]:not(a img)"; 
+                    "img[alt]:not(a img)"; 
     public static final String IMG_NOT_IN_LINK_CSS_LIKE_QUERY="img:not(a img)"; 
     public static final String IMG_WITH_ISMAP_ATTR_CSS_LIKE_QUERY=
                     "img[ismap] , "
@@ -170,30 +170,34 @@ public final class CssLikeQueryStore {
     public static final String NOT_ANCHOR_LINK_CSS_LIKE_QUERY = 
                     "a:not([name]):not([id])";
     public static final String TEXT_LINK_CSS_LIKE_QUERY = 
-                    "a:not(:has(*))";
-    public static final String IMAGE_LINK_CSS_LIKE_QUERY = 
-                    "a:has(img))";
-    
+                    "a[href]:not(:has(*))";
+    public static final String LINK_WITH_CHILDREN_CSS_LIKE_QUERY = 
+                    "a[href]:has(*)";
+    public static final String IMAGE_LINK_CHILDREN_CSS_LIKE_QUERY = 
+                    "img , object[type^=image]";
+
     // Scripts css-like queries
     public static final String CHANGE_CONTEXT_SCRIPT_CSS_LIKE_QUERY = 
                     "select[onchange], "
                     + "form:has(select)"
-                    +      ":not(:has(button))"
-                    +      ":not(:has(input[type=submit]))"
-                    +      ":not(:has(input[type=button]))"
-                    +      ":not(:has(input[type=reset]))";
+                    +     ":not(:has(button))"
+                    +     ":not(:has(input[type=submit]))"
+                    +     ":not(:has(input[type=button]))"
+                    +     ":not(:has(input[type=reset]))";
     
     // Consultation css-like queries
     public static final String META_WITH_REFRESH_CSS_LIKE_QUERY = 
-                "meta[http-equiv=refresh][content*=url]";
+                    "meta[http-equiv=refresh][content*=url]";
     
     // Structuration of information css-like queries
     public static final String HEADINGS_CSS_LIKE_QUERY = 
-                "h1, h2, h3, h4, h5, h6";
+                    "h1, h2, h3, h4, h5, h6";
     
     // Elements with attributes (minus element exceptions)
-    public static final String ELEMENT_WITH_WITDH_ATTR_NOT_IMG = ":not(img)[width]";
-    public static final String ELEMENT_WITH_HEIGHT_ATTR_NOT_IMG =":not(img)[height]";
+    public static final String ELEMENT_WITH_WITDH_ATTR_NOT_IMG = 
+                    ":not(img)[width]";
+    public static final String ELEMENT_WITH_HEIGHT_ATTR_NOT_IMG =
+                    ":not(img)[height]";
     
     /**
      * Private constructor. This class handles keys and must not be instanciated

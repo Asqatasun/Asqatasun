@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2012  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -34,7 +34,13 @@ public final class EvidenceStore {
     public static final String LINK_TITLE_ATTR_EE = "Link-Title-Attribut";
     public static final String LINK_TEXT_EE = "Link-Text";
     public static final String LINK_HREF_ATTR_EE = "Link-Href-Attribut";
+    public static final String ELEMENT_NAME_EE = "Element-Name";
+    public static final String CSS_SELECTOR_EE = "Css-Selector";
+    public static final String CSS_FILENAME_EE = "Css-Filename";
     public static final String TARGETTED_ELEMENT_FROM_SCOPE_EE = "Element-Name";
+    public static final String FG_COLOR_EE = "Foreground-Color";
+    public static final String BG_COLOR_EE = "Background-Color";
+    public static final String CONTRAST_EE = "Contrast";
     
     /**
      * private constructor. This class handles keys and must not be instanciated

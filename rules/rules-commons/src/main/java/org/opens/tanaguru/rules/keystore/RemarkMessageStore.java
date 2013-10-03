@@ -35,7 +35,6 @@ public final class RemarkMessageStore {
     public static final String TITLE_ATTR_MISSING_MSG = "TitleAttributeMissing";
     public static final String ID_MISSING_MSG = "IdMissing";
     public static final String ID_NOT_UNIQUE_MSG = "IdNotUnique";
-    public static final String NOT_PERTINENT_TITLE_MSG = "NotPertinentTitle";
 
     // doctype
     public static final String DOCTYPE_MISSING_MSG = "DoctypeMissing";
@@ -173,6 +172,8 @@ public final class RemarkMessageStore {
     
     // mandatory elements 
     public static final String TITLE_TAG_MISSING_MSG = "TitleTagMissing";
+    public static final String NOT_PERTINENT_TITLE_MSG = "NotPertinentTitle";
+    public static final String CHECK_TITLE_PERTINENCE_MSG = "CheckTitlePertinence";
     public static final String LANG_ATTRIBUTE_MISSING_ON_HTML_TAG_MSG =
             "LangAttributeMissingOnHtml";
     public static final String LANG_ATTRIBUTE_MISSING_ON_WHOLE_PAGE_MSG =
@@ -188,6 +189,8 @@ public final class RemarkMessageStore {
     public static final String UNDETECTED_LANG_MSG = "UndetectedLanguage";
     public static final String MALFORMED_LANGUAGE_DECLARATION_MSG =
             "MalformedLanguage";
+    public static final String LANGUAGE_CHANGE_MISSING_MSG = 
+            "LangChangeMissingOnElementOrOneOfItsParent";
 
     // links
     public static final String EMPTY_LINK_MSG = "EmptyLink";
@@ -213,9 +216,20 @@ public final class RemarkMessageStore {
     
     
     // structuration of information
-    public static final String DETECTED_TAG_MSG =
-            "DetectedTag";
+    public static final String DETECTED_TAG_MSG = "DetectedTag";
 
+    // css
+    public static final String BAD_UNIT_TYPE_MSG = "BadUnitType";
+    
+    // colors and contrast
+    public static final String BAD_CONTRAST_MSG = "BadContrast";
+    public static final String BAD_CONTRAST_HIDDEN_ELEMENT_MSG = 
+            "BadContrastHiddenElement";
+    public static final String CHECK_CONTRAST_MANUALLY_MSG =
+            "CheckContrastManually";
+    public static final String NOT_TREATED_BACKGROUND_COLOR_MSG =
+            "NotTreatedBackgroundColor";
+    
     /**
      * Private constructor. This class handles keys and must not be instantiated
      */

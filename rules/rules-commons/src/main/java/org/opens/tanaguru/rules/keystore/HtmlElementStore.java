@@ -58,20 +58,26 @@ public final class HtmlElementStore {
     public static final String INPUT_ELEMENT = HTML.Tag.INPUT.toString();
     public static final String LABEL_ELEMENT = "label";
     public static final String LEGEND_ELEMENT = "legend";
+    public static final String LI_ELEMENT = HTML.Tag.LI.toString();
     public static final String META_ELEMENT = HTML.Tag.META.toString();
     public static final String MARQUEE_ELEMENT = "marquee";
     public static final String OBJECT_ELEMENT = HTML.Tag.OBJECT.toString();
+    public static final String OL_ELEMENT = HTML.Tag.OL.toString();
     public static final String OPTION_ELEMENT = HTML.Tag.OPTION.toString();
     public static final String OPTGROUP_ELEMENT = "optgroup";
     public static final String P_ELEMENT = HTML.Tag.P.toString();
     public static final String SELECT_ELEMENT = HTML.Tag.SELECT.toString();
+    public static final String SCRIPT_ELEMENT = HTML.Tag.SPAN.toString();
     public static final String SPAN_ELEMENT = HTML.Tag.SPAN.toString();
     public static final String STRONG_ELEMENT = HTML.Tag.STRONG.toString();
     public static final String TABLE_ELEMENT = HTML.Tag.TABLE.toString();
-    public static final String TEXTAREA_ELEMENT = HTML.Tag.TEXTAREA.toString();
-    public static final String TITLE_ELEMENT = HTML.Tag.TITLE.toString();
+    public static final String TD_ELEMENT = HTML.Tag.TD.toString();
     public static final String TEXT_ELEMENT = "#text";
     public static final String TEXT_ELEMENT2 = "text";
+    public static final String TEXTAREA_ELEMENT = HTML.Tag.TEXTAREA.toString();
+    public static final String TH_ELEMENT = HTML.Tag.TH.toString();
+    public static final String TITLE_ELEMENT = HTML.Tag.TITLE.toString();
+    public static final String UL_ELEMENT = HTML.Tag.UL.toString();
     
     /**
      * Private constructor. This class handles keys and must not be instanciated
