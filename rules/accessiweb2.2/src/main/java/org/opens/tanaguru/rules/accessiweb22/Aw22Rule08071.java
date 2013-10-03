@@ -20,7 +20,16 @@
 
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.jsoup.nodes.Element;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.processor.SSPHandler;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
+import org.opens.tanaguru.rules.elementchecker.lang.LangChangeChecker;
+import org.opens.tanaguru.rules.elementchecker.lang.LangChecker;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.HTML_WITH_LANG_CSS_LIKE_QUERY;
 
 /**
  * Implementation of the rule 8.7.1 of the referential Accessiweb 2.2.
@@ -28,16 +37,36 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/aw22-rule-8-7-1">the rule 8.7.1 design page.</a>
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-8-7-1"> 8.7.1 rule specification</a>
  *
- * @author jkowalczyk
  */
-
-public class Aw22Rule08071 extends AbstractNotTestedRuleImplementation {
+public class Aw22Rule08071 extends AbstractPageRuleMarkupImplementation {
 
     /**
      * Default constructor
      */
     public Aw22Rule08071 () {
         super();
+    }
+    
+    @Override
+    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
+        SimpleElementSelector selector = new SimpleElementSelector(HTML_WITH_LANG_CSS_LIKE_QUERY);
+        selector.selectElements(sspHandler, elementHandler);
+   }
+
+    @Override
+    protected void check(
+            SSPHandler sspHandler, 
+            ElementHandler<Element> selectionHandler, 
+            TestSolutionHandler testSolutionHandler) {
+        super.check(sspHandler, selectionHandler, testSolutionHandler);
+        
+        if (selectionHandler.isEmpty()) {
+            testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
+            return;
+        }
+        LangChecker ec = new LangChangeChecker();
+        ec.setNomenclatureLoaderService(nomenclatureLoaderService);
+        ec.check(sspHandler, selectionHandler, testSolutionHandler);
     }
 
 }

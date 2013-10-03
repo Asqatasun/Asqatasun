@@ -20,11 +20,17 @@
 
 package org.opens.tanaguru.rules.accessiweb22;
 
+import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.opens.tanaguru.processor.SSPHandler;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
+import org.opens.tanaguru.rules.elementchecker.lang.LangChecker;
+import org.opens.tanaguru.rules.elementchecker.lang.LangDeclarationValidityChecker;
+import org.opens.tanaguru.rules.elementselector.ElementSelector;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.ELEMENT_WITH_LANG_ATTR_CSS_LIKE_QUERY;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
 
 /**
  * Implementation of the rule 8.8.2 of the referential Accessiweb 2.2.
@@ -33,22 +39,35 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-8-8-2"> 8.8.2 rule specification</a>
  *
  */
-public class Aw22Rule08082 extends AbstractDetectionPageRuleImplementation {
-    
+public class Aw22Rule08082 extends AbstractPageRuleMarkupImplementation {
+
     /**
      * Default constructor
      */
     public Aw22Rule08082 () {
-        super(
-                new SimpleElementSelector(ELEMENT_WITH_LANG_ATTR_CSS_LIKE_QUERY),
-                // solution when at least one element is found
-                TestSolution.NEED_MORE_INFO,
-                // solution when no element is found
-                TestSolution.NOT_APPLICABLE,
-                // manual check message
-                MANUAL_CHECK_ON_ELEMENTS_MSG,
-                null
-            );
+        super();
+    }
+    
+    @Override
+    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
+        ElementSelector selector = new SimpleElementSelector(ELEMENT_WITH_LANG_ATTR_CSS_LIKE_QUERY);
+        selector.selectElements(sspHandler, elementHandler);
+   }
+
+    @Override
+    protected void check(
+            SSPHandler sspHandler, 
+            ElementHandler<Element> elementHandler, 
+            TestSolutionHandler testSolutionHandler) {
+        super.check(sspHandler, elementHandler, testSolutionHandler);
+        
+        if (elementHandler.isEmpty()) {
+            testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
+            return;
+        }
+        LangChecker ec = new LangDeclarationValidityChecker(false, true);
+        ec.setNomenclatureLoaderService(nomenclatureLoaderService);
+        ec.check(sspHandler, elementHandler, testSolutionHandler);
     }
 
 }
