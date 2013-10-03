@@ -479,8 +479,10 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
                         aCSS = MediaQueryTools.getWrappedInMediaQuery (aCSS,mediaList);
                     }
                     stylesheetContent.setAdaptedContent(new XStream().toXML(aCSS));
-                    for (CSSImportRule cssImportRule : aCSS.getAllImportRules()) {
-                        getImportedResources(cssImportRule, currentLocalResourcePath);
+                    if (aCSS.hasImportRules()) {
+                        for (CSSImportRule cssImportRule : aCSS.getAllImportRules()) {
+                            getImportedResources(cssImportRule, currentLocalResourcePath);
+                        }
                     }
                 } 
             } catch (IllegalArgumentException iae) {
