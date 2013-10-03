@@ -246,7 +246,7 @@ public abstract class ElementCheckerImpl implements ElementChecker {
     }
     
     /**
-     * Returns the default evidence Element Collection with an additionnal 
+     * Returns the default evidence Element Collection with an additional 
      * info when a sourceCodeRemark is created
      * 
      * @param element
@@ -308,6 +308,58 @@ public abstract class ElementCheckerImpl implements ElementChecker {
         return processRemarkService.getEvidenceElement(evidenceKey, evidenceValue);
     }
 
+    /**
+     * The textual content of an element can be composed with :
+     * <ul>
+     *     <li> The text of the element</li>
+     *     <li> The text of the alt attribute of the element</li>
+     *     <li> The text of the title attribute of the element</li>
+     *     <li> The text of the summary attribute of the element</li>
+     *     <li> The text of the value attribute of the element</li>
+     *     <li> The text of the content attribute of the element when 
+     *          the value of the name attribute is "description"
+     *      </li>
+     * </ul>
+     * 
+     * @param element
+     * @return the textual content of an element
+     */
+    protected String getTextualContentOfElement(Element element) {
+        StringBuilder strb = new StringBuilder();
+        if (StringUtils.isNotBlank(element.ownText())) {
+            strb.append(element.ownText().trim());
+            strb.append(' ');
+        }
+        
+        strb.append(getTextualContentOfAttribute(element, AttributeStore.ALT_ATTR));
+        strb.append(getTextualContentOfAttribute(element, AttributeStore.TITLE_ATTR));
+        strb.append(getTextualContentOfAttribute(element, AttributeStore.SUMMARY_ATTR));
+        strb.append(getTextualContentOfAttribute(element, AttributeStore.VALUE_ATTR));
+        
+        if (element.hasAttr(AttributeStore.CONTENT_ATTR) && 
+                element.hasAttr(AttributeStore.NAME_ATTR) && 
+                StringUtils.equalsIgnoreCase(element.attr(AttributeStore.NAME_ATTR), "description") && 
+                StringUtils.isNotBlank(element.attr(AttributeStore.CONTENT_ATTR))) {
+            strb.append(element.attr(AttributeStore.CONTENT_ATTR).trim());
+            strb.append(' ');
+        }
+        return strb.toString().trim();
+    }
+    
+    /**
+     * 
+     * @param element
+     * @param attributeName
+     * @return the textual content of an attribute
+     */
+    private String getTextualContentOfAttribute(Element element, String attributeName) {
+        if (StringUtils.isNotBlank(attributeName) && 
+                element.hasAttr(attributeName) ) {
+            return element.attr(attributeName).trim() + ' ';
+        }
+        return "";
+    }
+    
     /**
      * Determines whether an attribute defines an external resource regarding
      * the markup type
