@@ -120,7 +120,7 @@ public class Aw22Rule08031Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.3.1-1Passed-04");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+        assertEquals(0, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.PASSED, processResult.getValue());
         // check number of remarks and their value

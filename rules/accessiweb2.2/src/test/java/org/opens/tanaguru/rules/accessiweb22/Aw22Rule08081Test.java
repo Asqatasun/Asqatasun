@@ -19,11 +19,12 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
+import java.util.Iterator;
 import java.util.LinkedHashSet;
-import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.SourceCodeRemark;
-import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
+import org.opens.tanaguru.rules.keystore.AttributeStore;
+import org.opens.tanaguru.rules.keystore.EvidenceStore;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
@@ -33,7 +34,9 @@ import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
  * @author jkowalczyk
  */
 public class Aw22Rule08081Test extends Aw22RuleImplementationTestCase {
-
+    
+    private static String XML_LANG_EE_KEY = "xml-lang";
+    
     /**
      * Default constructor
      */
@@ -49,18 +52,33 @@ public class Aw22Rule08081Test extends Aw22RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-        getWebResourceMap().put("AW22.Test.8.8.1-3NMI-01",
+        getWebResourceMap().put("AW22.Test.8.8.1-1Passed-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule08081/AW22.Test.8.8.1-3NMI-01.html"));
-        getWebResourceMap().put("AW22.Test.8.8.1-3NMI-02",
+                getTestcasesFilePath() + "AW22/Aw22Rule08081/AW22.Test.8.8.1-1Passed-01.html"));
+        getWebResourceMap().put("AW22.Test.8.8.1-1Passed-02",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule08081/AW22.Test.8.8.1-3NMI-02.html"));
-        getWebResourceMap().put("AW22.Test.8.8.1-3NMI-03",
+                getTestcasesFilePath() + "AW22/Aw22Rule08081/AW22.Test.8.8.1-1Passed-02.html"));
+        getWebResourceMap().put("AW22.Test.8.8.1-1Passed-03",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule08081/AW22.Test.8.8.1-3NMI-03.html"));
-        getWebResourceMap().put("AW22.Test.8.8.1-3NMI-04",
+                getTestcasesFilePath() + "AW22/Aw22Rule08081/AW22.Test.8.8.1-1Passed-03.html"));
+        getWebResourceMap().put("AW22.Test.8.8.1-1Passed-04",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule08081/AW22.Test.8.8.1-3NMI-04.html"));
+                getTestcasesFilePath() + "AW22/Aw22Rule08081/AW22.Test.8.8.1-1Passed-04.html"));
+        getWebResourceMap().put("AW22.Test.8.8.1-2Failed-01",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule08081/AW22.Test.8.8.1-2Failed-01.html"));
+        getWebResourceMap().put("AW22.Test.8.8.1-2Failed-02",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule08081/AW22.Test.8.8.1-2Failed-02.html"));
+        getWebResourceMap().put("AW22.Test.8.8.1-2Failed-03",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule08081/AW22.Test.8.8.1-2Failed-03.html"));
+        getWebResourceMap().put("AW22.Test.8.8.1-2Failed-04",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule08081/AW22.Test.8.8.1-2Failed-04.html"));
+        getWebResourceMap().put("AW22.Test.8.8.1-2Failed-05",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule08081/AW22.Test.8.8.1-2Failed-05.html"));
         getWebResourceMap().put("AW22.Test.8.8.1-4NA-01",
               getWebResourceFactory().createPage(
               getTestcasesFilePath() + "AW22/Aw22Rule08081/AW22.Test.8.8.1-4NA-01.html"));
@@ -72,77 +90,173 @@ public class Aw22Rule08081Test extends Aw22RuleImplementationTestCase {
     @Override
     protected void setProcess() {
         //----------------------------------------------------------------------
-        //------------------------------3NMI-01---------------------------------
+        //---------------------------1Passed-01---------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("AW22.Test.8.8.1-3NMI-01");
+        ProcessResult processResult = processPageTest("AW22.Test.8.8.1-1Passed-01");
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
+        
+        
+        //----------------------------------------------------------------------
+        //---------------------------1Passed-02---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.8.8.1-1Passed-02");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
+        
+        
+        //----------------------------------------------------------------------
+        //---------------------------1Passed-03---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.8.8.1-1Passed-03");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
+        
+        
+        //----------------------------------------------------------------------
+        //---------------------------1Passed-04---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.8.8.1-1Passed-04");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-01------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.8.8.1-2Failed-01");
+        assertEquals(TestSolution.FAILED,processResult.getValue());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.MALFORMED_LANGUAGE_DECLARATION_MSG, processRemark.getMessageCode());
         assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        assertEquals(1, processRemark.getElementList().size());
+        Iterator<EvidenceElement> pIter = processRemark.getElementList().iterator();
+        EvidenceElement ee = pIter.next();
+        assertEquals("fren-FR",ee.getValue());
+        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
         
         
         //----------------------------------------------------------------------
-        //------------------------------3NMI-02------------------------------
+        //------------------------------2Failed-02------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("AW22.Test.8.8.1-3NMI-02");
+        processResult = processPageTest("AW22.Test.8.8.1-2Failed-02");
+        assertEquals(TestSolution.FAILED,processResult.getValue());
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.WRONG_LANGUAGE_DECLARATION_MSG, processRemark.getMessageCode());
         assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        assertEquals(1, processRemark.getElementList().size());
+        pIter = processRemark.getElementList().iterator();
+        ee = pIter.next();
+        assertEquals("aq",ee.getValue());
+        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
         
         
         //----------------------------------------------------------------------
-        //------------------------------3NMI-03------------------------------
+        //------------------------------2Failed-03------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("AW22.Test.8.8.1-3NMI-03");
+        processResult = processPageTest("AW22.Test.8.8.1-2Failed-03");
+        assertEquals(TestSolution.FAILED,processResult.getValue());
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.MALFORMED_LANGUAGE_DECLARATION_MSG, processRemark.getMessageCode());
         assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        assertEquals(1, processRemark.getElementList().size());
+        pIter = processRemark.getElementList().iterator();
+        ee = pIter.next();
+        assertEquals("french",ee.getValue());
+        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
         
         
         //----------------------------------------------------------------------
-        //------------------------------3NMI-04------------------------------
+        //------------------------------2Failed-04------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("AW22.Test.8.8.1-3NMI-04");
+        processResult = processPageTest("AW22.Test.8.8.1-2Failed-04");
+        assertEquals(TestSolution.FAILED,processResult.getValue());
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.BODY_ELEMENT, processRemark.getTarget());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.MALFORMED_LANGUAGE_DECLARATION_MSG, processRemark.getMessageCode());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        assertEquals(1, processRemark.getElementList().size());
+        pIter = processRemark.getElementList().iterator();
+        ee = pIter.next();
+        assertEquals("fr-F",ee.getValue());
+        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
         
         
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-05------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.8.8.1-2Failed-05");
+        assertEquals(TestSolution.FAILED,processResult.getValue());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.MALFORMED_LANGUAGE_DECLARATION_MSG, processRemark.getMessageCode());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(1, processRemark.getElementList().size());
+        pIter = processRemark.getElementList().iterator();
+        ee = pIter.next();
+        assertEquals("fr/FR",ee.getValue());
+        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
+        
+
         //----------------------------------------------------------------------
         //------------------------------4NA-01----------------------------------
         //----------------------------------------------------------------------
@@ -165,14 +279,24 @@ public class Aw22Rule08081Test extends Aw22RuleImplementationTestCase {
 
     @Override
     protected void setConsolidate() {
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("AW22.Test.8.8.1-3NMI-01").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("AW22.Test.8.8.1-3NMI-02").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("AW22.Test.8.8.1-3NMI-03").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("AW22.Test.8.8.1-3NMI-04").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("AW22.Test.8.8.1-1Passed-01").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("AW22.Test.8.8.1-1Passed-02").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("AW22.Test.8.8.1-1Passed-03").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("AW22.Test.8.8.1-1Passed-04").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.8.8.1-2Failed-01").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.8.8.1-2Failed-02").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.8.8.1-2Failed-03").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.8.8.1-2Failed-04").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.8.8.1-2Failed-05").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("AW22.Test.8.8.1-4NA-01").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
