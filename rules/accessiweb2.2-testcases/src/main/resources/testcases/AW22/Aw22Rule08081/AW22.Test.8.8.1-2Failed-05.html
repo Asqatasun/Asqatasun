@@ -2,24 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Aw22 Test.8.8.2 NMI 03</title>
+        <title>Aw22 Test.8.8.1 Failed 05</title>
     </head>
     <body>
         <div>
 
-            <h1>Aw22 Test.8.8.2 NMI 03</h1>
+            <h1>Aw22 Test.8.8.1 Failed 05</h1>
 
             <div class="test-detail">
-                On each Web page, is each language change (lang and/or xml:lang attribute) relevant?
+                On each Web page, is each language change (lang and/or xml:lang attribute) valid?
             </div>
 
-            <div class="testcase" xml:lang="en">
+            <div class="testcase" lang="fr/FR">
                 <p>Texte en francais </p>
             </div>
 
             <div class="test-explanation">
-               NMI : A language change occurs once, seems to be irrelevant but
-                the text is not long enough to decide surely
+                Failed : A language change occurs once but is not well-defined.
             </div>
         </div>
     </body>
