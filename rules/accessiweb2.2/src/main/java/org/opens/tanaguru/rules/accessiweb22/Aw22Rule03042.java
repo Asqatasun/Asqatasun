@@ -20,7 +20,8 @@
 
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithCheckerImplementation;
+import org.opens.tanaguru.rules.elementchecker.contrast.ContrastChecker;
 
 /**
  * Implementation of the rule 3.4.2 of the referential Accessiweb 2.2.
@@ -31,13 +32,23 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * @author jkowalczyk
  */
 
-public class Aw22Rule03042 extends AbstractNotTestedRuleImplementation {
+public class Aw22Rule03042 extends AbstractPageRuleWithCheckerImplementation {
+    
+    /** The constract checker with a value of ratio set to 7*/
+    private static final ContrastChecker CONSTRAST_CHECKER = 
+            new ContrastChecker(7f, false, true, true);
 
     /**
      * Default constructor
      */
     public Aw22Rule03042 () {
-        super();
+        /** The constract checker with a value of ratio set to 3*/
+        super(CONSTRAST_CHECKER);
+    }
+
+    @Override
+    public int getSelectionSize() {
+        return CONSTRAST_CHECKER.getElementCounter();
     }
 
 }
