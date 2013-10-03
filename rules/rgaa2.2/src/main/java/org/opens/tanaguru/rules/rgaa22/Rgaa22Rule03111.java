@@ -25,7 +25,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleDefaultImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
@@ -49,7 +49,7 @@ import org.opens.tanaguru.rules.utils.CssLikeSelectorBuilder;
  * @see <a href="http://rgaa.net/Absence-d-element-de-formulaire,29.html"> 3.11 rule specification
  *
  */
-public class Rgaa22Rule03111 extends AbstractPageRuleDefaultImplementation {
+public class Rgaa22Rule03111 extends AbstractPageRuleMarkupImplementation {
     
     /** The element selector */
     private static final ElementSelector ELEMENT_SELECTOR = 
@@ -97,7 +97,7 @@ public class Rgaa22Rule03111 extends AbstractPageRuleDefaultImplementation {
     }
     
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
+    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
         ELEMENT_SELECTOR.selectElements(sspHandler, elementHandler);
         
         if (elementHandler.isEmpty()) {
@@ -133,7 +133,7 @@ public class Rgaa22Rule03111 extends AbstractPageRuleDefaultImplementation {
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler elementHandler, 
+            ElementHandler<Element> elementHandler, 
             TestSolutionHandler testSolutionHandler) {
         super.check(sspHandler, elementHandler, testSolutionHandler);
         
