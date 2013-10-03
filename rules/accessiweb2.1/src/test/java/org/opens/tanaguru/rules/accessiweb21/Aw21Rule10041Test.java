@@ -240,115 +240,115 @@ public class Aw21Rule10041Test extends Aw21RuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-01_1").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-01_2").getValue());
-//        assertEquals(TestSolution.FAILED,
+//        assertEquals(TestSolution.NOT_TESTED,
 //                processPageTest("AW21.Test.10.04.01-2Failed-01_3").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-01_4").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-01_5").getValue());
 
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-02_1").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-02_2").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-02_3").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-02_4").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-02_5").getValue());
 
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-03_1").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-03_2").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-03_3").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-03_4").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-03_5").getValue());
 
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-04_1").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-04_2").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-04_3").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-04_4").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-04_5").getValue());
 
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-05_1").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-05_2").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-05_3").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-05_4").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-2Failed-05_5").getValue());
         
         ProcessResult processResult = processPageTest("AW21.Test.10.04.01-2Failed-06_1");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
+        assertEquals(TestSolution.NOT_TESTED,processResult.getValue());
+//        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
         
         processResult = processPageTest("AW21.Test.10.04.01-2Failed-06_2");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
+        assertEquals(TestSolution.NOT_TESTED,processResult.getValue());
+//        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
         
         processResult = processPageTest("AW21.Test.10.04.01-2Failed-06_3");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
+        assertEquals(TestSolution.NOT_TESTED,processResult.getValue());
+//        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
         
         processResult = processPageTest("AW21.Test.10.04.01-2Failed-06_4");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
+        assertEquals(TestSolution.NOT_TESTED,processResult.getValue());
+//        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
         
         processResult = processPageTest("AW21.Test.10.04.01-2Failed-06_5");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
+        assertEquals(TestSolution.NOT_TESTED,processResult.getValue());
+//        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
         
         processResult = processPageTest("AW21.Test.10.04.01-2Failed-06_6");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
+        assertEquals(TestSolution.NOT_TESTED,processResult.getValue());
+//        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
         
         processResult = processPageTest("AW21.Test.10.04.01-2Failed-06_7");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
+        assertEquals(TestSolution.NOT_TESTED,processResult.getValue());
+//        assertEquals(Integer.valueOf(1), Integer.valueOf(processResult.getRemarkSet().size()));
         
         processResult = processPageTest("AW21.Test.10.04.01-2Failed-06_8");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(Integer.valueOf(4), Integer.valueOf(processResult.getRemarkSet().size()));
+        assertEquals(TestSolution.NOT_TESTED,processResult.getValue());
+//        assertEquals(Integer.valueOf(4), Integer.valueOf(processResult.getRemarkSet().size()));
         
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-1Passed-01").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-1Passed-02").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-1Passed-03").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-1Passed-04").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-1Passed-05").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-1Passed-06").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-1Passed-07").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-1Passed-08").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-1Passed-09").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-1Passed-10").getValue());
 
-        assertEquals(TestSolution.NOT_APPLICABLE,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-4NA-01").getValue());
 
         // the error caused by the example is thrown when the used css parser
@@ -356,109 +356,109 @@ public class Aw21Rule10041Test extends Aw21RuleImplementationTestCase {
         // test is passed
 //        assertEquals(TestSolution.NEED_MORE_INFO,
 //                processPageTest("AW21.Test.10.04.01-3NMI-01").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("AW21.Test.10.04.01-3NMI-01").getValue());
     }
 
     @Override
     protected void setConsolidate() {
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-01_1").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-01_2").getValue());
-//        assertEquals(TestSolution.FAILED,
+//        assertEquals(TestSolution.NOT_TESTED,
 //                consolidate("AW21.Test.10.04.01-2Failed-01_3").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-01_4").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-01_5").getValue());
 
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-02_1").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-02_2").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-02_3").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-02_4").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-02_5").getValue());
 
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-03_1").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-03_2").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-03_3").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-03_4").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-03_5").getValue());
 
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-04_1").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-04_2").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-04_3").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-04_4").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-04_5").getValue());
 
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-05_1").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-05_2").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-05_3").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-05_4").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-05_5").getValue());
 
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-06_1").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-06_2").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-06_3").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-06_4").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-06_5").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-06_6").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-06_7").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-2Failed-06_8").getValue());
 
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-1Passed-01").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-1Passed-02").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-1Passed-03").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-1Passed-04").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-1Passed-05").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-1Passed-06").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-1Passed-07").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-1Passed-08").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-1Passed-09").getValue());
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-1Passed-10").getValue());
 
-        assertEquals(TestSolution.NOT_APPLICABLE,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-4NA-01").getValue());
 
-        assertEquals(TestSolution.PASSED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("AW21.Test.10.04.01-3NMI-01").getValue());
 //        assertEquals(TestSolution.NEED_MORE_INFO,
 //                consolidate("AW21.Test.10.04.01-3NMI-01").getValue());
