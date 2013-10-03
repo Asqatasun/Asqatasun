@@ -22,6 +22,8 @@
 package org.opens.tanaguru.rules.utils;
 
 import java.util.Collection;
+import javax.annotation.Nullable;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.processor.SSPHandler;
 
 /**
@@ -62,7 +64,7 @@ public final class CssLikeSelectorBuilder {
      */
     public static String buildSelectorFromElementsAndAttribute(
             Collection<String> elementNameList, 
-            String attributeName, 
+            @Nullable String attributeName, 
             boolean notEmptyAttribute) {
         StringBuilder selector = new StringBuilder();
         boolean isFirstElement = true;
@@ -73,7 +75,7 @@ public final class CssLikeSelectorBuilder {
                 selector.append(SPACE);
             }
             selector.append(elementName);
-            if (attributeName != null && !attributeName.isEmpty()) {
+            if (StringUtils.isNotBlank(attributeName)) {
                 selector.append(OPEN_BRACKET);
                 selector.append(attributeName);
                 selector.append(CLOSE_BRACKET);
