@@ -10,11 +10,11 @@
     <name>tanaguru</name>
     <url>http://www.tanaguru.org</url>
     <modules>
-        <module>engine</module>
+<!--        <module>engine</module>
         <module>web-app</module>
         <module>testing-tools</module>
         <module>cli</module>
-        <module>rules</module>
+        <module>rules</module>-->
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -818,12 +818,12 @@
             <dependency>
                 <groupId>com.phloc</groupId>
                 <artifactId>phloc-css</artifactId>
-                <version>3.3.1</version>
+                <version>3.6.0</version>
             </dependency>
             <dependency>
                 <groupId>com.phloc</groupId>
                 <artifactId>phloc-commons</artifactId>
-                <version>4.0.0</version>
+                <version>4.0.10</version>
             </dependency>
             <dependency>
                 <groupId>org.json</groupId>
