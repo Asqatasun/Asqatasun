@@ -23,6 +23,12 @@
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
+            <artifactId>accessiweb2.2-testcases</artifactId>
+            <version>${rulesVersion}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${rulesGroupId}</groupId>
             <artifactId>accessiweb2.2-i18n</artifactId>
             <version>${rulesVersion}</version>
             <scope>runtime</scope>
