@@ -42,9 +42,15 @@ public abstract class AbstractPageRuleWithSelectorAndCheckerImplementation <Elem
 
     /** The elementChecker used by the rule */
     private ElementChecker elementChecker;
+    public ElementChecker getElementChecker() {
+        return elementChecker;
+    }
     
     /** The elementSelector used by the rule */
     private ElementSelector elementSelector;
+    public ElementSelector getElementSelector() {
+        return elementSelector;
+    }
     
     /**
      * The constructor
