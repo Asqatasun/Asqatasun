@@ -21,9 +21,16 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
-import static junit.framework.Assert.assertEquals;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import static junit.framework.Assert.*;
+import org.opens.tanaguru.entity.audit.EvidenceElement;
+import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
+import org.opens.tanaguru.rules.keystore.HtmlElementStore;
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
  *
@@ -62,16 +69,102 @@ public class Aw22Rule08061Test extends Aw22RuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
-        assertEquals(TestSolution.FAILED,   
-                processPageTest("AW22.Test.8.6.1-2Failed-01").getValue());
-        assertEquals(TestSolution.FAILED,   
-                processPageTest("AW22.Test.8.6.1-2Failed-02").getValue());
-        assertEquals(TestSolution.FAILED,   
-                processPageTest("AW22.Test.8.6.1-2Failed-03").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                processPageTest("AW22.Test.8.6.1-3NMI-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("AW22.Test.8.6.1-4NA-01").getValue());
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-01------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult = processPageTest("AW22.Test.8.6.1-2Failed-01");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_TITLE_MSG, processRemark.getMessageCode());
+        assertEquals(HtmlElementStore.TITLE_ELEMENT, processRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(1, processRemark.getElementList().size());
+        Iterator<EvidenceElement> pIter = processRemark.getElementList().iterator();
+        EvidenceElement ee = pIter.next();
+        assertEquals("Page title",ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-02------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.8.6.1-2Failed-02");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_TITLE_MSG, processRemark.getMessageCode());
+        assertEquals(HtmlElementStore.TITLE_ELEMENT, processRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(1, processRemark.getElementList().size());
+        pIter = processRemark.getElementList().iterator();
+        ee = pIter.next();
+        assertEquals("",ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-03------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.8.6.1-2Failed-03");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_TITLE_MSG, processRemark.getMessageCode());
+        assertEquals(HtmlElementStore.TITLE_ELEMENT, processRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(1, processRemark.getElementList().size());
+        pIter = processRemark.getElementList().iterator();
+        ee = pIter.next();
+        assertEquals("Bienvenue dans Adobe GoLive 6",ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-01------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.8.6.1-3NMI-01");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_TITLE_PERTINENCE_MSG, processRemark.getMessageCode());
+        assertEquals(HtmlElementStore.TITLE_ELEMENT, processRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(1, processRemark.getElementList().size());
+        pIter = processRemark.getElementList().iterator();
+        ee = pIter.next();
+        assertEquals("AW22 Test.8.6.1 NMI 01",ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+
+        
+        //----------------------------------------------------------------------
+        //------------------------------4NA-01----------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.8.6.1-4NA-01");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
     }
 
     @Override
