@@ -80,7 +80,7 @@ public class Aw22Rule10011Test extends Aw22RuleImplementationTestCase {
     @Override
     protected void setProcess() {
         //----------------------------------------------------------------------
-        //------------------------------1Passed-09------------------------------
+        //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("AW22.Test.10.1.1-1Passed-01");
         // check test result
