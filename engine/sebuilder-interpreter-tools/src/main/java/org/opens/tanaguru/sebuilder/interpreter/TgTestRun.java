@@ -38,6 +38,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.UnhandledAlertException;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.opens.tanaguru.sebuilder.interpreter.exception.TestRunException;
@@ -224,7 +225,12 @@ public class TgTestRun extends TestRun {
         getLog().debug("Executing js");
         Map<String, String> jsScriptResult = new HashMap<String, String>();
         for (Map.Entry<String, String> entry : jsScriptMap.entrySet()) {
-            jsScriptResult.put(entry.getKey(), getDriver().executeScript(entry.getValue()).toString());
+            try {
+             jsScriptResult.put(entry.getKey(), getDriver().executeScript(entry.getValue()).toString());
+            } catch (WebDriverException wde) {
+                getLog().warn("Script " + entry.getKey() + " has failed");
+                getLog().warn(wde.getMessage());
+            }
         }
         getLog().debug("Js executed");
         return jsScriptResult;
