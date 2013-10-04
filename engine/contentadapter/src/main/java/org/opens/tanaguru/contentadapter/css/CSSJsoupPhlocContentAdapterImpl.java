@@ -40,7 +40,6 @@ import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.util.*;
-import java.util.logging.Level;
 import javax.annotation.Nullable;
 import javax.persistence.PersistenceException;
 import org.apache.commons.collections.CollectionUtils;
@@ -134,13 +133,13 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      * 
      */
     public void adaptContent() {
-        Logger.getLogger(this.getClass()).debug("initContext()");
+        LOGGER.debug("initContext()");
         initContext();
-        Logger.getLogger(this.getClass()).debug("adaptInlineCSS()");
+        LOGGER.debug("adaptInlineCSS()");
         adaptInlineCSS();
-        Logger.getLogger(this.getClass()).debug("adaptLocaleCSS()");
+        LOGGER.debug("adaptLocaleCSS()");
         adaptLocaleCSS();
-        Logger.getLogger(this.getClass()).debug("adaptExternalCss()");
+        LOGGER.debug("adaptExternalCss()");
         adaptExternalCss();
     }
     
@@ -453,15 +452,15 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
             Charset charset = null;
             try {
                 charset = CSSReader.getCharsetDeclaredInCSS(new ByteArrayInputStreamProvider(resource.getResource().getBytes()));
-                Logger.getLogger(this.getClass()).debug("is css valid CSS2 " + 
+                LOGGER.debug("is css valid CSS2 " + 
                         CSSReader.isValidCSS(resource.getResource(), ECSSVersion.CSS21) + " " + 
                         stylesheetContent.getURI());
-                Logger.getLogger(this.getClass()).debug("is css valid CSS3 " + 
+                LOGGER.debug("is css valid CSS3 " + 
                         CSSReader.isValidCSS(resource.getResource(), ECSSVersion.CSS30) + " " + 
                         stylesheetContent.getURI());
             } catch (TokenMgrError tme) {
-                Logger.getLogger(this.getClass()).debug(resource.getResource() +" is on error, so invalid"); 
-                Logger.getLogger(this.getClass()).debug(tme.getMessage()); 
+                LOGGER.debug(resource.getResource() +" is on error, so invalid"); 
+                LOGGER.debug(tme.getMessage()); 
             }
             if (charset == null) {
                 charset = Charset.forName("utf-8");
@@ -474,9 +473,16 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
                         new CSSParseExceptionHandlerImpl(stylesheetContent));
                 // if an exception has been caught, the adapted content attribute 
                 // has been set to "on error" and so is not null
+                LOGGER.error(stylesheetContent.getURI());
                 if (stylesheetContent.getAdaptedContent() == null) {
-                    if (CollectionUtils.isNotEmpty(mediaList)) {
-                        aCSS = MediaQueryTools.getWrappedInMediaQuery (aCSS,mediaList);
+                    if (CollectionUtils.isNotEmpty(mediaList) && MediaQueryTools.canWrapInMediaQuery(aCSS)) {
+                        if (MediaQueryTools.canWrapInMediaQuery(aCSS)) {
+                            aCSS = MediaQueryTools.getWrappedInMediaQuery(aCSS,mediaList);
+                        } else {
+                            LOGGER.warn(stylesheetContent.getURI() + " should be"
+                                    + "wrapped into "+mediaList + " but it "
+                                    + "is impossible");
+                        }
                     }
                     stylesheetContent.setAdaptedContent(new XStream().toXML(aCSS));
                     if (aCSS.hasImportRules()) {
@@ -504,9 +510,9 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
             uri = UURIFactory.getInstance(base);
             return uri.getScheme()+"://"+uri.getHost().toString();
         } catch (URIException ex) {
-            java.util.logging.Logger.getLogger(CSSJsoupPhlocContentAdapterImpl.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex);
         } catch (NullPointerException ex) {
-            java.util.logging.Logger.getLogger(CSSJsoupPhlocContentAdapterImpl.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex);
         }
         return base;
     }
@@ -528,9 +534,9 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
             int line  = extype.currentToken.next.beginLine;
             int column  = extype.currentToken.next.beginColumn;
             this.css.setAdaptedContent(CSS_ON_ERROR+'l'+line+'c'+column);
-            Logger.getLogger(this.getClass()).warn("Error on adaptation " + css.getURI() + " "+css.getSource());
-            Logger.getLogger(this.getClass()).warn(extype.currentToken.getValue());
-            Logger.getLogger(this.getClass()).warn(extype.getMessage());
+            LOGGER.warn("Error on adaptation " + css.getURI() + " "+css.getSource());
+            LOGGER.warn(extype.currentToken.getValue());
+            LOGGER.warn(extype.getMessage());
         }
 
     };
