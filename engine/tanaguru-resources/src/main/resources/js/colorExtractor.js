@@ -213,6 +213,9 @@ jQuery.fn.isAllowedElement = function() {
         if ($elem.is('svg')) {
             return false;
         }
+        if ($elem.is('head')) {
+            return false;
+        }
         return true;
     }
     return test ( $(this));
@@ -282,15 +285,17 @@ jQuery.fn.extractInfo  = function(parentFgColor, parentBgColor, result) {
  */
 
 var d = new Date().getTime();
-var html = $('html');
-var body = $('body');
 var result = [];
 var element;
-/*var d = new Date().getTime();*/
-var htmlBgColor = $(html).bkgcolor();
-var htmlFgColor= $(html).color();
+var html = $('html');
+var rootElem = $('body');
+if (rootElem.length !== 0) {
+    /*var d = new Date().getTime();*/
+    var htmlBgColor = $(html).bkgcolor();
+    var htmlFgColor= $(html).color();
 
-$(body).extractInfo(htmlFgColor, htmlBgColor, result);
+    $(rootElem).extractInfo(htmlFgColor, htmlBgColor, result);
+}
 
 length = result.length;
 var e = new Date().getTime();
@@ -308,8 +313,8 @@ for ( var j = 0; j < length; j++ ) {
  /*var f = new Date().getTime();
 console.log("Execution : "+ (f-e)  + "ms");
 for ( var j = 0; j < result.length; j++ ) {
-     console.log($(result[j].path));*/
-    /*if (result[j].isTextNode) {
+     console.log($(result[j].path));
+    if (result[j].isTextNode) {
         if (result[j].contrastRatio !== -1) {
             if (result[j].contrastRatio < 4.5) {
                 console.log("failed ");
