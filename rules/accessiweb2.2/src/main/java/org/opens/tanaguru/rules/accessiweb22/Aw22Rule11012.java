@@ -25,6 +25,7 @@ import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementatio
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
+import org.opens.tanaguru.rules.elementchecker.attribute.AttributeEmptinessChecker;
 import org.opens.tanaguru.rules.elementchecker.attribute.AttributePresenceChecker;
 import org.opens.tanaguru.rules.elementchecker.attribute.IdUnicityChecker;
 import org.opens.tanaguru.rules.elementselector.ElementSelector;
@@ -76,8 +77,8 @@ public class Aw22Rule11012 extends AbstractPageRuleMarkupImplementation {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;
         }
-        
-        /** The attribute Presence Checker */
+
+        /* The attribute Presence Checker */
         ElementChecker attributePresenceChecker = 
                 new AttributePresenceChecker(
                         ID_ATTR, 
@@ -86,8 +87,18 @@ public class Aw22Rule11012 extends AbstractPageRuleMarkupImplementation {
                         null, 
                         ID_MISSING_MSG);
         attributePresenceChecker.check(sspHandler, elementHandler, testSolutionHandler);
+
+        /* The attribute Emptiness Checker. Keep default value i.e failed 
+         when attribute is empty
+         */
+        ElementChecker attributeEmptinessChecker = 
+                new AttributeEmptinessChecker(
+                        ID_ATTR, 
+                        ID_MISSING_MSG, 
+                        null);
+        attributeEmptinessChecker.check(sspHandler, elementHandler, testSolutionHandler);
         
-        /** The id unicityChecker */
+        /* The id unicityChecker */
         ElementChecker idUnicityChecker = new IdUnicityChecker(ID_NOT_UNIQUE_MSG);
         idUnicityChecker.check(sspHandler, elementHandler, testSolutionHandler);
     }
