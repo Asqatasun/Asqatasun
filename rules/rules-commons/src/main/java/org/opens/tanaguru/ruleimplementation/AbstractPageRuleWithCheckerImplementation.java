@@ -40,6 +40,17 @@ public abstract class AbstractPageRuleWithCheckerImplementation
 
     /** The elementChecker used by the rule */
     private ElementChecker elementChecker;
+    public void setElementChecker(ElementChecker elementChecker) {
+        this.elementChecker = elementChecker;
+    }
+    
+    /**
+     * The default constructor
+     * 
+     */
+    public AbstractPageRuleWithCheckerImplementation() {
+        super();
+    }
     
     /**
      * The constructor
@@ -50,7 +61,7 @@ public abstract class AbstractPageRuleWithCheckerImplementation
             @Nonnull ElementChecker elementChecker) {
         super();
         this.elementChecker = elementChecker;
-    }   
+    }
     
     /**
      * No selection is performed here.
