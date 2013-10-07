@@ -25,6 +25,7 @@ import java.util.Collection;
 import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.processor.SSPHandler;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.ID_ATTR;
 
 /**
  * css-selector like queries builder utilities.
@@ -206,6 +207,9 @@ public final class CssLikeSelectorBuilder {
      * @return the css query
      */
     public static String buildSelectorFromId(String idValue) {
+       if (StringUtils.contains(idValue, ':')) {
+           return buildSelectorFromAttributeTypeAndValue(ID_ATTR, idValue);
+       }
        StringBuilder strb = new StringBuilder();
        strb.append(ID_SELECTOR_PREFIX);
        strb.append(idValue);
