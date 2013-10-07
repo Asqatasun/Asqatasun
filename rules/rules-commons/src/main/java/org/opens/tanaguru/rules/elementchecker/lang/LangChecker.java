@@ -55,7 +55,7 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
 
     private static final Logger LOGGER = Logger.getLogger(LangChecker.class);
 
-    private static final String NON_ALPHANUMERIC_PATTERN_STR = "\\W+?";
+    private static final String NON_ALPHANUMERIC_PATTERN_STR = "[\\d+\\W+]+?";
     private Pattern nonAlphanumericPattern = Pattern.compile(NON_ALPHANUMERIC_PATTERN_STR);
     private static final String LANG_DECLARATION_PATTERN_STR = "\\w{2,3}(\\-\\w{2,})?$";
     private Pattern langDeclarationPattern = Pattern.compile(LANG_DECLARATION_PATTERN_STR);
