@@ -36,6 +36,7 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.ElementCheckerImpl;
+import org.opens.tanaguru.rules.elementchecker.contrast.exception.ContrastCheckerParseResultException;
 import static org.opens.tanaguru.rules.keystore.EvidenceStore.*;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
 import static org.opens.tanaguru.service.ProcessRemarkService.DEFAULT_EVIDENCE;
@@ -128,7 +129,11 @@ public class ContrastChecker extends ElementCheckerImpl {
             // as passed, if some elements are invalid, we override it with a 
             // a failed solution
             parseJSONArray(sspHandler, new JSONArray(ppr), testSolutionHandler);
-            testSolutionHandler.addTestSolution(TestSolution.PASSED);
+            if (elementCounter > 0) {
+                testSolutionHandler.addTestSolution(TestSolution.PASSED);
+            } else {
+                testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
+            }
         } catch (JSONException e) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_TESTED);
             Logger.getLogger(this.getClass()).error(e);
@@ -137,6 +142,14 @@ public class ContrastChecker extends ElementCheckerImpl {
             // means a problem occured when executing js. Nothing cannot be done.
             // the testResult is NOT_TESTED
             testSolutionHandler.addTestSolution(TestSolution.NOT_TESTED);
+        } catch (ContrastCheckerParseResultException ccpre) {
+            // if any problem is encountered while analysing elements, the 
+            // test result is set to NOT_TESTED and the processRemarkService is
+            // reset
+            testSolutionHandler.cleanTestSolutions();
+            testSolutionHandler.addTestSolution(TestSolution.NOT_TESTED);
+            getProcessRemarkService().resetService();
+            elementCounter = 0;
         }
     }
 
@@ -147,13 +160,13 @@ public class ContrastChecker extends ElementCheckerImpl {
      * @param testSolutionHandler
      * 
      * @throws JSONException 
+     * @throws ContrastCheckerParseResultException
      */
     private void parseJSONArray(
             SSPHandler sspHandler,
             JSONArray json, 
-            TestSolutionHandler testSolutionHandler) throws JSONException{
+            TestSolutionHandler testSolutionHandler) throws JSONException, ContrastCheckerParseResultException{
         for(int i=0;i<json.length();i++) {
-            Logger.getLogger(this.getClass()).warn(json.get(i).toString());
             JSONObject myJson = new JSONObject(json.get(i).toString());
             String lumi = myJson.get(JSON_CONSTRAST_RATIO_KEY).toString();
 
@@ -212,7 +225,7 @@ public class ContrastChecker extends ElementCheckerImpl {
             boolean isHidden, 
             String luminosity,
             String color, 
-            String bgColor) {
+            String bgColor) throws ContrastCheckerParseResultException {
         
         TestSolution testSolution;
         String msgCode;
@@ -229,10 +242,24 @@ public class ContrastChecker extends ElementCheckerImpl {
 
         Elements elements = sspHandler.domCssLikeSelectNodeSet(cssPath).
                 getSelectedElements();
-        if (elements.isEmpty() || elements.size() > 1) {
+        if (elements.isEmpty()) {
+            // if any element can't be retrieved by jsoup, that means that
+            // something is weird with the dom. The check is stopped, and
+            // the test returns not_tested to avoid false positive results
+            Logger.getLogger(this.getClass()).warn(
+                    " cssPath " + cssPath+ " returns no element on " +
+                    sspHandler.getSSP().getURI() 
+                    + " The result of the test is set to Not tested");
+            throw new ContrastCheckerParseResultException();
+        } else if (elements.size() > 1) {
+            // if any element can't be retrieved by jsoup, that means that
+            // something is weird with the dom. The check is stopped, and
+            // the test returns not_tested to avoid false positive results
             Logger.getLogger(this.getClass()).warn(
                     " cssPath " + cssPath+ " returns more than one element on " +
-                    sspHandler.getSSP().getURI());
+                    sspHandler.getSSP().getURI() 
+                    + " The result of the test is set to Not tested");
+            throw new ContrastCheckerParseResultException();
         } else {
             Collection<EvidenceElement> eeList = new ArrayList<EvidenceElement>();
             eeList.add(getEvidenceElement(CONTRAST_EE, luminosity));
