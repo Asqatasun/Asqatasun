@@ -308,7 +308,7 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
                 }
             }
         }
-        return strb.toString().trim();
+        return strb.toString();
     }
     
     /**

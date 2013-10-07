@@ -343,7 +343,7 @@ public abstract class ElementCheckerImpl implements ElementChecker {
             strb.append(element.attr(AttributeStore.CONTENT_ATTR).trim());
             strb.append(' ');
         }
-        return strb.toString().trim();
+        return strb.toString();
     }
     
     /**
