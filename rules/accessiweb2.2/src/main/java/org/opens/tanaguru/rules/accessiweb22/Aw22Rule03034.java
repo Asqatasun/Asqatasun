@@ -34,21 +34,21 @@ import org.opens.tanaguru.rules.elementchecker.contrast.ContrastChecker;
 
 public class Aw22Rule03034 extends AbstractPageRuleWithCheckerImplementation {
     
-    /** The constract checker with a value of ratio set to 3*/
-    private static final ContrastChecker CONSTRAST_CHECKER = 
+    /** The contrast checker with a value of ratio set to 3*/
+    private final ContrastChecker contrastChecker = 
             new ContrastChecker(3f, false, true, false);
 
     /**
      * Default constructor
      */
     public Aw22Rule03034 () {
-        /** The constract checker with a value of ratio set to 3*/
-        super(CONSTRAST_CHECKER);
+        super();
+        setElementChecker(contrastChecker);
     }
 
     @Override
     public int getSelectionSize() {
-        return CONSTRAST_CHECKER.getElementCounter();
+        return contrastChecker.getElementCounter();
     }
 
 }
