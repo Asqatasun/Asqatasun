@@ -50,6 +50,16 @@ import org.w3c.dom.NodeList;
 public class ProcessRemarkServiceImpl implements ProcessRemarkService {
 
     private static final Logger LOGGER = Logger.getLogger(ProcessRemarkServiceImpl.class);
+    
+//    private static final String ESCAPED_DOUBLE_QUOTE = "&quot;";
+    private static final String ESCAPED_OPEN_TAG = "&lt;";
+    private static final String ESCAPED_CLOSE_TAG = "&gt;";
+    private static final String CLOSURE_TAG_OCCUR = "/";
+    private static final String AUTO_CLOSE_TAG_OCCUR = 
+                CLOSURE_TAG_OCCUR+ESCAPED_CLOSE_TAG;
+    private static final String CLOSE_TAG_OCCUR = 
+                ESCAPED_OPEN_TAG + CLOSURE_TAG_OCCUR;
+    
     private static final String CSS_SELECTOR_EVIDENCE = "Css-Selector";
     private static final String CSS_FILENAME_EVIDENCE = "Css-Filename";
     private static final String START_COMMENT_OCCURENCE = "<!--";
@@ -700,12 +710,135 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         }
     }
     
-    private String getSnippetFromElement(Element element) {
-        String elementHtml = StringEscapeUtils.escapeHtml4(StringUtil.normaliseWhitespace(element.outerHtml()));
-        if (elementHtml.length() > SNIPPET_MAX_LENGTH) {
-            return elementHtml.substring(0, SNIPPET_MAX_LENGTH);
+    /**
+     * 
+     * @param element
+     * @return 
+     */
+    public String getSnippetFromElement(Element element) {
+        String elementHtml = StringEscapeUtils.escapeHtml4(
+                StringUtil.normaliseWhitespace(element.outerHtml())).trim();
+        if (element.children().isEmpty() || elementHtml.length() <= SNIPPET_MAX_LENGTH) {
+            return elementHtml;
         }
-        return elementHtml;
+        return properlyCloseSnippet(
+                    element,
+                    elementHtml,
+                    elementHtml.substring(0, SNIPPET_MAX_LENGTH));
+    }
+
+    /**
+     * 
+     * @param element
+     * @param originalElementHtml
+     * @param truncatedElementHtml
+     * @return 
+     */
+    private String properlyCloseSnippet (
+            Element element, 
+            String originalElementHtml, 
+            String truncatedElementHtml) {
+        if (isElementAutoClose(originalElementHtml)) {
+            return originalElementHtml;
+        }
+
+        if (getElementCurrentlyOpenCount(truncatedElementHtml) == 1) {
+            return closeInnerElement(originalElementHtml, truncatedElementHtml);
+        } else if (getElementCurrentlyOpenCount(truncatedElementHtml) > 1) {
+            truncatedElementHtml = 
+                    closeInnerElement(originalElementHtml, truncatedElementHtml);
+            return closeElement(truncatedElementHtml, element.tagName());
+        } else {
+            return closeElement(truncatedElementHtml, element.tagName());
+        }
+    }
+    
+    /**
+    * 
+    * @param elementHtml
+    * @return 
+    */
+    private boolean isElementAutoClose(String elementHtml) {
+        return StringUtils.endsWith(elementHtml, AUTO_CLOSE_TAG_OCCUR);
+    }
+    
+    /**
+    * 
+    * @param elementHtml
+    * @return 
+    */
+    private int getElementCurrentlyOpenCount(String elementHtml) {
+        int openTagCounter = 
+                StringUtils.countMatches(elementHtml, ESCAPED_OPEN_TAG)
+                -
+                StringUtils.countMatches(elementHtml, CLOSE_TAG_OCCUR);
+        int closureTagCounter = 
+                StringUtils.countMatches(elementHtml, AUTO_CLOSE_TAG_OCCUR) 
+                + 
+                StringUtils.countMatches(elementHtml, CLOSE_TAG_OCCUR) ;
+        return (openTagCounter - closureTagCounter);
+    }
+    
+    /**
+     * 
+     * @param originalElementHtml
+     * @return 
+     */
+    private String closeElement(String elementHtml, String elementName) {
+        StringBuilder strb =  new StringBuilder();
+        strb.append(elementHtml);
+        strb.append(" ... ");
+        strb.append(ESCAPED_OPEN_TAG);
+        strb.append(CLOSURE_TAG_OCCUR);
+        strb.append(elementName);
+        strb.append(ESCAPED_CLOSE_TAG);
+        return strb.toString();
+    }
+    
+        /**
+     * 
+     * @param originalElementHtml
+     * @param truncatedElementHtml
+     * @param indexOfElementToClose
+     * @return 
+     */
+    private String closeInnerElement (
+            String originalElementHtml, 
+            String truncatedElementHtml) {
+        
+        int startPos = truncatedElementHtml.length();
+        
+        int indexOfElementCloser = 
+                StringUtils.indexOf(originalElementHtml, ESCAPED_CLOSE_TAG, startPos);
+        int indexOfElementAutoCloser = 
+                StringUtils.indexOf(originalElementHtml, AUTO_CLOSE_TAG_OCCUR, startPos);
+        
+        
+        String innerClosedElement = StringUtils.substring(
+                originalElementHtml, 
+                0, 
+                (indexOfElementCloser+ESCAPED_CLOSE_TAG.length()));
+        
+        // if the current element is auto-close, return current well-closed element
+        if (indexOfElementAutoCloser == (indexOfElementCloser-1) ) {
+            return innerClosedElement;
+        }
+        
+        // if the current element is not auto-close, get the name of it and 
+        // and properly close it
+        int indexOfElementOpenTagOpener = 
+                StringUtils.lastIndexOf(originalElementHtml, ESCAPED_OPEN_TAG, startPos);
+        
+        int indexOfElementOpenTagClose = 
+                StringUtils.indexOf(originalElementHtml, ' ', indexOfElementOpenTagOpener);
+        
+        String elementName = 
+                StringUtils.substring(
+                    originalElementHtml, 
+                    indexOfElementOpenTagOpener + ESCAPED_OPEN_TAG.length(), 
+                    indexOfElementOpenTagClose);
+
+        return closeElement(innerClosedElement, elementName);
     }
 
 }
