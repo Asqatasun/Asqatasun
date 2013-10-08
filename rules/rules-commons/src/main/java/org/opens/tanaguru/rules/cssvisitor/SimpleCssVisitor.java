@@ -159,6 +159,7 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
         if (excludeStyle) {
             return;
         }
+        Logger.getLogger(this.getClass()).debug("onBeginFontFaceRule ");
         this.currentSelector = cssffr.getAsCSSString(writterSetting, 0);
         // if this style rule is not excluded from the media type, it is 
         // added to the counter
@@ -171,6 +172,7 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
         if (excludeStyle) {
             return;
         }
+        Logger.getLogger(this.getClass()).debug("onStyleRuleSelector ");
         this.currentSelector = aSelector.getAsCSSString(writterSetting, 0);
         // if this style rule is not excluded from the media type, it is 
         // added to the counter
@@ -178,7 +180,21 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
     }
 
     @Override
+    public void onBeginPageRule(final CSSPageRule csspageRule) {
+        globalSelectorCounter++;
+        if (excludeStyle) {
+            return;
+        }
+        Logger.getLogger(this.getClass()).debug("onBeginPageRule " + csspageRule.getPseudoPage());
+        this.currentSelector = csspageRule.getAsCSSString(writterSetting, 0);
+        // if this style rule is not excluded from the media type, it is 
+        // added to the counter
+        effectiveSelectorCounter++;
+    }
+    
+    @Override
     public void onDeclaration(final CSSDeclaration aDeclaration) {
+        Logger.getLogger(this.getClass()).debug("onDeclaration ");
         if (excludeStyle) {
             return;
         }
