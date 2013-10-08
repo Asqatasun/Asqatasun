@@ -49,11 +49,51 @@
                                     </h3>
                                 </div>
                                 <div class="span6 theme-result-repartition">
-                                    <span class="passed-th-gray theme-result">${counterByThemeMap[entry.key].passedCount}</span>
-                                    <span class="failed-th-gray theme-result">${counterByThemeMap[entry.key].failedCount}</span>
-                                    <span class="nmi-th-gray theme-result">${counterByThemeMap[entry.key].nmiCount}</span>
-                                    <span class="na-th-gray theme-result">${counterByThemeMap[entry.key].naCount}</span>
-                                    <span class="nt-th-gray theme-result">${counterByThemeMap[entry.key].ntCount}</span>
+                                    <c:set scope="page" var="passedTitle">
+                                        <fmt:message key="resultPage.criteria">
+                                            <fmt:param value="${counterByThemeMap[entry.key].passedCount}"/>
+                                        </fmt:message>
+                                        <fmt:message key="passed"/>
+                                        <fmt:message key="resultPage.forTheTheme"/>
+                                        <fmt:message key="${entry.key.code}"/>
+                                    </c:set>
+                                    <span class="passed-th-gray theme-result" title="${passedTitle}">${counterByThemeMap[entry.key].passedCount}</span>
+                                    <c:set scope="page" var="failedTitle">
+                                        <fmt:message key="resultPage.criteria">
+                                            <fmt:param value="${counterByThemeMap[entry.key].failedCount}"/>
+                                        </fmt:message>
+                                        <fmt:message key="passed"/>
+                                        <fmt:message key="resultPage.forTheTheme"/>
+                                        <fmt:message key="${entry.key.code}"/>
+                                    </c:set>
+                                    <span class="failed-th-gray theme-result" title="${failedTitle}">${counterByThemeMap[entry.key].failedCount}</span>
+                                    <c:set scope="page" var="nmiTitle">
+                                        <fmt:message key="resultPage.criteria">
+                                            <fmt:param value="${counterByThemeMap[entry.key].nmiCount}"/>
+                                        </fmt:message>
+                                        <fmt:message key="failed"/>
+                                        <fmt:message key="resultPage.forTheTheme"/>
+                                        <fmt:message key="${entry.key.code}"/>
+                                    </c:set>
+                                    <span class="nmi-th-gray theme-result" title="${nmiTitle}">${counterByThemeMap[entry.key].nmiCount}</span>
+                                    <c:set scope="page" var="naTitle">
+                                        <fmt:message key="resultPage.criteria">
+                                            <fmt:param value="${counterByThemeMap[entry.key].naCount}"/>
+                                        </fmt:message>
+                                        <fmt:message key="na"/>
+                                        <fmt:message key="resultPage.forTheTheme"/>
+                                        <fmt:message key="${entry.key.code}"/>
+                                    </c:set>
+                                    <span class="na-th-gray theme-result" title="${naTitle}">${counterByThemeMap[entry.key].naCount}</span>
+                                    <c:set scope="page" var="ntTitle">
+                                        <fmt:message key="resultPage.criteria">
+                                            <fmt:param value="${counterByThemeMap[entry.key].ntCount}"/>
+                                        </fmt:message>
+                                        <fmt:message key="nt"/>
+                                        <fmt:message key="resultPage.forTheTheme"/>
+                                        <fmt:message key="${entry.key.code}"/>
+                                    </c:set>
+                                    <span class="nt-th-gray theme-result" title="${ntTitle}">${counterByThemeMap[entry.key].ntCount}</span>
                                 </div>
                             </div>
                         </div><!-- class="span16" -->
@@ -87,7 +127,11 @@
                                     <fmt:message key="${criterionResult.criterion.code}"/>
                                 </div><!-- class="span9 rule-label" -->
                                 <div class="span1 criterion-result offset2">
-                                    <img src="<c:url value="/Images/ico-${criterionResult.resultCode}-m.png"/>" alt="<fmt:message key="${criterionResult.resultCode}"/>"/> 
+                                    <img src="<c:url value="/Images/ico-${criterionResult.resultCode}-m.png"/>" alt="
+                                         <fmt:message key="resultPage.criterion"/>
+                                         ${criterionResult.criterion.label}
+                                         <fmt:message key="${criterionResult.resultCode}"/>
+                                         "/> 
                                 </div>
                                 <div class="span1 criterion-details">
                                     <a href="<c:url value="/home/contract/criterion-result.html?wr=${param.wr}&amp;crit=${criterionResult.criterion.id}"/>" class="criterion-result-compact" title="Voir le détail des tests du critère ${criterionResult.criterion.label}">
