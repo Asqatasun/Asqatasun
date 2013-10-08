@@ -52,6 +52,8 @@ import static org.opens.tanaguru.service.ProcessRemarkService.DEFAULT_EVIDENCE;
  */
 public class ContrastChecker extends ElementCheckerImpl {
 
+    private static final Logger LOGGER = Logger.getLogger(ContrastChecker.class);
+    
     private static final String COLOR_EXTRACTOR_PRE_PROCESS_RESULT_KEY = "colorExtractor";
     
     private static final String JSON_CONSTRAST_RATIO_KEY = "contrastRatio";
@@ -135,21 +137,17 @@ public class ContrastChecker extends ElementCheckerImpl {
                 testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             }
         } catch (JSONException e) {
-            testSolutionHandler.addTestSolution(TestSolution.NOT_TESTED);
-            Logger.getLogger(this.getClass()).error(e);
+            resetCollectedDataOnException(testSolutionHandler, e);
         } catch (NoResultException nre) {
             // if the getPreProcessResult returns a noResultException, that 
             // means a problem occured when executing js. Nothing cannot be done.
             // the testResult is NOT_TESTED
-            testSolutionHandler.addTestSolution(TestSolution.NOT_TESTED);
+            resetCollectedDataOnException(testSolutionHandler, nre);
         } catch (ContrastCheckerParseResultException ccpre) {
             // if any problem is encountered while analysing elements, the 
             // test result is set to NOT_TESTED and the processRemarkService is
             // reset
-            testSolutionHandler.cleanTestSolutions();
-            testSolutionHandler.addTestSolution(TestSolution.NOT_TESTED);
-            getProcessRemarkService().resetService();
-            elementCounter = 0;
+            resetCollectedDataOnException(testSolutionHandler, ccpre);
         }
     }
 
@@ -181,14 +179,14 @@ public class ContrastChecker extends ElementCheckerImpl {
                             myJson.get(JSON_FG_COLOR_KEY).toString(), 
                             myJson.get(JSON_BG_COLOR_KEY).toString());
                     testSolutionHandler.addTestSolution(TestSolution.NEED_MORE_INFO);
-                    Logger.getLogger(this.getClass()).debug(" nmi " + 
+                    LOGGER.debug(" nmi " + 
                                 myJson.get(JSON_ELEMENT_PATH_KEY).toString()+ " "
                                     +" "+ " ");
                 } else {
                     Float luminosity = Float.valueOf(lumi);
                     elementCounter++;
                     if (luminosity < contrastRatio) {
-                        Logger.getLogger(this.getClass()).debug(" cssPath " + 
+                        LOGGER.debug(" cssPath " + 
                                 myJson.get(JSON_ELEMENT_PATH_KEY).toString()+ " "
                                     + luminosity +" "+ " ");
                         TestSolution elementSolution = createRemarkOnBadContrastElement (
@@ -200,7 +198,7 @@ public class ContrastChecker extends ElementCheckerImpl {
                                 myJson.get(JSON_BG_COLOR_KEY).toString());
                         testSolutionHandler.addTestSolution(elementSolution);
                     } else {
-                        Logger.getLogger(this.getClass()).debug(" good luminosity " + 
+                        LOGGER.debug(" good luminosity " + 
                                 myJson.get(JSON_ELEMENT_PATH_KEY).toString()+ " "
                                     + luminosity +" "+ " ");
                     }
@@ -246,7 +244,7 @@ public class ContrastChecker extends ElementCheckerImpl {
             // if any element can't be retrieved by jsoup, that means that
             // something is weird with the dom. The check is stopped, and
             // the test returns not_tested to avoid false positive results
-            Logger.getLogger(this.getClass()).warn(
+            LOGGER.warn(
                     " cssPath " + cssPath+ " returns no element on " +
                     sspHandler.getSSP().getURI() 
                     + " The result of the test is set to Not tested");
@@ -255,7 +253,7 @@ public class ContrastChecker extends ElementCheckerImpl {
             // if any element can't be retrieved by jsoup, that means that
             // something is weird with the dom. The check is stopped, and
             // the test returns not_tested to avoid false positive results
-            Logger.getLogger(this.getClass()).warn(
+            LOGGER.warn(
                     " cssPath " + cssPath+ " returns more than one element on " +
                     sspHandler.getSSP().getURI() 
                     + " The result of the test is set to Not tested");
@@ -292,7 +290,7 @@ public class ContrastChecker extends ElementCheckerImpl {
             Elements elements = sspHandler.domCssLikeSelectNodeSet(cssPath).
                     getSelectedElements();
             if (elements.isEmpty() || elements.size() > 1) {
-                Logger.getLogger(this.getClass()).warn(
+                LOGGER.warn(
                         " cssPath " + cssPath+ " returns more than one element on " +
                         sspHandler.getSSP().getURI());
             } else {
@@ -394,4 +392,19 @@ public class ContrastChecker extends ElementCheckerImpl {
     private boolean isTextNodeFromJson (JSONObject myJson) throws JSONException {
         return Boolean.valueOf(myJson.get(JSON_IS_TEXT_NODE_KEY).toString());
     }
+
+    /**
+     * Reset collected data when an exception occurred
+     * @param testSolutionHandler 
+     */
+    private void resetCollectedDataOnException (
+            TestSolutionHandler testSolutionHandler, 
+            Exception exception) {
+        LOGGER.warn(exception);
+        testSolutionHandler.cleanTestSolutions();
+        testSolutionHandler.addTestSolution(TestSolution.NOT_TESTED);
+        getProcessRemarkService().resetService();
+        elementCounter = 0;
+    }
+
 }
