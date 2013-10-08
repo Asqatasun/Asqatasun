@@ -493,7 +493,7 @@ public final class TestResultFactory {
             if (StringUtils.isNotBlank(((SourceCodeRemark)remark).getSnippet())){
                 elementMap.put(TestResult.SNIPPET, ((SourceCodeRemark)remark).getSnippet());
             }
-            int lineNumber = computeLineNumber((SourceCodeRemark)remark);
+            int lineNumber = ((SourceCodeRemark)remark).getLineNumber();
             if (lineNumber > 0) {
                 elementMap.put(TestResult.LINE_NUMBER_KEY, String.valueOf(lineNumber));
             }
@@ -528,20 +528,20 @@ public final class TestResultFactory {
         return evidenceElementList;
     }
     
-    /**
-     *
-     * @param remark
-     * @return
-     */
-    private int computeLineNumber(
-            SourceCodeRemark remark) {
-        int lineNumber;
-        // The doctype is added when the result is displayed.
-        // When the doctype is not null, each line remark has to be
-        // one-line-negative-shifted
-        lineNumber = remark.getLineNumber()-1;
-        return lineNumber;
-    }
+//    /**
+//     *
+//     * @param remark
+//     * @return
+//     */
+//    private int computeLineNumber(
+//            SourceCodeRemark remark) {
+//        int lineNumber;
+//        // The doctype is added when the result is displayed.
+//        // When the doctype is not null, each line remark has to be
+//        // one-line-negative-shifted
+//        lineNumber = remark.getLineNumber()-1;
+//        return lineNumber;
+//    }
 
     /**
      * 
