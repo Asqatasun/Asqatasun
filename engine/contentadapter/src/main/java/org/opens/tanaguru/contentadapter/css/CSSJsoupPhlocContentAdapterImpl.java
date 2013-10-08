@@ -473,7 +473,6 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
                         new CSSParseExceptionHandlerImpl(stylesheetContent));
                 // if an exception has been caught, the adapted content attribute 
                 // has been set to "on error" and so is not null
-                LOGGER.error(stylesheetContent.getURI());
                 if (stylesheetContent.getAdaptedContent() == null) {
                     if (CollectionUtils.isNotEmpty(mediaList) && MediaQueryTools.canWrapInMediaQuery(aCSS)) {
                         if (MediaQueryTools.canWrapInMediaQuery(aCSS)) {
