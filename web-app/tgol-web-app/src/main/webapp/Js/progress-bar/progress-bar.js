@@ -18,8 +18,8 @@ $(document).ready(function() {
 
 function launchProcessDialog() {
     var processingMessages = [], 
-        displayedMessages = [], 
-        firstRandomMessage;
+//        displayedMessages = [], 
+        messageIndex = 0;
 
     $(".process-message").each(function (d, i) {
         processingMessages.push($(this).text());
@@ -28,11 +28,11 @@ function launchProcessDialog() {
 
     $("#process-anim").show();
 
-    firstRandomMessage = Math.floor((Math.random()*processingMessages.length));
-    displayedMessages.push(firstRandomMessage);
+//    firstRandomMessage = Math.floor((Math.random()*processingMessages.length));
+//    displayedMessages.push(firstRandomMessage);
 
     $("#process-dialog")
-        .append("<p id='process-msg' aria-live='true'>"+processingMessages[firstRandomMessage]+"</p>")
+        .append("<p id='process-msg' aria-live='true'>"+processingMessages[messageIndex]+"</p>")
         .dialog({
             autoOpen : true,
             modal : true,
@@ -40,19 +40,19 @@ function launchProcessDialog() {
             resizable : false,
             draggable : false,
             dialogClass : "noCloseBtn",
-            width : 300,
-            height : 220
+            width : 300
         });
 
     setInterval(function() {
-        var randomMessage = Math.floor((Math.random()*processingMessages.length));
-        while (jQuery.inArray(randomMessage, displayedMessages) != -1) {
-            randomMessage = Math.floor((Math.random()*processingMessages.length));
-        }
-        displayedMessages.push(randomMessage);
-        if (displayedMessages.length == processingMessages.length) {
-            displayedMessages = [];
-        }
-        $('#process-msg').text(processingMessages[randomMessage]);
-    }, 1000);
+        messageIndex++;
+//        var randomMessage = Math.floor((Math.random()*processingMessages.length));
+//        while (jQuery.inArray(randomMessage, displayedMessages) != -1) {
+//            randomMessage = Math.floor((Math.random()*processingMessages.length));
+//        }
+//        displayedMessages.push(randomMessage);
+//        if (displayedMessages.length == processingMessages.length) {
+//            displayedMessages = [];
+//        }
+        $('#process-msg').text(processingMessages[messageIndex]);
+    }, 5000);
 }
