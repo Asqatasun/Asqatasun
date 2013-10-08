@@ -126,9 +126,7 @@
         </c:set>            
     </c:otherwise>
 </c:choose>
-<c:if test="${statistics.auditScope == 'DOMAIN' || statistics.auditScope == 'PAGE'}">
-    <c:set var="addRelaunchAction" scope="page" value="true"/>
-</c:if>
+<c:set var="addRelaunchAction" scope="page" value="true"/>
 <html lang="${lang}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="resultPage.pageTitle">
