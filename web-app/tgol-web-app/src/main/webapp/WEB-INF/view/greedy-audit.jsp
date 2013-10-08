@@ -18,12 +18,12 @@
 </c:choose>
 <c:choose>
     <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="greedyAuditImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/greedy-audit.jpg"/>
+        <c:set var="greedyAuditImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/work-in-progress.jpg"/>
         <c:set var="creativeCommonLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/creative_common_logo.png"/>
     </c:when>
     <c:otherwise>
         <c:set var="greedyAuditImgUrl">
-            <c:url value="/Images/greedy-audit.jpg"/>  
+            <c:url value="/Images/work-in-progress.jpg"/>  
         </c:set>
         <c:set var="creativeCommonLogoUrl">
             <c:url value="/Images/creative_common_logo.png"/>
@@ -91,11 +91,15 @@
                 </div><!-- class="span16 main-logo" -->
             </div><!-- class="row" -->
             <div class="row">
-                <div class="span4 offset9">
+                <div class="span4 offset11">
                     <a title="Creative Commons Attribution 3.0 License" href="http://creativecommons.org/licenses/by/3.0/">
                         <img src="${creativeCommonLogoUrl}" alt="License"/>
                     </a>
-                    <a title="Flickr: Galerie de Patrick van IJzendoorn" href="http://www.flickr.com/photos/33630119@N07/">Patrick van IJzendoorn </a>
+                    <a title="Flickr: Galerie de blumpy" href="http://www.flickr.com/photos/blumpy/">blumpy</a>
+<!--                    <a title="Creative Commons Attribution 3.0 License" href="http://creativecommons.org/licenses/by/3.0/">
+                        <img src="${creativeCommonLogoUrl}" alt="License"/>
+                    </a>
+                    <a title="Flickr: Galerie de Patrick van IJzendoorn" href="http://www.flickr.com/photos/33630119@N07/">Patrick van IJzendoorn </a>-->
                 </div><!-- class="span4 offset9" -->
             </div><!-- class="row" -->
         </div><!-- class="container"-->
