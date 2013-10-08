@@ -94,7 +94,7 @@
                                         <c:when test="${evidenceElement2.key == 'Snippet'}">
                                     <td class="${evidenceElement2.key}">
                                         <c:set var="snippetCode" scope="page">
-                                            ${evidenceElement2.value}
+                                            ${fn:trim(evidenceElement2.value)}
                                         </c:set>
                                         <code class="prettyprint">
                                             ${snippetCode}
