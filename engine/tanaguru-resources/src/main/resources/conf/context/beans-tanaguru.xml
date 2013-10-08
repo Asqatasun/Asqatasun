@@ -18,7 +18,7 @@
 
     <bean id="auditCommandFactory" class="org.opens.tanaguru.service.command.factory.AuditCommandFactoryImpl">
         <property name="auditPageWithCrawler" value="false"/>
-        <property name="cleanUpRelatedContent" value="false"/>
+        <property name="cleanUpRelatedContent" value="true"/>
         <property name="adaptationTreatmentWindow" value="4"/>
         <property name="processingTreatmentWindow" value="4"/>
         <property name="consolidationTreatmentWindow" value="200"/>
