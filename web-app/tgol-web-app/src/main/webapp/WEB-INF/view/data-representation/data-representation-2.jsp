@@ -98,9 +98,6 @@
                                         </c:set>
                                         <code class="prettyprint">
                                             ${snippetCode}
-                                            <c:if test="${!fn:endsWith(snippetCode, '&gt;')}">
-                                                ...
-                                            </c:if>
                                         </code>
                                     </td>
                                         </c:when>
