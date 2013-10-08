@@ -192,6 +192,7 @@ public class LanguageDetectorTest extends TestCase {
         Document doc;
         try {
             doc = Jsoup.parse(new URL("http://ko.wikipedia.org/wiki/%EC%9B%B9_%EC%A0%91%EA%B7%BC%EC%84%B1"), 10000);
+            System.out.println(doc.text());
             LOGGER.debug("start detection");
             assertEquals("ko", instance.detectLanguage(doc.text()).getDetectedLanguage());
             LOGGER.debug("detection ended");
