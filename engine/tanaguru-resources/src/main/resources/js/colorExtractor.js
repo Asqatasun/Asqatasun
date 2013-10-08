@@ -155,6 +155,9 @@ jQuery.fn.isTextNode = function() {
         if ($elem.is('script')) {
             return false;
         }
+        if ($elem.is('style')) {
+            return false;
+        }
         if ($elem.is('img[alt]') && $elem.attr('alt').trim().length > 0) {
             return true;
         }
