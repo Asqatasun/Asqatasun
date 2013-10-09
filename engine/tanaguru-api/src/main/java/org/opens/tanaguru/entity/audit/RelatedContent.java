@@ -22,12 +22,13 @@
 package org.opens.tanaguru.entity.audit;
 
 import java.util.Set;
+import org.opens.tanaguru.sdk.entity.Entity;
 
 /**
  *
  * @author nselly
  */
-public interface RelatedContent {
+public interface RelatedContent extends Entity{
 
     /**
      *
