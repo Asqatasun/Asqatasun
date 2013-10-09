@@ -22,10 +22,7 @@
 
 package org.opens.tanaguru.rules.elementchecker.lang;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
@@ -64,6 +61,13 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
     private static final String XHTML_DOCTYPE_NOM = "XhtmlDoctypeDeclarations";
     private static final String LANG_NOM = "ValidLanguageCode";
     private static final int DISPLAYABLE_TEXT_SIZE = 200;
+    private static final String[] EXCLUDED_ELEMENTS = {
+                HtmlElementStore.SCRIPT_ELEMENT, 
+                HtmlElementStore.NO_FRAMES_ELEMENT, 
+                HtmlElementStore.NO_SCRIPT_ELEMENT, 
+                };
+    private static final Collection<String> EXCLUDED_ELEMENTS_LIST = 
+                Arrays.asList(EXCLUDED_ELEMENTS);
 
     private String suspectedIdenticalLangMsg;
     public void setSuspectedIdenticalLangMsg(String suspectedIdenticalLangMsg) {
@@ -303,7 +307,7 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
         if (extractRecursively) {
             for (Element el : element.children()) {
                 if (!isLangDefinedForElement(el) && 
-                        !StringUtils.equalsIgnoreCase(el.tagName(), HtmlElementStore.SCRIPT_ELEMENT)) {
+                        !EXCLUDED_ELEMENTS_LIST.contains(el.tagName())) {
                     strb.append(extractTextFromElement(el, true));
                 }
             }

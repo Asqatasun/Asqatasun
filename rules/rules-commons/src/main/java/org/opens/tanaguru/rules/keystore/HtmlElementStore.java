@@ -61,6 +61,8 @@ public final class HtmlElementStore {
     public static final String LI_ELEMENT = HTML.Tag.LI.toString();
     public static final String META_ELEMENT = HTML.Tag.META.toString();
     public static final String MARQUEE_ELEMENT = "marquee";
+    public static final String NO_FRAMES_ELEMENT = HTML.Tag.NOFRAMES.toString();
+    public static final String NO_SCRIPT_ELEMENT = "noscript";
     public static final String OBJECT_ELEMENT = HTML.Tag.OBJECT.toString();
     public static final String OL_ELEMENT = HTML.Tag.OL.toString();
     public static final String OPTION_ELEMENT = HTML.Tag.OPTION.toString();
