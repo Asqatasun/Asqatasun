@@ -380,7 +380,7 @@ public class ContrastChecker extends ElementCheckerImpl {
                 fontWeight = NORMAL_FONT_WEIGHT;
             }
         }
-        return fontWeight > BOLD_FONT_WEIGHT;
+        return fontWeight >= BOLD_FONT_WEIGHT;
     }
     
     /**
