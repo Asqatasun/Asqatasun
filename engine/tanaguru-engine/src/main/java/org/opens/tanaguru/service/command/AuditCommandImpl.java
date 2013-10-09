@@ -832,7 +832,9 @@ public abstract class AuditCommandImpl implements AuditCommand {
                         true);
             for (Content content : contentList) {
                 if (content instanceof SSP) {
-                    contentDataService.deleteRelatedContentFromContent(content);
+                    for (RelatedContent rc : ((SSP)content).getRelatedContentSet()) {
+                        contentDataService.delete(rc.getId());
+                    }
                 }
             }
             i = i + processingTreatmentWindow;
