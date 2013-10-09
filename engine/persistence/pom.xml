@@ -6,13 +6,13 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>3.0.0-SNAPSHOT</version>
+        <version>3.0.0-beta4</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>persistence</artifactId>
     <name>persistence</name>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.0.0-beta4</version>
     <url>http://www.open-s.com</url>
     <build>
         <resources>

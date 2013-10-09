@@ -5,12 +5,12 @@
      <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>3.0.0-SNAPSHOT</version>
+        <version>3.0.0-beta4</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>seo-testcases</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-beta2</version>
     <name>seo-testcases</name>
     <url>http://maven.apache.org</url>
 </project>
