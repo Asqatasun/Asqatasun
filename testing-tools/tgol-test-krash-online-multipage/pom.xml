@@ -43,7 +43,6 @@
         <dependency>
             <groupId>${testingToolsGroupId}</groupId>
             <artifactId>tgol-testing-tools</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
