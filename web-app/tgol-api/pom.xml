@@ -5,44 +5,19 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.opens</groupId>
-        <artifactId>tanaguru</artifactId>
+        <artifactId>web-app</artifactId>
         <version>3.0.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>org.opens</groupId>
     <artifactId>tgol-api</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
     <name>tgol-api</name>
-    <url>http://www.tanaguru.org</url>
     <dependencies>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-api</artifactId>
-            <version>${engineVersion}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>poi</groupId>
-                    <artifactId>poi</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>poi</groupId>
-                    <artifactId>poi-ooxlm</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>poi</groupId>
-                    <artifactId>poi-scratchpad</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>displaytag</groupId>
             <artifactId>displaytag</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.lowagie</groupId>
-                    <artifactId>itext</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>ar.com.fdvs</groupId>

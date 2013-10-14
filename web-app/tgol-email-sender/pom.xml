@@ -5,15 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.opens</groupId>
-        <artifactId>tanaguru</artifactId>
+        <artifactId>web-app</artifactId>
         <version>3.0.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>org.opens</groupId>
     <artifactId>tgol-email-sender</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
     <name>tgol-email-sender</name>
-    <url>http://www.tanaguru.org</url>
     <dependencies>
         <dependency>
             <groupId>javax.mail</groupId>
@@ -22,7 +18,6 @@
         <dependency>
             <groupId>${webappGroupId}</groupId>
             <artifactId>tgol-api</artifactId>
-            <version>${webappVersion}</version>
         </dependency>
     </dependencies>
 </project>

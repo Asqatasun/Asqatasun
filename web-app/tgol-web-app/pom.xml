@@ -5,160 +5,112 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.opens</groupId>
-        <artifactId>tanaguru</artifactId>
+        <artifactId>web-app</artifactId>
         <version>3.0.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>org.opens</groupId>
     <artifactId>tgol-web-app</artifactId>
     <packaging>war</packaging>
-    <version>3.0.0-SNAPSHOT</version>
     <name>tgol-web-app</name>
-    <url>http://www.tanaguru.org</url>
     <dependencies>
         <!-- tgol dependencies-->
         <dependency>
             <groupId>${webappGroupId}</groupId>
             <artifactId>tgol-orchestrator</artifactId>
-            <version>${webappVersion}</version>
         </dependency>
         <dependency>
             <groupId>${webappGroupId}</groupId>
             <artifactId>tgol-email-sender</artifactId>
-            <version>${webappVersion}</version>
         </dependency>
         <dependency>
             <groupId>${webappGroupId}</groupId>
             <artifactId>tgol-persistence</artifactId>
-            <version>${webappVersion}</version>
         </dependency>
         <dependency>
             <groupId>${webappGroupId}</groupId>
             <artifactId>tgol-security</artifactId>
-            <version>${webappVersion}</version>
         </dependency>
         <dependency>
             <groupId>${webappGroupId}</groupId>
             <artifactId>tgol-data-presentation</artifactId>
-            <version>${webappVersion}</version>
         </dependency>
         <dependency>
             <groupId>${webappGroupId}</groupId>
             <artifactId>tgol-voter</artifactId>
-            <version>${webappVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tgol-report</artifactId>
-            <version>${webappVersion}</version>
         </dependency>
         <dependency>
             <groupId>${webappGroupId}</groupId>
             <artifactId>tgol-resources</artifactId>
-            <version>${webappVersion}</version>
-            <scope>runtime</scope>
         </dependency>
         <!-- tanaguru dependencies-->
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-engine</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-resources</artifactId>
-            <version>${engineVersion}</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>nomenclatureloader</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>rule-implementation-loader</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>crawler</artifactId>
-            <version>${engineVersion}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>poi</groupId>
-                    <artifactId>poi</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>poi</groupId>
-                    <artifactId>poi-ooxlm</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>poi</groupId>
-                    <artifactId>poi-scratchpad</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>contentloader</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>contentadapter</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>processor</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>consolidator</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>analyser</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>logging</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>scenarioloader</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         
         <!-- rules dependencies-->
         <dependency>
             <groupId>${rulesGroupId}</groupId>
             <artifactId>accessiweb2.1</artifactId>
-            <version>${rulesVersion}</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
             <artifactId>accessiweb2.2</artifactId>
-            <version>${rulesVersion}</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
             <artifactId>rgaa2.2</artifactId>
-            <version>${rulesVersion}</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
             <artifactId>seo</artifactId>
-            <version>${rulesVersion}</version>
-            <scope>runtime</scope>
         </dependency>
         
         <!-- spring dependencies -->

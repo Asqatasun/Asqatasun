@@ -5,15 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.opens</groupId>
-        <artifactId>tanaguru</artifactId>
+        <artifactId>engine</artifactId>
         <version>3.0.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>org.opens</groupId>
     <artifactId>persistence</artifactId>
     <name>persistence</name>
-    <version>3.0.0-SNAPSHOT</version>
-    <url>http://www.open-s.com</url>
     <build>
         <resources>
             <resource>
@@ -33,32 +29,26 @@
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>audit</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>statistics</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>parameterization</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>commons-entity-jpa</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.dbunit</groupId>
             <artifactId>dbunit</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -124,10 +114,5 @@
             <artifactId>spring-beans</artifactId>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>
-            <groupId>${httpcomponentsGroupId}</groupId>
-            <artifactId>httpclient</artifactId>
-            <scope>compile</scope>
-        </dependency>-->
     </dependencies>
 </project>

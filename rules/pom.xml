@@ -6,12 +6,10 @@
         <artifactId>tanaguru</artifactId>
         <version>3.0.0-SNAPSHOT</version>
     </parent>
-    <groupId>org.opens</groupId>
     <artifactId>rules</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
     <name>rules</name>
-    <url>http://www.tanaguru.org</url>
     <build>
         <plugins>
             <plugin>

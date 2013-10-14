@@ -5,36 +5,23 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.opens</groupId>
-        <artifactId>tanaguru</artifactId>
+        <artifactId>web-app</artifactId>
         <version>3.0.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>org.opens</groupId>
     <artifactId>tgol-persistence</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
     <name>tgol-persistence</name>
-    <url>http://www.tanaguru.org</url>
     <dependencies>
         <dependency>
             <groupId>${webappGroupId}</groupId>
             <artifactId>tgol-si</artifactId>
-            <version>${webappVersion}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>slf4j-log4j12</artifactId>
-                    <groupId>org.slf4j</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>persistence</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${webappGroupId}</groupId>
             <artifactId>tgol-data-presentation</artifactId>
-            <version>${webappVersion}</version>
         </dependency>
 <!--        <dependency>
             <groupId>${webappGroupId}</groupId>
@@ -84,7 +71,6 @@
         <dependency>
             <groupId>hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>

@@ -5,43 +5,23 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.opens</groupId>
-        <artifactId>tanaguru</artifactId>
+        <artifactId>engine</artifactId>
         <version>3.0.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>org.opens</groupId>
     <artifactId>processor</artifactId>
     <name>processor</name>
-    <version>3.0.0-SNAPSHOT</version>
-    <url>http://www.tanaguru.org</url>
     <dependencies>
-<!--        <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-api</artifactId>
-            <version>${engineVersion}</version>
-        </dependency>-->
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>commons-processing</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
         </dependency>
-<!--        <dependency>
-            <groupId>org.milyn</groupId>
-            <artifactId>flute</artifactId>
-        </dependency>-->
         <dependency>
             <groupId>com.phloc</groupId>
             <artifactId>phloc-css</artifactId>
         </dependency>
-<!--        <dependency>
-             jsoup HTML parser library @ http://jsoup.org/ 
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
-            <version>1.7.1</version>
-        </dependency>-->
     </dependencies>
 </project>

@@ -5,15 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.opens</groupId>
-        <artifactId>tanaguru</artifactId>
+        <artifactId>cli</artifactId>
         <version>3.0.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>org.opens</groupId>
     <artifactId>tanaguru-cli</artifactId>
     <name>tanaguru-cli</name>
-    <version>3.0.0-SNAPSHOT</version>
-    <url>http://www.tanaguru.org</url>
     <build>
         <plugins>
             <plugin>
@@ -41,109 +37,90 @@
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-engine</artifactId>
-            <version>${engineVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-resources</artifactId>
-            <version>${engineVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>persistence</artifactId>
-            <version>${engineVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>nomenclatureloader</artifactId>
-            <version>${engineVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>rule-implementation-loader</artifactId>
-            <version>${engineVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>crawler</artifactId>
-            <version>${engineVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>contentloader</artifactId>
-            <version>${engineVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>contentadapter</artifactId>
-            <version>${engineVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>processor</artifactId>
-            <version>${engineVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>consolidator</artifactId>
-            <version>${engineVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>analyser</artifactId>
-            <version>${engineVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>scenarioloader</artifactId>
-            <version>${engineVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-api</artifactId>
-            <version>${engineVersion}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>logging</artifactId>
-            <version>${engineVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
             <artifactId>accessiweb2.1</artifactId>
-            <version>${rulesVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
             <artifactId>accessiweb2.2</artifactId>
-            <version>${rulesVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
             <artifactId>rgaa2.2</artifactId>
-            <version>${rulesVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
             <artifactId>seo</artifactId>
-            <version>${rulesVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>

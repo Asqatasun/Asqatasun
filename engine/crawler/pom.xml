@@ -5,15 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.opens</groupId>
-        <artifactId>tanaguru</artifactId>
+        <artifactId>engine</artifactId>
         <version>3.0.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>org.opens</groupId>
     <artifactId>crawler</artifactId>
     <name>crawler</name>
-    <version>3.0.0-SNAPSHOT</version>
-    <url>http://www.tanaguru.org</url>
     <build>
         <plugins>
             <plugin>
@@ -46,8 +42,11 @@
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>audit</artifactId>
-            <version>${engineVersion}</version>
-            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>${engineGroupId}</groupId>
+            <artifactId>persistence</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>${heritrixGroupId}</groupId>
@@ -57,38 +56,28 @@
         <dependency>
             <groupId>com.googlecode.juniversalchardet</groupId>
             <artifactId>juniversalchardet</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${springGroupId}</groupId>
             <artifactId>spring-context</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>persistence</artifactId>
-            <version>${engineVersion}</version>
-            <scope>test</scope>
-        </dependency>
+        
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -108,7 +97,6 @@
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

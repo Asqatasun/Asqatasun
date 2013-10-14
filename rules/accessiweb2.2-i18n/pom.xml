@@ -3,13 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
      <parent>
         <groupId>org.opens</groupId>
-        <artifactId>tanaguru</artifactId>
-        <version>3.0.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
+        <artifactId>rules</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <groupId>org.opens</groupId>
     <artifactId>accessiweb2.2-i18n</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
     <name>accessiweb2.2-i18n</name>
-    <url>http://www.tanaguru.org</url>
 </project>

@@ -3,15 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.opens</groupId>
-        <artifactId>tanaguru</artifactId>
-        <version>3.0.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
+        <artifactId>rules</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <groupId>org.opens</groupId>
     <artifactId>rgaa2.2</artifactId>
     <name>rgaa2.2</name>
-    <version>1.0.0-SNAPSHOT</version>
-    <url>http://www.tanaguru.org</url>
     <build>
         <finalName>rgaa2.2-${rulesVersion}</finalName>
     </build>
@@ -19,22 +15,18 @@
         <dependency>
             <groupId>${rulesGroupId}</groupId>
             <artifactId>rules-commons</artifactId>
-            <version>${rulesVersion}</version>
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
             <artifactId>rgaa2.2-i18n</artifactId>
-            <version>${rulesVersion}</version>
-            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${rulesGroupId}</groupId>
+            <artifactId>rgaa2.2-testcases</artifactId>
         </dependency>
         <dependency>
             <groupId>${testingToolsGroupId}</groupId>
             <artifactId>rules-testing-tools</artifactId>
-            <version>${testingToolsVersion}</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 </project>
