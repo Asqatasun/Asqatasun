@@ -30,7 +30,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.junit.*;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
@@ -52,26 +51,17 @@ public class ElementPresenceCheckerTest extends TestCase{
     public ElementPresenceCheckerTest() {
     }
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-    
-    @Before
+    @Override
     public void setUp() {
     }
     
-    @After
+    @Override
     public void tearDown() {
     }
 
     /**
      * Test of doCheck method, of class ElementPresenceChecker.
      */
-    @Test
     public void testCheckDefaultDetectedResult() {
         System.out.println("elementPresenceChecker-check-default-detected-result");
         Document doc = null;
@@ -100,7 +90,6 @@ public class ElementPresenceCheckerTest extends TestCase{
     /**
      * Test of doCheck method, of class ElementPresenceChecker.
      */
-    @Test
     public void testCheckDefaultNotDetectedResult() {
         System.out.println("elementPresenceChecker-check-default-not-detected-result");
         Document doc = null;
@@ -130,7 +119,6 @@ public class ElementPresenceCheckerTest extends TestCase{
     /**
      * Test of doCheck method, of class ElementPresenceChecker.
      */
-    @Test
     public void testCheckDefaultDetectedUnicityResult() {
         System.out.println("elementPresenceChecker-check-default-detected-unicity-result");
         Document doc = null;
@@ -160,7 +148,6 @@ public class ElementPresenceCheckerTest extends TestCase{
     /**
      * Test of doCheck method, of class ElementPresenceChecker.
      */
-    @Test
     public void testCheckDefaultDetectedUnicityFailedResult() {
         System.out.println("elementPresenceChecker-check-default-detection-unicity-failed-result");
         Document doc = null;
@@ -190,7 +177,6 @@ public class ElementPresenceCheckerTest extends TestCase{
     /**
      * Test of doCheck method, of class ElementPresenceChecker.
      */
-    @Test
     public void testCheckDefaultDetectedUnicityFailedOverrideSolutionResult1() {
         System.out.println("elementPresenceChecker-check-default-detection-unicity-failed-override-solution-result1");
         Document doc = null;
@@ -225,7 +211,6 @@ public class ElementPresenceCheckerTest extends TestCase{
     /**
      * Test of doCheck method, of class ElementPresenceChecker.
      */
-    @Test
     public void testCheckDefaultDetectedUnicityFailedOverrideSolutionResult2() {
         System.out.println("elementPresenceChecker-check-default-detection-unicity-failed-override-solution-result2");
         Document doc = null;

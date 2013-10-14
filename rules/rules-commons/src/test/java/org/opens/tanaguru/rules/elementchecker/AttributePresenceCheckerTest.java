@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2013  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -21,8 +21,8 @@
  */
 package org.opens.tanaguru.rules.elementchecker;
 
+import junit.framework.TestCase;
 import org.jsoup.select.Elements;
-import org.junit.*;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
@@ -32,31 +32,22 @@ import org.opens.tanaguru.rules.elementchecker.attribute.AttributePresenceChecke
  *
  * @author jkowalczyk
  */
-public class AttributePresenceCheckerTest {
+public class AttributePresenceCheckerTest extends TestCase{
     
     public AttributePresenceCheckerTest() {
     }
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-    
-    @Before
+    @Override
     public void setUp() {
     }
     
-    @After
+    @Override
     public void tearDown() {
     }
 
     /**
      * Test of getNotDetectedSolution method, of class AttributePresenceChecker.
      */
-    @Test
     public void testGetNotDetectedSolution() {
         System.out.println("getNotDetectedSolution");
         AttributePresenceChecker instance = null;
@@ -70,7 +61,6 @@ public class AttributePresenceCheckerTest {
     /**
      * Test of setNotDetectedSolution method, of class AttributePresenceChecker.
      */
-    @Test
     public void testSetNotDetectedSolution() {
         System.out.println("setNotDetectedSolution");
         TestSolution notDetectedSolution = null;
@@ -83,7 +73,6 @@ public class AttributePresenceCheckerTest {
     /**
      * Test of getDetectedSolution method, of class AttributePresenceChecker.
      */
-    @Test
     public void testGetDetectedSolution() {
         System.out.println("getDetectedSolution");
         AttributePresenceChecker instance = null;
@@ -97,7 +86,6 @@ public class AttributePresenceCheckerTest {
     /**
      * Test of setDetectedSolution method, of class AttributePresenceChecker.
      */
-    @Test
     public void testSetDetectedSolution() {
         System.out.println("setDetectedSolution");
         TestSolution detectedSolution = null;
@@ -110,7 +98,6 @@ public class AttributePresenceCheckerTest {
     /**
      * Test of doCheck method, of class AttributePresenceChecker.
      */
-    @Test
     public void testDoCheck() {
         System.out.println("doCheck");
         SSPHandler sspHandler = null;

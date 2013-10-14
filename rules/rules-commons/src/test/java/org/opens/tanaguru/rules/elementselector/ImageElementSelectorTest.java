@@ -29,7 +29,6 @@ import org.easymock.EasyMock;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.junit.*;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
@@ -48,20 +47,10 @@ public class ImageElementSelectorTest extends TestCase{
     public ImageElementSelectorTest() {
     }
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-    
-    @Before
     @Override
     public void setUp() {
     }
     
-    @After
     @Override
     public void tearDown() {
     }
@@ -69,7 +58,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements1_1() {
         System.out.println("selectElements1-1");
         Document doc = null;
@@ -97,7 +85,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements1_2() {
         System.out.println("selectElements1-2");
         Document doc = null;
@@ -125,7 +112,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements1_3() {
         System.out.println("selectElements1-3");
         Document doc = null;
@@ -153,7 +139,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements1_4() {
         System.out.println("selectElements1-4");
         Document doc = null;
@@ -181,7 +166,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements2_1() {
         System.out.println("selectElements2-1");
         Document doc = null;
@@ -210,7 +194,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements2_2() {
         System.out.println("selectElements2-2");
         Document doc = null;
@@ -239,7 +222,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements2_3() {
         System.out.println("selectElements2-3");
         Document doc = null;
@@ -268,7 +250,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements2_4() {
         System.out.println("selectElements2-4");
         Document doc = null;
@@ -297,7 +278,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements3_1() {
         System.out.println("selectElements3-1");
         Document doc = null;
@@ -325,7 +305,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements3_2() {
         System.out.println("selectElements3-2");
         Document doc = null;
@@ -353,7 +332,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements3_3() {
         System.out.println("selectElements3-3");
         Document doc = null;
@@ -381,7 +359,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements3_4() {
         System.out.println("selectElements3-4");
         Document doc = null;
@@ -409,7 +386,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements4_1() {
         System.out.println("selectElements4-1");
         Document doc = null;
@@ -438,7 +414,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements4_2() {
         System.out.println("selectElements4-2");
         Document doc = null;
@@ -467,7 +442,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements4_3() {
         System.out.println("selectElements4-3");
         Document doc = null;
@@ -496,7 +470,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements4_4() {
         System.out.println("selectElements4-4");
         Document doc = null;
@@ -524,7 +497,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements5_1() {
         System.out.println("selectElements5-1");
         Document doc = null;
@@ -552,7 +524,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements5_2() {
         System.out.println("selectElements5-2");
         Document doc = null;
@@ -580,7 +551,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements5_3() {
         System.out.println("selectElements5-3");
         Document doc = null;
@@ -608,7 +578,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements5_4() {
         System.out.println("selectElements5-4");
         Document doc = null;
@@ -636,7 +605,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements5_5() {
         System.out.println("selectElements5-5");
         Document doc = null;
@@ -664,7 +632,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements6_1() {
         System.out.println("selectElements6-1");
         Document doc = null;
@@ -692,7 +659,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements6_2() {
         System.out.println("selectElements6-2");
         Document doc = null;
@@ -720,7 +686,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements6_3() {
         System.out.println("selectElements6-3");
         Document doc = null;
@@ -748,7 +713,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements6_4() {
         System.out.println("selectElements6-4");
         Document doc = null;
@@ -776,7 +740,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements6_5() {
         System.out.println("selectElements6-5");
         Document doc = null;
@@ -804,7 +767,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements7_1() {
         System.out.println("selectElements7-1");
         Document doc = null;
@@ -833,7 +795,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements7_2() {
         System.out.println("selectElements7-2");
         Document doc = null;
@@ -862,7 +823,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements7_3() {
         System.out.println("selectElements7-3");
         Document doc = null;
@@ -891,7 +851,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements7_4() {
         System.out.println("selectElements7-4");
         Document doc = null;
@@ -920,7 +879,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements7_5() {
         System.out.println("selectElements7-5");
         Document doc = null;
@@ -949,7 +907,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements8_1() {
         System.out.println("selectElements8-1");
         Document doc = null;
@@ -978,7 +935,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements8_2() {
         System.out.println("selectElements8-2");
         Document doc = null;
@@ -1007,7 +963,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements8_3() {
         System.out.println("selectElements8-3");
         Document doc = null;
@@ -1036,7 +991,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements8_4() {
         System.out.println("selectElements8-4");
         Document doc = null;
@@ -1065,7 +1019,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElements8_5() {
         System.out.println("selectElements8-5");
         Document doc = null;
@@ -1094,7 +1047,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElementsWithSelectorAsConstructorArgument() {
         System.out.println("selectElementsWithSelectorAsConstructorArguement");
         Document doc = null;
@@ -1122,7 +1074,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElementsWithSelectorAsConstructorArgumentAndNoExclusionSpecification() {
         System.out.println("selectElementsWithSelectorAsConstructorArguement");
         Document doc = null;
@@ -1149,7 +1100,6 @@ public class ImageElementSelectorTest extends TestCase{
     /**
      * Test of selectElements method, of class ImageElementSelector.
      */
-    @Test
     public void testSelectElementsWithNoExclusionSpecification() {
         System.out.println("selectElementsWithSelectorAsConstructorArguement");
         Document doc = null;

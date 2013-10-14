@@ -24,12 +24,11 @@ package org.opens.tanaguru.rules.elementselector;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import junit.framework.TestCase;
 import org.easymock.EasyMock;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import static org.junit.Assert.assertTrue;
-import org.junit.*;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
@@ -40,7 +39,7 @@ import org.opens.tanaguru.rules.keystore.HtmlElementStore;
  *
  * @author jkowalczyk
  */
-public class CaptchaElementSelectorTest {
+public class CaptchaElementSelectorTest extends TestCase{
     
     private SSP ssp;
     private SSPHandler sspHandler;
@@ -48,26 +47,17 @@ public class CaptchaElementSelectorTest {
     public CaptchaElementSelectorTest() {
     }
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-    
-    @Before
+    @Override
     public void setUp() {
     }
     
-    @After
+    @Override
     public void tearDown() {
     }
 
     /**
      * Test of selectElements method, of class CaptchaElementSelector.
      */
-    @Test
     public void testSelectElementsAttrElement() {
         System.out.println("selectElementsAttrElement");
         Document doc = null;
@@ -95,7 +85,6 @@ public class CaptchaElementSelectorTest {
     /**
      * Test of selectElements method, of class CaptchaElementSelector.
      */
-    @Test
     public void testSelectElementsTextSibling1() {
         System.out.println("selectElementsTextSibling1");
         Document doc = null;
@@ -123,7 +112,6 @@ public class CaptchaElementSelectorTest {
     /**
      * Test of selectElements method, of class CaptchaElementSelector.
      */
-    @Test
     public void testSelectElementsTextSibling2() {
         System.out.println("selectElementsTextSibling2");
         Document doc = null;
@@ -151,7 +139,6 @@ public class CaptchaElementSelectorTest {
     /**
      * Test of selectElements method, of class CaptchaElementSelector.
      */
-    @Test
     public void testSelectElementsTextParent() {
         System.out.println("selectElementsTextParent");
         Document doc = null;
@@ -179,7 +166,6 @@ public class CaptchaElementSelectorTest {
     /**
      * Test of selectElements method, of class CaptchaElementSelector.
      */
-    @Test
     public void testSelectElementsAttrParent() {
         System.out.println("selectElementsAttrParent");
         Document doc = null;
@@ -207,7 +193,6 @@ public class CaptchaElementSelectorTest {
     /**
      * Test of selectElements method, of class CaptchaElementSelector.
      */
-    @Test
     public void testNoCaptcha1() {
         System.out.println("noCaptcha1");
         Document doc = null;
@@ -233,7 +218,6 @@ public class CaptchaElementSelectorTest {
     /**
      * Test of selectElements method, of class CaptchaElementSelector.
      */
-    @Test
     public void testNoCaptcha2() {
         System.out.println("noCaptcha1");
         Document doc = null;
@@ -259,7 +243,6 @@ public class CaptchaElementSelectorTest {
     /**
      * Test of selectElements method, of class CaptchaElementSelector.
      */
-    @Test
     public void testEmptyPreSelection() {
         System.out.println("EmptyPreSelection");
         Document doc = null;
