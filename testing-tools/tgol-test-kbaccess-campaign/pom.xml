@@ -5,15 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.opens</groupId>
-        <artifactId>tanaguru</artifactId>
+        <artifactId>testing-tools</artifactId>
         <version>3.0.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>org.opens</groupId>
     <artifactId>tgol-test-kbaccess-campaign</artifactId>
     <name>tgol-test-kbaccess-campaign</name>
-    <version>3.0.0-SNAPSHOT</version>
-    <url>http://www.tanaguru.org</url>
     <build>
         <plugins>
             <plugin>
@@ -59,14 +55,11 @@
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-api</artifactId>
-            <version>${engineVersion}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>${testingToolsGroupId}</groupId>
             <artifactId>tgol-testing-tools</artifactId>
-            <version>${testingToolsVersion}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>

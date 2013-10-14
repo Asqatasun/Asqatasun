@@ -5,61 +5,48 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.opens</groupId>
-        <artifactId>tanaguru</artifactId>
+        <artifactId>testing-tools</artifactId>
         <version>3.0.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>org.opens</groupId>
     <artifactId>rules-testing-tools</artifactId>
     <packaging>jar</packaging>
-    <version>3.0.0-SNAPSHOT</version>
     <name>rules-testing-tools</name>
-    <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-api</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>nomenclatureloader</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>rule-implementation-loader</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>persistence</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>crawler</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>contentloader</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>contentadapter</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>processor</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>consolidator</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${springGroupId}</groupId>
@@ -96,6 +83,7 @@
         <dependency>
             <groupId>org.dbunit</groupId>
             <artifactId>dbunit</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>hsqldb</groupId>
@@ -120,6 +108,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
