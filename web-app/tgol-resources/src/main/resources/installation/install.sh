@@ -1,19 +1,20 @@
 #!/bin/bash
 
+declare prefix="/"
+
 declare mysql_tg_user=
 declare mysql_tg_passwd=
 declare mysql_root_user=
 declare mysql_root_passwd=
 declare mysql_tg_db=
-declare fs_root=
 declare tanaguru_url=
 declare tanaguru_webapp_dir=
 declare tomcat_webapps=
 declare tomcat_user=
 declare tg_admin_user=
 declare tg_admin_passwd=
-declare tg_admin_user_name=
-declare tg_admin_user_first_name=
+declare firefox_esr_path=
+declare display_port=
 
 declare omit_cleanup=true
 
@@ -34,7 +35,6 @@ declare TG_WAR_VERSION=$TG_VERSION
 declare TG_WAR="tgol-web-app-$TG_WAR_VERSION.war"
 
 declare -a OPTIONS=(
-        fs_root
 	mysql_root_user
 	mysql_root_passwd
 	mysql_tg_user
@@ -45,8 +45,8 @@ declare -a OPTIONS=(
 	tomcat_user
         tg_admin_user
         tg_admin_passwd
-        tg_admin_user_name
-        tg_admin_user_first_name
+	firefox_esr_path
+	display_port
 )
 
 warn() {
@@ -79,20 +79,37 @@ cleanup() {
 	$dirty_directories && cleanup_directories
 }
 
-fail() {
+fail_with_usage() {
         echo ""
 	echo "FAILURE : $*"
         echo ""
         usage
 	$omit_cleanup || cleanup
-	exit 1
+	exit -1
+}
+
+fail() {
+        echo ""
+	echo "FAILURE : $*"
+        echo ""
+	$omit_cleanup || cleanup
+	exit -1
+}
+
+prerequesites() {
+
+	echo ""
+	echo "Please verify your configuration meets the requirements : http://www.tanaguru.org/en/content/ubuntu-prerequisites-tanaguru-3x"
+	echo ""	
+	read -p "Are you sure you want to continue installation (yes/no)? " response
+	[[ "${response}" == "yes" ]] || fail "Installation is stopped"
+	echo ""	
 }
 
 usage() {
 	cat << EOF
 
 Usage : $0 [-h] 
-        --fs-root <installation root> 
         --mysql-tg-db <Tanaguru mysql db> 
         --mysql-tg-user <Tanaguru mysql user> 
         --mysql-tg-psswd <Tanaguru mysql password> 
@@ -101,26 +118,24 @@ Usage : $0 [-h]
         --tanaguru-url <Tanaguru webapp url> 
         --tomcat-webapps <tomcat webapps directory> 
         --tomcat-user <tomcat unix user>
-        --tg-admin-user <tanaguru application admin user email>
-        --tg-admin-passwd <tanaguru application admin user password>
-        --tg-admin-user-name <tanaguru application admin user name>
-        --tg-admin-user-first-name <tanaguru application admin user first_name>
-
+        --tg-admin-email <Tanaguru admin email>
+        --tg-admin-passwd <tanaguru admin password>
+	--firefox-esr-path <path-to-Firefox-ESR>
+	--display-port <Xorg-display-port>
+	
 Installation options :
- --mysql-root-user           The mysql user to use to create the database and the user
- --mysql-root-passwd         The password of the user specified by --mysql-root-user
- --mysql-tg-user             The user to create for Tanaguru
- --mysql-tg-passwd           The password that the Tanaguru mysql user will use
- --mysql-tg-db               The database to create for tanaguru
- --fs-root	             The filesystem root. Has to be absolute.
- --tanaguru-url              The url where tanaguru will be deployed
- --tomcat-webapps            The directory of the tomcat's webapps
-                               (ie. : ~tomcat/webapps or /var/lib/tomcat/webapps)
- --tomcat-user               The unix user name of the tomcat service
- --tg-admin-user             The tanaguru application admin user (must be an email)
+ --mysql-root-user           Mysql user with privileges of database creation and user creation (e.g. mysql root user)
+ --mysql-root-passwd         Password of the user specified by --mysql-root-user
+ --mysql-tg-user             Mysql user for Tanaguru
+ --mysql-tg-passwd           Password of the user specified by --mysql-tg-user
+ --mysql-tg-db               Database for Tanaguru
+ --tanaguru-url              URL where tanaguru will be deployed (e.g. http://localhost:8080/)
+ --tomcat-webapps            Tomcat webapps directory (e.g./var/lib/tomcat/webapps)
+ --tomcat-user               Unix user name for the tomcat service
+ --tg-admin-email            Email of the Tanaguru admin user
  --tg-admin-passwd           The tanaguru application admin password
- --tg-admin-user-name        The tanaguru application admin name
- --tg-admin-user-first-name  The tanaguru application admin first name
+ --firefox-esr-path	     Path to Firefox-ESR binary (e.g. /opt/firefox-esr/firefox)
+ --display-port              Xorg display port (e.g. ":99.1")
 
 Script options :
  -h --help           Display this help message
@@ -136,7 +151,7 @@ proceed_cmdline() {
 		for option in ${OPTIONS[@]}; do
 			if [[ "$option" = "$var" ]]; then
 				eval $var=$2
-				shift 2 || fail "Missing argument after $1"
+				shift 2 || fail_with_usage "Missing argument after $1"
 				isVar=true
 				break
 			fi
@@ -162,7 +177,7 @@ echo_missing_options() {
 
 proceed_stdin() {
         local missing_options=$(echo_missing_options)
-	[[ ! -z $missing_options ]] && fail "Missing options : " $missing_options
+	[[ ! -z $missing_options ]] && fail_with_usage "Missing options : " $missing_options
 	for option in ${OPTIONS[@]}; do
 		local value=$(eval echo \${$option})
 		while [[ -z "$value" ]]; do
@@ -185,7 +200,11 @@ preprocess_options()
 		sed "s#${protocol}${domain}${port}/\?##"
 	) || fail "--tanaguru-url argument is not a valid url : \"$tanaguru_url\""
 
-	[[ "$fs_root" == /* ]] || fail "Invalid --fs-root argument"
+	[[ "$prefix" == /* ]] || fail "Invalid --prefix argument"
+        case $prefix in
+	     */) prefix=$prefix;;
+	     *) prefix+='/';;
+	esac
 	[[ -z "$tanaguru_webapp_dir" ]] && tanaguru_webapp_dir=ROOT
 }
 
@@ -193,16 +212,17 @@ echo_configuration_summary() {
 	cat << EOF
 
 Installing Tanaguru with the following configuration :
- - All path are relative to "${fs_root}"
+ - All path are relative to "${prefix}"
  - The mysql user "${mysql_root_user}" will be used to create the Tanaguru database and user
  - The mysql user "${mysql_tg_user}" will be created and used by Tanaguru
  - The mysql database "${mysql_tg_db}" will be created and used by Tanaguru
  - The web application will be installed in "${tomcat_webapps}/${tanaguru_webapp_dir}"
  - The web application will be accessible from "${tanaguru_url}"
- - Tanaguru will write its log file in "$TG_LOG_DIR"
- - Tanaguru will use "$TG_TMP_DIR" as a temporary directory
- - Tanaguru will read its configuration in "$TG_CONF_DIR"
- - The user "${tomcat_user}" will have the write rights on the directories "$TG_LOG_DIR" and "$TG_TMP_DIR"
+ - Tanaguru will write its log file in "${prefix}$TG_LOG_DIR"
+ - Tanaguru will use "${prefix}$TG_TMP_DIR" as a temporary directory
+ - Tanaguru will read its configuration in "${prefix}$TG_CONF_DIR"
+ - The user "${tomcat_user}" will have the write rights on the directories "${prefix}$TG_LOG_DIR" and "${prefix}$TG_TMP_DIR"
+ - Tomcat configuration will be updated to with Xms, Xmx, display and webdriver.firefox.bin options"
 
 
 EOF
@@ -228,7 +248,10 @@ create_tables() {
 		mysql --user=${mysql_tg_user}            \
 		      --password=${mysql_tg_passwd}      \
                       ${mysql_tg_db} ||                  \
-		fail "Unable to create the rules tables"
+		fail "Unable to create the rules tables."\
+                     "The mysql user ${mysql_tg_user}" \
+                     "may already exists with a different" \
+                     "password in the database."
 
 	cd "$PKG_DIR/install/rules/sql"
 	cat 10-rules-resources-insert.sql                \
@@ -239,34 +262,38 @@ create_tables() {
 		mysql --user=${mysql_tg_user}            \
 		      --password=${mysql_tg_passwd}      \
                       ${mysql_tg_db} ||                  \
-		fail "Unable to create the rules tables"
+		fail "Unable to create the rules tables" \
+                     "The mysql user ${mysql_tg_user}" \
+                     "may already exists with a different" \
+                     "password in the database."
 	
 	cd "$PKG_DIR/install/web-app/sql"
 	cat tgol-20-create-tables.sql tgol-30-insert.sql | \
 		sed -e "s/\$tgDatabase/$mysql_tg_db/" |    \
 		mysql --user="$mysql_tg_user"              \
 		      --password="$mysql_tg_passwd" ||     \
-		fail "Unable to create and fill the TGSI tables"
-	
-
+		fail "Unable to create and fill the TGSI tables" \
+                     "The mysql user ${mysql_tg_user}" \
+                     "may already exists with a different" \
+                     "password in the database."
 }
 
 create_directories() {
 	dirty_directories=true
 	install -dm 700 -o ${tomcat_user} -g root \
-		"${fs_root}/$TG_CONF_DIR"         \
-		"${fs_root}/$TG_LOG_DIR"          \
-		"${fs_root}/$TG_TMP_DIR"          \
+		"${prefix}/$TG_CONF_DIR"         \
+		"${prefix}/$TG_LOG_DIR"          \
+		"${prefix}/$TG_TMP_DIR"          \
 		|| fail "Unable to create Tanaguru directories"
 	install -dm 755 -o ${tomcat_user} -g root                          \
-		"${fs_root}/${tomcat_webapps}/${tanaguru_webapp_dir}" \
+		"${prefix}/${tomcat_webapps}/${tanaguru_webapp_dir}" \
 		|| fail "Unable to create Tanaguru webapp directory"
 }
 
 install_configuration() {
 	dirty_conf=true
 	cp -r "$PKG_DIR"/install/web-app/conf/* \
-	   "${fs_root}/$TG_CONF_DIR" ||                  \
+	   "${prefix}/$TG_CONF_DIR" ||                  \
 		fail "Unable to copy the tanaguru configuration"
 	sed -i -e "s#\$TGOL-DEPLOYMENT-PATH .*#${tomcat_webapps}/${tanaguru_webapp_dir}/WEB-INF/conf#" \
 	    -e    "s#\$WEB-APP-URL .*#${tanaguru_url}#"               \
@@ -274,21 +301,21 @@ install_configuration() {
 	    -e    "s#\$USER#$mysql_tg_user#"                          \
 	    -e    "s#\$PASSWORD#$mysql_tg_passwd#"                    \
 	    -e    "s#\$DATABASE_NAME#$mysql_tg_db#"                   \
-	    "${fs_root}/$TG_CONF_DIR/tgol.conf" ||                    \
+	    "${prefix}/$TG_CONF_DIR/tgol.conf" ||                    \
 		fail "Unable to set up the tanaguru configuration"
-	grep '$' "${fs_root}/$TG_CONF_DIR" >/dev/null &&            \
-		warn "The file ${fs_root}/$TG_CONF_DIR contains"    \
+	grep '$' "${prefix}/$TG_CONF_DIR" >/dev/null &&            \
+		warn "The file ${prefix}/$TG_CONF_DIR contains"    \
 		     "dollar symboles. Check by yourself that the " \
 		     "replacement worked fine."
 }
 
 install_webapp() {
 	dirty_webapp=true
-	cd "${fs_root}/${tomcat_webapps}/${tanaguru_webapp_dir}"        \
+	cd "${prefix}/${tomcat_webapps}/${tanaguru_webapp_dir}"        \
 		|| fail "Unable to go to the tanaguru webapp directory"
-	unzip "$PKG_DIR/install/web-app/$TG_WAR" \
+	unzip -q "$PKG_DIR/install/web-app/$TG_WAR" \
 		|| fail "Unable to extract the tanaguru war"
-        sed -i -e "s#file:///#file://${fs_root}/#g"              \
+        sed -i -e "s#file:///#file://${prefix}/#g"              \
 	    "WEB-INF/conf/tgol-service.xml" ||                    \
 		fail "Unable to set up the tanaguru configuration"
 }
@@ -303,7 +330,7 @@ edit_esapi_configuration_file() {
 	encryptorMasterSalt=$(grep Encryptor.MasterSalt generated_keys.txt)
 	sed -i -e "s#Encryptor.MasterKey=\$MasterKey#${encryptorMasterKey}#"  \
 	    -e    "s#Encryptor.MasterSalt=\$MasterSalt#${encryptorMasterSalt}#" \
-	    "${fs_root}/$TG_CONF_DIR/ESAPI.properties" ||                    \
+	    "${prefix}/$TG_CONF_DIR/ESAPI.properties" ||                    \
 		fail "Unable to set up the esapie configuration"
 	rm -f generated_keys.txt
 }
@@ -311,33 +338,37 @@ edit_esapi_configuration_file() {
 create_first_user() {
 
 	cd "$PKG_DIR/install/web-app/sql-management"
-        sed -i -e "s/DbUser=/DbUser=$mysql_tg_user/g" 	\
-	    -e "s/DbUserPasswd=/DbUserPasswd=$mysql_tg_passwd/g" \
-	    -e "s/DbName=/DbName=$mysql_tg_db/g"  \
+        sed -i -e "s/^DbUser=.*$/DbUser=$mysql_tg_user/g" 	\
+	    -e "s/^DbUserPasswd=.*$/DbUserPasswd=$mysql_tg_passwd/g" \
+	    -e "s/^DbName=.*$/DbName=$mysql_tg_db/g"  \
             tg-set-user-admin.sh tg-create-user.sh  ||   \
 		fail "Unable to create tanaguru admin user"
-        sh ./tg-create-user.sh -e $tg_admin_user -p $tg_admin_passwd -l $tg_admin_user_name -f $tg_admin_user_first_name
-        sh ./tg-set-user-admin.sh -u $tg_admin_user
+        sh ./tg-create-user.sh -e $tg_admin_user -p $tg_admin_passwd -l " " -f " " || fail "Error while creating Tanaguru user. User may already exists"
+        sh ./tg-set-user-admin.sh -u $tg_admin_user || fail "Error while setting Tanaguru user as admin"
+}
+
+update_tomcat_configuration() {
+	# we assume the filename is the same as tomcat-user specified by user
+	MY_DEFAULT_TOMCAT=/etc/default/${tomcat_user}
+	local tgOption=` grep "# Tanaguru JVM options" $MY_DEFAULT_TOMCAT `
+	if [[ -z "$tgOption" ]]; then
+	    echo "Adding JAVA_OPTS in tomcat configuration file"
+	    echo "" >>$MY_DEFAULT_TOMCAT
+	    echo "# Tanaguru JVM options" >>$MY_DEFAULT_TOMCAT
+	    echo "JAVA_OPTS=\"\$JAVA_OPTS -Xms512M -Xmx2048M -Dwebdriver.firefox.bin=${firefox_esr_path} -Ddisplay=${display_port}\"" >>$MY_DEFAULT_TOMCAT
+	fi
 }
 
 echo_installation_summary() {
 	cat << EOF
 
-Done installing Tanaguru.
+Well done, your Tanaguru is installed !
 
-Do not forget the requirements : http://www.tanaguru.org/en/content/ubuntu-prerequisites-tanaguru-2x
+Tomcat needs to be restarted (e.g. "sudo service ${tomcat_user} restart", take a coffee while it restarts :) )
 
-Now, check your tomcat's JVM setup, you must have the folowing options
-set in your JAVA_OPTS environement variable:
+Tanaguru is available at:
 
--Xms512M -Xmx2048M -Dwebdriver.firefox.bin=/opt/firefox/firefox
-
-The DISPLAY environement variable must be set before running tomcat:
-
-export DISPLAY=:99.1
-
-You can now start tomcat and visit
-${tanaguru_url}
+	${tanaguru_url}
 
 EOF
 }
@@ -351,20 +382,32 @@ main() {
 	preprocess_options
 	# print installation summary
 	echo_configuration_summary
+	# prerequesites
+	prerequesites
 	# create tanaguru directories
 	create_directories
+	echo "Directory creation:	.	.	OK"
 	# create SQL user and database
 	create_user_and_database
+	echo "SQL username and database creation:	OK"
 	# filling the SQL database
 	create_tables
+	echo "SQL inserts: 		.	.	OK"
 	# install configuration file
 	install_configuration
+	echo "Tanaguru config files creation: .       OK"
 	# install webapp
 	install_webapp
+	echo "Tanaguru webapp creation: 	.	OK"
 	# edit esapi configuration file
 	edit_esapi_configuration_file
+	echo "Tanaguru webapp configuration: 	.	OK"
 	# create first user
 	create_first_user
+	echo "Tanaguru admin creation:        .	OK"
+	# update tomcat configuration
+	update_tomcat_configuration
+	echo "Tomcat configuration: 	.	.	OK"
 	# done
 	echo_installation_summary
 }
