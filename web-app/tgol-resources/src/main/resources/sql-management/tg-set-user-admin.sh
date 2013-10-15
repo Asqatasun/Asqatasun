@@ -17,7 +17,7 @@ done
 if [ -z "$Email" ] ; then
 	echo "Usage $0 -u <Email> "
         echo "Set given user administrator privileges"
-	exit 0
+	exit -1
 fi
 
 mysql -u $DbUser -p$DbUserPasswd $DbName -e "

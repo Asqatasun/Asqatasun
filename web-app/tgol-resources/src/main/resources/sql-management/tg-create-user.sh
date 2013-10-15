@@ -20,7 +20,7 @@ done
 
 if [ -z "$Email" ] || [ -z "$Passwd" ] || [ -z "$LastName" ] || [ -z "$FirstName" ]; then
 	echo "Usage $0 -e <Email> -p <password> -l <LastName> -f <FirstName> "
-	exit 0
+	exit -1
 fi
 
 Md5pwd=$(/usr/bin/java -jar ./Passwdmd5/jacksum.jar -a md5 -q "txt:${Passwd}")
