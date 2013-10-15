@@ -1,17 +1,10 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `AUDIT`
 --
-
+-- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AUDIT` (
   `Id_Audit` bigint(20) NOT NULL AUTO_INCREMENT,
   `Comment` varchar(255) DEFAULT NULL,
@@ -20,35 +13,44 @@ CREATE TABLE IF NOT EXISTS `AUDIT` (
   PRIMARY KEY (`Id_Audit`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+
 -- --------------------------------------------------------
-
 --
--- Structure de la table `AUDIT_TEST`
+-- Structure de la table `WEB_RESOURCE`
 --
-
-CREATE TABLE IF NOT EXISTS `AUDIT_TEST` (
-  `Id_Audit` bigint(20) NOT NULL,
-  `Id_Test` bigint(20) NOT NULL,
-  KEY `FK838E6E96493EC9C2` (`Id_Audit`),
-  CONSTRAINT `FK838E6E96493EC9C2` 
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `WEB_RESOURCE` (
+  `DTYPE` varchar(31) NOT NULL,
+  `Id_Web_Resource` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Label` varchar(255) DEFAULT NULL,
+  `Mark` float DEFAULT NULL,
+  `Url` varchar(2048) NOT NULL,
+  `Rank` int DEFAULT 0,
+  `Id_Audit` bigint(20) DEFAULT NULL,
+  `Id_Web_Resource_Parent` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`Id_Web_Resource`),
+  KEY `FKD9A970B9493EC9C2` (`Id_Audit`),
+  CONSTRAINT `FKD9A970B9493EC9C2` 
       FOREIGN KEY Id_Audit_Index (`Id_Audit`) 
       REFERENCES `AUDIT` (`Id_Audit`) 
-      ON UPDATE NO ACTION
-      ON DELETE CASCADE,
-  KEY `FK838E6E96A17A5FA8` (`Id_Test`),
-  CONSTRAINT `FK838E6E96A17A5FA8` 
-      FOREIGN KEY Id_Test_Index (`Id_Test`) 
-      REFERENCES `TEST` (`Id_Test`)
-      ON UPDATE NO ACTION
-      ON DELETE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+      ON DELETE CASCADE 
+      ON UPDATE CASCADE,
+  KEY `FKD9A970B92F70FF12` (`Id_Web_Resource_Parent`),
+  CONSTRAINT `FKD9A970B92F70FF12` 
+      FOREIGN KEY Id_Web_Resource_Parent_Index (`Id_Web_Resource_Parent`) 
+      REFERENCES `WEB_RESOURCE` (`Id_Web_Resource`) 
+      ON DELETE CASCADE 
+      ON UPDATE CASCADE,
+  INDEX `Url_Index` (`Url` ASC),
+  INDEX `DTYPE_Index` (`DTYPE` ASC)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `CONTENT`
 --
-
+-- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTENT` (
   `DTYPE` varchar(31) NOT NULL,
   `Id_Content` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -81,11 +83,10 @@ CREATE TABLE IF NOT EXISTS `CONTENT` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `CONTENT_RELATIONSHIP`
 --
-
+-- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTENT_RELATIONSHIP` (
   `Id_Content_Child` bigint(20) NOT NULL,
   `Id_Content_Parent` bigint(20) NOT NULL,
@@ -104,12 +105,87 @@ CREATE TABLE IF NOT EXISTS `CONTENT_RELATIONSHIP` (
       ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
+-- --------------------------------------------------------
+--
+-- Structure de la table `SCOPE`
+--
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `SCOPE` (
+  `Id_Scope` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Code` varchar(255) DEFAULT NULL,
+  `Description` varchar(255) DEFAULT NULL,
+  `Label` varchar(255) NOT NULL,
+  PRIMARY KEY (`Id_Scope`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+-- --------------------------------------------------------
+--
+-- Structure de la table `DECISION_LEVEL`
+--
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DECISION_LEVEL` (
+  `Id_Decision_Level` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Cd_Decision_Level` varchar(255) DEFAULT NULL,
+  `Description` varchar(255) DEFAULT NULL,
+  `Label` varchar(255) NOT NULL,
+  PRIMARY KEY (`Id_Decision_Level`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+-- --------------------------------------------------------
+--
+-- Structure de la table `LEVEL`
+--
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `LEVEL` (
+  `Id_Level` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Cd_Level` varchar(255) DEFAULT NULL,
+  `Description` varchar(255) DEFAULT NULL,
+  `Label` varchar(255) DEFAULT NULL,
+  `Rank` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Id_Level`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+-- --------------------------------------------------------
+--
+-- Structure de la table `THEME`
+--
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `THEME` (
+  `Id_Theme` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Cd_Theme` varchar(255) DEFAULT NULL,
+  `Description` varchar(255) DEFAULT NULL,
+  `Label` varchar(255) NOT NULL,
+  `Rank` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Id_Theme`),
+  INDEX `Cd_Theme_Index` (`Cd_Theme` ASC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+-- --------------------------------------------------------
+--
+-- Structure de la table `REFERENCE`
+--
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `REFERENCE` (
+  `Id_Reference` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Cd_Reference` varchar(255) DEFAULT NULL,
+  `Description` varchar(255) DEFAULT NULL,
+  `Label` varchar(255) NOT NULL,
+  `Rank` int(11) DEFAULT NULL,
+  `Url` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`Id_Reference`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+-- --------------------------------------------------------
 --
 -- Structure de la table `CRITERION`
 --
-
+-- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CRITERION` (
   `Id_Criterion` bigint(20) NOT NULL AUTO_INCREMENT,
   `Cd_Criterion` varchar(255) DEFAULT NULL,
@@ -130,26 +206,72 @@ CREATE TABLE IF NOT EXISTS `CRITERION` (
       REFERENCES `REFERENCE` (`Id_Reference`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+
 -- --------------------------------------------------------
-
 --
--- Structure de la table `DECISION_LEVEL`
+-- Structure de la table `TEST`
 --
-
-CREATE TABLE IF NOT EXISTS `DECISION_LEVEL` (
-  `Id_Decision_Level` bigint(20) NOT NULL AUTO_INCREMENT,
-  `Cd_Decision_Level` varchar(255) DEFAULT NULL,
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `TEST` (
+  `Id_Test` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Cd_Test` varchar(255) DEFAULT NULL,
   `Description` varchar(255) DEFAULT NULL,
-  `Label` varchar(255) NOT NULL,
-  PRIMARY KEY (`Id_Decision_Level`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `Label` varchar(255) DEFAULT NULL,
+  `Rank` int(11) DEFAULT NULL,
+  `Weight` numeric(2,1) UNSIGNED DEFAULT '1.0',
+  `Rule_Archive_Name` varchar(255) DEFAULT NULL,
+  `Rule_Class_Name` varchar(255) DEFAULT NULL,
+  `Rule_Design_Url` varchar(255) DEFAULT NULL,
+  `Id_Criterion` bigint(20) DEFAULT NULL,
+  `Id_Decision_Level` bigint(20) DEFAULT NULL,
+  `Id_Level` bigint(20) DEFAULT NULL,
+  `Id_Rule` bigint(20) DEFAULT NULL,
+  `Id_Scope` bigint(20) DEFAULT NULL,
+  `No_Process` bit(1) DEFAULT b'1',
+  PRIMARY KEY (`Id_Test`),
+  CONSTRAINT `FK273C92CCA757AD` 
+      FOREIGN KEY Id_Decision_Level_Index (`Id_Decision_Level`) 
+      REFERENCES `DECISION_LEVEL` (`Id_Decision_Level`),
+  CONSTRAINT `FK273C9250C99824` 
+      FOREIGN KEY Id_Scope_Index (`Id_Scope`) 
+      REFERENCES `SCOPE` (`Id_Scope`),
+  CONSTRAINT `FK273C926CCA4C3E` 
+      FOREIGN KEY Id_Criterion_Index (`Id_Criterion`) 
+      REFERENCES `CRITERION` (`Id_Criterion`),
+  CONSTRAINT `FK273C9272343A84` 
+      FOREIGN KEY Id_Level_Index (`Id_Level`) 
+      REFERENCES `LEVEL` (`Id_Level`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
 
 -- --------------------------------------------------------
+--
+-- Structure de la table `AUDIT_TEST`
+--
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AUDIT_TEST` (
+  `Id_Audit` bigint(20) NOT NULL,
+  `Id_Test` bigint(20) NOT NULL,
+  KEY `FK838E6E96493EC9C2` (`Id_Audit`),
+  CONSTRAINT `FK838E6E96493EC9C2` 
+      FOREIGN KEY Id_Audit_Index (`Id_Audit`) 
+      REFERENCES `AUDIT` (`Id_Audit`) 
+      ON UPDATE NO ACTION
+      ON DELETE CASCADE,
+  KEY `FK838E6E96A17A5FA8` (`Id_Test`),
+  CONSTRAINT `FK838E6E96A17A5FA8` 
+      FOREIGN KEY Id_Test_Index (`Id_Test`) 
+      REFERENCES `TEST` (`Id_Test`)
+      ON UPDATE NO ACTION
+      ON DELETE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+-- --------------------------------------------------------
 --
 -- Structure de la table `EVIDENCE`
 --
-
+-- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EVIDENCE` (
   `Id_Evidence` bigint(20) NOT NULL AUTO_INCREMENT,
   `Cd_Evidence` varchar(255) DEFAULT NULL,
@@ -158,116 +280,12 @@ CREATE TABLE IF NOT EXISTS `EVIDENCE` (
   PRIMARY KEY (`Id_Evidence`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Structure de la table `EVIDENCE_ELEMENT`
---
-
-CREATE TABLE IF NOT EXISTS `EVIDENCE_ELEMENT` (
-  `Id_Evidence_Element` bigint(20) NOT NULL AUTO_INCREMENT,
-  `Element_Value` mediumtext NOT NULL,
-  `EVIDENCE_Id_Evidence` bigint(20) DEFAULT NULL,
-  `PROCESS_REMARK_Id_Process_Remark` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`Id_Evidence_Element`),
-  KEY `FK698B98F4C94A0CBA` (`EVIDENCE_Id_Evidence`),
-  CONSTRAINT `FK698B98F4C94A0CBA` 
-      FOREIGN KEY EVIDENCE_Id_Evidence_Index (`EVIDENCE_Id_Evidence`) 
-      REFERENCES `EVIDENCE` (`Id_Evidence`),
-  KEY `FK698B98F425AD22C4` (`PROCESS_REMARK_Id_Process_Remark`),
-  CONSTRAINT `FK698B98F425AD22C4` 
-      FOREIGN KEY PROCESS_REMARK_Id_Process_Remark_Index (`PROCESS_REMARK_Id_Process_Remark`) 
-      REFERENCES `PROCESS_REMARK` (`Id_Process_Remark`) 
-      ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
-
---
--- Structure de la table `LEVEL`
---
-
-CREATE TABLE IF NOT EXISTS `LEVEL` (
-  `Id_Level` bigint(20) NOT NULL AUTO_INCREMENT,
-  `Cd_Level` varchar(255) DEFAULT NULL,
-  `Description` varchar(255) DEFAULT NULL,
-  `Label` varchar(255) DEFAULT NULL,
-  `Rank` int(11) DEFAULT NULL,
-  PRIMARY KEY (`Id_Level`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `NOMENCLATURE`
---
-
-CREATE TABLE IF NOT EXISTS `NOMENCLATURE` (
-  `Id_Nomenclature` bigint(20) NOT NULL AUTO_INCREMENT,
-  `Cd_Nomenclature` varchar(255) DEFAULT NULL,
-  `Description` varchar(255) DEFAULT NULL,
-  `Long_Label` varchar(255) DEFAULT NULL,
-  `Short_Label` varchar(255) DEFAULT NULL,
-  `Id_Nomenclature_Parent` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`Id_Nomenclature`),
-  KEY `FKBF856B7795431825` (`Id_Nomenclature_Parent`),
-  CONSTRAINT `FKBF856B7795431825` 
-      FOREIGN KEY Id_Nomenclature_Parent_Index (`Id_Nomenclature_Parent`) 
-      REFERENCES `NOMENCLATURE` (`Id_Nomenclature`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `NOMENCLATURE_ELEMENT`
---
-
-CREATE TABLE IF NOT EXISTS `NOMENCLATURE_ELEMENT` (
-  `DTYPE` varchar(31) NOT NULL,
-  `Id_Nomenclature_Element` bigint(20) NOT NULL AUTO_INCREMENT,
-  `Label` varchar(255) NOT NULL,
-  `shortValue` int(11) DEFAULT NULL,
-  `Id_Nomenclature` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`Id_Nomenclature_Element`),
-  KEY `FK44F856145FAB5EF2` (`Id_Nomenclature`),
-  CONSTRAINT `FK44F856145FAB5EF2` 
-      FOREIGN KEY Id_Nomenclature_Index (`Id_Nomenclature`) 
-      REFERENCES `NOMENCLATURE` (`Id_Nomenclature`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `PROCESS_REMARK`
---
-
-CREATE TABLE IF NOT EXISTS `PROCESS_REMARK` (
-  `DTYPE` varchar(31) NOT NULL,
-  `Id_Process_Remark` bigint(20) NOT NULL AUTO_INCREMENT,
-  `Issue` varchar(255) DEFAULT NULL,
-  `Message_Code` varchar(255) DEFAULT NULL,
-  `Selected_Element` varchar(255) DEFAULT NULL,
-  `Selection_Expression` varchar(255) DEFAULT NULL,
-  `Character_Position` int(11) DEFAULT NULL,
-  `Line_Number` int(11) DEFAULT NULL,
-  `Target` varchar(5000) DEFAULT NULL,
-  `Snippet` mediumtext DEFAULT NULL,
-  `Id_Process_Result` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`Id_Process_Remark`),
-  KEY `FK1C3EA37045A988AD` (`Id_Process_Result`),
-  CONSTRAINT `FK1C3EA37045A988AD` 
-      FOREIGN KEY Id_Process_Result_Index (`Id_Process_Result`) 
-      REFERENCES `PROCESS_RESULT` (`Id_Process_Result`) 
-      ON DELETE CASCADE,
-  INDEX `Issue_Index` (`Issue` ASC)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
 --
 -- Structure de la table `PROCESS_RESULT`
 --
-
+-- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PROCESS_RESULT` (
   `DTYPE` varchar(31) NOT NULL,
   `Id_Process_Result` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -308,42 +326,101 @@ CREATE TABLE IF NOT EXISTS `PROCESS_RESULT` (
   INDEX `Definite_Value_Index` (`Definite_Value` ASC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+
 -- --------------------------------------------------------
-
 --
--- Structure de la table `REFERENCE`
+-- Structure de la table `PROCESS_REMARK`
 --
-
-CREATE TABLE IF NOT EXISTS `REFERENCE` (
-  `Id_Reference` bigint(20) NOT NULL AUTO_INCREMENT,
-  `Cd_Reference` varchar(255) DEFAULT NULL,
-  `Description` varchar(255) DEFAULT NULL,
-  `Label` varchar(255) NOT NULL,
-  `Rank` int(11) DEFAULT NULL,
-  `Url` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`Id_Reference`)
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `PROCESS_REMARK` (
+  `DTYPE` varchar(31) NOT NULL,
+  `Id_Process_Remark` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Issue` varchar(255) DEFAULT NULL,
+  `Message_Code` varchar(255) DEFAULT NULL,
+  `Selected_Element` varchar(255) DEFAULT NULL,
+  `Selection_Expression` varchar(255) DEFAULT NULL,
+  `Character_Position` int(11) DEFAULT NULL,
+  `Line_Number` int(11) DEFAULT NULL,
+  `Target` varchar(5000) DEFAULT NULL,
+  `Snippet` mediumtext DEFAULT NULL,
+  `Id_Process_Result` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`Id_Process_Remark`),
+  KEY `FK1C3EA37045A988AD` (`Id_Process_Result`),
+  CONSTRAINT `FK1C3EA37045A988AD` 
+      FOREIGN KEY Id_Process_Result_Index (`Id_Process_Result`) 
+      REFERENCES `PROCESS_RESULT` (`Id_Process_Result`) 
+      ON DELETE CASCADE,
+  INDEX `Issue_Index` (`Issue` ASC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+
 -- --------------------------------------------------------
-
 --
--- Structure de la table `SCOPE`
+-- Structure de la table `EVIDENCE_ELEMENT`
 --
-
-CREATE TABLE IF NOT EXISTS `SCOPE` (
-  `Id_Scope` bigint(20) NOT NULL AUTO_INCREMENT,
-  `Code` varchar(255) DEFAULT NULL,
-  `Description` varchar(255) DEFAULT NULL,
-  `Label` varchar(255) NOT NULL,
-  PRIMARY KEY (`Id_Scope`)
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `EVIDENCE_ELEMENT` (
+  `Id_Evidence_Element` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Element_Value` mediumtext NOT NULL,
+  `EVIDENCE_Id_Evidence` bigint(20) DEFAULT NULL,
+  `PROCESS_REMARK_Id_Process_Remark` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`Id_Evidence_Element`),
+  KEY `FK698B98F4C94A0CBA` (`EVIDENCE_Id_Evidence`),
+  CONSTRAINT `FK698B98F4C94A0CBA` 
+      FOREIGN KEY EVIDENCE_Id_Evidence_Index (`EVIDENCE_Id_Evidence`) 
+      REFERENCES `EVIDENCE` (`Id_Evidence`),
+  KEY `FK698B98F425AD22C4` (`PROCESS_REMARK_Id_Process_Remark`),
+  CONSTRAINT `FK698B98F425AD22C4` 
+      FOREIGN KEY PROCESS_REMARK_Id_Process_Remark_Index (`PROCESS_REMARK_Id_Process_Remark`) 
+      REFERENCES `PROCESS_REMARK` (`Id_Process_Remark`) 
+      ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
 
+-- --------------------------------------------------------
+--
+-- Structure de la table `NOMENCLATURE`
+--
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `NOMENCLATURE` (
+  `Id_Nomenclature` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Cd_Nomenclature` varchar(255) DEFAULT NULL,
+  `Description` varchar(255) DEFAULT NULL,
+  `Long_Label` varchar(255) DEFAULT NULL,
+  `Short_Label` varchar(255) DEFAULT NULL,
+  `Id_Nomenclature_Parent` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`Id_Nomenclature`),
+  KEY `FKBF856B7795431825` (`Id_Nomenclature_Parent`),
+  CONSTRAINT `FKBF856B7795431825` 
+      FOREIGN KEY Id_Nomenclature_Parent_Index (`Id_Nomenclature_Parent`) 
+      REFERENCES `NOMENCLATURE` (`Id_Nomenclature`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+-- --------------------------------------------------------
+--
+-- Structure de la table `NOMENCLATURE_ELEMENT`
+--
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `NOMENCLATURE_ELEMENT` (
+  `DTYPE` varchar(31) NOT NULL,
+  `Id_Nomenclature_Element` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Label` varchar(255) NOT NULL,
+  `shortValue` int(11) DEFAULT NULL,
+  `Id_Nomenclature` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`Id_Nomenclature_Element`),
+  KEY `FK44F856145FAB5EF2` (`Id_Nomenclature`),
+  CONSTRAINT `FK44F856145FAB5EF2` 
+      FOREIGN KEY Id_Nomenclature_Index (`Id_Nomenclature`) 
+      REFERENCES `NOMENCLATURE` (`Id_Nomenclature`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+-- --------------------------------------------------------
 --
 -- Structure de la table `STANDARD_MESSAGE`
 --
-
+-- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `STANDARD_MESSAGE` (
   `Id_Standard_Message` bigint(20) NOT NULL AUTO_INCREMENT,
   `Cd_Standard_Message` varchar(255) DEFAULT NULL,
@@ -352,97 +429,12 @@ CREATE TABLE IF NOT EXISTS `STANDARD_MESSAGE` (
   PRIMARY KEY (`Id_Standard_Message`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Structure de la table `TEST`
---
-
-CREATE TABLE IF NOT EXISTS `TEST` (
-  `Id_Test` bigint(20) NOT NULL AUTO_INCREMENT,
-  `Cd_Test` varchar(255) DEFAULT NULL,
-  `Description` varchar(255) DEFAULT NULL,
-  `Label` varchar(255) DEFAULT NULL,
-  `Rank` int(11) DEFAULT NULL,
-  `Weight` numeric(2,1) UNSIGNED DEFAULT '1.0',
-  `Rule_Archive_Name` varchar(255) DEFAULT NULL,
-  `Rule_Class_Name` varchar(255) DEFAULT NULL,
-  `Rule_Design_Url` varchar(255) DEFAULT NULL,
-  `Id_Criterion` bigint(20) DEFAULT NULL,
-  `Id_Decision_Level` bigint(20) DEFAULT NULL,
-  `Id_Level` bigint(20) DEFAULT NULL,
-  `Id_Rule` bigint(20) DEFAULT NULL,
-  `Id_Scope` bigint(20) DEFAULT NULL,
-  `No_Process` bit(1) DEFAULT b'1',
-  PRIMARY KEY (`Id_Test`),
-  CONSTRAINT `FK273C92CCA757AD` 
-      FOREIGN KEY Id_Decision_Level_Index (`Id_Decision_Level`) 
-      REFERENCES `DECISION_LEVEL` (`Id_Decision_Level`),
-  CONSTRAINT `FK273C9250C99824` 
-      FOREIGN KEY Id_Scope_Index (`Id_Scope`) 
-      REFERENCES `SCOPE` (`Id_Scope`),
-  CONSTRAINT `FK273C926CCA4C3E` 
-      FOREIGN KEY Id_Criterion_Index (`Id_Criterion`) 
-      REFERENCES `CRITERION` (`Id_Criterion`),
-  CONSTRAINT `FK273C9272343A84` 
-      FOREIGN KEY Id_Level_Index (`Id_Level`) 
-      REFERENCES `LEVEL` (`Id_Level`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
-
---
--- Structure de la table `THEME`
---
-
-CREATE TABLE IF NOT EXISTS `THEME` (
-  `Id_Theme` bigint(20) NOT NULL AUTO_INCREMENT,
-  `Cd_Theme` varchar(255) DEFAULT NULL,
-  `Description` varchar(255) DEFAULT NULL,
-  `Label` varchar(255) NOT NULL,
-  `Rank` int(11) DEFAULT NULL,
-  PRIMARY KEY (`Id_Theme`),
-  INDEX `Cd_Theme_Index` (`Cd_Theme` ASC)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `WEB_RESOURCE`
---
-
-CREATE TABLE IF NOT EXISTS `WEB_RESOURCE` (
-  `DTYPE` varchar(31) NOT NULL,
-  `Id_Web_Resource` bigint(20) NOT NULL AUTO_INCREMENT,
-  `Label` varchar(255) DEFAULT NULL,
-  `Mark` float DEFAULT NULL,
-  `Url` varchar(2048) NOT NULL,
-  `Rank` int DEFAULT 0,
-  `Id_Audit` bigint(20) DEFAULT NULL,
-  `Id_Web_Resource_Parent` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`Id_Web_Resource`),
-  KEY `FKD9A970B9493EC9C2` (`Id_Audit`),
-  CONSTRAINT `FKD9A970B9493EC9C2` 
-      FOREIGN KEY Id_Audit_Index (`Id_Audit`) 
-      REFERENCES `AUDIT` (`Id_Audit`) 
-      ON DELETE CASCADE 
-      ON UPDATE CASCADE,
-  KEY `FKD9A970B92F70FF12` (`Id_Web_Resource_Parent`),
-  CONSTRAINT `FKD9A970B92F70FF12` 
-      FOREIGN KEY Id_Web_Resource_Parent_Index (`Id_Web_Resource_Parent`) 
-      REFERENCES `WEB_RESOURCE` (`Id_Web_Resource`) 
-      ON DELETE CASCADE 
-      ON UPDATE CASCADE,
-  INDEX `Url_Index` (`Url` ASC),
-  INDEX `DTYPE_Index` (`DTYPE` ASC)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
 --
 -- Structure de la table `PRE_PROCESS_RESULT`
 --
-
+-- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PRE_PROCESS_RESULT` (
   `Id_Pre_Process_Result` bigint(20) NOT NULL AUTO_INCREMENT,
   `Pre_Process_Key` varchar(255) NOT NULL,
@@ -465,10 +457,11 @@ CREATE TABLE IF NOT EXISTS `PRE_PROCESS_RESULT` (
     ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
 --
 -- Structure de la table `SNAPSHOT`
 --
-
+-- --------------------------------------------------------
 -- CREATE TABLE IF NOT EXISTS `SNAPSHOT` (
 --  `Id_Snapshot` bigint(20) NOT NULL AUTO_INCREMENT,
 --  `Snapshot_Content` mediumblob,
@@ -481,6 +474,7 @@ CREATE TABLE IF NOT EXISTS `PRE_PROCESS_RESULT` (
 --    ON DELETE CASCADE
 --    ON UPDATE NO ACTION
 -- ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
 
 -- -----------------------------------------------------
 -- Table `PARAMETER_FAMILY`
@@ -495,6 +489,7 @@ CREATE  TABLE IF NOT EXISTS `PARAMETER_FAMILY` (
   UNIQUE INDEX `Cd_Parameter_Family_UNIQUE` (`Cd_Parameter_Family` ASC)
 )
 ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table `PARAMETER_ELEMENT`
@@ -516,6 +511,7 @@ CREATE  TABLE IF NOT EXISTS `PARAMETER_ELEMENT` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+
 -- -----------------------------------------------------
 -- Table `PARAMETER`
 -- -----------------------------------------------------
@@ -534,6 +530,7 @@ CREATE  TABLE IF NOT EXISTS `PARAMETER` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
+
 
 -- -----------------------------------------------------
 -- Table `AUDIT_PARAMETER_VALUE`
@@ -555,6 +552,7 @@ CREATE  TABLE IF NOT EXISTS `AUDIT_PARAMETER` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
 
 -- -----------------------------------------------------
 -- Table `tanaguru`.`WEB_RESOURCE_STATISTICS`
@@ -597,6 +595,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
+
 -- -----------------------------------------------------
 -- Table `tanaguru`.`THEME_STATISTICS`
 -- -----------------------------------------------------
@@ -628,6 +627,7 @@ CREATE TABLE IF NOT EXISTS `THEME_STATISTICS` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
+
 
 -- -----------------------------------------------------
 -- Table `tanaguru`.`CRITERION_STATISTICS`
@@ -661,6 +661,7 @@ CREATE TABLE IF NOT EXISTS `CRITERION_STATISTICS` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
+
 
 -- -----------------------------------------------------
 -- Table `tanaguru`.`TEST_STATISTICS`
