@@ -30,7 +30,17 @@ CREATE TABLE IF NOT EXISTS `AUDIT_TEST` (
   `Id_Audit` bigint(20) NOT NULL,
   `Id_Test` bigint(20) NOT NULL,
   KEY `FK838E6E96493EC9C2` (`Id_Audit`),
-  KEY `FK838E6E96A17A5FA8` (`Id_Test`)
+  CONSTRAINT `FK838E6E96493EC9C2` 
+      FOREIGN KEY Id_Audit_Index (`Id_Audit`) 
+      REFERENCES `AUDIT` (`Id_Audit`) 
+      ON UPDATE NO ACTION
+      ON DELETE CASCADE,
+  KEY `FK838E6E96A17A5FA8` (`Id_Test`),
+  CONSTRAINT `FK838E6E96A17A5FA8` 
+      FOREIGN KEY Id_Test_Index (`Id_Test`) 
+      REFERENCES `TEST` (`Id_Test`)
+      ON UPDATE NO ACTION
+      ON DELETE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -54,7 +64,20 @@ CREATE TABLE IF NOT EXISTS `CONTENT` (
   `Id_Page` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`Id_Content`),
   KEY `FK6382C059493EC9C2` (`Id_Audit`),
-  KEY `FK6382C059A8A177A1` (`Id_Page`)
+  CONSTRAINT `FK6382C059493EC9C2` 
+      FOREIGN KEY Id_Audit_Index (`Id_Audit`) 
+      REFERENCES `AUDIT` (`Id_Audit`) 
+      ON UPDATE NO ACTION
+      ON DELETE CASCADE,
+  KEY `FK6382C059A8A177A1` (`Id_Page`),
+  CONSTRAINT `FK6382C059A8A177A1` 
+      FOREIGN KEY Id_Page_Index (`Id_Page`) 
+      REFERENCES `WEB_RESOURCE` (`Id_Web_Resource`) 
+      ON UPDATE NO ACTION
+      ON DELETE CASCADE,
+  INDEX `Uri_Index` (`Uri` ASC),
+  INDEX `DTYPE_Index` (`DTYPE` ASC),
+  INDEX `Http_Status_Code_Index` (`Http_Status_Code` ASC)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -68,7 +91,17 @@ CREATE TABLE IF NOT EXISTS `CONTENT_RELATIONSHIP` (
   `Id_Content_Parent` bigint(20) NOT NULL,
   PRIMARY KEY (`Id_Content_Child`,`Id_Content_Parent`),
   KEY `FKBA33205EBA71C750` (`Id_Content_Child`),
-  KEY `FKBA33205E620A8494` (`Id_Content_Parent`)
+  CONSTRAINT `FKBA33205EBA71C750` 
+      FOREIGN KEY Id_Content_Child_Index (`Id_Content_Child`) 
+      REFERENCES `CONTENT` (`Id_Content`) 
+      ON UPDATE NO ACTION 
+      ON DELETE CASCADE,
+  KEY `FKBA33205E620A8494` (`Id_Content_Parent`),
+  CONSTRAINT `FKBA33205E620A8494` 
+      FOREIGN KEY Id_Content_Parent_Index (`Id_Content_Parent`) 
+      REFERENCES `CONTENT` (`Id_Content`) 
+      ON UPDATE NO ACTION 
+      ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -88,7 +121,13 @@ CREATE TABLE IF NOT EXISTS `CRITERION` (
   `Theme_Id_Theme` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`Id_Criterion`),
   KEY `FKBCFA1E81E8F67244` (`Theme_Id_Theme`),
-  KEY `FKBCFA1E81D03CE506` (`Reference_Id_Reference`)
+  CONSTRAINT `FKBCFA1E81E8F67244` 
+      FOREIGN KEY Theme_Id_Theme_Index (`Theme_Id_Theme`) 
+      REFERENCES `THEME` (`Id_Theme`),
+  KEY `FKBCFA1E81D03CE506` (`Reference_Id_Reference`),
+  CONSTRAINT `FKBCFA1E81D03CE506` 
+      FOREIGN KEY Reference_Id_Reference_Index (`Reference_Id_Reference`) 
+      REFERENCES `REFERENCE` (`Id_Reference`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -132,7 +171,14 @@ CREATE TABLE IF NOT EXISTS `EVIDENCE_ELEMENT` (
   `PROCESS_REMARK_Id_Process_Remark` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`Id_Evidence_Element`),
   KEY `FK698B98F4C94A0CBA` (`EVIDENCE_Id_Evidence`),
-  KEY `FK698B98F425AD22C4` (`PROCESS_REMARK_Id_Process_Remark`)
+  CONSTRAINT `FK698B98F4C94A0CBA` 
+      FOREIGN KEY EVIDENCE_Id_Evidence_Index (`EVIDENCE_Id_Evidence`) 
+      REFERENCES `EVIDENCE` (`Id_Evidence`),
+  KEY `FK698B98F425AD22C4` (`PROCESS_REMARK_Id_Process_Remark`),
+  CONSTRAINT `FK698B98F425AD22C4` 
+      FOREIGN KEY PROCESS_REMARK_Id_Process_Remark_Index (`PROCESS_REMARK_Id_Process_Remark`) 
+      REFERENCES `PROCESS_REMARK` (`Id_Process_Remark`) 
+      ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -164,7 +210,10 @@ CREATE TABLE IF NOT EXISTS `NOMENCLATURE` (
   `Short_Label` varchar(255) DEFAULT NULL,
   `Id_Nomenclature_Parent` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`Id_Nomenclature`),
-  KEY `FKBF856B7795431825` (`Id_Nomenclature_Parent`)
+  KEY `FKBF856B7795431825` (`Id_Nomenclature_Parent`),
+  CONSTRAINT `FKBF856B7795431825` 
+      FOREIGN KEY Id_Nomenclature_Parent_Index (`Id_Nomenclature_Parent`) 
+      REFERENCES `NOMENCLATURE` (`Id_Nomenclature`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -180,7 +229,10 @@ CREATE TABLE IF NOT EXISTS `NOMENCLATURE_ELEMENT` (
   `shortValue` int(11) DEFAULT NULL,
   `Id_Nomenclature` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`Id_Nomenclature_Element`),
-  KEY `FK44F856145FAB5EF2` (`Id_Nomenclature`)
+  KEY `FK44F856145FAB5EF2` (`Id_Nomenclature`),
+  CONSTRAINT `FK44F856145FAB5EF2` 
+      FOREIGN KEY Id_Nomenclature_Index (`Id_Nomenclature`) 
+      REFERENCES `NOMENCLATURE` (`Id_Nomenclature`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -202,7 +254,12 @@ CREATE TABLE IF NOT EXISTS `PROCESS_REMARK` (
   `Snippet` mediumtext DEFAULT NULL,
   `Id_Process_Result` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`Id_Process_Remark`),
-  KEY `FK1C3EA37045A988AD` (`Id_Process_Result`)
+  KEY `FK1C3EA37045A988AD` (`Id_Process_Result`),
+  CONSTRAINT `FK1C3EA37045A988AD` 
+      FOREIGN KEY Id_Process_Result_Index (`Id_Process_Result`) 
+      REFERENCES `PROCESS_RESULT` (`Id_Process_Result`) 
+      ON DELETE CASCADE,
+  INDEX `Issue_Index` (`Issue` ASC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -226,10 +283,29 @@ CREATE TABLE IF NOT EXISTS `PROCESS_RESULT` (
   UNIQUE KEY `Id_Test` (`Id_Test`,`Id_Web_Resource`,`Id_Audit_Gross_Result`),
   UNIQUE KEY `Id_Test_2` (`Id_Test`,`Id_Web_Resource`,`Id_Audit_Net_Result`),
   KEY `FK1C41A80DFA349234` (`Id_Process_Result_Parent`),
+  CONSTRAINT `FK1C41A80DFA349234` 
+      FOREIGN KEY Id_Process_Result_Parent_Index (`Id_Process_Result_Parent`) 
+      REFERENCES `PROCESS_RESULT` (`Id_Process_Result`),
   KEY `FK1C41A80D8146180B` (`Id_Audit_Gross_Result`),
+  CONSTRAINT `FK1C41A80D8146180B` 
+      FOREIGN KEY Id_Audit_Gross_Result_Index (`Id_Audit_Gross_Result`) 
+      REFERENCES `AUDIT` (`Id_Audit`)
+      ON DELETE CASCADE,
   KEY `FK1C41A80D2E48600` (`Id_Web_Resource`),
+  CONSTRAINT `FK1C41A80D2E48600` 
+      FOREIGN KEY Id_Web_Resource_Index (`Id_Web_Resource`) 
+      REFERENCES `WEB_RESOURCE` (`Id_Web_Resource`) 
+      ON DELETE CASCADE,
   KEY `FK1C41A80DA17A5FA8` (`Id_Test`),
-  KEY `FK1C41A80DB6D0E092` (`Id_Audit_Net_Result`)
+  CONSTRAINT `FK1C41A80DA17A5FA8` 
+      FOREIGN KEY Id_Test_Index (`Id_Test`) 
+      REFERENCES `TEST` (`Id_Test`),
+  KEY `FK1C41A80DB6D0E092` (`Id_Audit_Net_Result`),
+  CONSTRAINT `FK1C41A80DB6D0E092` 
+      FOREIGN KEY Id_Audit_Net_Result_Index (`Id_Audit_Net_Result`) 
+      REFERENCES `AUDIT` (`Id_Audit`) 
+      ON DELETE CASCADE,
+  INDEX `Definite_Value_Index` (`Definite_Value` ASC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -298,7 +374,19 @@ CREATE TABLE IF NOT EXISTS `TEST` (
   `Id_Rule` bigint(20) DEFAULT NULL,
   `Id_Scope` bigint(20) DEFAULT NULL,
   `No_Process` bit(1) DEFAULT b'1',
-  PRIMARY KEY (`Id_Test`)
+  PRIMARY KEY (`Id_Test`),
+  CONSTRAINT `FK273C92CCA757AD` 
+      FOREIGN KEY Id_Decision_Level_Index (`Id_Decision_Level`) 
+      REFERENCES `DECISION_LEVEL` (`Id_Decision_Level`),
+  CONSTRAINT `FK273C9250C99824` 
+      FOREIGN KEY Id_Scope_Index (`Id_Scope`) 
+      REFERENCES `SCOPE` (`Id_Scope`),
+  CONSTRAINT `FK273C926CCA4C3E` 
+      FOREIGN KEY Id_Criterion_Index (`Id_Criterion`) 
+      REFERENCES `CRITERION` (`Id_Criterion`),
+  CONSTRAINT `FK273C9272343A84` 
+      FOREIGN KEY Id_Level_Index (`Id_Level`) 
+      REFERENCES `LEVEL` (`Id_Level`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -313,7 +401,8 @@ CREATE TABLE IF NOT EXISTS `THEME` (
   `Description` varchar(255) DEFAULT NULL,
   `Label` varchar(255) NOT NULL,
   `Rank` int(11) DEFAULT NULL,
-  PRIMARY KEY (`Id_Theme`)
+  PRIMARY KEY (`Id_Theme`),
+  INDEX `Cd_Theme_Index` (`Cd_Theme` ASC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -333,7 +422,19 @@ CREATE TABLE IF NOT EXISTS `WEB_RESOURCE` (
   `Id_Web_Resource_Parent` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`Id_Web_Resource`),
   KEY `FKD9A970B9493EC9C2` (`Id_Audit`),
-  KEY `FKD9A970B92F70FF12` (`Id_Web_Resource_Parent`)
+  CONSTRAINT `FKD9A970B9493EC9C2` 
+      FOREIGN KEY Id_Audit_Index (`Id_Audit`) 
+      REFERENCES `AUDIT` (`Id_Audit`) 
+      ON DELETE CASCADE 
+      ON UPDATE CASCADE,
+  KEY `FKD9A970B92F70FF12` (`Id_Web_Resource_Parent`),
+  CONSTRAINT `FKD9A970B92F70FF12` 
+      FOREIGN KEY Id_Web_Resource_Parent_Index (`Id_Web_Resource_Parent`) 
+      REFERENCES `WEB_RESOURCE` (`Id_Web_Resource`) 
+      ON DELETE CASCADE 
+      ON UPDATE CASCADE,
+  INDEX `Url_Index` (`Url` ASC),
+  INDEX `DTYPE_Index` (`DTYPE` ASC)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -592,94 +693,3 @@ CREATE TABLE IF NOT EXISTS `TEST_STATISTICS` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
-
---
--- Contraintes pour la table `AUDIT_TEST`
---
-ALTER TABLE `AUDIT_TEST`
-  ADD CONSTRAINT `FK838E6E96A17A5FA8` FOREIGN KEY Id_Test_Index (`Id_Test`) REFERENCES `TEST` (`Id_Test`),
-  ADD CONSTRAINT `FK838E6E96493EC9C2` FOREIGN KEY Id_Audit_Index (`Id_Audit`) REFERENCES `AUDIT` (`Id_Audit`) ON DELETE CASCADE;
-
---
--- Contraintes pour la table `CONTENT`
---
-ALTER TABLE `CONTENT`
-  ADD CONSTRAINT `FK6382C059A8A177A1` FOREIGN KEY Id_Page_Index (`Id_Page`) REFERENCES `WEB_RESOURCE` (`Id_Web_Resource`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK6382C059493EC9C2` FOREIGN KEY Id_Audit_Index (`Id_Audit`) REFERENCES `AUDIT` (`Id_Audit`) ON DELETE CASCADE;
-CREATE INDEX Uri_Index ON CONTENT (Uri);
-CREATE INDEX DTYPE_Index ON CONTENT (DTYPE);
-CREATE INDEX Http_Status_Code_Index ON CONTENT (Http_Status_Code);
---
--- Contraintes pour la table `CONTENT_RELATIONSHIP`
---
-ALTER TABLE `CONTENT_RELATIONSHIP`
-  ADD CONSTRAINT `FKBA33205E620A8494` FOREIGN KEY Id_Content_Parent_Index (`Id_Content_Parent`) REFERENCES `CONTENT` (`Id_Content`) ON UPDATE NO ACTION ON DELETE CASCADE,
-  ADD CONSTRAINT `FKBA33205EBA71C750` FOREIGN KEY Id_Content_Child_Index (`Id_Content_Child`) REFERENCES `CONTENT` (`Id_Content`) ON UPDATE NO ACTION ON DELETE CASCADE;
-
---
--- Contraintes pour la table `CRITERION`
---
-ALTER TABLE `CRITERION`
-  ADD CONSTRAINT `FKBCFA1E81D03CE506` FOREIGN KEY Reference_Id_Reference_Index (`Reference_Id_Reference`) REFERENCES `REFERENCE` (`Id_Reference`),
-  ADD CONSTRAINT `FKBCFA1E81E8F67244` FOREIGN KEY Theme_Id_Theme_Index (`Theme_Id_Theme`) REFERENCES `THEME` (`Id_Theme`);
-
---
--- Contraintes pour la table `EVIDENCE_ELEMENT`
---
-ALTER TABLE `EVIDENCE_ELEMENT`
-  ADD CONSTRAINT `FK698B98F425AD22C4` FOREIGN KEY PROCESS_REMARK_Id_Process_Remark_Index (`PROCESS_REMARK_Id_Process_Remark`) REFERENCES `PROCESS_REMARK` (`Id_Process_Remark`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK698B98F4C94A0CBA` FOREIGN KEY EVIDENCE_Id_Evidence_Index (`EVIDENCE_Id_Evidence`) REFERENCES `EVIDENCE` (`Id_Evidence`);
-
---
--- Contraintes pour la table `NOMENCLATURE`
---
-ALTER TABLE `NOMENCLATURE`
-  ADD CONSTRAINT `FKBF856B7795431825` FOREIGN KEY Id_Nomenclature_Parent_Index (`Id_Nomenclature_Parent`) REFERENCES `NOMENCLATURE` (`Id_Nomenclature`);
-
---
--- Contraintes pour la table `NOMENCLATURE_ELEMENT`
---
-ALTER TABLE `NOMENCLATURE_ELEMENT`
-  ADD CONSTRAINT `FK44F856145FAB5EF2` FOREIGN KEY Id_Nomenclature_Index (`Id_Nomenclature`) REFERENCES `NOMENCLATURE` (`Id_Nomenclature`);
-
---
--- Contraintes pour la table `PROCESS_REMARK`
---
-ALTER TABLE `PROCESS_REMARK`
-  ADD CONSTRAINT `FK1C3EA37045A988AD` FOREIGN KEY Id_Process_Result_Index (`Id_Process_Result`) REFERENCES `PROCESS_RESULT` (`Id_Process_Result`) ON DELETE CASCADE;
-CREATE INDEX Issue_Index ON PROCESS_REMARK (Issue);
-
---
--- Contraintes pour la table `PROCESS_RESULT`
---
-ALTER TABLE `PROCESS_RESULT`
-  ADD CONSTRAINT `FK1C41A80DB6D0E092` FOREIGN KEY Id_Audit_Net_Result_Index (`Id_Audit_Net_Result`) REFERENCES `AUDIT` (`Id_Audit`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK1C41A80D2E48600` FOREIGN KEY Id_Web_Resource_Index (`Id_Web_Resource`) REFERENCES `WEB_RESOURCE` (`Id_Web_Resource`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK1C41A80D8146180B` FOREIGN KEY Id_Audit_Gross_Result_Index (`Id_Audit_Gross_Result`) REFERENCES `AUDIT` (`Id_Audit`)ON DELETE CASCADE,
-  ADD CONSTRAINT `FK1C41A80DA17A5FA8` FOREIGN KEY Id_Test_Index (`Id_Test`) REFERENCES `TEST` (`Id_Test`),
-  ADD CONSTRAINT `FK1C41A80DFA349234` FOREIGN KEY Id_Process_Result_Parent_Index (`Id_Process_Result_Parent`) REFERENCES `PROCESS_RESULT` (`Id_Process_Result`);
-CREATE INDEX Definite_Value_Index ON PROCESS_RESULT (Definite_Value);
-
-
---
--- Contraintes pour la table `TEST`
---
-ALTER TABLE `TEST`
-  ADD CONSTRAINT `FK273C92CCA757AD` FOREIGN KEY Id_Decision_Level_Index (`Id_Decision_Level`) REFERENCES `DECISION_LEVEL` (`Id_Decision_Level`),
-  ADD CONSTRAINT `FK273C9250C99824` FOREIGN KEY Id_Scope_Index (`Id_Scope`) REFERENCES `SCOPE` (`Id_Scope`),
-  ADD CONSTRAINT `FK273C926CCA4C3E` FOREIGN KEY Id_Criterion_Index (`Id_Criterion`) REFERENCES `CRITERION` (`Id_Criterion`),
-  ADD CONSTRAINT `FK273C9272343A84` FOREIGN KEY Id_Level_Index (`Id_Level`) REFERENCES `LEVEL` (`Id_Level`);
-
---
--- Index pour la table `THEME`
---
-CREATE INDEX Cd_Theme_Index ON THEME(Cd_Theme);
-
---
--- Contraintes pour la table `WEB_RESOURCE`
---
-ALTER TABLE `WEB_RESOURCE`
-  ADD CONSTRAINT `FKD9A970B92F70FF12` FOREIGN KEY Id_Web_Resource_Parent_Index (`Id_Web_Resource_Parent`) REFERENCES `WEB_RESOURCE` (`Id_Web_Resource`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FKD9A970B9493EC9C2` FOREIGN KEY Id_Audit_Index (`Id_Audit`) REFERENCES `AUDIT` (`Id_Audit`) ON DELETE CASCADE ON UPDATE CASCADE;
-CREATE INDEX Url_Index ON WEB_RESOURCE (Url);
-CREATE INDEX DTYPE_Index ON WEB_RESOURCE (DTYPE);
