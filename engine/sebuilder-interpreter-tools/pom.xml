@@ -39,25 +39,5 @@
             <groupId>commons-pool</groupId>
             <artifactId>commons-pool</artifactId>
         </dependency>
-        <dependency>
-            <groupId>commons-http</groupId>
-            <artifactId>commons-http</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-httpclient</groupId>
-            <artifactId>commons-httpclient</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore</artifactId>
-            <scope>runtime</scope>
-        </dependency>
     </dependencies>
 </project>
