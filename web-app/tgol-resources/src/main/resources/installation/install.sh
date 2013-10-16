@@ -343,8 +343,8 @@ create_first_user() {
 	    -e "s/^DbName=.*$/DbName=$mysql_tg_db/g"  \
             tg-set-user-admin.sh tg-create-user.sh  ||   \
 		fail "Unable to create tanaguru admin user"
-        sh ./tg-create-user.sh -e $tg_admin_user -p $tg_admin_passwd -l " " -f " " || fail "Error while creating Tanaguru user. User may already exists"
-        sh ./tg-set-user-admin.sh -u $tg_admin_user || fail "Error while setting Tanaguru user as admin"
+        sh ./tg-create-user.sh -e $tg_admin_user -p $tg_admin_passwd -l " " -f " " >/dev/null || fail "Error while creating Tanaguru user. User may already exists"
+        sh ./tg-set-user-admin.sh -u $tg_admin_user >/dev/null || fail "Error while setting Tanaguru user as admin"
 }
 
 update_tomcat_configuration() {
