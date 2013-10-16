@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 20111102 mfaure
+# 20131016 mfaure
 
 # For Getopts: very first ":" for error managing, then a ":" after each option requiring an argument
 DbUser=
@@ -30,9 +30,9 @@ if [ -z "$SiteLabel" ] || [ -z "$UserId" ] || [ -z "$Functs" ] || [ -z "$Refs" ]
         echo "  The \"r\" option represents the referential and can take several values from :"
         echo "     - r1 -> Accessiweb 2.1"
         echo "     - r2 -> Seo "
+        echo "     - r3 -> RGAA 2.2.1 "
+        echo "     - r4 -> Accessiweb 2.2 "
         echo "  The \"m\" option represents max authorized document when the site audit functionality is activated"
-        echo "     - r1 -> Accessiweb 2.1"
-        echo "     - r2 -> Seo "
 	exit 0
 fi
 
@@ -42,6 +42,8 @@ fi
 
 ref1=NULL;
 ref2=NULL;
+ref3=NULL;
+ref4=NULL;
 for ref in $Refs;do
    if [ $ref = "r1" ];
      then 
@@ -50,6 +52,14 @@ for ref in $Refs;do
    if [ $ref = "r2" ];
      then 
         ref2=2;
+   fi
+   if [ $ref = "r3" ];
+     then 
+        ref3=3;
+   fi
+   if [ $ref = "r4" ];
+     then 
+        ref4=4;
    fi
 done
 
@@ -77,5 +87,5 @@ for funct in $Functs;do
 done   
 
 mysql -u $DbUser -p$DbUserPasswd $DbName -e "
-call create_contract($UserId, \"$SiteLabel\", \"$URL\", $ref1, $ref2, $funct1, $funct2, $funct3, $funct4, $maxDoc);
+call create_contract($UserId, \"$SiteLabel\", \"$URL\", $ref1, $ref2, $ref3, $ref4, $funct1, $funct2, $funct3, $funct4, $maxDoc);
 "
