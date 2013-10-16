@@ -11,7 +11,7 @@ declare tanaguru_url=
 declare tanaguru_webapp_dir=
 declare tomcat_webapps=
 declare tomcat_user=
-declare tg_admin_user=
+declare tg_admin_email=
 declare tg_admin_passwd=
 declare firefox_esr_path=
 declare display_port=
@@ -43,7 +43,7 @@ declare -a OPTIONS=(
 	tanaguru_url
 	tomcat_webapps
 	tomcat_user
-        tg_admin_user
+        tg_admin_email
         tg_admin_passwd
 	firefox_esr_path
 	display_port
@@ -343,8 +343,8 @@ create_first_user() {
 	    -e "s/^DbName=.*$/DbName=$mysql_tg_db/g"  \
             tg-set-user-admin.sh tg-create-user.sh  ||   \
 		fail "Unable to create tanaguru admin user"
-        sh ./tg-create-user.sh -e $tg_admin_user -p $tg_admin_passwd -l " " -f " " >/dev/null || fail "Error while creating Tanaguru user. User may already exists"
-        sh ./tg-set-user-admin.sh -u $tg_admin_user >/dev/null || fail "Error while setting Tanaguru user as admin"
+        sh ./tg-create-user.sh -e $tg_admin_email -p $tg_admin_passwd -l " " -f " " >/dev/null || fail "Error while creating Tanaguru user. User may already exists"
+        sh ./tg-set-user-admin.sh -u $tg_admin_email >/dev/null || fail "Error while setting Tanaguru user as admin"
 }
 
 update_tomcat_configuration() {
