@@ -22,6 +22,7 @@
 
 package org.opens.tanaguru.rules.elementchecker.contrast;
 
+import java.text.DecimalFormat;
 import java.util.*;
 import javax.annotation.Nonnull;
 import javax.persistence.NoResultException;
@@ -39,6 +40,7 @@ import org.opens.tanaguru.rules.elementchecker.ElementCheckerImpl;
 import org.opens.tanaguru.rules.elementchecker.contrast.exception.ContrastCheckerParseResultException;
 import static org.opens.tanaguru.rules.keystore.EvidenceStore.*;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
+import org.opens.tanaguru.rules.utils.ContrastHelper;
 import static org.opens.tanaguru.service.ProcessRemarkService.DEFAULT_EVIDENCE;
 
 /**
@@ -56,7 +58,7 @@ public class ContrastChecker extends ElementCheckerImpl {
     
     private static final String COLOR_EXTRACTOR_PRE_PROCESS_RESULT_KEY = "colorExtractor";
     
-    private static final String JSON_CONSTRAST_RATIO_KEY = "contrastRatio";
+//    private static final String JSON_CONSTRAST_RATIO_KEY = "contrastRatio";
     private static final String JSON_FONT_SIZE_KEY = "fontSize";
     private static final String JSON_ELEMENT_PATH_KEY = "path";
     private static final String JSON_FONT_WEIGHT_KEY = "fontWeight";
@@ -70,7 +72,7 @@ public class ContrastChecker extends ElementCheckerImpl {
     private static final String LIGHTER_WEIGHT_KEY = "lighter";
     private static final String BOLDER_WEIGHT_KEY = "bolder";
     
-    private static final String INIT_CONTRAST_VALUE = "-1";
+//    private static final String INIT_CONTRAST_VALUE = "-1";
     
     private static int NORMAL_FONT_SIZE_THRESHOLD = 18;
     private static int BOLD_FONT_SIZE_THRESHOLD = 14;
@@ -166,42 +168,48 @@ public class ContrastChecker extends ElementCheckerImpl {
             TestSolutionHandler testSolutionHandler) throws JSONException, ContrastCheckerParseResultException{
         for(int i=0;i<json.length();i++) {
             JSONObject myJson = new JSONObject(json.get(i).toString());
-            String lumi = myJson.get(JSON_CONSTRAST_RATIO_KEY).toString();
 
             // if the luminosity couldn't have been computed, its value is set 
             // to "-1"
             if (isElementPartOfTheScope(myJson)) {
-                if (StringUtils.equals(lumi, INIT_CONTRAST_VALUE)) {
+                
+                String bgColor = myJson.get(JSON_BG_COLOR_KEY).toString();
+                String fgColor = myJson.get(JSON_FG_COLOR_KEY).toString();
+                
+                if (ContrastHelper.isColorTestable(fgColor) && 
+                    ContrastHelper.isColorTestable(bgColor)) {
+                    
                     elementCounter++;
-                    createNmiRemarkForManualCheckElement(
-                            sspHandler, 
-                            myJson.get(JSON_ELEMENT_PATH_KEY).toString(), 
-                            myJson.get(JSON_FG_COLOR_KEY).toString(), 
-                            myJson.get(JSON_BG_COLOR_KEY).toString());
-                    testSolutionHandler.addTestSolution(TestSolution.NEED_MORE_INFO);
-                    LOGGER.debug(" nmi " + 
-                                myJson.get(JSON_ELEMENT_PATH_KEY).toString()+ " "
-                                    +" "+ " ");
-                } else {
-                    Float luminosity = Float.valueOf(lumi);
-                    elementCounter++;
-                    if (luminosity < contrastRatio) {
+                    
+                    Double contrast = ContrastHelper.getConstrastRatio(fgColor, bgColor);
+                    if (contrast < contrastRatio) {
                         LOGGER.debug(" cssPath " + 
                                 myJson.get(JSON_ELEMENT_PATH_KEY).toString()+ " "
-                                    + luminosity +" "+ " ");
+                                    + contrast +" "+ " ");
                         TestSolution elementSolution = createRemarkOnBadContrastElement (
                                 sspHandler, 
                                 myJson.get(JSON_ELEMENT_PATH_KEY).toString(), 
                                 Boolean.valueOf(myJson.get(JSON_IS_HIDDEN_KEY).toString()),
-                                String.valueOf(luminosity),
+                                new DecimalFormat("#.00").format(contrast),
                                 myJson.get(JSON_FG_COLOR_KEY).toString(), 
                                 myJson.get(JSON_BG_COLOR_KEY).toString());
                         testSolutionHandler.addTestSolution(elementSolution);
                     } else {
                         LOGGER.debug(" good luminosity " + 
                                 myJson.get(JSON_ELEMENT_PATH_KEY).toString()+ " "
-                                    + luminosity +" "+ " ");
+                                    + contrast +" "+ " ");
                     }
+                } else {
+                    elementCounter++;
+                    createNmiRemarkForManualCheckElement(
+                            sspHandler, 
+                            myJson.get(JSON_ELEMENT_PATH_KEY).toString(), 
+                            fgColor, 
+                            bgColor);
+                    testSolutionHandler.addTestSolution(TestSolution.NEED_MORE_INFO);
+                    LOGGER.debug(" nmi " + 
+                                myJson.get(JSON_ELEMENT_PATH_KEY).toString()+ " "
+                                    +" "+ " ");
                 }
             }
         }
