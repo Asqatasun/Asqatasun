@@ -38,6 +38,7 @@ public final class HtmlElementStore {
     public static final String BODY_ELEMENT = HTML.Tag.BODY.toString();
     public static final String BUTTON_ELEMENT = "button";
     public static final String CAPTION_ELEMENT = HTML.Tag.CAPTION.toString();
+    public static final String CODE_ELEMENT = HTML.Tag.CODE.toString();
     public static final String COMMENT_ELEMENT = HTML.Tag.COMMENT.toString();
     public static final String DIV_ELEMENT = HTML.Tag.DIV.toString();
     public static final String DL_ELEMENT = "dl";
@@ -56,6 +57,7 @@ public final class HtmlElementStore {
     public static final String IFRAME_ELEMENT = "iframe";
     public static final String IMG_ELEMENT = HTML.Tag.IMG.toString();
     public static final String INPUT_ELEMENT = HTML.Tag.INPUT.toString();
+    public static final String KBD_ELEMENT = HTML.Tag.KBD.toString();
     public static final String LABEL_ELEMENT = "label";
     public static final String LEGEND_ELEMENT = "legend";
     public static final String LI_ELEMENT = HTML.Tag.LI.toString();
@@ -68,6 +70,7 @@ public final class HtmlElementStore {
     public static final String OPTION_ELEMENT = HTML.Tag.OPTION.toString();
     public static final String OPTGROUP_ELEMENT = "optgroup";
     public static final String P_ELEMENT = HTML.Tag.P.toString();
+    public static final String SAMP_ELEMENT = HTML.Tag.SAMP.toString();
     public static final String SELECT_ELEMENT = HTML.Tag.SELECT.toString();
     public static final String SCRIPT_ELEMENT = HTML.Tag.SPAN.toString();
     public static final String SPAN_ELEMENT = HTML.Tag.SPAN.toString();
@@ -79,7 +82,9 @@ public final class HtmlElementStore {
     public static final String TEXTAREA_ELEMENT = HTML.Tag.TEXTAREA.toString();
     public static final String TH_ELEMENT = HTML.Tag.TH.toString();
     public static final String TITLE_ELEMENT = HTML.Tag.TITLE.toString();
+    public static final String TT_ELEMENT = HTML.Tag.TT.toString();
     public static final String UL_ELEMENT = HTML.Tag.UL.toString();
+    public static final String VAR_ELEMENT = HTML.Tag.VAR.toString();
     
     /**
      * Private constructor. This class handles keys and must not be instanciated

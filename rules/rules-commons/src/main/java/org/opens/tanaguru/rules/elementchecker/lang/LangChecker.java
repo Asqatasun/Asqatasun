@@ -63,6 +63,11 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
     private static final int DISPLAYABLE_TEXT_SIZE = 200;
     private static final String[] EXCLUDED_ELEMENTS = {
                 HtmlElementStore.SCRIPT_ELEMENT, 
+                HtmlElementStore.CODE_ELEMENT, 
+                HtmlElementStore.KBD_ELEMENT, 
+                HtmlElementStore.SAMP_ELEMENT, 
+                HtmlElementStore.TT_ELEMENT, 
+                HtmlElementStore.VAR_ELEMENT, 
                 HtmlElementStore.NO_FRAMES_ELEMENT, 
                 HtmlElementStore.NO_SCRIPT_ELEMENT, 
                 };
