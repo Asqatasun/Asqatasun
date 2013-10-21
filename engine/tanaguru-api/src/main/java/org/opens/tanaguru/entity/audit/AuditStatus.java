@@ -36,6 +36,7 @@ public enum AuditStatus {
         SCENARIO_LOADING,
         ERROR,
         INITIALISATION,
+        PENDING,
         PROCESSING;
 
 }
