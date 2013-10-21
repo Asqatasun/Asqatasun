@@ -102,9 +102,9 @@ public class UploadAuditCommandImpl extends AuditCommandImpl {
         //call the load content service to convert files into SSP and link it
         //to the appropriate webResource
         List<Content> contentList = contentLoaderService.loadContent(getAudit().getSubject(), fileMap);
-        System.out.println("loadContent UploadAuditCommandImpl4");
+
         for (Content content : contentList) {
-            System.out.println("loadContent UploadAuditCommandImpl5");
+
             content.setAudit(getAudit());
             try {
                 getContentDataService().saveOrUpdate(content);
@@ -113,7 +113,7 @@ public class UploadAuditCommandImpl extends AuditCommandImpl {
                 break;
             }
         }
-        System.out.println("loadContent UploadAuditCommandImpl6");
+
         setStatusToAudit(AuditStatus.CONTENT_ADAPTING);
         if (LOGGER.isInfoEnabled()) {
             LOGGER.info(fileMap +" has been loaded");
