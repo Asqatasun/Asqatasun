@@ -4,13 +4,13 @@
      <parent>
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
-        <version>3.0.0-SNAPSHOT</version>
+        <version>3.0.0-beta5</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>rgaa2.2-resources</artifactId>
     <name>rgaa2.2-resources</name>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-beta3</version>
     <url>http://www.tanaguru.org</url>
 </project>
 
