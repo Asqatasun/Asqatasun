@@ -22,10 +22,8 @@
 package org.opens.tgol.controller;
 
 import java.util.*;
-import org.apache.commons.httpclient.URIException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.archive.net.UURIFactory;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.parameterization.Parameter;
@@ -345,12 +343,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
         List<String> trueUrl = new ArrayList<String>();
         for (String str : auditSetUpCommand.getUrlList()) {
             if (StringUtils.isNotBlank(str)) {
-                try {
-                    trueUrl.add(urlCounter, UURIFactory.getInstance(str.trim()).getEscapedURI());
-                } catch (URIException ex) {
-                    Logger.getLogger(this.getClass()).warn(ex);
-                    trueUrl.add(urlCounter, str.trim());
-                }
+                trueUrl.add(urlCounter, str.trim());
                 urlCounter++;
             }
         }
