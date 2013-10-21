@@ -295,6 +295,11 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         fireNewSSP(url, sourceCode, snapshot, jsScriptMap);
     }
 
+    /**
+     * 
+     * @param url
+     * @return the page instance for a given URL
+     */
     private Page getWebResource(String url) {
         Page page = null;
         if (webResource instanceof Page) {
