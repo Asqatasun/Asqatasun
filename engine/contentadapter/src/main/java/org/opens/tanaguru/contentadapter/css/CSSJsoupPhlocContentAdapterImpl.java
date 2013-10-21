@@ -27,8 +27,6 @@ import com.phloc.css.ECSSVersion;
 import com.phloc.css.decl.CSSImportRule;
 import com.phloc.css.decl.CSSMediaQuery;
 import com.phloc.css.decl.CascadingStyleSheet;
-import com.phloc.css.handler.ICSSParseExceptionHandler;
-import com.phloc.css.parser.ParseException;
 import com.phloc.css.parser.TokenMgrError;
 import com.phloc.css.reader.CSSReader;
 import com.phloc.css.tools.MediaQueryTools;
@@ -74,8 +72,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
 
     private static final Logger LOGGER = Logger.getLogger(CSSJsoupPhlocContentAdapterImpl.class);
     private static final String HTTP_PREFIX = "http";
-    private static final String CSS_ON_ERROR = "CSS_ON_ERROR";
-
+    
     private String currentLocalResourcePath;
     private Set<StylesheetContent> relatedExternalCssSet =
             new HashSet<StylesheetContent>();
@@ -473,7 +470,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
                         resource.getResource(), 
                         charset, 
                         ECSSVersion.CSS30,
-                        new CSSParseExceptionHandlerImpl(stylesheetContent));
+                        new CSSParserExceptionHandlerImpl(stylesheetContent));
                 // if an exception has been caught, the adapted content attribute 
                 // has been set to "on error" and so is not null
                 if (stylesheetContent.getAdaptedContent() == null) {
@@ -518,29 +515,5 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
         }
         return base;
     }
-    
-    /**
-     * Inner class to handle exception encountered while parse the css. 
-     * The adapted content is set as "ON ERROR" and extra info are added (line 
-     * and column position where the problem occured.
-     */
-    private class CSSParseExceptionHandlerImpl implements ICSSParseExceptionHandler {
-        
-        private StylesheetContent css;
-        public CSSParseExceptionHandlerImpl(StylesheetContent css) {
-            this.css = css;
-        }
-        
-        @Override
-        public void onException(ParseException extype) {
-            int line  = extype.currentToken.next.beginLine;
-            int column  = extype.currentToken.next.beginColumn;
-            this.css.setAdaptedContent(CSS_ON_ERROR+'l'+line+'c'+column);
-            LOGGER.warn("Error on adaptation " + css.getURI() + " "+css.getSource());
-            LOGGER.warn(extype.currentToken.getValue());
-            LOGGER.warn(extype.getMessage());
-        }
-
-    };
     
 }
