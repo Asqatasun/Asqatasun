@@ -183,7 +183,8 @@ public class Tanaguru implements AuditServiceListener {
                 if (!isValidSiteUrl(cl)) {
                     printUsage();
                 } else {
-
+                    System.out.println("Functionnality is not working on cli interface");
+                    printUsage();
                 }
             }
         } catch (ParseException ex) {
