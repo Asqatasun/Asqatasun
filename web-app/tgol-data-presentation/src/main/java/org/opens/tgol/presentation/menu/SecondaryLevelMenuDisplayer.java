@@ -40,7 +40,7 @@ import org.springframework.ui.Model;
  * 
  * @author jkowalczyk
  */
-public final class SecondaryLevelMenuDisplayer {
+public class SecondaryLevelMenuDisplayer {
 
     List<String> referentialWithModifiableTestWeight = new ArrayList<String>();
     public void setReferentialWithModifiableTestWeight(
@@ -60,7 +60,7 @@ public final class SecondaryLevelMenuDisplayer {
     /**
      * private constructor
      */
-    private SecondaryLevelMenuDisplayer() {}
+    public SecondaryLevelMenuDisplayer() {}
 
     /**
      * If the current user owns contracts with modifiable test weight 

@@ -32,7 +32,7 @@ public class JavaScriptListImpl implements JavaScriptList {
 
     private List<JSResource> javaScriptList;
 
-    private JavaScriptListImpl() {
+    public JavaScriptListImpl() {
         super();
         this.javaScriptList = new ArrayList<JSResource>();
     }
