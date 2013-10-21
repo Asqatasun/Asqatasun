@@ -198,7 +198,7 @@
                                                             <c:set var="disabled" scope="page" value=""/>
                                                         </c:otherwise>
                                                     </c:choose>
-                                                    <option value="${level.value}" ${selected} ${disabled}><spring:message code="${level.i18nKey}"/></option>
+                                                    <option value="${level.value}" ${selected} ${disabled}><spring:message code="${level.i18nKey}"/> (<spring:message code="${group.key}-optgroup"/>)</option>
                                                     </c:forEach><!-- for each element of a referentiel -->
                                                 </optgroup>
                                             </c:forEach>
