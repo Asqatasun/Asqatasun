@@ -1,7 +1,9 @@
-                   ------------------------------
-                             Tanaguru
-                            Version 1.5.0
-                  ------------------------------
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+---------------------------------Tanaguru-----------------------------------
+---------------------------Version 3.0.0-SNAPSHOT---------------------------
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
 
 1. Web Resources
 ================
@@ -15,7 +17,7 @@ All things about tanaguru are available from there.
 
 The latest version and the sources of Tanaguru can be found at:
 
-	http://www.tanaguru.org/download/
+	http://www.tanaguru.org/Download/tanaguru-latest.tar.gz
 
 If you think you found a bug in this version, please make sure that it
 hasn't been reported earlier and that it is not just new stuff that is
@@ -47,7 +49,7 @@ that can be found at :
 For detailed installation instructions, please refer to the wiki documentation
 that can be found at :
 
-        http://www.tanaguru.org/content/installation
+        http://www.tanaguru.org/content/installation-3x
 
 5. Configuration
 ================
