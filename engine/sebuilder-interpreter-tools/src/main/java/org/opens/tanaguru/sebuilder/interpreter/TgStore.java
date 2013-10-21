@@ -33,7 +33,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class TgStore extends Store {
 
-    private static String TANAGURU_GET_PAGE_VARIABLE = "tanaguru";
+    private static final String TANAGURU_GET_PAGE_VARIABLE = "tanaguru";
     
     public TgStore(Getter getter) {
         super(getter);
