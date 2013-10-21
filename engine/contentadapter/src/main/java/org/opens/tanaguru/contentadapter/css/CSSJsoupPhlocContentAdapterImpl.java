@@ -360,6 +360,9 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
         } catch (IllegalCharsetNameException icne) {
             LOGGER.debug("the resource " + cssAbsolutePath + " can't be retrieved : IllegalCharsetNameException");
             cssSourceCode = CSS_ON_ERROR;
+        } catch (IllegalStateException ise) {
+            LOGGER.debug("the resource " + cssAbsolutePath + " can't be retrieved : IllegalStateException");
+            cssSourceCode = CSS_ON_ERROR;
         }
         if (StringUtils.isBlank(cssSourceCode)) {
             LOGGER.debug("the resource " + cssAbsolutePath + " has an empty content");
