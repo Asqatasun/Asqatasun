@@ -97,9 +97,8 @@ public class UploadAuditCommandImpl extends AuditCommandImpl {
             setStatusToAudit(AuditStatus.ERROR);
             return;
         }
-        System.out.println("loadContent UploadAuditCommandImpl2");
+
         createWebResources();
-        System.out.println("loadContent UploadAuditCommandImpl3");
         //call the load content service to convert files into SSP and link it
         //to the appropriate webResource
         List<Content> contentList = contentLoaderService.loadContent(getAudit().getSubject(), fileMap);
