@@ -423,7 +423,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             String projectName) {
         
         String emailSubject = bundle.getString(SUCCESS_SUBJECT_KEY).
-                replaceAll(PROJECT_NAME_TO_REPLACE, projectName.toString());
+                replaceAll(PROJECT_NAME_TO_REPLACE, projectName);
         
         String messageContent = bundle.getString(SUCCESS_MSG_CONTENT_KEY);
         messageContent = messageContent.replaceAll(URL_TO_REPLACE, buildResultUrl(act));
@@ -445,7 +445,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             String emailFrom, 
             Set<String> emailTo,
             String projectName) {
-        String emailSubject = bundle.getString(ERROR_SUBJECT_KEY).replaceAll(PROJECT_NAME_TO_REPLACE, projectName.toString());
+        String emailSubject = bundle.getString(ERROR_SUBJECT_KEY).replaceAll(PROJECT_NAME_TO_REPLACE, projectName);
         String messageContent;
         if (act.getScope().getCode().equals(ScopeEnum.DOMAIN)) {
             messageContent = bundle.getString(SITE_ERROR_MSG_CONTENT_KEY);
@@ -475,7 +475,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
                 emailFrom, 
                 emailToSet, 
                 emailSubject, 
-                emailMessage.toString());
+                emailMessage);
     }
     
     /**
