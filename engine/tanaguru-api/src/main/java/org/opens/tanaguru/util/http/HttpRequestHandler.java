@@ -293,7 +293,7 @@ public class HttpRequestHandler {
     
     private String getEncodedUrl(String url) {
         try {
-            return URIUtil.encodeQuery(url) ;
+            return URIUtil.encodeQuery(URIUtil.decode(url));
         } catch (URIException ue) {
             LOGGER.warn("URIException on " + url);
             return url;
