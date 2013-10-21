@@ -251,13 +251,13 @@ public abstract class AuditCommandImpl implements AuditCommand {
                     .append(WAS_REQUIRED_LOGGER_STR).toString());
             return;
         }
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("Adapting " + audit.getSubject().getURL());
-        }
+        
+        LOGGER.info("Adapting " + audit.getSubject().getURL());
+        
         // debug tools
-        Date beginProcessDate = null;
-        Date endRetrieveDate = null;
-        Date endProcessDate = null;
+        Date beginProcessDate;
+        Date endRetrieveDate;
+        Date endProcessDate;
         Date endPersistDate;
         Long persistenceDuration = Long.valueOf(0);
 
@@ -272,16 +272,16 @@ public abstract class AuditCommandImpl implements AuditCommand {
         }
         
         while (i.compareTo(nbOfContent) < 0) {
-            if (LOGGER.isDebugEnabled()) {
-                beginProcessDate = Calendar.getInstance().getTime();
-                LOGGER.debug(
+
+            beginProcessDate = Calendar.getInstance().getTime();
+            LOGGER.debug(
                         new StringBuilder("Adapting ssp from  ")
                             .append(i)
                             .append(TO_LOGGER_STR)
                             .append(i + adaptationTreatmentWindow)
                             .append(" for ")
                             .append(audit.getSubject().getURL()).toString());
-            }
+
             List<Content> contentList = retrieveContentList(
                                             webResourceId, 
                                             i, 
@@ -289,9 +289,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
                                             beginProcessDate, 
                                             false, 
                                             true);
-            if (LOGGER.isDebugEnabled()) {
-                endRetrieveDate = Calendar.getInstance().getTime();
-            }
+            endRetrieveDate = Calendar.getInstance().getTime();
             
             Set<Content> contentSet = new HashSet<Content>();
             // Set the referential to the contentAdapterService due to different
@@ -299,34 +297,30 @@ public abstract class AuditCommandImpl implements AuditCommand {
             // implementations will be based on jsoup.
             contentSet.addAll(contentAdapterService.adaptContent(contentList, referential));
             
-            if (LOGGER.isDebugEnabled()) {
-                endProcessDate = Calendar.getInstance().getTime();
-                LOGGER.debug(
-                        new StringBuilder("Adapting  ")
+            endProcessDate = Calendar.getInstance().getTime();
+            LOGGER.debug(
+                    new StringBuilder("Adapting  ")
                             .append(contentList.size())
                             .append(SSP_TOOK_LOGGER_STR)
                             .append(endProcessDate.getTime() - endRetrieveDate.getTime())
                             .append(MS_LOGGER_STR)
                             .append(contentSet.size()).toString());
-            }
 
             hasCorrectDOM = hasCorrectDOM || hasContentSetAtLeastOneCorrectDOM(contentSet);
             
             this.encodeSourceAndPersistContentList(contentSet);
 
-            if (LOGGER.isDebugEnabled()) {
-                endPersistDate = Calendar.getInstance().getTime();
-                LOGGER.debug(
-                        new StringBuilder("Persisting  ") 
-                            .append(contentSet.size())
-                            .append(SSP_TOOK_LOGGER_STR) 
-                            .append(endPersistDate.getTime() - endProcessDate.getTime())
-                            .append(MS_LOGGER_STR)
-                            .append("for ")
-                            .append(audit.getSubject().getURL()).toString());
-                persistenceDuration = persistenceDuration
-                        + (endPersistDate.getTime() - endProcessDate.getTime());
-            }
+            endPersistDate = Calendar.getInstance().getTime();
+            LOGGER.debug(
+                    new StringBuilder("Persisting  ") 
+                        .append(contentSet.size())
+                        .append(SSP_TOOK_LOGGER_STR) 
+                        .append(endPersistDate.getTime() - endProcessDate.getTime())
+                        .append(MS_LOGGER_STR)
+                        .append("for ")
+                        .append(audit.getSubject().getURL()).toString());
+            persistenceDuration = persistenceDuration
+                    + (endPersistDate.getTime() - endProcessDate.getTime());
             i = i + adaptationTreatmentWindow;
             // explicit call of the Gc
             System.gc();
@@ -347,9 +341,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
         if (adaptationListener != null) {
             adaptationListener.adaptationCompleted(audit);
         }
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info(audit.getSubject().getURL() + " has been adapted");
-        }
+        LOGGER.info(audit.getSubject().getURL() + " has been adapted");
     }
 
     /**
