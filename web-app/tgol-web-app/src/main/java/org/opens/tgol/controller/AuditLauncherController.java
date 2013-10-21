@@ -55,18 +55,18 @@ import org.springframework.ui.Model;
 public class AuditLauncherController extends AuditDataHandlerController {
 
     private static final Logger LOGGER = Logger.getLogger(AuditLauncherController.class);
-    private static String LEVEL_PARAM_KEY="LEVEL";
-    private static String PROXY_HOST_PARAM_KEY="PROXY_HOST";
-    private static String PROXY_PORT_PARAM_KEY="PROXY_PORT";
-    private static String DEPTH_PARAM_KEY="DEPTH";
-    private static String MAX_DOCUMENT_PARAM_KEY="MAX_DOCUMENTS";
-    private static String MAX_DURATION_PARAM_KEY="MAX_DURATION";
-    private static String EXCLUSION_URL_LIST_PARAM_KEY="EXCLUSION_REGEXP";
-    private static String DEPTH_PAGE_PARAM_VALUE="0";
-    private static String PROXY_HOST_CONF_KEY="proxyHost";
-    private static String PROXY_PORT_CONF_KEY="proxyPort";
-    private static String PROXY_EXCLUSION_URL_CONF_KEY="proxyExclusionUrl";
-    private static String EMAIL_SENT_TO_USER_EXCLUSION_CONF_KEY="emailSentToUserExclusionList";
+    private static final String LEVEL_PARAM_KEY="LEVEL";
+    private static final String PROXY_HOST_PARAM_KEY="PROXY_HOST";
+    private static final String PROXY_PORT_PARAM_KEY="PROXY_PORT";
+    private static final String DEPTH_PARAM_KEY="DEPTH";
+    private static final String MAX_DOCUMENT_PARAM_KEY="MAX_DOCUMENTS";
+    private static final String MAX_DURATION_PARAM_KEY="MAX_DURATION";
+    private static final String EXCLUSION_URL_LIST_PARAM_KEY="EXCLUSION_REGEXP";
+    private static final String DEPTH_PAGE_PARAM_VALUE="0";
+    private static final String PROXY_HOST_CONF_KEY="proxyHost";
+    private static final String PROXY_PORT_CONF_KEY="proxyPort";
+    private static final String PROXY_EXCLUSION_URL_CONF_KEY="proxyExclusionUrl";
+    private static final String EMAIL_SENT_TO_USER_EXCLUSION_CONF_KEY="emailSentToUserExclusionList";
             
     private String groupePagesName = "";
     /**

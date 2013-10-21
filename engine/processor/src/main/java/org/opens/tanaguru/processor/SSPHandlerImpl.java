@@ -52,8 +52,8 @@ import org.w3c.dom.Node;
  */
 public class SSPHandlerImpl implements SSPHandler {
 
-    private static String BASE64_IMAGE_PREFIX = "data:image";
-    private static char COMMA = ',';
+    private static final String BASE64_IMAGE_PREFIX = "data:image";
+    private static final char COMMA = ',';
     private CSSHandler cssHandler;
     private DOMHandler domHandler;
     private JSHandler jsHandler;

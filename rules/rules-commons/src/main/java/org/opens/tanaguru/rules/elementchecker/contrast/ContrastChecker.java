@@ -58,7 +58,6 @@ public class ContrastChecker extends ElementCheckerImpl {
     
     private static final String COLOR_EXTRACTOR_PRE_PROCESS_RESULT_KEY = "colorExtractor";
     
-//    private static final String JSON_CONSTRAST_RATIO_KEY = "contrastRatio";
     private static final String JSON_FONT_SIZE_KEY = "fontSize";
     private static final String JSON_ELEMENT_PATH_KEY = "path";
     private static final String JSON_FONT_WEIGHT_KEY = "fontWeight";
@@ -72,12 +71,10 @@ public class ContrastChecker extends ElementCheckerImpl {
     private static final String LIGHTER_WEIGHT_KEY = "lighter";
     private static final String BOLDER_WEIGHT_KEY = "bolder";
     
-//    private static final String INIT_CONTRAST_VALUE = "-1";
-    
-    private static int NORMAL_FONT_SIZE_THRESHOLD = 18;
-    private static int BOLD_FONT_SIZE_THRESHOLD = 14;
-    private static int NORMAL_FONT_WEIGHT = 400;
-    private static int BOLD_FONT_WEIGHT = 700;
+    private static final int NORMAL_FONT_SIZE_THRESHOLD = 18;
+    private static final int BOLD_FONT_SIZE_THRESHOLD = 14;
+    private static final int NORMAL_FONT_WEIGHT = 400;
+    private static final int BOLD_FONT_WEIGHT = 700;
     
     /** The contrast ratio */
     private Float contrastRatio;

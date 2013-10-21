@@ -61,10 +61,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AuditScenarioController extends AbstractAuditSetUpController {
 
-    private static String CONTENT_TYPE="text/plain";
-    private static String JSON_EXTENSION=".json";
-    private static String CONTENT_DISPOSITION="Content-Disposition";
-    private static String ATTACHMENT="attachment; filename=";
+    private static final String CONTENT_TYPE="text/plain";
+    private static final String JSON_EXTENSION=".json";
+    private static final String CONTENT_DISPOSITION="Content-Disposition";
+    private static final String ATTACHMENT="attachment; filename=";
     JRStyledTextParser j;
     private AddScenarioFormValidator addScenarioFormValidator;
     public AddScenarioFormValidator getAddScenarioFormValidator() {
