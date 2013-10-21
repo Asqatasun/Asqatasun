@@ -43,7 +43,7 @@ public class ExternalCSSRetrieverImpl implements ExternalCSSRetriever, Adaptatio
     private Map<Long, Collection<StylesheetContent>> externalCssMap =
             new HashMap<Long, Collection<StylesheetContent>>();
 
-    private static final String CSS_ON_ERROR = "CSS_ON_ERROR";
+//    private static final String CSS_ON_ERROR = "CSS_ON_ERROR";
     private boolean persistOnTheFly = true;
     private ContentDataService contentDataService;
 
@@ -119,7 +119,7 @@ public class ExternalCSSRetrieverImpl implements ExternalCSSRetriever, Adaptatio
         Collection<StylesheetContent> externalStyleSheet = externalCssMap.get(audit.getId());
         for (StylesheetContent stylesheetContent : externalStyleSheet) {
             if (stylesheetContent.getAdaptedContent() == null || stylesheetContent.getAdaptedContent().isEmpty()) {
-                stylesheetContent.setAdaptedContent(CSS_ON_ERROR);
+                stylesheetContent.setAdaptedContent(CSSContentAdapter.CSS_ON_ERROR);
                 if (persistOnTheFly) {
                     contentDataService.saveOrUpdate(stylesheetContent);
                 }

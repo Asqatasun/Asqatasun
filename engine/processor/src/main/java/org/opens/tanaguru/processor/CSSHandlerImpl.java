@@ -28,6 +28,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.httpclient.HttpStatus;
+import org.opens.tanaguru.contentadapter.css.CSSContentAdapter;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.service.ProcessRemarkService;
 
@@ -41,7 +42,6 @@ public class CSSHandlerImpl implements CSSHandler {
     private SSP ssp;
     private Map<String, CascadingStyleSheet> styleMap;
     private Collection<StylesheetContent> cssOnErrorSet;
-    private static final String CSS_ON_ERROR = "CSS_ON_ERROR";
     
     private ProcessRemarkService processRemarkService;
     @Override
@@ -66,14 +66,13 @@ public class CSSHandlerImpl implements CSSHandler {
         XStream xstream = new XStream();
         for (RelatedContent relatedContent : ssp.getRelatedContentSet()) {
             if (relatedContent instanceof StylesheetContent) {
-                if (((StylesheetContent) relatedContent).getHttpStatusCode() == HttpStatus.SC_OK
-                        && ((StylesheetContent) relatedContent).getAdaptedContent() != null
-                        && !((StylesheetContent) relatedContent).getAdaptedContent().startsWith(CSS_ON_ERROR)) {
+                StylesheetContent sc = (StylesheetContent) relatedContent;
+                if (isStylesheetTestable(sc)) {
                     styleMap.put(((Content) relatedContent).getURI(),
-                                (CascadingStyleSheet) xstream.fromXML(
-                                ((StylesheetContent) relatedContent).getAdaptedContent()));
+                                    (CascadingStyleSheet) xstream.fromXML(
+                                        (sc).getAdaptedContent()));
                 } else {
-                    addStylesheetOnError((StylesheetContent) relatedContent);
+                    addStylesheetOnError(sc);
                 }
             }
         }
@@ -133,4 +132,42 @@ public class CSSHandlerImpl implements CSSHandler {
         return cssOnErrorSet;
     }
 
+    /**
+     * 
+     * @param stylesheetContent
+     * @return whether the current stylesheet can be tested
+     */
+    private boolean isStylesheetTestable(StylesheetContent stylesheetContent) {
+        return isStylesheetStatusOk(stylesheetContent) && 
+                !isStylesheetNull(stylesheetContent) 
+                && !isStylesheetOnError(stylesheetContent);
+    }
+    
+    /**
+     * 
+     * @param stylesheetContent
+     * @return whether the current stylesheet http status code returned 200
+     */
+    private boolean isStylesheetStatusOk(StylesheetContent stylesheetContent) {
+        return stylesheetContent.getHttpStatusCode() == HttpStatus.SC_OK;
+    }
+    
+    /**
+     * 
+     * @param stylesheetContent
+     * @return whether the current stylesheet is null
+     */
+    private boolean isStylesheetNull(StylesheetContent stylesheetContent) {
+        return stylesheetContent.getAdaptedContent() == null;
+    }
+    
+    /**
+     * 
+     * @param stylesheetContent
+     * @return whether an error occured while parsing the current stylesheet
+     */
+    private boolean isStylesheetOnError(StylesheetContent stylesheetContent) {
+        return stylesheetContent.getAdaptedContent().
+                startsWith(CSSContentAdapter.CSS_ON_ERROR);
+    }
 }
