@@ -151,8 +151,10 @@
         <fileSet>
             <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/sql-management</directory>
             <includes>
+                <include>create-contract-procedure.sql</include>
                 <include>tg-set-user-admin.sh</include>
                 <include>tg-create-user.sh</include>
+                <include>tg-create-contract.sh</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install/web-app/sql-management</outputDirectory>
