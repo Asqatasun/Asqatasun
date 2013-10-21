@@ -195,7 +195,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
                     // if the token is valid but the request comes from the 
                     // form submission with success
                     Object passwordModified = model.asMap().get(TgolKeyStore.PASSWORD_MODIFIED_KEY);
-                    if (passwordModified != null && passwordModified instanceof Boolean &&
+                    if (passwordModified instanceof Boolean &&
                             (Boolean)passwordModified) {
                         TgolTokenHelper.getInstance().setTokenUsed(token);
                         return TgolKeyStore.CHANGE_PASSWORD_VIEW_NAME;

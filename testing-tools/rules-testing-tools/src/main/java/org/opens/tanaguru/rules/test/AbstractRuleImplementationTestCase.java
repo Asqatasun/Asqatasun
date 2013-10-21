@@ -511,7 +511,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
             }
             if (contentMap.containsKey(entry.getValue()) && !contentMap.get(entry.getValue()).isEmpty()) {
                 Content content = contentMap.get(entry.getValue()).iterator().next();
-                if (content != null && content instanceof SSP) {
+                if (content instanceof SSP) {
                     ((SSP)content).setAudit(audit);
                 }
             }
