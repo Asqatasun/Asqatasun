@@ -199,21 +199,21 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
     @Override
     public void auditCompleted(AuditServiceThread thread) {
         fireAuditCompleted(thread.getAudit());
-        thread.remove(this);
-        if (pageAuditExecutionList.remove(thread)) {
-            processPageAuditWaitQueue();
-        } else if (scenarioAuditExecutionList.remove(thread)) {
-            processScenarioAuditWaitQueue();
-        } else if (uploadAuditExecutionList.remove(thread)) {
-            processPageUploadAuditWaitQueue();
-        } else {
-            siteAuditExecutionList.remove(thread);
-        }
+        terminateProperlyAudit(thread);
     }
 
     @Override
     public void auditCrashed(AuditServiceThread thread, Exception exception) {
         fireAuditCrashed(thread.getAudit(), exception);
+        terminateProperlyAudit(thread);
+    }
+
+    /**
+     * Interrogate each execution List to properly remove the current thread
+     * and eventually launch audit waiting in the queue
+     * @param thread 
+     */
+    private void terminateProperlyAudit(AuditServiceThread thread){
         thread.remove(this);
         if (pageAuditExecutionList.remove(thread)) {
             processPageAuditWaitQueue();
@@ -221,8 +221,8 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
             processScenarioAuditWaitQueue();
         } else if (uploadAuditExecutionList.remove(thread)) {
             processPageUploadAuditWaitQueue();
-        } else {
-            siteAuditExecutionList.remove(thread);
+        } else if (siteAuditExecutionList.remove(thread)) {
+            processSiteAuditWaitQueue();
         }
     }
 

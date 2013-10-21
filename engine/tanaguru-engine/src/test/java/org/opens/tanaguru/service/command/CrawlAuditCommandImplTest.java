@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2013  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -41,7 +41,7 @@ public class CrawlAuditCommandImplTest extends AuditCommandTestCase {
     protected void setUp() throws Exception {
         super.setUp();
         mockCrawlerService = EasyMock.createMock(CrawlerService.class);
-        mockInitialisationCalls(false, null);
+        mockConstructorCalls();
     }
     
     @Override
@@ -55,19 +55,12 @@ public class CrawlAuditCommandImplTest extends AuditCommandTestCase {
     public void testGetCrawlerService() {
         System.out.println("getCrawlerService");
         
-//        EasyMock.replay(mockAudit);
-//        EasyMock.replay(mockAuditDataService);
-//        EasyMock.replay(mockTestDataService);
-//        EasyMock.replay(mockParameterDataService);
+        setReplayMode();
         
         CrawlAuditCommandImpl instance = new TestCrawlAuditCommandImpl();
         
         assertEquals(mockCrawlerService, instance.getCrawlerService());
-        
-//        EasyMock.verify(mockAudit);
-//        EasyMock.verify(mockAuditDataService);
-//        EasyMock.verify(mockTestDataService);
-//        EasyMock.verify(mockParameterDataService);
+        setVerifyMode();
     }
 
     /**
@@ -75,25 +68,21 @@ public class CrawlAuditCommandImplTest extends AuditCommandTestCase {
      */
     public void testInit() {
         System.out.println("init");
+
+        mockInitialisationCalls(false, null);
         
         mockAudit.setStatus(AuditStatus.CRAWLING);
         EasyMock.expectLastCall().once();
         
         EasyMock.expect(mockAuditDataService.saveOrUpdate(mockAudit)).andReturn(mockAudit).once();
         
-        EasyMock.replay(mockAudit);
-        EasyMock.replay(mockAuditDataService);
-        EasyMock.replay(mockTestDataService);
-        EasyMock.replay(mockParameterDataService);
+        setReplayMode();
         
         CrawlAuditCommandImpl instance = new TestCrawlAuditCommandImpl();
         
         instance.init();
 
-        EasyMock.verify(mockAudit);
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockParameterDataService);
+        setVerifyMode();
     }
 
     /**
@@ -102,6 +91,9 @@ public class CrawlAuditCommandImplTest extends AuditCommandTestCase {
     public void testLoadContent() {
         System.out.println("loadContent");
         
+        mockInitialisationCalls(false, null);
+        
+        // expecting part
         mockAudit.setStatus(AuditStatus.CRAWLING);
         EasyMock.expectLastCall().once();
         
@@ -115,20 +107,26 @@ public class CrawlAuditCommandImplTest extends AuditCommandTestCase {
         
         EasyMock.expect(mockAuditDataService.saveOrUpdate(mockAudit)).andReturn(mockAudit).once();
         
-        EasyMock.replay(mockAudit);
-        EasyMock.replay(mockAuditDataService);
-        EasyMock.replay(mockTestDataService);
-        EasyMock.replay(mockParameterDataService);
-        EasyMock.replay(mockContentDataService);
+        setReplayMode();
         
+        // test
         CrawlAuditCommandImpl instance = new TestCrawlAuditCommandImpl();
         instance.init();
         instance.loadContent();
         
-        EasyMock.verify(mockAudit);
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockParameterDataService);
+        // verification
+        setVerifyMode();
+    }
+
+   @Override
+    protected void setReplayModeOfLocalMocks() {
+        EasyMock.replay(mockCrawlerService);
+        EasyMock.replay(mockContentDataService);
+    }
+
+    @Override
+    protected void setVerifyModeOfLocalMocks() {
+        EasyMock.verify(mockCrawlerService);
         EasyMock.verify(mockContentDataService);
     }
 

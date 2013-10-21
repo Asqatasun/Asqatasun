@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2013  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -43,6 +43,7 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
     protected void setUp() throws Exception {
         super.setUp();
         mockScenarioLoaderService = createMock(ScenarioLoaderService.class);
+        mockConstructorCalls();
         mockInitialisationCalls(false, null);
     }
     
@@ -62,19 +63,13 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
         
         expect(mockAuditDataService.saveOrUpdate(mockAudit)).andReturn(mockAudit).once();
         
-        replay(mockAudit);
-        replay(mockAuditDataService);
-        replay(mockTestDataService);
-        replay(mockParameterDataService);
+        setReplayMode();
         
         AbstractScenarioAuditCommandImpl instance = new TestAbstractScenarioAuditCommandImpl();
         
         instance.init();
 
-        verify(mockAudit);
-        verify(mockAuditDataService);
-        verify(mockTestDataService);
-        verify(mockParameterDataService);
+        setVerifyMode();
     }
 
     /**
@@ -109,13 +104,8 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
         expect(mockWebResourceDataService.createPage(myUrl)).andReturn(mockPage).once();
         expect(mockWebResourceDataService.saveOrUpdate(mockPage)).andReturn(mockPage).once();
         
-        replay(mockAudit);
-        replay(mockAuditDataService);
-        replay(mockTestDataService);
-        replay(mockParameterDataService);
-        replay(mockWebResourceDataService);
-        replay(mockScenarioLoaderService);
         replay(mockPage);
+        setReplayMode();
         
         AbstractScenarioAuditCommandImpl instance = new TestAbstractScenarioAuditCommandImpl();
         instance.setScenarioName(myUrl);
@@ -124,13 +114,8 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
         instance.init();
         instance.loadContent();
         
-        verify(mockAudit);
-        verify(mockAuditDataService);
-        verify(mockTestDataService);
-        verify(mockParameterDataService);
-        verify(mockWebResourceDataService);
-        verify(mockScenarioLoaderService);
         verify(mockPage);
+        setVerifyMode();
     }
     
     /**
@@ -165,13 +150,8 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
         expect(mockWebResourceDataService.createSite(myUrl)).andReturn(mockSite).once();
         expect(mockWebResourceDataService.saveOrUpdate(mockSite)).andReturn(mockSite).once();
         
-        replay(mockAudit);
-        replay(mockAuditDataService);
-        replay(mockTestDataService);
-        replay(mockParameterDataService);
-        replay(mockWebResourceDataService);
-        replay(mockScenarioLoaderService);
         replay(mockSite);
+        setReplayMode();
         
         AbstractScenarioAuditCommandImpl instance = new TestAbstractScenarioAuditCommandImpl();
         instance.setScenarioName(myUrl);
@@ -180,13 +160,18 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
         instance.init();
         instance.loadContent();
         
-        verify(mockAudit);
-        verify(mockAuditDataService);
-        verify(mockTestDataService);
-        verify(mockParameterDataService);
-        verify(mockWebResourceDataService);
-        verify(mockScenarioLoaderService);
         verify(mockSite);
+        setVerifyMode();
+    }
+
+    @Override
+    protected void setReplayModeOfLocalMocks() {
+        replay(mockScenarioLoaderService);
+    }
+
+    @Override
+    protected void setVerifyModeOfLocalMocks() {
+        verify(mockScenarioLoaderService);
     }
 
     public class TestAbstractScenarioAuditCommandImpl extends AbstractScenarioAuditCommandImpl {

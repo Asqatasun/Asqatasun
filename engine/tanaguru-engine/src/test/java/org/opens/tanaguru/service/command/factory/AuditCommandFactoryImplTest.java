@@ -29,6 +29,7 @@ import junit.framework.TestCase;
 import org.easymock.EasyMock;
 import org.opens.tanaguru.contentadapter.AdaptationListener;
 import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
@@ -74,37 +75,18 @@ public class AuditCommandFactoryImplTest extends TestCase {
         super.setUp();
         
         mockAuditDataService = EasyMock.createMock(AuditDataService.class);
-        mockTestDataService = EasyMock.createMock(TestDataService.class);
-        mockParameterDataService = EasyMock.createMock(ParameterDataService.class);
-        mockWebResourceDataService = EasyMock.createMock(WebResourceDataService.class); 
-        mockContentDataService = EasyMock.createMock(ContentDataService.class);
-        mockContentLoaderService = EasyMock.createMock(ContentLoaderService.class);
-        mockScenarioLoaderService = EasyMock.createMock(ScenarioLoaderService.class);
-        mockProcessResultDataService = EasyMock.createMock(ProcessResultDataService.class);
-        mockContentAdapterService = EasyMock.createMock(ContentAdapterService.class);
-        mockProcessorService = EasyMock.createMock(ProcessorService.class);
-        mockCrawlerService = EasyMock.createMock(CrawlerService.class);
-        mockConsolidatorService = EasyMock.createMock(ConsolidatorService.class);
-        mockAnalyserService = EasyMock.createMock(AnalyserService.class);
-        mockAdaptationListener = EasyMock.createMock(AdaptationListener.class);
+        mockAudit = EasyMock.createMock(Audit.class);
         
+        EasyMock.expect(mockAuditDataService.create()).andReturn(mockAudit);
+        mockAudit.setStatus(AuditStatus.PENDING);
+        EasyMock.expectLastCall().once();
+        EasyMock.expect(mockAuditDataService.saveOrUpdate(mockAudit)).andReturn(mockAudit).once();
+
+        EasyMock.replay(mockAuditDataService);
+        EasyMock.replay(mockAudit);
+
         auditCommandFactory = new AuditCommandFactoryImpl();
-        
-        auditCommandFactory.setAdaptationListener(mockAdaptationListener);
-        auditCommandFactory.setAnalyserService(mockAnalyserService);
         auditCommandFactory.setAuditDataService(mockAuditDataService);
-        auditCommandFactory.setConsolidatorService(mockConsolidatorService);
-        auditCommandFactory.setContentDataService(mockContentDataService);
-        auditCommandFactory.setContentLoaderService(mockContentLoaderService);
-        auditCommandFactory.setCrawlerService(mockCrawlerService);
-        auditCommandFactory.setParameterDataService(mockParameterDataService);
-        auditCommandFactory.setProcessResultDataService(mockProcessResultDataService);
-        auditCommandFactory.setProcessorService(mockProcessorService);
-        auditCommandFactory.setContentAdapterService(mockContentAdapterService);
-        auditCommandFactory.setScenarioLoaderService(mockScenarioLoaderService);
-        auditCommandFactory.setTestDataService(mockTestDataService);
-        auditCommandFactory.setWebResourceDataService(mockWebResourceDataService);
-        
     }
     
     @Override
@@ -117,13 +99,16 @@ public class AuditCommandFactoryImplTest extends TestCase {
      */
     public void testCreate_3args_1() {
         System.out.println("create PageAuditCommand with crawler");
+        
         String url = "";
         Set<Parameter> paramSet = null;
         boolean isSite = false;
         auditCommandFactory.setAuditPageWithCrawler(true);
         AuditCommand result = this.auditCommandFactory.create(url, paramSet, isSite);
+        
         assertTrue(result instanceof PageAuditCrawlerCommandImpl);
- 
+        EasyMock.verify(mockAuditDataService);
+        EasyMock.verify(mockAudit);
     }
     
     /**
@@ -137,7 +122,8 @@ public class AuditCommandFactoryImplTest extends TestCase {
         auditCommandFactory.setAuditPageWithCrawler(false);
         AuditCommand result = this.auditCommandFactory.create(url, paramSet, isSite);
         assertTrue(result instanceof PageAuditCommandImpl);
-
+        EasyMock.verify(mockAuditDataService);
+        EasyMock.verify(mockAudit);
     }
     
     /**
@@ -152,7 +138,8 @@ public class AuditCommandFactoryImplTest extends TestCase {
 
         AuditCommand result = this.auditCommandFactory.create(url, paramSet, isSite);
         assertTrue(result instanceof SiteAuditCommandImpl);
- 
+        EasyMock.verify(mockAuditDataService);
+        EasyMock.verify(mockAudit);
     }
 
     /**
@@ -165,7 +152,8 @@ public class AuditCommandFactoryImplTest extends TestCase {
         
         AuditCommand result = this.auditCommandFactory.create(fileMap, paramSet);
         assertTrue(result instanceof UploadAuditCommandImpl);
-
+        EasyMock.verify(mockAuditDataService);
+        EasyMock.verify(mockAudit);
     }
 
     /**
@@ -180,7 +168,8 @@ public class AuditCommandFactoryImplTest extends TestCase {
         auditCommandFactory.setAuditPageWithCrawler(true);
         AuditCommand result = this.auditCommandFactory.create(siteUrl, pageUrlList, paramSet);
         assertTrue(result instanceof GroupOfPagesCrawlerAuditCommandImpl);
-       
+        EasyMock.verify(mockAuditDataService);
+        EasyMock.verify(mockAudit);
     }
     
     /**
@@ -195,6 +184,8 @@ public class AuditCommandFactoryImplTest extends TestCase {
         auditCommandFactory.setAuditPageWithCrawler(false);
         AuditCommand result = this.auditCommandFactory.create(siteUrl, pageUrlList, paramSet);
         assertTrue(result instanceof GroupOfPagesAuditCommandImpl);
+        EasyMock.verify(mockAuditDataService);
+        EasyMock.verify(mockAudit);
     }
 
     /**
@@ -208,6 +199,8 @@ public class AuditCommandFactoryImplTest extends TestCase {
         
         AuditCommand result = this.auditCommandFactory.create(scenarioName, scenario, paramSet);
         assertTrue(result instanceof ScenarioAuditCommandImpl);
+        EasyMock.verify(mockAuditDataService);
+        EasyMock.verify(mockAudit);
     }
     
 }

@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2013  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -70,6 +70,7 @@ public abstract class AuditCommandTestCase extends TestCase{
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+        mockAudit = EasyMock.createMock(Audit.class);
         mockAuditDataService = EasyMock.createMock(AuditDataService.class);
         mockTestDataService = EasyMock.createMock(TestDataService.class);
         mockParameterDataService = EasyMock.createMock(ParameterDataService.class);
@@ -92,23 +93,23 @@ public abstract class AuditCommandTestCase extends TestCase{
     protected void mockInitialisationCalls(
             boolean isMockInReplayMode,
             AuditStatus expectedAuditStatus) {
+        
         Set<Parameter> nullParameterSet = null ;
         EasyMock.expect(mockParameterDataService.saveOrUpdate(nullParameterSet)).andReturn(nullParameterSet).once();
         
         List<Test> testList = null;
         EasyMock.expect(mockTestDataService.getTestListFromParamSet(nullParameterSet)).andReturn(testList).once();
-        
-        mockAudit = EasyMock.createMock(Audit.class);
-
-        EasyMock.expect(mockAuditDataService.create()).andReturn(mockAudit).once();
 
         mockAudit.setTestList(testList);
         EasyMock.expectLastCall().once();
+        
         mockAudit.setParameterSet(nullParameterSet);
         EasyMock.expectLastCall().once();
+
         mockAudit.setStatus(AuditStatus.INITIALISATION);
         EasyMock.expectLastCall().once();
         EasyMock.expect(mockAuditDataService.saveOrUpdate(mockAudit)).andReturn(mockAudit).once();
+        
         if (expectedAuditStatus != null) {
             mockAudit.setStatus(expectedAuditStatus);
             EasyMock.expectLastCall().once();
@@ -116,11 +117,49 @@ public abstract class AuditCommandTestCase extends TestCase{
         }
         
         if (isMockInReplayMode) {
-            EasyMock.replay(mockAudit);
-            EasyMock.replay(mockAuditDataService);
-            EasyMock.replay(mockTestDataService);
-            EasyMock.replay(mockParameterDataService);
+            setReplayMode();
         }
     }
     
+    /**
+     * 
+     * @param isMockInReplayMode 
+     */
+    protected void mockConstructorCalls() {
+        mockAudit = EasyMock.createMock(Audit.class);
+        EasyMock.expect(mockAuditDataService.create()).andReturn(mockAudit).once();
+
+        mockAudit.setStatus(AuditStatus.PENDING);
+        EasyMock.expectLastCall().once();
+        EasyMock.expect(mockAuditDataService.saveOrUpdate(mockAudit)).andReturn(mockAudit).once();
+    }
+
+    /**
+     * 
+     */
+    protected void setReplayMode() {
+        EasyMock.replay(mockAudit);
+        EasyMock.replay(mockAuditDataService);
+        EasyMock.replay(mockTestDataService);
+        EasyMock.replay(mockParameterDataService);
+        EasyMock.replay(mockWebResourceDataService);
+        setReplayModeOfLocalMocks();
+    }
+    
+    protected abstract void setReplayModeOfLocalMocks();
+    
+    /**
+     * 
+     */
+    protected void setVerifyMode() {
+        EasyMock.verify(mockAudit);
+        EasyMock.verify(mockAuditDataService);
+        EasyMock.verify(mockTestDataService);
+        EasyMock.verify(mockParameterDataService);
+        EasyMock.verify(mockWebResourceDataService);
+        setVerifyModeOfLocalMocks();
+    }
+    
+    protected abstract void setVerifyModeOfLocalMocks();
+
 }

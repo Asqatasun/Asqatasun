@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2013  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -43,6 +43,8 @@ public class PageAuditCrawlerCommandImplTest extends AuditCommandTestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+        mockCrawlerService = EasyMock.createMock(CrawlerService.class);
+        mockConstructorCalls();
     }
     
     @Override
@@ -56,18 +58,31 @@ public class PageAuditCrawlerCommandImplTest extends AuditCommandTestCase {
     public void testCallCrawlerService() {
         System.out.println("callCrawlerService");
 
-        mockInitialisationCalls(true, AuditStatus.CRAWLING);
+        mockInitialisationCalls(false, AuditStatus.CRAWLING);
         
-        mockCrawlerService = EasyMock.createMock(CrawlerService.class);
         EasyMock.expect(mockCrawlerService.crawlPage(mockAudit, FileNaming.addProtocolToUrl(pageUrl))).
                 andReturn(EasyMock.createMock(WebResource.class))
                 .once();
-        EasyMock.replay(mockCrawlerService);
         
-        PageAuditCrawlerCommandImpl pageAuditCommand = new PageAuditCrawlerCommandImpl(
+        setReplayMode();
+        
+        PageAuditCrawlerCommandImpl pageAuditCommand = getInstance();
+
+        pageAuditCommand.callCrawlerService();
+        
+        setVerifyMode();
+    }
+    
+    /**
+     * 
+     * @return an instance of PageAuditCrawlerCommandImpl class
+     */
+    private PageAuditCrawlerCommandImpl getInstance() {
+         PageAuditCrawlerCommandImpl pageAuditCommand = new PageAuditCrawlerCommandImpl(
                 pageUrl, 
                 null,
                 mockAuditDataService);
+
         pageAuditCommand.setTestDataService(mockTestDataService);
         pageAuditCommand.setParameterDataService(mockParameterDataService);
         pageAuditCommand.setWebResourceDataService(mockWebResourceDataService);
@@ -86,13 +101,18 @@ public class PageAuditCrawlerCommandImplTest extends AuditCommandTestCase {
         pageAuditCommand.setAnalyseTreatmentWindow(5);
         
         pageAuditCommand.init();
-        
-        pageAuditCommand.callCrawlerService();
-        
-        EasyMock.verify(mockCrawlerService);
-        EasyMock.verify(mockAudit);
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockParameterDataService);
+
+        return pageAuditCommand;
     }
+    
+    @Override
+    protected void setReplayModeOfLocalMocks() {
+        EasyMock.replay(mockCrawlerService);
+    }
+
+    @Override
+    protected void setVerifyModeOfLocalMocks() {
+        EasyMock.verify(mockCrawlerService);
+    }
+
 }

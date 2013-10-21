@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2013  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -33,20 +33,22 @@ import org.opens.tanaguru.service.CrawlerService;
  * @author jkowalczyk
  */
 public class GroupOfPagesCrawlerAuditCommandImplTest extends AuditCommandTestCase {
-    
+
     private String siteUrl = "My Group of Pages site Name";
     private List<String> urlList = new ArrayList<String>();
     private CrawlerService mockCrawlerService;
-    
+
     public GroupOfPagesCrawlerAuditCommandImplTest(String testName) {
         super(testName);
     }
-    
+
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+        mockCrawlerService = EasyMock.createMock(CrawlerService.class);
+        mockConstructorCalls();
     }
-    
+
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
@@ -58,20 +60,34 @@ public class GroupOfPagesCrawlerAuditCommandImplTest extends AuditCommandTestCas
     public void testCallCrawlerService() {
         System.out.println("callCrawlerService");
 
-        mockInitialisationCalls(true, AuditStatus.CRAWLING);
-        
-        mockCrawlerService = EasyMock.createMock(CrawlerService.class);
+        mockInitialisationCalls(false, AuditStatus.CRAWLING);
+
         EasyMock.expect(mockCrawlerService.crawlGroupOfPages(mockAudit, siteUrl, urlList)).
-                andReturn(EasyMock.createMock(WebResource.class))
-                .once();
-        EasyMock.replay(mockCrawlerService);
+                andReturn(EasyMock.createMock(WebResource.class)).once();
+
+        setReplayMode();
+
+        GroupOfPagesCrawlerAuditCommandImpl groupOfPagesAuditCommand =
+                getInstance();
         
-        GroupOfPagesCrawlerAuditCommandImpl groupOfPagesAuditCommand = 
+        groupOfPagesAuditCommand.callCrawlerService();
+
+        setVerifyMode();
+    }
+
+    /**
+     *
+     * @return an instance of GroupOfPagesCrawlerAuditCommandImpl class
+     */
+    private GroupOfPagesCrawlerAuditCommandImpl getInstance() {
+        
+        GroupOfPagesCrawlerAuditCommandImpl groupOfPagesAuditCommand =
                 new GroupOfPagesCrawlerAuditCommandImpl(
-                    siteUrl, 
+                    siteUrl,
                     urlList,
                     null,
                     mockAuditDataService);
+        
         groupOfPagesAuditCommand.setTestDataService(mockTestDataService);
         groupOfPagesAuditCommand.setParameterDataService(mockParameterDataService);
         groupOfPagesAuditCommand.setWebResourceDataService(mockWebResourceDataService);
@@ -88,15 +104,18 @@ public class GroupOfPagesCrawlerAuditCommandImplTest extends AuditCommandTestCas
         groupOfPagesAuditCommand.setProcessingTreatmentWindow(5);
         groupOfPagesAuditCommand.setConsolidationTreatmentWindow(5);
         groupOfPagesAuditCommand.setAnalyseTreatmentWindow(5);
-        
-        groupOfPagesAuditCommand.init();
 
-        groupOfPagesAuditCommand.callCrawlerService();
-        
+        groupOfPagesAuditCommand.init();
+        return groupOfPagesAuditCommand;
+    }
+
+    @Override
+    protected void setReplayModeOfLocalMocks() {
+        EasyMock.replay(mockCrawlerService);
+    }
+
+    @Override
+    protected void setVerifyModeOfLocalMocks() {
         EasyMock.verify(mockCrawlerService);
-        EasyMock.verify(mockAudit);
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockParameterDataService);
     }
 }

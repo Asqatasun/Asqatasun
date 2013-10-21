@@ -221,6 +221,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
         this.paramSet = paramSet;
         this.auditDataService = auditDataService;
         audit = auditDataService.create();
+        setStatusToAudit(AuditStatus.PENDING);
     }
     
     /**

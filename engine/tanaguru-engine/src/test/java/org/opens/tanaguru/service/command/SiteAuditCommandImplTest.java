@@ -42,6 +42,8 @@ public class SiteAuditCommandImplTest extends AuditCommandTestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+        mockCrawlerService = EasyMock.createMock(CrawlerService.class);
+        mockConstructorCalls();
     }
     
     @Override
@@ -55,18 +57,30 @@ public class SiteAuditCommandImplTest extends AuditCommandTestCase {
     public void testCallCrawlerService() {
         System.out.println("callCrawlerService");
 
-        mockInitialisationCalls(true, AuditStatus.CRAWLING);
+        mockInitialisationCalls(false, AuditStatus.CRAWLING);
         
-        mockCrawlerService = EasyMock.createMock(CrawlerService.class);
         EasyMock.expect(mockCrawlerService.crawlSite(mockAudit, siteUrl)).
                 andReturn(EasyMock.createMock(WebResource.class))
                 .once();
-        EasyMock.replay(mockCrawlerService);
+        setReplayMode();
         
-        SiteAuditCommandImpl siteAuditCommand = new SiteAuditCommandImpl(
+        SiteAuditCommandImpl siteAuditCommand = getInstance();
+
+        siteAuditCommand.callCrawlerService();
+        
+        setVerifyMode();
+    }
+
+    /**
+     * 
+     * @return an instance of SiteAuditCommandImpl class
+     */
+    private SiteAuditCommandImpl getInstance() {
+         SiteAuditCommandImpl siteAuditCommand = new SiteAuditCommandImpl(
                 siteUrl, 
                 null,
                 mockAuditDataService);
+
         siteAuditCommand.setTestDataService(mockTestDataService);
         siteAuditCommand.setParameterDataService(mockParameterDataService);
         siteAuditCommand.setWebResourceDataService(mockWebResourceDataService);
@@ -86,12 +100,16 @@ public class SiteAuditCommandImplTest extends AuditCommandTestCase {
         
         siteAuditCommand.init();
 
-        siteAuditCommand.callCrawlerService();
-        
+        return siteAuditCommand;
+    }
+    
+    @Override
+    protected void setReplayModeOfLocalMocks() {
+        EasyMock.replay(mockCrawlerService);
+    }
+
+    @Override
+    protected void setVerifyModeOfLocalMocks() {
         EasyMock.verify(mockCrawlerService);
-        EasyMock.verify(mockAudit);
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockParameterDataService);
     }
 }

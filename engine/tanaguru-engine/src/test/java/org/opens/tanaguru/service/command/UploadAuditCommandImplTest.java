@@ -21,11 +21,12 @@
  */
 package org.opens.tanaguru.service.command;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import org.easymock.EasyMock;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.audit.Content;
-import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.service.ContentLoaderService;
@@ -37,6 +38,7 @@ import org.opens.tanaguru.service.ContentLoaderService;
 public class UploadAuditCommandImplTest extends AuditCommandTestCase {
     
     private ContentLoaderService mockContentLoaderService;
+    private Map<String, String> fileMap;
     
     public UploadAuditCommandImplTest(String testName) {
         super(testName);
@@ -45,7 +47,9 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+        fileMap = new HashMap<String, String>();
         mockContentLoaderService = EasyMock.createMock(ContentLoaderService.class);
+        mockConstructorCalls();
     }
     
     @Override
@@ -59,24 +63,11 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
     public void testInit() {
         System.out.println("init");
         
-        mockInitialisationCalls(false, null);
+        mockInitialisationCalls(true, AuditStatus.CONTENT_LOADING);
         
-        mockAudit.setStatus(AuditStatus.CONTENT_LOADING);
-        EasyMock.expectLastCall().once();
-        
-        EasyMock.expect(mockAuditDataService.saveOrUpdate(mockAudit)).andReturn(mockAudit).once();
-        
-        EasyMock.replay(mockAudit);
-        EasyMock.replay(mockAuditDataService);
-        EasyMock.replay(mockTestDataService);
-        EasyMock.replay(mockParameterDataService);
-        
-        getInstance(new HashMap<String, String>(), null);
+        getInstance();
 
-        EasyMock.verify(mockAudit);
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockParameterDataService);
+        setVerifyMode();
     }
 
     /**
@@ -87,7 +78,6 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
         
         mockInitialisationCalls(false, AuditStatus.CONTENT_LOADING);
         
-        Map<String, String> fileMap = new HashMap<String, String>();
         fileMap.put("My File Name", "MyFileContent");
         
         EasyMock.expect(mockAudit.getStatus()).andReturn(AuditStatus.CONTENT_LOADING).once();
@@ -119,25 +109,15 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
                 .andReturn(mockAudit)
                 .once();
         
-        EasyMock.replay(mockAudit);
-        EasyMock.replay(mockAuditDataService);
-        EasyMock.replay(mockWebResourceDataService);
-        EasyMock.replay(mockTestDataService);
-        EasyMock.replay(mockParameterDataService);
-        EasyMock.replay(mockContentLoaderService);
         EasyMock.replay(mockPage);
+        setReplayMode();
         
-        UploadAuditCommandImpl instance = getInstance(fileMap, null);
+        UploadAuditCommandImpl instance = getInstance();
         
         instance.loadContent();
 
-        EasyMock.verify(mockAudit);
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockParameterDataService);
-        EasyMock.verify(mockWebResourceDataService);
-        EasyMock.verify(mockContentLoaderService);
         EasyMock.verify(mockPage);
+        setVerifyMode();
     }
     
     /**
@@ -148,7 +128,6 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
         
         mockInitialisationCalls(false, AuditStatus.CONTENT_LOADING);
         
-        Map<String, String> fileMap = new LinkedHashMap<String, String>();
         fileMap.put("file:///My File Name1", "MyFileContent1");
         fileMap.put("file:///My File Name2", "MyFileContent2");
         
@@ -201,29 +180,19 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
                 .andReturn(mockAudit)
                 .once();
         
-        EasyMock.replay(mockAudit);
-        EasyMock.replay(mockAuditDataService);
-        EasyMock.replay(mockWebResourceDataService);
-        EasyMock.replay(mockTestDataService);
-        EasyMock.replay(mockParameterDataService);
-        EasyMock.replay(mockContentLoaderService);
         EasyMock.replay(mockSite);
         EasyMock.replay(mockPage1);
         EasyMock.replay(mockPage2);
+        setReplayMode();
         
-        UploadAuditCommandImpl instance = getInstance(fileMap, null);
+        UploadAuditCommandImpl instance = getInstance();
 
         instance.loadContent();
 
-        EasyMock.verify(mockAudit);
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockTestDataService);
-        EasyMock.verify(mockParameterDataService);
-        EasyMock.verify(mockWebResourceDataService);
-        EasyMock.verify(mockContentLoaderService);
         EasyMock.verify(mockSite);
         EasyMock.verify(mockPage1);
         EasyMock.verify(mockPage2);
+        setVerifyMode();
     }
  
     /**
@@ -232,11 +201,12 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
      * @param paramSet
      * @return 
      */
-    private UploadAuditCommandImpl getInstance(Map<String,String> fileMap, Set<Parameter> paramSet) {
+    private UploadAuditCommandImpl getInstance() {
         UploadAuditCommandImpl instance = new UploadAuditCommandImpl(
                 fileMap, 
-                paramSet,
+                null,
                 mockAuditDataService);
+
         instance.setTestDataService(mockTestDataService);
         instance.setParameterDataService(mockParameterDataService);
         instance.setWebResourceDataService(mockWebResourceDataService);
@@ -257,5 +227,15 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
         instance.init();
 
         return instance;
+    }
+
+    @Override
+    protected void setReplayModeOfLocalMocks() {
+        EasyMock.replay(mockContentLoaderService);
+    }
+
+    @Override
+    protected void setVerifyModeOfLocalMocks() {
+        EasyMock.verify(mockContentLoaderService);
     }
 }

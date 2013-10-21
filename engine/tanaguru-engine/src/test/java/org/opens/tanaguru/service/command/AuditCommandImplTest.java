@@ -58,6 +58,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+        mockConstructorCalls();
     }
     
     @Override
@@ -92,10 +93,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         AuditDataService result = instance.getAuditDataService();
         assertEquals(mockAuditDataService, result);
         
-        verify(mockAuditDataService);
-        verify(mockTestDataService);
-        verify(mockParameterDataService);
-        verify(mockAudit);
+        setVerifyMode();
     }
 
     /**
@@ -111,10 +109,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         TestDataService result = instance.getTestDataService();
         assertEquals(mockTestDataService, result);
         
-        verify(mockAuditDataService);
-        verify(mockTestDataService);
-        verify(mockParameterDataService);
-        verify(mockAudit);
+        setVerifyMode();
     }
 
     /**
@@ -130,10 +125,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         ParameterDataService result = instance.getParameterDataService();
         assertEquals(mockParameterDataService, result);
         
-        verify(mockAuditDataService);
-        verify(mockTestDataService);
-        verify(mockParameterDataService);
-        verify(mockAudit);
+        setVerifyMode();
     }
 
     /**
@@ -149,10 +141,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         WebResourceDataService result = instance.getWebResourceDataService();
         assertEquals(mockWebResourceDataService, result);
         
-        verify(mockAuditDataService);
-        verify(mockTestDataService);
-        verify(mockParameterDataService);
-        verify(mockAudit);
+        setVerifyMode();
     }
 
     /**
@@ -168,10 +157,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         ContentDataService result = instance.getContentDataService();
         assertEquals(mockContentDataService, result);
         
-        verify(mockAuditDataService);
-        verify(mockTestDataService);
-        verify(mockParameterDataService);
-        verify(mockAudit);
+        setVerifyMode();
     }
 
     /**
@@ -187,10 +173,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         ProcessResultDataService result = instance.getProcessResultDataService();
         assertEquals(mockProcessResultDataService, result);
         
-        verify(mockAuditDataService);
-        verify(mockTestDataService);
-        verify(mockParameterDataService);
-        verify(mockAudit);
+        setVerifyMode();
     }
 
     /**
@@ -206,10 +189,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         ContentAdapterService result = instance.getContentAdapterService();
         assertEquals(mockContentAdapterService, result);
         
-        verify(mockAuditDataService);
-        verify(mockTestDataService);
-        verify(mockParameterDataService);
-        verify(mockAudit);
+        setVerifyMode();
     }
 
     /**
@@ -225,10 +205,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         ProcessorService result = instance.getProcessorService();
         assertEquals(mockProcessorService, result);
         
-        verify(mockAuditDataService);
-        verify(mockTestDataService);
-        verify(mockParameterDataService);
-        verify(mockAudit);
+        setVerifyMode();
     }
 
     /**
@@ -244,10 +221,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         ConsolidatorService result = instance.getConsolidatorService();
         assertEquals(mockConsolidatorService, result);
         
-        verify(mockAuditDataService);
-        verify(mockTestDataService);
-        verify(mockParameterDataService);
-        verify(mockAudit);
+        setVerifyMode();
     }
 
     /**
@@ -263,10 +237,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         AnalyserService result = instance.getAnalyserService();
         assertEquals(mockAnalyserService, result);
         
-        verify(mockAuditDataService);
-        verify(mockTestDataService);
-        verify(mockParameterDataService);
-        verify(mockAudit);
+        setVerifyMode();
     }
 
     /**
@@ -282,10 +253,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         AdaptationListener result = instance.getAdaptationListener();
         assertEquals(mockAdaptationListener, result);
         
-        verify(mockAuditDataService);
-        verify(mockTestDataService);
-        verify(mockParameterDataService);
-        verify(mockAudit);
+        setVerifyMode();
     }
 
     /**
@@ -347,27 +315,22 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         expect(mockAuditDataService.saveOrUpdate(mockAudit)).andReturn(mockAudit).once();
         
-        replay(mockAudit);
         replay(mockWr);
-        replay(mockAuditDataService);
         replay(mockContentDataService);
         replay(mockContentAdapterService);
-        replay(mockTestDataService);
-        replay(mockParameterDataService);
         replay(mockSSP);
+        
+        setReplayMode();
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
         
         instance.adaptContent();
 
-        verify(mockAuditDataService);
-        verify(mockTestDataService);
         verify(mockContentDataService);
         verify(mockContentAdapterService);
-        verify(mockParameterDataService);
-        verify(mockAudit);
         verify(mockWr);
         verify(mockSSP);
+        setVerifyMode();
     }
 
     /**
@@ -413,6 +376,16 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
 //        instance.setStatusToAudit(auditStatus);
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
+    }
+
+    @Override
+    protected void setReplayModeOfLocalMocks() {
+        
+    }
+
+    @Override
+    protected void setVerifyModeOfLocalMocks() {
+        
     }
 
     public class TestAuditCommandImpl extends AuditCommandImpl {
