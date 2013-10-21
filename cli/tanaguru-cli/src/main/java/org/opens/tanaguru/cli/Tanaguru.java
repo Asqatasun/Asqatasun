@@ -437,7 +437,7 @@ public class Tanaguru implements AuditServiceListener {
      */
     private static void printUsage() {
         HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("./bin/tanaguru.sh [OPTIONS]... [URL OR FILE]...\n", OPTIONS);
+        formatter.printHelp("./bin/tanaguru.sh [OPTIONS]... [URL OR FILE OR SCENARIO]...\n", OPTIONS);
     }
 
     /**
