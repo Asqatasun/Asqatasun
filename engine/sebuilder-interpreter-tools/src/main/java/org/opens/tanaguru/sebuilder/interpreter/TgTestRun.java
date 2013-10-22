@@ -24,6 +24,7 @@ package org.opens.tanaguru.sebuilder.interpreter;
 import com.sebuilder.interpreter.Script;
 import com.sebuilder.interpreter.TestRun;
 import com.sebuilder.interpreter.Verify;
+import com.sebuilder.interpreter.webdriverfactory.WebDriverFactory;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -35,12 +36,10 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
 import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.UnhandledAlertException;
-import org.openqa.selenium.WebDriverException;
+import org.apache.commons.logging.Log;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.opens.tanaguru.sebuilder.interpreter.exception.TestRunException;
 import org.opens.tanaguru.sebuilder.tools.FirefoxDriverObjectPool;
 
@@ -88,11 +87,11 @@ public class TgTestRun extends TestRun {
         }
     }
     
-    private FirefoxDriver fd;
+    private RemoteWebDriver rwd;
     @Override
-    public FirefoxDriver getDriver() {
+    public RemoteWebDriver getDriver() {
         if (firefoxDriverObjectPool != null) {
-            return fd;
+            return rwd;
         } else {
             // keep the ability not to use an object pool
             return super.getDriver();
@@ -105,17 +104,58 @@ public class TgTestRun extends TestRun {
     }
 
     /**
-     * 
-     * @param script 
+     * Constructor
+     * @param script
+     * @param implicitelyWaitDriverTimeout
+     * @param pageLoadDriverTimeout 
      */
-    public TgTestRun(Script script) {
-        super(script);
+    public TgTestRun(Script script, int implicitelyWaitDriverTimeout, int pageLoadDriverTimeout) {
+        super(script, implicitelyWaitDriverTimeout, pageLoadDriverTimeout);
     }
 
-    public TgTestRun(Script script, FirefoxProfile firefoxProfile, Map<String, String> jsScriptMap) {
-        super(script);
-        setFirefoxProfile(firefoxProfile);
-        this.jsScriptMap = jsScriptMap;
+    /**
+     * Constructor
+     * @param script
+     * @param log
+     * @param webDriverFactory
+     * @param webDriverConfig
+     * @param implicitelyWaitDriverTimeout
+     * @param pageLoadDriverTimeout 
+     */
+    public TgTestRun(
+                Script script, 
+                Log log, 
+                WebDriverFactory webDriverFactory, 
+                HashMap<String, String> webDriverConfig, 
+                int implicitelyWaitDriverTimeout, 
+                int pageLoadDriverTimeout) {
+        super(script, 
+              log, 
+              webDriverFactory, 
+              webDriverConfig, 
+              implicitelyWaitDriverTimeout, 
+              pageLoadDriverTimeout);
+    }
+    
+    /**
+     * Constructor
+     * @param script
+     * @param webDriverFactory
+     * @param webDriverConfig
+     * @param implicitelyWaitDriverTimeout
+     * @param pageLoadDriverTimeout 
+     */
+    public TgTestRun(
+                Script script, 
+                WebDriverFactory webDriverFactory, 
+                HashMap<String, String> webDriverConfig, 
+                int implicitelyWaitDriverTimeout, 
+                int pageLoadDriverTimeout) {
+        super(script, 
+              webDriverFactory, 
+              webDriverConfig, 
+              implicitelyWaitDriverTimeout, 
+              pageLoadDriverTimeout);
     }
     
     /**
@@ -123,7 +163,7 @@ public class TgTestRun extends TestRun {
      */
     @Override
     public boolean hasNext() {
-        boolean hasNext = stepIndex < getScript().getSteps().size() - 1;
+        boolean hasNext = stepIndex < getScript().steps.size() - 1;
         if (!hasNext && getDriver() != null) {
             properlyCloseWebDriver();
         }
@@ -141,17 +181,18 @@ public class TgTestRun extends TestRun {
             getLog().debug("Starting test run.");
         }
 
-        initDriver();
+        initRemoteWebDriver();
+        
         isStepOpenNewPage = false;
 
         getLog().debug("Running step " + (stepIndex+2) + ":"
-                + getScript().getSteps().get(stepIndex+1).getType().toString() + " step.");
+                + getScript().steps.get(stepIndex+1).type.toString() + " step.");
         
         boolean result = false;
         String previousUrl = null;
         try {
             previousUrl = getDriver().getCurrentUrl();
-            result = getScript().getSteps().get(++stepIndex).getType().run(this);
+            result = getScript().steps.get(++stepIndex).type.run(this);
             // wait a second to make sure the page is fully loaded
             Thread.sleep(500);
             if (!isStepOpenNewPage && !StringUtils.equals(previousUrl, getDriver().getCurrentUrl())) {
@@ -177,7 +218,7 @@ public class TgTestRun extends TestRun {
 
         if (!result) {
             // If a verify failed, we just note this but continue.
-            if (currentStep().getType() instanceof Verify) {
+            if (currentStep().type instanceof Verify) {
                 getLog().error(currentStep() + " failed.");
                 return false;
             }
@@ -243,10 +284,13 @@ public class TgTestRun extends TestRun {
      * @return 
      */
     private byte[] createPageSnapshot() {
+        if (!(getDriver() instanceof TakesScreenshot)) {
+            return null;
+        }
         byte[] snapshot = null;
         try {
             getLog().debug("Creating snapshot");
-            snapshot = getDriver().getScreenshotAs(OutputType.BYTES); 
+            snapshot = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.BYTES); 
             BufferedImage snapshotImg = ImageIO.read(new ByteArrayInputStream(snapshot));
             BufferedImage scaledImg = resizeImage(snapshotImg);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -280,17 +324,17 @@ public class TgTestRun extends TestRun {
     }
 
     @Override
-    public void initDriver() {
+    public void initRemoteWebDriver() {
         if (firefoxDriverObjectPool != null && getDriver() == null) {
             getLog().debug("Initialisation FirefoxDriver terminated ");
             try {
-                fd = firefoxDriverObjectPool.borrowObject();
+                rwd = firefoxDriverObjectPool.borrowObject();
             } catch (Exception ex) {
                 getLog().warn("Firefox driver cannot be borrowed due to  " + ex.getMessage());
             }
         // if the firefoxDriver object pool is not set, keep the default behaviour
         } else if (getDriver() == null) {
-            super.initDriver();
+            super.initRemoteWebDriver();
         }
     }
  
@@ -300,11 +344,12 @@ public class TgTestRun extends TestRun {
      */
     private void properlyCloseWebDriver() {
         getLog().debug("Closing Firefox driver.");
-        if (firefoxDriverObjectPool != null && getDriver() != null) {
+        if (firefoxDriverObjectPool != null && getDriver() != null && 
+                getDriver() instanceof FirefoxDriver) {
             //set the blank page before returning the webDriver instance
             getDriver().get("");
             try {
-                firefoxDriverObjectPool.returnObject(getDriver());
+                firefoxDriverObjectPool.returnObject((FirefoxDriver)getDriver());
             } catch (Exception ex) {
                 getLog().warn("Firefox driver cannot be returned due to  " + ex.getMessage());
             }
@@ -316,7 +361,9 @@ public class TgTestRun extends TestRun {
                 getLog().warn("An error occured while closing driver."
                         + " A defunct firefox process may run on the system. "
                         + " Trying to kill before leaving");
-                getDriver().kill();
+                if (getDriver() instanceof FirefoxDriver) {
+                    ((FirefoxDriver)getDriver()).kill();
+                }
             }
         }
     }

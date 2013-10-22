@@ -25,12 +25,16 @@ package org.opens.tanaguru.sebuilder.interpreter.factory;
 import com.sebuilder.interpreter.Script;
 import com.sebuilder.interpreter.TestRun;
 import com.sebuilder.interpreter.factory.TestRunFactory;
+import com.sebuilder.interpreter.webdriverfactory.WebDriverFactory;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.logging.Log;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.opens.tanaguru.sebuilder.interpreter.NewPageListener;
 import org.opens.tanaguru.sebuilder.interpreter.TgTestRun;
-import org.opens.tanaguru.sebuilder.tools.FirefoxDriverObjectPool;
+import org.opens.tanaguru.sebuilder.interpreter.webdriverfactory.TgFirefox;
 
 /**
  *
@@ -38,6 +42,23 @@ import org.opens.tanaguru.sebuilder.tools.FirefoxDriverObjectPool;
  */
 public class TgTestRunFactory extends TestRunFactory {
 
+    /**
+     * The firefox profile used when the browser is loaded
+     */
+    WebDriverFactory webDriverFactory = new TgFirefox();
+
+
+    /**
+     * The firefox profile used when the browser is loaded
+     */
+    FirefoxProfile firefoxProfile = new FirefoxProfile();
+    public void setFirefoxProfile(FirefoxProfile firefoxProfile) {
+        this.firefoxProfile = firefoxProfile;
+    }
+    
+    /**
+     * the map that handles js scripts executed when page is loaded
+     */
     private Map<String, String> jsScriptMap;
     public Map<String, String> getJsScriptMap() {
         return jsScriptMap;
@@ -46,6 +67,9 @@ public class TgTestRunFactory extends TestRunFactory {
         this.jsScriptMap = jsScriptMap;
     }
     
+    /**
+     * The new page listeners
+     */
     private Collection<NewPageListener> newPageListeners;
     public void addNewPageListener(NewPageListener newPageListener) {
         if (newPageListeners == null) {
@@ -73,18 +97,43 @@ public class TgTestRunFactory extends TestRunFactory {
         }
     }
 
-    private FirefoxDriverObjectPool fdop;
-    public void setFirefoxDriverObjectPool(FirefoxDriverObjectPool fdop) {
-        this.fdop = fdop;
-    }
-
+//    private FirefoxDriverObjectPool fdop;
+//    public void setFirefoxDriverObjectPool(FirefoxDriverObjectPool fdop) {
+//        this.fdop = fdop;
+//    }
+    
     @Override
-    public TestRun createInstance(Script script) {
-        TgTestRun testRun = new TgTestRun(script);
+    public TestRun createTestRun(Script script) {
+        if (webDriverFactory instanceof TgFirefox) {
+            ((TgFirefox)webDriverFactory).setFirefoxProfile(firefoxProfile);
+        }
+        TgTestRun testRun = new TgTestRun(
+                script, 
+                webDriverFactory, 
+                new HashMap<String, String>(), 
+                getImplicitelyWaitDriverTimeout(), 
+                getPageLoadDriverTimeout());
         testRun.addNewPageListeners(newPageListeners);
         testRun.setJsScriptMap(jsScriptMap);
-//        testRun.setFirefoxDriverObjectPool(fdop);
         return testRun;
     }
     
+    @Override
+    public TestRun createTestRun(Script script, Log log, WebDriverFactory webDriverFactory, HashMap<String, String> webDriverConfig) {
+        if (webDriverFactory instanceof TgFirefox) {
+            ((TgFirefox)webDriverFactory).setFirefoxProfile(firefoxProfile);
+        }
+        TgTestRun testRun = 
+                new TgTestRun(
+                    script, 
+                    log, 
+                    webDriverFactory, 
+                    webDriverConfig, 
+                    getImplicitelyWaitDriverTimeout(), 
+                    getPageLoadDriverTimeout());
+        testRun.addNewPageListeners(newPageListeners);
+        testRun.setJsScriptMap(jsScriptMap);
+        return testRun;
+    }
+
 }
