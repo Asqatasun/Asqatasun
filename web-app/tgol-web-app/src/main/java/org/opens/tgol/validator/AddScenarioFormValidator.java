@@ -23,6 +23,7 @@ package org.opens.tgol.validator;
 
 
 import com.sebuilder.interpreter.IO;
+import com.sebuilder.interpreter.factory.ScriptFactory.SuiteException;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -158,6 +159,10 @@ public class AddScenarioFormValidator implements Validator {
             errors.rejectValue(GENERAL_ERROR_MSG_KEY,
                     MANDATORY_FIELD_MSG_BUNDLE_KEY);
         } catch (IOException ex) {
+            errors.rejectValue(SCENARIO_FILE_KEY, INVALID_SCENARIO_MSG_BUNDLE_KEY);
+            errors.rejectValue(GENERAL_ERROR_MSG_KEY,
+                    MANDATORY_FIELD_MSG_BUNDLE_KEY);
+        } catch (SuiteException ex) {
             errors.rejectValue(SCENARIO_FILE_KEY, INVALID_SCENARIO_MSG_BUNDLE_KEY);
             errors.rejectValue(GENERAL_ERROR_MSG_KEY,
                     MANDATORY_FIELD_MSG_BUNDLE_KEY);
