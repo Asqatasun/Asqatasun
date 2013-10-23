@@ -54,5 +54,5 @@ function launchProcessDialog() {
 //            displayedMessages = [];
 //        }
         $('#process-msg').text(processingMessages[messageIndex]);
-    }, 5000);
+    }, 1500); // = asynchronous delay (30s) / nb of messages (20)
 }
