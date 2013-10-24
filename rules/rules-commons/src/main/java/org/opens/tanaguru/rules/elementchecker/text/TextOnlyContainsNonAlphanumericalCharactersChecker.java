@@ -20,7 +20,7 @@
  *  Contact us by mail: open-s AT open-s DOT com
  */
 
-package org.opens.tanaguru.rules.elementchecker.attribute;
+package org.opens.tanaguru.rules.elementchecker.text;
 
 import java.util.regex.Pattern;
 import org.jsoup.nodes.Element;
@@ -29,77 +29,87 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.NomenclatureBasedElementChecker;
-import org.opens.tanaguru.rules.elementchecker.TextualElementBuilder;
+import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
  * 
  */
-public class TextElementOnlyContainsNonAlphanumericalCharactersChecker 
-            extends NomenclatureBasedElementChecker implements TextualElementBuilder{
+public class TextOnlyContainsNonAlphanumericalCharactersChecker 
+            extends NomenclatureBasedElementChecker {
 
     private static final String NON_ALPHANUMERIC_PATTERN_STR ="[^\\p{L}]*";
     private static final Pattern NON_ALPHANUMERIC_PATTERN =
               Pattern.compile(NON_ALPHANUMERIC_PATTERN_STR);
     
-    /**
+    /*
      * The message thrown when an element only contains non alphanumerical 
      * characters.
      */
     private String textOnlyContainsNacMsgCode;
 
-    /**
-     * Detected solution. Default is FAILED.
-     */
+    /* Detected solution. Default is FAILED */
     private TestSolution detectedSolution = TestSolution.FAILED;
     
+    /* The text element builder. By default, it is a simple Text builder */
+    private TextElementBuilder textElementBuilder;
+    
     /**
      * Constructor
+     * 
+     * @param textElementBuilder
      * @param textOnlyContainsNacMsgCode
      */
-    public TextElementOnlyContainsNonAlphanumericalCharactersChecker(
+    public TextOnlyContainsNonAlphanumericalCharactersChecker(
+            TextElementBuilder textElementBuilder,
             String textOnlyContainsNacMsgCode) {
         super();
+        this.textElementBuilder = textElementBuilder;
         this.textOnlyContainsNacMsgCode = textOnlyContainsNacMsgCode;
     }
     
     /**
      * Constructor
+     * @param textElementBuilder
      * @param textOnlyContainsNacMsgCode
      * @param eeAttributeNameList 
      */
-    public TextElementOnlyContainsNonAlphanumericalCharactersChecker(
+    public TextOnlyContainsNonAlphanumericalCharactersChecker(
+            TextElementBuilder textElementBuilder,
             String textOnlyContainsNacMsgCode,
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
+        this.textElementBuilder = textElementBuilder;
         this.textOnlyContainsNacMsgCode = textOnlyContainsNacMsgCode;
     }
     
     /**
      * Constructor
+     * @param textElementBuilder
      * @param detectionSolution
      * @param textOnlyContainsNacMsgCode
      */
-    public TextElementOnlyContainsNonAlphanumericalCharactersChecker(
+    public TextOnlyContainsNonAlphanumericalCharactersChecker(
+            TextElementBuilder textElementBuilder,
             TestSolution detectedSolution,
             String textOnlyContainsNacMsgCode) {
-        super();
+        this(textElementBuilder, textOnlyContainsNacMsgCode);
         this.detectedSolution = detectedSolution;
-        this.textOnlyContainsNacMsgCode = textOnlyContainsNacMsgCode;
     }
     
     /**
      * Constructor
+     * @param textElementBuilder
      * @param detectionSolution
      * @param textOnlyContainsNacMsgCode
      * @param eeAttributeNameList 
      */
-    public TextElementOnlyContainsNonAlphanumericalCharactersChecker(
+    public TextOnlyContainsNonAlphanumericalCharactersChecker(
+            TextElementBuilder textElementBuilder,
             TestSolution detectedSolution,
             String textOnlyContainsNacMsgCode,
             String... eeAttributeNameList) {
-        super(eeAttributeNameList);
+        this(textElementBuilder, textOnlyContainsNacMsgCode, eeAttributeNameList);
         this.detectedSolution = detectedSolution;
-        this.textOnlyContainsNacMsgCode = textOnlyContainsNacMsgCode;
     }
 
     @Override
@@ -111,7 +121,7 @@ public class TextElementOnlyContainsNonAlphanumericalCharactersChecker
              testSolutionHandler.addTestSolution(
                      checkTextElementOnlyContainsNonAlphanumericCharacters(
                         element, 
-                        buildTextFromElement(element)));
+                        this.textElementBuilder.buildTextFromElement(element)));
          }
     }
     
@@ -147,9 +157,4 @@ public class TextElementOnlyContainsNonAlphanumericalCharactersChecker
         }
     }
 
-    @Override
-    public String buildTextFromElement(Element element) {
-        return element.text().trim();
-    }
-    
 }

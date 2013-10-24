@@ -20,7 +20,7 @@
  *  Contact us by mail: open-s AT open-s DOT com
  */
 
-package org.opens.tanaguru.rules.elementchecker.attribute;
+package org.opens.tanaguru.rules.elementchecker.text;
 
 import java.util.Collection;
 import org.apache.commons.collections.CollectionUtils;
@@ -31,17 +31,14 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.NomenclatureBasedElementChecker;
-import org.opens.tanaguru.rules.elementchecker.TextualElementBuilder;
+import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
  * 
  */
-public class TextElementEndsWithChecker extends NomenclatureBasedElementChecker
-            implements TextualElementBuilder {
+public class TextEndsWithChecker extends NomenclatureBasedElementChecker {
 
-    /**
-     * the extension collection
-     */
+    /* the extension collection */
     private Collection<String> extensions;
     public Collection<String> getExtensions() {
         if (extensions == null) {
@@ -51,82 +48,90 @@ public class TextElementEndsWithChecker extends NomenclatureBasedElementChecker
         return extensions;
     }
     
-    /**
-     * The name of the nomenclature that handles the extension list.
-     */
+    /* The name of the nomenclature that handles the extension list */
     private String extensionListNomName;
 
-    /**
+    /*
      * The message thrown when an element ends with an extension that belongs to
      * to the extension list.
      */
     private String textEndsWithMessageCode;
     
-    /**
-     * Detected solution. Default is FAILED.
-     */
+    /* Detected solution. Default is FAILED */
     private TestSolution detectedSolution = TestSolution.FAILED;
     
+    /* The text element builder. By default, it is a simple Text builder */
+    private TextElementBuilder textElementBuilder;
+    
     /**
      * Constructor
+     * @param textElementBuilder
      * @param extensionListNomName
      * @param textEndsWithMessageCode
      */
-    public TextElementEndsWithChecker(
+    public TextEndsWithChecker(
+            TextElementBuilder textElementBuilder,
             String extensionListNomName,
             String textEndsWithMessageCode) {
         super();
+        this.textElementBuilder = textElementBuilder;
         this.extensionListNomName = extensionListNomName;
         this.textEndsWithMessageCode = textEndsWithMessageCode;
     }
     
     /**
      * Constructor
+     * @param textElementBuilder
      * @param extensionListNomName
      * @param textEndsWithMessageCode
      * @param eeAttributeNameList 
      */
-    public TextElementEndsWithChecker(
+    public TextEndsWithChecker(
+            TextElementBuilder textElementBuilder,
             String extensionListNomName,
             String textEndsWithMessageCode,
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
+        this.textElementBuilder = textElementBuilder;
         this.extensionListNomName = extensionListNomName;
         this.textEndsWithMessageCode = textEndsWithMessageCode;
     }
     
     /**
      * Constructor
+     * @param textElementBuilder
      * @param extensionListNomName
      * @param detectedSolution
      * @param textEndsWithMessageCode
      */
-    public TextElementEndsWithChecker(
+    public TextEndsWithChecker(
+            TextElementBuilder textElementBuilder,
             String extensionListNomName,
             TestSolution detectedSolution, 
             String textEndsWithMessageCode) {
-        super();
-        this.extensionListNomName = extensionListNomName;
+        this(textElementBuilder, extensionListNomName, textEndsWithMessageCode);
         this.detectedSolution = detectedSolution;
-        this.textEndsWithMessageCode = textEndsWithMessageCode;
     }
     
     /**
      * Constructor
+     * @param textElementBuilder
      * @param extensionListNomName
      * @param detectedSolution
      * @param textEndsWithMessageCode
      * @param eeAttributeNameList 
      */
-    public TextElementEndsWithChecker(
+    public TextEndsWithChecker(
+            TextElementBuilder textElementBuilder,
             String extensionListNomName,
             TestSolution detectedSolution, 
             String textEndsWithMessageCode,
             String... eeAttributeNameList) {
-        super(eeAttributeNameList);
-        this.extensionListNomName = extensionListNomName;
+        this(textElementBuilder,
+             extensionListNomName, 
+             textEndsWithMessageCode,
+             eeAttributeNameList);
         this.detectedSolution = detectedSolution;
-        this.textEndsWithMessageCode = textEndsWithMessageCode;
     }
 
     @Override
@@ -138,7 +143,7 @@ public class TextElementEndsWithChecker extends NomenclatureBasedElementChecker
              testSolutionHandler.addTestSolution(
                      checkTextElementEndsWithExtension(
                         element, 
-                        buildTextFromElement(element)));
+                        this.textElementBuilder.buildTextFromElement(element)));
          }
     }
     
@@ -153,7 +158,9 @@ public class TextElementEndsWithChecker extends NomenclatureBasedElementChecker
             Element element,
             String elementText) {
         // the test is made through the getter to force the initialisation
-        if (element == null || CollectionUtils.isEmpty(getExtensions())) {
+        if (element == null ||
+                elementText == null ||
+                CollectionUtils.isEmpty(getExtensions())) {
             return TestSolution.NOT_APPLICABLE;
         }
         for (String extension : extensions) {
@@ -170,9 +177,4 @@ public class TextElementEndsWithChecker extends NomenclatureBasedElementChecker
         return TestSolution.PASSED;
     }
 
-    @Override
-    public String buildTextFromElement(Element element) {
-        return element.text().trim();
-    }
-    
 }

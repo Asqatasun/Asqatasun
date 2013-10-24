@@ -39,6 +39,9 @@ public abstract class RuleHelper {
      * @return the synthesis of the test solution collection
      */
     public static TestSolution synthesizeTestSolutionCollection(Collection<TestSolution> testSolutionCollection) {
+        if (testSolutionCollection.isEmpty()) {
+            return TestSolution.NOT_APPLICABLE;
+        }
         boolean hasPassed = false;
         boolean hasFailed = false;
         boolean hasNMI = false;

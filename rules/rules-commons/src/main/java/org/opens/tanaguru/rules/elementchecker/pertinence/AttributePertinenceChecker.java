@@ -22,18 +22,93 @@
 
 package org.opens.tanaguru.rules.elementchecker.pertinence;
 
+import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.rules.elementchecker.attribute.AttributeEmptinessChecker;
-import org.opens.tanaguru.rules.elementchecker.attribute.AttributeEndsWithChecker;
-import org.opens.tanaguru.rules.elementchecker.attribute.AttributeNotIdenticalToOtherAttributeChecker;
-import org.opens.tanaguru.rules.elementchecker.attribute.AttributeOnlyContainsNonAlphanumericalCharactersChecker;
+import org.opens.tanaguru.rules.elementchecker.text.TextEndsWithChecker;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
+import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
  * 
  */
-public class AttributePertinenceChecker extends PertinenceChecker {
+public class AttributePertinenceChecker extends TextPertinenceChecker {
 
+    /* The attr element builder needed to retrieve the attribute to compare with*/
+    private TextAttributeOfElementBuilder attrElementBuilder;
+    @Override
+    public TextElementBuilder getTextElementBuilder() {
+        if (attrElementBuilder == null) {
+            attrElementBuilder = new TextAttributeOfElementBuilder();
+        }
+        return attrElementBuilder;
+    }
+
+    /**
+     * Constructor. 
+     * Enables to override the not pertinent solution.
+     * 
+     * @param attributeName
+     * @param checkEmptiness
+     * @param attributeNameToCompare
+     * @param extensionsListNameToCompareWith
+     * @param attrNotPertinentSolution
+     * @param notPertinentMessageCode
+     * @param manualCheckMessage
+     * @param eeAttributeNameList 
+     */
+    public AttributePertinenceChecker(
+            String attributeName,
+            boolean checkEmptiness,
+            @Nullable String attributeNameToCompare,
+            @Nullable String extensionsListNameToCompareWith,
+            TestSolution attrNotPertinentSolution,
+            String notPertinentMessageCode,
+            String manualCheckMessage,
+            String... eeAttributeNameList) {
+        super(checkEmptiness, 
+              attributeNameToCompare, 
+              null, // this attribute is about the text blacklist nomenclature 
+              attrNotPertinentSolution, 
+              notPertinentMessageCode, 
+              manualCheckMessage, 
+              eeAttributeNameList);
+        this.attrElementBuilder.setAttributeName(attributeName);
+        
+        addExtensionChecker(extensionsListNameToCompareWith);
+    }
+
+    /**
+     * Constructor. 
+     * Enables to override the not pertinent solution.
+     * 
+     * @param attributeName
+     * @param checkEmptiness
+     * @param attributeNameToCompare
+     * @param extensionsListNameToCompareWith
+     * @param attrNotPertinentSolution
+     * @param notPertinentMessageCode
+     * @param manualCheckMessage
+     */
+    public AttributePertinenceChecker(
+            String attributeName,
+            boolean checkEmptiness,
+            @Nullable String attributeNameToCompare,
+            @Nullable String extensionsListNameToCompareWith,
+            TestSolution attrNotPertinentSolution,
+            String notPertinentMessageCode,
+            String manualCheckMessage) {
+        super(checkEmptiness, 
+              attributeNameToCompare, 
+              null, // this attribute is about the text blacklist nomenclature 
+              attrNotPertinentSolution, 
+              notPertinentMessageCode, 
+              manualCheckMessage);
+        this.attrElementBuilder.setAttributeName(attributeName);
+        
+        addExtensionChecker(extensionsListNameToCompareWith);
+    }
+    
     /**
      * Constructor. 
      * Returns FAILED when the attribute is not pertinent.
@@ -48,43 +123,17 @@ public class AttributePertinenceChecker extends PertinenceChecker {
     public AttributePertinenceChecker(
             String attributeName,
             boolean checkEmptiness,
-            String attributeNameToCompare,
-            String extensionsListNameToCompareWith,
+            @Nullable String attributeNameToCompare,
+            @Nullable String extensionsListNameToCompareWith,
             String notPertinentMessageCode,
             String manualCheckMessage) {
-        super(manualCheckMessage);
-
-         // The first check, when requested, is the attribute emptiness
-        if (checkEmptiness) {
-            addChecker(new AttributeEmptinessChecker(
-                        attributeName, 
-                        TestSolution.FAILED, 
-                        TestSolution.PASSED, 
-                        notPertinentMessageCode, 
-                        null));
-        }
-
-        if (StringUtils.isNotBlank(extensionsListNameToCompareWith)) {
-            addChecker(new AttributeEndsWithChecker(
-                            attributeName, 
-                            extensionsListNameToCompareWith,
-                            notPertinentMessageCode));
-        }
-        
-        // The second check consists in verifying the attribute does not only
-        // contains non alphanumerical characters
-        addChecker(new AttributeOnlyContainsNonAlphanumericalCharactersChecker(
-                        attributeName,   
-                        notPertinentMessageCode));
-        
-        // The last check, when requested, consists in verifying the attribute
-        // content is not identical to another attribute.
-        if (StringUtils.isNotBlank(attributeNameToCompare)) {
-            addChecker(new AttributeNotIdenticalToOtherAttributeChecker(
-                            attributeName, 
-                            attributeNameToCompare, 
-                            notPertinentMessageCode));
-        }
+        this(attributeName,
+             checkEmptiness, 
+             attributeNameToCompare, 
+             extensionsListNameToCompareWith,
+             TestSolution.FAILED,
+             notPertinentMessageCode, 
+             manualCheckMessage);
     }
     
     /**
@@ -102,169 +151,38 @@ public class AttributePertinenceChecker extends PertinenceChecker {
     public AttributePertinenceChecker(
             String attributeName,
             boolean checkEmptiness,
-            String attributeNameToCompare,
-            String extensionsListNameToCompareWith,
+            @Nullable String attributeNameToCompare,
+            @Nullable String extensionsListNameToCompareWith,
             String notPertinentMessageCode,
             String manualCheckMessage,
             String... eeAttributeNameList) {
-        super(manualCheckMessage, eeAttributeNameList);
-
-         // The first check, when requested, is the attribute emptiness
-        if (checkEmptiness) {
-            addChecker(new AttributeEmptinessChecker(
-                        attributeName, 
-                        TestSolution.FAILED, 
-                        TestSolution.PASSED, 
-                        notPertinentMessageCode, 
-                        null, 
-                        eeAttributeNameList));
-        }
-
-        if (StringUtils.isNotBlank(extensionsListNameToCompareWith)) {
-            addChecker(new AttributeEndsWithChecker(
-                            attributeName, 
-                            extensionsListNameToCompareWith,
-                            notPertinentMessageCode, 
-                            eeAttributeNameList));
-        }
-        
-        // The second check consists in verifying the attribute does not only
-        // contains non alphanumerical characters
-        addChecker(new AttributeOnlyContainsNonAlphanumericalCharactersChecker(
-                        attributeName,   
-                        notPertinentMessageCode, 
-                        eeAttributeNameList));
-        
-        // The last check, when requested, consists in verifying the attribute
-        // content is not identical to another attribute.
-        if (StringUtils.isNotBlank(attributeNameToCompare)) {
-            addChecker(new AttributeNotIdenticalToOtherAttributeChecker(
-                            attributeName, 
-                            attributeNameToCompare, 
-                            notPertinentMessageCode, 
-                            eeAttributeNameList));
-        }
+        this(attributeName,
+             checkEmptiness, 
+             attributeNameToCompare, 
+             extensionsListNameToCompareWith,
+             TestSolution.FAILED,
+             notPertinentMessageCode, 
+             manualCheckMessage, 
+             eeAttributeNameList);
     }
     
-    /**
-     * Constructor. 
-     * Enables to override the not pertinent solution.
-     * 
-     * @param attributeName
-     * @param checkEmptiness
-     * @param attributeNameToCompare
-     * @param extensionsListNameToCompareWith
-     * @param attrNotPertinentSolution
-     * @param notPertinentMessageCode
-     * @param manualCheckMessage
-     */
-    public AttributePertinenceChecker(
-            String attributeName,
-            boolean checkEmptiness,
-            String attributeNameToCompare,
-            String extensionsListNameToCompareWith,
-            TestSolution attrNotPertinentSolution,
-            String notPertinentMessageCode,
-            String manualCheckMessage) {
-        super(manualCheckMessage, attrNotPertinentSolution);
-
-         // The first check, when requested, is the attribute emptiness
-        if (checkEmptiness) {
-            addChecker(new AttributeEmptinessChecker(
-                        attributeName, 
-                        attrNotPertinentSolution, 
-                        TestSolution.PASSED, 
-                        notPertinentMessageCode, 
-                        null));
-        }
-
-        if (StringUtils.isNotBlank(extensionsListNameToCompareWith)) {
-            addChecker(new AttributeEndsWithChecker(
-                            attributeName,
-                            extensionsListNameToCompareWith,
-                            attrNotPertinentSolution,
-                            notPertinentMessageCode));
-        }
-        
-        // The second check consists in verifying the attribute does not only
-        // contains non alphanumerical characters
-        addChecker(new AttributeOnlyContainsNonAlphanumericalCharactersChecker(
-                        attributeName,   
-                        attrNotPertinentSolution,
-                        notPertinentMessageCode));
-        
-        // The last check, when requested, consists in verifying the attribute
-        // content is not identical to another attribute.
-        if (StringUtils.isNotBlank(attributeNameToCompare)) {
-            addChecker(new AttributeNotIdenticalToOtherAttributeChecker(
-                            attributeName, 
-                            attributeNameToCompare, 
-                            attrNotPertinentSolution,
-                            notPertinentMessageCode));
-        }
-    }
     
+    
+    
+
     /**
-     * Constructor. 
-     * Enables to override the not pertinent solution.
-     * 
-     * @param attributeName
-     * @param checkEmptiness
-     * @param attributeNameToCompare
-     * @param extensionsListNameToCompareWith
-     * @param attrNotPertinentSolution
-     * @param notPertinentMessageCode
-     * @param manualCheckMessage
-     * @param eeAttributeNameList 
+     * Add a {@link TextEndsWithChecker} to the checker collection
      */
-    public AttributePertinenceChecker(
-            String attributeName,
-            boolean checkEmptiness,
-            String attributeNameToCompare,
-            String extensionsListNameToCompareWith,
-            TestSolution attrNotPertinentSolution,
-            String notPertinentMessageCode,
-            String manualCheckMessage,
-            String... eeAttributeNameList) {
-        super(manualCheckMessage, attrNotPertinentSolution, eeAttributeNameList);
-
-         // The first check, when requested, is the attribute emptiness
-        if (checkEmptiness) {
-            addChecker(new AttributeEmptinessChecker(
-                        attributeName, 
-                        attrNotPertinentSolution, 
-                        TestSolution.PASSED, 
-                        notPertinentMessageCode, 
-                        null, 
-                        eeAttributeNameList));
-        }
-
-        if (StringUtils.isNotBlank(extensionsListNameToCompareWith)) {
-            addChecker(new AttributeEndsWithChecker(
-                            attributeName,
-                            extensionsListNameToCompareWith,
-                            attrNotPertinentSolution,
-                            notPertinentMessageCode,
-                            eeAttributeNameList));
-        }
-        
-        // The second check consists in verifying the attribute does not only
+    private void addExtensionChecker(String extensionsListNameToCompareWith) {
+        // The second check consists in verifying the element content does not only
         // contains non alphanumerical characters
-        addChecker(new AttributeOnlyContainsNonAlphanumericalCharactersChecker(
-                        attributeName,   
-                        attrNotPertinentSolution,
-                        notPertinentMessageCode, 
-                        eeAttributeNameList));
-        
-        // The last check, when requested, consists in verifying the attribute
-        // content is not identical to another attribute.
-        if (StringUtils.isNotBlank(attributeNameToCompare)) {
-            addChecker(new AttributeNotIdenticalToOtherAttributeChecker(
-                            attributeName, 
-                            attributeNameToCompare, 
-                            attrNotPertinentSolution,
+        if (StringUtils.isNotBlank(extensionsListNameToCompareWith)) {
+            addChecker(new TextEndsWithChecker(
+                            getTextElementBuilder(),
+                            extensionsListNameToCompareWith,
+                            getNotPertinentSolution(), 
                             notPertinentMessageCode, 
-                            eeAttributeNameList));
+                            getEeAttributeNames()));
         }
     }
 

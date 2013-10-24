@@ -72,7 +72,7 @@ public final class HtmlElementStore {
     public static final String P_ELEMENT = HTML.Tag.P.toString();
     public static final String SAMP_ELEMENT = HTML.Tag.SAMP.toString();
     public static final String SELECT_ELEMENT = HTML.Tag.SELECT.toString();
-    public static final String SCRIPT_ELEMENT = HTML.Tag.SPAN.toString();
+    public static final String SCRIPT_ELEMENT = HTML.Tag.SCRIPT.toString();
     public static final String SPAN_ELEMENT = HTML.Tag.SPAN.toString();
     public static final String STRONG_ELEMENT = HTML.Tag.STRONG.toString();
     public static final String TABLE_ELEMENT = HTML.Tag.TABLE.toString();

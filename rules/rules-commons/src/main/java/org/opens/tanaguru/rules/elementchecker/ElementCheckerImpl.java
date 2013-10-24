@@ -60,15 +60,14 @@ public abstract class ElementCheckerImpl implements ElementChecker {
     /**
      * the collection of attributes name used to collect evidenceElement
      */
-    private Collection<String> eeAttributeNameList;
-    public Collection<String> getEeAttributeNameList() {
-        return eeAttributeNameList;
+    private String[] eeAttributeNames = {};
+    public String[] getEeAttributeNames() {
+        return eeAttributeNames;
+    }
+    public Collection<String> getEeAttributeNameAsCollection() {
+        return Arrays.asList(eeAttributeNames);
     }
 
-    public void setEeAttributeNameList(Collection<String> eeAttributeNameList) {
-        this.eeAttributeNameList = eeAttributeNameList;
-    }
-    
     /**
      * The locale ref to the processRemarkService
      */
@@ -93,7 +92,8 @@ public abstract class ElementCheckerImpl implements ElementChecker {
      * @param eeAttributeNameList 
      */
     public ElementCheckerImpl(String... eeAttributeNameList) {
-       this.eeAttributeNameList = Arrays.asList(eeAttributeNameList); 
+       this.eeAttributeNames = 
+               Arrays.copyOf(eeAttributeNameList, eeAttributeNameList.length); 
     }
 
     @Override
@@ -128,7 +128,9 @@ public abstract class ElementCheckerImpl implements ElementChecker {
             Element element, 
             String messageCode) {
         Collection<EvidenceElement> eeCol = 
-                getEvidenceElementCollection(element, eeAttributeNameList);
+                getEvidenceElementCollection(
+                    element, 
+                    getEeAttributeNameAsCollection());
         if (CollectionUtils.isNotEmpty(eeCol)) {
             processRemarkService.addSourceCodeRemarkOnElement(
                         testSolution, 
@@ -309,58 +311,6 @@ public abstract class ElementCheckerImpl implements ElementChecker {
     }
 
     /**
-     * The textual content of an element can be composed with :
-     * <ul>
-     *     <li> The text of the element</li>
-     *     <li> The text of the alt attribute of the element</li>
-     *     <li> The text of the title attribute of the element</li>
-     *     <li> The text of the summary attribute of the element</li>
-     *     <li> The text of the value attribute of the element</li>
-     *     <li> The text of the content attribute of the element when 
-     *          the value of the name attribute is "description"
-     *      </li>
-     * </ul>
-     * 
-     * @param element
-     * @return the textual content of an element
-     */
-    protected String getTextualContentOfElement(Element element) {
-        StringBuilder strb = new StringBuilder();
-        if (StringUtils.isNotBlank(element.ownText())) {
-            strb.append(element.ownText().trim());
-            strb.append(' ');
-        }
-        
-        strb.append(getTextualContentOfAttribute(element, AttributeStore.ALT_ATTR));
-        strb.append(getTextualContentOfAttribute(element, AttributeStore.TITLE_ATTR));
-        strb.append(getTextualContentOfAttribute(element, AttributeStore.SUMMARY_ATTR));
-        strb.append(getTextualContentOfAttribute(element, AttributeStore.VALUE_ATTR));
-        
-        if (element.hasAttr(AttributeStore.CONTENT_ATTR) && 
-                element.hasAttr(AttributeStore.NAME_ATTR) && 
-                StringUtils.equalsIgnoreCase(element.attr(AttributeStore.NAME_ATTR), "description") && 
-                StringUtils.isNotBlank(element.attr(AttributeStore.CONTENT_ATTR))) {
-            strb.append(element.attr(AttributeStore.CONTENT_ATTR).trim());
-            strb.append(' ');
-        }
-        return strb.toString();
-    }
-    
-    /**
-     * 
-     * @param element
-     * @param attributeName
-     * @return the textual content of an attribute
-     */
-    private String getTextualContentOfAttribute(Element element, String attributeName) {
-        if (StringUtils.isNotBlank(attributeName) && 
-                element.hasAttr(attributeName) ) {
-            return element.attr(attributeName).trim() + ' ';
-        }
-        return "";
-    }
-    
-    /**
      * Determines whether an attribute defines an external resource regarding
      * the markup type
      * 
@@ -399,23 +349,6 @@ public abstract class ElementCheckerImpl implements ElementChecker {
             return element.absUrl(attributeName).trim();
         } else {
             return element.attr(attributeName).trim();
-        }
-    }
-    
-    /**
-     * 
-     * @param element
-     * @param attributeName
-     * @return the text content of an attribute if the attribute exits, null
-     * instead
-     */
-    protected String getAttributeContent(
-            Element element, 
-            String attributeName) {
-        if (element.hasAttr(attributeName)) {
-            return StringUtils.trim(element.attr(attributeName));
-        } else {
-            return null;
         }
     }
     

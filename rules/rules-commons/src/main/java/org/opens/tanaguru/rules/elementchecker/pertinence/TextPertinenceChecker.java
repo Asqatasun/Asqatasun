@@ -25,64 +25,63 @@ package org.opens.tanaguru.rules.elementchecker.pertinence;
 import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.rules.elementchecker.attribute.TextElementBelongsToBlackListChecker;
-import org.opens.tanaguru.rules.elementchecker.attribute.TextElementEmptinessChecker;
-import org.opens.tanaguru.rules.elementchecker.attribute.TextElementNotIdenticalToAttributeChecker;
-import org.opens.tanaguru.rules.elementchecker.attribute.TextElementOnlyContainsNonAlphanumericalCharactersChecker;
+import org.opens.tanaguru.rules.elementchecker.text.TextBelongsToBlackListChecker;
+import org.opens.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
+import org.opens.tanaguru.rules.elementchecker.text.TextNotIdenticalToAttributeChecker;
+import org.opens.tanaguru.rules.elementchecker.text.TextOnlyContainsNonAlphanumericalCharactersChecker;
+import org.opens.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
+import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
- * 
+ * Text pertinence of a text by invoking successively unitary checkers
  */
 public class TextPertinenceChecker extends PertinenceChecker {
 
+    /* The element builder needed to retrieve the text to check */
+    private TextElementBuilder textElementBuilder;
+    public TextElementBuilder getTextElementBuilder() {
+        if (textElementBuilder == null) {
+            textElementBuilder = new SimpleTextElementBuilder();
+        }
+        return textElementBuilder;
+    }
+
+    /* check emptiness */
+    private boolean checkEmptiness;
+    /* attribute name to compare with*/
+    private String attributeNameToCompare = null;
+    /* blacklist name to compare with*/
+    private String blacklistNameToCompareWith = null;
+    /* not pertinent message code */
+    String notPertinentMessageCode = null;
+    
     /**
-     * Constructor.
-     * Returns FAILED when the attribute is not pertinent.
+     * constructor.
+     * Enables to override the not pertinent solution.
      * 
      * @param checkEmptiness
      * @param attributeNameToCompare
      * @param blacklistNameToCompareWith
      * @param notPertinentMessageCode
      * @param manualCheckMessage
+     * @param eeAttributeNameList 
      */
     public TextPertinenceChecker(
             boolean checkEmptiness,
-            @Nullable String attributeNameToCompare,
-            @Nullable String blacklistNameToCompareWith,
+            String attributeNameToCompare,
+            String blacklistNameToCompareWith,
+            TestSolution notPertinentSolution,
             String notPertinentMessageCode,
-            String manualCheckMessage) {
-        super(manualCheckMessage);
+            String manualCheckMessage,
+            String... eeAttributeNameList) {
+        super(manualCheckMessage, notPertinentSolution, eeAttributeNameList);
 
-        // The first check, when requested, is the consists in verifying
-        // the element content emptiness
-        if (checkEmptiness) {
-            addChecker(new TextElementEmptinessChecker(
-                        TestSolution.FAILED, 
-                        TestSolution.PASSED, 
-                        notPertinentMessageCode, 
-                        null));
-        }
+        this.checkEmptiness = checkEmptiness;
+        this.attributeNameToCompare = attributeNameToCompare;
+        this.blacklistNameToCompareWith = blacklistNameToCompareWith;
+        this.notPertinentMessageCode = notPertinentMessageCode;
 
-        // The second check consists in verifying the element content 
-        // does not belong to a blacklist 
-        if (StringUtils.isNotBlank(blacklistNameToCompareWith)) {
-            addChecker(new TextElementBelongsToBlackListChecker(
-                        blacklistNameToCompareWith, 
-                        notPertinentMessageCode));
-        }
-        
-        // The third check consists in verifying the element content does not only
-        // contains non alphanumerical characters
-        addChecker(new TextElementOnlyContainsNonAlphanumericalCharactersChecker(
-                        notPertinentMessageCode));
-        
-        // The last check, when requested, consists in verifying the element
-        // content is not identical to another attribute.
-        if (StringUtils.isNotBlank(attributeNameToCompare)) {
-            addChecker(new TextElementNotIdenticalToAttributeChecker(
-                            attributeNameToCompare, 
-                            notPertinentMessageCode));
-        }
+        addCheckers();
     }
     
     /**
@@ -103,101 +102,109 @@ public class TextPertinenceChecker extends PertinenceChecker {
             String notPertinentMessageCode,
             String manualCheckMessage,
             String... eeAttributeNameList) {
-        super(manualCheckMessage, eeAttributeNameList);
-
-        // The first check, when requested, is the consists in verifying
-        // the element content emptiness
-        if (checkEmptiness) {
-            addChecker(new TextElementEmptinessChecker(
-                        TestSolution.FAILED, 
-                        TestSolution.PASSED, 
-                        notPertinentMessageCode, 
-                        null, 
-                        eeAttributeNameList));
-        }
-
-        // The second check consists in verifying the element content does not only
-        // contains non alphanumerical characters
-        if (StringUtils.isNotBlank(blacklistNameToCompareWith)) {
-            addChecker(new TextElementBelongsToBlackListChecker(
-                        blacklistNameToCompareWith, 
-                        notPertinentMessageCode, 
-                        eeAttributeNameList));
-        }
-        
-        // The third check consists in verifying the element content does not only
-        // contains non alphanumerical characters
-        addChecker(new TextElementOnlyContainsNonAlphanumericalCharactersChecker(
-                        notPertinentMessageCode, 
-                        eeAttributeNameList));
-        
-        // The last check, when requested, consists in verifying the element
-        // content is not identical to another attribute.
-        if (StringUtils.isNotBlank(attributeNameToCompare)) {
-            addChecker(new TextElementNotIdenticalToAttributeChecker(
-                            attributeNameToCompare, 
-                            notPertinentMessageCode,    
-                            eeAttributeNameList));
-        }
+        this(checkEmptiness, 
+             attributeNameToCompare, 
+             blacklistNameToCompareWith, 
+             TestSolution.FAILED,
+             notPertinentMessageCode,
+             manualCheckMessage, 
+             eeAttributeNameList);
     }
     
     /**
      * Constructor.
-     * Enables to override the not pertinent solution.
+     * Returns FAILED when the attribute is not pertinent.
      * 
      * @param checkEmptiness
      * @param attributeNameToCompare
      * @param blacklistNameToCompareWith
      * @param notPertinentMessageCode
      * @param manualCheckMessage
-     * @param eeAttributeNameList 
      */
     public TextPertinenceChecker(
             boolean checkEmptiness,
-            String attributeNameToCompare,
-            String blacklistNameToCompareWith,
-            TestSolution notPertinentSolution,
+            @Nullable String attributeNameToCompare,
+            @Nullable String blacklistNameToCompareWith,
             String notPertinentMessageCode,
-            String manualCheckMessage,
-            String... eeAttributeNameList) {
-        super(manualCheckMessage, notPertinentSolution, eeAttributeNameList);
-
+            String manualCheckMessage) {
+        this(checkEmptiness, 
+             attributeNameToCompare, 
+             blacklistNameToCompareWith, 
+             TestSolution.FAILED,
+             notPertinentMessageCode,
+             manualCheckMessage);
+    }
+    
+    /**
+     * Add all the checkers to the checker collection
+     */
+    private void addCheckers() {
+        addTextEmptinessChecker();
+        addBlackListChecker();
+        addTextNonAlphanumChecker();
+        addAttributeComparisonChecker();
+    }
+    
+    /**
+     * Add a {@link TextEmptinessChecker} to the checker collection
+     */
+    protected final void addTextEmptinessChecker() {
         // The first check, when requested, is the consists in verifying
         // the element content emptiness
         if (checkEmptiness) {
-            addChecker(new TextElementEmptinessChecker(
-                        notPertinentSolution, 
-                        TestSolution.PASSED, 
-                        notPertinentMessageCode, 
-                        null, 
-                        eeAttributeNameList));
+            addChecker(new TextEmptinessChecker(
+                            getTextElementBuilder(),
+                            getNotPertinentSolution(), 
+                            TestSolution.PASSED, 
+                            notPertinentMessageCode, 
+                            null, 
+                            getEeAttributeNames()));
         }
+    }
 
+    /**
+     * Add a {@link TextBelongsToBlackListChecker} to the checker collection
+     */
+    protected final void addBlackListChecker() {
         // The second check consists in verifying the element content does not only
         // contains non alphanumerical characters
         if (StringUtils.isNotBlank(blacklistNameToCompareWith)) {
-            addChecker(new TextElementBelongsToBlackListChecker(
-                        blacklistNameToCompareWith,
-                        notPertinentSolution,
-                        notPertinentMessageCode, 
-                        eeAttributeNameList));
+            addChecker(new TextBelongsToBlackListChecker(
+                            getTextElementBuilder(),
+                            blacklistNameToCompareWith,
+                            getNotPertinentSolution(),
+                            notPertinentMessageCode, 
+                            getEeAttributeNames()));
         }
-        
+    }
+    
+    /**
+     * Add a {@link TextOnlyContainsNonAlphanumericalCharactersChecker}
+     * to the checker collection
+     */
+    protected final void addTextNonAlphanumChecker() {
         // The third check consists in verifying the element content does not only
         // contains non alphanumerical characters
-        addChecker(new TextElementOnlyContainsNonAlphanumericalCharactersChecker(
-                        notPertinentSolution,
+        addChecker(new TextOnlyContainsNonAlphanumericalCharactersChecker(
+                        getTextElementBuilder(),
+                        getNotPertinentSolution(),
                         notPertinentMessageCode, 
-                        eeAttributeNameList));
-        
+                        getEeAttributeNames()));
+    }
+
+    /**
+     * Add a {@link TextNotIdenticalToAttributeChecker} to the checker collection 
+     */
+    protected final void addAttributeComparisonChecker() {
         // The last check, when requested, consists in verifying the element
         // content is not identical to another attribute.
         if (StringUtils.isNotBlank(attributeNameToCompare)) {
-            addChecker(new TextElementNotIdenticalToAttributeChecker(
+            addChecker(new TextNotIdenticalToAttributeChecker(
+                            getTextElementBuilder(),
                             attributeNameToCompare, 
-                            notPertinentSolution,
+                            getNotPertinentSolution(),
                             notPertinentMessageCode, 
-                            eeAttributeNameList));
+                            getEeAttributeNames()));
         }
     }
 

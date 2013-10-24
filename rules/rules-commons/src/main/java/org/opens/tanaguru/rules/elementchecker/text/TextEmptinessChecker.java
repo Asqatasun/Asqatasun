@@ -20,7 +20,7 @@
  *  Contact us by mail: open-s AT open-s DOT com
  */
 
-package org.opens.tanaguru.rules.elementchecker.attribute;
+package org.opens.tanaguru.rules.elementchecker.text;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
@@ -29,89 +29,98 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.ElementCheckerImpl;
+import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
- * This class checks whether the content of an attribute is empty.
+ * This class checks whether the content of an text is empty.
  */
-public abstract class TextEmptinessChecker extends ElementCheckerImpl {
+public class TextEmptinessChecker extends ElementCheckerImpl {
 
-    /**
-     * Text Not empty solution. Default is PASSED.
-     */
+    /* Text Not empty solution. Default is PASSED */
     private TestSolution textNotEmptySolution = TestSolution.PASSED;
 
-    /**
-     * Text empty solution. Default is FAILED.
-     */
+    /* Text empty solution. Default is FAILED */
     private TestSolution textEmptySolution = TestSolution.FAILED;
 
-    /**
+    /*
      * The message code associated with a processRemark when the attribute is
      * empty on an element
      */
     private String messageCodeOnTextEmpty;
     
-    /**
+    /* 
      * The message code associated with a processRemark when the attribute is
      * empty on an element
      */
     private String messageCodeOnTextNotEmpty;
     
+    /* The text element builder. By default, it is a simple Text builder */
+    private TextElementBuilder textElementBuilder;
+    
     /**
      * Constructor. 
      * Returns FAILED when the text is empty and PASSED when it is not.
      * 
+     * @param textElementBuilder
      * @param messageCodeOnTextEmpty
      * @param messageCodeOnTextNotEmpty
      */
     public TextEmptinessChecker(
+            TextElementBuilder textElementBuilder,
             String messageCodeOnTextEmpty, 
-            String messageCodeOnAttrNotEmpty) {
+            String messageCodeOnTextNotEmpty) {
         super();
+        this.textElementBuilder = textElementBuilder;
         this.messageCodeOnTextEmpty = messageCodeOnTextEmpty;
-        this.messageCodeOnTextNotEmpty = messageCodeOnAttrNotEmpty;
+        this.messageCodeOnTextNotEmpty = messageCodeOnTextNotEmpty;
     }
     
     /**
      * Constructor.
      * Returns FAILED when the text is empty and PASSED when it is not.
      * 
+     * @param textElementBuilder
      * @param messageCodeOnTextEmpty
      * @param messageCodeOnTextNotEmpty
      * @param eeAttributeNameList 
      */
     public TextEmptinessChecker(
+            TextElementBuilder textElementBuilder,
             String messageCodeOnTextEmpty, 
-            String messageCodeOnAttrNotEmpty, 
+            String messageCodeOnTextNotEmpty, 
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
+        this.textElementBuilder = textElementBuilder;
         this.messageCodeOnTextEmpty = messageCodeOnTextEmpty;
-        this.messageCodeOnTextNotEmpty = messageCodeOnAttrNotEmpty;
+        this.messageCodeOnTextNotEmpty = messageCodeOnTextNotEmpty;
     }
     
     /**
      * Constructor.
      * 
+     * @param textElementBuilder
      * @param textEmptySolution
      * @param textNotEmptySolution
      * @param messageCodeOnTextEmpty
      * @param messageCodeOnTextNotEmpty
      */
     public TextEmptinessChecker(
+            TextElementBuilder textElementBuilder,
             TestSolution textEmptySolution,
             TestSolution textNotEmptySolution,
             String messageCodeOnTextEmpty, 
-            String messageCodeOnAttrNotEmpty) {
-        super();
+            String messageCodeOnTextNotEmpty) {
+        this(textElementBuilder, 
+             messageCodeOnTextEmpty, 
+             messageCodeOnTextNotEmpty);
         this.textEmptySolution = textEmptySolution;
         this.textNotEmptySolution = textNotEmptySolution;
-        this.messageCodeOnTextEmpty = messageCodeOnTextEmpty;
-        this.messageCodeOnTextNotEmpty = messageCodeOnAttrNotEmpty;
     }
     
     /**
      * Constructor 
      * 
+     * @param textElementBuilder
      * @param textEmptySolution
      * @param textNotEmptySolution
      * @param messageCodeOnTextEmpty
@@ -119,16 +128,18 @@ public abstract class TextEmptinessChecker extends ElementCheckerImpl {
      * @param eeAttributeNameList 
      */
     public TextEmptinessChecker(
+            TextElementBuilder textElementBuilder,
             TestSolution textEmptySolution,
             TestSolution textNotEmptySolution,
             String messageCodeOnTextEmpty, 
-            String messageCodeOnAttrNotEmpty, 
+            String messageCodeOnTextNotEmpty, 
             String... eeAttributeNameList) {
-        super(eeAttributeNameList);
+        this(textElementBuilder, 
+             messageCodeOnTextEmpty, 
+             messageCodeOnTextNotEmpty, 
+             eeAttributeNameList);
         this.textEmptySolution = textEmptySolution;
         this.textNotEmptySolution = textNotEmptySolution;
-        this.messageCodeOnTextEmpty = messageCodeOnTextEmpty;
-        this.messageCodeOnTextNotEmpty = messageCodeOnAttrNotEmpty;
     }
     
     @Override
@@ -158,23 +169,22 @@ public abstract class TextEmptinessChecker extends ElementCheckerImpl {
         }
         
         TestSolution testSolution = TestSolution.PASSED;
-        
+        String textElement;
         for (Element el : elements) {
-            if (isElementEmpty(el)) {
+            textElement = textElementBuilder.buildTextFromElement(el);
+            if (textElement == null)  {
+                testSolution = setTestSolution(testSolution, TestSolution.NOT_APPLICABLE);
+            } else if (isElementEmpty(textElement)) {
                 
                 testSolution = setTestSolution(testSolution, textEmptySolution);
 
                 if (StringUtils.isNotBlank(messageCodeOnTextEmpty)) {
-                    
                     addSourceCodeRemark(textEmptySolution, el, messageCodeOnTextEmpty);
-                    
                 }
                 
             } else if (StringUtils.isNotBlank(messageCodeOnTextNotEmpty)) {
-                
                 testSolution = setTestSolution(testSolution, textNotEmptySolution);
                 addSourceCodeRemark(textNotEmptySolution, el, messageCodeOnTextNotEmpty);
-                
             }
         }
         testSolutionHandler.addTestSolution(testSolution);
@@ -185,6 +195,8 @@ public abstract class TextEmptinessChecker extends ElementCheckerImpl {
      * @param element
      * @return whether an element is seen as empty
      */
-    public abstract boolean isElementEmpty(Element element);
+    private boolean isElementEmpty(String textElement) {
+        return StringUtils.isBlank(textElement);
+    }
 
 }

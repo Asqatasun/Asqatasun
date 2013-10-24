@@ -23,7 +23,6 @@
 package org.opens.tanaguru.rules.elementchecker.attribute;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.opens.tanaguru.entity.audit.TestSolution;

@@ -26,6 +26,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.validator.GenericValidator;
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -41,6 +42,8 @@ import static org.opens.tanaguru.rules.keystore.AttributeStore.XML_LANG_ATTR;
 import static org.opens.tanaguru.rules.keystore.EvidenceStore.*;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
+import org.opens.tanaguru.rules.textbuilder.CompleteTextElementBuilder;
+import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 import org.opens.tanaguru.rules.utils.LanguageDetectionResult;
 import org.opens.tanaguru.rules.utils.LanguageDetector;
 
@@ -93,6 +96,18 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
     public void setIdenticalLangMsg(String identicalLangMsg) {
         this.identicalLangMsg = identicalLangMsg;
     }
+    
+    /** the number of elements tested */
+    private int nbOfElementsTested =0;
+    public int getNbOfElementsTested() {
+        return nbOfElementsTested;
+    }
+    public void newElementTested() {
+        nbOfElementsTested++;
+    }
+
+    /* the text Element Builder used to extract text to test */
+    private TextElementBuilder textElementBuilder;
     
     /**
      * Default constructor
@@ -305,19 +320,26 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
      * @return 
      */
     protected String extractTextFromElement (Element element, boolean extractRecursively) {
+        if (EXCLUDED_ELEMENTS_LIST.contains(element.tagName())) {
+            System.out.println("return null with " + element.tagName());
+            return null;
+        }
         StringBuilder strb = new StringBuilder();
-        
-        strb.append(getTextualContentOfElement(element));
+        if (textElementBuilder == null) {
+            textElementBuilder = new CompleteTextElementBuilder();
+        }
+        strb.append(textElementBuilder.buildTextFromElement(element));
 
         if (extractRecursively) {
             for (Element el : element.children()) {
                 if (!isLangDefinedForElement(el) && 
                         !EXCLUDED_ELEMENTS_LIST.contains(el.tagName())) {
+                    strb.append(TextElementBuilder.SPACER);
                     strb.append(extractTextFromElement(el, true));
                 }
             }
         }
-        return strb.toString();
+        return strb.toString().replaceAll(" +", " ");
     }
     
     /**
@@ -326,8 +348,14 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
      * @return 
      */
     protected boolean isTextTestable(String extractedText) {
-        Matcher m = nonAlphanumericPattern.matcher(extractedText);
-        return StringUtils.isNotBlank(extractedText) && !m.matches();
+        if (StringUtils.isBlank(extractedText)){
+            return false;
+        }
+        String textToTest = StringUtils.trim(extractedText);
+        Matcher m = nonAlphanumericPattern.matcher(textToTest);
+        return !m.matches() && 
+               !GenericValidator.isEmail(textToTest) && 
+               !GenericValidator.isUrl(textToTest);
     }
     
     /**

@@ -20,7 +20,7 @@
  *  Contact us by mail: open-s AT open-s DOT com
  */
 
-package org.opens.tanaguru.rules.elementchecker.attribute;
+package org.opens.tanaguru.rules.elementchecker.text;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,14 +32,14 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.NomenclatureBasedElementChecker;
-import org.opens.tanaguru.rules.elementchecker.TextualElementBuilder;
+import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
  * 
  * @author jkowalczyk
  */
-public class TextElementBelongsToBlackListChecker extends NomenclatureBasedElementChecker 
-            implements TextualElementBuilder {
+public class TextBelongsToBlackListChecker 
+                        extends NomenclatureBasedElementChecker {
 
     private static final String NON_ALPHANUMERIC_PATTERN_STR ="[^\\p{L}]*";
     private static final String TEXT_CASE_INSENSITIVE_PATTERN_STR ="(?i)";
@@ -81,61 +81,79 @@ public class TextElementBelongsToBlackListChecker extends NomenclatureBasedEleme
      */
     private TestSolution detectedSolution = TestSolution.FAILED;
     
+    /** The text element builder. By default, it is a simple Text builder*/
+    private TextElementBuilder textElementBuilder;
+    
     /**
      * Constructor
+     * @param textElementBuilder
      * @param blackListNomName
      * @param textBelongsToBlackListMessageCode
      */
-    public TextElementBelongsToBlackListChecker(
+    public TextBelongsToBlackListChecker(
+            TextElementBuilder textElementBuilder,
             String blackListNomName,
             String textBelongsToBlackListMessageCode) {
         super();
+        this.textElementBuilder = textElementBuilder;
         this.blackListNomName = blackListNomName;
         this.textBelongsToBlackListMessageCode = textBelongsToBlackListMessageCode;
     }
     
     /**
      * Constructor
+     * @param textElementBuilder
      * @param blackListNomName
      * @param textBelongsToBlackListMessageCode
      * @param eeAttributeNameList 
      */
-    public TextElementBelongsToBlackListChecker(
+    public TextBelongsToBlackListChecker(
+            TextElementBuilder textElementBuilder,
             String blackListNomName,
             String textBelongsToBlackListMessageCode,
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
+        this.textElementBuilder = textElementBuilder;
         this.blackListNomName = blackListNomName;
         this.textBelongsToBlackListMessageCode = textBelongsToBlackListMessageCode;
     }
     
     /**
      * Constructor
+     * @param textElementBuilder
      * @param blackListNomName
      * @param detectedSolution
      * @param textBelongsToBlackListMessageCode
      */
-    public TextElementBelongsToBlackListChecker(
+    public TextBelongsToBlackListChecker(
+            TextElementBuilder textElementBuilder,
             String blackListNomName,
             TestSolution detectedSolution,
             String textBelongsToBlackListMessageCode) {
-        this(blackListNomName,textBelongsToBlackListMessageCode);
+        this(textElementBuilder, 
+             blackListNomName,
+             textBelongsToBlackListMessageCode);
         this.detectedSolution = detectedSolution;
     }
     
     /**
      * Constructor
+     * @param textElementBuilder
      * @param blackListNomName
      * @param detectedSolution
      * @param textBelongsToBlackListMessageCode
      * @param eeAttributeNameList 
      */
-    public TextElementBelongsToBlackListChecker(
+    public TextBelongsToBlackListChecker(
+            TextElementBuilder textElementBuilder,
             String blackListNomName,
             TestSolution detectedSolution,
             String textBelongsToBlackListMessageCode,
             String... eeAttributeNameList) {
-        this(blackListNomName,textBelongsToBlackListMessageCode,eeAttributeNameList);
+        this(textElementBuilder, 
+             blackListNomName,
+             textBelongsToBlackListMessageCode,
+             eeAttributeNameList);
         this.detectedSolution = detectedSolution;
     }
 
@@ -148,7 +166,7 @@ public class TextElementBelongsToBlackListChecker extends NomenclatureBasedEleme
              testSolutionHandler.addTestSolution(
                      checkTextElementBelongsToBlacklist(
                         element, 
-                        buildTextFromElement(element)));
+                        textElementBuilder.buildTextFromElement(element)));
          }
     }
     
@@ -164,6 +182,7 @@ public class TextElementBelongsToBlackListChecker extends NomenclatureBasedEleme
             String elementText) {
         // the test is made through the getter to force the initialisation
         if (element == null || 
+                elementText == null ||
                 CollectionUtils.isEmpty(getBlackListPatternCollection())) {
             return TestSolution.NOT_APPLICABLE;
         }
@@ -173,16 +192,11 @@ public class TextElementBelongsToBlackListChecker extends NomenclatureBasedEleme
                     detectedSolution,
                     element,
                     textBelongsToBlackListMessageCode, 
-                    getEvidenceElementCollection(element, getEeAttributeNameList()));
+                    getEvidenceElementCollection(element, getEeAttributeNameAsCollection()));
                 return detectedSolution;
             }
         }
         return TestSolution.PASSED;
     }
 
-    @Override
-    public String buildTextFromElement(Element element) {
-        return element.text().trim();
-    }
-    
 }

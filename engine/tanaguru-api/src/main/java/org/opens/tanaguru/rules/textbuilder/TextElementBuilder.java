@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tanaguru.rules.elementchecker;
+package org.opens.tanaguru.rules.textbuilder;
 
 import org.jsoup.nodes.Element;
 
@@ -28,7 +28,10 @@ import org.jsoup.nodes.Element;
  * element, the value of an attribute of the element or the concatenation of 
  * multiple values.
  */
-public interface TextualElementBuilder {
+public interface TextElementBuilder {
+
+    /* space needed from string concatenation */
+    static char SPACER = ' ';
     
     /**
      * @param element

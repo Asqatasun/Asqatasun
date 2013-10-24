@@ -61,6 +61,9 @@ public abstract class PertinenceChecker extends NomenclatureBasedElementChecker 
      * Default is FAILED
      */
     private TestSolution notPertinentSolution = TestSolution.FAILED;
+    public TestSolution getNotPertinentSolution() {
+        return notPertinentSolution;
+    }
 
     /**
      * Constructor. 
@@ -147,15 +150,15 @@ public abstract class PertinenceChecker extends NomenclatureBasedElementChecker 
             ElementHandler<Element> elementHandler) {
         
         TestSolutionHandler testSolutionHandler = new TestSolutionHandlerImpl();
-        
+
         for (ElementChecker ec : checkers) {
             testSolutionHandler.cleanTestSolutions();
             ec.check(sspHandler, elementHandler, testSolutionHandler);
-            
+
             TestSolution checkerSolution = testSolutionHandler.getTestSolution();
 
             Logger.getLogger(this.getClass()).debug("Checker "+ec.getClass() + 
-                    "returned " + checkerSolution);
+                    " returned " + checkerSolution);
 
             if (checkerSolution.equals(notPertinentSolution) || 
                     checkerSolution.equals(TestSolution.NOT_APPLICABLE))  {

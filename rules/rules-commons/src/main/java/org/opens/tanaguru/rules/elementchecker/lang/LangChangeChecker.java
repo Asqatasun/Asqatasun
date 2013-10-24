@@ -111,8 +111,9 @@ public class LangChangeChecker extends LangChecker {
         // we extract the textual content of the current element. If not empty 
         // we check the language relevancy 
         String extractedText = extractTextFromElement(element, false);
-
+        System.out.println(extractedText);
         if (isTextTestable(extractedText)) {
+            newElementTested();
             if (langRedefinitionInProgress) {
                 tsh.addTestSolution(
                     checkLanguageDifferentFromDefault(element, extractedText));
