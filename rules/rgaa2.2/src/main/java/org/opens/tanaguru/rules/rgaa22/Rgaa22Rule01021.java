@@ -42,7 +42,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NOT_PERTINENT
  * @author jkowalczyk
  */
 public class Rgaa22Rule01021 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
-
+    
     /** The element selector */
     private static final ElementSelector ELEMENT_SELECTOR = 
             new MultipleElementSelector(
@@ -51,20 +51,20 @@ public class Rgaa22Rule01021 extends AbstractPageRuleWithSelectorAndCheckerImple
     
     /** The element checker */
     private static final ElementChecker ELEMENT_CHECKER = 
-            new AttributePertinenceChecker(
-                // the attribute to check
-                TITLE_ATTR, 
-                // the selection keep elements with not empty title
-                false, 
-                // compare title with src attribute
-                SRC_ATTR, 
-                // no black list comparison
-                null, 
-                //  message associated with element when title is not pertinent
-                NOT_PERTINENT_TITLE_OF_FRAME_MSG, 
-                // message associated with element when pertinence cannot be determined
-                CHECK_TITLE_OF_FRAME_PERTINENCE_MSG, 
-                // evidence elements 
+              new AttributePertinenceChecker(
+                    // the attribute to check
+                    TITLE_ATTR, 
+                    // the selection keep elements with not empty title
+                    false, 
+                    // compare title with src attribute
+                    SRC_ATTR, 
+                    // no black list comparison
+                    null, 
+                    //  message associated with element when title is not pertinent
+                    NOT_PERTINENT_TITLE_OF_FRAME_MSG, 
+                    // message associated with element when pertinence cannot be determined
+                    CHECK_TITLE_OF_FRAME_PERTINENCE_MSG, 
+                    // evidence elements 
                 TITLE_ATTR);
 
     public Rgaa22Rule01021() {

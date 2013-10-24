@@ -132,7 +132,7 @@ public class Rgaa22Rule03101 extends AbstractPageRuleMarkupImplementation {
                 sspHandler, 
                 elementsWithoutUniqueId, 
                 testSolutionHandler);
-
+        
         // check the pertinence of title attribute for elements without unique id
         ATTRIBUTE_PERTINENCE_CHECKER.check(
                 sspHandler, 

@@ -23,13 +23,14 @@ package org.opens.tanaguru.rules.rgaa22;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
-import org.opens.tanaguru.rules.elementchecker.attribute.AttributeEmptinessChecker;
+import org.opens.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
 import org.opens.tanaguru.rules.elementselector.ElementSelector;
 import org.opens.tanaguru.rules.elementselector.MultipleElementSelector;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.FRAME_WITH_TITLE_CSS_LIKE_QUERY;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.IFRAME_WITH_TITLE_CSS_LIKE_QUERY;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.EMPTY_TITLE_OF_FRAME_MSG;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 1.1 of the referential RGAA 2.2.
@@ -48,9 +49,9 @@ public class Rgaa22Rule01011 extends AbstractPageRuleWithSelectorAndCheckerImple
     
     /** The element checker */
     private static final ElementChecker ELEMENT_CHECKER = 
-            new AttributeEmptinessChecker(
+            new TextEmptinessChecker(
                 // the attribute to check
-                TITLE_ATTR, 
+                new TextAttributeOfElementBuilder(TITLE_ATTR), 
                 // failed when the attribute is empty
                 TestSolution.FAILED, 
                 // passed when the attribute is not empty

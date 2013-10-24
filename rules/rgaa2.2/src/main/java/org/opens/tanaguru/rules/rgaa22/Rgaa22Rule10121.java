@@ -22,13 +22,14 @@ package org.opens.tanaguru.rules.rgaa22;
 
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.opens.tanaguru.rules.elementchecker.attribute.AttributeEmptinessChecker;
+import org.opens.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
 import org.opens.tanaguru.rules.elementselector.ElementSelector;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.ACRONYM_ELEMENT;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 10.12 of the referential RGAA 2.2.
@@ -49,8 +50,8 @@ public class Rgaa22Rule10121 extends AbstractPageRuleWithSelectorAndCheckerImple
     public Rgaa22Rule10121 () {
         super(
                 ELEMENT_SELECTOR, 
-                new AttributeEmptinessChecker(
-                    TITLE_ATTR, 
+                new TextEmptinessChecker(
+                    new TextAttributeOfElementBuilder(TITLE_ATTR), 
                     TestSolution.NOT_APPLICABLE, 
                     TestSolution.NEED_MORE_INFO, 
                     null, 
