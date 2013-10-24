@@ -22,7 +22,7 @@ package org.opens.tanaguru.rules.accessiweb22;
 
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
-import org.opens.tanaguru.rules.elementchecker.attribute.TextElementEmptinessChecker;
+import org.opens.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
 import org.opens.tanaguru.rules.elementselector.ImageElementSelector;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.DATA_ATTR;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.OBJECT_TYPE_IMG_CSS_LIKE_QUERY;
@@ -30,6 +30,7 @@ import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
 import static org.opens.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
 import static org.opens.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
+import org.opens.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
 
 /**
  * Implementation of the rule 1.2.4 of the referential Accessiweb 2.2.
@@ -54,7 +55,9 @@ public class Aw22Rule01024 extends AbstractMarkerPageRuleImplementation {
                 INFORMATIVE_IMAGE_MARKER, 
 
                 // checker for elements identified by marker
-                new TextElementEmptinessChecker(
+                new TextEmptinessChecker(
+                    // the text element builder
+                    new SimpleTextElementBuilder(),
                     // solution when text is empty
                     TestSolution.PASSED, 
                     // solution when text is not empty
@@ -68,7 +71,9 @@ public class Aw22Rule01024 extends AbstractMarkerPageRuleImplementation {
                     DATA_ATTR),
                 
                 // checker for elements not identified by marker
-                new TextElementEmptinessChecker(
+                new TextEmptinessChecker(
+                    // the text element builder
+                    new SimpleTextElementBuilder(),
                     // solution when text is empty
                     TestSolution.NEED_MORE_INFO, 
                     // solution when text is notempty

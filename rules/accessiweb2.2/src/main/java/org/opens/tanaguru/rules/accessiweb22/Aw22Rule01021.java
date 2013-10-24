@@ -21,7 +21,7 @@ package org.opens.tanaguru.rules.accessiweb22;
 
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
-import org.opens.tanaguru.rules.elementchecker.attribute.AttributeEmptinessChecker;
+import org.opens.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
 import org.opens.tanaguru.rules.elementselector.ImageElementSelector;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
@@ -29,6 +29,7 @@ import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.IMG_WITH_ALT_W
 import static org.opens.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
 import static org.opens.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 1.2.1 of the referential Accessiweb 2.2.
@@ -50,8 +51,8 @@ public class Aw22Rule01021 extends AbstractMarkerPageRuleImplementation {
                 INFORMATIVE_IMAGE_MARKER, 
 
                // checker for elements identified by marker
-                new AttributeEmptinessChecker( 
-                    ALT_ATTR, 
+                new TextEmptinessChecker( 
+                    new TextAttributeOfElementBuilder(ALT_ATTR), 
                     // solution when attribute is empty
                     TestSolution.PASSED, 
                     // solution when attribute is not empty
@@ -63,8 +64,8 @@ public class Aw22Rule01021 extends AbstractMarkerPageRuleImplementation {
                     SRC_ATTR),
                 
                 // checker for elements not identified by marker
-                new AttributeEmptinessChecker(
-                    ALT_ATTR, 
+                new TextEmptinessChecker(
+                    new TextAttributeOfElementBuilder(ALT_ATTR), 
                     TestSolution.NEED_MORE_INFO, 
                     TestSolution.NEED_MORE_INFO, 
                     CHECK_ELEMENT_WITH_EMPTY_ALT_MSG, 

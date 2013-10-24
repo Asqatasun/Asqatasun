@@ -22,13 +22,14 @@ package org.opens.tanaguru.rules.accessiweb22;
 
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
-import org.opens.tanaguru.rules.elementchecker.attribute.AttributeEmptinessChecker;
+import org.opens.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.SUMMARY_ATTR;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.TABLE_WITH_SUMMARY_CSS_LIKE_QUERY;
 import static org.opens.tanaguru.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
 import static org.opens.tanaguru.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 5.2.2 of the referential Accessiweb 2.2.
@@ -53,9 +54,9 @@ public class Aw22Rule05022 extends AbstractMarkerPageRuleImplementation {
                 DATA_TABLE_MARKER,
 
                 // checker for elements identified by marker
-                new AttributeEmptinessChecker(
+                new TextEmptinessChecker(
                     // the attribute to check
-                    SUMMARY_ATTR,
+                    new TextAttributeOfElementBuilder(SUMMARY_ATTR), 
                     // passed when attribute is found
                     TestSolution.PASSED, 
                     // failed when attribute is not found
@@ -68,9 +69,9 @@ public class Aw22Rule05022 extends AbstractMarkerPageRuleImplementation {
                     SUMMARY_ATTR),
                 
                 // checker for elements identified by marker
-                new AttributeEmptinessChecker(
+                new TextEmptinessChecker(
                     // the attribute to check
-                    SUMMARY_ATTR,
+                    new TextAttributeOfElementBuilder(SUMMARY_ATTR), 
                     // nmi when attribute is empty
                     TestSolution.NEED_MORE_INFO, 
                     // nmi when attribute is not empty

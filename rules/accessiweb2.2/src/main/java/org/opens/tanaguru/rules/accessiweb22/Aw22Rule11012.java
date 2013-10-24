@@ -25,15 +25,16 @@ import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementatio
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
-import org.opens.tanaguru.rules.elementchecker.attribute.AttributeEmptinessChecker;
 import org.opens.tanaguru.rules.elementchecker.attribute.AttributePresenceChecker;
 import org.opens.tanaguru.rules.elementchecker.attribute.IdUnicityChecker;
+import org.opens.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
 import org.opens.tanaguru.rules.elementselector.ElementSelector;
 import org.opens.tanaguru.rules.elementselector.InputFormElementWithExplicitLabelSelector;
 import org.opens.tanaguru.rules.elementselector.InputFormElementWithInplicitLabelSelector;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.ID_ATTR;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.ID_MISSING_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.ID_NOT_UNIQUE_MSG;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 11.1.2 of the referential Accessiweb 2.2.
@@ -92,8 +93,8 @@ public class Aw22Rule11012 extends AbstractPageRuleMarkupImplementation {
          when attribute is empty
          */
         ElementChecker attributeEmptinessChecker = 
-                new AttributeEmptinessChecker(
-                        ID_ATTR, 
+                new TextEmptinessChecker(
+                        new TextAttributeOfElementBuilder(ID_ATTR), 
                         ID_MISSING_MSG, 
                         null);
         attributeEmptinessChecker.check(sspHandler, elementHandler, testSolutionHandler);

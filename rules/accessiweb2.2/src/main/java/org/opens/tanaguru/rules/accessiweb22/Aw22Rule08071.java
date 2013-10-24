@@ -40,6 +40,8 @@ import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.HTML_WITH_LANG
  */
 public class Aw22Rule08071 extends AbstractPageRuleMarkupImplementation {
 
+    private LangChecker ec = new LangChangeChecker();
+    
     /**
      * Default constructor
      */
@@ -64,9 +66,14 @@ public class Aw22Rule08071 extends AbstractPageRuleMarkupImplementation {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;
         }
-        LangChecker ec = new LangChangeChecker();
+        ec = new LangChangeChecker();
         ec.setNomenclatureLoaderService(nomenclatureLoaderService);
         ec.check(sspHandler, selectionHandler, testSolutionHandler);
+    }
+    
+    @Override
+    public int getSelectionSize() {
+        return ec.getNbOfElementsTested();
     }
 
 }
