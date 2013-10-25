@@ -16,6 +16,10 @@
             <artifactId>selenium-java</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.github.detro.ghostdriver</groupId>
+            <artifactId>phantomjsdriver</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.saucelabs</groupId>
             <artifactId>sebuilder-interpreter</artifactId>
         </dependency>

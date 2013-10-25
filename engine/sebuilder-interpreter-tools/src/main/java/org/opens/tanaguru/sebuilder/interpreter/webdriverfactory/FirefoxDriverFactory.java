@@ -17,12 +17,15 @@ package org.opens.tanaguru.sebuilder.interpreter.webdriverfactory;
 
 import com.sebuilder.interpreter.webdriverfactory.WebDriverFactory;
 import java.util.HashMap;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class TgFirefox implements WebDriverFactory {
+public class FirefoxDriverFactory implements WebDriverFactory {
 
+    private static final String DISPLAY_PROPERTY = "display";
+    
     FirefoxProfile firefoxProfile;
     public void setFirefoxProfile(FirefoxProfile firefoxProfile) {
         this.firefoxProfile = firefoxProfile;
@@ -35,6 +38,16 @@ public class TgFirefox implements WebDriverFactory {
      */
     @Override
     public RemoteWebDriver make(HashMap<String, String> config) {
-        return new FirefoxDriver(firefoxProfile);
+        FirefoxBinary ffBinary = new FirefoxBinary();
+        if (System.getProperty(DISPLAY_PROPERTY) != null) {
+            ffBinary.setEnvironmentProperty(
+                    DISPLAY_PROPERTY.toUpperCase(), 
+                    System.getProperty(DISPLAY_PROPERTY));
+        } else if (System.getenv(DISPLAY_PROPERTY.toUpperCase()) != null) {
+            ffBinary.setEnvironmentProperty(
+                    DISPLAY_PROPERTY.toUpperCase(), 
+                    System.getenv(DISPLAY_PROPERTY.toUpperCase()));
+        }
+        return new FirefoxDriver(ffBinary, firefoxProfile);
     }
 }

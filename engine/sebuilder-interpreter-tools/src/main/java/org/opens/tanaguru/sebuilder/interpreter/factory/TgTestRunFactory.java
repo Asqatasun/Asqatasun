@@ -34,7 +34,7 @@ import org.apache.commons.logging.Log;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.opens.tanaguru.sebuilder.interpreter.NewPageListener;
 import org.opens.tanaguru.sebuilder.interpreter.TgTestRun;
-import org.opens.tanaguru.sebuilder.interpreter.webdriverfactory.TgFirefox;
+import org.opens.tanaguru.sebuilder.interpreter.webdriverfactory.FirefoxDriverFactory;
 
 /**
  *
@@ -45,8 +45,8 @@ public class TgTestRunFactory extends TestRunFactory {
     /**
      * The firefox profile used when the browser is loaded
      */
-    WebDriverFactory webDriverFactory = new TgFirefox();
-
+    WebDriverFactory webDriverFactory = new FirefoxDriverFactory();
+//    WebDriverFactory webDriverFactory = new PhantomJsFactory();
 
     /**
      * The firefox profile used when the browser is loaded
@@ -104,8 +104,8 @@ public class TgTestRunFactory extends TestRunFactory {
     
     @Override
     public TestRun createTestRun(Script script) {
-        if (webDriverFactory instanceof TgFirefox) {
-            ((TgFirefox)webDriverFactory).setFirefoxProfile(firefoxProfile);
+        if (webDriverFactory instanceof FirefoxDriverFactory) {
+            ((FirefoxDriverFactory)webDriverFactory).setFirefoxProfile(firefoxProfile);
         }
         TgTestRun testRun = new TgTestRun(
                 script, 
@@ -120,8 +120,8 @@ public class TgTestRunFactory extends TestRunFactory {
     
     @Override
     public TestRun createTestRun(Script script, Log log, WebDriverFactory webDriverFactory, HashMap<String, String> webDriverConfig) {
-        if (webDriverFactory instanceof TgFirefox) {
-            ((TgFirefox)webDriverFactory).setFirefoxProfile(firefoxProfile);
+        if (webDriverFactory instanceof FirefoxDriverFactory) {
+            ((FirefoxDriverFactory)webDriverFactory).setFirefoxProfile(firefoxProfile);
         }
         TgTestRun testRun = 
                 new TgTestRun(
