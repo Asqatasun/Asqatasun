@@ -17,6 +17,7 @@
                 <filtering>true</filtering>
                 <excludes>
                     <exclude>**/sql/*</exclude>
+                    <exclude>**/sql-update/*</exclude>
                     <exclude>**/scripts/*</exclude>
                     <exclude>**/lib/*</exclude>
                     <exclude>**/tanaguru-test-conf/*</exclude>
