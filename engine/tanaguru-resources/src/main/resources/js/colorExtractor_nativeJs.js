@@ -20,8 +20,11 @@ function isTextNode (elem) {
     if (isElementOfType(elem,'img') && elem.hasAttribute('alt') && (elem.getAttribute('type').trim().length > 0)) {
         return true;
     }
-    if (elem.textContent.trim().length > 0) {
-        return true;
+    for (var i=0 ; i<elem.childNodes.length ; i++) {
+        if (elem.childNodes[i].nodeName === "#text" && 
+            elem.childNodes[i].textContent.trim().length > 0) {
+            return true;
+        }
     }
     return false;
 };
