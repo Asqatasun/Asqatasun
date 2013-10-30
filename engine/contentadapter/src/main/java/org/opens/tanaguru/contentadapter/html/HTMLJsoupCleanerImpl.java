@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -34,6 +34,9 @@ import org.opens.tanaguru.contentadapter.HTMLCleaner;
  */
 public class HTMLJsoupCleanerImpl extends AbstractHTMLCleaner implements HTMLCleaner {
     
+    private static final String EMPTY_NS_DEFINITION_PATTERN = "xmlns=\"(\\s)*\"";
+    private static final String NS_TAG_OPEN_PREFIX_DEFINITION_PATTERN = "<a[0-9]+:";
+    private static final String NS_TAG_CLOSURE_PREFIX_DEFINITION_PATTERN = "</a[0-9]+:";
     static final String CORRECTOR_NAME = "JsoupCleaner";
 
     public HTMLJsoupCleanerImpl() {
@@ -42,6 +45,7 @@ public class HTMLJsoupCleanerImpl extends AbstractHTMLCleaner implements HTMLCle
 
     @Override
     public void run() {
+        dirtyHTML = removeBadNamespaceDefinition(dirtyHTML);
         Document doc = Jsoup.parse(dirtyHTML);
         doc.outputSettings().escapeMode(Entities.EscapeMode.xhtml);
         doc.outputSettings().outline(true);
@@ -90,6 +94,19 @@ public class HTMLJsoupCleanerImpl extends AbstractHTMLCleaner implements HTMLCle
             removeMalformedAttributes(child);
             i++;
         }
+    }
+    
+    /**
+     * Webdriver may return some html with namespace prefixed tag. This method
+     * provides a clean operation on the source code, to enable its parse with
+     * Jsoup
+     * @param dirtyHTML
+     * @return 
+     */
+    private String removeBadNamespaceDefinition(String dirtyHTML) {
+        return dirtyHTML.replaceAll(EMPTY_NS_DEFINITION_PATTERN, "")
+                        .replaceAll(NS_TAG_OPEN_PREFIX_DEFINITION_PATTERN, "<")
+                        .replaceAll(NS_TAG_CLOSURE_PREFIX_DEFINITION_PATTERN, "</");
     }
     
     @Override
