@@ -787,7 +787,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     private String closeElement(String elementHtml, String elementName) {
         StringBuilder strb =  new StringBuilder();
         strb.append(elementHtml);
-        strb.append(" [...] ");
+        strb.append("[...]");
         strb.append(ESCAPED_OPEN_TAG);
         strb.append(CLOSURE_TAG_OCCUR);
         strb.append(elementName);
