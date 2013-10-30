@@ -91,6 +91,11 @@
                                         <a href="${evidenceElement2.value}" title="${evidenceElement2.value}">${evidenceElement2.value}</a>
                                     </td>
                                         </c:when>
+                                        <c:when test="${evidenceElement2.key == 'Css-Filename' && fn:startsWith(evidenceElement2.value, 'http')}">
+                                    <td class="${evidenceElement2.key}">
+                                        <a href="${evidenceElement2.value}" title="${evidenceElement2.value}">${evidenceElement2.value}</a>
+                                    </td>
+                                        </c:when>
                                         <c:when test="${evidenceElement2.key == 'Snippet'}">
                                     <td class="${evidenceElement2.key}">
                                         <c:set var="snippetCode" scope="page">
