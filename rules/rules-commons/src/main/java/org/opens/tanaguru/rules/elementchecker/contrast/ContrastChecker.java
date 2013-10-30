@@ -38,8 +38,15 @@ import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.ElementCheckerImpl;
 import org.opens.tanaguru.rules.elementchecker.contrast.exception.ContrastCheckerParseResultException;
-import static org.opens.tanaguru.rules.keystore.EvidenceStore.*;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
+import static org.opens.tanaguru.rules.keystore.EvidenceStore.BG_COLOR_EE;
+import static org.opens.tanaguru.rules.keystore.EvidenceStore.CONTRAST_EE;
+import static org.opens.tanaguru.rules.keystore.EvidenceStore.FG_COLOR_EE;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.BAD_CONTRAST_HIDDEN_ELEMENT_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.BAD_CONTRAST_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_CONTRAST_MANUALLY_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_CONTRAST_OF_IMAGE_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NOT_TREATED_BACKGROUND_COLOR_MSG;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.IMG_CSS_LIKE_QUERY;
 import org.opens.tanaguru.rules.utils.ContrastHelper;
 import static org.opens.tanaguru.service.ProcessRemarkService.DEFAULT_EVIDENCE;
 
@@ -130,10 +137,24 @@ public class ContrastChecker extends ElementCheckerImpl {
             // as passed, if some elements are invalid, we override it with a 
             // a failed solution
             parseJSONArray(sspHandler, new JSONArray(ppr), testSolutionHandler);
-            if (elementCounter > 0) {
-                testSolutionHandler.addTestSolution(TestSolution.PASSED);
+            if (elementCounter > 0) { 
+//                 means that no element is on error or NMI
+                if (testSolutionHandler.getTestSolution().equals(TestSolution.NOT_APPLICABLE)) {
+                    LOGGER.debug("nothing to say about contrast");
+                    if (sspHandler.domCssLikeSelectNodeSet(IMG_CSS_LIKE_QUERY).getSelectedElementNumber() == 0) {
+                        testSolutionHandler.addTestSolution(TestSolution.PASSED);
+                        LOGGER.debug("The page has no image, the result is Passed");
+                    } else {
+                        testSolutionHandler.addTestSolution(TestSolution.NEED_MORE_INFO);
+                        addProcessRemark(TestSolution.NEED_MORE_INFO, 
+                                         CHECK_CONTRAST_OF_IMAGE_MSG);
+                        LOGGER.debug("The page has images, the result is NMI");
+                    }
+                } else {
+                    LOGGER.debug("some Constrast remarks have been thrown");
+                }
             } else {
-                testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
+                LOGGER.debug("test is not applicable");
             }
         } catch (JSONException e) {
             resetCollectedDataOnException(testSolutionHandler, e);
