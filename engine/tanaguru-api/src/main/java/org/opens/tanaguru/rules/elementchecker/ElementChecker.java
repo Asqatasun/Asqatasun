@@ -22,6 +22,7 @@
 
 package org.opens.tanaguru.rules.elementchecker;
 
+import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
@@ -30,6 +31,12 @@ import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
  * This interface defines a check to be done on elements 
  */
 public interface ElementChecker {
+    
+    /* success solution */
+    TestSolution getSuccessSolution();
+    
+    /* failure solution */
+    TestSolution getFailureSolution();
     
     /**
      * Perform the check operation. The instance of {@link ElementHandler} 
