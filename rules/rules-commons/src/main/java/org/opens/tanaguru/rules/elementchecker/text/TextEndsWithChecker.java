@@ -57,9 +57,6 @@ public class TextEndsWithChecker extends NomenclatureBasedElementChecker {
      */
     private String textEndsWithMessageCode;
     
-    /* Detected solution. Default is FAILED */
-    private TestSolution detectedSolution = TestSolution.FAILED;
-    
     /* The text element builder. By default, it is a simple Text builder */
     private TextElementBuilder textElementBuilder;
     
@@ -110,7 +107,7 @@ public class TextEndsWithChecker extends NomenclatureBasedElementChecker {
             TestSolution detectedSolution, 
             String textEndsWithMessageCode) {
         this(textElementBuilder, extensionListNomName, textEndsWithMessageCode);
-        this.detectedSolution = detectedSolution;
+        setFailureSolution(detectedSolution);
     }
     
     /**
@@ -131,7 +128,7 @@ public class TextEndsWithChecker extends NomenclatureBasedElementChecker {
              extensionListNomName, 
              textEndsWithMessageCode,
              eeAttributeNameList);
-        this.detectedSolution = detectedSolution;
+        setFailureSolution(detectedSolution);
     }
 
     @Override
@@ -167,14 +164,14 @@ public class TextEndsWithChecker extends NomenclatureBasedElementChecker {
             if (StringUtils.endsWithIgnoreCase(elementText, extension)) {
                 
                 addSourceCodeRemark(
-                    detectedSolution,
+                    getFailureSolution(),
                     element,
                     textEndsWithMessageCode);
 
-                return detectedSolution;
+                return getFailureSolution();
             }
         }
-        return TestSolution.PASSED;
+        return getSuccessSolution();
     }
 
 }

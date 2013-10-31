@@ -66,11 +66,11 @@ public class DoctypeValidityChecker extends NomenclatureBasedElementChecker {
          if (!doesDoctypeBelongToNom(doctype, CASE_INSENSITIVE_DOCTYPE_NOM, false) && 
                 ! doesDoctypeBelongToNom(doctype, CASE_SENSITIVE_DOCTYPE_NOM, true)){
 
-            testSolutionHandler.addTestSolution(TestSolution.FAILED);
-            addProcessRemark(TestSolution.FAILED,INVALID_DOCTYPE_MSG);
+            testSolutionHandler.addTestSolution(getFailureSolution());
+            addProcessRemark(getFailureSolution(),INVALID_DOCTYPE_MSG);
             
         } else {
-            testSolutionHandler.addTestSolution(TestSolution.PASSED);
+            testSolutionHandler.addTestSolution(getSuccessSolution());
         }
     }
 

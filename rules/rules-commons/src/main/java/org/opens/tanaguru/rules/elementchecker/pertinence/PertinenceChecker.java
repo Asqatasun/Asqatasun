@@ -24,6 +24,7 @@ package org.opens.tanaguru.rules.elementchecker.pertinence;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -56,15 +57,6 @@ public abstract class PertinenceChecker extends NomenclatureBasedElementChecker 
      */
     private String manualCheckMessage;
     
-    /** 
-     * The global result of the test when the element is seen as not pertinent.
-     * Default is FAILED
-     */
-    private TestSolution notPertinentSolution = TestSolution.FAILED;
-    public TestSolution getNotPertinentSolution() {
-        return notPertinentSolution;
-    }
-
     /**
      * Constructor. 
      * Returns FAILED when the tested element is not pertinent.
@@ -101,7 +93,7 @@ public abstract class PertinenceChecker extends NomenclatureBasedElementChecker 
             String manualCheckMessage,
             TestSolution notPertinentSolution) {
         super();
-        this.notPertinentSolution = notPertinentSolution;
+        setFailureSolution(notPertinentSolution);
         this.manualCheckMessage = manualCheckMessage;
     }
     
@@ -118,7 +110,7 @@ public abstract class PertinenceChecker extends NomenclatureBasedElementChecker 
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
         
-        this.notPertinentSolution = notPertinentSolution;
+        setFailureSolution(notPertinentSolution);
         this.manualCheckMessage = manualCheckMessage;
     }
 
@@ -160,23 +152,33 @@ public abstract class PertinenceChecker extends NomenclatureBasedElementChecker 
             Logger.getLogger(this.getClass()).debug("Checker "+ec.getClass() + 
                     " returned " + checkerSolution);
 
-            if (checkerSolution.equals(notPertinentSolution) || 
+            if (checkerSolution.equals(ec.getFailureSolution()) || 
                     checkerSolution.equals(TestSolution.NOT_APPLICABLE))  {
                 return checkerSolution;
             }
         }
 
-        // if the test at this step is not failed, create a NMI ProcessRemark
-        // for a manual check
-        Element el = (Element)elementHandler.get().iterator().next();
-        addSourceCodeRemark(
-                TestSolution.NEED_MORE_INFO,
-                el,
-                manualCheckMessage);
+        createNMIProcessRemark(elementHandler);
 
         return TestSolution.NEED_MORE_INFO;
     }
 
+    /**
+     * 
+     * @param elementHandler 
+     */
+    private void createNMIProcessRemark(ElementHandler<Element> elementHandler) {
+        if (StringUtils.isNotBlank(manualCheckMessage)) {
+            // if the test at this step is not failed, create a NMI ProcessRemark
+            // for a manual check
+            Element el = (Element)elementHandler.get().iterator().next();
+            addSourceCodeRemark(
+                    TestSolution.NEED_MORE_INFO,
+                    el,
+                    manualCheckMessage);
+        }
+    }
+    
     /**
      * Set service to elementChecker depending on their nature.
      * @param elementChecker 

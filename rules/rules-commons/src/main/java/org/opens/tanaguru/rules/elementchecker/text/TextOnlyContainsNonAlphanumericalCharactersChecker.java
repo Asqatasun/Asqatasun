@@ -47,9 +47,6 @@ public class TextOnlyContainsNonAlphanumericalCharactersChecker
      */
     private String textOnlyContainsNacMsgCode;
 
-    /* Detected solution. Default is FAILED */
-    private TestSolution detectedSolution = TestSolution.FAILED;
-    
     /* The text element builder. By default, it is a simple Text builder */
     private TextElementBuilder textElementBuilder;
     
@@ -93,7 +90,7 @@ public class TextOnlyContainsNonAlphanumericalCharactersChecker
             TestSolution detectedSolution,
             String textOnlyContainsNacMsgCode) {
         this(textElementBuilder, textOnlyContainsNacMsgCode);
-        this.detectedSolution = detectedSolution;
+        setFailureSolution(detectedSolution);
     }
     
     /**
@@ -109,7 +106,7 @@ public class TextOnlyContainsNonAlphanumericalCharactersChecker
             String textOnlyContainsNacMsgCode,
             String... eeAttributeNameList) {
         this(textElementBuilder, textOnlyContainsNacMsgCode, eeAttributeNameList);
-        this.detectedSolution = detectedSolution;
+        setFailureSolution(detectedSolution);
     }
 
     @Override
@@ -140,19 +137,19 @@ public class TextOnlyContainsNonAlphanumericalCharactersChecker
         if (elementText == null) {
             return TestSolution.NOT_APPLICABLE;
         }
-        
+
         if (NON_ALPHANUMERIC_PATTERN.matcher(elementText).matches()) {
             
             addSourceCodeRemark(
-                detectedSolution,
+                getFailureSolution(),
                 element,
                 textOnlyContainsNacMsgCode);
             
-            return detectedSolution;
+            return getFailureSolution();
             
         } else {
             
-            return TestSolution.PASSED;
+            return getSuccessSolution();
             
         }
     }

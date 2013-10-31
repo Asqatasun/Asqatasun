@@ -75,6 +75,24 @@ public class LinkTextElementBuilderTest extends TestCase {
     /**
      * Test of buildTextFromElement method, of class LinkTextElementBuilder.
      */
+    public void testImageObjectLink() {
+        System.out.println("buildTextFromElement of Image object link");
+        Document document = Jsoup.parse("<a href=\"fake-link.htm\"> <object type=\"image\" "
+                + "data=\"fake-data.png\">"
+                
+                + "        cliquez ici"
+                + "    </object>"
+                +"</a>");
+        Element el = document.select("a").first();
+        LinkTextElementBuilder instance = new LinkTextElementBuilder();
+        String expResult = "cliquez ici";
+        String result = instance.buildTextFromElement(el);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of buildTextFromElement method, of class LinkTextElementBuilder.
+     */
     public void testSimpleLink() {
         System.out.println("buildTextFromElement of simple link");
         Document document = Jsoup.parse("<a href=\"\">    Text1 Text3    </a>");

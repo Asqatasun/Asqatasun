@@ -30,6 +30,7 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.keystore.AttributeStore;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 import org.opens.tanaguru.service.ProcessRemarkService;
 
@@ -80,8 +81,9 @@ public class TextNotIdenticalToAttributeCheckerTest extends TestCase {
         TextNotIdenticalToAttributeChecker instance = 
                 new TextNotIdenticalToAttributeChecker(
                     mockTextElementBuilder, 
-                    AttributeStore.ALT_ATTR, 
-                    DETECTION_MSG);
+                    new TextAttributeOfElementBuilder(AttributeStore.ALT_ATTR), 
+                    DETECTION_MSG, 
+                    null);
 
         replay(mockTextElementBuilder, mockSSPHandler, mockTestSolutionHandler);
         
@@ -110,7 +112,8 @@ public class TextNotIdenticalToAttributeCheckerTest extends TestCase {
         TextNotIdenticalToAttributeChecker instance = 
                 new TextNotIdenticalToAttributeChecker(
                     mockTextElementBuilder, 
-                    AttributeStore.ALT_ATTR, 
+                    new TextAttributeOfElementBuilder(AttributeStore.ALT_ATTR), 
+                    null, 
                     DETECTION_MSG);
         replay(mockTextElementBuilder,
                mockSSPHandler, 
@@ -143,9 +146,11 @@ public class TextNotIdenticalToAttributeCheckerTest extends TestCase {
         TextNotIdenticalToAttributeChecker instance = 
                 new TextNotIdenticalToAttributeChecker(
                     mockTextElementBuilder, 
-                    AttributeStore.ALT_ATTR, 
+                    new TextAttributeOfElementBuilder(AttributeStore.ALT_ATTR), 
                     TestSolution.NOT_APPLICABLE,
-                    DETECTION_MSG);
+                    TestSolution.PASSED,
+                    DETECTION_MSG,
+                    null);
         replay(mockTextElementBuilder,
                mockSSPHandler, 
                mockTestSolutionHandler);
@@ -182,8 +187,9 @@ public class TextNotIdenticalToAttributeCheckerTest extends TestCase {
         TextNotIdenticalToAttributeChecker instance = 
                 new TextNotIdenticalToAttributeChecker(
                     mockTextElementBuilder, 
-                    AttributeStore.ALT_ATTR, 
-                    DETECTION_MSG);
+                    new TextAttributeOfElementBuilder(AttributeStore.ALT_ATTR), 
+                    DETECTION_MSG, 
+                    null);
         instance.setProcessRemarkService(mockProcessRemarkService);
         
         replay(mockTextElementBuilder,
@@ -218,8 +224,9 @@ public class TextNotIdenticalToAttributeCheckerTest extends TestCase {
         TextNotIdenticalToAttributeChecker instance = 
                 new TextNotIdenticalToAttributeChecker(
                     mockTextElementBuilder, 
-                    AttributeStore.ALT_ATTR, 
-                    DETECTION_MSG);
+                    new TextAttributeOfElementBuilder(AttributeStore.ALT_ATTR), 
+                    DETECTION_MSG,  
+                    null);
         
         replay(mockTextElementBuilder,
                mockSSPHandler, 
@@ -257,9 +264,11 @@ public class TextNotIdenticalToAttributeCheckerTest extends TestCase {
         TextNotIdenticalToAttributeChecker instance = 
                 new TextNotIdenticalToAttributeChecker(
                     mockTextElementBuilder, 
-                    AttributeStore.ALT_ATTR, 
+                    new TextAttributeOfElementBuilder(AttributeStore.ALT_ATTR), 
                     TestSolution.NEED_MORE_INFO,
-                    DETECTION_MSG);
+                    TestSolution.PASSED,
+                    DETECTION_MSG, 
+                    null);
         instance.setProcessRemarkService(mockProcessRemarkService);
         
         replay(mockTextElementBuilder,
@@ -294,9 +303,11 @@ public class TextNotIdenticalToAttributeCheckerTest extends TestCase {
         TextNotIdenticalToAttributeChecker instance = 
                 new TextNotIdenticalToAttributeChecker(
                     mockTextElementBuilder, 
-                    AttributeStore.ALT_ATTR, 
+                    new TextAttributeOfElementBuilder(AttributeStore.ALT_ATTR), 
                     TestSolution.NEED_MORE_INFO,
-                    DETECTION_MSG);
+                    TestSolution.PASSED,
+                    DETECTION_MSG,
+                    null);
 
         replay(mockTextElementBuilder,
                mockSSPHandler, 

@@ -42,16 +42,6 @@ public class AttributePresenceChecker extends ElementCheckerImpl {
     private String attributeName;
     
     /**
-     * Not detected solution. Default is FAILED.
-     */
-    private TestSolution notDetectedSolution = TestSolution.FAILED;
-
-    /**
-     * Detected solution. Default is PASSED.
-     */
-    private TestSolution detectedSolution = TestSolution.PASSED;
-
-    /**
      * The message code associated with a processRemark when the attribute is
      * detected on an element
      */
@@ -85,13 +75,10 @@ public class AttributePresenceChecker extends ElementCheckerImpl {
             String messageCodeOnAttrDetected, 
             String messageCodeOnAttrNotDetected, 
             String...eeAttributeNameList) {
-        super(eeAttributeNameList);
+        super(detectedSolution, notDetectedSolution, eeAttributeNameList);
         this.attributeName = attributeName;
         
-        this.detectedSolution = detectedSolution;
         this.messageCodeOnAttrDetected = messageCodeOnAttrDetected;
-        
-        this.notDetectedSolution = notDetectedSolution;
         this.messageCodeOnAttrNotDetected = messageCodeOnAttrNotDetected;
     }
     
@@ -113,13 +100,10 @@ public class AttributePresenceChecker extends ElementCheckerImpl {
             String messageCodeOnAttrNotDetected, 
             boolean createSourceCodeRemarkOnAttribute, 
             String...eeAttributeNameList) {
-        super(eeAttributeNameList);
+        super(detectedSolution, notDetectedSolution, eeAttributeNameList);
         this.attributeName = attributeName;
         
-        this.detectedSolution = detectedSolution;
         this.messageCodeOnAttrDetected = messageCodeOnAttrDetected;
-        
-        this.notDetectedSolution = notDetectedSolution;
         this.messageCodeOnAttrNotDetected = messageCodeOnAttrNotDetected;
         
         this.createSourceCodeRemarkOnAttribute = createSourceCodeRemarkOnAttribute;
@@ -156,18 +140,18 @@ public class AttributePresenceChecker extends ElementCheckerImpl {
         for (Element el : elements) {
             if (!el.hasAttr(attributeName)) {
                 
-                testSolution = setTestSolution(testSolution, notDetectedSolution);
+                testSolution = setTestSolution(testSolution, getFailureSolution());
                 
                 if (StringUtils.isNotBlank(messageCodeOnAttrNotDetected)) {
-                    createSourceCodeRemark(notDetectedSolution, el, messageCodeOnAttrNotDetected);
+                    createSourceCodeRemark(getFailureSolution(), el, messageCodeOnAttrNotDetected);
                     
                 }
                 
             } else if (StringUtils.isNotBlank(messageCodeOnAttrDetected)) {
                 
-                testSolution = setTestSolution(testSolution, detectedSolution);
+                testSolution = setTestSolution(testSolution, getSuccessSolution());
                 
-                createSourceCodeRemark(detectedSolution, el, messageCodeOnAttrDetected);
+                createSourceCodeRemark(getSuccessSolution(), el, messageCodeOnAttrDetected);
 
             }
         }

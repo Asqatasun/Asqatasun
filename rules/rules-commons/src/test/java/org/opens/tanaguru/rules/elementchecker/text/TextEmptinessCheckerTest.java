@@ -203,7 +203,7 @@ public class TextEmptinessCheckerTest extends TestCase {
         TextEmptinessChecker instance = new TextEmptinessChecker(
                     mockTextElementBuilder, 
                     TestSolution.NEED_MORE_INFO, 
-                    TestSolution.FAILED, 
+                    TestSolution.PASSED, 
                     TEXT_EMPTY_MSG, 
                     TEXT_NOT_EMPTY_MSG);
         instance.setProcessRemarkService(mockProcessRemarkService);

@@ -112,12 +112,6 @@ public final class RemarkMessageStore {
     public static final String INVALID_FORM_FIELD_MSG = "InvalidFormField";
     public static final String INVALID_LABEL_MSG = "InvalidLabel";
     
-    // link
-    public static final String NOT_PERTINENT_LINK_TEXT_MSG = 
-            "NotPertinentLinkText";
-    public static final String CHECK_LINK_TEXT_PERTINENCE_MSG = 
-            "CheckLinkTextPertinence";
-    
     // table
     public static final String SUMMARY_MISSING_MSG = "SummaryMissing";
     public static final String CHECK_NATURE_OF_TABLE_WITH_EMPTY_SUMMARY_MSG =
@@ -194,7 +188,22 @@ public final class RemarkMessageStore {
 
     // links
     public static final String EMPTY_LINK_MSG = "EmptyLink";
-
+    public static final String UNEXPLICIT_LINK_WITH_CONTEXT_MSG = 
+            "UnexplicitLinkWithContext";
+    public static final String CHECK_LINK_WITH_CONTEXT_PERTINENCE_MSG = 
+            "CheckLinkWithContextPertinence";
+    public static final String CHECK_LINK_WITHOUT_CONTEXT_PERTINENCE_MSG = 
+            "CheckLinkWithoutContextPertinence";
+    public static final String CHECK_LINK_PERTINENCE_MSG = "CheckLinkPertinence";
+    public static final String UNEXPLICIT_LINK_MSG = "UnexplicitLink";
+    public static final String NOT_PERTINENT_LINK_TITLE_MSG = 
+            "NotPertinentLinkTitle";
+    public static final String SUSPECTED_NOT_PERTINENT_LINK_TITLE_MSG = 
+            "SuspectedNotPertinentLinkTitle";
+    public static final String SUSPECTED_PERTINENT_LINK_TITLE_MSG = 
+            "SuspectedPertinentLinkTitle";
+    public static final String EMPTY_LINK_TITLE_MSG = "EmptyLinkTitle";
+    
     // scripts
     public static final String CONTEXT_CHANGED_SCRIPT_MSG = 
             "ContextChangedScriptDetected";
@@ -229,6 +238,8 @@ public final class RemarkMessageStore {
             "CheckContrastManually";
     public static final String NOT_TREATED_BACKGROUND_COLOR_MSG =
             "NotTreatedBackgroundColor";
+    public static final String CHECK_CONTRAST_OF_IMAGE_MSG =
+            "CheckTheContrastOfImagesWithText";
     
     /**
      * Private constructor. This class handles keys and must not be instantiated

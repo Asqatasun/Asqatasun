@@ -76,11 +76,6 @@ public class TextBelongsToBlackListChecker
      */
     private String textBelongsToBlackListMessageCode;
     
-    /**
-     * Detected solution. Default is FAILED.
-     */
-    private TestSolution detectedSolution = TestSolution.FAILED;
-    
     /** The text element builder. By default, it is a simple Text builder*/
     private TextElementBuilder textElementBuilder;
     
@@ -133,7 +128,7 @@ public class TextBelongsToBlackListChecker
         this(textElementBuilder, 
              blackListNomName,
              textBelongsToBlackListMessageCode);
-        this.detectedSolution = detectedSolution;
+        setFailureSolution(detectedSolution);
     }
     
     /**
@@ -154,7 +149,7 @@ public class TextBelongsToBlackListChecker
              blackListNomName,
              textBelongsToBlackListMessageCode,
              eeAttributeNameList);
-        this.detectedSolution = detectedSolution;
+        setFailureSolution(detectedSolution);
     }
 
     @Override
@@ -189,14 +184,14 @@ public class TextBelongsToBlackListChecker
         for (Pattern pattern : blackListPatternCollection) {
             if (pattern.matcher(elementText).matches()) {
                 getProcessRemarkService().addSourceCodeRemarkOnElement(
-                    detectedSolution,
+                    getFailureSolution(),
                     element,
                     textBelongsToBlackListMessageCode, 
                     getEvidenceElementCollection(element, getEeAttributeNameAsCollection()));
-                return detectedSolution;
+                return getFailureSolution();
             }
         }
-        return TestSolution.PASSED;
+        return getSuccessSolution();
     }
 
 }

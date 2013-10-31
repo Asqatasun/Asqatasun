@@ -321,7 +321,6 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
      */
     protected String extractTextFromElement (Element element, boolean extractRecursively) {
         if (EXCLUDED_ELEMENTS_LIST.contains(element.tagName())) {
-            System.out.println("return null with " + element.tagName());
             return null;
         }
         StringBuilder strb = new StringBuilder();

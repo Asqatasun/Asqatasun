@@ -69,12 +69,12 @@ public class DoctypePositionChecker extends ElementCheckerImpl {
          if (indexOfHtmlTag < indexOfDoctype || 
                  StringUtils.indexOfIgnoreCase(sourcePage,DOCTYPE_KEY, indexOfHtmlTag) != -1) {
              
-             testSolutionHandler.addTestSolution(TestSolution.FAILED);
-             addProcessRemark(TestSolution.FAILED, BAD_DOCTYPE_LOCATION_MSG);
+             testSolutionHandler.addTestSolution(getFailureSolution());
+             addProcessRemark(getFailureSolution(), BAD_DOCTYPE_LOCATION_MSG);
              
          } else {
              
-             testSolutionHandler.addTestSolution(TestSolution.PASSED);
+             testSolutionHandler.addTestSolution(getSuccessSolution());
              
          }
     }

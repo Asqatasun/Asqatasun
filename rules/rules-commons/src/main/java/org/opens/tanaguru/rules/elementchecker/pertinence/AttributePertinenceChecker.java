@@ -60,14 +60,14 @@ public class AttributePertinenceChecker extends TextPertinenceChecker {
     public AttributePertinenceChecker(
             String attributeName,
             boolean checkEmptiness,
-            @Nullable String attributeNameToCompare,
+            @Nullable TextElementBuilder textElementBuilderToCompareWith,
             @Nullable String extensionsListNameToCompareWith,
             TestSolution attrNotPertinentSolution,
             String notPertinentMessageCode,
             String manualCheckMessage,
             String... eeAttributeNameList) {
         super(checkEmptiness, 
-              attributeNameToCompare, 
+              textElementBuilderToCompareWith, 
               null, // this attribute is about the text blacklist nomenclature 
               attrNotPertinentSolution, 
               notPertinentMessageCode, 
@@ -93,13 +93,13 @@ public class AttributePertinenceChecker extends TextPertinenceChecker {
     public AttributePertinenceChecker(
             String attributeName,
             boolean checkEmptiness,
-            @Nullable String attributeNameToCompare,
+            @Nullable TextElementBuilder textElementBuilderToCompareWith,
             @Nullable String extensionsListNameToCompareWith,
             TestSolution attrNotPertinentSolution,
             String notPertinentMessageCode,
             String manualCheckMessage) {
         super(checkEmptiness, 
-              attributeNameToCompare, 
+              textElementBuilderToCompareWith, 
               null, // this attribute is about the text blacklist nomenclature 
               attrNotPertinentSolution, 
               notPertinentMessageCode, 
@@ -123,13 +123,13 @@ public class AttributePertinenceChecker extends TextPertinenceChecker {
     public AttributePertinenceChecker(
             String attributeName,
             boolean checkEmptiness,
-            @Nullable String attributeNameToCompare,
+            @Nullable TextElementBuilder textElementBuilderToCompareWith,
             @Nullable String extensionsListNameToCompareWith,
             String notPertinentMessageCode,
             String manualCheckMessage) {
         this(attributeName,
              checkEmptiness, 
-             attributeNameToCompare, 
+             textElementBuilderToCompareWith, 
              extensionsListNameToCompareWith,
              TestSolution.FAILED,
              notPertinentMessageCode, 
@@ -151,14 +151,14 @@ public class AttributePertinenceChecker extends TextPertinenceChecker {
     public AttributePertinenceChecker(
             String attributeName,
             boolean checkEmptiness,
-            @Nullable String attributeNameToCompare,
+            @Nullable TextElementBuilder textElementBuilderToCompareWith,
             @Nullable String extensionsListNameToCompareWith,
             String notPertinentMessageCode,
             String manualCheckMessage,
             String... eeAttributeNameList) {
         this(attributeName,
              checkEmptiness, 
-             attributeNameToCompare, 
+             textElementBuilderToCompareWith, 
              extensionsListNameToCompareWith,
              TestSolution.FAILED,
              notPertinentMessageCode, 
@@ -166,10 +166,6 @@ public class AttributePertinenceChecker extends TextPertinenceChecker {
              eeAttributeNameList);
     }
     
-    
-    
-    
-
     /**
      * Add a {@link TextEndsWithChecker} to the checker collection
      */
@@ -180,7 +176,7 @@ public class AttributePertinenceChecker extends TextPertinenceChecker {
             addChecker(new TextEndsWithChecker(
                             getTextElementBuilder(),
                             extensionsListNameToCompareWith,
-                            getNotPertinentSolution(), 
+                            getFailureSolution(), 
                             notPertinentMessageCode, 
                             getEeAttributeNames()));
         }

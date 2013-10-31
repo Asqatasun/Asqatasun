@@ -24,8 +24,6 @@ package org.opens.tanaguru.rules.elementselector;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
-import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.IMAGE_LINK_CHILDREN_CSS_LIKE_QUERY;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.LINK_WITH_CHILDREN_CSS_LIKE_QUERY;
 
@@ -40,42 +38,28 @@ public class CompositeLinkElementSelector extends LinkElementSelector {
 
     private boolean searchImageLink = false;
 
-    /**
-     * Default constructor
-     */
-    public CompositeLinkElementSelector() {}
-    
-    /**
+   /**
      * Constructor
+     * @param considerContext
      * @param searchImageLink 
      */
-    public CompositeLinkElementSelector(boolean searchImageLink) {
+    public CompositeLinkElementSelector(
+            boolean considerContext, 
+            boolean searchImageLink) {
+        super(considerContext);
         this.searchImageLink = searchImageLink;
     }
     
     @Override
-    public void selectElements(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        elementHandler.addAll(
-                sspHandler.beginCssLikeSelection().
-                    domCssLikeSelectNodeSet(LINK_WITH_CHILDREN_CSS_LIKE_QUERY).
-                        getSelectedElements());
-        for (Element el : elementHandler.get()) {
-            if (isLinkPartOfTheScope(el)) {
-                if (doesLinkHaveContext(el)) {
-                    getElementsWithContext().add(el);
-                } else {
-                    getElementsWithoutContext().add(el);
-                }
-            }
-        }
+    protected String getCssLikeQuery() {
+        return LINK_WITH_CHILDREN_CSS_LIKE_QUERY;
     }
     
-    /**
-     * 
-     * @param linkElement
-     * @return 
-     */
-    protected boolean isLinkPartOfTheScope(Element linkElement) {
+    @Override
+    protected boolean isLinkPartOfTheScope(Element linkElement, String linkText) {
+        if (!super.isLinkPartOfTheScope(linkElement, linkText)) {
+            return false;
+        }
         if (searchImageLink) {
             return isImageLink(linkElement);
         }
@@ -98,4 +82,5 @@ public class CompositeLinkElementSelector extends LinkElementSelector {
         }
         return false;
     }
+
 }

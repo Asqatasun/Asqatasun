@@ -39,6 +39,7 @@ public class TextPertinenceChecker extends PertinenceChecker {
 
     /* The element builder needed to retrieve the text to check */
     private TextElementBuilder textElementBuilder;
+    @Override
     public TextElementBuilder getTextElementBuilder() {
         if (textElementBuilder == null) {
             textElementBuilder = new SimpleTextElementBuilder();
@@ -49,7 +50,7 @@ public class TextPertinenceChecker extends PertinenceChecker {
     /* check emptiness */
     private boolean checkEmptiness;
     /* attribute name to compare with*/
-    private String attributeNameToCompare = null;
+    private TextElementBuilder textElementBuilderToCompareWith;
     /* blacklist name to compare with*/
     private String blacklistNameToCompareWith = null;
     /* not pertinent message code */
@@ -68,7 +69,7 @@ public class TextPertinenceChecker extends PertinenceChecker {
      */
     public TextPertinenceChecker(
             boolean checkEmptiness,
-            String attributeNameToCompare,
+            TextElementBuilder textElementBuilderToCompareWith, 
             String blacklistNameToCompareWith,
             TestSolution notPertinentSolution,
             String notPertinentMessageCode,
@@ -77,7 +78,7 @@ public class TextPertinenceChecker extends PertinenceChecker {
         super(manualCheckMessage, notPertinentSolution, eeAttributeNameList);
 
         this.checkEmptiness = checkEmptiness;
-        this.attributeNameToCompare = attributeNameToCompare;
+        this.textElementBuilderToCompareWith = textElementBuilderToCompareWith;
         this.blacklistNameToCompareWith = blacklistNameToCompareWith;
         this.notPertinentMessageCode = notPertinentMessageCode;
 
@@ -97,13 +98,13 @@ public class TextPertinenceChecker extends PertinenceChecker {
      */
     public TextPertinenceChecker(
             boolean checkEmptiness,
-            @Nullable String attributeNameToCompare,
+            @Nullable TextElementBuilder textElementBuilderToCompareWith, 
             @Nullable String blacklistNameToCompareWith,
             String notPertinentMessageCode,
             String manualCheckMessage,
             String... eeAttributeNameList) {
         this(checkEmptiness, 
-             attributeNameToCompare, 
+             textElementBuilderToCompareWith, 
              blacklistNameToCompareWith, 
              TestSolution.FAILED,
              notPertinentMessageCode,
@@ -123,12 +124,12 @@ public class TextPertinenceChecker extends PertinenceChecker {
      */
     public TextPertinenceChecker(
             boolean checkEmptiness,
-            @Nullable String attributeNameToCompare,
+            @Nullable TextElementBuilder textElementBuilderToCompareWith, 
             @Nullable String blacklistNameToCompareWith,
             String notPertinentMessageCode,
             String manualCheckMessage) {
         this(checkEmptiness, 
-             attributeNameToCompare, 
+             textElementBuilderToCompareWith, 
              blacklistNameToCompareWith, 
              TestSolution.FAILED,
              notPertinentMessageCode,
@@ -154,7 +155,7 @@ public class TextPertinenceChecker extends PertinenceChecker {
         if (checkEmptiness) {
             addChecker(new TextEmptinessChecker(
                             getTextElementBuilder(),
-                            getNotPertinentSolution(), 
+                            getFailureSolution(), 
                             TestSolution.PASSED, 
                             notPertinentMessageCode, 
                             null, 
@@ -172,7 +173,7 @@ public class TextPertinenceChecker extends PertinenceChecker {
             addChecker(new TextBelongsToBlackListChecker(
                             getTextElementBuilder(),
                             blacklistNameToCompareWith,
-                            getNotPertinentSolution(),
+                            getFailureSolution(),
                             notPertinentMessageCode, 
                             getEeAttributeNames()));
         }
@@ -187,7 +188,7 @@ public class TextPertinenceChecker extends PertinenceChecker {
         // contains non alphanumerical characters
         addChecker(new TextOnlyContainsNonAlphanumericalCharactersChecker(
                         getTextElementBuilder(),
-                        getNotPertinentSolution(),
+                        getFailureSolution(),
                         notPertinentMessageCode, 
                         getEeAttributeNames()));
     }
@@ -198,12 +199,14 @@ public class TextPertinenceChecker extends PertinenceChecker {
     protected final void addAttributeComparisonChecker() {
         // The last check, when requested, consists in verifying the element
         // content is not identical to another attribute.
-        if (StringUtils.isNotBlank(attributeNameToCompare)) {
+        if (textElementBuilderToCompareWith != null) {
             addChecker(new TextNotIdenticalToAttributeChecker(
                             getTextElementBuilder(),
-                            attributeNameToCompare, 
-                            getNotPertinentSolution(),
+                            textElementBuilderToCompareWith, 
+                            getFailureSolution(),
+                            TestSolution.PASSED,
                             notPertinentMessageCode, 
+                            null,
                             getEeAttributeNames()));
         }
     }

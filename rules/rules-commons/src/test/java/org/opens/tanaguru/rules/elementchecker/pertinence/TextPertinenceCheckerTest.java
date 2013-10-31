@@ -25,6 +25,7 @@ import junit.framework.TestCase;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.keystore.AttributeStore;
 import org.opens.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
@@ -54,7 +55,7 @@ public class TextPertinenceCheckerTest extends TestCase {
         System.out.println("getTextElementBuilder");
         TextPertinenceChecker instance = new TextPertinenceChecker( 
                 true,
-                AttributeStore.ALT_ATTR, 
+                new TextAttributeOfElementBuilder(AttributeStore.ALT_ATTR), 
                 "blacklistNomenclature", 
                 TestSolution.NEED_MORE_INFO,
                 "notPertinent", 

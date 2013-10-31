@@ -36,12 +36,6 @@ import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
  */
 public class TextEmptinessChecker extends ElementCheckerImpl {
 
-    /* Text Not empty solution. Default is PASSED */
-    private TestSolution textNotEmptySolution = TestSolution.PASSED;
-
-    /* Text empty solution. Default is FAILED */
-    private TestSolution textEmptySolution = TestSolution.FAILED;
-
     /*
      * The message code associated with a processRemark when the attribute is
      * empty on an element
@@ -113,8 +107,8 @@ public class TextEmptinessChecker extends ElementCheckerImpl {
         this(textElementBuilder, 
              messageCodeOnTextEmpty, 
              messageCodeOnTextNotEmpty);
-        this.textEmptySolution = textEmptySolution;
-        this.textNotEmptySolution = textNotEmptySolution;
+        setSuccessSolution(textNotEmptySolution);
+        setFailureSolution(textEmptySolution);
     }
     
     /**
@@ -138,8 +132,8 @@ public class TextEmptinessChecker extends ElementCheckerImpl {
              messageCodeOnTextEmpty, 
              messageCodeOnTextNotEmpty, 
              eeAttributeNameList);
-        this.textEmptySolution = textEmptySolution;
-        this.textNotEmptySolution = textNotEmptySolution;
+        setSuccessSolution(textNotEmptySolution);
+        setFailureSolution(textEmptySolution);
     }
     
     @Override
@@ -168,23 +162,31 @@ public class TextEmptinessChecker extends ElementCheckerImpl {
             return;
         }
         
-        TestSolution testSolution = TestSolution.PASSED;
+        TestSolution testSolution = TestSolution.NOT_APPLICABLE;
         String textElement;
         for (Element el : elements) {
             textElement = textElementBuilder.buildTextFromElement(el);
             if (textElement == null)  {
-                testSolution = setTestSolution(testSolution, TestSolution.NOT_APPLICABLE);
+                testSolution = setTestSolution(testSolution, 
+                                               TestSolution.NOT_APPLICABLE);
             } else if (isElementEmpty(textElement)) {
-                
-                testSolution = setTestSolution(testSolution, textEmptySolution);
-
+                testSolution = setTestSolution(testSolution, 
+                                               getFailureSolution());
                 if (StringUtils.isNotBlank(messageCodeOnTextEmpty)) {
-                    addSourceCodeRemark(textEmptySolution, el, messageCodeOnTextEmpty);
+                    addSourceCodeRemark(
+                            getFailureSolution(), 
+                            el, 
+                            messageCodeOnTextEmpty);
                 }
-                
-            } else if (StringUtils.isNotBlank(messageCodeOnTextNotEmpty)) {
-                testSolution = setTestSolution(testSolution, textNotEmptySolution);
-                addSourceCodeRemark(textNotEmptySolution, el, messageCodeOnTextNotEmpty);
+            } else {
+                testSolution = setTestSolution(testSolution, 
+                                               getSuccessSolution());
+                if (StringUtils.isNotBlank(messageCodeOnTextNotEmpty)) {
+                    addSourceCodeRemark(
+                            getSuccessSolution(), 
+                            el, 
+                            messageCodeOnTextNotEmpty);
+                }
             }
         }
         testSolutionHandler.addTestSolution(testSolution);

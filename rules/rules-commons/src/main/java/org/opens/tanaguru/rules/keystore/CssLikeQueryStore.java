@@ -174,7 +174,9 @@ public final class CssLikeQueryStore {
     public static final String LINK_WITH_CHILDREN_CSS_LIKE_QUERY = 
                     "a[href]:has(*)";
     public static final String IMAGE_LINK_CHILDREN_CSS_LIKE_QUERY = 
-                    "img , object[type^=image]";
+                    "img , object[type^=image], object[data^=data:image],"
+                  + "object[data$=png], object[data$=jpeg], object[data$=jpg],"
+                  + "object[data$=bmp], object[data$=gif]" ;
 
     // Scripts css-like queries
     public static final String CHANGE_CONTEXT_SCRIPT_CSS_LIKE_QUERY = 
@@ -199,6 +201,10 @@ public final class CssLikeQueryStore {
     public static final String ELEMENT_WITH_HEIGHT_ATTR_NOT_IMG =
                     ":not(img)[height]";
     
+    public static final String IMG_CSS_LIKE_QUERY=
+                    IMAGE_LINK_CHILDREN_CSS_LIKE_QUERY
+                   + "embed[type^=image]" 
+                   + "input[type^=image]"; 
     /**
      * Private constructor. This class handles keys and must not be instanciated
      */

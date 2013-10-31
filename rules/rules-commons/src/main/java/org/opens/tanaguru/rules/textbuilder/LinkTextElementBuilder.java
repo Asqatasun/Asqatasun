@@ -39,13 +39,16 @@ public class LinkTextElementBuilder implements TextElementBuilder{
     @Override
     public String buildTextFromElement(Element element) {
         StringBuilder linkText = new StringBuilder();
+        if (element.hasAttr(ALT_ATTR)) {
+            linkText.append(SPACER);
+            linkText.append(altAttrTextBuilder.buildTextFromElement(element));
+        }
         for (Node child : element.childNodes()) {
             if (child instanceof TextNode && !((TextNode)child).isBlank()) {
                linkText.append(SPACER);
                linkText.append(StringUtils.trim(((TextNode)child).text()));
             } else if (child instanceof Element){
                 linkText.append(SPACER);
-                linkText.append(altAttrTextBuilder.buildTextFromElement((Element)child));
                 linkText.append(buildTextFromElement((Element)child));
             }
         }

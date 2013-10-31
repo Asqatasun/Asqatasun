@@ -22,6 +22,7 @@
 
 package org.opens.tanaguru.rules.elementchecker.text;
 
+import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -29,7 +30,6 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.ElementCheckerImpl;
-import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
@@ -37,35 +37,46 @@ import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
  */
 public class TextNotIdenticalToAttributeChecker extends ElementCheckerImpl {
 
-    /* The message thrown when an element belongs to the black list */
+    /* The message thrown when the text is identical to another textual element*/
     private String textIdenticalToAttributeValueMessageCode;
     
-    /* Detected solution. Default is FAILED. */
-    private TestSolution detectedSolution = TestSolution.FAILED;
+    /* The message thrown when the text is not identical to another textual element*/
+    private String textNotIdenticalToAttributeValueMessageCode;
     
     /* The text element builder. By default, it is a simple Text builder */
     private TextElementBuilder textElementBuilder;
     
     /* The attr element builder needed to retrieve the attribute to compare with*/
-    private TextAttributeOfElementBuilder attrElementBuilder = 
-                new TextAttributeOfElementBuilder();
-    
+    private TextElementBuilder attrElementBuilder;
+
+    /* Boolean that enable to determine the kind of control : contains or equals.
+     * Contains is the default 
+     */
+    private boolean strictEquality = false;
+    public void setStrictEquality(boolean strictEquality) {
+        this.strictEquality = strictEquality;
+    }
+
     /**
      * Constructor.
      * 
      * @param textElementBuilder
      * @param attributeNameToCompareWith
      * @param textIdenticalToAttributeValueMessageCode
+     * @param textNotIdenticalToAttributeValueMessageCode
      */
     public TextNotIdenticalToAttributeChecker(
             TextElementBuilder textElementBuilder,
-            String attributeNameToCompareWith, 
-            String textIdenticalToAttributeValueMessageCode) {
+            TextElementBuilder textElementBuilderToCompareWith, 
+            String textIdenticalToAttributeValueMessageCode, 
+            @Nullable String textNotIdenticalToAttributeValueMessageCode) {
         super();
         this.textElementBuilder = textElementBuilder;
-        this.attrElementBuilder.setAttributeName(attributeNameToCompareWith);
+        this.attrElementBuilder = textElementBuilderToCompareWith;
         this.textIdenticalToAttributeValueMessageCode = 
                 textIdenticalToAttributeValueMessageCode;
+        this.textNotIdenticalToAttributeValueMessageCode = 
+                textNotIdenticalToAttributeValueMessageCode;
     }
     
     /**
@@ -74,18 +85,22 @@ public class TextNotIdenticalToAttributeChecker extends ElementCheckerImpl {
      * @param textElementBuilder
      * @param attributeNameToCompareWith
      * @param textIdenticalToAttributeValueMessageCode
+     * @param textNotIdenticalToAttributeValueMessageCode
      * @param eeAttributeNameList 
      */
     public TextNotIdenticalToAttributeChecker(
             TextElementBuilder textElementBuilder,
-            String attributeNameToCompareWith, 
+            TextElementBuilder textElementBuilderToCompareWith, 
             String textIdenticalToAttributeValueMessageCode, 
+            @Nullable String textNotIdenticalToAttributeValueMessageCode,
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
         this.textElementBuilder = textElementBuilder;
-        this.attrElementBuilder.setAttributeName(attributeNameToCompareWith);
+        this.attrElementBuilder = textElementBuilderToCompareWith;
         this.textIdenticalToAttributeValueMessageCode = 
                 textIdenticalToAttributeValueMessageCode;
+        this.textNotIdenticalToAttributeValueMessageCode = 
+                textNotIdenticalToAttributeValueMessageCode;
     }
     
     /**
@@ -94,17 +109,23 @@ public class TextNotIdenticalToAttributeChecker extends ElementCheckerImpl {
      * @param textElementBuilder
      * @param attributeNameToCompareWith
      * @param detectedSolution
-     * @param textElementIdenticalToAttributeValueMessageCode 
+     * @param notDetectedSolution
+     * @param textIdenticalToAttributeValueMessageCode 
+     * @param textNotIdenticalToAttributeValueMessageCode 
      */
     public TextNotIdenticalToAttributeChecker(
             TextElementBuilder textElementBuilder,
-            String attributeNameToCompareWith, 
+            TextElementBuilder textElementBuilderToCompareWith,
             TestSolution detectedSolution,
-            String textElementIdenticalToAttributeValueMessageCode) {
+            TestSolution notDetectedSolution,
+            String textIdenticalToAttributeValueMessageCode, 
+            String textNotIdenticalToAttributeValueMessageCode) {
         this(textElementBuilder, 
-             attributeNameToCompareWith,
-             textElementIdenticalToAttributeValueMessageCode);
-        this.detectedSolution = detectedSolution;
+             textElementBuilderToCompareWith,
+             textIdenticalToAttributeValueMessageCode,
+             textNotIdenticalToAttributeValueMessageCode);
+        setSuccessSolution(notDetectedSolution);
+        setFailureSolution(detectedSolution);
     }
     
     /**
@@ -113,20 +134,26 @@ public class TextNotIdenticalToAttributeChecker extends ElementCheckerImpl {
      * @param textElementBuilder
      * @param attributeNameToCompareWith
      * @param detectedSolution
-     * @param textElementIdenticalToAttributeValueMessageCode
+     * @param notDetectedSolution
+     * @param textIdenticalToAttributeValueMessageCode
+     * @param textNotIdenticalToAttributeValueMessageCode
      * @param eeAttributeNameList 
      */
     public TextNotIdenticalToAttributeChecker(
             TextElementBuilder textElementBuilder,
-            String attributeNameToCompareWith, 
+            TextElementBuilder textElementBuilderToCompareWith, 
             TestSolution detectedSolution,
-            String textElementIdenticalToAttributeValueMessageCode, 
+            TestSolution notDetectedSolution,
+            String textIdenticalToAttributeValueMessageCode, 
+            String textNotIdenticalToAttributeValueMessageCode, 
             String... eeAttributeNameList) {
         this(textElementBuilder, 
-             attributeNameToCompareWith, 
-             textElementIdenticalToAttributeValueMessageCode, 
+             textElementBuilderToCompareWith, 
+             textIdenticalToAttributeValueMessageCode, 
+             textNotIdenticalToAttributeValueMessageCode, 
              eeAttributeNameList);
-        this.detectedSolution = detectedSolution;
+        setSuccessSolution(notDetectedSolution);
+        setFailureSolution(detectedSolution);
     }
     
     @Override
@@ -155,22 +182,31 @@ public class TextNotIdenticalToAttributeChecker extends ElementCheckerImpl {
             String elementText) {
         
         if (elementText == null) {
-            return detectedSolution;
+            return getFailureSolution();
         }
 
         String otherAttributeContent = attrElementBuilder.buildTextFromElement(element);
         
-        if (StringUtils.contains(otherAttributeContent, elementText)) {
+        if ( (strictEquality && 
+                StringUtils.equalsIgnoreCase(otherAttributeContent, elementText)) || 
+             ((!strictEquality && 
+                StringUtils.contains(otherAttributeContent, elementText)))   ) {
             
             addSourceCodeRemark(
-                detectedSolution,
+                getFailureSolution(),
                 element,
                 textIdenticalToAttributeValueMessageCode);
 
-            return detectedSolution;
+            return getFailureSolution();
             
         } else {
-            return TestSolution.PASSED;
+            if (StringUtils.isNotBlank(textNotIdenticalToAttributeValueMessageCode)) {
+                addSourceCodeRemark(
+                    getSuccessSolution(),
+                    element,
+                    textNotIdenticalToAttributeValueMessageCode);
+            }
+            return getSuccessSolution();
         }
     }
 

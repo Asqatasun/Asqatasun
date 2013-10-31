@@ -38,6 +38,8 @@ import org.opens.tanaguru.rules.keystore.AttributeStore;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.*;
 import org.opens.tanaguru.rules.keystore.EvidenceStore;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;
+import org.opens.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
+import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
@@ -56,7 +58,37 @@ public abstract class ElementCheckerImpl implements ElementChecker {
     /** Absolute URL prefix */
     private static final String ABS_URL_PREFIX = "abs:";
     
+    /* The element builder needed to build the element text */
+    private TextElementBuilder textElementBuilder;
+    public TextElementBuilder getTextElementBuilder() {
+        if (textElementBuilder == null) {
+            textElementBuilder = new SimpleTextElementBuilder();
+        }
+        return textElementBuilder;
+    }
     
+    /* Success solution when checker returns success. Default is PASSED*/
+    private TestSolution successSolution = TestSolution.PASSED;
+    @Override
+    public TestSolution getSuccessSolution(){
+        return successSolution;
+    }
+    
+    public void setSuccessSolution(TestSolution successSolution){
+        this.successSolution = successSolution;
+    }
+    
+    /* Success solution when checker returns failure. Default is FAILED*/
+    private TestSolution failureSolution = TestSolution.FAILED;
+    @Override
+    public TestSolution getFailureSolution(){
+        return failureSolution;
+    }
+    
+    public void setFailureSolution(TestSolution failureSolution){
+        this.failureSolution = failureSolution;
+    }
+
     /**
      * the collection of attributes name used to collect evidenceElement
      */
@@ -81,14 +113,35 @@ public abstract class ElementCheckerImpl implements ElementChecker {
     
     /**
      * 
-     * @param messageCode
-     * @param eeAttributeNameList 
+     * Constructor
      */
     public ElementCheckerImpl() {}
     
     /**
      * 
-     * @param messageCode
+     * @param successSolution
+     * @param failureSolution 
+     */
+    public ElementCheckerImpl(TestSolution successSolution, 
+                              TestSolution failureSolution) {
+        this.successSolution = successSolution;
+        this.failureSolution = failureSolution;
+    }
+    
+    /**
+     * 
+     * @param eeAttributeNameList 
+     */
+    public ElementCheckerImpl(TestSolution successSolution, 
+                              TestSolution failureSolution,
+                              String... eeAttributeNameList) {
+       this(successSolution,failureSolution);
+       this.eeAttributeNames = 
+               Arrays.copyOf(eeAttributeNameList, eeAttributeNameList.length); 
+    }
+    
+    /**
+     * 
      * @param eeAttributeNameList 
      */
     public ElementCheckerImpl(String... eeAttributeNameList) {
@@ -285,7 +338,10 @@ public abstract class ElementCheckerImpl implements ElementChecker {
         if (isElementTextRequested(attr)) {
             extraEe = processRemarkService.getEvidenceElement(
                     attrEE, 
-                    StringUtils.substring(element.text(), 0, MAX_TEXT_EE_SIZE));
+                    StringUtils.substring(
+                        getTextElementBuilder().buildTextFromElement(element), 
+                        0, 
+                        MAX_TEXT_EE_SIZE));
         } else if (isAttributeExternalResource(attr)) {
             extraEe = processRemarkService.getEvidenceElement(
                     attrEE, 
@@ -368,7 +424,11 @@ public abstract class ElementCheckerImpl implements ElementChecker {
     protected TestSolution setTestSolution(
                 TestSolution currentTestSolution, 
                 TestSolution requestedTestSolution) {
-        if (requestedTestSolution.equals(TestSolution.PASSED)) {
+        if (requestedTestSolution.equals(TestSolution.PASSED) && 
+                currentTestSolution.equals(TestSolution.NOT_APPLICABLE)) {
+            return requestedTestSolution;
+        } else 
+            if (requestedTestSolution.equals(TestSolution.PASSED)) {
             return currentTestSolution;
         } else if (requestedTestSolution.equals(TestSolution.NEED_MORE_INFO) && 
                 currentTestSolution.equals(TestSolution.FAILED)) {

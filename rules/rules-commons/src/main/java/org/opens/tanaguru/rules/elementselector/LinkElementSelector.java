@@ -25,12 +25,15 @@ package org.opens.tanaguru.rules.elementselector;
 import java.util.Collection;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
+import org.opens.tanaguru.rules.keystore.CssLikeQueryStore;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.TEXT_LINK_CSS_LIKE_QUERY;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;
+import org.opens.tanaguru.rules.textbuilder.LinkTextElementBuilder;
 import org.springframework.util.CollectionUtils;
 
 /**
@@ -76,65 +79,145 @@ public class LinkElementSelector implements ElementSelector {
             CollectionUtils.arrayToList(PREV_SIBLING_CONTEXT_ELEMENTS_TAB);
     
     /** */
-    private ElementHandler<Element> elementsWithContext = new ElementHandlerImpl();
-    public ElementHandler<Element> getElementsWithContext() {
-        return elementsWithContext;
+    private ElementHandler<Element> decidableElements = new ElementHandlerImpl();
+    public ElementHandler<Element> getDecidableElements() {
+        return decidableElements;
     }
 
     /** */
-    private ElementHandler<Element> elementsWithoutContext = new ElementHandlerImpl();
-    public ElementHandler<Element> getElementsWithoutContext() {
-        return elementsWithoutContext;
+    private ElementHandler<Element> notDecidableElements = new ElementHandlerImpl();
+    public ElementHandler<Element> getNotDecidableElements() {
+        return notDecidableElements;
     }
+    
+    /* 
+     * does the selection split results between the one that have a context 
+     and the one that have not
+     */
+    private boolean considerContext = true;
+    public boolean isConsiderContext() {
+        return considerContext;
+    }
+    
+    /* The element builder needed to build the link text */
+    private LinkTextElementBuilder linkTextElementBuilder = 
+            new LinkTextElementBuilder();
     
     /**
      * Default constructor
      */
-    public LinkElementSelector() {}
-    
-    @Override
-    public void selectElements(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        elementHandler.addAll(
-                sspHandler.beginCssLikeSelection().
-                    domCssLikeSelectNodeSet(TEXT_LINK_CSS_LIKE_QUERY).
-                        getSelectedElements());
-        for (Element el : elementHandler.get()) {
-            if (StringUtils.isNotBlank(el.ownText())) {
-                if (doesLinkHaveContext(el)) {
-                    elementsWithContext.add(el);
-                } else {
-                    elementsWithoutContext.add(el);
-                }
-            }
-        }
+    public LinkElementSelector(boolean considerContext) {
+        this.considerContext = considerContext;
     }
 
     /**
      * 
+     * @return 
+     */
+    protected String getCssLikeQuery() {
+        return TEXT_LINK_CSS_LIKE_QUERY;
+    }
+    
+    @Override
+    public void selectElements(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
+        Elements elements = sspHandler.beginCssLikeSelection().
+                               domCssLikeSelectNodeSet(getCssLikeQuery()).
+                               getSelectedElements();
+        characteriseElements(elements);
+        elementHandler.addAll(notDecidableElements.get());
+        elementHandler.addAll(decidableElements.get());
+    }
+
+    /**
+     * 
+     * @param elementHandler 
+     */
+    protected void characteriseElements(Elements elements) {
+        for (Element el : elements) {
+            characteriseElement(el);
+        }
+    }
+    
+    /**
+     * 
+     * @param element 
+     */
+    protected void characteriseElement(Element element) {
+        String linkText = getLinkText(element);
+        if (!isLinkPartOfTheScope(element, linkText)) {
+            return;
+        }
+        if (considerContext) {
+            if (doesLinkHaveContext(element, linkText)) {
+                notDecidableElements.add(element);
+            } else {
+                decidableElements.add(element);
+            }
+        } else {
+            decidableElements.add(element);   
+        }
+    }
+
+        /**
+     * 
      * @param linkElement
      * @return 
      */
-    protected boolean doesLinkHaveContext(Element linkElement) {
+    protected String getLinkText(Element linkElement) {
+        return linkTextElementBuilder.buildTextFromElement(linkElement);
+    }
+    
+    /**
+     * 
+     * @param linkElement
+     * @param linkText
+     * @return 
+     */
+    protected boolean isLinkPartOfTheScope(Element linkElement, String linkText) {
+        return StringUtils.isNotBlank(linkText);
+    }
+    
+    /**
+     * 
+     * @param linkElement
+     * @param linkText
+     * @return 
+     */
+    protected boolean doesLinkHaveContext(Element linkElement, String linkText) {
         if (linkElement.hasAttr(TITLE_ATTR) && 
-                !StringUtils.equals(linkElement.attr(TITLE_ATTR), linkElement.ownText())) {
+                !StringUtils.equals(linkElement.attr(TITLE_ATTR), linkText)) {
             return true;
         }
         if (StringUtils.isNotBlank(linkElement.parent().ownText())) {
             return true;
         }
-        for (Element el : linkElement.parents()) {
-            if (PARENT_CONTEXT_ELEMENTS.contains(el.tagName())) {
+        if (doesPreviousSiblingContainsHeading(linkElement)) {
+            return true;
+        }
+        for (Element parent : linkElement.parents()) {
+            if (PARENT_CONTEXT_ELEMENTS.contains(parent.tagName()) || 
+                    doesPreviousSiblingContainsHeading(parent)) {
                 return true;
             }
         }
-        Element prevElementSibling = linkElement.previousElementSibling();
+        return false;
+    }
+
+    /**
+     * 
+     * @param element
+     * @return 
+     */
+    private boolean doesPreviousSiblingContainsHeading(Element element) {
+        Element prevElementSibling = element.previousElementSibling();
         while (prevElementSibling != null) {
-            if (PREV_SIBLING_CONTEXT_ELEMENTS.contains(prevElementSibling.tagName())) {
+            if (PREV_SIBLING_CONTEXT_ELEMENTS.contains(prevElementSibling.tagName()) || 
+                    !prevElementSibling.select(CssLikeQueryStore.HEADINGS_CSS_LIKE_QUERY).isEmpty()) {
                 return true;
             }
             prevElementSibling = prevElementSibling.previousElementSibling();
         }
         return false;
     }
-
+    
 }
