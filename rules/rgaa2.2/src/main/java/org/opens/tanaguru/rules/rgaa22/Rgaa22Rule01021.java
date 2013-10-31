@@ -31,6 +31,7 @@ import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.FRAME_WITH_NOT
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.IFRAME_WITH_NOT_EMPTY_TITLE_CSS_LIKE_QUERY;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_TITLE_OF_FRAME_PERTINENCE_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NOT_PERTINENT_TITLE_OF_FRAME_MSG;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 
 /**
@@ -57,7 +58,7 @@ public class Rgaa22Rule01021 extends AbstractPageRuleWithSelectorAndCheckerImple
                     // the selection keep elements with not empty title
                     false, 
                     // compare title with src attribute
-                    SRC_ATTR, 
+                    new TextAttributeOfElementBuilder(SRC_ATTR), 
                     // no black list comparison
                     null, 
                     //  message associated with element when title is not pertinent
