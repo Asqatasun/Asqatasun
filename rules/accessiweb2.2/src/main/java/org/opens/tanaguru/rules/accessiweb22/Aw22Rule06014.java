@@ -20,7 +20,8 @@
 
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractLinkPertinenceRuleImplementation;
+import org.opens.tanaguru.rules.elementselector.CompositeLinkElementSelector;
 
 /**
  * Implementation of the rule 6.1.4 of the referential Accessiweb 2.2.
@@ -31,13 +32,14 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * @author jkowalczyk
  */
 
-public class Aw22Rule06014 extends AbstractNotTestedRuleImplementation {
+public class Aw22Rule06014 extends AbstractLinkPertinenceRuleImplementation {
 
     /**
      * Default constructor
      */
     public Aw22Rule06014 () {
-        super();
+        // context is taken into consideration 
+        super(new CompositeLinkElementSelector(true, false));
     }
 
 }

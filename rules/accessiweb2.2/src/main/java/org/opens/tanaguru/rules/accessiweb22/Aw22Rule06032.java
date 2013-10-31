@@ -19,7 +19,8 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractLinkPertinenceRuleImplementation;
+import org.opens.tanaguru.rules.elementselector.CompositeLinkElementSelector;
 
 /**
  * Implementation of the rule 6.3.2 of the referential Accessiweb 2.2.
@@ -28,12 +29,14 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-6-3-2"> 6.3.2 rule specification</a>
  *
  */
-public class Aw22Rule06032 extends AbstractNotTestedRuleImplementation {
+public class Aw22Rule06032 extends AbstractLinkPertinenceRuleImplementation {
 
     /**
      * Default constructor
      */
     public Aw22Rule06032 () {
-        super();
+        // context is not taken into consideration and the composite link 
+        // selector only keep image link
+        super(new CompositeLinkElementSelector(false, true));
     }
 }

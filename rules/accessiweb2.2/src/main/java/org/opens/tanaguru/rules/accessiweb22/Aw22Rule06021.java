@@ -19,21 +19,28 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.opens.tanaguru.rules.elementchecker.pertinence.LinkTitlePertinenceChecker;
+import org.opens.tanaguru.rules.elementselector.LinkElementSelector;
 
 /**
- * Implementation of the rule 6.2.1 of the referential Accessiweb 2.2.
- * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/aw22-rule-6-2-1">the rule 6.2.1 design page.</a>
- * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-6-2-1"> 6.2.1 rule specification</a>
+ * Implementation of the rule 6.2.1 of the referential Accessiweb 2.2. <br/> For
+ * more details about the implementation, refer to <a
+ * href="http://www.tanaguru.org/en/content/aw22-rule-6-2-1">the rule 6.2.1
+ * design page.</a>
+ *
+ * @see <a
+ * href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-6-2-1">
+ * 6.2.1 rule specification</a>
  *
  */
-public class Aw22Rule06021 extends AbstractNotTestedRuleImplementation {
+public class Aw22Rule06021 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
     /**
-     * Default constructor
+     * 
      */
-    public Aw22Rule06021 () {
-        super();
+    public Aw22Rule06021() {
+        super(new LinkElementSelector(false), new LinkTitlePertinenceChecker());
     }
+
 }

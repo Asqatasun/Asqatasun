@@ -28,6 +28,7 @@ import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.IFRAME_WITH_TITLE_CSS_LIKE_QUERY;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_TITLE_OF_IFRAME_PERTINENCE_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NOT_PERTINENT_TITLE_OF_IFRAME_MSG;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 2.2.2 of the referential Accessiweb 2.2.
@@ -50,7 +51,7 @@ public class Aw22Rule02022 extends AbstractPageRuleWithSelectorAndCheckerImpleme
                     // the selection keep elements with not empty title
                     true, 
                     // compare title with src attribute
-                    SRC_ATTR, 
+                    new TextAttributeOfElementBuilder(SRC_ATTR), 
                     // no comparison by extension
                     null, 
                     //  message associated with element when title is not pertinent

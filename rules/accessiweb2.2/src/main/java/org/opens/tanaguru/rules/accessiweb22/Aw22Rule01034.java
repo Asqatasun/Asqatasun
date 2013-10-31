@@ -24,11 +24,13 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
 import org.opens.tanaguru.rules.elementchecker.pertinence.AttributePertinenceChecker;
 import org.opens.tanaguru.rules.elementselector.ImageElementSelector;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.*;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.CODE_ATTR;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.APPLET_WITH_ALT_CSS_LIKE_QUERY;
 import static org.opens.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
 import static org.opens.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 1.3.4 of the referential Accessiweb 2.2.
@@ -63,7 +65,7 @@ public class Aw22Rule01034 extends AbstractMarkerPageRuleImplementation {
                     // check emptiness
                     true,
                     // compare with src attribute
-                    CODE_ATTR,
+                    new TextAttributeOfElementBuilder(CODE_ATTR),
                     // compare attribute value with nomenclature
                     IMAGE_FILE_EXTENSION_NOM,
                     // not pertinent message
@@ -80,7 +82,7 @@ public class Aw22Rule01034 extends AbstractMarkerPageRuleImplementation {
                     // no emptiness check 
                     false,
                     // compare with src attribute
-                    CODE_ATTR,
+                    new TextAttributeOfElementBuilder(CODE_ATTR),
                     // compare attribute value with nomenclature
                     IMAGE_FILE_EXTENSION_NOM,
                     // override not pertinent result

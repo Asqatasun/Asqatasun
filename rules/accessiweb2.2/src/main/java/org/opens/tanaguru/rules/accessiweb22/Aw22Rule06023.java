@@ -19,7 +19,9 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.opens.tanaguru.rules.elementchecker.pertinence.LinkTitlePertinenceChecker;
+import org.opens.tanaguru.rules.elementselector.AreaLinkElementSelector;
 
 /**
  * Implementation of the rule 6.2.3 of the referential Accessiweb 2.2.
@@ -28,12 +30,13 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-6-2-3"> 6.2.3 rule specification</a>
  *
  */
-public class Aw22Rule06023 extends AbstractNotTestedRuleImplementation {
+public class Aw22Rule06023 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
     /**
      * Default constructor
      */
     public Aw22Rule06023 () {
-        super();
+        super(new AreaLinkElementSelector(false), 
+              new LinkTitlePertinenceChecker(true));
     }
 }

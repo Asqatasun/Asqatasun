@@ -25,10 +25,12 @@ import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementatio
 import org.opens.tanaguru.rules.elementchecker.pertinence.AttributePertinenceChecker;
 import org.opens.tanaguru.rules.elementselector.AreaElementSelector;
 import org.opens.tanaguru.rules.elementselector.ImageElementSelector;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.*;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.HREF_ATTR;
 import static org.opens.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
 import static org.opens.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 1.3.2 of the referential Accessiweb 2.2.
@@ -61,7 +63,7 @@ public class Aw22Rule01032 extends AbstractMarkerPageRuleImplementation {
                     // check emptiness
                     true,
                     // compare with src attribute
-                    HREF_ATTR,
+                    new TextAttributeOfElementBuilder(HREF_ATTR),
                     // compare attribute value with nomenclature
                     IMAGE_FILE_EXTENSION_NOM,
                     // not pertinent message
@@ -78,7 +80,7 @@ public class Aw22Rule01032 extends AbstractMarkerPageRuleImplementation {
                     // no emptiness check
                     false,
                     // compare with src attribute
-                    HREF_ATTR,
+                    new TextAttributeOfElementBuilder(HREF_ATTR),
                     // compare attribute value with nomenclature
                     IMAGE_FILE_EXTENSION_NOM,
                     // override not pertinent result

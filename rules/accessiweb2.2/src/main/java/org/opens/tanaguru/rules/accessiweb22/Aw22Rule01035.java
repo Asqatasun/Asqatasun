@@ -30,6 +30,7 @@ import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.OBJECT_TYPE_IM
 import static org.opens.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
 import static org.opens.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 1.3.5 of the referential Accessiweb 2.2.
@@ -61,7 +62,7 @@ public class Aw22Rule01035 extends AbstractMarkerPageRuleImplementation {
                     // check emptiness
                     true,
                     // compare with src attribute
-                    SRC_ATTR,
+                    new TextAttributeOfElementBuilder(SRC_ATTR),
                     // no comparison
                     null,
                     // not pertinent message
@@ -77,7 +78,7 @@ public class Aw22Rule01035 extends AbstractMarkerPageRuleImplementation {
                     // no emptiness check
                     false,
                     // compare with src attribute
-                    SRC_ATTR,
+                    new TextAttributeOfElementBuilder(SRC_ATTR),
                     // no comparison
                     null,
                     // override not pertinent solution
