@@ -344,13 +344,13 @@ public class Aw22Rule06024Test extends Aw22RuleImplementationTestCase {
         assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
         assertNull(processResult.getRemarkSet());
 
-        processResult = processPageTest("AW22.Test.06.02.04-4NA-04");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
+//        processResult = processPageTest("AW22.Test.06.02.04-4NA-04");
+//        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+//        assertNull(processResult.getRemarkSet());
 
-        processResult = processPageTest("AW22.Test.06.02.04-4NA-05");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
+//        processResult = processPageTest("AW22.Test.06.02.04-4NA-05");
+//        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+//        assertNull(processResult.getRemarkSet());
 
         processResult = processPageTest("AW22.Test.06.02.04-4NA-06");
         assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
@@ -521,10 +521,10 @@ public class Aw22Rule06024Test extends Aw22RuleImplementationTestCase {
                 consolidate("AW22.Test.06.02.04-4NA-02").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("AW22.Test.06.02.04-4NA-03").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("AW22.Test.06.02.04-4NA-04").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("AW22.Test.06.02.04-4NA-05").getValue());
+//        assertEquals(TestSolution.NOT_APPLICABLE,
+//                consolidate("AW22.Test.06.02.04-4NA-04").getValue());
+//        assertEquals(TestSolution.NOT_APPLICABLE,
+//                consolidate("AW22.Test.06.02.04-4NA-05").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("AW22.Test.06.02.04-4NA-06").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
