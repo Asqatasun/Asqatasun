@@ -51,7 +51,7 @@ public class DoctypePresenceChecker extends ElementCheckerImpl {
          if (StringUtils.isBlank(sspHandler.getSSP().getDoctype())) {
              
             addProcessRemark(TestSolution.FAILED,DOCTYPE_MISSING_MSG);
-            testSolutionHandler.addTestSolution(getSuccessSolution());
+            testSolutionHandler.addTestSolution(getFailureSolution());
             
         } else {
             testSolutionHandler.addTestSolution(getSuccessSolution());
