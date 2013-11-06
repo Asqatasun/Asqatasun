@@ -63,7 +63,7 @@ public final class CssLikeQueryStore {
     public static final String FORM_BUTTON_WITH_ALT_CSS_LIKE_QUERY=
                     "input[type=image][alt]";
     public static final String MAP_WITH_AREA_CHILD_AND_NAME_ATTR_CSS_LIKE_QUERY = 
-                    "map:has(area)[name]";
+                    "map:has(area)[name]:not([name~=^\\s*$])";
 
     // Table theme css-like queries
     public static final String TABLE_WITH_SUMMARY_CSS_LIKE_QUERY="table[summary]"; 

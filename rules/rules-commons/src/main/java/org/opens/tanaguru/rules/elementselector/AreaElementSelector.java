@@ -22,6 +22,8 @@
 
 package org.opens.tanaguru.rules.elementselector;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.opens.tanaguru.processor.SSPHandler;
@@ -99,6 +101,9 @@ public class AreaElementSelector extends SimpleElementSelector {
      * @return 
      */
     private boolean isMapAssociatedWithImage(SSPHandler sspHandler, Element element) {
+        if (StringUtils.isBlank(element.attr(NAME_ATTR))) {
+            return false;
+        }
         String query = CssLikeSelectorBuilder.buildSelectorFromAttributeTypeAndValue(
                 USEMAP_ATTR, 
                 element.attr(NAME_ATTR));
