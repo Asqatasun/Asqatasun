@@ -29,9 +29,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.*;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
+import org.jsoup.select.Selector.SelectorParseException;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -530,7 +532,13 @@ public class DOMHandlerImpl implements DOMHandler {
      */
     @Override
     public DOMHandler cssLikeSelectNodeSet(String expr) {
-        selectedElements = jsoupDocument.select(expr);
+        if (StringUtils.isNotBlank(expr)) {
+            try {
+            selectedElements = jsoupDocument.select(expr);
+            } catch (SelectorParseException spe) {               
+            } catch (IllegalArgumentException iae) {
+            }
+        }
         return this;
     }
 
