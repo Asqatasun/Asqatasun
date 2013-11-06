@@ -136,6 +136,18 @@ function isAllowedElement(elem) {
     if (isElementOfType(tagName,'head')) {
         return false;
     }
+    if (isElementOfType(tagName,'style')) {
+        return false;
+    }
+    if (isElementOfType(tagName,'meta')) {
+        return false;
+    }
+    if (isElementOfType(tagName,'link')) {
+        return false;
+    }
+    if (isElementOfType(tagName,'title')) {
+        return false;
+    }
     return true;
 };
 
