@@ -19,7 +19,9 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.link.AbstractLinkRuleImplementation;
+import org.opens.tanaguru.rules.elementchecker.link.IdenticalLinkWithDifferentTargetChecker;
+import org.opens.tanaguru.rules.elementselector.LinkElementSelector;
 
 /**
  * Implementation of the rule 6.4.1 of the referential Accessiweb 2.2.
@@ -28,12 +30,15 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-6-4-1"> 6.4.1 rule specification</a>
  *
  */
-public class Aw22Rule06041 extends AbstractNotTestedRuleImplementation {
+public class Aw22Rule06041 extends AbstractLinkRuleImplementation {
 
     /**
      * Default constructor
      */
     public Aw22Rule06041 () {
-        super();
+        // context is taken into consideration 
+        super(new LinkElementSelector(false, true), 
+              new IdenticalLinkWithDifferentTargetChecker(false),
+              new IdenticalLinkWithDifferentTargetChecker(true));
     }
 }

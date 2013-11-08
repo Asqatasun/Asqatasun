@@ -64,7 +64,7 @@ public class Aw22Rule06044Test extends Aw22RuleImplementationTestCase {
 //                processPageTest("AW22.Test.6.4.4-1Passed-01").getValue());
 //        assertEquals(TestSolution.FAILED,
 //                processPageTest("AW22.Test.6.4.4-2Failed-01").getValue());
-        assertEquals(TestSolution.NOT_TESTED,
+        assertEquals(TestSolution.NOT_APPLICABLE,
                 processPageTest("AW22.Test.6.4.4-3NMI-01").getValue());
 //        assertEquals(TestSolution.NOT_APPLICABLE,
 //                processPageTest("AW22.Test.6.4.4-4NA-01").getValue());
@@ -76,7 +76,7 @@ public class Aw22Rule06044Test extends Aw22RuleImplementationTestCase {
 //                consolidate("AW22.Test.6.4.4-1Passed-01").getValue());
 //        assertEquals(TestSolution.FAILED,
 //                consolidate("AW22.Test.6.4.4-2Failed-01").getValue());
-        assertEquals(TestSolution.NOT_TESTED,
+        assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("AW22.Test.6.4.4-3NMI-01").getValue());
 //        assertEquals(TestSolution.NOT_APPLICABLE,
 //                consolidate("AW22.Test.6.4.4-4NA-01").getValue());
