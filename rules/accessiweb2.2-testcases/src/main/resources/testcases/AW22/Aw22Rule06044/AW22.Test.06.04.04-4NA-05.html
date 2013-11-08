@@ -3,29 +3,32 @@
 
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>AW22 Test.6.3.4 NA 02</title>
+        <title>AW22 Test.6.4.4 NA 05</title>
     </head>
     <body>
         <div>
 
+            <h1>AW22 Test.6.4.4 NA 05</h1>
+
             <div class="test-detail">
-                Is each combined link (content of the text and of the alt attribute) explicit out of context (except in special cases)? 
+                <span>Does each identical link of type combined link have the same purpose and target?</span>
             </div>
+
             <div class="testcase">
 
-                <a>
-                    <img src="image.jpg" alt="This is a combined link"/>
-                    without href
+                <a href="my-link.html">
+                    <img src="image.jpg" alt="combined"/>
+                    <strong>Link 1</strong>
                 </a>
 
-                <a>
+                <a href="my-link.html">
+                    <strong>Combined</strong>
                     <object data="data.png">
-                        -->
+                        Link 2
                     </object>
-                    ;*
                 </a>
             </div>
-            <p class="test-explanation">NA : The page doesn't contain any &lt;a&gt; tag with a href attribute</p>
+            <p class="test-explanation">NA : The page doesn't contain identical links</p>
 
         </div>
     </body>

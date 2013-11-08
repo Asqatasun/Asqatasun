@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>AW22 Test.6.4.4 Failed 06</title>
+    </head>
+    <body>
+        <div>
+
+            <div class="test-detail">
+                <span>Does each identical link of type combined link have the same purpose and target?</span>
+            </div>
+
+            <div class="testcase">
+
+                <a href="my-link.html">
+                    cliquez 
+                    <img src="image.jpg" alt="ici"/>
+                </a>
+
+                <a href="link2.htm" >
+                    cliquez 
+                    <img src="image.jpg" alt="ici"/>
+                </a>
+
+                <h1>
+                    <a href="my-link.html" title=" This is a combined link with context">
+                        cliquez 
+                        <object data="data.png">
+                            ici
+                        </object>
+                    </a>
+                </h1>
+
+                <h2>
+                    <a href="link2.htm" title="This is a combined link with context">
+                        CLIQUEZ 
+                        <object data="data.png">
+                            ICI
+                        </object>
+                    </a>
+                </h2>
+            </div>
+            <p class="test-explanation">Failed : The page contains two identical links without context and with different target</p>
+            <p class="test-explanation">Two identical links with context are also present in the page</p>
+
+        </div>
+    </body>
+</html>
