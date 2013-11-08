@@ -67,7 +67,7 @@ public class ProcessRemarkServiceImplTest extends TestCase {
         String expectedSnippet = "<label> <span>Rechercher:</span> "
                 + "<input type=\"text\" onkeyup=\"return CatchEnter(event);\" "
                 + "class=\"text\" id=\"searchfield\" "
-                + "name=\"search&amp;qudsqqqssqdsqdsqdo\" /> [...] </label>";
+                + "name=\"search&amp;qudsqqqssqdsqdsqdo\" />[...]</label>";
         assertEquals(expectedSnippet, snippet);
         
         //--------------------------------------------------------------------//
@@ -83,8 +83,8 @@ public class ProcessRemarkServiceImplTest extends TestCase {
                 StringEscapeUtils.unescapeHtml4(instance.getSnippetFromElement(element));
         expectedSnippet = "<label> <span>New Rechercher:</span> "
                 + "<p title=\"some title here\" onkeyup=\"return CatchEnter(event);\""
-                + " id=\"searchfield\" class=\"myclass other-class1 other-class2\"> "
-                + "[...] </p> [...] </label>";
+                + " id=\"searchfield\" class=\"myclass other-class1 other-class2\">"
+                + "[...]</p>[...]</label>";
         assertEquals(expectedSnippet, snippet);
         
         //--------------------------------------------------------------------//
@@ -120,8 +120,8 @@ public class ProcessRemarkServiceImplTest extends TestCase {
         snippet = 
                 StringEscapeUtils.unescapeHtml4(instance.getSnippetFromElement(element));
         expectedSnippet = "<center> <script type=\"text/javascript\"> if (articledetail == false) initAdhese('IMU.SUPER.WIDE'); </script> "
-                 + "<script src=\"http://anyUrl.com/ad3/sl_ave_home_-IMU.SUPER.WIDE/lafr/rn92/pv1/brFirefox;Firefox17;Linux;screenundefined/in;prx;;gmbl;/?t=1381234838205\" type=\"text/javascript\"> [...] </script>"
-                 + " [...] </center>";
+                 + "<script src=\"http://anyUrl.com/ad3/sl_ave_home_-IMU.SUPER.WIDE/lafr/rn92/pv1/brFirefox;Firefox17;Linux;screenundefined/in;prx;;gmbl;/?t=1381234838205\" type=\"text/javascript\">[...]</script>"
+                 + "[...]</center>";
         assertEquals(expectedSnippet, snippet);
     }
     
