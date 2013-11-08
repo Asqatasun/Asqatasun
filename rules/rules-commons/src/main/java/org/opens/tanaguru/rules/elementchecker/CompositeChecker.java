@@ -20,7 +20,7 @@
  *  Contact us by mail: open-s AT open-s DOT com
  */
 
-package org.opens.tanaguru.rules.elementchecker.pertinence;
+package org.opens.tanaguru.rules.elementchecker;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -34,13 +34,12 @@ import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandlerImpl;
-import org.opens.tanaguru.rules.elementchecker.ElementChecker;
-import org.opens.tanaguru.rules.elementchecker.NomenclatureBasedElementChecker;
 
 /**
+ * This checker aggregate checkers and call then recursively, element by element
  * 
  */
-public abstract class PertinenceChecker extends NomenclatureBasedElementChecker {
+public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
 
     /**
      * The collection of checkers recursively called to check the pertinence. 
@@ -63,7 +62,7 @@ public abstract class PertinenceChecker extends NomenclatureBasedElementChecker 
      * 
      * @param manualCheckMessage
      */
-    public PertinenceChecker(String manualCheckMessage) {
+    public CompositeChecker(String manualCheckMessage) {
         super();
         this.manualCheckMessage = manualCheckMessage;
     }
@@ -75,7 +74,7 @@ public abstract class PertinenceChecker extends NomenclatureBasedElementChecker 
      * @param manualCheckMessage
      * @param eeAttributeNameList 
      */
-    public PertinenceChecker(
+    public CompositeChecker(
             String manualCheckMessage,
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
@@ -84,12 +83,12 @@ public abstract class PertinenceChecker extends NomenclatureBasedElementChecker 
     
     /**
      * Constructor.
-     * Enables to override the not pertinent solution.
+     * Enables to override the failure solution.
      * 
      * @param manualCheckMessage
      * @param notPertinentSolution
      */
-    public PertinenceChecker(
+    public CompositeChecker(
             String manualCheckMessage,
             TestSolution notPertinentSolution) {
         super();
@@ -99,12 +98,12 @@ public abstract class PertinenceChecker extends NomenclatureBasedElementChecker 
     
     /**
      * Constructor.
-     * Enables to override the not pertinent solution.
+     * Enables to override the failure solution.
      * @param manualCheckMessage
      * @param notPertinentSolution
      * @param eeAttributeNameList 
      */
-    public PertinenceChecker(
+    public CompositeChecker(
             String manualCheckMessage,
             TestSolution notPertinentSolution,
             String... eeAttributeNameList) {

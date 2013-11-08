@@ -38,7 +38,7 @@ public class CompositeLinkElementSelector extends LinkElementSelector {
 
     private boolean searchImageLink = false;
 
-   /**
+    /**
      * Constructor
      * @param considerContext
      * @param searchImageLink 
@@ -47,6 +47,20 @@ public class CompositeLinkElementSelector extends LinkElementSelector {
             boolean considerContext, 
             boolean searchImageLink) {
         super(considerContext);
+        this.searchImageLink = searchImageLink;
+    }
+    
+    /**
+     * Constructor
+     * @param considerTitleAsContext
+     * @param considerContext
+     * @param searchImageLink 
+     */
+    public CompositeLinkElementSelector(
+            boolean considerTitleAsContext, 
+            boolean considerContext, 
+            boolean searchImageLink) {
+        super(considerTitleAsContext, considerContext);
         this.searchImageLink = searchImageLink;
     }
     
@@ -73,7 +87,7 @@ public class CompositeLinkElementSelector extends LinkElementSelector {
      */
     protected boolean isImageLink(Element linkElement) {
         if (linkElement.children().isEmpty() 
-                || linkElement.children().size() > 2 
+                || linkElement.children().size() > 1
                 || StringUtils.isNotBlank(linkElement.ownText()) ) {
             return false;
         }

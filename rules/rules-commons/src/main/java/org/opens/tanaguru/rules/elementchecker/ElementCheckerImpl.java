@@ -66,6 +66,10 @@ public abstract class ElementCheckerImpl implements ElementChecker {
         }
         return textElementBuilder;
     }
+    @Override
+    public void setTextElementBuilder(TextElementBuilder textElementBuilder) {
+        this.textElementBuilder = textElementBuilder;
+    }
     
     /* Success solution when checker returns success. Default is PASSED*/
     private TestSolution successSolution = TestSolution.PASSED;

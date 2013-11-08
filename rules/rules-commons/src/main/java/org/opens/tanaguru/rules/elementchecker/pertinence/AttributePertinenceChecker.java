@@ -30,7 +30,14 @@ import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
- * 
+ * This class checks whether the content of an attribute is pertinent by verifying :
+ * <ul>
+ * <li>it is not empty</li>
+ * <li>it is not only composed of non alphanumerical characters</li>
+ * <li>it is not blacklisted</li>
+ * <li>it is not identical to another text (the content of another attribute
+ * for instance)</li>
+  *</ul>
  */
 public class AttributePertinenceChecker extends TextPertinenceChecker {
 

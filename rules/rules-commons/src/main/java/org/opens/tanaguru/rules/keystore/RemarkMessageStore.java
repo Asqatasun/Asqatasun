@@ -203,6 +203,10 @@ public final class RemarkMessageStore {
     public static final String SUSPECTED_PERTINENT_LINK_TITLE_MSG = 
             "SuspectedPertinentLinkTitle";
     public static final String EMPTY_LINK_TITLE_MSG = "EmptyLinkTitle";
+    public static final String IDENTICAL_LINK_WITH_DIFFERENT_TARGET=
+            "IdenticalLinkWithDifferentTarget";
+    public static final String SUSPECTED_IDENTICAL_LINK_WITH_DIFFERENT_TARGET=
+            "SuspectedIdenticalLinkWithDifferentTarget";
     
     // scripts
     public static final String CONTEXT_CHANGED_SCRIPT_MSG = 

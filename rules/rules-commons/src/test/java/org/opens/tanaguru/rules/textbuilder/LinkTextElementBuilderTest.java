@@ -62,6 +62,23 @@ public class LinkTextElementBuilderTest extends TestCase {
     /**
      * Test of buildTextFromElement method, of class LinkTextElementBuilder.
      */
+    public void testCompositeLinkWithNonAlphanumericalCharacters() {
+        System.out.println("buildTextFromElement of Composite link");
+        Document document = Jsoup.parse("<a href=\"my-link.html\" title=\"-+*-->;*&!§\">"
+            +"    -+*"
+            +"    <img src=\"image.jpg\" alt=\"-->;*\"/>"
+            +"    &!§"
+            +"</a>");
+        Element el = document.select("a").first();
+        LinkTextElementBuilder instance = new LinkTextElementBuilder();
+        String expResult = "-+* -->;* &!§";
+        String result = instance.buildTextFromElement(el);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of buildTextFromElement method, of class LinkTextElementBuilder.
+     */
     public void testImageLink() {
         System.out.println("buildTextFromElement of Image link");
         Document document = Jsoup.parse("<a href=\"\">   <img alt=\" Image Alt \" src=\"\"/>  </a>");

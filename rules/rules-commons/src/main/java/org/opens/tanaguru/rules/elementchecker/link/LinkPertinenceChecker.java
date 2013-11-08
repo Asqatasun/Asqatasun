@@ -20,15 +20,19 @@
  *  Contact us by mail: open-s AT open-s DOT com
  */
 
-package org.opens.tanaguru.rules.elementchecker.pertinence;
+package org.opens.tanaguru.rules.elementchecker.link;
 
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.rules.elementchecker.pertinence.TextPertinenceChecker;
 import org.opens.tanaguru.rules.textbuilder.LinkTextElementBuilder;
 import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
- * 
- * @author jkowalczyk
+ * This class checks whether a the text of a link is pertinent by verifying :
+ * <ul>
+ * <li>it is not only composed of non alphanumerical characters</li>
+ * <li>it is not blacklisted</li>
+ *</ul>
  */
 public class LinkPertinenceChecker extends TextPertinenceChecker {
 

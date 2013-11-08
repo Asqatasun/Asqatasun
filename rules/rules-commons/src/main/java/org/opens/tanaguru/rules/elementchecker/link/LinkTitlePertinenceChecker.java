@@ -20,9 +20,10 @@
  *  Contact us by mail: open-s AT open-s DOT com
  */
 
-package org.opens.tanaguru.rules.elementchecker.pertinence;
+package org.opens.tanaguru.rules.elementchecker.link;
 
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.rules.elementchecker.CompositeChecker;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
 import org.opens.tanaguru.rules.elementchecker.text.TextBelongsToBlackListChecker;
 import org.opens.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
@@ -36,10 +37,16 @@ import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
- * 
- * @author jkowalczyk
+ * This class checks whether the title of a link is pertinent by verifying :
+ * <ul>
+ * <li>it is not empty</li>
+ * <li>it is not only composed of non alphanumerical characters</li>
+ * <li>its content is not blacklisted</li>
+ * <li>its content is not strictly identical to the link text</li>
+ * <li>its content contains at least the link text</li>
+ * </ul>
  */
-public class LinkTitlePertinenceChecker extends PertinenceChecker {
+public class LinkTitlePertinenceChecker extends CompositeChecker {
 
     private  static final String LINK_TEXT_BL_NOM_NAME = "LinkTextBlacklist";
     
@@ -76,24 +83,30 @@ public class LinkTitlePertinenceChecker extends PertinenceChecker {
      * 
      */
     private void addCheckers() {
-        addChecker(new TextEmptinessChecker(
+        ElementChecker ec = new TextEmptinessChecker(
                         titleAttrElementBuilder,
                         RemarkMessageStore.EMPTY_LINK_TITLE_MSG, 
                         null,
-                        getEeAttributeNames()));
+                        getEeAttributeNames());
+        ec.setTextElementBuilder(linkTextElementBuilder);
+        addChecker(ec);
         
-        addChecker(new TextOnlyContainsNonAlphanumericalCharactersChecker(
+        ec = new TextOnlyContainsNonAlphanumericalCharactersChecker(
                         titleAttrElementBuilder,
                         getFailureSolution(),
                         RemarkMessageStore.NOT_PERTINENT_LINK_TITLE_MSG, 
-                        getEeAttributeNames()));
+                        getEeAttributeNames());
+        ec.setTextElementBuilder(linkTextElementBuilder);
+        addChecker(ec);
 
-        addChecker(new TextBelongsToBlackListChecker(
+        ec = new TextBelongsToBlackListChecker(
                             titleAttrElementBuilder,
                             LINK_TEXT_BL_NOM_NAME,
                             getFailureSolution(),
                             RemarkMessageStore.NOT_PERTINENT_LINK_TITLE_MSG, 
-                            getEeAttributeNames()));
+                            getEeAttributeNames());
+        ec.setTextElementBuilder(linkTextElementBuilder);
+        addChecker(ec);
         
         TestSolution strictCheckerSolution = TestSolution.FAILED;
         String strictCheckerMsg = RemarkMessageStore.NOT_PERTINENT_LINK_TITLE_MSG;
@@ -111,6 +124,7 @@ public class LinkTitlePertinenceChecker extends PertinenceChecker {
                         null,
                         getEeAttributeNames());
         ((TextNotIdenticalToAttributeChecker)strictChecker).setStrictEquality(true);
+        strictChecker.setTextElementBuilder(linkTextElementBuilder);
         addChecker(strictChecker);
         
         ElementChecker containChecker = new TextNotIdenticalToAttributeChecker(
@@ -121,6 +135,7 @@ public class LinkTitlePertinenceChecker extends PertinenceChecker {
                         RemarkMessageStore.SUSPECTED_PERTINENT_LINK_TITLE_MSG, 
                         RemarkMessageStore.SUSPECTED_NOT_PERTINENT_LINK_TITLE_MSG, 
                         getEeAttributeNames());
+        containChecker.setTextElementBuilder(linkTextElementBuilder);
         addChecker(containChecker);
     }
 }

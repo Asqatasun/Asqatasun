@@ -25,6 +25,7 @@ package org.opens.tanaguru.rules.elementchecker.pertinence;
 import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.rules.elementchecker.CompositeChecker;
 import org.opens.tanaguru.rules.elementchecker.text.TextBelongsToBlackListChecker;
 import org.opens.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
 import org.opens.tanaguru.rules.elementchecker.text.TextNotIdenticalToAttributeChecker;
@@ -33,9 +34,16 @@ import org.opens.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
 import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
- * Text pertinence of a text by invoking successively unitary checkers
+ * This class checks whether a text is pertinent by verifying :
+ * <ul>
+ * <li>it is not empty</li>
+ * <li>it is not only composed of non alphanumerical characters</li>
+ * <li>it is not blacklisted</li>
+ * <li>it is not identical to another text (the content of another attribue
+ * for instance)</li>
+  *</ul>
  */
-public class TextPertinenceChecker extends PertinenceChecker {
+public class TextPertinenceChecker extends CompositeChecker {
 
     /* The element builder needed to retrieve the text to check */
     private TextElementBuilder textElementBuilder;

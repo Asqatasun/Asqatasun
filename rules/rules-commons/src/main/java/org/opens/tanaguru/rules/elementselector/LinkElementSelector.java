@@ -37,8 +37,9 @@ import org.opens.tanaguru.rules.textbuilder.LinkTextElementBuilder;
 import org.springframework.util.CollectionUtils;
 
 /**
- * Element selector implementation that select text links (without children tags)
- * 
+ * Element selector implementation that select text links.
+ * The initial selection is split between results that have a context 
+ * and results that have not. Each selection is then exposed
  * @author jkowalczyk
  */
 public class LinkElementSelector implements ElementSelector {
@@ -92,11 +93,19 @@ public class LinkElementSelector implements ElementSelector {
     
     /* 
      * does the selection split results between the one that have a context 
-     and the one that have not
+     * and the one that have not
      */
     private boolean considerContext = true;
-    public boolean isConsiderContext() {
+    public boolean considerContext() {
         return considerContext;
+    }
+    /* 
+     * does the selection split results between the one that have a context 
+     and the one that have not
+     */
+    private boolean considerTitleAsContext = true;
+    public boolean considerTitleAsContext() {
+        return considerTitleAsContext;
     }
     
     /* The element builder needed to build the link text */
@@ -104,10 +113,21 @@ public class LinkElementSelector implements ElementSelector {
             new LinkTextElementBuilder();
     
     /**
-     * Default constructor
+     * 
+     * @param considerContext 
      */
     public LinkElementSelector(boolean considerContext) {
         this.considerContext = considerContext;
+    }
+    
+    /**
+     * Constructor
+     * @param considerTitleAsContext
+     * @param considerContext 
+     */
+    public LinkElementSelector(boolean considerTitleAsContext, boolean considerContext) {
+        this.considerContext = considerContext;
+        this.considerTitleAsContext = considerTitleAsContext;
     }
 
     /**
@@ -161,7 +181,7 @@ public class LinkElementSelector implements ElementSelector {
         /**
      * 
      * @param linkElement
-     * @return 
+     * @return the link text
      */
     protected String getLinkText(Element linkElement) {
         return linkTextElementBuilder.buildTextFromElement(linkElement);
@@ -171,7 +191,8 @@ public class LinkElementSelector implements ElementSelector {
      * 
      * @param linkElement
      * @param linkText
-     * @return 
+     * @return whether the link is part o the scope, i.e the link text is not 
+     * empty
      */
     protected boolean isLinkPartOfTheScope(Element linkElement, String linkText) {
         return StringUtils.isNotBlank(linkText);
@@ -181,22 +202,28 @@ public class LinkElementSelector implements ElementSelector {
      * 
      * @param linkElement
      * @param linkText
-     * @return 
+     * @return whether the current link have a context
      */
     protected boolean doesLinkHaveContext(Element linkElement, String linkText) {
-        if (linkElement.hasAttr(TITLE_ATTR) && 
+        // does the current link have a title attribute? 
+        if (considerTitleAsContext && 
+                linkElement.hasAttr(TITLE_ATTR) && 
                 !StringUtils.equals(linkElement.attr(TITLE_ATTR), linkText)) {
             return true;
         }
+        // does the parent of the current link have some text?
         if (StringUtils.isNotBlank(linkElement.parent().ownText())) {
             return true;
         }
-        if (doesPreviousSiblingContainsHeading(linkElement)) {
+        // does the current element have a previous sibling of heading type?
+        if (isOneOfPrecedingSiblingofHeadingType(linkElement)) {
             return true;
         }
+        // does one of the parent of the current element have a previous sibling 
+        // of heading type or is found in the PARENT_CONTEXT_ELEMENTS list?
         for (Element parent : linkElement.parents()) {
             if (PARENT_CONTEXT_ELEMENTS.contains(parent.tagName()) || 
-                    doesPreviousSiblingContainsHeading(parent)) {
+                    isOneOfPrecedingSiblingofHeadingType(parent)) {
                 return true;
             }
         }
@@ -206,9 +233,9 @@ public class LinkElementSelector implements ElementSelector {
     /**
      * 
      * @param element
-     * @return 
+     * @return whether one of the preceding sibling is of heading type
      */
-    private boolean doesPreviousSiblingContainsHeading(Element element) {
+    private boolean isOneOfPrecedingSiblingofHeadingType(Element element) {
         Element prevElementSibling = element.previousElementSibling();
         while (prevElementSibling != null) {
             if (PREV_SIBLING_CONTEXT_ELEMENTS.contains(prevElementSibling.tagName()) || 

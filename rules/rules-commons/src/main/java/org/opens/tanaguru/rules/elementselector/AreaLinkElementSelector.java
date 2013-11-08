@@ -19,41 +19,53 @@
  * 
  *  Contact us by mail: open-s AT open-s DOT com
  */
-
 package org.opens.tanaguru.rules.elementselector;
 
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.rules.keystore.AttributeStore;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.CLICKABLE_AREA_CSS_LIKE_QUERY;
 import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
+ * Element selector implementation that select area links. 
  * 
  * @author jkowalczyk
  */
 public class AreaLinkElementSelector extends LinkElementSelector {
 
-    /* The element builder needed to build the link text */
-    private TextElementBuilder areaTextElementBuilder = 
+    /*
+     * The element builder needed to build the link text
+     */
+    private TextElementBuilder areaTextElementBuilder =
             new TextAttributeOfElementBuilder(AttributeStore.ALT_ATTR);
-    
-   /**
+
+    /**
      * Constructor
+     *
      * @param considerContext
-     * @param searchImageLink 
      */
     public AreaLinkElementSelector(boolean considerContext) {
         super(considerContext);
     }
-    
+
+    /**
+     * Constructor
+     *
+     * @param considerTitleAsContext
+     * @param considerContext
+     */
+    public AreaLinkElementSelector(boolean considerTitleAsContext, boolean considerContext) {
+        super(considerTitleAsContext, considerContext);
+    }
+
     @Override
     protected String getCssLikeQuery() {
-        return "area[href][alt]";
+        return CLICKABLE_AREA_CSS_LIKE_QUERY;
     }
 
     @Override
     protected String getLinkText(Element linkElement) {
         return areaTextElementBuilder.buildTextFromElement(linkElement);
     }
-
 }

@@ -177,6 +177,7 @@ public final class CssLikeQueryStore {
                     "img , object[type^=image], object[data^=data:image],"
                   + "object[data$=png], object[data$=jpeg], object[data$=jpg],"
                   + "object[data$=bmp], object[data$=gif]" ;
+    public static final String CLICKABLE_AREA_CSS_LIKE_QUERY = "area[href][alt]";
 
     // Scripts css-like queries
     public static final String CHANGE_CONTEXT_SCRIPT_CSS_LIKE_QUERY = 
