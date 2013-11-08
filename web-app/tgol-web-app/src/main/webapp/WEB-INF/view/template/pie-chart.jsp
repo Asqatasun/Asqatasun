@@ -52,6 +52,26 @@
                                         </td>
                                     </tr>   
                                     <tr>
+                                        <td class="col01 na"></td>
+                                        <td class="col02" ><fmt:message key="na"/></td>
+                                        <td class="col03">${counter.naCount}</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="2">
+                                            <span class="fd-slider-wrapper">
+                                                <c:set var="naPercent" scope="page">
+                                                    ${(counter.naCount / totalNumber) * 100 }
+                                                </c:set>
+                                                <c:set var="naLeftOffset" scope="page">
+                                                    ${100 - naPercent}
+                                                </c:set>
+                                                <span class="fd-slider-range na" style="left: ${naLeftOffset}\%; width: ${naPercent}\%;"></span>
+                                                <span class="fd-slider-bar"></span>
+                                            </span>
+                                        </td>
+                                    </tr>                                    
+                                    <tr>
                                         <td class="col01 nmi"></td>
                                         <td class="col02"><fmt:message key="nmi"/></td>
                                         <td class="col03">${counter.nmiCount}</td>
@@ -72,26 +92,6 @@
                                             </span>
                                         </td>
                                     </tr>   
-                                    <tr>
-                                        <td class="col01 na"></td>
-                                        <td class="col02" ><fmt:message key="na"/></td>
-                                        <td class="col03">${counter.naCount}</td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td colspan="2">
-                                            <span class="fd-slider-wrapper">
-                                                <c:set var="naPercent" scope="page">
-                                                    ${(counter.naCount / totalNumber) * 100 }
-                                                </c:set>
-                                                <c:set var="naLeftOffset" scope="page">
-                                                    ${100 - naPercent}
-                                                </c:set>
-                                                <span class="fd-slider-range na" style="left: ${naLeftOffset}\%; width: ${naPercent}\%;"></span>
-                                                <span class="fd-slider-bar"></span>
-                                            </span>
-                                        </td>
-                                    </tr>
                                     <tr>
                                         <td class="col01 nt"></td>
                                         <td class="col02"><fmt:message key="nt"/></td>
