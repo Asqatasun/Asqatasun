@@ -19,8 +19,14 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractLinkPertinenceRuleImplementation;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.ruleimplementation.link.AbstractLinkRuleImplementation;
+import org.opens.tanaguru.rules.elementchecker.link.LinkPertinenceChecker;
 import org.opens.tanaguru.rules.elementselector.CompositeLinkElementSelector;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.UNEXPLICIT_LINK_MSG;
 
 /**
  * Implementation of the rule 6.3.2 of the referential Accessiweb 2.2.
@@ -29,7 +35,7 @@ import org.opens.tanaguru.rules.elementselector.CompositeLinkElementSelector;
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-6-3-2"> 6.3.2 rule specification</a>
  *
  */
-public class Aw22Rule06032 extends AbstractLinkPertinenceRuleImplementation {
+public class Aw22Rule06032 extends AbstractLinkRuleImplementation {
 
     /**
      * Default constructor
@@ -37,6 +43,18 @@ public class Aw22Rule06032 extends AbstractLinkPertinenceRuleImplementation {
     public Aw22Rule06032 () {
         // context is not taken into consideration and the composite link 
         // selector only keep image link
-        super(new CompositeLinkElementSelector(false, true));
+        super(new CompositeLinkElementSelector(false, true), 
+              new LinkPertinenceChecker(
+                    // not pertinent solution 
+                    TestSolution.FAILED,
+                    // not pertinent message
+                    UNEXPLICIT_LINK_MSG,
+                    // manual check message
+                    CHECK_LINK_PERTINENCE_MSG,
+                    // evidence elements
+                    TEXT_ELEMENT2,
+                    TITLE_ATTR
+              ),
+              null);
     }
 }

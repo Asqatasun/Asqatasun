@@ -12,15 +12,15 @@
                 <span lang="fr">Chaque intitulé de lien image (contenu de l'attribut alt ou contenu entre &lt;object&gt;&lt;/object&gt;) est-il explicite hors contexte (hors cas particulier) ? </span>
             </p>
 
-            <a href="fake-link.htm">
-                <object data="fake-data.png">
+            <a href="my-link.html">
+                <object data="data.png">
                     cliquez ici
                 </object>
             </a>
 
             <h1>AW22 Test.6.3.2 Failed 06</h1>
-            <a href="fake-link.htm" >
-                <img src="fake.jpg" alt="cliquez ici"/>
+            <a href="my-link.html" >
+                <img src="image.jpg" alt="cliquez ici"/>
             </a>
 
             <p class="test-explanation">Failed : The content of image links belongs to the image link blacklist (the context is ignored). We can deduce they are not pertinent</p>
