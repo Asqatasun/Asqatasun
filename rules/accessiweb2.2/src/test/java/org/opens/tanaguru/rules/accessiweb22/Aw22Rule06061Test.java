@@ -160,7 +160,7 @@ public class Aw22Rule06061Test extends Aw22RuleImplementationTestCase {
         assertEquals(HtmlElementStore.A_ELEMENT, processRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(1,processRemark.getElementList().size());
-        assertTrue(processRemark.getElementList().iterator().next().getValue().contains("mock-url.html"));
+        assertTrue(processRemark.getElementList().iterator().next().getValue().contains("my-link.html"));
         assertEquals(AttributeStore.HREF_ATTR, processRemark.getElementList().
                 iterator().next().getEvidence().getCode());
 
@@ -181,7 +181,7 @@ public class Aw22Rule06061Test extends Aw22RuleImplementationTestCase {
         assertEquals(HtmlElementStore.A_ELEMENT, processRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(1,processRemark.getElementList().size());
-        assertTrue(processRemark.getElementList().iterator().next().getValue().contains("mock-url.html"));
+        assertTrue(processRemark.getElementList().iterator().next().getValue().contains("my-link.html"));
         assertEquals(AttributeStore.HREF_ATTR, processRemark.getElementList().
                 iterator().next().getEvidence().getCode());
 
@@ -202,7 +202,7 @@ public class Aw22Rule06061Test extends Aw22RuleImplementationTestCase {
         assertEquals(HtmlElementStore.A_ELEMENT, processRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(1,processRemark.getElementList().size());
-        assertTrue(processRemark.getElementList().iterator().next().getValue().contains("mock-url.html"));
+        assertTrue(processRemark.getElementList().iterator().next().getValue().contains("my-link.html"));
         assertEquals(AttributeStore.HREF_ATTR, processRemark.getElementList().
                 iterator().next().getEvidence().getCode());
 
@@ -223,7 +223,7 @@ public class Aw22Rule06061Test extends Aw22RuleImplementationTestCase {
         assertEquals(HtmlElementStore.A_ELEMENT, processRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(1,processRemark.getElementList().size());
-        assertTrue(processRemark.getElementList().iterator().next().getValue().contains("mock-url.html"));
+        assertTrue(processRemark.getElementList().iterator().next().getValue().contains("my-link.html"));
         assertEquals(AttributeStore.HREF_ATTR, processRemark.getElementList().
                 iterator().next().getEvidence().getCode());
 
@@ -244,7 +244,7 @@ public class Aw22Rule06061Test extends Aw22RuleImplementationTestCase {
         assertEquals(HtmlElementStore.A_ELEMENT, processRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(1,processRemark.getElementList().size());
-        assertTrue(processRemark.getElementList().iterator().next().getValue().contains("mock-url.html"));
+        assertTrue(processRemark.getElementList().iterator().next().getValue().contains("my-link.html"));
         assertEquals(AttributeStore.HREF_ATTR, processRemark.getElementList().
                 iterator().next().getEvidence().getCode());
         
