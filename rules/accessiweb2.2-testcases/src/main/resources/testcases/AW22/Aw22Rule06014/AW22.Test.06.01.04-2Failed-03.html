@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>AW22 Test.6.1.4 Failed 03</title>
+    </head>
+    <body>
+        <div>
+
+            <div class="test-detail">
+                Does each combined link pass one of the conditions below (except in special cases)?  <ul> 		<li>The link text alone allows to understand the link purpose and target</li>   	<li>The link context allows to understand the link purpose and target</li> 	</ul>
+            </div>
+
+            <a href="my-link.html" title="-+* -->;* &!§">
+                -+*
+                <img src="image.jpg" alt="-->;*"/>
+                &!§
+            </a>
+
+            <p class="test-explanation">Failed : The link has no context, its text only contains non alphanumeric characters and is identical to the title attribute (in this case, this attribute defines the context). We can deduce it is not pertinent</p>
+
+        </div>
+    </body>
+</html>
