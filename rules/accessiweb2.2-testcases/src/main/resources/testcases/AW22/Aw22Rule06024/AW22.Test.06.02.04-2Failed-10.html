@@ -3,27 +3,25 @@
 
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>AW22 Test.6.2.4 NMI 02</title>
+        <title>AW22 Test.6.2.4 Failed 10</title>
     </head>
     <body>
         <div>
 
-            <h1>AW22 Test.6.2.4 NMI 02</h1>
+            <h1>AW22 Test.6.2.4 Failed 10</h1>
 
             <p class="test-detail">
                 <span lang="fr">Test 6.2.4 : Pour chaque lien composite ayant un titre de lien (attribut title), le contenu de cet attribut est-il pertinent ? </span>
             </p>
 
-            <a href="my-link.html" title="This is a composite link with a suspected pertinent title" >
+            <a href="my-link.html" title="This is a composite link" >
                 <object data="data.jpg">
-                    This is a composite
+
                 </object>
-                <object data="data.jpg">
-                    link 
-                </object>
+                This is a composite link
             </a>
 
-            <p class="test-explanation">NMI : The title attribute doesn't seem to be pertinent but a human control is needed for the final decision</p>
+            <p class="test-explanation">Failed : The content of the title attribute is the same as the text of the link. we can deduce it is not pertinent</p>
 
         </div>
     </body>

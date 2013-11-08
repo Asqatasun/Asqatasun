@@ -23,6 +23,7 @@ package org.opens.tanaguru.rules.accessiweb22;
 
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
@@ -192,6 +193,12 @@ public class Aw22Rule06022Test extends Aw22RuleImplementationTestCase {
         getWebResourceMap().put("AW22.Test.06.02.04-2Failed-08",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "AW22/Aw22Rule06024/AW22.Test.06.02.04-2Failed-08.html"));
+        getWebResourceMap().put("AW22.Test.06.02.04-2Failed-09",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06024/AW22.Test.06.02.04-2Failed-09.html"));
+        getWebResourceMap().put("AW22.Test.06.02.04-2Failed-10",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06024/AW22.Test.06.02.04-2Failed-10.html"));
         getWebResourceMap().put("AW22.Test.06.02.04-3NMI-01",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "AW22/Aw22Rule06024/AW22.Test.06.02.04-3NMI-01.html"));
@@ -266,7 +273,7 @@ public class Aw22Rule06022Test extends Aw22RuleImplementationTestCase {
         assertEquals(TestSolution.FAILED,processResult.getValue());
         assertEquals(RemarkMessageStore.NOT_PERTINENT_LINK_TITLE_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        
         processResult = processPageTest("AW22.Test.06.02.02-2Failed-02");
         assertEquals(TestSolution.FAILED,processResult.getValue());
         assertEquals(RemarkMessageStore.NOT_PERTINENT_LINK_TITLE_MSG,
@@ -312,25 +319,42 @@ public class Aw22Rule06022Test extends Aw22RuleImplementationTestCase {
         assertEquals(RemarkMessageStore.SUSPECTED_NOT_PERTINENT_LINK_TITLE_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
 
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("AW22.Test.06.02.02-4NA-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("AW22.Test.06.02.02-4NA-02").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("AW22.Test.06.02.02-4NA-03").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("AW22.Test.06.02.02-4NA-04").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("AW22.Test.06.02.02-4NA-05").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("AW22.Test.06.02.02-4NA-06").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("AW22.Test.06.02.02-4NA-07").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("AW22.Test.06.02.02-4NA-08").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("AW22.Test.06.02.02-4NA-09").getValue());
-                
+        processResult = processPageTest("AW22.Test.06.02.02-4NA-01");
+        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("AW22.Test.06.02.02-4NA-02");
+        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("AW22.Test.06.02.02-4NA-03");
+        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("AW22.Test.06.02.02-4NA-04");
+        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("AW22.Test.06.02.02-4NA-05");
+        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("AW22.Test.06.02.02-4NA-06");
+        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("AW22.Test.06.02.02-4NA-07");
+        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("AW22.Test.06.02.02-4NA-08");
+        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("AW22.Test.06.02.02-4NA-09");
+        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        assertNull(processResult.getRemarkSet());
+        
         // 06.02.01 testcases : All is Not Applicable
         processResult = processPageTest("AW22.Test.06.02.01-2Failed-01");
         assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
@@ -413,14 +437,22 @@ public class Aw22Rule06022Test extends Aw22RuleImplementationTestCase {
         processResult = processPageTest("AW22.Test.06.02.04-2Failed-08");
         assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
         assertNull(processResult.getRemarkSet());
+                
+        processResult = processPageTest("AW22.Test.06.02.04-2Failed-09");
+        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        assertNull(processResult.getRemarkSet());
+        
+        processResult = processPageTest("AW22.Test.06.02.04-2Failed-10");
+        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        assertNull(processResult.getRemarkSet());
         
         processResult = processPageTest("AW22.Test.06.02.04-3NMI-01");
         assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
         assertNull(processResult.getRemarkSet());
         
-//        processResult = processPageTest("AW22.Test.06.02.04-3NMI-02");
-//        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-//        assertNull(processResult.getRemarkSet());
+        processResult = processPageTest("AW22.Test.06.02.04-3NMI-02");
+        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        assertNull(processResult.getRemarkSet());
         
         processResult = processPageTest("AW22.Test.06.02.04-3NMI-03");
         assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
@@ -505,7 +537,68 @@ public class Aw22Rule06022Test extends Aw22RuleImplementationTestCase {
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("AW22.Test.06.02.02-4NA-09").getValue());
         
+        // 06.02.01 testcases : All is Not Applicable
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.01-2Failed-01").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.01-2Failed-02").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.01-2Failed-03").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.01-2Failed-04").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.01-3NMI-01").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.01-3NMI-02").getValue());
                 
+        // 06.02.03 testcases : All is Not Applicable
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.03-2Failed-02").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.03-2Failed-03").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.03-2Failed-04").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.03-3NMI-01").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.03-3NMI-02").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.03-3NMI-03").getValue());
+        
+        // 06.02.04 testcases : All is Not Applicable
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.04-2Failed-01").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.04-2Failed-02").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.04-2Failed-03").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.04-2Failed-04").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.04-2Failed-05").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.04-2Failed-06").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.04-2Failed-07").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.04-2Failed-08").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.04-2Failed-09").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.04-2Failed-10").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.04-3NMI-01").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.04-3NMI-02").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.04-3NMI-03").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.04-3NMI-04").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.04-3NMI-05").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.02.04-3NMI-06").getValue());        
+        
         // 06.06.01 testcases : All is Not Applicable
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("AW22.Test.06.06.01-2Failed-01").getValue());

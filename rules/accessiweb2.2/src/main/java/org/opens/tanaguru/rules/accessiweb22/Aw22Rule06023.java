@@ -20,7 +20,7 @@
 package org.opens.tanaguru.rules.accessiweb22;
 
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.opens.tanaguru.rules.elementchecker.pertinence.LinkTitlePertinenceChecker;
+import org.opens.tanaguru.rules.elementchecker.link.LinkTitlePertinenceChecker;
 import org.opens.tanaguru.rules.elementselector.AreaLinkElementSelector;
 
 /**
