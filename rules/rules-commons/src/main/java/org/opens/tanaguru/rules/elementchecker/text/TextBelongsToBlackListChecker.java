@@ -77,55 +77,55 @@ public class TextBelongsToBlackListChecker
     private String textBelongsToBlackListMessageCode;
     
     /** The text element builder. By default, it is a simple Text builder*/
-    private TextElementBuilder textElementBuilder;
+    private TextElementBuilder testableTextBuilder;
     
     /**
      * Constructor
-     * @param textElementBuilder
+     * @param testableTextBuilder
      * @param blackListNomName
      * @param textBelongsToBlackListMessageCode
      */
     public TextBelongsToBlackListChecker(
-            TextElementBuilder textElementBuilder,
+            TextElementBuilder testableTextBuilder,
             String blackListNomName,
             String textBelongsToBlackListMessageCode) {
         super();
-        this.textElementBuilder = textElementBuilder;
+        this.testableTextBuilder = testableTextBuilder;
         this.blackListNomName = blackListNomName;
         this.textBelongsToBlackListMessageCode = textBelongsToBlackListMessageCode;
     }
     
     /**
      * Constructor
-     * @param textElementBuilder
+     * @param testableTextBuilder
      * @param blackListNomName
      * @param textBelongsToBlackListMessageCode
      * @param eeAttributeNameList 
      */
     public TextBelongsToBlackListChecker(
-            TextElementBuilder textElementBuilder,
+            TextElementBuilder testableTextBuilder,
             String blackListNomName,
             String textBelongsToBlackListMessageCode,
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
-        this.textElementBuilder = textElementBuilder;
+        this.testableTextBuilder = testableTextBuilder;
         this.blackListNomName = blackListNomName;
         this.textBelongsToBlackListMessageCode = textBelongsToBlackListMessageCode;
     }
     
     /**
      * Constructor
-     * @param textElementBuilder
+     * @param testableTextBuilder
      * @param blackListNomName
      * @param detectedSolution
      * @param textBelongsToBlackListMessageCode
      */
     public TextBelongsToBlackListChecker(
-            TextElementBuilder textElementBuilder,
+            TextElementBuilder testableTextBuilder,
             String blackListNomName,
             TestSolution detectedSolution,
             String textBelongsToBlackListMessageCode) {
-        this(textElementBuilder, 
+        this(testableTextBuilder, 
              blackListNomName,
              textBelongsToBlackListMessageCode);
         setFailureSolution(detectedSolution);
@@ -133,19 +133,19 @@ public class TextBelongsToBlackListChecker
     
     /**
      * Constructor
-     * @param textElementBuilder
+     * @param testableTextBuilder
      * @param blackListNomName
      * @param detectedSolution
      * @param textBelongsToBlackListMessageCode
      * @param eeAttributeNameList 
      */
     public TextBelongsToBlackListChecker(
-            TextElementBuilder textElementBuilder,
+            TextElementBuilder testableTextBuilder,
             String blackListNomName,
             TestSolution detectedSolution,
             String textBelongsToBlackListMessageCode,
             String... eeAttributeNameList) {
-        this(textElementBuilder, 
+        this(testableTextBuilder, 
              blackListNomName,
              textBelongsToBlackListMessageCode,
              eeAttributeNameList);
@@ -161,7 +161,7 @@ public class TextBelongsToBlackListChecker
              testSolutionHandler.addTestSolution(
                      checkTextElementBelongsToBlacklist(
                         element, 
-                        textElementBuilder.buildTextFromElement(element)));
+                        testableTextBuilder.buildTextFromElement(element)));
          }
     }
     

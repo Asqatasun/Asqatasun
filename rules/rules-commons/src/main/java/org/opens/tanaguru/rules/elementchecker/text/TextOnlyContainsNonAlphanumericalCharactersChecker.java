@@ -48,64 +48,64 @@ public class TextOnlyContainsNonAlphanumericalCharactersChecker
     private String textOnlyContainsNacMsgCode;
 
     /* The text element builder. By default, it is a simple Text builder */
-    private TextElementBuilder textElementBuilder;
+    private TextElementBuilder testableTextBuilder;
     
     /**
      * Constructor
      * 
-     * @param textElementBuilder
+     * @param testableTextBuilder
      * @param textOnlyContainsNacMsgCode
      */
     public TextOnlyContainsNonAlphanumericalCharactersChecker(
-            TextElementBuilder textElementBuilder,
+            TextElementBuilder testableTextBuilder,
             String textOnlyContainsNacMsgCode) {
         super();
-        this.textElementBuilder = textElementBuilder;
+        this.testableTextBuilder = testableTextBuilder;
         this.textOnlyContainsNacMsgCode = textOnlyContainsNacMsgCode;
     }
     
     /**
      * Constructor
-     * @param textElementBuilder
+     * @param testableTextBuilder
      * @param textOnlyContainsNacMsgCode
      * @param eeAttributeNameList 
      */
     public TextOnlyContainsNonAlphanumericalCharactersChecker(
-            TextElementBuilder textElementBuilder,
+            TextElementBuilder testableTextBuilder,
             String textOnlyContainsNacMsgCode,
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
-        this.textElementBuilder = textElementBuilder;
+        this.testableTextBuilder = testableTextBuilder;
         this.textOnlyContainsNacMsgCode = textOnlyContainsNacMsgCode;
     }
     
     /**
      * Constructor
-     * @param textElementBuilder
+     * @param testableTextBuilder
      * @param detectionSolution
      * @param textOnlyContainsNacMsgCode
      */
     public TextOnlyContainsNonAlphanumericalCharactersChecker(
-            TextElementBuilder textElementBuilder,
+            TextElementBuilder testableTextBuilder,
             TestSolution detectedSolution,
             String textOnlyContainsNacMsgCode) {
-        this(textElementBuilder, textOnlyContainsNacMsgCode);
+        this(testableTextBuilder, textOnlyContainsNacMsgCode);
         setFailureSolution(detectedSolution);
     }
     
     /**
      * Constructor
-     * @param textElementBuilder
+     * @param testableTextBuilder
      * @param detectionSolution
      * @param textOnlyContainsNacMsgCode
      * @param eeAttributeNameList 
      */
     public TextOnlyContainsNonAlphanumericalCharactersChecker(
-            TextElementBuilder textElementBuilder,
+            TextElementBuilder testableTextBuilder,
             TestSolution detectedSolution,
             String textOnlyContainsNacMsgCode,
             String... eeAttributeNameList) {
-        this(textElementBuilder, textOnlyContainsNacMsgCode, eeAttributeNameList);
+        this(testableTextBuilder, textOnlyContainsNacMsgCode, eeAttributeNameList);
         setFailureSolution(detectedSolution);
     }
 
@@ -118,7 +118,7 @@ public class TextOnlyContainsNonAlphanumericalCharactersChecker
              testSolutionHandler.addTestSolution(
                      checkTextElementOnlyContainsNonAlphanumericCharacters(
                         element, 
-                        this.textElementBuilder.buildTextFromElement(element)));
+                        this.testableTextBuilder.buildTextFromElement(element)));
          }
     }
     

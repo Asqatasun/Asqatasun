@@ -44,7 +44,7 @@ public class TextNotIdenticalToAttributeChecker extends ElementCheckerImpl {
     private String textNotIdenticalToAttributeValueMessageCode;
     
     /* The text element builder. By default, it is a simple Text builder */
-    private TextElementBuilder textElementBuilder;
+    private TextElementBuilder testableTextBuilder;
     
     /* The attr element builder needed to retrieve the attribute to compare with*/
     private TextElementBuilder attrElementBuilder;
@@ -60,19 +60,19 @@ public class TextNotIdenticalToAttributeChecker extends ElementCheckerImpl {
     /**
      * Constructor.
      * 
-     * @param textElementBuilder
+     * @param testableTextBuilder
      * @param attributeNameToCompareWith
      * @param textIdenticalToAttributeValueMessageCode
      * @param textNotIdenticalToAttributeValueMessageCode
      */
     public TextNotIdenticalToAttributeChecker(
-            TextElementBuilder textElementBuilder,
-            TextElementBuilder textElementBuilderToCompareWith, 
+            TextElementBuilder testableTextBuilder,
+            TextElementBuilder testableTextBuilderToCompareWith, 
             String textIdenticalToAttributeValueMessageCode, 
             @Nullable String textNotIdenticalToAttributeValueMessageCode) {
         super();
-        this.textElementBuilder = textElementBuilder;
-        this.attrElementBuilder = textElementBuilderToCompareWith;
+        this.testableTextBuilder = testableTextBuilder;
+        this.attrElementBuilder = testableTextBuilderToCompareWith;
         this.textIdenticalToAttributeValueMessageCode = 
                 textIdenticalToAttributeValueMessageCode;
         this.textNotIdenticalToAttributeValueMessageCode = 
@@ -82,21 +82,21 @@ public class TextNotIdenticalToAttributeChecker extends ElementCheckerImpl {
     /**
      * Constructor.
      * 
-     * @param textElementBuilder
+     * @param testableTextBuilder
      * @param attributeNameToCompareWith
      * @param textIdenticalToAttributeValueMessageCode
      * @param textNotIdenticalToAttributeValueMessageCode
      * @param eeAttributeNameList 
      */
     public TextNotIdenticalToAttributeChecker(
-            TextElementBuilder textElementBuilder,
-            TextElementBuilder textElementBuilderToCompareWith, 
+            TextElementBuilder testableTextBuilder,
+            TextElementBuilder testableTextBuilderToCompareWith, 
             String textIdenticalToAttributeValueMessageCode, 
             @Nullable String textNotIdenticalToAttributeValueMessageCode,
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
-        this.textElementBuilder = textElementBuilder;
-        this.attrElementBuilder = textElementBuilderToCompareWith;
+        this.testableTextBuilder = testableTextBuilder;
+        this.attrElementBuilder = testableTextBuilderToCompareWith;
         this.textIdenticalToAttributeValueMessageCode = 
                 textIdenticalToAttributeValueMessageCode;
         this.textNotIdenticalToAttributeValueMessageCode = 
@@ -106,7 +106,7 @@ public class TextNotIdenticalToAttributeChecker extends ElementCheckerImpl {
     /**
      * Constructor
      * 
-     * @param textElementBuilder
+     * @param testableTextBuilder
      * @param attributeNameToCompareWith
      * @param detectedSolution
      * @param notDetectedSolution
@@ -114,14 +114,14 @@ public class TextNotIdenticalToAttributeChecker extends ElementCheckerImpl {
      * @param textNotIdenticalToAttributeValueMessageCode 
      */
     public TextNotIdenticalToAttributeChecker(
-            TextElementBuilder textElementBuilder,
-            TextElementBuilder textElementBuilderToCompareWith,
+            TextElementBuilder testableTextBuilder,
+            TextElementBuilder testableTextBuilderToCompareWith,
             TestSolution detectedSolution,
             TestSolution notDetectedSolution,
             String textIdenticalToAttributeValueMessageCode, 
             String textNotIdenticalToAttributeValueMessageCode) {
-        this(textElementBuilder, 
-             textElementBuilderToCompareWith,
+        this(testableTextBuilder, 
+             testableTextBuilderToCompareWith,
              textIdenticalToAttributeValueMessageCode,
              textNotIdenticalToAttributeValueMessageCode);
         setSuccessSolution(notDetectedSolution);
@@ -131,7 +131,7 @@ public class TextNotIdenticalToAttributeChecker extends ElementCheckerImpl {
     /**
      * Constructor.
      * 
-     * @param textElementBuilder
+     * @param testableTextBuilder
      * @param attributeNameToCompareWith
      * @param detectedSolution
      * @param notDetectedSolution
@@ -140,15 +140,15 @@ public class TextNotIdenticalToAttributeChecker extends ElementCheckerImpl {
      * @param eeAttributeNameList 
      */
     public TextNotIdenticalToAttributeChecker(
-            TextElementBuilder textElementBuilder,
-            TextElementBuilder textElementBuilderToCompareWith, 
+            TextElementBuilder testableTextBuilder,
+            TextElementBuilder testableTextBuilderToCompareWith, 
             TestSolution detectedSolution,
             TestSolution notDetectedSolution,
             String textIdenticalToAttributeValueMessageCode, 
             String textNotIdenticalToAttributeValueMessageCode, 
             String... eeAttributeNameList) {
-        this(textElementBuilder, 
-             textElementBuilderToCompareWith, 
+        this(testableTextBuilder, 
+             testableTextBuilderToCompareWith, 
              textIdenticalToAttributeValueMessageCode, 
              textNotIdenticalToAttributeValueMessageCode, 
              eeAttributeNameList);
@@ -165,7 +165,7 @@ public class TextNotIdenticalToAttributeChecker extends ElementCheckerImpl {
             testSolutionHandler.addTestSolution(
                     checkTextElementNotIdenticalToAnother(
                         el, 
-                        textElementBuilder.buildTextFromElement(el)));
+                        testableTextBuilder.buildTextFromElement(el)));
         }
     }
 

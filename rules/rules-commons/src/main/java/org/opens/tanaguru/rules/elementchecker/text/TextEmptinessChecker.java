@@ -49,22 +49,22 @@ public class TextEmptinessChecker extends ElementCheckerImpl {
     private String messageCodeOnTextNotEmpty;
     
     /* The text element builder. By default, it is a simple Text builder */
-    private TextElementBuilder textElementBuilder;
+    private TextElementBuilder testableTextBuilder;
     
     /**
      * Constructor. 
      * Returns FAILED when the text is empty and PASSED when it is not.
      * 
-     * @param textElementBuilder
+     * @param testableTextBuilder
      * @param messageCodeOnTextEmpty
      * @param messageCodeOnTextNotEmpty
      */
     public TextEmptinessChecker(
-            TextElementBuilder textElementBuilder,
+            TextElementBuilder testableTextBuilder,
             String messageCodeOnTextEmpty, 
             String messageCodeOnTextNotEmpty) {
         super();
-        this.textElementBuilder = textElementBuilder;
+        this.testableTextBuilder = testableTextBuilder;
         this.messageCodeOnTextEmpty = messageCodeOnTextEmpty;
         this.messageCodeOnTextNotEmpty = messageCodeOnTextNotEmpty;
     }
@@ -73,18 +73,18 @@ public class TextEmptinessChecker extends ElementCheckerImpl {
      * Constructor.
      * Returns FAILED when the text is empty and PASSED when it is not.
      * 
-     * @param textElementBuilder
+     * @param testableTextBuilder
      * @param messageCodeOnTextEmpty
      * @param messageCodeOnTextNotEmpty
      * @param eeAttributeNameList 
      */
     public TextEmptinessChecker(
-            TextElementBuilder textElementBuilder,
+            TextElementBuilder testableTextBuilder,
             String messageCodeOnTextEmpty, 
             String messageCodeOnTextNotEmpty, 
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
-        this.textElementBuilder = textElementBuilder;
+        this.testableTextBuilder = testableTextBuilder;
         this.messageCodeOnTextEmpty = messageCodeOnTextEmpty;
         this.messageCodeOnTextNotEmpty = messageCodeOnTextNotEmpty;
     }
@@ -92,19 +92,19 @@ public class TextEmptinessChecker extends ElementCheckerImpl {
     /**
      * Constructor.
      * 
-     * @param textElementBuilder
+     * @param testableTextBuilder
      * @param textEmptySolution
      * @param textNotEmptySolution
      * @param messageCodeOnTextEmpty
      * @param messageCodeOnTextNotEmpty
      */
     public TextEmptinessChecker(
-            TextElementBuilder textElementBuilder,
+            TextElementBuilder testableTextBuilder,
             TestSolution textEmptySolution,
             TestSolution textNotEmptySolution,
             String messageCodeOnTextEmpty, 
             String messageCodeOnTextNotEmpty) {
-        this(textElementBuilder, 
+        this(testableTextBuilder, 
              messageCodeOnTextEmpty, 
              messageCodeOnTextNotEmpty);
         setSuccessSolution(textNotEmptySolution);
@@ -114,7 +114,7 @@ public class TextEmptinessChecker extends ElementCheckerImpl {
     /**
      * Constructor 
      * 
-     * @param textElementBuilder
+     * @param testableTextBuilder
      * @param textEmptySolution
      * @param textNotEmptySolution
      * @param messageCodeOnTextEmpty
@@ -122,13 +122,13 @@ public class TextEmptinessChecker extends ElementCheckerImpl {
      * @param eeAttributeNameList 
      */
     public TextEmptinessChecker(
-            TextElementBuilder textElementBuilder,
+            TextElementBuilder testableTextBuilder,
             TestSolution textEmptySolution,
             TestSolution textNotEmptySolution,
             String messageCodeOnTextEmpty, 
             String messageCodeOnTextNotEmpty, 
             String... eeAttributeNameList) {
-        this(textElementBuilder, 
+        this(testableTextBuilder, 
              messageCodeOnTextEmpty, 
              messageCodeOnTextNotEmpty, 
              eeAttributeNameList);
@@ -165,7 +165,7 @@ public class TextEmptinessChecker extends ElementCheckerImpl {
         TestSolution testSolution = TestSolution.NOT_APPLICABLE;
         String textElement;
         for (Element el : elements) {
-            textElement = textElementBuilder.buildTextFromElement(el);
+            textElement = testableTextBuilder.buildTextFromElement(el);
             if (textElement == null)  {
                 testSolution = setTestSolution(testSolution, 
                                                TestSolution.NOT_APPLICABLE);

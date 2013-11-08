@@ -58,73 +58,73 @@ public class TextEndsWithChecker extends NomenclatureBasedElementChecker {
     private String textEndsWithMessageCode;
     
     /* The text element builder. By default, it is a simple Text builder */
-    private TextElementBuilder textElementBuilder;
+    private TextElementBuilder testableTextBuilder;
     
     /**
      * Constructor
-     * @param textElementBuilder
+     * @param testableTextBuilder
      * @param extensionListNomName
      * @param textEndsWithMessageCode
      */
     public TextEndsWithChecker(
-            TextElementBuilder textElementBuilder,
+            TextElementBuilder testableTextBuilder,
             String extensionListNomName,
             String textEndsWithMessageCode) {
         super();
-        this.textElementBuilder = textElementBuilder;
+        this.testableTextBuilder = testableTextBuilder;
         this.extensionListNomName = extensionListNomName;
         this.textEndsWithMessageCode = textEndsWithMessageCode;
     }
     
     /**
      * Constructor
-     * @param textElementBuilder
+     * @param testableTextBuilder
      * @param extensionListNomName
      * @param textEndsWithMessageCode
      * @param eeAttributeNameList 
      */
     public TextEndsWithChecker(
-            TextElementBuilder textElementBuilder,
+            TextElementBuilder testableTextBuilder,
             String extensionListNomName,
             String textEndsWithMessageCode,
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
-        this.textElementBuilder = textElementBuilder;
+        this.testableTextBuilder = testableTextBuilder;
         this.extensionListNomName = extensionListNomName;
         this.textEndsWithMessageCode = textEndsWithMessageCode;
     }
     
     /**
      * Constructor
-     * @param textElementBuilder
+     * @param testableTextBuilder
      * @param extensionListNomName
      * @param detectedSolution
      * @param textEndsWithMessageCode
      */
     public TextEndsWithChecker(
-            TextElementBuilder textElementBuilder,
+            TextElementBuilder testableTextBuilder,
             String extensionListNomName,
             TestSolution detectedSolution, 
             String textEndsWithMessageCode) {
-        this(textElementBuilder, extensionListNomName, textEndsWithMessageCode);
+        this(testableTextBuilder, extensionListNomName, textEndsWithMessageCode);
         setFailureSolution(detectedSolution);
     }
     
     /**
      * Constructor
-     * @param textElementBuilder
+     * @param testableTextBuilder
      * @param extensionListNomName
      * @param detectedSolution
      * @param textEndsWithMessageCode
      * @param eeAttributeNameList 
      */
     public TextEndsWithChecker(
-            TextElementBuilder textElementBuilder,
+            TextElementBuilder testableTextBuilder,
             String extensionListNomName,
             TestSolution detectedSolution, 
             String textEndsWithMessageCode,
             String... eeAttributeNameList) {
-        this(textElementBuilder,
+        this(testableTextBuilder,
              extensionListNomName, 
              textEndsWithMessageCode,
              eeAttributeNameList);
@@ -140,7 +140,7 @@ public class TextEndsWithChecker extends NomenclatureBasedElementChecker {
              testSolutionHandler.addTestSolution(
                      checkTextElementEndsWithExtension(
                         element, 
-                        this.textElementBuilder.buildTextFromElement(element)));
+                        this.testableTextBuilder.buildTextFromElement(element)));
          }
     }
     
