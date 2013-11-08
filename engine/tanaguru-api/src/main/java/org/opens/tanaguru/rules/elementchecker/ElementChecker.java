@@ -26,11 +26,15 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
+import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
  * This interface defines a check to be done on elements 
  */
 public interface ElementChecker {
+
+    /* The text element builder*/ 
+    void setTextElementBuilder(TextElementBuilder textElementBuilder);
     
     /* success solution */
     TestSolution getSuccessSolution();
