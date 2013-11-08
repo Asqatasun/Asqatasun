@@ -715,7 +715,7 @@ public class Aw22Rule06011Test extends Aw22RuleImplementationTestCase {
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("AW22.Test.06.01.02-2Failed-03").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("AW22.Test.06.01.03-2Failed-04").getValue());
+                consolidate("AW22.Test.06.01.02-2Failed-04").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("AW22.Test.06.01.02-2Failed-05").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
@@ -781,7 +781,7 @@ public class Aw22Rule06011Test extends Aw22RuleImplementationTestCase {
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("AW22.Test.06.01.04-2Failed-03").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("AW22.Test.06.01.03-2Failed-04").getValue());
+                consolidate("AW22.Test.06.01.04-2Failed-04").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("AW22.Test.06.01.04-2Failed-05").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,

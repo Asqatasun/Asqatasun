@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>AW22 Test.6.3.4 NMI 03</title>
+    </head>
+    <body>
+        <div>
+
+            <div class="test-detail">
+                Is each combined link (content of the text and of the alt attribute) explicit out of context (except in special cases)? 
+            </div>
+            <div class="testcase">
+
+                <h1>
+                    <a href="my-link.html" title="-->;*">
+                        <span>unpredictable content pertinence"</span>
+                    </a>
+                </h1>
+
+
+            </div>
+            <p class="test-explanation">NMI : The text link pertinence is unpredictable (whatever the context)</p>
+
+        </div>
+    </body>
+</html>

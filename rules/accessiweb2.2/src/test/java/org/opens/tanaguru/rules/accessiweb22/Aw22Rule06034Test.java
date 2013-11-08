@@ -19,9 +19,11 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
+import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
  * Unit test class for the implementation of the rule 6.3.4 of the referential Accessiweb 2.2.
@@ -45,18 +47,75 @@ public class Aw22Rule06034Test extends Aw22RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-//        getWebResourceMap().put("AW22.Test.6.3.4-1Passed-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.6.3.4-1Passed-01.html"));
-//        getWebResourceMap().put("AW22.Test.6.3.4-2Failed-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.6.3.4-2Failed-01.html"));
-        getWebResourceMap().put("AW22.Test.6.3.4-3NMI-01",
+        getWebResourceMap().put("AW22.Test.06.03.04-2Failed-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.6.3.4-3NMI-01.html"));
-//        getWebResourceMap().put("AW22.Test.6.3.4-4NA-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.6.3.4-4NA-01.html"));
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-2Failed-01.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-2Failed-02",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-2Failed-02.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-2Failed-03",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-2Failed-03.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-2Failed-04",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-2Failed-04.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-2Failed-05",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-2Failed-05.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-2Failed-06",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-2Failed-06.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-2Failed-07",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-2Failed-07.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-2Failed-08",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-2Failed-08.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-2Failed-09",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-2Failed-09.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-2Failed-10",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-2Failed-10.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-2Failed-11",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-2Failed-11.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-2Failed-12",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-2Failed-12.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-3NMI-01",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-3NMI-01.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-3NMI-02",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-3NMI-02.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-3NMI-03",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-3NMI-03.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-3NMI-04",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-3NMI-04.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-3NMI-05",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-3NMI-05.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-3NMI-06",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-3NMI-06.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-4NA-01",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-4NA-01.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-4NA-02",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-4NA-02.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-4NA-03",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-4NA-03.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-4NA-04",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-4NA-04.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-4NA-05",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-4NA-05.html"));
         
         // 06.03.01 testcases
         getWebResourceMap().put("AW22.Test.06.03.01-2Failed-01",
@@ -231,17 +290,206 @@ public class Aw22Rule06034Test extends Aw22RuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
-//        assertEquals(TestSolution.PASSED,
-//                processPageTest("AW22.Test.6.3.4-1Passed-01").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                processPageTest("AW22.Test.6.3.4-2Failed-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("AW22.Test.6.3.4-3NMI-01").getValue());
-//        assertEquals(TestSolution.NOT_APPLICABLE,
-//                processPageTest("AW22.Test.6.3.4-4NA-01").getValue());
+        ProcessResult processResult =
+                processPageTest("AW22.Test.06.03.04-2Failed-01");
+        assertEquals(TestSolution.FAILED,processResult.getValue());
+        assertEquals(1, processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(TestSolution.FAILED,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+
+        processResult = processPageTest("AW22.Test.06.03.04-2Failed-02");
+        assertEquals(TestSolution.FAILED,processResult.getValue());
+        assertEquals(1, processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(TestSolution.FAILED,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+
+        processResult = processPageTest("AW22.Test.06.03.04-2Failed-03");
+        assertEquals(TestSolution.FAILED,processResult.getValue());
+        assertEquals(1, processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(TestSolution.FAILED,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+
+        processResult = processPageTest("AW22.Test.06.03.04-2Failed-04");
+        assertEquals(TestSolution.FAILED,processResult.getValue());
+        assertEquals(1, processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(TestSolution.FAILED,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+
+        processResult = processPageTest("AW22.Test.06.03.04-2Failed-05");
+        assertEquals(TestSolution.FAILED,processResult.getValue());
+        assertEquals(3, processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(TestSolution.FAILED,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
+        assertEquals(TestSolution.FAILED,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[2]).getMessageCode());
+        assertEquals(TestSolution.FAILED,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[2]).getIssue());
+
+        processResult = processPageTest("AW22.Test.06.03.04-2Failed-06");
+        assertEquals(TestSolution.FAILED,processResult.getValue());
+        assertEquals(2, processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(TestSolution.FAILED,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
+        assertEquals(TestSolution.FAILED,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
+
+        processResult = processPageTest("AW22.Test.06.03.04-2Failed-07");
+        assertEquals(TestSolution.FAILED,processResult.getValue());
+        assertEquals(2, processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(TestSolution.FAILED,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
+        assertEquals(TestSolution.FAILED,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
+
+        processResult = processPageTest("AW22.Test.06.03.04-2Failed-08");
+        assertEquals(TestSolution.FAILED,processResult.getValue());
+        assertEquals(2, processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(TestSolution.FAILED,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
+        assertEquals(TestSolution.FAILED,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
+
+        processResult = processPageTest("AW22.Test.06.03.04-2Failed-09");
+        assertEquals(TestSolution.FAILED,processResult.getValue());
+        assertEquals(1, processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(TestSolution.FAILED,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+
+        processResult = processPageTest("AW22.Test.06.03.04-2Failed-10");
+        assertEquals(TestSolution.FAILED,processResult.getValue());
+        assertEquals(1, processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(TestSolution.FAILED,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+        
+
+        processResult = processPageTest("AW22.Test.06.03.04-2Failed-11");
+        assertEquals(TestSolution.FAILED,processResult.getValue());
+        assertEquals(1, processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(TestSolution.FAILED,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+
+        processResult = processPageTest("AW22.Test.06.03.04-2Failed-12");
+        assertEquals(TestSolution.FAILED,processResult.getValue());
+        assertEquals(1, processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(TestSolution.FAILED,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+
+        processResult = processPageTest("AW22.Test.06.03.04-3NMI-01");
+        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
+        assertEquals(2, processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
+
+        processResult = processPageTest("AW22.Test.06.03.04-3NMI-02");
+        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
+        assertEquals(2, processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
+
+        processResult = processPageTest("AW22.Test.06.03.04-3NMI-03");
+        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
+        assertEquals(1, processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+
+        processResult = processPageTest("AW22.Test.06.03.04-3NMI-04");
+        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
+        assertEquals(2, processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
+
+        processResult = processPageTest("AW22.Test.06.03.04-3NMI-05");
+        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
+        assertEquals(1, processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+
+        processResult = processPageTest("AW22.Test.06.03.04-3NMI-06");
+        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
+        assertEquals(1, processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+
+        processResult = processPageTest("AW22.Test.06.03.04-4NA-01");
+        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        assertNull(processResult.getRemarkSet());
+        
+        processResult = processPageTest("AW22.Test.06.03.04-4NA-02");
+        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("AW22.Test.06.03.04-4NA-03");
+        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("AW22.Test.06.03.04-4NA-04");
+        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("AW22.Test.06.03.04-4NA-05");
+        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        assertNull(processResult.getRemarkSet());
         
         // 06.03.01 testcases : All is Not Applicable
-        ProcessResult processResult = processPageTest("AW22.Test.06.03.01-2Failed-01");
+        processResult = processPageTest("AW22.Test.06.03.01-2Failed-01");
         assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
         assertNull(processResult.getRemarkSet());
         
@@ -463,14 +711,52 @@ public class Aw22Rule06034Test extends Aw22RuleImplementationTestCase {
 
     @Override
     protected void setConsolidate() {
-//        assertEquals(TestSolution.PASSED,
-//                consolidate("AW22.Test.6.3.4-1Passed-01").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                consolidate("AW22.Test.6.3.4-2Failed-01").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.06.03.04-2Failed-01").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.06.03.04-2Failed-02").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.06.03.04-2Failed-03").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.06.03.04-2Failed-04").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.06.03.04-2Failed-05").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.06.03.04-2Failed-06").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.06.03.04-2Failed-07").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.06.03.04-2Failed-08").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.06.03.04-2Failed-09").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.06.03.04-2Failed-10").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.06.03.04-2Failed-11").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("AW22.Test.06.03.04-2Failed-12").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.06.03.04-3NMI-01").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.06.03.04-3NMI-02").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.06.03.04-3NMI-03").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.06.03.04-3NMI-04").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.06.03.04-3NMI-05").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.06.03.04-3NMI-06").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("AW22.Test.6.3.4-3NMI-01").getValue());
-//        assertEquals(TestSolution.NOT_APPLICABLE,
-//                consolidate("AW22.Test.6.3.4-4NA-01").getValue());
+                consolidate("AW22.Test.06.03.04-4NA-01").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.03.04-4NA-02").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.03.04-4NA-03").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.03.04-4NA-04").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.06.03.04-4NA-05").getValue());
         
         // 06.03.01 testcases : All is Not Applicable
         assertEquals(TestSolution.NOT_APPLICABLE,
