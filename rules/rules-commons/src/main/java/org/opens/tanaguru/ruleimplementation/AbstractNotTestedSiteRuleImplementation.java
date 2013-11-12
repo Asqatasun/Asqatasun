@@ -39,7 +39,7 @@ import org.opens.tanaguru.service.ProcessRemarkService;
  * current audit is a page audit (one page tested) and NOT_TESTED instead. 
  */
 public abstract class AbstractNotTestedSiteRuleImplementation 
-            extends AbstractSiteRuleImplementation {
+            extends AbstractGroupRuleImplementation {
 
     private static final String MOCK_INDEFINITE_RESULT = "mock-result";
     
@@ -59,22 +59,13 @@ public abstract class AbstractNotTestedSiteRuleImplementation
     }
 
     @Override
-    protected DefiniteResult consolidateSiteImpl(
+    protected DefiniteResult consolidateGroupImpl(
             Site group, 
             List<ProcessResult> groupedGrossResultList, 
             ProcessRemarkService processRemarkService) {
-        // if only one gross result have been created, that means that only
-        // one page is currently tested. The test is then not_applicable
-        if (groupedGrossResultList.size() == 1) {
-            return this.definiteResultFactory.create(
-                test, 
-                groupedGrossResultList.iterator().next().getSubject(), 
-                TestSolution.NOT_APPLICABLE, 
-                null);
-        };
         return this.definiteResultFactory.create(
                 test, 
-                groupedGrossResultList.iterator().next().getSubject(), 
+                group, 
                 TestSolution.NOT_TESTED, 
                 null);
     }
