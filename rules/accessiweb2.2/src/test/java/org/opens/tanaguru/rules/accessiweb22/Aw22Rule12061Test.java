@@ -70,7 +70,7 @@ public class Aw22Rule12061Test extends Aw22RuleImplementationTestCase {
     protected void setProcess() {
         ProcessResult pr = processPageTest("AW22.Test.12.6.1-4NA-01");
         assertTrue(pr instanceof IndefiniteResult);
-        assertEquals(getWebResourceMap().get("AW22.Test.12.6.1-3NMI-01"),pr.getSubject());
+        assertEquals(getWebResourceMap().get("AW22.Test.12.6.1-4NA-01"),pr.getSubject());
         assertEquals("mock-result", pr.getValue());
         
         process("AW22.Test.12.6.1-5NT-01");
