@@ -20,7 +20,10 @@
 package org.opens.tanaguru.rules.accessiweb22;
 
 import java.util.Iterator;
-import org.opens.tanaguru.entity.audit.*;
+import org.opens.tanaguru.entity.audit.ProcessRemark;
+import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.audit.SourceCodeRemark;
+import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
