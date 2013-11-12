@@ -178,6 +178,10 @@ public final class CssLikeQueryStore {
                   + "object[data$=png], object[data$=jpeg], object[data$=jpg],"
                   + "object[data$=bmp], object[data$=gif]" ;
     public static final String CLICKABLE_AREA_CSS_LIKE_QUERY = "area[href][alt]";
+    public static final String LINK_WITHOUT_TARGET_CSS_LIKE_QUERY = 
+                    "a:not([href]):not([name]):not([id])";
+    public static final String FIELDSET_NOT_WITHIN_FORM_CSS_LIKE_QUERY = 
+                    "fieldset:not(form fieldset):not(*[role=search] fieldset):not(*[role=form] fieldset)";
 
     // Scripts css-like queries
     public static final String CHANGE_CONTEXT_SCRIPT_CSS_LIKE_QUERY = 

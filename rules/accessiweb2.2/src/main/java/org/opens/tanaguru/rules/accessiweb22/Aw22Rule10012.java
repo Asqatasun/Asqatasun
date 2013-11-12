@@ -51,7 +51,8 @@ public class Aw22Rule10012 extends AbstractPageRuleMarkupImplementation {
     
     private Map<String, ElementHandler> attrElementHandlerMap = 
             new HashMap<String, ElementHandler>();
-    
+    /* the total number of elements */
+    int totalNumberOfElements = 0;
     
     /**
      * Default constructor
@@ -62,11 +63,7 @@ public class Aw22Rule10012 extends AbstractPageRuleMarkupImplementation {
     
     @Override
     protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
-        // Retrieve all elements of the page and store to main elementHandler
-        // for couting purpose.
-        SimpleElementSelector allElements = new SimpleElementSelector("*");
-        allElements.selectElements(sspHandler, elementHandler);
-
+        totalNumberOfElements = sspHandler.getTotalNumberOfElements();
         // retrieve element from the nomenclature
         Nomenclature deprecatedHtmlAttr = nomenclatureLoaderService.
                 loadByCode(PRESENTATION_ATTR_NOM);
@@ -111,5 +108,9 @@ public class Aw22Rule10012 extends AbstractPageRuleMarkupImplementation {
             attrEc.check(sspHandler, attrElementHandlerMapEntry.getValue(), testSolutionHandler);
         }
     }
-
+    
+    @Override
+    public int getSelectionSize() {
+        return totalNumberOfElements;
+    }
 }

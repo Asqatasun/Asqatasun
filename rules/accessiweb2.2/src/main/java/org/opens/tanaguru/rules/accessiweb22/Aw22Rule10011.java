@@ -38,7 +38,8 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_
 public class Aw22Rule10011 extends AbstractDetectionPageRuleImplementation {
 
     private static final String DEPREC_TAG_NOM = "DeprecatedRepresentationTagsV2";
-    
+    /* the total number of elements */
+    int totalNumberOfElements = 0;
     
     /**
      * Default constructor
@@ -57,17 +58,6 @@ public class Aw22Rule10011 extends AbstractDetectionPageRuleImplementation {
     }
 
     @Override
-    protected ProcessResult processImpl(SSPHandler sspHandler) {
-        select(sspHandler, this);
-        check(sspHandler, this, this);
-        return computeResult(
-                sspHandler, 
-                this, 
-                sspHandler.domCssLikeSelectNodeSet("*").getSelectedElementNumber()); 
-                // number of elements is the total number of tags of the page
-    }
-
-    @Override
     protected void select(SSPHandler sspHandler, ElementHandler selectionHandler) {
         // retrieve element from the nomenclature
         Nomenclature deprecatedHtmlTags = nomenclatureLoaderService.
@@ -77,7 +67,13 @@ public class Aw22Rule10011 extends AbstractDetectionPageRuleImplementation {
         for (String deprecatedTag  : deprecatedHtmlTags.getValueList()) {
             mes.addCssQuery(deprecatedTag.toLowerCase());
         }
+        totalNumberOfElements = sspHandler.getTotalNumberOfElements();
         super.select(sspHandler, selectionHandler);
     }
     
+     @Override
+    public int getSelectionSize() {
+        return totalNumberOfElements;
+    }
+
 }
