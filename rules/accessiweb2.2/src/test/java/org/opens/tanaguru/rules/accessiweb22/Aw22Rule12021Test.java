@@ -19,7 +19,11 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
+import org.opens.tanaguru.entity.audit.IndefiniteResult;
+import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.subject.Page;
+import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
 
 /**
@@ -42,44 +46,42 @@ public class Aw22Rule12021Test extends Aw22RuleImplementationTestCase {
                 "org.opens.tanaguru.rules.accessiweb22.Aw22Rule12021");
     }
 
-    @Override
+   @Override
     protected void setUpWebResourceMap() {
-//        getWebResourceMap().put("AW22.Test.12.2.1-1Passed-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "AW22/Aw22Rule12021/AW22.Test.12.2.1-1Passed-01.html"));
-//        getWebResourceMap().put("AW22.Test.12.2.1-2Failed-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "AW22/Aw22Rule12021/AW22.Test.12.2.1-2Failed-01.html"));
-        getWebResourceMap().put("AW22.Test.12.2.1-3NMI-01",
+        getWebResourceMap().put("AW22.Test.12.2.1-4NA-01",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "AW22/Aw22Rule12021/AW22.Test.12.2.1-3NMI-01.html"));
-//        getWebResourceMap().put("AW22.Test.12.2.1-4NA-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "AW22/Aw22Rule12021/AW22.Test.12.2.1-4NA-01.html"));
+        
+        Site site = getWebResourceFactory().createSite("file:Site-NotTested");
+        getWebResourceMap().put("AW22.Test.12.2.1-5NT-01", site);
+
+        Page page = getWebResourceFactory().createPage(getTestcasesFilePath() +
+                "AW22/Aw22Rule12021/AW22.Test.12.2.1-3NMI-01.html");
+        site.addChild(page);
+        getWebResourceMap().put("AW22.Test.12.2.1-5NT-01-page1",page);
+
+        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
+                "AW22/Aw22Rule12021/AW22.Test.12.2.1-3NMI-01.html");
+        site.addChild(page);
+        getWebResourceMap().put("AW22.Test.12.2.1-5NT-01-page1",page);
     }
 
     @Override
     protected void setProcess() {
-//        assertEquals(TestSolution.PASSED,
-//                processPageTest("AW22.Test.12.2.1-1Passed-01").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                processPageTest("AW22.Test.12.2.1-2Failed-01").getValue());
-        assertEquals(TestSolution.NOT_TESTED,
-                processPageTest("AW22.Test.12.2.1-3NMI-01").getValue());
-//        assertEquals(TestSolution.NOT_APPLICABLE,
-//                processPageTest("AW22.Test.12.2.1-4NA-01").getValue());
+        ProcessResult pr = processPageTest("AW22.Test.12.2.1-4NA-01");
+        assertTrue(pr instanceof IndefiniteResult);
+        assertEquals(getWebResourceMap().get("AW22.Test.12.2.1-3NMI-01"),pr.getSubject());
+        assertEquals("mock-result", pr.getValue());
+        
+        process("AW22.Test.12.2.1-5NT-01");
     }
 
     @Override
     protected void setConsolidate() {
-//        assertEquals(TestSolution.PASSED,
-//                consolidate("AW22.Test.12.2.1-1Passed-01").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                consolidate("AW22.Test.12.2.1-2Failed-01").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.12.2.1-4NA-01").getValue());
         assertEquals(TestSolution.NOT_TESTED,
-                consolidate("AW22.Test.12.2.1-3NMI-01").getValue());
-//        assertEquals(TestSolution.NOT_APPLICABLE,
-//                consolidate("AW22.Test.12.2.1-4NA-01").getValue());
+                consolidate("AW22.Test.12.2.1-5NT-01").getValue());
     }
 
 }

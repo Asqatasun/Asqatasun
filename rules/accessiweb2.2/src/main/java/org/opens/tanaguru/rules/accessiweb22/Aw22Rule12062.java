@@ -20,7 +20,7 @@
 
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractNotTestedSiteRuleImplementation;
 
 /**
  * Implementation of the rule 12.6.2 of the referential Accessiweb 2.2.
@@ -31,7 +31,7 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * @author jkowalczyk
  */
 
-public class Aw22Rule12062 extends AbstractNotTestedRuleImplementation {
+public class Aw22Rule12062 extends AbstractNotTestedSiteRuleImplementation {
 
     /**
      * Default constructor
