@@ -69,6 +69,9 @@ public class DOMHandlerImpl implements DOMHandler {
 
     private ProcessRemarkService processRemarkService;
 
+    /* the total number of elements of the DOM */
+    private int totalNumberOfElement = -1;
+    
     /**
      * The message code defined by the user
      */
@@ -625,6 +628,16 @@ public class DOMHandlerImpl implements DOMHandler {
         return 0;
     }
 
+    @Override
+    public int getTotalNumberOfElements() {
+        if (totalNumberOfElement == -1) {
+            totalNumberOfElement = 
+                    cssLikeSelectNodeSet("*").getSelectedElementNumber();
+            selectedElements = new Elements();
+        }
+        return totalNumberOfElement;
+    }
+     
     @Override
     public void setProcessRemarkService(ProcessRemarkService processRemarkService) {
         this.processRemarkService = processRemarkService;

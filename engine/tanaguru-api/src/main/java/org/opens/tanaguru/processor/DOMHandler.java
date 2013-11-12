@@ -255,10 +255,14 @@ public interface DOMHandler {
             String remarkMessage);
 
     /**
-     * This method return the number of selected elements
-     * @return
+     * @return the number of selected elements
      */
     int getSelectedElementNumber();
+    
+    /**
+     * @return the total number of elements on the page
+     */
+    int getTotalNumberOfElements();
 
     /**
      * @deprecated

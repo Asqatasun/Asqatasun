@@ -455,6 +455,11 @@ public class SSPHandlerImpl implements SSPHandler {
     public int getSelectedElementNumber() {
         return domHandler.getSelectedElementNumber();
     }
+    
+    @Override
+    public int getTotalNumberOfElements() {
+        return domHandler.getTotalNumberOfElements();
+    }
 
     @Override
     public void setProcessRemarkService(ProcessRemarkService processRemarkService) {
