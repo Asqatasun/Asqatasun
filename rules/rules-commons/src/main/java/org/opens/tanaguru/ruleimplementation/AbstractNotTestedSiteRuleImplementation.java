@@ -23,6 +23,7 @@ package org.opens.tanaguru.ruleimplementation;
 
 
 import java.util.List;
+import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.DefiniteResult;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -52,7 +53,8 @@ public abstract class AbstractNotTestedSiteRuleImplementation
 
     @Override
     protected ProcessResult processImpl(SSPHandler sspHandler) {
-        return this.indefiniteResultFactory.create(
+        sspHandler.getProcessRemarkService().resetService();
+        return indefiniteResultFactory.create(
                 test, 
                 sspHandler.getPage(), 
                 MOCK_INDEFINITE_RESULT);
@@ -63,7 +65,7 @@ public abstract class AbstractNotTestedSiteRuleImplementation
             Site group, 
             List<ProcessResult> groupedGrossResultList, 
             ProcessRemarkService processRemarkService) {
-        return this.definiteResultFactory.create(
+        return definiteResultFactory.create(
                 test, 
                 group, 
                 TestSolution.NOT_TESTED, 
