@@ -23,13 +23,13 @@ package org.opens.tanaguru.ruleimplementation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.opens.tanaguru.entity.audit.DefiniteResult;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
-import java.util.Map;
 import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
@@ -90,7 +90,8 @@ public abstract class AbstractGroupRuleImplementation extends AbstractRuleImplem
                         key);
                 netResult.setDefiniteValue(TestSolution.NOT_APPLICABLE);
                 for (ProcessResult grossResult : grossResultList) {
-                    netResult.addChildResult(grossResult);
+//                    netResult.addChildResult(grossResult);
+                    netResult.setNetResultAudit(grossResult.getGrossResultAudit());
                 }
                 netResultList.add(netResult);
                 continue;
