@@ -21,16 +21,15 @@
  */
 package org.opens.tanaguru.entity.dao.audit;
 
-import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 import java.util.Collection;
-import java.util.List;
 import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 
 /**
  * 
@@ -109,5 +108,11 @@ public interface ProcessResultDAO extends GenericDAO<ProcessResult, Long> {
     Collection<ProcessResult> retrieveGrossResultFromAuditAndTest(
             Audit audit,
             Test test);
+    
+    /**
+     * 
+     * @param audit 
+     */
+    void deleteIndefiniteResultFromAudit(Audit audit);
 
 }

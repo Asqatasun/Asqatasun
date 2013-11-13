@@ -832,6 +832,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
             }
             i = i + processingTreatmentWindow;
         }
+        processResultDataService.cleanUpIndefiniteResultFromAudit(audit);
         preProcessResultDataService.cleanUpAllPreProcessResultByAudit(audit);
     }
     

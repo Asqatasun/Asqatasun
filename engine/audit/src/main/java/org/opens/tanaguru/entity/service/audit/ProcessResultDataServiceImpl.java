@@ -80,5 +80,10 @@ public class ProcessResultDataServiceImpl extends AbstractGenericDataService<Pro
     public Collection<ProcessResult> getGrossResultFromAuditAndTest(Audit audit, Test test) {
         return ((ProcessResultDAO) entityDao).retrieveGrossResultFromAuditAndTest(audit, test);
     }
+    
+    @Override
+    public void cleanUpIndefiniteResultFromAudit(Audit audit) {
+        ((ProcessResultDAO) entityDao).deleteIndefiniteResultFromAudit(audit);
+    }
 
 }

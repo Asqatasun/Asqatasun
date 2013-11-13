@@ -50,15 +50,19 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
     private Class<DefiniteResultImpl> getDefitiniteResultClass() {
         return DefiniteResultImpl.class;
     }
+    
+    private Class<IndefiniteResultImpl> getIndefitiniteResultClass() {
+        return IndefiniteResultImpl.class;
+    }
 
     @Override
     public int getResultByThemeCount(WebResource webresource, TestSolution testSolution, Theme theme) {
         StringBuilder queryStr = new StringBuilder();
-        queryStr.append("SELECT COUNT(pr) FROM "
-                + getDefitiniteResultClass().getName() + " pr "
-                + "WHERE "+
-                "pr.subject = :webresource AND " +
-                "pr.definiteValue = :definiteValue");
+        queryStr.append("SELECT COUNT(pr) FROM ");
+        queryStr.append(getDefitiniteResultClass().getName());
+        queryStr.append(" pr WHERE ");
+        queryStr.append("pr.subject = :webresource AND ");
+        queryStr.append("pr.definiteValue = :definiteValue");
         if (theme != null) {
             queryStr.append(" AND pr.test.criterion.theme = :theme");
         }
@@ -151,6 +155,18 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
         query.setParameter("audit", audit);
         query.setParameter("test", test);
         return query.getResultList();
+    }
+
+    @Override
+    public void deleteIndefiniteResultFromAudit(Audit audit) {
+        Query query = entityManager.createQuery("SELECT pr FROM "
+                + getIndefitiniteResultClass().getName() + " pr "
+                + " WHERE "
+                + " pr.grossResultAudit = :audit");
+        query.setParameter("audit", audit);
+        for (ProcessResult pr : (Collection<ProcessResult>)query.getResultList()) {
+            delete(pr.getId());
+        }
     }
 
 }

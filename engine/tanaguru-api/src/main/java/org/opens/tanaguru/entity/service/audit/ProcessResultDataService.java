@@ -104,5 +104,13 @@ public interface ProcessResultDataService extends
      * @return
      */
     Collection<ProcessResult> getNetResultFromAuditAndWebResource(Audit audit, WebResource webResource);
+    
+    /**
+     * 
+     * @param audit
+     * @param webResource
+     * @return
+     */
+    void cleanUpIndefiniteResultFromAudit(Audit audit);
 
 }
