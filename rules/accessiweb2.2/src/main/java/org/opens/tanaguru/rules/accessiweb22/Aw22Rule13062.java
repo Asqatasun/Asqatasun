@@ -20,7 +20,13 @@
 
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.ruleimplementation.link.AbstractDownloadableLinkRuleImplementation;
+import org.opens.tanaguru.rules.elementchecker.text.TextEndsWithChecker;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.HREF_ATTR;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 13.6.2 of the referential Accessiweb 2.2.
@@ -31,13 +37,33 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * @author jkowalczyk
  */
 
-public class Aw22Rule13062 extends AbstractNotTestedRuleImplementation {
+public class Aw22Rule13062 extends AbstractDownloadableLinkRuleImplementation {
+
+    /* the browser readable extensions nomenclature */
+    private static final String OFFICE_DOC_EXT_NOM = "BrowserReadableExtensions";
 
     /**
      * Default constructor
      */
     public Aw22Rule13062 () {
-        super();
+        super(
+                new TextEndsWithChecker(
+                    // the href attribute is tested
+                    new TextAttributeOfElementBuilder(HREF_ATTR), 
+                    // the nomenclature listing the extensions to test
+                    OFFICE_DOC_EXT_NOM, 
+                    // the result when detected
+                    TestSolution.PASSED, 
+                    // the result when not detected
+                    TestSolution.NEED_MORE_INFO, 
+                    // the message when detected
+                    null, 
+                    // the message when detected
+                    DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, 
+                    // the evidence elements
+                    HREF_ATTR, 
+                    TITLE_ATTR)
+            );
     }
 
 }

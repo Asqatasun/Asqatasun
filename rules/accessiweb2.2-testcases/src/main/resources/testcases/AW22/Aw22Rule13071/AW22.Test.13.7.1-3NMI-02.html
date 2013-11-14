@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Aw22 Test.13.7.1 NMI 01</title>
+        <title>Aw22 Test.13.7.1 NMI 02</title>
     </head>
     <body>
         <div>
 
-            <h1>Aw22 Test.13.7.1 NMI 01</h1>
+            <h1>Aw22 Test.13.7.1 NMI 02</h1>
 
             <div class="test-detail">
                 On each Web page, does each downloading functionality for an electronic document pass one of the conditions below (except in special cases)? 
@@ -19,22 +19,17 @@
             </div>
 
             <div class="testcase">
-                <a href="my-link.odt">Office Document</a>
+                <a href="my-link.html">My link</a>
+                <form action="download">
+                    
+                </form>
             </div>
 
             <div class="test-explanation">
-                NMI : The page has a link with an office document extension
+                NMI : The page has a link with an extension that does not correspond to 
+                an office document. The form present on the page may provide a way
+                to download a document.
             </div>
         </div>
     </body>
 </html>
-
-CSS Query : a:not([href~=(?i)\.(asp|aspx|bmp|cfm|css|do|gif|html|htm|ico|jif|jpe|jpg|jpeg|js|jse|jsp|png|php|shtml|swf|tif|tiff|xhtml|xml|svg)])
-Total number of instances : 9948773
-Total number of pages with feature : 77574
-Max number of instances per page : 18585
-
-CSS Query : a[href~=(?i)\.(asp|aspx|bmp|cfm|css|do|gif|html|htm|ico|jif|jpe|jpg|jpeg|js|jse|jsp|png|php|shtml|swf|tif|tiff|xhtml|xml|svg)]
-Total number of instances : 5640511
-Total number of pages with feature : 62103
-Max number of instances per page : 17254

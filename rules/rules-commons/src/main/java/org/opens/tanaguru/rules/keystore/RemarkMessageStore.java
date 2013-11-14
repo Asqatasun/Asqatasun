@@ -219,6 +219,18 @@ public final class RemarkMessageStore {
     // consultation 
     public static final String NOT_IMMEDIATE_REDIRECT_VIA_META_MSG = 
             "NotImmediateRedirectionViaMeta";
+    public static final String OFFICE_DOCUMENT_DETECTED_MSG = 
+            "OfficeDocumentDetected";
+    public static final String DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG = 
+            "FileToDownloadDetectedCheckFormat";
+    public static final String DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG = 
+            "FileToDownloadDetectedCheckWeight";
+    public static final String DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG = 
+            "FileToDownloadDetectedCheckLang";
+    public static final String CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG = 
+            "CheckManuallyLinkWithoutExtension";
+    public static final String CHECK_DOWNLOADABLE_DOCUMENT_FROM_FORM_MSG = 
+            "CheckDownloadableDocumentFromForm";
     
     // structuration of information
     public static final String HEADER_NOT_HIERARCHICALLY_WELL_DEFINED_MSG =
@@ -230,7 +242,6 @@ public final class RemarkMessageStore {
             "PresentationTagFound";
     public static final String PRESENTATION_ATTR_DETECTED_MSG =
             "PresentationAttrFound";
-    
     
     // structuration of information
     public static final String DETECTED_TAG_MSG = "DetectedTag";

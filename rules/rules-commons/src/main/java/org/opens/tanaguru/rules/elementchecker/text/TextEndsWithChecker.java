@@ -34,7 +34,8 @@ import org.opens.tanaguru.rules.elementchecker.NomenclatureBasedElementChecker;
 import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
- * 
+ * This class check whether a given textual element ends with an extension
+ * that belongs to a nomenclature
  */
 public class TextEndsWithChecker extends NomenclatureBasedElementChecker {
 
@@ -56,6 +57,12 @@ public class TextEndsWithChecker extends NomenclatureBasedElementChecker {
      * to the extension list.
      */
     private String textEndsWithMessageCode;
+    
+    /*
+     * The message thrown when an element doesn't end with an extension that belongs to
+     * to the extension list.
+     */
+    private String textNotEndsWithMessageCode;
     
     /* The text element builder. By default, it is a simple Text builder */
     private TextElementBuilder testableTextBuilder;
@@ -105,6 +112,7 @@ public class TextEndsWithChecker extends NomenclatureBasedElementChecker {
             TextElementBuilder testableTextBuilder,
             String extensionListNomName,
             TestSolution detectedSolution, 
+            TestSolution notDetectedSolution, 
             String textEndsWithMessageCode) {
         this(testableTextBuilder, extensionListNomName, textEndsWithMessageCode);
         setFailureSolution(detectedSolution);
@@ -129,6 +137,33 @@ public class TextEndsWithChecker extends NomenclatureBasedElementChecker {
              textEndsWithMessageCode,
              eeAttributeNameList);
         setFailureSolution(detectedSolution);
+    }
+    
+    /**
+     * Constructor
+     * @param testableTextBuilder
+     * @param extensionListNomName
+     * @param detectedSolution
+     * @param notDetectedSolution
+     * @param textEndsWithMessageCode
+     * @param textNotEndsWithMessageCode
+     * @param eeAttributeNameList 
+     */
+    public TextEndsWithChecker(
+            TextElementBuilder testableTextBuilder,
+            String extensionListNomName,
+            TestSolution detectedSolution, 
+            TestSolution notDetectedSolution, 
+            String textEndsWithMessageCode,
+            String textNotEndsWithMessageCode,
+            String... eeAttributeNameList) {
+        this(testableTextBuilder,
+             extensionListNomName, 
+             textEndsWithMessageCode,
+             eeAttributeNameList);
+        setFailureSolution(detectedSolution);
+        setSuccessSolution(notDetectedSolution);
+        this.textNotEndsWithMessageCode = textNotEndsWithMessageCode;
     }
 
     @Override
@@ -163,13 +198,22 @@ public class TextEndsWithChecker extends NomenclatureBasedElementChecker {
         for (String extension : extensions) {
             if (StringUtils.endsWithIgnoreCase(elementText, extension)) {
                 
-                addSourceCodeRemark(
-                    getFailureSolution(),
-                    element,
-                    textEndsWithMessageCode);
-
+                if (StringUtils.isNotBlank(textEndsWithMessageCode)) {
+                    addSourceCodeRemark(
+                        getFailureSolution(),
+                        element,
+                        textEndsWithMessageCode);
+                }
                 return getFailureSolution();
             }
+        }
+        if (!getSuccessSolution().equals(TestSolution.PASSED) && 
+            !getSuccessSolution().equals(TestSolution.NOT_APPLICABLE) && 
+            StringUtils.isNotBlank(textNotEndsWithMessageCode)) {
+                    addSourceCodeRemark(
+                        getSuccessSolution(),
+                        element,
+                        textNotEndsWithMessageCode);
         }
         return getSuccessSolution();
     }

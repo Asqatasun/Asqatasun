@@ -173,6 +173,8 @@ public final class CssLikeQueryStore {
                     "a[href]:not(:has(*))";
     public static final String LINK_WITH_CHILDREN_CSS_LIKE_QUERY = 
                     "a[href]:has(*)";
+    public static final String LINK_WITH_HREF_CSS_LIKE_QUERY = 
+                    "a[href]";
     public static final String IMAGE_LINK_CHILDREN_CSS_LIKE_QUERY = 
                     "img , object[type^=image], object[data^=data:image],"
                   + "object[data$=png], object[data$=jpeg], object[data$=jpg],"
