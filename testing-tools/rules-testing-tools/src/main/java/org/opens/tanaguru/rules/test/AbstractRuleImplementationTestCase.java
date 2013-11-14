@@ -29,6 +29,7 @@ import java.util.*;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriter;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.dbunit.DBTestCase;
 import org.dbunit.PropertiesBasedJdbcDatabaseTester;
@@ -516,6 +517,13 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
                 }
             }
         }
+    }
+    
+    @Override
+    public String getName(){
+        int lastPointIndex = StringUtils.lastIndexOf(ruleImplementationClassName, ".")+1;
+        String className = StringUtils.substring(ruleImplementationClassName, lastPointIndex);
+        return StringUtils.replace(className, "Rule", "-");
     }
 
 }
