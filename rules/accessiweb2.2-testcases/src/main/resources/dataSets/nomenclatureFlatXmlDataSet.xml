@@ -20,6 +20,8 @@
     <NOMENCLATURE Id_Nomenclature="17" Cd_Nomenclature="RecommendedDoctypeDeclarations" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
     <NOMENCLATURE Id_Nomenclature="18" Cd_Nomenclature="XhtmlDoctypeDeclarations" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
     <NOMENCLATURE Id_Nomenclature="19" Cd_Nomenclature="RecommendedCaseInsensitiveDoctypeDeclarations" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
+    <NOMENCLATURE Id_Nomenclature="20" Cd_Nomenclature="OfficeDocumentExtensions" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
+    <NOMENCLATURE Id_Nomenclature="21" Cd_Nomenclature="BrowserReadableExtensions" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
 
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="1" Label="reset"  Id_Nomenclature="1"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2" Label="submit"  Id_Nomenclature="1"/>
@@ -281,7 +283,79 @@
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="258" Label="&lt;!DOCTYPE svg:svg PUBLIC &quot;-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN&quot; &quot;http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd&quot;&gt;"  Id_Nomenclature="18"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="259" Label="&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML Basic 1.0//EN&quot; &quot;http://www.w3.org/TR/xhtml-basic/xhtml-basic10.dtd&quot;&gt;" Id_Nomenclature="18"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="260" Label="&lt;!DOCTYPE html&gt;" Id_Nomenclature="19"/>
-
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="828" Label=".ods" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="829" Label=".fods" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="830" Label=".odt" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="831" Label=".fodt" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="832" Label=".odp" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="833" Label=".fodp" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="834" Label=".odg" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="835" Label=".fodg" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="836" Label=".pdf" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="837" Label=".doc" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="838" Label=".docx" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="839" Label=".docm" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="840" Label=".dot" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="841" Label=".dotm" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="842" Label=".xls" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="843" Label=".xlsx" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="844" Label=".xlsm" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="845" Label=".xlt" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="846" Label=".xltx" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="847" Label=".xltm" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="848" Label=".xlc" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="849" Label=".xlr" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="850" Label=".xlam" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="851" Label=".csv" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="852" Label=".ppt" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="853" Label=".pptx" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="854" Label=".pps" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="855" Label=".vsd" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="856" Label=".vst" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="857" Label=".vss" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="858" Label=".sxc" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="859" Label=".sxd" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="860" Label=".sxi" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="861" Label=".sxm" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="862" Label=".sxw" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="863" Label=".sda" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="864" Label=".sdc" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="865" Label=".sdd" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="866" Label=".sdf" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="867" Label=".sdp" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="868" Label=".sds" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="869" Label=".sdw" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="870" Label=".otf" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="871" Label=".otg" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="872" Label=".oth" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="873" Label=".ots" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="874" Label=".ott" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="875" Label=".asp" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="876" Label=".aspx" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="877" Label=".bmp" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="878" Label=".cfm" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="879" Label=".css" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="880" Label=".do" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="881" Label=".gif" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="882" Label=".html" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="883" Label=".htm" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="884" Label=".ico" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="885" Label=".jif" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="886" Label=".jpe" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="887" Label=".jpg" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="888" Label=".jpeg" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="889" Label=".js" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="890" Label=".jse" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="891" Label=".jsp" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="892" Label=".png" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="893" Label=".php" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="894" Label=".shtml" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="895" Label=".svg" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="896" Label=".swf" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="897" Label=".tif" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="898" Label=".tiff" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="899" Label=".xhtml" Id_Nomenclature="21"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="900" Label=".xml" Id_Nomenclature="21"/>
 
     <EVIDENCE Id_Evidence="1" Cd_Evidence="Element-Name" Description="NULL" Long_Label="NULL" />
     <EVIDENCE Id_Evidence="2" Cd_Evidence="src" Description="NULL" Long_Label="NULL" />
