@@ -182,7 +182,7 @@ buildResultByThemeChart = function() {
 
     rect.transition()
     .delay(function(d, i) {
-        return 500;
+        return 500 ;
     })
     .attr("y", function(d) {
         return y(d.y0 + d.y);
@@ -236,7 +236,7 @@ buildPieChart = function() {
     pieRadius = Math.min(pieWidth, pieHeight) / 2.2;
 
     pieColor = d3.scale.ordinal()
-        .range(["#a0d261", "#ec4d63", "#5ac2e7", "#CCCCCC"]);
+        .range(["#a0d261", "#ec4d63", "#CCCCCC", "#5ac2e7"]);
 
     pieArc = d3.svg.arc()
         .outerRadius(pieRadius - 10)

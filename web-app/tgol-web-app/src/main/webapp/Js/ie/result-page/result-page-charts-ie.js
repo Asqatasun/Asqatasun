@@ -248,7 +248,7 @@ buildPieChart = function() {
     radius = Math.min(pieWidth, pieHeight) / 2;
     
     pieColor = d3.scale.ordinal()
-       .range(["#a0d261", "#ec4d63", "#5ac2e7", "#CCCCCC"]);
+       .range(["#a0d261", "#ec4d63", "#CCCCCC", "#5ac2e7"]);
      
     arc = d3.svg.arc()
         .outerRadius(radius - 10)
