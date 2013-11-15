@@ -212,9 +212,9 @@ public final class CssLikeQueryStore {
     
     // Elements with attributes (minus element exceptions)
     public static final String ELEMENT_WITH_WITDH_ATTR_NOT_IMG = 
-                    ":not(img)[width]";
+                    ":not(img):not(svg)[width]:not(svg [width])";
     public static final String ELEMENT_WITH_HEIGHT_ATTR_NOT_IMG =
-                    ":not(img)[height]";
+                    ":not(img):not(svg)[height]:not(svg [width])";
     
     public static final String IMG_CSS_LIKE_QUERY=
                     IMAGE_LINK_CHILDREN_CSS_LIKE_QUERY
