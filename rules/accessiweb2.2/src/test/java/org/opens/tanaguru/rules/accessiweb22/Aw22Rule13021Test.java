@@ -65,6 +65,9 @@ public class Aw22Rule13021Test extends Aw22RuleImplementationTestCase {
         getWebResourceMap().put("AW22.Test.13.2.1-3NMI-05",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "AW22/Aw22Rule13021/AW22.Test.13.2.1-3NMI-05.html"));
+        getWebResourceMap().put("AW22.Test.13.2.1-3NMI-06",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule13021/AW22.Test.13.2.1-3NMI-06.html"));
     }
 
     @Override
@@ -200,6 +203,20 @@ public class Aw22Rule13021Test extends Aw22RuleImplementationTestCase {
         ee = eIter.next();
         assertEquals("attribute-absent", ee.getValue());
         assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-06---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.13.2.1-3NMI-06");
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = processResult.getRemarkSet().iterator().next();
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_JS_PROMPT_A_NEW_WINDOW_MSG, processRemark.getMessageCode());
  
     }
 
@@ -215,6 +232,8 @@ public class Aw22Rule13021Test extends Aw22RuleImplementationTestCase {
                 consolidate("AW22.Test.13.2.1-3NMI-04").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW22.Test.13.2.1-3NMI-05").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.13.2.1-3NMI-06").getValue());
     }
 
 }
