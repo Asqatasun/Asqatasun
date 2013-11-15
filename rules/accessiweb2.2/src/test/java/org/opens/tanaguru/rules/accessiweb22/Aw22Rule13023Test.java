@@ -19,8 +19,13 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
+import java.util.LinkedHashSet;
+import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
+import org.opens.tanaguru.rules.keystore.HtmlElementStore;
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
  * Unit test class for the implementation of the rule 13.2.3 of the referential Accessiweb 2.2.
@@ -44,42 +49,144 @@ public class Aw22Rule13023Test extends Aw22RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-//        getWebResourceMap().put("AW22.Test.13.2.3-1Passed-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "AW22/Aw22Rule13023/AW22.Test.13.2.3-1Passed-01.html"));
-//        getWebResourceMap().put("AW22.Test.13.2.3-2Failed-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "AW22/Aw22Rule13023/AW22.Test.13.2.3-2Failed-01.html"));
         getWebResourceMap().put("AW22.Test.13.2.3-3NMI-01",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "AW22/Aw22Rule13023/AW22.Test.13.2.3-3NMI-01.html"));
-//        getWebResourceMap().put("AW22.Test.13.2.3-4NA-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "AW22/Aw22Rule13023/AW22.Test.13.2.3-4NA-01.html"));
+        getWebResourceMap().put("AW22.Test.13.2.3-3NMI-02",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule13023/AW22.Test.13.2.3-3NMI-02.html"));
+        getWebResourceMap().put("AW22.Test.13.2.3-3NMI-03",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule13023/AW22.Test.13.2.3-3NMI-03.html"));
+        getWebResourceMap().put("AW22.Test.13.2.3-3NMI-04",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule13023/AW22.Test.13.2.3-3NMI-04.html"));
+        getWebResourceMap().put("AW22.Test.13.2.3-3NMI-05",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule13023/AW22.Test.13.2.3-3NMI-05.html"));
+        getWebResourceMap().put("AW22.Test.13.2.3-4NA-01",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule13023/AW22.Test.13.2.3-4NA-04.html"));
     }
 
     @Override
     protected void setProcess() {
-//        assertEquals(TestSolution.PASSED,
-//                processPageTest("AW22.Test.13.2.3-1Passed-01").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                processPageTest("AW22.Test.13.2.3-2Failed-01").getValue());
-        assertEquals(TestSolution.NOT_TESTED,
-                processPageTest("AW22.Test.13.2.3-3NMI-01").getValue());
-//        assertEquals(TestSolution.NOT_APPLICABLE,
-//                processPageTest("AW22.Test.13.2.3-4NA-01").getValue());
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-01---------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult = processPageTest("AW22.Test.13.2.3-3NMI-01");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG, processRemark.getMessageCode());
+        assertEquals(HtmlElementStore.FORM_ELEMENT, processRemark.getTarget());
+        // check number of evidence elements and their value
+        assertNull(processRemark.getElementList());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-02---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.13.2.3-3NMI-02");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG, processRemark.getMessageCode());
+        assertEquals(HtmlElementStore.SELECT_ELEMENT, processRemark.getTarget());
+        // check number of evidence elements and their value
+        assertNull(processRemark.getElementList());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-03---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.13.2.3-3NMI-03");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG, processRemark.getMessageCode());
+        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
+        // check number of evidence elements and their value
+        assertNull(processRemark.getElementList());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-04---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.13.2.3-3NMI-04");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG, processRemark.getMessageCode());
+        assertEquals(HtmlElementStore.TEXTAREA_ELEMENT, processRemark.getTarget());
+        // check number of evidence elements and their value
+        assertNull(processRemark.getElementList());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-05---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.13.2.3-3NMI-05");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG, processRemark.getMessageCode());
+        assertEquals(HtmlElementStore.BUTTON_ELEMENT, processRemark.getTarget());
+        // check number of evidence elements and their value
+        assertNull(processRemark.getElementList());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-01----------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.13.2.3-4NA-01");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
     }
 
     @Override
     protected void setConsolidate() {
-//        assertEquals(TestSolution.PASSED,
-//                consolidate("AW22.Test.13.2.3-1Passed-01").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                consolidate("AW22.Test.13.2.3-2Failed-01").getValue());
-        assertEquals(TestSolution.NOT_TESTED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW22.Test.13.2.3-3NMI-01").getValue());
-//        assertEquals(TestSolution.NOT_APPLICABLE,
-//                consolidate("AW22.Test.13.2.3-4NA-01").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.13.2.3-3NMI-02").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.13.2.3-3NMI-03").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.13.2.3-3NMI-04").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.13.2.3-3NMI-05").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.13.2.3-4NA-01").getValue());
     }
 
 }

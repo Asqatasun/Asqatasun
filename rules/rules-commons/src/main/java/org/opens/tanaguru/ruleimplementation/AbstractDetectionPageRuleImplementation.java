@@ -167,7 +167,7 @@ public class AbstractDetectionPageRuleImplementation
      * 
      * @return 
      */
-    private ElementPresenceChecker getElementPresenceChecker() {
+    protected ElementPresenceChecker getElementPresenceChecker() {
         if (eeAttributeNameList != null && eeAttributeNameList.length > 0) {
             return new ElementPresenceChecker(
                             detectedSolution, 

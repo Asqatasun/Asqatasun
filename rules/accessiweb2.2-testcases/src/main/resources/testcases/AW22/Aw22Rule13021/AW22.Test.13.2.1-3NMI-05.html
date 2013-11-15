@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Aw22 Test.13.2.1 NMI 05</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>Aw22 Test.13.2.1 NMI 05</h1>
+
+            <div class="test-detail">
+                On each Web page, for each new window opening launched via a link (target="_blank" attribute) or a javascript command, is the user warned?
+            </div>
+
+            <div class="testcase">
+                <a href="my-link1.html" target="blank">My link 1</a>
+                <a href="my-link2.html" target="_anything">My link 2</a>
+                <a href="my-link3.html" target="anything" title="Link 3 title">My link 3</a>
+                <a href="my-link4.html" target="self">
+                    <img src="my-image.jpg" alt="My link 4"/>
+                </a>
+            </div>
+
+            <div class="test-explanation">
+                NMI : The page has links with a target attribute different from "_self"
+            </div>
+        </div>
+    </body>
+</html>

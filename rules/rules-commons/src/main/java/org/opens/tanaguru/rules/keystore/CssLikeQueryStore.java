@@ -184,6 +184,8 @@ public final class CssLikeQueryStore {
                     "a:not([href]):not([name]):not([id])";
     public static final String FIELDSET_NOT_WITHIN_FORM_CSS_LIKE_QUERY = 
                     "fieldset:not(form fieldset):not(*[role=search] fieldset):not(*[role=form] fieldset)";
+    public static final String LINK_WITH_TARGET_ATTR_CSS_LIKE_QUERY = 
+                    "a[href][target]:not([target=_self])";
 
     // Scripts css-like queries
     public static final String CHANGE_CONTEXT_SCRIPT_CSS_LIKE_QUERY = 
@@ -197,6 +199,8 @@ public final class CssLikeQueryStore {
     // Consultation css-like queries
     public static final String META_WITH_REFRESH_CSS_LIKE_QUERY = 
                     "meta[http-equiv=refresh][content*=url]";
+    public static final String FORM_CONTROL_CSS_LIKE_QUERY = 
+                    "form, select, textarea, input, button";
     
     // Structuration of information css-like queries
     public static final String HEADINGS_CSS_LIKE_QUERY = 

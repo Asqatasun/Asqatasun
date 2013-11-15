@@ -20,7 +20,13 @@
 
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.opens.tanaguru.rules.elementselector.MultipleElementSelector;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.APPLET_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.EMBED_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.OBJECT_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG;
 
 /**
  * Implementation of the rule 13.2.2 of the referential Accessiweb 2.2.
@@ -31,13 +37,21 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * @author jkowalczyk
  */
 
-public class Aw22Rule13022 extends AbstractNotTestedRuleImplementation {
+public class Aw22Rule13022 extends AbstractDetectionPageRuleImplementation {
 
     /**
      * Default constructor
      */
     public Aw22Rule13022 () {
-        super();
+        super(
+                new MultipleElementSelector(OBJECT_ELEMENT, EMBED_ELEMENT, APPLET_ELEMENT),
+                // solution when at least one element is found
+                TestSolution.NEED_MORE_INFO,
+                // solution when no element is found
+                TestSolution.NOT_APPLICABLE,
+                // manual check message
+                CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG,
+                null);
     }
 
 }
