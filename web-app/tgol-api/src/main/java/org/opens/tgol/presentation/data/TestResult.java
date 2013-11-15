@@ -31,6 +31,7 @@ import org.opens.tanaguru.entity.reference.Test;
 public interface TestResult {
 
     String ELEMENT_NAME_KEY = "Element-Name";
+    String TAG_KEY = "Tag";
     String SNIPPET = "Snippet";
     String LINE_NUMBER_KEY = "Line-Number";
     String REPRESENTATION_SUFFIX_KEY = "-representation-index";

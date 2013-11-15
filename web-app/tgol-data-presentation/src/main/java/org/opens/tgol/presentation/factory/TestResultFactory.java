@@ -481,12 +481,15 @@ public final class TestResultFactory {
             RemarkInfos currentRemarkInfos,
             ProcessRemark remark) {
         Map <String, String> elementMap = new LinkedHashMap<String, String>();
+        boolean targetOverridenByElementName = false;
         for (EvidenceElement evidenceElement : sortEvidenceElementSet(remark.getElementList())) {
             if (!evidenceElement.getEvidence().getCode().
                     equalsIgnoreCase(TestResult.ELEMENT_NAME_KEY)) {
                 elementMap.put(
                         evidenceElement.getEvidence().getCode(),
                         evidenceElement.getValue());
+            } else {
+                elementMap.put(TestResult.TAG_KEY, ((SourceCodeRemark)remark).getTarget());
             }
         }
         if (remark instanceof SourceCodeRemark) {
