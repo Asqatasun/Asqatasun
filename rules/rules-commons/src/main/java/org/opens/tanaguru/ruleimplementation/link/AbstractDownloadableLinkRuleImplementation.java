@@ -22,6 +22,7 @@
 package org.opens.tanaguru.ruleimplementation.link;
 
 import java.util.Collection;
+import java.util.Iterator;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.lang3.StringUtils;
@@ -70,10 +71,20 @@ public abstract class AbstractDownloadableLinkRuleImplementation
             SSPHandler sspHandler, 
             ElementHandler elementHandler) {
         super.select(sspHandler, elementHandler);
-        for (Element el : (Collection<Element>)elementHandler.get()) {
-            if (isLinkWithProperExtension(el)) {
-                linkWithSimpleExtension.add(el);
-            }
+        Iterator<Element> iter = ((Collection<Element>)elementHandler.get()).iterator();
+        Element el;
+        while (iter.hasNext()){
+            el = iter.next();
+            try {
+                URI uri = new URI(el.absUrl(HREF_ATTR), true);
+                if (isLinkWithProperExtension(uri)) {
+                    if (uri.hasFragment()) {
+                        iter.remove();
+                    } else {
+                        linkWithSimpleExtension.add(el);
+                    }
+                }
+            } catch (URIException use){}
         }
     }
     
@@ -124,27 +135,24 @@ public abstract class AbstractDownloadableLinkRuleImplementation
     
     /**
      * 
-     * @param element
+     * @param uri
      * @return whether the current link has a proper extension (link.html)
+     * @throws URIException
      */
-    private boolean isLinkWithProperExtension(Element element) {
-        try {
-            URI uri = new URI(element.absUrl(HREF_ATTR), true);
-            if (uri.hasQuery()) {
-                return false;
-            }
-            String path = uri.getPath();
-            if (StringUtils.isBlank(path) || 
-                    StringUtils.equals(path, SLASH_CHAR)) {
-                return false;
-            }
-            int lastSlash = StringUtils.lastIndexOf(path, SLASH_CHAR);
-            if (StringUtils.substring(path, lastSlash).contains(POINT_CHAR)) {
-                return true;
-            }
-        } catch (URIException use){
-                
+    private boolean isLinkWithProperExtension(URI uri) throws URIException{
+        if (uri.hasQuery()) {
+            return false;
         }
+        String path = uri.getPath();
+        if (StringUtils.isBlank(path) || 
+                StringUtils.equals(path, SLASH_CHAR)) {
+            return false;
+        }
+        int lastSlash = StringUtils.lastIndexOf(path, SLASH_CHAR);
+        if (StringUtils.substring(path, lastSlash).contains(POINT_CHAR)) {
+            return true;
+        }
+
         return false;
     }
     

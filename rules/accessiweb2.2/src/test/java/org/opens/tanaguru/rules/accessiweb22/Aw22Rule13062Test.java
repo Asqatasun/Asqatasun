@@ -74,6 +74,9 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
         getWebResourceMap().put("AW22.Test.13.6.2-4NA-02",
               getWebResourceFactory().createPage(
               getTestcasesFilePath() + "AW22/Aw22Rule13062/AW22.Test.13.6.2-4NA-02.html"));
+        getWebResourceMap().put("AW22.Test.13.6.2-4NA-03",
+              getWebResourceFactory().createPage(
+              getTestcasesFilePath() + "AW22/Aw22Rule13062/AW22.Test.13.6.2-4NA-03.html"));
     }
 
     @Override
@@ -222,6 +225,18 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
         assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
         // check number of remarks and their value
         assertNull(processResult.getRemarkSet());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------4NA-03----------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.13.6.2-4NA-03");
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
     }
 
     @Override
@@ -242,6 +257,8 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
                 consolidate("AW22.Test.13.6.2-4NA-01").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("AW22.Test.13.6.2-4NA-02").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("AW22.Test.13.6.2-4NA-03").getValue());
     }
 
     /**
