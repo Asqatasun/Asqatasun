@@ -982,6 +982,10 @@ INSERT IGNORE INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `
 ('NomenclatureElementImpl', 898, '.tif', NULL, 23),
 ('NomenclatureElementImpl', 899, '.tiff', NULL, 23),
 ('NomenclatureElementImpl', 900, '.xhtml', NULL, 23),
-('NomenclatureElementImpl', 901, '.xml', NULL, 23);
+('NomenclatureElementImpl', 901, '.xml', NULL, 23),
+('NomenclatureElementImpl', 902, 'this website', NULL, 7),
+('NomenclatureElementImpl', 903, 'ce site', NULL, 7),
+('NomenclatureElementImpl', 904, 'untitled document', NULL, 12)
+;
 
 SET foreign_key_checks=1;
