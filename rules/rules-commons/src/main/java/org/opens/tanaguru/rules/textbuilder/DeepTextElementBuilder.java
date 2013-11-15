@@ -29,31 +29,32 @@ import static org.opens.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
 
 /**
  * This implementation of the {@link TextualElementBuilder} extracts the 
- * text of a link element by calling recursively the tag children and by adding
+ * text of a element by calling recursively the tag children and by adding
  * the content of the alt attribute of tags when they exists.
  */
-public class LinkTextElementBuilder implements TextElementBuilder{
+public class DeepTextElementBuilder implements TextElementBuilder{
 
     private TextElementBuilder altAttrTextBuilder = 
             new TextAttributeOfElementBuilder(ALT_ATTR);
     
     @Override
     public String buildTextFromElement(Element element) {
-        StringBuilder linkText = new StringBuilder();
+        StringBuilder elementText = new StringBuilder();
         if (element.hasAttr(ALT_ATTR)) {
-            linkText.append(SPACER);
-            linkText.append(altAttrTextBuilder.buildTextFromElement(element));
+            elementText.append(SPACER);
+            elementText.append(altAttrTextBuilder.buildTextFromElement(element));
         }
         for (Node child : element.childNodes()) {
             if (child instanceof TextNode && !((TextNode)child).isBlank()) {
-               linkText.append(SPACER);
-               linkText.append(StringUtils.trim(((TextNode)child).text()));
+               elementText.append(SPACER);
+               elementText.append(StringUtils.trim(((TextNode)child).text()));
             } else if (child instanceof Element){
-                linkText.append(SPACER);
-                linkText.append(buildTextFromElement((Element)child));
+                elementText.append(SPACER);
+                elementText.append(buildTextFromElement((Element)child));
             }
         }
-        return StringUtils.trim(linkText.toString());
+        System.out.println(elementText.toString());
+        return StringUtils.trim(elementText.toString());
     }
     
 }

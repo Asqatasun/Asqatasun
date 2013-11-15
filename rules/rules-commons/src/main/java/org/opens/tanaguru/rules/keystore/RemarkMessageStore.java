@@ -240,6 +240,9 @@ public final class RemarkMessageStore {
     public static final String HEADER_NOT_HIERARCHICALLY_WELL_DEFINED_MSG =
             "HeaderTagNotHierarchicallyWelldefined";
     public static final String H1_TAG_MISSING_MSG = "H1TagMissing";
+    public static final String NOT_PERTINENT_HEADING_MSG = "NotPertinentHeading";
+    public static final String CHECK_HEADING_PERTINENCE_MSG = 
+            "CheckHeadingPertinence";
     
     // structuration of information
     public static final String PRESENTATION_TAG_DETECTED_MSG =

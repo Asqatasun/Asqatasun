@@ -486,7 +486,7 @@ INSERT IGNORE INTO `TEST` (`Id_Test`, `Cd_Test`, `Description`, `Label`, `Rank`,
 (805, 'AW22-13171', 'http://www.accessiweb.org/index.php/accessiweb_2.2_liste_generale.html#consultation', '13.17.1', 3131701, '1.0', 'accessiweb2.2', 'org.opens.tanaguru.rules.accessiweb22.Aw22Rule13171', 333, NULL, 1, 1, 'http://www.tanaguru.org/en/content/aw22-rule-13-17-1', b'1'),
 (806, 'AW22-13172', 'http://www.accessiweb.org/index.php/accessiweb_2.2_liste_generale.html#consultation', '13.17.2', 3131702, '1.0', 'accessiweb2.2', 'org.opens.tanaguru.rules.accessiweb22.Aw22Rule13172', 333, NULL, 1, 1, 'http://www.tanaguru.org/en/content/aw22-rule-13-17-2', b'1');
 
-UPDATE TEST SET `No_Process`=b'0' WHERE 
+PUDATE TEST SET `No_Process`=b'0' WHERE 
 Cd_Test='AW22-01011' OR 
 Cd_Test='AW22-01012' OR 
 Cd_Test='AW22-01013' OR 
@@ -596,6 +596,7 @@ Cd_Test='AW22-08082' OR
 Cd_Test='AW22-08091' OR 
 Cd_Test='AW22-09011' OR 
 Cd_Test='AW22-09012' OR 
+Cd_Test='AW22-09014' OR 
 Cd_Test='AW22-10011' OR 
 Cd_Test='AW22-10012' OR 
 Cd_Test='AW22-10041' OR 

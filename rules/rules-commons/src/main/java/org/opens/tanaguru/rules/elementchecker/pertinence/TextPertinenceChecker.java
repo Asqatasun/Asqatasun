@@ -119,7 +119,37 @@ public class TextPertinenceChecker extends CompositeChecker {
              manualCheckMessage, 
              eeAttributeNameList);
     }
-    
+    /**
+     * Constructor.
+     * Returns FAILED when the attribute is not pertinent.
+     * 
+     * @param textElementBuilder
+     * @param checkEmptiness
+     * @param attributeNameToCompare
+     * @param blacklistNameToCompareWith
+     * @param notPertinentMessageCode
+     * @param manualCheckMessage
+     * @param eeAttributeNameList
+     */
+    public TextPertinenceChecker(
+            TextElementBuilder textElementBuilder,
+            boolean checkEmptiness,
+            @Nullable TextElementBuilder textElementBuilderToCompareWith, 
+            @Nullable String blacklistNameToCompareWith,
+            String notPertinentMessageCode,
+            String manualCheckMessage,
+            String... eeAttributeNameList) {
+        super(manualCheckMessage, TestSolution.FAILED, eeAttributeNameList);
+
+        this.checkEmptiness = checkEmptiness;
+        this.textElementBuilderToCompareWith = textElementBuilderToCompareWith;
+        this.blacklistNameToCompareWith = blacklistNameToCompareWith;
+        this.notPertinentMessageCode = notPertinentMessageCode;
+        this.textElementBuilder = textElementBuilder;
+        
+        addCheckers();
+    }
+
     /**
      * Constructor.
      * Returns FAILED when the attribute is not pertinent.
