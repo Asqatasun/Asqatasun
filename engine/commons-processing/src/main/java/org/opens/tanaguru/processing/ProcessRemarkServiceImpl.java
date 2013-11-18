@@ -191,14 +191,14 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     public void initializeService(org.jsoup.nodes.Document document, String adaptedContent) {
         Date beginDate = null;
 
-        if (document != null && jsoupDocument == null) {
+        if (document != null) {
             this.jsoupDocument = document;
         }
         if (LOGGER.isDebugEnabled()) {
             beginDate = new Date();
             LOGGER.debug("Initialising source Map by line");
         }
-        if (adaptedContent != null && rawSourceCodeWithLine == null) {
+        if (adaptedContent != null) {
             initializeRawSourceCodeMap(adaptedContent);
         }
         if (LOGGER.isDebugEnabled()) {
