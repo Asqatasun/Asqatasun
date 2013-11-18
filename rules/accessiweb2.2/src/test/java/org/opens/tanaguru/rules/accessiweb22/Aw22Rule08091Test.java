@@ -171,7 +171,7 @@ public class Aw22Rule08091Test extends Aw22RuleImplementationTestCase {
         assertEquals(1, processResult.getRemarkSet().size());
         ProcessRemark processRemark = processResult.getRemarkSet().iterator().next();
         assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.NO_PATTERN_DETECTED_MSG, processRemark.getMessageCode());
+        assertEquals(getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG), processRemark.getMessageCode());
         assertNull(processRemark.getElementList());
         
         
@@ -187,7 +187,7 @@ public class Aw22Rule08091Test extends Aw22RuleImplementationTestCase {
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = processResult.getRemarkSet().iterator().next();
         assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.NO_PATTERN_DETECTED_MSG, processRemark.getMessageCode());
+        assertEquals(getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG), processRemark.getMessageCode());
         assertNull(processRemark.getElementList());
         
         
@@ -203,7 +203,7 @@ public class Aw22Rule08091Test extends Aw22RuleImplementationTestCase {
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = processResult.getRemarkSet().iterator().next();
         assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.NO_PATTERN_DETECTED_MSG, processRemark.getMessageCode());
+        assertEquals(getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG), processRemark.getMessageCode());
         assertNull(processRemark.getElementList());
         
         
@@ -219,7 +219,7 @@ public class Aw22Rule08091Test extends Aw22RuleImplementationTestCase {
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = processResult.getRemarkSet().iterator().next();
         assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.NO_PATTERN_DETECTED_MSG, processRemark.getMessageCode());
+        assertEquals(getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG), processRemark.getMessageCode());
         assertNull(processRemark.getElementList());
         
         
@@ -235,7 +235,7 @@ public class Aw22Rule08091Test extends Aw22RuleImplementationTestCase {
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = processResult.getRemarkSet().iterator().next();
         assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.NO_PATTERN_DETECTED_MSG, processRemark.getMessageCode());
+        assertEquals(getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG), processRemark.getMessageCode());
         assertNull(processRemark.getElementList());
         
         
@@ -251,7 +251,7 @@ public class Aw22Rule08091Test extends Aw22RuleImplementationTestCase {
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = processResult.getRemarkSet().iterator().next();
         assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.NO_PATTERN_DETECTED_MSG, processRemark.getMessageCode());
+        assertEquals(getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG), processRemark.getMessageCode());
         assertNull(processRemark.getElementList());
         
         
@@ -267,7 +267,7 @@ public class Aw22Rule08091Test extends Aw22RuleImplementationTestCase {
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = processResult.getRemarkSet().iterator().next();
         assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.NO_PATTERN_DETECTED_MSG, processRemark.getMessageCode());
+        assertEquals(getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG), processRemark.getMessageCode());
         assertNull(processRemark.getElementList());
         
 
@@ -299,4 +299,15 @@ public class Aw22Rule08091Test extends Aw22RuleImplementationTestCase {
                 consolidate("AW22.Test.8.9.1-3NMI-07").getValue());
     }
 
+    /**
+     * 
+     * @param msg
+     * @return the message suffixed with the test key identifier
+     */
+    private String getMessageKey(String msg) {
+        StringBuilder strb = new StringBuilder(msg);
+        strb.append("_");
+        strb.append(getName());
+        return strb.toString();
+    }
 }

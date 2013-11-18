@@ -35,6 +35,7 @@ import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.LINK_WITHOUT_T
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.FIELDSET_NOT_WITHIN_FORM_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.LINK_WITHOUT_TARGET_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NO_PATTERN_DETECTED_MSG;
+import org.opens.tanaguru.rules.utils.RuleCheckHelper;
 
 /**
  * Implementation of the rule 8.9.1 of the referential Accessiweb 2.2.
@@ -85,7 +86,10 @@ public class Aw22Rule08091 extends AbstractPageRuleMarkupImplementation {
         if (linkWithoutTarget.isEmpty() && fieldsetNotWithinForm.isEmpty()) {
             sspHandler.getProcessRemarkService().addProcessRemark(
                     TestSolution.NEED_MORE_INFO, 
-                    NO_PATTERN_DETECTED_MSG);
+                    RuleCheckHelper.specifyMessageToRule(
+                        NO_PATTERN_DETECTED_MSG, 
+                        this.getTest().getCode())
+                    );
             testSolutionHandler.addTestSolution(TestSolution.NEED_MORE_INFO);
             return;
         }
