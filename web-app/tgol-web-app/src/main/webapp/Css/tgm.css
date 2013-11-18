@@ -856,6 +856,7 @@ footer a {
     font-family: OpenSansLight;
     font-size: 32px;
     text-decoration: none;
+    word-wrap: break-word;
 }
 .project-name a:hover {
     text-decoration: underline;
@@ -901,8 +902,9 @@ footer a {
     }
 }
 .action-s {
-    width : 30px;
-    margin-right: 15px;
+/*    width : 18px;*/
+    margin-right: 4px;
+    margin-top: 40px
 }
 /*
  * Page : contract
