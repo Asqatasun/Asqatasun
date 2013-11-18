@@ -32,7 +32,7 @@ import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.LINK_WITH_TARGET_ATTR_CSS_LIKE_QUERY;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_JS_PROMPT_A_NEW_WINDOW_MSG;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_USER_IS_WARNED_WHEN_NEW_WINDOW_OPEN_MSG;
 import org.opens.tanaguru.rules.textbuilder.LinkTextElementBuilder;
 
 /**
@@ -57,7 +57,7 @@ public class Aw22Rule13021 extends AbstractDetectionPageRuleImplementation {
                 // solution when no element is found
                 TestSolution.NEED_MORE_INFO,
                 // message when element is found
-                CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG,
+                CHECK_USER_IS_WARNED_WHEN_NEW_WINDOW_OPEN_MSG,
                 // message when element is not found
                 CHECK_JS_PROMPT_A_NEW_WINDOW_MSG,
                 // evidence elements

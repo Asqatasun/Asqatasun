@@ -129,7 +129,7 @@ public class Aw22Rule13021Test extends Aw22RuleImplementationTestCase {
         assertEquals(1, processResult.getRemarkSet().size());
         SourceCodeRemark sourceCodeRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.CHECK_USER_IS_WARNED_WHEN_NEW_WINDOW_OPEN_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2,sourceCodeRemark.getElementList().size());
@@ -148,7 +148,7 @@ public class Aw22Rule13021Test extends Aw22RuleImplementationTestCase {
         Iterator<ProcessRemark> iter =  processResult.getRemarkSet().iterator();
         sourceCodeRemark = (SourceCodeRemark)iter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.CHECK_USER_IS_WARNED_WHEN_NEW_WINDOW_OPEN_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2,sourceCodeRemark.getElementList().size());
@@ -162,7 +162,7 @@ public class Aw22Rule13021Test extends Aw22RuleImplementationTestCase {
         
         sourceCodeRemark = (SourceCodeRemark)iter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.CHECK_USER_IS_WARNED_WHEN_NEW_WINDOW_OPEN_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2,sourceCodeRemark.getElementList().size());
@@ -176,7 +176,7 @@ public class Aw22Rule13021Test extends Aw22RuleImplementationTestCase {
         
         sourceCodeRemark = (SourceCodeRemark)iter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.CHECK_USER_IS_WARNED_WHEN_NEW_WINDOW_OPEN_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2,sourceCodeRemark.getElementList().size());
@@ -191,7 +191,7 @@ public class Aw22Rule13021Test extends Aw22RuleImplementationTestCase {
         
         sourceCodeRemark = (SourceCodeRemark)iter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.CHECK_USER_IS_WARNED_WHEN_NEW_WINDOW_OPEN_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2,sourceCodeRemark.getElementList().size());
