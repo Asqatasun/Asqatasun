@@ -256,7 +256,6 @@ public final class TgolKeyStore {
     public static final String MODIFIABLE_TEST_WEIGHT_REFS_KEY ="modifiableTestWeightRefs";
     
     public static final String SOURCE_CODE_KEY = "sourceCode";
-    public static final String CONTRACT_ACTION_LIST_KEY = "contractActionList";
     public static final String RESULT_ACTION_LIST_KEY = "resultActionList";
     public static final String HOME_ACTION_LIST_KEY = "homeActionList";
     public static final String DISPLAY_RESULT_TREND_KEY = "displayResultTrend";

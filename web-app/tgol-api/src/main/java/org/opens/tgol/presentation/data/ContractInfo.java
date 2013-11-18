@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,7 +21,9 @@
  */
 package org.opens.tgol.presentation.data;
 
+import java.util.Collection;
 import java.util.Date;
+import org.opens.tgol.action.Action;
 
 /**
  * The interface handles displayable contractInfo data
@@ -85,36 +87,6 @@ public interface ContractInfo {
      */
     void setLastActInfo(ActInfo lastActInfo);
 
-    
-
-//    /**
-//     *
-//     * @return
-//     *      whether the pages function is enabled for the contract
-//     */
-//    boolean isIsPagesForbidden();
-//
-//    /**
-//     * Disable/Enable the pages function for the contract
-//     *
-//     * @param isPagesForbidden
-//     */
-//    void setIsPagesForbidden(boolean isPagesForbidden);
-//
-//    /**
-//     *
-//     * @return
-//     *      whether the site function is enabled for the contract
-//     */
-//    boolean isIsFullSiteForbidden();
-//
-//    /**
-//     * Disable/Enable the site function for the contract
-//     *
-//     * @param isFullSiteForbidden
-//     */
-//    void setIsFullSiteForbidden(boolean isFullSiteForbidden);
-
     /**
      *
      * @return
@@ -167,4 +139,15 @@ public interface ContractInfo {
      */
     void setIsActRunning(boolean isActRunning);
 
+    /**
+     * 
+     * @return the list of action (types of audit) for the current contract
+     */
+    Collection<Action> getActionList();
+    
+    /**
+     * 
+     * @param actionList 
+     */
+    void setActionList(Collection<Action> actionList);
 }
