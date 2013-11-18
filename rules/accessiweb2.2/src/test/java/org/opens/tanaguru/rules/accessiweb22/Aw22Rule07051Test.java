@@ -91,7 +91,7 @@ public class Aw22Rule07051Test extends Aw22RuleImplementationTestCase {
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         assertTrue(processResult.getRemarkSet().iterator().next() instanceof ProcessRemark);
-        assertEquals(RemarkMessageStore.NO_PATTERN_DETECTED_MSG, 
+        assertEquals(getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG), 
                 processResult.getRemarkSet().iterator().next().getMessageCode());
 
         
@@ -166,7 +166,7 @@ public class Aw22Rule07051Test extends Aw22RuleImplementationTestCase {
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         assertTrue(processResult.getRemarkSet().iterator().next() instanceof ProcessRemark);
-        assertEquals(RemarkMessageStore.NO_PATTERN_DETECTED_MSG, 
+        assertEquals(getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG), 
                 processResult.getRemarkSet().iterator().next().getMessageCode());
         
         
@@ -181,7 +181,7 @@ public class Aw22Rule07051Test extends Aw22RuleImplementationTestCase {
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         assertTrue(processResult.getRemarkSet().iterator().next() instanceof ProcessRemark);
-        assertEquals(RemarkMessageStore.NO_PATTERN_DETECTED_MSG, 
+        assertEquals(getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG), 
                 processResult.getRemarkSet().iterator().next().getMessageCode());
 
         
@@ -196,7 +196,7 @@ public class Aw22Rule07051Test extends Aw22RuleImplementationTestCase {
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         assertTrue(processResult.getRemarkSet().iterator().next() instanceof ProcessRemark);
-        assertEquals(RemarkMessageStore.NO_PATTERN_DETECTED_MSG, 
+        assertEquals(getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG), 
                 processResult.getRemarkSet().iterator().next().getMessageCode());
 
         
@@ -211,7 +211,7 @@ public class Aw22Rule07051Test extends Aw22RuleImplementationTestCase {
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         assertTrue(processResult.getRemarkSet().iterator().next() instanceof ProcessRemark);
-        assertEquals(RemarkMessageStore.NO_PATTERN_DETECTED_MSG, 
+        assertEquals(getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG), 
                 processResult.getRemarkSet().iterator().next().getMessageCode());
 
         
@@ -266,4 +266,16 @@ public class Aw22Rule07051Test extends Aw22RuleImplementationTestCase {
                 consolidate("AW22.Test.07.05.01-3NMI-09").getValue());
     }
 
+    /**
+     * 
+     * @param msg
+     * @return the message suffixed with the test key identifier
+     */
+    private String getMessageKey(String msg) {
+        StringBuilder strb = new StringBuilder(msg);
+        strb.append("_");
+        strb.append(getName());
+        return strb.toString();
+    }
+    
 }

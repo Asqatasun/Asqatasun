@@ -62,6 +62,9 @@ public class AbstractDetectionPageRuleImplementation
      * not found on the page
      */
     private String messageCodeOnElementNotDetected;
+    public void setMessageCodeOnElementNotDetected(String messageCodeOnElementNotDetected) {
+        this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
+    }
 
     /**
      * the collection of attributes name used to collect evidenceElement
@@ -106,7 +109,9 @@ public class AbstractDetectionPageRuleImplementation
             @Nullable String messageCodeOnElementDetected, 
             @Nullable String messageCodeOnElementNotDetected,
             String... eeAttributeNameList) {
-        this(elementSelector,messageCodeOnElementDetected,messageCodeOnElementNotDetected);
+        this(elementSelector,
+             messageCodeOnElementDetected,
+             messageCodeOnElementNotDetected);
         this.eeAttributeNameList = eeAttributeNameList;
     }
     
@@ -125,7 +130,9 @@ public class AbstractDetectionPageRuleImplementation
             @Nonnull TestSolution notDetectedSolution, 
             @Nullable String messageCodeOnElementDetected, 
             @Nullable String messageCodeOnElementNotDetected) {
-        this(elementSelector, messageCodeOnElementDetected, messageCodeOnElementNotDetected);
+        this(elementSelector, 
+             messageCodeOnElementDetected, 
+             messageCodeOnElementNotDetected);
         this.detectedSolution = detectedSolution;
         this.notDetectedSolution = notDetectedSolution;
     }
@@ -147,17 +154,24 @@ public class AbstractDetectionPageRuleImplementation
             @Nullable String messageCodeOnElementDetected, 
             @Nullable String messageCodeOnElementNotDetected,
             String... eeAttributeNameList) {
-        this(elementSelector, detectedSolution, notDetectedSolution, messageCodeOnElementDetected, messageCodeOnElementNotDetected);
+        this(elementSelector, 
+             detectedSolution, 
+             notDetectedSolution, 
+             messageCodeOnElementDetected, 
+             messageCodeOnElementNotDetected);
         this.eeAttributeNameList = eeAttributeNameList;
     }
     
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> selectionHandler) {
+    protected void select(SSPHandler sspHandler, 
+                          ElementHandler<Element> selectionHandler) {
         elementSelector.selectElements(sspHandler, selectionHandler);
     }
 
     @Override
-    protected void check(SSPHandler sspHandler, ElementHandler<Element> selectionHandler, TestSolutionHandler testSolutionHandler) {
+    protected void check(SSPHandler sspHandler, 
+                         ElementHandler<Element> selectionHandler, 
+                         TestSolutionHandler testSolutionHandler) {
         super.check(sspHandler, selectionHandler, testSolutionHandler);
         ElementPresenceChecker epc = getElementPresenceChecker();
         epc.check(sspHandler, selectionHandler, testSolutionHandler);
