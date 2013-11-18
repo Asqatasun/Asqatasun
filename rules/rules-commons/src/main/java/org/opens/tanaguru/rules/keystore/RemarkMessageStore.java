@@ -231,6 +231,8 @@ public final class RemarkMessageStore {
             "CheckManuallyLinkWithoutExtension";
     public static final String CHECK_DOWNLOADABLE_DOCUMENT_FROM_FORM_MSG = 
             "CheckDownloadableDocumentFromForm";
+    public static final String CHECK_USER_IS_WARNED_WHEN_NEW_WINDOW_OPEN_MSG = 
+            "CheckUserIsWarnedWhenNewWindowOpen";
     public static final String CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG = 
             "CheckUserIsWarnedInCaseOfNewWindow";
     public static final String CHECK_JS_PROMPT_A_NEW_WINDOW_MSG = 

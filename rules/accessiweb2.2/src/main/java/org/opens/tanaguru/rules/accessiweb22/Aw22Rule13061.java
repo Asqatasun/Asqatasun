@@ -40,7 +40,7 @@ import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 public class Aw22Rule13061 extends AbstractDownloadableLinkRuleImplementation {
 
     /* the browser readable extensions nomenclature */
-    private static final String OFFICE_DOC_EXT_NOM = "BrowserReadableExtensions";
+    private static final String OFFICE_DOC_EXT_NOM = "DownloadableDocumentExtensions";
 
     /**
      * Default constructor
@@ -53,11 +53,7 @@ public class Aw22Rule13061 extends AbstractDownloadableLinkRuleImplementation {
                     // the nomenclature listing the extensions to test
                     OFFICE_DOC_EXT_NOM, 
                     // the result when detected
-                    TestSolution.PASSED, 
-                    // the result when not detected
                     TestSolution.NEED_MORE_INFO, 
-                    // the message when detected
-                    null, 
                     // the message when detected
                     DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, 
                     // the evidence elements
