@@ -21,8 +21,10 @@
  */
 package org.opens.tgol.presentation.data;
 
+import java.util.Collection;
 import org.opens.tgol.util.TgolEscapeUrl;
 import java.util.Date;
+import org.opens.tgol.action.Action;
 
 /**
  *
@@ -116,6 +118,17 @@ public class ContractInfoImpl implements ContractInfo {
     @Override
     public void setIsActRunning(boolean isActRunning) {
         this.isActRunning = isActRunning;
+    }
+
+    private Collection<Action> actionList;
+    @Override
+    public Collection<Action> getActionList() {
+        return actionList;
+    }
+
+    @Override
+    public void setActionList(Collection<Action> actionList) {
+        this.actionList = actionList;
     }
 
 }

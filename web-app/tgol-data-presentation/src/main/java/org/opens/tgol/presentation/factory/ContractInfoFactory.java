@@ -23,6 +23,7 @@ package org.opens.tgol.presentation.factory;
 
 import java.util.Calendar;
 import java.util.Collection;
+import org.opens.tgol.action.voter.ActionHandler;
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.contract.ScopeEnum;
@@ -59,6 +60,16 @@ public class ContractInfoFactory {
         this.contractDataService = contractDataService;
     }
 
+    private ActionHandler actionHandler;
+    public ActionHandler getActionHandler() {
+        return actionHandler;
+    }
+
+    @Autowired
+    public void setActionHandler(ActionHandler contractActionHandler) {
+        this.actionHandler = contractActionHandler;
+    }
+    
     /**
      * The unique shared instance of ContractInfoFactory
      */
@@ -84,7 +95,7 @@ public class ContractInfoFactory {
      */
     public ContractInfo getContractInfo(Contract contract){
         ContractInfo contractInfo = new ContractInfoImpl();
-
+        contract = contractDataService.read(contract.getId());
         setBasicContractInfo(contract, contractInfo);
         
         contractInfo.setExpirationDate(contract.getEndDate());
@@ -109,6 +120,7 @@ public class ContractInfoFactory {
         contractInfo.setUrl(contractDataService.getUrlFromContractOption(contract));
         contractInfo.setId(contract.getId().intValue());
         contractInfo.setIsActRunning(!actDataService.getRunningActsByContract(contract).isEmpty());
+        contractInfo.setActionList(actionHandler.getActionList(contract));
         return contractInfo;
     }
 
