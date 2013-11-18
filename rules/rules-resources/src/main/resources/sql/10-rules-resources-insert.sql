@@ -985,7 +985,20 @@ INSERT IGNORE INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `
 ('NomenclatureElementImpl', 901, '.xml', NULL, 23),
 ('NomenclatureElementImpl', 902, 'this website', NULL, 7),
 ('NomenclatureElementImpl', 903, 'ce site', NULL, 7),
-('NomenclatureElementImpl', 904, 'untitled document', NULL, 12)
+('NomenclatureElementImpl', 904, 'untitled document', NULL, 12),
+('NomenclatureElementImpl', 905, 'untitled', NULL, 12),
+('NomenclatureElementImpl', 906, 'error', NULL, 12),
+('NomenclatureElementImpl', 907, 'IIS7', NULL, 12),
+('NomenclatureElementImpl', 908, 'index of /', NULL, 12),
+('NomenclatureElementImpl', 909, 'directory', NULL, 12),
+('NomenclatureElementImpl', 910, 'under construction', NULL, 12),
+('NomenclatureElementImpl', 911, 'My Site - Your Source for Social News and Networking', NULL, 12),
+('NomenclatureElementImpl', 912, 'index.html', NULL, 12),
+('NomenclatureElementImpl', 913, 'Welcome to nginx!', NULL, 12),
+('NomenclatureElementImpl', 914, 'inicio', NULL, 12),
+('NomenclatureElementImpl', 915, 'login', NULL, 12),
+('NomenclatureElementImpl', 916, 'redirect', NULL, 12),
+('NomenclatureElementImpl', 917, 'redirecting', NULL, 12)
 ;
 
 SET foreign_key_checks=1;
