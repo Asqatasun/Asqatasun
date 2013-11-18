@@ -37,14 +37,13 @@
                         <c:forEach var="formField" items="${resultSortFormField}" >
                         <c:set var="i18nKey" scope="page" value="${formField.i18nKey}"/>
                         <div class="clearfix ${auditParameterErrorClass}">
-                            <label id="set-up-${i18nKey}"><fmt:message key="${i18nKey}"/></label>
                             <c:choose>
                                 <c:when test="${function:instanceOf(formField, 'org.opens.tgol.form.CheckboxFormField')}">
                             <div id="${i18nKey}" class="set-up-value input">
                                 <ul class="inputs-list">
-                                    <c:forEach items="${formField.checkboxElementList}" var="element">
+                                    <c:forEach items="${formField.checkboxElementList}" var="element" varStatus="pResult">
                                     <li>
-                                        <label class="checkbox">    
+                                        <label class="checkbox" for="sortOptionMap${formField.code}${pResult.index + 1}">    
                                             <form:checkbox value="${element.value}" path="sortOptionMap[${formField.code}]" />
                                             <fmt:message key="${element.i18nKey}"/>
                                         </label>
@@ -53,6 +52,7 @@
                                 </ul>
                                 </c:when>
                                 <c:when test="${function:instanceOf(formField, 'org.opens.tgol.form.SelectFormField')}">
+                            <label id="set-up-${i18nKey}" for="${i18nKey}"><fmt:message key="${i18nKey}"/></label>                                    
                             <div class="set-up-value input">
                                 <c:forEach items="${formField.selectElementMap}" var="group">
                                     <form:select id="${i18nKey}" path="sortOptionMap[${group.key}]">
@@ -79,8 +79,8 @@
                                 </c:forEach><!-- for each referentiel -->
                                 </c:when>
                                 <c:otherwise>
-                            <div class="set-up-value input">
-                                <form:input id="${i18nKey}" path="sortOptionMap[${code}]" cssErrorClass="xlarge error" cssClass="xlarge"/>
+                            <div class="set-up-value input"> 
+                               <form:input id="${i18nKey}" path="sortOptionMap[${code}]" cssErrorClass="xlarge error" cssClass="xlarge"/>
                                 <form:errors path="sortOptionMap[${code}]" cssClass="alert-message error" /><br/>
                                 </c:otherwise>
                             </c:choose><!-- test="instanceof SelectFormField"-->
