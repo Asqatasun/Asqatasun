@@ -1768,6 +1768,7 @@ input[type="text"]:focus{
 }
 .process-remarks code {
     font-size: 12px;
+    background-color : #EEE;
 }
 .rule-id h4{
     display : inline;
