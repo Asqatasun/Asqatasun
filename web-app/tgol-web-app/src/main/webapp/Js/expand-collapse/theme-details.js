@@ -57,8 +57,8 @@ $(document).ready(function() {
         }
 
     }); 
-    $('#collapse-all').css('display', 'inline-block');
-    $('#expand-all').css('display', 'inline-block');
+    $('#collapse-all').css('display', 'inline-block').attr('aria-controls', 'all-themes');
+    $('#expand-all').css('display', 'inline-block').attr('aria-controls', 'all-themes');
     
     $('.theme-info  a').click(function()
     {

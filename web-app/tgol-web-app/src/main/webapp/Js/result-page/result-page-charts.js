@@ -349,7 +349,6 @@ buildAxis = function() {
             scale0 = this.__chart__ || scale1;
             this.__chart__ = scale1;
         
-        path.enter().append("path").attr("class", "domain");
         tickEnter.append("line").attr("class", "tick").attr("y2", "0");
         tickEnter.append("text");
         

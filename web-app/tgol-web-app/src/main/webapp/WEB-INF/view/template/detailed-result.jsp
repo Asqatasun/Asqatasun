@@ -41,6 +41,7 @@
                     </div><!-- class="span16" -->
                 </div><!-- class="row" -->
                 </c:if>
+                <div id="all-themes">
                 <c:forEach var="entry" items="${testResultMap}" varStatus="pResultMap">
                 <c:if test="${addThemeHeader}">
                 <div class="row theme-info">
@@ -142,7 +143,7 @@
                                     <img alt="<fmt:message key="resultPage.displayTestInfosOn"> <fmt:param>${testResult.testShortLabel}</fmt:param></fmt:message>" src="${collapsedSmallImg}" class="show-test-details-link-icon">
                                 </span>
                                 </c:if>
-                                <h4>${testResult.testShortLabel}</h4>
+                                <h4>${testResult.testShortLabel} <span class="test-result sr-only"> <fmt:message key="${testResult.resultCode}"/> </span></h4>
                                 <span class="rule-detail-link">
                                     <a title="<fmt:message key="resultPage.more"/> ${testResult.testShortLabel}" href="<fmt:message key="${testResult.testCode}-url"/>">
                                         <img alt="<fmt:message key="resultPage.more"/> ${testResult.testShortLabel}" src="${testInfoLinkImg}">
@@ -258,6 +259,7 @@
                     </c:forEach>
                 </div> <!-- div id="themex-results"> --> 
                 </c:forEach>
+                </div><!-- id="all-theme" -->
             </c:when>
             <c:otherwise>
                 <div class="row">
