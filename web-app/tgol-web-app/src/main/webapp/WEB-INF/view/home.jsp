@@ -95,35 +95,13 @@
                         <%@include file="template/thumbnail.jsp" %>
                         <c:choose>
                             <c:when test="${contract.isContractExpired != 'true'}">
-                        <div class="span10">
+                        <div class="span8">
                             <h2 class="project-name">
                                 <a href="home/contract.html?cr=${contract.id}">${contract.label}</a>
                                 <c:if test="${contract.isActRunning == 'true'}">
                                 <img src="${gearImgUrl}" title="<fmt:message key="home.actRunning"/>" alt="<fmt:message key="home.actRunning"/>" class="running-audit"/>
                                 </c:if>
                             </h2>
-                             <!--   
-                            <div class="project-actions">
-                                <c:forEach var="contractAction" items="${contract.actionList}" varStatus="pContractAction">
-                                    <c:if test="${contractAction.actionEnabled}">
-                                    <c:choose>
-                                        <c:when test="${not empty configProperties['cdnUrl']}">
-                                            <c:set var="contractActionImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}${contractAction.enabledActionImageUrl}"/>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <c:set var="contractActionImgUrl">
-                                                <c:url value="${contractAction.enabledActionImageUrl}"/>
-                                            </c:set>
-                                        </c:otherwise>
-                                    </c:choose>    
-                                <span>
-                                    <a href="<c:url value="${contractAction.actionUrl}?cr=${contract.id}"/>" title="<fmt:message key="${contractAction.actionI81NCode}"/>">
-                                        <img src="${contractActionImgUrl}" alt="<fmt:message key="${contractAction.actionI81NCode}"/>" class="action-s"/>
-                                    </a>
-                                </span>
-                                    </c:if>
-                                </c:forEach>
-                            </div>-->
                             <c:if test="${not empty contract.url}">
                             <div class="project-url"><a href="${contract.url}">${contract.url}</a></div>
                             </c:if>
@@ -135,7 +113,69 @@
                                     <div class="project-status"><span class="last-audit-label"><fmt:message key="home.noAudit"/></span></div>
                                 </c:otherwise>
                             </c:choose>
-                        </div><!-- class="span9"-->
+                        </div><!-- class="span8"-->
+                        <div class="project-actions span2" >
+                            <c:forEach var="contractAction" items="${contract.actionList}" varStatus="pContractAction">
+                                <c:set var="actionNameI18N">
+                                    <fmt:message key="${contractAction.actionI81NCode}"/>
+                                </c:set>
+                                <c:set var="actionName">
+                                    ${fn:replace(actionNameI18N, '<br/>', '')}
+                                </c:set>
+                                <c:set var="enableActionUrl">
+                                    ${fn:replace(contractAction.enabledActionImageUrl, '.png', '-s.png')}
+                                </c:set>
+                                <c:set var="disableActionUrl">
+                                    ${fn:replace(contractAction.disabledActionImageUrl, '.png', '-s.png')}
+                                </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty configProperties['cdnUrl']}">
+                                        <c:choose>
+                                            <c:when test="${contractAction.actionEnabled}">
+                                                <c:set var="contractActionImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}${enableActionUrl}"/>
+                                                <c:set var="disabledComplement" value=""/>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:set var="contractActionImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}${disableActionUrl}"/>
+                                                <c:set var="disabledComplement">
+                                                    <fmt:message key="contract.disabled"/>
+                                                </c:set>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:choose>
+                                            <c:when test="${contractAction.actionEnabled}">
+                                                <c:set var="contractActionImgUrl">
+                                                    <c:url value="${enableActionUrl}"/>
+                                                </c:set>
+                                                <c:set var="disabledComplement" value=""/>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:set var="contractActionImgUrl">
+                                                    <c:url value="${disableActionUrl}"/>
+                                                </c:set>
+                                                <c:set var="disabledComplement">
+                                                    <fmt:message key="contract.disabled"/>
+                                                </c:set>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:otherwise>
+                                </c:choose>
+                            <span class="action-button">
+                                <c:choose>
+                                    <c:when test="${contractAction.actionEnabled}">
+                                <a href="<c:url value="${contractAction.actionUrl}?cr=${contract.id}"/>" title="${actionName} ${disabledComplement}">
+                                    <img src="${contractActionImgUrl}" alt="${actionName} ${disabledComplement}" class="action-s"/>
+                                </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="${contractActionImgUrl}" alt="${actionName} ${disabledComplement}" class="action-s" title="${actionName} ${disabledComplement}"/>
+                                    </c:otherwise>
+                                </c:choose>
+                            </span>
+                            </c:forEach>
+                        </div>
                         <c:if test='${contract.lastActInfo != null}'>
                             <c:choose>
                                 <c:when test="${contract.lastActInfo.status == 'COMPLETED'}">
@@ -156,7 +196,7 @@
                                 </c:if>
                                 <fmt:message key="${contract.lastActInfo.status}"/>
                             </div>
-                            </div><!-- class="span3" -->
+                        </div><!-- class="span2" -->
                                 </c:otherwise>
                             </c:choose>
                         </c:if>
