@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-                    <table summary="<fmt:message key="graph.resultRepartitionSummaryAndCaption"/>">
+                    <table>
                         <caption><fmt:message key="graph.resultRepartitionSummaryAndCaption"/></caption>
                         <tr>
                             <th class="col01 passed" scope="row">Passed</th>

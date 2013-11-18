@@ -133,7 +133,7 @@
             <c:choose>
                 <c:when test="${not empty userList}">
                 <div class="span16 tg-table-container">
-                    <table id="user-list-table" class="tg-table" summary="<fmt:message key="admin.userList"/>">
+                    <table id="user-list-table" class="tg-table">
                         <caption><fmt:message key="admin.userList"/></caption>
                         <thead>
                             <tr>

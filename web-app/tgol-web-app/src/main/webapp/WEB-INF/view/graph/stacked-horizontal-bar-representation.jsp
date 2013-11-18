@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-		<table id="top5-failed-theme" summary="<fmt:message key="graph.mostInvalidedThemesSummaryAndCaption"/>">
+		<table id="top5-failed-theme">
                     <caption><fmt:message key="graph.mostInvalidedThemesSummaryAndCaption"/></caption>
                     <tr>
                         <td></td>

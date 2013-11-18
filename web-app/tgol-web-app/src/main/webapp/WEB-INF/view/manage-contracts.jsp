@@ -115,7 +115,7 @@
             <c:choose>
                 <c:when test="${not empty contractList}">
                 <div class="span16 tg-table-container">
-                    <table id="contract-list-table" class="tg-table" summary="<fmt:message key="manage-contracts.contractList"/>">
+                    <table id="contract-list-table" class="tg-table">
                         <caption><fmt:message key="manage-contracts.contractList"/></caption>
                         <thead>
                             <tr>

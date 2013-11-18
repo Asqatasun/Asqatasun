@@ -40,7 +40,7 @@
                             height="${height}">
                 </cewolf:imgurl>
                 <object id="site-audit-history" class="chart-object" type="image/png" data="<c:url value="/${timeChartUrl}"/>" usemap="#timeChart" title="<fmt:message key="graph.siteAuditHistoryTitle"/>">
-                    <table summary="${title}">
+                    <table>
                     <caption>"${title}"</caption>
                         <tr>
                             <td></td>

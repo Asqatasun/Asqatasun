@@ -134,7 +134,7 @@
                     </h2>
                 </div><!-- class="span16"-->
                 <div class="span16 tg-table-container">
-                    <table summary="<fmt:message key="synthesisSite.failed-test-by-page"/>" id="top5-failed-test-by-page" class="tg-table">
+                    <table id="top5-failed-test-by-page" class="tg-table">
                         <caption><fmt:message key="synthesisSite.failed-test-by-page"/></caption>
                         <thead>
                             <tr>
@@ -183,7 +183,7 @@
                     </h2>
                 </div><!-- class="span16 tg-table-title"-->
                 <div class="span16 tg-table-container">
-                    <table id="top5-failed-url-by-test" summary="<spring:message code="synthesisSite.failed-url-by-test"/>" class="tg-table">
+                    <table id="top5-failed-url-by-test" class="tg-table">
                         <caption><spring:message code="synthesisSite.failed-url-by-test"/></caption>
                         <thead>
                             <tr>
@@ -232,7 +232,7 @@
                         <fmt:message key="synthesisSite.sorted-by-occurrence"/></h2>
                 </div><!-- class="span16 tg-table-title"-->
                 <div class="span16 tg-table-container">
-                    <table id="top5-failed-url-by-occurrence" summary="<fmt:message key="synthesisSite.failed-url-by-occurrence"/>" class="tg-table">
+                    <table id="top5-failed-url-by-occurrence" class="tg-table">
                         <caption><fmt:message key="synthesisSite.failed-url-by-occurrence"/></caption>
                         <thead>
                             <tr>
@@ -279,7 +279,7 @@
                    <spring:message code="${status}"/>
                 </div>
                 <div class="span16">
-                    <table summary="Audit meta-data" id="result-meta" class="">
+                    <table id="result-meta" class="">
                         <caption>Audit meta-data</caption>
                         <tr>
                             <th id="meta-url" scope="row" class="col01"><spring:message code="resultPage.url"/></th>

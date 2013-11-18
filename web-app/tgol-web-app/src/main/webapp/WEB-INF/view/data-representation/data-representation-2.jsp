@@ -30,7 +30,7 @@
                         <c:if test='${not empty remarkInfosItem.evidenceElementList}'>
                         <c:set value="false" var="bgColor" scope="page"/>
                         <c:set value="false" var="color" scope="page"/>
-                        <table summary="<fmt:message  key="${msgCode}"/>" class="evidence-elements-table">
+                        <table class="evidence-elements-table">
                             <caption><fmt:message  key="${msgCode}"/></caption>
                             <!-- First parse of evidence element list to get the table headers (evidencement element key)-->
                             <thead>

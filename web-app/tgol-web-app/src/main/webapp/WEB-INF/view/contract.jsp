@@ -114,7 +114,7 @@
             </div><!-- class="row" -->
             <div id="audit-actions-container" class="row">
                 <div class="span16">
-                    <table id="audit-actions" summary="" class="link-underline">
+                    <table id="audit-actions" class="link-underline">
                         <tr>
 <!--                        <div id="audit-actions">-->
                         <c:forEach var="contractAction" items="${contractActionList}" varStatus="pContractAction">
@@ -244,7 +244,7 @@
                 </div><!-- class="span16 offset0" -->
             <c:if test='${not empty detailedContractInfo.lastActInfoSet}'>
                 <div id="act-list" class="span16 tg-table-container">
-                    <table id="act-list-table" class="tg-table" summary="<fmt:message key="contract.auditHistory"/>">
+                    <table id="act-list-table" class="tg-table">
                         <caption><fmt:message key="contract.auditHistory"/></caption>
                         <thead>
                             <tr>

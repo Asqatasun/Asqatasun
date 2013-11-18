@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-                <table id="result-by-theme" summary="<fmt:message key="graph.resultRepartitionByThemeSummaryAndCaption"/>" class="zebra-striped">
+                <table id="result-by-theme" class="zebra-striped">
                     <caption><fmt:message key="graph.resultRepartitionByThemeSummaryAndCaption"/></caption>
                     <thead>
                         <tr>

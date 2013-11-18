@@ -105,7 +105,7 @@
                     </h2>
                 </div><!-- class="span16"-->
                 <div class="span16 tg-table-container">
-                    <table id="page-list-table" summary="Audit page list" class="tg-table">
+                    <table id="page-list-table" class="tg-table">
                         <caption>Audit page list</caption>
                         <thead>
                             <tr>

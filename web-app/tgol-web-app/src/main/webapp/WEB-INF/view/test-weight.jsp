@@ -126,7 +126,7 @@
                                 <fmt:param>${param.seo}</fmt:param>   
                             </fmt:message>
                         </c:set>
-                        <table id="test-weight-mngt" summary="${tableSummaryAndCaption}" class="tg-table">
+                        <table id="test-weight-mngt" class="tg-table">
                             <caption>${tableSummaryAndCaption}</caption>
                                 <thead>
                                     <tr>

@@ -125,7 +125,7 @@
             <c:choose>
                 <c:when test="${not empty scenarioList}">
                 <div class="span16 tg-table-container">
-                    <table id="scenario-list-table" class="tg-table" summary="<fmt:message key="scenarioManagement.scenarioList"/>">
+                    <table id="scenario-list-table" class="tg-table">
                         <caption><fmt:message key="auditSetUpScenario.scenarioList"/></caption>
                         <thead>
                             <tr>
