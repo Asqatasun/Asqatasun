@@ -900,7 +900,10 @@ footer a {
         width: 280px;
     }
 }
-
+.action-s {
+    width : 30px;
+    margin-right: 15px;
+}
 /*
  * Page : contract
  * ==============================================

@@ -151,6 +151,7 @@ public class ContractControllerTest extends TestCase {
         setUpContractDataService(0,0);
         setUpActDataService(0,0,0,0,0);
         setUpLocaleResolver(0);
+        setUpActionHandler(0);
         setUpMockAuthenticationContext();
         
         // contractId cannot be converted as a long, the ForbiddenUserException 
@@ -325,6 +326,7 @@ public class ContractControllerTest extends TestCase {
             expect(mockActionHandler.getActionList(mockContract)).andReturn(new ArrayList<Action>()).times(getActionListCounter);
         }
         replay(mockActionHandler);
-        instance.setActionHandler(mockActionHandler);
+        ContractInfoFactory.getInstance().setActionHandler(mockActionHandler);
+        DetailedContractInfoFactory.getInstance().setActionHandler(mockActionHandler);
     }
 }

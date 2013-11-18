@@ -117,7 +117,7 @@
                     <table id="audit-actions" class="link-underline">
                         <tr>
 <!--                        <div id="audit-actions">-->
-                        <c:forEach var="contractAction" items="${contractActionList}" varStatus="pContractAction">
+                        <c:forEach var="contractAction" items="${detailedContractInfo.actionList}" varStatus="pContractAction">
                             <td class="action-button">
 <!--                            <span class="action-button">-->
                             <c:choose>

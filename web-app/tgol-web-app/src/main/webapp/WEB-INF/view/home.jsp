@@ -80,7 +80,9 @@
                     <h1><fmt:message key="home.h1"/></h1>
                 </div>
             </div>
+            <c:if test="${fn:length(contractList) > 1}">
             <c:import url="template/sort-contract-console.jsp" />
+            </c:if>
             <div class="row">
                 <div class="span16">
                 <c:forEach var="contract" items="${contractList}" varStatus="pContractSet">
@@ -100,6 +102,28 @@
                                 <img src="${gearImgUrl}" title="<fmt:message key="home.actRunning"/>" alt="<fmt:message key="home.actRunning"/>" class="running-audit"/>
                                 </c:if>
                             </h2>
+                             <!--   
+                            <div class="project-actions">
+                                <c:forEach var="contractAction" items="${contract.actionList}" varStatus="pContractAction">
+                                    <c:if test="${contractAction.actionEnabled}">
+                                    <c:choose>
+                                        <c:when test="${not empty configProperties['cdnUrl']}">
+                                            <c:set var="contractActionImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}${contractAction.enabledActionImageUrl}"/>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:set var="contractActionImgUrl">
+                                                <c:url value="${contractAction.enabledActionImageUrl}"/>
+                                            </c:set>
+                                        </c:otherwise>
+                                    </c:choose>    
+                                <span>
+                                    <a href="<c:url value="${contractAction.actionUrl}?cr=${contract.id}"/>" title="<fmt:message key="${contractAction.actionI81NCode}"/>">
+                                        <img src="${contractActionImgUrl}" alt="<fmt:message key="${contractAction.actionI81NCode}"/>" class="action-s"/>
+                                    </a>
+                                </span>
+                                    </c:if>
+                                </c:forEach>
+                            </div>-->
                             <c:if test="${not empty contract.url}">
                             <div class="project-url"><a href="${contract.url}">${contract.url}</a></div>
                             </c:if>

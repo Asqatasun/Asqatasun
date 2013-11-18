@@ -24,6 +24,8 @@ package org.opens.tgol.controller;
 import java.util.*;
 import junit.framework.TestCase;
 import static org.easymock.EasyMock.*;
+import org.opens.tgol.action.Action;
+import org.opens.tgol.action.voter.ActionHandler;
 import org.opens.tgol.command.helper.ContractSortCommandHelper;
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.contract.Contract;
@@ -53,8 +55,7 @@ public class HomeControllerTest extends TestCase {
     private HomeController instance;
     private ContractDataService mockContractDataService;
     private ActDataService mockActDataService;
-//    private LocaleResolver mockLocaleResolver;
-//    private ActionHandler mockActionHandler;
+    private ActionHandler mockActionHandler;
     private AuthenticationDetails mockAuthenticationDetails;
     private Authentication mockAuthentication;
     private Contract mockContract;
@@ -98,12 +99,9 @@ public class HomeControllerTest extends TestCase {
         if (mockAuthentication != null) {
             verify(mockAuthentication);
         }
-//        if (mockLocaleResolver != null) {
-//            verify(mockLocaleResolver);
-//        }
-//        if (mockActionHandler != null) {
-//            verify(mockActionHandler);
-//        }
+        if (mockActionHandler != null) {
+            verify(mockActionHandler);
+        }
     }
 
     /**
@@ -130,7 +128,7 @@ public class HomeControllerTest extends TestCase {
 
         expect(mockContract.getLabel()).andReturn("").times(3);
 
-        expect(mockContract.getId()).andReturn(Long.valueOf(1)).once();
+        expect(mockContract.getId()).andReturn(Long.valueOf(1)).times(2);
 
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.set(2030, 01, 01);
@@ -153,11 +151,19 @@ public class HomeControllerTest extends TestCase {
 
         mockContractDataService = createMock(ContractDataService.class); 
         expect(mockContractDataService.getUrlFromContractOption(mockContract)).andReturn("").once();
+        expect(mockContractDataService.read(Long.valueOf("1"))).andReturn(mockContract).once();
         
         replay(mockContractDataService);
         
+        mockActionHandler = createMock(ActionHandler.class);
+        List<Action> actionList = new ArrayList<Action>();
+        expect(mockActionHandler.getActionList(mockContract)).andReturn(actionList).once();
+        
+        replay(mockActionHandler);
+        
         instance.setContractDataService(mockContractDataService);
         ContractInfoFactory.getInstance().setContractDataService(mockContractDataService);
+        ContractInfoFactory.getInstance().setActionHandler(mockActionHandler);
         DetailedContractInfoFactory.getInstance().setContractDataService(mockContractDataService);
     }
     
@@ -202,13 +208,4 @@ public class HomeControllerTest extends TestCase {
         replay(mockAuthenticationDetails);
     }
  
-//    private void setUpActionHandler(int getActionListCounter) {
-//        // the HomeController needs a actionHandler
-//        mockActionHandler = createMock(ActionHandler.class);
-//        if (getActionListCounter > 0) {
-//            expect(mockActionHandler.getActionList(mockContract)).andReturn(new ArrayList<Action>()).times(getActionListCounter);
-//        }
-//        replay(mockActionHandler);
-//        instance.setActionHandler(mockActionHandler);
-//    }
 }

@@ -34,7 +34,7 @@
                 <value>SCENARIO</value>
             </list>
         </property>
-        <property name="actionHandler" ref="contractActionHandler"/>
+<!--        <property name="actionHandler" ref="contractActionHandler"/>-->
     </bean>
 
     <bean id="pageListController" class="org.opens.tgol.controller.PageListController">

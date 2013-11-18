@@ -65,14 +65,14 @@ public class ContractController extends AbstractController {
         this.authorizedFunctionalityForTrend = authorizedFunctionalityForTrend;
     }
 
-    private ActionHandler actionHandler;
-    public ActionHandler getActionHandler() {
-        return actionHandler;
-    }
-
-    public void setActionHandler(ActionHandler contractActionHandler) {
-        this.actionHandler = contractActionHandler;
-    }
+//    private ActionHandler actionHandler;
+//    public ActionHandler getActionHandler() {
+//        return actionHandler;
+//    }
+//
+//    public void setActionHandler(ActionHandler contractActionHandler) {
+//        this.actionHandler = contractActionHandler;
+//    }
 
     public ContractController() {
         super();
@@ -122,7 +122,7 @@ public class ContractController extends AbstractController {
             throw new ForbiddenUserException(getCurrentUser());
         }
         // add the action list to the view
-        model.addAttribute(TgolKeyStore.CONTRACT_ACTION_LIST_KEY, actionHandler.getActionList(contract));
+//        model.addAttribute(TgolKeyStore.CONTRACT_ACTION_LIST_KEY, actionHandler.getActionList(contract));
         if (isContractHasFunctionalityAllowingTrend(contract)) {
             model.addAttribute(TgolKeyStore.DISPLAY_RESULT_TREND_KEY, true);
         }
