@@ -46,7 +46,7 @@ public final class RuleCheckHelper {
     private static final String CAPTCHA_KEYWORD = "captcha";
     private static final String TEST_RESULT_EVIDENCE_ELEMENT = "Precomputed-Test-Result";
     private static final String ABSENT_ATTRIBUTE_VALUE = "attribute-absent";
-    
+    private static final String MSG_SPACER = "_";
 
     /**
      * The ProcessRemarkService
@@ -211,6 +211,13 @@ public final class RuleCheckHelper {
         } else {
             return element.attr(attributeName);
         }
+    }
+
+    public static String specifyMessageToRule(String msg, String testCode) {
+        StringBuilder strb = new StringBuilder(msg);
+        strb.append(MSG_SPACER);
+        strb.append(testCode);
+        return strb.toString();
     }
 
 }

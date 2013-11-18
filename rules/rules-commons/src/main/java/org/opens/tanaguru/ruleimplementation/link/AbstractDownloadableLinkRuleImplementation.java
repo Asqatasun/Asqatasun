@@ -40,6 +40,7 @@ import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.LINK_WITH_HREF
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.FORM_ELEMENT;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_DOWNLOADABLE_DOCUMENT_FROM_FORM_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG;
+import org.opens.tanaguru.rules.utils.RuleCheckHelper;
 
 /**
  * This class deals with the tests related with links that point to 
@@ -51,7 +52,6 @@ public abstract class AbstractDownloadableLinkRuleImplementation
     
     private static final String POINT_CHAR = ".";
     private static final String SLASH_CHAR = "/";
-    private static final String MSG_SPACER = "_";
 
     /* the links with a proper extension */
     private ElementHandler linkWithSimpleExtension = new ElementHandlerImpl();
@@ -103,7 +103,10 @@ public abstract class AbstractDownloadableLinkRuleImplementation
             testSolutionHandler.addTestSolution(TestSolution.NEED_MORE_INFO);
             sspHandler.getProcessRemarkService().addProcessRemark(
                     TestSolution.NEED_MORE_INFO, 
-                    getMessageKey(CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG));
+                    RuleCheckHelper.specifyMessageToRule(
+                        CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG, 
+                        this.getTest().getCode())
+                    );
             return;
         }
         
@@ -114,7 +117,10 @@ public abstract class AbstractDownloadableLinkRuleImplementation
                 testSolutionHandler.addTestSolution(TestSolution.NEED_MORE_INFO);
                 sspHandler.getProcessRemarkService().addProcessRemark(
                     TestSolution.NEED_MORE_INFO, 
-                    getMessageKey(CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG));
+                    RuleCheckHelper.specifyMessageToRule(
+                        CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG, 
+                        this.getTest().getCode())
+                    );
                 return;
             }
             // we search whether the page contains form, if yes, the result 
@@ -128,7 +134,10 @@ public abstract class AbstractDownloadableLinkRuleImplementation
                 testSolutionHandler.addTestSolution(TestSolution.NEED_MORE_INFO);
                 sspHandler.getProcessRemarkService().addProcessRemark(
                     TestSolution.NEED_MORE_INFO, 
-                    getMessageKey(CHECK_DOWNLOADABLE_DOCUMENT_FROM_FORM_MSG));
+                    RuleCheckHelper.specifyMessageToRule(
+                        CHECK_DOWNLOADABLE_DOCUMENT_FROM_FORM_MSG, 
+                        this.getTest().getCode())
+                    );
             }
         }
     }
@@ -156,24 +165,4 @@ public abstract class AbstractDownloadableLinkRuleImplementation
         return false;
     }
     
-    /**
-     * 
-     * @param msg
-     * @return the message suffixed with the test key identifier
-     */
-    private String getMessageKey(String msg) {
-        StringBuilder strb = new StringBuilder(msg);
-        strb.append(MSG_SPACER);
-        strb.append(getRuleKey());
-        return strb.toString();
-    }
-
-    /**
-     * 
-     * @return a key identifying the test used to format remark messages and 
-     * make them rule dependent.
-     */
-    private String getRuleKey() {
-        return this.test.getCode();
-    }
 }
