@@ -114,9 +114,9 @@
         <welcome-file>dispatch.html</welcome-file>
     </welcome-file-list>
 
-    <!-- session timeout configuration : set to 30 min as default -->
+    <!-- session timeout configuration : set to 60 min as default -->
     <session-config>
-        <session-timeout>30</session-timeout>
+        <session-timeout>60</session-timeout>
     </session-config>
 
 </web-app>
