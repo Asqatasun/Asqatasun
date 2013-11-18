@@ -330,7 +330,9 @@
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="871" Label=".otg" Id_Nomenclature="20"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="872" Label=".oth" Id_Nomenclature="20"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="873" Label=".ots" Id_Nomenclature="20"/>
-    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="874" Label=".ott" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="1100" Label=".ott" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="1101" Label=".cws" Id_Nomenclature="20"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="874" Label=".cwk" Id_Nomenclature="20"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="875" Label=".asp" Id_Nomenclature="21"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="876" Label=".aspx" Id_Nomenclature="21"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="877" Label=".bmp" Id_Nomenclature="21"/>

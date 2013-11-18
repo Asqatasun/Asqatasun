@@ -176,7 +176,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -191,7 +191,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -206,7 +206,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -221,7 +221,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -236,7 +236,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -251,7 +251,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -266,7 +266,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -281,7 +281,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -296,7 +296,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -311,7 +311,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -326,7 +326,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -341,7 +341,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -356,7 +356,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -371,7 +371,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -386,7 +386,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -401,7 +401,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -416,7 +416,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -431,7 +431,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -446,7 +446,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -461,7 +461,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -476,7 +476,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -491,7 +491,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -506,7 +506,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -521,7 +521,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -536,7 +536,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -551,7 +551,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -566,7 +566,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -581,7 +581,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -596,7 +596,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -611,7 +611,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -626,7 +626,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -641,7 +641,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -656,7 +656,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -671,7 +671,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -686,7 +686,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -701,7 +701,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -716,7 +716,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -731,7 +731,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -746,7 +746,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -761,7 +761,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -776,7 +776,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -791,7 +791,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -806,7 +806,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -821,7 +821,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -836,7 +836,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -851,7 +851,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -866,7 +866,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -881,7 +881,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -896,7 +896,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -911,7 +911,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -926,7 +926,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -941,7 +941,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -956,7 +956,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -971,7 +971,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -986,7 +986,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1001,7 +1001,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1016,7 +1016,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1031,7 +1031,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1046,7 +1046,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1061,7 +1061,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1076,7 +1076,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1091,7 +1091,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1106,7 +1106,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1121,7 +1121,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1136,7 +1136,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1151,7 +1151,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1166,7 +1166,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1181,7 +1181,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1196,7 +1196,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1211,7 +1211,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1226,7 +1226,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1241,7 +1241,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1256,7 +1256,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1271,7 +1271,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1286,7 +1286,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1301,7 +1301,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1316,7 +1316,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1331,7 +1331,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1346,7 +1346,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1361,7 +1361,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1376,7 +1376,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1391,7 +1391,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1406,7 +1406,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1421,7 +1421,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1436,7 +1436,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1451,7 +1451,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1466,7 +1466,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1481,7 +1481,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1496,7 +1496,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1511,7 +1511,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1526,7 +1526,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1541,7 +1541,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1556,7 +1556,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1571,7 +1571,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1586,7 +1586,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1601,7 +1601,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1616,7 +1616,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1631,7 +1631,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1646,7 +1646,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1661,7 +1661,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1676,7 +1676,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1691,7 +1691,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1706,7 +1706,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1721,7 +1721,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1736,7 +1736,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1751,7 +1751,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1766,7 +1766,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1781,7 +1781,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1796,7 +1796,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1811,7 +1811,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1826,7 +1826,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1841,7 +1841,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1856,7 +1856,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1871,7 +1871,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1886,7 +1886,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1901,7 +1901,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1916,7 +1916,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1931,7 +1931,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1946,7 +1946,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1961,7 +1961,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1976,7 +1976,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -1991,7 +1991,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2006,7 +2006,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2021,7 +2021,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2036,7 +2036,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2051,7 +2051,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2066,7 +2066,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2081,7 +2081,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2096,7 +2096,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2111,7 +2111,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2126,7 +2126,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2141,7 +2141,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2156,7 +2156,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2171,7 +2171,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2186,7 +2186,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2201,7 +2201,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2216,7 +2216,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2231,7 +2231,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2246,7 +2246,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2261,7 +2261,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2276,7 +2276,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2291,7 +2291,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2306,7 +2306,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2321,7 +2321,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2336,7 +2336,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2351,7 +2351,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2366,7 +2366,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2381,7 +2381,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2396,7 +2396,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2411,7 +2411,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2426,7 +2426,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2441,7 +2441,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2456,7 +2456,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2471,7 +2471,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2486,7 +2486,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2501,7 +2501,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2516,7 +2516,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2531,7 +2531,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2546,7 +2546,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2561,7 +2561,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2576,7 +2576,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2591,7 +2591,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2606,7 +2606,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2621,7 +2621,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2636,7 +2636,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2651,7 +2651,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2666,7 +2666,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2681,7 +2681,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2696,7 +2696,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2711,7 +2711,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2726,7 +2726,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2741,7 +2741,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2756,7 +2756,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2771,7 +2771,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2786,7 +2786,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2801,7 +2801,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
@@ -2816,7 +2816,7 @@ public class Aw22Rule13062Test extends Aw22RuleImplementationTestCase {
 	//----------------------------------------------------------------------
         sourceCodeRemark = (SourceCodeRemark)sIter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2, sourceCodeRemark.getElementList().size());
