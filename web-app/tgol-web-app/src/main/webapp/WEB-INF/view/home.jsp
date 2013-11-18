@@ -122,21 +122,15 @@
                                 <c:set var="actionName">
                                     ${fn:replace(actionNameI18N, '<br/>', '')}
                                 </c:set>
-                                <c:set var="enableActionUrl">
-                                    ${fn:replace(contractAction.enabledActionImageUrl, '.png', '-s.png')}
-                                </c:set>
-                                <c:set var="disableActionUrl">
-                                    ${fn:replace(contractAction.disabledActionImageUrl, '.png', '-s.png')}
-                                </c:set>
                                 <c:choose>
                                     <c:when test="${not empty configProperties['cdnUrl']}">
                                         <c:choose>
                                             <c:when test="${contractAction.actionEnabled}">
-                                                <c:set var="contractActionImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}${enableActionUrl}"/>
+                                                <c:set var="contractActionImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}${contractAction.enabledActionImageUrl}"/>
                                                 <c:set var="disabledComplement" value=""/>
                                             </c:when>
                                             <c:otherwise>
-                                                <c:set var="contractActionImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}${disableActionUrl}"/>
+                                                <c:set var="contractActionImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}${contractAction.disabledActionImageUrl}"/>
                                                 <c:set var="disabledComplement">
                                                     <fmt:message key="contract.disabled"/>
                                                 </c:set>
@@ -147,13 +141,13 @@
                                         <c:choose>
                                             <c:when test="${contractAction.actionEnabled}">
                                                 <c:set var="contractActionImgUrl">
-                                                    <c:url value="${enableActionUrl}"/>
+                                                    <c:url value="${contractAction.enabledActionImageUrl}"/>
                                                 </c:set>
                                                 <c:set var="disabledComplement" value=""/>
                                             </c:when>
                                             <c:otherwise>
                                                 <c:set var="contractActionImgUrl">
-                                                    <c:url value="${disableActionUrl}"/>
+                                                    <c:url value="${contractAction.disabledActionImageUrl}"/>
                                                 </c:set>
                                                 <c:set var="disabledComplement">
                                                     <fmt:message key="contract.disabled"/>
