@@ -161,13 +161,15 @@ buildResultByThemeChart = function() {
             return d;
         })
         .enter().append("rect")
+        
         .attr("x", function(d) {
             return x(d.x);
         })
         .attr("y", height)
         .attr("width", x.rangeBand())
-        .attr("height", 0)
-        .attr("title", function(d) { 
+        .attr("height", 0);
+
+    rect.append("title").text(function(d) { 
             return columns[d.themeRank-1].label + " : " + d.y + " " + results[d.resultTypeRank];
         });
 
@@ -264,10 +266,11 @@ buildPieChart = function() {
         .style("fill", function(d, i) {
             return pieColor(i);
         })
-        .style("fill-opacity", 1)
-        .attr("title", function(d) { 
+        .style("fill-opacity", 1);    
+        
+    pieG.append("title").text(function(d) { 
             return d.data.label + " : " + d.value;
-        });    
+        });
 };
 
 buildScoreDonut = function() {

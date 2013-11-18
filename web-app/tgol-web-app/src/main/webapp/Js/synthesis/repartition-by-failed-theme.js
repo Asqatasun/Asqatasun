@@ -10,6 +10,7 @@ $(document).ready(function() {
         y, 
         xAxis, 
         yAxis, 
+        bars,
         svg;
         
     $("#top5-failed-theme tr:nth-child(1)").find("th").each(function(){
@@ -62,7 +63,7 @@ $(document).ready(function() {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    svg.selectAll(".bar")
+    bars = svg.selectAll(".bar")
         .data(data)
         .enter().append("rect")
         .attr("fill", "#ED4D60")
@@ -78,11 +79,11 @@ $(document).ready(function() {
         .attr("width", function(d) {
             return Math.abs(x(d) - x(0));
         })
-        .attr("height", y.rangeBand())
-        .attr("title", function(d, i) {
-            return thematics[i] + " : " + d;
-        });
+        .attr("height", y.rangeBand());
 
+    bars.append("title").text(function(d, i) {
+            return thematics[i] + " : " + d;
+    });
     svg.append("g")
         .attr("class", "repartition-chart-x-axis")
         .call(xAxis);

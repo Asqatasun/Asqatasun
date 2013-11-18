@@ -26,6 +26,7 @@ buildResultByThemeChart = function() {
         label, 
         text, 
         rule, 
+        rects,
         cause;
         
     $('#result-by-theme thead tr').find('th').each(function(d) 
@@ -186,7 +187,7 @@ buildResultByThemeChart = function() {
         .style("stroke", "none");
 
     // Add a rect for each date.
-    cause.selectAll("rect")
+    rects = cause.selectAll("rect")
         .data(Object)
         .enter().append("rect")
         .attr("x", function(d) {
@@ -200,11 +201,12 @@ buildResultByThemeChart = function() {
         })
         .attr("width", x.rangeBand())
         .attr("stroke", "none")
-        .attr("stroke-width", "0")
-        .attr("title", function(d, i, z) {
-            return columns[i].label+ " : " + d.y + " " +resultTypes[z];
-        }); 
+        .attr("stroke-width", "0");
         
+    rects.append("title").text(function(d, i, z) {
+            return columns[i].label+ " : " + d.y + " " +resultTypes[z];
+        });
+
     label.append("circle")
         .attr("r", 5)
         .attr("cx", function(d) { 
@@ -229,6 +231,7 @@ buildPieChart = function() {
         pieColor, 
         arc, 
         pie, 
+        arcs,
         pieSvg;
 
     $('#result-synthetized-text').find(".col02").each(function(d, i) 
@@ -266,7 +269,7 @@ buildPieChart = function() {
         .append("g")
         .attr("transform", "translate(" + (pieWidth/2 +pieMargins.left*2) +"," + (pieHeight/2)+ ")");
     
-    pieSvg.selectAll(".arc")
+    arcs = pieSvg.selectAll(".arc")
         .data(pie(pieData))
         .enter().append("path")
         .attr("class", "arc")
@@ -277,10 +280,11 @@ buildPieChart = function() {
         .attr("stroke-width", "0")
         .attr("stroke", function(d) {
             return pieColor(d.value);
-        })
-        .attr("title", function(d) { 
+        });
+        
+    arcs.append("title").text(function(d) { 
             return d.data.label + " : " + d.value;
-        });        
+        });
 
 };
 

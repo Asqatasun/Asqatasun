@@ -11,6 +11,7 @@ $(document).ready(function() {
         line, 
         label, 
         text,
+        dots,
         rule; 
 
     $("#act-list-table tbody tr").each(function (d, i) {
@@ -80,11 +81,10 @@ $(document).ready(function() {
         .attr("stroke", "#2CA4D2")
         .attr("fill", "none");
 
-    svg.selectAll(".dot")
+    dots = svg.selectAll(".dot")
         .data(data)
         .enter().append("circle")
         .attr("class", "ietrend-dot")
-        .attr("title", function(d) { return "Date : " + d.label +"\r" + "Score : " + d.value*100 + "%"+"\r"+"Ref :" + d.ref;})
         .attr("r", 4)
         .attr("cx", function(d,i) {
             return x(i);
@@ -94,6 +94,8 @@ $(document).ready(function() {
         .attr("stroke","#2CA4D2")
         .attr("stroke-width", "2px");
 
+    dots.append("title").text(function(d) { return "Date : " + d.label +"\r" + "Score : " + d.value*100 + "%"+"\r"+"Ref :" + d.ref;});
+    
     // Add the audit date as abscissa.
     label = svg.selectAll("g.xAxis")
         .data(data)

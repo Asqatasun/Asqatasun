@@ -10,6 +10,7 @@ $(document).ready(function() {
         yAxis, 
         area, 
         line, 
+        dots,
         svg;
 
     $("#act-list-table tbody tr").each(function (d, i) {
@@ -116,16 +117,17 @@ $(document).ready(function() {
         .attr("x1", 0)
         .attr("x2", 0);
 
-    svg.append("g").selectAll(".dot")
+    dots = svg.append("g").selectAll(".dot")
         .data(data)
         .enter().append("circle")
         .attr("class", "trend-dot")
-        .attr("title", function(d) { return "Date : " + d.label +"\r" + "Score : " + d.value*100 + "%"+"\r"+"Ref :" + d.ref;})
         .attr("r", 4)
         .attr("cx", function(d,i) {
             return x(i);
         })
         .attr("cy", function(d) { return y(d.value); });
         
+    dots.append("title").text(function(d) { return "Date : " + d.label +"\r" + "Score : " + d.value*100 + "%"+"\r"+"Ref :" + d.ref;});
+    
     d3.selectAll(".trend-x-axis text").attr("transform", "rotate(-50)").attr("y", "0").attr("x", "-3").style("text-anchor", "end");
 });
