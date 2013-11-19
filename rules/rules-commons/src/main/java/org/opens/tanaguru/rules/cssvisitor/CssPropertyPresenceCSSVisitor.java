@@ -40,7 +40,9 @@ public class CssPropertyPresenceCSSVisitor extends SimpleCssVisitor {
         this.cssPropertyList = cssPropertyList;
     }
 
-
+    /*
+     * Constructor
+     */
     public CssPropertyPresenceCSSVisitor(Collection<String> cssPropertyList) {
         super();
         this.cssPropertyList = cssPropertyList;

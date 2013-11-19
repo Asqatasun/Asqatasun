@@ -39,10 +39,18 @@ public class ForbiddenUnitChecker extends SimpleCssChecker {
 
     /**
      * 
-     * @param cssVisitor 
+     * Constructor
      */
     public ForbiddenUnitChecker () {
         setCssVisitor(new CheckUnitCSSVisitor());
+    }
+    
+    /**
+     * Constructor
+     * @param propertyName
+     */
+    public ForbiddenUnitChecker (String propertyName) {
+        setCssVisitor(new CheckUnitCSSVisitor(propertyName));
     }
     
     @Override

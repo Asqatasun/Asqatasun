@@ -75,6 +75,9 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
     /** state that determines if the current style has to be visited **/
     private boolean excludeStyle = false;
     
+    /** state that determines if the current property has to be visited **/
+    boolean excludeProperty = false;
+    
     private ICSSWriterSettings writterSetting = new CSSWriterSettings(ECSSVersion.CSS30);
 
     /** The testSolutionHandler **/
@@ -111,16 +114,25 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
         return globalSelectorCounter;
     }
 
-    private int effectiveSelectorCounter = 0;
-
+    int effectiveSelectorCounter = 0;
     public int getEffectiveSelectorCounter() {
         return effectiveSelectorCounter;
     }
     
+    boolean propertyTargetRule = false;
+            
     /**
      * Default constructor
      */
     public SimpleCssVisitor (){}
+    
+    /**
+     * Constructor
+     * @param propertyRuleTarget 
+     */
+    public SimpleCssVisitor (boolean propertyRuleTarget){
+        this.propertyTargetRule = propertyRuleTarget;
+    }
     
     /**
      * 
@@ -163,7 +175,9 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
         this.currentSelector = cssffr.getAsCSSString(writterSetting, 0);
         // if this style rule is not excluded from the media type, it is 
         // added to the counter
-        effectiveSelectorCounter++;
+        if (!propertyTargetRule) {
+            effectiveSelectorCounter++;
+        }
     }
 
     @Override
@@ -176,7 +190,9 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
         this.currentSelector = aSelector.getAsCSSString(writterSetting, 0);
         // if this style rule is not excluded from the media type, it is 
         // added to the counter
-        effectiveSelectorCounter++;
+        if (!propertyTargetRule) {
+            effectiveSelectorCounter++;
+        }
     }
 
     @Override
@@ -189,7 +205,9 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
         this.currentSelector = csspageRule.getAsCSSString(writterSetting, 0);
         // if this style rule is not excluded from the media type, it is 
         // added to the counter
-        effectiveSelectorCounter++;
+        if (!propertyTargetRule) {
+            effectiveSelectorCounter++;
+        }
     }
     
     @Override
@@ -198,10 +216,17 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
         if (excludeStyle) {
             return;
         }
-        checkCSSDeclarationMembers(aDeclaration.getExpression().getAllMembers());
+        
         checkCSSDeclarationProperty(aDeclaration.getProperty());
+        if (!excludeProperty) {
+            checkCSSDeclarationMembers(aDeclaration.getExpression().getAllMembers());
+            if (propertyTargetRule) {
+                effectiveSelectorCounter++;
+            }
+        }
+        excludeProperty = false;
     }
-
+    
     @Override
     public void onBeginMediaRule(final CSSMediaRule aMediaRule) {
         if (includeMediaList == null) {

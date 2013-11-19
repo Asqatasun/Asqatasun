@@ -20,7 +20,8 @@
 
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleCssImplementation;
+import org.opens.tanaguru.rules.csschecker.ForbiddenUnitChecker;
 
 /**
  * Implementation of the rule 10.4.2 of the referential Accessiweb 2.2.
@@ -31,13 +32,16 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * @author jkowalczyk
  */
 
-public class Aw22Rule10042 extends AbstractNotTestedRuleImplementation {
+public class Aw22Rule10042 extends AbstractPageRuleCssImplementation {
 
+    /* the font-size css property key */
+    private static final String FONT_SIZE_CSS_PROPERTY = "font-size";
+    
     /**
-     * Default constructor
+     * 
      */
-    public Aw22Rule10042 () {
-        super();
+    public Aw22Rule10042() {
+        super(new ForbiddenUnitChecker(FONT_SIZE_CSS_PROPERTY));
     }
 
 }

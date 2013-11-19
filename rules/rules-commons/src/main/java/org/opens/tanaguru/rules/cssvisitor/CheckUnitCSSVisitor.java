@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.BAD_UNIT_TYPE_MSG;
@@ -49,9 +50,23 @@ public class CheckUnitCSSVisitor extends SimpleCssVisitor {
         this.checkUnitList = getECSSUnitListFromLexicalUnitBlackList(unitList);
     }
 
-
+    /* the property name to visit. If null, all properties are visited.*/
+    private String propertyName;
+    
+    /**
+     * Constructor
+     */
     public CheckUnitCSSVisitor() {
         super();
+    }
+    
+    /**
+     * Constructor
+     * @param propertyName 
+     */
+    public CheckUnitCSSVisitor(String propertyName) {
+        super(true); /*for counter purpose*/
+        this.propertyName = propertyName;
     }
 
     @Override
@@ -121,7 +136,14 @@ public class CheckUnitCSSVisitor extends SimpleCssVisitor {
 
     @Override
     protected void checkCSSDeclarationProperty(String property) {
-//        throw new UnsupportedOperationException("Not supported yet.");
+        if (StringUtils.isBlank(propertyName)) {
+            return;
+        }
+        if (StringUtils.equalsIgnoreCase(propertyName, property)) {
+            excludeProperty = false;
+        } else {
+            excludeProperty = true;
+        }
     }
 
 }
