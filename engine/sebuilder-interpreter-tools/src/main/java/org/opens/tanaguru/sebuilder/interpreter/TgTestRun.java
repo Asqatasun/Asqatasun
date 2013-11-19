@@ -34,7 +34,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.text.html.HTML;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.openqa.selenium.*;
@@ -246,9 +249,20 @@ public class TgTestRun extends TestRun {
                 throw new TestRunException(currentStep() + " failed.", ex, currentStep().toString(), stepIndex);
             }
             String sourceCode = getDriver().getPageSource();
-
+            
+            /* ##############################################################
+             * ACHTUNG !!!!!!!!!!!!!!!!!!!!!!!!!!
+             * this sendKeys action is here to grad the focus on the page.
+             * It is needed later by the js script to execute the focus()
+             * method on each element. Without the focus is kept by the adress
+             * bar.
+             */
+            WebElement body = getDriver().findElementByTagName("html");
+            body.sendKeys(Keys.TAB);
+            /*##############################################################*/
+            
             Map<String, String> jsScriptResult = executeJsScripts();
-    //        byte[] snapshot = createPageSnapshot();
+            /* byte[] snapshot = createPageSnapshot();*/
             for (NewPageListener npl : newPageListeners) {
                 npl.fireNewPage(url, sourceCode, null, jsScriptResult);
             }

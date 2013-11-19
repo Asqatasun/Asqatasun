@@ -47,6 +47,16 @@ function buildPath (elem, parentPath, index) {
 }
 
 /*
+ * Replace comma in color string.
+ */
+function formatColor(color) {
+    while (color.indexOf(',') > -1) {
+        color = color.replace(',',';');
+    }
+    return color;
+}
+
+/*
  * compute the background color of a node
  */
 function getBackgroundColor(elem){
@@ -58,10 +68,7 @@ function getBackgroundColor(elem){
         return "background-image:"+bgImg;
     }
     var bgColor = getStyle(elem,'background-color');
-    while (bgColor.indexOf(',') > -1) {
-        bgColor = bgColor.replace(',',';');
-    }
-    return bgColor;
+    return formatColor(bgColor);
 }
 
 /*
@@ -69,10 +76,7 @@ function getBackgroundColor(elem){
  */
 function getForegroundColor(elem){
     var color = getStyle(elem,'color');
-    while (color.indexOf(',') > -1) {	
-        color = color.replace(',',';');
-    }
-    return color;
+    return formatColor(color);;
 }
 
 /*
@@ -91,12 +95,12 @@ function isHidden(elem) {
 /*
  * get the computed style of an element
  */
-function getStyle(elem, strCssRule){
+function getStyle(elem, strCssRule, pseudoSelector){
     var style = "";
     if (elem.currentStyle) {
 	style = elem.currentStyle[strCssRule];
     } else if (window.getComputedStyle) {
-        style = document.defaultView.getComputedStyle(elem, null).
+        style = document.defaultView.getComputedStyle(elem, pseudoSelector).
             getPropertyValue(strCssRule);
     }
     return style;
@@ -156,7 +160,7 @@ function isAllowedElement(elem) {
  */
 function extractInfo (elem, parentFgColor, parentBgColor, result, parentPath, elemIndex) {
     if (isAllowedElement(elem)) {
-        var path, element={}, bgColor, color, children;
+        var path, element={}, bgColor, color, children, focus;
         bgColor = getBackgroundColor(elem);
         if (bgColor == 'transparent' && parentBgColor != null) {
             bgColor = parentBgColor;
@@ -176,6 +180,16 @@ function extractInfo (elem, parentFgColor, parentBgColor, result, parentPath, el
         element.fontSize =  getStyle(elem,'font-size');
         element.fontWeight = getStyle(elem,'font-weight');
         element.isTextNode = isTextNode(elem);
+        elem.focus();
+        focus = document.activeElement;
+        if (elem === focus) {
+            element.isFocusable = true;
+            element.outlineColorFocus = '\"'+formatColor(getStyle(elem,'outline-color', 'focus'))+'\"';
+            element.outlineStyleFocus = '\"'+getStyle(elem,'outline-style', 'focus')+'\"';
+            element.outlineWidthFocus = getStyle(elem,'outline-width', 'focus');
+        } else {
+            element.isFocusable = false;
+        }
         result.push(element);
 
         children = elem.children;
