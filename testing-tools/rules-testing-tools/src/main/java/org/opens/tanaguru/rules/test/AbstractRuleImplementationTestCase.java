@@ -81,7 +81,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     public ConsolidatorService getConsolidatorService() {
         return consolidatorService;
     }
-
+    
     private AuditFactory auditFactory;
     private URLIdentifier urlIdentifier;
     private Map<WebResource, List<Content>> contentMap = new HashMap<WebResource, List<Content>>();
@@ -262,6 +262,9 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         associateParameterToSSP();
     }
 
+    /**
+     * 
+     */
     private void setUpClass() {
         Test test = testFactory.create();
         test.setCode(this.getName());

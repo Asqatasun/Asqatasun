@@ -21,13 +21,14 @@
  */
 package org.opens.tanaguru.rules.test;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import javax.persistence.NoResultException;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.PreProcessResult;
-import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.service.audit.PreProcessResultDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
@@ -39,13 +40,18 @@ import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
  */
 public class PreProcessResultDataServiceMock implements PreProcessResultDataService{
 
-    private int i=0;
-    private Map<Long, RelatedContent> relatedContentMap = new HashMap<Long, RelatedContent>();
-
     @Override
     public String getPreProcessResultByKeyAndWebResource(String key, WebResource webresource) {
-        throw new NoResultException();
-//        return "[{\"isHidden\"=false, \"color\"=\"rgb(0, 0, 0)\", \"path\"=\"#kba-release\", \"fontSize\"=\"13px\", \"fontWeight\"=\"normal\", \"luminosity\"=\"8.15\", \"bgcolor\"=\"rgb(255, 124, 30)\"}, {\"isHidden\"=false, \"fontWeight\"=\"normal\", \"color\"=\"rgb(0, 0, 0)\", \"path\"=\"#identification > form:nth-of-type(1) > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(1) > td:nth-of-type(1)\", \"fontSize\"=\"11.05px\", \"luminosity\"=\"20.43\", \"bgcolor\"=\"rgb(255, 255, 204)\"}, {\"isHidden\"=false, \"color\"=\"rgb(0, 0, 238)\", \"path\"=\"#identification > form:nth-of-type(1) > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(1) > td:nth-of-type(1) > a:nth-of-type(1)\", \"fontSize\"=\"11.05px\", \"luminosity\"=9.14, \"fontWeight\"=\"normal\", \"bgcolor\"=\"rgb(255, 255, 204)\"}, {\"isHidden\"=\"false\", \"color\"=\"rgb(0, 0, 0)\", \"path\"=\"#identification > form:nth-of-type(1) > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(2) > td:nth-of-type(1) > label:nth-of-type(1)\", \"fontWeight\"=\"normal\", \"fontSize\"=\"11.05px\", \"luminosity\"=\"20.43\", \"bgcolor\"=\"rgb(255, 255, 204)\"}]";
+        String path = StringUtils.replace(webresource.getURL(), "html", "json");
+        path = StringUtils.replace(path, "file:", "");
+        try {
+            String json = FileUtils.readFileToString(new File(path));
+            System.out.println(json);
+            return json;
+        } catch (IOException ex) {
+            System.out.println(ex);
+            throw new NoResultException();
+        }
     }
 
     @Override
@@ -122,6 +128,5 @@ public class PreProcessResultDataServiceMock implements PreProcessResultDataServ
     public PreProcessResult update(PreProcessResult entity) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
     
 }
