@@ -252,9 +252,9 @@ public class TgTestRun extends TestRun {
             
             /* ##############################################################
              * ACHTUNG !!!!!!!!!!!!!!!!!!!!!!!!!!
-             * this sendKeys action is here to grad the focus on the page.
+             * this sendKeys action is here to grab the focus on the page.
              * It is needed later by the js script to execute the focus()
-             * method on each element. Without the focus is kept by the adress
+             * method on each element. Without it, the focus is kept by the adress
              * bar.
              */
             WebElement body = getDriver().findElementByTagName("html");
