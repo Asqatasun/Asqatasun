@@ -180,6 +180,7 @@
                                     <div class="set-up-value input">
                                         <form:select id="${i18nKey}" path="level" cssErrorClass="xlarge error" cssClass="xlarge">
                                             <c:forEach items="${level.selectElementMap}" var="group">
+                                                <c:if test="${group.value[0].enabled}">
                                                 <optgroup label="<spring:message code="${group.key}-optgroup"/>">
                                                     <c:forEach items="${group.value}" var="level">
                                                     <c:choose>
@@ -190,17 +191,10 @@
                                                             <c:set var="selected" scope="page" value=""/>
                                                         </c:otherwise>
                                                     </c:choose>
-                                                    <c:choose>
-                                                        <c:when test="${level.enabled == 'false'}">
-                                                            <c:set var="disabled" scope="page" value="disabled=\"disabled\""/>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <c:set var="disabled" scope="page" value=""/>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                    <option value="${level.value}" ${selected} ${disabled}><spring:message code="${level.i18nKey}"/> (<spring:message code="${group.key}-optgroup"/>)</option>
+                                                    <option value="${level.value}" ${selected}><spring:message code="${level.i18nKey}"/> (<spring:message code="${group.key}-optgroup"/>)</option>
                                                     </c:forEach><!-- for each element of a referentiel -->
                                                 </optgroup>
+                                                </c:if>
                                             </c:forEach>
                                         </form:select>
                                         <form:errors path="level" cssClass="alert-message error" /><br/>
