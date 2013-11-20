@@ -21,10 +21,10 @@
  */
 package org.opens.tgol.form.builder;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import org.opens.tgol.form.SelectElement;
 import org.opens.tgol.form.SelectFormField;
 import org.opens.tgol.form.SelectFormFieldImpl;
@@ -60,7 +60,7 @@ public class SelectFormFieldBuilderImpl extends FormFieldBuilderImpl
 
     @Override
     public Map<String, List<SelectElement>> getSelectElementMap() {
-        Map<String, List<SelectElement>> selectElementMap = new HashMap<String, List<SelectElement>>();
+        Map<String, List<SelectElement>> selectElementMap = new TreeMap<String, List<SelectElement>>();
         for (Map.Entry<String, List<SelectElementBuilder>> entry : selectElementBuilderMap.entrySet()) {
             List<SelectElement> selectElementList = new LinkedList<SelectElement>();
             for (SelectElementBuilder seb : entry.getValue()) {
