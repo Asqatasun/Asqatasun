@@ -136,7 +136,7 @@ public class ElementPresenceCheckerTest extends TestCase{
         TestSolutionHandler testSolutionHandler = new TestSolutionHandlerImpl();
         
         ElementPresenceChecker instance = 
-                new ElementPresenceChecker(true,"detected", "notDetected");
+                new ElementPresenceChecker(true,"detected", "notDetected", null);
         
         instance.check(mockSspHandler, elementHandler, testSolutionHandler);
 
@@ -165,7 +165,7 @@ public class ElementPresenceCheckerTest extends TestCase{
         TestSolutionHandler testSolutionHandler = new TestSolutionHandlerImpl();
         
         ElementPresenceChecker instance = 
-                new ElementPresenceChecker(true,"detected", "notDetected");
+                new ElementPresenceChecker(true,"detected", "notDetected", null);
         
         instance.check(mockSspHandler, elementHandler, testSolutionHandler);
 
@@ -199,7 +199,8 @@ public class ElementPresenceCheckerTest extends TestCase{
                     TestSolution.NEED_MORE_INFO,
                     TestSolution.NOT_APPLICABLE,
                     "detected", 
-                    "notDetected");
+                    "notDetected", 
+                    null);
         
         instance.check(mockSspHandler, elementHandler, testSolutionHandler);
 
