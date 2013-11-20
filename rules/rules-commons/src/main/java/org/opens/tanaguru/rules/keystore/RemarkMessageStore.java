@@ -253,8 +253,10 @@ public final class RemarkMessageStore {
 
     // presentation of information
     public static final String HIDDEN_TEXT_DETECTED_MSG = "HiddenTextDetected";
-    public static final String REMOVED_OUTLINE_MSG = "RemovedOutline";
-    public static final String DEGRADED_OUTLINE_MSG = "DegradedOutline";
+    public static final String INVISIBLE_OUTLINE_ON_FOCUS_MSG = 
+            "InvisibleOutlineOnFocus";
+    public static final String CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG = 
+            "CheckManuallyOutlineForFormElementAndIframe";
     
     // css
     public static final String BAD_UNIT_TYPE_MSG = "BadUnitType";
@@ -270,6 +272,12 @@ public final class RemarkMessageStore {
     public static final String CHECK_CONTRAST_OF_IMAGE_MSG =
             "CheckTheContrastOfImagesWithText";
     
+    // seo 
+    public static final String META_DESC_MISSING_MSG =
+            "MetaDescriptionTagMissing";
+    public static final String MORE_THAN_ONE_META_DESC_MSG_CODE = 
+            "MoreThanOneMetaDescriptionTag";
+        
     /**
      * Private constructor. This class handles keys and must not be instantiated
      */
