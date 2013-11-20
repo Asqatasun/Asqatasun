@@ -488,7 +488,8 @@ public final class TestResultFactory {
                 elementMap.put(
                         evidenceElement.getEvidence().getCode(),
                         evidenceElement.getValue());
-            } else if (StringUtils.isNotBlank(((SourceCodeRemark)remark).getTarget())) {
+            } else if (remark instanceof SourceCodeRemark && 
+                    StringUtils.isNotBlank(((SourceCodeRemark)remark).getTarget())) {
                 elementMap.put(TestResult.TAG_KEY, ((SourceCodeRemark)remark).getTarget());
             }
         }
