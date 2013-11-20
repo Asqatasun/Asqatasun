@@ -50,7 +50,8 @@ public class Rgaa22Rule09061 extends AbstractPageRuleWithSelectorAndCheckerImple
                     TestSolution.PASSED, 
                     TestSolution.FAILED, 
                     null, 
-                    TITLE_TAG_MISSING_MSG
+                    TITLE_TAG_MISSING_MSG,
+                    null
             );
     
     /**
