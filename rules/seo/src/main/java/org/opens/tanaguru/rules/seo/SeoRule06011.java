@@ -44,7 +44,8 @@ public class SeoRule06011 extends AbstractPageRuleWithSelectorAndCheckerImplemen
                     TestSolution.PASSED, 
                     TestSolution.FAILED, 
                     null, 
-                    TITLE_TAG_MISSING_MSG)
+                    TITLE_TAG_MISSING_MSG, 
+                    null)
             );
     }
 }

@@ -220,6 +220,10 @@ public final class CssLikeQueryStore {
                     IMAGE_LINK_CHILDREN_CSS_LIKE_QUERY
                    + "embed[type^=image]" 
                    + "input[type^=image]"; 
+    
+    // Seo 
+    public static final String META_DESC_CSS_LIKE_QUERY = 
+                    "head meta[name=description][content]";
     /**
      * Private constructor. This class handles keys and must not be instanciated
      */

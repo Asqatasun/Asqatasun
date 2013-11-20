@@ -12,9 +12,11 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import org.opens.tanaguru.entity.audit.ProcessRemark;
-import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.TestSolution;
+import java.util.Iterator;
+import org.opens.tanaguru.entity.audit.*;
+import org.opens.tanaguru.rules.keystore.AttributeStore;
+import org.opens.tanaguru.rules.keystore.HtmlElementStore;
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 import org.opens.tanaguru.rules.seo.test.SeoRuleImplementationTestCase;
 
 /**
@@ -53,30 +55,77 @@ public class SeoRule01011Test extends SeoRuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
-        ProcessResult processResult =
-                processPageTest("Seo.Test.1.1.1-1Passed-01");
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-01------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult = processPageTest("Seo.Test.1.1.1-1Passed-01");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
         assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check number of remarks and their value
         assertNull(processResult.getRemarkSet());
-
-        processResult = processPageTest("Seo.Test.1.1.1-1Passed-02");
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-
-        processResult = processPageTest("Seo.Test.1.1.1-2Failed-01");
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-
-        assertEquals(1,processResult.getRemarkSet().size());
         
-        assertEquals(SeoRule01011.ERROR_MESSAGE_CODE,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
-        processResult = processPageTest("Seo.Test.1.1.1-2Failed-02");
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-01------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Seo.Test.1.1.1-1Passed-02");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-01------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Seo.Test.1.1.1-2Failed-01");
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
+        // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
-        assertEquals(2,processResult.getRemarkSet().size());
-        assertEquals(SeoRule01011.MORE_THAN_ONE_META_DESC_MSG_CODE,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(SeoRule01011.MORE_THAN_ONE_META_DESC_MSG_CODE,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        ProcessRemark processRemark = processResult.getRemarkSet().iterator().next();
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals("MetaDescriptionTagMissing", processRemark.getMessageCode());
+        // check number of evidence elements and their value
+        assertNull(processRemark.getElementList());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-02------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Seo.Test.1.1.1-2Failed-02");
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(2, processResult.getRemarkSet().size());
+        Iterator<ProcessRemark> iter = processResult.getRemarkSet().iterator();
+        SourceCodeRemark sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.MORE_THAN_ONE_META_DESC_MSG_CODE, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.META_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(1,sourceCodeRemark.getElementList().size());
+        EvidenceElement ee = sourceCodeRemark.getElementList().iterator().next();
+        assertEquals("Seo10 Test.1.1.1 Failed 02 unit test1", ee.getValue());
+        assertEquals(AttributeStore.CONTENT_ATTR, ee.getEvidence().getCode());
+        
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.MORE_THAN_ONE_META_DESC_MSG_CODE, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.META_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(1,sourceCodeRemark.getElementList().size());
+        ee = sourceCodeRemark.getElementList().iterator().next();
+        assertEquals("Seo10 Test.1.1.1 Failed 02 unit test2", ee.getValue());
+        assertEquals(AttributeStore.CONTENT_ATTR, ee.getEvidence().getCode());
     }
 
     @Override

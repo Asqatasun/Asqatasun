@@ -20,31 +20,67 @@
 package org.opens.tanaguru.rules.seo;
 
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.rules.seo.detection.AbstractTagDetectionPageRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import org.opens.tanaguru.rules.keystore.AttributeStore;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.META_DESC_CSS_LIKE_QUERY;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.META_DESC_MISSING_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MORE_THAN_ONE_META_DESC_MSG_CODE;
 
 /**
  * Test whether a meta description tag is present on the page
  * 
  * @author jkowalczyk
  */
-public class SeoRule01011 extends AbstractTagDetectionPageRuleImplementation {
+public class SeoRule01011 
+//extends AbstractTagDetectionPageRuleImplementation {
+//
+//    public static final String ERROR_MESSAGE_CODE = "MetaDescriptionTagMissing";
+//    private static final String TAG_DETECTION_CSS_EXPR =
+//            "head meta[name=description][content]";
+//    public static final String META_DESC_EVIDENCE_NAME = "MetaDescription";
+//    public static final String MORE_THAN_ONE_META_DESC_MSG_CODE = "MoreThanOneMetaDescriptionTag";
+//
+//    public SeoRule01011() {
+//        super();
+//        setMessageCode(ERROR_MESSAGE_CODE);
+//        setSelectionExpression(TAG_DETECTION_CSS_EXPR);
+//        setDetectedSolution(TestSolution.PASSED);
+//        setNotDetectedSolution(TestSolution.FAILED);
+//        setIsRemarkCreatedOnDetection(false);
+//        setHasElementToBeUnique(true);
+//        setNotUniqueMessage(MORE_THAN_ONE_META_DESC_MSG_CODE);
+//        setNotUniqueEvidenceElement(META_DESC_EVIDENCE_NAME);
+//    }
+//
+//}
 
-    public static final String ERROR_MESSAGE_CODE = "MetaDescriptionTagMissing";
-    private static final String TAG_DETECTION_CSS_EXPR =
-            "head meta[name=description][content]";
-    public static final String META_DESC_EVIDENCE_NAME = "MetaDescription";
-    public static final String MORE_THAN_ONE_META_DESC_MSG_CODE = "MoreThanOneMetaDescriptionTag";
-
-    public SeoRule01011() {
-        super();
-        setMessageCode(ERROR_MESSAGE_CODE);
-        setSelectionExpression(TAG_DETECTION_CSS_EXPR);
-        setDetectedSolution(TestSolution.PASSED);
-        setNotDetectedSolution(TestSolution.FAILED);
-        setIsRemarkCreatedOnDetection(false);
-        setHasElementToBeUnique(true);
-        setNotUniqueMessage(MORE_THAN_ONE_META_DESC_MSG_CODE);
-        setNotUniqueEvidenceElement(META_DESC_EVIDENCE_NAME);
+extends AbstractPageRuleWithSelectorAndCheckerImplementation {
+    
+    /**
+     * Default constructor
+     */
+    public SeoRule01011(){
+        super(
+                new SimpleElementSelector(META_DESC_CSS_LIKE_QUERY), 
+                
+                new ElementPresenceChecker(
+                    // check element has to be unique
+                    true,
+                    // solution when detected
+                    TestSolution.PASSED,
+                    // solution when not detected
+                    TestSolution.FAILED,
+                    // no message on detection
+                    null,
+                    // message when not detected
+                    META_DESC_MISSING_MSG, 
+                    // message when multiple elements detected
+                    MORE_THAN_ONE_META_DESC_MSG_CODE, 
+                    // evidence elements
+                    AttributeStore.CONTENT_ATTR)
+            );
     }
-
 }
