@@ -9,8 +9,9 @@
             </c:set>    
         </c:if>
         <footer>
+            <jsp:useBean id="now" class="java.util.Date" scope="page" />
             <div id="footer-down">
-                &copy; 2009-2012 <a href="http://www.Open-S.com/">Open-S</a> - <fmt:message key="footer.poweredBy"/> <a href="http://www.tanaguru.org/">Tanaguru v${tanaguruVersion}</a> - <fmt:message key="footer.availableUnder"/> <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU AGPL v3</a>
+                &copy; 2009-<fmt:formatDate value="${now}" pattern="yyyy" /> <a href="http://www.Open-S.com/">Open-S</a> - <fmt:message key="footer.poweredBy"/> <a href="http://www.tanaguru.org/">Tanaguru v${tanaguruVersion}</a> - <fmt:message key="footer.availableUnder"/> <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU AGPL v3</a>
             </div>
         </footer>
         <c:if test="${not empty configProperties['google-analytics-code']}">
