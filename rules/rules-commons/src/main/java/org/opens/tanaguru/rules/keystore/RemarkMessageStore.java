@@ -245,16 +245,17 @@ public final class RemarkMessageStore {
     public static final String NOT_PERTINENT_HEADING_MSG = "NotPertinentHeading";
     public static final String CHECK_HEADING_PERTINENCE_MSG = 
             "CheckHeadingPertinence";
-    
-    // structuration of information
     public static final String PRESENTATION_TAG_DETECTED_MSG =
             "PresentationTagFound";
     public static final String PRESENTATION_ATTR_DETECTED_MSG =
             "PresentationAttrFound";
-    
-    // structuration of information
     public static final String DETECTED_TAG_MSG = "DetectedTag";
 
+    // presentation of information
+    public static final String HIDDEN_TEXT_DETECTED_MSG = "HiddenTextDetected";
+    public static final String REMOVED_OUTLINE_MSG = "RemovedOutline";
+    public static final String DEGRADED_OUTLINE_MSG = "DegradedOutline";
+    
     // css
     public static final String BAD_UNIT_TYPE_MSG = "BadUnitType";
     

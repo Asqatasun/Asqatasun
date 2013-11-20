@@ -2,12 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Aw22 Test.10.13.1 NMI 01</title>
+        <title>Aw22 Test.10.13.1 NMI 14</title>
+        <link rel="stylesheet" href="css/AW22.Test.10.13.1-3NMI-14.css" type="text/css"/>
     </head>
     <body>
         <div>
 
-            <h1>Aw22 Test.10.13.1 NMI 01</h1>
+            <h1>Aw22 Test.10.13.1 NMI 14</h1>
 
             <div class="test-detail">
                 On each Web page, does each hidden text (display:none or visibility:hidden property) pass one of the conditions below? 
@@ -18,11 +19,11 @@
             </div>
 
             <div class="testcase">
-                <span style="display : none;">Some hidden text</span>
+                <span id="hidden-text">Some hidden text</span>
             </div>
 
             <div class="test-explanation">
-                NMI : Some text is hidden by inline style
+                NMI : Some text is hidden by external style through an id selector
             </div>
         </div>
     </body>

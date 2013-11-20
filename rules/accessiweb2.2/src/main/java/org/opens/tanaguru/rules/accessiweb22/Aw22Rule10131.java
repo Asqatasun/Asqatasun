@@ -20,7 +20,16 @@
 
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import java.util.Collection;
+import org.jsoup.nodes.Element;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.processor.SSPHandler;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleFromPreProcessImplementation;
+import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.rules.domelement.DomElement;
+import org.opens.tanaguru.rules.domelement.extractor.DomElementExtractor;
+import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.HIDDEN_TEXT_DETECTED_MSG;
 
 /**
  * Implementation of the rule 10.13.1 of the referential Accessiweb 2.2.
@@ -30,14 +39,35 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  *
  * @author jkowalczyk
  */
-
-public class Aw22Rule10131 extends AbstractNotTestedRuleImplementation {
+public class Aw22Rule10131 extends AbstractPageRuleFromPreProcessImplementation {
 
     /**
      * Default constructor
      */
     public Aw22Rule10131 () {
-        super();
+        super(new ElementPresenceChecker(
+                    // if some elements are found
+                    TestSolution.NEED_MORE_INFO, 
+                    // if no found element
+                    TestSolution.NOT_APPLICABLE, 
+                    // message for each detected element
+                    HIDDEN_TEXT_DETECTED_MSG,
+                    null));
     }
+
+    @Override
+    protected void doSelect(
+            Collection<DomElement> domElements, 
+            SSPHandler sspHandler, 
+            ElementHandler elementHandler) {
+        for (DomElement element : domElements) {
+            if (element.isHidden() && element.isTextNode()) {
+                Element el = DomElementExtractor.getElementFromDomElement(element, sspHandler);
+                if (el != null) {
+                    elementHandler.add(el);
+                }
+            }
+        }
+    }   
 
 }
