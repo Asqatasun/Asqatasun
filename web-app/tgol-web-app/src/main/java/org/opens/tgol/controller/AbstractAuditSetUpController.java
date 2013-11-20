@@ -52,7 +52,7 @@ import org.springframework.validation.BindingResult;
 @Controller
 public abstract class AbstractAuditSetUpController extends AuditDataHandlerController{
 
-    private String defaultReferential = "AW21";
+    private String defaultReferential = "AW22";
     public String getDefaultReferential() {
         return defaultReferential;
     }
