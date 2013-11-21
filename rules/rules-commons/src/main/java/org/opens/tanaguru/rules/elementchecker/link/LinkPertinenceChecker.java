@@ -23,6 +23,7 @@
 package org.opens.tanaguru.rules.elementchecker.link;
 
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.rules.elementchecker.ElementChecker;
 import org.opens.tanaguru.rules.elementchecker.pertinence.TextPertinenceChecker;
 import org.opens.tanaguru.rules.textbuilder.LinkTextElementBuilder;
 import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
@@ -47,7 +48,7 @@ public class LinkPertinenceChecker extends TextPertinenceChecker {
         }
         return linkTextElementBuilder;
     }
-    
+
     /**
      * Constructor.
      * Returns FAILED when the attribute is not pertinent.
@@ -63,6 +64,7 @@ public class LinkPertinenceChecker extends TextPertinenceChecker {
               LINK_TEXT_BL_NOM_NAME,
               notPertinentMessageCode,
               manualCheckMessage);
+        setLinkTextElementBuilderToCheckers();
     }
     
     /**
@@ -83,6 +85,7 @@ public class LinkPertinenceChecker extends TextPertinenceChecker {
               notPertinentMessageCode,
               manualCheckMessage, 
               eeAttributeNameList);
+        setLinkTextElementBuilderToCheckers();
     }
     
     /**
@@ -106,6 +109,17 @@ public class LinkPertinenceChecker extends TextPertinenceChecker {
               notPertinentMessageCode,
               manualCheckMessage, 
               eeAttributeNameList);
+        setLinkTextElementBuilderToCheckers();
+    }
+
+    /**
+     * Needed to use the appropriate textBuilder when creating a EvidenceElement
+     * of type TEXT.
+     */
+    private void setLinkTextElementBuilderToCheckers() {
+        for (ElementChecker ec : getCheckers()) {
+            ec.setTextElementBuilder(getTextElementBuilder());
+        }
     }
 
 }

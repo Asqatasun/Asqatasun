@@ -46,6 +46,9 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
      * This collection is of LinkedList type to maintain an order.
      */
     private Collection<ElementChecker> checkers = new LinkedList<ElementChecker>();
+    public Collection<ElementChecker> getCheckers() {
+        return checkers;
+    }
     public void addChecker(ElementChecker elementChecker) {
         checkers.add(elementChecker);
     }
