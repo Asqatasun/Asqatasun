@@ -228,10 +228,10 @@ public class ContrastChecker extends ElementCheckerImpl {
 
         Element element = DomElementExtractor.getElementFromDomElement(domElement, sspHandler);
         if (element != null) {
-            Collection<EvidenceElement> eeList = new ArrayList<EvidenceElement>();
-            eeList.add(getEvidenceElement(CONTRAST_EE, contrast));
+            Collection<EvidenceElement> eeList = new LinkedList<EvidenceElement>();
             eeList.add(getEvidenceElement(FG_COLOR_EE, domElement.getFgColor()));
             eeList.add(getEvidenceElement(BG_COLOR_EE, domElement.getBgColor()));
+            eeList.add(getEvidenceElement(CONTRAST_EE, contrast));
             addSourceCodeRemark(
                     testSolution, 
                     element, 
