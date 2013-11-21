@@ -2,12 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Aw22 Test.3.3.1 NMI 01</title>
+        <title>Aw22 Test.3.3.1 Failed 05</title>
+        <style type="text/css">
+            .testcase {
+                background-color: #DFF0D8;
+                color: #468847;
+            }
+        </style>
     </head>
     <body>
         <div>
 
-            <h1>Aw22 Test.3.3.1 NMI 01</h1>
+            <h1>Aw22 Test.3.3.1 Failed 05</h1>
 
             <div class="test-detail">
                 On each Web page, <strong>until 150%</strong> of the default font size (or 1.5em), do text and image of text without bolding pass one of the conditions below (except in special cases)?
@@ -21,14 +27,12 @@
                 <span>
                     Some text with correct contrast
                 </span>
-                <img alt="" src="my-image.jpg"/>
             </div>
 
             <div class="test-explanation">
-                NMI : The text is displayed with the default background (white) and 
-                foreground (black) colors which are conform in terms of contrast.
-                The page contains a image that can have some contrast problems
-                and needs to be manually checked.
+                Failed : The text is displayed with a background color 
+                set to #DFF0D8 and foreground set to #468847 which is incorrect in terms of contrast
+                for a 4.5 ratio (very close to 4.5)
             </div>
         </div>
     </body>
