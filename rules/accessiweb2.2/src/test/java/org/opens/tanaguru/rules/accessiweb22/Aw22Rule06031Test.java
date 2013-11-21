@@ -21,10 +21,11 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.opens.tanaguru.entity.audit.ProcessRemark;
-import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.TestSolution;
+import java.util.Iterator;
+import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
+import org.opens.tanaguru.rules.keystore.AttributeStore;
+import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
@@ -285,171 +286,534 @@ public class Aw22Rule06031Test extends Aw22RuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
-        ProcessResult processResult =
-                processPageTest("AW22.Test.06.03.01-2Failed-01");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-01------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult = processPageTest("AW22.Test.06.03.01-2Failed-01");
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
         assertEquals(2, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.FAILED,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-        assertEquals(TestSolution.FAILED,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
+        Iterator<ProcessRemark> iter = processResult.getRemarkSet().iterator();
+        SourceCodeRemark sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        Iterator<EvidenceElement> eIter = sourceCodeRemark.getElementList().iterator();
+        EvidenceElement ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("or whatever", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-02------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.06.03.01-2Failed-02");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
         assertEquals(2, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.FAILED,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-        assertEquals(TestSolution.FAILED,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-03------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.06.03.01-2Failed-03");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.FAILED,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-04------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.06.03.01-2Failed-04");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
         assertEquals(2, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.FAILED,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-        assertEquals(TestSolution.FAILED,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-05------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.06.03.01-2Failed-05");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.FAILED,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-06------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.06.03.01-2Failed-06");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.FAILED,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-07------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.06.03.01-2Failed-07");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.FAILED,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("whatever the title", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-08------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.06.03.01-2Failed-08");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
         assertEquals(2, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.FAILED,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-        assertEquals(TestSolution.FAILED,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-01---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.06.03.01-3NMI-01");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
         assertEquals(2, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("Unpredictable content", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("Title is different", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("Unpredictable content", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-02---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.06.03.01-3NMI-02");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
         assertEquals(2, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("unpredictable content", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("unpredictable content", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-03---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.06.03.01-3NMI-03");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("unpredictable content", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-04---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.06.03.01-3NMI-04");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
         assertEquals(2, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("unpredictable content", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("unpredictable content", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-05---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.06.03.01-3NMI-05");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("This is a link", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-06---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.06.03.01-3NMI-06");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("This is a link", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("This is a link and more", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-07---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.06.03.01-3NMI-07");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("This is a link", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
         
+        
+        //----------------------------------------------------------------------
+        //------------------------------4NA-01---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.06.03.01-4NA-01");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
         assertNull(processResult.getRemarkSet());
         
+        
+        //----------------------------------------------------------------------
+        //------------------------------4NA-02---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.06.03.01-4NA-02");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
         assertNull(processResult.getRemarkSet());
         
+        
+        //----------------------------------------------------------------------
+        //------------------------------4NA-03---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.06.03.01-4NA-03");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
         assertNull(processResult.getRemarkSet());
         
+        
+        //----------------------------------------------------------------------
+        //------------------------------4NA-04---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.06.03.01-4NA-04");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
         assertNull(processResult.getRemarkSet());
 
+        
         // 06.03.02 testcases : All is Not Applicable
         processResult = processPageTest("AW22.Test.06.03.02-2Failed-01");
         assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
