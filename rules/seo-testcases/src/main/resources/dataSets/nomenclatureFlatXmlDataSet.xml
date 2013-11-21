@@ -286,5 +286,7 @@
     <EVIDENCE Id_Evidence="13" Cd_Evidence="First-H-Tag-Index" Description="NULL" Long_Label="NULL" />
     <EVIDENCE Id_Evidence="14" Cd_Evidence="Snippet" Description="NULL" Long_Label="NULL" />
     <EVIDENCE Id_Evidence="15" Cd_Evidence="content" Description="NULL" Long_Label="NULL" />
+    <EVIDENCE Id_Evidence="16" Cd_Evidence="text" Description="NULL" Long_Label="NULL" />
+    <EVIDENCE Id_Evidence="17" Cd_Evidence="title" Description="NULL" Long_Label="NULL" />
 
 </dataset>

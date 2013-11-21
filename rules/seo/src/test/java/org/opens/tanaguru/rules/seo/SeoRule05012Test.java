@@ -12,9 +12,11 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import org.opens.tanaguru.entity.audit.ProcessRemark;
-import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.TestSolution;
+import java.util.Iterator;
+import org.opens.tanaguru.entity.audit.*;
+import org.opens.tanaguru.rules.keystore.AttributeStore;
+import org.opens.tanaguru.rules.keystore.HtmlElementStore;
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 import org.opens.tanaguru.rules.seo.test.SeoRuleImplementationTestCase;
 
 /**
@@ -202,176 +204,817 @@ public class SeoRule05012Test extends SeoRuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
-        ProcessResult processResult =
-                processPageTest("Seo.Test.5.1.2-2Failed-01");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals("UnexplicitLinkOutOfContext",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-01------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult = processPageTest("Seo.Test.5.1.2-2Failed-01");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        Iterator<ProcessRemark> iter = processResult.getRemarkSet().iterator();
+        SourceCodeRemark sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        Iterator<EvidenceElement> eIter = sourceCodeRemark.getElementList().iterator();
+        EvidenceElement ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-02------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.5.1.2-2Failed-02");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals("UnexplicitLinkOutOfContext",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-03------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.5.1.2-2Failed-03");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals("UnexplicitLinkOutOfContext",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-04------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.5.1.2-2Failed-04");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals("UnexplicitLinkOutOfContext",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-05------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.5.1.2-2Failed-05");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals("UnexplicitLinkOutOfContext",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals("UnexplicitLinkOutOfContext",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-        assertEquals("UnexplicitLinkOutOfContext",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[2]).getMessageCode());
-
+        // check number of elements in the page
+        assertEquals(3, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(3, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-06------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.5.1.2-2Failed-06");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals("UnexplicitLinkOutOfContext",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals("UnexplicitLinkOutOfContext",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(2, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-07------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.5.1.2-2Failed-07");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals("UnexplicitLinkOutOfContext",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals("UnexplicitLinkOutOfContext",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(2, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-08------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.5.1.2-2Failed-08");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals("UnexplicitLinkOutOfContext",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals("UnexplicitLinkOutOfContext",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(2, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-09------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.5.1.2-2Failed-09");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals("UnexplicitLinkOutOfContext",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-10------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.5.1.2-2Failed-10");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals("UnexplicitLinkOutOfContext",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-11------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.5.1.2-2Failed-11");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals("UnexplicitLinkOutOfContext",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-12------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.5.1.2-2Failed-12");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals("UnexplicitLinkOutOfContext",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-01---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.5.1.2-3NMI-01");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(2, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("unpredictable content pertinence", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("unpredictable content pertinence", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-02---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.5.1.2-3NMI-02");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(2, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("unpredictable content pertinence", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("unpredictable content pertinence", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-03---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.5.1.2-3NMI-03");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("unpredictable content pertinence", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-04---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.5.1.2-3NMI-04");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(2, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("unpredictable content pertinence", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("unpredictable content pertinence", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-05---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.5.1.2-3NMI-05");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("unpredictable content pertinence", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-06---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.5.1.2-3NMI-06");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("unpredictable content pertinence", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("unpredictable content pertinence and more", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-01---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Seo.Test.5.1.2-4NA-01");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
         assertNull(processResult.getRemarkSet());
 
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.2-4NA-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.2-4NA-02").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.2-4NA-03").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.2-4NA-04").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.2-4NA-05").getValue());
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-02---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Seo.Test.5.1.2-4NA-02");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-03---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Seo.Test.5.1.2-4NA-03");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-04---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Seo.Test.5.1.2-4NA-04");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-05---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Seo.Test.5.1.2-4NA-05");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
 
 
         // 5.1.1 testcases : All is Not Applicable
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.1-2Failed-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.1-2Failed-02").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.1-2Failed-03").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.1-2Failed-04").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.1-2Failed-05").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.1-2Failed-06").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.1-2Failed-07").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.1-2Failed-08").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.1-3NMI-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.1-3NMI-02").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.1-3NMI-03").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.1-3NMI-04").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.1-3NMI-05").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.1-3NMI-06").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.1-3NMI-07").getValue());
+        processResult = processPageTest("Seo.Test.5.1.1-2Failed-01");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.1-2Failed-02");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.1-2Failed-03");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.1-2Failed-04");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.1-2Failed-05");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.1-2Failed-06");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.1-2Failed-07");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.1-2Failed-08");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.1-3NMI-01");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.1-3NMI-02");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.1-3NMI-03");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.1-3NMI-04");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.1-3NMI-05");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.1-3NMI-06");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.1-3NMI-07");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
 
         // 5.1.3 testcases : All is Not Applicable
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.3-2Failed-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.3-2Failed-02").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.3-2Failed-03").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.3-2Failed-04").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.3-2Failed-05").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.3-2Failed-06").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.3-2Failed-07").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.3-2Failed-08").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.3-3NMI-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.3-3NMI-02").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.3-3NMI-03").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.3-3NMI-04").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.3-3NMI-05").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.3-3NMI-06").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Seo.Test.5.1.3-3NMI-07").getValue());
+        processResult = processPageTest("Seo.Test.5.1.3-2Failed-01");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.3-2Failed-02");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.3-2Failed-03");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.3-2Failed-04");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.3-2Failed-05");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.3-2Failed-06");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.3-2Failed-07");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.3-2Failed-08");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.3-3NMI-01");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.3-3NMI-02");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.3-3NMI-03");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.3-3NMI-04");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.3-3NMI-05");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.3-3NMI-06");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+
+        processResult = processPageTest("Seo.Test.5.1.3-3NMI-07");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
     }
 
     @Override
@@ -487,5 +1130,4 @@ public class SeoRule05012Test extends SeoRuleImplementationTestCase {
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("Seo.Test.5.1.3-3NMI-07").getValue());
     }
-
 }
