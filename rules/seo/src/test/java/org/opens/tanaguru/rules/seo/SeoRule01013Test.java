@@ -13,11 +13,13 @@
 package org.opens.tanaguru.rules.seo;
 
 
+import java.util.Iterator;
+import org.opens.tanaguru.entity.audit.*;
+import org.opens.tanaguru.rules.keystore.AttributeStore;
 import org.opens.tanaguru.rules.seo.SeoRule01013;
 import org.opens.tanaguru.rules.seo.test.SeoRuleImplementationTestCase;
-import org.opens.tanaguru.entity.audit.ProcessRemark;
-import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.rules.keystore.HtmlElementStore;
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 
 /**
@@ -50,45 +52,80 @@ public class SeoRule01013Test extends SeoRuleImplementationTestCase {
                 getWebResourceFactory().createPage(getTestcasesFilePath() +
                 "SEO/SeoRule01013/Seo.Test.1.1.3-2Failed-01.html"));
 
-        getWebResourceMap().put("Seo.Test.1.1.3-2Failed-02",
-                getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule01013/Seo.Test.1.1.3-2Failed-02.html"));
-
         getWebResourceMap().put("Seo.Test.1.1.3-4NA-01",
                 getWebResourceFactory().createPage(getTestcasesFilePath() +
                 "SEO/SeoRule01013/Seo.Test.1.1.3-4NA-01.html"));
+
+        getWebResourceMap().put("Seo.Test.1.1.3-4NA-02",
+                getWebResourceFactory().createPage(getTestcasesFilePath() +
+                "SEO/SeoRule01013/Seo.Test.1.1.3-4NA-02.html"));
     }
 
     @Override
     protected void setProcess() {
-        ProcessResult processResult =
-                processPageTest("Seo.Test.1.1.3-1Passed-01");
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-01------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult = processPageTest("Seo.Test.1.1.3-1Passed-01");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
         assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check number of remarks and their value
         assertNull(processResult.getRemarkSet());
 
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-01------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.1.1.3-1Passed-02");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
         assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check number of remarks and their value
         assertNull(processResult.getRemarkSet());
 
-        processResult = processPageTest("Seo.Test.1.1.3-2Failed-01");
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule01013.MESSAGE_CODE,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
 
-        processResult = processPageTest("Seo.Test.1.1.3-2Failed-02");
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-01------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Seo.Test.1.1.3-2Failed-01");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
-        assertEquals(2,processResult.getRemarkSet().size());
-        assertEquals(SeoRule01013.MORE_THAN_ONE_META_MESSAGE_CODE,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(2,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getElementList().size());
-        assertEquals(SeoRule01013.MORE_THAN_ONE_META_MESSAGE_CODE,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-        assertEquals(2,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getElementList().size());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        Iterator<ProcessRemark> iter = processResult.getRemarkSet().iterator();
+        SourceCodeRemark sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.META_DESC_EXCEEDS_LIMIT_MSG_CODE, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.META_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(1,sourceCodeRemark.getElementList().size());
+        EvidenceElement ee = sourceCodeRemark.getElementList().iterator().next();
+        assertTrue(ee.getValue().contains("Seo10 Test.06.03.1 Failed 01"));
+        assertEquals(AttributeStore.CONTENT_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------4NA-01---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.1.1.3-4NA-01");
+        // check test result
         assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------4NA-01---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Seo.Test.1.1.3-4NA-02");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
         assertNull(processResult.getRemarkSet());
     }
 
@@ -104,10 +141,10 @@ public class SeoRule01013Test extends SeoRuleImplementationTestCase {
         processResult = consolidate("Seo.Test.1.1.3-2Failed-01");
         assertEquals(TestSolution.FAILED, processResult.getValue());
 
-        processResult = consolidate("Seo.Test.1.1.3-2Failed-02");
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-
         processResult = consolidate("Seo.Test.1.1.3-4NA-01");
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        
+        processResult = consolidate("Seo.Test.1.1.3-4NA-02");
         assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
     }
 

@@ -19,57 +19,60 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import org.jsoup.select.Elements;
-import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.rules.seo.length.AbstractElementLengthControlPageRuleImplementation;
-import org.opens.tanaguru.rules.seo.util.UniqueElementChecker;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
+import org.opens.tanaguru.rules.elementchecker.ElementChecker;
+import org.opens.tanaguru.rules.elementchecker.text.TextLengthChecker;
+import org.opens.tanaguru.rules.elementselector.ElementSelector;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import org.opens.tanaguru.rules.keystore.AttributeStore;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.META_DESC_CSS_LIKE_QUERY;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.META_DESC_EXCEEDS_LIMIT_MSG_CODE;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Test whether the meta description of the page exceeds 255 characters?
  * 
  * @author jkowalczyk
  */
-public class SeoRule01013 extends AbstractElementLengthControlPageRuleImplementation {
+public class SeoRule01013 extends AbstractPageRuleMarkupImplementation {
 
-    public static final String MESSAGE_CODE = "MetaDescriptionTagLengthExceedLimit";
-    public static final String META_EVIDENCE_NAME = "MetaDescription";
-    public static final String MORE_THAN_ONE_META_MESSAGE_CODE = "MoreThanOneMetaTag";
-    private static final int URL_MAX_LENGTH = 255;
-    private static final String TAG_DETECTION_XPATH_EXPR =
-            "head meta[name=description][content]";
-
+    private static int MAX_META_DESC_LENGTH = 255;
+    
+    /*
+     * Constructor
+     */
     public SeoRule01013() {
         super();
-        setMessageCode(MESSAGE_CODE);
-        setLength(URL_MAX_LENGTH);
     }
-
+    
     @Override
-    protected ProcessResult processImpl(SSPHandler sspHandler) {
-        Elements elements = sspHandler.beginCssLikeSelection().domCssLikeSelectNodeSet(TAG_DETECTION_XPATH_EXPR).getSelectedElements();
-        if (elements.isEmpty()) {
-            // if the page has no title tag, the result is NA.
-            return definiteResultFactory.create(
-                test,
-                sspHandler.getSSP().getPage(),
-                TestSolution.NOT_APPLICABLE,
-                sspHandler.getRemarkList());
-        } else if (elements.size() == 1) {
-            setElement(elements.get(0).attr("content"));
-            return super.processImpl(sspHandler);
-        } else {
-            return definiteResultFactory.create(
-                test,
-                sspHandler.getSSP().getPage(),
-                TestSolution.FAILED,
-                UniqueElementChecker.getNotUniqueElementProcessRemarkCollection(
-                    sspHandler,
-                    elements,
-                    MORE_THAN_ONE_META_MESSAGE_CODE,
-                    META_EVIDENCE_NAME));
+    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
+        ElementSelector es = new SimpleElementSelector(META_DESC_CSS_LIKE_QUERY);
+        es.selectElements(sspHandler, elementHandler);
+    }
+    
+    @Override
+    protected void check(
+            SSPHandler sspHandler, 
+            ElementHandler<Element> elementHandler, 
+            TestSolutionHandler testSolutionHandler) {
+        super.check(sspHandler, elementHandler, testSolutionHandler);
+        if (elementHandler.isEmpty() || elementHandler.get().size() > 1) {
+            testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
+            return;
         }
+        ElementChecker ec = new TextLengthChecker(
+                new TextAttributeOfElementBuilder(AttributeStore.CONTENT_ATTR), 
+                MAX_META_DESC_LENGTH, 
+                META_DESC_EXCEEDS_LIMIT_MSG_CODE, 
+                // evidence elements
+                AttributeStore.CONTENT_ATTR);
+        ec.check(sspHandler, elementHandler, testSolutionHandler);
     }
 
 }
