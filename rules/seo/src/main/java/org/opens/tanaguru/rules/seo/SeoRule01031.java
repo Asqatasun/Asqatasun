@@ -19,30 +19,50 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.jsoup.nodes.Element;
+import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.rules.seo.length.AbstractElementLengthControlPageRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.URL_EXCEEDS_LIMIT_MSG_CODE;
 
 /**
  * Test whether the Url of the page exceeds 255 characters
  * 
  * @author jkowalczyk
  */
-public class SeoRule01031 extends AbstractElementLengthControlPageRuleImplementation {
+public class SeoRule01031 extends AbstractPageRuleMarkupImplementation {
 
-    public static final String MESSAGE_CODE = "UrlLengthExceedLimit";
-    public static final int URL_MAX_LENGTH = 255;
+    private static final int URL_MAX_LENGTH = 255;
 
     public SeoRule01031() {
         super();
-        setMessageCode(MESSAGE_CODE);
-        setLength(URL_MAX_LENGTH);
     }
 
     @Override
-    protected ProcessResult processImpl(SSPHandler sspHandler) {
-        setElement(sspHandler.getSSP().getURI());
-        return super.processImpl(sspHandler);
+    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
+        // do nothing
+    }
+    
+    @Override
+    protected void check(
+            SSPHandler sspHandler, 
+            ElementHandler<Element> selectionHandler, 
+            TestSolutionHandler testSolutionHandler) {
+        super.check(sspHandler, selectionHandler, testSolutionHandler);
+        if (sspHandler.getSSP().getURI().length() > URL_MAX_LENGTH) {
+            testSolutionHandler.addTestSolution(TestSolution.FAILED);
+            sspHandler.getProcessRemarkService().addProcessRemark(
+                    TestSolution.FAILED, 
+                    URL_EXCEEDS_LIMIT_MSG_CODE);
+            return;
+        }
+        testSolutionHandler.addTestSolution(TestSolution.PASSED);
     }
 
+    @Override
+    public int getSelectionSize() {
+        return 1;
+    }
 }

@@ -13,11 +13,11 @@
 package org.opens.tanaguru.rules.seo;
 
 
-import org.opens.tanaguru.rules.seo.SeoRule01031;
 import org.opens.tanaguru.rules.seo.test.SeoRuleImplementationTestCase;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 
 /**
@@ -48,16 +48,31 @@ public class SeoRule01031Test extends SeoRuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
-        ProcessResult processResult =
-                processPageTest("Seo.Test.1.3.1-1Passed-01");
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-01------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult = processPageTest("Seo.Test.1.3.1-1Passed-01");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
         assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check number of remarks and their value
         assertNull(processResult.getRemarkSet());
-
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-01------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.1.3.1-2Failed-01");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule01031.MESSAGE_CODE,
+        assertEquals(RemarkMessageStore.URL_EXCEEDS_LIMIT_MSG_CODE,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(TestSolution.FAILED,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
     }
 
     @Override
