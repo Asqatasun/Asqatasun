@@ -280,8 +280,6 @@ public class ElementPresenceChecker extends ElementCheckerImpl {
                         notDetectedSolution, 
                         el, 
                         messageCodeOnMultipleElements);
-                System.out.println(el.attr("content"));
-                System.out.println(getEeAttributeNames());
             }
             
         } else if (StringUtils.isNotBlank(messageCodeOnElementNotDetected)) {
