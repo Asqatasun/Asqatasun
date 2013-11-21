@@ -20,7 +20,6 @@
 package org.opens.tanaguru.rules.seo;
 
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
@@ -34,30 +33,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MORE_THAN_ONE
  * 
  * @author jkowalczyk
  */
-public class SeoRule01011 
-//extends AbstractTagDetectionPageRuleImplementation {
-//
-//    public static final String ERROR_MESSAGE_CODE = "MetaDescriptionTagMissing";
-//    private static final String TAG_DETECTION_CSS_EXPR =
-//            "head meta[name=description][content]";
-//    public static final String META_DESC_EVIDENCE_NAME = "MetaDescription";
-//    public static final String MORE_THAN_ONE_META_DESC_MSG_CODE = "MoreThanOneMetaDescriptionTag";
-//
-//    public SeoRule01011() {
-//        super();
-//        setMessageCode(ERROR_MESSAGE_CODE);
-//        setSelectionExpression(TAG_DETECTION_CSS_EXPR);
-//        setDetectedSolution(TestSolution.PASSED);
-//        setNotDetectedSolution(TestSolution.FAILED);
-//        setIsRemarkCreatedOnDetection(false);
-//        setHasElementToBeUnique(true);
-//        setNotUniqueMessage(MORE_THAN_ONE_META_DESC_MSG_CODE);
-//        setNotUniqueEvidenceElement(META_DESC_EVIDENCE_NAME);
-//    }
-//
-//}
-
-extends AbstractPageRuleWithSelectorAndCheckerImplementation {
+public class SeoRule01011 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
     
     /**
      * Default constructor

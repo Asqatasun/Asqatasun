@@ -19,57 +19,39 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import org.opens.tanaguru.entity.audit.ProcessRemark;
-import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.RuleHelper;
-import org.opens.tanaguru.rules.seo.handler.link.AbstractPageRuleLinkThemeImplementation;
-import org.opens.tanaguru.rules.seo.handler.link.LinkRulesHandler;
+import org.opens.tanaguru.ruleimplementation.link.AbstractLinkRuleImplementation;
+import org.opens.tanaguru.rules.elementchecker.link.LinkPertinenceChecker;
+import org.opens.tanaguru.rules.elementselector.LinkElementSelector;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.UNEXPLICIT_LINK_MSG;
 
 /**
  * Is each text of a text link explicit out of context (except in special cases)?
  * 
  * @author jkowalczyk
  */
-public class SeoRule05011 extends AbstractPageRuleLinkThemeImplementation{
+public class SeoRule05011 extends AbstractLinkRuleImplementation {
 
     /**
-     * xpath expression to get a tags without context and without title
+     * Default constructor
      */
-    public static final String XPATH_EXPR =
-        LinkRulesHandler.A_SELECTOR +
-        LinkRulesHandler.SIMPLE_LINK +
-        LinkRulesHandler.END_BRACKET;
-
-    public SeoRule05011() {
-        super();
+    public SeoRule05011 () {
+        // context is not taken into consideration 
+        super(new LinkElementSelector(false), 
+              new LinkPertinenceChecker(
+                    // not pertinent solution 
+                    TestSolution.FAILED,
+                    // not pertinent message
+                    UNEXPLICIT_LINK_MSG,
+                    // manual check message
+                    CHECK_LINK_PERTINENCE_MSG,
+                    // evidence elements
+                    TEXT_ELEMENT2,
+                    TITLE_ATTR
+              ),
+              null);
     }
-
-    @Override
-    protected ProcessResult processImpl(SSPHandler sspHandler) {
-        super.processImpl(sspHandler);
-        List<ProcessRemark> processRemarkList = new ArrayList<ProcessRemark>();
-
-        TestSolution testSolution = linkRulesHandler.checkContextPertinence(
-                XPATH_EXPR,
-                TestSolution.FAILED,
-                LinkRulesHandler.UNEXPLICIT_LINK_OUT_OF_CONTEXT,
-                processRemarkList);
-
-        ProcessResult processResult = definiteResultFactory.create(
-                test,
-                sspHandler.getPage(),
-                testSolution,
-                processRemarkList);
-        processResult.setElementCounter(linkRulesHandler.getElementCounter());
-
-        cleanUpRule();
-        return processResult;
-    }
-
 }
