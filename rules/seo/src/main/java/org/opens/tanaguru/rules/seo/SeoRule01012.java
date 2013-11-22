@@ -19,54 +19,70 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import org.jsoup.select.Elements;
-import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.rules.seo.detection.AbstractTagDetectionPageRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
+import org.opens.tanaguru.rules.elementchecker.pertinence.TextPertinenceChecker;
+import org.opens.tanaguru.rules.elementselector.ElementSelector;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.CONTENT_ATTR;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.META_DESC_CSS_LIKE_QUERY;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_META_DESC_RELEVANCY_MSG_CODE;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.META_DESC_NOT_RELEVANT_MSG_CODE;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Test whether the meta description is relevant on the page
  * 
  * @author jkowalczyk
  */
-public class SeoRule01012 extends AbstractTagDetectionPageRuleImplementation {
+public class SeoRule01012 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    public static final String ERROR_MESSAGE_CODE = "EmptyMetaDescriptionTag";
-    public static final String CHECK_ELEMENT_MESSAGE_CODE = "checkRelevancyMetaDescriptionTag";
-    private static final String TAG_DETECTION_CSS_EXPR =
-            "head meta[name=description][content]";
-    public static final String META_DESC_EVIDENCE_NAME = "MetaDescription";
-    public static final String MORE_THAN_ONE_META_DESC_MSG_CODE = "MoreThanOneMetaDescriptionTag";
-
-    public SeoRule01012() {
-        super();
-        setMessageCode(ERROR_MESSAGE_CODE);
-        setSelectionExpression(TAG_DETECTION_CSS_EXPR);
-        setDetectedSolution(TestSolution.NEED_MORE_INFO);
-        setNotDetectedSolution(TestSolution.NOT_APPLICABLE);
-        setIsRemarkCreatedOnDetection(true);
-        setHasElementToBeUnique(true);
-        setHasElementToBeNotNullAndContainsAlphanumericalContent(true);
-        setElementName("content");
-        setNotUniqueMessage(MORE_THAN_ONE_META_DESC_MSG_CODE);
-        setNotUniqueEvidenceElement(META_DESC_EVIDENCE_NAME);
-        setCheckElementMessageCode(CHECK_ELEMENT_MESSAGE_CODE);
+     /* The selector */
+    private static final ElementSelector ELEMENT_SELECTOR = 
+            new SimpleElementSelector(META_DESC_CSS_LIKE_QUERY);
+    
+    /**
+     * Default constructor
+     */
+    public SeoRule01012 () {
+        super(
+                ELEMENT_SELECTOR,
+                new TextPertinenceChecker(
+                    new TextAttributeOfElementBuilder(CONTENT_ATTR),
+                    // check emptiness
+                    true, 
+                    // no comparison with other attribute
+                    null, 
+                    // blacklist nomenclature name
+                    null, 
+                    // not pertinent message
+                    META_DESC_NOT_RELEVANT_MSG_CODE, 
+                    // manual check message
+                    CHECK_META_DESC_RELEVANCY_MSG_CODE,
+                    // evidence elements
+                    CONTENT_ATTR
+                )
+            );
     }
-
+    
     @Override
-    protected ProcessResult processImpl(SSPHandler sspHandler) {
-        Elements elements = sspHandler.beginCssLikeSelection().domCssLikeSelectNodeSet(TAG_DETECTION_CSS_EXPR).
-                getSelectedElements();
-        if (elements.isEmpty() || elements.size() > 1) {
-            return definiteResultFactory.create(
-                test,
-                sspHandler.getSSP().getPage(),
-                TestSolution.NOT_APPLICABLE,
-                sspHandler.getRemarkList());
-        } else {
-            return super.processImpl(sspHandler);
+    protected void check(
+            SSPHandler sspHandler, 
+            ElementHandler elementHandler, 
+            TestSolutionHandler testSolutionHandler) {
+        if (elementHandler.isEmpty()) {
+            testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
+            return;
         }
+        if (elementHandler.get().size() > 1)  {
+            Element el = (Element)elementHandler.get().iterator().next();
+            elementHandler.clean().add(el);
+        }
+        super.check(sspHandler, elementHandler, testSolutionHandler);
     }
 
 }

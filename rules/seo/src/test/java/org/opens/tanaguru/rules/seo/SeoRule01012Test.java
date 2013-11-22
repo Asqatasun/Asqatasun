@@ -13,12 +13,11 @@
 package org.opens.tanaguru.rules.seo;
 
 
-import org.opens.tanaguru.rules.seo.SeoRule01012;
-import org.opens.tanaguru.rules.seo.test.SeoRuleImplementationTestCase;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
-
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
+import org.opens.tanaguru.rules.seo.test.SeoRuleImplementationTestCase;
 
 /**
  *
@@ -57,13 +56,13 @@ public class SeoRule01012Test extends SeoRuleImplementationTestCase {
                 getWebResourceFactory().createPage(getTestcasesFilePath() +
                 "SEO/SeoRule01012/Seo.Test.1.1.2-3NMI-01.html"));
         
+        getWebResourceMap().put("Seo.Test.1.1.2-3NMI-02",
+                getWebResourceFactory().createPage(getTestcasesFilePath() +
+                "SEO/SeoRule01012/Seo.Test.1.1.2-3NMI-02.html"));
+        
         getWebResourceMap().put("Seo.Test.1.1.2-4NA-01",
                 getWebResourceFactory().createPage(getTestcasesFilePath() +
                 "SEO/SeoRule01012/Seo.Test.1.1.2-4NA-01.html"));
-
-        getWebResourceMap().put("Seo.Test.1.1.2-4NA-02",
-                getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule01012/Seo.Test.1.1.2-4NA-02.html"));
     }
 
     @Override
@@ -71,38 +70,40 @@ public class SeoRule01012Test extends SeoRuleImplementationTestCase {
         ProcessResult processResult = processPageTest("Seo.Test.1.1.2-2Failed-01");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule01012.ERROR_MESSAGE_CODE,
+        assertEquals(RemarkMessageStore.META_DESC_NOT_RELEVANT_MSG_CODE,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
 
         processResult = processPageTest("Seo.Test.1.1.2-2Failed-02");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule01012.ERROR_MESSAGE_CODE,
+        assertEquals(RemarkMessageStore.META_DESC_NOT_RELEVANT_MSG_CODE,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
         
         processResult = processPageTest("Seo.Test.1.1.2-2Failed-03");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule01012.ERROR_MESSAGE_CODE,
+        assertEquals(RemarkMessageStore.META_DESC_NOT_RELEVANT_MSG_CODE,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
         
         processResult = processPageTest("Seo.Test.1.1.2-2Failed-04");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule01012.ERROR_MESSAGE_CODE,
+        assertEquals(RemarkMessageStore.META_DESC_NOT_RELEVANT_MSG_CODE,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
 
         processResult = processPageTest("Seo.Test.1.1.2-3NMI-01");
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(SeoRule01012.CHECK_ELEMENT_MESSAGE_CODE,
+        assertEquals(RemarkMessageStore.CHECK_META_DESC_RELEVANCY_MSG_CODE,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        
+        processResult = processPageTest("Seo.Test.1.1.2-3NMI-02");
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        assertEquals(1, processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.CHECK_META_DESC_RELEVANCY_MSG_CODE,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
         
         processResult = processPageTest("Seo.Test.1.1.2-4NA-01");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-
-        processResult = processPageTest("Seo.Test.1.1.2-4NA-02");
         assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
         assertNull(processResult.getRemarkSet());
     }
@@ -123,11 +124,11 @@ public class SeoRule01012Test extends SeoRuleImplementationTestCase {
         
         processResult = consolidate("Seo.Test.1.1.2-3NMI-01");
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        
+        processResult = consolidate("Seo.Test.1.1.2-3NMI-02");
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
 
         processResult = consolidate("Seo.Test.1.1.2-4NA-01");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-
-        processResult = consolidate("Seo.Test.1.1.2-4NA-02");
         assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
     }
 
