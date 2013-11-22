@@ -19,137 +19,75 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import org.opens.tanaguru.entity.audit.DefiniteResult;
-import org.opens.tanaguru.entity.audit.ProcessRemark;
-import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
+import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import org.opens.tanaguru.rules.elementselector.ElementSelector;
+import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
+import org.opens.tanaguru.rules.elementchecker.ElementChecker;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.FLASH_CONTENT_CSS_LIKE_QUERY;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.SCRIPT_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.FLASH_CONTENT_DETECTED_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.SUSPECTED_FLASH_CONTENT_DETECTED_MSG;
 
 /**
  * Detect the presence of flash content in the page
  * 
  * @author jkowalczyk
  */
-public class SeoRule08011 extends AbstractPageRuleImplementation {
-
-    private static final String CSS_EXPR = "object";
-    private static final String CSS_EXPR2 = "script";
+public class SeoRule08011 extends AbstractPageRuleMarkupImplementation {
 
     private static final String SWF_EXT = "swf";
-    private static final String EMBED_NODE_NAME = "embed";
-    private static final String SRC_ATTRIBUTE = "src";
-    private static final String TYPE_ATTRIBUTE = "type";
-    private static final String SWF_TYPE_DEFINITION = "application/x-shockwave-flash";
-
-    public static final String FLASH_CONTENT_DETECTED_MESSAGE_CODE =
-            "FlashContentDetected";
-    public static final String SUSPECTED_FLASH_CONTENT_DETECTED_MESSAGE_CODE =
-            "SuspectedFlashContentDetected";
+    private ElementHandler decidableElements = new ElementHandlerImpl();
+    private ElementHandler notDecidableElements = new ElementHandlerImpl();
+    
 
     public SeoRule08011() {
         super();
     }
 
     @Override
-    protected ProcessResult processImpl(SSPHandler sspHandler) {
-        List<ProcessRemark> processRemarkList = new ArrayList<ProcessRemark>();
-        TestSolution testSolution = checkObjectNodes(sspHandler.beginCssLikeSelection().
-                domCssLikeSelectNodeSet(CSS_EXPR).
-                getSelectedElements(),
-                sspHandler);
-
-        processRemarkList.addAll(sspHandler.getRemarkList());
-        
-        TestSolution scriptNodetestSolution =
-                checkScriptNodes(sspHandler.domCssLikeSelectNodeSet(
-                    CSS_EXPR2).getSelectedElements(),
-                    sspHandler);
-        
-        processRemarkList.addAll(sspHandler.getRemarkList());
-
-        if (testSolution.equals(TestSolution.PASSED)){
-            testSolution = scriptNodetestSolution;
+    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
+        ElementSelector es = new SimpleElementSelector(FLASH_CONTENT_CSS_LIKE_QUERY);
+	es.selectElements(sspHandler, decidableElements);
+        es = new SimpleElementSelector(SCRIPT_ELEMENT);
+	es.selectElements(sspHandler, notDecidableElements);
+	Iterator<Element> iter = notDecidableElements.get().iterator();
+        while (iter.hasNext()) {
+            Element script = iter.next();
+            if (!StringUtils.contains(script.html(), SWF_EXT)) {
+		iter.remove();
+	    }
         }
-        
-        if (testSolution.equals(TestSolution.PASSED)){
-            testSolution = checkSourceCode(sspHandler);
-        }
-        processRemarkList.addAll(sspHandler.getRemarkList());
-        DefiniteResult result = definiteResultFactory.create(
-                test,
-                sspHandler.getSSP().getPage(),
-                testSolution,
-                processRemarkList);
-
-        return result ;
     }
 
-    /**
-     * This methods checks for each &lt;object&gt; node whether its &lt;embed&gt;
-     * child node contains a "src" attribute with a "swf" extension or a
-     * "type" attribute equals to "application/x-shockwave-flash"
-     * @param elements
-     * @param sspHandler
-     * @return
-     */
-    private TestSolution checkObjectNodes (Elements elements,
-            SSPHandler sspHandler) {
-        TestSolution testSolution = TestSolution.PASSED;
-        if (!elements.isEmpty()) {
-            for (Element element : elements) {
-                Element embedElement = null;
-                for (int i=0;i<element.children().size();i++){
-                    if (element.child(i).nodeName().trim().
-                            equalsIgnoreCase(EMBED_NODE_NAME)) {
-                        embedElement = element.child(i);
-                        break;
-                    }
-                }
-                if (embedElement != null && (embedElement.hasAttr(SRC_ATTRIBUTE) &&
-                            embedElement.attr(SRC_ATTRIBUTE).endsWith(SWF_EXT)) ||
-                         (embedElement.hasAttr(TYPE_ATTRIBUTE) &&
-                            embedElement.attr(TYPE_ATTRIBUTE).trim().equalsIgnoreCase(SWF_TYPE_DEFINITION))) {
-                    testSolution = TestSolution.FAILED;
-                    sspHandler.getProcessRemarkService().addSourceCodeRemarkOnElement(
-                        testSolution,
-                        element,
-                        FLASH_CONTENT_DETECTED_MESSAGE_CODE);
-                    
-                }
-            }
-        }
-        return testSolution;
-    }
-
-    /**
-     * This methods checks the presence of the "swf" occurrence within
-     * &lt;script&gt; nodes.
-     * If the occurrence is found, a source process remark is created and the
-     * testSolution is set to NEED_MORE_INFORMATION
-     * @param elements
-     * @param sspHandler
-     * @return
-     */
-    private TestSolution checkScriptNodes (Elements elements,
-            SSPHandler sspHandler) {
-        TestSolution testSolution = TestSolution.PASSED;
-        if (!elements.isEmpty()) {
-            for (Element element : elements) {
-                if (element.outerHtml().contains(SWF_EXT)) {
-                    testSolution = TestSolution.NEED_MORE_INFO;
-                    sspHandler.getProcessRemarkService().addSourceCodeRemarkOnElement(
-                        testSolution,
-                        element,
-                        SUSPECTED_FLASH_CONTENT_DETECTED_MESSAGE_CODE);
-                }
-            }
-        }
-        return testSolution;
+    @Override
+    protected void check(SSPHandler sspHandler, 
+                         ElementHandler<Element> elementHandler,
+                         TestSolutionHandler testSolutionHandler) {
+	super.check(sspHandler, elementHandler, testSolutionHandler);
+        ElementChecker ec = new ElementPresenceChecker(
+				TestSolution.FAILED, 
+				TestSolution.PASSED, 
+				FLASH_CONTENT_DETECTED_MSG, 
+				null);
+	ec.check(sspHandler, decidableElements, testSolutionHandler);
+	ec = new ElementPresenceChecker(
+				TestSolution.NEED_MORE_INFO,
+				TestSolution.PASSED, 
+				SUSPECTED_FLASH_CONTENT_DETECTED_MSG, 
+				null);
+	ec.check(sspHandler, notDecidableElements, testSolutionHandler);
+	if (testSolutionHandler.getTestSolution().equals(TestSolution.PASSED)) {
+		testSolutionHandler.addTestSolution(checkSourceCode(sspHandler));
+	}
     }
 
     /**
@@ -162,11 +100,11 @@ public class SeoRule08011 extends AbstractPageRuleImplementation {
      */
     private TestSolution checkSourceCode (SSPHandler sspHandler) {
         TestSolution testSolution = TestSolution.PASSED;
-        if (sspHandler.getSSP().getSource().toLowerCase().contains(SWF_EXT)){
+        if (sspHandler.getSSP().getAdaptedContent().toLowerCase().contains(SWF_EXT)){
             testSolution = TestSolution.NEED_MORE_INFO;
             sspHandler.getProcessRemarkService().addProcessRemark(
                     TestSolution.NEED_MORE_INFO,
-                    SUSPECTED_FLASH_CONTENT_DETECTED_MESSAGE_CODE);
+                    SUSPECTED_FLASH_CONTENT_DETECTED_MSG);
         }
         return testSolution;
     }
