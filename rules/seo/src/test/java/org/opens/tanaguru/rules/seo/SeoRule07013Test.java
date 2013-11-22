@@ -17,6 +17,7 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.seo.test.SeoRuleImplementationTestCase;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
  *
@@ -67,84 +68,86 @@ public class SeoRule07013Test extends SeoRuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
-//        ProcessResult processResult = 
-//                processPageTest("Seo.Test.7.1.3-2Failed-01");
-//        assertEquals(TestSolution.FAILED, processResult.getValue());
-//        assertEquals(1,processResult.getRemarkSet().size());
-//        assertEquals(SeoRule07013.ERROR_MESSAGE_CODE,
-//                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-//        
-//        processResult = processPageTest("Seo.Test.7.1.3-2Failed-02");
-//        assertEquals(TestSolution.FAILED, processResult.getValue());
-//        assertEquals(1,processResult.getRemarkSet().size());
-//        assertEquals(SeoRule07013.ERROR_MESSAGE_CODE,
-//                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-//        
-//        processResult = processPageTest("Seo.Test.7.1.3-2Failed-03");
-//        assertEquals(TestSolution.FAILED, processResult.getValue());
-//        assertEquals(1,processResult.getRemarkSet().size());
-//        assertEquals(SeoRule07013.ERROR_MESSAGE_CODE,
-//                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-//        
-//        processResult = processPageTest("Seo.Test.7.1.3-2Failed-04");
-//        assertEquals(TestSolution.FAILED, processResult.getValue());
-//        assertEquals(1,processResult.getRemarkSet().size());
-//        assertEquals(SeoRule07013.ERROR_MESSAGE_CODE,
-//                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-//        
-//        processResult = processPageTest("Seo.Test.7.1.3-2Failed-05");
-//        assertEquals(TestSolution.FAILED, processResult.getValue());
-//        assertEquals(4,processResult.getRemarkSet().size());
-//        assertEquals(SeoRule07013.ERROR_MESSAGE_CODE,
-//                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-//        assertEquals(SeoRule07013.ERROR_MESSAGE_CODE,
-//                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-//        assertEquals(SeoRule07013.ERROR_MESSAGE_CODE,
-//                ((ProcessRemark)processResult.getRemarkSet().toArray()[2]).getMessageCode());
-//        assertEquals(SeoRule07013.ERROR_MESSAGE_CODE,
-//                ((ProcessRemark)processResult.getRemarkSet().toArray()[3]).getMessageCode());
-//        
-//        processResult = processPageTest("Seo.Test.7.1.3-3NMI-01");
-//        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-//        assertEquals(1,processResult.getRemarkSet().size());
-//        assertEquals(SeoRule07013.CHECK_ELEMENT_MESSAGE_CODE,
-//                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-//        
-//        processResult = processPageTest("Seo.Test.7.1.3-3NMI-02");
-//        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-//        assertEquals(1,processResult.getRemarkSet().size());
-//        assertEquals(SeoRule07013.CHECK_ELEMENT_MESSAGE_CODE,
-//                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-//        
-//        processResult = processPageTest("Seo.Test.7.1.3-4NA-01");
-//        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-//        assertNull(processResult.getRemarkSet());
-//        
-//        processResult = processPageTest("Seo.Test.7.1.3-4NA-02");
-//        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-//        assertNull(processResult.getRemarkSet());
+        ProcessResult processResult = 
+                processPageTest("Seo.Test.7.1.3-2Failed-01");
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(1,processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.NOT_RELEVANT_H1_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        
+        processResult = processPageTest("Seo.Test.7.1.3-2Failed-02");
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(1,processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.NOT_RELEVANT_H1_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        
+        processResult = processPageTest("Seo.Test.7.1.3-2Failed-03");
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(1,processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.NOT_RELEVANT_H1_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        
+        processResult = processPageTest("Seo.Test.7.1.3-2Failed-04");
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(1,processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.NOT_RELEVANT_H1_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        
+        processResult = processPageTest("Seo.Test.7.1.3-2Failed-05");
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(4,processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.NOT_RELEVANT_H1_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(RemarkMessageStore.NOT_RELEVANT_H1_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
+        assertEquals(RemarkMessageStore.CHECK_H1_RELEVANCY_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[2]).getMessageCode());
+        assertEquals(RemarkMessageStore.CHECK_H1_RELEVANCY_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[3]).getMessageCode());
+        
+        processResult = processPageTest("Seo.Test.7.1.3-3NMI-01");
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        assertEquals(1,processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.CHECK_H1_RELEVANCY_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        
+        processResult = processPageTest("Seo.Test.7.1.3-3NMI-02");
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        assertEquals(2,processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.CHECK_H1_RELEVANCY_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(RemarkMessageStore.CHECK_H1_RELEVANCY_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
+        
+        processResult = processPageTest("Seo.Test.7.1.3-4NA-01");
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        assertNull(processResult.getRemarkSet());
+        
+        processResult = processPageTest("Seo.Test.7.1.3-4NA-02");
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        assertNull(processResult.getRemarkSet());
     }
 
     @Override
     protected void setConsolidate() {
-//        assertEquals(TestSolution.FAILED,
-//                consolidate("Seo.Test.7.1.3-2Failed-01").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                consolidate("Seo.Test.7.1.3-2Failed-02").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                consolidate("Seo.Test.7.1.3-2Failed-03").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                consolidate("Seo.Test.7.1.3-2Failed-04").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                consolidate("Seo.Test.7.1.3-2Failed-05").getValue());
-//        assertEquals(TestSolution.NEED_MORE_INFO,
-//                consolidate("Seo.Test.7.1.3-3NMI-01").getValue());
-//        assertEquals(TestSolution.NEED_MORE_INFO,
-//                consolidate("Seo.Test.7.1.3-3NMI-02").getValue());
-//        assertEquals(TestSolution.NOT_APPLICABLE,
-//                consolidate("Seo.Test.7.1.3-4NA-01").getValue());
-//        assertEquals(TestSolution.NOT_APPLICABLE,
-//                consolidate("Seo.Test.7.1.3-4NA-02").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("Seo.Test.7.1.3-2Failed-01").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("Seo.Test.7.1.3-2Failed-02").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("Seo.Test.7.1.3-2Failed-03").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("Seo.Test.7.1.3-2Failed-04").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("Seo.Test.7.1.3-2Failed-05").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Seo.Test.7.1.3-3NMI-01").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Seo.Test.7.1.3-3NMI-02").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("Seo.Test.7.1.3-4NA-01").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("Seo.Test.7.1.3-4NA-02").getValue());
     }
 
 }
