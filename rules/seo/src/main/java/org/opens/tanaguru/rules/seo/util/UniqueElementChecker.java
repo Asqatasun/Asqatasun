@@ -21,6 +21,8 @@ import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
+import org.opens.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
+import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
@@ -28,6 +30,9 @@ import org.opens.tanaguru.service.ProcessRemarkService;
  * @author jkowalczyk
  */
 public final class UniqueElementChecker {
+    
+    private static final TextElementBuilder TEXT_ELEMENT_BUILDER = 
+            new SimpleTextElementBuilder();
 
     /**
      * Default private constructor
@@ -60,7 +65,7 @@ public final class UniqueElementChecker {
             evidenceElementSet.add(
                     processRemarkService.getEvidenceElement(
                     evidenceName,
-                    TextContentExtractor.buildTextContentFromNodeElements(element)));
+                    TEXT_ELEMENT_BUILDER.buildTextFromElement(element)));
         
             processRemarkSet.add(
                 processRemarkService.createProcessRemark(
