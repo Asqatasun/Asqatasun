@@ -12,11 +12,12 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import org.opens.tanaguru.rules.seo.SeoRule08011;
 import org.opens.tanaguru.rules.seo.test.SeoRuleImplementationTestCase;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.FLASH_CONTENT_DETECTED_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.SUSPECTED_FLASH_CONTENT_DETECTED_MSG;
 
 /**
  *
@@ -98,39 +99,39 @@ public class SeoRule08011Test extends SeoRuleImplementationTestCase {
         processResult = processPageTest("Seo.Test.8.1-2Failed-01");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule08011.FLASH_CONTENT_DETECTED_MESSAGE_CODE,
+        assertEquals(FLASH_CONTENT_DETECTED_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
 
         processResult = processPageTest("Seo.Test.8.1-2Failed-02");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule08011.FLASH_CONTENT_DETECTED_MESSAGE_CODE,
+        assertEquals(FLASH_CONTENT_DETECTED_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
 
         processResult = processPageTest("Seo.Test.8.1-2Failed-03");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule08011.FLASH_CONTENT_DETECTED_MESSAGE_CODE,
+        assertEquals(FLASH_CONTENT_DETECTED_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
 
         processResult = processPageTest("Seo.Test.8.1-2Failed-04");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(2,processResult.getRemarkSet().size());
-        assertEquals(SeoRule08011.FLASH_CONTENT_DETECTED_MESSAGE_CODE,
+        assertEquals(FLASH_CONTENT_DETECTED_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(SeoRule08011.SUSPECTED_FLASH_CONTENT_DETECTED_MESSAGE_CODE,
+        assertEquals(SUSPECTED_FLASH_CONTENT_DETECTED_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
 
         processResult = processPageTest("Seo.Test.8.1-3NMI-01");
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule08011.SUSPECTED_FLASH_CONTENT_DETECTED_MESSAGE_CODE,
+        assertEquals(SUSPECTED_FLASH_CONTENT_DETECTED_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
 
         processResult = processPageTest("Seo.Test.8.1-3NMI-02");
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule08011.SUSPECTED_FLASH_CONTENT_DETECTED_MESSAGE_CODE,
+        assertEquals(SUSPECTED_FLASH_CONTENT_DETECTED_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
     }
 
