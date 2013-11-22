@@ -105,6 +105,8 @@ public class Aw22Rule10071 extends AbstractPageRuleFromPreProcessImplementation 
             ElementHandler selectionHandler, 
             TestSolutionHandler testSolutionHandler) {
          if (nbOfFocusableElements == 0) {
+             sspHandler.getProcessRemarkService().resetService();
+             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
              return;
          }
          super.check(sspHandler, selectionHandler, testSolutionHandler);
@@ -122,9 +124,6 @@ public class Aw22Rule10071 extends AbstractPageRuleFromPreProcessImplementation 
      * @return whether the outline of the current element is visible
      */
     private boolean isOutlineVisible(DomElement element) {
-        System.out.println("element.getOutlineStyle() " +element.getOutlineStyle());
-        System.out.println("element.getOutlineColor() " +  element.getOutlineColor());
-        System.out.println(" element.getOutlineWidthValue() " +element.getOutlineWidthValue());
         if (StringUtils.equalsIgnoreCase(element.getOutlineStyle(), NONE_OUTLINE_STYLE) || 
                 StringUtils.equalsIgnoreCase(element.getOutlineStyle(), HIDDEN_OUTLINE_STYLE)) {
             return false;
