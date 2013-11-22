@@ -19,50 +19,41 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import org.opens.tanaguru.entity.audit.DefiniteResult;
-import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.opens.tanaguru.rules.elementchecker.attribute.AttributePresenceChecker;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.IFRAME_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.TITLE_ATTR_MISSING_MSG;
 
 /**
  * * This rule tests if all the iframe tags have a "title" attribute
  * @author jkowalczyk
  */
-public class SeoRule03012 extends AbstractPageRuleImplementation {
+public class SeoRule03012 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    public static final String SRC_EVIDENCE_ELEMENT = "src";
-    public static final String CSS_EXPR = "iframe";
-    public static final String TITLE_ATTRIBUTE = "title";
-
-    public SeoRule03012() {
-        super();
+    /**
+     * Default constructor
+     */
+    public SeoRule03012 () {
+        super(
+                new SimpleElementSelector(IFRAME_ELEMENT), 
+                
+                new AttributePresenceChecker(
+                    TITLE_ATTR, 
+                    // passed when attribute is found
+                    TestSolution.PASSED, 
+                    // failed when attribute is not found
+                    TestSolution.FAILED, 
+                    // no message created when attribute is found
+                    null,
+                    // message associated with element when attribute is not found
+                    TITLE_ATTR_MISSING_MSG, 
+                    // evidence elements
+                    SRC_ATTR)
+            );
     }
 
-    @Override
-    protected ProcessResult processImpl(SSPHandler sspHandler) {
-
-        Elements elements = sspHandler.beginCssLikeSelection().domCssLikeSelectNodeSet(
-                CSS_EXPR).getSelectedElements();
-        TestSolution checkResult = TestSolution.PASSED;
-        if (elements.isEmpty()) {
-            checkResult = TestSolution.NOT_APPLICABLE;
-        }
-        for (Element el : elements) {
-            if (!el.hasAttr(TITLE_ATTRIBUTE)) {
-                sspHandler.getProcessRemarkService().addSourceCodeRemarkOnElement(checkResult, el, "attributeMissing");
-                checkResult = TestSolution.FAILED;
-            }
-        }
-        DefiniteResult result = definiteResultFactory.create(
-                test,
-                sspHandler.getSSP().getPage(),
-                checkResult,
-                sspHandler.getRemarkList());
-
-        result.setElementCounter(sspHandler.getSelectedElements().size());
-        return result;
-    }
 }
