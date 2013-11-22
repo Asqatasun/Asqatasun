@@ -296,7 +296,9 @@ public final class RemarkMessageStore {
     public static final String SOURCE_CODE_NOT_UNIQUE_MSG_CODE = "SourceCodeNotUnique";
     public static final String SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE = 
             "SourceCodeIdenticalTo";
-
+    public static final String ROBOTS_TXT_MSG_CODE = "RobotsTxtMissing";
+    public static final String SITEMAP_MSG_CODE = "SitemapMissing";
+    
     /**
      * Private constructor. This class handles keys and must not be instantiated
      */

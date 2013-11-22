@@ -32,6 +32,7 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractSiteRuleImplementation;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.SITEMAP_MSG_CODE;
 import org.opens.tanaguru.service.ProcessRemarkService;
 import org.opens.tanaguru.util.http.HttpRequestHandler;
 
@@ -42,7 +43,8 @@ import org.opens.tanaguru.util.http.HttpRequestHandler;
  */
 public class SeoRule01061 extends AbstractSiteRuleImplementation {
 
-    public static final String MESSAGE_CODE = "SitemapMissing";
+    /* the sitemap URL suffix*/
+    private static final String SITEMAP_URL_SUFFIX = "/sitempa.xml";
 
     public SeoRule01061() {
         super();
@@ -64,7 +66,7 @@ public class SeoRule01061 extends AbstractSiteRuleImplementation {
         processRemarkService.resetService();
         String robotsTxtContent = null;
         try {
-            robotsTxtContent = HttpRequestHandler.getInstance().getHttpContent(group.getURL()+"/sitemap.xml");
+            robotsTxtContent = HttpRequestHandler.getInstance().getHttpContent(group.getURL()+SITEMAP_URL_SUFFIX);
         } catch (URISyntaxException ex) {
             Logger.getLogger(SeoRule01051.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnknownHostException ex) {
@@ -75,7 +77,7 @@ public class SeoRule01061 extends AbstractSiteRuleImplementation {
         if (StringUtils.isEmpty(robotsTxtContent)) {
             processRemarkService.addConsolidationRemark(
                     TestSolution.FAILED, 
-                    MESSAGE_CODE, 
+                    SITEMAP_MSG_CODE, 
                     "", 
                     group.getURL());
             return definiteResultFactory.create(
