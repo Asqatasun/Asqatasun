@@ -44,7 +44,7 @@ import org.opens.tanaguru.util.http.HttpRequestHandler;
 public class SeoRule01061 extends AbstractSiteRuleImplementation {
 
     /* the sitemap URL suffix*/
-    private static final String SITEMAP_URL_SUFFIX = "/sitempa.xml";
+    private static final String SITEMAP_URL_SUFFIX = "/sitemap.xml";
 
     public SeoRule01061() {
         super();
