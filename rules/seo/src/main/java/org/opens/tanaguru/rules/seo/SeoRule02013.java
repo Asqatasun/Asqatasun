@@ -19,71 +19,41 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import org.jsoup.nodes.Element;
-import org.opens.tanaguru.entity.audit.DefiniteResult;
-import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.opens.tanaguru.rules.elementchecker.attribute.AttributePresenceChecker;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.FORM_BUTTON_CSS_LIKE_QUERY;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.ALT_MISSING_MSG;
 
 /**
  * Does each form button (input tag with the type="image" attribute)
  * have an alt attribute?
  * @author jkowalczyk
  */
-public class SeoRule02013 extends AbstractPageRuleImplementation {
+public class SeoRule02013 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    private static final String MESSAGE_CODE = "AttributeMissing";
-
-    private static final String ALT_ATTR = "alt";
-
-//    private static final String XPATH_EXPR =
-//            "//input[(@type = 'image') and @alt]";
-    private static final String CSS_EXPR =
-            "input[type=image][alt]";
-
-//    private static final String XPATH_EXPR2 =
-//            "//input[(@type = 'image') and not(@alt)]";
-    private static final String CSS_EXPR2 =
-            "input[type=image]:not([alt])";
-
-    public SeoRule02013(){
-        super();
+    /**
+     * Default constructor
+     */
+    public SeoRule02013() {
+        super(
+                new SimpleElementSelector(FORM_BUTTON_CSS_LIKE_QUERY), 
+                new AttributePresenceChecker(
+                        ALT_ATTR, 
+                        // passed when attribute is found
+                        TestSolution.PASSED, 
+                        // failed when attribute is not found
+                        TestSolution.FAILED, 
+                        // no message created when attribute is found
+                        null, 
+                        // message associated with element when attribute is not found
+                        ALT_MISSING_MSG, 
+                        // evidence elements
+                        SRC_ATTR)
+            );
     }
 
-    @Override
-    protected ProcessResult processImpl(SSPHandler sspHandler) {
-
-        int testedElementCounter = 0;
-        
-        TestSolution checkResult = TestSolution.NOT_APPLICABLE;
-
-        sspHandler.beginCssLikeSelection().domCssLikeSelectNodeSet(CSS_EXPR);
-        testedElementCounter += sspHandler.getSelectedElements().size();
-        if (!sspHandler.getSelectedElements().isEmpty()) {
-            checkResult = TestSolution.PASSED;
-        }
-
-        sspHandler.domCssLikeSelectNodeSet(CSS_EXPR2);
-        if (!sspHandler.getSelectedElements().isEmpty()) {
-            testedElementCounter += sspHandler.getSelectedElements().size();
-            checkResult = TestSolution.FAILED;
-            for (Element el : sspHandler.getSelectedElements()){
-                sspHandler.getProcessRemarkService().addSourceCodeRemarkOnElement(
-                        checkResult,
-                        el,
-                        MESSAGE_CODE);
-            }
-        }
-
-        DefiniteResult result = definiteResultFactory.create(
-                test,
-                sspHandler.getSSP().getPage(),
-                checkResult,
-                sspHandler.getRemarkList());
-
-        result.setElementCounter(testedElementCounter);
-
-        return result;
-    }
 }

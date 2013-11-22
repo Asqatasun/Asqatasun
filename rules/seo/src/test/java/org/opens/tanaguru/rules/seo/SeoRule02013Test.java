@@ -15,6 +15,7 @@ package org.opens.tanaguru.rules.seo;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 import org.opens.tanaguru.rules.seo.test.SeoRuleImplementationTestCase;
 
 /**
@@ -65,13 +66,13 @@ public class SeoRule02013Test extends SeoRuleImplementationTestCase {
         ProcessResult processResult =
                 processPageTest("Seo.Test.2.1.3-2Failed-01");
         assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals("AttributeMissing",
+        assertEquals(RemarkMessageStore.ALT_MISSING_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
 
         processResult = processPageTest("Seo.Test.2.1.3-2Failed-02");
         assertEquals(TestSolution.FAILED,
                 processResult.getValue());
-        assertEquals("AttributeMissing",
+        assertEquals(RemarkMessageStore.ALT_MISSING_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
 
         assertEquals(TestSolution.NOT_APPLICABLE,
