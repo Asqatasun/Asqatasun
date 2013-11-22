@@ -21,30 +21,43 @@ package org.opens.tanaguru.rules.seo;
 
 
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.rules.seo.detection.AbstractTagDetectionPageRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.H1_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.H1_TAG_MISSING_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MORE_THAN_ONE_H1_MSG;
 
 /**
  * This rule tests if each page has one and only one &lt;h1&gt; tag
  * @author jkowalczyk
  */
-public class SeoRule07021 extends AbstractTagDetectionPageRuleImplementation {
-
-    public static final String ERROR_MESSAGE_CODE = "H1TagMissing";
-    private static final String TAG_DETECTION_XPATH_EXPR =
-            "body h1";
-    public static final String H1_EVIDENCE_NAME = "H1";
-    public static final String MORE_THAN_ONE_H1_MSG_CODE = "MoreThanOneH1Tag";
-
-    public SeoRule07021() {
-        super();
-        setMessageCode(ERROR_MESSAGE_CODE);
-        setSelectionExpression(TAG_DETECTION_XPATH_EXPR);
-        setDetectedSolution(TestSolution.PASSED);
-        setNotDetectedSolution(TestSolution.FAILED);
-        setIsRemarkCreatedOnDetection(false);
-        setHasElementToBeUnique(true);
-        setNotUniqueMessage(MORE_THAN_ONE_H1_MSG_CODE);
-        setNotUniqueEvidenceElement(H1_EVIDENCE_NAME);
+public class SeoRule07021 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
+    
+    /**
+     * Default constructor
+     */
+    public SeoRule07021(){
+        super(
+                new SimpleElementSelector(H1_ELEMENT), 
+                
+                new ElementPresenceChecker(
+                    // check element has to be unique
+                    true,
+                    // solution when detected
+                    TestSolution.PASSED,
+                    // solution when not detected
+                    TestSolution.FAILED,
+                    // no message on detection
+                    null,
+                    // message when not detected
+                    H1_TAG_MISSING_MSG, 
+                    // message when multiple elements detected
+                    MORE_THAN_ONE_H1_MSG, 
+                    // evidence elements
+                    TEXT_ELEMENT2)
+            );
     }
 
 }

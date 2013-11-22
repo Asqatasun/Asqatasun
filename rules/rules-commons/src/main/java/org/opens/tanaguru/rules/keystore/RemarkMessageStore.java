@@ -306,6 +306,7 @@ public final class RemarkMessageStore {
     public static final String FRAMESET_DETECTED_MSG = "FramesetDetected";
     public static final String NOT_RELEVANT_H1_MSG = "notRelevantH1Tag";
     public static final String CHECK_H1_RELEVANCY_MSG = "checkRelevancyH1Tag";
+    public static final String MORE_THAN_ONE_H1_MSG = "MoreThanOneH1Tag";
     
     /**
      * Private constructor. This class handles keys and must not be instantiated

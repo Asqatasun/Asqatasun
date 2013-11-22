@@ -16,6 +16,7 @@ import org.opens.tanaguru.rules.seo.SeoRule07021;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 import org.opens.tanaguru.rules.seo.test.SeoRuleImplementationTestCase;
 
 /**
@@ -59,21 +60,21 @@ public class SeoRule07021Test extends SeoRuleImplementationTestCase {
         processResult = processPageTest("Seo.Test.7.2.1-2Failed-01");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule07021.ERROR_MESSAGE_CODE,
+        assertEquals(RemarkMessageStore.H1_TAG_MISSING_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
 
         processResult = processPageTest("Seo.Test.7.2.1-2Failed-02");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule07021.ERROR_MESSAGE_CODE,
+        assertEquals(RemarkMessageStore.H1_TAG_MISSING_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
 
         processResult = processPageTest("Seo.Test.7.2.1-2Failed-03");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(2,processResult.getRemarkSet().size());
-        assertEquals(SeoRule07021.MORE_THAN_ONE_H1_MSG_CODE,
+        assertEquals(RemarkMessageStore.MORE_THAN_ONE_H1_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(SeoRule07021.MORE_THAN_ONE_H1_MSG_CODE,
+        assertEquals(RemarkMessageStore.MORE_THAN_ONE_H1_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
     }
 
