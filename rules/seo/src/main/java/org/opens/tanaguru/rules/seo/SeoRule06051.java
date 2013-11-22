@@ -19,55 +19,21 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.opens.tanaguru.entity.audit.ProcessRemark;
-import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithCheckerImplementation;
+import org.opens.tanaguru.rules.elementchecker.doctype.DoctypePresenceChecker;
 
 /**
  * For each Web page, is the &lt;a href="http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDTD"&gt;
  * document type&lt;/a&gt; (doctype tag) available?
  * @author jkowalczyk
  */
-public class SeoRule06051 extends AbstractPageRuleImplementation {
+public class SeoRule06051 extends AbstractPageRuleWithCheckerImplementation {
 
-    private static final String MESSAGE_CODE = "DoctypeMissing";
     /**
      *
      */
     public SeoRule06051() {
-        super();
+        super(new DoctypePresenceChecker());
     }
 
-    /**
-     *
-     * @param sspHandler
-     * @return
-     */
-    @Override
-    protected ProcessResult processImpl(SSPHandler sspHandler) {
-        List<ProcessRemark> processRemarkList =  new ArrayList<ProcessRemark>();
-        TestSolution testSolution = null;
-        String doctype = sspHandler.getSSP().getDoctype();
-        if (doctype == null || doctype.trim().isEmpty()) {
-            testSolution = TestSolution.FAILED;
-            processRemarkList.add(
-                    sspHandler.getProcessRemarkService().createProcessRemark(
-                    TestSolution.FAILED,
-                    MESSAGE_CODE));
-        } else {
-            testSolution = TestSolution.PASSED;
-        }
-
-        ProcessResult processResult = definiteResultFactory.create(
-                test,
-                sspHandler.getPage(),
-                testSolution,
-                processRemarkList);
-
-        return processResult;
-    }
 }
