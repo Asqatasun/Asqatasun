@@ -53,7 +53,6 @@ public class DeepTextElementBuilder implements TextElementBuilder{
                 elementText.append(buildTextFromElement((Element)child));
             }
         }
-        System.out.println(elementText.toString());
         return StringUtils.trim(elementText.toString());
     }
     
