@@ -1001,7 +1001,6 @@ INSERT IGNORE INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `
 ('NomenclatureElementImpl', 915, 'login', NULL, 12),
 ('NomenclatureElementImpl', 916, 'redirect', NULL, 12),
 ('NomenclatureElementImpl', 917, 'redirecting', NULL, 12),
-
 ('NomenclatureElementImpl', 918, '.ods', NULL, 24),
 ('NomenclatureElementImpl', 919, '.fods', NULL, 24),
 ('NomenclatureElementImpl', 920, '.odt', NULL, 24),
@@ -1178,6 +1177,7 @@ INSERT IGNORE INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `
 ('NomenclatureElementImpl', 1091, '.r97', NULL, 24),
 ('NomenclatureElementImpl', 1092, '.r98', NULL, 24),
 ('NomenclatureElementImpl', 1093, '.r99', NULL, 24),
-('NomenclatureElementImpl', 1094, '.taz', NULL, 24);
+('NomenclatureElementImpl', 1094, '.taz', NULL, 24),
+('NomenclatureElementImpl', 1095, 'page sans titre', NULL, 12);
 
 SET foreign_key_checks=1;
