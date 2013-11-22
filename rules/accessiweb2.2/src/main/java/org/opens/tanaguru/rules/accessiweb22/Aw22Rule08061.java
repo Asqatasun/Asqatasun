@@ -38,7 +38,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NOT_PERTINENT
  */
 public class Aw22Rule08061 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-     /* The selector */
+    /* The selector */
     private static final ElementSelector ELEMENT_SELECTOR = 
             new SimpleElementSelector(TITLE_ELEMENT);
     
