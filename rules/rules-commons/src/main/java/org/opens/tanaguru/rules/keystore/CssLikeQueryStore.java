@@ -224,6 +224,11 @@ public final class CssLikeQueryStore {
     // Seo 
     public static final String META_DESC_CSS_LIKE_QUERY = 
                     "head meta[name=description][content]";
+    public static final String FLASH_CONTENT_CSS_LIKE_QUERY =
+                    "[type=application/x-shockwave-flash], "
+                  + "object[data$=swf], "
+                  + "embed[src$=swf]";
+
     /**
      * Private constructor. This class handles keys and must not be instanciated
      */
