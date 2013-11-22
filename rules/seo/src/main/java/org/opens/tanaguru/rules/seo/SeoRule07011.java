@@ -20,49 +20,41 @@
 package org.opens.tanaguru.rules.seo;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import org.opens.tanaguru.entity.audit.ProcessRemark;
-import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
-
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.H1_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.H1_TAG_MISSING_MSG;
 
 /**
  * This rule tests if each page has at least one <h1> tag
  * @author jkowalczyk
  */
-public class SeoRule07011 extends AbstractPageRuleImplementation {
-
-    private static final String MESSAGE_CODE = "H1TagMissing";
-    private static final String CSS_EXPR = "body h1";
-
-    public SeoRule07011() {
-        super();
-    }
-
-    @Override
-    protected ProcessResult processImpl(SSPHandler sspHandler) {
-        sspHandler.beginCssLikeSelection().domCssLikeSelectNodeSet(CSS_EXPR);
-        
-        List<ProcessRemark> processRemarkList = new ArrayList<ProcessRemark>();
-        TestSolution testSolution = TestSolution.PASSED;
-
-        if (sspHandler.getSelectedElements().isEmpty()) {
-            testSolution = TestSolution.FAILED;
-            processRemarkList.add(sspHandler.getProcessRemarkService().
-                    createProcessRemark(TestSolution.FAILED,MESSAGE_CODE));
-        }
-
-        ProcessResult processResult = definiteResultFactory.create(
-                test,
-                sspHandler.getPage(),
-                testSolution,
-                processRemarkList);
-
-        return processResult;
-
+public class SeoRule07011 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
+    
+    /**
+     * Default constructor
+     */
+    public SeoRule07011(){
+        super(
+                new SimpleElementSelector(H1_ELEMENT), 
+                
+                new ElementPresenceChecker(
+                    // check element has to be unique
+                    false,
+                    // solution when detected
+                    TestSolution.PASSED,
+                    // solution when not detected
+                    TestSolution.FAILED,
+                    // no message on detection
+                    null,
+                    // message when not detected
+                    H1_TAG_MISSING_MSG, 
+                    // evidence elements
+                    TEXT_ELEMENT2)
+            );
     }
 
 }
