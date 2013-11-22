@@ -19,57 +19,68 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import org.jsoup.select.Elements;
-import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.rules.seo.length.AbstractElementLengthControlPageRuleImplementation;
-import org.opens.tanaguru.rules.seo.util.UniqueElementChecker;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
+import org.opens.tanaguru.rules.elementchecker.ElementChecker;
+import org.opens.tanaguru.rules.elementchecker.text.TextLengthChecker;
+import org.opens.tanaguru.rules.elementselector.ElementSelector;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.TITLE_WITHIN_HEAD_CSS_LIKE_QUERY;
+import org.opens.tanaguru.rules.keystore.HtmlElementStore;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.TITLE_EXCEEDS_LIMIT_MSG_CODE;
+import org.opens.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
 
 /**
  * Test whether the Title tag of the page exceeds 70 characters?
  * 
  * @author jkowalczyk
  */
-public class SeoRule06031 extends AbstractElementLengthControlPageRuleImplementation {
+public class SeoRule06031 extends AbstractPageRuleMarkupImplementation {
 
-    public static final String MESSAGE_CODE = "TitleTagLengthExceedLimit";
-    public static final String TITLE_EVIDENCE_NAME = "Title";
-    public static final String MORE_THAN_ONE_TITLE_MESSAGE_CODE = "MoreThanOneTitleTag";
-    private static final int URL_MAX_LENGTH = 70;
-    private static final String CSS_EXPR = "head title";
+    /* the max length of the title element */
+    private static final int TITLE_MAX_LENGTH = 100;
 
+    /*
+     * Constructor
+     */
     public SeoRule06031() {
         super();
-        setMessageCode(MESSAGE_CODE);
-        setLength(URL_MAX_LENGTH);
     }
 
+     @Override
+    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
+        ElementSelector es = new SimpleElementSelector(TITLE_WITHIN_HEAD_CSS_LIKE_QUERY);
+        es.selectElements(sspHandler, elementHandler);
+    }
+    
     @Override
-    protected ProcessResult processImpl(SSPHandler sspHandler) {
-        Elements elements = sspHandler.beginCssLikeSelection().
-                domCssLikeSelectNodeSet(CSS_EXPR).getSelectedElements();
-        if (elements.isEmpty()) {
-            // if the page has no title tag, the result is NA.
-            return definiteResultFactory.create(
-                test,
-                sspHandler.getSSP().getPage(),
-                TestSolution.NOT_APPLICABLE,
-                sspHandler.getRemarkList());
-        } else if (elements.size() == 1) {
-            setElement(elements.get(0).text());
-            return super.processImpl(sspHandler);
-        } else {
-            return definiteResultFactory.create(
-                test,
-                sspHandler.getSSP().getPage(),
-                TestSolution.FAILED,
-                UniqueElementChecker.getNotUniqueElementProcessRemarkCollection(
-                    sspHandler,
-                    elements,
-                    MORE_THAN_ONE_TITLE_MESSAGE_CODE,
-                    TITLE_EVIDENCE_NAME));
+    protected void check(
+            SSPHandler sspHandler, 
+            ElementHandler<Element> elementHandler, 
+            TestSolutionHandler testSolutionHandler) {
+        super.check(sspHandler, elementHandler, testSolutionHandler);
+        if (elementHandler.isEmpty()) {
+            testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
+            return;
         }
+
+        // in case of more than one title, keep the first. 
+        if (elementHandler.get().size() > 1) {
+            Element el = elementHandler.get().iterator().next();
+            elementHandler.clean().add(el);
+        }
+
+        ElementChecker ec = new TextLengthChecker(
+                new SimpleTextElementBuilder(), 
+                TITLE_MAX_LENGTH, 
+                TITLE_EXCEEDS_LIMIT_MSG_CODE, 
+                // evidence elements
+                HtmlElementStore.TEXT_ELEMENT2);
+        ec.check(sspHandler, elementHandler, testSolutionHandler);
     }
 
 }

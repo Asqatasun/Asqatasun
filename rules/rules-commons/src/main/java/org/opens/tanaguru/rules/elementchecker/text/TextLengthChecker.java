@@ -142,7 +142,7 @@ public class TextLengthChecker extends ElementCheckerImpl {
                 elementText == null) {
             return TestSolution.NOT_APPLICABLE;
         }
-        if (elementText.length() >= lengthLimit) {
+        if (elementText.length() > lengthLimit) {
             if (StringUtils.isNotBlank(textTooLongMessageCode)) {
                 addSourceCodeRemark(
                     getFailureSolution(), 

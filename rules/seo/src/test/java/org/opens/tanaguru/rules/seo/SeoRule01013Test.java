@@ -16,7 +16,6 @@ package org.opens.tanaguru.rules.seo;
 import java.util.Iterator;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.rules.keystore.AttributeStore;
-import org.opens.tanaguru.rules.seo.SeoRule01013;
 import org.opens.tanaguru.rules.seo.test.SeoRuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
@@ -76,7 +75,7 @@ public class SeoRule01013Test extends SeoRuleImplementationTestCase {
 
         
         //----------------------------------------------------------------------
-        //------------------------------1Passed-01------------------------------
+        //------------------------------1Passed-02------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Seo.Test.1.1.3-1Passed-02");
         // check number of elements in the page

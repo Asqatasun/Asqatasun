@@ -281,6 +281,8 @@ public final class RemarkMessageStore {
             "MetaDescriptionTagLengthExceedLimit";
     public static final String URL_EXCEEDS_LIMIT_MSG_CODE = 
             "UrlLengthExceedLimit";
+    public static final String TITLE_EXCEEDS_LIMIT_MSG_CODE = 
+            "TitleTagLengthExceedLimit";
         
     /**
      * Private constructor. This class handles keys and must not be instantiated
