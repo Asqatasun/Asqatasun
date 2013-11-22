@@ -116,11 +116,11 @@ public abstract class AbstractPageRuleFromPreProcessImplementation
             SSPHandler sspHandler, 
             ElementHandler selectionHandler, 
             TestSolutionHandler testSolutionHandler) {
+        super.check(sspHandler, selectionHandler, testSolutionHandler);
         if (domElements == null) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_TESTED);
             return;
         }
-        super.check(sspHandler, selectionHandler, testSolutionHandler);
         
         if (elementChecker instanceof NomenclatureBasedElementChecker) {
             ((NomenclatureBasedElementChecker)elementChecker).
