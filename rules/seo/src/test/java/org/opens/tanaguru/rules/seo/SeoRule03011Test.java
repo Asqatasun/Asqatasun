@@ -12,11 +12,11 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import org.opens.tanaguru.rules.seo.SeoRule03011;
 import org.opens.tanaguru.rules.seo.test.SeoRuleImplementationTestCase;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
  *
@@ -56,13 +56,13 @@ public class SeoRule03011Test extends SeoRuleImplementationTestCase {
         processResult = processPageTest("Seo.Test.3.1.1-2Failed-01");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule03011.ERROR_MESSAGE_CODE,
+        assertEquals(RemarkMessageStore.FRAMESET_DETECTED_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
         
         processResult = processPageTest("Seo.Test.3.1.1-2Failed-02");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule03011.ERROR_MESSAGE_CODE,
+        assertEquals(RemarkMessageStore.FRAMESET_DETECTED_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
     }
 

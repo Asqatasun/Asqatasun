@@ -287,6 +287,11 @@ public final class RemarkMessageStore {
             "MetaDescriptionNotUnique";
     public static final String META_DESC_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE = 
             "MetaDescriptionIdenticalTo";
+    public static final String META_DESC_NOT_RELEVANT_MSG_CODE = 
+            "EmptyMetaDescriptionTag";
+    public static final String CHECK_META_DESC_RELEVANCY_MSG_CODE = 
+            "CheckRelevancyMetaDescriptionTag";
+    
     public static final String TITLE_NOT_UNIQUE_MSG_CODE = "TitleNotUnique";
     public static final String TITLE_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE = 
             "TitleIdenticalTo";
@@ -298,6 +303,7 @@ public final class RemarkMessageStore {
             "SourceCodeIdenticalTo";
     public static final String ROBOTS_TXT_MSG_CODE = "RobotsTxtMissing";
     public static final String SITEMAP_MSG_CODE = "SitemapMissing";
+    public static final String FRAMESET_DETECTED_MSG = "FramesetDetected";
     
     /**
      * Private constructor. This class handles keys and must not be instantiated

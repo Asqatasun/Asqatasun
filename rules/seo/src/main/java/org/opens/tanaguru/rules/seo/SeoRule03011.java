@@ -20,26 +20,46 @@
 package org.opens.tanaguru.rules.seo;
 
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.rules.seo.detection.AbstractTagDetectionPageRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.FRAMESET_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.FRAMESET_DETECTED_MSG;
 
 /**
  * This rule checks whether the page contains frameset tags
  * @author jkowalczyk
  */
-public class SeoRule03011 extends AbstractTagDetectionPageRuleImplementation {
+public class SeoRule03011 extends AbstractDetectionPageRuleImplementation {
 
-    public static final String ERROR_MESSAGE_CODE = "FramesetDetected";
-    private static final String TAG_DETECTION_XPATH_EXPR =
-            "frameset";
-    
-    public SeoRule03011() {
-        super();
-        setMessageCode(ERROR_MESSAGE_CODE);
-        setSelectionExpression(TAG_DETECTION_XPATH_EXPR);
-        setDetectedSolution(TestSolution.FAILED);
-        setNotDetectedSolution(TestSolution.PASSED);
-        setIsRemarkCreatedOnDetection(true);
-        setHasElementToBeUnique(false);
+    /**
+     * Default constructor
+     */
+    public SeoRule03011 () {
+        super(
+                new SimpleElementSelector(FRAMESET_ELEMENT),
+                // solution when at least one element is found
+                TestSolution.FAILED,
+                // solution when no element is found
+                TestSolution.PASSED,
+                // manual check message
+                FRAMESET_DETECTED_MSG,
+                null);
     }
+
+//extends AbstractTagDetectionPageRuleImplementation {
+//
+//    public static final String ERROR_MESSAGE_CODE = "FramesetDetected";
+//    private static final String TAG_DETECTION_XPATH_EXPR =
+//            "frameset";
+//    
+//    public SeoRule03011() {
+//        super();
+//        setMessageCode(ERROR_MESSAGE_CODE);
+//        setSelectionExpression(TAG_DETECTION_XPATH_EXPR);
+//        setDetectedSolution(TestSolution.FAILED);
+//        setNotDetectedSolution(TestSolution.PASSED);
+//        setIsRemarkCreatedOnDetection(true);
+//        setHasElementToBeUnique(false);
+//    }
 
 }

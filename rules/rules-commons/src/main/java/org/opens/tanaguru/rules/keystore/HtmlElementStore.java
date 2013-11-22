@@ -46,6 +46,7 @@ public final class HtmlElementStore {
     public static final String FIELDSET_ELEMENT = "fieldset";
     public static final String FORM_ELEMENT = HTML.Tag.FORM.toString();
     public static final String FRAME_ELEMENT = HTML.Tag.FRAME.toString();
+    public static final String FRAMESET_ELEMENT = HTML.Tag.FRAMESET.toString();
     public static final String H1_ELEMENT = HTML.Tag.H1.toString();
     public static final String H2_ELEMENT = HTML.Tag.H2.toString();
     public static final String H3_ELEMENT = HTML.Tag.H3.toString();
