@@ -283,7 +283,20 @@ public final class RemarkMessageStore {
             "UrlLengthExceedLimit";
     public static final String TITLE_EXCEEDS_LIMIT_MSG_CODE = 
             "TitleTagLengthExceedLimit";
-        
+    public static final String META_DESC_NOT_UNIQUE_MSG_CODE = 
+            "MetaDescriptionNotUnique";
+    public static final String META_DESC_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE = 
+            "MetaDescriptionIdenticalTo";
+    public static final String TITLE_NOT_UNIQUE_MSG_CODE = "TitleNotUnique";
+    public static final String TITLE_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE = 
+            "TitleIdenticalTo";
+    public static final String H1_NOT_UNIQUE_MSG_CODE = "H1NotUnique";
+    public static final String H1_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE = 
+            "H1IdenticalTo";
+    public static final String SOURCE_CODE_NOT_UNIQUE_MSG_CODE = "SourceCodeNotUnique";
+    public static final String SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE = 
+            "SourceCodeIdenticalTo";
+
     /**
      * Private constructor. This class handles keys and must not be instantiated
      */

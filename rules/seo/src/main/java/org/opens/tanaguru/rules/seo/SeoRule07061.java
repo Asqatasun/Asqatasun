@@ -19,24 +19,29 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import org.opens.tanaguru.rules.seo.unicity.AbstractTagUnicitySiteRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractUniqueElementSiteRuleImplementation;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import org.opens.tanaguru.rules.keystore.HtmlElementStore;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.H1_NOT_UNIQUE_MSG_CODE;
+import org.opens.tanaguru.rules.textbuilder.DeepTextElementBuilder;
 
 /**
  * For each page of a site or a group of pages, is the H1 tag unique ?
  * 
  * @author jkowalczyk
  */
-public class SeoRule07061 extends AbstractTagUnicitySiteRuleImplementation {
+public class SeoRule07061 extends AbstractUniqueElementSiteRuleImplementation {
 
-    public static final String SITE_LEVEL_MESSAGE_CODE = "H1NotUnique";
-    public static final String PAGE_LEVEL_MESSAGE_CODE = "H1IdenticalTo";
-    private static final String XPATH_REQUEST = "body h1";
-
+    /**
+     * Constructor
+     */
     public SeoRule07061() {
-        super();
-        setPageLevelMessageCode(PAGE_LEVEL_MESSAGE_CODE);
-        setSiteLevelMessageCode(SITE_LEVEL_MESSAGE_CODE);
-        setSelectionExpression(XPATH_REQUEST);
+        super(
+                new SimpleElementSelector(HtmlElementStore.H1_ELEMENT),
+                new DeepTextElementBuilder(), 
+                H1_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE,
+                H1_NOT_UNIQUE_MSG_CODE);
     }
 
 }

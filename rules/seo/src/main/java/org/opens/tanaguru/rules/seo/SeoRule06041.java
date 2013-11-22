@@ -19,24 +19,30 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import org.opens.tanaguru.rules.seo.unicity.AbstractTagUnicitySiteRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractUniqueElementSiteRuleImplementation;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.TITLE_WITHIN_HEAD_CSS_LIKE_QUERY;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.TITLE_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.TITLE_NOT_UNIQUE_MSG_CODE;
+import org.opens.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
 
 /**
  * For each page of a site or a group of pages, is the title unique ?
  * 
  * @author jkowalczyk
  */
-public class SeoRule06041 extends AbstractTagUnicitySiteRuleImplementation {
+public class SeoRule06041 extends AbstractUniqueElementSiteRuleImplementation {
 
-    public static final String SITE_LEVEL_MESSAGE_CODE = "TitleNotUnique";
-    public static final String PAGE_LEVEL_MESSAGE_CODE = "TitleIdenticalTo";
-    private static final String XPATH_REQUEST = "html head title";
-
+    /**
+     * Constructor
+     */
     public SeoRule06041() {
-        super();
-        setPageLevelMessageCode(PAGE_LEVEL_MESSAGE_CODE);
-        setSiteLevelMessageCode(SITE_LEVEL_MESSAGE_CODE);
-        setSelectionExpression(XPATH_REQUEST);
+        super(
+                new SimpleElementSelector(TITLE_WITHIN_HEAD_CSS_LIKE_QUERY),
+                new SimpleTextElementBuilder(), 
+                TITLE_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE,
+                TITLE_NOT_UNIQUE_MSG_CODE
+                );
     }
 
 }

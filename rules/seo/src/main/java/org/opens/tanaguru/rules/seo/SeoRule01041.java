@@ -22,26 +22,31 @@ package org.opens.tanaguru.rules.seo;
 import org.opens.tanaguru.entity.audit.IndefiniteResult;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.rules.seo.unicity.AbstractTagUnicitySiteRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractUniqueElementSiteRuleImplementation;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.SOURCE_CODE_NOT_UNIQUE_MSG_CODE;
 
 /**
  * For each page of a website or a group of pages, is the source code unique ?
  * 
  * @author jkowalczyk
  */
-public class SeoRule01041 extends AbstractTagUnicitySiteRuleImplementation {
+public class SeoRule01041 extends AbstractUniqueElementSiteRuleImplementation {
 
-    public static final String SITE_LEVEL_MESSAGE_CODE = "SourceCodeNotUnique";
-    public static final String PAGE_LEVEL_MESSAGE_CODE = "SourceCodeIdenticalTo";
-
+    /**
+     * Constructor
+     */
     public SeoRule01041() {
-        super();
-        setPageLevelMessageCode(PAGE_LEVEL_MESSAGE_CODE);
-        setSiteLevelMessageCode(SITE_LEVEL_MESSAGE_CODE);
+        super(
+                null, 
+                null,
+                SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE,
+                SOURCE_CODE_NOT_UNIQUE_MSG_CODE);
     }
 
     @Override
     protected ProcessResult processImpl(SSPHandler sspHandler) {
+        sspHandler.getProcessRemarkService().resetService();
         // The source code is encoding amoung MD5 algorithm after the adaptation
         // phase. This conversion is useless.
         IndefiniteResult result = indefiniteResultFactory.create(test,

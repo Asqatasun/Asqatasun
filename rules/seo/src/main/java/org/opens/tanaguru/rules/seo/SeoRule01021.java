@@ -19,12 +19,13 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import org.opens.tanaguru.entity.audit.IndefiniteResult;
-import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.rules.seo.unicity.AbstractTagUnicitySiteRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractUniqueElementSiteRuleImplementation;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.CONTENT_ATTR;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.META_DESC_CSS_LIKE_QUERY;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.META_DESC_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.META_DESC_NOT_UNIQUE_MSG_CODE;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * For each page of a site or a group of pages, is the meta description tag
@@ -32,33 +33,19 @@ import org.opens.tanaguru.rules.seo.unicity.AbstractTagUnicitySiteRuleImplementa
  *
  * @author jkowalczyk
  */
-public class SeoRule01021 extends AbstractTagUnicitySiteRuleImplementation {
+public class SeoRule01021 extends AbstractUniqueElementSiteRuleImplementation {
 
-    public static final String SITE_LEVEL_MESSAGE_CODE = "MetaDescriptionNotUnique";
-    public static final String PAGE_LEVEL_MESSAGE_CODE = "MetaDescriptionIdenticalTo";
-    private static final String TAG_DETECTION_XPATH_EXPR =
-            "head meta[name=description][content]";
-    private static final String CONTENT_ATTRIBUTE_NAME = "content";
 
+    /**
+     * Constructor
+     */
     public SeoRule01021() {
-        super();
-        setPageLevelMessageCode(PAGE_LEVEL_MESSAGE_CODE);
-        setSiteLevelMessageCode(SITE_LEVEL_MESSAGE_CODE);
-        setSelectionExpression(TAG_DETECTION_XPATH_EXPR);
-    }
-
-    @Override
-    protected ProcessResult processImpl(SSPHandler sspHandler) {
-        sspHandler.beginCssLikeSelection().domCssLikeSelectNodeSet(getSelectionExpression());
-        Elements elements = sspHandler.getSelectedElements();
-        String elementValue=  null;
-        if (!elements.isEmpty()) {
-            Element element = elements.iterator().next();
-            elementValue = element.attr(CONTENT_ATTRIBUTE_NAME).trim();
-        }
-        IndefiniteResult result = indefiniteResultFactory.create(test,
-                sspHandler.getPage(), elementValue);
-        return result;
+        super(
+                new SimpleElementSelector(META_DESC_CSS_LIKE_QUERY),
+                new TextAttributeOfElementBuilder(CONTENT_ATTR), 
+                META_DESC_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE,
+                META_DESC_NOT_UNIQUE_MSG_CODE
+                );
     }
 
 }

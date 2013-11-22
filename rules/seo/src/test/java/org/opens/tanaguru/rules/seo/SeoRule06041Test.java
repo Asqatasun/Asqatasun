@@ -12,8 +12,6 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import org.opens.tanaguru.rules.seo.SeoRule06041;
-import org.opens.tanaguru.rules.seo.test.SeoSiteRuleWithPageResultImplementationTestCase;
 import java.util.Collection;
 import java.util.List;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
@@ -21,6 +19,8 @@ import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
+import org.opens.tanaguru.rules.seo.test.SeoSiteRuleWithPageResultImplementationTestCase;
 
 /**
  *
@@ -119,13 +119,13 @@ public class SeoRule06041Test extends SeoSiteRuleWithPageResultImplementationTes
         assertEquals(TestSolution.FAILED, ((List<ProcessResult>)processResult).get(2).getValue());
 
         assertEquals(1, ((List<ProcessResult>)processResult).get(0).getRemarkSet().size());
-        assertEquals(SeoRule06041.PAGE_LEVEL_MESSAGE_CODE,
+        assertEquals(RemarkMessageStore.TITLE_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE,
                 ((ProcessRemark)((List<ProcessResult>)processResult).get(0).getRemarkSet().toArray()[0]).getMessageCode());
         assertEquals(1, ((List<ProcessResult>)processResult).get(1).getRemarkSet().size());
-        assertEquals(SeoRule06041.PAGE_LEVEL_MESSAGE_CODE,
+        assertEquals(RemarkMessageStore.TITLE_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE,
                 ((ProcessRemark)((List<ProcessResult>)processResult).get(1).getRemarkSet().toArray()[0]).getMessageCode());
         assertEquals(2, ((List<ProcessResult>)processResult).get(2).getRemarkSet().size());
-        assertEquals(SeoRule06041.SITE_LEVEL_MESSAGE_CODE,
+        assertEquals(RemarkMessageStore.TITLE_NOT_UNIQUE_MSG_CODE,
                 ((ProcessRemark)((List<ProcessResult>)processResult).get(2).getRemarkSet().toArray()[0]).getMessageCode());
 
         processResult = consolidateWithListAsReturn("Seo.Test.6.4.1-4NA-01");
