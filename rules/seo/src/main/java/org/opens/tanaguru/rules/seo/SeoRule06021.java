@@ -19,48 +19,48 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import org.jsoup.select.Elements;
-import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.rules.seo.detection.AbstractTagDetectionPageRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.opens.tanaguru.rules.elementchecker.pertinence.TextPertinenceChecker;
+import org.opens.tanaguru.rules.elementselector.ElementSelector;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TITLE_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_TITLE_PERTINENCE_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NOT_PERTINENT_TITLE_MSG;
 
 /**
  * Test whether the content of the title tag is relevant on the page
  * @author jkowalczyk
  */
-public class SeoRule06021 extends AbstractTagDetectionPageRuleImplementation {
+public class SeoRule06021 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    public static final String ERROR_MESSAGE_CODE = "notRelevantTitleTag";
-    public static final String CHECK_ELEMENT_MESSAGE_CODE = "checkRelevancyTitleTag";
-    private static final String TAG_DETECTION_CSS_EXPR =
-            "html head title";
-
-    public SeoRule06021() {
-        super();
-        setMessageCode(ERROR_MESSAGE_CODE);
-        setSelectionExpression(TAG_DETECTION_CSS_EXPR);
-        setDetectedSolution(TestSolution.NEED_MORE_INFO);
-        setNotDetectedSolution(TestSolution.NOT_APPLICABLE);
-        setIsRemarkCreatedOnDetection(true);
-        setHasElementToBeUnique(false);
-        setHasElementToBeNotNullAndContainsAlphanumericalContent(true);
-        setElementName(null);
-        setCheckElementMessageCode(CHECK_ELEMENT_MESSAGE_CODE);
-    }
-
-    @Override
-    protected ProcessResult processImpl(SSPHandler sspHandler) {
-        Elements elements = sspHandler.beginCssLikeSelection().domCssLikeSelectNodeSet(TAG_DETECTION_CSS_EXPR).
-                getSelectedElements();
-        if (elements.isEmpty() || elements.size() > 1) {
-            return definiteResultFactory.create(
-                test,
-                sspHandler.getSSP().getPage(),
-                TestSolution.NOT_APPLICABLE,
-                sspHandler.getRemarkList());
-        } else {
-            return super.processImpl(sspHandler);
-        }
+    /* The selector */
+    private static final ElementSelector ELEMENT_SELECTOR = 
+            new SimpleElementSelector(TITLE_ELEMENT);
+    
+    /* Title blacklisted nomenclature */
+    private static final String TITLE_BLACKLIST_NOM = "UnexplicitPageTitle";
+    
+    /**
+     * Default constructor
+     */
+    public SeoRule06021 () {
+        super(
+                ELEMENT_SELECTOR,
+                new TextPertinenceChecker(
+                    // check emptiness
+                    true, 
+                    // no comparison with other attribute
+                    null, 
+                    // blacklist nomenclature name
+                    TITLE_BLACKLIST_NOM, 
+                    // not pertinent message
+                    NOT_PERTINENT_TITLE_MSG, 
+                    // manual check message
+                    CHECK_TITLE_PERTINENCE_MSG,
+                    // evidence elements
+                    TEXT_ELEMENT2
+                )
+            );
     }
 }

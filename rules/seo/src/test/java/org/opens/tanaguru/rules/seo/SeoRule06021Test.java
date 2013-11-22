@@ -12,11 +12,11 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import org.opens.tanaguru.rules.seo.SeoRule06021;
 import org.opens.tanaguru.rules.seo.test.SeoRuleImplementationTestCase;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
  *
@@ -67,31 +67,31 @@ public class SeoRule06021Test extends SeoRuleImplementationTestCase {
                 processPageTest("Seo.Test.6.2.1-2Failed-01");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule06021.ERROR_MESSAGE_CODE,
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_TITLE_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
         
         processResult = processPageTest("Seo.Test.6.2.1-2Failed-02");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule06021.ERROR_MESSAGE_CODE,
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_TITLE_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
         
         processResult = processPageTest("Seo.Test.6.2.1-2Failed-03");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule06021.ERROR_MESSAGE_CODE,
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_TITLE_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
         
         processResult = processPageTest("Seo.Test.6.2.1-2Failed-04");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule06021.ERROR_MESSAGE_CODE,
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_TITLE_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
         
         processResult = processPageTest("Seo.Test.6.2.1-3NMI-01");
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule06021.CHECK_ELEMENT_MESSAGE_CODE,
+        assertEquals(RemarkMessageStore.CHECK_TITLE_PERTINENCE_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
         
         processResult = processPageTest("Seo.Test.6.2.1-4NA-01");
