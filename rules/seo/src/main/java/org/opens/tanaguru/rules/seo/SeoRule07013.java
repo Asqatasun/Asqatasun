@@ -20,33 +20,47 @@
 package org.opens.tanaguru.rules.seo;
 
 
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.rules.seo.detection.AbstractTagDetectionPageRuleImplementation;
-
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.opens.tanaguru.rules.elementchecker.pertinence.TextPertinenceChecker;
+import org.opens.tanaguru.rules.elementselector.ElementSelector;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.H1_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_H1_RELEVANCY_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NOT_RELEVANT_H1_MSG;
 
 /**
  * Test whether a not empty H1 tag is present on the page
  * 
  * @author jkowalczyk
  */
-public class SeoRule07013 extends AbstractTagDetectionPageRuleImplementation {
+public class SeoRule07013 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    private static final String TAG_DETECTION_XPATH_EXPR = "//h1";
-    public static final String ERROR_MESSAGE_CODE = "notRelevantH1Tag";
-    public static final String CHECK_ELEMENT_MESSAGE_CODE = "checkRelevancyH1Tag";
+    /* The selector */
+    private static final ElementSelector ELEMENT_SELECTOR = 
+                    new SimpleElementSelector(H1_ELEMENT);
     
-
-    public SeoRule07013() {
-        super();
-        setMessageCode(ERROR_MESSAGE_CODE);
-        setSelectionExpression(TAG_DETECTION_XPATH_EXPR);
-        setDetectedSolution(TestSolution.NEED_MORE_INFO);
-        setNotDetectedSolution(TestSolution.NOT_APPLICABLE);
-        setIsRemarkCreatedOnDetection(true);
-        setHasElementToBeUnique(false);
-        setHasElementToBeNotNullAndContainsAlphanumericalContent(true);
-        setElementName(null);
-        setCheckElementMessageCode(CHECK_ELEMENT_MESSAGE_CODE);
+    /**
+     * Default constructor
+     */
+    public SeoRule07013 () {
+        super(
+                ELEMENT_SELECTOR,
+                new TextPertinenceChecker(
+                    // check emptiness
+                    true, 
+                    // no comparison with other attribute
+                    null, 
+                    // blacklist nomenclature name
+                    null, 
+                    // not pertinent message
+                    NOT_RELEVANT_H1_MSG, 
+                    // manual check message
+                    CHECK_H1_RELEVANCY_MSG,
+                    // evidence elements
+                    TEXT_ELEMENT2
+                )
+            );
     }
 
 }
