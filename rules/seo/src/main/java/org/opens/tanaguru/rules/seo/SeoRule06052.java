@@ -19,69 +19,20 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.opens.tanaguru.entity.audit.ProcessRemark;
-import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.entity.reference.Nomenclature;
-import org.opens.tanaguru.entity.reference.NomenclatureElement;
-import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithCheckerImplementation;
+import org.opens.tanaguru.rules.elementchecker.doctype.DoctypeValidityChecker;
 
 /**
  * 
  * @author jkowalczyk
  */
-public class SeoRule06052 extends AbstractPageRuleImplementation {
+public class SeoRule06052 extends AbstractPageRuleWithCheckerImplementation {
 
-    private static final String MESSAGE_CODE = "WrongDoctypeDeclaration";
-    private static final String RECOM_DOCTYPE_NOM = "RecommendedDoctypeDeclarations";
     /**
      *
      */
     public SeoRule06052() {
-        super();
-    }
-
-    /**
-     *
-     * @param sspHandler
-     * @return
-     */
-    @Override
-    protected ProcessResult processImpl(SSPHandler sspHandler) {
-
-        Nomenclature recommendedDocytpeDeclarations =
-                nomenclatureLoaderService.loadByCode(RECOM_DOCTYPE_NOM);
-        List<ProcessRemark> processRemarkList =  new ArrayList<ProcessRemark>();
-        
-        TestSolution testSolution = TestSolution.FAILED;
-        String doctype = sspHandler.getSSP().getDoctype();
-        if (doctype == null || doctype.trim().isEmpty()) {
-            testSolution = TestSolution.NOT_APPLICABLE;
-        } else {
-            for (NomenclatureElement nomElement : recommendedDocytpeDeclarations.getElementList()) {
-                if (nomElement.getLabel().equals(doctype)) {
-                    testSolution = TestSolution.PASSED;
-                    break;
-                }
-            }
-        }
-
-        if (testSolution == TestSolution.FAILED) {
-            processRemarkList.add(
-                    sspHandler.getProcessRemarkService().createProcessRemark(
-                    TestSolution.FAILED,
-                    MESSAGE_CODE));
-        }
-
-        ProcessResult processResult = definiteResultFactory.create(
-                test,
-                sspHandler.getPage(),
-                testSolution,
-                processRemarkList);
-        return processResult;
+        super(new DoctypeValidityChecker());
     }
 
 }
