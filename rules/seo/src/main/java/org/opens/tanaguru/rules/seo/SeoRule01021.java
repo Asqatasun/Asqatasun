@@ -23,8 +23,8 @@ import org.opens.tanaguru.ruleimplementation.AbstractUniqueElementSiteRuleImplem
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.CONTENT_ATTR;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.META_DESC_CSS_LIKE_QUERY;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.META_DESC_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.META_DESC_NOT_UNIQUE_MSG_CODE;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.META_DESC_IDENTICAL_TO_ANOTHER_PAGE_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.META_DESC_NOT_UNIQUE_MSG;
 import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
@@ -43,8 +43,8 @@ public class SeoRule01021 extends AbstractUniqueElementSiteRuleImplementation {
         super(
                 new SimpleElementSelector(META_DESC_CSS_LIKE_QUERY),
                 new TextAttributeOfElementBuilder(CONTENT_ATTR), 
-                META_DESC_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE,
-                META_DESC_NOT_UNIQUE_MSG_CODE
+                META_DESC_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                META_DESC_NOT_UNIQUE_MSG
                 );
     }
 

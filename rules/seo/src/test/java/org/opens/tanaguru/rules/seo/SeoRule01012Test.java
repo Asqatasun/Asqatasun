@@ -70,37 +70,37 @@ public class SeoRule01012Test extends SeoRuleImplementationTestCase {
         ProcessResult processResult = processPageTest("Seo.Test.1.1.2-2Failed-01");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.META_DESC_NOT_RELEVANT_MSG_CODE,
+        assertEquals(RemarkMessageStore.META_DESC_NOT_RELEVANT_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
 
         processResult = processPageTest("Seo.Test.1.1.2-2Failed-02");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.META_DESC_NOT_RELEVANT_MSG_CODE,
+        assertEquals(RemarkMessageStore.META_DESC_NOT_RELEVANT_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
         
         processResult = processPageTest("Seo.Test.1.1.2-2Failed-03");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.META_DESC_NOT_RELEVANT_MSG_CODE,
+        assertEquals(RemarkMessageStore.META_DESC_NOT_RELEVANT_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
         
         processResult = processPageTest("Seo.Test.1.1.2-2Failed-04");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.META_DESC_NOT_RELEVANT_MSG_CODE,
+        assertEquals(RemarkMessageStore.META_DESC_NOT_RELEVANT_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
 
         processResult = processPageTest("Seo.Test.1.1.2-3NMI-01");
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.CHECK_META_DESC_RELEVANCY_MSG_CODE,
+        assertEquals(RemarkMessageStore.CHECK_META_DESC_RELEVANCY_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
         
         processResult = processPageTest("Seo.Test.1.1.2-3NMI-02");
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.CHECK_META_DESC_RELEVANCY_MSG_CODE,
+        assertEquals(RemarkMessageStore.CHECK_META_DESC_RELEVANCY_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
         
         processResult = processPageTest("Seo.Test.1.1.2-4NA-01");

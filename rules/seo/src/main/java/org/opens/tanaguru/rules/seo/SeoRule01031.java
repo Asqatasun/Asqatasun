@@ -25,7 +25,7 @@ import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.URL_EXCEEDS_LIMIT_MSG_CODE;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.URL_EXCEEDS_LIMIT_MSG;
 
 /**
  * Test whether the Url of the page exceeds 255 characters
@@ -55,7 +55,7 @@ public class SeoRule01031 extends AbstractPageRuleMarkupImplementation {
             testSolutionHandler.addTestSolution(TestSolution.FAILED);
             sspHandler.getProcessRemarkService().addProcessRemark(
                     TestSolution.FAILED, 
-                    URL_EXCEEDS_LIMIT_MSG_CODE);
+                    URL_EXCEEDS_LIMIT_MSG);
             return;
         }
         testSolutionHandler.addTestSolution(TestSolution.PASSED);

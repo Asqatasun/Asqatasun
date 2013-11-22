@@ -31,7 +31,7 @@ import org.opens.tanaguru.rules.elementselector.ElementSelector;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.TITLE_WITHIN_HEAD_CSS_LIKE_QUERY;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.TITLE_EXCEEDS_LIMIT_MSG_CODE;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.TITLE_EXCEEDS_LIMIT_MSG;
 import org.opens.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
 
 /**
@@ -77,7 +77,7 @@ public class SeoRule06031 extends AbstractPageRuleMarkupImplementation {
         ElementChecker ec = new TextLengthChecker(
                 new SimpleTextElementBuilder(), 
                 TITLE_MAX_LENGTH, 
-                TITLE_EXCEEDS_LIMIT_MSG_CODE, 
+                TITLE_EXCEEDS_LIMIT_MSG, 
                 // evidence elements
                 HtmlElementStore.TEXT_ELEMENT2);
         ec.check(sspHandler, elementHandler, testSolutionHandler);

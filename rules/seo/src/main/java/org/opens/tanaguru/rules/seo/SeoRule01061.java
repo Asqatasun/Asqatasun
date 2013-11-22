@@ -32,7 +32,7 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractSiteRuleImplementation;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.SITEMAP_MSG_CODE;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.SITEMAP_MSG;
 import org.opens.tanaguru.service.ProcessRemarkService;
 import org.opens.tanaguru.util.http.HttpRequestHandler;
 
@@ -77,7 +77,7 @@ public class SeoRule01061 extends AbstractSiteRuleImplementation {
         if (StringUtils.isEmpty(robotsTxtContent)) {
             processRemarkService.addConsolidationRemark(
                     TestSolution.FAILED, 
-                    SITEMAP_MSG_CODE, 
+                    SITEMAP_MSG, 
                     "", 
                     group.getURL());
             return definiteResultFactory.create(

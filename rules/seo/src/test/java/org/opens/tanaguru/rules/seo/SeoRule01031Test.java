@@ -69,7 +69,7 @@ public class SeoRule01031Test extends SeoRuleImplementationTestCase {
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.URL_EXCEEDS_LIMIT_MSG_CODE,
+        assertEquals(RemarkMessageStore.URL_EXCEEDS_LIMIT_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
         assertEquals(TestSolution.FAILED,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());

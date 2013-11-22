@@ -22,8 +22,8 @@ package org.opens.tanaguru.rules.seo;
 import org.opens.tanaguru.ruleimplementation.AbstractUniqueElementSiteRuleImplementation;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.TITLE_WITHIN_HEAD_CSS_LIKE_QUERY;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.TITLE_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.TITLE_NOT_UNIQUE_MSG_CODE;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.TITLE_IDENTICAL_TO_ANOTHER_PAGE_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.TITLE_NOT_UNIQUE_MSG;
 import org.opens.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
 
 /**
@@ -40,8 +40,8 @@ public class SeoRule06041 extends AbstractUniqueElementSiteRuleImplementation {
         super(
                 new SimpleElementSelector(TITLE_WITHIN_HEAD_CSS_LIKE_QUERY),
                 new SimpleTextElementBuilder(), 
-                TITLE_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE,
-                TITLE_NOT_UNIQUE_MSG_CODE
+                TITLE_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                TITLE_NOT_UNIQUE_MSG
                 );
     }
 

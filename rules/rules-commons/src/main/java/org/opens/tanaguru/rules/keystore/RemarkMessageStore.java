@@ -275,34 +275,34 @@ public final class RemarkMessageStore {
     // seo 
     public static final String META_DESC_MISSING_MSG =
             "MetaDescriptionTagMissing";
-    public static final String MORE_THAN_ONE_META_DESC_MSG_CODE = 
+    public static final String MORE_THAN_ONE_META_DESC_MSG = 
             "MoreThanOneMetaDescriptionTag";
-    public static final String META_DESC_EXCEEDS_LIMIT_MSG_CODE = 
+    public static final String META_DESC_EXCEEDS_LIMIT_MSG = 
             "MetaDescriptionTagLengthExceedLimit";
-    public static final String URL_EXCEEDS_LIMIT_MSG_CODE = 
+    public static final String URL_EXCEEDS_LIMIT_MSG = 
             "UrlLengthExceedLimit";
-    public static final String TITLE_EXCEEDS_LIMIT_MSG_CODE = 
+    public static final String TITLE_EXCEEDS_LIMIT_MSG = 
             "TitleTagLengthExceedLimit";
-    public static final String META_DESC_NOT_UNIQUE_MSG_CODE = 
+    public static final String META_DESC_NOT_UNIQUE_MSG = 
             "MetaDescriptionNotUnique";
-    public static final String META_DESC_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE = 
+    public static final String META_DESC_IDENTICAL_TO_ANOTHER_PAGE_MSG = 
             "MetaDescriptionIdenticalTo";
-    public static final String META_DESC_NOT_RELEVANT_MSG_CODE = 
+    public static final String META_DESC_NOT_RELEVANT_MSG = 
             "EmptyMetaDescriptionTag";
-    public static final String CHECK_META_DESC_RELEVANCY_MSG_CODE = 
+    public static final String CHECK_META_DESC_RELEVANCY_MSG = 
             "CheckRelevancyMetaDescriptionTag";
     
-    public static final String TITLE_NOT_UNIQUE_MSG_CODE = "TitleNotUnique";
-    public static final String TITLE_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE = 
+    public static final String TITLE_NOT_UNIQUE_MSG = "TitleNotUnique";
+    public static final String TITLE_IDENTICAL_TO_ANOTHER_PAGE_MSG = 
             "TitleIdenticalTo";
-    public static final String H1_NOT_UNIQUE_MSG_CODE = "H1NotUnique";
-    public static final String H1_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE = 
+    public static final String H1_NOT_UNIQUE_MSG = "H1NotUnique";
+    public static final String H1_IDENTICAL_TO_ANOTHER_PAGE_MSG = 
             "H1IdenticalTo";
-    public static final String SOURCE_CODE_NOT_UNIQUE_MSG_CODE = "SourceCodeNotUnique";
-    public static final String SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE = 
+    public static final String SOURCE_CODE_NOT_UNIQUE_MSG = "SourceCodeNotUnique";
+    public static final String SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG = 
             "SourceCodeIdenticalTo";
-    public static final String ROBOTS_TXT_MSG_CODE = "RobotsTxtMissing";
-    public static final String SITEMAP_MSG_CODE = "SitemapMissing";
+    public static final String ROBOTS_TXT_MSG = "RobotsTxtMissing";
+    public static final String SITEMAP_MSG = "SitemapMissing";
     public static final String FRAMESET_DETECTED_MSG = "FramesetDetected";
     public static final String NOT_RELEVANT_H1_MSG = "notRelevantH1Tag";
     public static final String CHECK_H1_RELEVANCY_MSG = "checkRelevancyH1Tag";

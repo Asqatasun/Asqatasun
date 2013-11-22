@@ -23,8 +23,8 @@ import org.opens.tanaguru.entity.audit.IndefiniteResult;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractUniqueElementSiteRuleImplementation;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.SOURCE_CODE_NOT_UNIQUE_MSG_CODE;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.SOURCE_CODE_NOT_UNIQUE_MSG;
 
 /**
  * For each page of a website or a group of pages, is the source code unique ?
@@ -40,8 +40,8 @@ public class SeoRule01041 extends AbstractUniqueElementSiteRuleImplementation {
         super(
                 null, 
                 null,
-                SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE,
-                SOURCE_CODE_NOT_UNIQUE_MSG_CODE);
+                SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                SOURCE_CODE_NOT_UNIQUE_MSG);
     }
 
     @Override

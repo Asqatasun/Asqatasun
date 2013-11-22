@@ -105,13 +105,13 @@ public class SeoRule01041Test extends SeoSiteRuleWithPageResultImplementationTes
         assertEquals(TestSolution.FAILED, ((List<ProcessResult>)processResult).get(2).getValue());
 
         assertEquals(1, ((List<ProcessResult>)processResult).get(0).getRemarkSet().size());
-         assertEquals(RemarkMessageStore.SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE,
+         assertEquals(RemarkMessageStore.SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG,
                 ((ProcessRemark)((List<ProcessResult>)processResult).get(0).getRemarkSet().toArray()[0]).getMessageCode());
         assertEquals(1, ((List<ProcessResult>)processResult).get(1).getRemarkSet().size());
-        assertEquals(RemarkMessageStore.SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG_CODE,
+        assertEquals(RemarkMessageStore.SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG,
                 ((ProcessRemark)((List<ProcessResult>)processResult).get(1).getRemarkSet().toArray()[0]).getMessageCode());
         assertEquals(2, ((List<ProcessResult>)processResult).get(2).getRemarkSet().size());
-        assertEquals(RemarkMessageStore.SOURCE_CODE_NOT_UNIQUE_MSG_CODE,
+        assertEquals(RemarkMessageStore.SOURCE_CODE_NOT_UNIQUE_MSG,
                 ((ProcessRemark)((List<ProcessResult>)processResult).get(2).getRemarkSet().toArray()[0]).getMessageCode());
     }
 

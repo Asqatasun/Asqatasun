@@ -99,7 +99,7 @@ public class SeoRule01013Test extends SeoRuleImplementationTestCase {
         Iterator<ProcessRemark> iter = processResult.getRemarkSet().iterator();
         SourceCodeRemark sourceCodeRemark = (SourceCodeRemark)iter.next();
         assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.META_DESC_EXCEEDS_LIMIT_MSG_CODE, sourceCodeRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.META_DESC_EXCEEDS_LIMIT_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.META_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(1,sourceCodeRemark.getElementList().size());

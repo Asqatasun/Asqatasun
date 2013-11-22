@@ -30,8 +30,8 @@ import org.opens.tanaguru.rules.elementselector.ElementSelector;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.CONTENT_ATTR;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.META_DESC_CSS_LIKE_QUERY;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_META_DESC_RELEVANCY_MSG_CODE;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.META_DESC_NOT_RELEVANT_MSG_CODE;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_META_DESC_RELEVANCY_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.META_DESC_NOT_RELEVANT_MSG;
 import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
@@ -60,9 +60,9 @@ public class SeoRule01012 extends AbstractPageRuleWithSelectorAndCheckerImplemen
                     // blacklist nomenclature name
                     null, 
                     // not pertinent message
-                    META_DESC_NOT_RELEVANT_MSG_CODE, 
+                    META_DESC_NOT_RELEVANT_MSG, 
                     // manual check message
-                    CHECK_META_DESC_RELEVANCY_MSG_CODE,
+                    CHECK_META_DESC_RELEVANCY_MSG,
                     // evidence elements
                     CONTENT_ATTR
                 )

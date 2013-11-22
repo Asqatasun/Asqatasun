@@ -26,7 +26,7 @@ import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import org.opens.tanaguru.rules.keystore.AttributeStore;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.META_DESC_CSS_LIKE_QUERY;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.META_DESC_MISSING_MSG;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MORE_THAN_ONE_META_DESC_MSG_CODE;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MORE_THAN_ONE_META_DESC_MSG;
 
 /**
  * Test whether a meta description tag is present on the page
@@ -54,7 +54,7 @@ public class SeoRule01011 extends AbstractPageRuleWithSelectorAndCheckerImplemen
                     // message when not detected
                     META_DESC_MISSING_MSG, 
                     // message when multiple elements detected
-                    MORE_THAN_ONE_META_DESC_MSG_CODE, 
+                    MORE_THAN_ONE_META_DESC_MSG, 
                     // evidence elements
                     AttributeStore.CONTENT_ATTR)
             );
