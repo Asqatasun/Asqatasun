@@ -18,7 +18,7 @@ import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.seo.test.SeoRuleImplementationTestCase;
-
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
  *
@@ -80,45 +80,30 @@ public class SeoRule07051Test extends SeoRuleImplementationTestCase {
         processResult = processPageTest("Seo.Test.7.5.1-2Failed-01");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule07051.ERROR_MESSAGE_CODE,
+        assertEquals(RemarkMessageStore.IDENTICAL_H1_AND_TITLE_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
 
         processResult = processPageTest("Seo.Test.7.5.1-2Failed-02");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1,processResult.getRemarkSet().size());
-        assertEquals(SeoRule07051.ERROR_MESSAGE_CODE,
+        assertEquals(RemarkMessageStore.IDENTICAL_H1_AND_TITLE_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
 
         processResult = processPageTest("Seo.Test.7.5.1-2Failed-03");
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        assertEquals(2,processResult.getRemarkSet().size());
-        assertEquals(SeoRule07051.MORE_THAN_ONE_TITLE_MESSAGE_CODE,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(SeoRule07051.MORE_THAN_ONE_TITLE_MESSAGE_CODE,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        assertNull(processResult.getRemarkSet());
+        
         processResult = processPageTest("Seo.Test.7.5.1-2Failed-04");
         assertEquals(TestSolution.FAILED, processResult.getValue());
-        assertEquals(2,processResult.getRemarkSet().size());
-        assertEquals(SeoRule07051.MORE_THAN_ONE_H1_MESSAGE_CODE,
+        assertEquals(1,processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.IDENTICAL_H1_AND_TITLE_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(SeoRule07051.MORE_THAN_ONE_H1_MESSAGE_CODE,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
 
         processResult = processPageTest("Seo.Test.7.5.1-2Failed-05");
         assertEquals(TestSolution.FAILED, processResult.getValue());
-        assertEquals(4,processResult.getRemarkSet().size());
-        int moreThanOneH1Counter = 0;
-        int moreThanOneTitleCounter = 0;
-        for (ProcessRemark pr : processResult.getRemarkSet()) {
-            if (StringUtils.equalsIgnoreCase(SeoRule07051.MORE_THAN_ONE_TITLE_MESSAGE_CODE, pr.getMessageCode())) {
-                moreThanOneTitleCounter++;
-            } else if (StringUtils.equalsIgnoreCase(SeoRule07051.MORE_THAN_ONE_H1_MESSAGE_CODE, pr.getMessageCode())) {
-                moreThanOneH1Counter++;
-            }
-        }
-        assertEquals(2, moreThanOneH1Counter);
-        assertEquals(2, moreThanOneTitleCounter);
+        assertEquals(1,processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.IDENTICAL_H1_AND_TITLE_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
 
         processResult = processPageTest("Seo.Test.7.5.1-4NA-01");
         assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
@@ -142,7 +127,7 @@ public class SeoRule07051Test extends SeoRuleImplementationTestCase {
         assertEquals(TestSolution.FAILED, processResult.getValue());
 
         processResult = consolidate("Seo.Test.7.5.1-2Failed-03");
-        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(TestSolution.PASSED, processResult.getValue());
 
         processResult = consolidate("Seo.Test.7.5.1-2Failed-04");
         assertEquals(TestSolution.FAILED, processResult.getValue());

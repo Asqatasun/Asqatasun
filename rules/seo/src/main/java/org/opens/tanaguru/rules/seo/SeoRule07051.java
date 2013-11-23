@@ -19,16 +19,22 @@
  */
 package org.opens.tanaguru.rules.seo;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import org.apache.commons.lang3.StringUtils;
-import org.jsoup.select.Elements;
-import org.opens.tanaguru.entity.audit.ProcessRemark;
-import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
-import org.opens.tanaguru.rules.seo.util.UniqueElementChecker;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
+import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import org.opens.tanaguru.rules.elementselector.ElementSelector;
+import org.opens.tanaguru.rules.textbuilder.DeepTextElementBuilder;
+import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
+import org.opens.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.H1_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TITLE_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.IDENTICAL_H1_AND_TITLE_MSG;
 
 /**
  * Test whether the text content of the Title tag is different from the text
@@ -36,80 +42,53 @@ import org.opens.tanaguru.rules.seo.util.UniqueElementChecker;
  * 
  * @author jkowalczyk
  */
-public class SeoRule07051 extends AbstractPageRuleImplementation {
+public class SeoRule07051 extends AbstractPageRuleMarkupImplementation {
 
-    public static final String ERROR_MESSAGE_CODE = "IdenticalH1AndTitleTags";
-    private static final String TITLE_EVIDENCE_NAME = "Title";
-    private static final String H1_EVIDENCE_NAME = "H1";
-    public static final String MORE_THAN_ONE_TITLE_MESSAGE_CODE =
-            "MoreThanOneTitleTag";
-    public static final String MORE_THAN_ONE_H1_MESSAGE_CODE =
-            "MoreThanOneH1Tag";
-    private static final String TITLE_DETECTION_CSS_EXPR = 
-            "head title";
-    private static final String H1_DETECTION_CSS_EXPR =
-            "body h1";
+    private ElementHandler<Element> h1Elements = new ElementHandlerImpl();
+    private ElementHandler<Element> titleElement = 
+				new ElementHandlerImpl();
 
     public SeoRule07051() {
         super();
     }
 
     @Override
-    protected ProcessResult processImpl(SSPHandler sspHandler) {
-        
-        Collection<ProcessRemark> processRemarkList = new ArrayList<ProcessRemark>();
-        Elements elements = sspHandler.beginCssLikeSelection().
-                domCssLikeSelectNodeSet(TITLE_DETECTION_CSS_EXPR).getSelectedElements();
-        
-        TestSolution testSolution = TestSolution.PASSED;
-        String titleTextContent = null;
-        if (elements.size() == 1) {
-            titleTextContent = elements.get(0).text().trim();
-        } else if (elements.isEmpty()) {
-            // if the page has no title tag, the result is NA.
-            return definiteResultFactory.create(
-                test,
-                sspHandler.getSSP().getPage(),
-                TestSolution.NOT_APPLICABLE,
-                sspHandler.getRemarkList());
-        } else {
-            testSolution = TestSolution.FAILED;
-            processRemarkList.addAll(UniqueElementChecker.getNotUniqueElementProcessRemarkCollection(
-                    sspHandler,
-                    elements,
-                    MORE_THAN_ONE_TITLE_MESSAGE_CODE,
-                    TITLE_EVIDENCE_NAME));
+    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
+        ElementSelector selector = new SimpleElementSelector(H1_ELEMENT);
+	selector.selectElements(sspHandler, h1Elements);
+	// only keep one title when more than 2 are encountered
+        selector = new SimpleElementSelector(TITLE_ELEMENT);
+	selector.selectElements(sspHandler, titleElement);
+	if (titleElement.get().size() > 1) {
+	    Element title = titleElement.get().iterator().next();
+	    titleElement.clean().add(title);
         }
-        elements = sspHandler.domCssLikeSelectNodeSet(H1_DETECTION_CSS_EXPR).getSelectedElements();
-        String h1TextContent = null;
-        if (elements.size() == 1) {
-            h1TextContent = elements.get(0).text().trim();
-        } else if (elements.isEmpty()) {
-            // if the page has no title tag, the result is NA.
-            return definiteResultFactory.create(
-                test,
-                sspHandler.getSSP().getPage(),
-                TestSolution.NOT_APPLICABLE,
-                sspHandler.getRemarkList());
-        } else {
-            testSolution = TestSolution.FAILED;
-            processRemarkList.addAll(UniqueElementChecker.getNotUniqueElementProcessRemarkCollection(
-                    sspHandler,
-                    elements,
-                    MORE_THAN_ONE_H1_MESSAGE_CODE,
-                    H1_EVIDENCE_NAME));
+    }
+
+    @Override
+    protected void check(SSPHandler sspHandler, 
+                         ElementHandler<Element> elementHandler,
+                         TestSolutionHandler testSolutionHandler) {
+	super.check(sspHandler, elementHandler, testSolutionHandler);
+	if (titleElement.isEmpty() || h1Elements.isEmpty()) {
+	    testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
+	    return;
         }
-        if (testSolution.equals(TestSolution.PASSED) &&
-                StringUtils.equalsIgnoreCase(h1TextContent, titleTextContent)) {
-            testSolution = TestSolution.FAILED;
-            processRemarkList.add(sspHandler.getProcessRemarkService().
-                    createProcessRemark(testSolution,ERROR_MESSAGE_CODE));
-        }
-        return definiteResultFactory.create(
-                test,
-                sspHandler.getSSP().getPage(),
-                testSolution,
-                processRemarkList);
+	String titleValue = new SimpleTextElementBuilder().
+		buildTextFromElement(titleElement.get().iterator().next());
+	TextElementBuilder h1ValueBuilder = new DeepTextElementBuilder();
+	for (Element el : h1Elements.get()) {
+	    String h1 = h1ValueBuilder.buildTextFromElement(el);
+	    if (StringUtils.equalsIgnoreCase(h1, titleValue)) {
+		sspHandler.getProcessRemarkService().
+                    addProcessRemark(
+			TestSolution.FAILED,
+			IDENTICAL_H1_AND_TITLE_MSG);
+		testSolutionHandler.addTestSolution(TestSolution.FAILED);
+		return;
+            }
+	}
+	testSolutionHandler.addTestSolution(TestSolution.PASSED);
     }
 
 }

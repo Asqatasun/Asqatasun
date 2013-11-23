@@ -311,6 +311,7 @@ public final class RemarkMessageStore {
             "FlashContentDetected";
     public static final String SUSPECTED_FLASH_CONTENT_DETECTED_MSG =
             "SuspectedFlashContentDetected";
+    public static final String IDENTICAL_H1_AND_TITLE_MSG = "IdenticalH1AndTitleTags";
     
     /**
      * Private constructor. This class handles keys and must not be instantiated
