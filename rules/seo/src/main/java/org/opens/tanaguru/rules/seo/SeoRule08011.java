@@ -20,18 +20,18 @@
 package org.opens.tanaguru.rules.seo;
 
 import java.util.Iterator;
-import org.jsoup.nodes.Element;
 import org.apache.commons.lang3.StringUtils;
+import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
-import org.opens.tanaguru.rules.elementselector.ElementSelector;
-import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
+import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
+import org.opens.tanaguru.rules.elementselector.ElementSelector;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.FLASH_CONTENT_CSS_LIKE_QUERY;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.SCRIPT_ELEMENT;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.FLASH_CONTENT_DETECTED_MSG;
@@ -72,7 +72,6 @@ public class SeoRule08011 extends AbstractPageRuleMarkupImplementation {
     protected void check(SSPHandler sspHandler, 
                          ElementHandler<Element> elementHandler,
                          TestSolutionHandler testSolutionHandler) {
-	super.check(sspHandler, elementHandler, testSolutionHandler);
         ElementChecker ec = new ElementPresenceChecker(
 				TestSolution.FAILED, 
 				TestSolution.PASSED, 

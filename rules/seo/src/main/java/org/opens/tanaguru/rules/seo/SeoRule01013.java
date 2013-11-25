@@ -61,7 +61,6 @@ public class SeoRule01013 extends AbstractPageRuleMarkupImplementation {
             SSPHandler sspHandler, 
             ElementHandler<Element> elementHandler, 
             TestSolutionHandler testSolutionHandler) {
-        super.check(sspHandler, elementHandler, testSolutionHandler);
         if (elementHandler.isEmpty() || elementHandler.get().size() > 1) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;

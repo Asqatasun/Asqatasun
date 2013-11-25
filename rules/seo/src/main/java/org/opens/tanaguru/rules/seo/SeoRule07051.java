@@ -27,14 +27,14 @@ import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementatio
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import org.opens.tanaguru.rules.elementselector.ElementSelector;
-import org.opens.tanaguru.rules.textbuilder.DeepTextElementBuilder;
-import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
-import org.opens.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.H1_ELEMENT;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TITLE_ELEMENT;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.IDENTICAL_H1_AND_TITLE_MSG;
+import org.opens.tanaguru.rules.textbuilder.DeepTextElementBuilder;
+import org.opens.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
+import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
  * Test whether the text content of the Title tag is different from the text
@@ -69,7 +69,6 @@ public class SeoRule07051 extends AbstractPageRuleMarkupImplementation {
     protected void check(SSPHandler sspHandler, 
                          ElementHandler<Element> elementHandler,
                          TestSolutionHandler testSolutionHandler) {
-	super.check(sspHandler, elementHandler, testSolutionHandler);
 	if (titleElement.isEmpty() || h1Elements.isEmpty()) {
 	    testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
 	    return;
