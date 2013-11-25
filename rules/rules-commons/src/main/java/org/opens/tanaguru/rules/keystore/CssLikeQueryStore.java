@@ -203,7 +203,7 @@ public final class CssLikeQueryStore {
                     "form, "
                     + "select:not(form select), "
                     + "textarea:not(form textarea), "
-                    + "input:not(form input), "
+                    + "input:not(form input):not([type=hidden]), "
                     + "button:not(form button)";
 
     // Structuration of information css-like queries
