@@ -82,7 +82,7 @@ public class Aw22Rule08091 extends AbstractPageRuleMarkupImplementation {
             SSPHandler sspHandler, 
             ElementHandler selectionHandler, 
             TestSolutionHandler testSolutionHandler) {
-        super.check(sspHandler, selectionHandler, testSolutionHandler);
+
         if (linkWithoutTarget.isEmpty() && fieldsetNotWithinForm.isEmpty()) {
             sspHandler.getProcessRemarkService().addProcessRemark(
                     TestSolution.NEED_MORE_INFO, 

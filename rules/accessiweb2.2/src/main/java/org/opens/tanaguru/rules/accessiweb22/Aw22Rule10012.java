@@ -47,7 +47,8 @@ import org.opens.tanaguru.rules.utils.CssLikeSelectorBuilder;
  */
 public class Aw22Rule10012 extends AbstractPageRuleMarkupImplementation {
 
-    private static final String PRESENTATION_ATTR_NOM = "DeprecatedRepresentationAttributes";
+    private static final String PRESENTATION_ATTR_NOM = 
+                "DeprecatedRepresentationAttributes";
     
     private Map<String, ElementHandler> attrElementHandlerMap = 
             new HashMap<String, ElementHandler>();
@@ -77,14 +78,16 @@ public class Aw22Rule10012 extends AbstractPageRuleMarkupImplementation {
         }   
         
         // elements with width attribute that are not img
-        SimpleElementSelector secWidthAttrNotImg = new SimpleElementSelector(ELEMENT_WITH_WITDH_ATTR_NOT_IMG);
+        SimpleElementSelector secWidthAttrNotImg = 
+                new SimpleElementSelector(ELEMENT_WITH_WITDH_ATTR_NOT_IMG);
         ElementHandler ehWithAttrNotImg = new ElementHandlerImpl();
         secWidthAttrNotImg.selectElements(sspHandler, ehWithAttrNotImg);
             
         attrElementHandlerMap.put(WIDTH_ATTR, ehWithAttrNotImg);
         
         // elements with width attribute that are not img
-        SimpleElementSelector secHeightAttrNotImg = new SimpleElementSelector(ELEMENT_WITH_HEIGHT_ATTR_NOT_IMG);
+        SimpleElementSelector secHeightAttrNotImg = 
+                new SimpleElementSelector(ELEMENT_WITH_HEIGHT_ATTR_NOT_IMG);
         ElementHandler ehHeightAttrNotImg = new ElementHandlerImpl();
         secHeightAttrNotImg.selectElements(sspHandler, ehHeightAttrNotImg);
             
@@ -93,9 +96,10 @@ public class Aw22Rule10012 extends AbstractPageRuleMarkupImplementation {
 
     @Override
     protected void check(SSPHandler sspHandler, ElementHandler selectionHandler, TestSolutionHandler testSolutionHandler) {
-        super.check(sspHandler, selectionHandler, testSolutionHandler); 
+
         // Attributes checks
-        for (Map.Entry<String, ElementHandler> attrElementHandlerMapEntry : attrElementHandlerMap.entrySet()) {
+        for (Map.Entry<String, ElementHandler> attrElementHandlerMapEntry : 
+                attrElementHandlerMap.entrySet()) {
             
             ElementChecker attrEc = new ElementWithAttributePresenceChecker(
                 TestSolution.FAILED, 
@@ -105,7 +109,10 @@ public class Aw22Rule10012 extends AbstractPageRuleMarkupImplementation {
                 attrElementHandlerMapEntry.getKey()
             );
             
-            attrEc.check(sspHandler, attrElementHandlerMapEntry.getValue(), testSolutionHandler);
+            attrEc.check(
+                    sspHandler, 
+                    attrElementHandlerMapEntry.getValue(), 
+                    testSolutionHandler);
         }
     }
     

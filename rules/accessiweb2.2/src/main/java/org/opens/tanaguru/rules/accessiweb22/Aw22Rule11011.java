@@ -89,8 +89,7 @@ public class Aw22Rule11011 extends AbstractPageRuleMarkupImplementation {
             SSPHandler sspHandler, 
             ElementHandler selectionHandler, 
             TestSolutionHandler testSolutionHandler) {
-        super.check(sspHandler, selectionHandler, testSolutionHandler);
-        
+
         // If the page has no input form element, the test is not applicable
         if (selectionHandler.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);

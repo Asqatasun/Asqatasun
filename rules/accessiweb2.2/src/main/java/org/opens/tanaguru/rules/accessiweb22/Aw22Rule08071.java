@@ -60,8 +60,7 @@ public class Aw22Rule08071 extends AbstractPageRuleMarkupImplementation {
             SSPHandler sspHandler, 
             ElementHandler<Element> selectionHandler, 
             TestSolutionHandler testSolutionHandler) {
-        super.check(sspHandler, selectionHandler, testSolutionHandler);
-        
+
         if (selectionHandler.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;

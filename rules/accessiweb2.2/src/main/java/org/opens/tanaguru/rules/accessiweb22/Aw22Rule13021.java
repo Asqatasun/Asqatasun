@@ -67,8 +67,11 @@ public class Aw22Rule13021 extends AbstractDetectionPageRuleImplementation {
     }
 
     @Override
-    protected void check(SSPHandler sspHandler, ElementHandler<Element> selectionHandler, TestSolutionHandler testSolutionHandler) {
-        sspHandler.getProcessRemarkService().resetService();
+    protected void check(
+                SSPHandler sspHandler, 
+                ElementHandler<Element> selectionHandler, 
+                TestSolutionHandler testSolutionHandler) {
+
         ElementPresenceChecker epc = getElementPresenceChecker();
         epc.setTextElementBuilder(new LinkTextElementBuilder());
         epc.check(sspHandler, selectionHandler, testSolutionHandler);

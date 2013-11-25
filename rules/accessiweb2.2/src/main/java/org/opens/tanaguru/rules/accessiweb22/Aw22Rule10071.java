@@ -105,7 +105,6 @@ public class Aw22Rule10071 extends AbstractPageRuleFromPreProcessImplementation 
             ElementHandler selectionHandler, 
             TestSolutionHandler testSolutionHandler) {
          if (nbOfFocusableElements == 0) {
-             sspHandler.getProcessRemarkService().resetService();
              testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
              return;
          }

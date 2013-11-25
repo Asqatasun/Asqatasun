@@ -22,7 +22,6 @@ package org.opens.tanaguru.rules.accessiweb22;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
@@ -75,7 +74,7 @@ public class Aw22Rule13012 extends AbstractPageRuleMarkupImplementation {
             SSPHandler sspHandler, 
             ElementHandler selectionHandler, 
             TestSolutionHandler testSolutionHandler) {
-        super.check(sspHandler, selectionHandler, testSolutionHandler);
+
         if (selectionHandler.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;

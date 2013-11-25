@@ -75,7 +75,6 @@ public class Aw22Rule11013 extends AbstractPageRuleMarkupImplementation {
             SSPHandler sspHandler, 
             ElementHandler<Element> elementHandler, 
             TestSolutionHandler testSolutionHandler) {
-        super.check(sspHandler, elementHandler, testSolutionHandler);
         
         if (explicitLabelElements.isEmpty() && elementHandler.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
