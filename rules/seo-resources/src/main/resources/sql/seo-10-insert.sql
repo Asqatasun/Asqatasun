@@ -77,7 +77,6 @@ INSERT IGNORE INTO `TEST` (`Id_Test`, `Cd_Test`, `Description`, `Label`, `Rank`,
 (1025, 'Seo-07021', '', '7.2.1', 10007021, '1.0', 'seo', 'org.opens.tanaguru.rules.seo.SeoRule07021', 1016, NULL, 2, 1, b'0'),
 (1026, 'Seo-07051', '', '7.5.1', 10007051, '1.0', 'seo', 'org.opens.tanaguru.rules.seo.SeoRule07051', 1017, NULL, 2, 1, b'0'),
 (1027, 'Seo-07061', '', '7.6.1', 10007061, '1.0', 'seo', 'org.opens.tanaguru.rules.seo.SeoRule07061', 1018, NULL, 1, 3, b'0'),
-(1028, 'Seo-06031', '', '6.3.1', 10006031, '1.0', 'seo', 'org.opens.tanaguru.rules.seo.SeoRule06031', 1012, NULL, 1, 1, b'0'),
 (1029, 'Seo-08011', '', '8.1.1', 10008011, '1.0', 'seo', 'org.opens.tanaguru.rules.seo.SeoRule08011', 1021, NULL, 1, 1, b'0');
 
 SET foreign_key_checks=1;
