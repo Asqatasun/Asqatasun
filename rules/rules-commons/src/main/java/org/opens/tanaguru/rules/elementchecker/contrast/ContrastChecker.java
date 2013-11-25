@@ -312,7 +312,6 @@ public class ContrastChecker extends ElementCheckerImpl {
         LOGGER.warn(exception);
         testSolutionHandler.cleanTestSolutions();
         testSolutionHandler.addTestSolution(TestSolution.NOT_TESTED);
-        getProcessRemarkService().resetService();
         elementCounter = 0;
     }
 

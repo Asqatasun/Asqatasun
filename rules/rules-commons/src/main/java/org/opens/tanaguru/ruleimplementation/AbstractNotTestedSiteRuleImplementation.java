@@ -23,7 +23,6 @@ package org.opens.tanaguru.ruleimplementation;
 
 
 import java.util.List;
-import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.DefiniteResult;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
