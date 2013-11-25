@@ -60,12 +60,14 @@ public abstract class AbstractPageRuleDefaultImplementation extends AbstractPage
      * This implementation of the process defines 3 actions that characterise
      * an usual way to test a page : the selection, the check and the 
      * computation of the result.
+     * It also reset the processRemarkService.
      * 
      * @param sspHandler
      * @return 
      */
     @Override
     protected ProcessResult processImpl(SSPHandler sspHandler) {
+        sspHandler.getProcessRemarkService().resetService();
         selectAndCheck(sspHandler, this);
         return computeResult(sspHandler, this);
     }

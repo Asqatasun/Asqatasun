@@ -90,8 +90,10 @@ public abstract class AbstractPageRuleCssImplementation
     }
     
     @Override
-    protected void selectAndCheck(SSPHandler sspHandler, TestSolutionHandler testSolutionHandler) {
-        sspHandler.getProcessRemarkService().resetService();
+    protected void selectAndCheck(
+                SSPHandler sspHandler, 
+                TestSolutionHandler testSolutionHandler) {
+        
         if (StringUtils.isNotBlank(mediaListNomenclatureKey)) {
             cssChecker.setMediaList(nomenclatureLoaderService.
                     loadByCode(mediaListNomenclatureKey).getValueList());
@@ -99,7 +101,8 @@ public abstract class AbstractPageRuleCssImplementation
         
         cssChecker.setNomenclatureLoaderService(nomenclatureLoaderService);
 
-        for (Map.Entry<String,CascadingStyleSheet> entry : sspHandler.beginCssSelection().getStyleSheetMap().entrySet()) {
+        for (Map.Entry<String,CascadingStyleSheet> entry : 
+                sspHandler.beginCssSelection().getStyleSheetMap().entrySet()) {
             cssChecker.check(
                     sspHandler, 
                     entry.getKey(),

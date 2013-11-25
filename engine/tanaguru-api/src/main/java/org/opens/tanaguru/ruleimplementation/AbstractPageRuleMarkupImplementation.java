@@ -72,7 +72,9 @@ public abstract class AbstractPageRuleMarkupImplementation
      * @param elementHandler
      *            the selectionHandler that handles the selected elements of the DOM.
      */
-    abstract protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler);
+    abstract protected void select(
+                SSPHandler sspHandler, 
+                ElementHandler<Element> elementHandler);
     
     /**
      * This method defines a check operation . The instance of 
@@ -90,9 +92,10 @@ public abstract class AbstractPageRuleMarkupImplementation
      * @param testSolutionHandler
      *            the testSolutionHandler that handles the computed TestSolutions.
      */
-    protected void check(SSPHandler sspHandler, ElementHandler<Element> selectionHandler, TestSolutionHandler testSolutionHandler) {
-        sspHandler.getProcessRemarkService().resetService();
-    }
+    abstract protected void check(
+                SSPHandler sspHandler, 
+                ElementHandler<Element> elementHandler, 
+                TestSolutionHandler testSolutionHandler);
     
     @Override
     public int getSelectionSize() {
