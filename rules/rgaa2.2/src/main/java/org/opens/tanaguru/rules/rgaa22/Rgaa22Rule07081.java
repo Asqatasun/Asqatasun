@@ -97,8 +97,7 @@ public class Rgaa22Rule07081 extends AbstractPageRuleMarkupImplementation {
 
     @Override
     protected void check(SSPHandler sspHandler, ElementHandler selectionHandler, TestSolutionHandler testSolutionHandler) {
-        super.check(sspHandler, selectionHandler, testSolutionHandler); 
-        
+ 
         // Tags check
         ElementChecker ec = new ElementPresenceChecker(
                 TestSolution.FAILED, 

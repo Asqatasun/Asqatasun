@@ -114,8 +114,7 @@ public class Rgaa22Rule03101 extends AbstractPageRuleMarkupImplementation {
             SSPHandler sspHandler, 
             ElementHandler elementHandler, 
             TestSolutionHandler testSolutionHandler) {
-        super.check(sspHandler, elementHandler, testSolutionHandler);
-        
+
         // if the page have no form elements, the test is not applicable
         if (elementHandler.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
