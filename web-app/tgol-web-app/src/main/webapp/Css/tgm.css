@@ -1980,6 +1980,9 @@ input[type="text"]:focus{
 .page-list li {
     list-style: none;
 }
+.page-list ul {
+    margin-left: 0;
+}
 .subcounter {
     background-image: url("../Images/subcounter.png");
     background-position: 10% center;
