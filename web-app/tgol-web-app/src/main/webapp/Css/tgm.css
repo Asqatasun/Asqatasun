@@ -153,7 +153,7 @@ h1, h2, h3, h4 {
     padding-top: 0;
     padding-bottom: 0;
     margin-top: 0;
-    height: 50px;
+    height: 55px;
 }
 .topbar div > ul a, .nav a {
     color:#FFFFFF;
@@ -646,6 +646,9 @@ footer a {
 #lang-switcher > a:hover{
     text-decoration: underline;
 }
+.lang-switcher-offset {
+    margin-top: 13px;
+}
 /*
  * Page: error-pages (template)
  * ==============================================
@@ -673,7 +676,10 @@ footer a {
     margin-top: 70px;
 }
 #tgm-login footer {
-    margin-top: 120px
+    margin-top: 80px
+}
+#tgm-login #lang-switcher{
+    padding-top: 6px;
 }
 #login-main-row {
     margin-top: 2em;
@@ -698,25 +704,64 @@ footer a {
     width: 270px;
     text-align: right;
 }
-#login-form form {
-    padding-left: 0;
+#login-form .inline input {
+    vertical-align: top;
+    box-shadow: none;
+    background-color: #F5F5F5;
+    color: #000;
+}
+#login-form .inline input:focus {
+    border-bottom-color: rgba(82, 168, 236, 0.8);
+    border-left-color-ltr-source: physical;
+    border-left-color-rtl-source: physical;
+    border-left-color-value: rgba(82, 168, 236, 0.8);
+    border-right-color-ltr-source: physical;
+    border-right-color-rtl-source: physical;
+    border-right-color-value: rgba(82, 168, 236, 0.8);
+    border-top-color: rgba(82, 168, 236, 0.8);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset, 0 0 8px rgba(82, 168, 236, 0.6);
+}
+#login-topbar-logo {
+    padding-top: 6px;
+}
+.inline-password{
+    display : inline-block;
+}
+#lost-password {
+    padding-top : 0px;
+    padding-left : 5px;
+    font-size: 10px;
 }
 #login-demo {
-    margin-top : 3em;
-    margin-bottom: 7em;
-    width : 255px;
+    margin-top : 20em;
+    text-align: center;
 }
-#login-demo p {
-    font-weight: bold;
-}
-#login-sign-up {
-    width: 270px;
-}
-#login-demo input {
+#login-demo-form > input {
     width: 100%;
+    color : #FFFFFF;
+    font-size : 24px;
+    text-decoration: none;
+    font-family: OpenSansBold;
+    line-height: 1.5em;
+    padding : 15px;
+    border-radius: 15px;
+    background: #dd2b13; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover, #dd2b13 0%, #cb1017 100%, #1e69de 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#dd2b13), color-stop(100%,#cb1017), color-stop(100%,#1e69de)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover, #dd2b13 0%,#cb1017 100%,#1e69de 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover, #dd2b13 0%,#cb1017 100%,#1e69de 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover, #dd2b13 0%,#cb1017 100%,#1e69de 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center, #dd2b13 0%,#cb1017 100%,#1e69de 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dd2b13', endColorstr='#1e69de',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+#login-demo-form > input:hover {
+    text-decoration: underline;
 }
 #login-demo-form {
     margin : 2em;
+}
+#login-sign-up {
+    width: 270px;
 }
 #login-sign-up a{
     text-align: center;
@@ -729,7 +774,14 @@ footer a {
 #login-submit input{
     width : 30%;
 }
-
+#login-form .inline .btn {
+    color: black;
+    font-family: OpenSansRegular;
+}
+#login-form .inline input {
+/*    box-shadow: none;
+    color : #FFFFFF;*/
+}
 /*
  * Page: sign-up
  * ==============================================

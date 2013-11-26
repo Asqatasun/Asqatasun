@@ -301,7 +301,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
         // if the audit lasted more than expected, we return a "audit in progress"
         // page and send an email when it's ready
         if (audit == null) {
-            model.addAttribute(TgolKeyStore.TESTED_URL_KEY, getContractDataService().getUrlFromContractOption(contract));
+            model.addAttribute(TgolKeyStore.TESTED_URL_KEY, auditSetUpCommand.getUrlList().get(0));
             model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
             model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
             model.addAttribute(TgolKeyStore.IS_PAGE_AUDIT_KEY, isPageAudit);

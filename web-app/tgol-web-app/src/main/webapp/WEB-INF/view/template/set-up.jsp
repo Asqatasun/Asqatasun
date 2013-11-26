@@ -31,6 +31,7 @@
             </c:if>
             <div class="span16">
                 <div id="audit-set-up-form">
+                    
                     <form:form modelAttribute="auditSetUpCommand" action="" method="post" enctype="multipart/form-data">
                         <spring:hasBindErrors name="auditSetUpCommand">
                         <div id="sign-up-form-general-error">
@@ -47,6 +48,18 @@
                             </c:if>
                         </div>
                     <c:choose>
+                        <c:when test="${action == 'page' && fn:length(auditSetUpCommand.urlList) == 1}">
+                            <label id="label-url" for="urlList0">
+                                <span class="mandatory">* </span><spring:message code="auditSetUp.enterOneUrl"/>
+                            </label>
+                            <div class="url-input input">
+                                <form:input path="urlList[0]" cssErrorClass="xxlarge error" cssClass="xxlarge" />
+                                <form:errors path="urlList[0]" cssClass="alert-message error" />
+                                <span class="help-block">
+                                    <fmt:message key="required.mandatoryFieldHelpMsg"/>
+                                </span>
+                            </div>
+                        </c:when>
                         <c:when test="${action == 'page'}">
                         <fieldset>
                             <legend><spring:message code="auditSetUp.enterUrl"/></legend>

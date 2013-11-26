@@ -21,19 +21,6 @@
                     </c:set>
                 </c:otherwise>
             </c:choose>
-            <sec:authorize access="isAnonymous()">
-            <div class="row">
-                <c:set var="offset" value="12"/>
-                <c:if test="${addLogo == 'true'}">
-                <div id="logo-box" class="span4">
-                    <a href="<c:url value="/login.html"/>" title="<fmt:message key="sign-up.backToLogin"/>">
-                        <img src="${tgLogoUrl}" alt="" />
-                    </a>
-                </div>
-                <c:set var="offset" value="10"/>
-                </c:if>
-                <div class="span2 offset${offset}">
-            </sec:authorize>
             <c:set var="properQueryString" scope="page" value="${fn:replace(pageContext.request.queryString, '&', '&amp;')}"/>
             <c:choose>
                 <c:when test="${not empty pageContext.request.queryString}">
@@ -67,7 +54,3 @@
                     <abbr title="Français">FR</abbr>
                 </a>
             </div>
-            <sec:authorize access="isAnonymous()">
-                </div><!--class="span4 offset8"-->
-            </div> <!-- class="row"-->
-            </sec:authorize>    

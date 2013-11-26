@@ -10,6 +10,12 @@
     <context:component-scan
         base-package="org.opens.tgol.controller"/>
 
+    <bean id="loginController" class="org.opens.tgol.controller.LoginController">
+        <property name="authenticationManager">
+            <ref bean="authenticationManager"/>
+        </property>
+    </bean>
+
     <bean id="homeController" class="org.opens.tgol.controller.HomeController">
         <property name="displayOptionFieldsBuilderList">
             <list>

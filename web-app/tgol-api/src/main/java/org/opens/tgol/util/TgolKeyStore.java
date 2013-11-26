@@ -131,6 +131,7 @@ public final class TgolKeyStore {
     public static final String SOURCE_CODE_URL = "/source-code-page";
     public static final String SOURCE_CODE_CONTRACT_URL =
             CONTRACT_URL+SOURCE_CODE_URL;
+    public static final String DEMO_URL = "/demo";
 
     /* view name keys */
     public static final String DISPATCH_VIEW_REDIRECT_NAME = "dispatch-redirect";

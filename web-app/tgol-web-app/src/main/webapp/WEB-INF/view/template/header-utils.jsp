@@ -40,26 +40,42 @@
                     <ul class="nav secondary-nav">
                         
                     <sec:authorize access="isAuthenticated()">
-                    <c:if test="${currentUserName != 'guest'}">
                     <c:choose>
                         <c:when test="${configProperties['enable-account-settings'] == 'true'}">
                         <li ${accountSettingsActive}>
+                            <c:choose>
+                            <c:when test="${currentUserName != 'guest'}">
                             <div id="account-settings">
                                 <a href="<c:url value="/account-settings.html"/>" title="<fmt:message key="account-settings.accountSettingsLinkTitle"><fmt:param>${currentUserName}</fmt:param></fmt:message>">${currentUserName}</a>
                             </div>
                             <%@include file="lang-box.jsp" %>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="lang-switcher-offset">
+                                    <%@include file="lang-box.jsp" %>
+                                </div>
+                            </c:otherwise>
+                            </c:choose>
                         </li>
                         </c:when>
                         <c:otherwise>
                         <li ${accountSettingsActive}>
+                            <c:choose>
+                                <c:when test="${currentUserName != 'guest'}">
                             <div id="account-settings">
                                 <a href="#">${currentUserName}</a>
                             </div>
                             <%@include file="lang-box.jsp" %>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="lang-switcher-offset">
+                                        <%@include file="lang-box.jsp" %>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
                         </li>
                         </c:otherwise>
                     </c:choose>
-                    </c:if>
                     </sec:authorize>
                     <c:set var="isInTopBar" scope="page" value="true"/>
                     <sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -70,11 +86,9 @@
                         </li>    
                     </sec:authorize>
                         <li>
-                            <div>
-                                <a href="<c:url value="/j_spring_security_logout"/>" id="logout" title="<fmt:message key="home.logout"/>">
-                                    <img src="${logoutLogoUrl}" alt="<fmt:message key="home.logout"/>" id="logout-icon"/>
-                                </a>
-                            </div>
+                            <a href="<c:url value="/j_spring_security_logout"/>" id="logout" title="<fmt:message key="home.logout"/>">
+                                <img src="${logoutLogoUrl}" alt="<fmt:message key="home.logout"/>" id="logout-icon"/>
+                            </a>
                         </li>
                     </ul><!--class="nav secondary-nav"-->
                 </div><!-- class="container" -->

@@ -73,14 +73,28 @@
                                 <fmt:param>${testedUrl}</fmt:param>
                             </fmt:message>
                         </p>
-                        <p>
-                            <fmt:message key="greedyAudit.refresh"/>
                         <c:if test="${isUserNotified == true}">
+                            <p>
                             <fmt:message key="greedyAudit.sendEmail"/>
+                            </p>
                         </c:if>
-                        </p>
+                            
                         <div class="alert-actions">
-                            <a href="<c:url value="/home/contract.html?cr=${param.cr}"/>" class="btn small"><fmt:message key="greedyAudit.backOnContract"/></a>
+                            <c:set var="currentUserName" scope="page">
+                                <sec:authentication property="principal.displayedUserName" />
+                            </c:set>
+                            <c:choose>
+                                <c:when test="${currentUserName != 'guest'}">
+                            <a href="<c:url value="/home/contract.html?cr=${param.cr}"/>" class="btn small">
+                                <fmt:message key="greedyAudit.backOnContract">
+                                    <fmt:param>${contractName}</fmt:param>
+                                </fmt:message>
+                            </a>
+                                </c:when>
+                                <c:otherwise>
+                            <a href="<c:url value="/home/contract.html?cr=${param.cr}"/>" class="btn small"><fmt:message key="greedyAudit.backOnContractGuest"/></a>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div><!-- alert-message block-message success -->
                 </div><!-- class="span15 offset1" -->

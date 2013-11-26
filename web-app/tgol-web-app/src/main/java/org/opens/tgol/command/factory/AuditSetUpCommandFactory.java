@@ -337,11 +337,19 @@ public final class AuditSetUpCommandFactory {
      */
     private List<String> getGroupOfPagesUrl(Contract contract) {
         User user = contract.getUser();
+        /* 
+         * WARNING hard-coded exception for guest user 
+         * @TODO : do it better
+         */
+        int nbOfPages = AuditSetUpCommand.DEFAULT_LIST_SIZE;
         List<String> groupOfPagesUrl = new LinkedList<String>();
         if (user == null) {
             return null;
+        } else if (user.getEmail1().equalsIgnoreCase("guest")) {
+            nbOfPages = 1;
+        } else {
         }
-        for (int i = 0; i < AuditSetUpCommand.DEFAULT_LIST_SIZE; i++) {
+        for (int i = 0; i < nbOfPages; i++) {
             groupOfPagesUrl.add(new String());
         }
         // When the form is displayed for an authenticated user, it is

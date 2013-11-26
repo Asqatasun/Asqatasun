@@ -17,6 +17,14 @@
                             <p class="process-message"><fmt:message key="auditSetUp.processMessage10"/></p>
                             <p class="process-message"><fmt:message key="auditSetUp.processMessage11"/></p>
                             <p class="process-message"><fmt:message key="auditSetUp.processMessage12"/></p>
+                            <p class="process-message"><fmt:message key="auditSetUp.processMessage13"/></p>
+                            <p class="process-message"><fmt:message key="auditSetUp.processMessage14"/></p>
+                            <p class="process-message"><fmt:message key="auditSetUp.processMessage15"/></p>
+                            <p class="process-message"><fmt:message key="auditSetUp.processMessage16"/></p>
+                            <p class="process-message"><fmt:message key="auditSetUp.processMessage17"/></p>
+                            <p class="process-message"><fmt:message key="auditSetUp.processMessage18"/></p>
+                            <p class="process-message"><fmt:message key="auditSetUp.processMessage19"/></p>
+                            <p class="process-message"><fmt:message key="auditSetUp.processMessage20"/></p>
                             <p id="process-anim">
                                 <img src="${processingImgUrl}" alt="<fmt:message key="auditSetUp.beingProcessed"/>"/>
                             </p>

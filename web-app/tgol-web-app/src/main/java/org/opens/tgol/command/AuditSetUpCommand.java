@@ -123,9 +123,6 @@ public class AuditSetUpCommand implements Serializable {
 
     public void setUrlList(final List<String> urlList) {
         this.urlList.addAll(urlList);
-        for (int i = urlList.size(); i < DEFAULT_LIST_SIZE; i++) {
-            this.urlList.add(new String());
-        }
     }
     
     /**

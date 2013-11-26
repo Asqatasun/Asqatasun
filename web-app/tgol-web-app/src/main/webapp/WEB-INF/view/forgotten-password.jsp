@@ -17,6 +17,16 @@
         <c:set var="lang" value="${pageContext.response.locale}"/>
     </c:otherwise>
 </c:choose>
+ <c:choose>
+    <c:when test="${not empty configProperties['cdnUrl']}">
+        <c:set var="tgLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="tgLogoUrl">
+            <c:url value="/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>  
+        </c:set>
+    </c:otherwise>
+</c:choose>
 <html lang="${lang}">
     <c:set var="pageTitle" scope="page">
         <spring:message code="forgotten-password.pageTitle"/>
@@ -26,9 +36,21 @@
     </c:set>
     <%@include file="template/head.jsp" %>
     <body id="tgm-forgotten-password">
+        <div class="topbar">
+            <div class="fill">
+                <div class="container">
+                    <a href="<c:url value="/login.html"/>" title="<fmt:message key="sign-up.backToLogin"/>">
+                        <img src="${tgLogoUrl}" alt="<fmt:message key="sign-up.backToLogin"/>" />
+                    </a>
+                    <ul class="nav secondary-nav">
+                        <li>
+                            <%@include file="template/lang-box.jsp" %>
+                        </li>
+                    </ul>
+                </div> <!-- class="container"-->
+            </div> <!-- class="fill"-->
+        </div> <!-- class="topbar"-->
         <div class="container">
-            <c:set var="addLogo" scope="page" value="true"/>
-            <%@include file="template/lang-box.jsp" %>
             <c:set var="pageName" scope="page">
                 <fmt:message key="forgotten-password.h1"/>
             </c:set>
