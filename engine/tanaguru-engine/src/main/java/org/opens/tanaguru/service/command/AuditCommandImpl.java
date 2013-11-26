@@ -669,22 +669,19 @@ public abstract class AuditCommandImpl implements AuditCommand {
         int i = 0;
         while (iter.hasNext()) {
             ProcessResult pr = iter.next();
-            // To avoid errors with processResult of Site Type in case of page audit
-            if (!(pr.getTest().getScope().getCode().contains("site") && pr.getSubject() instanceof Page)) {
-                pr.setNetResultAudit(audit);
-                processResultSubset.add(pr);
-                i++;
-                if (i % consolidationTreatmentWindow == 0) {
-                    if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug(
-                                new StringBuilder("Persisting Consolidation from ")
-                                    .append(i)
-                                    .append(TO_LOGGER_STR)
-                                    .append(i+consolidationTreatmentWindow).toString());
-                    }
-                    processResultDataService.saveOrUpdate(processResultSubset);
-                    processResultSubset.clear();
+            pr.setNetResultAudit(audit);
+            processResultSubset.add(pr);
+            i++;
+            if (i % consolidationTreatmentWindow == 0) {
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug(
+                            new StringBuilder("Persisting Consolidation from ")
+                                .append(i)
+                                .append(TO_LOGGER_STR)
+                                .append(i+consolidationTreatmentWindow).toString());
                 }
+                processResultDataService.saveOrUpdate(processResultSubset);
+                processResultSubset.clear();
             }
         }
         processResultDataService.saveOrUpdate(processResultSubset);
@@ -832,7 +829,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
             }
             i = i + processingTreatmentWindow;
         }
-        processResultDataService.cleanUpIndefiniteResultFromAudit(audit);
+//        processResultDataService.cleanUpIndefiniteResultFromAudit(audit);
         preProcessResultDataService.cleanUpAllPreProcessResultByAudit(audit);
     }
     
