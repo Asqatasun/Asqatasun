@@ -52,6 +52,7 @@ public class SeoRule01051 extends AbstractSiteRuleImplementation {
 
     @Override
     protected ProcessResult processImpl(SSPHandler sspHandler) {
+        sspHandler.getProcessRemarkService().resetService();
         return indefiniteResultFactory.create(
                         test, 
                         sspHandler.getPage(),
@@ -77,9 +78,7 @@ public class SeoRule01051 extends AbstractSiteRuleImplementation {
         if (StringUtils.isEmpty(robotsTxtContent)) {
             processRemarkService.addConsolidationRemark(
                     TestSolution.FAILED, 
-                    ROBOTS_TXT_MSG, 
-                    "", 
-                    group.getURL());
+                    ROBOTS_TXT_MSG);
             return definiteResultFactory.create(
                         test, 
                         group,
