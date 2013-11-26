@@ -11,7 +11,7 @@
       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 
-    <http auto-config="true" access-denied-page="/access-denied.html">
+    <http auto-config="true" access-denied-page="/access-denied.html" disable-url-rewriting="true">
 <!--        <intercept-url pattern="/*.html*" requires-channel="https"/>-->
 <!--        <intercept-url pattern="/login.html*" filters="none"/>-->
         <intercept-url pattern="/admin.html" access="ROLE_ADMIN"/>
@@ -29,6 +29,7 @@
         <intercept-url pattern="/home/contract/audit*" access="ROLE_USER,ROLE_ADMIN"/>
         <intercept-url pattern="/home/contract/page*" access="ROLE_USER,ROLE_ADMIN"/>
         <form-login login-page="/login.html" authentication-failure-url="/login.html?error=errorOnLogin" default-target-url="/dispatch.html"/>
+        <logout delete-cookies="JSESSIONID" invalidate-session="false"/>
         <session-management invalid-session-url="/login.html?error=sessionTimeout" >
             <concurrency-control max-sessions="100" error-if-maximum-exceeded="true"  />
         </session-management>
