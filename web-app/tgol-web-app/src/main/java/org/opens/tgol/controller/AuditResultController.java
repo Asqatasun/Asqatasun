@@ -463,6 +463,7 @@ public class AuditResultController extends AuditDataHandlerController {
         
         // Attributes for breadcrumb
         Contract contract = retrieveContractFromAudit(audit);
+        model.addAttribute(TgolKeyStore.AUDIT_ID_KEY, audit.getId());
         model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
         model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
         model.addAttribute(TgolKeyStore.RESULT_ACTION_LIST_KEY, actionHandler.getActionList("EXPORT"));

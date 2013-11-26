@@ -132,11 +132,11 @@
                 <c:set var="auditSynthesisName" scope="page">
                     <fmt:message key="synthesisSite.h1">
                         <fmt:param>
-                            ${param.wr}
+                            ${audit}
                         </fmt:param>
                     </fmt:message>
                 </c:set>
-                <li><a href="<c:url value="/home/contract/audit-synthesis.html?audit=${param.audit}"/>">${auditSynthesisName}</a> <span class="divider"></span></li>
+                <li><a href="<c:url value="/home/contract/audit-synthesis.html?audit=${audit}"/>">${auditSynthesisName}</a> <span class="divider"></span></li>
                 <li class="active">${pageName}</li>
             </ul>
             <div class="row">
