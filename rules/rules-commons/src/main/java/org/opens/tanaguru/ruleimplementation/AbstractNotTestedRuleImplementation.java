@@ -22,8 +22,7 @@
 package org.opens.tanaguru.ruleimplementation;
 
 
-import org.opens.tanaguru.entity.audit.DefiniteResult;
-import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 
@@ -35,7 +34,7 @@ import org.opens.tanaguru.processor.SSPHandler;
  * A no process rule implementation that returns NOT_TESTED as test result. 
  */
 public abstract class AbstractNotTestedRuleImplementation 
-            extends AbstractPageRuleImplementation {
+            extends AbstractPageRuleMarkupImplementation {
 
     /**
      * Default constructor
@@ -43,21 +42,18 @@ public abstract class AbstractNotTestedRuleImplementation
     public AbstractNotTestedRuleImplementation () {
         super();
     }
-
-    /**
-     * @param sspHandler
-     * @return
-     *      A {@link DefiniteResult} with an empty remarkList and a 
-     *      {@link TestSolution} equals to NOT_TESTED.
-     */
+    
     @Override
-    protected ProcessResult processImpl(SSPHandler sspHandler) {
-        DefiniteResult result = definiteResultFactory.create(
-                test,
-                sspHandler.getSSP().getPage(),
-                TestSolution.NOT_TESTED,
-                null);
-        return result;
+    protected void select(SSPHandler sspHandler, 
+                          ElementHandler<Element> elementHandler) {
+        // DO NOTHING
+    }
+    
+    @Override
+    protected void check(SSPHandler sspHandler, 
+                         ElementHandler<Element> elementHandler,
+                         TestSolutionHandler testSolutionHandler) {
+        testSolutionHandler.addTestSolution(TestSolution.NOT_TESTED);
     }
 
 }

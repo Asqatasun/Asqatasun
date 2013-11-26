@@ -26,7 +26,6 @@ import javax.annotation.Nonnull;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
-import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
@@ -122,25 +121,6 @@ public abstract class AbstractMarkerPageRuleImplementation
         this.markerElementChecker = markerElementChecker;
     }
 
-    /**
-     * This implementation of the process defines 3 actions that characterised
-     * an usual way to test a page : the selection, the check and the 
-     * computation of the result.
-     * 
-     * @param sspHandler
-     * @return the final result of the test
-     */
-    @Override
-    protected ProcessResult processImpl(SSPHandler sspHandler) {
-        select(sspHandler, this);
-        check(sspHandler, this, this);
-        return computeResult(
-                sspHandler, 
-                this, 
-                get().size() + this.selectionWithMarkerHandler.get().size()); 
-                // number of elements without marker + number of elements with marker
-    }
-
     @Override
     protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
         elementSelector.selectElements(sspHandler, elementHandler);
@@ -169,6 +149,11 @@ public abstract class AbstractMarkerPageRuleImplementation
         }
     }
     
+    @Override
+    public int getSelectionSize() {
+        return get().size() + this.selectionWithMarkerHandler.get().size();
+    }
+     
     /**
      * Retrieves the parameter value from audit parameters and return 
      * the marker list

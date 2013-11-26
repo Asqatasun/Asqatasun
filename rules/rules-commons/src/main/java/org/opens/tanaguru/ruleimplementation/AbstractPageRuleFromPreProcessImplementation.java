@@ -82,8 +82,6 @@ public abstract class AbstractPageRuleFromPreProcessImplementation
      */
     @Override
     protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
-        sspHandler.beginCssLikeSelection();
-        
         try {
             domElements = DomElementExtractor.extractDomElements(sspHandler);
         } catch (NoResultException nre) {
