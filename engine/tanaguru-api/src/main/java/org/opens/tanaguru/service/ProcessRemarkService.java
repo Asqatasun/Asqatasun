@@ -238,6 +238,13 @@ public interface ProcessRemarkService {
             String messageCode, 
             String value, 
             String url);
+    
+    /**
+     * 
+     * @param processResult
+     * @param messageCode
+     */
+    void addConsolidationRemark(TestSolution processResult, String messageCode);
 
     /**
      *
@@ -252,6 +259,16 @@ public interface ProcessRemarkService {
             String messageCode, 
             String value, 
             String url);
+    
+    /**
+     *
+     * @param processResult
+     * @param messageCode
+     * @return
+     */
+    ProcessRemark createConsolidationRemark(
+            TestSolution processResult,
+            String messageCode);
 
     /**
      *

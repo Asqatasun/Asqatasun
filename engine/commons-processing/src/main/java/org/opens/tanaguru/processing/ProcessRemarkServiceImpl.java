@@ -25,6 +25,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.*;
+import javax.annotation.Nullable;
 import javax.xml.xpath.*;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -642,6 +643,15 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     }
 
     @Override
+    public void addConsolidationRemark(
+            TestSolution processResult,
+            String messageCode) {
+        remarkSet.add(createConsolidationRemark(
+                processResult,
+                messageCode));
+    }
+
+    @Override
     public void addProcessRemark(
             TestSolution processResult,
             String messageCode,
@@ -670,12 +680,17 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     @Override
     public ProcessRemark createConsolidationRemark(
             TestSolution processResult,
+            String messageCode) {
+        return processRemarkFactory.create(processResult, messageCode);
+    }
+
+    @Override
+    public ProcessRemark createConsolidationRemark(
+            TestSolution processResult,
             String messageCode,
-            String value,
-            String url) {
-        ProcessRemark remark = processRemarkFactory.create();
-        remark.setIssue(processResult);
-        remark.setMessageCode(messageCode);
+            @Nullable String value,
+            @Nullable String url) {
+        ProcessRemark remark = createConsolidationRemark(processResult, messageCode);
 
         if (value != null) {
             EvidenceElement evidenceElement = evidenceElementFactory.create();
