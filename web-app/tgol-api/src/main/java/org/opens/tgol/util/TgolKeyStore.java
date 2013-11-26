@@ -93,6 +93,9 @@ public final class TgolKeyStore {
     public static final String PAGE_RESULT_URL = "/page-result";
     public static final String PAGE_RESULT_CONTRACT_URL =
             CONTRACT_URL+PAGE_RESULT_URL;
+    public static final String SITE_RESULT_URL = "/site-result";
+    public static final String SITE_RESULT_CONTRACT_URL =
+            CONTRACT_URL+SITE_RESULT_URL;
     public static final String CRITERION_RESULT_URL = "/criterion-result";
     public static final String CRITERION_RESULT_CONTRACT_URL =
             CONTRACT_URL+CRITERION_RESULT_URL;
