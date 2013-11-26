@@ -35,7 +35,7 @@
         </session-management>
     </http>
 
-    <authentication-manager>
+    <authentication-manager alias="authenticationManager">
         <authentication-provider user-service-ref="tgolAuthenticationProvider">
             <password-encoder hash="md5"/>
         </authentication-provider>
