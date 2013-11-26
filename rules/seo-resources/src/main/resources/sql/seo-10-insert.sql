@@ -11,7 +11,6 @@ INSERT IGNORE INTO `THEME` (`ID_THEME`, `CD_THEME`, `DESCRIPTION`, `LABEL`, `RAN
 (1005, 'Seo-05', NULL, 'Liens', 05),
 (1006, 'Seo-06', NULL, 'Eléments Obligatoires', 06),
 (1007, 'Seo-07', NULL, 'Structuration de l\'information', 07),
-(1009, 'Seo-09', NULL, 'Navigation', 09),
 (1008, 'Seo-08', NULL, 'Multimedia', 08);
 
 --
@@ -42,7 +41,6 @@ INSERT IGNORE INTO `CRITERION` (`ID_CRITERION`, `reference_ID_REFERENCE`, `theme
 (1016, 1000, 1007, 'Seo-0702', 'Dans chaque page Web, l\'information est-elle optimisée par l\'utilisation appropriée de titres ?', '07.02', ' ', 1016),
 (1017, 1000, 1007, 'Seo-0705', 'Dans chaque page web, le titre de niveau 1 (balise h1) est-il différent du titre de page (balise title) ?', '07.05', ' ', 1017),
 (1018, 1000, 1007, 'Seo-0706', 'Dans chaque ensemble de page, chaque titre de niveau 1 (balise H1) est-il unique?', '07.06', ' ', 1018),
-(1019, 1000, 1009, 'Seo-0901', 'Dans chaque ensemble de pages,  le menu ou les barres de navigation sont-ils toujours à la même place (hors cas particuliers) ?', '09.01', ' ', 1019),
 (1020, 1000, 1001, 'Seo-0106', 'Le site web possède-t-il un fichier décrivant le plan du site à destination des robots d\'indexation?', '01.05', ' ', 1020),
 (1021, 1000, 1008, 'Seo-0801', 'Le site possède-t-il du contenu flash?', '08.01', ' ', 1021);
 
