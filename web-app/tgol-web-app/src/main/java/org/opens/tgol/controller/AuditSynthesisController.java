@@ -113,7 +113,7 @@ public class AuditSynthesisController extends AuditDataHandlerController {
                 model.addAttribute(
                         TgolKeyStore.CONTRACT_NAME_KEY,contract.getLabel());
                 model.addAttribute(TgolKeyStore.AUDIT_ID_KEY, auditId);
-                
+                model.addAttribute(TgolKeyStore.WEBRESOURCE_ID_KEY, audit.getSubject().getId());
                 return prepareSynthesisSiteData(audit, model);
                 
             } else {

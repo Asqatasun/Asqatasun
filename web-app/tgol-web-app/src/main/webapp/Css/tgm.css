@@ -745,14 +745,19 @@ footer a {
     line-height: 1.5em;
     padding : 15px;
     border-radius: 15px;
-    background: #dd2b13; /* Old browsers */
-    background: -moz-radial-gradient(center, ellipse cover, #dd2b13 0%, #cb1017 100%, #1e69de 100%); /* FF3.6+ */
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#dd2b13), color-stop(100%,#cb1017), color-stop(100%,#1e69de)); /* Chrome,Safari4+ */
-    background: -webkit-radial-gradient(center, ellipse cover, #dd2b13 0%,#cb1017 100%,#1e69de 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-radial-gradient(center, ellipse cover, #dd2b13 0%,#cb1017 100%,#1e69de 100%); /* Opera 12+ */
-    background: -ms-radial-gradient(center, ellipse cover, #dd2b13 0%,#cb1017 100%,#1e69de 100%); /* IE10+ */
-    background: radial-gradient(ellipse at center, #dd2b13 0%,#cb1017 100%,#1e69de 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dd2b13', endColorstr='#1e69de',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    background: #e4420d; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover, #e4420d 0%, #d61119 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#e4420d), color-stop(100%,#d61119)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover, #e4420d 0%,#d61119 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover, #e4420d 0%,#d61119 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover, #e4420d 0%,#d61119 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center, #e4420d 0%,#d61119 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4420d', endColorstr='#d61119',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    -moz-box-shadow: px 10px 0px 0px #AA0000;
+    -webkit-box-shadow: px 10px 0px 0px #AA0000;
+    -o-box-shadow: px 10px 0px 0px #AA0000;
+    box-shadow: px 10px 0px 0px #AA0000;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#AA0000, Direction=180, Strength=0);
 }
 #login-demo-form > input:hover {
     text-decoration: underline;
@@ -1249,12 +1254,17 @@ input[type="text"]:focus{
      line-height: 18px;  
  }
  #synthesis-action-list {
-     margin-left: 10px;
-     margin-top: 2em;
-     font-size : 12px;
+     margin-top: 1.5em;
+     font-size : 14px;
 }
 #synthesis-action-list .result-page-action {
     color: #fff;
+    font-family: OpenSansSemibold;
+    text-decoration: none;
+}
+#synthesis-action-list .result-page-action:focus, #synthesis-action-list .result-page-action:hover {
+    text-decoration: underline;
+    outline-color: #222222;
 }
 .audit-nb-of-pages {
     font-size: 150%;
@@ -1963,6 +1973,12 @@ input[type="text"]:focus{
 .Line-Number {
     min-width: 70px;
     max-width: 70px;
+}
+.occurences {
+    text-align: right;
+}
+.page-list li {
+    list-style: none;
 }
 .subcounter {
     background-image: url("../Images/subcounter.png");

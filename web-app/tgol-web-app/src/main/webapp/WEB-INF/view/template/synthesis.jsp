@@ -71,12 +71,12 @@
                                     ${pageCounterLinkTitle}
                                 </c:otherwise>
                             </c:choose>
-                        <c:if test="${hasSiteScopeTest == 'true'}">
-                            <span id="synthesis-action-list">
-                                <a href="<c:url value="/home/contract/audit-result.html?wr=${wr}"/>" class="result-page-action"><spring:message code="synthesisSite.siteResults"/></a></li>
-                            </span>
-                        </c:if>                                        
                         </div>
+                        <c:if test="${hasSiteScopeTest == 'true'}">
+                        <div id="synthesis-action-list">
+                            <a href="<c:url value="/home/contract/site-result.html?wr=${wr}"/>" class="result-page-action"><spring:message code="synthesisSite.siteResults"/></a></li>
+                        </div>
+                        </c:if>                                        
                         </c:if>
                         <c:if test="${fn:length(statistics.parametersMap) != 0}">
                         <div id="audit-ref">

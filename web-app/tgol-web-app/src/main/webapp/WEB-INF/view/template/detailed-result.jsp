@@ -233,25 +233,33 @@
                         <c:set var="nmiCounter" scope="request" value="0"/>
                         <c:set var="failedCounter" scope="request" value="0"/>
                         <c:if test='${not empty testResult.remarkInfosList}'>
-                            <c:forEach var="remarkInfosItem" items="${testResult.remarkInfosList}">
-                                <c:set var="remarkInfosItem" scope="request" value="${remarkInfosItem}"/>
-                                <c:set var="testCode" scope="request" value="${testResult.testCode}"/>
-                                <c:choose>
-                                    <c:when test="${testResult.testRepresentation != null}">
-                                        <c:import url="${testResult.testRepresentation}"/>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <c:import url="data-representation/data-representation-2.jsp"/>
-                                    </c:otherwise>
-                                </c:choose>
-                                
-                                <c:if test="${remarkInfosItem.remarkResult == 'nmi'}">
-                                    <c:set var="nmiCounter" scope="request" value="${nmiCounter + 1}"/>
-                                </c:if>
-                                <c:if test="${remarkInfosItem.remarkResult == 'failed'}">
-                                    <c:set var="failedCounter" scope="request" value="${failedCounter + 1}"/>
-                                </c:if>
-                            </c:forEach>
+                            <c:choose>
+                                <c:when test="${testResult.testRepresentation  == 'data-representation/data-representation-3.jsp'}">
+                                    <c:set var="remarkInfosList" scope="request" value="${testResult.remarkInfosList}"/>
+                                    <c:import url="data-representation/data-representation-3.jsp"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:forEach var="remarkInfosItem" items="${testResult.remarkInfosList}">
+                                        <c:set var="remarkInfosItem" scope="request" value="${remarkInfosItem}"/>
+                                        <c:set var="testCode" scope="request" value="${testResult.testCode}"/>
+                                        <c:choose>
+                                            <c:when test="${testResult.testRepresentation != null}">
+                                                <c:import url="${testResult.testRepresentation}"/>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:import url="data-representation/data-representation-2.jsp"/>
+                                            </c:otherwise>
+                                        </c:choose>
+
+                                        <c:if test="${remarkInfosItem.remarkResult == 'nmi'}">
+                                            <c:set var="nmiCounter" scope="request" value="${nmiCounter + 1}"/>
+                                        </c:if>
+                                        <c:if test="${remarkInfosItem.remarkResult == 'failed'}">
+                                            <c:set var="failedCounter" scope="request" value="${failedCounter + 1}"/>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
                         </c:if><!-- if has remarks to display -->
                     </div>
                     </c:if> <!-- if test="addTestDetails"> --> 

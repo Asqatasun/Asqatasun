@@ -214,7 +214,7 @@ public class AuditResultController extends AuditDataHandlerController {
      * @param response
      * @return
      */
-    @RequestMapping(value=TgolKeyStore.PAGE_RESULT_CONTRACT_URL, method=RequestMethod.GET)
+    @RequestMapping(value={TgolKeyStore.PAGE_RESULT_CONTRACT_URL, TgolKeyStore.SITE_RESULT_CONTRACT_URL}, method=RequestMethod.GET)
     @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String displayPageResultFromContract(
             @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
