@@ -156,7 +156,7 @@
                             <form:hidden path="contractId"/>
                             <form:hidden path="level"/>
                             <div id="relaunch-audit-form-submit">
-                                <input id="launch-audit-submit" type="submit" class="relaunch-button result-page-action" value="Relancer l'audit"/>
+                                <input id="launch-audit-submit" type="submit" class="relaunch-button result-page-action" value="<fmt:message key="resultPage.relaunchAudit"/>"/>
                             </div>
                             <%@include file="template/process-pop-up.jsp" %>
                         </form:form>
