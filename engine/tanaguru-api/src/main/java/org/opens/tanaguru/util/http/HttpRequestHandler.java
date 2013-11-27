@@ -138,6 +138,9 @@ public class HttpRequestHandler {
         } catch (UnknownHostException uhe) {
             LOGGER.warn("UnknownHostException on " + encodedUrl);
             return HttpStatus.SC_NOT_FOUND;
+        } catch (IllegalArgumentException iae) {
+            LOGGER.warn("IllegalArgumentException on " + encodedUrl);
+            return HttpStatus.SC_NOT_FOUND;
         } catch (IOException ioe) {
             LOGGER.warn("IOException on " + encodedUrl);
             ioe.fillInStackTrace();
