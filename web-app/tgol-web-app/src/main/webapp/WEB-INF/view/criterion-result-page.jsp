@@ -125,7 +125,7 @@
             </div><!-- class="row"-->
             <div class="row">
                 <div class="offset12 span4 back-link">
-                    <a href="<c:url value="/home/contract/audit-result.html?audit=${param.audit}"/>" class="back-link">
+                    <a href="<c:url value="/home/contract/audit-result.html?audit=${audit}"/>" class="back-link">
                         <fmt:message key="criterionResultPage.backToAuditResultByCriterion"/>
                     </a>
                 </div>
