@@ -1080,24 +1080,23 @@ td.action-button {
     margin-left: 0;
 }
 #act-list-table td[headers=date] { /* date */
-    width : 8em;
+    width : 16%;
 }
 #act-list-table td[headers=raw-mark] { /* mark */
     width : 9%;
 }
+#act-list-table td[headers=referential] { /* referential */
+    width : 12%;
+}
+#act-list-table td[headers=scope] { /* scope */
+    width : 13%;
+}
+#act-list-table td[headers=status] { /* status */
+    width : 8%;
+}
 #act-list-table td[headers=date], #act-list-table td[headers=raw-mark]{
     font-size: 14px;
 }
-#act-list-table td[headers=referential] { /* referential */
-    width : 8em;
-}
-#act-list-table td[headers=scope] { /* scope */
-    width : 15%;
-}
-#act-list-table td[headers=status] { /* status */
-    width : 2em;
-}
-
 /*
  * Page : set-up template
  * ==============================================
