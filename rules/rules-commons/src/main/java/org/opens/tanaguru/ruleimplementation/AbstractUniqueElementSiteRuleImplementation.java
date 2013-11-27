@@ -177,7 +177,6 @@ public class AbstractUniqueElementSiteRuleImplementation
                 Collection<ProcessRemark> processRemarkList = 
                         createProcessRemarkListForPageOnError(
                             tagValue,
-                            webResource.getURL(),
                             urlList,
                             processRemarkService);
                 definiteResultList.add(
@@ -207,26 +206,22 @@ public class AbstractUniqueElementSiteRuleImplementation
     /**
      * 
      * @param tagValue
-     * @param currentUrl
      * @param urlList
      * @param processRemarkService
      * @return 
      */
     private Collection<ProcessRemark> createProcessRemarkListForPageOnError(
             String tagValue,
-            String currentUrl,
             List<String> urlList, 
             ProcessRemarkService processRemarkService) {
         Collection<ProcessRemark> processRemarkList = new ArrayList<ProcessRemark>();
         for (String url : urlList) {
-            if (!url.equalsIgnoreCase(currentUrl)) {
-                processRemarkList.add(
-                        processRemarkService.createConsolidationRemark(
-                            TestSolution.FAILED, 
-                            pageLevelMessageCode, 
-                            tagValue, 
-                            url));
-            }
+            processRemarkList.add(
+                    processRemarkService.createConsolidationRemark(
+                        TestSolution.FAILED, 
+                        pageLevelMessageCode, 
+                        tagValue, 
+                        url));
         }
         return processRemarkList;
     }
