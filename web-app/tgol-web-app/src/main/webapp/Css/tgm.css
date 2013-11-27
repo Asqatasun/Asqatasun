@@ -985,7 +985,7 @@ td.project-info {
     font-size: 13px;
 }
 .last-audit-label {
-    font-family: OpenSansSemibold;
+    font-family: OpenSansRegular;
     font-size: 13px;
 }
 .project-status.running {

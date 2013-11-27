@@ -275,17 +275,7 @@
                                             </a>
                                         </span>
                                     </c:if>
-                                    <c:choose>
-                                        <c:when test="${actInfo.scope == 'PAGE' || actInfo.scope == 'FILE'}">
-                                            <c:set var="resultUrl" scope="page" value="/home/contract/audit-result.html?audit="/>
-                                        </c:when>
-                                        <c:when test="${actInfo.scope == 'GROUPOFPAGES' || actInfo.scope == 'GROUPOFFILES'}">
-                                            <c:set var="resultUrl" scope="page" value="/home/contract/audit-result.html?audit="/>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <c:set var="resultUrl" scope="page" value="/home/contract/audit-result.html?audit="/>
-                                        </c:otherwise>
-                                    </c:choose>
+                                    <c:set var="resultUrl" scope="page" value="/home/contract/audit-result.html?audit="/>
                                     <a href="<c:url value="${resultUrl}${actInfo.auditId}"/>" title="<fmt:message key="pageList.pageDetailedResult"></fmt:message> <fmt:message key="pageList.for"></fmt:message> ${actInfo.url}">
                                         ${actInfo.url}
                                     </a>

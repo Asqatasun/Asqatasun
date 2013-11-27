@@ -125,7 +125,18 @@
                             </c:if>
                             <c:choose>
                                 <c:when test='${contract.lastActInfo != null}'>
-                                    <div class="project-status"><span class="last-audit-label"><fmt:message key="home.lastAudit"/></span> : <fmt:formatDate type="date" value="${contract.lastActInfo.date}" dateStyle="long"/> <fmt:message key="home.at"/> <fmt:formatDate type="time" value="${contract.lastActInfo.date}"/></div>
+                                    <c:set var="resultUrl" scope="page" value="/home/contract/audit-result.html?audit="/>
+                                    <c:set var="auditDate" scope="page">
+                                        <fmt:formatDate type="date" value="${contract.lastActInfo.date}" dateStyle="long"/> <fmt:message key="home.at"/> <fmt:formatDate type="time" value="${contract.lastActInfo.date}"/>
+                                    </c:set>
+                                    <div class="project-status">
+                                        <a href="<c:url value="${resultUrl}${contract.lastActInfo.auditId}"/>">
+                                            <span class="last-audit-label" title="<fmt:message key="pageList.pageDetailedResult"></fmt:message> <fmt:message key="pageList.for"></fmt:message> ${contract.lastActInfo.url} (${auditDate})">
+                                                <fmt:message key="home.lastAudit"/>
+                                            </span>
+                                        </a>
+                                        : ${auditDate}
+                                    </div>
                                 </c:when>
                                 <c:otherwise>
                                     <div class="project-status"><span class="last-audit-label"><fmt:message key="home.noAudit"/></span></div>
