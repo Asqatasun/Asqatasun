@@ -92,9 +92,7 @@
                     <h1><fmt:message key="home.h1"/></h1>
                 </div>
             </div>
-            <c:if test="${fn:length(contractList) > 1}">
             <c:import url="template/sort-contract-console.jsp" />
-            </c:if>
             <div class="row">
                 <div class="span16">
                 <c:forEach var="contract" items="${contractList}" varStatus="pContractSet">
