@@ -38,6 +38,7 @@ import org.opens.tgol.entity.option.OptionElement;
 import org.opens.tgol.entity.service.option.OptionElementDataService;
 import org.opens.tgol.entity.user.User;
 import org.opens.tgol.exception.LostInSpaceException;
+import org.opens.tgol.orchestrator.KrashAuditException;
 import org.opens.tgol.orchestrator.TanaguruOrchestrator;
 import org.opens.tgol.util.HttpStatusCodeFamily;
 import org.opens.tgol.util.TgolKeyStore;
@@ -292,11 +293,15 @@ public class AuditLauncherController extends AuditDataHandlerController {
         Audit audit;
         boolean isPageAudit = true;
         // if the form is correct, we launch the audit
-        if (auditScope.equals(ScopeEnum.FILE)) {
-            audit = launchUploadAudit(contract, auditSetUpCommand, locale);
-            isPageAudit = false;
-        } else {
-            audit = launchPageAudit(contract,auditSetUpCommand, locale);
+        try {
+            if (auditScope.equals(ScopeEnum.FILE)) {
+                audit = launchUploadAudit(contract, auditSetUpCommand, locale);
+                isPageAudit = false;
+            } else {
+                audit = launchPageAudit(contract,auditSetUpCommand, locale);
+            }
+        } catch (KrashAuditException kae) {
+            return TgolKeyStore.OUPS_VIEW_NAME;
         }
         // if the audit lasted more than expected, we return a "audit in progress"
         // page and send an email when it's ready
