@@ -137,10 +137,8 @@ public abstract class AbstractPageRuleDefaultImplementation extends AbstractPage
                 test,
                 sspHandler.getSSP().getPage(),
                 testSolution,
+                elementCounter,
                 sspHandler.getRemarkList());
-
-        result.setElementCounter(elementCounter);
-
         return result;
     }
     
