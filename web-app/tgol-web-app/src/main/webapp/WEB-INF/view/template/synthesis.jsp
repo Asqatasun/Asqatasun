@@ -74,7 +74,7 @@
                         </div>
                         <c:if test="${hasSiteScopeTest == 'true'}">
                         <div id="synthesis-action-list">
-                            <a href="<c:url value="/home/contract/site-result.html?wr=${wr}"/>" class="result-page-action"><spring:message code="synthesisSite.siteResults"/></a></li>
+                            <a href="<c:url value="/home/contract/site-result.html?wr=${wr}"/>" class="result-page-action"><spring:message code="synthesisSite.siteResults"/></a>
                         </div>
                         </c:if>                                        
                         </c:if>
