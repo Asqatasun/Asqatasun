@@ -66,21 +66,6 @@
             <c:when test="${fn:contains(sessionId, 'A')}">
             <div class="row">
                 <div class="span16 main-logo">
-                    <img src="${oupsImg1Url}" alt=""/>
-                </div><!-- class="span16 main-logo" -->
-            </div><!-- class="row" -->
-            <div class="row">
-                <div class="span4 offset9">
-                    <a title="Creative Commons Attribution 3.0 License" href="http://creativecommons.org/licenses/by/3.0/">
-                        <img src="${creativeCommonLogoUrl}" alt="License"/>
-                    </a>
-                    <a title="Flickr: Galerie de Be holder" href="http://www.flickr.com/photos/14192845@N03/">Be holder</a>
-                </div><!-- class="span4 offset9" -->
-            </div><!-- class="row" -->
-            </c:when>
-            <c:when test="${fn:contains(sessionId, '1')}">
-            <div class="row">
-                <div class="span16 main-logo">
                     <img src="${oupsImg2Url}" alt=""/>
                 </div><!-- class="span16 main-logo" -->
             </div><!-- class="row" -->
@@ -92,6 +77,21 @@
                     <a title="Flickr: Galerie de Dr Case" href="http://www.flickr.com/photos/14192845@N03/">Dr Case</a>
                 </div><!-- class="span4 offset9" -->
             </div><!-- class="row" -->
+            </c:when>
+            <c:when test="${fn:contains(sessionId, '1')}">
+            <div class="row">
+                <div class="span16 main-logo">
+                    <img src="${oupsImg1Url}" alt=""/>
+                </div><!-- class="span16 main-logo" -->
+            </div><!-- class="row" -->
+            <div class="row">
+                <div class="span4 offset11">
+                    <a title="Creative Commons Attribution 3.0 License" href="http://creativecommons.org/licenses/by/3.0/">
+                        <img src="${creativeCommonLogoUrl}" alt="License"/>
+                    </a>
+                    <a title="Flickr: Galerie de Be holder" href="http://www.flickr.com/photos/14192845@N03/">Be holder</a>
+                </div><!-- class="span4 offset9" -->
+            </div><!-- class="row" -->            
             </c:when>
             <c:otherwise>
             <div class="row">
