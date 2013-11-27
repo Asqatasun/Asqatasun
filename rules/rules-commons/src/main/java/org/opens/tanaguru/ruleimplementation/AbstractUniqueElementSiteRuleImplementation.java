@@ -83,19 +83,20 @@ public class AbstractUniqueElementSiteRuleImplementation
         TestSolution testSolution = TestSolution.NOT_APPLICABLE;
         processRemarkService.resetService();
         List<DefiniteResult> netResultList = new ArrayList<DefiniteResult>();
+        int elementCounter = 0;
         if (!groupedGrossResultList.isEmpty()) {
             testSolution = TestSolution.PASSED;
-            Map<String, List<WebResource>> previousTitles = new HashMap<String, List<WebResource>>();
+            Map<String, List<WebResource>> previousText = new HashMap<String, List<WebResource>>();
             for (ProcessResult grossResult : groupedGrossResultList) {
-                Object titleObj = grossResult.getValue();
-                if (titleObj != null) {
-                    String title = (String) titleObj;
-                    if (previousTitles.containsKey(title)) {
-                        previousTitles.get(title).add(grossResult.getSubject());
+                if (grossResult.getValue() != null) {
+                    elementCounter++;
+                    String text = (String) grossResult.getValue();
+                    if (previousText.containsKey(text)) {
+                        previousText.get(text).add(grossResult.getSubject());
                     } else {
                         List<WebResource> urlList = new ArrayList<WebResource>();
                         urlList.add(grossResult.getSubject());
-                        previousTitles.put(title, urlList);
+                        previousText.put(text, urlList);
                     }
                 } else {
                     netResultList.add(
@@ -107,10 +108,10 @@ public class AbstractUniqueElementSiteRuleImplementation
                 }
             }
             // if all the elements are null
-            if (previousTitles.isEmpty()) {
+            if (previousText.isEmpty()) {
                 testSolution = TestSolution.NOT_APPLICABLE;
             } else {
-                Iterator<Map.Entry<String, List<WebResource>>> iter = previousTitles.entrySet().iterator();
+                Iterator<Map.Entry<String, List<WebResource>>> iter = previousText.entrySet().iterator();
                 List<WebResource> tmpElementList;
                 while (iter.hasNext()) {
                     // if the same element has been found twice
@@ -131,6 +132,7 @@ public class AbstractUniqueElementSiteRuleImplementation
                             createTestSolutionAtPageLevel(
                                 tmpElementList,
                                 tmpTagValue,
+                                elementCounter,
                                 processRemarkService));
                 }
             }
@@ -141,6 +143,7 @@ public class AbstractUniqueElementSiteRuleImplementation
                     test, 
                     group,
                     testSolution, 
+                    elementCounter,
                     processRemarkService.getRemarkList()));
         return netResultList;
     }
@@ -149,12 +152,14 @@ public class AbstractUniqueElementSiteRuleImplementation
      * 
      * @param webResourceList
      * @param tagValue
+     * @param elementCounter
      * @param processRemarkService
      * @return 
      */
     private List<DefiniteResult> createTestSolutionAtPageLevel(
             List<WebResource> webResourceList, 
             String tagValue,
+            int elementCounter,
             ProcessRemarkService processRemarkService) {
         
         List<DefiniteResult> definiteResultList = new ArrayList<DefiniteResult>();
@@ -184,6 +189,7 @@ public class AbstractUniqueElementSiteRuleImplementation
                         test, 
                         webResource,
                         TestSolution.FAILED, 
+                        elementCounter,
                         processRemarkList));
             }
         }
