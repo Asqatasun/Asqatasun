@@ -24,7 +24,6 @@
 <!--                             First parse of evidence element list to get the table headers (evidencement element key)-->
                             <thead>
                                 <tr>
-                                    <th class="r${testCode}-col-text" scope="col"><fmt:message  key="text"/></th>
                                     <th class="r${testCode}-col-Occurences occurences" scope="col"><fmt:message  key="Failed-Occurences"/></th>
                                     <th class="r${testCode}-col-page-list" scope="col"><fmt:message  key="Page-List"/></th>
                                 </tr>
@@ -33,9 +32,6 @@
                             <tbody>
                             <c:forEach var="remarkInfosItem" items="${remarkInfosList}">
                                 <tr>
-                                    <td class="text">
-                                        ${remarkInfosItem.remarkTarget}
-                                    </td>
                                     <td class="occurences">
                                         ${fn:length(remarkInfosItem.evidenceElementList)}
                                     </td>

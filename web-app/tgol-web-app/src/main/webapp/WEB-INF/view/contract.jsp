@@ -27,6 +27,7 @@
         <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-1.9.1.min.js"/>
         <c:set var="d3JsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/d3.v3.min.js"/>
         <c:set var="raphaelJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/r2d3.v2.min.js"/>
+        <c:set var="jqueryTableSorterUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery.tablesorter.min.js" scope="request"/>
         
         <!-- internal js --> 
         <c:set var="trendChartJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/trend/trend-chart-min.js"/>
@@ -35,6 +36,7 @@
         <c:set var="scoreJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/score/score-min.js"/>
         <c:set var="contractScoreIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/score/score-contract-ie-min.js"/>
         <c:set var="scoreIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/score/score-ie-min.js"/>
+        <c:set var="accessibleTableSorterJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/table-sorter/accessible-table-sorter-min.js" scope="request"/>
         
         <!-- external images --> 
         <c:set var="gearImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/gear.png"/>
@@ -52,7 +54,10 @@
         <c:set var="d3JsUrl">
             <c:url value="/External-Js/d3.v3.min.js"/>
         </c:set>
-
+        <c:set var="jqueryTableSorterUrl" scope="request">
+            <c:url value="/External-Js/jquery.tablesorter.min.js"/>
+        </c:set> 
+        
         <!-- internal js --> 
         <c:set var="trendChartJsUrl">
             <c:url value="/Js/trend/trend-chart-min.js"/>
@@ -71,6 +76,9 @@
         </c:set>
         <c:set var="scoreIEJsUrl">
             <c:url value="/Js/ie/score/score-ie-min.js"/>
+        </c:set>
+        <c:set var="accessibleTableSorterJsUrl" scope="page">
+            <c:url value="/Js/table-sorter/accessible-table-sorter-min.js"/>
         </c:set>
         
         <!-- images --> 
@@ -194,8 +202,6 @@
                     <c:when test="${detailedContractInfo.lastActInfo.status == 'COMPLETED'}">
                         <c:set var="mark" scope="page" value="${detailedContractInfo.lastActInfo.rawMark}"/>
                         <c:set var="scoreId" scope="page" value="project-score"/>
-                        <c:set var="hasProgressInfo" scope="page" value="false"/>
-                        <c:set var="progressValue" scope="page" value="${detailedContractInfo.siteAuditProgression}"/>
                         <c:set var="hasScoreFormulaLink" scope="page" value="false"/>
                         <c:set var="spanClass" scope="page" value="span2"/>
                         <%@include file="template/score.jsp" %>
@@ -244,7 +250,7 @@
                 </div><!-- class="span16 offset0" -->
             <c:if test='${not empty detailedContractInfo.lastActInfoSet}'>
                 <div id="act-list" class="span16 tg-table-container">
-                    <table id="act-list-table" class="tg-table">
+                    <table id="act-list-table" class="tg-table sortable-table">
                         <caption><fmt:message key="contract.auditHistory"/></caption>
                         <thead>
                             <tr>
@@ -318,6 +324,8 @@
         </div><!-- class="container"-->
         <%@include file="template/footer.jsp" %>
         <script type="text/javascript" src="${jqueryUrl}"></script>
+        <script type="text/javascript" src="${jqueryTableSorterUrl}"></script>
+        <script type="text/javascript" src="${accessibleTableSorterJsUrl}"></script>
         <!--[if lte IE 8]>
         <script type="text/javascript" src="${raphaelJsUrl}"></script>
         <script type="text/javascript" src="${trendChartIEJsUrl}"></script>

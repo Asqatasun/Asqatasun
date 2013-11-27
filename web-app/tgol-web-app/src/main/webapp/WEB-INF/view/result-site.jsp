@@ -22,10 +22,9 @@
         <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-1.9.1.min.js"/>
         <c:set var="d3JsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/d3.v3.min.js" scope="request"/>            
         <c:set var="r2d3JsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/r2d3.v2.min.js" scope="request"/>
-        <c:set var="codePrettifierJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/prettify.min.js" scope="request"/>
+        <c:set var="jqueryTableSorterUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery.tablesorter.min.js" scope="request"/>
 
         <!-- internal js -->
-        <c:set var="prettyPrintJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/result-page/pretty-print-min.js" scope="request"/>
         <c:set var="testDetailsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/expand-collapse/test-details-min.js" scope="page"/>
         <c:set var="themeDetailsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/expand-collapse/theme-details-min.js" scope="page"/>
         <c:set var="auditParametersDetailsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/expand-collapse/audit-parameters-details-min.js" scope="page"/>
@@ -33,6 +32,7 @@
         <c:set var="siteScopeScoreJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/score/score-page-list-min.js" scope="request"/>
         <c:set var="scoreIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/score/score-ie-min.js" scope="request"/>
         <c:set var="siteScopeScoreIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/score/score-page-list-ie-min.js" scope="request"/>
+        <c:set var="accessibleTableSorterJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/table-sorter/accessible-table-sorter-min.js" scope="request"/>
 
         <!-- external images -->
         <c:set var="testInfoLinkImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/test-info-link.png" scope="request"/>
@@ -51,20 +51,17 @@
         <c:set var="d3JsUrl" scope="request">
             <c:url value="/External-Js/d3.v3.min.js"/>
         </c:set> 
-        <c:set var="codePrettifierJsUrl" scope="request">
-            <c:url value="/External-Js/prettify.min.js"/>
-        </c:set> 
         <c:set var="r2d3JsUrl" scope="request">
             <c:url value="/External-Js/r2d3.v2.min.js"/>
+        </c:set> 
+        <c:set var="jqueryTableSorterUrl" scope="request">
+            <c:url value="/External-Js/jquery.tablesorter.min.js"/>
         </c:set> 
 
         <!-- internal js -->
         <c:set var="resultPageChartsIEJsUrl" scope="request">
             <c:url value="/Js/ie/result-page/result-page-charts-ie-min.js"/>
         </c:set>
-        <c:set var="prettyPrintJsUrl" scope="request">
-            <c:url value="/Js/result-page/pretty-print-min.js"/>
-        </c:set> 
         <c:set var="scoreJsUrl" scope="request">
             <c:url value="/Js/score/score-min.js"/>
         </c:set>
@@ -85,6 +82,9 @@
         </c:set>
         <c:set var="auditParametersDetailsJsUrl" scope="page">
             <c:url value="/Js/expand-collapse/audit-parameters-details-min.js"/>
+        </c:set>
+        <c:set var="accessibleTableSorterJsUrl" scope="page">
+            <c:url value="/Js/table-sorter/accessible-table-sorter-min.js"/>
         </c:set>
 
         <!-- external images -->
@@ -161,15 +161,16 @@
             <c:set var="displayAlgorithm" scope="request" value="true"/>
             <c:set var="scope" scope="request" value="site"/>
             <c:set var="addThemeHeader" scope="request" value="true"/>
+            <c:set var="addMainTitle" scope="request" value="true"/>
             <c:import url="template/detailed-result.jsp" />
         </div><!-- class="container"-->
         <%@include file="template/footer.jsp" %>
         <script type="text/javascript" src="${jqueryUrl}"></script>
         <script type="text/javascript" src="${testDetailsJsUrl}"></script>
         <script type="text/javascript" src="${themeDetailsJsUrl}"></script>
-        <script type="text/javascript" src="${codePrettifierJsUrl}"></script>
-        <script type="text/javascript" src="${prettyPrintJsUrl}"></script>
         <script type="text/javascript" src="${auditParametersDetailsJsUrl}"></script>
+        <script type="text/javascript" src="${jqueryTableSorterUrl}"></script>
+        <script type="text/javascript" src="${accessibleTableSorterJsUrl}"></script>
         <!--[if lte IE 8]>
         <script type="text/javascript" src="${r2d3JsUrl}"></script>
         <script type="text/javascript" src="${scoreIEJsUrl}"></script>
