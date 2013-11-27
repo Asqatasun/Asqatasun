@@ -63,4 +63,27 @@ public class DefiniteResultFactoryImpl implements DefiniteResultFactory {
         return definiteResult;
     }
 
+    @Override
+    public DefiniteResult create(
+            Test test, 
+            WebResource subject, 
+            TestSolution value, 
+            int elementCounter) {
+        DefiniteResult definiteResult = create(test, subject, value, null);
+        definiteResult.setElementCounter(elementCounter);
+        return definiteResult;
+    }
+
+    @Override
+    public DefiniteResult create(
+            Test test, 
+            WebResource subject, 
+            TestSolution value, 
+            int elementCounter, 
+            Collection<ProcessRemark> remarkSet) {
+        DefiniteResult definiteResult = create(test, subject, value, remarkSet);
+        definiteResult.setElementCounter(elementCounter);
+        return definiteResult;
+    }
+
 }

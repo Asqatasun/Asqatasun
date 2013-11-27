@@ -21,13 +21,13 @@
  */
 package org.opens.tanaguru.entity.factory.audit;
 
+import java.util.Collection;
 import org.opens.tanaguru.entity.audit.DefiniteResult;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
-import java.util.Collection;
 
 /**
  * 
@@ -45,6 +45,22 @@ public interface DefiniteResultFactory extends GenericFactory<DefiniteResult> {
      */
     public DefiniteResult create(Test test, WebResource subject);
 
+        
+    /**
+     *
+     * @param test
+     *            the test to set
+     * @param subject
+     *            the subject to set
+     * @param value
+     *            the value to set
+     * @param elementCounter
+     *            the  number of tested elements
+     * @return a new instance of DefiniteResult
+     */
+    public DefiniteResult create(Test test, WebResource subject,
+            TestSolution value, int elementCounter);
+    
     /**
      *
      * @param test
@@ -59,5 +75,24 @@ public interface DefiniteResultFactory extends GenericFactory<DefiniteResult> {
      */
     public DefiniteResult create(Test test, WebResource subject,
             TestSolution value, Collection<ProcessRemark> remarkSet);
-
+    /**
+     *
+     * @param test
+     *            the test to set
+     * @param subject
+     *            the subject to set
+     * @param value
+     *            the value to set
+     * @param elementCounter
+     *            the  number of tested elements
+     * @param remarkList
+     *            the remark list to set
+     * @return a new instance of DefiniteResult
+     */
+    public DefiniteResult create(
+                Test test, 
+                WebResource subject,
+                TestSolution value, 
+                int elementCounter, 
+                Collection<ProcessRemark> remarkSet);
 }
