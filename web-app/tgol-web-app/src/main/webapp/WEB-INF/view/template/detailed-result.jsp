@@ -234,9 +234,10 @@
                         <c:set var="failedCounter" scope="request" value="0"/>
                         <c:if test='${not empty testResult.remarkInfosList}'>
                             <c:choose>
-                                <c:when test="${testResult.testRepresentation  == 'data-representation/data-representation-3.jsp'}">
+                                <c:when test="${testResult.testRepresentation  == 'data-representation/data-representation-3.jsp' || 
+                                        testResult.testRepresentation  == 'data-representation/data-representation-4.jsp'}">
                                     <c:set var="remarkInfosList" scope="request" value="${testResult.remarkInfosList}"/>
-                                    <c:import url="data-representation/data-representation-3.jsp"/>
+                                    <c:import url="${testResult.testRepresentation}"/>
                                 </c:when>
                                 <c:otherwise>
                                     <c:forEach var="remarkInfosItem" items="${testResult.remarkInfosList}">

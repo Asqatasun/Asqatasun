@@ -620,6 +620,10 @@ footer a {
 }
 .tg-table .tg-textual-column {
     text-align: left;
+    max-width: 450px;
+    word-wrap: break-word;
+    word-break: break-all;
+    -ms-word-break: break-all; /*ie8 only*/
 }
 .tg-table .tg-numerical-column {
     text-align: right;
@@ -801,6 +805,26 @@ footer a {
 #sign-up-submit input{
     width : 30%;
 }
+/*
+ * Sortable table
+ * ==============================================
+ */
+/*table.sortable-table .header {
+    padding-left: 18px;
+}
+table.sortable-table .headerSortUp, table.sortable-table .headerSortDown {
+    background-repeat: no-repeat;
+}
+table.sortable-table .headerSortDown {
+    background-repeat: no-repeat;
+}*/
+.offscreen {
+    position: absolute;
+    left: -10000px;
+}
+table.sortable-table .header:focus, .sortable-table .header:hover {
+    background-color: #ccc;
+}
 
 /*
  * Page: sign-up-confirmation
@@ -918,6 +942,44 @@ footer a {
 .project-name a:hover {
     text-decoration: underline;
 }
+.project-table {
+    margin-bottom: 25px;
+}
+.project-thumbnail {
+    text-align: left;
+    width : 10%;
+}
+.project-info {
+    width : 45%;
+}
+.project-expired {
+    width : 760px;
+}
+.project-expired .project-name{
+    font-family: OpenSansLight;
+    font-size: 32px;
+    word-wrap: break-word;
+}
+td.project-info {
+    vertical-align: top;
+}
+.project-actions {
+    width : 20%;
+}
+.project-actions .action-s {
+    width : 30px;
+    margin-right: 8px;
+}
+.project-result {
+    text-align: center;
+}
+.project-trend .score-progression {
+    margin-top: 0;
+}
+.project-trend {
+    width: 5%;
+    text-align: right;
+}
 .project-url a {
     font-family: OpenSansLight;
     font-size: 13px;
@@ -935,12 +997,19 @@ footer a {
 }
 .one-project .project-border {
     border-top: solid 1px #ddd;
-    margin-bottom: 25px;
-    margin-top: 25px;
 }
 .one-project .thumbnail img  {
     width: 140px;
     height: 90px;
+}
+.one-project td {
+    vertical-align: middle;
+    padding-top: 25px;
+}
+
+.one-project.last-project td {
+    padding-bottom: 25px;
+    border-bottom: solid 1px #ddd;
 }
 #contract-option-console .clearfix {
     width: 18%;
@@ -957,11 +1026,6 @@ footer a {
     #contract-option-console .clearfix {
         width: 280px;
     }
-}
-.action-s {
-    width : 18px;
-    margin-right: 4px;
-    margin-top: 40px
 }
 /*
  * Page : contract
@@ -1974,9 +2038,6 @@ input[type="text"]:focus{
     min-width: 70px;
     max-width: 70px;
 }
-.occurences {
-    text-align: right;
-}
 .page-list li {
     list-style: none;
 }
@@ -2462,9 +2523,6 @@ input[type="text"]:focus{
     font-size: 13px;
     font-family: OpenSansLight;
     opacity: 0.7;
-}
-.d3-one-project-score {
-    text-align: right;
 }
 .d3-one-project-score .d3-score-graph{
     margin-left: 0;

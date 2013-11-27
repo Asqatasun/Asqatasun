@@ -34,6 +34,9 @@
         
         <!-- external images -->
         <c:set var="gearImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/gear.png"/>
+        <c:set var="increaseLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/increase-narrow.png"/>
+        <c:set var="decreaseLogoUrl"value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/decrease-narrow.png"/>
+        <c:set var="stableLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/stable-narrow.png"/>
     </c:when>
     <c:otherwise>
         <!-- external js -->
@@ -65,6 +68,15 @@
         <c:set var="gearImgUrl">
             <c:url value="/Images/gear.png"/>  
         </c:set>
+        <c:set var="increaseLogoUrl">
+            <c:url value="/Images/increase-narrow.png"/>  
+        </c:set>
+        <c:set var="decreaseLogoUrl">
+            <c:url value="/Images/decrease-narrow.png"/>
+        </c:set>
+        <c:set var="stableLogoUrl">
+            <c:url value="/Images/stable-narrow.png"/>
+        </c:set>
     </c:otherwise>
 </c:choose>
 <html lang="${lang}">
@@ -86,16 +98,24 @@
             <div class="row">
                 <div class="span16">
                 <c:forEach var="contract" items="${contractList}" varStatus="pContractSet">
-                    <div id="project-${pContractSet.index}" class="row one-project">
-                        <div class="span16 project-border"></div>
+                    <table class="project-table">
+                        <c:choose>
+                        <c:when test="${fn:length(contractList) == pContractSet.index + 1}">
+                            <tr id="project-${pContractSet.index}" class="one-project last-project">
+                        </c:when>
+                        <c:otherwise>
+                            <tr id="project-${pContractSet.index}" class="one-project">        
+                        </c:otherwise>
+                        </c:choose>
                         <c:set var="url" scope="page" value="${contract.url}"/>
                         <c:set var="contract" scope="page" value="${contract}"/>
-                        <c:set var="proportion" scope="page" value="span3"/>
                         <c:set var="size" scope="page" value="T"/>
+                        <td class="project-thumbnail">
                         <%@include file="template/thumbnail.jsp" %>
+                        </td>
                         <c:choose>
                             <c:when test="${contract.isContractExpired != 'true'}">
-                        <div class="span8">
+                        <td class="project-info">
                             <h2 class="project-name">
                                 <a href="home/contract.html?cr=${contract.id}">${contract.label}</a>
                                 <c:if test="${contract.isActRunning == 'true'}">
@@ -113,8 +133,8 @@
                                     <div class="project-status"><span class="last-audit-label"><fmt:message key="home.noAudit"/></span></div>
                                 </c:otherwise>
                             </c:choose>
-                        </div><!-- class="span8"-->
-                        <div class="project-actions span2" >
+                        </td>
+                        <td class="project-actions">
                             <c:forEach var="contractAction" items="${contract.actionList}" varStatus="pContractAction">
                                 <c:set var="actionNameI18N">
                                     <fmt:message key="${contractAction.actionI81NCode}"/>
@@ -169,46 +189,49 @@
                                 </c:choose>
                             </span>
                             </c:forEach>
-                        </div>
+                        </td>
+                        <td class="project-result">
                         <c:if test='${contract.lastActInfo != null}'>
                             <c:choose>
                                 <c:when test="${contract.lastActInfo.status == 'COMPLETED'}">
                             <c:set var="mark" scope="page" value="${contract.lastActInfo.rawMark}"/>
                             <c:set var="scoreClass" scope="page" value="one-project-score"/>
                             <c:set var="scoreId" scope="page" value=""/>
-                            <c:set var="hasProgressInfo" scope="page" value="true"/>
-                            <c:set var="progressValue" scope="page" value="${contract.siteAuditProgression}"/>
                             <c:set var="hasScoreFormulaLink" scope="page" value="false"/>
-                            <c:set var="spanClass" scope="page" value="span2"/>
+                            <c:set var="spanClass" scope="page" value=""/>
                             <%@include file="template/score.jsp" %>
                                 </c:when>
                                 <c:otherwise>
-                        <div class="span2">
-                            <div class="project-fail">
-                                <c:if test="${isActRunning == 'true'}">
-                                    <img src="" alt="<fmt:message key="home.noAudit"/>"/>
-                                </c:if>
-                                <fmt:message key="${contract.lastActInfo.status}"/>
-                            </div>
-                        </div><!-- class="span2" -->
+                                <span class="project-fail"><fmt:message key="${contract.lastActInfo.status}"/></span>
                                 </c:otherwise>
                             </c:choose>
                         </c:if>
+                        </td>
+                        <td class="project-trend">
+                        <c:set var="progressValue" scope="page" value="${contract.siteAuditProgression}"/>
+                        <c:choose>
+                        <c:when test="${progressValue eq 'PROGRESS'}">
+                            <img src="${increaseLogoUrl}" alt="<fmt:message key="score-increase"/>" title="<fmt:message key="score-increase"/>" class="score-progression"/>
+                        </c:when>
+                        <c:when test="${progressValue eq 'REGRESS'}">
+                            <img src="${decreaseLogoUrl}" alt="<fmt:message key="score-decrease"/>" title="<fmt:message key="score-decrease"/>" class="score-progression"/>
+                        </c:when>
+                        <c:when test="${progressValue eq 'STABLE'}">
+                            <img src="${stableLogoUrl}" alt="<fmt:message key="score-stable"/>" title="<fmt:message key="score-stable"/>" class="score-progression"/>
+                        </c:when>
+                        </c:choose>
+                        </td>
                             </c:when>
                             <c:otherwise>
-                        <div class="span12">
+                        <td class="project-expired">
                             <h2 class="project-name">${contract.label}</h2>
                             <div class="project-expiration"><fmt:message key="home.projectHasExpired"/></div>
                             <div class="project-url"><a href="${contract.url}">${contract.url}</a></div>
-                        </div><!-- class="span11 one-project" -->
+                        </td>
                             </c:otherwise>
                         </c:choose>
-                    </div><!-- id="project-index" class="row one-project" -->
-                    <c:if test="${fn:length(contractList) == pContractSet.index + 1}">
-                        <div class="row one-project">
-                            <div class="span16 project-border"></div>
-                        </div>
-                    </c:if>
+                        </tr>
+                    </table>
                 </c:forEach>
                 </div><!-- class="span16" -->
             </div><!-- class="row" -->
