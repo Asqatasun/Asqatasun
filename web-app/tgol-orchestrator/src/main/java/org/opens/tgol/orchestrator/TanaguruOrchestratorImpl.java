@@ -326,6 +326,10 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
                     break;
                 }
             }
+            if (auditTimeoutThread.getException() != null) {
+                LOGGER.error("new KrashAuditException()");
+                throw new KrashAuditException();
+            }
             return auditTimeoutThread.getAudit();
         }
     }
