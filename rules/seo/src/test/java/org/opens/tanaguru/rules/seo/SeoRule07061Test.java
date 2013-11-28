@@ -42,105 +42,105 @@ public class SeoRule07061Test extends SeoSiteRuleWithPageResultImplementationTes
         Site site = getWebResourceFactory().createSite("file:Site-Passed1");
         getWebResourceMap().put("Seo.Test.7.6.1-1Passed-01", site);
 
-        Page page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule07061/Seo.Test.7.6.1-1Passed-01.html");
+        Page page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule07061/Seo.Test.7.6.1-1Passed-01.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.7.6.1-page01",page);
+        getWebResourceMap().put("Seo.Test.7.6.1-page01", page);
 
-        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule07061/Seo.Test.7.6.1-1Passed-02.html");
+        page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule07061/Seo.Test.7.6.1-1Passed-02.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.7.6.1-page02",page);
+        getWebResourceMap().put("Seo.Test.7.6.1-page02", page);
 
         site = getWebResourceFactory().createSite("file:Site-Failed1");
         getWebResourceMap().put("Seo.Test.7.6.1-2Failed-01", site);
 
-        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule07061/Seo.Test.7.6.1-2Failed-01.html");
+        page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule07061/Seo.Test.7.6.1-2Failed-01.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.7.6.1-page03",page);
+        getWebResourceMap().put("Seo.Test.7.6.1-page03", page);
 
-        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule07061/Seo.Test.7.6.1-2Failed-02.html");
+        page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule07061/Seo.Test.7.6.1-2Failed-02.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.7.6.1-page04",page);
+        getWebResourceMap().put("Seo.Test.7.6.1-page04", page);
 
         site = getWebResourceFactory().createSite("file:Site-NA1");
         getWebResourceMap().put("Seo.Test.7.6.1-4NA-01", site);
 
-        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule07061/Seo.Test.7.6.1-4NA-01.html");
+        page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule07061/Seo.Test.7.6.1-4NA-01.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.7.6.1-page05",page);
+        getWebResourceMap().put("Seo.Test.7.6.1-page05", page);
 
-        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule07061/Seo.Test.7.6.1-4NA-02.html");
+        page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule07061/Seo.Test.7.6.1-4NA-02.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.7.6.1-page06",page);
+        getWebResourceMap().put("Seo.Test.7.6.1-page06", page);
 
         site = getWebResourceFactory().createSite("file:Site-Passed2");
         getWebResourceMap().put("Seo.Test.7.6.1-1Passed-02", site);
-        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule07061/Seo.Test.7.6.1-4NA-02.html");
+        page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule07061/Seo.Test.7.6.1-4NA-02.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.7.6.1-page07",page);
+        getWebResourceMap().put("Seo.Test.7.6.1-page07", page);
 
-        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule07061/Seo.Test.7.6.1-1Passed-01.html");
+        page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule07061/Seo.Test.7.6.1-1Passed-01.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.7.6.1-page08",page);
+        getWebResourceMap().put("Seo.Test.7.6.1-page08", page);
 
         site = getWebResourceFactory().createSite("file:Site-Failed2");
         getWebResourceMap().put("Seo.Test.7.6.1-2Failed-02", site);
 
-        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule07061/Seo.Test.7.6.1-2Failed-03.html");
+        page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule07061/Seo.Test.7.6.1-2Failed-03.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.7.6.1-page09",page);
+        getWebResourceMap().put("Seo.Test.7.6.1-page09", page);
 
-        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule07061/Seo.Test.7.6.1-2Failed-04.html");
+        page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule07061/Seo.Test.7.6.1-2Failed-04.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.7.6.1-page10",page);
+        getWebResourceMap().put("Seo.Test.7.6.1-page10", page);
 
         site = getWebResourceFactory().createSite("file:Site-Failed3");
         getWebResourceMap().put("Seo.Test.7.6.1-2Failed-03", site);
 
-        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule07061/Seo.Test.7.6.1-2Failed-05.html");
+        page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule07061/Seo.Test.7.6.1-2Failed-05.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.7.6.1-page11",page);
+        getWebResourceMap().put("Seo.Test.7.6.1-page11", page);
 
-        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule07061/Seo.Test.7.6.1-2Failed-06.html");
+        page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule07061/Seo.Test.7.6.1-2Failed-06.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.7.6.1-page12",page);
+        getWebResourceMap().put("Seo.Test.7.6.1-page12", page);
 
         site = getWebResourceFactory().createSite("file:Site-Failed4");
         getWebResourceMap().put("Seo.Test.7.6.1-2Failed-04", site);
 
-        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule07061/Seo.Test.7.6.1-2Failed-07.html");
+        page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule07061/Seo.Test.7.6.1-2Failed-07.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.7.6.1-page13",page);
+        getWebResourceMap().put("Seo.Test.7.6.1-page13", page);
 
-        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule07061/Seo.Test.7.6.1-2Failed-08.html");
+        page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule07061/Seo.Test.7.6.1-2Failed-08.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.7.6.1-page14",page);
+        getWebResourceMap().put("Seo.Test.7.6.1-page14", page);
 
         site = getWebResourceFactory().createSite("file:Site-Failed5");
         getWebResourceMap().put("Seo.Test.7.6.1-2Failed-05", site);
 
-        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule07061/Seo.Test.7.6.1-2Failed-09.html");
+        page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule07061/Seo.Test.7.6.1-2Failed-09.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.7.6.1-page15",page);
+        getWebResourceMap().put("Seo.Test.7.6.1-page15", page);
 
-        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule07061/Seo.Test.7.6.1-2Failed-10.html");
+        page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule07061/Seo.Test.7.6.1-2Failed-10.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.7.6.1-page16",page);
+        getWebResourceMap().put("Seo.Test.7.6.1-page16", page);
     }
 
     @Override
@@ -159,102 +159,121 @@ public class SeoRule07061Test extends SeoSiteRuleWithPageResultImplementationTes
     protected void setConsolidate() {
         Collection<ProcessResult> processResult = consolidateWithListAsReturn("Seo.Test.7.6.1-1Passed-01");
         assertEquals(3, processResult.size());
-        assertEquals(TestSolution.PASSED, ((List<ProcessResult>)processResult).get(0).getValue());
-        assertEquals(TestSolution.PASSED, ((List<ProcessResult>)processResult).get(1).getValue());
-        assertEquals(TestSolution.PASSED, ((List<ProcessResult>)processResult).get(2).getValue());
+        assertEquals(TestSolution.PASSED, ((List<ProcessResult>) processResult).get(0).getValue());
+        assertEquals(TestSolution.PASSED, ((List<ProcessResult>) processResult).get(1).getValue());
+        assertEquals(TestSolution.PASSED, ((List<ProcessResult>) processResult).get(2).getValue());
 
         processResult = consolidateWithListAsReturn("Seo.Test.7.6.1-1Passed-02");
         assertEquals(3, processResult.size());
-        assertEquals(TestSolution.NOT_APPLICABLE, ((List<ProcessResult>)processResult).get(0).getValue());
-        assertEquals(TestSolution.PASSED, ((List<ProcessResult>)processResult).get(1).getValue());
-        assertEquals(TestSolution.PASSED, ((List<ProcessResult>)processResult).get(2).getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE, ((List<ProcessResult>) processResult).get(0).getValue());
+        assertEquals(TestSolution.PASSED, ((List<ProcessResult>) processResult).get(1).getValue());
+        assertEquals(TestSolution.PASSED, ((List<ProcessResult>) processResult).get(2).getValue());
 
         processResult = consolidateWithListAsReturn("Seo.Test.7.6.1-2Failed-01");
         assertEquals(3, processResult.size());
-        assertEquals(TestSolution.FAILED, ((List<ProcessResult>)processResult).get(0).getValue());
-        assertEquals(TestSolution.FAILED, ((List<ProcessResult>)processResult).get(1).getValue());
-        assertEquals(TestSolution.FAILED, ((List<ProcessResult>)processResult).get(2).getValue());
+        assertEquals(TestSolution.FAILED, ((List<ProcessResult>) processResult).get(0).getValue());
+        assertEquals(TestSolution.FAILED, ((List<ProcessResult>) processResult).get(1).getValue());
+        assertEquals(TestSolution.FAILED, ((List<ProcessResult>) processResult).get(2).getValue());
 
-        assertEquals(1, ((List<ProcessResult>)processResult).get(0).getRemarkSet().size());
-         assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
-                ((ProcessRemark)((List<ProcessResult>)processResult).get(0).getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(1, ((List<ProcessResult>)processResult).get(1).getRemarkSet().size());
+        assertEquals(2, ((List<ProcessResult>) processResult).get(0).getRemarkSet().size());
         assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
-                ((ProcessRemark)((List<ProcessResult>)processResult).get(1).getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(2, ((List<ProcessResult>)processResult).get(2).getRemarkSet().size());
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(0).getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(0).getRemarkSet().toArray()[1]).getMessageCode());
+        assertEquals(2, ((List<ProcessResult>) processResult).get(1).getRemarkSet().size());
+        assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(1).getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(1).getRemarkSet().toArray()[1]).getMessageCode());
+        assertEquals(2, ((List<ProcessResult>) processResult).get(2).getRemarkSet().size());
         assertEquals(RemarkMessageStore.H1_NOT_UNIQUE_MSG,
-                ((ProcessRemark)((List<ProcessResult>)processResult).get(2).getRemarkSet().toArray()[0]).getMessageCode());
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(2).getRemarkSet().toArray()[0]).getMessageCode());
 
         processResult = consolidateWithListAsReturn("Seo.Test.7.6.1-2Failed-02");
         assertEquals(3, processResult.size());
-        assertEquals(TestSolution.FAILED, ((List<ProcessResult>)processResult).get(0).getValue());
-        assertEquals(TestSolution.FAILED, ((List<ProcessResult>)processResult).get(1).getValue());
-        assertEquals(TestSolution.FAILED, ((List<ProcessResult>)processResult).get(2).getValue());
+        assertEquals(TestSolution.FAILED, ((List<ProcessResult>) processResult).get(0).getValue());
+        assertEquals(TestSolution.FAILED, ((List<ProcessResult>) processResult).get(1).getValue());
+        assertEquals(TestSolution.FAILED, ((List<ProcessResult>) processResult).get(2).getValue());
 
-        assertEquals(1, ((List<ProcessResult>)processResult).get(0).getRemarkSet().size());
-         assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
-                ((ProcessRemark)((List<ProcessResult>)processResult).get(0).getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(1, ((List<ProcessResult>)processResult).get(1).getRemarkSet().size());
+        assertEquals(2, ((List<ProcessResult>) processResult).get(0).getRemarkSet().size());
         assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
-                ((ProcessRemark)((List<ProcessResult>)processResult).get(1).getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(2, ((List<ProcessResult>)processResult).get(2).getRemarkSet().size());
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(0).getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(0).getRemarkSet().toArray()[1]).getMessageCode());
+        assertEquals(2, ((List<ProcessResult>) processResult).get(1).getRemarkSet().size());
+        assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(1).getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(1).getRemarkSet().toArray()[1]).getMessageCode());
+        assertEquals(2, ((List<ProcessResult>) processResult).get(2).getRemarkSet().size());
         assertEquals(RemarkMessageStore.H1_NOT_UNIQUE_MSG,
-                ((ProcessRemark)((List<ProcessResult>)processResult).get(2).getRemarkSet().toArray()[0]).getMessageCode());
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(2).getRemarkSet().toArray()[0]).getMessageCode());
 
 
         processResult = consolidateWithListAsReturn("Seo.Test.7.6.1-2Failed-03");
         assertEquals(3, processResult.size());
-        assertEquals(TestSolution.FAILED, ((List<ProcessResult>)processResult).get(0).getValue());
-        assertEquals(TestSolution.FAILED, ((List<ProcessResult>)processResult).get(1).getValue());
-        assertEquals(TestSolution.FAILED, ((List<ProcessResult>)processResult).get(2).getValue());
+        assertEquals(TestSolution.FAILED, ((List<ProcessResult>) processResult).get(0).getValue());
+        assertEquals(TestSolution.FAILED, ((List<ProcessResult>) processResult).get(1).getValue());
+        assertEquals(TestSolution.FAILED, ((List<ProcessResult>) processResult).get(2).getValue());
 
-        assertEquals(1, ((List<ProcessResult>)processResult).get(0).getRemarkSet().size());
-         assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
-                ((ProcessRemark)((List<ProcessResult>)processResult).get(0).getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(1, ((List<ProcessResult>)processResult).get(1).getRemarkSet().size());
+        assertEquals(2, ((List<ProcessResult>) processResult).get(0).getRemarkSet().size());
         assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
-                ((ProcessRemark)((List<ProcessResult>)processResult).get(1).getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(2, ((List<ProcessResult>)processResult).get(2).getRemarkSet().size());
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(0).getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(0).getRemarkSet().toArray()[1]).getMessageCode());
+        assertEquals(2, ((List<ProcessResult>) processResult).get(1).getRemarkSet().size());
+        assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(1).getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(1).getRemarkSet().toArray()[1]).getMessageCode());
+        assertEquals(2, ((List<ProcessResult>) processResult).get(2).getRemarkSet().size());
         assertEquals(RemarkMessageStore.H1_NOT_UNIQUE_MSG,
-                ((ProcessRemark)((List<ProcessResult>)processResult).get(2).getRemarkSet().toArray()[0]).getMessageCode());
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(2).getRemarkSet().toArray()[0]).getMessageCode());
 
         processResult = consolidateWithListAsReturn("Seo.Test.7.6.1-2Failed-04");
         assertEquals(3, processResult.size());
-        assertEquals(TestSolution.FAILED, ((List<ProcessResult>)processResult).get(0).getValue());
-        assertEquals(TestSolution.FAILED, ((List<ProcessResult>)processResult).get(1).getValue());
-        assertEquals(TestSolution.FAILED, ((List<ProcessResult>)processResult).get(2).getValue());
+        assertEquals(TestSolution.FAILED, ((List<ProcessResult>) processResult).get(0).getValue());
+        assertEquals(TestSolution.FAILED, ((List<ProcessResult>) processResult).get(1).getValue());
+        assertEquals(TestSolution.FAILED, ((List<ProcessResult>) processResult).get(2).getValue());
 
-        assertEquals(1, ((List<ProcessResult>)processResult).get(0).getRemarkSet().size());
-         assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
-                ((ProcessRemark)((List<ProcessResult>)processResult).get(0).getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(1, ((List<ProcessResult>)processResult).get(1).getRemarkSet().size());
+        assertEquals(2, ((List<ProcessResult>) processResult).get(0).getRemarkSet().size());
         assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
-                ((ProcessRemark)((List<ProcessResult>)processResult).get(1).getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(2, ((List<ProcessResult>)processResult).get(2).getRemarkSet().size());
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(0).getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(0).getRemarkSet().toArray()[1]).getMessageCode());
+        assertEquals(2, ((List<ProcessResult>) processResult).get(1).getRemarkSet().size());
+        assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(1).getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(1).getRemarkSet().toArray()[1]).getMessageCode());
+        assertEquals(2, ((List<ProcessResult>) processResult).get(2).getRemarkSet().size());
         assertEquals(RemarkMessageStore.H1_NOT_UNIQUE_MSG,
-                ((ProcessRemark)((List<ProcessResult>)processResult).get(2).getRemarkSet().toArray()[0]).getMessageCode());
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(2).getRemarkSet().toArray()[0]).getMessageCode());
 
         processResult = consolidateWithListAsReturn("Seo.Test.7.6.1-2Failed-05");
         assertEquals(3, processResult.size());
-        assertEquals(TestSolution.FAILED, ((List<ProcessResult>)processResult).get(0).getValue());
-        assertEquals(TestSolution.FAILED, ((List<ProcessResult>)processResult).get(1).getValue());
-        assertEquals(TestSolution.FAILED, ((List<ProcessResult>)processResult).get(2).getValue());
+        assertEquals(TestSolution.FAILED, ((List<ProcessResult>) processResult).get(0).getValue());
+        assertEquals(TestSolution.FAILED, ((List<ProcessResult>) processResult).get(1).getValue());
+        assertEquals(TestSolution.FAILED, ((List<ProcessResult>) processResult).get(2).getValue());
 
-        assertEquals(1, ((List<ProcessResult>)processResult).get(0).getRemarkSet().size());
-         assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
-                ((ProcessRemark)((List<ProcessResult>)processResult).get(0).getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(1, ((List<ProcessResult>)processResult).get(1).getRemarkSet().size());
+        assertEquals(2, ((List<ProcessResult>) processResult).get(0).getRemarkSet().size());
         assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
-                ((ProcessRemark)((List<ProcessResult>)processResult).get(1).getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(2, ((List<ProcessResult>)processResult).get(2).getRemarkSet().size());
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(0).getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(0).getRemarkSet().toArray()[1]).getMessageCode());
+        assertEquals(2, ((List<ProcessResult>) processResult).get(1).getRemarkSet().size());
+        assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(1).getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(RemarkMessageStore.H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(1).getRemarkSet().toArray()[1]).getMessageCode());
+        assertEquals(2, ((List<ProcessResult>) processResult).get(2).getRemarkSet().size());
         assertEquals(RemarkMessageStore.H1_NOT_UNIQUE_MSG,
-                ((ProcessRemark)((List<ProcessResult>)processResult).get(2).getRemarkSet().toArray()[0]).getMessageCode());
-        
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(2).getRemarkSet().toArray()[0]).getMessageCode());
+
         processResult = consolidateWithListAsReturn("Seo.Test.7.6.1-4NA-01");
         assertEquals(3, processResult.size());
-        assertEquals(TestSolution.NOT_APPLICABLE, ((List<ProcessResult>)processResult).get(0).getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE, ((List<ProcessResult>)processResult).get(1).getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE, ((List<ProcessResult>)processResult).get(2).getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE, ((List<ProcessResult>) processResult).get(0).getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE, ((List<ProcessResult>) processResult).get(1).getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE, ((List<ProcessResult>) processResult).get(2).getValue());
     }
-
 }

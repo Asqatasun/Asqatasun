@@ -42,39 +42,39 @@ public class SeoRule01041Test extends SeoSiteRuleWithPageResultImplementationTes
         Site site = getWebResourceFactory().createSite("file:Site-Passed1");
         getWebResourceMap().put("Seo.Test.1.4.1-1Passed-01", site);
 
-        Page page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule01041/Seo.Test.1.4.1-1Passed-01.html");
+        Page page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule01041/Seo.Test.1.4.1-1Passed-01.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.1.4.1-page01",page);
+        getWebResourceMap().put("Seo.Test.1.4.1-page01", page);
 
-        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule01041/Seo.Test.1.4.1-1Passed-02.html");
+        page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule01041/Seo.Test.1.4.1-1Passed-02.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.1.4.1-page02",page);
+        getWebResourceMap().put("Seo.Test.1.4.1-page02", page);
 
         site = getWebResourceFactory().createSite("file:Site-Failed1");
         getWebResourceMap().put("Seo.Test.1.4.1-2Failed-01", site);
 
-        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule01041/Seo.Test.1.4.1-2Failed-01.html");
+        page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule01041/Seo.Test.1.4.1-2Failed-01.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.1.4.1-page03",page);
+        getWebResourceMap().put("Seo.Test.1.4.1-page03", page);
 
-        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule01041/Seo.Test.1.4.1-2Failed-02.html");
+        page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule01041/Seo.Test.1.4.1-2Failed-02.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.1.4.1-page04",page);
+        getWebResourceMap().put("Seo.Test.1.4.1-page04", page);
 
         site = getWebResourceFactory().createSite("file:Site-Passed2");
         getWebResourceMap().put("Seo.Test.1.4.1-1Passed-02", site);
-        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule01041/Seo.Test.1.4.1-2Failed-02.html");
+        page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule01041/Seo.Test.1.4.1-2Failed-02.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.1.4.1-page05",page);
-        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "SEO/SeoRule01041/Seo.Test.1.4.1-1Passed-01.html");
+        getWebResourceMap().put("Seo.Test.1.4.1-page05", page);
+        page = getWebResourceFactory().createPage(getTestcasesFilePath()
+                + "SEO/SeoRule01041/Seo.Test.1.4.1-1Passed-01.html");
         site.addChild(page);
-        getWebResourceMap().put("Seo.Test.1.4.1-page06",page);
+        getWebResourceMap().put("Seo.Test.1.4.1-page06", page);
     }
 
     @Override
@@ -88,31 +88,34 @@ public class SeoRule01041Test extends SeoSiteRuleWithPageResultImplementationTes
     protected void setConsolidate() {
         Collection<ProcessResult> processResult = consolidateWithListAsReturn("Seo.Test.1.4.1-1Passed-01");
         assertEquals(3, processResult.size());
-        assertEquals(TestSolution.PASSED, ((List<ProcessResult>)processResult).get(0).getValue());
-        assertEquals(TestSolution.PASSED, ((List<ProcessResult>)processResult).get(1).getValue());
-        assertEquals(TestSolution.PASSED, ((List<ProcessResult>)processResult).get(2).getValue());
+        assertEquals(TestSolution.PASSED, ((List<ProcessResult>) processResult).get(0).getValue());
+        assertEquals(TestSolution.PASSED, ((List<ProcessResult>) processResult).get(1).getValue());
+        assertEquals(TestSolution.PASSED, ((List<ProcessResult>) processResult).get(2).getValue());
 
         processResult = consolidateWithListAsReturn("Seo.Test.1.4.1-1Passed-02");
         assertEquals(3, processResult.size());
-        assertEquals(TestSolution.PASSED, ((List<ProcessResult>)processResult).get(0).getValue());
-        assertEquals(TestSolution.PASSED, ((List<ProcessResult>)processResult).get(1).getValue());
-        assertEquals(TestSolution.PASSED, ((List<ProcessResult>)processResult).get(2).getValue());
+        assertEquals(TestSolution.PASSED, ((List<ProcessResult>) processResult).get(0).getValue());
+        assertEquals(TestSolution.PASSED, ((List<ProcessResult>) processResult).get(1).getValue());
+        assertEquals(TestSolution.PASSED, ((List<ProcessResult>) processResult).get(2).getValue());
 
         processResult = consolidateWithListAsReturn("Seo.Test.1.4.1-2Failed-01");
         assertEquals(3, processResult.size());
-        assertEquals(TestSolution.FAILED, ((List<ProcessResult>)processResult).get(0).getValue());
-        assertEquals(TestSolution.FAILED, ((List<ProcessResult>)processResult).get(1).getValue());
-        assertEquals(TestSolution.FAILED, ((List<ProcessResult>)processResult).get(2).getValue());
+        assertEquals(TestSolution.FAILED, ((List<ProcessResult>) processResult).get(0).getValue());
+        assertEquals(TestSolution.FAILED, ((List<ProcessResult>) processResult).get(1).getValue());
+        assertEquals(TestSolution.FAILED, ((List<ProcessResult>) processResult).get(2).getValue());
 
-        assertEquals(1, ((List<ProcessResult>)processResult).get(0).getRemarkSet().size());
-         assertEquals(RemarkMessageStore.SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG,
-                ((ProcessRemark)((List<ProcessResult>)processResult).get(0).getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(1, ((List<ProcessResult>)processResult).get(1).getRemarkSet().size());
+        assertEquals(2, ((List<ProcessResult>) processResult).get(0).getRemarkSet().size());
         assertEquals(RemarkMessageStore.SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG,
-                ((ProcessRemark)((List<ProcessResult>)processResult).get(1).getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(2, ((List<ProcessResult>)processResult).get(2).getRemarkSet().size());
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(0).getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(RemarkMessageStore.SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(0).getRemarkSet().toArray()[1]).getMessageCode());
+        assertEquals(2, ((List<ProcessResult>) processResult).get(1).getRemarkSet().size());
+        assertEquals(RemarkMessageStore.SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(1).getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(RemarkMessageStore.SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG,
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(1).getRemarkSet().toArray()[1]).getMessageCode());
+        assertEquals(2, ((List<ProcessResult>) processResult).get(2).getRemarkSet().size());
         assertEquals(RemarkMessageStore.SOURCE_CODE_NOT_UNIQUE_MSG,
-                ((ProcessRemark)((List<ProcessResult>)processResult).get(2).getRemarkSet().toArray()[0]).getMessageCode());
+                ((ProcessRemark) ((List<ProcessResult>) processResult).get(2).getRemarkSet().toArray()[0]).getMessageCode());
     }
-
 }
