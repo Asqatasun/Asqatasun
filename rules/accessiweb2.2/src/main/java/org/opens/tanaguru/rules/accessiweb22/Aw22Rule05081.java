@@ -22,7 +22,6 @@ package org.opens.tanaguru.rules.accessiweb22;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
@@ -184,14 +183,8 @@ public class Aw22Rule05081 extends AbstractMarkerPageRuleImplementation {
     }
     
     @Override
-    protected ProcessResult computeResult(
-            SSPHandler sspHandler, 
-            TestSolutionHandler testSolutionHandler, 
-            int elementCounter) {
-        return prepareDefiniteResult(
-                    testSolutionHandler.getTestSolution(), 
-                    sspHandler, 
-                    tableCounter);
+    public int getSelectionSize() {
+        return tableCounter;
     }
     
 }
