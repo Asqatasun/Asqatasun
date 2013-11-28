@@ -13,6 +13,7 @@ $(document).ready(function() {
             lien = $('<a>',
         {
             'href': '#' + anchor,
+            'class': 'test-expand',
             'title': $(this).next().attr("alt"),
             'aria-expanded': 'false',
             'aria-controls': anchor
@@ -22,7 +23,7 @@ $(document).ready(function() {
         $(this).next().show();
     }); 
     
-    $('.rule-id a:nth-child(1)').click(function() {
+    $('.rule-id .test-expand').click(function() {
         var showIcon;
         if ($(this).attr('aria-expanded') == 'false') {
             $(this).attr('aria-expanded', true).parent().parent().parent().parent().next(panels).show();
@@ -41,7 +42,7 @@ $(document).ready(function() {
     });
 
     $('.rule-label.expandable').click( function() {
-	$(this).siblings('.rule-id').find('a:first').click();
+	$(this).siblings('.rule-id').find('.test-expand').click();
     });
     
 });
