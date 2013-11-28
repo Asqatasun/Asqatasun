@@ -180,7 +180,7 @@ function extractInfo (elem, parentFgColor, parentBgColor, result, parentPath, el
         element.fontSize =  getStyle(elem,'font-size');
         element.fontWeight = getStyle(elem,'font-weight');
         element.isTextNode = isTextNode(elem);
-        elem.focus();
+        elem.focus(); // get the focus
         focus = document.activeElement;
         if (elem === focus) {
             element.isFocusable = true;
@@ -190,6 +190,7 @@ function extractInfo (elem, parentFgColor, parentBgColor, result, parentPath, el
         } else {
             element.isFocusable = false;
         }
+        elem.blur(); // release the focus
         result.push(element);
 
         children = elem.children;
