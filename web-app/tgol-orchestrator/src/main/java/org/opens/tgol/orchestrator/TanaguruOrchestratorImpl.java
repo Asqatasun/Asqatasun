@@ -44,6 +44,7 @@ import org.opens.tgol.entity.scenario.Scenario;
 import org.opens.tgol.entity.service.contract.ActDataService;
 import org.opens.tgol.entity.service.contract.ScopeDataService;
 import org.opens.tgol.entity.service.scenario.ScenarioDataService;
+import org.opens.tgol.exception.KrashAuditException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 

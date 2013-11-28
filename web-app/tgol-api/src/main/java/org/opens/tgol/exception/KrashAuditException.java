@@ -20,7 +20,7 @@
  *  Contact us by mail: open-s AT open-s DOT com
  */
 
-package org.opens.tgol.orchestrator;
+package org.opens.tgol.exception;
 
 /**
  *
