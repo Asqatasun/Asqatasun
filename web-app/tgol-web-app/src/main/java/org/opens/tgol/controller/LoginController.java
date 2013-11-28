@@ -75,6 +75,9 @@ public class LoginController extends AbstractUserAndContractsController{
     
     @RequestMapping(value = TgolKeyStore.LOGIN_URL, method=RequestMethod.GET)
     public String displayLoginPage (Model model) {
+        if (isAuthenticated()) {
+            return TgolKeyStore.HOME_VIEW_NAME;
+        }
         return TgolKeyStore.LOGIN_VIEW_NAME;
     }
 
