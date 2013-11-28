@@ -24,6 +24,7 @@ package org.opens.tgol.controller;
 import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.security.userdetails.TgolUserDetailsService;
@@ -34,6 +35,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,16 +49,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LoginController extends AbstractUserAndContractsController{
 
-    private static final String GUEST_KEY = "guest";
-    private UserDetails guestUserDetails;
+    
     private AuthenticationManager authenticationManager;
     public void setAuthenticationManager(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
+
+    UserDetails guestUserDetails;
     
+    private String guestUser;
+    public void setGuestUser(String guestUser) {
+        this.guestUser = guestUser;
+    }
+    
+    private String guestPassword;
+    public void setGuestPassword(String guestPassword) {
+        this.guestPassword = guestPassword;
+    }
+    
+    TgolUserDetailsService tgolUserDetailsService;
     @Autowired
     public void setTgolUserDetails(TgolUserDetailsService tgolUserDetailsService) {
-        guestUserDetails  = tgolUserDetailsService.loadUserByUsername(GUEST_KEY);
+        this.tgolUserDetailsService = tgolUserDetailsService;
     }
     
     @RequestMapping(value = TgolKeyStore.LOGIN_URL, method=RequestMethod.GET)
@@ -74,14 +88,25 @@ public class LoginController extends AbstractUserAndContractsController{
             HttpServletRequest request,
             HttpServletResponse response,
             Model model) {
-        if (isAuthenticated() || guestUserDetails == null) {
-            return TgolKeyStore.ACCESS_DENIED_VIEW_NAME;    
+        if (StringUtils.isBlank(guestUser) || StringUtils.isBlank(guestPassword)) {
+            return TgolKeyStore.NO_DEMO_AVAILABLE_VIEW_NAME;
         }
+        if (isAuthenticated()) {
+            return TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
+        }
+        if (guestUserDetails == null) {
+            try {
+                guestUserDetails = tgolUserDetailsService.loadUserByUsername(guestUser);
+            } catch (UsernameNotFoundException unfe) {
+                return TgolKeyStore.NO_DEMO_AVAILABLE_VIEW_NAME;
+            }
+        }
+
         doGuestAutoLogin(request);
 
         Collection<Contract> contractSet = getContractDataService().getAllContractsByUser(getCurrentUser());
-        if (contractSet == null) {
-            return TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
+        if (contractSet == null || contractSet.isEmpty()) {
+            return TgolKeyStore.NO_DEMO_AVAILABLE_VIEW_NAME;
         }
         String contractId = contractSet.iterator().next().getId().toString();
         model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contractId);
@@ -92,7 +117,7 @@ public class LoginController extends AbstractUserAndContractsController{
         try {
             // Must be called from request filtered by Spring Security, otherwise SecurityContextHolder is not updated
             UsernamePasswordAuthenticationToken token = 
-                    new UsernamePasswordAuthenticationToken(GUEST_KEY, GUEST_KEY);
+                    new UsernamePasswordAuthenticationToken(guestUser, guestPassword);
             token.setDetails(new WebAuthenticationDetails(request));
             Authentication guest = authenticationManager.authenticate(token);
             Logger.getLogger(this.getClass()).debug("Logging in with [{}]" + guest.getPrincipal());

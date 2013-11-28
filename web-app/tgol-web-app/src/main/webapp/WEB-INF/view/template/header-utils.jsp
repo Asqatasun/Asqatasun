@@ -23,7 +23,9 @@
             </c:otherwise>
         </c:choose>
         <c:set var="currentUserName" scope="page">
-            <sec:authentication property="principal.displayedUserName" />
+            <c:catch var="notAuthenException" >
+                <sec:authentication property="principal.displayedUserName" />
+            </c:catch>
         </c:set>
         <c:if test="${accountSettingsActive == 'true'}">
             <c:set var="accountSettingsActive" scope="page" value=""/>
@@ -34,9 +36,18 @@
         <div class="topbar">
             <div class="fill">
                 <div class="container">
-                    <a class="brand" href="<c:url value="/dispatch.html"/>" title="<fmt:message key="home.home"/>">
-                        <img src="${tgLogoUrl}" alt="<fmt:message key="home.home"/>" />
-                    </a>
+                    <c:choose>
+                        <c:when test="${empty notAuthenException}">
+                        <a class="brand" href="<c:url value="/dispatch.html"/>" title="<fmt:message key="home.home"/>">
+                            <img src="${tgLogoUrl}" alt="<fmt:message key="home.home"/>" />
+                        </a>
+                        </c:when>
+                        <c:otherwise>
+                        <a class="brand" href="<c:url value="/login.html"/>" title="Login">
+                            <img src="${tgLogoUrl}" alt="Login" />
+                        </a>
+                        </c:otherwise>
+                    </c:choose>
                     <ul class="nav secondary-nav">
                         
                     <sec:authorize access="isAuthenticated()">
@@ -85,11 +96,13 @@
                             </a>
                         </li>    
                     </sec:authorize>
+                    <c:if test="${empty notAuthenException}">
                         <li>
                             <a href="<c:url value="/j_spring_security_logout"/>" id="logout" title="<fmt:message key="home.logout"/>">
                                 <img src="${logoutLogoUrl}" alt="<fmt:message key="home.logout"/>" id="logout-icon"/>
                             </a>
                         </li>
+                    </c:if>
                     </ul><!--class="nav secondary-nav"-->
                 </div><!-- class="container" -->
             </div><!-- class="fill" -->
