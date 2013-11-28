@@ -209,6 +209,7 @@ public final class TgolKeyStore {
     public static final String EXPORT_AUDIT_FORMAT_ERROR_VIEW_REDIRECT_NAME =
             "export-audit-format-error-redirect";
     public static final String SOURCE_CODE_PAGE_VIEW_NAME = "source-code-page";
+    public static final String NO_DEMO_AVAILABLE_VIEW_NAME = "no-demo-available";
 
     /* data model keys */
     public static final String AUDIT_SET_UP_COMMAND_KEY = "auditSetUpCommand";
