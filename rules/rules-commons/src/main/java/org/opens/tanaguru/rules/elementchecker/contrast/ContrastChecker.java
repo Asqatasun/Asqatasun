@@ -32,6 +32,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.domelement.DomElement;
@@ -55,6 +56,9 @@ public class ContrastChecker extends ElementCheckerImpl {
 
     private static final Logger LOGGER = Logger.getLogger(ContrastChecker.class);
     
+    private static final String ALT_CONTRAST_MECHA_PARAM_KEY = 
+                    "ALTERNATIVE_CONTRAST_MECHANISM";
+    
     private static final int NORMAL_FONT_SIZE_THRESHOLD = 18;
     private static final int BOLD_FONT_SIZE_THRESHOLD = 14;
     
@@ -75,6 +79,9 @@ public class ContrastChecker extends ElementCheckerImpl {
     
     /** */
     private Set<String> notTreatedBackgroundColorValue = new HashSet<String>();
+    
+    /** */
+    private boolean alternativeContrastMechanismPresent = false;
     
     /** The element counter */
     int elementCounter = 0;
@@ -102,6 +109,9 @@ public class ContrastChecker extends ElementCheckerImpl {
     
     @Override
     protected void doCheck(SSPHandler sspHandler, Elements elements, TestSolutionHandler testSolutionHandler) {
+        alternativeContrastMechanismPresent = 
+                isAlternativeContrastMechanismPresentFromParam(sspHandler);
+        
         Collection<DomElement> domElements;
         try {
             domElements = 
@@ -220,6 +230,10 @@ public class ContrastChecker extends ElementCheckerImpl {
             // if the result is hidden, the result is NEED_MORE_INFO
             testSolution = TestSolution.NEED_MORE_INFO;
             msgCode = BAD_CONTRAST_HIDDEN_ELEMENT_MSG;
+        } else if (alternativeContrastMechanismPresent) {
+            // An alternative contrast mechanism is provided
+            testSolution = TestSolution.NEED_MORE_INFO;
+            msgCode = BAD_CONTRAST_MSG;
         } else {
             // By default the result is failed
             testSolution = TestSolution.FAILED;
@@ -315,4 +329,16 @@ public class ContrastChecker extends ElementCheckerImpl {
         elementCounter = 0;
     }
 
+    private boolean isAlternativeContrastMechanismPresentFromParam(SSPHandler sspHandler) {
+        for (Parameter parameter : sspHandler.getSSP().getAudit().getParameterSet()){
+            if (parameter.getParameterElement().getParameterElementCode().equalsIgnoreCase(ALT_CONTRAST_MECHA_PARAM_KEY)) {
+                if(parameter.getValue().equals("true")) {
+                    return true;
+                }
+                break;
+            }
+        }
+        return false;
+    }
+        
 }

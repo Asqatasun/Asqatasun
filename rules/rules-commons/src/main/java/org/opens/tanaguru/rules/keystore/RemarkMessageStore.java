@@ -265,6 +265,8 @@ public final class RemarkMessageStore {
     public static final String BAD_CONTRAST_MSG = "BadContrast";
     public static final String BAD_CONTRAST_HIDDEN_ELEMENT_MSG = 
             "BadContrastHiddenElement";
+    public static final String BAD_CONTRAST_BUT_ALT_MECHANISM_MSG = 
+            "BadContrastButAlternativeContrastMechanismOnPage";
     public static final String CHECK_CONTRAST_MANUALLY_MSG =
             "CheckContrastManually";
     public static final String NOT_TREATED_BACKGROUND_COLOR_MSG =
