@@ -47,6 +47,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.archive.net.UURI;
 import org.archive.net.UURIFactory;
+import org.hibernate.exception.DataException;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.contentadapter.ContentParser;
 import org.opens.tanaguru.contentadapter.Resource;
@@ -231,12 +232,9 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
                 cssContent = (StylesheetContent)getContentDataService().saveOrUpdate(cssContent);
                 relatedCssIdSet.add(cssContent.getId());
             } catch (PersistenceException pe) {
-                cssContent.setSource(CSS_ON_ERROR);
-                cssContent.setAdaptedContent(CSS_ON_ERROR);
-                cssContent = (StylesheetContent)getContentDataService().saveOrUpdate(cssContent);
-                relatedCssIdSet.add(cssContent.getId());
-                LOGGER.debug("Problem with "+ cssContent.getURI() +
-                    ". Persist it with content set as on error");
+                adaptedContentOnError(cssContent, relatedCssIdSet);
+            } catch (DataException de) {
+                adaptedContentOnError(cssContent, relatedCssIdSet);
             }
         }
         getContentDataService().saveContentRelationShip(getSSP(), relatedCssIdSet);
@@ -498,6 +496,20 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
         }
     }
 
+    /**
+     * 
+     * @param cssContent
+     * @param relatedCssIdSet 
+     */
+    private void adaptedContentOnError(StylesheetContent cssContent, Set<Long> relatedCssIdSet) {
+        cssContent.setSource(CSS_ON_ERROR);
+        cssContent.setAdaptedContent(CSS_ON_ERROR);
+        cssContent = (StylesheetContent)getContentDataService().saveOrUpdate(cssContent);
+        relatedCssIdSet.add(cssContent.getId());
+        LOGGER.info("Problem with "+ cssContent.getURI() +
+            ". Persist it with content set as on error");
+    }
+    
     /**
      * 
      * @param base
