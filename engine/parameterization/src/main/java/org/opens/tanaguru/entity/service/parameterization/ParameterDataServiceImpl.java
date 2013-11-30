@@ -46,6 +46,12 @@ public class ParameterDataServiceImpl extends AbstractGenericDataService<Paramet
 
     @Override
     public Parameter getParameter(ParameterElement parameterElement, String value) {
+        if (value == null) {
+            // the set-up forms may return null when a checkbox is not selected.
+            // As a checkbox is supposed to handle a state, the null value is 
+            // considered as a false
+            value=Boolean.FALSE.toString();
+        }
         Parameter parameter = ((ParameterDAO) entityDao).findParameter(parameterElement, value);
         if (parameter == null) {
             return ((ParameterFactory) entityFactory).createParameter(parameterElement, value);
