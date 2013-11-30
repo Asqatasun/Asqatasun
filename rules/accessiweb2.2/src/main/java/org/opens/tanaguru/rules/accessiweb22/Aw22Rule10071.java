@@ -78,7 +78,7 @@ public class Aw22Rule10071 extends AbstractPageRuleFromPreProcessImplementation 
     public Aw22Rule10071 () {
         super(new ElementPresenceChecker(
                     // if some elements are found
-                    TestSolution.FAILED, 
+                    TestSolution.NEED_MORE_INFO, 
                     // if no found element
                     TestSolution.PASSED, 
                     // message for each detected element

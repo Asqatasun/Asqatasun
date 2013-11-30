@@ -167,11 +167,11 @@ public class Aw22Rule10071Test extends Aw22RuleImplementationTestCase {
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
         assertEquals(RemarkMessageStore.INVISIBLE_OUTLINE_ON_FOCUS_MSG, processRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, processRemark.getTarget());
         // check number of evidence elements and their value
@@ -185,11 +185,11 @@ public class Aw22Rule10071Test extends Aw22RuleImplementationTestCase {
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
         assertEquals(RemarkMessageStore.INVISIBLE_OUTLINE_ON_FOCUS_MSG, processRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, processRemark.getTarget());
         // check number of evidence elements and their value
@@ -203,11 +203,11 @@ public class Aw22Rule10071Test extends Aw22RuleImplementationTestCase {
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
         assertEquals(RemarkMessageStore.INVISIBLE_OUTLINE_ON_FOCUS_MSG, processRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, processRemark.getTarget());
         // check number of evidence elements and their value
@@ -221,11 +221,11 @@ public class Aw22Rule10071Test extends Aw22RuleImplementationTestCase {
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
         assertEquals(RemarkMessageStore.INVISIBLE_OUTLINE_ON_FOCUS_MSG, processRemark.getMessageCode());
         assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
         // check number of evidence elements and their value
@@ -239,11 +239,11 @@ public class Aw22Rule10071Test extends Aw22RuleImplementationTestCase {
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
         assertEquals(RemarkMessageStore.INVISIBLE_OUTLINE_ON_FOCUS_MSG, processRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, processRemark.getTarget());
         // check number of evidence elements and their value
@@ -257,11 +257,11 @@ public class Aw22Rule10071Test extends Aw22RuleImplementationTestCase {
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
         assertEquals(RemarkMessageStore.INVISIBLE_OUTLINE_ON_FOCUS_MSG, processRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, processRemark.getTarget());
         // check number of evidence elements and their value
@@ -275,11 +275,11 @@ public class Aw22Rule10071Test extends Aw22RuleImplementationTestCase {
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
         assertEquals(RemarkMessageStore.INVISIBLE_OUTLINE_ON_FOCUS_MSG, processRemark.getMessageCode());
         assertEquals(HtmlElementStore.SPAN_ELEMENT, processRemark.getTarget());
         // check number of evidence elements and their value
@@ -535,19 +535,19 @@ public class Aw22Rule10071Test extends Aw22RuleImplementationTestCase {
         assertEquals(TestSolution.PASSED,
                 consolidate("AW22.Test.10.7.1-1Passed-02").getValue());
 
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW22.Test.10.7.1-2Failed-01").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW22.Test.10.7.1-2Failed-02").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW22.Test.10.7.1-2Failed-03").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW22.Test.10.7.1-2Failed-04").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW22.Test.10.7.1-2Failed-05").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW22.Test.10.7.1-2Failed-06").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW22.Test.10.7.1-2Failed-07").getValue());
 
         assertEquals(TestSolution.NEED_MORE_INFO,
