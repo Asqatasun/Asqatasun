@@ -40,8 +40,15 @@ import org.opens.tanaguru.rules.domelement.extractor.DomElementExtractor;
 import org.opens.tanaguru.rules.elementchecker.ElementCheckerImpl;
 import org.opens.tanaguru.rules.elementchecker.contrast.exception.ContrastCheckerParseResultException;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.IMG_CSS_LIKE_QUERY;
-import static org.opens.tanaguru.rules.keystore.EvidenceStore.*;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
+import static org.opens.tanaguru.rules.keystore.EvidenceStore.BG_COLOR_EE;
+import static org.opens.tanaguru.rules.keystore.EvidenceStore.CONTRAST_EE;
+import static org.opens.tanaguru.rules.keystore.EvidenceStore.FG_COLOR_EE;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.BAD_CONTRAST_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.BAD_CONTRAST_BUT_ALT_MECHANISM_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.BAD_CONTRAST_HIDDEN_ELEMENT_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_CONTRAST_MANUALLY_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_CONTRAST_OF_IMAGE_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NOT_TREATED_BACKGROUND_COLOR_MSG;
 import org.opens.tanaguru.rules.utils.ContrastHelper;
 import static org.opens.tanaguru.service.ProcessRemarkService.DEFAULT_EVIDENCE;
 
@@ -233,7 +240,7 @@ public class ContrastChecker extends ElementCheckerImpl {
         } else if (alternativeContrastMechanismPresent) {
             // An alternative contrast mechanism is provided
             testSolution = TestSolution.NEED_MORE_INFO;
-            msgCode = BAD_CONTRAST_MSG;
+            msgCode = BAD_CONTRAST_BUT_ALT_MECHANISM_MSG;
         } else {
             // By default the result is failed
             testSolution = TestSolution.FAILED;
