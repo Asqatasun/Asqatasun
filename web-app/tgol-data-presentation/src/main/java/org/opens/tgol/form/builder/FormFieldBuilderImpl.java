@@ -21,8 +21,6 @@
  */
 package org.opens.tgol.form.builder;
 
-import org.opens.tgol.form.FormField;
-
 /**
  *
  * @author jkowalczyk
@@ -31,12 +29,6 @@ public abstract class FormFieldBuilderImpl implements FormFieldBuilder{
 
     public FormFieldBuilderImpl() {
         super();
-    }
-
-    @Override
-    public FormField build() {
-        // mock implementation of build method for this abstract class
-        return null;
     }
 
     private String i18nKey=null;
