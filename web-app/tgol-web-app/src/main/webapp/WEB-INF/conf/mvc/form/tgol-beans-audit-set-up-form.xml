@@ -251,5 +251,27 @@
         <property name="parameterCode" value="INFORMATIVE_IMAGE_MARKER"/>
         <property name="formFieldBuilder" ref="informativeImageFormFieldBuilder"/>
     </bean>
+    
+    <bean id="alternativeContrastMechanismPresent" class="org.opens.tgol.form.builder.CheckboxElementBuilderImpl">
+<!--        <property name="i18nKey" value="alternative-contrast"/>
+        <property name="errorI18nKey" value="alternativeContrast-error"/>-->
+        <property name="enabled" value="true"/>
+        <property name="value" value="true"/>
+    </bean>
+
+    <bean id="alternativeContrastMechanismPresentFormFieldBuilder" class="org.opens.tgol.form.builder.CheckboxFormFieldBuilderImpl">
+        <property name="i18nKey" value="contrast-alternative"/>
+        <property name="errorI18nKey" value="contrast-alternative-error"/>
+        <property name="checkboxElementBuilderList">
+            <list>
+                <ref local="alternativeContrastMechanismPresent"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="alternativeContrastMechanismPresentParamBuilder" class="org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
+        <property name="parameterCode" value="ALTERNATIVE_CONTRAST_MECHANISM"/>
+        <property name="formFieldBuilder" ref="alternativeContrastMechanismPresentFormFieldBuilder"/>
+    </bean>
 
 </beans>

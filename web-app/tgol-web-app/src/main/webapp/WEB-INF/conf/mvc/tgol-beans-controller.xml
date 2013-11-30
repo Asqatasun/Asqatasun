@@ -83,6 +83,9 @@
                 <entry key="INFORMATIVE_IMAGE_MARKER">
                     <value>informative-image</value>
                 </entry>
+                <entry key="ALTERNATIVE_CONTRAST_MECHANISM">
+                    <value>contrast-alternative</value>
+                </entry>
             </map>
         </property>
         <property name="authorizedScopeForPageList">
@@ -143,6 +146,9 @@
                 <entry key="INFORMATIVE_IMAGE_MARKER">
                     <value>informative-image</value>
                 </entry>
+                <entry key="ALTERNATIVE_CONTRAST_MECHANISM">
+                    <value>contrast-alternative</value>
+                </entry>
             </map>
         </property>
         <property name="authorizedScopeForSynthesis">
@@ -175,6 +181,11 @@
                         <ref bean="exclusionRegexpParamBuilder"/>
                     </list>
                 </entry>
+                <entry key="contrast-parameters">
+                    <list>
+                        <ref bean="alternativeContrastMechanismPresentParamBuilder"/>
+                    </list>
+                </entry>
             </map>
         </property>
         <property name="pageOptionFormFieldBuilderMap">
@@ -185,6 +196,11 @@
                         <ref bean="presentationTableParamBuilder"/>
                         <ref bean="decorativeImageParamBuilder"/>
                         <ref bean="informativeImageParamBuilder"/>
+                    </list>
+                </entry>
+                <entry key="contrast-parameters">
+                    <list>
+                        <ref bean="alternativeContrastMechanismPresentParamBuilder"/>
                     </list>
                 </entry>
             </map>
@@ -240,6 +256,11 @@
                         <ref bean="presentationTableParamBuilder"/>
                         <ref bean="decorativeImageParamBuilder"/>
                         <ref bean="informativeImageParamBuilder"/>
+                    </list>
+                </entry>
+                <entry key="contrast-parameters">
+                    <list>
+                        <ref bean="alternativeContrastMechanismPresentParamBuilder"/>
                     </list>
                 </entry>
             </map>

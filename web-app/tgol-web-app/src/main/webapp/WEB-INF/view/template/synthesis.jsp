@@ -103,10 +103,10 @@
                                 <li>
                                     <span class="synthesis-meta-title"><spring:message code="${entry.key}"/> : </span>
                                     <span class="synthesis-meta-value">
-                                    <c:catch var="jspTagException" >
-                                        <spring:message code="${entry.value}"/>
+                                    <c:catch var="booleanTagException" >
+                                        <spring:message code="parameter-value-${entry.value}"/>
                                     </c:catch>
-                                    <c:if test = "${jspTagException != null}">
+                                    <c:if test = "${booleanTagException != null}">
                                         ${entry.value}
                                     </c:if>
                                     </span>

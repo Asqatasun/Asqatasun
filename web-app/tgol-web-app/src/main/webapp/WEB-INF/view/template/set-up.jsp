@@ -239,7 +239,9 @@
                                     </c:otherwise>
                                 </c:choose>
                                 <div class="clearfix ${auditParameterErrorClass}">
+                                    <c:if test="${! function:instanceOf(parameter.formField, 'org.opens.tgol.form.CheckboxFormField')}">
                                     <label id="set-up-${i18nKey}" for="${i18nKey}"><fmt:message key="${i18nKey}"/></label>
+                                    </c:if>
                                     <div class="set-up-value input">
                                     <c:choose>
                                         <c:when test="${function:instanceOf(parameter.formField, 'org.opens.tgol.form.SelectFormField')}">
@@ -268,6 +270,18 @@
                                             </optgroup>
                                             </c:forEach><!-- for each referentiel -->
                                             </form:select>
+                                        </c:when>
+                                        <c:when test="${function:instanceOf(parameter.formField, 'org.opens.tgol.form.CheckboxFormField')}">
+                                            <ul class="inputs-list">
+                                                <c:forEach items="${parameter.formField.checkboxElementList}" var="element" varStatus="pResult">
+                                                <li>
+                                                    <label class="checkbox" for="auditParameter${code}${pResult.index + 1}">    
+                                                        <form:checkbox path="auditParameter[${code}]" value="${element.value}"/>
+                                                        <fmt:message key="${i18nKey}"/>
+                                                    </label>
+                                                </li>
+                                                </c:forEach>
+                                            </ul>
                                         </c:when>
                                         <c:otherwise>
                                             <form:input id="${i18nKey}" path="auditParameter[${code}]" cssErrorClass="xlarge error" cssClass="xlarge"/>
