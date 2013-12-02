@@ -103,12 +103,4 @@ public class LanguageDetectionResult {
         return false;
     }
  
-    /**
-     * 
-     * @return whether the tested text is seen as a short text
-     */
-    public boolean isShorText() {
-        return numberOfWords < MIN_NUMBER_OF_WORDS_TO_BE_RELIABLE;
-    }
-
 }
