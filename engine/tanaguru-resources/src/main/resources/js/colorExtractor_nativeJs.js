@@ -152,6 +152,9 @@ function isAllowedElement(elem) {
     if (isElementOfType(tagName,'title')) {
         return false;
     }
+    if (isElementOfType(tagName,'option')) {
+        return false;
+    }
     return true;
 };
 
