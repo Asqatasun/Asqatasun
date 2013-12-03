@@ -185,7 +185,8 @@ public final class CssLikeQueryStore {
     public static final String FIELDSET_NOT_WITHIN_FORM_CSS_LIKE_QUERY = 
                     "fieldset:not(form fieldset):not(*[role=search] fieldset):not(*[role=form] fieldset)";
     public static final String LINK_WITH_TARGET_ATTR_CSS_LIKE_QUERY = 
-                    "a[href][target]:not([target=_self]):not([target~=^\\s*$])";
+                    "a[href][target]:not([target=_self]):not([target~=^\\s*$])"
+                    + ":not([target=_top]):not([target=_parent])";
 
     // Scripts css-like queries
     public static final String CHANGE_CONTEXT_SCRIPT_CSS_LIKE_QUERY = 
