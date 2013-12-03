@@ -44,7 +44,6 @@ import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.IMG_CSS_LIKE_Q
 import static org.opens.tanaguru.rules.keystore.EvidenceStore.BG_COLOR_EE;
 import static org.opens.tanaguru.rules.keystore.EvidenceStore.CONTRAST_EE;
 import static org.opens.tanaguru.rules.keystore.EvidenceStore.FG_COLOR_EE;
-import static org.opens.tanaguru.rules.keystore.HtmlElementStore.OPTION_ELEMENT;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.BAD_CONTRAST_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.BAD_CONTRAST_BUT_ALT_MECHANISM_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.BAD_CONTRAST_HIDDEN_ELEMENT_MSG;
@@ -145,8 +144,7 @@ public class ContrastChecker extends ElementCheckerImpl {
             // means that no element is on error or NMI
                 if (testSolutionHandler.getTestSolution().equals(TestSolution.NOT_APPLICABLE)) {
                     LOGGER.debug("nothing to say about contrast");
-                    if (sspHandler.domCssLikeSelectNodeSet(IMG_CSS_LIKE_QUERY).getSelectedElementNumber() == 0 && 
-                            sspHandler.domCssLikeSelectNodeSet(OPTION_ELEMENT).getSelectedElementNumber() == 0) {
+                    if (sspHandler.domCssLikeSelectNodeSet(IMG_CSS_LIKE_QUERY).getSelectedElementNumber() == 0) {
                         testSolutionHandler.addTestSolution(TestSolution.PASSED);
                         LOGGER.debug("The page has no image, the result is Passed");
                     } else {
@@ -252,17 +250,15 @@ public class ContrastChecker extends ElementCheckerImpl {
 
         Element element = DomElementExtractor.getElementFromDomElement(domElement, sspHandler);
         if (element != null) {
-            if (!StringUtils.equalsIgnoreCase(element.tagName(), OPTION_ELEMENT)) {
-                Collection<EvidenceElement> eeList = new LinkedList<EvidenceElement>();
-                eeList.add(getEvidenceElement(FG_COLOR_EE, domElement.getFgColor()));
-                eeList.add(getEvidenceElement(BG_COLOR_EE, domElement.getBgColor()));
-                eeList.add(getEvidenceElement(CONTRAST_EE, contrast));
-                addSourceCodeRemark(
-                        testSolution, 
-                        element, 
-                        msgCode, 
-                        eeList);
-            }
+            Collection<EvidenceElement> eeList = new LinkedList<EvidenceElement>();
+            eeList.add(getEvidenceElement(FG_COLOR_EE, domElement.getFgColor()));
+            eeList.add(getEvidenceElement(BG_COLOR_EE, domElement.getBgColor()));
+            eeList.add(getEvidenceElement(CONTRAST_EE, contrast));
+            addSourceCodeRemark(
+                    testSolution, 
+                    element, 
+                    msgCode, 
+                    eeList);
         } else {
             // the element can't be retrieved by jsoup, that means that
             // something is weird with the dom. The check is stopped, and
@@ -285,7 +281,7 @@ public class ContrastChecker extends ElementCheckerImpl {
         
         if (createSourceCodeRemarkForNmi) {
             Element el = DomElementExtractor.getElementFromDomElement(element, sspHandler);
-            if (el != null && !StringUtils.equalsIgnoreCase(el.tagName(), OPTION_ELEMENT)) {
+            if (el != null) {
                 Collection<EvidenceElement> eeList = new ArrayList<EvidenceElement>();
                 eeList.add(getEvidenceElement(FG_COLOR_EE, element.getFgColor()));
                 eeList.add(getEvidenceElement(BG_COLOR_EE, element.getBgColor()));
