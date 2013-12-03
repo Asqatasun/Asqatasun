@@ -160,6 +160,8 @@ public final class ProfileFactory {
         firefoxProfile.setPreference("browser.cache.disk.smart_size.first_run", false);
         firefoxProfile.setPreference("browser.cache.disk.smart_size_cached_value", 0);
         firefoxProfile.setPreference("browser.cache.memory.enable", false);
+        firefoxProfile.setPreference("browser.shell.checkDefaultBrowser", false);
+        firefoxProfile.setPreference("browser.startup.homepage_override.mstone", "ignore");
         firefoxProfile.setPreference("browser.preferences.advanced.selectedTabIndex", 0);
         firefoxProfile.setPreference("browser.privatebrowsing.autostart", false);
         firefoxProfile.setPreference("browser.link.open_newwindow", 2);
