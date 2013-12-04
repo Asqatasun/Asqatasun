@@ -21,8 +21,17 @@
  */
 package org.opens.tgol.controller;
 
+import java.util.ArrayList;
+import static org.easymock.EasyMock.*;
+import java.util.Collection;
 import junit.framework.TestCase;
+import org.opens.tgol.security.userdetails.TgolUserDetails;
 import org.opens.tgol.util.TgolKeyStore;
+import org.springframework.security.authentication.AuthenticationDetails;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 
@@ -31,6 +40,8 @@ import org.springframework.ui.Model;
  * @author jkowalczyk
  */
 public class LoginControllerTest extends TestCase {
+    
+    private Authentication mockAuthentication;
     
     public LoginControllerTest(String testName) {
         super(testName);
@@ -52,6 +63,7 @@ public class LoginControllerTest extends TestCase {
     public void testDisplayLoginPage() {
         System.out.println("displayLoginPage");
                 Model model = new ExtendedModelMap();
+        setUpMockAuthenticationContext();
         LoginController instance = new LoginController();
         String expResult = TgolKeyStore.LOGIN_VIEW_NAME;
         String result = instance.displayLoginPage(model);
@@ -69,5 +81,16 @@ public class LoginControllerTest extends TestCase {
         String result = instance.displayAccessDeniedPage(model);
         assertEquals(expResult, result);
     }
-    
+ 
+     private void setUpMockAuthenticationContext(){
+        // initialise the context with the user identified by the email 
+        // "test1@test.com" seen as authenticated
+        
+        mockAuthentication = createMock(Authentication.class);
+        SecurityContextImpl securityContextImpl = new SecurityContextImpl();
+        securityContextImpl.setAuthentication(mockAuthentication);
+        SecurityContextHolder.setContext(securityContextImpl);
+        expect(mockAuthentication.isAuthenticated()).andReturn(Boolean.FALSE);
+        replay(mockAuthentication);
+    }
 }
