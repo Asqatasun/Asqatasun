@@ -358,7 +358,7 @@
         <script type="text/javascript" src="${scoreJsUrl}"></script>
         <script type="text/javascript" src="${resultPageChartsJsUrl}"></script>
         <script type="text/javascript" src="${top5FailedThemeGraphJsUrl}"></script>
-        <!--<![endif]-->
+        <![endif]-->
         <!--[if !IE]><!-->
         <script type="text/javascript" src="${d3JsUrl}"></script>
         <script type="text/javascript" src="${scoreJsUrl}"></script>
