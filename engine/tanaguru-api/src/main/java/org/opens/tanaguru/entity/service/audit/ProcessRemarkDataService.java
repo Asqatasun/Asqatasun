@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,10 +21,11 @@
  */
 package org.opens.tanaguru.entity.service.audit;
 
-import org.opens.tanaguru.sdk.entity.service.GenericDataService;
 import java.util.Collection;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.sdk.entity.service.GenericDataService;
 
 /**
  * 
@@ -35,9 +36,33 @@ public interface ProcessRemarkDataService extends
 
     /**
      * 
-     * @param sourceCodeRemark
-     * @return
+     * @param processResult
+     * @param limit
+     * @return a collection of ProcessRemark
      */
-    public Collection<ProcessRemark> findAllByProcessResult(ProcessResult processResult);
+    public Collection<ProcessRemark> findProcessRemarksFromProcessResult(
+            ProcessResult processResult, 
+            int limit);
+
+    /**
+     * 
+     * @param processResult
+     * @param limit
+     * @return a collection of ProcessRemark
+     */
+    public Collection<ProcessRemark> findProcessRemarksFromProcessResultAndTestSolution(
+            ProcessResult processResult, 
+            TestSolution testSolution,
+            int limit);
+    
+    /**
+     * 
+     * @param processResult
+     * @param testSolution
+     * @return the number of processRemark regarding the parameters
+     */
+    public int findNumberOfProcessRemarksFromProcessResultAndTestSolution(
+            ProcessResult processResult, 
+            TestSolution testSolution);
     
 }

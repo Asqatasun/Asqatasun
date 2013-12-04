@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,14 +21,15 @@
  */
 package org.opens.tanaguru.entity.dao.audit;
 
-import org.opens.tanaguru.entity.audit.ProcessRemark;
-import org.opens.tanaguru.entity.audit.ProcessRemarkImpl;
-import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.persistence.Query;
+import org.opens.tanaguru.entity.audit.ProcessRemark;
+import org.opens.tanaguru.entity.audit.ProcessRemarkImpl;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 
 /**
  * 
@@ -47,14 +48,55 @@ public class ProcessRemarkDAOImpl extends AbstractJPADAO<ProcessRemark, Long>
     }
 
     @Override
-    public Collection<ProcessRemark> retrieveAllByProcessResult(
-            ProcessResult processResult) {
+    public Collection<ProcessRemark> retrieveProcessRemarksFromProcessResult(
+            ProcessResult processResult, 
+            int limit) {
         Query query = entityManager.createQuery("SELECT r FROM "
                 + getEntityClass().getName() + " r"
                 + " left join fetch r.elementSet e"
-                + " WHERE r.processResult = :processResult");
+                + " WHERE r.processResult = :processResult "
+                + " ORDER BY r.id ASC");
         query.setParameter("processResult", processResult);
+        /* limit = 0 or -1 means all */
+        if (limit > 0) {
+            query.setMaxResults(limit);
+        }
         Set setItems = new LinkedHashSet(query.getResultList());
         return setItems;
     }
+
+    @Override
+    public Collection<ProcessRemark> retrieveProcessRemarksFromProcessResultAndTestSolution(
+            ProcessResult processResult, 
+            TestSolution testSolution, 
+            int limit) {
+        Query query = entityManager.createQuery("SELECT r FROM "
+                + getEntityClass().getName() + " r"
+                + " left join fetch r.elementSet e"
+                + " WHERE r.processResult = :processResult "
+                + " AND r.issue=:testSolution"
+                + " ORDER BY r.id ASC");
+        query.setParameter("processResult", processResult);
+        query.setParameter("testSolution", testSolution);
+        /* limit = 0 or -1 means all */
+        if (limit > 0) {
+            query.setMaxResults(limit);
+        }
+        Set setItems = new LinkedHashSet(query.getResultList());
+        return setItems;
+    }
+    
+    @Override
+    public int countProcessRemarksFromProcessResultAndTestSolution(
+            ProcessResult processResult, 
+            TestSolution testSolution) {
+        Query query = entityManager.createQuery("SELECT count(r.id) FROM "
+                + getEntityClass().getName() + " r"
+                + " WHERE r.processResult = :processResult "
+                + " AND r.issue=:testSolution");
+        query.setParameter("processResult", processResult);
+        query.setParameter("testSolution", testSolution);
+        return ((Long)query.getSingleResult()).intValue();
+    }
+    
 }

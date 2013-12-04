@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,11 +21,12 @@
  */
 package org.opens.tanaguru.entity.service.audit;
 
-import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 import java.util.Collection;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.dao.audit.ProcessRemarkDAO;
+import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 
 /**
  * 
@@ -35,9 +36,28 @@ public class ProcessRemarkDataServiceImpl extends AbstractGenericDataService<Pro
         ProcessRemarkDataService {
 
     @Override
-    public Collection<ProcessRemark> findAllByProcessResult(ProcessResult processResult) {
+    public Collection<ProcessRemark> findProcessRemarksFromProcessResult(
+            ProcessResult processResult, 
+            int limit) {
         return ((ProcessRemarkDAO) entityDao).
-                retrieveAllByProcessResult(processResult);
+                retrieveProcessRemarksFromProcessResult(processResult, limit);
+    }
+    
+    @Override
+    public Collection<ProcessRemark> findProcessRemarksFromProcessResultAndTestSolution(
+            ProcessResult processResult, 
+            TestSolution testSolution, 
+            int limit) {
+        return ((ProcessRemarkDAO) entityDao).
+                retrieveProcessRemarksFromProcessResultAndTestSolution(processResult, testSolution, limit);
+    }
+
+    @Override
+    public int findNumberOfProcessRemarksFromProcessResultAndTestSolution(
+            ProcessResult processResult, 
+            TestSolution testSolution) {
+        return ((ProcessRemarkDAO) entityDao).
+                countProcessRemarksFromProcessResultAndTestSolution(processResult, testSolution);
     }
     
 }

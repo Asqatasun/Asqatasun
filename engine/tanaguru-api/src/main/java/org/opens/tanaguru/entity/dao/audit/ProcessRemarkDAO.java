@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,10 +21,11 @@
  */
 package org.opens.tanaguru.entity.dao.audit;
 
-import org.opens.tanaguru.entity.audit.ProcessRemark;
-import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 import java.util.Collection;
+import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 
 /**
  * 
@@ -32,7 +33,36 @@ import org.opens.tanaguru.entity.audit.ProcessResult;
  */
 public interface ProcessRemarkDAO extends GenericDAO<ProcessRemark, Long> {
 
-    public Collection<ProcessRemark> retrieveAllByProcessResult(
-            ProcessResult processResult);
+    /**
+     * 
+     * @param processResult
+     * @param limit
+     * @return 
+     */
+    public Collection<ProcessRemark> retrieveProcessRemarksFromProcessResult(
+            ProcessResult processResult, 
+            int limit);
+
+    /**
+     * 
+     * @param processResult
+     * @param testSolution
+     * @param limit
+     * @return 
+     */
+    public Collection<ProcessRemark> retrieveProcessRemarksFromProcessResultAndTestSolution(
+            ProcessResult processResult, 
+            TestSolution testSolution, 
+            int limit);
+    
+    /**
+     * 
+     * @param processResult
+     * @param testSolution
+     * @return 
+     */
+    public int countProcessRemarksFromProcessResultAndTestSolution(
+            ProcessResult processResult, 
+            TestSolution testSolution);
     
 }

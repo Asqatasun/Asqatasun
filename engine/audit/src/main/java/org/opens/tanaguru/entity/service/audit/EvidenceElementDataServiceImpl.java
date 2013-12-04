@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,11 +21,11 @@
  */
 package org.opens.tanaguru.entity.service.audit;
 
-import org.opens.tanaguru.entity.audit.EvidenceElement;
-import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 import java.util.Collection;
+import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.dao.audit.EvidenceElementDAO;
+import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 
 /**
  * 

@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,13 +21,13 @@
  */
 package org.opens.tanaguru.entity.dao.audit;
 
-import org.opens.tanaguru.entity.audit.EvidenceElement;
-import org.opens.tanaguru.entity.audit.EvidenceElementImpl;
-import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 import java.util.Collection;
 import javax.persistence.Query;
 import org.opens.tanaguru.entity.audit.Evidence;
+import org.opens.tanaguru.entity.audit.EvidenceElement;
+import org.opens.tanaguru.entity.audit.EvidenceElementImpl;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
+import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 
 /**
  * 
@@ -61,7 +61,8 @@ public class EvidenceElementDAOImpl extends AbstractJPADAO<EvidenceElement, Long
             ProcessRemark processRemark) {
         Query query = entityManager.createQuery("SELECT r FROM "
                 + getEntityClass().getName()
-                + " r WHERE r.processRemark = :processRemark");
+                + " r WHERE r.processRemark = :processRemark"
+                + " ORDER BY r.id ASC");
         query.setParameter("processRemark", processRemark);
         return query.getResultList();
     }
