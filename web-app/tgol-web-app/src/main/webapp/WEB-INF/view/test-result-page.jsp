@@ -20,17 +20,16 @@
         <!-- external js -->
         <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-1.9.1.min.js"/>
         <c:set var="codePrettifierJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/prettify.min.js" scope="request"/>
-
+        <c:set var="jqueryTableSorterUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery.tablesorter.min.js" scope="request"/>
+        
         <!-- internal js -->
         <c:set var="displayExternalImgJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/result-page/add-img-snapshot-min.js" scope="request"/>
         <c:set var="prettyPrintJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/result-page/pretty-print-min.js" scope="request"/>
-        <c:set var="testDetailsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/expand-collapse/test-details-min.js" scope="page"/>
+        <c:set var="accessibleTableSorterJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/table-sorter/accessible-table-sorter-min.js" scope="request"/>
 
         <!-- external images -->
         <c:set var="testInfoLinkImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/test-info-link.png" scope="request"/>
         <c:set var="algoLinkImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/algo-link.png" scope="request"/>
-        <c:set var="expandedSmallImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/expanded-s.png" scope="request"/>
-        <c:set var="collapsedSmallImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/collapsed-s.png" scope="request"/>
         <c:set var="sourceCodeImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/html-source-icon.png" scope="request"/>
         <!-- external images -->
         <c:set var="processingImgUrl" scope="request" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/processing.gif"/>
@@ -43,6 +42,9 @@
         <c:set var="codePrettifierJsUrl" scope="request">
             <c:url value="/External-Js/prettify.min.js"/>
         </c:set> 
+        <c:set var="jqueryTableSorterUrl" scope="request">
+            <c:url value="/External-Js/jquery.tablesorter.min.js"/>
+        </c:set> 
 
         <!-- internal js -->
         <c:set var="displayExternalImgJsUrl" scope="request">
@@ -51,8 +53,8 @@
         <c:set var="prettyPrintJsUrl" scope="request">
             <c:url value="/Js/result-page/pretty-print-min.js"/>
         </c:set> 
-        <c:set var="testDetailsJsUrl" scope="page">
-            <c:url value="/Js/expand-collapse/test-details-min.js"/>
+        <c:set var="accessibleTableSorterJsUrl" scope="page">
+            <c:url value="/Js/table-sorter/accessible-table-sorter-min.js"/>
         </c:set>
 
         <!-- external images -->
@@ -62,12 +64,6 @@
         <c:set var="algoLinkImg" scope="request">
             <c:url value="/Images/algo-link.png"/>
         </c:set> 
-        <c:set var="expandedSmallImg" scope="request">
-            <c:url value="/Images/expanded-s.png"/>
-        </c:set> 
-        <c:set var="collapsedSmallImg" scope="request">
-            <c:url value="/Images/collapsed-s.png"/>
-        </c:set> 
         <c:set var="sourceCodeImg" scope="request">
             <c:url value="/Images/html-source-icon.png"/>
         </c:set>
@@ -75,9 +71,9 @@
 </c:choose>
 <html lang="${lang}">
     <c:set var="pageTitle" scope="page">
-        <fmt:message key="criterionResultPage.pageTitle">
+        <fmt:message key="testResultPage.pageTitle">
             <fmt:param>
-                ${criterionLabel}
+                ${testLabel}
             </fmt:param>
             <fmt:param>
                 ${url}
@@ -86,13 +82,13 @@
     </c:set>
     <c:set var="addJqueryUI" scope="request" value="true"/>
     <%@include file="template/head.jsp" %>
-    <body id="tgm-criterion-result-page">
+    <body id="tgm-test-result-page">
         <%@include file="template/header-utils.jsp" %>
         <div class="container">
             <c:set var="pageName" scope="page">
-                <fmt:message key="criterionResultPage.h1">
+                <fmt:message key="testResultPage.h1">
                     <fmt:param>
-                        ${criterionLabel}
+                        ${testLabel}
                     </fmt:param>
                     <fmt:param>
                         <a href="${url}">${url}</a>
@@ -102,7 +98,8 @@
             <ul class="breadcrumb">
                 <li><a href="<c:url value="/home.html"/>"><fmt:message key="home.h1"/></a> <span class="divider"></span></li>
                 <li><a href="<c:url value="/home/contract.html?cr=${cr}"/>">${contractName}</a> <span class="divider"></span></li>
-                <c:if test="${authorizedScopeForPageList == 'true'}">
+            <c:choose>
+                <c:when test="${siteScopeTestDetails == 'true'}">
                     <c:set var="auditSynthesisName" scope="page">
                         <fmt:message key="synthesisSite.h1">
                             <fmt:param>
@@ -110,11 +107,25 @@
                             </fmt:param>
                         </fmt:message>
                     </c:set>
-                    <li><a href="<c:url value="/home/contract/audit-synthesis.html?audit=${audit}"/>">${auditSynthesisName}</a> <span class="divider"></span></li>
-                    <li><a href="<c:url value="/home/contract/page-list.html?audit=${audit}"/>"><fmt:message key="pageList.h1"/></a> <span class="divider"></span></li>
-                    <li><a href="<c:url value="/home/contract/page-list.html?audit=${audit}&amp;status=f2xx"/>"><fmt:message key="pageList.f2xx.h1"/></a> <span class="divider"></span></li>
-                </c:if>
-                <li><a href="<c:url value="/home/contract/audit-result.html?audit=${audit}"/>"><fmt:message key="resultPage.h1"/></a> <span class="divider"></span></li>
+                <li><a href="<c:url value="/home/contract/audit-synthesis.html?audit=${audit}"/>">${auditSynthesisName}</a> <span class="divider"></span></li>
+                <li><a href="<c:url value="/home/contract/site-result.html?wr=${param.wr}"/>"><fmt:message key="resultSite.h1"/></a> <span class="divider"></span></li>
+                </c:when>
+                <c:otherwise>
+                    <c:if test="${authorizedScopeForPageList == 'true'}">
+                    <c:set var="auditSynthesisName" scope="page">
+                        <fmt:message key="synthesisSite.h1">
+                            <fmt:param>
+                                ${audit}
+                            </fmt:param>
+                        </fmt:message>
+                    </c:set>
+                <li><a href="<c:url value="/home/contract/audit-synthesis.html?audit=${audit}"/>">${auditSynthesisName}</a> <span class="divider"></span></li>
+                <li><a href="<c:url value="/home/contract/page-list.html?audit=${audit}"/>"><fmt:message key="pageList.h1"/></a> <span class="divider"></span></li>
+                <li><a href="<c:url value="/home/contract/page-list.html?audit=${audit}&amp;status=f2xx"/>"><fmt:message key="pageList.f2xx.h1"/></a> <span class="divider"></span></li>
+                    </c:if>
+                <li><a href="<c:url value="/home/contract/page-result.html?wr=${param.wr}"/>"><fmt:message key="resultPage.h1"/></a> <span class="divider"></span></li>
+                </c:otherwise>
+            </c:choose>
                 <li class="active">${pageTitle}</li>
             </ul>
             <div class="row">
@@ -124,23 +135,43 @@
                     </h1>
                 </div>
             </div><!-- class="row"-->
+            <c:choose>
+                <c:when test="${siteScopeTestDetails == 'true'}">
+                    <c:set var="backUrl">
+                        <c:url value="/home/contract/site-result.html?wr=${param.wr}"/>
+                    </c:set>
+                </c:when>
+                <c:otherwise>
+                    <c:set var="backUrl">
+                        <c:url value="/home/contract/page-result.html?wr=${param.wr}"/>
+                    </c:set>
+                </c:otherwise>
+            </c:choose>        
             <div class="row">
                 <div class="span16 back">
-                    <a href="<c:url value="/home/contract/audit-result.html?audit=${audit}"/>" class="back-link">
-                        <fmt:message key="criterionResultPage.backToAuditResultByCriterion"/>
+                    <a href="${backUrl}" class="back-link">
+                        <fmt:message key="testResultPage.backToAuditResultByTest"/>
                     </a>
                 </div>
             </div><!-- class="row"-->
             <c:set var="counterByThemeMap" scope="request" value="${statistics.counterByThemeMap}"/>
-            <c:set var="addShowHide" scope="request" value="true"/>
+            <c:set var="addShowHide" scope="request" value="false"/>
             <c:import url="template/detailed-result.jsp" />
+            <div class="row">
+                <div class="span16 back">
+                    <a href="${backUrl}" class="back-link">
+                        <fmt:message key="testResultPage.backToAuditResultByTest"/>
+                    </a>
+                </div>
+            </div><!-- class="row"-->
         </div><!-- id="container"-->
         <%@include file="template/footer.jsp" %>
         <script type="text/javascript" src="${jqueryUrl}"></script>
-        <script type="text/javascript" src="${testDetailsJsUrl}"></script>
         <script type="text/javascript" src="${displayExternalImgJsUrl}"></script>
         <script type="text/javascript" src="${codePrettifierJsUrl}"></script>
         <script type="text/javascript" src="${prettyPrintJsUrl}"></script>
+        <script type="text/javascript" src="${jqueryTableSorterUrl}"></script>
+        <script type="text/javascript" src="${accessibleTableSorterJsUrl}"></script>
     </body>
 </html>
 </compress:html>

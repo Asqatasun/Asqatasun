@@ -99,6 +99,9 @@ public final class TgolKeyStore {
     public static final String CRITERION_RESULT_URL = "/criterion-result";
     public static final String CRITERION_RESULT_CONTRACT_URL =
             CONTRACT_URL+CRITERION_RESULT_URL;
+    public static final String TEST_RESULT_URL = "/test-result";
+    public static final String TEST_RESULT_CONTRACT_URL =
+            CONTRACT_URL+TEST_RESULT_URL;
     public static final String EXPORT_AUDIT_RESULT_URL = "/export-audit-result";
     public static final String EXPORT_AUDIT_RESULT_CONTRACT_URL =
             CONTRACT_URL+EXPORT_AUDIT_RESULT_URL;
@@ -182,6 +185,7 @@ public final class TgolKeyStore {
     public static final String RESULT_PAGE_BY_CRITERION_VIEW_REDIRECT_NAME =
             "result-page-by-criterion-redirect";
     public static final String CRITERION_RESULT_VIEW_NAME = "criterion-result-page";
+    public static final String TEST_RESULT_VIEW_NAME = "test-result-page";
     public static final String RESULT_SITE_VIEW_NAME = "result-site";
     public static final String SYNTHESIS_SITE_VIEW_NAME = "synthesis-site";
     public static final String SYNTHESIS_SITE_VIEW_REDIRECT_NAME =
@@ -256,7 +260,9 @@ public final class TgolKeyStore {
     public static final String TEST_RESULT_LIST_KEY ="testResultMap";
     public static final String CRITERION_RESULT_LIST_KEY ="criterionResultMap";
     public static final String CRITERION_CODE_KEY ="crit";
+    public static final String TEST_CODE_KEY ="test";
     public static final String CRITERION_LABEL_KEY ="criterionLabel";
+    public static final String TEST_LABEL_KEY ="testLabel";
     public static final String TEST_LIST_KEY ="testList";
     public static final String MODIFIABLE_TEST_WEIGHT_REFS_KEY ="modifiableTestWeightRefs";
     
@@ -295,6 +301,7 @@ public final class TgolKeyStore {
     public static final String AUTHORIZED_PAGE_SIZE_KEY = "authorizedPageSize";
     public static final String AUTHORIZED_SORT_CRITERION_KEY = "authorizedSortCriterion";
     public static final String AUTHORIZED_SCOPE_FOR_PAGE_LIST = "authorizedScopeForPageList";
+    public static final String SITE_SCOPE_TEST_DETAILS_KEY = "siteScopeTestDetails";
     public static final String CREATE_USER_COMMAND_KEY = "createUserCommand";
     public static final String CREATE_CONTRACT_COMMAND_KEY = "createContractCommand";
     public static final String CREATE_USER_ATTACK_COMMAND_KEY = "createUserAttack";
@@ -344,7 +351,5 @@ public final class TgolKeyStore {
     public static final String ACT_QUOTA_EXCEEDED = "actQuotaExceeded";
     public static final String ACT_QUOTA_BY_IP_EXCEEDED = "actQuotaByIpExceeded";
     public static final String ACT_ALLOWED = "actAllowed";
- 
-    
     
 }

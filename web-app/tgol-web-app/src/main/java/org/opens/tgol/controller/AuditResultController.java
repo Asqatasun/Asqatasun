@@ -21,6 +21,7 @@
  */
 package org.opens.tgol.controller;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -33,6 +34,8 @@ import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.audit.SSP;
+import org.opens.tanaguru.entity.reference.Criterion;
+import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.service.reference.CriterionDataService;
 import org.opens.tanaguru.entity.service.statistics.CriterionStatisticsDataService;
 import org.opens.tanaguru.entity.subject.Page;
@@ -287,7 +290,7 @@ public class AuditResultController extends AuditDataHandlerController {
      *      the test-result view name
      */
     @RequestMapping(value=TgolKeyStore.CRITERION_RESULT_CONTRACT_URL, method=RequestMethod.GET)
-    public String displayTestResult(
+    public String displayCriterionResult(
             @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
             @RequestParam(TgolKeyStore.CRITERION_CODE_KEY) String criterionId,
             Model model) {
@@ -311,15 +314,67 @@ public class AuditResultController extends AuditDataHandlerController {
                 model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
                 model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
                 model.addAttribute(TgolKeyStore.URL_KEY, webResource.getURL());
-                model.addAttribute(TgolKeyStore.CRITERION_LABEL_KEY, criterionDataService.read(critId).getLabel());
+                Criterion crit = criterionDataService.read(critId);
+                model.addAttribute(TgolKeyStore.CRITERION_LABEL_KEY, crit.getLabel());
                 model.addAttribute(TgolKeyStore.AUDIT_ID_KEY, audit.getId());
 
                 // Add a boolean used to display the breadcrumb. 
                 model.addAttribute(TgolKeyStore.AUTHORIZED_SCOPE_FOR_PAGE_LIST, isAuthorizedScopeForPageList(audit));
             
                 model.addAttribute(TgolKeyStore.TEST_RESULT_LIST_KEY,
-                    TestResultFactory.getInstance().getTestResultListFromCriterion(webResource, critId));
+                    TestResultFactory.getInstance().getTestResultListFromCriterion(webResource, crit));
                 return TgolKeyStore.CRITERION_RESULT_VIEW_NAME;
+        } else {
+            throw new ForbiddenPageException();
+        }
+    }
+    
+    /**
+     *
+     * @param model
+     * @return
+     *      the test-result view name
+     */
+    @RequestMapping(value=TgolKeyStore.TEST_RESULT_CONTRACT_URL, method=RequestMethod.GET)
+    public String displayTestResult(
+            @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
+            @RequestParam(TgolKeyStore.TEST_CODE_KEY) String testId,
+            Model model) {
+        Long wrId;
+        Long tstId;
+        try {
+            wrId = Long.valueOf(webresourceId);
+            tstId = Long.valueOf(testId);
+        } catch (NumberFormatException nfe) {
+            throw new ForbiddenUserException(getCurrentUser());
+        }
+        
+        WebResource webResource = getWebResourceDataService().ligthRead(wrId);
+        if (webResource == null) {
+            throw new ForbiddenPageException();
+        }
+        Audit audit = getAuditFromWebResource(webResource);
+        if (isUserAllowedToDisplayResult(audit))  {
+                Contract contract = retrieveContractFromAudit(audit);
+                // Attributes for breadcrumb
+                model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
+                model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
+                model.addAttribute(TgolKeyStore.URL_KEY, webResource.getURL());
+                Test test = getTestDataService().read(tstId);
+                
+                model.addAttribute(TgolKeyStore.TEST_LABEL_KEY, test.getLabel());
+                model.addAttribute(TgolKeyStore.AUDIT_ID_KEY, audit.getId());
+
+                if (!test.getScope().equals(getPageScope())) {
+                    model.addAttribute(TgolKeyStore.SITE_SCOPE_TEST_DETAILS_KEY, true);
+                } else {
+                    // Add a boolean used to display the breadcrumb. 
+                    model.addAttribute(TgolKeyStore.AUTHORIZED_SCOPE_FOR_PAGE_LIST, isAuthorizedScopeForPageList(audit));
+                }
+            
+                model.addAttribute(TgolKeyStore.TEST_RESULT_LIST_KEY,
+                    TestResultFactory.getInstance().getTestResultListFromTest(webResource, test));
+                return TgolKeyStore.TEST_RESULT_VIEW_NAME;
         } else {
             throw new ForbiddenPageException();
         }
@@ -354,13 +409,13 @@ public class AuditResultController extends AuditDataHandlerController {
             this.callGc(webResource);
 
             String displayScope = computeDisplayScope(request, auditResultSortCommand);
-            
+
             // first we add statistics meta-data to model 
             addAuditStatisticsToModel(webResource, model, displayScope);
 
             // The page is displayed with sort option. Form needs to be set up
             prepareDataForSortConsole(webResourceId, displayScope, auditResultSortCommand, model);
-            
+
             // Data need to be prepared regarding the audit type
             return prepareSuccessfullAuditData(
                     webResource,
@@ -410,6 +465,12 @@ public class AuditResultController extends AuditDataHandlerController {
         model.addAttribute(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY, asuc);
     }
     
+    /**
+     * 
+     * @param webResourceId
+     * @param referentialParameter
+     * @return whether the criterion view is accessible for the given referential
+     */
     private boolean isCriterionViewAccessible(Long webResourceId, String referentialParameter) {
         return authorizedRefForCriterionViewList.contains(referentialParameter) && 
                 criterionStatisticsDataService.getCriterionStatisticsCountByWebResource(webResourceId) > 0;
@@ -457,7 +518,6 @@ public class AuditResultController extends AuditDataHandlerController {
                 TestResultFactory.getInstance().getTestResultSortedByThemeMap(
                             site,
                             getSiteScope(),
-                            true,
                             asuc.getSortOptionMap().get(themeSortKey).toString(),
                             getTestResultSortSelection(asuc)));
         
@@ -507,14 +567,13 @@ public class AuditResultController extends AuditDataHandlerController {
         
         if (StringUtils.equalsIgnoreCase(displayScope, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE)) {
             AuditResultSortCommand asuc = ((AuditResultSortCommand)model.asMap().get(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY));
-
+            
             model.addAttribute(TgolKeyStore.TEST_RESULT_LIST_KEY,
                 TestResultFactory.getInstance().getTestResultSortedByThemeMap(
                     page,
                     getPageScope(),
-                    true,
                     asuc.getSortOptionMap().get(themeSortKey).toString(),
-                    getTestResultSortSelection(asuc))); 
+                    getTestResultSortSelection(asuc)));             
             return TgolKeyStore.RESULT_PAGE_VIEW_NAME;
         } else {
             AuditResultSortCommand asuc = ((AuditResultSortCommand)model.asMap().get(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY));

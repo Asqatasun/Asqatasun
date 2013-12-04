@@ -72,7 +72,16 @@
         <div class="topbar">
             <div class="fill">
                 <div class="container">
-                    <img id="login-topbar-logo" src="${tgLogoUrl}"/>
+                    <c:choose>
+                        <c:when test="${configProperties['enable-demo-link'] == 'true' && empty errorOnPage}">
+                    <h1>
+                    <img id="login-topbar-logo" class="brand" src="${tgLogoUrl}" alt="Tanaguru.com"/>
+                    </h1>
+                        </c:when>
+                        <c:otherwise>
+                    <img id="login-topbar-logo" class="brand" src="${tgLogoUrl}" alt=""/>
+                        </c:otherwise>
+                    </c:choose>
                     <ul class="nav secondary-nav">
                         <c:if test="${configProperties['enable-demo-link'] == 'true' && empty errorOnPage}">
                         <li>

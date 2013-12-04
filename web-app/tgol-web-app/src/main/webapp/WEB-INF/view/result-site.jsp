@@ -162,6 +162,7 @@
             <c:set var="scope" scope="request" value="site"/>
             <c:set var="addThemeHeader" scope="request" value="true"/>
             <c:set var="addMainTitle" scope="request" value="true"/>
+            <c:set var="addShowHide" scope="request" value="true"/>
             <c:import url="template/detailed-result.jsp" />
         </div><!-- class="container"-->
         <%@include file="template/footer.jsp" %>

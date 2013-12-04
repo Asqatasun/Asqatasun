@@ -149,7 +149,6 @@ public class AuditExportResultController extends AuditDataHandlerController {
         List<TestResult> testResultList = TestResultFactory.getInstance().getTestResultList(
                     webResource,
                     scope,
-                    true, // detailed results
                     getLocaleResolver().resolveLocale(request));
 
         AuditStatistics auditStatistics = getAuditStatistics(

@@ -137,7 +137,7 @@
                     <div class="span16 ${ruleGeneralResultClass} ${rowBgClass}">
                         <div class="test-result-compact row">
                             <div class="rule-id span2">
-                                <c:if test="${addTestDetails}">
+                                <c:if test="${addTestDetails && addShowHide}">
                                 <span class="detail-link-icon">
                                     <img alt="<fmt:message key="resultPage.hideTestInfosOn"> <fmt:param>${testResult.testShortLabel}</fmt:param></fmt:message>" src="${expandedSmallImg}" class="hide-test-details-link-icon">
                                     <img alt="<fmt:message key="resultPage.displayTestInfosOn"> <fmt:param>${testResult.testShortLabel}</fmt:param></fmt:message>" src="${collapsedSmallImg}" class="show-test-details-link-icon">
@@ -262,6 +262,27 @@
                                 </c:otherwise>
                             </c:choose>
                         </c:if><!-- if has remarks to display -->
+                        <c:if test='${testResult.isTruncated}'>
+                        <div class="span14 all-remarks">
+                            <c:set var="allRemarksLink">
+                                <fmt:message key="resultPage.seeAllRemarks">
+                                    <fmt:param>
+                                        ${testResult.testShortLabel}
+                                     </fmt:param>
+                                </fmt:message>
+                            </c:set>
+                            <c:set var="allRemarksLinkTitle">
+                                <fmt:message key="resultPage.seeAllRemarksTitle">
+                                    <fmt:param>
+                                        ${testResult.testShortLabel}
+                                     </fmt:param>
+                                </fmt:message>
+                            </c:set>
+                            <a title="${allRemarksLinkTitle} "class="all-remarks-link" href="<c:url value="/home/contract/test-result.html?wr=${param.wr}&amp;test=${testResult.test.id}"/>" target="_blank">
+                                ${allRemarksLink}
+                            </a>
+                        </div>
+                        </c:if>    
                     </div>
                     </c:if> <!-- if test="addTestDetails"> --> 
                 </div>
