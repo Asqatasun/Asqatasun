@@ -275,6 +275,17 @@ public class TestResultImpl implements TestResult{
         this.ruleDesignUrl = ruleDesignUrl;
     }
 
+    boolean isTruncated = false;
+    @Override
+    public boolean getIsTruncated() {
+        return isTruncated;
+    }
+
+    @Override
+    public void setTruncated(boolean isTruncated) {
+        this.isTruncated = isTruncated;
+    }
+    
     /**
      * Default constructor
      */

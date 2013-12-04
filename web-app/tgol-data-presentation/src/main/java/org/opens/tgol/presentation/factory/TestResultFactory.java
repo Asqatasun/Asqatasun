@@ -31,10 +31,9 @@ import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
-import org.opens.tanaguru.entity.service.reference.CriterionDataService;
+import org.opens.tanaguru.entity.service.audit.ProcessRemarkDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
-import org.opens.tanaguru.sdk.entity.Entity;
 import org.opens.tgol.entity.decorator.tanaguru.subject.WebResourceDataServiceDecorator;
 import org.opens.tgol.presentation.data.RemarkInfos;
 import org.opens.tgol.presentation.data.TestResult;
@@ -59,18 +58,18 @@ public final class TestResultFactory {
         this.webResourceDataService = webResourceDataServiceDecorator;
     }
     
+    private ProcessRemarkDataService processRemarkDataService;
+    @Autowired
+    public void setProcessRemarkDataService(ProcessRemarkDataService processRemarkDataService) {
+        this.processRemarkDataService = processRemarkDataService;
+    }
+    
     private AuditDataService auditDataService;
     @Autowired
     public void setAuditDataService(AuditDataService auditDataService) {
         this.auditDataService = auditDataService;
     }
-    
-    private CriterionDataService criterionDataService;
-    @Autowired
-    public void setCriterionDataService(CriterionDataService criterionDataService) {
-        this.criterionDataService = criterionDataService;
-    }
-    
+
     private TestDataService testDataService;
     @Autowired
     public void setTestDataService(TestDataService testDataService) {
@@ -119,13 +118,14 @@ public final class TestResultFactory {
     /**
      * 
      * @param processResult
-     * @param hasSourceCodeADoctype
      * @param hasResultDetails
-     * @return
+     * @param truncatable
+     * @return an instance of ProcessResult
      */
     public TestResult getTestResult(
             ProcessResult processResult,
-            boolean hasResultDetails) {
+            boolean hasResultDetails,
+            boolean truncatable) {
         TestResult testResult = new TestResultImpl();
         testResult.setTestUrl(processResult.getTest().getDescription());
         testResult.setTestShortLabel(processResult.getTest().getLabel());
@@ -148,8 +148,10 @@ public final class TestResultFactory {
         } catch (MissingResourceException mre) {
             Logger.getLogger(this.getClass()).warn(mre);
         }
-        if (hasResultDetails) {
-            setRemarkInfosMap(testResult, processResult);
+        if (hasResultDetails && 
+                (testResult.getResult().equalsIgnoreCase(TestSolution.FAILED.toString()) || 
+                testResult.getResult().equalsIgnoreCase(TestSolution.NEED_MORE_INFO.toString()))) {
+            addRemarkInfosMapToTestResult(testResult, processResult, truncatable);
         }
         return testResult;
     }
@@ -158,19 +160,19 @@ public final class TestResultFactory {
      * 
      * @param webresource
      * @param scope
-     * @param hasSourceCodeWithDoctype
-     * @param hasResultDetails
      * @param theme
      * @param testSolutionList
+     * @param hasResultDetails
+     * @param truncatable
      * @return 
      */
     public Map<Theme, List<TestResult>> getTestResultSortedByThemeMap(
             WebResource webresource,
             Scope scope,
-//            boolean hasSourceCodeWithDoctype,
-            boolean hasResultDetails,
             String theme,
-            Collection<String> testSolutionList){
+            Collection<String> testSolutionList, 
+            boolean hasResultDetails,
+            boolean truncatable){
         
         List<ProcessResult> effectiveNetResultList = (List<ProcessResult>)
                 webResourceDataService.
@@ -187,8 +189,8 @@ public final class TestResultFactory {
         
         return prepareThemeResultMap(
                 effectiveNetResultList, 
-//                hasSourceCodeWithDoctype, 
-                hasResultDetails);
+                hasResultDetails, 
+                truncatable);
     }
 
     /**
@@ -196,11 +198,13 @@ public final class TestResultFactory {
      * @param netResultList
      * @param hasSourceCodeWithDoctype
      * @param hasResultDetails
+     * @param truncatable
      * @return
      */
     private Map<Theme, List<TestResult>> prepareThemeResultMap(
             List<ProcessResult> netResultList,
-            boolean hasResultDetails) {
+            boolean hasResultDetails,
+            boolean truncatable) {
         
         // Map that associates a list of results with a theme
         Map<Theme, List<TestResult>> testResultMap =
@@ -211,7 +215,8 @@ public final class TestResultFactory {
             if (processResult instanceof DefiniteResult) {
                 TestResult testResult = getTestResult(
                         processResult,
-                        hasResultDetails);
+                        hasResultDetails, 
+                        truncatable);
                 Theme theme =
                         processResult.getTest().getCriterion().getTheme();
                 
@@ -258,7 +263,8 @@ public final class TestResultFactory {
             if (processResult instanceof DefiniteResult) {
                 TestResult testResult = getTestResult(
                         processResult,
-                        hasResultDetails);
+                        hasResultDetails, 
+                        false);
                 testResultList.add(testResult);
             }
         }
@@ -277,10 +283,9 @@ public final class TestResultFactory {
      */
     public Map<Theme, List<TestResult>> getTestResultListFromCriterion(
             WebResource webresource,
-            Long criterionId) {
+            Criterion crit) {
         // Map that associates a list of results with a theme
         List<TestResult> testResultList = new LinkedList<TestResult>();
-        Criterion crit = criterionDataService.read(criterionId);
         List<ProcessResult> netResultList = (List<ProcessResult>)
                 webResourceDataService.
                 getProcessResultListByWebResourceAndCriterion(
@@ -298,12 +303,58 @@ public final class TestResultFactory {
             if (processResult instanceof DefiniteResult) {
                 TestResult testResult = getTestResult(
                         processResult,
-                        true);
+                        true, 
+                        false);
                 testResultList.add(testResult);
             }
         }
         Map<Theme, List<TestResult>> testResultMap = new HashMap<Theme, List<TestResult>>();
         testResultMap.put(crit.getTheme(), testResultList);
+        return testResultMap;
+    }
+    
+        /**
+     * 
+     * @param webresource
+     * @param scope
+     * @param hasSourceCodeWithDoctype
+     * @param hasResultDetails
+     * @param locale
+     * @return
+     *      the test result list without user filter (used for the export function)
+     */
+    public Map<Theme, List<TestResult>> getTestResultListFromTest(
+            WebResource webresource,
+            Test test) {
+        // Map that associates a list of results with a theme
+        List<TestResult> testResultList = new LinkedList<TestResult>();
+        List<ProcessResult> netResultList = (List<ProcessResult>)
+                webResourceDataService.
+                getProcessResultListByWebResourceAndTest(
+                    webresource, 
+                    test);
+        
+        Collection testList = new ArrayList<Test>();
+        testList.add(test);
+        
+        netResultList.addAll(
+                addNotTestedProcessResult(
+                    testList, 
+                    test.getCriterion().getTheme().getCode(), 
+                    netResultList));
+        
+        sortCollection(netResultList);
+        for (ProcessResult processResult : netResultList) {
+            if (processResult instanceof DefiniteResult) {
+                TestResult testResult = getTestResult(
+                        processResult,
+                        true, 
+                        false);
+                testResultList.add(testResult);
+            }
+        }
+        Map<Theme, List<TestResult>> testResultMap = new HashMap<Theme, List<TestResult>>();
+        testResultMap.put(test.getCriterion().getTheme(), testResultList);
         return testResultMap;
     }
 
@@ -350,36 +401,53 @@ public final class TestResultFactory {
     }
 
     /**
-     * @param result
+     * 
+     * @param testResult
+     * @param processResult
+     * @param truncatable 
      */
-    @SuppressWarnings("unchecked")
-    public void setRemarkInfosMap(TestResult testResult, ProcessResult processResult) {
-        for (ProcessRemark remark : sortRemarkSet((Collection<ProcessRemark>)processResult.getRemarkSet())) {
+    private void addRemarkInfosMapToTestResult(
+            TestResult testResult, 
+            ProcessResult processResult, 
+            boolean truncatable) {
+        addElementToCounter(testResult, processResult);
+        Collection<ProcessRemark> remarks;
+        
+        if (!truncatable) {
+            testResult.setTruncated(false);
+            remarks = processRemarkDataService.findProcessRemarksFromProcessResult(
+                        processResult, 
+                        -1); /* means all*/
+        } else if (testResult.getResultCounter().getFailedCount() > TestResult.MAX_REMARK_INFO) {
+            testResult.setTruncated(true);
+            remarks = processRemarkDataService.findProcessRemarksFromProcessResultAndTestSolution(
+                        processResult, 
+                        TestSolution.FAILED,
+                        TestResult.MAX_REMARK_INFO);
+        } else if ( (testResult.getResultCounter().getFailedCount() + testResult.getResultCounter().getNmiCount()) > TestResult.MAX_REMARK_INFO) {
+            testResult.setTruncated(true);
+            remarks = new LinkedHashSet<ProcessRemark>();
+            remarks.addAll(processRemarkDataService.findProcessRemarksFromProcessResultAndTestSolution(
+                        processResult, 
+                        TestSolution.FAILED,
+                        -1));
+            remarks.addAll(processRemarkDataService.findProcessRemarksFromProcessResultAndTestSolution(
+                        processResult, 
+                        TestSolution.NEED_MORE_INFO,
+                        TestResult.MAX_REMARK_INFO - testResult.getResultCounter().getFailedCount() ));
+        } else {
+            testResult.setTruncated(false);
+            remarks = processRemarkDataService.findProcessRemarksFromProcessResult(
+                        processResult, 
+                        -1); /* means all*/
+        }
+        
+        for (ProcessRemark remark : remarks) {
             RemarkInfos currentRemarkInfos =
-                     getRemarkInfo(testResult, remark.getMessageCode(), extractRemarkTarget(remark), remark);
-            currentRemarkInfos.setRemarkResult(addElementToCounter(testResult,remark.getIssue()));
+                     getRemarkInfo(testResult, remark.getMessageCode(), remark);
+            currentRemarkInfos.setRemarkResult(getDisplayableResultKey(remark.getIssue()));
             addElementsToRemark(testResult, currentRemarkInfos, remark);
-         }
-    }
-
-    /**
-     * This method sorts the processResult elements in ascending order
-     * @param processResultList
-     */
-    private List<ProcessRemark> sortRemarkSet(Collection<ProcessRemark> processRemarkSet) {
-        List<ProcessRemark> processRemarkList = new ArrayList<ProcessRemark>();
-        processRemarkList.addAll(processRemarkSet);
-        Collections.sort(processRemarkList, new Comparator<ProcessRemark>() {
-            @Override
-            public int compare(ProcessRemark o1, ProcessRemark o2) {
-                if (o1.getId() < o2.getId()) {
-                    return -1;
-                } else {
-                    return 1;
-                }
-            }
-        });
-        return processRemarkList;
+        }
     }
 
     /**
@@ -408,14 +476,17 @@ public final class TestResultFactory {
      /**
      * This methods converts raw processRemark data to displayable RemarkInfosImpl
      * data
+     * @param testResult
      * @param messageCode
+     * @param remark
      * @return
      */
     private RemarkInfos getRemarkInfo(
             TestResult testResult,
             String messageCode,
-            String remarkTarget,
             ProcessRemark remark) {
+        String remarkTarget = extractRemarkTarget(remark);
+        
         for (RemarkInfos remarkInfos : testResult.getRemarkInfosList()) {
             if (remarkInfos.getMessageCode().equalsIgnoreCase(messageCode) &&
                     (
@@ -440,29 +511,41 @@ public final class TestResultFactory {
     }
 
     /**
+     * 
      * @param testResult
-     * @param remarkResult
-     * @return
+     * @param processResult 
      */
-    private String addElementToCounter(TestResult testResult, TestSolution remarkResult) {
+    private void addElementToCounter(TestResult testResult, ProcessResult processResult) {
+        int failed = processRemarkDataService.
+                    findNumberOfProcessRemarksFromProcessResultAndTestSolution(
+                        processResult, 
+                        TestSolution.FAILED);
+        if (failed > 0) {
+            testResult.getResultCounter().setFailedCount(failed);
+        }
+        int nmi = processRemarkDataService.
+                    findNumberOfProcessRemarksFromProcessResultAndTestSolution(
+                        processResult, 
+                        TestSolution.NEED_MORE_INFO);
+        if (nmi > 0) {
+            testResult.getResultCounter().setNmiCount(nmi);   
+        }
+    }
+    
+    /**
+     * 
+     * @param remarkResult
+     * @return 
+     */
+    private String getDisplayableResultKey(TestSolution remarkResult) {
         switch (remarkResult) {
             case PASSED:
                 return TestResult.PASSED_LOWER;
             case NOT_APPLICABLE:
                 return TestResult.NOT_APPLICABLE_LOWER;
             case FAILED:
-                if (testResult.getResultCounter().getFailedCount() == -1) {
-                    testResult.getResultCounter().setFailedCount(1);
-                } else {
-                    testResult.getResultCounter().setFailedCount(testResult.getResultCounter().getFailedCount()+1);
-                }
                 return TestResult.FAILED_LOWER;
             case NEED_MORE_INFO:
-                if (testResult.getResultCounter().getNmiCount() == -1) {
-                    testResult.getResultCounter().setNmiCount(1);
-                } else {
-                    testResult.getResultCounter().setNmiCount(testResult.getResultCounter().getNmiCount()+1);
-                }
                 return TestResult.NEED_MORE_INFO_LOWER;
             case NOT_TESTED:
                 return TestResult.NOT_TESTED_LOWER;
@@ -470,18 +553,20 @@ public final class TestResultFactory {
                 return "";
         }
     }
-
+    
     /**
-     *
+     * 
+     * @param testResult
      * @param currentRemarkInfos
      * @param remark
+     * @param eeList 
      */
     private void addElementsToRemark(
             TestResult testResult,
             RemarkInfos currentRemarkInfos,
             ProcessRemark remark) {
         Map <String, String> elementMap = new LinkedHashMap<String, String>();
-        
+
         for (EvidenceElement evidenceElement : sortEvidenceElementSet(remark.getElementList())) {
             if (!evidenceElement.getEvidence().getCode().
                     equalsIgnoreCase(TestResult.ELEMENT_NAME_KEY)) {
@@ -531,21 +616,6 @@ public final class TestResultFactory {
         });
         return evidenceElementList;
     }
-    
-//    /**
-//     *
-//     * @param remark
-//     * @return
-//     */
-//    private int computeLineNumber(
-//            SourceCodeRemark remark) {
-//        int lineNumber;
-//        // The doctype is added when the result is displayed.
-//        // When the doctype is not null, each line remark has to be
-//        // one-line-negative-shifted
-//        lineNumber = remark.getLineNumber()-1;
-//        return lineNumber;
-//    }
 
     /**
      * 
@@ -627,24 +697,6 @@ public final class TestResultFactory {
             audit = wr.getParent().getAudit();
         }
         return auditDataService.getAuditWithTest(audit.getId()).getTestList();
-    }
-
-    /**
-     * Inner class to sort entities by Id
-     */
-    private static class EntityComparator implements Comparator<Entity> {
-
-        public EntityComparator() {
-        }
-
-        @Override
-        public int compare(Entity o1, Entity o2) {
-            if (o1.getId() < o2.getId()) {
-                return -1;
-            } else {
-                return 1;
-            }
-        }
     }
 
 }

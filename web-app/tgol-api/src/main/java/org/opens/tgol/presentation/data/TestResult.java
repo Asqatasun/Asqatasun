@@ -55,6 +55,8 @@ public interface TestResult {
 
     String REPRESENTATION_FILE_PREFIX ="data-representation/data-representation-";
     String REPRESENTATION_FILE_SUFFIX = ".jsp";
+    
+    int MAX_REMARK_INFO = 10;
 
     /**
      *
@@ -225,5 +227,17 @@ public interface TestResult {
      * @param ruleDesignUrl
      */
     void setRuleDesignUrl(String ruleDesignUrl);
+    
+    /**
+     * 
+     * @return whether the rendered result is truncated
+     */
+    boolean getIsTruncated();
+    
+    /**
+     * 
+     * @param isTruncated
+     */
+    void setTruncated(boolean isTruncated);
     
 }
