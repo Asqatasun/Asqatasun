@@ -28,6 +28,7 @@ import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Scope;
+import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -149,6 +150,16 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
     Collection<ProcessResult> getProcessResultListByWebResourceAndCriterion(
             WebResource webResource,
             Criterion criterion);
+    
+    /**
+     *
+     * @param webResource
+     * @param test
+     * @return
+     */
+    Collection<ProcessResult> getProcessResultListByWebResourceAndTest(
+            WebResource webResource,
+            Test test);
     
     /**
      * 

@@ -1,7 +1,7 @@
 /*
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -24,12 +24,16 @@ package org.opens.tgol.entity.dao.tanaguru.subject;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.audit.ProcessResultImpl;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Scope;
+import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.entity.subject.WebResourceImpl;
 import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
@@ -85,6 +89,10 @@ public class TgolWebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
     @Override
     protected Class<? extends WebResource> getEntityClass() {
         return WebResourceImpl.class;
+    }
+    
+    protected Class<? extends ProcessResult> getProcessResultClass() {
+        return ProcessResultImpl.class;
     }
 
     @Override
@@ -194,16 +202,14 @@ public class TgolWebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
             String theme,
             Collection<String> testSolutions) {
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT distinct(pr) FROM ");
-        sb.append(getEntityClass().getName());
-        sb.append(" r");
-        sb.append(JOIN_PROCESS_RESULT);
-        sb.append(" LEFT JOIN FETCH pr.remarkSet pk");
-        sb.append(" LEFT JOIN FETCH pk.elementSet el");
+        sb.append("SELECT pr FROM ");
+        sb.append(getProcessResultClass().getName());
+        sb.append(" pr");
+        sb.append(" JOIN pr.subject w");
         sb.append(" JOIN pr.test t");
         sb.append(" JOIN pr.test.criterion.theme th");
         sb.append(" JOIN t.scope s");
-        sb.append(" WHERE r=:webResource");
+        sb.append(" WHERE w=:webResource");
         sb.append(" AND (s = :scope or s.id = :pageAndSiteScope) ");
         if (theme != null && 
                 !theme.isEmpty() &&
@@ -277,6 +283,26 @@ public class TgolWebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
             }
         } catch (NoResultException e) {
             return false;
+        }
+    }
+
+    @Override
+    public Collection<ProcessResult> retrieveProcessResultListByWebResourceAndTest(WebResource webResource, Test test) {
+        Query query = entityManager.createQuery(
+                "SELECT distinct(pr) FROM "
+                + getEntityClass().getName() + " r"
+                + JOIN_PROCESS_RESULT
+                + " LEFT JOIN FETCH pr.remarkSet pk"
+                + " LEFT JOIN FETCH pk.elementSet el"
+                + " JOIN pr.test t"
+                + " WHERE r=:webResource"
+                + " AND t=:test");
+        query.setParameter("webResource", webResource);
+        query.setParameter("test", test);
+        try {
+            return query.getResultList();
+        } catch (NoResultException e) {
+            return null;
         }
     }
 

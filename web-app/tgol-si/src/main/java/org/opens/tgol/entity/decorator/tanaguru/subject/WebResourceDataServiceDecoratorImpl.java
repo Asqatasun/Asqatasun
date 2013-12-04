@@ -29,6 +29,7 @@ import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Scope;
+import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
@@ -284,6 +285,12 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
                 sortDirection,
                 sortCriterion,
                 containingValue);
+    }
+
+    @Override
+    public Collection<ProcessResult> getProcessResultListByWebResourceAndTest(WebResource webResource, Test test) {
+        return ((TgolWebResourceDAO)entityDao).
+                retrieveProcessResultListByWebResourceAndTest(webResource, test);
     }
 
 }
