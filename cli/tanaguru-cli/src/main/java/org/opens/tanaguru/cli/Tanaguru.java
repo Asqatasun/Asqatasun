@@ -284,7 +284,7 @@ public class Tanaguru implements AuditServiceListener {
         }) ;
         for (ProcessResult result : prList) {
             System.out.println(result.getTest().getCode() + ": " + result.getValue());
-            Set<ProcessRemark> processRemarkList = (Set<ProcessRemark>) processRemarkDataService.findAllByProcessResult(result);
+            Set<ProcessRemark> processRemarkList = (Set<ProcessRemark>) processRemarkDataService.findProcessRemarksFromProcessResult(result, -1);
             for (ProcessRemark processRemark : processRemarkList) {
                 System.out.println(" ->  " + processRemark.getIssue()
                         + " " + processRemark.getMessageCode());
