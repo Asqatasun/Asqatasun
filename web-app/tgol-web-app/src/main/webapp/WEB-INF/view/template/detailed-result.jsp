@@ -236,6 +236,7 @@
                             <c:choose>
                                 <c:when test="${testResult.testRepresentation  == 'data-representation/data-representation-3.jsp' || 
                                         testResult.testRepresentation  == 'data-representation/data-representation-4.jsp'}">
+                                    <c:set var="testCode" scope="request" value="${testResult.testCode}"/>
                                     <c:set var="remarkInfosList" scope="request" value="${testResult.remarkInfosList}"/>
                                     <c:import url="${testResult.testRepresentation}"/>
                                 </c:when>
