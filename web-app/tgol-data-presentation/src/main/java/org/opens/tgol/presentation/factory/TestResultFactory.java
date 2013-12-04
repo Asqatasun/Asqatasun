@@ -170,9 +170,7 @@ public final class TestResultFactory {
             WebResource webresource,
             Scope scope,
             String theme,
-            Collection<String> testSolutionList, 
-            boolean hasResultDetails,
-            boolean truncatable){
+            Collection<String> testSolutionList){
         
         List<ProcessResult> effectiveNetResultList = (List<ProcessResult>)
                 webResourceDataService.
@@ -187,10 +185,7 @@ public final class TestResultFactory {
             effectiveNetResultList.addAll(addNotTestedProcessResult(getTestListFromWebResource(webresource), theme, netResultList));
         }
         
-        return prepareThemeResultMap(
-                effectiveNetResultList, 
-                hasResultDetails, 
-                truncatable);
+        return prepareThemeResultMap(effectiveNetResultList);
     }
 
     /**
@@ -202,9 +197,7 @@ public final class TestResultFactory {
      * @return
      */
     private Map<Theme, List<TestResult>> prepareThemeResultMap(
-            List<ProcessResult> netResultList,
-            boolean hasResultDetails,
-            boolean truncatable) {
+            List<ProcessResult> netResultList) {
         
         // Map that associates a list of results with a theme
         Map<Theme, List<TestResult>> testResultMap =
@@ -215,8 +208,8 @@ public final class TestResultFactory {
             if (processResult instanceof DefiniteResult) {
                 TestResult testResult = getTestResult(
                         processResult,
-                        hasResultDetails, 
-                        truncatable);
+                        true, 
+                        true);
                 Theme theme =
                         processResult.getTest().getCriterion().getTheme();
                 
@@ -244,7 +237,7 @@ public final class TestResultFactory {
     public List<TestResult> getTestResultList(
             WebResource webresource,
             Scope scope,
-            boolean hasResultDetails,
+//            boolean hasResultDetails,
             Locale locale) {
         // Map that associates a list of results with a theme
         List<TestResult> testResultList = new LinkedList<TestResult>();
@@ -263,7 +256,7 @@ public final class TestResultFactory {
             if (processResult instanceof DefiniteResult) {
                 TestResult testResult = getTestResult(
                         processResult,
-                        hasResultDetails, 
+                        true, 
                         false);
                 testResultList.add(testResult);
             }
