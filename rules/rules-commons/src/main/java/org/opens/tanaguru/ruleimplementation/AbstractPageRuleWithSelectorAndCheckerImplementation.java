@@ -37,7 +37,7 @@ import org.opens.tanaguru.rules.elementselector.ElementSelector;
  * </p>
  * 
  */
-public abstract class AbstractPageRuleWithSelectorAndCheckerImplementation <Element>
+public abstract class AbstractPageRuleWithSelectorAndCheckerImplementation 
         extends AbstractPageRuleMarkupImplementation {
 
     /** The elementChecker used by the rule */
