@@ -31,7 +31,7 @@ import org.jsoup.nodes.Element;
 public interface TextElementBuilder {
 
     /* space needed from string concatenation */
-    static char SPACER = ' ';
+    char SPACER = ' ';
     
     /**
      * @param element

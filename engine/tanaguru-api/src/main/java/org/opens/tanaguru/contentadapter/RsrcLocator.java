@@ -27,10 +27,10 @@ package org.opens.tanaguru.contentadapter;
  */
 public interface RsrcLocator {
 
-    static final short EXTERNAL = 2;
-    static final short INLINE = 3;
-    static final short LOCAL = 1;
-    static final short REFERENCED = 4;
+    short EXTERNAL = 2;
+    short INLINE = 3;
+    short LOCAL = 1;
+    short REFERENCED = 4;
 
     /**
      *

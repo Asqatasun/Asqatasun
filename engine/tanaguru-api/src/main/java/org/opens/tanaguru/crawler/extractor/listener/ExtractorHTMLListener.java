@@ -34,6 +34,6 @@ public interface ExtractorHTMLListener {
      *
      * @param curi
      */
-    public void computeResource(CrawlURI curi);
+    void computeResource(CrawlURI curi);
 
 }

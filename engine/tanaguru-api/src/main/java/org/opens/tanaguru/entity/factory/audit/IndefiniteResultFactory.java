@@ -21,12 +21,12 @@
  */
 package org.opens.tanaguru.entity.factory.audit;
 
+import java.util.Collection;
 import org.opens.tanaguru.entity.audit.IndefiniteResult;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
-import java.util.Collection;
 
 /**
  * 
@@ -45,7 +45,7 @@ public interface IndefiniteResultFactory extends
      *            the value to set
      * @return a new instance of IndefiniteResult
      */
-    public IndefiniteResult create(Test test, WebResource subject, String value);
+    IndefiniteResult create(Test test, WebResource subject, String value);
 
     /**
      *

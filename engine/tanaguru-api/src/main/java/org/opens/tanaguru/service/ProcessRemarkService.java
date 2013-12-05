@@ -38,10 +38,10 @@ import org.w3c.dom.Node;
  */
 public interface ProcessRemarkService {
 
-    public static final String DEFAULT_EVIDENCE = "Element-Name";
-    public static final String URL_EVIDENCE = "Url";
-    public static final String SNIPPET_EVIDENCE = "Snippet";
-    public static final int SNIPPET_MAX_LENGTH = 200;
+    String DEFAULT_EVIDENCE = "Element-Name";
+    String URL_EVIDENCE = "Url";
+    String SNIPPET_EVIDENCE = "Snippet";
+    int SNIPPET_MAX_LENGTH = 200;
 
     /**
      *

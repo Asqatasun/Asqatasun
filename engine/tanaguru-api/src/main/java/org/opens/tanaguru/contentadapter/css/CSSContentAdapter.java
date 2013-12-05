@@ -29,8 +29,8 @@ import org.opens.tanaguru.contentadapter.ContentAdapter;
  */
 public interface CSSContentAdapter extends ContentAdapter {
     
-    static final String INLINE_CSS_PREFIX = "#tanaguru-inline-";
-    static final String LOCALE_CSS_PREFIX = "#tanaguru-locale-";
-    static final String CSS_ON_ERROR = "CSS_ON_ERROR";
+    String INLINE_CSS_PREFIX = "#tanaguru-inline-";
+    String LOCALE_CSS_PREFIX = "#tanaguru-locale-";
+    String CSS_ON_ERROR = "CSS_ON_ERROR";
     
 }

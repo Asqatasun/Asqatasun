@@ -21,10 +21,10 @@
  */
 package org.opens.tanaguru.entity.service.audit;
 
-import org.opens.tanaguru.entity.audit.EvidenceElement;
-import org.opens.tanaguru.sdk.entity.service.GenericDataService;
 import java.util.Collection;
+import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
+import org.opens.tanaguru.sdk.entity.service.GenericDataService;
 
 /**
  * 
@@ -39,7 +39,7 @@ public interface EvidenceElementDataService extends
      * @return
      *      the collection of evidenceElement for the given ProcessRemark
      */
-    public Collection<EvidenceElement> findAllByProcessRemark(
+    Collection<EvidenceElement> findAllByProcessRemark(
             ProcessRemark processRemark);
 
 }
