@@ -347,7 +347,6 @@ public final class AuditSetUpCommandFactory {
             return null;
         } else if (user.getEmail1().equalsIgnoreCase("guest")) {
             nbOfPages = 1;
-        } else {
         }
         for (int i = 0; i < nbOfPages; i++) {
             groupOfPagesUrl.add(new String());
