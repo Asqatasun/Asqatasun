@@ -40,11 +40,10 @@ public class DomElement {
     private static final String LIGHTER_WEIGHT_KEY = "lighter";
     private static final String BOLDER_WEIGHT_KEY = "bolder";
     
-    private static final String WHITE_KEY="rgb(255; 255; 255)";
-    private static final String TRANSPARENT_KEY="transparent";
-    
     private static final int NORMAL_FONT_WEIGHT = 400;
     private static final int BOLD_FONT_WEIGHT = 700;
+    /* */
+    private static final String BACKGROUND_IMAGE_KEY="background-image:";
     
     /* whether the current element is hidden*/
     private boolean isHidden;
@@ -129,12 +128,15 @@ public class DomElement {
         return bgColor;
     }
 
-    public void setBgColor(String bgColor) {
-        if (StringUtils.equalsIgnoreCase(bgColor, TRANSPARENT_KEY)) {
-            this.bgColor = WHITE_KEY;
-        } else {
-            this.bgColor = bgColor;
+    public String getDisplayableBgColor() {
+        if (StringUtils.startsWith(bgColor, BACKGROUND_IMAGE_KEY)) {
+            return StringUtils.substring(bgColor, bgColor.indexOf(":")+1, bgColor.length());
         }
+        return bgColor;
+    }
+    
+    public void setBgColor(String bgColor) {
+        this.bgColor = bgColor;
     }
     
     /* the current element outline width (when focusable)*/

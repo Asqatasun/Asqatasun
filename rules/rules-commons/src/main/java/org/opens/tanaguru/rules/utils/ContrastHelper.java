@@ -86,6 +86,7 @@ public final class ContrastHelper {
         return !StringUtils.contains(color, BACKGROUND_IMAGE_KEY) &&
                !StringUtils.contains(color, GRADIENT_KEY) && 
                !StringUtils.contains(color, ALPHA_COLOR_KEY) && 
+               !StringUtils.equalsIgnoreCase(color, TRANSPARENT_KEY) &&
                StringUtils.startsWith(color, RGB_COLOR_KEY);
     }   
 

@@ -27,7 +27,6 @@ import java.util.*;
 import javax.annotation.Nonnull;
 import javax.persistence.NoResultException;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -41,15 +40,8 @@ import org.opens.tanaguru.rules.domelement.extractor.DomElementExtractor;
 import org.opens.tanaguru.rules.elementchecker.ElementCheckerImpl;
 import org.opens.tanaguru.rules.elementchecker.contrast.exception.ContrastCheckerParseResultException;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.IMG_CSS_LIKE_QUERY;
-import static org.opens.tanaguru.rules.keystore.EvidenceStore.BG_COLOR_EE;
-import static org.opens.tanaguru.rules.keystore.EvidenceStore.CONTRAST_EE;
-import static org.opens.tanaguru.rules.keystore.EvidenceStore.FG_COLOR_EE;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.BAD_CONTRAST_MSG;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.BAD_CONTRAST_BUT_ALT_MECHANISM_MSG;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.BAD_CONTRAST_HIDDEN_ELEMENT_MSG;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_CONTRAST_MANUALLY_MSG;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_CONTRAST_OF_IMAGE_MSG;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NOT_TREATED_BACKGROUND_COLOR_MSG;
+import static org.opens.tanaguru.rules.keystore.EvidenceStore.*;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
 import org.opens.tanaguru.rules.utils.ContrastHelper;
 import static org.opens.tanaguru.service.ProcessRemarkService.DEFAULT_EVIDENCE;
 
@@ -293,7 +285,7 @@ public class ContrastChecker extends ElementCheckerImpl {
             }
         } else if (!notTreatedBackgroundColorValue.contains(element.getBgColor())) {
             List<EvidenceElement> eeList = new ArrayList<EvidenceElement>();
-            eeList.add(getEvidenceElement(DEFAULT_EVIDENCE, element.getBgColor()));
+            eeList.add(getEvidenceElement(DEFAULT_EVIDENCE, element.getDisplayableBgColor()));
             addSourceCodeRemark(
                     TestSolution.NEED_MORE_INFO,
                     null,
