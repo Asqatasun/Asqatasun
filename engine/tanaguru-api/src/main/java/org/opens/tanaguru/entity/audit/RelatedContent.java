@@ -41,13 +41,13 @@ public interface RelatedContent extends Entity{
      * @param contentList
      *          The content list to add
      */
-    public void addAllParentContent(Set<Content> contentList);
+    void addAllParentContent(Set<Content> contentList);
 
     /**
      *
      * @param content
      *              The content to add
      */
-    public void addParentContent(Content content);
+    void addParentContent(Content content);
 
 }

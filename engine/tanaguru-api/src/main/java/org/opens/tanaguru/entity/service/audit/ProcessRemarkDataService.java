@@ -40,7 +40,7 @@ public interface ProcessRemarkDataService extends
      * @param limit
      * @return a collection of ProcessRemark
      */
-    public Collection<ProcessRemark> findProcessRemarksFromProcessResult(
+    Collection<ProcessRemark> findProcessRemarksFromProcessResult(
             ProcessResult processResult, 
             int limit);
 
@@ -50,7 +50,7 @@ public interface ProcessRemarkDataService extends
      * @param limit
      * @return a collection of ProcessRemark
      */
-    public Collection<ProcessRemark> findProcessRemarksFromProcessResultAndTestSolution(
+    Collection<ProcessRemark> findProcessRemarksFromProcessResultAndTestSolution(
             ProcessResult processResult, 
             TestSolution testSolution,
             int limit);
@@ -61,7 +61,7 @@ public interface ProcessRemarkDataService extends
      * @param testSolution
      * @return the number of processRemark regarding the parameters
      */
-    public int findNumberOfProcessRemarksFromProcessResultAndTestSolution(
+    int findNumberOfProcessRemarksFromProcessResultAndTestSolution(
             ProcessResult processResult, 
             TestSolution testSolution);
     

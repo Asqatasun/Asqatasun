@@ -39,7 +39,7 @@ public interface ProcessRemarkDAO extends GenericDAO<ProcessRemark, Long> {
      * @param limit
      * @return 
      */
-    public Collection<ProcessRemark> retrieveProcessRemarksFromProcessResult(
+    Collection<ProcessRemark> retrieveProcessRemarksFromProcessResult(
             ProcessResult processResult, 
             int limit);
 
@@ -50,7 +50,7 @@ public interface ProcessRemarkDAO extends GenericDAO<ProcessRemark, Long> {
      * @param limit
      * @return 
      */
-    public Collection<ProcessRemark> retrieveProcessRemarksFromProcessResultAndTestSolution(
+    Collection<ProcessRemark> retrieveProcessRemarksFromProcessResultAndTestSolution(
             ProcessResult processResult, 
             TestSolution testSolution, 
             int limit);
@@ -61,7 +61,7 @@ public interface ProcessRemarkDAO extends GenericDAO<ProcessRemark, Long> {
      * @param testSolution
      * @return 
      */
-    public int countProcessRemarksFromProcessResultAndTestSolution(
+    int countProcessRemarksFromProcessResultAndTestSolution(
             ProcessResult processResult, 
             TestSolution testSolution);
     

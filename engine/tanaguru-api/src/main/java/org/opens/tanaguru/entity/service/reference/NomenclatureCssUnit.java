@@ -31,12 +31,12 @@ public interface NomenclatureCssUnit {
      *
      * @return
      */
-    public int getCssShortValue();
+    int getCssShortValue();
 
     /**
      * 
      * @param cssShortValue
      */
-    public void setCssShortValue(int cssShortValue);
+    void setCssShortValue(int cssShortValue);
 
 }

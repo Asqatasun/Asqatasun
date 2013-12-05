@@ -93,13 +93,13 @@ public interface SSP extends TextContent {
      * @param contentList
      *          The content list to add
      */
-    public void addAllRelationContent(Collection<RelatedContent> contentList);
+    void addAllRelationContent(Collection<RelatedContent> contentList);
 
     /**
      *
      * @param content
      *              The content to add
      */
-    public void addRelatedContent(RelatedContent content);
+    void addRelatedContent(RelatedContent content);
 
 }

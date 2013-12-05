@@ -43,7 +43,7 @@ public interface DefiniteResultFactory extends GenericFactory<DefiniteResult> {
      *            the subject to set
      * @return a new instance of DefiniteResult
      */
-    public DefiniteResult create(Test test, WebResource subject);
+    DefiniteResult create(Test test, WebResource subject);
 
         
     /**
@@ -58,7 +58,7 @@ public interface DefiniteResultFactory extends GenericFactory<DefiniteResult> {
      *            the  number of tested elements
      * @return a new instance of DefiniteResult
      */
-    public DefiniteResult create(Test test, WebResource subject,
+    DefiniteResult create(Test test, WebResource subject,
             TestSolution value, int elementCounter);
     
     /**
@@ -73,7 +73,7 @@ public interface DefiniteResultFactory extends GenericFactory<DefiniteResult> {
      *            the remark list to set
      * @return a new instance of DefiniteResult
      */
-    public DefiniteResult create(Test test, WebResource subject,
+    DefiniteResult create(Test test, WebResource subject,
             TestSolution value, Collection<ProcessRemark> remarkSet);
     /**
      *
@@ -89,7 +89,7 @@ public interface DefiniteResultFactory extends GenericFactory<DefiniteResult> {
      *            the remark list to set
      * @return a new instance of DefiniteResult
      */
-    public DefiniteResult create(
+    DefiniteResult create(
                 Test test, 
                 WebResource subject,
                 TestSolution value, 
