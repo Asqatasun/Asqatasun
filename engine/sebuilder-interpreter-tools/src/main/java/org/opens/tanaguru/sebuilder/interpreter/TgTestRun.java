@@ -357,7 +357,7 @@ public class TgTestRun extends TestRun {
      */
     private void properlyCloseWebDriver() {
         getLog().debug("Closing Firefox driver.");
-        if (firefoxDriverObjectPool != null && getDriver() != null && 
+        if (firefoxDriverObjectPool != null && 
                 getDriver() instanceof FirefoxDriver) {
             //set the blank page before returning the webDriver instance
             getDriver().get("");
