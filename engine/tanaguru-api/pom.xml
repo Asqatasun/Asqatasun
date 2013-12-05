@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>engine</artifactId>
-        <version>3.0.0-SNAPSHOT</version>
+        <version>3.0.0-beta6</version>
     </parent>
     <artifactId>tanaguru-api</artifactId>
     <name>tanaguru-api</name>
