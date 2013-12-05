@@ -37,6 +37,6 @@ public interface RestrictionHandler {
      * @param clientIp
      * @return
      */
-    public String checkRestriction (Contract contract, String clientIp);
+    String checkRestriction (Contract contract, String clientIp);
 
 }

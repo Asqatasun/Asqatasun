@@ -21,8 +21,8 @@
  */
 package org.opens.tgol.action.voter;
 
-import org.opens.tgol.action.Action;
 import java.util.List;
+import org.opens.tgol.action.Action;
 
 /**
  *
@@ -37,6 +37,6 @@ public interface ActionHandler {
      * @return
      *      a set instance of ContractInfo
      */
-    public List<Action> getActionList(Object object);
+    List<Action> getActionList(Object object);
 
 }

@@ -28,8 +28,8 @@ package org.opens.tgol.presentation.highlighter;
  */
 public interface HtmlHighlighter {
     
-    static final char CARRIAGE_RETURN_CHAR = '\n';
-    static final char EMPTY_CHAR = ' ';
+    char CARRIAGE_RETURN_CHAR = '\n';
+    char EMPTY_CHAR = ' ';
 
     /**
      * 
@@ -37,7 +37,7 @@ public interface HtmlHighlighter {
      * @param htmlContent
      * @return 
      */
-    public String highlightSourceCode(String doctype, String htmlContent);
+    String highlightSourceCode(String doctype, String htmlContent);
     
     /**
      * 
@@ -45,6 +45,6 @@ public interface HtmlHighlighter {
      * @param htmlContent
      * @return 
      */
-    public String highlightSourceCode(String htmlContent);
+    String highlightSourceCode(String htmlContent);
     
 }

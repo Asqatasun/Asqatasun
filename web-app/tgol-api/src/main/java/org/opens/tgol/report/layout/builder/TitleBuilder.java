@@ -21,8 +21,8 @@
  */
 package org.opens.tgol.report.layout.builder;
 
-import org.opens.tgol.presentation.data.AuditStatistics;
 import java.util.Locale;
+import org.opens.tgol.presentation.data.AuditStatistics;
 
 /**
  *
@@ -36,7 +36,7 @@ public interface TitleBuilder {
      * @param locale
      * @return
      */
-    public String getTitle(
+    String getTitle(
             AuditStatistics auditStatistics,
             Locale locale);
 

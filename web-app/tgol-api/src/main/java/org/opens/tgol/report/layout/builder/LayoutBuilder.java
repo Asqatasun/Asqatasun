@@ -40,7 +40,7 @@ public interface LayoutBuilder {
      * @param format
      * @return
      */
-    public DynamicReportBuilder getDynamicReportBuilder(
+    DynamicReportBuilder getDynamicReportBuilder(
             AuditStatistics auditStatistics,
             Locale locale, 
             String format);
