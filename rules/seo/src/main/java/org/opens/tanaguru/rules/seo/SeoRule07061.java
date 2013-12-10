@@ -41,7 +41,8 @@ public class SeoRule07061 extends AbstractUniqueElementSiteRuleImplementation {
                 new SimpleElementSelector(HtmlElementStore.H1_ELEMENT),
                 new DeepTextElementBuilder(), 
                 H1_IDENTICAL_TO_ANOTHER_PAGE_MSG,
-                H1_NOT_UNIQUE_MSG);
+                H1_NOT_UNIQUE_MSG,
+                true);
     }
 
 }

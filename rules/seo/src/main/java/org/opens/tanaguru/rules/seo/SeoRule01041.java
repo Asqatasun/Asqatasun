@@ -41,7 +41,8 @@ public class SeoRule01041 extends AbstractUniqueElementSiteRuleImplementation {
                 null, 
                 null,
                 SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG,
-                SOURCE_CODE_NOT_UNIQUE_MSG);
+                SOURCE_CODE_NOT_UNIQUE_MSG, 
+                true);
     }
 
     @Override

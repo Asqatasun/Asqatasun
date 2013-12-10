@@ -229,6 +229,8 @@ public final class CssLikeQueryStore {
                     "[type=application/x-shockwave-flash], "
                   + "object[data$=swf], "
                   + "embed[src$=swf]";
+    public static final String REL_CANONICAL_CSS_LIKE_QUERY = 
+                    "head link[rel=canonical][href]";
 
     /**
      * Private constructor. This class handles keys and must not be instanciated

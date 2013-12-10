@@ -44,8 +44,8 @@ public class SeoRule01021 extends AbstractUniqueElementSiteRuleImplementation {
                 new SimpleElementSelector(META_DESC_CSS_LIKE_QUERY),
                 new TextAttributeOfElementBuilder(CONTENT_ATTR), 
                 META_DESC_IDENTICAL_TO_ANOTHER_PAGE_MSG,
-                META_DESC_NOT_UNIQUE_MSG
-                );
+                META_DESC_NOT_UNIQUE_MSG, 
+                false);
     }
 
 }
