@@ -4,7 +4,7 @@
      <parent>
         <groupId>org.opens</groupId>
         <artifactId>rules</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0-beta7</version>
     </parent>
     <artifactId>accessiweb2.1-resources</artifactId>
     <name>accessiweb2.1-resources</name>
