@@ -4,9 +4,6 @@ Tanaguru 3.0.0-beta7, 2013-12-11
 Bugs : 
 - Display correct breadcrumb for test details page
 
-AW22 referential : 
-- Complete (links, downloadable documents detection, hidden elements, contrasts)
-
 Features :
 SEO referential -> rules about duplicate search now consider link elements with rel=canonical attribute
 A11y referential -> do not consider transparent as white color for contrast rules (ContrastChecker)

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------------
 ----------------------------------------------------------------------------
 ---------------------------------Tanaguru-----------------------------------
----------------------------Version 3.0.0-SNAPSHOT---------------------------
+---------------------------Version 3.0.0-beta7------------------------------
 ----------------------------------------------------------------------------
 ----------------------------------------------------------------------------
 
@@ -61,14 +61,12 @@ that can be found at :
 
 6. Content of the version 
 =========================
-Features :
-#634 : Installation script (https://dev.tanaguru.org/redmine/issues/634)
-#633 : Refactor js script that extract colors to only use native Javascript (https://dev.tanaguru.org/redmine/issues/633)
-#631 : Clean-up maven configuration (https://dev.tanaguru.org/redmine/issues/631)
-
 Bugs : 
-#632 : Css adaptation : catch exception when trying to retrieve file as external resource (https://dev.tanaguru.org/redmine/issues/632)
-#630 : Encoding issue with filled-in URL (https://dev.tanaguru.org/redmine/issues/630) 
+- Display correct breadcrumb for test details page
+
+Features :
+SEO referential -> rules about duplicate search now consider link elements with rel=canonical attribute
+A11y referential -> do not consider transparent as white color for contrast rules (ContrastChecker)
 
 
 Have Fun
