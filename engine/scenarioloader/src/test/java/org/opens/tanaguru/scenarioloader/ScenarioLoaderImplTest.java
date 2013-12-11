@@ -31,7 +31,6 @@ import junit.framework.TestCase;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.pool.impl.GenericObjectPool.Config;
 import static org.easymock.EasyMock.*;
-import org.opens.tanaguru.contentloader.HarFileContentLoaderFactoryImpl;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
@@ -125,12 +124,7 @@ public class ScenarioLoaderImplTest extends TestCase {
                 .times(8);
         ContentDataService mockContentDataService = createMock(ContentDataService.class);
         WebResourceDataService mockWebResourceDataService = createMock(WebResourceDataService.class);
-       
-        HarFileContentLoaderFactoryImpl harFileContentLoaderFactory = 
-                new HarFileContentLoaderFactoryImpl();
-        harFileContentLoaderFactory.setContentFactory(mockContentFactory);
-        harFileContentLoaderFactory.setDateFactory(mockDateFactory);
-        
+
         Page mockPage1 = createMock(Page.class); 
         expect(mockWebResourceDataService.createPage(ROOT_PAGE_URL))
                 .andReturn(mockPage1)
