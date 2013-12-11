@@ -29,7 +29,7 @@ declare PKG_DIR=$(pwd)
 
 declare ARCH="i386"
 
-declare TG_VERSION="3.0.0-beta7"
+declare TG_VERSION="3.0.0-SNAPSHOT"
 declare TG_ARCHIVE="tanaguru-$TG_VERSION.$ARCH"
 declare TG_WAR_VERSION=$TG_VERSION
 declare TG_WAR="tgol-web-app-$TG_WAR_VERSION.war"
