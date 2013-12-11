@@ -255,6 +255,13 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>false</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>yuicompressor-maven-plugin</artifactId>
                 <version>1.1</version>
@@ -282,7 +289,8 @@
                 <!-- the "activation" command offer the ability to run this profile only if "property" is set
                 See http://maven.apache.org/guides/introduction/introduction-to-profiles.html -->
                 <property>
-                    <name>qa.deployPath</name>
+                    <name>qa.deployInt</name>
+                    <value>true</value>
                 </property>
             </activation>
             <build>
