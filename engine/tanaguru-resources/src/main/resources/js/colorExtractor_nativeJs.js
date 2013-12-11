@@ -207,13 +207,16 @@ function extractInfo (elem, parentFgColor, parentBgColor, result, parentPath, el
  * Get all the elements of the DOM from body, 
  * extracts the textual one and store bg-color, font-size, color and font-weight.
  */
-var result = [];
-var element;
-var htmlElem = document.children[0];
-var rootElem = document.body;
+var result = [], element, rootElem, htmlElem;
+rootElem = document.body;
 /*var e = new Date().getTime();*/
 if (rootElem.length !== 0) {
-    extractInfo(rootElem, getForegroundColor(htmlElem), getBackgroundColor(htmlElem), result, "",0);
+    htmlElem = rootElem.parentNode;
+    if (htmlElem.length !== 0{
+        extractInfo(rootElem, getForegroundColor(htmlElem), getBackgroundColor(htmlElem), result, "",0);
+    } else {
+        extractInfo(rootElem, null, null, result, "",0);	
+    }
 }
 /*var f = new Date().getTime();
 console.log("Execution : "+ (f-e)  + "ms");
