@@ -15,6 +15,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <skipTests>false</skipTests>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
             <plugin>
@@ -34,10 +35,22 @@
             </plugin>
         </plugins>
     </build>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${engineGroupId}</groupId>
+            <artifactId>sebuilder-interpreter-tools</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${engineGroupId}</groupId>
+            <artifactId>tanaguru-resources</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cybozu.labs</groupId>
