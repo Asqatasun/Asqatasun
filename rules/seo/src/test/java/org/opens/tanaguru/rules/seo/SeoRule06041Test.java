@@ -251,7 +251,6 @@ public class SeoRule06041Test extends SeoSiteRuleWithPageResultImplementationTes
         processResult = consolidateWithListAsReturn("Seo.Test.6.4.1-2Failed-02");
         assertEquals(4, processResult.size());
         for (ProcessResult pr : processResult) {
-            System.out.println(pr.getSubject().getURL());
             if (pr.getSubject().getURL().contains("2Failed-05")) {
                 assertEquals(TestSolution.PASSED, pr.getValue());
             } else {
@@ -278,7 +277,6 @@ public class SeoRule06041Test extends SeoSiteRuleWithPageResultImplementationTes
         processResult = consolidateWithListAsReturn("Seo.Test.6.4.1-2Failed-03");
         assertEquals(4, processResult.size());
         for (ProcessResult pr : processResult) {
-            System.out.println(pr.getSubject().getURL());
             if (pr.getSubject().getURL().contains("2Failed-07")) {
                 assertEquals(TestSolution.PASSED, pr.getValue());
             } else {
@@ -305,7 +303,6 @@ public class SeoRule06041Test extends SeoSiteRuleWithPageResultImplementationTes
         processResult = consolidateWithListAsReturn("Seo.Test.6.4.1-2Failed-04");
         assertEquals(5, processResult.size());
         for (ProcessResult pr : processResult) {
-            System.out.println(pr.getSubject().getURL());
             if (pr.getSubject().getURL().contains("2Failed-11") || 
                     pr.getSubject().getURL().contains("2Failed-12")) {
                 assertEquals(TestSolution.PASSED, pr.getValue());
