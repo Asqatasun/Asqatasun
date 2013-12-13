@@ -291,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `PROCESS_RESULT` (
   `Id_Process_Result` bigint(20) NOT NULL AUTO_INCREMENT,
   `Element_Counter` int(11) DEFAULT NULL,
   `Definite_Value` varchar(255) DEFAULT NULL,
-  `Indefinite_Value` varchar(4096),
+  `Indefinite_Value` mediumtext DEFAULT NULL,
   `Id_Audit_Gross_Result` bigint(20) DEFAULT NULL,
   `Id_Audit_Net_Result` bigint(20) DEFAULT NULL,
   `Id_Process_Result_Parent` bigint(20) DEFAULT NULL,
