@@ -11,6 +11,7 @@
     </bean>
 
     <bean id="contentDataService" class="org.opens.tanaguru.rules.test.ContentDataServiceMock"/>
+    <bean id="processRemarkDataService" class="org.opens.tanaguru.rules.test.ProcessRemarkDataServiceMock"/>
     <bean id="preProcessResultDataService" class="org.opens.tanaguru.rules.test.PreProcessResultDataServiceMock"/>
 
     <bean id="auditDAO" class="org.opens.tanaguru.entity.dao.audit.AuditDAOImpl"/>

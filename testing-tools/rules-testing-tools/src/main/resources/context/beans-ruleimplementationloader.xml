@@ -10,6 +10,7 @@
         <property name="definiteResultFactory" ref="definiteResultFactory"/>
         <property name="indefiniteResultFactory" ref="indefiniteResultFactory"/>
         <property name="nomenclatureLoaderService" ref="nomenclatureLoaderService"/>
+        <property name="processRemarkDataService" ref="processRemarkDataService"/>
     </bean>
 
 </beans>

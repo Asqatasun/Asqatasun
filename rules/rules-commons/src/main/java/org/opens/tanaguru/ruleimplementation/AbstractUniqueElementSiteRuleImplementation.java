@@ -328,7 +328,7 @@ public class AbstractUniqueElementSiteRuleImplementation
         Collection<WebResource> pagesWithDuplicate = new HashSet<WebResource>();
         Map<String, Collection<WebResource>> urlListWithRelCanonical = 
                 new HashMap<String, Collection<WebResource>>();
-        
+
         // extraction
         for (ProcessResult processResult : processResultList) {
             String canonicalValue = getCanonicalValue(processResult);
@@ -426,11 +426,13 @@ public class AbstractUniqueElementSiteRuleImplementation
      * @return the extracted canonical value when it exists, null instead.
      */
     private String getCanonicalValue(ProcessResult processResult) {
-        if (CollectionUtils.isEmpty(processResult.getRemarkSet()) || 
-                processResult.getRemarkSet().size() > 1){
+        Collection<ProcessRemark> processRemarks = 
+                processRemarkDataService.findProcessRemarksFromProcessResult(processResult, -1); /*-1 means no limit*/
+        if (CollectionUtils.isEmpty(processRemarks) || 
+                processRemarks.size() > 1){
             return null;
         }
-        ProcessRemark prk = processResult.getRemarkSet().iterator().next();
+        ProcessRemark prk = processRemarks.iterator().next();
         if (prk.getIssue().equals(TestSolution.PASSED) && 
                 prk.getMessageCode().equals(REL_CAN_VALUE_REMARK_MSG) ) {
             for (EvidenceElement ee : prk.getElementList()) {
