@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2013  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,13 +21,15 @@
  */
 package org.opens.tanaguru.service;
 
-import org.opens.tanaguru.entity.reference.Test;
-import org.opens.tanaguru.entity.factory.audit.DefiniteResultFactory;
-import org.opens.tanaguru.entity.factory.audit.IndefiniteResultFactory;
-import org.opens.tanaguru.ruleimplementation.RuleImplementation;
-import org.opens.tanaguru.ruleimplementationloader.RuleImplementationLoader;
 import java.util.HashSet;
 import java.util.Set;
+import org.opens.tanaguru.entity.factory.audit.DefiniteResultFactory;
+import org.opens.tanaguru.entity.factory.audit.IndefiniteResultFactory;
+import org.opens.tanaguru.entity.reference.Test;
+import org.opens.tanaguru.entity.service.audit.ProcessRemarkDataService;
+import org.opens.tanaguru.ruleimplementation.AbstractSiteRuleWithPageResultImplementation;
+import org.opens.tanaguru.ruleimplementation.RuleImplementation;
+import org.opens.tanaguru.ruleimplementationloader.RuleImplementationLoader;
 import org.opens.tanaguru.ruleimplementationloader.RuleImplementationLoaderFactory;
 
 /**
@@ -39,6 +41,7 @@ public class RuleImplementationLoaderServiceImpl implements RuleImplementationLo
     private DefiniteResultFactory definiteResultFactory;
     private IndefiniteResultFactory indefiniteResultFactory;
     private NomenclatureLoaderService nomenclatureLoaderService;
+    private ProcessRemarkDataService processRemarkDataService;
     private String archiveRoot;
     private RuleImplementationLoaderFactory ruleImplementationLoaderFactory;
 
@@ -64,7 +67,16 @@ public class RuleImplementationLoaderServiceImpl implements RuleImplementationLo
         ruleImplementation.setDefiniteResultFactory(definiteResultFactory);
         ruleImplementation.setIndefiniteResultFactory(indefiniteResultFactory);
         ruleImplementation.setNomenclatureLoaderService(nomenclatureLoaderService);
-
+        
+        // for specific purpose, we may need to access to ProcessRemark of
+        // indefinite processResult while consolidating. 
+        // yet, the ProcessResult are passed with lazy collection. 
+        // The processRemarkDataService enables to retrieve the processRemark
+        // of a given ProcessResult in this case
+        if (ruleImplementation instanceof AbstractSiteRuleWithPageResultImplementation) {
+            ((AbstractSiteRuleWithPageResultImplementation)ruleImplementation).setProcessRemarkDataService(processRemarkDataService);
+        }
+        
         return ruleImplementation;
     }
 
@@ -83,6 +95,10 @@ public class RuleImplementationLoaderServiceImpl implements RuleImplementationLo
     @Override
     public void setNomenclatureLoaderService(NomenclatureLoaderService nomenclatureService) {
         this.nomenclatureLoaderService = nomenclatureService;
+    }
+    
+    public void setProcessRemarkDataService(ProcessRemarkDataService processRemarkDataService) {
+        this.processRemarkDataService = processRemarkDataService;
     }
 
     @Override

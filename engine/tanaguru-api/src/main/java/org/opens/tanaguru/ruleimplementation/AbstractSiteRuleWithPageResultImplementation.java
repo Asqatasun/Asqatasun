@@ -24,6 +24,7 @@ package org.opens.tanaguru.ruleimplementation;
 import java.util.List;
 import org.opens.tanaguru.entity.audit.DefiniteResult;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.service.audit.ProcessRemarkDataService;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.service.ProcessRemarkService;
 
@@ -36,6 +37,11 @@ import org.opens.tanaguru.service.ProcessRemarkService;
  */
 public abstract class AbstractSiteRuleWithPageResultImplementation extends AbstractGroupRuleWithPageResultImplementation {
 
+    protected ProcessRemarkDataService processRemarkDataService;
+    public void setProcessRemarkDataService(ProcessRemarkDataService processRemarkDataService) {
+        this.processRemarkDataService = processRemarkDataService;
+    }
+    
     @Override
     protected List<DefiniteResult> consolidateGroupImpl(Site group,
             List<ProcessResult> groupedGrossResultList,
