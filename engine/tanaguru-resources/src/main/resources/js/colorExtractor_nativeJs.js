@@ -212,7 +212,7 @@ rootElem = document.body;
 /*var e = new Date().getTime();*/
 if (rootElem.length !== 0) {
     htmlElem = rootElem.parentNode;
-    if (htmlElem.length !== 0{
+    if (htmlElem.length !== 0) {
         extractInfo(rootElem, getForegroundColor(htmlElem), getBackgroundColor(htmlElem), result, "",0);
     } else {
         extractInfo(rootElem, null, null, result, "",0);	
