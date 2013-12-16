@@ -20,7 +20,13 @@
 
 package org.opens.tanaguru.rules.rgaa22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.opens.tanaguru.rules.elementselector.MultipleElementSelector;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.APPLET_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.EMBED_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.OBJECT_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
 
 /**
  * Implementation of the rule 12.3 of the referential RGAA 2.2.
@@ -30,13 +36,22 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule12031 extends AbstractNotTestedRuleImplementation {
+public class Rgaa22Rule12031 extends AbstractDetectionPageRuleImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa22Rule12031 () {
-        super();
+       super(
+                new MultipleElementSelector(APPLET_ELEMENT, OBJECT_ELEMENT, EMBED_ELEMENT),
+                // solution when at least one element is found
+                TestSolution.NEED_MORE_INFO,
+                // solution when no element is found
+                TestSolution.NOT_APPLICABLE,
+                // detected tag message
+                MANUAL_CHECK_ON_ELEMENTS_MSG,
+                null
+            );
     }
 
 }
