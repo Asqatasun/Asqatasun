@@ -25,7 +25,6 @@ import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementa
 import org.opens.tanaguru.rules.elementselector.ElementSelector;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.EMBED_ELEMENT;
-import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
 
 /**

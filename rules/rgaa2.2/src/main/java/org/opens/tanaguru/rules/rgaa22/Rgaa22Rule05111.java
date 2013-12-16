@@ -24,10 +24,10 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
 import org.opens.tanaguru.rules.elementselector.ElementSelector;
 import org.opens.tanaguru.rules.elementselector.MultipleElementSelector;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.APPLET_ELEMENT;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.OBJECT_ELEMENT;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
 
 /**
  * Implementation of the rule 5.11 of the referential RGAA 2.2.
