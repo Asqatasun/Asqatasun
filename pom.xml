@@ -1275,9 +1275,9 @@
             <releases>
                 <enabled>true</enabled>
             </releases>
-            <beta8s>
+            <snapshots>
                 <enabled>false</enabled>
-            </beta8s>
+            </snapshots>
         </repository>
         <repository>
             <id>djmaven2</id>
@@ -1285,9 +1285,9 @@
             <releases>
                 <enabled>true</enabled>
             </releases>
-            <beta8s>
+            <snapshots>
                 <enabled>false</enabled>
-            </beta8s>
+            </snapshots>
         </repository>
         <repository>
             <id>phlocRepos</id>
@@ -1295,9 +1295,9 @@
             <releases>
                 <enabled>true</enabled>
             </releases>
-            <beta8s>
+            <snapshots>
                 <enabled>false</enabled>
-            </beta8s>
+            </snapshots>
         </repository>
         <repository>
             <id>heritrixRepos</id>
@@ -1305,9 +1305,9 @@
             <releases>
                 <enabled>true</enabled>
             </releases>
-            <beta8s>
+            <snapshots>
                 <enabled>false</enabled>
-            </beta8s>
+            </snapshots>
         </repository>
     </repositories>
 </project>
