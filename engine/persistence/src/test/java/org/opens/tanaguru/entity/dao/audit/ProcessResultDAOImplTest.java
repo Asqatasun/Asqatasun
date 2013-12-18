@@ -22,7 +22,6 @@
 package org.opens.tanaguru.entity.dao.audit;
 
 import java.util.Collection;
-import java.util.List;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;

@@ -21,6 +21,7 @@
  */
 package org.opens.tanaguru.entity.service.audit;
 
+import java.util.Collection;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.PreProcessResult;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -56,6 +57,13 @@ public interface PreProcessResultDataService extends
     String getPreProcessResultByKeyAndAudit(
             String key,
             Audit audit);
+    
+    /**
+     * 
+     * @param audit
+     * @return all the PreProcessResults for a given audit
+     */
+    Collection<PreProcessResult> getPreProcessResultFromAudit(Audit audit); 
     
     /**
      * This method clears all the entries for a given audit

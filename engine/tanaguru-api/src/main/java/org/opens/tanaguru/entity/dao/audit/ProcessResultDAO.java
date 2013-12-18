@@ -114,5 +114,12 @@ public interface ProcessResultDAO extends GenericDAO<ProcessResult, Long> {
      * @param audit 
      */
     void deleteIndefiniteResultFromAudit(Audit audit);
+    
+    /**
+     * 
+     * @param audit
+     * @return the collection of indefiniteResults for a given audit
+     */
+    Collection<ProcessResult> retrieveIndefiniteResultFromAudit(Audit audit);
 
 }

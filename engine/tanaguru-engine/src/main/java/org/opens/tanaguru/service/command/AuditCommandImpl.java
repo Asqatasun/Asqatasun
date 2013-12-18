@@ -809,6 +809,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
      * @param audit 
      */
     private void cleanUpTestData(Audit audit) {
+        LOGGER.info("Cleaning-up data for " + audit.getSubject().getURL());
         Long i = Long.valueOf(0);
         Long webResourceId = audit.getSubject().getId();
         Long nbOfContent = contentDataService.getNumberOfSSPFromWebResource(audit.getSubject(), HttpStatus.SC_OK);
@@ -829,8 +830,13 @@ public abstract class AuditCommandImpl implements AuditCommand {
             }
             i = i + processingTreatmentWindow;
         }
-        processResultDataService.cleanUpIndefiniteResultFromAudit(audit);
-        preProcessResultDataService.cleanUpAllPreProcessResultByAudit(audit);
+        for (ProcessResult pr : processResultDataService.getIndefiniteResultFromAudit(audit)) {
+            processResultDataService.delete(pr.getId());
+        }
+        for (PreProcessResult ppr : preProcessResultDataService.getPreProcessResultFromAudit(audit)) {
+            preProcessResultDataService.delete(ppr.getId());
+        }
+        LOGGER.info("Data cleaned-up for " + audit.getSubject().getURL());
     }
     
     /**

@@ -21,6 +21,7 @@
  */
 package org.opens.tanaguru.entity.service.audit;
 
+import java.util.Collection;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.PreProcessResult;
 import org.opens.tanaguru.entity.dao.audit.PreProcessResultDAO;
@@ -52,6 +53,11 @@ public class PreProcessResultDataServiceImpl extends AbstractGenericDataService<
     @Override
     public void cleanUpAllPreProcessResultByWebResource(WebResource webResource) {
         ((PreProcessResultDAO) entityDao).deleteAllPreProcessResultByWebResource(webResource);
+    }
+
+    @Override
+    public Collection<PreProcessResult> getPreProcessResultFromAudit(Audit audit) {
+        return ((PreProcessResultDAO) entityDao).findPreProcessResultFromAudit(audit);
     }
 
 }

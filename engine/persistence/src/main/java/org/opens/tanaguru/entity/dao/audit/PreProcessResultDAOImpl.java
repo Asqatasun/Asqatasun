@@ -21,10 +21,10 @@
  */
 package org.opens.tanaguru.entity.dao.audit;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Query;
-import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.PreProcessResult;
 import org.opens.tanaguru.entity.audit.PreProcessResultImpl;
@@ -97,4 +97,14 @@ public class PreProcessResultDAOImpl extends AbstractJPADAO<PreProcessResult, Lo
         this.delete(pprToDelete);
     }
 
+    @Override
+    public Collection<PreProcessResult> findPreProcessResultFromAudit(Audit audit) {
+        Query query = entityManager.createQuery("SELECT ppr FROM "
+                + getEntityClass().getName() + " ppr "
+                + " WHERE "
+                + " ppr.audit = :audit");
+        query.setParameter("audit", audit);
+        return query.getResultList();
+    }
+    
 }

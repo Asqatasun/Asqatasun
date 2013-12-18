@@ -21,6 +21,7 @@
  */
 package org.opens.tanaguru.entity.dao.audit;
 
+import java.util.Collection;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.PreProcessResult;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -72,5 +73,12 @@ public interface PreProcessResultDAO extends GenericDAO<PreProcessResult, Long> 
      * @return
      */
     void deleteAllPreProcessResultByWebResource(WebResource webResource); 
+    
+    /**
+     * 
+     * @param audit
+     * @return all the PreProcessResults for a given audit
+     */
+    Collection<PreProcessResult> findPreProcessResultFromAudit(Audit audit);
 
 }

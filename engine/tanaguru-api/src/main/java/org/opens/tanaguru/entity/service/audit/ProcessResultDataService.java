@@ -112,5 +112,12 @@ public interface ProcessResultDataService extends
      * @return
      */
     void cleanUpIndefiniteResultFromAudit(Audit audit);
+    
+    /**
+     * 
+     * @param audit
+     * @return the list of IndefiniteProcessResult for a given audit
+     */
+    Collection<ProcessResult> getIndefiniteResultFromAudit(Audit audit);
 
 }

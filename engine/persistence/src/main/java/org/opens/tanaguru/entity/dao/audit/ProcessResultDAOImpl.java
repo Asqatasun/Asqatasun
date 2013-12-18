@@ -168,5 +168,15 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
             delete(pr.getId());
         }
     }
+    
+    @Override
+    public Collection<ProcessResult> retrieveIndefiniteResultFromAudit(Audit audit) {
+        Query query = entityManager.createQuery("SELECT pr FROM "
+                + getIndefitiniteResultClass().getName() + " pr "
+                + " WHERE "
+                + " pr.grossResultAudit = :audit");
+        query.setParameter("audit", audit);
+        return query.getResultList();
+    }
 
 }
