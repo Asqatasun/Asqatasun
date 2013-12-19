@@ -117,7 +117,7 @@ public class AbstractUniqueElementSiteRuleImplementation
             Site group,
             List<ProcessResult> groupedGrossResultList,
             ProcessRemarkService processRemarkService) {
-        
+
         prs = processRemarkService; 
         processRemarkService.resetService();
         
@@ -332,7 +332,7 @@ public class AbstractUniqueElementSiteRuleImplementation
         // extraction
         for (ProcessResult processResult : processResultList) {
             String canonicalValue = getCanonicalValue(processResult);
-            
+
             WebResource wr = processResult.getSubject();
             
             if (StringUtils.isNotBlank(canonicalValue)) {
@@ -350,7 +350,7 @@ public class AbstractUniqueElementSiteRuleImplementation
         
         // process
         if (pagesWithDuplicate.size() == 1 ) {
-
+            
             String canonicalUrl = pagesWithDuplicate.iterator().next().getURL();
             if (urlListWithRelCanonical.size() == 1) {
 
@@ -375,7 +375,7 @@ public class AbstractUniqueElementSiteRuleImplementation
                                 null));
                     return new ArrayList<WebResource>();
                 } else {
-
+                    
                     // if all the pages with the rel canonical don't point to 
                     // a unique page defined by the href value, all is on error
                     pagesWithDuplicate.addAll(urlListWithRelCanonical.get(canonicalValue));
@@ -497,13 +497,15 @@ public class AbstractUniqueElementSiteRuleImplementation
             return;
         }
         String relValue = ((Element)relCan.get().iterator().next()).absUrl(AttributeStore.HREF_ATTR);
-        System.out.println(relValue);
-        remarks.add(
+
+        if (!StringUtils.equalsIgnoreCase(relValue, sspHandler.getSSP().getURI())) {
+            remarks.add(
                 prs.createConsolidationRemark(
                     TestSolution.PASSED, 
                     REL_CAN_VALUE_REMARK_MSG, 
                     relValue, 
                     sspHandler.getSSP().getURI()));
+        }
     }
 
 }
