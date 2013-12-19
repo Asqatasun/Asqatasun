@@ -90,7 +90,8 @@ public abstract class AbstractGroupRuleWithPageResultImplementation extends Abst
                         key);
                 netResult.setDefiniteValue(TestSolution.NOT_APPLICABLE);
                 for (ProcessResult grossResult : grossResultList) {
-                    netResult.addChildResult(grossResult);
+//                    netResult.addChildResult(grossResult);
+                    netResult.setNetResultAudit(grossResult.getGrossResultAudit());
                 }
                 netResultList.add(netResult);
                 continue;
