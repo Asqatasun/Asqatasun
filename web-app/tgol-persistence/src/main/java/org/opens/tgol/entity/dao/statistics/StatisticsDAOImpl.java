@@ -483,7 +483,14 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         Query query = entityManager.createNativeQuery(queryString.toString());
         query.setParameter("idWebResource", idWebResource);
         try {
-            return ((Float)query.getSingleResult());
+            Object result = query.getSingleResult();
+            if (result instanceof Float) {
+                return (Float)result;
+            } else if (result instanceof Double) {
+                return ((Double)result).floatValue();
+            } else {
+                return Float.valueOf(0);
+            }
         } catch (NoResultException e) {
             return Float.valueOf(0);
         }
@@ -509,7 +516,14 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         Query query = entityManager.createNativeQuery(queryString.toString());
         query.setParameter("idWebResource", idWebResource);
         try {
-            return ((Float)query.getSingleResult());
+            Object result = query.getSingleResult();
+            if (result instanceof Float) {
+                return (Float)result;
+            } else if (result instanceof Double) {
+                return ((Double)result).floatValue();
+            } else {
+                return Float.valueOf(0);
+            }
         } catch (NoResultException e) {
             return Float.valueOf(0);
         }
