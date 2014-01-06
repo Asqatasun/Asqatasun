@@ -132,7 +132,7 @@ public class Aw22Rule05081 extends AbstractMarkerPageRuleImplementation {
             ec = new ElementPresenceChecker(
                         // nmi when element is found
                         TestSolution.NEED_MORE_INFO, 
-                        // nmi when element is not found
+                        // na when element is not found
                         TestSolution.NOT_APPLICABLE, 
                         // message associated when element is found
                         CHECK_TABLE_IS_PRESENTATION_TABLE_MSG, 
@@ -145,9 +145,10 @@ public class Aw22Rule05081 extends AbstractMarkerPageRuleImplementation {
         }
         if (!presentationTableWithoutDataTableMarkup.isEmpty()) {
             ec = new ElementPresenceChecker(
-                        // nmi when element is found
+                        // passed when element is foundexit
+                    
                         TestSolution.PASSED, 
-                        // nmi when element is not found
+                        // na when element is not found
                         TestSolution.NOT_APPLICABLE, 
                         // message associated when element is found
                         null, 
