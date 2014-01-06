@@ -20,7 +20,22 @@
 
 package org.opens.tanaguru.rules.rgaa22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.processor.SSPHandler;
+import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
+import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
+import org.opens.tanaguru.rules.elementchecker.ElementChecker;
+import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.DATA_TABLE_MARKUP_CSS_LIKE_QUERY;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TABLE_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
+import static org.opens.tanaguru.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
 
 /**
  * Implementation of the rule 11.4 of the referential RGAA 2.2.
@@ -28,15 +43,148 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-11-4">the rule 11.4 design page.</a>
  * @see <a href="http://rgaa.net/Absence-des-elements-propres-aux.html"> 11.4 rule specification
  *
- * @author jkowalczyk
  */
-public class Rgaa22Rule11041 extends AbstractNotTestedRuleImplementation {
+public class Rgaa22Rule11041 extends AbstractMarkerPageRuleImplementation {
 
+    /** 
+     * Tables not identified as presentation table that does not contain
+     * data table markup
+     */
+    private ElementHandler notIdentifiedTableWithoutDataTableMarkup = 
+            new ElementHandlerImpl();
+    /** 
+     * Tables identified as presentation table that does not contain
+     * data table markup
+     */
+    private ElementHandler presentationTableWithoutDataTableMarkup = 
+            new ElementHandlerImpl();
+    
+    /** The local element counter */
+    private int tableCounter = 0;
+    
     /**
      * Default constructor
      */
-    public Rgaa22Rule11041 () {
-        super();
+    public Rgaa22Rule11041() {
+        super(
+                new SimpleElementSelector(TABLE_ELEMENT),
+
+                // the presentation tables are part of the scope
+                PRESENTATION_TABLE_MARKER,
+                
+                // the data tables are not part of the scope
+                DATA_TABLE_MARKER,
+
+                // checker for elements identified by marker
+                new ElementPresenceChecker(
+                    // failed when element is found
+                    TestSolution.FAILED, 
+                    // na when element is not found
+                    TestSolution.NOT_APPLICABLE, 
+                    // message associated when element is found
+                    PRESENTATION_TABLE_WITH_FORBIDDEN_MARKUP_MSG,
+                    // no message created when child element is not found
+                    null),
+                
+                // checker for elements not identified by marker
+                new ElementPresenceChecker(
+                    // nmi when element is found
+                    TestSolution.NEED_MORE_INFO, 
+                    // na when element is not found
+                    TestSolution.NOT_APPLICABLE, 
+                    // message associated when element is found
+                    CHECK_TABLE_IS_DATA_TABLE_MSG, 
+                    // no message created when child element is not found
+                    null)
+            );
+    }
+
+    @Override
+    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
+        super.select(sspHandler, elementHandler);
+        
+        if (elementHandler.isEmpty() && getSelectionWithMarkerHandler().isEmpty()) {
+            return;
+        }
+        
+        tableCounter = elementHandler.get().size() + 
+                       getSelectionWithMarkerHandler().get().size();
+        
+        // extract not identified tables with data table markup
+        extractTableWithDataTableMarkup(
+                    elementHandler, 
+                    notIdentifiedTableWithoutDataTableMarkup);
+        
+        // extract presentation tables with data table markup
+        extractTableWithDataTableMarkup(
+                    getSelectionWithMarkerHandler(), 
+                    presentationTableWithoutDataTableMarkup);
+    }
+    
+    @Override
+    protected void check(
+            SSPHandler sspHandler, 
+            ElementHandler<Element> elementHandler, 
+            TestSolutionHandler testSolutionHandler) {
+        super.check(sspHandler, elementHandler, testSolutionHandler);
+        ElementChecker ec;
+        if (!notIdentifiedTableWithoutDataTableMarkup.isEmpty()) {
+            ec = new ElementPresenceChecker(
+                        // nmi when element is found
+                        TestSolution.NEED_MORE_INFO, 
+                        // na when element is not found
+                        TestSolution.NOT_APPLICABLE, 
+                        // message associated when element is found
+                        CHECK_TABLE_IS_PRESENTATION_TABLE_MSG, 
+                        // no message created when child element is not found
+                        null);
+            ec.check(
+                    sspHandler, 
+                    notIdentifiedTableWithoutDataTableMarkup, 
+                    testSolutionHandler);
+        }
+        if (!presentationTableWithoutDataTableMarkup.isEmpty()) {
+            ec = new ElementPresenceChecker(
+                        // passed when element is found
+                        TestSolution.PASSED, 
+                        // na when element is not found
+                        TestSolution.NOT_APPLICABLE, 
+                        // message associated when element is found
+                        null, 
+                        // no message created when child element is not found
+                        null);
+            ec.check(
+                    sspHandler, 
+                    presentationTableWithoutDataTableMarkup, 
+                    testSolutionHandler);
+        }
+    }
+ 
+    /**
+     * 
+     * @param sspHandler
+     * @param elementHandler 
+     * @param elementHandlerWithoutDataTableMarkup
+     */
+    private void extractTableWithDataTableMarkup(
+                ElementHandler<Element> elementHandler, 
+                ElementHandler elementHandlerWithoutDataTableMarkup) {
+        
+        Elements elementsWithMarkup = new Elements();
+        
+        for (Element el : elementHandler.get()) {
+            if (el.select(DATA_TABLE_MARKUP_CSS_LIKE_QUERY).size() > 0) {
+                elementsWithMarkup.add(el);
+            } else if (elementHandlerWithoutDataTableMarkup != null) {
+                elementHandlerWithoutDataTableMarkup.add(el);
+            }
+        }
+        elementHandler.clean().addAll(elementsWithMarkup);
+    }
+    
+    @Override
+    public int getSelectionSize() {
+        return tableCounter;
     }
 
 }
