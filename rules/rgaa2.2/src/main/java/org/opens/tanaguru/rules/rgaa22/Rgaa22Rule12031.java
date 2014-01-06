@@ -23,9 +23,7 @@ package org.opens.tanaguru.rules.rgaa22;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
 import org.opens.tanaguru.rules.elementselector.MultipleElementSelector;
-import static org.opens.tanaguru.rules.keystore.HtmlElementStore.APPLET_ELEMENT;
-import static org.opens.tanaguru.rules.keystore.HtmlElementStore.EMBED_ELEMENT;
-import static org.opens.tanaguru.rules.keystore.HtmlElementStore.OBJECT_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.*;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
 
 /**
