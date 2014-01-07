@@ -20,7 +20,15 @@
 
 package org.opens.tanaguru.rules.rgaa22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.opens.tanaguru.rules.elementchecker.pertinence.AttributePertinenceChecker;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.SUMMARY_ATTR;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.TABLE_WITH_SUMMARY_CSS_LIKE_QUERY;
+import static org.opens.tanaguru.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
+import static org.opens.tanaguru.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
 
 /**
  * Implementation of the rule 11.10 of the referential RGAA 2.2.
@@ -30,13 +38,53 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule11101 extends AbstractNotTestedRuleImplementation {
+public class Rgaa22Rule11101 extends AbstractMarkerPageRuleImplementation {
 
     /**
      * Default constructor
      */
-    public Rgaa22Rule11101 () {
-        super();
+    public Rgaa22Rule11101() {
+        super(
+                new SimpleElementSelector(TABLE_WITH_SUMMARY_CSS_LIKE_QUERY),
+            
+                // the data tables are part of the scope
+                DATA_TABLE_MARKER,
+
+                // the presentation tables are not part of the scope
+                PRESENTATION_TABLE_MARKER,
+
+                // checker for elements identified by marker
+                new AttributePertinenceChecker(
+                    //the attribute to check 
+                    SUMMARY_ATTR,
+                    // check emptiness
+                    true,
+                    null,
+                    null,
+                    // not pertinent message
+                    NOT_PERTINENT_SUMMARY_MSG,
+                    // manual check message
+                    CHECK_SUMMARY_PERTINENCE_FOR_DATA_TABLE_MSG,
+                    // evidence elements
+                    SUMMARY_ATTR),
+                
+                // checker for elements not identified by marker
+                new AttributePertinenceChecker(
+                    //the attribute to check 
+                    SUMMARY_ATTR,
+                    // no emptiness check 
+                    false,
+                    null,
+                    null,
+                    // override not pertinent solution
+                    TestSolution.NEED_MORE_INFO, 
+                    // not pertinent message
+                    CHECK_NATURE_OF_TABLE_FOR_NOT_PERTINENT_SUMMARY_MSG,
+                    // manual check message
+                    CHECK_NATURE_OF_TABLE_AND_SUMMARY_PERTINENCE_MSG,
+                    // evidence elements
+                    SUMMARY_ATTR)
+            );
     }
 
 }

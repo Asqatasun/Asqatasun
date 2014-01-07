@@ -326,5 +326,6 @@
     <EVIDENCE Id_Evidence="21" Cd_Evidence="code" Description="NULL" Long_Label="NULL" />
     <EVIDENCE Id_Evidence="22" Cd_Evidence="color" Description="NULL" Long_Label="NULL" />
     <EVIDENCE Id_Evidence="23" Cd_Evidence="bgColor" Description="NULL" Long_Label="NULL" />
+    <EVIDENCE Id_Evidence="24" Cd_Evidence="summary" Description="NULL" Long_Label="NULL" />
 
 </dataset>

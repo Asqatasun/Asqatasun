@@ -22,7 +22,6 @@ package org.opens.tanaguru.rules.rgaa22;
 
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
 import org.opens.tanaguru.rules.elementchecker.element.ChildElementPresenceChecker;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;
