@@ -163,6 +163,10 @@ public final class RemarkMessageStore {
             "CheckTableIsDataTable";
     public static final String CHECK_TABLE_IS_PRESENTATION_TABLE_MSG =
             "CheckTableIsPresentationTable";
+    public static final String DATA_TABLE_WITHOUT_HEADER_MSG =
+            "DataTableWithoutHeader";
+    public static final String HEADER_DETECTED_CHECK_ALL_HEADERS_ARE_WELL_FORMED_MSG =
+            "HeaderDetectedCheckAllHeadersAreWellFormed";
     
     // mandatory elements 
     public static final String TITLE_TAG_MISSING_MSG = "TitleTagMissing";

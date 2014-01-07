@@ -14,15 +14,16 @@
             </div>
 
             <div class="testcase">
-                <table id="test-table" class="class-data-table">
-                </table>
-                <table id="test-table2" >
+                <table id="test-table" >
+                    <tr>
+                        <th></th>
+                    </tr>
                 </table>
             </div>
 
             <div class="test-explanation">
-                NMI : Two &lt;table&gt; tag are found. 
-                One is identified as data table, and the other is not.
+                NMI : The table is not identified as data table by marker
+                but the presence of "th" child tag lets suppose it.
             </div>
         </div>
     </body>

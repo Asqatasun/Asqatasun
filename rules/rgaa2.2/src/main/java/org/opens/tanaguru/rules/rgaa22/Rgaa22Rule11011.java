@@ -22,13 +22,16 @@ package org.opens.tanaguru.rules.rgaa22;
 
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
-import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
+import org.opens.tanaguru.rules.elementchecker.element.ChildElementPresenceChecker;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TABLE_ELEMENT;
 import static org.opens.tanaguru.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
 import static org.opens.tanaguru.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_TABLE_AND_HEADERS_USAGE_MSG;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_USAGE_OF_HEADERS_FOR_DATA_TABLE_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_TABLE_IS_DATA_TABLE_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_TABLE_IS_PRESENTATION_TABLE_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.DATA_TABLE_WITHOUT_HEADER_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.HEADER_DETECTED_CHECK_ALL_HEADERS_ARE_WELL_FORMED_MSG;
 
 /**
  * Implementation of the rule 11.1 of the referential RGAA 2.2.
@@ -54,24 +57,28 @@ public class Rgaa22Rule11011 extends AbstractMarkerPageRuleImplementation {
                 PRESENTATION_TABLE_MARKER,
 
                 // checker for elements identified by marker
-                new ElementPresenceChecker(
+                new ChildElementPresenceChecker(
+                    HtmlElementStore.TH_ELEMENT,
                     // nmi when element is found
                     TestSolution.NEED_MORE_INFO, 
                     // na when element is not found
-                    TestSolution.NOT_APPLICABLE, 
+                    TestSolution.FAILED, 
                     // message associated with each found element
-                    CHECK_USAGE_OF_HEADERS_FOR_DATA_TABLE_MSG,
-                    null),
-                
+                    HEADER_DETECTED_CHECK_ALL_HEADERS_ARE_WELL_FORMED_MSG,
+                    // message associated with each not found element
+                    DATA_TABLE_WITHOUT_HEADER_MSG),
+//                le tableau comporte au moins une entête, vérifier que chaque entête est bien identifiée par une balise th
                 // checker for elements not identified by marker
-                new ElementPresenceChecker(
+                new ChildElementPresenceChecker(
+                    HtmlElementStore.TH_ELEMENT,
                     // nmi when element is found
                     TestSolution.NEED_MORE_INFO, 
                     // na when element is not found
-                    TestSolution.NOT_APPLICABLE, 
+                    TestSolution.NEED_MORE_INFO, 
                     // message associated with each found element
-                    CHECK_NATURE_OF_TABLE_AND_HEADERS_USAGE_MSG,
-                    null)
+                    CHECK_TABLE_IS_DATA_TABLE_MSG,
+                    // message associated with each not found element
+                    CHECK_TABLE_IS_PRESENTATION_TABLE_MSG)
             );
     }
     

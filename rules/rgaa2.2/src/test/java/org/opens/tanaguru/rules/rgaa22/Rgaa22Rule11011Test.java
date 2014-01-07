@@ -51,6 +51,10 @@ public class Rgaa22Rule11011Test extends Rgaa22RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
+        getWebResourceMap().put("RGAA22.Test.11.1-2Failed-01",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule11011/RGAA22.Test.11.1-2Failed-01.html"));
+        addParameterToParameterMap("RGAA22.Test.11.1-2Failed-01", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
         getWebResourceMap().put("RGAA22.Test.11.1-3NMI-01",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "RGAA22/Rgaa22Rule11011/RGAA22.Test.11.1-3NMI-01.html"));
@@ -74,18 +78,37 @@ public class Rgaa22Rule11011Test extends Rgaa22RuleImplementationTestCase {
     @Override
     protected void setProcess() {
         //----------------------------------------------------------------------
+        //----------------------------2Failed-01--------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult = processPageTest("RGAA22.Test.11.1-2Failed-01");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.DATA_TABLE_WITHOUT_HEADER_MSG, processRemark.getMessageCode());
+        assertTrue(processRemark.getTarget().equalsIgnoreCase(HtmlElementStore.TABLE_ELEMENT));
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertNull(processRemark.getElementList());
+        
+        
+        //----------------------------------------------------------------------
         //------------------------------3NMI-01--------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("RGAA22.Test.11.1-3NMI-01");
+        processResult = processPageTest("RGAA22.Test.11.1-3NMI-01");
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
-        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
         assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_NATURE_OF_TABLE_AND_HEADERS_USAGE_MSG, processRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.CHECK_TABLE_IS_PRESENTATION_TABLE_MSG, processRemark.getMessageCode());
         assertTrue(processRemark.getTarget().equalsIgnoreCase(HtmlElementStore.TABLE_ELEMENT));
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
@@ -104,7 +127,7 @@ public class Rgaa22Rule11011Test extends Rgaa22RuleImplementationTestCase {
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
         assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_USAGE_OF_HEADERS_FOR_DATA_TABLE_MSG, processRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.HEADER_DETECTED_CHECK_ALL_HEADERS_ARE_WELL_FORMED_MSG, processRemark.getMessageCode());
         assertTrue(processRemark.getTarget().equalsIgnoreCase(HtmlElementStore.TABLE_ELEMENT));
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
@@ -116,24 +139,16 @@ public class Rgaa22Rule11011Test extends Rgaa22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("RGAA22.Test.11.1-3NMI-03");
         // check number of elements in the page
-        assertEquals(2, processResult.getElementCounter());
+        assertEquals(1, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(2, processResult.getRemarkSet().size());
+        assertEquals(1, processResult.getRemarkSet().size());
         Iterator<ProcessRemark> iter = processResult.getRemarkSet().iterator();
         
         processRemark = (SourceCodeRemark)iter.next();
         assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_USAGE_OF_HEADERS_FOR_DATA_TABLE_MSG, processRemark.getMessageCode());
-        assertTrue(processRemark.getTarget().equalsIgnoreCase(HtmlElementStore.TABLE_ELEMENT));
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
-        
-        processRemark = (SourceCodeRemark)iter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_NATURE_OF_TABLE_AND_HEADERS_USAGE_MSG, processRemark.getMessageCode());
+        assertEquals(RemarkMessageStore.CHECK_TABLE_IS_DATA_TABLE_MSG, processRemark.getMessageCode());
         assertTrue(processRemark.getTarget().equalsIgnoreCase(HtmlElementStore.TABLE_ELEMENT));
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
@@ -166,6 +181,8 @@ public class Rgaa22Rule11011Test extends Rgaa22RuleImplementationTestCase {
 
     @Override
     protected void setConsolidate() {
+        assertEquals(TestSolution.FAILED,
+                consolidate("RGAA22.Test.11.1-2Failed-01").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("RGAA22.Test.11.1-3NMI-01").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
