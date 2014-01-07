@@ -67,7 +67,7 @@ public class Rgaa22Rule11011 extends AbstractMarkerPageRuleImplementation {
                     HEADER_DETECTED_CHECK_ALL_HEADERS_ARE_WELL_FORMED_MSG,
                     // message associated with each not found element
                     DATA_TABLE_WITHOUT_HEADER_MSG),
-//                le tableau comporte au moins une entête, vérifier que chaque entête est bien identifiée par une balise th
+
                 // checker for elements not identified by marker
                 new ChildElementPresenceChecker(
                     HtmlElementStore.TH_ELEMENT,
