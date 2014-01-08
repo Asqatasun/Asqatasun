@@ -284,6 +284,13 @@ metadata.description=Basic crawl starting with useful defaults
         <property name="cssRegexp">
             <value>.*(?i)(\.css(\?.*)?)$</value>
         </property>
+        <property name="authorizedMimeTypes">
+            <list>
+                <value>text/html</value>
+                <value>text/css</value>
+                <value>application/xhtml+xml</value>
+            </list>
+        </property>
     </bean>
 
     <bean id="candidates" class="org.archive.crawler.postprocessor.CandidatesProcessor">

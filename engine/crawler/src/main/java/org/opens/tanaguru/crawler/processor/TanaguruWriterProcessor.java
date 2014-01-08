@@ -22,6 +22,8 @@
 package org.opens.tanaguru.crawler.processor;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
 import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 import org.archive.io.RecordingInputStream;
@@ -117,6 +119,15 @@ public class TanaguruWriterProcessor extends Processor
         this.htmlRegexp = htmlRegexp;
     }
 
+    private Collection<String> authorizedMimeTypes;
+    public Collection<String> getAuthorizedMimeTypes() {
+        return authorizedMimeTypes;
+    }
+    
+    public void setAuthorizedMimeTypes(Collection<String> authorizedMimeTypes) {
+        this.authorizedMimeTypes = authorizedMimeTypes;
+    }
+    
     /**
      * @param name Name of this processor.
      */
@@ -126,11 +137,13 @@ public class TanaguruWriterProcessor extends Processor
     @Override
     protected boolean shouldProcess(CrawlURI curi) {
         Logger.getLogger(this.getClass()).debug("should process? " + curi.getURI() + " with mime type " + curi.getContentType());
-        if (!curi.getContentType().contains("text/html") && !curi.getContentType().contains("text/css")) {
-            Logger.getLogger(this.getClass()).debug(curi.getURI() + " rejected due to mime type ");
-            return false;
+        for (String mimeType : authorizedMimeTypes) {
+            if (curi.getContentType().contains(mimeType)) {
+                return isSuccess(curi);
+            }
         }
-        return isSuccess(curi);
+        Logger.getLogger(this.getClass()).debug(curi.getURI() + " rejected due to mime type ");
+        return false;
     }
     
     @Override
