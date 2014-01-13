@@ -267,7 +267,12 @@ public class CrawlerImpl implements Crawler, ContentWriter {
 
             // extract data from fetched content and record it to SSP object
 //            String charset = CrawlUtils.extractCharset(recis.getMessageBodyReplayInputStream());
-            String charset = curi.getContentType().substring(curi.getContentType().indexOf("=")+1);
+            String charset;
+            if (curi.getContentType().indexOf("=") != -1 ) {
+                charset = curi.getContentType().substring(curi.getContentType().indexOf("=")+1);
+            } else {
+                charset = CrawlUtils.extractCharset(recis.getMessageBodyReplayInputStream());
+            }
             LOGGER.debug(charset);
             String sourceCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset);
             lastFetchedSSP = saveWebResourceFromFetchedPage(curi, charset, sourceCode, true);
@@ -280,7 +285,12 @@ public class CrawlerImpl implements Crawler, ContentWriter {
                 cssCode = "";
             } else {
 //                String charset = CrawlUtils.extractCharset(recis.getMessageBodyReplayInputStream());
-                String charset = curi.getContentType().substring(curi.getContentType().indexOf("=")+1);
+                String charset;
+                if (curi.getContentType().indexOf("=") != -1 ) {
+                    charset = curi.getContentType().substring(curi.getContentType().indexOf("=")+1);
+                } else {
+                    charset = CrawlUtils.extractCharset(recis.getMessageBodyReplayInputStream());
+                }
                 cssCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset);
             }
             saveStylesheetFromFetchedCss(curi, cssCode);
