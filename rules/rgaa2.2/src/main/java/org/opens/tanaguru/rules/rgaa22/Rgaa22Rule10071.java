@@ -36,9 +36,11 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_
  * @author jkowalczyk
  */
 public class Rgaa22Rule10071 extends AbstractDetectionPageRuleImplementation {
+
     /** The element selector */
     private static final ElementSelector ELEMENT_SELECTOR = 
             new SimpleElementSelector(DL_ELEMENT);
+
     /**
      * Default constructor
      */
