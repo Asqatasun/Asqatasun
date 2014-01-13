@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.opens</groupId>
@@ -22,20 +22,20 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-<!--            <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <skipTests>false</skipTests>
-                    <systemProperties>
+<!--                    <systemProperties>
                         <property>
                         <name>java.util.logging.config.file</name>
                         <value>/home/jkowalczyk/Documents/Sources/TanaguruEngine_wc/Trunk/engine/crawler/src/test/resources/logging.properties</value>
                         </property>
-                    </systemProperties>
+                    </systemProperties>-->
                 </configuration>
                 
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
     <dependencies>
@@ -97,6 +97,10 @@
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
         </dependency>
     </dependencies>
 </project>
