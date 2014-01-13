@@ -539,6 +539,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
      * this url is different from the current url.
      */
     private boolean isRelCanonicalPage(Content content) {
+        // @TODO make this implementation cleaner
         if (! treatRelCanonical) {
             return false;
         }
@@ -554,13 +555,22 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         }
         // At this step, we are sure that the rel canonical is defined and 
         // is unique
-        String href = relCanonical.first().attr(HTML.Tag.HTML.toString());
+        String href = relCanonical.first().attr("href");
+        if (href.equals(".")) {
+            return false;
+        }
+        if (href.contains("//")) {
+            href = href.substring(href.indexOf("//") +2 );
+        }
         if (href.endsWith("/")) {
             href = href.substring(0, href.length() -1 );
         }
         String currentUrl = content.getURI();
         if (currentUrl.endsWith("/")) {
             currentUrl = currentUrl.substring(0, currentUrl.length() -1 );
+        }
+        if (currentUrl.contains("//")) {
+            currentUrl = currentUrl.substring(currentUrl.indexOf("//") +2 );
         }
         if (currentUrl.equals(href)) {
             LOGGER.info("rel canonical present but points to itself " + content.getURI());
