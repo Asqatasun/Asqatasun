@@ -24,11 +24,15 @@ package org.opens.tanaguru.crawler;
 import java.io.IOException;
 import java.util.*;
 import java.util.regex.Pattern;
+import javax.swing.text.html.HTML;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.archive.io.GzipHeader;
 import org.archive.io.RecordingInputStream;
 import org.archive.modules.CrawlURI;
 import org.archive.modules.deciderules.MatchesFilePatternDecideRule;
+import org.jsoup.Jsoup;
+import org.jsoup.select.Elements;
 import org.opens.tanaguru.crawler.framework.TanaguruCrawlJob;
 import org.opens.tanaguru.crawler.util.CrawlUtils;
 import org.opens.tanaguru.entity.audit.*;
@@ -48,6 +52,9 @@ public class CrawlerImpl implements Crawler, ContentWriter {
 
     private static final Logger LOGGER = Logger.getLogger(CrawlerImpl.class);
     private static final int RETRIEVE_WINDOW = 1000;
+    private static final int REL_CANONICAL_PAGE_FAKE_HTTP_STATUS = 900;
+    private static final String REL_CANONICAL_CSS_LIKE_QUERY = 
+                    "head link[rel=canonical][href]";
     private static final String UNREACHABLE_RESOURCE_STR =
             "Unreachable resource ";
     private static final String HERITRIX_SITE_FILE_NAME = "tanaguru-crawler-beans-site.xml";
@@ -161,6 +168,8 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         return gzipHeader;
     }
 
+    private boolean treatRelCanonical = true;
+    
     int pageRankCounter = 1; // a counter to determine the rank a page is fetched
 
     public CrawlerImpl() {
@@ -258,6 +267,8 @@ public class CrawlerImpl implements Crawler, ContentWriter {
 
             // extract data from fetched content and record it to SSP object
             String charset = CrawlUtils.extractCharset(recis.getMessageBodyReplayInputStream());
+//            String charset = curi.getContentType().substring(curi.getContentType().indexOf("=")+1);
+            LOGGER.debug(charset);
             String sourceCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset);
             lastFetchedSSP = saveWebResourceFromFetchedPage(curi, charset, sourceCode, true);
         } else if (curi.getContentType().contains(ContentType.css.getType())) {
@@ -504,7 +515,16 @@ public class CrawlerImpl implements Crawler, ContentWriter {
      * @param curi
      */
     private Content saveAndPersistFetchDataToContent(Content content, CrawlURI curi) {
-        content.setHttpStatusCode(curi.getFetchStatus());
+        // Waiting for a better implementation, we parse here the html content
+        // to detect the presence of the rel=canonical property.
+        // If true, the HttpStatusCode is set arbitrarely to 900 and thus the
+        // page won't be tested while processing
+        if (isRelCanonicalPage(content)) {
+            LOGGER.info("Fetching page with rel canonical " + content.getURI() + ". Set Http status to 900");
+            content.setHttpStatusCode(REL_CANONICAL_PAGE_FAKE_HTTP_STATUS);
+        } else {
+            content.setHttpStatusCode(curi.getFetchStatus());
+        }
         content.setDateOfLoading(new Date(curi.getFetchCompletedTime()));
         if (persistOnTheFly) {
             content = contentDataService.saveOrUpdate(content);
@@ -512,6 +532,43 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         return content;
     }
 
+    /**
+     * 
+     * @param content
+     * @return whether the current page defines a rel canonical Url and whether
+     * this url is different from the current url.
+     */
+    private boolean isRelCanonicalPage(Content content) {
+        if (! treatRelCanonical) {
+            return false;
+        }
+        if (! (content instanceof SSP)) {
+            return false;
+        }
+        if (StringUtils.isBlank(((SSP)content).getSource())) {
+            return false;
+        }
+        Elements relCanonical = Jsoup.parse(((SSP)content).getSource()).select(REL_CANONICAL_CSS_LIKE_QUERY);
+        if (relCanonical.isEmpty() || relCanonical.size() > 1) {
+            return false;
+        }
+        // At this step, we are sure that the rel canonical is defined and 
+        // is unique
+        String href = relCanonical.first().attr(HTML.Tag.HTML.toString());
+        if (href.endsWith("/")) {
+            href = href.substring(0, href.length() -1 );
+        }
+        String currentUrl = content.getURI();
+        if (currentUrl.endsWith("/")) {
+            currentUrl = currentUrl.substring(0, currentUrl.length() -1 );
+        }
+        if (currentUrl.equals(href)) {
+            LOGGER.info("rel canonical present but points to itself " + content.getURI());
+            return false;
+        }
+        return true;
+    }
+    
     /**
      * 
      * @param ssp
