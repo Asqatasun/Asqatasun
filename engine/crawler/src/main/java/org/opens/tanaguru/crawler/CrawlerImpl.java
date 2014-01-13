@@ -266,8 +266,8 @@ public class CrawlerImpl implements Crawler, ContentWriter {
             LOGGER.debug("Found Html " + curi.getURI());
 
             // extract data from fetched content and record it to SSP object
-            String charset = CrawlUtils.extractCharset(recis.getMessageBodyReplayInputStream());
-//            String charset = curi.getContentType().substring(curi.getContentType().indexOf("=")+1);
+//            String charset = CrawlUtils.extractCharset(recis.getMessageBodyReplayInputStream());
+            String charset = curi.getContentType().substring(curi.getContentType().indexOf("=")+1);
             LOGGER.debug(charset);
             String sourceCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset);
             lastFetchedSSP = saveWebResourceFromFetchedPage(curi, charset, sourceCode, true);
@@ -279,8 +279,8 @@ public class CrawlerImpl implements Crawler, ContentWriter {
             if (compressed) {
                 cssCode = "";
             } else {
-                String charset = CrawlUtils.extractCharset(recis.getMessageBodyReplayInputStream());
-//                String charset = CrawlUtils.extractCharset(recis.getContentReplayInputStream());
+//                String charset = CrawlUtils.extractCharset(recis.getMessageBodyReplayInputStream());
+                String charset = curi.getContentType().substring(curi.getContentType().indexOf("=")+1);
                 cssCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset);
             }
             saveStylesheetFromFetchedCss(curi, cssCode);
