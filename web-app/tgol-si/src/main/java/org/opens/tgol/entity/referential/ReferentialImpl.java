@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ReferentialImpl implements Referential, Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Referential")
     private Long id;
 

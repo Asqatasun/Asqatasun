@@ -38,7 +38,7 @@ import org.opens.tgol.entity.contract.ContractImpl;
 public class ScenarioImpl implements Scenario, Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Scenario")
     private Long id;
 

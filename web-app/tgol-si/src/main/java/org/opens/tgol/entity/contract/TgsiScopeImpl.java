@@ -22,13 +22,7 @@
 package org.opens.tgol.entity.contract;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -43,7 +37,7 @@ public class TgsiScopeImpl implements Scope, Serializable {
     private static final long serialVersionUID = -986936354821552963L;
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Scope")
     private Long id;
 

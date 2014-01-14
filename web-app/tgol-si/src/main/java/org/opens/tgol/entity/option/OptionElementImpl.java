@@ -37,7 +37,7 @@ public class OptionElementImpl implements OptionElement, Serializable {
     private static final long serialVersionUID = 866337625495716065L;
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Option_Element")
     private Long id;
 

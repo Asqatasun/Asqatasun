@@ -48,7 +48,7 @@ public class ContractImpl implements Contract, Serializable {
     private static final long serialVersionUID = -8963515112270144367L;
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Contract")
     private Long id;
 

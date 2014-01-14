@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class OptionFamilyImpl implements OptionFamily, Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Option_Family")
     private Long id;
 

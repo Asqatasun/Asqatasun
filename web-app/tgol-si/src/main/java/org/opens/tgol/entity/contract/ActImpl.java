@@ -40,7 +40,7 @@ public class ActImpl implements Act, Serializable {
     private static final long serialVersionUID = -8484972854096344167L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Act")
     private Long id;
 

@@ -37,7 +37,7 @@ public class FunctionalityImpl implements Functionality, Serializable {
     private static final long serialVersionUID = -3727864744296037213L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Functionality")
     private Long id;
 
