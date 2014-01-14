@@ -38,7 +38,7 @@ public class RoleImpl implements Role, Serializable {
     private static final long serialVersionUID = -8229758185132700393L;
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Role")
     private Long id;
 
