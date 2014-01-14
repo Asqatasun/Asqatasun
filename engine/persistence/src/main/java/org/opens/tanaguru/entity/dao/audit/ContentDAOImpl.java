@@ -47,7 +47,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
     private static final int DEFAULT_HTTP_STATUS_VALUE = -1;
     private static final Integer HTTP_STATUS_OK = Integer.valueOf(HttpStatus.SC_OK);
     private static final String INSERT_QUERY =
-            "INSERT IGNORE INTO CONTENT_RELATIONSHIP (Id_Content_Parent, Id_Content_Child) values ";
+            "INSERT INTO CONTENT_RELATIONSHIP (Id_Content_Parent, Id_Content_Child) values ";
     private static final String DELETE_CONTENT_RELATIONSHIP_QUERY =
             "DELETE FROM CONTENT_RELATIONSHIP WHERE Id_Content_Child=:idContentChild ";
     private static final String DELETE_RELATED_CONTENT_QUERY =
@@ -71,8 +71,8 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             +" WHERE ssp.DTYPE='SSPImpl'"
             +" AND (page.Id_Web_Resource =:idWebResource OR page.Id_Web_Resource_Parent =:idWebResource)"
             +" AND ssp.Http_Status_Code<>-1"
-            +" LIMIT :start , :chunkSize ";
-    private static final String LIMIT_OPTION = " LIMIT :start , :chunkSize ";
+            +" LIMIT :chunkSize OFFSET :start";
+    private static final String LIMIT_OPTION = " LIMIT :chunkSize OFFSET :start";
     private static final String HTTP_STATUS_EQUAL_OPTION = " AND ssp.Http_Status_Code = :httpStatusCode";
     private static final String HTTP_STATUS_NOT_EQUAL_OPTION = " AND ssp.Http_Status_Code != :httpStatusCode";
     private static final String JOIN_WR = " JOIN s.page w";
@@ -404,15 +404,22 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
      */
     @Override
     public void saveContentRelationShip(SSP ssp, Set<Long> relatedContentIdSet) {
-        if (!relatedContentIdSet.isEmpty()) {
+        List<Long> relatedContentIds = findRelatedContentFromSsp(ssp);
+        Set<Long> newRelatedContentIdSet = new HashSet<Long>();
+        for (Long relatedContentId : relatedContentIdSet) {
+            if (!relatedContentIds.contains(relatedContentId)) {
+                newRelatedContentIdSet.add(relatedContentId);
+            }
+        }
+        if (!newRelatedContentIdSet.isEmpty()) {
             StringBuilder queryValuesBuilder = new StringBuilder();
-            for (Long relatedContentId : relatedContentIdSet) {
-                queryValuesBuilder.append("(");
-                queryValuesBuilder.append(ssp.getId());
-                queryValuesBuilder.append(",");
-                queryValuesBuilder.append(relatedContentId);
-                queryValuesBuilder.append(")");
-                queryValuesBuilder.append(",");
+            for (Long relatedContentId : newRelatedContentIdSet) {
+                    queryValuesBuilder.append("(");
+                    queryValuesBuilder.append(ssp.getId());
+                    queryValuesBuilder.append(",");
+                    queryValuesBuilder.append(relatedContentId);
+                    queryValuesBuilder.append(")");
+                    queryValuesBuilder.append(",");
             }
             queryValuesBuilder.setCharAt(queryValuesBuilder.length()-1, ';');
             Query query = entityManager.createNativeQuery(
@@ -429,6 +436,21 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
         }
     }
 
+    /**
+     * 
+     * @param ssp
+     * @return the list of ids of related contents for a given ssp
+     */
+    private List<Long> findRelatedContentFromSsp(SSP ssp) {
+        Query query = entityManager.createQuery(
+                "select rc.id FROM "
+                + RelatedContentImpl.class.getName() + RELATED_CONTENT_KEY
+                + JOIN_PARENT_CONTENT_SET
+                + " WHERE s.id =:idSSP");
+        query.setParameter("idSSP", ssp.getId());
+        return query.getResultList();
+    }
+    
     /**
      *
      * @param idContent
