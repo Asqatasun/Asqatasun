@@ -41,7 +41,7 @@ public class CriterionStatisticsImpl
     private static final long serialVersionUID = 3956468354933408288L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Criterion_Statistics")
     private Long id;
 

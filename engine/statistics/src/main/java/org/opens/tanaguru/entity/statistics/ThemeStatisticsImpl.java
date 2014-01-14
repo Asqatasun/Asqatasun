@@ -22,14 +22,7 @@
 package org.opens.tanaguru.entity.statistics;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.reference.ThemeImpl;
@@ -47,7 +40,7 @@ public class ThemeStatisticsImpl
     private static final long serialVersionUID = 3956468354933408288L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Theme_Statistics")
     private Long id;
 

@@ -45,7 +45,7 @@ public class WebResourceStatisticsImpl
     private static final long serialVersionUID = -4723351714043709585L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Web_Resource_Statistics")
     private Long id;
 

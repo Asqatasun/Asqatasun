@@ -40,7 +40,7 @@ public class TestStatisticsImpl
     private static final long serialVersionUID = 8264819391088181375L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Test_Statistics")
     private Long id;
 
