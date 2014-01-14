@@ -47,7 +47,7 @@ public class TestImpl implements Test, Serializable {
     @Column(name = "Description")
     private String description;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Test")
     private Long id;
     @Column(name = "Label")

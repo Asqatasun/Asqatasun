@@ -39,7 +39,7 @@ public class ScopeImpl implements Scope, Serializable {
     @Column(name = "Description")
     private String description;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Scope")
     private Long id;
     @Column(name = "Label", nullable = false)

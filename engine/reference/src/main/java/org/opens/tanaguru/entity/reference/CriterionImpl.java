@@ -43,7 +43,7 @@ public class CriterionImpl implements Criterion, Serializable {
     @Column(name = "Description")
     private String description;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Criterion")
     private Long id;
     @Column(name = "Label")

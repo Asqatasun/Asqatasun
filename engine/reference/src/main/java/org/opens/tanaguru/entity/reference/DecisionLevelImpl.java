@@ -22,12 +22,7 @@
 package org.opens.tanaguru.entity.reference;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -44,7 +39,7 @@ public class DecisionLevelImpl implements DecisionLevel, Serializable {
 	@Column(name = "Description")
 	private String description;
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id_Decision_Level")
 	private Long id;
 	@Column(name = "Label", nullable = false)

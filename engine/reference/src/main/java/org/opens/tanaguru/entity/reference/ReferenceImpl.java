@@ -45,7 +45,7 @@ public class ReferenceImpl implements Reference, Serializable {
     @Column(name = "Description")
     private String description;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Reference")
     private Long id;
     @Column(name = "Label", nullable = false)

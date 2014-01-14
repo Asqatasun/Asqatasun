@@ -46,7 +46,7 @@ public class ThemeImpl implements Theme, Serializable {
     @Column(name = "Description")
     private String description;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Theme")
     private Long id;
     @Column(name = "Label", nullable = false)

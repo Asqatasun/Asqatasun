@@ -29,7 +29,6 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.hibernate.collection.PersistentSet;
 import org.opens.tanaguru.entity.service.reference.NomenclatureCssUnit;
 
 /**
@@ -48,7 +47,7 @@ public class NomenclatureImpl implements Nomenclature, Serializable {
     @OneToMany(mappedBy = "nomenclature", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     private Collection<NomenclatureElementImpl> elementList;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Nomenclature")
     private Long id;
     @Column(name = "Long_Label")

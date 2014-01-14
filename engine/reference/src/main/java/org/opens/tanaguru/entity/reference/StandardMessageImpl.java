@@ -36,7 +36,7 @@ public class StandardMessageImpl implements StandardMessage {
     @Column(name = "Cd_Standard_Message")
     private String code;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Standard_Message")
     private Long id;
     @Column(name = "Label")
