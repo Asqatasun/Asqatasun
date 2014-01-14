@@ -22,12 +22,7 @@
 package org.opens.tanaguru.i18n.entity;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import org.opens.tanaguru.sdk.entity.i18n.Language;
 
 /**
@@ -43,7 +38,7 @@ public class LanguageImpl implements Language, Serializable {
     @Column(name = "Code", nullable = false)
     protected String code;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Language")
     protected Long id;
     @Column(name = "Label", nullable = false)
