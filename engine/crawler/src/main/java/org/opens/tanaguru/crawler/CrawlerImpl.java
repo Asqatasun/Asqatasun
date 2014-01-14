@@ -292,7 +292,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
                 } else {
                     charset = CrawlUtils.extractCharset(recis.getMessageBodyReplayInputStream());
                 }
-                cssCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset);
+                cssCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset).trim();
             }
             saveStylesheetFromFetchedCss(curi, cssCode);
             
