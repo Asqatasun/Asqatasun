@@ -222,6 +222,21 @@ public final class CssLikeQueryStore {
                    + "embed[type^=image]" 
                    + "input[type^=image]"; 
     
+    // scripts
+    public static final String ONCLICK_CSS_LIKE_QUERY=
+                    "*[onclick]"
+                    + ":not(a[onlick])"
+                    + ":not(area[onclick])"
+                    + ":not(button[onlick])"
+                    + ":not(input[type=button][onclick])"
+                    + ":not(input[type=submit][onclick])"
+                    + ":not(input[type=reset][onclick])"
+                    + ":not(input[type=image][onclick])"
+                    + ":not(input[type=password][onclick])"
+                    + ":not(input[type=radio][onclick])"
+                    + ":not(input[type=checkbox][onclick])"
+                    + ":not(input[type=button][onclick])";
+            
     // Seo 
     public static final String META_DESC_CSS_LIKE_QUERY = 
                     "head meta[name=description][content]";

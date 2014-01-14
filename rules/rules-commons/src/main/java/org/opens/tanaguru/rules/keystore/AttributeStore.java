@@ -39,6 +39,7 @@ public final class AttributeStore {
     public static final String CODE_ATTR = HTML.Attribute.CODE.toString();
     public static final String CONTENT_ATTR = HTML.Attribute.CONTENT.toString();
     public static final String DATA_ATTR = HTML.Attribute.DATA.toString();
+    public static final String DISABLED_ATTR = "disabled";
     public static final String FOR_ATTR = "for";
     public static final String HREF_ATTR = HTML.Attribute.HREF.toString();
     public static final String ID_ATTR = HTML.Attribute.ID.toString();
@@ -46,9 +47,11 @@ public final class AttributeStore {
     public static final String LANG_ATTR = HTML.Attribute.LANG.toString();
     public static final String LONGDESC_ATTR = "longdesc";
     public static final String NAME_ATTR = HTML.Attribute.NAME.toString();
+    public static final String ONKEYPRESS_ATTR = "onkeypress";
     public static final String ROLE_ATTR = "role";
     public static final String SRC_ATTR = HTML.Attribute.SRC.toString();
     public static final String SUMMARY_ATTR = "summary";
+    public static final String TABINDEX_ATTR = "tabindex";
     public static final String TITLE_ATTR = HTML.Attribute.TITLE.toString();
     public static final String USEMAP_ATTR = HTML.Attribute.USEMAP.toString();
     public static final String VALUE_ATTR = HTML.Attribute.VALUE.toString();

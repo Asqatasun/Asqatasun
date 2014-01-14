@@ -278,6 +278,11 @@ public final class RemarkMessageStore {
     public static final String CHECK_CONTRAST_OF_IMAGE_MSG =
             "CheckTheContrastOfImagesWithText";
     
+    // scripts
+    public static final String ONKEYPRESS_MISSING_MSG = "OnKeyPressMissing";
+    public static final String CHECK_ONCLICK_DEFINTION_IN_JS_MSG = 
+            "CheckOnClickDefinitionInJs";
+    
     // seo 
     public static final String META_DESC_MISSING_MSG =
             "MetaDescriptionTagMissing";
