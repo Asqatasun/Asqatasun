@@ -21,10 +21,11 @@
  */
 package org.opens.tanaguru.crawler;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.regex.Pattern;
-import javax.swing.text.html.HTML;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.archive.io.GzipHeader;
@@ -274,7 +275,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
                 charset = CrawlUtils.extractCharset(recis.getMessageBodyReplayInputStream());
             }
             LOGGER.debug(charset);
-            String sourceCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset);
+            String sourceCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset).trim();
             lastFetchedSSP = saveWebResourceFromFetchedPage(curi, charset, sourceCode, true);
         } else if (curi.getContentType().contains(ContentType.css.getType())) {
             LOGGER.debug("Found css " + curi.getURI() + " last fetched ssp " + lastFetchedSSP.getURI());
