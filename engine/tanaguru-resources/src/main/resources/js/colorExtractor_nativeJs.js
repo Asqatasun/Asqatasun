@@ -90,7 +90,7 @@ function isHidden(elem) {
         return isHidden(elem.parentNode);
     }
     return isElementHidden;
-};
+}
 
 /*
  * get the computed style of an element
