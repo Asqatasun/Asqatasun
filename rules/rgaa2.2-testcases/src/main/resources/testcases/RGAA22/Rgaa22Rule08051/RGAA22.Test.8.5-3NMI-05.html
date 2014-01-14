@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>RGAA22 Test.8.5 NMI 05</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>RGAA22 Test.8.5 NMI 05</h1>
+
+            <div class="test-detail" lang="fr">
+                Absence de changements de contexte suite à une action de l’utilisateur sans validation explicite ou information préalable
+            </div>
+
+            <div class="testcase">
+                <form action="http://somesite.com/prog/component-select" method="post">
+                    <p>
+                        <select multiple="multiple" size="4" name="component-select">
+                            <option selected="selected" value="Component_1_a">Component_1</option>
+                            <option selected="selected" value="Component_1_b">Component_2</option>
+                            <option>Component_3</option>
+                            <option>Component_4</option>
+                            <option>Component_5</option>
+                            <option>Component_6</option>
+                            <option>Component_7</option>
+                        </select>
+                        <input type="submit" value="Send"/>
+                        <input type="reset"/>
+                    </p>
+                </form>
+            </div>
+
+            <p class="test-explanation">
+                NMI : no script that changes the context is detected
+            </p>
+
+        </div>
+    </body>
+</html>
