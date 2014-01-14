@@ -22,11 +22,7 @@
 package org.opens.tanaguru.entity.parameterization;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -41,7 +37,7 @@ public class ParameterFamilyImpl implements ParameterFamily, Serializable{
     private static final long serialVersionUID = -6433539300057498390L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Parameter_Family")
     private Long id;
 
