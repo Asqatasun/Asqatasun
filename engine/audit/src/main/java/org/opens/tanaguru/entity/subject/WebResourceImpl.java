@@ -48,7 +48,7 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     @JoinColumn(name = "Id_Audit", nullable = true)
     private AuditImpl audit;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Web_Resource")
     private Long id;
     @Column(name = "Label")

@@ -39,7 +39,7 @@ public class ProcessRemarkImpl implements ProcessRemark, Serializable {
 
     private static final long serialVersionUID = -8309768143794126739L;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Process_Remark")
     private Long id;
     @Enumerated(EnumType.STRING)

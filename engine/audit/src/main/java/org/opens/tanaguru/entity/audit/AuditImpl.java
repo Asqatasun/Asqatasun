@@ -58,7 +58,7 @@ public class AuditImpl implements Audit, Serializable {
     @OneToMany(mappedBy = "grossResultAudit")
     private Set<ProcessResultImpl> grossResultSet;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Audit")
     private Long id;
     @OneToMany(mappedBy = "netResultAudit")

@@ -48,7 +48,7 @@ public class EvidenceImpl implements Evidence, Serializable {
     @OneToMany(mappedBy = "evidence", cascade = CascadeType.ALL)
     private Set<EvidenceElementImpl> elementList = new HashSet<EvidenceElementImpl>();
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Evidence")
     private Long id;
     @Column(name = "Long_Label")

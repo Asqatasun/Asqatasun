@@ -22,7 +22,6 @@
 package org.opens.tanaguru.entity.audit;
 
 import java.io.Serializable;
-
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,10 +35,10 @@ public abstract class RelatedTextContentImpl extends RelatedContentImpl implemen
         TextContent, RelatedContent, Serializable {
 
     private static final long serialVersionUID = -8312398273757492821L;
-    @Column(name = "Source", length = 16777215)
+    @Column(name = "Source", columnDefinition="LONGTEXT")
     private String source = null;
 
-    @Column(name = "Adapted_Content", length = 16777215)
+    @Column(name = "Adapted_Content", columnDefinition="LONGTEXT")
     private String adaptedContent = null;
 
     public RelatedTextContentImpl() {

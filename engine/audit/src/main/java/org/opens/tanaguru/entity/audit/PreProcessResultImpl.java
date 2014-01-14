@@ -40,7 +40,7 @@ import org.opens.tanaguru.entity.subject.WebResourceImpl;
 public class PreProcessResultImpl implements PreProcessResult, Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Pre_Process_Result")
     private Long id;
     @ManyToOne

@@ -22,14 +22,7 @@
 package org.opens.tanaguru.entity.audit;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -45,7 +38,7 @@ public class EvidenceElementImpl implements EvidenceElement,
     
     private static final long serialVersionUID = 5494394934902604527L;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Evidence_Element")
     private Long id;
     @ManyToOne

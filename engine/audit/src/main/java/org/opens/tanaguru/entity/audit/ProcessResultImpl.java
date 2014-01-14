@@ -55,7 +55,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     @JoinColumn(name = "Id_Audit_Gross_Result")
     private AuditImpl grossResultAudit;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Process_Result")
     private Long id;
     @ManyToOne
