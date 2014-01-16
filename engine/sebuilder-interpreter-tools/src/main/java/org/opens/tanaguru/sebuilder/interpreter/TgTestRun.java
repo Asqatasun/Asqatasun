@@ -233,13 +233,35 @@ public class TgTestRun extends TestRun {
         }
     }
 
+    /**
+     * 
+     * @param urlSuffix 
+     */
+    public void fireNewPage(String urlSuffix) {
+        isStepOpenNewPage = true;
+        if (newPageListeners == null) {
+            return;
+        }
+        getSourceCodeAndFireNewPage(getDriver().getCurrentUrl()+'#'+urlSuffix);
+    }
+    
+    /**
+     * 
+     */
     public void fireNewPage() {
         isStepOpenNewPage = true;
         if (newPageListeners == null) {
             return;
         }
+        getSourceCodeAndFireNewPage(getDriver().getCurrentUrl());
+    }
+
+    /**
+     * 
+     * @param url 
+     */
+    private void getSourceCodeAndFireNewPage(String url) {
         try {
-            String url = getDriver().getCurrentUrl();
             try {
                 Thread.sleep(500);
             } catch (InterruptedException ex) {
@@ -268,7 +290,7 @@ public class TgTestRun extends TestRun {
             throw new TestRunException(currentStep() + " failed.", uae, currentStep().toString(), stepIndex);
         }
     }
-
+    
     /**
      * 
      * @return 
