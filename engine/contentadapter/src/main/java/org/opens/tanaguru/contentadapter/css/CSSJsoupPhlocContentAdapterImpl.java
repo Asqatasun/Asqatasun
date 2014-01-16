@@ -229,7 +229,13 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
                     " and " + cssContent.getURI());
             // to avoid fatal error when persist weird sourceCode
             try {
-                cssContent = (StylesheetContent)getContentDataService().saveOrUpdate(cssContent);
+                // the content is saved only when the id is null which means 
+                // that the content hasn't been persisted yet. Otherwise, the
+                // save is uneeded and the id is used to create the relation 
+                // with the current SSP
+                if (cssContent.getId() == null) {
+                    cssContent = (StylesheetContent)getContentDataService().saveOrUpdate(cssContent);
+                }
                 relatedCssIdSet.add(cssContent.getId());
             } catch (PersistenceException pe) {
                 adaptedContentOnError(cssContent, relatedCssIdSet);
