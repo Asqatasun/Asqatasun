@@ -35,10 +35,10 @@ public abstract class RelatedTextContentImpl extends RelatedContentImpl implemen
         TextContent, RelatedContent, Serializable {
 
     private static final long serialVersionUID = -8312398273757492821L;
-    @Column(name = "Source", columnDefinition="LONGTEXT")
+    @Column(name = "Source", length=167772150)
     private String source = null;
 
-    @Column(name = "Adapted_Content", columnDefinition="LONGTEXT")
+    @Column(name = "Adapted_Content",length=167772150)
     private String adaptedContent = null;
 
     public RelatedTextContentImpl() {

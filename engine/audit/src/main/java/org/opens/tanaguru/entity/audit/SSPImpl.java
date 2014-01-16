@@ -40,14 +40,14 @@ import org.opens.tanaguru.entity.subject.PageImpl;
 public class SSPImpl extends ContentImpl implements SSP, Serializable {
 
     private static final long serialVersionUID = -7889349852989199094L;
-    @Column(name = "Adapted_Content", columnDefinition="LONGTEXT")
+    @Column(name = "Adapted_Content", length=167772150)
     private String dom;
 
     @ManyToOne
     @JoinColumn(name = "Id_Page")
     private PageImpl page;
 
-    @Column(name = "Source", columnDefinition="LONGTEXT")
+    @Column(name = "Source", length=167772150)
     private String source;
 
     @Column(name = "Doctype", length = 512)
