@@ -138,7 +138,6 @@ public class Aw22Rule10012 extends AbstractPageRuleMarkupImplementation {
                         buildSelectorFromAttributeAndParentDifferentFrom(
                             HtmlElementStore.SVG_ELEMENT, 
                             attributeName));
-        System.out.println(strb.toString());
         return strb.toString();
     }
     
