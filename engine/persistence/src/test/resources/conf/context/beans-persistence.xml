@@ -15,7 +15,6 @@
         <property name="persistenceXmlLocation" value="src/test/resources/conf/context/persistence.xml"/>
         <property name="jpaProperties">
             <props>
-<!--                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>-->
                 <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
                 <prop key="hibernate.show_sql">false</prop>
             </props>
