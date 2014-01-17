@@ -143,7 +143,7 @@
                 <include>ESAPI.properties</include>
                 <include>google-code.properties</include>
                 <include>sign-up-mail.properties</include>
-                <include>tgol.conf</include>
+                <include>tanaguru.conf</include>
             </includes>
             <fileMode>666</fileMode>
             <outputDirectory>/install/web-app/conf</outputDirectory>
