@@ -36,7 +36,7 @@ import org.opens.tanaguru.rules.elementselector.MultipleElementSelector;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_ATTR_DETECTED_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG;
-import org.opens.tanaguru.rules.utils.CssLikeSelectorBuilder;
+import org.opens.tanaguru.rules.elementselector.builder.CssLikeSelectorBuilder;
 
 /**
  * Implementation of the rule 7.8 of the referential RGAA 2.2.

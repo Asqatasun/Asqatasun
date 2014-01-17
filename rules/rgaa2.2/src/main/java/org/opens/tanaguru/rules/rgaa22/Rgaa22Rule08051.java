@@ -27,7 +27,7 @@ import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.CHANGE_CONTEXT_SCRIPT_CSS_LIKE_QUERY;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CONTEXT_CHANGED_SCRIPT_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NO_PATTERN_DETECTED_MSG;
-import org.opens.tanaguru.rules.utils.RuleCheckHelper;
+import org.opens.tanaguru.rules.elementchecker.helper.RuleCheckHelper;
 
 /**
  * Implementation of the rule 8.5 of the referential RGAA 2.2.

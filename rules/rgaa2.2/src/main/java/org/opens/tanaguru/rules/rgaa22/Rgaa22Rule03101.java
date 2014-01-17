@@ -38,7 +38,7 @@ import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.FORM_ELEMENT_CSS_LIKE_QUERY;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_TITLE_OF_FORM_ELEMENT_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.FORM_ELEMENT_WITHOUT_IDENTIFIER_MSG;
-import org.opens.tanaguru.rules.utils.CssLikeSelectorBuilder;
+import org.opens.tanaguru.rules.elementselector.builder.CssLikeSelectorBuilder;
 
 /**
  * Implementation of the rule 3.10 of the referential RGAA 2.2.

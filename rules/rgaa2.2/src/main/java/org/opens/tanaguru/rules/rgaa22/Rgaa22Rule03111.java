@@ -34,13 +34,13 @@ import org.opens.tanaguru.rules.elementchecker.attribute.AttributePresenceChecke
 import org.opens.tanaguru.rules.elementchecker.pertinence.AttributePertinenceChecker;
 import org.opens.tanaguru.rules.elementselector.ElementSelector;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import org.opens.tanaguru.rules.elementselector.builder.CssLikeSelectorBuilder;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.FOR_ATTR;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.FORM_ELEMENT_WITH_ID_CSS_LIKE_QUERY;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.LABEL_ELEMENT;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_TITLE_OF_FORM_ELEMENT_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.FORM_ELEMENT_WITHOUT_LABEL_MSG;
-import org.opens.tanaguru.rules.utils.CssLikeSelectorBuilder;
 
 /**
  * Implementation of the rule 3.11 of the referential RGAA 2.2.
