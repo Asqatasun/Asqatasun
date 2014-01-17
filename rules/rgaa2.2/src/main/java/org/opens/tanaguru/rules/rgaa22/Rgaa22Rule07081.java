@@ -37,6 +37,7 @@ import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_ATTR_DETECTED_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG;
 import org.opens.tanaguru.rules.elementselector.builder.CssLikeSelectorBuilder;
+import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 
 /**
  * Implementation of the rule 7.8 of the referential RGAA 2.2.
@@ -87,7 +88,7 @@ public class Rgaa22Rule07081 extends AbstractPageRuleMarkupImplementation {
                 loadByCode(PRESENTATION_ATTR_NOM);
         for (String deprecatedAttr : deprecatedHtmlAttr.getValueList()) {
             SimpleElementSelector sec = new SimpleElementSelector(
-                    CssLikeSelectorBuilder.buildSelectorFromAttributeType(deprecatedAttr));
+                    buildQuery(deprecatedAttr));
             ElementHandler eh = new ElementHandlerImpl();
             sec.selectElements(sspHandler, eh);
             
@@ -122,4 +123,22 @@ public class Rgaa22Rule07081 extends AbstractPageRuleMarkupImplementation {
         }
     }
     
+        /**
+     * 
+     * @param attributeName
+     * @return return the query regarding the attributeName excluding the svg 
+     * elements 
+     */
+    private String buildQuery(String attributeName) {
+        StringBuilder strb = new StringBuilder();
+        strb.append(CssLikeSelectorBuilder.
+                        buildSelectorFromElementDifferentFromAndAttribute(
+                            HtmlElementStore.SVG_ELEMENT, 
+                            attributeName));
+        strb.append(CssLikeSelectorBuilder.
+                        buildSelectorFromAttributeAndParentDifferentFrom(
+                            HtmlElementStore.SVG_ELEMENT, 
+                            attributeName));
+        return strb.toString();
+    }
 }
