@@ -1,4 +1,13 @@
 --------------------------
+Tanaguru 3.0.0-beta9, 2014-01-17
+--------------------------
+Bugs :
+#637 : Tanaguru rejects pages with the time type "application/xhtml+xml" on site audit (https://dev.tanaguru.org/redmine/issues/637)
+
+Features : 
+#638 : Crawler : the pages that defines a link tag with the rel attribute equals to canonical must be excluded from the crawl (https://dev.tanaguru.org/redmine/issues/638)
+
+--------------------------
 Tanaguru 3.0.0-beta8, 2013-12-18
 --------------------------
 Bugs : 
