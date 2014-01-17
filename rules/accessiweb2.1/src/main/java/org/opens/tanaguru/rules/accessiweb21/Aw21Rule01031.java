@@ -29,7 +29,7 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Nomenclature;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
-import org.opens.tanaguru.rules.utils.ImageChecker;
+import org.opens.tanaguru.rules.accessiweb21.image.ImageChecker;
 import org.opens.tanaguru.service.ProcessRemarkService;
 import org.w3c.dom.Node;
 
