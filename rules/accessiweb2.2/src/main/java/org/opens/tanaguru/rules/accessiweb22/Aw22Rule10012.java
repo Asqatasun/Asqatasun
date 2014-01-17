@@ -31,12 +31,13 @@ import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
 import org.opens.tanaguru.rules.elementchecker.element.ElementWithAttributePresenceChecker;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import org.opens.tanaguru.rules.elementselector.builder.CssLikeSelectorBuilder;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.HEIGHT_ATTR;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.WIDTH_ATTR;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.ELEMENT_WITH_HEIGHT_ATTR_NOT_IMG;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.ELEMENT_WITH_WITDH_ATTR_NOT_IMG;
+import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_ATTR_DETECTED_MSG;
-import org.opens.tanaguru.rules.utils.CssLikeSelectorBuilder;
 
 /**
  * Implementation of the rule 10.1.2 of the referential Accessiweb 2.2.
@@ -69,8 +70,8 @@ public class Aw22Rule10012 extends AbstractPageRuleMarkupImplementation {
         Nomenclature deprecatedHtmlAttr = nomenclatureLoaderService.
                 loadByCode(PRESENTATION_ATTR_NOM);
         for (String deprecatedAttr : deprecatedHtmlAttr.getValueList()) {
-            SimpleElementSelector sec = new SimpleElementSelector(
-                    CssLikeSelectorBuilder.buildSelectorFromAttributeType(deprecatedAttr));
+            SimpleElementSelector sec = 
+                        new SimpleElementSelector(buildQuery(deprecatedAttr));
             ElementHandler eh = new ElementHandlerImpl();
             sec.selectElements(sspHandler, eh);
             
@@ -120,4 +121,25 @@ public class Aw22Rule10012 extends AbstractPageRuleMarkupImplementation {
     public int getSelectionSize() {
         return totalNumberOfElements;
     }
+    
+    /**
+     * 
+     * @param attributeName
+     * @return return the query regarding the attributeName excluding the svg 
+     * elements 
+     */
+    private String buildQuery(String attributeName) {
+        StringBuilder strb = new StringBuilder();
+        strb.append(CssLikeSelectorBuilder.
+                        buildSelectorFromElementDifferentFromAndAttribute(
+                            HtmlElementStore.SVG_ELEMENT, 
+                            attributeName));
+        strb.append(CssLikeSelectorBuilder.
+                        buildSelectorFromAttributeAndParentDifferentFrom(
+                            HtmlElementStore.SVG_ELEMENT, 
+                            attributeName));
+        System.out.println(strb.toString());
+        return strb.toString();
+    }
+    
 }

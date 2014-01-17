@@ -49,6 +49,12 @@ public class Aw22Rule10012Test extends Aw22RuleImplementationTestCase {
         getWebResourceMap().put("AW22.Test.10.1.2-1Passed-02",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "AW22/Aw22Rule10012/AW22.Test.10.1.2-1Passed-02.html"));
+        getWebResourceMap().put("AW22.Test.10.1.2-1Passed-03",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule10012/AW22.Test.10.1.2-1Passed-03.html"));
+        getWebResourceMap().put("AW22.Test.10.1.2-1Passed-04",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule10012/AW22.Test.10.1.2-1Passed-04.html"));
         getWebResourceMap().put("AW22.Test.10.1.2-2Failed-01",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "AW22/Aw22Rule10012/AW22.Test.10.1.2-2Failed-01.html"));
@@ -83,13 +89,27 @@ public class Aw22Rule10012Test extends Aw22RuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
-        assertEquals(TestSolution.PASSED,
-                processPageTest("AW22.Test.10.1.2-1Passed-01").getValue());
-        assertEquals(TestSolution.PASSED,
-                processPageTest("AW22.Test.10.1.2-1Passed-02").getValue());
+        ProcessResult processResult = processPageTest("AW22.Test.10.1.2-1Passed-01");
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        assertNull(processResult.getRemarkSet());
+        
+        
+        processResult = processPageTest("AW22.Test.10.1.2-1Passed-02");
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        assertNull(processResult.getRemarkSet());
+        
+        
+        processResult = processPageTest("AW22.Test.10.1.2-1Passed-03");
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        assertNull(processResult.getRemarkSet());
+        
+        
+        processResult = processPageTest("AW22.Test.10.1.2-1Passed-04");
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        assertNull(processResult.getRemarkSet());
 
-        ProcessResult processResult =
-                processPageTest("AW22.Test.10.1.2-2Failed-01");
+        
+        processResult = processPageTest("AW22.Test.10.1.2-2Failed-01");
         assertEquals(TestSolution.FAILED, processResult.getValue());
         assertEquals(1, processResult.getRemarkSet().size());
         assertEquals("PresentationAttrFound",
@@ -161,6 +181,10 @@ public class Aw22Rule10012Test extends Aw22RuleImplementationTestCase {
                 consolidate("AW22.Test.10.1.2-1Passed-01").getValue());
         assertEquals(TestSolution.PASSED,
                 consolidate("AW22.Test.10.1.2-1Passed-02").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("AW22.Test.10.1.2-1Passed-03").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("AW22.Test.10.1.2-1Passed-04").getValue());
         assertEquals(TestSolution.FAILED,
                 consolidate("AW22.Test.10.1.2-2Failed-01").getValue());
         assertEquals(TestSolution.FAILED,
