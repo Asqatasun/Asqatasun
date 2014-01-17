@@ -29,6 +29,7 @@ import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandlerImpl;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG;
+import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
  * 
@@ -49,6 +50,14 @@ public class LangChangeChecker extends LangChecker {
      */
     public LangChangeChecker() {
         super();
+    }
+    
+    /**
+     * Default constructor
+     */
+    public LangChangeChecker(TextElementBuilder textElementBuilder) {
+        super();
+        setTestableTextElementBuilder(textElementBuilder);
     }
     
     @Override

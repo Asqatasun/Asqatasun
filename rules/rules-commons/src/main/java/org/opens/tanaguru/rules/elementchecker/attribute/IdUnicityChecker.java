@@ -29,8 +29,8 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.ElementCheckerImpl;
+import org.opens.tanaguru.rules.elementselector.builder.CssLikeSelectorBuilder;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.ID_ATTR;
-import org.opens.tanaguru.rules.utils.CssLikeSelectorBuilder;
 
 /**
  * This checker controls the unicity of the id attribute for a set of elements.

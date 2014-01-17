@@ -23,16 +23,15 @@
 package org.opens.tanaguru.rules.elementselector;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.rules.elementselector.builder.CssLikeSelectorBuilder;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.NAME_ATTR;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.USEMAP_ATTR;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.*;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.AREA_ELEMENT;
-import org.opens.tanaguru.rules.utils.CssLikeSelectorBuilder;
 
 /**
  * Area selector implementation. This implementation is quite specific due to 

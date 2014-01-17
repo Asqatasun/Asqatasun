@@ -42,7 +42,7 @@ import org.opens.tanaguru.rules.elementchecker.contrast.exception.ContrastChecke
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.IMG_CSS_LIKE_QUERY;
 import static org.opens.tanaguru.rules.keystore.EvidenceStore.*;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
-import org.opens.tanaguru.rules.utils.ContrastHelper;
+import org.opens.tanaguru.rules.elementchecker.contrast.helper.ContrastHelper;
 import static org.opens.tanaguru.service.ProcessRemarkService.DEFAULT_EVIDENCE;
 
 

@@ -40,7 +40,7 @@ import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.LINK_WITH_HREF
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.FORM_ELEMENT;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_DOWNLOADABLE_DOCUMENT_FROM_FORM_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG;
-import org.opens.tanaguru.rules.utils.RuleCheckHelper;
+import org.opens.tanaguru.rules.elementchecker.helper.RuleCheckHelper;
 
 /**
  * This class deals with the tests related with links that point to 

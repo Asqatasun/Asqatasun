@@ -26,10 +26,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.rules.elementselector.builder.CssLikeSelectorBuilder;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.FOR_ATTR;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.FORM_ELEMENT_CSS_LIKE_QUERY;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.LABEL_ELEMENT;
-import org.opens.tanaguru.rules.utils.CssLikeSelectorBuilder;
 
 /**
  * 

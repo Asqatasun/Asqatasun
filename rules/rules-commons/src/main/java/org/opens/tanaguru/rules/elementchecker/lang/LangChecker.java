@@ -36,6 +36,8 @@ import org.opens.tanaguru.entity.reference.Nomenclature;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.NomenclatureBasedElementChecker;
+import org.opens.tanaguru.rules.elementchecker.lang.detector.LanguageDetectionResult;
+import org.opens.tanaguru.rules.elementchecker.lang.detector.LanguageDetector;
 import org.opens.tanaguru.rules.keystore.AttributeStore;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.LANG_ATTR;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.XML_LANG_ATTR;
@@ -44,8 +46,6 @@ import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
 import org.opens.tanaguru.rules.textbuilder.CompleteTextElementBuilder;
 import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
-import org.opens.tanaguru.rules.utils.LanguageDetectionResult;
-import org.opens.tanaguru.rules.utils.LanguageDetector;
 
 /**
  * 
@@ -107,7 +107,10 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
     }
 
     /* the text Element Builder used to extract text to test */
-    private TextElementBuilder textElementBuilder;
+    private TextElementBuilder testableTextElementBuilder;
+    public void setTestableTextElementBuilder(TextElementBuilder testableTextElementBuilder) {
+        this.testableTextElementBuilder = testableTextElementBuilder;
+    }
     
     /**
      * Default constructor
@@ -134,7 +137,7 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
         this.suspectedIdenticalLangMsg = suspectedIdenticalLangMsg;
         this.suspectedDifferentLangMsg = suspectedDifferentLangMsg;
     }
-
+    
     @Override
     protected void doCheck(
              SSPHandler sspHandler, 
@@ -324,10 +327,10 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
             return null;
         }
         StringBuilder strb = new StringBuilder();
-        if (textElementBuilder == null) {
-            textElementBuilder = new CompleteTextElementBuilder();
+        if (testableTextElementBuilder == null) {
+            testableTextElementBuilder = new CompleteTextElementBuilder();
         }
-        strb.append(textElementBuilder.buildTextFromElement(element));
+        strb.append(testableTextElementBuilder.buildTextFromElement(element));
 
         if (extractRecursively) {
             for (Element el : element.children()) {
