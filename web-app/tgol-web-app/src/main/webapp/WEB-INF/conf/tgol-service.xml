@@ -7,10 +7,10 @@
     <bean id="exposedPropertiesConfigurer" class="org.opens.tgol.util.webapp.ExposablePropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>file:///etc/tgol/tgol.conf</value>
-                <value>file:///etc/tgol/google-code.properties</value>
-                <value>file:///etc/tgol/sign-up-mail.properties</value>
-                <value>file:///etc/tgol/ESAPI.properties</value>
+                <value>file:///etc/tanaguru/tanaguru.conf</value>
+                <value>file:///etc/tanaguru/google-code.properties</value>
+                <value>file:///etc/tanaguru/sign-up-mail.properties</value>
+                <value>file:///etc/tanaguru/ESAPI.properties</value>
             </list>
         </property>
         <property name="fileEncoding">

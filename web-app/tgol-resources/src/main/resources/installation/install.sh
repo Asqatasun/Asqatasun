@@ -22,7 +22,7 @@ declare dirty_database=false
 declare dirty_directories=false
 declare dirty_webapp=false
 
-declare TG_CONF_DIR="etc/tgol/"
+declare TG_CONF_DIR="etc/tanaguru/"
 declare TG_TMP_DIR="var/tmp/tanaguru"
 declare TG_LOG_DIR="var/log/tanaguru"
 declare PKG_DIR=$(pwd)
@@ -301,7 +301,7 @@ install_configuration() {
 	    -e    "s#\$USER#$mysql_tg_user#"                          \
 	    -e    "s#\$PASSWORD#$mysql_tg_passwd#"                    \
 	    -e    "s#\$DATABASE_NAME#$mysql_tg_db#"                   \
-	    "${prefix}/$TG_CONF_DIR/tgol.conf" ||                    \
+	    "${prefix}/$TG_CONF_DIR/tanaguru.conf" ||                    \
 		fail "Unable to set up the tanaguru configuration"
 	grep '$' "${prefix}/$TG_CONF_DIR" >/dev/null &&            \
 		warn "The file ${prefix}/$TG_CONF_DIR contains"    \
