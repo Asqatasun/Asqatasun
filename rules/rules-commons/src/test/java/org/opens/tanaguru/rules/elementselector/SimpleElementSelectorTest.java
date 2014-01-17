@@ -31,7 +31,6 @@ import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import org.opens.tanaguru.rules.keystore.CssLikeQueryStore;
-import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 
 /**
  *
@@ -97,5 +96,43 @@ public class SimpleElementSelectorTest extends TestCase {
     private void verifyMockContext() {
         EasyMock.verify(ssp);
         EasyMock.verify(sspHandler);
+    }
+    
+    /**
+     * Test of selectElements method, of class SimpleElementSelector.
+     */
+    public void testSelectWidthNotWithinSvg() {
+        System.out.println("select width attr not within svg and children");
+        Document doc = Jsoup.parse("<svg width=\"\" height=\"\">"
+                
+            +"</svg>"
+            +"<svg text=\"bou\">"
+                +"<text width=\"\" height=\"\" text=\"hop\"/>"
+                
+            +"</svg>");
+
+        initMockContext(CssLikeQueryStore.ELEMENT_WITH_WITDH_ATTR_NOT_IMG, doc);
+                        
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
+        SimpleElementSelector instance = 
+                new SimpleElementSelector(
+                    CssLikeQueryStore.ELEMENT_WITH_WITDH_ATTR_NOT_IMG);
+        
+        instance.selectElements(sspHandler, elementHandler);
+        assertTrue(elementHandler.isEmpty());
+        
+        verifyMockContext();
+        
+        initMockContext(":not(svg)[text]:not(svg [text])", doc);
+                        
+        elementHandler = new ElementHandlerImpl();
+        instance = new SimpleElementSelector(
+                    ":not(svg)[text]:not(svg [text])");
+        
+        instance.selectElements(sspHandler, elementHandler);
+        assertTrue(elementHandler.isEmpty());
+        
+        verifyMockContext();
+        
     }
 }

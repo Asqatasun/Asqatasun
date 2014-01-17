@@ -128,6 +128,31 @@ public final class CssLikeSelectorBuilder {
     }
     
     /**
+     * Build a JQuery selector to retrieve elements different from the specified
+     * type that contain a given attribute. 
+     * 
+     * @param elementName
+     * @param attributeName
+     * @param notEmptyAttribute
+     * @return 
+     *      The css selector
+     */
+    public static String buildSelectorFromElementDifferentFromAndAttribute(
+            String elementName, 
+            String attributeName) {
+        StringBuilder selector = new StringBuilder();
+        selector.append(NOT_PREFIX);
+        selector.append(elementName);
+        selector.append(CLOSE_PARENTHESE);
+        if (attributeName != null && !attributeName.isEmpty()) {
+            selector.append(OPEN_BRACKET);
+            selector.append(attributeName);
+            selector.append(CLOSE_BRACKET);
+        }
+        return selector.toString();
+    }
+    
+    /**
      * Build a JQuery selector to retrieve elements that have or not children of a 
      * given type. Multiple children can be set.
      * 
@@ -259,4 +284,27 @@ public final class CssLikeSelectorBuilder {
        return strb.toString();
     }
     
+    /**
+     * Create a selector of the type :not($elementName [$attributeName]) that 
+     * select all the elements with a given attribute and without a parent of type
+     * of the given element
+     * @param elementName
+     * @param attributeName
+     * @return the css query
+     */
+    public static String buildSelectorFromAttributeAndParentDifferentFrom(
+            String elementName, 
+            String attributeName) {
+        StringBuilder selector = new StringBuilder();
+        selector.append(NOT_PREFIX);
+        selector.append(elementName);
+        selector.append(SPACE);
+        if (attributeName != null && !attributeName.isEmpty()) {
+            selector.append(OPEN_BRACKET);
+            selector.append(attributeName);
+            selector.append(CLOSE_BRACKET);
+        }
+        selector.append(CLOSE_PARENTHESE);
+        return selector.toString();
+    }
 }

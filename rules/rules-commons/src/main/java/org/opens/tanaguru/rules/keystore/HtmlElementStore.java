@@ -76,6 +76,7 @@ public final class HtmlElementStore {
     public static final String SCRIPT_ELEMENT = HTML.Tag.SCRIPT.toString();
     public static final String SPAN_ELEMENT = HTML.Tag.SPAN.toString();
     public static final String STRONG_ELEMENT = HTML.Tag.STRONG.toString();
+    public static final String SVG_ELEMENT = "svg";
     public static final String TABLE_ELEMENT = HTML.Tag.TABLE.toString();
     public static final String TD_ELEMENT = HTML.Tag.TD.toString();
     public static final String TEXT_ELEMENT = "#text";
