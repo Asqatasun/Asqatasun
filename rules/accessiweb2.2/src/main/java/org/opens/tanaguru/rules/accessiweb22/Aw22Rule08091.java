@@ -35,7 +35,7 @@ import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.LINK_WITHOUT_T
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.FIELDSET_NOT_WITHIN_FORM_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.LINK_WITHOUT_TARGET_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NO_PATTERN_DETECTED_MSG;
-import org.opens.tanaguru.rules.utils.RuleCheckHelper;
+import org.opens.tanaguru.rules.elementchecker.helper.RuleCheckHelper;
 
 /**
  * Implementation of the rule 8.9.1 of the referential Accessiweb 2.2.
