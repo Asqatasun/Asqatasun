@@ -280,7 +280,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             TestSolution processResult, 
             String targetValue,
             String messageCode, 
-            Collection<EvidenceElement> evidenceElementList) {
+            EvidenceElement... evidenceElementList) {
         
         SourceCodeRemark remark = sourceCodeRemarkFactory.create();
         remark.setIssue(processResult);
@@ -288,11 +288,9 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         remark.setTarget(targetValue);
         remark.setLineNumber(-1);
 
-        if (CollectionUtils.isNotEmpty(evidenceElementList)) {
-            for (EvidenceElement ee : evidenceElementList) {
-                remark.addElement(ee);
-                ee.setProcessRemark(remark);
-            }
+        for (EvidenceElement ee : evidenceElementList) {
+            remark.addElement(ee);
+            ee.setProcessRemark(remark);
         }
         remarkSet.add(remark);
     }
@@ -740,7 +738,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
                     element,
                     elementHtml,
                     elementHtml.substring(0, SNIPPET_MAX_LENGTH));
-    }
+        }
 
     /**
      * 

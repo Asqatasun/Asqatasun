@@ -129,7 +129,7 @@ public interface ProcessRemarkService {
             TestSolution processResult, 
             String targetValue,
             String messageCode, 
-            Collection<EvidenceElement> evidenceElementList);
+            EvidenceElement... evidenceElementList);
     
     /**
      * @deprecated 
