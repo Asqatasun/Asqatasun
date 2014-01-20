@@ -21,10 +21,10 @@
  */
 package org.opens.tanaguru.rules.cssvisitor;
 
-import com.phloc.css.ECSSUnit;
 import com.phloc.css.decl.CSSExpressionMemberTermSimple;
-import com.phloc.css.utils.CSSNumberHelper;
 import java.util.Collection;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.entity.audit.TestSolution;
 
 /**
@@ -36,42 +36,91 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 public class CssPropertyPresenceCSSVisitor extends SimpleCssVisitor {
 
     private Collection<String> cssPropertyList;
+    public void setPropertyList(Collection<String> cssPropertyList) {
+        this.cssPropertyList = cssPropertyList;
+    }
+    
+    private Collection<String> pseudoSelectorList;
     public void setUnitList(Collection<String> cssPropertyList) {
         this.cssPropertyList = cssPropertyList;
     }
 
-    /*
-     * Constructor
+    private String messageOnDetection;
+    public String getMessageOnDetection() {
+        return messageOnDetection;
+    }
+
+    public void setMessageOnDetection(String messageOnDetection) {
+        this.messageOnDetection = messageOnDetection;
+    }
+    
+    private TestSolution solutionOnDetection;
+    public TestSolution getSolutionOnDetection() {
+        return solutionOnDetection;
+    }
+
+    public void setSolutionOnDetection(TestSolution solutionOnDetection) {
+        this.solutionOnDetection = solutionOnDetection;
+    }
+    
+    /**
+     * 
+     * @param cssPropertyList
+     * @param solutionOnDetection
+     * @param messageOnDetection 
      */
-    public CssPropertyPresenceCSSVisitor(Collection<String> cssPropertyList) {
-        super();
+    public CssPropertyPresenceCSSVisitor(
+                Collection<String> cssPropertyList, 
+                Collection<String> pseudoSelectorList, 
+                TestSolution solutionOnDetection, 
+                String messageOnDetection) {
+        super(true);
         this.cssPropertyList = cssPropertyList;
+        if (pseudoSelectorList != null) {
+            this.pseudoSelectorList = pseudoSelectorList;
+        }
+        this.solutionOnDetection = solutionOnDetection;
+        this.messageOnDetection = messageOnDetection;
     }
 
     @Override
     protected void checkCSSExpressionMemberTermSimple(CSSExpressionMemberTermSimple exprMember) {
-        String exprValue = exprMember.getOptimizedValue();
-        ECSSUnit unit = extractUnitFromExpressionValue(exprValue);
-        // if the selector has not unit, or the value is 0
-        if (unit == null) {
-            return;
+        String contentValue = exprMember.getOptimizedValue();
+        // Some attributes (like "content") declare their content within ""
+        // These characters are removed to work on the appropriate content
+        if (contentValue.startsWith("\"") && contentValue.endsWith("\"")) {
+            contentValue = StringUtils.substring(contentValue, 1, contentValue.length()-1);
         }
-    }
-
-    /**
-     * 
-     * @param exprValue
-     * @return 
-     */
-    private ECSSUnit extractUnitFromExpressionValue(String exprValue) {
-        return CSSNumberHelper.getMatchingUnitInclPercentage(exprValue);
+        if (StringUtils.isNotBlank(contentValue)) {
+            System.out.println("contentValue "  + solutionOnDetection);
+            addCssCodeRemark(
+                        solutionOnDetection,
+                        messageOnDetection,
+                        contentValue);
+        } else {
+            System.out.println("content found but empty");
+        }
     }
 
     @Override
     protected void checkCSSDeclarationProperty(String property) {
-        if (cssPropertyList.contains(property)) {
-            addCssCodeRemark(TestSolution.FAILED, "CssPropertyDetected", property);
+        if (StringUtils.isBlank(property)) {
+            return;
         }
+        if (cssPropertyList.contains(property)) {
+            if (CollectionUtils.isEmpty(pseudoSelectorList)) {
+                excludeProperty = false;
+                return;
+            } else {
+                for (String pseudoSelector : pseudoSelectorList) {
+                    if (getCurrentSelector().contains(pseudoSelector)) {
+                        excludeProperty = false;
+                        return;
+                    }
+                }
+            }
+        }
+        excludeProperty = true;
     }
 
 }

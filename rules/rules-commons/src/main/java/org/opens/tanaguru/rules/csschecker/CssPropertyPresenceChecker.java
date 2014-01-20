@@ -25,6 +25,7 @@ package org.opens.tanaguru.rules.csschecker;
 import com.phloc.css.decl.CascadingStyleSheet;
 import java.util.Arrays;
 import java.util.Collection;
+import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.cssvisitor.CssPropertyPresenceCSSVisitor;
@@ -39,18 +40,40 @@ public class CssPropertyPresenceChecker extends SimpleCssChecker {
 
     /**
      * 
-     * @param cssVisitor 
+     * @param propertyName
+     * @param pseudoSelectorList
+     * @param solutionOnDetection
+     * @param messageOnDetection 
      */
-    public CssPropertyPresenceChecker (String propertyName) {
-        setCssVisitor(new CssPropertyPresenceCSSVisitor(Arrays.asList(propertyName)));
+    public CssPropertyPresenceChecker (
+            String propertyName, 
+            Collection<String> pseudoSelectorList,
+            TestSolution solutionOnDetection, 
+            String messageOnDetection) {
+        setCssVisitor(new CssPropertyPresenceCSSVisitor(
+                                Arrays.asList(propertyName), 
+                                pseudoSelectorList,
+                                solutionOnDetection, 
+                                messageOnDetection));
     }
     
     /**
      * 
-     * @param cssVisitor 
+     * @param propertyNameList
+     * @param pseudoSelectorList
+     * @param solutionOnDetection
+     * @param messageOnDetection 
      */
-    public CssPropertyPresenceChecker (Collection<String> propertyNameList) {
-        setCssVisitor(new CssPropertyPresenceCSSVisitor(propertyNameList));
+    public CssPropertyPresenceChecker (
+            Collection<String> propertyNameList,
+            Collection<String> pseudoSelectorList,
+            TestSolution solutionOnDetection, 
+            String messageOnDetection) {
+        setCssVisitor(new CssPropertyPresenceCSSVisitor(
+                                propertyNameList, 
+                                pseudoSelectorList,
+                                solutionOnDetection,
+                                messageOnDetection));
     }
     
     @Override

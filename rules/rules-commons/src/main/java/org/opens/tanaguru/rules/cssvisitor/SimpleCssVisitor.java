@@ -27,12 +27,10 @@ import com.phloc.css.ICSSWriterSettings;
 import com.phloc.css.decl.*;
 import com.phloc.css.decl.visit.DefaultCSSVisitor;
 import com.phloc.css.writer.CSSWriterSettings;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.contentadapter.css.CSSContentAdapter;
-import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.keystore.EvidenceStore;
@@ -73,7 +71,7 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
     }
     
     /** state that determines if the current style has to be visited **/
-    private boolean excludeStyle = false;
+    private boolean excludeStyleFromMedia = false;
     
     /** state that determines if the current property has to be visited **/
     boolean excludeProperty = false;
@@ -168,7 +166,7 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
     @Override
     public void onBeginFontFaceRule(final CSSFontFaceRule cssffr) {
         globalSelectorCounter++;
-        if (excludeStyle) {
+        if (excludeStyleFromMedia) {
             return;
         }
         Logger.getLogger(this.getClass()).debug("onBeginFontFaceRule ");
@@ -183,7 +181,7 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
     @Override
     public void onStyleRuleSelector(final CSSSelector aSelector) {
         globalSelectorCounter++;
-        if (excludeStyle) {
+        if (excludeStyleFromMedia) {
             return;
         }
         Logger.getLogger(this.getClass()).debug("onStyleRuleSelector ");
@@ -198,7 +196,7 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
     @Override
     public void onBeginPageRule(final CSSPageRule csspageRule) {
         globalSelectorCounter++;
-        if (excludeStyle) {
+        if (excludeStyleFromMedia) {
             return;
         }
         Logger.getLogger(this.getClass()).debug("onBeginPageRule " + csspageRule.getPseudoPage());
@@ -213,7 +211,7 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
     @Override
     public void onDeclaration(final CSSDeclaration aDeclaration) {
         Logger.getLogger(this.getClass()).debug("onDeclaration ");
-        if (excludeStyle) {
+        if (excludeStyleFromMedia) {
             return;
         }
         
@@ -237,12 +235,12 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
                 return;
             }
         }
-        excludeStyle = true;
+        excludeStyleFromMedia = true;
     }
 
     @Override
     public void onEndMediaRule(final CSSMediaRule aMediaRule) {
-        excludeStyle = false;
+        excludeStyleFromMedia = false;
     }
     
     @Override
@@ -255,7 +253,8 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
     public void end() {
         if (effectiveSelectorCounter == 0) {
             solutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
-        } else if (!solutionHandler.getTestSolution().equals(TestSolution.FAILED)) {
+        } else if (!solutionHandler.getTestSolution().equals(TestSolution.FAILED) && 
+                !solutionHandler.getTestSolution().equals(TestSolution.NEED_MORE_INFO)) {
             solutionHandler.addTestSolution(TestSolution.PASSED);
         }
     }
@@ -304,17 +303,14 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
             String remarkTarget) {
         solutionHandler.addTestSolution(testSolution);
 
-        Collection<EvidenceElement> eeList = new ArrayList<EvidenceElement>();
-        eeList.add(processRemarkService.getEvidenceElement(
-                EvidenceStore.CSS_SELECTOR_EE, currentSelector));
-        eeList.add(processRemarkService.getEvidenceElement(
-                EvidenceStore.CSS_FILENAME_EE, getFileNameFromCssName(currentFileName)));
-
         processRemarkService.addSourceCodeRemark(
                         testSolution,
                         remarkTarget,
                         message,
-                        eeList);
+                        processRemarkService.getEvidenceElement(
+                            EvidenceStore.CSS_SELECTOR_EE, currentSelector), 
+                        processRemarkService.getEvidenceElement(
+                            EvidenceStore.CSS_FILENAME_EE, getFileNameFromCssName(currentFileName)));
     }
     
     /**
