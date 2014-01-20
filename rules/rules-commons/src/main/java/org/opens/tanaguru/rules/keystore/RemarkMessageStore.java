@@ -264,6 +264,8 @@ public final class RemarkMessageStore {
     
     // css
     public static final String BAD_UNIT_TYPE_MSG = "BadUnitType";
+    public static final String CONTENT_CSS_PROPERTY_DETECTED_MSG = 
+            "ContentCssPropertyDetected";
     
     // colors and contrast
     public static final String BAD_CONTRAST_MSG = "BadContrast";

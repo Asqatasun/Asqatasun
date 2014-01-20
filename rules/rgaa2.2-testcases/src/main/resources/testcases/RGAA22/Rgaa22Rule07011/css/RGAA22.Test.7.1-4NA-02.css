@@ -1,0 +1,9 @@
+h1{
+    content: "the content attribute is defined but without appropriate pseudo selector";
+}
+.test-explanation{
+    content: "the content attribute is defined but without appropriate pseudo selector";
+}
+.test-detail {
+    content: "the content attribute is defined but without appropriate pseudo selector";
+}

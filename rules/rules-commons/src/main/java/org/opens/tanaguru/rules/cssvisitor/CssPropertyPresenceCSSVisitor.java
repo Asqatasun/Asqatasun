@@ -89,16 +89,15 @@ public class CssPropertyPresenceCSSVisitor extends SimpleCssVisitor {
         // Some attributes (like "content") declare their content within ""
         // These characters are removed to work on the appropriate content
         if (contentValue.startsWith("\"") && contentValue.endsWith("\"")) {
-            contentValue = StringUtils.substring(contentValue, 1, contentValue.length()-1);
+            contentValue = StringUtils.substring(contentValue, 1, contentValue.length()-1).trim();
         }
         if (StringUtils.isNotBlank(contentValue)) {
-            System.out.println("contentValue "  + solutionOnDetection);
             addCssCodeRemark(
                         solutionOnDetection,
                         messageOnDetection,
                         contentValue);
         } else {
-            System.out.println("content found but empty");
+            getSolutionHandler().addTestSolution(TestSolution.PASSED);
         }
     }
 

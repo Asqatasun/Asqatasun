@@ -20,7 +20,12 @@
 
 package org.opens.tanaguru.rules.rgaa22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import java.util.Arrays;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleCssImplementation;
+import org.opens.tanaguru.rules.csschecker.CssPropertyPresenceChecker;
+import org.opens.tanaguru.rules.keystore.AttributeStore;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CONTENT_CSS_PROPERTY_DETECTED_MSG;
 
 /**
  * Implementation of the rule 7.1 of the referential RGAA 2.2.
@@ -30,13 +35,16 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule07011 extends AbstractNotTestedRuleImplementation {
+public class Rgaa22Rule07011 extends AbstractPageRuleCssImplementation {
 
-    /**
-     * Default constructor
-     */
-    public Rgaa22Rule07011 () {
-        super();
+    private static final String[] pseudoSelectors = {":after", ":before"};
+    
+    public Rgaa22Rule07011() {
+        super(new CssPropertyPresenceChecker(
+                        AttributeStore.CONTENT_ATTR, 
+                        Arrays.asList(pseudoSelectors),
+                        TestSolution.NEED_MORE_INFO,
+                        CONTENT_CSS_PROPERTY_DETECTED_MSG));
     }
 
 }
