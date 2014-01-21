@@ -155,7 +155,7 @@ public class CssPropertyPresenceCheckerTest extends TestCase {
 
             expect(mockTestSolutionHandler.getTestSolution()).andReturn(resultOnDetection).times(2);
             mockTestSolutionHandler.addTestSolution(resultOnDetection);
-            expectLastCall().once();
+            expectLastCall().anyTimes();
             
             if (StringUtils.isNotBlank(selector)) {
                 EvidenceElement eElement1 = createMock(EvidenceElement.class);

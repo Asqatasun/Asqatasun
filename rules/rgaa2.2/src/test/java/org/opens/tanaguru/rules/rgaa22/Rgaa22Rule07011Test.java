@@ -19,7 +19,13 @@
  */
 package org.opens.tanaguru.rules.rgaa22;
 
-import org.opens.tanaguru.entity.audit.TestSolution;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import org.apache.commons.lang3.StringUtils;
+import org.opens.tanaguru.entity.audit.*;
+import org.opens.tanaguru.rules.keystore.EvidenceStore;
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 import org.opens.tanaguru.rules.rgaa22.test.Rgaa22RuleImplementationTestCase;
 
 /**
@@ -44,49 +50,194 @@ public class Rgaa22Rule07011Test extends Rgaa22RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-//        getWebResourceMap().put("Rgaa22.Test.7.1-1Passed-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "RGAA22/Rgaa22Rule07011/RGAA22.Test.7.1-1Passed-01.html"));
-//        getWebResourceMap().put("Rgaa22.Test.7.1-2Failed-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "RGAA22/Rgaa22Rule07011/RGAA22.Test.7.1-2Failed-01.html"));
-//        getWebResourceMap().put("Rgaa22.Test.7.1-3NMI-01",
-//                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "RGAA22/Rgaa22Rule07011/RGAA22.Test.7.1-3NMI-01.html"));
-//        getWebResourceMap().put("Rgaa22.Test.7.1-4NA-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "RGAA22/Rgaa22Rule07011/RGAA22.Test.7.1-4NA-01.html"));
-        getWebResourceMap().put("Rgaa22.Test.7.1-5NT-01",
+        getWebResourceMap().put("RGAA22.Test.7.1-1Passed-01",
+              getWebResourceFactory().createPage(
+              getTestcasesFilePath() + "RGAA22/Rgaa22Rule07011/RGAA22.Test.7.1-1Passed-01.html"));
+        getWebResourceMap().put("RGAA22.Test.7.1-1Passed-02",
+              getWebResourceFactory().createPage(
+              getTestcasesFilePath() + "RGAA22/Rgaa22Rule07011/RGAA22.Test.7.1-1Passed-02.html"));
+        getWebResourceMap().put("RGAA22.Test.7.1-3NMI-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule07011/RGAA22.Test.7.1-5NT-01.html"));
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule07011/RGAA22.Test.7.1-3NMI-01.html"));
+        getWebResourceMap().put("RGAA22.Test.7.1-3NMI-02",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule07011/RGAA22.Test.7.1-3NMI-02.html"));
+        getWebResourceMap().put("RGAA22.Test.7.1-4NA-01",
+              getWebResourceFactory().createPage(
+              getTestcasesFilePath() + "RGAA22/Rgaa22Rule07011/RGAA22.Test.7.1-4NA-01.html"));
+        getWebResourceMap().put("RGAA22.Test.7.1-4NA-02",
+              getWebResourceFactory().createPage(
+              getTestcasesFilePath() + "RGAA22/Rgaa22Rule07011/RGAA22.Test.7.1-4NA-02.html"));
+        
+        setUpRelatedContentMap();
     }
 
+    private void setUpRelatedContentMap(){
+        List<String> relatedContent1 = new ArrayList<String>();
+        relatedContent1.add("css/RGAA22.Test.7.1-1Passed-02.css");
+        getRelatedContentMap().put(getWebResourceMap().get("RGAA22.Test.7.1-1Passed-02"), relatedContent1);
+        
+        List<String> relatedContent2 = new ArrayList<String>();
+        relatedContent2.add("css/RGAA22.Test.7.1-3NMI-02.css");
+        getRelatedContentMap().put(getWebResourceMap().get("RGAA22.Test.7.1-3NMI-02"), relatedContent2);
+        
+        List<String> relatedContent3 = new ArrayList<String>();
+        relatedContent3.add("css/RGAA22.Test.7.1-4NA-02.css");
+        getRelatedContentMap().put(getWebResourceMap().get("RGAA22.Test.7.1-4NA-02"), relatedContent3);
+    }
+    
     @Override
     protected void setProcess() {
-//        assertEquals(TestSolution.PASSED,
-//                processPageTest("Rgaa22.Test.7.1-1Passed-01").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                processPageTest("Rgaa22.Test.7.1-2Failed-01").getValue());
-//        assertEquals(TestSolution.NEED_MORE_INFO,
-//                processPageTest("Rgaa22.Test.7.1-3NMI-01").getValue());
-//        assertEquals(TestSolution.NOT_APPLICABLE,
-//                processPageTest("Rgaa22.Test.7.1-4NA-01").getValue());
-        assertEquals(TestSolution.NOT_TESTED,
-                processPageTest("Rgaa22.Test.7.1-5NT-01").getValue());
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-01------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult = processPageTest("RGAA22.Test.7.1-1Passed-01");
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-02------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.7.1-1Passed-02");
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-01---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.7.1-3NMI-01");
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check test has no remark
+        assertEquals(2, processResult.getRemarkSet().size());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        
+        Iterator<ProcessRemark> iter = processResult.getRemarkSet().iterator();
+        
+        SourceCodeRemark processRemark = ((SourceCodeRemark)iter.next());
+        assertEquals(RemarkMessageStore.CONTENT_CSS_PROPERTY_DETECTED_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals("RGAA22",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        Iterator<EvidenceElement> eIter = processRemark.getElementList().iterator();
+        EvidenceElement ee = eIter.next();
+        assertEquals("h1:before",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+        
+        processRemark = ((SourceCodeRemark)iter.next());
+        assertEquals(RemarkMessageStore.CONTENT_CSS_PROPERTY_DETECTED_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals("and needs to be manually checked",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        eIter = processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals(".test-explanation:after",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "locale"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-02---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.7.1-3NMI-02");
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check test has no remark
+        assertEquals(2, processResult.getRemarkSet().size());
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        
+        iter = processResult.getRemarkSet().iterator();
+        
+        processRemark = ((SourceCodeRemark)iter.next());
+        assertEquals(RemarkMessageStore.CONTENT_CSS_PROPERTY_DETECTED_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals("RGAA22",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        eIter = processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("h1:before",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "RGAA22.Test.7.1-3NMI-02.css"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+        
+        processRemark = ((SourceCodeRemark)iter.next());
+        assertEquals(RemarkMessageStore.CONTENT_CSS_PROPERTY_DETECTED_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals("pseudo selectors.",processRemark.getTarget());
+        assertNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2, processRemark.getElementList().size());
+        eIter = processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals(".test-explanation:after",ee.getValue());
+        assertEquals(EvidenceStore.CSS_SELECTOR_EE,ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertTrue(StringUtils.contains(ee.getValue(), "RGAA22.Test.7.1-3NMI-02.css"));
+        assertEquals(EvidenceStore.CSS_FILENAME_EE, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------4NA-1-----------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.7.1-4NA-01");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------4NA-2-----------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.7.1-4NA-02");
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check test has no remark
+        assertNull(processResult.getRemarkSet());
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
     }
 
     @Override
     protected void setConsolidate() {
-//        assertEquals(TestSolution.PASSED,
-//                consolidate("Rgaa22.Test.7.1-1Passed-01").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                consolidate("Rgaa22.Test.7.1-2Failed-01").getValue());
-//        assertEquals(TestSolution.NEED_MORE_INFO,
-//                consolidate("Rgaa22.Test.7.1-3NMI-01").getValue());
-//        assertEquals(TestSolution.NOT_APPLICABLE,
-//                consolidate("Rgaa22.Test.7.1-4NA-01").getValue());
-        assertEquals(TestSolution.NOT_TESTED,
-                consolidate("Rgaa22.Test.7.1-5NT-01").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("RGAA22.Test.7.1-1Passed-01").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("RGAA22.Test.7.1-1Passed-02").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("RGAA22.Test.7.1-3NMI-01").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("RGAA22.Test.7.1-3NMI-02").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("RGAA22.Test.7.1-4NA-01").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("RGAA22.Test.7.1-4NA-02").getValue());
     }
 
 }

@@ -1,0 +1,9 @@
+h1:after {
+    content: "  ";
+}
+.test-explanation:before {
+    content: "";
+}
+.test-detail {
+    content: "the content attribute is defined but without appropriate pseudo selector";
+}

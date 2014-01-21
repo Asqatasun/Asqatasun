@@ -1,0 +1,9 @@
+h1:before{
+    content: " RGAA22 ";
+}
+.test-explanation:after{
+    content: "   pseudo selectors.   ";
+}
+.test-detail {
+    content: "the content attribute is defined but without appropriate pseudo selector";
+}
