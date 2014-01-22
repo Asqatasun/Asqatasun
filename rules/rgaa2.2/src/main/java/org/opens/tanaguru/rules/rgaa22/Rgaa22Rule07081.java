@@ -34,10 +34,10 @@ import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
 import org.opens.tanaguru.rules.elementchecker.element.ElementWithAttributePresenceChecker;
 import org.opens.tanaguru.rules.elementselector.MultipleElementSelector;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_ATTR_DETECTED_MSG;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG;
 import org.opens.tanaguru.rules.elementselector.builder.CssLikeSelectorBuilder;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_ATTR_DETECTED_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG;
 
 /**
  * Implementation of the rule 7.8 of the referential RGAA 2.2.
