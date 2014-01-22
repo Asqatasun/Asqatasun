@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Rgaa22 Test.7.11 Failed 07</title>
+        <style type="text/css">
+            #span:focus {
+                outline-color : red;
+            }
+            body {
+                background-color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+
+            <h1>Rgaa22 Test.7.11 Failed 07</h1>
+
+            <div class="test-detail" lang="fr">
+                Absence de suppression de l’effet visuel au focus des éléments
+            </div>
+
+            <div class="testcase">
+                <span id="span" tabindex="2">A span with a tabindex can grab the focus</span>
+            </div>
+
+            <p class="test-explanation">
+                Failed : the css property outline-color is set to red for the
+                element with the id "span" when it is selected. 
+                Knowing that the background color of the page is also set to 
+                red, the outline will be invisible. The test is failed.
+            </p>
+
+        </div>
+    </body>
+</html>

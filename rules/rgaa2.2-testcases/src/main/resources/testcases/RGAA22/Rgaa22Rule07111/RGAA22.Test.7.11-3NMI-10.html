@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Rgaa22 Test.7.11 NMI 10</title>
+        <style type="text/css">
+            #input:focus {
+                outline-color : red;
+            }
+            body {
+                background-color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+
+            <h1>Rgaa22 Test.7.11 NMI 10</h1>
+
+            <div class="test-detail" lang="fr">
+                Absence de suppression de l’effet visuel au focus des éléments
+            </div>
+
+            <div class="testcase">
+                <input id="input" type="text"/>
+            </div>
+
+            <p class="test-explanation">
+                NMI : The "input" element can grab the focus, but its outline
+                value can't be trustly extracted. A manual check is needed
+            </p>
+
+        </div>
+    </body>
+</html>
