@@ -13,6 +13,7 @@
            http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
     <bean id="emailSender" class="org.opens.tgol.emailsender.EmailSenderImpl">
+    	<property name="smptHost" value="${smtp.host}"/>
     </bean>
 
 </beans>

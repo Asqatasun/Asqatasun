@@ -47,6 +47,12 @@ public class EmailSenderImpl implements EmailSender {
     private static final String CONTENT_TYPE_KEY = "Content-Type";
     private static final String FULL_CHARSET_KEY = "text/plain; charset=UTF-8";
     private static final String CHARSET_KEY = "UTF-8";
+    
+    private String smptHost = SMTP_HOST;
+    public void setSmptHost(String smptHost) {
+		this.smptHost = smptHost;
+	}
+    
 
     /**
      * 
