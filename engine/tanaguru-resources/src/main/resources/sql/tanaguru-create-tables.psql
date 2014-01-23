@@ -1,0 +1,400 @@
+-- Converted by db_converter
+
+START TRANSACTION;
+SET standard_conforming_strings=off;
+SET escape_string_warning=off;
+SET CONSTRAINTS ALL DEFERRED;
+
+
+CREATE TABLE "audit" (
+    "id_audit" bigserial NOT NULL,
+    "comment" varchar(510) DEFAULT NULL,
+    "dt_creation" timestamp with time zone DEFAULT NULL,
+    "status" varchar(510) DEFAULT NULL,
+    PRIMARY KEY ("id_audit")
+);
+
+CREATE TABLE "audit_parameter" (
+    "id_audit" bigint NOT NULL,
+    "id_parameter" bigint NOT NULL
+);
+
+CREATE TABLE "audit_test" (
+    "id_audit" bigint NOT NULL,
+    "id_test" bigint NOT NULL
+);
+
+CREATE TABLE "content" (
+    "id_content" bigserial NOT NULL,
+    "dt_loading" timestamp with time zone DEFAULT NULL,
+    "http_status_code" integer NOT NULL,
+    "uri" varchar(4096) NOT NULL,
+    "binary_content" BYTEA ,
+    "adapted_content" text ,
+    "source" text ,
+    "charset" varchar(510) DEFAULT NULL,
+    "doctype" varchar(1024) DEFAULT NULL,
+    "id_audit" bigint DEFAULT NULL,
+    "id_page" bigint DEFAULT NULL,
+    "dtype" varchar(62) NOT NULL,
+    PRIMARY KEY ("id_content")
+);
+
+CREATE TABLE "content_relationship" (
+    "id_content_child" bigint NOT NULL,
+    "id_content_parent" bigint NOT NULL,
+    PRIMARY KEY ("id_content_child","id_content_parent")
+);
+
+CREATE TABLE "criterion" (
+    "id_criterion" bigserial NOT NULL,
+    "cd_criterion" varchar(510) DEFAULT NULL,
+    "description" varchar(510) DEFAULT NULL,
+    "label" varchar(510) DEFAULT NULL,
+    "rank" integer DEFAULT NULL,
+    "url" varchar(510) DEFAULT NULL,
+    "reference_id_reference" bigint DEFAULT NULL,
+    "theme_id_theme" bigint DEFAULT NULL,
+    PRIMARY KEY ("id_criterion")
+);
+
+CREATE TABLE "criterion_statistics" (
+    "id_criterion_statistics" bigserial NOT NULL,
+    "nb_passed" integer DEFAULT NULL,
+    "nb_failed" integer DEFAULT NULL,
+    "nb_nmi" integer DEFAULT NULL,
+    "nb_na" integer DEFAULT NULL,
+    "nb_suspected" integer DEFAULT NULL,
+    "nb_detected" integer DEFAULT NULL,
+    "nb_not_tested" integer DEFAULT NULL,
+    "criterion_result" varchar(510) DEFAULT NULL,
+    "id_criterion" bigint DEFAULT NULL,
+    "id_web_resource_statistics" bigint DEFAULT NULL,
+    PRIMARY KEY ("id_criterion_statistics")
+);
+
+CREATE TABLE "decision_level" (
+    "id_decision_level" bigserial NOT NULL,
+    "cd_decision_level" varchar(510) DEFAULT NULL,
+    "description" varchar(510) DEFAULT NULL,
+    "label" varchar(510) NOT NULL,
+    PRIMARY KEY ("id_decision_level")
+);
+
+CREATE TABLE "evidence" (
+    "id_evidence" bigserial NOT NULL,
+    "cd_evidence" varchar(510) DEFAULT NULL,
+    "description" varchar(510) DEFAULT NULL,
+    "long_label" varchar(510) DEFAULT NULL,
+    PRIMARY KEY ("id_evidence")
+);
+
+CREATE TABLE "evidence_element" (
+    "id_evidence_element" bigserial NOT NULL,
+    "element_value" text NOT NULL,
+    "evidence_id_evidence" bigint DEFAULT NULL,
+    "process_remark_id_process_remark" bigint DEFAULT NULL,
+    PRIMARY KEY ("id_evidence_element")
+);
+
+CREATE TABLE "level" (
+    "id_level" bigserial NOT NULL,
+    "cd_level" varchar(510) DEFAULT NULL,
+    "description" varchar(510) DEFAULT NULL,
+    "label" varchar(510) DEFAULT NULL,
+    "rank" integer DEFAULT NULL,
+    PRIMARY KEY ("id_level")
+);
+
+CREATE TABLE "nomenclature" (
+    "id_nomenclature" bigserial NOT NULL,
+    "cd_nomenclature" varchar(510) DEFAULT NULL,
+    "description" varchar(510) DEFAULT NULL,
+    "long_label" varchar(510) DEFAULT NULL,
+    "short_label" varchar(510) DEFAULT NULL,
+    "id_nomenclature_parent" bigint DEFAULT NULL,
+    PRIMARY KEY ("id_nomenclature")
+);
+
+CREATE TABLE "nomenclature_element" (
+    "id_nomenclature_element" bigserial NOT NULL,
+    "label" varchar(510) NOT NULL,
+    "shortvalue" integer DEFAULT NULL,
+    "id_nomenclature" bigint DEFAULT NULL,
+    "dtype" varchar(62) NOT NULL,
+    PRIMARY KEY ("id_nomenclature_element")
+);
+
+CREATE TABLE "parameter" (
+    "id_parameter" bigserial NOT NULL,
+    "parameter_value" varchar(2000) NOT NULL,
+    "id_parameter_element" bigint NOT NULL,
+    "is_default" boolean DEFAULT FALSE,
+    PRIMARY KEY ("id_parameter")
+);
+
+CREATE TABLE "parameter_element" (
+    "id_parameter_element" bigserial NOT NULL,
+    "cd_parameter_element" varchar(510) NOT NULL,
+    "id_parameter_family" bigint NOT NULL,
+    "short_label" varchar(510) DEFAULT NULL,
+    "long_label" varchar(510) DEFAULT NULL,
+    PRIMARY KEY ("id_parameter_element"),
+    UNIQUE ("cd_parameter_element")
+);
+
+CREATE TABLE "parameter_family" (
+    "id_parameter_family" bigserial NOT NULL,
+    "cd_parameter_family" varchar(510) NOT NULL,
+    "description" varchar(510) DEFAULT NULL,
+    "long_label" varchar(510) DEFAULT NULL,
+    "short_label" varchar(510) DEFAULT NULL,
+    PRIMARY KEY ("id_parameter_family"),
+    UNIQUE ("cd_parameter_family")
+);
+
+CREATE TABLE "pre_process_result" (
+    "id_pre_process_result" bigserial NOT NULL,
+    "pre_process_key" varchar(510) NOT NULL,
+    "pre_process_value" text ,
+    "id_audit" bigint NOT NULL,
+    "id_web_resource" bigint DEFAULT NULL,
+    PRIMARY KEY ("id_pre_process_result"),
+    UNIQUE ("pre_process_key","id_web_resource","id_audit")
+);
+
+CREATE TABLE "process_remark" (
+    "id_process_remark" bigserial NOT NULL,
+    "issue" varchar(510) DEFAULT NULL,
+    "message_code" varchar(510) DEFAULT NULL,
+    "selected_element" varchar(510) DEFAULT NULL,
+    "selection_expression" varchar(510) DEFAULT NULL,
+    "character_position" integer DEFAULT NULL,
+    "line_number" integer DEFAULT NULL,
+    "target" varchar(10000) DEFAULT NULL,
+    "snippet" text ,
+    "id_process_result" bigint DEFAULT NULL,
+    "dtype" varchar(62) NOT NULL,
+    PRIMARY KEY ("id_process_remark")
+);
+
+CREATE TABLE "process_result" (
+    "id_process_result" bigserial NOT NULL,
+    "element_counter" integer DEFAULT NULL,
+    "definite_value" varchar(510) DEFAULT NULL,
+    "indefinite_value" varchar(8192) DEFAULT NULL,
+    "id_audit_gross_result" bigint DEFAULT NULL,
+    "id_audit_net_result" bigint DEFAULT NULL,
+    "id_process_result_parent" bigint DEFAULT NULL,
+    "id_web_resource" bigint NOT NULL,
+    "id_test" bigint DEFAULT NULL,
+    "dtype" varchar(62) NOT NULL,
+    PRIMARY KEY ("id_process_result"),
+    UNIQUE ("id_test","id_web_resource","id_audit_gross_result"),
+    UNIQUE ("id_test","id_web_resource","id_audit_net_result")
+);
+
+CREATE TABLE "reference" (
+    "id_reference" bigserial NOT NULL,
+    "cd_reference" varchar(510) DEFAULT NULL,
+    "description" varchar(510) DEFAULT NULL,
+    "label" varchar(510) NOT NULL,
+    "rank" integer DEFAULT NULL,
+    "url" varchar(510) DEFAULT NULL,
+    PRIMARY KEY ("id_reference")
+);
+
+CREATE TABLE "scope" (
+    "id_scope" bigserial NOT NULL,
+    "code" varchar(510) DEFAULT NULL,
+    "description" varchar(510) DEFAULT NULL,
+    "label" varchar(510) NOT NULL,
+    PRIMARY KEY ("id_scope")
+);
+
+CREATE TABLE "standard_message" (
+    "id_standard_message" bigserial NOT NULL,
+    "cd_standard_message" varchar(510) DEFAULT NULL,
+    "label" varchar(510) DEFAULT NULL,
+    "Text" varchar(510) DEFAULT NULL,
+    PRIMARY KEY ("id_standard_message")
+);
+
+CREATE TABLE "test" (
+    "id_test" bigserial NOT NULL,
+    "cd_test" varchar(510) DEFAULT NULL,
+    "description" varchar(510) DEFAULT NULL,
+    "label" varchar(510) DEFAULT NULL,
+    "rank" integer DEFAULT NULL,
+    "weight" decimal(2,1)  DEFAULT '1.0',
+    "rule_archive_name" varchar(510) DEFAULT NULL,
+    "rule_class_name" varchar(510) DEFAULT NULL,
+    "rule_design_url" varchar(510) DEFAULT NULL,
+    "id_criterion" bigint DEFAULT NULL,
+    "id_decision_level" bigint DEFAULT NULL,
+    "id_level" bigint DEFAULT NULL,
+    "id_rule" bigint DEFAULT NULL,
+    "id_scope" bigint DEFAULT NULL,
+    "no_process" boolean DEFAULT TRUE,
+    PRIMARY KEY ("id_test")
+);
+
+CREATE TABLE "test_statistics" (
+    "id_test_statistics" bigserial NOT NULL,
+    "nb_passed" integer DEFAULT NULL,
+    "nb_failed" integer DEFAULT NULL,
+    "nb_nmi" integer DEFAULT NULL,
+    "nb_na" integer DEFAULT NULL,
+    "nb_suspected" integer DEFAULT NULL,
+    "nb_detected" integer DEFAULT NULL,
+    "nb_not_tested" integer DEFAULT NULL,
+    "id_test" bigint DEFAULT NULL,
+    "id_web_resource_statistics" bigint DEFAULT NULL,
+    PRIMARY KEY ("id_test_statistics")
+);
+
+CREATE TABLE "theme" (
+    "id_theme" bigserial NOT NULL,
+    "cd_theme" varchar(510) DEFAULT NULL,
+    "description" varchar(510) DEFAULT NULL,
+    "label" varchar(510) NOT NULL,
+    "rank" integer DEFAULT NULL,
+    PRIMARY KEY ("id_theme")
+);
+
+CREATE TABLE "theme_statistics" (
+    "id_theme_statistics" bigserial NOT NULL,
+    "nb_passed" integer DEFAULT NULL,
+    "nb_failed" integer DEFAULT NULL,
+    "nb_nmi" integer DEFAULT NULL,
+    "nb_na" integer DEFAULT NULL,
+    "nb_suspected" integer DEFAULT NULL,
+    "nb_detected" integer DEFAULT NULL,
+    "nb_not_tested" integer DEFAULT NULL,
+    "id_theme" bigint DEFAULT NULL,
+    "id_web_resource_statistics" bigint DEFAULT NULL,
+    PRIMARY KEY ("id_theme_statistics")
+);
+
+CREATE TABLE "web_resource" (
+    "id_web_resource" bigserial NOT NULL,
+    "label" varchar(510) DEFAULT NULL,
+    "mark" float DEFAULT NULL,
+    "url" varchar(4096) NOT NULL,
+    "rank" integer DEFAULT '0',
+    "id_audit" bigint DEFAULT NULL,
+    "id_web_resource_parent" bigint DEFAULT NULL,
+    "dtype" varchar(62) NOT NULL,
+    PRIMARY KEY ("id_web_resource")
+);
+
+CREATE TABLE "web_resource_statistics" (
+    "id_web_resource_statistics" bigserial NOT NULL,
+    "mark" float DEFAULT NULL,
+    "raw_mark" float DEFAULT NULL,
+    "nb_passed" integer DEFAULT NULL,
+    "nb_failed" integer DEFAULT NULL,
+    "nb_nmi" integer DEFAULT NULL,
+    "nb_na" integer DEFAULT NULL,
+    "nb_suspected" integer DEFAULT NULL,
+    "nb_detected" integer DEFAULT NULL,
+    "nb_not_tested" integer DEFAULT NULL,
+    "weighted_passed" decimal(10,1)  DEFAULT NULL,
+    "weighted_failed" decimal(10,1)  DEFAULT NULL,
+    "weighted_nmi" decimal(10,1)  DEFAULT NULL,
+    "weighted_na" decimal(10,1)  DEFAULT NULL,
+    "nb_failed_occurrences" integer DEFAULT NULL,
+    "nb_invalid_test" integer DEFAULT NULL,
+    "id_audit" bigint DEFAULT NULL,
+    "id_web_resource" bigint DEFAULT NULL,
+    "http_status_code" integer DEFAULT '-1',
+    PRIMARY KEY ("id_web_resource_statistics")
+);
+
+
+-- Post-data save --
+COMMIT;
+START TRANSactION;
+
+-- Typecasts --
+
+-- Foreign keys --
+ALTER TABLE "audit_parameter" ADD CONSTRAINT "fk_audit_parameter_audit" FOREIGN KEY ("id_audit") REFERENCES "audit" ("id_audit") ON DELETE CASCADE ON UPDATE NO actION DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "audit_parameter" ("id_audit");
+ALTER TABLE "audit_parameter" ADD CONSTRAINT "fk_audit_parameter_parameter" FOREIGN KEY ("id_parameter") REFERENCES "parameter" ("id_parameter") ON DELETE CASCADE ON UPDATE NO actION DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "audit_parameter" ("id_parameter");
+ALTER TABLE "audit_test" ADD CONSTRAINT "FK838E6E96493EC9C2" FOREIGN KEY ("id_audit") REFERENCES "audit" ("id_audit") ON DELETE CASCADE ON UPDATE NO actION DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "audit_test" ("id_audit");
+ALTER TABLE "audit_test" ADD CONSTRAINT "FK838E6E96A17A5FA8" FOREIGN KEY ("id_test") REFERENCES "test" ("id_test") ON DELETE NO actION ON UPDATE NO actION DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "audit_test" ("id_test");
+ALTER TABLE "content" ADD CONSTRAINT "FK6382C059493EC9C2" FOREIGN KEY ("id_audit") REFERENCES "audit" ("id_audit") ON DELETE CASCADE ON UPDATE NO actION DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "content" ("id_audit");
+ALTER TABLE "content" ADD CONSTRAINT "FK6382C059A8A177A1" FOREIGN KEY ("id_page") REFERENCES "web_resource" ("id_web_resource") ON DELETE CASCADE ON UPDATE NO actION DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "content" ("id_page");
+ALTER TABLE "content_relationship" ADD CONSTRAINT "FKBA33205EBA71C750" FOREIGN KEY ("id_content_child") REFERENCES "content" ("id_content") ON DELETE CASCADE ON UPDATE NO actION DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "content_relationship" ("id_content_child");
+ALTER TABLE "content_relationship" ADD CONSTRAINT "FKBA33205E620A8494" FOREIGN KEY ("id_content_parent") REFERENCES "content" ("id_content") ON DELETE CASCADE ON UPDATE NO actION DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "content_relationship" ("id_content_parent");
+ALTER TABLE "criterion" ADD CONSTRAINT "FKBCFA1E81E8F67244" FOREIGN KEY ("theme_id_theme") REFERENCES "theme" ("id_theme") DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "criterion" ("theme_id_theme");
+ALTER TABLE "criterion" ADD CONSTRAINT "FKBCFA1E81D03CE506" FOREIGN KEY ("reference_id_reference") REFERENCES "reference" ("id_reference") DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "criterion" ("reference_id_reference");
+ALTER TABLE "criterion_statistics" ADD CONSTRAINT "fk_criterion_statistics_criterion" FOREIGN KEY ("id_criterion") REFERENCES "criterion" ("id_criterion") ON DELETE CASCADE ON UPDATE NO actION DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "criterion_statistics" ("id_criterion");
+ALTER TABLE "criterion_statistics" ADD CONSTRAINT "fk_criterion_statistics_web_resource_statistics" FOREIGN KEY ("id_web_resource_statistics") REFERENCES "web_resource_statistics" ("id_web_resource_statistics") ON DELETE CASCADE ON UPDATE NO actION DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "criterion_statistics" ("id_web_resource_statistics");
+ALTER TABLE "evidence_element" ADD CONSTRAINT "FK698B98F4C94A0CBA" FOREIGN KEY ("evidence_id_evidence") REFERENCES "evidence" ("id_evidence") DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "evidence_element" ("evidence_id_evidence");
+ALTER TABLE "evidence_element" ADD CONSTRAINT "FK698B98F425AD22C4" FOREIGN KEY ("process_remark_id_process_remark") REFERENCES "process_remark" ("id_process_remark") ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "evidence_element" ("process_remark_id_process_remark");
+ALTER TABLE "nomenclature" ADD CONSTRAINT "FKBF856B7795431825" FOREIGN KEY ("id_nomenclature_parent") REFERENCES "nomenclature" ("id_nomenclature") DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "nomenclature" ("id_nomenclature_parent");
+ALTER TABLE "nomenclature_element" ADD CONSTRAINT "FK44F856145FAB5EF2" FOREIGN KEY ("id_nomenclature") REFERENCES "nomenclature" ("id_nomenclature") DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "nomenclature_element" ("id_nomenclature");
+ALTER TABLE "parameter" ADD CONSTRAINT "fk_parameter_parameter_element" FOREIGN KEY ("id_parameter_element") REFERENCES "parameter_element" ("id_parameter_element") ON DELETE NO actION ON UPDATE NO actION DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "parameter" ("id_parameter_element");
+ALTER TABLE "parameter_element" ADD CONSTRAINT "fk_parameter_element_parameter" FOREIGN KEY ("id_parameter_family") REFERENCES "parameter_family" ("id_parameter_family") ON DELETE NO actION ON UPDATE NO actION DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "parameter_element" ("id_parameter_family");
+ALTER TABLE "pre_process_result" ADD CONSTRAINT "fk_pre_process_result_audit" FOREIGN KEY ("id_audit") REFERENCES "audit" ("id_audit") ON DELETE CASCADE ON UPDATE NO actION DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "pre_process_result" ("id_audit");
+ALTER TABLE "pre_process_result" ADD CONSTRAINT "fk_pre_process_result_web_resource" FOREIGN KEY ("id_web_resource") REFERENCES "web_resource" ("id_web_resource") ON DELETE CASCADE ON UPDATE NO actION DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "pre_process_result" ("id_web_resource");
+ALTER TABLE "process_remark" ADD CONSTRAINT "FK1C3EA37045A988AD" FOREIGN KEY ("id_process_result") REFERENCES "process_result" ("id_process_result") ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "process_remark" ("id_process_result");
+ALTER TABLE "process_result" ADD CONSTRAINT "FK1C41A80DFA349234" FOREIGN KEY ("id_process_result_parent") REFERENCES "process_result" ("id_process_result") DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "process_result" ("id_process_result_parent");
+ALTER TABLE "process_result" ADD CONSTRAINT "FK1C41A80D8146180B" FOREIGN KEY ("id_audit_gross_result") REFERENCES "audit" ("id_audit") ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "process_result" ("id_audit_gross_result");
+ALTER TABLE "process_result" ADD CONSTRAINT "FK1C41A80D2E48600" FOREIGN KEY ("id_web_resource") REFERENCES "web_resource" ("id_web_resource") ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "process_result" ("id_web_resource");
+ALTER TABLE "process_result" ADD CONSTRAINT "FK1C41A80DA17A5FA8" FOREIGN KEY ("id_test") REFERENCES "test" ("id_test") DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "process_result" ("id_test");
+ALTER TABLE "process_result" ADD CONSTRAINT "FK1C41A80DB6D0E092" FOREIGN KEY ("id_audit_net_result") REFERENCES "audit" ("id_audit") ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "process_result" ("id_audit_net_result");
+ALTER TABLE "test" ADD CONSTRAINT "FK273C92CCA757AD" FOREIGN KEY ("id_decision_level") REFERENCES "decision_level" ("id_decision_level") DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "test" ("id_decision_level");
+ALTER TABLE "test" ADD CONSTRAINT "FK273C9250C99824" FOREIGN KEY ("id_scope") REFERENCES "scope" ("id_scope") DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "test" ("id_scope");
+ALTER TABLE "test" ADD CONSTRAINT "FK273C926CCA4C3E" FOREIGN KEY ("id_criterion") REFERENCES "criterion" ("id_criterion") DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "test" ("id_criterion");
+ALTER TABLE "test" ADD CONSTRAINT "FK273C9272343A84" FOREIGN KEY ("id_level") REFERENCES "level" ("id_level") DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "test" ("id_level");
+ALTER TABLE "test_statistics" ADD CONSTRAINT "fk_test_statistics_test" FOREIGN KEY ("id_test") REFERENCES "test" ("id_test") ON DELETE CASCADE ON UPDATE NO actION DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "test_statistics" ("id_test");
+ALTER TABLE "test_statistics" ADD CONSTRAINT "fk_test_statistics_web_resource_statistics" FOREIGN KEY ("id_web_resource_statistics") REFERENCES "web_resource_statistics" ("id_web_resource_statistics") ON DELETE CASCADE ON UPDATE NO actION DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "test_statistics" ("id_web_resource_statistics");
+ALTER TABLE "theme_statistics" ADD CONSTRAINT "fk_theme_statistics_theme" FOREIGN KEY ("id_theme") REFERENCES "theme" ("id_theme") ON DELETE CASCADE ON UPDATE NO actION DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "theme_statistics" ("id_theme");
+ALTER TABLE "theme_statistics" ADD CONSTRAINT "fk_theme_statistics_web_resource_statistics" FOREIGN KEY ("id_web_resource_statistics") REFERENCES "web_resource_statistics" ("id_web_resource_statistics") ON DELETE CASCADE ON UPDATE NO actION DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "theme_statistics" ("id_web_resource_statistics");
+ALTER TABLE "web_resource" ADD CONSTRAINT "FKD9A970B9493EC9C2" FOREIGN KEY ("id_audit") REFERENCES "audit" ("id_audit") ON DELETE CASCADE ON UPDATE CASCADE DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "web_resource" ("id_audit");
+ALTER TABLE "web_resource" ADD CONSTRAINT "FKD9A970B92F70FF12" FOREIGN KEY ("id_web_resource_parent") REFERENCES "web_resource" ("id_web_resource") ON DELETE CASCADE ON UPDATE CASCADE DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "web_resource" ("id_web_resource_parent");
+ALTER TABLE "web_resource_statistics" ADD CONSTRAINT "fk_web_resource_statistics_audit" FOREIGN KEY ("id_audit") REFERENCES "audit" ("id_audit") ON DELETE CASCADE ON UPDATE NO actION DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "web_resource_statistics" ("id_audit");
+ALTER TABLE "web_resource_statistics" ADD CONSTRAINT "fk_web_resource_statistics_web_resource" FOREIGN KEY ("id_web_resource") REFERENCES "web_resource" ("id_web_resource") ON DELETE CASCADE ON UPDATE NO actION DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "web_resource_statistics" ("id_web_resource");
+
+
+COMMIT;

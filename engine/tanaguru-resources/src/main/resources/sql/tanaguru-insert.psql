@@ -1,0 +1,91 @@
+-- Converted by db_converter
+
+START TRANSACTION;
+SET standard_conforming_strings=off;
+SET escape_string_warning=off;
+SET CONSTRAINTS ALL DEFERRED;
+
+
+INSERT INTO "parameter_family" VALUES 
+(1,'CRAWL','This parameter family handles all the parameters needed by the crawler component','crawl parameters','crawl params'),
+(2,'GENERAL','This parameter family handles all the general parameters of the audit','general parameters','gen params'),
+(3,'RULES','This parameter family handles all the parameters needed by the rules','rules parameters','rules params'),
+(4,'Seo_test_WEIGHT_MANAGEMENT','This parameters handles the test weight potentially overridden by users','test weight parameters','test weight params');
+
+
+INSERT INTO "parameter_element" VALUES 
+(1,'MAX_DOCUMENTS',1,'max pages','Maximum number of downloaded pages'),
+(2,'EXCLUSION_REGEXP',1,'exclusion regex','Regulard expression to exclude urls'),
+(3,'DEPTH',1,'max depth','Maximum depth of the crawl'),
+(4,'MAX_DURATION',1,'max duration','Maximum duration of the crawl'),
+(5,'LEVEL',2,'audit level','audit level (includes the referential code)'),
+(6,'DATA_TABLE_MARKER',3,'Data table marker','Data Table HTML marker (id or class)'),
+(7,'PRESENTATION_TABLE_MARKER',3,'presentation table marker','presentation Table HTML marker (id or class)'),
+(8,'PROXY_HOST',1,'proxy host','proxy host'),
+(9,'PROXY_PORT',1,'proxy port','proxy port'),
+(10,'Seo-01011',4,'Seo-01011 weight','Weight of rule Seo-01011 overriden by user'),
+(11,'Seo-01012',4,'Seo-01011 weight','Weight of rule Seo-01011 overriden by user'),
+(12,'Seo-01013',4,'Seo-01011 weight','Weight of rule Seo-01011 overriden by user'),
+(13,'Seo-01021',4,'Seo-01021 weight','Weight of rule Seo-01021 overriden by user'),
+(14,'Seo-01031',4,'Seo-01031 weight','Weight of rule Seo-01031 overriden by user'),
+(15,'Seo-01041',4,'Seo-01041 weight','Weight of rule Seo-01041 overriden by user'),
+(16,'Seo-01051',4,'Seo-01051 weight','Weight of rule Seo-01051 overriden by user'),
+(17,'Seo-01061',4,'Seo-01061 weight','Weight of rule Seo-01061 overriden by user'),
+(18,'Seo-02011',4,'Seo-02011 weight','Weight of rule Seo-02011 overriden by user'),
+(19,'Seo-02012',4,'Seo-02012 weight','Weight of rule Seo-02012 overriden by user'),
+(20,'Seo-02013',4,'Seo-02013 weight','Weight of rule Seo-02013 overriden by user'),
+(21,'Seo-03011',4,'Seo-01011 weight','Weight of rule Seo-03011 overriden by user'),
+(22,'Seo-03012',4,'Seo-03012 weight','Weight of rule Seo-03012 overriden by user'),
+(23,'Seo-05011',4,'Seo-05011 weight','Weight of rule Seo-05011 overriden by user'),
+(24,'Seo-05012',4,'Seo-05012 weight','Weight of rule Seo-05012 overriden by user'),
+(25,'Seo-05013',4,'Seo-05013 weight','Weight of rule Seo-05013 overriden by user'),
+(26,'Seo-06011',4,'Seo-06011 weight','Weight of rule Seo-06011 overriden by user'),
+(27,'Seo-06021',4,'Seo-06021 weight','Weight of rule Seo-06021 overriden by user'),
+(28,'Seo-06031',4,'Seo-06031 weight','Weight of rule Seo-06031 overriden by user'),
+(29,'Seo-06041',4,'Seo-06041 weight','Weight of rule Seo-06041 overriden by user'),
+(30,'Seo-06051',4,'Seo-06051 weight','Weight of rule Seo-06051 overriden by user'),
+(31,'Seo-06052',4,'Seo-06052 weight','Weight of rule Seo-06052 overriden by user'),
+(32,'Seo-07011',4,'Seo-07011 weight','Weight of rule Seo-07011 overriden by user'),
+(33,'Seo-07012',4,'Seo-07012 weight','Weight of rule Seo-07012 overriden by user'),
+(34,'Seo-07021',4,'Seo-07021 weight','Weight of rule Seo-07021 overriden by user'),
+(35,'Seo-07051',4,'Seo-07051 weight','Weight of rule Seo-07051 overriden by user'),
+(36,'Seo-07061',4,'Seo-07061 weight','Weight of rule Seo-07061 overriden by user'),
+(37,'Seo-08011',4,'Seo-08011 weight','Weight of rule Seo-08011 overriden by user'),
+(38,'DECORATIVE_IMAGE_MARKER',3,'Decorative image marker','Decorative image HTML marker (id or class)'),
+(39,'INFORMATIVE_IMAGE_MARKER',3,'Informative image marker','Informative image HTML marker (id or class)'),
+(40,'ALTERNATIVE_CONTRAST_MECHANISM',3,'Alternative Contrast Mechanism','The page embeds a mechanism that displays text with a correct ratio');
+
+
+INSERT INTO "parameter" VALUES 
+(1,'50000',1,FALSE),
+(2,'',2,TRUE),
+(3,'20',3,TRUE),
+(4,'0',3,FALSE),
+(5,'604800',4,FALSE),
+(6,'Seo;Or',5,FALSE),
+(7,'Seo;Ar',5,FALSE),
+(8,'Seo;Bz',5,FALSE),
+(9,'AW21;Ar',5,FALSE),
+(10,'AW21;Bz',5,FALSE),
+(11,'AW21;Or',5,FALSE),
+(12,'100',1,FALSE),
+(13,'10000',1,TRUE),
+(14,'20000',1,FALSE),
+(15,'',6,TRUE),
+(16,'',7,TRUE),
+(17,'',8,TRUE),
+(18,'',9,TRUE),
+(19,'86400',4,TRUE),
+(20,'AW22;Ar',5,TRUE),
+(21,'AW22;Bz',5,FALSE),
+(22,'AW22;Or',5,FALSE),
+(23,'',38,TRUE),
+(24,'',39,TRUE),
+(25,'true',40,FALSE),
+(26,'false',40,TRUE);
+
+
+ALTER SEQUENCE parameter_id_parameter_seq RESTART WITH 26;
+
+-- Post-data save --
+COMMIT;
