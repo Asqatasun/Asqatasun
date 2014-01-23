@@ -10,11 +10,11 @@
     <name>tanaguru</name>
     <url>http://www.tanaguru.org</url>
     <modules>
-<!--        <module>engine</module>
+        <module>engine</module>
         <module>testing-tools</module>
         <module>rules</module>
         <module>web-app</module>
-        <module>cli</module>-->
+        <module>cli</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
