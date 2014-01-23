@@ -97,13 +97,14 @@ public class EmailSenderImpl implements EmailSender {
 	@Override
 	public void sendEmail(String emailFrom, Set<String> emailToSet,
 			String emailSubject, String emailContent) {
-		boolean debug = true;
+		boolean debug = false;
 
 				// Set the host smtp address
 		Properties props = new Properties();
 		// props.put(SMTP_HOST_KEY, SMTP_HOST);
 		props.putAll(propertiesMap);
 		props.put("mail."+protocol+".host", smtpHost);
+		props.put("mail."+protocol+".starttls.enable","true");
 
 		// create some properties and get the default Session
 		Session session = Session.getInstance(props);
