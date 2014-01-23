@@ -10,11 +10,11 @@
     <name>tanaguru</name>
     <url>http://www.tanaguru.org</url>
     <modules>
-        <module>engine</module>
+<!--        <module>engine</module>
         <module>testing-tools</module>
         <module>rules</module>
         <module>web-app</module>
-        <module>cli</module>
+        <module>cli</module>-->
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -811,6 +811,10 @@
                         <groupId>com.esotericsoftware</groupId>
                         <artifactId>reflectasm</artifactId>
                     </exclusion>
+                    <exclusion>
+                        <groupId>com.google.guava</groupId>
+                        <artifactId>guava</artifactId>
+                    </exclusion>
                 </exclusions>
             </dependency>
             <dependency>
@@ -1199,6 +1203,10 @@
                         <groupId>org.apache.httpcomponents</groupId>
                         <artifactId>httpcore</artifactId>
                     </exclusion>
+                    <exclusion>
+                        <groupId>com.google.guava</groupId>
+                        <artifactId>guava</artifactId>
+                    </exclusion>
                 </exclusions>
             </dependency>
             <dependency>
@@ -1220,6 +1228,16 @@
                 <groupId>com.saucelabs</groupId>
                 <artifactId>sebuilder-interpreter</artifactId>
                 <version>1.0.2</version>
+            </dependency>
+            
+            <!-- guava is shared by heritrix and selenium but their version 
+                 are incompatible (r08 vs 15.0). The 10.0.1 is the first compatible one.
+                 Warning !! Be aware of selenium evolution !!!
+            -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>10.0.1</version>
             </dependency>
             
             <!-- html and css parsers -->
