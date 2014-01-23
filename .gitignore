@@ -70,3 +70,9 @@ web-app/tgol-security/target/
 web-app/tgol-si/target/
 web-app/tgol-voter/target/
 web-app/tgol-web-app/target/
+.project
+.classpath
+.settings
+org.eclipse.core.resources.prefs
+org.eclipse.jdt.core.prefs
+org.eclipse.m2e.core.prefs
