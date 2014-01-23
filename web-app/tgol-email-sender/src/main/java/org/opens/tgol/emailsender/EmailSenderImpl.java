@@ -22,8 +22,6 @@
 package org.opens.tgol.emailsender;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.logging.Level;
@@ -38,6 +36,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 /**
@@ -48,12 +47,10 @@ public class EmailSenderImpl implements EmailSender {
 
 	private static final Logger LOGGER = Logger
 			.getLogger(EmailSenderImpl.class);
-	private static final String SMTP_HOST_KEY = "mail.smtp.host";
 	private static final String SMTP_HOST = "localhost";
 	private static final String CONTENT_TYPE_KEY = "Content-Type";
 	private static final String FULL_CHARSET_KEY = "text/plain; charset=UTF-8";
 	private static final String CHARSET_KEY = "UTF-8";
-	private static final String PROTOCOL = "smtp";
 
 	private String smtpHost = SMTP_HOST;
 
@@ -61,28 +58,19 @@ public class EmailSenderImpl implements EmailSender {
 		this.smtpHost = smptHost;
 	}
 
-	private Map<String, String> propertiesMap = new HashMap<String, String>();
-
-	public void setPropertiesMap(Map<String, String> propertiesMap) {
-		this.propertiesMap = propertiesMap;
-	}
-
 	private String userName = "";
 
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
-	private String from;
+
+	private String from = "";
+
 	public void setFrom(String from) {
 		this.from = from;
 	}
 
 	private String password = "";
-	private String protocol = PROTOCOL;
-	public void setProtocol(String protocol) {
-		this.protocol = protocol;
-	}
 
 	public void setPassword(String password) {
 		this.password = password;
@@ -99,18 +87,17 @@ public class EmailSenderImpl implements EmailSender {
 			String emailSubject, String emailContent) {
 		boolean debug = false;
 
-				// Set the host smtp address
+		// Set the host smtp address
 		Properties props = new Properties();
-		// props.put(SMTP_HOST_KEY, SMTP_HOST);
-		props.putAll(propertiesMap);
-		props.put("mail."+protocol+".host", smtpHost);
-		props.put("mail."+protocol+".starttls.enable","true");
+		props.put("mail.smtp.host", smtpHost);
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
 
 		// create some properties and get the default Session
 		Session session = Session.getInstance(props);
 		session.setDebug(debug);
 		try {
-			Transport t = session.getTransport(protocol);
+			Transport t = session.getTransport("smtp");
 			t.connect(smtpHost, userName, password);
 
 			// create a message
@@ -119,8 +106,10 @@ public class EmailSenderImpl implements EmailSender {
 			// set the from and to address
 			InternetAddress addressFrom;
 			try {
-				// XXX replace "from" with "emailFrom"
-				addressFrom = new InternetAddress(from);
+				// Used default from address is passed one is null or empty or
+				// blank
+				addressFrom = (StringUtils.isNotBlank(emailFrom)) ? new InternetAddress(
+						emailFrom) : new InternetAddress(from);
 				msg.setFrom(addressFrom);
 				Address[] recipients = new InternetAddress[emailToSet.size()];
 				int i = 0;

@@ -11,19 +11,12 @@
            http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
 	<bean id="emailSender" class="org.opens.tgol.emailsender.EmailSenderImpl">
-		<property name="smtpHost" value="${smtp.host}" />
-		<property name="userName" value="${smtp.user}"></property>
-		<property name="from" value="${smtp.from}" />
-		<property name="password" value="${smtp.password}" />
-		<property name="propertiesMap">
-			<util:map>
-				<!-- <entry key="mail.smtp.host" value="${smtp.host}" /> -->
-				<entry key="mail.smtp.auth" value="true" />
-				<!-- <entry key="mail.smtp.port" value="587" /> -->
-				<!-- <entry key="mail.smtp.starttls.enable" value="true" /> -->
-			</util:map>
-		</property>
-
+		<!-- Uncomment the following lines if you need a specific SMTP configuration. 
+			Values are taken from tanaguru.conf configuration file. -->
+		<!-- <property name="smtpHost" value="${smtp.host}" /> -->
+		<!-- <property name="userName" value="${smtp.user}"/> -->
+		<!-- <property name="from" value="${smtp.from}" /> -->
+		<!-- <property name="password" value="${smtp.password}" /> -->
 	</bean>
 
 </beans>
