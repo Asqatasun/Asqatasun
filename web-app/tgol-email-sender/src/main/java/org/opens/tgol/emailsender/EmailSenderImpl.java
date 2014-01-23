@@ -22,97 +22,143 @@
 package org.opens.tgol.emailsender;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.logging.Level;
+
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
 import org.apache.log4j.Logger;
 
 /**
- *
+ * 
  * @author jkowalczyk
  */
 public class EmailSenderImpl implements EmailSender {
-    
-    private static final Logger LOGGER = Logger.getLogger(EmailSenderImpl.class);
-    private static final String SMTP_HOST_KEY = "mail.smtp.host";
-    private static final String SMTP_HOST = "localhost";
-    private static final String CONTENT_TYPE_KEY = "Content-Type";
-    private static final String FULL_CHARSET_KEY = "text/plain; charset=UTF-8";
-    private static final String CHARSET_KEY = "UTF-8";
-    
-    private String smptHost = SMTP_HOST;
-    public void setSmptHost(String smptHost) {
-		this.smptHost = smptHost;
+
+	private static final Logger LOGGER = Logger
+			.getLogger(EmailSenderImpl.class);
+	private static final String SMTP_HOST_KEY = "mail.smtp.host";
+	private static final String SMTP_HOST = "localhost";
+	private static final String CONTENT_TYPE_KEY = "Content-Type";
+	private static final String FULL_CHARSET_KEY = "text/plain; charset=UTF-8";
+	private static final String CHARSET_KEY = "UTF-8";
+	private static final String PROTOCOL = "smtp";
+
+	private String smtpHost = SMTP_HOST;
+
+	public void setSmtpHost(String smptHost) {
+		this.smtpHost = smptHost;
 	}
-    
 
-    /**
-     * 
-     * @param emailFrom
-     * @param emailToSet
-     * @param mailContent
-     */
-    @Override
-    public void sendEmail(
-            String emailFrom,
-            Set<String> emailToSet,
-            String emailSubject,
-            String emailContent) {
-        boolean debug = false;
+	private Map<String, String> propertiesMap = new HashMap<String, String>();
 
-        //Set the host smtp address
-        Properties props = new Properties();
-        props.put(SMTP_HOST_KEY, SMTP_HOST);
+	public void setPropertiesMap(Map<String, String> propertiesMap) {
+		this.propertiesMap = propertiesMap;
+	}
 
-        // create some properties and get the default Session
-        Session session = Session.getDefaultInstance(props, null);
-        session.setDebug(debug);
+	private String userName = "";
 
-        // create a message
-        MimeMessage msg = new MimeMessage(session);
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
+	private String from;
+	public void setFrom(String from) {
+		this.from = from;
+	}
 
-        // set the from and to address
-        InternetAddress addressFrom;
-        try {
-            addressFrom = new InternetAddress(emailFrom);
-            msg.setFrom(addressFrom);
-            Address[] recipients = new InternetAddress[emailToSet.size()];
-            int i=0;
-            for (String emailTo : emailToSet) {
-                recipients[i] = new InternetAddress(emailTo);
-                i++;
-            }
-            msg.setRecipients(Message.RecipientType.TO, recipients);
+	private String password = "";
+	private String protocol = PROTOCOL;
+	public void setProtocol(String protocol) {
+		this.protocol = protocol;
+	}
 
-            // Setting the Subject
-            msg.setSubject(emailSubject, CHARSET_KEY);
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-            // Setting content and charset (warning: both declarations of charset are needed)
-            msg.setHeader(CONTENT_TYPE_KEY, FULL_CHARSET_KEY);
-            LOGGER.debug("emailContent  " +  emailContent);
-            msg.setContent(emailContent, FULL_CHARSET_KEY);
-            try {
-                LOGGER.debug("emailContent from message object " + msg.getContent().toString());
-            } catch (IOException ex) {
-                java.util.logging.Logger.getLogger(EmailSenderImpl.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (MessagingException ex) {
-                java.util.logging.Logger.getLogger(EmailSenderImpl.class.getName()).log(Level.SEVERE, null, ex);
-            }
+	/**
+	 * 
+	 * @param emailFrom
+	 * @param emailToSet
+	 * @param mailContent
+	 */
+	@Override
+	public void sendEmail(String emailFrom, Set<String> emailToSet,
+			String emailSubject, String emailContent) {
+		boolean debug = true;
 
-            Transport.send(msg);
-        } catch (AddressException ex) {
-            LOGGER.warn(ex.getMessage());
-        } catch (MessagingException ex) {
-            LOGGER.warn(ex.getMessage());
-        }
-    }
+				// Set the host smtp address
+		Properties props = new Properties();
+		// props.put(SMTP_HOST_KEY, SMTP_HOST);
+		props.putAll(propertiesMap);
+		props.put("mail."+protocol+".host", smtpHost);
+
+		// create some properties and get the default Session
+		Session session = Session.getInstance(props);
+		session.setDebug(debug);
+		try {
+			Transport t = session.getTransport(protocol);
+			t.connect(smtpHost, userName, password);
+
+			// create a message
+			MimeMessage msg = new MimeMessage(session);
+
+			// set the from and to address
+			InternetAddress addressFrom;
+			try {
+				// XXX replace "from" with "emailFrom"
+				addressFrom = new InternetAddress(from);
+				msg.setFrom(addressFrom);
+				Address[] recipients = new InternetAddress[emailToSet.size()];
+				int i = 0;
+				for (String emailTo : emailToSet) {
+					recipients[i] = new InternetAddress(emailTo);
+					i++;
+				}
+				msg.setRecipients(Message.RecipientType.TO, recipients);
+
+				// Setting the Subject
+				msg.setSubject(emailSubject, CHARSET_KEY);
+
+				// Setting content and charset (warning: both declarations of
+				// charset are needed)
+				msg.setHeader(CONTENT_TYPE_KEY, FULL_CHARSET_KEY);
+				LOGGER.debug("emailContent  " + emailContent);
+				msg.setContent(emailContent, FULL_CHARSET_KEY);
+				try {
+					LOGGER.debug("emailContent from message object "
+							+ msg.getContent().toString());
+				} catch (IOException ex) {
+					java.util.logging.Logger.getLogger(
+							EmailSenderImpl.class.getName()).log(Level.SEVERE,
+							null, ex);
+				} catch (MessagingException ex) {
+					java.util.logging.Logger.getLogger(
+							EmailSenderImpl.class.getName()).log(Level.SEVERE,
+							null, ex);
+				}
+
+				t.sendMessage(msg, msg.getAllRecipients());
+			} catch (AddressException ex) {
+				LOGGER.warn(ex.getMessage());
+			}
+		} catch (NoSuchProviderException e) {
+			LOGGER.warn(e.getMessage());
+		} catch (MessagingException e) {
+			LOGGER.warn(e.getMessage());
+		}
+	}
 
 }

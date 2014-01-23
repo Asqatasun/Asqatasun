@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:util="http://www.springframework.org/schema/util"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.0.xsd
            http://www.springframework.org/schema/beans
@@ -12,8 +10,20 @@
            http://www.springframework.org/schema/util
            http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="emailSender" class="org.opens.tgol.emailsender.EmailSenderImpl">
-    	<property name="smptHost" value="${smtp.host}"/>
-    </bean>
+	<bean id="emailSender" class="org.opens.tgol.emailsender.EmailSenderImpl">
+		<property name="smtpHost" value="${smtp.host}" />
+		<property name="userName" value="${smtp.user}"></property>
+		<property name="from" value="${smtp.from}" />
+		<property name="password" value="${smtp.password}" />
+		<property name="propertiesMap">
+			<util:map>
+				<!-- <entry key="mail.smtp.host" value="${smtp.host}" /> -->
+				<entry key="mail.smtp.auth" value="true" />
+				<!-- <entry key="mail.smtp.port" value="587" /> -->
+				<!-- <entry key="mail.smtp.starttls.enable" value="true" /> -->
+			</util:map>
+		</property>
+
+	</bean>
 
 </beans>
