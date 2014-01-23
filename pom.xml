@@ -1161,7 +1161,7 @@
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-java</artifactId>
-                <version>2.35.0</version>
+                <version>LATEST</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.seleniumhq.selenium</groupId>
@@ -1219,7 +1219,7 @@
             <dependency>
                 <groupId>com.saucelabs</groupId>
                 <artifactId>sebuilder-interpreter</artifactId>
-                <version>1.0.2-OPEN-S</version>
+                <version>1.0.2</version>
             </dependency>
             
             <!-- html and css parsers -->
