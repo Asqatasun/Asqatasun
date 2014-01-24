@@ -56,11 +56,11 @@ Whether your contribution is a full-fledged feature or a mere typo fix, the proc
 1. push one last time your local branch on your GitHub fork,
 1. send a pull request for that branch!
 
-Let's see the corresponding commands for that:
+Let's see that process in details.
 
 ### Creating the work branch from an up-to-date version of `develop`:
 
-* First, switch to your local `develop` branch and update it from the official Tanaguru repository:
+First, switch to your local `develop` branch and update it from the official Tanaguru repository:
 
 `git checkout develop`
 `git pull upstream develop`
@@ -69,7 +69,7 @@ If some actual updates come in, you may want to push them to your fork, so as to
 
 `git push`
 
-* Now create your local work branch from that point:
+Now create your local work branch from that point:
 
 `git checkout -b my_work_branch`
 
