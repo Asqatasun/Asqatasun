@@ -83,6 +83,7 @@ Well, you should know how to do that one ;)
 This one should go something like:
 
 `git add .`
+
 `git commit -m "my commit message with usefull informations in it"`
 
 Refer to [Scott Chacon's Pro Git](http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository) for more information on how to work with Git.
