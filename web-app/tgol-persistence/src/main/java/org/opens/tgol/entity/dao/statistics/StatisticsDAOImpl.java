@@ -22,17 +22,14 @@
 package org.opens.tgol.entity.dao.statistics;
 
 import java.math.BigInteger;
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.displaytag.properties.SortOrderEnum;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Theme;
-import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
+import org.opens.tanaguru.entity.statistics.*;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 import org.opens.tgol.presentation.data.FailedPageInfo;
@@ -90,7 +87,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
     private static final String DESC_STR = " DESC ";
     private static final String ASC_STR = " ASC ";
     private static final String PARAMETRABLE_LIMIT_STR = " LIMIT :nbOfResult ";
-    private static final String PARAMETRABLE_WINDOW_STR = ",:window ";
+    private static final String PARAMETRABLE_WINDOW_STR = "OFFSET :window ";
     private static final String URL_FIELD_STR = " w.Url ";
     private static final String ID_WEB_RESOURCE_FIELD_STR = " w.Id_Web_Resource ";
 
@@ -133,10 +130,10 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
 
     private static final String AUDIT_AND_STATUS_CODE_CONDITION = 
             "WHERE wrs.Id_Audit=:idAudit "
-            + "AND (wrs.Http_Status_Code like :httpStatusCode";
+            + "AND ( CAST(wrs.Http_Status_Code AS char(4)) like :httpStatusCode ";
     
     private static final String EXTRA_HTTP_STATUS_CODE_CONDITION =
-             " OR wrs.Http_Status_Code like :extraHttpStatusCode )";
+             " OR CAST(wrs.Http_Status_Code AS char(4)) like :extraHttpStatusCode )";
 
     private static final String CONTAINING_VALUE_CONDITION = 
              " AND w.Url like :containingValue ";
@@ -146,7 +143,19 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
 
     @Override
     protected Class<? extends WebResourceStatistics> getEntityClass() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return WebResourceStatisticsImpl.class;
+    }
+    
+    protected Class<? extends CriterionStatistics> getCriterionStatisticsEntityClass() {
+        return CriterionStatisticsImpl.class;
+    }
+    
+    protected Class<? extends TestStatistics> getTestStatisticsEntityClass() {
+        return TestStatisticsImpl.class;
+    }
+    
+    protected Class<? extends ThemeStatistics> getThemeStatisticsEntityClass() {
+        return ThemeStatisticsImpl.class;
     }
 
     /**
@@ -232,21 +241,34 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         query.setParameter("idWebResource", webResource.getId());
         query.setParameter("idAudit", audit.getId());
         query.setParameter("nbOfResult", nbOfResult);
-        Set<FailedThemeInfo> failedThemeInfoSet = new LinkedHashSet<FailedThemeInfo>();
-        List<Object[]> result = null;
+        
         try {
-            result = (List<Object[]>)query.getResultList();
+            List<Object[]> result = (List<Object[]>)query.getResultList();
+            if (result.isEmpty()) {
+                return Collections.EMPTY_SET;
+            }
+            return convertRawResultAsFailedThemeInfo(result);
         } catch (NoResultException nre) {
-            return failedThemeInfoSet;
+            return Collections.EMPTY_SET;
         }
+    }
+
+    /**
+     * 
+     * @param result
+     * @return a collection of FailedThemeInfo from a raw result collection
+     */
+    private Set<FailedThemeInfo> convertRawResultAsFailedThemeInfo(Collection<Object[]> result) {
+        Set<FailedThemeInfo> failedThemeInfoSet = new LinkedHashSet<FailedThemeInfo>();
         for (Object[] obj : result) {
-            FailedThemeInfo fti = FailedThemeInfoFactory.getInstance().getFailedThemeInfo(((BigInteger)obj[0]).longValue(),
-                    ((Integer)obj[1]).longValue());
+            FailedThemeInfo fti = FailedThemeInfoFactory.getInstance().getFailedThemeInfo(
+                        ((BigInteger)obj[0]).longValue(),
+                        ((Integer)obj[1]).longValue());
             failedThemeInfoSet.add(fti);
         }
         return failedThemeInfoSet;
     }
-
+    
     /**
      * Native sql query :
      * SELECT t.Cd_Test, t.Label, ts.Nb_Failed
@@ -290,16 +312,31 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         query.setParameter("idWebResource", webResource.getId());
         query.setParameter("idAudit", audit.getId());
         query.setParameter("nbOfResult", nbOfResult);
-        Set<FailedTestInfo> failedTestInfoSet = new LinkedHashSet<FailedTestInfo>();
-        List<Object[]> result=  null;
+
         try {
-            result = (List<Object[]>)query.getResultList();
+            List<Object[]> result = (List<Object[]>)query.getResultList();
+            if (result.isEmpty()) {
+                return Collections.EMPTY_SET;
+            }
+            return convertRawResultAsFailedTestInfo(result);
         } catch (NoResultException e) {
-            return failedTestInfoSet;
+            return Collections.EMPTY_SET;
         }
+    }
+
+    /**
+     * 
+     * @param result
+     * @return a collection of FailedTestInfo from a raw result collection
+     */
+    private Set<FailedTestInfo> convertRawResultAsFailedTestInfo(Collection<Object[]> result) {
+        Set<FailedTestInfo> failedTestInfoSet = new LinkedHashSet<FailedTestInfo>();
         for (Object[] obj : result) {
             if ((Integer)obj[2] > 0) {
-                FailedTestInfo fti = FailedTestInfoFactory.getInstance().getFailedTestInfo((String)obj[0], (String)obj[1], ((Integer)obj[2]).longValue());
+                FailedTestInfo fti = FailedTestInfoFactory.getInstance().getFailedTestInfo(
+                        (String)obj[0], 
+                        (String)obj[1], 
+                        ((Integer)obj[2]).longValue());
                 failedTestInfoSet.add(fti);
             }            
         }
@@ -383,22 +420,16 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         Query query = entityManager.createNativeQuery(queryString.toString());
         query.setParameter("idAudit", audit.getId());
         query.setParameter("nbOfResult", nbOfResults);
-        Set<FailedPageInfo> failedPageInfoSet = new LinkedHashSet<FailedPageInfo>();
-        List<Object[]> result = null;
+        
         try {
-            result = (List<Object[]>)query.getResultList();
+            List<Object[]> result = (List<Object[]>)query.getResultList();
+            if (result.isEmpty()) {
+                return Collections.EMPTY_SET;
+            }
+            return convertRawResultAsFailedPageInfo(result);
         } catch (NoResultException e) {
-            return failedPageInfoSet;
+            return Collections.EMPTY_SET;
         }
-        for (Object[] obj : result) {
-            FailedPageInfo fti = FailedPageInfoFactory.getInstance().getFailedPageInfo(
-                    (String)obj[0],
-                    ((BigInteger)obj[1]).longValue(),
-                    ((Integer)obj[2]).longValue(),
-                    ((Integer)obj[3]).longValue());
-            failedPageInfoSet.add(fti);
-        }
-        return failedPageInfoSet;
     }
 
     /**
@@ -445,13 +476,25 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         Query query = entityManager.createNativeQuery(queryString.toString());
         query.setParameter("idAudit", audit.getId());
         query.setParameter("nbOfResult", nbOfResults);
-        Set<FailedPageInfo> failedPageInfoSet = new LinkedHashSet<FailedPageInfo>();
-        List<Object[]> result = null;
+        
         try {
-            result = (List<Object[]>)query.getResultList();
+            List<Object[]>  result = (List<Object[]>)query.getResultList();
+            if (result.isEmpty()) {
+                return Collections.EMPTY_SET;
+            }
+            return convertRawResultAsFailedPageInfo(result);
         } catch (NoResultException e) {
-            return failedPageInfoSet;
+            return Collections.EMPTY_SET;
         }
+    }
+
+    /**
+     * 
+     * @param result
+     * @return a collection of FailedPageInfo from a raw result collection
+     */
+    private Set<FailedPageInfo> convertRawResultAsFailedPageInfo(Collection<Object[]> result) {
+        Set<FailedPageInfo> failedPageInfoSet = new LinkedHashSet<FailedPageInfo>();
         for (Object[] obj : result) {
             FailedPageInfo fti = FailedPageInfoFactory.getInstance().getFailedPageInfo(
                     (String)obj[0],
@@ -462,7 +505,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         }
         return failedPageInfoSet;
     }
-
+    
     /**
      * Native sql query :
      * SELECT Mark
@@ -551,7 +594,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
     @Override
     public Long findWebResourceCountByAuditAndHttpStatusCode(
             Long idAudit,
-            HttpStatusCodeFamily httpStatusCode,
+            HttpStatusCodeFamily httpStatusCode,  
             String invalidTestLabel,
             String containingValue) {
         boolean hasContainingValue = false;
@@ -643,8 +686,8 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
             Long idAudit,
             HttpStatusCodeFamily httpStatusCode,
             String invalidTestLabel,
-            int nbOfResult,
             int window,
+            int nbOfResult,
             SortOrderEnum sortDirection,
             String sortCriterion,
             String containingValue) {
@@ -705,7 +748,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         } else {
             queryString.append(ASC_STR);
         }
-        if (window != -1) {
+        if (nbOfResult != -1) {
             queryString.append(PARAMETRABLE_LIMIT_STR);
             queryString.append(PARAMETRABLE_WINDOW_STR);
         }
@@ -716,7 +759,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
             query.setParameter("extraHttpStatusCode", HttpStatusCodeFamily.f5xx.getCode() + "%");
         }
         query.setParameter("idAudit", idAudit);
-        if (window != -1) {
+        if (nbOfResult != -1) {
             query.setParameter("nbOfResult", nbOfResult);
             query.setParameter("window", window);
         }
@@ -726,26 +769,58 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         if (hasInvalidTestConstraint) {
             query.setParameter("invalidTestLabel", invalidTestLabel);
         }
-        Set<PageResult> failedPageInfoSet = new LinkedHashSet<PageResult>();
-        List<Object[]> result = null;
+        
         try {
-            result = (List<Object[]>)query.getResultList();
+            List<Object[]> result = (List<Object[]>)query.getResultList();
+            if (result.isEmpty()) {
+                return Collections.EMPTY_SET;
+            }
+            return convertRawResultAsPageResultSet(result);
         } catch (NoResultException e) {
-            return failedPageInfoSet;
+            return Collections.EMPTY_SET;
         }
+    }
+
+    /**
+     * 
+     * @param result
+     * @return a collection of PageResult from a raw result collection
+     */
+    private Set<PageResult> convertRawResultAsPageResultSet(Collection<Object[]> result) {
+        Set<PageResult> failedPageInfoSet = new LinkedHashSet<PageResult>();
         for (Object[] obj : result) {
+            
+            Float weightedMark;
+            // cast to deal with different sgbd interpretation
+            if (obj[2] instanceof Float) {
+                weightedMark = (Float)obj[2];
+            } else if (obj[2] instanceof Double) {
+                weightedMark = ((Double)obj[2]).floatValue();
+            } else {
+                weightedMark = (Float)obj[2];
+            }
+
+            Float rawMark;
+            if (obj[3] instanceof Float) {
+                rawMark = (Float)obj[3];
+            } else if (obj[3] instanceof Double) {
+                rawMark = ((Double)obj[3]).floatValue();
+            } else {
+                rawMark = (Float)obj[3];
+            }
+
             PageResult fti = PageResultFactory.getInstance().getPageResult(
                     (String)obj[0],
                     (Integer)obj[1], // rank
-                    ((Float)obj[2]), //weighted mark
-                    ((Float)obj[3]), // raw mark
+                    weightedMark, //weighted mark
+                    rawMark, // raw mark
                     ((BigInteger)obj[4]).longValue(), //webresource Id
                     ((Integer)obj[5]).toString()); // http status code
             failedPageInfoSet.add(fti);
         }
         return failedPageInfoSet;
     }
-
+    
     /**
      * This method returns the appropriate native sql field for a given 
      * testSolution.
