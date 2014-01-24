@@ -63,6 +63,7 @@ Let's see that process in details.
 First, switch to your local `develop` branch and update it from the official Tanaguru repository:
 
 `git checkout develop`
+
 `git pull upstream develop`
 
 If some actual updates come in, you may want to push them to your fork, so as to keep it up-to-date:
