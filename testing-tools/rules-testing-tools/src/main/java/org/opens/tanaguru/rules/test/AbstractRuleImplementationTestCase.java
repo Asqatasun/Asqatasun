@@ -310,7 +310,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
                     }
                 }
             }
-            contentMap.put(webResource, contentAdapterService.adaptContent(contentMap.get(webResource),""));
+            contentMap.put(webResource, contentAdapterService.adaptContent(contentMap.get(webResource)));
         }
     }
 

@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -22,6 +22,7 @@
 package org.opens.tanaguru.contentadapter;
 
 import java.util.List;
+import org.opens.tanaguru.contentadapter.util.AdaptationActionVoter;
 import org.opens.tanaguru.entity.audit.Content;
 
 /**
@@ -30,6 +31,16 @@ import org.opens.tanaguru.entity.audit.Content;
  */
 public class ContentsAdapterFactoryImpl implements ContentsAdapterFactory {
 
+    private AdaptationActionVoter xmlizeVoter;
+    public void setXmlizeVoter(AdaptationActionVoter xmlizeVoter) {
+        this.xmlizeVoter = xmlizeVoter;
+    }
+    
+    private AdaptationActionVoter parseHtmlVoter;
+    public void setParseHtmlVoter(AdaptationActionVoter parseHtmlVoter) {
+        this.parseHtmlVoter = parseHtmlVoter;
+    }
+    
     public ContentsAdapterFactoryImpl() {
         super();
     }
@@ -41,38 +52,19 @@ public class ContentsAdapterFactoryImpl implements ContentsAdapterFactory {
             String tempFolderRootPath,
             HTMLCleaner htmlCleaner,
             HTMLParser htmlParser) {
-        return new ContentsAdapterImpl(
+        ContentsAdapterImpl contentsAdapter = new ContentsAdapterImpl(
                 contentList,
                 writeCleanHtmlInFile,
                 tempFolderRootPath,
                 htmlCleaner,
                 htmlParser);
-    }
-
-    @Override
-    public ContentsAdapter create(
-            List<Content> contentList, 
-            boolean writeCleanHtmlInFile, 
-            String tempFolderRootPath, 
-            HTMLCleaner htmlCleaner, 
-            HTMLParser htmlParser, 
-            String ref) {
-        
-        // While accessiweb 2.1 rules are not based on jsoup, some specific 
-        // treatment has to be done on the DOM : 
-        // remove the doctype and set tags to upper case
-        
-        boolean removeDoctype = false;
-        if (ref.equals("AW21")) {
-            removeDoctype = true;
+        if (parseHtmlVoter != null) {
+            contentsAdapter.setParseHtmlVoter(parseHtmlVoter);
         }
-        return new ContentsAdapterImpl(
-                contentList,
-                writeCleanHtmlInFile,
-                tempFolderRootPath,
-                htmlCleaner,
-                htmlParser, 
-                removeDoctype);
+        if (xmlizeVoter != null) {
+            contentsAdapter.setXmlizeVoter(xmlizeVoter);
+        }
+        return contentsAdapter;
     }
 
 }

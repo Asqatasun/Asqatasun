@@ -66,8 +66,6 @@ public abstract class AuditCommandImpl implements AuditCommand {
     public static final int DEFAULT_ADAPTATION_TREATMENT_WINDOW = 4;
     public static final int DEFAULT_CONSOLIDATION_TREATMENT_WINDOW = 200;
     
-    private String referential;
-
     private int adaptationTreatmentWindow = DEFAULT_ADAPTATION_TREATMENT_WINDOW;
     public void setAdaptationTreatmentWindow(int adaptationTreatmentWindow) {
         this.adaptationTreatmentWindow = adaptationTreatmentWindow;
@@ -235,7 +233,6 @@ public abstract class AuditCommandImpl implements AuditCommand {
         parameterDataService.saveOrUpdate(paramSet);
         audit.setTestList(testDataService.getTestListFromParamSet(paramSet));
         audit.setParameterSet(paramSet);
-        referential = extractReferentialFromParamSet(paramSet);
         setStatusToAudit(AuditStatus.INITIALISATION);
     }
     
@@ -295,7 +292,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
             // Set the referential to the contentAdapterService due to different
             // behaviour in the implementation. Has to be removed when accessiweb 2.1
             // implementations will be based on jsoup.
-            contentSet.addAll(contentAdapterService.adaptContent(contentList, referential));
+            contentSet.addAll(contentAdapterService.adaptContent(contentList));
             
             endProcessDate = Calendar.getInstance().getTime();
             LOGGER.debug(
@@ -848,21 +845,4 @@ public abstract class AuditCommandImpl implements AuditCommand {
         audit = auditDataService.saveOrUpdate(audit);
     }
  
-    /**
-     * Extract the referential from the LEVEL parameter
-     * 
-     * @param paramSet
-     * @return 
-     */
-    private String extractReferentialFromParamSet(Set<Parameter> paramSet) {
-        if (paramSet != null) {
-            for (Parameter param : paramSet) {
-                if (param.getParameterElement().getParameterElementCode().equals("LEVEL")) {
-                    return param.getValue().split(";")[0];
-                }
-            }
-        }
-        return "";
-    }
-
 }

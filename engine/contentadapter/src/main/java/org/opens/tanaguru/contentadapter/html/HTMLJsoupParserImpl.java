@@ -23,7 +23,7 @@ package org.opens.tanaguru.contentadapter.html;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.Set;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -39,7 +39,7 @@ import org.opens.tanaguru.entity.audit.SSP;
  */
 public class HTMLJsoupParserImpl implements HTMLParser {
 
-    protected Set<ContentAdapter> contentAdapterSet = new HashSet<ContentAdapter>();
+    protected Set<ContentAdapter> contentAdapterSet = Collections.EMPTY_SET;
     protected boolean initialized = false;
     protected SSP ssp;
 
@@ -60,6 +60,9 @@ public class HTMLJsoupParserImpl implements HTMLParser {
 
     @Override
     public void run() {
+        if (contentAdapterSet.isEmpty()) {
+            return;
+        }
         Document doc = Jsoup.parse(ssp.getDOM(), ssp.getURI());
 
         Collection<Element> inlineCssElementList = new ArrayList<Element>();
