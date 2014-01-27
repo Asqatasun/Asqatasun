@@ -27,7 +27,7 @@ import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG;
 import org.opens.tanaguru.rules.rgaa22.test.Rgaa22RuleImplementationTestCase;
 
 /**
@@ -76,14 +76,14 @@ public class Rgaa22Rule06251Test extends Rgaa22RuleImplementationTestCase {
          // check type of remarks and their value
         assertNotNull(processResult.getRemarkSet());
         SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(MANUAL_CHECK_ON_ELEMENTS_MSG, processRemark.getMessageCode());
+        assertEquals(CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG, processRemark.getMessageCode());
         // check number, type and value of remarks
         assertNotNull(processResult.getRemarkSet());
         assertEquals(2, processResult.getRemarkSet().size());
        
         for (ProcessRemark remark : processResult.getRemarkSet()) {
             processRemark = (SourceCodeRemark)remark;
-            assertEquals(MANUAL_CHECK_ON_ELEMENTS_MSG, processRemark.getMessageCode());
+            assertEquals(CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG, processRemark.getMessageCode());
         }
         
         //----------------------------------------------------------------------
