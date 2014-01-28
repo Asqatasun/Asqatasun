@@ -111,7 +111,7 @@ public class TgTestRunFactory extends TestRunFactory {
                 script, 
                 webDriverFactory, 
                 new HashMap<String, String>(), 
-                getImplicitelyWaitDriverTimeout(), 
+                getImplicitlyWaitDriverTimeout(), 
                 getPageLoadDriverTimeout());
         testRun.addNewPageListeners(newPageListeners);
         testRun.setJsScriptMap(jsScriptMap);
@@ -129,7 +129,7 @@ public class TgTestRunFactory extends TestRunFactory {
                     log, 
                     webDriverFactory, 
                     webDriverConfig, 
-                    getImplicitelyWaitDriverTimeout(), 
+                    getImplicitlyWaitDriverTimeout(), 
                     getPageLoadDriverTimeout());
         testRun.addNewPageListeners(newPageListeners);
         testRun.setJsScriptMap(jsScriptMap);
