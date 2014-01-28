@@ -31,7 +31,7 @@ All is here: http://www.tanaguru.org/en/content/documentation
 
 More precisely:
 
-* [Installation](http://www.tanaguru.org/content/installation-3x)
+* [Installation](http://www.tanaguru.org/en/content/tanaguru-3x)
 * [Configuration](http://www.tanaguru.org/en/content/configuration)
 * [How to build](http://www.tanaguru.org/en/content/how-build)
 
