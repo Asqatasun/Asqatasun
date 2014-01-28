@@ -20,7 +20,13 @@
 
 package org.opens.tanaguru.rules.rgaa22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.ruleimplementation.link.AbstractDownloadableLinkRuleImplementation;
+import org.opens.tanaguru.rules.elementchecker.text.TextEndsWithChecker;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.HREF_ATTR;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 6.26 of the referential RGAA 2.2.
@@ -30,13 +36,29 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule06261 extends AbstractNotTestedRuleImplementation {
+public class Rgaa22Rule06261  extends AbstractDownloadableLinkRuleImplementation {
+
+    /* the browser readable extensions nomenclature */
+    private static final String OFFICE_DOC_EXT_NOM = "DownloadableDocumentExtensions";
 
     /**
      * Default constructor
      */
     public Rgaa22Rule06261 () {
-        super();
+        super(
+                new TextEndsWithChecker(
+                    // the href attribute is tested
+                    new TextAttributeOfElementBuilder(HREF_ATTR), 
+                    // the nomenclature listing the extensions to test
+                    OFFICE_DOC_EXT_NOM, 
+                    // the result when detected
+                    TestSolution.NEED_MORE_INFO, 
+                    // the message when detected
+                    DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG, 
+                    // the evidence elements
+                    HREF_ATTR, 
+                    TITLE_ATTR)
+            );
     }
 
 }

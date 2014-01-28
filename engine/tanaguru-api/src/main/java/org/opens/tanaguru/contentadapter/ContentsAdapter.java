@@ -72,10 +72,4 @@ public interface ContentsAdapter {
      */
     void setWriteCleanHtmlInFile(Boolean writeCleanHtmlInFile);
     
-    /**
-     * 
-     * @param removeDoctype 
-     */
-    void setRemoveDoctype(Boolean removeDoctype);
-
 }

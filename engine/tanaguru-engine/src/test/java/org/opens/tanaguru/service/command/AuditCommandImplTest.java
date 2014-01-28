@@ -305,7 +305,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         List<Content> mockAdaptedContentList = new ArrayList<Content>();
         mockAdaptedContentList.add(mockSSP);
         
-        expect(mockContentAdapterService.adaptContent(new ArrayList<Content>(),"")).
+        expect(mockContentAdapterService.adaptContent(new ArrayList<Content>())).
                 andReturn(mockAdaptedContentList).times(2);
         
         expect(mockContentDataService.saveOrUpdate(mockSSP)).

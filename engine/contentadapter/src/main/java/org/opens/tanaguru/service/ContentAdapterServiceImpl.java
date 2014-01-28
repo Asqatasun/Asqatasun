@@ -37,7 +37,7 @@ public class ContentAdapterServiceImpl implements ContentAdapterService {
     }
 
     @Override
-    public List<Content> adaptContent(List<Content> contentList, String referential) {
+    public List<Content> adaptContent(List<Content> contentList) {
 
         Set<ContentAdapter> contentAdapterSet = new HashSet<ContentAdapter>();
         
@@ -54,8 +54,7 @@ public class ContentAdapterServiceImpl implements ContentAdapterService {
                 writeCleanHtmlInFile, 
                 tempFolderRootPath, 
                 htmlCleanerFactory.create(), 
-                htmlParserFactory.create(contentAdapterSet), 
-                referential);
+                htmlParserFactory.create(contentAdapterSet));
         adapter.run();
         return adapter.getResult();
     }

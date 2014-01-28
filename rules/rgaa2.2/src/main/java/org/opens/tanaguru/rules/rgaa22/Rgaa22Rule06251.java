@@ -22,11 +22,10 @@ package org.opens.tanaguru.rules.rgaa22;
 
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
-import org.opens.tanaguru.rules.elementselector.ElementSelector;
 import org.opens.tanaguru.rules.elementselector.MultipleElementSelector;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.EMBED_ELEMENT;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.OBJECT_ELEMENT;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG;
 
 /**
  * Implementation of the rule 6.25 of the referential RGAA 2.2.
@@ -37,23 +36,19 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_
  * @author jkowalczyk
  */
 public class Rgaa22Rule06251 extends AbstractDetectionPageRuleImplementation {
-    /** The element selector */
-    private static final ElementSelector ELEMENT_SELECTOR = 
-            new MultipleElementSelector(OBJECT_ELEMENT, EMBED_ELEMENT);
-    
     
     /**
      * Default constructor
      */
     public Rgaa22Rule06251 () {
                super(
-                ELEMENT_SELECTOR,
+                new MultipleElementSelector(OBJECT_ELEMENT, EMBED_ELEMENT),
                 // solution when at least one element is found
                 TestSolution.NEED_MORE_INFO,
                 // solution when no element is found
                 TestSolution.NOT_APPLICABLE,
                 // manual check message
-                MANUAL_CHECK_ON_ELEMENTS_MSG,
+                CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG,
                 null 
             );
     }
