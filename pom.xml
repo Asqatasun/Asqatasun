@@ -1326,5 +1326,15 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+        <repository>
+            <id>fdvsolution.public</id>
+            <url>http://archiva.fdvs.com.ar/repository/public1/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
     </repositories>
 </project>
