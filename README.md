@@ -81,7 +81,8 @@ Or you can send an email to
 ## Content of this (last) version
 
 Bugs :
-#636 : Clean-up step at the end of audit may cause deadlock on CONTENT table (https://dev.tanaguru.org/redmine/issues/636)
+
+* \#636 : Clean-up step at the end of audit may cause deadlock on CONTENT table (https://dev.tanaguru.org/redmine/issues/636)
 
 
 Have Fun
