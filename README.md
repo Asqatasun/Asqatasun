@@ -3,7 +3,6 @@
 Tanaguru is an opensource (AGPL license) website assessment tool dedicated to
 
 * accessibility (a11y) audits,  
-* search engine optimisation (SEO) audits.
 
 ## Features
 
@@ -28,7 +27,13 @@ http://www.tanaguru.org/Download/tanaguru-latest.tar.gz
 
 ## Installation and documentation
 
-http://www.tanaguru.org/en/content/documentation
+All is here: http://www.tanaguru.org/en/content/documentation
+
+More precisely:
+
+* [Installation](http://www.tanaguru.org/content/installation-3x)
+* [Configuration](http://www.tanaguru.org/en/content/configuration)
+* [How to build](http://www.tanaguru.org/en/content/how-build)
 
 ## Business: accessibility
 
@@ -42,28 +47,42 @@ What tests are covered:
 
 By january 2014, this represents [~170 accessibility tests](http://www.tanaguru.org/en/content/accessiweb-22-coverage)
 
-## Business: SEO
-
-* test each page with a set of WCAG-inspired tests (e.g. precence+relevancy of h1, precence+relevancy of title, relevancy of hx structure...)
-* test each site for duplicate content
- * duplicate title
- * duplicate h1
-
 ## Links
 
 * [Tanaguru wiki](http://www.tanaguru.org) (registration is warmly welcomed, please email mfaure AT tanaguru. org)
-* while waiting to move to Git/Github, [Tanaguru source code](https://adullact.net/scm/?group_id=663)
 
-## Other tools
+## Vision expanded
 
 Last point to complete the vision:
 
 * and create other tools if needed
 
-See also:
+So you can see also
 
 * [KBAccess](http://www.kbaccess.org/) : database of good and bad examplee
 * [Tanaguru Contrast-Finder](http://contrast-finder.tanaguru.com/) : for a given wrong contrast, *propose* good color combination
 * [Accessibility observatory](http://observatoire-accessibilite.org/) : have an overview of the accessibility of a large set of websites
  
 All these projects are opensource and also under the umbrella of [Tanaguru Github account](https://github.com/Tanaguru)
+
+## Contact and mailing-list
+
+We have a mailing lists dedicated to Tanaguru user and development
+discussion. To subscribe, send an empty message to :
+
+        tanaguru-users-fr@lists.adullact.net
+
+Or you can send an email to 
+
+        tanaguru AT tanaguru dot org 
+
+(only english, french and klingon is spoken :) ) 
+
+## Content of this (last) version
+
+Bugs :
+#636 : Clean-up step at the end of audit may cause deadlock on CONTENT table (https://dev.tanaguru.org/redmine/issues/636)
+
+
+Have Fun
+Tanaguru team
