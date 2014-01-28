@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Rgaa22 Test.6.15 Failed 19</title>
+    </head>
+    <body>
+        <div>
+
+            <div class="test-detail" lang="fr">
+                Cohérence de la destination ou de l’action des liens ayant un intitulé identique
+            </div>
+
+            <div class="testcase">
+
+                <a href="my-link.html" title=" This is a combined link" >
+                    <span>cliquez</span>
+                    <img src="image.jpg" alt="ici"/>
+                </a>
+
+                <a href="link2.htm" title="This is a combined link " >
+                    <img src="image.jpg" alt="cliquez "/>
+                    <span>ici</span>
+                </a>
+
+                <h1>
+                    <a href="my-link.html">
+                        <object data="data.png">
+                            cliquez 
+                        </object>
+                        ici
+                    </a>
+                </h1>
+
+                <h2>
+                    <a href="link2.htm">
+                        <object data="data.png">
+                            CLIQUEZ 
+                        </object>
+                        ICI
+                    </a>
+                </h2>
+            </div>
+            <p class="test-explanation">Failed : The page contains two identical links without context and with different target</p>
+            <p class="test-explanation">Two identical links with context are also present in the page</p>
+        </div>
+    </body>
+</html>

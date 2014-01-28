@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>RGAA22 Test.6.14 NMI 22</title>
+    </head>
+    <body>
+        <div>
+
+            <div class="test-detail" lang="fr">
+                Possibilité d’identifier la destination ou l’action des liens et des boutons (intitulé seul)
+            </div>
+
+            <p class="test-detail" lang="fr">
+                <a href="my-link.html" title="cliquez ici">
+                    <img src="image.jpg" alt="unpredictable content pertinence"/>
+                    pertinence
+                </a>
+            </p>
+
+            <p class="test-detail" lang="fr">
+                <a href="my-link.html" title="cliquez ici">
+                    unpredictable 
+                    <object data="data.png">
+                        content pertinence
+                    </object>
+                </a>
+            </p>
+
+            <p class="test-explanation">NMI : The image link belongs to the image link blacklist but the context may precise the link function and destination. A warning is thrown</p>
+
+        </div>
+    </body>
+</html>

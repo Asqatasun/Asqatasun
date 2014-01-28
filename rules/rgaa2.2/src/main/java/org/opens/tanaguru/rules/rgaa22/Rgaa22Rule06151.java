@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -20,7 +20,16 @@
 
 package org.opens.tanaguru.rules.rgaa22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.processor.SSPHandler;
+import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
+import org.opens.tanaguru.ruleimplementation.link.AbstractAllLinkAggregateRuleImplementation;
+import org.opens.tanaguru.rules.elementchecker.link.IdenticalLinkWithDifferentTargetChecker;
+import org.opens.tanaguru.rules.elementselector.AreaLinkElementSelector;
+import org.opens.tanaguru.rules.elementselector.CompositeLinkElementSelector;
+import org.opens.tanaguru.rules.elementselector.LinkElementSelector;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_BUTTON_WITH_SAME_TEXT_LEAD_TO_SAME_ACTION_MSG;
 
 /**
  * Implementation of the rule 6.15 of the referential RGAA 2.2.
@@ -30,13 +39,39 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule06151 extends AbstractNotTestedRuleImplementation {
-
+public class Rgaa22Rule06151 extends AbstractAllLinkAggregateRuleImplementation {
+    
     /**
-     * Default constructor
+     * Constructor
+     * 
+     * @param linkElementSelector
+     * @param decidableElementsChecker
+     * @param notDecidableElementsChecker
      */
     public Rgaa22Rule06151 () {
-        super();
+        super(new LinkElementSelector(false, true), 
+              new CompositeLinkElementSelector(false, true, true),
+              new AreaLinkElementSelector(false, true),
+              new CompositeLinkElementSelector(false, true, false),
+              new IdenticalLinkWithDifferentTargetChecker(false),
+              new IdenticalLinkWithDifferentTargetChecker(true)
+        );
     }
 
+    @Override
+    protected void checkButtonSelection(
+            SSPHandler sspHandler, 
+            ElementHandler formButtonHandler, 
+            TestSolutionHandler testSolutionHandler) {        
+        // after all checks, if the test is passed, we check whether some form 
+        // buttons are present on the page and set the result as NMI
+        if (testSolutionHandler.getTestSolution().equals(TestSolution.PASSED)
+                && !formButtonHandler.isEmpty()) {
+            testSolutionHandler.addTestSolution(TestSolution.NEED_MORE_INFO);
+            sspHandler.getProcessRemarkService().addProcessRemark(
+                    TestSolution.NEED_MORE_INFO, 
+                    CHECK_BUTTON_WITH_SAME_TEXT_LEAD_TO_SAME_ACTION_MSG);
+        }
+    }
+    
 }

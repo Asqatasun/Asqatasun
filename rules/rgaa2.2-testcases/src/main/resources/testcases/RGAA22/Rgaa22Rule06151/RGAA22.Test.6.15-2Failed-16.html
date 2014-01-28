@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Rgaa22 Test.6.15 Failed 16</title>
+    </head>
+    <body>
+        <div>
+
+            <div class="test-detail" lang="fr">
+                Cohérence de la destination ou de l’action des liens ayant un intitulé identique
+            </div>
+
+            <div class="testcase">
+
+                <a href="my-link.html" >
+                    CLIQUEZ 
+                    <img src="image.jpg" alt="ICI "/>
+                </a>
+
+                <a href="link2.htm">
+                    <img src="image.jpg" alt="cliquez "/>
+                    ici
+                </a>
+            </div>
+            <p class="test-explanation">Failed : The page contains two identical links without context and with different target</p>
+
+        </div>
+    </body>
+</html>

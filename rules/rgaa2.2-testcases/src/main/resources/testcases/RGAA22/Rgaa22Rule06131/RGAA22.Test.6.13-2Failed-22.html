@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>RGAA22 Test.6.13 Failed 22</title>
+    </head>
+    <body>
+        <div>
+
+            <p class="test-detail" lang="fr">
+                Possibilité d’identifier la destination ou l’action des liens et des boutons
+            </p>
+
+            <map id="map1">
+                <area href="my-link.html" alt="cliquez ici"/>
+            </map>
+
+            <map id="map2">
+                <area href="my-link.html"
+                      alt="cliquez ici"/>
+            </map>
+
+            <p class="test-explanation">Failed : The link has no context and its text belongs to the text link blacklist. We can deduce it is not pertinent</p>
+
+        </div>
+    </body>
+</html>

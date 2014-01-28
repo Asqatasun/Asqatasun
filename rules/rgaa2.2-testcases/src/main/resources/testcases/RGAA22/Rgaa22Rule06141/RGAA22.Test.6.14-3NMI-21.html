@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>RGAA22 Test.6.14 NMI 21</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>RGAA22 Test.6.14 NMI 21</h1>
+
+            <div class="test-detail" lang="fr">
+                Possibilité d’identifier la destination ou l’action des liens et des boutons (intitulé seul)
+            </div>
+            <div class="testcase">
+                <a href="my-link.html" >
+                    unpredictable 
+                    <img src="image.jpg" alt="content pertinence"/>
+                </a>
+
+                <a href="my-link.html">
+                    <object data="data.png">
+                        unpredictable content 
+                    </object>
+                    pertinence
+                </a>
+            </div>
+            <p class="test-explanation">NMI : The text link pertinence is unpredictable (whatever the context)</p>
+
+        </div>
+    </body>
+</html>

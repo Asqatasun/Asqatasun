@@ -203,6 +203,10 @@ public final class RemarkMessageStore {
     public static final String CHECK_LINK_WITHOUT_CONTEXT_PERTINENCE_MSG = 
             "CheckLinkWithoutContextPertinence";
     public static final String CHECK_LINK_PERTINENCE_MSG = "CheckLinkPertinence";
+    public static final String CHECK_BUTTON_TITLE_PERTINENCE_MSG = 
+            "CheckButtonTitlePertinence";
+    public static final String CHECK_BUTTON_WITH_SAME_TEXT_LEAD_TO_SAME_ACTION_MSG = 
+            "CheckButtonWithSameTextLeadToSameAction";
     public static final String UNEXPLICIT_LINK_MSG = "UnexplicitLink";
     public static final String NOT_PERTINENT_LINK_TITLE_MSG = 
             "NotPertinentLinkTitle";
