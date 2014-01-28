@@ -362,7 +362,7 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         testRunFactory.setFirefoxProfile(firefoxProfile);
         testRunFactory.setJsScriptMap(jsScriptMap);
         if (implicitelyWaitDriverTimeout != -1) {
-            testRunFactory.setImplicitelyWaitDriverTimeout(implicitelyWaitDriverTimeout);
+            testRunFactory.setImplicitlyWaitDriverTimeout(implicitelyWaitDriverTimeout);
         }
         testRunFactory.setPageLoadDriverTimeout(pageLoadDriverTimeout);
 //      ((TgTestRunFactory)testRunFactory).setFirefoxDriverObjectPool(firefoxDriverObjectPool);

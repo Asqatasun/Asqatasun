@@ -1239,7 +1239,6 @@
                 <artifactId>guava</artifactId>
                 <version>10.0.1</version>
             </dependency>
-            
             <!-- html and css parsers -->
             <dependency>
                 <!-- jsoup HTML parser library @ http://jsoup.org/ -->
@@ -1298,8 +1297,8 @@
             </snapshots>
         </repository>
         <repository>
-            <id>djmaven2</id>
-            <url>http://archiva.fdvs.com.ar/repository/public1/</url>
+            <id>saucelabs-repository</id>
+            <url>https://repository-saucelabs.forge.cloudbees.com/release</url>
             <releases>
                 <enabled>true</enabled>
             </releases>

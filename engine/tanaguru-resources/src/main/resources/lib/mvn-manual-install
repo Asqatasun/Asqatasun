@@ -1,3 +1,1 @@
 #!/bin/sh
-
-mvn install:install-file -DgroupId=com.saucelabs -DartifactId=sebuilder-interpreter -Dversion=1.0.2 -Dpackaging=jar -Dfile=sebuilder-interpreter-1.0.2.jar
