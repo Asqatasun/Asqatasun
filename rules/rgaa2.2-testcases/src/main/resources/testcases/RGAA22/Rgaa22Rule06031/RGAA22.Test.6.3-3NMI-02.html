@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Rgaa22 Test.6.3.1 NMI 02</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>Rgaa22 Test.6.3.1 NMI 02</h1>
+
+            <div class="test-detail" lang="fr">
+                Présence d’un avertissement préalable à l’ouverture de nouvelle fenêtre lors de l’utilisation de l’attribut target sur les images liens et les zones cliquables
+            </div>
+
+            <div class="testcase">
+                <a href="my-link1.html" target="_blank">
+                    <img alt="My image link 1" src="my-image1.jpg"/>
+                </a>
+                <a href="my-link2.html" target="_anything" title="New page">
+                    <img alt="My image link 2" src="my-image2.jpg"/>
+                </a>
+            </div>
+
+            <div class="test-explanation">
+                Need More info : The page has image ling area with a target attribute
+                different from "_top", "_parent" or "_self".
+            </div>
+        </div>
+    </body>
+</html>

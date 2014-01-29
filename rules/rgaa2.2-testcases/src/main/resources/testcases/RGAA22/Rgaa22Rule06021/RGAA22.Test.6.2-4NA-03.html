@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Rgaa22 Test.6.2.1 NA 03</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>Rgaa22 Test.6.2.1 NA 03</h1>
+
+            <div class="test-detail" lang="fr">
+                Présence d’un avertissement préalable à l’ouverture de nouvelle fenêtre lors de l’utilisation de l’attribut target sur les liens textuels et les formulaires
+            </div>
+
+            <div class="testcase">
+                <a href="my-link1.html" target="_blank">
+                    <img alt="My link 1" src="my-image.jpg"/>
+                </a>
+                <a href="my-link2.html" target="_top">
+                    My Link 2
+                </a>
+                <a href="my-link3.html" target="_self">
+                    <img alt="My" src="my-image.jpg"/>
+                    link 3
+                </a>
+                <a href="my-link4.html" target="_parent">
+                    <span>My Link</span>4
+                </a>
+            </div>
+
+            <div class="test-explanation">
+                Not applicable : The page has an image link (out of scope) 
+                with a target attribute different from "_parent", "_self" or "_parent"
+                or links with a target attribute equals to "_parent", "_self" or "_parent".
+            </div>
+        </div>
+    </body>
+</html>

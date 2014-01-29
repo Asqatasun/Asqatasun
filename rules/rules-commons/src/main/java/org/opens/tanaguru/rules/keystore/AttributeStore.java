@@ -52,6 +52,7 @@ public final class AttributeStore {
     public static final String SRC_ATTR = HTML.Attribute.SRC.toString();
     public static final String SUMMARY_ATTR = "summary";
     public static final String TABINDEX_ATTR = "tabindex";
+    public static final String TARGET_ATTR = HTML.Attribute.TARGET.toString();
     public static final String TITLE_ATTR = HTML.Attribute.TITLE.toString();
     public static final String USEMAP_ATTR = HTML.Attribute.USEMAP.toString();
     public static final String VALUE_ATTR = HTML.Attribute.VALUE.toString();

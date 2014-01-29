@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -20,7 +20,23 @@
 
 package org.opens.tanaguru.rules.rgaa22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.StringUtils;
+import org.jsoup.nodes.Element;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.processor.SSPHandler;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
+import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
+import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
+import org.opens.tanaguru.rules.elementselector.AreaLinkElementSelector;
+import org.opens.tanaguru.rules.elementselector.CompositeLinkElementSelector;
+import org.opens.tanaguru.rules.elementselector.LinkElementSelector;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.TARGET_ATTR;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_USER_IS_WARNED_WHEN_NEW_WINDOW_OPEN_MSG;
+import org.opens.tanaguru.rules.textbuilder.LinkTextElementBuilder;
 
 /**
  * Implementation of the rule 6.3 of the referential RGAA 2.2.
@@ -30,13 +46,80 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule06031 extends AbstractNotTestedRuleImplementation {
+public class Rgaa22Rule06031 extends AbstractPageRuleMarkupImplementation {
+
+    private static final String PARENT_TARGET_VALUE = "_parent";
+    private static final String SELF_TARGET_VALUE = "_self";
+    private static final String TOP_TARGET_VALUE = "_top";
 
     /**
      * Default constructor
      */
     public Rgaa22Rule06031 () {
         super();
+    }
+
+    @Override
+    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
+        /* the image link element selector */
+        LinkElementSelector imageLinkElementSelector = 
+                new CompositeLinkElementSelector(false, true);
+                
+        ElementHandler<Element> elHandler = new ElementHandlerImpl();
+        
+        imageLinkElementSelector.selectElements(sspHandler, elHandler);
+        for (Element el : imageLinkElementSelector.getDecidableElements().get()) {
+            if (doesElementHaveRequestedTargetAttribute(el)) {
+                elementHandler.add(el);
+            }
+        }
+              
+        LinkElementSelector areaLinkElementSelector = new AreaLinkElementSelector(false);
+        elHandler.clean();
+        areaLinkElementSelector.selectElements(sspHandler, elHandler);
+        for (Element el : areaLinkElementSelector.getDecidableElements().get()) {
+            if (doesElementHaveRequestedTargetAttribute(el)) {
+                elementHandler.add(el);
+            }
+        }
+    }
+
+    @Override
+    protected void check(
+            SSPHandler sspHandler, 
+            ElementHandler<Element> elementHandler, 
+            TestSolutionHandler testSolutionHandler) {
+        if (elementHandler.isEmpty()) {
+            testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
+            return;
+        }
+        ElementPresenceChecker epc = new ElementPresenceChecker(
+                                        TestSolution.NEED_MORE_INFO, 
+                                        TestSolution.NOT_APPLICABLE, 
+                                        CHECK_USER_IS_WARNED_WHEN_NEW_WINDOW_OPEN_MSG,
+                                        null,
+                                        TEXT_ELEMENT2,
+                                        TITLE_ATTR);
+        epc.setTextElementBuilder(new LinkTextElementBuilder());
+        epc.check(sspHandler, elementHandler, testSolutionHandler);
+    }
+
+    /**
+     * 
+     * @param element
+     * @return 
+     */
+    private boolean doesElementHaveRequestedTargetAttribute(Element element) {
+       if (!element.hasAttr(TARGET_ATTR)) {
+           return false;
+       }
+       String targetValue = element.attr(TARGET_ATTR);
+       if (StringUtils.equalsIgnoreCase(targetValue, TOP_TARGET_VALUE) || 
+               StringUtils.equalsIgnoreCase(targetValue, PARENT_TARGET_VALUE) || 
+               StringUtils.equalsIgnoreCase(targetValue, SELF_TARGET_VALUE)) {
+           return false;
+       }
+       return true;
     }
 
 }

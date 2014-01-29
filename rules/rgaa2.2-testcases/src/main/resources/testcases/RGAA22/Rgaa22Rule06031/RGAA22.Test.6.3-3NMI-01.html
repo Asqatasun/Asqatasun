@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Rgaa22 Test.6.3.1 NMI 01</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>Rgaa22 Test.6.3.1 NMI 01</h1>
+
+            <div class="test-detail" lang="fr">
+                Présence d’un avertissement préalable à l’ouverture de nouvelle fenêtre lors de l’utilisation de l’attribut target sur les images liens et les zones cliquables
+            </div>
+
+            <div class="testcase">
+                <area href="my-area1.html" alt="area1" target="_top"/>
+
+                <map id="map" >
+                    <area href="my-area2.html" alt="area2" target="_self"/>
+                    <area href="my-area3.html" alt="area3" target="_parent"/>
+                    <area href="my-area4.html" alt="area4" target="_blank"/>
+                </map>
+                <area href="my-area5.html" alt="area5" target="_anything" title="New page"/>
+            </div>
+
+            <div class="test-explanation">
+                Need More info : The page has clickable area with a target attribute
+                different from "_top", "_parent" or "_self".
+                The one with a target attribute equals to "_top", "_parent" or "_self"
+                are out of scope
+            </div>
+        </div>
+    </body>
+</html>

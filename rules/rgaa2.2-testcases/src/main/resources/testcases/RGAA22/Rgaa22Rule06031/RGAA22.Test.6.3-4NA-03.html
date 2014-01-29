@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Rgaa22 Test.6.3.1 NA 03</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>Rgaa22 Test.6.3.1 NA 03</h1>
+
+            <div class="test-detail" lang="fr">
+                Présence d’un avertissement préalable à l’ouverture de nouvelle fenêtre lors de l’utilisation de l’attribut target sur les images liens et les zones cliquables
+            </div>
+
+            <div class="testcase">
+                <a href="my-link1.html" target="_top">
+                    <img alt="My link 1" src="my-image1.jpg"/>
+                </a>
+                <a href="my-link2.html" target="_parent">
+                    <img alt="My link 2" src="my-image2.jpg"/>
+                </a>
+                <a href="my-link3.html" target="_self">
+                    <img alt="My link 3" src="my-image3.jpg"/>
+                </a>
+                <a href="my-link4.html" target="_blank">
+                    My Link 4
+                </a>
+                <a href="my-link5.html" target="_anything">
+                    <img alt="My" src="my-image5.jpg"/>
+                    link 5
+                </a>
+                <a href="my-link6.html" target="_blank">
+                    <span>My Link</span>6
+                </a>
+            </div>
+
+            <div class="test-explanation">
+                Not applicable : The page has neither image links with a target attribute
+                different from "_parent", "_top" or "_self".
+                The links with a target attribute different from "_parent", "_top" 
+                or "_self" are not image links.
+            </div>
+        </div>
+    </body>
+</html>

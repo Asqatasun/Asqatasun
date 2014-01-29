@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Rgaa22 Test.6.2.1 NMI 02</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>Rgaa22 Test.6.2.1 NMI 02</h1>
+
+            <div class="test-detail" lang="fr">
+                Présence d’un avertissement préalable à l’ouverture de nouvelle 
+                fenêtre lors de l’utilisation de l’attribut target sur les liens textuels et les formulaires.
+            </div>
+
+            <div class="testcase">
+                <a href="my-link1.html" target="_blank" title="New page">
+                    My Link 1
+                </a>
+                <a href="my-link2.html" target="_anything" title="New page">
+                    <img alt="My" src="my-image.jpg"/>
+                    link 2
+                </a>
+                <a href="my-link3.html" target="_blank" >
+                    <span>My Link</span>3
+                </a>
+            </div>
+
+            <div class="test-explanation">
+                Need more info : The page contains links with a "target" attribute 
+                different from "_self", "_top" and "_parent".
+                The ones with a "target" attribute equals to "_self", "_top" or "_parent"
+                are ignored.
+            </div>
+        </div>
+    </body>
+</html>
