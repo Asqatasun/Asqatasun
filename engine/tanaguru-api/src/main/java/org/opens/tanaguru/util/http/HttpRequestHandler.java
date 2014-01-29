@@ -41,6 +41,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.params.CoreConnectionPNames;
+import org.apache.http.params.CoreProtocolPNames;
 import org.apache.log4j.Logger;
 
 /**
@@ -49,6 +50,7 @@ import org.apache.log4j.Logger;
  */
 public class HttpRequestHandler {
     
+    private static final String TANAGURU_USER_AGENT = "tanaguru";
     private static final Logger LOGGER  = Logger.getLogger(HttpRequestHandler.class);
 
     /**
@@ -228,6 +230,9 @@ public class HttpRequestHandler {
             httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
         }
         setTimeouts(httpclient.getParams());
+        httpclient.getParams().setParameter(
+                CoreProtocolPNames.USER_AGENT, 
+                TANAGURU_USER_AGENT);
         return httpclient;
     }
     
