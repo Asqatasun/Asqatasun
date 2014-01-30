@@ -20,9 +20,7 @@
 package org.opens.tanaguru.rules.rgaa22;
 
 import java.util.LinkedHashSet;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.*;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.SourceCodeRemark;
