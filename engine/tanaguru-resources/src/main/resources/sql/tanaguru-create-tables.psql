@@ -279,7 +279,6 @@ CREATE TABLE "theme_statistics" (
 CREATE TABLE "web_resource" (
     "id_web_resource" bigserial NOT NULL,
     "label" varchar(510) DEFAULT NULL,
-    "mark" float DEFAULT NULL,
     "url" varchar(4096) NOT NULL,
     "rank" integer DEFAULT '0',
     "id_audit" bigint DEFAULT NULL,

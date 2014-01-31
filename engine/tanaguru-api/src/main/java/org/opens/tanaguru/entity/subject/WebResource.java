@@ -58,12 +58,6 @@ public interface WebResource extends Entity {
 
     /**
      *
-     * @return the mark
-     */
-    float getMark();
-    
-    /**
-     *
      * @return the rank
      */
     int getRank();
@@ -107,13 +101,6 @@ public interface WebResource extends Entity {
      */
     void setProcessResultList(Collection<ProcessResult> processResultList);
 
-    /**
-     *
-     * @param mark
-     *            the mark to set
-     */
-    void setMark(float mark);
-    
     /**
      *
      * @param mark

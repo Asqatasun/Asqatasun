@@ -23,7 +23,6 @@ CREATE TABLE IF NOT EXISTS `WEB_RESOURCE` (
   `DTYPE` varchar(31) NOT NULL,
   `Id_Web_Resource` bigint(20) NOT NULL AUTO_INCREMENT,
   `Label` varchar(255) DEFAULT NULL,
-  `Mark` float DEFAULT NULL,
   `Url` varchar(2048) NOT NULL,
   `Rank` int DEFAULT 0,
   `Id_Audit` bigint(20) DEFAULT NULL,

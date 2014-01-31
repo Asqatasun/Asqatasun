@@ -86,11 +86,6 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     }
 
     @Override
-    public float getMark() {
-        return mark;
-    }
-    
-    @Override
     public int getRank() {
         return rank;
     }
@@ -120,11 +115,6 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
         this.id = id;
     }
 
-    @Override
-    public void setMark(float mark) {
-        this.mark = mark;
-    }
-    
     @Override
     public void setLabel(String label) {
         this.label = label;
