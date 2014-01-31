@@ -26,8 +26,8 @@ import org.opens.tanaguru.sebuilder.interpreter.TgStore;
  */
 public class TgStepTypeFactory extends StepTypeFactory{
 
-    private static final String PRIMARY_PACKAGE_FOR_STEP = "org.opens.tanaguru.sebuilder.interpreter.steptype.";
-    private static final String SECONDARY_PACKAGE_FOR_STEP = "com.sebuilder.interpreter.steptype.";
+    private static final String PRIMARY_PACKAGE_FOR_STEP = "org.opens.tanaguru.sebuilder.interpreter.steptype";
+    private static final String SECONDARY_PACKAGE_FOR_STEP = "com.sebuilder.interpreter.steptype";
     
     public TgStepTypeFactory() {
         super();
