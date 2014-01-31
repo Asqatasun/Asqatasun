@@ -60,8 +60,6 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     private String url;
     @OneToMany(mappedBy = "subject")
     private Set<ProcessResultImpl> processResultSet;
-    @Column(name = "Mark")
-    private float mark;
     @Column(name = "Rank", nullable = false)
     private int rank = 0;
 
