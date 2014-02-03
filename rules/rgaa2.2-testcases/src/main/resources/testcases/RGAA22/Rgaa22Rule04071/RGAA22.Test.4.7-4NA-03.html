@@ -2,25 +2,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa22 Test.4.8 NMI 02</title>
+        <title>Rgaa22 Test.4.7 NA 03</title>
     </head>
     <body>
         <div>
 
-            <h1>Rgaa22 Test.4.8 NMI 02</h1>
+            <h1>Rgaa22 Test.4.7 NA 03</h1>
 
             <div class="test-detail" lang="fr">
-                Pertinence de la description longue pour les images le nécessitant
+                Existence d’une description longue pour les images le nécessitant
             </div>
 
             <div class="testcase">
-                <img id="id-informative-image" alt="" src="mock_image1.jpg"/>
-                <img alt="" src="mock_image2.jpg"/>
-                <img id="id-decorative-image" alt="" src="mock_image3.jpg"/>
+                <img alt="captcha" src="mock_image1"/>
+                <img class="class-decorative-image" src="mock_image2" alt=""/>
             </div>
 
             <div class="test-explanation">
-                NMI : The html element implied by the test has been found at least once on the page
+                NA : The html element implied by the test is not present on the page.
+                The image is identified as decorative by marker and so is out 
+                of scope.
             </div>
         </div>
     </body>

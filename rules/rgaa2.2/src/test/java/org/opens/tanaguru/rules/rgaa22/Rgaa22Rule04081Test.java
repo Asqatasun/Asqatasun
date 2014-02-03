@@ -22,10 +22,11 @@ package org.opens.tanaguru.rules.rgaa22;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import org.opens.tanaguru.entity.audit.*;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 import org.opens.tanaguru.rules.rgaa22.test.Rgaa22RuleImplementationTestCase;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.*;
 
 /**
  * Unit test class for the implementation of the rule 4.8 of the referential RGAA 2.2.

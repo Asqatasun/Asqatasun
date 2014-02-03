@@ -69,6 +69,10 @@ public final class RemarkMessageStore {
             "CheckNatureOfImageAndLongdescDefinition";
     public static final String CHECK_DETAILED_DESC_DEFINITION_OF_INFORMATIVE_IMG_MSG =
             "CheckLongdescDefinitionOfInformativeImage";
+    public static final String CHECK_DESC_PRESENCE_OF_INFORMATIVE_IMG_MSG = 
+            "CheckDescriptionPresenceOfInformativeImage";
+    public static final String CHECK_NATURE_OF_IMAGE_AND_DESC_PRESENCE_MSG = 
+            "CheckNatureOfImageAndDescriptionPresence";
     public static final String CHECK_DESC_PERTINENCE_OF_INFORMATIVE_IMG_MSG = 
             "CheckDescriptionPertinenceOfInformativeImage";
     public static final String CHECK_NATURE_OF_IMAGE_AND_DESC_PERTINENCE_MSG = 

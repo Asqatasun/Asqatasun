@@ -439,6 +439,7 @@ Cd_Test='Rgaa22-03131' OR
 Cd_Test='Rgaa22-03141' OR 
 Cd_Test='Rgaa22-03151' OR 
 Cd_Test='Rgaa22-03161' OR
+Cd_Test='Rgaa22-04071' OR
 Cd_Test='Rgaa22-04081' OR
 Cd_Test='Rgaa22-04091' OR
 Cd_Test='Rgaa22-04101' OR
