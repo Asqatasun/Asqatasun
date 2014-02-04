@@ -39,8 +39,8 @@
     <AUDIT Id_Audit="1" Dt_Creation="2010-10-26 13:50:29" Status="COMPLETED"/>
     <AUDIT Id_Audit="2" Dt_Creation="2010-10-26 14:50:29" Status="COMPLETED"/>
     
-    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="1" Label="NULL" Url="http://www.mock-url.org/1.html" Id_Audit="1" Mark="50" Rank="1"/>
-    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="2" Label="NULL" Url="http://www.mock-url.org/2.html" Id_Audit="2" Mark="75" Rank="1" />
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="1" Label="NULL" Url="http://www.mock-url.org/1.html" Id_Audit="1" Rank="1"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="2" Label="NULL" Url="http://www.mock-url.org/2.html" Id_Audit="2" Rank="1" />
 
     <PROCESS_RESULT DTYPE="DefiniteResultImpl" Id_Process_Result="1" Definite_Value="NEED_MORE_INFO" Element_Counter="2" Id_Web_Resource="1" Id_Test="1" Id_Audit_Net_Result="1" Id_Audit_Gross_Result="1"/>
     <PROCESS_RESULT DTYPE="DefiniteResultImpl" Id_Process_Result="2" Definite_Value="PASSED" Element_Counter="2" Id_Web_Resource="1" Id_Test="2" Id_Audit_Net_Result="1" Id_Audit_Gross_Result="1"/>

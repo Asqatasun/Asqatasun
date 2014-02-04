@@ -5,14 +5,14 @@
     <AUDIT Id_Audit="2" Dt_Creation="2010-10-26 14:50:29" Status="COMPLETED"/>
     <AUDIT Id_Audit="3" Dt_Creation="2010-10-26 14:50:29" Status="COMPLETED"/>
 
-    <WEB_RESOURCE DTYPE="SiteImpl" Id_Web_Resource="1" Label="NULL" Url="http://www.mock-url1.org/" Id_Audit="1" Mark="50" Id_Web_Resource_Parent="[NULL]" Rank="0"/>
-    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="2" Label="NULL" Url="http://www.mock-url2.org/" Id_Audit="2" Mark="50" Id_Web_Resource_Parent="[NULL]" Rank="1"/>
-    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="5" Label="NULL" Url="http://www.mock-url2.org/" Mark="50" Id_Web_Resource_Parent="1" Rank="1"/>
-    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="6" Label="NULL" Url="http://www.mock-url4.org/" Mark="75" Id_Web_Resource_Parent="1" Rank="2"/>
-    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="7" Label="NULL" Url="http://www.mock-url5.org/" Mark="51" Id_Web_Resource_Parent="1" Rank="3"/>
-    <WEB_RESOURCE DTYPE="SiteImpl" Id_Web_Resource="8" Label="NULL" Url="http://www.mock-url1.org/" Id_Audit="3" Mark="50" Id_Web_Resource_Parent="[NULL]" Rank="0"/>
-    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="9" Label="NULL" Url="http://www.mock-url2.org/" Mark="50" Id_Web_Resource_Parent="8" Rank="1"/>
-    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="10" Label="NULL" Url="http://www.mock-url4.org/" Mark="75" Id_Web_Resource_Parent="8" Rank="2"/>
+    <WEB_RESOURCE DTYPE="SiteImpl" Id_Web_Resource="1" Label="NULL" Url="http://www.mock-url1.org/" Id_Audit="1" Id_Web_Resource_Parent="[NULL]" Rank="0"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="2" Label="NULL" Url="http://www.mock-url2.org/" Id_Audit="2" Id_Web_Resource_Parent="[NULL]" Rank="1"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="5" Label="NULL" Url="http://www.mock-url2.org/" Id_Web_Resource_Parent="1" Rank="1"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="6" Label="NULL" Url="http://www.mock-url4.org/" Id_Web_Resource_Parent="1" Rank="2"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="7" Label="NULL" Url="http://www.mock-url5.org/" Id_Web_Resource_Parent="1" Rank="3"/>
+    <WEB_RESOURCE DTYPE="SiteImpl" Id_Web_Resource="8" Label="NULL" Url="http://www.mock-url1.org/" Id_Audit="3" Id_Web_Resource_Parent="[NULL]" Rank="0"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="9" Label="NULL" Url="http://www.mock-url2.org/" Id_Web_Resource_Parent="8" Rank="1"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="10" Label="NULL" Url="http://www.mock-url4.org/" Id_Web_Resource_Parent="8" Rank="2"/>
 
     <CONTENT DTYPE="SSPImpl"                Id_Content="1" Uri="http://www.mock-url.org/1.html" Id_Page="5" Http_Status_Code="-1" Id_Audit="1"/>
     <CONTENT DTYPE="SSPImpl"                Id_Content="2" Uri="http://www.mock-url.org/2.html" Id_Page="6" Http_Status_Code="-1" Id_Audit="1"/>
