@@ -76,3 +76,4 @@ web-app/tgol-web-app/target/
 org.eclipse.core.resources.prefs
 org.eclipse.jdt.core.prefs
 org.eclipse.m2e.core.prefs
+/ws/tanaguru-ws/target/
