@@ -24,7 +24,6 @@ package org.opens.tanaguru.rules.elementselector;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.springframework.util.CollectionUtils;
