@@ -24,47 +24,46 @@ package org.opens.tanaguru.rules.elementselector;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.springframework.util.CollectionUtils;
 
 /**
- * Element selector implementation that uses multiple css queries to retrieve
- * elements implied by the test
+ * Element selector implementation that uses multiple {@link SimpleElementSelector}
+ * instances to retrieve the elements implied by the test
  * 
  * @author jkowalczyk
  */
-public class MultipleElementSelector implements ElementSelector{
+public class SimpleElementSelectorAggregator implements ElementSelector{
 
     /* The css queries used to retrieve Elements */
-    private Collection<String> cssQueryList = Collections.EMPTY_LIST;
-    public void addCssQuery(String cssQuery) {
-        if (cssQueryList == null) {
-            cssQueryList = new ArrayList<String>();
+    private Collection<SimpleElementSelector> simpleElementSelectorList;
+    public void addSimpleElementSelector(SimpleElementSelector simpleElementSelector) {
+        if (simpleElementSelectorList == null ) {
+            simpleElementSelectorList = new ArrayList<SimpleElementSelector>();
         }
-        cssQueryList.add(cssQuery);
+        simpleElementSelectorList.add(simpleElementSelector);
     }
-
+    
     /**
      * Constructor
      */
-    public MultipleElementSelector() {
+    public SimpleElementSelectorAggregator() {
     }
     
     /**
      * constructor
      * @param cssQuery 
      */
-    public MultipleElementSelector(String... cssQueryList) {
-        this.cssQueryList = CollectionUtils.arrayToList(cssQueryList);
+    public SimpleElementSelectorAggregator(SimpleElementSelector... simpleElementSelector) {
+        this.simpleElementSelectorList = 
+                CollectionUtils.arrayToList(simpleElementSelector);
     }
-    
+
     @Override
     public void selectElements(SSPHandler sspHandler, ElementHandler selectionHandler) {
-        for (String cssQuery : cssQueryList) {
-            selectionHandler.addAll(sspHandler.
-                    domCssLikeSelectNodeSet(cssQuery).getSelectedElements());
+        for (SimpleElementSelector ses : simpleElementSelectorList) {
+            ses.selectElements(sspHandler, selectionHandler);
         }
     }
 

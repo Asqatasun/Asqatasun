@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Rgaa22 Test.4.5 Passed 05</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>Rgaa22 Test.4.5 Passed 05</h1>
+
+            <p class="test-detail" lang="fr">
+                Pertinence de l’alternative vide aux éléments décoratifs
+            </p>
+
+            <div class="testcase">
+                <img id="id-decorative-image" src="mock-decorative-image.jpg" alt=""/>
+                <a>
+                    <img src="image-link.jpg" alt=""/>
+                </a>
+                <img src="image-with-longdesc.jpg" alt="" longdesc=""/>
+                <img src="image-without-alt.jpg" />
+                <img class="class-informative-image" src="mock-informative-image.jpg" alt=""/>
+            </div>
+
+            <p class="test-explanation">
+                Passed: One image is marked as decorative and its alt attribute is empty.
+                The other images are either an image link, either an image with
+                a longdesc attribute, either an image marked as informative or
+                an image without alt attribute. They are all out of scope.
+            </p>
+
+        </div>
+    </body>
+</html>
