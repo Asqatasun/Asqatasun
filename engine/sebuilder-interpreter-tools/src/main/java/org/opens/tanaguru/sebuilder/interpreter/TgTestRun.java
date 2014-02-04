@@ -367,9 +367,9 @@ public class TgTestRun extends TestRun {
             }
         // if the firefoxDriver object pool is not set, keep the default behaviour
         } else if (getDriver() == null) {
-            getLog().warn("Before init  ");
+            getLog().debug("Launching initialisation of WebDriver");
             super.initRemoteWebDriver();
-            getLog().warn("After init  ");
+            getLog().debug("WebDriver initialised");
         }
     }
  
