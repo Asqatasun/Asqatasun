@@ -61,18 +61,14 @@
     <AUDIT Id_Audit="3" Dt_Creation="2010-10-26 15:50:29" Status="COMPLETED"/>
     <AUDIT Id_Audit="4" Dt_Creation="2010-10-26 15:50:29" Status="ERROR"/>
 
-    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="1" Label="NULL" Url="http://www.open-s.com/" Id_Audit="1" Mark="50" Rank="1"/>
-    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="2" Label="NULL" Url="http://www.open-s.com/" Id_Audit="2" Mark="75" Rank="1"/>
-    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="3" Label="NULL" Url="http://www.mock-url.com/" Id_Audit="3" Mark="51" Rank="1"/>
-    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="4" Label="NULL" Url="http://www.mock-url1.com/" Id_Audit="4" Mark="12" Rank="1"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="1" Label="NULL" Url="http://www.open-s.com/" Id_Audit="1" Rank="1"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="2" Label="NULL" Url="http://www.open-s.com/" Id_Audit="2" Rank="1"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="3" Label="NULL" Url="http://www.mock-url.com/" Id_Audit="3" Rank="1"/>
+    <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="4" Label="NULL" Url="http://www.mock-url1.com/" Id_Audit="4" Rank="1"/>
 
     <TGSI_ACT_AUDIT ACT_Id_Act="1" AUDIT_Id_Audit="1"/>
     <TGSI_ACT_AUDIT ACT_Id_Act="2" AUDIT_Id_Audit="2"/>
     <TGSI_ACT_AUDIT ACT_Id_Act="3" AUDIT_Id_Audit="3"/>
     <TGSI_ACT_AUDIT ACT_Id_Act="7" AUDIT_Id_Audit="4"/>
-<!--    <TGSI_ACT_WEB_RESOURCE ACT_Id_Act="1" WEB_RESOURCE_Id_Web_Resource="1"/>
-    <TGSI_ACT_WEB_RESOURCE ACT_Id_Act="2" WEB_RESOURCE_Id_Web_Resource="2"/>
-    <TGSI_ACT_WEB_RESOURCE ACT_Id_Act="3" WEB_RESOURCE_Id_Web_Resource="3"/>
-    <TGSI_ACT_WEB_RESOURCE ACT_Id_Act="7" WEB_RESOURCE_Id_Web_Resource="4"/>-->
 
 </dataset>
