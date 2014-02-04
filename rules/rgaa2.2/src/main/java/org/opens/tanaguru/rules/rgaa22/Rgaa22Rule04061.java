@@ -20,7 +20,13 @@
 
 package org.opens.tanaguru.rules.rgaa22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.opens.tanaguru.rules.elementchecker.text.TextLengthChecker;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.NOT_EMPTY_ALT_ATTR_NOT_IN_LINK_CSS_LIKE_QUERY;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.ALTERNATIVE_TOO_LONG_MSG;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 4.6 of the referential RGAA 2.2.
@@ -30,13 +36,23 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule04061 extends AbstractNotTestedRuleImplementation {
+public class Rgaa22Rule04061 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
+    private static final int MAX_ALT_LENGTH=119;
+    
     /**
      * Default constructor
      */
     public Rgaa22Rule04061 () {
-        super();
+        super(
+                new SimpleElementSelector(
+                    NOT_EMPTY_ALT_ATTR_NOT_IN_LINK_CSS_LIKE_QUERY),
+                new TextLengthChecker(
+                    new TextAttributeOfElementBuilder(ALT_ATTR), 
+                    MAX_ALT_LENGTH, 
+                    ALTERNATIVE_TOO_LONG_MSG, 
+                    ALT_ATTR)  
+             );
     }
 
 }

@@ -77,7 +77,7 @@ public final class RemarkMessageStore {
             "CheckDescriptionPertinenceOfInformativeImage";
     public static final String CHECK_NATURE_OF_IMAGE_AND_DESC_PERTINENCE_MSG = 
             "CheckNatureOfImageAndDescriptionPertinence";
-
+    public static final String ALTERNATIVE_TOO_LONG_MSG = "AlternativeTooLong";
     
     // frames 
     public static final String NOT_PERTINENT_TITLE_OF_FRAME_MSG = 

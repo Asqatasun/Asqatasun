@@ -64,6 +64,8 @@ public final class CssLikeQueryStore {
                     "input[type=image][alt]";
     public static final String MAP_WITH_AREA_CHILD_AND_NAME_ATTR_CSS_LIKE_QUERY = 
                     "map:has(area)[name]:not([name~=^\\s*$])";
+    public static final String NOT_EMPTY_ALT_ATTR_NOT_IN_LINK_CSS_LIKE_QUERY = 
+                    "[alt]:not([alt~=^\\s*$]):not(a [alt])";
 
     // Table theme css-like queries
     public static final String TABLE_WITH_SUMMARY_CSS_LIKE_QUERY="table[summary]"; 
