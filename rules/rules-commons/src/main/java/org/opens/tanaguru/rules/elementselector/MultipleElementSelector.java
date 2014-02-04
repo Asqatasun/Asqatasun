@@ -38,7 +38,7 @@ import org.springframework.util.CollectionUtils;
 public class MultipleElementSelector implements ElementSelector{
 
     /* The css queries used to retrieve Elements */
-    private Collection<String> cssQueryList = Collections.EMPTY_LIST;
+    private Collection<String> cssQueryList;
     public void addCssQuery(String cssQuery) {
         if (cssQueryList == null) {
             cssQueryList = new ArrayList<String>();
