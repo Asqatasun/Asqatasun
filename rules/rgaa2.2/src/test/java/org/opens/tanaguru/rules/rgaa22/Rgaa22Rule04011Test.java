@@ -19,8 +19,15 @@
  */
 package org.opens.tanaguru.rules.rgaa22;
 
+import java.util.LinkedHashSet;
+import org.apache.commons.lang3.StringUtils;
+import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.*;
+import org.opens.tanaguru.rules.keystore.HtmlElementStore;
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 import org.opens.tanaguru.rules.rgaa22.test.Rgaa22RuleImplementationTestCase;
 
 /**
@@ -45,208 +52,485 @@ public class Rgaa22Rule04011Test extends Rgaa22RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-//        getWebResourceMap().put("Rgaa22.Test.4.1-1Passed-01",
-//                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-1Passed-01.html"));
-//        getWebResourceMap().put("Rgaa22.Test.4.1-1Passed-02",
-//                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-1Passed-02.html"));
-//        getWebResourceMap().put("Rgaa22.Test.4.1-2Failed-01",
-//                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-2Failed-01.html"));
-//        getWebResourceMap().put("Rgaa22.Test.4.1-2Failed-02",
-//                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-2Failed-02.html"));
-//        getWebResourceMap().put("Rgaa22.Test.4.1-3NMI-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-3NMI-01.html"));
-//        getWebResourceMap().put("Rgaa22.Test.4.1-4NA-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-4NA-01.html"));
-        getWebResourceMap().put("Rgaa22.Test.4.1-5NT-01",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-5NT-01.html"));
+        /*------------------------------------1Passed------------------------------------------*/
+        getWebResourceMap().put("RGAA22.Test.4.1-1Passed-01",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-1Passed-01.html"));
+        getWebResourceMap().put("RGAA22.Test.4.1-1Passed-02",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-1Passed-02.html"));
+        getWebResourceMap().put("RGAA22.Test.4.1-1Passed-03",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-1Passed-03.html"));
+        getWebResourceMap().put("RGAA22.Test.4.1-1Passed-04",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-1Passed-04.html"));
+        getWebResourceMap().put("RGAA22.Test.4.1-1Passed-05",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-1Passed-05.html"));
+        getWebResourceMap().put("RGAA22.Test.4.1-1Passed-06",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-1Passed-06.html"));
+        getWebResourceMap().put("RGAA22.Test.4.1-1Passed-07",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-1Passed-07.html"));
+
+        /*------------------------------------2Failed------------------------------------------*/
+        getWebResourceMap().put("RGAA22.Test.4.1-2Failed-01",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-2Failed-01.html"));
+        getWebResourceMap().put("RGAA22.Test.4.1-2Failed-02",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-2Failed-02.html"));
+        getWebResourceMap().put("RGAA22.Test.4.1-2Failed-03",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-2Failed-03.html"));
+        getWebResourceMap().put("RGAA22.Test.4.1-2Failed-04",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-2Failed-04.html"));
+        getWebResourceMap().put("RGAA22.Test.4.1-2Failed-05",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-2Failed-05.html"));
+        getWebResourceMap().put("RGAA22.Test.4.1-2Failed-06",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-2Failed-06.html"));
+        getWebResourceMap().put("RGAA22.Test.4.1-2Failed-07",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-2Failed-07.html"));
+        getWebResourceMap().put("RGAA22.Test.4.1-2Failed-08",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-2Failed-08.html"));
+        getWebResourceMap().put("RGAA22.Test.4.1-2Failed-09",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-2Failed-09.html"));
+
+
+        /*------------------------------------4NA------------------------------------------*/
+        getWebResourceMap().put("RGAA22.Test.4.1-4NA-01",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-4NA-01.html"));
+        getWebResourceMap().put("RGAA22.Test.4.1-4NA-02",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-4NA-02.html"));
+        getWebResourceMap().put("RGAA22.Test.4.1-4NA-03",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-4NA-03.html"));
+        getWebResourceMap().put("RGAA22.Test.4.1-4NA-04",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-4NA-04.html"));
+        getWebResourceMap().put("RGAA22.Test.4.1-4NA-05",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-4NA-05.html"));
+        getWebResourceMap().put("RGAA22.Test.4.1-4NA-06",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04011/RGAA22.Test.4.1-4NA-06.html"));
+
     }
 
     @Override
     protected void setProcess() {
-//        //----------------------------------------------------------------------
-//        //------------------------------1Passed-01------------------------------
-//        //----------------------------------------------------------------------
-//        ProcessResult processResult = processPageTest("Rgaa22.Test.4.1-1Passed-01");
-//        // check test result
-//        assertEquals(TestSolution.PASSED, processResult.getValue());
-//        // check test has no remark
-//        assertNull(processResult.getRemarkSet());
-//        // check number of elements in the page
-//        assertEquals(1, processResult.getElementCounter());
-//        
-//        //----------------------------------------------------------------------
-//        //------------------------------1Passed-01------------------------------
-//        //----------------------------------------------------------------------
-//        processResult = processPageTest("Rgaa22.Test.4.1-1Passed-02");
-//        // check test result
-//        assertEquals(TestSolution.PASSED, processResult.getValue());
-//        // check test has no remark
-//        assertNull(processResult.getRemarkSet());
-//        // check number of elements in the page
-//        assertEquals(5, processResult.getElementCounter());
-//        
-//        //-------------------------------------------------------------------------//
-//        processResult = processPageTest("Rgaa22.Test.4.1-2Failed-01");
-//        assertEquals(TestSolution.FAILED, processResult.getValue());
-//        assertEquals(5,processResult.getElementCounter());
-//        assertEquals(5,processResult.getRemarkSet().size());
-//        Iterator<ProcessRemark> iter = processResult.getRemarkSet().iterator();
-//        
-//        ProcessRemark pr = iter.next();
-//        assertEquals(Rgaa22Rule04011.FAILED_MESSAGE_CODE,pr.getMessageCode());
-//        assertEquals(3,pr.getElementList().size());
-//        Iterator<EvidenceElement> iterEe = pr.getElementList().iterator();
-//        assertEquals("img",iterEe.next().getValue());
-//        iterEe.next(); // the second evidence element is the snippet and not tested here
-//        assertTrue(iterEe.next().getValue().contains("img/mock-img.jpg")); // extract src of image
-//        
-//        pr = iter.next();
-//        assertEquals(Rgaa22Rule04011.FAILED_MESSAGE_CODE,pr.getMessageCode());
-//        assertEquals(3,pr.getElementList().size());
-//        iterEe = pr.getElementList().iterator();
-//        assertEquals("img",iterEe.next().getValue());
-//        iterEe.next(); // the second evidence element is the snippet and not tested here
-//        assertTrue(iterEe.next().getValue().contains("img/mock-img2.jpg")); // extract src of image
-//        
-//        pr = iter.next();
-//        assertEquals(Rgaa22Rule04011.FAILED_MESSAGE_CODE,pr.getMessageCode());
-//        assertEquals(3,pr.getElementList().size());
-//        iterEe = pr.getElementList().iterator();
-//        assertEquals("area",iterEe.next().getValue());
-//        iterEe.next(); // the second evidence element is the snippet and not tested here
-//        assertTrue(iterEe.next().getValue().contains("attribute-absent")); // extract hreaf of area but absent
-//
-//        pr = iter.next();
-//        assertEquals(Rgaa22Rule04011.FAILED_MESSAGE_CODE,pr.getMessageCode());
-//        assertEquals(3,pr.getElementList().size());
-//        iterEe = pr.getElementList().iterator();
-//        assertEquals("input",iterEe.next().getValue());
-//        iterEe.next(); // the second evidence element is the snippet and not tested here
-//        assertTrue(iterEe.next().getValue().contains("attribute-absent")); // extract src of input but absent
-//        
-//        pr = iter.next();
-//        assertEquals(Rgaa22Rule04011.FAILED_MESSAGE_CODE,pr.getMessageCode());
-//        assertEquals(3,pr.getElementList().size());
-//        iterEe = pr.getElementList().iterator();
-//        assertEquals("applet",iterEe.next().getValue());
-//        iterEe.next(); // the second evidence element is the snippet and not tested here
-//        assertTrue(iterEe.next().getValue().contains("mock.class")); // extract code of applet
-//        
-//        //-------------------------------------------------------------------------//
-//        processResult = processPageTest("Rgaa22.Test.4.1-2Failed-02");
-//        assertEquals(TestSolution.FAILED, processResult.getValue());
-//        assertEquals(5,processResult.getElementCounter());
-//        assertEquals(5,processResult.getRemarkSet().size());
-//        iter = processResult.getRemarkSet().iterator();
-//        
-//        pr = iter.next(); // 1st encountered failed element is img
-//        assertEquals(Rgaa22Rule04011.CHECK_CAPTCHA_MESSAGE_CODE,pr.getMessageCode());
-//        assertEquals(4,pr.getElementList().size());
-//        iterEe = pr.getElementList().iterator();
-//        assertEquals("img",iterEe.next().getValue());
-//        iterEe.next(); // the second evidence element is the snippet and not tested here
-//        assertEquals("FAILED",iterEe.next().getValue()); // the precomputed result is failed
-//        assertTrue(iterEe.next().getValue().contains("img/mock-captcha.jpg")); // extract src of image
-//        
-//        pr = iter.next(); // 2nd encountered nmi element is img
-//        assertEquals(Rgaa22Rule04011.FAILED_MESSAGE_CODE,pr.getMessageCode());
-//        assertEquals(3,pr.getElementList().size());
-//        iterEe = pr.getElementList().iterator();
-//        assertEquals("img",iterEe.next().getValue());
-//        iterEe.next(); // the second evidence element is the snippet and not tested here
-//        assertTrue(iterEe.next().getValue().contains("img/mock-img2.jpg")); // extract src of image
-//        
-//        pr = iter.next(); // 3rd encountered nmi element is area
-//        assertEquals(Rgaa22Rule04011.FAILED_MESSAGE_CODE,pr.getMessageCode());
-//        assertEquals(3,pr.getElementList().size());
-//        iterEe = pr.getElementList().iterator();
-//        assertEquals("area",iterEe.next().getValue());
-//        iterEe.next(); // the second evidence element is the snippet and not tested here
-//        assertTrue(iterEe.next().getValue().contains("attribute-absent")); // extract href of area
-//        
-//        pr = iter.next(); // 4th encountered failed element is input
-//        assertEquals(Rgaa22Rule04011.CHECK_CAPTCHA_MESSAGE_CODE,pr.getMessageCode());
-//        assertEquals(4,pr.getElementList().size());
-//        iterEe = pr.getElementList().iterator();
-//        assertEquals("input",iterEe.next().getValue());
-//        iterEe.next(); // the second evidence element is the snippet and not tested here
-//        assertEquals("PASSED",iterEe.next().getValue()); // the precomputed result is passed
-//        assertTrue(iterEe.next().getValue().contains("attribute-absent")); // extract src of input
-//        
-//        pr = iter.next(); // 5th encountered failed element is applet
-//        assertEquals(Rgaa22Rule04011.CHECK_CAPTCHA_MESSAGE_CODE,pr.getMessageCode());
-//        assertEquals(4,pr.getElementList().size());
-//        iterEe = pr.getElementList().iterator();
-//        assertEquals("applet",iterEe.next().getValue());
-//        iterEe.next(); // the second evidence element is the snippet and not tested here
-//        assertEquals("FAILED",iterEe.next().getValue()); // the precomputed result is failed
-//        assertTrue(iterEe.next().getValue().contains("mock.class")); // extract code of applet
-//        
-//        //-------------------------------------------------------------------------//
-//        processResult = processPageTest("Rgaa22.Test.4.1-3NMI-01");
-//        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-//        assertEquals(5,processResult.getElementCounter());
-//        assertEquals(3,processResult.getRemarkSet().size());
-//        iter = processResult.getRemarkSet().iterator();
-//        
-//        pr = iter.next(); // 1st encountered nmi element is img
-//        assertEquals(Rgaa22Rule04011.CHECK_CAPTCHA_MESSAGE_CODE,pr.getMessageCode());
-//        assertEquals(4,pr.getElementList().size());
-//        iterEe = pr.getElementList().iterator();
-//        assertEquals("img",iterEe.next().getValue());
-//        iterEe.next(); // the second evidence element is the snippet and not tested here
-//        assertEquals("FAILED",iterEe.next().getValue()); // the precomputed result is failed
-//        assertTrue(iterEe.next().getValue().contains("img/mock-captcha.jpg")); // extract src of image
-//        
-//        pr = iter.next(); // 2nd encountered failed element is input
-//        assertEquals(Rgaa22Rule04011.CHECK_CAPTCHA_MESSAGE_CODE,pr.getMessageCode());
-//        assertEquals(4,pr.getElementList().size());
-//        iterEe = pr.getElementList().iterator();
-//        assertEquals("input",iterEe.next().getValue());
-//        iterEe.next(); // the second evidence element is the snippet and not tested here
-//        assertEquals("PASSED",iterEe.next().getValue()); // the precomputed result is passed
-//        assertTrue(iterEe.next().getValue().contains("attribute-absent")); // extract src of input but absent
-//        
-//        pr = iter.next(); // 3rd encountered failed element is applet
-//        assertEquals(Rgaa22Rule04011.CHECK_CAPTCHA_MESSAGE_CODE,pr.getMessageCode());
-//        assertEquals(4,pr.getElementList().size());
-//        iterEe = pr.getElementList().iterator();
-//        assertEquals("applet",iterEe.next().getValue());
-//        iterEe.next(); // the second evidence element is the snippet and not tested here
-//        assertEquals("FAILED",iterEe.next().getValue()); // the precomputed result is failed
-//        assertTrue(iterEe.next().getValue().contains("mock.class")); // extract code of applet
-//
-//        //-------------------------------------------------------------------------//
-//        processResult = processPageTest("Rgaa22.Test.4.1-4NA-01");
-//        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-//        assertNull(processResult.getRemarkSet());
-        //-------------------------------------------------------------------------//
-        ProcessResult processResult = processPageTest("Rgaa22.Test.4.1-5NT-01");
-        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-01------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult = processPageTest("RGAA22.Test.4.1-1Passed-01");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-02------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-1Passed-02");
+        // check number of elements in the page
+        assertEquals(3, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-03------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-1Passed-03");
+        // check number of elements in the page
+        assertEquals(3, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-04------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-1Passed-04");
+        // check number of elements in the page
+        assertEquals(3, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-05------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-1Passed-05");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-06------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-1Passed-06");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-07------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-1Passed-07");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.PASSED, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-01------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-2Failed-01");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.ALT_MISSING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.IMG_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(1, processRemark.getElementList().size());
+        EvidenceElement ee = processRemark.getElementList().iterator().next();
+        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+        assertTrue(StringUtils.contains(ee.getValue(), "mock-image-failed.jpg"));
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-02------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-2Failed-02");
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.ALT_MISSING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.IMG_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(1, processRemark.getElementList().size());
+        ee = processRemark.getElementList().iterator().next();
+        assertTrue(StringUtils.contains(ee.getValue(), "mock-image-failed.jpg"));
+        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-03------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-2Failed-03");
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.ALT_MISSING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.IMG_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(1, processRemark.getElementList().size());
+        ee = processRemark.getElementList().iterator().next();
+        assertTrue(StringUtils.contains(ee.getValue(), "mock-image-failed.jpg"));
+        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-04------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-2Failed-04");
+        // check number of elements in the page
+        assertEquals(3, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(2, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.ALT_MISSING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(1, processRemark.getElementList().size());
+        ee = processRemark.getElementList().iterator().next();
+        assertEquals(ABSENT_ATTRIBUTE_VALUE, ee.getValue());
+        assertEquals(HREF_ATTR, ee.getEvidence().getCode());
+
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-05------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-2Failed-05");
+        // check number of elements in the page
+        assertEquals(3, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(2, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.ALT_MISSING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(1, processRemark.getElementList().size());
+        ee = processRemark.getElementList().iterator().next();
+        assertEquals(ABSENT_ATTRIBUTE_VALUE, ee.getValue());
+        assertEquals(HREF_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-06------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-2Failed-06");
+        // check number of elements in the page
+        assertEquals(3, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.ALT_MISSING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(1, processRemark.getElementList().size());
+        ee = processRemark.getElementList().iterator().next();
+        assertTrue(StringUtils.contains(ee.getValue(), "mock-area-link.html"));
+        assertEquals(HREF_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-07------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-2Failed-07");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.ALT_MISSING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(1, processRemark.getElementList().size());
+        ee = processRemark.getElementList().iterator().next();
+        assertEquals(ABSENT_ATTRIBUTE_VALUE, ee.getValue());
+        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-08------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-2Failed-08");
+        // check number of elements in the page
+        assertEquals(2, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(RemarkMessageStore.ALT_MISSING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(1, processRemark.getElementList().size());
+        ee = processRemark.getElementList().iterator().next();
+        assertTrue(StringUtils.contains(ee.getValue(), "mock-input-src.jpg"));
+        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-09------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-2Failed-09");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.APPLET_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(1, processRemark.getElementList().size());
+        ee = processRemark.getElementList().iterator().next();
+        assertTrue(StringUtils.contains(ee.getValue(), "mock.class"));
+        assertEquals(CODE_ATTR, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------4NA-01----------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-4NA-01");
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-02----------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-4NA-02");
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-03----------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-4NA-03");
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-04----------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-4NA-04");
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-05----------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-4NA-05");
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
+
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-06----------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("RGAA22.Test.4.1-4NA-06");
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check number of remarks and their value
         assertNull(processResult.getRemarkSet());
     }
 
     @Override
     protected void setConsolidate() {
-//        assertEquals(TestSolution.PASSED,
-//                consolidate("Rgaa22.Test.4.1-1Passed-01").getValue());
-//        assertEquals(TestSolution.PASSED,
-//                consolidate("Rgaa22.Test.4.1-1Passed-02").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                consolidate("Rgaa22.Test.4.1-2Failed-01").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                consolidate("Rgaa22.Test.4.1-2Failed-02").getValue());
-//        assertEquals(TestSolution.NEED_MORE_INFO,
-//                consolidate("Rgaa22.Test.4.1-3NMI-01").getValue());
-        assertEquals(TestSolution.NOT_TESTED,
-                consolidate("Rgaa22.Test.4.1-5NT-01").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("RGAA22.Test.4.1-1Passed-01").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("RGAA22.Test.4.1-1Passed-02").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("RGAA22.Test.4.1-1Passed-03").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("RGAA22.Test.4.1-1Passed-04").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("RGAA22.Test.4.1-1Passed-05").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("RGAA22.Test.4.1-1Passed-06").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("RGAA22.Test.4.1-1Passed-07").getValue());
+
+        assertEquals(TestSolution.FAILED,
+                consolidate("RGAA22.Test.4.1-2Failed-01").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("RGAA22.Test.4.1-2Failed-02").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("RGAA22.Test.4.1-2Failed-03").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("RGAA22.Test.4.1-2Failed-04").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("RGAA22.Test.4.1-2Failed-05").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("RGAA22.Test.4.1-2Failed-06").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("RGAA22.Test.4.1-2Failed-07").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("RGAA22.Test.4.1-2Failed-08").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("RGAA22.Test.4.1-2Failed-09").getValue());
+
+
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("RGAA22.Test.4.1-4NA-01").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("RGAA22.Test.4.1-4NA-02").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("RGAA22.Test.4.1-4NA-03").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("RGAA22.Test.4.1-4NA-04").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("RGAA22.Test.4.1-4NA-05").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("RGAA22.Test.4.1-4NA-06").getValue());
     }
 
 }
