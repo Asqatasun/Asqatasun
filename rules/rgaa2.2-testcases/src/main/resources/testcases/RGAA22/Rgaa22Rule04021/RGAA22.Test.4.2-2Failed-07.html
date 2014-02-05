@@ -3,7 +3,7 @@
 
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa22 Test.4.2 NA 02</title>
+        <title>Rgaa22 Test.4.2 Failed 07</title>
     </head>
     <body>
         <div>
@@ -13,19 +13,20 @@
             </div>
 
             <div class="testcase">
-                <a>
-                    <img src="image.jpg" alt="This is a link"/>
+                <a href="my-link.html" title="-->;*" >
+                    <img src="image.jpg" alt="-->;*"/>
                 </a>
 
-                <a>
+                <h1>Rgaa22 Test.4.2 Failed 07</h1>
+                <a href="my-link.html" title="-->;*">
                     <object data="data.png">
                         -->;*
                     </object>
                 </a>
             </div>
             
-            <div class="test-explanation">NA : The page doesn't contain any &lt;a&gt; tag with a href attribute</div>
-
+            <div class="test-explanation">Failed : The link has no context, its text only contains non alphanumeric characters and is identical to the title attribute (in this case, this attribute defines the context). We can deduce it is not pertinent</div>
+            <div class="test-explanation">A suspected not pertinent conimage link is also present in the page</div>
         </div>
     </body>
 </html>

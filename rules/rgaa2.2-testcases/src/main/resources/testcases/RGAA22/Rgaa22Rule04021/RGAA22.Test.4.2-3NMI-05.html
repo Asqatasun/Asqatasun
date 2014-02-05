@@ -3,10 +3,12 @@
 
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa22 Test.4.2 Failed 04</title>
+        <title>Rgaa22 Test.4.2 NMI 05</title>
     </head>
     <body>
         <div>
+
+            <h1>Rgaa22 Test.4.2 NMI 05</h1>
 
             <div class="test-detail" lang="fr">
                 Pertinence de l’alternative textuelle aux images liens
@@ -14,11 +16,13 @@
 
             <div class="testcase">
                 <a href="my-link.html">
-                    <img src="image.jpg" alt="-->;*"/>
+                    <object data="data.png">
+                        This is a link
+                    </object>
                 </a>
             </div>
-            
-            <div class="test-explanation">Failed : The link has no context and its text only contains non alphanumeric characters. We can deduce it is not pertinent</div>
+        
+            <div class="test-explanation">NMI : The pertinence of the contexte of the image link is unpredictable</div>
 
         </div>
     </body>

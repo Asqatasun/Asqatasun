@@ -3,7 +3,7 @@
 
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa22 Test.4.2 Failed 04</title>
+        <title>Rgaa22 Test.4.2 NA 03</title>
     </head>
     <body>
         <div>
@@ -14,11 +14,16 @@
 
             <div class="testcase">
                 <a href="my-link.html">
-                    <img src="image.jpg" alt="-->;*"/>
+                    <img src="image.jpg" alt=""/>
+                </a>
+
+                <a href="my-link.html">
+                    <object data="data.png">
+                    </object>
                 </a>
             </div>
             
-            <div class="test-explanation">Failed : The link has no context and its text only contains non alphanumeric characters. We can deduce it is not pertinent</div>
+            <div class="test-explanation">NA : The page contains any &lt;a&gt; tag with a "title" attribute but the link text is missing. In this case, the tag is ignored</div>
 
         </div>
     </body>

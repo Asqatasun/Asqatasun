@@ -17,136 +17,56 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-
 package org.opens.tanaguru.rules.rgaa22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.ruleimplementation.link.AbstractLinkRuleImplementation;
+import org.opens.tanaguru.rules.elementchecker.link.LinkPertinenceChecker;
+import org.opens.tanaguru.rules.elementselector.CompositeLinkElementSelector;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
 
 /**
- * Implementation of the rule 4.2 of the referential RGAA 2.2.
- * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-4-2">the rule 4.2 design page.</a>
- * @see <a href="http://rgaa.net/Pertinence-de-l-alternative.html"> 4.2 rule specification
+ * Implementation of the rule 4.2 of the referential RGAA 2.2. <br/> For more
+ * details about the implementation, refer to <a
+ * href="http://www.tanaguru.org/en/content/rgaa22-rule-4-2">the rule 4.2 design
+ * page.</a>
+ *
+ * @see <a href="http://rgaa.net/Pertinence-de-l-alternative.html"> 4.2 rule
+ * specification
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule04021 extends AbstractNotTestedRuleImplementation {
+public class Rgaa22Rule04021 extends AbstractLinkRuleImplementation {
 
-//    private static final String[] EVIDENCE_ELEMENT_ATTRIBUTES = 
-//                {HtmlElementKeyStore.TEXT_ELEMENT2};
-//    private static final String[] CSS_LIKE_QUERIES = 
-//            {CssLikeQueryKeyStore.FRAME_WITH_TITLE_CSS_LIKE_QUERY, 
-//            CssLikeQueryKeyStore.IFRAME_WITH_TITLE_CSS_LIKE_QUERY};
-
-//    private ElementHandler linkImageHandler = new ElementHandlerImpl();
-//    private ElementHandler linkButtonHandler = new ElementHandlerImpl();
-//    
-//    private static ElementSelector imageLinkSelector = 
-//            new SimpleElementSelector(null);
-//    private static ElementSelector buttonLinkSelector = 
-//            new SimpleElementSelector(null);
-
-    
+    /**
+     * Default constructor
+     */
     public Rgaa22Rule04021() {
-        
+        // context is taken into consideration 
+        super(
+            new CompositeLinkElementSelector(true, true),
+            new LinkPertinenceChecker(
+                // not pertinent solution 
+                TestSolution.FAILED,
+                // not pertinent message
+                UNEXPLICIT_LINK_MSG,
+                // manual check message
+                CHECK_LINK_WITHOUT_CONTEXT_PERTINENCE_MSG,
+                // evidence elements
+                TEXT_ELEMENT2,
+                TITLE_ATTR),
+            new LinkPertinenceChecker(
+                // not pertinent solution 
+                TestSolution.NEED_MORE_INFO,
+                // not pertinent message
+                UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
+                // manual check message
+                CHECK_LINK_WITH_CONTEXT_PERTINENCE_MSG,
+                // evidence elements
+                TEXT_ELEMENT2,
+                TITLE_ATTR)
+        );
     }
-//        super(
-//            new MultipleElementSelector(Arrays.asList(CSS_LIKE_QUERIES)),
-//            new TextPertinenceChecker(
-//                true, // the emptiness is tested
-//                null, // no comparison with other attributes
-//                null, // no comparison with blacklist
-//                NOT_PERTINENT_LEGEND_MSG, //  message associated with element when not pertinent
-//                CHECK_LEGEND_PERTINENCE_MSG, //  message associated with element when pertinence cannot be determined
-//                Arrays.asList(EVIDENCE_ELEMENT_ATTRIBUTES))
-//            );
-//    }
-//    
-//    @Override
-//    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
-//        imageSelector.selectElements(sspHandler, elementHandler);
-//        ElementSelector imageSelector = new ImageSelector
-//    }
-
-//    @Override
-//    protected void check(SSPHandler sspHandler, ElementHandler selectionHandler, TestSolutionHandler testSolutionHandler) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-//    public static String FAILED_MESSAGE_CODE = "linkTextNotPertinent";
-//    public static String MANUAL_CHECK_MESSAGE_CODE = "checkLinkTextPertinence";
-//    private static String JQUERY_EXPR = ""
-//            + "a:has(img[alt]), "
-//            + "button:has(img[alt])";
-    
-//    /**
-//     * Default constructor
-//     */
-//    public Rgaa22Rule04021 () {
-//        super();
-//    }
-
-//    /**
-//     * Concrete implementation of the 4.2 rule.
-//     * @param sspHandler
-//     * @return
-//     *      the processResult of the test
-//     */
-//    @Override
-//    protected ProcessResult processImpl(SSPHandler sspHandler) {
-//        super.processImpl(sspHandler);
-//        
-//        sspHandler.beginCssLikeSelection().domCssLikeSelectNodeSet(JQUERY_EXPR);
-//        
-//        DefiniteResult result = definiteResultFactory.create(
-//                test,
-//                sspHandler.getSSP().getPage(),
-//                computeResult(sspHandler),
-//                sspHandler.getRemarkList());
-//        
-//        for (ProcessRemark pk : sspHandler.getRemarkList()) {
-//            Iterator<EvidenceElement> iterEe = pk.getElementList().iterator();
-//            iterEe.next();
-//        }
-//        
-//        result.setElementCounter(sspHandler.getSelectedElements().size());
-//        
-////        cleanUpRule();
-//        return result;
-//    }
-
-//    /**
-//     * Process regarding the selection.
-//     * @param sspHandler
-//     * @return 
-//     *      The solution of the test
-//     */
-//    private TestSolution computeResult (SSPHandler sspHandler){
-//        Elements elements = sspHandler.getSelectedElements();
-//        if (elements.isEmpty()) {
-//            return TestSolution.NOT_APPLICABLE;
-//        }
-//        
-//        Map<Element,String> elementsMap = new LinkedHashMap<Element, String>();
-//        for (Element el : elements) {
-//            elementsMap.put(el,RuleCheckHelper.extractImageLinkText(el));
-//        }
-//        
-//        return RuleCheckHelper.checkTextElementPertinence(
-//                elementsMap, 
-//                null, 
-//                FAILED_MESSAGE_CODE, 
-//                MANUAL_CHECK_MESSAGE_CODE);
-//    }
-
-//    @Override
-//    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
-//        imageSelector.selectElements(sspHandler, elementHandler);
-////        ElementSelector imageSelector = new ImageSelector
-//    }
-//
-//    @Override
-//    protected void check(SSPHandler sspHandler, ElementHandler selectionHandler, TestSolutionHandler testSolutionHandler) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-    
 }

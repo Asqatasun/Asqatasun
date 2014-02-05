@@ -1,28 +1,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>rgaa22 Test.04021 NMI 02</title>
+        <title>Rgaa22 Test.4.2 NMI 02</title>
     </head>
     <body>
         <div>
-
-            <h1>rgaa22 Test.04021 NMI 02</h1>
 
             <div class="test-detail" lang="fr">
                 Pertinence de l’alternative textuelle aux images liens
             </div>
 
-            <div id="testcase1" class="testcase">
-                <button type="button">
-                    <img alt="Any alternative text" src="mock-img.jpg"/>
-                </button>
-            </div>
+            <p class="testcase">
+                <a href="my-link.html" title="cliquez ici">
+                    <img src="image.jpg" alt="cliquez ici"/>
+                </a>
+            </p>
+
+            <p class="testcase">
+                <a href="my-link.html" title="cliquez ici">
+                    <object data="data.png">
+                        cliquez ici
+                    </object>
+                </a>
+            </p>
             
             <div class="test-explanation">
-                NMI : The pertinence of the alternatives of the button links of the page can't be deduced. 
-                A human check is needed
+                NMI : The image link belongs to the image link blacklist but the context may precise the link function and destination. A warning is thrown
             </div>
+
         </div>
     </body>
 </html>

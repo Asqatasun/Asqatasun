@@ -3,22 +3,30 @@
 
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa22 Test.4.2 Failed 04</title>
+        <title>Rgaa22 Test.4.2 NA 04</title>
     </head>
     <body>
         <div>
+
+            <h1>Rgaa22 Test.4.2 NA 04</h1>
 
             <div class="test-detail" lang="fr">
                 Pertinence de l’alternative textuelle aux images liens
             </div>
 
             <div class="testcase">
-                <a href="my-link.html">
-                    <img src="image.jpg" alt="-->;*"/>
+                <a>
+                    <img src="image.jpg" alt="This is a link"/>
+                </a>
+
+                <a>
+                    <object data="data.png">
+                        -->;*
+                    </object>
                 </a>
             </div>
             
-            <div class="test-explanation">Failed : The link has no context and its text only contains non alphanumeric characters. We can deduce it is not pertinent</div>
+            <div class="test-explanation">NA : The page doesn't contain any &lt;a&gt; tag with a href attribute. The tag is ignored despite the context</div>
 
         </div>
     </body>
