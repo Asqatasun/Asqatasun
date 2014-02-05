@@ -23,8 +23,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.entity.audit.*;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.*;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import static org.opens.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
 import static org.opens.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
@@ -521,9 +520,8 @@ public class Rgaa22Rule04051Test extends Rgaa22RuleImplementationTestCase {
         assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
         assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         ee = iter.next();
-        System.out.println(ee.getValue());
-        assertTrue(StringUtils.contains(ee.getValue(), "attribute-absent"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+        assertEquals("mock.class", ee.getValue());
+        assertEquals(CODE_ATTR, ee.getEvidence().getCode());
 
 
         //----------------------------------------------------------------------
@@ -548,8 +546,8 @@ public class Rgaa22Rule04051Test extends Rgaa22RuleImplementationTestCase {
         assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
         assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "attribute-absent"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+        assertEquals("mock.class", ee.getValue());
+        assertEquals(CODE_ATTR, ee.getEvidence().getCode());
         
 
         //----------------------------------------------------------------------
@@ -574,8 +572,8 @@ public class Rgaa22Rule04051Test extends Rgaa22RuleImplementationTestCase {
         assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
         assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "attribute-absent"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+        assertEquals("mock.class", ee.getValue());
+        assertEquals(CODE_ATTR, ee.getEvidence().getCode());
         
 
         //----------------------------------------------------------------------
@@ -602,8 +600,8 @@ public class Rgaa22Rule04051Test extends Rgaa22RuleImplementationTestCase {
         assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
         assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "attribute-absent"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+        assertEquals("mock1.class", ee.getValue());
+        assertEquals(CODE_ATTR, ee.getEvidence().getCode());
         
         processRemark = (SourceCodeRemark)pIter.next();
         assertEquals(RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
@@ -617,8 +615,8 @@ public class Rgaa22Rule04051Test extends Rgaa22RuleImplementationTestCase {
         assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
         assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "attribute-absent"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+        assertEquals("mock2.class", ee.getValue());
+        assertEquals(CODE_ATTR, ee.getEvidence().getCode());
         
         processRemark = (SourceCodeRemark)pIter.next();
         assertEquals(RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
@@ -632,8 +630,8 @@ public class Rgaa22Rule04051Test extends Rgaa22RuleImplementationTestCase {
         assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
         assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "attribute-absent"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+        assertEquals("mock3.class", ee.getValue());
+        assertEquals(CODE_ATTR, ee.getEvidence().getCode());
         
 
         //----------------------------------------------------------------------
@@ -658,8 +656,8 @@ public class Rgaa22Rule04051Test extends Rgaa22RuleImplementationTestCase {
         assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
         assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "attribute-absent"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+        assertEquals("mock1.class", ee.getValue());
+        assertEquals(CODE_ATTR, ee.getEvidence().getCode());
         
 
         //----------------------------------------------------------------------
@@ -840,8 +838,8 @@ public class Rgaa22Rule04051Test extends Rgaa22RuleImplementationTestCase {
         assertTrue(StringUtils.contains(ee.getValue(), ""));
         assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "attribute-absent"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+        assertEquals("mock.class", ee.getValue());
+        assertEquals(CODE_ATTR, ee.getEvidence().getCode());
         
 
         //----------------------------------------------------------------------
@@ -866,8 +864,8 @@ public class Rgaa22Rule04051Test extends Rgaa22RuleImplementationTestCase {
         assertTrue(StringUtils.contains(ee.getValue(), ""));
         assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "attribute-absent"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+        assertEquals("mock.class", ee.getValue());
+        assertEquals(CODE_ATTR, ee.getEvidence().getCode());
         
 
         //----------------------------------------------------------------------
@@ -892,8 +890,8 @@ public class Rgaa22Rule04051Test extends Rgaa22RuleImplementationTestCase {
         assertTrue(StringUtils.contains(ee.getValue(), ""));
         assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "attribute-absent"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+        assertEquals("mock1.class", ee.getValue());
+        assertEquals(CODE_ATTR, ee.getEvidence().getCode());
         
 
         //----------------------------------------------------------------------
@@ -918,8 +916,8 @@ public class Rgaa22Rule04051Test extends Rgaa22RuleImplementationTestCase {
         assertTrue(StringUtils.contains(ee.getValue(), ""));
         assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "attribute-absent"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+        assertEquals("mock1.class", ee.getValue());
+        assertEquals(CODE_ATTR, ee.getEvidence().getCode());
         
 
         //----------------------------------------------------------------------
@@ -944,8 +942,8 @@ public class Rgaa22Rule04051Test extends Rgaa22RuleImplementationTestCase {
         assertTrue(StringUtils.contains(ee.getValue(), ""));
         assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "attribute-absent"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+        assertEquals("mock1.class", ee.getValue());
+        assertEquals(CODE_ATTR, ee.getEvidence().getCode());
         
 
         //----------------------------------------------------------------------
@@ -970,8 +968,8 @@ public class Rgaa22Rule04051Test extends Rgaa22RuleImplementationTestCase {
         assertTrue(StringUtils.contains(ee.getValue(), ""));
         assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "attribute-absent"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+        assertEquals("mock1.class", ee.getValue());
+        assertEquals(CODE_ATTR, ee.getEvidence().getCode());
         
         
         //----------------------------------------------------------------------

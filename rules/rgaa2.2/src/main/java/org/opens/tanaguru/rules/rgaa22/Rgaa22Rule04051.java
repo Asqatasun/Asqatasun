@@ -20,13 +20,15 @@
 
 package org.opens.tanaguru.rules.rgaa22;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.ruleimplementation.AbstractCompositePageRuleMarkupImplementation;
 import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
 import org.opens.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
 import org.opens.tanaguru.rules.elementselector.ImageElementSelector;
-import org.opens.tanaguru.rules.elementselector.SimpleElementSelectorAggregator;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.*;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.APPLET_WITH_ALT_CSS_LIKE_QUERY;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.IMG_WITH_ALT_WITHOUT_LONGDESC_CSS_LIKE_QUERY;
 import static org.opens.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
@@ -42,25 +44,40 @@ import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule04051 extends AbstractMarkerPageRuleImplementation {
+public class Rgaa22Rule04051 extends AbstractCompositePageRuleMarkupImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa22Rule04051() {
-        super(
-                new SimpleElementSelectorAggregator(
-                    new ImageElementSelector(IMG_WITH_ALT_WITHOUT_LONGDESC_CSS_LIKE_QUERY, true, false),
-                    new ImageElementSelector(APPLET_WITH_ALT_CSS_LIKE_QUERY, true, false)),
-                
-                
+        super();
+        Collection<AbstractPageRuleMarkupImplementation> ruleCheckers = 
+                new ArrayList<AbstractPageRuleMarkupImplementation>();
+        ruleCheckers.add(new DecorativeImageRuleMarkupImplementation());
+        ruleCheckers.add(new DecorativeAppletRuleMarkupImplementation());
+        setInnerRuleCheckers(ruleCheckers);
+    }
+
+    /**
+     * Inner class that works on "marked as decorative" <img> tags
+     */
+    private class DecorativeImageRuleMarkupImplementation 
+                    extends AbstractMarkerPageRuleImplementation {
+        
+        /**
+         * Default constructor
+         */
+        public DecorativeImageRuleMarkupImplementation() {
+            super(
+                new ImageElementSelector(IMG_WITH_ALT_WITHOUT_LONGDESC_CSS_LIKE_QUERY, true, false),
+
                 // the decorative images are part of the scope
                 DECORATIVE_IMAGE_MARKER, 
-                
+
                 // the informative images are not part of the scope
                 INFORMATIVE_IMAGE_MARKER, 
 
-               // checker for elements identified by marker
+                // checker for elements identified by marker
                 new TextEmptinessChecker( 
                     new TextAttributeOfElementBuilder(ALT_ATTR), 
                     // solution when attribute is empty
@@ -72,7 +89,7 @@ public class Rgaa22Rule04051 extends AbstractMarkerPageRuleImplementation {
                     DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, 
                     ALT_ATTR, 
                     SRC_ATTR),
-                
+
                 // checker for elements not identified by marker
                 new TextEmptinessChecker(
                     new TextAttributeOfElementBuilder(ALT_ATTR), 
@@ -85,6 +102,53 @@ public class Rgaa22Rule04051 extends AbstractMarkerPageRuleImplementation {
                     ALT_ATTR, 
                     SRC_ATTR)
             );
+        }
     }
 
+    /**
+     * Inner class that works on marked as decorative <applet> tags
+     */
+    private class DecorativeAppletRuleMarkupImplementation 
+                    extends AbstractMarkerPageRuleImplementation {
+        
+        /**
+         * Default constructor
+         */
+        public DecorativeAppletRuleMarkupImplementation() {
+            super(
+                new ImageElementSelector(APPLET_WITH_ALT_CSS_LIKE_QUERY, true, false),
+
+                // the decorative images are part of the scope
+                DECORATIVE_IMAGE_MARKER, 
+
+                // the informative images are not part of the scope
+                INFORMATIVE_IMAGE_MARKER, 
+
+                // checker for elements identified by marker
+                new TextEmptinessChecker( 
+                    new TextAttributeOfElementBuilder(ALT_ATTR), 
+                    // solution when attribute is empty
+                    TestSolution.PASSED, 
+                    // solution when attribute is not empty
+                    TestSolution.FAILED, 
+                    // no message created when a decorative with empty alt is found
+                    null, 
+                    DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, 
+                    ALT_ATTR, 
+                    CODE_ATTR),
+
+                // checker for elements not identified by marker
+                new TextEmptinessChecker(
+                    new TextAttributeOfElementBuilder(ALT_ATTR), 
+                    // solution when attribute is empty
+                    TestSolution.NEED_MORE_INFO, 
+                    // solution when attribute is not empty
+                    TestSolution.NEED_MORE_INFO, 
+                    CHECK_ELEMENT_WITH_EMPTY_ALT_MSG, 
+                    CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, 
+                    ALT_ATTR, 
+                    CODE_ATTR)
+            );
+        }
+    }
 }

@@ -51,6 +51,7 @@ public abstract class AbstractCompositePageRuleMarkupImplementation
     protected void selectAndCheck(SSPHandler sspHandler, TestSolutionHandler testSolutionHandler) {
         assert innerRuleCheckers != null;
         for (AbstractPageRuleMarkupImplementation checker : innerRuleCheckers) {
+            setServicesToRuleChecker(checker);
             checker.selectAndCheck(sspHandler, testSolutionHandler);
         }
     }
@@ -62,6 +63,17 @@ public abstract class AbstractCompositePageRuleMarkupImplementation
             selectionSize += innerRule.getSelectionSize();
         }
         return selectionSize;
+    }
+
+    /**
+     * 
+     * @param checker 
+     */
+    private void setServicesToRuleChecker(AbstractPageRuleMarkupImplementation checker) {
+        checker.setTest(test);
+        checker.setNomenclatureLoaderService(nomenclatureLoaderService);
+        checker.setDefiniteResultFactory(definiteResultFactory);
+        checker.setIndefiniteResultFactory(indefiniteResultFactory);
     }
 
 }

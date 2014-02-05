@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>AW1 Test.4.4 Failed 09</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>AW1 Test.4.4 Failed 09</h1>
+
+            <div class="test-detail" lang="fr">
+                <span lang="fr">Pour chaque image porteuse d'information (balise img) ayant un attribut alt, le contenu de cet attribut est-il pertinent (hors cas particuliers) ?</span>
+            </div>
+
+            <div class="testcase">
+                <img class="class-informative-image" src="mock-image1.jpg" alt=""/>
+                <img class="class-informative-image" src="mock-image2.jpg" alt="Informative image alternative"/>
+                <img src="images/mock-image3" alt="mock-image3"/>
+                <a href="mock-link.html" title="combined link">
+                    combined link
+                    <img src="mock-image4.jpg" alt="not identified image alternative"/>
+                </a>
+                <img src="catpcha.jpg" alt="captcha image"/>
+                <a href="mock-link.html">
+                    <img src="mock-image5.jpg" alt="image  within a link"/>
+                </a>
+                <img class="class-decorative-image" src="mock-image6.jpg" alt=""/>
+            </div>
+
+            <div class="test-explanation">
+                Failed : Two &lt;img&gt; are identified by marker. One has an empty
+                alt attribute, the other needs a human check. 
+                The third &lt;img&gt; is not identified by marker and the value of its 
+                alt attribute is contained in the src attribute. It is suspected failed.
+                The fourth &lt;img&gt; is a combined link, it is part of the scope 
+                and the pertinence of the its alt attribute needs to be 
+                humanly check.
+                The fifth &lt;img&gt; is seen as a captcha, it is out of scope.
+                The sixth &lt;img&gt; is within a link, it is out of scope.
+                The sixth &lt;img&gt; is identified as decorative by marker usage.
+            </div>
+        </div>
+    </body>
+</html>
