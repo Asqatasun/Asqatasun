@@ -1,33 +1,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>rgaa22 Test.04011 Failed 02</title>
+        <title>Rgaa22 Test.4.1 Failed 02</title>
     </head>
     <body>
         <div>
 
-            <h1>rgaa22 Test.04011 Failed 02</h1>
+            <h1>Rgaa22 Test.4.1 Failed 02</h1>
 
             <div class="test-detail" lang="fr">
                 Présence de l’attribut alt
             </div>
 
             <div class="testcase">
-                <img src="img/mock-captcha.jpg" />
-                <img src="img/mock-img2.jpg" usemap="#mymap"/>
-                <map id="mymap" name="mymap" >
-                    <area shape="rect" coords="25,25,25,25"></area>
-                </map>
-                <applet code="mock.class" title="captcha"/>
-                <input type="image" alt="captcha">
-                </input>
+                <img src="mock-image-passed.jpg" alt="" />
+                <img src="mock-image-failed.jpg" />
             </div>
 
-            <div class="test-explanation">
-                Failed : Some images of the page have no "alt" attribute.
-                Some others may be a captcha and need a human check to determine whether they are in the scope
-            </div>
+            <p class="test-explanation">at least one image has no alt attribute</p>
+
         </div>
     </body>
 </html>

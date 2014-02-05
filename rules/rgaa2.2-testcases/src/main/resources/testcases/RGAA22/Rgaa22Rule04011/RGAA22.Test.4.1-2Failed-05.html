@@ -3,27 +3,31 @@
 
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa22 Test.4.1 Passed 02</title>
+        <title>Rgaa22 Test.4.1 Failed 05</title>
     </head>
     <body>
         <div>
 
-            <h1>Rgaa22 Test.4.1 Passed 02</h1>
+            <h1>Rgaa22 Test.4.1 Failed 05</h1>
 
             <div class="test-detail" lang="fr">
-                    Présence de l’attribut alt
-                </div>
+                Présence de l’attribut alt
+            </div>
 
             <div class="testcase">
                 <img src="mock-image.jpg" alt="" usemap="#map"/>
-                
-                <map id="mymap" name="map">
+
+                <map id="map1" name="orphan-map">
                     <area alt=""></area>
                     <area alt=""></area>
                 </map>
+                <map id="map2" name="map">
+                    <area></area>
+                    <area></area>
+                </map>
             </div>
 
-            <p class="test-explanation">Passed: the image map has area tags with alt attribute</p>
+            <p class="test-explanation">Failed: the image map has area tags without alt attribute</p>
 
         </div>
     </body>
