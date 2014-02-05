@@ -34,7 +34,7 @@ import org.opens.tanaguru.processor.SSPHandler;
  *  <li>selection</li>
  *  <li>check</li>
  *  </ul>
- *  This class implements the {@link ElementHanlder} interface to handle the selected 
+ *  This class implements the {@link ElementHandler} interface to handle the selected 
  *  elements of the selections. <br/>
  *  The concrete implementation may need to use local instances of {@link ElementHanlder}
  *  implementation when multiple selection is needed.

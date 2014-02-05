@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Rgaa22 Test.4.3 NMI 06</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>Rgaa22 Test.4.3 NMI 06</h1>
+
+            <div class="test-detail" lang="fr">
+                Pertinence de l’alternative textuelle aux zones cliquables ou aux boutons graphiques
+            </div>
+
+            <div class="testcase">
+                <img alt="" src="mock-image.jpg" usemap="#mock-map"/>
+                <map id="mock-map" name="mock-map">
+                    <area class="class-informative-area" href="mock-area2.html" alt="Informative area alternative"/>
+                    <area href="mock-area3.html" alt="mock-area3.html"/>
+                </map>
+
+                <img alt="" src="mock-image2.jpg" usemap="#mock-map2"/>
+                <a href="mock-link.html" title="combined link">
+                    <map id="mock-map2" name="mock-map2">
+                        combined link
+                        <area href="mock-area4.html" alt="not identified area alternative"/>
+                    </map>
+
+                </a>
+
+                <img alt="" src="mock-image2.jpg" usemap="#mock-map3"/>
+                <a href="mock-link2.html">
+                    <map id="mock-map3" name="mock-map3">
+                        <area href="mock-area5.html" alt="area within link"/>
+
+                    </map>
+                </a>
+                <img alt="" src="mock-image3.jpg" usemap="#mock-map4"/>
+                <map id="mock-map4" name="mock-map4">
+                    <area href="mock-area6.html" alt="captcha"/>
+                    <area class="class-decorative-area" href="mock-area7.html" alt=""/>
+                </map>
+            </div>
+
+            <div class="test-explanation">
+                NMI : The pertinence of the alt attribute of the first &lt;area&gt;
+                identified as informative by marker needs to be a humanly check. 
+                The second &lt;area&gt; is not identified by marker and the value of its 
+                alt attribute is contained in the src attribute. It is suspected failed.
+                The third &lt;area&gt; is a combined link, it is part of the scope 
+                and the pertinence of the its alt attribute needs to be 
+                humanly check.
+                The fourth &lt;area&gt; is within a link, it is out of scope.
+                The fifth &lt;area&gt; is seen as a captcha, it is out of scope.
+                The sixth &lt;area&gt; is identified as decorative by marker usage.
+            </div>
+        </div>
+    </body>
+</html>

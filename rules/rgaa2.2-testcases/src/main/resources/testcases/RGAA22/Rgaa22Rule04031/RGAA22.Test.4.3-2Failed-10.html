@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Rgaa22 Test.4.3 Failed 10</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>Rgaa22 Test.4.3 Failed 10</h1>
+
+            <div class="test-detail" lang="fr">
+                Pertinence de l’alternative textuelle aux zones cliquables ou aux boutons graphiques
+            </div>
+
+            <div class="testcase">
+                <input type="image" class="class-informative-input" src="image/mock-image1" alt="">
+                </input>
+                <input type="image" class="class-informative-input" src="image/mock-image2" alt="Informative input alternative">
+                </input>
+                <input type="image" src="image/mock-image3" alt="mock-image3">
+                </input>
+                <a href="mock-link.html" title="combined link">
+                    combined link
+                    <input type="image" src="image/mock-image4" alt="not identified input alternative">
+                    </input>
+                </a>
+                <input type="image" src="image/mock-image5" alt="mock-image" title="captcha">
+                </input>
+                <a href="mock-link.html">
+                    <input type="image" src="image/mock-image6" alt="input within link">
+                    </input>
+                </a>
+                <input class="class-decorative-input" type="image" src="image/mock-image7" alt="">
+                </input>
+                <input type="text" src="image/mock-image8" alt="">
+                </input>
+            </div>
+
+            <div class="test-explanation">
+                Failed : Two &lt;input&gt; are identified by marker. One has an empty
+                alt attribute, the other needs a human check. 
+                The third &lt;input&gt; is not identified by marker and the value of its 
+                alt attribute is contained in the src attribute. It is suspected failed.
+                The fourth &lt;input&gt; is a combined link, it is part of the scope 
+                and the pertinence of the its alt attribute needs to be 
+                humanly check.
+                The fifth &lt;input&gt; is seen as a captcha, it is out of scope.
+                The sixth &lt;input&gt; is within a link, it is out of scope.
+                The seventh &lt;input&gt; is identified as decorative by marker usage.
+                The eighth &lt;input&gt; is a text input
+            </div>
+        </div>
+    </body>
+</html>

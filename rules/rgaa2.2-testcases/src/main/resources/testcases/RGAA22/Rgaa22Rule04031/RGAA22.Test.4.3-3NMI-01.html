@@ -1,28 +1,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>rgaa22 Test.04031 NMI 01</title>
+        <title>Rgaa22 Test.4.3 NMI 01</title>
     </head>
     <body>
         <div>
 
-            <h1>rgaa22 Test.04031 NMI 01</h1>
+            <h1>Rgaa22 Test.4.3 NMI 01</h1>
 
             <div class="test-detail" lang="fr">
                 Pertinence de l’alternative textuelle aux zones cliquables ou aux boutons graphiques
             </div>
 
-           <div id="testcase1" class="testcase">
-                <img src="img/mock-img1.jpg" alt="" usemap="#mymap1"/>
-                <map id="mymap1" name="mymap1" >
-                    <area alt="Any alternative text" href="mock-link.html" coords="10,10,10,10"></area>
+            <div class="testcase">
+                <img alt="" src="mock-image.jpg" usemap="#mock-map"/>
+                <map id="mock-map" name="mock-map">
+                    <area href="mock-area.html" alt="mock-area.html"/>
                 </map>
             </div>
 
             <div class="test-explanation">
-                NMI : The pertinence of the alternatives of the clickable area of the page can't be deduced. 
-                A human check is needed.
+                NMI : The &lt;area&gt; has a suspected not pertinent alt attribute (
+                alt contained by src) but is not identified by marker.
             </div>
         </div>
     </body>
