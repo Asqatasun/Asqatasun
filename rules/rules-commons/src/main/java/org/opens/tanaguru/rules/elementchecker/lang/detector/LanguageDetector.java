@@ -90,7 +90,8 @@ public class LanguageDetector {
     public LanguageDetectionResult detectLanguage(String text) {
         try {
             Detector detector = DetectorFactory.create(0.15);
-            detector.append(text);
+            // issue#47 correction
+            detector.append(text.toLowerCase());
             ArrayList<Language> languages = detector.getProbabilities();
             Language detectedLanguage =  
                     extractLangWithHighestProbability(languages);
