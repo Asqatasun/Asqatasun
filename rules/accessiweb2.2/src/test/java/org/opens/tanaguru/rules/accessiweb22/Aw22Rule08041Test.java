@@ -299,10 +299,10 @@ public class Aw22Rule08041Test extends Aw22RuleImplementationTestCase {
         assertEquals(3, processRemark.getElementList().size());
         pIter = processRemark.getElementList().iterator();
         ee = pIter.next();
-        assertEquals("en",ee.getValue());
+        assertEquals("de",ee.getValue());
         assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
         ee = pIter.next();
-        assertEquals("de",ee.getValue());
+        assertEquals("en",ee.getValue());
         assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
         ee = pIter.next();
         assertTrue(ee.getValue().contains("AW22 Test.8.4.1 NMI 01 AW22 Test.8.4.1 NMI 01"));
