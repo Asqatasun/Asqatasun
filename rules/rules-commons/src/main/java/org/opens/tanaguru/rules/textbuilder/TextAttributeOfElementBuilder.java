@@ -21,6 +21,10 @@
  */
 package org.opens.tanaguru.rules.textbuilder;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
 
@@ -32,15 +36,11 @@ import org.jsoup.nodes.Element;
 public class TextAttributeOfElementBuilder implements TextElementBuilder {
 
     /* the attribute name*/
-    private String attributeName;
-    public String getAttributeName() {
-        return attributeName;
+    private Collection<String> attributeNames = new HashSet<String>();
+    public final void setAttributeName(String attributeName) {
+        this.attributeNames.add(attributeName);
     }
     
-    public final void setAttributeName(String attributeName) {
-        this.attributeName = attributeName;
-    }
-
     /**
      * Constructor
      */
@@ -53,7 +53,15 @@ public class TextAttributeOfElementBuilder implements TextElementBuilder {
      * @param attributeName 
      */
     public TextAttributeOfElementBuilder(String attributeName) {
-        setAttributeName(attributeName);
+        attributeNames.add(attributeName);
+    }
+    
+    /**
+     * Constructor
+     * @param attributeName 
+     */
+    public TextAttributeOfElementBuilder(String... attributeNames) {
+        this.attributeNames.addAll(Arrays.asList(attributeNames));
     }
 
     /**
@@ -63,14 +71,22 @@ public class TextAttributeOfElementBuilder implements TextElementBuilder {
      */
     @Override
     public String buildTextFromElement(Element element) {
-        if (attributeName == null) {
+        if (CollectionUtils.isEmpty(attributeNames)) {
             return null;
         }
-        if (element.hasAttr(attributeName)) {
-            return StringUtils.trim(element.attr(attributeName));
-        } else {
+        boolean elementHasAttr = false;
+        StringBuilder strb = new StringBuilder();
+        for (String attributeName : attributeNames) {
+            if (element.hasAttr(attributeName)) {
+                elementHasAttr = true;
+                strb.append(element.attr(attributeName));
+                strb.append(SPACER);
+            }
+        }
+        if (!elementHasAttr) {
             return null;
         }
+        return strb.toString().trim();
     }
 
 }

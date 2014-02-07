@@ -56,9 +56,9 @@ public class Rgaa22Rule12021Test extends Rgaa22RuleImplementationTestCase {
 //        getWebResourceMap().put("Rgaa22.Test.12.2-4NA-01",
 //              getWebResourceFactory().createPage(
 //              getTestcasesFilePath() + "RGAA22/Rgaa22Rule12021/RGAA22.Test.12.2-4NA-01.html"));
-        getWebResourceMap().put("Rgaa22.Test.12.2-5NT-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule12021/RGAA22.Test.12.2-5NT-01.html"));
+//        getWebResourceMap().put("Rgaa22.Test.12.2-5NT-01",
+//                getWebResourceFactory().createPage(
+//                getTestcasesFilePath() + "RGAA22/Rgaa22Rule12021/RGAA22.Test.12.2-5NT-01.html"));
     }
 
     @Override
@@ -71,8 +71,8 @@ public class Rgaa22Rule12021Test extends Rgaa22RuleImplementationTestCase {
 //                processPageTest("Rgaa22.Test.12.2-3NMI-01").getValue());
 //        assertEquals(TestSolution.NOT_APPLICABLE,
 //                processPageTest("Rgaa22.Test.12.2-4NA-01").getValue());
-        assertEquals(TestSolution.NOT_TESTED,
-                processPageTest("Rgaa22.Test.12.2-5NT-01").getValue());
+//        assertEquals(TestSolution.NOT_TESTED,
+//                processPageTest("Rgaa22.Test.12.2-5NT-01").getValue());
     }
 
     @Override
@@ -85,8 +85,8 @@ public class Rgaa22Rule12021Test extends Rgaa22RuleImplementationTestCase {
 //                consolidate("Rgaa22.Test.12.2-3NMI-01").getValue());
 //        assertEquals(TestSolution.NOT_APPLICABLE,
 //                consolidate("Rgaa22.Test.12.2-4NA-01").getValue());
-        assertEquals(TestSolution.NOT_TESTED,
-                consolidate("Rgaa22.Test.12.2-5NT-01").getValue());
+//        assertEquals(TestSolution.NOT_TESTED,
+//                consolidate("Rgaa22.Test.12.2-5NT-01").getValue());
     }
 
 }

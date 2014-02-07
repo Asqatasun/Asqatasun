@@ -492,6 +492,8 @@ Cd_Test='Rgaa22-11071' OR
 Cd_Test='Rgaa22-11081' OR
 Cd_Test='Rgaa22-11091' OR
 Cd_Test='Rgaa22-11101' OR
+Cd_Test='Rgaa22-12011' OR
+Cd_Test='Rgaa22-12021' OR
 Cd_Test='Rgaa22-12031';
 
 SET foreign_key_checks=1;

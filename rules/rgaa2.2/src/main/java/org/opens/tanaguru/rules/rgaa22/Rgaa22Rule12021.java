@@ -20,7 +20,18 @@
 
 package org.opens.tanaguru.rules.rgaa22;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.jsoup.nodes.Element;
+import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.processor.SSPHandler;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
+import org.opens.tanaguru.rules.elementchecker.lang.LangChangeChecker;
+import org.opens.tanaguru.rules.elementchecker.lang.LangChecker;
+import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.*;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.HTML_WITH_LANG_CSS_LIKE_QUERY;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 12.2 of the referential RGAA 2.2.
@@ -30,13 +41,50 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule12021 extends AbstractNotTestedRuleImplementation {
+public class Rgaa22Rule12021 extends AbstractPageRuleMarkupImplementation {
 
+    private LangChecker ec = new LangChangeChecker();
+    
     /**
      * Default constructor
      */
     public Rgaa22Rule12021 () {
         super();
     }
+    
+    @Override
+    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
+        SimpleElementSelector selector = new SimpleElementSelector(HTML_WITH_LANG_CSS_LIKE_QUERY);
+        selector.selectElements(sspHandler, elementHandler);
+   }
+
+    @Override
+    protected void check(
+            SSPHandler sspHandler, 
+            ElementHandler<Element> selectionHandler, 
+            TestSolutionHandler testSolutionHandler) {
+
+        if (selectionHandler.isEmpty()) {
+            testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
+            return;
+        }
+        ec = new LangChangeChecker(
+                    new TextAttributeOfElementBuilder(
+                        ALT_ATTR, 
+                        SUMMARY_ATTR, 
+                        CONTENT_ATTR, 
+                        LABEL_ATTR, 
+                        VALUE_ATTR, 
+                        NAME_ATTR, 
+                        TITLE_ATTR));
+        ec.setNomenclatureLoaderService(nomenclatureLoaderService);
+        ec.check(sspHandler, selectionHandler, testSolutionHandler);
+    }
+    
+    @Override
+    public int getSelectionSize() {
+        return ec.getNbOfElementsTested();
+    }
+
 
 }
