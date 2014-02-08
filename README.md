@@ -21,9 +21,11 @@ Four kinds of audit:
 2. Be 200% reliable (don't give erroneous result)
 3. have technological fun
 
-## Download & demo
+## Download
 
 http://www.tanaguru.org/Download/tanaguru-latest.tar.gz
+
+## Demo
 
 http://beta.tanaguru.com/
 
