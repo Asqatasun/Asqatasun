@@ -22,6 +22,7 @@
 package org.opens.tanaguru.webapp.test;
 
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.firefox.FirefoxBinary;
@@ -62,28 +63,28 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
     /**
      * Parameters keys retrieved through property file
      */
-    private static final String BUNDLE_NAME = "test";
-    private static final String LOGIN_URL_KEY = "login_url";
-    private static final String LOGOUT_URL_KEY = "logout_url";
-    private static final String FORM_URL_KEY = "form_url";
-    private static final String FIELD_NAME_KEY = "field_name";
-    private static final String USER_FIELD_NAME_KEY = "user_field_name";
-    private static final String PASSWORD_FIELD_NAME_KEY = "password_field_name";
+    protected static final String BUNDLE_NAME = "test";
+    protected static final String LOGIN_URL_KEY = "login_url";
+    protected static final String LOGOUT_URL_KEY = "logout_url";
+    protected static final String FORM_URL_KEY = "form_url";
+    protected static final String FIELD_NAME_KEY = "field_name";
+    protected static final String USER_FIELD_NAME_KEY = "user_field_name";
+    protected static final String PASSWORD_FIELD_NAME_KEY = "password_field_name";
     
     /**
      * Parameters keys passed as JVM arguments
      */
-    private static final String USER_KEY = "user";
-    private static final String PASSWORD_KEY = "password";
-    private static final String CONTRACT_ID_KEY = "contract.id";
-    private static final String HOST_LOCATION_KEY = "host.location";
-    private static final String XVFB_DISPLAY_KEY = "xvfb.display";
+    protected static final String USER_KEY = "user";
+    protected static final String PASSWORD_KEY = "password";
+    protected static final String CONTRACT_ID_KEY = "contract.id";
+    protected static final String HOST_LOCATION_KEY = "host.location";
+    protected static final String XVFB_DISPLAY_KEY = "xvfb.display";
     
     /**
      * Submit elements in the page
      */
-    private static final String SUBMIT_BUTTON_NAME = "launch-audit-submit";
-    private static final String LOGIN_BUTTON_NAME = "Login";
+    protected static final String SUBMIT_BUTTON_NAME = "launch-audit-submit";
+    protected static final String LOGIN_BUTTON_NAME = "Login";
     
     // Application urls used to navigate
     protected String loginUrl;
@@ -98,7 +99,7 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
     /**
      * Xvfb display port value used in headless mode
      */
-    private String xvfbDisplay;
+    protected String xvfbDisplay;
     /**
      * User info
      */
@@ -113,7 +114,7 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
      * The firefox driver. The webdriver.firefox.bin is supposed to passed
      * as JVM argument.
      */
-    FirefoxDriver driver;
+    protected FirefoxDriver driver;
     
     /**
      * Default constructor
@@ -230,11 +231,20 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
     /**
      * 
      */
-    private void login (){
+    protected void login (){
         driver.get(loginUrl);
+        try {
+//            Thread.sleep(5000);
+       
         driver.findElementById(userFieldName).sendKeys(user);
+//        Thread.sleep(5000);
         driver.findElementById(passwordFieldName).sendKeys(password);
+//        Thread.sleep(5000);
         driver.findElementByName(LOGIN_BUTTON_NAME).submit();
+        Thread.sleep(5000);
+         } catch (InterruptedException ex) {
+            java.util.logging.Logger.getLogger(AbstractTanaguruOnlineTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

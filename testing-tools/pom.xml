@@ -20,6 +20,7 @@
 <!--        <module>tgol-test-kbaccess-campaign</module>
         <module>tgol-test-krash-offline</module>
         <module>tgol-test-krash-online</module>
-        <module>tgol-test-krash-online-multipage</module>-->
+        <module>tgol-test-krash-online-multipage</module>
+           <module>tgol-test-krash-online-site</module>-->
     </modules>
 </project>
