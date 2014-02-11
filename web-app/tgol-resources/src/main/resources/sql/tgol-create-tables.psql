@@ -29,7 +29,7 @@ CREATE TABLE "tgsi_contract" (
     "begin_date" timestamp with time zone NOT NULL,
     "end_date" timestamp with time zone NOT NULL,
     "renewal_date" timestamp with time zone DEFAULT NULL,
-    "price" float  DEFAULT NULL,
+    "price" real  DEFAULT NULL,
     "user_id_user" bigint NOT NULL,
     PRIMARY KEY ("id_contract")
 );

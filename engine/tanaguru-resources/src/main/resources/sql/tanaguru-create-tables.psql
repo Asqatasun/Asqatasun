@@ -289,8 +289,8 @@ CREATE TABLE "web_resource" (
 
 CREATE TABLE "web_resource_statistics" (
     "id_web_resource_statistics" bigserial NOT NULL,
-    "mark" float DEFAULT NULL,
-    "raw_mark" float DEFAULT NULL,
+    "mark" real DEFAULT NULL,
+    "raw_mark" real DEFAULT NULL,
     "nb_passed" integer DEFAULT NULL,
     "nb_failed" integer DEFAULT NULL,
     "nb_nmi" integer DEFAULT NULL,
