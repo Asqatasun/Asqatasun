@@ -1,3 +1,8 @@
+<%@page import="java.util.Collections"%>
+<%@page import="java.util.Collection"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Map"%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@page pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -40,13 +45,21 @@
                                         ${fn:length(remarkInfosItem.evidenceElementList)}
                                     </td>
                                     <td class="page-list">
+                                        <c:set var="evidenceElements" value="${remarkInfosItem.evidenceElementList}"/>
                                         <ul>
-                                        <c:forEach var="evidenceElementList" items="${remarkInfosItem.evidenceElementList}">
-                                            <c:forEach var="evidenceElement" items="${evidenceElementList}">
+                                        <%
+                                        List urls = new ArrayList<String>();
+                                        
+                                        for (Map<String,String> entry : ((Collection<Map<String, String>>) pageContext.getAttribute("evidenceElements") ) )  {
+                                            urls.addAll(entry.values());
+                                        }
+                                        Collections.sort(urls);
+                                        pageContext.setAttribute("sortedUrls", urls);
+                                        %>
+                                        <c:forEach var="url" items="${sortedUrls}">
                                             <li>
-                                                <a href="${evidenceElement.value}" title="${evidenceElement.value}">${evidenceElement.value}</a>
+                                                <a href="${url}" title="${url}">${url}</a>
                                             </li>
-                                            </c:forEach>
                                         </c:forEach>
                                         </ul>
                                     </td>

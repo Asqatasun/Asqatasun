@@ -2044,6 +2044,7 @@ input[type="text"]:focus{
 }
 .page-list li {
     list-style: none;
+    padding-bottom: 10px;
 }
 .page-list ul {
     margin-left: 0;
@@ -2084,6 +2085,12 @@ input[type="text"]:focus{
 .evidence-elements-table tbody tr:nth-child(2n+1) td, 
 .evidence-elements-table tbody tr:nth-child(2n+1) th {
     background-color: #F2F2F2;
+}
+td.page-list {
+    min-width: 500px;
+}
+td.occurences {
+    width: 50px;
 }
 .all-remarks {
     text-align: center;
