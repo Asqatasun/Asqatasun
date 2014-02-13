@@ -38,7 +38,7 @@
         <springVersion>3.1.2.RELEASE</springVersion>
         
         <heritrixGroupId>org.archive.heritrix</heritrixGroupId>
-        <heritrixVersion>3.1.0</heritrixVersion>
+        <heritrixVersion>3.1.1</heritrixVersion>
         
         <hibernateGroupId>org.hibernate</hibernateGroupId>
         <hibernateVersion>3.6.0.Final</hibernateVersion>

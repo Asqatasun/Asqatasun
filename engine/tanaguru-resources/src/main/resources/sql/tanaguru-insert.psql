@@ -13,7 +13,7 @@ INSERT INTO "parameter_family" VALUES
 (4,'Seo_test_WEIGHT_MANAGEMENT','This parameters handles the test weight potentially overridden by users','test weight parameters','test weight params');
 
 
-INSERT INTO "parameter_element" VALUES 
+INSERT INTO "parameter_element" VALUES
 (1,'MAX_DOCUMENTS',1,'max pages','Maximum number of downloaded pages'),
 (2,'EXCLUSION_REGEXP',1,'exclusion regex','Regulard expression to exclude urls'),
 (3,'DEPTH',1,'max depth','Maximum depth of the crawl'),
@@ -53,39 +53,40 @@ INSERT INTO "parameter_element" VALUES
 (37,'Seo-08011',4,'Seo-08011 weight','Weight of rule Seo-08011 overriden by user'),
 (38,'DECORATIVE_IMAGE_MARKER',3,'Decorative image marker','Decorative image HTML marker (id or class)'),
 (39,'INFORMATIVE_IMAGE_MARKER',3,'Informative image marker','Informative image HTML marker (id or class)'),
-(40,'ALTERNATIVE_CONTRAST_MECHANISM',3,'Alternative Contrast Mechanism','The page embeds a mechanism that displays text with a correct ratio');
+(40,'ALTERNATIVE_CONTRAST_MECHANISM',3,'Alternative Contrast Mechanism','The page embeds a mechanism that displays text with a correct ratio'),
+(41,'CONSIDER_COOKIES',1,'consider cookies','consider cookies while crawling');
 
 
-INSERT INTO "parameter" VALUES 
-(1,'50000',1,FALSE),
-(2,'',2,TRUE),
-(3,'20',3,TRUE),
-(4,'0',3,FALSE),
-(5,'604800',4,FALSE),
-(6,'Seo;Or',5,FALSE),
-(7,'Seo;Ar',5,FALSE),
-(8,'Seo;Bz',5,FALSE),
-(9,'AW21;Ar',5,FALSE),
-(10,'AW21;Bz',5,FALSE),
-(11,'AW21;Or',5,FALSE),
-(12,'100',1,FALSE),
-(13,'10000',1,TRUE),
-(14,'20000',1,FALSE),
-(15,'',6,TRUE),
-(16,'',7,TRUE),
-(17,'',8,TRUE),
-(18,'',9,TRUE),
-(19,'86400',4,TRUE),
-(20,'AW22;Ar',5,TRUE),
-(21,'AW22;Bz',5,FALSE),
-(22,'AW22;Or',5,FALSE),
-(23,'',38,TRUE),
-(24,'',39,TRUE),
-(25,'true',40,FALSE),
-(26,'false',40,TRUE);
+INSERT INTO "parameter"  (parameter_value, id_parameter_element, is_default) VALUES 
+('50000',1,FALSE),
+('',2,TRUE),
+('20',3,TRUE),
+('0',3,FALSE),
+('604800',4,FALSE),
+('Seo;Or',5,FALSE),
+('Seo;Ar',5,FALSE),
+('Seo;Bz',5,FALSE),
+('AW21;Ar',5,FALSE),
+('AW21;Bz',5,FALSE),
+('AW21;Or',5,FALSE),
+('100',1,FALSE),
+('10000',1,TRUE),
+('20000',1,FALSE),
+('',6,TRUE),
+('',7,TRUE),
+('',8,TRUE),
+('',9,TRUE),
+('86400',4,TRUE),
+('AW22;Ar',5,TRUE),
+('AW22;Bz',5,FALSE),
+('AW22;Or',5,FALSE),
+('',38,TRUE),
+('',39,TRUE),
+('true',40,FALSE),
+('false',40,TRUE), 
+('false',41,FALSE), 
+('true',41,TRUE);
 
-
-ALTER SEQUENCE parameter_id_parameter_seq RESTART WITH 26;
 
 -- Post-data save --
 COMMIT;

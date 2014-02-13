@@ -225,6 +225,7 @@
         <property name="httpProxyHost" value="" />
         <property name="httpProxyPort" value="0" />
         <property name="digestContent" value="false" />
+        <property name="ignoreCookies" value="false" />
     </bean>
 
     <bean id="extractorHttp" class="org.archive.modules.extractor.ExtractorHTTP">

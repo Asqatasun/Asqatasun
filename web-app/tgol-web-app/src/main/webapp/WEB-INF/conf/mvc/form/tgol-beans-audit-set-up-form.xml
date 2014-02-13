@@ -273,5 +273,25 @@
         <property name="parameterCode" value="ALTERNATIVE_CONTRAST_MECHANISM"/>
         <property name="formFieldBuilder" ref="alternativeContrastMechanismPresentFormFieldBuilder"/>
     </bean>
+    
+    <bean id="considerCookiesBuilder" class="org.opens.tgol.form.builder.CheckboxElementBuilderImpl">
+        <property name="enabled" value="true"/>
+        <property name="value" value="true"/>
+    </bean>
+
+    <bean id="considerCookiesFormFieldBuilder" class="org.opens.tgol.form.builder.CheckboxFormFieldBuilderImpl">
+        <property name="i18nKey" value="consider-cookies"/>
+        <property name="errorI18nKey" value="consider-cookies-error"/>
+        <property name="checkboxElementBuilderList">
+            <list>
+                <ref local="considerCookiesBuilder"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="considerCookiesParamBuilder" class="org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
+        <property name="parameterCode" value="CONSIDER_COOKIES"/>
+        <property name="formFieldBuilder" ref="considerCookiesFormFieldBuilder"/>
+    </bean>
 
 </beans>

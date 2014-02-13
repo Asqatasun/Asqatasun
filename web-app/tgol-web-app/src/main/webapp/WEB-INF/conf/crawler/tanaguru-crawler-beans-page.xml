@@ -226,7 +226,6 @@ metadata.description=Basic crawl starting with useful defaults
   <!-- <property name="sendConnectionClose" value="true" /> -->
   <!-- <property name="sendReferer" value="false" /> -->
   <!-- <property name="sendRange" value="false" /> -->
-  <!-- <property name="ignoreCookies" value="true" /> --> 
   <!-- <property name="sslTrustLevel" value="OPEN" /> -->
   <!-- <property name="acceptHeaders"> 
         <list>
@@ -237,7 +236,7 @@ metadata.description=Basic crawl starting with useful defaults
         <property name="httpProxyHost" value="" />
         <property name="httpProxyPort" value="" />
         <property name="digestContent" value="false" />
-  <!-- <property name="digestAlgorithm" value="sha1" /> -->
+        <property name="ignoreCookies" value="false" />
     </bean>
 
     <bean id="extractorHttp" class="org.archive.modules.extractor.ExtractorHTTP">

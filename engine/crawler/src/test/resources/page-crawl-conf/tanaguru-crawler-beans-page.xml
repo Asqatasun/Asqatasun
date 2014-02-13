@@ -239,6 +239,7 @@ metadata.description=Basic crawl starting with useful defaults
         <property name="httpProxyHost" value="" />
         <property name="httpProxyPort" value="0" />
         <property name="digestContent" value="false" />
+        <property name="ignoreCookies" value="true" />
   <!-- <property name="digestAlgorithm" value="sha1" /> -->
     </bean>
 

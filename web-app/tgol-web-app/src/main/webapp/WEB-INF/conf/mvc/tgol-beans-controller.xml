@@ -149,6 +149,9 @@
                 <entry key="ALTERNATIVE_CONTRAST_MECHANISM">
                     <value>contrast-alternative</value>
                 </entry>
+                <entry key="IGNORE_COOKIES">
+                    <value>ignore-cookies</value>
+                </entry>
             </map>
         </property>
         <property name="authorizedScopeForSynthesis">
@@ -179,6 +182,7 @@
                         <ref bean="maxDurationParamBuilder"/>
                         <ref bean="maxDocumentsParamBuilder"/>
                         <ref bean="exclusionRegexpParamBuilder"/>
+                        <ref bean="considerCookiesParamBuilder"/>
                     </list>
                 </entry>
                 <entry key="contrast-parameters">

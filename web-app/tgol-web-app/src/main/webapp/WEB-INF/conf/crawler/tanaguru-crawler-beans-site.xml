@@ -51,7 +51,8 @@
     <bean id="longerOverrides" class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
         <property name="properties">
             <props>
-                <prop key="seeds.textSource.value">
+                <prop key="seeds.textSource.value" >
+                    
                 </prop>
             </props>
         </property>
@@ -96,7 +97,7 @@
                 </bean>
 
                 <bean id="tooManyHopsDecideRule" class="org.archive.modules.deciderules.TooManyHopsDecideRule">
-                    <property name="maxHops" value="20" />
+                    <property name="maxHops" value="20"/>
                 </bean>
 
                 <!-- ...but ACCEPT those more than a configured link-hop-count from start... -->
@@ -226,13 +227,13 @@
         <property name="httpProxyHost" value="" />
         <property name="httpProxyPort" value="" />
         <property name="digestContent" value="false" />
+        <property name="ignoreCookies" value="false" />
     </bean>
 
     <bean id="extractorHttp" class="org.archive.modules.extractor.ExtractorHTTP">
     </bean>
 
     <bean id="extractorHtml" class="org.archive.modules.extractor.ExtractorHTML">
-<!--    <bean id="extractorHtml" class="org.opens.tanaguru.crawler.extractor.TanaguruExtractorHTML">-->
         <property name="extractJavascript" value="false" />
   <!-- <property name="extractValueAttributes" value="true" /> -->
   <!-- <property name="ignoreFormActionUrls" value="false" /> -->
@@ -242,22 +243,10 @@
   <!-- <property name="maxElementLength" value="1024" /> -->
   <!-- <property name="maxAttributeNameLength" value="1024" /> -->
   <!-- <property name="maxAttributeValueLength" value="16384" /> -->
-<!--        <property name="extractorHTMLListenerSet">
-            <set>
-                <ref bean="tanaguruWriter"/>
-            </set>
-        </property>-->
     </bean>
 
     <bean id="extractorCss" class="org.archive.modules.extractor.ExtractorCSS">
     </bean>
-<!--    <bean id="extractorCss" class="org.opens.tanaguru.crawler.extractor.TanaguruExtractorCSS">
-        <property name="extractorCSSListenerSet">
-            <set>
-                <ref bean="tanaguruWriter"/>
-            </set>
-        </property>
-    </bean>-->
 
  <!--bean id="extractorJs" class="org.archive.modules.extractor.ExtractorJS">
  </bean>

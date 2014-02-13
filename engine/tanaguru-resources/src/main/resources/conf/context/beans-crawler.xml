@@ -17,6 +17,13 @@
         <property name="idBeanParent" value="tooManyHopsDecideRule"/>
         <property name="elementName" value="property"/>
     </bean>
+    
+    <bean id="ignoreCookiesModifier" class="org.opens.tanaguru.crawler.util.HeritrixInverseBooleanAttributeValueModifier">
+        <property name="attributeName" value="name"/>
+        <property name="attributeValue" value="ignoreCookies"/>
+        <property name="idBeanParent" value="fetchHttp"/>
+        <property name="elementName" value="property"/>
+    </bean>
 
     <bean id="maxDocumentsModifier" class="org.opens.tanaguru.crawler.util.HeritrixAttributeValueModifier">
         <property name="attributeName" value="name"/>
@@ -67,6 +74,7 @@
                 <entry key="EXCLUSION_REGEXP" value-ref="exclusionRegexpModifier"/>
                 <entry key="PROXY_HOST" value-ref="proxyHostModifier"/>
                 <entry key="PROXY_PORT" value-ref="proxyPortModifier"/>
+                <entry key="CONSIDER_COOKIES" value-ref="ignoreCookiesModifier"/>
             </map>
         </property>
         <property name="urlModifier">

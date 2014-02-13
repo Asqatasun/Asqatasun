@@ -46,7 +46,8 @@ INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_El
 (37, 'Seo-08011', 4, 'Weight of rule Seo-08011 overriden by user', 'Seo-08011 weight'), 
 (38, 'DECORATIVE_IMAGE_MARKER', 3, 'Decorative image HTML marker (id or class)', 'Decorative image marker'),
 (39, 'INFORMATIVE_IMAGE_MARKER', 3, 'Informative image HTML marker (id or class)', 'Informative image marker'), 
-(40, 'ALTERNATIVE_CONTRAST_MECHANISM', 3, 'The page embeds a mechanism that displays text with a correct ratio', 'Alternative Contrast Mechanism');
+(40, 'ALTERNATIVE_CONTRAST_MECHANISM', 3, 'The page embeds a mechanism that displays text with a correct ratio', 'Alternative Contrast Mechanism'),
+(41, 'CONSIDER_COOKIES',1,'consider cookies','consider cookies while crawling');
 
 INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
 (1, '50000', b'0'),
@@ -73,7 +74,9 @@ INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_D
 (5, 'AW22;Or', b'0'), 
 (38, '', b'1'),
 (39, '', b'1'), 
-(40, 'true', b''), 
-(40, 'false', b'1');
+(40, 'true', b'0'), 
+(40, 'false', b'1'),
+(41, 'true', b'1'),
+(41, 'false', b'0');
 
 SET foreign_key_checks=1;
