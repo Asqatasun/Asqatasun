@@ -170,20 +170,22 @@
                 </c:if>
             <li class="active">${pageName}</li>
             </ul>
+            <!-- little hack to insert message for guest user. That user has to be named 'guest' in the db -->
+            <c:if test="${authorizedScopeForPageList != 'true' && configProperties['enable-demo-link'] == 'true' && currentUserName == 'guest'}">
+            <div class="row">
+                <div class="span16">
+                    <div class="alert-message info like-it-message">
+                        <fmt:message key="pageList.likedItForGuest"/>
+                    </div>
+                </div>
+            </div>
+            </c:if>
             <div id="result-page-title" class="row">
                 <div class="span11">
                     <h1>
                         ${contractName}
                     </h1>
                 </div>
-<!--                    <div class="span4">
-                    <div>
-                        <fmt:message key="resultPage.h1"/>
-                    </div>
-                    <div>
-                        Scope : page
-                    </div>
-                </div>-->
                 <div class="span4 offset1">
                     <c:if test="${addRelaunchAction}">
                     <div id="relaunch-action">

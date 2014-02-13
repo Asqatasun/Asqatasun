@@ -250,6 +250,20 @@ element.style {
     color: #404040;
     font-weight: normal;
 }
+.alert-message.info.like-it-message {
+    background-image: linear-gradient(to bottom , #0A8299 0%, #188295 100%);
+    background-image: -moz-linear-gradient(center top , #0A8299 0%, #188295 100%);
+    background-image: -webkit-linear-gradient(top, #0A8299 0%, #188295 100%);
+    background-image: -ms-linear-gradient(center top, #0A8299 0%, #188295 100%);
+    background-image: -o-linear-gradient(center top, #0A8299 0%, #188295 100%);
+    margin-left: 0;
+    font-family: OpenSansRegular;
+    font-size: 18px;
+    text-align: center;
+}
+.alert-message.info.like-it-message a{
+    color: #FFFFFF;
+}
 .topbar div > ul.secondary-nav, .nav.secondary-nav {
     margin-right : -15px;
 }
