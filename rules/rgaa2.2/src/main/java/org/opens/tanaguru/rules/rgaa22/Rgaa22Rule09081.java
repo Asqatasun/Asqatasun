@@ -20,8 +20,6 @@
 package org.opens.tanaguru.rules.rgaa22;
 
 import org.jsoup.nodes.Element;
-import org.opens.tanaguru.entity.audit.EvidenceElement;
-import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
