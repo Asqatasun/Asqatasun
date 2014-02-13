@@ -47,5 +47,23 @@
         </property>
         <property name="arguments" value="all-theme"/>
     </bean>
-
+    
+    <bean id="auditSetUpFormFieldHelper" class="org.opens.tgol.form.parameterization.helper.AuditSetUpFormFieldHelper"/>
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="auditSetUpFormFieldHelper"/>
+        </property>
+        <property name="targetMethod">
+            <value>setDefaultLevelByRefMap</value>
+        </property>
+        <property name="arguments">
+            <map> 
+                <entry key="AW21" value="Ar"/>
+                <entry key="Aw22" value="Ar"/>
+                <entry key="Seo" value="Or"/>
+                <entry key="RGAA22" value="AA"/>
+            </map>
+        </property>
+    </bean>
+    
 </beans>

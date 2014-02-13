@@ -22,6 +22,7 @@
 package org.opens.tgol.form.parameterization.helper;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang.StringUtils;
@@ -42,7 +43,11 @@ import org.opens.tgol.form.parameterization.AuditSetUpFormField;
 public final class AuditSetUpFormFieldHelper {
 
     private static final String DEFAULT_LEVEL = "Ar";
-    
+    private static Map<String, String> DEFAULT_LEVEL_BY_REF_MAP = Collections.EMPTY_MAP;
+    public static void setDefaultLevelByRefMap(Map<String, String> defaultLevelByRef) {
+        DEFAULT_LEVEL_BY_REF_MAP = defaultLevelByRef;
+    }
+            
     private AuditSetUpFormFieldHelper() {
     }
 
@@ -230,7 +235,11 @@ public final class AuditSetUpFormFieldHelper {
         StringBuilder strb = new StringBuilder();
         strb.append(ref);
         strb.append(";");
-        strb.append(DEFAULT_LEVEL);
+        if (DEFAULT_LEVEL_BY_REF_MAP.containsKey(ref)) {
+            strb.append(DEFAULT_LEVEL_BY_REF_MAP.get(ref));
+        } else {
+            strb.append(DEFAULT_LEVEL);
+        }
         selectDefaultLevelFromLevelValue(selectFormFieldList, strb.toString());
     }
 
