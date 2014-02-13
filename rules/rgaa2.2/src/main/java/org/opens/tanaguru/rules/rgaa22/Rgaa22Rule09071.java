@@ -22,9 +22,10 @@ package org.opens.tanaguru.rules.rgaa22;
 
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.opens.tanaguru.rules.elementchecker.pertinence.TextPertinenceChecker;
-import org.opens.tanaguru.rules.elementselector.ElementSelector;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TITLE_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_TITLE_PERTINENCE_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NOT_PERTINENT_TITLE_MSG;
 
 /**
@@ -37,10 +38,6 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NOT_PERTINENT
  */
 public class Rgaa22Rule09071 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    /* The selector */
-    private static final ElementSelector ELEMENT_SELECTOR = 
-            new SimpleElementSelector(TITLE_ELEMENT);
-    
     /* Title blacklisted nomenclature */
     private static final String TITLE_BLACKLIST_NOM = "UnexplicitPageTitle";
     
@@ -49,13 +46,20 @@ public class Rgaa22Rule09071 extends AbstractPageRuleWithSelectorAndCheckerImple
      */
     public Rgaa22Rule09071 () {
         super(
-                ELEMENT_SELECTOR,
+                new SimpleElementSelector(TITLE_ELEMENT),
                 new TextPertinenceChecker(
+                    // check emptiness
                     true, 
+                    // no comparison with other attribute
                     null, 
+                    // blacklist nomenclature name
                     TITLE_BLACKLIST_NOM, 
+                    // not pertinent message
                     NOT_PERTINENT_TITLE_MSG, 
-                    null
+                    // manual check message
+                    CHECK_TITLE_PERTINENCE_MSG,
+                    // evidence elements
+                    TEXT_ELEMENT2
                 )
             );
     }
