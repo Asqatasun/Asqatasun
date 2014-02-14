@@ -178,7 +178,7 @@ public final class CssLikeQueryStore {
     public static final String LINK_WITH_HREF_CSS_LIKE_QUERY = 
                     "a[href]";
     public static final String IMAGE_LINK_CHILDREN_CSS_LIKE_QUERY = 
-                    "img , object[type^=image], object[data^=data:image],"
+                    "img[alt] , object[type^=image], object[data^=data:image],"
                   + "object[data$=png], object[data$=jpeg], object[data$=jpg],"
                   + "object[data$=bmp], object[data$=gif]" ;
     public static final String CLICKABLE_AREA_CSS_LIKE_QUERY = "area[href][alt]";
