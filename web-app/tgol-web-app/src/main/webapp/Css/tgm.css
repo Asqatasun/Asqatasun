@@ -259,6 +259,7 @@ element.style {
     margin-left: 0;
     font-family: OpenSansRegular;
     font-size: 18px;
+    line-height:26px;
     text-align: center;
 }
 .alert-message.info.like-it-message a{
