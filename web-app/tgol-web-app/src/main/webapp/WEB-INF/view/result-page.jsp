@@ -175,7 +175,7 @@
             <div class="row">
                 <div class="span16">
                     <div class="alert-message info like-it-message">
-                        <fmt:message key="pageList.likedItForGuest"/>
+                        <fmt:message key="resultPage.likedItForGuest"/>
                     </div>
                 </div>
             </div>
