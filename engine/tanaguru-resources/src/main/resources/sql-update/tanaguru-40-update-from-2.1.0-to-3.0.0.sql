@@ -212,4 +212,14 @@ ALTER IGNORE TABLE CONTENT MODIFY `Adapted_Content` longtext DEFAULT NULL;
 ALTER IGNORE TABLE CONTENT MODIFY `Source` longtext DEFAULT NULL;
 ALTER TABLE WEB_RESOURCE DROP `Mark`;
 
+INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_Element`, `Id_Parameter_Family`, `Long_Label`, `Short_Label`) VALUES
+(40, 'ALTERNATIVE_CONTRAST_MECHANISM', 3, 'The page embeds a mechanism that displays text with a correct ratio', 'Alternative Contrast Mechanism'),
+(41, 'CONSIDER_COOKIES',1,'consider cookies','consider cookies while crawling');
+
+INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
+(40, 'true', b'0'), 
+(40, 'false', b'1'),
+(41, 'true', b'1'),
+(41, 'false', b'0');
+
 SET foreign_key_checks=1;
