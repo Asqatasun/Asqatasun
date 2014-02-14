@@ -454,7 +454,7 @@ public abstract class AbstractAuditSetUpController extends AuditDataHandlerContr
 
         // Copy the audit setup form field map from the builders
         Map<String, List<AuditSetUpFormField>> initialisedSetUpFormFielMap = 
-                new HashMap<String, List<AuditSetUpFormField>>();
+                new LinkedHashMap<String, List<AuditSetUpFormField>>();
         for (Map.Entry<String, List<AuditSetUpFormFieldBuilderImpl>> entry : auditSetUpFormFieldBuilderMap.entrySet()) {
             initialisedSetUpFormFielMap.put(
                     entry.getKey(), 

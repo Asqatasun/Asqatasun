@@ -226,6 +226,7 @@ form .clearfix.error .help-block{
     color : #404040;
     font-weight: normal;
     font-size: 11px;
+    max-width: 720px;
 }
 form .clearfix.error input, form .clearfix.error textarea {
     color : #404040;

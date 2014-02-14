@@ -149,8 +149,8 @@
                 <entry key="ALTERNATIVE_CONTRAST_MECHANISM">
                     <value>contrast-alternative</value>
                 </entry>
-                <entry key="IGNORE_COOKIES">
-                    <value>ignore-cookies</value>
+                <entry key="CONSIDER_COOKIES">
+                    <value>consider-cookies</value>
                 </entry>
             </map>
         </property>
@@ -168,21 +168,25 @@
         </property>
         <property name="siteOptionFormFieldBuilderMap">
             <map>
+                <entry key="crawl-limits">
+                    <list>
+                        <ref bean="depthParamBuilder"/>
+                        <ref bean="maxDurationParamBuilder"/>
+                        <ref bean="maxDocumentsParamBuilder"/>
+                    </list>
+                </entry>
+                <entry key="crawl-options">
+                    <list>
+                        <ref bean="exclusionRegexpParamBuilder"/>
+                        <ref bean="considerCookiesParamBuilder"/>
+                    </list>
+                </entry>
                 <entry key="marker-parameters">
                     <list>
                         <ref bean="dataTableParamBuilder"/>
                         <ref bean="presentationTableParamBuilder"/>
                         <ref bean="decorativeImageParamBuilder"/>
                         <ref bean="informativeImageParamBuilder"/>
-                    </list>
-                </entry>
-                <entry key="crawl-parameters">
-                    <list>
-                        <ref bean="depthParamBuilder"/>
-                        <ref bean="maxDurationParamBuilder"/>
-                        <ref bean="maxDocumentsParamBuilder"/>
-                        <ref bean="exclusionRegexpParamBuilder"/>
-                        <ref bean="considerCookiesParamBuilder"/>
                     </list>
                 </entry>
                 <entry key="contrast-parameters">

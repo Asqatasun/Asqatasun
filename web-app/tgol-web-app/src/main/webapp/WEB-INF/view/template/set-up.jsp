@@ -222,7 +222,7 @@
                                     <spring:message code="${entry.key}-info"/>
                                 </c:set>
                                 <c:if test="${fieldsetInfo != ''}">
-                                    <div class="alert-message warning">
+                                    <div class="alert-message block-message warning">
                                         <p class="fieldset-info">${fieldsetInfo}</p>
                                     </div>
                                 </c:if>
