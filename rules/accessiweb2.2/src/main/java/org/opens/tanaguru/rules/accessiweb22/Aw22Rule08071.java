@@ -30,6 +30,7 @@ import org.opens.tanaguru.rules.elementchecker.lang.LangChangeChecker;
 import org.opens.tanaguru.rules.elementchecker.lang.LangChecker;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.HTML_WITH_LANG_CSS_LIKE_QUERY;
+import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
  * Implementation of the rule 8.7.1 of the referential Accessiweb 2.2.
@@ -68,6 +69,12 @@ public class Aw22Rule08071 extends AbstractPageRuleMarkupImplementation {
         ec = new LangChangeChecker();
         ec.setNomenclatureLoaderService(nomenclatureLoaderService);
         ec.check(sspHandler, selectionHandler, testSolutionHandler);
+        
+        if (testSolutionHandler.getTestSolution().equals(TestSolution.NEED_MORE_INFO)) {
+            sspHandler.getProcessRemarkService().addProcessRemark(
+                    TestSolution.NEED_MORE_INFO, 
+                    RemarkMessageStore.CHECK_SHORT_TEST_MSG);
+        }
     }
     
     @Override

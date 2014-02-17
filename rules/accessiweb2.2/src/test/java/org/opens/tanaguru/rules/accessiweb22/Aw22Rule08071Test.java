@@ -20,7 +20,6 @@
 package org.opens.tanaguru.rules.accessiweb22;
 
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.EvidenceStore;
@@ -118,11 +117,11 @@ public class Aw22Rule08071Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("AW22.Test.8.7.1-1Passed-01");
         // check number of elements in the page
-//        assertEquals(1, processResult.getElementCounter());
+        assertEquals(8, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.PASSED, processResult.getValue());
         // check number of remarks and their value
-//        assertNull(processResult.getRemarkSet());
+        assertNull(processResult.getRemarkSet());
         
         
         //----------------------------------------------------------------------
@@ -130,11 +129,11 @@ public class Aw22Rule08071Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.7.1-1Passed-02");
         // check number of elements in the page
-//        assertEquals(1, processResult.getElementCounter());
+        assertEquals(8, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.PASSED, processResult.getValue());
         // check number of remarks and their value
-//        assertNull(processResult.getRemarkSet());
+        assertNull(processResult.getRemarkSet());
 
         
         //----------------------------------------------------------------------
@@ -142,11 +141,11 @@ public class Aw22Rule08071Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.7.1-1Passed-03");
         // check number of elements in the page
-//        assertEquals(1, processResult.getElementCounter());
+        assertEquals(8, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.PASSED, processResult.getValue());
         // check number of remarks and their value
-//        assertNull(processResult.getRemarkSet());
+        assertNull(processResult.getRemarkSet());
 
         
         //----------------------------------------------------------------------
@@ -154,11 +153,11 @@ public class Aw22Rule08071Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.7.1-1Passed-04");
         // check number of elements in the page
-//        assertEquals(1, processResult.getElementCounter());
+        assertEquals(8, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.PASSED, processResult.getValue());
         // check number of remarks and their value
-//        assertNull(processResult.getRemarkSet());
+        assertNull(processResult.getRemarkSet());
 
         
         //----------------------------------------------------------------------
@@ -166,11 +165,11 @@ public class Aw22Rule08071Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.7.1-1Passed-05");
         // check number of elements in the page
-//        assertEquals(1, processResult.getElementCounter());
+        assertEquals(8, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.PASSED, processResult.getValue());
         // check number of remarks and their value
-//        assertNull(processResult.getRemarkSet());
+        assertNull(processResult.getRemarkSet());
 
         
         //----------------------------------------------------------------------
@@ -178,195 +177,94 @@ public class Aw22Rule08071Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.7.1-2Failed-01");
         // check number of elements in the page
-//        assertEquals(1, processResult.getElementCounter());
+        assertEquals(8, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
-//        assertEquals(2, processResult.getRemarkSet().size());
-//        Iterator<ProcessRemark> sIter = processResult.getRemarkSet().iterator();
-//        SourceCodeRemark processRemark = (SourceCodeRemark)sIter.next();
-//        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-//        assertEquals(RemarkMessageStore.IRRELEVANT_LANG_DECL_MSG, processRemark.getMessageCode());
-//        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
-//        assertNotNull(processRemark.getSnippet());
-//        // check number of evidence elements and their value
-//        assertEquals(3, processRemark.getElementList().size());
-//        Iterator<EvidenceElement> pIter = processRemark.getElementList().iterator();
-//        EvidenceElement ee = pIter.next();
-//        assertEquals("fr",ee.getValue());
-//        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertEquals("en",ee.getValue());
-//        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertTrue(ee.getValue().contains("On each Web page, does each text that is written in a language differing"));
-//        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
-//        
-//        processRemark = (SourceCodeRemark)sIter.next();
-//        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-//        assertEquals(RemarkMessageStore.IRRELEVANT_LANG_DECL_MSG, processRemark.getMessageCode());
-//        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
-//        assertNotNull(processRemark.getSnippet());
-//        // check number of evidence elements and their value
-//        assertEquals(3, processRemark.getElementList().size());
-//        pIter = processRemark.getElementList().iterator();
-//        ee = pIter.next();
-//        assertEquals("fr",ee.getValue());
-//        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertEquals("en",ee.getValue());
-//        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertTrue(ee.getValue().contains("Failed : All the textual nodes without lang attribute are long enough"));
-//        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
-
+        assertEquals(1, processResult.getRemarkSet().size());
+        Iterator<ProcessRemark> sIter = processResult.getRemarkSet().iterator();
+        SourceCodeRemark sourceCodeRemark = (SourceCodeRemark)sIter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.P_ELEMENT, sourceCodeRemark.getTarget());
+        assertNotNull(sourceCodeRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(3, sourceCodeRemark.getElementList().size());
+        Iterator<EvidenceElement> pIter = sourceCodeRemark.getElementList().iterator();
+        EvidenceElement ee = pIter.next();
+        assertEquals("en",ee.getValue());
+        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
+        ee = pIter.next();
+        assertEquals("fr",ee.getValue());
+        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
+        ee = pIter.next();
+        assertTrue(ee.getValue().contains("L'accessibilité du web est la problématique de l'accès aux"));
+        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
         
         //----------------------------------------------------------------------
         //---------------------------2Failed-02---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.7.1-2Failed-02");
         // check number of elements in the page
-//        assertEquals(1, processResult.getElementCounter());
+        assertEquals(8, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
-//        assertEquals(7, processResult.getRemarkSet().size());
-//        sIter = processResult.getRemarkSet().iterator();
-//        processRemark = (SourceCodeRemark)sIter.next();
-//        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-//        assertEquals(RemarkMessageStore.SUSPECTED_IRRELEVANT_LANG_DECL_MSG, processRemark.getMessageCode());
-//        assertEquals(HtmlElementStore.TITLE_ELEMENT, processRemark.getTarget());
-//        assertNotNull(processRemark.getSnippet());
-//        // check number of evidence elements and their value
-//        assertEquals(3, processRemark.getElementList().size());
-//        pIter = processRemark.getElementList().iterator();
-//        ee = pIter.next();
-//        assertEquals("fr",ee.getValue());
-//        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertEquals("en",ee.getValue());
-//        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertTrue(ee.getValue().contains("Aw22 Test.8.7.1 Failed 02"));
-//        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
-//        
-//        processRemark = (SourceCodeRemark)sIter.next();
-//        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-//        assertEquals(RemarkMessageStore.SUSPECTED_IRRELEVANT_LANG_DECL_MSG, processRemark.getMessageCode());
-//        assertEquals(HtmlElementStore.H1_ELEMENT, processRemark.getTarget());
-//        assertNotNull(processRemark.getSnippet());
-//        // check number of evidence elements and their value
-//        assertEquals(3, processRemark.getElementList().size());
-//        pIter = processRemark.getElementList().iterator();
-//        ee = pIter.next();
-//        assertEquals("fr",ee.getValue());
-//        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertEquals("en",ee.getValue());
-//        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertTrue(ee.getValue().contains("Aw22 Test.8.7.1 Failed 02"));
-//        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
-//        
-//        processRemark = (SourceCodeRemark)sIter.next();
-//        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-//        assertEquals(RemarkMessageStore.IRRELEVANT_LANG_DECL_MSG, processRemark.getMessageCode());
-//        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
-//        assertNotNull(processRemark.getSnippet());
-//        // check number of evidence elements and their value
-//        assertEquals(3, processRemark.getElementList().size());
-//        pIter = processRemark.getElementList().iterator();
-//        ee = pIter.next();
-//        assertEquals("fr",ee.getValue());
-//        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertEquals("en",ee.getValue());
-//        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertTrue(ee.getValue().contains("On each Web page, does each text that is written in a language differing "));
-//        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
-//        
-//        processRemark = (SourceCodeRemark)sIter.next();
-//        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-//        assertEquals(RemarkMessageStore.SUSPECTED_IRRELEVANT_LANG_DECL_MSG, processRemark.getMessageCode());
-//        assertEquals(HtmlElementStore.LI_ELEMENT, processRemark.getTarget());
-//        assertNotNull(processRemark.getSnippet());
-//        // check number of evidence elements and their value
-//        assertEquals(3, processRemark.getElementList().size());
-//        pIter = processRemark.getElementList().iterator();
-//        ee = pIter.next();
-//        assertEquals("fr",ee.getValue());
-//        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertEquals("en",ee.getValue());
-//        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertEquals("The language specification is provided on the element that contains the text",ee.getValue());
-//        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
-//        
-//        processRemark = (SourceCodeRemark)sIter.next();
-//        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-//        assertEquals(RemarkMessageStore.SUSPECTED_IRRELEVANT_LANG_DECL_MSG, processRemark.getMessageCode());
-//        assertEquals(HtmlElementStore.LI_ELEMENT, processRemark.getTarget());
-//        assertNotNull(processRemark.getSnippet());
-//        // check number of evidence elements and their value
-//        assertEquals(3, processRemark.getElementList().size());
-//        pIter = processRemark.getElementList().iterator();
-//        ee = pIter.next();
-//        assertEquals("fr",ee.getValue());
-//        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertEquals("en",ee.getValue());
-//        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertEquals("The language specification is provided on one of the parent elements",ee.getValue());
-//        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
-//        
-//        processRemark = (SourceCodeRemark)sIter.next();
-//        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-//        assertEquals(RemarkMessageStore.SUSPECTED_RELEVANT_LANG_DECL_MSG, processRemark.getMessageCode());
-//        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
-//        assertNotNull(processRemark.getSnippet());
-//        // check number of evidence elements and their value
-//        assertEquals(3, processRemark.getElementList().size());
-//        pIter = processRemark.getElementList().iterator();
-//        ee = pIter.next();
-//        assertEquals("fr",ee.getValue());
-//        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertEquals("fr",ee.getValue());
-//        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertEquals("Un texte court en français",ee.getValue());
-//        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
-//        
-//        processRemark = (SourceCodeRemark)sIter.next();
-//        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-//        assertEquals(RemarkMessageStore.IRRELEVANT_LANG_DECL_MSG, processRemark.getMessageCode());
-//        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
-//        assertNotNull(processRemark.getSnippet());
-//        // check number of evidence elements and their value
-//        assertEquals(3, processRemark.getElementList().size());
-//        pIter = processRemark.getElementList().iterator();
-//        ee = pIter.next();
-//        assertEquals("fr",ee.getValue());
-//        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertEquals("en",ee.getValue());
-//        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertTrue(ee.getValue().contains("Failed : All the textual nodes without lang attribute are long enough"));
-//        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
-        
+        assertEquals(1, processResult.getRemarkSet().size());
+        sIter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)sIter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.P_ELEMENT, sourceCodeRemark.getTarget());
+        assertNotNull(sourceCodeRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(4, sourceCodeRemark.getElementList().size());
+        pIter = sourceCodeRemark.getElementList().iterator();
+        ee = pIter.next();
+        assertEquals("en",ee.getValue());
+        assertEquals(EvidenceStore.DEFAULT_LANGUAGE_EE, ee.getEvidence().getCode());
+        ee = pIter.next();
+        assertEquals("fr",ee.getValue());
+        assertEquals(EvidenceStore.CURRENT_LANGUAGE_EE, ee.getEvidence().getCode());
+        ee = pIter.next();
+        assertEquals("en",ee.getValue());
+        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
+        ee = pIter.next();
+        assertTrue(ee.getValue().contains("Web accessibility refers to the inclusive practice of making "));
+        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
+ 
         
         //----------------------------------------------------------------------
         //---------------------------2Failed-03---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.7.1-2Failed-03");
         // check number of elements in the page
-//        assertEquals(1, processResult.getElementCounter());
+        assertEquals(8, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        sIter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)sIter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.SPAN_ELEMENT, sourceCodeRemark.getTarget());
+        assertNotNull(sourceCodeRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(4, sourceCodeRemark.getElementList().size());
+        pIter = sourceCodeRemark.getElementList().iterator();
+        ee = pIter.next();
+        assertEquals("en",ee.getValue());
+        assertEquals(EvidenceStore.DEFAULT_LANGUAGE_EE, ee.getEvidence().getCode());
+        ee = pIter.next();
+        assertEquals("fr",ee.getValue());
+        assertEquals(EvidenceStore.CURRENT_LANGUAGE_EE, ee.getEvidence().getCode());
+        ee = pIter.next();
+        assertEquals("en",ee.getValue());
+        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
+        ee = pIter.next();
+        assertTrue(ee.getValue().contains("Web accessibility refers to the inclusive practice of making"));
+        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
         
         
         //----------------------------------------------------------------------
@@ -374,9 +272,32 @@ public class Aw22Rule08071Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.7.1-2Failed-04");
         // check number of elements in the page
-//        assertEquals(1, processResult.getElementCounter());
+        assertEquals(8, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        sIter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)sIter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.P_ELEMENT, sourceCodeRemark.getTarget());
+        assertNotNull(sourceCodeRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(4, sourceCodeRemark.getElementList().size());
+        pIter = sourceCodeRemark.getElementList().iterator();
+        ee = pIter.next();
+        assertEquals("en",ee.getValue());
+        assertEquals(EvidenceStore.DEFAULT_LANGUAGE_EE, ee.getEvidence().getCode());
+        ee = pIter.next();
+        assertEquals("dummy",ee.getValue());
+        assertEquals(EvidenceStore.CURRENT_LANGUAGE_EE, ee.getEvidence().getCode());
+        ee = pIter.next();
+        assertEquals("en",ee.getValue());
+        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
+        ee = pIter.next();
+        assertTrue(ee.getValue().contains("Web accessibility refers to the inclusive practice of making "));
+        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
         
         
         //----------------------------------------------------------------------
@@ -384,9 +305,32 @@ public class Aw22Rule08071Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.7.1-2Failed-05");
         // check number of elements in the page
-//        assertEquals(1, processResult.getElementCounter());
+        assertEquals(8, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        sIter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)sIter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.P_ELEMENT, sourceCodeRemark.getTarget());
+        assertNotNull(sourceCodeRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(4, sourceCodeRemark.getElementList().size());
+        pIter = sourceCodeRemark.getElementList().iterator();
+        ee = pIter.next();
+        assertEquals("en",ee.getValue());
+        assertEquals(EvidenceStore.DEFAULT_LANGUAGE_EE, ee.getEvidence().getCode());
+        ee = pIter.next();
+        assertEquals("dummy",ee.getValue());
+        assertEquals(EvidenceStore.CURRENT_LANGUAGE_EE, ee.getEvidence().getCode());
+        ee = pIter.next();
+        assertEquals("en",ee.getValue());
+        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
+        ee = pIter.next();
+        assertTrue(ee.getValue().contains("Web accessibility refers to the inclusive practice of making "));
+        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
         
         
         //----------------------------------------------------------------------
@@ -394,9 +338,32 @@ public class Aw22Rule08071Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.7.1-2Failed-06");
         // check number of elements in the page
-//        assertEquals(1, processResult.getElementCounter());
+        assertEquals(8, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        sIter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)sIter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.P_ELEMENT, sourceCodeRemark.getTarget());
+        assertNotNull(sourceCodeRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(4, sourceCodeRemark.getElementList().size());
+        pIter = sourceCodeRemark.getElementList().iterator();
+        ee = pIter.next();
+        assertEquals("en",ee.getValue());
+        assertEquals(EvidenceStore.DEFAULT_LANGUAGE_EE, ee.getEvidence().getCode());
+        ee = pIter.next();
+        assertEquals("dummy",ee.getValue());
+        assertEquals(EvidenceStore.CURRENT_LANGUAGE_EE, ee.getEvidence().getCode());
+        ee = pIter.next();
+        assertEquals("en",ee.getValue());
+        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
+        ee = pIter.next();
+        assertTrue(ee.getValue().contains("Web accessibility refers to the inclusive practice of making "));
+        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
         
         
         //----------------------------------------------------------------------
@@ -404,9 +371,32 @@ public class Aw22Rule08071Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.7.1-2Failed-07");
         // check number of elements in the page
-//        assertEquals(1, processResult.getElementCounter());
+        assertEquals(8, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        sIter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)sIter.next();
+        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.SPAN_ELEMENT, sourceCodeRemark.getTarget());
+        assertNotNull(sourceCodeRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(4, sourceCodeRemark.getElementList().size());
+        pIter = sourceCodeRemark.getElementList().iterator();
+        ee = pIter.next();
+        assertEquals("en",ee.getValue());
+        assertEquals(EvidenceStore.DEFAULT_LANGUAGE_EE, ee.getEvidence().getCode());
+        ee = pIter.next();
+        assertEquals("dummy",ee.getValue());
+        assertEquals(EvidenceStore.CURRENT_LANGUAGE_EE, ee.getEvidence().getCode());
+        ee = pIter.next();
+        assertEquals("en",ee.getValue());
+        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
+        ee = pIter.next();
+        assertTrue(ee.getValue().contains("Web accessibility refers to the inclusive practice of making "));
+        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
         
         
         //----------------------------------------------------------------------
@@ -414,65 +404,15 @@ public class Aw22Rule08071Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.7.1-3NMI-01");
         // check number of elements in the page
-//        assertEquals(1, processResult.getElementCounter());
+        assertEquals(8, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         // check number of remarks and their value
-//        assertEquals(3, processResult.getRemarkSet().size());
-//        sIter = processResult.getRemarkSet().iterator();
-//        processRemark = (SourceCodeRemark)sIter.next();
-//        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-//        assertEquals(RemarkMessageStore.SUSPECTED_RELEVANT_LANG_DECL_MSG, processRemark.getMessageCode());
-//        assertEquals(HtmlElementStore.H1_ELEMENT, processRemark.getTarget());
-//        assertNotNull(processRemark.getSnippet());
-//        // check number of evidence elements and their value
-//        assertEquals(3, processRemark.getElementList().size());
-//        pIter = processRemark.getElementList().iterator();
-//        ee = pIter.next();
-//        assertEquals("en",ee.getValue());
-//        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertEquals("en",ee.getValue());
-//        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertTrue(ee.getValue().contains("Aw22 Test.8.7.1 NMI 01"));
-//        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
-//        
-//        processRemark = (SourceCodeRemark)sIter.next();
-//        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-//        assertEquals(RemarkMessageStore.SUSPECTED_IRRELEVANT_LANG_DECL_MSG, processRemark.getMessageCode());
-//        assertEquals(HtmlElementStore.LI_ELEMENT, processRemark.getTarget());
-//        assertNotNull(processRemark.getSnippet());
-//        // check number of evidence elements and their value
-//        assertEquals(3, processRemark.getElementList().size());
-//        pIter = processRemark.getElementList().iterator();
-//        ee = pIter.next();
-//        assertEquals("fr",ee.getValue());
-//        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertEquals("en",ee.getValue());
-//        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertEquals("The language specification is provided on the element that contains the text",ee.getValue());
-//        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
-//        
-//        processRemark = (SourceCodeRemark)sIter.next();
-//        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-//        assertEquals(RemarkMessageStore.SUSPECTED_IRRELEVANT_LANG_DECL_MSG, processRemark.getMessageCode());
-//        assertEquals(HtmlElementStore.LI_ELEMENT, processRemark.getTarget());
-//        assertNotNull(processRemark.getSnippet());
-//        // check number of evidence elements and their value
-//        assertEquals(3, processRemark.getElementList().size());
-//        pIter = processRemark.getElementList().iterator();
-//        ee = pIter.next();
-//        assertEquals("fr",ee.getValue());
-//        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertEquals("en",ee.getValue());
-//        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-//        ee = pIter.next();
-//        assertEquals("The language specification is provided on one of the parent elements",ee.getValue());
-//        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
+        assertEquals(1, processResult.getRemarkSet().size());
+        sIter = processResult.getRemarkSet().iterator();
+        ProcessRemark processRemark = sIter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_SHORT_TEST_MSG, processRemark.getMessageCode());
         
         
         //----------------------------------------------------------------------
@@ -480,9 +420,15 @@ public class Aw22Rule08071Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.7.1-3NMI-02");
         // check number of elements in the page
-//        assertEquals(1, processResult.getElementCounter());
+        assertEquals(7, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        sIter = processResult.getRemarkSet().iterator();
+        processRemark = sIter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_SHORT_TEST_MSG, processRemark.getMessageCode());
         
         
         //----------------------------------------------------------------------
@@ -490,9 +436,15 @@ public class Aw22Rule08071Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.7.1-3NMI-03");
         // check number of elements in the page
-//        assertEquals(1, processResult.getElementCounter());
+        assertEquals(7, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        sIter = processResult.getRemarkSet().iterator();
+        processRemark = sIter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_SHORT_TEST_MSG, processRemark.getMessageCode());
         
         
         //----------------------------------------------------------------------
@@ -500,9 +452,15 @@ public class Aw22Rule08071Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.7.1-3NMI-04");
         // check number of elements in the page
-//        assertEquals(1, processResult.getElementCounter());
+        assertEquals(7, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        sIter = processResult.getRemarkSet().iterator();
+        processRemark = sIter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_SHORT_TEST_MSG, processRemark.getMessageCode());
         
         
         //----------------------------------------------------------------------

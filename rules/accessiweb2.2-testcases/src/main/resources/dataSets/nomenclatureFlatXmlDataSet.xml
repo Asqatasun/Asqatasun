@@ -568,5 +568,7 @@
     <EVIDENCE Id_Evidence="28" Cd_Evidence="Foreground-Color" Description="NULL" Long_Label="NULL" />
     <EVIDENCE Id_Evidence="29" Cd_Evidence="Background-Color" Description="NULL" Long_Label="NULL" />
     <EVIDENCE Id_Evidence="30" Cd_Evidence="Contrast" Description="NULL" Long_Label="NULL" />
+    <EVIDENCE Id_Evidence="31" Cd_Evidence="Default-Language" Description="NULL" Long_Label="NULL" />
+    <EVIDENCE Id_Evidence="32" Cd_Evidence="Current-Language" Description="NULL" Long_Label="NULL" />
 
 </dataset>
