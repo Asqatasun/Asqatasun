@@ -298,6 +298,7 @@ public final class TgolKeyStore {
     public static final String AUDITED_PAGES_COUNT_KEY = "auditedPagesCount";
     public static final String REDIRECTED_PAGES_COUNT_KEY = "redirectedPagesCount";
     public static final String ERROR_PAGES_COUNT_KEY = "errorPagesCount";
+    public static final String REL_CANONICAL_PAGES_COUNT_KEY = "relCanonicalPagesCount";
     public static final String AUTHORIZED_PAGE_SIZE_KEY = "authorizedPageSize";
     public static final String AUTHORIZED_SORT_CRITERION_KEY = "authorizedSortCriterion";
     public static final String AUTHORIZED_SCOPE_FOR_PAGE_LIST = "authorizedScopeForPageList";
