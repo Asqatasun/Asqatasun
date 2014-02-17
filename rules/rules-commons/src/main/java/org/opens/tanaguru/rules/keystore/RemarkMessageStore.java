@@ -193,8 +193,8 @@ public final class RemarkMessageStore {
             "MalformedLanguage";
     public static final String LANGUAGE_CHANGE_MISSING_MSG = 
             "LangChangeMissingOnElementOrOneOfItsParent";
-    public static final String LINK_WITHOUT_TARGET_MSG = 
-            "LinkWithoutTarget";
+    public static final String CHECK_SHORT_TEST_MSG = "CheckManuallyShortText";
+    public static final String LINK_WITHOUT_TARGET_MSG = "LinkWithoutTarget";
     public static final String FIELDSET_NOT_WITHIN_FORM_MSG = 
             "FieldsetNotWithinForm";
 

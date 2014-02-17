@@ -558,5 +558,7 @@
     <EVIDENCE Id_Evidence="25" Cd_Evidence="alt" Description="NULL" Long_Label="NULL" />
     <EVIDENCE Id_Evidence="26" Cd_Evidence="longdesc" Description="NULL" Long_Label="NULL" />
     <EVIDENCE Id_Evidence="27" Cd_Evidence="data" Description="NULL" Long_Label="NULL" />
+    <EVIDENCE Id_Evidence="28" Cd_Evidence="Default-Language" Description="NULL" Long_Label="NULL" />
+    <EVIDENCE Id_Evidence="29" Cd_Evidence="Current-Language" Description="NULL" Long_Label="NULL" />
 
 </dataset>
