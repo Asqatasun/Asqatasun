@@ -196,7 +196,8 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
     /**
      * 
      * @param element
-     * @param lang
+     * @param defaultLang
+     * @param currentLang
      * @param text
      * @param solutionOnIdentical
      * @param solutionOnDifferent
@@ -204,7 +205,8 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
      */
     protected TestSolution checkLanguageRelevancy(
             Element element, 
-            String lang, 
+            String defaultLang, 
+            String currentLang, 
             String text, 
             TestSolution solutionOnIdentical,
             TestSolution solutionOnDifferent) {
@@ -226,20 +228,22 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
                     TestSolution.NEED_MORE_INFO,
                     element,
                     UNDETECTED_LANG_MSG,
-                    lang,
+                    defaultLang,
+                    currentLang,
                     "",
                     text);
             return TestSolution.NEED_MORE_INFO;
         }  
 
-        boolean isLangIdentical = StringUtils.equalsIgnoreCase(lang, ldr.getDetectedLanguage());
+        boolean isLangIdentical = StringUtils.equalsIgnoreCase(defaultLang, ldr.getDetectedLanguage());
 
         if (isLangIdentical && ldr.isReliable()) {
             addSourceCodeRemark(
                         solutionOnIdentical,
                         element,
                         identicalLangMsg,
-                        lang,
+                        defaultLang,
+                        currentLang,
                         ldr.getDetectedLanguage(),
                         text);
             return solutionOnIdentical;
@@ -248,7 +252,8 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
                         TestSolution.NEED_MORE_INFO,
                         element,
                         suspectedIdenticalLangMsg,
-                        lang,
+                        defaultLang,
+                        currentLang,
                         ldr.getDetectedLanguage(),
                         text);
                 return TestSolution.NEED_MORE_INFO;
@@ -257,7 +262,8 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
                         solutionOnDifferent,
                         element,
                         differentLangMsg,
-                        lang,
+                        defaultLang,
+                        currentLang,
                         ldr.getDetectedLanguage(),
                         text);
             return solutionOnDifferent;
@@ -266,7 +272,8 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
                         TestSolution.NEED_MORE_INFO,
                         element,
                         suspectedDifferentLangMsg,
-                        lang,
+                        defaultLang,
+                        currentLang,
                         ldr.getDetectedLanguage(),
                         text);
             return TestSolution.NEED_MORE_INFO;
@@ -418,14 +425,16 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
      * @param testSolution
      * @param element
      * @param message
-     * @param linkTitleAttrValue
+     * @param defaultLang
+     * @param currentLang
      * @param linkTextValue
      */
     private void addSourceCodeRemark(
             TestSolution testSolution,
             Element element,
             String message,
-            String lang,
+            String defaultLang,
+            String currentLang,
             String detectedLang,
             String testedText) {
         if (testSolution.equals(TestSolution.PASSED) || 
@@ -434,7 +443,12 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
         }
         List<EvidenceElement> evidenceElementList = new ArrayList<EvidenceElement>();
 
-        evidenceElementList.add(getEvidenceElement(LANGUAGE_EE, lang));
+        if (StringUtils.isNotBlank(currentLang)) {
+            evidenceElementList.add(getEvidenceElement(DEFAULT_LANGUAGE_EE, defaultLang));
+            evidenceElementList.add(getEvidenceElement(CURRENT_LANGUAGE_EE, currentLang));
+        } else {
+            evidenceElementList.add(getEvidenceElement(LANGUAGE_EE, defaultLang));
+        }
         evidenceElementList.add(getEvidenceElement(DETECTED_LANGUAGE_EE, detectedLang));
         
         if (testedText.length() > DISPLAYABLE_TEXT_SIZE) {

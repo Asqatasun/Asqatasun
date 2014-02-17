@@ -85,6 +85,7 @@ public class LangDeclarationValidityChecker extends LangChecker {
                 return checkLanguageRelevancy(
                         element, 
                         effectiveLang, 
+                        null,
                         extractedText, 
                         TestSolution.PASSED,
                         TestSolution.FAILED);

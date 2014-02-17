@@ -22,6 +22,7 @@
 
 package org.opens.tanaguru.rules.elementchecker.lang;
 
+import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -84,7 +85,7 @@ public class LangChangeChecker extends LangChecker {
             return TestSolution.NOT_APPLICABLE;
         }
         // the handler may contain the html element or nothing
-        return checkLanguageRelevancyRecursively(sspHandler, element, false);
+        return checkLanguageRelevancyRecursively(sspHandler, element, null);
     }
     
     /**
@@ -97,8 +98,10 @@ public class LangChangeChecker extends LangChecker {
     private TestSolution checkLanguageRelevancyRecursively(
             SSPHandler sspHandler,
             Element element, 
-            boolean langRedefinitionInProgress) {
-
+            @Nullable String currentLangRedefinitionValue) {
+        
+        String currentLangRedefinition = currentLangRedefinitionValue;
+        
         TestSolutionHandler tsh = new TestSolutionHandlerImpl();
         // if the current element defines a lang, we extract its value and check
         // it is different from the default one. If it is different, we start
@@ -109,11 +112,11 @@ public class LangChangeChecker extends LangChecker {
         // children have to be identical to the default one.
         if (isLangDefinedForElement(element)) {
             String langDefinition = extractLangDefinitionFromElement(element, sspHandler);
-            String lang = extractEffectiveLang(langDefinition);
-            if (!StringUtils.equalsIgnoreCase(defaultLang, lang)) {
-                langRedefinitionInProgress = true;
+            String currentLang = extractEffectiveLang(langDefinition);
+            if (!StringUtils.equalsIgnoreCase(defaultLang, currentLang)) {
+                currentLangRedefinition = currentLang;
             } else {
-                langRedefinitionInProgress = false;
+                currentLangRedefinition = null;
             }
         }
       
@@ -122,9 +125,9 @@ public class LangChangeChecker extends LangChecker {
         String extractedText = extractTextFromElement(element, false);
         if (isTextTestable(extractedText)) {
             newElementTested();
-            if (langRedefinitionInProgress) {
+            if (StringUtils.isNotBlank(currentLangRedefinition)) {
                 tsh.addTestSolution(
-                    checkLanguageDifferentFromDefault(element, extractedText));
+                    checkLanguageDifferentFromDefault(element, extractedText, currentLangRedefinition));
             } else {
                 tsh.addTestSolution(
                     checkLanguageIdenticalToDefault(element, extractedText));
@@ -136,7 +139,7 @@ public class LangChangeChecker extends LangChecker {
                 checkLanguageRelevancyRecursively(
                     sspHandler, 
                     el, 
-                    langRedefinitionInProgress)
+                    currentLangRedefinition)
                 );
         }
         return tsh.getTestSolution();
@@ -152,6 +155,8 @@ public class LangChangeChecker extends LangChecker {
         return checkLanguageRelevancy(
                 element,
                 text,
+                defaultLang,
+                null, // no current lang, set to null
                 TestSolution.NOT_APPLICABLE,
                 TestSolution.FAILED,
                 null,
@@ -166,10 +171,15 @@ public class LangChangeChecker extends LangChecker {
      * @param text
      * @return 
      */
-    private TestSolution checkLanguageDifferentFromDefault(Element element, String text) {
+    private TestSolution checkLanguageDifferentFromDefault(
+            Element element, 
+            String text, 
+            String currentLangDefinition) {
         return checkLanguageRelevancy(
                 element,
                 text,
+                defaultLang,
+                currentLangDefinition,
                 TestSolution.FAILED,
                 TestSolution.PASSED,
                 LANGUAGE_CHANGE_MISSING_MSG,
@@ -183,6 +193,7 @@ public class LangChangeChecker extends LangChecker {
      * @param element
      * @param lang
      * @param text
+     * @param defaultLang
      * @param solutionOnIdentical
      * @param solutionOnDifferent
      * @param identicalLangMessage
@@ -194,6 +205,8 @@ public class LangChangeChecker extends LangChecker {
     private TestSolution checkLanguageRelevancy(
             Element element, 
             String text, 
+            String defaultLang,
+            @Nullable String currentLang,
             TestSolution solutionOnIdentical, 
             TestSolution solutionOnDifferent,
             String identicalLangMsg,
@@ -207,6 +220,7 @@ public class LangChangeChecker extends LangChecker {
         return checkLanguageRelevancy(
                 element, 
                 defaultLang, 
+                currentLang,
                 text, 
                 solutionOnIdentical, 
                 solutionOnDifferent);
