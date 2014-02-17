@@ -21,6 +21,11 @@
  */
 package org.opens.tanaguru.crawler.framework;
 
+import org.apache.commons.httpclient.HttpConnection;
+import org.apache.log4j.Logger;
+import org.archive.httpclient.HttpRecorderMethod;
+import org.archive.modules.CrawlURI;
+import org.archive.modules.deciderules.DecideResult;
 import org.archive.modules.fetcher.FetchHTTP;
 
 /**
@@ -47,4 +52,13 @@ public class TanaguruFetchHTTP extends FetchHTTP{
         super();
     }
 
+    @Override
+    protected boolean checkMidfetchAbort(CrawlURI curi, HttpRecorderMethod method, HttpConnection conn) {
+        boolean checkMidfetchAbort= super.checkMidfetchAbort(curi, method, conn);
+        Logger.getLogger(this.getClass()).debug("curi.isPrerequisite() "+curi.isPrerequisite());
+        Logger.getLogger(this.getClass()).debug("curi.getContentType() "+curi.getContentType());
+        Logger.getLogger(this.getClass()).debug("checkMidfetchAbort "+checkMidfetchAbort);
+        return checkMidfetchAbort;
+    }
+    
 }
