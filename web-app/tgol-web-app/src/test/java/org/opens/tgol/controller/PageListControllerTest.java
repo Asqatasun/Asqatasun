@@ -359,6 +359,17 @@ public class PageListControllerTest extends TestCase {
     public void testDisplay4xxPageList() throws Exception {
         System.out.println("TO DO : testDisplay2xxPageList");
     }
+    
+    /**
+     * The PageList is displayed when the webResource is a Site instance. 
+     * When the request has TgolKeyStore.STATUS_KEY equals to 2xx, 
+     * the returned page list the pages that returned a code 200 when fetched
+     * 
+     * @throws Exception 
+     */
+    public void testDisplay9xxPageList() throws Exception {
+        System.out.println("TO DO : testDisplay9xxPageList");
+    }
  
     /**
      * 
@@ -510,7 +521,7 @@ public class PageListControllerTest extends TestCase {
                 mockSite = createMock(Site.class);
                 expect(mockAuditDataService.read(Long.valueOf(getIdValue))).andReturn(mockAudit).anyTimes();
                 expect(mockAudit.getSubject()).andReturn(mockSite).times(2);
-                expect(mockAudit.getId()).andReturn(Long.valueOf(getIdValue)).times(3);
+                expect(mockAudit.getId()).andReturn(Long.valueOf(getIdValue)).times(4);
                 // set mock data Service cause the data are all collected
                 setUpMockWebResourceDataServiceDecorator(Long.valueOf(getIdValue));
                 replay(mockSite);
@@ -572,6 +583,9 @@ public class PageListControllerTest extends TestCase {
                 anyTimes();
         expect(mockWebResourceDataServiceDecorator.getWebResourceCountByAuditAndHttpStatusCode(idAudit, HttpStatusCodeFamily.f4xx, null, null)).
                 andReturn(Long.valueOf(3)).
+                anyTimes();
+        expect(mockWebResourceDataServiceDecorator.getWebResourceCountByAuditAndHttpStatusCode(idAudit, HttpStatusCodeFamily.f9xx, null, null)).
+                andReturn(Long.valueOf(4)).
                 anyTimes();
         expect(mockWebResourceDataServiceDecorator.getMarkByWebResourceAndAudit(mockSite, false)).
                 andReturn(Float.valueOf(55)).

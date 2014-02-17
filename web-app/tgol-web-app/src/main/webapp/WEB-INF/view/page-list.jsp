@@ -140,6 +140,12 @@
                                 </td>
                                 <td class="tg-numerical-column" headers="nbOfPages">${errorPagesCount}</td>
                             </tr>
+                            <tr>
+                                <td class="tg-textual-column" headers="httpStatus">
+                                    <a href="?audit=${param.audit}&amp;status=f9xx"><fmt:message key="pageList.f9xx"/></a> <fmt:message key="pageList.f9xxDetails"/>
+                                </td>
+                                <td class="tg-numerical-column" headers="nbOfPages">${relCanonicalPagesCount}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div><!-- id="span16 tg-table-container"-->

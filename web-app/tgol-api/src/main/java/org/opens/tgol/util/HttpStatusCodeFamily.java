@@ -30,7 +30,8 @@ public enum HttpStatusCodeFamily {
     f2xx("2"),
     f3xx("3"),
     f4xx("4"),
-    f5xx("5");
+    f5xx("5"),
+    f9xx("9");
 
     private HttpStatusCodeFamily(String code) {
         this.code = code;

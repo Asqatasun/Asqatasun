@@ -161,6 +161,9 @@ public class PageListController extends AuditDataHandlerController{
         model.addAttribute(
                 TgolKeyStore.ERROR_PAGES_COUNT_KEY,
                 getWebResourceCount(audit.getId(), HttpStatusCodeFamily.f4xx));
+        model.addAttribute(
+                TgolKeyStore.REL_CANONICAL_PAGES_COUNT_KEY,
+                getWebResourceCount(audit.getId(), HttpStatusCodeFamily.f9xx));
         addAuditStatisticsToModel(audit.getSubject(), model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE);
         return TgolKeyStore.PAGE_LIST_VIEW_NAME;
     }
@@ -187,6 +190,9 @@ public class PageListController extends AuditDataHandlerController{
         } else if (status.equalsIgnoreCase(HttpStatusCodeFamily.f4xx.name())) {
             getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getDefault3xxSortCriterion());
             return HttpStatusCodeFamily.f4xx;
+        } else if (status.equalsIgnoreCase(HttpStatusCodeFamily.f9xx.name())) {
+            getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getDefault3xxSortCriterion());
+            return HttpStatusCodeFamily.f9xx;
         } else {
             return null;
         }

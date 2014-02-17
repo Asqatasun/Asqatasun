@@ -272,6 +272,9 @@
                                 <c:when test="${param.status == 'f2xx'}">
                                     <display:column property="rawMark" title="${rawMarkTitle}" headerClass="markCol" class="markCol" headerScope="col"/>
                                 </c:when>
+                                <c:when test="${param.status == 'f9xx'}">
+                                    <!-- do nothing -->
+                                </c:when>
                                 <c:otherwise>
                                     <display:column property="httpStatusCode" title="${httpStatusCodeTitle}" headerClass="statusCol" class="statusCol" headerScope="col"/>
                                 </c:otherwise>
@@ -283,6 +286,9 @@
                                     <display:column property="urlWithPageResultLinkAndExternalLink" title="${urlTitle}" headerClass="urlCol" class="urlCol" headerScope="col"/>
                                     <display:column property="rawMark" title="${rawMarkTitle}" headerClass="markCol" class="markCol" headerScope="col"/>
                                     <display:column property="rank" title="${rankTitle}" headerClass="rankCol" class="rankCol" headerScope="col"/>
+                                </c:when>
+                                <c:when test="${param.status == 'f9xx'}">
+                                    <!-- do nothing -->
                                 </c:when>
                                 <c:otherwise>
                                     <display:column property="urlWithExternalLink" title="${urlTitle}" headerClass="urlCol" class="urlCol" headerScope="col"/>
