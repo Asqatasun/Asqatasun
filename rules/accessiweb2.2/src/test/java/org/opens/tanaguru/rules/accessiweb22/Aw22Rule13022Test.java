@@ -60,7 +60,7 @@ public class Aw22Rule13022Test extends Aw22RuleImplementationTestCase {
                 getTestcasesFilePath() + "AW22/Aw22Rule13022/AW22.Test.13.2.2-3NMI-03.html"));
         getWebResourceMap().put("AW22.Test.13.2.2-4NA-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule13022/AW22.Test.13.2.2-4NA-04.html"));
+                getTestcasesFilePath() + "AW22/Aw22Rule13022/AW22.Test.13.2.2-4NA-01.html"));
     }
 
     @Override

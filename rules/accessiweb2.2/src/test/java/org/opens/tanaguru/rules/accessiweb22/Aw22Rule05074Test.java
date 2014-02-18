@@ -78,7 +78,7 @@ public class Aw22Rule05074Test extends Aw22RuleImplementationTestCase {
               getTestcasesFilePath() + "AW22/Aw22Rule05074/AW22.Test.5.7.4-4NA-02.html"));
         getWebResourceMap().put("AW22.Test.5.7.4-4NA-03",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "AW22/Aw22Rule05073/AW22.Test.5.7.4-4NA-03.html"));
+              getTestcasesFilePath() + "AW22/Aw22Rule05074/AW22.Test.5.7.4-4NA-03.html"));
         addParameterToParameterMap("AW22.Test.5.7.4-4NA-03", createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
     }
 

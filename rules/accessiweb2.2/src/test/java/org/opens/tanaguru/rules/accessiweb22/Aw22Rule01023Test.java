@@ -131,10 +131,10 @@ public class Aw22Rule01023Test extends Aw22RuleImplementationTestCase {
                 getTestcasesFilePath() + "AW22/Aw22Rule01023/AW22.Test.1.2.3-4NA-03.html"));
         getWebResourceMap().put("AW22.Test.1.2.3-4NA-04",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule01021/AW22.Test.1.2.3-4NA-04.html"));
+                getTestcasesFilePath() + "AW22/Aw22Rule01023/AW22.Test.1.2.3-4NA-04.html"));
         getWebResourceMap().put("AW22.Test.1.2.3-4NA-05",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule01021/AW22.Test.1.2.3-4NA-05.html"));
+                getTestcasesFilePath() + "AW22/Aw22Rule01023/AW22.Test.1.2.3-4NA-05.html"));
     }
 
     @Override
