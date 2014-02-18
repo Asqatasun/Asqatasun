@@ -86,8 +86,9 @@ public class ContentsAdapterImpl implements ContentsAdapter {
             // Unreachable resources (404 error) are saved in the list for reports
             // We only handle here the fetched content (HttpStatus=200)
             if (content instanceof SSP && content.getHttpStatusCode() == 200) {
+                Logger.getLogger(this.getClass()).debug("Adapting " + content.getURI());
                 SSP ssp = (SSP) content;
-
+                
                 ssp.setDoctype(DocumentCaseInsensitiveAdapter.extractDoctypeDeclaration(ssp.getSource()));
                 
                 String dirtyHtml;
@@ -151,7 +152,7 @@ public class ContentsAdapterImpl implements ContentsAdapter {
     private void writeCleanDomInFile(SSP ssp) {
         if (writeCleanHtmlInFile) {
             // @debug
-            String fileName = null;
+            String fileName;
             int lastIndexOfSlash = ssp.getURI().lastIndexOf("/");
             if (lastIndexOfSlash == ssp.getURI().length() - 1) {
                 fileName = "index.html";
