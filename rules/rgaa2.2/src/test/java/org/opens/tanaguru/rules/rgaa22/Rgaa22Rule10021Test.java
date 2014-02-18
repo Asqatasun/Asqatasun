@@ -61,7 +61,7 @@ public class Rgaa22Rule10021Test extends Rgaa22RuleImplementationTestCase {
                 getTestcasesFilePath() + "RGAA22/Rgaa22Rule10021/RGAA22.Test.10.2-3NMI-01.html"));
         getWebResourceMap().put("RGAA22.Test.10.2-4NA-01",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "RGAA22/Rgaa22Rule09013/RGAA22.Test.10.2-4NA-01.html"));
+              getTestcasesFilePath() + "RGAA22/Rgaa22Rule10021/RGAA22.Test.10.2-4NA-01.html"));
     }
 
     @Override
