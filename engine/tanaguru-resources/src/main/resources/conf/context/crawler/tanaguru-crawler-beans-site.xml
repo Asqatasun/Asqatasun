@@ -130,13 +130,14 @@
                             <value>.*(?i)(\.(xml))$</value>
                             <value>.*(?i)(\.(txt|conf|pdf))$</value>
                             <value>.*(?i)(\.(swf))$</value>
+                            <value>.*(?i)(\.(css))$</value>
                             <value>.*(?i)(\.(js))$</value>
                             <value>.*(?i)(\.(bmp|gif|jpe?g|png|svg|ico|tiff?))$</value>
                         </list>
                     </property>
                 </bean>
 
-                <bean class="org.archive.modules.deciderules.MatchesListRegexDecideRule">
+<!--                <bean class="org.archive.modules.deciderules.MatchesListRegexDecideRule">
                     <property name="decision" value="ACCEPT"/>
                     <property name="listLogicalOr" value="true" />
                     <property name="regexList">
@@ -144,7 +145,7 @@
                             <value>.*(?i)(\.css(\?.*)?)$</value>
                         </list>
                     </property>
-                </bean>
+                </bean>-->
 
                 <!-- ...but always ACCEPT those marked as prerequisitee for another URI... -->
                 <bean class="org.archive.modules.deciderules.PrerequisiteAcceptDecideRule">
@@ -229,7 +230,7 @@
         <property name="shouldFetchBodyRule">
             <bean class="org.archive.modules.deciderules.ContentTypeNotMatchesRegexDecideRule">
                 <property name="decision" value="REJECT"/>
-                <property name="regex" value="^([tT][eE][xX][tT]/[hH][tT][mM][lL]|[tT][eE][xX][tT]/[cC][sS][sS]|[aA][pP][pP][lL][iI][cC][aA][tT][iI][oO][nN]/[xX][hH][tT][mM][lL]\+[xX][mM][lL]).*"/>
+                <property name="regex" value="^([tT][eE][xX][tT]/[hH][tT][mM][lL]|[uU][nN][kK][nN][oO][wW][nN]|[aA][pP][pP][lL][iI][cC][aA][tT][iI][oO][nN]/[xX][hH][tT][mM][lL]\+[xX][mM][lL]).*"/>
             </bean>
         </property>
     </bean>

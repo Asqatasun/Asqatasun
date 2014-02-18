@@ -21,11 +21,9 @@
  */
 package org.opens.tanaguru.crawler;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.regex.Pattern;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.archive.io.GzipHeader;
@@ -52,14 +50,18 @@ import org.opens.tanaguru.entity.subject.WebResource;
 public class CrawlerImpl implements Crawler, ContentWriter {
 
     private static final Logger LOGGER = Logger.getLogger(CrawlerImpl.class);
+    private static final String OPEN_HTML_TAG = "<html";
+    private static final String END_HTML_TAG = "</html>";
     private static final int RETRIEVE_WINDOW = 1000;
     private static final int REL_CANONICAL_PAGE_FAKE_HTTP_STATUS = 900;
     private static final String REL_CANONICAL_CSS_LIKE_QUERY = 
                     "head link[rel=canonical][href]";
     private static final String UNREACHABLE_RESOURCE_STR =
             "Unreachable resource ";
-    private static final String HERITRIX_SITE_FILE_NAME = "tanaguru-crawler-beans-site.xml";
-    private static final String HERITRIX_PAGE_FILE_NAME = "tanaguru-crawler-beans-page.xml";
+    private static final String HERITRIX_SITE_FILE_NAME = 
+            "tanaguru-crawler-beans-site.xml";
+    private static final String HERITRIX_PAGE_FILE_NAME = 
+            "tanaguru-crawler-beans-page.xml";
 
     /**
      * This boolean is used to determine whether a page has already been fetched
@@ -262,21 +264,16 @@ public class CrawlerImpl implements Crawler, ContentWriter {
             RecordingInputStream recis) throws IOException {
         LOGGER.debug("Writing " + curi.getURI() + " : "
                 + curi.getFetchStatus() + " " + curi.getContentType() + " " + curi.getFetchDuration() + "ms");
-        if (curi.getContentType().contains(ContentType.html.getType())
+        
+        if ( curi.getContentType().contains(ContentType.html.getType()) 
                 && !curi.getURI().contains("robots.txt")) {
-            LOGGER.debug("Found Html " + curi.getURI());
-
-            // extract data from fetched content and record it to SSP object
-//            String charset = CrawlUtils.extractCharset(recis.getMessageBodyReplayInputStream());
-            String charset;
-            if (curi.getContentType().indexOf("=") != -1 ) {
-                charset = curi.getContentType().substring(curi.getContentType().indexOf("=")+1);
-            } else {
-                charset = CrawlUtils.extractCharset(recis.getMessageBodyReplayInputStream());
-            }
-            LOGGER.debug(charset);
-            String sourceCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset).trim();
-            lastFetchedSSP = saveWebResourceFromFetchedPage(curi, charset, sourceCode, true);
+            
+            saveHtmlContent(curi, recis);
+            
+        } else if (curi.getContentType().contains(ContentType.unknown.getType())) {
+            
+            lastChanceToQualifyUnknownContent(curi, recis);
+            
         } else if (curi.getContentType().contains(ContentType.css.getType())) {
             LOGGER.debug("Found css " + curi.getURI() + " last fetched ssp " + lastFetchedSSP.getURI());
             
@@ -285,14 +282,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
             if (compressed) {
                 cssCode = "";
             } else {
-//                String charset = CrawlUtils.extractCharset(recis.getMessageBodyReplayInputStream());
-                String charset;
-                if (curi.getContentType().indexOf("=") != -1 ) {
-                    charset = curi.getContentType().substring(curi.getContentType().indexOf("=")+1);
-                } else {
-                    charset = CrawlUtils.extractCharset(recis.getMessageBodyReplayInputStream());
-                }
-                cssCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset).trim();
+                cssCode = CrawlUtils.convertSourceCodeIntoUtf8(recis, extractCharset(curi, recis)).trim();
             }
             saveStylesheetFromFetchedCss(curi, cssCode);
             
@@ -310,6 +300,26 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         }
     }
 
+    /**
+     * 
+     * @param curi
+     * @param recis
+     * @throws IOException 
+     */
+    private void saveHtmlContent(
+            CrawlURI curi,
+            RecordingInputStream recis) throws IOException {
+        String charset = extractCharset(curi, recis);
+        LOGGER.debug("Found Html " + curi.getURI() +" with charset " + charset);
+        
+        lastFetchedSSP = saveWebResourceFromFetchedPage(
+                            curi.getURI(), 
+                            charset, 
+                            curi.getFetchStatus(),
+                            CrawlUtils.convertSourceCodeIntoUtf8(recis, charset).trim(), 
+                            true);
+    }
+    
     @Override
     public void computeAndPersistUnsuccessfullFetchedResource(CrawlURI curi) {
         ContentType resourceContentType =
@@ -321,7 +331,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
                         UNREACHABLE_RESOURCE_STR + curi.getURI() + " : "
                         + curi.getFetchStatus());
                 
-                saveWebResourceFromFetchedPage(curi, null, null, false);
+                saveWebResourceFromFetchedPage(curi.getURI(), null, curi.getFetchStatus(),null, false);
                 break;
                 
             case css:
@@ -355,8 +365,9 @@ public class CrawlerImpl implements Crawler, ContentWriter {
      * @return
      */
     private SSP saveWebResourceFromFetchedPage(
-            CrawlURI curi,
+            String uri, 
             String charset,
+            int fetchStatus,
             String sourceCode,
             boolean successfullFetch) {
 
@@ -366,12 +377,12 @@ public class CrawlerImpl implements Crawler, ContentWriter {
                 page = (Page) mainWebResource;
                 // in case of redirection, we modify the URI of the webresource
                 // to ensure the webresource and its SSP have the same URI.
-                page.setURL(curi.getURI());
+                page.setURL(uri);
                 if (successfullFetch) {
                     isPageAlreadyFetched = true;
-                    SSP ssp = createSSPFromPage(curi, charset, page, sourceCode);
+                    SSP ssp = createSSPFromPage(uri, charset, page, sourceCode);
                     if (persistOnTheFly) {
-                        persistSSP(ssp, curi, page);
+                        persistSSP(ssp, uri, fetchStatus, page);
                     }
                     return ssp;
                 } else {
@@ -383,13 +394,13 @@ public class CrawlerImpl implements Crawler, ContentWriter {
                 return lastFetchedSSP;
             }
         } else {
-            page = webResourceDataService.createPage(curi.getURI());
+            page = webResourceDataService.createPage(uri);
             page.setParent((Site) mainWebResource);
             page.setRank(pageRankCounter);
             pageRankCounter++;
-            SSP ssp = createSSPFromPage(curi, charset, page, sourceCode);
+            SSP ssp = createSSPFromPage(uri, charset, page, sourceCode);
             if (persistOnTheFly) {
-                persistSSP(ssp, curi, page);
+                persistSSP(ssp, uri, fetchStatus, page);
             }
             return ssp;
         }
@@ -404,11 +415,11 @@ public class CrawlerImpl implements Crawler, ContentWriter {
      * @return
      */
     private SSP createSSPFromPage(
-            CrawlURI curi,
+            String uri,
             String charset,
             Page page,
             String sourceCode) {
-        SSP ssp = contentFactory.createSSP(curi.getURI());
+        SSP ssp = contentFactory.createSSP(uri);
         ssp.setPage(page);
         ssp.setCharset(charset);
         ssp.setSource(sourceCode);
@@ -417,18 +428,25 @@ public class CrawlerImpl implements Crawler, ContentWriter {
     
     /**
      * 
-     * @param curi
-     * @param charset
+     * @param ssp
+     * @param uri
+     * @param httpStatusCode
      * @param page
-     * @param sourceCode
-     * @return 
      */
     private void persistSSP(
             SSP ssp,
-            CrawlURI curi,
+            String uri,
+            int httpStatusCode,
             Page page) {
         webResourceDataService.saveOrUpdate(page);
-        saveAndPersistFetchDataToContent(ssp, curi);
+        int status = httpStatusCode;
+        if (isRelCanonicalPage(ssp)) {
+            // If true, the HttpStatusCode is set arbitrarely to 900 and thus the
+            // page won't be tested while processing
+            LOGGER.info("Fetching page with rel canonical " + uri + ". Set Http status to 900");
+            status = REL_CANONICAL_PAGE_FAKE_HTTP_STATUS;
+        }
+        saveAndPersistFetchDataToContent(ssp, uri, status);
     }
 
     /**
@@ -449,10 +467,19 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         // SSP and relatedContent but we have to link this relatedContent to any
         // (the last) ssp to associate this relatedContent with the current
         // crawl
-        StylesheetContent returnedCssContent = (StylesheetContent) saveAndPersistFetchDataToContent((Content) newCssContent, curi);
+        StylesheetContent returnedCssContent = 
+                (StylesheetContent) saveAndPersistFetchDataToContent(
+                        (Content) newCssContent, 
+                        curi.getURI(),
+                        curi.getFetchStatus());
         persistContentRelationShip(lastFetchedSSP, returnedCssContent);
     }
 
+    /**
+     * 
+     * @param curi
+     * @param rawImage 
+     */
     private void saveRawImageFromFetchedImage(CrawlURI curi, byte[] rawImage) {
         ImageContent newImgContent = contentFactory.createImageContent(
                     null,
@@ -461,7 +488,10 @@ public class CrawlerImpl implements Crawler, ContentWriter {
                     rawImage,
                     curi.getFetchStatus());
         ImageContent returnedImgContent =
-                    (ImageContent) saveAndPersistFetchDataToContent(newImgContent, curi);
+                (ImageContent) saveAndPersistFetchDataToContent(
+                        newImgContent, 
+                        curi.getURI(), 
+                        curi.getFetchStatus());
         persistContentRelationShip(lastFetchedSSP, returnedImgContent);
     }
 
@@ -525,18 +555,18 @@ public class CrawlerImpl implements Crawler, ContentWriter {
      * @param content
      * @param curi
      */
-    private Content saveAndPersistFetchDataToContent(Content content, CrawlURI curi) {
+    private Content saveAndPersistFetchDataToContent(Content content, String uri, int status) {
         // Waiting for a better implementation, we parse here the html content
         // to detect the presence of the rel=canonical property.
         // If true, the HttpStatusCode is set arbitrarely to 900 and thus the
         // page won't be tested while processing
         if (isRelCanonicalPage(content)) {
-            LOGGER.info("Fetching page with rel canonical " + content.getURI() + ". Set Http status to 900");
+            LOGGER.info("Fetching page with rel canonical " + uri + ". Set Http status to 900");
             content.setHttpStatusCode(REL_CANONICAL_PAGE_FAKE_HTTP_STATUS);
         } else {
-            content.setHttpStatusCode(curi.getFetchStatus());
+            content.setHttpStatusCode(status);
         }
-        content.setDateOfLoading(new Date(curi.getFetchCompletedTime()));
+        content.setDateOfLoading(Calendar.getInstance().getTime());
         if (persistOnTheFly) {
             content = contentDataService.saveOrUpdate(content);
         }
@@ -544,7 +574,8 @@ public class CrawlerImpl implements Crawler, ContentWriter {
     }
 
     /**
-     * 
+     * Waiting for a better implementation, we parse here the html content
+     * to detect the presence of the rel=canonical property.
      * @param content
      * @return whether the current page defines a rel canonical Url and whether
      * this url is different from the current url.
@@ -603,6 +634,47 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         relatedContentSetTemp.clear();
         relatedContentSetTemp.add(((Content) relatedContent).getId());
         contentDataService.saveContentRelationShip(ssp, relatedContentSetTemp);
+    }
+
+    /**
+     * 
+     * @param curi
+     * @param recis
+     * @return
+     * @throws IOException 
+     */
+    private String extractCharset(CrawlURI curi, RecordingInputStream recis) throws IOException{
+        if (curi.getContentType().indexOf("=") != -1 ) {
+            return curi.getContentType().substring(curi.getContentType().indexOf("=")+1);
+        } else {
+            return CrawlUtils.extractCharset(recis.getMessageBodyReplayInputStream());
+        }
+    }
+
+    /**
+     * Heritrix may return content with an unknow content-type. This content
+     * may be Html and that's what we try to detect here. 
+     * The raw content is first converted into UTF-8 and then we search the
+     * $lt;html and $lt;/html$gt;. If present, we deduce it is html. If not, 
+     * we do nothing, the content is trashed.
+     * @param curi
+     * @param recis 
+     */
+    private void lastChanceToQualifyUnknownContent(
+                        CrawlURI curi,
+                        RecordingInputStream recis) throws IOException{
+        String charset = extractCharset(curi, recis);
+        try {
+            String data = CrawlUtils.convertSourceCodeIntoUtf8(recis, charset).trim();
+            if (StringUtils.containsIgnoreCase(data, OPEN_HTML_TAG) && 
+                StringUtils.containsIgnoreCase(data, END_HTML_TAG)) {
+                saveHtmlContent(curi, recis);
+            }
+        } catch (Exception e) {
+            LOGGER.debug("Exception caught when trying to convert unknow Content "
+                    + curi.getURI()
+                    + " into UTF-8. We deduce this content is not of html type");
+        }
     }
 
 }

@@ -31,6 +31,7 @@ public enum ContentType {
     css("css"),
     js("js"),
     img("image"),
+    unknown("unknown"),
     misc(""),;
 
     /**
