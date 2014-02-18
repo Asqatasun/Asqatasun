@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -20,14 +20,21 @@
 package org.opens.tanaguru.rules.seo;
 
 
+import org.apache.commons.collections.CollectionUtils;
+import org.opens.tanaguru.entity.audit.EvidenceElement;
+import org.opens.tanaguru.entity.audit.ProcessRemark;
+import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.pertinence.TextPertinenceChecker;
-import org.opens.tanaguru.rules.elementselector.ElementSelector;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.opens.tanaguru.rules.keystore.HtmlElementStore.H1_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.HEADINGS_CSS_LIKE_QUERY;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_H1_RELEVANCY_MSG;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NOT_RELEVANT_H1_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NOT_PERTINENT_HEADING_MSG;
+import org.opens.tanaguru.rules.textbuilder.DeepTextElementBuilder;
+import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
  * Test whether a not empty H1 tag is present on the page
@@ -36,31 +43,60 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NOT_RELEVANT_
  */
 public class SeoRule07013 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    /* The selector */
-    private static final ElementSelector ELEMENT_SELECTOR = 
-                    new SimpleElementSelector(H1_ELEMENT);
-    
+    private static final String ELEMENT_NAME_VALUE_KEY= "headings";
+
     /**
      * Default constructor
      */
-    public SeoRule07013 () {
+    public SeoRule07013() {
         super(
-                ELEMENT_SELECTOR,
+                new SimpleElementSelector(HEADINGS_CSS_LIKE_QUERY), 
                 new TextPertinenceChecker(
+                    new DeepTextElementBuilder(),
                     // check emptiness
                     true, 
                     // no comparison with other attribute
                     null, 
-                    // blacklist nomenclature name
+                    // no blacklist comparison
                     null, 
                     // not pertinent message
-                    NOT_RELEVANT_H1_MSG, 
+                    NOT_PERTINENT_HEADING_MSG, 
                     // manual check message
-                    CHECK_H1_RELEVANCY_MSG,
+                    CHECK_HEADING_PERTINENCE_MSG,
                     // evidence elements
                     TEXT_ELEMENT2
                 )
             );
+    }
+
+    @Override
+    protected void check(
+            SSPHandler sspHandler, 
+            ElementHandler elementHandler, 
+            TestSolutionHandler testSolutionHandler) {
+        super.check(sspHandler, elementHandler, testSolutionHandler);
+        ProcessRemarkService prs = sspHandler.getProcessRemarkService();
+        if (CollectionUtils.isNotEmpty(prs.getRemarkList())) {
+            for (ProcessRemark pr : prs.getRemarkList()) {
+                addElementNameEvidenceElementToOverrideTarget(prs, pr);
+            }
+        }
+    }
+    
+    /**
+     * This method adds an evidence element of type DEFAULT_EVIDENCE to 
+     * override the default behaviour when grouping message. 
+     * 
+     * @param prs
+     * @param pr 
+     */
+    private void addElementNameEvidenceElementToOverrideTarget(
+            ProcessRemarkService prs,
+            ProcessRemark pr) {
+        EvidenceElement ee = prs.getEvidenceElement(
+                    ProcessRemarkService.DEFAULT_EVIDENCE, 
+                    ELEMENT_NAME_VALUE_KEY);
+        pr.addElement(ee);
     }
 
 }

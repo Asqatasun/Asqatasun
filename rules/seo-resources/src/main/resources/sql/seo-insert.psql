@@ -69,7 +69,8 @@ INSERT INTO "test" VALUES
 (1025,'Seo-07021','','7.2.1',10007021,1.0,'seo','org.opens.tanaguru.rules.seo.SeoRule07021',NULL,1016,NULL,2,NULL,1,FALSE),
 (1026,'Seo-07051','','7.5.1',10007051,1.0,'seo','org.opens.tanaguru.rules.seo.SeoRule07051',NULL,1017,NULL,2,NULL,1,FALSE),
 (1027,'Seo-07061','','7.6.1',10007061,1.0,'seo','org.opens.tanaguru.rules.seo.SeoRule07061',NULL,1018,NULL,1,NULL,3,FALSE),
-(1029,'Seo-08011','','8.1.1',10008011,1.0,'seo','org.opens.tanaguru.rules.seo.SeoRule08011',NULL,1021,NULL,1,NULL,1,FALSE);
+(1029,'Seo-08011','','8.1.1',10008011,1.0,'seo','org.opens.tanaguru.rules.seo.SeoRule08011',NULL,1021,NULL,1,NULL,1,FALSE),
+(1030,'Seo-07013','','7.1.3',10007013,1.0,'seo','org.opens.tanaguru.rules.seo.SeoRule07013',NULL,1015,NULL,1,NULL,1,FALSE);
 
 -- Post-data save --
 COMMIT;
