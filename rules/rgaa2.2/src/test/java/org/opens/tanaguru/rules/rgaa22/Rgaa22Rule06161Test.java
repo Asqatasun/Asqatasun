@@ -20,9 +20,7 @@
 package org.opens.tanaguru.rules.rgaa22;
 
 import java.util.LinkedHashSet;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNull;
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.*;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -86,6 +84,9 @@ public class Rgaa22Rule06161Test extends Rgaa22RuleImplementationTestCase {
         getWebResourceMap().put("Rgaa22.Test.6.16-4NA-01",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "RGAA22/Rgaa22Rule06161/RGAA22.Test.6.16-4NA-01.html"));
+        getWebResourceMap().put("Rgaa22.Test.6.16-4NA-02",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "RGAA22/Rgaa22Rule06161/RGAA22.Test.6.16-4NA-02.html"));
     }
 
     @Override
@@ -256,11 +257,22 @@ public class Rgaa22Rule06161Test extends Rgaa22RuleImplementationTestCase {
                 iterator().next().getEvidence().getCode());
         
         
-        
         //----------------------------------------------------------------------
         //------------------------------4NA-01----------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa22.Test.6.16-4NA-01");
+        // check number of elements in the page
+        assertEquals(0, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        // check number of remarks and their value
+        assertNull(processResult.getRemarkSet());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------4NA-02----------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa22.Test.6.16-4NA-02");
         // check number of elements in the page
         assertEquals(0, processResult.getElementCounter());
         // check test result
@@ -293,6 +305,8 @@ public class Rgaa22Rule06161Test extends Rgaa22RuleImplementationTestCase {
                 consolidate("Rgaa22.Test.6.16-2Failed-05").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("Rgaa22.Test.6.16-4NA-01").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("Rgaa22.Test.6.16-4NA-02").getValue());
     }
 
 }
