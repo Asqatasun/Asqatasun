@@ -293,7 +293,7 @@ public class SSPHandlerImpl implements SSPHandler {
     /**
      * http://www.ibm.com/developerworks/library/x-javaxpathapi.html
      *
-     * @param expr
+     * @param expression
      * @return
      */
     @Override
@@ -306,7 +306,7 @@ public class SSPHandlerImpl implements SSPHandler {
     /**
      * http://www.ibm.com/developerworks/library/x-javaxpathapi.html
      *
-     * @param expr
+     * @param expression
      * @return
      */
     @Override

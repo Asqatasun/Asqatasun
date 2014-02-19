@@ -561,11 +561,15 @@ public class DOMHandlerImpl implements DOMHandler {
 
     /**
      * This method checks whether an attribute only contains
-     * non alphanumeric characters
+     * non alphanumeric characters.
+     * 
      * @param attribute
-     * @param node
-     * @param currentTestSolution
-     * @return
+     * @param workingElement
+     * @param testSolution
+     * @param remarkMessage
+     * 
+     * @return whether the current element only contains non alphanumerical 
+     * characters
      */
     @Override
     public  TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
@@ -594,10 +598,14 @@ public class DOMHandlerImpl implements DOMHandler {
     /**
      * This method checks whether an attribute only contains
      * non alphanumeric characters
-     * @param attribute
-     * @param node
-     * @param currentTestSolution
-     * @return
+     * 
+     * @param attributeContent
+     * @param workingElement
+     * @param testSolution
+     * @param remarkMessage
+     * 
+     * @return whether the current element only contains non alphanumerical 
+     * characters
      */
     @Override
     public  TestSolution checkAttributeOnlyContainsNonAlphanumericCharacters(
