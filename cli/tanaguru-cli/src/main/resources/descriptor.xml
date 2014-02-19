@@ -59,7 +59,9 @@
             <includes>
                 <include>tanaguru-10-create-user-and-base.sql</include>
                 <include>tanaguru-20-create-tables.sql</include>
+                <include>tanaguru-create-tables.psql</include>
                 <include>tanaguru-30-insert.sql</include>
+                <include>tanaguru-insert.psql</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install/engine/sql</outputDirectory>
@@ -68,6 +70,7 @@
             <directory>${basedir}/../../rules/rules-resources/src/main/resources/sql</directory>
             <includes>
                 <include>10-rules-resources-insert.sql</include>
+                <include>10-rules-resources-insert.psql</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install/rules/sql</outputDirectory>
@@ -76,6 +79,7 @@
             <directory>${basedir}/../../rules/accessiweb2.1-resources/src/main/resources/sql</directory>
             <includes>
                 <include>accessiweb2.1-insert.sql</include>
+                <include>accessiweb2.1-insert.psql</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install/rules/sql</outputDirectory>
@@ -84,6 +88,7 @@
             <directory>${basedir}/../../rules/accessiweb2.2-resources/src/main/resources/sql</directory>
             <includes>
                 <include>accessiweb2.2-insert.sql</include>
+                <include>accessiweb2.2-insert.psql</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install/rules/sql</outputDirectory>
@@ -92,6 +97,7 @@
             <directory>${basedir}/../../rules/rgaa2.2-resources/src/main/resources/sql</directory>
             <includes>
                 <include>rgaa2.2-insert.sql</include>
+                <include>rgaa2.2-insert.psql</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install/rules/sql</outputDirectory>
@@ -100,6 +106,7 @@
             <directory>${basedir}/../../rules/seo-resources/src/main/resources/sql</directory>
             <includes>
                 <include>seo-10-insert.sql</include>
+                <include>seo-10-insert.psql</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install/rules/sql</outputDirectory>
@@ -117,6 +124,8 @@
             <includes>
                 <include>tgol-20-create-tables.sql</include>
                 <include>tgol-30-insert.sql</include>
+                <include>tgol-create-tables.psql</include>
+                <include>tgol-insert.psql</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install/web-app/sql</outputDirectory>
