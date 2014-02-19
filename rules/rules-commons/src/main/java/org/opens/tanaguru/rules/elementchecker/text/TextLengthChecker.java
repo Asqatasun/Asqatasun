@@ -100,9 +100,9 @@ public class TextLengthChecker extends ElementCheckerImpl {
     /**
      * Constructor
      * @param testableTextBuilder
-     * @param lengthToTest
+     * @param lengthLimit
      * @param textTooLongSolution
-     * @param textTooLongMessageCode,
+     * @param textTooLongMessageCode
      * @param eeAttributeNameList 
      */
     public TextLengthChecker(

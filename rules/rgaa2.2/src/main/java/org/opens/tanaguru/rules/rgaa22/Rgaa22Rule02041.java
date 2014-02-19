@@ -26,7 +26,7 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * Implementation of the rule 2.4 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-2-4">the rule 2.4 design page.</a>
- * @see <a href="http://rgaa.net/Presence-d-un-moyen-de,6.html"> 2.4 rule specification
+ * @see <a href="http://rgaa.net/Presence-d-un-moyen-de,6.html"> 2.4 rule specification </a>
  *
  * @author jkowalczyk
  */

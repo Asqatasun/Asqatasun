@@ -56,7 +56,7 @@ public interface ContractOptionFormFieldBuilder {
 
     /**
      * Set the restriction code that has to be set to each instance of AuditSetUpFormField
-     * @param restrictionCode
+     * @param optionCode
      */
     void setOptionCode(String optionCode);
 

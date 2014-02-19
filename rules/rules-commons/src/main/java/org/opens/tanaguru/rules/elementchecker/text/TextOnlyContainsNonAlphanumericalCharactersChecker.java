@@ -82,7 +82,7 @@ public class TextOnlyContainsNonAlphanumericalCharactersChecker
     /**
      * Constructor
      * @param testableTextBuilder
-     * @param detectionSolution
+     * @param detectedSolution
      * @param textOnlyContainsNacMsgCode
      */
     public TextOnlyContainsNonAlphanumericalCharactersChecker(
@@ -96,7 +96,7 @@ public class TextOnlyContainsNonAlphanumericalCharactersChecker
     /**
      * Constructor
      * @param testableTextBuilder
-     * @param detectionSolution
+     * @param detectedSolution
      * @param textOnlyContainsNacMsgCode
      * @param eeAttributeNameList 
      */

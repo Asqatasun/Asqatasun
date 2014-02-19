@@ -45,7 +45,7 @@ public interface Role extends Entity {
 
     /**
      *
-     * @param user
+     * @param role
      *          the child role to add
      */
     void addChildRole(Role role);
@@ -53,7 +53,7 @@ public interface Role extends Entity {
 
     /**
      *
-     * @param
+     * @param childRoleSet
      *          the child role set to add
      */
     void addAllChildRole(Collection<Role> childRoleSet);

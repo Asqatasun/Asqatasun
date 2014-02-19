@@ -37,7 +37,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_
  * Implementation of the rule 4.8 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-4-8">the rule 4.8 design page.</a>
- * @see <a href="http://rgaa.net/Pertinence-de-la-description.html"> 4.8 rule specification
+ * @see <a href="http://rgaa.net/Pertinence-de-la-description.html"> 4.8 rule specification </a>
  *
  * @author jkowalczyk
  */

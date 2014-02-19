@@ -61,8 +61,8 @@ public interface TestDataService extends GenericDataService<Test, Long> {
 
     /**
      *
-     * @param codeReference
-     * @param codeLevel
+     * @param reference
+     * @param level
      * @return
      */
     List<Test> getAllByReferenceAndLevel(Reference reference, Level level);

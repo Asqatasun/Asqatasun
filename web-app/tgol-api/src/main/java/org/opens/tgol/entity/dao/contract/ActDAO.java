@@ -44,7 +44,7 @@ public interface ActDAO extends GenericDAO<Act, Long> {
 
     /**
      *
-     * @param product
+     * @param contract
      * @return
      */
     Collection<Act> findAllActsByContract(Contract contract);

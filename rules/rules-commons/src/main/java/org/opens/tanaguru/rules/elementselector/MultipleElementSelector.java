@@ -53,7 +53,7 @@ public class MultipleElementSelector implements ElementSelector{
     
     /**
      * constructor
-     * @param cssQuery 
+     * @param cssQueryList 
      */
     public MultipleElementSelector(String... cssQueryList) {
         this.cssQueryList = CollectionUtils.arrayToList(cssQueryList);

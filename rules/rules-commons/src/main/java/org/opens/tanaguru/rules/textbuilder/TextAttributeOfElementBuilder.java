@@ -25,7 +25,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
 
 /**
@@ -58,7 +57,7 @@ public class TextAttributeOfElementBuilder implements TextElementBuilder {
     
     /**
      * Constructor
-     * @param attributeName 
+     * @param attributeNames
      */
     public TextAttributeOfElementBuilder(String... attributeNames) {
         this.attributeNames.addAll(Arrays.asList(attributeNames));

@@ -125,7 +125,6 @@ public abstract class AbstractPageRuleWithMarkerImplementation
      * 
      * @param sspHandler
      * @param resultSet
-     * @param isDecidable
      * @return
      *      the list of process remarks
      */

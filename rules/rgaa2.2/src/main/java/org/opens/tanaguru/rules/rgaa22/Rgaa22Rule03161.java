@@ -31,7 +31,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_
  * Implementation of the rule 3.16 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-3-16">the rule 3.16 design page.</a>
- * @see <a href="http://rgaa.net/Presence-d-une-page-d-aide-ou-d-un.html"> 3.16 rule specification
+ * @see <a href="http://rgaa.net/Presence-d-une-page-d-aide-ou-d-un.html"> 3.16 rule specification </a>
  *
  * @author jkowalczyk
  */

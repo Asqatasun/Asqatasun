@@ -80,7 +80,7 @@ public class CaptchaElementSelector implements ElementSelector {
      * This methods parses all the elements retrieved from the scope and extracts
      * the ones where the occurrence "captcha" is found among the attribute values
      *
-     * @param elements
+     * @param selectionHandler
      */
     public void extractCaptchaElements(ElementHandler<Element> selectionHandler) {
         if (selectionHandler.isEmpty()) {

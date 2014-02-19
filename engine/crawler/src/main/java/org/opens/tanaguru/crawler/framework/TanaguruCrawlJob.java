@@ -87,12 +87,13 @@ public class TanaguruCrawlJob implements ApplicationListener<CrawlStateEvent>{
     private DecideRuleSequence decideRuleSequence;
 
     /**
+     * Default constructor
      * 
-     * @param url
+     * @param urlList
      * @param heritrixFileName
      * @param outputDir
      * @param crawlConfigFilePath
-     * @param paramSet
+     * @param paramSet 
      */
     public TanaguruCrawlJob(
             Collection<String> urlList,

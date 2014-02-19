@@ -100,7 +100,7 @@ public final class ContractSortCommandHelper  {
      * This methods retrieves and prepare contract info
      * 
      * @param user
-     * @param contractSortCommand
+     * @param csc the ContractSortCommand
      * @param displayOptionFieldsBuilderList
      * @param model
      * @return 
@@ -142,7 +142,7 @@ public final class ContractSortCommandHelper  {
      * This methods retrieves and prepare contract info
      * 
      * @param user
-     * @param contractSortCommand
+     * @param csc the ContractSortCommand
      * @param displayOptionFieldsBuilderList
      * @param model
      * @return 
@@ -322,7 +322,7 @@ public final class ContractSortCommandHelper  {
     /**
      * 
      * @param contractInfoSet
-     * @param contractSortCommand 
+     * @param csc the ContractSortCommand 
      */
     public static void sortContractInfoSetRegardingCommand(
             List<ContractInfo> contractInfoSet, 

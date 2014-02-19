@@ -131,7 +131,7 @@ public class AuditStatisticsFactory {
      * with the URL, the date, the number of components (in case of site audit )
      * and the mark of the audit
      *
-     * @param audit
+     * @param webResource
      * @param parametersToDisplay
      * @param displayScope
      * @return

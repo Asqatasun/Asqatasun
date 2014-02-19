@@ -32,10 +32,9 @@ public interface ActionHandler {
 
     /**
      * 
-     * @param product
-     * @param contractInfo
+     * @param object
      * @return
-     *      a set instance of ContractInfo
+     *      a collection of action for a given objet
      */
     List<Action> getActionList(Object object);
 

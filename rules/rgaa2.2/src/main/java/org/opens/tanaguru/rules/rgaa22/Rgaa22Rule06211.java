@@ -26,7 +26,7 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * Implementation of the rule 6.21 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-6-21">the rule 6.21 design page.</a>
- * @see <a href="http://rgaa.net/Presence-de-menus-ou-de-barres-de.html"> 6.21 rule specification
+ * @see <a href="http://rgaa.net/Presence-de-menus-ou-de-barres-de.html"> 6.21 rule specification </a>
  *
  * @author jkowalczyk
  */

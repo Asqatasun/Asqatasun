@@ -24,7 +24,6 @@ package org.opens.tgol.form.parameterization.helper;
 import java.util.*;
 import org.opens.tgol.form.parameterization.ContractOptionFormField;
 import org.opens.tgol.form.parameterization.builder.ContractOptionFormFieldBuilder;
-import org.opens.tgol.form.parameterization.builder.ContractOptionFormFieldBuilderImpl;
 
 /**
  * That class handles utility methods to deal with ContractOptionFormFields. 
@@ -60,7 +59,7 @@ public final class ContractOptionFormFieldHelper {
      * Create a fresh list of auditSetUpFormField from a auditSetUpFormFieldBuilder
      * list
      * 
-     * @param auditSetUpFormFieldBuilderList
+     * @param contractOptionFormFieldBuilderList
      * @return 
      */
     public static List<ContractOptionFormField> getFreshContractOptionFormFieldList(

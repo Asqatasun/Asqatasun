@@ -32,7 +32,7 @@ import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
  * Implementation of the rule 6.27 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-6-27">the rule 6.27 design page.</a>
- * @see <a href="http://rgaa.net/Presence-des-informations-de-poids.html"> 6.27 rule specification
+ * @see <a href="http://rgaa.net/Presence-des-informations-de-poids.html"> 6.27 rule specification </a>
  *
  * @author jkowalczyk
  */

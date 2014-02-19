@@ -60,7 +60,7 @@ public interface WebResourceStatisticsDataService
 
     /**
      * 
-     * @param parentWebresourceId
+     * @param webresourceId
      * @param testSolution
      * @return
      */
@@ -77,7 +77,7 @@ public interface WebResourceStatisticsDataService
     
     /**
      *
-     * @param webresourceId
+     * @param webResource
      * @return
      */
     WebResourceStatistics getWebResourceStatisticsByWebResource(WebResource webResource);

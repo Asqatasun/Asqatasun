@@ -50,12 +50,9 @@ public final class AddScenarioCommandFactory {
      * handles the last values selected by the user
      * 
      * @param contract
-     * @param auditSetUpFormFieldList
-     * @param auditSite
      * @return
      */
-    public static AddScenarioCommand getAddScenarioCommand (
-            Contract contract) {
+    public static AddScenarioCommand getAddScenarioCommand (Contract contract) {
         AddScenarioCommand addScenarioCommand = new AddScenarioCommand();
         addScenarioCommand.setContractId(contract.getId());
         return addScenarioCommand;

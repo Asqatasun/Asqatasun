@@ -33,7 +33,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_
  * Implementation of the rule 5.11 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-5-11">the rule 5.11 design page.</a>
- * @see <a href="http://rgaa.net/Presence-d-une-alternative-aux.html"> 5.11 rule specification
+ * @see <a href="http://rgaa.net/Presence-d-une-alternative-aux.html"> 5.11 rule specification </a>
  *
  * @author jkowalczyk
  */

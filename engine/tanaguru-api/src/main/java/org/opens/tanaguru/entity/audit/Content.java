@@ -21,8 +21,8 @@
  */
 package org.opens.tanaguru.entity.audit;
 
-import org.opens.tanaguru.sdk.entity.Entity;
 import java.util.Date;
+import org.opens.tanaguru.sdk.entity.Entity;
 
 /**
  * 
@@ -77,7 +77,7 @@ public interface Content extends Entity {
 
     /**
      *
-     * @param httpReturnCode
+     * @param httpStatusCode
      *            the Http Status Code when fetched the content
      */
     void setHttpStatusCode(int httpStatusCode);

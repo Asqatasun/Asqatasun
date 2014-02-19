@@ -162,9 +162,8 @@ public final class TestResultFactory {
      * @param scope
      * @param theme
      * @param testSolutionList
-     * @param hasResultDetails
-     * @param truncatable
      * @return 
+     *      A map of themes with for each theme the list of TestResult
      */
     public Map<Theme, List<TestResult>> getTestResultSortedByThemeMap(
             WebResource webresource,
@@ -229,7 +228,6 @@ public final class TestResultFactory {
      * 
      * @param webresource
      * @param scope
-     * @param hasResultDetails
      * @param locale
      * @return
      *      the test result list without user filter (used for the export function)
@@ -237,7 +235,6 @@ public final class TestResultFactory {
     public List<TestResult> getTestResultList(
             WebResource webresource,
             Scope scope,
-//            boolean hasResultDetails,
             Locale locale) {
         // Map that associates a list of results with a theme
         List<TestResult> testResultList = new LinkedList<TestResult>();
@@ -267,10 +264,7 @@ public final class TestResultFactory {
     /**
      * 
      * @param webresource
-     * @param scope
-     * @param hasSourceCodeWithDoctype
-     * @param hasResultDetails
-     * @param locale
+     * @param crit
      * @return
      *      the test result list without user filter (used for the export function)
      */
@@ -309,10 +303,7 @@ public final class TestResultFactory {
         /**
      * 
      * @param webresource
-     * @param scope
-     * @param hasSourceCodeWithDoctype
-     * @param hasResultDetails
-     * @param locale
+     * @param test
      * @return
      *      the test result list without user filter (used for the export function)
      */

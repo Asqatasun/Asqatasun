@@ -247,9 +247,7 @@ public final class LinkRulesHandler {
     /**
      *
      * @param attributeName
-     * @param blacklist (can be null)
-     * @param attributeToCompareWithList (can be null)
-     * @param sourceCodeRemark
+     * @param isEqualContentAuthorized
      * @return
      */
     public TestSolution checkAttributePertinence(
@@ -566,7 +564,7 @@ public final class LinkRulesHandler {
      * @param nodeText
      * @param blacklist
      * @param testSolution
-     * @param erroMessageCode
+     * @param errorMessageCode
      * @param workingElement
      * @return
      */

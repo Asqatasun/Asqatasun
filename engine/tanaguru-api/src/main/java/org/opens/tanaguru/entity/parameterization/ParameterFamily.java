@@ -38,7 +38,7 @@ public interface ParameterFamily extends Entity {
 
     /**
      *
-     * @param parameterElement
+     * @param parameterFamilyCode
      */
     void setParameterFamilyCode(String parameterFamilyCode);
 

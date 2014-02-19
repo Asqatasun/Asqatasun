@@ -114,7 +114,8 @@ public class ContractManagementController extends AbstractUserAndContractsContro
     }
     
     /**
-     * @param contractId
+     * @param contractDisplayCommand
+     * @param userId
      * @param request
      * @param response
      * @param model
@@ -150,7 +151,7 @@ public class ContractManagementController extends AbstractUserAndContractsContro
     }
     
     /**
-     * @param contractId
+     * @param userId
      * @param request
      * @param response
      * @param model
@@ -185,7 +186,8 @@ public class ContractManagementController extends AbstractUserAndContractsContro
     }
     
     /**
-     * @param contractId
+     * @param createContractCommand
+     * @param result
      * @param request
      * @param response
      * @param model
@@ -281,7 +283,8 @@ public class ContractManagementController extends AbstractUserAndContractsContro
     }
     
     /**
-     * @param contractId
+     * @param createContractCommand
+     * @param result
      * @param request
      * @param response
      * @param model

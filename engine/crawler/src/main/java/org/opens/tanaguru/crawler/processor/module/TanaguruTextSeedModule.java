@@ -21,13 +21,7 @@
  */
 package org.opens.tanaguru.crawler.processor.module;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -143,7 +137,7 @@ public class TanaguruTextSeedModule extends TanaguruSeedModule implements ReadSo
      * Handle a read line that is not a seed, but may still have
      * meaning to seed-consumers (such as scoping beans).
      *
-     * @param uri String seed-containing line
+     * @param line String seed-containing line
      */
     protected void nonseedLine(String line) {
         publishNonSeedLine(line);

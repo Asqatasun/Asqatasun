@@ -41,7 +41,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
  * Implementation of the rule 11.4 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-11-4">the rule 11.4 design page.</a>
- * @see <a href="http://rgaa.net/Absence-des-elements-propres-aux.html"> 11.4 rule specification
+ * @see <a href="http://rgaa.net/Absence-des-elements-propres-aux.html"> 11.4 rule specification </a>
  *
  */
 public class Rgaa22Rule11041 extends AbstractMarkerPageRuleImplementation {

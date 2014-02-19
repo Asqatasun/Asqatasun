@@ -36,7 +36,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_
  * Implementation of the rule 11.7 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-11-7">the rule 11.7 design page.</a>
- * @see <a href="http://rgaa.net/Presence-d-un-titre-pour-les.html"> 11.7 rule specification
+ * @see <a href="http://rgaa.net/Presence-d-un-titre-pour-les.html"> 11.7 rule specification </a>
  *
  * @author jkowalczyk
  */

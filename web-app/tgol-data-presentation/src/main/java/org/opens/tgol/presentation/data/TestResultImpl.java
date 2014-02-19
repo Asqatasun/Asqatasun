@@ -73,7 +73,7 @@ public class TestResultImpl implements TestResult{
 
     /**
      *
-     * @param testRepresentation
+     * @param testRepresentationType
      */
     @Override
     public void setTestRepresentation(int testRepresentationType) {

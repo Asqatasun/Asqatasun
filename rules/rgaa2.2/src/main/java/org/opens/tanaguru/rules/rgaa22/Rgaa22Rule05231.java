@@ -31,7 +31,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.DETECTED_TAG_
  * Implementation of the rule 5.23 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-5-23">the rule 5.23 design page.</a>
- * @see <a href="http://rgaa.net/Absence-d-element-marquee.html"> 5.23 rule specification
+ * @see <a href="http://rgaa.net/Absence-d-element-marquee.html"> 5.23 rule specification </a>
  *
  * @author jkowalczyk
  */

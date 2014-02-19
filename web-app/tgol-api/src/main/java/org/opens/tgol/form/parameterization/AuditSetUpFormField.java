@@ -39,7 +39,7 @@ public interface AuditSetUpFormField {
 
     /**
      *
-     * @param parameterCode
+     * @param parameterElement
      */
     void setParameterElement(ParameterElement parameterElement);
 

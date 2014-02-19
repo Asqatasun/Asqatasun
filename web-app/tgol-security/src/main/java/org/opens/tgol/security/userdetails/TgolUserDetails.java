@@ -53,7 +53,6 @@ public class TgolUserDetails extends org.springframework.security.core.userdetai
      * @param credentialsNonExpired
      * @param accountNonLocked
      * @param authorities
-     * @param displayName
      * @param user
      * @throws IllegalArgumentException
      */

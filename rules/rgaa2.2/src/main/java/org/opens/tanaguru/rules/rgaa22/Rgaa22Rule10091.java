@@ -26,7 +26,7 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * Implementation of the rule 10.9 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-10-9">the rule 10.9 design page.</a>
- * @see <a href="http://rgaa.net/Balisage-correct-des-abreviations.html"> 10.9 rule specification
+ * @see <a href="http://rgaa.net/Balisage-correct-des-abreviations.html"> 10.9 rule specification </a>
  *
  * @author jkowalczyk
  */

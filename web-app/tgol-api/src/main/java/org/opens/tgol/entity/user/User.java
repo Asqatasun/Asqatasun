@@ -117,7 +117,7 @@ public interface User extends Entity {
 
     /**
      *
-     * @param
+     * @param contractSet
      *          the contracts set to add to a user
      */
     void addAllContracts(Collection<Contract> contractSet);
@@ -164,7 +164,7 @@ public interface User extends Entity {
 
     /**
      * 
-     * @param twitterId
+     * @param identicaId
      */
     void setIdenticaId(String identicaId);
 

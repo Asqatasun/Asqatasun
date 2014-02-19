@@ -222,7 +222,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
 
     /**
      * This methods enables an authenticated user to launch an audit.
-     * @param contractId
+     * @param auditSetUpCommand
      * @param locale
      * @param model
      * @return

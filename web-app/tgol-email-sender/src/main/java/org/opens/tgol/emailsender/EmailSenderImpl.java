@@ -25,17 +25,10 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.Set;
 import java.util.logging.Level;
-
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -77,11 +70,12 @@ public class EmailSenderImpl implements EmailSender {
 	}
 
 	/**
-	 * 
-	 * @param emailFrom
-	 * @param emailToSet
-	 * @param mailContent
-	 */
+         * 
+         * @param emailFrom
+         * @param emailToSet
+         * @param emailSubject
+         * @param emailContent 
+         */
 	@Override
 	public void sendEmail(String emailFrom, Set<String> emailToSet,
 			String emailSubject, String emailContent) {

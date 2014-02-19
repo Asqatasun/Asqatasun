@@ -65,7 +65,7 @@ public interface WebResourceStatistics extends Entity, ResultCounter {
 
     /**
      *
-     * @param mark
+     * @param rawMark
      */
     void setRawMark(Float rawMark);
 
@@ -101,7 +101,7 @@ public interface WebResourceStatistics extends Entity, ResultCounter {
 
     /**
      * 
-     * @param page
+     * @param webResource
      */
     void setWebResource(WebResource webResource);
 
@@ -119,7 +119,7 @@ public interface WebResourceStatistics extends Entity, ResultCounter {
 
     /**
      *
-     * @param themeStatisticsSet
+     * @param themeStatistics
      */
     void addThemeStatistics(ThemeStatistics themeStatistics);
 
@@ -137,7 +137,7 @@ public interface WebResourceStatistics extends Entity, ResultCounter {
 
     /**
      *
-     * @param themeStatisticsSet
+     * @param testStatistics
      */
     void addTestStatistics(TestStatistics testStatistics);
     
@@ -155,7 +155,7 @@ public interface WebResourceStatistics extends Entity, ResultCounter {
 
     /**
      *
-     * @param themeStatisticsSet
+     * @param criterionStatistics
      */
     void addCriterionStatistics(CriterionStatistics criterionStatistics);
 
@@ -166,8 +166,8 @@ public interface WebResourceStatistics extends Entity, ResultCounter {
     BigDecimal getWeightedNa();
 
     /**
-     *
-     * @param weightedNA
+     * 
+     * @param weightedNa 
      */
     void setWeightedNa(BigDecimal weightedNa);
 
@@ -178,8 +178,8 @@ public interface WebResourceStatistics extends Entity, ResultCounter {
     BigDecimal getWeightedNmi();
 
     /**
-     *
-     * @param weightedNMI
+     * 
+     * @param weightedNmi 
      */
     void setWeightedNmi(BigDecimal weightedNmi);
 

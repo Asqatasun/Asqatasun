@@ -51,13 +51,14 @@ public class AttributePertinenceChecker extends TextPertinenceChecker {
         return attrElementBuilder;
     }
 
+    
     /**
      * Constructor. 
-     * Enables to override the not pertinent solution.
+     * Enables to override the not pertinent solution. 
      * 
      * @param attributeName
      * @param checkEmptiness
-     * @param attributeNameToCompare
+     * @param textElementBuilderToCompareWith
      * @param extensionsListNameToCompareWith
      * @param attrNotPertinentSolution
      * @param notPertinentMessageCode
@@ -85,17 +86,18 @@ public class AttributePertinenceChecker extends TextPertinenceChecker {
         addExtensionChecker(extensionsListNameToCompareWith);
     }
 
+    
     /**
      * Constructor. 
-     * Enables to override the not pertinent solution.
+     * Enables to override the not pertinent solution. 
      * 
      * @param attributeName
      * @param checkEmptiness
-     * @param attributeNameToCompare
+     * @param textElementBuilderToCompareWith
      * @param extensionsListNameToCompareWith
      * @param attrNotPertinentSolution
      * @param notPertinentMessageCode
-     * @param manualCheckMessage
+     * @param manualCheckMessage 
      */
     public AttributePertinenceChecker(
             String attributeName,
@@ -122,7 +124,7 @@ public class AttributePertinenceChecker extends TextPertinenceChecker {
      * 
      * @param attributeName
      * @param checkEmptiness
-     * @param attributeNameToCompare
+     * @param textElementBuilderToCompareWith
      * @param extensionsListNameToCompareWith
      * @param notPertinentMessageCode
      * @param manualCheckMessage 
@@ -149,7 +151,7 @@ public class AttributePertinenceChecker extends TextPertinenceChecker {
      * 
      * @param attributeName
      * @param checkEmptiness
-     * @param attributeNameToCompare
+     * @param textElementBuilderToCompareWith
      * @param extensionsListNameToCompareWith
      * @param notPertinentMessageCode
      * @param manualCheckMessage

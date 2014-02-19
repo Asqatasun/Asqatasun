@@ -34,7 +34,7 @@ public interface ProcessResult extends Entity {
 
     /**
      *
-     * @param remarkList
+     * @param remarkSet
      *            the remark list to add
      */
     void addAllRemark(Collection<ProcessRemark> remarkSet);

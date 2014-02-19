@@ -36,13 +36,13 @@ import org.opens.tgol.entity.contract.Contract;
 public interface TanaguruOrchestrator {
 
     /**
-     *
+     * 
      * @param contract
      * @param pageUrl
-     * @param ipClient
+     * @param clientIp
      * @param paramSet
      * @param locale
-     * @return
+     * @return 
      */
     Audit auditPage(
             Contract contract,
@@ -52,13 +52,13 @@ public interface TanaguruOrchestrator {
             Locale locale);
     
     /**
-     *
+     * 
      * @param contract
      * @param fileMap
-     * @param ipClient
+     * @param clientIp
      * @param paramSet
      * @param locale
-     * @return
+     * @return 
      */
     Audit auditPageUpload(
             Contract contract,
@@ -68,12 +68,12 @@ public interface TanaguruOrchestrator {
             Locale locale);
 
     /**
-     *
+     * 
      * @param contract
      * @param siteUrl
-     * @param ipClient
+     * @param clientIp
      * @param paramSet
-     * @param locale
+     * @param locale 
      */
     void auditSite(
             Contract contract,
@@ -83,13 +83,14 @@ public interface TanaguruOrchestrator {
             Locale locale);
 
     /**
-     *
+     * 
      * @param contract
      * @param siteUrl
-     * @param ipClient
+     * @param pageUrlList
+     * @param clientIp
      * @param paramSet
      * @param locale
-     * @return
+     * @return 
      */
     Audit auditSite(
             Contract contract,
@@ -102,8 +103,7 @@ public interface TanaguruOrchestrator {
     /**
      * 
      * @param contract
-     * @param scenarioName
-     * @param scenario
+     * @param idScenario
      * @param clientIp
      * @param parameterSet
      * @param locale 

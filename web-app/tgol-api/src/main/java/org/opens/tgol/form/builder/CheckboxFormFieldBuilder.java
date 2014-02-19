@@ -22,7 +22,6 @@
 package org.opens.tgol.form.builder;
 
 import java.util.List;
-import java.util.Map;
 import org.opens.tgol.form.CheckboxElement;
 
 /**
@@ -81,7 +80,7 @@ public interface CheckboxFormFieldBuilder extends FormFieldBuilder {
     
     /**
      * Sets the code used to map the result of the selection
-     * @param activationCode
+     * @param code
      */
     void setCode(String code);
 

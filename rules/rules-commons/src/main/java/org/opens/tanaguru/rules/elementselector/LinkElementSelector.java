@@ -150,7 +150,7 @@ public class LinkElementSelector implements ElementSelector {
 
     /**
      * 
-     * @param elementHandler 
+     * @param elements 
      */
     protected void characteriseElements(Elements elements) {
         for (Element el : elements) {

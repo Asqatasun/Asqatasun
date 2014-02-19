@@ -26,7 +26,7 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * Implementation of the rule 5.31 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-5-31">the rule 5.31 design page.</a>
- * @see <a href="http://rgaa.net/Presence-de-version-en-langue-des.html"> 5.31 rule specification
+ * @see <a href="http://rgaa.net/Presence-de-version-en-langue-des.html"> 5.31 rule specification </a>
  *
  * @author jkowalczyk
  */

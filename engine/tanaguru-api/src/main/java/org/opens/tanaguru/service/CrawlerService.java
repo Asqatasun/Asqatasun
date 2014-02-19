@@ -46,7 +46,7 @@ public interface CrawlerService {
 
     /**
      * @param audit  the current Audit
-     * @param page  the URL to crawl
+     * @param pageUrl  the URL to crawl
      * @return a page instance from the URL
      */
     WebResource crawlPage(Audit audit, String pageUrl);

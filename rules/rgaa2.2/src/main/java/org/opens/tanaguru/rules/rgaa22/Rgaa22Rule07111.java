@@ -41,7 +41,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.INVISIBLE_OUT
  * Implementation of the rule 7.11 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-7-11">the rule 7.11 design page.</a>
- * @see <a href="http://rgaa.net/Absence-de-suppression-de-l-effet.html"> 7.11 rule specification
+ * @see <a href="http://rgaa.net/Absence-de-suppression-de-l-effet.html"> 7.11 rule specification </a>
  *
  * @author jkowalczyk
  */

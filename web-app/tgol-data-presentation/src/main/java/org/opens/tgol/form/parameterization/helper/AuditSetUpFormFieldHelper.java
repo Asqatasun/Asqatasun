@@ -111,26 +111,26 @@ public final class AuditSetUpFormFieldHelper {
      * @param optionElementSet
      */
     private static void activateSelectFormField(
-            SelectFormField sff,
+            SelectFormField selectFormField,
             Collection<OptionElement> optionElementSet) {
         boolean enableElements = true;
         OptionElement optionElement = null;
-        if (StringUtils.isNotEmpty(sff.getRestrictionCode())) {
+        if (StringUtils.isNotEmpty(selectFormField.getRestrictionCode())) {
             optionElement = getOptionFromOptionSet(
                     optionElementSet,
-                    sff.getRestrictionCode());
+                    selectFormField.getRestrictionCode());
             enableElements = false;
-        } else if (StringUtils.isNotEmpty(sff.getActivationCode())) {
+        } else if (StringUtils.isNotEmpty(selectFormField.getActivationCode())) {
             optionElement = getOptionFromOptionSet(
                     optionElementSet,
-                    sff.getActivationCode());
+                    selectFormField.getActivationCode());
         }
         if (optionElement != null) {
             String[] optionValues = optionElement.getValue().split(";");
             boolean isSelectFormFieldHasDefault = false;
             for (int i = 0; i < optionValues.length; i++) {
                 List<SelectElement> sel =
-                        sff.getSelectElementMap().get(optionValues[i]);
+                        selectFormField.getSelectElementMap().get(optionValues[i]);
                 for (SelectElement se : sel) {
                     se.setEnabled(enableElements);
                     // By option mechanism, we can set an SelectElement as default.
@@ -142,7 +142,7 @@ public final class AuditSetUpFormFieldHelper {
             // When no default elements have been found, the first enabled element
             // is set as default
             if (!isSelectFormFieldHasDefault) {
-                setFirstSelectElementAsDefault(sff.getSelectElementMap());
+                setFirstSelectElementAsDefault(selectFormField.getSelectElementMap());
             }
         }
     }
@@ -197,7 +197,7 @@ public final class AuditSetUpFormFieldHelper {
      * referential in a SelectFormField regarding a set of allowed referentials.
      *
      * @param refAndLevelSelectFormField
-     * @param referentialSet
+     * @param allowedReferentialCodeSet
      */
     public static void activateAllowedReferentialField(
             SelectFormField refAndLevelSelectFormField,

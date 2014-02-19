@@ -26,7 +26,7 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * Implementation of the rule 8.2 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-8-2">the rule 8.2 design page.</a>
- * @see <a href="http://rgaa.net/Universalite-du-gestionnaire-d.html"> 8.2 rule specification
+ * @see <a href="http://rgaa.net/Universalite-du-gestionnaire-d.html"> 8.2 rule specification </a>
  *
  */
 public class Rgaa22Rule08021 extends AbstractNotTestedRuleImplementation {

@@ -69,7 +69,7 @@ public interface DefiniteResultFactory extends GenericFactory<DefiniteResult> {
      *            the subject to set
      * @param value
      *            the value to set
-     * @param remarkList
+     * @param remarkSet
      *            the remark list to set
      * @return a new instance of DefiniteResult
      */
@@ -85,7 +85,7 @@ public interface DefiniteResultFactory extends GenericFactory<DefiniteResult> {
      *            the value to set
      * @param elementCounter
      *            the  number of tested elements
-     * @param remarkList
+     * @param remarkSet
      *            the remark list to set
      * @return a new instance of DefiniteResult
      */

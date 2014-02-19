@@ -52,7 +52,7 @@ public interface FailedPageInfo {
 
     /**
      *
-     * @param idWebResource
+     * @param webResourceId
      */
     void setWebResourceId(Long webResourceId);
 

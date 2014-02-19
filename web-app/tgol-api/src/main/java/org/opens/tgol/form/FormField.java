@@ -47,7 +47,7 @@ public interface FormField {
 
     /**
      *
-     * @param i18nKey
+     * @param value
      */
     void setValue (String value);
 

@@ -26,7 +26,7 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * Implementation of the rule 8.11 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-8-11">the rule 8.11 design page.</a>
- * @see <a href="http://rgaa.net/Absence-de-perte-d-informations.html"> 8.11 rule specification
+ * @see <a href="http://rgaa.net/Absence-de-perte-d-informations.html"> 8.11 rule specification </a>
  *
  * @author jkowalczyk
  */

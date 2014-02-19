@@ -143,7 +143,6 @@ public final class FormRulesHandler {
     /**
      * This method extracts the value of the "for" attribute for each label tag.
      *
-     * @param sspHandler
      * @return
      */
     public List<String> getForAttributeFromLabelTagsList() {
@@ -158,8 +157,7 @@ public final class FormRulesHandler {
 
     /**
      * 
-     * @param nodeList
-     * @param duplicateIdSet
+     * @param nodeSet
      * @return
      */
     public TestSolution checkIdUnicity(Set<Node> nodeSet) {

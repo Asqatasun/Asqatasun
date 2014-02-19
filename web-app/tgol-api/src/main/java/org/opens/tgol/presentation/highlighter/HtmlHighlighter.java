@@ -41,7 +41,6 @@ public interface HtmlHighlighter {
     
     /**
      * 
-     * @param doctype
      * @param htmlContent
      * @return 
      */

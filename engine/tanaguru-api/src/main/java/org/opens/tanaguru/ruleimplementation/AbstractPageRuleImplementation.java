@@ -23,9 +23,9 @@ package org.opens.tanaguru.ruleimplementation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.subject.WebResource;
-import java.util.Map;
 import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
@@ -44,8 +44,10 @@ public abstract class AbstractPageRuleImplementation extends AbstractRuleImpleme
      * gross results already filtered in the main consolidation operation. In
      * common cases, this method should not be overriden.
      *
-     * @param grossResultList
-     *            the gross result list to consolidate.
+     * @param grossResultMap
+     *            the gross result map to consolidate.
+     * @param processRemarkService
+     *            
      * @return the net result list which is exactly the same as the gross result
      *         list received from the parameter set.
      */

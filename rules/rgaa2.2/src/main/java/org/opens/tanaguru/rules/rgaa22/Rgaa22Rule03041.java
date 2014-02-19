@@ -31,7 +31,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_
  * Implementation of the rule 3.4 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-3-4">the rule 3.4 design page.</a>
- * @see <a href="http://rgaa.net/Regroupement-d-elements-de.html"> 3.4 rule specification
+ * @see <a href="http://rgaa.net/Regroupement-d-elements-de.html"> 3.4 rule specification </a>
  *
  */
 public class Rgaa22Rule03041  extends AbstractDetectionPageRuleImplementation {

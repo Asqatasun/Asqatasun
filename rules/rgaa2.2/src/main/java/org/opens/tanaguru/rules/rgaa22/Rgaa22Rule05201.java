@@ -26,7 +26,7 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * Implementation of the rule 5.20 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-5-20">the rule 5.20 design page.</a>
- * @see <a href="http://rgaa.net/Absence-d-elements-provoquant-des,65.html"> 5.20 rule specification
+ * @see <a href="http://rgaa.net/Absence-d-elements-provoquant-des,65.html"> 5.20 rule specification </a>
  *
  * @author jkowalczyk
  */

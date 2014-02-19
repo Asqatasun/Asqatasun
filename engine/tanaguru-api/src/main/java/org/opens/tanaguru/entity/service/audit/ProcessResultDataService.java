@@ -108,7 +108,6 @@ public interface ProcessResultDataService extends
     /**
      * 
      * @param audit
-     * @param webResource
      * @return
      */
     void cleanUpIndefiniteResultFromAudit(Audit audit);

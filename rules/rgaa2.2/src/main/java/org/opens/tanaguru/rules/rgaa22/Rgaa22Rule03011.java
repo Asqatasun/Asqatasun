@@ -31,7 +31,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_
  * Implementation of the rule 3.1 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-3-1">the rule 3.1 design page.</a>
- * @see <a href="http://rgaa.net/Possibilite-d-identifier-les.html"> 3.1 rule specification
+ * @see <a href="http://rgaa.net/Possibilite-d-identifier-les.html"> 3.1 rule specification </a>
  *
  */
 public class Rgaa22Rule03011 extends AbstractDetectionPageRuleImplementation {

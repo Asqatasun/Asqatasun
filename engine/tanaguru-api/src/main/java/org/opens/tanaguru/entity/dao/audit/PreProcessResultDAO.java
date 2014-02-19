@@ -43,8 +43,7 @@ public interface PreProcessResultDAO extends GenericDAO<PreProcessResult, Long> 
      */
     String findPreProcessResultByKeyAndWebResource(
             String key,
-            WebResource webresource
-            );
+            WebResource webresource);
     
     /**
      * This method returns all the pre-process result for a given audit and
@@ -69,7 +68,7 @@ public interface PreProcessResultDAO extends GenericDAO<PreProcessResult, Long> 
     /**
      * This method clears all the entries for a given webResource
      * 
-     * @param webresource
+     * @param webResource
      * @return
      */
     void deleteAllPreProcessResultByWebResource(WebResource webResource); 

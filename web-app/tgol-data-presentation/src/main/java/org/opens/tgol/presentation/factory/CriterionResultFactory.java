@@ -80,9 +80,7 @@ public final class CriterionResultFactory {
 
     /**
      * 
-     * @param processResult
-     * @param hasSourceCodeADoctype
-     * @param hasResultDetails
+     * @param criterionStatistics
      * @return
      */
     public CriterionResult getCriterionResult(
@@ -99,11 +97,10 @@ public final class CriterionResultFactory {
     /**
      * 
      * @param webresource
-     * @param hasSourceCodeWithDoctype
-     * @param hasResultDetails
      * @param theme
      * @param testSolution
      * @return 
+     *      A map of themes with for each theme the list of CriterionResult
      */
     public Map<Theme, List<CriterionResult>> getCriterionResultSortedByThemeMap(
             WebResource webresource,

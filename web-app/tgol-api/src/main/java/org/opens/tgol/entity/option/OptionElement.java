@@ -38,9 +38,9 @@ public interface OptionElement extends Entity {
 
     /**
      *
-     * @param code
+     * @param option
      */
-    void setOption(Option Option);
+    void setOption(Option option);
 
     /**
      *
@@ -51,8 +51,8 @@ public interface OptionElement extends Entity {
 
     /**
      *
-     * @param OptionValue
+     * @param optionValue
      */
-    void setValue(String OptionValue);
+    void setValue(String optionValue);
     
 }

@@ -116,13 +116,15 @@ public class ForgottenOrChangePasswordController extends AbstractController {
 
     /**
      * This method displays the change password page from an authenticated user
-     * @param contractId
+     * @param userId
+     * @param token
+     * @param request
      * @param model
      * @return
      */
     @RequestMapping(value = TgolKeyStore.CHANGE_PASSWORD_URL, method = RequestMethod.GET)
     public String displayChangePasswordFromUserPage(
-            @RequestParam(TgolKeyStore.USER_ID_KEY) String id,
+            @RequestParam(TgolKeyStore.USER_ID_KEY) String userId,
             @RequestParam(TgolKeyStore.TOKEN_KEY) String token,
             HttpServletRequest request,
             Model model) {
@@ -130,9 +132,16 @@ public class ForgottenOrChangePasswordController extends AbstractController {
         secondaryLevelMenuDisplayer.setModifiableReferentialsForUserToModel(
                         getCurrentUser(), 
                         model); 
-        return displayChangePasswordView(id, token, model, request);
+        return displayChangePasswordView(userId, token, model, request);
     }
 
+    /**
+     * 
+     * @param id
+     * @param request
+     * @param model
+     * @return 
+     */
     @RequestMapping(value = TgolKeyStore.CHANGE_PASSWORD_FROM_ADMIN_URL, method = RequestMethod.GET)
     @Secured(TgolKeyStore.ROLE_ADMIN_KEY)
     public String displayChangePasswordFromAdminPage(
@@ -237,7 +246,6 @@ public class ForgottenOrChangePasswordController extends AbstractController {
      * This methods controls the validity of the form and modify the password 
      * of the wished user
      * 
-     * @param launchAuditFromContractCommand
      * @param forgottenPasswordCommand
      * @param result
      * @param model
@@ -250,8 +258,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
             @ModelAttribute(TgolKeyStore.FORGOTTEN_PASSWORD_COMMAND_KEY) ForgottenPasswordCommand forgottenPasswordCommand,
             BindingResult result,
             Model model,
-            HttpServletRequest request)
-            throws Exception {
+            HttpServletRequest request) throws Exception {
         // We check whether the form is valid
         forgottenPasswordFormValidator.validate(forgottenPasswordCommand, result);
         // If the form has some errors, we display it again with errors' details

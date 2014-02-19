@@ -229,7 +229,7 @@ public interface DOMHandler {
      * characters
      * @param attribute
      * @param workingElement
-     * @param currentTestSolution
+     * @param testSolution
      * @param remarkMessage
      * @return
      */
@@ -244,7 +244,7 @@ public interface DOMHandler {
      * characters
      * @param attributeContent
      * @param workingElement
-     * @param currentTestSolution
+     * @param testSolution
      * @param remarkMessage
      * @return
      */

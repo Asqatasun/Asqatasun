@@ -38,7 +38,7 @@ public interface ParameterElement extends Entity {
 
     /**
      *
-     * @param longValue
+     * @param parameterElementCode
      */
     void setParameterElementCode(String parameterElementCode);
 
@@ -50,7 +50,7 @@ public interface ParameterElement extends Entity {
 
     /**
      *
-     * @param parameterElement
+     * @param parameterFamily
      */
     void setParameterFamily(ParameterFamily parameterFamily);
 

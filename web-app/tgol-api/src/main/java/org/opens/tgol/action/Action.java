@@ -66,10 +66,10 @@ public interface Action {
 
     /**
      *
-     * @param ationI81NCode
+     * @param actionI81NCode
      */
-
     void setActionI81NCode(String actionI81NCode);
+    
     /**
      *
      * @return
@@ -79,9 +79,9 @@ public interface Action {
 
     /**
      *
-     * @param contractActionI81NCode
+     * @param actionAltI81NCode
      */
-    void setActionAltI81NCode(String actionTitleI81NCode);
+    void setActionAltI81NCode(String actionAltI81NCode);
 
     /**
      *
@@ -105,9 +105,9 @@ public interface Action {
 
     /**
      *
-     * @param contractActionUrl
+     * @param enabledActionImageUrl
      */
-    void setEnabledActionImageUrl(String contractActionImageUrl);
+    void setEnabledActionImageUrl(String enabledActionImageUrl);
     
     /**
      *
@@ -118,9 +118,9 @@ public interface Action {
 
     /**
      *
-     * @param contractActionUrl
+     * @param disabledActionImageUrl
      */
-    void setDisabledActionImageUrl(String contractActionImageUrl);
+    void setDisabledActionImageUrl(String disabledActionImageUrl);
 
     /**
      *

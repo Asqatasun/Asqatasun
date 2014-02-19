@@ -27,7 +27,6 @@ import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tgol.entity.contract.ScopeEnum;
 import org.opens.tgol.entity.option.OptionElement;
-import org.opens.tgol.entity.user.User;
 
 /**
  *
@@ -61,7 +60,7 @@ public interface ParameterDataServiceDecorator extends ParameterDataService {
     
     /**
      * 
-     * @param optionSet
+     * @param optionElementSet
      * @return 
      */
     Collection<Parameter> getParameterSetFromOptionElementSet(Collection<OptionElement> optionElementSet);

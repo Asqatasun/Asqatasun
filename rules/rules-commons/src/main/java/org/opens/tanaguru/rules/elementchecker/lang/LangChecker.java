@@ -161,7 +161,8 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
     /**
      * 
      * @param element
-     * @param lang
+     * @param langDefinition
+     * @param effectiveLang
      * @param createProcessRemarkOnFailure
      * @return 
      */

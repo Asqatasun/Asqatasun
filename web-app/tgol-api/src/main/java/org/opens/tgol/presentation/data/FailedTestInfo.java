@@ -64,7 +64,7 @@ public interface FailedTestInfo {
 
     /**
      *
-     * @param idWebResource
+     * @param pageCounter
      */
     void setPageCounter(Long pageCounter);
 

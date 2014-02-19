@@ -103,7 +103,7 @@ public class AccountSettingsController extends AbstractUserAndContractsControlle
     
     /**
      * This method displays the form for an authenticated user
-     * @param contractId
+     * 
      * @param model
      * @return
      */
@@ -172,7 +172,8 @@ public class AccountSettingsController extends AbstractUserAndContractsControlle
      * This page is displayed if and only if the current user owns at least 
      * one contract on the wished referential. 
      * 
-     * @param contractId
+     * @param refCode
+     * @param request
      * @param model
      * @return
      */

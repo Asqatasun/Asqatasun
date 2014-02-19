@@ -164,7 +164,7 @@ public abstract class ElementCheckerImpl implements ElementChecker {
     
     /**
      * 
-     * @param processRemarkService
+     * @param sspHandler
      * @param elements
      * @param testSolutionHandler 
      */
@@ -209,7 +209,7 @@ public abstract class ElementCheckerImpl implements ElementChecker {
      * @param testSolution
      * @param element
      * @param messageCode 
-     * @param evidenceElementList
+     * @param evidenceElement
      */
     protected void addSourceCodeRemark (
             TestSolution testSolution, 
@@ -395,7 +395,7 @@ public abstract class ElementCheckerImpl implements ElementChecker {
      * 
      * @param element
      * @param attributeName
-     * @param isExternalLink
+     * @param isExternalResource
      * @return the text content of an attribute
      */
     protected String buildAttributeContent(

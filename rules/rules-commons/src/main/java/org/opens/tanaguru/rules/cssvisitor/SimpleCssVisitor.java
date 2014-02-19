@@ -295,7 +295,7 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
      * 
      * @param testSolution
      * @param message
-     * @param attributeName 
+     * @param remarkTarget
      */
     protected void addCssCodeRemark(
             TestSolution testSolution, 
@@ -337,7 +337,7 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
     
     /**
      * Make the effective control on the css property 
-     * @param exprMember 
+     * @param property 
      */
     protected abstract void checkCSSDeclarationProperty(String property);
     

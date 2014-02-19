@@ -43,7 +43,6 @@ public class SignUpController extends AbstractUserAndContractsController {
 
     /**
      * This method displays the one page form for an authenticated user
-     * @param contractId
      * @param model
      * @return
      */
@@ -60,10 +59,9 @@ public class SignUpController extends AbstractUserAndContractsController {
      * This methods controls the validity of the form and launch an audit with
      * values populated by the user. In case of audit failure, an appropriate
      * message is displayed
-     * @param launchAuditFromContractCommand
+     * @param createUserCommand
      * @param result
      * @param model
-     * @param request
      * @return
      * @throws Exception
      */

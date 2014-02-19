@@ -32,7 +32,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NOT_PERTINENT
  * Implementation of the rule 9.7 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-9-7">the rule 9.7 design page.</a>
- * @see <a href="http://rgaa.net/Pertinence-du-titre-de-la-page.html"> 9.7 rule specification
+ * @see <a href="http://rgaa.net/Pertinence-du-titre-de-la-page.html"> 9.7 rule specification </a>
  *
  * @author jkowalczyk
  */

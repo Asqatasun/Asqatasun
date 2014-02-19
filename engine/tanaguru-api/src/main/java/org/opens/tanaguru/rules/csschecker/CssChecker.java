@@ -69,7 +69,7 @@ public interface CssChecker {
      * 
      * @param sspHandler
      * @param styleSheetName
-     * @param selectionHandler
+     * @param cascadingStyleSheet
      * @param testSolutionHandler
      *  
      */

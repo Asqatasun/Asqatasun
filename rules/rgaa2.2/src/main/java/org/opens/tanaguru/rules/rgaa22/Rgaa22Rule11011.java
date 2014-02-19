@@ -37,7 +37,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.HEADER_DETECT
  * Implementation of the rule 11.1 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-11-1">the rule 11.1 design page.</a>
- * @see <a href="http://rgaa.net/Presence-des-balises-th-pour.html"> 11.1 rule specification
+ * @see <a href="http://rgaa.net/Presence-des-balises-th-pour.html"> 11.1 rule specification </a>
  *
  * @author jkowalczyk
  */

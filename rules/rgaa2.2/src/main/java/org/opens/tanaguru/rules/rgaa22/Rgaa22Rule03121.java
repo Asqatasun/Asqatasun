@@ -33,7 +33,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_LABEL_P
  * Implementation of the rule 3.12 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-3-12">the rule 3.12 design page.</a>
- * @see <a href="http://rgaa.net/Pertinence-des-etiquettes-d.html"> 3.12 rule specification
+ * @see <a href="http://rgaa.net/Pertinence-des-etiquettes-d.html"> 3.12 rule specification </a>
  *
  * @author jkowalczyk
  */

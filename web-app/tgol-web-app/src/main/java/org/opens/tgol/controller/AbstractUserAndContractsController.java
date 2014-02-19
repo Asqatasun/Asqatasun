@@ -207,9 +207,8 @@ public class AbstractUserAndContractsController extends AbstractController{
      * @param model
      * @param successViewName
      * @param errorViewName
-     * @param checkUserUrl
-     * @param checkUserUrl
-     * @param addContractListToModel
+     * @param newUserFromAdmin
+     * @param successMessageKey
      * @return
      * @throws Exception
      */
@@ -220,8 +219,7 @@ public class AbstractUserAndContractsController extends AbstractController{
             String successViewName,
             String errorViewName,
             boolean newUserFromAdmin,
-            String successMessageKey)
-            throws Exception {
+            String successMessageKey) throws Exception {
 
         createUserFormValidator.setCheckSiteUrl(!newUserFromAdmin);
         // We check whether the form is valid
@@ -250,10 +248,14 @@ public class AbstractUserAndContractsController extends AbstractController{
      * 
      * @param createUserCommand
      * @param result
+     * @param request
      * @param model
+     * @param userToModify
      * @param successViewName
      * @param errorViewName
-     * @param userNameToCheck
+     * @param updateAllUserData
+     * @param updateUserFromAdmin
+     * @param successMessageKey
      * @return
      * @throws Exception
      */

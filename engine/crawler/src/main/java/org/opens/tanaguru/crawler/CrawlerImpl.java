@@ -201,8 +201,9 @@ public class CrawlerImpl implements Crawler, ContentWriter {
     }
 
     /**
-     *
-     * @param siteUrl
+     * 
+     * @param siteName
+     * @param siteURL 
      */
     @Override
     public void setSiteURL(String siteName, Collection<String> siteURL) {
@@ -220,8 +221,8 @@ public class CrawlerImpl implements Crawler, ContentWriter {
     }
 
     /**
-     *
-     * @param siteUrl
+     * 
+     * @param pageURL 
      */
     @Override
     public void setPageURL(String pageURL) {
@@ -360,6 +361,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
      * 
      * @param curi
      * @param charset
+     * @param fetchStatus
      * @param sourceCode
      * @param successfullFetch
      * @return

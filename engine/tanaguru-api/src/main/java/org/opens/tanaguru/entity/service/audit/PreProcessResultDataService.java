@@ -76,7 +76,7 @@ public interface PreProcessResultDataService extends
     /**
      * This method clears all the entries for a given webResource
      * 
-     * @param webresource
+     * @param webResource
      * @return
      */
     void cleanUpAllPreProcessResultByWebResource(WebResource webResource); 

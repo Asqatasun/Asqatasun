@@ -309,7 +309,7 @@ public class CreateContractCommandFactory  implements Serializable {
 
     /**
      * 
-     * @param createContractCommand
+     * @param ccc the CreateContractCommand
      * @param contract
      * @return 
      */

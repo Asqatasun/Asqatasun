@@ -21,9 +21,9 @@
  */
 package org.opens.tanaguru.entity.factory.parameterization;
 
-import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
 import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.entity.parameterization.ParameterFamily;
+import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
 
 /**
  * 
@@ -33,8 +33,7 @@ public interface ParameterElementFactory extends GenericFactory<ParameterElement
 
     /**
      *
-     * @param parameterElement
-     * @param value
+     * @param parameterFamily
      * @return
      */
     ParameterElement createParameter(ParameterFamily parameterFamily);

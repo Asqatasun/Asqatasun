@@ -57,7 +57,7 @@ public interface TgolWebResourceDAO extends GenericDAO<WebResource, Long> {
 
     /**
      *
-     * @param parentWebresourceId
+     * @param parentWebresource
      * @return
      */
     Long retrieveChildWebResourceCount(WebResource parentWebresource);
