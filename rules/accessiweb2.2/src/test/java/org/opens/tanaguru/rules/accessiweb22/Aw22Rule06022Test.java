@@ -23,7 +23,6 @@ package org.opens.tanaguru.rules.accessiweb22;
 
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
@@ -123,18 +122,6 @@ public class Aw22Rule06022Test extends Aw22RuleImplementationTestCase {
         getWebResourceMap().put("AW22.Test.06.02.01-3NMI-02",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "AW22/Aw22Rule06021/AW22.Test.06.02.01-3NMI-02.html"));
-        getWebResourceMap().put("AW22.Test.06.02.01-4NA-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule06021/AW22.Test.06.02.01-4NA-01.html"));
-        getWebResourceMap().put("AW22.Test.06.02.01-4NA-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule06021/AW22.Test.06.02.01-4NA-02.html"));
-        getWebResourceMap().put("AW22.Test.06.02.01-4NA-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule06021/AW22.Test.06.02.01-4NA-03.html"));
-        getWebResourceMap().put("AW22.Test.06.02.01-4NA-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule06021/AW22.Test.06.02.01-4NA-04.html"));
         
         //06.02.03 testcases
         getWebResourceMap().put("AW22.Test.06.02.03-2Failed-02",
@@ -155,18 +142,6 @@ public class Aw22Rule06022Test extends Aw22RuleImplementationTestCase {
         getWebResourceMap().put("AW22.Test.06.02.03-3NMI-03",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "AW22/Aw22Rule06023/AW22.Test.06.02.03-3NMI-03.html"));
-        getWebResourceMap().put("AW22.Test.06.02.03-4NA-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule06023/AW22.Test.06.02.03-4NA-01.html"));
-        getWebResourceMap().put("AW22.Test.06.02.03-4NA-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule06023/AW22.Test.06.02.03-4NA-02.html"));
-        getWebResourceMap().put("AW22.Test.06.02.03-4NA-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule06023/AW22.Test.06.02.03-4NA-03.html"));
-        getWebResourceMap().put("AW22.Test.06.02.03-4NA-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule06023/AW22.Test.06.02.03-4NA-04.html"));
         
         //06.02.04 testcases
         getWebResourceMap().put("AW22.Test.06.02.04-2Failed-01",
@@ -217,33 +192,6 @@ public class Aw22Rule06022Test extends Aw22RuleImplementationTestCase {
         getWebResourceMap().put("AW22.Test.06.02.04-3NMI-06",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "AW22/Aw22Rule06024/AW22.Test.06.02.04-3NMI-06.html"));
-        getWebResourceMap().put("AW22.Test.06.02.04-4NA-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule06024/AW22.Test.06.02.04-4NA-01.html"));
-        getWebResourceMap().put("AW22.Test.06.02.04-4NA-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule06024/AW22.Test.06.02.04-4NA-02.html"));
-        getWebResourceMap().put("AW22.Test.06.02.04-4NA-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule06024/AW22.Test.06.02.04-4NA-03.html"));
-        getWebResourceMap().put("AW22.Test.06.02.04-4NA-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule06024/AW22.Test.06.02.04-4NA-04.html"));
-        getWebResourceMap().put("AW22.Test.06.02.04-4NA-05",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule06024/AW22.Test.06.02.04-4NA-05.html"));
-        getWebResourceMap().put("AW22.Test.06.02.04-4NA-06",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule06024/AW22.Test.06.02.04-4NA-06.html"));
-        getWebResourceMap().put("AW22.Test.06.02.04-4NA-07",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule06024/AW22.Test.06.02.04-4NA-07.html"));
-        getWebResourceMap().put("AW22.Test.06.02.04-4NA-08",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule06024/AW22.Test.06.02.04-4NA-08.html"));
-        getWebResourceMap().put("AW22.Test.06.02.04-4NA-09",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule06024/AW22.Test.06.02.04-4NA-09.html"));
         
         //06.06.01 testcases -> empty links
         getWebResourceMap().put("AW22.Test.06.06.01-2Failed-01",
