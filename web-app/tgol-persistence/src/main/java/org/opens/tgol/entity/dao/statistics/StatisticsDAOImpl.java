@@ -513,7 +513,6 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
      *       WHERE Id_Web_Resource=:idWebResource;
      *
      * @param idWebResource
-     * @param audit
      * @return
      *      the mark for given audit and webresource
      */
@@ -546,7 +545,6 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
      *       WHERE Id_Web_Resource=:idWebResource
      *
      * @param idWebResource
-     * @param audit
      * @return
      *      the mark for given audit and webresource
      */
@@ -673,9 +671,9 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
      *
      * @param idAudit
      * @param httpStatusCode
-     * @param idInvalidLabel
-     * @param nbOfResult
+     * @param invalidTestLabel
      * @param window
+     * @param nbOfResult
      * @param sortDirection
      * @param sortCriterion
      * @param containingValue
