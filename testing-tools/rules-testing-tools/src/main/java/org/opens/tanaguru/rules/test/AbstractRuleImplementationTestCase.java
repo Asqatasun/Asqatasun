@@ -487,9 +487,8 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     
     /**
      * 
-     * @param familyValue
-     * @param elementValue
-     * @param value
+     * @param sspIdentifier
+     * @param parameter
      * @return 
      */
     protected void addParameterToParameterMap(String sspIdentifier, Parameter parameter) {

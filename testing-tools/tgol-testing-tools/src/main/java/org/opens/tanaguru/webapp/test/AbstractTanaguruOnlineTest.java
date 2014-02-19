@@ -25,9 +25,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.webapp.test.data.KrashtestResult;
 
@@ -201,7 +199,6 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
     /**
      * This method extracts the result for a given test from the tanaguru
      * response
-     * @param bodyText
      * @param testName
      * @return
      */
