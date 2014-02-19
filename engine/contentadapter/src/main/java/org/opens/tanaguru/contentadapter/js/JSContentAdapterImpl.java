@@ -21,28 +21,20 @@
  */
 package org.opens.tanaguru.contentadapter.js;
 
-import org.opens.tanaguru.contentadapter.ContentParser;
-import org.opens.tanaguru.contentadapter.Resource;
-import org.opens.tanaguru.contentadapter.util.ExternalRsrc;
-import org.opens.tanaguru.contentadapter.util.HtmlNodeAttr;
-import org.opens.tanaguru.contentadapter.util.HtmlTags;
-import org.opens.tanaguru.contentadapter.util.InlineRsrc;
-import org.opens.tanaguru.contentadapter.util.LocalRsrc;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import org.xml.sax.Attributes;
-import org.xml.sax.Locator;
-import org.xml.sax.SAXException;
-
-import com.thoughtworks.xstream.XStream;
-import java.util.HashSet;
-import org.opens.tanaguru.contentadapter.util.URLIdentifier;
+import org.opens.tanaguru.contentadapter.ContentParser;
+import org.opens.tanaguru.contentadapter.Resource;
+import org.opens.tanaguru.contentadapter.util.*;
 import org.opens.tanaguru.contentloader.Downloader;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
+import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
+import org.xml.sax.Locator;
+import org.xml.sax.SAXException;
 import org.xml.sax.helpers.LocatorImpl;
 
 /**
@@ -136,7 +128,7 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
     }
 
     /**
-     * @param prefixe
+     * @param prefix
      * @see org.xml.sax.ContentHandler#endPrefixMapping(java.lang.String)
      */
     @Override
