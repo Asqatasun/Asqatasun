@@ -33,15 +33,15 @@ public interface ContentWriter {
 
     /**
      *
-     * @param resourceContentType
      * @param curi
      */
     void computeAndPersistUnsuccessfullFetchedResource(CrawlURI curi);
 
     /**
      * 
-     * @param resourceContentType
      * @param curi
+     * @param recis
+     * @throws IOException 
      */
     void computeAndPersistSuccessfullFetchedResource(
             CrawlURI curi,

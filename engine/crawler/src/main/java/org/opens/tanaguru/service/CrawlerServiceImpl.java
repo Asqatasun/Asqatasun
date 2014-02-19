@@ -114,7 +114,10 @@ public class CrawlerServiceImpl implements CrawlerService {
 
     /**
      * Calls the crawler component process then updates the site.
-     * @param site the site to crawl
+     * 
+     * @param siteUrl the site to crawl
+     * @param audit the current audit
+     * 
      * @return returns the site after modification
      */
     @Override

@@ -129,9 +129,10 @@ public class TanaguruWriterProcessor extends Processor
     }
     
     /**
-     * @param name Name of this processor.
+     * Default constructor
      */
     public TanaguruWriterProcessor() {
+        super();
     }
 
     @Override
