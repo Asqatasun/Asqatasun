@@ -81,8 +81,17 @@ Or you can send an email to
 ## Content of this (last) version
 
 Bugs :
+#47 : The language detection tests return bad results for uppercase submitted text
 
-* \#636 : Clean-up step at the end of audit may cause deadlock on CONTENT table (https://dev.tanaguru.org/redmine/issues/636)
+Features : 
+- Rgaa 2.2 referential full supported
+- Postgresql management (creation and insertion scripts)
+- Crawl optimisations (deal with canonical, improve fetch counting, improve fetch of testable data)
+#50 : Provide a way to set-up whether the cookies have to be considered while crawling
+#49 : [SEO 6.4.1] For a given title value, sort URLs
+#46 : Override default user agent used by apache library to test URL before launching effectively the audit
+#43 : Disable the load of Css content for audit of SEO type
+#37 : Mail server is not configurable://github.com/Tanaguru/Tanaguru/issues/37)
 
 
 Have Fun
