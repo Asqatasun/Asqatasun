@@ -26,7 +26,7 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * Implementation of the rule 5.2 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-5-2">the rule 5.2 design page.</a>
- * @see <a href="http://rgaa.net/Presence-de-la-transcription.html"> 5.2 rule specification
+ * @see <a href="http://rgaa.net/Presence-de-la-transcription.html"> 5.2 rule specification </a>
  *
  * @author jkowalczyk
  */

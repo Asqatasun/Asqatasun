@@ -36,7 +36,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.SUMMARY_MISSI
  * Implementation of the rule 11.8 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-11-8">the rule 11.8 design page.</a>
- * @see <a href="http://rgaa.net/Presence-d-un-resume-pour-les.html"> 11.8 rule specification
+ * @see <a href="http://rgaa.net/Presence-d-un-resume-pour-les.html"> 11.8 rule specification </a>
  *
  * @author jkowalczyk
  */

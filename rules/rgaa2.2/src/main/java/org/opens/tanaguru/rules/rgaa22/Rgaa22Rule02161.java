@@ -27,7 +27,7 @@ import org.opens.tanaguru.rules.elementchecker.contrast.ContrastChecker;
  * Implementation of the rule 2.16 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-2-16">the rule 2.16 design page.</a>
- * @see <a href="http://rgaa.net/Valeur-du-rapport-de-contraste-du,18.html"> 2.16 rule specification
+ * @see <a href="http://rgaa.net/Valeur-du-rapport-de-contraste-du,18.html"> 2.16 rule specification </a>
  *
  * @author jkowalczyk
  */

@@ -26,7 +26,7 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * Implementation of the rule 6.36 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-6-36">the rule 6.36 design page.</a>
- * @see <a href="http://rgaa.net/Presence-d-une-indication-de-la.html"> 6.36 rule specification
+ * @see <a href="http://rgaa.net/Presence-d-une-indication-de-la.html"> 6.36 rule specification </a>
  *
  * @author jkowalczyk
  */

@@ -26,7 +26,7 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * Implementation of the rule 10.6 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-10-6">the rule 10.6 design page.</a>
- * @see <a href="http://rgaa.net/Utilisation-systematique-de-listes.html"> 10.6 rule specification
+ * @see <a href="http://rgaa.net/Utilisation-systematique-de-listes.html"> 10.6 rule specification </a>
  *
  * @author jkowalczyk
  */

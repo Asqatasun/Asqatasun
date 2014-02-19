@@ -31,7 +31,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_
  * Implementation of the rule 5.29 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-5-29">the rule 5.29 design page.</a>
- * @see <a href="http://rgaa.net/Absence-d-elements-declenchant-la.html"> 5.29 rule specification
+ * @see <a href="http://rgaa.net/Absence-d-elements-declenchant-la.html"> 5.29 rule specification </a>
  *
  * @author jkowalczyk
  */

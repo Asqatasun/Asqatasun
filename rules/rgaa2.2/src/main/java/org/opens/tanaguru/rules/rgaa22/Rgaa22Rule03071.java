@@ -34,7 +34,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_SELECT_
  * Implementation of the rule 3.7 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-3-7">the rule 3.7 design page.</a>
- * @see <a href="http://rgaa.net/Regroupement-d-elements-option.html"> 3.7 rule specification
+ * @see <a href="http://rgaa.net/Regroupement-d-elements-option.html"> 3.7 rule specification </a>
  *
  */
 public class Rgaa22Rule03071 extends AbstractPageRuleWithSelectorAndCheckerImplementation {

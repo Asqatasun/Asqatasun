@@ -26,7 +26,7 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * Implementation of the rule 6.7 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-6-7">the rule 6.7 design page.</a>
- * @see <a href="http://rgaa.net/Absence-d-element-meta-provoquant.html"> 6.7 rule specification
+ * @see <a href="http://rgaa.net/Absence-d-element-meta-provoquant.html"> 6.7 rule specification </a>
  *
  * @author jkowalczyk
  */

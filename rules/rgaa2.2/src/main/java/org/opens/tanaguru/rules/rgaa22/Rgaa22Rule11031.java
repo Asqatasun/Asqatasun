@@ -34,7 +34,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_
  * Implementation of the rule 11.3 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-11-3">the rule 11.3 design page.</a>
- * @see <a href="http://rgaa.net/Presence-d-une-relation-entre-les,170.html"> 11.3 rule specification
+ * @see <a href="http://rgaa.net/Presence-d-une-relation-entre-les,170.html"> 11.3 rule specification </a>
  *
  * @author jkowalczyk
  */

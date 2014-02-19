@@ -26,7 +26,7 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * Implementation of the rule 8.8 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-8-8">the rule 8.8 design page.</a>
- * @see <a href="http://rgaa.net/Presence-d-une-alternative-au-code.html"> 8.8 rule specification
+ * @see <a href="http://rgaa.net/Presence-d-une-alternative-au-code.html"> 8.8 rule specification </a>
  *
  * @author jkowalczyk
  */

@@ -31,7 +31,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_
  * Implementation of the rule 3.15 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-3-15">the rule 3.15 design page.</a>
- * @see <a href="http://rgaa.net/Presence-de-mecanismes-permettant,33.html"> 3.15 rule specification
+ * @see <a href="http://rgaa.net/Presence-de-mecanismes-permettant,33.html"> 3.15 rule specification </a>
  *
  * @author jkowalczyk
  */

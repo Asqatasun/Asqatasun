@@ -26,7 +26,7 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * Implementation of the rule 11.5 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-11-5">the rule 11.5 design page.</a>
- * @see <a href="http://rgaa.net/Absence-de-tableaux-de-donnees-ou.html"> 11.5 rule specification
+ * @see <a href="http://rgaa.net/Absence-de-tableaux-de-donnees-ou.html"> 11.5 rule specification </a>
  *
  * @author jkowalczyk
  */

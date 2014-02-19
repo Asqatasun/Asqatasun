@@ -26,7 +26,7 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * Implementation of the rule 5.33 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-5-33">the rule 5.33 design page.</a>
- * @see <a href="http://rgaa.net/Niveau-sonore-de-la-piste-de.html"> 5.33 rule specification
+ * @see <a href="http://rgaa.net/Niveau-sonore-de-la-piste-de.html"> 5.33 rule specification </a>
  *
  * @author jkowalczyk
  */

@@ -26,7 +26,7 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * Implementation of the rule 10.8 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-10-8">the rule 10.8 design page.</a>
- * @see <a href="http://rgaa.net/Balisage-correct-des-citations.html"> 10.8 rule specification
+ * @see <a href="http://rgaa.net/Balisage-correct-des-citations.html"> 10.8 rule specification </a>
  *
  * @author jkowalczyk
  */

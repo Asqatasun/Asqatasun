@@ -30,7 +30,7 @@ import static org.opens.tanaguru.rules.keystore.HtmlElementStore.*;
  * Implementation of the rule 2.8 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-2-8">the rule 2.8 design page.</a>
- * @see <a href="http://rgaa.net/Valeur-du-rapport-de-contraste-du,10.html"> 2.8 rule specification
+ * @see <a href="http://rgaa.net/Valeur-du-rapport-de-contraste-du,10.html"> 2.8 rule specification </a>
  *
  */
 public class Rgaa22Rule02081 extends AbstractDetectionPageRuleImplementation {

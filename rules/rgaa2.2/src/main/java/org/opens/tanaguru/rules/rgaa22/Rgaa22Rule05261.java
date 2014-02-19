@@ -26,7 +26,7 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * Implementation of the rule 5.26 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-5-26">the rule 5.26 design page.</a>
- * @see <a href="http://rgaa.net/Absence-de-mise-en-forme,71.html"> 5.26 rule specification
+ * @see <a href="http://rgaa.net/Absence-de-mise-en-forme,71.html"> 5.26 rule specification </a>
  *
  * @author jkowalczyk
  */

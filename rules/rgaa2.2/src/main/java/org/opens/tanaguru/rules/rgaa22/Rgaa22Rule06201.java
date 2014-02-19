@@ -26,7 +26,7 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * Implementation of the rule 6.20 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-6-20">the rule 6.20 design page.</a>
- * @see <a href="http://rgaa.net/Presence-d-un-fil-d-ariane.html"> 6.20 rule specification
+ * @see <a href="http://rgaa.net/Presence-d-un-fil-d-ariane.html"> 6.20 rule specification </a>
  *
  * @author jkowalczyk
  */

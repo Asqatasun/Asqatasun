@@ -39,7 +39,7 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.ALT_MISSING_M
  * Implementation of the rule 4.1 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-4-1">the rule 4.1 design page.</a>
- * @see <a href="http://rgaa.net/Presence-de-l-attribut-alt.html"> 4.1 rule specification
+ * @see <a href="http://rgaa.net/Presence-de-l-attribut-alt.html"> 4.1 rule specification </a>
  *
  */
 public class Rgaa22Rule04011 extends AbstractCompositePageRuleMarkupImplementation {

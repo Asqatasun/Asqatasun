@@ -33,7 +33,7 @@ import org.opens.tanaguru.rules.elementchecker.helper.RuleCheckHelper;
  * Implementation of the rule 8.5 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-8-5">the rule 8.5 design page.</a>
- * @see <a href="http://rgaa.net/Absence-de-changements-de-contexte.html"> 8.5 rule specification
+ * @see <a href="http://rgaa.net/Absence-de-changements-de-contexte.html"> 8.5 rule specification </a>
  *
  * @author jkowalczyk
  */

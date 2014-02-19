@@ -40,7 +40,7 @@ import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
  * Implementation of the rule 4.3 of the referential RGAA 2.2.
  * <br/>
  * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-4-3">the rule 4.3 design page.</a>
- * @see <a href="http://rgaa.net/Pertinence-de-l-alternative,37.html"> 4.3 rule specification
+ * @see <a href="http://rgaa.net/Pertinence-de-l-alternative,37.html"> 4.3 rule specification </a>
  *
  * @author jkowalczyk
  */
