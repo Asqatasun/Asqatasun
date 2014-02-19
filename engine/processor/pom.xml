@@ -8,12 +8,12 @@
         <artifactId>engine</artifactId>
         <version>3.0.0</version>
     </parent>
-    <artifactId>processor</artifactId>
+    <artifactId>tanaguru-processor</artifactId>
     <name>processor</name>
     <dependencies>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>commons-processing</artifactId>
+            <artifactId>tanaguru-commons-processing</artifactId>
         </dependency>
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>

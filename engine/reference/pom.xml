@@ -8,7 +8,7 @@
         <artifactId>engine</artifactId>
         <version>3.0.0</version>
     </parent>
-    <artifactId>reference</artifactId>
+    <artifactId>tanaguru-reference</artifactId>
     <name>reference</name>
     <dependencies>
         <dependency>

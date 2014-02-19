@@ -8,7 +8,7 @@
         <artifactId>engine</artifactId>
         <version>3.0.0</version>
     </parent>
-    <artifactId>persistence</artifactId>
+    <artifactId>tanaguru-persistence</artifactId>
     <name>persistence</name>
     <build>
         <resources>
@@ -28,19 +28,19 @@
     <dependencies>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>audit</artifactId>
+            <artifactId>tanaguru-audit</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>statistics</artifactId>
+            <artifactId>tanaguru-statistics</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>parameterization</artifactId>
+            <artifactId>tanaguru-parameterization</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>commons-entity-jpa</artifactId>
+            <artifactId>tanaguru-commons-entity-jpa</artifactId>
         </dependency>
         <dependency>
             <groupId>org.dbunit</groupId>

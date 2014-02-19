@@ -6,6 +6,6 @@
         <artifactId>rules</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>accessiweb2.2-i18n</artifactId>
+    <artifactId>tanaguru-accessiweb2.2-i18n</artifactId>
     <name>accessiweb2.2-i18n</name>
 </project>

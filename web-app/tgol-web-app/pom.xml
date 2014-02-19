@@ -56,61 +56,61 @@
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>nomenclatureloader</artifactId>
+            <artifactId>tanaguru-nomenclatureloader</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>rule-implementation-loader</artifactId>
+            <artifactId>tanaguru-rule-implementation-loader</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>crawler</artifactId>
+            <artifactId>tanaguru-crawler</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>contentloader</artifactId>
+            <artifactId>tanaguru-contentloader</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>contentadapter</artifactId>
+            <artifactId>tanaguru-contentadapter</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>processor</artifactId>
+            <artifactId>tanaguru-processor</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>consolidator</artifactId>
+            <artifactId>tanaguru-consolidator</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>analyser</artifactId>
+            <artifactId>tanaguru-analyser</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>logging</artifactId>
+            <artifactId>tanaguru-logging</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>scenarioloader</artifactId>
+            <artifactId>tanaguru-scenarioloader</artifactId>
         </dependency>
         
         <!-- rules dependencies-->
         <dependency>
             <groupId>${rulesGroupId}</groupId>
-            <artifactId>accessiweb2.1</artifactId>
+            <artifactId>tanaguru-accessiweb2.1</artifactId>
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
-            <artifactId>accessiweb2.2</artifactId>
+            <artifactId>tanaguru-accessiweb2.2</artifactId>
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
-            <artifactId>rgaa2.2</artifactId>
+            <artifactId>tanaguru-rgaa2.2</artifactId>
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
-            <artifactId>seo</artifactId>
+            <artifactId>tanaguru-seo</artifactId>
         </dependency>
         
         <!-- spring dependencies -->

@@ -6,7 +6,7 @@
         <artifactId>rules</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>rules-resources</artifactId>
+    <artifactId>tanaguru-rules-resources</artifactId>
     <name>rules-resources</name>
 </project>
 

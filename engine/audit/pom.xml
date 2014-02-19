@@ -8,16 +8,16 @@
         <artifactId>engine</artifactId>
         <version>3.0.0</version>
     </parent>
-    <artifactId>audit</artifactId>
+    <artifactId>tanaguru-audit</artifactId>
     <name>audit</name>
     <dependencies>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>reference</artifactId>
+            <artifactId>tanaguru-reference</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>parameterization</artifactId>
+            <artifactId>tanaguru-parameterization</artifactId>
         </dependency>
     </dependencies>
 </project>

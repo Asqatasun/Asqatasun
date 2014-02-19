@@ -17,7 +17,7 @@
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>sebuilder-interpreter-tools</artifactId>
+            <artifactId>tanaguru-sebuilder-interpreter-tools</artifactId>
         </dependency>
         <dependency>
             <groupId>${hibernateGroupId}</groupId>
@@ -37,7 +37,7 @@
         </dependency>
         <dependency>
             <groupId>org.opens</groupId>
-            <artifactId>audit</artifactId>
+            <artifactId>tanaguru-audit</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

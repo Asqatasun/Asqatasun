@@ -8,7 +8,7 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.opens</groupId>
-    <artifactId>seo-resources</artifactId>
+    <artifactId>tanaguru-seo-resources</artifactId>
     <name>seo-resources</name>
     <version>1.0.0</version>
     <url>http://www.tanaguru.org</url>

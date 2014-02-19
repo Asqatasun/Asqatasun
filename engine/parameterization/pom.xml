@@ -8,12 +8,12 @@
         <artifactId>engine</artifactId>
         <version>3.0.0</version>
     </parent>
-    <artifactId>parameterization</artifactId>
+    <artifactId>tanaguru-parameterization</artifactId>
     <name>parameterization</name>
     <dependencies>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>reference</artifactId>
+            <artifactId>tanaguru-reference</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

@@ -8,7 +8,7 @@
         <artifactId>testing-tools</artifactId>
         <version>3.0.0</version>
     </parent>
-    <artifactId>rules-testing-tools</artifactId>
+    <artifactId>tanaguru-rules-testing-tools</artifactId>
     <packaging>jar</packaging>
     <name>rules-testing-tools</name>
     <dependencies>
@@ -18,35 +18,35 @@
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>nomenclatureloader</artifactId>
+            <artifactId>tanaguru-nomenclatureloader</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>rule-implementation-loader</artifactId>
+            <artifactId>tanaguru-rule-implementation-loader</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>persistence</artifactId>
+            <artifactId>tanaguru-persistence</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>crawler</artifactId>
+            <artifactId>tanaguru-crawler</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>contentloader</artifactId>
+            <artifactId>tanaguru-contentloader</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>contentadapter</artifactId>
+            <artifactId>tanaguru-contentadapter</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>processor</artifactId>
+            <artifactId>tanaguru-processor</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>consolidator</artifactId>
+            <artifactId>tanaguru-consolidator</artifactId>
         </dependency>
         <dependency>
             <groupId>${springGroupId}</groupId>

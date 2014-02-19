@@ -29,7 +29,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>tanaguru-engine</artifactId>
+            <artifactId>engine</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

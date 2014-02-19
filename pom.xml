@@ -81,78 +81,78 @@
             <!-- tanaguru-rules dependencies -->
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
-                <artifactId>rules-commons</artifactId>
+                <artifactId>tanaguru-rules-commons</artifactId>
                 <version>${rulesVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
-                <artifactId>accessiweb2.1</artifactId>
-                <version>${rulesVersion}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>${rulesGroupId}</groupId>
-                <artifactId>accessiweb2.1-i18n</artifactId>
+                <artifactId>tanaguru-accessiweb2.1</artifactId>
                 <version>${rulesVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
-                <artifactId>accessiweb2.1-testcases</artifactId>
+                <artifactId>tanaguru-accessiweb2.1-i18n</artifactId>
+                <version>${rulesVersion}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>${rulesGroupId}</groupId>
+                <artifactId>tanaguru-accessiweb2.1-testcases</artifactId>
                 <version>${rulesVersion}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
-                <artifactId>accessiweb2.2</artifactId>
+                <artifactId>tanaguru-accessiweb2.2</artifactId>
                 <version>${rulesVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
-                <artifactId>accessiweb2.2-i18n</artifactId>
+                <artifactId>tanaguru-accessiweb2.2-i18n</artifactId>
                 <version>${rulesVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
-                <artifactId>accessiweb2.2-testcases</artifactId>
+                <artifactId>tanaguru-accessiweb2.2-testcases</artifactId>
                 <version>${rulesVersion}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
-                <artifactId>rgaa2.2</artifactId>
+                <artifactId>tanaguru-rgaa2.2</artifactId>
                 <version>${rulesVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
-                <artifactId>rgaa2.2-i18n</artifactId>
+                <artifactId>tanaguru-rgaa2.2-i18n</artifactId>
                 <version>${rulesVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
-                <artifactId>rgaa2.2-testcases</artifactId>
+                <artifactId>tanaguru-rgaa2.2-testcases</artifactId>
                 <version>${rulesVersion}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
-                <artifactId>seo</artifactId>
+                <artifactId>tanaguru-seo</artifactId>
                 <version>${rulesVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
-                <artifactId>seo-i18n</artifactId>
+                <artifactId>tanaguru-seo-i18n</artifactId>
                 <version>${rulesVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
-                <artifactId>seo-testcases</artifactId>
+                <artifactId>tanaguru-seo-testcases</artifactId>
                 <version>${rulesVersion}</version>
                 <scope>test</scope>
             </dependency>
@@ -160,12 +160,12 @@
             <!-- tanaguru-engine dependencies -->
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>commons-entity</artifactId>
+                <artifactId>tanaguru-commons-entity</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>commons-entity-jpa</artifactId>
+                <artifactId>tanaguru-commons-entity-jpa</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
@@ -193,12 +193,12 @@
             </dependency>
             <dependency>
                 <groupId>org.opens</groupId>
-                <artifactId>audit</artifactId>
+                <artifactId>tanaguru-audit</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>crawler</artifactId>
+                <artifactId>tanaguru-crawler</artifactId>
                 <version>${engineVersion}</version>
                 <exclusions>
                     <exclusion>
@@ -217,37 +217,37 @@
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>persistence</artifactId>
+                <artifactId>tanaguru-persistence</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>statistics</artifactId>
+                <artifactId>tanaguru-statistics</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>reference</artifactId>
+                <artifactId>tanaguru-reference</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>parameterization</artifactId>
+                <artifactId>tanaguru-parameterization</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>commons-processing</artifactId>
+                <artifactId>tanaguru-commons-processing</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>sebuilder-interpreter-tools</artifactId>
+                <artifactId>tanaguru-sebuilder-interpreter-tools</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>contentloader</artifactId>
+                <artifactId>tanaguru-contentloader</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
@@ -263,49 +263,49 @@
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>nomenclatureloader</artifactId>
+                <artifactId>tanaguru-nomenclatureloader</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>rule-implementation-loader</artifactId>
+                <artifactId>tanaguru-rule-implementation-loader</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>contentadapter</artifactId>
+                <artifactId>tanaguru-contentadapter</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>processor</artifactId>
+                <artifactId>tanaguru-processor</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>consolidator</artifactId>
+                <artifactId>tanaguru-consolidator</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>analyser</artifactId>
+                <artifactId>tanaguru-analyser</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>scenarioloader</artifactId>
+                <artifactId>tanaguru-scenarioloader</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>logging</artifactId>
+                <artifactId>tanaguru-logging</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             
             <!-- tanaguru testing-tools --> 
             <dependency>
                 <groupId>${testingToolsGroupId}</groupId>
-                <artifactId>rules-testing-tools</artifactId>
+                <artifactId>tanaguru-rules-testing-tools</artifactId>
                 <version>${testingToolsVersion}</version>
                 <scope>test</scope>
             </dependency>

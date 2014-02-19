@@ -6,6 +6,6 @@
         <artifactId>rules</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>rgaa2.2-i18n</artifactId>
+    <artifactId>tanaguru-rgaa2.2-i18n</artifactId>
     <name>rgaa2.2-i18n</name>
 </project>

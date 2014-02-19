@@ -8,7 +8,7 @@
         <artifactId>engine</artifactId>
         <version>3.0.0</version>
     </parent>
-    <artifactId>consolidator</artifactId>
+    <artifactId>tanaguru-consolidator</artifactId>
     <name>consolidator</name>
     <dependencies>
         <dependency>
@@ -17,7 +17,7 @@
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>commons-processing</artifactId>
+            <artifactId>tanaguru-commons-processing</artifactId>
         </dependency>
     </dependencies>
 </project>

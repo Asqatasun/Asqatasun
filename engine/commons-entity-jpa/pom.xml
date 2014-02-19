@@ -8,12 +8,12 @@
         <artifactId>engine</artifactId>
         <version>3.0.0</version>
     </parent>
-    <artifactId>commons-entity-jpa</artifactId>
+    <artifactId>tanaguru-commons-entity-jpa</artifactId>
     <name>commons-entity-jpa</name>
     <dependencies>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>commons-entity</artifactId>
+            <artifactId>tanaguru-commons-entity</artifactId>
         </dependency>
         <dependency>
             <groupId>${hibernateGroupId}</groupId>

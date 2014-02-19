@@ -17,26 +17,12 @@
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>persistence</artifactId>
+            <artifactId>tanaguru-persistence</artifactId>
         </dependency>
         <dependency>
             <groupId>${webappGroupId}</groupId>
             <artifactId>tgol-data-presentation</artifactId>
         </dependency>
-<!--        <dependency>
-            <groupId>${webappGroupId}</groupId>
-            <artifactId>tgol-data-presentation</artifactId>
-            <version>${webappVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>persistence</artifactId>
-            <version>${engineVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>${springGroupId}</groupId>
-            <artifactId>spring-beans</artifactId>
-        </dependency>-->
         <dependency>
             <groupId>org.dbunit</groupId>
             <artifactId>dbunit</artifactId>
