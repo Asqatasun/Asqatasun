@@ -222,11 +222,6 @@ public abstract class AuditCommandImpl implements AuditCommand {
         setStatusToAudit(AuditStatus.PENDING);
     }
     
-    /**
-     * 
-     * @param paramSet
-     * @return 
-     */
     @Override
     public void init() {
         // the paramSet has to be persisted
