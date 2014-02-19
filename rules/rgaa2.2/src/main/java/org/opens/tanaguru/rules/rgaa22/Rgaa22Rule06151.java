@@ -43,10 +43,6 @@ public class Rgaa22Rule06151 extends AbstractAllLinkAggregateRuleImplementation 
     
     /**
      * Constructor
-     * 
-     * @param linkElementSelector
-     * @param decidableElementsChecker
-     * @param notDecidableElementsChecker
      */
     public Rgaa22Rule06151 () {
         super(new LinkElementSelector(false, true), 
