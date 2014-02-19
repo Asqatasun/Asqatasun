@@ -132,7 +132,7 @@ public class UserManagementController extends AbstractUserAndContractsController
     }
 
     /**
-     * @param contractId
+     * @param userId
      * @param request
      * @param response
      * @param model
@@ -167,6 +167,7 @@ public class UserManagementController extends AbstractUserAndContractsController
      *
      * @param createUserCommand
      * @param result
+     * @param request
      * @param model
      * @return
      * @throws Exception
@@ -203,7 +204,6 @@ public class UserManagementController extends AbstractUserAndContractsController
     }
 
     /**
-     * @param contractId
      * @param request
      * @param response
      * @param model
@@ -249,7 +249,7 @@ public class UserManagementController extends AbstractUserAndContractsController
     }
 
     /**
-     * @param contractId
+     * @param userId
      * @param request
      * @param response
      * @param model
@@ -278,7 +278,6 @@ public class UserManagementController extends AbstractUserAndContractsController
     }
 
     /**
-     * @param contractId
      * @param request
      * @param response
      * @param model
@@ -375,7 +374,6 @@ public class UserManagementController extends AbstractUserAndContractsController
     }
 
     /**
-     * @param contractId
      * @param request
      * @param response
      * @param model
@@ -397,7 +395,7 @@ public class UserManagementController extends AbstractUserAndContractsController
     }
 
     /**
-     * @param contractId
+     * @param ccc the CreateContractCommand 
      * @param request
      * @param response
      * @param model

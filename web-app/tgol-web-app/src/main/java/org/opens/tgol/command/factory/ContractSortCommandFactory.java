@@ -51,13 +51,12 @@ public final class ContractSortCommandFactory {
     }
     
     /**
-     * Return a initialised auditCommand object for the given contract. This object
-     * handles the last values selected by the user
      * 
-     * @param contract
-     * @param auditSetUpFormFieldList
-     * @param auditSite
+     * @param userId
+     * @param formFieldList
      * @return
+     * An initialised auditCommand object for the given contract. This object
+     * handles the last values selected by the user
      */
     public ContractSortCommand getInitialisedContractDisplayCommand (
             Long userId,

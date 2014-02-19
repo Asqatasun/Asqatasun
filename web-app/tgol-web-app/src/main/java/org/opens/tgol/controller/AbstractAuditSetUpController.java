@@ -175,7 +175,7 @@ public abstract class AbstractAuditSetUpController extends AuditDataHandlerContr
      * @param viewName
      * @param contractId
      * @param scenarioId
-     * @param formFieldBuilderMap
+     * @param optionFormFieldBuilderMap
      * @param scope
      * @param model
      * @return 
@@ -398,8 +398,8 @@ public abstract class AbstractAuditSetUpController extends AuditDataHandlerContr
      * belongs to the current user. We also check that the current contract handles
      * the functionality associated with the set-up page. 
      * 
-     * @param user
-     * @param webresourceId
+     * @param contract
+     * @param viewName
      * @return
      *      true if the user is allowed to display the result, false otherwise.
      */
@@ -491,7 +491,6 @@ public abstract class AbstractAuditSetUpController extends AuditDataHandlerContr
      * In this case, the activation of the element is done through the referential
      * list associated with the contract
      * 
-     * @param contract
      * @param authorisedReferentialList
      * @param auditSetUpFormFieldBuilderList
      * @return 

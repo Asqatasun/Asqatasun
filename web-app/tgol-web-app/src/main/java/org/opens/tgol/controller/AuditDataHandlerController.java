@@ -255,7 +255,7 @@ public abstract class AuditDataHandlerController extends AbstractController {
      * 
      * @param webResource
      * @param model
-     * @param hasResultAction
+     * @param displayScope
      * @return
      */
     protected AuditStatistics getAuditStatistics(WebResource webResource, Model model, String displayScope){
@@ -270,7 +270,8 @@ public abstract class AuditDataHandlerController extends AbstractController {
      * audit result of a given audit. To do so, we verify that the act
      * associated with the audit belongs to the current user and
      * that the current contract is not expired
-     * @param act
+     * 
+     * @param audit
      * @return
      *      true if the user is allowed to display the result, false otherwise.
      */
@@ -320,7 +321,7 @@ public abstract class AuditDataHandlerController extends AbstractController {
 
     /**
      * 
-     * @param webResource
+     * @param audit
      * @return
      */
     protected String computeAuditStatus(Audit audit) {
@@ -340,7 +341,6 @@ public abstract class AuditDataHandlerController extends AbstractController {
      * while processing
      * @param audit
      * @param model
-     * @param contract
      * @return
      */
     protected String prepareFailedAuditData(Audit audit, Model model) {
@@ -359,10 +359,14 @@ public abstract class AuditDataHandlerController extends AbstractController {
     }
 
     /**
-     *
-     * @param site
+     * 
+     * @param audit
      * @param model
+     * @param httpStatusCode
+     * @param request
+     * @param returnRedirectView
      * @return
+     * @throws ServletRequestBindingException 
      */
     protected String preparePageListStatsByHttpStatusCode(
             Audit audit,

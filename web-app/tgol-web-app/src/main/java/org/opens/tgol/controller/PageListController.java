@@ -56,7 +56,6 @@ public class PageListController extends AuditDataHandlerController{
 
     /**
      *
-     * @param webresourceId
      * @param request
      * @param response
      * @param model

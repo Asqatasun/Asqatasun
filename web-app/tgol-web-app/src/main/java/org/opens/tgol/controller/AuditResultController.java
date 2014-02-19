@@ -177,8 +177,9 @@ public class AuditResultController extends AuditDataHandlerController {
      * General router when receive audit-result request.
      * Regarding the scope of the audit, the returned page may differ.
      * 
+     * @param auditId
      * @param request
-     * @param response
+     * @param model
      * @return
      */
     @RequestMapping(value=TgolKeyStore.AUDIT_RESULT_CONTRACT_URL, method=RequestMethod.GET)
@@ -213,8 +214,9 @@ public class AuditResultController extends AuditDataHandlerController {
     }
     
     /**
+     * @param webresourceId
      * @param request
-     * @param response
+     * @param model
      * @return
      */
     @RequestMapping(value={TgolKeyStore.PAGE_RESULT_CONTRACT_URL, TgolKeyStore.SITE_RESULT_CONTRACT_URL}, method=RequestMethod.GET)
@@ -236,6 +238,14 @@ public class AuditResultController extends AuditDataHandlerController {
                 request);
     }
 
+    /**
+     * 
+     * @param auditResultSortCommand
+     * @param result
+     * @param model
+     * @param request
+     * @return 
+     */
     @RequestMapping(value=TgolKeyStore.PAGE_RESULT_CONTRACT_URL, method = RequestMethod.POST)
     @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     protected String submitPageResultSorter(
@@ -250,6 +260,14 @@ public class AuditResultController extends AuditDataHandlerController {
                 request);
     }
 
+    /**
+     * 
+     * @param webresourceId
+     * @param request
+     * @param response
+     * @param model
+     * @return 
+     */
     @RequestMapping(value=TgolKeyStore.SOURCE_CODE_CONTRACT_URL, method=RequestMethod.GET)
     @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String displaySourceCodeFromContract(
