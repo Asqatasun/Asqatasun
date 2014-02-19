@@ -25,8 +25,9 @@ import org.apache.commons.httpclient.HttpConnection;
 import org.apache.log4j.Logger;
 import org.archive.httpclient.HttpRecorderMethod;
 import org.archive.modules.CrawlURI;
-import org.archive.modules.deciderules.DecideResult;
 import org.archive.modules.fetcher.FetchHTTP;
+import org.opens.tanaguru.crawler.frontier.TanaguruBdbFrontier;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author jkowalczyk
@@ -35,6 +36,12 @@ public class TanaguruFetchHTTP extends FetchHTTP{
 
     private static final long serialVersionUID = 5284296477962226238L;
 
+    private TanaguruBdbFrontier frontier;
+    @Autowired
+    public void setFrontier(TanaguruBdbFrontier frontier) {
+        this.frontier = frontier;
+    }
+    
     @Override
     public int getHttpProxyPort() {
         return super.getHttpProxyPort();
@@ -58,6 +65,11 @@ public class TanaguruFetchHTTP extends FetchHTTP{
         Logger.getLogger(this.getClass()).debug("curi.isPrerequisite() "+curi.isPrerequisite());
         Logger.getLogger(this.getClass()).debug("curi.getContentType() "+curi.getContentType());
         Logger.getLogger(this.getClass()).debug("checkMidfetchAbort "+checkMidfetchAbort);
+        // the counter is incremented when the curi is seen as success
+        if (checkMidfetchAbort && curi.isSuccess()) {
+            frontier.decrementSucceededFetchCounter();
+            Logger.getLogger(this.getClass()).debug("succeeded Fetch Counter decremented due to MidfetchAbort");
+        }
         return checkMidfetchAbort;
     }
     
