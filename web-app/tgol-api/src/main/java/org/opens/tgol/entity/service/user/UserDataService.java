@@ -32,7 +32,7 @@ public interface UserDataService extends GenericDataService<User, Long> {
 
     /**
      *
-     * @param the user's email
+     * @param email the user's email
      * @return
      *      the instance of User
      */
@@ -40,7 +40,7 @@ public interface UserDataService extends GenericDataService<User, Long> {
 
     /**
      *
-     * @param the user's name
+     * @param name the user's name
      * @return
      *      the instance of User
      */

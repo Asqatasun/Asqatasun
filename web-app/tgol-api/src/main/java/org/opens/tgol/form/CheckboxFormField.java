@@ -44,7 +44,7 @@ public interface CheckboxFormField extends FormField {
 
     /**
      *
-     * @param elementCode
+     * @param code
      */
     void setCode(String code);
     

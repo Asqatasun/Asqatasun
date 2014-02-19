@@ -34,7 +34,7 @@ public interface TgolParameterDAO extends GenericDAO<Parameter, Long> {
 
     /**
      * 
-     * @param contract
+     * @param idContract
      * @param parameterElement
      * @param scope
      * @return

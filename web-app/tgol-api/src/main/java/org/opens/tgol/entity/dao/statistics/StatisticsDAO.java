@@ -45,10 +45,11 @@ import org.opens.tgol.util.HttpStatusCodeFamily;
 public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
 
     /**
-     *
-     * @param parentWebresourceId
+     * 
+     * @param webResource
+     * @param audit
      * @param nbOfResult
-     * @return
+     * @return 
      */
     Collection<FailedPageInfo> findFailedWebResourceSortedByTest(
             WebResource webResource,
@@ -56,10 +57,11 @@ public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
             int nbOfResult);
 
     /**
-     *
-     * @param parentWebresourceId
+     * 
+     * @param webResource
+     * @param audit
      * @param nbOfResult
-     * @return
+     * @return 
      */
     Collection<FailedPageInfo> findFailedWebResourceSortedByOccurrence(
             WebResource webResource,
@@ -67,10 +69,11 @@ public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
             int nbOfResult);
 
     /**
-     *
-     * @param parentWebresourceId
+     * 
+     * @param webResource
+     * @param audit
      * @param nbOfResult
-     * @return
+     * @return 
      */
     Collection<FailedTestInfo> findFailedTestByOccurrence(
             WebResource webResource,
@@ -78,10 +81,11 @@ public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
             int nbOfResult);
 
     /**
-     *
-     * @param parentWebresourceId
+     * 
+     * @param webResource
+     * @param audit
      * @param testSolution
-     * @return
+     * @return 
      */
     Long findResultCountByResultType(
             WebResource webResource,
@@ -89,11 +93,12 @@ public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
             TestSolution testSolution);
 
     /**
-     *
-     * @param parentWebresourceId
+     * 
+     * @param webResource
+     * @param audit
      * @param testSolution
      * @param nb0fResult
-     * @return
+     * @return 
      */
     Collection<FailedThemeInfo> findResultCountByResultTypeAndTheme(
             WebResource webResource,
@@ -102,11 +107,12 @@ public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
             int nb0fResult);
 
     /**
-     *
-     * @param parentWebresourceId
+     * 
+     * @param webResource
+     * @param audit
      * @param testSolution
      * @param theme
-     * @return
+     * @return 
      */
     Long findResultCountByResultTypeAndTheme(
             WebResource webResource,
@@ -116,17 +122,16 @@ public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
 
     /**
      * 
-     * @param webResource
-     * @param audit
-     * @return
+     * @param idWebResource
+     * @return 
      */
     Float findWeightedMarkByWebResourceAndAudit(
             Long idWebResource);
 
     /**
-     *
-     * @param webResource
-     * @return
+     * 
+     * @param idWebResource
+     * @return 
      */
     Float findRawMarkByWebResourceAndAudit(
             Long idWebResource);
@@ -137,7 +142,7 @@ public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
      * @param httpStatusCode
      * @param invalidTestLabel
      * @param containingValue
-     * @return
+     * @return 
      */
     Long findWebResourceCountByAuditAndHttpStatusCode(
             Long idAudit,
@@ -155,7 +160,7 @@ public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
      * @param sortDirection
      * @param sortCriterion
      * @param containingValue
-     * @return
+     * @return 
      */
     Collection<PageResult> findWebResourceByAuditAndHttpStatusCode(
             Long idAudit,

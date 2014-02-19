@@ -55,10 +55,11 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
     Long getParentWebResourceId(Long webresourceId);
 
     /**
-     *
-     * @param parentWebresourceId
+     * 
+     * @param webResource
+     * @param audit
      * @param nbOfResult
-     * @return
+     * @return 
      */
     Collection<FailedPageInfo> getFailedWebResourceSortedByTest(
             WebResource webResource, 
@@ -66,10 +67,11 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
             int nbOfResult);
 
     /**
-     *
-     * @param parentWebresourceId
+     * 
+     * @param webResource
+     * @param audit
      * @param nbOfResult
-     * @return
+     * @return 
      */
     Collection<FailedPageInfo> getFailedWebResourceSortedByOccurrence(
             WebResource webResource, 
@@ -77,10 +79,11 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
             int nbOfResult);
 
     /**
-     *
-     * @param parentWebresourceId
+     * 
+     * @param webResource
+     * @param audit
      * @param nbOfResult
-     * @return
+     * @return 
      */
     Collection<FailedTestInfo> getFailedTestByOccurrence(
             WebResource webResource, 
@@ -88,9 +91,9 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
             int nbOfResult);
 
     /**
-     *
+     * 
      * @param webResourceId
-     * @return
+     * @return 
      */
     WebResource ligthRead(Long webResourceId);
 
@@ -102,10 +105,11 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
     WebResource deepRead(Long webResourceId);
 
     /**
-     *
-     * @param parentWebresourceId
+     * 
+     * @param webResource
+     * @param audit
      * @param testSolution
-     * @return
+     * @return 
      */
     Long getResultCountByResultType(
             WebResource webResource,
@@ -113,10 +117,12 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
             TestSolution testSolution);
 
     /**
-     *
-     * @param parentWebresourceId
+     * 
+     * @param webResource
+     * @param audit
      * @param testSolution
-     * @return
+     * @param nb0fResult
+     * @return 
      */
     Collection<FailedThemeInfo> getResultCountByResultTypeAndTheme(
             WebResource webResource,
@@ -125,17 +131,17 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
             int nb0fResult);
 
     /**
-     *
-     * @param parentWebresourceId
-     * @return
+     * 
+     * @param webresourceId
+     * @return 
      */
     Long getChildWebResourceCount(WebResource webresourceId);
 
     /**
-     *
+     * 
      * @param webResource
      * @param scope
-     * @return
+     * @return 
      */
     Collection<ProcessResult> getProcessResultListByWebResourceAndScope(
             WebResource webResource,
@@ -165,7 +171,7 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
      * 
      * @param webResource
      * @param scope
-     * @param themeList
+     * @param theme
      * @param testSolutionList
      * @return
      */
@@ -177,11 +183,12 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
 
 
     /**
-     *
-     * @param parentWebresourceId
+     * 
+     * @param webResource
+     * @param audit
      * @param testSolution
      * @param theme
-     * @return
+     * @return 
      */
     Long getResultCountByResultTypeAndTheme(
             WebResource webResource,
@@ -190,26 +197,26 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
             Theme theme);
 
     /**
-     *
+     * 
      * @param webResource
-     * @return
+     * @param audit
+     * @return 
      */
     Collection<PageResult> getChildUrlList(
             WebResource webResource,
             Audit audit);
 
     /**
-     *
+     * 
      * @param webResource
      * @param scope
-     * @return
+     * @return 
      */
     boolean hasAuditSiteScopeTest(WebResource webResource, Scope scope);
 
     /**
      *
      * @param webResource
-     * @param audit
      * @param isRawMark
      * @return
      */
@@ -221,7 +228,7 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
      * @param httpStatusCode
      * @param invalidTestLabel
      * @param containingValue
-     * @return
+     * @return 
      */
     Long getWebResourceCountByAuditAndHttpStatusCode(
             Long idAudit,
@@ -233,13 +240,13 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
      * 
      * @param idAudit
      * @param httpStatusCode
-     * @param invalidTestId
+     * @param invalidTestLabel
      * @param nbOfElements
      * @param window
      * @param sortDirection
      * @param sortCriterion
      * @param containingValue
-     * @return
+     * @return 
      */
     Collection<PageResult> getWebResourceListByAuditAndHttpStatusCode(
             Long idAudit,

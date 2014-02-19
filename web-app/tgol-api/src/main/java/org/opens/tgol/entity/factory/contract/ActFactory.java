@@ -21,10 +21,10 @@
  */
 package org.opens.tgol.entity.factory.contract;
 
+import java.util.Date;
 import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.contract.Contract;
-import java.util.Date;
 
 /**
  *
@@ -35,7 +35,7 @@ public interface ActFactory extends GenericFactory<Act> {
     /**
      * 
      * @param date
-     * @param offer
+     * @param contract
      * @return
      *      an initialized instance of Act
      */

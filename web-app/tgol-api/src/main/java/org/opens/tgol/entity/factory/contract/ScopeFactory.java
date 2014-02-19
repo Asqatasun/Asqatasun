@@ -33,7 +33,7 @@ public interface ScopeFactory extends GenericFactory<Scope> {
 
     /**
      * 
-     * @param scopeName
+     * @param scopeCode
      * @return
      *      an initialized instance of scope
      */

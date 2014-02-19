@@ -50,7 +50,7 @@ public interface Option extends Entity {
 
     /**
      * 
-     * @param string
+     * @param label
      */
     void setLabel(String label);
     
@@ -62,7 +62,7 @@ public interface Option extends Entity {
 
     /**
      * 
-     * @param string
+     * @param description
      */
     void setDescription(String description);
     

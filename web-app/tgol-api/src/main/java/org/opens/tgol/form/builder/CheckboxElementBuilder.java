@@ -42,7 +42,7 @@ public interface CheckboxElementBuilder extends FormFieldBuilder {
     /**
      * Sets whether each instance of SelectElement is the default among all the
      * selectElement of the SelectFormField
-     * @param isEnabled
+     * @param isDefault
      */
     void setDefault(boolean isDefault);
 
@@ -55,7 +55,7 @@ public interface CheckboxElementBuilder extends FormFieldBuilder {
     /**
      * Sets whether each checkbox is selected.
      * 
-     * @param isEnabled
+     * @param isSelected
      */
     void setSelected(boolean isSelected);
 

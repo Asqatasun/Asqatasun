@@ -21,8 +21,8 @@
  */
 package org.opens.tgol.action.voter;
 
-import org.opens.tgol.action.Action;
 import java.util.List;
+import org.opens.tgol.action.Action;
 
 /**
  *
@@ -32,18 +32,15 @@ public interface ActionVoter {
 
     /**
      *
-     * @param contractInfo
-     * @return
-     *      a set instance of Action
+     * @param actionList
      */
     void initialize (List<Action> actionList);
     
     /**
      *
-     * @param contractInfo
      * @return
-     *      a set instance of Action
-     */
-    List<Action> getActionList ();
+     *      the action list after the vote
+     */ 
+    List<Action> getActionList();
 
 }

@@ -23,7 +23,6 @@ package org.opens.tgol.entity.contract;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
 import org.opens.tanaguru.sdk.entity.Entity;
 import org.opens.tgol.entity.functionality.Functionality;
 import org.opens.tgol.entity.option.OptionElement;
@@ -168,7 +167,7 @@ public interface Contract extends Entity {
     
     /**
      * 
-     * @param functionality
+     * @param functionalitySet
      */
     void addAllFunctionality(Collection<Functionality> functionalitySet);
     
@@ -181,13 +180,13 @@ public interface Contract extends Entity {
 
     /**
      * 
-     * @param reference
+     * @param referential
      */
     void addReferential(Referential referential);
     
     /**
      * 
-     * @param reference
+     * @param referentialSet
      */
     void addAllReferential(Collection<Referential> referentialSet);
     
@@ -200,13 +199,13 @@ public interface Contract extends Entity {
 
     /**
      * 
-     * @param reference
+     * @param scenario
      */
-    void addScenario(Scenario Scenario);
+    void addScenario(Scenario scenario);
     
     /**
      * 
-     * @param reference
+     * @param scenarioSet
      */
     void addAllScenario(Collection<Scenario> scenarioSet);
 }

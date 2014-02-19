@@ -75,7 +75,7 @@ public interface PageResult {
 
     /**
      *
-     * @param mark
+     * @param rawMark
      */
     void setRawMark(String rawMark);
 

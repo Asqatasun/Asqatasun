@@ -86,7 +86,7 @@ public interface TestResult {
 
     /**
      *
-     * @param testRepresentation
+     * @param testRepresentationType
      */
     void setTestRepresentation(int testRepresentationType);
 

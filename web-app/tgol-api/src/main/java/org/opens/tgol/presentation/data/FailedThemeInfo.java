@@ -37,7 +37,7 @@ public interface FailedThemeInfo {
 
     /**
      *
-     * @param themeLabel
+     * @param themeId
      */
     void setThemeId(Long themeId);
 
@@ -50,7 +50,7 @@ public interface FailedThemeInfo {
 
     /**
      *
-     * @param idWebResource
+     * @param resultCounter
      */
     void setResultCounter(Long resultCounter);
 

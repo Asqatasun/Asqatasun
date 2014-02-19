@@ -43,7 +43,7 @@ public interface CheckboxElement extends FormField {
     /**
      * Sets whether each checkbox is selected .
      * 
-     * @param isEnabled
+     * @param isSelected
      */
     void setSelected(boolean isSelected);
 

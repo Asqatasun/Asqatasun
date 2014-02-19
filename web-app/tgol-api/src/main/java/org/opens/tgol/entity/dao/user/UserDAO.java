@@ -21,8 +21,8 @@
  */
 package org.opens.tgol.entity.dao.user;
 
-import org.opens.tgol.entity.user.User;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
+import org.opens.tgol.entity.user.User;
 
 /**
  *
@@ -32,7 +32,7 @@ public interface UserDAO extends GenericDAO<User, Long> {
 
     /**
      *
-     * @param the user's email
+     * @param email the user's email
      * @return
      *      the instance of User
      */
@@ -40,7 +40,7 @@ public interface UserDAO extends GenericDAO<User, Long> {
 
     /**
      *
-     * @param the user's name
+     * @param name the user's name
      * @return
      *      the instance of User
      */

@@ -44,7 +44,7 @@ public interface ActDataService extends GenericDataService<Act, Long> {
     int getNumberOfAct(Contract contract);
     /**
      *
-     * @param product
+     * @param contract
      * @return
      *          All the acts associated with a contract
      */
@@ -78,7 +78,7 @@ public interface ActDataService extends GenericDataService<Act, Long> {
 
     /**
      * 
-     * @param auditId
+     * @param audit
      * @return
      *        The act corresponding to the given audit
      */
