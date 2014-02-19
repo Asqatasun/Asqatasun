@@ -46,7 +46,7 @@ public class InputFormElementWithInplicitLabelSelector implements ElementSelecto
     
     /**
      * Constructor
-     * @param formElement 
+     * @param formElementHandler 
      */
     public InputFormElementWithInplicitLabelSelector(ElementHandler formElementHandler) {
         this.formElementHandler = formElementHandler;

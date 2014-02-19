@@ -69,7 +69,7 @@ public abstract class SimpleCssChecker implements CssChecker {
     
     /**
      * 
-     * @param cssVisitor 
+     * Default constructor
      */
     public SimpleCssChecker () {}
 

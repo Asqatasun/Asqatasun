@@ -69,8 +69,9 @@ public class TextPertinenceChecker extends CompositeChecker {
      * Enables to override the not pertinent solution.
      * 
      * @param checkEmptiness
-     * @param attributeNameToCompare
+     * @param textElementBuilderToCompareWith
      * @param blacklistNameToCompareWith
+     * @param notPertinentSolution
      * @param notPertinentMessageCode
      * @param manualCheckMessage
      * @param eeAttributeNameList 
@@ -98,7 +99,7 @@ public class TextPertinenceChecker extends CompositeChecker {
      * Returns FAILED when the attribute is not pertinent.
      * 
      * @param checkEmptiness
-     * @param attributeNameToCompare
+     * @param textElementBuilderToCompareWith
      * @param blacklistNameToCompareWith
      * @param notPertinentMessageCode
      * @param manualCheckMessage
@@ -125,7 +126,7 @@ public class TextPertinenceChecker extends CompositeChecker {
      * 
      * @param textElementBuilder
      * @param checkEmptiness
-     * @param attributeNameToCompare
+     * @param textElementBuilderToCompareWith
      * @param blacklistNameToCompareWith
      * @param notPertinentMessageCode
      * @param manualCheckMessage
@@ -155,7 +156,7 @@ public class TextPertinenceChecker extends CompositeChecker {
      * Returns FAILED when the attribute is not pertinent.
      * 
      * @param checkEmptiness
-     * @param attributeNameToCompare
+     * @param textElementBuilderToCompareWith
      * @param blacklistNameToCompareWith
      * @param notPertinentMessageCode
      * @param manualCheckMessage

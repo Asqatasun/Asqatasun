@@ -55,7 +55,7 @@ public abstract class AbstractPageRuleWithCheckerImplementation
     /**
      * The constructor
      * 
-     * @param elementCheckerKey 
+     * @param elementChecker
      */
     public AbstractPageRuleWithCheckerImplementation(
             @Nonnull ElementChecker elementChecker) {

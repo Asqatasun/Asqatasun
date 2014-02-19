@@ -61,7 +61,7 @@ public class TextNotIdenticalToAttributeChecker extends ElementCheckerImpl {
      * Constructor.
      * 
      * @param testableTextBuilder
-     * @param attributeNameToCompareWith
+     * @param testableTextBuilderToCompareWith
      * @param textIdenticalToAttributeValueMessageCode
      * @param textNotIdenticalToAttributeValueMessageCode
      */
@@ -83,7 +83,7 @@ public class TextNotIdenticalToAttributeChecker extends ElementCheckerImpl {
      * Constructor.
      * 
      * @param testableTextBuilder
-     * @param attributeNameToCompareWith
+     * @param testableTextBuilderToCompareWith
      * @param textIdenticalToAttributeValueMessageCode
      * @param textNotIdenticalToAttributeValueMessageCode
      * @param eeAttributeNameList 
@@ -107,7 +107,7 @@ public class TextNotIdenticalToAttributeChecker extends ElementCheckerImpl {
      * Constructor
      * 
      * @param testableTextBuilder
-     * @param attributeNameToCompareWith
+     * @param testableTextBuilderToCompareWith
      * @param detectedSolution
      * @param notDetectedSolution
      * @param textIdenticalToAttributeValueMessageCode 
@@ -132,7 +132,7 @@ public class TextNotIdenticalToAttributeChecker extends ElementCheckerImpl {
      * Constructor.
      * 
      * @param testableTextBuilder
-     * @param attributeNameToCompareWith
+     * @param testableTextBuilderToCompareWith
      * @param detectedSolution
      * @param notDetectedSolution
      * @param textIdenticalToAttributeValueMessageCode

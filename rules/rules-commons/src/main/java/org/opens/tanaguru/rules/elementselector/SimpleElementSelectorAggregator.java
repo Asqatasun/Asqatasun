@@ -53,11 +53,11 @@ public class SimpleElementSelectorAggregator implements ElementSelector{
     
     /**
      * constructor
-     * @param cssQuery 
+     * @param simpleElementSelectors 
      */
-    public SimpleElementSelectorAggregator(SimpleElementSelector... simpleElementSelector) {
+    public SimpleElementSelectorAggregator(SimpleElementSelector... simpleElementSelectors) {
         this.simpleElementSelectorList = 
-                CollectionUtils.arrayToList(simpleElementSelector);
+                CollectionUtils.arrayToList(simpleElementSelectors);
     }
 
     @Override

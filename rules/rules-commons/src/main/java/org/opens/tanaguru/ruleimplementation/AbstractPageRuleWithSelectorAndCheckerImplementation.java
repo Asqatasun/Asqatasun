@@ -55,8 +55,8 @@ public abstract class AbstractPageRuleWithSelectorAndCheckerImplementation
     /**
      * The constructor
      * 
-     * @param elementSelectorKey
-     * @param elementCheckerKey 
+     * @param elementSelector
+     * @param elementChecker
      */
     public AbstractPageRuleWithSelectorAndCheckerImplementation(
             @Nonnull ElementSelector elementSelector, 

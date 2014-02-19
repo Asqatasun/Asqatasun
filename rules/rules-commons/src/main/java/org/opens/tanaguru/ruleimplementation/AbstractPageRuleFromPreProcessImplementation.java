@@ -66,7 +66,7 @@ public abstract class AbstractPageRuleFromPreProcessImplementation
     /**
      * The constructor
      * 
-     * @param elementCheckerKey 
+     * @param elementChecker
      */
     public AbstractPageRuleFromPreProcessImplementation(
             @Nonnull ElementChecker elementChecker) {

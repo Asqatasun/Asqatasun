@@ -133,7 +133,6 @@ public final class CssLikeSelectorBuilder {
      * 
      * @param elementName
      * @param attributeName
-     * @param notEmptyAttribute
      * @return 
      *      The css selector
      */
@@ -158,7 +157,7 @@ public final class CssLikeSelectorBuilder {
      * 
      * @param elementName
      * @param childrenList
-     * @param notEmptyAttribute
+     * @param hasChild
      * @return 
      *      The jquery selector
      */
@@ -191,11 +190,10 @@ public final class CssLikeSelectorBuilder {
     
     /**
      * 
-     * @param elementName
-     * @param childrenList
-     * @param notEmptyAttribute
+     * @param sspHandler
+     * @param selector
      * @return 
-     *      The number of found elements for a given selector
+     *      The number of found elements for a given selection
      */
     public static int getNumberOfElements(
             SSPHandler sspHandler, 
