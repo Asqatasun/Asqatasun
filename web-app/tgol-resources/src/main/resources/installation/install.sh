@@ -4,8 +4,6 @@ declare prefix="/"
 
 declare mysql_tg_user=
 declare mysql_tg_passwd=
-declare mysql_root_user=
-declare mysql_root_passwd=
 declare mysql_tg_db=
 declare tanaguru_url=
 declare tanaguru_webapp_dir=
@@ -35,8 +33,6 @@ declare TG_WAR_VERSION=$TG_VERSION
 declare TG_WAR="tgol-web-app-$TG_WAR_VERSION.war"
 
 declare -a OPTIONS=(
-	mysql_root_user
-	mysql_root_passwd
 	mysql_tg_user
 	mysql_tg_passwd
 	mysql_tg_db
@@ -58,14 +54,6 @@ error() {
 	return 1
 }
 
-cleanup_database() {
-	mysql --user="$mysql_root_user"
-	      --password="$mysql_root_passwd"
-		<< EOF
-DROP DATABASE `$mysql_tg_db`;
-DROP USER '$mysql_tg_user'@'localhost';
-EOF
-}
 
 cleanup_directories() {
 	rmdir "$TG_CONF_DIR" || error "Unable to remove $TG_CONF_DIR"
@@ -75,7 +63,6 @@ cleanup_directories() {
 
 cleanup() {
 	$dirty_webapp && cleanup_webapp
-	$dirty_database && cleanup_database
 	$dirty_directories && cleanup_directories
 }
 
@@ -113,8 +100,6 @@ Usage : $0 [-h]
         --mysql-tg-db <Tanaguru mysql db> 
         --mysql-tg-user <Tanaguru mysql user> 
         --mysql-tg-psswd <Tanaguru mysql password> 
-        --mysql-root-user <mysql root user> 
-        --mysql-root-passwd <mysql root password> 
         --tanaguru-url <Tanaguru webapp url> 
         --tomcat-webapps <tomcat webapps directory> 
         --tomcat-user <tomcat unix user>
@@ -124,8 +109,6 @@ Usage : $0 [-h]
 	--display-port <Xorg-display-port>
 	
 Installation options :
- --mysql-root-user           Mysql user with privileges of database creation and user creation (e.g. mysql root user)
- --mysql-root-passwd         Password of the user specified by --mysql-root-user
  --mysql-tg-user             Mysql user for Tanaguru
  --mysql-tg-passwd           Password of the user specified by --mysql-tg-user
  --mysql-tg-db               Database for Tanaguru
@@ -213,7 +196,6 @@ echo_configuration_summary() {
 
 Installing Tanaguru with the following configuration :
  - All path are relative to "${prefix}"
- - The mysql user "${mysql_root_user}" will be used to create the Tanaguru database and user
  - The mysql user "${mysql_tg_user}" will be created and used by Tanaguru
  - The mysql database "${mysql_tg_db}" will be created and used by Tanaguru
  - The web application will be installed in "${tomcat_webapps}/${tanaguru_webapp_dir}"
@@ -226,18 +208,6 @@ Installing Tanaguru with the following configuration :
 
 
 EOF
-}
-
-create_user_and_database() {
-	cd "$PKG_DIR/install/engine/sql"
-	cat tanaguru-10-create-user-and-base.sql |         \
-		sed -e "s/\$tgUser/$mysql_tg_user/g"       \
-		    -e "s/\$tgPassword/$mysql_tg_passwd/g" \
-		    -e "s/\$tgDatabase/$mysql_tg_db/g" |   \
-		mysql --user="$mysql_root_user"            \
-		      --password="$mysql_root_passwd" ||   \
-		fail "Unable to create the user or the database."
-	dirty_database=true
 }
 
 create_tables() {
@@ -387,9 +357,6 @@ main() {
 	# create tanaguru directories
 	create_directories
 	echo "Directory creation:	.	.	OK"
-	# create SQL user and database
-	create_user_and_database
-	echo "SQL username and database creation:	OK"
 	# filling the SQL database
 	create_tables
 	echo "SQL inserts: 		.	.	OK"
