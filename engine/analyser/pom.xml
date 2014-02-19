@@ -8,7 +8,7 @@
         <artifactId>engine</artifactId>
         <version>3.0.0-SNAPSHOT</version>
     </parent>
-    <artifactId>analyser</artifactId>
+    <artifactId>tanaguru-analyser</artifactId>
     <name>analyser</name>
     <dependencies>
         <dependency>
@@ -17,7 +17,7 @@
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>statistics</artifactId>
+            <artifactId>tanaguru-statistics</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

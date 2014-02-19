@@ -8,7 +8,7 @@
         <artifactId>engine</artifactId>
         <version>3.0.0-SNAPSHOT</version>
     </parent>
-    <artifactId>nomenclatureloader</artifactId>
+    <artifactId>tanaguru-nomenclatureloader</artifactId>
     <name>nomenclatureloader</name>
     <dependencies>
         <dependency>

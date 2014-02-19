@@ -6,6 +6,6 @@
         <artifactId>rules</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <artifactId>rgaa2.2-testcases</artifactId>
+    <artifactId>tanaguru-rgaa2.2-testcases</artifactId>
     <name>rgaa2.2-testcases</name>
 </project>

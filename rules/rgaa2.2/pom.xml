@@ -6,7 +6,7 @@
         <artifactId>rules</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <artifactId>rgaa2.2</artifactId>
+    <artifactId>tanaguru-rgaa2.2</artifactId>
     <name>rgaa2.2</name>
     <build>
         <finalName>rgaa2.2-${rulesVersion}</finalName>
@@ -14,19 +14,19 @@
     <dependencies>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
-            <artifactId>rules-commons</artifactId>
+            <artifactId>tanaguru-rules-commons</artifactId>
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
-            <artifactId>rgaa2.2-i18n</artifactId>
+            <artifactId>tanaguru-rgaa2.2-i18n</artifactId>
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
-            <artifactId>rgaa2.2-testcases</artifactId>
+            <artifactId>tanaguru-rgaa2.2-testcases</artifactId>
         </dependency>
         <dependency>
             <groupId>${testingToolsGroupId}</groupId>
-            <artifactId>rules-testing-tools</artifactId>
+            <artifactId>tanaguru-rules-testing-tools</artifactId>
         </dependency>
     </dependencies>
 </project>
