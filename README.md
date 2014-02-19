@@ -69,19 +69,18 @@ Or you can send an email to
 
 Bugs :
 
-[#47](https://github.com/Tanaguru/Tanaguru/issues/47) : The language detection tests return bad results for uppercase submitted text
+- [#47](https://github.com/Tanaguru/Tanaguru/issues/47) : The language detection tests return bad results for uppercase submitted text
 
 Features : 
 
 - Rgaa 2.2 referential full supported
 - Postgresql management (creation and insertion scripts)
 - Crawl optimisations (deal with canonical, improve fetch counting, improve fetch of testable data)
-
-[#50](https://github.com/Tanaguru/Tanaguru/issues/50) : Provide a way to set-up whether the cookies have to be considered while crawling
-[#49](https://github.com/Tanaguru/Tanaguru/issues/49) : [SEO 6.4.1] For a given title value, sort URLs
-[#46](https://github.com/Tanaguru/Tanaguru/issues/46) : Override default user agent used by apache library to test URL before launching effectively the audit
-[#43](https://github.com/Tanaguru/Tanaguru/issues/43) : Disable the load of Css content for audit of SEO type
-[#37](https://github.com/Tanaguru/Tanaguru/issues/37) : Mail server is not configurable
+- [#50](https://github.com/Tanaguru/Tanaguru/issues/50) : Provide a way to set-up whether the cookies have to be considered while crawling
+- [#49](https://github.com/Tanaguru/Tanaguru/issues/49) : [SEO 6.4.1] For a given title value, sort URLs
+- [#46](https://github.com/Tanaguru/Tanaguru/issues/46) : Override default user agent used by apache library to test URL before launching effectively the audit
+- [#43](https://github.com/Tanaguru/Tanaguru/issues/43) : Disable the load of Css content for audit of SEO type
+- [#37](https://github.com/Tanaguru/Tanaguru/issues/37) : Mail server is not configurable
 
 ## Other opensource tools
 
