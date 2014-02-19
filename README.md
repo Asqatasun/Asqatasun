@@ -2,7 +2,7 @@
 
 Tanaguru is an opensource (AGPL license) website assessment tool dedicated to
 
-* accessibility (a11y) audits,  
+* accessibility (a11y) audits
 
 ## Features
 
@@ -25,9 +25,13 @@ Four kinds of audit:
 
 http://www.tanaguru.org/Download/tanaguru-latest.tar.gz
 
+## Demo
+
+http://beta.tanaguru.com/
+
 ## Installation and documentation
 
-All is here: http://www.tanaguru.org/en/content/documentation
+[Tanaguru wiki](http://www.tanaguru.org) (registration is warmly welcomed, please email mfaure AT tanaguru. org)
 
 More precisely:
 
@@ -44,26 +48,9 @@ What tests are covered:
 * language specification
 * downloadable files / office files (spreadsheet, wordprocessor...)
 * switch of context
+* ...
 
 By january 2014, this represents [~170 accessibility tests](http://www.tanaguru.org/en/content/accessiweb-22-coverage)
-
-## Links
-
-* [Tanaguru wiki](http://www.tanaguru.org) (registration is warmly welcomed, please email mfaure AT tanaguru. org)
-
-## Vision expanded
-
-Last point to complete the vision:
-
-* and create other tools if needed
-
-So you can see also
-
-* [KBAccess](http://www.kbaccess.org/) : database of good and bad examplee
-* [Tanaguru Contrast-Finder](http://contrast-finder.tanaguru.com/) : for a given wrong contrast, *propose* good color combination
-* [Accessibility observatory](http://observatoire-accessibilite.org/) : have an overview of the accessibility of a large set of websites
- 
-All these projects are opensource and also under the umbrella of [Tanaguru Github account](https://github.com/Tanaguru)
 
 ## Contact and mailing-list
 
@@ -93,6 +80,13 @@ Features :
 #43 : Disable the load of Css content for audit of SEO type
 #37 : Mail server is not configurable://github.com/Tanaguru/Tanaguru/issues/37)
 
+## Other opensource tools
+
+* [KBAccess](http://www.kbaccess.org/) : database of good and bad examples of web accessibility
+* [Tanaguru Contrast-Finder](http://contrast-finder.tanaguru.com/) : for a given wrong contrast, *propose* good color combination
+* [Accessibility observatory](http://observatoire-accessibilite.org/) : have an overview of the accessibility of a large set of websites
+ 
+All these projects are opensource and also under the umbrella of [Tanaguru Github account](https://github.com/Tanaguru)
 
 Have Fun
 
