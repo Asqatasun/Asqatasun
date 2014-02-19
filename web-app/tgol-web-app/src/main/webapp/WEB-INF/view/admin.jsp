@@ -9,51 +9,33 @@
 <%@taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@taglib uri="http://www.springframework.org/security/tags" prefix="sec"  %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
-<c:choose>
-    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
-        <c:set var="lang">
-            ${fn:substringBefore(pageContext.response.locale, "_")}
-        </c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="lang" value="${pageContext.response.locale}"/>
-    </c:otherwise>
-</c:choose>
-<c:choose>
-    <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="addUser" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/user.png"/>
-        <c:set var="editUser" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/edit.png"/>
-        <c:set var="deleteUser" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/remove.png"/>
-        <c:set var="editContract" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/folder_open.png"/>
-        <c:set var="deleteAudits" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/bin.png"/>
-        <c:set var="addContract" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/plus_2.png"/>
-    </c:when>
-    <c:otherwise>
-        <c:set var="addUser">
-            <c:url value="/Images/user.png"/>  
-        </c:set>
-        <c:set var="editUser">
-            <c:url value="/Images/edit.png"/>  
-        </c:set>
-        <c:set var="deleteUser">
-            <c:url value="/Images/remove.png"/>  
-        </c:set>
-        <c:set var="editContract">
-            <c:url value="/Images/folder_open.png"/>
-        </c:set>
-        <c:set var="deleteAudits">
-            <c:url value="/Images/bin.png"/>
-        </c:set>
-        <c:set var="addContract">
-            <c:url value="/Images/plus_2.png"/>
-        </c:set>
-    </c:otherwise>
-</c:choose>
+
+<c:set var="addUser">
+    <c:url value="/Images/user.png"/>  
+</c:set>
+<c:set var="editUser">
+    <c:url value="/Images/edit.png"/>  
+</c:set>
+<c:set var="deleteUser">
+    <c:url value="/Images/remove.png"/>  
+</c:set>
+<c:set var="editContract">
+    <c:url value="/Images/folder_open.png"/>
+</c:set>
+<c:set var="deleteAudits">
+    <c:url value="/Images/bin.png"/>
+</c:set>
+<c:set var="addContract">
+    <c:url value="/Images/plus_2.png"/>
+</c:set>
+
 <c:set var="authenticatedUserId" scope="page">
     <sec:authentication property="principal.user.id" />
 </c:set>
-<html lang="${lang}">
+
+<html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="admin.pageTitle"/>
     </c:set>

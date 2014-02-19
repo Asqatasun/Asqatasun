@@ -7,18 +7,9 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@taglib uri="http://www.springframework.org/security/tags" prefix="sec"  %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
-<c:choose>
-    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
-        <c:set var="lang">
-            ${fn:substringBefore(pageContext.response.locale, "_")}
-        </c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="lang" value="${pageContext.response.locale}"/>
-    </c:otherwise>
-</c:choose>
-<html lang="${lang}">
+<html lang="${tg:lang(pageContext)}">
     <c:choose>
         <c:when test="${changeUserPasswordFromAdmin == true}">
             <c:set var="pageTitle" scope="page">

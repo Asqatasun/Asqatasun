@@ -5,18 +5,9 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
-<c:choose>
-    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
-        <c:set var="lang">
-            ${fn:substringBefore(pageContext.response.locale, "_")}
-        </c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="lang" value="${pageContext.response.locale}"/>
-    </c:otherwise>
-</c:choose>
-<html lang="${lang}">
+<html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="exportAuditFormatError.pageTitle"/>
     </c:set>

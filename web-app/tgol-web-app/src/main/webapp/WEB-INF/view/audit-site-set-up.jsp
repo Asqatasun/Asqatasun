@@ -7,32 +7,17 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
-<c:choose>
-    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
-        <c:set var="lang">
-            ${fn:substringBefore(pageContext.response.locale, "_")}
-        </c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="lang" value="${pageContext.response.locale}"/>
-    </c:otherwise>
-</c:choose>
-<c:choose>
-    <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-1.9.1.min.js"/>
-        <c:set var="auditSetUpDetailsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/expand-collapse/audit-set-up-details-min.js"/>
-    </c:when>
-    <c:otherwise>
-        <c:set var="jqueryUrl">
-            <c:url value="/External-Js/jquery-1.9.1.min.js"/>  
-        </c:set>
-        <c:set var="auditSetUpDetailsJsUrl">
-            <c:url value="/Js/expand-collapse/audit-set-up-details-min.js"/>
-        </c:set>
-    </c:otherwise>
-</c:choose>
-<html lang="${lang}">
+
+<c:set var="jqueryUrl">
+    <c:url value="/External-Js/jquery-1.9.1.min.js"/>  
+</c:set>
+<c:set var="auditSetUpDetailsJsUrl">
+    <c:url value="/Js/expand-collapse/audit-set-up-details-min.js"/>
+</c:set>
+
+<html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="auditSetUpSite.pageTitle"/>
         <spring:hasBindErrors name="auditSetUpCommand">

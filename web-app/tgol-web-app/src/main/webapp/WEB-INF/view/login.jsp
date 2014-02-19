@@ -7,6 +7,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <%@page import="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter" %>
 <%@page import="org.springframework.web.context.request.RequestContextHolder" %>
 <%@page import="org.springframework.web.context.request.ServletRequestAttributes" %>
@@ -15,35 +16,18 @@
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Set"%>
 <!DOCTYPE html>
-<c:choose>
-    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
-        <c:set var="lang">
-            ${fn:substringBefore(pageContext.response.locale, "_")}
-        </c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="lang" value="${pageContext.response.locale}"/>
-    </c:otherwise>
-</c:choose>
-<c:choose>
-    <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="tgLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>
-        <c:set var="tgLogo1Url" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/Logo-Tanaguru-G-w500-h600-75dpi-bgTransp.png"/>
-        <c:set var="tgLogo2Url" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/Logo-tanaguru.com-black-w140px-h63px-bgTransp.png"/>
-    </c:when>
-    <c:otherwise>
-        <c:set var="tgLogoUrl">
-            <c:url value="/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>  
-        </c:set>
-        <c:set var="tgLogo1Url">
-            <c:url value="/Images/Logo-Tanaguru-G-w500-h600-75dpi-bgTransp.png"/>  
-        </c:set>
-        <c:set var="tgLogo2Url">
-            <c:url value="/Images/Logo-tanaguru.com-black-w140px-h63px-bgTransp.png"/>  
-        </c:set>
-    </c:otherwise>
-</c:choose>
-<html lang="${lang}">
+
+<c:set var="tgLogoUrl">
+    <c:url value="/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>  
+</c:set>
+<c:set var="tgLogo1Url">
+    <c:url value="/Images/Logo-Tanaguru-G-w500-h600-75dpi-bgTransp.png"/>  
+</c:set>
+<c:set var="tgLogo2Url">
+    <c:url value="/Images/Logo-tanaguru.com-black-w140px-h63px-bgTransp.png"/>  
+</c:set>
+
+<html lang="${tg:lang(pageContext)}">
     <c:if test="${not empty param.error}">
         <c:choose>
             <c:when test="${param.error == 'sessionTimeout'}">

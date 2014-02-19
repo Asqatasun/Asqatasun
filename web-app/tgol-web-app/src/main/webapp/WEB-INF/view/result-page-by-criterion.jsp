@@ -6,94 +6,61 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
-<c:choose>
-    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
-        <c:set var="lang">
-            ${fn:substringBefore(pageContext.response.locale, "_")}
-        </c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="lang" value="${pageContext.response.locale}"/>
-    </c:otherwise>
-</c:choose>
-<c:choose>
-    <c:when test="${not empty configProperties['cdnUrl']}">
-        <!-- external js -->
-        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-1.9.1.min.js"/>
-        <c:set var="jqueryUIUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-ui-1.10.1.custom.min.js"/>
-        <c:set var="d3JsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/d3.v3.min.js" scope="request"/>
-        <c:set var="r2d3JsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/r2d3.v2.min.js" scope="request"/>
 
-        <!-- internal js -->
-        <c:set var="resultPageChartsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/result-page/result-page-charts-min.js" scope="request"/>
-        <c:set var="resultPageChartsJsIEUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/result-pageresult-page-charts-ie-min.js" scope="request"/>        
-        <c:set var="scoreJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/score/score-min.js" scope="request"/>
-        <c:set var="auditParametersDetailsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/expand-collapse/audit-parameters-details-min.js" scope="page"/>
-        <c:set var="themeDetailsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/expand-collapse/theme-details-min.js" scope="page"/>
-        <c:set var="progressBarJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/progress-bar/progress-bar-min.js" scope="page"/>
+<!-- external js -->
+<c:set var="jqueryUrl">
+    <c:url value="/External-Js/jquery-1.9.1.min.js"/>
+</c:set>        
+<c:set var="jqueryUIUrl">
+    <c:url value="/External-Js/jquery-ui-1.10.1.custom.min.js"/>  
+</c:set>
+<c:set var="d3JsUrl" scope="request">
+    <c:url value="/External-Js/d3.v3.min.js"/>
+</c:set>
+<c:set var="r2d3JsUrl" scope="request">
+    <c:url value="/External-Js/r2d3.v2.min.js"/>
+</c:set> 
 
-        <!-- external img -->
-        <c:set var="sourceCodeImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/html-source-icon.png" scope="request"/>
-        <c:set var="expandedImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/expanded.png" scope="request"/>
-        <c:set var="collapsedImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/collapsed.png" scope="request"/>
-        <!-- external images -->
-        <c:set var="processingImgUrl" scope="request" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/processing.gif"/>
-    </c:when>
-    <c:otherwise>
-        <!-- external js -->
-        <c:set var="jqueryUrl">
-            <c:url value="/External-Js/jquery-1.9.1.min.js"/>
-        </c:set>        
-        <c:set var="jqueryUIUrl">
-            <c:url value="/External-Js/jquery-ui-1.10.1.custom.min.js"/>  
-        </c:set>
-        <c:set var="d3JsUrl" scope="request">
-            <c:url value="/External-Js/d3.v3.min.js"/>
-        </c:set>
-        <c:set var="r2d3JsUrl" scope="request">
-            <c:url value="/External-Js/r2d3.v2.min.js"/>
-        </c:set> 
+<!-- internal js -->
+<c:set var="resultPageChartsJsIEUrl" scope="request">
+    <c:url value="/Js/ie/result-page/result-page-charts-ie-min.js"/>
+</c:set>
+<c:set var="resultPageChartsJsUrl" scope="request">
+    <c:url value="/Js/result-page/result-page-charts-min.js"/>
+</c:set>
+<c:set var="scoreJsUrl" scope="request">
+    <c:url value="/Js/score/score-min.js"/>
+</c:set>
+<c:set var="themeDetailsJsUrl" scope="page">
+    <c:url value="/Js/expand-collapse/theme-details-min.js"/>
+</c:set>
+<c:set var="auditParametersDetailsJsUrl" scope="page">
+    <c:url value="/Js/expand-collapse/audit-parameters-details-min.js"/>
+</c:set>
+<c:set var="progressBarJsUrl" scope="page">
+    <c:url value="/Js/progress-bar/progress-bar-min.js"/>
+</c:set>
 
-        <!-- internal js -->
-        <c:set var="resultPageChartsJsIEUrl" scope="request">
-            <c:url value="/Js/ie/result-page/result-page-charts-ie-min.js"/>
-        </c:set>
-        <c:set var="resultPageChartsJsUrl" scope="request">
-            <c:url value="/Js/result-page/result-page-charts-min.js"/>
-        </c:set>
-        <c:set var="scoreJsUrl" scope="request">
-            <c:url value="/Js/score/score-min.js"/>
-        </c:set>
-        <c:set var="themeDetailsJsUrl" scope="page">
-            <c:url value="/Js/expand-collapse/theme-details-min.js"/>
-        </c:set>
-        <c:set var="auditParametersDetailsJsUrl" scope="page">
-            <c:url value="/Js/expand-collapse/audit-parameters-details-min.js"/>
-        </c:set>
-        <c:set var="progressBarJsUrl" scope="page">
-            <c:url value="/Js/progress-bar/progress-bar-min.js"/>
-        </c:set>
+<!-- external img -->
+<c:set var="expandedImg" scope="request">
+    <c:url value="/Images/expanded.png"/>
+</c:set> 
+<c:set var="collapsedImg" scope="request">
+    <c:url value="/Images/collapsed.png"/>
+</c:set> 
+<c:set var="sourceCodeImg" scope="request">
+    <c:url value="/Images/html-source-icon.png"/>
+</c:set>
+<c:set var="processingImgUrl" scope="request">
+    <c:url value="/Images/processing.gif"/>  
+</c:set>
 
-        <!-- external img -->
-        <c:set var="expandedImg" scope="request">
-            <c:url value="/Images/expanded.png"/>
-        </c:set> 
-        <c:set var="collapsedImg" scope="request">
-            <c:url value="/Images/collapsed.png"/>
-        </c:set> 
-        <c:set var="sourceCodeImg" scope="request">
-            <c:url value="/Images/html-source-icon.png"/>
-        </c:set>
-        <c:set var="processingImgUrl" scope="request">
-            <c:url value="/Images/processing.gif"/>  
-        </c:set>            
-    </c:otherwise>
-</c:choose>
 <c:if test="${statistics.auditScope == 'DOMAIN' || statistics.auditScope == 'PAGE'}">
     <c:set var="addRelaunchAction" scope="page" value="true"/>
 </c:if>
-<html lang="${lang}">
+<html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="resultPageByCriterion.pageTitle">
             <fmt:param>

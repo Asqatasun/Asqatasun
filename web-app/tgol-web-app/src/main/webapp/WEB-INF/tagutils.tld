@@ -8,4 +8,9 @@
         <function-class>org.opens.tgol.util.TagUtils</function-class>
         <function-signature>boolean instanceOf(java.lang.Object, java.lang.String)</function-signature>
     </function>
+    <function>
+        <name>lang</name>
+        <function-class>org.opens.tgol.util.TagUtils</function-class>
+        <function-signature>String getLangFromPageContext(javax.servlet.jsp.PageContext)</function-signature>
+    </function>
 </taglib>

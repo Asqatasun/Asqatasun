@@ -6,78 +6,49 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
-<c:choose>
-    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
-        <c:set var="lang">
-            ${fn:substringBefore(pageContext.response.locale, "_")}
-        </c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="lang" value="${pageContext.response.locale}"/>
-    </c:otherwise>
-</c:choose>
-<c:choose>
-    <c:when test="${not empty configProperties['cdnUrl']}">
-        <!-- external js-->
-        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-1.9.1.min.js"/>
-        <c:set var="d3JsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/d3.v3.min.js" scope="request"/>
-        <c:set var="r2d3JsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/r2d3.v2.min.js" scope="request"/>
 
-        <!-- internal js-->
-        <c:set var="top5FailedThemeGraphJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/synthesis/repartition-by-failed-theme-min.js" scope="request"/>
-        <c:set var="top5FailedThemeGraphIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/synthesis/repartition-by-failed-theme-ie-min.js" scope="request"/>
-        <c:set var="resultPageChartsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/result-page/result-page-charts-min.js" scope="request"/>
-        <c:set var="resultPageChartsIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/result-page/result-page-charts-ie-min.js" scope="request"/>
-        <c:set var="scoreJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/score/score-min.js" scope="request"/>
-        <c:set var="scoreIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/score/score-ie-min.js" scope="request"/>
-        <c:set var="auditParametersDetailsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/expand-collapse/audit-parameters-details-min.js"/>
-        
-        <!-- images --> 
-        <c:set var="goToImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/window-duplicate.png"/>
-    </c:when>
-    <c:otherwise>
-        <!-- external js-->
-        <c:set var="jqueryUrl">
-            <c:url value="/External-Js/jquery-1.9.1.min.js"/>
-        </c:set>        
-        <c:set var="d3JsUrl" scope="request">
-            <c:url value="/External-Js/d3.v3.min.js"/>
-        </c:set> 
-        <c:set var="r2d3JsUrl" scope="request">
-            <c:url value="/External-Js/r2d3.v2.min.js"/>
-        </c:set> 
-        
-        <!-- internal js-->
-        <c:set var="top5FailedThemeGraphJsUrl" scope="request">
-            <c:url value="/Js/synthesis/repartition-by-failed-theme-min.js"/>
-        </c:set> 
-        <c:set var="top5FailedThemeGraphIEJsUrl" scope="request">
-            <c:url value="/Js/ie/synthesis/repartition-by-failed-theme-ie-min.js"/>
-        </c:set> 
-        <c:set var="resultPageChartsIEJsUrl" scope="request">
-            <c:url value="/Js/ie/result-page/result-page-charts-ie-min.js"/>
-        </c:set>
-        <c:set var="resultPageChartsJsUrl" scope="request">
-            <c:url value="/Js/result-page/result-page-charts-min.js"/>
-        </c:set>
-        <c:set var="auditParametersDetailsJsUrl">
-            <c:url value="/Js/expand-collapse/audit-parameters-details-min.js"/>
-        </c:set>
-        <c:set var="scoreJsUrl" scope="request">
-            <c:url value="/Js/score/score-min.js"/>
-        </c:set>
-        <c:set var="scoreIEJsUrl" scope="request">
-            <c:url value="/Js/ie/score/score-ie-min.js"/>
-        </c:set>
-        
-        <!-- images --> 
-        <c:set var="goToImgUrl">
-            <c:url value="/Images/window-duplicate.png"/>
-        </c:set>
-    </c:otherwise>
-</c:choose>
-<html lang="${lang}">
+<!-- external js-->
+<c:set var="jqueryUrl">
+    <c:url value="/External-Js/jquery-1.9.1.min.js"/>
+</c:set>        
+<c:set var="d3JsUrl" scope="request">
+    <c:url value="/External-Js/d3.v3.min.js"/>
+</c:set> 
+<c:set var="r2d3JsUrl" scope="request">
+    <c:url value="/External-Js/r2d3.v2.min.js"/>
+</c:set> 
+
+<!-- internal js-->
+<c:set var="top5FailedThemeGraphJsUrl" scope="request">
+    <c:url value="/Js/synthesis/repartition-by-failed-theme-min.js"/>
+</c:set> 
+<c:set var="top5FailedThemeGraphIEJsUrl" scope="request">
+    <c:url value="/Js/ie/synthesis/repartition-by-failed-theme-ie-min.js"/>
+</c:set> 
+<c:set var="resultPageChartsIEJsUrl" scope="request">
+    <c:url value="/Js/ie/result-page/result-page-charts-ie-min.js"/>
+</c:set>
+<c:set var="resultPageChartsJsUrl" scope="request">
+    <c:url value="/Js/result-page/result-page-charts-min.js"/>
+</c:set>
+<c:set var="auditParametersDetailsJsUrl">
+    <c:url value="/Js/expand-collapse/audit-parameters-details-min.js"/>
+</c:set>
+<c:set var="scoreJsUrl" scope="request">
+    <c:url value="/Js/score/score-min.js"/>
+</c:set>
+<c:set var="scoreIEJsUrl" scope="request">
+    <c:url value="/Js/ie/score/score-ie-min.js"/>
+</c:set>
+
+<!-- images --> 
+<c:set var="goToImgUrl">
+    <c:url value="/Images/window-duplicate.png"/>
+</c:set>
+
+<html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="synthesisSite.pageTitle">
             <fmt:param>

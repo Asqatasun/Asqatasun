@@ -6,32 +6,17 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page import = "java.util.Date,java.text.SimpleDateFormat,java.text.ParseException"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
-<c:choose>
-    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
-        <c:set var="lang">
-            ${fn:substringBefore(pageContext.response.locale, "_")}
-        </c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="lang" value="${pageContext.response.locale}"/>
-    </c:otherwise>
-</c:choose>
-<c:choose>
-    <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="loadingErrorImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/error_loading.jpg"/>
-        <c:set var="creativeCommonLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/creative_common_logo.png"/>
-    </c:when>
-    <c:otherwise>
-        <c:set var="loadingErrorImgUrl">
-            <c:url value="/Images/error_loading.jpg"/>  
-        </c:set>
-        <c:set var="creativeCommonLogoUrl">
-            <c:url value="/Images/creative_common_logo.png"/>
-        </c:set>
-    </c:otherwise>
-</c:choose>
-<html lang="${lang}">
+
+<c:set var="loadingErrorImgUrl">
+    <c:url value="/Images/error_loading.jpg"/>  
+</c:set>
+<c:set var="creativeCommonLogoUrl">
+    <c:url value="/Images/creative_common_logo.png"/>
+</c:set>
+
+<html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="errorLoadingPage.pageTitle"/>
     </c:set>

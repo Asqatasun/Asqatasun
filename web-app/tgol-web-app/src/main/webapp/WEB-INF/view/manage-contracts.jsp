@@ -8,40 +8,23 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
-<c:choose>
-    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
-        <c:set var="lang">
-            ${fn:substringBefore(pageContext.response.locale, "_")}
-        </c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="lang" value="${pageContext.response.locale}"/>
-    </c:otherwise>
-</c:choose>
-<c:choose>
-    <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="deleteContract" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/remove.png"/>
-        <c:set var="editContract" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/edit.png"/>
-        <c:set var="deleteAudits" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/bin.png"/>
-        <c:set var="addContract" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/plus_2.png"/>
-    </c:when>
-    <c:otherwise>
-        <c:set var="editContract">
-            <c:url value="/Images/edit.png"/>  
-        </c:set>
-        <c:set var="deleteContract">
-            <c:url value="/Images/remove.png"/>  
-        </c:set>
-        <c:set var="deleteAudits">
-            <c:url value="/Images/bin.png"/>
-        </c:set>
-        <c:set var="addContract">
-            <c:url value="/Images/plus_2.png"/>
-        </c:set>
-    </c:otherwise>
-</c:choose>
-<html lang="${lang}">
+
+<c:set var="editContract">
+    <c:url value="/Images/edit.png"/>  
+</c:set>
+<c:set var="deleteContract">
+    <c:url value="/Images/remove.png"/>  
+</c:set>
+<c:set var="deleteAudits">
+    <c:url value="/Images/bin.png"/>
+</c:set>
+<c:set var="addContract">
+    <c:url value="/Images/plus_2.png"/>
+</c:set>
+
+<html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="manage-contracts.pageTitle">
             <fmt:param>${userName}</fmt:param>

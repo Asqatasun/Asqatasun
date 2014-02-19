@@ -5,32 +5,17 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
-<c:choose>
-    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
-        <c:set var="lang">
-            ${fn:substringBefore(pageContext.response.locale, "_")}
-        </c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="lang" value="${pageContext.response.locale}"/>
-    </c:otherwise>
-</c:choose>
-<c:choose>
-    <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="quotaExceededImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/quota_exceeded.jpg"/>
-        <c:set var="creativeCommonLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/creative_common_logo.png"/>
-    </c:when>
-    <c:otherwise>
-        <c:set var="quotaExceededImgUrl">
-            <c:url value="/Images/quota_exceeded.jpg"/>  
-        </c:set>
-        <c:set var="creativeCommonLogoUrl">
-            <c:url value="/Images/creative_common_logo.png"/>
-        </c:set>
-    </c:otherwise>
-</c:choose>
-<html lang="${lang}">
+
+<c:set var="quotaExceededImgUrl">
+    <c:url value="/Images/quota_exceeded.jpg"/>  
+</c:set>
+<c:set var="creativeCommonLogoUrl">
+    <c:url value="/Images/creative_common_logo.png"/>
+</c:set>
+
+<html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="quota-by-ip-exceeded.pageTitle"/>
     </c:set>

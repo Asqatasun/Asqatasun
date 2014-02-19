@@ -6,37 +6,20 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
-<c:choose>
-    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
-        <c:set var="lang">
-            ${fn:substringBefore(pageContext.response.locale, "_")}
-        </c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="lang" value="${pageContext.response.locale}"/>
-    </c:otherwise>
-</c:choose>
-<c:choose>
-    <c:when test="${not empty configProperties['cdnUrl']}">
-        <!-- external js -->
-        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-1.9.1.min.js"/>
-        <!-- internal js -->
-        <c:set var="highlightSelectedLineJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/highlighter/highlight-selected-line-min.js"/>
-    </c:when>
-    <c:otherwise>
-        <!-- external js -->
-        <c:set var="jqueryUrl">
-            <c:url value="/External-Js/jquery-1.9.1.min.js"/>
-        </c:set>
-        
-        <!-- internal js -->
-        <c:set var="highlightSelectedLineJsUrl">
-            <c:url value="/Js/highlighter/highlight-selected-line-min.js"/>
-        </c:set>
-    </c:otherwise>
-</c:choose>
-<html lang="${lang}">
+
+<!-- external js -->
+<c:set var="jqueryUrl">
+    <c:url value="/External-Js/jquery-1.9.1.min.js"/>
+</c:set>
+
+<!-- internal js -->
+<c:set var="highlightSelectedLineJsUrl">
+    <c:url value="/Js/highlighter/highlight-selected-line-min.js"/>
+</c:set>
+
+<html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="sourceCode.pageTitle">
             <fmt:param>

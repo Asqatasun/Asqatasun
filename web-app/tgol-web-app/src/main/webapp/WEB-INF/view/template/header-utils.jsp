@@ -4,24 +4,16 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://www.springframework.org/security/tags" prefix="sec"  %>
 
-        <c:choose>
-            <c:when test="${not empty configProperties['cdnUrl']}">
-                <c:set var="tgLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>
-                <c:set var="logoutLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/icon-logout.png"/>
-                <c:set var="adminLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/icon-admin.png"/>
-            </c:when>
-            <c:otherwise>
-                <c:set var="tgLogoUrl">
-                    <c:url value="/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>  
-                </c:set>
-                <c:set var="logoutLogoUrl">
-                    <c:url value="/Images/icon-logout.png"/>  
-                </c:set>
-                <c:set var="adminLogoUrl">
-                    <c:url value="/Images/icon-admin.png"/>  
-                </c:set>
-            </c:otherwise>
-        </c:choose>
+        <c:set var="tgLogoUrl">
+            <c:url value="/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>  
+        </c:set>
+        <c:set var="logoutLogoUrl">
+            <c:url value="/Images/icon-logout.png"/>  
+        </c:set>
+        <c:set var="adminLogoUrl">
+            <c:url value="/Images/icon-admin.png"/>  
+        </c:set>
+        
         <c:set var="currentUserName" scope="page">
             <c:catch var="notAuthenException" >
                 <sec:authentication property="principal.displayedUserName" />

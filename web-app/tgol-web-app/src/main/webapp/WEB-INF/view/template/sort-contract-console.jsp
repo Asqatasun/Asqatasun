@@ -2,7 +2,7 @@
 <%@page pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@taglib prefix="function" uri="http://tagutils"%>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
             <div id="contract-option-console" class="row option-console">
                 <div class="span16">
@@ -19,7 +19,7 @@
                             <label id="set-up-${i18nKey}" for="${i18nKey}"><fmt:message key="${i18nKey}"/></label>
                             <div class="set-up-value input">
                             <c:choose>
-                                <c:when test="${function:instanceOf(formField, 'org.opens.tgol.form.SelectFormField')}">
+                                <c:when test="${tg:instanceOf(formField, 'org.opens.tgol.form.SelectFormField')}">
                                     <c:forEach items="${formField.selectElementMap}" var="group">
                                     <form:select id="${i18nKey}" path="sortOptionMap[${group.key}]">
                                         <c:forEach items="${group.value}" var="level">

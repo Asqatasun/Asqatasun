@@ -9,21 +9,12 @@
 <%@taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="function" uri="http://tagutils"%>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
-<c:choose>
-    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
-        <c:set var="lang">
-            ${fn:substringBefore(pageContext.response.locale, "_")}
-        </c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="lang" value="${pageContext.response.locale}"/>
-    </c:otherwise>
-</c:choose>
 <c:if test="${userName == null && not empty userList}">
     <c:set var="multipleUser" value="true"/>
 </c:if>
-<html lang="${lang}">
+<html lang="${tg:lang(pageContext)}">
     <c:choose>
         <c:when test="${multipleUser == 'true'}">
             <c:set var="pageTitle" scope="page">

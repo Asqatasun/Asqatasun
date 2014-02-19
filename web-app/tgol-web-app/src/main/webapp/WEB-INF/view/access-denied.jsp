@@ -5,36 +5,20 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
-<c:choose>
-    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
-        <c:set var="lang">
-            ${fn:substringBefore(pageContext.response.locale, "_")}
-        </c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="lang" value="${pageContext.response.locale}"/>
-    </c:otherwise>
-</c:choose>
-<c:choose>
-    <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="accessDenied1ImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/access_denied2.jpg"/>
-        <c:set var="accessDenied2ImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/access_denied2.JPG"/>
-        <c:set var="creativeCommonLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/creative_common_logo.png"/>
-    </c:when>
-    <c:otherwise>
-        <c:set var="accessDenied1ImgUrl">
-            <c:url value="/Images/access_denied1.jpg"/>  
-        </c:set>
-        <c:set var="accessDenied2ImgUrl">
-            <c:url value="/Images/access_denied2.JPG"/>  
-        </c:set>
-        <c:set var="creativeCommonLogoUrl">
-            <c:url value="/Images/creative_common_logo.png"/>
-        </c:set>
-    </c:otherwise>
-</c:choose>
-<html lang="${lang}">
+
+<c:set var="accessDenied1ImgUrl">
+    <c:url value="/Images/access_denied1.jpg"/>  
+</c:set>
+<c:set var="accessDenied2ImgUrl">
+    <c:url value="/Images/access_denied2.JPG"/>  
+</c:set>
+<c:set var="creativeCommonLogoUrl">
+    <c:url value="/Images/creative_common_logo.png"/>
+</c:set>
+
+<html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <spring:message code="accessDeniedPage.pageTitle"/>
     </c:set>

@@ -5,58 +5,35 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
-<c:choose>
-    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
-        <c:set var="lang">
-            ${fn:substringBefore(pageContext.response.locale, "_")}
-        </c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="lang" value="${pageContext.response.locale}"/>
-    </c:otherwise>
-</c:choose>
-<c:choose>
-    <c:when test="${not empty configProperties['cdnUrl']}">
-        <!-- external js-->
-        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-1.9.1.min.js"/>
-        <c:set var="d3JsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/d3.v3.min.js" scope="request"/>
-        <c:set var="r2d3JsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/r2d3.v2.min.js" scope="request"/>
 
-        <!-- internal js-->
-        <c:set var="scoreJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/score/score-min.js" scope="request"/>
-        <c:set var="pageListScoreJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/score/score-page-list-min.js" scope="request"/>
-        <c:set var="scoreIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/score/score-ie-min.js" scope="request"/>
-        <c:set var="pageListScoreIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/score/score-page-list-ie-min.js" scope="request"/>
-    </c:when>
-    <c:otherwise>
-        <!-- external js-->
-        <c:set var="jqueryUrl">
-            <c:url value="/External-Js/jquery-1.9.1.min.js"/>
-        </c:set>
-        <c:set var="d3JsUrl" scope="request">
-            <c:url value="/External-Js/d3.v3.min.js"/>
-        </c:set> 
-        <c:set var="r2d3JsUrl" scope="request">
-            <c:url value="/External-Js/r2d3.v2.min.js"/>
-        </c:set> 
-        
-        <!-- internal js-->
-        <c:set var="scoreJsUrl" scope="request">
-            <c:url value="/Js/score/score-min.js"/>
-        </c:set>
-        <c:set var="pageListScoreJsUrl" scope="request">
-            <c:url value="/Js/score/score-page-list-min.js"/>
-        </c:set>
-        <c:set var="scoreIEJsUrl" scope="request">
-            <c:url value="/Js/ie/score/score-ie-min.js"/>
-        </c:set>
-        <c:set var="pageListScoreIEJsUrl" scope="request">
-            <c:url value="/Js/ie/score/score-page-list-ie-min.js"/>
-        </c:set>
-    </c:otherwise>
-</c:choose>
-<html lang="${lang}">
+<!-- external js-->
+<c:set var="jqueryUrl">
+    <c:url value="/External-Js/jquery-1.9.1.min.js"/>
+</c:set>
+<c:set var="d3JsUrl" scope="request">
+    <c:url value="/External-Js/d3.v3.min.js"/>
+</c:set> 
+<c:set var="r2d3JsUrl" scope="request">
+    <c:url value="/External-Js/r2d3.v2.min.js"/>
+</c:set> 
+
+<!-- internal js-->
+<c:set var="scoreJsUrl" scope="request">
+    <c:url value="/Js/score/score-min.js"/>
+</c:set>
+<c:set var="pageListScoreJsUrl" scope="request">
+    <c:url value="/Js/score/score-page-list-min.js"/>
+</c:set>
+<c:set var="scoreIEJsUrl" scope="request">
+    <c:url value="/Js/ie/score/score-ie-min.js"/>
+</c:set>
+<c:set var="pageListScoreIEJsUrl" scope="request">
+    <c:url value="/Js/ie/score/score-page-list-ie-min.js"/>
+</c:set>
+
+<html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="pageList.pageTitle">
             <fmt:param>

@@ -4,8 +4,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib prefix="function" uri="http://tagutils"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@taglib uri="http://tagutils" prefix="tg" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
             <c:choose>
                 <c:when test="${auditSetUpCommand.scope == 'DOMAIN'}">
@@ -239,12 +239,12 @@
                                     </c:otherwise>
                                 </c:choose>
                                 <div class="clearfix ${auditParameterErrorClass}">
-                                    <c:if test="${! function:instanceOf(parameter.formField, 'org.opens.tgol.form.CheckboxFormField')}">
+                                    <c:if test="${! tg:instanceOf(parameter.formField, 'org.opens.tgol.form.CheckboxFormField')}">
                                     <label id="set-up-${i18nKey}" for="${i18nKey}"><fmt:message key="${i18nKey}"/></label>
                                     </c:if>
                                     <div class="set-up-value input">
                                     <c:choose>
-                                        <c:when test="${function:instanceOf(parameter.formField, 'org.opens.tgol.form.SelectFormField')}">
+                                        <c:when test="${tg:instanceOf(parameter.formField, 'org.opens.tgol.form.SelectFormField')}">
                                             <form:select id="${i18nKey}" path="auditParameter[${code}]">
                                             <c:forEach items="${parameter.formField.selectElementMap}" var="group">
                                             <optgroup label="<spring:message code="${group.key}"/>">
@@ -271,7 +271,7 @@
                                             </c:forEach><!-- for each referentiel -->
                                             </form:select>
                                         </c:when>
-                                        <c:when test="${function:instanceOf(parameter.formField, 'org.opens.tgol.form.CheckboxFormField')}">
+                                        <c:when test="${tg:instanceOf(parameter.formField, 'org.opens.tgol.form.CheckboxFormField')}">
                                             <ul class="inputs-list">
                                                 <c:forEach items="${parameter.formField.checkboxElementList}" var="element" varStatus="pResult">
                                                 <li>
@@ -288,7 +288,7 @@
                                             <form:errors path="auditParameter[${code}]" cssClass="alert-message error" /><br/>
                                             <span class="help-block">
                                             <c:choose>
-                                                <c:when test="${function:instanceOf(parameter.formField, 'org.opens.tgol.form.NumericalFormField')}">
+                                                <c:when test="${tg:instanceOf(parameter.formField, 'org.opens.tgol.form.NumericalFormField')}">
                                                     <fmt:message key="${i18nKey}-rule">
                                                         <fmt:param>${parameter.formField.maxValue}</fmt:param>
                                                     </fmt:message>

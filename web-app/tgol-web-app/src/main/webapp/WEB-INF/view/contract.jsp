@@ -7,93 +7,62 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
-<c:choose>
-    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
-        <c:set var="lang">
-            ${fn:substringBefore(pageContext.response.locale, "_")}
-        </c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="lang" value="${pageContext.response.locale}"/>
-    </c:otherwise>
-</c:choose>
+
 <c:set var="imgName" scope="request">
     <fmt:message key="contract.historicSampleImgName"/>
 </c:set>
-<c:choose>
-    <c:when test="${not empty configProperties['cdnUrl']}">
-        <!-- external js --> 
-        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-1.9.1.min.js"/>
-        <c:set var="d3JsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/d3.v3.min.js"/>
-        <c:set var="raphaelJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/r2d3.v2.min.js"/>
-        <c:set var="jqueryTableSorterUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery.tablesorter.min.js" scope="request"/>
-        
-        <!-- internal js --> 
-        <c:set var="trendChartJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/trend/trend-chart-min.js"/>
-        <c:set var="trendChartIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/trend/trend-chart-ie-min.js"/>
-        <c:set var="contractScoreJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/score/score-contract-min.js"/>
-        <c:set var="scoreJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/score/score-min.js"/>
-        <c:set var="contractScoreIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/score/score-contract-ie-min.js"/>
-        <c:set var="scoreIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/score/score-ie-min.js"/>
-        <c:set var="accessibleTableSorterJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/table-sorter/accessible-table-sorter-min.js" scope="request"/>
-        
-        <!-- external images --> 
-        <c:set var="gearImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/gear.png"/>
-        <c:set var="historicSampleImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/${imgName}"/>
-        <c:set var="goToImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/window-duplicate.png"/>
-    </c:when>
-    <c:otherwise>
-        <!-- external js --> 
-        <c:set var="jqueryUrl">
-            <c:url value="/External-Js/jquery-1.9.1.min.js"/>
-        </c:set>        
-        <c:set var="raphaelJsUrl" scope="request">
-            <c:url value="/External-Js/r2d3.v2.min.js"/>
-        </c:set> 
-        <c:set var="d3JsUrl">
-            <c:url value="/External-Js/d3.v3.min.js"/>
-        </c:set>
-        <c:set var="jqueryTableSorterUrl" scope="request">
-            <c:url value="/External-Js/jquery.tablesorter.min.js"/>
-        </c:set> 
-        
-        <!-- internal js --> 
-        <c:set var="trendChartJsUrl">
-            <c:url value="/Js/trend/trend-chart-min.js"/>
-        </c:set>
-        <c:set var="trendChartIEJsUrl">
-            <c:url value="/Js/ie/trend/trend-chart-ie-min.js"/>
-        </c:set>
-        <c:set var="contractScoreJsUrl">
-            <c:url value="/Js/score/score-contract-min.js"/>
-        </c:set>
-        <c:set var="scoreJsUrl">
-            <c:url value="/Js/score/score-min.js"/>
-        </c:set>
-        <c:set var="contractScoreIEJsUrl">
-            <c:url value="/Js/ie/score/score-contract-ie-min.js"/>
-        </c:set>
-        <c:set var="scoreIEJsUrl">
-            <c:url value="/Js/ie/score/score-ie-min.js"/>
-        </c:set>
-        <c:set var="accessibleTableSorterJsUrl" scope="page">
-            <c:url value="/Js/table-sorter/accessible-table-sorter-min.js"/>
-        </c:set>
-        
-        <!-- images --> 
-        <c:set var="gearImgUrl">
-            <c:url value="/Images/gear.png"/>  
-        </c:set>
-        <c:set var="historicSampleImgUrl">
-            <c:url value="/Images/${imgName}"/>
-        </c:set>
-        <c:set var="goToImgUrl">
-            <c:url value="/Images/window-duplicate.png"/>
-        </c:set>
-    </c:otherwise>
-</c:choose>
-<html lang="${lang}">
+
+<!-- external js --> 
+<c:set var="jqueryUrl">
+    <c:url value="/External-Js/jquery-1.9.1.min.js"/>
+</c:set>        
+<c:set var="raphaelJsUrl" scope="request">
+    <c:url value="/External-Js/r2d3.v2.min.js"/>
+</c:set> 
+<c:set var="d3JsUrl">
+    <c:url value="/External-Js/d3.v3.min.js"/>
+</c:set>
+<c:set var="jqueryTableSorterUrl" scope="request">
+    <c:url value="/External-Js/jquery.tablesorter.min.js"/>
+</c:set> 
+
+<!-- internal js --> 
+<c:set var="trendChartJsUrl">
+    <c:url value="/Js/trend/trend-chart-min.js"/>
+</c:set>
+<c:set var="trendChartIEJsUrl">
+    <c:url value="/Js/ie/trend/trend-chart-ie-min.js"/>
+</c:set>
+<c:set var="contractScoreJsUrl">
+    <c:url value="/Js/score/score-contract-min.js"/>
+</c:set>
+<c:set var="scoreJsUrl">
+    <c:url value="/Js/score/score-min.js"/>
+</c:set>
+<c:set var="contractScoreIEJsUrl">
+    <c:url value="/Js/ie/score/score-contract-ie-min.js"/>
+</c:set>
+<c:set var="scoreIEJsUrl">
+    <c:url value="/Js/ie/score/score-ie-min.js"/>
+</c:set>
+<c:set var="accessibleTableSorterJsUrl" scope="page">
+    <c:url value="/Js/table-sorter/accessible-table-sorter-min.js"/>
+</c:set>
+
+<!-- images --> 
+<c:set var="gearImgUrl">
+    <c:url value="/Images/gear.png"/>  
+</c:set>
+<c:set var="historicSampleImgUrl">
+    <c:url value="/Images/${imgName}"/>
+</c:set>
+<c:set var="goToImgUrl">
+    <c:url value="/Images/window-duplicate.png"/>
+</c:set>
+    
+<html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="contract.pageTitle">
             <fmt:message>
@@ -130,30 +99,16 @@
 <!--                            <span class="action-button">-->
                             <c:choose>
                                 <c:when test="${contractAction.actionEnabled == 'false' || isContractExpired == 'true'}">
-                                    <c:choose>
-                                        <c:when test="${not empty configProperties['cdnUrl']}">
-                                            <c:set var="contractActionImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}${contractAction.disabledActionImageUrl}"/>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <c:set var="contractActionImgUrl">
-                                                <c:url value="${contractAction.disabledActionImageUrl}"/>
-                                            </c:set>
-                                        </c:otherwise>
-                                    </c:choose>
+                                    <c:set var="contractActionImgUrl">
+                                        <c:url value="${contractAction.disabledActionImageUrl}"/>
+                                    </c:set>
                                     <img src="${contractActionImgUrl}" alt="" />
                                     <span class="action-label"><fmt:message key="${contractAction.actionI81NCode}"/> <br/><span class="desactivated"><fmt:message key="contract.disabled"/></span></span>
                                 </c:when>
                                 <c:otherwise>
-                                    <c:choose>
-                                        <c:when test="${not empty configProperties['cdnUrl']}">
-                                            <c:set var="contractActionImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}${contractAction.enabledActionImageUrl}"/>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <c:set var="contractActionImgUrl">
-                                                <c:url value="${contractAction.enabledActionImageUrl}"/>
-                                            </c:set>
-                                        </c:otherwise>
-                                    </c:choose>
+                                    <c:set var="contractActionImgUrl">
+                                        <c:url value="${contractAction.enabledActionImageUrl}"/>
+                                    </c:set>
                                     <a href="<c:url value="${contractAction.actionUrl}?cr=${contractIdValue}"/>">
                                         <img src="${contractActionImgUrl}" alt="" />
                                         <span class="action-label"><fmt:message key="${contractAction.actionI81NCode}"/></span>

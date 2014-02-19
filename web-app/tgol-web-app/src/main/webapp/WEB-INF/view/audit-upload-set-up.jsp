@@ -7,54 +7,31 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
-<c:choose>
-    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
-        <c:set var="lang">
-            ${fn:substringBefore(pageContext.response.locale, "_")}
-        </c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="lang" value="${pageContext.response.locale}"/>
-    </c:otherwise>
-</c:choose>
-<c:choose>
-    <c:when test="${not empty configProperties['cdnUrl']}">
-        <!-- external js -->
-        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-1.9.1.min.js"/>
-        <c:set var="jqueryUIUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-ui-1.10.1.custom.min.js"/>
 
-        <!-- internal js -->
-        <c:set var="auditSetUpDetailsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/expand-collapse/audit-set-up-details-min.js"/>
-        <c:set var="progressBarJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/progress-bar/progress-bar-min.js"/>
-        
-        <!-- external images -->
-        <c:set var="processingImgUrl" scope="request" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/processing.gif"/>
-    </c:when>
-    <c:otherwise>
-        <!-- external js -->
-        <c:set var="jqueryUrl">
-            <c:url value="/External-Js/jquery-1.9.1.min.js"/>
-        </c:set>
-        <c:set var="jqueryUIUrl">
-            <c:url value="/External-Js/jquery-ui-1.10.1.custom.min.js"/>  
-        </c:set>
-        
-        <!-- internal js -->
-        <c:set var="auditSetUpDetailsJsUrl">
-            <c:url value="/Js/expand-collapse/audit-set-up-details-min.js"/>
-        </c:set>
-        <c:set var="progressBarJsUrl">
-            <c:url value="/Js/progress-bar/progress-bar-min.js"/>
-        </c:set>
-        
-        <!-- external images -->
-        <c:set var="processingImgUrl" scope="request">
-            <c:url value="/Images/processing.gif"/>  
-        </c:set>
-    </c:otherwise>
-</c:choose>
-<html lang="${lang}">
+<!-- external js -->
+<c:set var="jqueryUrl">
+    <c:url value="/External-Js/jquery-1.9.1.min.js"/>
+</c:set>
+<c:set var="jqueryUIUrl">
+    <c:url value="/External-Js/jquery-ui-1.10.1.custom.min.js"/>  
+</c:set>
+
+<!-- internal js -->
+<c:set var="auditSetUpDetailsJsUrl">
+    <c:url value="/Js/expand-collapse/audit-set-up-details-min.js"/>
+</c:set>
+<c:set var="progressBarJsUrl">
+    <c:url value="/Js/progress-bar/progress-bar-min.js"/>
+</c:set>
+
+<!-- external images -->
+<c:set var="processingImgUrl" scope="request">
+    <c:url value="/Images/processing.gif"/>  
+</c:set>
+
+<html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="auditSetUpSite.pageTitle"/>
         <spring:hasBindErrors name="auditSetUpCommand">

@@ -8,78 +8,49 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
-<c:choose>
-    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
-        <c:set var="lang">
-            ${fn:substringBefore(pageContext.response.locale, "_")}
-        </c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="lang" value="${pageContext.response.locale}"/>
-    </c:otherwise>
-</c:choose>
-<c:choose>
-    <c:when test="${not empty configProperties['cdnUrl']}">
-        <!-- external js -->
-        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-1.9.1.min.js"/>
-        <c:set var="d3JsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/d3.v3.min.js" scope="request"/>
-        <c:set var="raphaelJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/r2d3.v2.min.js" scope="request"/>
-        
-        <!-- internal js -->        
-        <c:set var="scoreJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/score/score-min.js" scope="request"/>
-        <c:set var="scoreIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/score/score-ie-min.js" scope="request"/>
-        <c:set var="homeScoreJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/score/score-home-min.js" scope="request"/>
-        <c:set var="homeScoreIEJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/ie/score/score-home-ie-min.js" scope="request"/>
-        
-        <!-- external images -->
-        <c:set var="gearImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/gear.png"/>
-        <c:set var="increaseLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/increase-narrow.png"/>
-        <c:set var="decreaseLogoUrl"value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/decrease-narrow.png"/>
-        <c:set var="stableLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/stable-narrow.png"/>
-    </c:when>
-    <c:otherwise>
-        <!-- external js -->
-        <c:set var="jqueryUrl">
-            <c:url value="/External-Js/jquery-1.9.1.min.js"/>
-        </c:set>
-        <c:set var="d3JsUrl" scope="request">
-            <c:url value="/External-Js/d3.v3.min.js"/>
-        </c:set> 
-        <c:set var="r2d3JsUrl" scope="request">
-            <c:url value="/External-Js/r2d3.v2.min.js"/>
-        </c:set> 
 
-        <!-- internal js -->
-        <c:set var="homeScoreJsUrl" scope="request">
-            <c:url value="/Js/score/score-home-min.js"/>
-        </c:set> 
-        <c:set var="homeScoreIEJsUrl" scope="request">
-            <c:url value="/Js/ie/score/score-home-ie-min.js"/>
-        </c:set>
-        <c:set var="scoreJsUrl" scope="request">
-            <c:url value="/Js/score/score-min.js"/>
-        </c:set> 
-        <c:set var="scoreIEJsUrl" scope="request">
-            <c:url value="/Js/ie/score/score-ie-min.js"/>
-        </c:set> 
+<!-- external js -->
+<c:set var="jqueryUrl">
+    <c:url value="/External-Js/jquery-1.9.1.min.js"/>
+</c:set>
+<c:set var="d3JsUrl" scope="request">
+    <c:url value="/External-Js/d3.v3.min.js"/>
+</c:set> 
+<c:set var="r2d3JsUrl" scope="request">
+    <c:url value="/External-Js/r2d3.v2.min.js"/>
+</c:set> 
 
-        <!-- external images -->
-        <c:set var="gearImgUrl">
-            <c:url value="/Images/gear.png"/>  
-        </c:set>
-        <c:set var="increaseLogoUrl">
-            <c:url value="/Images/increase-narrow.png"/>  
-        </c:set>
-        <c:set var="decreaseLogoUrl">
-            <c:url value="/Images/decrease-narrow.png"/>
-        </c:set>
-        <c:set var="stableLogoUrl">
-            <c:url value="/Images/stable-narrow.png"/>
-        </c:set>
-    </c:otherwise>
-</c:choose>
-<html lang="${lang}">
+<!-- internal js -->
+<c:set var="homeScoreJsUrl" scope="request">
+    <c:url value="/Js/score/score-home-min.js"/>
+</c:set> 
+<c:set var="homeScoreIEJsUrl" scope="request">
+    <c:url value="/Js/ie/score/score-home-ie-min.js"/>
+</c:set>
+<c:set var="scoreJsUrl" scope="request">
+    <c:url value="/Js/score/score-min.js"/>
+</c:set> 
+<c:set var="scoreIEJsUrl" scope="request">
+    <c:url value="/Js/ie/score/score-ie-min.js"/>
+</c:set> 
+
+<!-- external images -->
+<c:set var="gearImgUrl">
+    <c:url value="/Images/gear.png"/>  
+</c:set>
+<c:set var="increaseLogoUrl">
+    <c:url value="/Images/increase-narrow.png"/>  
+</c:set>
+<c:set var="decreaseLogoUrl">
+    <c:url value="/Images/decrease-narrow.png"/>
+</c:set>
+<c:set var="stableLogoUrl">
+    <c:url value="/Images/stable-narrow.png"/>
+</c:set>
+
+<html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="home.pageTitle"/>
     </c:set>
@@ -151,40 +122,24 @@
                                 <c:set var="actionName">
                                     ${fn:replace(actionNameI18N, '<br/>', '')}
                                 </c:set>
+
                                 <c:choose>
-                                    <c:when test="${not empty configProperties['cdnUrl']}">
-                                        <c:choose>
-                                            <c:when test="${contractAction.actionEnabled}">
-                                                <c:set var="contractActionImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}${contractAction.enabledActionImageUrl}"/>
-                                                <c:set var="disabledComplement" value=""/>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <c:set var="contractActionImgUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}${contractAction.disabledActionImageUrl}"/>
-                                                <c:set var="disabledComplement">
-                                                    <fmt:message key="contract.disabled"/>
-                                                </c:set>
-                                            </c:otherwise>
-                                        </c:choose>
+                                    <c:when test="${contractAction.actionEnabled}">
+                                        <c:set var="contractActionImgUrl">
+                                            <c:url value="${contractAction.enabledActionImageUrl}"/>
+                                        </c:set>
+                                        <c:set var="disabledComplement" value=""/>
                                     </c:when>
                                     <c:otherwise>
-                                        <c:choose>
-                                            <c:when test="${contractAction.actionEnabled}">
-                                                <c:set var="contractActionImgUrl">
-                                                    <c:url value="${contractAction.enabledActionImageUrl}"/>
-                                                </c:set>
-                                                <c:set var="disabledComplement" value=""/>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <c:set var="contractActionImgUrl">
-                                                    <c:url value="${contractAction.disabledActionImageUrl}"/>
-                                                </c:set>
-                                                <c:set var="disabledComplement">
-                                                    <fmt:message key="contract.disabled"/>
-                                                </c:set>
-                                            </c:otherwise>
-                                        </c:choose>
+                                        <c:set var="contractActionImgUrl">
+                                            <c:url value="${contractAction.disabledActionImageUrl}"/>
+                                        </c:set>
+                                        <c:set var="disabledComplement">
+                                            <fmt:message key="contract.disabled"/>
+                                        </c:set>
                                     </c:otherwise>
                                 </c:choose>
+                                
                             <span class="action-button">
                                 <c:choose>
                                     <c:when test="${contractAction.actionEnabled}">

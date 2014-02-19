@@ -11,16 +11,11 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Set"%>
-            <c:choose>
-                <c:when test="${not empty configProperties['cdnUrl']}">
-                    <c:set var="tgLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/Logo-Tanaguru.com-75dpi-210x95-transp.png"/>
-                </c:when>
-                <c:otherwise>
-                    <c:set var="tgLogoUrl">
-                        <c:url value="/Images/Logo-Tanaguru.com-75dpi-210x95-transp.png"/>  
-                    </c:set>
-                </c:otherwise>
-            </c:choose>
+
+            <c:set var="tgLogoUrl">
+                <c:url value="/Images/Logo-Tanaguru.com-75dpi-210x95-transp.png"/>  
+            </c:set>
+
             <c:set var="properQueryString" scope="page" value="${fn:replace(pageContext.request.queryString, '&', '&amp;')}"/>
             <c:choose>
                 <c:when test="${not empty pageContext.request.queryString}">

@@ -9,23 +9,11 @@
     <meta name="description" content="${pageMetaDescription}"/>
     <meta name="author" content="Open-S.com"/>
     <!-- Le styles -->
-<c:choose>
-    <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:if test="${addJqueryUI}">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Css/jquery-ui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Css/prettify.min.css"/>
-        </c:if>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Css/tgm.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Css/font-open.css"/>
-    <link rel="icon" type="image/ico" href="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/tanaguru.ico" />
-    <c:set var="modernizrJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/modernizr.min.js" scope="request"/>
-    </c:when>
-    <c:otherwise>
-        <c:if test="${addJqueryUI}">
+
+<c:if test="${addJqueryUI}">
     <link rel="stylesheet" type="text/css" href="<c:url value="/External-Css/jquery-ui.min.css"/>"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/External-Css/prettify.min.css"/>"/>
-        </c:if>
+</c:if>
     <link rel="stylesheet" type="text/css" href="<c:url value="/External-Css/bootstrap.min.css"/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value="/Css/tgm.css"/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value="/Css/font-open.css"/>" />
@@ -33,8 +21,7 @@
     <c:set var="modernizrJsUrl" scope="request">
         <c:url value="/External-Js/modernizr.min.js"/>
     </c:set>
-    </c:otherwise>
-</c:choose>
+
     <!--[if lte IE 8]>
     <script type="text/javascript" src="${modernizrJsUrl}"></script>
     <![endif]-->

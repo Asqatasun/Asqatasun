@@ -21,12 +21,17 @@
  */
 package org.opens.tgol.util;
 
+import java.util.Locale;
+import javax.servlet.jsp.PageContext;
+
 /**
  *
  * @author jkowalczyk
  */
 public final class TagUtils {
 
+    private static final String LANG_FR_KEY=Locale.FRENCH.getLanguage();
+    
     /**
      * Private constructor.  This class only handles static methods
      */
@@ -42,5 +47,18 @@ public final class TagUtils {
         }
         return returnValue;
     }
-
+    
+    /**
+     * 
+     * @param pageContext
+     * @return 
+     */
+    public static String getLangFromPageContext(PageContext pageContext) {
+        if (pageContext.getResponse().getLocale().getLanguage().
+                equalsIgnoreCase(Locale.FRENCH.getLanguage())) {
+            return Locale.FRENCH.getLanguage();
+        }
+        return Locale.ENGLISH.getLanguage();
+    }
+    
 }

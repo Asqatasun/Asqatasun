@@ -5,7 +5,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@taglib uri="http://tagutils" prefix="function" %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 
                 <div class="span16">
                     <div id="mandatory-elements-message" class="alert-message block-message warning">
@@ -144,7 +144,7 @@
                                             <form:errors path="optionMap[${code}]" cssClass="alert-message error" /><br/>
                                             <span class="help-block">
                                             <c:choose>
-                                                <c:when test="${function:instanceOf(option.formField, 'org.opens.tgol.form.NumericalFormField')}">
+                                                <c:when test="${tg:instanceOf(option.formField, 'org.opens.tgol.form.NumericalFormField')}">
                                                     <fmt:message key="${i18nKey}-rule">
                                                         <fmt:param>${option.formField.maxValue}</fmt:param>
                                                     </fmt:message>

@@ -4,76 +4,46 @@
 <%@page pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
-<c:choose>
-    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
-        <c:set var="lang">
-            ${fn:substringBefore(pageContext.response.locale, "_")}
-        </c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="lang" value="${pageContext.response.locale}"/>
-    </c:otherwise>
-</c:choose>
-<c:choose>
-    <c:when test="${not empty configProperties['cdnUrl']}">
-        <!-- external js -->
-        <c:set var="jqueryUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/jquery-1.9.1.min.js"/>
-        <c:set var="codePrettifierJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/External-Js/prettify.min.js" scope="request"/>
 
-        <!-- internal js -->
-        <c:set var="displayExternalImgJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/result-page/add-img-snapshot-min.js" scope="request"/>
-        <c:set var="prettyPrintJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/result-page/pretty-print-min.js" scope="request"/>
-        <c:set var="testDetailsJsUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Js/expand-collapse/test-details-min.js" scope="page"/>
+<!-- external js -->
+<c:set var="jqueryUrl">
+    <c:url value="/External-Js/jquery-1.9.1.min.js"/>
+</c:set>        
+<c:set var="codePrettifierJsUrl" scope="request">
+    <c:url value="/External-Js/prettify.min.js"/>
+</c:set> 
 
-        <!-- external images -->
-        <c:set var="testInfoLinkImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/test-info-link.png" scope="request"/>
-        <c:set var="algoLinkImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/algo-link.png" scope="request"/>
-        <c:set var="expandedSmallImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/expanded-s.png" scope="request"/>
-        <c:set var="collapsedSmallImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/collapsed-s.png" scope="request"/>
-        <c:set var="sourceCodeImg" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/html-source-icon.png" scope="request"/>
-        <!-- external images -->
-        <c:set var="processingImgUrl" scope="request" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/processing.gif"/>
-    </c:when>
-    <c:otherwise>
-        <!-- external js -->
-        <c:set var="jqueryUrl">
-            <c:url value="/External-Js/jquery-1.9.1.min.js"/>
-        </c:set>        
-        <c:set var="codePrettifierJsUrl" scope="request">
-            <c:url value="/External-Js/prettify.min.js"/>
-        </c:set> 
+<!-- internal js -->
+<c:set var="displayExternalImgJsUrl" scope="request">
+    <c:url value="/Js/result-page/add-img-snapshot-min.js"/>
+</c:set>        
+<c:set var="prettyPrintJsUrl" scope="request">
+    <c:url value="/Js/result-page/pretty-print-min.js"/>
+</c:set> 
+<c:set var="testDetailsJsUrl" scope="page">
+    <c:url value="/Js/expand-collapse/test-details-min.js"/>
+</c:set>
 
-        <!-- internal js -->
-        <c:set var="displayExternalImgJsUrl" scope="request">
-            <c:url value="/Js/result-page/add-img-snapshot-min.js"/>
-        </c:set>        
-        <c:set var="prettyPrintJsUrl" scope="request">
-            <c:url value="/Js/result-page/pretty-print-min.js"/>
-        </c:set> 
-        <c:set var="testDetailsJsUrl" scope="page">
-            <c:url value="/Js/expand-collapse/test-details-min.js"/>
-        </c:set>
+<!-- external images -->
+<c:set var="testInfoLinkImg" scope="request">
+    <c:url value="/Images/test-info-link.png"/>
+</c:set> 
+<c:set var="algoLinkImg" scope="request">
+    <c:url value="/Images/algo-link.png"/>
+</c:set> 
+<c:set var="expandedSmallImg" scope="request">
+    <c:url value="/Images/expanded-s.png"/>
+</c:set> 
+<c:set var="collapsedSmallImg" scope="request">
+    <c:url value="/Images/collapsed-s.png"/>
+</c:set> 
+<c:set var="sourceCodeImg" scope="request">
+    <c:url value="/Images/html-source-icon.png"/>
+</c:set>
 
-        <!-- external images -->
-        <c:set var="testInfoLinkImg" scope="request">
-            <c:url value="/Images/test-info-link.png"/>
-        </c:set> 
-        <c:set var="algoLinkImg" scope="request">
-            <c:url value="/Images/algo-link.png"/>
-        </c:set> 
-        <c:set var="expandedSmallImg" scope="request">
-            <c:url value="/Images/expanded-s.png"/>
-        </c:set> 
-        <c:set var="collapsedSmallImg" scope="request">
-            <c:url value="/Images/collapsed-s.png"/>
-        </c:set> 
-        <c:set var="sourceCodeImg" scope="request">
-            <c:url value="/Images/html-source-icon.png"/>
-        </c:set>
-    </c:otherwise>
-</c:choose>
-<html lang="${lang}">
+<html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="criterionResultPage.pageTitle">
             <fmt:param>

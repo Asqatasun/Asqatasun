@@ -5,40 +5,23 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
-<c:choose>
-    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
-        <c:set var="lang">
-            ${fn:substringBefore(pageContext.response.locale, "_")}
-        </c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="lang" value="${pageContext.response.locale}"/>
-    </c:otherwise>
-</c:choose>
-<c:choose>
-    <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="oupsImg1Url" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/oups1.jpg"/>
-        <c:set var="oupsImg2Url" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/oups2.jpg"/>
-        <c:set var="oupsImg3Url" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/oups3.jpg"/>
-        <c:set var="creativeCommonLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/creative_common_logo.png"/>
-    </c:when>
-    <c:otherwise>
-        <c:set var="oupsImg1Url">
-            <c:url value="/Images/oups1.jpg"/>  
-        </c:set>
-        <c:set var="oupsImg2Url">
-            <c:url value="/Images/oups2.jpg"/>  
-        </c:set>
-        <c:set var="oupsImg3Url">
-            <c:url value="/Images/oups3.jpg"/>  
-        </c:set>
-        <c:set var="creativeCommonLogoUrl">
-            <c:url value="/Images/creative_common_logo.png"/>
-        </c:set>
-    </c:otherwise>
-</c:choose>
-<html lang="${lang}">
+
+<c:set var="oupsImg1Url">
+    <c:url value="/Images/oups1.jpg"/>  
+</c:set>
+<c:set var="oupsImg2Url">
+    <c:url value="/Images/oups2.jpg"/>  
+</c:set>
+<c:set var="oupsImg3Url">
+    <c:url value="/Images/oups3.jpg"/>  
+</c:set>
+<c:set var="creativeCommonLogoUrl">
+    <c:url value="/Images/creative_common_logo.png"/>
+</c:set>
+
+<html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="oups.pageTitle"/>
     </c:set>

@@ -6,28 +6,14 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
-<c:choose>
-    <c:when test="${fn:contains(pageContext.response.locale, '_')}">
-        <c:set var="lang">
-            ${fn:substringBefore(pageContext.response.locale, "_")}
-        </c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="lang" value="${pageContext.response.locale}"/>
-    </c:otherwise>
-</c:choose>
- <c:choose>
-    <c:when test="${not empty configProperties['cdnUrl']}">
-        <c:set var="tgLogoUrl" value="${pageContext.request.scheme}://${configProperties['cdnUrl']}/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>
-    </c:when>
-    <c:otherwise>
-        <c:set var="tgLogoUrl">
-            <c:url value="/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>  
-        </c:set>
-    </c:otherwise>
-</c:choose>
-<html lang="${lang}">
+ 
+<c:set var="tgLogoUrl">
+    <c:url value="/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>  
+</c:set>
+ 
+<html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <spring:message code="forgotten-password.pageTitle"/>
         <spring:hasBindErrors name="userSignUpCommand">
