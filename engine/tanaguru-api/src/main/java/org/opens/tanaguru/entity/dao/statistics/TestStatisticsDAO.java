@@ -41,10 +41,12 @@ public interface TestStatisticsDAO extends GenericDAO<TestStatistics, Long> {
 
     /**
      * 
-     * @param parentWebresourceId
+     * @param webResource
      * @param test
      * @param testSolution
-     * @return
+     * @return 
+     *      the number of webresources returning the given testSolution 
+     *  for the given test
      */
     Long findResultCounterByResultTypeAndTest(
             WebResource webResource,

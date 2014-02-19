@@ -22,10 +22,10 @@
 package org.opens.tanaguru.entity.dao.audit;
 
 import java.util.Collection;
-import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 import org.opens.tanaguru.entity.audit.Evidence;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
+import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 
 /**
  * 
@@ -45,8 +45,9 @@ public interface EvidenceElementDAO extends
 
     /**
      * 
-     * @param consolidationRemark
-     * @return
+     * @param processRemark
+     * @return 
+     *      all the evidence elements for a given process remark
      */
     Collection<EvidenceElement> retrieveAllByProcessRemark(ProcessRemark processRemark);
 

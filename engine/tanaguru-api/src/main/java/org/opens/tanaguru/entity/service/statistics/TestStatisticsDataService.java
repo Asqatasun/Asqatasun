@@ -21,9 +21,9 @@
  */
 package org.opens.tanaguru.entity.service.statistics;
 
-import org.opens.tanaguru.entity.statistics.TestStatistics;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Test;
+import org.opens.tanaguru.entity.statistics.TestStatistics;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.service.GenericDataService;
 
@@ -36,10 +36,12 @@ public interface TestStatisticsDataService
 
     /**
      * 
-     * @param parentWebresourceId
-     * @param test
+     * @param webResource
      * @param testSolution
-     * @return
+     * @param test
+     * @return 
+     *      the number of webresource returning the given testSolution for the 
+     * given test
      */
     Long getResultCountByResultTypeAndTest(
             WebResource webResource,

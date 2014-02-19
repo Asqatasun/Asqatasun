@@ -40,7 +40,7 @@ public interface CriterionStatisticsDataService
      * 
      * @param webResource
      * @param testSolution
-     * @param theme
+     * @param criterion
      * @return
      */
     Long getResultCountByResultTypeAndCriterion(

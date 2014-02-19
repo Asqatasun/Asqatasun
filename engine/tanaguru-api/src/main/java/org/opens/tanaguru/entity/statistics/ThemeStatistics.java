@@ -50,7 +50,7 @@ public interface ThemeStatistics extends Entity, ResultCounter {
 
     /**
      * 
-     * @param auditStatistics
+     * @param webResourceStatisticsStatistics
      */
     void setWebResourceStatistics(
             WebResourceStatistics webResourceStatisticsStatistics);

@@ -255,7 +255,7 @@ public interface SSPHandler {
      * characters
      * @param attributeContent
      * @param workingElement
-     * @param currentTestSolution
+     * @param testSolution
      * @param remarkMessage
      * @return
      */

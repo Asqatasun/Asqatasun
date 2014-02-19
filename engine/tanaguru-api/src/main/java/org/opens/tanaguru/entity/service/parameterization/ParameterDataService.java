@@ -48,7 +48,7 @@ public interface ParameterDataService extends GenericDataService<Parameter, Long
     /**
      *
      * @param parameterElement
-     * @param audit
+     * @param value
      * @return
      *      a parameter from the parameter element and its value
      */
@@ -74,7 +74,7 @@ public interface ParameterDataService extends GenericDataService<Parameter, Long
     
     /**
      * @param parameterFamily
-     * @param audit
+     * @param paramSet
      * @return
      *      the subset of parameters corresponding to the parameterFamily
      */

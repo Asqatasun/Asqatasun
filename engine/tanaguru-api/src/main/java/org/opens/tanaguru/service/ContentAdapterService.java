@@ -44,7 +44,6 @@ public interface ContentAdapterService {// TODO Write javadoc
     /**
      * 
      * @param contentList
-     * @param referential
      * @return
      */
     List<Content> adaptContent(List<Content> contentList);

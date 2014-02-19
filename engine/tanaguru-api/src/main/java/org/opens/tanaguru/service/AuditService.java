@@ -24,8 +24,8 @@ package org.opens.tanaguru.service;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.opens.tanaguru.entity.audit.Audit;
 import javax.xml.bind.annotation.XmlTransient;
+import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 
 /**
@@ -113,7 +113,6 @@ public interface AuditService {
     /**
      *
      * @param pageUrl
-     * @param testCodeList
      * @param paramSet
      * @return
      */
@@ -121,9 +120,10 @@ public interface AuditService {
 
     /**
      * 
+     * @param scenarioName
      * @param scenarionFile
      * @param paramSet
-     * @return
+     * @return 
      */
     Audit auditScenario(String scenarioName, String scenarionFile, Set<Parameter> paramSet);
 

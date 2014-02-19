@@ -60,7 +60,7 @@ public interface ElementHandler<E> {
     /**
      * Remove elements from the collection
      * 
-     * @param elements 
+     * @param elementHandler
      */
     void removeAll(ElementHandler<E> elementHandler);
     

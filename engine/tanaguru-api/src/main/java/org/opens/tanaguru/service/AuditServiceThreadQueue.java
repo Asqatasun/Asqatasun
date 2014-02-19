@@ -55,25 +55,25 @@ public interface AuditServiceThreadQueue {// TODO Write javadoc
 
     /**
      *
-     * @param audit
+     * @param auditCommand
      */
     void addPageAudit(AuditCommand auditCommand);
 
     /**
      *
-     * @param audit
+     * @param auditCommand
      */
     void addScenarioAudit(AuditCommand auditCommand);
 
     /**
      *
-     * @param audit
+     * @param auditCommand
      */
     void addPageUploadAudit(AuditCommand auditCommand);
 
     /**
      *
-     * @param audit
+     * @param auditCommand
      */
     void addSiteAudit(AuditCommand auditCommand);
 

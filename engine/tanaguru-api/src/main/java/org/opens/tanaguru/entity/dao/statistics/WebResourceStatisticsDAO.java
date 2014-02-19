@@ -82,9 +82,9 @@ public interface WebResourceStatisticsDAO extends GenericDAO<WebResourceStatisti
 
     /**
      *
-     * @param webresourceId
+     * @param webResource
      * @return
      */
-    WebResourceStatistics findWebResourceStatisticsByWebResource(WebResource webReesource);
+    WebResourceStatistics findWebResourceStatisticsByWebResource(WebResource webResource);
 
 }

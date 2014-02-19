@@ -34,8 +34,8 @@ public interface ResultCounter {
     int getNbOfNa();
 
     /**
-     *
-     * @param nbOfNA
+     * 
+     * @param nbOfNa 
      */
     void setNbOfNa(int nbOfNa) ;
 
@@ -46,8 +46,8 @@ public interface ResultCounter {
     int getNbOfNmi();
 
     /**
-     *
-     * @param nbOfNMI
+     * 
+     * @param nbOfNmi 
      */
     void setNbOfNmi(int nbOfNmi);
     
@@ -83,7 +83,7 @@ public interface ResultCounter {
     
     /**
      *
-     * @param nbOfNMI
+     * @param nbOfSuspected
      */
     void setNbOfSuspected(int nbOfSuspected);
     
@@ -95,12 +95,13 @@ public interface ResultCounter {
     
     /**
      * 
-     */
+     * @param nbOfDetected 
+     */    
     void setNbOfDetected(int nbOfDetected);
     
     /**
-     *
-     * @param nbOfNMI
+     * 
+     * @return 
      */
     int getNbOfNotTested();
     

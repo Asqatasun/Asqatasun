@@ -66,7 +66,7 @@ public interface AnalyserService {
 
     /**
      * 
-     * @param analyser
+     * @param analyserFactory
      */
     void addAnalyserFactory(AnalyserFactory analyserFactory);
 

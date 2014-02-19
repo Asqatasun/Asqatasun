@@ -41,7 +41,6 @@ public abstract class AbstractCompositePageRuleMarkupImplementation
     
     /**
      * Default constructor
-     * @param innerRuleCheckers 
      */
     public AbstractCompositePageRuleMarkupImplementation(){
         super();

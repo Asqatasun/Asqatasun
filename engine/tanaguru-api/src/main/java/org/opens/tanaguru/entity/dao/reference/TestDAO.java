@@ -67,9 +67,10 @@ public interface TestDAO extends GenericDAO<Test, Long> {
 
     /**
      * 
-     * @param referenceCode
-     * @param levelCode
-     * @return
+     * @param reference
+     * @param level
+     * @return 
+     *      the collection of test regarding the reference and the level
      */
     List<Test> retrieveAllByReferenceAndLevel(Reference reference, Level level);
 

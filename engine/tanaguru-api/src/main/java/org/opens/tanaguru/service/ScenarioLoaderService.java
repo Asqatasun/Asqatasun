@@ -37,14 +37,14 @@ public interface ScenarioLoaderService {
     /**
      *
      * @param webResource
-     * @param fileMap
+     * @param scenarioFile
      * @return
      */
     List<Content> loadScenario(WebResource webResource, String scenarioFile);
 
     /**
      *
-     * @param contentLoaderFactory
+     * @param scenarioLoaderFactory
      */
     void setScenarioLoaderFactory(ScenarioLoaderFactory scenarioLoaderFactory);
 

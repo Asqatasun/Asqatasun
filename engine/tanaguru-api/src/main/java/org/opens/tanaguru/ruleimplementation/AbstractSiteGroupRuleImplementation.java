@@ -43,8 +43,10 @@ public abstract class AbstractSiteGroupRuleImplementation extends AbstractGroupR
 
     /**
      * 
-     * @param netResultList
-     * @return
+     * @param netResultSet
+     * @param processRemarkService
+     * @return 
+     *      the list of consolidated process results
      */
     protected abstract List<ProcessResult> consolidateSiteImpl(
             List<ProcessResult> netResultSet,

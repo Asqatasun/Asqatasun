@@ -38,7 +38,7 @@ public interface TestStatistics extends Entity, ResultCounter {
 
     /**
      *
-     * @param auditStatistics
+     * @param webResourceStatistics
      */
     void setWebResourceStatistics(WebResourceStatistics webResourceStatistics);
 

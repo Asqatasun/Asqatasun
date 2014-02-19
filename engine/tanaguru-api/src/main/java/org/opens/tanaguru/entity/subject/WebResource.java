@@ -103,7 +103,7 @@ public interface WebResource extends Entity {
 
     /**
      *
-     * @param mark
+     * @param rank
      *            the rank to set
      */
     void setRank(int rank);
