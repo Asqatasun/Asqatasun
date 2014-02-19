@@ -104,7 +104,7 @@ public class CriterionResultImpl implements CriterionResult{
 
     /**
      *
-     * @param testUrl
+     * @param criterionUrl
      */
     @Override
     public void setCriterionUrl(String criterionUrl) {

@@ -35,8 +35,8 @@ public class FailedThemeInfoImpl implements FailedThemeInfo{
 
     /**
      * Constructor
-     * @param testLabel
-     * @param pageCounter
+     * @param themeId
+     * @param resultCounter
      */
     public FailedThemeInfoImpl(Long themeId, Long resultCounter) {
         this.themeId = themeId;
@@ -57,7 +57,7 @@ public class FailedThemeInfoImpl implements FailedThemeInfo{
 
     /**
      *
-     * @param themeLabel
+     * @param themeId
      */
     @Override
     public void setThemeId(Long themeId) {
@@ -78,7 +78,7 @@ public class FailedThemeInfoImpl implements FailedThemeInfo{
 
     /**
      *
-     * @param idWebResource
+     * @param resultCounter
      */
     @Override
     public void setResultCounter(Long resultCounter) {

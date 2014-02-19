@@ -71,7 +71,7 @@ public class AuditStatisticsImpl implements AuditStatistics{
 
     /**
      *
-     * @param url
+     * @param snaphostUrl
      */
     @Override
     public void setSnapshotUrl(String snaphostUrl) {
@@ -93,7 +93,7 @@ public class AuditStatisticsImpl implements AuditStatistics{
 
     /**
      *
-     * @param mark
+     * @param rawMark
      */
     @Override
     public void setRawMark(String rawMark) {
@@ -115,7 +115,7 @@ public class AuditStatisticsImpl implements AuditStatistics{
 
     /**
      *
-     * @param mark
+     * @param weightedMark
      */
     @Override
     public void setWeightedMark(String weightedMark) {

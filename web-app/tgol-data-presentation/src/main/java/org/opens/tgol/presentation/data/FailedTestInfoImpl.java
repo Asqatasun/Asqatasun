@@ -101,7 +101,7 @@ public class FailedTestInfoImpl implements FailedTestInfo{
 
     /**
      *
-     * @param idWebResource
+     * @param pageCounter
      */
     @Override
     public void setPageCounter(Long pageCounter) {
