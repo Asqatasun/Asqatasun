@@ -20,19 +20,19 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         
         <engineGroupId>org.opens</engineGroupId>
-        <engineVersion>3.0.0</engineVersion>
+        <engineVersion>3.0.0-SNAPSHOT</engineVersion>
         
         <webappGroupId>org.opens</webappGroupId>
-        <webappVersion>3.0.0</webappVersion>
+        <webappVersion>3.0.0-SNAPSHOT</webappVersion>
         
         <testingToolsGroupId>org.opens</testingToolsGroupId>
-        <testingToolsVersion>3.0.0</testingToolsVersion>
+        <testingToolsVersion>3.0.0-SNAPSHOT</testingToolsVersion>
         
         <tanaguruCliGroupId>org.opens</tanaguruCliGroupId>
-        <tanaguruCliVersion>3.0.0</tanaguruCliVersion>
+        <tanaguruCliVersion>3.0.0-SNAPSHOT</tanaguruCliVersion>
         
         <rulesGroupId>org.opens</rulesGroupId>
-        <rulesVersion>1.0.0</rulesVersion>
+        <rulesVersion>1.0.0-SNAPSHOT</rulesVersion>
         
         <springGroupId>org.springframework</springGroupId>
         <springVersion>3.1.2.RELEASE</springVersion>
