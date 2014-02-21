@@ -32,7 +32,9 @@
 <c:set var="pageListScoreIEJsUrl" scope="request">
     <c:url value="/Js/ie/score/score-page-list-ie-min.js"/>
 </c:set>
-
+<c:set var="displaySnapshotJsUrl" scope="page">
+    <c:url value="/Js/snapshot/snapshot-min.js"/>
+</c:set>
 <html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="pageList.pageTitle">
@@ -145,6 +147,7 @@
         <script type="text/javascript" src="${scoreJsUrl}"></script>
         <script type="text/javascript" src="${pageListScoreJsUrl}"></script>
         <!--<![endif]-->
+        <script type="text/javascript" src="${displaySnapshotJsUrl}"></script>
     </body>
 </html>
 </compress:html>
