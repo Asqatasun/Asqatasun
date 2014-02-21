@@ -227,8 +227,7 @@ create_tables() {
 	cat 10-rules-resources-insert.sql                \
             accessiweb2.1-insert.sql               \
             accessiweb2.2-insert.sql               \
-            rgaa2.2-insert.sql               \
-            seo-10-insert.sql |              \
+            rgaa2.2-insert.sql |              \
 		mysql --user=${mysql_tg_user}            \
 		      --password=${mysql_tg_passwd}      \
                       ${mysql_tg_db} ||                  \

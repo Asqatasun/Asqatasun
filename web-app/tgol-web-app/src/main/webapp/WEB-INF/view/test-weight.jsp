@@ -108,7 +108,7 @@
                     </spring:hasBindErrors>
                         <c:set var="tableSummaryAndCaption">
                             <fmt:message key="test-weight.weightMngtTableCaption">
-                                <fmt:param>${param.seo}</fmt:param>   
+                                <fmt:param>${param.ref}</fmt:param>   
                             </fmt:message>
                         </c:set>
                         <table id="test-weight-mngt" class="tg-table">

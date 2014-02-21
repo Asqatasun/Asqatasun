@@ -138,24 +138,6 @@
                 <version>${rulesVersion}</version>
                 <scope>test</scope>
             </dependency>
-            <dependency>
-                <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-seo</artifactId>
-                <version>${rulesVersion}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-seo-i18n</artifactId>
-                <version>${rulesVersion}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-seo-testcases</artifactId>
-                <version>${rulesVersion}</version>
-                <scope>test</scope>
-            </dependency>
 
             <!-- tanaguru-engine dependencies -->
             <dependency>

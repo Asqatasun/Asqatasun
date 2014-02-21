@@ -102,37 +102,6 @@
         <property name="enabled" value="false"/>-->
     </bean>
 
-    <!-- Seo select elements -->
-    <bean id="seoBronzeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="Seo;Bz"/>
-        <property name="i18nKey" value="Bz"/>
-        <property name="errorI18nKey" value="Bz-error"/>
-        <property name="defaultCode" value="DEFAULT_LEVEL"/>
-        <!--    Default values
-        <property name="default" value="false"/>
-        <property name="enabled" value="false"/>-->
-    </bean>
-
-    <bean id="seoSilverSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="Seo;Ar"/>
-        <property name="i18nKey" value="Ar"/>
-        <property name="errorI18nKey" value="Ar-error"/>
-        <property name="defaultCode" value="DEFAULT_LEVEL"/>
-<!--    Default values
-        <property name="default" value="false"/>
-        <property name="enabled" value="false"/>-->
-    </bean>
-
-    <bean id="seoGoldSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="Seo;Or"/>
-        <property name="i18nKey" value="Or"/>
-        <property name="errorI18nKey" value="Or-error"/>
-        <property name="defaultCode" value="DEFAULT_LEVEL"/>
-<!--    Default values
-        <property name="default" value="false"/>
-        <property name="enabled" value="false"/>-->
-    </bean>
-
     <bean id="levelSelectFormFieldBuilder" class="org.opens.tgol.form.builder.SelectFormFieldBuilderImpl">
         <property name="i18nKey" value="level"/>
         <property name="errorI18nKey" value="level-error"/>
@@ -157,13 +126,6 @@
                         <ref local="rgaa22ASelectElementBuilder"/>
                         <ref local="rgaa22AASelectElementBuilder"/>
                         <ref local="rgaa22AAASelectElementBuilder"/>
-                    </list>
-                </entry>
-                <entry key="Seo">
-                    <list>
-                        <ref local="seoBronzeSelectElementBuilder"/>
-                        <ref local="seoSilverSelectElementBuilder"/>
-                        <ref local="seoGoldSelectElementBuilder"/>
                     </list>
                 </entry>
             </map>

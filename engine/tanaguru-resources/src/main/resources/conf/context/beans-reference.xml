@@ -22,7 +22,6 @@
                 <entry key="AW21" value="Bz"/>
                 <entry key="AW22" value="Bz"/>
                 <entry key="RGAA22" value="A"/>
-                <entry key="Seo" value="Bz"/>
             </map>
         </property>
         <property name="levelDAO" ref="levelDAO"/>

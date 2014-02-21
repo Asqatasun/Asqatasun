@@ -36,7 +36,6 @@
                 <value>i18n/theme-rgaa22-I18N</value>
                 <value>i18n/theme-aw22-I18N</value>
                 <value>i18n/theme-aw21-I18N</value>
-                <value>i18n/theme-seo-I18N</value>
             </list>
         </property>
         <property name="escapeHtml" value="false"/>
@@ -54,7 +53,6 @@
                 <value>i18n/rule-rgaa22-I18N</value>
                 <value>i18n/rule-aw22-I18N</value>
                 <value>i18n/rule-aw21-I18N</value>
-                <value>i18n/rule-seo-I18N</value>
             </list>
         </property>
         <property name="escapeHtml" value="false"/>
