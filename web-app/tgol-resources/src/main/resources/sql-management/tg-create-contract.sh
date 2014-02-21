@@ -29,9 +29,8 @@ if [ -z "$SiteLabel" ] || [ -z "$UserId" ] || [ -z "$Functs" ] || [ -z "$Refs" ]
         echo "     - f4 -> Scenario Audit "
         echo "  The \"r\" option represents the referential and can take several values from :"
         echo "     - r1 -> Accessiweb 2.1"
-        echo "     - r2 -> Seo "
-        echo "     - r3 -> RGAA 2.2.1 "
-        echo "     - r4 -> Accessiweb 2.2 "
+        echo "     - r2 -> RGAA 2.2.1 "
+        echo "     - r3 -> Accessiweb 2.2 "
         echo "  The \"m\" option represents max authorized document when the site audit functionality is activated"
 	exit 0
 fi
@@ -51,15 +50,11 @@ for ref in $Refs;do
    fi
    if [ $ref = "r2" ];
      then 
-        ref2=2;
+        ref2=3;
    fi
    if [ $ref = "r3" ];
      then 
-        ref3=3;
-   fi
-   if [ $ref = "r4" ];
-     then 
-        ref4=4;
+        ref3=4;
    fi
 done
 

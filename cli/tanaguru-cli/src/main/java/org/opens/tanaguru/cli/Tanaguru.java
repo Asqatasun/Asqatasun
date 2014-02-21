@@ -71,7 +71,6 @@ public class Tanaguru implements AuditServiceListener {
     private static final String AW21_REF = "AW21";
     private static final String AW22_REF = "AW22";
     private static final String RGAA22_REF = "RGAA22";
-    private static final String SEO_REF = "Seo";
     private static String REF = AW22_REF;
     
     private static final String BRONZE_LEVEL = "Bz";
@@ -405,8 +404,7 @@ public class Tanaguru implements AuditServiceListener {
                              .withDescription("Referential : \n"
                 + "- \"AW22\" for Accessiweb 2.2 (default)\n"
                 + "- \"AW21\" for Accessiweb 2.1 \n"
-                + "- \"RGA22\" for Rgaa 2.2\n"
-                + "- \"Seo\" for Seo")
+                + "- \"RGA22\" for Rgaa 2.2\n")
                              .hasArg()
                              .isRequired(false)
                              .create("r"));
@@ -471,8 +469,7 @@ public class Tanaguru implements AuditServiceListener {
     private static boolean isValidReferential(String ref) {
         if (StringUtils.equals(ref, AW21_REF) || 
                 StringUtils.equals(ref, AW21_REF) ||
-                StringUtils.equals(ref, RGAA22_REF) ||
-                StringUtils.equals(ref, SEO_REF) ) {
+                StringUtils.equals(ref, RGAA22_REF) ) {
             return true;
         }
         System.out.println("\nThe referential \"" + ref + "\" doesn't exist.\n");

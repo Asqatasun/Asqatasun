@@ -34,12 +34,6 @@
                 <value>i18n/rule-rgaa22-I18N</value>
                 <value>i18n/rule-remark-rgaa22-I18N</value>
                 
-                <!--seo2.2 i18n files -->
-                <value>i18n/referential-seo-I18N</value>
-                <value>i18n/theme-seo-I18N</value>
-                <value>i18n/criterion-seo-I18N</value>
-                <value>i18n/rule-seo-I18N</value>
-                
                 <!--rules-commons i18n files -->
                 <value>i18n/evidence-elements-I18N</value>
                 <value>i18n/rule-remark-I18N</value>

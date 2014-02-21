@@ -22,8 +22,8 @@
 
 package org.opens.tgol.presentation.menu;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import org.opens.tgol.entity.contract.Contract;
@@ -42,7 +42,7 @@ import org.springframework.ui.Model;
  */
 public class SecondaryLevelMenuDisplayer {
 
-    List<String> referentialWithModifiableTestWeight = new ArrayList<String>();
+    List<String> referentialWithModifiableTestWeight = Collections.EMPTY_LIST;
     public void setReferentialWithModifiableTestWeight(
             List<String> referentialWithModifiableTestWeight) {
         this.referentialWithModifiableTestWeight = referentialWithModifiableTestWeight;

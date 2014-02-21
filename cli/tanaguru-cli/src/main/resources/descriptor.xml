@@ -103,15 +103,6 @@
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>${basedir}/../../rules/seo-resources/src/main/resources/sql</directory>
-            <includes>
-                <include>seo-10-insert.sql</include>
-                <include>seo-10-insert.psql</include>
-            </includes>
-            <fileMode>755</fileMode>
-            <outputDirectory>/install/rules/sql</outputDirectory>
-        </fileSet>
-        <fileSet>
             <directory>${basedir}/../../engine/tanaguru-resources/src/main/resources/sql-update</directory>
             <includes>
                 <include>**/*</include>
