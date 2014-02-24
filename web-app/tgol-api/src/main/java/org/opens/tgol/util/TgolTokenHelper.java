@@ -91,9 +91,8 @@ public final class TgolTokenHelper {
      * @return
      */
     public String getTokenUser(User user) {
-        CryptoToken cryptoToken = null;
         try {
-            cryptoToken = new CryptoToken();
+            CryptoToken cryptoToken = new CryptoToken();
             cryptoToken.setUserAccountName(user.getEmail1());
             cryptoToken.setExpiration(tokenDurationValidity);
             String token = cryptoToken.getToken();
