@@ -34,7 +34,7 @@
         </property>
         <property name="arguments">
             <list>
-                <value>/etc/tgol</value>
+                <value>/etc/tanaguru</value>
             </list>
         </property>
     </bean>
