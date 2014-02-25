@@ -237,17 +237,17 @@ public class AuditLauncherController extends AuditDataHandlerController {
         } else {
             // before launching the audit, we check whether any restriction on the
             //contract forbids it.
-            String checkResult = restrictionHandler.checkRestriction(contract, getClientIpAddress());
+            ScopeEnum scope = auditSetUpCommand.getScope();
+            String checkResult = restrictionHandler.checkRestriction(contract, getClientIpAddress(), scope);
             if (!checkResult.equalsIgnoreCase(TgolKeyStore.ACT_ALLOWED)) {
                 return checkResult;
             }
-            ScopeEnum auditScope = auditSetUpCommand.getScope();
-            if (auditScope.equals(ScopeEnum.PAGE) ||
-                    auditScope.equals(ScopeEnum.FILE)) {
-                return preparePageAudit(auditSetUpCommand, contract, locale, auditScope,model);
+            if (scope.equals(ScopeEnum.PAGE) ||
+                    scope.equals(ScopeEnum.FILE)) {
+                return preparePageAudit(auditSetUpCommand, contract, locale, scope,model);
             }
             String url = getContractDataService().getUrlFromContractOption(contract);
-            if (auditScope.equals(ScopeEnum.DOMAIN)) {
+            if (scope.equals(ScopeEnum.DOMAIN)) {
                 tanaguruExecutor.auditSite(
                     contract,
                     url,
@@ -256,7 +256,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
                     locale
                     );
                 model.addAttribute(TgolKeyStore.TESTED_URL_KEY, url);
-            } else if (auditScope.equals(ScopeEnum.SCENARIO)) {
+            } else if (scope.equals(ScopeEnum.SCENARIO)) {
                 tanaguruExecutor.auditScenario(
                     contract,
                     auditSetUpCommand.getScenarioId(),

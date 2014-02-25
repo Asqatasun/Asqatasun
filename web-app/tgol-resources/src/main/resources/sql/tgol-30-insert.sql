@@ -43,7 +43,11 @@ The period is expressed in seconds and the format is \"nb_of_acts/period\"', b'1
 (7, 'EXCLUSION_REGEXP', 'This restriction applies an exclusion rule on crawled Urls', b'1', 1),
 (8, 'ACT_LIFETIME','This restriction determines the lifetime of each associated with the contract', b'1', 3),
 (9, 'NB_OF_AUDIT_TO_DISPLAY','This restriction determines the number of audit results that can be displayed on the contract page', b'1', 4), 
-(10,'DOMAIN', 'Domain associated with a contract', b'1', 4);
+(10,'DOMAIN', 'Domain associated with a contract', b'1', 4), 
+(11, 'PAGES_ACT_LIMITATION', 'The number of authorized acts of pages scope', b'1', 2),
+(12, 'DOMAIN_ACT_LIMITATION', 'The number of authorized acts of domain scope', b'1', 2),
+(13, 'UPLOAD_ACT_LIMITATION', 'The number of authorized acts of upload scope', b'1', 2),
+(14, 'SCENARIO_ACT_LIMITATION', 'The number of authorized acts of scenario scope', b'1', 2);
 
 INSERT IGNORE INTO `TGSI_OPTION_ELEMENT` (`Id_Option_Element`,`OPTION_Id_Option`, `Value`) VALUES
 (1, 1, '5'),

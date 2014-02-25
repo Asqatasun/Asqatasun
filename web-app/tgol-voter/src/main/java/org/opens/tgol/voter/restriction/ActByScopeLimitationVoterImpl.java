@@ -21,6 +21,8 @@
  */
 package org.opens.tgol.voter.restriction;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.contract.ScopeEnum;
 import org.opens.tgol.entity.option.OptionElement;
@@ -32,8 +34,15 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author jkowalczyk
  */
-public class ActLimitationVoterImpl implements RestrictionVoter {
+public class ActByScopeLimitationVoterImpl implements RestrictionVoter {
 
+    private Collection<ScopeEnum> scopes = new ArrayList<ScopeEnum>();
+    public void setScopes(Collection<String> scopes) {
+        for (String scope : scopes) {
+            this.scopes.add(ScopeEnum.valueOf(scope));
+        }
+    }
+    
     private ActDataService actDataService;
 
     @Autowired
@@ -47,9 +56,11 @@ public class ActLimitationVoterImpl implements RestrictionVoter {
             OptionElement optionElement, 
             String clientIp, 
             ScopeEnum scope) {
-        
+        if (!scopes.contains(scope)) {
+            return TgolKeyStore.ACT_ALLOWED;
+        }
         int nbOfAct = Integer.valueOf(optionElement.getValue());
-        if (nbOfAct <= actDataService.getNumberOfAct(contract)) {
+        if (nbOfAct <= actDataService.getNumberOfActByScope(contract, scopes)) {
             return TgolKeyStore.ACT_QUOTA_EXCEEDED;
         }
         return TgolKeyStore.ACT_ALLOWED;

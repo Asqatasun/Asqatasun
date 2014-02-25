@@ -60,12 +60,10 @@ public class CreateContractCommandFactory  implements Serializable {
     
     public void setOptionDataService (OptionDataService optionDataService) {
         for (Option option : optionDataService.findAll()) {
-            if (optionNameList.contains(option.getCode())){
-                if (option.getCode().equals(DOMAIN_OPTION_CODE)){
-                    contractUrlOption = option;
-                } else {
-                    optionList.add(option);    
-                }
+            if (option.getCode().equals(DOMAIN_OPTION_CODE)){
+                contractUrlOption = option;
+            } else {
+                optionList.add(option);    
             }
         }
     }
@@ -75,11 +73,6 @@ public class CreateContractCommandFactory  implements Serializable {
         this.optionElementDataService = optionElementDataService;
     }
 
-    private Collection<String> optionNameList;
-    public void setOptionNameList (Collection<String> optionNameList) {
-        this.optionNameList = optionNameList;
-    }
-    
     /**
      * Factory has default constructor
      */

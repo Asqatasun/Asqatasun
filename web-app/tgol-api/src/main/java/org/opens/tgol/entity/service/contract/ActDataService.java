@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -42,6 +42,15 @@ public interface ActDataService extends GenericDataService<Act, Long> {
      *      the total number of acts for a given contract
      */
     int getNumberOfAct(Contract contract);
+    /**
+     *
+     * @param contract
+     * @param scopes
+     * @return
+     *      the total number of acts for a given contract and scopes
+     */
+    int getNumberOfActByScope(Contract contract, Collection<ScopeEnum> scopes);
+    
     /**
      *
      * @param contract

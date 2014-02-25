@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -24,6 +24,7 @@ package org.opens.tgol.voter.restriction;
 import java.util.Map;
 import java.util.Set;
 import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.entity.contract.ScopeEnum;
 import org.opens.tgol.entity.option.OptionElement;
 import org.opens.tgol.util.TgolKeyStore;
 
@@ -40,7 +41,7 @@ public class RestrictionHandlerImpl implements RestrictionHandler {
     }
 
     @Override
-    public synchronized String checkRestriction(Contract contract, String clientIp) {
+    public synchronized String checkRestriction(Contract contract, String clientIp, ScopeEnum scope) {
         String decision = TgolKeyStore.ACT_ALLOWED;
         Set<OptionElement> optionElementSet = (Set<OptionElement>) contract.getOptionElementSet();
         if (optionElementSet.isEmpty()) {
@@ -49,7 +50,7 @@ public class RestrictionHandlerImpl implements RestrictionHandler {
         for (OptionElement optionElement : optionElementSet) {
             RestrictionVoter restrictionVoter = chooseRestrictionVoter(optionElement);
             if (restrictionVoter != null) {
-                decision = restrictionVoter.checkRestriction(contract, optionElement, clientIp);
+                decision = restrictionVoter.checkRestriction(contract, optionElement, clientIp, scope);
             }
             if (!decision.equalsIgnoreCase(TgolKeyStore.ACT_ALLOWED)) {
                 break;

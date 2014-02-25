@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,7 +21,9 @@
  */
 package org.opens.tgol.voter.restriction;
 
+import javax.annotation.Nullable;
 import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.entity.contract.ScopeEnum;
 
 /**
  * This interface handles the restriction context to decide if an action can
@@ -35,8 +37,13 @@ public interface RestrictionHandler {
      * 
      * @param contract
      * @param clientIp
+     * @param scope
      * @return
+     *      A string representing the result of the check
      */
-    String checkRestriction (Contract contract, String clientIp);
+    String checkRestriction (
+            Contract contract, 
+            String clientIp, 
+            @Nullable ScopeEnum scope);
 
 }
