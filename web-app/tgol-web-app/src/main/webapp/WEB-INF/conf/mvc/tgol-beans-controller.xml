@@ -337,6 +337,10 @@
                 <entry key="general-options">
                     <list>
                         <ref bean="nbMaxAuditsPerContractOptionBuilder"/>
+                        <ref bean="nbMaxPagesAuditsPerContractOptionBuilder"/>
+                        <ref bean="nbMaxDomainAuditsPerContractOptionBuilder"/>
+                        <ref bean="nbMaxUploadAuditsPerContractOptionBuilder"/>
+                        <ref bean="nbMaxScenarioAuditsPerContractOptionBuilder"/>
                         <ref bean="nbMaxActsToDisplayPerContractOptionBuilder"/>
                     </list>
                 </entry>
@@ -368,6 +372,10 @@
                 <entry key="general-options">
                     <list>
                         <ref bean="nbMaxAuditsPerContractOptionBuilder"/>
+                        <ref bean="nbMaxPagesAuditsPerContractOptionBuilder"/>
+                        <ref bean="nbMaxDomainAuditsPerContractOptionBuilder"/>
+                        <ref bean="nbMaxUploadAuditsPerContractOptionBuilder"/>
+                        <ref bean="nbMaxScenarioAuditsPerContractOptionBuilder"/>
                         <ref bean="nbMaxActsToDisplayPerContractOptionBuilder"/>
                     </list>
                 </entry>

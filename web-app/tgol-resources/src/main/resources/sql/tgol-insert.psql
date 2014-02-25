@@ -49,7 +49,11 @@ INSERT INTO "tgsi_option" VALUES
 (7,'EXCLUSION_REGEXP',NULL,'This restriction applies an exclusion rule on crawled urls',TRUE,1),
 (8,'ACT_LIFETIME',NULL,'This restriction determines the lifetime of each associated with the contract',TRUE,3),
 (9,'NB_OF_AUDIT_TO_DISPLAY',NULL,'This restriction determines the number of audit results that can be displayed on the contract page',TRUE,4),
-(10,'DOMAIN',NULL,'Domain associated with a contract',TRUE,4);
+(10,'DOMAIN',NULL,'Domain associated with a contract',TRUE,4),
+(11,'PAGES_ACT_LIMITATION',NULL,'The number of authorized acts of pages scope', TRUE, 2),
+(12,'DOMAIN_ACT_LIMITATION',NULL,'The number of authorized acts of domain scope', TRUE, 2),
+(13,'UPLOAD_ACT_LIMITATION',NULL,'The number of authorized acts of upload scope', TRUE, 2),
+(14,'SCENARIO_ACT_LIMITATION',NULL,'The number of authorized acts of scenario scope', TRUE, 2);
 
 
 INSERT INTO "tgsi_option_element" VALUES 
