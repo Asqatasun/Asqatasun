@@ -19,10 +19,6 @@
         </dependency>
         <dependency>
             <groupId>${webappGroupId}</groupId>
-            <artifactId>tgol-email-sender</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${webappGroupId}</groupId>
             <artifactId>tgol-persistence</artifactId>
         </dependency>
         <dependency>
