@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -19,13 +19,13 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.util;
+package org.opens.security.tokenmanagement;
 
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.opens.tgol.entity.user.User;
 import org.owasp.esapi.crypto.CryptoToken;
 import org.owasp.esapi.errors.EncryptionException;
 import org.owasp.esapi.errors.ValidationException;
@@ -34,7 +34,7 @@ import org.owasp.esapi.errors.ValidationException;
  *
  * @author jkowalczyk
  */
-public final class TgolTokenHelper {
+public final class TokenManager {
 
     private String esapiPropertyName = null;
     public void setEsapiPropertyName(String esapiPropertyName) {
@@ -56,25 +56,9 @@ public final class TgolTokenHelper {
     private Map<String, Boolean> tokenUsage = new HashMap<String, Boolean>();
     
     /**
-     * The unique instance of TgolTokenHelper
+     * Default constructor
      */
-    private static TgolTokenHelper tokenHelper = null;
-
-    /**
-     * Private constructor
-     */
-    private TgolTokenHelper() {}
-
-    /**
-     *
-     * @return
-     */
-    public static synchronized TgolTokenHelper getInstance() {
-        if (tokenHelper == null) {
-            tokenHelper = new TgolTokenHelper();
-        }
-        return tokenHelper;
-    }
+    public TokenManager() {}
 
     /**
      *
@@ -90,10 +74,10 @@ public final class TgolTokenHelper {
      * @param user
      * @return
      */
-    public String getTokenUser(User user) {
+    public String getTokenUser(String userAccountName) {
         try {
             CryptoToken cryptoToken = new CryptoToken();
-            cryptoToken.setUserAccountName(user.getEmail1());
+            cryptoToken.setUserAccountName(userAccountName);
             cryptoToken.setExpiration(tokenDurationValidity);
             String token = cryptoToken.getToken();
             tokenUsage.put(token, Boolean.FALSE);
@@ -113,40 +97,39 @@ public final class TgolTokenHelper {
      * @param token
      * @return
      */
-    public boolean checkUserToken(User user, String token) {
-        CryptoToken cryptoToken = null;
+    public boolean checkUserToken(String userAccountName, String token) {
         try {
-            cryptoToken = new CryptoToken(token);
+            CryptoToken cryptoToken = new CryptoToken(token);
+            if (StringUtils.isBlank(userAccountName)) {
+                Logger.getLogger(this.getClass()).info("user == null");
+                return false;
+            }
+            if (!StringUtils.equalsIgnoreCase(userAccountName, cryptoToken.getUserAccountName())) {
+                Logger.getLogger(this.getClass()).info(
+                        "!user.getEmail1().equalsIgnoreCase(cryptoToken.getUserAccountName() " 
+                        + userAccountName
+                        + " " 
+                        + cryptoToken.getUserAccountName());
+                return false;
+            }
+            if (Calendar.getInstance().getTime().after(cryptoToken.getExpirationDate())) {
+                Logger.getLogger(this.getClass()).info(
+                        "Calendar.getInstance().getTime().after(cryptoToken.getExpirationDate() " 
+                        + cryptoToken.getExpirationDate());
+                return false;
+            }
+            if (!tokenUsage.containsKey(token) || 
+                tokenUsage.get(token).booleanValue()) {
+                Logger.getLogger(this.getClass()).info(
+                        "!tokenUsage.containsKey(token) || "
+                        + " tokenUsage.get(token).booleanValue() " );
+                return false;
+            }
+            return true;
         } catch (EncryptionException ex) {
             Logger.getLogger(this.getClass()).warn(ex);
             return false;
         }
-        if (user == null) {
-            Logger.getLogger(this.getClass()).info("user == null");
-            return false;
-        }
-        if (!user.getEmail1().equalsIgnoreCase(cryptoToken.getUserAccountName())) {
-            Logger.getLogger(this.getClass()).info(
-                    "!user.getEmail1().equalsIgnoreCase(cryptoToken.getUserAccountName() " 
-                    + user.getEmail1() 
-                    + " " 
-                    + cryptoToken.getUserAccountName());
-            return false;
-        }
-        if (Calendar.getInstance().getTime().after(cryptoToken.getExpirationDate())) {
-            Logger.getLogger(this.getClass()).info(
-                    "Calendar.getInstance().getTime().after(cryptoToken.getExpirationDate() " 
-                    + cryptoToken.getExpirationDate());
-            return false;
-        }
-        if (!tokenUsage.containsKey(token) || 
-            tokenUsage.get(token).booleanValue()) {
-            Logger.getLogger(this.getClass()).info(
-                    "!tokenUsage.containsKey(token) || "
-                    + " tokenUsage.get(token).booleanValue() " );
-            return false;
-        }
-        return true;
     }
     
     public void setTokenUsed(String token) {

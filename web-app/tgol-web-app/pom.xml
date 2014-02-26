@@ -41,6 +41,10 @@
             <groupId>${webappGroupId}</groupId>
             <artifactId>tgol-resources</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${webappGroupId}</groupId>
+            <artifactId>security</artifactId>
+        </dependency>
         <!-- tanaguru dependencies-->
         <dependency>
             <groupId>${engineGroupId}</groupId>

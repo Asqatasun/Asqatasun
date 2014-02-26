@@ -10,11 +10,11 @@
     <name>tanaguru</name>
     <url>http://www.tanaguru.org</url>
     <modules>
-<!--        <module>engine</module>
+        <module>engine</module>
         <module>testing-tools</module>
-        <module>rules</module>-->
+        <module>rules</module>
         <module>web-app</module>
-<!--        <module>cli</module>-->
+        <module>cli</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -329,6 +329,21 @@
             <dependency>
                 <groupId>${webappGroupId}</groupId>
                 <artifactId>email-sender</artifactId>
+                <version>${webappVersion}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.commons</groupId>
+                        <artifactId>commons-lang3</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>${log4jGroupId}</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>${webappGroupId}</groupId>
+                <artifactId>security</artifactId>
                 <version>${webappVersion}</version>
                 <exclusions>
                     <exclusion>

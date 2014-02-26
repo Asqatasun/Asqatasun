@@ -79,3 +79,4 @@ org.eclipse.m2e.core.prefs
 /ws/tanaguru-ws/target/
 /testing-tools/tgol-test-krash-online-site/target/
 /testing-tools/tgol-test-krash-online-site/nbactions.xml
+/web-app/security/target/

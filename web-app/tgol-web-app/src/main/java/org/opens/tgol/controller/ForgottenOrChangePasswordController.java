@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.emailsender.EmailSender;
+import org.opens.security.tokenmanagement.TokenManager;
 import org.opens.tanaguru.util.MD5Encoder;
 import org.opens.tgol.command.ChangePasswordCommand;
 import org.opens.tgol.command.ForgottenPasswordCommand;
@@ -37,7 +38,6 @@ import org.opens.tgol.exception.ForbiddenPageException;
 import org.opens.tgol.exception.ForbiddenUserException;
 import org.opens.tgol.presentation.menu.SecondaryLevelMenuDisplayer;
 import org.opens.tgol.util.TgolKeyStore;
-import org.opens.tgol.util.TgolTokenHelper;
 import org.opens.tgol.util.webapp.ExposablePropertyPlaceholderConfigurer;
 import org.opens.tgol.validator.ChangePasswordFormValidator;
 import org.opens.tgol.validator.ForgottenPasswordFormValidator;
@@ -108,6 +108,12 @@ public class ForgottenOrChangePasswordController extends AbstractController {
     @Autowired
     public void setSecondaryLevelMenuDisplayer(SecondaryLevelMenuDisplayer secondaryLevelMenuDisplayer) {
         this.secondaryLevelMenuDisplayer = secondaryLevelMenuDisplayer;
+    }
+    
+    private TokenManager tokenManager;
+    @Autowired
+    public void setTokenManager(TokenManager tokenManager) {
+        this.tokenManager = tokenManager;
     }
     
     public ForgottenOrChangePasswordController() {
@@ -197,7 +203,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
             user = getUserDataService().read(userId);
             try {
                 // if the token is invalid
-                if (!TgolTokenHelper.getInstance().checkUserToken(user, token)) {
+                if (!tokenManager.checkUserToken(user.getEmail1(), token)) {
                     model.addAttribute(TgolKeyStore.INVALID_CHANGE_PASSWORD_URL_KEY, true);
                     return TgolKeyStore.CHANGE_PASSWORD_VIEW_NAME;
                 } else {
@@ -206,7 +212,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
                     Object passwordModified = model.asMap().get(TgolKeyStore.PASSWORD_MODIFIED_KEY);
                     if (passwordModified instanceof Boolean &&
                             (Boolean)passwordModified) {
-                        TgolTokenHelper.getInstance().setTokenUsed(token);
+                        tokenManager.setTokenUsed(token);
                         return TgolKeyStore.CHANGE_PASSWORD_VIEW_NAME;
                     }
                 }
@@ -442,7 +448,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
         sb.append(user.getId());
         sb.append("&token=");
         try {
-            sb.append(URLEncoder.encode(TgolTokenHelper.getInstance().getTokenUser(user), "UTF-8"));
+            sb.append(URLEncoder.encode(tokenManager.getTokenUser(user.getEmail1()), "UTF-8"));
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(this.getClass()).warn(ex);
         }

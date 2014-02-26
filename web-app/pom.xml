@@ -11,6 +11,7 @@
     <name>web-app</name>
     <modules>
         <module>email-sender</module>
+        <module>security</module>
         <module>tgol-resources</module>
         <module>tgol-api</module>
         <module>tgol-persistence</module>
