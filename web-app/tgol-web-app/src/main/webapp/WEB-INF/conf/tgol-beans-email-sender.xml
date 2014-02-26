@@ -10,7 +10,7 @@
            http://www.springframework.org/schema/util
            http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-	<bean id="emailSender" class="org.opens.tgol.emailsender.EmailSenderImpl">
+	<bean id="emailSender" class="org.opens.emailsender.EmailSender">
 		<!-- Uncomment the following lines if you need a specific SMTP configuration. 
 			Values are taken from tanaguru.conf configuration file. -->
 		<!-- <property name="smtpHost" value="${smtp.host}" /> -->

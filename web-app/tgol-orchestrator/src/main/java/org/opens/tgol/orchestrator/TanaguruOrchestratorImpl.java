@@ -37,7 +37,7 @@ import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.service.AuditService;
 import org.opens.tanaguru.service.AuditServiceListener;
-import org.opens.tgol.emailsender.EmailSender;
+import org.opens.emailsender.EmailSender;
 import org.opens.tgol.entity.contract.*;
 import org.opens.tgol.entity.factory.contract.ActFactory;
 import org.opens.tgol.entity.scenario.Scenario;
