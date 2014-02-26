@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -60,21 +60,19 @@ public class LanguageDetector {
      * The holder that handles the unique instance of LanguageDetector
      */
     private static class LanguageDetectorHolder {
-        public static LanguageDetector INSTANCE = new LanguageDetector();
+        private static final LanguageDetector INSTANCE = new LanguageDetector();
     }
-
+    
     /**
      * Private constructor
      */
     private LanguageDetector() {
-        if (LanguageDetectorHolder.INSTANCE != null) {
-            throw new IllegalStateException("Already instantiated");
-        }
         initProfiles();
     }
-
+    
     /**
-     *
+     * Singleton pattern based on the "Initialization-on-demand 
+     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
      * @return the unique instance of LanguageDetector
      */
     public static LanguageDetector getInstance() {

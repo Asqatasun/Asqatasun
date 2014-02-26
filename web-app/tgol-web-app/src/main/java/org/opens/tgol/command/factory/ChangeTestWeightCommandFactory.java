@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -40,8 +40,6 @@ import org.opens.tgol.entity.user.User;
  */
 public class ChangeTestWeightCommandFactory  implements Serializable {
 
-    private static ChangeTestWeightCommandFactory changeTestWeightCommandFactory;
-    
     private String optionFamilyCodeStr = "TEST_WEIGHT_MANAGEMENT";
     public void setOptionFamilyCodeStr(String optionFamilyCodeStr) {
         this.optionFamilyCodeStr = optionFamilyCodeStr;
@@ -75,16 +73,25 @@ public class ChangeTestWeightCommandFactory  implements Serializable {
     }
     
     /**
-     * Factory has default constructor
+     * The holder that handles the unique instance of ChangeTestWeightCommandFactory
      */
-    private ChangeTestWeightCommandFactory() {
+    private static class ChangeTestWeightCommandFactoryHolder {
+        private static final ChangeTestWeightCommandFactory INSTANCE = 
+                new ChangeTestWeightCommandFactory();
     }
-
-    public static synchronized ChangeTestWeightCommandFactory getInstance() {
-        if (changeTestWeightCommandFactory == null) {
-            changeTestWeightCommandFactory = new ChangeTestWeightCommandFactory();
-        }
-        return changeTestWeightCommandFactory;
+    
+    /**
+     * Private constructor
+     */
+    private ChangeTestWeightCommandFactory() {}
+    
+    /**
+     * Singleton pattern based on the "Initialization-on-demand 
+     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
+     * @return the unique instance of ChangeTestWeightCommandFactory
+     */
+    public static ChangeTestWeightCommandFactory getInstance() {
+        return ChangeTestWeightCommandFactoryHolder.INSTANCE;
     }
 
     /**

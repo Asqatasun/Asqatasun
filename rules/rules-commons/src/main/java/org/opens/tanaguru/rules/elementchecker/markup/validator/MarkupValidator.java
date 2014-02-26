@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ *  Copyright (C) 2008-2014  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -37,24 +37,21 @@ public final class MarkupValidator {
      * The holder that handles the unique instance of MarkupValidator
      */
     private static class MarkupValidatorHolder {
-        public static MarkupValidator INSTANCE = new MarkupValidator();
+        private static final MarkupValidator INSTANCE = new MarkupValidator();
     }
-
+    
     /**
      * Private constructor
      */
-    private MarkupValidator() {
-        if (MarkupValidator.MarkupValidatorHolder.INSTANCE != null) {
-            throw new IllegalStateException("Already instantiated");
-        }
-    }
-
+    private MarkupValidator() {}
+    
     /**
-     *
+     * Singleton pattern based on the "Initialization-on-demand 
+     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
      * @return the unique instance of MarkupValidator
      */
     public static MarkupValidator getInstance() {
-        return MarkupValidator.MarkupValidatorHolder.INSTANCE;
+        return MarkupValidatorHolder.INSTANCE;
     }
     
 //    /**

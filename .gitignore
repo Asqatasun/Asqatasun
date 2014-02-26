@@ -70,6 +70,8 @@ web-app/tgol-security/target/
 web-app/tgol-si/target/
 web-app/tgol-voter/target/
 web-app/tgol-web-app/target/
+web-app/security/target/
+web-app/email-sender/target/
 .project
 .classpath
 .settings

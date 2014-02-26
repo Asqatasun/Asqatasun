@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2014  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -53,13 +53,6 @@ public class HttpRequestHandler {
     private static final String TANAGURU_USER_AGENT = "tanaguru";
     private static final Logger LOGGER  = Logger.getLogger(HttpRequestHandler.class);
 
-    /**
-     * The holder that handles the unique instance of LanguageDetector
-     */
-    private static class HttpRequestHandlerHolder {
-        public static HttpRequestHandler INSTANCE = new HttpRequestHandler();
-    }
-    
     private String proxyPort;
     public void setProxyPort(String proxyPort) {
         this.proxyPort = proxyPort;
@@ -93,18 +86,31 @@ public class HttpRequestHandler {
     }
     
     /**
-     * Private constructor, singleton pattern
+     * The holder that handles the unique instance of HttpRequestHandler
      */
-    private HttpRequestHandler() {
-        if (HttpRequestHandlerHolder.INSTANCE != null) {
-            throw new IllegalStateException("Already instantiated");
-        }
+    private static class HttpRequestHandlerHolder {
+        private static final HttpRequestHandler INSTANCE = new HttpRequestHandler();
     }
     
-    public static synchronized HttpRequestHandler getInstance() {
+    /**
+     * Private constructor
+     */
+    private HttpRequestHandler() {}
+    
+    /**
+     * Singleton pattern based on the "Initialization-on-demand 
+     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
+     * @return the unique instance of HttpRequestHandler
+     */
+    public static HttpRequestHandler getInstance() {
         return HttpRequestHandlerHolder.INSTANCE;
     }
 
+    /**
+     * 
+     * @param url
+     * @return whether the given Url is accessible or not
+     */
     public boolean isUrlAccessible (String url) {
         int statusFromHead = computeStatus(getHttpStatus(url));
         switch (statusFromHead) {

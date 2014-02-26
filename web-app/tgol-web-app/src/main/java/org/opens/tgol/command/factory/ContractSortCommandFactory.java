@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -36,18 +36,26 @@ import org.opens.tgol.form.TextualFormField;
  */
 public final class ContractSortCommandFactory {
 
-    private static ContractSortCommandFactory contractDisplayCommandFactory;
-
     /**
-     * Factory has default constructor
+     * The holder that handles the unique instance of ContractSortCommandFactory
      */
-    private ContractSortCommandFactory(){}
-
-    public static synchronized ContractSortCommandFactory getInstance() {
-        if (contractDisplayCommandFactory == null) {
-            contractDisplayCommandFactory = new ContractSortCommandFactory();
-        }
-        return contractDisplayCommandFactory;
+    private static class ContractSortCommandFactoryHolder {
+        private static final ContractSortCommandFactory INSTANCE = 
+                new ContractSortCommandFactory();
+    }
+    
+    /**
+     * Private constructor
+     */
+    private ContractSortCommandFactory() {}
+    
+    /**
+     * Singleton pattern based on the "Initialization-on-demand 
+     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
+     * @return the unique instance of ContractSortCommandFactory
+     */
+    public static ContractSortCommandFactory getInstance() {
+        return ContractSortCommandFactoryHolder.INSTANCE;
     }
     
     /**

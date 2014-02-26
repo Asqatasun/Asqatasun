@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ *  Copyright (C) 2008-2014  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -37,8 +37,6 @@ import org.openqa.selenium.firefox.FirefoxProfile;
  */
 public final class ProfileFactory {
 
-    private static ProfileFactory profileFactory;
-    
     private List<String> extensionPathList = new ArrayList<String>();
     public void setExtensionPathList(List<String> extensionPathList) {
         this.extensionPathList.addAll(extensionPathList);
@@ -82,15 +80,24 @@ public final class ProfileFactory {
             new HashMap<FirefoxProfile, String>();
     
     /**
-     * Default private constructor
+     * The holder that handles the unique instance of ProfileFactory
      */
-    private ProfileFactory() {};
+    private static class ProfileFactoryHolder {
+        private static final ProfileFactory INSTANCE = new ProfileFactory();
+    }
     
-    public static synchronized ProfileFactory getInstance() {
-        if (profileFactory == null) {
-            profileFactory = new ProfileFactory();
-        }
-        return profileFactory;
+    /**
+     * Private constructor
+     */
+    private ProfileFactory() {}
+    
+    /**
+     * Singleton pattern based on the "Initialization-on-demand 
+     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
+     * @return the unique instance of ProfileFactory
+     */
+    public static ProfileFactory getInstance() {
+        return ProfileFactoryHolder.INSTANCE;
     }
     
     /**
@@ -141,7 +148,7 @@ public final class ProfileFactory {
                 FileDeleteStrategy.FORCE.delete(new File(netExportPathMap.get(firefoxProfile)));
             }
         } catch (IOException ex) {
-            Logger.getLogger(profileFactory.getClass()).error(ex);
+            Logger.getLogger(this.getClass()).error(ex);
         }
         netExportPathMap.remove(firefoxProfile);
     }
@@ -189,7 +196,7 @@ public final class ProfileFactory {
             try {
                 firefoxProfile.addExtension(new File(extensionPath));
             } catch (IOException ex) {
-                Logger.getLogger(profileFactory.getClass()).error(ex);
+                Logger.getLogger(this.getClass()).error(ex);
             }
         }
                 

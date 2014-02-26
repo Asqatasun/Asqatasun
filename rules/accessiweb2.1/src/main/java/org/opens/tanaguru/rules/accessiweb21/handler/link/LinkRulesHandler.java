@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2012  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -20,7 +20,6 @@
 package org.opens.tanaguru.rules.accessiweb21.handler.link;
 
 import java.util.*;
-import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -119,7 +118,6 @@ public final class LinkRulesHandler {
     /**
      * The unique instance of LinkRulesHandler (singleton pattern)
      */
-//    private static LinkRulesHandler linkRulesHandler;
 
     private int elementCounter = 0;
     public int getElementCounter() {
@@ -185,17 +183,6 @@ public final class LinkRulesHandler {
      * Default private constructor
      */
     public LinkRulesHandler(){}
-
-//    /**
-//     * 
-//     * @return
-//     */
-//    public static synchronized LinkRulesHandler getInstance() {
-//        if (linkRulesHandler == null){
-//            linkRulesHandler = new LinkRulesHandler();
-//        }
-//        return linkRulesHandler;
-//    }
 
     /**
      *
