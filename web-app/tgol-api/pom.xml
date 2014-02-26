@@ -12,6 +12,10 @@
     <name>tgol-api</name>
     <dependencies>
         <dependency>
+            <groupId>${webappGroupId}</groupId>
+            <artifactId>email-sender</artifactId>
+        </dependency>
+        <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-api</artifactId>
         </dependency>
