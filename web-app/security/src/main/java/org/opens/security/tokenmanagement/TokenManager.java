@@ -37,28 +37,29 @@ import org.owasp.esapi.errors.ValidationException;
 public final class TokenManager {
 
     private String esapiPropertyName = null;
+
     public void setEsapiPropertyName(String esapiPropertyName) {
         this.esapiPropertyName = esapiPropertyName;
         setSystemProperty();
     }
-
     private String esapiPropertyValue = null;
+
     public void setEsapiPropertyValue(String esapiPropertyValue) {
         this.esapiPropertyValue = esapiPropertyValue;
         setSystemProperty();
     }
-
     private int tokenDurationValidity = 3600;
+
     public void setTokenDurationValidity(int tokenDurationValidity) {
         this.tokenDurationValidity = tokenDurationValidity;
     }
-
     private Map<String, Boolean> tokenUsage = new HashMap<String, Boolean>();
-    
+
     /**
      * Default constructor
      */
-    public TokenManager() {}
+    public TokenManager() {
+    }
 
     /**
      *
@@ -70,7 +71,7 @@ public final class TokenManager {
     }
 
     /**
-     * 
+     *
      * @param user
      * @return
      */
@@ -92,7 +93,7 @@ public final class TokenManager {
     }
 
     /**
-     * 
+     *
      * @param user
      * @param token
      * @return
@@ -106,23 +107,23 @@ public final class TokenManager {
             }
             if (!StringUtils.equalsIgnoreCase(userAccountName, cryptoToken.getUserAccountName())) {
                 Logger.getLogger(this.getClass()).info(
-                        "!user.getEmail1().equalsIgnoreCase(cryptoToken.getUserAccountName() " 
+                        "!user.getEmail1().equalsIgnoreCase(cryptoToken.getUserAccountName() "
                         + userAccountName
-                        + " " 
+                        + " "
                         + cryptoToken.getUserAccountName());
                 return false;
             }
             if (Calendar.getInstance().getTime().after(cryptoToken.getExpirationDate())) {
                 Logger.getLogger(this.getClass()).info(
-                        "Calendar.getInstance().getTime().after(cryptoToken.getExpirationDate() " 
+                        "Calendar.getInstance().getTime().after(cryptoToken.getExpirationDate() "
                         + cryptoToken.getExpirationDate());
                 return false;
             }
-            if (!tokenUsage.containsKey(token) || 
-                tokenUsage.get(token).booleanValue()) {
+            if (!tokenUsage.containsKey(token)
+                    || tokenUsage.get(token).booleanValue()) {
                 Logger.getLogger(this.getClass()).info(
                         "!tokenUsage.containsKey(token) || "
-                        + " tokenUsage.get(token).booleanValue() " );
+                        + " tokenUsage.get(token).booleanValue() ");
                 return false;
             }
             return true;
@@ -131,9 +132,45 @@ public final class TokenManager {
             return false;
         }
     }
-    
-    public void setTokenUsed(String token) {
-        tokenUsage.put(token,Boolean.TRUE);   
+
+    /**
+     *
+     * @param token
+     * @return
+     */
+    public String getUserNameFromToken(String token) {
+        try {
+            CryptoToken cryptoToken = new CryptoToken(token);
+            return cryptoToken.getUserAccountName();
+        } catch (EncryptionException ex) {
+            Logger.getLogger(this.getClass()).warn(ex);
+            return StringUtils.EMPTY;
+        }
     }
 
+    /**
+     *
+     * @param token
+     * @return
+     */
+    public boolean isTokenExpired(String token) {
+        try {
+            CryptoToken cryptoToken = new CryptoToken(token);
+            if (Calendar.getInstance().getTime().after(cryptoToken.getExpirationDate())) {
+                Logger.getLogger(this.getClass()).info(
+                        "Calendar.getInstance().getTime().after(cryptoToken.getExpirationDate() "
+                        + cryptoToken.getExpirationDate());
+                return true;
+            }
+            return false;
+        } catch (EncryptionException ex) {
+            ex.fillInStackTrace();
+            Logger.getLogger(this.getClass()).warn(ex);
+            return true;
+        }
+    }
+
+    public void setTokenUsed(String token) {
+        tokenUsage.put(token, Boolean.TRUE);
+    }
 }
