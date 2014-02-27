@@ -446,7 +446,7 @@ public class AbstractUserAndContractsController extends AbstractController{
         } else {
             emailContent = emailContent.replace(PHONE_NUMBER_KEY, "");
         }
-        emailSender.sendEmail(emailFrom, emailToSet, emailSubject, emailContent);
+        emailSender.sendEmail(emailFrom, emailToSet, null, null,emailSubject, emailContent);
     }
 
     /**

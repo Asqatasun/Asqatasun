@@ -41,7 +41,7 @@ public class EmailSender {
     private static final Logger LOGGER = Logger.getLogger(EmailSender.class);
     private static final String SMTP_HOST = "localhost";
     private static final String CONTENT_TYPE_KEY = "Content-Type";
-    private static final String FULL_CHARSET_KEY = "text/plain; charset=UTF-8";
+    private static final String FULL_CHARSET_KEY = "text/html; charset=UTF-8";
     private static final String CHARSET_KEY = "UTF-8";
     private String smtpHost = SMTP_HOST;
 
@@ -68,11 +68,18 @@ public class EmailSender {
      *
      * @param emailFrom
      * @param emailToSet
+     * @param emailBccSet (can be null)
+     * @param replyTo (can be null)
      * @param emailSubject
      * @param emailContent
      */
-    public void sendEmail(String emailFrom, Set<String> emailToSet,
-            String emailSubject, String emailContent) {
+    public void sendEmail(
+            String emailFrom, 
+            Set<String> emailToSet,
+            Set<String> emailBccSet,
+            String replyTo,
+            String emailSubject, 
+            String emailContent) {
         boolean debug = false;
 
         // Set the host smtp address
@@ -105,8 +112,23 @@ public class EmailSender {
                     recipients[i] = new InternetAddress(emailTo);
                     i++;
                 }
+                
                 msg.setRecipients(Message.RecipientType.TO, recipients);
+                msg.setRecipients(Message.RecipientType.BCC, recipients);
 
+                if (emailToSet != null) {
+                    Address[] bccRecipients = new InternetAddress[emailBccSet.size()];
+                    i = 0;
+                    for (String emailBcc : emailBccSet) {
+                        bccRecipients[i] = new InternetAddress(emailBcc);
+                        i++;
+                    }
+                    msg.setRecipients(Message.RecipientType.BCC, bccRecipients);
+                }
+                if (StringUtils.isNotBlank(replyTo)) {
+                    Address[] replyToRecipients = {new InternetAddress(replyTo)};
+                    msg.setReplyTo(replyToRecipients);
+                }
                 // Setting the Subject
                 msg.setSubject(emailSubject, CHARSET_KEY);
 

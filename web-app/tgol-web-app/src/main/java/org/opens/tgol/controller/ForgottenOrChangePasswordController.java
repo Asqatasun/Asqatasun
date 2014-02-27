@@ -433,7 +433,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
         String emailContent = MessageFormat.format(emailContentPattern,
                 user.getEmail1(),
                 computeReturnedUrl(user));
-        emailSender.sendEmail(emailFrom, emailToSet, emailSubject, emailContent);
+        emailSender.sendEmail(emailFrom, emailToSet, null, null, emailSubject, emailContent);
     }
 
     /**

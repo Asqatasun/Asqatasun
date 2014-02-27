@@ -262,7 +262,7 @@ public class SignUpControllerTest extends TestCase {
        mockEmailSender = createMock(EmailSender.class);
        Set<String> toUserList = new HashSet<String>();
        toUserList.add("to@user.com");
-       mockEmailSender.sendEmail("from@user.com", toUserList, "subject", "content");
+       mockEmailSender.sendEmail("from@user.com", toUserList, null, null, "subject", "content");
        expectLastCall();
        replay(mockEmailSender);
        
