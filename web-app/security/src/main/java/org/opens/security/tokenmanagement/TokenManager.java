@@ -72,7 +72,31 @@ public final class TokenManager {
 
     /**
      *
-     * @param user
+     * @param userAccountName
+     * @param additionalParameters
+     * @return
+     */
+    public String getTokenUser(String userAccountName, Map<String, String> additionalParameters) {
+        try {
+            CryptoToken cryptoToken = new CryptoToken();
+            cryptoToken.setUserAccountName(userAccountName);
+            cryptoToken.setExpiration(tokenDurationValidity);
+            cryptoToken.addAttributes(additionalParameters);
+            String token = cryptoToken.getToken();
+            tokenUsage.put(token, Boolean.FALSE);
+            return token;
+        } catch (EncryptionException ex) {
+            Logger.getLogger(this.getClass()).warn(ex);
+            return "";
+        } catch (ValidationException ex) {
+            Logger.getLogger(this.getClass()).warn(ex);
+            return "";
+        }
+    }
+    
+    /**
+     *
+     * @param userAccountName
      * @return
      */
     public String getTokenUser(String userAccountName) {
@@ -94,7 +118,7 @@ public final class TokenManager {
 
     /**
      *
-     * @param user
+     * @param userAccountName
      * @param token
      * @return
      */
@@ -147,6 +171,22 @@ public final class TokenManager {
             return StringUtils.EMPTY;
         }
     }
+    
+    /**
+     *
+     * @param token
+     * @param attributeName
+     * @return
+     */
+    public String getAttributeValueFromToken(String token, String attributeName) {
+        try {
+            CryptoToken cryptoToken = new CryptoToken(token);
+            return cryptoToken.getAttribute(attributeName);
+        } catch (EncryptionException ex) {
+            Logger.getLogger(this.getClass()).warn(ex);
+            return StringUtils.EMPTY;
+        }
+    }
 
     /**
      *
@@ -164,8 +204,10 @@ public final class TokenManager {
             }
             return false;
         } catch (EncryptionException ex) {
-            ex.fillInStackTrace();
             Logger.getLogger(this.getClass()).warn(ex);
+            return true;
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
+            Logger.getLogger(this.getClass()).warn(aioobe);
             return true;
         }
     }
