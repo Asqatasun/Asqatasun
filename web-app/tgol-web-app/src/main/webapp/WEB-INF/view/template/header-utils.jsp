@@ -83,8 +83,8 @@
                     <c:set var="isInTopBar" scope="page" value="true"/>
                     <sec:authorize access="hasRole('ROLE_ADMIN')">
                         <li ${adminActive}>
-                            <a href="<c:url value="/admin.html"/>">
-                                <img src="${adminLogoUrl}" alt="Admin"/>
+                            <a href="<c:url value="/admin.html"/>" title="<fmt:message key="home.admin"/>">
+                                <img src="${adminLogoUrl}" alt="<fmt:message key="home.admin"/>"/>
                             </a>
                         </li>    
                     </sec:authorize>
