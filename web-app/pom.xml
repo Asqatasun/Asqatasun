@@ -10,12 +10,13 @@
     <packaging>pom</packaging>
     <name>web-app</name>
     <modules>
+        <module>email-sender</module>
+        <module>security</module>
         <module>tgol-resources</module>
         <module>tgol-api</module>
         <module>tgol-persistence</module>
         <module>tgol-si</module>
         <module>tgol-orchestrator</module>
-        <module>tgol-email-sender</module>
         <module>tgol-data-presentation</module>
         <module>tgol-voter</module>
         <module>tgol-report</module>

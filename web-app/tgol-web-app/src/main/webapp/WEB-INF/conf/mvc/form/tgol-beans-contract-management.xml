@@ -21,6 +21,54 @@
         <property name="formFieldBuilder" ref="nbMaxAuditsPerContractFormFieldBuilder"/>
     </bean>
     
+    <bean id="nbMaxDomainAuditsPerContractFormFieldBuilder" class="org.opens.tgol.form.builder.NumericalFormFieldBuilderImpl">
+        <property name="maxValue" value="10000"/>
+        <property name="minValue" value="0"/>
+        <property name="i18nKey" value="nb-max-domain-audits-per-contract"/>
+        <property name="errorI18nKey" value="nb-max-domain-audits-per-contract-error"/>
+    </bean>
+    
+    <bean id="nbMaxDomainAuditsPerContractOptionBuilder" class="org.opens.tgol.form.parameterization.builder.ContractOptionFormFieldBuilderImpl">
+        <property name="optionCode" value="DOMAIN_ACT_LIMITATION"/>
+        <property name="formFieldBuilder" ref="nbMaxDomainAuditsPerContractFormFieldBuilder"/>
+    </bean>
+    
+    <bean id="nbMaxPagesAuditsPerContractFormFieldBuilder" class="org.opens.tgol.form.builder.NumericalFormFieldBuilderImpl">
+        <property name="maxValue" value="10000"/>
+        <property name="minValue" value="0"/>
+        <property name="i18nKey" value="nb-max-pages-audits-per-contract"/>
+        <property name="errorI18nKey" value="nb-max-pages-audits-per-contract-error"/>
+    </bean>
+    
+    <bean id="nbMaxPagesAuditsPerContractOptionBuilder" class="org.opens.tgol.form.parameterization.builder.ContractOptionFormFieldBuilderImpl">
+        <property name="optionCode" value="PAGES_ACT_LIMITATION"/>
+        <property name="formFieldBuilder" ref="nbMaxPagesAuditsPerContractFormFieldBuilder"/>
+    </bean>
+    
+    <bean id="nbMaxUploadAuditsPerContractFormFieldBuilder" class="org.opens.tgol.form.builder.NumericalFormFieldBuilderImpl">
+        <property name="maxValue" value="10000"/>
+        <property name="minValue" value="0"/>
+        <property name="i18nKey" value="nb-max-upload-audits-per-contract"/>
+        <property name="errorI18nKey" value="nb-max-upload-audits-per-contract-error"/>
+    </bean>
+    
+    <bean id="nbMaxUploadAuditsPerContractOptionBuilder" class="org.opens.tgol.form.parameterization.builder.ContractOptionFormFieldBuilderImpl">
+        <property name="optionCode" value="UPLOAD_ACT_LIMITATION"/>
+        <property name="formFieldBuilder" ref="nbMaxUploadAuditsPerContractFormFieldBuilder"/>
+    </bean>
+    
+    <bean id="nbMaxScenarioAuditsPerContractFormFieldBuilder" class="org.opens.tgol.form.builder.NumericalFormFieldBuilderImpl">
+        <property name="maxValue" value="10000"/>
+        <property name="minValue" value="0"/>
+        <property name="i18nKey" value="nb-max-scenario-audits-per-contract"/>
+        <property name="errorI18nKey" value="nb-max-scenario-audits-per-contract-error"/>
+    </bean>
+    
+    <bean id="nbMaxScenarioAuditsPerContractOptionBuilder" class="org.opens.tgol.form.parameterization.builder.ContractOptionFormFieldBuilderImpl">
+        <property name="optionCode" value="SCENARIO_ACT_LIMITATION"/>
+        <property name="formFieldBuilder" ref="nbMaxScenarioAuditsPerContractFormFieldBuilder"/>
+    </bean>
+    
     <bean id="nbMaxActsToDisplayPerContractFormFieldBuilder" class="org.opens.tgol.form.builder.NumericalFormFieldBuilderImpl">
         <property name="maxValue" value="10000"/>
         <property name="minValue" value="0"/>

@@ -20,19 +20,19 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         
         <engineGroupId>org.opens</engineGroupId>
-        <engineVersion>3.0.0</engineVersion>
+        <engineVersion>3.0.0-SNAPSHOT</engineVersion>
         
         <webappGroupId>org.opens</webappGroupId>
-        <webappVersion>3.0.0</webappVersion>
+        <webappVersion>3.0.0-SNAPSHOT</webappVersion>
         
         <testingToolsGroupId>org.opens</testingToolsGroupId>
-        <testingToolsVersion>3.0.0</testingToolsVersion>
+        <testingToolsVersion>3.0.0-SNAPSHOT</testingToolsVersion>
         
         <tanaguruCliGroupId>org.opens</tanaguruCliGroupId>
-        <tanaguruCliVersion>3.0.0</tanaguruCliVersion>
+        <tanaguruCliVersion>3.0.0-SNAPSHOT</tanaguruCliVersion>
         
         <rulesGroupId>org.opens</rulesGroupId>
-        <rulesVersion>1.0.0</rulesVersion>
+        <rulesVersion>1.0.0-SNAPSHOT</rulesVersion>
         
         <springGroupId>org.springframework</springGroupId>
         <springVersion>3.1.2.RELEASE</springVersion>
@@ -135,24 +135,6 @@
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
                 <artifactId>tanaguru-rgaa2.2-testcases</artifactId>
-                <version>${rulesVersion}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-seo</artifactId>
-                <version>${rulesVersion}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-seo-i18n</artifactId>
-                <version>${rulesVersion}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-seo-testcases</artifactId>
                 <version>${rulesVersion}</version>
                 <scope>test</scope>
             </dependency>
@@ -346,9 +328,33 @@
             </dependency>
             <dependency>
                 <groupId>${webappGroupId}</groupId>
-                <artifactId>tgol-email-sender</artifactId>
+                <artifactId>email-sender</artifactId>
                 <version>${webappVersion}</version>
-                <scope>runtime</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.commons</groupId>
+                        <artifactId>commons-lang3</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>${log4jGroupId}</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>${webappGroupId}</groupId>
+                <artifactId>security</artifactId>
+                <version>${webappVersion}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.commons</groupId>
+                        <artifactId>commons-lang3</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>${log4jGroupId}</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>${webappGroupId}</groupId>
@@ -441,18 +447,7 @@
                 <artifactId>jta</artifactId>
                 <version>1.1</version>
             </dependency>
-            <dependency>
-                <groupId>javax.mail</groupId>
-                <artifactId>mail</artifactId>
-                <version>1.4.3</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>javax.activation</groupId>
-                        <artifactId>activation</artifactId>
-                    </exclusion>
-                </exclusions>   
-            </dependency>
-            
+
             <!-- commons dependencies -->
             <dependency>
                 <groupId>commons-lang</groupId>

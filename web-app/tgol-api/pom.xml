@@ -12,6 +12,10 @@
     <name>tgol-api</name>
     <dependencies>
         <dependency>
+            <groupId>${webappGroupId}</groupId>
+            <artifactId>email-sender</artifactId>
+        </dependency>
+        <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-api</artifactId>
         </dependency>
@@ -42,10 +46,6 @@
         <dependency>
             <groupId>${springGroupId}</groupId>
             <artifactId>spring-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.owasp.esapi</groupId>
-            <artifactId>esapi</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>

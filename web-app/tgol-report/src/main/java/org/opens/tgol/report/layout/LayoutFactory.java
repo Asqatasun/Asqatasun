@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -42,19 +42,25 @@ public class LayoutFactory {
         this.layoutBuilder = layoutBuilder;
     }
 
-    private static LayoutFactory layoutFactory;
-
+    /**
+     * The holder that handles the unique instance of LayoutFactory
+     */
+    private static class LayoutFactoryHolder {
+        private static final LayoutFactory INSTANCE = new LayoutFactory();
+    }
+    
     /**
      * Private constructor
      */
-    private LayoutFactory() {
-    }
-
-    public static synchronized LayoutFactory getInstance() {
-        if (layoutFactory == null) {
-            layoutFactory = new LayoutFactory();
-        }
-        return layoutFactory;
+    private LayoutFactory() {}
+    
+    /**
+     * Singleton pattern based on the "Initialization-on-demand 
+     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
+     * @return the unique instance of LayoutFactory
+     */
+    public static LayoutFactory getInstance() {
+        return LayoutFactoryHolder.INSTANCE;
     }
 
     /**

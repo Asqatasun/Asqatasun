@@ -119,22 +119,27 @@ public final class AuditSetUpCommandFactory {
     public void setScenarioDataService(ScenarioDataService scenarioDataService) {
         this.scenarioDataService = scenarioDataService;
     }
+    
     /**
-     * The static instance
+     * The holder that handles the unique instance of AuditSetUpCommandFactory
      */
-    private static AuditSetUpCommandFactory auditSetUpCommandFactory;
-
-    /**
-     * Factory has default constructor
-     */
-    private AuditSetUpCommandFactory() {
+    private static class AuditSetUpCommandFactoryHolder {
+        private static final AuditSetUpCommandFactory INSTANCE = 
+                new AuditSetUpCommandFactory();
     }
-
-    public static synchronized AuditSetUpCommandFactory getInstance() {
-        if (auditSetUpCommandFactory == null) {
-            auditSetUpCommandFactory = new AuditSetUpCommandFactory();
-        }
-        return auditSetUpCommandFactory;
+    
+    /**
+     * Private constructor
+     */
+    private AuditSetUpCommandFactory() {}
+    
+    /**
+     * Singleton pattern based on the "Initialization-on-demand 
+     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
+     * @return the unique instance of AuditSetUpCommandFactory
+     */
+    public static AuditSetUpCommandFactory getInstance() {
+        return AuditSetUpCommandFactoryHolder.INSTANCE;
     }
 
     /**

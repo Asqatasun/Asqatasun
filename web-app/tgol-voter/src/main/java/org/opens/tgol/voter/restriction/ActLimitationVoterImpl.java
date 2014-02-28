@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -22,6 +22,7 @@
 package org.opens.tgol.voter.restriction;
 
 import org.opens.tgol.entity.contract.Contract;
+import org.opens.tgol.entity.contract.ScopeEnum;
 import org.opens.tgol.entity.option.OptionElement;
 import org.opens.tgol.entity.service.contract.ActDataService;
 import org.opens.tgol.util.TgolKeyStore;
@@ -41,7 +42,12 @@ public class ActLimitationVoterImpl implements RestrictionVoter {
     }
 
     @Override
-    public String checkRestriction(Contract contract, OptionElement optionElement, String clientIp) {
+    public String checkRestriction(
+            Contract contract, 
+            OptionElement optionElement, 
+            String clientIp, 
+            ScopeEnum scope) {
+        
         int nbOfAct = Integer.valueOf(optionElement.getValue());
         if (nbOfAct <= actDataService.getNumberOfAct(contract)) {
             return TgolKeyStore.ACT_QUOTA_EXCEEDED;

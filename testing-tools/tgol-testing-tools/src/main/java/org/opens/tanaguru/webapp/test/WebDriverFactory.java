@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2014  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -23,6 +23,7 @@
 package org.opens.tanaguru.webapp.test;
 
 import java.util.concurrent.TimeUnit;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -37,23 +38,40 @@ import org.opens.tanaguru.sebuilder.tools.ProfileFactory;
 public class WebDriverFactory {
 
     private FirefoxDriver webDriver;
-    private static WebDriverFactory webDriverFactory;
     
-    private WebDriverFactory(){}
-    
-    public static WebDriverFactory getInstance() {
-        if (webDriverFactory == null) {
-            webDriverFactory = new WebDriverFactory();
-        }
-        return webDriverFactory;
+    /**
+     * The holder that handles the unique instance of WebDriverFactory
+     */
+    private static class WebDriverFactoryHolder {
+        private static final WebDriverFactory INSTANCE = new WebDriverFactory();
     }
     
-    public FirefoxDriver getFirefoxDriver(String xvfbDisplay) {
+    /**
+     * Private constructor
+     */
+    private WebDriverFactory() {}
+    
+    /**
+     * Singleton pattern based on the "Initialization-on-demand 
+     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
+     * @return the unique instance of WebDriverFactory
+     */
+    public static WebDriverFactory getInstance() {
+        return WebDriverFactoryHolder.INSTANCE;
+    }
+    
+    /**
+     * This methods creates a firefoxDriver instance and set a DISPLAY 
+     * environment variable
+     * @param display
+     * @return an instance of firefoxDriver 
+     */
+    public FirefoxDriver getFirefoxDriver(String display) {
         if (webDriver == null) {
             FirefoxBinary ffBinary = new FirefoxBinary();
-            if (xvfbDisplay != null) {
-                Logger.getLogger(this.getClass()).info("Setting Xvfb display with value " + xvfbDisplay);
-                ffBinary.setEnvironmentProperty("DISPLAY", xvfbDisplay);
+            if (StringUtils.isNotBlank(display)) {
+                Logger.getLogger(this.getClass()).info("Setting Xvfb display with value " + display);
+                ffBinary.setEnvironmentProperty("DISPLAY", display);
             }
             ProfileFactory pf = ProfileFactory.getInstance();
             webDriver = new FirefoxDriver(ffBinary, pf.getOnlineProfile());

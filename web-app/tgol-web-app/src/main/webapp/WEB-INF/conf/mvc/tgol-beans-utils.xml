@@ -9,51 +9,12 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
     <!-- Définition d'un validateur -->
-    <bean id="tgolTokenHelper" class="org.opens.tgol.util.TgolTokenHelper" factory-method="getInstance"/>
-
-    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject">
-            <ref local="tgolTokenHelper"/>
-        </property>
-        <property name="targetMethod">
-            <value>setEsapiPropertyName</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <value>org.owasp.esapi.resources</value>
-            </list>
-        </property>
+    <bean id="tokenManager" class="org.opens.security.tokenmanagement.TokenManager">
+        <property name="esapiPropertyName" value="org.owasp.esapi.resources"/>
+        <property name="esapiPropertyValue" value="/etc/tanaguru"/>
+        <property name="tokenDurationValidity" value="3600"/>
     </bean>
-
-    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject">
-            <ref local="tgolTokenHelper"/>
-        </property>
-        <property name="targetMethod">
-            <value>setEsapiPropertyValue</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <value>/etc/tgol</value>
-            </list>
-        </property>
-    </bean>
-    
-    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject">
-            <ref local="tgolTokenHelper"/>
-        </property>
-        <property name="targetMethod">
-            <value>setTokenDurationValidity</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <value>3600</value>
-            </list>
-        </property>
-    </bean>
-
-    
+   
     <bean id="contractSortCommandHelper" class="org.opens.tgol.command.helper.ContractSortCommandHelper"/>
     
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
@@ -131,11 +92,6 @@
     <bean id="secondaryLevelMenuDisplayer" class="org.opens.tgol.presentation.menu.SecondaryLevelMenuDisplayer">
         <property name="contractDataService">
             <ref bean="contractDataService"/>
-        </property>
-        <property name="referentialWithModifiableTestWeight">
-            <list>
-                <value>Seo</value>
-            </list>
         </property>
     </bean>    
     

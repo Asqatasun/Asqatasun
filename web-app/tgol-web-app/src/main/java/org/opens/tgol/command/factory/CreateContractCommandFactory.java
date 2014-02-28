@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -39,10 +39,9 @@ import org.opens.tgol.entity.service.referential.ReferentialDataService;
  *
  * @author jkowalczyk
  */
-public class CreateContractCommandFactory  implements Serializable {
+public class CreateContractCommandFactory implements Serializable {
 
     private static final String DOMAIN_OPTION_CODE = "DOMAIN";
-    private static CreateContractCommandFactory createContractCommandFactory;
     
     private Collection<Referential> referentialList;
     private Collection<Functionality> functionalityList;
@@ -60,12 +59,10 @@ public class CreateContractCommandFactory  implements Serializable {
     
     public void setOptionDataService (OptionDataService optionDataService) {
         for (Option option : optionDataService.findAll()) {
-            if (optionNameList.contains(option.getCode())){
-                if (option.getCode().equals(DOMAIN_OPTION_CODE)){
-                    contractUrlOption = option;
-                } else {
-                    optionList.add(option);    
-                }
+            if (option.getCode().equals(DOMAIN_OPTION_CODE)){
+                contractUrlOption = option;
+            } else {
+                optionList.add(option);    
             }
         }
     }
@@ -75,21 +72,26 @@ public class CreateContractCommandFactory  implements Serializable {
         this.optionElementDataService = optionElementDataService;
     }
 
-    private Collection<String> optionNameList;
-    public void setOptionNameList (Collection<String> optionNameList) {
-        this.optionNameList = optionNameList;
+    /**
+     * The holder that handles the unique instance of CreateContractCommandFactory
+     */
+    private static class CreateContractCommandFactoryHolder {
+        private static final CreateContractCommandFactory INSTANCE = 
+                new CreateContractCommandFactory();
     }
     
     /**
-     * Factory has default constructor
+     * Private constructor
      */
-    private CreateContractCommandFactory(){}
-
-    public static synchronized CreateContractCommandFactory getInstance() {
-        if (createContractCommandFactory == null) {
-            createContractCommandFactory = new CreateContractCommandFactory();
-        }
-        return createContractCommandFactory;
+    private CreateContractCommandFactory() {}
+    
+    /**
+     * Singleton pattern based on the "Initialization-on-demand 
+     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
+     * @return the unique instance of CreateContractCommandFactory
+     */
+    public static CreateContractCommandFactory getInstance() {
+        return CreateContractCommandFactoryHolder.INSTANCE;
     }
     
     /**

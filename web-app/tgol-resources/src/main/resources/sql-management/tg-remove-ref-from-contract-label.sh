@@ -22,7 +22,6 @@ if [ -z "$ContractLabel" ] || [ -z "$UserEmail" ] || [ -z "$Refs" ]; then
         echo "Remove referentials to the given contract"
         echo "  The \"r\" option represents the referential and can take several values from :"
         echo "     - r1 -> Accessiweb 2.1"
-        echo "     - r2 -> Seo "
 	exit 0
 fi
 
@@ -36,7 +35,13 @@ for ref in $Refs;do
    if [ $ref = "r2" ];
      then 
         mysql -u $DbUser -p$DbUserPasswd $DbName -e "
-        call remove_ref_to_contract_from_contract_label(\"$ContractLabel\", \"$UserEmail\", 2);
+        call remove_ref_to_contract_from_contract_label(\"$ContractLabel\", \"$UserEmail\", 3);
+        "
+   fi
+   if [ $ref = "r3" ];
+     then 
+        mysql -u $DbUser -p$DbUserPasswd $DbName -e "
+        call remove_ref_to_contract_from_contract_label(\"$ContractLabel\", \"$UserEmail\", 4);
         "
    fi
 done

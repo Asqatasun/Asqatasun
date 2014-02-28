@@ -8,6 +8,37 @@
     <bean id="actByIpLimitationVoter" class="org.opens.tgol.voter.restriction.ActByIpLimitationVoterImpl"/>
     <bean id="actLimitationVoter" class="org.opens.tgol.voter.restriction.ActLimitationVoterImpl"/>
 
+    <bean id="domainActLimitationVoter" class="org.opens.tgol.voter.restriction.ActByScopeLimitationVoterImpl">
+        <property name="scopes">
+            <list>
+                <value>DOMAIN</value>
+            </list>
+        </property>
+    </bean>    
+    <bean id="pagesActLimitationVoter" class="org.opens.tgol.voter.restriction.ActByScopeLimitationVoterImpl">
+        <property name="scopes">
+            <list>
+                <value>PAGE</value>
+                <value>GROUPOFPAGES</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="uploadActLimitationVoter" class="org.opens.tgol.voter.restriction.ActByScopeLimitationVoterImpl">
+        <property name="scopes">
+            <list>
+                <value>FILE</value>
+                <value>GROUPOFFILES</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="scenarioActLimitationVoter" class="org.opens.tgol.voter.restriction.ActByScopeLimitationVoterImpl">
+        <property name="scopes">
+            <list>
+                <value>SCENARIO</value>
+            </list>
+        </property>
+    </bean>
+
     <bean id="restrictionHandler" class="org.opens.tgol.voter.restriction.RestrictionHandlerImpl">
         <property name="restrictionVoterMap">
             <map>
@@ -16,6 +47,18 @@
                 </entry>
                 <entry key="ACT_BY_IP_LIMITATION">
                     <ref bean="actByIpLimitationVoter"/>
+                </entry>
+                <entry key="DOMAIN_ACT_LIMITATION">
+                    <ref bean="domainActLimitationVoter"/>
+                </entry>
+                <entry key="PAGES_ACT_LIMITATION">
+                    <ref bean="pagesActLimitationVoter"/>
+                </entry>
+                <entry key="UPLOAD_ACT_LIMITATION">
+                    <ref bean="uploadActLimitationVoter"/>
+                </entry>
+                <entry key="SCENARIO_ACT_LIMITATION">
+                    <ref bean="scenarioActLimitationVoter"/>
                 </entry>
             </map>
         </property>

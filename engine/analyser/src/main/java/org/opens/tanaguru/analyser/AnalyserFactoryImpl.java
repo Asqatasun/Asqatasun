@@ -22,6 +22,7 @@
 package org.opens.tanaguru.analyser;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import org.opens.tanaguru.entity.audit.Audit;
@@ -33,7 +34,6 @@ import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterFamilyDataService;
-import org.opens.tanaguru.entity.service.reference.TestDataService;
 import org.opens.tanaguru.entity.service.statistics.CriterionStatisticsDataService;
 import org.opens.tanaguru.entity.service.statistics.TestStatisticsDataService;
 import org.opens.tanaguru.entity.service.statistics.ThemeStatisticsDataService;
@@ -123,7 +123,7 @@ public class AnalyserFactoryImpl implements AnalyserFactory {// TODO Write javad
         this.parameterFamilyDataService = parameterFamilyDataService;
     }
 
-    private List<String> testWeightParameterFamilyCodeList;
+    private List<String> testWeightParameterFamilyCodeList = Collections.EMPTY_LIST;
     public void setTestWeightParameterFamilyCodeList(List<String> testWeightParameterFamilyCodeList) {
         this.testWeightParameterFamilyCodeList = testWeightParameterFamilyCodeList;
     }

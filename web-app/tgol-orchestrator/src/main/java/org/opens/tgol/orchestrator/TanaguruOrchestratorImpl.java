@@ -31,13 +31,13 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
+import org.opens.emailsender.EmailSender;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.service.AuditService;
 import org.opens.tanaguru.service.AuditServiceListener;
-import org.opens.tgol.emailsender.EmailSender;
 import org.opens.tgol.entity.contract.*;
 import org.opens.tgol.entity.factory.contract.ActFactory;
 import org.opens.tgol.entity.scenario.Scenario;
@@ -479,6 +479,8 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         emailSender.sendEmail(
                 emailFrom, 
                 emailToSet, 
+                null, 
+                null,
                 emailSubject, 
                 emailMessage);
     }

@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -31,25 +31,50 @@ import org.w3c.dom.Document;
  */
 public class CrawlConfigurationUtils {
 
-    private static CrawlConfigurationUtils crawlConfigurationUtils = null;
     Map<String, HeritrixConfigurationModifier> paramModifierMap;
     HeritrixConfigurationModifier urlModifier;
 
+    /**
+     * The holder that handles the unique instance of CrawlConfigurationUtils
+     */
+    private static class CrawlConfigurationUtilsHolder {
+        private static final CrawlConfigurationUtils INSTANCE = 
+                new CrawlConfigurationUtils();
+    }
+    
+    /**
+     * Private constructor
+     */
     private CrawlConfigurationUtils() {}
-
-    public static synchronized CrawlConfigurationUtils getInstance() {
-        if (crawlConfigurationUtils == null) {
-            crawlConfigurationUtils = new CrawlConfigurationUtils();
-        }
-        return crawlConfigurationUtils;
+    
+    /**
+     * Singleton pattern based on the "Initialization-on-demand 
+     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
+     * @return the unique instance of CrawlConfigurationUtils
+     */
+    public static CrawlConfigurationUtils getInstance() {
+        return CrawlConfigurationUtilsHolder.INSTANCE;
     }
 
+    /**
+     * 
+     * @param document
+     * @param parameter
+     * @return the document with the parameter modified
+     */
     public Document modifyHeritrixParameter (Document document, Parameter parameter) {
         HeritrixConfigurationModifier hpf =
                 paramModifierMap.get(parameter.getParameterElement().getParameterElementCode());
         return modifyValue(hpf, document, parameter.getValue());
     }
 
+    /**
+     * 
+     * @param hcm
+     * @param document
+     * @param value
+     * @return the document with the parameter modified
+     */
     public Document modifyValue (HeritrixConfigurationModifier hcm, Document document, String value) {
         if (hcm != null && !value.equals("-1")) {
             return hcm.modifyDocument(document, value);
@@ -58,10 +83,18 @@ public class CrawlConfigurationUtils {
         }
     }
 
+    /**
+     * 
+     * @param paramModifierMap 
+     */
     public void setParameterModifierMap(Map<String, HeritrixConfigurationModifier> paramModifierMap) {
         this.paramModifierMap = paramModifierMap;
     }
 
+    /**
+     * 
+     * @param urlModifier 
+     */
     public void setUrlModifier(HeritrixConfigurationModifier urlModifier) {
         this.urlModifier = urlModifier;
     }

@@ -19,10 +19,6 @@
         </dependency>
         <dependency>
             <groupId>${webappGroupId}</groupId>
-            <artifactId>tgol-email-sender</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${webappGroupId}</groupId>
             <artifactId>tgol-persistence</artifactId>
         </dependency>
         <dependency>
@@ -44,6 +40,10 @@
         <dependency>
             <groupId>${webappGroupId}</groupId>
             <artifactId>tgol-resources</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${webappGroupId}</groupId>
+            <artifactId>security</artifactId>
         </dependency>
         <!-- tanaguru dependencies-->
         <dependency>
@@ -107,10 +107,6 @@
         <dependency>
             <groupId>${rulesGroupId}</groupId>
             <artifactId>tanaguru-rgaa2.2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${rulesGroupId}</groupId>
-            <artifactId>tanaguru-seo</artifactId>
         </dependency>
         
         <!-- spring dependencies -->

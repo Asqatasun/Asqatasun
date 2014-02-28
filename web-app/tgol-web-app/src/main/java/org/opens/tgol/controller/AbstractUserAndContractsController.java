@@ -25,13 +25,13 @@ package org.opens.tgol.controller;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
+import org.opens.emailsender.EmailSender;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.util.MD5Encoder;
 import org.opens.tgol.command.CreateContractCommand;
 import org.opens.tgol.command.CreateUserCommand;
 import org.opens.tgol.command.factory.CreateContractCommandFactory;
 import org.opens.tgol.command.factory.CreateUserCommandFactory;
-import org.opens.tgol.emailsender.EmailSender;
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.service.contract.ActDataService;
@@ -446,7 +446,7 @@ public class AbstractUserAndContractsController extends AbstractController{
         } else {
             emailContent = emailContent.replace(PHONE_NUMBER_KEY, "");
         }
-        emailSender.sendEmail(emailFrom, emailToSet, emailSubject, emailContent);
+        emailSender.sendEmail(emailFrom, emailToSet, null, null,emailSubject, emailContent);
     }
 
     /**

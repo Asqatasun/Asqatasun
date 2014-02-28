@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -43,6 +43,11 @@ public class ActDataServiceImpl extends AbstractGenericDataService<Act, Long>
     }
 
     @Override
+    public int getNumberOfActByScope(Contract contract, Collection<ScopeEnum> scopes) {
+        return ((ActDAO)entityDao).findNumberOfActByScope(contract, scopes);
+    }
+   
+    @Override
     public Collection<Act> getAllActsByContract(Contract contract) {
         return ((ActDAO) entityDao).findAllActsByContract(contract);
     }
@@ -82,4 +87,5 @@ public class ActDataServiceImpl extends AbstractGenericDataService<Act, Long>
         return ((ActDAO) entityDao).findNumberOfActByPeriodAndIp(contract, limitDate, ip);
     }
 
+    
 }

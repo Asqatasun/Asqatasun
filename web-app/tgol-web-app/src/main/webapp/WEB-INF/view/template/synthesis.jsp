@@ -19,7 +19,7 @@
                     <c:set var="proportion" scope="page" value="span5"/>
                     <c:set var="offset" scope="page" value="offset0"/>
                     <c:set var="size" scope="page" value="S"/>
-                    <%@include file="thumbnail.jsp" %>
+                    <%@include file="thumbnail-audit-result.jsp" %>
                     <div id="synthesis-meta-data" class="span8 offset0">
                         <div id="project-url">
                     <c:choose>

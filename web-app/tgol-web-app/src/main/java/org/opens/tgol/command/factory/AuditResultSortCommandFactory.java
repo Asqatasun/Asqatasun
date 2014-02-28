@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -45,20 +45,27 @@ public final class AuditResultSortCommandFactory {
         this.themeKey = themeKey;
     }
 
-    private static AuditResultSortCommandFactory auditResultSortCommandFactory;
-
     /**
-     * Factory has default constructor
+     * The holder that handles the unique instance of AuditResultSortCommandFactory
      */
-    private AuditResultSortCommandFactory(){}
-
-    public static synchronized AuditResultSortCommandFactory getInstance() {
-        if (auditResultSortCommandFactory == null) {
-            auditResultSortCommandFactory = new AuditResultSortCommandFactory();
-        }
-        return auditResultSortCommandFactory;
+    private static class AuditResultSortCommandFactoryHolder {
+        private static final AuditResultSortCommandFactory INSTANCE = 
+                new AuditResultSortCommandFactory();
     }
-
+    
+    /**
+     * Private constructor
+     */
+    private AuditResultSortCommandFactory() {}
+    
+    /**
+     * Singleton pattern based on the "Initialization-on-demand 
+     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
+     * @return the unique instance of AuditResultSortCommandFactory
+     */
+    public static AuditResultSortCommandFactory getInstance() {
+        return AuditResultSortCommandFactoryHolder.INSTANCE;
+    }
     
     /**
      * 

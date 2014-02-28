@@ -21,7 +21,8 @@ if [ -z "$UserEmail" ] || [ -z "$Refs" ]; then
         echo "Add referentials to all the contracts of the given user"
         echo "  The \"r\" option represents the referential and can take several values from :"
         echo "     - r1 -> Accessiweb 2.1"
-        echo "     - r2 -> Seo "
+        echo "     - r2 -> RGAA 2.2"
+        echo "     - r3 -> Accessiweb 2.2"
 	exit 0
 fi
 
@@ -35,7 +36,13 @@ for ref in $Refs;do
    if [ $ref = "r2" ];
      then 
         mysql -u $DbUser -p$DbUserPasswd $DbName -e "
-        call add_ref_to_contract_from_user_email(\"$UserEmail\", 2);
+        call add_ref_to_contract_from_user_email(\"$UserEmail\", 3);
+        "
+   fi
+   if [ $ref = "r3" ];
+     then 
+        mysql -u $DbUser -p$DbUserPasswd $DbName -e "
+        call add_ref_to_contract_from_user_email(\"$UserEmail\", 4);
         "
    fi
 done

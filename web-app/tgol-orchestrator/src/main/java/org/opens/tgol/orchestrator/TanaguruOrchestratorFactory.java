@@ -21,9 +21,9 @@
  */
 package org.opens.tgol.orchestrator;
 
+import org.opens.emailsender.EmailSender;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.service.AuditService;
-import org.opens.tgol.emailsender.EmailSender;
 import org.opens.tgol.entity.factory.contract.ActFactory;
 import org.opens.tgol.entity.service.contract.ActDataService;
 import org.opens.tgol.entity.service.contract.ScopeDataService;

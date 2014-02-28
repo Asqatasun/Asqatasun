@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -31,18 +31,25 @@ import org.opens.tgol.entity.contract.Contract;
  */
 public final class AddScenarioCommandFactory {
 
-    private static AddScenarioCommandFactory addScenarioCommandFactory;
-
     /**
-     * Factory has default constructor
+     * The holder that handles the unique instance of AddScenarioCommandFactory
      */
-    private AddScenarioCommandFactory(){}
-
-    public static synchronized AddScenarioCommandFactory getInstance() {
-        if (addScenarioCommandFactory == null) {
-            addScenarioCommandFactory = new AddScenarioCommandFactory();
-        }
-        return addScenarioCommandFactory;
+    private static class AddScenarioCommandFactoryHolder {
+        private static final AddScenarioCommandFactory INSTANCE = new AddScenarioCommandFactory();
+    }
+    
+    /**
+     * Private constructor
+     */
+    private AddScenarioCommandFactory() {}
+    
+    /**
+     * Singleton pattern based on the "Initialization-on-demand 
+     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
+     * @return the unique instance of AddScenarioCommandFactory
+     */
+    public static AddScenarioCommandFactory getInstance() {
+        return AddScenarioCommandFactoryHolder.INSTANCE;
     }
     
     /**

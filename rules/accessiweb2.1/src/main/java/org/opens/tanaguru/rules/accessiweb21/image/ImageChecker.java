@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -44,16 +44,21 @@ public class ImageChecker {
      * The holder that handles the unique instance of ImageChecker
      */
     private static class ImageCheckerHolder {
-        public static ImageChecker INSTANCE = new ImageChecker();
+        private static final ImageChecker INSTANCE = new ImageChecker();
     }
-    private ImageChecker() {
-        if (ImageChecker.ImageCheckerHolder.INSTANCE != null) {
-            throw new IllegalStateException("Already instantiated");
-        }
-    }
-
-    public static synchronized ImageChecker getInstance() {
-        return ImageChecker.ImageCheckerHolder.INSTANCE;
+    
+    /**
+     * Private constructor
+     */
+    private ImageChecker() {}
+    
+    /**
+     * Singleton pattern based on the "Initialization-on-demand 
+     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
+     * @return the unique instance of ImageChecker
+     */
+    public static ImageChecker getInstance() {
+        return ImageCheckerHolder.INSTANCE;
     }
 
     @Deprecated

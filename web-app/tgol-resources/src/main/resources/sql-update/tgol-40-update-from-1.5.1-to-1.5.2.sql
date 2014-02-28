@@ -114,8 +114,7 @@ INSERT IGNORE INTO `TGSI_FUNCTIONALITY` (`Id_Functionality`, `Code`, `Label`, `D
 (3, 'UPLOAD', 'Audit Upload', '');
 
 INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Id_Referential`, `Code`, `Label`) VALUES
-(1, 'AW21', 'Accessiweb 2.1 referential'), 
-(2, 'Seo', 'Seo referential');
+(1, 'AW21', 'Accessiweb 2.1 referential');
 
 INSERT IGNORE INTO `TGSI_OPTION_FAMILY` (`Id_Option_Family`, `Code`, `Label`) VALUES
 (1, 'CRAWL', ''),
@@ -236,8 +235,7 @@ INSERT IGNORE INTO `TGSI_FUNCTIONALITY` (`Id_Functionality`, `Code`, `Label`, `D
 -- Insertion of referential
 -- -----------------------------------------------------------------
 INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Id_Referential`, `Code`, `Label`) VALUES
-(1, 'Aw21', 'Accessiweb 2.1 referential'), 
-(2, 'Seo', 'Seo referential');
+(1, 'Aw21', 'Accessiweb 2.1 referential');
 
 -- -----------------------------------------------------------------
 -- Insertion of Option Family

@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -58,18 +58,26 @@ public class CreateUserCommandFactory  implements Serializable {
         adminRole = roleDataService.read(adminRoleId);
     }
     
-    private static CreateUserCommandFactory createUserCommandFactory;
+    /**
+     * The holder that handles the unique instance of CreateUserCommandFactory
+     */
+    private static class CreateUserCommandFactoryHolder {
+        private static final CreateUserCommandFactory INSTANCE = 
+                new CreateUserCommandFactory();
+    }
     
     /**
-     * Factory has default constructor
+     * Private constructor
      */
-    private CreateUserCommandFactory(){}
-
-    public static synchronized CreateUserCommandFactory getInstance() {
-        if (createUserCommandFactory == null) {
-            createUserCommandFactory = new CreateUserCommandFactory();
-        }
-        return createUserCommandFactory;
+    private CreateUserCommandFactory() {}
+    
+    /**
+     * Singleton pattern based on the "Initialization-on-demand 
+     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
+     * @return the unique instance of CreateUserCommandFactory
+     */
+    public static CreateUserCommandFactory getInstance() {
+        return CreateUserCommandFactoryHolder.INSTANCE;
     }
     
     public CreateUserCommand getInitialisedCreateUserCommand(User user) {

@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -60,19 +60,25 @@ public final class ExportService {
         this.exportFormatMap = exportFormatMap;
     }
 
-    private static ExportService exportService;
-
+    /**
+     * The holder that handles the unique instance of ExportService
+     */
+    private static class ExportServiceHolder {
+        private static final ExportService INSTANCE = new ExportService();
+    }
+    
     /**
      * Private constructor
      */
-    private ExportService() {
-    }
-
-    public static synchronized ExportService getInstance() {
-        if (exportService == null) {
-            exportService = new ExportService();
-        }
-        return exportService;
+    private ExportService() {}
+    
+    /**
+     * Singleton pattern based on the "Initialization-on-demand 
+     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
+     * @return the unique instance of ExportService
+     */
+    public static ExportService getInstance() {
+        return ExportServiceHolder.INSTANCE;
     }
 
     /**

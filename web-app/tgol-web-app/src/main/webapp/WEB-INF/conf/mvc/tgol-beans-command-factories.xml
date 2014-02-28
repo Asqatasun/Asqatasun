@@ -85,26 +85,6 @@
             <ref local="createContractCommandFactory"/>
         </property>
         <property name="targetMethod">
-            <value>setOptionNameList</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <value>ACT_LIMITATION</value>
-                <value>MAX_DOCUMENTS</value>
-                <value>DOMAIN</value>
-                <value>DEPTH</value>
-                <value>MAX_DURATION</value>
-                <value>EXCLUSION_REGEXP</value>
-                <value>NB_OF_AUDIT_TO_DISPLAY</value>
-            </list>
-        </property>
-    </bean>
-    
-    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject">
-            <ref local="createContractCommandFactory"/>
-        </property>
-        <property name="targetMethod">
             <value>setOptionDataService</value>
         </property>
         <property name="arguments">

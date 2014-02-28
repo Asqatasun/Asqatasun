@@ -52,10 +52,6 @@
         <module>rgaa2.2-testcases</module>
         <module>rgaa2.2-i18n</module>
         <module>rgaa2.2-resources</module>
-        <module>seo</module>
-        <module>seo-i18n</module>
-        <module>seo-testcases</module>
-        <module>seo-resources</module>
         <module>rules-resources</module>
     </modules>
 

@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,10 +21,7 @@
  */
 package org.opens.tgol.entity.dao.contract;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.List;
+import java.util.*;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
 import org.opens.tanaguru.entity.audit.AuditStatus;
@@ -153,6 +150,42 @@ public class ActDAOImpl extends AbstractJPADAO<Act, Long> implements ActDAO {
         query.setParameter("errorStatus", ActStatus.ERROR);
         query.setParameter("auditStatus", AuditStatus.COMPLETED);
         query.setParameter("limitDate", limitDate, TemporalType.TIMESTAMP);
+        return ((Long)query.getSingleResult()).intValue();
+    }
+
+    @Override
+    public int findNumberOfActByScope(Contract contract, Collection<ScopeEnum> scopes) {
+        StringBuilder strb = new StringBuilder();
+        strb.append("SELECT count(a.id) FROM ");
+        strb.append(getEntityClass().getName());
+        strb.append(" a");
+        strb.append(" left join a.audit au");
+        strb.append(" WHERE a.contract = :contract");
+        strb.append(" AND a.status = :completedStatus");
+        strb.append(" AND au.status = :auditStatus");
+        strb.append(" AND (");
+        int index=0;
+        Iterator<ScopeEnum> iter = scopes.iterator();
+        while (iter.hasNext()) {
+            strb.append("a.scope.code = :auditScope");
+            strb.append(index);
+            iter.next();
+            index++;
+            if (iter.hasNext()) {
+                strb.append(" OR ");
+            }
+        }
+        strb.append(")");
+        Query query = entityManager.createQuery(strb.toString());
+        query.setParameter("contract", contract);
+        query.setParameter("completedStatus", ActStatus.COMPLETED);
+        query.setParameter("auditStatus", AuditStatus.COMPLETED);
+        iter = scopes.iterator();
+        index=0;
+        while (iter.hasNext()) {
+            query.setParameter("auditScope"+index, iter.next());
+            index++;
+        }
         return ((Long)query.getSingleResult()).intValue();
     }
 
