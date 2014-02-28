@@ -9,11 +9,14 @@ $(document).ready(function() {
     var status = askSnapshotStatus(service);
     console.log(status);
     if (status === 'CREATED') {
-        updateImageSrc(service);
+        updateSnapshotImageSrc(service);
 //        console.log("return after display snapshot");
         return;
     }
-
+    if (status === 'JsonParseException') {
+        updateDefaultImageSrc();
+        return;
+    }
     if(status === 'NOT_EXIST') {
         askSnapshot(service); // the snapshot is not created, send the get Request
     }
@@ -21,16 +24,24 @@ $(document).ready(function() {
     var intervalID = setInterval(function() {
 //        console.log("wait a second before reinterogating");
         if (askSnapshotStatus(service) === 'CREATED') {
-            updateImageSrc(service);
+            updateSnapshotImageSrc(service);
             clearInterval(intervalID);
         }
         timeout++;
         if (timeout == 8) {
-            updateImageSrc(document.getElementById("fail-snapshot-url").textContent.trim());
+            updateDefaultImageSrc();
             clearInterval(intervalID);
         }
     }, 1000);
 });
+
+function updateSnapshotImageSrc(service) {
+    updateImageSrc(service);
+}
+
+function updateDefaultImageSrc() {
+    updateImageSrc(document.getElementById("fail-snapshot-url").textContent.trim());
+}
 
 function updateImageSrc(srcValue) {
     var snapshot = document.getElementById("snapshot");
@@ -41,10 +52,14 @@ function updateImageSrc(srcValue) {
 
 function askSnapshotStatus(service) {
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", service+"&status=true", false );
+    service = service.replace("/?", "/?status=true");
+    xmlHttp.open( "GET", service, false );
     xmlHttp.send(null);
-    var status = JSON.parse(xmlHttp.responseText).status;
-//    console.log(status);
+    try {
+        var status = JSON.parse(xmlHttp.responseText).status;
+    } catch (e) {
+        return "JsonParseException";
+    }
     return status;
 }
 
