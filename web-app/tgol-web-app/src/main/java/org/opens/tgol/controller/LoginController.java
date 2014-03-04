@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -86,7 +86,7 @@ public class LoginController extends AbstractUserAndContractsController{
         return TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
     }
     
-    @RequestMapping(value = TgolKeyStore.DEMO_URL, method=RequestMethod.POST)
+    @RequestMapping(value = TgolKeyStore.DEMO_URL, method=RequestMethod.GET)
     public String displayDemoPage(
             HttpServletRequest request,
             HttpServletResponse response,

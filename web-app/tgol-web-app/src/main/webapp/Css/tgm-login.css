@@ -1,0 +1,8 @@
+/*
+ * Override Bootstap
+ * ==============================================
+ */
+html {
+    background: #F8F8F8;
+    background-image: url("../Images/bg-noise.png");
+}

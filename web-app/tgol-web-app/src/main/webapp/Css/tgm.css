@@ -687,6 +687,17 @@ footer a {
  * Page: login
  * ==============================================
  */
+ #tgm-login {
+    font-family: "OpenSansRegular",Arial,sans-serif;
+    background: #F8F8F8; /* Old browsers */
+    background-image: url("../Images/bg-noise.png"), -moz-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* FF3.6+ */
+    background-image: url("../Images/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#F8F8F8)); /* Chrome,Safari4+ */
+    background-image: url("../Images/bg-noise.png"), -webkit-linear-gradient(top,  #F4F4F4 55px, #F8F8F8 100%); /* Chrome10+,Safari5.1+ */
+    background-image: url("../Images/bg-noise.png"), -o-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* Opera 11.10+ */
+    background-image: url("../Images/bg-noise.png"), -ms-linear-gradient(top, #F4F4F4 55px,  #F8F8F8 100%); /* IE10+ */
+    background-image: url("../Images/bg-noise.png"), linear-gradient(to bottom, #F4F4F4 55px, #F8F8F8 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F2F2F2', endColorstr='#F8F8F8',GradientType=0 ); /* IE6-9 */
+}
 #tgm-login .container{
     background: none;
     margin-top : 0;
@@ -694,27 +705,25 @@ footer a {
 #tgm-login .topbar .container h1{
     margin-bottom: 0px;
     margin-top: 0px;
+    
 }
 #tgm-login h1 {
-    margin-bottom: -5px;
-    margin-top: 70px;
+    margin-bottom: 1.2em;
+    margin-top: 1.5em;
+    font-family: OpenSansBold;
+    text-align: center;
+    font-size: 43px;
+    color : #4D4D4D;
 }
 #tgm-login footer {
-    margin-top: 80px
+    margin-top: 10em;
 }
 #tgm-login #lang-switcher{
     padding-top: 6px;
 }
-#login-main-row {
-    margin-top: 2em;
-}
-#login-main-row .alert-message{
-    margin-left: 0;
-}
-#login-main-row .alert-message.error {
-    padding: 4px;
-    margin-top: 10px;
-    width: 270px;
+#login-main-row .error {
+    color: #D81816;
+    font-family: OpenSansSemibold;
 }
 #login-form .actions {
     margin-top: 0;
@@ -757,7 +766,7 @@ footer a {
     font-size: 10px;
 }
 #login-demo {
-    margin-top : 20em;
+    margin-top : 2em;
     text-align: center;
 }
 #login-demo-form > input {
@@ -800,6 +809,9 @@ footer a {
 #login-logo {
     margin-bottom: 3em;
 }
+#login-logo > img {
+    width: 45em;
+}
 #login-submit input{
     width : 30%;
 }
@@ -807,9 +819,12 @@ footer a {
     color: black;
     font-family: OpenSansRegular;
 }
-#login-form .inline input {
-/*    box-shadow: none;
-    color : #FFFFFF;*/
+#login-form label {
+    margin-bottom: 0.3em;
+    margin-top: 1em;
+}
+#login-form input[type="submit"] {
+    margin-top: 0.5em;
 }
 /*
  * Page: sign-up

@@ -18,13 +18,10 @@
 <!DOCTYPE html>
 
 <c:set var="tgLogoUrl">
-    <c:url value="/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>  
+    <c:url value="/Images/Logo-tanaguru-white-w78px-h35px-bgTransp.png"/>  
 </c:set>
 <c:set var="tgLogo1Url">
-    <c:url value="/Images/Logo-Tanaguru-G-w500-h600-75dpi-bgTransp.png"/>  
-</c:set>
-<c:set var="tgLogo2Url">
-    <c:url value="/Images/Logo-tanaguru.com-black-w140px-h63px-bgTransp.png"/>  
+    <c:url value="/Images/machine.png"/>  
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">
@@ -52,27 +49,13 @@
         </c:if>
     </c:set>
     <%@include file="template/head.jsp" %>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/Css/tgm-login.css"/>" />
     <body id="tgm-login">
         <div class="topbar">
             <div class="fill">
                 <div class="container">
-                    <c:choose>
-                        <c:when test="${configProperties['enable-demo-link'] == 'true' && empty errorOnPage}">
-                    <h1>
-                    <img id="login-topbar-logo" class="brand" src="${tgLogoUrl}" alt="Tanaguru.com"/>
-                    </h1>
-                        </c:when>
-                        <c:otherwise>
-                    <img id="login-topbar-logo" class="brand" src="${tgLogoUrl}" alt=""/>
-                        </c:otherwise>
-                    </c:choose>
+                    <img id="login-topbar-logo" class="brand" src="${tgLogoUrl}" alt="Tanaguru"/>
                     <ul class="nav secondary-nav">
-                        <c:if test="${configProperties['enable-demo-link'] == 'true' && empty errorOnPage}">
-                        <li>
-                            <c:set var="inline" value="true"/>
-                            <%@include file="template/login-form.jsp" %>
-                        </li>
-                        </c:if>
                         <li>
                             <%@include file="template/lang-box.jsp" %>
                         </li>
@@ -81,36 +64,26 @@
             </div> <!-- class="fill"-->
         </div> <!-- class="topbar"-->
         <div class="container">
+            <div class="row">
+                <div class="span16">
+                    <h1>
+                        <fmt:message key="login.h1"/>
+                    </h1>
+                </div>
+            </div>
             <div id="login-main-row" class="row">
-                <div class="span6">
+                <div class="span10">
                     <div id="login-logo">
                         <img src="${tgLogo1Url}" alt="" />
                     </div>
                 </div>
-                <div class="span7 offset3">
-                    <c:if test="${configProperties['enable-demo-link'] == 'false' || not empty errorOnPage}">
-                        <h1>
-                            <img src="${tgLogo2Url}" alt="Tanaguru.com" />
-                        </h1>
-                        <c:if test="${not empty errorOnPage}">
-                        <div class="alert-message error">
-                            ${errorOnPage}
-                        </div>
-                        </c:if>
-                        <%@include file="template/login-form.jsp" %>
-                    </c:if>
-                    <c:if test="${configProperties['enable-demo-link'] == 'true' && empty errorOnPage}">
-                    <div id="login-demo">
-                        <form id="login-demo-form" method="post" action="<c:url value="/demo.html"/>" >
-                            <input type="submit" name="Login-Demo" value="<fmt:message key="login.demo"/>"/>
-                        </form>
-                    </div><!-- id="login-demo" -->
-                    </c:if>
-                    <c:if test="${configProperties['enable-sign-up'] == 'true'}">
-                    <div id="login-sign-up">
-                        <a class="awesome big magenta" href="sign-up.html"><fmt:message key="login.sign-up"/></a>
+                <div class="span5 offset1">
+                    <c:if test="${not empty errorOnPage}">
+                    <div class="error">
+                        ${errorOnPage}
                     </div>
                     </c:if>
+                    <%@include file="template/login-form.jsp" %>
                 </div><!-- class="span8 offset4" -->
             </div><!-- class="row" -->
         </div><!-- class="container" -->
