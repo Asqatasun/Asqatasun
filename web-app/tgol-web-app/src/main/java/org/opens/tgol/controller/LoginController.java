@@ -24,6 +24,7 @@ package org.opens.tgol.controller;
 import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tgol.entity.contract.Contract;
@@ -41,6 +42,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /** 
  *
@@ -74,9 +76,16 @@ public class LoginController extends AbstractUserAndContractsController{
     }
     
     @RequestMapping(value = TgolKeyStore.LOGIN_URL, method=RequestMethod.GET)
-    public String displayLoginPage (Model model) {
+    public String displayLoginPage (
+            @RequestParam(value=TgolKeyStore.EMAIL_KEY, required=false) String email,
+            HttpServletRequest request,
+            Model model) {
         if (isAuthenticated()) {
-            return TgolKeyStore.HOME_VIEW_NAME;
+            if (StringUtils.isNotBlank(email)){
+                logoutCurrentUser(request);
+            } else {
+                return TgolKeyStore.HOME_VIEW_NAME;
+            }
         }
         return TgolKeyStore.LOGIN_VIEW_NAME;
     }
@@ -129,6 +138,18 @@ public class LoginController extends AbstractUserAndContractsController{
             SecurityContextHolder.getContext().setAuthentication(null);
             Logger.getLogger(this.getClass()).debug("Failure in autoLogin",  e);
         }
+    }
+    
+    /**
+     * 
+     * @param request 
+     */
+    private void logoutCurrentUser(HttpServletRequest request) {
+         SecurityContextHolder.clearContext();
+         HttpSession session = request.getSession(false);
+         if (session != null) {
+             session.invalidate();
+         }
     }
 
 }
