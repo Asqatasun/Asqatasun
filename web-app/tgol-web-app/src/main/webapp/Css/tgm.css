@@ -296,6 +296,13 @@ label, input, select, textarea {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+.ie9 .sr-only {
+    position : inherit;
+    width: auto;
+    height: auto;
+    clip : inherit;
+    margin : auto;
+}
 /*
  * HTML tags
  * ==============================================
@@ -362,7 +369,29 @@ fieldset {
 fieldset legend {
     padding-left: 10px;
 }
-
+input::-webkit-input-placeholder, .topbar input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { /* WebKit browsers */
+    color: #404040;
+    opacity: 0.6;
+    font-family: OpenSansLight;
+}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { /* WebKit browsers */
+    padding-top: 2px;
+}
+input:-moz-placeholder, .topbar input:-moz-placeholder, textarea:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #404040;
+    opacity: 0.6;
+    font-family: OpenSansLight;
+}
+input::-moz-placeholder, .topbar input::-moz-placeholder, textarea::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #404040;
+    opacity: 0.6;
+    font-family: OpenSansLight;
+}
+input:-ms-input-placeholder, .topbar input:-ms-input-placeholder, textarea:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #404040;
+    opacity: 0.6;
+    font-family: OpenSansLight;
+}
 /*
  * Classes: grade
  * ------------------------------------------------- */
@@ -724,6 +753,31 @@ footer a {
 #login-main-row .error {
     color: #D81816;
     font-family: OpenSansSemibold;
+    font-size: 13px;
+    line-height: 20px;
+}
+.topbar #login-form input {
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    display: inline-block;
+    font-size: 14px;
+    padding: 4px;
+    background-color: #FFFFFF;
+    color:#404040;
+    font-family: OpenSansRegular;
+    vertical-align: top;
+}
+.topbar #login-form input:focus {
+    background-color: #FFFEE1;
+    border-bottom-color: rgba(82, 168, 236, 0.8);
+    border-left-color-ltr-source: physical;
+    border-left-color-rtl-source: physical;
+    border-left-color-value: rgba(82, 168, 236, 0.8);
+    border-right-color-ltr-source: physical;
+    border-right-color-rtl-source: physical;
+    border-right-color-value: rgba(82, 168, 236, 0.8);
+    border-top-color: rgba(82, 168, 236, 0.8);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset, 0 0 8px rgba(82, 168, 236, 0.6);
 }
 #login-form .actions {
     margin-top: 0;
@@ -736,23 +790,6 @@ footer a {
 #login-form .help-block {
     width: 270px;
     text-align: right;
-}
-#login-form .inline input {
-    vertical-align: top;
-    box-shadow: none;
-    background-color: #F5F5F5;
-    color: #000;
-}
-#login-form .inline input:focus {
-    border-bottom-color: rgba(82, 168, 236, 0.8);
-    border-left-color-ltr-source: physical;
-    border-left-color-rtl-source: physical;
-    border-left-color-value: rgba(82, 168, 236, 0.8);
-    border-right-color-ltr-source: physical;
-    border-right-color-rtl-source: physical;
-    border-right-color-value: rgba(82, 168, 236, 0.8);
-    border-top-color: rgba(82, 168, 236, 0.8);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset, 0 0 8px rgba(82, 168, 236, 0.6);
 }
 #login-topbar-logo {
     padding-top: 6px;
@@ -823,9 +860,7 @@ footer a {
     margin-bottom: 0.3em;
     margin-top: 1em;
 }
-#login-form input[type="submit"] {
-    margin-top: 0.5em;
-}
+
 /*
  * Page: sign-up
  * ==============================================
@@ -1161,9 +1196,9 @@ td.action-button {
     margin-top : 0.5em;
     margin-bottom : 0;
 }
-input[type="text"]:focus{
+input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus, input[type="email"]:focus{
     -moz-appearance: textfield;
-    color: black;
+    color: #404040;
     background-color: #ffffe1;
 }
 .master-input.expanded, .master-audit-options.expanded {
