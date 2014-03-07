@@ -30,7 +30,7 @@
         <intercept-url pattern="/home/contract/page*" access="ROLE_USER,ROLE_ADMIN"/>
         <form-login login-page="/login.html" authentication-failure-url="/login.html?error=errorOnLogin" default-target-url="/dispatch.html"/>
         <logout delete-cookies="JSESSIONID" invalidate-session="false"/>
-        <session-management invalid-session-url="/login.html?error=sessionTimeout" >
+        <session-management invalid-session-url="/login.html"  >
             <concurrency-control max-sessions="100" error-if-maximum-exceeded="true"  />
         </session-management>
     </http>

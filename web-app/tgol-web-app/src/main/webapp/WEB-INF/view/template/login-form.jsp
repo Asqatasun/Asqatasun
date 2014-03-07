@@ -16,25 +16,64 @@
                     </c:choose>
                     <div id="login-form" class="row">
                         <form method="post" action="<c:url value="j_spring_security_check"/>" class="${formClass}">
-                        <c:choose>
-                            <c:when test="${inline == 'true'}">
-                            <input type="text" class="${inputSize}" title="<fmt:message key="login.id"/>" placeholder="<fmt:message key="login.id"/>" name="j_username" id="j_username" <c:if test="${not empty param.login_error}"> value="<%= session.getAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY)%>"</c:if> />
+                    <c:choose>
+                        <c:when test="${not empty param.login_error}">
+                            <c:set var="usernameValue">
+                                <%= session.getAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY)%>
+                            </c:set>
+                        </c:when>
+                        <c:when test="${not empty param.email}">
+                            <c:set var="usernameValue" value="${param.email}"/>  
+                        </c:when>
+                        <c:otherwise>
+                            <c:set var="usernameValue" value=""/>  
+                        </c:otherwise>
+                    </c:choose>
+                    <c:choose>
+                        <c:when test="${inline == 'true'}">
+                            <input type="text" 
+                                   class="${inputSize}" 
+                                   title="<fmt:message key="login.id"/>" 
+                                   placeholder="<fmt:message key="login.id"/>" 
+                                   name="j_username" 
+                                   id="j_username" 
+                                   <c:if test="${not empty usernameValue}"> value="${usernameValue}"</c:if> />
                             <div class="inline-password">
-                                <input type="password" name="j_password" title="<fmt:message key="login.password"/>" placeholder="<fmt:message key="login.password"/>" id="j_password" class="${inputSize}" />
-                                <span class="help"><a id="lost-password" href="<c:url value="/forgotten-password.html"/>"> <fmt:message key="login.passwordForgotten"/></a></span>
+                                <input type="password" 
+                                       name="j_password" 
+                                       title="<fmt:message key="login.password"/>" 
+                                       placeholder="<fmt:message key="login.password"/>" 
+                                       id="j_password" 
+                                       class="${inputSize}" />
+                                <span class="help">
+                                    <a id="lost-password" href="<c:url value="/forgotten-password.html"/>"> 
+                                        <fmt:message key="login.passwordForgotten"/>
+                                    </a>
+                                </span>
                             </div>
                             <input class="btn" type="submit" name="Login" value="<fmt:message key="login.submit"/>"/>
-                            </c:when>
-                            <c:otherwise>
-                            <label for="j_username"><fmt:message key="login.id"/></label>
-                            <input type="text" class="${inputSize}" name="j_username" id="j_username" <c:if test="${not empty param.login_error}"> value="<%= session.getAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY)%>"</c:if> />
-                            <label for="j_password"><fmt:message key="login.password"/></label>
-                            <input type="password" name="j_password" id="j_password" class="${inputSize}" />
+                        </c:when>
+                        <c:otherwise>
+                            <label for="j_username">
+                                <fmt:message key="login.id"/>
+                            </label>
+                            <input type="text" 
+                                   class="${inputSize}" 
+                                   name="j_username" 
+                                   id="j_username" 
+                                   <c:if test="${not empty usernameValue}"> value="${usernameValue}"</c:if> />
+                            <label for="j_password">
+                                <fmt:message key="login.password"/>
+                            </label>
+                            <input type="password" 
+                                   name="j_password" 
+                                   id="j_password" 
+                                   class="${inputSize}" />
                             <c:if test="${configProperties['enable-account-settings'] == 'true'}">
                             <span class="help-block"><a href="<c:url value="/forgotten-password.html"/>"> <fmt:message key="login.passwordForgotten"/></a></span>
                             <input class="btn" type="submit" name="Login" value="<fmt:message key="login.submit"/>"/>
                             </c:if>
-                            </c:otherwise>
-                        </c:choose>
+                        </c:otherwise>
+                    </c:choose>
                         </form>
                     </div><!-- id="login-form" -->

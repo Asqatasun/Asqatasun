@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2012  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,15 +21,22 @@
  */
 package org.opens.tgol.controller;
 
-import java.util.ArrayList;
-import static org.easymock.EasyMock.*;
-import java.util.Collection;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.Principal;
+import java.util.Enumeration;
+import java.util.Locale;
+import java.util.Map;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletInputStream;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import junit.framework.TestCase;
-import org.opens.tgol.security.userdetails.TgolUserDetails;
+import static org.easymock.EasyMock.*;
 import org.opens.tgol.util.TgolKeyStore;
-import org.springframework.security.authentication.AuthenticationDetails;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.ui.ExtendedModelMap;
@@ -66,7 +73,278 @@ public class LoginControllerTest extends TestCase {
         setUpMockAuthenticationContext();
         LoginController instance = new LoginController();
         String expResult = TgolKeyStore.LOGIN_VIEW_NAME;
-        String result = instance.displayLoginPage(model);
+        String result = instance.displayLoginPage("",new HttpServletRequest() {
+
+            @Override
+            public String getAuthType() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public Cookie[] getCookies() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public long getDateHeader(String string) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getHeader(String string) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public Enumeration getHeaders(String string) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public Enumeration getHeaderNames() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public int getIntHeader(String string) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getMethod() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getPathInfo() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getPathTranslated() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getContextPath() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getQueryString() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getRemoteUser() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public boolean isUserInRole(String string) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public Principal getUserPrincipal() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getRequestedSessionId() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getRequestURI() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public StringBuffer getRequestURL() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getServletPath() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public HttpSession getSession(boolean bln) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public HttpSession getSession() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public boolean isRequestedSessionIdValid() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public boolean isRequestedSessionIdFromCookie() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public boolean isRequestedSessionIdFromURL() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public boolean isRequestedSessionIdFromUrl() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public Object getAttribute(String string) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public Enumeration getAttributeNames() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getCharacterEncoding() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public void setCharacterEncoding(String string) throws UnsupportedEncodingException {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public int getContentLength() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getContentType() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public ServletInputStream getInputStream() throws IOException {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getParameter(String string) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public Enumeration getParameterNames() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String[] getParameterValues(String string) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public Map getParameterMap() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getProtocol() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getScheme() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getServerName() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public int getServerPort() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public BufferedReader getReader() throws IOException {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getRemoteAddr() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getRemoteHost() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public void setAttribute(String string, Object o) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public void removeAttribute(String string) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public Locale getLocale() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public Enumeration getLocales() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public boolean isSecure() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public RequestDispatcher getRequestDispatcher(String string) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getRealPath(String string) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public int getRemotePort() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getLocalName() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getLocalAddr() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public int getLocalPort() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+        }, model);
         assertEquals(expResult, result);
     }
 

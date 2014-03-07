@@ -21,7 +21,11 @@
  */
 package org.opens.tgol.util;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -30,8 +34,6 @@ import javax.servlet.jsp.PageContext;
  */
 public final class TagUtils {
 
-    private static final String LANG_FR_KEY=Locale.FRENCH.getLanguage();
-    
     /**
      * Private constructor.  This class only handles static methods
      */
@@ -59,6 +61,19 @@ public final class TagUtils {
             return Locale.FRENCH.getLanguage();
         }
         return Locale.ENGLISH.getLanguage();
+    }
+    
+    /**
+     * 
+     * @param pageContext
+     * @return 
+     */
+    public static String getHostFromUrl(String url)  {
+        try {
+            return new URL(url).getHost();
+        } catch (MalformedURLException ex) {
+            return url;
+        }
     }
     
 }
