@@ -67,9 +67,14 @@
             <div class="row">
                 <div class="span16">
                 <c:forEach var="contract" items="${contractList}" varStatus="pContractSet">
+                    <c:set var="explanation">
+                        <c:catch var="explanationException">
+                            <spring:message code="${contract.label}-explanation" arguments="${tg:host(contract.url)}"/>
+                        </c:catch>
+                    </c:set>
                     <table class="project-table">
                         <c:choose>
-                        <c:when test="${fn:length(contractList) == pContractSet.index + 1}">
+                        <c:when test="${fn:length(contractList) == pContractSet.index + 1 && empty explanation}">
                             <tr id="project-${pContractSet.index}" class="one-project last-project">
                         </c:when>
                         <c:otherwise>
@@ -86,7 +91,14 @@
                             <c:when test="${contract.isContractExpired != 'true'}">
                         <td class="project-info">
                             <h2 class="project-name">
-                                <a href="home/contract.html?cr=${contract.id}">${contract.label}</a>
+                                <a href="home/contract.html?cr=${contract.id}">
+                                    <c:catch var="i18nException">
+                                        <spring:message code="${contract.label}" arguments="${tg:host(contract.url)}"/>
+                                    </c:catch>
+                                    <c:if test = "${i18nException != null}">
+                                        ${contract.label}
+                                    </c:if>
+                                </a>
                                 <c:if test="${contract.isActRunning == 'true'}">
                                 <img src="${gearImgUrl}" title="<fmt:message key="home.actRunning"/>" alt="<fmt:message key="home.actRunning"/>" class="running-audit"/>
                                 </c:if>
@@ -195,6 +207,23 @@
                             </c:otherwise>
                         </c:choose>
                         </tr>
+                        <c:if test="${not empty explanation}">
+                        <c:choose>
+                        <c:when test="${fn:length(contractList) == pContractSet.index + 1}">
+                            <tr class="contract-explanation last-project">
+                        </c:when>
+                        <c:otherwise>
+                            <tr class="contract-explanation">
+                        </c:otherwise>
+                        </c:choose>    
+                            <td></td>
+                            <td colspan="2">
+                                <div class="help-message">${explanation}</div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        </c:if>
                     </table>
                 </c:forEach>
                 </div><!-- class="span16" -->
