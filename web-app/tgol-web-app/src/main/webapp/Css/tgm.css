@@ -1085,6 +1085,23 @@ td.project-info {
 #contract-option-console .clearfix {
     width: 18%;
 }
+.contract-explanation .help-message {
+    font-family: OpenSansLight;
+    font-size: 12px;
+    padding-left: 20px;
+    text-align:left;
+    margin: 0;
+    background: url("../Images/icon-info.png") no-repeat scroll 0 3px rgba(0, 0, 0, 0);
+}
+.contract-explanation td {
+    border: none;
+    padding-bottom:0;
+    padding-top:0;
+}
+.contract-explanation.last-project td {
+    padding-bottom: 25px;
+    border-bottom: solid 1px #ddd;
+}
 /* threshold :
 < 1680px: display options as row under the h1
 > 1680px: display options on the right
