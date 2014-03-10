@@ -351,7 +351,7 @@ public class AuditSetUpControllerTest extends TestCase {
     
     private void setUpMockUserDataServiceAndUser() {
         mockUser = createMock(User.class);
-        System.out.println(mockUser.hashCode());
+
         expect(mockUser.getId()).andReturn(Long.valueOf(1)).anyTimes();
         expect(mockUser.getEmail1()).andReturn("test1@test.com").anyTimes();
         expect(mockUser.getName()).andReturn("").anyTimes();
@@ -374,7 +374,7 @@ public class AuditSetUpControllerTest extends TestCase {
             String contractLabel) {
         
         mockContract = createMock(Contract.class);
-        System.out.println(mockUser.hashCode());
+
         expect(mockContract.getUser()).andReturn(mockUser).anyTimes();
         expect(mockContract.getId()).andReturn(Long.valueOf(contractId)).anyTimes();
         expect(mockContract.getLabel()).andReturn(contractLabel).anyTimes();
