@@ -119,8 +119,11 @@ public class ContractInfoFactory {
         contractInfo.setLabel(contract.getLabel());
         contractInfo.setUrl(contractDataService.getUrlFromContractOption(contract));
         contractInfo.setId(contract.getId().intValue());
-        contractInfo.setIsActRunning(!actDataService.getRunningActsByContract(contract).isEmpty());
+        contractInfo.setIsActRunning(
+                !actDataService.getRunningActsByContract(contract).isEmpty());
         contractInfo.setActionList(actionHandler.getActionList(contract));
+        contractInfo.setPresetContractKey(
+                contractDataService.getPresetContractKeyContractOption(contract));
         return contractInfo;
     }
 
