@@ -17,12 +17,13 @@
         <fmt:message key="forgotten-password-confirmation.pageTitle"/>
     </c:set>
     <%@include file="template/head.jsp" %>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/Css/tgm-login.css"/>" />
     <body id="tgm-forgotten-password-confirmation">
         <div class="topbar">
             <div class="fill">
                 <div class="container">
                     <a href="<c:url value="/login.html"/>" title="<fmt:message key="sign-up.backToLogin"/>">
-                        <img src="${tgLogoUrl}" alt="<fmt:message key="sign-up.backToLogin"/>" />
+                        <img id="login-topbar-logo" src="${tgLogoUrl}" alt="<fmt:message key="sign-up.backToLogin"/>" />
                     </a>
                     <ul class="nav secondary-nav">
                         <li>
@@ -39,7 +40,7 @@
                 </div><!-- class="span16" -->
             </div><!-- class="row" -->
             <div class="row">
-                <div class="span16">
+                <div class="span10 offset3">
                     <div class="alert-message block-message success">
                         <p><fmt:message key="forgotten-password-confirmation.message"><fmt:param value="${url}"/></fmt:message></p>
                         <div class="alert-actions">
