@@ -21,11 +21,9 @@
  */
 package org.opens.tgol.controller;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import junit.framework.TestCase;
+import org.apache.commons.lang3.StringUtils;
 import static org.easymock.EasyMock.*;
 import org.opens.emailsender.EmailSender;
 import org.opens.tgol.command.CreateUserCommand;
@@ -262,7 +260,13 @@ public class SignUpControllerTest extends TestCase {
        mockEmailSender = createMock(EmailSender.class);
        Set<String> toUserList = new HashSet<String>();
        toUserList.add("to@user.com");
-       mockEmailSender.sendEmail("from@user.com", toUserList, null, null, "subject", "content");
+       mockEmailSender.sendEmail(
+               "from@user.com", 
+               toUserList, 
+               Collections.EMPTY_SET, 
+               StringUtils.EMPTY, 
+               "subject", 
+               "content");
        expectLastCall();
        replay(mockEmailSender);
        
