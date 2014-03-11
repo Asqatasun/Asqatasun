@@ -24,11 +24,11 @@ package org.opens.emailsender;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Set;
-import java.util.logging.Level;
 import javax.mail.*;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -87,7 +87,7 @@ public class EmailSender {
         props.put("mail.smtp.host", smtpHost);
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-
+        
         // create some properties and get the default Session
         Session session = Session.getInstance(props);
         session.setDebug(debug);
@@ -114,9 +114,9 @@ public class EmailSender {
                 }
                 
                 msg.setRecipients(Message.RecipientType.TO, recipients);
-                msg.setRecipients(Message.RecipientType.BCC, recipients);
 
-                if (emailToSet != null) {
+                
+                if (CollectionUtils.isNotEmpty(emailBccSet)) {
                     Address[] bccRecipients = new InternetAddress[emailBccSet.size()];
                     i = 0;
                     for (String emailBcc : emailBccSet) {
@@ -125,31 +125,31 @@ public class EmailSender {
                     }
                     msg.setRecipients(Message.RecipientType.BCC, bccRecipients);
                 }
+
                 if (StringUtils.isNotBlank(replyTo)) {
                     Address[] replyToRecipients = {new InternetAddress(replyTo)};
                     msg.setReplyTo(replyToRecipients);
                 }
+
                 // Setting the Subject
                 msg.setSubject(emailSubject, CHARSET_KEY);
 
                 // Setting content and charset (warning: both declarations of
                 // charset are needed)
                 msg.setHeader(CONTENT_TYPE_KEY, FULL_CHARSET_KEY);
-                LOGGER.debug("emailContent  " + emailContent);
+                LOGGER.error("emailContent  " + emailContent);
                 msg.setContent(emailContent, FULL_CHARSET_KEY);
                 try {
                     LOGGER.debug("emailContent from message object "
                             + msg.getContent().toString());
                 } catch (IOException ex) {
-                    java.util.logging.Logger.getLogger(
-                            EmailSender.class.getName()).log(Level.SEVERE,
-                            null, ex);
+                    LOGGER.error(ex.getMessage());
                 } catch (MessagingException ex) {
-                    java.util.logging.Logger.getLogger(
-                            EmailSender.class.getName()).log(Level.SEVERE,
-                            null, ex);
+                    LOGGER.error(ex.getMessage());
                 }
-
+                for (Address addr :  msg.getAllRecipients()) {
+                    LOGGER.error("addr " + addr);
+                }
                 t.sendMessage(msg, msg.getAllRecipients());
             } catch (AddressException ex) {
                 LOGGER.warn(ex.getMessage());
