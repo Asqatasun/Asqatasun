@@ -275,9 +275,11 @@ public class TgTestRun extends TestRun {
              */
             WebElement body = getDriver().findElementByTagName("html");
             Map<String, String> jsScriptResult = Collections.EMPTY_MAP;
-            if (body != null) {
+            try {
                 body.sendKeys(Keys.TAB);
                 jsScriptResult = executeJsScripts();
+            } catch (WebDriverException wde) {
+                getLog().warn(wde.getMessage());
             }
             /*##############################################################*/
             
