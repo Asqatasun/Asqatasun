@@ -25,6 +25,7 @@ package org.opens.tanaguru.service.command;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
+import javax.persistence.PersistenceException;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -441,7 +442,16 @@ public abstract class AuditCommandImpl implements AuditCommand {
                     LOGGER.warn(ex);
                 }
             }
-            contentDataService.saveOrUpdate(content);
+            try {
+                contentDataService.saveOrUpdate(content);
+            } catch (PersistenceException pe) {
+                LOGGER.warn(content.getURI() +" could not have been persisted due to "  +pe.getLocalizedMessage());
+                if (content instanceof SSP && 
+                !((SSP) content).getDOM().isEmpty()) {
+                    ((SSP) content).setDOM("");
+                    contentDataService.saveOrUpdate(content);
+                }
+            }
         }
     }
     
