@@ -75,12 +75,12 @@ public class HttpRequestHandler {
         proxyExclusionUrlList.addAll(Arrays.asList(proxyExclusionUrl.split(";")));
     }
 
-    private int connectionTimeout = 20000;
+    private int connectionTimeout = 3000;
     public void setConnectionTimeout(int connectionTimeout) {
         this.connectionTimeout = connectionTimeout;
     }
     
-    private int socketTimeout = 20000;
+    private int socketTimeout = 3000;
     public void setSocketTimeout(int socketTimeout) {
         this.socketTimeout = socketTimeout;
     }
