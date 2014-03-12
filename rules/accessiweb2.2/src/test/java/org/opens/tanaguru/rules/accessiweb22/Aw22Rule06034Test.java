@@ -101,6 +101,9 @@ public class Aw22Rule06034Test extends Aw22RuleImplementationTestCase {
         getWebResourceMap().put("AW22.Test.06.03.04-3NMI-06",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-3NMI-06.html"));
+        getWebResourceMap().put("AW22.Test.06.03.04-3NMI-07",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-3NMI-07.html"));
         getWebResourceMap().put("AW22.Test.06.03.04-4NA-01",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "AW22/Aw22Rule06034/AW22.Test.06.03.04-4NA-01.html"));
@@ -471,6 +474,14 @@ public class Aw22Rule06034Test extends Aw22RuleImplementationTestCase {
         assertEquals(TestSolution.NEED_MORE_INFO,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
 
+        processResult = processPageTest("AW22.Test.06.03.04-3NMI-07");
+        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
+        assertEquals(1, processResult.getRemarkSet().size());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+
         processResult = processPageTest("AW22.Test.06.03.04-4NA-01");
         assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
         assertNull(processResult.getRemarkSet());
@@ -754,6 +765,8 @@ public class Aw22Rule06034Test extends Aw22RuleImplementationTestCase {
                 consolidate("AW22.Test.06.03.04-3NMI-05").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW22.Test.06.03.04-3NMI-06").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.06.03.04-3NMI-07").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("AW22.Test.06.03.04-4NA-01").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
