@@ -60,6 +60,7 @@ public abstract class ElementCheckerImpl implements ElementChecker {
     
     /* The element builder needed to build the element text */
     private TextElementBuilder textElementBuilder;
+    @Override
     public TextElementBuilder getTextElementBuilder() {
         if (textElementBuilder == null) {
             textElementBuilder = new SimpleTextElementBuilder();
