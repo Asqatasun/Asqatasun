@@ -548,7 +548,7 @@ public class Aw22Rule06034Test extends Aw22RuleImplementationTestCase {
         assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
         assertNull(processResult.getRemarkSet());
         
-        processResult = processPageTest("AW22.Test.06.03.01-3NMI-09");
+        processResult = processPageTest("AW22.Test.06.03.01-3NMI-08");
         assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
         assertNull(processResult.getRemarkSet());
         
