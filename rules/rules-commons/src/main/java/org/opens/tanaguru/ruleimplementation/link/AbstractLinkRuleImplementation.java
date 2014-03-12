@@ -42,11 +42,21 @@ public abstract class AbstractLinkRuleImplementation
 
     /* the link element selector */
     LinkElementSelector linkElementSelector;
+    public LinkElementSelector getLinkElementSelector() {
+        return linkElementSelector;
+    }
 
     /* the checked used for decidable elements */
     ElementChecker decidableElementsChecker;
+    public ElementChecker getDecidableElementsChecker() {
+        return decidableElementsChecker;
+    }
+    
     /* the checked used for not decidable elements */
     ElementChecker notDecidableElementsChecker;
+    public ElementChecker getNotDecidableElementsChecker() {
+        return notDecidableElementsChecker;
+    }
 
     /**
      * Constructor
@@ -99,7 +109,7 @@ public abstract class AbstractLinkRuleImplementation
      * Set service to elementChecker depending on their nature.
      * @param elementChecker 
      */
-    private void setServicesToChecker(ElementChecker ec) {
+    protected void setServicesToChecker(ElementChecker ec) {
         if (ec instanceof NomenclatureBasedElementChecker) {
             ((NomenclatureBasedElementChecker)ec).
                 setNomenclatureLoaderService(nomenclatureLoaderService);
