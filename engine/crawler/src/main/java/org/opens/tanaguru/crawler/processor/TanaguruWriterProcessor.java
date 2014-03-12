@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.regex.Pattern;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.archive.io.RecordingInputStream;
 import org.archive.modules.CrawlURI;
@@ -168,6 +169,7 @@ public class TanaguruWriterProcessor extends Processor
         } catch (IOException e) {
             curi.getNonFatalFailures().add(e);
         }
+        IOUtils.closeQuietly(recis);
     }
 
     /**
