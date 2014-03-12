@@ -3,24 +3,21 @@
 
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>AW22 Test.6.3.1 Failed 06</title>
+        <title>AW22 Test.6.3.1 NMI 09</title>
     </head>
     <body>
         <div>
 
+            <h1>AW22 Test.6.3.1 NMI 09</h1>
             <p class="test-detail">
                 <span lang="fr">Test 6.3.1 : Chaque intitulé de lien texte est-il explicite hors contexte (hors cas particulier) ?</span>
             </p>
 
-            <h1>AW22 Test.6.3.1 Failed 06</h1>
-            <a href="my-link.html">
-                cliquez ici
-            </a>
+            <a href="my-link.html" title="the title needs to be checked">cliquez ici</a>
 
             <p class="test-explanation">
-                Failed : The link text belongs to the 
-                text link blacklist (whatever the context). 
-                We can deduce it is not pertinent
+                NMI : The text link is not pertinent but the pertinence of
+                the title needs to be manually checked
             </p>
 
         </div>
