@@ -37,6 +37,16 @@ public class ElementHandlerImpl implements ElementHandler<Element> {
      * Default constructor
      */
     public ElementHandlerImpl(){}
+    
+    /**
+     * Constructor that initialise locale collection with elements passed as 
+     * arguement
+     */
+    public ElementHandlerImpl(Element... els){
+        for (Element el : els) {
+            elements.add(el);
+        }
+    }
 
     /**
      * The elements implied by the test
