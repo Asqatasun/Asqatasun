@@ -116,6 +116,10 @@ public class ExternalCSSRetrieverImpl implements ExternalCSSRetriever, Adaptatio
      * @param audit
      */
     private void checkAllExternalCssHaveBeenAdapted(Audit audit) {
+        if (!externalCssMap.containsKey(audit.getId())) {
+            LOGGER.debug("No Css found for the id " + audit.getId());
+            return;
+        }
         Collection<StylesheetContent> externalStyleSheet = externalCssMap.get(audit.getId());
         for (StylesheetContent stylesheetContent : externalStyleSheet) {
             if (stylesheetContent.getAdaptedContent() == null || stylesheetContent.getAdaptedContent().isEmpty()) {
