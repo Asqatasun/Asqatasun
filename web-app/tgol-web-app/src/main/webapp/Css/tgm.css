@@ -1752,7 +1752,12 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
 #synthesis-result .project-fail {
     text-align: left;
 }
-
+#failed-test-list-link {
+    text-align: right;
+}
+#failed-test-list-link a {
+    margin-right: 2%;
+}
 /*
  * Page : score (template)
  * ----------------------------------------------

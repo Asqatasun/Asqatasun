@@ -233,7 +233,7 @@ public abstract class AuditDataHandlerController extends AbstractController {
         this.localeResolver = localeResolver;
     }
 
-    private static final String INVALID_TEST_VALUE_CHECKER_REGEXP = "\\d\\d?\\.\\d\\d?\\.\\d\\d?";
+    private static final String INVALID_TEST_VALUE_CHECKER_REGEXP = "\\d\\d?\\.\\d\\d?\\.?\\d?\\d?";
     private Pattern invalidTestValueCheckerPattern = Pattern.compile(INVALID_TEST_VALUE_CHECKER_REGEXP);
     
     public AuditDataHandlerController() {}

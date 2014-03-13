@@ -111,6 +111,9 @@ public final class TgolKeyStore {
     public static final String AUDIT_SYNTHESIS_URL = "/audit-synthesis";
     public static final String AUDIT_SYNTHESIS_CONTRACT_URL =
             CONTRACT_URL+AUDIT_SYNTHESIS_URL;
+    public static final String FAILED_TEST_LIST_URL = "/failed-test-list";
+    public static final String FAILED_TEST_LIST_CONTRACT_URL =
+            CONTRACT_URL+FAILED_TEST_LIST_URL;
     public static final String PAGE_LIST_URL = "/page-list";
     public static final String PAGE_LIST_CONTRACT_URL =
             CONTRACT_URL+PAGE_LIST_URL;
@@ -190,6 +193,9 @@ public final class TgolKeyStore {
     public static final String SYNTHESIS_SITE_VIEW_NAME = "synthesis-site";
     public static final String SYNTHESIS_SITE_VIEW_REDIRECT_NAME =
             "synthesis-site-redirect";
+    public static final String FAILED_TEST_LIST_VIEW_NAME = "failed-test-list";
+    public static final String FAILED_TEST_LIST_VIEW_REDIRECT_NAME =
+            "failed-test-list-redirect";
     public static final String PAGE_LIST_VIEW_NAME = "page-list";
     public static final String PAGE_LIST_XXX_VIEW_NAME = "page-list-xxx";
     public static final String PAGE_LIST_XXX_VIEW_REDIRECT_NAME = "page-list-xxx-redirect";

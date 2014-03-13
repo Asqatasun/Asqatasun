@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -307,11 +307,15 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         queryString.append(ORDER_BY_STR);
         queryString = selectNbField(queryString, TestSolution.FAILED);
         queryString.append(DESC_STR);
-        queryString.append(PARAMETRABLE_LIMIT_STR);
+        if (nbOfResult > 0) {
+            queryString.append(PARAMETRABLE_LIMIT_STR);
+        }
         Query query = entityManager.createNativeQuery(queryString.toString());
         query.setParameter("idWebResource", webResource.getId());
         query.setParameter("idAudit", audit.getId());
-        query.setParameter("nbOfResult", nbOfResult);
+        if (nbOfResult > 0) {
+            query.setParameter("nbOfResult", nbOfResult);
+        }
 
         try {
             List<Object[]> result = (List<Object[]>)query.getResultList();
@@ -434,7 +438,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
 
     /**
      * Native sql query :
-     * SELECT w.Url, w.Id_Web_Resource, wrs.Nb_Failed_Occurrences, wrs.Nb_Invalid_Test
+     * SELECT w.Url, w.Id_Web_Resource, wrs.Nb_Invalid_Test, wrs.Nb_Failed_Occurrences
      * FROM WEB_RESOURCE_STATISTICS as wrs,
      *       WEB_RESOURCE as w
      *       WHERE wrs.Id_Audit=:idAudit
@@ -462,9 +466,9 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         queryString.append(COMA_CHAR);
         queryString.append(ID_WEB_RESOURCE_FIELD_STR);
         queryString.append(COMA_CHAR);
-        queryString.append(FAILED_OCCURRENCES_STR);
-        queryString.append(COMA_CHAR);
         queryString.append(INVALID_TEST_STR);
+        queryString.append(COMA_CHAR);
+        queryString.append(FAILED_OCCURRENCES_STR);
         queryString.append(TOP_N_INVALID_URL_QUERY);
         queryString.append(ORDER_BY_STR);
         queryString.append(FAILED_OCCURRENCES_STR);
@@ -499,8 +503,8 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
             FailedPageInfo fti = FailedPageInfoFactory.getInstance().getFailedPageInfo(
                     (String)obj[0],
                     ((BigInteger)obj[1]).longValue(),
-                    ((Integer)obj[3]).longValue(),
-                    ((Integer)obj[2]).longValue());
+                    ((Integer)obj[2]).longValue(),
+                    ((Integer)obj[3]).longValue());
             failedPageInfoSet.add(fti);
         }
         return failedPageInfoSet;
