@@ -74,9 +74,6 @@ public final class CrawlUtils {
                 ByteBuffer outputBuffer = utf8charset.encode(data);
                 byte[] outputData = outputBuffer.array();
                 String source = new String(outputData);
-                inputBuffer.reset();
-                data.reset();
-                outputBuffer.reset();
                 return source;
             } else {
                 baos = new ByteArrayOutputStream();
