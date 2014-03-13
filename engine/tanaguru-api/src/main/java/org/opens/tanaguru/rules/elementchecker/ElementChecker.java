@@ -36,6 +36,12 @@ public interface ElementChecker {
     /* The text element builder*/ 
     void setTextElementBuilder(TextElementBuilder textElementBuilder);
     
+    /**
+     * 
+     * @return the textElementBuilder used to test the element
+     */
+    TextElementBuilder getTextElementBuilder();
+    
     /* success solution */
     TestSolution getSuccessSolution();
     

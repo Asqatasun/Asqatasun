@@ -54,6 +54,7 @@ INSERT INTO "tgsi_option" VALUES
 (12,'DOMAIN_ACT_LIMITATION',NULL,'The number of authorized acts of domain scope', TRUE, 2),
 (13,'UPLOAD_ACT_LIMITATION',NULL,'The number of authorized acts of upload scope', TRUE, 2),
 (14,'SCENARIO_ACT_LIMITATION',NULL,'The number of authorized acts of scenario scope', TRUE, 2);
+(15,'PRESET_CONTRACT',NULL,'The type of preset contract',FALSE,4);
 
 
 INSERT INTO "tgsi_option_element" VALUES 

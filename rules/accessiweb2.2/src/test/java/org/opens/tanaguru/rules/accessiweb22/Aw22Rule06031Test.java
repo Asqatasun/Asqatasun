@@ -67,9 +67,6 @@ public class Aw22Rule06031Test extends Aw22RuleImplementationTestCase {
         getWebResourceMap().put("AW22.Test.06.03.01-2Failed-07",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "AW22/Aw22Rule06031/AW22.Test.06.03.01-2Failed-07.html"));
-        getWebResourceMap().put("AW22.Test.06.03.01-2Failed-08",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule06031/AW22.Test.06.03.01-2Failed-08.html"));
         getWebResourceMap().put("AW22.Test.06.03.01-3NMI-01",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "AW22/Aw22Rule06031/AW22.Test.06.03.01-3NMI-01.html"));
@@ -91,6 +88,12 @@ public class Aw22Rule06031Test extends Aw22RuleImplementationTestCase {
         getWebResourceMap().put("AW22.Test.06.03.01-3NMI-07",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "AW22/Aw22Rule06031/AW22.Test.06.03.01-3NMI-07.html"));
+        getWebResourceMap().put("AW22.Test.06.03.01-3NMI-08",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06031/AW22.Test.06.03.01-3NMI-08.html"));
+        getWebResourceMap().put("AW22.Test.06.03.01-3NMI-09",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "AW22/Aw22Rule06031/AW22.Test.06.03.01-3NMI-09.html"));
         getWebResourceMap().put("AW22.Test.06.03.01-4NA-01",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "AW22/Aw22Rule06031/AW22.Test.06.03.01-4NA-01.html"));
@@ -312,8 +315,8 @@ public class Aw22Rule06031Test extends Aw22RuleImplementationTestCase {
         assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
 
         sourceCodeRemark = (SourceCodeRemark)iter.next();
-        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
         assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
         // check number of evidence elements and their value
         assertEquals(2,sourceCodeRemark.getElementList().size());
@@ -488,32 +491,6 @@ public class Aw22Rule06031Test extends Aw22RuleImplementationTestCase {
         //------------------------------2Failed-07------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.06.03.01-2Failed-07");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        iter = processResult.getRemarkSet().iterator();
-        sourceCodeRemark = (SourceCodeRemark)iter.next();
-        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2,sourceCodeRemark.getElementList().size());
-        eIter = sourceCodeRemark.getElementList().iterator();
-        ee = eIter.next();
-        assertEquals("-->;*", ee.getValue());
-        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
-        ee = eIter.next();
-        assertEquals("whatever the title", ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-        
-        
-        //----------------------------------------------------------------------
-        //------------------------------2Failed-08------------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("AW22.Test.06.03.01-2Failed-08");
         // check number of elements in the page
         assertEquals(2, processResult.getElementCounter());
         // check test result
@@ -771,6 +748,58 @@ public class Aw22Rule06031Test extends Aw22RuleImplementationTestCase {
         assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
         ee = eIter.next();
         assertEquals("attribute-absent", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-08---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.06.03.01-3NMI-08");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("-->;*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("the title needs to be checked", ee.getValue());
+        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-09---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("AW22.Test.06.03.01-3NMI-09");
+        // check number of elements in the page
+        assertEquals(1, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(1, processResult.getRemarkSet().size());
+        iter = processResult.getRemarkSet().iterator();
+        sourceCodeRemark = (SourceCodeRemark)iter.next();
+        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
+        assertEquals(RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG, sourceCodeRemark.getMessageCode());
+        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
+        // check number of evidence elements and their value
+        assertEquals(2,sourceCodeRemark.getElementList().size());
+        eIter = sourceCodeRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("cliquez ici", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("the title needs to be checked", ee.getValue());
         assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
         
         
@@ -1063,8 +1092,6 @@ public class Aw22Rule06031Test extends Aw22RuleImplementationTestCase {
                 consolidate("AW22.Test.06.03.01-2Failed-06").getValue());
         assertEquals(TestSolution.FAILED,
                 consolidate("AW22.Test.06.03.01-2Failed-07").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("AW22.Test.06.03.01-2Failed-08").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW22.Test.06.03.01-3NMI-01").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
@@ -1079,6 +1106,10 @@ public class Aw22Rule06031Test extends Aw22RuleImplementationTestCase {
                 consolidate("AW22.Test.06.03.01-3NMI-06").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("AW22.Test.06.03.01-3NMI-07").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.06.03.01-3NMI-08").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("AW22.Test.06.03.01-3NMI-09").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("AW22.Test.06.03.01-4NA-01").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,

@@ -49,5 +49,15 @@ public interface ContractDataService extends GenericDataService<Contract, Long> 
      * @return 
      */
     String getUrlFromContractOption(Contract contract);
+    
+    /**
+     * The contract may have been created with preset functionalities. In this
+     * case, the key of the preset contract is kept as a contract option and this 
+     * method extract the value of this option from the option set
+     * 
+     * @param contract
+     * @return the presetContractKey
+     */
+    String getPresetContractKeyContractOption(Contract contract);
 
 }

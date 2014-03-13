@@ -25,6 +25,7 @@ package org.opens.tgol.controller;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.emailsender.EmailSender;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.util.MD5Encoder;
@@ -446,7 +447,13 @@ public class AbstractUserAndContractsController extends AbstractController{
         } else {
             emailContent = emailContent.replace(PHONE_NUMBER_KEY, "");
         }
-        emailSender.sendEmail(emailFrom, emailToSet, null, null,emailSubject, emailContent);
+        emailSender.sendEmail(
+                emailFrom, 
+                emailToSet, 
+                Collections.EMPTY_SET, 
+                StringUtils.EMPTY,
+                emailSubject, 
+                emailContent);
     }
 
     /**

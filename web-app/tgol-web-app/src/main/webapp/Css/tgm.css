@@ -734,10 +734,9 @@ footer a {
 #tgm-login .topbar .container h1{
     margin-bottom: 0px;
     margin-top: 0px;
-    
 }
 #tgm-login h1 {
-    margin-bottom: 1.2em;
+    margin-bottom: 1.5em;
     margin-top: 1.5em;
     font-family: OpenSansBold;
     text-align: center;
@@ -747,7 +746,7 @@ footer a {
 #tgm-login footer {
     margin-top: 10em;
 }
-#tgm-login #lang-switcher{
+#tgm-login #lang-switcher, #tgm-forgotten-password #lang-switcher, #tgm-forgotten-password-confirmation #lang-switcher{
     padding-top: 6px;
 }
 #login-main-row .error {
@@ -909,9 +908,28 @@ table.sortable-table .header:focus, .sortable-table .header:hover {
  * Page: forgotten-password
  * ==============================================
  */
+ #tgm-forgotten-password {
+    font-family: "OpenSansRegular",Arial,sans-serif;
+    background: #F8F8F8; /* Old browsers */
+    background-image: url("../Images/bg-noise.png"), -moz-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* FF3.6+ */
+    background-image: url("../Images/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#F8F8F8)); /* Chrome,Safari4+ */
+    background-image: url("../Images/bg-noise.png"), -webkit-linear-gradient(top,  #F4F4F4 55px, #F8F8F8 100%); /* Chrome10+,Safari5.1+ */
+    background-image: url("../Images/bg-noise.png"), -o-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* Opera 11.10+ */
+    background-image: url("../Images/bg-noise.png"), -ms-linear-gradient(top, #F4F4F4 55px,  #F8F8F8 100%); /* IE10+ */
+    background-image: url("../Images/bg-noise.png"), linear-gradient(to bottom, #F4F4F4 55px, #F8F8F8 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F2F2F2', endColorstr='#F8F8F8',GradientType=0 ); /* IE6-9 */
+}
 #tgm-forgotten-password .container{
     background: none;
     margin-top : 0;
+}
+#tgm-forgotten-password h1 {
+    margin-bottom: 1.5em;
+    margin-top: 1.5em;
+    font-family: OpenSansBold;
+    text-align: center;
+    font-size: 43px;
+    color : #4D4D4D;
 }
 #forgotten-password-submit {
     padding-top: 0;
@@ -946,9 +964,58 @@ table.sortable-table .header:focus, .sortable-table .header:hover {
  * Page: forgotten-password-confirmation
  * ==============================================
  */
+#tgm-forgotten-password-confirmation {
+    font-family: "OpenSansRegular",Arial,sans-serif;
+    background: #F8F8F8; /* Old browsers */
+    background-image: url("../Images/bg-noise.png"), -moz-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* FF3.6+ */
+    background-image: url("../Images/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#F8F8F8)); /* Chrome,Safari4+ */
+    background-image: url("../Images/bg-noise.png"), -webkit-linear-gradient(top,  #F4F4F4 55px, #F8F8F8 100%); /* Chrome10+,Safari5.1+ */
+    background-image: url("../Images/bg-noise.png"), -o-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* Opera 11.10+ */
+    background-image: url("../Images/bg-noise.png"), -ms-linear-gradient(top, #F4F4F4 55px,  #F8F8F8 100%); /* IE10+ */
+    background-image: url("../Images/bg-noise.png"), linear-gradient(to bottom, #F4F4F4 55px, #F8F8F8 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F2F2F2', endColorstr='#F8F8F8',GradientType=0 ); /* IE6-9 */
+}
 #tgm-forgotten-password-confirmation .container{
     background: none;
     margin-top : 0;
+}
+#tgm-forgotten-password-confirmation h1 {
+    margin-bottom: 1.5em;
+    margin-top: 1.5em;
+    font-family: OpenSansBold;
+    text-align: center;
+    font-size: 43px;
+    color : #4D4D4D;
+}
+#tgm-forgotten-password-confirmation .alert-message.block-message.success {
+    text-align: center;
+}
+/*
+ * Page: reset-password
+ * ==============================================
+ */
+#tgm-reset-password {
+    font-family: "OpenSansRegular",Arial,sans-serif;
+    background: #F8F8F8; /* Old browsers */
+    background-image: url("../Images/bg-noise.png"), -moz-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* FF3.6+ */
+    background-image: url("../Images/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#F8F8F8)); /* Chrome,Safari4+ */
+    background-image: url("../Images/bg-noise.png"), -webkit-linear-gradient(top,  #F4F4F4 55px, #F8F8F8 100%); /* Chrome10+,Safari5.1+ */
+    background-image: url("../Images/bg-noise.png"), -o-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* Opera 11.10+ */
+    background-image: url("../Images/bg-noise.png"), -ms-linear-gradient(top, #F4F4F4 55px,  #F8F8F8 100%); /* IE10+ */
+    background-image: url("../Images/bg-noise.png"), linear-gradient(to bottom, #F4F4F4 55px, #F8F8F8 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F2F2F2', endColorstr='#F8F8F8',GradientType=0 ); /* IE6-9 */
+}
+#tgm-reset-password .container{
+    background: none;
+    margin-top : 0;
+}
+#tgm-reset-password h1 {
+    margin-bottom: 1.5em;
+    margin-top: 1.5em;
+    font-family: OpenSansBold;
+    text-align: center;
+    font-size: 43px;
+    color : #4D4D4D;
 }
 
 /*
@@ -1685,7 +1752,12 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
 #synthesis-result .project-fail {
     text-align: left;
 }
-
+#failed-test-list-link {
+    text-align: right;
+}
+#failed-test-list-link a {
+    margin-right: 2%;
+}
 /*
  * Page : score (template)
  * ----------------------------------------------

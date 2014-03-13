@@ -150,4 +150,16 @@ public interface ContractInfo {
      * @param actionList 
      */
     void setActionList(Collection<Action> actionList);
+    
+    /**
+     * 
+     * @return the preset contract key when it exits
+     */
+    String getPresetContractKey();
+    
+    /**
+     * 
+     * @param presetContractKey 
+     */
+    void setPresetContractKey(String presetContractKey);
 }

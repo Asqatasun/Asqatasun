@@ -83,8 +83,10 @@ public class LoginController extends AbstractUserAndContractsController{
         if (isAuthenticated()) {
             if (StringUtils.isNotBlank(email)){
                 logoutCurrentUser(request);
+            } else if (getCurrentUser().getEmail1().equalsIgnoreCase(guestUser)) {
+                logoutCurrentUser(request);
             } else {
-                return TgolKeyStore.HOME_VIEW_NAME;
+                return TgolKeyStore.HOME_VIEW_REDIRECT_NAME;
             }
         }
         return TgolKeyStore.LOGIN_VIEW_NAME;

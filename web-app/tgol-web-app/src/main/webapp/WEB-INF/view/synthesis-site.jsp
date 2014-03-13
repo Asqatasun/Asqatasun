@@ -134,7 +134,13 @@
                         </c:forEach>
                         </tbody>
                     </table>
+                    
                 </div><!-- class="span16  tg-table-container"-->
+                <div id="failed-test-list-link" class="span16">
+                    <a href="<c:url value="/home/contract/failed-test-list.html?audit=${param.audit}"/>">
+                        <fmt:message key="synthesisSite.displayTheCompleteListOfFailedTests"/>
+                    </a>
+                </div>
                 <div class="span16 tg-table-title">
                     <h2 id="top5-invalid-theme">
                         <spring:message code="synthesisSite.top5-invalid-theme"/>
@@ -202,7 +208,8 @@
                                 ${fn:length(failedPageInfoByOccurrenceSet)}
                             </fmt:param>
                         </fmt:message> 
-                        <fmt:message key="synthesisSite.sorted-by-occurrence"/></h2>
+                        <fmt:message key="synthesisSite.sorted-by-occurrence"/>
+                    </h2>
                 </div><!-- class="span16 tg-table-title"-->
                 <div class="span16 tg-table-container">
                     <table id="top5-failed-url-by-occurrence" class="tg-table">

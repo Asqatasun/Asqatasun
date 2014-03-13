@@ -151,6 +151,7 @@ public class HomeControllerTest extends TestCase {
 
         mockContractDataService = createMock(ContractDataService.class); 
         expect(mockContractDataService.getUrlFromContractOption(mockContract)).andReturn("").once();
+        expect(mockContractDataService.getPresetContractKeyContractOption(mockContract)).andReturn("").once();
         expect(mockContractDataService.read(Long.valueOf("1"))).andReturn(mockContract).once();
         
         replay(mockContractDataService);

@@ -24,8 +24,6 @@ package org.opens.tgol.util;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.jsp.PageContext;
 
 /**

@@ -21,12 +21,13 @@
         </spring:hasBindErrors>
     </c:set>
     <%@include file="template/head.jsp" %>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/Css/tgm-login.css"/>" />
     <body id="tgm-forgotten-password">
         <div class="topbar">
             <div class="fill">
                 <div class="container">
                     <a href="<c:url value="/login.html"/>" title="<fmt:message key="sign-up.backToLogin"/>">
-                        <img src="${tgLogoUrl}" alt="<fmt:message key="sign-up.backToLogin"/>" />
+                        <img id="login-topbar-logo" src="${tgLogoUrl}" alt="<fmt:message key="sign-up.backToLogin"/>" />
                     </a>
                     <ul class="nav secondary-nav">
                         <li>

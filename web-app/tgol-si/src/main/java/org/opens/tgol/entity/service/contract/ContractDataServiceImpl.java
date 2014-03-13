@@ -37,6 +37,7 @@ public class ContractDataServiceImpl extends AbstractGenericDataService<Contract
         implements ContractDataService {
 
     private static final String URL_OPTION_NAME = "DOMAIN";
+    private static final String PRESET_CONTRACT_OPTION_NAME = "PRESET_CONTRACT";
     
     @Override
     public Collection<Contract> getAllContractsByUser(User user) {
@@ -47,6 +48,17 @@ public class ContractDataServiceImpl extends AbstractGenericDataService<Contract
     public String getUrlFromContractOption(Contract contract) {
         for (OptionElement optionElement : ((ContractDAO) entityDao).read(contract.getId()).getOptionElementSet()) {
             if (StringUtils.equals(URL_OPTION_NAME, optionElement.getOption().getCode())) {
+                return optionElement.getValue();
+            }
+        }
+        return "";
+    }
+    
+    @Override
+    public String getPresetContractKeyContractOption(Contract contract) {
+        for (OptionElement optionElement : 
+                ((ContractDAO) entityDao).read(contract.getId()).getOptionElementSet()) {
+            if (StringUtils.equals(PRESET_CONTRACT_OPTION_NAME, optionElement.getOption().getCode())) {
                 return optionElement.getValue();
             }
         }

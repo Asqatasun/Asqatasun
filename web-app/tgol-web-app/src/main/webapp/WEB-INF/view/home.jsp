@@ -69,7 +69,7 @@
                 <c:forEach var="contract" items="${contractList}" varStatus="pContractSet">
                     <c:set var="explanation">
                         <c:catch var="explanationException">
-                            <spring:message code="${contract.label}-explanation" arguments="${tg:host(contract.url)}"/>
+                            <spring:message code="${contract.presetContractKey}-explanation" arguments="${tg:host(contract.url)}"/>
                         </c:catch>
                     </c:set>
                     <table class="project-table">
@@ -92,12 +92,7 @@
                         <td class="project-info">
                             <h2 class="project-name">
                                 <a href="home/contract.html?cr=${contract.id}">
-                                    <c:catch var="i18nException">
-                                        <spring:message code="${contract.label}" arguments="${tg:host(contract.url)}"/>
-                                    </c:catch>
-                                    <c:if test = "${i18nException != null}">
-                                        ${contract.label}
-                                    </c:if>
+                                    ${contract.label}
                                 </a>
                                 <c:if test="${contract.isActRunning == 'true'}">
                                 <img src="${gearImgUrl}" title="<fmt:message key="home.actRunning"/>" alt="<fmt:message key="home.actRunning"/>" class="running-audit"/>

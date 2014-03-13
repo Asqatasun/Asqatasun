@@ -125,6 +125,52 @@ public class AuditSynthesisController extends AuditDataHandlerController {
     }
 
     /**
+     * 
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = TgolKeyStore.FAILED_TEST_LIST_CONTRACT_URL, method = RequestMethod.GET)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
+    public String displayAuditTestSynthesisFromContract(
+            @RequestParam(TgolKeyStore.AUDIT_ID_KEY) String auditId,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            Model model) {
+        Long aId;
+        try {
+            aId = Long.valueOf(auditId);
+        } catch (NumberFormatException nfe) {
+            throw new ForbiddenPageException();
+        }
+        Audit audit = getAuditDataService().read(aId);
+        if (isUserAllowedToDisplayResult(audit)) {
+            if (isAuthorizedScopeForSynthesis(audit)) {
+                Contract contract = retrieveContractFromAudit(audit);
+                model.addAttribute(
+                        TgolKeyStore.CONTRACT_ID_KEY,contract.getId());
+                model.addAttribute(
+                        TgolKeyStore.CONTRACT_NAME_KEY,contract.getLabel());
+                model.addAttribute(TgolKeyStore.AUDIT_ID_KEY, auditId);
+                model.addAttribute(TgolKeyStore.WEBRESOURCE_ID_KEY, audit.getSubject().getId());
+                Site site = (Site)audit.getSubject();
+                addAuditStatisticsToModel(site, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE);
+                model.addAttribute(TgolKeyStore.FAILED_TEST_INFO_BY_OCCURRENCE_SET_KEY,
+                getWebResourceDataService().getFailedTestByOccurrence(site, audit, -1));
+                model.addAttribute(TgolKeyStore.HAS_SITE_SCOPE_TEST_KEY,
+                        getWebResourceDataService().hasAuditSiteScopeTest(site, getSiteScope()));
+                model.addAttribute(TgolKeyStore.STATUS_KEY, computeAuditStatus(site.getAudit()));
+                return TgolKeyStore.FAILED_TEST_LIST_VIEW_NAME;
+                
+            } else {
+                throw new ForbiddenPageException();
+            }
+        } else {
+            throw new ForbiddenUserException();
+        }
+    }
+    
+    /**
      * This method prepares data for the synthesis page. Only multi pages audit
      * are considered here
      * 

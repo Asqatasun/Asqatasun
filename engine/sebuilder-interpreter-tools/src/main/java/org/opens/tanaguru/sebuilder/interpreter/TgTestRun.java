@@ -30,10 +30,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import javax.imageio.ImageIO;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -277,10 +274,15 @@ public class TgTestRun extends TestRun {
              * bar.
              */
             WebElement body = getDriver().findElementByTagName("html");
-            body.sendKeys(Keys.TAB);
+            Map<String, String> jsScriptResult = Collections.EMPTY_MAP;
+            try {
+                body.sendKeys(Keys.TAB);
+                jsScriptResult = executeJsScripts();
+            } catch (WebDriverException wde) {
+                getLog().warn(wde.getMessage());
+            }
             /*##############################################################*/
             
-            Map<String, String> jsScriptResult = executeJsScripts();
             /* byte[] snapshot = createPageSnapshot();*/
             for (NewPageListener npl : newPageListeners) {
                 npl.fireNewPage(url, sourceCode, null, jsScriptResult);

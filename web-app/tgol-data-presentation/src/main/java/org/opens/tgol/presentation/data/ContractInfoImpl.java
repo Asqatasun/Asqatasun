@@ -22,9 +22,9 @@
 package org.opens.tgol.presentation.data;
 
 import java.util.Collection;
-import org.opens.tgol.util.TgolEscapeUrl;
 import java.util.Date;
 import org.opens.tgol.action.Action;
+import org.opens.tgol.util.TgolEscapeUrl;
 
 /**
  *
@@ -129,6 +129,17 @@ public class ContractInfoImpl implements ContractInfo {
     @Override
     public void setActionList(Collection<Action> actionList) {
         this.actionList = actionList;
+    }
+
+    private String presetContractKey = "";
+    @Override
+    public String getPresetContractKey() {
+        return presetContractKey;
+    }
+
+    @Override
+    public void setPresetContractKey(String presetContractKey) {
+        this.presetContractKey = presetContractKey;
     }
 
 }

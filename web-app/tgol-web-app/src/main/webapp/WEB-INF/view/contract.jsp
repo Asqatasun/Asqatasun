@@ -82,12 +82,7 @@
             <div class="row">
                 <div class="span16">
                     <h1>
-                        <c:catch var="i18nException">
-                            <spring:message code="${detailedContractInfo.label}" arguments="${tg:host(detailedContractInfo.url)}"/>
-                        </c:catch>
-                        <c:if test = "${i18nException != null}">
-                            ${detailedContractInfo.label}
-                        </c:if>
+                        ${detailedContractInfo.label}
                         <c:if test="${detailedContractInfo.isActRunning == 'true'}">
                         <img src="${gearImgUrl}" title="<fmt:message key="home.actRunning"/>" alt="<fmt:message key="home.actRunning"/>" class="running-audit"/>
                         </c:if>

@@ -479,8 +479,8 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         emailSender.sendEmail(
                 emailFrom, 
                 emailToSet, 
-                null, 
-                null,
+                Collections.EMPTY_SET, 
+                StringUtils.EMPTY,
                 emailSubject, 
                 emailMessage);
     }

@@ -10,36 +10,36 @@
 
     <!-- BLACK -->
     <bean id="blackColor" class="java.awt.Color">
-        <constructor-arg value="0"/>
-        <constructor-arg value="0"/>
-        <constructor-arg value="0"/>
+        <constructor-arg type="int" value="0"/>
+        <constructor-arg type="int" value="0"/>
+        <constructor-arg type="int" value="0"/>
     </bean>
 
     <bean id="thirtyPercentGrey" class="java.awt.Color">
-        <constructor-arg value="179"/>
-        <constructor-arg value="179"/>
-        <constructor-arg value="179"/>
+        <constructor-arg type="int" value="179"/>
+        <constructor-arg type="int" value="179"/>
+        <constructor-arg type="int" value="179"/>
     </bean>
 
     <!-- passed color : green -->
     <bean id="passedColor" class="java.awt.Color">
-        <constructor-arg value="0"/>
-        <constructor-arg value="174"/>
-        <constructor-arg value="0"/>
+        <constructor-arg type="int" value="0"/>
+        <constructor-arg type="int" value="174"/>
+        <constructor-arg type="int" value="0"/>
     </bean>
 
     <!-- failed color : red -->
     <bean id="failedColor" class="java.awt.Color">
-        <constructor-arg value="220"/>
-        <constructor-arg value="35"/>
-        <constructor-arg value="0"/>
+        <constructor-arg type="int" value="220"/>
+        <constructor-arg type="int" value="35"/>
+        <constructor-arg type="int" value="0"/>
     </bean>
 
     <!-- nmi color : cyan -->
     <bean id="nmiColor" class="java.awt.Color">
-        <constructor-arg value="0"/>
-        <constructor-arg value="153"/>
-        <constructor-arg value="255"/>
+        <constructor-arg type="int" value="0"/>
+        <constructor-arg type="int" value="153"/>
+        <constructor-arg type="int" value="255"/>
     </bean>
 
     <!-- na color : black -->
@@ -48,9 +48,9 @@
 
     <!-- header cell color : cyan -->
     <bean id="headerCellColor" class="java.awt.Color">
-        <constructor-arg value="255"/>
-        <constructor-arg value="255"/>
-        <constructor-arg value="204"/>
+        <constructor-arg type="int" value="255"/>
+        <constructor-arg type="int" value="255"/>
+        <constructor-arg type="int" value="204"/>
     </bean>
 
 </beans>

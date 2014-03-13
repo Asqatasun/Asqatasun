@@ -242,6 +242,7 @@ public class ContractControllerTest extends TestCase {
         mockContractDataService = createMock(ContractDataService.class); 
         if (getUrlFromContractOption > 0  ) {
             expect(mockContractDataService.getUrlFromContractOption(mockContract)).andReturn("").times(getUrlFromContractOption);
+            expect(mockContractDataService.getPresetContractKeyContractOption(mockContract)).andReturn("").times(getUrlFromContractOption);
         }
         if (getReadContractIdCounter > 0) {
             expect(mockContractDataService.read(Long.valueOf(1))).andReturn(mockContract).times(getReadContractIdCounter);

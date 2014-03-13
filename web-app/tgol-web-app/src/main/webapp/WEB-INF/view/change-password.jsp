@@ -33,9 +33,9 @@
         <c:set var="authenticated" scope="request" value="true"/>
     </sec:authorize>
     <%@include file="template/head.jsp" %>
-    <body id="tgm-change-password">
         <c:choose>
             <c:when test="${authenticated}">
+    <body id="tgm-change-password">                
         <c:set var="displayLogoutLink" scope="page" value="true"/>
         <c:if test="${changeUserPasswordFromAdmin}">
             <c:set var="adminActive" value="true"/>
@@ -66,9 +66,25 @@
             </c:if>
             </c:when>
             <c:otherwise>
-        <c:set var="addLogo" scope="page" value="true"/>
+        <link rel="stylesheet" type="text/css" href="<c:url value="/Css/tgm-login.css"/>" />
+        <body id="tgm-reset-password">
+            <div class="topbar">
+                <div class="fill">
+                    <div class="container">
+                        <a href="<c:url value="/login.html"/>" title="<fmt:message key="sign-up.backToLogin"/>">
+                            <img id="login-topbar-logo" 
+                                 src="<c:url value="/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/> " 
+                                 alt="<fmt:message key="sign-up.backToLogin"/>" />
+                        </a>
+                        <ul class="nav secondary-nav">
+                            <li>
+                                <%@include file="template/lang-box.jsp" %>
+                            </li>
+                        </ul>
+                    </div> <!-- class="container"-->
+                </div> <!-- class="fill"-->
+            </div> <!-- class="topbar"-->
         <div class="container not-authentified">
-        <%@include file="template/lang-box.jsp" %>
             </c:otherwise>
         </c:choose>
             <c:set var="pageName" scope="page">

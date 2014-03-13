@@ -32,6 +32,7 @@ import java.nio.charset.UnsupportedCharsetException;
 import java.util.NoSuchElementException;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriter;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.archive.io.RecordingInputStream;
 import org.mozilla.universalchardet.UniversalDetector;
@@ -61,20 +62,30 @@ public final class CrawlUtils {
     public static String convertSourceCodeIntoUtf8(
             RecordingInputStream recis,
             String charset) throws IOException {
-        if (!charset.equalsIgnoreCase(DEFAULT_CHARSET)) {
-            Charset utf8charset = Charset.forName(DEFAULT_CHARSET);
-            Charset incomingCharset = Charset.forName(charset);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            recis.getReplayInputStream().readContentTo(baos);
-            ByteBuffer inputBuffer = ByteBuffer.wrap(baos.toByteArray());
-            CharBuffer data = incomingCharset.decode(inputBuffer);
-            ByteBuffer outputBuffer = utf8charset.encode(data);
-            byte[] outputData = outputBuffer.array();
-            return new String(outputData);
-        } else {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            recis.getReplayInputStream().readContentTo(baos);
-            return baos.toString(charset);
+        ByteArrayOutputStream baos = null;
+        try {
+            if (!charset.equalsIgnoreCase(DEFAULT_CHARSET)) {
+                Charset utf8charset = Charset.forName(DEFAULT_CHARSET);
+                Charset incomingCharset = Charset.forName(charset);
+                baos = new ByteArrayOutputStream();
+                recis.getReplayInputStream().readContentTo(baos);
+                ByteBuffer inputBuffer = ByteBuffer.wrap(baos.toByteArray());
+                CharBuffer data = incomingCharset.decode(inputBuffer);
+                ByteBuffer outputBuffer = utf8charset.encode(data);
+                byte[] outputData = outputBuffer.array();
+                String source = new String(outputData);
+                return source;
+            } else {
+                baos = new ByteArrayOutputStream();
+                recis.getReplayInputStream().readContentTo(baos);
+                String source = baos.toString(charset);
+                return source;
+            }
+        } finally {
+            IOUtils.closeQuietly(recis);
+            if (baos != null) {
+                IOUtils.closeQuietly(baos);
+            }
         }
     }
 
