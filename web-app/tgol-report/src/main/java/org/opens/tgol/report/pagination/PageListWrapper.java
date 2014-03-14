@@ -147,17 +147,18 @@ public class PageListWrapper extends TableDecorator {
             ResourceBundle resourceBundle) {
 
         int lId = pageResult.getId().intValue();
+        String url = pageResult.getUrl().replaceAll("&", "&amp;");
         Integer mark = Integer.valueOf(pageResult.getRawMark());
         if (mark > 0 ) {
             return "<a href=\"page-result.html?wr=" + 
                     lId + 
                     "\" title=\"" + 
-                    getTitle(resourceBundle, pageResult.getUrl())+
+                    getTitle(resourceBundle, url)+
                     "\">"+
-                    pageResult.getUrl()+
+                    url+
                     "</a>";
         } else {
-            return pageResult.getUrl() +" ("+getNoDetailedResult(resourceBundle)+")";
+            return url +" ("+getNoDetailedResult(resourceBundle)+")";
         }
     }
 
