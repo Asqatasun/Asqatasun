@@ -2,7 +2,7 @@
 
 Tanaguru is an opensource (AGPL license) website assessment tool dedicated to
 
-* accessibility (a11y) audits,  
+* accessibility (a11y) audits
 
 ## Features
 
@@ -25,9 +25,13 @@ Four kinds of audit:
 
 http://www.tanaguru.org/Download/tanaguru-latest.tar.gz
 
+## Demo
+
+http://beta.tanaguru.com/
+
 ## Installation and documentation
 
-All is here: http://www.tanaguru.org/en/content/documentation
+[Tanaguru wiki](http://www.tanaguru.org) (registration is warmly welcomed, please email mfaure AT tanaguru. org)
 
 More precisely:
 
@@ -44,26 +48,9 @@ What tests are covered:
 * language specification
 * downloadable files / office files (spreadsheet, wordprocessor...)
 * switch of context
+* ...
 
 By january 2014, this represents [~170 accessibility tests](http://www.tanaguru.org/en/content/accessiweb-22-coverage)
-
-## Links
-
-* [Tanaguru wiki](http://www.tanaguru.org) (registration is warmly welcomed, please email mfaure AT tanaguru. org)
-
-## Vision expanded
-
-Last point to complete the vision:
-
-* and create other tools if needed
-
-So you can see also
-
-* [KBAccess](http://www.kbaccess.org/) : database of good and bad examplee
-* [Tanaguru Contrast-Finder](http://contrast-finder.tanaguru.com/) : for a given wrong contrast, *propose* good color combination
-* [Accessibility observatory](http://observatoire-accessibilite.org/) : have an overview of the accessibility of a large set of websites
- 
-All these projects are opensource and also under the umbrella of [Tanaguru Github account](https://github.com/Tanaguru)
 
 ## Contact and mailing-list
 
@@ -81,18 +68,27 @@ Or you can send an email to
 ## Content of this (last) version
 
 Bugs :
-#47 : The language detection tests return bad results for uppercase submitted text
+
+- [#47](https://github.com/Tanaguru/Tanaguru/issues/47) : The language detection tests return bad results for uppercase submitted text
 
 Features : 
+
 - Rgaa 2.2 referential full supported
 - Postgresql management (creation and insertion scripts)
 - Crawl optimisations (deal with canonical, improve fetch counting, improve fetch of testable data)
-#50 : Provide a way to set-up whether the cookies have to be considered while crawling
-#49 : [SEO 6.4.1] For a given title value, sort URLs
-#46 : Override default user agent used by apache library to test URL before launching effectively the audit
-#43 : Disable the load of Css content for audit of SEO type
-#37 : Mail server is not configurable://github.com/Tanaguru/Tanaguru/issues/37)
+- [#50](https://github.com/Tanaguru/Tanaguru/issues/50) : Provide a way to set-up whether the cookies have to be considered while crawling
+- [#49](https://github.com/Tanaguru/Tanaguru/issues/49) : [SEO 6.4.1] For a given title value, sort URLs
+- [#46](https://github.com/Tanaguru/Tanaguru/issues/46) : Override default user agent used by apache library to test URL before launching effectively the audit
+- [#43](https://github.com/Tanaguru/Tanaguru/issues/43) : Disable the load of Css content for audit of SEO type
+- [#37](https://github.com/Tanaguru/Tanaguru/issues/37) : Mail server is not configurable
 
+## Other opensource tools
+
+* [KBAccess](http://www.kbaccess.org/) : database of good and bad examples of web accessibility
+* [Tanaguru Contrast-Finder](http://contrast-finder.tanaguru.com/) : for a given wrong contrast, *propose* good color combination
+* [Accessibility observatory](http://observatoire-accessibilite.org/) : have an overview of the accessibility of a large set of websites
+ 
+All these projects are opensource and also under the umbrella of [Tanaguru Github account](https://github.com/Tanaguru)
 
 Have Fun
 
