@@ -85,7 +85,7 @@
                                     <c:set var="abbrTitle">
                                         ${failedTestByPageInfo.testLabel} : <spring:message code="${failedTestByPageInfo.testCode}"/>
                                     </c:set>
-                                    <abbr title="${fn:replace(abbrTitle,"\"", "&quot;")}"  style="border-bottom: 1px dotted;cursor: help;">
+                                    <abbr title="${fn:escapeXml(abbrTitle)}"  style="border-bottom: 1px dotted;cursor: help;">
                                         ${failedTestByPageInfo.testLabel}
                                     </abbr>
                                 </td>
