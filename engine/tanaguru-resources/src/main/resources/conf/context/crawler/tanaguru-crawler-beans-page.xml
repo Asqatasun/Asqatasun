@@ -452,20 +452,20 @@ metadata.description=Basic crawl starting with useful defaults
 
     <property name="domain">
         <value>
-            localhost:8080
+            $MyDOmaiN
         </value>
     </property>
 
     <property name="login-uri">
         <value>
-            http://localhost:8080/tgol-web-app-1.0-SNAPSHOT/login.html
+            $My login URI
         </value>
     </property>
 
     <property name="form-items">
         <map>
-            <entry key="j_username" value="grom83@gmail.com"/>
-            <entry key="j_password" value="T0NY_g059"/>
+            <entry key="j_username" value=""/>
+            <entry key="j_password" value=""/>
             <entry key="submit" value="Login"/>
         </map>
     </property>
