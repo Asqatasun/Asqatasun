@@ -413,7 +413,7 @@ input:-ms-input-placeholder, .topbar input:-ms-input-placeholder, textarea:-ms-i
     position: absolute;
 }
 .mandatory {
-    color : #E20200;
+    color : #D00501;
 }
 
 /*
