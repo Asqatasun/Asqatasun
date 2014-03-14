@@ -32,7 +32,6 @@ INSERT IGNORE INTO `TGSI_OPTION_FAMILY` (`Id_Option_Family`, `Code`, `Label`) VA
 (3, 'ACT_MANAGEMENT', ''),
 (4, 'CONTRACT_MANAGEMENT', '');
 
-INSERT IGNORE INTO `TGSI_OPTION` (`Id_Option`, `Code`, `Description`, `Is_Restriction`, OPTION_FAMILY_Id_Option_Family) VALUES
 (1, 'ACT_LIMITATION', 'The act limitation unit is the number of acts', b'1', 2),
 (2, 'ACT_BY_IP_LIMITATION', 'The act by ip limitation unit is the number of acts in a period for a given ip.
 The period is expressed in seconds and the format is \"nb_of_acts/period\"', b'1', 2),
