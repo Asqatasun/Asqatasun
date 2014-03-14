@@ -82,9 +82,12 @@
                         <c:forEach var="failedTestByPageInfo" items="${failedTestInfoByPageSet}" varStatus="pFailedTestInfoByPageSet">
                             <tr>
                                 <td headers="testTop5FailedTestByPage" class="tg-textual-column">
-                                    <a href="<spring:message code="${failedTestByPageInfo.testCode}-url"/>" title="<spring:message code="${failedTestByPageInfo.testCode}"/>">
+                                    <c:set var="abbrTitle">
+                                        ${failedTestByPageInfo.testLabel} : <spring:message code="${failedTestByPageInfo.testCode}"/>
+                                    </c:set>
+                                    <abbr title="${fn:replace(abbrTitle,"\"", "&quot;")}"  style="border-bottom: 1px dotted;cursor: help;">
                                         ${failedTestByPageInfo.testLabel}
-                                    </a>
+                                    </abbr>
                                 </td>
                                 <td headers="urlListTop5FailedTestByPage" class="tg-textual-column">
                                     <a href="<c:url value="/home/contract/page-list.html?audit=${param.audit}&amp;status=f2xx&amp;sortDirection=2&amp;test=${failedTestByPageInfo.testLabel}"/>">
