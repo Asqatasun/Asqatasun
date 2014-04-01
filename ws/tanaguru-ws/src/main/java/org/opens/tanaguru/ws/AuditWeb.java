@@ -1,39 +1,28 @@
 package org.opens.tanaguru.ws;
 
-import javax.jws.WebMethod;
-import javax.jws.WebService;
-import org.opens.tanaguru.entity.audit.AuditImpl;
-import org.opens.tanaguru.service.AuditService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Response;
+
 
 /**
+ * Webservice interface definition.
  * 
- * @author jkowalczyk
+ * This interface defines all exposed webservice's operations. 
+ *
  */
-//@WebService
-public class AuditWeb {
+public interface AuditWeb {
+	
+	// Launching audits operations
 
-//    private AuditService auditService;
-//
-//    public AuditWeb() {
-//        super();
-//    }
-//
-//    public void setAuditService(AuditService auditService) {
-//        this.auditService = auditService;
-//    }
-//
-//    @WebMethod
-//    public AuditImpl auditPage(String pageURL, String[] testCodeList) {
-////        return (AuditImpl) auditService.auditPage(pageURL, testCodeList);
-//    }
-//
-//    @WebMethod
-////    public AuditImpl auditSite(String siteURL, String[] testCodeList) {
-//        return (AuditImpl) auditService.auditSite(siteURL, testCodeList);
-//    }
-//
-//    @WebMethod
-//    public AuditImpl auditSiteWithoutCrawler(String siteUrl, String[] pageUrlList, String[] testCodeList) {
-//        return (AuditImpl) auditService.auditSite(siteUrl, pageUrlList, testCodeList);
-//    }
+	
+
+    public Response auditPage(String pageURL, String level, HttpServletRequest request);
+	
+	//As a first step, json file is defined as a simple string. This may change in future versions.
+	public Response auditScenario( String scenarioName, String scenarioText , String level);
+	
+	public Response auditSite(String siteURL, String level);
+	
+	//results
 }
