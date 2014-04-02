@@ -91,8 +91,11 @@ public final class TgolKeyStore {
     public static final String AUDIT_RESULT_CONTRACT_URL =
             CONTRACT_URL+AUDIT_RESULT_URL;
     public static final String PAGE_RESULT_URL = "/page-result";
+    public static final String PAGE_MANUAL_AUDIT_URL = "/page-manual";
     public static final String PAGE_RESULT_CONTRACT_URL =
             CONTRACT_URL+PAGE_RESULT_URL;
+    public static final String PAGE_MANUAL_AUDIT_CONTRACT_URL =
+            CONTRACT_URL+PAGE_MANUAL_AUDIT_URL;
     public static final String SITE_RESULT_URL = "/site-result";
     public static final String SITE_RESULT_CONTRACT_URL =
             CONTRACT_URL+SITE_RESULT_URL;
@@ -229,6 +232,7 @@ public final class TgolKeyStore {
     public static final String AUDIT_RESULT_SORT_COMMAND_KEY="auditResultSortCommand";
     public static final String CONTRACT_SORT_COMMAND_KEY="contractSortCommand";
     public static final String WEBRESOURCE_ID_KEY = "wr";
+    public static final String IS_MANUAL_AUDIT_KEY = "ma";
     public static final String AUDIT_ID_KEY = "audit";
     public static final String DISPLAY_SCOPE_KEY = "lvl";
     public static final String EXPORT_FORMAT_KEY = "format";
@@ -276,6 +280,7 @@ public final class TgolKeyStore {
     public static final String RESULT_ACTION_LIST_KEY = "resultActionList";
     public static final String HOME_ACTION_LIST_KEY = "homeActionList";
     public static final String DISPLAY_RESULT_TREND_KEY = "displayResultTrend";
+    public static final String CONTRACT_WITH_MANUAL_AUDIT_KEY = "displayManualAuditOption";
     public static final String CONTRACT_LIST_KEY = "contractList";
     public static final String USER_LIST_KEY = "userList";
     public static final String RETURN_PAGE_URL_KEY="returnPageUrl";
