@@ -257,6 +257,15 @@
                                 </td>
                                 <td headers="scope" class="tg-textual-column"><fmt:message key="${actInfo.scope}"/></td>
                                 <td headers="status" class="tg-textual-column"><fmt:message key="${actInfo.status}"/></td>
+                                <c:if test="${displayManualAuditOption == 'true'}">
+	                                <td headers="page-url" class="tg-textual-column">
+	                                <c:set var="auditUrl" scope="page" value="/home/contract/audit-result.html?audit="/>
+	                                <a href="<c:url value="${auditUrl}${actInfo.auditId}&ma=true"/>" >
+	                                        <fmt:message key="pageList.manualAudit"/>
+	                                    </a>
+	                                </td>
+                                </c:if>
+                                
                             </tr>
                         </c:forEach>
                         <c:if test="${fn:length(detailedContractInfo.lastActInfoSet) > 0}">

@@ -22,6 +22,8 @@
 package org.opens.tgol.validator;
 
 import java.util.*;
+import java.util.Map.Entry;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.opens.tgol.command.CreateContractCommand;
@@ -59,7 +61,8 @@ public class CreateContractFormValidator implements Validator {
             "edit-contract.endDateAnteriorToBeginDate";
     private static final String INVALID_URL_KEY =
             "sign-up.invalidUrl";
-
+    private static final String COMBINATION_NOT_ALLOWED =
+    "edit-contract.typeAuditCombinationIsNotAllowed";
 //    private static final String URL_CHECKER_REGEXP =
 //            "(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
 //    private final Pattern urlCheckerPattern = Pattern.compile(URL_CHECKER_REGEXP);
@@ -78,7 +81,12 @@ public class CreateContractFormValidator implements Validator {
     public void validate(Object target, Errors errors) {
         CreateContractCommand ccc = (CreateContractCommand)target;
         checkMandatoryElements(ccc, errors, false);
-        checkElements(ccc, errors);
+        try {
+        	checkElements(ccc, errors);
+        }catch (IllegalArgumentException e) {
+//        	 errors.rejectValue("optionMap["+entry.getKey()+"]", coff.getFormField().getErrorI18nKey());
+        	//afficher le bon message
+        }
     }
 
     public void validateMultipleUsers(Object target, Errors errors) {
@@ -114,7 +122,11 @@ public class CreateContractFormValidator implements Validator {
         if (!checkDates(ccc, errors)) {
             hasMandatoryElementWrong = true;
         }
-        
+        if (!checkTypeAudit(ccc, errors))
+        {
+        	errors.rejectValue(GENERAL_ERROR_MSG_KEY, COMBINATION_NOT_ALLOWED);
+            hasMandatoryElementWrong = true;
+        } 
         if(hasMandatoryElementWrong) { // if no URL is filled-in
             errors.rejectValue(GENERAL_ERROR_MSG_KEY,
                     MANDATORY_FIELD_MSG_BUNDLE_KEY);
@@ -129,7 +141,7 @@ public class CreateContractFormValidator implements Validator {
     private void checkElements(
             CreateContractCommand ccc, 
             Errors errors) {
-        
+    
         checkContractUrl(ccc, errors);
         
         ContractOptionFormField coff;
@@ -150,7 +162,41 @@ public class CreateContractFormValidator implements Validator {
         }
     }
     
-    /**
+	private boolean checkTypeAudit(CreateContractCommand ccc, Errors errors) {
+		// TODO Auto-generated method stub
+		// taoufiq
+		boolean manual = false;
+		boolean scenario = false;
+		boolean upload = false;
+		boolean pages = false;
+		Map<String, Boolean> functionalityMap = ccc.getFunctionalityMap();
+		for (Entry<String, Boolean> it : functionalityMap.entrySet()) {
+			System.out.println(it.getKey());
+			System.out.println(it.getValue());
+			if (it.getKey().equals("MANUAL")) {
+				if (it.getValue() == null) {
+				} else
+					manual = true;
+			} else if (it.getKey().equals("SCENARIO")) {
+				if (it.getValue() == null) {
+				} else
+					scenario = true;
+			} else if (it.getKey().equals("UPLOAD")) {
+				if (it.getValue() == null) {
+				} else
+					upload = true;
+			} else if (it.getKey().equals("PAGES")) {
+				if (it.getValue() == null) {
+				} else
+					pages = true;
+			}
+		}
+		if (!pages && !upload && !scenario && manual)
+			return false;
+		return true;
+	}
+
+	/**
      *
      * @param userSubscriptionCommand
      * @param errors

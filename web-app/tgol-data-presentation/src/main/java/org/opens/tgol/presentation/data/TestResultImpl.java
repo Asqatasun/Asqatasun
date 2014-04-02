@@ -23,6 +23,7 @@ package org.opens.tgol.presentation.data;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.opens.tanaguru.entity.reference.Test;
 
 /**
@@ -32,8 +33,29 @@ import org.opens.tanaguru.entity.reference.Test;
 public class TestResultImpl implements TestResult{
 
     private List<RemarkInfos> remarkInfosList = new ArrayList<RemarkInfos>();
+    
+    // audit manuel
+	private String comment;
+	private String state;
+	
 
-    /**
+    public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	/**
      *
      * @return
      *          the list of remark info for the given test
