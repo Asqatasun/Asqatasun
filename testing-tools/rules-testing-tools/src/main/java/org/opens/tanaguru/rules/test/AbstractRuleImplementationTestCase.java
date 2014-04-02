@@ -357,7 +357,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     
     private void initializePath() {
         testcasesFilePath =
-                "file://" + System.getenv("PWD") + "/" + testcasesFilePath;
+                "file://" + System.getProperty("user.dir")  + "/" + testcasesFilePath;
         testcasesFilePath = FilenameUtils.normalize(testcasesFilePath);
     }
 
