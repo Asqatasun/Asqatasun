@@ -131,7 +131,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         this.crawlConfigFilePath = crawlConfigFilePath;
     }
 
-    private String outputDir = System.getenv("PWD") + "/output";
+    private String outputDir = System.getProperty("user.dir")  + "/output";
     public String getOutputDir() {
         return this.outputDir;
     }
