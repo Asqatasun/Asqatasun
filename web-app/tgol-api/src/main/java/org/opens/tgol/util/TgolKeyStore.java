@@ -318,6 +318,7 @@ public final class TgolKeyStore {
     public static final String CREATE_CONTRACT_COMMAND_KEY = "createContractCommand";
     public static final String CREATE_USER_ATTACK_COMMAND_KEY = "createUserAttack";
     public static final String CHANGE_TEST_WEIGHT_COMMAND_KEY ="changeTestWeightCommand";
+    public static final String MANUAL_AUDIT_COMMAND_KEY ="manualAuditCommand";
     public static final String TEST_WEIGHT_SUCCESSFULLY_UPDATED_KEY="testWeightSuccessfullyUpdated";
     public static final String IS_CONTRACT_EXPIRED_KEY = "isContractExpired";
     public static final String PARAMETERS_MAP_KEY = "parametersMap";
