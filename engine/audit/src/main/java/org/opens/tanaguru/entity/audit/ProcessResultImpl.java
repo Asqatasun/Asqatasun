@@ -26,11 +26,13 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlTransient;
+
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.TestImpl;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -74,8 +76,14 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     private TestImpl test;
     @Column(name = "Element_Counter")
     private int elementCounter;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "Manual_Defenitive_Value")
+    private TestSolution manualDefenitiveValue;
 
-    public ProcessResultImpl() {
+ 
+
+	public ProcessResultImpl() {
         super();
     }
 
@@ -225,5 +233,15 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     public void setElementCounter(int elementCounter){
        this.elementCounter = elementCounter;
     }
+    
+    @Override
+    public TestSolution getManualDefenitiveValue() {
+ 		return manualDefenitiveValue;
+ 	}
+    
+    @Override
+ 	public void setManualDefenitiveValue(TestSolution manualDefenitiveValue) {
+ 		this.manualDefenitiveValue = manualDefenitiveValue;
+ 	}
 
 }
