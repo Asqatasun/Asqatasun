@@ -13,6 +13,11 @@
     <name>tgol-web-app</name>
     <dependencies>
         <!-- tgol dependencies-->
+             <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>2.35.0</version>
+        </dependency>
         <dependency>
             <groupId>${webappGroupId}</groupId>
             <artifactId>tgol-orchestrator</artifactId>
