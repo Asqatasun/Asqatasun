@@ -97,7 +97,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     private int elementCounter;
     
     @Enumerated(EnumType.STRING)
-    @Column(name = "Manual_Defenitive_Value")
+    @Column(name = "Defenitive_Value_Manual")
     private TestSolution manualDefenitiveValue;
 
  
