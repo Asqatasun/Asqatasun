@@ -33,6 +33,9 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
+import org.hibernate.envers.RelationTargetAuditMode;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.TestImpl;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -48,32 +51,48 @@ import org.opens.tanaguru.entity.subject.WebResourceImpl;
         "Id_Audit_Gross_Result"}),
     @UniqueConstraint(columnNames = {"Id_Test", "Id_Web_Resource",
         "Id_Audit_Net_Result"})})
+@Audited
 public abstract class ProcessResultImpl implements ProcessResult, Serializable {
 
     private static final long serialVersionUID = -6016677895001819904L;
     @OneToMany(mappedBy = "parentResult", cascade = CascadeType.ALL)
     private Set<ProcessResultImpl> childResultSet;
+   
     @ManyToOne
     @JoinColumn(name = "Id_Audit_Gross_Result")
+    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     private AuditImpl grossResultAudit;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Process_Result")
     private Long id;
+    
     @ManyToOne
     @JoinColumn(name = "Id_Audit_Net_Result")
+    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     private AuditImpl netResultAudit;
+    
     @ManyToOne
     @JoinColumn(name = "Id_Process_Result_Parent")
     private ProcessResultImpl parentResult;
+    
+    
     @OneToMany(mappedBy = "processResult", cascade = {CascadeType.PERSIST})
+    @NotAudited
     private Set<ProcessRemarkImpl> remarkSet;
+    
     @ManyToOne
     @JoinColumn(name = "Id_Web_Resource", nullable = false)
+//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    @NotAudited
     private WebResourceImpl subject;
+    
     @ManyToOne
     @JoinColumn(name = "Id_Test")
+    @NotAudited
     private TestImpl test;
+    
     @Column(name = "Element_Counter")
     private int elementCounter;
     
@@ -88,6 +107,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     }
 
     @Override
+//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     public void addAllRemark(Collection<ProcessRemark> remarkSet) {
         if (remarkSet == null) {
             return;
@@ -108,6 +128,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     }
 
     @Override
+//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     public void addRemark(ProcessRemark remark) {
         if (remarkSet == null) {
             this.remarkSet = new LinkedHashSet<ProcessRemarkImpl>();
@@ -153,6 +174,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.ProcessRemarkImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.SourceCodeRemarkImpl.class)})
+//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     public Collection<ProcessRemark> getRemarkSet() {
         return (Collection)remarkSet;
     }
@@ -209,6 +231,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     }
 
     @Override
+//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     public void setRemarkSet(Collection<ProcessRemark> remarkSet) {
         if (this.remarkSet == null) {
             this.remarkSet = new LinkedHashSet<ProcessRemarkImpl>();
