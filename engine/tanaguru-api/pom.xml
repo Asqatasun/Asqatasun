@@ -63,6 +63,12 @@
             <groupId>${hibernateGroupId}</groupId>
             <artifactId>hibernate-core</artifactId>
         </dependency>
+       <dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-envers</artifactId>
+			<version>3.6.0.Final</version>
+		</dependency>
+            
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
