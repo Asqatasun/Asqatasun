@@ -141,5 +141,16 @@ public interface ActInfo {
      * @param referential 
      */
     void setReferential(String referential);
+    
+    /**
+     * @return 
+     *   the boolean of manual
+     * */
+    boolean isManual();
+    
+    /**
+     *  @param manual 
+     * **/
+    void setManual(boolean isManual);
 
 }
