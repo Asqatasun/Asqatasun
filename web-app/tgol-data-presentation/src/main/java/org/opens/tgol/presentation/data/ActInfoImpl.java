@@ -22,6 +22,7 @@
 package org.opens.tgol.presentation.data;
 
 import java.util.Date;
+
 import org.opens.tgol.util.TgolEscapeUrl;
 
 /**
@@ -29,8 +30,18 @@ import org.opens.tgol.util.TgolEscapeUrl;
  * @author jkowalczyk
  */
 public class ActInfoImpl implements ActInfo{
+	
+	private boolean isManual;
+	@Override
+    public boolean isManual() {
+		return isManual;
+	}
+    @Override
+	public void setManual(boolean isManual) {
+		this.isManual = isManual;
+	}
 
-    private Date date = null;
+	private Date date = null;
     @Override
     public Date getDate() {
         if (date != null) {
@@ -125,5 +136,5 @@ public class ActInfoImpl implements ActInfo{
     public void setReferential(String referential) {
         this.referential = referential;
     }
-
+    
 }
