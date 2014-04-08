@@ -6,29 +6,50 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.oceaneconsulting.tanaguru.entity.WsInvocation;
 import java.util.Date;
 
+/**
+ * Classe des invocations
+ * @author msobahi
+ *
+ */
 @Entity
 @Table(name = "WS_INVOCATION")
 @XmlRootElement
 public class WsInvocationImpl implements WsInvocation, Serializable {
 	  
-	  
+	/**
+	 * Identifiant  
+	 */
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_INVOCATION")
 	private Long id;
-	 
+	/**
+	 * Nom du host
+	 */
     @Column(name = "HOST_NAME") 
 	private String hostName;
-	    
+	
+    /**
+     * L'adresse IP du host
+     */
     @Column(name = "HOST_IP")
 	private String hostIp;
-	  
+	
+    /**
+     * Date d'invocation
+     */
     @Column(name = "DT_INVOCATION")
 	private Date dateInvocation;
-	  
+	
+    /**
+     * Le type d'audit
+     */
     @Column(name = "AUDIT_TYPE")
 	private Integer auditType;
 	
+    /**
+     * L'utilsateur qui a lancé l'audit
+     */
     @ManyToOne
     @JoinColumn(name = "ID_USER", nullable = false)
 	private WsUserImpl user;
@@ -69,7 +90,7 @@ public class WsInvocationImpl implements WsInvocation, Serializable {
     }
     
     @Override
-	public void setDateInvocation(){
+	public void setDateInvocation(Date dateInvocation){
     	this.dateInvocation = dateInvocation;
     }
     
