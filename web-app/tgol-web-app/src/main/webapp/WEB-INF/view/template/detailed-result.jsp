@@ -176,10 +176,11 @@
 	                            	<fieldset>
 	                            		<legend><fmt:message key="resultPage.overridenResult"/><span class="offscreen">${testResult.testShortLabel}</span>
 	                            		</legend>
+	                            		<form:hidden path="modifiedTestResultMap['${testResult.testShortLabel}'].testShortLabel" value="${testResult.testShortLabel}"/>
 	               						<c:forEach items="${manualAuditCommand.statusList}" var="auditStatus">
 	               							<div class="clearfix ">
 	               							 	<div class="input">
-	                                       			<form:radiobutton id="${auditStatus}${testResult.testShortLabel}" name="auditStatus${testResult.testShortLabel}" path="${testResult.status}" value="${auditStatus}"/>
+	               							 		<form:radiobutton id="${auditStatus}${testResult.testShortLabel}" name="auditStatus${testResult.testShortLabel}" path="modifiedTestResultMap['${testResult.testShortLabel}'].manualStatus" value="${auditStatus}"/>
 	                                      			<form:label path="" for="${auditStatus}${testResult.testShortLabel}"><fmt:message key="${auditStatus}"/></form:label>
 	                                      		</div>
 	                                      	</div>
@@ -200,7 +201,7 @@
                             
                             <div class="audit-result-manual-comment span11" id="commentContainer${testResult.testShortLabel}">
                             	<label for="cmt${testResult.testShortLabel}"> <fmt:message key="resultPage.commentArea"/> <span class="offscreen">${testResult.testShortLabel}</label>
-                            	<form:textarea id="cmt${testResult.testShortLabel}" path="${testResult.comment}" rows="2" cols="30" maxLength="250"/>
+                            	<form:textarea id="cmt${testResult.testShortLabel}" path="modifiedTestResultMap['${testResult.testShortLabel}'].comment" rows="2" cols="30" maxLength="250"/>
                             </div>
                         </div>
                     </div>
@@ -329,7 +330,11 @@
                     </c:forEach>
                 </div> <!-- div id="themex-results"> --> 
                 </c:forEach>
+                  <div id="manual-audit-form-submit" class="actions">
+                                <input class="btn primary" type="submit" value="Save"/>
+                 </div>
                 </div><!-- id="all-theme" -->
+               
                 </form:form>
             </c:when>
             <c:otherwise>
