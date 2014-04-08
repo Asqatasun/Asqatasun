@@ -1,7 +1,9 @@
 package com.oceaneconsulting.tanaguru.entity;
 
 import org.opens.tanaguru.sdk.entity.Entity;
+
 import com.oceaneconsulting.tanaguru.entity.impl.WsRoleImpl;
+
 /**
  * Interface de l'utilisateur web service 
  * @author msobahi
@@ -64,5 +66,29 @@ public interface WsUser extends Entity {
 	 * @param role Role de l'utilisateur
 	 */
 	void setRole(WsRoleImpl role);
+
+	/**
+	 * Getter de l'émail de l'utilisateur
+	 * @return l'émail de l'utilisateur
+	 */
+	String getEmail();
+
+	/**
+	 * Setter de l'émail de l'utilisateur
+	 * @param email L'émail de l'utilisateur
+	 */
+	void setEmail(String email);
+
+	/**
+	 * Getter du mot de passe de l'utilisateur
+	 * @return le mot de passe de l'utilisateur
+	 */
+	String getPassword();
+
+	/**
+	 * Setteir du mot de passe de l'utilisateur
+	 * @param password Le mot de passe 
+	 */
+	void setPassword(String password);
 	
 }
