@@ -5,6 +5,11 @@ import com.oceaneconsulting.tanaguru.dao.WsUserDao;
 import com.oceaneconsulting.tanaguru.entity.WsUser;
 import com.oceaneconsulting.tanaguru.entity.impl.WsUserImpl;
 
+/**
+ * Classe de la DAO des utilisateurs
+ * @author msobahi
+ *
+ */
 public class WsUserDaoImpl extends AbstractJPADAO<WsUser, Long> implements WsUserDao {
 	@Override
     protected Class<? extends WsUser> getEntityClass() {
