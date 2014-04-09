@@ -96,11 +96,6 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     @Column(name = "Element_Counter")
     private int elementCounter;
     
-    @Enumerated(EnumType.STRING)
-    @Column(name = "Defenitive_Value_Manual")
-    private TestSolution manualDefenitiveValue;
-
- 
 
 	public ProcessResultImpl() {
         super();
@@ -257,14 +252,4 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
        this.elementCounter = elementCounter;
     }
     
-    @Override
-    public TestSolution getManualDefenitiveValue() {
- 		return manualDefenitiveValue;
- 	}
-    
-    @Override
- 	public void setManualDefenitiveValue(TestSolution manualDefenitiveValue) {
- 		this.manualDefenitiveValue = manualDefenitiveValue;
- 	}
-
 }
