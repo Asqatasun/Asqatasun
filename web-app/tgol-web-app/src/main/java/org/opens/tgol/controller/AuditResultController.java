@@ -24,11 +24,9 @@ package org.opens.tgol.controller;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,10 +36,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
+import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Test;
-import org.opens.tanaguru.entity.reference.Theme;
+import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.reference.CriterionDataService;
 import org.opens.tanaguru.entity.service.statistics.CriterionStatisticsDataService;
 import org.opens.tanaguru.entity.subject.Page;
@@ -50,7 +49,6 @@ import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tgol.action.voter.ActionHandler;
 import org.opens.tgol.command.AuditResultSortCommand;
 import org.opens.tgol.command.ManualAuditCommand;
-import org.opens.tgol.command.ResultAuditManualCommand;
 import org.opens.tgol.command.factory.AuditResultSortCommandFactory;
 import org.opens.tgol.command.factory.AuditSetUpCommandFactory;
 import org.opens.tgol.entity.contract.Act;
@@ -63,8 +61,6 @@ import org.opens.tgol.exception.LostInSpaceException;
 import org.opens.tgol.form.CheckboxElement;
 import org.opens.tgol.form.CheckboxFormFieldImpl;
 import org.opens.tgol.form.FormField;
-import org.opens.tgol.form.SelectElement;
-import org.opens.tgol.form.SelectFormFieldImpl;
 import org.opens.tgol.form.builder.FormFieldBuilder;
 import org.opens.tgol.presentation.data.AuditStatistics;
 import org.opens.tgol.presentation.data.TestResult;
@@ -186,6 +182,13 @@ public class AuditResultController extends AuditDataHandlerController {
 			CriterionStatisticsDataService criterionStatisticsDataService) {
 		this.criterionStatisticsDataService = criterionStatisticsDataService;
 	}
+	
+	@Autowired
+	private ProcessResultDataService processResultDataService;
+	public void setCriterionStatisticsDataService(
+			ProcessResultDataService processResultDataService) {
+		this.processResultDataService = processResultDataService;
+	}
 
 	/**
 	 * The Html hightlighter.
@@ -284,57 +287,69 @@ public class AuditResultController extends AuditDataHandlerController {
 				request, manual);
 	}
 	
-//	
-//	/**
-//	 * @param webresourceId
-//	 * @param request
-//	 * @param model
-//	 * @return
-//	 */
-//	@RequestMapping(value = { "/home/contract/audit-save-manual",
-//			TgolKeyStore.SITE_RESULT_CONTRACT_URL }, method = RequestMethod.POST)
-//	@Secured({ TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY })
-//	public String saveAuditManual(
-//			@RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
-//			HttpServletRequest request, Model model) {
-//		Long webResourceIdValue;
-//		try {
-//			webResourceIdValue = Long.valueOf(webresourceId);
-//		} catch (NumberFormatException nfe) {
-//			throw new ForbiddenPageException();
-//		}
-//		// save dans la table
-//		
-//		return dispatchDisplayResultRequest(webResourceIdValue, null, model,
-//				request, false);
-//	}
 
-
-	/**
-	 * 
-	 * @param auditResultSortCommand
-	 * @param result
-	 * @param model
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping(value = TgolKeyStore.PAGE_RESULT_CONTRACT_URL, method = RequestMethod.POST)
-	@Secured({ TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY })
-	protected String submitPageResultSorter(
-			@ModelAttribute(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY) AuditResultSortCommand auditResultSortCommand,
-			//@ModelAttribute("resultAuditManualCommand") ResultAuditManualCommand resultAuditManualCommand,
-			BindingResult result, Model model, HttpServletRequest request) {
-		
-		
-		ResultAuditManualCommand resulAudit = ((ResultAuditManualCommand) model.asMap()
-				.get("resultAuditManualCommand"));
-		
-		
-		return dispatchDisplayResultRequest(
-				auditResultSortCommand.getWebResourceId(),
-				auditResultSortCommand, model, request, false);
-	}
-
+    /**
+     * @param manualAuditCommand
+     * @param auditResultSortCommand
+     * @param result
+     * @param model
+     * @param request
+     * @param webresourceId
+     * @return 
+     */
+    @RequestMapping(value=TgolKeyStore.PAGE_RESULT_CONTRACT_URL, method = RequestMethod.POST)
+    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
+    protected String submitPageResultSorter(
+            @ModelAttribute(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY) AuditResultSortCommand auditResultSortCommand,
+            @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
+            @ModelAttribute(TgolKeyStore.MANUAL_AUDIT_COMMAND_KEY) ManualAuditCommand manualAuditCommand,
+            BindingResult result,
+            Model model,
+            HttpServletRequest request) {
+    	if(manualAuditCommand !=null){
+    		return dispatchSubmitManualAuditValues(webresourceId,manualAuditCommand,result,model,request);
+    	}else{
+    		return dispatchDisplayResultRequest(
+                    auditResultSortCommand.getWebResourceId(),
+                    auditResultSortCommand,
+                    model,
+                    request,false);
+    	}
+    }
+    
+	private String dispatchSubmitManualAuditValues(
+    		@RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
+            @ModelAttribute(TgolKeyStore.MANUAL_AUDIT_COMMAND_KEY) ManualAuditCommand manualAuditCommand,
+            BindingResult result,
+            Model model,
+            HttpServletRequest request) {
+    
+    	WebResource webResource;
+        try {
+            webResource = getWebResourceDataService().ligthRead(Long.valueOf(webresourceId));
+        } catch (NumberFormatException nfe) {
+            throw new ForbiddenPageException();
+        }
+        if (webResource instanceof Site) {
+            throw new ForbiddenPageException();
+        }
+        Audit audit = getAuditFromWebResource(webResource);
+        if (isUserAllowedToDisplayResult(audit)){
+        	
+    	List<ProcessResult> processResultList=TestResultFactory.getInstance().getProcessResultListFromTestsResult(
+    			new LinkedList<TestResult>(manualAuditCommand.getModifiedTestResultMap().values()), webResource);
+    	
+    	processResultDataService.saveOrUpdate(processResultList);
+    	
+    	return dispatchDisplayResultRequest(
+    			webResource.getId(), 
+                 null, 
+                 model, 
+                 request,true);
+        }
+        else
+        	 throw new ForbiddenPageException();	
+    }
 	/**
 	 * 
 	 * @param webresourceId
@@ -706,23 +721,17 @@ public class AuditResultController extends AuditDataHandlerController {
 									asuc.getSortOptionMap().get(themeSortKey)
 											.toString(),
 									getTestResultSortSelection(asuc)));
+			//hack to force manual audit to be removed later
+			isManualAudit=true;
 			if (isManualAudit) {
-//				ResultAuditManualCommand rAuditManual =new ResultAuditManualCommand();
-//				
-//				rAuditManual.setTestResultMap(TestResultFactory.getInstance()
-//							.getTestResultSortedByThemeMap(
-//									page,
-//									getPageScope(),
-//									asuc.getSortOptionMap().get(themeSortKey)
-//											.toString(),
-//									getTestResultSortSelection(asuc)));
-//				model.addAttribute("resultAuditManualCommand",
-//						rAuditManual);
-				 ManualAuditCommand manualAudit=new ManualAuditCommand();
-		         model.addAttribute(TgolKeyStore.MANUAL_AUDIT_COMMAND_KEY,manualAudit);
-				
+				ManualAuditCommand manualAudit=new ManualAuditCommand();
+	            manualAudit.setModifedTestResultMap(TestResultFactory.getInstance().getTestResultMap(
+	                            page,
+	                            getPageScope(),
+	                            asuc.getSortOptionMap().get(themeSortKey).toString(),
+	                            getTestResultSortSelection(asuc)));
+	            model.addAttribute(TgolKeyStore.MANUAL_AUDIT_COMMAND_KEY,manualAudit);
 			}
-
 			return TgolKeyStore.RESULT_PAGE_VIEW_NAME;
 		} else {
 			AuditResultSortCommand asuc = ((AuditResultSortCommand) model
