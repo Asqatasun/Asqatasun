@@ -22,6 +22,7 @@
 package org.opens.tgol.presentation.factory;
 
 import java.util.*;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.*;
@@ -32,6 +33,7 @@ import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ProcessRemarkDataService;
+import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tgol.entity.decorator.tanaguru.subject.WebResourceDataServiceDecorator;
@@ -70,6 +72,12 @@ public final class TestResultFactory {
         this.auditDataService = auditDataService;
     }
 
+    private ProcessResultDataService processDataService;
+    @Autowired
+    public void setProcessResultDataService(ProcessResultDataService processDataService) {
+        this.processDataService = processDataService;
+    }
+    
     private TestDataService testDataService;
     @Autowired
     public void setTestDataService(TestDataService testDataService) {
@@ -177,6 +185,7 @@ public final class TestResultFactory {
         // The not tested tests are not persisted but deduced from the testResultList
         // If the not_tested solution is requested to be displayed, we add fake
         // processResult to the current list.
+
         if (testSolutionList.contains(NOT_TESTED_STR)) {
             List<ProcessResult> netResultList = (List<ProcessResult>)
                 webResourceDataService.
@@ -259,6 +268,53 @@ public final class TestResultFactory {
             }
         }
         return testResultList;
+    }
+    
+    public List<ProcessResult> getProcessResultListFromTestsResult(List<TestResult> listTestResult,WebResource webResource){
+    	List <ProcessResult> processResultList=new LinkedList<ProcessResult>();
+    	for(TestResult testResult:listTestResult){
+    		if(testResult.getManualStatus()!=null){
+    			//Page audit only one process result can be returned for a webresource
+    			ProcessResult processResult=((List<ProcessResult>)webResourceDataService.getProcessResultListByWebResourceAndTest(webResource, testDataService.read(testResult.getTestShortLabel()))).get(0);
+    			((DefiniteResult)processResult).setManualDefiniteValue(testResult.getManualStatus().equals("failed") ? TestSolution.FAILED : (testResult.getManualStatus().equals("passed") ? TestSolution.PASSED :  TestSolution.NOT_APPLICABLE));
+    			((DefiniteResult)processResult).setManualAuditComment(testResult.getComment());
+    			processResultList.add(processResult);
+    		}
+    	}
+    	return processResultList;
+    }
+    
+    /**
+     * 
+     * @param webresource
+     * @param scope
+     * @param locale
+     * @return
+     *      the test result map, use of test short label as key
+     */
+    public Map<String,TestResultImpl> getTestResultMap(
+    		 WebResource webresource,
+             Scope scope,
+             String theme,
+             Collection<String> testSolutionList) {
+        // Map that associates a list of results with a theme
+        Map<String,TestResultImpl> testResultMap = new HashMap<String, TestResultImpl>();
+        List<ProcessResult> effectiveNetResultList = (List<ProcessResult>)
+                webResourceDataService.
+                getProcessResultListByWebResourceAndScope(webresource, scope, theme, testSolutionList);
+        
+        if (testSolutionList.contains(NOT_TESTED_STR)) {
+            List<ProcessResult> netResultList = (List<ProcessResult>)
+                webResourceDataService.
+                getProcessResultListByWebResourceAndScope(webresource, scope);
+            effectiveNetResultList.addAll(addNotTestedProcessResult(getTestListFromWebResource(webresource), theme, netResultList));
+        }
+       
+        for (ProcessResult processResult : effectiveNetResultList) {
+                TestResult testResult = getTestResult(processResult,true, false);
+                testResultMap.put(testResult.getTestShortLabel(),(TestResultImpl) testResult);
+        }
+        return testResultMap;
     }
     
     /**
