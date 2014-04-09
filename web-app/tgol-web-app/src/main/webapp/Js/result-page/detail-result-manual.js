@@ -2,11 +2,20 @@
  * JavaScript to display and hide comment area in manual audit
  */
 $(document).ready(
+		
 		function() {
 			
 			// hide all comment area
 			$(".audit-result-manual-comment").css("visibility", "hidden");
-
+			
+			//enable comment area for checked failed radio 
+			$('input:radio').each(function(){
+				if ((($(this).val()) == 'failed')&&$(this).is(':checked')) {
+					var commentAreaId = 'commentContainer'+$(this).attr('id').substring(6,$(this).attr('id').length);
+					$('div[id="'+commentAreaId+'"]').css("visibility", "visible");
+				}	}
+			);
+			
 			// bind event to radiobutton
 			$('input:radio').on(
 					'change',
