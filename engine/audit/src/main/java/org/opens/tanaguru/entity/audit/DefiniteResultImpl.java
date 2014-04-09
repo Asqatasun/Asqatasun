@@ -43,6 +43,13 @@ public class DefiniteResultImpl extends ProcessResultImpl implements
     @Enumerated(EnumType.STRING)
     @Column(name = "Definite_Value")
     private TestSolution definiteValue;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "Manual_Definite_Value")
+    private TestSolution manualDefiniteValue;
+    
+    @Column(name = "Manual_Audit_Comment")
+    private String manualAuditComment;
 
     public DefiniteResultImpl() {
         super();
@@ -67,4 +74,23 @@ public class DefiniteResultImpl extends ProcessResultImpl implements
     public void setValue(Object value) {
         setDefiniteValue((TestSolution) value);
     }
+    @Override
+	public TestSolution getManualDefiniteValue() {
+		return manualDefiniteValue;
+	}
+	@Override
+	public void setManualDefiniteValue(TestSolution manualDefiniteValue) {
+		this.manualDefiniteValue = manualDefiniteValue;
+	}
+
+	@Override
+	public String getManualAuditcomment() {
+		return manualAuditComment;
+	}
+
+	@Override
+	public void setManualAuditComment(String manualAuditcomment) {
+		this.manualAuditComment=manualAuditcomment;
+	}
+   
 }
