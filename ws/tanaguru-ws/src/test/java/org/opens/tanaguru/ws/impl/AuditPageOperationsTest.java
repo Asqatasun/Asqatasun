@@ -20,7 +20,24 @@ public class AuditPageOperationsTest extends AbstactAuditWebServiceTest {
 	//launch page audit with url and level parameters
 
 	//launch page audit without url and level parameters
-	
+
+	//launch page audit with only url parameter
+		@Test
+		public void auditPageCase02() {
+			
+	        WebResource resource = resource();
+	        // build request params
+	        String params = "auditType=PAGE|pageUrl=oceaneconsulting.com";
+	        
+	        String audit = resource.path( "audit" ).queryParam("params", params)
+//	            .accept( MediaType.TEXT_PLAIN )
+	            .get( String.class );
+	        assertNotNull( audit );
+	        assertEquals( audit, "Page audit was launched" );
+
+		} 
+		
+/*
 	//launch page audit with only url parameter
 	@Test
 	public void auditPageCase03() {
@@ -34,6 +51,6 @@ public class AuditPageOperationsTest extends AbstactAuditWebServiceTest {
 
 	} 
 	
-	
+	*/
 	//launch page audit with only level parameter
 }

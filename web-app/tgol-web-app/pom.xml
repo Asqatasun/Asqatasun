@@ -12,12 +12,18 @@
     <packaging>war</packaging>
     <name>tgol-web-app</name>
     <dependencies>
+   	 <dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.14</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+    	<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
         <!-- tgol dependencies-->
-             <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>2.35.0</version>
-        </dependency>
         <dependency>
             <groupId>${webappGroupId}</groupId>
             <artifactId>tgol-orchestrator</artifactId>
@@ -127,11 +133,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-instrument</artifactId>
         </dependency>
-<!--        <dependency>
+       <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-instrument-tomcat</artifactId>
-        </dependency>-->
-<!--        <dependency>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
         </dependency>
@@ -142,7 +148,7 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-        </dependency>-->
+        </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
@@ -268,6 +274,7 @@
                 <version>1.1</version>
                 <executions>
                 <execution>
+                	<phase>package</phase>
                     <goals>
                         <goal>compress</goal>
                     </goals>
@@ -281,6 +288,26 @@
                     <failOnWarning>false</failOnWarning>
                 </configuration>
             </plugin>
+            <plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
+				<version>1.1</version>
+				<configuration>
+					<path>/tgol</path>
+					<port>8182</port>
+					<systemProperties>
+						<WEB-APP-URL>http://localhost:8182/tgol</WEB-APP-URL>
+						<CONFIG_TANAGURU >C:\Users\diamamp\git\conf_tgol\tanaguru</CONFIG_TANAGURU >
+						<test.key>true</test.key>
+						<MAVEN_OPTS>-Xms512m -Xmx512m -XX:PermSize=512m
+							-XX:MaxPermSize=512m -Dfile.encoding=UTF-8</MAVEN_OPTS>
+					</systemProperties>
+					<server>tomcat</server>
+					<warFile>${project.build.directory}/${project.build.finalName}.war</warFile>
+					<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+					<warSourceDirectory>${project.build.directory}/${project.build.finalName}</warSourceDirectory>
+				</configuration>
+			</plugin>
         </plugins>
         <finalName>tgol-web-app-${webappVersion}</finalName>
     </build>

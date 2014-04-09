@@ -33,7 +33,7 @@ public abstract class AbstactAuditWebServiceTest {
 					"org.opens.tanaguru.ws.impl")
 					.contextPath("tanaguru-ws")
 					.contextParam("contextConfigLocation",
-							"classpath:beans-ws.xml")
+							"classpath:test-beans-ws.xml")
 					.servletClass(SpringServlet.class)
 					.contextListenerClass(ContextLoaderListener.class)
 					.requestListenerClass(RequestContextListener.class).build()) {

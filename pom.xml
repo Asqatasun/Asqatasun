@@ -52,6 +52,100 @@
         
         <httpcomponentsGroupId>org.apache.httpcomponents</httpcomponentsGroupId>
     </properties>
+    <repositories>
+		<repository>
+			<id>oceane-repo</id>
+			<name>oceane repository</name>
+			<url>http://192.168.58.116:8094/nexus/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		  <repository>
+            <url>http://repo1.maven.org/maven2/</url>
+            <id>central</id>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>saucelabs-repository</id>
+            <url>https://repository-saucelabs.forge.cloudbees.com/release</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>phlocRepos</id>
+            <url>http://repo.phloc.com/maven2/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>heritrixRepos</id>
+            <url>http://builds.archive.org:8080/maven2/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>fdvsolution.public</id>
+            <url>http://archiva.fdvs.com.ar/repository/public1/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+	</repositories>
+	<pluginRepositories>
+		<!-- download plugins from this repo -->
+		<pluginRepository>
+			<id>oceane-repo</id>
+			<name>oceane repository</name>
+			<url>http://192.168.58.116:8094/nexus/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<distributionManagement>
+		<!-- Publish the versioned releases here -->
+		<repository>
+			<id>oceane-releases-repo</id>
+			<name>oceane-releases-repo</name>
+			<url>http://192.168.58.116:8094/nexus/content/repositories/oceane-releases/</url>
+		</repository>
+
+		<!-- Publish the versioned releases here -->
+		<snapshotRepository>
+			<id>oceane-snapshots-repo</id>
+			<name>oceane-snapshots-repo</name>
+			<url>http://192.168.58.116:8094/nexus/content/repositories/oceane-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+    
     <build>
         <plugins>
             <plugin>
@@ -1280,56 +1374,5 @@
         </dependencies>
     </dependencyManagement>
 
-    <repositories>
-        <repository>
-            <url>http://repo1.maven.org/maven2/</url>
-            <id>central</id>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>saucelabs-repository</id>
-            <url>https://repository-saucelabs.forge.cloudbees.com/release</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>phlocRepos</id>
-            <url>http://repo.phloc.com/maven2/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>heritrixRepos</id>
-            <url>http://builds.archive.org:8080/maven2/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>fdvsolution.public</id>
-            <url>http://archiva.fdvs.com.ar/repository/public1/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+    
 </project>
