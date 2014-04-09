@@ -31,8 +31,9 @@ import org.opens.tanaguru.entity.reference.Test;
  */
 public class TestResultImpl implements TestResult{
 
+	
     private List<RemarkInfos> remarkInfosList = new ArrayList<RemarkInfos>();
-
+    
     /**
      *
      * @return
@@ -48,15 +49,15 @@ public class TestResultImpl implements TestResult{
     public void setTestEvidenceRepresentationOrder(String testEvidenceRepresentationOrder) {
         this.testEvidenceRepresentationOrder = testEvidenceRepresentationOrder.split(";");
     }
-    private String status;
+    private String manualStatus;
 	private String comment;
 	@Override
-    public String getStatus() {
-		return status;
+    public String getManualStatus() {
+		return manualStatus;
 	}
 	
-	public void setStatus(String status) {
-		this.status = status;
+	public void setManualStatus(String manualStatus) {
+		this.manualStatus = manualStatus;
 	}
 	@Override
 	public String getComment() {
