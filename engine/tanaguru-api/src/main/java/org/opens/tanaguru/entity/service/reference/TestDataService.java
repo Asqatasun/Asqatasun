@@ -23,6 +23,7 @@ package org.opens.tanaguru.entity.service.reference;
 
 import java.util.List;
 import java.util.Set;
+
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Level;
@@ -35,7 +36,15 @@ import org.opens.tanaguru.sdk.entity.service.GenericDataService;
  * @author jkowalczyk
  */
 public interface TestDataService extends GenericDataService<Test, Long> {
-
+	
+	/**
+    *
+    * @param label
+    *            the label of the test to read
+    * @return the matching read test
+    */
+	Test read(String label);
+	
     /**
      *
      * @param reference

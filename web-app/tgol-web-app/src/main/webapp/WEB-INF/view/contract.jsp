@@ -209,55 +209,135 @@
                         <caption><fmt:message key="contract.auditHistory"/></caption>
                         <thead>
                             <tr>
+                            	<th id="Modifier" scope="col" class="tg-textual-column"></th>
                                 <th id="page-url" scope="col" class="tg-textual-column"><fmt:message key="contract.pageUrl"/></th>
                                 <th id="date" scope="col" class="tg-textual-column"><fmt:message key="contract.date"/></th>
                                 <th id="raw-mark" scope="col" class="tg-numerical-column"><fmt:message key="contract.rawMark"/></th>
                                 <th id="referential" scope="col" class="tg-textual-column"><fmt:message key="referential"/></th>
                                 <th id="scope" scope="col" class="tg-textual-column"><fmt:message key="contract.scope"/></th>
                                 <th id="status" scope="col" class="tg-textual-column"><fmt:message key="contract.status"/></th>
+                                <th id="manual" scope="col" class="tg-textual-column"><fmt:message key="contract.manual"/></th>
                             </tr>
                         </thead>
                         <c:if test="${fn:length(detailedContractInfo.lastActInfoSet) > 0}">
                         <tbody>
                         </c:if>
                         <c:forEach var="actInfo" items="${detailedContractInfo.lastActInfoSet}" varStatus="pContractSet">
+								
+								<c:if test="${actInfo.manual == 'true'}">
+								 <tr>
+									<td headers="Modifier" class="tg-textual-column"><c:set
+											var="auditUrl" scope="page"
+											value="/home/contract/audit-result.html?audit=" /> <a
+										href="<c:url value="${auditUrl}${actInfo.auditId}&ma=true"/>">
+											<fmt:message key="pageList.manualAudit" />
+									</a></td>
+									 
+									
+									
+									
+									
+									
+									
+
+								<td headers="page-url" class="tg-textual-column"><c:if
+										test="${actInfo.scope != 'GROUPOFFILES' && actInfo.scope != 'FILE'}">
+										<span class="open-external-url-icon"> <a
+											title="<fmt:message key="pageList.goTo"/> ${actInfo.url}"
+											href="${actInfo.url}"> <img
+												alt="<fmt:message key="pageList.goTo"/> ${actInfo.url}"
+												src="${goToImgUrl}">
+										</a>
+										</span>
+									</c:if> <c:set var="resultUrl" scope="page"
+										value="/home/contract/audit-result.html?audit=" /> <a
+									href="<c:url value="${resultUrl}${actInfo.auditId}"/>"
+									title="<fmt:message key="pageList.pageDetailedResult"></fmt:message> <fmt:message key="pageList.for"></fmt:message> ${actInfo.url}">
+										${actInfo.url} </a></td>
+								<td headers="date" class="tg-textual-column"><fmt:formatDate
+										type="both" value="${actInfo.date}" dateStyle="short"
+										timeStyle="short" /></td>
+								<td headers="raw-mark" class="tg-numerical-column"><c:choose>
+										<c:when test="${actInfo.status == 'COMPLETED'}">
+											<c:set var="mark" scope="page" value="${actInfo.rawMark}" />
+											<c:set var="scoreClass" scope="page" value="act-score" />
+											<c:set var="scoreId" scope="page" value="" />
+											<c:set var="displayWeightedMark" scope="page" value="false" />
+											<c:set var="hasProgressInfo" scope="page" value="false" />
+											<c:set var="spanClass" scope="page" value="" />
+											<%@include file="template/score.jsp"%>
+										</c:when>
+										<c:otherwise>
+											<div>--</div>
+										</c:otherwise>
+									</c:choose></td>
+								<td headers="referential" class="tg-textual-column"><fmt:message
+										key="${actInfo.referential}" /></td>
+								<td headers="scope" class="tg-textual-column"><fmt:message
+										key="${actInfo.scope}" /></td>
+								<td headers="status" class="tg-textual-column"><fmt:message
+										key="${actInfo.status}" /></td>
+
+							</tr>
+									
+									
+								</c:if>
                             <tr>
-                                <td headers="page-url" class="tg-textual-column">
-                                    <c:if test="${actInfo.scope != 'GROUPOFFILES' && actInfo.scope != 'FILE'}">
-                                        <span class="open-external-url-icon">
-                                            <a title="<fmt:message key="pageList.goTo"/> ${actInfo.url}" href="${actInfo.url}">
-                                                <img alt="<fmt:message key="pageList.goTo"/> ${actInfo.url}" src="${goToImgUrl}">
-                                            </a>
-                                        </span>
-                                    </c:if>
-                                    <c:set var="resultUrl" scope="page" value="/home/contract/audit-result.html?audit="/>
-                                    <a href="<c:url value="${resultUrl}${actInfo.auditId}"/>" title="<fmt:message key="pageList.pageDetailedResult"></fmt:message> <fmt:message key="pageList.for"></fmt:message> ${actInfo.url}">
-                                        ${actInfo.url}
-                                    </a>
-                                </td>
-                                <td headers="date" class="tg-textual-column"><fmt:formatDate type="both" value="${actInfo.date}" dateStyle="short" timeStyle="short"/></td>
-                                <td headers="raw-mark" class="tg-numerical-column">
-                                    <c:choose>
-                                        <c:when test="${actInfo.status == 'COMPLETED'}">
-                                            <c:set var="mark" scope="page" value="${actInfo.rawMark}"/>
-                                            <c:set var="scoreClass" scope="page" value="act-score"/>
-                                            <c:set var="scoreId" scope="page" value=""/>
-                                            <c:set var="displayWeightedMark" scope="page" value="false"/>
-                                            <c:set var="hasProgressInfo" scope="page" value="false"/>
-                                            <c:set var="spanClass" scope="page" value=""/>
-                                     <%@include file="template/score.jsp" %>
-                                        </c:when>
-                                        <c:otherwise>
-                                     <div> -- </div>
-                                            </c:otherwise>
-                                    </c:choose>
-                                </td>
-                                <td headers="referential" class="tg-textual-column">
-                                    <fmt:message key="${actInfo.referential}"/>
-                                </td>
-                                <td headers="scope" class="tg-textual-column"><fmt:message key="${actInfo.scope}"/></td>
-                                <td headers="status" class="tg-textual-column"><fmt:message key="${actInfo.status}"/></td>
-                            </tr>
+								<c:if test="${actInfo.manual == 'true'}">
+									<td>|_______</td>
+								</c:if>
+								<c:if test="${actInfo.manual == 'false'}">
+									<td></td>
+								</c:if>
+								<td headers="page-url" class="tg-textual-column"><c:if
+										test="${actInfo.scope != 'GROUPOFFILES' && actInfo.scope != 'FILE'}">
+										<span class="open-external-url-icon"> <a
+											title="<fmt:message key="pageList.goTo"/> ${actInfo.url}"
+											href="${actInfo.url}"> <img
+												alt="<fmt:message key="pageList.goTo"/> ${actInfo.url}"
+												src="${goToImgUrl}">
+										</a>
+										</span>
+									</c:if> <c:set var="resultUrl" scope="page"
+										value="/home/contract/audit-result.html?audit=" /> <a
+									href="<c:url value="${resultUrl}${actInfo.auditId}"/>"
+									title="<fmt:message key="pageList.pageDetailedResult"></fmt:message> <fmt:message key="pageList.for"></fmt:message> ${actInfo.url}">
+										${actInfo.url} </a></td>
+								<td headers="date" class="tg-textual-column"><fmt:formatDate
+										type="both" value="${actInfo.date}" dateStyle="short"
+										timeStyle="short" /></td>
+								<td headers="raw-mark" class="tg-numerical-column"><c:choose>
+										<c:when test="${actInfo.status == 'COMPLETED'}">
+											<c:set var="mark" scope="page" value="${actInfo.rawMark}" />
+											<c:set var="scoreClass" scope="page" value="act-score" />
+											<c:set var="scoreId" scope="page" value="" />
+											<c:set var="displayWeightedMark" scope="page" value="false" />
+											<c:set var="hasProgressInfo" scope="page" value="false" />
+											<c:set var="spanClass" scope="page" value="" />
+											<%@include file="template/score.jsp"%>
+										</c:when>
+										<c:otherwise>
+											<div>--</div>
+										</c:otherwise>
+									</c:choose></td>
+								<td headers="referential" class="tg-textual-column"><fmt:message
+										key="${actInfo.referential}" /></td>
+								<td headers="scope" class="tg-textual-column"><fmt:message
+										key="${actInfo.scope}" /></td>
+								<td headers="status" class="tg-textual-column"><fmt:message
+										key="${actInfo.status}" /></td>
+
+
+
+								<c:if test="${displayManualAuditOption == 'true' && actInfo.manual != 'true'}">
+									<td headers="manual" class="tg-textual-column"><c:set
+											var="auditUrl" scope="page"
+											value="/home/contract/audit-result.html?audit=" /> <a
+										href="<c:url value="${auditUrl}${actInfo.auditId}&ma=true"/>">
+											<fmt:message key="pageList.manualAudit" />
+									</a></td>
+								</c:if>
+							</tr>
                         </c:forEach>
                         <c:if test="${fn:length(detailedContractInfo.lastActInfoSet) > 0}">
                         </tbody>

@@ -296,6 +296,8 @@ CREATE TABLE IF NOT EXISTS `PROCESS_RESULT` (
   `Id_Process_Result_Parent` bigint(20) DEFAULT NULL,
   `Id_Web_Resource` bigint(20) NOT NULL,
   `Id_Test` bigint(20) DEFAULT NULL,
+  `Manual_Definite_Value` VARCHAR(255) NULL DEFAULT NULL,
+  `Manual_Audit_Comment` VARCHAR(255) NULL DEFAULT NULL
   PRIMARY KEY (`Id_Process_Result`),
   UNIQUE KEY `Id_Test` (`Id_Test`,`Id_Web_Resource`,`Id_Audit_Gross_Result`),
   UNIQUE KEY `Id_Test_2` (`Id_Test`,`Id_Web_Resource`,`Id_Audit_Net_Result`),
@@ -324,6 +326,21 @@ CREATE TABLE IF NOT EXISTS `PROCESS_RESULT` (
       ON DELETE CASCADE,
   INDEX `Definite_Value_Index` (`Definite_Value` ASC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE `process_result_aud` (
+  `DTYPE` varchar(31) NOT NULL,
+  `Id_Process_Result` bigint(20) NOT NULL,
+  `REV` int(11) NOT NULL,
+  `REVTYPE` tinyint(4) DEFAULT NULL,
+  `Element_Counter` int(11) DEFAULT NULL,
+  `Id_Audit_Gross_Result` bigint(20) DEFAULT NULL,
+  `Id_Audit_Net_Result` bigint(20) DEFAULT NULL,
+  `Id_Process_Result_Parent` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`Id_Process_Result`,`REV`),
+  KEY `FK5411075EDF74E053` (`REV`),
+  CONSTRAINT `FK5411075EDF74E053` FOREIGN KEY (`REV`) REFERENCES `revinfo` (`REV`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 -- --------------------------------------------------------

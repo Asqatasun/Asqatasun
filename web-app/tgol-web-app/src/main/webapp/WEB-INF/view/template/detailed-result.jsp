@@ -3,6 +3,23 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
+
+<!-- external js -->
+<c:set var="jqueryUrl">
+<c:url value="/External-Js/jquery-1.9.1.min.js"/>
+</c:set>
+<c:set var="jqueryUIUrl">
+<c:url value="/External-Js/jquery-ui-1.10.1.custom.min.js"/>  
+</c:set>
+<!-- internal js -->
+<c:set var="detailResultManualJsUrl">
+<c:url value="/Js/result-page/detail-result-manual.js"/>  
+</c:set>
+<script type="text/javascript" src="${jqueryUrl}"></script>
+<script type="text/javascript" src="${jqueryUIUrl}"></script>
+<script type="text/javascript" src="${detailResultManualJsUrl}"></script>
 
             <c:if test="${addSideBarNav}">
             <div class="theme-nav bs-docs-sidebar">
@@ -41,6 +58,7 @@
                     </div><!-- class="span16" -->
                 </div><!-- class="row" -->
                 </c:if>
+                <form:form commandName="manualAuditCommand" method="post" acceptCharset="UTF-8" enctype="application/x-www-form-urlencoded">
                 <div id="all-themes">
                 <c:forEach var="entry" items="${testResultMap}" varStatus="pResultMap">
                 <c:if test="${addThemeHeader}">
@@ -150,20 +168,42 @@
                                     </a>
                                 </span>
                             </div>
-                            <div class="rule-label span11">
+                            <div class="rule-label span9">
                                 <fmt:message key="${testResult.testCode}"/>
                             </div><!-- class="span9 rule-label" -->
-                            <div class="${rowBgClass} span1 test-result">
-                                <img src="<c:url value="/Images/ico-${testResult.resultCode}-m.png"/>" alt="test ${testResult.testShortLabel} <fmt:message key="${testResult.resultCode}"/>"/> 
-                            </div>
-                            <div class="span1 test-details">
+							<div class="audit-result-container">
+	                            <div class="audit-result-manual span3">
+	                            <form:hidden path="modifiedTestResultMap['${testResult.testShortLabel}'].testShortLabel" value="${testResult.testShortLabel}"/>
+	               					<fieldset>
+	                            		<legend><fmt:message key="resultPage.overridenResult"/><span class="offscreen">${testResult.testShortLabel}</span>
+	                            		</legend>
+	                            		<c:forEach items="${manualAuditCommand.statusList}" var="auditStatus">
+	               							<div class="clearfix ">
+	               							 	<div class="input">
+	               							 		<form:radiobutton id="${auditStatus}${testResult.testShortLabel}" name="auditStatus${testResult.testShortLabel}" path="modifiedTestResultMap['${testResult.testShortLabel}'].manualStatus" value="${auditStatus}"/>
+	                                      			<form:label path="" for="${auditStatus}${testResult.testShortLabel}"><fmt:message key="${auditStatus}"/></form:label>
+	                                      		</div>
+	                                      	</div>
+	                                    </c:forEach>
+	                   			</fieldset>
+	                   			</div>       
+	                            <div class="${rowBgClass} span1 test-result" >
+	                                <img src="<c:url value="/Images/ico-${testResult.resultCode}-m.png"/>" alt="test ${testResult.testShortLabel} <fmt:message key="${testResult.resultCode}"/>"/> 
+	                            </div>
+	                            <div class="span1 test-details">
                                 <c:if test="${displayAlgorithm == 'true'}">
                                 <a title="<fmt:message key="resultPage.ruleDesignUrl"/> ${testResult.testShortLabel}" href="${testResult.ruleDesignUrl}">
                                     <img alt="<fmt:message key="resultPage.ruleDesignUrl"/> ${testResult.testShortLabel}" src="${algoLinkImg}">
                                 </a>
                                 </c:if>
                             </div>
-                        </div><!-- class="row" -->
+                            </div>
+                            
+                            <div class="audit-result-manual-comment span11" id="commentContainer${testResult.testShortLabel}">
+                            	<label for="cmt${testResult.testShortLabel}"> <fmt:message key="resultPage.commentArea"/> <span class="offscreen">${testResult.testShortLabel}</label>
+                            	<form:textarea id="cmt${testResult.testShortLabel}" path="modifiedTestResultMap['${testResult.testShortLabel}'].comment" rows="2" cols="30" maxLength="250"/>
+                            </div>
+                        </div>
                     </div>
                     <c:if test="${addTestDetails}">
                     <div id="r${testResult.testShortLabel}-detailed" class="span15 test-result-detailed">
@@ -290,11 +330,16 @@
                     </c:forEach>
                 </div> <!-- div id="themex-results"> --> 
                 </c:forEach>
+                  <div id="manual-audit-form-submit" class="actions">
+                                <input class="btn primary" type="submit" value="Save"/>
+                 </div>
                 </div><!-- id="all-theme" -->
+               
+                </form:form>
             </c:when>
             <c:otherwise>
                 <div class="row">
-                    <div id="work-done" class="span16"
+                    <div id="work-done" class="span16">
                         <h2>
                             <fmt:message key="resultPage.noResults"/>
                         </h2>

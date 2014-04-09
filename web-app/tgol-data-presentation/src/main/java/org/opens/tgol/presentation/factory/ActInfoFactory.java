@@ -23,7 +23,9 @@ package org.opens.tgol.presentation.factory;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
+import java.util.Random;
 import java.util.Set;
+
 import org.apache.commons.lang.StringUtils;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
@@ -113,7 +115,18 @@ public final class ActInfoFactory {
             setActInfoReferential(actInfo, audit);
         }
         
+        //TODO :El hamdouni
+        actInfo.setManual(isAuditManual());
+        
         return actInfo;
+    }
+    /**
+     * mock pour simuler le flag audit manuel 
+     * 
+     * **/
+    public boolean isAuditManual() {
+        Random random = new Random();
+        return random.nextBoolean();
     }
 
     /**

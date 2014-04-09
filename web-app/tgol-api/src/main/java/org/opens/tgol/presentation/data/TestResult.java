@@ -64,6 +64,20 @@ public interface TestResult {
      *          the list of remark info for the given test
      */
     List<RemarkInfos> getRemarkInfosList();
+    
+    /**
+    *
+    * @return
+    *          the manual audit test status
+    */
+    String getManualStatus();
+   
+   /**
+   *
+   * @return
+   *          the manual audit entered comment
+   */
+    String getComment();
 
     /**
      *

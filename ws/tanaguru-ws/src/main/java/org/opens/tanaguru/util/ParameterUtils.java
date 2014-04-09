@@ -35,22 +35,25 @@ public class ParameterUtils {
 	public static Map<String, List<Parameter>> parametersMap = null;
 	
 	public static void initParametersMap(ParameterDataService parameterDataService) {
-
-		// get all parameters
-		Collection<Parameter> params = parameterDataService.findAll();
-
+		
 		// create map for parameters identified par parent element code.
 		if (parametersMap == null) {
-			parametersMap = new HashMap<String, List<Parameter>>();
-		}
+			
+			// get all parameters
+			Collection<Parameter> params = parameterDataService.findAll();
 
-		for (Parameter param : params) {
-			if (param != null && param.getParameterElement() != null && param.getParameterElement().getParameterElementCode() != null) {
-				if (!parametersMap.containsKey(param.getParameterElement().getParameterElementCode())) {
-					parametersMap.put(param.getParameterElement().getParameterElementCode(), new ArrayList<Parameter>());
+
+			parametersMap = new HashMap<String, List<Parameter>>();
+
+
+			for (Parameter param : params) {
+				if (param != null && param.getParameterElement() != null && param.getParameterElement().getParameterElementCode() != null) {
+					if (!parametersMap.containsKey(param.getParameterElement().getParameterElementCode())) {
+						parametersMap.put(param.getParameterElement().getParameterElementCode(), new ArrayList<Parameter>());
+					}
+					param.setDefaultParameterValue(Boolean.FALSE);
+					parametersMap.get(param.getParameterElement().getParameterElementCode()).add(param);
 				}
-				param.setDefaultParameterValue(Boolean.FALSE);
-				parametersMap.get(param.getParameterElement().getParameterElementCode()).add(param);
 			}
 		}
 	}

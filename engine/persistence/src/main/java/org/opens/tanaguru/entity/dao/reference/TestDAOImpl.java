@@ -97,6 +97,19 @@ public class TestDAOImpl extends AbstractJPADAO<Test, Long> implements TestDAO {
     }
 
     @Override
+    public Test read(String label) {
+        StringBuilder queryStr = new StringBuilder();
+        queryStr.append("SELECT t FROM ");
+        queryStr.append(getEntityClass().getName());
+        queryStr.append(" t WHERE");
+        queryStr.append(" t.label = :label");
+        Query query = entityManager.createQuery(queryStr.toString());
+        query.setParameter("label", label);
+        query.setHint("org.hibernate.cacheable", "true");
+        return (Test)query.getSingleResult();
+    }
+    
+    @Override
     @SuppressWarnings("unchecked")
     public List<Test> retrieveAll(Reference reference) {
         Query query = entityManager.createQuery("SELECT t FROM "
@@ -174,7 +187,7 @@ public class TestDAOImpl extends AbstractJPADAO<Test, Long> implements TestDAO {
         query.setHint("org.hibernate.cacheable", "true");
         return query.getResultList();
     }
-
+    
     @Override
     public List<Test> retrieveAllByReferenceAndCriterion(
             Reference reference,

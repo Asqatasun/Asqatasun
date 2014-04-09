@@ -22,6 +22,7 @@
 package org.opens.tanaguru.entity.audit;
 
 import java.util.Collection;
+
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.Entity;
@@ -169,5 +170,6 @@ public interface ProcessResult extends Entity {
      *              the number of tested elements
      */
     void setElementCounter(int elementCounter);
-
+    
+  
 }
