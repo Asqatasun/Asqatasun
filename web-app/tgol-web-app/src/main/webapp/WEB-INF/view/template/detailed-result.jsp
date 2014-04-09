@@ -173,11 +173,11 @@
                             </div><!-- class="span9 rule-label" -->
 							<div class="audit-result-container">
 	                            <div class="audit-result-manual span3">
-	                            	<fieldset>
+	                            <form:hidden path="modifiedTestResultMap['${testResult.testShortLabel}'].testShortLabel" value="${testResult.testShortLabel}"/>
+	               					<fieldset>
 	                            		<legend><fmt:message key="resultPage.overridenResult"/><span class="offscreen">${testResult.testShortLabel}</span>
 	                            		</legend>
-	                            		<form:hidden path="modifiedTestResultMap['${testResult.testShortLabel}'].testShortLabel" value="${testResult.testShortLabel}"/>
-	               						<c:forEach items="${manualAuditCommand.statusList}" var="auditStatus">
+	                            		<c:forEach items="${manualAuditCommand.statusList}" var="auditStatus">
 	               							<div class="clearfix ">
 	               							 	<div class="input">
 	               							 		<form:radiobutton id="${auditStatus}${testResult.testShortLabel}" name="auditStatus${testResult.testShortLabel}" path="modifiedTestResultMap['${testResult.testShortLabel}'].manualStatus" value="${auditStatus}"/>
