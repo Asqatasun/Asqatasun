@@ -23,6 +23,7 @@ package org.opens.tanaguru.entity.service.reference;
 
 import java.util.List;
 import java.util.Set;
+
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.dao.reference.TestDAO;
 import org.opens.tanaguru.entity.parameterization.Parameter;
@@ -59,6 +60,11 @@ public class TestDataServiceImpl extends AbstractGenericDataService<Test, Long>
     public TestDataServiceImpl() {
         super();
     }
+    
+    @Override
+	public Test read(String label) {
+		return ((TestDAO) entityDao).read(label);
+	}
 
     @Override
     public List<Test> findAll(Reference reference) {
@@ -108,5 +114,6 @@ public class TestDataServiceImpl extends AbstractGenericDataService<Test, Long>
         }
         return testList;
     }
-    
+
+	
 }
