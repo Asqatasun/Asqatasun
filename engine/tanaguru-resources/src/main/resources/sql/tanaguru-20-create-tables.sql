@@ -296,6 +296,8 @@ CREATE TABLE IF NOT EXISTS `PROCESS_RESULT` (
   `Id_Process_Result_Parent` bigint(20) DEFAULT NULL,
   `Id_Web_Resource` bigint(20) NOT NULL,
   `Id_Test` bigint(20) DEFAULT NULL,
+  `Manual_Definite_Value` VARCHAR(255) NULL DEFAULT NULL,
+  `Manual_Audit_Comment` VARCHAR(255) NULL DEFAULT NULL
   PRIMARY KEY (`Id_Process_Result`),
   UNIQUE KEY `Id_Test` (`Id_Test`,`Id_Web_Resource`,`Id_Audit_Gross_Result`),
   UNIQUE KEY `Id_Test_2` (`Id_Test`,`Id_Web_Resource`,`Id_Audit_Net_Result`),
