@@ -144,6 +144,19 @@ public final class TestResultFactory {
         testResult.setRuleDesignUrl(processResult.getTest().getRuleDesignUrl());
         testResult.setResultCounter(ResultCounterFactory.getInstance().getResultCounter());
         testResult.setTest(processResult.getTest());
+        if(processResult instanceof DefiniteResult){
+	        ((TestResultImpl)testResult).setComment(((DefiniteResult)processResult).getManualAuditcomment());
+	        
+	        String manualStatus=null;
+	        if(TestSolution.FAILED.equals(((DefiniteResult)processResult).getManualDefiniteValue()))
+	        	manualStatus="failed";
+	        else if(TestSolution.PASSED.equals(((DefiniteResult)processResult).getManualDefiniteValue()))
+	        	manualStatus="passed";
+	        else if(TestSolution.NOT_APPLICABLE.equals(((DefiniteResult)processResult).getManualDefiniteValue()))
+	        	manualStatus="na";
+	        
+	        ((TestResultImpl)testResult).setManualStatus(manualStatus);
+        }
         try {
             testResult.setTestRepresentation(Integer.valueOf(representationBundle.
                 getString(testResult.getTestCode()+TestResult.REPRESENTATION_SUFFIX_KEY)));
