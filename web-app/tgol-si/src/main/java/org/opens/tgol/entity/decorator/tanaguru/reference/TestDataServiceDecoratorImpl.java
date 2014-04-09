@@ -23,6 +23,7 @@ package org.opens.tgol.entity.decorator.tanaguru.reference;
 
 import java.util.List;
 import java.util.Set;
+
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Level;
@@ -76,5 +77,10 @@ public class TestDataServiceDecoratorImpl extends AbstractGenericDataService<Tes
     public List<Test> findAllByCriterion(Criterion criterion) {
         return decoratedTestDataService.findAllByCriterion(criterion);
     }
+
+	@Override
+	public Test read(String label) {
+		return decoratedTestDataService.read(label);
+	}
 
 }
