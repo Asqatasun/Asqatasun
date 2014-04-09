@@ -171,9 +171,5 @@ public interface ProcessResult extends Entity {
      */
     void setElementCounter(int elementCounter);
     
-    
-    public TestSolution getManualDefenitiveValue() ;
-    
-    public void setManualDefenitiveValue(TestSolution manualDefenitiveValue);
-
+  
 }
