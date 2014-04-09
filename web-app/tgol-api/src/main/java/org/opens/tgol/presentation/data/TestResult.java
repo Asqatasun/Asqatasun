@@ -70,7 +70,7 @@ public interface TestResult {
     * @return
     *          the manual audit test status
     */
-    String getStatus();
+    String getManualStatus();
    
    /**
    *
