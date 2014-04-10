@@ -115,7 +115,10 @@ public class AccesibiliteServiceImpl  implements AccesibiliteService{
 		// list des erreurs
 		List<AuditInputError> errors = new ArrayList<AuditInputError>();
 	
-		//TODO check crediantial if needed (user, passwor or token id)
+		//  TODO check audit level if required
+		
+		
+		//TODO check crediantial if needed (user, password or token id)
 		
 		// verify audit type
 		AuditType auditType = auditInputs.getAuditType();
@@ -157,7 +160,6 @@ public class AccesibiliteServiceImpl  implements AccesibiliteService{
 			}
 		}
 		
-		// user access.
 		
 		return errors;
 	}

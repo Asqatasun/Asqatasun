@@ -23,6 +23,7 @@ public class ParameterInputs {
 	/*
 	 * **********************OTHER SERVICE PARAMETERS
 	 */
+	public static final  String AUDIT_LEVEL = "level";
 	public static final  String PAGE_URL = "pageUrl";
 	public static final  String PAGE_URLS = "pageUrls";
 	public static final  String AUDIT_TYPE = "auditType";

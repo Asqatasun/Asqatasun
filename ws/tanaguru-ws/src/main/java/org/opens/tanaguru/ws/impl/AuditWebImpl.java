@@ -32,6 +32,7 @@ import org.springframework.stereotype.Component;
 
 import com.oceaneconsulting.tanaguru.bean.AuditInputs;
 import com.oceaneconsulting.tanaguru.bean.AuditResult;
+import com.oceaneconsulting.tanaguru.enumerations.AuditLevel;
 import com.oceaneconsulting.tanaguru.enumerations.AuditType;
 import com.oceaneconsulting.tanaguru.service.AccesibiliteService;
 import com.oceaneconsulting.tanaguru.util.ParameterInputs;
@@ -99,6 +100,19 @@ public class AuditWebImpl implements AuditWeb {
 		auditInputs.setAuditType(AuditType.valueOf(mapValues
 				.get(ParameterInputs.AUDIT_TYPE.toUpperCase())));
 
+		// audit level
+		String level = mapValues.get(ParameterInputs.AUDIT_LEVEL.toUpperCase());
+		if(level == null){
+			// no level specified
+			auditInputs.setLevel(AuditLevel.AR.getValue());
+		}else {
+			AuditLevel auditLevel = AuditLevel.valueOf(level);
+			if(auditLevel != null){
+				auditInputs.setLevel(auditLevel.getValue());
+			}
+					
+		}
+		
 		// pageUrl
 		auditInputs.setPageUrl(mapValues.get(ParameterInputs.PAGE_URL
 				.toUpperCase()));
