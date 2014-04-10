@@ -60,9 +60,9 @@
         <class>org.opens.tanaguru.entity.statistics.TestStatisticsImpl</class>
         <class>org.opens.tanaguru.entity.statistics.ThemeStatisticsImpl</class>
         <!-- Entity du WS -->
-        <class>org.opens.tanaguru.entity.impl.WsInvocationImpl</class>
-        <class>org.opens.tanaguru.entity.impl.WsRoleImpl</class>
-        <class>org.opens.tanaguru.entity.impl.WsUserImpl</class>
+        <class>com.oceaneconsulting.tanaguru.entity.impl.WsInvocationImpl</class>
+        <class>com.oceaneconsulting.tanaguru.entity.impl.WsRoleImpl</class>
+        <class>com.oceaneconsulting.tanaguru.entity.impl.WsUserImpl</class>
         <class></class>
         <class></class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
