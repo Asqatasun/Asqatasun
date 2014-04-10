@@ -68,14 +68,14 @@ public interface WsUser extends Entity {
 	void setRole(WsRoleImpl role);
 
 	/**
-	 * Getter de l'émail de l'utilisateur
-	 * @return l'émail de l'utilisateur
+	 * Getter de l'email de l'utilisateur
+	 * @return l'email de l'utilisateur
 	 */
 	String getEmail();
 
 	/**
-	 * Setter de l'émail de l'utilisateur
-	 * @param email L'émail de l'utilisateur
+	 * Setter de l'email de l'utilisateur
+	 * @param email L'email de l'utilisateur
 	 */
 	void setEmail(String email);
 

@@ -42,13 +42,13 @@ public class WsUserImpl implements WsUser, Serializable {
 	private String name;
 	
 	/**
-	 * Prénom de l'utilisateur
+	 * Prnom de l'utilisateur
 	 */
 	@Column (name = "FIRST_NAME")
 	private String firstName;
 	
 	/**
-	 * Flag d'activité (0 ou 1)
+	 * Flag d'activit (0 ou 1)
 	 */
 	@Column (name ="ACTIVE")
 	private Boolean active;

@@ -14,21 +14,21 @@ import com.oceaneconsulting.tanaguru.entity.WsUser;
 public interface WsInvocationDao extends GenericDAO<WsInvocation, Long> {
 
 	/**
-	 * Récupérer le nombre d'invocations faites par l'utilisateur
+	 * Recuperer le nombre d'invocations faites par l'utilisateur
 	 * @param user L'utilsateur
 	 * @return Le nombre d'invocations
 	 */
 	int getCountInvocByUser(WsUser user);
 	
 	/**
-	 * Récupérer le nombre d'invocations faites par l'utilisateur via son identifiant
+	 * Recuperer le nombre d'invocations faites par l'utilisateur via son identifiant
 	 * @param userId Identifiant de l'utilisateur
 	 * @return Le nombre d'invocations
 	 */
 	int getCountInvocByUserId(Long userId);
 
 	/**
-	 * Récupérer le nombre d'invocations faites par l'utilisateur
+	 * Recuperer le nombre d'invocations faites par l'utilisateur
 	 * @param user L'utilisateur
 	 * @param hostName Le nom du host
 	 * @param hostIp L'adresse ip du host

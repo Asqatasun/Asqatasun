@@ -7,7 +7,7 @@ INSERT INTO `evalaccess`.`ws_role` (`ID_ROLE`, `ROLE`, `LABEL`) VALUES ('3', 'GU
 --- -----------------------------------------------------
 --- Table `WS_USER`
 --- -----------------------------------------------------
-INSERT INTO `evalaccess`.`ws_user` (`ID_USER`, `EMAIL`, `PASSWORD`, `NAME`, `FIRST_NAME`, `ACTIVE`, `ID_ROLE`) VALUES ('1', 'fhalna@oceaneconsulting.com', '098f6bcd4621d373cade4e832627b4f6', 'HALNA', 'Fréderic', 1, 'ADMIN');
+INSERT INTO `evalaccess`.`ws_user` (`ID_USER`, `EMAIL`, `PASSWORD`, `NAME`, `FIRST_NAME`, `ACTIVE`, `ID_ROLE`) VALUES ('1', 'fhalna@oceaneconsulting.com', '098f6bcd4621d373cade4e832627b4f6', 'HALNA', 'Frederic', 1, 'ADMIN');
 INSERT INTO `evalaccess`.`ws_user` (`ID_USER`, `EMAIL`, `PASSWORD`, `NAME`, `FIRST_NAME`, `ACTIVE`, `ID_ROLE`) VALUES ('2', 'shamdi@oceaneconsulting.com', '098f6bcd4621d373cade4e832627b4f6', 'HAMDI', 'Sofien', 1, 'USER');
 --- -----------------------------------------------------
 --- Table `WS_INVOCATION`

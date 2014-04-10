@@ -6,7 +6,7 @@ import com.oceaneconsulting.tanaguru.entity.WsRole;
 import com.oceaneconsulting.tanaguru.entity.impl.WsRoleImpl;
 
 /**
- * Classe de la DAO des rôles
+ * Classe de la DAO des rles
  * @author msobahi
  *
  */

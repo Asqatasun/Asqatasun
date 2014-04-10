@@ -25,7 +25,7 @@ public class InvocationDaoImplTest extends AbstractDaoTest {
 	}
 	
 	/**
-	 * Test de la méthode qui récupère le nombre d'invocations faites par un utilisateur
+	 * Test de la mthode qui rcupre le nombre d'invocations faites par un utilisateur
 	 */
 	public void testGetCountInvocByUser(){
 		WsRoleImpl role = new WsRoleImpl();
@@ -44,7 +44,7 @@ public class InvocationDaoImplTest extends AbstractDaoTest {
 	}
 	
 	/**
-	 * Test de la méthode qui récupère le nombre d'invocations faites par un utilisateur pour un host donné
+	 * Test de la mthode qui rcupre le nombre d'invocations faites par un utilisateur pour un host donn
 	 */
 	public void testGetCountInvocByUserHostNameHostIpRole(){
 		WsRoleImpl role = new WsRoleImpl();
@@ -63,7 +63,7 @@ public class InvocationDaoImplTest extends AbstractDaoTest {
 	}
 	
 	/**
-	 * Test de la méthode qui récupère le nombre d'invocations faites par un utilisateur via son identifiant
+	 * Test de la mthode qui rcupre le nombre d'invocations faites par un utilisateur via son identifiant
 	 */
 	public void testGetCountInvocByUserId(){
 		Long userId = new Long(3);

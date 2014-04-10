@@ -27,7 +27,7 @@ public abstract class AbstractDaoTest extends DBTestCase  {
      */
     private static final String JDBC_DRIVER = "org.hsqldb.jdbcDriver";
     /**
-     * base de données HSQLDB nommée "database" qui fonctionne en mode mémoire
+     * base de donnes HSQLDB nomme "database" qui fonctionne en mode mmoire
      */
     private static final String DATABASE = "jdbc:hsqldb:file:src/test/resources/hsql-db";
     /**
@@ -47,16 +47,16 @@ public abstract class AbstractDaoTest extends DBTestCase  {
     private String inputDataFileName = "";
     
     /**
-     * Récupération du fichier de données pour le test
-     * @return Le chemin du fichier de données du test
+     * Rcupration du fichier de donnes pour le test
+     * @return Le chemin du fichier de donnes du test
      */
     public String getInputDataFileName() {
         return inputDataFileName;
     }
 
     /**
-     * Setter de fichier de données pour le test
-     * @param inputDataFileName Le chemin du fichier de données pour le test
+     * Setter de fichier de donnes pour le test
+     * @param inputDataFileName Le chemin du fichier de donnes pour le test
      */
     public void setInputDataFileName(String inputDataFileName) {
         this.inputDataFileName = inputDataFileName;

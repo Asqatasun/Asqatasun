@@ -4,7 +4,7 @@ import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 import com.oceaneconsulting.tanaguru.entity.WsRole;
 
 /**
- * Interface de la DAO des rôles
+ * Interface de la DAO des roles
  * @author msobahi
  *
  */

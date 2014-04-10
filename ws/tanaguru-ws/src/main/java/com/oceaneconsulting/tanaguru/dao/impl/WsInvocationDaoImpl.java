@@ -19,7 +19,7 @@ import com.oceaneconsulting.tanaguru.entity.impl.WsInvocationImpl;
 public class WsInvocationDaoImpl extends AbstractJPADAO<WsInvocation, Long> implements WsInvocationDao {
 
 	/**
-	 * Option de la mise en cache de la requête
+	 * Option de la mise en cache de la requte
 	 */
 	private static final String CACHEABLE_OPTION = "org.hibernate.cacheable";
 

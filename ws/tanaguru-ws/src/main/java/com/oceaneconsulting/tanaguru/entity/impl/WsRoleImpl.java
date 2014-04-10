@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.oceaneconsulting.tanaguru.entity.WsRole;
 
 /**
- * Classe des rôles 
+ * Classe des rles 
  * @author msobahi
  *
  */
@@ -24,13 +24,13 @@ public class WsRoleImpl implements WsRole, Serializable {
 	private Long id;
 	
 	/**
-	 * Le rôle
+	 * Le rle
 	 */
 	@Column(name = "ROLE")
 	private String role;
 	
 	/**
-	 * Le libellé du rôle
+	 * Le libell  du rle
 	 */
 	@Column(name = "LABEL")
 	private String label;

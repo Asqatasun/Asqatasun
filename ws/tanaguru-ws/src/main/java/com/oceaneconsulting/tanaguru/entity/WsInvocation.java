@@ -4,7 +4,7 @@ import com.oceaneconsulting.tanaguru.entity.impl.WsUserImpl;
 import java.util.Date;
 
 /**
- * Intefrace de l'entité des invocation
+ * Intefrace de l'entite des invocation
  * @author msobahi
  *
  */
@@ -58,13 +58,13 @@ public interface WsInvocation extends Entity {
 	void setAuditType(Integer auditType);
 	
 	/**
-	 * Getter de l'utilisateur qui a lancé l'invocation
+	 * Getter de l'utilisateur qui a lance l'invocation
 	 * @return Utilisateur 
 	 */
 	WsUserImpl getUser();
 	
 	/**
-	 * Setter de l'utilisateur qui a lancé l'invocation
+	 * Setter de l'utilisateur qui a lance l'invocation
 	 * @param user L'utilsateur 
 	 */
 	void setUser(WsUserImpl user);
