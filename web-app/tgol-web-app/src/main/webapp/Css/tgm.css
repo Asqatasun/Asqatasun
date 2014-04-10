@@ -1899,6 +1899,9 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     padding-right: 10px;
     color : #FFF;
 }
+.manual-audit-save-btn{
+	float:right;
+}
 .theme-nav {
     display: none;
 }
@@ -2009,7 +2012,10 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
 	width:280px;
 }
 .audit-result-container .audit-result-manual,.audit-result-container .test-result,.audit-result-container .test-details{
-	float:left;
+	float:right;
+}
+.audit-result-manual-empty{
+	margin-left:20px;;
 }
 .audit-result-manual div{
 	margin-bottom:0;
