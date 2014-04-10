@@ -1,4 +1,4 @@
-package org.opens.tanaguru.util;
+package com.oceaneconsulting.tanaguru.util;
 
 public class AuditCodeErrors {
 

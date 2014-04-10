@@ -1,4 +1,4 @@
-package org.oceane.tanaguru.service;
+package com.oceaneconsulting.tanaguru.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,23 +6,24 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.oceane.tanaguru.bean.AuditInputError;
-import org.oceane.tanaguru.bean.AuditInputs;
-import org.oceane.tanaguru.bean.AuditResult;
-import org.oceane.tanaguru.enumerations.AuditType;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.statistics.WebResourceStatisticsDataService;
 import org.opens.tanaguru.service.AuditService;
-import org.opens.tanaguru.util.AuditCodeErrors;
-import org.opens.tanaguru.util.ParameterInputs;
-import org.opens.tanaguru.util.ParameterUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+
+import com.oceaneconsulting.tanaguru.bean.AuditInputError;
+import com.oceaneconsulting.tanaguru.bean.AuditInputs;
+import com.oceaneconsulting.tanaguru.bean.AuditResult;
+import com.oceaneconsulting.tanaguru.enumerations.AuditType;
+import com.oceaneconsulting.tanaguru.util.AuditCodeErrors;
+import com.oceaneconsulting.tanaguru.util.ParameterInputs;
+import com.oceaneconsulting.tanaguru.util.ParameterUtils;
 
 @Service(value = "accesibiliteServiceImpl#oceane")
 public class AccesibiliteServiceImpl  implements AccesibiliteService{

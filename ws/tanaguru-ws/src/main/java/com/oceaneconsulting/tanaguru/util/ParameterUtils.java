@@ -1,4 +1,4 @@
-package org.opens.tanaguru.util;
+package com.oceaneconsulting.tanaguru.util;
 
 import java.util.ArrayList;
 import java.util.Collection;

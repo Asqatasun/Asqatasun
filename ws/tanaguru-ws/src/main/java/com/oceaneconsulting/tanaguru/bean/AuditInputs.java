@@ -1,10 +1,10 @@
-package org.oceane.tanaguru.bean;
+package com.oceaneconsulting.tanaguru.bean;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.oceane.tanaguru.enumerations.AuditType;
+import com.oceaneconsulting.tanaguru.enumerations.AuditType;
 
 /**
  * Encapsule les inputs pour effectuer un audit

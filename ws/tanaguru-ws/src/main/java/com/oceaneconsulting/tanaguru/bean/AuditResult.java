@@ -1,4 +1,4 @@
-package org.oceane.tanaguru.bean;
+package com.oceaneconsulting.tanaguru.bean;
 
 import java.util.List;
 

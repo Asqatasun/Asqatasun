@@ -1,10 +1,10 @@
-package org.oceane.tanaguru.service;
+package com.oceaneconsulting.tanaguru.service;
 
 import java.util.List;
 
-import org.oceane.tanaguru.bean.AuditInputError;
-import org.oceane.tanaguru.bean.AuditInputs;
-import org.oceane.tanaguru.bean.AuditResult;
+import com.oceaneconsulting.tanaguru.bean.AuditInputError;
+import com.oceaneconsulting.tanaguru.bean.AuditInputs;
+import com.oceaneconsulting.tanaguru.bean.AuditResult;
 
 public interface AccesibiliteService {
 

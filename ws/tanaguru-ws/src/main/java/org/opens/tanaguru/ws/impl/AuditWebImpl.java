@@ -21,20 +21,21 @@ import javax.ws.rs.core.UriInfo;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.oceane.tanaguru.bean.AuditInputs;
-import org.oceane.tanaguru.bean.AuditResult;
-import org.oceane.tanaguru.enumerations.AuditType;
-import org.oceane.tanaguru.service.AccesibiliteService;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.service.AuditService;
-import org.opens.tanaguru.util.ParameterInputs;
-import org.opens.tanaguru.util.ParameterUtils;
 import org.opens.tanaguru.ws.AuditWeb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
+import com.oceaneconsulting.tanaguru.bean.AuditInputs;
+import com.oceaneconsulting.tanaguru.bean.AuditResult;
+import com.oceaneconsulting.tanaguru.enumerations.AuditType;
+import com.oceaneconsulting.tanaguru.service.AccesibiliteService;
+import com.oceaneconsulting.tanaguru.util.ParameterInputs;
+import com.oceaneconsulting.tanaguru.util.ParameterUtils;
 
 /**
  * Webservice implementation class.

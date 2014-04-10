@@ -8,7 +8,7 @@
 	<context:property-placeholder
 		location="classpath*:test-tanaguru.properties" />
 
-	<context:component-scan base-package="org.opens.tanaguru.ws.impl,org.oceane" />
+	<context:component-scan base-package="org.opens.tanaguru.ws.impl,org.oceaneconsulting" />
 	
 	<!-- loading configuration files parameters -->
 	<bean id="exposedPropertiesConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

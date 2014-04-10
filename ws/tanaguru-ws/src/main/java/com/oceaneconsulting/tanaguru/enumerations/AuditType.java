@@ -1,4 +1,4 @@
-package org.oceane.tanaguru.enumerations;
+package com.oceaneconsulting.tanaguru.enumerations;
 
 /**
  * type  de status
