@@ -48,7 +48,7 @@ public class WsInvocationImpl implements WsInvocation, Serializable {
 	private Integer auditType;
 	
     /**
-     * L'utilsateur qui a lancé l'audit
+     * L'utilsateur qui a lanc l'audit
      */
     @ManyToOne
     @JoinColumn(name = "ID_USER", nullable = false)
