@@ -7,7 +7,6 @@
 		<groupId>org.opens</groupId>
 		<artifactId>tanaguru</artifactId>
 		<version>3.0.0-SNAPSHOT</version>
-		<relativePath>../../pom.xml</relativePath>
 	</parent>
 	<artifactId>tanaguru-ws</artifactId>
 	<packaging>war</packaging>
