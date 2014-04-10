@@ -63,8 +63,6 @@
         <class>com.oceaneconsulting.tanaguru.entity.impl.WsInvocationImpl</class>
         <class>com.oceaneconsulting.tanaguru.entity.impl.WsRoleImpl</class>
         <class>com.oceaneconsulting.tanaguru.entity.impl.WsUserImpl</class>
-        <class></class>
-        <class></class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="dialect" value="org.hibernate.dialect.HSQLDialect"/>

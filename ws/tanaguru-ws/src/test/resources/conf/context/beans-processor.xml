@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="processorFactory" class="org.opens.tanaguru.processor.ProcessorFactoryImpl"/>
+
+    <bean id="processorService" class="org.opens.tanaguru.service.ProcessorServiceImpl"/>
+
+    <bean id="httpRequestHandler" class="org.opens.tanaguru.util.http.HttpRequestHandler" factory-method="getInstance"/>
+
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="httpRequestHandler"/>
+        </property>
+        <property name="targetMethod">
+            <value>setProxyPort</value>
+        </property>
+        <property name="arguments">
+            <list>
+                <value>${proxyPort}</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="httpRequestHandler"/>
+        </property>
+        <property name="targetMethod">
+            <value>setProxyHost</value>
+        </property>
+        <property name="arguments">
+            <list>
+                <value>${proxyHost}</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="httpRequestHandler"/>
+        </property>
+        <property name="targetMethod">
+            <value>setProxyExclusionUrl</value>
+        </property>
+        <property name="arguments">
+            <list>
+                <value>${proxyExclusionUrl}</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>

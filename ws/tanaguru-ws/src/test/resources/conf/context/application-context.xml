@@ -14,7 +14,8 @@
        http://jax-ws.dev.java.net/spring/core http://jax-ws.dev.java.net/spring/core.xsd
        http://jax-ws.dev.java.net/spring/servlet http://jax-ws.dev.java.net/spring/servlet.xsd">
     
-    <import resource="beans-ws.xml"/>
-    <import resource="beans-ws-persistence.xml"/>
+    <import resource="classpath*:test-beans-ws.xml"/>
+<!--     <import resource="beans-ws.xml"/>
+    <import resource="beans-ws-persistence.xml"/> -->
     
 </beans>
