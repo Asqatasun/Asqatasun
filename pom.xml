@@ -18,10 +18,12 @@
 	<profiles>
 		<profile>
 			<id>dev</id>
+			<modules>
 			<module>engine</module>
 			<module>rules</module>
 			<module>web-app</module>
 			<module>cli</module>
+			</modules>
 		</profile>
 	</profiles>
 	<properties>
