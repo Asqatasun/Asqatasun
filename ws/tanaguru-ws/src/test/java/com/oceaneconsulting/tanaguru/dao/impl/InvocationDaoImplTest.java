@@ -1,11 +1,11 @@
 package com.oceaneconsulting.tanaguru.dao.impl;
 
-import com.oceaneconsulting.tanaguru.dao.AbstractDaoTest;
+import com.oceaneconsulting.tanaguru.AbstractDbUnitTest;
 import com.oceaneconsulting.tanaguru.entity.WsUser;
 import com.oceaneconsulting.tanaguru.entity.impl.WsRoleImpl;
 import com.oceaneconsulting.tanaguru.entity.impl.WsUserImpl;
 
-public class InvocationDaoImplTest extends AbstractDaoTest {
+public class InvocationDaoImplTest extends AbstractDbUnitTest {
 	
 	 /**
      * Nom du fichier xml contenant le jeu de données à importer
@@ -25,7 +25,7 @@ public class InvocationDaoImplTest extends AbstractDaoTest {
 	}
 	
 	/**
-	 * Test de la mthode qui rcupre le nombre d'invocations faites par un utilisateur
+	 * Test de la methode qui recupere le nombre d'invocations faites par un utilisateur
 	 */
 	public void testGetCountInvocByUser(){
 		WsRoleImpl role = new WsRoleImpl();
@@ -44,7 +44,7 @@ public class InvocationDaoImplTest extends AbstractDaoTest {
 	}
 	
 	/**
-	 * Test de la mthode qui rcupre le nombre d'invocations faites par un utilisateur pour un host donn
+	 * Test de la methode qui recupere le nombre d'invocations faites par un utilisateur pour un host donn
 	 */
 	public void testGetCountInvocByUserHostNameHostIpRole(){
 		WsRoleImpl role = new WsRoleImpl();
@@ -63,7 +63,7 @@ public class InvocationDaoImplTest extends AbstractDaoTest {
 	}
 	
 	/**
-	 * Test de la mthode qui rcupre le nombre d'invocations faites par un utilisateur via son identifiant
+	 * Test de la methode qui recupere le nombre d'invocations faites par un utilisateur via son identifiant
 	 */
 	public void testGetCountInvocByUserId(){
 		Long userId = new Long(3);
