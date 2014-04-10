@@ -287,8 +287,18 @@ public final class TestResultFactory {
     	List <ProcessResult> processResultList=new LinkedList<ProcessResult>();
     	for(TestResult testResult:listTestResult){
     		if(testResult.getManualStatus()!=null){
-    			//Page audit only one process result can be returned for a webresource
-    			ProcessResult processResult=((List<ProcessResult>)webResourceDataService.getProcessResultListByWebResourceAndTest(webResource, testDataService.read(testResult.getTestShortLabel()))).get(0);
+    			Test test=testDataService.read(testResult.getTestShortLabel());
+    			List<ProcessResult> prList=((List<ProcessResult>)webResourceDataService.getProcessResultListByWebResourceAndTest(webResource, test));
+    			/**
+    			 * If returned process result list doesn't contains elements that means the test is NOT_TESTED
+    			 * and has to be created to persist the manual audit value
+    			 */
+    			ProcessResult processResult;
+    			if(prList.isEmpty()){
+    				 processResult=createNotTestedProcessResult(test,webResource);
+    			}else{
+    				 processResult=prList.get(0);
+    			}
     			((DefiniteResult)processResult).setManualDefiniteValue(testResult.getManualStatus().equals("failed") ? TestSolution.FAILED : (testResult.getManualStatus().equals("passed") ? TestSolution.PASSED :  TestSolution.NOT_APPLICABLE));
     			((DefiniteResult)processResult).setManualAuditComment(testResult.getComment());
     			processResultList.add(processResult);
@@ -711,8 +721,19 @@ public final class TestResultFactory {
             List<ProcessResult> netResultList) {
         
         Collection<Test> testedTestList = new ArrayList<Test>();
+        Map<String,TestSolution> manualValues=new HashMap<String, TestSolution>();
         for (ProcessResult pr : netResultList) {
-            testedTestList.add(pr.getTest());
+        	/**
+        	 * NOT_TESTED tests may have been created by manual audit during audit result overriding
+        	 * and has to be part of NOT_TESTED tests and the overridden value is stored in map to 
+        	 * be retrieved later
+        	 */
+        	if((pr instanceof DefiniteResult) && (((DefiniteResult)pr).getDefiniteValue().equals(TestSolution.NOT_TESTED))){
+        		testedTestList.add(pr.getTest());
+        		manualValues.put(pr.getTest().getLabel(), ((DefiniteResult)pr).getManualDefiniteValue());
+        		continue;
+        	}
+        	testedTestList.add(pr.getTest());
         }
         
         Collection<ProcessResult> notTestedProcessResult = new ArrayList<ProcessResult>();
@@ -728,13 +749,40 @@ public final class TestResultFactory {
                 ProcessResult pr = processResultFactory.createDefiniteResult();
                 pr.setTest(test);
                 pr.setValue(TestSolution.NOT_TESTED);
-                notTestedProcessResult.add(pr);
                 pr.setRemarkSet(new ArrayList<ProcessRemark>());
+                if(manualValues.containsKey(test.getLabel())){
+                	((DefiniteResult)pr).setManualDefiniteValue(manualValues.get(test.getLabel()));
+                }
+                notTestedProcessResult.add(pr);                
             }
         }
         return notTestedProcessResult;
     }
     
+    /**
+     * If test is not tested and if it has been overridden during the manual audit we create
+     * new process result to be persisted in DB with NOT_TESTED state in the automatic audit 
+     * and the new state value for the manual audit.  
+     * 
+     * @param test
+     * @param wr
+     * @param pr
+     * @return 
+     */
+    private ProcessResult createNotTestedProcessResult(
+            Test test, 
+            WebResource wr) {
+        
+                ProcessResult pr = processResultFactory.createDefiniteResult();
+                pr.setTest(test);
+                pr.setValue(TestSolution.NOT_TESTED);
+                pr.setRemarkSet(new ArrayList<ProcessRemark>());
+                pr.setSubject(wr);
+                pr.setElementCounter(1); //TODO set value to 1 or 0?
+                pr.setNetResultAudit(wr.getAudit());
+                pr.setGrossResultAudit(wr.getAudit());
+                return pr;
+    }
     /**
      * Return the list of tests for a given webResource. If the webresource has 
      * a parent, we pass through the parent linked with the audit to retrieve 
