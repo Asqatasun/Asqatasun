@@ -37,6 +37,9 @@ public enum AuditStatus {
         ERROR,
         INITIALISATION,
         PENDING,
-        PROCESSING;
+        PROCESSING,
+	    MANUAL_INITIALIZING,
+	    MANUAL_ANALYSE_IN_PROGRESS,
+	    MANUAL_COMPLETED;
 
 }
