@@ -22,6 +22,7 @@
 package org.opens.tgol.controller;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -40,6 +41,7 @@ import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Test;
+import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.reference.CriterionDataService;
 import org.opens.tanaguru.entity.service.statistics.CriterionStatisticsDataService;
@@ -188,6 +190,13 @@ public class AuditResultController extends AuditDataHandlerController {
 	public void setCriterionStatisticsDataService(
 			ProcessResultDataService processResultDataService) {
 		this.processResultDataService = processResultDataService;
+	}
+	
+	@Autowired
+	private AuditDataService auditDataService;
+	public void setAudittDataService(
+			AuditDataService auditDataService) {
+		this.auditDataService = auditDataService;
 	}
 
 	/**
@@ -340,6 +349,15 @@ public class AuditResultController extends AuditDataHandlerController {
     			new LinkedList<TestResult>(manualAuditCommand.getModifiedTestResultMap().values()), webResource);
     	
     	processResultDataService.saveOrUpdate(processResultList);
+    	/**
+    	 * if save the manual audit for the first time save
+    	 * we set the manual audit start time and status to MANUAL_INITIALIZING
+    	 */
+    	if(audit.getManualAuditDateOfCreation()==null){
+	    	audit.setManualAuditDateOfCreation(Calendar.getInstance().getTime());
+	    	audit.setStatus(AuditStatus.MANUAL_INITIALIZING);
+	    	auditDataService.update(audit);
+    	}
     	
     	return dispatchDisplayResultRequest(
     			webResource.getId(), 
@@ -721,8 +739,6 @@ public class AuditResultController extends AuditDataHandlerController {
 									asuc.getSortOptionMap().get(themeSortKey)
 											.toString(),
 									getTestResultSortSelection(asuc)));
-			//hack to force manual audit to be removed later
-			isManualAudit=true;
 			if (isManualAudit) {
 				ManualAuditCommand manualAudit=new ManualAuditCommand();
 	            manualAudit.setModifedTestResultMap(TestResultFactory.getInstance().getTestResultMap(
