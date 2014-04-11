@@ -56,22 +56,26 @@ public interface WebResourceStatisticsDAO extends GenericDAO<WebResourceStatisti
      * @param webresourceId
      * @param paramSet
      * @param testSolution
+     * @param isManualAudit
      * @return 
      */
     public BigDecimal findWeightedResultCountByResultType(
             Long webresourceId,
             Collection<Parameter> paramSet,
-            TestSolution testSolution);
+            TestSolution testSolution, 
+            boolean isManualAudit);
     
     /**
      * 
      * @param webresourceId
      * @param testSolution
+     * @param isManualAudit
      * @return
      */
     Long findNumberOfOccurrencesByWebResourceAndResultType(
             Long webresourceId,
-            TestSolution testSolution);
+            TestSolution testSolution,
+            boolean isManualAudit);
 
     /**
      * 
