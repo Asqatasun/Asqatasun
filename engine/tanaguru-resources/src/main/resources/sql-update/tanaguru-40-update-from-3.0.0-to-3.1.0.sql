@@ -22,3 +22,9 @@ COMMENT 'Manual audit user comment' AFTER `Manual_Definite_Value`;
 -- -----------------------------------------------------
 ALTER TABLE `AUDIT` 
 ADD COLUMN `Manual_Audit_Dt_Creation` DATETIME NULL DEFAULT NULL AFTER `Dt_Creation`;
+
+-- ---------------------------------------------------------------------------------------------------------
+-- Column `web_resource_statistics` to know if the web_resource_statistics is for manual or automatic audit 
+-- ---------------------------------------------------------------------------------------------------------
+ALTER TABLE `web_resource_statistics` ADD COLUMN `Manual_Audit` INT NULL DEFAULT 0 
+COMMENT 'Colonne indiquant s\'il s\'agit de statistiques d\'un audit manuel ou automatique\n0 : automatique\n1: manuel'  AFTER `Http_Status_Code` ;
