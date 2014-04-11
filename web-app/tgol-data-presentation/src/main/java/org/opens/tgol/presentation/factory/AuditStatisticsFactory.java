@@ -139,14 +139,15 @@ public class AuditStatisticsFactory {
     public AuditStatistics getAuditStatistics(
             WebResource webResource,
             Map<String, String> parametersToDisplay,
-            String displayScope) {
+            String displayScope,
+            boolean isManual) {
         
         AuditStatistics auditStats = new AuditStatisticsImpl();
         
         auditStats.setUrl(webResource.getURL());
         auditStats.setSnapshotUrl(webResource.getURL());
-        auditStats.setRawMark(markFormatter(webResource, true));
-        auditStats.setWeightedMark(markFormatter(webResource, false));
+        auditStats.setRawMark(markFormatter(webResource, true, isManual));
+        auditStats.setWeightedMark(markFormatter(webResource, false, isManual));
 
         Audit audit;
         if (webResource instanceof Site) {
@@ -244,8 +245,9 @@ public class AuditStatisticsFactory {
      */
     private String markFormatter(
             WebResource webresource, 
-            boolean isRawMark) {
-        Float mark = webResourceDataService.getMarkByWebResourceAndAudit(webresource, isRawMark);
+            boolean isRawMark,
+            boolean isManual) {
+        Float mark = webResourceDataService.getMarkByWebResourceAndAudit(webresource, isRawMark,isManual);
         return String.valueOf(Float.valueOf(mark).intValue());
     }
 

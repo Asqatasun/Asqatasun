@@ -116,6 +116,8 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
     private static final String RETRIEVE_MARK_QUERY =
             " FROM WEB_RESOURCE_STATISTICS "
             + "WHERE Id_Web_Resource=:idWebResource";
+    private static final String IS_AUDIT_MANUAL =
+            " AND Manual_Audit=:isManual";
 
     private static final String WEB_RESOURCE_STAT_COUNT =
             " count(Id_Web_Resource_Statistics) ";
@@ -521,13 +523,15 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
      *      the mark for given audit and webresource
      */
     @Override
-    public Float findWeightedMarkByWebResourceAndAudit(Long idWebResource) {
+    public Float findWeightedMarkByWebResourceAndAudit(Long idWebResource , boolean isManual) {
         StringBuilder queryString = new StringBuilder();
         queryString.append(SELECT_STR);
         queryString.append(MARK_FIELD_STR);
         queryString.append(RETRIEVE_MARK_QUERY);
+        queryString.append(IS_AUDIT_MANUAL);
         Query query = entityManager.createNativeQuery(queryString.toString());
         query.setParameter("idWebResource", idWebResource);
+        query.setParameter("isManual", isManual);
         try {
             Object result = query.getSingleResult();
             if (result instanceof Float) {
@@ -553,13 +557,16 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
      *      the mark for given audit and webresource
      */
     @Override
-    public Float findRawMarkByWebResourceAndAudit(Long idWebResource) {
+    public Float findRawMarkByWebResourceAndAudit(Long idWebResource, boolean isManual) {
         StringBuilder queryString = new StringBuilder();
         queryString.append(SELECT_STR);
         queryString.append(RAW_MARK_FIELD_STR);
         queryString.append(RETRIEVE_MARK_QUERY);
+        queryString.append(IS_AUDIT_MANUAL);
+        
         Query query = entityManager.createNativeQuery(queryString.toString());
         query.setParameter("idWebResource", idWebResource);
+        query.setParameter("isManual", isManual);
         try {
             Object result = query.getSingleResult();
             if (result instanceof Float) {

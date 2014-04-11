@@ -123,18 +123,20 @@ public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
     /**
      * 
      * @param idWebResource
+     * @param isManual 
      * @return 
      */
     Float findWeightedMarkByWebResourceAndAudit(
-            Long idWebResource);
+            Long idWebResource, boolean isManual);
 
     /**
      * 
      * @param idWebResource
+     * @param isManual
      * @return 
      */
     Float findRawMarkByWebResourceAndAudit(
-            Long idWebResource);
+            Long idWebResource, boolean isManual);
 
     /**
      * 

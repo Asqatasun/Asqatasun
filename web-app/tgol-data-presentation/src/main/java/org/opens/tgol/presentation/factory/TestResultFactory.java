@@ -307,6 +307,30 @@ public final class TestResultFactory {
     	return processResultList;
     }
     
+    public List<ProcessResult> getAllProcessResultListFromTestsResult(List<TestResult> listTestResult,WebResource webResource){
+    	List <ProcessResult> processResultList=new LinkedList<ProcessResult>();
+    	for(TestResult testResult:listTestResult){
+    		
+    			Test test=testDataService.read(testResult.getTestShortLabel());
+    			List<ProcessResult> prList=((List<ProcessResult>)webResourceDataService.getProcessResultListByWebResourceAndTest(webResource, test));
+    			/**
+    			 * If returned process result list doesn't contains elements that means the test is NOT_TESTED
+    			 * and has to be created to persist the manual audit value
+    			 */
+    			ProcessResult processResult;
+    			if(prList.isEmpty()){
+    				 processResult=createNotTestedProcessResult(test,webResource);
+    			}else{
+    				 processResult=prList.get(0);
+    			}
+    			((DefiniteResult)processResult).setManualDefiniteValue(testResult.getManualStatus().equals("failed") ? TestSolution.FAILED : (testResult.getManualStatus().equals("passed") ? TestSolution.PASSED : (testResult.getManualStatus().equals("na") ? TestSolution.NOT_APPLICABLE : null)));
+    			((DefiniteResult)processResult).setManualAuditComment(testResult.getComment());
+    			processResultList.add(processResult);
+    		}
+    	
+    	return processResultList;
+    }
+    
     /**
      * 
      * @param webresource

@@ -218,9 +218,10 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
      *
      * @param webResource
      * @param isRawMark
+     * @param isManual
      * @return
      */
-    Float getMarkByWebResourceAndAudit(WebResource webResource, boolean isRawMark);
+    Float getMarkByWebResourceAndAudit(WebResource webResource, boolean isRawMark, boolean isManual);
     
     /**
      * 

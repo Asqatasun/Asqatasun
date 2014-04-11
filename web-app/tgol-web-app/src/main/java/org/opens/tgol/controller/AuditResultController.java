@@ -51,6 +51,7 @@ import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tgol.action.voter.ActionHandler;
 import org.opens.tgol.command.AuditResultSortCommand;
 import org.opens.tgol.command.ManualAuditCommand;
+import org.opens.tgol.command.ResultAuditManualCommand;
 import org.opens.tgol.command.factory.AuditResultSortCommandFactory;
 import org.opens.tgol.command.factory.AuditSetUpCommandFactory;
 import org.opens.tgol.entity.contract.Act;
@@ -227,6 +228,7 @@ public class AuditResultController extends AuditDataHandlerController {
 	public String displayAuditResultFromContract(
 			@RequestParam(TgolKeyStore.AUDIT_ID_KEY) String auditId,
 			@RequestParam(value = TgolKeyStore.IS_MANUAL_AUDIT_KEY, required = false, defaultValue = "false") boolean manual,
+			@RequestParam(value = "type", required = false, defaultValue = "false") String type,
 			HttpServletRequest request, Model model) {
 		try {
 			Audit audit = getAuditDataService().read(Long.valueOf(auditId));
@@ -237,8 +239,9 @@ public class AuditResultController extends AuditDataHandlerController {
 				model.addAttribute(TgolKeyStore.WEBRESOURCE_ID_KEY, audit
 						.getSubject().getId());
 				model.addAttribute(TgolKeyStore.IS_MANUAL_AUDIT_KEY, manual);
+				model.addAttribute("type", type);
 
-				if (manual) {
+				if (manual) { 
 					// appel au service
 					Contract contract = getContractDataService().read(
 							act.getContract().getId());
@@ -285,6 +288,7 @@ public class AuditResultController extends AuditDataHandlerController {
 	public String displayPageResultFromContract(
 			@RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
 			@RequestParam(value = TgolKeyStore.IS_MANUAL_AUDIT_KEY) boolean manual,
+			@RequestParam(value = "type")  String type,
 			HttpServletRequest request, Model model) {
 		Long webResourceIdValue;
 		try {
@@ -293,7 +297,7 @@ public class AuditResultController extends AuditDataHandlerController {
 			throw new ForbiddenPageException();
 		}
 		return dispatchDisplayResultRequest(webResourceIdValue, null, model,
-				request, manual);
+				request, manual,type);
 	}
 	
 
@@ -322,7 +326,7 @@ public class AuditResultController extends AuditDataHandlerController {
                     auditResultSortCommand.getWebResourceId(),
                     auditResultSortCommand,
                     model,
-                    request,false);
+                    request,false ,"auto");
     	}
     }
     
@@ -363,7 +367,7 @@ public class AuditResultController extends AuditDataHandlerController {
     			webResource.getId(), 
                  null, 
                  model, 
-                 request,true);
+                 request,true ,"auto");
         }
         else
         	 throw new ForbiddenPageException();	
@@ -528,9 +532,10 @@ public class AuditResultController extends AuditDataHandlerController {
 	 */
 	private String dispatchDisplayResultRequest(Long webResourceId,
 			AuditResultSortCommand auditResultSortCommand, Model model,
-			HttpServletRequest request, boolean isManualAudit) {
+			HttpServletRequest request, boolean isManualAudit, String type ) {
 		// We first check that the current user is allowed to display the result
 		// of this audit
+		boolean statManual = false;
 		WebResource webResource = getWebResourceDataService().ligthRead(
 				webResourceId);
 		if (webResource == null) {
@@ -546,7 +551,12 @@ public class AuditResultController extends AuditDataHandlerController {
 					auditResultSortCommand);
 
 			// first we add statistics meta-data to model
-			addAuditStatisticsToModel(webResource, model, displayScope);
+			if(type.equals("manual")){
+				statManual = true;
+			}else {
+				statManual = false;
+			}
+			addAuditStatisticsToModel(webResource, model, displayScope ,statManual);
 
 			// The page is displayed with sort option. Form needs to be set up
 			prepareDataForSortConsole(webResourceId, displayScope,
@@ -569,11 +579,11 @@ public class AuditResultController extends AuditDataHandlerController {
 	 * @param displayScope
 	 * @param auditResultSortCommand
 	 * @param model
-	 * @param isManualAuit
+	 * @param isManualAudit
 	 */
 	private void prepareDataForSortConsole(Long webResourceId,
 			String displayScope, AuditResultSortCommand auditResultSortCommand,
-			Model model, boolean isManualAuit) {
+			Model model, boolean isManualAudit) {
 		// Meta-statistics have been added to the method previously
 		String referentialParameter = ((AuditStatistics) model.asMap().get(
 				TgolKeyStore.STATISTICS_KEY)).getParametersMap().get(
@@ -584,7 +594,7 @@ public class AuditResultController extends AuditDataHandlerController {
 			formFieldList = AuditResultSortCommandFactory.getInstance()
 					.getFormFieldBuilderCopy(referentialParameter,
 							sortFormFieldBuilderList);
-			if (isManualAuit) {
+			if (isManualAudit) {
 				CheckboxFormFieldImpl ObjectList = (CheckboxFormFieldImpl) formFieldList
 						.get(1);
 				List<CheckboxElement> checkboxElementList = ObjectList
@@ -699,7 +709,10 @@ public class AuditResultController extends AuditDataHandlerController {
 
 		Contract contract = retrieveContractFromAudit(audit);
 
-		if (!audit.getStatus().equals(AuditStatus.COMPLETED)) {
+		if (!audit.getStatus().equals(AuditStatus.COMPLETED)
+				 && !audit.getStatus().equals(AuditStatus.MANUAL_ANALYSE_IN_PROGRESS)
+				 && !audit.getStatus().equals(AuditStatus.MANUAL_COMPLETED)
+				 && !audit.getStatus().equals(AuditStatus.MANUAL_INITIALIZING)) {
 			return prepareFailedAuditData(audit, model);
 		}
 
@@ -739,15 +752,17 @@ public class AuditResultController extends AuditDataHandlerController {
 									asuc.getSortOptionMap().get(themeSortKey)
 											.toString(),
 									getTestResultSortSelection(asuc)));
-			if (isManualAudit) {
-				ManualAuditCommand manualAudit=new ManualAuditCommand();
+			if (isManualAudit) {	         
+		         		ManualAuditCommand manualAudit=new ManualAuditCommand();
 	            manualAudit.setModifedTestResultMap(TestResultFactory.getInstance().getTestResultMap(
 	                            page,
 	                            getPageScope(),
 	                            asuc.getSortOptionMap().get(themeSortKey).toString(),
 	                            getTestResultSortSelection(asuc)));
 	            model.addAttribute(TgolKeyStore.MANUAL_AUDIT_COMMAND_KEY,manualAudit);
+				
 			}
+
 			return TgolKeyStore.RESULT_PAGE_VIEW_NAME;
 		} else {
 			AuditResultSortCommand asuc = ((AuditResultSortCommand) model
