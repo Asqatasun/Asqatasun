@@ -23,8 +23,12 @@ package org.opens.tgol.entity.contract;
 
 import java.io.Serializable;
 import java.util.*;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.opens.tgol.entity.functionality.Functionality;
 import org.opens.tgol.entity.functionality.FunctionalityImpl;
 import org.opens.tgol.entity.option.OptionElement;
@@ -80,19 +84,19 @@ public class ContractImpl implements Contract, Serializable {
     @OneToMany(mappedBy = "contract")
     private Set<ScenarioImpl> scenarioSet = new LinkedHashSet<ScenarioImpl>();
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
         @JoinTable(name = "TGSI_CONTRACT_FUNCTIONALITY", joinColumns =
         @JoinColumn(name = "CONTRACT_Id_Contract"), inverseJoinColumns =
         @JoinColumn(name = "FUNCTIONALITY_Id_Functionality"))
     private Set<FunctionalityImpl> functionalitySet = new HashSet<FunctionalityImpl>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
         @JoinTable(name = "TGSI_CONTRACT_OPTION_ELEMENT", joinColumns =
         @JoinColumn(name = "CONTRACT_Id_Contract"), inverseJoinColumns =
         @JoinColumn(name = "OPTION_ELEMENT_Id_Option_Element"))
     Set<OptionElementImpl> optionElementSet = new HashSet<OptionElementImpl>();
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
         @JoinTable(name = "TGSI_CONTRACT_REFERENTIAL", joinColumns =
         @JoinColumn(name = "CONTRACT_Id_Contract"), inverseJoinColumns =
         @JoinColumn(name = "REFERENTIAL_Id_Referential"))
