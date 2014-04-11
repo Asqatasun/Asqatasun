@@ -302,6 +302,7 @@ public final class TgolKeyStore {
     public static final String HAS_SSP_KEY = "hasSSP";
     public static final String STATUS_KEY = "status";
     public static final String COMPLETED_KEY = "COMPLETED";
+    public static final String ONGOING_KEY = "ONGOING";
     public static final String ERROR_LOADING_KEY = "ERROR_LOADING";
     public static final String ERROR_ADAPTING_KEY = "ERROR_ADAPTING";
     public static final String ERROR_UNKNOWN_KEY = "ERROR_UNKNOWN";
