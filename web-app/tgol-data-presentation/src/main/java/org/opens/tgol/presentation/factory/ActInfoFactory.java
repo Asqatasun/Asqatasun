@@ -101,9 +101,17 @@ public final class ActInfoFactory {
                 actInfo.setUrl(wr.getURL());
             }
             
-            if (audit.getStatus().equals(AuditStatus.COMPLETED)) {
-                actInfo.setWeightedMark(webResourceDataService.getMarkByWebResourceAndAudit(wr, false).intValue());
-                actInfo.setRawMark(webResourceDataService.getMarkByWebResourceAndAudit(wr, true).intValue());
+            
+            //
+            
+            //cas automatioque
+            
+            if (audit.getStatus().equals(AuditStatus.COMPLETED) || audit.getStatus().equals(AuditStatus.MANUAL_INITIALIZING)
+					|| audit.getStatus().equals(
+							AuditStatus.MANUAL_ANALYSE_IN_PROGRESS)
+					|| audit.getStatus().equals(AuditStatus.MANUAL_COMPLETED)) {
+                actInfo.setWeightedMark(webResourceDataService.getMarkByWebResourceAndAudit(wr, false , false).intValue());
+                actInfo.setRawMark(webResourceDataService.getMarkByWebResourceAndAudit(wr, true, false).intValue());
                 actInfo.setStatus(TgolKeyStore.COMPLETED_KEY);
             } else if (!contentDataService.hasContent(audit)){
                 actInfo.setStatus(TgolKeyStore.ERROR_LOADING_KEY);
@@ -112,22 +120,43 @@ public final class ActInfoFactory {
             } else {
                 actInfo.setStatus(TgolKeyStore.ERROR_UNKNOWN_KEY);
             }
+            
+            //cas manual
+            actInfo.setManual(audit.getStatus().equals(AuditStatus.MANUAL_INITIALIZING)
+					|| audit.getStatus().equals(
+							AuditStatus.MANUAL_ANALYSE_IN_PROGRESS)
+					|| audit.getStatus().equals(AuditStatus.MANUAL_COMPLETED));
+			if (actInfo.isManual()) {
+				
+				actInfo.setDateManual(audit.getManualAuditDateOfCreation());
+				actInfo.setWeightedMarkManual(webResourceDataService
+						.getMarkByWebResourceAndAudit(wr, false, true)
+						.intValue());
+				actInfo.setRawMarkManual(webResourceDataService
+						.getMarkByWebResourceAndAudit(wr, true, true)
+						.intValue());
+
+				if (audit.getStatus().equals(AuditStatus.MANUAL_COMPLETED)) {
+					actInfo.setStatusManual(TgolKeyStore.COMPLETED_KEY);
+				} else if (audit.getStatus().equals(
+						AuditStatus.MANUAL_ANALYSE_IN_PROGRESS)
+						|| audit.getStatus().equals(
+								AuditStatus.MANUAL_INITIALIZING)) {
+					actInfo.setStatusManual(TgolKeyStore.ONGOING_KEY);
+
+				} else {
+					actInfo.setStatusManual(TgolKeyStore.ERROR_UNKNOWN_KEY);
+				}
+
+			}
             setActInfoReferential(actInfo, audit);
         }
         
-        //TODO :El hamdouni
-        actInfo.setManual(isAuditManual());
+      
         
         return actInfo;
     }
-    /**
-     * mock pour simuler le flag audit manuel 
-     * 
-     * **/
-    public boolean isAuditManual() {
-        Random random = new Random();
-        return random.nextBoolean();
-    }
+  
 
     /**
      * 
