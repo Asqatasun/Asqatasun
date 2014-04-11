@@ -100,6 +100,9 @@ public class WebResourceStatisticsImpl
     @ManyToOne
     @JoinColumn(name = "Id_Web_Resource")
     private WebResourceImpl webResource;
+    
+    @Column(name="Manual_Audit")
+    private int isManualAuditStatistics=0;
 
     @ManyToOne
     @JoinColumn(name = "Id_Audit")
@@ -363,5 +366,15 @@ public class WebResourceStatisticsImpl
     public void setWeightedFailed(BigDecimal weightedFailed) {
         this.weightedFailed = weightedFailed;
     }
+
+    @Override
+    public int getIsManualAuditStatistics() {
+		return isManualAuditStatistics;
+	}
+
+    @Override
+    public void setIsManualAuditStatistics(int isManualAuditStatistics) {
+		this.isManualAuditStatistics = isManualAuditStatistics;
+	}
 
 }
