@@ -40,8 +40,63 @@ public class ActInfoImpl implements ActInfo{
 	public void setManual(boolean isManual) {
 		this.isManual = isManual;
 	}
+    private Date dateManual = null;
+    
+    @Override
+    public Date getDateManual() {
+        if (dateManual != null) {
+            return new Date(dateManual.getTime());
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public void setDateManual(Date dateManual) {
+        if (dateManual != null) {
+            this.dateManual = new Date(dateManual.getTime());
+        } else {
+            this.dateManual = null;
+        }
+    }
+    
+    private int weightedMarkManual = 0;
+    @Override
+    public int getWeightedMarkManual() {
+        return weightedMarkManual;
+    }
+
+    @Override
+    public void setWeightedMarkManual(int weightedMarkManual) {
+        this.weightedMarkManual = weightedMarkManual;
+    }
+
+    private int rawMarkManual = 0;
+    @Override
+    public int getRawMarkManual() {
+        return rawMarkManual;
+    }
+
+    @Override
+    public void setRawMarkManual(int rawMarkManual) {
+        this.rawMarkManual = rawMarkManual;
+    }
+    
+    private String statusManual;
+    @Override
+    public String getStatusManual() {
+        return statusManual;
+    }
+    
+    @Override
+    public void setStatusManual(String statusManual){
+        this.statusManual = statusManual;
+    }
+
 
 	private Date date = null;
+	
+	
     @Override
     public Date getDate() {
         if (date != null) {
