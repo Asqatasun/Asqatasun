@@ -66,6 +66,7 @@
     </bean>
 
     <bean id="auditResultController" class="org.opens.tgol.controller.AuditResultController">
+        <property name="webResourceStatisticsDataService" ref="webResourceStatisticsDataServiceBean"/>
         <property name="parametersToDisplay">
             <map>
                 <entry key="LEVEL">
@@ -111,6 +112,11 @@
         </property>
         <property name="themeSortKey" value="theme"/>
         <property name="testResultSortKey" value="test-result"/>
+    </bean>
+    
+    <bean id="webResourceStatisticsDataServiceBean" class="org.opens.tanaguru.entity.service.statistics.WebResourceStatisticsDataServiceImpl">
+    	<property name="entityDao" ref="webResourceStatisticsDAO"/>
+        <property name="entityFactory" ref="webResourceStatisticsFactory"/>
     </bean>
 
     <bean id="auditSynthesisController" class="org.opens.tgol.controller.AuditSynthesisController">
