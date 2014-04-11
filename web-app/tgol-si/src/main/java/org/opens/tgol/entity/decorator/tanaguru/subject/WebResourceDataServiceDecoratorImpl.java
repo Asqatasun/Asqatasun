@@ -204,8 +204,8 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
         List<PageResult> pageResultList = (List<PageResult>)
                 ((TgolWebResourceDAO)entityDao).retrieveChildUrlList(webResource);
         for (PageResult pageResult : pageResultList) {
-            pageResult.setWeightedMark(String.valueOf(getMarkByWebResourceAndAudit(pageResult.getId(), false).intValue()));
-            pageResult.setRawMark(String.valueOf(getMarkByWebResourceAndAudit(pageResult.getId(), true).intValue()));
+            pageResult.setWeightedMark(String.valueOf(getMarkByWebResourceAndAudit(pageResult.getId(), false , false).intValue()));
+            pageResult.setRawMark(String.valueOf(getMarkByWebResourceAndAudit(pageResult.getId(), true, false).intValue()));
         }
         return pageResultList;
     }
@@ -233,8 +233,9 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
     @Override
     public Float getMarkByWebResourceAndAudit(
             WebResource webResource,
-            boolean isRawMark) {
-        return this.getMarkByWebResourceAndAudit(webResource.getId(), isRawMark);
+            boolean isRawMark,
+            boolean isManual) {
+        return this.getMarkByWebResourceAndAudit(webResource.getId(), isRawMark, isManual);
     }
 
     /**
@@ -245,11 +246,12 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
      */
     private Float getMarkByWebResourceAndAudit(
             Long idWebResource,
-            boolean isRawMark) {
+            boolean isRawMark,
+            boolean isManual) {
         if (isRawMark) {
-            return statisticsDAO.findRawMarkByWebResourceAndAudit(idWebResource);
+            return statisticsDAO.findRawMarkByWebResourceAndAudit(idWebResource, isManual);
         } else {
-            return statisticsDAO.findWeightedMarkByWebResourceAndAudit(idWebResource);
+            return statisticsDAO.findWeightedMarkByWebResourceAndAudit(idWebResource, isManual);
         }
     }
 

@@ -587,10 +587,10 @@ public class PageListControllerTest extends TestCase {
         expect(mockWebResourceDataServiceDecorator.getWebResourceCountByAuditAndHttpStatusCode(idAudit, HttpStatusCodeFamily.f9xx, null, null)).
                 andReturn(Long.valueOf(4)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getMarkByWebResourceAndAudit(mockSite, false)).
+        expect(mockWebResourceDataServiceDecorator.getMarkByWebResourceAndAudit(mockSite, false , false)).
                 andReturn(Float.valueOf(55)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getMarkByWebResourceAndAudit(mockSite, true)).
+        expect(mockWebResourceDataServiceDecorator.getMarkByWebResourceAndAudit(mockSite, true , false)).
                 andReturn(Float.valueOf(75)).
                 anyTimes();
         expect(mockWebResourceDataServiceDecorator.getChildWebResourceCount(mockSite)).

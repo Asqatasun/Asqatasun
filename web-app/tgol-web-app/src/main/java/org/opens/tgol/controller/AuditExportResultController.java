@@ -150,11 +150,11 @@ public class AuditExportResultController extends AuditDataHandlerController {
                     webResource,
                     scope,
                     getLocaleResolver().resolveLocale(request));
-
+        
         AuditStatistics auditStatistics = getAuditStatistics(
                     webResource, 
                     model, 
-                    TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE);
+                    TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE, false);
         model.addAttribute(TgolKeyStore.STATISTICS_KEY, auditStatistics);
 
         try {

@@ -245,10 +245,10 @@ public abstract class AuditDataHandlerController extends AbstractController {
      * @param model
      * @param displayScope
      */
-    protected void addAuditStatisticsToModel(WebResource webResource, Model model, String displayScope) {
+    protected void addAuditStatisticsToModel(WebResource webResource, Model model, String displayScope, boolean isManual) {
         model.addAttribute(
                 TgolKeyStore.STATISTICS_KEY,
-                getAuditStatistics(webResource, model, displayScope));
+                getAuditStatistics(webResource, model, displayScope, isManual));
     }
 
     /**
@@ -258,11 +258,12 @@ public abstract class AuditDataHandlerController extends AbstractController {
      * @param displayScope
      * @return
      */
-    protected AuditStatistics getAuditStatistics(WebResource webResource, Model model, String displayScope){
+    protected AuditStatistics getAuditStatistics(WebResource webResource, Model model, String displayScope, boolean isManual){
         return AuditStatisticsFactory.getInstance().getAuditStatistics(
                 webResource, 
                 getParametersToDisplay(),
-                displayScope);
+                displayScope,
+                isManual);
     }
 
     /**
