@@ -470,22 +470,26 @@ public class AnalyserImpl implements Analyser {
         BigDecimal weightedPassed = webResourceStatisticsDataService.getWeightedResultByResultType(
                 webResource.getId(),
                 paramSet,
-                TestSolution.PASSED);
+                TestSolution.PASSED,
+                false);
 
         BigDecimal weightedFailed = webResourceStatisticsDataService.getWeightedResultByResultType(
                 webResource.getId(),
                 paramSet,
-                TestSolution.FAILED);
+                TestSolution.FAILED,
+                false);
 
         BigDecimal weightedNa = webResourceStatisticsDataService.getWeightedResultByResultType(
                 webResource.getId(),
                 paramSet,
-                TestSolution.NOT_APPLICABLE);
+                TestSolution.NOT_APPLICABLE,
+                false);
 
         BigDecimal weightedNmi = webResourceStatisticsDataService.getWeightedResultByResultType(
                 webResource.getId(),
                 paramSet,
-                TestSolution.NEED_MORE_INFO);
+                TestSolution.NEED_MORE_INFO,
+                false);
         wrStatistics.setWeightedFailed(weightedFailed);
         wrStatistics.setWeightedPassed(weightedPassed);
         wrStatistics.setWeightedNmi(weightedNmi);
@@ -557,7 +561,8 @@ public class AnalyserImpl implements Analyser {
         int nbOfFailedOccurences =
                 webResourceStatisticsDataService.getNumberOfOccurrencesByWebResourceAndResultType(
                 webResource.getId(),
-                TestSolution.FAILED).intValue();
+                TestSolution.FAILED,
+                false).intValue();
         wrStatistics.setNbOfFailedOccurences(nbOfFailedOccurences);
         return wrStatistics;
     }
