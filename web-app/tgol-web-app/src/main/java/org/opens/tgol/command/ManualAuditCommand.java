@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tgol.presentation.data.TestResultImpl;
 
 
@@ -13,6 +14,7 @@ public class ManualAuditCommand implements Serializable{
 	private static final long serialVersionUID = -5390311731974450559L;
 	
 	private String generalErrorMsg;
+	
     public String getGeneralErrorMsg() {
         return generalErrorMsg;
     }
@@ -30,6 +32,15 @@ public class ManualAuditCommand implements Serializable{
 		return statusList;
 	}
 	
+	private List<ProcessResult> processResultList;
+	
+	
+	public List<ProcessResult> getProcessResultList() {
+		return processResultList;
+	}
+	public void setProcessResultList(List<ProcessResult> processResultList) {
+		this.processResultList = processResultList;
+	}
 	/** Default constructor */
 	public ManualAuditCommand() {
 	}
