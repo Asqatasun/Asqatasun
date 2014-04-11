@@ -45,13 +45,14 @@ import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.reference.CriterionDataService;
 import org.opens.tanaguru.entity.service.statistics.CriterionStatisticsDataService;
+import org.opens.tanaguru.entity.service.statistics.WebResourceStatisticsDataService;
+import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tgol.action.voter.ActionHandler;
 import org.opens.tgol.command.AuditResultSortCommand;
 import org.opens.tgol.command.ManualAuditCommand;
-import org.opens.tgol.command.ResultAuditManualCommand;
 import org.opens.tgol.command.factory.AuditResultSortCommandFactory;
 import org.opens.tgol.command.factory.AuditSetUpCommandFactory;
 import org.opens.tgol.entity.contract.Act;
@@ -67,11 +68,14 @@ import org.opens.tgol.form.FormField;
 import org.opens.tgol.form.builder.FormFieldBuilder;
 import org.opens.tgol.presentation.data.AuditStatistics;
 import org.opens.tgol.presentation.data.TestResult;
+import org.opens.tgol.presentation.data.TestResultImpl;
 import org.opens.tgol.presentation.factory.CriterionResultFactory;
+import org.opens.tgol.presentation.factory.DetailedContractInfoFactory;
 import org.opens.tgol.presentation.factory.TestResultFactory;
 import org.opens.tgol.presentation.highlighter.HtmlHighlighter;
 import org.opens.tgol.util.HttpStatusCodeFamily;
 import org.opens.tgol.util.TgolKeyStore;
+import org.opens.tgol.validator.ManualAuditValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -93,6 +97,19 @@ public class AuditResultController extends AuditDataHandlerController {
 			.getLogger(AuditResultController.class);
 	private static final String CRITERION_RESULT_PAGE_KEY = "criterion-result";
 	private static final String REFERER_HEADER_KEY = "referer";
+	
+	private WebResourceStatisticsDataService webResourceStatisticsDataService;
+
+	public void setWebResourceStatisticsDataService(
+			WebResourceStatisticsDataService webResourceStatisticsDataService) {
+		this.webResourceStatisticsDataService = webResourceStatisticsDataService;
+	}
+	
+	ManualAuditValidator manualAuditValidator;
+	@Autowired
+	public void setManualAuditValidator(ManualAuditValidator manualAuditValidator) {
+		this.manualAuditValidator = manualAuditValidator;
+	}
 
 	List<FormFieldBuilder> sortFormFieldBuilderList;
 
@@ -301,41 +318,73 @@ public class AuditResultController extends AuditDataHandlerController {
 	}
 	
 
+//    /**
+//     * @param manualAuditCommand
+//     * @param auditResultSortCommand
+//     * @param result
+//     * @param model
+//     * @param request
+//     * @param webresourceId
+//     * @return 
+//     */
+//    @RequestMapping(value=TgolKeyStore.PAGE_RESULT_CONTRACT_URL, method = RequestMethod.POST)
+//    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
+//    protected String submitPageResultSorter(
+//            @ModelAttribute(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY) AuditResultSortCommand auditResultSortCommand,
+//            @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
+//            @ModelAttribute(TgolKeyStore.MANUAL_AUDIT_COMMAND_KEY) ManualAuditCommand manualAuditCommand,
+//            BindingResult result,
+//            Model model,
+//            HttpServletRequest request) {
+//    	if(manualAuditCommand !=null){
+//    		return dispatchSubmitManualAuditValues(webresourceId,manualAuditCommand,result,model,request, false, auditResultSortCommand);
+//    	}else{
+//    		return dispatchDisplayResultRequest(
+//                    auditResultSortCommand.getWebResourceId(),
+//                    auditResultSortCommand,
+//                    model,
+//                    request,false ,"auto");
+//    	}
+//    }
+    
     /**
-     * @param manualAuditCommand
-     * @param auditResultSortCommand
-     * @param result
-     * @param model
-     * @param request
-     * @param webresourceId
-     * @return 
-     */
-    @RequestMapping(value=TgolKeyStore.PAGE_RESULT_CONTRACT_URL, method = RequestMethod.POST)
-    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
-    protected String submitPageResultSorter(
-            @ModelAttribute(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY) AuditResultSortCommand auditResultSortCommand,
-            @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
-            @ModelAttribute(TgolKeyStore.MANUAL_AUDIT_COMMAND_KEY) ManualAuditCommand manualAuditCommand,
-            BindingResult result,
-            Model model,
-            HttpServletRequest request) {
-    	if(manualAuditCommand !=null){
-    		return dispatchSubmitManualAuditValues(webresourceId,manualAuditCommand,result,model,request);
-    	}else{
-    		return dispatchDisplayResultRequest(
-                    auditResultSortCommand.getWebResourceId(),
-                    auditResultSortCommand,
-                    model,
-                    request,false ,"auto");
-    	}
-    }
+	 * @param manualAuditCommand
+	 * @param auditResultSortCommand
+	 * @param result
+	 * @param model
+	 * @param request
+	 * @param webresourceId
+	 * @return
+	 */
+	@RequestMapping(value = TgolKeyStore.PAGE_RESULT_CONTRACT_URL, method = RequestMethod.POST)
+	@Secured({ TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY })
+	protected String submitPageResultSorter(
+			@ModelAttribute(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY) AuditResultSortCommand auditResultSortCommand,
+			@RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
+			@ModelAttribute(TgolKeyStore.MANUAL_AUDIT_COMMAND_KEY) ManualAuditCommand manualAuditCommand,
+			@RequestParam String action, BindingResult result, Model model,
+			HttpServletRequest request) {
+		if (manualAuditCommand != null) {
+			if (action.equals("Finish")) {
+				return dispatchSubmitManualAuditValues(webresourceId,
+						manualAuditCommand, result, model, request, true, auditResultSortCommand);
+			} else {
+				return dispatchSubmitManualAuditValues(webresourceId,
+						manualAuditCommand, result, model, request, false,auditResultSortCommand);
+			}
+		} else {
+			return dispatchDisplayResultRequest(
+					auditResultSortCommand.getWebResourceId(),
+					auditResultSortCommand, model, request, false, "auto");
+		}
+	}
     
 	private String dispatchSubmitManualAuditValues(
     		@RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
             @ModelAttribute(TgolKeyStore.MANUAL_AUDIT_COMMAND_KEY) ManualAuditCommand manualAuditCommand,
             BindingResult result,
             Model model,
-            HttpServletRequest request) {
+            HttpServletRequest request,boolean isValidating,AuditResultSortCommand auditResultSortCommand) {
     
     	WebResource webResource;
         try {
@@ -349,9 +398,10 @@ public class AuditResultController extends AuditDataHandlerController {
         Audit audit = getAuditFromWebResource(webResource);
         if (isUserAllowedToDisplayResult(audit)){
         	
-    	List<ProcessResult> processResultList=TestResultFactory.getInstance().getProcessResultListFromTestsResult(
-    			new LinkedList<TestResult>(manualAuditCommand.getModifiedTestResultMap().values()), webResource);
-    	
+        	Collection<TestResultImpl> modifiedTestResultList = manualAuditCommand.getModifiedTestResultMap().values();
+        	List<ProcessResult> processResultList=TestResultFactory.getInstance().getProcessResultListFromTestsResult(
+    			new LinkedList<TestResult>(modifiedTestResultList), webResource);
+    		
     	processResultDataService.saveOrUpdate(processResultList);
     	/**
     	 * if save the manual audit for the first time save
@@ -363,15 +413,63 @@ public class AuditResultController extends AuditDataHandlerController {
 	    	auditDataService.update(audit);
     	}
     	
-    	return dispatchDisplayResultRequest(
-    			webResource.getId(), 
-                 null, 
-                 model, 
-                 request,true ,"auto");
-        }
-        else
-        	 throw new ForbiddenPageException();	
-    }
+if (isValidating ){
+    		
+        	List<ProcessResult> allProcessResultList=TestResultFactory.getInstance().getAllProcessResultListFromTestsResult(
+    			new LinkedList<TestResult>(modifiedTestResultList), webResource);
+        	manualAuditCommand.setProcessResultList(allProcessResultList);
+    		manualAuditValidator.validate(manualAuditCommand, result);
+				if (result.hasErrors()) {
+					// ajout message d'erreur.
+					model.addAttribute("manualAuditCommand", manualAuditCommand);
+					return dispatchDisplayResultRequest(webResource.getId(),
+							null, model, request, true,"auto");
+
+				} else {
+					// mettre à jour le statut
+					audit.setStatus(AuditStatus.MANUAL_COMPLETED);
+
+					WebResourceStatistics ws = webResourceStatisticsDataService
+							.createWebResourceStatisticsForManualAudit(audit,
+									webResource, allProcessResultList);
+					//
+
+					// rediriger vers la pages contrat
+
+					Contract contract = retrieveContractFromAudit(audit);
+					Page page = (Page) webResource;
+					model.addAttribute(
+							TgolKeyStore.AUDIT_SET_UP_COMMAND_KEY,
+							AuditSetUpCommandFactory.getInstance()
+									.getPageAuditSetUpCommand(
+											contract,
+											page.getURL(),
+											getParameterDataService()
+													.getParameterSetFromAudit(
+															audit)));
+
+					model.addAttribute(TgolKeyStore.DISPLAY_RESULT_TREND_KEY,
+							true);
+					model.addAttribute(
+							TgolKeyStore.CONTRACT_WITH_MANUAL_AUDIT_KEY, true);
+					model.addAttribute(TgolKeyStore.CONTRACT_ID_VALUE,
+							contract.getId());
+					model.addAttribute(TgolKeyStore.DETAILED_CONTRACT_INFO,
+							DetailedContractInfoFactory.getInstance()
+									.getDetailedContractInfo(contract));
+					model.addAttribute(TgolKeyStore.IS_CONTRACT_EXPIRED_KEY,
+							isContractExpired(contract));
+					return TgolKeyStore.CONTRACT_VIEW_NAME;
+
+				}
+			}
+
+			return dispatchDisplayResultRequest(webResource.getId(), null,
+					model, request, true,"auto");
+		} else
+			throw new ForbiddenPageException();
+	}
+
 	/**
 	 * 
 	 * @param webresourceId
