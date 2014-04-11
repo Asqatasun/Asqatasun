@@ -152,5 +152,22 @@ public interface ActInfo {
      *  @param manual 
      * **/
     void setManual(boolean isManual);
+    
+	void setStatusManual(String statusManual);
+
+	String getStatusManual();
+
+	void setRawMarkManual(int rawMarkManual);
+
+	int getRawMarkManual();
+
+	void setWeightedMarkManual(int weightedMarkManual);
+
+	int getWeightedMarkManual();
+
+	void setDateManual(Date dateManual);
+
+	Date getDateManual();
+
 
 }
