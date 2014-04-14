@@ -20,8 +20,11 @@ public abstract class AbstactAuditWebServiceTest extends JerseyTest {
 
 //	protected static JerseyTest jersyTest;
 	
-	
+	public AbstactAuditWebServiceTest(){
+		
+	}
  
+
 	 /**
      * Register specific context parameters
      */
@@ -35,6 +38,7 @@ public abstract class AbstactAuditWebServiceTest extends JerseyTest {
     	// Create specific test parameters for WSApplication instance
         return new WSApplication().register(AuditWebImpl.class) //root resource
                 .property("contextConfigLocation", "classpath:beans-ws.xml"); // application context configuration file
+//                .property("persistenceXmlLocation", "classpath*:conf/persistence.xml");
     }
     
     

@@ -1,5 +1,7 @@
 package com.oceaneconsulting.tanaguru.dao.impl;
 
+
+
 import com.oceaneconsulting.tanaguru.AbstractDbUnitTest;
 import com.oceaneconsulting.tanaguru.entity.WsUser;
 import com.oceaneconsulting.tanaguru.entity.impl.WsRoleImpl;

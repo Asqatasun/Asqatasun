@@ -42,7 +42,7 @@ public abstract class AbstractDbUnitTest extends DBTestCase  {
     /**
      * Context d'application spring
      */
-    private static final String SPRING_FILE_PATH = "src/test/resources/conf/context/application-context.xml";
+    private static final String SPRING_FILE_PATH = "classpath*:test-beans-ws.xml";
     
     private String inputDataFileName = "";
     

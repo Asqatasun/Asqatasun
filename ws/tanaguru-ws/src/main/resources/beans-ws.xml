@@ -27,5 +27,5 @@
     <bean id="userDao" class="com.oceaneconsulting.tanaguru.dao.impl.WsUserDaoImpl"/>
 	
 	
-	<import resource="classpath:conf/context/beans-*.xml"/>
+	<import resource="classpath*:conf/context/beans-*.xml"/>
 </beans>
