@@ -1,7 +1,12 @@
 package com.oceaneconsulting.tanaguru.dao.impl;
 
+import javax.persistence.Query;
+
 import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.springframework.stereotype.Repository;
+
 import com.oceaneconsulting.tanaguru.dao.WsUserDao;
+import com.oceaneconsulting.tanaguru.entity.WsRole;
 import com.oceaneconsulting.tanaguru.entity.WsUser;
 import com.oceaneconsulting.tanaguru.entity.impl.WsUserImpl;
 
@@ -10,9 +15,26 @@ import com.oceaneconsulting.tanaguru.entity.impl.WsUserImpl;
  * @author msobahi
  *
  */
+@Repository("userDao")
 public class WsUserDaoImpl extends AbstractJPADAO<WsUser, Long> implements WsUserDao {
+	
+	/**
+	 * Option de la mise en cache de la requete
+	 */
+	private static final String CACHEABLE_OPTION = "org.hibernate.cacheable";
+	
 	@Override
     protected Class<? extends WsUser> getEntityClass() {
         return WsUserImpl.class;
     }
+	
+	@Override
+	public WsRole getUserRole(WsUser user) {
+		Query query = entityManager.createQuery("SELECT usr.role FROM " + getEntityClass().getName() + " usr "
+				+ " WHERE usr = :user");
+		query.setParameter("user", user);
+		query.setHint(CACHEABLE_OPTION, "true");
+		return (WsRole) query.getSingleResult();
+	}
+
 }

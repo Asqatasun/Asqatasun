@@ -3,6 +3,7 @@ package com.oceaneconsulting.tanaguru.dao.impl;
 import javax.persistence.Query;
 
 import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.springframework.stereotype.Repository;
 
 import com.oceaneconsulting.tanaguru.dao.WsInvocationDao;
 import com.oceaneconsulting.tanaguru.entity.WsInvocation;
@@ -16,10 +17,11 @@ import com.oceaneconsulting.tanaguru.entity.impl.WsInvocationImpl;
  * @author msobahi
  * 
  */
+@Repository("invocationDao")
 public class WsInvocationDaoImpl extends AbstractJPADAO<WsInvocation, Long> implements WsInvocationDao {
 
 	/**
-	 * Option de la mise en cache de la requte
+	 * Option de la mise en cache de la requete
 	 */
 	private static final String CACHEABLE_OPTION = "org.hibernate.cacheable";
 
