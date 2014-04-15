@@ -22,9 +22,9 @@
 		</property>
 	</bean>
 	
-	<bean id="invocationDao" class="com.oceaneconsulting.tanaguru.dao.impl.WsInvocationDaoImpl"/>
+	<!-- <bean id="invocationDao" class="com.oceaneconsulting.tanaguru.dao.impl.WsInvocationDaoImpl"/>
     <bean id="roleDao" class="com.oceaneconsulting.tanaguru.dao.impl.WsRoleDaoImpl"/>
-    <bean id="userDao" class="com.oceaneconsulting.tanaguru.dao.impl.WsUserDaoImpl"/>
+    <bean id="userDao" class="com.oceaneconsulting.tanaguru.dao.impl.WsUserDaoImpl"/> -->
 	
 	
 	<import resource="classpath*:conf/context/beans-*.xml"/>
