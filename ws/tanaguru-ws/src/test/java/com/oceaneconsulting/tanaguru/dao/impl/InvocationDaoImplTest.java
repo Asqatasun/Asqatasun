@@ -3,6 +3,7 @@ package com.oceaneconsulting.tanaguru.dao.impl;
 
 
 import com.oceaneconsulting.tanaguru.AbstractDbUnitTest;
+import com.oceaneconsulting.tanaguru.dao.WsInvocationDao;
 import com.oceaneconsulting.tanaguru.entity.WsUser;
 import com.oceaneconsulting.tanaguru.entity.impl.WsRoleImpl;
 import com.oceaneconsulting.tanaguru.entity.impl.WsUserImpl;
@@ -10,11 +11,11 @@ import com.oceaneconsulting.tanaguru.entity.impl.WsUserImpl;
 public class InvocationDaoImplTest extends AbstractDbUnitTest {
 	
 	 /**
-     * Nom du fichier xml contenant le jeu de données à importer
+     * Nom du fichier xml contenant le jeu de donnees a importer
      */
     private static final String INPUT_DATA_SET_FILENAME = "src/test/resources/dataSets/invocationDaoTest.xml";
     
-    private WsInvocationDaoImpl invocationDao;
+    private WsInvocationDao invocationDao;
 
     /**
      * Constructeur
@@ -23,7 +24,7 @@ public class InvocationDaoImplTest extends AbstractDbUnitTest {
 	public InvocationDaoImplTest(String testName) {
 		super(testName);
 		setInputDataFileName(INPUT_DATA_SET_FILENAME);
-		invocationDao = (WsInvocationDaoImpl)springBeanFactory.getBean("invocationDao");
+		invocationDao = (WsInvocationDao)springBeanFactory.getBean("invocationDao");
 	}
 	
 	/**
