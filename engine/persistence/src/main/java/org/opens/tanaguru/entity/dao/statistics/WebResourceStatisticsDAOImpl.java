@@ -94,7 +94,7 @@ public class WebResourceStatisticsDAOImpl extends
 				+ getWebResourceEntityClass().getName() + " r"
 				+ JOIN_PROCESS_RESULT + JOIN_TEST
 				+ " WHERE (r.id=:id OR r.parent.id=:id)"
-				+ " AND pr.manualDefenitiveValue = :value";
+				+ " AND pr.manualDefiniteValue = :value";
 		Query query = null;
 		if (isManualAudit) {
 			query = entityManager.createQuery(queryStringForAutomatic);
