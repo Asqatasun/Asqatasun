@@ -428,7 +428,8 @@ if (isValidating ){
 				} else {
 					// mettre à jour le statut
 					audit.setStatus(AuditStatus.MANUAL_COMPLETED);
-
+					auditDataService.update(audit);
+					
 					WebResourceStatistics ws = webResourceStatisticsDataService
 							.createWebResourceStatisticsForManualAudit(audit,
 									webResource, allProcessResultList);
