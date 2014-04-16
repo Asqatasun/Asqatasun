@@ -22,7 +22,10 @@
 package org.opens.tanaguru.entity.service.audit;
 
 import java.util.Collection;
+import java.util.List;
+
 import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.audit.DefiniteResult;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Scope;
@@ -118,5 +121,13 @@ public interface ProcessResultDataService extends
      * @return the list of IndefiniteProcessResult for a given audit
      */
     Collection<ProcessResult> getIndefiniteResultFromAudit(Audit audit);
+
+    
+	/**
+	 * Return the history changes for the given processResult
+	 * @param processResult 
+	 * @return The list of changes
+	 */
+	List<DefiniteResult> getHistoyChanges(ProcessResult processResult);
 
 }
