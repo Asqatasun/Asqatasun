@@ -107,6 +107,7 @@
                                     <fmt:message key="nmi"/>
                                     <fmt:message key="resultPage.forTheTheme"/>
                                     <fmt:message key="${entry.key.code}"/>
+                                    <!-- test git commit -->
                                 </c:set>
                                 <span class="nmi-th-gray theme-result" title="${nmiTitle}">${counterByThemeMap[entry.key].nmiCount}</span>
                                 <c:set scope="page" var="naTitle">
