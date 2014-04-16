@@ -323,8 +323,11 @@ public final class TestResultFactory {
     			}else{
     				 processResult=prList.get(0);
     			}
-    			((DefiniteResult)processResult).setManualDefiniteValue(testResult.getManualStatus().equals("failed") ? TestSolution.FAILED : (testResult.getManualStatus().equals("passed") ? TestSolution.PASSED : (testResult.getManualStatus().equals("na") ? TestSolution.NOT_APPLICABLE : null)));
-    			((DefiniteResult)processResult).setManualAuditComment(testResult.getComment());
+    			if(testResult.getManualStatus()!=null){
+	    			((DefiniteResult)processResult).setManualDefiniteValue(testResult.getManualStatus().equals("failed") ? TestSolution.FAILED : (testResult.getManualStatus().equals("passed") ? TestSolution.PASSED : (testResult.getManualStatus().equals("na") ? TestSolution.NOT_APPLICABLE : null)));
+	    			((DefiniteResult)processResult).setManualAuditComment(testResult.getComment());
+    			}
+    			
     			processResultList.add(processResult);
     		}
     	
