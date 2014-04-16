@@ -22,7 +22,10 @@
 package org.opens.tanaguru.entity.dao.audit;
 
 import java.util.Collection;
+import java.util.List;
+
 import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.audit.DefiniteResult;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Scope;
@@ -121,5 +124,8 @@ public interface ProcessResultDAO extends GenericDAO<ProcessResult, Long> {
      * @return the collection of indefiniteResults for a given audit
      */
     Collection<ProcessResult> retrieveIndefiniteResultFromAudit(Audit audit);
+    
+    
+    List<DefiniteResult> getHistoryChanges (ProcessResult processResultImpl);
 
 }
