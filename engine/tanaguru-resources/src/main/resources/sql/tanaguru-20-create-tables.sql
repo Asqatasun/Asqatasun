@@ -329,20 +329,6 @@ CREATE TABLE IF NOT EXISTS `PROCESS_RESULT` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
-CREATE TABLE `process_result_aud` (
-  `DTYPE` varchar(31) NOT NULL,
-  `Id_Process_Result` bigint(20) NOT NULL,
-  `REV` int(11) NOT NULL,
-  `REVTYPE` tinyint(4) DEFAULT NULL,
-  `Element_Counter` int(11) DEFAULT NULL,
-  `Id_Audit_Gross_Result` bigint(20) DEFAULT NULL,
-  `Id_Audit_Net_Result` bigint(20) DEFAULT NULL,
-  `Id_Process_Result_Parent` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`Id_Process_Result`,`REV`),
-  KEY `FK5411075EDF74E053` (`REV`),
-  CONSTRAINT `FK5411075EDF74E053` FOREIGN KEY (`REV`) REFERENCES `revinfo` (`REV`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-
 
 -- --------------------------------------------------------
 --
@@ -711,3 +697,33 @@ CREATE TABLE IF NOT EXISTS `TEST_STATISTICS` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
+
+
+
+-- ---------------------------------------------------------------------------------------------------------
+-- Creating the hibernate audit table of process_result
+-- ---------------------------------------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `process_result_aud` (
+  `DTYPE` varchar(31) NOT NULL,
+  `Id_Process_Result` bigint(20) NOT NULL,
+  `REV` int(11) NOT NULL,
+  `REVTYPE` tinyint(4) DEFAULT NULL,
+  `Element_Counter` int(11) DEFAULT NULL,
+  `Id_Process_Result_Parent` bigint(20) DEFAULT NULL,
+  `Definite_Value` varchar(255) DEFAULT NULL,
+  `Manual_Audit_Comment` varchar(255) DEFAULT NULL,
+  `Manual_Definite_Value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`Id_Process_Result`,`REV`),
+  KEY `FK5411075EDF74E053` (`REV`),
+  CONSTRAINT `FK5411075EDF74E053` FOREIGN KEY (`REV`) REFERENCES `revinfo` (`REV`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ---------------------------------------------------------------------------------------------------------
+-- Hibernate envers technical table to refer the hibernate changes versions
+-- ---------------------------------------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `revinfo` (
+  `REV` int(11) NOT NULL AUTO_INCREMENT,
+  `REVTSTMP` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`REV`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
