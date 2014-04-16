@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.com/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence         http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-    <!-- 
-    	In order to run tanaguru-ws project correctly, it's necessary to define the entry below in tanaguru configuration file (/conf/tanaguru.conf)
-    	- persistenceXmlLocation=classpath:/conf/persistence.xml
-     -->
-    <persistence-unit name="tanaguruPU" transaction-type="RESOURCE_LOCAL">
+    
+<!--     	In order to run tanaguru-ws project correctly, it's necessary to define the entry below in tanaguru configuration file (/conf/tanaguru.conf)
+    	- persistenceXmlLocation=classpath:/conf/persistence.xml -->
+    
+    <persistence-unit name="test-tanaguruPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <non-jta-data-source>jdbc/tanaguruDS</non-jta-data-source>
-        <!-- TGSI classes
-        <class>org.opens.tgol.entity.user.UserImpl</class>
+        <!-- TGSI classes -->
+<!--         <class>org.opens.tgol.entity.user.UserImpl</class>
         <class>org.opens.tgol.entity.user.RoleImpl</class>
         <class>org.opens.tgol.entity.contract.ContractImpl</class>
         <class>org.opens.tgol.entity.contract.ActImpl</class>
@@ -18,9 +18,9 @@
         <class>org.opens.tgol.entity.option.OptionElementImpl</class>
         <class>org.opens.tgol.entity.option.OptionFamilyImpl</class>
         <class>org.opens.tgol.entity.referential.ReferentialImpl</class>
-        <class>org.opens.tgol.entity.scenario.ScenarioImpl</class>-->
-        <!-- tanaguru classes-->
-        <class>org.opens.tanaguru.entity.reference.CriterionImpl</class>
+        <class>org.opens.tgol.entity.scenario.ScenarioImpl</class> -->
+        <!-- tanaguru classes -->
+<!--         <class>org.opens.tanaguru.entity.reference.CriterionImpl</class>
         <class>org.opens.tanaguru.entity.reference.DecisionLevelImpl</class>
         <class>org.opens.tanaguru.entity.reference.LevelImpl</class>
         <class>org.opens.tanaguru.entity.reference.NomenclatureCssUnitImpl</class>
@@ -50,15 +50,15 @@
         <class>org.opens.tanaguru.entity.subject.PageImpl</class>
         <class>org.opens.tanaguru.entity.subject.SiteImpl</class>
         <class>org.opens.tanaguru.entity.subject.WebResourceImpl</class>
-		<!--<class>org.opens.tanaguru.entity.subject.SnapshotImpl</class>-->
+		<class>org.opens.tanaguru.entity.subject.SnapshotImpl</class>
         <class>org.opens.tanaguru.entity.parameterization.ParameterImpl</class>
         <class>org.opens.tanaguru.entity.parameterization.ParameterElementImpl</class>
-        <class>org.opens.tanaguru.entity.parameterization.ParameterFamilyImpl</class>
-        <!-- tg-analyser classes-->
-		<class>org.opens.tanaguru.entity.statistics.CriterionStatisticsImpl</class>
+        <class>org.opens.tanaguru.entity.parameterization.ParameterFamilyImpl</class> -->
+        <!-- tg-analyser classes -->
+<!-- 		<class>org.opens.tanaguru.entity.statistics.CriterionStatisticsImpl</class>
 		<class>org.opens.tanaguru.entity.statistics.WebResourceStatisticsImpl</class>
         <class>org.opens.tanaguru.entity.statistics.TestStatisticsImpl</class>
-        <class>org.opens.tanaguru.entity.statistics.ThemeStatisticsImpl</class>
+        <class>org.opens.tanaguru.entity.statistics.ThemeStatisticsImpl</class> -->
         <!-- Entity du WS -->
         <class>com.oceaneconsulting.tanaguru.entity.impl.WsInvocationImpl</class>
         <class>com.oceaneconsulting.tanaguru.entity.impl.WsRoleImpl</class>

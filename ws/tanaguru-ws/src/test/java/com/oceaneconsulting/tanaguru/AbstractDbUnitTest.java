@@ -27,36 +27,36 @@ public abstract class AbstractDbUnitTest extends DBTestCase  {
      */
     private static final String JDBC_DRIVER = "org.hsqldb.jdbcDriver";
     /**
-     * base de donn√©es HSQLDB nomm√©e "database" qui fonctionne en mode m√©moire
+     * base de donnÈes HSQLDB nommÈe "database" qui fonctionne en mode mÈmoire
      */
     private static final String DATABASE = "jdbc:hsqldb:file:src/test/resources/hsql-db";
     /**
-     * utilisateur qui se connecte √† la base de donn√©es
+     * utilisateur qui se connecte ‡ la base de donnÈes
      */
     private static final String USER = "sa";
     /**
-     * getDataSet mot de passe pour se connecter √† la base de donn√©es
+     * getDataSet mot de passe pour se connecter ‡ la base de donnÈes
      */
     private static final String PASSWORD = "";
     
     /**
      * Context d'application spring
      */
-    private static final String SPRING_FILE_PATH = "src/test/resources/conf/context/application-context.xml";
+    private static final String SPRING_FILE_PATH = "classpath*:test-beans-ws.xml";
     
     private String inputDataFileName = "";
     
     /**
-     * R√©cup√©ration du fichier de donn√©es pour le test
-     * @return Le chemin du fichier de donn√©es du test
+     * Recuperation du fichier de donnees pour le test
+     * @return Le chemin du fichier de donnees du test
      */
     public String getInputDataFileName() {
         return inputDataFileName;
     }
 
     /**
-     * Setter de fichier de donn√©es pour le test
-     * @param inputDataFileName Le chemin du fichier de donn√©es pour le test
+     * Setter de fichier de donnees pour le test
+     * @param inputDataFileName Le chemin du fichier de donnees pour le test
      */
     public void setInputDataFileName(String inputDataFileName) {
         this.inputDataFileName = inputDataFileName;
@@ -92,7 +92,7 @@ public abstract class AbstractDbUnitTest extends DBTestCase  {
     }
 
     /**
-     * Charge le jeu de donn√©es √† partir d'un fichier XML d'import
+     * Charge le jeu de donnÈes a partir d'un fichier XML d'import
      */
     @Override
     protected IDataSet getDataSet() throws Exception {

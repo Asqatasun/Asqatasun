@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 

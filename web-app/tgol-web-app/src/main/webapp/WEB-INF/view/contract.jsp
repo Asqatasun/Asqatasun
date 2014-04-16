@@ -252,7 +252,7 @@
 										type="both" value="${actInfo.dateManual}" dateStyle="short"
 										timeStyle="short" /></td>
 								<td headers="raw-mark" class="tg-numerical-column"><c:choose>
-										<c:when test="${actInfo.status == 'MANUAL_COMPLETED'}">
+										<c:when test="${actInfo.statusManual == 'COMPLETED'}">
 											<c:set var="mark" scope="page" value="${actInfo.rawMarkManual}" />
 											<c:set var="scoreClass" scope="page" value="act-score" />
 											<c:set var="scoreId" scope="page" value="" />

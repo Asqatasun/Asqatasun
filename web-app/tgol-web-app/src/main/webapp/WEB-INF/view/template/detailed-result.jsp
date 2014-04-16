@@ -20,7 +20,7 @@
 <script type="text/javascript" src="${jqueryUrl}"></script>
 <script type="text/javascript" src="${jqueryUIUrl}"></script>
 <script type="text/javascript" src="${detailResultManualJsUrl}"></script>
- <c:set var="isManualAudit" scope="request" value="${param.type}"/>
+ <c:set var="isManualAudit" scope="request" value="${param.ma}"/>
             <c:if test="${addSideBarNav}">
             <div class="theme-nav bs-docs-sidebar">
                 <ul class="nav-list bs-docs-sidenav">
@@ -192,7 +192,7 @@
 	                                <img src="<c:url value="/Images/ico-${testResult.resultCode}-m.png"/>" alt="test ${testResult.testShortLabel} <fmt:message key="${testResult.resultCode}"/>"/> 
 	                            </div>
 							<c:choose>
-							<c:when test="${isManualAudit == 'manual'}">
+							<c:when test="${isManualAudit == true}">
 	                            <div class="audit-result-manual span3">
 	                            <form:hidden path="modifiedTestResultMap['${testResult.testShortLabel}'].testShortLabel" value="${testResult.testShortLabel}"/>
 	               					<fieldset>
@@ -216,7 +216,7 @@
 	                           
 	                       
                             </div>
-                           <c:if test="${isManualAudit == 'manual'}">
+                           <c:if test="${isManualAudit == true}">
                             <div class="audit-result-manual-comment span11" id="commentContainer${testResult.testShortLabel}">
                             	<label for="cmt${testResult.testShortLabel}"> <fmt:message key="resultPage.commentArea"/> <span class="offscreen">${testResult.testShortLabel}</label>
                             	<form:textarea id="cmt${testResult.testShortLabel}" path="modifiedTestResultMap['${testResult.testShortLabel}'].comment" rows="2" cols="30" maxLength="250"/>
@@ -349,9 +349,9 @@
                     </c:forEach>
                 </div> <!-- div id="themex-results"> --> 
                 </c:forEach>
-                <c:if test="${isManualAudit == 'manual'}">
+                <c:if test="${isManualAudit == true}">
                   <div id="manual-audit-form-submit">
-                                <input  type="submit"  class="result-page-action manual-audit-save-btn" value="<fmt:message key="resultPage.saveManualResultsBtnName"/>"/>
+                                <input  type="submit"  class="result-page-action manual-audit-save-btn"  name="action"  value="<fmt:message key="resultPage.saveManualResultsBtnName"/>"/>
                                 <input class="result-page-action manual-audit-save-btn" type="submit" value="Finish" name="action" />
                  </div>
                 </c:if>

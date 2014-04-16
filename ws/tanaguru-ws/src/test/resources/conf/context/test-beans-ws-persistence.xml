@@ -12,11 +12,11 @@
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="persistenceXmlLocation" value="classpath:conf/context/persistence.xml"/>
+        <property name="persistenceXmlLocation" value="${test-persistenceXmlLocation}"/>
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
-                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.show_sql">true</prop>
             </props>
         </property>
     </bean>
