@@ -126,7 +126,7 @@ public class WebResourceStatisticsDAOImpl extends
 				+ getWebResourceEntityClass().getName() + " r"
 				+ JOIN_PROCESS_RESULT + " JOIN pr.remarkSet pk"
 				+ " WHERE (r.id=:id OR r.parent.id=:id)"
-				+ " AND pr.manualDefenitiveValue = :value" + " AND pk.issue = :value";
+				+ " AND pr.manualDefiniteValue = :value" + " AND pk.issue = :value";
 		Query query = null;
 		if(isManualAudit){
 			query = entityManager.createQuery(queryStringForAutomatic);
