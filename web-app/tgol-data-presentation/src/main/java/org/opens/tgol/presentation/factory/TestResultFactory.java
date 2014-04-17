@@ -26,6 +26,7 @@ import java.util.*;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.*;
+import org.opens.tanaguru.entity.dao.audit.ProcessResultDAO;
 import org.opens.tanaguru.entity.factory.audit.ProcessResultFactory;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Scope;
@@ -41,6 +42,7 @@ import org.opens.tgol.presentation.data.RemarkInfos;
 import org.opens.tgol.presentation.data.TestResult;
 import org.opens.tgol.presentation.data.TestResultImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
 /**
@@ -48,6 +50,9 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author jkowalczyk
  */
 public final class TestResultFactory {
+	
+	
+	private ProcessResultDAO processResultDAO;
 
     private static final String NOT_TESTED_STR = "NOT_TESTED";
     
@@ -55,6 +60,8 @@ public final class TestResultFactory {
             ResourceBundle.getBundle(TestResult.REPRESENTATION_BUNDLE_NAME);
 
     private WebResourceDataServiceDecorator webResourceDataService;
+    
+    
     @Autowired
     public void setWebResourceDataService(WebResourceDataServiceDecorator webResourceDataServiceDecorator) {
         this.webResourceDataService = webResourceDataServiceDecorator;
@@ -102,6 +109,9 @@ public final class TestResultFactory {
      * The unique shared instance of TestResultFactory
      */
     private static TestResultFactory testResultFactory;
+    
+    
+//    private ProcessResultDataService processResultDataService;
 
     /**
      * Default private constructor
@@ -144,6 +154,7 @@ public final class TestResultFactory {
         testResult.setRuleDesignUrl(processResult.getTest().getRuleDesignUrl());
         testResult.setResultCounter(ResultCounterFactory.getInstance().getResultCounter());
         testResult.setTest(processResult.getTest());
+        testResult.setHistory(constructHistoryChanges(processResult));
         if(processResult instanceof DefiniteResult){
 	        ((TestResultImpl)testResult).setComment(((DefiniteResult)processResult).getManualAuditcomment());
 	        
@@ -177,7 +188,16 @@ public final class TestResultFactory {
         return testResult;
     }
 
-    /**
+    private List<DefiniteResult> constructHistoryChanges(
+			ProcessResult processResult) {
+		
+    	List<DefiniteResult> histoyChanges = processDataService.getHistoyChanges (processResult);
+		return histoyChanges;
+    	
+    	
+	}
+
+	/**
      * 
      * @param webresource
      * @param scope
