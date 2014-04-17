@@ -23,6 +23,11 @@ package org.opens.tgol.presentation.data;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.AuditReaderFactory;
+import org.opens.tanaguru.entity.audit.DefiniteResult;
+import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.reference.Test;
 
 /**
@@ -310,5 +315,25 @@ public class TestResultImpl implements TestResult{
      */
     public TestResultImpl() {
     }
+    
+    private List<DefiniteResult> history;
+
+	public List<DefiniteResult> getHistory() {
+		return history;
+	}
+
+	public void setHistory(List<DefiniteResult> history) {
+		this.history = history;
+	}
+
+	@Override
+	public List<ProcessResult> getHistory(ProcessResult processResult) {
+		//TODO :YNE: afficher l'historique pour chaque processResult
+		//TODO :YNE: essayer de déporter ce code sur un service et/ou module dédier à hibernate-envers
+		
+//		AuditReader auditReader = AuditReaderFactory.get(ProcessResultImpl);
+		
+		return null;
+	}
 
 }

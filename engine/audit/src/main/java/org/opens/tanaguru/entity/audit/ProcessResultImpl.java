@@ -33,9 +33,13 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlTransient;
 
+
+
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
-import org.hibernate.envers.RelationTargetAuditMode;
+//import org.hibernate.envers.Audited;
+//import org.hibernate.envers.NotAudited;
+//import org.hibernate.envers.RelationTargetAuditMode;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.TestImpl;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -60,7 +64,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
    
     @ManyToOne
     @JoinColumn(name = "Id_Audit_Gross_Result")
-    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    @NotAudited
     private AuditImpl grossResultAudit;
     
     @Id
@@ -70,7 +74,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     
     @ManyToOne
     @JoinColumn(name = "Id_Audit_Net_Result")
-    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    @NotAudited
     private AuditImpl netResultAudit;
     
     @ManyToOne

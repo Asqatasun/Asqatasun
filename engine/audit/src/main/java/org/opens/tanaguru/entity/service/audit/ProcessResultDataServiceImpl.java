@@ -22,7 +22,10 @@
 package org.opens.tanaguru.entity.service.audit;
 
 import java.util.Collection;
+import java.util.List;
+
 import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.audit.DefiniteResult;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.dao.audit.ProcessResultDAO;
@@ -90,5 +93,10 @@ public class ProcessResultDataServiceImpl extends AbstractGenericDataService<Pro
     public Collection<ProcessResult> getIndefiniteResultFromAudit(Audit audit) {
         return ((ProcessResultDAO) entityDao).retrieveIndefiniteResultFromAudit(audit);
     }
+
+	@Override
+	public List<DefiniteResult> getHistoyChanges(ProcessResult processResult) {
+		return ((ProcessResultDAO) entityDao).getHistoryChanges(processResult);
+	}
 
 }
