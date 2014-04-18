@@ -21,34 +21,31 @@
  */
 package org.opens.tanaguru.crawler.util;
 
-import javax.xml.xpath.XPathExpressionException;
-import org.apache.log4j.Logger;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
+import org.apache.commons.lang3.StringUtils;
 
 /**
+ * Overriding in this class the buildRegexp method to format a regular
+ * expression. This will be check if the url contains the regexp.
  *
- * @author jkowalczyk
+ * @author alingua
  */
-public class HeritrixParameterValueModifier extends DefaultHeritrixConfigurationModifier {
+public class HeritrixContainsRegexpParameterValueModifier extends HeritrixRegexpParameterValueModifier {
 
-    public HeritrixParameterValueModifier(){
+    private static final String BEGIN_REGEXP_EXCLUSION = "(?i)(.*";
+
+    public HeritrixContainsRegexpParameterValueModifier() {
         super();
     }
 
     @Override
-    public Document modifyDocument(Document document, String value) {
-        if (value == null || value.isEmpty()) {
-            return document;
+    protected String buildRegexp(String rawRegexp, String url) {
+        if (StringUtils.isNotBlank(rawRegexp)) {
+            StringBuilder strb = new StringBuilder();
+            strb.append(BEGIN_REGEXP_EXCLUSION);
+            strb.append(rawRegexp);
+            strb.append(END_REGEXP);
+            return strb.toString();
         }
-        try {
-            Node node = getNodeFromXpath(document);
-            node.setTextContent(value);
-        } catch (XPathExpressionException ex) {
-            ex.fillInStackTrace();
-            Logger.getLogger(HeritrixParameterValueModifier.class.getName()).warn(ex.getMessage());
-        }
-        return document;
+        return rawRegexp.toString();
     }
-
 }

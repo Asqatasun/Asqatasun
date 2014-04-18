@@ -64,7 +64,7 @@ public class CheckboxElementBuilderImpl extends FormFieldBuilderImpl
     }
 
     @Override
-    public boolean getDefault() {
+    public boolean getDefaultElement() {
         return this.isDefault;
     }
 

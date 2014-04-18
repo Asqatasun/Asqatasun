@@ -119,23 +119,27 @@ public final class AuditSetUpCommandFactory {
     public void setScenarioDataService(ScenarioDataService scenarioDataService) {
         this.scenarioDataService = scenarioDataService;
     }
-    
+
     /**
      * The holder that handles the unique instance of AuditSetUpCommandFactory
      */
     private static class AuditSetUpCommandFactoryHolder {
-        private static final AuditSetUpCommandFactory INSTANCE = 
+
+        private static final AuditSetUpCommandFactory INSTANCE =
                 new AuditSetUpCommandFactory();
     }
-    
+
     /**
      * Private constructor
      */
-    private AuditSetUpCommandFactory() {}
-    
+    private AuditSetUpCommandFactory() {
+    }
+
     /**
-     * Singleton pattern based on the "Initialization-on-demand 
-     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
+     * Singleton pattern based on the "Initialization-on-demand holder idiom".
+     * See
+     *
+     * @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
      * @return the unique instance of AuditSetUpCommandFactory
      */
     public static AuditSetUpCommandFactory getInstance() {
@@ -154,7 +158,7 @@ public final class AuditSetUpCommandFactory {
             Map<String, List<AuditSetUpFormField>> optionalFormFieldMap) {
         AuditSetUpCommand pageAuditSetUpCommand = new AuditSetUpCommand();
         pageAuditSetUpCommand.setScope(ScopeEnum.PAGE);
-        pageAuditSetUpCommand.setUrlList(getGroupOfPagesUrl(contract));
+        pageAuditSetUpCommand.setUrlList(getGroupOfPagesUrl(contract, false));
         setUpAuditSetUpCommand(
                 pageAuditSetUpCommand,
                 contract,
@@ -221,6 +225,7 @@ public final class AuditSetUpCommandFactory {
             List<SelectFormField> levelFormFieldList,
             Map<String, List<AuditSetUpFormField>> optionalFormFieldMap) {
         AuditSetUpCommand siteAuditSetUpCommand = new AuditSetUpCommand();
+        siteAuditSetUpCommand.setUrlList(getGroupOfPagesUrl(contract, true));
         siteAuditSetUpCommand.setScope(ScopeEnum.DOMAIN);
         setUpAuditSetUpCommand(
                 siteAuditSetUpCommand,
@@ -340,7 +345,7 @@ public final class AuditSetUpCommandFactory {
      * @param contractId
      * @return
      */
-    private List<String> getGroupOfPagesUrl(Contract contract) {
+    private List<String> getGroupOfPagesUrl(Contract contract, boolean isSiteAudit) {
         User user = contract.getUser();
         /* 
          * WARNING hard-coded exception for guest user 
@@ -350,7 +355,7 @@ public final class AuditSetUpCommandFactory {
         List<String> groupOfPagesUrl = new LinkedList<String>();
         if (user == null) {
             return null;
-        } else if (user.getEmail1().equalsIgnoreCase("guest")) {
+        } else if (user.getEmail1().equalsIgnoreCase("guest") || isSiteAudit) {
             nbOfPages = 1;
         }
         for (int i = 0; i < nbOfPages; i++) {

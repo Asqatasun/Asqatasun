@@ -339,9 +339,9 @@ public class TanaguruCrawlJob implements ApplicationListener<CrawlStateEvent>{
             urls.append(uriTmp);
             urls.append("\r");
         }
-        doc = ccu.modifyValue(ccu.getUrlModifier(), doc, urls.toString());
+        doc = ccu.modifyValue(ccu.getUrlModifier(), doc, urls.toString(), "");
         for (Parameter parameter : crawlParameterSet) {
-            doc = ccu.modifyHeritrixParameter(doc, parameter);
+            doc = ccu.modifyHeritrixParameter(doc, parameter, urlList.iterator().next());
         }
         return doc;
     }

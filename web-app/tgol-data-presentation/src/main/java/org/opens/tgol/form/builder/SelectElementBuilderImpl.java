@@ -41,7 +41,7 @@ public class SelectElementBuilderImpl extends FormFieldBuilderImpl
         formField.setErrorI18nKey(getErrorI18nKey());
         formField.setI18nKey(getI18nKey());
         formField.setValue(getValue());
-        formField.setDefault(isDefault);
+        formField.setDefault(isDefaultElement);
         formField.setDefaultCode(defaultCode);
         formField.setEnabled(isEnabled);
         return formField;
@@ -58,15 +58,15 @@ public class SelectElementBuilderImpl extends FormFieldBuilderImpl
         return this.isEnabled;
     }
 
-    private boolean isDefault = false;
+    private boolean isDefaultElement = false;
     @Override
-    public void setDefault(boolean isDefault) {
-        this.isDefault = isDefault;
+    public void setDefault(boolean isDefaultElement) {
+        this.isDefaultElement = isDefaultElement;
     }
 
     @Override
-    public boolean getDefault() {
-        return this.isDefault;
+    public boolean getDefaultElement() {
+        return this.isDefaultElement;
     }
 
     String defaultCode = null;

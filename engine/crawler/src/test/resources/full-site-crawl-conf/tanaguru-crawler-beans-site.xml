@@ -4,33 +4,33 @@
   
    This is a relatively minimal configuration suitable for many crawls.
    
-   Commented-out beans and properties are provided as an example; values
-   shown in comments reflect the actual defaults which are in effect
-   without specification. (To change from the default behavior, 
-   uncomment AND alter the shown values.)   
- -->
+  Commented-out beans and properties are provided as an example; values
+  shown in comments reflect the actual defaults which are in effect
+  without specification. (To change from the default behavior, 
+  uncomment AND alter the shown values.)   
+-->
 <beans xmlns="http://www.springframework.org/schema/beans"
-	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns:context="http://www.springframework.org/schema/context"
-	     xmlns:aop="http://www.springframework.org/schema/aop"
-	     xmlns:tx="http://www.springframework.org/schema/tx"
-	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
  
     <context:annotation-config/>
 
-<!-- 
-  OVERRIDES
-   Values elsewhere in the configuration may be replaced ('overridden') 
-   by a Properties map declared in a PropertiesOverrideConfigurer, 
-   using a dotted-bean-path to address individual bean properties. 
-   This allows us to collect a few of the most-often changed values
-   in an easy-to-edit format here at the beginning of the model
-   configuration.    
- -->
- <!-- overrides from a text property list -->
+    <!-- 
+     OVERRIDES
+      Values elsewhere in the configuration may be replaced ('overridden') 
+      by a Properties map declared in a PropertiesOverrideConfigurer, 
+      using a dotted-bean-path to address individual bean properties. 
+      This allows us to collect a few of the most-often changed values
+      in an easy-to-edit format here at the beginning of the model
+      configuration.    
+    -->
+    <!-- overrides from a text property list -->
     <bean id="simpleOverrides" class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
         <property name="properties">
             <value>
@@ -46,8 +46,8 @@
         </property>
     </bean>
 
- <!-- overrides from declared <prop> elements, more easily allowing
-      multiline values or even declared beans -->
+    <!-- overrides from declared <prop> elements, more easily allowing
+    multiline values or even declared beans -->
     <bean id="longerOverrides" class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
         <property name="properties">
             <props>
@@ -58,7 +58,7 @@
         </property>
     </bean>
 
- <!-- CRAWL METADATA: including identification of crawler/operator -->
+    <!-- CRAWL METADATA: including identification of crawler/operator -->
     <bean id="metadata" class="org.archive.modules.CrawlMetadata" autowire="byName">
         <property name="operatorContactUrl" value="[see override above]"/>
         <property name="jobName" value="[see override above]"/>
@@ -66,10 +66,10 @@
         <property name="userAgentTemplate" value="tanaguru +@OPERATOR_CONTACT_URL@"/>
     </bean>
  
- <!-- SEEDS: crawl starting points 
-      ConfigString allows simple, inline specification of a moderate
-      number of seeds; see below comment for example of using an
-      arbitrarily-large external file. -->
+    <!-- SEEDS: crawl starting points 
+    ConfigString allows simple, inline specification of a moderate
+    number of seeds; see below comment for example of using an
+    arbitrarily-large external file. -->
     <bean id="seeds" class="org.opens.tanaguru.crawler.processor.module.TanaguruTextSeedModule">
         <property name="textSource">
             <bean class="org.archive.spring.ConfigString">
@@ -82,32 +82,31 @@
         </property>
     </bean>
  
-  <!-- SCOPE: rules for which discovered URIs to crawl; order is very 
-      important because last decision returned other than 'NONE' wins. -->
-    <bean id="scope" class="org.archive.modules.deciderules.DecideRuleSequence">
+    <!-- SCOPE: rules for which discovered URIs to crawl; order is very 
+    important because last decision returned other than 'NONE' wins. -->
+    <bean id="scope" class="org.opens.tanaguru.crawler.framework.TanaguruDecideRuleSequenceExtended">
         <property name="rules">
             <list>
                 <!-- Begin by REJECTing all... -->
                 <bean class="org.archive.modules.deciderules.RejectDecideRule">
                 </bean>
 
-                <!-- ...then ACCEPT those within configured/seed-implied SURT prefixes... -->
-                <bean class="org.archive.modules.deciderules.surt.SurtPrefixedDecideRule">
+                <!--                 ...then ACCEPT those within configured/seed-implied SURT prefixes... 
+                <bean id="surtPrefixedDecideRule" class="org.archive.modules.deciderules.surt.SurtPrefixedDecideRule">
                     <property name="seedsAsSurtPrefixes" value="true" />
+                </bean>-->
+                
+                <bean class="org.archive.modules.deciderules.surt.OnDomainsDecideRule">
+                    <property name="decision" value="ACCEPT"/>
                 </bean>
-
-                <bean id="tooManyHopsDecideRule" class="org.archive.modules.deciderules.TooManyHopsDecideRule">
-                    <property name="maxHops" value="20"/>
-                </bean>
-
-                <!-- ...but ACCEPT those more than a configured link-hop-count from start... -->
-                <bean class="org.archive.modules.deciderules.TransclusionDecideRule">
-                    <property name="maxTransHops" value="1" />
-                    <property name="maxSpeculativeHops" value="0" />
-                </bean>
-
-                <bean class="org.archive.modules.deciderules.surt.NotOnDomainsDecideRule">
+                
+                <!--<bean id="inclusionListRegexDecideRule" class="org.archive.modules.deciderules.NotMatchesListRegexDecideRule">-->
+                <bean id="inclusionListRegexDecideRule" class="org.opens.tanaguru.crawler.processor.deciderule.NotMatchesRegexpDecideRule">
                     <property name="decision" value="REJECT"/>
+                    <property name="listLogicalOr" value="true" />
+                    <property name="regexList">
+                        <list></list>
+                    </property>
                 </bean>
 
                 <!-- ...and REJECT those with suspicious repeating path-segments... -->
@@ -133,20 +132,14 @@
                             <value>.*(?i)(\.(swf))$</value>
                             <value>.*(?i)(\.(js))$</value>
                             <value>.*(?i)(\.(css))$</value>
-                            <value>.*(?i)(\.(bmp|gif|jpe?g|png|svg|tiff?))$</value>
+                            <value>.*(?i)(\.(bmp|gif|jpe?g|png|ico|svg|tiff?))$</value>
                         </list>
                     </property>
                 </bean>
 
-<!--                <bean class="org.archive.modules.deciderules.MatchesListRegexDecideRule">
-                    <property name="decision" value="ACCEPT"/>
-                    <property name="listLogicalOr" value="true" />
-                    <property name="regexList">
-                        <list>
-                            <value>.*(?i)(\.css(\?.*)?)$</value>
-                        </list>
-                    </property>
-                </bean>-->
+                <bean id="tooManyHopsDecideRule" class="org.archive.modules.deciderules.TooManyHopsDecideRule">
+                    <property name="maxHops" value="20"/>
+                </bean>
 
                 <!-- ...but always ACCEPT those marked as prerequisitee for another URI... -->
                 <bean class="org.archive.modules.deciderules.PrerequisiteAcceptDecideRule">
@@ -200,17 +193,17 @@
         </property>
     </bean>
   
- <!-- FETCH CHAIN --> 
- <!-- processors declared as named beans -->
- <!--bean id="preselector" class="org.archive.crawler.prefetch.Preselector">
-       <property name="recheckScope" value="false" /> 
-       <property name="blockAll" value="false" /> 
-       <property name="blockByRegex" value="" /> 
-       <property name="allowByRegex" value="" /> 
- </bean-->
+    <!-- FETCH CHAIN --> 
+    <!-- processors declared as named beans -->
+    <!--bean id="preselector" class="org.archive.crawler.prefetch.Preselector">
+          <property name="recheckScope" value="false" /> 
+          <property name="blockAll" value="false" /> 
+          <property name="blockByRegex" value="" /> 
+          <property name="allowByRegex" value="" /> 
+    </bean-->
     <bean id="preconditions" class="org.archive.crawler.prefetch.PreconditionEnforcer">
-<!--         <property name="ipValidityDurationSeconds" value="21600" />
-         <property name="robotsValidityDurationSeconds" value="86400" />-->
+        <!--         <property name="ipValidityDurationSeconds" value="21600" />
+        <property name="robotsValidityDurationSeconds" value="86400" />-->
         <property name="calculateRobotsOnly" value="false" />
     </bean>
 
@@ -242,24 +235,24 @@
 
     <bean id="extractorHtml" class="org.archive.modules.extractor.ExtractorHTML">
         <property name="extractJavascript" value="false" />
-  <!-- <property name="extractValueAttributes" value="true" /> -->
-  <!-- <property name="ignoreFormActionUrls" value="false" /> -->
-  <!-- <property name="extractOnlyFormGets" value="true" /> -->
+        <!-- <property name="extractValueAttributes" value="true" /> -->
+        <!-- <property name="ignoreFormActionUrls" value="false" /> -->
+        <!-- <property name="extractOnlyFormGets" value="true" /> -->
         <property name="treatFramesAsEmbedLinks" value="false" />
-  <!-- <property name="ignoreUnexpectedHtml" value="true" /> -->
-  <!-- <property name="maxElementLength" value="1024" /> -->
-  <!-- <property name="maxAttributeNameLength" value="1024" /> -->
-  <!-- <property name="maxAttributeValueLength" value="16384" /> -->
+        <!-- <property name="ignoreUnexpectedHtml" value="true" /> -->
+        <!-- <property name="maxElementLength" value="1024" /> -->
+        <!-- <property name="maxAttributeNameLength" value="1024" /> -->
+        <!-- <property name="maxAttributeValueLength" value="16384" /> -->
     </bean>
 
     <bean id="extractorCss" class="org.archive.modules.extractor.ExtractorCSS">
     </bean>
 
- <!--bean id="extractorJs" class="org.archive.modules.extractor.ExtractorJS">
- </bean>
- <bean id="extractorSwf" class="org.archive.modules.extractor.ExtractorSWF">
- </bean-->
- <!-- assembled into ordered FetchChain bean -->
+    <!--bean id="extractorJs" class="org.archive.modules.extractor.ExtractorJS">
+    </bean>
+    <bean id="extractorSwf" class="org.archive.modules.extractor.ExtractorSWF">
+    </bean-->
+    <!-- assembled into ordered FetchChain bean -->
     <bean id="fetchProcessors" class="org.archive.modules.FetchChain">
         <property name="processors">
             <list>
@@ -292,7 +285,7 @@
         <property name="cssRegexp">
             <value>.*(?i)(\.css(\?.*)?)$</value>
         </property>
-<!--        <property name="authorizedMimeTypes">
+        <!--        <property name="authorizedMimeTypes">
             <list>
                 <value>text/html</value>
                 <value>text/css</value>
@@ -320,7 +313,7 @@
                 <!-- write to aggregate archival files... -->
                 <ref bean="tanaguruWriter"/>
                 <!-- ...send each outlink candidate URI to CandidatesChain,
-                    and enqueue those ACCEPTed to the frontier... -->
+                and enqueue those ACCEPTed to the frontier... -->
                 <ref bean="candidates"/>
                 <!-- ...then update stats, shared-structures, frontier decisions -->
                 <ref bean="disposition"/>
@@ -328,12 +321,12 @@
         </property>
     </bean>
  
- <!-- CRAWLCONTROLLER: Control interface, unifying context -->
+    <!-- CRAWLCONTROLLER: Control interface, unifying context -->
     <bean id="crawlController"
-   class="org.archive.crawler.framework.CrawlController">
+          class="org.archive.crawler.framework.CrawlController">
         <property name="maxToeThreads" value="10" />
         <property name="pauseAtStart" value="false" />
-<!--        <property name="pauseAtFinish" value="false" />-->
+        <!--        <property name="pauseAtFinish" value="false" />-->
         <!-- <property name="recorderInBufferBytes" value="2097152" /> -->
         <!-- <property name="recorderOutBufferBytes" value="65536" /> -->
         <!-- <property name="checkpointerPeriod" value="-1" /> -->
@@ -341,7 +334,7 @@
         <!-- <property name="checkpointsDir" value="checkpoints" /> -->
     </bean>
  
- <!-- FRONTIER: Record of all URIs discovered and queued-for-collection -->
+    <!-- FRONTIER: Record of all URIs discovered and queued-for-collection -->
     <bean id="frontier" class="org.opens.tanaguru.crawler.frontier.TanaguruBdbFrontier">
         <!-- <property name="holdQueues" value="true" /> -->
         <!-- <property name="queueTotalBudget" value="-1" /> -->
@@ -371,8 +364,8 @@
     -->
   
     <!-- ACTIONDIRECTORY: disk directory for mid-crawl operations
-      Running job will watch directory for new files with URIs, 
-      scripts, and other data to be processed during a crawl. -->
+    Running job will watch directory for new files with URIs, 
+    scripts, and other data to be processed during a crawl. -->
     <bean id="actionDirectory" class="org.archive.crawler.framework.ActionDirectory">
         <!-- <property name="actionDir" value="action" /> -->
         <!-- <property name="initialDelaySeconds" value="1000" /> -->
@@ -392,127 +385,127 @@
         <!-- <property name="checkpointsDir" value="checkpoints"/> -->
     </bean>
  
- <!-- 
-   OPTIONAL BEANS
-    Uncomment and expand as needed, or if non-default alternate 
-    implementations are preferred.
-  -->
+    <!-- 
+     OPTIONAL BEANS
+      Uncomment and expand as needed, or if non-default alternate 
+      implementations are preferred.
+    -->
   
- <!-- CANONICALIZATION POLICY -->
- <!--
- <bean id="canonicalizationPolicy" 
-   class="org.archive.modules.canonicalize.RulesCanonicalizationPolicy">
-   <property name="rules">
-    <list>
-     <bean class="org.archive.modules.canonicalize.LowercaseRule" />
-     <bean class="org.archive.modules.canonicalize.StripUserinfoRule" />
-     <bean class="org.archive.modules.canonicalize.StripWWWNRule" />
-     <bean class="org.archive.modules.canonicalize.StripSessionIDs" />
-     <bean class="org.archive.modules.canonicalize.StripSessionCFIDs" />
-     <bean class="org.archive.modules.canonicalize.FixupQueryString" />
-    </list>
-  </property>
- </bean>
- -->
+    <!-- CANONICALIZATION POLICY -->
+    <!--
+    <bean id="canonicalizationPolicy" 
+      class="org.archive.modules.canonicalize.RulesCanonicalizationPolicy">
+      <property name="rules">
+       <list>
+        <bean class="org.archive.modules.canonicalize.LowercaseRule" />
+        <bean class="org.archive.modules.canonicalize.StripUserinfoRule" />
+        <bean class="org.archive.modules.canonicalize.StripWWWNRule" />
+        <bean class="org.archive.modules.canonicalize.StripSessionIDs" />
+        <bean class="org.archive.modules.canonicalize.StripSessionCFIDs" />
+        <bean class="org.archive.modules.canonicalize.FixupQueryString" />
+       </list>
+     </property>
+    </bean>
+    -->
  
 
- <!-- QUEUE ASSIGNMENT POLICY -->
- <!--
- <bean id="queueAssignmentPolicy" 
-   class="org.archive.crawler.frontier.SurtAuthorityQueueAssignmentPolicy">
-  <property name="forceQueueAssignment" value="" />
-  <property name="deferToPrevious" value="true" />
-  <property name="parallelQueues" value="1" />
- </bean>
- -->
+    <!-- QUEUE ASSIGNMENT POLICY -->
+    <!--
+    <bean id="queueAssignmentPolicy" 
+      class="org.archive.crawler.frontier.SurtAuthorityQueueAssignmentPolicy">
+     <property name="forceQueueAssignment" value="" />
+     <property name="deferToPrevious" value="true" />
+     <property name="parallelQueues" value="1" />
+    </bean>
+    -->
  
- <!-- URI PRECEDENCE POLICY -->
- <!--
- <bean id="uriPrecedencePolicy" 
-   class="org.archive.crawler.frontier.precedence.CostUriPrecedencePolicy">
- </bean>
- -->
+    <!-- URI PRECEDENCE POLICY -->
+    <!--
+    <bean id="uriPrecedencePolicy" 
+      class="org.archive.crawler.frontier.precedence.CostUriPrecedencePolicy">
+    </bean>
+    -->
  
- <!-- COST ASSIGNMENT POLICY -->
- <!--
- <bean id="costAssignmentPolicy" 
-   class="org.archive.crawler.frontier.UnitCostAssignmentPolicy">
- </bean>
- -->
+    <!-- COST ASSIGNMENT POLICY -->
+    <!--
+    <bean id="costAssignmentPolicy" 
+      class="org.archive.crawler.frontier.UnitCostAssignmentPolicy">
+    </bean>
+    -->
  
- <!-- CREDENTIAL STORE: HTTP authentication or FORM POST credentials -->
- <!-- 
- <bean id="credentialStore" 
-   class="org.archive.modules.credential.CredentialStore">
- </bean>
- -->
+    <!-- CREDENTIAL STORE: HTTP authentication or FORM POST credentials -->
+    <!-- 
+    <bean id="credentialStore" 
+      class="org.archive.modules.credential.CredentialStore">
+    </bean>
+    -->
  
- <!-- 
-   REQUIRED STANDARD BEANS
-    It will be very rare to replace or reconfigure the following beans.
-  -->
+    <!-- 
+     REQUIRED STANDARD BEANS
+      It will be very rare to replace or reconfigure the following beans.
+    -->
 
- <!-- STATISTICSTRACKER: standard stats/reporting collector -->
+    <!-- STATISTICSTRACKER: standard stats/reporting collector -->
     <bean id="statisticsTracker"
-   class="org.archive.crawler.reporting.StatisticsTracker" autowire="byName">
-  <!-- <property name="reportsDir" value="reports" /> -->
-  <!-- <property name="liveHostReportSize" value="20" /> -->
-  <!-- <property name="intervalSeconds" value="20" /> -->
-  <!-- <property name="keepSnapshotsCount" value="5" /> -->
-  <!-- <property name="liveHostReportSize" value="20" /> -->
+          class="org.archive.crawler.reporting.StatisticsTracker" autowire="byName">
+        <!-- <property name="reportsDir" value="reports" /> -->
+        <!-- <property name="liveHostReportSize" value="20" /> -->
+        <!-- <property name="intervalSeconds" value="20" /> -->
+        <!-- <property name="keepSnapshotsCount" value="5" /> -->
+        <!-- <property name="liveHostReportSize" value="20" /> -->
     </bean>
  
- <!-- CRAWLERLOGGERMODULE: shared logging facility -->
+    <!-- CRAWLERLOGGERMODULE: shared logging facility -->
     <bean id="loggerModule"
-   class="org.archive.crawler.reporting.CrawlerLoggerModule">
-  <!-- <property name="path" value="logs" />--> 
-  <!-- <property name="crawlLogPath" value="crawl.log" /> -->
-  <!-- <property name="alertsLogPath" value="alerts.log" /> -->
-  <!-- <property name="progressLogPath" value="progress-statistics.log" /> -->
-  <!-- <property name="uriErrorsLogPath" value="uri-errors.log" /> -->
-  <!-- <property name="runtimeErrorsLogPath" value="runtime-errors.log" /> -->
-  <!-- <property name="nonfatalErrorsLogPath" value="nonfatal-errors.log" /> -->
+          class="org.archive.crawler.reporting.CrawlerLoggerModule">
+        <!-- <property name="path" value="logs" />--> 
+        <!-- <property name="crawlLogPath" value="crawl.log" /> -->
+        <!-- <property name="alertsLogPath" value="alerts.log" /> -->
+        <!-- <property name="progressLogPath" value="progress-statistics.log" /> -->
+        <!-- <property name="uriErrorsLogPath" value="uri-errors.log" /> -->
+        <!-- <property name="runtimeErrorsLogPath" value="runtime-errors.log" /> -->
+        <!-- <property name="nonfatalErrorsLogPath" value="nonfatal-errors.log" /> -->
     </bean>
  
- <!-- SHEETOVERLAYMANAGER: manager of sheets of contextual overlays
-      Autowired to include any SheetForSurtPrefix or 
-      SheetForDecideRuled beans -->
+    <!-- SHEETOVERLAYMANAGER: manager of sheets of contextual overlays
+    Autowired to include any SheetForSurtPrefix or 
+    SheetForDecideRuled beans -->
     <bean id="sheetOverlaysManager" autowire="byType"
-   class="org.archive.crawler.spring.SheetOverlaysManager">
+          class="org.archive.crawler.spring.SheetOverlaysManager">
     </bean>
 
- <!-- BDBMODULE: shared BDB-JE disk persistence manager -->
+    <!-- BDBMODULE: shared BDB-JE disk persistence manager -->
     <bean id="bdb"
-  class="org.archive.bdb.BdbModule">
-  <!-- <property name="dir" value="state" /> -->
-  <!-- <property name="cachePercent" value="0" /> -->
-  <!-- <property name="useSharedCache" value="false" /> -->
-  <!-- <property name="checkpointCopyLogs" value="true" /> -->
-  <!-- <property name="expectedConcurrency" value="25" /> -->
+          class="org.archive.bdb.BdbModule">
+        <!-- <property name="dir" value="state" /> -->
+        <!-- <property name="cachePercent" value="0" /> -->
+        <!-- <property name="useSharedCache" value="false" /> -->
+        <!-- <property name="checkpointCopyLogs" value="true" /> -->
+        <!-- <property name="expectedConcurrency" value="25" /> -->
     </bean>
  
- <!-- BDBCOOKIESTORAGE: disk-based cookie storage for FetchHTTP -->
+    <!-- BDBCOOKIESTORAGE: disk-based cookie storage for FetchHTTP -->
     <bean id="cookieStorage"
-   class="org.archive.modules.fetcher.BdbCookieStorage">
-  <!-- <property name="cookiesLoadFile"><null/></property> -->
-  <!-- <property name="cookiesSaveFile"><null/></property> -->
-  <!-- <property name="bdb">
-        <ref bean="bdb"/>
-       </property> -->
+          class="org.archive.modules.fetcher.BdbCookieStorage">
+        <!-- <property name="cookiesLoadFile"><null/></property> -->
+        <!-- <property name="cookiesSaveFile"><null/></property> -->
+        <!-- <property name="bdb">
+         <ref bean="bdb"/>
+        </property> -->
     </bean>
  
- <!-- SERVERCACHE: shared cache of server/host info -->
+    <!-- SERVERCACHE: shared cache of server/host info -->
     <bean id="serverCache"
-   class="org.archive.modules.net.BdbServerCache">
-  <!-- <property name="bdb">
-        <ref bean="bdb"/>
-       </property> -->
+          class="org.archive.modules.net.BdbServerCache">
+        <!-- <property name="bdb">
+         <ref bean="bdb"/>
+        </property> -->
     </bean>
 
- <!-- CONFIG PATH CONFIGURER: required helper making crawl paths relative
-      to crawler-beans.cxml file, and tracking crawl files for web UI -->
+    <!-- CONFIG PATH CONFIGURER: required helper making crawl paths relative
+    to crawler-beans.cxml file, and tracking crawl files for web UI -->
     <bean id="configPathConfigurer"
-   class="org.archive.spring.ConfigPathConfigurer">
+          class="org.archive.spring.ConfigPathConfigurer">
     </bean>
  
 </beans>
