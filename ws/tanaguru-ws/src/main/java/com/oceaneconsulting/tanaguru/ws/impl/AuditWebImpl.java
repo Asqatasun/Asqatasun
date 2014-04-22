@@ -3,8 +3,6 @@ package com.oceaneconsulting.tanaguru.ws.impl;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -14,7 +12,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
 import javax.ws.rs.container.TimeoutHandler;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -22,13 +19,14 @@ import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
-import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
 import org.opens.tanaguru.service.AuditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.oceaneconsulting.tanaguru.decorator.WebResourceDataServiceDecorator;
+import com.oceaneconsulting.tanaguru.service.WsInvocationService;
+import com.oceaneconsulting.tanaguru.util.ParameterInputs;
 import com.oceaneconsulting.tanaguru.util.ParameterUtils;
 import com.oceaneconsulting.tanaguru.ws.AuditWeb;
 import com.oceaneconsulting.tanaguru.ws.types.AuditResult;
@@ -45,7 +43,6 @@ import com.oceaneconsulting.tanaguru.ws.types.AuditResult;
  */
 @Component
 @Path("/")
-@Consumes(MediaType.APPLICATION_JSON)
 public class AuditWebImpl implements AuditWeb {
 
 	private static final Logger LOGGER = Logger.getLogger(AuditWebImpl.class);
@@ -60,52 +57,33 @@ public class AuditWebImpl implements AuditWeb {
 	
 	@Autowired
 	ParameterDataService parameterDataService;
-
 	
+	@Autowired
+	WsInvocationService wsInvocationService;
+
+
     public AuditWebImpl() {
         super();
     }
     
-
-	@GET
-	@Path("/auditPageSync")
-    public Response auditPageSync(@QueryParam("url")String pageURL, @QueryParam("level")String level, @Context HttpServletRequest request) {
-		
-		String host = request.getRemoteHost();
-		String ipAddress = request.getRemoteAddr();
-
-		LOGGER.debug("host" + host + "| ipAddress" + ipAddress);
-		
-		//get parameters
-		ParameterUtils.initParametersMap(parameterDataService);
-		
-		
-		//Get default set of parameters
-		Set<Parameter> parameters =  ParameterUtils.getDefaultParametersForPA();
-		
-		//define level if necessary : supposing it's not mondatory
-		if(level != null && !level.isEmpty()){
-			parameters.add(ParameterUtils.createParameter("LEVEL", level));
-		}
-		
-		//launch ws (unused result variable) 
-    	Audit audit = auditService.auditPage(pageURL, parameters);
-    	
-      return Response.status(200).entity("Page audit was launched").build();
-    }
-	
+    
 	@GET
 	@Path("/auditPage")
 	@Produces(MediaType.APPLICATION_JSON) 
-    public void auditPage(@QueryParam("url") final String pageURL, @QueryParam("level") final String level, @Suspended final AsyncResponse response) {
-    		/*,  @Context final HttpServletRequest request*/ 
-		
+    public void auditPage(@QueryParam(ParameterInputs.PAGE_URL) final String pageURL, 
+    		@QueryParam(ParameterInputs.AUDIT_LEVEL) final String level, 
+    		@QueryParam(ParameterInputs.DATA_TABLE_MARKER_PARAM) final String tblMarker, 
+    		@QueryParam(ParameterInputs.PRESENTATION_TABLE_MARKER) final String prTblMarker, 
+    		@QueryParam(ParameterInputs.DECORATIVE_IMAGE_MARKER) final String dcrImgMarker, 
+    		@QueryParam(ParameterInputs.INFORMATIVE_IMAGE_MARKER) final String infImgMarker,
+    		@Suspended final AsyncResponse response) {
+
+		 
 		//Time out response if 
 		response.setTimeoutHandler(new TimeoutHandler() {
 	        @Override
 	        public void handleTimeout(AsyncResponse asyncResponse) {
 	        	AuditResult auditResult = new AuditResult();
-	        	auditResult.setUrl(pageURL);
 	        	auditResult.setMessage("Operation time out.");
 	            asyncResponse.resume(Response.status(Response.Status.SERVICE_UNAVAILABLE).entity(auditResult).build());
 	        }
@@ -119,9 +97,12 @@ public class AuditWebImpl implements AuditWeb {
 //			public void onComplete(Throwable throwable) {
 //
 //				if (throwable == null) {
-//					response.resume(Response.status(200).entity("Execution ended !").build());
+//					//response.resume(Response.status(200).entity("Execution ended !").build());
 //				} else {
-//					response.resume(Response.status(Response.Status.SERVICE_UNAVAILABLE).entity("Operation time out.").build());
+//		        	AuditResult auditResult = new AuditResult();
+//		        	auditResult.setUrl(pageURL);
+//		        	auditResult.setMessage("Operation time out.");
+//		            response.resume(Response.status(Response.Status.SERVICE_UNAVAILABLE).entity(auditResult).build());
 //				}
 //			}
 //		});
@@ -132,20 +113,13 @@ public class AuditWebImpl implements AuditWeb {
 	        @Override
 	        public void run() {
 	            response.resume(auditPage());
-	            
-	        }
-	 
+	        }	 
 	        private AuditResult auditPage() {
 	        	LOGGER.debug("Run audit thread");
 	        	
 	        	AuditResult auditResult = new AuditResult(); 
 	        	
-//	    		//security parameters
-//	    		LOGGER.debug("Security parameters...");
-//	    		String host = request.getRemoteHost();
-//	    		String ipAddress = request.getRemoteAddr();
-//	    		LOGGER.debug("host" + host + "| ipAddress" + ipAddress);
-	    		
+	        	
 	    		LOGGER.debug("Initialize parameters...");
 	        	//get parameters
 	    		ParameterUtils.initParametersMap(parameterDataService);
@@ -153,6 +127,46 @@ public class AuditWebImpl implements AuditWeb {
 	        	LOGGER.debug("Validate parameters...");
 	    		//Get default set of parameters
 	    		Set<Parameter> parameters =  ParameterUtils.getDefaultParametersForPA();
+	    		
+	 	    	//TODO properly (parameters)
+	    		//define level is mondatory 
+	    		if(pageURL == null || pageURL.isEmpty() || level == null || level.isEmpty()){
+		        	auditResult.setMessage("URL and level are mondatory parameters.");
+		            return auditResult;
+	    		}
+	    		if(level != null && !level.isEmpty()){
+	    			parameters.add(ParameterUtils.createParameter(ParameterInputs.LEVEL, level));
+	    		} 
+
+	    		for(Parameter parameter : parameters){
+	    			
+	    			if(parameter != null && parameter.getParameterElement() != null && parameter.getParameterElement().getParameterElementCode() != null){
+	
+			    		
+		    			if(tblMarker != null){
+			    			if(ParameterInputs.DATA_TABLE_MARKER.equals(parameter.getParameterElement().getParameterElementCode()) ){
+			    				parameter.setValue(tblMarker);
+			    			}
+		    			}
+		    			if(prTblMarker != null){ 
+			    			if(ParameterInputs.PRESENTATION_TABLE_MARKER.equals(parameter.getParameterElement().getParameterElementCode()) ){
+			    				parameter.setValue(prTblMarker);
+			    			}
+		    			}
+		    			if(dcrImgMarker != null){
+			    			if(ParameterInputs.DECORATIVE_IMAGE_MARKER.equals(parameter.getParameterElement().getParameterElementCode()) ){
+			    				parameter.setValue(dcrImgMarker);
+			    			}
+		    			}
+		    			if(infImgMarker != null){
+			    			if(ParameterInputs.INFORMATIVE_IMAGE_MARKER.equals(parameter.getParameterElement().getParameterElementCode()) ){
+			    				parameter.setValue(infImgMarker);
+			    			}
+		    			}
+
+	    			LOGGER.debug(parameter.getParameterElement().getShortLabel() +  " = "+ parameter.getValue());
+	    			}
+	    		}
 	    		
 	    		LOGGER.debug("Launch audit...");
 	    		//launch ws (unused result variable) 
@@ -181,8 +195,6 @@ public class AuditWebImpl implements AuditWeb {
 	    		    		//Other intermediate status
 	    		    	}
 	    				
-	    		    	auditResult.setUrl(pageURL);
-	    				    	    	
 
 	    			} catch (InterruptedException e) {
 	    				loop = Boolean.FALSE;
@@ -193,7 +205,6 @@ public class AuditWebImpl implements AuditWeb {
 	        	return auditResult;
 	        }
 	    }).start();
-	    
 	    
     }
 	
