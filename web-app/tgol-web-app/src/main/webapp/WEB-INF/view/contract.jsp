@@ -222,13 +222,18 @@
                         <c:if test="${fn:length(detailedContractInfo.lastActInfoSet) > 0}">
                         <tbody>
                         </c:if>
-                        <c:forEach var="actInfo" items="${detailedContractInfo.lastActInfoSet}" varStatus="pContractSet">
+						<c:set var="contractSupportedManualTrue" scope="page" value="&ma=true" />
+						<c:set var="typeAuditManual" scope="page" value="&type=manual" />
+						<c:set var="typeAuditAuto" scope="page" value="&type=auto" />
+						
+						<c:forEach var="actInfo" items="${detailedContractInfo.lastActInfoSet}" varStatus="pContractSet">
 								
 								<c:if test="${actInfo.manual == 'true'}">
 								 <tr>
 									<td headers="Modifier" class="tg-textual-column">
 										<c:set var="auditUrl" scope="page" value="/home/contract/audit-result.html?audit=" /> 
-										<a href=" <c:url value="${auditUrl}${actInfo.auditId}&ma=true&type=manual"/>">
+										
+										<a href=" <c:url value="${auditUrl}${actInfo.auditId}${contractSupportedManualTrue}${typeAuditManual}"/>">
 											<fmt:message key="pageList.manualAudit" />
 										</a>
 										
@@ -292,11 +297,12 @@
 												src="${goToImgUrl}">
 										</a>
 										</span>
-									</c:if> <c:set var="resultUrl" scope="page"
-										value="/home/contract/audit-result.html?audit=" /> <a
-									href="<c:url value="${resultUrl}${actInfo.auditId}"/>"
-									title="<fmt:message key="pageList.pageDetailedResult"></fmt:message> <fmt:message key="pageList.for"></fmt:message> ${actInfo.url}">
-										${actInfo.url} </a></td>
+									</c:if> 
+									<c:set var="resultUrl" scope="page" value="/home/contract/audit-result.html?audit=" /> 
+									<a href="<c:url value="${resultUrl}${actInfo.auditId}"/>" title="<fmt:message key="pageList.pageDetailedResult"></fmt:message> 
+										<fmt:message key="pageList.for" /> ${actInfo.url}"> ${actInfo.url} 
+									</a>
+								</td>
 								<td headers="date" class="tg-textual-column"><fmt:formatDate
 										type="both" value="${actInfo.date}" dateStyle="short"
 										timeStyle="short" /></td>
@@ -328,8 +334,8 @@
 											var="auditUrl" scope="page"
 											value="/home/contract/audit-result.html?audit=" /> 
 											
-											<a
-										href="<c:url value="${auditUrl}${actInfo.auditId}&ma=true&type=auto"/>">
+											<a 
+										href="<c:url value="${auditUrl}${actInfo.auditId}${contractSupportedManualTrue}${typeAuditAuto}"/>">
 											<fmt:message key="pageList.manualAudit" />
 									</a></td>
 								</c:if>
