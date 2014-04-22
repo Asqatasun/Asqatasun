@@ -41,16 +41,43 @@ public class WsInvocationDaoImpl extends AbstractJPADAO<WsInvocation, Long> impl
 
 	@Override
 	public int getCountInvocByUser(WsUser user, String hostName, String hostIp, WsRole role) {
-		Query query = entityManager.createQuery("SELECT COUNT(inv.id) "
-			    + "FROM " + getEntityClass().getName() + " inv " //
-				+ "WHERE inv.user = :user " //
-				+ " AND inv.hostName = :hostName " // 
-				+ "AND inv.hostIp = :hostIp " //
-				+ "AND inv.user.role = :role");
-		query.setParameter("user", user);
-		query.setParameter("hostName", hostName);
-		query.setParameter("hostIp", hostIp);
-		query.setParameter("role", role);
+		StringBuffer querySB= new StringBuffer();
+		
+		querySB.append("SELECT COUNT(inv.id) ");
+		querySB.append( "FROM " + getEntityClass().getName() + " inv WHERE 1=1 " );
+		if(user != null){
+			querySB.append("AND inv.user = :user " );
+		}
+		if(role != null) {
+			querySB.append("AND inv.user.role = :role " );
+		}
+		if(hostName != null || hostIp!= null){
+			querySB.append("AND ( " );
+				if(hostName != null){
+					querySB.append("inv.hostName = :hostName " );
+				}
+				if(hostName != null && hostIp != null){
+					querySB.append(" OR " );
+				}
+				if(hostIp != null){
+					querySB.append("inv.hostIp = :hostIp " );
+				}
+			querySB.append(")" );
+		}
+		Query query = entityManager.createQuery(querySB.toString());
+		if (user != null) {
+			query.setParameter("user", user);
+		}
+		if (role != null) {
+			query.setParameter("role", role);
+		}
+		if (hostName != null) {
+			query.setParameter("hostName", hostName);
+		}
+		if (hostIp != null) {
+			query.setParameter("hostIp", hostIp);
+		}
+
 		query.setHint(CACHEABLE_OPTION, "true");
 		return Long.valueOf((Long) query.getSingleResult()).intValue();
 	}
