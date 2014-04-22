@@ -1,8 +1,9 @@
 package com.oceaneconsulting.tanaguru.ws;
 
-
 import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.core.Response;
+
+
 
 
 
@@ -15,7 +16,13 @@ import javax.ws.rs.core.Response;
 public interface AuditWeb {
 	
 
-    public void auditPage(final String pageURL, final String level /*, final HttpServletRequest request*/, final AsyncResponse response);
+	public void auditPage(final String pageURL, 
+    				  	  final String level, 
+    				  	  final String tblMarker, 
+    				  	  final String prTblMarker, 
+    				  	  final String dcrImgMarker,	 
+    				  	  final String infImgMarker,
+    				  	  final AsyncResponse response);
 	
 	//As a first step, json file is defined as a simple string. This may change in future versions.
 	public Response auditScenario( String scenarioName, String scenarioText , String level);
