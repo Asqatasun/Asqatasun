@@ -1,6 +1,6 @@
 package com.oceaneconsulting.tanaguru.service;
 
-import org.opens.tanaguru.sdk.entity.service.GenericDataService;
+//import org.opens.tanaguru.sdk.entity.service.GenericDataService;
 
 import com.oceaneconsulting.tanaguru.entity.WsInvocation;
 import com.oceaneconsulting.tanaguru.entity.WsRole;
@@ -11,7 +11,10 @@ import com.oceaneconsulting.tanaguru.entity.WsUser;
  * @author msobahi
  *
  */
-public interface WsInvocationService extends GenericDataService<WsInvocation, Long> {
+public interface WsInvocationService /*extends GenericDataService<WsInvocation, Long>*/ {
+	
+	
+	public void create(WsInvocation wsInvocation);
 
 	/**
 	 * Recuperer le nombre d'invocation par utilisteur
