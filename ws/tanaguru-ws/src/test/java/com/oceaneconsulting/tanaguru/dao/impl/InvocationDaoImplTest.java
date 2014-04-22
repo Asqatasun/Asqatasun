@@ -62,7 +62,7 @@ public class InvocationDaoImplTest extends AbstractDbUnitTest {
 		user.setActive(true);
 		user.setRole(role);
 		int nbrInvocationByUser = invocationDao.getCountInvocByUser(user,"www.oceaneconsulting.com","192.168.15.2",role);
-		assertEquals(3, nbrInvocationByUser);
+		assertEquals(5, nbrInvocationByUser);
 	}
 	
 	/**
