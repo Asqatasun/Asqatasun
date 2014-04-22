@@ -1,6 +1,8 @@
 package com.oceaneconsulting.tanaguru.dao.impl;
 
 
+import java.math.BigInteger;
+
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
@@ -19,13 +21,14 @@ import com.oceaneconsulting.tanaguru.dao.StatisticsDAO;
 import com.oceaneconsulting.tanaguru.ws.types.AuditResult;
 
 
-@Repository("statisticsDAO")
+@Repository("statisticsDAO")  
 public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Long> implements StatisticsDAO {
 
-    private static final String SELECT_CLAUSE_Q1 = "SELECT WEB_RESOURCE_STATISTICS.Mark, AUDIT.STATUS ";
+    private static final String SELECT_CLAUSE_Q1 = "SELECT WEB_RESOURCE_STATISTICS.Mark, AUDIT.STATUS, WEB_RESOURCE_STATISTICS.ID_WEB_RESOURCE ";
     private static final String FROM_CLAUSE_Q1  = "FROM AUDIT left outer join WEB_RESOURCE on WEB_RESOURCE.ID_AUDIT = AUDIT.ID_AUDIT left outer join WEB_RESOURCE_STATISTICS on WEB_RESOURCE_STATISTICS.Id_Web_Resource=WEB_RESOURCE.Id_Web_Resource ";
     private static final String WHERE_CLAUSE_Q1  = "WHERE  AUDIT.ID_AUDIT = :idAudit";
 	
+    private static final String RESULT_URL = "http://localhost:8080/tgol-web-app/home/contract/page-result.html?wr=";
    
     @Override
     public AuditResult findWeightedMarkAndStatusByAuditId(Long idAudit) {
@@ -48,6 +51,11 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
             }
             
             auditResult.setStatus((String)result[1]);
+            
+            if(result[2] != null){
+            	auditResult.setUrl(RESULT_URL + (BigInteger)result[2]);
+            }
+            
             
         } catch (NoResultException e) {
         	return null;
