@@ -16,7 +16,7 @@ import com.oceaneconsulting.tanaguru.service.WsInvocationService;
  *
  */       
 @Service("wsInvocationService")
-public class WsInvocationServiceImpl extends AbstractGenericDataService<WsInvocation, Long> implements WsInvocationService {
+public class WsInvocationServiceImpl /*extends AbstractGenericDataService<WsInvocation, Long> */implements WsInvocationService {
 
 	/**
 	 * Max invocation
@@ -25,6 +25,11 @@ public class WsInvocationServiceImpl extends AbstractGenericDataService<WsInvoca
 	
 	@Autowired
 	private WsInvocationDao invocationDao;
+	
+	@Override
+	public void create(WsInvocation wsInvocation) {
+		invocationDao.create(wsInvocation);
+	}
 	
 	@Override
 	public int getCountInvocByUser(WsUser user) {
@@ -44,7 +49,7 @@ public class WsInvocationServiceImpl extends AbstractGenericDataService<WsInvoca
 	@Override
 	public boolean checkLimitationOverflow(WsUser user, String hostName, String hostIp, WsRole role){
 		int nbrInvocation = invocationDao.getCountInvocByUser(user, hostName, hostIp, role);		
-		return nbrInvocation < NBR_INVOCATION_MAX;
+		return nbrInvocation <= NBR_INVOCATION_MAX;
 	}
 
 }
