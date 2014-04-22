@@ -183,15 +183,6 @@
         <property name="formFieldBuilder" ref="inclusionRegexpFormFieldBuilder"/>
     </bean>
 
-    <bean id="startUrlInclusionFormFieldBuilder" class="org.opens.tgol.form.builder.TextualFormFieldBuilderImpl">
-        <property name="i18nKey" value="start-inclusion-url"/>
-        <property name="errorI18nKey" value="start-inclusion-url-error"/>
-    </bean>
-    <bean id="startUrlInclusionParamBuilder" class="org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
-        <property name="parameterCode" value="START_INCLUSION_URL"/>
-        <property name="formFieldBuilder" ref="startUrlInclusionFormFieldBuilder"/>
-    </bean>
-
     <bean id="presentationTableFormFieldBuilder" class="org.opens.tgol.form.builder.TextualFormFieldBuilderImpl">
         <property name="i18nKey" value="presentation-table"/>
         <property name="errorI18nKey" value="presentation-table-error"/>
