@@ -314,7 +314,7 @@ public class AuditResultController extends AuditDataHandlerController {
 			throw new ForbiddenPageException();
 		}
 		return dispatchDisplayResultRequest(webResourceIdValue, null, model,
-				request, manual,type);
+				request, manual,type , null);
 	}
 	
 
@@ -375,7 +375,7 @@ public class AuditResultController extends AuditDataHandlerController {
 		} else {
 			return dispatchDisplayResultRequest(
 					auditResultSortCommand.getWebResourceId(),
-					auditResultSortCommand, model, request, false, "auto");
+					auditResultSortCommand, model, request, false, "auto" ,manualAuditCommand);
 		}
 	}
     
@@ -416,14 +416,16 @@ public class AuditResultController extends AuditDataHandlerController {
 if (isValidating ){
     		
         	List<ProcessResult> allProcessResultList=TestResultFactory.getInstance().getAllProcessResultListFromTestsResult(
-    			new LinkedList<TestResult>(modifiedTestResultList), webResource);
+    			new LinkedList<TestResult>(modifiedTestResultList), webResource); 
         	manualAuditCommand.setProcessResultList(allProcessResultList);
     		manualAuditValidator.validate(manualAuditCommand, result);
 				if (result.hasErrors()) {
 					// ajout message d'erreur.
 					model.addAttribute("manualAuditCommand", manualAuditCommand);
+					
+					//return TgolKeyStore.RESULT_PAGE_VIEW_NAME; 
 					return dispatchDisplayResultRequest(webResource.getId(),
-							null, model, request, true,"auto");
+							null, model, request, true,"auto" , manualAuditCommand );
 
 				} else {
 					// mettre à jour le statut
@@ -466,7 +468,7 @@ if (isValidating ){
 			}
 
 			return dispatchDisplayResultRequest(webResource.getId(), null,
-					model, request, true,"auto");
+					model, request, true,"auto" ,manualAuditCommand);
 		} else
 			throw new ForbiddenPageException();
 	}
@@ -631,7 +633,7 @@ if (isValidating ){
 	 */
 	private String dispatchDisplayResultRequest(Long webResourceId,
 			AuditResultSortCommand auditResultSortCommand, Model model,
-			HttpServletRequest request, boolean isManualAudit, String type ) {
+			HttpServletRequest request, boolean isManualAudit, String type ,ManualAuditCommand manualAuditCommand ) {
 		// We first check that the current user is allowed to display the result
 		// of this audit
 		boolean statManual = false;
@@ -664,7 +666,7 @@ if (isValidating ){
 			// Data need to be prepared regarding the audit type
 			return prepareSuccessfullAuditData(webResource, audit, model,
 					displayScope, getLocaleResolver().resolveLocale(request),
-					isManualAudit);
+					isManualAudit ,manualAuditCommand);
 		} else {
 			throw new ForbiddenUserException(getCurrentUser());
 		}
@@ -749,7 +751,7 @@ if (isValidating ){
 	 */
 	private String prepareSuccessfullAuditData(WebResource webResource,
 			Audit audit, Model model, String displayScope, Locale locale,
-			boolean isManualAudit) {
+			boolean isManualAudit,ManualAuditCommand manualAuditCommand) {
 		model.addAttribute(TgolKeyStore.LOCALE_KEY, locale);
 		if (webResource instanceof Site) {
 			return prepareSuccessfullSiteData((Site) webResource, audit, model);
@@ -758,7 +760,7 @@ if (isValidating ){
 			// with
 			// the page, that's why a deepRead is needed
 			return prepareSuccessfullPageData((Page) webResource, audit, model,
-					displayScope, isManualAudit);
+					displayScope, isManualAudit , manualAuditCommand);
 		}
 		throw new LostInSpaceException();
 	}
@@ -804,7 +806,7 @@ if (isValidating ){
 	 * @throws IOException
 	 */
 	private String prepareSuccessfullPageData(Page page, Audit audit,
-			Model model, String displayScope, boolean isManualAudit) {
+			Model model, String displayScope, boolean isManualAudit ,ManualAuditCommand manualAuditCommand) {
 
 		Contract contract = retrieveContractFromAudit(audit);
 
@@ -851,14 +853,16 @@ if (isValidating ){
 									asuc.getSortOptionMap().get(themeSortKey)
 											.toString(),
 									getTestResultSortSelection(asuc)));
-			if (isManualAudit) {	         
-		         		ManualAuditCommand manualAudit=new ManualAuditCommand();
-	            manualAudit.setModifedTestResultMap(TestResultFactory.getInstance().getTestResultMap(
+			if (isManualAudit) {	   
+				if(manualAuditCommand == null){
+					manualAuditCommand =new ManualAuditCommand();
+				}
+				manualAuditCommand.setModifedTestResultMap(TestResultFactory.getInstance().getTestResultMap(
 	                            page,
 	                            getPageScope(),
 	                            asuc.getSortOptionMap().get(themeSortKey).toString(),
 	                            getTestResultSortSelection(asuc)));
-	            model.addAttribute(TgolKeyStore.MANUAL_AUDIT_COMMAND_KEY,manualAudit);
+	            model.addAttribute(TgolKeyStore.MANUAL_AUDIT_COMMAND_KEY,manualAuditCommand);
 				
 			}
 

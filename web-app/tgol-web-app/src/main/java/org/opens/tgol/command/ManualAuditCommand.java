@@ -2,11 +2,13 @@ package org.opens.tgol.command;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tgol.entity.user.User;
 import org.opens.tgol.presentation.data.TestResultImpl;
 
 
@@ -17,6 +19,19 @@ public class ManualAuditCommand implements Serializable{
 	
     public String getGeneralErrorMsg() {
         return generalErrorMsg;
+    }
+    
+
+	/**
+     * the label of the contract
+     */
+    private Collection<User> userList;
+    public Collection<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(Collection<User> userList) {
+        this.userList = userList;
     }
     
 	private Map<String, TestResultImpl> modifiedTestResultMap=new HashMap<String, TestResultImpl>();
