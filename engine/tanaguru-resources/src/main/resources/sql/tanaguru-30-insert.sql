@@ -18,7 +18,8 @@ INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_El
 (38, 'DECORATIVE_IMAGE_MARKER', 3, 'Decorative image HTML marker (id or class)', 'Decorative image marker'),
 (39, 'INFORMATIVE_IMAGE_MARKER', 3, 'Informative image HTML marker (id or class)', 'Informative image marker'), 
 (40, 'ALTERNATIVE_CONTRAST_MECHANISM', 3, 'The page embeds a mechanism that displays text with a correct ratio', 'Alternative Contrast Mechanism'),
-(41, 'CONSIDER_COOKIES',1,'consider cookies','consider cookies while crawling');
+(41, 'CONSIDER_COOKIES',1,'consider cookies','consider cookies while crawling'),
+(42, 'INCLUSION_REGEXP', 1, '', 'inclusion regex');
 
 INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
 (1, '50000', b'0'),
@@ -45,6 +46,7 @@ INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_D
 (40, 'true', b'0'), 
 (40, 'false', b'1'),
 (41, 'true', b'1'),
-(41, 'false', b'0');
+(41, 'false', b'0'),
+(42, '', b'1');
 
 SET foreign_key_checks=1;

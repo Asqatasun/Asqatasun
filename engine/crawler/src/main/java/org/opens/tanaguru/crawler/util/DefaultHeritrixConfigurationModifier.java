@@ -19,50 +19,26 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-package org.opens.tgol.form.builder;
+package org.opens.tanaguru.crawler.util;
+
+import org.w3c.dom.Document;
 
 /**
  *
  * @author jkowalczyk
  */
-public interface CheckboxElementBuilder extends FormFieldBuilder {
+public abstract class DefaultHeritrixConfigurationModifier extends HeritrixConfigurationModifier {
+
+    @Override
+    Document modifyDocument(Document document, String value, String url) {
+        return modifyDocument(document, value);
+    }
 
     /**
-     * Sets whether each instance SelectElement is enabled
-     * @param isEnabled
-     */
-    void setEnabled(boolean isEnabled);
-
-    /**
-     * 
+     *
+     * @param document
+     * @param value
      * @return
      */
-    boolean getEnabled();
-    
-    /**
-     * Sets whether each instance of SelectElement is the default among all the
-     * selectElement of the SelectFormField
-     * @param isDefault
-     */
-    void setDefault(boolean isDefault);
-
-    /**
-     * 
-     * @return
-     */
-    boolean getDefaultElement();
-    
-    /**
-     * Sets whether each checkbox is selected.
-     * 
-     * @param isSelected
-     */
-    void setSelected(boolean isSelected);
-
-    /**
-     * 
-     * @return
-     */
-    boolean getSelected();
-
+    abstract Document modifyDocument(Document document, String value);
 }

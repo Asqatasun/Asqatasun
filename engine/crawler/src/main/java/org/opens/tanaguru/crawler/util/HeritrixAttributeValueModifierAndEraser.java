@@ -32,7 +32,7 @@ import org.w3c.dom.Node;
  *
  * @author jkowalczyk
  */
-public class HeritrixAttributeValueModifierAndEraser extends HeritrixConfigurationModifier{
+public class HeritrixAttributeValueModifierAndEraser extends DefaultHeritrixConfigurationModifier{
 
     private static final Logger LOGGER = Logger.getLogger(HeritrixAttributeValueModifierAndEraser.class);
     private static final String DEFAULT_ATTRIBUTE_NAME = "value";

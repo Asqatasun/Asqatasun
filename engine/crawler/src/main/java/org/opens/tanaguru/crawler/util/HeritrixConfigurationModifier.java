@@ -141,6 +141,6 @@ public abstract class HeritrixConfigurationModifier {
      * @param value
      * @return
      */
-    abstract Document modifyDocument (Document document, String value);
+    abstract Document modifyDocument (Document document, String value, String url);
 
 }

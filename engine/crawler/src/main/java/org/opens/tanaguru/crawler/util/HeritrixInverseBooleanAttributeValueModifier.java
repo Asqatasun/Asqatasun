@@ -35,7 +35,7 @@ import org.w3c.dom.Node;
  * 
  * @author jkowalczyk
  */
-public class HeritrixInverseBooleanAttributeValueModifier extends HeritrixConfigurationModifier{
+public class HeritrixInverseBooleanAttributeValueModifier extends DefaultHeritrixConfigurationModifier{
 
     private static final Logger LOGGER = Logger.getLogger(HeritrixInverseBooleanAttributeValueModifier.class);
     private static final String DEFAULT_ATTRIBUTE_NAME = "value";

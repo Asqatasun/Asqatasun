@@ -51,7 +51,7 @@ public interface SelectElement extends FormField {
      * @return
      *      whether the element is the default value
      */
-    boolean getDefault();
+    boolean getDefaultElement();
     
     /**
      * 

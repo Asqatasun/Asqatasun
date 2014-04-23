@@ -45,7 +45,7 @@ public class SelectElementImpl extends FormFieldImpl implements SelectElement{
     }
 
     @Override
-    public boolean getDefault() {
+    public boolean getDefaultElement() {
         return this.isDefault;
     }
 

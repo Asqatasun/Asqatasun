@@ -32,7 +32,7 @@ import org.w3c.dom.Node;
  *
  * @author jkowalczyk
  */
-public class HeritrixAttributeValueModifier extends HeritrixConfigurationModifier{
+public class HeritrixAttributeValueModifier extends DefaultHeritrixConfigurationModifier{
 
     private static final Logger LOGGER = Logger.getLogger(HeritrixAttributeValueModifier.class);
     private static final String DEFAULT_ATTRIBUTE_NAME = "value";
@@ -44,6 +44,7 @@ public class HeritrixAttributeValueModifier extends HeritrixConfigurationModifie
     @Override
     public Document modifyDocument(Document document, String value) {
         if (value == null || value.isEmpty()) {
+            LOGGER.debug( " value is empty " + this.getClass());
             return document;
         }
         try {

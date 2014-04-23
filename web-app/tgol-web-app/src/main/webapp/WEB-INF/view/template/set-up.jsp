@@ -197,7 +197,7 @@
                                                 <optgroup label="<spring:message code="${group.key}-optgroup"/>">
                                                     <c:forEach items="${group.value}" var="level">
                                                     <c:choose>
-                                                        <c:when test="${level.default == 'true'}">
+                                                        <c:when test="${level.defaultElement == 'true'}">
                                                             <c:set var="selected" scope="page" value="selected=\"selected\""/>
                                                         </c:when>
                                                         <c:otherwise>
@@ -250,7 +250,7 @@
                                             <optgroup label="<spring:message code="${group.key}"/>">
                                                 <c:forEach items="${group.value}" var="level">
                                                 <c:choose>
-                                                    <c:when test="${level.default == 'true'}">
+                                                    <c:when test="${level.defaultElement == 'true'}">
                                                         <c:set var="selected" scope="page" value="selected=\"selected\""/>
                                                     </c:when>
                                                     <c:otherwise>

@@ -58,7 +58,7 @@
                                     <form:select id="${i18nKey}" path="sortOptionMap[${group.key}]">
                                         <c:forEach items="${group.value}" var="level">
                                             <c:choose>
-                                                <c:when test="${level.default == 'true'}">
+                                                <c:when test="${level.defaultElement == 'true'}">
                                                     <c:set var="selected" scope="page" value="selected=\"selected\""/>
                                                 </c:when>
                                                 <c:otherwise>
