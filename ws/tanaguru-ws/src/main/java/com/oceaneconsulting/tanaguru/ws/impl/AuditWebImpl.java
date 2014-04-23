@@ -1,8 +1,10 @@
 package com.oceaneconsulting.tanaguru.ws.impl;
 
+import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.Resource;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -25,6 +27,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.oceaneconsulting.tanaguru.decorator.WebResourceDataServiceDecorator;
+import com.oceaneconsulting.tanaguru.enumerations.AuditLevel;
 import com.oceaneconsulting.tanaguru.service.WsInvocationService;
 import com.oceaneconsulting.tanaguru.util.ParameterInputs;
 import com.oceaneconsulting.tanaguru.util.ParameterUtils;
@@ -60,6 +63,9 @@ public class AuditWebImpl implements AuditWeb {
 	
 	@Autowired
 	WsInvocationService wsInvocationService;
+	
+	@Resource(name="messages")
+	private Properties messages;
 
 
     public AuditWebImpl() {
@@ -79,12 +85,12 @@ public class AuditWebImpl implements AuditWeb {
     		@Suspended final AsyncResponse response) {
 
 		 
-		//Time out response if 
+		//Time out response if the fixed waiting time exceeded
 		response.setTimeoutHandler(new TimeoutHandler() {
 	        @Override
 	        public void handleTimeout(AsyncResponse asyncResponse) {
 	        	AuditResult auditResult = new AuditResult();
-	        	auditResult.setMessage("Operation time out.");
+	        	auditResult.setMessage((String)messages.get("global.timeout.error") );
 	            asyncResponse.resume(Response.status(Response.Status.SERVICE_UNAVAILABLE).entity(auditResult).build());
 	        }
 	    });
@@ -119,22 +125,63 @@ public class AuditWebImpl implements AuditWeb {
 	        	
 	        	AuditResult auditResult = new AuditResult(); 
 	        	
-	        	
 	    		LOGGER.debug("Initialize parameters...");
 	        	//get parameters
 	    		ParameterUtils.initParametersMap(parameterDataService);
 	        	
 	        	LOGGER.debug("Validate parameters...");
-	    		//Get default set of parameters
+	    		//get default set of parameters
 	    		Set<Parameter> parameters =  ParameterUtils.getDefaultParametersForPA();
 	    		
-	 	    	//TODO properly (parameters)
-	    		//define level is mondatory 
+	 	    	//validate parameters
 	    		if(pageURL == null || pageURL.isEmpty() || level == null || level.isEmpty()){
-		        	auditResult.setMessage("URL and level are mondatory parameters.");
+		        	auditResult.setMessage((String)messages.get("input.validation.urlNlevel.mondatory"));
+		            return auditResult;
+	    		} else if(!AuditLevel.contains(level)){
+		        	auditResult.setMessage((String)messages.get("input.validation.level.error"));
 		            return auditResult;
 	    		}
-	    		if(level != null && !level.isEmpty()){
+	    		
+	    		initializeParams(level, tblMarker, prTblMarker, dcrImgMarker, infImgMarker, parameters);
+	    		
+	    		LOGGER.debug("Launch audit...");
+	    		//launch ws (unused result variable) 
+	        	Audit audit = auditService.auditPage(pageURL, parameters);
+	        	
+	        	LOGGER.debug("Getting audit statistics for audit with identifier ["+audit.getId() + "] for page [" +pageURL +"] ...");
+	        	Boolean loop = Boolean.TRUE;
+	        	
+	        	while(loop){
+	        		try {
+	        			long timeToSleep = 5000l;
+	    				Thread.sleep(timeToSleep);
+
+	    				auditResult = webResourceDataServiceDecorator.findWeightedMarkAndStatusByAuditId(audit.getId());
+	    				
+	    				LOGGER.debug(auditResult.toString());
+	    				
+	    				if("COMPLETED".equals(auditResult.getStatus())){
+		    	    		loop = Boolean.FALSE;	
+		    	    		
+	    	    		} else if( "ERROR".equals(auditResult.getStatus())){
+	    		    	    loop = Boolean.FALSE;	
+	    		    	    LOGGER.info( "A problem occured during test (wrong URL ...)");
+	    		    	    auditResult.setMessage((String)messages.get("input.parameters.error")); 
+	    		    	} else {
+	    		    		//Other intermediate status
+	    		    	}
+	    				
+
+	    			} catch (InterruptedException e) {
+	    				loop = Boolean.FALSE;
+	    				auditResult.setMessage((String)messages.get("global.runtime.error")); 
+	    			}
+	        	}
+	    		
+	        	return auditResult;
+	        }
+			private void initializeParams(String level, String tblMarker, String prTblMarker, String dcrImgMarker, String infImgMarker, Set<Parameter> parameters) {
+				if(level != null && !level.isEmpty()){
 	    			parameters.add(ParameterUtils.createParameter(ParameterInputs.LEVEL, level));
 	    		} 
 
@@ -167,43 +214,7 @@ public class AuditWebImpl implements AuditWeb {
 	    			LOGGER.debug(parameter.getParameterElement().getShortLabel() +  " = "+ parameter.getValue());
 	    			}
 	    		}
-	    		
-	    		LOGGER.debug("Launch audit...");
-	    		//launch ws (unused result variable) 
-	        	Audit audit = auditService.auditPage(pageURL, parameters);
-	        	
-	        	LOGGER.debug("Getting audit statistics for audit with identifier ["+audit.getId() + "] for page [" +pageURL +"] ...");
-	        	Boolean loop = Boolean.TRUE;
-	        	
-	        	while(loop){
-	        		try {
-	        			long timeToSleep = 5000l;
-	    				Thread.sleep(timeToSleep);
-
-	    				auditResult = webResourceDataServiceDecorator.findWeightedMarkAndStatusByAuditId(audit.getId());
-	    				
-	    				LOGGER.debug(auditResult.toString());
-	    				
-	    				if("COMPLETED".equals(auditResult.getStatus())){
-		    	    		loop = Boolean.FALSE;	
-		    	    		
-	    	    		} else if( "ERROR".equals(auditResult.getStatus())){
-	    		    	    loop = Boolean.FALSE;	
-	    		    	    LOGGER.info( "A problem occured during test (wrong URL ...)");
-	    		    	    auditResult.setMessage("A problem occured during test (wrong URL ...)");
-	    		    	} else {
-	    		    		//Other intermediate status
-	    		    	}
-	    				
-
-	    			} catch (InterruptedException e) {
-	    				loop = Boolean.FALSE;
-	    				auditResult.setMessage("Runtime problem occured !");
-	    			}
-	        	}
-	    		
-	        	return auditResult;
-	        }
+			}
 	    }).start();
 	    
     }
@@ -217,7 +228,7 @@ public class AuditWebImpl implements AuditWeb {
 //		
 //		Set<Parameter> parameters =  ParameterUtils.getDefaultParametersForScenario();
 //		
-//		//define level if necessary : supposing it's not mondatory
+//		//define level if necessary : supposing it's not mandatory
 //		if(level != null && !level.isEmpty()){
 //			parameters.add(ParameterUtils.createParameter(5l, "LEVEL", level));
 //		}
@@ -238,13 +249,6 @@ public class AuditWebImpl implements AuditWeb {
 
 
 
-//
-//	@Override
-//	public Response auditPage(String pageURL, String level,
-//			HttpServletRequest request) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
     
 
