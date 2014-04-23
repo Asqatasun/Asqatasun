@@ -262,7 +262,8 @@
                                     <display:column property="rank" title="${rankTitle}" headerClass="rankCol" class="rankCol" headerScope="col"/>
                                 </c:when>
                                 <c:when test="${param.status == 'f9xx'}">
-                                    <!-- do nothing -->
+                                    <display:column property="urlWithExternalLink" title="${urlTitle}" headerClass="urlCol" class="urlCol" headerScope="col"/>
+                                    <display:column property="rank" title="${rankTitle}" headerClass="rankCol" class="rankCol" headerScope="col"/>
                                 </c:when>
                                 <c:otherwise>
                                     <display:column property="urlWithExternalLink" title="${urlTitle}" headerClass="urlCol" class="urlCol" headerScope="col"/>
