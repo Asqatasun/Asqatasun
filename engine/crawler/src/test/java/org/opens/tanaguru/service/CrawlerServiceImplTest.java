@@ -183,9 +183,9 @@ public class CrawlerServiceImplTest extends TestCase {
         String siteUrl = bundle.getString(COMPANEO_CRAWL_URL_KEY);
         List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "2", "", "devis_", "", "10", "", "");
         Set<String> urlSet = getUrlSet(contentList);
-        for (String mecaTrouveUrl : urlSet) {
-            System.out.println("url in mecatrouve folder: " + mecaTrouveUrl);
-            assertTrue(StringUtils.startsWithIgnoreCase(mecaTrouveUrl, "http://devis.companeo.com/devis"));
+        for (String companeoTrouveUrl : urlSet) {
+            System.out.println("url in companeo folder: " + companeoTrouveUrl);
+            assertTrue(StringUtils.startsWithIgnoreCase(companeoTrouveUrl, "http://devis.companeo.com/devis"));
         }
     }
 
