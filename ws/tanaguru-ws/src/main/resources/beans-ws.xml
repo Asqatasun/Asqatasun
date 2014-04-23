@@ -22,6 +22,13 @@
 		</property>
 	</bean>
 	
+	<bean id="messages" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+  		<property name="locations">
+    		<list>
+      			<value>classpath*:messages.properties</value>
+   			</list>
+  		</property>
+	</bean>
 	<!-- <bean id="invocationDao" class="com.oceaneconsulting.tanaguru.dao.impl.WsInvocationDaoImpl"/>
     <bean id="roleDao" class="com.oceaneconsulting.tanaguru.dao.impl.WsRoleDaoImpl"/>
     <bean id="userDao" class="com.oceaneconsulting.tanaguru.dao.impl.WsUserDaoImpl"/> -->
