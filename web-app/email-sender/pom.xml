@@ -6,7 +6,7 @@
     <groupId>org.opens</groupId>
     <artifactId>email-sender</artifactId>
     <name>email-sender</name>
-    <version>3.0.0</version>
+    <version>3.0.1</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 

@@ -1,4 +1,14 @@
 --------------------------
+Tanaguru 3.0.1, 2014-04-24
+--------------------------
+Bugs:
+- Handle rel canonical tags with relative Urls on crawl
+
+Features :
+- update table representation for non canonical pages :only display link and rank
+- Add the inclusion option to the crawler #59 
+
+--------------------------
 Tanaguru 3.0.0, 2014-02-19
 --------------------------
 Bugs :
