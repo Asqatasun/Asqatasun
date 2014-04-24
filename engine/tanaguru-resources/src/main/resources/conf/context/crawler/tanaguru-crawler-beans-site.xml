@@ -83,7 +83,7 @@
  
     <!-- SCOPE: rules for which discovered URIs to crawl; order is very 
     important because last decision returned other than 'NONE' wins. -->
-    <bean id="scope" class="org.opens.tanaguru.crawler.framework.TanaguruDecideRuleSequenceExtended">
+    <bean id="scope" class="org.archive.modules.deciderules.DecideRuleSequence">
         <property name="rules">
             <list>
                 <!-- Begin by REJECTing all... -->
