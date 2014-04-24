@@ -255,8 +255,14 @@
                                 <td headers="referential" class="tg-textual-column">
                                     <fmt:message key="${actInfo.referential}"/>
                                 </td>
-                                <td headers="scope" class="tg-textual-column"><fmt:message key="${actInfo.scope}"/></td>
-                                <td headers="status" class="tg-textual-column"><fmt:message key="${actInfo.status}"/></td>
+                                <td headers="scope" class="tg-textual-column">
+                                    <fmt:message key="${actInfo.scope}"/>
+                                </td>
+                                <td headers="status" class="tg-textual-column">
+                                    <a href="<c:url value="${resultUrl}${actInfo.auditId}"/>" title="<fmt:message key="pageList.pageDetailedResult"></fmt:message> <fmt:message key="pageList.for"></fmt:message> ${actInfo.url}">
+                                        <fmt:message key="${actInfo.status}"/>
+                                    </a>
+                                </td>
                             </tr>
                         </c:forEach>
                         <c:if test="${fn:length(detailedContractInfo.lastActInfoSet) > 0}">

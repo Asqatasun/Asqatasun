@@ -517,6 +517,11 @@ public abstract class AuditCommandImpl implements AuditCommand {
                             .append("for ")
                             .append(audit.getSubject().getURL()).toString());
             }
+            if (LOGGER.isDebugEnabled()) {
+                for (Content content : contentList) {
+                    LOGGER.debug("Persisting result for page " +content.getURI());
+                }
+            }
             processResultDataService.saveOrUpdate(processResultSet);
             if (LOGGER.isDebugEnabled()) {
                 endPersistDate = Calendar.getInstance().getTime();

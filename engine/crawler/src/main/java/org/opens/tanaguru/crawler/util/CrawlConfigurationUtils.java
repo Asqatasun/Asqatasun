@@ -22,6 +22,7 @@
 package org.opens.tanaguru.crawler.util;
 
 import java.util.Map;
+import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.w3c.dom.Document;
 
@@ -38,18 +39,22 @@ public class CrawlConfigurationUtils {
      * The holder that handles the unique instance of CrawlConfigurationUtils
      */
     private static class CrawlConfigurationUtilsHolder {
-        private static final CrawlConfigurationUtils INSTANCE = 
+
+        private static final CrawlConfigurationUtils INSTANCE =
                 new CrawlConfigurationUtils();
     }
-    
+
     /**
      * Private constructor
      */
-    private CrawlConfigurationUtils() {}
-    
+    private CrawlConfigurationUtils() {
+    }
+
     /**
-     * Singleton pattern based on the "Initialization-on-demand 
-     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
+     * Singleton pattern based on the "Initialization-on-demand holder idiom".
+     * See
+     *
+     * @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
      * @return the unique instance of CrawlConfigurationUtils
      */
     public static CrawlConfigurationUtils getInstance() {
@@ -57,43 +62,47 @@ public class CrawlConfigurationUtils {
     }
 
     /**
-     * 
+     *
      * @param document
      * @param parameter
+     * @param url
      * @return the document with the parameter modified
      */
-    public Document modifyHeritrixParameter (Document document, Parameter parameter) {
+    public Document modifyHeritrixParameter(Document document, Parameter parameter, String url) {
+        Logger.getLogger(this.getClass()).debug(parameter.getValue() + " " + parameter.getParameterElement().getParameterElementCode());
         HeritrixConfigurationModifier hpf =
                 paramModifierMap.get(parameter.getParameterElement().getParameterElementCode());
-        return modifyValue(hpf, document, parameter.getValue());
+        return modifyValue(hpf, document, parameter.getValue(), url);
     }
 
     /**
-     * 
+     *
      * @param hcm
      * @param document
      * @param value
+     * @param url
      * @return the document with the parameter modified
      */
-    public Document modifyValue (HeritrixConfigurationModifier hcm, Document document, String value) {
+    public Document modifyValue(HeritrixConfigurationModifier hcm, Document document, String value, String url) {
         if (hcm != null && !value.equals("-1")) {
-            return hcm.modifyDocument(document, value);
+            Logger.getLogger(this.getClass()).debug("Modifier found for value " + value);
+            return hcm.modifyDocument(document, value, url);
         } else {
             return document;
         }
     }
 
     /**
-     * 
-     * @param paramModifierMap 
+     *
+     * @param paramModifierMap
      */
     public void setParameterModifierMap(Map<String, HeritrixConfigurationModifier> paramModifierMap) {
         this.paramModifierMap = paramModifierMap;
     }
 
     /**
-     * 
-     * @param urlModifier 
+     *
+     * @param urlModifier
      */
     public void setUrlModifier(HeritrixConfigurationModifier urlModifier) {
         this.urlModifier = urlModifier;
@@ -101,12 +110,10 @@ public class CrawlConfigurationUtils {
 
     /**
      *
-     * @return
-     *      the HeritrixConfigurationModifier used to specify the Url the audit
-     * is about.
+     * @return the HeritrixConfigurationModifier used to specify the Url the
+     * audit is about.
      */
     public HeritrixConfigurationModifier getUrlModifier() {
         return this.urlModifier;
     }
-        
 }

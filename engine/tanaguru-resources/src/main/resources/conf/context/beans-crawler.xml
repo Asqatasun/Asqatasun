@@ -39,8 +39,13 @@
         <property name="elementName" value="property"/>
     </bean>
 
-    <bean id="exclusionRegexpModifier" class="org.opens.tanaguru.crawler.util.HeritrixRegexpParameterValueModifier">
+    <bean id="exclusionRegexpModifier" class="org.opens.tanaguru.crawler.util.HeritrixContainsRegexpParameterValueModifier">
         <property name="xpathExpression" value="//list[ancestor::property/@name='regexList' and ancestor::bean/@id='matchesListRegexDecideRule']"/>
+        <property name="elementName" value="value"/>
+    </bean>
+
+    <bean id="inclusionRegexpModifier" class="org.opens.tanaguru.crawler.util.HeritrixContainsRegexpParameterValueModifier">
+        <property name="xpathExpression" value="//list[ancestor::property/@name='regexList' and ancestor::bean/@id='inclusionListRegexDecideRule']"/>
         <property name="elementName" value="value"/>
     </bean>
 
@@ -72,6 +77,7 @@
                 <entry key="MAX_DOCUMENTS" value-ref="maxDocumentsModifier"/>
                 <entry key="MAX_DURATION" value-ref="maxDurationModifier"/>
                 <entry key="EXCLUSION_REGEXP" value-ref="exclusionRegexpModifier"/>
+                <entry key="INCLUSION_REGEXP" value-ref="inclusionRegexpModifier"/>
                 <entry key="PROXY_HOST" value-ref="proxyHostModifier"/>
                 <entry key="PROXY_PORT" value-ref="proxyPortModifier"/>
                 <entry key="CONSIDER_COOKIES" value-ref="ignoreCookiesModifier"/>

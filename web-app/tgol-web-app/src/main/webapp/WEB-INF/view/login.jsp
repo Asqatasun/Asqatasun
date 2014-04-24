@@ -34,7 +34,7 @@
             </c:when>
             <c:when test="${param.error == 'errorOnLogin'}">
                 <c:set scope="page" var="springException">
-                    ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].class.simpleName}
+                    ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"]['class'].simpleName}
                 </c:set>
                 <c:set scope="page" var="errorOnPage">
                     <fmt:message key="${springException}"/>

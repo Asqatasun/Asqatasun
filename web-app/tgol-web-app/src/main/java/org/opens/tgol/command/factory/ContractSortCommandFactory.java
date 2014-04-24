@@ -74,7 +74,7 @@ public final class ContractSortCommandFactory {
             if (ff instanceof SelectFormField) {
                 for (Map.Entry<String, List<SelectElement>> entry : ((SelectFormField)ff).getSelectElementMap().entrySet()) {
                     for (SelectElement se : entry.getValue()) {
-                        if (se.getDefault() && se.getEnabled()) {
+                        if (se.getDefaultElement() && se.getEnabled()) {
                             contractDisplayCommand.getSortOptionMap().put(entry.getKey(), se.getValue());
                         }
                     }
