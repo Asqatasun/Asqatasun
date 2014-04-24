@@ -173,6 +173,7 @@ public final class TgolKeyStore {
     public static final String SIGN_UP_CONFIRMATION_VIEW_NAME = "sign-up-confirmation";
     public static final String SIGN_UP_CONFIRMATION_VIEW_REDIRECT_NAME = "sign-up-confirmation-redirect";
     public static final String CONTRACT_VIEW_NAME = "contract";
+    public static final String CONTRACT_VIEW_NAME_REDIRECT = "contract-redirect";
     public static final String AUDIT_SITE_SET_UP_VIEW_NAME = "audit-site-set-up";
     public static final String AUDIT_PAGE_SET_UP_VIEW_NAME = "audit-page-set-up";
     public static final String AUDIT_UPLOAD_SET_UP_VIEW_NAME = "audit-upload-set-up";
