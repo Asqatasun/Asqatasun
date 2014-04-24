@@ -52,7 +52,6 @@ import org.opens.tanaguru.service.mock.MockWebResourceDataService;
 public class CrawlerServiceImplTest extends TestCase {
 
     private static final String FULL_SITE_CRAWL_URL_KEY = "full-site-crawl-url";
-    private static final String COMPANEO_CRAWL_URL_KEY = "companeo-crawl-url";
     private static final String ROBOTS_RESTRICTED_CRAWL_URL_KEY =
             "robots-restricted-crawl-url";
     private static final String SITES_URL_BUNDLE_NAME = "sites-url";
@@ -177,16 +176,39 @@ public class CrawlerServiceImplTest extends TestCase {
         assertTrue(urlSet.contains(siteUrl));
     }
 
-    public void testCrawl_SiteWithRegexpInclusionOptionOnCompaneo() {
-        System.out.println("crawl_full_site_With_Regexp_Inclusion_Option_On_Companeo");
+    public void testCrawl_SiteWithRegexpInclusionOption() {
+        System.out.println("crawl_full_site_With_Regexp_Inclusion_Option");
         crawlerFactory.setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
-        String siteUrl = bundle.getString(COMPANEO_CRAWL_URL_KEY);
-        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "2", "", "devis_", "", "10", "", "");
+        String siteUrl = bundle.getString(FULL_SITE_CRAWL_URL_KEY)+"page-1.html";
+        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "2", "", "page-", "", "10", "", "");
+        assertEquals(3, contentList.size());
         Set<String> urlSet = getUrlSet(contentList);
-        for (String companeoTrouveUrl : urlSet) {
-            System.out.println("url in companeo folder: " + companeoTrouveUrl);
-            assertTrue(StringUtils.startsWithIgnoreCase(companeoTrouveUrl, "http://devis.companeo.com/devis"));
-        }
+        assertTrue(urlSet.contains(siteUrl));
+        assertTrue(urlSet.contains(bundle.getString(FULL_SITE_CRAWL_URL_KEY) + PAGE_NAME_LEVEL2));
+        assertTrue(urlSet.contains(bundle.getString(FULL_SITE_CRAWL_URL_KEY) + FORBIDDEN_PAGE_NAME));
+    }
+
+    public void testCrawl_SiteWithRegexpInclusionOption2() {
+        System.out.println("crawl_full_site_With_Regexp_Inclusion_Option 2");
+        crawlerFactory.setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
+        String siteUrl = bundle.getString(FULL_SITE_CRAWL_URL_KEY)+"page-1.html";
+        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "2", "", "page-\\d", "", "10", "", "");
+        assertEquals(2, contentList.size());
+        Set<String> urlSet = getUrlSet(contentList);
+        assertTrue(urlSet.contains(siteUrl));
+        assertTrue(urlSet.contains(bundle.getString(FULL_SITE_CRAWL_URL_KEY) + PAGE_NAME_LEVEL2));
+    }
+
+    public void testCrawl_SiteWithRegexpInclusionOption3() {
+        System.out.println("crawl_full_site_With_Regexp_Inclusion_Option 3");
+        crawlerFactory.setCrawlConfigFilePath(FULL_SITE_CRAWL_CONF_FILE_PATH);
+        String siteUrl = bundle.getString(FULL_SITE_CRAWL_URL_KEY);
+        List<Content> contentList = initialiseAndLaunchCrawl(siteUrl, "2", "", "page-\\d", "", "10", "", "");
+        assertEquals(3, contentList.size());
+        Set<String> urlSet = getUrlSet(contentList);
+        assertTrue(urlSet.contains(siteUrl));
+        assertTrue(urlSet.contains(siteUrl + PAGE_NAME_LEVEL1));
+        assertTrue(urlSet.contains(siteUrl + PAGE_NAME_LEVEL2));
     }
 
     public void testCrawl_SiteWithRegexpExclusionOption2() {
