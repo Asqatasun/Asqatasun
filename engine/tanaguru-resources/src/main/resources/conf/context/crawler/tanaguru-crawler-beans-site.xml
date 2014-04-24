@@ -91,13 +91,13 @@
                 </bean>
 
                 <!--                 ...then ACCEPT those within configured/seed-implied SURT prefixes... 
-                <bean id="surtPrefixedDecideRule" class="org.archive.modules.deciderules.surt.SurtPrefixedDecideRule">
+-->             <bean id="surtPrefixedDecideRule" class="org.archive.modules.deciderules.surt.SurtPrefixedDecideRule">
                     <property name="seedsAsSurtPrefixes" value="true" />
-                </bean>-->
-                
-                <bean class="org.archive.modules.deciderules.surt.OnDomainsDecideRule">
-                    <property name="decision" value="ACCEPT"/>
                 </bean>
+                
+<!--                <bean class="org.archive.modules.deciderules.surt.OnDomainsDecideRule">
+                    <property name="decision" value="ACCEPT"/>
+                </bean>-->
                 
                 <!--<bean id="inclusionListRegexDecideRule" class="org.archive.modules.deciderules.NotMatchesListRegexDecideRule">-->
                 <bean id="inclusionListRegexDecideRule" class="org.opens.tanaguru.crawler.processor.deciderule.NotMatchesRegexpDecideRule">
