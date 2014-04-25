@@ -16,6 +16,11 @@ import com.oceaneconsulting.tanaguru.entity.WsRole;
 public class WsRoleImpl implements WsRole, Serializable {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9043152774140766775L;
+
+	/**
 	 * Identifiant
 	 */
 	@Id

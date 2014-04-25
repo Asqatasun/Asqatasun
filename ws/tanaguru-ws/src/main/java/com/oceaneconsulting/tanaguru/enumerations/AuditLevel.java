@@ -7,9 +7,9 @@ package com.oceaneconsulting.tanaguru.enumerations;
  * 
  */
 public enum AuditLevel {
-	OR("AW22;Or"), 
-    AR("AW22;Ar"),
-    BZ("AW22;Bz");
+	AW22_OR("AW22;Or"), 
+	AW22_AR("AW22;Ar"),
+	AW22_BZ("AW22;Bz");
     
     private String value;
 
@@ -51,7 +51,16 @@ public enum AuditLevel {
     {
         this.value = value;
     }
+    public static boolean contains(String value) {
 
+        for (AuditLevel c : AuditLevel.values()) {
+            if (c.getValue().equals(value)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
     public boolean equals( String value )
     {
         AuditLevel statusType = getStatusFromValue( value );
@@ -61,6 +70,7 @@ public enum AuditLevel {
         }
         return false;
     }
+
 
     
 }

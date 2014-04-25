@@ -24,4 +24,9 @@ public class WsUserServiceImpl extends AbstractGenericDataService<WsUser, Long> 
 	public WsRole getUserRole(WsUser user) {		
 		return userDao.getUserRole(user);
 	}
+	
+	@Override
+	public WsUser getUser(String login){
+		return userDao.getUser(login);
+	}
 }

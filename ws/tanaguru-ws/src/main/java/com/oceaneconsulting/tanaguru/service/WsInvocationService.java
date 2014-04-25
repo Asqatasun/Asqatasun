@@ -49,5 +49,7 @@ public interface WsInvocationService /*extends GenericDataService<WsInvocation, 
 	 * @return limitation depasse true/false
 	 */
 	boolean checkLimitationOverflow(WsUser user, String hostName, String hostIp, WsRole role);
+	
+	
 
 }

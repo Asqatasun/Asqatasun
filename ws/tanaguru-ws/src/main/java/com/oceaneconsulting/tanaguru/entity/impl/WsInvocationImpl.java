@@ -17,6 +17,11 @@ import java.util.Date;
 public class WsInvocationImpl implements WsInvocation, Serializable {
 	  
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7482159329304767809L;
+	
+	/**
 	 * Identifiant  
 	 */
     @Id

@@ -12,6 +12,9 @@ import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 
+import org.apache.commons.lang.StringUtils;
+import com.oceaneconsulting.tanaguru.ws.types.AuditSiteOrder;
+
 /**
  * Parameters initialization utilities.
  * 
@@ -26,9 +29,6 @@ public class ParameterUtils {
 	 * Class logger definition
 	 */
 	private static final Logger LOGGER = Logger.getLogger(ParameterUtils.class);
-	
-	
-	//Constants
 	
 	
 	
@@ -66,15 +66,14 @@ public class ParameterUtils {
 		
 		Set<Parameter> parameters = new HashSet<Parameter>();
 		
-		parameters.add(createParameter("DATA_TABLE_MARKER", ""));
-		parameters.add(createParameter("PROXY_HOST", ""));
-		parameters.add(createParameter("CONSIDER_COOKIES", "true"));
-		parameters.add(createParameter("ALTERNATIVE_CONTRAST_MECHANISM", "false"));
-		parameters.add(createParameter("LEVEL", "AW22;Or"));
-		parameters.add(createParameter("INFORMATIVE_IMAGE_MARKER", ""));
-		parameters.add(createParameter("PROXY_PORT", ""));
-		parameters.add(createParameter("PRESENTATION_TABLE_MARKER", ""));
-		parameters.add(createParameter("DECORATIVE_IMAGE_MARKER", ""));
+		parameters.add(createParameter(ParameterInputs.DATA_TABLE_MARKER, ""));
+		parameters.add(createParameter(ParameterInputs.PROXY_HOST, ""));
+		parameters.add(createParameter(ParameterInputs.CONSIDER_COOKIES, "true"));
+		parameters.add(createParameter(ParameterInputs.ALTERNATIVE_CONTRAST_MECHANISM, "false"));
+		parameters.add(createParameter(ParameterInputs.INFORMATIVE_IMAGE_MARKER, ""));
+		parameters.add(createParameter(ParameterInputs.PROXY_PORT, ""));
+		parameters.add(createParameter(ParameterInputs.PRESENTATION_TABLE_MARKER, ""));
+		parameters.add(createParameter(ParameterInputs.DECORATIVE_IMAGE_MARKER, ""));
 		
 		return parameters;
 	}
@@ -121,14 +120,29 @@ public class ParameterUtils {
 		Set<Parameter> parameters = commonDefaultParameters();
 		
 		//specific parameters to page audit
-		parameters.add(createParameter("MAX_DOCUMENTS", "1"));
-		parameters.add(createParameter("MAX_DURATION", "86400"));
-		parameters.add(createParameter("EXCLUSION_REGEXP", ""));
-		parameters.add(createParameter("DEPTH", "0"));
+		parameters.add(createParameter(ParameterInputs.MAX_DOCUMENTS, "1"));
+		parameters.add(createParameter(ParameterInputs.MAX_DURATION, "86400"));
+		parameters.add(createParameter(ParameterInputs.EXCLUSION_REGEXP, ""));
+		parameters.add(createParameter(ParameterInputs.DEPTH, "0"));
 		
 		return parameters;
 	}
-	
+	/**
+	 * Site audit parameters definition with default values. 
+	 * @return set of parameters needed in site audit request.
+	 */
+	public static Set<Parameter> getDefaultParametersForSite(){
+		
+		Set<Parameter> parameters = commonDefaultParameters();
+		
+		//specific parameters to page audit
+		parameters.add(createParameter(ParameterInputs.MAX_DOCUMENTS, "10000"));
+		parameters.add(createParameter(ParameterInputs.MAX_DURATION, "86400"));
+		parameters.add(createParameter(ParameterInputs.EXCLUSION_REGEXP, ""));
+		parameters.add(createParameter(ParameterInputs.DEPTH, "1"));
+		
+		return parameters;
+	}
 	/**
 	 * Scenario audit parameters definition with default values. 
 	 * @return set of parameters needed in scenario audit request.
@@ -136,4 +150,95 @@ public class ParameterUtils {
 	public static Set<Parameter> getDefaultParametersForScenario() {
 		return commonDefaultParameters();
 	}
+	
+
+	public static void initializePAInputOptions(String level, String tblMarker, String prTblMarker, String dcrImgMarker, String infImgMarker, Set<Parameter> parameters) {
+		
+		if(level != null && !level.isEmpty()){
+			parameters.add(ParameterUtils.createParameter(ParameterInputs.LEVEL, level));
+		} 
+
+		for(Parameter parameter : parameters){
+			
+			if(parameter != null && parameter.getParameterElement() != null && parameter.getParameterElement().getParameterElementCode() != null){
+
+    			if(tblMarker != null){
+	    			if(ParameterInputs.DATA_TABLE_MARKER.equals(parameter.getParameterElement().getParameterElementCode()) ){
+	    				parameter.setValue(tblMarker);
+	    			}
+    			}
+    			if(prTblMarker != null){ 
+	    			if(ParameterInputs.PRESENTATION_TABLE_MARKER.equals(parameter.getParameterElement().getParameterElementCode()) ){
+	    				parameter.setValue(prTblMarker);
+	    			}
+    			}
+    			if(dcrImgMarker != null){
+	    			if(ParameterInputs.DECORATIVE_IMAGE_MARKER.equals(parameter.getParameterElement().getParameterElementCode()) ){
+	    				parameter.setValue(dcrImgMarker);
+	    			}
+    			}
+    			if(infImgMarker != null){
+	    			if(ParameterInputs.INFORMATIVE_IMAGE_MARKER.equals(parameter.getParameterElement().getParameterElementCode()) ){
+	    				parameter.setValue(infImgMarker);
+	    			}
+    			}
+
+    			LOGGER.debug(parameter.getParameterElement().getShortLabel() +  " = "+ parameter.getValue());
+			}
+		}
+	}
+	public static void initializeSAInputOptions(AuditSiteOrder auditSiteOrder, Set<Parameter> parameters){
+		
+		if(auditSiteOrder.getLevel() != null && !auditSiteOrder.getLevel() .isEmpty()){
+			parameters.add(ParameterUtils.createParameter(ParameterInputs.LEVEL, auditSiteOrder.getLevel()));
+		} 
+	
+		for(Parameter parameter : parameters){
+			
+			if(parameter != null && parameter.getParameterElement() != null && parameter.getParameterElement().getParameterElementCode() != null){
+    			if(StringUtils.isNotBlank(auditSiteOrder.getTblMarker())){
+	    			if(ParameterInputs.DATA_TABLE_MARKER.equals(parameter.getParameterElement().getParameterElementCode()) ){
+	    				parameter.setValue(auditSiteOrder.getTblMarker());
+	    			}
+    			}
+    			if(StringUtils.isNotBlank(auditSiteOrder.getPrTblMarker())){ 
+	    			if(ParameterInputs.PRESENTATION_TABLE_MARKER.equals(parameter.getParameterElement().getParameterElementCode()) ){
+	    				parameter.setValue(auditSiteOrder.getPrTblMarker());
+	    			}
+    			} 
+    			if(StringUtils.isNotBlank(auditSiteOrder.getDcrImgMarker())){
+	    			if(ParameterInputs.DECORATIVE_IMAGE_MARKER.equals(parameter.getParameterElement().getParameterElementCode()) ){
+	    				parameter.setValue(auditSiteOrder.getDcrImgMarker());
+	    			}
+    			}
+    			if(StringUtils.isNotBlank(auditSiteOrder.getInfImgMarker())){
+	    			if(ParameterInputs.INFORMATIVE_IMAGE_MARKER.equals(parameter.getParameterElement().getParameterElementCode()) ){
+	    				parameter.setValue(auditSiteOrder.getInfImgMarker());
+	    			}
+    			}
+    			if(StringUtils.isNotBlank(auditSiteOrder.getMaxDocuments())){
+	    			if(ParameterInputs.MAX_DOCUMENTS.equals(parameter.getParameterElement().getParameterElementCode()) ){
+	    				parameter.setValue(auditSiteOrder.getMaxDocuments());
+	    			}
+    			}
+    			if(StringUtils.isNotBlank(auditSiteOrder.getMaxDuration())){
+	    			if(ParameterInputs.MAX_DURATION.equals(parameter.getParameterElement().getParameterElementCode()) ){
+	    				parameter.setValue(auditSiteOrder.getMaxDuration());
+	    			}
+    			}
+    			if(StringUtils.isNotBlank(auditSiteOrder.getExclusionRegExp())){
+	    			if(ParameterInputs.EXCLUSION_REGEXP.equals(parameter.getParameterElement().getParameterElementCode()) ){
+	    				parameter.setValue(auditSiteOrder.getExclusionRegExp());
+	    			}
+    			}
+    			if(StringUtils.isNotBlank(auditSiteOrder.getDepth())){
+	    			if(ParameterInputs.DEPTH.equals(parameter.getParameterElement().getParameterElementCode()) ){
+	    				parameter.setValue(auditSiteOrder.getDepth());
+	    			}
+    			}
+    			LOGGER.debug(parameter.getParameterElement().getShortLabel() +  " = "+ parameter.getValue());
+			}
+		}
+	}
+			
 }

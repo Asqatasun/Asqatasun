@@ -10,10 +10,10 @@ public class AuditResult implements Serializable {
 	private static final long serialVersionUID = -13067243016941886L;
 	
 	
-	private String url;
-	private Float score;
-	private String status;
-	private String message;
+	private String url = "";
+	private Float score = 0f;
+	private String status = "";
+	private String message = "";
 	
 	public String getUrl() {
 		return url;
@@ -39,12 +39,11 @@ public class AuditResult implements Serializable {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Audit result [url=" + url + ", score=" + score + ", status="
+		return "Audit Result [url=" + url + ", score=" + score + ", status="
 				+ status + ", message=" + message + "]";
 	}
-	
 	
 }
