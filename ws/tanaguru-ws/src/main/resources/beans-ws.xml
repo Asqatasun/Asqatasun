@@ -33,6 +33,6 @@
     <bean id="roleDao" class="com.oceaneconsulting.tanaguru.dao.impl.WsRoleDaoImpl"/>
     <bean id="userDao" class="com.oceaneconsulting.tanaguru.dao.impl.WsUserDaoImpl"/> -->
 	
-	
 	<import resource="classpath*:conf/context/beans-*.xml"/>
+	<import resource="beans-ws-security.xml"/>
 </beans>
