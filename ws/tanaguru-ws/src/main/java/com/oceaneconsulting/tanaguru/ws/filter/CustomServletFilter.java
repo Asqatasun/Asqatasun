@@ -11,6 +11,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
@@ -30,40 +31,49 @@ public class CustomServletFilter implements Filter {
 	@Override
 	public void init(FilterConfig config) throws ServletException {
 		if(bean == null){
+			LOGGER.debug("Getting WS invocation service bean.");
 			bean = WebApplicationContextUtils.getRequiredWebApplicationContext(config.getServletContext()).getBean(WsInvocationService.class);
 		}
+
 	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
 		try {
-			boolean access = Boolean.FALSE;
-			//TODO 2 cases : audit page and other
-			LOGGER.debug("Access control launched...");
-//			access = bean.serviceAccesVerification(request.getRemoteHost(), request.getRemoteAddr());
-			LOGGER.info("Audit page access control for host name ="+request.getRemoteHost()+", ip="+request.getRemoteAddr());
-			
-			//save user information
-			WsInvocation invocation = new WsInvocationImpl();
-			invocation.setDateInvocation(new Date());
-			invocation.setHostIp(request.getRemoteAddr());
-			invocation.setHostName(request.getRemoteHost());
-			invocation.setAuditType(0);
-			invocation.setUser(null);//unnecessary information
-			bean.create(invocation);
-			
-			//verify user access limitation
-			access = bean.checkLimitationOverflow(null, request.getRemoteHost(), request.getRemoteAddr(), null);
-			
-			LOGGER.debug("Verification complete, allowed =" + access);
-			
-			if(!access){
-				 ((HttpServletResponse)response).sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "You reached the maximum number of audits allowed for today...");
-			} else {
+			if("GET".equals(((HttpServletRequest)request).getMethod())){ //audit page
+
+				boolean access = Boolean.FALSE;
+				LOGGER.info("Access control launched...");
+				LOGGER.debug("Audit page access control for host name ="+request.getRemoteHost()+", ip="+request.getRemoteAddr());
+				
+				//save user information
+				WsInvocation invocation = new WsInvocationImpl();
+				invocation.setDateInvocation(new Date());
+				invocation.setHostIp(request.getRemoteAddr());
+				invocation.setHostName(request.getRemoteHost());
+				invocation.setAuditType(0);
+				invocation.setUser(null);//unnecessary information
+				bean.create(invocation);
+				
+				//verify user access limitation
+				access = bean.checkLimitationOverflow(null, request.getRemoteHost(), request.getRemoteAddr(), null);
+				
+				LOGGER.debug("Verification complete, allowed =" + access);
+				
+				if(!access){
+					 ((HttpServletResponse)response).sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "You reached the maximum number of audits allowed for today...");
+				} else {
+					LOGGER.debug("Request filter process...");
+					chain.doFilter(request, response);
+					LOGGER.debug("Request filter OK.");
+				}
+			} else if("POST".equals(((HttpServletRequest)request).getMethod())){ //site audit 
 				LOGGER.debug("Request filter process...");
 				chain.doFilter(request, response);
 				LOGGER.debug("Request filter OK.");
+			} else {//other methods are considered as bad request
+				((HttpServletResponse)response).sendError(HttpServletResponse.SC_BAD_REQUEST);
 			}
 
 		} catch (Exception e) {

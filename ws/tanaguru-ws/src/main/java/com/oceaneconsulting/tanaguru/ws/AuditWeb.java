@@ -1,7 +1,11 @@
 package com.oceaneconsulting.tanaguru.ws;
 
 import javax.ws.rs.container.AsyncResponse;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
+
+import com.oceaneconsulting.tanaguru.ws.types.AuditSiteOrder;
 
 
 
@@ -24,9 +28,10 @@ public interface AuditWeb {
     				  	  final String infImgMarker,
     				  	  final AsyncResponse response);
 	
+	public Response launchAuditSite(AuditSiteOrder auditSiteOrder, @Context SecurityContext securityContext);
+	
 	//As a first step, json file is defined as a simple string. This may change in future versions.
 	public Response auditScenario( String scenarioName, String scenarioText , String level);
-	
-	public Response auditSite(String siteURL, String level);
+
 	
 }

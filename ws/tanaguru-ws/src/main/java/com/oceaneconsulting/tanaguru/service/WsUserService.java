@@ -6,17 +6,25 @@ import com.oceaneconsulting.tanaguru.entity.WsRole;
 import com.oceaneconsulting.tanaguru.entity.WsUser;
 
 /**
- * Interface du service des utilisateurs 
+ * User service interface definition
  * @author msobahi 
  *
  */
 public interface WsUserService extends GenericDataService<WsUser, Long> {
 
 	/**
-	 * Retourner le role de l'utilisateur
-	 * @param user L'utilisateur
-	 * @return Le role de l'utilisateur.
+	 * Get user's role
+	 * @param user
+	 * @return user's role
 	 */
 	WsRole getUserRole(WsUser user);
+	
+	
+	/**
+	 * Get user by login
+	 * @param login : given user login
+	 * @return WsUser object
+	 */
+	WsUser getUser(String login);
 
 }
