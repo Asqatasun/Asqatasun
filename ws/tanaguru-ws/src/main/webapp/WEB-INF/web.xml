@@ -6,16 +6,28 @@
 
 	<display-name>tanaguru-ws</display-name>
 
-	<!-- Spring -->
-	<context-param>
+	<!-- spring context loader-->
+	<context-param> 
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:beans-ws.xml</param-value>
 	</context-param>
-	
+
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	<!-- spring security filter -->
+	<filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <async-supported>true</async-supported>
+    </filter>
 
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
 	<!-- spring jersey servlet -->
 	<servlet>
 		<servlet-name>spring-jersey-serlvet</servlet-name>
@@ -26,6 +38,7 @@
 			<param-value>com.oceaneconsulting.tanaguru.ws.impl</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
 	</servlet>
  
 	<servlet-mapping>
@@ -34,6 +47,6 @@
 	</servlet-mapping>
 	
 	<session-config>
-		<session-timeout>120</session-timeout>
+		<session-timeout>30</session-timeout>
 	</session-config>
 </web-app>
