@@ -16,6 +16,11 @@ import com.oceaneconsulting.tanaguru.entity.WsUser;
 public class WsUserImpl implements WsUser, Serializable {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5995686793369202749L;
+
+	/**
 	 * Identifiant
 	 */
 	@Id

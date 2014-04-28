@@ -16,6 +16,7 @@ public class ParameterInputs {
 	public static final  String MAX_DURATION = "MAX_DURATION";
 	public static final  String EXCLUSION_REGEXP = "EXCLUSION_REGEXP";
 	public static final  String DEPTH = "DEPTH";
+	public static final  String PRESENTATION_TABLE_MARKER = "PRESENTATION_TABLE_MARKER";
 	/*
 	 * **********************TANGURU PARAMETERS
 	 */
@@ -29,6 +30,11 @@ public class ParameterInputs {
 	public static final  String AUDIT_TYPE = "auditType";
 	public static final  String SCENARIO_NAME = "scenarioName";
 	public static final  String SCENARIO = "scenario";
+	public static final  String DATA_TABLE_MARKER_PARAM = "tblMarker";
+	public static final  String PRESENTATION_TABLE_MARKER_PARAM = "prTblMarker";
+	public static final  String DECORATIVE_IMAGE_MARKER_PARAM = "dcrImgMarker";
+	public static final  String INFORMATIVE_IMAGE_MARKER_PARAM = "infImgMarker";
+	
 	
 
 }

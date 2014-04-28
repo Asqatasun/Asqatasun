@@ -28,6 +28,7 @@ public class WsUserDaoImpl extends AbstractJPADAO<WsUser, Long> implements WsUse
         return WsUserImpl.class;
     }
 	
+
 	@Override
 	public WsRole getUserRole(WsUser user) {
 		Query query = entityManager.createQuery("SELECT usr.role FROM " + getEntityClass().getName() + " usr "
@@ -37,4 +38,12 @@ public class WsUserDaoImpl extends AbstractJPADAO<WsUser, Long> implements WsUse
 		return (WsRole) query.getSingleResult();
 	}
 
+	
+	public WsUser getUser(String login){
+		Query query = entityManager.createQuery("SELECT usr FROM " + getEntityClass().getName() + " usr "
+				+ " WHERE usr.email = :login");
+		query.setParameter("login", login);
+		query.setHint(CACHEABLE_OPTION, "true");
+		return (WsUser) query.getSingleResult();
+	}
 }

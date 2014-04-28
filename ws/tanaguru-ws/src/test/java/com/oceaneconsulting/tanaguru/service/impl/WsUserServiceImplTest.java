@@ -37,7 +37,7 @@ public class WsUserServiceImplTest extends AbstractDbUnitTest {
 	}
 	
 	/**
-	 * Test de la méthode qui recupere le nombre d'invocations faites par un utilisateur
+	 * Test de la methode qui recupere le nombre d'invocations faites par un utilisateur
 	 */
 	public void testGetUserRole(){
 		

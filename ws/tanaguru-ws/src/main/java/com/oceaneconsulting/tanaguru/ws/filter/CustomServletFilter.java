@@ -54,7 +54,7 @@ public class CustomServletFilter implements Filter {
 				invocation.setHostName(request.getRemoteHost());
 				invocation.setAuditType(0);
 				invocation.setUser(null);//unnecessary information
-				bean.create(invocation);
+				//bean.create(invocation);
 				
 				//verify user access limitation
 				access = bean.checkLimitationOverflow(null, request.getRemoteHost(), request.getRemoteAddr(), null);

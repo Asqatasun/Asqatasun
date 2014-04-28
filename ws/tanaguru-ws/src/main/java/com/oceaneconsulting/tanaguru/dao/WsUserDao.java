@@ -6,17 +6,24 @@ import com.oceaneconsulting.tanaguru.entity.WsRole;
 import com.oceaneconsulting.tanaguru.entity.WsUser;
 
 /**
- * Interface de la DAO des utilisateurs
+ * User DAO interface definition 
  * @author msobahi
  *
  */
 public interface WsUserDao extends GenericDAO<WsUser, Long> {
 
 	/**
-	 * Recuperer le role de l'utilisateur
-	 * @param user L'utilisateur
-	 * @return Le role de l'utilisateur
+	 * Get user's role
+	 * @param user
+	 * @return user's role
 	 */
 	WsRole getUserRole(WsUser user);
+	
+	/**
+	 * Get user by login
+	 * @param login : given user login
+	 * @return WsUser object
+	 */
+	WsUser getUser(String login);
 
 }
