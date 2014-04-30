@@ -120,10 +120,6 @@ public class PageListController extends AuditDataHandlerController {
                 String testLabel = ServletRequestUtils.getStringParameter(request, TgolKeyStore.TEST_KEY);
                 if (StringUtils.isNotBlank(testLabel)) {
                     model.addAttribute(TgolKeyStore.TEST_CODE_KEY, getTestDataService().getTestFromAuditAndLabel(audit, testLabel).getLabel());
-                    LOGGER.info("MESSAGE" + getTestDataService().getTestFromAuditAndLabel(audit, testLabel).getLabel());
-                    LOGGER.info("MESSAGE" + getTestDataService().getTestFromAuditAndLabel(audit, testLabel).getDescription());
-                    LOGGER.info("MESSAGE" + getTestDataService().getTestFromAuditAndLabel(audit, testLabel).getFullCode());
-                    LOGGER.info("MESSAGE" + getTestDataService().getTestFromAuditAndLabel(audit, testLabel).getCode());
                 }
                 return this.preparePageListData(audit, model);
             } catch (Exception e) {
@@ -143,7 +139,7 @@ public class PageListController extends AuditDataHandlerController {
             }
             String testLabel = ServletRequestUtils.getStringParameter(request, TgolKeyStore.TEST_CODE_KEY);
             if (StringUtils.isNotBlank(testLabel)) {
-                model.addAttribute("testKey", getTestDataService().getTestFromAuditAndLabel(audit, testLabel).getCode());
+                model.addAttribute(TgolKeyStore.TEST_CODE_KEY, getTestDataService().getTestFromAuditAndLabel(audit, testLabel));
             }
             return this.preparePageListStatsByHttpStatusCode(
                     audit,

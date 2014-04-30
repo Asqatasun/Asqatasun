@@ -105,9 +105,9 @@
                         <h1>
                             ${pageName}
                         </h1>
-                        <c:if test="${testKey!= null}">
+                        <c:if test="${not empty testKey && testKey != null}">
                             <blockquote class="test-label">
-                                <fmt:message key="${testKey}"/>
+                                <fmt:message key="${testKey.code}"/>
                             </blockquote>
                         </c:if>
                     </div><!-- class="span16" -->
