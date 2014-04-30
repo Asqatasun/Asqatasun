@@ -105,7 +105,7 @@
                         <h1>
                             ${pageName}
                         </h1>
-                        <c:if test="${not empty testKey && testKey != null}">
+                        <c:if test="${not empty testKey}">
                             <blockquote class="test-label">
                                 <fmt:message key="${testKey.code}"/>
                             </blockquote>

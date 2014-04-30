@@ -266,7 +266,7 @@ public final class TgolKeyStore {
     public static final String TEST_RESULT_LIST_KEY ="testResultMap";
     public static final String CRITERION_RESULT_LIST_KEY ="criterionResultMap";
     public static final String CRITERION_CODE_KEY ="crit";
-    public static final String TEST_CODE_KEY ="test";
+    public static final String TEST_CODE_KEY ="testKey";
     public static final String CRITERION_LABEL_KEY ="criterionLabel";
     public static final String TEST_LABEL_KEY ="testLabel";
     public static final String TEST_LIST_KEY ="testList";
