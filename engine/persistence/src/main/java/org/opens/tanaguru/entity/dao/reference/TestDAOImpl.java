@@ -27,11 +27,13 @@ import java.util.List;
 import java.util.Map;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.audit.AuditImpl;
 import org.opens.tanaguru.entity.reference.*;
 import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 
 /**
- * 
+ *
  * @author jkowalczyk
  */
 public class TestDAOImpl extends AbstractJPADAO<Test, Long> implements TestDAO {
@@ -40,27 +42,28 @@ public class TestDAOImpl extends AbstractJPADAO<Test, Long> implements TestDAO {
      * The gold level code
      */
     private List<String> goldLevelCodeList = new ArrayList<String>();
+
     public List<String> getGoldLevelCodeList() {
         return this.goldLevelCodeList;
     }
-    
+
     public void setGoldLevelCodeList(List<String> goldLevelCodeList) {
         this.goldLevelCodeList.addAll(goldLevelCodeList);
     }
-
     /**
      * The silver level code
      */
     private List<String> silverLevelCodeList = new ArrayList<String>();
+
     public List<String> getSilverLevelCodeList() {
         return this.silverLevelCodeList;
     }
-    
+
     public void setSilverLevelCodeList(List<String> silverLevelCodeList) {
         this.silverLevelCodeList.addAll(silverLevelCodeList);
     }
-
     private LevelDAO levelDAO;
+
     @Override
     public void setLevelDAO(LevelDAO levelDAO) {
         this.levelDAO = levelDAO;
@@ -68,13 +71,14 @@ public class TestDAOImpl extends AbstractJPADAO<Test, Long> implements TestDAO {
             for (Map.Entry<String, String> entry : bronzeLevelCodeByRefMap.entrySet()) {
                 try {
                     this.bronzeLevelByRefMap.put(entry.getKey(), levelDAO.retrieveByCode(entry.getValue()));
-                } catch (NoResultException nre) {}
+                } catch (NoResultException nre) {
+                }
             }
         }
     }
-
     private Map<String, String> bronzeLevelCodeByRefMap = new HashMap<String, String>();
     private Map<String, Level> bronzeLevelByRefMap = new HashMap<String, Level>();
+
     @Override
     public void setBronzeLevelCodeByRefMap(Map<String, String> bronzeLevelCodeByRefMap) {
         this.bronzeLevelCodeByRefMap = bronzeLevelCodeByRefMap;
@@ -82,7 +86,8 @@ public class TestDAOImpl extends AbstractJPADAO<Test, Long> implements TestDAO {
             for (Map.Entry<String, String> entry : bronzeLevelCodeByRefMap.entrySet()) {
                 try {
                     this.bronzeLevelByRefMap.put(entry.getKey(), levelDAO.retrieveByCode(entry.getValue()));
-                } catch (NoResultException nre) {}
+                } catch (NoResultException nre) {
+                }
             }
         }
     }
@@ -95,6 +100,10 @@ public class TestDAOImpl extends AbstractJPADAO<Test, Long> implements TestDAO {
     protected Class<TestImpl> getEntityClass() {
         return TestImpl.class;
     }
+    
+    protected Class<AuditImpl> getAuditEntityClass() {
+        return AuditImpl.class;
+    }
 
     @Override
     @SuppressWarnings("unchecked")
@@ -104,9 +113,8 @@ public class TestDAOImpl extends AbstractJPADAO<Test, Long> implements TestDAO {
                 + " WHERE t.criterion.reference = :reference");
         query.setParameter("reference", reference);
         query.setHint("org.hibernate.cacheable", "true");
-        return (List<Test>)query.getResultList();
+        return (List<Test>) query.getResultList();
     }
-
 
     @Override
     @SuppressWarnings("unchecked")
@@ -131,14 +139,14 @@ public class TestDAOImpl extends AbstractJPADAO<Test, Long> implements TestDAO {
         }
         stringBuilder.append(')');
         Query query = entityManager.createQuery(stringBuilder.toString());
-        return (List<Test>)query.getResultList();
+        return (List<Test>) query.getResultList();
     }
-    
+
     @Override
     public List<Test> retrieveAllByReferenceAndLevel(Reference reference, Level level) {
         if (goldLevelCodeList.contains(level.getCode())) {
             return retrieveAll(reference);
-        } else  {
+        } else {
             StringBuilder queryStr = new StringBuilder();
             queryStr.append("SELECT t FROM ");
             queryStr.append(getEntityClass().getName());
@@ -161,7 +169,7 @@ public class TestDAOImpl extends AbstractJPADAO<Test, Long> implements TestDAO {
             return query.getResultList();
         }
     }
-    
+
     @Override
     public List<Test> retrieveAllByCriterion(Criterion criterion) {
         StringBuilder queryStr = new StringBuilder();
@@ -182,4 +190,20 @@ public class TestDAOImpl extends AbstractJPADAO<Test, Long> implements TestDAO {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
+    public Test retrieveTestFromAuditAndLabel(Audit audit, String testLabel) {
+        Query query = entityManager.createQuery(
+                "SELECT t FROM "
+                + getAuditEntityClass().getName() + " a"
+                + " LEFT JOIN a.testSet t"
+                + " WHERE t.label=:testLabel"
+                + " AND a = :audit");
+        query.setParameter("audit", audit);
+        query.setParameter("testLabel", testLabel);
+        try {
+            return (Test)query.getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
+    }
 }

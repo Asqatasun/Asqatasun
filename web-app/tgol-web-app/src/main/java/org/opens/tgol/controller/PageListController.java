@@ -23,6 +23,7 @@ package org.opens.tgol.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.subject.Page;
@@ -40,12 +41,12 @@ import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/** 
+/**
  *
  * @author jkowalczyk
  */
 @Controller
-public class PageListController extends AuditDataHandlerController{
+public class PageListController extends AuditDataHandlerController {
 
     private static final Logger LOGGER = Logger.getLogger(PageListController.class);
 
@@ -60,7 +61,7 @@ public class PageListController extends AuditDataHandlerController{
      * @param model
      * @return
      */
-    @RequestMapping(value=TgolKeyStore.PAGE_LIST_CONTRACT_URL, method=RequestMethod.GET)
+    @RequestMapping(value = TgolKeyStore.PAGE_LIST_CONTRACT_URL, method = RequestMethod.GET)
     @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String displayPageList(
             HttpServletRequest request,
@@ -70,7 +71,6 @@ public class PageListController extends AuditDataHandlerController{
         if (auditId == null) {
             throw new ForbiddenPageException(new AuditParameterMissingException());
         }
-
         Audit audit;
         try {
             audit = getAuditDataService().read(Long.valueOf(auditId));
@@ -88,8 +88,8 @@ public class PageListController extends AuditDataHandlerController{
     }
 
     /**
-     * This method dispatches the result depending on the parameters passed
-     * to the request. Only multi-pages audit are considered here.
+     * This method dispatches the result depending on the parameters passed to
+     * the request. Only multi-pages audit are considered here.
      *
      * @param request
      * @param webResource
@@ -115,8 +115,16 @@ public class PageListController extends AuditDataHandlerController{
             }
             try {
                 Contract currentContract = retrieveContractFromAudit(audit);
-                model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY,currentContract.getLabel());
-                model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY,currentContract.getId());
+                model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, currentContract.getLabel());
+                model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, currentContract.getId());
+                String testLabel = ServletRequestUtils.getStringParameter(request, TgolKeyStore.TEST_KEY);
+                if (StringUtils.isNotBlank(testLabel)) {
+                    model.addAttribute(TgolKeyStore.TEST_CODE_KEY, getTestDataService().getTestFromAuditAndLabel(audit, testLabel).getLabel());
+                    LOGGER.info("MESSAGE" + getTestDataService().getTestFromAuditAndLabel(audit, testLabel).getLabel());
+                    LOGGER.info("MESSAGE" + getTestDataService().getTestFromAuditAndLabel(audit, testLabel).getDescription());
+                    LOGGER.info("MESSAGE" + getTestDataService().getTestFromAuditAndLabel(audit, testLabel).getFullCode());
+                    LOGGER.info("MESSAGE" + getTestDataService().getTestFromAuditAndLabel(audit, testLabel).getCode());
+                }
                 return this.preparePageListData(audit, model);
             } catch (Exception e) {
                 return TgolKeyStore.OUPS_VIEW_REDIRECT_NAME;
@@ -124,14 +132,18 @@ public class PageListController extends AuditDataHandlerController{
         } else {
             boolean isAuthorizedScopeForPageList = isAuthorizedScopeForPageList(audit);
             Contract currentContract = retrieveContractFromAudit(audit);
-            model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY,currentContract.getLabel());
-            model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY,currentContract.getId());
+            model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, currentContract.getLabel());
+            model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, currentContract.getId());
             // when this page is displayed from a group of pages audit, it has
             // to indicate the audit number. So we add an attribute that can be
             // used in the jsp
             if (!isAuthorizedScopeForPageList) {
                 model.addAttribute(
-                    TgolKeyStore.AUDIT_NUMBER_KEY,true);
+                        TgolKeyStore.AUDIT_NUMBER_KEY, true);
+            }
+            String testLabel = ServletRequestUtils.getStringParameter(request, TgolKeyStore.TEST_CODE_KEY);
+            if (StringUtils.isNotBlank(testLabel)) {
+                model.addAttribute("testKey", getTestDataService().getTestFromAuditAndLabel(audit, testLabel).getCode());
             }
             return this.preparePageListStatsByHttpStatusCode(
                     audit,
@@ -142,14 +154,15 @@ public class PageListController extends AuditDataHandlerController{
         }
     }
 
-   /**
+    /**
      * This method prepares data for the page list page
+     *
      * @param audit
      * @param model
      * @return
      * @throws IOException
      */
-    private String preparePageListData(Audit audit,  Model model) {
+    private String preparePageListData(Audit audit, Model model) {
         model.addAttribute(
                 TgolKeyStore.AUDITED_PAGES_COUNT_KEY,
                 getWebResourceCount(audit.getId(), HttpStatusCodeFamily.f2xx));
@@ -197,14 +210,13 @@ public class PageListController extends AuditDataHandlerController{
     }
 
     /**
-     * 
+     *
      * @param idAudit
      * @param hpcf
-     * @return
-     *      the number of webresource for a given http status code family
+     * @return the number of webresource for a given http status code family
      */
     private int getWebResourceCount(
-            Long idAudit, 
+            Long idAudit,
             HttpStatusCodeFamily hpcf) {
         return getWebResourceDataService().getWebResourceCountByAuditAndHttpStatusCode(
                 idAudit,
@@ -212,5 +224,4 @@ public class PageListController extends AuditDataHandlerController{
                 null,
                 null).intValue();
     }
-
 }

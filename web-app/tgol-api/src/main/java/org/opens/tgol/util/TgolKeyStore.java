@@ -296,6 +296,7 @@ public final class TgolKeyStore {
             "hasSiteScopeTest";
     public static final String HAS_SSP_KEY = "hasSSP";
     public static final String STATUS_KEY = "status";
+    public static final String TEST_KEY = "test";
     public static final String COMPLETED_KEY = "COMPLETED";
     public static final String ERROR_LOADING_KEY = "ERROR_LOADING";
     public static final String ERROR_ADAPTING_KEY = "ERROR_ADAPTING";

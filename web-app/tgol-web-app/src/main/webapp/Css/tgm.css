@@ -328,6 +328,13 @@ h1 {
     margin-top: 20px;
     margin-bottom: 40px;
 }
+
+.test-label {
+    margin-top: -30px;
+    margin-bottom: 40px;
+    font-style: italic;
+}
+
 h2 {
     font-size: 161.6%;
     color: #333;
@@ -1494,7 +1501,8 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
 }
 
 .audit-nb-of-pages span {
-    font-size: 16px;
+    font-size: 15px;
+    font-weight: normal;
 }
 
 .audit-score {

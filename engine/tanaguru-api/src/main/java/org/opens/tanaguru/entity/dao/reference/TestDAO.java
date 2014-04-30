@@ -23,6 +23,7 @@ package org.opens.tanaguru.entity.dao.reference;
 
 import java.util.List;
 import java.util.Map;
+import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Level;
 import org.opens.tanaguru.entity.reference.Reference;
@@ -87,4 +88,6 @@ public interface TestDAO extends GenericDAO<Test, Long> {
      */
     void setBronzeLevelCodeByRefMap(Map<String, String> bronzeLevelCodeByRefMap);
 
+    
+    Test retrieveTestFromAuditAndLabel(Audit audit, String testLabel);
 }
