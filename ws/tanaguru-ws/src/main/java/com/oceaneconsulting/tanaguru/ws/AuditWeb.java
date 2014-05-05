@@ -10,11 +10,12 @@ import com.oceaneconsulting.tanaguru.ws.types.AuditSiteOrder;
 
 
 
-
 /**
  * Webservice interface definition.
  * 
  * This interface defines all exposed webservice's operations. 
+ *
+ * @author shamdi at oceaneconsulting dot com
  *
  */
 public interface AuditWeb {

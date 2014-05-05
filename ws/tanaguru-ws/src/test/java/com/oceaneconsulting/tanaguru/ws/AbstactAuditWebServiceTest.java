@@ -11,7 +11,7 @@ import com.oceaneconsulting.tanaguru.ws.impl.AuditWebImpl;
 /**
  * Unit test initialization abstract class.
  * 
- * @author shamdi
+ * @author shamdi at oceaneconsulting com
  * 
  */
 public abstract class AbstactAuditWebServiceTest extends JerseyTest {

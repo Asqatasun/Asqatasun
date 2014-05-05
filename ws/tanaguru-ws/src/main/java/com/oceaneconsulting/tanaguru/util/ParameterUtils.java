@@ -20,7 +20,7 @@ import com.oceaneconsulting.tanaguru.ws.types.AuditSiteOrder;
  * 
  * This class defines sets of parameters used in different webservice's operations.
  * 
- * @author shamdi
+ * @author shamdi at oceaneconsulting dot com
  *
  */
 public class ParameterUtils {
@@ -34,7 +34,7 @@ public class ParameterUtils {
 	
 	public static Map<String, List<Parameter>> parametersMap = null;
 	
-	public static void initParametersMap(ParameterDataService parameterDataService) {
+	public static void  initParametersMap(ParameterDataService parameterDataService) {
 		
 		// create map for parameters identified par parent element code.
 		if (parametersMap == null) {
@@ -58,7 +58,7 @@ public class ParameterUtils {
 		}
 	}
 	
-	/**@
+	/**
 	 * Common parameters definition with default values. 
 	 * @return set of parameters needed in audit request.
 	 */

@@ -21,6 +21,12 @@ import com.oceaneconsulting.tanaguru.entity.WsInvocation;
 import com.oceaneconsulting.tanaguru.entity.impl.WsInvocationImpl;
 import com.oceaneconsulting.tanaguru.service.WsInvocationService;
 
+/**
+ * Custom filter implementing specific limitation rules.
+ * 
+ * @author shamdi at oceaneconsulting dot com
+ *
+ */
 @WebFilter(urlPatterns = {"/*" }, asyncSupported = true)
 public class CustomServletFilter implements Filter {
 
@@ -54,7 +60,7 @@ public class CustomServletFilter implements Filter {
 				invocation.setHostName(request.getRemoteHost());
 				invocation.setAuditType(0);
 				invocation.setUser(null);//unnecessary information
-				//bean.create(invocation);
+				bean.create(invocation);
 				
 				//verify user access limitation
 				access = bean.checkLimitationOverflow(null, request.getRemoteHost(), request.getRemoteAddr(), null);

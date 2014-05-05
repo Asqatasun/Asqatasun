@@ -20,7 +20,7 @@ import com.oceaneconsulting.tanaguru.ws.types.AuditSiteOrder;
 /**
  * This class tests differents scenarios for calling audit site operations.
  * 
- * @author shamdi
+ * @author shamdi at oceaneconsulting dot com
  *
  */
 public class AuditSiteOperationsTest  extends AbstactAuditWebServiceTest {

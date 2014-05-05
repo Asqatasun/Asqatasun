@@ -22,6 +22,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.parameterization.Parameter;
@@ -42,6 +43,7 @@ import com.oceaneconsulting.tanaguru.util.ParameterInputs;
 import com.oceaneconsulting.tanaguru.util.ParameterUtils;
 import com.oceaneconsulting.tanaguru.ws.AuditWeb;
 import com.oceaneconsulting.tanaguru.ws.types.AuditResult;
+import com.oceaneconsulting.tanaguru.ws.types.AuditSiteLaunchResult;
 import com.oceaneconsulting.tanaguru.ws.types.AuditSiteOrder;
 
 
@@ -51,7 +53,7 @@ import com.oceaneconsulting.tanaguru.ws.types.AuditSiteOrder;
  * 
  * This class defines all exposed webservice's operations.
  *  
- * @author shamdi
+ * @author shamdi at oceaneconsulting dot com
  *
  */
 @Component
@@ -186,6 +188,7 @@ public class AuditWebImpl implements AuditWeb {
 	    				
 
 	    			} catch (InterruptedException e) {
+	    				LOGGER.error(ExceptionUtils.getFullStackTrace(e));
 	    				loop = Boolean.FALSE;
 	    				auditResult.setMessage((String)messages.get("global.runtime.error")); 
 	    			}
@@ -203,7 +206,7 @@ public class AuditWebImpl implements AuditWeb {
 	@Produces(MediaType.APPLICATION_JSON) 
 	public Response launchAuditSite(AuditSiteOrder auditSiteOrder, @Context SecurityContext securityContext) {
 		
-		AuditResult auditResult = new AuditResult();
+		AuditSiteLaunchResult auditResult = new AuditSiteLaunchResult();
 		
 		LOGGER.info("Validate mandatory input parameters...");
 		// validate parameters
@@ -241,13 +244,24 @@ public class AuditWebImpl implements AuditWeb {
 			WsInvocation wsInvocation = new WsInvocationImpl();
 			wsInvocation.setAuditType(1);//Constant
 			wsInvocation.setDateInvocation(new Date());
-			wsInvocation.setHostIp(((org.springframework.security.web.authentication.WebAuthenticationDetails)
-					(((org.springframework.security.authentication.UsernamePasswordAuthenticationToken)securityContext.getUserPrincipal())).getDetails()).getRemoteAddress());//to be deleted
+//			wsInvocation.setHostIp(((org.springframework.security.web.authentication.WebAuthenticationDetails)
+//					(((org.springframework.security.authentication.UsernamePasswordAuthenticationToken)securityContext.getUserPrincipal())).getDetails()).getRemoteAddress());//to be deleted
 			wsInvocation.setUser((WsUserImpl)wsUserService.getUser(securityContext.getUserPrincipal().getName()));
 			wsInvocation.setHostName("");
+			wsInvocation.setHostIp("");
+			
+			if(audit.getId() != null){
+				auditResult.setIdAudit(audit.getId());
+				wsInvocation.setAuditId(audit.getId());
+			}
+			//Data based on request properties : we must study automation possibility with tools like Temis
+			wsInvocation.setCountry(auditSiteOrder.getCountry());
+			wsInvocation.setCategory(auditSiteOrder.getCategory());
+			
 			LOGGER.debug("Save invocation information.");
 			wsInvocationService.create(wsInvocation);
 		}
+		
 		return  Response.status(HttpServletResponse.SC_OK).entity(auditResult).build();
 	}	
 	

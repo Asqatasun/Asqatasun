@@ -58,6 +58,25 @@ public class WsInvocationImpl implements WsInvocation, Serializable {
     @ManyToOne
     @JoinColumn(name = "ID_USER", nullable = false)
 	private WsUserImpl user;
+
+    /**
+     * Audit identifier
+     */
+    @Column(name = "ID_AUDIT")
+	private Long auditId;
+	
+    /**
+     * Audit category
+     */
+    @Column(name = "CATEGORY")
+	private String category;
+	
+    /**
+     * Audit country
+     */
+    @Column(name = "COUNTRY")
+	private String country;
+    
     
     @Override
     public Long getId(){
@@ -118,4 +137,28 @@ public class WsInvocationImpl implements WsInvocation, Serializable {
 	public void setUser(WsUserImpl user){
     	this.user = user;
     }
+
+	public Long getAuditId() {
+		return auditId;
+	}
+
+	public void setAuditId(Long auditId) {
+		this.auditId = auditId;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
 }

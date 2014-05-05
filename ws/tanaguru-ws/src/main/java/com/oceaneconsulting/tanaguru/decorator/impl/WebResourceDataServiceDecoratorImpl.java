@@ -1,6 +1,6 @@
 package com.oceaneconsulting.tanaguru.decorator.impl;
 
-	
+
 import java.util.List;
 
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
@@ -16,20 +16,29 @@ import com.oceaneconsulting.tanaguru.dao.StatisticsDAO;
 import com.oceaneconsulting.tanaguru.decorator.WebResourceDataServiceDecorator;
 import com.oceaneconsulting.tanaguru.ws.types.AuditResult;
 
-
+/**
+ * This class wrap {@link org.opens.tanaguru.entity.service.subject.WebResourceDataService} class. 
+ * It enlarge default webresource data service by adding specific statistics.
+ *
+ * @author shamdi at oceaneconsulting dot com
+ *
+ */
 @Service("webResourceDataServiceDecorator")
 public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataService<WebResource, Long>  implements WebResourceDataServiceDecorator {
 		
 		@Autowired
 		@Qualifier("webResourceDataService")
-	    private WebResourceDataService webResourceDataService;  
+	    private WebResourceDataService webResourceDataService;
 	    
 		@Autowired
 		private StatisticsDAO statisticsDAO;
 
+
 	    public AuditResult findWeightedMarkAndStatusByAuditId(Long idAudit) {
 	            return statisticsDAO.findWeightedMarkAndStatusByAuditId(idAudit) ;
 	    }
+	    
+	    //TODO get statistics for audit site 
 
 		@Override
 		public Page createPage(String arg0) {

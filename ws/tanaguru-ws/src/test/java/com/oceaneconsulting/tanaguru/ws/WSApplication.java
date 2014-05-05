@@ -7,6 +7,11 @@ import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.TestProperties;
 
+/**
+ * 
+ * @author shamdi at oceaneconsulting dot com
+ *
+ */
 @ApplicationPath("/")
 public class WSApplication extends ResourceConfig {
 

@@ -2,6 +2,12 @@ package com.oceaneconsulting.tanaguru.ws.types;
 
 import java.io.Serializable;
 
+/**
+ * Audit page global result.
+ * 
+ * @author shamdi at oceaneconsulting dot com
+ *
+ */
 public class AuditResult implements Serializable {
 	
 	/**

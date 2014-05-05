@@ -25,7 +25,7 @@ import com.oceaneconsulting.tanaguru.ws.types.AuditResult;
 /**
  * This class tests differents scenarios for calling audit page operation.
  * 
- * @author shamdi
+ * @author shamdi at oceaneconsulting dot com
  *
  */
 public class AuditPageOperationsTest extends AbstactAuditWebServiceTest {

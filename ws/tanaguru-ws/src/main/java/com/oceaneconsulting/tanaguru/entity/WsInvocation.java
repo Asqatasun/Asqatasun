@@ -1,6 +1,8 @@
 package com.oceaneconsulting.tanaguru.entity;
 import org.opens.tanaguru.sdk.entity.Entity;
+
 import com.oceaneconsulting.tanaguru.entity.impl.WsUserImpl;
+
 import java.util.Date;
 
 /**
@@ -69,4 +71,15 @@ public interface WsInvocation extends Entity {
 	 */
 	void setUser(WsUserImpl user);
 	
+	Long getAuditId();
+
+	void setAuditId(Long auditId);
+
+	String getCategory();
+
+	void setCategory(String category);
+
+	String getCountry();
+
+	void setCountry(String country);
 }

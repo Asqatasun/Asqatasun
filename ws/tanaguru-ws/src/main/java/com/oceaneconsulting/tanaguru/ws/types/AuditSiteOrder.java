@@ -2,6 +2,12 @@ package com.oceaneconsulting.tanaguru.ws.types;
 
 import java.io.Serializable;
 
+/**
+ * Audit site request.
+ * 
+ * @author shamdi at oceaneconsulting dot com
+ *
+ */
 public class AuditSiteOrder implements Serializable {
 
 	/**
