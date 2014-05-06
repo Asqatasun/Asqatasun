@@ -687,6 +687,11 @@ footer a {
     text-align: right;
 }
 
+.tg-table .total-pages-line {
+    text-align: right;
+    font-weight: bold;
+}
+
 /*
  * Lang-switcher
  * ==============================================
