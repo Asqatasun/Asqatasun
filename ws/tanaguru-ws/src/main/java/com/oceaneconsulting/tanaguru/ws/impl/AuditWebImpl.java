@@ -348,13 +348,18 @@ public class AuditWebImpl implements AuditWeb {
 	@Consumes(MediaType.APPLICATION_JSON) 
 	@Produces(MediaType.APPLICATION_JSON) 
 	public Response globalStats(GlobalStatsOrder globalStatsOrder) {
-		List<AuditResult> auditResult = new ArrayList<AuditResult>();
-		
-		LOGGER.debug("Executing global stats query...");
-		//Executing global stats query
-		auditResult = webResourceDataServiceDecorator.findWeightedMarkAndStatus(globalStatsOrder);
-
-		return  Response.status(HttpServletResponse.SC_OK).entity(auditResult).build();
+		List<AuditResult> auditResults = new ArrayList<AuditResult>();
+		try{
+			LOGGER.debug("Executing global stats query...");
+			//Executing global stats query
+			auditResults = webResourceDataServiceDecorator.findWeightedMarkAndStatus(globalStatsOrder);
+		} catch (Exception e){
+			LOGGER.error("An error occured during getting stats operation...");
+			AuditResult auditResult = new AuditResult();
+			auditResult.setMessage((String) messages.get("global.stats.error"));
+			auditResults.add(auditResult);
+		}
+		return  Response.status(HttpServletResponse.SC_OK).entity(auditResults).build();
 	}
 
 
