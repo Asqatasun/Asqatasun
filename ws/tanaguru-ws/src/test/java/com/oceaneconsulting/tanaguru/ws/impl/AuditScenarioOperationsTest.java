@@ -15,7 +15,7 @@ import org.junit.Test;
 
 import com.oceaneconsulting.tanaguru.enumerations.AuditLevel;
 import com.oceaneconsulting.tanaguru.ws.AbstactAuditWebServiceTest;
-import com.oceaneconsulting.tanaguru.ws.types.AuditSiteOrder;
+import com.oceaneconsulting.tanaguru.ws.types.AuditScenarioOrder;
 
 /**
  * This class tests different scenarios for calling audit site operations.
@@ -23,7 +23,7 @@ import com.oceaneconsulting.tanaguru.ws.types.AuditSiteOrder;
  * @author shamdi at oceaneconsulting dot com
  *
  */
-public class AuditSiteOperationsTest  extends AbstactAuditWebServiceTest {
+public class AuditScenarioOperationsTest  extends AbstactAuditWebServiceTest {
 	
 	private static final Logger LOGGER = Logger.getLogger(AuditSiteOperationsTest.class);
 	
@@ -31,13 +31,14 @@ public class AuditSiteOperationsTest  extends AbstactAuditWebServiceTest {
 	@Test ///no security provider
 	public void auditSiteCase01() {
 		
-		AuditSiteOrder auditOrder = new AuditSiteOrder();
-		auditOrder.setSiteURL("oceaneconsulting.com");
+		AuditScenarioOrder auditOrder = new AuditScenarioOrder();
+		auditOrder.setScenarioLabel("visit_oceane_website");
+		auditOrder.setScenarioText("{ \"type\": \"script\",  \"seleniumVersion\": \"2\",  \"formatVersion\": 1,  \"steps\": [    {      \"type\": \"get\",      \"url\": \"http://www.oceaneconsulting.com/\"    }]}");
 		auditOrder.setLevel(AuditLevel.AW22_AR.getValue());
 		
 		try {
 			Client client = ClientBuilder.newClient();
-			Response response = client.target("http://localhost:9998/").path("secure/launchAuditSite") //basic url
+			Response response = client.target("http://localhost:9998/").path("secure/launchAuditScenario") //basic url
 					.request(MediaType.APPLICATION_JSON).post(Entity.entity(auditOrder, MediaType.APPLICATION_JSON)); // input parameter
 			//Verify response execution status 
 			assertTrue(HttpServletResponse.SC_OK == response.getStatus());

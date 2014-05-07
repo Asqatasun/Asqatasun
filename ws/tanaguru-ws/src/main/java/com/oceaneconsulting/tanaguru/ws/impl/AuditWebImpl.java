@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -25,6 +24,7 @@ import javax.ws.rs.core.SecurityContext;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.service.AuditService;
@@ -43,7 +43,8 @@ import com.oceaneconsulting.tanaguru.util.ParameterInputs;
 import com.oceaneconsulting.tanaguru.util.ParameterUtils;
 import com.oceaneconsulting.tanaguru.ws.AuditWeb;
 import com.oceaneconsulting.tanaguru.ws.types.AuditResult;
-import com.oceaneconsulting.tanaguru.ws.types.AuditSiteLaunchResult;
+import com.oceaneconsulting.tanaguru.ws.types.AuditScenarioOrder;
+import com.oceaneconsulting.tanaguru.ws.types.AuditLaunchResult;
 import com.oceaneconsulting.tanaguru.ws.types.AuditSiteOrder;
 
 
@@ -166,24 +167,37 @@ public class AuditWebImpl implements AuditWeb {
 	        	
 	        	LOGGER.debug("Getting audit statistics for audit with identifier ["+audit.getId() + "] for page [" +pageURL +"] ...");
 	        	Boolean loop = Boolean.TRUE;
-	        	
+	        	int loopCount = 1;
+	        	long timeToSleep = 5000l;
 	        	while(loop){
 	        		try {
-	        			long timeToSleep = 5000l;
+	        			
 	    				Thread.sleep(timeToSleep);
 
 	    				auditResult = webResourceDataServiceDecorator.findWeightedMarkAndStatusByAuditId(audit.getId());
 	    				
 	    				LOGGER.debug(auditResult.toString());
 	    				
-	    				if("COMPLETED".equals(auditResult.getStatus())){
+	    				if(AuditStatus.COMPLETED.toString().equals(auditResult.getStatus())){
 		    	    		loop = Boolean.FALSE;	
-	    	    		} else if( "ERROR".equals(auditResult.getStatus())){
+	    	    		} else if(AuditStatus.ERROR.toString().equals(auditResult.getStatus())){
 	    		    	    loop = Boolean.FALSE;	
 	    		    	    LOGGER.error( "A problem occured during test (wrong URL ...)");
 	    		    	    auditResult.setMessage((String)messages.get("input.parameters.error")); 
+	    		    	} else if(AuditStatus.PENDING.toString().equals(auditResult.getStatus())) {
+	    		    	    loop = Boolean.FALSE;	
+	    		    	    LOGGER.error("Excecuting thread is in a pending status.");
+	    		    	    auditResult.setMessage((String)messages.get("global.status.pending")); 
+	    		    	} else if(AuditStatus.SCENARIO_LOADING.toString().equals(auditResult.getStatus())) {
+	    		    		//If any problems occurs with webdriver
+	    		    		if(loopCount>12){
+		    		    	    loop = Boolean.FALSE;	
+		    		    	    LOGGER.error( "Scenario loading takes a long time.");
+		    		    	    auditResult.setMessage((String)messages.get("global.runtime.error")); 
+	    		    		}
+	    		    		++loopCount;
 	    		    	} else {
-	    		    		//Other intermediate status
+	    		    		//intermediate status
 	    		    	}
 	    				
 
@@ -206,7 +220,7 @@ public class AuditWebImpl implements AuditWeb {
 	@Produces(MediaType.APPLICATION_JSON) 
 	public Response launchAuditSite(AuditSiteOrder auditSiteOrder, @Context SecurityContext securityContext) {
 		
-		AuditSiteLaunchResult auditResult = new AuditSiteLaunchResult();
+		AuditLaunchResult auditResult = new AuditLaunchResult();
 		
 		LOGGER.info("Validate mandatory input parameters...");
 		// validate parameters
@@ -228,7 +242,7 @@ public class AuditWebImpl implements AuditWeb {
 		// get default set of parameters
 		Set<Parameter> parameters = ParameterUtils.getDefaultParametersForSite();
 		// set option values
-		ParameterUtils.initializeSAInputOptions(auditSiteOrder, parameters);
+		ParameterUtils.initializeInputOptions(auditSiteOrder, parameters);
 
 		
 		LOGGER.info("Launch audit site service...");
@@ -249,14 +263,14 @@ public class AuditWebImpl implements AuditWeb {
 			wsInvocation.setUser((WsUserImpl)wsUserService.getUser(securityContext.getUserPrincipal().getName()));
 			wsInvocation.setHostName("");
 			wsInvocation.setHostIp("");
+			wsInvocation.setAuditId(audit.getId());
 			
-			if(audit.getId() != null){
-				auditResult.setIdAudit(audit.getId());
-				wsInvocation.setAuditId(audit.getId());
-			}
 			//Data based on request properties : we must study automation possibility with tools like Temis
 			wsInvocation.setCountry(auditSiteOrder.getCountry());
 			wsInvocation.setCategory(auditSiteOrder.getCategory());
+			
+			//Set audit identifier for webservice response
+			auditResult.setIdAudit(audit.getId());
 			
 			LOGGER.debug("Save invocation information.");
 			wsInvocationService.create(wsInvocation);
@@ -267,22 +281,62 @@ public class AuditWebImpl implements AuditWeb {
 	
 	
 	@POST
-	@Path("/auditScenario")
-	public Response auditScenario(@FormParam("scenarioName") String scenarioName, @FormParam("scenarioText") String scenarioText , @FormParam("level")String level){
+	@Path("/secure/launchAuditScenario")
+	@Consumes(MediaType.APPLICATION_JSON) 
+	@Produces(MediaType.APPLICATION_JSON) 
+	public Response launchAuditScenario(AuditScenarioOrder auditScenarioOrder, @Context SecurityContext securityContext) {
+		AuditLaunchResult auditResult = new AuditLaunchResult();
 		
-//		
-//		Set<Parameter> parameters =  ParameterUtils.getDefaultParametersForScenario();
-//		
-//		//define level if necessary : supposing it's not mandatory
-//		if(level != null && !level.isEmpty()){
-//			parameters.add(ParameterUtils.createParameter(5l, "LEVEL", level));
-//		}
-//		//TODO : adding security a
-//		
-//		Audit audit = auditService.auditScenario(scenarioName, scenarioText, parameters);
-//    	
-//		//return response
-    	return Response.status(200).entity("Scenario audit was launched").build();
+		LOGGER.info("Validate mandatory input parameters...");
+		// validate parameters
+		if (auditScenarioOrder.getScenarioText() == null || auditScenarioOrder.getScenarioText().isEmpty() || auditScenarioOrder.getLevel() == null || auditScenarioOrder.getLevel().isEmpty()) {
+			auditResult.setMessage((String) messages.get("input.validation.scenarioNlevel.mondatory"));
+		} else if (!AuditLevel.contains(auditScenarioOrder.getLevel())) {
+			auditResult.setMessage((String) messages.get("input.validation.level.error"));
+		}
+
+		if (!auditResult.getMessage().isEmpty()) {// send error to user
+			LOGGER.error(auditResult.getMessage());
+			return Response.status(HttpServletResponse.SC_OK).entity(auditResult).build();
+		}
+
+		LOGGER.info("Initialize parameters...");
+		// init parameters
+		// get parameters from DB
+		ParameterUtils.initParametersMap(parameterDataService);
+		// get default set of parameters
+		Set<Parameter> parameters = ParameterUtils.getDefaultParametersForScenario();
+		// set option values
+		ParameterUtils.initializeInputOptions(auditScenarioOrder, parameters);
+
+		
+		LOGGER.info("Launch audit scenario service...");
+		// launch audit scenario service
+		Audit audit = auditService.auditScenario(auditScenarioOrder.getScenarioLabel(), auditScenarioOrder.getScenarioText(), parameters);
+
+		
+		LOGGER.info("Save audit scenario references...");
+		LOGGER.debug("Audit scenario identifier [" + audit.getId() + "] for scenario label ["+ auditScenarioOrder.getScenarioLabel() + "] ...");
+		// save audit references
+		if(securityContext != null && securityContext.getUserPrincipal() != null){
+			LOGGER.debug("User with login =" + securityContext.getUserPrincipal().getName());
+			WsInvocation wsInvocation = new WsInvocationImpl();
+			wsInvocation.setAuditType(2);//Constant
+			wsInvocation.setDateInvocation(new Date());
+			wsInvocation.setUser((WsUserImpl)wsUserService.getUser(securityContext.getUserPrincipal().getName()));
+			wsInvocation.setHostName("");
+			wsInvocation.setHostIp("");
+			wsInvocation.setAuditId(audit.getId());
+			
+			//Set audit identifier for webservice response
+			auditResult.setIdAudit(audit.getId());
+				
+			
+			LOGGER.debug("Save invocation information.");
+			wsInvocationService.create(wsInvocation);
+		}
+		
+		return  Response.status(HttpServletResponse.SC_OK).entity(auditResult).build();
 	}
 
 

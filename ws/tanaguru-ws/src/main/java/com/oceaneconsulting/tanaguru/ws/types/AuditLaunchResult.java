@@ -3,18 +3,19 @@ package com.oceaneconsulting.tanaguru.ws.types;
 import java.io.Serializable;
 
 /**
- * Audit site launching result.
+ * Audit launching result.
  * 
  * @author shamdi at oceaneconsulting dot com
  *
  */
-public class AuditSiteLaunchResult implements Serializable {
+public class AuditLaunchResult implements Serializable {
 
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 451322024417493356L;
-	
+	private static final long serialVersionUID = -790338109931724106L;
+
 	private Long idAudit;
 	
 	private String message = "";

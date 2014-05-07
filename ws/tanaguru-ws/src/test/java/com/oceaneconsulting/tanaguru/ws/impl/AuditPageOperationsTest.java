@@ -23,7 +23,7 @@ import com.oceaneconsulting.tanaguru.ws.AbstactAuditWebServiceTest;
 import com.oceaneconsulting.tanaguru.ws.types.AuditResult;
 
 /**
- * This class tests differents scenarios for calling audit page operation.
+ * This class tests different scenarios for calling audit page operation.
  * 
  * @author shamdi at oceaneconsulting dot com
  *
@@ -59,7 +59,7 @@ public class AuditPageOperationsTest extends AbstactAuditWebServiceTest {
 			
 			LOGGER.info(result.get());
 			
-			assertTrue("Score test is OK for the given parameters.", new Float("76.4172").equals(result.get().getScore()));
+			assertTrue("Score test is not OK for the given parameters.", new Float("76.4172").equals(result.get().getScore()));
 			
 		} catch (Exception e) {
 			LOGGER.info(ExceptionUtils.getFullStackTrace(e));
@@ -92,7 +92,7 @@ public class AuditPageOperationsTest extends AbstactAuditWebServiceTest {
 			
 			LOGGER.info(result.get());
 			
-			assertTrue("Score test is OK for the given parameters.", new Float("74.4445").equals(result.get().getScore()));
+			assertTrue("Score test is not OK for the given parameters.", new Float("74.4445").equals(result.get().getScore()));
 			
 		} catch (Exception e) {
 			LOGGER.info(ExceptionUtils.getFullStackTrace(e));

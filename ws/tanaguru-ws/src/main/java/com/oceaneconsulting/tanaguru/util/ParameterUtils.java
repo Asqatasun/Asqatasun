@@ -11,9 +11,9 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
-
 import org.apache.commons.lang.StringUtils;
-import com.oceaneconsulting.tanaguru.ws.types.AuditSiteOrder;
+
+import com.oceaneconsulting.tanaguru.ws.types.CommonOrder;
 
 /**
  * Parameters initialization utilities.
@@ -187,58 +187,59 @@ public class ParameterUtils {
 			}
 		}
 	}
-	public static void initializeSAInputOptions(AuditSiteOrder auditSiteOrder, Set<Parameter> parameters){
+	public static void initializeInputOptions(CommonOrder commonOrder, Set<Parameter> parameters){
 		
-		if(auditSiteOrder.getLevel() != null && !auditSiteOrder.getLevel() .isEmpty()){
-			parameters.add(ParameterUtils.createParameter(ParameterInputs.LEVEL, auditSiteOrder.getLevel()));
+		if(commonOrder.getLevel() != null && !commonOrder.getLevel() .isEmpty()){
+			parameters.add(ParameterUtils.createParameter(ParameterInputs.LEVEL, commonOrder.getLevel()));
 		} 
 	
 		for(Parameter parameter : parameters){
 			
 			if(parameter != null && parameter.getParameterElement() != null && parameter.getParameterElement().getParameterElementCode() != null){
-    			if(StringUtils.isNotBlank(auditSiteOrder.getTblMarker())){
+    			if(StringUtils.isNotBlank(commonOrder.getTblMarker())){
 	    			if(ParameterInputs.DATA_TABLE_MARKER.equals(parameter.getParameterElement().getParameterElementCode()) ){
-	    				parameter.setValue(auditSiteOrder.getTblMarker());
+	    				parameter.setValue(commonOrder.getTblMarker());
 	    			}
     			}
-    			if(StringUtils.isNotBlank(auditSiteOrder.getPrTblMarker())){ 
+    			if(StringUtils.isNotBlank(commonOrder.getPrTblMarker())){ 
 	    			if(ParameterInputs.PRESENTATION_TABLE_MARKER.equals(parameter.getParameterElement().getParameterElementCode()) ){
-	    				parameter.setValue(auditSiteOrder.getPrTblMarker());
+	    				parameter.setValue(commonOrder.getPrTblMarker());
 	    			}
     			} 
-    			if(StringUtils.isNotBlank(auditSiteOrder.getDcrImgMarker())){
+    			if(StringUtils.isNotBlank(commonOrder.getDcrImgMarker())){
 	    			if(ParameterInputs.DECORATIVE_IMAGE_MARKER.equals(parameter.getParameterElement().getParameterElementCode()) ){
-	    				parameter.setValue(auditSiteOrder.getDcrImgMarker());
+	    				parameter.setValue(commonOrder.getDcrImgMarker());
 	    			}
     			}
-    			if(StringUtils.isNotBlank(auditSiteOrder.getInfImgMarker())){
+    			if(StringUtils.isNotBlank(commonOrder.getInfImgMarker())){
 	    			if(ParameterInputs.INFORMATIVE_IMAGE_MARKER.equals(parameter.getParameterElement().getParameterElementCode()) ){
-	    				parameter.setValue(auditSiteOrder.getInfImgMarker());
+	    				parameter.setValue(commonOrder.getInfImgMarker());
 	    			}
     			}
-    			if(StringUtils.isNotBlank(auditSiteOrder.getMaxDocuments())){
+    			if(StringUtils.isNotBlank(commonOrder.getMaxDocuments())){
 	    			if(ParameterInputs.MAX_DOCUMENTS.equals(parameter.getParameterElement().getParameterElementCode()) ){
-	    				parameter.setValue(auditSiteOrder.getMaxDocuments());
+	    				parameter.setValue(commonOrder.getMaxDocuments());
 	    			}
     			}
-    			if(StringUtils.isNotBlank(auditSiteOrder.getMaxDuration())){
+    			if(StringUtils.isNotBlank(commonOrder.getMaxDuration())){
 	    			if(ParameterInputs.MAX_DURATION.equals(parameter.getParameterElement().getParameterElementCode()) ){
-	    				parameter.setValue(auditSiteOrder.getMaxDuration());
+	    				parameter.setValue(commonOrder.getMaxDuration());
 	    			}
     			}
-    			if(StringUtils.isNotBlank(auditSiteOrder.getExclusionRegExp())){
+    			if(StringUtils.isNotBlank(commonOrder.getExclusionRegExp())){
 	    			if(ParameterInputs.EXCLUSION_REGEXP.equals(parameter.getParameterElement().getParameterElementCode()) ){
-	    				parameter.setValue(auditSiteOrder.getExclusionRegExp());
+	    				parameter.setValue(commonOrder.getExclusionRegExp());
 	    			}
     			}
-    			if(StringUtils.isNotBlank(auditSiteOrder.getDepth())){
+    			if(StringUtils.isNotBlank(commonOrder.getDepth())){
 	    			if(ParameterInputs.DEPTH.equals(parameter.getParameterElement().getParameterElementCode()) ){
-	    				parameter.setValue(auditSiteOrder.getDepth());
+	    				parameter.setValue(commonOrder.getDepth());
 	    			}
     			}
     			LOGGER.debug(parameter.getParameterElement().getShortLabel() +  " = "+ parameter.getValue());
 			}
 		}
 	}
+	
 			
 }
