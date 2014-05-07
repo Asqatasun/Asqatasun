@@ -16,6 +16,7 @@ import org.junit.Test;
 import com.oceaneconsulting.tanaguru.enumerations.AuditLevel;
 import com.oceaneconsulting.tanaguru.ws.AbstactAuditWebServiceTest;
 import com.oceaneconsulting.tanaguru.ws.types.AuditScenarioOrder;
+import com.oceaneconsulting.tanaguru.ws.types.GlobalStatsOrder;
 
 /**
  * This class tests different scenarios for calling audit site operations.
@@ -29,7 +30,7 @@ public class AuditScenarioOperationsTest  extends AbstactAuditWebServiceTest {
 	
 	
 	@Test ///no security provider
-	public void auditSiteCase01() {
+	public void auditScenarioCase01() {
 		
 		AuditScenarioOrder auditOrder = new AuditScenarioOrder();
 		auditOrder.setScenarioLabel("visit_oceane_website");
@@ -40,6 +41,24 @@ public class AuditScenarioOperationsTest  extends AbstactAuditWebServiceTest {
 			Client client = ClientBuilder.newClient();
 			Response response = client.target("http://localhost:9998/").path("secure/launchAuditScenario") //basic url
 					.request(MediaType.APPLICATION_JSON).post(Entity.entity(auditOrder, MediaType.APPLICATION_JSON)); // input parameter
+			//Verify response execution status 
+			assertTrue(HttpServletResponse.SC_OK == response.getStatus());
+			
+		} catch (Exception e) {
+			LOGGER.info(ExceptionUtils.getFullStackTrace(e));
+		}
+	}
+	
+	@Test ///no security provider
+	public void auditScenarioCase02() {
+		//Get all stats of audit scenario 
+		GlobalStatsOrder statsOrder = new GlobalStatsOrder();
+		statsOrder.setAuditType(2);
+		
+		try {
+			Client client = ClientBuilder.newClient();
+			Response response = client.target("http://localhost:9998/").path("secure/globalStats") //basic url
+					.request(MediaType.APPLICATION_JSON).post(Entity.entity(statsOrder, MediaType.APPLICATION_JSON)); // input parameter
 			//Verify response execution status 
 			assertTrue(HttpServletResponse.SC_OK == response.getStatus());
 			

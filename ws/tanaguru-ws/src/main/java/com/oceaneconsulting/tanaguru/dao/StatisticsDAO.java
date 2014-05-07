@@ -1,10 +1,13 @@
 package com.oceaneconsulting.tanaguru.dao;
 
 
+import java.util.List;
+
 import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 
 import com.oceaneconsulting.tanaguru.ws.types.AuditResult;
+import com.oceaneconsulting.tanaguru.ws.types.GlobalStatsOrder;
 
 
 
@@ -22,5 +25,7 @@ public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
 	  * @return Audit global result
 	  */
 	 public AuditResult findWeightedMarkAndStatusByAuditId(Long idAudit);
+
+	 public List<AuditResult> findWeightedMarkAndStatus(GlobalStatsOrder globalStatsOrder);
 
 }

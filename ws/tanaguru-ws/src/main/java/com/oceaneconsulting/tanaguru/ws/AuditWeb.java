@@ -6,6 +6,7 @@ import javax.ws.rs.core.SecurityContext;
 
 import com.oceaneconsulting.tanaguru.ws.types.AuditScenarioOrder;
 import com.oceaneconsulting.tanaguru.ws.types.AuditSiteOrder;
+import com.oceaneconsulting.tanaguru.ws.types.GlobalStatsOrder;
 
 
 
@@ -31,7 +32,9 @@ public interface AuditWeb {
 	
 	public Response launchAuditSite(AuditSiteOrder auditSiteOrder, SecurityContext securityContext);
 	
-	public Response launchAuditScenario(AuditScenarioOrder auditSiteOrder, SecurityContext securityContext) ;
+	public Response launchAuditScenario(AuditScenarioOrder auditSiteOrder, SecurityContext securityContext);
+	
+	public Response globalStats(GlobalStatsOrder globalStatsOrder);
 
 	
 }

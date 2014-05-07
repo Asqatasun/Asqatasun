@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.oceaneconsulting.tanaguru.dao.StatisticsDAO;
 import com.oceaneconsulting.tanaguru.decorator.WebResourceDataServiceDecorator;
 import com.oceaneconsulting.tanaguru.ws.types.AuditResult;
+import com.oceaneconsulting.tanaguru.ws.types.GlobalStatsOrder;
 
 /**
  * This class wrap {@link org.opens.tanaguru.entity.service.subject.WebResourceDataService} class. 
@@ -35,9 +36,13 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
 
 
 	    public AuditResult findWeightedMarkAndStatusByAuditId(Long idAudit) {
-	            return statisticsDAO.findWeightedMarkAndStatusByAuditId(idAudit) ;
+	    	return statisticsDAO.findWeightedMarkAndStatusByAuditId(idAudit);
 	    }
-	    
+		
+	    public List<AuditResult> findWeightedMarkAndStatus(GlobalStatsOrder globalStatsOrder) {
+	    	return statisticsDAO.findWeightedMarkAndStatus(globalStatsOrder);
+		}
+		
 	    //TODO get statistics for audit site 
 
 		@Override

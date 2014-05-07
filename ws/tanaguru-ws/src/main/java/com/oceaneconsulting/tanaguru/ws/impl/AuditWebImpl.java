@@ -1,6 +1,8 @@
 package com.oceaneconsulting.tanaguru.ws.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -46,6 +48,7 @@ import com.oceaneconsulting.tanaguru.ws.types.AuditResult;
 import com.oceaneconsulting.tanaguru.ws.types.AuditScenarioOrder;
 import com.oceaneconsulting.tanaguru.ws.types.AuditLaunchResult;
 import com.oceaneconsulting.tanaguru.ws.types.AuditSiteOrder;
+import com.oceaneconsulting.tanaguru.ws.types.GlobalStatsOrder;
 
 
 
@@ -336,6 +339,21 @@ public class AuditWebImpl implements AuditWeb {
 			wsInvocationService.create(wsInvocation);
 		}
 		
+		return  Response.status(HttpServletResponse.SC_OK).entity(auditResult).build();
+	}
+	
+	
+	@POST
+	@Path("/secure/globalStats")
+	@Consumes(MediaType.APPLICATION_JSON) 
+	@Produces(MediaType.APPLICATION_JSON) 
+	public Response globalStats(GlobalStatsOrder globalStatsOrder) {
+		List<AuditResult> auditResult = new ArrayList<AuditResult>();
+		
+		LOGGER.debug("Executing global stats query...");
+		//Executing global stats query
+		auditResult = webResourceDataServiceDecorator.findWeightedMarkAndStatus(globalStatsOrder);
+
 		return  Response.status(HttpServletResponse.SC_OK).entity(auditResult).build();
 	}
 
