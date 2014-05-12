@@ -162,9 +162,13 @@ public class WebResourceStatisticsDAOImpl extends
 		}
 	}
 
+
 	@Override
 	public WebResourceStatistics findWebResourceStatisticsByWebResource(
 			WebResource webResource) {
+		
+		//FIXME :YNE: henceforth, we have two lines of WebResourceStatistics (auto and manual). this methode must be adapted to this function
+		//TODO :YNE we can do so by adding a new critorion manualAudit !=1 (That can return the automatic audit stats)
 		if (webResource == null) {
 			return null;
 		}
@@ -216,6 +220,22 @@ public class WebResourceStatisticsDAOImpl extends
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * */
+	@Override
+	public List<WebResourceStatistics> findWebResourceStatisticsByWebResource(
+			WebResource webResource, boolean manual) {
+		if (webResource == null) {
+			return null;
+		}
+		Query query = entityManager.createQuery("SELECT s FROM "
+				+ getEntityClass().getName() + " s"
+				+ " WHERE s.webResource=:webResource");
+		query.setParameter("webResource", webResource);
+		return query.getResultList();
 	}
 
 }
