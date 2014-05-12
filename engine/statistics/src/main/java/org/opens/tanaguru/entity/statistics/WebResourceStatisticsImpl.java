@@ -23,10 +23,13 @@ package org.opens.tanaguru.entity.statistics;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditImpl;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -108,15 +111,15 @@ public class WebResourceStatisticsImpl
     @JoinColumn(name = "Id_Audit")
     private AuditImpl audit;
 
-    @OneToMany(mappedBy = "webResourceStatistics", cascade = {CascadeType.PERSIST})
+    @OneToMany(mappedBy = "webResourceStatistics", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     protected Set<ThemeStatisticsImpl> themeStatisticsSet =
             new LinkedHashSet<ThemeStatisticsImpl>();
 
-    @OneToMany(mappedBy = "webResourceStatistics", cascade = {CascadeType.PERSIST})
+    @OneToMany(mappedBy = "webResourceStatistics", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     protected Set<TestStatisticsImpl> testStatisticsSet =
             new LinkedHashSet<TestStatisticsImpl>();
     
-    @OneToMany(mappedBy = "webResourceStatistics", cascade = {CascadeType.PERSIST})
+    @OneToMany(mappedBy = "webResourceStatistics", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     protected Set<CriterionStatisticsImpl> criterionStatisticsSet =
             new LinkedHashSet<CriterionStatisticsImpl>();
 
@@ -262,7 +265,8 @@ public class WebResourceStatisticsImpl
 
     @Override
     public Set<ThemeStatistics> getThemeStatisticsSet() {
-        return (Set<ThemeStatistics>)(LinkedHashSet)themeStatisticsSet;
+//        return (Set<ThemeStatistics>)(LinkedHashSet)themeStatisticsSet;
+    	return new HashSet<ThemeStatistics>(themeStatisticsSet);
     }
 
     @Override
