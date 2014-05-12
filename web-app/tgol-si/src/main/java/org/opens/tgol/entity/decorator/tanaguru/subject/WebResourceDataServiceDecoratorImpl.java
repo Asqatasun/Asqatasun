@@ -192,9 +192,10 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
             WebResource webResource,
             Audit audit,
             TestSolution testSolution,
-            Theme theme) {
+            Theme theme,
+            boolean manualAudit) {
         return statisticsDAO.findResultCountByResultTypeAndTheme(
-            webResource,audit,testSolution,theme);
+            webResource,audit,testSolution,theme, manualAudit);
     }
 
     @Override
