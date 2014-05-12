@@ -184,12 +184,16 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
             WebResource webResource,
             Audit audit,
             TestSolution testSolution,
-            Theme theme) {
+            Theme theme,
+            boolean manualAudit) {
         StringBuilder queryString = new StringBuilder();
         queryString.append(SELECT_STR);
         queryString.append(THEME_STATISTICS_TABLE_STR);
         queryString = selectNbField(queryString, testSolution);
         queryString.append(RETRIEVE_COUNT_BY_RESULT_TYPE_AND_THEME_QUERY);
+        queryString.append(" and wrs.manual_audit = ");
+        queryString.append(manualAudit ? "1" : "0")
+        ;
         
         Query query = entityManager.createNativeQuery(queryString.toString());
         query.setParameter("idWebResource", webResource.getId());
