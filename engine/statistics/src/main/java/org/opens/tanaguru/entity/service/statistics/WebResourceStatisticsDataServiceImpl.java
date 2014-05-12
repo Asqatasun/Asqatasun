@@ -28,7 +28,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import org.opens.tanaguru.entity.dao.statistics.CriterionStatisticsDAO;
+import org.opens.tanaguru.entity.dao.statistics.ThemeStatisticsDAO;
 import org.opens.tanaguru.entity.dao.statistics.WebResourceStatisticsDAO;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Theme;
@@ -52,6 +55,10 @@ import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 public class WebResourceStatisticsDataServiceImpl extends
 		AbstractGenericDataService<WebResourceStatistics, Long> implements
 		WebResourceStatisticsDataService {
+	
+	private CriterionStatisticsDAO criterionStatisticsDAO;
+	
+	private ThemeStatisticsDAO themeStatisticsDAO;
 
 	private static BigDecimal ZERO = BigDecimal.valueOf(Double.valueOf(0.0));
 	
@@ -92,6 +99,14 @@ public class WebResourceStatisticsDataServiceImpl extends
 		return ((WebResourceStatisticsDAO) entityDao)
 				.findWebResourceStatisticsByWebResource(webResource);
 	}
+	
+//	@Override
+//	public Collection<CriterionStatistics> findCriterionStatisticsByWebResource(
+//			WebResourceStatistics webResourceStatistics) {
+//		Collection<CriterionStatistics> aa =((CriterionStatisticsDAO) entityDao).findCriterionStatisticsByWebResource(null);
+//		return null;
+//	}
+
 
 	/**
 	 * This method compute the mark of the audit. Here is the algorithm formula
@@ -198,9 +213,38 @@ public class WebResourceStatisticsDataServiceImpl extends
 	public WebResourceStatistics createWebResourceStatisticsForManualAudit(
 			Audit audit, WebResource webResource,
 			List<ProcessResult> netResultList) {
-		WebResourceStatistics wrStats = this.create();
-		Map<Criterion, CriterionStatistics> csMap = new HashMap<Criterion, CriterionStatistics>();;
-	    Map<Theme, ThemeStatistics> tsMap = new HashMap<Theme, ThemeStatistics>();;
+		
+		// Get the WebResourceStatistics for the current webResource
+		// If there is one. the create a manual else update the manual
+		// WebResourceStatistics with manual_audit flag = 1
+		WebResourceStatistics wrStats = null;
+		
+		List<WebResourceStatistics> webResourceStatisticsByWebResourceList = ((WebResourceStatisticsDAO) entityDao).findWebResourceStatisticsByWebResource(webResource, true);
+		
+		if (webResourceStatisticsByWebResourceList.isEmpty() || webResourceStatisticsByWebResourceList.size() ==1) {
+			wrStats = this.create();	
+		} else {
+			int size = webResourceStatisticsByWebResourceList.size();
+			WebResourceStatistics webResourceStatistics = null;
+			for (int i=0; i<size; i++) {
+				webResourceStatistics = webResourceStatisticsByWebResourceList.get(i);
+				if (webResourceStatistics.getIsManualAuditStatistics() == 1)  {
+					wrStats = webResourceStatistics;
+					// assuming there is one line of manual audit
+					break;
+				}
+			}
+		}
+		
+		
+		//get creterion_statistics by web_resources_statistics and test
+		//get theme_statistics by web_resources_statistics
+		
+		
+		
+		
+		Map<Criterion, CriterionStatistics> csMap = new HashMap<Criterion, CriterionStatistics>();
+	    Map<Theme, ThemeStatistics> tsMap = new HashMap<Theme, ThemeStatistics>();
 
 		int nbOfPassed = 0;
 		int nbOfFailed = 0;
@@ -210,8 +254,20 @@ public class WebResourceStatisticsDataServiceImpl extends
 		int nbOfSuspected = 0;
 		int nbOfNt = 0;
 
+		Collection<CriterionStatistics> criterionStatisticsByWr = criterionStatisticsDAO.findCriterionStatisticsByWebResource(wrStats);
+		Collection<ThemeStatistics> themeStatisticsByWr = themeStatisticsDAO.findThemeStatisticsByWebResource(wrStats);
+		
+		System.out.println("criterionStatisticsByWr " +  criterionStatisticsByWr.size());
+		System.out.println("criterionStatisticsByWr " + themeStatisticsByWr.size());
+		
+		fillThemeStatisticsMap (themeStatisticsByWr, tsMap);
+		
+		
 		for (ProcessResult pr : netResultList) {
-			TestSolution prResult = (TestSolution) pr.getValue();
+			TestSolution prResult = (TestSolution) pr.getManualValue();
+			
+//			((CriterionStatisticsDAO) entityDao).findCriterionStatisticsByWebResource(webResource, pr.getTest().getCriterion().getTheme().getCode(),netResultList);
+			
 			switch (prResult) {
 			case PASSED:
 				nbOfPassed++;
@@ -232,8 +288,15 @@ public class WebResourceStatisticsDataServiceImpl extends
 				nbOfNt++;
 				break;
 			}
-			addResultToCriterionCounterMap(prResult, pr.getTest().getCriterion(), wrStats, csMap);
-            addResultToThemeCounterMap(prResult, pr.getTest().getCriterion().getTheme(), wrStats, tsMap);
+			Criterion criterion = pr.getTest().getCriterion();
+			Theme theme = criterion.getTheme();
+			
+//			((CriterionStatisticsDAO)entityDao).findCriterionStatisticsByWebResources(wrStats);
+			
+			System.out.println(criterionStatisticsByWr);
+			
+			addResultToCriterionCounterMap(prResult, criterion, wrStats, csMap);
+			addResultToThemeCounterMap(prResult, theme, wrStats, tsMap);
 		}
 
 			wrStats.setNbOfFailed(nbOfFailed);
@@ -265,7 +328,17 @@ public class WebResourceStatisticsDataServiceImpl extends
 	        }
 	        // Link each themeStatistics to the current webResourceStatistics
 	        for (ThemeStatistics ts : tsMap.values()) {
-	        	wrStats.addThemeStatistics(ts);
+	        	
+	        	
+	        	Set<ThemeStatistics> themeStatisticsSet = wrStats.getThemeStatisticsSet();
+				if (! themeStatisticsSet.contains(ts)){
+	        		wrStats.addThemeStatistics(ts);	
+	        	} else {
+	        		themeStatisticsSet.remove(ts);
+	        		wrStats.addThemeStatistics(ts);
+	        	}
+	        		
+//	        	wrStats.addThemeStatistics(ts);
 	        }
 
 			this.saveOrUpdate(wrStats);
@@ -273,6 +346,24 @@ public class WebResourceStatisticsDataServiceImpl extends
 		return wrStats;
 	}
 	
+	private void fillThemeStatisticsMap(
+			Collection<ThemeStatistics> themeStatisticsByWr,
+			Map<Theme, ThemeStatistics> tsMap) {
+		
+		
+		if (themeStatisticsByWr.isEmpty()) {
+			return;
+		}
+		
+		for (ThemeStatistics current : themeStatisticsByWr) {
+			
+			if (!tsMap.containsValue(current)) {
+				tsMap.put(current.getTheme(), current);
+			}
+		}
+		
+	}
+
 	/**
      * This computation is based on the priority of the results : - priority 1 :
      * Failed - priority 2 : NMI - priority 3 : Not Tested - priority 4 : Passed
@@ -403,5 +494,23 @@ public class WebResourceStatisticsDataServiceImpl extends
               break;
       }
   }
+
+public CriterionStatisticsDAO getCriterionStatisticsDAO() {
+	return criterionStatisticsDAO;
+}
+
+public void setCriterionStatisticsDAO(
+		CriterionStatisticsDAO criterionStatisticsDAO) {
+	this.criterionStatisticsDAO = criterionStatisticsDAO;
+}
+
+public ThemeStatisticsDAO getThemeStatisticsDAO() {
+	return themeStatisticsDAO;
+}
+
+public void setThemeStatisticsDAO(ThemeStatisticsDAO themeStatisticsDAO) {
+	this.themeStatisticsDAO = themeStatisticsDAO;
+}
+
 
 }
