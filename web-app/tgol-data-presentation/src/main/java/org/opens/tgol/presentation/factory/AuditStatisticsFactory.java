@@ -170,7 +170,7 @@ public class AuditStatisticsFactory {
         resultCounter.setNaCount(0);
         resultCounter.setNtCount(0);
 
-        auditStats.setCounterByThemeMap(addCounterByThemeMap(audit, webResource, resultCounter, displayScope));
+        auditStats.setCounterByThemeMap(addCounterByThemeMap(audit, webResource, resultCounter, displayScope, isManual));
         auditStats.setParametersMap(getAuditParameters(audit, parametersToDisplay));
         return auditStats;
     }
@@ -258,20 +258,21 @@ public class AuditStatisticsFactory {
      *
      * @param webResource
      * @param audit
+     * @param manualAudit 
      * @return
      */
     private Map<Theme, ResultCounter> addCounterByThemeMap(
             Audit audit,
             WebResource webResource,
             ResultCounter globalResultCounter,
-            String displayScope) {
+            String displayScope, boolean manualAudit) {
         Map<Theme, ResultCounter> counterByThemeMap =
                 new LinkedHashMap<Theme, ResultCounter>();
         for (Theme theme : getThemeListFromAudit(audit)) {
 
             ResultCounter themeResultCounter = null;
             if (StringUtils.equalsIgnoreCase(displayScope, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE)) {
-                themeResultCounter = getResultCounterByThemeForTest(webResource, audit, theme);
+                themeResultCounter = getResultCounterByThemeForTest(webResource, audit, theme, manualAudit);
             } else if (StringUtils.equalsIgnoreCase(displayScope, TgolKeyStore.CRITERION_DISPLAY_SCOPE_VALUE)) {
                 themeResultCounter = getResultCounterByThemeForCriterion(webResource, theme);
             }
@@ -298,19 +299,20 @@ public class AuditStatisticsFactory {
     private ResultCounter getResultCounterByThemeForTest(
             WebResource webResource,
             Audit audit,
-            Theme theme) {
+            Theme theme,
+            boolean manualAudit) {
         ResultCounter resultCounter =
                 ResultCounterFactory.getInstance().getResultCounter();
         resultCounter.setPassedCount(webResourceDataService.getResultCountByResultTypeAndTheme(
-                webResource, audit, TestSolution.PASSED, theme).intValue());
+                webResource, audit, TestSolution.PASSED, theme, manualAudit).intValue());
         resultCounter.setFailedCount(webResourceDataService.getResultCountByResultTypeAndTheme(
-                webResource, audit, TestSolution.FAILED, theme).intValue());
+                webResource, audit, TestSolution.FAILED, theme, manualAudit).intValue());
         resultCounter.setNmiCount(webResourceDataService.getResultCountByResultTypeAndTheme(
-                webResource, audit, TestSolution.NEED_MORE_INFO, theme).intValue());
+                webResource, audit, TestSolution.NEED_MORE_INFO, theme, manualAudit).intValue());
         resultCounter.setNaCount(webResourceDataService.getResultCountByResultTypeAndTheme(
-                webResource, audit, TestSolution.NOT_APPLICABLE, theme).intValue());
+                webResource, audit, TestSolution.NOT_APPLICABLE, theme, manualAudit).intValue());
         resultCounter.setNtCount(webResourceDataService.getResultCountByResultTypeAndTheme(
-                webResource, audit, TestSolution.NOT_TESTED, theme).intValue());
+                webResource, audit, TestSolution.NOT_TESTED, theme, manualAudit).intValue());
         return resultCounter;
     }
 
