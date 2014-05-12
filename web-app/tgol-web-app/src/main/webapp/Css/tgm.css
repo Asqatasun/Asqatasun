@@ -287,14 +287,14 @@ label, input, select, textarea {
     width : 300px;
 }
 .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
 .ie9 .sr-only {
     position : inherit;
@@ -328,10 +328,23 @@ h1 {
     margin-top: 20px;
     margin-bottom: 40px;
 }
+
+.test-label {
+    font-size: 13px;
+    font-style: italic;
+    line-height: 18px;
+    margin-bottom: 40px;
+    margin-top: -30px;
+}
+
+.test-label li {
+    font-style: italic;
+}
+
 h2 {
     font-size: 161.6%;
     color: #333;
- }
+}
 code {
     font-family: monospace;
     font-size: 10px;
@@ -348,9 +361,9 @@ caption {
 }
 
 table {
-/*    width: 96%;
-    margin-left: 2%;
-    margin-right: 2%;*/
+    /*    width: 96%;
+        margin-left: 2%;
+        margin-right: 2%;*/
 }
 legend {
     font-size: 123.1%;
@@ -451,7 +464,7 @@ footer {
 }
 footer a {
     color : #000;
-    
+
 }
 #footer-upper {
     background-color: #f8f8f8;
@@ -522,7 +535,7 @@ footer a {
 
     .option-console {
         position: fixed;
-/*        top : 185px;*/
+        /*        top : 185px;*/
         right : 2%;
         background-color: #FFFFFF;
         margin-top : 0;
@@ -674,6 +687,11 @@ footer a {
     text-align: right;
 }
 
+.tg-table .total-pages-line {
+    text-align: right;
+    font-weight: bold;
+}
+
 /*
  * Lang-switcher
  * ==============================================
@@ -716,7 +734,7 @@ footer a {
  * Page: login
  * ==============================================
  */
- #tgm-login {
+#tgm-login {
     font-family: "OpenSansRegular",Arial,sans-serif;
     background: #F8F8F8; /* Old browsers */
     background-image: url("../Images/bg-noise.png"), -moz-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* FF3.6+ */
@@ -908,7 +926,7 @@ table.sortable-table .header:focus, .sortable-table .header:hover {
  * Page: forgotten-password
  * ==============================================
  */
- #tgm-forgotten-password {
+#tgm-forgotten-password {
     font-family: "OpenSansRegular",Arial,sans-serif;
     background: #F8F8F8; /* Old browsers */
     background-image: url("../Images/bg-noise.png"), -moz-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* FF3.6+ */
@@ -1286,10 +1304,10 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     background-color: #ffffe1;
 }
 .master-input.expanded, .master-audit-options.expanded {
-  background-image: url(../Images/minus.png);
+    background-image: url(../Images/minus.png);
 }
 .master-input.collapsed, .master-audit-options.collapsed {
-  background-image: url(../Images/plus.png);
+    background-image: url(../Images/plus.png);
 }
 .parameters-legend {
     font-size: 123.1%;
@@ -1348,10 +1366,10 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
  * Page : pie-chart (graph template)
  * ==============================================
  */
- #graphical-synthesis-result {
-     margin-top: 2em;
- }
- #tgm-piechart {
+#graphical-synthesis-result {
+    margin-top: 2em;
+}
+#tgm-piechart {
     margin: -1.5em 0 0;
     text-align: center;
     width: 100%;
@@ -1421,7 +1439,7 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     z-index:3;
     height:3px;
     margin-top:-13px;
-/*    margin-left:2.3em; */
+    /*    margin-left:2.3em; */
     margin-bottom:0;
     margin-right:0;
     padding:0;
@@ -1466,14 +1484,14 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
  * Page : synthesis (template)
  * ==============================================
  */
- #synthesis-result {
-     font-family: OpenSansLight;
-     font-size: 15px;
-     line-height: 18px;  
- }
- #synthesis-action-list {
-     margin-top: 1.5em;
-     font-size : 14px;
+#synthesis-result {
+    font-family: OpenSansLight;
+    font-size: 15px;
+    line-height: 18px;  
+}
+#synthesis-action-list {
+    margin-top: 1.5em;
+    font-size : 14px;
 }
 #synthesis-action-list .result-page-action {
     color: #fff;
@@ -1492,6 +1510,12 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     margin-top: 1em;
     vertical-align: middle;
 }
+
+.audit-nb-of-pages span {
+    font-size: 15px;
+    font-weight: normal;
+}
+
 .audit-score {
     font-size: 400%;
     font-weight: bold;
@@ -1585,15 +1609,15 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     vertical-align: middle;
 }
 #synthesis-meta-data {
-/*    margin-top: -5px;*/
+    /*    margin-top: -5px;*/
 }
 .synthesis-meta-title {
     font-family: OpenSansSemibold;
     font-size: 15px;
 }
 #synthesis-score {
-/*    text-align: right;
-    margin-top: 0.9em;*/
+    /*    text-align: right;
+        margin-top: 0.9em;*/
 }
 #project-url a {
     word-wrap : break-word;
@@ -1602,7 +1626,7 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     margin-top: 20px;
 }
 #audit-parameters {
-/*    margin-top: 1em;*/
+    /*    margin-top: 1em;*/
 }
 #audit-parameters li{
     list-style: none;
@@ -1619,10 +1643,10 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     background-position: 0px;
 }
 #master-audit-parameters.expanded {
-  background-image: url(../Images/expanded-s.png);
+    background-image: url(../Images/expanded-s.png);
 }
 #master-audit-parameters.collapsed {
-  background-image: url(../Images/collapsed-s.png);
+    background-image: url(../Images/collapsed-s.png);
 }
 #page-source-code-link {
     margin-left : 2em;
@@ -1875,21 +1899,21 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
  * ----------------------------------------------
  */
 #result-page-title {
-     margin-top: 26px;
- }
+    margin-top: 26px;
+}
 #result-page-title h1{
-     color: #000;
-     font-family: OpenSansLight;
-     font-size: 55px;
-     line-height: 55px;
-     font-weight: normal;
-     margin-top: 0;
-     margin-bottom: 40px;
+    color: #000;
+    font-family: OpenSansLight;
+    font-size: 55px;
+    line-height: 55px;
+    font-weight: normal;
+    margin-top: 0;
+    margin-bottom: 40px;
 }
 #result-page-title h1 .two-lines{
-     color: #000;
-     font-family: OpenSansLight;
-     font-size: 21px;
+    color: #000;
+    font-family: OpenSansLight;
+    font-size: 21px;
 }
 .result-page-action {
     border : solid 1px #666;
@@ -1972,7 +1996,7 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
  */
 .theme {
     border-top: 1px solid #E6E6E6;
-/*    margin: 1em 0;*/
+    /*    margin: 1em 0;*/
     padding-top: 1.5em;
     padding-bottom: 1em;
     background-color:#FAFAFA;
@@ -2048,7 +2072,7 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     margin-left: 10px;
 }
 .process-remarks {
-/*    font-family: OpenSansSemibold;*/
+    /*    font-family: OpenSansSemibold;*/
     font-size: 13px;
 }
 .process-remarks code {
@@ -2128,13 +2152,13 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
 }
 .test-result-detailed table {
     width: 98%;
-/*    margin-left: 2em;*/
+    /*    margin-left: 2em;*/
 }
 .test-result-detailed table th, .test-result-detailed table td {
-/*    border-bottom: dotted 1px gray;*/
+    /*    border-bottom: dotted 1px gray;*/
 }
 .test-result-detailed table th {
-/*    background-color: #cff;*/
+    /*    background-color: #cff;*/
 }
 .test-result-detailed td {
     /* selecteur pas assez précis pour specifier le padding*/
@@ -2189,7 +2213,7 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     max-height: 150px;
 }
 .Snippet {
-/*    width: 100px;*/
+    /*    width: 100px;*/
     word-wrap: break-word;
     max-width: 600px;
 }
@@ -2471,7 +2495,7 @@ td.occurences {
     border: 1px solid #d0d0d0;
     background-color: #f0f0f0;
     padding-left: 2em;
-/*    overflow: scroll;*/
+    /*    overflow: scroll;*/
 }
 .html4strict a:link {
     color: #000060;
@@ -2564,8 +2588,8 @@ td.occurences {
  * ==============================================
  */
 #tgm-admin .tg-table-title, #tgm-contracts-mngt .tg-table-title{
-     margin-top: 0px;
-     padding-top: 10px;
+    margin-top: 0px;
+    padding-top: 10px;
 }
 .edit-contract-label {
     float:inherit;

@@ -266,7 +266,7 @@ public final class TgolKeyStore {
     public static final String TEST_RESULT_LIST_KEY ="testResultMap";
     public static final String CRITERION_RESULT_LIST_KEY ="criterionResultMap";
     public static final String CRITERION_CODE_KEY ="crit";
-    public static final String TEST_CODE_KEY ="test";
+    public static final String TEST_CODE_KEY ="testKey";
     public static final String CRITERION_LABEL_KEY ="criterionLabel";
     public static final String TEST_LABEL_KEY ="testLabel";
     public static final String TEST_LIST_KEY ="testList";
@@ -296,6 +296,7 @@ public final class TgolKeyStore {
             "hasSiteScopeTest";
     public static final String HAS_SSP_KEY = "hasSSP";
     public static final String STATUS_KEY = "status";
+    public static final String TEST_KEY = "test";
     public static final String COMPLETED_KEY = "COMPLETED";
     public static final String ERROR_LOADING_KEY = "ERROR_LOADING";
     public static final String ERROR_ADAPTING_KEY = "ERROR_ADAPTING";
