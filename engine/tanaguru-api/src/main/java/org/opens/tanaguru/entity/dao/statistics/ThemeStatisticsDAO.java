@@ -21,9 +21,12 @@
  */
 package org.opens.tanaguru.entity.dao.statistics;
 
+import java.util.Collection;
+
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.statistics.ThemeStatistics;
+import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 
@@ -50,5 +53,12 @@ public interface ThemeStatisticsDAO extends GenericDAO<ThemeStatistics, Long> {
             WebResource webResource,
             TestSolution testSolution,
             Theme theme);
+
+	/**
+	 * Getting the theme statistic by Web Resource Statistics
+	 * @param wrStats
+	 * @return
+	 */
+	Collection<ThemeStatistics> findThemeStatisticsByWebResource(WebResourceStatistics wrStats);
 
 }

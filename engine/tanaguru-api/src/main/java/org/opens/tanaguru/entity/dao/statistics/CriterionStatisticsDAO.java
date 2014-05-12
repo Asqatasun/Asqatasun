@@ -22,10 +22,12 @@
 package org.opens.tanaguru.entity.dao.statistics;
 
 import java.util.Collection;
+
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.statistics.CriterionStatistics;
+import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 
@@ -82,5 +84,16 @@ public interface CriterionStatisticsDAO extends GenericDAO<CriterionStatistics, 
      * @return 
      */
     Long findCriterionStatisticsCountByWebResource(Long webResourceId);
+    
+    
+    
+    /**
+     * Getting the CriterionStatistics by web resources statistics
+     * @param webResourceStatistics The web resources statistics
+     * @return List of CriterionStatistics by web resources statistics
+     */
+    Collection<CriterionStatistics> findCriterionStatisticsByWebResource(WebResourceStatistics webResourceStatistics);
+
+
 
 }

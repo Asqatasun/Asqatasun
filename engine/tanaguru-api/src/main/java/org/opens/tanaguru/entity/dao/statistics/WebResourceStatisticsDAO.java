@@ -23,6 +23,8 @@ package org.opens.tanaguru.entity.dao.statistics;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.List;
+
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
@@ -90,5 +92,17 @@ public interface WebResourceStatisticsDAO extends GenericDAO<WebResourceStatisti
      * @return
      */
     WebResourceStatistics findWebResourceStatisticsByWebResource(WebResource webResource);
+    
+    
+    
+    /**
+     * Getting the The list of WebResourceStatistics for either the manual and the automatic audit by webResouce
+     * @param webResource 
+     * @param manual If incluse olso the manual statistics
+     * @return The list of WebResourceStatistics for either the manual and the automatic audit
+     */
+    List<WebResourceStatistics> findWebResourceStatisticsByWebResource(WebResource webResource, boolean manual);
+    
+    
 
 }
