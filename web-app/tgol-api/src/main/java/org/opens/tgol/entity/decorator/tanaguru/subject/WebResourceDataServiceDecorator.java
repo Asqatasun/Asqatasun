@@ -194,7 +194,9 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
             WebResource webResource,
             Audit audit,
             TestSolution testSolution,
-            Theme theme);
+            Theme theme,
+            boolean manualAudit
+            );
 
     /**
      * 
