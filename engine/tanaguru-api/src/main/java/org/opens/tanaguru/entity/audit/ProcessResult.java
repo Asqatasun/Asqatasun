@@ -170,6 +170,11 @@ public interface ProcessResult extends Entity {
      *              the number of tested elements
      */
     void setElementCounter(int elementCounter);
+ 
+    /**
+     * Return the manual audit status
+     * */
+    Object getManualValue ();
     
   
 }
