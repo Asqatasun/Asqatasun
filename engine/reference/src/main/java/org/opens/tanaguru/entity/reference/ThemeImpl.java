@@ -156,4 +156,9 @@ public class ThemeImpl implements Theme, Serializable {
         
         return true;
     }
+
+	@Override
+	public String toString() {
+		return "ThemeImpl [id=" + id + ", label=" + label + "]";
+	}
 }
