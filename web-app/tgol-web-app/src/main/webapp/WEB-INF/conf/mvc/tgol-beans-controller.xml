@@ -117,6 +117,8 @@
     <bean id="webResourceStatisticsDataServiceBean" class="org.opens.tanaguru.entity.service.statistics.WebResourceStatisticsDataServiceImpl">
     	<property name="entityDao" ref="webResourceStatisticsDAO"/>
         <property name="entityFactory" ref="webResourceStatisticsFactory"/>
+        <property name="criterionStatisticsDAO" ref="criterionStatisticsDAO" />
+        <property name="themeStatisticsDAO" ref="themeStatisticsDAO" />
     </bean>
 
     <bean id="auditSynthesisController" class="org.opens.tgol.controller.AuditSynthesisController">
