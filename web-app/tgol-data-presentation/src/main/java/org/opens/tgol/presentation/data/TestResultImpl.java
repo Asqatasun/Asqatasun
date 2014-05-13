@@ -286,10 +286,21 @@ public class TestResultImpl implements TestResult{
         this.isTruncated = isTruncated;
     }
     
+    private String colorTestContrastRatio;
+    @Override
+    public void setColorTestContrastRatio(String colorTestContrastRatio) {
+        this.colorTestContrastRatio = colorTestContrastRatio;
+    }
+
+    @Override
+    public String getColorTestContrastRatio() {
+        return colorTestContrastRatio;
+    }
+    
     /**
      * Default constructor
      */
     public TestResultImpl() {
     }
-
+    
 }

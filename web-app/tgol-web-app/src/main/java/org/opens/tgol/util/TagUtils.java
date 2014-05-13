@@ -21,6 +21,7 @@
  */
 package org.opens.tgol.util;
 
+import java.awt.Color;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
@@ -74,4 +75,17 @@ public final class TagUtils {
         }
     }
     
+    /**
+     * 
+     * @param rgbColor
+     * @return 
+     */
+    public static String getHexColorFromRgb(String rgbColor)  {
+        String[] colors = rgbColor.substring(4, rgbColor.length() - 1).split(",");
+        Color convertColor = new java.awt.Color(
+                Integer.valueOf(colors[0].trim()),
+                Integer.valueOf(colors[1].trim()),
+                Integer.valueOf(colors[2].trim()));
+        return String.format("#%02x%02x%02x", convertColor.getRed(), convertColor.getGreen(), convertColor.getBlue()).toUpperCase();
+    }
 }

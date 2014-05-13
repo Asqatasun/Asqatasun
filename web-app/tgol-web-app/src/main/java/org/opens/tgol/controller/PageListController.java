@@ -119,7 +119,7 @@ public class PageListController extends AuditDataHandlerController {
                 model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, currentContract.getId());
                 String testLabel = ServletRequestUtils.getStringParameter(request, TgolKeyStore.TEST_KEY);
                 if (StringUtils.isNotBlank(testLabel)) {
-                    model.addAttribute(TgolKeyStore.TEST_CODE_KEY, getTestDataService().getTestFromAuditAndLabel(audit, testLabel).getLabel());
+                    model.addAttribute(TgolKeyStore.TEST_CODE_KEY, getTestDataService().getTestFromAuditAndLabel(audit, testLabel));
                 }
                 return this.preparePageListData(audit, model);
             } catch (Exception e) {

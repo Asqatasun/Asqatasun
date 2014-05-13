@@ -18,4 +18,9 @@
         <function-class>org.opens.tgol.util.TagUtils</function-class>
         <function-signature>String getHostFromUrl(java.lang.String)</function-signature>
     </function>
+    <function>
+        <name>convertRgbToHex</name>
+        <function-class>org.opens.tgol.util.TagUtils</function-class>
+        <function-signature>String getHexColorFromRgb(java.lang.String)</function-signature>
+    </function>
 </taglib>
