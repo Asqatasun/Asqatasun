@@ -103,8 +103,8 @@ public class MockContentDataService implements ContentDataService {
     }
 
     @Override
-    public List<Long> getSSPFromWebResource(Long webResourceId, int httpStatusCode, int start, int chunkSize) {
-        List<Long> idList = new ArrayList<Long>();
+    public Collection<Long> getSSPIdsFromWebResource(Long webResourceId, int httpStatusCode, int start, int chunkSize) {
+        Collection<Long> idList = new ArrayList<Long>();
         for (Content content : contentMap.values()) {
             if (content.getHttpStatusCode() == httpStatusCode) {
                 idList.add(content.getId());
@@ -114,7 +114,7 @@ public class MockContentDataService implements ContentDataService {
     }
 
     @Override
-    public List<Long> getRelatedContentFromWebResource(Long webResourceId, int start, int chunkSize) {
+    public Collection<Long> getRelatedContentIdsFromWebResource(Long webResourceId, int start, int chunkSize) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -203,6 +203,16 @@ public class MockContentDataService implements ContentDataService {
 
     @Override
     public void deleteRelatedContentFromContent(Content content) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Collection<Content> getSSPFromWebResource(Long webResourceId, Long startValue, int windowSize, boolean acceptContentWithNullDom) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Collection<Content> getSSPWithRelatedContentFromWebResource(Long webResourceId, Long startValue, int windowSize, boolean acceptContentWithNullDom) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     

@@ -149,23 +149,51 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param chunkSize
      * @return
      */
-    List<Long> getSSPFromWebResource(  
+    Collection<Long> getSSPIdsFromWebResource(  
             Long webResourceId,
             int httpStatusCode,
             int start,
             int chunkSize);
-
+    
     /**
-     *
+     * 
      * @param webResourceId
      * @param start
      * @param chunkSize
-     * @return
+     * @return 
      */
-    List<Long> getRelatedContentFromWebResource( 
+    Collection<Long> getRelatedContentIdsFromWebResource( 
             Long webResourceId,
             int start,
             int chunkSize);
+    
+    /**
+     * 
+     * @param webResourceId
+     * @param startValue
+     * @param windowSize
+     * @param acceptContentWithNullDom
+     * @return 
+     */
+    Collection<Content> getSSPFromWebResource(
+            Long webResourceId, 
+            Long startValue, 
+            int windowSize,
+            boolean acceptContentWithNullDom);
+    
+    /**
+     * 
+     * @param webResourceId
+     * @param startValue
+     * @param windowSize
+     * @param acceptContentWithNullDom
+     * @return 
+     */
+    Collection<Content> getSSPWithRelatedContentFromWebResource(
+            Long webResourceId, 
+            Long startValue, 
+            int windowSize,
+            boolean acceptContentWithNullDom);
 
     /**
      * 

@@ -23,7 +23,6 @@ package org.opens.tanaguru.service;
 
 import java.util.*;
 import junit.framework.TestCase;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.opens.tanaguru.crawler.CrawlerFactory;
 import org.opens.tanaguru.crawler.CrawlerFactoryImpl;
@@ -132,7 +131,7 @@ public class CrawlerServiceImplTest extends TestCase {
         Audit audit = auditFactory.create();
         audit.setParameterSet(setCrawlParameters(depth, exlusionRegexp, inlusionRegexp, maxDuration, maxDocuments, proxyHost, proxyPort));
         WebResource site = crawlerService.crawlSite(audit, siteUrl);
-        List<Long> contentListId = mockContentDataService.getSSPFromWebResource(site.getId(), HttpStatus.SC_OK, 0, 10);
+        Collection<Long> contentListId = mockContentDataService.getSSPIdsFromWebResource(site.getId(), HttpStatus.SC_OK, 0, 10);
         List<Content> contentList = new ArrayList();
         for (Long id : contentListId) {
             Content content = mockContentDataService.readWithRelatedContent(id, false);
@@ -260,7 +259,7 @@ public class CrawlerServiceImplTest extends TestCase {
         Audit audit = auditFactory.create();
         audit.setParameterSet(setCrawlParameters("3", "", "", "", "", "", ""));
         WebResource page = crawlerService.crawlPage(audit, siteUrl);
-        List<Long> contentListId = mockContentDataService.getSSPFromWebResource(page.getId(), HttpStatus.SC_OK, 0, 10);
+        Collection<Long> contentListId = mockContentDataService.getSSPIdsFromWebResource(page.getId(), HttpStatus.SC_OK, 0, 10);
         List<Content> contentList = new ArrayList<Content>();
         for (Long id : contentListId) {
             contentList.add(mockContentDataService.readWithRelatedContent(id, false));

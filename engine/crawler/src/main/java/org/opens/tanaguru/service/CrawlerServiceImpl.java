@@ -22,10 +22,7 @@
 package org.opens.tanaguru.service;
 
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.crawler.Crawler;
 import org.opens.tanaguru.crawler.CrawlerFactory;
@@ -169,7 +166,8 @@ public class CrawlerServiceImpl implements CrawlerService {
         Long i = Long.valueOf(0);
         Date endProcessDate = null;
         Date beginProcessDate = null;
-        Date endPersistDate = null;
+        Date endPersistDate;
+
         LOGGER.debug("Number Of SSP From WebResource " + wr.getURL() + " : " + nbOfContent);
         while (i.compareTo(nbOfContent) < 0) {
             if (LOGGER.isDebugEnabled()) {
@@ -177,8 +175,12 @@ public class CrawlerServiceImpl implements CrawlerService {
                 LOGGER.debug("Set audit to ssp from  "
                         + i + " to " + (i + PROCESS_WINDOW));
             }
-            List<Long> contentIdList =
-                    contentDataService.getSSPFromWebResource(wr.getId(), httpStatusCode, i.intValue(), PROCESS_WINDOW);
+            Collection<Long> contentIdList =
+                    contentDataService.getSSPIdsFromWebResource(
+                            wr.getId(), 
+                            httpStatusCode, 
+                            i.intValue(), 
+                            PROCESS_WINDOW);
             if (LOGGER.isDebugEnabled()) {
                 endProcessDate = Calendar.getInstance().getTime();
                 LOGGER.debug("Retrieving  " + PROCESS_WINDOW + " SSP took "
@@ -205,8 +207,12 @@ public class CrawlerServiceImpl implements CrawlerService {
                 LOGGER.debug("Set audit to relatedContent from  "
                         + i + " to " + (i + PROCESS_WINDOW));
             }
-            List<Long> contentIdList =
-                    contentDataService.getRelatedContentFromWebResource(wr.getId(), i.intValue(), PROCESS_WINDOW);
+            Collection<Long> contentIdList =
+                    contentDataService.getRelatedContentIdsFromWebResource(
+                            wr.getId(), 
+                            i.intValue(), 
+                            PROCESS_WINDOW);
+
             if (LOGGER.isDebugEnabled()) {
                 endProcessDate = Calendar.getInstance().getTime();
                 LOGGER.debug("Retrieving  " + PROCESS_WINDOW + " relatedContent took "

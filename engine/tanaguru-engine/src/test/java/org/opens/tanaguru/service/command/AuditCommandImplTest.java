@@ -24,6 +24,7 @@ package org.opens.tanaguru.service.command;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.log4j.Logger;
@@ -277,14 +278,14 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
                 mockWr, 
                 HttpStatus.SC_OK)).andReturn(Long.valueOf(49)).once();
         
-        List<Long> longList = new ArrayList<Long>(25);
-        expect(mockContentDataService.getSSPFromWebResource(
+        Collection<Long> longList = new ArrayList<Long>(25);
+        expect(mockContentDataService.getSSPIdsFromWebResource(
                 Long.valueOf(1), 
                 HttpStatus.SC_OK,
                 0, 
                 25)).andReturn(longList).once();
         
-        expect(mockContentDataService.getSSPFromWebResource(
+        expect(mockContentDataService.getSSPIdsFromWebResource(
                 Long.valueOf(1), 
                 HttpStatus.SC_OK,
                 25, 

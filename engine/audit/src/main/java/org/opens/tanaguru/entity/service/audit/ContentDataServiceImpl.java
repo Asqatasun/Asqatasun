@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -21,9 +21,10 @@
  */
 package org.opens.tanaguru.entity.service.audit;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.entity.dao.audit.ContentDAO;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -35,6 +36,8 @@ import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
  */
 public class ContentDataServiceImpl extends AbstractGenericDataService<Content, Long>
         implements ContentDataService {
+
+    private static final Logger LOGGER = Logger.getLogger(ContentDataServiceImpl.class);
 
     public ContentDataServiceImpl() {
         super();
@@ -121,7 +124,7 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
     }
 
     @Override
-    public List<Long> getSSPFromWebResource(
+    public Collection<Long> getSSPIdsFromWebResource(
             Long webResourceId,
             int httpStatusCode,
             int start,
@@ -134,7 +137,7 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
     }
 
     @Override
-    public List<Long> getRelatedContentFromWebResource(
+    public Collection<Long> getRelatedContentIdsFromWebResource(
             Long webResourceId,
             int start,
             int chunkSize) {
@@ -143,7 +146,7 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
                 start,
                 chunkSize);
     }
-
+    
     @Override
     public Content readWithRelatedContent(Long id, boolean isFetchParameters) {
         return ((ContentDAO) entityDao).readWithRelatedContent(id, isFetchParameters);
@@ -169,4 +172,95 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
         ((ContentDAO) entityDao).deleteRelatedContentFromContent(content);
     }
 
+    @Override
+    public Collection<Content> getSSPFromWebResource(
+            Long webResourceId, 
+            Long startValue, 
+            int windowSize,
+            boolean acceptContentWithNullDom) {
+        return getContentList(webResourceId, startValue, windowSize, false,acceptContentWithNullDom);
+    }
+    
+    @Override
+    public Collection<Content> getSSPWithRelatedContentFromWebResource(
+            Long webResourceId, 
+            Long startValue, 
+            int windowSize,
+            boolean acceptContentWithNullDom) {
+        return getContentList(webResourceId, startValue, windowSize, true,acceptContentWithNullDom);
+    }
+    
+    /**
+     * 
+     * @param webResourceId
+     * @param startValue
+     * @param windowSize
+     * @param beginProcessDate
+     * @param getContentWithRelatedContent
+     * @param getContentWithNullDom
+     * @return 
+     */
+    private List<Content> getContentList(
+            Long webResourceId, 
+            Long startValue, 
+            int windowSize,
+            boolean getContentWithRelatedContent, 
+            boolean getContentWithNullDom) {
+
+        Date beginProcessDate = Calendar.getInstance().getTime();
+        List<Content> contentList = new ArrayList<Content>();
+        
+        // First we retrieve a list of Ids
+        Collection<Long> contentIdList = this.getSSPIdsFromWebResource(
+                                webResourceId,
+                                HttpStatus.SC_OK,
+                                startValue.intValue(),
+                                windowSize);
+        
+        // we retrieve each content from its ID and add it to the contentList 
+        // that will be returned
+        for (Long id : contentIdList) {
+            Content content;
+            if (getContentWithRelatedContent) {
+                content = this.readWithRelatedContent(id, true);
+            } else {
+                content = this.read(id);
+            }
+            if (content != null && 
+                    ( getContentWithNullDom || 
+                        (!getContentWithNullDom 
+                            && content instanceof SSP 
+                            && StringUtils.isNotEmpty(((SSP)content).getDOM())))) {
+                contentList.add(content);
+            }
+        }
+        
+        if (LOGGER.isDebugEnabled()) {
+            long length = 0;
+            int nbOfResources = 0;
+            for (Content content : contentList) {
+                if (((SSP) content).getDOM() != null) {
+                    length += ((SSP) content).getDOM().length();
+                    if (getContentWithRelatedContent) {
+                        nbOfResources += ((SSP) content).getRelatedContentSet().size();
+                    }
+                }
+            }
+            StringBuilder debugMessage = new StringBuilder("Retrieving  ")
+                        .append(contentList.size())
+                        .append(" SSP took ")
+                        .append(Calendar.getInstance().getTime().getTime() - beginProcessDate.getTime())
+                        .append(" ms and working on ")
+                        .append(length)
+                        .append(" characters");
+            if (getContentWithRelatedContent) {
+                debugMessage.append(" and ");
+                debugMessage.append(nbOfResources);
+                debugMessage.append(" relatedContent ");
+            }
+            LOGGER.debug(debugMessage.toString());
+        }
+        return contentList;
+    }
+    
 }
