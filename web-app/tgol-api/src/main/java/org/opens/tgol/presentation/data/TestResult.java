@@ -36,6 +36,7 @@ public interface TestResult {
     String LINE_NUMBER_KEY = "Line-Number";
     String REPRESENTATION_SUFFIX_KEY = "-representation-index";
     String REPRESENTATION_ORDER_SUFFIX_KEY = "-representation-order";
+    String CONTRAST_RATIO_SUFFIX_KEY = "-contrast-ratio";
 
     String FAILED = "FAILED";
     String PASSED = "PASSED";
@@ -90,6 +91,21 @@ public interface TestResult {
      */
     void setTestRepresentation(int testRepresentationType);
 
+    /**
+     * In case of tests checking color contrast, we may need to call 
+     * an external service to find good colors with the contrast value 
+     * threashold. That value is set through the properties file.
+     * 
+     * @param contrastRatio 
+     */
+    void setColorTestContrastRatio(String colorTestContrastRatio);
+    
+    /**
+     * 
+     * @return the contrast value threashold for the given test
+     */
+    String getColorTestContrastRatio();
+    
     /**
      * 
      * @return

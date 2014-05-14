@@ -131,6 +131,9 @@
                 <entry key="EXCLUSION_REGEXP">
                     <value>exclusion-regexp</value>
                 </entry>
+                <entry key="INCLUSION_REGEXP">
+                    <value>inclusion-regexp</value>
+                </entry>
                 <entry key="DATA_TABLE_MARKER">
                     <value>data-table</value>
                 </entry>
