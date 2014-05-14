@@ -96,7 +96,7 @@
             <div id="audit-level">
                 <span class="synthesis-meta-title"><spring:message code="level"/> : </span>
                 <c:set var="levelCode" scope="page">
-                    ${statistics.parametersMap["referential"]}-${statistics.parametersMap["level"]}
+                    ${fn:replace(statistics.parametersMap["level"],";", "-")}
                 </c:set>
                 <span class="synthesis-meta-value"><spring:message code="${levelCode}"/></span>
             </div>

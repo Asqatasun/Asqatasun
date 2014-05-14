@@ -340,6 +340,9 @@ public final class TgolKeyStore {
     public static final String SCENARIO_NAME_KEY = "scenarioName";
     public static final String SCENARIO_KEY = "scenario";
     
+    public static final String REFERENTIAL_PARAM_KEY = "referential";
+    public static final String LEVEL_PARAM_KEY = "LEVEL";
+    
     public static final String CRITERION_DISPLAY_SCOPE_VALUE = "cr";
     public static final String TEST_DISPLAY_SCOPE_VALUE = "tst";
 

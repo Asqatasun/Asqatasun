@@ -628,17 +628,18 @@ public class PageListControllerTest extends TestCase {
                 anyTimes();
                 
         Set<Parameter> paramSet = new HashSet<Parameter>();
-        Parameter mockParameter=  createMock(Parameter.class);
+//        Parameter mockParameter=  createMock(Parameter.class);
         ParameterElement mockParameterElement=  createMock(ParameterElement.class);
-        expect(mockParameterElement.getParameterElementCode()).andReturn("LEVEL").anyTimes();
-        expect(mockParameter.getParameterElement()).andReturn(mockParameterElement).anyTimes();
-        expect(mockParameter.getValue()).andReturn("AW21").anyTimes();
-        paramSet.add(mockParameter);
+//        expect(mockParameterElement.getParameterElementCode()).andReturn("LEVEL").anyTimes();
+//        expect(mockParameter.getParameterElement()).andReturn(mockParameterElement).anyTimes();
+//        expect(mockParameter.getValue()).andReturn("AW21").anyTimes();
+//        paramSet.add(mockParameter);
         expect(mockParameterDataService.getParameterSetFromAudit(mockAudit)).andReturn(paramSet).anyTimes();
+        expect(mockParameterDataService.getReferentialKeyFromAudit(mockAudit)).andReturn("AW21").anyTimes();
         
         replay(mockWebResourceDataServiceDecorator);
         replay(mockParameterDataService);
-        replay(mockParameter);
+//        replay(mockParameter);
         replay(mockParameterElement);
         
         instance.setWebResourceDataService(mockWebResourceDataServiceDecorator);

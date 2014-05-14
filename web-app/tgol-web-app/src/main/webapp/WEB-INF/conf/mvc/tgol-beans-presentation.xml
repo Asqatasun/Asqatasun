@@ -54,14 +54,10 @@
             <ref local="auditSetUpFormFieldHelper"/>
         </property>
         <property name="targetMethod">
-            <value>setDefaultLevelByRefMap</value>
+            <value>setReferenceDataService</value>
         </property>
         <property name="arguments">
-            <map> 
-                <entry key="AW21" value="Ar"/>
-                <entry key="Aw22" value="Ar"/>
-                <entry key="RGAA22" value="AA"/>
-            </map>
+            <ref bean="referenceDataService"/>
         </property>
     </bean>
     

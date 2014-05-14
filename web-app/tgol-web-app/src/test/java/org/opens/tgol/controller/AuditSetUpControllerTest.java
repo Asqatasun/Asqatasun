@@ -536,6 +536,7 @@ public class AuditSetUpControllerTest extends TestCase {
             expect(mockParameterDataService.getDefaultParameterSet()).andReturn(paramSet).anyTimes();
             expect(mockParameterDataService.getDefaultParameter(mockParameterElementLevel)).andReturn(mockParameter1).anyTimes();
             expect(mockParameterDataService.getDefaultParameter(mockParameterElementTextualFormField)).andReturn(mockParameter2).anyTimes();
+            expect(mockParameterDataService.getDefaultLevelParameter()).andReturn(mockParameter1).anyTimes();
             expect(mockParameterDataService.getLastParameterValueFromUser(
                     Long.valueOf(1), 
                     mockParameterElementLevel, 

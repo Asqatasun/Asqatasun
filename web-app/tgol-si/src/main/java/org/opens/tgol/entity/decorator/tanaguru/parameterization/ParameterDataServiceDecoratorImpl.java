@@ -138,4 +138,14 @@ public class ParameterDataServiceDecoratorImpl extends AbstractGenericDataServic
         return decoratedParameterDataService.getParameter(audit, parameterElementCode);
     }
 
+    @Override
+    public Parameter getLevelParameter(String levelKey) {
+        return decoratedParameterDataService.getLevelParameter(levelKey);
+    }
+
+    @Override
+    public Parameter getDefaultLevelParameter() {
+        return decoratedParameterDataService.getDefaultLevelParameter();
+    }
+
 }
