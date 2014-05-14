@@ -4,18 +4,8 @@ SET foreign_key_checks=0;
 --
 -- Contenu de la table `reference`
 --
-INSERT IGNORE INTO `REFERENCE` (`ID_REFERENCE`, `CD_REFERENCE`, `DESCRIPTION`, `LABEL`, `URL`, `RANK`) VALUES
-(4, 'AW22', NULL, 'AccessiWeb 2.2', 'http://www.accessiweb.org/index.php/accessiweb-22-english-version.html', 4);
-
-
---
--- Dumping data for table `LEVEL`
---
-
-INSERT IGNORE INTO `LEVEL` (`Id_Level`, `Cd_Level`, `Label`, `Description`, `Rank`) VALUES
-(1, 'Bz', 'Bronze', NULL, 10),
-(2, 'Ar', 'Argent', NULL, 20),
-(3, 'Or', 'Or', NULL, 30);
+INSERT IGNORE INTO `REFERENCE` (`ID_REFERENCE`, `CD_REFERENCE`, `DESCRIPTION`, `LABEL`, `URL`, `RANK`, `ID_DEFAULT_LEVEL`) VALUES
+(4, 'AW22', NULL, 'AccessiWeb 2.2', 'http://www.accessiweb.org/index.php/accessiweb-22-english-version.html', 4, 2);
 
 
 --

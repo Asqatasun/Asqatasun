@@ -5,7 +5,7 @@ SET CONSTRAINTS ALL DEFERRED;
 
 
 INSERT INTO "reference" VALUES 
-(1,'AW21',NULL,'Accessiweb 2.1',1,'http://www.braillenet.org/accessibilite/referentiel-aw21/');
+(1,'AW21',NULL,'Accessiweb 2.1',1,'http://www.braillenet.org/accessibilite/referentiel-aw21/',2);
 
 
 INSERT INTO "theme" VALUES 
