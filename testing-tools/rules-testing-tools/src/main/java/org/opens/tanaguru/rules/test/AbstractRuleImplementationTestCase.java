@@ -310,7 +310,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
                     }
                 }
             }
-            contentMap.put(webResource, contentAdapterService.adaptContent(contentMap.get(webResource)));
+            contentMap.put(webResource, (List<Content>)contentAdapterService.adaptContent((contentMap.get(webResource))));
         }
     }
 
@@ -369,10 +369,9 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         } catch (MalformedURLException ex) {
             LOGGER.error(ex);
         }
-        BufferedImage image = null;
         byte[] resultImageAsRawBytes = null;
         try {
-            image = ImageIO.read(url);
+            BufferedImage image = ImageIO.read(url);
             // W R I T E
             ImageIO.write(image, getImageExtension(imgUrl), baos);
             // C L O S E
