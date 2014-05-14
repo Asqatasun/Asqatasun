@@ -24,10 +24,8 @@ package org.opens.tgol.presentation.factory;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import org.apache.commons.lang.StringUtils;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
-import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tgol.entity.contract.Act;
@@ -131,19 +129,12 @@ public final class ActInfoFactory {
     }
 
     /**
-     * Set the referential to the ActInfo regarding the "LEVEL" parameter of the 
-     * audit. This parameter handles level and referential. That's why its value
-     * needs to be split to extract the referential data.
+     * Set the referential to the ActInfo interrogating the parameterDataService
      * @param actInfo
      * @param audit 
      */
     private void setActInfoReferential(ActInfo actInfo, Audit audit) {
-        Set<Parameter> parameterSet = parameterDataService.getParameterSetFromAudit(audit);
-        for (Parameter param : parameterSet) {
-            if (StringUtils.equals(param.getParameterElement().getParameterElementCode(), "LEVEL")) {
-                actInfo.setReferential(param.getValue().split(";")[0]);
-            }
-        }
+        actInfo.setReferential(parameterDataService.getReferentialKeyFromAudit(audit));
     }
 
 }

@@ -110,6 +110,16 @@ public class ParameterDataServiceDecoratorImpl extends AbstractGenericDataServic
     }
     
     @Override
+    public String getLevelKeyFromAudit(Audit audit) {
+        return decoratedParameterDataService.getLevelKeyFromAudit(audit);
+    }
+    
+    @Override
+    public String getReferentialKeyFromAudit(Audit audit) {
+        return decoratedParameterDataService.getReferentialKeyFromAudit(audit);
+    }
+    
+    @Override
     public Collection<Parameter> getParameterSetFromOptionElementSet(Collection<OptionElement> optionElementSet) {
         Set<Parameter> paramSet = new HashSet<Parameter>();
         for (OptionElement optionElement : optionElementSet) {
