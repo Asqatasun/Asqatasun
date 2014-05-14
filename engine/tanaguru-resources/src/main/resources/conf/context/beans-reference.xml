@@ -4,28 +4,8 @@
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="testDAO" class="org.opens.tanaguru.entity.dao.reference.TestDAOImpl">
-        <property name="goldLevelCodeList">
-            <list>
-                <value>Or</value>
-                <value>AAA</value>
-            </list>
-        </property>
-        <property name="silverLevelCodeList">
-            <list>
-                <value>Ar</value>
-                <value>AA</value>
-            </list>
-        </property>
-        <property name="bronzeLevelCodeByRefMap">
-            <map>
-                <entry key="AW21" value="Bz"/>
-                <entry key="AW22" value="Bz"/>
-                <entry key="RGAA22" value="A"/>
-            </map>
-        </property>
-        <property name="levelDAO" ref="levelDAO"/>
-    </bean>
+    <bean id="testDAO" class="org.opens.tanaguru.entity.dao.reference.TestDAOImpl"/>
+
     <bean id="testDataService" class="org.opens.tanaguru.entity.service.reference.TestDataServiceImpl">
         <property name="entityFactory" ref="testFactory"/>
         <property name="entityDao" ref="testDAO"/>

@@ -97,6 +97,18 @@ public interface ParameterDataService extends GenericDataService<Parameter, Long
      * @return
      */
     Set<Parameter> getParameterSetFromAudit(Audit audit);
+    
+    /**
+     * Retrieve the referential parameter for a given audit
+     * @return
+     */
+    String getReferentialKeyFromAudit(Audit audit);
+    
+    /**
+     * Retrieve the level parameter for a given audit
+     * @return
+     */
+    String getLevelKeyFromAudit(Audit audit);
 
     /**
      * Update the current paramSet (generally the default one) with other parameters

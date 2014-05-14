@@ -201,6 +201,7 @@ CREATE TABLE "reference" (
     "label" varchar(510) NOT NULL,
     "rank" integer DEFAULT NULL,
     "url" varchar(510) DEFAULT NULL,
+    "id_level" bigint DEFAULT NULL,
     PRIMARY KEY ("id_reference")
 );
 
@@ -370,6 +371,8 @@ ALTER TABLE "process_result" ADD CONSTRAINT "FK1C41A80DA17A5FA8" FOREIGN KEY ("i
 CREATE INDEX ON "process_result" ("id_test");
 ALTER TABLE "process_result" ADD CONSTRAINT "FK1C41A80DB6D0E092" FOREIGN KEY ("id_audit_net_result") REFERENCES "audit" ("id_audit") ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
 CREATE INDEX ON "process_result" ("id_audit_net_result");
+ALTER TABLE "reference" ADD CONSTRAINT "fk_reference_default_level" FOREIGN KEY ("id_default_level") REFERENCES "level" ("id_level") DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX ON "reference" ("id_default_level");
 ALTER TABLE "test" ADD CONSTRAINT "FK273C92CCA757AD" FOREIGN KEY ("id_decision_level") REFERENCES "decision_level" ("id_decision_level") DEFERRABLE INITIALLY DEFERRED;
 CREATE INDEX ON "test" ("id_decision_level");
 ALTER TABLE "test" ADD CONSTRAINT "FK273C9250C99824" FOREIGN KEY ("id_scope") REFERENCES "scope" ("id_scope") DEFERRABLE INITIALLY DEFERRED;

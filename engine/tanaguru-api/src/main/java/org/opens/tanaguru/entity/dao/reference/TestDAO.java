@@ -77,17 +77,9 @@ public interface TestDAO extends GenericDAO<Test, Long> {
 
     /**
      * 
-     * @param levelDAO
+     * @param audit
+     * @param testLabel
+     * @return the test for a given audit and label
      */
-    void setLevelDAO(LevelDAO levelDAO);
-
-    /**
-     * 
-     * @param bronzeLevelCodeByRefMap This map handles the bronze level code
-     *      (first level) for each referential
-     */
-    void setBronzeLevelCodeByRefMap(Map<String, String> bronzeLevelCodeByRefMap);
-
-    
     Test retrieveTestFromAuditAndLabel(Audit audit, String testLabel);
 }

@@ -22,9 +22,7 @@
 package org.opens.tanaguru.entity.dao.reference;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.opens.tanaguru.entity.audit.Audit;
@@ -39,59 +37,8 @@ import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 public class TestDAOImpl extends AbstractJPADAO<Test, Long> implements TestDAO {
 
     /**
-     * The gold level code
+     * Constructor
      */
-    private List<String> goldLevelCodeList = new ArrayList<String>();
-
-    public List<String> getGoldLevelCodeList() {
-        return this.goldLevelCodeList;
-    }
-
-    public void setGoldLevelCodeList(List<String> goldLevelCodeList) {
-        this.goldLevelCodeList.addAll(goldLevelCodeList);
-    }
-    /**
-     * The silver level code
-     */
-    private List<String> silverLevelCodeList = new ArrayList<String>();
-
-    public List<String> getSilverLevelCodeList() {
-        return this.silverLevelCodeList;
-    }
-
-    public void setSilverLevelCodeList(List<String> silverLevelCodeList) {
-        this.silverLevelCodeList.addAll(silverLevelCodeList);
-    }
-    private LevelDAO levelDAO;
-
-    @Override
-    public void setLevelDAO(LevelDAO levelDAO) {
-        this.levelDAO = levelDAO;
-        if (!bronzeLevelCodeByRefMap.isEmpty()) {
-            for (Map.Entry<String, String> entry : bronzeLevelCodeByRefMap.entrySet()) {
-                try {
-                    this.bronzeLevelByRefMap.put(entry.getKey(), levelDAO.retrieveByCode(entry.getValue()));
-                } catch (NoResultException nre) {
-                }
-            }
-        }
-    }
-    private Map<String, String> bronzeLevelCodeByRefMap = new HashMap<String, String>();
-    private Map<String, Level> bronzeLevelByRefMap = new HashMap<String, Level>();
-
-    @Override
-    public void setBronzeLevelCodeByRefMap(Map<String, String> bronzeLevelCodeByRefMap) {
-        this.bronzeLevelCodeByRefMap = bronzeLevelCodeByRefMap;
-        if (levelDAO != null) {
-            for (Map.Entry<String, String> entry : bronzeLevelCodeByRefMap.entrySet()) {
-                try {
-                    this.bronzeLevelByRefMap.put(entry.getKey(), levelDAO.retrieveByCode(entry.getValue()));
-                } catch (NoResultException nre) {
-                }
-            }
-        }
-    }
-
     public TestDAOImpl() {
         super();
     }
@@ -144,30 +91,18 @@ public class TestDAOImpl extends AbstractJPADAO<Test, Long> implements TestDAO {
 
     @Override
     public List<Test> retrieveAllByReferenceAndLevel(Reference reference, Level level) {
-        if (goldLevelCodeList.contains(level.getCode())) {
-            return retrieveAll(reference);
-        } else {
-            StringBuilder queryStr = new StringBuilder();
-            queryStr.append("SELECT t FROM ");
-            queryStr.append(getEntityClass().getName());
-            queryStr.append(" t WHERE");
-            if (silverLevelCodeList.contains(level.getCode())) {
-                queryStr.append(" (");
-            }
-            queryStr.append(" t.level = :bronzeLevel");
-            if (silverLevelCodeList.contains(level.getCode())) {
-                queryStr.append(" OR t.level = :silverLevel)");
-            }
-            queryStr.append(" AND t.criterion.reference = :reference");
-            Query query = entityManager.createQuery(queryStr.toString());
-            query.setParameter("bronzeLevel", bronzeLevelByRefMap.get(reference.getCode()));
-            if (silverLevelCodeList.contains(level.getCode())) {
-                query.setParameter("silverLevel", level);
-            }
-            query.setParameter("reference", reference);
-            query.setHint("org.hibernate.cacheable", "true");
-            return query.getResultList();
-        }
+        StringBuilder queryStr = new StringBuilder();
+        queryStr.append("SELECT t FROM ");
+        queryStr.append(getEntityClass().getName());
+        queryStr.append(" t WHERE");
+        queryStr.append(" t.level.rank <= :levelRank");
+
+        queryStr.append(" AND t.criterion.reference = :reference");
+        Query query = entityManager.createQuery(queryStr.toString());
+        query.setParameter("levelRank", level.getRank());
+        query.setParameter("reference", reference);
+        query.setHint("org.hibernate.cacheable", "true");
+        return query.getResultList();
     }
 
     @Override
