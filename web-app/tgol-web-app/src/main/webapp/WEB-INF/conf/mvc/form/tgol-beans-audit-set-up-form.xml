@@ -9,41 +9,10 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 
-    <!-- Accessiweb 2.1 select elements -->
-    <bean id="aw21BronzeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="AW21;Bz"/>
-        <property name="i18nKey" value="Bz"/>
-        <property name="errorI18nKey" value="Bz-error"/>
-        <property name="defaultCode" value="DEFAULT_LEVEL"/>
-        <!--    Default values
-        <property name="default" value="false"/>
-        <property name="enabled" value="false"/>-->
-    </bean>
-
-    <bean id="aw21SilverSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="AW21;Ar"/>
-        <property name="i18nKey" value="Ar"/>
-        <property name="errorI18nKey" value="Ar-error"/>
-        <property name="defaultCode" value="DEFAULT_LEVEL"/>
-        <!--    Default values
-        <property name="default" value="false"/>
-        <property name="enabled" value="false"/>-->
-    </bean>
-
-    <bean id="aw21GoldSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="AW21;Or"/>
-        <property name="i18nKey" value="Or"/>
-        <property name="errorI18nKey" value="Or-error"/>
-        <property name="defaultCode" value="DEFAULT_LEVEL"/>
-        <!--    Default values
-        <property name="default" value="false"/>
-        <property name="enabled" value="false"/>-->
-    </bean>
-    
     <!-- Accessiweb 2.2 select elements -->
     <bean id="aw22BronzeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="AW22;Bz"/>
-        <property name="i18nKey" value="Bz"/>
+        <property name="value" value="AW22;LEVEL_1"/>
+        <property name="i18nKey" value="AW22-LEVEL_1"/>
         <property name="errorI18nKey" value="Bz-error"/>
         <property name="defaultCode" value="DEFAULT_LEVEL"/>
         <!--    Default values
@@ -52,9 +21,9 @@
     </bean>
 
     <bean id="aw22SilverSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="AW22;Ar"/>
-        <property name="i18nKey" value="Ar"/>
-        <property name="errorI18nKey" value="Ar-error"/>
+        <property name="value" value="AW22;LEVEL_2"/>
+        <property name="i18nKey" value="AW22-LEVEL_2"/>
+        <property name="errorI18nKey" value="LEVEL_2-error"/>
         <property name="defaultCode" value="DEFAULT_LEVEL"/>
         <!--    Default values
         <property name="default" value="false"/>
@@ -62,9 +31,9 @@
     </bean>
 
     <bean id="aw22GoldSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="AW22;Or"/>
-        <property name="i18nKey" value="Or"/>
-        <property name="errorI18nKey" value="Or-error"/>
+        <property name="value" value="AW22;LEVEL_3"/>
+        <property name="i18nKey" value="AW22-LEVEL_3"/>
+        <property name="errorI18nKey" value="LEVEL_3-error"/>
         <property name="defaultCode" value="DEFAULT_LEVEL"/>
         <!--    Default values
         <property name="default" value="false"/>
@@ -73,8 +42,8 @@
     
     <!-- RGAA 2.2 select elements -->
     <bean id="rgaa22ASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="RGAA22;A"/>
-        <property name="i18nKey" value="A"/>
+        <property name="value" value="RGAA22;LEVEL_1"/>
+        <property name="i18nKey" value="RGAA22-LEVEL_1"/>
         <property name="errorI18nKey" value="A-error"/>
         <property name="defaultCode" value="DEFAULT_LEVEL"/>
         <!--    Default values
@@ -83,9 +52,9 @@
     </bean>
     
     <bean id="rgaa22AASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="RGAA22;AA"/>
-        <property name="i18nKey" value="AA"/>
-        <property name="errorI18nKey" value="AA-error"/>
+        <property name="value" value="RGAA22;LEVEL_2"/>
+        <property name="i18nKey" value="RGAA22-LEVEL_2"/>
+        <property name="errorI18nKey" value="LEVEL_2-error"/>
         <property name="defaultCode" value="DEFAULT_LEVEL"/>
         <!--    Default values
         <property name="default" value="false"/>
@@ -93,9 +62,9 @@
     </bean>
     
     <bean id="rgaa22AAASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="RGAA22;AAA"/>
-        <property name="i18nKey" value="AAA"/>
-        <property name="errorI18nKey" value="A-error"/>
+        <property name="value" value="RGAA22;LEVEL_3"/>
+        <property name="i18nKey" value="RGAA22-LEVEL_3"/>
+        <property name="errorI18nKey" value="LEVEL_3-error"/>
         <property name="defaultCode" value="DEFAULT_LEVEL"/>
         <!--    Default values
         <property name="default" value="false"/>
@@ -107,13 +76,6 @@
         <property name="errorI18nKey" value="level-error"/>
         <property name="selectElementBuilderMap">
             <map>
-                <entry key="AW21">
-                    <list>
-                        <ref local="aw21BronzeSelectElementBuilder"/>
-                        <ref local="aw21SilverSelectElementBuilder"/>
-                        <ref local="aw21GoldSelectElementBuilder"/>
-                    </list>
-                </entry>
                 <entry key="AW22">
                     <list>
                         <ref local="aw22BronzeSelectElementBuilder"/>
