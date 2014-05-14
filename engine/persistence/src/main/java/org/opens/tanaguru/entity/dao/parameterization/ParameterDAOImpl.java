@@ -115,6 +115,21 @@ public class ParameterDAOImpl extends AbstractJPADAO<Parameter, Long> implements
     }
     
     @Override
+    public Parameter findLevelParameter(String parameterValue) {
+        Query query = entityManager.createQuery("SELECT p FROM "
+                + getEntityClass().getName() + " p"
+                + " WHERE p.parameterElement.parameterElementCode = :parameterElementCode"
+                + " AND p.parameterValue = :parameterValue");
+        query.setParameter("parameterValue", parameterValue);
+        query.setParameter("parameterElementCode", "LEVEL");
+        try {
+            return (Parameter)(query.getSingleResult());
+        } catch (NoResultException nre) {
+            return null;
+        }
+    }
+    
+    @Override
     public Parameter findParameter(Audit audit, String parameterElementCode) {
         for (Parameter param : findParameterSetFromAudit(audit)) {
             if (param.getParameterElement().getParameterElementCode().equals(parameterElementCode)) {

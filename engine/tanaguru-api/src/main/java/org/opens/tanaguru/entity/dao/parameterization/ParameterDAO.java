@@ -45,6 +45,14 @@ public interface ParameterDAO extends GenericDAO<Parameter, Long> {
     Parameter findParameter(ParameterElement parameterElement, String value);
     
     /**
+     *
+     * @param value
+     * @return
+     *      the level parameter for the given value
+     */
+    Parameter findLevelParameter(String value);
+    
+    /**
      * 
      * @param audit
      * @param parameterElementCode

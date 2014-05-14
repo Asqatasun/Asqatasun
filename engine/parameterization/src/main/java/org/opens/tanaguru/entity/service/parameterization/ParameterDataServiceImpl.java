@@ -43,6 +43,8 @@ public class ParameterDataServiceImpl extends AbstractGenericDataService<Paramet
     private static int REF_INDEX_IN_PARAM = 0;
     private static int LEVEL_INDEX_IN_PARAM = 1;
     
+    private Parameter defaultLevelParameter;
+    
     private String levelAndRefParameterKey = DEFAULT_LEVEL_AND_REF_PARAM_KEY;
     public String getLevelAndRefParameterKey() {
         return levelAndRefParameterKey;
@@ -51,7 +53,6 @@ public class ParameterDataServiceImpl extends AbstractGenericDataService<Paramet
     public void setLevelAndRefParameterKey(String levelAndRefParameterKey) {
         this.levelAndRefParameterKey = levelAndRefParameterKey;
     }
-    
     
     @Override
     public Parameter create(ParameterElement parameterElement, String value, Audit audit) {
@@ -131,6 +132,19 @@ public class ParameterDataServiceImpl extends AbstractGenericDataService<Paramet
     public Parameter getDefaultParameter(ParameterElement parameterElement) {
         return ((ParameterDAO) entityDao).findDefaultParameter(parameterElement);
     }
+    
+    @Override
+    public Parameter getDefaultLevelParameter() {
+        if (defaultLevelParameter == null) {
+            for (Parameter param : getDefaultParameterSet()) {
+                if (param.getParameterElement().getParameterElementCode().equals(DEFAULT_LEVEL_AND_REF_PARAM_KEY)) {
+                    defaultLevelParameter = param;
+                    break;
+                }
+            }
+        }
+        return defaultLevelParameter;
+    }
 
     @Override
     public Set<Parameter> getParameterSet(ParameterFamily parameterFamily, Collection<Parameter> paramSet) {
@@ -145,6 +159,11 @@ public class ParameterDataServiceImpl extends AbstractGenericDataService<Paramet
     @Override
     public String getLevelKeyFromAudit(Audit audit) {
         return getParameter(audit, levelAndRefParameterKey).getValue().split(";")[LEVEL_INDEX_IN_PARAM];
+    }
+    
+    @Override
+    public Parameter getLevelParameter(String levelKey) {
+        return ((ParameterDAO) entityDao).findLevelParameter(levelKey);
     }
 
 }
