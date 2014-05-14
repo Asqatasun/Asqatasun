@@ -22,9 +22,7 @@
 package org.opens.tgol.presentation.factory;
 
 import java.util.*;
-
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.parameterization.Parameter;
@@ -207,8 +205,6 @@ public class AuditStatisticsFactory {
         for (Map.Entry<String, String> entry : parametersToDisplay.entrySet()) {
             for (Parameter param : auditParamSet) {
                 if (entry.getKey().equals(param.getParameterElement().getParameterElementCode())) {
-                    Logger.getLogger(this.getClass()).error(entry.getValue());
-                    Logger.getLogger(this.getClass()).error(param.getValue());
                     auditParameters.put(
                                 entry.getValue(),
                                 param.getValue());
@@ -217,7 +213,6 @@ public class AuditStatisticsFactory {
         }
         auditParameters.put(TgolKeyStore.REFERENTIAL_PARAM_KEY, 
                             parameterDataService.getReferentialKeyFromAudit(audit));
-        Logger.getLogger(this.getClass()).error(parameterDataService.getReferentialKeyFromAudit(audit));
         return auditParameters;
     }
 
