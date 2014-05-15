@@ -31,18 +31,20 @@ $(document).ready(function() {
     }
 //    getAnchorValue -> test-1.1.1
 //    if AnchorValue  !== null -> extract Theme index -> 1
+    var hashCode = window.location.hash.substring(1).toString();
+    var themeInHash;
+    if (hashCode.charAt(6).match('^\\d')){
+        themeInHash = 'theme' + hashCode.charAt(5) + hashCode.charAt(6) + '-details';}
+    else {
+        themeInHash = 'theme' + hashCode.charAt(5) + '-details';
+    }
 
     $('.theme-info .hide-theme-details-link-icon').each(function(i)
     {
         var ancre = $(this).parent().parent().parent().parent().next(panels)[0].id,
                 lien;
         if (collapse) {
-            var hashCode = window.location.hash.substring(1).toString();
-            var themeInHash;
-            if (hashCode.charAt(6).match('^\\d'))
-                themeInHash = 'theme' + hashCode.charAt(5) + hashCode.charAt(6) + '-details';
-            else
-                themeInHash = 'theme' + hashCode.charAt(5) + '-details';
+            
             var ariaExpandedValue = 'false';
             if (ancre === themeInHash) {
                 ariaExpandedValue = 'true';
@@ -113,6 +115,8 @@ $(document).ready(function() {
             }
         });
     });
+    
+    window.location.hash=window.location.hash;
 });
 
 function showPanel(selection, panneaux) {
