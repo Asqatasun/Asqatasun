@@ -83,6 +83,16 @@ public class AuditResultController extends AuditDataHandlerController {
     public final void setFormFieldBuilderList(final List<FormFieldBuilder> formFieldBuilderList) {
         this.sortFormFieldBuilderList = formFieldBuilderList;
     }
+    
+    /**
+     * 
+     * @param formFieldBuilder 
+     */
+    public final void addFormFieldBuilder(final FormFieldBuilder formFieldBuilder) {
+        if (sortFormFieldBuilderList != null) {
+            this.sortFormFieldBuilderList.add(formFieldBuilder);
+        }
+    }
 
     private ActionHandler actionHandler;
     public ActionHandler getActionHandler() {

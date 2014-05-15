@@ -40,6 +40,15 @@ public interface SelectFormFieldBuilder extends FormFieldBuilder {
     void setSelectElementBuilderMap(Map<String,List<SelectElementBuilder>> selectElementBuilderMap);
 
     /**
+     * Add a unique collection of selectElementBuilder to associate with a 
+     * referential
+     * 
+     * @param refKey
+     * @param selectElementBuilderList 
+     */
+    void addSelectElementBuilder(String refKey, List<SelectElementBuilder> selectElementBuilderList);
+    
+    /**
      *
      * @return
      *      the SelectElement Map that has to be set to each instance of SelectFormField
