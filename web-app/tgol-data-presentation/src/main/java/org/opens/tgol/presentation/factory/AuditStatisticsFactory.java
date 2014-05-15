@@ -211,8 +211,10 @@ public class AuditStatisticsFactory {
                 }
             }
         }
-        auditParameters.put(TgolKeyStore.REFERENTIAL_PARAM_KEY, 
+        if (!parametersToDisplay.isEmpty()) {
+            auditParameters.put(TgolKeyStore.REFERENTIAL_PARAM_KEY, 
                             parameterDataService.getReferentialKeyFromAudit(audit));
+        }
         return auditParameters;
     }
 

@@ -153,6 +153,7 @@ public class AuditSynthesisController extends AuditDataHandlerController {
                 model.addAttribute(
                         TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
                 model.addAttribute(TgolKeyStore.AUDIT_ID_KEY, auditId);
+                model.addAttribute(TgolKeyStore.REFERENTIAL_CD_KEY, getParameterDataService().getReferentialKeyFromAudit(audit));
                 model.addAttribute(TgolKeyStore.WEBRESOURCE_ID_KEY, audit.getSubject().getId());
                 Site site = (Site) audit.getSubject();
                 addAuditStatisticsToModel(site, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE);

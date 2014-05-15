@@ -74,6 +74,7 @@
                         <thead>
                             <tr>
                                 <th id="testTop5FailedTestByPage" scope="col" class="tg-textual-column"><spring:message code="failedTestList.test"/></th>
+                                <th id="testLevelTop5FailedTestByPage" scope="col" class="tg-textual-column"><spring:message code="level"/></th>
                                 <th id="urlListTop5FailedTestByPage" scope="col" class="tg-textual-column"><spring:message code="failedTestList.urlListCsv"/></th>
                                 <th id="nbOfPagesTop5FailedTestByPage" scope="col" class="tg-numerical-column"><spring:message code="failedTestList.nbOfPages"/></th>
                             </tr>
@@ -88,6 +89,12 @@
                                     <abbr title="${fn:escapeXml(abbrTitle)}"  style="border-bottom: 1px dotted;cursor: help;">
                                         ${failedTestByPageInfo.testLabel}
                                     </abbr>
+                                </td>
+                                <td headers="testLevelTop5FailedTestByPage" class="tg-textual-column">
+                                    <c:set var="testLevelCode">
+                                        ${ref}-${failedTestByPageInfo.testLevelCode}
+                                    </c:set>
+                                    <fmt:message key="${testLevelCode}"/>
                                 </td>
                                 <td headers="urlListTop5FailedTestByPage" class="tg-textual-column">
                                     <a href="<c:url value="/home/contract/page-list.html?audit=${param.audit}&amp;status=f2xx&amp;sortDirection=2&amp;test=${failedTestByPageInfo.testLabel}"/>">

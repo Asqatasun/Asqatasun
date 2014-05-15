@@ -60,10 +60,11 @@ public final class FailedTestInfoFactory {
      * @param testCode
      * @param testLabel
      * @param pageCounter
+     * @param testLevelCode
      * @return
      */
-    public FailedTestInfo getFailedTestInfo(String testCode, String testLabel, Long pageCounter) {
-        return new FailedTestInfoImpl(testCode, testLabel, pageCounter);
+    public FailedTestInfo getFailedTestInfo(String testCode, String testLabel, Long pageCounter, String testLevelCode) {
+        return new FailedTestInfoImpl(testCode, testLabel, pageCounter, testLevelCode);
     }
 
 }
