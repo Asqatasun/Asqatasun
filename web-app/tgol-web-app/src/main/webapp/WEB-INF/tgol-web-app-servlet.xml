@@ -15,7 +15,7 @@
 
     <!-- This annotation needs to be defined in the servlet context to be applied
     at the controller level -->
-    <security:global-method-security secured-annotations="enabled"
+    <security:global-method-security 
             access-decision-manager-ref="accessDecisionManager"/>
 
     <mvc:annotation-driven />
