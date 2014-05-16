@@ -5,7 +5,6 @@
         <groupId>org.opens</groupId>
         <artifactId>rules</artifactId>
         <version>1.0.1</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>tanaguru-rgaa2.2-resources</artifactId>
