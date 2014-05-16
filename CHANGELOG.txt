@@ -1,4 +1,30 @@
 --------------------------
+Tanaguru 3.0.2, 2014-05-16
+--------------------------
+Bugs:
+#71 : Crawl parameters: included URL pattern is not shown in audit details (https://github.com/Tanaguru/Tanaguru/issues/71)
+
+Features :
+#74 : Top 5 invalid tests: add level of test (https://github.com/Tanaguru/Tanaguru/issues/73)
+#73 : Add link to contrast finder (https://github.com/Tanaguru/Tanaguru/issues/73)
+#68 : List of pages invalidating a given test: enhance links (https://github.com/Tanaguru/Tanaguru/issues/68) 
+#67 : List of pages invalidating a given test: add test label (https://github.com/Tanaguru/Tanaguru/issues/67)
+#66 : Fix weighted formula (https://github.com/Tanaguru/Tanaguru/issues/67)
+#65 : Add UnicityChecker (https://github.com/Tanaguru/Tanaguru/issues/65) 
+#64 : Number of "pages tested" is not the good one (https://github.com/Tanaguru/Tanaguru/issues/64)
+Manage levels more generically (level 1,2,3) and delegate the naming to the referential i18n project
+
+--------------------------
+Tanaguru 3.0.1, 2014-04-24
+--------------------------
+Bugs:
+- Handle rel canonical tags with relative Urls on crawl
+
+Features :
+- update table representation for non canonical pages :only display link and rank
+- Add the inclusion option to the crawler #59 
+
+--------------------------
 Tanaguru 3.0.0, 2014-02-19
 --------------------------
 Bugs :

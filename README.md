@@ -67,20 +67,21 @@ Or you can send an email to
 
 ## Content of this (last) version
 
-Bugs :
+Bugs:
 
-- [#47](https://github.com/Tanaguru/Tanaguru/issues/47) : The language detection tests return bad results for uppercase submitted text
+- [#71](https://github.com/Tanaguru/Tanaguru/issues/71) : Crawl parameters: included URL pattern is not shown in audit details
 
-Features : 
+Features :
 
-- Rgaa 2.2 referential full supported
-- Postgresql management (creation and insertion scripts)
-- Crawl optimisations (deal with canonical, improve fetch counting, improve fetch of testable data)
-- [#50](https://github.com/Tanaguru/Tanaguru/issues/50) : Provide a way to set-up whether the cookies have to be considered while crawling
-- [#49](https://github.com/Tanaguru/Tanaguru/issues/49) : [SEO 6.4.1] For a given title value, sort URLs
-- [#46](https://github.com/Tanaguru/Tanaguru/issues/46) : Override default user agent used by apache library to test URL before launching effectively the audit
-- [#43](https://github.com/Tanaguru/Tanaguru/issues/43) : Disable the load of Css content for audit of SEO type
-- [#37](https://github.com/Tanaguru/Tanaguru/issues/37) : Mail server is not configurable
+- [#74](https://github.com/Tanaguru/Tanaguru/issues/74) : Top 5 invalid tests: add level of test
+- [#73](https://github.com/Tanaguru/Tanaguru/issues/73) : Add link to contrast finder
+- [#68](https://github.com/Tanaguru/Tanaguru/issues/68) : List of pages invalidating a given test: enhance links
+- [#67](https://github.com/Tanaguru/Tanaguru/issues/67) : List of pages invalidating a given test: add test label
+- [#66](https://github.com/Tanaguru/Tanaguru/issues/66) : Fix weighted formula
+- [#65](https://github.com/Tanaguru/Tanaguru/issues/65) : Add UnicityChecker
+- [#64](https://github.com/Tanaguru/Tanaguru/issues/65) : Number of "pages tested" is not the good one
+- Manage levels more generically (level 1,2,3) and delegate the naming to the referential i18n project
+
 
 ## Other opensource tools
 
