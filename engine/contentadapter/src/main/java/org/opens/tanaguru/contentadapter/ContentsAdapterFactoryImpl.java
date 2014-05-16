@@ -21,7 +21,7 @@
  */
 package org.opens.tanaguru.contentadapter;
 
-import java.util.List;
+import java.util.Collection;
 import org.opens.tanaguru.contentadapter.util.AdaptationActionVoter;
 import org.opens.tanaguru.entity.audit.Content;
 
@@ -47,7 +47,7 @@ public class ContentsAdapterFactoryImpl implements ContentsAdapterFactory {
 
     @Override
     public ContentsAdapter create(
-            List<Content> contentList,
+            Collection<Content> contentList,
             boolean writeCleanHtmlInFile,
             String tempFolderRootPath,
             HTMLCleaner htmlCleaner,

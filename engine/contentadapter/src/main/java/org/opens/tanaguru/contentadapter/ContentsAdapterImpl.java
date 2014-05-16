@@ -24,10 +24,7 @@ package org.opens.tanaguru.contentadapter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.contentadapter.html.AbstractHTMLCleaner;
@@ -43,17 +40,17 @@ import org.opens.tanaguru.entity.audit.SSP;
  */
 public class ContentsAdapterImpl implements ContentsAdapter {
 
-    private List<Content> contentList;
+    private Collection<Content> contentList;
     private HTMLCleaner htmlCleaner;
     private HTMLParser htmlParser;
-    private List<Content> result;
+    private Collection<Content> result;
     private Boolean writeCleanHtmlInFile = false;
     private String tempFolderRootPath = "/var/tmp";
     private boolean xmlizeContent = false;
     private boolean parseAndRetrievelRelatedContent = true;
 
     ContentsAdapterImpl(
-            List<Content> contentList, 
+            Collection<Content> contentList, 
             boolean writeCleanHtmlInFile, 
             String tempFolderRootPath, 
             HTMLCleaner htmlCleaner, 
@@ -71,7 +68,7 @@ public class ContentsAdapterImpl implements ContentsAdapter {
     }
 
     @Override
-    public List<Content> getResult() {
+    public Collection<Content> getResult() {
         return result;
     }
 
@@ -80,8 +77,8 @@ public class ContentsAdapterImpl implements ContentsAdapter {
         result = run(contentList);
     }
 
-    private List<Content> run(List<Content> contentList) {
-        List<Content> localResult = new ArrayList<Content>();
+    private Collection<Content> run(Collection<Content> contentList) {
+        Collection<Content> localResult = new ArrayList<Content>();
         for (Content content : contentList) {
             // Unreachable resources (404 error) are saved in the list for reports
             // We only handle here the fetched content (HttpStatus=200)

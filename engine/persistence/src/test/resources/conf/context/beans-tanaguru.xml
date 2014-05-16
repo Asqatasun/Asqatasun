@@ -12,18 +12,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     <bean id="criterionDAO" class="org.opens.tanaguru.entity.dao.reference.CriterionDAOImpl"/>
     <bean id="levelDAO" class="org.opens.tanaguru.entity.dao.reference.LevelDAOImpl"/>
     <bean id="referenceDAO" class="org.opens.tanaguru.entity.dao.reference.ReferenceDAOImpl"/>
-    <bean id="testDAO" class="org.opens.tanaguru.entity.dao.reference.TestDAOImpl">
-        <property name="goldLevelCodeList">
-            <list>
-                <value>Or</value>
-            </list>
-        </property>
-        <property name="silverLevelCodeList">
-            <list>
-                <value>Ar</value>
-            </list>
-        </property>
-    </bean>
+    <bean id="testDAO" class="org.opens.tanaguru.entity.dao.reference.TestDAOImpl"/>
     <bean id="themeDAO" class="org.opens.tanaguru.entity.dao.reference.ThemeDAOImpl"/>
     <bean id="scopeDAO" class="org.opens.tanaguru.entity.dao.reference.ScopeDAOImpl"/>
     <bean id="webresourceDAO" class="org.opens.tanaguru.entity.dao.subject.WebResourceDAOImpl"/>

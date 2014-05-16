@@ -37,6 +37,7 @@ import org.opens.tgol.presentation.data.FailedThemeInfo;
 import org.opens.tgol.presentation.data.ResultCounter;
 import org.opens.tgol.presentation.factory.AuditStatisticsFactory;
 import org.opens.tgol.presentation.factory.ResultCounterFactory;
+import org.opens.tgol.util.HttpStatusCodeFamily;
 import org.opens.tgol.util.TgolKeyStore;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -45,7 +46,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-/** 
+/**
  *
  * @author jkowalczyk
  */
@@ -53,18 +54,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AuditSynthesisController extends AuditDataHandlerController {
 
     private static final Logger LOGGER = Logger.getLogger(AuditSynthesisController.class);
-
     private int nbOfDisplayedFailedTest = 5;
+
     public void setNbOfDisplayedFailedTest(int nbOfDisplayedFailedTest) {
         this.nbOfDisplayedFailedTest = nbOfDisplayedFailedTest;
     }
-
     private int nbOfDisplayedFailedPages = 10;
+
     public void setNbOfDisplayedFailedPages(int nbOfDisplayedFailedPages) {
         this.nbOfDisplayedFailedPages = nbOfDisplayedFailedPages;
     }
-
     private List<String> authorizedScopeForSynthesis = new ArrayList<String>();
+
     public void setAuthorizedScopeForSynthesis(List<String> authorizedScopeForSynthesis) {
         this.authorizedScopeForSynthesis = authorizedScopeForSynthesis;
     }
@@ -78,15 +79,15 @@ public class AuditSynthesisController extends AuditDataHandlerController {
             return false;
         }
         String scope = getActDataService().getActFromAudit(audit).getScope().getCode().name();
-        return (authorizedScopeForSynthesis.contains(scope))? true : false;
+        return (authorizedScopeForSynthesis.contains(scope)) ? true : false;
     }
-    
+
     public AuditSynthesisController() {
         super();
     }
 
     /**
-     * 
+     *
      * @param request
      * @param response
      * @return
@@ -109,13 +110,13 @@ public class AuditSynthesisController extends AuditDataHandlerController {
             if (isAuthorizedScopeForSynthesis(audit)) {
                 Contract contract = retrieveContractFromAudit(audit);
                 model.addAttribute(
-                        TgolKeyStore.CONTRACT_ID_KEY,contract.getId());
+                        TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
                 model.addAttribute(
-                        TgolKeyStore.CONTRACT_NAME_KEY,contract.getLabel());
+                        TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
                 model.addAttribute(TgolKeyStore.AUDIT_ID_KEY, auditId);
                 model.addAttribute(TgolKeyStore.WEBRESOURCE_ID_KEY, audit.getSubject().getId());
                 return prepareSynthesisSiteData(audit, model);
-                
+
             } else {
                 throw new ForbiddenPageException();
             }
@@ -125,7 +126,7 @@ public class AuditSynthesisController extends AuditDataHandlerController {
     }
 
     /**
-     * 
+     *
      * @param request
      * @param response
      * @return
@@ -148,20 +149,21 @@ public class AuditSynthesisController extends AuditDataHandlerController {
             if (isAuthorizedScopeForSynthesis(audit)) {
                 Contract contract = retrieveContractFromAudit(audit);
                 model.addAttribute(
-                        TgolKeyStore.CONTRACT_ID_KEY,contract.getId());
+                        TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
                 model.addAttribute(
-                        TgolKeyStore.CONTRACT_NAME_KEY,contract.getLabel());
+                        TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
                 model.addAttribute(TgolKeyStore.AUDIT_ID_KEY, auditId);
+                model.addAttribute(TgolKeyStore.REFERENTIAL_CD_KEY, getParameterDataService().getReferentialKeyFromAudit(audit));
                 model.addAttribute(TgolKeyStore.WEBRESOURCE_ID_KEY, audit.getSubject().getId());
-                Site site = (Site)audit.getSubject();
+                Site site = (Site) audit.getSubject();
                 addAuditStatisticsToModel(site, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE);
                 model.addAttribute(TgolKeyStore.FAILED_TEST_INFO_BY_OCCURRENCE_SET_KEY,
-                getWebResourceDataService().getFailedTestByOccurrence(site, audit, -1));
+                        getWebResourceDataService().getFailedTestByOccurrence(site, audit, -1));
                 model.addAttribute(TgolKeyStore.HAS_SITE_SCOPE_TEST_KEY,
                         getWebResourceDataService().hasAuditSiteScopeTest(site, getSiteScope()));
                 model.addAttribute(TgolKeyStore.STATUS_KEY, computeAuditStatus(site.getAudit()));
                 return TgolKeyStore.FAILED_TEST_LIST_VIEW_NAME;
-                
+
             } else {
                 throw new ForbiddenPageException();
             }
@@ -169,11 +171,11 @@ public class AuditSynthesisController extends AuditDataHandlerController {
             throw new ForbiddenUserException();
         }
     }
-    
+
     /**
      * This method prepares data for the synthesis page. Only multi pages audit
      * are considered here
-     * 
+     *
      * @param audit
      * @param model
      * @return
@@ -182,7 +184,7 @@ public class AuditSynthesisController extends AuditDataHandlerController {
     private String prepareSynthesisSiteData(Audit audit, Model model) {
         // Add this step, we are sure that the audit subject 
         // is a site, we can trustly cast it
-        Site site = (Site)audit.getSubject();
+        Site site = (Site) audit.getSubject();
         addAuditStatisticsToModel(site, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE);
 
         Map<Theme, ResultCounter> top5SortedThemeMap =
@@ -198,6 +200,13 @@ public class AuditSynthesisController extends AuditDataHandlerController {
             top5SortedThemeMap.put(AuditStatisticsFactory.getInstance().getTheme(tfi.getThemeId()), failedCounter);
         }
 
+        model.addAttribute(
+                TgolKeyStore.AUDITED_PAGES_COUNT_KEY,
+                getWebResourceDataService().getWebResourceCountByAuditAndHttpStatusCode(
+                audit.getId(),
+                HttpStatusCodeFamily.f2xx,
+                null,
+                null).intValue());
         model.addAttribute(TgolKeyStore.TOP5_SORTED_THEME_MAP, top5SortedThemeMap);
         model.addAttribute(TgolKeyStore.FAILED_PAGE_INFO_BY_TEST_SET_KEY,
                 getWebResourceDataService().getFailedWebResourceSortedByTest(site, audit, nbOfDisplayedFailedPages));

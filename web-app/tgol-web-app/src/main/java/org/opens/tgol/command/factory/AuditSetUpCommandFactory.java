@@ -39,6 +39,7 @@ import org.opens.tgol.form.NumericalFormField;
 import org.opens.tgol.form.SelectFormField;
 import org.opens.tgol.form.parameterization.AuditSetUpFormField;
 import org.opens.tgol.form.parameterization.helper.AuditSetUpFormFieldHelper;
+import org.opens.tgol.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -49,23 +50,10 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 public final class AuditSetUpCommandFactory {
 
     /**
-     * The code that identified the level Parameter
-     */
-    private String levelParameterCode = "LEVEL";
-
-    public String getLevelParameterCode() {
-        return levelParameterCode;
-    }
-
-    public void setLevelParameterCode(String levelParameterCode) {
-        this.levelParameterCode = levelParameterCode;
-    }
-
-    /**
      *
      */
     public ParameterElement getLevelParameterElement() {
-        return parameterElementDataService.getParameterElement(levelParameterCode);
+        return parameterElementDataService.getParameterElement(TgolKeyStore.LEVEL_PARAM_KEY);
     }
     /**
      *
@@ -181,7 +169,7 @@ public final class AuditSetUpCommandFactory {
         pageAuditSetUpCommand.setUrlList(urlList);
         for (Parameter param : auditParamset) {
             String paramCode = param.getParameterElement().getParameterElementCode();
-            if (paramCode.equals(levelParameterCode)) {
+            if (paramCode.equals(TgolKeyStore.LEVEL_PARAM_KEY)) {
                 pageAuditSetUpCommand.setLevel(param.getValue());
             } else {
                 pageAuditSetUpCommand.setAuditParameter(paramCode, param.getValue());
@@ -380,16 +368,16 @@ public final class AuditSetUpCommandFactory {
             Contract contract,
             List<SelectFormField> levelFormFieldList,
             AuditSetUpCommand auditSetUpCommand) {
-        ParameterElement levelParameterElement = getLevelParameterElement();
+
         // We retrieve the default value of the Parameter associated 
         // with the level ParameterElement
-        String defaultValue = getParameterDataService().
-                getDefaultParameter(levelParameterElement).getValue();
+        String defaultValue = getParameterDataService().getDefaultLevelParameter().getValue();
+        
         Logger.getLogger(this.getClass()).debug("default level value " + defaultValue);
         ScopeEnum scope = auditSetUpCommand.getScope();
         boolean isDefaultValue = true;
         if (scope == ScopeEnum.DOMAIN || scope == ScopeEnum.SCENARIO) {
-            String lastUserValue = retrieveParameterValueFromLastAudit(contract, levelParameterElement, auditSetUpCommand);
+            String lastUserValue = retrieveParameterValueFromLastAudit(contract, getLevelParameterElement(), auditSetUpCommand);
             Logger.getLogger(this.getClass()).debug("lastUserValue " + lastUserValue);
             if (lastUserValue != null && !StringUtils.equals(lastUserValue, defaultValue)) {
                 // we override the auditParameter with the last user value

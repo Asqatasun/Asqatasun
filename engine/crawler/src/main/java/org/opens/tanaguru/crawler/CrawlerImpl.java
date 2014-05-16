@@ -440,14 +440,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
             int httpStatusCode,
             Page page) {
         webResourceDataService.saveOrUpdate(page);
-        int status = httpStatusCode;
-        if (isRelCanonicalPage(ssp)) {
-            // If true, the HttpStatusCode is set arbitrarely to 900 and thus the
-            // page won't be tested while processing
-            LOGGER.info("Fetching page with rel canonical " + uri + ". Set Http status to 900");
-            status = REL_CANONICAL_PAGE_FAKE_HTTP_STATUS;
-        }
-        saveAndPersistFetchDataToContent(ssp, uri, status);
+        saveAndPersistFetchDataToContent(ssp, uri, httpStatusCode);
     }
 
     /**

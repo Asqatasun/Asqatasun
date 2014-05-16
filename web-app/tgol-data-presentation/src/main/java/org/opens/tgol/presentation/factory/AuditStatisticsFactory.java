@@ -47,7 +47,6 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class AuditStatisticsFactory {
 
-    private static final String PARAM_SEPARATOR = ";";
     private ActDataService actDataService;
 
     @Autowired
@@ -98,16 +97,7 @@ public class AuditStatisticsFactory {
             sortThemeList(entry);
         }
     }
-    private String levelParameter = "LEVEL";
-
-    public void setLevelParameter(String levelParameter) {
-        this.levelParameter = levelParameter;
-    }
-    private String referentialParameter = "referential";
-
-    public String getReferentialParameter() {
-        return referentialParameter;
-    }
+    
     /**
      * The unique shared instance of ContractInfoFactory
      */
@@ -215,22 +205,15 @@ public class AuditStatisticsFactory {
         for (Map.Entry<String, String> entry : parametersToDisplay.entrySet()) {
             for (Parameter param : auditParamSet) {
                 if (entry.getKey().equals(param.getParameterElement().getParameterElementCode())) {
-                    //specific case of level parameter
-                    if (entry.getKey().equals(levelParameter)) {
-                        String[] refAndLevel = param.getValue().split(PARAM_SEPARATOR);
-                        auditParameters.put(
-                                referentialParameter,
-                                refAndLevel[0]);
-                        auditParameters.put(
-                                entry.getValue(),
-                                refAndLevel[1]);
-                    } else {
-                        auditParameters.put(
+                    auditParameters.put(
                                 entry.getValue(),
                                 param.getValue());
-                    }
                 }
             }
+        }
+        if (!parametersToDisplay.isEmpty()) {
+            auditParameters.put(TgolKeyStore.REFERENTIAL_PARAM_KEY, 
+                            parameterDataService.getReferentialKeyFromAudit(audit));
         }
         return auditParameters;
     }
@@ -365,35 +348,12 @@ public class AuditStatisticsFactory {
      * @return the list of themes for a given audit
      */
     private Collection<Theme> getThemeListFromAudit(Audit audit) {
-        String ref = extractRefFromAuditParameter(audit);
+        String ref = parameterDataService.getReferentialKeyFromAudit(audit);
         if (ref != null) {
             return fullThemeMapByRef.get(ref);
         } else {
             return fullThemeMapByRef.get(fullThemeMapByRef.keySet().iterator().next());
         }
-    }
-
-    /**
-     * Extracts the referential value from the LEVEL PARAMETER. This parameter
-     * is specific because two parameters are associated : the referential and
-     * the level. The two values are separated by a ; and the first value is the
-     * referential, the second the level.
-     *
-     * @param audit
-     * @return
-     */
-    private String extractRefFromAuditParameter(Audit audit) {
-        Parameter refParameter = null;
-        for (Parameter param : parameterDataService.getParameterSetFromAudit(audit)) {
-            if (param.getParameterElement().getParameterElementCode().equalsIgnoreCase(levelParameter)) {
-                refParameter = param;
-                break;
-            }
-        }
-        if (refParameter != null) {
-            return refParameter.getValue().split(PARAM_SEPARATOR)[0];
-        }
-        return null;
     }
 
     /**

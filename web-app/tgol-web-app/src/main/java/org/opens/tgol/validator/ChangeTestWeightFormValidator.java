@@ -39,8 +39,7 @@ public class ChangeTestWeightFormValidator implements Validator {
             "test-weight.invalidElements";
     private static final String WRONG_VALUE_MSG_BUNDLE_KEY =
             "test-weight.invalidElement";
-    private static final String WEIGHT_VALUE_REGEXP =
-            "([0-1]([.,][0-9])?)|(2([,.]0)?)";
+    private static final String WEIGHT_VALUE_REGEXP ="[1-9]";
     private final Pattern weightCheckerPattern = Pattern.compile(WEIGHT_VALUE_REGEXP);
     
     @Override

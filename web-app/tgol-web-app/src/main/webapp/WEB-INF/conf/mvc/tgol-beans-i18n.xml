@@ -14,11 +14,6 @@
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basenames">
             <list>
-                <!--accessiweb2.1 i18n files -->
-                <value>i18n/referential-aw21-I18N</value>
-                <value>i18n/theme-aw21-I18N</value>
-                <value>i18n/criterion-aw21-I18N</value>
-                <value>i18n/rule-aw21-I18N</value>
                 
                 <!--accessiweb2.2 i18n files -->
                 <value>i18n/referential-aw22-I18N</value>
@@ -64,7 +59,6 @@
                 <value>i18n/home-page-I18N</value>
                 <value>i18n/loading-error-page-I18N</value>
                 <value>i18n/login-page-I18N</value>
-                <value>i18n/level-I18N</value>
                 <value>i18n/manage-contracts-I18N</value>
                 <value>i18n/mass-audit-set-up-I18N</value>
                 <value>i18n/max-file-size-error-page-I18N</value>
@@ -74,8 +68,8 @@
                 <value>i18n/parameters-I18N</value>
                 <value>i18n/quota-by-ip-exceeded-page-I18N</value>
                 <value>i18n/quota-exceeded-page-I18N</value>
-                <value>i18n/referential-I18N</value>
                 <value>i18n/result-page-I18N</value>
+                <value>i18n/result-page-evidence-element-I18N</value>
                 <value>i18n/rule-error-I18N</value>
                 <value>i18n/rule-result-I18N</value>
                 <value>i18n/scenario-management-I18N</value>

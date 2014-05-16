@@ -97,7 +97,7 @@
                                 <c:forEach items="${createContractCommand.referentialMap}" var="ref" varStatus="pRefInput">
                                     <span class="edit-contract-ref">
                                     <c:set var="refKey">${ref.key}</c:set>
-                                    <label id="${refKey}" for="referentialMap${refKey}1" class="edit-contract-label"><fmt:message key="edit-contract.${refKey}"/></label>
+                                    <label id="${refKey}" for="referentialMap${refKey}1" class="edit-contract-label"><fmt:message key="${refKey}"/></label>
                                     <form:checkbox path="referentialMap[${refKey}]" cssErrorClass="error" value="${ref.value}" />
                                     <form:errors path="referentialMap[${refKey}]" cssClass="alert-message error" />
                                     </span>

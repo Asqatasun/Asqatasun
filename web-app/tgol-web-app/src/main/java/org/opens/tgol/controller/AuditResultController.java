@@ -21,7 +21,6 @@
  */
 package org.opens.tgol.controller;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -84,6 +83,16 @@ public class AuditResultController extends AuditDataHandlerController {
     public final void setFormFieldBuilderList(final List<FormFieldBuilder> formFieldBuilderList) {
         this.sortFormFieldBuilderList = formFieldBuilderList;
     }
+    
+    /**
+     * 
+     * @param formFieldBuilder 
+     */
+    public final void addFormFieldBuilder(final FormFieldBuilder formFieldBuilder) {
+        if (sortFormFieldBuilderList != null) {
+            this.sortFormFieldBuilderList.add(formFieldBuilder);
+        }
+    }
 
     private ActionHandler actionHandler;
     public ActionHandler getActionHandler() {
@@ -112,24 +121,6 @@ public class AuditResultController extends AuditDataHandlerController {
         this.testResultSortKey = testResultSortKey;
     }
 
-    private String referentialCode = "referential";
-    public String getReferentialCode() {
-        return referentialCode;
-    }
-
-    public void setReferentialCode(String referentialCode) {
-        this.referentialCode = referentialCode;
-    }
-    
-    private String levelParameterCode = "LEVEL";
-    public String getLevelParameterCode() {
-        return levelParameterCode;
-    }
-
-    public void setLevelParameterCode(String levelParameterCode) {
-        this.levelParameterCode = levelParameterCode;
-    }
-    
     private List<String> authorizedRefForCriterionViewList;
     public List<String> getAuthorizedRefForCriterionViewList() {
         return authorizedRefForCriterionViewList;
@@ -463,7 +454,7 @@ public class AuditResultController extends AuditDataHandlerController {
         // Meta-statistics have been added to the method previously
         String referentialParameter = 
                     ((AuditStatistics)model.asMap().get(TgolKeyStore.STATISTICS_KEY)).
-                        getParametersMap().get(referentialCode);
+                        getParametersMap().get(TgolKeyStore.REFERENTIAL_PARAM_KEY);
         AuditResultSortCommand asuc;
         List<FormField> formFieldList;
         if (auditResultSortCommand == null) {

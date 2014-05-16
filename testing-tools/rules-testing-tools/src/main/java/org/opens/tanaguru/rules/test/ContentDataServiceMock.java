@@ -105,12 +105,12 @@ public class ContentDataServiceMock implements ContentDataService{
     }
 
     @Override
-    public List<Long> getSSPFromWebResource(Long webResourceId, int httpStatusCode, int start, int chunkSize) {
+    public List<Long> getSSPIdsFromWebResource(Long webResourceId, int httpStatusCode, int start, int chunkSize) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public List<Long> getRelatedContentFromWebResource(Long webResourceId, int start, int chunkSize) {
+    public List<Long> getRelatedContentIdsFromWebResource(Long webResourceId, int start, int chunkSize) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -201,6 +201,16 @@ public class ContentDataServiceMock implements ContentDataService{
 
     @Override
     public void deleteRelatedContentFromContent(Content content) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Collection<Content> getSSPFromWebResource(Long webResourceId, Long startValue, int windowSize, boolean acceptContentWithNullDom) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Collection<Content> getSSPWithRelatedContentFromWebResource(Long webResourceId, Long startValue, int windowSize, boolean acceptContentWithNullDom) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

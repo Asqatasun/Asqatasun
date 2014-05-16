@@ -56,7 +56,7 @@ import org.springframework.ui.Model;
 public class AuditLauncherController extends AuditDataHandlerController {
 
     private static final Logger LOGGER = Logger.getLogger(AuditLauncherController.class);
-    private static final String LEVEL_PARAM_KEY = "LEVEL";
+
     private static final String PROXY_HOST_PARAM_KEY = "PROXY_HOST";
     private static final String PROXY_PORT_PARAM_KEY = "PROXY_PORT";
     private static final String DEPTH_PARAM_KEY = "DEPTH";
@@ -68,6 +68,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
     private static final String PROXY_PORT_CONF_KEY = "proxyPort";
     private static final String PROXY_EXCLUSION_URL_CONF_KEY = "proxyExclusionUrl";
     private static final String EMAIL_SENT_TO_USER_EXCLUSION_CONF_KEY = "emailSentToUserExclusionList";
+    
     private String groupePagesName = "";
     /**
      * The TanaguruOrchestrator instance needed to launch the audit process
@@ -484,9 +485,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
      * @return
      */
     private Set<Parameter> setLevelParameter(Set<Parameter> paramSet, String level) {
-        ParameterElement levelParameterElement =
-                parameterElementDataService.getParameterElement(LEVEL_PARAM_KEY);
-        Parameter levelParameter = getParameterDataService().getParameter(levelParameterElement, level);
+        Parameter levelParameter = getParameterDataService().getLevelParameter(level);
         paramSet = getParameterDataService().updateParameter(paramSet, levelParameter);
         return paramSet;
     }

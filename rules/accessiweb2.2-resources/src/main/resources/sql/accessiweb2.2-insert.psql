@@ -5,7 +5,7 @@ SET CONSTRAINTS ALL DEFERRED;
 
 
 INSERT INTO "reference" VALUES 
-(4,'AW22',NULL,'Accessiweb 2.2',4,'http://www.accessiweb.org/index.php/accessiweb-22-english-version.html');
+(4,'AW22',NULL,'Accessiweb 2.2',4,'http://www.accessiweb.org/index.php/accessiweb-22-english-version.html',2);
 
 
 INSERT INTO "theme" VALUES 

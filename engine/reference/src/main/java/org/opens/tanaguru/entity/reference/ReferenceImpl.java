@@ -54,7 +54,10 @@ public class ReferenceImpl implements Reference, Serializable {
     private int rank;
     @Column(name = "Url", nullable = true)
     private String url;
-
+    @ManyToOne
+    @JoinColumn(name = "Id_Default_Level")
+    private LevelImpl defaultLevel;
+    
     public ReferenceImpl() {
         super();
     }
@@ -103,6 +106,12 @@ public class ReferenceImpl implements Reference, Serializable {
     public int getRank() {
         return rank;
     }
+    
+    @Override
+    @XmlElementRef(type = org.opens.tanaguru.entity.reference.LevelImpl.class)
+    public Level getDefaultLevel() {
+        return defaultLevel;
+    }
 
     @Override
     public void setCode(String code) {
@@ -145,4 +154,10 @@ public class ReferenceImpl implements Reference, Serializable {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    @Override
+    public void setDefaultLevel(Level defaultLevel) {
+        this.defaultLevel = (LevelImpl)defaultLevel;
+    }
+
 }

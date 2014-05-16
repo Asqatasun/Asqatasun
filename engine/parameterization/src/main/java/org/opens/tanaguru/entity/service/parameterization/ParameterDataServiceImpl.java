@@ -39,6 +39,21 @@ import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 public class ParameterDataServiceImpl extends AbstractGenericDataService<Parameter, Long>
         implements ParameterDataService {
 
+    private static String DEFAULT_LEVEL_AND_REF_PARAM_KEY = "LEVEL";
+    private static int REF_INDEX_IN_PARAM = 0;
+    private static int LEVEL_INDEX_IN_PARAM = 1;
+    
+    private Parameter defaultLevelParameter;
+    
+    private String levelAndRefParameterKey = DEFAULT_LEVEL_AND_REF_PARAM_KEY;
+    public String getLevelAndRefParameterKey() {
+        return levelAndRefParameterKey;
+    }
+
+    public void setLevelAndRefParameterKey(String levelAndRefParameterKey) {
+        this.levelAndRefParameterKey = levelAndRefParameterKey;
+    }
+    
     @Override
     public Parameter create(ParameterElement parameterElement, String value, Audit audit) {
         return ((ParameterFactory) entityFactory).createParameter(parameterElement, value, audit);
@@ -117,10 +132,38 @@ public class ParameterDataServiceImpl extends AbstractGenericDataService<Paramet
     public Parameter getDefaultParameter(ParameterElement parameterElement) {
         return ((ParameterDAO) entityDao).findDefaultParameter(parameterElement);
     }
+    
+    @Override
+    public Parameter getDefaultLevelParameter() {
+        if (defaultLevelParameter == null) {
+            for (Parameter param : getDefaultParameterSet()) {
+                if (param.getParameterElement().getParameterElementCode().equals(DEFAULT_LEVEL_AND_REF_PARAM_KEY)) {
+                    defaultLevelParameter = param;
+                    break;
+                }
+            }
+        }
+        return defaultLevelParameter;
+    }
 
     @Override
     public Set<Parameter> getParameterSet(ParameterFamily parameterFamily, Collection<Parameter> paramSet) {
         return ((ParameterDAO) entityDao).findParametersFromParameterFamily(parameterFamily, paramSet);
+    }
+
+    @Override
+    public String getReferentialKeyFromAudit(Audit audit) {
+        return getParameter(audit, levelAndRefParameterKey).getValue().split(";")[REF_INDEX_IN_PARAM];
+    }
+
+    @Override
+    public String getLevelKeyFromAudit(Audit audit) {
+        return getParameter(audit, levelAndRefParameterKey).getValue().split(";")[LEVEL_INDEX_IN_PARAM];
+    }
+    
+    @Override
+    public Parameter getLevelParameter(String levelKey) {
+        return ((ParameterDAO) entityDao).findLevelParameter(levelKey);
     }
 
 }

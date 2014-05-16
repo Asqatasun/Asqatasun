@@ -63,6 +63,13 @@ public interface ParameterDataService extends GenericDataService<Parameter, Long
      * element
      */
     Parameter getParameter(Audit audit, String parameterElementCode);
+    
+    /**
+     * 
+     * @param levelKey
+     * @return the parameter for the given level key
+     */
+    Parameter getLevelParameter(String levelKey);
 
     /**
      * @param parameterFamily
@@ -91,12 +98,30 @@ public interface ParameterDataService extends GenericDataService<Parameter, Long
      *      the default parameter for a given parameter element.
      */
     Parameter getDefaultParameter(ParameterElement parameterElement);
+    
+    /**
+     * @return
+     *      the default parameter for a given parameter element.
+     */
+    Parameter getDefaultLevelParameter();
 
     /**
      * Retrieve the list of parameters for a given audit
      * @return
      */
     Set<Parameter> getParameterSetFromAudit(Audit audit);
+    
+    /**
+     * Retrieve the referential parameter for a given audit
+     * @return
+     */
+    String getReferentialKeyFromAudit(Audit audit);
+    
+    /**
+     * Retrieve the level parameter for a given audit
+     * @return
+     */
+    String getLevelKeyFromAudit(Audit audit);
 
     /**
      * Update the current paramSet (generally the default one) with other parameters

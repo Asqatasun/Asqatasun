@@ -148,6 +148,12 @@ public final class TestResultFactory {
         } catch (MissingResourceException mre) {
             Logger.getLogger(this.getClass()).warn(mre);
         }
+        try {
+            testResult.setColorTestContrastRatio(representationBundle.
+                getString(testResult.getTestCode()+TestResult.CONTRAST_RATIO_SUFFIX_KEY));
+        } catch (MissingResourceException mre) {
+            Logger.getLogger(this.getClass()).warn(mre);
+        }
         if (hasResultDetails && 
                 (testResult.getResult().equalsIgnoreCase(TestSolution.FAILED.toString()) || 
                 testResult.getResult().equalsIgnoreCase(TestSolution.NEED_MORE_INFO.toString()))) {

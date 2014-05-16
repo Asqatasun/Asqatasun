@@ -96,14 +96,12 @@
         </property>
         <property name="authorizedRefForCriterionViewList">
             <list>
-                <value>AW21</value>
                 <value>AW22</value>
             </list>
         </property>
         <property name="actionHandler" ref="resultActionHandler"/>
         <property name="formFieldBuilderList">
             <list>
-                <ref bean="aw21ThemeSelectFormFieldBuilder"/>
                 <ref bean="aw22ThemeSelectFormFieldBuilder"/>
                 <ref bean="rgaa22ThemeSelectFormFieldBuilder"/>
                 <ref bean="testResultCheckboxFormFieldBuilder"/>
@@ -132,6 +130,9 @@
                 </entry>
                 <entry key="EXCLUSION_REGEXP">
                     <value>exclusion-regexp</value>
+                </entry>
+                <entry key="INCLUSION_REGEXP">
+                    <value>inclusion-regexp</value>
                 </entry>
                 <entry key="DATA_TABLE_MARKER">
                     <value>data-table</value>

@@ -176,7 +176,12 @@ CREATE TABLE IF NOT EXISTS `REFERENCE` (
   `Label` varchar(255) NOT NULL,
   `Rank` int(11) DEFAULT NULL,
   `Url` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`Id_Reference`)
+  `Id_Default_Level` bigint(20) DEFAULT 2,
+  PRIMARY KEY (`Id_Reference`),
+  KEY `fk_Ref_Level` (`Id_Default_Level`),
+      CONSTRAINT `fk_Ref_Level` 
+          FOREIGN KEY Id_Default_Level_Index (`Id_Default_Level`) 
+          REFERENCES `LEVEL` (`Id_Level`),
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 

@@ -19,7 +19,6 @@
  * 
  *  Contact us by mail: open-s AT open-s DOT com
  */
-
 package org.opens.tanaguru.rules.elementchecker.element;
 
 import org.apache.commons.lang3.StringUtils;
@@ -38,7 +37,7 @@ import org.opens.tanaguru.rules.elementchecker.ElementCheckerImpl;
  * by constructor argument (default is passed).
  * The creation of {@link sourceCodeRemark} for each detected element is 
  * optional and may be overridden by constructor argument (default is true).
- * 
+ *
  */
 public class ElementPresenceChecker extends ElementCheckerImpl {
 
@@ -46,68 +45,63 @@ public class ElementPresenceChecker extends ElementCheckerImpl {
      * Determine whether the element has to be present and unique.
      */
     private boolean checkUnicity = false;
-    
     /**
      * Not detected solution. Default is PASSED.
      */
     private TestSolution notDetectedSolution = TestSolution.PASSED;
-
     /**
      * Detected solution. Default is FAILED.
      */
     private TestSolution detectedSolution = TestSolution.FAILED;
-
     /**
      * The message code associated with a processRemark when the element is
      * detected on the page
      */
     private String messageCodeOnElementDetected;
-    
     /**
      * The message code associated with a processRemark when the element is
      * not found on the page
      */
     private String messageCodeOnElementNotDetected;
-    
     /**
-     * The message code associated with a sourceCodeRemark when several elements 
+     * The message code associated with a sourceCodeRemark when several elements
      * are detected and the checkUnicity state is set to true
      */
     private String messageCodeOnMultipleElements;
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param messageCodeOnElementDetected
      * @param messageCodeOnElementNotDetected
      */
     public ElementPresenceChecker(
-            String messageCodeOnElementDetected, 
+            String messageCodeOnElementDetected,
             String messageCodeOnElementNotDetected) {
         super();
         this.messageCodeOnElementDetected = messageCodeOnElementDetected;
         this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
     }
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param messageCodeOnElementDetected
      * @param messageCodeOnElementNotDetected
-     * @param eeAttributeNameList 
+     * @param eeAttributeNameList
      */
     public ElementPresenceChecker(
-            String messageCodeOnElementDetected, 
-            String messageCodeOnElementNotDetected, 
+            String messageCodeOnElementDetected,
+            String messageCodeOnElementNotDetected,
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
         this.messageCodeOnElementDetected = messageCodeOnElementDetected;
         this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
     }
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param detectedSolution
      * @param notDetectedSolution
      * @param messageCodeOnElementDetected
@@ -115,29 +109,29 @@ public class ElementPresenceChecker extends ElementCheckerImpl {
      */
     public ElementPresenceChecker(
             TestSolution detectedSolution,
-            TestSolution notDetectedSolution, 
-            String messageCodeOnElementDetected, 
+            TestSolution notDetectedSolution,
+            String messageCodeOnElementDetected,
             String messageCodeOnElementNotDetected) {
         this.detectedSolution = detectedSolution;
         this.messageCodeOnElementDetected = messageCodeOnElementDetected;
         this.notDetectedSolution = notDetectedSolution;
         this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
     }
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param detectedSolution
      * @param notDetectedSolution
      * @param messageCodeOnElementDetected
      * @param messageCodeOnElementNotDetected
-     * @param eeAttributeNameList 
+     * @param eeAttributeNameList
      */
     public ElementPresenceChecker(
             TestSolution detectedSolution,
-            TestSolution notDetectedSolution, 
-            String messageCodeOnElementDetected, 
-            String messageCodeOnElementNotDetected, 
+            TestSolution notDetectedSolution,
+            String messageCodeOnElementDetected,
+            String messageCodeOnElementNotDetected,
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
         this.detectedSolution = detectedSolution;
@@ -148,7 +142,7 @@ public class ElementPresenceChecker extends ElementCheckerImpl {
 
     /**
      * Constructor.
-     * 
+     *
      * @param checkUnicity
      * @param messageCodeOnElementDetected
      * @param messageCodeOnElementNotDetected
@@ -156,7 +150,7 @@ public class ElementPresenceChecker extends ElementCheckerImpl {
      */
     public ElementPresenceChecker(
             boolean checkUnicity,
-            String messageCodeOnElementDetected, 
+            String messageCodeOnElementDetected,
             String messageCodeOnElementNotDetected,
             String messageCodeOnMultipleElements) {
         super();
@@ -168,17 +162,17 @@ public class ElementPresenceChecker extends ElementCheckerImpl {
 
     /**
      * Constructor.
-     * 
+     *
      * @param checkUnicity
      * @param messageCodeOnElementDetected
      * @param messageCodeOnElementNotDetected
      * @param messageCodeOnMultipleElements
-     * @param eeAttributeNameList 
+     * @param eeAttributeNameList
      */
     public ElementPresenceChecker(
             boolean checkUnicity,
-            String messageCodeOnElementDetected, 
-            String messageCodeOnElementNotDetected, 
+            String messageCodeOnElementDetected,
+            String messageCodeOnElementNotDetected,
             String messageCodeOnMultipleElements,
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
@@ -187,10 +181,10 @@ public class ElementPresenceChecker extends ElementCheckerImpl {
         this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
         this.messageCodeOnMultipleElements = messageCodeOnMultipleElements;
     }
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param checkUnicity
      * @param detectedSolution
      * @param notDetectedSolution
@@ -201,9 +195,9 @@ public class ElementPresenceChecker extends ElementCheckerImpl {
     public ElementPresenceChecker(
             boolean checkUnicity,
             TestSolution detectedSolution,
-            TestSolution notDetectedSolution, 
-            String messageCodeOnElementDetected, 
-            String messageCodeOnElementNotDetected, 
+            TestSolution notDetectedSolution,
+            String messageCodeOnElementDetected,
+            String messageCodeOnElementNotDetected,
             String messageCodeOnMultipleElements) {
         super();
         this.checkUnicity = checkUnicity;
@@ -213,25 +207,25 @@ public class ElementPresenceChecker extends ElementCheckerImpl {
         this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
         this.messageCodeOnMultipleElements = messageCodeOnMultipleElements;
     }
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param checkUnicity
      * @param detectedSolution
      * @param notDetectedSolution
      * @param messageCodeOnElementDetected
      * @param messageCodeOnElementNotDetected
      * @param messageCodeOnMultipleElements
-     * @param eeAttributeNameList 
+     * @param eeAttributeNameList
      */
     public ElementPresenceChecker(
             boolean checkUnicity,
             TestSolution detectedSolution,
-            TestSolution notDetectedSolution, 
-            String messageCodeOnElementDetected, 
-            String messageCodeOnElementNotDetected, 
-            String messageCodeOnMultipleElements, 
+            TestSolution notDetectedSolution,
+            String messageCodeOnElementDetected,
+            String messageCodeOnElementNotDetected,
+            String messageCodeOnMultipleElements,
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
         this.checkUnicity = checkUnicity;
@@ -241,55 +235,55 @@ public class ElementPresenceChecker extends ElementCheckerImpl {
         this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
         this.messageCodeOnMultipleElements = messageCodeOnMultipleElements;
     }
-    
+
     @Override
     public void doCheck(
-            SSPHandler sspHandler, 
-            Elements elements, 
+            SSPHandler sspHandler,
+            Elements elements,
             TestSolutionHandler testSolutionHandler) {
         checkElementPresence(elements, testSolutionHandler);
     }
 
     /**
      * This methods checks whether a given element is present on the page.
-     * 
+     *
      * @param elements
-     * @param testSolutionHandler 
+     * @param testSolutionHandler
      */
     private void checkElementPresence (
-            Elements elements, 
+            Elements elements,
             TestSolutionHandler testSolutionHandler) {
-        
+
         TestSolution checkResult = notDetectedSolution;
-        
+
         if (!elements.isEmpty() && ((!checkUnicity)||(checkUnicity && elements.size() == 1))) {
-            
+
             checkResult = detectedSolution;
-            
+
             if (StringUtils.isNotBlank(messageCodeOnElementDetected)) {
-                
+
                 for (Element el : elements) {
                     createSourceCodeRemark(detectedSolution, el, messageCodeOnElementDetected);
                 }
-                
+
             }
         } else if (checkUnicity && elements.size() > 1 && 
                 StringUtils.isNotBlank(messageCodeOnMultipleElements)) {
             for (Element el : elements) {
                 addSourceCodeRemark(
-                        notDetectedSolution, 
-                        el, 
+                        notDetectedSolution,
+                        el,
                         messageCodeOnMultipleElements);
             }
-            
+
         } else if (StringUtils.isNotBlank(messageCodeOnElementNotDetected)) {
-            
+
             getProcessRemarkService().addProcessRemark(
-                    notDetectedSolution, 
+                    notDetectedSolution,
                     messageCodeOnElementNotDetected);
-            
+
         }
-        
+
         testSolutionHandler.addTestSolution(checkResult);
     }
 

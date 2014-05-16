@@ -101,15 +101,18 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
 
     private static final String TEST_LABEL_FIELD_STR ="t.Label";
     private static final String TEST_CODE_FIELD_STR ="t.Cd_Test";
+    private static final String LEVEL_CODE_FIELD_STR ="l.Cd_Level";
     private static final String TEST_STATISTICS_TABLE_STR = "ts.";
     private static final String TOP_N_BY_TEST_AND_RESULT_TYPE_QUERY = 
             " FROM TEST_STATISTICS as ts, "
             + "TEST as t, "
+            + "LEVEL as l, "
             + "WEB_RESOURCE_STATISTICS as wrs "
             + "WHERE ts.Id_Web_Resource_Statistics=wrs.Id_Web_Resource_Statistics "
             + "AND wrs.Id_Web_Resource=:idWebResource "
             + "AND wrs.Id_Audit=:idAudit "
-            + "AND ts.Id_Test=t.Id_Test ";
+            + "AND ts.Id_Test=t.Id_Test "
+            + "AND t.Id_Level=l.Id_Level ";
 
     private static final String MARK_FIELD_STR = " Mark ";
     private static final String RAW_MARK_FIELD_STR = " Raw_Mark ";
@@ -271,14 +274,16 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
     
     /**
      * Native sql query :
-     * SELECT t.Cd_Test, t.Label, ts.Nb_Failed
+     * SELECT t.Cd_Test, t.Label, ts.Nb_Failed, l.Cd_Level
      * FROM TEST_STATISTICS as ts,
      *       TEST as t,
+     *       LEVEL as l,
      *       WEB_RESOURCE_STATISTICS as wrs
      *       WHERE ts.Id_Web_Resource_Statistics=wrs.Id_Web_Resource_Statistics
      *       AND wrs.Id_Web_Resource=:idWebResource
      *       AND wrs.Id_Audit=:idAudit
      *       AND ts.Id_Test=t.Id_Test 
+     *       AND t.Id_Level=l.Id_Level
      *       ORDER BY ts.Nb_Failed DESC;
      * 
      * where $testSolution is computed on the fly for the given the testSolution
@@ -303,6 +308,8 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         queryString.append(COMA_CHAR);
         queryString.append(TEST_STATISTICS_TABLE_STR);
         queryString = selectNbField(queryString, TestSolution.FAILED);
+        queryString.append(COMA_CHAR);
+        queryString.append(LEVEL_CODE_FIELD_STR);
         queryString.append(TOP_N_BY_TEST_AND_RESULT_TYPE_QUERY);
         queryString.append(ORDER_BY_STR);
         queryString = selectNbField(queryString, TestSolution.FAILED);
@@ -340,7 +347,8 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
                 FailedTestInfo fti = FailedTestInfoFactory.getInstance().getFailedTestInfo(
                         (String)obj[0], 
                         (String)obj[1], 
-                        ((Integer)obj[2]).longValue());
+                        ((Integer)obj[2]).longValue(),
+                        (String)obj[3]);
                 failedTestInfoSet.add(fti);
             }            
         }

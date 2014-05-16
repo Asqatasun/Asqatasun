@@ -1,5 +1,10 @@
 SET foreign_key_checks=0;
 
+INSERT IGNORE INTO `LEVEL` (`Id_Level`, `Cd_Level`, `Label`, `Description`, `Rank`) VALUES
+(1, 'LEVEL_1', 'Level 1', NULL, 1),
+(2, 'LEVEL_2', 'Level 2', NULL, 2),
+(3, 'LEVEL_3', 'Level 3', NULL, 3);
+
 INSERT IGNORE INTO `PARAMETER_FAMILY` (`Id_Parameter_Family`, `Cd_Parameter_Family`, `Description`, `Long_Label`, `Short_Label`) VALUES
 (1, 'CRAWL', 'This parameter family handles all the parameters needed by the crawler component', 'crawl parameters', 'crawl params'),
 (2, 'GENERAL', 'This parameter family handles all the general parameters of the audit', 'general parameters', 'gen params'),
@@ -27,9 +32,9 @@ INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_D
 (3, '20', b'1'),
 (3, '0', b'0'),
 (4, '604800', b'0'),
-(5, 'AW21;Ar', b'0'),
-(5, 'AW21;Bz', b'0'),
-(5, 'AW21;Or', b'0'),
+(5, 'AW21;LEVEL_1', b'0'),
+(5, 'AW21;LEVEL_2', b'0'),
+(5, 'AW21;LEVEL_3', b'0'),
 (1, '100', b'0'),
 (1, '10000', b'1'),
 (1, '20000', b'0'),
@@ -38,15 +43,18 @@ INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_D
 (8, '', b'1'),
 (9, '', b'1'), 
 (4, '86400', b'1'), 
-(5, 'AW22;Ar', b'1'),
-(5, 'AW22;Bz', b'0'),
-(5, 'AW22;Or', b'0'), 
+(5, 'AW22;LEVEL_1', b'0'),
+(5, 'AW22;LEVEL_2', b'1'),
+(5, 'AW22;LEVEL_3', b'0'), 
 (38, '', b'1'),
 (39, '', b'1'), 
 (40, 'true', b'0'), 
 (40, 'false', b'1'),
 (41, 'true', b'1'),
 (41, 'false', b'0'),
-(42, '', b'1');
+(42, '', b'1') ,
+(5, 'RGAA22;LEVEL_1', b'0'),
+(5, 'RGAA22;LEVEL_2', b'0'),
+(5, 'RGAA22;LEVEL_3', b'0');
 
 SET foreign_key_checks=1;
