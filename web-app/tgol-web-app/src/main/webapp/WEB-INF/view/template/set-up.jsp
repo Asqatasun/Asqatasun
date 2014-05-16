@@ -53,10 +53,10 @@
                                 <span class="mandatory">* </span><spring:message code="auditSetUp.enterOneUrl"/>
                             </label>
                             <div class="url-input input">
-                                <form:input path="urlList[0]" cssErrorClass="xxlarge error" cssClass="xxlarge" />
+                                <form:input path="urlList[0]" cssErrorClass="xxlarge error" cssClass="xxlarge" placeholder="http://www.domain.com"/>
                                 <form:errors path="urlList[0]" cssClass="alert-message error" />
                                 <span class="help-block">
-                                    <fmt:message key="required.mandatoryFieldHelpMsg"/>
+                                    <fmt:message key="required.mandatoryFieldHelpMsg"/> (http://www.domain.com)
                                 </span>
                             </div>
                         </c:when>
