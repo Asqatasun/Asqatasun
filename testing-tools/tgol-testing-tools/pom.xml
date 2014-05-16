@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>testing-tools</artifactId>
-        <version>3.0.1</version>
+        <version>3.0.2</version>
     </parent>
     <artifactId>tgol-testing-tools</artifactId>
     <name>tgol-testing-tools</name>

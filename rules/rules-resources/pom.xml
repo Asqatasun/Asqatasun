@@ -4,7 +4,7 @@
      <parent>
         <groupId>org.opens</groupId>
         <artifactId>rules</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
     <artifactId>tanaguru-rules-resources</artifactId>
     <name>rules-resources</name>
