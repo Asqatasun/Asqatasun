@@ -68,7 +68,6 @@ public class Tanaguru implements AuditServiceListener {
     private static final String FILE_AUDIT = "File";
     private static final String SITE_AUDIT = "File";
     
-    private static final String AW21_REF = "AW21";
     private static final String AW22_REF = "AW22";
     private static final String RGAA22_REF = "RGAA22";
     private static String REF = AW22_REF;
@@ -79,6 +78,11 @@ public class Tanaguru implements AuditServiceListener {
     private static final String AA_LEVEL = "AA";
     private static final String GOLD_LEVEL = "Or";
     private static final String AAA_LEVEL = "AAA";
+   
+    private static final String LEVEL_1 = "LEVEL_1";
+    private static final String LEVEL_2 = "LEVEL_1";
+    private static final String LEVEL_3 = "LEVEL_3";
+    
     private static String LEVEL = SILVER_LEVEL;
     
     private static final String LEVEL_PARAMETER_ELEMENT_CODE = "LEVEL";
@@ -348,6 +352,13 @@ public class Tanaguru implements AuditServiceListener {
                 level=AAA_LEVEL;
             }
         }
+        if (level.equalsIgnoreCase(BRONZE_LEVEL) || level.equalsIgnoreCase(A_LEVEL)) {
+            level=LEVEL_1;
+        } else if (level.equalsIgnoreCase(SILVER_LEVEL) || level.equalsIgnoreCase(AA_LEVEL)) {
+            level=LEVEL_2;
+        } else if (level.equalsIgnoreCase(GOLD_LEVEL) || level.equalsIgnoreCase(AAA_LEVEL)) {
+            level=LEVEL_3;
+        } 
         ParameterElement levelParameterElement = parameterElementDataService.getParameterElement(LEVEL_PARAMETER_ELEMENT_CODE);
         Parameter levelParameter = parameterDataService.getParameter(levelParameterElement, ref + ";" + level);
         Set<Parameter> paramSet = parameterDataService.getDefaultParameterSet();
@@ -403,7 +414,6 @@ public class Tanaguru implements AuditServiceListener {
         options.addOption(OptionBuilder.withLongOpt("referential")
                              .withDescription("Referential : \n"
                 + "- \"AW22\" for Accessiweb 2.2 (default)\n"
-                + "- \"AW21\" for Accessiweb 2.1 \n"
                 + "- \"RGA22\" for Rgaa 2.2\n")
                              .hasArg()
                              .isRequired(false)
@@ -467,8 +477,7 @@ public class Tanaguru implements AuditServiceListener {
      * @return whether the given referential is valid
      */
     private static boolean isValidReferential(String ref) {
-        if (StringUtils.equals(ref, AW21_REF) || 
-                StringUtils.equals(ref, AW21_REF) ||
+        if (StringUtils.equals(ref, AW22_REF) ||
                 StringUtils.equals(ref, RGAA22_REF) ) {
             return true;
         }

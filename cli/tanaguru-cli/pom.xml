@@ -105,11 +105,6 @@
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
-            <artifactId>tanaguru-accessiweb2.1</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>${rulesGroupId}</groupId>
             <artifactId>tanaguru-accessiweb2.2</artifactId>
             <scope>runtime</scope>
         </dependency>
