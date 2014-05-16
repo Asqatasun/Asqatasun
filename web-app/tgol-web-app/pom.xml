@@ -98,10 +98,6 @@
         <!-- rules dependencies-->
         <dependency>
             <groupId>${rulesGroupId}</groupId>
-            <artifactId>tanaguru-accessiweb2.1</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${rulesGroupId}</groupId>
             <artifactId>tanaguru-accessiweb2.2</artifactId>
         </dependency>
         <dependency>
