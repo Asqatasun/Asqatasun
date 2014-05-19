@@ -53,7 +53,7 @@
             <div class="audit-nb-of-pages">
                 <c:set var="pageCounterLinkTitle" scope="page">
                     <fmt:message key="resultPage.pageCounter">
-                        <fmt:param value="${auditedPagesCount}"/>
+                        <fmt:param value="${statistics.auditedPageCounter}"/>
                     </fmt:message>
                 </c:set>
                 <c:set var="totalPageCounterTitle" scope="page">

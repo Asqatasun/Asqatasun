@@ -260,4 +260,15 @@ public class AuditStatisticsImpl implements AuditStatistics{
         this.auditScope = auditScope;
     }
 
+    private Integer auditedPageCounter;
+    @Override
+    public Integer getAuditedPageCounter() {
+        return auditedPageCounter;
+    }
+
+    @Override
+    public void setAuditedPageCounter(Integer auditedPageCounter) {
+        this.auditedPageCounter = auditedPageCounter;
+    }
+
 }

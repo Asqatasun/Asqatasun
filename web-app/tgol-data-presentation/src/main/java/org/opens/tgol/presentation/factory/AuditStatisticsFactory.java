@@ -38,6 +38,7 @@ import org.opens.tgol.entity.service.contract.ActDataService;
 import org.opens.tgol.presentation.data.AuditStatistics;
 import org.opens.tgol.presentation.data.AuditStatisticsImpl;
 import org.opens.tgol.presentation.data.ResultCounter;
+import org.opens.tgol.util.HttpStatusCodeFamily;
 import org.opens.tgol.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -142,6 +143,11 @@ public class AuditStatisticsFactory {
         if (webResource instanceof Site) {
             auditStats.setPageCounter(webResourceDataService.getChildWebResourceCount(webResource).intValue());
             audit = webResource.getAudit();
+            auditStats.setAuditedPageCounter(webResourceDataService.getWebResourceCountByAuditAndHttpStatusCode(
+                audit.getId(),
+                HttpStatusCodeFamily.f2xx,
+                null,
+                null).intValue());
         } else if (webResource.getParent() != null) {
             audit = webResource.getParent().getAudit();
         } else {

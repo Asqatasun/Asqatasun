@@ -200,13 +200,6 @@ public class AuditSynthesisController extends AuditDataHandlerController {
             top5SortedThemeMap.put(AuditStatisticsFactory.getInstance().getTheme(tfi.getThemeId()), failedCounter);
         }
 
-        model.addAttribute(
-                TgolKeyStore.AUDITED_PAGES_COUNT_KEY,
-                getWebResourceDataService().getWebResourceCountByAuditAndHttpStatusCode(
-                audit.getId(),
-                HttpStatusCodeFamily.f2xx,
-                null,
-                null).intValue());
         model.addAttribute(TgolKeyStore.TOP5_SORTED_THEME_MAP, top5SortedThemeMap);
         model.addAttribute(TgolKeyStore.FAILED_PAGE_INFO_BY_TEST_SET_KEY,
                 getWebResourceDataService().getFailedWebResourceSortedByTest(site, audit, nbOfDisplayedFailedPages));
