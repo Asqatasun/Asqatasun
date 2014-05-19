@@ -50,6 +50,9 @@
 <c:set var="accessibleTableSorterJsUrl" scope="page">
     <c:url value="/Js/table-sorter/accessible-table-sorter-min.js"/>
 </c:set>
+<c:set var="displaySnapshotJsUrl" scope="page">
+    <c:url value="/Js/snapshot/snapshot-min.js"/>
+</c:set>
 
 <!-- external images -->
 <c:set var="testInfoLinkImg" scope="request">
@@ -150,6 +153,7 @@
         <script type="text/javascript" src="${scoreJsUrl}"></script>
         <script type="text/javascript" src="${siteScopeScoreJsUrl}"></script>
         <!--<![endif]-->
+        <script type="text/javascript" src="${displaySnapshotJsUrl}"></script>
     </body>
 </html>
 </compress:html>
