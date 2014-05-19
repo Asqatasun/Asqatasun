@@ -280,7 +280,7 @@
                                                     </fmt:param>
                                                 </fmt:message>
                                             </c:set>
-                                            <a title="${allRemarksLinkTitle}" class="all-remarks-link" href="<c:url value="/home/contract/test-result.html?wr=${param.wr}&amp;test=${testResult.test.id}"/>" target="_blank">
+                                            <a title="${allRemarksLinkTitle}" class="all-remarks-link" href="<c:url value="/home/contract/test-result.html?wr=${param.wr}&amp;testKey=${testResult.test.id}"/>" target="_blank">
                                                 ${allRemarksLink}
                                             </a>
                                         </div>
