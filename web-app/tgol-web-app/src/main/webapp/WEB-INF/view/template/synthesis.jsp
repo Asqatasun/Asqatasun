@@ -29,9 +29,9 @@
                 <c:when test="${statistics.auditScope == 'SCENARIO'}">
                     <span class="synthesis-meta-title">Scenario : </span> ${statistics.url}
                 </c:when>
-                <c:otherwise>
+                <c:when test="${statistics.auditScope != 'DOMAIN'}">
                     <span class="synthesis-meta-title">Url : </span><a href="${statistics.url}">${statistics.url}</a>
-                </c:otherwise>
+                </c:when>
             </c:choose>
             <c:if test="${addLinkToSourceCode == 'true'}">
                 <c:set var="sourceCodeLinkTitle" scope="page">
@@ -46,9 +46,11 @@
                 </span>
             </c:if>
         </div>
-        <div id="project-creation-date">
-            <span class="synthesis-meta-title"><fmt:message key="contract.createdOn"/> : </span><fmt:formatDate type="date" value="${statistics.date}" dateStyle="long"/> <fmt:formatDate type="time" value="${statistics.date}"/>
-        </div>
+        <c:if test="${statistics.auditScope != 'DOMAIN'}">
+            <div id="project-creation-date">
+                <span class="synthesis-meta-title"><fmt:message key="contract.createdOn"/> : </span><fmt:formatDate type="date" value="${statistics.date}" dateStyle="long"/> <fmt:formatDate type="time" value="${statistics.date}"/>
+            </div>
+        </c:if>
         <c:if test="${hasPageCounter == 'true'}">
             <div class="audit-nb-of-pages">
                 <c:set var="pageCounterLinkTitle" scope="page">
@@ -68,8 +70,11 @@
                                 <a href="<c:url value="/home/contract/page-list.html?audit=${param.audit}&amp;status=f2xx&amp;sortDirection=2&amp;sortCriterion=rank"/>" >${pageCounterLinkTitle}</a>
                             </c:when>
                             <c:when test="${statistics.auditScope == 'DOMAIN'}">
+                                <fmt:message key="synthesisSite.errors">
+                                    <fmt:param value="${statistics.resultCounter.failedCount}"/>
+                                </fmt:message>
                                 <a href="<c:url value="/home/contract/page-list.html?audit=${param.audit}"/>">${pageCounterLinkTitle}</a>
-                                <span>${totalPageCounterTitle}</span>
+                                <span>(${totalPageCounterTitle})</span>
                             </c:when>
                         </c:choose>
                     </c:when>
@@ -78,28 +83,44 @@
                         <span>${totalPageCounterTitle}</span>
                     </c:otherwise>
                 </c:choose>
-            </div>
-            <c:if test="${hasSiteScopeTest == 'true'}">
-                <div id="synthesis-action-list">
-                    <a href="<c:url value="/home/contract/site-result.html?wr=${wr}"/>" class="result-page-action"><spring:message code="synthesisSite.siteResults"/></a>
-                </div>
-            </c:if>                                        
+            </div>                            
         </c:if>
-        <c:if test="${fn:length(statistics.parametersMap) != 0}">
-            <div id="audit-ref">
+        <c:choose>
+            <c:when test="${statistics.auditScope == 'DOMAIN'}">
+                <div id="url-domain">
+                    <span class="synthesis-meta-title">Url : </span><a href="${statistics.url}">${statistics.url}</a>
+                </div>
+                <div id="synthesis-action-list-domain">
+                    <span class="synthesis-meta-title"><fmt:message key="contract.createdOn"/> : </span><fmt:formatDate type="date" value="${statistics.date}" dateStyle="long"/> <fmt:formatDate type="time" value="${statistics.date}"/>
+                </div>
                 <span class="synthesis-meta-title"><spring:message code="referential"/> : </span>
                 <c:set var="refCode" scope="page">
                     ${statistics.parametersMap["referential"]}
                 </c:set>
                 <span class="synthesis-meta-value"><spring:message code="${refCode}"/></span>
-            </div>
-            <div id="audit-level">
-                <span class="synthesis-meta-title"><spring:message code="level"/> : </span>
                 <c:set var="levelCode" scope="page">
                     ${fn:replace(statistics.parametersMap["level"],";", "-")}
                 </c:set>
                 <span class="synthesis-meta-value"><spring:message code="${levelCode}"/></span>
-            </div>
+            </c:when>
+            <c:otherwise>
+                <div id="audit-ref">
+                    <span class="synthesis-meta-title"><spring:message code="referential"/> : </span>
+                    <c:set var="refCode" scope="page">
+                        ${statistics.parametersMap["referential"]}
+                    </c:set>
+                    <span class="synthesis-meta-value"><spring:message code="${refCode}"/></span>
+                </div>
+                <div id="audit-level">
+                    <span class="synthesis-meta-title"><spring:message code="level"/> : </span>
+                    <c:set var="levelCode" scope="page">
+                        ${fn:replace(statistics.parametersMap["level"],";", "-")}
+                    </c:set>
+                    <span class="synthesis-meta-value"><spring:message code="${levelCode}"/></span>
+                </div>
+            </c:otherwise>
+        </c:choose>
+        <c:if test="${fn:length(statistics.parametersMap) != 0}">
             <div>
                 <span id="master-audit-parameters"><fmt:message key="auditSetUp.formTitle"/></span>
             </div>
