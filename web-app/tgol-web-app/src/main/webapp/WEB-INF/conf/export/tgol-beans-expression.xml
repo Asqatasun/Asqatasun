@@ -35,7 +35,6 @@
             <list>
                 <value>i18n/theme-rgaa22-I18N</value>
                 <value>i18n/theme-aw22-I18N</value>
-                <value>i18n/theme-aw21-I18N</value>
             </list>
         </property>
         <property name="escapeHtml" value="false"/>
@@ -52,7 +51,6 @@
             <list>
                 <value>i18n/rule-rgaa22-I18N</value>
                 <value>i18n/rule-aw22-I18N</value>
-                <value>i18n/rule-aw21-I18N</value>
             </list>
         </property>
         <property name="escapeHtml" value="false"/>
@@ -62,7 +60,8 @@
     <bean id="levelExpressionBuilder" class="org.opens.tgol.report.expression.builder.I18nExpressionBuilderImpl">
         <property name="bundleNameList">
             <list>
-                <value>i18n/level-I18N</value>
+                <value>i18n/referential-aw22-I18N</value>
+                <value>i18n/referential-rgaa22-I18N</value>
             </list>
         </property>
         <property name="escapeHtml" value="false"/>
