@@ -9,6 +9,7 @@
     <artifactId>engine</artifactId>
     <packaging>pom</packaging>
     <name>engine</name>
+   
     <modules>
         <module>commons-entity</module>
         <module>commons-entity-jpa</module>
@@ -33,5 +34,6 @@
 <!--        <module>tanaguru-i18n</module>-->
         <module>scenarioloader</module>
         <module>sebuilder-interpreter-tools</module>
-  </modules>
+        <module>tanaguru-jms</module>
+    </modules>
 </project>

@@ -13,8 +13,16 @@
     </bean>
 
     <bean id="auditServiceThreadFactory" class="org.opens.tanaguru.service.AuditServiceThreadFactoryImpl"/>
+    
+<!--     <bean id="auditServiceThread" class="org.opens.tanaguru.service.AuditServiceThreadImpl"> -->
+<!--     	<constructor-arg index="0" type="org.opens.tanaguru.entity.audit.Audit" > -->
+<!--     		<ref bean="audit"/> -->
+<!--     	</constructor-arg> -->
+<!--     	<constructor-arg index="1" type="org.opens.tanaguru.service.command.AuditCommand" > -->
+<!--     		<ref bean="auditCommand"/>	 -->
+<!--     	</constructor-arg>   -->
+<!--     </bean> -->
 
-    <bean id="auditService" class="org.opens.tanaguru.service.AuditServiceImpl"/>
 
     <bean id="auditCommandFactory" class="org.opens.tanaguru.service.command.factory.AuditCommandFactoryImpl">
         <property name="auditPageWithCrawler" value="false"/>

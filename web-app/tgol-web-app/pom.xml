@@ -62,6 +62,11 @@
             <artifactId>tanaguru-engine</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.opens</groupId>
+            <artifactId>tanaguru-jms</artifactId>
+            <version>3.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-resources</artifactId>
         </dependency>
@@ -166,6 +171,11 @@
             <artifactId>hibernate-entitymanager</artifactId>
 <!--            <scope>runtime</scope>-->
         </dependency>
+        <dependency>
+		  <groupId>org.apache.activemq</groupId>
+		  <artifactId>activemq-all</artifactId>
+		  <version>5.9.1</version>
+		</dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-c3p0</artifactId>

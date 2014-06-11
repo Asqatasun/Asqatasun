@@ -109,5 +109,11 @@ public class DefiniteResultImpl extends ProcessResultImpl implements
 	public void setManualAuditComment(String manualAuditcomment) {
 		this.manualAuditComment=manualAuditcomment;
 	}
+
+	@Override
+	public Object getManualValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
    
 }

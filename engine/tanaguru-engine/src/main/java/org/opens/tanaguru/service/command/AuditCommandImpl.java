@@ -91,8 +91,8 @@ public abstract class AuditCommandImpl implements AuditCommand {
     @Override
     public Audit getAudit() {
         return audit;
-    }
     
+    }
     @Override
     public void setAudit(Audit audit) {
         this.audit = audit;

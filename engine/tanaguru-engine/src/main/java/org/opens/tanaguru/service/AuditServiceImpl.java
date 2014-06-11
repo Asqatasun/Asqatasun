@@ -37,6 +37,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author jkowalczyk
  */
 public class AuditServiceImpl implements AuditService, AuditServiceListener {
+	
+//	@Autowired
+	private AuditServiceThread auditServiceThread;
+	
 
     private AuditServiceThreadFactory auditServiceThreadFactory;
     @Autowired
@@ -201,6 +205,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
      * @return
      */
     private AuditServiceThread getInitialisedAuditServiceThread(Audit audit) {
+    	  
         return auditServiceThreadFactory.create(audit);
     }
 

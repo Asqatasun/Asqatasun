@@ -318,8 +318,8 @@ public class AuditServiceImplTest extends TestCase {
                 andReturn(auditReturnedByAuditMethodOfAuditServiceThread).once();
         EasyMock.replay(mockAuditServiceThread);
         
-        EasyMock.expect(mockAuditServiceThreadFactory.create(audit)).
-                andReturn(mockAuditServiceThread).once();
+//        EasyMock.expect(mockAuditServiceThreadFactory.create(audit)).
+//                andReturn(mockAuditServiceThread).once();
         EasyMock.replay(mockAuditServiceThreadFactory);
         
         assertEquals(auditReturnedByAuditMethodOfAuditServiceThread, 

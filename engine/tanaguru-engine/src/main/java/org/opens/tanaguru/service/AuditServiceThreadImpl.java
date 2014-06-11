@@ -23,23 +23,35 @@ package org.opens.tanaguru.service;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.service.command.AuditCommand;
+import org.opens.tanaguru.service.messagin.JmsProducer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author enzolalay
  */
+//@Service
+//@Lazy
 public class AuditServiceThreadImpl implements AuditServiceThread {
 
     private Audit audit;
     private AuditCommand auditCommand;
+    
+    @Autowired
+    private AuditServiceThread auditServiceThread;
 
     private Set<AuditServiceThreadListener> listeners;
     public Set<AuditServiceThreadListener> getListeners() {
         return listeners;
     }
+
+    
 
     /**
      * 
@@ -86,7 +98,9 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
 
     @Override
     public void run() {
-        try {
+        
+    	//FIXME :Taoufiq
+    	try {
             init();
             loadContent();
             adaptContent();
@@ -94,14 +108,28 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
             consolidate();
             analyse();
             fireAuditCompleted();
+            callTheAquitementFinishProcess();
         } catch (Exception e) {
             fireAuditException(e);
         }
     }
 
-    @Override
+    @Autowired
+    private JmsProducer jmsProducer;
+    
+    private void callTheAquitementFinishProcess() {
+    	System.out.println("avant de passer au JMS"+ getAudit().getStatus().toString());
+    	 jmsProducer.sendMessageAudit("TestAuditFinished");
+		
+		
+	}
+
+
+
+	@Override
     public void init() {
         auditCommand.init();
+        
     }
 
     @Override
@@ -136,6 +164,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         for (AuditServiceThreadListener listener : listeners) {
             listener.auditCompleted(this);
         }
+        //TODO :envoi JMS
     }
 
     private void fireAuditException(Exception e) {

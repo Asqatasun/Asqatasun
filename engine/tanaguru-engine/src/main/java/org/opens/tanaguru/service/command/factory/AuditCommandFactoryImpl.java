@@ -25,6 +25,7 @@ package org.opens.tanaguru.service.command.factory;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.contentadapter.AdaptationListener;
 import org.opens.tanaguru.entity.parameterization.Parameter;
@@ -37,7 +38,10 @@ import org.opens.tanaguru.entity.service.reference.TestDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.service.*;
 import org.opens.tanaguru.service.command.*;
+import org.opens.tanaguru.service.messagin.JmsProducer;
 import org.springframework.beans.factory.annotation.Autowired;
+
+
 
 /**
  *
@@ -171,8 +175,15 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
     public void setProcessingTreatmentWindow(int processingTreatmentWindow) {
         this.processingTreatmentWindow = processingTreatmentWindow;
     }
-    
-    @Override
+   
+    @Autowired
+    private JmsProducer jmsProducer;
+
+//    public void setJmsProducer(JmsProducer jmsProducer) {
+//		this.jmsProducer = jmsProducer;
+//	}
+
+	@Override
     public AuditCommand create(String url, Set<Parameter> paramSet, boolean isSite) {
         if (isSite) {
             SiteAuditCommandImpl auditCommand = 
@@ -183,6 +194,7 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
         } else if (auditPageWithCrawler) {
             PageAuditCrawlerCommandImpl auditCommand = 
                     new PageAuditCrawlerCommandImpl(url, paramSet, auditDataService);
+            jmsProducer.sendMessageAudit("testAuditPENDING");
             initCommandServices(auditCommand);
             auditCommand.setCrawlerService(crawlerService);
             return auditCommand;
@@ -190,6 +202,7 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
             PageAuditCommandImpl auditCommand = 
                     new PageAuditCommandImpl(url, paramSet, auditDataService);
             initCommandServices(auditCommand);
+            jmsProducer.sendMessageAudit("testAuditPENDING");
             auditCommand.setScenarioLoaderService(scenarioLoaderService);
             return auditCommand;
         }
