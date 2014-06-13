@@ -29,9 +29,9 @@
                 <c:when test="${statistics.auditScope == 'SCENARIO'}">
                     <span class="synthesis-meta-title">Scenario : </span> ${statistics.url}
                 </c:when>
-                <c:otherwise>
+                <c:when test="${statistics.auditScope != 'DOMAIN'}">
                     <span class="synthesis-meta-title">Url : </span><a href="${statistics.url}">${statistics.url}</a>
-                </c:otherwise>
+                </c:when>
             </c:choose>
             <c:if test="${addLinkToSourceCode == 'true'}">
                 <c:set var="sourceCodeLinkTitle" scope="page">
@@ -46,122 +46,150 @@
                 </span>
             </c:if>
         </div>
-        <div id="project-creation-date">
-            <span class="synthesis-meta-title"><fmt:message key="contract.createdOn"/> : </span><fmt:formatDate type="date" value="${statistics.date}" dateStyle="long"/> <fmt:formatDate type="time" value="${statistics.date}"/>
-        </div>
+        <c:if test="${statistics.auditScope != 'DOMAIN'}">
+            <div id="project-creation-date">
+                <span class="synthesis-meta-title"><fmt:message key="contract.createdOn"/> : </span><fmt:formatDate type="date" value="${statistics.date}" dateStyle="long"/> <fmt:formatDate type="time" value="${statistics.date}"/>
+            </div>
+        </c:if>
         <c:if test="${hasPageCounter == 'true'}">
-            <div class="audit-nb-of-pages">
-                <c:set var="pageCounterLinkTitle" scope="page">
-                    <fmt:message key="resultPage.pageCounter">
-                        <fmt:param value="${auditedPagesCount}"/>
-                    </fmt:message>
-                </c:set>
-                <c:set var="totalPageCounterTitle" scope="page">
-                    <fmt:message key="resultPage.totalPageCounter">
-                        <fmt:param value="${statistics.pageCounter}"/>
-                    </fmt:message>
-                </c:set>
-                <c:choose>
-                    <c:when test="${hasPagesListLink == 'true'}">
-                        <c:choose>
-                            <c:when test="${statistics.auditScope == 'SCENARIO'}">
-                                <a href="<c:url value="/home/contract/page-list.html?audit=${param.audit}&amp;status=f2xx&amp;sortDirection=2&amp;sortCriterion=rank"/>" >${pageCounterLinkTitle}</a>
-                            </c:when>
-                            <c:when test="${statistics.auditScope == 'DOMAIN'}">
-                                <a href="<c:url value="/home/contract/page-list.html?audit=${param.audit}"/>">${pageCounterLinkTitle}</a>
-                                <span>${totalPageCounterTitle}</span>
-                            </c:when>
-                        </c:choose>
-                    </c:when>
-                    <c:otherwise>
-                        ${pageCounterLinkTitle}
-                        <span>${totalPageCounterTitle}</span>
-                    </c:otherwise>
-                </c:choose>
-            </div>
-            <c:if test="${hasSiteScopeTest == 'true'}">
-                <div id="synthesis-action-list">
-                    <a href="<c:url value="/home/contract/site-result.html?wr=${wr}"/>" class="result-page-action"><spring:message code="synthesisSite.siteResults"/></a>
+            <c:choose>
+                <c:when test="${statistics.auditScope == 'DOMAIN'}">
+                    <div id="audit-nb-of-pages-domain">
+                </c:when>
+                <c:otherwise>
+                    <div class="audit-nb-of-pages">
+                </c:otherwise>
+            </c:choose>
+                    <c:set var="pageCounterLinkTitle" scope="page">
+                        <fmt:message key="resultPage.pageCounter">
+                            <fmt:param value="${auditedPagesCount}"/>
+                        </fmt:message>
+                    </c:set>
+                    <c:set var="totalPageCounterTitle" scope="page">
+                        <fmt:message key="resultPage.totalPageCounter">
+                            <fmt:param value="${statistics.pageCounter}"/>
+                        </fmt:message>
+                    </c:set>
+                    <c:choose>
+                        <c:when test="${hasPagesListLink == 'true'}">
+                            <c:choose>
+                                <c:when test="${statistics.auditScope == 'SCENARIO'}">
+                                    <a href="<c:url value="/home/contract/page-list.html?audit=${param.audit}&amp;status=f2xx&amp;sortDirection=2&amp;sortCriterion=rank"/>" >${pageCounterLinkTitle}</a>
+                                </c:when>
+                                <c:when test="${statistics.auditScope == 'DOMAIN'}">
+                                    <fmt:message key="synthesisSite.errors">
+                                        <fmt:param value="${statistics.resultCounter.failedCount}"/>
+                                    </fmt:message>
+                                    <a href="<c:url value="/home/contract/page-list.html?audit=${param.audit}"/>">${pageCounterLinkTitle}</a>
+                                    <span>(${totalPageCounterTitle})</span>
+                                </c:when>
+                            </c:choose>
+                        </c:when>
+                        <c:otherwise>
+                            ${pageCounterLinkTitle}
+                            <span>${totalPageCounterTitle}</span>
+                        </c:otherwise>
+                    </c:choose>
+                </div>                            
+            </c:if>
+            <c:choose>
+                <c:when test="${statistics.auditScope == 'DOMAIN'}">
+                    <div id="url-domain">
+                        <span class="synthesis-meta-title">Url : </span><a href="${statistics.url}">${statistics.url}</a>
+                    </div>
+                    <div id="synthesis-action-list-domain">
+                        <span class="synthesis-meta-title"><fmt:message key="contract.createdOn"/> : </span><fmt:formatDate type="date" value="${statistics.date}" dateStyle="long"/> <fmt:formatDate type="time" value="${statistics.date}"/>
+                    </div>
+                    <span class="synthesis-meta-title"><spring:message code="referential"/> : </span>
+                    <c:set var="refCode" scope="page">
+                        ${statistics.parametersMap["referential"]}
+                    </c:set>
+                    <span class="synthesis-meta-value"><spring:message code="${refCode}"/></span>
+                    <c:set var="levelCode" scope="page">
+                        ${fn:replace(statistics.parametersMap["level"],";", "-")}
+                    </c:set>
+                    <span class="synthesis-meta-value"><spring:message code="${levelCode}"/></span>
+                </c:when>
+                <c:otherwise>
+                    <div id="audit-ref">
+                        <span class="synthesis-meta-title"><spring:message code="referential"/> : </span>
+                        <c:set var="refCode" scope="page">
+                            ${statistics.parametersMap["referential"]}
+                        </c:set>
+                        <span class="synthesis-meta-value"><spring:message code="${refCode}"/></span>
+                    </div>
+                    <div id="audit-level">
+                        <span class="synthesis-meta-title"><spring:message code="level"/> : </span>
+                        <c:set var="levelCode" scope="page">
+                            ${fn:replace(statistics.parametersMap["level"],";", "-")}
+                        </c:set>
+                        <span class="synthesis-meta-value"><spring:message code="${levelCode}"/></span>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+            <c:if test="${fn:length(statistics.parametersMap) != 0}">
+                <div>
+                    <span id="master-audit-parameters"><fmt:message key="auditSetUp.formTitle"/></span>
                 </div>
-            </c:if>                                        
-        </c:if>
-        <c:if test="${fn:length(statistics.parametersMap) != 0}">
-            <div id="audit-ref">
-                <span class="synthesis-meta-title"><spring:message code="referential"/> : </span>
-                <c:set var="refCode" scope="page">
-                    ${statistics.parametersMap["referential"]}
-                </c:set>
-                <span class="synthesis-meta-value"><spring:message code="${refCode}"/></span>
-            </div>
-            <div id="audit-level">
-                <span class="synthesis-meta-title"><spring:message code="level"/> : </span>
-                <c:set var="levelCode" scope="page">
-                    ${fn:replace(statistics.parametersMap["level"],";", "-")}
-                </c:set>
-                <span class="synthesis-meta-value"><spring:message code="${levelCode}"/></span>
-            </div>
-            <div>
-                <span id="master-audit-parameters"><fmt:message key="auditSetUp.formTitle"/></span>
-            </div>
-            <div id="audit-parameters">
-                <ul>
-                    <c:forEach var="entry" items="${statistics.parametersMap}">
-                        <c:if test="${entry.key != 'referential' && entry.key != 'level'}">
-                            <li>
-                                <span class="synthesis-meta-title"><spring:message code="${entry.key}"/> : </span>
-                                <span class="synthesis-meta-value">
-                                    <c:catch var="booleanTagException" >
-                                        <spring:message code="parameter-value-${entry.value}"/>
-                                    </c:catch>
-                                    <c:if test = "${booleanTagException != null}">
-                                        ${entry.value}
-                                    </c:if>
-                                </span>
-                            </li>
-                        </c:if>
-                    </c:forEach>
-                </ul>
-            </div><!-- class="project-parameters" -->
-        </c:if>
-    </div><!-- class="span6 offset2" -->
-    <c:set var="mark" scope="page" value="${statistics.rawMark}"/>
-    <c:set var="weightedMark" scope="page" value="${statistics.weightedMark}"/>
-    <c:set var="scoreId" scope="page" value="audit-score"/>
-    <c:set var="hasScoreFormulaLink" scope="page" value="false"/>
-    <c:set var="spanClass" scope="page" value="span3"/>
-    <%@include file="../template/score.jsp" %>
-</div> <!-- class="row" -->
-<c:if test="${hasResultDispatchTitle == 'true'}">
-    <div class="row">
-        <div class="span16 offset0">
-            <h2 id="result-dispatch"><spring:message code="synthesisSite.resultDispatch"/></h2>
-        </div><!-- class="span16 offset0" -->
+                <div id="audit-parameters">
+                    <ul>
+                        <c:forEach var="entry" items="${statistics.parametersMap}">
+                            <c:if test="${entry.key != 'referential' && entry.key != 'level'}">
+                                <li>
+                                    <span class="synthesis-meta-title"><spring:message code="${entry.key}"/> : </span>
+                                    <span class="synthesis-meta-value">
+                                        <c:catch var="booleanTagException" >
+                                            <spring:message code="parameter-value-${entry.value}"/>
+                                        </c:catch>
+                                        <c:if test = "${booleanTagException != null}">
+                                            ${entry.value}
+                                        </c:if>
+                                    </span>
+                                </li>
+                            </c:if>
+                        </c:forEach>
+                    </ul>
+                </div><!-- class="project-parameters" -->
+            </c:if>
+        </div><!-- class="span6 offset2" -->
+        <c:set var="mark" scope="page" value="${statistics.rawMark}"/>
+        <c:set var="weightedMark" scope="page" value="${statistics.weightedMark}"/>
+        <c:set var="scoreId" scope="page" value="audit-score"/>
+        <c:set var="hasScoreFormulaLink" scope="page" value="false"/>
+        <c:set var="spanClass" scope="page" value="span3"/>
+        <%@include file="../template/score.jsp" %>
     </div> <!-- class="row" -->
-</c:if>
-<c:if test="${hasGraphics == 'true'}">
-    <div id="graphical-synthesis-result" class="row">
-        <c:if test="${hasPieChartInGraphicalResult == 'true'}">
-            <div class="span5">
-                <c:set var="counter" scope="request" value="${statistics.resultCounter}"/>
-                <c:import url="template/pie-chart.jsp"/>
-            </div><!---class="span5"-->
-        </c:if>
-        <c:set var="counterByThemeMap" scope="request" value="${statistics.counterByThemeMap}"/>
-        <c:set var="width" scope="request" value="${themeRepartitionWidth}"/>
-        <c:set var="height" scope="request" value="250"/>
-        <c:set var="xLabel" scope="request" value="Themes"/>
-        <c:set var="yLabel" scope="request" value="Count"/>
-        <c:choose>
-            <c:when test="${hasPieChartInGraphicalResult == 'true'}">
-                <div id="barChartRepresentation" class="span11">
-                    <c:import url="graph/bar-chart-representation.jsp"/>
-                </div>
-            </c:when>
-            <c:otherwise>
-                <div id="barChartRepresentation" class="span16">
-                    <c:import url="graph/bar-chart-representation.jsp"/>
-                </div>
-            </c:otherwise>
-        </c:choose>
-    </div><!--div class="row" id="graphical-synthesis-result"-->
-</c:if>
+    <c:if test="${hasResultDispatchTitle == 'true'}">
+        <div class="row">
+            <div class="span16 offset0">
+                <h2 id="result-dispatch"><spring:message code="synthesisSite.resultDispatch"/></h2>
+            </div><!-- class="span16 offset0" -->
+        </div> <!-- class="row" -->
+    </c:if>
+    <c:if test="${hasGraphics == 'true'}">
+        <div id="graphical-synthesis-result" class="row">
+            <c:if test="${hasPieChartInGraphicalResult == 'true'}">
+                <div class="span5">
+                    <c:set var="counter" scope="request" value="${statistics.resultCounter}"/>
+                    <c:import url="template/pie-chart.jsp"/>
+                </div><!---class="span5"-->
+            </c:if>
+            <c:set var="counterByThemeMap" scope="request" value="${statistics.counterByThemeMap}"/>
+            <c:set var="width" scope="request" value="${themeRepartitionWidth}"/>
+            <c:set var="height" scope="request" value="250"/>
+            <c:set var="xLabel" scope="request" value="Themes"/>
+            <c:set var="yLabel" scope="request" value="Count"/>
+            <c:choose>
+                <c:when test="${hasPieChartInGraphicalResult == 'true'}">
+                    <div id="barChartRepresentation" class="span11">
+                        <c:import url="graph/bar-chart-representation.jsp"/>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div id="barChartRepresentation" class="span16">
+                        <c:import url="graph/bar-chart-representation.jsp"/>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+        </div><!--div class="row" id="graphical-synthesis-result"-->
+    </c:if>
