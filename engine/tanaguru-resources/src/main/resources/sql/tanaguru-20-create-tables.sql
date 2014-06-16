@@ -181,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `REFERENCE` (
   KEY `fk_Ref_Level` (`Id_Default_Level`),
       CONSTRAINT `fk_Ref_Level` 
           FOREIGN KEY Id_Default_Level_Index (`Id_Default_Level`) 
-          REFERENCES `LEVEL` (`Id_Level`),
+          REFERENCES `LEVEL` (`Id_Level`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
