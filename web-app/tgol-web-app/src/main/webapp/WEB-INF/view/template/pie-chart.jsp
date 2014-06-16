@@ -26,7 +26,7 @@
                                                 <c:set var="passedLeftOffset" scope="page">
                                                     ${100 - passedPercent}
                                                 </c:set>
-                                                <span class="fd-slider-range passed" style="left: ${passedLeftOffset}\%; width: ${passedPercent}\%;"></span>
+                                                <span class="fd-slider-range passed" style="left: ${passedLeftOffset}%; width: ${passedPercent}%;"></span>
                                                 <span class="fd-slider-bar"></span>
                                             </span>
                                         </td>
@@ -46,7 +46,7 @@
                                                 <c:set var="failedLeftOffset" scope="page">
                                                     ${100 - failedPercent }
                                                 </c:set>
-                                                <span class="fd-slider-range failed" style="left: ${failedLeftOffset}\%; width: ${failedPercent}\%;"></span>
+                                                <span class="fd-slider-range failed" style="left: ${failedLeftOffset}%; width: ${failedPercent}%;"></span>
                                                 <span class="fd-slider-bar"></span>
                                             </span>
                                         </td>
@@ -66,7 +66,7 @@
                                                 <c:set var="naLeftOffset" scope="page">
                                                     ${100 - naPercent}
                                                 </c:set>
-                                                <span class="fd-slider-range na" style="left: ${naLeftOffset}\%; width: ${naPercent}\%;"></span>
+                                                <span class="fd-slider-range na" style="left: ${naLeftOffset}%; width: ${naPercent}%;"></span>
                                                 <span class="fd-slider-bar"></span>
                                             </span>
                                         </td>
@@ -87,7 +87,7 @@
                                                 <c:set var="nmiLeftOffset" scope="page">
                                                     ${100 - nmiPercent}
                                                 </c:set>
-                                                <span class="fd-slider-range nmi" style="left: ${nmiLeftOffset}\%; width: ${nmiPercent}\%;"></span>
+                                                <span class="fd-slider-range nmi" style="left: ${nmiLeftOffset}%; width: ${nmiPercent}%;"></span>
                                                 <span class="fd-slider-bar"></span>
                                             </span>
                                         </td>

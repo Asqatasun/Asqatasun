@@ -25,7 +25,7 @@ package org.opens.tgol.exception;
  *
  * @author jkowalczyk
  */
-public class AuditParameterMissingException extends RuntimeException{
+public class AuditParameterMissingException extends ForbiddenPageException{
 
     public AuditParameterMissingException() {
         super();

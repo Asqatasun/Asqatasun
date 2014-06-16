@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -37,6 +37,7 @@ import org.opens.tgol.util.TgolKeyStore;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -60,6 +61,7 @@ public class PageListController extends AuditDataHandlerController {
      * @param response
      * @param model
      * @return
+     * @throws java.lang.Exception
      */
     @RequestMapping(value = TgolKeyStore.PAGE_LIST_CONTRACT_URL, method = RequestMethod.GET)
     @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
@@ -69,12 +71,12 @@ public class PageListController extends AuditDataHandlerController {
             Model model) throws Exception {
         String auditId = ServletRequestUtils.getStringParameter(request, TgolKeyStore.AUDIT_ID_KEY);
         if (auditId == null) {
-            throw new ForbiddenPageException(new AuditParameterMissingException());
+            throw new AuditParameterMissingException();
         }
         Audit audit;
         try {
             audit = getAuditDataService().read(Long.valueOf(auditId));
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             throw new ForbiddenPageException(e);
         }
 
@@ -122,7 +124,7 @@ public class PageListController extends AuditDataHandlerController {
                     model.addAttribute(TgolKeyStore.TEST_CODE_KEY, getTestDataService().getTestFromAuditAndLabel(audit, testLabel));
                 }
                 return this.preparePageListData(audit, model);
-            } catch (Exception e) {
+            } catch (ServletRequestBindingException e) {
                 return TgolKeyStore.OUPS_VIEW_REDIRECT_NAME;
             }
         } else {
