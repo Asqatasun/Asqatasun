@@ -199,7 +199,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         try {
             return ((Integer)query.getSingleResult()).longValue();
         } catch (NoResultException e) {
-            return Long.valueOf(0);
+            return (long) 0;
         }
     }
 
@@ -262,7 +262,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
      * @return a collection of FailedThemeInfo from a raw result collection
      */
     private Set<FailedThemeInfo> convertRawResultAsFailedThemeInfo(Collection<Object[]> result) {
-        Set<FailedThemeInfo> failedThemeInfoSet = new LinkedHashSet<FailedThemeInfo>();
+        Set<FailedThemeInfo> failedThemeInfoSet = new LinkedHashSet();
         for (Object[] obj : result) {
             FailedThemeInfo fti = FailedThemeInfoFactory.getInstance().getFailedThemeInfo(
                         ((BigInteger)obj[0]).longValue(),
@@ -341,7 +341,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
      * @return a collection of FailedTestInfo from a raw result collection
      */
     private Set<FailedTestInfo> convertRawResultAsFailedTestInfo(Collection<Object[]> result) {
-        Set<FailedTestInfo> failedTestInfoSet = new LinkedHashSet<FailedTestInfo>();
+        Set<FailedTestInfo> failedTestInfoSet = new LinkedHashSet();
         for (Object[] obj : result) {
             if ((Integer)obj[2] > 0) {
                 FailedTestInfo fti = FailedTestInfoFactory.getInstance().getFailedTestInfo(
@@ -386,7 +386,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         try {
             return ((Integer)query.getSingleResult()).longValue();
         } catch (NoResultException e) {
-            return Long.valueOf(0);
+            return (long) 0;
         }
     }
 
@@ -506,7 +506,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
      * @return a collection of FailedPageInfo from a raw result collection
      */
     private Set<FailedPageInfo> convertRawResultAsFailedPageInfo(Collection<Object[]> result) {
-        Set<FailedPageInfo> failedPageInfoSet = new LinkedHashSet<FailedPageInfo>();
+        Set<FailedPageInfo> failedPageInfoSet = new LinkedHashSet();
         for (Object[] obj : result) {
             FailedPageInfo fti = FailedPageInfoFactory.getInstance().getFailedPageInfo(
                     (String)obj[0],
@@ -543,10 +543,10 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
             } else if (result instanceof Double) {
                 return ((Double)result).floatValue();
             } else {
-                return Float.valueOf(0);
+                return (float) 0;
             }
         } catch (NoResultException e) {
-            return Float.valueOf(0);
+            return (float) 0;
         }
     }
     
@@ -575,10 +575,10 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
             } else if (result instanceof Double) {
                 return ((Double)result).floatValue();
             } else {
-                return Float.valueOf(0);
+                return (float) 0;
             }
         } catch (NoResultException e) {
-            return Float.valueOf(0);
+            return (float) 0;
         }
     }
 
@@ -653,7 +653,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         try {
             return (((BigInteger)query.getSingleResult()).longValue());
         } catch (NoResultException e) {
-            return Long.valueOf(0);
+            return (long) 0;
         }
     }
 
@@ -797,7 +797,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
      * @return a collection of PageResult from a raw result collection
      */
     private Set<PageResult> convertRawResultAsPageResultSet(Collection<Object[]> result) {
-        Set<PageResult> failedPageInfoSet = new LinkedHashSet<PageResult>();
+        Set<PageResult> failedPageInfoSet = new LinkedHashSet();
         for (Object[] obj : result) {
             
             Float weightedMark;

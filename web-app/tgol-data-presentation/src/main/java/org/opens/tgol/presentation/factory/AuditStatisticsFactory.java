@@ -78,7 +78,7 @@ public class AuditStatisticsFactory {
     public final void setThemeDataService(ThemeDataService themeDataService) {
         Collection<Theme> themeList = themeDataService.findAll();
         if (fullThemeMapByRef == null) {
-            fullThemeMapByRef = new HashMap<String, Collection<Theme>>();
+            fullThemeMapByRef = new HashMap();
         }
         // we retrieve the theme from the criterion. To display a theme, it has
         // to be associated with a criterion
@@ -86,7 +86,7 @@ public class AuditStatisticsFactory {
             if (!theme.getCriterionList().isEmpty()) {
                 String referenceCode = theme.getCriterionList().iterator().next().getReference().getCode();
                 if (!fullThemeMapByRef.containsKey(referenceCode)) {
-                    Collection<Theme> themeListByRef = new ArrayList<Theme>();
+                    Collection<Theme> themeListByRef = new ArrayList();
                     themeListByRef.add(theme);
                     fullThemeMapByRef.put(referenceCode, themeListByRef);
                 } else {
@@ -159,13 +159,18 @@ public class AuditStatisticsFactory {
                 actDataService.getActFromAudit(audit).getScope().getCode());
 
         ResultCounter resultCounter = auditStats.getResultCounter();
-        resultCounter.setPassedCount(0);
-        resultCounter.setFailedCount(0);
-        resultCounter.setNmiCount(0);
-        resultCounter.setNaCount(0);
-        resultCounter.setNtCount(0);
+        resultCounter.setPassedCount(webResourceDataService.getResultCountByResultType(
+                webResource, audit, TestSolution.PASSED).intValue());
+        resultCounter.setFailedCount(webResourceDataService.getResultCountByResultType(
+                webResource, audit, TestSolution.FAILED).intValue());
+        resultCounter.setNmiCount(webResourceDataService.getResultCountByResultType(
+                webResource, audit, TestSolution.NEED_MORE_INFO).intValue());
+        resultCounter.setNaCount(webResourceDataService.getResultCountByResultType(
+                webResource, audit, TestSolution.NOT_APPLICABLE).intValue());
+        resultCounter.setNtCount(webResourceDataService.getResultCountByResultType(
+                webResource, audit, TestSolution.NOT_TESTED).intValue());
 
-        auditStats.setCounterByThemeMap(addCounterByThemeMap(audit, webResource, resultCounter, displayScope));
+        auditStats.setCounterByThemeMap(addCounterByThemeMap(audit, webResource, displayScope));
         auditStats.setParametersMap(getAuditParameters(audit, parametersToDisplay));
         return auditStats;
     }
@@ -200,7 +205,7 @@ public class AuditStatisticsFactory {
     private Map<String, String> getAuditParameters(
             Audit audit,
             Map<String, String> parametersToDisplay) {
-        Map<String, String> auditParameters = new LinkedHashMap<String, String>();
+        Map<String, String> auditParameters = new LinkedHashMap();
         Set<Parameter> auditParamSet =
                 parameterDataService.getParameterSetFromAudit(audit);
         // to ensure compatibility with audit that have been launched before
@@ -235,7 +240,7 @@ public class AuditStatisticsFactory {
             WebResource webresource, 
             boolean isRawMark) {
         Float mark = webResourceDataService.getMarkByWebResourceAndAudit(webresource, isRawMark);
-        return String.valueOf(Float.valueOf(mark).intValue());
+        return String.valueOf(mark.intValue());
     }
 
     /**
@@ -243,17 +248,16 @@ public class AuditStatisticsFactory {
      * populate a map with the Theme as key and a ResultCounter instance as
      * value.
      *
-     * @param webResource
      * @param audit
+     * @param webResource
+     * @param displayScope
      * @return
      */
     private Map<Theme, ResultCounter> addCounterByThemeMap(
             Audit audit,
             WebResource webResource,
-            ResultCounter globalResultCounter,
             String displayScope) {
-        Map<Theme, ResultCounter> counterByThemeMap =
-                new LinkedHashMap<Theme, ResultCounter>();
+        Map<Theme, ResultCounter> counterByThemeMap = new LinkedHashMap();
         for (Theme theme : getThemeListFromAudit(audit)) {
 
             ResultCounter themeResultCounter = null;
@@ -263,12 +267,6 @@ public class AuditStatisticsFactory {
                 themeResultCounter = getResultCounterByThemeForCriterion(webResource, theme);
             }
             if (themeResultCounter != null) {
-                globalResultCounter.setPassedCount(themeResultCounter.getPassedCount() + globalResultCounter.getPassedCount());
-                globalResultCounter.setFailedCount(themeResultCounter.getFailedCount() + globalResultCounter.getFailedCount());
-                globalResultCounter.setNmiCount(themeResultCounter.getNmiCount() + globalResultCounter.getNmiCount());
-                globalResultCounter.setNaCount(themeResultCounter.getNaCount() + globalResultCounter.getNaCount());
-                globalResultCounter.setNtCount(themeResultCounter.getNtCount() + globalResultCounter.getNtCount());
-
                 counterByThemeMap.put(theme, themeResultCounter);
             }
         }
@@ -372,8 +370,7 @@ public class AuditStatisticsFactory {
 
             @Override
             public int compare(Theme t1, Theme t2) {
-                return Integer.valueOf(t1.getRank()).
-                        compareTo(Integer.valueOf(t2.getRank()));
+                return Integer.valueOf(t1.getRank()).compareTo(t2.getRank());
             }
         });
     }
