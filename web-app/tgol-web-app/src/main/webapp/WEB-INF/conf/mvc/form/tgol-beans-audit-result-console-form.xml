@@ -19,104 +19,104 @@
 
     <bean id="aw22ImageThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="AW22-1"/>
-        <property name="i18nKey" value="AW22-1-select"/>
-        <property name="errorI18nKey" value="AW22-1-selecterror"/>
+        <property name="i18nKey" value="AW22-1"/>
+        <property name="errorI18nKey" value="AW22-1-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
 
     <bean id="aw22FrameThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="AW22-2"/>
-        <property name="i18nKey" value="AW22-2-select"/>
-        <property name="errorI18nKey" value="AW22-2-select-error"/>
+        <property name="i18nKey" value="AW22-2"/>
+        <property name="errorI18nKey" value="AW22-2-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
 
     <bean id="aw22ColorThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="AW22-3"/>
-        <property name="i18nKey" value="AW22-3-select"/>
-        <property name="errorI18nKey" value="AW22-3-select-error"/>
+        <property name="i18nKey" value="AW22-3"/>
+        <property name="errorI18nKey" value="AW22-3-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
     
     <bean id="aw22MultimediaThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="AW22-4"/>
-        <property name="i18nKey" value="AW22-4-select"/>
-        <property name="errorI18nKey" value="AW22-4-select-error"/>
+        <property name="i18nKey" value="AW22-4"/>
+        <property name="errorI18nKey" value="AW22-4-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
     
     <bean id="aw22TableThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="AW22-5"/>
-        <property name="i18nKey" value="AW22-5-select"/>
-        <property name="errorI18nKey" value="AW22-5-select-error"/>
+        <property name="i18nKey" value="AW22-5"/>
+        <property name="errorI18nKey" value="AW22-5-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
 
     <bean id="aw22LinkThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="AW22-6"/>
-        <property name="i18nKey" value="AW22-6-select"/>
-        <property name="errorI18nKey" value="AW22-6-select-error"/>
+        <property name="i18nKey" value="AW22-6"/>
+        <property name="errorI18nKey" value="AW22-6-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
 
     <bean id="aw22ScriptThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="AW22-7"/>
-        <property name="i18nKey" value="AW22-7-select"/>
-        <property name="errorI18nKey" value="AW22-7-select-error"/>
+        <property name="i18nKey" value="AW22-7"/>
+        <property name="errorI18nKey" value="AW22-7-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
 
     <bean id="aw22MandatoryElementsThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="AW22-8"/>
-        <property name="i18nKey" value="AW22-8-select"/>
-        <property name="errorI18nKey" value="AW22-8-select-error"/>
+        <property name="i18nKey" value="AW22-8"/>
+        <property name="errorI18nKey" value="AW22-8-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
     
     <bean id="aw22InfoStructureThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="AW22-9"/>
-        <property name="i18nKey" value="AW22-9-select"/>
-        <property name="errorI18nKey" value="AW22-9-select-error"/>
+        <property name="i18nKey" value="AW22-9"/>
+        <property name="errorI18nKey" value="AW22-9-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
 
     <bean id="aw22InfoPresentationThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="AW22-10"/>
-        <property name="i18nKey" value="AW22-10-select"/>
-        <property name="errorI18nKey" value="AW22-10-select-error"/>
+        <property name="i18nKey" value="AW22-10"/>
+        <property name="errorI18nKey" value="AW22-10-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
 
     <bean id="aw22FormThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="AW22-11"/>
-        <property name="i18nKey" value="AW22-11-select"/>
-        <property name="errorI18nKey" value="AW22-11-select-error"/>
+        <property name="i18nKey" value="AW22-11"/>
+        <property name="errorI18nKey" value="AW22-11-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
 
     <bean id="aw22NavigationThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="AW22-12"/>
-        <property name="i18nKey" value="AW22-12-select"/>
-        <property name="errorI18nKey" value="AW22-12-select-error"/>
+        <property name="i18nKey" value="AW22-12"/>
+        <property name="errorI18nKey" value="AW22-12-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
 
     <bean id="aw22ConsultationThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="AW22-13"/>
-        <property name="i18nKey" value="AW22-13-select"/>
-        <property name="errorI18nKey" value="AW22-13-select-error"/>
+        <property name="i18nKey" value="AW22-13"/>
+        <property name="errorI18nKey" value="AW22-13-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
@@ -159,96 +159,96 @@
 
     <bean id="rgaa22FrameThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="RGAA22-1"/>
-        <property name="i18nKey" value="RGAA22-1-select"/>
-        <property name="errorI18nKey" value="RGAA22-1-select-error"/>
+        <property name="i18nKey" value="RGAA22-1"/>
+        <property name="errorI18nKey" value="RGAA22-1-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
 
     <bean id="rgaa22ColorThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="RGAA22-2"/>
-        <property name="i18nKey" value="RGAA22-2-select"/>
-        <property name="errorI18nKey" value="RGAA22-2-select-error"/>
+        <property name="i18nKey" value="RGAA22-2"/>
+        <property name="errorI18nKey" value="RGAA22-2-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
 
     <bean id="rgaa22FormThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="RGAA22-3"/>
-        <property name="i18nKey" value="RGAA22-3-select"/>
-        <property name="errorI18nKey" value="RGAA22-3-select-error"/>
+        <property name="i18nKey" value="RGAA22-3"/>
+        <property name="errorI18nKey" value="RGAA22-3-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
 
     <bean id="rgaa22ImageThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="RGAA22-4"/>
-        <property name="i18nKey" value="RGAA22-4-select"/>
-        <property name="errorI18nKey" value="RGAA22-4-select-error"/>
+        <property name="i18nKey" value="RGAA22-4"/>
+        <property name="errorI18nKey" value="RGAA22-4-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
 
     <bean id="rgaa22MultimediaThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="RGAA22-5"/>
-        <property name="i18nKey" value="RGAA22-5-select"/>
-        <property name="errorI18nKey" value="RGAA22-5-select-error"/>
+        <property name="i18nKey" value="RGAA22-5"/>
+        <property name="errorI18nKey" value="RGAA22-5-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
 
     <bean id="rgaa22NavigationThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="RGAA22-6"/>
-        <property name="i18nKey" value="RGAA22-6-select"/>
-        <property name="errorI18nKey" value="RGAA22-6-select-error"/>
+        <property name="i18nKey" value="RGAA22-6"/>
+        <property name="errorI18nKey" value="RGAA22-6-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
 
     <bean id="rgaa22PresentationThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="RGAA22-7"/>
-        <property name="i18nKey" value="RGAA22-7-select"/>
-        <property name="errorI18nKey" value="RGAA22-7-select-error"/>
+        <property name="i18nKey" value="RGAA22-7"/>
+        <property name="errorI18nKey" value="RGAA22-7-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
 
     <bean id="rgaa22ScriptThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="RGAA22-8"/>
-        <property name="i18nKey" value="RGAA22-8-select"/>
-        <property name="errorI18nKey" value="RGAA22-8-select-error"/>
+        <property name="i18nKey" value="RGAA22-8"/>
+        <property name="errorI18nKey" value="RGAA22-8-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
     
     <bean id="rgaa22StandardThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="RGAA22-9"/>
-        <property name="i18nKey" value="RGAA22-9-select"/>
-        <property name="errorI18nKey" value="RGAA22-9-select-error"/>
+        <property name="i18nKey" value="RGAA22-9"/>
+        <property name="errorI18nKey" value="RGAA22-9-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
     
     <bean id="rgaa22StructureThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="RGAA22-10"/>
-        <property name="i18nKey" value="RGAA22-10-select"/>
-        <property name="errorI18nKey" value="RGAA22-10-select-error"/>
+        <property name="i18nKey" value="RGAA22-10"/>
+        <property name="errorI18nKey" value="RGAA22-10-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
     
     <bean id="rgaa22TableThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="RGAA22-11"/>
-        <property name="i18nKey" value="RGAA22-11-select"/>
-        <property name="errorI18nKey" value="RGAA22-11-select-error"/>
+        <property name="i18nKey" value="RGAA22-11"/>
+        <property name="errorI18nKey" value="RGAA22-11-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
     
     <bean id="rgaa22TextThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="RGAA22-12"/>
-        <property name="i18nKey" value="RGAA22-12-select"/>
-        <property name="errorI18nKey" value="RGAA22-12-select-error"/>
+        <property name="i18nKey" value="RGAA22-12"/>
+        <property name="errorI18nKey" value="RGAA22-12-error"/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>

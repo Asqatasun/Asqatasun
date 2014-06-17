@@ -56,7 +56,7 @@
                             <div class="set-up-value input">
                                 <c:forEach items="${formField.selectElementMap}" var="group">
                                     <form:select id="${i18nKey}" path="sortOptionMap[${group.key}]">
-                                        <c:forEach items="${group.value}" var="level">
+                                        <c:forEach items="${group.value}" var="level" varStatus="loop">
                                             <c:choose>
                                                 <c:when test="${level.defaultElement == 'true'}">
                                                     <c:set var="selected" scope="page" value="selected=\"selected\""/>
@@ -73,7 +73,16 @@
                                                     <c:set var="disabled" scope="page" value=""/>
                                                 </c:otherwise>
                                             </c:choose>
-                                            <option value="${level.value}" ${selected} ${disabled}><fmt:message key="${level.i18nKey}"/></option>
+                                            <option value="${level.value}" ${selected} ${disabled}>
+                                            <c:choose>
+                                                <c:when test="${loop.index != 0}">
+                                                    ${loop.index}. <fmt:message key="${level.i18nKey}"/>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <fmt:message key="${level.i18nKey}"/>
+                                                </c:otherwise>    
+                                            </c:choose>
+                                            </option>
                                         </c:forEach><!-- for each element of a referentiel -->
                                     </form:select>
                                 </c:forEach><!-- for each referentiel -->
