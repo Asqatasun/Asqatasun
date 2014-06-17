@@ -46,6 +46,7 @@ import org.opens.tgol.entity.decorator.tanaguru.subject.WebResourceDataServiceDe
 import org.opens.tgol.entity.service.contract.ActDataService;
 import org.opens.tgol.entity.service.user.UserDataService;
 import org.opens.tgol.entity.user.User;
+import org.opens.tgol.exception.AuditParameterMissingException;
 import org.opens.tgol.exception.ForbiddenPageException;
 import org.opens.tgol.exception.ForbiddenScopeException;
 import org.opens.tgol.presentation.factory.AuditStatisticsFactory;
@@ -174,11 +175,8 @@ public class PageListControllerTest extends TestCase {
                     new MockHttpServletResponse(), 
                     new ExtendedModelMap());
             assertTrue(false);
-        } catch (ForbiddenPageException fbe) {
-            assertTrue(
-                    StringUtils.equals(
-                    "org.opens.tgol.exception.AuditParameterMissingException", 
-                    fbe.getCause().toString()));
+        } catch (AuditParameterMissingException fbe) {
+            assertTrue(true);
         }
     } 
     
