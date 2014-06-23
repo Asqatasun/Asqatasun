@@ -36,9 +36,23 @@ import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
-import org.opens.tanaguru.service.*;
-import org.opens.tanaguru.service.command.*;
-import org.opens.tanaguru.service.messagin.JmsProducer;
+import org.opens.tanaguru.messagin.TanaguruMsgOutService;
+import org.opens.tanaguru.service.AnalyserService;
+import org.opens.tanaguru.service.ConsolidatorService;
+import org.opens.tanaguru.service.ContentAdapterService;
+import org.opens.tanaguru.service.ContentLoaderService;
+import org.opens.tanaguru.service.CrawlerService;
+import org.opens.tanaguru.service.ProcessorService;
+import org.opens.tanaguru.service.ScenarioLoaderService;
+import org.opens.tanaguru.service.command.AuditCommand;
+import org.opens.tanaguru.service.command.AuditCommandImpl;
+import org.opens.tanaguru.service.command.GroupOfPagesAuditCommandImpl;
+import org.opens.tanaguru.service.command.GroupOfPagesCrawlerAuditCommandImpl;
+import org.opens.tanaguru.service.command.PageAuditCommandImpl;
+import org.opens.tanaguru.service.command.PageAuditCrawlerCommandImpl;
+import org.opens.tanaguru.service.command.ScenarioAuditCommandImpl;
+import org.opens.tanaguru.service.command.SiteAuditCommandImpl;
+import org.opens.tanaguru.service.command.UploadAuditCommandImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -139,7 +153,13 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
         this.adaptationListener = adaptationListener;
     }
     
-    private boolean auditPageWithCrawler = false;
+    private TanaguruMsgOutService tanaguruMsgOutService;
+    @Autowired
+    public void setTanaguruMsgOutService(TanaguruMsgOutService tanaguruMsgOutService) {
+		this.tanaguruMsgOutService = tanaguruMsgOutService;
+	}
+
+	private boolean auditPageWithCrawler = false;
     public void setAuditPageWithCrawler(boolean auditPageWithCrawler) {
         Logger.getLogger(this.getClass()).debug("AuditPageWithCrawler " + auditPageWithCrawler);
         this.auditPageWithCrawler = auditPageWithCrawler;
@@ -176,12 +196,6 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
         this.processingTreatmentWindow = processingTreatmentWindow;
     }
    
-    @Autowired
-    private JmsProducer jmsProducer;
-
-//    public void setJmsProducer(JmsProducer jmsProducer) {
-//		this.jmsProducer = jmsProducer;
-//	}
 
 	@Override
     public AuditCommand create(String url, Set<Parameter> paramSet, boolean isSite) {
@@ -194,7 +208,6 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
         } else if (auditPageWithCrawler) {
             PageAuditCrawlerCommandImpl auditCommand = 
                     new PageAuditCrawlerCommandImpl(url, paramSet, auditDataService);
-            jmsProducer.sendMessageAudit("testAuditPENDING");
             initCommandServices(auditCommand);
             auditCommand.setCrawlerService(crawlerService);
             return auditCommand;
@@ -202,7 +215,6 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
             PageAuditCommandImpl auditCommand = 
                     new PageAuditCommandImpl(url, paramSet, auditDataService);
             initCommandServices(auditCommand);
-            jmsProducer.sendMessageAudit("testAuditPENDING");
             auditCommand.setScenarioLoaderService(scenarioLoaderService);
             return auditCommand;
         }
@@ -274,5 +286,8 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
         auditCommand.setProcessorService(processorService);
         auditCommand.setTestDataService(testDataService);
         auditCommand.setWebResourceDataService(webResourceDataService);
+        
+        //service to send message on queu
+        auditCommand.setTanaguruMsgOutService(tanaguruMsgOutService);
     }
 }

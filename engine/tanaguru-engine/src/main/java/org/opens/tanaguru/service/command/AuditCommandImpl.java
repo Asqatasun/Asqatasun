@@ -25,7 +25,9 @@ package org.opens.tanaguru.service.command;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
+
 import javax.persistence.PersistenceException;
+
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -43,6 +45,7 @@ import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.messagin.TanaguruMsgOutService;
 import org.opens.tanaguru.service.*;
 import org.opens.tanaguru.util.MD5Encoder;
 
@@ -188,11 +191,20 @@ public abstract class AuditCommandImpl implements AuditCommand {
     }
     public void setAnalyserService(AnalyserService analyserService) {
         this.analyserService = analyserService;
-    }    
+    }   
+    
+    //The sender
+    private TanaguruMsgOutService tanaguruMsgOutService;
+    public TanaguruMsgOutService getTanaguruMsgOutService() {
+  		return tanaguruMsgOutService;
+  	}
+  	public void setTanaguruMsgOutService(TanaguruMsgOutService tanaguruMsgOutService) {
+  		this.tanaguruMsgOutService = tanaguruMsgOutService;
+  	}
+    
 
     // The listeners
-    
-    private AdaptationListener adaptationListener;
+	private AdaptationListener adaptationListener;
     public AdaptationListener getAdaptationListener() {
         return adaptationListener;
     }
@@ -805,6 +817,13 @@ public abstract class AuditCommandImpl implements AuditCommand {
             cleanUpTestData(audit);
         }
     }
+    
+    
+    @Override
+    public boolean sendMessageOut(String ulrPage){
+    	return tanaguruMsgOutService.send(ulrPage);
+    }
+    
     
     /**
      * 

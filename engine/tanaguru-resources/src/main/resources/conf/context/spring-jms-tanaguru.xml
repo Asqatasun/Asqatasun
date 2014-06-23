@@ -43,7 +43,7 @@
                <property name="defaultDestination" ref="auditQueueOut" />
         </bean>
 
-        <bean id="jmsProducer" class="org.opens.tanaguru.service.messagin.JmsProducer">
+        <bean id="tanaguruMsgOutService" class="org.tanaguru.jms.messaging.TanaguruMsgOutServiceImpl">
                <property name="jmsTemplate" ref="producerTemplate" />
         </bean>
         

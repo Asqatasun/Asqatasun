@@ -76,18 +76,13 @@ public class AuditListener implements SessionAwareMessageListener<TextMessage> {
     		
     		logger.info("Launch audit page service...");
     		
-    		//launch ws 
-        	Audit audit = auditService.auditPage(pageURL.getText(), parameters);
-			
-			//3- persist audit information on db observatoire
-        	
+    		//launch audit 
+        	Audit audit = auditService.auditPage(pageURL.getText(), parameters);			
+			//3- persist audit information on db observatoire	
         	Long idAudit =audit.getId();
         	
         	logger.info("Audit finished" + audit.getId());
-        	
-        	
-			
-			
+       	
 	    }
 	}
 }

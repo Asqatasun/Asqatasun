@@ -24,13 +24,9 @@ package org.opens.tanaguru.service;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.service.command.AuditCommand;
-import org.opens.tanaguru.service.messagin.JmsProducer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Service;
 
 /**
  *
@@ -102,35 +98,25 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
     	//FIXME :Taoufiq
     	try {
             init();
+            sendMessage("[MSGOUT] AUDIT " + getAudit().getId() + " PENDIG ");
             loadContent();
             adaptContent();
             process();
             consolidate();
             analyse();
             fireAuditCompleted();
-            callTheAquitementFinishProcess();
+            sendMessage("[MSGOUT] AUDIT " + getAudit().getId() + " FINISHED ");
         } catch (Exception e) {
             fireAuditException(e);
         }
     }
-
-    @Autowired
-    private JmsProducer jmsProducer;
-    
-    private void callTheAquitementFinishProcess() {
-    	System.out.println("avant de passer au JMS"+ getAudit().getStatus().toString());
-    	 jmsProducer.sendMessageAudit("TestAuditFinished");
-		
-		
-	}
-
-
-
+ 
 	@Override
     public void init() {
         auditCommand.init();
         
     }
+	
 
     @Override
     public void loadContent() {
@@ -157,6 +143,10 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         auditCommand.analyse();
     }
 
+    @Override
+    public boolean sendMessage(String urlPage){
+    	return auditCommand.sendMessageOut(urlPage);
+    }
     private void fireAuditCompleted() {
         if (listeners == null) {
             return;
