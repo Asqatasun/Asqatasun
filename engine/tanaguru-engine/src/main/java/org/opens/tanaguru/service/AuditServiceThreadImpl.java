@@ -47,7 +47,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         return listeners;
     }
 
-     
+    
 
     /**
      * 
@@ -116,7 +116,6 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         auditCommand.init();
         
     }
-	
 
     @Override
     public void loadContent() {

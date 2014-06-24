@@ -196,7 +196,6 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
         this.processingTreatmentWindow = processingTreatmentWindow;
     }
    
-
 	@Override
     public AuditCommand create(String url, Set<Parameter> paramSet, boolean isSite) {
         if (isSite) {

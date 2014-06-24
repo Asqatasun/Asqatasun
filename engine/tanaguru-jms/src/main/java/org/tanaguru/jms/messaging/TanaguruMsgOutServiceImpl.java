@@ -7,7 +7,6 @@ import javax.jms.Session;
 import org.opens.tanaguru.messagin.TanaguruMsgOutService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.JmsException;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
@@ -24,14 +23,13 @@ public class TanaguruMsgOutServiceImpl implements TanaguruMsgOutService {
 
 private final static Logger LOGGER = LoggerFactory.getLogger(TanaguruMsgOutServiceImpl.class);
 
-	@Autowired
-	private JmsTemplate jmsTanaguruOutTemplate;
+    private JmsTemplate jmsTemplate;
 
 	@Override
 	public boolean send(final String urlSite) {
 		  
 		try {
-		jmsTanaguruOutTemplate.send(new MessageCreator() {
+		    jmsTemplate.send(new MessageCreator() {
 		      public Message createMessage(final Session session) throws JMSException {
 		        return session.createTextMessage(urlSite);
 		      }
@@ -44,8 +42,19 @@ private final static Logger LOGGER = LoggerFactory.getLogger(TanaguruMsgOutServi
 		  }
 		
 	@Override
-	public void sendAndSave(String xmlContent, String fileName, String id) {
+	public void sendAndSave(String urlPage, String fileName, String id) {
 		// TODO Auto-generated method stub
 	}
+
+    public JmsTemplate getJmsTemplate() {
+        return jmsTemplate;
+    }
+
+    public void setJmsTemplate(JmsTemplate jmsTemplate) {
+        this.jmsTemplate = jmsTemplate;
+    }
+	
+	
+	
 	
 }
