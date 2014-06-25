@@ -11,4 +11,12 @@ ALTER IGNORE TABLE REFERENCE ADD `Id_Default_Level` bigint(20) DEFAULT 2 AFTER `
 ALTER TABLE `REFERENCE`
 	ADD CONSTRAINT `fk_Ref_Level` FOREIGN KEY Id_Default_Level_Index (`Id_Default_Level`)  REFERENCES `LEVEL` (`Id_Level`) ON DELETE NO ACTION;
 
+ALTER TABLE `PARAMETER`	ADD UNIQUE KEY `Unique_Param_Element_Type_Param_value` 
+        (`Parameter_Value`(255),`Id_Parameter_Element`);
+
+ALTER TABLE `THEME` ADD UNIQUE INDEX `Cd_Theme_UNIQUE` (`Cd_Theme` ASC);
+ALTER TABLE `TEST` ADD UNIQUE INDEX `Cd_Test_UNIQUE` (`Cd_Test` ASC);
+ALTER TABLE `CRITERION` ADD UNIQUE INDEX `Cd_Criterion_UNIQUE` (`Cd_Criterion` ASC);
+ALTER TABLE `REFERENCE` ADD UNIQUE INDEX `Cd_Reference_UNIQUE` (`Cd_Reference` ASC);
+
 SET foreign_key_checks=1;
