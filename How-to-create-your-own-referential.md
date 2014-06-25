@@ -18,3 +18,6 @@ Go into the jar folder and execute this command :
  1. In the `<generator.dataFile>` tag, set the absolute path to your CSV file.
  1. In the `<generator.delimiter>` is optional. Set the character who's delimite each CSV columns. (Default, the delimiter is set with semicolon `;` character. 
  1. In the `<generator.refDescriptor>` is optional, if you have an URL page that describe your referential, set this url between refDescriptor tag.
+1. Build this project (referentiel-context-creator).
+
+Your referential is now ready to implement what you need !
