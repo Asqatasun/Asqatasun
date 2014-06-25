@@ -73,7 +73,7 @@ public final class DomElementExtractor {
         String ppr = sspHandler.getPreProcessResult(
                 COLOR_EXTRACTOR_PRE_PROCESS_RESULT_KEY,
                 sspHandler.getPage());
-        Collection<DomElement> domElements = new ArrayList<DomElement>();
+        Collection<DomElement> domElements = new ArrayList<>();
         
         JSONArray json;
         try {

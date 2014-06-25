@@ -135,6 +135,8 @@ public abstract class ElementCheckerImpl implements ElementChecker {
     
     /**
      * 
+     * @param successSolution 
+     * @param failureSolution 
      * @param eeAttributeNameList 
      */
     public ElementCheckerImpl(TestSolution successSolution, 
@@ -219,8 +221,7 @@ public abstract class ElementCheckerImpl implements ElementChecker {
             EvidenceElement evidenceElement) {
         
         if (evidenceElement != null) {
-            Collection<EvidenceElement> evidenceElementList = 
-                    new ArrayList<EvidenceElement>();
+            Collection<EvidenceElement> evidenceElementList = new ArrayList<>();
             evidenceElementList.add(evidenceElement);
             processRemarkService.addSourceCodeRemarkOnElement(
                         testSolution, 
@@ -251,8 +252,7 @@ public abstract class ElementCheckerImpl implements ElementChecker {
             String attributeName) {
         
         if (attributeName != null) {
-            Collection<EvidenceElement> evidenceElementList = 
-                    new ArrayList<EvidenceElement>();
+            Collection<EvidenceElement> evidenceElementList = new ArrayList<>();
             EvidenceElement ee = getEvidenceElement(
                     EvidenceStore.TARGETTED_ELEMENT_FROM_SCOPE_EE, attributeName);
             evidenceElementList.add(ee);
@@ -319,7 +319,7 @@ public abstract class ElementCheckerImpl implements ElementChecker {
         if (CollectionUtils.isEmpty(eeListCollection)) {
             return null;
         }
-        Collection<EvidenceElement> eeList = new ArrayList<EvidenceElement>();
+        Collection<EvidenceElement> eeList = new ArrayList<>();
         for (String eeName : eeListCollection) {
             eeList.add(getEvidenceElement(element, eeName));
         }
@@ -380,7 +380,7 @@ public abstract class ElementCheckerImpl implements ElementChecker {
      */
     private boolean isAttributeExternalResource(String attributeName) {
         return (StringUtils.equalsIgnoreCase(attributeName, SRC_ATTR) || 
-                StringUtils.equalsIgnoreCase(attributeName, HREF_ATTR)) ? true : false; 
+                StringUtils.equalsIgnoreCase(attributeName, HREF_ATTR)); 
     }  
     
     /**
@@ -389,7 +389,7 @@ public abstract class ElementCheckerImpl implements ElementChecker {
      * @return whether a requested attribute is of text type
      */
     private boolean isElementTextRequested(String attributeName) {
-        return StringUtils.equalsIgnoreCase(attributeName, HtmlElementStore.TEXT_ELEMENT2) ? true : false; 
+        return StringUtils.equalsIgnoreCase(attributeName, HtmlElementStore.TEXT_ELEMENT2); 
     }  
 
     /**

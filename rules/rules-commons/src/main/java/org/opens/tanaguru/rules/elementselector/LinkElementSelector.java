@@ -80,13 +80,13 @@ public class LinkElementSelector implements ElementSelector {
             CollectionUtils.arrayToList(PREV_SIBLING_CONTEXT_ELEMENTS_TAB);
     
     /** */
-    private ElementHandler<Element> decidableElements = new ElementHandlerImpl();
+    private final ElementHandler<Element> decidableElements = new ElementHandlerImpl();
     public ElementHandler<Element> getDecidableElements() {
         return decidableElements;
     }
 
     /** */
-    private ElementHandler<Element> notDecidableElements = new ElementHandlerImpl();
+    private final ElementHandler<Element> notDecidableElements = new ElementHandlerImpl();
     public ElementHandler<Element> getNotDecidableElements() {
         return notDecidableElements;
     }
@@ -109,7 +109,7 @@ public class LinkElementSelector implements ElementSelector {
     }
     
     /* The element builder needed to build the link text */
-    private LinkTextElementBuilder linkTextElementBuilder = 
+    private final LinkTextElementBuilder linkTextElementBuilder = 
             new LinkTextElementBuilder();
     
     /**

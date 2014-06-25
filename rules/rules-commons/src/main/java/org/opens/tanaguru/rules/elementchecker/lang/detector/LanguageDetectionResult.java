@@ -63,7 +63,7 @@ public class LanguageDetectionResult {
     /**
      * The probability of the result
      */
-    private double probability;
+    private final double probability;
     /**
      * The number of words of the tested text
      */
@@ -96,11 +96,8 @@ public class LanguageDetectionResult {
      * the number of tested words
      */
     public boolean isReliable() {
-        if (probability > MIN_PROBABILITY_TO_BE_RELIABLE
-                && numberOfWords >= MIN_NUMBER_OF_WORDS_TO_BE_RELIABLE) {
-            return true;
-        }
-        return false;
+        return probability > MIN_PROBABILITY_TO_BE_RELIABLE
+                && numberOfWords >= MIN_NUMBER_OF_WORDS_TO_BE_RELIABLE;
     }
  
 }

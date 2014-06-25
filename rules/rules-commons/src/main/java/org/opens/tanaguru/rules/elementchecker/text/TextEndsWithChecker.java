@@ -34,7 +34,7 @@ import org.opens.tanaguru.rules.elementchecker.NomenclatureBasedElementChecker;
 import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
- * This class check whether a given textual element ends with an extension
+ * This class checks whether a given textual element ends with an extension
  * that belongs to a nomenclature
  */
 public class TextEndsWithChecker extends NomenclatureBasedElementChecker {
@@ -106,6 +106,7 @@ public class TextEndsWithChecker extends NomenclatureBasedElementChecker {
      * @param testableTextBuilder
      * @param extensionListNomName
      * @param detectedSolution
+     * @param notDetectedSolution
      * @param textEndsWithMessageCode
      */
     public TextEndsWithChecker(

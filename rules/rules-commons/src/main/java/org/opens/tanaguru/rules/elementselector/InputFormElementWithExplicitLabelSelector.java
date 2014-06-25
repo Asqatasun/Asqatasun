@@ -89,10 +89,7 @@ public class InputFormElementWithExplicitLabelSelector implements ElementSelecto
                         LABEL_ELEMENT,
                         FOR_ATTR, 
                         id);
-        if (!sspHandler.domCssLikeSelectNodeSet(query).getSelectedElements().isEmpty()) {
-            return true;
-        }
-        return false;
+        return !sspHandler.domCssLikeSelectNodeSet(query).getSelectedElements().isEmpty();
     }
 
 }

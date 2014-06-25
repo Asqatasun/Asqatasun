@@ -40,7 +40,7 @@ public class ElementWithAttributePresenceChecker extends ElementPresenceChecker 
     /**
      * The name of the attribute handled by the element
      */
-    private String attributeName;
+    private final String attributeName;
 
     /**
      * Constructor.

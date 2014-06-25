@@ -32,7 +32,7 @@ import org.opens.tanaguru.rules.elementchecker.ElementCheckerImpl;
 import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
- * This class checks whether the content of an text is empty.
+ * This class checks whether the content of a text is empty.
  */
 public class TextEmptinessChecker extends ElementCheckerImpl {
 

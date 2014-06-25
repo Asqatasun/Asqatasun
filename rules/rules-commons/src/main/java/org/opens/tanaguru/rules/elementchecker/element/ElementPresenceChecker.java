@@ -57,12 +57,12 @@ public class ElementPresenceChecker extends ElementCheckerImpl {
      * The message code associated with a processRemark when the element is
      * detected on the page
      */
-    private String messageCodeOnElementDetected;
+    private final String messageCodeOnElementDetected;
     /**
      * The message code associated with a processRemark when the element is
      * not found on the page
      */
-    private String messageCodeOnElementNotDetected;
+    private final String messageCodeOnElementNotDetected;
     /**
      * The message code associated with a sourceCodeRemark when several elements
      * are detected and the checkUnicity state is set to true

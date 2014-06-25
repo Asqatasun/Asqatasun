@@ -44,18 +44,18 @@ public class ElementUnicityChecker extends ElementCheckerImpl {
      * The message code associated with a processRemark when the element is
      * detected on the page
      */
-    private String messageCodeOnElementUnique;
+    private final String messageCodeOnElementUnique;
     /**
      * The message code associated with a processRemark when the element is not
      * found on the page
      */
-    private String messageCodeOnElementNotUnique;
+    private final String messageCodeOnElementNotUnique;
 
     /**
      * Constructor.
      *
      * @param messageCodeOnElementUnique
-     * @param messageCodeOnElementNotDetected
+     * @param messageCodeOnElementNotUnique
      */
     public ElementUnicityChecker(
             String messageCodeOnElementUnique,

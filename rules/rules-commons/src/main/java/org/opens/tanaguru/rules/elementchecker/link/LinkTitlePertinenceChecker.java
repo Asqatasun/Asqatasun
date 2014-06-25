@@ -50,13 +50,13 @@ public class LinkTitlePertinenceChecker extends CompositeChecker {
 
     private  static final String LINK_TEXT_BL_NOM_NAME = "LinkTextBlacklist";
     
-    private TextElementBuilder linkTextElementBuilder = new LinkTextElementBuilder();
+    private final TextElementBuilder linkTextElementBuilder = new LinkTextElementBuilder();
     @Override 
     public TextElementBuilder getTextElementBuilder() {
         return linkTextElementBuilder;
     }
     
-    private TextElementBuilder titleAttrElementBuilder = 
+    private final TextElementBuilder titleAttrElementBuilder = 
             new TextAttributeOfElementBuilder(TITLE_ATTR);
     /* */
     private boolean isEqualContentAuthorized = false;

@@ -36,8 +36,7 @@ import static org.opens.tanaguru.rules.keystore.HtmlElementStore.AREA_ELEMENT;
 /**
  * Area selector implementation. This implementation is quite specific due to 
  * area definition. An area is linked to a map that is linked through its name
- * attribute to an image through a usemap attribute.
- * 
+ * attribute to an image through a usemap attribute. 
  */
 public class AreaElementSelector extends SimpleElementSelector {
 
@@ -112,10 +111,7 @@ public class AreaElementSelector extends SimpleElementSelector {
         query = CssLikeSelectorBuilder.buildSelectorFromAttributeTypeAndValue(
                 USEMAP_ATTR, 
                 '#'+element.attr(NAME_ATTR));
-        if (CssLikeSelectorBuilder.getNumberOfElements(sspHandler, query)> 0) {
-            return true;
-        }
-        return false;
+        return CssLikeSelectorBuilder.getNumberOfElements(sspHandler, query)> 0;
     }
 
 }

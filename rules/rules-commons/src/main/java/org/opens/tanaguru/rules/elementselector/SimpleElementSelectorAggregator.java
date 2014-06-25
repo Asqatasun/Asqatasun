@@ -40,7 +40,7 @@ public class SimpleElementSelectorAggregator implements ElementSelector{
     private Collection<SimpleElementSelector> simpleElementSelectorList;
     public void addSimpleElementSelector(SimpleElementSelector simpleElementSelector) {
         if (simpleElementSelectorList == null ) {
-            simpleElementSelectorList = new ArrayList<SimpleElementSelector>();
+            simpleElementSelectorList = new ArrayList<>();
         }
         simpleElementSelectorList.add(simpleElementSelector);
     }

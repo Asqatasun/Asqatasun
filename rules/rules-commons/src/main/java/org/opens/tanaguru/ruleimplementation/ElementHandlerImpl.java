@@ -21,6 +21,7 @@
  */
 package org.opens.tanaguru.ruleimplementation;
 
+import java.util.Arrays;
 import java.util.Collection;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -41,20 +42,20 @@ public class ElementHandlerImpl implements ElementHandler<Element> {
     /**
      * Constructor that initialise locale collection with elements passed as 
      * arguement
+     * @param els
      */
     public ElementHandlerImpl(Element... els){
-        for (Element el : els) {
-            elements.add(el);
-        }
+        elements.addAll(Arrays.asList(els));
     }
 
     /**
      * The elements implied by the test
      */
-    private Elements elements = new Elements();
+    private final Elements elements = new Elements();
     
     /**
      * {@inheritDoc}
+     * @param element
      */
     @Override
     public void add(Element element) {
@@ -65,6 +66,7 @@ public class ElementHandlerImpl implements ElementHandler<Element> {
     
     /**
      * {@inheritDoc}
+     * @param element
      */
     @Override
     public void remove(Element element) {
@@ -73,6 +75,7 @@ public class ElementHandlerImpl implements ElementHandler<Element> {
     
     /**
      * {@inheritDoc}
+     * @param elements
      */
     @Override
     public void addAll(Collection<Element> elements) {
@@ -83,6 +86,7 @@ public class ElementHandlerImpl implements ElementHandler<Element> {
     
     /**
      * {@inheritDoc}
+     * @param elements
      */
     @Override
     public void removeAll(Collection<Element> elements) {
@@ -91,6 +95,7 @@ public class ElementHandlerImpl implements ElementHandler<Element> {
     
     /**
      * {@inheritDoc}
+     * @param elementHandler
      */
     @Override
     public void removeAll(ElementHandler<Element> elementHandler) {
@@ -99,6 +104,7 @@ public class ElementHandlerImpl implements ElementHandler<Element> {
     
     /**
      * {@inheritDoc}
+     * @return the current ElementHandler emptied
      */
     @Override
     public ElementHandler clean() {
@@ -108,6 +114,7 @@ public class ElementHandlerImpl implements ElementHandler<Element> {
     
     /**
      * {@inheritDoc}
+     * @return 
      */
     @Override
     public Elements get() {
@@ -116,6 +123,7 @@ public class ElementHandlerImpl implements ElementHandler<Element> {
 
     /**
      * {@inheritDoc}
+     * @return 
      */
     @Override
     public boolean isEmpty() {
