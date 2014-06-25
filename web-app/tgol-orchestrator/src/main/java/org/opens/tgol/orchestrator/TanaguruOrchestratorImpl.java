@@ -55,20 +55,20 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
 
     private static final Logger LOGGER = Logger.getLogger(TanaguruOrchestratorImpl.class);
-    private AuditService auditService;
-    private ActDataService actDataService;
-    private AuditDataService auditDataService;
-    private ScenarioDataService scenarioDataService;
-    private ActFactory actFactory;
-    private ThreadPoolTaskExecutor threadPoolTaskExecutor;
-    private Map<ScopeEnum, Scope> scopeMap = new EnumMap<ScopeEnum, Scope>(ScopeEnum.class);
+    private final AuditService auditService;
+    private final ActDataService actDataService;
+    private final AuditDataService auditDataService;
+    private final ScenarioDataService scenarioDataService;
+    private final ActFactory actFactory;
+    private final ThreadPoolTaskExecutor threadPoolTaskExecutor;
+    private final Map<ScopeEnum, Scope> scopeMap = new EnumMap<>(ScopeEnum.class);
     private void initializeScopeMap(ScopeDataService ScopeDataService) {
         for (Scope scope : ScopeDataService.findAll()) {
             scopeMap.put(scope.getCode(), scope);
         }
     }
     
-    private EmailSender emailSender;
+    private final EmailSender emailSender;
     /*
      * keys to send the user an email at the end of an audit.
      */
@@ -128,12 +128,12 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         this.delay = delay;
     }
     
-    private List<String> emailSentToUserExclusionList = new ArrayList<String>();
+    private final List<String> emailSentToUserExclusionList = new ArrayList<>();
     public void setEmailSentToUserExclusionRawList(String emailSentToUserExclusionRawList) {
         this.emailSentToUserExclusionList.addAll(Arrays.asList(emailSentToUserExclusionRawList.split(";")));
     }
     
-    private List<String> krashReportMailList = new ArrayList<String>();
+    private final List<String> krashReportMailList = new ArrayList<>();
     public void setKrashReportMailList(String krashReportMailList) {
         this.krashReportMailList.addAll(Arrays.asList(krashReportMailList.split(";")));
     }
@@ -327,9 +327,9 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
                     break;
                 }
             }
-            if (auditTimeoutThread.getException() != null) {
+            if (null != auditTimeoutThread.getException()) {
                 LOGGER.error("new KrashAuditException()");
-                throw new KrashAuditException();
+                throw new KrashAuditException(auditTimeoutThread.getException());
             }
             return auditTimeoutThread.getAudit();
         }
@@ -351,7 +351,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         }
         ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME, locale);
         String emailFrom = bundle.getString(RECIPIENT_KEY);
-        Set<String> emailToSet = new HashSet<String>();
+        Set<String> emailToSet = new HashSet<>();
         emailToSet.add(emailTo);
         if (act.getStatus().equals(ActStatus.COMPLETED)) {
             sendSuccessfulMessageOnActTerminated(act, bundle, emailFrom, emailToSet, getProjectNameFromAct(act));
@@ -372,7 +372,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         String projectName = getProjectNameFromAct(act);
         
         if (isAllowedToSendKrashReport && CollectionUtils.isNotEmpty(krashReportMailList)) {
-            Set<String> emailToSet = new HashSet<String>();
+            Set<String> emailToSet = new HashSet<>();
             emailToSet.addAll(krashReportMailList);
             String host ="";
             try { 
@@ -401,7 +401,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
                     + "exlusion list");
             return;
         }
-        Set<String> emailToSet = new HashSet<String>();
+        Set<String> emailToSet = new HashSet<>();
         emailToSet.add(emailTo);
         String msgSubject = bundle.getString(KRASH_SUBJECT_KEY);
         msgSubject = StringUtils.replace(msgSubject, PROJECT_NAME_TO_REPLACE, projectName);
@@ -558,7 +558,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             this.auditService = auditService;
         }
         
-        private Set<Parameter> parameterSet = new HashSet<Parameter>();
+        private Set<Parameter> parameterSet = new HashSet<>();
         public Set<Parameter> getParameterSet() {
             return parameterSet;
         }
@@ -576,7 +576,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             this.currentAct = currentAct;
         }
         
-        private Map<Audit, Long> auditExecutionList = new ConcurrentHashMap<Audit, Long>();
+        private Map<Audit, Long> auditExecutionList = new ConcurrentHashMap<>();
         public Map<Audit, Long> getAuditExecutionList() {
             return auditExecutionList;
         }
@@ -585,7 +585,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             this.auditExecutionList = auditExecutionList;
         }
         
-        private Map<Long, Audit> auditCompletedList = new ConcurrentHashMap<Long, Audit>();
+        private Map<Long, Audit> auditCompletedList = new ConcurrentHashMap<>();
         public Map<Long, Audit> getAuditCompletedList() {
             return auditCompletedList;
         }
@@ -594,7 +594,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             this.auditCompletedList = auditCompletedList;
         }
         
-        private Map<Long, AbstractMap.SimpleImmutableEntry<Audit, Exception>> auditCrashedList = new HashMap<Long, AbstractMap.SimpleImmutableEntry<Audit, Exception>>();
+        private Map<Long, AbstractMap.SimpleImmutableEntry<Audit, Exception>> auditCrashedList = new HashMap<>();
         public Map<Long, SimpleImmutableEntry<Audit, Exception>> getAuditCrashedList() {
             return auditCrashedList;
         }
@@ -657,9 +657,10 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
         public void run() {
             this.getAuditService().add(this);
             Audit currentAudit = launchAudit();
+            this.getCurrentAct().setAudit(currentAudit);
+            actDataService.saveOrUpdate(this.getCurrentAct());
             currentAudit = this.waitForAuditToComplete(currentAudit);
             this.getAuditService().remove(this);
-            this.getCurrentAct().setAudit(currentAudit);
             onActTerminated(this.getCurrentAct(), currentAudit);
         }
         
@@ -705,7 +706,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             if (auditCrashed != null) {
                 Long token = this.auditExecutionList.get(auditCrashed);
                 this.auditExecutionList.remove(auditCrashed);
-                this.auditCrashedList.put(token, new AbstractMap.SimpleImmutableEntry<Audit, Exception>(audit, exception));
+                this.auditCrashedList.put(token, new AbstractMap.SimpleImmutableEntry<>(audit, exception));
                 this.exception = exception;
             }
         }
@@ -758,7 +759,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
      */
     private class AuditSiteThread extends AuditThread {
 
-        private String siteUrl;
+        private final String siteUrl;
         
         public AuditSiteThread(
                 String siteUrl,
@@ -796,8 +797,8 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
      */
     private class AuditScenarioThread extends AuditThread {
 
-        private String scenarioName;
-        private String scenario;
+        private final String scenarioName;
+        private final String scenario;
         
         public AuditScenarioThread(
                 String scenarioName,
@@ -886,8 +887,8 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
      */
     private class AuditGroupOfPagesThread extends AuditTimeoutThread {
 
-        private String siteUrl;
-        private List<String> pageUrlList = new ArrayList<String>();
+        private final String siteUrl;
+        private final List<String> pageUrlList = new ArrayList<>();
         
         public AuditGroupOfPagesThread(
                 String siteUrl,
@@ -930,7 +931,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
      */
     private class AuditPageThread extends AuditTimeoutThread {
 
-        private String pageUrl;
+        private final String pageUrl;
         
         public AuditPageThread(
                 String pageUrl,
@@ -968,7 +969,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
      */
     private class AuditPageUploadThread extends AuditTimeoutThread {
 
-        Map<String, String> pageMap = new HashMap<String, String>();
+        private final Map<String, String> pageMap = new HashMap<>();
         
         public AuditPageUploadThread(
                 Map<String, String> pageMap,
@@ -980,8 +981,8 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
             super(auditService, act, parameterSet, locale, delay);
             if (pageMap != null) {
                 this.pageMap.putAll(pageMap);
+                LOGGER.info("Launching audit files on " + pageMap.keySet());
             }
-            LOGGER.info("Launching audit files on " + pageMap.keySet());
         }
 
         @Override
