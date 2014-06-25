@@ -120,11 +120,71 @@
     </session-config>
     
     <error-page>
+        <error-code>400</error-code>
+        <location>/access-denied.html</location>
+    </error-page>
+    <error-page>
+        <error-code>401</error-code>
+        <location>/access-denied.html</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/access-denied.html</location>
+    </error-page>
+    <error-page>
         <error-code>404</error-code>
         <location>/access-denied.html</location>
     </error-page>
     <error-page>
         <error-code>405</error-code>
         <location>/access-denied.html</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/oups.html</location>
+    </error-page>
+    <error-page>
+        <error-code>501</error-code>
+        <location>/oups.html</location>
+    </error-page>
+    <error-page>
+        <error-code>502</error-code>
+        <location>/oups.html</location>
+    </error-page>
+    <error-page>
+        <error-code>503</error-code>
+        <location>/oups.html</location>
+    </error-page>
+    <error-page>
+        <error-code>504</error-code>
+        <location>/oups.html</location>
+    </error-page>
+    <error-page>
+        <error-code>505</error-code>
+        <location>/oups.html</location>
+    </error-page>
+    <error-page>
+        <error-code>506</error-code>
+        <location>/oups.html</location>
+    </error-page>
+    <error-page>
+        <error-code>507</error-code>
+        <location>/oups.html</location>
+    </error-page>
+    <error-page>
+        <error-code>508</error-code>
+        <location>/oups.html</location>
+    </error-page>
+    <error-page>
+        <error-code>509</error-code>
+        <location>/oups.html</location>
+    </error-page>
+    <error-page>
+        <error-code>510</error-code>
+        <location>/oups.html</location>
+    </error-page>
+    <error-page>
+        <error-code>520</error-code>
+        <location>/oups.html</location>
     </error-page>
 </web-app>
