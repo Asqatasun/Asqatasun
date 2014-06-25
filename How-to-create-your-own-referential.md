@@ -1,4 +1,4 @@
-# You can use Tanaguru Referential-Creator to ease the creation of your own referentiel.
+# Tanaguru Referential-Creator ease the referantial creation
 
 ## Prerequisite :
 Manual install of the apache commons-csv library available here.
