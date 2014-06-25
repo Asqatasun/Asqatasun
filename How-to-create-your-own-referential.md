@@ -1,0 +1,1 @@
+You can use Tanaguru Referential-Creator to ease the creation of your own referentiel.
