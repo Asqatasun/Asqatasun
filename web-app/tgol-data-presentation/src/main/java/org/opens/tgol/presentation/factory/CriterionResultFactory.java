@@ -149,9 +149,9 @@ public final class CriterionResultFactory {
         Collections.sort(criterionStatisticsList, new Comparator<CriterionStatistics>() {
             @Override
             public int compare(CriterionStatistics o1, CriterionStatistics o2) {
-                return String.CASE_INSENSITIVE_ORDER.compare(
-                        o1.getCriterion().getCode(),
-                        o2.getCriterion().getCode());
+                return Integer.compare(
+                        o1.getCriterion().getRank(),
+                        o2.getCriterion().getRank());
             }
         });
     }
