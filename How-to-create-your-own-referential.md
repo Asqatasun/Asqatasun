@@ -1,4 +1,4 @@
-# Tanaguru Referential-Creator ease the referantial creation
+# Referential-Creator ease the referential creation
 
 ## Prerequisite :
 Manual install of the apache commons-csv library available here.
