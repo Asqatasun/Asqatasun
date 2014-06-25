@@ -15,6 +15,8 @@ The theme column : Define by a number, just an integer.
 The critere column : Define by two numbers separated by a dash. The first number is the theme number, the second is the critere number.
 The test column : Define by three numbers separated by a dash. The first is the theme number, the second is the critere number and the third is the test number.
 
+You can see our CSV example use the `ø` delimiter.
+
 ## The steps to generate the context
 
 1. Build the referentiel-creator maven plugin.
