@@ -17,7 +17,7 @@
         </dependency>
         <dependency>
             <groupId>${hibernateGroupId}</groupId>
-            <artifactId>hibernate-core</artifactId>
+            <artifactId>hibernate-entitymanager</artifactId>
         </dependency>
     </dependencies>
 </project>
