@@ -23,6 +23,7 @@ package org.opens.tgol.presentation.factory;
 
 import java.util.*;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.parameterization.Parameter;
@@ -161,16 +162,13 @@ public class AuditStatisticsFactory {
         ResultCounter resultCounter = auditStats.getResultCounter();
         resultCounter.setPassedCount(webResourceDataService.getResultCountByResultType(
                 webResource, audit, TestSolution.PASSED).intValue());
-        resultCounter.setFailedCount(webResourceDataService.getResultCountByResultType(
-                webResource, audit, TestSolution.FAILED).intValue());
-        resultCounter.setNmiCount(webResourceDataService.getResultCountByResultType(
-                webResource, audit, TestSolution.NEED_MORE_INFO).intValue());
-        resultCounter.setNaCount(webResourceDataService.getResultCountByResultType(
-                webResource, audit, TestSolution.NOT_APPLICABLE).intValue());
-        resultCounter.setNtCount(webResourceDataService.getResultCountByResultType(
-                webResource, audit, TestSolution.NOT_TESTED).intValue());
+        resultCounter.setPassedCount(0);
+        resultCounter.setFailedCount(0);
+        resultCounter.setNmiCount(0);
+        resultCounter.setNaCount(0);
+        resultCounter.setNtCount(0);
 
-        auditStats.setCounterByThemeMap(addCounterByThemeMap(audit, webResource, displayScope));
+        auditStats.setCounterByThemeMap(addCounterByThemeMap(audit, webResource, resultCounter, displayScope));
         auditStats.setParametersMap(getAuditParameters(audit, parametersToDisplay));
         return auditStats;
     }
@@ -250,12 +248,14 @@ public class AuditStatisticsFactory {
      *
      * @param audit
      * @param webResource
+     * @param globalResultCounter
      * @param displayScope
      * @return
      */
     private Map<Theme, ResultCounter> addCounterByThemeMap(
             Audit audit,
             WebResource webResource,
+            ResultCounter globalResultCounter, 
             String displayScope) {
         Map<Theme, ResultCounter> counterByThemeMap = new LinkedHashMap();
         for (Theme theme : getThemeListFromAudit(audit)) {
@@ -267,6 +267,11 @@ public class AuditStatisticsFactory {
                 themeResultCounter = getResultCounterByThemeForCriterion(webResource, theme);
             }
             if (themeResultCounter != null) {
+                globalResultCounter.setPassedCount(themeResultCounter.getPassedCount() + globalResultCounter.getPassedCount());
+                globalResultCounter.setFailedCount(themeResultCounter.getFailedCount() + globalResultCounter.getFailedCount());
+                globalResultCounter.setNmiCount(themeResultCounter.getNmiCount() + globalResultCounter.getNmiCount());
+                globalResultCounter.setNaCount(themeResultCounter.getNaCount() + globalResultCounter.getNaCount());
+                globalResultCounter.setNtCount(themeResultCounter.getNtCount() + globalResultCounter.getNtCount());
                 counterByThemeMap.put(theme, themeResultCounter);
             }
         }
