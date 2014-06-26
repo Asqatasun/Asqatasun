@@ -1,7 +1,7 @@
-<%@page contentType="text/html;charset=UTF-8"%>
-<%@page pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<@page contentType="text/html;charset=UTF-8">
+<@page pageEncoding="UTF-8">
+<@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" >
+<@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c">
                         <c:if test="${addSpan == 'true'}">
                             <div class="span4">
                         </c:if>
@@ -9,6 +9,9 @@
                             <c:set var="totalNumber" scope="page">
                                 ${counter.passedCount + counter.failedCount + counter.nmiCount + counter.naCount}
                             </c:set>
+                        <c:if test="${totalNumber == 0}">
+                            <c:set var="totalNumber" scope="page" value="1"/>
+                        </c:if>
                             <div>
                                 <table id="result-synthetized-text">
                                     <tr>
