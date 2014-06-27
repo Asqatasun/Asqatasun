@@ -34,6 +34,7 @@ public class CriterionFactoryImpl implements CriterionFactory {
         super();
     }
 
+    @Override
     public Criterion create() {
         return new CriterionImpl();
     }

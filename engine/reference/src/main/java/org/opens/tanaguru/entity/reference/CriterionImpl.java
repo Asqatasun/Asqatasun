@@ -56,7 +56,7 @@ public class CriterionImpl implements Criterion, Serializable {
     @JoinColumn(name = "Reference_Id_Reference")
     private ReferenceImpl reference;
     @OneToMany(mappedBy = "criterion", cascade = CascadeType.ALL)
-    private Collection<TestImpl> testList = new ArrayList<TestImpl>();
+    private Collection<TestImpl> testList = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "Theme_Id_Theme")
     private ThemeImpl theme;

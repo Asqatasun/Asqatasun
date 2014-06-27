@@ -24,6 +24,7 @@ package org.opens.tanaguru.entity.reference;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
@@ -42,7 +43,7 @@ public class ThemeImpl implements Theme, Serializable {
     @Column(name = "Cd_Theme")
     private String code;
     @OneToMany(mappedBy = "theme", cascade = CascadeType.ALL)
-    private Set<CriterionImpl> criterionList;
+    private final Set<CriterionImpl> criterionList = new HashSet<>();
     @Column(name = "Description")
     private String description;
     @Id
@@ -56,7 +57,6 @@ public class ThemeImpl implements Theme, Serializable {
 
     public ThemeImpl() {
         super();
-        criterionList = new HashSet<CriterionImpl>();
     }
 
     public ThemeImpl(String code, String label, String description) {
@@ -150,10 +150,6 @@ public class ThemeImpl implements Theme, Serializable {
         if ((this.code == null) ? (other.code != null) : !this.code.equals(other.code)) {
             return false;
         }
-        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
-            return false;
-        }
-        
-        return true;
+        return Objects.equals(this.id, other.id) || (this.id != null && this.id.equals(other.id));
     }
 }

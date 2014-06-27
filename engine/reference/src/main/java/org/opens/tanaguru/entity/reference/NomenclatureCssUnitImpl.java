@@ -48,10 +48,12 @@ public class NomenclatureCssUnitImpl extends NomenclatureElementImpl implements
         this.cssShortValue = cssShortValue;
     }
 
+    @Override
     public int getCssShortValue() {
         return cssShortValue;
     }
 
+    @Override
     public void setCssShortValue(int cssShortValue) {
         this.cssShortValue = cssShortValue;
     }

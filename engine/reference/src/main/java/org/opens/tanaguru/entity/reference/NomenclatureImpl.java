@@ -99,7 +99,7 @@ public class NomenclatureImpl implements Nomenclature, Serializable {
 
     @Override
     public Collection<Integer> getIntegerValueList() {
-        Collection<Integer> values = new HashSet<Integer>();
+        Collection<Integer> values = new HashSet<>();
         for (NomenclatureElement element : elementList) {
             if (element instanceof NomenclatureCssUnit) {
                 NomenclatureCssUnit cssUnitElement = (NomenclatureCssUnit) element;
@@ -126,7 +126,7 @@ public class NomenclatureImpl implements Nomenclature, Serializable {
 
     @Override
     public Collection<String> getValueList() {
-        Collection<String> values = new HashSet<String>();
+        Collection<String> values = new HashSet<>();
         for (NomenclatureElement element : elementList) {
             values.add(element.getLabel());
         }
@@ -147,7 +147,7 @@ public class NomenclatureImpl implements Nomenclature, Serializable {
     public void setElementList(
             Collection<NomenclatureElement> elementList) {
         if (this.elementList == null) {
-            this.elementList = new HashSet<NomenclatureElementImpl>();
+            this.elementList = new HashSet<>();
         }
         for (NomenclatureElement nomEl : elementList) {
             this.elementList.add((NomenclatureElementImpl)nomEl);

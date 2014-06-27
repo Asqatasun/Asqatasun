@@ -21,6 +21,7 @@
  */
 package org.opens.tanaguru.entity.reference;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -31,7 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "STANDARD_MESSAGE")
 @XmlRootElement
-public class StandardMessageImpl implements StandardMessage {
+public class StandardMessageImpl implements StandardMessage, Serializable {
 
     @Column(name = "Cd_Standard_Message")
     private String code;
@@ -54,34 +55,42 @@ public class StandardMessageImpl implements StandardMessage {
         this.text = text;
     }
 
+    @Override
     public String getCode() {
         return code;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public String getLabel() {
         return label;
     }
 
+    @Override
     public String getText() {
         return text;
     }
 
+    @Override
     public void setCode(String code) {
         this.code = code;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
+    @Override
     public void setLabel(String label) {
         this.label = label;
     }
 
+    @Override
     public void setText(String text) {
         this.text = text;
     }
