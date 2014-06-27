@@ -27,6 +27,7 @@ import java.util.Collection;
 import javax.persistence.NoResultException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.PreProcessResult;
 import org.opens.tanaguru.entity.service.audit.PreProcessResultDataService;
@@ -40,16 +41,18 @@ import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
  */
 public class PreProcessResultDataServiceMock implements PreProcessResultDataService{
 
+    private static final Logger LOGGER = Logger.getLogger(PreProcessResultDataServiceMock.class);
+    
     @Override
     public String getPreProcessResultByKeyAndWebResource(String key, WebResource webresource) {
         String path = StringUtils.replace(webresource.getURL(), "html", "json");
         path = StringUtils.replace(path, "file:", "");
         try {
             String json = FileUtils.readFileToString(new File(path));
-            System.out.println(json);
+            LOGGER.info(json);
             return json;
         } catch (IOException ex) {
-            System.out.println(ex);
+            LOGGER.warn(ex);
             throw new NoResultException();
         }
     }

@@ -71,7 +71,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
 
     private static final Logger LOGGER = Logger.getLogger(AbstractRuleImplementationTestCase.class);
-    private String applicationContextFilePath = "context/application-context.xml";
+    private final String applicationContextFilePath = "context/application-context.xml";
     private ApplicationContext applicationContext;
     private TestFactory testFactory;
     private ContentLoaderService contentLoaderService;
@@ -84,21 +84,21 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     
     private AuditFactory auditFactory;
     private URLIdentifier urlIdentifier;
-    private Map<WebResource, List<Content>> contentMap = new HashMap<WebResource, List<Content>>();
-    private Map<WebResource, List<String>> relatedContentMap = new HashMap<WebResource, List<String>>();
+    private final Map<WebResource, List<Content>> contentMap = new HashMap<>();
+    private final Map<WebResource, List<String>> relatedContentMap = new HashMap<>();
     public Map<WebResource, List<String>> getRelatedContentMap() {
         return relatedContentMap;
     }
-    private List<Test> testList = new ArrayList<Test>();
+    private final List<Test> testList = new ArrayList<>();
     public List<Test> getTestList() {
         return testList;
     }
-    private Map<WebResource, Collection<ProcessResult>> grossResultMap = new HashMap<WebResource, Collection<ProcessResult>>();
+    private final Map<WebResource, Collection<ProcessResult>> grossResultMap = new HashMap<>();
     public Map<WebResource, Collection<ProcessResult>> getGrossResultMap() {
         return grossResultMap;
     }
     
-    private Map<WebResource, ProcessResult> netResultMap = new HashMap<WebResource, ProcessResult>();
+    private final Map<WebResource, ProcessResult> netResultMap = new HashMap<>();
     private WebResourceFactory webResourceFactory;
     public WebResourceFactory getWebResourceFactory() {
         return webResourceFactory;
@@ -111,11 +111,11 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     public void setRuleImplementationClassName(String ruleImplementationClassName) {
         this.ruleImplementationClassName = ruleImplementationClassName;
     }
-    private Map<String, WebResource> webResourceMap = new HashMap<String, WebResource>();
+    private final Map<String, WebResource> webResourceMap = new HashMap<>();
     public Map<String, WebResource> getWebResourceMap() {
         return webResourceMap;
     }
-    private Map<String, Collection<Parameter>> parameterMap = new HashMap<String, Collection<Parameter>>();
+    private final Map<String, Collection<Parameter>> parameterMap = new HashMap<>();
     public Map<String, Collection<Parameter>> getParameterMap() {
         return parameterMap;
     }
@@ -315,7 +315,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     }
 
     protected Collection<ProcessResult> process(String webResourceKey) {
-        System.out.println(this + "::process(\"" + webResourceKey + "\")");
+        LOGGER.debug(this + "::process(\"" + webResourceKey + "\")");
         WebResource webResource = webResourceMap.get(webResourceKey);
         Collection<ProcessResult> grossResultList = processorService.process(contentMap.get(webResource), testList);
         grossResultMap.put(webResource, grossResultList);
@@ -327,7 +327,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     }
 
     public ProcessResult consolidate(String webResourceKey) {
-        System.out.println(this + "::consolidate(\"" + webResourceKey + "\")");
+        LOGGER.debug(this + "::consolidate(\"" + webResourceKey + "\")");
         WebResource webResource = webResourceMap.get(webResourceKey);
         ProcessResult netResult = consolidatorService.consolidate(grossResultMap.get(webResource), testList).iterator().next();
         netResultMap.put(webResource, netResult);
@@ -396,10 +396,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
 
     private boolean isContentCss(String url) {
         String ext = url.substring(url.lastIndexOf('.') + 1);
-        if (ext.equalsIgnoreCase("css")) {
-            return true;
-        }
-        return false;
+        return ext.equalsIgnoreCase("css");
     }
 
     private String getTextContent(String url) {
@@ -432,15 +429,18 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
 
     /**
      * Override method to set custom properties/features {@inheritDoc}
+     * @param config
      */
     @Override
     protected void setUpDatabaseConfig(DatabaseConfig config) {
         super.setUpDatabaseConfig(config);
-        config.setProperty(DatabaseConfig.PROPERTY_BATCH_SIZE, Integer.valueOf(97));
+        config.setProperty(DatabaseConfig.PROPERTY_BATCH_SIZE, 97);
     }
 
     /**
      * Charge le jeu de données à partir d'un fichier XML d'import
+     * @return 
+     * @throws java.lang.Exception 
      */
     @Override
     protected IDataSet getDataSet() throws Exception {
@@ -457,7 +457,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
 
     @Override
     protected DatabaseOperation getSetUpOperation() throws Exception {
-        return DatabaseOperation.CLEAN_INSERT;
+        return DatabaseOperation.INSERT;
     }
 
     @Override
@@ -488,13 +488,12 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
      * 
      * @param sspIdentifier
      * @param parameter
-     * @return 
      */
     protected void addParameterToParameterMap(String sspIdentifier, Parameter parameter) {
         if (parameterMap.containsKey(sspIdentifier)) {
             parameterMap.get(sspIdentifier).add(parameter);
         } else {
-            Collection<Parameter> params = new ArrayList<Parameter>();
+            Collection<Parameter> params = new ArrayList<>();
             params.add(parameter);
             parameterMap.put(sspIdentifier, params);
         }
