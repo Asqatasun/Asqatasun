@@ -33,10 +33,9 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "CONTENT")
-@org.hibernate.annotations.Entity(
-		selectBeforeUpdate = false,
-		dynamicInsert = true,
-		dynamicUpdate = true)
+@org.hibernate.annotations.DynamicInsert(true)
+@org.hibernate.annotations.DynamicUpdate(true)
+@org.hibernate.annotations.SelectBeforeUpdate(false)
 public abstract class ContentImpl implements Content, Serializable {
 
     private static final long serialVersionUID = -8672816298160346526L;
