@@ -1,0 +1,35 @@
+<?xml version="1.0"?><project xmlns:pom="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.opens</groupId>
+        <artifactId>tanaguru-${referentielFolder.toLowerCase()}</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>${referentielFolder.toLowerCase()}</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <build>
+        <finalName>${referentielFolder.toLowerCase()}-${rulesVersion}</finalName>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>${rulesGroupId}</groupId>
+            <artifactId>tanaguru-rules-commons</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>${rulesGroupId}</groupId>
+            <artifactId>${referentielFolder.toLowerCase()}-i18n</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${rulesGroupId}</groupId>
+            <artifactId>${referentielFolder.toLowerCase()}-testcases</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${testingToolsGroupId}</groupId>
+            <artifactId>tanaguru-rules-testing-tools</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
