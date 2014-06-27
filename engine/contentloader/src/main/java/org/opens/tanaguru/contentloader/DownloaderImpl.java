@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -42,7 +42,9 @@ import org.apache.log4j.Logger;
  * @author jkowalczyk
  */
 public class DownloaderImpl implements Downloader {
-
+    
+    private static final Logger LOGGER = Logger.getLogger(DownloaderImpl.class);
+    
     protected String result;
     protected String url;
     private final String HTTP_PROTOCOL_PREFIX = "http://";
@@ -67,7 +69,7 @@ public class DownloaderImpl implements Downloader {
             }
             return urlContent.toString();
         } catch (IOException ex) {
-            Logger.getLogger(DownloaderImpl.class.getName()).warn(ex);
+            LOGGER.warn(ex);
             return "";
         } finally {
             try {
@@ -75,7 +77,7 @@ public class DownloaderImpl implements Downloader {
                     in.close();
                 }
             } catch (IOException ex) {
-                Logger.getLogger(DownloaderImpl.class.getName()).warn(ex);
+                LOGGER.warn(ex);
                 throw new RuntimeException(ex);
             }
         }
@@ -97,20 +99,16 @@ public class DownloaderImpl implements Downloader {
         try {
             responseBody = httpclient.execute(httpget, responseHandler);
         } catch (HttpResponseException ex) {
-            Logger.getLogger(DownloaderImpl.class.getName()).
-                    warn(ex.getMessage() + " " +url);
+            LOGGER.warn(ex.getMessage() + " " +url);
             return "";
         } catch (UnknownHostException ex ) {
-            Logger.getLogger(DownloaderImpl.class.getName()).
-                    warn(ex.getMessage() + " " +url);
+            LOGGER.warn(ex.getMessage() + " " +url);
             return "";
         } catch (SSLPeerUnverifiedException ex) {
-            Logger.getLogger(DownloaderImpl.class.getName()).
-                    warn(ex.getMessage() + " " +url);
+            LOGGER.warn(ex.getMessage() + " " +url);
             return "";
         } catch (IOException ex) {
-            Logger.getLogger(DownloaderImpl.class.getName()).
-                    warn(ex.getMessage() + " " +url);
+            LOGGER.warn(ex.getMessage() + " " +url);
             return "";
         }
         // When HttpClient instance is no longer needed,
@@ -134,12 +132,10 @@ public class DownloaderImpl implements Downloader {
     public void run() {
         if (url.startsWith(HTTP_PROTOCOL_PREFIX)
                 || url.startsWith(HTTPS_PROTOCOL_PREFIX)) {
-            Logger.getLogger(DownloaderImpl.class.getName()).
-                    info("Download resource "  + url);
+            LOGGER.debug("Download resource "  + url);
             result = download(url);
         } else if (url.startsWith(FILE_PROTOCOL_PREFIX)) {
-            Logger.getLogger(DownloaderImpl.class.getName()).
-                    info("Load resource "  + url);
+            LOGGER.debug("Load resource "  + url);
             result = load(url);
         }
     }
