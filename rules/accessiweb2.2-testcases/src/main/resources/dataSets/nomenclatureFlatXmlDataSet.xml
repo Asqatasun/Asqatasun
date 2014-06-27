@@ -214,7 +214,6 @@
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="188" Label="strike"  Id_Nomenclature="11"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="189" Label="tt"  Id_Nomenclature="11"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="190" Label="u"  Id_Nomenclature="11"/>
-    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="191" Label=""  Id_Nomenclature="12"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="192" Label="Bienvenue dans Adobe GoLive 6"  Id_Nomenclature="12"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="193" Label="Page title"  Id_Nomenclature="12"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="194" Label="Titre de la page"  Id_Nomenclature="12"/>
