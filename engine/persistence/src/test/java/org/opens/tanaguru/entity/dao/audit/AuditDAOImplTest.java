@@ -36,20 +36,12 @@ import org.opens.tanaguru.entity.subject.Site;
 public class AuditDAOImplTest extends AbstractDaoTestCase {
 
     private static final String INPUT_DATA_SET_FILENAME = "auditFlatXmlDataSet.xml";
-    private static final String INPUT_DATA_SET_WITH_TEST_FILENAME = "auditFlatXmlDataSetWithTest.xml";
 
-    private AuditDAO auditDAO;
+    private final AuditDAO auditDAO;
 
     public AuditDAOImplTest(String testName) {
         super(testName);
-        if (testName.equalsIgnoreCase("testFindAuditWithTest")) {
-            // due to integrity issues and problem when teardown is called at 
-            // the end of the test, the dataSet is different depending on the 
-            // test.
-            setInputDataFileName(getInputDataFilePath()+INPUT_DATA_SET_WITH_TEST_FILENAME);
-        } else {
-            setInputDataFileName(getInputDataFilePath()+INPUT_DATA_SET_FILENAME);
-        }
+        setInputDataFileName(getInputDataFilePath()+INPUT_DATA_SET_FILENAME);
         auditDAO = (AuditDAO)
                 springBeanFactory.getBean("auditDAO");
         if (!testName.equalsIgnoreCase("testFindAuditWithTest")) {
