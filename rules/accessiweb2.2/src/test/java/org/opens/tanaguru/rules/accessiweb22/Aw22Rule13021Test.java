@@ -182,7 +182,6 @@ public class Aw22Rule13021Test extends Aw22RuleImplementationTestCase {
         assertEquals(2,sourceCodeRemark.getElementList().size());
         eIter = sourceCodeRemark.getElementList().iterator();
         ee = eIter.next();
-        System.out.println(ee.getValue());
         assertTrue(StringUtils.contains(ee.getValue(), "My link 3"));
         assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
         ee = eIter.next();
@@ -197,7 +196,6 @@ public class Aw22Rule13021Test extends Aw22RuleImplementationTestCase {
         assertEquals(2,sourceCodeRemark.getElementList().size());
         eIter = sourceCodeRemark.getElementList().iterator();
         ee = eIter.next();
-        System.out.println(ee.getValue());
         assertTrue(StringUtils.contains(ee.getValue(), "My link 4"));
         assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
         ee = eIter.next();
