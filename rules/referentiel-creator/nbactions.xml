@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>rebuild</actionName>
+            <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
+                
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-Clean and Build With Debug</actionName>
+            <displayName>Clean and Build With Debug</displayName>
+            <goals>
+                <goal>-X</goal>
+                <goal>clean</goal>
+                <goal>install</goal>
+            </goals>
+        </action>
+    </actions>
