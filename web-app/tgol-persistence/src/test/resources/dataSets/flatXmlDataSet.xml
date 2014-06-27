@@ -32,8 +32,8 @@
     <TGSI_SCENARIO Id_Scenario="1" Date_Of_Creation="2011-01-01 00:00:00" Label="My Scenario 1" Content="Scenario Content" CONTRACT_Id_Contract="2"/>
     <TGSI_SCENARIO Id_Scenario="2" Date_Of_Creation="2011-01-01 00:00:00" Label="My Scenario 2" Content="Scenario Content" CONTRACT_Id_Contract="2"/>
     
-    <TGSI_OPTION_FAMILY Id_Option_Family="1" Code="DOMAIN" Label="" Description=""/>
-    <TGSI_OPTION_FAMILY Id_Option_Family="2" Code="USER_OPTION" Label="" Description=""/>
+    <TGSI_OPTION_FAMILY Id_Option_Family="1" Code="DOMAIN" />
+    <TGSI_OPTION_FAMILY Id_Option_Family="2" Code="USER_OPTION" />
     <TGSI_OPTION Id_Option="1" Code="DOMAIN" Is_Restriction="false" OPTION_FAMILY_Id_Option_Family="1"/>
     <TGSI_OPTION Id_Option="2" Code="USER_OPTION1" Is_Restriction="false" OPTION_FAMILY_Id_Option_Family="2"/>
     <TGSI_OPTION_ELEMENT Id_Option_Element="1" OPTION_Id_Option="1" Value="http://www.contract1.com/"/>
