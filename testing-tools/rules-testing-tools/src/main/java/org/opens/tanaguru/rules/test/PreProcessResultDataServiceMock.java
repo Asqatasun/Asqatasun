@@ -49,7 +49,7 @@ public class PreProcessResultDataServiceMock implements PreProcessResultDataServ
         path = StringUtils.replace(path, "file:", "");
         try {
             String json = FileUtils.readFileToString(new File(path));
-            LOGGER.info(json);
+            LOGGER.debug(json);
             return json;
         } catch (IOException ex) {
             LOGGER.warn(ex);
