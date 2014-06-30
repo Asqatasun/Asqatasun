@@ -52,10 +52,10 @@ public class Rgaa22Rule05271Test extends Rgaa22RuleImplementationTestCase {
     protected void setUpWebResourceMap() {
         getWebResourceMap().put("Rgaa22.Test.5.27-3NMI-01",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "RGAA22/Rgaa22Rule05271/RGAA22.Test.5.27-3NMI-01.html"));
+              getTestcasesFilePath() + "rgaa22/Rgaa22Rule05271/RGAA22.Test.5.27-3NMI-01.html"));
         getWebResourceMap().put("Rgaa22.Test.5.27-4NA-01",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "RGAA22/Rgaa22Rule05271/RGAA22.Test.5.27-4NA-01.html"));
+              getTestcasesFilePath() + "rgaa22/Rgaa22Rule05271/RGAA22.Test.5.27-4NA-01.html"));
     }
 
     @Override

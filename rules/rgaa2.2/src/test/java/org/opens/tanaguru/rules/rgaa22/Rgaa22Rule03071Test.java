@@ -51,16 +51,16 @@ public class Rgaa22Rule03071Test extends Rgaa22RuleImplementationTestCase {
     protected void setUpWebResourceMap() {
         getWebResourceMap().put("Rgaa22.Test.3.7-1Passed-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule03071/RGAA22.Test.3.7-1Passed-01.html"));
+                getTestcasesFilePath() + "rgaa22/Rgaa22Rule03071/RGAA22.Test.3.7-1Passed-01.html"));
         getWebResourceMap().put("Rgaa22.Test.3.7-3NMI-01",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "RGAA22/Rgaa22Rule03071/RGAA22.Test.3.7-3NMI-01.html"));
+              getTestcasesFilePath() + "rgaa22/Rgaa22Rule03071/RGAA22.Test.3.7-3NMI-01.html"));
         getWebResourceMap().put("Rgaa22.Test.3.7-4NA-01",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "RGAA22/Rgaa22Rule03071/RGAA22.Test.3.7-4NA-01.html"));
+              getTestcasesFilePath() + "rgaa22/Rgaa22Rule03071/RGAA22.Test.3.7-4NA-01.html"));
         getWebResourceMap().put("Rgaa22.Test.3.7-4NA-02",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "RGAA22/Rgaa22Rule03071/RGAA22.Test.3.7-4NA-02.html"));
+              getTestcasesFilePath() + "rgaa22/Rgaa22Rule03071/RGAA22.Test.3.7-4NA-02.html"));
     }
 
     @Override
