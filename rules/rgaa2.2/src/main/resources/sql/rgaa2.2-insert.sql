@@ -4,13 +4,13 @@ SET foreign_key_checks=0;
 -- Contenu de la table `reference`
 --
 INSERT IGNORE INTO `REFERENCE` (`CD_REFERENCE`, `DESCRIPTION`, `LABEL`, `URL`, `RANK`, `ID_DEFAULT_LEVEL`) VALUES
-('RGAA22', NULL, 'Rgaa 2.2', 'www.references.modernisation.gouv.fr/sites/default/files/RGAA_v2.2.1.pdf', 2, 2);
+('Rgaa22', NULL, 'Rgaa 2.2', 'www.references.modernisation.gouv.fr/sites/default/files/RGAA_v2.2.1.pdf', 2, 2);
 
 --
 -- Contenu de la table `TGSI_REFERENTIAL`
 --
 INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Code`, `Label`) VALUES
-('RGAA30', 'Rgaa 3.0');
+('Rgaa30', 'Rgaa 3.0');
 
 --
 -- Contenu de la table `level`
@@ -229,7 +229,7 @@ INSERT IGNORE INTO `CRITERION` (`CD_CRITERION`, `DESCRIPTION`, `LABEL`, `URL`, `
 ('Rgaa22-1209', '', '12.9', 'http://rgaa.net/Presence-d-un-autre-moyen-que-la,186.html', 186),
 ('Rgaa22-1210', '', '12.10', 'http://rgaa.net/Utilisation-d-un-style-de.html', 187);
 
-UPDATE `CRITERION` SET `reference_ID_REFERENCE` = (SELECT `ID_REFERENCE` FROM `REFERENCE` WHERE `CD_REFERENCE` LIKE 'RGAA22') WHERE `CD_CRITERION` LIKE 'Rgaa22-%';
+UPDATE `CRITERION` SET `reference_ID_REFERENCE` = (SELECT `ID_REFERENCE` FROM `REFERENCE` WHERE `CD_REFERENCE` LIKE 'Rgaa22') WHERE `CD_CRITERION` LIKE 'Rgaa22-%';
 UPDATE `CRITERION` SET `theme_ID_THEME` = (SELECT `ID_THEME` FROM `THEME` WHERE `CD_THEME` LIKE 'Rgaa22-1') WHERE `CD_CRITERION` LIKE 'Rgaa22-01%';
 UPDATE `CRITERION` SET `theme_ID_THEME` = (SELECT `ID_THEME` FROM `THEME` WHERE `CD_THEME` LIKE 'Rgaa22-2') WHERE `CD_CRITERION` LIKE 'Rgaa22-02%';
 UPDATE `CRITERION` SET `theme_ID_THEME` = (SELECT `ID_THEME` FROM `THEME` WHERE `CD_THEME` LIKE 'Rgaa22-3') WHERE `CD_CRITERION` LIKE 'Rgaa22-03%';
