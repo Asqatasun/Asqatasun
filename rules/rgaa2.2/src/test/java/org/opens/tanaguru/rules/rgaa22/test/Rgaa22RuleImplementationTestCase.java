@@ -27,8 +27,8 @@ import org.opens.tanaguru.rules.test.AbstractRuleImplementationTestCase;
  */
 public abstract class Rgaa22RuleImplementationTestCase extends AbstractRuleImplementationTestCase {
 
-    private static final String TESTCASE_FILE_PATH = "../rgaa2.2-testcases/src/main/resources/testcases/";
-    private static final String INPUT_FILE_DATA_NAME = "../rgaa2.2-testcases/src/main/resources/dataSets/nomenclatureFlatXmlDataSet.xml";
+    private static final String TESTCASE_FILE_PATH = "src/test/resources/testcases/";
+    private static final String INPUT_FILE_DATA_NAME = "src/test/resources/dataSets/nomenclatureFlatXmlDataSet.xml";
 
     public Rgaa22RuleImplementationTestCase(String testName) {
         super(testName, INPUT_FILE_DATA_NAME, TESTCASE_FILE_PATH);

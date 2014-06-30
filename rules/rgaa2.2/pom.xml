@@ -9,20 +9,58 @@
     <artifactId>tanaguru-rgaa2.2</artifactId>
     <name>rgaa2.2</name>
     <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/hsql*</exclude>
+                        <exclude>**/*.log</exclude>
+                        <exclude>**/*.script</exclude>
+                        <exclude>*.tmp</exclude>
+                        <exclude>sql/**</exclude>
+                        <exclude>deploy.sh</exclude>
+                        <exclude>descriptor.xml</exclude>
+                    </excludes>                    
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.14.1</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/resources/descriptor.xml</descriptor>
+                    </descriptors>
+                    <outputDirectory>target</outputDirectory>
+                    <finalName>tanaguru-rgaa2.2-${rulesVersion}.i386</finalName>
+                </configuration>
+                <executions>
+                    <execution>
+                    <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                    <phase>package</phase> <!-- append to the packaging phase. -->
+                    <goals>
+                        <goal>assembly</goal> <!-- goals == mojos -->
+                    </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
         <finalName>rgaa2.2-${rulesVersion}</finalName>
     </build>
     <dependencies>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
             <artifactId>tanaguru-rules-commons</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${rulesGroupId}</groupId>
-            <artifactId>tanaguru-rgaa2.2-i18n</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${rulesGroupId}</groupId>
-            <artifactId>tanaguru-rgaa2.2-testcases</artifactId>
         </dependency>
         <dependency>
             <groupId>${testingToolsGroupId}</groupId>
