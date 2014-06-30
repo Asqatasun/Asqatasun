@@ -102,17 +102,7 @@ public class CodeGeneratorMojo extends AbstractMojo {
      * @parameter
      * default-value="${basedir}/src/main/resources/pomProject/pom.vm"
      */
-    File templateParentPom;
-    /**
-     * @parameter
-     * default-value="${basedir}/src/main/resources/pomProject/ref-pom.vm"
-     */
-    File templateRefPom;
-    /**
-     * @parameter
-     * default-value="${basedir}/src/main/resources/pomProject/generator.vm"
-     */
-    File targzPom;
+    File pom;
     /**
      * @parameter
      */
@@ -172,8 +162,8 @@ public class CodeGeneratorMojo extends AbstractMojo {
             return;
         }
         try {
-            generate(ve, records);
             initializeContext();
+            generate(ve, records);
             cleanUpUnusedFiles();
         } catch (IOException ex) {
             Logger.getLogger(CodeGeneratorMojo.class.getName()).log(Level.SEVERE, null, ex);
@@ -280,16 +270,16 @@ public class CodeGeneratorMojo extends AbstractMojo {
         Map critereMap = Collections.singletonMap(critereCode, critere);
         Map testMap = Collections.singletonMap(testCode, test);
         if (StringUtils.isNotBlank(theme) && StringUtils.isNotBlank(String.valueOf(themeIndex))) {
-            fg.writei18NFile(destinationFolder + I18N_FOLDER, themeMap, lang, langSet.first(), "theme", refDescriptor);
+            fg.writei18NFile(themeMap, lang, langSet.first(), "theme", refDescriptor);
         }
         if (StringUtils.isNotBlank(critere) && StringUtils.isNotBlank(critereCode)) {
-            fg.writei18NFile(destinationFolder + I18N_FOLDER, critereMap, lang, langSet.first(), "criterion", refDescriptor);
+            fg.writei18NFile(critereMap, lang, langSet.first(), "criterion", refDescriptor);
         }
         if (StringUtils.isNotBlank(test) && StringUtils.isNotBlank(testCode)) {
-            fg.writei18NFile(destinationFolder + I18N_FOLDER, testMap, lang, langSet.first(), "rule", refDescriptor);
+            fg.writei18NFile(testMap, lang, langSet.first(), "rule", refDescriptor);
         }
         if (isI18NReferentialCreated == false) {
-            fg.writei18NFile(destinationFolder + I18N_FOLDER, null, lang, langSet.first(), "referential", refDescriptor);
+            fg.writei18NFile(null, lang, langSet.first(), "referential", refDescriptor);
         }
     }
 
@@ -302,9 +292,7 @@ public class CodeGeneratorMojo extends AbstractMojo {
             ResourceNotFoundException, ParseErrorException, Exception {
         // Getting the Template
         Template ruleTemplate = ve.getTemplate(templateRule.getPath());
-        Template parentPomTemplate = ve.getTemplate(templateParentPom.getPath());
-        Template targzPomTemplate = ve.getTemplate(targzPom.getPath());
-        Template refPomTemplate = ve.getTemplate(templateRefPom.getPath());
+        Template pomTemplate = ve.getTemplate(pom.getPath());
         Template webappBeansTemplate = ve.getTemplate(templateBeansWebapp.getPath());
         Template webappBeansExpressionTemplate = ve.getTemplate(templateBeansExpression.getPath());
         Template auditResultConsoleTemplate = ve.getTemplate(templateAuditResultConsole.getPath());
@@ -317,8 +305,8 @@ public class CodeGeneratorMojo extends AbstractMojo {
         // Create a context and add data to the templateRule placeholder
         VelocityContext context = new VelocityContext();
         // Fetch templateRule into a StringWriter
-        FileGenerator fg = new FileGenerator(referentiel, referentielLabel);
-        fg.createI18NFiles(langSet, destinationFolder + I18N_FOLDER);
+        FileGenerator fg = new FileGenerator(referentiel, referentielLabel, destinationFolder);
+        fg.createI18NFiles(langSet);
 
         // we parse the records collection only once to create the i18n files.
         // These files will be then used later to create other context files
@@ -331,32 +319,30 @@ public class CodeGeneratorMojo extends AbstractMojo {
             String test = record.get(TEST_CODE_COLUMN_NAME);
             String testLabelFr = record.get(TEST_LABEL_COLUMN_NAME + langSet.first());
             context = fg.getContextRuleClassFile(referentiel, packageName, test, testLabelFr, context);
-            fg.writeFileCodeGenerate(context, ruleTemplate, destinationFolder);
-            fg.writeUnitTestGenerate(context, unitTestTemplate, destinationFolder, testLabelFr);
+            fg.writeFileCodeGenerate(context, ruleTemplate);
+            fg.writeUnitTestGenerate(context, unitTestTemplate, testLabelFr);
             String[] testsCasesState = {"Passed", "Failed", "NMI", "NA"};
             for (int i = 0; i < testsCasesState.length; i++) {
                 context.put("state", testsCasesState[i]);
-                fg.writeTestCaseGenerate(context, testCaseTemplate, destinationFolder + TESTCASES_FOLDER, String.valueOf(i + 1));
+                fg.writeTestCaseGenerate(context, testCaseTemplate, String.valueOf(i + 1));
             }
         }
 
-        fg.createSqlReference(destinationFolder + RESOURCES_FOLDER);
-        fg.createSqlTheme(destinationFolder + I18N_FOLDER, destinationFolder + RESOURCES_FOLDER);
-        fg.createSqlCritere(destinationFolder + I18N_FOLDER, destinationFolder + RESOURCES_FOLDER);
-        fg.createSqlTest(destinationFolder + I18N_FOLDER, destinationFolder + RESOURCES_FOLDER);
-        fg.createSqlParameters(destinationFolder + I18N_FOLDER, destinationFolder + RESOURCES_FOLDER);
+        fg.createSqlReference();
+        fg.createSqlTheme();
+        fg.createSqlCritere();
+        fg.createSqlTest();
+        fg.createSqlParameters();
 
-        fg.writeAuditSetUpFormBeanGenerate(context, auditSetUpFormTemplate, destinationFolder + ALLRESOURCES_FOLDER);
-        fg.writeAuditResultConsoleBeanGenerate(context, auditResultConsoleTemplate, destinationFolder + ALLRESOURCES_FOLDER);
-        fg.writeWebappBeansGenerate(context, webappBeansTemplate, destinationFolder + ALLRESOURCES_FOLDER);
-        fg.writeWebappBeansExpressionGenerate(context, webappBeansExpressionTemplate, destinationFolder + ALLRESOURCES_FOLDER);
-        fg.writeInstallGenerate(context, installTemplate, destinationFolder + ALLRESOURCES_FOLDER);
-        fg.writeDescriptorGenerate(context, descriptorTemplate, destinationFolder + ALLRESOURCES_FOLDER);
-        fg.writeRuleImplementationTestCaseGenerate(context, ruleImplementationTestCaseTemplate, destinationFolder);
+        fg.writeAuditSetUpFormBeanGenerate(context, auditSetUpFormTemplate);
+        fg.writeAuditResultConsoleBeanGenerate(context, auditResultConsoleTemplate);
+        fg.writeWebappBeansGenerate(context, webappBeansTemplate);
+        fg.writeWebappBeansExpressionGenerate(context, webappBeansExpressionTemplate);
+        fg.writeInstallGenerate(context, installTemplate);
+        fg.writeDescriptorGenerate(context, descriptorTemplate);
+        fg.writeRuleImplementationTestCaseGenerate(context, ruleImplementationTestCaseTemplate);
 
-        fg.adaptParentPom(context, parentPomTemplate, parentFolder);
-        fg.adaptRefPom(context, refPomTemplate, destinationFolder);
-        fg.adaptTargzPom(context, targzPomTemplate, destinationFolder + ALLRESOURCES_FOLDER);
+        fg.adaptPom(context, pomTemplate);
     }
 
     /**
@@ -370,8 +356,8 @@ public class CodeGeneratorMojo extends AbstractMojo {
         String workingDir = System.getProperty("user.dir");
         File dataset = FileUtils.getFile(workingDir + "/src/main/resources/dataset/emptyFlatXmlDataSet.xml");
         File log4jFile = FileUtils.getFile(workingDir + "/src/main/resources/log4j/log4j.properties");
-        File datasetFolder = new File(destinationFolder + "-testcases/src/main/resources/dataSets");
-        File log4jFolder = new File(destinationFolder + "/src/main/resources");
+        File datasetFolder = new File(destinationFolder + "/src/test/resources/dataSets");
+        File log4jFolder = new File(destinationFolder + "/src/test/resources");
         dataset.mkdirs();
         log4jFile.mkdirs();
         FileUtils.copyFileToDirectory(dataset, datasetFolder);
@@ -385,7 +371,7 @@ public class CodeGeneratorMojo extends AbstractMojo {
      * @throws IOException
      */
     private void cleanUpUnusedFiles() throws IOException {
-        FileCleaner.cleanUpContext(destinationFolder);
+        //FileCleaner.cleanUpContext(destinationFolder);
     }
 
     /**
