@@ -35,7 +35,7 @@
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
             </plugin>
-            <plugin>
+<!--            <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <descriptors>
@@ -46,14 +46,14 @@
                 </configuration>
                 <executions>
                     <execution>
-                    <id>make-assembly</id> <!-- this is used for inheritance merges -->
-                    <phase>package</phase> <!-- append to the packaging phase. -->
+                    <id>make-assembly</id>  this is used for inheritance merges 
+                    <phase>package</phase>  append to the packaging phase. 
                     <goals>
-                        <goal>assembly</goal> <!-- goals == mojos -->
+                        <goal>assembly</goal>  goals == mojos 
                     </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
         </plugins>
         <finalName>rgaa2.2-${rulesVersion}</finalName>
     </build>
