@@ -404,13 +404,13 @@ public class FileGenerator {
             strb.append(vpc.getReferentiel().replace(".", "").toLowerCase()).append(".");
             strb.append(String.valueOf(vpc.getClassRule().get(i - (i / 2)))).append("\', ");
             strb.append("NULL, 1, 1, \'\', b\'0\')");
-            if (i < tests.size() - 1) {
+            if (i < tests.size() - 2) {
                 strb.append(",\n");
-            } else if (i == tests.size() - 1) {
+            } else if (i == tests.size() - 2) {
                 strb.append(";\n\n");
             }
         }
-        for (int i = 0; i < criteres.size(); i += 2) {
+        for (int i = 0; i < criteres.size(); i += 1) {
             strb.append("UPDATE `TEST` SET `Id_Criterion` = (SELECT `ID_CRITERION` FROM `CRITERION` WHERE `CD_CRITERION` LIKE \'");
             strb.append(criteres.get(i).split("=")[0]);
             strb.append("\') WHERE `Cd_Test` LIKE \'");
