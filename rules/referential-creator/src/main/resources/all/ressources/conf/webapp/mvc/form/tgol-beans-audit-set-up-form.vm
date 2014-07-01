@@ -9,10 +9,10 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 
-    <!-- ${referentiel.toUpperCase()} select elements -->
+    <!-- ${referentiel} select elements -->
     <bean id="${referentiel.toLowerCase()}BronzeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="${referentiel.toUpperCase()};LEVEL_1"/>
-        <property name="i18nKey" value="${referentiel.toUpperCase()}-LEVEL_1"/>
+        <property name="value" value="${referentiel};LEVEL_1"/>
+        <property name="i18nKey" value="${referentiel}-LEVEL_1"/>
         <property name="errorI18nKey" value="Bz-error"/>
         <property name="defaultCode" value="DEFAULT_LEVEL"/>
         <!--    Default values
@@ -21,8 +21,8 @@
     </bean>
 
     <bean id="${referentiel.toLowerCase()}SilverSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="${referentiel.toUpperCase()};LEVEL_2"/>
-        <property name="i18nKey" value="${referentiel.toUpperCase()}-LEVEL_2"/>
+        <property name="value" value="${referentiel};LEVEL_2"/>
+        <property name="i18nKey" value="${referentiel}-LEVEL_2"/>
         <property name="errorI18nKey" value="Ar-error"/>
         <property name="defaultCode" value="DEFAULT_LEVEL"/>
         <!--Default values-->
@@ -31,8 +31,8 @@
     </bean>
 
     <bean id="${referentiel.toLowerCase()}GoldSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="${referentiel.toUpperCase()};LEVEL_3"/>
-        <property name="i18nKey" value="${referentiel.toUpperCase()}-LEVEL_3"/>
+        <property name="value" value="${referentiel};LEVEL_3"/>
+        <property name="i18nKey" value="${referentiel}-LEVEL_3"/>
         <property name="errorI18nKey" value="Or-error"/>
         <property name="defaultCode" value="DEFAULT_LEVEL"/>
         <!--Default values-->
@@ -50,7 +50,7 @@
         </property>
         <property name="arguments">
             <list>
-                <value>${referentiel.toUpperCase()}</value>
+                <value>${referentiel}</value>
                 <list>
                     <ref bean="${referentiel.toLowerCase()}BronzeSelectElementBuilder"/>
                     <ref bean="${referentiel.toLowerCase()}SilverSelectElementBuilder"/>
