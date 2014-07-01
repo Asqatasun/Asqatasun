@@ -25,32 +25,6 @@
     </properties>
     <build>
         <plugins>
-<!--            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.3</version>
-                <executions>
-                    <execution>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <executable>${basedir}/src/main/resources/scripts/generate-project.sh</executable>
-                    <workingDirectory>${generator.baseFolder}/</workingDirectory>
-                    <arguments>
-                        <argument>${generator.groupId}</argument>
-                        <argument>${generator.baseFolder}</argument>
-                        <argument>${generator.referentiel}</argument>
-                        <argument>${generator.referentiel}-testcases</argument>
-                        <argument>${generator.referentiel}-i18n</argument>
-                        <argument>${generator.referentiel}-all-resources</argument>
-                        <argument>${generator.referentiel}-resources</argument>
-                    </arguments>
-                </configuration>
-            </plugin>-->
             <plugin>
                 <groupId>org.opens</groupId>
                 <artifactId>referential-creator-maven-plugin</artifactId>
