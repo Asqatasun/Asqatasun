@@ -15,11 +15,11 @@
     <url>http://maven.apache.org</url>
     <!-- Here is what you need to set-uo before launching generation-->
     <properties>
-        <generator.referentielName>Rgaa 3.0</generator.referentielName>
-        <generator.referentiel>rgaa3.0</generator.referentiel>
+        <generator.referentielName>Referentiel Name 1.0</generator.referentielName>
+        <generator.referentiel>referentielname1.0</generator.referentiel>
         <generator.groupId>org.opens</generator.groupId>
-        <generator.baseFolder>/home/alingua/</generator.baseFolder>
-        <generator.dataFile>/home/alingua/referentiel.csv</generator.dataFile>
+        <generator.baseFolder>/home/$user/Tanaguru/rules/</generator.baseFolder>
+        <generator.dataFile>/home/$user/referentiel.csv</generator.dataFile>
         <generator.delimiter>ø</generator.delimiter>
         <generator.refdescriptor>http://www.example.com/refential-descriptor.html</generator.refdescriptor>
     </properties>
@@ -39,7 +39,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <destinationFolder>${generator.baseFolder}/Tanaguru/rules/${generator.referentiel}</destinationFolder>
+                    <destinationFolder>${generator.baseFolder}/${generator.referentiel}</destinationFolder>
                     <parentFolder>${generator.baseFolder}/tanaguru-${generator.referentiel}</parentFolder>
                     <dataFile>${generator.dataFile}</dataFile>
                     <delimiter>${generator.delimiter}</delimiter>
