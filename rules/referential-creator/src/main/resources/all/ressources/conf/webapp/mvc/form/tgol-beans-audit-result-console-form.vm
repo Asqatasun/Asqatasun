@@ -30,7 +30,7 @@
     <bean id="${referentiel.toLowerCase()}ThemeSelectFormFieldBuilder" class="org.opens.tgol.form.builder.SelectFormFieldBuilderImpl">
         <property name="i18nKey" value="result.theme"/>
         <property name="errorI18nKey" value="result.theme-error"/>
-        <property name="value" value="${referentiel.toUpperCase()}"/>
+        <property name="value" value="${referentiel}"/>
         <property name="selectElementBuilderMap">
             <map>
                 <entry key="theme">
