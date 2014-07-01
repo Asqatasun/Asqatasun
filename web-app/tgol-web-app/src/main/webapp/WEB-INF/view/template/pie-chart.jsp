@@ -1,7 +1,7 @@
-<@page contentType="text/html;charset=UTF-8">
-<@page pageEncoding="UTF-8">
-<@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" >
-<@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c">
+<%@page contentType="text/html;charset=UTF-8"%>
+<%@page pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
                         <c:if test="${addSpan == 'true'}">
                             <div class="span4">
                         </c:if>
