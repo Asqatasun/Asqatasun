@@ -8,7 +8,7 @@ INSERT IGNORE INTO `REFERENCE` (`ID_REFERENCE`, `CD_REFERENCE`, `DESCRIPTION`, `
 (4, 'Aw22', NULL, 'AccessiWeb 2.2', 'http://www.accessiweb.org/index.php/accessiweb-22-english-version.html', 4, 2);
 
 INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Code`, `Label`) VALUES
-('AW22', 'Accessiweb 2.2') ;
+('Aw22', 'Accessiweb 2.2') ;
 
 --
 -- Contenu de la table `theme`
