@@ -200,11 +200,11 @@ public class FileGenerator {
 
     private void writeI18NReferentialFile(String lang, String defaultLanguage, String category) throws IOException {
         StringBuilder sb = new StringBuilder();
-        sb.append(vpc.getReferentiel().replace(".", "").toUpperCase()).append("=").append(vpc.getReferentielLabel()).append("\n");
-        sb.append(vpc.getReferentiel().replace(".", "").toUpperCase()).append("-optgroup=").append(vpc.getReferentielLabel()).append("\n");
-        sb.append(vpc.getReferentiel().replace(".", "").toUpperCase()).append("-LEVEL_1=A\n");
-        sb.append(vpc.getReferentiel().replace(".", "").toUpperCase()).append("-LEVEL_2=AA\n");
-        sb.append(vpc.getReferentiel().replace(".", "").toUpperCase()).append("-LEVEL_3=AAA");
+        sb.append(vpc.getReferentiel().replace(".", "")).append("=").append(vpc.getReferentielLabel()).append("\n");
+        sb.append(vpc.getReferentiel().replace(".", "")).append("-optgroup=").append(vpc.getReferentielLabel()).append("\n");
+        sb.append(vpc.getReferentiel().replace(".", "")).append("-LEVEL_1=A\n");
+        sb.append(vpc.getReferentiel().replace(".", "")).append("-LEVEL_2=AA\n");
+        sb.append(vpc.getReferentiel().replace(".", "")).append("-LEVEL_3=AAA");
         if (!FileUtils.readFileToString(getI18nFile(lang, category), UTF_8).contains(sb.toString())) {
             FileUtils.writeStringToFile(FileUtils.getFile(getI18nFile(lang, category)), sb.toString(), UTF_8, true);
         }
@@ -303,9 +303,9 @@ public class FileGenerator {
         FileUtils.touch(getSqlFile());
         StringBuilder strb = new StringBuilder();
         strb.append("INSERT IGNORE INTO `REFERENCE` (`CD_REFERENCE`, `DESCRIPTION`, `LABEL`, `URL`, `RANK`, `ID_DEFAULT_LEVEL`) VALUES\n");
-        strb.append("(\'").append(vpc.getReferentiel().replace(".", "").toUpperCase()).append("\', NULL, \'").append(vpc.getReferentielLabel()).append("\', \'\', 2000, 1);\n\n");
+        strb.append("(\'").append(vpc.getReferentiel().replace(".", "")).append("\', NULL, \'").append(vpc.getReferentielLabel()).append("\', \'\', 2000, 1);\n\n");
         strb.append("INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Code`, `Label`) VALUES\n");
-        strb.append("(\'").append(vpc.getReferentiel().replace(".", "").toUpperCase()).append("\', \'").append(vpc.getReferentielLabel()).append("\');\n\n");
+        strb.append("(\'").append(vpc.getReferentiel().replace(".", "")).append("\', \'").append(vpc.getReferentielLabel()).append("\');\n\n");
         FileUtils.writeStringToFile(FileUtils.getFile(getSqlFile()), strb.toString(), true);
     }
 
@@ -343,7 +343,7 @@ public class FileGenerator {
             }
         }
         strb.append("UPDATE `CRITERION` SET `reference_ID_REFERENCE` = (SELECT `ID_REFERENCE` FROM `REFERENCE` WHERE `CD_REFERENCE` LIKE \'");
-        strb.append(vpc.getReferentiel().replace(".", "").toUpperCase());
+        strb.append(vpc.getReferentiel().replace(".", ""));
         strb.append("\') WHERE `CD_CRITERION` LIKE \'");
         strb.append(vpc.getReferentiel().replace(".", "")).append("-%\';\n");
         for (int i = 0; i < themesList.size(); i++) {
@@ -361,9 +361,9 @@ public class FileGenerator {
     public void createSqlParameters() throws IOException {
         StringBuilder strb = new StringBuilder();
         strb.append("INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES\n");
-        strb.append("(5, \'").append(vpc.getReferentiel().replace(".", "").toUpperCase()).append(";LEVEL_1\', b\'0\'),\n");
-        strb.append("(5, \'").append(vpc.getReferentiel().replace(".", "").toUpperCase()).append(";LEVEL_2\', b\'0\'),\n");
-        strb.append("(5, \'").append(vpc.getReferentiel().replace(".", "").toUpperCase()).append(";LEVEL_3\', b\'0\');\n\n");
+        strb.append("(5, \'").append(vpc.getReferentiel().replace(".", "")).append(";LEVEL_1\', b\'0\'),\n");
+        strb.append("(5, \'").append(vpc.getReferentiel().replace(".", "")).append(";LEVEL_2\', b\'0\'),\n");
+        strb.append("(5, \'").append(vpc.getReferentiel().replace(".", "")).append(";LEVEL_3\', b\'0\');\n\n");
         FileUtils.writeStringToFile(FileUtils.getFile(getSqlFile()), strb.toString(), true);
     }
 
@@ -375,7 +375,7 @@ public class FileGenerator {
         for (int i = 0; i < tests.size(); i += 2) {
             strb.append("(\'").append(tests.get(i).split("=")[0]).append("\', \'\', \'");
             strb.append(tests.get(i).substring(vpc.getReferentiel().replace(".", "").length() + 1).split("=")[0].replace("-", ".")).append("\', ");
-            strb.append(String.valueOf(i + 1)).append(", ").append("\'1.0\', \'");
+            strb.append(String.valueOf(i - (i / 2))).append(", ").append("\'1.0\', \'");
             strb.append(vpc.getReferentiel().replace(".", "").replace(" ", "").toLowerCase()).append("\', \'");
             strb.append(vpc.getPackageString()).append('.');
             strb.append(vpc.getReferentiel().replace(".", "").toLowerCase()).append(".");
