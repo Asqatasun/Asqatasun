@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -100,6 +100,9 @@ public final class ActInfoFactory {
             if (audit.getStatus().equals(AuditStatus.COMPLETED)) {
                 actInfo.setWeightedMark(webResourceDataService.getMarkByWebResourceAndAudit(wr, false).intValue());
                 actInfo.setRawMark(webResourceDataService.getMarkByWebResourceAndAudit(wr, true).intValue());
+                if (actInfo.getRawMark() == -1) {
+                    actInfo.setRawMark(0);
+                }
                 actInfo.setStatus(TgolKeyStore.COMPLETED_KEY);
             } else if (!contentDataService.hasContent(audit)){
                 actInfo.setStatus(TgolKeyStore.ERROR_LOADING_KEY);
@@ -121,7 +124,7 @@ public final class ActInfoFactory {
      *  
      */
     public Collection<ActInfo> getActInfoSet(Collection<Act> actSet){
-        Set<ActInfo> actInfoSet = new LinkedHashSet<ActInfo>();
+        Set<ActInfo> actInfoSet = new LinkedHashSet<>();
         for (Act act : actSet) {
             actInfoSet.add(getActInfo(act));
         }

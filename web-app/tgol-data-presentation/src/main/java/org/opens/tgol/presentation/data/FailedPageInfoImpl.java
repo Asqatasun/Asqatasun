@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -43,7 +43,11 @@ public class FailedPageInfoImpl implements FailedPageInfo{
     public FailedPageInfoImpl(String url, Long id, Long failedTestCounter, Long failedOccurrenceCounter) {
         setWebResourceUrl(url);
         this.webResourceId = id;
-        this.failedTestCounter = failedTestCounter;
+        if (failedTestCounter != -1) {
+            this.failedTestCounter = failedTestCounter;
+        } else {
+            this.failedTestCounter = Long.valueOf(0);
+        }
         this.failedOccurrenceCounter = failedOccurrenceCounter;
     }
 

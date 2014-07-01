@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -39,7 +39,7 @@ public class FailedTestInfoImpl implements FailedTestInfo{
      * @param testCode
      * @param testLabel
      * @param pageCounter
-     * @param testLeveCode
+     * @param testLevelCode
      */
     public FailedTestInfoImpl(String testCode, String testLabel, Long pageCounter, String testLevelCode) {
         this.testCode = testCode;
