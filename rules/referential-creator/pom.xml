@@ -15,17 +15,17 @@
     <url>http://maven.apache.org</url>
     <!-- Here is what you need to set-uo before launching generation-->
     <properties>
-        <generator.referentielName>Referential Name</generator.referentielName>
-        <generator.referentiel>referentialname1.0</generator.referentiel>
-        <generator.groupId>org.example</generator.groupId>
-        <generator.baseFolder>/home/$user/Documents</generator.baseFolder>
-        <generator.dataFile>/home/$user/datafile.csv</generator.dataFile>
-        <!--<generator.delimiter>ø</generator.delimiter>-->
+        <generator.referentielName>Rgaa 3.0</generator.referentielName>
+        <generator.referentiel>rgaa3.0</generator.referentiel>
+        <generator.groupId>org.opens</generator.groupId>
+        <generator.baseFolder>/home/alingua/</generator.baseFolder>
+        <generator.dataFile>/home/alingua/referentiel.csv</generator.dataFile>
+        <generator.delimiter>ø</generator.delimiter>
         <generator.refdescriptor>http://www.example.com/refential-descriptor.html</generator.refdescriptor>
     </properties>
     <build>
         <plugins>
-            <plugin>
+<!--            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.3</version>
@@ -50,7 +50,7 @@
                         <argument>${generator.referentiel}-resources</argument>
                     </arguments>
                 </configuration>
-            </plugin>
+            </plugin>-->
             <plugin>
                 <groupId>org.opens</groupId>
                 <artifactId>referential-creator-maven-plugin</artifactId>
@@ -65,7 +65,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <destinationFolder>${generator.baseFolder}/tanaguru-${generator.referentiel}/${generator.referentiel}</destinationFolder>
+                    <destinationFolder>${generator.baseFolder}/Tanaguru/rules/${generator.referentiel}</destinationFolder>
                     <parentFolder>${generator.baseFolder}/tanaguru-${generator.referentiel}</parentFolder>
                     <dataFile>${generator.dataFile}</dataFile>
                     <delimiter>${generator.delimiter}</delimiter>

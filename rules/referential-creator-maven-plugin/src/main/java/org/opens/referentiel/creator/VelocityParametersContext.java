@@ -21,6 +21,7 @@ public class VelocityParametersContext {
     private String testCode;
     private String referentiel;
     private String packageString;
+    private String destinationFolder;
     private Set<Integer> themes = new LinkedHashSet();
 
     public String getClassString() {
@@ -77,5 +78,13 @@ public class VelocityParametersContext {
 
     public void setThemes(Set<Integer> themes) {
         this.themes = themes;
+    }
+
+    public String getDestinationFolder() {
+        return destinationFolder;
+    }
+
+    public void setDestinationFolder(String destinationFolder) {
+        this.destinationFolder = destinationFolder;
     }
 }
