@@ -50,18 +50,18 @@ public class Aw22Rule12062Test extends Aw22RuleImplementationTestCase {
     protected void setUpWebResourceMap() {
         getWebResourceMap().put("AW22.Test.12.6.2-4NA-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule12062/AW22.Test.12.6.2-3NMI-01.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule12062/AW22.Test.12.6.2-3NMI-01.html"));
         
         Site site = getWebResourceFactory().createSite("file:Site-NotTested");
         getWebResourceMap().put("AW22.Test.12.6.2-5NT-01", site);
 
         Page page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "AW22/Aw22Rule12062/AW22.Test.12.6.2-3NMI-01.html");
+                "accessiweb22/Aw22Rule12062/AW22.Test.12.6.2-3NMI-01.html");
         site.addChild(page);
         getWebResourceMap().put("AW22.Test.12.6.2-5NT-01-page1",page);
 
         page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "AW22/Aw22Rule12062/AW22.Test.12.6.2-3NMI-01.html");
+                "accessiweb22/Aw22Rule12062/AW22.Test.12.6.2-3NMI-01.html");
         site.addChild(page);
         getWebResourceMap().put("AW22.Test.12.6.2-5NT-01-page1",page);
     }

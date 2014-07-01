@@ -51,74 +51,74 @@ public class Aw22Rule05011Test extends Aw22RuleImplementationTestCase {
     protected void setUpWebResourceMap() {
         getWebResourceMap().put("AW22.Test.5.1.1-1Passed-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule05011/AW22.Test.5.1.1-1Passed-01.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule05011/AW22.Test.5.1.1-1Passed-01.html"));
         addParameterToParameterMap("AW22.Test.5.1.1-1Passed-01", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
 
         getWebResourceMap().put("AW22.Test.5.1.1-1Passed-02",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule05011/AW22.Test.5.1.1-1Passed-02.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule05011/AW22.Test.5.1.1-1Passed-02.html"));
         addParameterToParameterMap("AW22.Test.5.1.1-1Passed-02", createParameter("Rules", "DATA_TABLE_MARKER", "id-data-table"));
 
         getWebResourceMap().put("AW22.Test.5.1.1-1Passed-03",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule05011/AW22.Test.5.1.1-1Passed-03.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule05011/AW22.Test.5.1.1-1Passed-03.html"));
         addParameterToParameterMap("AW22.Test.5.1.1-1Passed-03", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table;id-data-table"));
         
         getWebResourceMap().put("AW22.Test.5.1.1-1Passed-04",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule05011/AW22.Test.5.1.1-1Passed-04.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule05011/AW22.Test.5.1.1-1Passed-04.html"));
         addParameterToParameterMap("AW22.Test.5.1.1-1Passed-04", createParameter("Rules", "DATA_TABLE_MARKER", "data-table"));
 
         getWebResourceMap().put("AW22.Test.5.1.1-2Failed-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule05011/AW22.Test.5.1.1-2Failed-01.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule05011/AW22.Test.5.1.1-2Failed-01.html"));
         addParameterToParameterMap("AW22.Test.5.1.1-2Failed-01", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
 
         getWebResourceMap().put("AW22.Test.5.1.1-2Failed-02",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule05011/AW22.Test.5.1.1-2Failed-02.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule05011/AW22.Test.5.1.1-2Failed-02.html"));
         addParameterToParameterMap("AW22.Test.5.1.1-2Failed-02", createParameter("Rules", "DATA_TABLE_MARKER", "id-data-table"));
         
         getWebResourceMap().put("AW22.Test.5.1.1-2Failed-03",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule05011/AW22.Test.5.1.1-2Failed-03.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule05011/AW22.Test.5.1.1-2Failed-03.html"));
         addParameterToParameterMap("AW22.Test.5.1.1-2Failed-03", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table;id-data-table"));
 
         getWebResourceMap().put("AW22.Test.5.1.1-2Failed-04",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule05011/AW22.Test.5.1.1-2Failed-04.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule05011/AW22.Test.5.1.1-2Failed-04.html"));
         addParameterToParameterMap("AW22.Test.5.1.1-2Failed-04", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
 
         getWebResourceMap().put("AW22.Test.5.1.1-2Failed-05",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule05011/AW22.Test.5.1.1-2Failed-05.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule05011/AW22.Test.5.1.1-2Failed-05.html"));
         addParameterToParameterMap("AW22.Test.5.1.1-2Failed-05", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
 
         getWebResourceMap().put("AW22.Test.5.1.1-3NMI-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule05011/AW22.Test.5.1.1-3NMI-01.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule05011/AW22.Test.5.1.1-3NMI-01.html"));
 
         getWebResourceMap().put("AW22.Test.5.1.1-3NMI-02",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule05011/AW22.Test.5.1.1-3NMI-02.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule05011/AW22.Test.5.1.1-3NMI-02.html"));
 
         getWebResourceMap().put("AW22.Test.5.1.1-3NMI-03",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule05011/AW22.Test.5.1.1-3NMI-03.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule05011/AW22.Test.5.1.1-3NMI-03.html"));
         addParameterToParameterMap("AW22.Test.5.1.1-3NMI-03", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
         
         getWebResourceMap().put("AW22.Test.5.1.1-3NMI-04",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule05011/AW22.Test.5.1.1-3NMI-04.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule05011/AW22.Test.5.1.1-3NMI-04.html"));
         addParameterToParameterMap("AW22.Test.5.1.1-3NMI-04", createParameter("Rules", "DATA_TABLE_MARKER", "id-data-table"));
         addParameterToParameterMap("AW22.Test.5.1.1-3NMI-04", createParameter("Rules", "PRESENTATION_TABLE_MARKER", "class-presentation-table"));
 
         getWebResourceMap().put("AW22.Test.5.1.1-4NA-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule05011/AW22.Test.5.1.1-4NA-01.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule05011/AW22.Test.5.1.1-4NA-01.html"));
         getWebResourceMap().put("AW22.Test.5.1.1-4NA-02",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule05011/AW22.Test.5.1.1-4NA-02.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule05011/AW22.Test.5.1.1-4NA-02.html"));
         addParameterToParameterMap("AW22.Test.5.1.1-4NA-02", createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
     }
 

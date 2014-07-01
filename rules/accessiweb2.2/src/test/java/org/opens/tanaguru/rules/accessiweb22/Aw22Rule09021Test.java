@@ -46,13 +46,13 @@ public class Aw22Rule09021Test extends Aw22RuleImplementationTestCase {
     protected void setUpWebResourceMap() {
         getWebResourceMap().put("AW22.Test.9.2.1-3NMI-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule09021/AW22.Test.9.2.1-3NMI-01.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule09021/AW22.Test.9.2.1-3NMI-01.html"));
 //        getWebResourceMap().put("AW22.Test.9.2.1-3NMI-02",
 //                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "AW22/Aw22Rule09021/AW22.Test.9.2.1-3NMI-02.html"));
+//                getTestcasesFilePath() + "accessiweb22/Aw22Rule09021/AW22.Test.9.2.1-3NMI-02.html"));
 //        getWebResourceMap().put("AW22.Test.9.2.1-3NMI-03",
 //                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "AW22/Aw22Rule09021/AW22.Test.9.2.1-3NMI-03.html"));
+//                getTestcasesFilePath() + "accessiweb22/Aw22Rule09021/AW22.Test.9.2.1-3NMI-03.html"));
     }
 
     @Override

@@ -50,31 +50,31 @@ public class Aw22Rule07051Test extends Aw22RuleImplementationTestCase {
     protected void setUpWebResourceMap() {
         getWebResourceMap().put("AW22.Test.07.05.01-3NMI-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-01.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-01.html"));
         getWebResourceMap().put("AW22.Test.07.05.01-3NMI-02",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-02.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-02.html"));
        getWebResourceMap().put("AW22.Test.07.05.01-3NMI-03",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-03.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-03.html"));
        getWebResourceMap().put("AW22.Test.07.05.01-3NMI-04",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-04.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-04.html"));
        getWebResourceMap().put("AW22.Test.07.05.01-3NMI-05",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-05.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-05.html"));
        getWebResourceMap().put("AW22.Test.07.05.01-3NMI-06",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-06.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-06.html"));
        getWebResourceMap().put("AW22.Test.07.05.01-3NMI-07",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-07.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-07.html"));
        getWebResourceMap().put("AW22.Test.07.05.01-3NMI-08",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-08.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-08.html"));
        getWebResourceMap().put("AW22.Test.07.05.01-3NMI-09",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-09.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule07051/AW22.Test.07.05.01-3NMI-09.html"));
     }
 
     @Override
