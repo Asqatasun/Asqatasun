@@ -238,6 +238,9 @@ public class AuditStatisticsFactory {
             WebResource webresource, 
             boolean isRawMark) {
         Float mark = webResourceDataService.getMarkByWebResourceAndAudit(webresource, isRawMark);
+        if (mark == -1) {
+            mark = 0f;
+        }
         return String.valueOf(mark.intValue());
     }
 
