@@ -7,9 +7,9 @@
     <bean id="exposedPropertiesConfigurer" class="org.opens.tgol.util.webapp.ExposablePropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>file:///etc/tanaguru/tanaguru.conf</value>
-                <value>file:///etc/tanaguru/google-code.properties</value>
-                <value>file:///etc/tanaguru/ESAPI.properties</value>
+                <value>#{systemProperties.confDir}/tanaguru.conf</value>
+                <value>#{systemProperties.confDir}/google-code.properties</value>
+                <value>#{systemProperties.confDir}/ESAPI.properties</value>
             </list>
         </property>
         <property name="fileEncoding">

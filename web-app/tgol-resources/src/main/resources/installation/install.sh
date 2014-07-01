@@ -323,7 +323,7 @@ update_tomcat_configuration() {
 	    echo "Adding JAVA_OPTS in tomcat configuration file"
 	    echo "" >>$MY_DEFAULT_TOMCAT
 	    echo "# Tanaguru JVM options" >>$MY_DEFAULT_TOMCAT
-	    echo "JAVA_OPTS=\"\$JAVA_OPTS -Xms512M -Xmx2048M -Dwebdriver.firefox.bin=${firefox_esr_path} -Ddisplay=${display_port}\"" >>$MY_DEFAULT_TOMCAT
+	    echo "JAVA_OPTS=\"\$JAVA_OPTS -Xms512M -Xmx2048M -DconfDir=file://${prefix}$TG_CONF_DIR -DlogDir=${prefix}$TG_LOG_DIR -Dwebdriver.firefox.bin=${firefox_esr_path} -Ddisplay=${display_port}\"" >>$MY_DEFAULT_TOMCAT
 	fi
 }
 
