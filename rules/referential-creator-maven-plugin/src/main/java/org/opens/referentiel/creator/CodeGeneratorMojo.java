@@ -243,6 +243,8 @@ public class CodeGeneratorMojo extends AbstractMojo {
         }
         if (themeList.equals(critereList) && critereList.equals(testList)) {
             langSet.addAll(themeList);
+        } else if (themeList.equals(critereList) && critereList.size() != testList.size()) {
+            langSet.addAll(themeList);
         } else {
             throw new I18NLanguageNotFoundException("All Label on csv column must have internationalization");
         }
@@ -253,20 +255,19 @@ public class CodeGeneratorMojo extends AbstractMojo {
         String theme = record.get(THEME_LABEL_COLUMN_NAME + lang);
         String critere = record.get(CRITERION_LABEL_COLUMN_NAME + lang);
         String critereCode = record.get(CRITERION_CODE_COLUMN_NAME);
-        if (StringUtils.isBlank(theme) 
+        if (StringUtils.isBlank(theme)
                 || StringUtils.isBlank(critere)
                 || StringUtils.isBlank(critereCode)) {
             throw new InvalidParameterException("Your csv file has an empty column");
         }
         String test;
         String testCode;
-        if (StringUtils.isNotBlank(record.get(TEST_LABEL_COLUMN_NAME + lang))
-                && StringUtils.isNotBlank(record.get(TEST_CODE_COLUMN_NAME))) {
-            test = record.get(TEST_LABEL_COLUMN_NAME + lang);
+        try {
+            test = record.get(TEST_LABEL_COLUMN_NAME + langSet.first());
             testCode = record.get(TEST_CODE_COLUMN_NAME);
-        } else {
-            test = record.get(CRITERION_LABEL_COLUMN_NAME + lang);
-            testCode = record.get(CRITERION_CODE_COLUMN_NAME) + ".1";
+        } catch (IllegalArgumentException iae) {
+            test = record.get(CRITERION_LABEL_COLUMN_NAME + langSet.first());
+            testCode = record.get(CRITERION_CODE_COLUMN_NAME) + "-1";
         }
         Map themeMap = Collections.singletonMap(themeIndex, theme);
         Map critereMap = Collections.singletonMap(critereCode, critere);
@@ -290,8 +291,7 @@ public class CodeGeneratorMojo extends AbstractMojo {
      * @param ve
      * @param records
      */
-    public void generate(VelocityEngine ve, Iterable<CSVRecord> records) throws IOException,
-            ResourceNotFoundException, ParseErrorException, Exception {
+    public void generate(VelocityEngine ve, Iterable<CSVRecord> records) throws IOException, ResourceNotFoundException, ParseErrorException, Exception {
         // Getting the Template
         Template ruleTemplate = ve.getTemplate(templateRule.getPath());
         Template pomTemplate = ve.getTemplate(pom.getPath());
@@ -314,15 +314,22 @@ public class CodeGeneratorMojo extends AbstractMojo {
         // These files will be then used later to create other context files
         // using the i18n keys.
         for (CSVRecord record : records) {
+            String testLabelDefault;
+            String test;
+            try {
+                testLabelDefault = record.get(TEST_LABEL_COLUMN_NAME + langSet.first());
+                test = record.get(TEST_CODE_COLUMN_NAME);
+            } catch (IllegalArgumentException iae) {
+                testLabelDefault = record.get(CRITERION_LABEL_COLUMN_NAME + langSet.first());
+                test = record.get(CRITERION_CODE_COLUMN_NAME) + "-1";
+            }
             for (String lang : langSet) {
                 writeToI18NFile(fg, record, lang);
             }
             IS_I18N_REFERENTIAL_CREATED = true;
-            String test = record.get(TEST_CODE_COLUMN_NAME);
-            String testLabelFr = record.get(TEST_LABEL_COLUMN_NAME + langSet.first());
-            context = fg.getContextRuleClassFile(referentiel, PACKAGE_NAME, test, testLabelFr, context);
+            context = fg.getContextRuleClassFile(referentiel, PACKAGE_NAME, test, testLabelDefault, context);
             fg.writeFileCodeGenerate(context, ruleTemplate);
-            fg.writeUnitTestGenerate(context, unitTestTemplate, testLabelFr);
+            fg.writeUnitTestGenerate(context, unitTestTemplate, testLabelDefault);
             String[] testsCasesState = {"Passed", "Failed", "NMI", "NA"};
             for (int i = 0; i < testsCasesState.length; i++) {
                 context.put("state", testsCasesState[i]);
