@@ -43,10 +43,6 @@ public class CodeGeneratorMojo extends AbstractMojo {
     private static final String THEME_CODE_COLUMN_NAME = "theme";
     private static final String CRITERION_CODE_COLUMN_NAME = "critere";
     private static final String TEST_CODE_COLUMN_NAME = "test";
-    private static final String I18N_FOLDER = "-i18n";
-    private static final String TESTCASES_FOLDER = "-testcases";
-    private static final String ALLRESOURCES_FOLDER = "-all-resources";
-    private static final String RESOURCES_FOLDER = "-resources";
     private static boolean isI18NReferentialCreated = false;
     /**
      * @parameter
@@ -115,10 +111,6 @@ public class CodeGeneratorMojo extends AbstractMojo {
      * @parameter
      */
     String destinationFolder;
-    /**
-     * @parameter
-     */
-    String parentFolder;
     /**
      * @parameter
      */
@@ -259,13 +251,26 @@ public class CodeGeneratorMojo extends AbstractMojo {
         }
     }
 
-    private void writeToI18NFile(FileGenerator fg, CSVRecord record, String lang) throws IOException {
+    private void writeToI18NFile(FileGenerator fg, CSVRecord record, String lang) throws IOException, InvalidParameterException {
         Integer themeIndex = Integer.valueOf(record.get(THEME_CODE_COLUMN_NAME));
         String theme = record.get(THEME_LABEL_COLUMN_NAME + lang);
         String critere = record.get(CRITERION_LABEL_COLUMN_NAME + lang);
         String critereCode = record.get(CRITERION_CODE_COLUMN_NAME);
-        String test = record.get(TEST_LABEL_COLUMN_NAME + lang);
-        String testCode = record.get(TEST_CODE_COLUMN_NAME);
+        if (StringUtils.isBlank(theme) 
+                || StringUtils.isBlank(critere)
+                || StringUtils.isBlank(critereCode)) {
+            throw new InvalidParameterException("Your csv file has an empty column");
+        }
+        String test;
+        String testCode;
+        if (StringUtils.isNotBlank(record.get(TEST_LABEL_COLUMN_NAME + lang))
+                && StringUtils.isNotBlank(record.get(TEST_CODE_COLUMN_NAME))) {
+            test = record.get(TEST_LABEL_COLUMN_NAME + lang);
+            testCode = record.get(TEST_CODE_COLUMN_NAME);
+        } else {
+            test = record.get(CRITERION_LABEL_COLUMN_NAME + lang);
+            testCode = record.get(CRITERION_CODE_COLUMN_NAME + ".1");
+        }
         Map themeMap = Collections.singletonMap(themeIndex, theme);
         Map critereMap = Collections.singletonMap(critereCode, critere);
         Map testMap = Collections.singletonMap(testCode, test);
