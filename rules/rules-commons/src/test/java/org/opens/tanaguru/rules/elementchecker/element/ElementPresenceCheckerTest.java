@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import junit.framework.TestCase;
+import org.apache.log4j.Logger;
 import org.easymock.EasyMock;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -45,6 +46,9 @@ import org.opens.tanaguru.service.ProcessRemarkService;
  */
 public class ElementPresenceCheckerTest extends TestCase{
     
+    private static final Logger LOGGER = 
+            Logger.getLogger(ElementPresenceCheckerTest.class);
+    
     private SSPHandler mockSspHandler;
     private ProcessRemarkService mockProcessRemarkService;
     
@@ -61,15 +65,13 @@ public class ElementPresenceCheckerTest extends TestCase{
 
     /**
      * Test of doCheck method, of class ElementPresenceChecker.
+     * @throws java.io.IOException
      */
-    public void testCheckDefaultDetectedResult() {
-        System.out.println("elementPresenceChecker-check-default-detected-result");
-        Document doc = null;
-        try {
-             doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-1.html"), 
+    public void testCheckDefaultDetectedResult() throws IOException{
+        LOGGER.debug("elementPresenceChecker-check-default-detected-result");
+
+        Document doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-1.html"), 
                      Charset.defaultCharset().displayName());
-        } catch (IOException ex) {
-        }
         ElementHandler elementHandler = new ElementHandlerImpl();
         elementHandler.addAll(doc.select(HtmlElementStore.DIV_ELEMENT));
         
@@ -89,15 +91,12 @@ public class ElementPresenceCheckerTest extends TestCase{
     
     /**
      * Test of doCheck method, of class ElementPresenceChecker.
+     * @throws java.io.IOException
      */
-    public void testCheckDefaultNotDetectedResult() {
-        System.out.println("elementPresenceChecker-check-default-not-detected-result");
-        Document doc = null;
-        try {
-             doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-1.html"), 
+    public void testCheckDefaultNotDetectedResult() throws IOException{
+        LOGGER.debug("elementPresenceChecker-check-default-not-detected-result");
+        Document doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-1.html"), 
                      Charset.defaultCharset().displayName());
-        } catch (IOException ex) {
-        }
 
         ElementHandler elementHandler = new ElementHandlerImpl();
         elementHandler.addAll(doc.select(HtmlElementStore.A_ELEMENT));
@@ -118,15 +117,12 @@ public class ElementPresenceCheckerTest extends TestCase{
     
     /**
      * Test of doCheck method, of class ElementPresenceChecker.
+     * @throws java.io.IOException
      */
-    public void testCheckDefaultDetectedUnicityResult() {
-        System.out.println("elementPresenceChecker-check-default-detected-unicity-result");
-        Document doc = null;
-        try {
-             doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-1.html"), 
+    public void testCheckDefaultDetectedUnicityResult() throws IOException{
+        LOGGER.debug("elementPresenceChecker-check-default-detected-unicity-result");
+        Document doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-1.html"), 
                      Charset.defaultCharset().displayName());
-        } catch (IOException ex) {
-        }
 
         ElementHandler elementHandler = new ElementHandlerImpl();
         elementHandler.addAll(doc.select(HtmlElementStore.DIV_ELEMENT));
@@ -147,15 +143,13 @@ public class ElementPresenceCheckerTest extends TestCase{
     
     /**
      * Test of doCheck method, of class ElementPresenceChecker.
+     * @throws java.io.IOException
      */
-    public void testCheckDefaultDetectedUnicityFailedResult() {
-        System.out.println("elementPresenceChecker-check-default-detection-unicity-failed-result");
-        Document doc = null;
-        try {
-             doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-unique-1.html"), 
+    public void testCheckDefaultDetectedUnicityFailedResult() throws IOException{
+        LOGGER.debug("elementPresenceChecker-check-default-detection-unicity-failed-result");
+        
+        Document doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-unique-1.html"), 
                      Charset.defaultCharset().displayName());
-        } catch (IOException ex) {
-        }
 
         ElementHandler elementHandler = new ElementHandlerImpl();
         elementHandler.addAll(doc.select(HtmlElementStore.DIV_ELEMENT));
@@ -176,15 +170,13 @@ public class ElementPresenceCheckerTest extends TestCase{
     
     /**
      * Test of doCheck method, of class ElementPresenceChecker.
+     * @throws java.io.IOException
      */
-    public void testCheckDefaultDetectedUnicityFailedOverrideSolutionResult1() {
-        System.out.println("elementPresenceChecker-check-default-detection-unicity-failed-override-solution-result1");
-        Document doc = null;
-        try {
-             doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-unique-1.html"), 
+    public void testCheckDefaultDetectedUnicityFailedOverrideSolutionResult1() throws IOException{
+        LOGGER.debug("elementPresenceChecker-check-default-detection-unicity-failed-override-solution-result1");
+        
+        Document doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-unique-1.html"), 
                      Charset.defaultCharset().displayName());
-        } catch (IOException ex) {
-        }
 
         ElementHandler elementHandler = new ElementHandlerImpl();
         elementHandler.addAll(doc.select(HtmlElementStore.DIV_ELEMENT));
@@ -211,15 +203,13 @@ public class ElementPresenceCheckerTest extends TestCase{
     
     /**
      * Test of doCheck method, of class ElementPresenceChecker.
+     * @throws java.io.IOException
      */
-    public void testCheckDefaultDetectedUnicityFailedOverrideSolutionResult2() {
-        System.out.println("elementPresenceChecker-check-default-detection-unicity-failed-override-solution-result2");
-        Document doc = null;
-        try {
-             doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-unique-1.html"), 
+    public void testCheckDefaultDetectedUnicityFailedOverrideSolutionResult2() throws IOException{
+        LOGGER.debug("elementPresenceChecker-check-default-detection-unicity-failed-override-solution-result2");
+        
+        Document doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-unique-1.html"), 
                      Charset.defaultCharset().displayName());
-        } catch (IOException ex) {
-        }
 
         ElementHandler elementHandler = new ElementHandlerImpl();
         elementHandler.addAll(doc.select(HtmlElementStore.A_ELEMENT));

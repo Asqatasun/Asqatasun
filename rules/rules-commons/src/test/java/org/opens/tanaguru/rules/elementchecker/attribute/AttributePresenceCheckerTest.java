@@ -24,6 +24,7 @@ package org.opens.tanaguru.rules.elementchecker.attribute;
 import java.util.ArrayList;
 import java.util.Collection;
 import junit.framework.TestCase;
+import org.apache.log4j.Logger;
 import static org.easymock.EasyMock.*;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
@@ -41,6 +42,9 @@ import org.opens.tanaguru.service.ProcessRemarkService;
  * @author jkowalczyk
  */
 public class AttributePresenceCheckerTest extends TestCase{
+    
+    private static final Logger LOGGER = 
+            Logger.getLogger(AttributePresenceCheckerTest.class);
     
     private static final String ATTR_PRESENT_MSG = "present";
     private static final String ATTR_ABSENT_MSG = "absent";
@@ -72,7 +76,7 @@ public class AttributePresenceCheckerTest extends TestCase{
      * Test of doCheck method, of class AttributePresenceChecker.
      */
     public void testDoCheckWithEmptyElements() {
-        System.out.println("doCheckWithEmptyElements");
+        LOGGER.debug("doCheckWithEmptyElements");
         
         /* Prepare test context */
         mockTestSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
@@ -98,7 +102,7 @@ public class AttributePresenceCheckerTest extends TestCase{
      * Test of doCheck method, of class AttributePresenceChecker.
      */
     public void testDoCheckWithDetectionResultOverridenByConstructor() {
-        System.out.println("doCheckWithDetectionResultOverridenByConstructor");
+        LOGGER.debug("doCheckWithDetectionResultOverridenByConstructor");
         
         /* Prepare test context */
         elements.add(element);
@@ -138,14 +142,14 @@ public class AttributePresenceCheckerTest extends TestCase{
      * Test of doCheck method, of class AttributePresenceChecker.
      */
     public void testDoCheckWithDetectionResultOverridenByConstructorAndProcessRemarkOnAttribute() {
-        System.out.println("doCheckWithDetectionResultOverridenByConstructorAndProcessRemarkOnAttribute");
+        LOGGER.debug("doCheckWithDetectionResultOverridenByConstructorAndProcessRemarkOnAttribute");
         
         /* Prepare test context */
         elements.add(element);
         mockTestSolutionHandler.addTestSolution(TestSolution.FAILED);
         expectLastCall().once();
 
-        Collection<EvidenceElement> evidenceElementList = new ArrayList<EvidenceElement>();
+        Collection<EvidenceElement> evidenceElementList = new ArrayList<>();
         EvidenceElement ee = createMock(EvidenceElement.class);
         expect(mockProcessRemarkService.getEvidenceElement(
                 EvidenceStore.TARGETTED_ELEMENT_FROM_SCOPE_EE, 
@@ -188,7 +192,7 @@ public class AttributePresenceCheckerTest extends TestCase{
      * Test of doCheck method, of class AttributePresenceChecker.
      */
     public void testDoCheckWithDetectionResultOverridenByConstructorAndNoMessageThrown() {
-        System.out.println("doCheckWithDetectionResultOverridenByConstructorAndNoMessageThrown");
+        LOGGER.debug("doCheckWithDetectionResultOverridenByConstructorAndNoMessageThrown");
         
         /* Prepare test context */
         elements.add(element);
@@ -222,7 +226,7 @@ public class AttributePresenceCheckerTest extends TestCase{
      * Test of doCheck method, of class AttributePresenceChecker.
      */
     public void testDoCheckWithNotDetectionResultOverridenByConstructor() {
-        System.out.println("doCheckWithNotDetectionResultOverridenByConstructor");
+        LOGGER.debug("doCheckWithNotDetectionResultOverridenByConstructor");
         
         /* Prepare test context */
         elements.add(element);
@@ -262,7 +266,7 @@ public class AttributePresenceCheckerTest extends TestCase{
      * Test of doCheck method, of class AttributePresenceChecker.
      */
     public void testDoCheckWithNotDetectionResultOverridenByConstructorAndNoMessageThrown() {
-        System.out.println("doCheckWithNotDetectionResultOverridenByConstructorAndNoMessageThrown");
+        LOGGER.debug("doCheckWithNotDetectionResultOverridenByConstructorAndNoMessageThrown");
         
         /* Prepare test context */
         elements.add(element);

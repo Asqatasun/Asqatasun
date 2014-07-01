@@ -22,6 +22,7 @@
 package org.opens.tanaguru.rules.textbuilder;
 
 import junit.framework.TestCase;
+import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
 
 /**
@@ -29,6 +30,9 @@ import org.jsoup.nodes.Element;
  * @author jkowalczyk
  */
 public class CompleteTextElementBuilderTest extends TestCase {
+    
+    private static final Logger LOGGER = 
+            Logger.getLogger(CompleteTextElementBuilderTest.class);
     
     public CompleteTextElementBuilderTest(String testName) {
         super(testName);
@@ -48,7 +52,7 @@ public class CompleteTextElementBuilderTest extends TestCase {
      * Test of buildTextFromElement method, of class CompleteTextElementBuilder.
      */
     public void testBuildTextFromElement() {
-        System.out.println("buildTextFromElement");
+        LOGGER.debug("buildTextFromElement");
         Element element = null;
         CompleteTextElementBuilder instance = new CompleteTextElementBuilder();
         String expResult = "";

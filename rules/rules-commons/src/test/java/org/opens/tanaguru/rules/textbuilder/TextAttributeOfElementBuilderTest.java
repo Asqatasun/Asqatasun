@@ -22,6 +22,7 @@
 package org.opens.tanaguru.rules.textbuilder;
 
 import junit.framework.TestCase;
+import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
 import org.opens.tanaguru.rules.keystore.AttributeStore;
@@ -31,6 +32,9 @@ import org.opens.tanaguru.rules.keystore.AttributeStore;
  * @author jkowalczyk
  */
 public class TextAttributeOfElementBuilderTest extends TestCase {
+    
+    private static final Logger LOGGER = 
+            Logger.getLogger(TextAttributeOfElementBuilderTest.class);
     
     public TextAttributeOfElementBuilderTest(String testName) {
         super(testName);
@@ -50,7 +54,7 @@ public class TextAttributeOfElementBuilderTest extends TestCase {
      * Test of buildTextFromElement method, of class TextAttributeOfElementBuilder.
      */
     public void testBuildTextFromElementWithTargettedAttributeNotSet() {
-        System.out.println("buildTextFromElementWithTargettedAttributeNotSet");
+        LOGGER.debug("buildTextFromElementWithTargettedAttributeNotSet");
         Element element = new Element(Tag.valueOf("div"), "");
         element.attr(AttributeStore.ALT_ATTR, "test");
         TextAttributeOfElementBuilder instance = new TextAttributeOfElementBuilder();
@@ -63,7 +67,7 @@ public class TextAttributeOfElementBuilderTest extends TestCase {
      * Test of buildTextFromElement method, of class TextAttributeOfElementBuilder.
      */
     public void testBuildTextFromElementWithAttribute() {
-        System.out.println("buildTextFromElementWithAttribute");
+        LOGGER.debug("buildTextFromElementWithAttribute");
         Element element = new Element(Tag.valueOf("div"), "");
         element.attr(AttributeStore.ALT_ATTR, "test");
         TextAttributeOfElementBuilder instance = new TextAttributeOfElementBuilder(AttributeStore.ALT_ATTR);
@@ -76,7 +80,7 @@ public class TextAttributeOfElementBuilderTest extends TestCase {
      * Test of buildTextFromElement method, of class TextAttributeOfElementBuilder.
      */
     public void testBuildTextFromElementWithAttributeTrim() {
-        System.out.println("buildTextFromElementWithAttributeTrim");
+        LOGGER.debug("buildTextFromElementWithAttributeTrim");
         Element element = new Element(Tag.valueOf("div"), "");
         element.attr(AttributeStore.ALT_ATTR,  "    test    ");
         TextAttributeOfElementBuilder instance = new TextAttributeOfElementBuilder();
@@ -90,7 +94,7 @@ public class TextAttributeOfElementBuilderTest extends TestCase {
      * Test of buildTextFromElement method, of class TextAttributeOfElementBuilder.
      */
     public void testBuildTextFromElementWithAttributeMissing() {
-        System.out.println("buildTextFromElementWithAttributeMissing");
+        LOGGER.debug("buildTextFromElementWithAttributeMissing");
         Element element = new Element(Tag.valueOf("div"), "");
         TextAttributeOfElementBuilder instance = new TextAttributeOfElementBuilder(AttributeStore.ALT_ATTR);
         String result = instance.buildTextFromElement(element);

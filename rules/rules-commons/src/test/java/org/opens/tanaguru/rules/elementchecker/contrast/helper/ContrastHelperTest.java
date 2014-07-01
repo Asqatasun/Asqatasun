@@ -23,12 +23,16 @@ package org.opens.tanaguru.rules.elementchecker.contrast.helper;
 
 import java.awt.Color;
 import junit.framework.TestCase;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author jkowalczyk
  */
 public class ContrastHelperTest extends TestCase {
+    
+    private static final Logger LOGGER = 
+            Logger.getLogger(ContrastHelperTest.class);
     
     public ContrastHelperTest(String testName) {
         super(testName);
@@ -48,7 +52,7 @@ public class ContrastHelperTest extends TestCase {
      * Test of getColorFromString method, of class ContrastHelper.
      */
     public void testGetColorFromString() {
-        System.out.println("getColorFromString");
+        LOGGER.debug("getColorFromString");
         String color = "rgb(228; 228; 228)";
         Color expResult = new Color(228,228,228);
         Color result = ContrastHelper.getColorFromString(color);
@@ -63,7 +67,7 @@ public class ContrastHelperTest extends TestCase {
      * Test of getColorFromString method, of class ContrastHelper.
      */
     public void testIsColorTestable() {
-        System.out.println("isColorTestable");
+        LOGGER.debug("isColorTestable");
         String color = "rgb(228; 228; 228)";
         assertTrue(ContrastHelper.isColorTestable(color));
         color = "rgba(228; 228; 228; 0)";

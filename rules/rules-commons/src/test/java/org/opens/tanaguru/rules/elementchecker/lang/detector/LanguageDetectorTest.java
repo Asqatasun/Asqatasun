@@ -23,9 +23,7 @@ package org.opens.tanaguru.rules.elementchecker.lang.detector;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import junit.framework.TestCase;
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -55,7 +53,7 @@ public class LanguageDetectorTest extends TestCase {
     }
 
     public void testDetectLanguageWithCaseSensitiveText() {
-        System.out.println("detectLanguage With case sensitive text");
+        LOGGER.debug("detectLanguage With case sensitive text");
         LanguageDetector instance = LanguageDetector.getInstance();
         LOGGER.debug("start detection");
         assertEquals("fr",instance.detectLanguage("34808 : CABLE DE COMMANDE DE BOITE A VITESSE RENAULT KANGOO 32.11 € TTC 34808 : CABLE DE COMMANDE DE BOITE A VITESSE RENAULT KANGOO").getDetectedLanguage());
@@ -83,7 +81,7 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with af pages.
      */
     public void testDetectLanguageAf() {
-        System.out.println("detectLanguage Af");
+        LOGGER.debug("detectLanguage Af");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
@@ -104,7 +102,7 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with fr pages.
      */
     public void testDetectLanguageFr() {
-        System.out.println("detectLanguage fr");
+        LOGGER.debug("detectLanguage fr");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
@@ -124,7 +122,7 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with de pages.
      */
     public void testDetectLanguageDe() {
-        System.out.println("detectLanguage De");
+        LOGGER.debug("detectLanguage De");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
@@ -145,7 +143,7 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with en pages.
      */
     public void testDetectLanguageEn() {
-        System.out.println("detectLanguage en");
+        LOGGER.debug("detectLanguage en");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
@@ -167,7 +165,7 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with es pages.
      */
     public void testDetectLanguageEs() {
-        System.out.println("detectLanguage es");
+        LOGGER.debug("detectLanguage es");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
@@ -188,7 +186,7 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with fa pages.
      */
     public void testDetectLanguageFa() {
-        System.out.println("detectLanguage fa");
+        LOGGER.debug("detectLanguage fa");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
@@ -209,7 +207,7 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with he pages.
      */
     public void testDetectLanguageHe() {
-        System.out.println("detectLanguage he");
+        LOGGER.debug("detectLanguage he");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
@@ -230,12 +228,12 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with ko pages.
      */
     public void testDetectLanguageKo() {
-        System.out.println("detectLanguage ko");
+        LOGGER.debug("detectLanguage ko");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
             doc = Jsoup.parse(new File(PATH+"ko.wikipedia.org-wiki_20140701.html"), UTF_8);
-            System.out.println(doc.text());
+            LOGGER.debug(doc.text());
             LOGGER.debug("start detection");
             assertEquals("ko", instance.detectLanguage(doc.text()).getDetectedLanguage());
             assertEquals("ko", instance.detectLanguage(doc.text().toLowerCase()).getDetectedLanguage());
@@ -252,7 +250,7 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with mk pages.
      */
     public void testDetectLanguageMk() {
-        System.out.println("detectLanguage mk");
+        LOGGER.debug("detectLanguage mk");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
@@ -273,7 +271,7 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with pl pages.
      */
     public void testDetectLanguagePl() {
-        System.out.println("detectLanguage pl");
+        LOGGER.debug("detectLanguage pl");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
@@ -294,7 +292,7 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with pt pages.
      */
     public void testDetectLanguagePt() {
-        System.out.println("detectLanguage pt");
+        LOGGER.debug("detectLanguage pt");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
@@ -315,7 +313,7 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with th pages.
      */
     public void testDetectLanguageTh() {
-        System.out.println("detectLanguage th");
+        LOGGER.debug("detectLanguage th");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
@@ -336,7 +334,7 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with vi pages.
      */
     public void testDetectLanguageVi() {
-        System.out.println("detectLanguage vi");
+        LOGGER.debug("detectLanguage vi");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
@@ -357,7 +355,7 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with zh pages.
      */
     public void testDetectLanguageZh() {
-        System.out.println("detectLanguage zh");
+        LOGGER.debug("detectLanguage zh");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
@@ -378,7 +376,7 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with ru pages.
      */
     public void testDetectLanguageRu() {
-        System.out.println("detectLanguage ru");
+        LOGGER.debug("detectLanguage ru");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {

@@ -23,6 +23,7 @@ package org.opens.tanaguru.rules.elementchecker.text;
 
 import java.util.Arrays;
 import junit.framework.TestCase;
+import org.apache.log4j.Logger;
 import static org.easymock.EasyMock.*;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
@@ -41,6 +42,9 @@ import org.opens.tanaguru.service.ProcessRemarkService;
  * @author jkowalczyk
  */
 public class TextBelongsToBlackListCheckerTest extends TestCase {
+    
+    private static final Logger LOGGER = 
+            Logger.getLogger(TextBelongsToBlackListCheckerTest.class);
     
     private static final String BLACKLIST_NOM_NAME = "blacklist";
     private static final String DETECTION_MSG = "detected";
@@ -82,7 +86,7 @@ public class TextBelongsToBlackListCheckerTest extends TestCase {
      * Test of doCheck method, of class TextBelongsToBlackListChecker.
      */
     public void testDoCheckWithEmptyElements() {
-        System.out.println("doCheckWithEmptyElements");
+        LOGGER.debug("doCheckWithEmptyElements");
         
         /* Prepare test context */
         TextBelongsToBlackListChecker instance = 
@@ -104,7 +108,7 @@ public class TextBelongsToBlackListCheckerTest extends TestCase {
      * Test of doCheck method, of class TextBelongsToBlackListChecker.
      */
     public void testDoCheckWithNullTextToCheck() {
-        System.out.println("doCheckWithNullTextToCheck");
+        LOGGER.debug("doCheckWithNullTextToCheck");
         
         /* Prepare test context */
         
@@ -137,7 +141,7 @@ public class TextBelongsToBlackListCheckerTest extends TestCase {
      * Test of doCheck method, of class TextBelongsToBlackListChecker.
      */
     public void testDoCheckWithDefaultDetectionResult() {
-        System.out.println("doCheckWithDefaultDetectionResult");
+        LOGGER.debug("doCheckWithDefaultDetectionResult");
         
         /* Prepare test context */
         elements.add(element);
@@ -186,7 +190,7 @@ public class TextBelongsToBlackListCheckerTest extends TestCase {
      * Test of doCheck method, of class TextBelongsToBlackListChecker.
      */
     public void testDoCheckWithDefaultNotDetectionResult() {
-        System.out.println("doCheckWithDefaultNotDetectionResult");
+        LOGGER.debug("doCheckWithDefaultNotDetectionResult");
         
         /* Prepare test context */
         elements.add(element);
@@ -226,7 +230,7 @@ public class TextBelongsToBlackListCheckerTest extends TestCase {
      * Test of doCheck method, of class TextBelongsToBlackListChecker.
      */
     public void testDoCheckWithDefaultDetectionResultAndDetectionResultOverridenByConstructor() {
-        System.out.println("doCheckWithDefaultDetectionResultAndDetectionResultOverridenByConstructor");
+        LOGGER.debug("doCheckWithDefaultDetectionResultAndDetectionResultOverridenByConstructor");
         
         /* Prepare test context */
         elements.add(element);
@@ -276,7 +280,7 @@ public class TextBelongsToBlackListCheckerTest extends TestCase {
      * Test of doCheck method, of class TextBelongsToBlackListChecker.
      */
     public void testDoCheckWithDefaultNotDetectionResultAndDetectionResultOverridenByConstructor() {
-        System.out.println("doCheckWithDefaultNotDetectionResultAndDetectionResultOverridenByConstructor");
+        LOGGER.debug("doCheckWithDefaultNotDetectionResultAndDetectionResultOverridenByConstructor");
         
         /* Prepare test context */
         elements.add(element);

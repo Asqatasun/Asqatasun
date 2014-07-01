@@ -22,6 +22,7 @@
 package org.opens.tanaguru.rules.elementchecker.text;
 
 import junit.framework.TestCase;
+import org.apache.log4j.Logger;
 import static org.easymock.EasyMock.*;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
@@ -40,6 +41,9 @@ import org.opens.tanaguru.service.ProcessRemarkService;
  * @author jkowalczyk
  */
 public class TextNotIdenticalToAttributeCheckerTest extends TestCase {
+    
+    private static final Logger LOGGER = 
+            Logger.getLogger(TextNotIdenticalToAttributeCheckerTest.class);
     
     private static final String DETECTION_MSG = "detected";
     
@@ -75,7 +79,7 @@ public class TextNotIdenticalToAttributeCheckerTest extends TestCase {
      * Test of doCheck method, of class TextNotIdenticalToAttributeChecker.
      */
     public void testDoCheckWithEmptyElements() {
-        System.out.println("doCheckWithEmptyElements");
+        LOGGER.debug("doCheckWithEmptyElements");
         
         /* Prepare test context */
         TextNotIdenticalToAttributeChecker instance = 
@@ -98,7 +102,7 @@ public class TextNotIdenticalToAttributeCheckerTest extends TestCase {
      * Test of doCheck method, of class TextNotIdenticalToAttributeChecker.
      */
     public void testDoCheckWithNullTextToCheck() {
-        System.out.println("doCheckWithNullTextToCheck");
+        LOGGER.debug("doCheckWithNullTextToCheck");
         
         /* Prepare test context */
         
@@ -132,7 +136,7 @@ public class TextNotIdenticalToAttributeCheckerTest extends TestCase {
      * Test of doCheck method, of class TextNotIdenticalToAttributeChecker.
      */
     public void testDoCheckWithNullTextToCheckAndDetectionResultOverridenByConstructor() {
-        System.out.println("doCheckWithNullTextToCheckAndDetectionResultOverridenByConstructor");
+        LOGGER.debug("doCheckWithNullTextToCheckAndDetectionResultOverridenByConstructor");
         
         /* Prepare test context */
         
@@ -168,7 +172,7 @@ public class TextNotIdenticalToAttributeCheckerTest extends TestCase {
      * Test of doCheck method, of class TextNotIdenticalToAttributeChecker.
      */
     public void testDoCheckWithDefaultDetectionResult() {
-        System.out.println("doCheckWithDefaultDetectionResult");
+        LOGGER.debug("doCheckWithDefaultDetectionResult");
         
         /* Prepare test context */
         elements.add(element);
@@ -211,7 +215,7 @@ public class TextNotIdenticalToAttributeCheckerTest extends TestCase {
      * Test of doCheck method, of class TextNotIdenticalToAttributeChecker.
      */
     public void testDoCheckWithDefaultNotDetectionResult() {
-        System.out.println("doCheckWithDefaultNotDetectionResult");
+        LOGGER.debug("doCheckWithDefaultNotDetectionResult");
         
         /* Prepare test context */
         elements.add(element);
@@ -245,7 +249,7 @@ public class TextNotIdenticalToAttributeCheckerTest extends TestCase {
      * Test of doCheck method, of class TextNotIdenticalToAttributeChecker.
      */
     public void testDoCheckWithDefaultDetectionResultAndDetectionResultOverridenByConstructor() {
-        System.out.println("doCheckWithDefaultDetectionResultAndDetectionResultOverridenByConstructor");
+        LOGGER.debug("doCheckWithDefaultDetectionResultAndDetectionResultOverridenByConstructor");
         
         /* Prepare test context */
         elements.add(element);
@@ -290,7 +294,7 @@ public class TextNotIdenticalToAttributeCheckerTest extends TestCase {
      * Test of doCheck method, of class TextNotIdenticalToAttributeChecker.
      */
     public void testDoCheckWithDefaultNotDetectionResultAndDetectionResultOverridenByConstructor() {
-        System.out.println("doCheckWithDefaultNotDetectionResultAndDetectionResultOverridenByConstructor");
+        LOGGER.debug("doCheckWithDefaultNotDetectionResultAndDetectionResultOverridenByConstructor");
         
         /* Prepare test context */
         elements.add(element);
