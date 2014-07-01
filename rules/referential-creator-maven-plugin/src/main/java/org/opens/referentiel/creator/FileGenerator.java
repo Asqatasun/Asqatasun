@@ -23,31 +23,34 @@ import static java.nio.charset.StandardCharsets.*;
 public class FileGenerator {
 
     private VelocityParametersContext vpc;
-    
-    public FileGenerator(String referentiel, String referentielLabel) {
+
+    public FileGenerator(String referentiel,
+            String referentielLabel,
+            String destinationFolder) {
         vpc = new VelocityParametersContext();
         vpc.setReferentiel(String.valueOf(referentiel.charAt(0)).toUpperCase()
                 + referentiel.substring(1));
         vpc.setReferentielLabel(referentielLabel);
+        vpc.setDestinationFolder(destinationFolder);
     }
 
-    protected File getSqlFile(String destinationFolder) {
-        return new File(destinationFolder
+    protected File getSqlFile() {
+        return new File(vpc.getDestinationFolder()
                 + "/src/main/resources/sql/"
                 + vpc.getReferentiel().toLowerCase()
                 + "-insert.sql");
     }
 
-    protected File getI18nDefaultFile(String destinationFolder, String category) {
-        return new File(destinationFolder
+    protected File getI18nDefaultFile(String category) {
+        return new File(vpc.getDestinationFolder()
                 + "/src/main/resources/i18n/"
                 + category + "-"
                 + vpc.getReferentiel().replace(".", "").toLowerCase()
                 + "-I18N.properties");
     }
 
-    protected File getI18nFile(String destinationFolder, String lang, String category) {
-        return new File(destinationFolder
+    protected File getI18nFile(String lang, String category) {
+        return new File(vpc.getDestinationFolder()
                 + "/src/main/resources/i18n/"
                 + category + "-"
                 + vpc.getReferentiel().replace(".", "").toLowerCase()
@@ -92,12 +95,11 @@ public class FileGenerator {
         return classCode;
     }
 
-    public void writeFileCodeGenerate(VelocityContext context, Template temp,
-            String destinationFolder) throws IOException {
+    public void writeFileCodeGenerate(VelocityContext context, Template temp) throws IOException {
         StringWriter wr = new StringWriter();
         temp.merge(context, wr);
         vpc.getClassRule().add(vpc.getClassString());
-        File classFile = new File(destinationFolder
+        File classFile = new File(vpc.getDestinationFolder()
                 + "/src/main/java/"
                 + vpc.getPackageString().replace('.', '/') + "/"
                 + vpc.getReferentiel().replace(".", "").toLowerCase() + "/"
@@ -105,40 +107,20 @@ public class FileGenerator {
         FileUtils.writeStringToFile(classFile, wr.toString());
     }
 
-    public void adaptParentPom(VelocityContext context, Template temp,
-            String destinationFolder) throws IOException {
+    public void adaptPom(VelocityContext context, Template temp) throws IOException {
         StringWriter wr = new StringWriter();
         temp.merge(context, wr);
-        File pomFile = new File(destinationFolder
+        File pomFile = new File(vpc.getDestinationFolder()
                 + "/pom.xml");
         FileUtils.writeStringToFile(pomFile, wr.toString());
     }
-
-    public void adaptRefPom(VelocityContext context, Template temp,
-            String destinationFolder) throws IOException {
-        StringWriter wr = new StringWriter();
-        temp.merge(context, wr);
-        File refPomFile = new File(destinationFolder
-                + "/pom.xml");
-        FileUtils.writeStringToFile(refPomFile, wr.toString());
-    }
-
-    public void adaptTargzPom(VelocityContext context, Template temp,
-            String destinationFolder) throws IOException {
-        StringWriter wr = new StringWriter();
-        temp.merge(context, wr);
-        File refPomFile = new File(destinationFolder
-                + "/pom.xml");
-        FileUtils.writeStringToFile(refPomFile, wr.toString());
-    }
-
+    
     public void writeTestCaseGenerate(VelocityContext context, Template temp,
-            String destinationFolder,
             String testCaseNumber) throws IOException {
         StringWriter wr = new StringWriter();
         temp.merge(context, wr);
-        File testCaseFile = new File(destinationFolder
-                + "/src/main/resources/testcases/"
+        File testCaseFile = new File(vpc.getDestinationFolder()
+                + "/src/test/resources/testcases/"
                 + vpc.getReferentiel().replace(".", "").toLowerCase() + "/"
                 + vpc.getClassString() + "/" + vpc.getReferentiel().replace(".", "")
                 + ".Test." + vpc.getTestCode().replace('-', '.')
@@ -147,11 +129,10 @@ public class FileGenerator {
     }
 
     public void writeUnitTestGenerate(VelocityContext context, Template temp,
-            String destinationFolder,
             String testCaseNumber) throws IOException {
         StringWriter wr = new StringWriter();
         temp.merge(context, wr);
-        File testCaseFile = new File(destinationFolder
+        File testCaseFile = new File(vpc.getDestinationFolder()
                 + "/src/test/java/"
                 + vpc.getPackageString().replace('.', '/') + "/"
                 + vpc.getReferentiel().replace(".", "").toLowerCase() + "/"
@@ -160,11 +141,10 @@ public class FileGenerator {
     }
 
     public void writeRuleImplementationTestCaseGenerate(
-            VelocityContext context, Template temp,
-            String destinationFolder) throws IOException {
+            VelocityContext context, Template temp) throws IOException {
         StringWriter wr = new StringWriter();
         temp.merge(context, wr);
-        File testCaseFile = new File(destinationFolder
+        File testCaseFile = new File(vpc.getDestinationFolder()
                 + "/src/test/java/"
                 + vpc.getPackageString().replace('.', '/') + "/"
                 + vpc.getReferentiel().replace(".", "").toLowerCase() + "/test/"
@@ -173,11 +153,11 @@ public class FileGenerator {
         FileUtils.writeStringToFile(testCaseFile, wr.toString());
     }
 
-    public void writei18NFile(String destinationFolder, Map categoryMap,
+    public void writei18NFile(Map categoryMap,
             String lang, String defaultLanguage,
             String category, String refDescriptor) throws IOException {
         if (category.equals("referential")) {
-            writeI18NReferentialFile(destinationFolder, lang, defaultLanguage, category);
+            writeI18NReferentialFile(lang, defaultLanguage, category);
             return;
         }
         Object code = categoryMap.keySet().iterator().next();
@@ -186,13 +166,13 @@ public class FileGenerator {
         sb.append(vpc.getReferentiel().replace(".", ""));
         sb.append("-").append(code).append("=").append(desc).append("\n");
         if (category.equals("rule")) {
-            writeTestUrlI18NFile(destinationFolder, refDescriptor, code, sb);
+            writeTestUrlI18NFile(refDescriptor, code, sb);
         }
-        if (!FileUtils.readFileToString(getI18nFile(destinationFolder, lang, category), UTF_8).contains(sb.toString())) {
-            FileUtils.writeStringToFile(FileUtils.getFile(getI18nFile(destinationFolder, lang, category)), sb.toString(), UTF_8, true);
+        if (!FileUtils.readFileToString(getI18nFile(lang, category), UTF_8).contains(sb.toString())) {
+            FileUtils.writeStringToFile(FileUtils.getFile(getI18nFile(lang, category)), sb.toString(), UTF_8, true);
         }
-        if (lang.equalsIgnoreCase(defaultLanguage) && !FileUtils.readFileToString(getI18nDefaultFile(destinationFolder, category), UTF_8).contains(sb.toString())) {
-            FileUtils.writeStringToFile(FileUtils.getFile(getI18nDefaultFile(destinationFolder, category)), sb.toString(), UTF_8, true);
+        if (lang.equalsIgnoreCase(defaultLanguage) && !FileUtils.readFileToString(getI18nDefaultFile(category), UTF_8).contains(sb.toString())) {
+            FileUtils.writeStringToFile(FileUtils.getFile(getI18nDefaultFile(category)), sb.toString(), UTF_8, true);
         }
     }
 
@@ -206,7 +186,7 @@ public class FileGenerator {
         return desc;
     }
 
-    private StringBuilder writeTestUrlI18NFile(String destinationFolder, String refDescriptor, Object code, StringBuilder sb) {
+    private StringBuilder writeTestUrlI18NFile(String refDescriptor, Object code, StringBuilder sb) {
         sb.append(vpc.getReferentiel().replace(".", ""));
         sb.append("-").append(code).append("-url=");
         if (StringUtils.isNotBlank(refDescriptor)) {
@@ -218,61 +198,59 @@ public class FileGenerator {
         return sb;
     }
 
-    private void writeI18NReferentialFile(String destinationFolder, String lang, String defaultLanguage, String category) throws IOException {
+    private void writeI18NReferentialFile(String lang, String defaultLanguage, String category) throws IOException {
         StringBuilder sb = new StringBuilder();
         sb.append(vpc.getReferentiel().replace(".", "").toUpperCase()).append("=").append(vpc.getReferentielLabel()).append("\n");
         sb.append(vpc.getReferentiel().replace(".", "").toUpperCase()).append("-optgroup=").append(vpc.getReferentielLabel()).append("\n");
         sb.append(vpc.getReferentiel().replace(".", "").toUpperCase()).append("-LEVEL_1=A\n");
         sb.append(vpc.getReferentiel().replace(".", "").toUpperCase()).append("-LEVEL_2=AA\n");
         sb.append(vpc.getReferentiel().replace(".", "").toUpperCase()).append("-LEVEL_3=AAA");
-        if (!FileUtils.readFileToString(getI18nFile(destinationFolder, lang, category), UTF_8).contains(sb.toString())) {
-            FileUtils.writeStringToFile(FileUtils.getFile(getI18nFile(destinationFolder, lang, category)), sb.toString(), UTF_8, true);
+        if (!FileUtils.readFileToString(getI18nFile(lang, category), UTF_8).contains(sb.toString())) {
+            FileUtils.writeStringToFile(FileUtils.getFile(getI18nFile(lang, category)), sb.toString(), UTF_8, true);
         }
-        if (lang.equalsIgnoreCase(defaultLanguage) && !FileUtils.readFileToString(getI18nDefaultFile(destinationFolder, category), UTF_8).contains(sb.toString())) {
-            FileUtils.writeStringToFile(FileUtils.getFile(getI18nDefaultFile(destinationFolder, category)), sb.toString(), UTF_8, true);
+        if (lang.equalsIgnoreCase(defaultLanguage) && !FileUtils.readFileToString(getI18nDefaultFile(category), UTF_8).contains(sb.toString())) {
+            FileUtils.writeStringToFile(FileUtils.getFile(getI18nDefaultFile(category)), sb.toString(), UTF_8, true);
         }
     }
 
-    public void createI18NFiles(Set<String> langs, String destinationFolder) throws IOException {
-        FileUtils.touch(getI18nDefaultFile(destinationFolder, "theme"));
-        FileUtils.touch(getI18nDefaultFile(destinationFolder, "criterion"));
-        FileUtils.touch(getI18nDefaultFile(destinationFolder, "rule"));
-        FileUtils.touch(getI18nDefaultFile(destinationFolder, "rule-remark"));
-        FileUtils.touch(getI18nDefaultFile(destinationFolder, "referential"));
+    public void createI18NFiles(Set<String> langs) throws IOException {
+        FileUtils.touch(getI18nDefaultFile("theme"));
+        FileUtils.touch(getI18nDefaultFile("criterion"));
+        FileUtils.touch(getI18nDefaultFile("rule"));
+        FileUtils.touch(getI18nDefaultFile("rule-remark"));
+        FileUtils.touch(getI18nDefaultFile("referential"));
         for (String lang : langs) {
-            FileUtils.touch(getI18nFile(destinationFolder, lang, "theme"));
-            FileUtils.touch(getI18nFile(destinationFolder, lang, "criterion"));
-            FileUtils.touch(getI18nFile(destinationFolder, lang, "rule"));
-            FileUtils.touch(getI18nFile(destinationFolder, lang, "rule-remark"));
-            FileUtils.touch(getI18nFile(destinationFolder, lang, "referential"));
+            FileUtils.touch(getI18nFile(lang, "theme"));
+            FileUtils.touch(getI18nFile(lang, "criterion"));
+            FileUtils.touch(getI18nFile(lang, "rule"));
+            FileUtils.touch(getI18nFile(lang, "rule-remark"));
+            FileUtils.touch(getI18nFile(lang, "referential"));
         }
     }
 
-    public void writeDescriptorGenerate(VelocityContext context, Template temp,
-            String destinationFolder) throws IOException {
+    public void writeDescriptorGenerate(VelocityContext context, Template temp) throws IOException {
         StringWriter wr = new StringWriter();
         temp.merge(context, wr);
-        File descriptorFile = new File(destinationFolder
+        File descriptorFile = new File(vpc.getDestinationFolder()
                 + "/src/main/resources/"
                 + "descriptor.xml");
         FileUtils.writeStringToFile(descriptorFile, wr.toString());
     }
 
-    public void writeInstallGenerate(VelocityContext context, Template temp,
-            String destinationFolder) throws IOException {
+    public void writeInstallGenerate(VelocityContext context, Template temp) throws IOException {
         StringWriter wr = new StringWriter();
         temp.merge(context, wr);
-        File installFile = new File(destinationFolder
+        File installFile = new File(vpc.getDestinationFolder()
                 + "/src/main/resources/"
-                + "install.sh");
+                + "deploy.sh");
         FileUtils.writeStringToFile(installFile, wr.toString());
     }
 
     public void writeWebappBeansGenerate(VelocityContext context,
-            Template temp, String destinationFolder) throws IOException {
+            Template temp) throws IOException {
         StringWriter wr = new StringWriter();
         temp.merge(context, wr);
-        File beansWebappFile = new File(destinationFolder
+        File beansWebappFile = new File(vpc.getDestinationFolder()
                 + "/src/main/resources/conf/context/"
                 + vpc.getReferentiel().replace(".", "").toLowerCase()
                 + "/web-app/"
@@ -282,10 +260,10 @@ public class FileGenerator {
     }
 
     public void writeWebappBeansExpressionGenerate(VelocityContext context,
-            Template temp, String destinationFolder) throws IOException {
+            Template temp) throws IOException {
         StringWriter wr = new StringWriter();
         temp.merge(context, wr);
-        File beansWebappFile = new File(destinationFolder
+        File beansWebappFile = new File(vpc.getDestinationFolder()
                 + "/src/main/resources/conf/context/"
                 + vpc.getReferentiel().replace(".", "").toLowerCase()
                 + "/web-app/export/" + "tgol-beans-"
@@ -295,11 +273,11 @@ public class FileGenerator {
     }
 
     public void writeAuditResultConsoleBeanGenerate(VelocityContext context,
-            Template temp, String destinationFolder) throws IOException {
+            Template temp) throws IOException {
         StringWriter wr = new StringWriter();
         context.put("themes", vpc.getThemes());
         temp.merge(context, wr);
-        File beansAuditResultConsoleFile = new File(destinationFolder
+        File beansAuditResultConsoleFile = new File(vpc.getDestinationFolder()
                 + "/src/main/resources/conf/context/"
                 + vpc.getReferentiel().replace(".", "").toLowerCase()
                 + "/web-app/mvc/form/" + "tgol-beans-"
@@ -309,10 +287,10 @@ public class FileGenerator {
     }
 
     public void writeAuditSetUpFormBeanGenerate(VelocityContext context,
-            Template temp, String destinationFolder) throws IOException {
+            Template temp) throws IOException {
         StringWriter wr = new StringWriter();
         temp.merge(context, wr);
-        File beansAuditResultConsoleFile = new File(destinationFolder
+        File beansAuditResultConsoleFile = new File(vpc.getDestinationFolder()
                 + "/src/main/resources/conf/context/"
                 + vpc.getReferentiel().replace(".", "").toLowerCase()
                 + "/web-app/mvc/form/" + "tgol-beans-"
@@ -321,21 +299,20 @@ public class FileGenerator {
         FileUtils.writeStringToFile(beansAuditResultConsoleFile, wr.toString());
     }
 
-    public void createSqlReference(String destinationFolder) throws IOException {
-        FileUtils.touch(getSqlFile(destinationFolder));
+    public void createSqlReference() throws IOException {
+        FileUtils.touch(getSqlFile());
         StringBuilder strb = new StringBuilder();
         strb.append("INSERT IGNORE INTO `REFERENCE` (`CD_REFERENCE`, `DESCRIPTION`, `LABEL`, `URL`, `RANK`, `ID_DEFAULT_LEVEL`) VALUES\n");
         strb.append("(\'").append(vpc.getReferentiel().replace(".", "").toUpperCase()).append("\', NULL, \'").append(vpc.getReferentielLabel()).append("\', \'\', 2000, 1);\n\n");
         strb.append("INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Code`, `Label`) VALUES\n");
         strb.append("(\'").append(vpc.getReferentiel().replace(".", "").toUpperCase()).append("\', \'").append(vpc.getReferentielLabel()).append("\');\n\n");
-        FileUtils.writeStringToFile(FileUtils.getFile(getSqlFile(destinationFolder)), strb.toString(), true);
+        FileUtils.writeStringToFile(FileUtils.getFile(getSqlFile()), strb.toString(), true);
     }
 
-    public void createSqlTheme(String i18NPath, String destinationFolder) throws IOException {
-        List<String> themesList = FileUtils.readLines(getI18nDefaultFile(i18NPath, "theme"));
+    public void createSqlTheme() throws IOException {
+        List<String> themesList = FileUtils.readLines(getI18nDefaultFile("theme"));
         StringBuilder strb = new StringBuilder();
         strb.append("INSERT IGNORE INTO `THEME` (`CD_THEME`, `DESCRIPTION`, `LABEL`, `RANK`) VALUES\n");
-//        FileUtils.writeStringToFile(FileUtils.getFile(getSqlFile(destinationFolder)), themeTable, true);
         for (int i = 0; i < themesList.size(); i++) {
             strb.append("(\'").append(themesList.get(i).split("=")[0]).append("\', NULL, \'").append(themesList.get(i).split("=")[1].replace("\'", "")).append("\', ");
             strb.append(String.valueOf(i + 1)).append(")");
@@ -345,12 +322,12 @@ public class FileGenerator {
                 strb.append(";\n\n");
             }
         }
-        FileUtils.writeStringToFile(FileUtils.getFile(getSqlFile(destinationFolder)), strb.toString(), true);
+        FileUtils.writeStringToFile(FileUtils.getFile(getSqlFile()), strb.toString(), true);
     }
 
-    public void createSqlCritere(String i18NPath, String destinationFolder) throws IOException {
-        List<String> criteres = FileUtils.readLines(getI18nDefaultFile(i18NPath, "criterion"));
-        List<String> themesList = FileUtils.readLines(getI18nDefaultFile(i18NPath, "theme"));
+    public void createSqlCritere() throws IOException {
+        List<String> criteres = FileUtils.readLines(getI18nDefaultFile("criterion"));
+        List<String> themesList = FileUtils.readLines(getI18nDefaultFile("theme"));
         StringBuilder strb = new StringBuilder();
         strb.append("INSERT IGNORE INTO `CRITERION` (`CD_CRITERION`, `DESCRIPTION`, `LABEL`, `URL`, `RANK`) VALUES\n");
         for (int i = 0; i < criteres.size(); i++) {
@@ -378,21 +355,21 @@ public class FileGenerator {
                 strb.append("\n");
             }
         }
-        FileUtils.writeStringToFile(FileUtils.getFile(getSqlFile(destinationFolder)), strb.toString(), true);
+        FileUtils.writeStringToFile(FileUtils.getFile(getSqlFile()), strb.toString(), true);
     }
 
-    public void createSqlParameters(String i18NPath, String destinationFolder) throws IOException {
+    public void createSqlParameters() throws IOException {
         StringBuilder strb = new StringBuilder();
         strb.append("INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES\n");
         strb.append("(5, \'").append(vpc.getReferentiel().replace(".", "").toUpperCase()).append(";LEVEL_1\', b\'0\'),\n");
         strb.append("(5, \'").append(vpc.getReferentiel().replace(".", "").toUpperCase()).append(";LEVEL_2\', b\'0\'),\n");
         strb.append("(5, \'").append(vpc.getReferentiel().replace(".", "").toUpperCase()).append(";LEVEL_3\', b\'0\');\n\n");
-        FileUtils.writeStringToFile(FileUtils.getFile(getSqlFile(destinationFolder)), strb.toString(), true);
+        FileUtils.writeStringToFile(FileUtils.getFile(getSqlFile()), strb.toString(), true);
     }
 
-    public void createSqlTest(String i18NPath, String destinationFolder) throws IOException {
-        List<String> tests = FileUtils.readLines(getI18nDefaultFile(i18NPath, "rule"));
-        List<String> criteres = FileUtils.readLines(getI18nDefaultFile(i18NPath, "criterion"));
+    public void createSqlTest() throws IOException {
+        List<String> tests = FileUtils.readLines(getI18nDefaultFile("rule"));
+        List<String> criteres = FileUtils.readLines(getI18nDefaultFile("criterion"));
         StringBuilder strb = new StringBuilder();
         strb.append("INSERT IGNORE INTO `TEST` (`Cd_Test`, `Description`, `Label`, `Rank`, `Weight`, `Rule_Archive_Name`, `Rule_Class_Name`, `Id_Decision_Level`, `Id_Level`, `Id_Scope`, `Rule_Design_Url`, `No_Process`) VALUES\n");
         for (int i = 0; i < tests.size(); i += 2) {
@@ -404,13 +381,13 @@ public class FileGenerator {
             strb.append(vpc.getReferentiel().replace(".", "").toLowerCase()).append(".");
             strb.append(String.valueOf(vpc.getClassRule().get(i - (i / 2)))).append("\', ");
             strb.append("NULL, 1, 1, \'\', b\'0\')");
-            if (i < tests.size() - 1) {
+            if (i < tests.size() - 2) {
                 strb.append(",\n");
-            } else if (i == tests.size() - 1) {
+            } else if (i == tests.size() - 2) {
                 strb.append(";\n\n");
             }
         }
-        for (int i = 0; i < criteres.size(); i += 2) {
+        for (int i = 0; i < criteres.size(); i += 1) {
             strb.append("UPDATE `TEST` SET `Id_Criterion` = (SELECT `ID_CRITERION` FROM `CRITERION` WHERE `CD_CRITERION` LIKE \'");
             strb.append(criteres.get(i).split("=")[0]);
             strb.append("\') WHERE `Cd_Test` LIKE \'");
@@ -419,6 +396,6 @@ public class FileGenerator {
                 strb.append("\n");
             }
         }
-        FileUtils.writeStringToFile(FileUtils.getFile(getSqlFile(destinationFolder)), strb.toString(), true);
+        FileUtils.writeStringToFile(FileUtils.getFile(getSqlFile()), strb.toString(), true);
     }
 }
