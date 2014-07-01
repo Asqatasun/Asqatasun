@@ -17,7 +17,6 @@
     <properties>
         <generator.referentielName>Referentiel Name 1.0</generator.referentielName>
         <generator.referentiel>referentielname1.0</generator.referentiel>
-        <generator.groupId>org.opens</generator.groupId>
         <generator.baseFolder>/home/$user/Tanaguru/rules/</generator.baseFolder>
         <generator.dataFile>/home/$user/referentiel.csv</generator.dataFile>
         <!--<generator.delimiter>ø</generator.delimiter>-->
@@ -42,7 +41,6 @@
                     <destinationFolder>${generator.baseFolder}/${generator.referentiel}</destinationFolder>
                     <dataFile>${generator.dataFile}</dataFile>
                     <delimiter>${generator.delimiter}</delimiter>
-                    <packageName>${generator.groupId}.tanaguru.rules</packageName>
                     <referentiel>${generator.referentiel}</referentiel>
                     <referentielLabel>${generator.referentielName}</referentielLabel>
                     <refDescriptor>${generator.refdescriptor}</refDescriptor>

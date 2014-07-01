@@ -37,13 +37,14 @@ import org.apache.velocity.exception.ResourceNotFoundException;
  */
 public class CodeGeneratorMojo extends AbstractMojo {
 
+    private static final String PACKAGE_NAME = "org.opens.tanaguru.rules";
     private static final String THEME_LABEL_COLUMN_NAME = "theme_";
     private static final String CRITERION_LABEL_COLUMN_NAME = "critere-label_";
     private static final String TEST_LABEL_COLUMN_NAME = "test-label_";
     private static final String THEME_CODE_COLUMN_NAME = "theme";
     private static final String CRITERION_CODE_COLUMN_NAME = "critere";
     private static final String TEST_CODE_COLUMN_NAME = "test";
-    private static boolean isI18NReferentialCreated = false;
+    private static boolean IS_I18N_REFERENTIAL_CREATED = false;
     /**
      * @parameter
      * default-value="${basedir}/src/main/resources/template/rule/rule.vm"
@@ -115,10 +116,6 @@ public class CodeGeneratorMojo extends AbstractMojo {
      * @parameter
      */
     String referentiel;
-    /**
-     * @parameter
-     */
-    String packageName;
     /**
      * @parameter
      */
@@ -283,7 +280,7 @@ public class CodeGeneratorMojo extends AbstractMojo {
         if (StringUtils.isNotBlank(test) && StringUtils.isNotBlank(testCode)) {
             fg.writei18NFile(testMap, lang, langSet.first(), "rule", refDescriptor);
         }
-        if (isI18NReferentialCreated == false) {
+        if (IS_I18N_REFERENTIAL_CREATED == false) {
             fg.writei18NFile(null, lang, langSet.first(), "referential", refDescriptor);
         }
     }
@@ -320,10 +317,10 @@ public class CodeGeneratorMojo extends AbstractMojo {
             for (String lang : langSet) {
                 writeToI18NFile(fg, record, lang);
             }
-            isI18NReferentialCreated = true;
+            IS_I18N_REFERENTIAL_CREATED = true;
             String test = record.get(TEST_CODE_COLUMN_NAME);
             String testLabelFr = record.get(TEST_LABEL_COLUMN_NAME + langSet.first());
-            context = fg.getContextRuleClassFile(referentiel, packageName, test, testLabelFr, context);
+            context = fg.getContextRuleClassFile(referentiel, PACKAGE_NAME, test, testLabelFr, context);
             fg.writeFileCodeGenerate(context, ruleTemplate);
             fg.writeUnitTestGenerate(context, unitTestTemplate, testLabelFr);
             String[] testsCasesState = {"Passed", "Failed", "NMI", "NA"};
@@ -396,7 +393,6 @@ public class CodeGeneratorMojo extends AbstractMojo {
                 || String.valueOf(delimiter).isEmpty()
                 || dataFile == null
                 || StringUtils.isBlank(destinationFolder)
-                || StringUtils.isBlank(packageName)
                 || StringUtils.isBlank(referentiel)
                 || StringUtils.isBlank(referentielLabel)) {
             throw new InvalidParameterException("One or several parameter(s) set to the pom file is/are invalid(s)");
