@@ -96,7 +96,7 @@
         </property>
         <property name="authorizedRefForCriterionViewList">
             <list>
-                <value>AW22</value>
+                <value>Aw22</value>
             </list>
         </property>
         <property name="actionHandler" ref="resultActionHandler"/>
