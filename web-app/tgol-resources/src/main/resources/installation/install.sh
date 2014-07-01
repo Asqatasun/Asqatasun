@@ -218,7 +218,17 @@ create_tables() {
 		mysql --user=${mysql_tg_user}            \
 		      --password=${mysql_tg_passwd}      \
                       ${mysql_tg_db} ||                  \
-		fail "Unable to create the rules tables."\
+		fail "Unable to create the engine tables."\
+                     "The mysql user ${mysql_tg_user}" \
+                     "may already exists with a different" \
+                     "password in the database."
+
+	cd "$PKG_DIR/install/web-app/sql"
+	cat tgol-20-create-tables.sql tgol-30-insert.sql | \
+		sed -e "s/\$tgDatabase/$mysql_tg_db/" |    \
+		mysql --user="$mysql_tg_user"              \
+		      --password="$mysql_tg_passwd" ||     \
+		fail "Unable to create and fill the TGSI tables" \
                      "The mysql user ${mysql_tg_user}" \
                      "may already exists with a different" \
                      "password in the database."
@@ -231,16 +241,6 @@ create_tables() {
 		      --password=${mysql_tg_passwd}      \
                       ${mysql_tg_db} ||                  \
 		fail "Unable to create the rules tables" \
-                     "The mysql user ${mysql_tg_user}" \
-                     "may already exists with a different" \
-                     "password in the database."
-	
-	cd "$PKG_DIR/install/web-app/sql"
-	cat tgol-20-create-tables.sql tgol-30-insert.sql | \
-		sed -e "s/\$tgDatabase/$mysql_tg_db/" |    \
-		mysql --user="$mysql_tg_user"              \
-		      --password="$mysql_tg_passwd" ||     \
-		fail "Unable to create and fill the TGSI tables" \
                      "The mysql user ${mysql_tg_user}" \
                      "may already exists with a different" \
                      "password in the database."

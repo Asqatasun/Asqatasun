@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `THEME` (
   `Label` varchar(255) NOT NULL,
   `Rank` int(11) DEFAULT NULL,
   PRIMARY KEY (`Id_Theme`),
-  UNIQUE INDEX `Cd_Theme_UNIQUE` (`Cd_Theme` ASC)
+  UNIQUE INDEX `Cd_Theme_UNIQUE` (`Cd_Theme` ASC),
   INDEX `Cd_Theme_Index` (`Cd_Theme` ASC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `REFERENCE` (
   `Url` varchar(255) DEFAULT NULL,
   `Id_Default_Level` bigint(20) DEFAULT 2,
   PRIMARY KEY (`Id_Reference`),
-  UNIQUE INDEX `Cd_Reference_UNIQUE` (`Cd_Reference` ASC)
+  UNIQUE INDEX `Cd_Reference_UNIQUE` (`Cd_Reference` ASC),
   KEY `fk_Ref_Level` (`Id_Default_Level`),
       CONSTRAINT `fk_Ref_Level` 
           FOREIGN KEY Id_Default_Level_Index (`Id_Default_Level`) 
@@ -202,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `CRITERION` (
   `Reference_Id_Reference` bigint(20) DEFAULT NULL,
   `Theme_Id_Theme` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`Id_Criterion`),
-  UNIQUE INDEX `Cd_Criterion_UNIQUE` (`Cd_Criterion` ASC)
+  UNIQUE INDEX `Cd_Criterion_UNIQUE` (`Cd_Criterion` ASC),
   KEY `FKBCFA1E81E8F67244` (`Theme_Id_Theme`),
   CONSTRAINT `FKBCFA1E81E8F67244` 
       FOREIGN KEY Theme_Id_Theme_Index (`Theme_Id_Theme`) 
@@ -236,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `TEST` (
   `Id_Scope` bigint(20) DEFAULT NULL,
   `No_Process` bit(1) DEFAULT b'1',
   PRIMARY KEY (`Id_Test`),
-  UNIQUE INDEX `Cd_Test_UNIQUE` (`Cd_Test` ASC)
+  UNIQUE INDEX `Cd_Test_UNIQUE` (`Cd_Test` ASC),
   CONSTRAINT `FK273C92CCA757AD` 
       FOREIGN KEY Id_Decision_Level_Index (`Id_Decision_Level`) 
       REFERENCES `DECISION_LEVEL` (`Id_Decision_Level`),
