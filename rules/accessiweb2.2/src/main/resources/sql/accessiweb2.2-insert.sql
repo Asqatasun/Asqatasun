@@ -645,4 +645,9 @@ Cd_Test='AW22-13071' OR
 Cd_Test='AW22-13154' OR
 Cd_Test='AW22-13164';
 
+INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
+(5, 'AW22;LEVEL_1', b'1'),
+(5, 'AW22;LEVEL_2', b'1'),
+(5, 'AW22;LEVEL_3', b'1');
+
 SET foreign_key_checks=1;
