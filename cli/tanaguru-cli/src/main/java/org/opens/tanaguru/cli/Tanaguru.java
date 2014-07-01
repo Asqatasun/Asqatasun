@@ -68,8 +68,8 @@ public class Tanaguru implements AuditServiceListener {
     private static final String FILE_AUDIT = "File";
     private static final String SITE_AUDIT = "File";
     
-    private static final String AW22_REF = "AW22";
-    private static final String RGAA22_REF = "RGAA22";
+    private static final String AW22_REF = "Aw22";
+    private static final String RGAA22_REF = "Rgaa22";
     private static String REF = AW22_REF;
     
     private static final String BRONZE_LEVEL = "Bz";
@@ -234,7 +234,7 @@ public class Tanaguru implements AuditServiceListener {
 
         Set<Parameter> paramSet = getParameterSetFromAuditLevel(ref, level);
 
-        Map<String, String> fileMap = new HashMap<String, String>();
+        Map<String, String> fileMap = new HashMap<>();
         for (String file : Arrays.asList(uploadFilePath)) {
             File uploadFile = new File(file);
             try {
@@ -271,7 +271,7 @@ public class Tanaguru implements AuditServiceListener {
     private void displayWebResourceResult(WebResource wr, List<ProcessResult> processResultList) {
         System.out.println("");
         System.out.println("Subject : " + wr.getURL());
-        List<ProcessResult> prList = new ArrayList<ProcessResult>();
+        List<ProcessResult> prList = new ArrayList<>();
         for (ProcessResult netResult : processResultList) {
             if (netResult.getSubject().getURL().equalsIgnoreCase(wr.getURL())) {
                 prList.add(netResult);
@@ -372,7 +372,7 @@ public class Tanaguru implements AuditServiceListener {
      */
     private List<String> extractUrlListFromParameter(String urlTab) {
         String[] pageUrlTab = urlTab.split(";");
-        List<String> pageUrlList = new LinkedList<String>();
+        List<String> pageUrlList = new LinkedList<>();
         pageUrlList.addAll(Arrays.asList(pageUrlTab));
         return pageUrlList;
     }
@@ -413,8 +413,8 @@ public class Tanaguru implements AuditServiceListener {
         
         options.addOption(OptionBuilder.withLongOpt("referential")
                              .withDescription("Referential : \n"
-                + "- \"AW22\" for Accessiweb 2.2 (default)\n"
-                + "- \"RGA22\" for Rgaa 2.2\n")
+                + "- \"Aw22\" for Accessiweb 2.2 (default)\n"
+                + "- \"Rgaa22\" for Rgaa 2.2\n")
                              .hasArg()
                              .isRequired(false)
                              .create("r"));
@@ -532,11 +532,11 @@ public class Tanaguru implements AuditServiceListener {
             System.out.println("\nPlease specify at least one URL\n");
             return false;
         }
-        for (int i=0;i<cl.getArgs().length;i++) {
+        for (String arg : cl.getArgs()) {
             try {
-                URL url = new URL(cl.getArgs()[i]);
+                URL url = new URL(arg);
             } catch (MalformedURLException ex) {
-                System.out.println("\nThe URL "+ cl.getArgs()[i]+ " is malformed\n");
+                System.out.println("\nThe URL " + arg + " is malformed\n");
                 return false;
             }
         }
@@ -567,11 +567,11 @@ public class Tanaguru implements AuditServiceListener {
             System.out.println("\nPlease specify at least one file\n");
             return false;
         }
-        for (int i=0;i<cl.getArgs().length;i++) {
-            File file = FileUtils.getFile(cl.getArgs()[i]);
+        for (String arg : cl.getArgs()) {
+            File file = FileUtils.getFile(arg);
             if (!file.canRead()) {
                 System.out.println("\nThe file "+ file.getAbsolutePath() +" is unreadable.\n");
-            return false;
+                return false;
             }
         }
         return true;
