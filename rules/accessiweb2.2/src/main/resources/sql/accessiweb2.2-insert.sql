@@ -7,6 +7,8 @@ SET foreign_key_checks=0;
 INSERT IGNORE INTO `REFERENCE` (`ID_REFERENCE`, `CD_REFERENCE`, `DESCRIPTION`, `LABEL`, `URL`, `RANK`, `ID_DEFAULT_LEVEL`) VALUES
 (4, 'Aw22', NULL, 'AccessiWeb 2.2', 'http://www.accessiweb.org/index.php/accessiweb-22-english-version.html', 4, 2);
 
+INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Code`, `Label`) VALUES
+('AW22', 'Accessiweb 2.2') ;
 
 --
 -- Contenu de la table `theme`
@@ -646,8 +648,8 @@ Cd_Test='Aw22-13154' OR
 Cd_Test='Aw22-13164';
 
 INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
-(5, 'Aw22;LEVEL_1', b'1'),
+(5, 'Aw22;LEVEL_1', b'0'),
 (5, 'Aw22;LEVEL_2', b'1'),
-(5, 'Aw22;LEVEL_3', b'1');
+(5, 'Aw22;LEVEL_3', b'0');
 
 SET foreign_key_checks=1;
