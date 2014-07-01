@@ -10,15 +10,7 @@ INSERT IGNORE INTO `REFERENCE` (`CD_REFERENCE`, `DESCRIPTION`, `LABEL`, `URL`, `
 -- Contenu de la table `TGSI_REFERENTIAL`
 --
 INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Code`, `Label`) VALUES
-('Rgaa30', 'Rgaa 3.0');
-
---
--- Contenu de la table `level`
---
-INSERT IGNORE INTO `LEVEL` (`Id_Level`, `Cd_Level`, `Label`, `Description`, `Rank`) VALUES
-(4, 'A', 'Facile', NULL, 40),
-(5, 'AA', 'Moyen', NULL, 50),
-(6, 'AAA', 'Difficile', NULL, 60);
+('Rgaa22', 'Rgaa 2.2');
 
 --
 -- Contenu de la table `theme`
@@ -712,5 +704,10 @@ Cd_Test='Rgaa22-12031';
 UPDATE TEST SET Id_Level='1' WHERE Id_Level='4' And Cd_Test like "Rgaa%";
 UPDATE TEST SET Id_Level='2' WHERE Id_Level='5' And Cd_Test like "Rgaa%";
 UPDATE TEST SET Id_Level='3' WHERE Id_Level='6' And Cd_Test like "Rgaa%";
+
+INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
+(5, 'Rgaa22;LEVEL_1', b'0'),
+(5, 'Rgaa22;LEVEL_2', b'0'),
+(5, 'Rgaa22;LEVEL_3', b'0');
 
 SET foreign_key_checks=1;
