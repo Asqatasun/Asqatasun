@@ -266,7 +266,7 @@ public class CodeGeneratorMojo extends AbstractMojo {
             testCode = record.get(TEST_CODE_COLUMN_NAME);
         } else {
             test = record.get(CRITERION_LABEL_COLUMN_NAME + lang);
-            testCode = record.get(CRITERION_CODE_COLUMN_NAME + ".1");
+            testCode = record.get(CRITERION_CODE_COLUMN_NAME) + ".1";
         }
         Map themeMap = Collections.singletonMap(themeIndex, theme);
         Map critereMap = Collections.singletonMap(critereCode, critere);
