@@ -15,6 +15,7 @@ import org.apache.velocity.Template;
 import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.VelocityContext;
 import static java.nio.charset.StandardCharsets.*;
+import java.util.LinkedList;
 
 /**
  *
@@ -375,7 +376,7 @@ public class FileGenerator {
         FileUtils.writeStringToFile(FileUtils.getFile(getSqlFile()), strb.toString(), true);
     }
 
-    public void createSqlTest() throws IOException {
+    public void createSqlTest(LinkedList<String> levelColum) throws IOException {
         List<String> tests = FileUtils.readLines(getI18nDefaultFile("rule"));
         List<String> criteres = FileUtils.readLines(getI18nDefaultFile("criterion"));
         StringBuilder strb = new StringBuilder();
@@ -394,7 +395,9 @@ public class FileGenerator {
             strb.append(vpc.getPackageString()).append('.');
             strb.append(vpc.getReferentiel().replace(".", "").toLowerCase()).append(".");
             strb.append(String.valueOf(vpc.getClassRule().get(i - (i / 2)))).append("\', ");
-            strb.append("NULL, 1, 1, \'\', b\'0\')");
+            strb.append("NULL, ");
+            strb.append(getLevelColum(levelColum.get(i - (i / 2))));
+            strb.append(", 1, \'\', b\'0\')");
             if (i < tests.size() - 2) {
                 strb.append(",\n");
             } else if (i == tests.size() - 2) {
@@ -411,5 +414,15 @@ public class FileGenerator {
             }
         }
         FileUtils.writeStringToFile(FileUtils.getFile(getSqlFile()), strb.toString(), true);
+    }
+
+    private Integer getLevelColum(String columLevel) {
+        if (columLevel.equalsIgnoreCase("AA") || columLevel.equalsIgnoreCase("2")) {
+            return 2;
+        } else if (columLevel.equalsIgnoreCase("AAA") || columLevel.equalsIgnoreCase("3")) {
+            return 3;
+        } else {
+            return 1;
+        }
     }
 }

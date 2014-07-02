@@ -13,6 +13,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TreeSet;
@@ -44,6 +45,7 @@ public class CodeGeneratorMojo extends AbstractMojo {
     private static final String THEME_CODE_COLUMN_NAME = "theme";
     private static final String CRITERION_CODE_COLUMN_NAME = "critere";
     private static final String TEST_CODE_COLUMN_NAME = "test";
+    private static final String LEVEL_CODE_COLUMN_NAME = "level";
     private static boolean IS_I18N_REFERENTIAL_CREATED = false;
     boolean isCriterionPresent;
     /**
@@ -129,6 +131,7 @@ public class CodeGeneratorMojo extends AbstractMojo {
      *
      */
     TreeSet<String> langSet = new TreeSet();
+    LinkedList<String> levelList = new LinkedList();
 
     /**
      * Default constructor
@@ -349,12 +352,17 @@ public class CodeGeneratorMojo extends AbstractMojo {
                 context.put("state", testsCasesState[i]);
                 fg.writeTestCaseGenerate(context, testCaseTemplate, String.valueOf(i + 1));
             }
+            try {
+                levelList.add(record.get(LEVEL_CODE_COLUMN_NAME));
+            } catch (IllegalArgumentException iae) {
+                levelList.add("1");
+            }
         }
 
         fg.createSqlReference();
         fg.createSqlTheme();
         fg.createSqlCritere();
-        fg.createSqlTest();
+        fg.createSqlTest(levelList);
         fg.createSqlParameters();
 
         fg.writeAuditSetUpFormBeanGenerate(context, auditSetUpFormTemplate);
