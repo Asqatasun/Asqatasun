@@ -33,9 +33,7 @@ import org.opens.tanaguru.rules.elementchecker.ElementCheckerImpl;
  * This class checks whether an element is present on the page. The testSolution
  * when at least one element is detected can be overridden by constructor
  * argument (default is failed). The testSolution when no element is detected
- * can be overridden by constructor argument (default is passed). The creation
- * of {@link sourceCodeRemark} for each detected element is optional and may be
- * overridden by constructor argument (default is true).
+ * can be overridden by constructor argument (default is passed). 
  *
  */
 public class ElementUnicityChecker extends ElementCheckerImpl {
@@ -69,7 +67,7 @@ public class ElementUnicityChecker extends ElementCheckerImpl {
      * Constructor.
      *
      * @param messageCodeOnElementUnique
-     * @param messageCodeOnElementNotDetected
+     * @param messageCodeOnElementNotUnique
      * @param eeAttributeNameList
      */
     public ElementUnicityChecker(
