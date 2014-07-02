@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ *  Copyright (C) 2008-2014  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -182,7 +182,7 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
                     testSolution,
                     MALFORMED_LANGUAGE_DECLARATION_MSG);
             }
-        } else if(!validLanguagesSet.contains(effectiveLang)) {
+        } else if(!validLanguagesSet.contains(effectiveLang.toLowerCase())) {
             testSolution = TestSolution.FAILED;
             if (createProcessRemarkOnFailure) {
                 addInvalidDeclarationSourceCodeRemark(
