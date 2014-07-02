@@ -23,15 +23,18 @@ import static java.nio.charset.StandardCharsets.*;
 public class FileGenerator {
 
     private VelocityParametersContext vpc;
+    private boolean isCriterionPresent;
 
     public FileGenerator(String referentiel,
             String referentielLabel,
-            String destinationFolder) {
+            String destinationFolder,
+            boolean isCriterionPresent) {
         vpc = new VelocityParametersContext();
         vpc.setReferentiel(String.valueOf(referentiel.charAt(0)).toUpperCase()
                 + referentiel.substring(1));
         vpc.setReferentielLabel(referentielLabel);
         vpc.setDestinationFolder(destinationFolder);
+        this.isCriterionPresent = isCriterionPresent;
     }
 
     protected File getSqlFile() {
@@ -114,7 +117,7 @@ public class FileGenerator {
                 + "/pom.xml");
         FileUtils.writeStringToFile(pomFile, wr.toString());
     }
-    
+
     public void writeTestCaseGenerate(VelocityContext context, Template temp,
             String testCaseNumber) throws IOException {
         StringWriter wr = new StringWriter();
@@ -160,7 +163,12 @@ public class FileGenerator {
             writeI18NReferentialFile(lang, defaultLanguage, category);
             return;
         }
-        Object code = categoryMap.keySet().iterator().next();
+        String code;
+        if (category.equals("rule") && !isCriterionPresent) {
+            code = categoryMap.keySet().iterator().next().toString() + "-1";
+        } else {
+            code = categoryMap.keySet().iterator().next().toString();
+        }
         String desc = cleanI18NString(categoryMap.values().iterator().next().toString());
         StringBuilder sb = new StringBuilder();
         sb.append(vpc.getReferentiel().replace(".", ""));
@@ -374,8 +382,14 @@ public class FileGenerator {
         strb.append("INSERT IGNORE INTO `TEST` (`Cd_Test`, `Description`, `Label`, `Rank`, `Weight`, `Rule_Archive_Name`, `Rule_Class_Name`, `Id_Decision_Level`, `Id_Level`, `Id_Scope`, `Rule_Design_Url`, `No_Process`) VALUES\n");
         for (int i = 0; i < tests.size(); i += 2) {
             strb.append("(\'").append(tests.get(i).split("=")[0]).append("\', \'\', \'");
-            strb.append(tests.get(i).substring(vpc.getReferentiel().replace(".", "").length() + 1).split("=")[0].replace("-", ".")).append("\', ");
-            strb.append(String.valueOf(i - (i / 2))).append(", ").append("\'1.0\', \'");
+            String tmpLabel = tests.get(i).substring(vpc.getReferentiel().replace(".", "").length() + 1).split("=")[0].replace("-", ".");
+            if (!isCriterionPresent) {
+                strb.append(tmpLabel.substring(0, tmpLabel.length() - 2));
+            } else {
+                strb.append(tmpLabel);
+            }
+            strb.append("\', ");
+            strb.append(String.valueOf(i - (i / 2) + 1)).append(", ").append("\'1.0\', \'");
             strb.append(vpc.getReferentiel().replace(".", "").replace(" ", "").toLowerCase()).append("\', \'");
             strb.append(vpc.getPackageString()).append('.');
             strb.append(vpc.getReferentiel().replace(".", "").toLowerCase()).append(".");

@@ -45,6 +45,7 @@ public class CodeGeneratorMojo extends AbstractMojo {
     private static final String CRITERION_CODE_COLUMN_NAME = "critere";
     private static final String TEST_CODE_COLUMN_NAME = "test";
     private static boolean IS_I18N_REFERENTIAL_CREATED = false;
+    boolean isCriterionPresent;
     /**
      * @parameter
      * default-value="${basedir}/src/main/resources/template/rule/rule.vm"
@@ -200,6 +201,7 @@ public class CodeGeneratorMojo extends AbstractMojo {
             lineIterator = null;
         }
         String[] csvHeaders = lineIterator.next().split(String.valueOf(delimiter));
+        isCriterionPresent = extractCriterionFromCsvHeader(csvHeaders);
         try {
             extractAvailableLangsFromCsvHeader(csvHeaders);
         } catch (I18NLanguageNotFoundException ex) {
@@ -241,33 +243,49 @@ public class CodeGeneratorMojo extends AbstractMojo {
                 testList.add(header.split("_")[1]);
             }
         }
-        if (themeList.equals(critereList) && critereList.equals(testList)) {
-            langSet.addAll(themeList);
-        } else if (themeList.equals(critereList) && critereList.size() != testList.size()) {
-            langSet.addAll(themeList);
+        if (isCriterionPresent) {
+            if (themeList.equals(critereList)
+                    && testList.equals(critereList)) {
+                langSet.addAll(themeList);
+            } else {
+                throw new I18NLanguageNotFoundException("All Label on csv column must have internationalization");
+            }
         } else {
-            throw new I18NLanguageNotFoundException("All Label on csv column must have internationalization");
+            if (themeList.equals(testList)) {
+                langSet.addAll(themeList);
+            } else {
+                throw new I18NLanguageNotFoundException("All Label on csv column must have internationalization");
+            }
         }
+    }
+
+    private boolean extractCriterionFromCsvHeader(String[] csvHeaders) {
+        for (String header : csvHeaders) {
+            if (header.startsWith("critere-label")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void writeToI18NFile(FileGenerator fg, CSVRecord record, String lang) throws IOException, InvalidParameterException {
         Integer themeIndex = Integer.valueOf(record.get(THEME_CODE_COLUMN_NAME));
         String theme = record.get(THEME_LABEL_COLUMN_NAME + lang);
-        String critere = record.get(CRITERION_LABEL_COLUMN_NAME + lang);
-        String critereCode = record.get(CRITERION_CODE_COLUMN_NAME);
+        String critere;
+        String critereCode;
+        String test = record.get(TEST_LABEL_COLUMN_NAME + langSet.first());
+        String testCode = record.get(TEST_CODE_COLUMN_NAME);
+        if (isCriterionPresent) {
+            critere = record.get(CRITERION_LABEL_COLUMN_NAME + lang);
+            critereCode = record.get(CRITERION_CODE_COLUMN_NAME);
+        } else {
+            critere = test;
+            critereCode = testCode;
+        }
         if (StringUtils.isBlank(theme)
                 || StringUtils.isBlank(critere)
                 || StringUtils.isBlank(critereCode)) {
             throw new InvalidParameterException("Your csv file has an empty column");
-        }
-        String test;
-        String testCode;
-        try {
-            test = record.get(TEST_LABEL_COLUMN_NAME + langSet.first());
-            testCode = record.get(TEST_CODE_COLUMN_NAME);
-        } catch (IllegalArgumentException iae) {
-            test = record.get(CRITERION_LABEL_COLUMN_NAME + langSet.first());
-            testCode = record.get(CRITERION_CODE_COLUMN_NAME) + "-1";
         }
         Map themeMap = Collections.singletonMap(themeIndex, theme);
         Map critereMap = Collections.singletonMap(critereCode, critere);
@@ -307,26 +325,22 @@ public class CodeGeneratorMojo extends AbstractMojo {
         // Create a context and add data to the templateRule placeholder
         VelocityContext context = new VelocityContext();
         // Fetch templateRule into a StringWriter
-        FileGenerator fg = new FileGenerator(referentiel, referentielLabel, destinationFolder);
+        FileGenerator fg = new FileGenerator(referentiel, referentielLabel, destinationFolder, isCriterionPresent);
         fg.createI18NFiles(langSet);
 
         // we parse the records collection only once to create the i18n files.
         // These files will be then used later to create other context files
         // using the i18n keys.
         for (CSVRecord record : records) {
-            String testLabelDefault;
-            String test;
-            try {
-                testLabelDefault = record.get(TEST_LABEL_COLUMN_NAME + langSet.first());
-                test = record.get(TEST_CODE_COLUMN_NAME);
-            } catch (IllegalArgumentException iae) {
-                testLabelDefault = record.get(CRITERION_LABEL_COLUMN_NAME + langSet.first());
-                test = record.get(CRITERION_CODE_COLUMN_NAME) + "-1";
-            }
+            String testLabelDefault = record.get(TEST_LABEL_COLUMN_NAME + langSet.first());
+            String test = record.get(TEST_CODE_COLUMN_NAME);
             for (String lang : langSet) {
                 writeToI18NFile(fg, record, lang);
             }
             IS_I18N_REFERENTIAL_CREATED = true;
+            if (!isCriterionPresent) {
+                test = test.concat("-1");
+            }
             context = fg.getContextRuleClassFile(referentiel, PACKAGE_NAME, test, testLabelDefault, context);
             fg.writeFileCodeGenerate(context, ruleTemplate);
             fg.writeUnitTestGenerate(context, unitTestTemplate, testLabelDefault);
