@@ -31,6 +31,6 @@ You can see our CSV example use the `ø` delimiter.
  1. In the `<generator.dataFile>` tag, set the absolute path to your CSV file.
  1. In the `<generator.delimiter>` is optional. Set the character who's delimite each CSV columns. (Default, the delimiter is set with semicolon `;` character. 
  1. In the `<generator.refDescriptor>` is optional, if you have an URL page that describe your referential, set this url between refDescriptor tag.
-1. Build this project (referentiel-context-creator).
+1. Build this project (referentiel-context-creator) referential-creator:generate .
 
 Your referential is now ready to implement what you need !
