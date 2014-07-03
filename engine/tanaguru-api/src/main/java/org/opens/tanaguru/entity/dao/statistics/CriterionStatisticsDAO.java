@@ -92,7 +92,7 @@ public interface CriterionStatisticsDAO extends GenericDAO<CriterionStatistics, 
      * @param webResourceStatistics The web resources statistics
      * @return List of CriterionStatistics by web resources statistics
      */
-    Collection<CriterionStatistics> findCriterionStatisticsByWebResource(WebResourceStatistics webResourceStatistics);
+    CriterionStatistics findCriterionStatisticsByWebResource(Criterion criterion ,WebResourceStatistics webResourceStatistics);
 
 
 

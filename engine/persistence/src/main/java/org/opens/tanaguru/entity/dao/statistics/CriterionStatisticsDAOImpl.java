@@ -187,19 +187,22 @@ public class CriterionStatisticsDAOImpl extends AbstractJPADAO<CriterionStatisti
      * {@inheritDoc}
      * */
 	@Override
-	public Collection<CriterionStatistics> findCriterionStatisticsByWebResource(
-			WebResourceStatistics webResourceStatistics) {
-		 StringBuilder strb = new StringBuilder();
-	        strb.append("SELECT cs FROM ");
-	        strb.append(getEntityClass().getName());
-	        strb.append(" cs ");
-	        strb.append(" JOIN cs.webResourceStatistics wrs ");
-	        strb.append(" WHERE wrs.webResource.id=:webResourceId ");
-	        Query query = entityManager.createQuery(strb.toString());
-	        query.setParameter("webResourceId", webResourceStatistics.getId());
-	        
-	     
-	        return query.getResultList();
+	public CriterionStatistics findCriterionStatisticsByWebResource(
+			Criterion criterion, WebResourceStatistics webResourceStatistics) {
+		StringBuilder strb = new StringBuilder();
+		strb.append("SELECT cs FROM ");
+		strb.append(getEntityClass().getName());
+		strb.append(" cs ");
+		strb.append(" WHERE cs.webResourceStatistics=:webResourceId ");
+		strb.append(" AND cs.criterion=:criterion ");
+		Query query = entityManager.createQuery(strb.toString());
+		query.setParameter("webResourceId", webResourceStatistics);
+		query.setParameter("criterion", criterion);
+		try {
+			return (CriterionStatistics) query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }

@@ -101,7 +101,7 @@ public interface WebResourceStatisticsDAO extends GenericDAO<WebResourceStatisti
      * @param manual If incluse olso the manual statistics
      * @return The list of WebResourceStatistics for either the manual and the automatic audit
      */
-    List<WebResourceStatistics> findWebResourceStatisticsByWebResource(WebResource webResource, boolean manual);
+    WebResourceStatistics findWebResourceStatisticsByWebResource(WebResource webResource, boolean manual);
     
     
 

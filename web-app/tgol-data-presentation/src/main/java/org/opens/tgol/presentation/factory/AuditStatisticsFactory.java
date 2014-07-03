@@ -140,14 +140,15 @@ public class AuditStatisticsFactory {
             WebResource webResource,
             Map<String, String> parametersToDisplay,
             String displayScope,
-            boolean isManual) {
+            boolean isAuditManual,
+            boolean isInitialManual) {
         
         AuditStatistics auditStats = new AuditStatisticsImpl();
         
         auditStats.setUrl(webResource.getURL());
         auditStats.setSnapshotUrl(webResource.getURL());
-        auditStats.setRawMark(markFormatter(webResource, true, isManual));
-        auditStats.setWeightedMark(markFormatter(webResource, false, isManual));
+        auditStats.setRawMark(markFormatter(webResource, true, isAuditManual));
+        auditStats.setWeightedMark(markFormatter(webResource, false, isAuditManual));
 
         Audit audit;
         if (webResource instanceof Site) {
@@ -170,7 +171,7 @@ public class AuditStatisticsFactory {
         resultCounter.setNaCount(0);
         resultCounter.setNtCount(0);
 
-        auditStats.setCounterByThemeMap(addCounterByThemeMap(audit, webResource, resultCounter, displayScope, isManual));
+        auditStats.setCounterByThemeMap(addCounterByThemeMap(audit, webResource, resultCounter, displayScope, isAuditManual, isInitialManual));
         auditStats.setParametersMap(getAuditParameters(audit, parametersToDisplay));
         return auditStats;
     }
@@ -265,24 +266,46 @@ public class AuditStatisticsFactory {
             Audit audit,
             WebResource webResource,
             ResultCounter globalResultCounter,
-            String displayScope, boolean manualAudit) {
+            String displayScope, boolean isAuditManual, boolean isInitialManual) {
         Map<Theme, ResultCounter> counterByThemeMap =
                 new LinkedHashMap<Theme, ResultCounter>();
         for (Theme theme : getThemeListFromAudit(audit)) {
 
             ResultCounter themeResultCounter = null;
             if (StringUtils.equalsIgnoreCase(displayScope, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE)) {
-                themeResultCounter = getResultCounterByThemeForTest(webResource, audit, theme, manualAudit);
+                themeResultCounter = getResultCounterByThemeForTest(webResource, audit, theme, isAuditManual);
             } else if (StringUtils.equalsIgnoreCase(displayScope, TgolKeyStore.CRITERION_DISPLAY_SCOPE_VALUE)) {
                 themeResultCounter = getResultCounterByThemeForCriterion(webResource, theme);
             }
             if (themeResultCounter != null) {
-                globalResultCounter.setPassedCount(themeResultCounter.getPassedCount() + globalResultCounter.getPassedCount());
-                globalResultCounter.setFailedCount(themeResultCounter.getFailedCount() + globalResultCounter.getFailedCount());
-                globalResultCounter.setNmiCount(themeResultCounter.getNmiCount() + globalResultCounter.getNmiCount());
-                globalResultCounter.setNaCount(themeResultCounter.getNaCount() + globalResultCounter.getNaCount());
-                globalResultCounter.setNtCount(themeResultCounter.getNtCount() + globalResultCounter.getNtCount());
-
+            	
+            	if(isInitialManual && !isAuditManual){
+            		//Initialisation des compteurs lors de la creation d'un audit manual
+            		themeResultCounter.setNtCount(themeResultCounter.getPassedCount() 
+                      		 + themeResultCounter.getFailedCount() + themeResultCounter.getNmiCount() 
+                      		 + themeResultCounter.getNaCount()  + themeResultCounter.getNtCount());
+            		themeResultCounter.setFailedCount(0);
+            		themeResultCounter.setNaCount(0);
+            		themeResultCounter.setPassedCount(0);
+            		themeResultCounter.setNmiCount(0);
+            		
+            		
+            		globalResultCounter.setPassedCount(0);
+                    globalResultCounter.setFailedCount(0);
+                    globalResultCounter.setNmiCount(0);
+                    globalResultCounter.setNaCount(0);
+                    globalResultCounter.setNtCount(themeResultCounter.getPassedCount() 
+                     		 + themeResultCounter.getFailedCount() + themeResultCounter.getNmiCount() 
+                     		 + themeResultCounter.getNaCount()  + themeResultCounter.getNtCount() + globalResultCounter.getNtCount());
+            		
+            	}else {
+            		globalResultCounter.setPassedCount(themeResultCounter.getPassedCount() + globalResultCounter.getPassedCount());
+                    globalResultCounter.setFailedCount(themeResultCounter.getFailedCount() + globalResultCounter.getFailedCount());
+                    globalResultCounter.setNmiCount(themeResultCounter.getNmiCount() + globalResultCounter.getNmiCount());
+                    globalResultCounter.setNaCount(themeResultCounter.getNaCount() + globalResultCounter.getNaCount());
+                    globalResultCounter.setNtCount(themeResultCounter.getNtCount() + globalResultCounter.getNtCount());
+            	}
+            	
                 counterByThemeMap.put(theme, themeResultCounter);
             }
         }

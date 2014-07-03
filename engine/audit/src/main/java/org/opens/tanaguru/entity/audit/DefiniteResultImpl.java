@@ -112,8 +112,6 @@ public class DefiniteResultImpl extends ProcessResultImpl implements
 
 	@Override
 	public Object getManualValue() {
-		// TODO Auto-generated method stub
-		return null;
+		return getManualDefiniteValue();
 	}
-   
 }

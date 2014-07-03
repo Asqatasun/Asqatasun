@@ -426,21 +426,22 @@ public class AuditResultController extends AuditDataHandlerController {
 				audit.setStatus(AuditStatus.MANUAL_INITIALIZING);
 				auditDataService.update(audit);
 			}
+			
+			List<ProcessResult> allProcessResultList = TestResultFactory
+					.getInstance().getAllProcessResultListFromTestsResult(
+							new LinkedList<TestResult>(
+									modifiedTestResultList), webResource);
+			manualAuditCommand.setProcessResultList(allProcessResultList);
 
 			if (isValidating) {
-
-				List<ProcessResult> allProcessResultList = TestResultFactory
-						.getInstance().getAllProcessResultListFromTestsResult(
-								new LinkedList<TestResult>(
-										modifiedTestResultList), webResource);
-				manualAuditCommand.setProcessResultList(allProcessResultList);
+				
 				manualAuditValidator.validate(manualAuditCommand, result);
 				if (result.hasErrors()) {
 					// ajout message d'erreur.
 					model.addAttribute("manualAuditCommand", manualAuditCommand);
 
 					return dispatchDisplayResultRequest(webResource.getId(),
-							null, model, request, true, "auto",
+							null, model, request, true, "manual",
 							manualAuditCommand);
 
 				} else {
@@ -451,18 +452,19 @@ public class AuditResultController extends AuditDataHandlerController {
 					WebResourceStatistics ws = webResourceStatisticsDataService
 							.createWebResourceStatisticsForManualAudit(audit,
 									webResource, allProcessResultList);
-					// TODO :YNE: Voir pourquoi on crée a chaque fois une
-					// nouvelle ligne de webResourcesStatistics. je pense qu'il
-					// faut mettre à jour la ligne existante
 
 					Contract contract = retrieveContractFromAudit(audit);
 					model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
 					return TgolKeyStore.CONTRACT_VIEW_NAME_REDIRECT;
 				}
 			}
+			
+			WebResourceStatistics ws = webResourceStatisticsDataService
+					.createWebResourceStatisticsForManualAudit(audit,
+							webResource, allProcessResultList);
 
 			return dispatchDisplayResultRequest(webResource.getId(), null,
-					model, request, true, "auto", manualAuditCommand);
+					model, request, true, "manual", manualAuditCommand);
 		} else {
 			throw new ForbiddenPageException();
 		}
@@ -654,7 +656,7 @@ public class AuditResultController extends AuditDataHandlerController {
 				statManual = false;
 			}
 			addAuditStatisticsToModel(webResource, model, displayScope,
-					statManual);
+					statManual, isManualAudit);
 
 			// The page is displayed with sort option. Form needs to be set up
 			prepareDataForSortConsole(webResourceId, displayScope,

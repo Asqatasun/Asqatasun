@@ -2,6 +2,7 @@
 <%@page pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ <c:set var="isManualAudit" scope="request" value="${param.ma}"/>
                         <c:if test="${addSpan == 'true'}">
                             <div class="span4">
                         </c:if>
@@ -24,9 +25,9 @@
                                                     ${(counter.passedCount / totalNumber) * 100 }
                                                 </c:set>
                                                 <c:set var="passedLeftOffset" scope="page">
-                                                    ${100 - passedPercent}
+                                                    ${100 - 20}
                                                 </c:set>
-                                                <span class="fd-slider-range passed" style="left: ${passedLeftOffset}\%; width: ${passedPercent}\%;"></span>
+                                                <span class="fd-slider-range passed" style="left: ${passedLeftOffset}\%; width: 20\%;"></span>
                                                 <span class="fd-slider-bar"></span>
                                             </span>
                                         </td>
@@ -44,9 +45,9 @@
                                                     ${(counter.failedCount / totalNumber) * 100 }
                                                 </c:set>
                                                 <c:set var="failedLeftOffset" scope="page">
-                                                    ${100 - failedPercent }
+                                                    ${100 - 20 }
                                                 </c:set>
-                                                <span class="fd-slider-range failed" style="left: ${failedLeftOffset}\%; width: ${failedPercent}\%;"></span>
+                                                <span class="fd-slider-range failed" style="left: ${failedLeftOffset}\%; width: 20\%;"></span>
                                                 <span class="fd-slider-bar"></span>
                                             </span>
                                         </td>
@@ -64,13 +65,14 @@
                                                     ${(counter.naCount / totalNumber) * 100 }
                                                 </c:set>
                                                 <c:set var="naLeftOffset" scope="page">
-                                                    ${100 - naPercent}
+                                                    ${100 - 20}
                                                 </c:set>
-                                                <span class="fd-slider-range na" style="left: ${naLeftOffset}\%; width: ${naPercent}\%;"></span>
+                                                <span class="fd-slider-range na" style="left: ${naLeftOffset}\%; width: 20\%;"></span>
                                                 <span class="fd-slider-bar"></span>
                                             </span>
                                         </td>
-                                    </tr>                                    
+                                    </tr>   
+                                     <c:if test="${isManualAudit == false}">                                 
                                     <tr>
                                         <td class="col01 nmi"></td>
                                         <td class="col02"><fmt:message key="nmi"/></td>
@@ -85,13 +87,14 @@
                                                     ${(counter.nmiCount / totalNumber) * 100 }
                                                 </c:set>
                                                 <c:set var="nmiLeftOffset" scope="page">
-                                                    ${100 - nmiPercent}
+                                                    ${100 - 20}
                                                 </c:set>
-                                                <span class="fd-slider-range nmi" style="left: ${nmiLeftOffset}\%; width: ${nmiPercent}\%;"></span>
+                                                <span class="fd-slider-range nmi" style="left: ${nmiLeftOffset}\%; width: 20\%;"></span>
                                                 <span class="fd-slider-bar"></span>
                                             </span>
                                         </td>
-                                    </tr>   
+                                    </tr> 
+                                    </c:if>  
                                     <tr>
                                         <td class="col01 nt"></td>
                                         <td class="col02"><fmt:message key="nt"/></td>

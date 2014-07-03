@@ -22,10 +22,8 @@
 package org.opens.tanaguru.entity.statistics;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.reference.ThemeImpl;
 
@@ -174,36 +172,5 @@ public class ThemeStatisticsImpl
     public void setWebResourceStatistics(WebResourceStatistics webResourceStatistics) {
         this.webResourceStatistics = (WebResourceStatisticsImpl)webResourceStatistics;
     }
-
-	@Override
-	public String toString() {
-		return "ThemeStatisticsImpl [id=" + id + ", theme=" + theme
-				+ ", webResourceStatistics=" + webResourceStatistics + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ThemeStatisticsImpl other = (ThemeStatisticsImpl) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
 
 }

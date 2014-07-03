@@ -100,6 +100,7 @@
                                     <fmt:message key="${entry.key.code}"/>
                                 </c:set>
                                 <span class="failed-th-gray theme-result" title="${failedTitle}">${counterByThemeMap[entry.key].failedCount}</span>
+                                <c:if test="${isManualAudit == false}">
                                 <c:set scope="page" var="nmiTitle">
                                     <fmt:message key="resultPage.tests">
                                         <fmt:param value="${counterByThemeMap[entry.key].nmiCount}"/>
@@ -110,6 +111,7 @@
                                     <!-- test git commit -->
                                 </c:set>
                                 <span class="nmi-th-gray theme-result" title="${nmiTitle}">${counterByThemeMap[entry.key].nmiCount}</span>
+                                </c:if>
                                 <c:set scope="page" var="naTitle">
                                     <fmt:message key="resultPage.tests">
                                         <fmt:param value="${counterByThemeMap[entry.key].naCount}"/>
@@ -118,7 +120,8 @@
                                     <fmt:message key="resultPage.forTheTheme"/>
                                     <fmt:message key="${entry.key.code}"/>
                                 </c:set>
-                                <span class="na-th-gray theme-result" title="${naTitle}">${counterByThemeMap[entry.key].naCount}</span>
+                                <span class="na-th-gray theme-result" title="${naTitle}">${counterByThemeMap[entry.key].naCount}</span> 
+                               
                                 <c:set scope="page" var="ntTitle">
                                     <fmt:message key="resultPage.tests">
                                         <fmt:param value="${counterByThemeMap[entry.key].ntCount}"/>

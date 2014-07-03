@@ -13,8 +13,6 @@
 
 package org.opens.tanaguru.entity.dao.statistics;
 
-import java.util.Collection;
-
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
@@ -76,23 +74,28 @@ public class ThemeStatisticsDAOImpl extends AbstractJPADAO<ThemeStatistics, Long
      * {@inheritDoc}
      * */
 	@Override
-	public Collection<ThemeStatistics> findThemeStatisticsByWebResource(
+	public ThemeStatistics findThemeStatisticsByWebResource(Theme theme,
 			WebResourceStatistics wrStats) {
-		
-		String paramWebResources = "webResources";
+
 		StringBuilder builder = new StringBuilder();
-		
+
 		builder.append(" SELECT ts FROM ");
-		builder.append( getEntityClass().getName() );
+		builder.append(getEntityClass().getName());
 		builder.append(" as ts");
 		builder.append(" WHERE ");
-		builder.append(" ts.webResourceStatistics= :").append(paramWebResources).append(" and ");
-		builder.append(" ts.webResourceStatistics.isManualAuditStatistics = 1 ");
-				
-		Query query = entityManager.createQuery(builder.toString());
-		query.setParameter(paramWebResources, wrStats);
+		builder.append(" ts.webResourceStatistics= :wrStats").append(" and ");
+		builder.append(" ts.theme= :theme");
 
-		return query.getResultList();
+		Query query = entityManager.createQuery(builder.toString());
+		query.setParameter("wrStats", wrStats);
+		query.setParameter("theme", theme);
+
+		try {
+			return (ThemeStatistics) query.getSingleResult();
+
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }

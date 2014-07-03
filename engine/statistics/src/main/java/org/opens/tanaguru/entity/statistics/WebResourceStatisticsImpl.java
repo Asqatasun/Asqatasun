@@ -111,15 +111,15 @@ public class WebResourceStatisticsImpl
     @JoinColumn(name = "Id_Audit")
     private AuditImpl audit;
 
-    @OneToMany(mappedBy = "webResourceStatistics", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "webResourceStatistics", cascade = {CascadeType.PERSIST})
     protected Set<ThemeStatisticsImpl> themeStatisticsSet =
             new LinkedHashSet<ThemeStatisticsImpl>();
 
-    @OneToMany(mappedBy = "webResourceStatistics", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "webResourceStatistics", cascade = {CascadeType.PERSIST})
     protected Set<TestStatisticsImpl> testStatisticsSet =
             new LinkedHashSet<TestStatisticsImpl>();
     
-    @OneToMany(mappedBy = "webResourceStatistics", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "webResourceStatistics", cascade = {CascadeType.PERSIST})
     protected Set<CriterionStatisticsImpl> criterionStatisticsSet =
             new LinkedHashSet<CriterionStatisticsImpl>();
 
@@ -265,8 +265,7 @@ public class WebResourceStatisticsImpl
 
     @Override
     public Set<ThemeStatistics> getThemeStatisticsSet() {
-//        return (Set<ThemeStatistics>)(LinkedHashSet)themeStatisticsSet;
-    	return new HashSet<ThemeStatistics>(themeStatisticsSet);
+        return (Set<ThemeStatistics>)(LinkedHashSet)themeStatisticsSet;
     }
 
     @Override

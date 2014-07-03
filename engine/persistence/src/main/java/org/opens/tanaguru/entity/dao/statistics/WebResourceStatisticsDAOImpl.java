@@ -97,9 +97,9 @@ public class WebResourceStatisticsDAOImpl extends
 				+ " AND pr.manualDefiniteValue = :value";
 		Query query = null;
 		if (isManualAudit) {
-			query = entityManager.createQuery(queryStringForAutomatic);
-		} else {
 			query = entityManager.createQuery(queryStringForManual);
+		} else {
+			query = entityManager.createQuery(queryStringForAutomatic);
 		}
 		query.setParameter("id", webresourceId);
 		query.setParameter("value", testSolution);
@@ -129,9 +129,9 @@ public class WebResourceStatisticsDAOImpl extends
 				+ " AND pr.manualDefiniteValue = :value" + " AND pk.issue = :value";
 		Query query = null;
 		if(isManualAudit){
-			query = entityManager.createQuery(queryStringForAutomatic);
-		} else {
 			query = entityManager.createQuery(queryStringForManual);
+		} else {
+			query = entityManager.createQuery(queryStringForAutomatic);
 		}
 		
 		query.setParameter("id", webresourceId);
@@ -226,16 +226,24 @@ public class WebResourceStatisticsDAOImpl extends
 	 * {@inheritDoc}
 	 * */
 	@Override
-	public List<WebResourceStatistics> findWebResourceStatisticsByWebResource(
+	public WebResourceStatistics findWebResourceStatisticsByWebResource(
 			WebResource webResource, boolean manual) {
 		if (webResource == null) {
 			return null;
 		}
+		
 		Query query = entityManager.createQuery("SELECT s FROM "
 				+ getEntityClass().getName() + " s"
-				+ " WHERE s.webResource=:webResource");
+				+ " WHERE s.webResource=:webResource" + " AND s.isManualAuditStatistics=:manual");
+		
 		query.setParameter("webResource", webResource);
-		return query.getResultList();
+		query.setParameter("manual", manual? 1 : 0 );
+		try {
+			return (WebResourceStatistics) query.getSingleResult();
+			
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }

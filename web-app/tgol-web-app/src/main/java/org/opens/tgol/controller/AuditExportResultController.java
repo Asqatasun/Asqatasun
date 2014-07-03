@@ -154,7 +154,7 @@ public class AuditExportResultController extends AuditDataHandlerController {
         AuditStatistics auditStatistics = getAuditStatistics(
                     webResource, 
                     model, 
-                    TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE, false);
+                    TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE, false, false);//TODO a revoir dans le cas manuel 
         model.addAttribute(TgolKeyStore.STATISTICS_KEY, auditStatistics);
 
         try {

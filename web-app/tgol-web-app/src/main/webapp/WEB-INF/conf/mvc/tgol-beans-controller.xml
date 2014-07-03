@@ -119,6 +119,7 @@
         <property name="entityFactory" ref="webResourceStatisticsFactory"/>
         <property name="criterionStatisticsDAO" ref="criterionStatisticsDAO" />
         <property name="themeStatisticsDAO" ref="themeStatisticsDAO" />
+        <property name="webResourceStatisticsDAO" ref="webResourceStatisticsDAO" />
     </bean>
 
     <bean id="auditSynthesisController" class="org.opens.tgol.controller.AuditSynthesisController">

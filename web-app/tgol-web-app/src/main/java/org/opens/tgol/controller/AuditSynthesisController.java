@@ -154,7 +154,7 @@ public class AuditSynthesisController extends AuditDataHandlerController {
                 model.addAttribute(TgolKeyStore.AUDIT_ID_KEY, auditId);
                 model.addAttribute(TgolKeyStore.WEBRESOURCE_ID_KEY, audit.getSubject().getId());
                 Site site = (Site)audit.getSubject();
-                addAuditStatisticsToModel(site, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE , false);
+                addAuditStatisticsToModel(site, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE , false ,false);//TODO cas manual
                 model.addAttribute(TgolKeyStore.FAILED_TEST_INFO_BY_OCCURRENCE_SET_KEY,
                 getWebResourceDataService().getFailedTestByOccurrence(site, audit, -1));
                 model.addAttribute(TgolKeyStore.HAS_SITE_SCOPE_TEST_KEY,
@@ -183,7 +183,7 @@ public class AuditSynthesisController extends AuditDataHandlerController {
         // Add this step, we are sure that the audit subject 
         // is a site, we can trustly cast it
         Site site = (Site)audit.getSubject();
-        addAuditStatisticsToModel(site, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE, false);
+        addAuditStatisticsToModel(site, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE, false ,false);//TODO cas manual
 
         Map<Theme, ResultCounter> top5SortedThemeMap =
                 new LinkedHashMap<Theme, ResultCounter>();
