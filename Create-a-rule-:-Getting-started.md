@@ -48,9 +48,8 @@ public class DetectIframe extends AbstractDetectionPageRuleImplementation {
 ```
 This test will return PASSED when no `iframe` has been found on the page, FAILED instead, producing the internationalisable message "IframeDetected" for each occurence found on the page. Thus, each occurence will be rendered in the  Tanaguru web-app interface with its line number, and snippet of html source representing the element.
 
-
-
-
+##Selection and Check rule
+Detection is great, but a bit limited. To perform checks on selected elements, implement a class that extends the `AbstractPageRuleWithSelectorAndCheckerImplementation` abstract class.  
 Let's say that you want to check that all the links (`a` tags) of a page have a `title` attribute. Here is what your class would look like : 
 
 ```java
@@ -72,7 +71,7 @@ public class MyClassThatChecksWhetherEachLinkHaveTitleAttribute extends
 
 }
 ```
-The message "LinkWithoutTitleMessage" is a key that needs to be internationalized to be rendered in the Tanaguru web-app interface (see How to internationalize the messages thrown by a test).
+
 
 You need to perform more complex selection? The `SimpleElementSelector` is based on [Jsoup](http://jsoup.org) and its powerfull CSS (or jquery) like selector syntax to find matching elements. Have a look to the [Jsoup selector-syntax description page](http://jsoup.org/cookbook/extracting-data/selector-syntax) to know more about what you can do.
 
