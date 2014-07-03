@@ -21,39 +21,15 @@
  */
 package org.opens.tanaguru.rules.textbuilder;
 
-import org.apache.commons.lang3.StringUtils;
-import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
-import org.jsoup.nodes.TextNode;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
-
 /**
  * This implementation of the {@link TextualElementBuilder} extracts the 
  * text of a link element by calling recursively the tag children and by adding
  * the content of the alt attribute of tags when they exists.
  */
-public class LinkTextElementBuilder implements TextElementBuilder{
+public class LinkTextElementBuilder extends DeepTextElementBuilder{
 
-    private TextElementBuilder altAttrTextBuilder = 
-            new TextAttributeOfElementBuilder(ALT_ATTR);
-    
-    @Override
-    public String buildTextFromElement(Element element) {
-        StringBuilder linkText = new StringBuilder();
-        if (element.hasAttr(ALT_ATTR)) {
-            linkText.append(SPACER);
-            linkText.append(altAttrTextBuilder.buildTextFromElement(element));
-        }
-        for (Node child : element.childNodes()) {
-            if (child instanceof TextNode && !((TextNode)child).isBlank()) {
-               linkText.append(SPACER);
-               linkText.append(StringUtils.trim(((TextNode)child).text()));
-            } else if (child instanceof Element){
-                linkText.append(SPACER);
-                linkText.append(buildTextFromElement((Element)child));
-            }
-        }
-        return StringUtils.trim(linkText.toString());
+    public LinkTextElementBuilder() {
+        super();
     }
     
 }

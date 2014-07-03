@@ -43,6 +43,9 @@ import org.opens.tanaguru.service.ProcessRemarkService;
  * doesn't point to the other thanks to the "rel=canonical" mechanism, a 
  * sourceCodeRemark is created, and the final result is false, true instead.
  * 
+ * For a given page, the first occurence of the selection is used to extract the 
+ * data to test, the other occurences are ignored.
+ * 
  * @author jkowalczyk
  */
 public class AbstractUniqueElementSiteRuleImplementation 

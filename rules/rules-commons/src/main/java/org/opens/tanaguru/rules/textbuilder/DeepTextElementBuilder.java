@@ -29,7 +29,7 @@ import static org.opens.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
 
 /**
  * This implementation of the {@link TextualElementBuilder} extracts the 
- * text of a element by calling recursively the tag children and by adding
+ * text of an element by calling recursively the tag children and by adding
  * the content of the alt attribute of tags when they exists.
  */
 public class DeepTextElementBuilder implements TextElementBuilder{
