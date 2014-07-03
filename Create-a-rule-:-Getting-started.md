@@ -1,36 +1,85 @@
 # Getting started
 
-Create your referential context by using the referential-creator maven plugin. 
+Start by [creating your test referential context](/Tanaguru/Tanaguru/wiki/How-to-create-your-own-referential) by using the referential-creator maven plugin. 
 
-The simplest way to write a rule is to extend the abstract class `AbstractPageRuleWithSelectorAndCheckerImplementation` and set a [ElementSelector](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementselector/ElementSelector.html) implementation and a [ElementChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/ElementChecker.htlm) implementation as constructor arguments. Let's say that you want to check that all the links of a page have a title attribute. Here is what your class would look like : 
+Once created, let's implement some rules : 
+##Detection rule
+To implement a detection rule, implement a class that extends the `AbstractDetectionPageRuleImplementation` abstract class. 
 
-`public class MyClassThatChecksWhetherEachLinkHaveTitleAttribute extends AbstractPageRuleWithSelectorAndCheckerImplementation {
+For example, the detection of the h1 tag should be implemented as follows : 
 
-public class MyClassThatChecksWhetherEachLinkHaveTitleAttribute extends AbstractPageRuleWithSelectorAndCheckerImplementation {
+```java
+public class DetectH1 extends AbstractDetectionPageRuleImplementation {
+
+    /**
+     * Default constructor
+     */
+    public DetectH1 () {
+        super(
+                new SimpleElementSelector("h1"),// the selector implementation that performs the selection
+                TestSolution.PASSED, // solution when at least one element is found
+                TestSolution.FAILED, // solution when no element is found
+                null, // no message created when element is found because passed doesn't produce message
+                "H1TagMissing", // General message indicating the element is not present on the page
+            );
+    }
+
+}
+```
+This test will return PASSED when at least one `h1` element is present on the page, FAILED instead, producing the internationalisable message "H1TagMissing" (see How to internationalize the messages thrown by a test to properly render it in the Tanaguru web-app interface)
+
+Let's consider the opposite : checking whether an unwished element, like `iframe`, is absent on the page should be implemented as follows : 
+```java
+public class DetectIframe extends AbstractDetectionPageRuleImplementation {
+
+    /**
+     * Default constructor
+     */
+    public DetectIframe () {
+        super(
+                new SimpleElementSelector("iframe"),// the selector implementation that performs the selection
+                TestSolution.FAILED, // solution when at least one element is found
+                TestSolution.PASSED, // solution when no element is found
+                "IframeDetected", // message associated with each detected element
+                null, // no message created when attribute is found because passed doesn't produce message
+            );
+    }
+}
+```
+This test will return PASSED when no `iframe` has been found on the page, FAILED instead, producing the internationalisable message "IframeDetected" for each occurence found on the page. Thus, each occurence will be rendered in the  Tanaguru web-app interface with its line number, and snippet of html source representing the element.
+
+
+
+
+Let's say that you want to check that all the links (`a` tags) of a page have a `title` attribute. Here is what your class would look like : 
+
+```java
+public class MyClassThatChecksWhetherEachLinkHaveTitleAttribute extends 
+                         AbstractPageRuleWithSelectorAndCheckerImplementation {
     /**
      * Constructor
      */
     public MyClassThatChecksWhetherEachLinkHaveTitleAttribute() {
-        super(new SimpleElementSelector("a"), 
-              new LinkTitlePertinenceChecker());
+        super(new SimpleElementSelector("a"), // The ElementSelector implementation
+              new AttributePresenceChecker( // The ElementChecker implementation
+                  "title", // the attribute to search
+                  TestSolution.PASSED, // solution when attribute is found
+                  TestSolution.FAILED, // solution when attribute is not found
+                  null, // no message created when attribute is found because passed doesn't produce message
+                  "LinkWithoutTitleMessage");// message associated with element when attribute is not found
+        );
     }
 
-}`
+}
+```
+The message "LinkWithoutTitleMessage" is a key that needs to be internationalized to be rendered in the Tanaguru web-app interface (see How to internationalize the messages thrown by a test).
 
-* `select(SSPHandler sspHandler, ElementHandler<Element> elementHandler);`
-* `check(SSPHandler sspHandler, ElementHandler<Element> elementHandler, TestSolutionHandler testSolutionHandler)`
+You need to perform more complex selection? The `SimpleElementSelector` is based on [Jsoup](http://jsoup.org) and its powerfull CSS (or jquery) like selector syntax to find matching elements. Have a look to the [Jsoup selector-syntax description page](http://jsoup.org/cookbook/extracting-data/selector-syntax) to know more about what you can do.
 
-A rule is a java class that handles the effective test to apply on the Html code. It has to extend the abstract class `AbstractPageRuleMarkupImplementation` and implement two methods : 
-* `select(SSPHandler sspHandler, ElementHandler<Element> elementHandler);`
-* `check(SSPHandler sspHandler, ElementHandler<Element> elementHandler, TestSolutionHandler testSolutionHandler)`
 
-## The different kind of rules  
-### Detection 
-To implement a detection rule, extends the `AbstractDetectionPageRuleImplementation` abstract class 
-### Select and check selection
-You need to do more than just checking the presence? 
+***
 
-# About the rule concept
+# About the rule entity
  
 ## What kind of data a rule can produce? 
 
@@ -40,6 +89,8 @@ A test can produce a result with 3 levels of informations :
 * Level3 (optional) -> EVIDENCE_ELEMENT that can store additionnal informations about the DOM element to help the qualification and thus the resolution.
 
 # Advanced
+
+The simplest way to write a rule is to create a java class that extends the abstract class `AbstractPageRuleWithSelectorAndCheckerImplementation` and set an [ElementSelector](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementselector/ElementSelector.html) implementation and an [ElementChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/ElementChecker.htlm) implementation by constructor arguments. Let's see some examples :
 
 ## The `ElementSelector` interface
 ### The existing implementations 
