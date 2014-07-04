@@ -22,6 +22,7 @@ public class VelocityParametersContext {
     private String referentiel;
     private String packageString;
     private String destinationFolder;
+    private String refDescriptor;
     private Set<Integer> themes = new LinkedHashSet();
 
     public String getClassString() {
@@ -30,6 +31,14 @@ public class VelocityParametersContext {
 
     public void setClassString(String classString) {
         this.classString = classString;
+    }
+
+    public String getRefDescriptor() {
+        return refDescriptor;
+    }
+
+    public void setRefDescriptor(String refDescriptor) {
+        this.refDescriptor = refDescriptor;
     }
 
     public String getTestCode() {

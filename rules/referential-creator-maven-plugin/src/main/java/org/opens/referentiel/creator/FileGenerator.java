@@ -29,12 +29,14 @@ public class FileGenerator {
     public FileGenerator(String referentiel,
             String referentielLabel,
             String destinationFolder,
+            String refDescriptor,
             boolean isCriterionPresent) {
         vpc = new VelocityParametersContext();
         vpc.setReferentiel(String.valueOf(referentiel.charAt(0)).toUpperCase()
                 + referentiel.substring(1));
         vpc.setReferentielLabel(referentielLabel);
         vpc.setDestinationFolder(destinationFolder);
+        vpc.setRefDescriptor(refDescriptor);
         this.isCriterionPresent = isCriterionPresent;
     }
 
@@ -79,6 +81,7 @@ public class FileGenerator {
         context.put("referentielName", vpc.getReferentielLabel());
         context.put("testLabel", testLabel);
         context.put("package", vpc.getPackageString());
+        context.put("refDescriptor", vpc.getRefDescriptor());
         return context;
     }
 
@@ -159,7 +162,7 @@ public class FileGenerator {
 
     public void writei18NFile(Map categoryMap,
             String lang, String defaultLanguage,
-            String category, String refDescriptor) throws IOException {
+            String category) throws IOException {
         if (category.equals("referential")) {
             writeI18NReferentialFile(lang, defaultLanguage, category);
             return;
@@ -175,7 +178,7 @@ public class FileGenerator {
         sb.append(vpc.getReferentiel().replace(".", ""));
         sb.append("-").append(code).append("=").append(desc).append("\n");
         if (category.equals("rule")) {
-            writeTestUrlI18NFile(refDescriptor, code, sb);
+            writeTestUrlI18NFile(vpc.getRefDescriptor(), code, sb);
         }
         if (!FileUtils.readFileToString(getI18nFile(lang, category), UTF_8).contains(sb.toString())) {
             FileUtils.writeStringToFile(FileUtils.getFile(getI18nFile(lang, category)), sb.toString(), UTF_8, true);
@@ -198,7 +201,7 @@ public class FileGenerator {
     private StringBuilder writeTestUrlI18NFile(String refDescriptor, Object code, StringBuilder sb) {
         sb.append(vpc.getReferentiel().replace(".", ""));
         sb.append("-").append(code).append("-url=");
-        if (StringUtils.isNotBlank(refDescriptor)) {
+        if (!refDescriptor.equalsIgnoreCase("empty")) {
             sb.append(refDescriptor).append("#test-").append(code);
         } else {
             sb.append("#");

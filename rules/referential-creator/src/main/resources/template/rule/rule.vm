@@ -24,8 +24,11 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
 /**
  * Implementation of the rule $ruleCode of the referential $referentielName.
  *
- * @see <a href="http://www.accessiweb.org/index.php/accessiweb-html5aria-liste-deployee.html#test-$ruleCode"> $ruleCode rule specification</a>
+#set ($empty = "empty")
+#if ( $refDescriptor != $empty )
+ * @see <a href="${refDescriptor}#test-$ruleCode"> $ruleCode rule specification</a>
  *
+#end
  * @author
  */
 

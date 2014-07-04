@@ -4,8 +4,6 @@
  */
 package org.opens.referentiel.creator;
 
-import org.opens.referentiel.creator.exception.I18NLanguageNotFoundException;
-import org.opens.referentiel.creator.exception.InvalidParameterException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -30,6 +28,8 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
+import org.opens.referentiel.creator.exception.InvalidParameterException;
+import org.opens.referentiel.creator.exception.I18NLanguageNotFoundException;
 
 /**
  * @goal generate
@@ -124,12 +124,9 @@ public class CodeGeneratorMojo extends AbstractMojo {
      */
     String referentielLabel;
     /**
-     * @parameter default-value=""
+     * @parameter default-value="empty"
      */
     String refDescriptor;
-    /**
-     *
-     */
     TreeSet<String> langSet = new TreeSet();
     LinkedList<String> levelList = new LinkedList();
 
@@ -294,16 +291,16 @@ public class CodeGeneratorMojo extends AbstractMojo {
         Map critereMap = Collections.singletonMap(critereCode, critere);
         Map testMap = Collections.singletonMap(testCode, test);
         if (StringUtils.isNotBlank(theme) && StringUtils.isNotBlank(String.valueOf(themeIndex))) {
-            fg.writei18NFile(themeMap, lang, langSet.first(), "theme", refDescriptor);
+            fg.writei18NFile(themeMap, lang, langSet.first(), "theme");
         }
         if (StringUtils.isNotBlank(critere) && StringUtils.isNotBlank(critereCode)) {
-            fg.writei18NFile(critereMap, lang, langSet.first(), "criterion", refDescriptor);
+            fg.writei18NFile(critereMap, lang, langSet.first(), "criterion");
         }
         if (StringUtils.isNotBlank(test) && StringUtils.isNotBlank(testCode)) {
-            fg.writei18NFile(testMap, lang, langSet.first(), "rule", refDescriptor);
+            fg.writei18NFile(testMap, lang, langSet.first(), "rule");
         }
         if (IS_I18N_REFERENTIAL_CREATED == false) {
-            fg.writei18NFile(null, lang, langSet.first(), "referential", refDescriptor);
+            fg.writei18NFile(null, lang, langSet.first(), "referential");
         }
     }
 
@@ -328,7 +325,8 @@ public class CodeGeneratorMojo extends AbstractMojo {
         // Create a context and add data to the templateRule placeholder
         VelocityContext context = new VelocityContext();
         // Fetch templateRule into a StringWriter
-        FileGenerator fg = new FileGenerator(referentiel, referentielLabel, destinationFolder, isCriterionPresent);
+        FileGenerator fg = new FileGenerator(referentiel, referentielLabel,
+                destinationFolder, refDescriptor, isCriterionPresent);
         fg.createI18NFiles(langSet);
 
         // we parse the records collection only once to create the i18n files.
