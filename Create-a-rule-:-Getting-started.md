@@ -4,7 +4,7 @@ Start by [creating your test referential context](/Tanaguru/Tanaguru/wiki/How-to
 
 Once created, let's implement some rules : 
 ##Detection rule
-To implement a detection rule, implement a class that extends the `AbstractDetectionPageRuleImplementation` abstract class. 
+To create a detection rule, implement a class that extends the `AbstractDetectionPageRuleImplementation` abstract class. 
 
 For example, the detection of the h1 tag should be implemented as follows : 
 
