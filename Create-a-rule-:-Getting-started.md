@@ -115,12 +115,13 @@ public class CheckTitleTagRelevancy extends
                   new SimpleTextElementBuilder(), // the TextElementBuilder implementation
                   "IrrelevantTitleNomenclature",// the name of the irrelevant titles nomenclature 
                   "IrrelevantTitle"// message created when the title belongs to the blacklist
+              )
         );
     }
 
 }
 ```
-To make this test work, an entry named "IrrelevantTitleNomenclature" has to exist in the NOMECLATURE table of the database. Please refer to the "create Nomenclature and populate it" section for more details.
+To make this test work, an entry named "IrrelevantTitleNomenclature" has to exist in the NOMECLATURE table of the database. Please refer to the "Create a nomenclature and populate it" section for more details.
 
 
 ##More About Selection
@@ -133,11 +134,11 @@ Based on the implementation of accessiblity rules, many checkers have been imple
 Regarding your need, you can use one of [our check implementations](##the-existing-elementchecker-implementations) or even implement your own ones.
 
 ##More About More
-Tanaguru can also make controls on CSS, combine selectors, checkers, use data extracted from a javascript script executing while fetching the page and more. You can browse the Accessiweb 2.2 rules implementations to get more examples of how to implement a rule. 
+Tanaguru can also make controls on CSS, combine selectors, checkers, use data extracted from a javascript script executing while fetching the page and more, characterise elements by using a marker approach (use the "decorative-image" class to identify all the decoration images of the page). You can browse the Accessiweb 2.2 rules implementations to get more examples of how to implement a rule. 
 
 ##Any questions?
 
-let's discuss [Tanaguru on StackOverflow](http://stackoverflow.com/search?q=tanaguru)
+Let's discuss [Tanaguru on StackOverflow](http://stackoverflow.com/search?q=tanaguru)
 
 ***
 
@@ -151,10 +152,13 @@ A test can produce a result with 3 levels of informations :
 * Level3 (optional) -> EVIDENCE_ELEMENT that can store additionnal informations about the DOM element to help the qualification and thus the resolution.
 
 # Advanced
-
-## The `ElementSelector` interface
-### Explanation
-### The existing ElementSelector implementations 
+## Rules input/output
+## The main interfaces
+### `SSPHandler`
+#### Explanation
+### `ElementSelector`
+#### Explanation
+#### The existing ElementSelector implementations 
 Here is a not exhaustive list of existing ElementSelector implementations : 
 * [SimpleElementSelector](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementselector/SimpleElementSelector.html)
 * [MultipleElementSelector](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementselector/MultipleElementSelector.html)
@@ -162,9 +166,9 @@ Here is a not exhaustive list of existing ElementSelector implementations :
 * [ImageElementSelector](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementselector/ImageElementSelector.html)
 * ...
 
-## The `ElementChecker` interface
-### Explanation
-### The existing ElementChecker implementations 
+### `ElementChecker`
+#### Explanation
+#### The existing ElementChecker implementations 
 Here is a not exhaustive list of existing ElementChecker implementations : 
 * [ElementPresenceChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/element/ElementPresenceChecker.html)
 * [ChildElementPresenceChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/element/ChildElementPresenceChecker.html)
@@ -179,6 +183,9 @@ Here is a not exhaustive list of existing ElementChecker implementations :
 * [LinkPertinenceChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/link/LinkPertinenceChecker.html)
 * ...
 
-## The `TextElementBuilder` interface
-### Explanation
-### The existing TextElementBuilder implementations 
+### The `TextElementBuilder` interface
+#### Explanation
+#### The existing TextElementBuilder implementations 
+
+## Test context
+### Create a nomenclature and populate it
