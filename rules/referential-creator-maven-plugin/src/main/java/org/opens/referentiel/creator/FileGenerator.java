@@ -327,7 +327,7 @@ public class FileGenerator {
     public void createSqlReference() throws IOException {
         FileUtils.touch(getSqlFile());
         StringBuilder strb = new StringBuilder();
-        strb.append("INSERT IGNORE INTO `REFERENCE` (`CD_REFERENCE`, `DESCRIPTION`, `LABEL`, `URL`, `RANK`, `ID_DEFAULT_LEVEL`) VALUES\n");
+        strb.append("INSERT IGNORE INTO `REFERENCE` (`Cd_Reference`, `Description`, `Label`, `Url`, `Rank`, `Id_Default_Level`) VALUES\n");
         strb.append("(\'").append(vpc.getReferentiel().replace(".", "")).append("\', NULL, \'").append(vpc.getReferentielLabel()).append("\', \'\', 2000, 1);\n\n");
         strb.append("INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Code`, `Label`) VALUES\n");
         strb.append("(\'").append(vpc.getReferentiel().replace(".", "")).append("\', \'").append(vpc.getReferentielLabel()).append("\');\n\n");
@@ -337,7 +337,7 @@ public class FileGenerator {
     public void createSqlTheme() throws IOException {
         List<String> themesList = FileUtils.readLines(getI18nDefaultFile("theme"));
         StringBuilder strb = new StringBuilder();
-        strb.append("INSERT IGNORE INTO `THEME` (`CD_THEME`, `DESCRIPTION`, `LABEL`, `RANK`) VALUES\n");
+        strb.append("INSERT IGNORE INTO `THEME` (`Cd_Theme`, `Description`, `Label`, `Rank`) VALUES\n");
         for (int i = 0; i < themesList.size(); i++) {
             strb.append("(\'").append(themesList.get(i).split("=")[0]).append("\', NULL, \'").append(themesList.get(i).split("=")[1].replace("\'", "")).append("\', ");
             strb.append(String.valueOf(i + 1)).append(")");
@@ -354,7 +354,7 @@ public class FileGenerator {
         List<String> criteres = FileUtils.readLines(getI18nDefaultFile("criterion"));
         List<String> themesList = FileUtils.readLines(getI18nDefaultFile("theme"));
         StringBuilder strb = new StringBuilder();
-        strb.append("INSERT IGNORE INTO `CRITERION` (`CD_CRITERION`, `DESCRIPTION`, `LABEL`, `URL`, `RANK`) VALUES\n");
+        strb.append("INSERT IGNORE INTO `CRITERION` (`Cd_Criterion`, `Description`, `Label`, `Url`, `Rank`) VALUES\n");
         for (int i = 0; i < criteres.size(); i++) {
             strb.append("(\'").append(criteres.get(i).split("=")[0]);
             strb.append("\', \'").append(criteres.get(i).split("=")[1].replace("\'", ""));
@@ -367,14 +367,14 @@ public class FileGenerator {
                 strb.append(";\n\n");
             }
         }
-        strb.append("UPDATE `CRITERION` SET `reference_ID_REFERENCE` = (SELECT `ID_REFERENCE` FROM `REFERENCE` WHERE `CD_REFERENCE` LIKE \'");
+        strb.append("UPDATE `CRITERION` SET `Reference_Id_Reference` = (SELECT `Id_Reference` FROM `REFERENCE` WHERE `Cd_Reference` LIKE \'");
         strb.append(vpc.getReferentiel().replace(".", ""));
-        strb.append("\') WHERE `CD_CRITERION` LIKE \'");
+        strb.append("\') WHERE `Cd_Criterion` LIKE \'");
         strb.append(vpc.getReferentiel().replace(".", "")).append("-%\';\n");
         for (int i = 0; i < themesList.size(); i++) {
-            strb.append("UPDATE `CRITERION` SET `theme_ID_THEME` = (SELECT `ID_THEME` FROM `THEME` WHERE `CD_THEME` LIKE \'");
+            strb.append("UPDATE `CRITERION` SET `Theme_Id_Theme` = (SELECT `Id_Theme` FROM `THEME` WHERE `Cd_Theme` LIKE \'");
             strb.append(themesList.get(i).split("=")[0]);
-            strb.append("\') WHERE `CD_CRITERION` LIKE \'");
+            strb.append("\') WHERE `Cd_Criterion` LIKE \'");
             strb.append(themesList.get(i).split("=")[0]).append("-%\';\n");
             if (i == themesList.size() - 1) {
                 strb.append("\n");
@@ -421,7 +421,7 @@ public class FileGenerator {
             }
         }
         for (int i = 0; i < criteres.size(); i += 1) {
-            strb.append("UPDATE `TEST` SET `Id_Criterion` = (SELECT `ID_CRITERION` FROM `CRITERION` WHERE `CD_CRITERION` LIKE \'");
+            strb.append("UPDATE `TEST` SET `Id_Criterion` = (SELECT `Id_Criterion` FROM `CRITERION` WHERE `Cd_Criterion` LIKE \'");
             strb.append(criteres.get(i).split("=")[0]);
             strb.append("\') WHERE `Cd_Test` LIKE \'");
             strb.append(criteres.get(i).split("=")[0]).append("-%\';\n");
