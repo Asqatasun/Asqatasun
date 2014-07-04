@@ -167,6 +167,27 @@ Here is a not exhaustive list of existing ElementSelector implementations :
 
 ### `ElementChecker`
 #### Explanation
+This interface defines a check to be done on elements 
+#### Method to implement
+```java
+/**
+     * Perform the check operation. The instance of {@link ElementHandler} 
+     * received as a parameter is used to retrieve elements the test is about
+     * and the instance of {@link TestSolutionHandler} received 
+     * as a parameter is used to store the results of tests performed 
+     * during the operation
+     * 
+     * @param sspHandler
+     * @param elementHandler
+     * @param testSolutionHandler
+     *  
+     */
+    void check (
+            SSPHandler sspHandler, 
+            ElementHandler elementHandler, 
+            TestSolutionHandler testSolutionHandler);
+```
+#### Abstract implementation
 #### The existing ElementChecker implementations 
 Here is a not exhaustive list of existing ElementChecker implementations : 
 * [ElementPresenceChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/element/ElementPresenceChecker.html)
