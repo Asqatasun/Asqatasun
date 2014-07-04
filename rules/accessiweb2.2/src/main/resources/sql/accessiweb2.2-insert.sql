@@ -4,7 +4,7 @@ SET foreign_key_checks=0;
 --
 -- Contenu de la table `reference`
 --
-INSERT IGNORE INTO `REFERENCE` (`ID_REFERENCE`, `CD_REFERENCE`, `DESCRIPTION`, `LABEL`, `URL`, `RANK`, `ID_DEFAULT_LEVEL`) VALUES
+INSERT IGNORE INTO `REFERENCE` (`Id_Reference`, `Cd_Reference`, `Description`, `Label`, `Url`, `Rank`, `Id_Default_Level`) VALUES
 (4, 'Aw22', NULL, 'AccessiWeb 2.2', 'http://www.accessiweb.org/index.php/accessiweb-22-english-version.html', 4, 2);
 
 INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Code`, `Label`) VALUES
@@ -13,7 +13,7 @@ INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Code`, `Label`) VALUES
 --
 -- Contenu de la table `theme`
 --
-INSERT IGNORE INTO `THEME` (`ID_THEME`, `CD_THEME`, `DESCRIPTION`, `LABEL`, `RANK`) VALUES
+INSERT IGNORE INTO `THEME` (`Id_Theme`, `Cd_Theme`, `Description`, `Label`, `Rank`) VALUES
 (31, 'Aw22-1', NULL, 'Images', 1),
 (32, 'Aw22-2', NULL, 'Cadres', 2),
 (33, 'Aw22-3', NULL, 'Couleurs', 3),
@@ -32,7 +32,7 @@ INSERT IGNORE INTO `THEME` (`ID_THEME`, `CD_THEME`, `DESCRIPTION`, `LABEL`, `RAN
 --
 -- Contenu de la table `criterion`
 --
-INSERT IGNORE INTO `CRITERION` (`ID_CRITERION`, `reference_ID_REFERENCE`, `theme_ID_THEME`, `CD_CRITERION`, `DESCRIPTION`, `LABEL`, `URL`, `RANK`) VALUES
+INSERT IGNORE INTO `CRITERION` (`Id_Criterion`, `reference_Id_Reference`, `theme_Id_Theme`, `Cd_CRITERION`, `Description`, `Label`, `Url`, `Rank`) VALUES
 (201, 4, 31, 'Aw22-0101', '', '1.1', 'http://www.accessiweb.org/index.php/accessiweb_2.2_liste_generale.html#crit-1-1 ', 201),
 (202, 4, 31, 'Aw22-0102', '', '1.2', 'http://www.accessiweb.org/index.php/accessiweb_2.2_liste_generale.html#crit-1-2 ', 202),
 (203, 4, 31, 'Aw22-0103', '', '1.3', 'http://www.accessiweb.org/index.php/accessiweb_2.2_liste_generale.html#crit-1-3 ', 203),
