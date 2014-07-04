@@ -198,9 +198,9 @@ Here is the list of existing TextElementBuilder implementations :
 ## Test context
 ### Create a nomenclature and populate it
 ```mysql
-// INSERT THE NOMENCLATURE
+-- INSERT THE NOMENCLATURE
 INSERT IGNORE INTO `NOMENCLATURE` (`Cd_Nomenclature`) VALUES ('MyNomenclature');
-// INSERT AN ELEMENT AND LINK IT TO THE NOMENCLATURE
+-- INSERT AN ELEMENT AND LINK IT TO THE NOMENCLATURE
 INSERT IGNORE INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Label`) VALUES`('NomenclatureElementImpl', 'Value1');
 UPDATE `NOMENCLATURE_ELEMENT` SET `Id_Nomenclature`= (SELECT `Id_Nomenclature` FROM `NOMENCLATURE` WHERE `Cd_Nomenclature` LIKE 'MyNomenclature') WHERE Label like 'Value1';
 ```
