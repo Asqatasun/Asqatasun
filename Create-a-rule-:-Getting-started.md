@@ -112,7 +112,7 @@ Based on the implementation of accessiblity rules, many checkers have been imple
 Regarding your need, you can use one of [our check implementations](##the-existing-elementchecker-implementations) or even implement yours.
 
 ##More About More
-Tanaguru can also make controls on CSS, combine selectors, checkers, use data extracted from a javascript script executing while fetching the page and more. You can browse the accessiweb 2.2 rules implementations to get more examples of how to implement a rule. 
+Tanaguru can also make controls on CSS, combine selectors, checkers, use data extracted from a javascript script executing while fetching the page and more. You can browse the Accessiweb 2.2 rules implementations to get more examples of how to implement a rule. 
 
 Any questions? let's discuss about it on our mailing-list or on stackoverflow
 
