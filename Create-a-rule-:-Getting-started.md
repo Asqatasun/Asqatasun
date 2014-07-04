@@ -6,7 +6,7 @@ Once created, let's implement some rules :
 ##Detection rule
 To create a detection rule, implement a class that extends the `AbstractDetectionPageRuleImplementation` abstract class. 
 
-For example, the detection of the h1 tag should be implemented as follows : 
+For example, the detection of the `h1` tag should be implemented as follows : 
 
 ```java
 public class DetectH1 extends AbstractDetectionPageRuleImplementation {
