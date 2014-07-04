@@ -105,11 +105,11 @@ This example introduces a new usefull interface called TextElementBuilder, that 
 ##More About Selection
 You need to perform more complex selection? The `SimpleElementSelector` is based on [Jsoup](http://jsoup.org) and its powerfull CSS (or jquery) like selector syntax to find matching elements. Have a look to the [Jsoup selector-syntax description page](http://jsoup.org/cookbook/extracting-data/selector-syntax) to know more about what you can do.
 
-You can use also use one of [our implementations](##the-existing-elementselector-implementations) or even implement yours. 
+You can use also use one of [our selection implementations](##the-existing-elementselector-implementations) or even implement yours. 
 
 ##More About Check
 Based on the implementation of accessiblity rules, many checkers have been implemented and can be reused.
-Regarding your need, you can use one of [our implementations](##the-existing-elementchecker-implementations) or even implement yours.
+Regarding your need, you can use one of [our check implementations](##the-existing-elementchecker-implementations) or even implement yours.
 
 ##More About More
 Tanaguru can also make controls on CSS, combine selectors, checkers, use data extracted from a javascript script executing while fetching the page and more. You can browse the accessiweb 2.2 rules implementations to get more examples of how to implement a rule. 
@@ -129,9 +129,8 @@ A test can produce a result with 3 levels of informations :
 
 # Advanced
 
-The simplest way to write a rule is to create a java class that extends the abstract class `AbstractPageRuleWithSelectorAndCheckerImplementation` and set an [ElementSelector](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementselector/ElementSelector.html) implementation and an [ElementChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/ElementChecker.htlm) implementation by constructor arguments. Let's see some examples :
-
 ## The `ElementSelector` interface
+### Explanation
 ### The existing ElementSelector implementations 
 Here is a not exhaustive list of existing ElementSelector implementations : 
 * [SimpleElementSelector](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementselector/SimpleElementSelector.html)
@@ -141,6 +140,7 @@ Here is a not exhaustive list of existing ElementSelector implementations :
 * ...
 
 ## The `ElementChecker` interface
+### Explanation
 ### The existing ElementChecker implementations 
 Here is a not exhaustive list of existing ElementChecker implementations : 
 * [ElementPresenceChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/element/ElementPresenceChecker.html)
@@ -155,3 +155,7 @@ Here is a not exhaustive list of existing ElementChecker implementations :
 * [LangChangeChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/lang/LangChangeChecker.html)
 * [LinkPertinenceChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/link/LinkPertinenceChecker.html)
 * ...
+
+## The `TextElementBuilder` interface
+### Explanation
+### The existing TextElementBuilder implementations 
