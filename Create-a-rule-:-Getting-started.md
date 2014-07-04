@@ -134,7 +134,7 @@ Based on the implementation of accessiblity rules, many checkers have been imple
 Regarding your need, you can use one of [our check implementations](#the-existing-elementchecker-implementations) or even implement your own ones.
 
 ##More About More
-Tanaguru can also make controls on CSS, combine selectors, checkers, use data extracted from a javascript script executing while fetching the page and more, characterise elements by using a marker approach (use the "decorative-image" class to identify all the decoration images of the page). You can browse [the Accessiweb 2.2 rules implementations](https://github.com/Tanaguru/Tanaguru/tree/master/rules/accessiweb2.2/src/main/java/org/opens/tanaguru/rules/accessiweb22) to get more examples of how to implement a rule. 
+Tanaguru can also make controls on CSS, combine selectors, checkers, use data extracted from a javascript script executing while fetching the page and more, characterise elements by using a marker approach (use the "decorative-image" class to identify all the decoration images of the page). You can browse [the AccessiWeb 2.2 rules implementations](https://github.com/Tanaguru/Tanaguru/tree/master/rules/accessiweb2.2/src/main/java/org/opens/tanaguru/rules/accessiweb22) to get more examples of how to implement a rule. 
 
 ##Any questions?
 
