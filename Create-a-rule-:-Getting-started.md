@@ -74,7 +74,8 @@ public class MyClassThatChecksWhetherEachLinkHaveTitleAttribute extends
 
 ##More About Selection
 You need to perform more complex selection? The `SimpleElementSelector` is based on [Jsoup](http://jsoup.org) and its powerfull CSS (or jquery) like selector syntax to find matching elements. Have a look to the [Jsoup selector-syntax description page](http://jsoup.org/cookbook/extracting-data/selector-syntax) to know more about what you can do.
-You can use also use one of our implementation or even implement yours. 
+
+You can use also use one of [our implementations](#the-existing-implementations) or even implement yours. 
 
 ##More About Check
 
