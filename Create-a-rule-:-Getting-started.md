@@ -46,26 +46,27 @@ public class DetectIframe extends AbstractDetectionPageRuleImplementation {
     }
 }
 ```
-This test will return PASSED when no `iframe` has been found on the page, FAILED instead, producing the internationalisable message "IframeDetected" for each occurence found on the page. Thus, each occurence will be rendered in the  Tanaguru web-app interface with its line number, and snippet of html source representing the element.
+This test will return PASSED when no `iframe` has been found on the page, FAILED instead, producing the internationalisable message "IframeDetected" for each occurence found on the page. Thus, each occurence will be rendered in the  Tanaguru web-app interface with its line number, and snippet of HTML source representing the element.
 
-##Selection and Check rule
+##Selection and check rule
 Detection is great, but you often need to perform checks on selected elements. To do so, implement a class that extends the `AbstractPageRuleWithSelectorAndCheckerImplementation` abstract class.  
-Let's say that you want to check that all the links (`a` tags) of a page have a `title` attribute. Here is what your class would look like : 
+Let's say that you want to check that all the links (`a` tags) of a page have not a `title` attribute. Here is what your class would look like : 
 
 ```java
-public class CheckWhetherEachLinkHaveTitleAttribute extends 
+public class CheckWhetherEachLinkHaventTitleAttribute extends 
                          AbstractPageRuleWithSelectorAndCheckerImplementation {
     /**
      * Constructor
      */
-    public CheckWhetherEachLinkHaveTitleAttribute() {
+    public CheckWhetherEachLinkHaventTitleAttribute() {
         super(new SimpleElementSelector("a"), // The ElementSelector implementation
               new AttributePresenceChecker( // The ElementChecker implementation
                   "title", // the attribute to search
-                  TestSolution.PASSED, // solution when attribute is found
-                  TestSolution.FAILED, // solution when attribute is not found
-                  null, // no message created when attribute is found because passed doesn't produce message
-                  "LinkWithoutTitleMessage");// message associated with element when attribute is not found
+                  TestSolution.FAILED, // solution when attribute is found
+                  TestSolution.PASSED, // solution when attribute is not found
+                  "LinkWithTitleMessage", // message associated with element when attribute is not found
+                  null // no message created when attribute is not found because passed doesn't produce message
+              );
         );
     }
 
@@ -134,7 +135,7 @@ Based on the implementation of accessiblity rules, many checkers have been imple
 Regarding your need, you can use one of [our check implementations](#the-existing-elementchecker-implementations) or even implement your own ones.
 
 ##More About More
-Tanaguru can also make controls on CSS, combine selectors, checkers, use data extracted from a javascript script executing while fetching the page and more, characterise elements by using a marker approach (use the "decorative-image" class to identify all the decoration images of the page). You can browse [the AccessiWeb 2.2 rules implementations](https://github.com/Tanaguru/Tanaguru/tree/master/rules/accessiweb2.2/src/main/java/org/opens/tanaguru/rules/accessiweb22) to get more examples of how to implement a rule. 
+Tanaguru can also make controls on CSS, combine selectors, checkers, use data extracted from a javascript script executing while fetching the page and more, characterise elements by using a marker approach (use the "decorative-image" class to identify all the decoration images of the page). You can browse [the Accessiweb 2.2 rules implementations](https://github.com/Tanaguru/Tanaguru/tree/master/rules/accessiweb2.2/src/main/java/org/opens/tanaguru/rules/accessiweb22) to get more examples of how to implement a rule. 
 
 ##Any questions?
 
