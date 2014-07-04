@@ -24,9 +24,9 @@ package org.opens.tanaguru.rules.textbuilder;
 import org.jsoup.nodes.Element;
 
 /**
- * The builder in charge of extracting the text to test. May be the text of the 
- * element, the value of an attribute of the element or the concatenation of 
- * multiple values.
+ * The builder in charge of creating a textual representation of an HTML element.
+ * May be the text of the element, the value of an attribute of the element, 
+ * the concatenation of multiple values...
  */
 public interface TextElementBuilder {
 
@@ -35,7 +35,7 @@ public interface TextElementBuilder {
     
     /**
      * @param element
-     * @return the text content of the element
+     * @return a textual representation of the element
      */
     String buildTextFromElement(Element element);
     
