@@ -53,12 +53,12 @@ Detection is great, but a bit limited. To perform checks on selected elements, i
 Let's say that you want to check that all the links (`a` tags) of a page have a `title` attribute. Here is what your class would look like : 
 
 ```java
-public class MyClassThatChecksWhetherEachLinkHaveTitleAttribute extends 
+public class CheckWhetherEachLinkHaveTitleAttribute extends 
                          AbstractPageRuleWithSelectorAndCheckerImplementation {
     /**
      * Constructor
      */
-    public MyClassThatChecksWhetherEachLinkHaveTitleAttribute() {
+    public CheckWhetherEachLinkHaveTitleAttribute() {
         super(new SimpleElementSelector("a"), // The ElementSelector implementation
               new AttributePresenceChecker( // The ElementChecker implementation
                   "title", // the attribute to search
