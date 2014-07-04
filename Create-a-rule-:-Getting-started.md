@@ -20,7 +20,7 @@ public class DetectH1 extends AbstractDetectionPageRuleImplementation {
                 TestSolution.PASSED, // solution when at least one element is found
                 TestSolution.FAILED, // solution when no element is found
                 null, // no message created when element is found because passed doesn't produce message
-                "H1TagMissing", // General message indicating the element is not present on the page
+                "H1TagMissing" // General message indicating the element is not present on the page
             );
     }
 
