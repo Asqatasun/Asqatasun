@@ -71,6 +71,13 @@ public class CheckWhetherEachLinkHaveTitleAttribute extends
 
 }
 ```
+## Nomenclature based Check rule
+Tanaguru uses the concept of nomenclature to create dynamic lists that then can be used as white lists or black lists. 
+
+Let's consider the check of the doctype validity. To avoid to hard-code in the rule implementation the exhaustive list of allowed doctype declarations, a nomenclature can be used to handle them. The addition of a new one (HTML6 ?) consists in inserting a new entry in database, without modifying a line of the code. You can have a look at the DoctypeValidityChecker implementation for more details.
+
+Another example could be the verification of 
+
 
 ##More About Selection
 You need to perform more complex selection? The `SimpleElementSelector` is based on [Jsoup](http://jsoup.org) and its powerfull CSS (or jquery) like selector syntax to find matching elements. Have a look to the [Jsoup selector-syntax description page](http://jsoup.org/cookbook/extracting-data/selector-syntax) to know more about what you can do.
@@ -96,7 +103,7 @@ The simplest way to write a rule is to create a java class that extends the abst
 
 ## The `ElementSelector` interface
 ### The existing implementations 
-This is a not exhaustive list of existing ElementSelector implementations : 
+Here is a not exhaustive list of existing ElementSelector implementations : 
 * [SimpleElementSelector](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementselector/SimpleElementSelector.html)
 * [MultipleElementSelector](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementselector/MultipleElementSelector.html)
 * [LinkElementSelector](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementselector/LinkElementSelector.html)
@@ -104,3 +111,18 @@ This is a not exhaustive list of existing ElementSelector implementations :
 * ...
 
 ## The `ElementChecker` interface
+### The existing implementations 
+Here is a not exhaustive list of existing ElementChecker implementations : 
+* [ElementPresenceChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/element
+/ElementPresenceChecker.html)
+* [ChildElementPresenceChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/element/ChildElementPresenceChecker.html)
+* [ElementUnicityChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/element/ElementUnicityChecker.html)
+* [AttributePresenceChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/attribute/AttributePresenceChecker.html)
+* [TextEmptinessChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/text/TextEmptinessChecker.html)
+* [TextLengthChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/text/TextLengthChecker.html)
+* [TextBelongsToBlacklistChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/text/TextBelongsToBlacklistChecker.html)
+* [DoctypeValidityChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/doctype/DoctypeValidityChecker.html)
+* [HeadingsHierarchyChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/headings/HeadingsHierarchyChecker.html)
+* [LangChangeChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/lang/LangChangeChecker.html)
+* [LinkPertinenceChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/link/LinkPertinenceChecker.html)
+* ...
