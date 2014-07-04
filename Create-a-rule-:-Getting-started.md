@@ -114,7 +114,9 @@ Regarding your need, you can use one of [our check implementations](##the-existi
 ##More About More
 Tanaguru can also make controls on CSS, combine selectors, checkers, use data extracted from a javascript script executing while fetching the page and more. You can browse the Accessiweb 2.2 rules implementations to get more examples of how to implement a rule. 
 
-Any questions? let's discuss about it on our mailing-list or on stackoverflow
+##Any questions?
+
+let's discuss [Tanaguru on StackOverflow](http://stackoverflow.com/search?q=tanaguru)
 
 ***
 
