@@ -102,8 +102,13 @@ public class FileGenerator {
         return classCode;
     }
 
-    public void writeFileCodeGenerate(VelocityContext context, Template temp) throws IOException {
+    public void writeFileCodeGenerate(VelocityContext context, Template temp,
+            String className) throws IOException {
         StringWriter wr = new StringWriter();
+        if (StringUtils.isNotBlank(className)) {
+            vpc.setClassString(className);
+            context.put("rule", vpc.getClassString());
+        }
         temp.merge(context, wr);
         vpc.getClassRule().add(vpc.getClassString());
         File classFile = new File(vpc.getDestinationFolder()
@@ -123,8 +128,12 @@ public class FileGenerator {
     }
 
     public void writeTestCaseGenerate(VelocityContext context, Template temp,
-            String testCaseNumber) throws IOException {
+            String className, String testCaseNumber) throws IOException {
         StringWriter wr = new StringWriter();
+        if (StringUtils.isNotBlank(className)) {
+            vpc.setClassString(className);
+            context.put("rule", vpc.getClassString());
+        }
         temp.merge(context, wr);
         File testCaseFile = new File(vpc.getDestinationFolder()
                 + "/src/test/resources/testcases/"
@@ -136,8 +145,12 @@ public class FileGenerator {
     }
 
     public void writeUnitTestGenerate(VelocityContext context, Template temp,
-            String testCaseNumber) throws IOException {
+            String testCaseNumber, String className) throws IOException {
         StringWriter wr = new StringWriter();
+        if (StringUtils.isNotBlank(className)) {
+            vpc.setClassString(className);
+            context.put("rule", vpc.getClassString());
+        }
         temp.merge(context, wr);
         File testCaseFile = new File(vpc.getDestinationFolder()
                 + "/src/test/java/"
@@ -379,7 +392,8 @@ public class FileGenerator {
         FileUtils.writeStringToFile(FileUtils.getFile(getSqlFile()), strb.toString(), true);
     }
 
-    public void createSqlTest(LinkedList<String> levelColum) throws IOException {
+    public void createSqlTest(LinkedList<String> levelColum,
+            LinkedList<String> scopeColum) throws IOException {
         List<String> tests = FileUtils.readLines(getI18nDefaultFile("rule"));
         List<String> criteres = FileUtils.readLines(getI18nDefaultFile("criterion"));
         StringBuilder strb = new StringBuilder();
@@ -392,15 +406,14 @@ public class FileGenerator {
             } else {
                 strb.append(tmpLabel);
             }
-            strb.append("\', ");
-            strb.append(String.valueOf(i - (i / 2) + 1)).append(", ").append("\'1.0\', \'");
+            strb.append("\', ").append(String.valueOf(i - (i / 2) + 1)).append(", ").append("\'1.0\', \'");
             strb.append(vpc.getReferentiel().replace(".", "").replace(" ", "").toLowerCase()).append("\', \'");
             strb.append(vpc.getPackageString()).append('.');
             strb.append(vpc.getReferentiel().replace(".", "").toLowerCase()).append(".");
             strb.append(String.valueOf(vpc.getClassRule().get(i - (i / 2)))).append("\', ");
-            strb.append("NULL, ");
-            strb.append(getLevelColum(levelColum.get(i - (i / 2))));
-            strb.append(", 1, \'\', b\'0\')");
+            strb.append("NULL, ").append(getLevelColum(levelColum.get(i - (i / 2))));
+            strb.append(", ").append(scopeColum.get(i - (i / 2)));
+            strb.append(", \'\', b\'0\')");
             if (i < tests.size() - 2) {
                 strb.append(",\n");
             } else if (i == tests.size() - 2) {

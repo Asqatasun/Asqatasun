@@ -46,6 +46,8 @@ public class CodeGeneratorMojo extends AbstractMojo {
     private static final String CRITERION_CODE_COLUMN_NAME = "critere";
     private static final String TEST_CODE_COLUMN_NAME = "test";
     private static final String LEVEL_CODE_COLUMN_NAME = "level";
+    private static final String SCOPE_CODE_COLUMN_NAME = "scope";
+    private static final String CLASSNAME_CODE_COLUMN_NAME = "class-name";
     private static boolean IS_I18N_REFERENTIAL_CREATED = false;
     boolean isCriterionPresent;
     /**
@@ -129,6 +131,7 @@ public class CodeGeneratorMojo extends AbstractMojo {
     String refDescriptor;
     TreeSet<String> langSet = new TreeSet();
     LinkedList<String> levelList = new LinkedList();
+    LinkedList<String> scopeList = new LinkedList();
 
     /**
      * Default constructor
@@ -343,24 +346,21 @@ public class CodeGeneratorMojo extends AbstractMojo {
                 test = test.concat("-1");
             }
             context = fg.getContextRuleClassFile(referentiel, PACKAGE_NAME, test, testLabelDefault, context);
-            fg.writeFileCodeGenerate(context, ruleTemplate);
-            fg.writeUnitTestGenerate(context, unitTestTemplate, testLabelDefault);
+            fg.writeFileCodeGenerate(context, ruleTemplate, getClassNameFromCsvColumn(record));
+            fg.writeUnitTestGenerate(context, unitTestTemplate, testLabelDefault, getClassNameFromCsvColumn(record));
             String[] testsCasesState = {"Passed", "Failed", "NMI", "NA"};
             for (int i = 0; i < testsCasesState.length; i++) {
                 context.put("state", testsCasesState[i]);
-                fg.writeTestCaseGenerate(context, testCaseTemplate, String.valueOf(i + 1));
+                fg.writeTestCaseGenerate(context, testCaseTemplate,
+                        getClassNameFromCsvColumn(record), String.valueOf(i + 1));
             }
-            try {
-                levelList.add(record.get(LEVEL_CODE_COLUMN_NAME));
-            } catch (IllegalArgumentException iae) {
-                levelList.add("1");
-            }
+            addLevelAndScopeToList(record);
         }
 
         fg.createSqlReference();
         fg.createSqlTheme();
         fg.createSqlCritere();
-        fg.createSqlTest(levelList);
+        fg.createSqlTest(levelList, scopeList);
         fg.createSqlParameters();
 
         fg.writeAuditSetUpFormBeanGenerate(context, auditSetUpFormTemplate);
@@ -372,6 +372,42 @@ public class CodeGeneratorMojo extends AbstractMojo {
         fg.writeRuleImplementationTestCaseGenerate(context, ruleImplementationTestCaseTemplate);
 
         fg.adaptPom(context, pomTemplate);
+    }
+
+    private void addLevelAndScopeToList(CSVRecord record) {
+        try {
+            String level = record.get(LEVEL_CODE_COLUMN_NAME);
+            if (StringUtils.isBlank(level)) {
+                levelList.add("1");
+            } else {
+                levelList.add(level);
+            }
+        } catch (IllegalArgumentException iae) {
+            levelList.add("1");
+        }
+        try {
+            String scope = record.get(SCOPE_CODE_COLUMN_NAME);
+            if (StringUtils.isBlank(scope)) {
+                scopeList.add("1");
+            } else {
+                scopeList.add(scope);
+            }
+        } catch (IllegalArgumentException iae) {
+            scopeList.add("1");
+        }
+    }
+
+    private String getClassNameFromCsvColumn(CSVRecord record) {
+        try {
+            String className = record.get(CLASSNAME_CODE_COLUMN_NAME);
+            if (StringUtils.isBlank(className)) {
+                return null;
+            } else {
+                return className.replace(" ", "").replace("-", "");
+            }
+        } catch (IllegalArgumentException iae) {
+            return null;
+        }
     }
 
     /**
