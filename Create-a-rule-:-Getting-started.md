@@ -75,7 +75,7 @@ public class CheckWhetherEachLinkHaventTitleAttribute extends
 ## Site level rule
 Tanaguru enables to create rules at site level, in other words, make cross-pages checks.
 
-The most obvious example is the verification of the unicity of the title tag for each page. Tanguru provides
+The most obvious example is the verification of the unicity of the title tag for each page. Tanaguru provides
 the `AbstractUniqueElementSiteRuleImplementation` abstract class that can be used as follows in this case : 
 
 ```java
@@ -102,7 +102,7 @@ Tanaguru uses the concept of nomenclature to create dynamic lists that then can 
 
 Let's consider the check of the doctype validity. To avoid to hard-code in the rule implementation the exhaustive list of allowed doctype declarations, a nomenclature (seen as a whitelist here) can be used to handle them. The addition of a new one (HTML6 ?) consists in inserting a new entry in database, without modifying a line of the code. You can have a look at the [DoctypeValidityChecker implementation](https://github.com/Tanaguru/Tanaguru/blob/master/rules/rules-commons/src/main/java/org/opens/tanaguru/rules/elementchecker/doctype/DoctypeValidityChecker.java) for more details.
 
-The concept of nomenclature can also lead to the check of relevancy. Dealing with this problematic is very difficult and is often taken up with complex algorithms. The usage of a nomeclature as a blacklist enables to detect, in an easy and collaborative way, common irrelevant cases.
+The concept of nomenclature can also lead to the check of relevancy. Dealing with this problematic is very difficult and is often taken up with complex algorithms. The usage of a nomenclature as a blacklist enables to detect, in an easy and collaborative way, common irrelevant cases.
 From this approach, the relevancy of the title of a page can be compared with a list of definitive irrelevant titles such as 'Document', 'Home', 'Welcome'. That list can be then populated from feedbacks by just inserting entries in database. The rule that implements this case could be written as follows : 
 ```java
 public class CheckTitleTagRelevancy extends 
@@ -122,7 +122,7 @@ public class CheckTitleTagRelevancy extends
 
 }
 ```
-To make this test work, an entry named "IrrelevantTitleNomenclature" has to exist in the NOMECLATURE table of the database. Please refer to the "[Create a nomenclature and populate it](#Create-a-nomenclature-and-populate-it)" section for more details.
+To make this test work, an entry named "IrrelevantTitleNomenclature" has to exist in the NOMENCLATURE table of the database. Please refer to the "[Create a nomenclature and populate it](#Create-a-nomenclature-and-populate-it)" section for more details.
 
 
 ##More About Selection
@@ -184,7 +184,20 @@ Here is a not exhaustive list of existing ElementChecker implementations :
 
 ### TextElementBuilder
 #### Explanation
+This builder is in charge of creating a textual representation of an HTML element.
 #### The existing TextElementBuilder implementations 
-* [LinkPertinenceChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/link/LinkPertinenceChecker.html)
+Here is the list of existing TextElementBuilder implementations : 
+* [SimpleTextElementBuilder](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/textbuilder/SimpleTextElementBuilder.html)
+* [OwnTextElementBuilder](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/textbuilder/OwnTextElementBuilder.html)
+* [TextAttributeOfElementBuilder](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/textbuilder/TextAttributeOfElementBuilder.html)
+* [DeepTextElementBuilder](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/textbuilder/DeepTextElementBuilder.html)
+* [CompleteTextElementBuilder](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/textbuilder/CompleteTextElementBuilder.html)
+* [LinkTextElementBuilder](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/textbuilder/LinkTextElementBuilder.html)
+* [PathElementBuilder](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/textbuilder/PathElementBuilder.html)
+
 ## Test context
 ### Create a nomenclature and populate it
+```mysql
+INSERT IGNORE INTO `NOMENCLATURE` (`Cd_Nomenclature`) VALUES ('MyNomenclature');
+INSERT IGNORE INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `Label`, `shortValue`, `Id_Nomenclature`) VALUES`();
+```
