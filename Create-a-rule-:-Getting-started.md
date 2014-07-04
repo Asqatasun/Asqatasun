@@ -76,7 +76,12 @@ Tanaguru uses the concept of nomenclature to create dynamic lists that then can 
 
 Let's consider the check of the doctype validity. To avoid to hard-code in the rule implementation the exhaustive list of allowed doctype declarations, a nomenclature can be used to handle them. The addition of a new one (HTML6 ?) consists in inserting a new entry in database, without modifying a line of the code. You can have a look at the DoctypeValidityChecker implementation for more details.
 
-Another example could be the verification of 
+
+## Site level rule
+Tanaguru enables to create rules at site level, in other words, make cross-pages checks.
+
+The most obvious example is the verification of the unicity of the title tag for each page. Tanguru provides
+the `AbstractUniqueElementSiteRuleImplementation` abstract class that can be used as follows in this case : 
 
 
 ##More About Selection
@@ -85,6 +90,11 @@ You need to perform more complex selection? The `SimpleElementSelector` is based
 You can use also use one of [our implementations](#the-existing-implementations) or even implement yours. 
 
 ##More About Check
+Based on the implementation of accessiblity rules, many checkers have been implemented and can be reused.
+Regarding your need, you can use one of [our implementations](#the-existing-implementations) or even implement yours.
+
+##More About More
+Tanaguru can also make controls on CSS, combine selectors, checkers, use data extracted from a javascript script executing while fetching the page, 
 
 ***
 
@@ -102,7 +112,7 @@ A test can produce a result with 3 levels of informations :
 The simplest way to write a rule is to create a java class that extends the abstract class `AbstractPageRuleWithSelectorAndCheckerImplementation` and set an [ElementSelector](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementselector/ElementSelector.html) implementation and an [ElementChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/ElementChecker.htlm) implementation by constructor arguments. Let's see some examples :
 
 ## The `ElementSelector` interface
-### The existing implementations 
+### The existing ElementSelector implementations 
 Here is a not exhaustive list of existing ElementSelector implementations : 
 * [SimpleElementSelector](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementselector/SimpleElementSelector.html)
 * [MultipleElementSelector](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementselector/MultipleElementSelector.html)
@@ -111,7 +121,7 @@ Here is a not exhaustive list of existing ElementSelector implementations :
 * ...
 
 ## The `ElementChecker` interface
-### The existing implementations 
+### The existing ElementChecker implementations 
 Here is a not exhaustive list of existing ElementChecker implementations : 
 * [ElementPresenceChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/element
 /ElementPresenceChecker.html)
