@@ -49,7 +49,7 @@ public class DetectIframe extends AbstractDetectionPageRuleImplementation {
 This test will return PASSED when no `iframe` has been found on the page, FAILED instead, producing the internationalisable message "IframeDetected" for each occurence found on the page. Thus, each occurence will be rendered in the  Tanaguru web-app interface with its line number, and snippet of html source representing the element.
 
 ##Selection and Check rule
-Detection is great, but a bit limited. To perform checks on selected elements, implement a class that extends the `AbstractPageRuleWithSelectorAndCheckerImplementation` abstract class.  
+Detection is great, but you often need to perform checks on selected elements. To do so, implement a class that extends the `AbstractPageRuleWithSelectorAndCheckerImplementation` abstract class.  
 Let's say that you want to check that all the links (`a` tags) of a page have a `title` attribute. Here is what your class would look like : 
 
 ```java
@@ -71,12 +71,6 @@ public class CheckWhetherEachLinkHaveTitleAttribute extends
 
 }
 ```
-## Nomenclature based Check rule
-Tanaguru uses the concept of nomenclature to create dynamic lists that then can be used as white lists or black lists. 
-
-Let's consider the check of the doctype validity. To avoid to hard-code in the rule implementation the exhaustive list of allowed doctype declarations, a nomenclature can be used to handle them. The addition of a new one (HTML6 ?) consists in inserting a new entry in database, without modifying a line of the code. You can have a look at the DoctypeValidityChecker implementation for more details.
-
-
 ## Site level rule
 Tanaguru enables to create rules at site level, in other words, make cross-pages checks.
 
@@ -100,16 +94,43 @@ public class CheckTitleContentUnicityAtSiteLevel
     }
 }
 ``` 
-This example introduces a new usefull interface called TextElementBuilder, that creates a String for a given Element. In this case, the expected string represents the content of the title tag. You may need to use another implementation or implement yours.  
+This example introduces a new usefull interface called TextElementBuilder, that creates a String for a given Element. In this case, the expected string represents the content of the title tag. You may need to use another implementation or implement your own ones.
+
+## Nomenclature based Check rule
+Tanaguru uses the concept of nomenclature to create dynamic lists that then can be used as white lists or black lists. 
+
+Let's consider the check of the doctype validity. To avoid to hard-code in the rule implementation the exhaustive list of allowed doctype declarations, a nomenclature (seen as a whitelist here) can be used to handle them. The addition of a new one (HTML6 ?) consists in inserting a new entry in database, without modifying a line of the code. You can have a look at the [DoctypeValidityChecker implementation](https://github.com/Tanaguru/Tanaguru/blob/master/rules/rules-commons/src/main/java/org/opens/tanaguru/rules/elementchecker/doctype/DoctypeValidityChecker.java) for more details.
+
+The concept of nomenclature can also lead to the check of relevancy. Dealing with this problematic is very difficult and is often taken up with complex algorithms. The usage of a nomeclature as a blacklist enables to detect, in an easy and collaborative way, common irrelevant cases.
+From this approach, the relevancy of the title of a page can be compared with a list of definitive irrelevant titles such as 'Document', 'Home', 'Welcome'. That list can be then populated from feedbacks by just inserting entries in database. The rule that implements this case could be written as follows : 
+```java
+public class CheckTitleTagRelevancy extends 
+                         AbstractPageRuleWithSelectorAndCheckerImplementation {
+    /**
+     * Constructor
+     */
+    public CheckTitleTagRelevancy() {
+        super(new SimpleElementSelector("title"), // The ElementSelector implementation
+              new TextBelongsToBlackListChecker( // The ElementChecker implementation
+                  new SimpleTextElementBuilder(), // the TextElementBuilder implementation
+                  "IrrelevantTitleNomenclature",// the name of the irrelevant titles nomenclature 
+                  "IrrelevantTitle"// message created when the title belongs to the blacklist
+        );
+    }
+
+}
+```
+To make this test work, an entry named "IrrelevantTitleNomenclature" has to exist in the NOMECLATURE table of the database. Please refer to the "create Nomenclature and populate it" section for more details.
+
 
 ##More About Selection
 You need to perform more complex selection? The `SimpleElementSelector` is based on [Jsoup](http://jsoup.org) and its powerfull CSS (or jquery) like selector syntax to find matching elements. Have a look to the [Jsoup selector-syntax description page](http://jsoup.org/cookbook/extracting-data/selector-syntax) to know more about what you can do.
 
-You can use also use one of [our selection implementations](##the-existing-elementselector-implementations) or even implement yours. 
+You can use also use one of [our selection implementations](##the-existing-elementselector-implementations) or even implement your own ones. 
 
 ##More About Check
 Based on the implementation of accessiblity rules, many checkers have been implemented and can be reused.
-Regarding your need, you can use one of [our check implementations](##the-existing-elementchecker-implementations) or even implement yours.
+Regarding your need, you can use one of [our check implementations](##the-existing-elementchecker-implementations) or even implement your own ones.
 
 ##More About More
 Tanaguru can also make controls on CSS, combine selectors, checkers, use data extracted from a javascript script executing while fetching the page and more. You can browse the Accessiweb 2.2 rules implementations to get more examples of how to implement a rule. 
