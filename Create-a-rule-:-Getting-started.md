@@ -185,6 +185,15 @@ Here is a not exhaustive list of existing ElementChecker implementations :
 ### TextElementBuilder
 #### Explanation
 This builder is in charge of creating a textual representation of an HTML element.
+#### Method to implement
+```java
+/**
+ * @param element
+ * @return a textual representation of the element
+ */
+String buildTextFromElement(Element element);
+```
+Take a look at the [online javadoc of the Jsoup Element](http://jsoup.org/apidocs/org/jsoup/nodes/Element.html). 
 #### The existing TextElementBuilder implementations 
 Here is the list of existing TextElementBuilder implementations : 
 * [SimpleTextElementBuilder](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/textbuilder/SimpleTextElementBuilder.html)
