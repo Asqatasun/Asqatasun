@@ -83,6 +83,24 @@ Tanaguru enables to create rules at site level, in other words, make cross-pages
 The most obvious example is the verification of the unicity of the title tag for each page. Tanguru provides
 the `AbstractUniqueElementSiteRuleImplementation` abstract class that can be used as follows in this case : 
 
+```java
+public class CheckTitleContentUnicityAtSiteLevel
+                   extends AbstractUniqueElementSiteRuleImplementation {
+
+    /**
+     * Constructor
+     */
+    public CheckTitleContentUnicityAtSiteLevel() {
+        super(
+                new SimpleElementSelector("head < title"), //The ElementSelector implementation  
+                new SimpleTextElementBuilder(), // the TextElementBuilder implementation
+                "titleIdenticalToAnotherPage",//message associated with element its title is present on another page
+                "titleNotUnique",//message created to render a cross-page version of the result
+                false);
+    }
+}
+``` 
+This example introduces a new usefull interface called TextElementBuilder, that creates a String for a given Element. In this case, the expected string represents the content of the title tag. You may need to use another implementation or implement yours.  
 
 ##More About Selection
 You need to perform more complex selection? The `SimpleElementSelector` is based on [Jsoup](http://jsoup.org) and its powerfull CSS (or jquery) like selector syntax to find matching elements. Have a look to the [Jsoup selector-syntax description page](http://jsoup.org/cookbook/extracting-data/selector-syntax) to know more about what you can do.
