@@ -41,7 +41,7 @@ public class DetectIframe extends AbstractDetectionPageRuleImplementation {
                 TestSolution.FAILED, // solution when at least one element is found
                 TestSolution.PASSED, // solution when no element is found
                 "IframeDetected", // message associated with each detected element
-                null, // no message created when attribute is found because passed doesn't produce message
+                null // no message created when attribute is found because passed doesn't produce message
             );
     }
 }
