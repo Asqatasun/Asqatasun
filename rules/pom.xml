@@ -47,7 +47,6 @@
         <module>accessiweb2.2</module>
         <module>rgaa2.2</module>
         <module>rules-resources</module>
-	<module>referential-creator-maven-plugin</module>
   </modules>
 
 </project>
