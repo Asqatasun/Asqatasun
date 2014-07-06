@@ -116,14 +116,14 @@ public class CheckTitleTagRelevancy extends
                   new SimpleTextElementBuilder(), // the TextElementBuilder implementation
                   "IrrelevantTitleNomenclature",// the name of the irrelevant titles nomenclature 
                   "IrrelevantTitle",// message created when the title belongs to the blacklist
-                  "text // the text of the title is extracted and displayed in case of irrelevant   
+                  "text" // the text of the title is extracted and displayed in case of irrelevant   
               )
         );
     }
 
 }
 ```
-To make this test work, an entry named "IrrelevantTitleNomenclature" has to exist in the NOMENCLATURE table of the database. Please refer to the "[Create a nomenclature and populate it](#Create-a-nomenclature-and-populate-it)" section for more details.
+To make this test work, an entry named "IrrelevantTitleNomenclature" has to exist in the NOMENCLATURE table of the database. Please refer to the "[Create a nomenclature and populate it](#create-a-nomenclature-and-populate-it)" section for more details.
 
 
 ##More About Selection
