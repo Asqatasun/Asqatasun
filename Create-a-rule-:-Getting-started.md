@@ -66,7 +66,7 @@ public class CheckWhetherEachLinkHaventTitleAttribute extends
                   TestSolution.PASSED, // solution when attribute is not found
                   "LinkWithTitleMessage", // message associated with element when attribute is not found
                   null // no message created when attribute is not found because passed doesn't produce message
-              );
+              )
         );
     }
 
