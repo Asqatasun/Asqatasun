@@ -4,7 +4,7 @@
      <parent>
         <groupId>org.opens</groupId>
         <artifactId>rules</artifactId>
-        <version>1.0.1</version>
+        <version>1.1.0</version>
     </parent>
     <artifactId>tanaguru-accessiweb2.1-testcases</artifactId>
     <name>accessiweb2.1-testcases</name>
