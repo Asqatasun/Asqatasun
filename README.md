@@ -69,19 +69,17 @@ Or you can send an email to
 
 Bugs:
 
-- [#71](https://github.com/Tanaguru/Tanaguru/issues/71) : Crawl parameters: included URL pattern is not shown in audit details
+- [#86](https://github.com/Tanaguru/Tanaguru/issues/86) : AW22 8.8.1 Case sensitivity of lang definition
 
 Features :
 
-- [#74](https://github.com/Tanaguru/Tanaguru/issues/74) : Top 5 invalid tests: add level of test
-- [#73](https://github.com/Tanaguru/Tanaguru/issues/73) : Add link to contrast finder
-- [#68](https://github.com/Tanaguru/Tanaguru/issues/68) : List of pages invalidating a given test: enhance links
-- [#67](https://github.com/Tanaguru/Tanaguru/issues/67) : List of pages invalidating a given test: add test label
-- [#66](https://github.com/Tanaguru/Tanaguru/issues/66) : Fix weighted formula
-- [#65](https://github.com/Tanaguru/Tanaguru/issues/65) : Add UnicityChecker
-- [#64](https://github.com/Tanaguru/Tanaguru/issues/65) : Number of "pages tested" is not the good one
-- Manage levels more generically (level 1,2,3) and delegate the naming to the referential i18n project
-
+- Upgrade Java from 1.6 to 1.7
+- Upgrade Hibernate from 3.6.0.Final to 4.3.5.Final
+- Add new "referential-creator-maven-plugin" and "referential-creator" projects 
+- Create "rule demo project"
+- Refactor rule packaging to be handled by one project 
+- Harmonisation of Referential names
+- Improve rules test management 
 
 ## Other opensource tools
 

@@ -1,4 +1,21 @@
 --------------------------
+Tanaguru 3.0.3, 2014-07-06
+--------------------------
+Bugs:
+
+- [#86](https://github.com/Tanaguru/Tanaguru/issues/86) : AW22 8.8.1 Case sensitivity of lang definition
+
+Features :
+
+- Upgrade Java from 1.6 to 1.7
+- Upgrade Hibernate from 3.6.0.Final to 4.3.5.Final
+- Add new "referential-creator-maven-plugin" and "referential-creator" projects 
+- Create "rule demo project"
+- Refactor rule packaging to be handled by one project 
+- Harmonisation of Referential names
+- Improve rules test management 
+
+--------------------------
 Tanaguru 3.0.2, 2014-05-16
 --------------------------
 Bugs:
