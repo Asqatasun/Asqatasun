@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+    <NOMENCLATURE Id_Nomenclature="1" Cd_Nomenclature="IrrelevantTitleNomenclature" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
+
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="1" Label="document"  Id_Nomenclature="1"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2" Label="untitled"  Id_Nomenclature="1"/>
+
+    <EVIDENCE Id_Evidence="1" Cd_Evidence="text" Description="NULL" Long_Label="NULL" />
+    <EVIDENCE Id_Evidence="2" Cd_Evidence="Element-Name" Description="NULL" Long_Label="NULL" />
+    <EVIDENCE Id_Evidence="3" Cd_Evidence="Url" Description="NULL" Long_Label="NULL" />
+
+</dataset>
