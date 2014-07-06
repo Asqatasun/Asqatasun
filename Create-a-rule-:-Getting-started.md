@@ -64,7 +64,7 @@ public class CheckWhetherEachLinkHaventTitleAttribute extends
                   "title", // the attribute to search
                   TestSolution.FAILED, // solution when attribute is found
                   TestSolution.PASSED, // solution when attribute is not found
-                  "LinkWithTitleMessage", // message associated with element when attribute is not found
+                  "LinkWithTitleDetected", // message associated with element when attribute is not found
                   null // no message created when attribute is not found because passed doesn't produce message
               )
         );
@@ -89,8 +89,8 @@ public class CheckTitleContentUnicityAtSiteLevel
         super(
                 new SimpleElementSelector("head < title"), //The ElementSelector implementation  
                 new SimpleTextElementBuilder(), // the TextElementBuilder implementation
-                "titleIdenticalToAnotherPage",//message associated with element its title is present on another page
-                "titleNotUnique",//message created to render a cross-page version of the result
+                "TitleIdenticalToAnotherPage",//message associated with element its title is present on another page
+                "TitleNotUnique",//message created to render a cross-page version of the result
                 false);
     }
 }
@@ -115,7 +115,8 @@ public class CheckTitleTagRelevancy extends
               new TextBelongsToBlackListChecker( // The ElementChecker implementation
                   new SimpleTextElementBuilder(), // the TextElementBuilder implementation
                   "IrrelevantTitleNomenclature",// the name of the irrelevant titles nomenclature 
-                  "IrrelevantTitle"// message created when the title belongs to the blacklist
+                  "IrrelevantTitle",// message created when the title belongs to the blacklist
+                  "text // the text of the title is extracted and displayed in case of irrelevant   
               )
         );
     }
@@ -159,10 +160,10 @@ A test can produce a result with 3 levels of informations :
 #### Explanation
 #### The existing ElementSelector implementations 
 Here is a not exhaustive list of existing ElementSelector implementations : 
-* [SimpleElementSelector](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementselector/SimpleElementSelector.html)
-* [MultipleElementSelector](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementselector/MultipleElementSelector.html)
-* [LinkElementSelector](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementselector/LinkElementSelector.html)
-* [ImageElementSelector](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementselector/ImageElementSelector.html)
+* [SimpleElementSelector](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementselector/SimpleElementSelector.html)
+* [MultipleElementSelector](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementselector/MultipleElementSelector.html)
+* [LinkElementSelector](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementselector/LinkElementSelector.html)
+* [ImageElementSelector](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementselector/ImageElementSelector.html)
 * ...
 
 ### `ElementChecker`
@@ -190,17 +191,17 @@ This interface defines a check to be done on elements
 #### Abstract implementation
 #### The existing ElementChecker implementations 
 Here is a not exhaustive list of existing ElementChecker implementations : 
-* [ElementPresenceChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/element/ElementPresenceChecker.html)
-* [ChildElementPresenceChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/element/ChildElementPresenceChecker.html)
-* [ElementUnicityChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/element/ElementUnicityChecker.html)
-* [AttributePresenceChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/attribute/AttributePresenceChecker.html)
-* [TextEmptinessChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/text/TextEmptinessChecker.html)
-* [TextLengthChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/text/TextLengthChecker.html)
-* [TextBelongsToBlackListChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/text/TextBelongsToBlackListChecker.html)
-* [DoctypeValidityChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/doctype/DoctypeValidityChecker.html)
-* [HeadingsHierarchyChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/headings/HeadingsHierarchyChecker.html)
-* [LangChangeChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/lang/LangChangeChecker.html)
-* [LinkPertinenceChecker](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/elementchecker/link/LinkPertinenceChecker.html)
+* [ElementPresenceChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/element/ElementPresenceChecker.html)
+* [ChildElementPresenceChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/element/ChildElementPresenceChecker.html)
+* [ElementUnicityChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/element/ElementUnicityChecker.html)
+* [AttributePresenceChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/attribute/AttributePresenceChecker.html)
+* [TextEmptinessChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/text/TextEmptinessChecker.html)
+* [TextLengthChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/text/TextLengthChecker.html)
+* [TextBelongsToBlackListChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/text/TextBelongsToBlackListChecker.html)
+* [DoctypeValidityChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/doctype/DoctypeValidityChecker.html)
+* [HeadingsHierarchyChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/headings/HeadingsHierarchyChecker.html)
+* [LangChangeChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/lang/LangChangeChecker.html)
+* [LinkPertinenceChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/link/LinkPertinenceChecker.html)
 * ...
 
 ### TextElementBuilder
@@ -217,13 +218,13 @@ String buildTextFromElement(Element element);
 Take a look at the [online javadoc of the Jsoup Element](http://jsoup.org/apidocs/org/jsoup/nodes/Element.html). 
 #### The existing TextElementBuilder implementations 
 Here is the list of existing TextElementBuilder implementations : 
-* [SimpleTextElementBuilder](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/textbuilder/SimpleTextElementBuilder.html)
-* [OwnTextElementBuilder](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/textbuilder/OwnTextElementBuilder.html)
-* [TextAttributeOfElementBuilder](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/textbuilder/TextAttributeOfElementBuilder.html)
-* [DeepTextElementBuilder](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/textbuilder/DeepTextElementBuilder.html)
-* [CompleteTextElementBuilder](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/textbuilder/CompleteTextElementBuilder.html)
-* [LinkTextElementBuilder](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/textbuilder/LinkTextElementBuilder.html)
-* [PathElementBuilder](http://tanaguru.org/Javadoc/3.0.2/org/opens/tanaguru/rules/textbuilder/PathElementBuilder.html)
+* [SimpleTextElementBuilder](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/textbuilder/SimpleTextElementBuilder.html)
+* [OwnTextElementBuilder](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/textbuilder/OwnTextElementBuilder.html)
+* [TextAttributeOfElementBuilder](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/textbuilder/TextAttributeOfElementBuilder.html)
+* [DeepTextElementBuilder](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/textbuilder/DeepTextElementBuilder.html)
+* [CompleteTextElementBuilder](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/textbuilder/CompleteTextElementBuilder.html)
+* [LinkTextElementBuilder](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/textbuilder/LinkTextElementBuilder.html)
+* [PathElementBuilder](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/textbuilder/PathElementBuilder.html)
 
 ## Test context
 ### Create a nomenclature and populate it
