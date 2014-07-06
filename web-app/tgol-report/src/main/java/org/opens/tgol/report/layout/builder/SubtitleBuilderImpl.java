@@ -21,10 +21,9 @@
  */
 package org.opens.tgol.report.layout.builder;
 
-import org.opens.tgol.presentation.data.AuditStatistics;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.opens.tgol.presentation.data.AuditStatistics;
 
 /**
  *
@@ -69,15 +68,6 @@ public class SubtitleBuilderImpl implements TitleBuilder {
         this.levelBundleName = levelBundleName;
     }
 
-    private String levelValueBundleName;
-    public String getLevelValueBundleName() {
-        return levelValueBundleName;
-    }
-
-    public void setLevelValueBundleName(String levelValueBundleName) {
-        this.levelValueBundleName = levelValueBundleName;
-    }
-    
     private String refBundleName;
     public String getRefBundleName() {
         return refBundleName;
@@ -87,13 +77,17 @@ public class SubtitleBuilderImpl implements TitleBuilder {
         this.refBundleName = refBundleName;
     }
     
-    private String refValueBundleName;
-    public String getRefValueBundleName() {
-        return refValueBundleName;
+    private List<String> refAndLevelValueBundleNameList = new ArrayList<String>();
+    public List<String> getRefAndLevelValueBundleList() {
+        return refAndLevelValueBundleNameList;
     }
 
-    public void setRefValueBundleName(String refValueBundleName) {
-        this.refValueBundleName = refValueBundleName;
+    public void setRefAndLevelValueBundleList(List<String> refAndLevelValueBundleNameList) {
+        this.refAndLevelValueBundleNameList.addAll(refAndLevelValueBundleNameList);
+    }
+    
+    public void addRefAndLevelValueBundleList(String refAndLevelValueBundleName) {
+        this.refAndLevelValueBundleNameList.add(refAndLevelValueBundleName);
     }
 
     @Override
@@ -116,18 +110,42 @@ public class SubtitleBuilderImpl implements TitleBuilder {
 
     private String getRefAndLevel(AuditStatistics auditStatistics, Locale locale) {
         ResourceBundle refBundle = ResourceBundle.getBundle(refBundleName, locale);
-        ResourceBundle refValueBundle = ResourceBundle.getBundle(refValueBundleName, locale);
-        ResourceBundle levelValueBundle = ResourceBundle.getBundle(levelValueBundleName, locale);
+        Collection<ResourceBundle> refAndlevelValueBundleList = new ArrayList<ResourceBundle>();
+        for (String bundle: refAndLevelValueBundleNameList) {
+            refAndlevelValueBundleList.add(ResourceBundle.getBundle(bundle, locale));
+        }
         ResourceBundle levelBundle = ResourceBundle.getBundle(levelBundleName, locale);
         StringBuilder refAndLevel = new StringBuilder();
         refAndLevel.append(StringEscapeUtils.unescapeHtml(refBundle.getString(refKey)));
         refAndLevel.append(DOUBLE_DOT_KEY);
-        refAndLevel.append(StringEscapeUtils.unescapeHtml(refValueBundle.getString(auditStatistics.getParametersMap().get(refKey))));
+        refAndLevel.append(StringEscapeUtils.unescapeHtml(
+                retrieveI18nValue(
+                    auditStatistics.getParametersMap().get(refKey),
+                    refAndlevelValueBundleList)));
         refAndLevel.append(SEPARATOR_KEY);
         refAndLevel.append(StringEscapeUtils.unescapeHtml(levelBundle.getString(levelKey)));
         refAndLevel.append(DOUBLE_DOT_KEY);
-        refAndLevel.append(StringEscapeUtils.unescapeHtml(levelValueBundle.getString(auditStatistics.getParametersMap().get(levelKey))));
+        refAndLevel.append(StringEscapeUtils.unescapeHtml(
+                retrieveI18nValue(
+                    auditStatistics.getParametersMap().get(levelKey).replace(";", "-"),
+                    refAndlevelValueBundleList)));
         return refAndLevel.toString();
     }
 
+    /**
+     * Retrieve a i18n among the Collection of resourceBundle associated with
+     * the instance
+     * 
+     * @param key
+     * @param resourceBundleList
+     * @return 
+     */
+    private String retrieveI18nValue(String key, Collection<ResourceBundle> resourceBundleList) {
+        for (ResourceBundle rb: resourceBundleList) {
+            if (rb.containsKey(key)) {
+                return rb.getString(key);
+            }
+        }
+        return key;
+    }
 }

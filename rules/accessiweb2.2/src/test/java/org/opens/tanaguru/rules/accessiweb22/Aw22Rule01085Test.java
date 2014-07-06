@@ -54,19 +54,19 @@ public class Aw22Rule01085Test extends Aw22RuleImplementationTestCase {
     protected void setUpWebResourceMap() {
         getWebResourceMap().put("AW22.Test.1.8.5-3NMI-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule01085/AW22.Test.1.8.5-3NMI-01.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule01085/AW22.Test.1.8.5-3NMI-01.html"));
         getWebResourceMap().put("AW22.Test.1.8.5-4NA-01",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "AW22/Aw22Rule01085/AW22.Test.1.8.5-4NA-01.html"));
+              getTestcasesFilePath() + "accessiweb22/Aw22Rule01085/AW22.Test.1.8.5-4NA-01.html"));
         getWebResourceMap().put("AW22.Test.1.8.5-4NA-02",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "AW22/Aw22Rule01085/AW22.Test.1.8.5-4NA-02.html"));
+              getTestcasesFilePath() + "accessiweb22/Aw22Rule01085/AW22.Test.1.8.5-4NA-02.html"));
         getWebResourceMap().put("AW22.Test.1.8.5-4NA-03",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "AW22/Aw22Rule01085/AW22.Test.1.8.5-4NA-03.html"));
+              getTestcasesFilePath() + "accessiweb22/Aw22Rule01085/AW22.Test.1.8.5-4NA-03.html"));
         getWebResourceMap().put("AW22.Test.1.8.5-4NA-04",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "AW22/Aw22Rule01085/AW22.Test.1.8.5-4NA-04.html"));
+              getTestcasesFilePath() + "accessiweb22/Aw22Rule01085/AW22.Test.1.8.5-4NA-04.html"));
     }
 
     @Override

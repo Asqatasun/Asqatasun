@@ -45,14 +45,8 @@
         <module>accessiweb2.1-i18n</module>
         <module>accessiweb2.1-resources</module>-->
         <module>accessiweb2.2</module>
-        <module>accessiweb2.2-testcases</module>
-        <module>accessiweb2.2-i18n</module>
-        <module>accessiweb2.2-resources</module>
         <module>rgaa2.2</module>
-        <module>rgaa2.2-testcases</module>
-        <module>rgaa2.2-i18n</module>
-        <module>rgaa2.2-resources</module>
         <module>rules-resources</module>
-    </modules>
+  </modules>
 
 </project>

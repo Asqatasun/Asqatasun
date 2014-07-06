@@ -76,7 +76,7 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
     /** state that determines if the current property has to be visited **/
     boolean excludeProperty = false;
     
-    private ICSSWriterSettings writterSetting = new CSSWriterSettings(ECSSVersion.CSS30);
+    private final ICSSWriterSettings writterSetting = new CSSWriterSettings(ECSSVersion.CSS30);
 
     /** The testSolutionHandler **/
     private TestSolutionHandler solutionHandler;
@@ -135,6 +135,8 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
     /**
      * 
      * @param currentFileName 
+     * @param solutionHandler 
+     * @param processRemarkService 
      */
     public SimpleCssVisitor (
             String currentFileName,
@@ -148,6 +150,9 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
     /**
      * 
      * @param currentFileName 
+     * @param solutionHandler
+     * @param processRemarkService 
+     * @param includeMediaList 
      */
     public SimpleCssVisitor (
             String currentFileName,

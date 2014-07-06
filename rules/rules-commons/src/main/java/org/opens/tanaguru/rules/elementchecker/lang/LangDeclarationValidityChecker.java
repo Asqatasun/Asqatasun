@@ -34,13 +34,15 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
 public class LangDeclarationValidityChecker extends LangChecker {
 
     /** check declaration validity */
-    private boolean checkDeclarationValidity;
+    private final boolean checkDeclarationValidity;
     
     /** check declaration relevancy */
-    private boolean checkDeclarationRelevancy;
+    private final boolean checkDeclarationRelevancy;
     
     /**
      * Default constructor
+     * @param checkDeclarationValidity
+     * @param checkDeclarationRelevancy
      */
     public LangDeclarationValidityChecker(
             @Nonnull boolean checkDeclarationValidity,

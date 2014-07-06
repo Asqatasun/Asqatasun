@@ -117,10 +117,10 @@ public class ContractControllerTest extends TestCase {
     public void testDisplayContractPage_4args() {
         System.out.println("displayContractPage");
         
-        setUpUserDataService(1,1,1,1,3,1,3,1,false);
-        setUpContractDataService(1,1);
+        setUpUserDataService(false);
+        setUpContractDataService(1);
         setUpActDataService(1,1,2,1,1);
-        setUpLocaleResolver(1);
+        setUpLocaleResolver();
         setUpActionHandler(1);
         setUpMockAuthenticationContext();
         
@@ -147,10 +147,10 @@ public class ContractControllerTest extends TestCase {
     public void testDisplayContractExpiredPage_4args() {
         System.out.println("displayContractExpiredPage");
         
-        setUpUserDataService(0,0,1,0,0,0,0,0,true);
-        setUpContractDataService(0,0);
+        setUpUserDataService(true);
+        setUpContractDataService(0);
         setUpActDataService(0,0,0,0,0);
-        setUpLocaleResolver(0);
+        setUpLocaleResolver();
         setUpActionHandler(0);
         setUpMockAuthenticationContext();
         
@@ -177,53 +177,31 @@ public class ContractControllerTest extends TestCase {
         }
     }
 
-    private void setUpUserDataService(
-            int getContractLabelCounter, 
-            int getContractSetCounter, 
-            int getEmailCounter,
-            int getBeginDateCounter,
-            int getEndDateCounter,
-            int getFunctionalitySetCounter,
-            int getContractIdCounter,
-            int getContractOptionElementCounter,
-            boolean expired) {
+    private void setUpUserDataService(boolean expired) {
         mockContract = createMock(Contract.class);
-        Collection<Contract> contractSet = new HashSet<Contract>();
+        Collection<Contract> contractSet = new HashSet<>();
         contractSet.add(mockContract);
-        if (getContractLabelCounter > 0) {
-            expect(mockContract.getLabel()).andReturn("").times(getContractLabelCounter);
-        }
-        if (getFunctionalitySetCounter > 0) {
-            expect(mockContract.getFunctionalitySet()).andReturn(new HashSet<Functionality>()).times(getFunctionalitySetCounter);
-        }
-        if (getContractIdCounter > 0) {
-            expect(mockContract.getId()).andReturn(Long.valueOf(1)).times(getContractIdCounter);
-        }
+        expect(mockContract.getLabel()).andReturn("").anyTimes();
+        expect(mockContract.getFunctionalitySet()).andReturn(new HashSet<Functionality>()).anyTimes();
+        expect(mockContract.getId()).andReturn(Long.valueOf(1)).anyTimes();
+
         GregorianCalendar calendar = new GregorianCalendar();
         if (expired) {
             calendar.set(2011, 01, 01);
         } else {
             calendar.set(2030, 01, 01);
         }
-        if (getEndDateCounter > 0) {
-            expect(mockContract.getEndDate()).andReturn(calendar.getTime()).times(getEndDateCounter);
-        }
-        if (getBeginDateCounter > 0) {
-            calendar.set(2010, 01, 01);
-            expect(mockContract.getBeginDate()).andReturn(calendar.getTime()).times(getBeginDateCounter);
-        }
-        if (getContractOptionElementCounter > 0) {
-            expect(mockContract.getOptionElementSet()).andReturn(new HashSet<OptionElement>()).times(getContractOptionElementCounter);
-        }
+        expect(mockContract.getEndDate()).andReturn(calendar.getTime()).anyTimes();
+        calendar.set(2010, 01, 01);
+        expect(mockContract.getBeginDate()).andReturn(calendar.getTime()).anyTimes();
+        expect(mockContract.getOptionElementSet()).andReturn(new HashSet<OptionElement>()).anyTimes();
+        
         mockUser = createMock(User.class);
-        if (getContractSetCounter > 0) {
-            expect(mockUser.getContractSet()).andReturn(contractSet).times(getContractSetCounter);
-        }
-        if (getEmailCounter > 0) {
-            expect(mockUser.getEmail1()).andReturn("test1@test.com").times(getEmailCounter);
-        }
-        expect(mockUser.getFirstName()).andReturn("").once();
-        expect(mockUser.getName()).andReturn("").once();
+        expect(mockUser.getContractSet()).andReturn(contractSet).anyTimes();
+        expect(mockUser.getEmail1()).andReturn("test1@test.com").anyTimes();
+        
+        expect(mockUser.getFirstName()).andReturn("").anyTimes();
+        expect(mockUser.getName()).andReturn("").anyTimes();
         
         mockUserDataService = createMock(UserDataService.class); 
         
@@ -235,18 +213,14 @@ public class ContractControllerTest extends TestCase {
         instance.setUserDataService(mockUserDataService);
     }
     
-    private void setUpContractDataService(
-            int getUrlFromContractOption,
-            int getReadContractIdCounter) {
+    private void setUpContractDataService(int getUrlFromContractOption) {
         // the HomeController needs a ContractDataService instance
         mockContractDataService = createMock(ContractDataService.class); 
         if (getUrlFromContractOption > 0  ) {
             expect(mockContractDataService.getUrlFromContractOption(mockContract)).andReturn("").times(getUrlFromContractOption);
             expect(mockContractDataService.getPresetContractKeyContractOption(mockContract)).andReturn("").times(getUrlFromContractOption);
         }
-        if (getReadContractIdCounter > 0) {
-            expect(mockContractDataService.read(Long.valueOf(1))).andReturn(mockContract).times(getReadContractIdCounter);
-        }
+        expect(mockContractDataService.read(Long.valueOf(1))).andReturn(mockContract).anyTimes();
         replay(mockContractDataService);
         
         instance.setContractDataService(mockContractDataService);
@@ -274,7 +248,7 @@ public class ContractControllerTest extends TestCase {
             expect(mockActDataService.getActsByContract(mockContract,-1,1, ScopeEnum.DOMAIN,true)).andReturn(new HashSet<Act>()).times(getActsByContract3);
         }
         if (getNumberOfActCounter > 0) {
-            expect(mockActDataService.getNumberOfAct(mockContract)).andReturn(Integer.valueOf(1)).times(getNumberOfActCounter);
+            expect(mockActDataService.getNumberOfAct(mockContract)).andReturn(1).times(getNumberOfActCounter);
         }
         
         replay(mockActDataService);
@@ -293,7 +267,7 @@ public class ContractControllerTest extends TestCase {
     private void setUpMockAuthenticationContext(){
         // initialise the context with the user identified by the email 
         // "test1@test.com" seen as authenticated
-        Collection<GrantedAuthority> gac = new ArrayList<GrantedAuthority>();
+        Collection<GrantedAuthority> gac = new ArrayList();
         TgolUserDetails tud = new TgolUserDetails("test1@test.com", "", true, false, true, true, gac, mockUser);
         
         mockAuthentication = createMock(Authentication.class);
@@ -310,11 +284,9 @@ public class ContractControllerTest extends TestCase {
         replay(mockAuthenticationDetails);
     }
  
-    private void setUpLocaleResolver(int resolveLocaleCounter) {
+    private void setUpLocaleResolver() {
         mockLocaleResolver = createMock(LocaleResolver.class);
-        if (resolveLocaleCounter  > 0) {
-            expect(mockLocaleResolver.resolveLocale(null)).andReturn(Locale.FRANCE).times(resolveLocaleCounter);
-        }
+        expect(mockLocaleResolver.resolveLocale(null)).andReturn(Locale.FRANCE).anyTimes();
         replay(mockLocaleResolver);
 
         instance.setLocaleResolver(mockLocaleResolver);

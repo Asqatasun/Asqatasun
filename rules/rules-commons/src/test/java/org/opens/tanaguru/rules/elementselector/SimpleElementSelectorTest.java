@@ -22,6 +22,7 @@
 package org.opens.tanaguru.rules.elementselector;
 
 import junit.framework.TestCase;
+import org.apache.log4j.Logger;
 import org.easymock.EasyMock;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -37,6 +38,9 @@ import org.opens.tanaguru.rules.keystore.CssLikeQueryStore;
  * @author jkowalczyk
  */
 public class SimpleElementSelectorTest extends TestCase {
+    
+    private static final Logger LOGGER = 
+            Logger.getLogger(SimpleElementSelectorTest.class);
     
     private SSP ssp;
     private SSPHandler sspHandler;
@@ -59,7 +63,7 @@ public class SimpleElementSelectorTest extends TestCase {
      * Test of selectElements method, of class SimpleElementSelector.
      */
     public void testSelectElements() {
-        System.out.println("select fieldset not within form");
+        LOGGER.debug("select fieldset not within form");
         Document doc = Jsoup.parse("<form action=\"action\"><fieldset>FieldSet</fieldset></form>");
 
         initMockContext(CssLikeQueryStore.FIELDSET_NOT_WITHIN_FORM_CSS_LIKE_QUERY, doc);
@@ -102,7 +106,7 @@ public class SimpleElementSelectorTest extends TestCase {
      * Test of selectElements method, of class SimpleElementSelector.
      */
     public void testSelectWidthNotWithinSvg() {
-        System.out.println("select width attr not within svg and children");
+        LOGGER.debug("select width attr not within svg and children");
         Document doc = Jsoup.parse("<svg width=\"\" height=\"\">"
                 
             +"</svg>"

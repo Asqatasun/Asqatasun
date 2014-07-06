@@ -43,6 +43,9 @@ import org.opens.tanaguru.service.ProcessRemarkService;
  * doesn't point to the other thanks to the "rel=canonical" mechanism, a 
  * sourceCodeRemark is created, and the final result is false, true instead.
  * 
+ * For a given page, the first occurence of the selection is used to extract the 
+ * data to test, the other occurences are ignored.
+ * 
  * @author jkowalczyk
  */
 public class AbstractUniqueElementSiteRuleImplementation 
@@ -50,15 +53,15 @@ public class AbstractUniqueElementSiteRuleImplementation
 
     private static final String REL_CAN_VALUE_REMARK_MSG = "relCanonicalValue";
     /* the page level message code*/
-    private String pageLevelMessageCode;
+    private final String pageLevelMessageCode;
     /* the site level message code*/
-    private String siteLevelMessageCode;
+    private final String siteLevelMessageCode;
     /* the elementSelector*/
-    private ElementSelector elementSelector;
+    private final ElementSelector elementSelector;
     /* the textElementBuilder*/
-    private TextElementBuilder textElementBuilder;
+    private final TextElementBuilder textElementBuilder;
     /* canonical testing*/
-    private boolean canonicalTesting;
+    private final boolean canonicalTesting;
     /* the processRemarkService*/
     private ProcessRemarkService prs;
 
@@ -68,6 +71,7 @@ public class AbstractUniqueElementSiteRuleImplementation
      * @param textElementBuilder
      * @param pageLevelMessageCode
      * @param siteLevelMessageCode 
+     * @param canonicalTesting
      */
     public AbstractUniqueElementSiteRuleImplementation(
             ElementSelector elementSelector,
@@ -97,7 +101,7 @@ public class AbstractUniqueElementSiteRuleImplementation
         }
         Collection<ProcessRemark> remarks = null;
         if (canonicalTesting) {
-            remarks = new ArrayList<ProcessRemark>();
+            remarks = new ArrayList<>();
             extractRelCanonical(
                     sspHandler, 
                     prs, 
@@ -124,7 +128,7 @@ public class AbstractUniqueElementSiteRuleImplementation
         /* set solution as NOT_APPLICABLE */
         TestSolution testSolution = TestSolution.NOT_APPLICABLE;
 
-        List<DefiniteResult> netResultList = new ArrayList<DefiniteResult>();
+        List<DefiniteResult> netResultList = new ArrayList<>();
         
         int elementCounter = 0;
         
@@ -134,11 +138,10 @@ public class AbstractUniqueElementSiteRuleImplementation
             // passed.
             testSolution = TestSolution.PASSED;
             
-            Map<String, List<ProcessResult>> previousText = 
-                                new HashMap<String, List<ProcessResult>>();
+            Map<String, List<ProcessResult>> previousText = new HashMap<>();
             
             // we parse all the result to populate a map where the key is an 
-            // encountered textual element and the key is a collection of pages 
+            // encountered textual element and the value is a collection of pages 
             // where that textual element has been found. If for a given page, 
             // the textual element could not have been extracted (the element
             // is absent), a result is created with the NOT_APPLICABLE result
@@ -149,7 +152,7 @@ public class AbstractUniqueElementSiteRuleImplementation
                     if (previousText.containsKey(text)) {
                         previousText.get(text).add(grossResult);
                     } else {
-                        List<ProcessResult> urlList = new ArrayList<ProcessResult>();
+                        List<ProcessResult> urlList = new ArrayList<>();
                         urlList.add(grossResult);
                         previousText.put(text, urlList);
                     }
@@ -275,7 +278,7 @@ public class AbstractUniqueElementSiteRuleImplementation
             Collection<ProcessRemark> processRemarkList) {
         
         Collection<DefiniteResult> definiteResults = 
-                            new ArrayList<DefiniteResult>();
+                            new ArrayList<>();
         
         for (WebResource wr : webResourceList) {
             definiteResults.add(
@@ -325,9 +328,8 @@ public class AbstractUniqueElementSiteRuleImplementation
             Collection<ProcessResult> processResultList, 
             List<DefiniteResult> netResultList) {
         
-        Collection<WebResource> pagesWithDuplicate = new HashSet<WebResource>();
-        Map<String, Collection<WebResource>> urlListWithRelCanonical = 
-                new HashMap<String, Collection<WebResource>>();
+        Collection<WebResource> pagesWithDuplicate = new HashSet<>();
+        Map<String, Collection<WebResource>> urlListWithRelCanonical = new HashMap<>();
 
         // extraction
         for (ProcessResult processResult : processResultList) {
@@ -339,7 +341,7 @@ public class AbstractUniqueElementSiteRuleImplementation
                 if (urlListWithRelCanonical.containsKey(canonicalValue)) {
                     urlListWithRelCanonical.get(canonicalValue).add(wr);
                 } else {
-                    Collection<WebResource> wrs = new ArrayList<WebResource>();
+                    Collection<WebResource> wrs = new ArrayList<>();
                     wrs.add(wr);
                     urlListWithRelCanonical.put(canonicalValue, wrs);
                 }
@@ -373,7 +375,7 @@ public class AbstractUniqueElementSiteRuleImplementation
                                 TestSolution.PASSED, 
                                 0, 
                                 null));
-                    return new ArrayList<WebResource>();
+                    return Collections.EMPTY_LIST;
                 } else {
                     
                     // if all the pages with the rel canonical don't point to 
@@ -450,7 +452,7 @@ public class AbstractUniqueElementSiteRuleImplementation
      * @return the collection of urls regarding the webresources
      */
     private Collection<String> getUrlsFromWebResources(Collection<WebResource> webResources) {
-        Collection<String> urls = new ArrayList<String>();
+        Collection<String> urls = new ArrayList<>();
         for (WebResource wr : webResources) {
             urls.add(wr.getURL());
         }
@@ -467,7 +469,7 @@ public class AbstractUniqueElementSiteRuleImplementation
     private Collection<ProcessRemark> createProcessRemarkListForPageOnError(
             String tagValue,
             Collection<WebResource> wrList) {
-        Collection<ProcessRemark> processRemarkList = new ArrayList<ProcessRemark>();
+        Collection<ProcessRemark> processRemarkList = new ArrayList<>();
         for (WebResource wr : wrList) {
             processRemarkList.add(
                     prs.createConsolidationRemark(

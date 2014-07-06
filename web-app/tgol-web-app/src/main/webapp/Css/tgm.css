@@ -1284,14 +1284,18 @@ td.action-button {
     background-position: 1px;
 }
 .master-audit-options {
-    padding-left: 1.5em;
-    background-position: 0px 1px;
+    background-position: 0 -2px;
+    font-size: 13px;
+    padding-left: 2.2em;
 }
 #audit-set-up-form input[type="file"] {
     margin-right: 6em;
 }
 #audit-set-up-form .alert-message {
     margin-left : 10px;
+}
+#label-url {
+    font-size: 16px;
 }
 .input .alert-message.error {
     display :inline-block;
@@ -1502,6 +1506,15 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     text-decoration: underline;
     outline-color: #222222;
 }
+
+#synthesis-action-list-domain {
+    font-size : 14px;
+}
+
+#url-domain {
+    margin-top: 1.7em;
+}
+
 .audit-nb-of-pages {
     font-size: 150%;
     font-weight: bold;
@@ -1509,6 +1522,19 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     margin-bottom: 0.5em;
     margin-top: 1em;
     vertical-align: middle;
+}
+
+#audit-nb-of-pages-domain {
+    font-size: 150%;
+    font-weight: bold;
+    text-align: left;
+    margin-top: 0.5em;
+    vertical-align: middle;
+}
+
+#audit-nb-of-pages-domain span {
+    font-size: 15px;
+    font-weight: normal;
 }
 
 .audit-nb-of-pages span {

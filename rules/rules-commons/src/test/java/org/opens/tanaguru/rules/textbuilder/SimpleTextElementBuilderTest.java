@@ -22,6 +22,7 @@
 package org.opens.tanaguru.rules.textbuilder;
 
 import junit.framework.TestCase;
+import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
 
@@ -30,6 +31,9 @@ import org.jsoup.parser.Tag;
  * @author jkowalczyk
  */
 public class SimpleTextElementBuilderTest extends TestCase {
+    
+    private static final Logger LOGGER = 
+            Logger.getLogger(SimpleTextElementBuilderTest.class);
     
     public SimpleTextElementBuilderTest(String testName) {
         super(testName);
@@ -49,7 +53,7 @@ public class SimpleTextElementBuilderTest extends TestCase {
      * Test of buildTextFromElement method, of class SimpleTextElementBuilder.
      */
     public void testBuildTextFromElement() {
-        System.out.println("buildTextFromElement");
+        LOGGER.debug("buildTextFromElement");
         Element element = new Element(Tag.valueOf("div"), "");
         element.text("test");
         SimpleTextElementBuilder instance = new SimpleTextElementBuilder();
@@ -62,7 +66,7 @@ public class SimpleTextElementBuilderTest extends TestCase {
      * Test of buildTextFromElement method, of class SimpleTextElementBuilder.
      */
     public void testBuildTextFromElementTrim() {
-        System.out.println("buildTextFromElementTrim");
+        LOGGER.debug("buildTextFromElementTrim");
         Element element = new Element(Tag.valueOf("div"), "");
         element.text("   test   ");
         SimpleTextElementBuilder instance = new SimpleTextElementBuilder();
@@ -75,7 +79,7 @@ public class SimpleTextElementBuilderTest extends TestCase {
      * Test of buildTextFromElement method, of class SimpleTextElementBuilder.
      */
     public void testBuildTextFromElementWithChildren() {
-        System.out.println("buildTextFromElementWithChildren");
+        LOGGER.debug("buildTextFromElementWithChildren");
         Element element = new Element(Tag.valueOf("div"), "");
         element.appendText("   text1   ");
         

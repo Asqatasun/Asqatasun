@@ -91,10 +91,7 @@ public class CompositeLinkElementSelector extends LinkElementSelector {
                 || StringUtils.isNotBlank(linkElement.ownText()) ) {
             return false;
         }
-        if (!linkElement.children().select(IMAGE_LINK_CHILDREN_CSS_LIKE_QUERY).isEmpty()) {
-            return true;
-        }
-        return false;
+        return !linkElement.children().select(IMAGE_LINK_CHILDREN_CSS_LIKE_QUERY).isEmpty();
     }
 
 }

@@ -76,16 +76,7 @@
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>${basedir}/../../rules/accessiweb2.1-resources/src/main/resources/sql</directory>
-            <includes>
-                <include>accessiweb2.1-insert.sql</include>
-                <include>accessiweb2.1-insert.psql</include>
-            </includes>
-            <fileMode>755</fileMode>
-            <outputDirectory>/install/rules/sql</outputDirectory>
-        </fileSet>
-        <fileSet>
-            <directory>${basedir}/../../rules/accessiweb2.2-resources/src/main/resources/sql</directory>
+            <directory>${basedir}/../../rules/accessiweb2.2/src/main/resources/sql</directory>
             <includes>
                 <include>accessiweb2.2-insert.sql</include>
                 <include>accessiweb2.2-insert.psql</include>
@@ -94,7 +85,7 @@
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>${basedir}/../../rules/rgaa2.2-resources/src/main/resources/sql</directory>
+            <directory>${basedir}/../../rules/rgaa2.2/src/main/resources/sql</directory>
             <includes>
                 <include>rgaa2.2-insert.sql</include>
                 <include>rgaa2.2-insert.psql</include>
@@ -142,7 +133,6 @@
             <includes>
                 <include>ESAPI.properties</include>
                 <include>google-code.properties</include>
-                <include>sign-up-mail.properties</include>
                 <include>tanaguru.conf</include>
             </includes>
             <fileMode>666</fileMode>

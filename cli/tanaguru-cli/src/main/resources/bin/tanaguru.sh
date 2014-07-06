@@ -31,7 +31,8 @@ done
 ##################
 # The first existing directory is used for JAVA_HOME (if JAVA_HOME is not
 # defined in $DEFAULT)
-JDK_DIRS="/usr/lib/jvm/java-1.6.0-openjdk /usr/lib/jvm/java-6-openjdk-i386 /usr/lib/jvm/java-6-openjdk-amd64 /usr/lib/jvm/java-6-sun"
+#JDK_DIRS="/usr/lib/jvm/java-1.6.0-openjdk /usr/lib/jvm/java-6-openjdk-i386 /usr/lib/jvm/java-6-openjdk-amd64 /usr/lib/jvm/java-6-sun"
+JDK_DIRS="/usr/lib/jvm/java-1.7.0-openjdk /usr/lib/jvm/java-7-openjdk-i386 /usr/lib/jvm/java-7-openjdk-amd64 /usr/lib/jvm/java-7-sun"
 
 # Look for the right JVM to use
 for jdir in $JDK_DIRS; do

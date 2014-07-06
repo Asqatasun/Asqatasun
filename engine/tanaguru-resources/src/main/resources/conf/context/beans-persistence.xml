@@ -21,43 +21,18 @@
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
                 <prop key="hibernate.show_sql">${jpa.showSql}</prop>
                 <prop key="hibernate.cache.use_second_level_cache">true</prop>
-                <prop key="hibernate.cache.use_structured_entries">true</prop>
                 <prop key="hibernate.cache.use_query_cache">true</prop>
-                <prop key="hibernate.generate_statistics">true</prop>
+                <prop key="hibernate.generate_statistics">false</prop>
                 <prop key="hibernate.default_batch_fetch_size">500</prop>
                 <prop key="hibernate.max_fetch_depth">3</prop>
                 <prop key="hibernate.jdbc.batch_size">1000</prop>
                 <prop key="hibernate.use_outer_join">true</prop>
-                <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+                <prop key="hibernate.cache.region.factory_class">
+                    org.hibernate.cache.ehcache.EhCacheRegionFactory
+                </prop>
             </props>
         </property>
     </bean>
-
-<!--     <bean class="org.springframework.jmx.export.MBeanExporter">
-        <property name="autodetect" value="false" />
-        <property name="assembler">
-            <bean id="jmxAssembler"
-                class="org.springframework.jmx.export.assembler.MetadataMBeanInfoAssembler">
-                <property name="attributeSource">
-                    <bean
-                        class="org.springframework.jmx.export.annotation.AnnotationJmxAttributeSource" />
-                </property>
-            </bean>
-        </property>
-        <property name="beans">
-            <map>
-                <entry key="org.hibernate:name=statistics">
-                    <bean class="org.hibernate.jmx.StatisticsService">
-                        <property name="statisticsEnabled" value="true" />
-                        <property name="sessionFactory">
-                            <util:property-path
-                                path="entityManagerFactory.sessionFactory" />
-                        </property>
-                    </bean>
-                </entry>
-            </map>
-        </property>
-    </bean>-->
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           p:driverClass="${jdbc.driverClassName}"

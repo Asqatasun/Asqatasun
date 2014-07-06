@@ -31,7 +31,6 @@ import javax.persistence.ManyToMany;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -39,11 +38,9 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author jkowalczyk
  */
 @Entity
-@XmlRootElement
-@org.hibernate.annotations.Entity(
-		selectBeforeUpdate = false,
-		dynamicInsert = true,
-		dynamicUpdate = true)
+@org.hibernate.annotations.DynamicInsert(true)
+@org.hibernate.annotations.DynamicUpdate(true)
+@org.hibernate.annotations.SelectBeforeUpdate(false)
 public class RelatedContentImpl extends ContentImpl implements
         RelatedContent, Serializable {
 
@@ -52,8 +49,7 @@ public class RelatedContentImpl extends ContentImpl implements
         targetEntity=org.opens.tanaguru.entity.audit.SSPImpl.class,
         mappedBy="relatedContentSet")
     @org.hibernate.annotations.Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    private Set<ContentImpl> parentContentSet =
-            new HashSet<ContentImpl>();
+    private final Set<ContentImpl> parentContentSet = new HashSet<>();
 
     public RelatedContentImpl() {
         super();
@@ -61,8 +57,9 @@ public class RelatedContentImpl extends ContentImpl implements
 
     public RelatedContentImpl(String uri, SSP ssp) {
         super(uri);
-        if (ssp != null)
+        if (ssp != null) {
             this.parentContentSet.add((SSPImpl) ssp);
+        }
     }
 
     public RelatedContentImpl(Date dateOfLoading, String uri) {

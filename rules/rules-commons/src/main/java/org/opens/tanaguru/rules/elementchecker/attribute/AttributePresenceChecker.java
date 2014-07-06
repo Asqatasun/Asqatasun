@@ -39,19 +39,19 @@ public class AttributePresenceChecker extends ElementCheckerImpl {
     /**
      * the attribute the test is about
      */
-    private String attributeName;
+    private final String attributeName;
     
     /**
      * The message code associated with a processRemark when the attribute is
      * detected on an element
      */
-    private String messageCodeOnAttrDetected;
+    private final String messageCodeOnAttrDetected;
     
     /**
      * The message code associated with a processRemark when the attribute is
      * not detected on an element
      */
-    private String messageCodeOnAttrNotDetected;
+    private final String messageCodeOnAttrNotDetected;
     
     /**
      * This flag determines whether each source code remark have to be related 

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project xmlns:pom="http://maven.apache.org/POM/4.0.0">
     <modelVersion>4.0.0</modelVersion>
-     <parent>
+    <parent>
         <groupId>org.opens</groupId>
         <artifactId>rules</artifactId>
         <version>1.0.1</version>
@@ -19,20 +19,28 @@
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/hsql*</exclude>
+                        <exclude>**/*.log</exclude>
+                        <exclude>**/*.script</exclude>
+                        <exclude>*.tmp</exclude>
+                        <exclude>sql/**</exclude>
+                        <exclude>deploy.sh</exclude>
+                        <exclude>descriptor.xml</exclude>
+                    </excludes>                    
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
             <artifactId>tanaguru-rules-commons</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${rulesGroupId}</groupId>
-            <artifactId>tanaguru-accessiweb2.2-testcases</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${rulesGroupId}</groupId>
-            <artifactId>tanaguru-accessiweb2.2-i18n</artifactId>
         </dependency>
         <dependency>
             <groupId>${testingToolsGroupId}</groupId>

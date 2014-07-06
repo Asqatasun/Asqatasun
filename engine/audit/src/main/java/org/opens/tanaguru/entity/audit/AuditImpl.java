@@ -119,7 +119,7 @@ public class AuditImpl implements Audit, Serializable {
     public void addContent(Content content) {
         content.setAudit(this);
         if (contentSet == null) {
-            contentSet = new HashSet<ContentImpl>();
+            contentSet = new HashSet<>();
         }
         this.contentSet.add((ContentImpl) content);
     }
@@ -128,7 +128,7 @@ public class AuditImpl implements Audit, Serializable {
     public void addGrossResult(ProcessResult pageResult) {
         pageResult.setGrossResultAudit(this);
         if (grossResultSet == null) {
-            grossResultSet = new HashSet<ProcessResultImpl>();
+            grossResultSet = new HashSet<>();
         }
         grossResultSet.add((ProcessResultImpl) pageResult);
     }
@@ -137,7 +137,7 @@ public class AuditImpl implements Audit, Serializable {
     public void addNetResult(ProcessResult testResult) {
         testResult.setNetResultAudit(this);
         if (netResultSet == null) {
-            netResultSet = new HashSet<ProcessResultImpl>();
+            netResultSet = new HashSet<>();
         }
         netResultSet.add((ProcessResultImpl) testResult);
     }
@@ -222,7 +222,7 @@ public class AuditImpl implements Audit, Serializable {
     @Override
     public void setContentList(Collection<Content> contentList) {
         if (this.contentSet == null) {
-            this.contentSet = new HashSet<ContentImpl>();
+            this.contentSet = new HashSet<>();
         }
         for (Content content : contentList) {
             content.setAudit(this);
@@ -238,7 +238,7 @@ public class AuditImpl implements Audit, Serializable {
     @Override
     public void setGrossResultList(Collection<ProcessResult> pageResultList) {
         if (this.grossResultSet == null) {
-            this.grossResultSet = new HashSet<ProcessResultImpl>();
+            this.grossResultSet = new HashSet<>();
         }
         for (ProcessResult grossResult : pageResultList) {
             grossResult.setGrossResultAudit(this);
@@ -254,7 +254,7 @@ public class AuditImpl implements Audit, Serializable {
     @Override
     public void setNetResultList(Collection<ProcessResult> netResultList) {
         if (this.netResultSet == null) {
-            this.netResultSet = new HashSet<ProcessResultImpl>();
+            this.netResultSet = new HashSet<>();
         }
         for (ProcessResult netResult : netResultList) {
             netResult.setNetResultAudit(this);
@@ -270,7 +270,7 @@ public class AuditImpl implements Audit, Serializable {
     @Override
     public void setTestList(Collection<Test> testList) {
         if (this.testSet == null) {
-            this.testSet = new HashSet<TestImpl>();
+            this.testSet = new HashSet<>();
         }
         for (Test test : testList) {
             this.testSet.add((TestImpl)test);
@@ -280,7 +280,7 @@ public class AuditImpl implements Audit, Serializable {
     @Override
     public void setParameterSet(Collection<Parameter> parameterSet){
         if (this.parameterSet == null) {
-            this.parameterSet = new HashSet<ParameterImpl>();
+            this.parameterSet = new HashSet<>();
         }
         for(Parameter param: parameterSet) {
             this.parameterSet.add((ParameterImpl)param);
@@ -290,7 +290,7 @@ public class AuditImpl implements Audit, Serializable {
     @Override
     public void addParameter(Parameter parameter){
         if (this.parameterSet == null) {
-            this.parameterSet = new HashSet<ParameterImpl>();
+            this.parameterSet = new HashSet<>();
         }
         this.parameterSet.add((ParameterImpl)parameter);
     }
@@ -298,7 +298,7 @@ public class AuditImpl implements Audit, Serializable {
     @Override
     public Collection<Parameter> getParameterSet() {
         if (this.parameterSet == null) {
-            this.parameterSet = new HashSet<ParameterImpl>();
+            this.parameterSet = new HashSet<>();
         }
         return (Collection)parameterSet;
     }

@@ -56,7 +56,7 @@ public interface ElementChecker {
      * during the operation
      * 
      * @param sspHandler
-     * @param selectionHandler
+     * @param elementHandler
      * @param testSolutionHandler
      *  
      */

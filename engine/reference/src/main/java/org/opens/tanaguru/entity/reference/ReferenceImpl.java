@@ -41,7 +41,7 @@ public class ReferenceImpl implements Reference, Serializable {
     @Column(name = "Cd_Reference")
     private String code;
     @OneToMany(mappedBy = "reference", cascade = CascadeType.ALL)
-    private List<CriterionImpl> criterionList = new ArrayList<CriterionImpl>();
+    private final List<CriterionImpl> criterionList = new ArrayList<>();
     @Column(name = "Description")
     private String description;
     @Id

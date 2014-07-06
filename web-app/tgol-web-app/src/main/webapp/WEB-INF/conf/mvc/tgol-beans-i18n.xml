@@ -11,74 +11,75 @@
     <!--
     Internationalization beans
     -->
-    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="defaultEncoding" value="UTF-8"/>
         <property name="basenames">
             <list>
                 
                 <!--accessiweb2.2 i18n files -->
-                <value>i18n/referential-aw22-I18N</value>
-                <value>i18n/theme-aw22-I18N</value>
-                <value>i18n/criterion-aw22-I18N</value>
-                <value>i18n/rule-aw22-I18N</value>
-                <value>i18n/rule-remark-aw22-I18N</value>
+                <value>classpath:i18n/referential-aw22-I18N</value>
+                <value>classpath:i18n/theme-aw22-I18N</value>
+                <value>classpath:i18n/criterion-aw22-I18N</value>
+                <value>classpath:i18n/rule-aw22-I18N</value>
+                <value>classpath:i18n/rule-remark-aw22-I18N</value>
                 
                 <!--rgaa2.2 i18n files -->
-                <value>i18n/referential-rgaa22-I18N</value>
-                <value>i18n/theme-rgaa22-I18N</value>
-                <value>i18n/criterion-rgaa22-I18N</value>
-                <value>i18n/rule-rgaa22-I18N</value>
-                <value>i18n/rule-remark-rgaa22-I18N</value>
+                <value>classpath:i18n/referential-rgaa22-I18N</value>
+                <value>classpath:i18n/theme-rgaa22-I18N</value>
+                <value>classpath:i18n/criterion-rgaa22-I18N</value>
+                <value>classpath:i18n/rule-rgaa22-I18N</value>
+                <value>classpath:i18n/rule-remark-rgaa22-I18N</value>
                 
                 <!--rules-commons i18n files -->
-                <value>i18n/evidence-elements-I18N</value>
-                <value>i18n/rule-remark-I18N</value>
+                <value>classpath:i18n/evidence-elements-I18N</value>
+                <value>classpath:i18n/rule-remark-I18N</value>
                 
                 <!--web-app i18n files -->
-                <value>i18n/access-denied-page-I18N</value>
-                <value>i18n/account-settings-page-I18N</value>
-                <value>i18n/adapting-error-page-I18N</value>
-                <value>i18n/add-contract-I18N</value>
-                <value>i18n/add-user-I18N</value>
-                <value>i18n/admin-I18N</value>
-                <value>i18n/audit-in-progress-page-I18N</value>
-                <value>i18n/audit-set-up-I18N</value>
-                <value>i18n/change-password-page-I18N</value>
-                <value>i18n/contract-page-I18N</value>
-                <value>i18n/delete-audits-I18N</value>
-                <value>i18n/delete-contract-I18N</value>
-                <value>i18n/delete-user-I18N</value>
-                <value>i18n/edit-contract-I18N</value>
-                <value>i18n/edit-user-I18N</value>
-                <value>i18n/export-audit-format-error-page-I18N</value>
-                <value>i18n/failed-test-list-I18N</value>
-                <value>i18n/footer-I18N</value>
-                <value>i18n/forgotten-password-page-I18N</value>
-                <value>i18n/forgotten-password-confirmation-page-I18N</value>
-                <value>i18n/graph-I18N</value>
-                <value>i18n/greedy-audit-I18N</value>
-                <value>i18n/home-page-I18N</value>
-                <value>i18n/loading-error-page-I18N</value>
-                <value>i18n/login-page-I18N</value>
-                <value>i18n/manage-contracts-I18N</value>
-                <value>i18n/mass-audit-set-up-I18N</value>
-                <value>i18n/max-file-size-error-page-I18N</value>
-                <value>i18n/no-demo-available-I18N</value>
-                <value>i18n/oups-page-I18N</value>
-                <value>i18n/page-list-page-I18N</value>
-                <value>i18n/parameters-I18N</value>
-                <value>i18n/quota-by-ip-exceeded-page-I18N</value>
-                <value>i18n/quota-exceeded-page-I18N</value>
-                <value>i18n/result-page-I18N</value>
-                <value>i18n/result-page-evidence-element-I18N</value>
-                <value>i18n/rule-error-I18N</value>
-                <value>i18n/rule-result-I18N</value>
-                <value>i18n/scenario-management-I18N</value>
-                <value>i18n/sign-up-page-I18N</value>
-                <value>i18n/sign-up-confirmation-page-I18N</value>
-                <value>i18n/sort-contract-console-I18N</value>
-                <value>i18n/source-code-page-I18N</value>
-                <value>i18n/synthesis-site-page-I18N</value>
-                <value>i18n/test-weight-I18N</value>
+                <value>classpath:i18n/access-denied-page-I18N</value>
+                <value>classpath:i18n/account-settings-page-I18N</value>
+                <value>classpath:i18n/adapting-error-page-I18N</value>
+                <value>classpath:i18n/add-contract-I18N</value>
+                <value>classpath:i18n/add-user-I18N</value>
+                <value>classpath:i18n/admin-I18N</value>
+                <value>classpath:i18n/audit-in-progress-page-I18N</value>
+                <value>classpath:i18n/audit-set-up-I18N</value>
+                <value>classpath:i18n/change-password-page-I18N</value>
+                <value>classpath:i18n/contract-page-I18N</value>
+                <value>classpath:i18n/delete-audits-I18N</value>
+                <value>classpath:i18n/delete-contract-I18N</value>
+                <value>classpath:i18n/delete-user-I18N</value>
+                <value>classpath:i18n/edit-contract-I18N</value>
+                <value>classpath:i18n/edit-user-I18N</value>
+                <value>classpath:i18n/export-audit-format-error-page-I18N</value>
+                <value>classpath:i18n/failed-test-list-I18N</value>
+                <value>classpath:i18n/footer-I18N</value>
+                <value>classpath:i18n/forgotten-password-page-I18N</value>
+                <value>classpath:i18n/forgotten-password-confirmation-page-I18N</value>
+                <value>classpath:i18n/graph-I18N</value>
+                <value>classpath:i18n/greedy-audit-I18N</value>
+                <value>classpath:i18n/home-page-I18N</value>
+                <value>classpath:i18n/loading-error-page-I18N</value>
+                <value>classpath:i18n/login-page-I18N</value>
+                <value>classpath:i18n/manage-contracts-I18N</value>
+                <value>classpath:i18n/mass-audit-set-up-I18N</value>
+                <value>classpath:i18n/max-file-size-error-page-I18N</value>
+                <value>classpath:i18n/no-demo-available-I18N</value>
+                <value>classpath:i18n/oups-page-I18N</value>
+                <value>classpath:i18n/page-list-page-I18N</value>
+                <value>classpath:i18n/parameters-I18N</value>
+                <value>classpath:i18n/quota-by-ip-exceeded-page-I18N</value>
+                <value>classpath:i18n/quota-exceeded-page-I18N</value>
+                <value>classpath:i18n/result-page-I18N</value>
+                <value>classpath:i18n/result-page-evidence-element-I18N</value>
+                <value>classpath:i18n/rule-error-I18N</value>
+                <value>classpath:i18n/rule-result-I18N</value>
+                <value>classpath:i18n/scenario-management-I18N</value>
+                <value>classpath:i18n/sign-up-page-I18N</value>
+                <value>classpath:i18n/sign-up-confirmation-page-I18N</value>
+                <value>classpath:i18n/sort-contract-console-I18N</value>
+                <value>classpath:i18n/source-code-page-I18N</value>
+                <value>classpath:i18n/synthesis-site-page-I18N</value>
+                <value>classpath:i18n/test-weight-I18N</value>
 	    </list>
 	</property>
     </bean>

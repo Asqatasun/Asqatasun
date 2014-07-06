@@ -43,7 +43,7 @@ public class IdUnicityChecker extends ElementCheckerImpl {
      * The message code associated with a processRemark when an id is not unique
      * on the page
      */
-    private String messageCodeOnIdNotUnique;
+    private final String messageCodeOnIdNotUnique;
     
     /**
      * Default constructor 

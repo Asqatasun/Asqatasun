@@ -22,6 +22,7 @@
 package org.opens.tanaguru.rules.elementchecker.pertinence;
 
 import junit.framework.TestCase;
+import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.keystore.AttributeStore;
 import org.opens.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
@@ -34,6 +35,9 @@ import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
  */
 public class TextPertinenceCheckerTest extends TestCase {
     
+    private static final Logger LOGGER = 
+            Logger.getLogger(TextPertinenceCheckerTest.class);
+     
     public TextPertinenceCheckerTest(String testName) {
         super(testName);
     }
@@ -52,7 +56,7 @@ public class TextPertinenceCheckerTest extends TestCase {
      * Test of getTextElementBuilder method, of class TextPertinenceChecker.
      */
     public void testGetTextElementBuilder() {
-        System.out.println("getTextElementBuilder");
+        LOGGER.debug("getTextElementBuilder");
         TextPertinenceChecker instance = new TextPertinenceChecker( 
                 true,
                 new TextAttributeOfElementBuilder(AttributeStore.ALT_ATTR), 

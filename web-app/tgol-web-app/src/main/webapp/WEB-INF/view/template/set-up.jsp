@@ -25,7 +25,7 @@
             <c:if test="${action != 'site' && action != 'scenario'}">
             <div class="span16">
                 <div id="mandatory-elements-message" class="alert-message block-message warning">
-                    <spring:message code="sign-up.mandatoryElementsMessage"/>
+                    <fmt:message key="sign-up.mandatoryElementsMessage"/>
                 </div><!-- id="mandatory-elements-message" class="alert-message block-message warning"-->
             </div><!-- class="span16" -->
             </c:if>
@@ -50,19 +50,19 @@
                     <c:choose>
                         <c:when test="${action == 'page' && fn:length(auditSetUpCommand.urlList) == 1}">
                             <label id="label-url" for="urlList0">
-                                <span class="mandatory">* </span><spring:message code="auditSetUp.enterOneUrl"/>
+                                <span class="mandatory">* </span><fmt:message key="auditSetUp.enterOneUrl"/>
                             </label>
                             <div class="url-input input">
-                                <form:input path="urlList[0]" cssErrorClass="xxlarge error" cssClass="xxlarge" />
+                                <form:input path="urlList[0]" cssErrorClass="xxlarge error" cssClass="xxlarge" placeholder="http://www.domain.com"/>
                                 <form:errors path="urlList[0]" cssClass="alert-message error" />
                                 <span class="help-block">
-                                    <fmt:message key="required.mandatoryFieldHelpMsg"/>
+                                    <fmt:message key="required.mandatoryFieldHelpMsg"/> (http://www.domain.com)
                                 </span>
                             </div>
                         </c:when>
                         <c:when test="${action == 'page'}">
                         <fieldset>
-                            <legend><spring:message code="auditSetUp.enterUrl"/></legend>
+                            <legend><fmt:message key="auditSetUp.enterUrl"/></legend>
                             <c:forEach items="${auditSetUpCommand.urlList}" varStatus="pUrlIndex">
                                 <c:set var="urlListIndexError"><form:errors path="urlList[${pUrlIndex.index}]"/></c:set>
                                 <c:choose>
@@ -114,7 +114,7 @@
                         </c:when>
                         <c:when test="${action == 'upload'}">
                         <fieldset>
-                            <legend><spring:message code="auditSetUp.enterFile"/></legend>
+                            <legend><fmt:message key="auditSetUp.enterFile"/></legend>
                             <c:forEach items="${auditSetUpCommand.fileInputList}" varStatus="pFileInput">
                                 <c:set var="fileIndexError"><form:errors path="fileInputList[${pFileInput.index}]"/></c:set>
                                 <c:choose>
@@ -178,7 +178,7 @@
                             <fieldset>
                                 <legend><fmt:message key="level-parameters"/></legend>
                             <c:set var="fieldsetInfo" scope="page">
-                                <spring:message code="level-parameters-info"/>
+                                <fmt:message key="level-parameters-info"/>
                             </c:set>
                             <c:if test="${fieldsetInfo != ''}">
                                 <div class="alert-message block-message warning">
@@ -194,7 +194,7 @@
                                         <form:select id="${i18nKey}" path="level" cssErrorClass="xlarge error" cssClass="xlarge">
                                             <c:forEach items="${level.selectElementMap}" var="group">
                                                 <c:if test="${group.value[0].enabled}">
-                                                <optgroup label="<spring:message code="${group.key}-optgroup"/>">
+                                                <optgroup label="<fmt:message key="${group.key}-optgroup"/>">
                                                     <c:forEach items="${group.value}" var="level">
                                                     <c:choose>
                                                         <c:when test="${level.defaultElement == 'true'}">
@@ -204,7 +204,7 @@
                                                             <c:set var="selected" scope="page" value=""/>
                                                         </c:otherwise>
                                                     </c:choose>
-                                                    <option value="${level.value}" ${selected}><spring:message code="${level.i18nKey}"/> (<spring:message code="${group.key}-optgroup"/>)</option>
+                                                    <option value="${level.value}" ${selected}><fmt:message key="${level.i18nKey}"/> (<fmt:message key="${group.key}-optgroup"/>)</option>
                                                     </c:forEach><!-- for each element of a referentiel -->
                                                 </optgroup>
                                                 </c:if>
@@ -219,7 +219,7 @@
                             <fieldset>
                                 <legend><fmt:message key="${entry.key}"/></legend>
                                 <c:set var="fieldsetInfo" scope="page">
-                                    <spring:message code="${entry.key}-info"/>
+                                    <fmt:message key="${entry.key}-info"/>
                                 </c:set>
                                 <c:if test="${fieldsetInfo != ''}">
                                     <div class="alert-message block-message warning">
@@ -247,7 +247,7 @@
                                         <c:when test="${tg:instanceOf(parameter.formField, 'org.opens.tgol.form.SelectFormField')}">
                                             <form:select id="${i18nKey}" path="auditParameter[${code}]">
                                             <c:forEach items="${parameter.formField.selectElementMap}" var="group">
-                                            <optgroup label="<spring:message code="${group.key}"/>">
+                                            <optgroup label="<fmt:message key="${group.key}"/>">
                                                 <c:forEach items="${group.value}" var="level">
                                                 <c:choose>
                                                     <c:when test="${level.defaultElement == 'true'}">
@@ -265,7 +265,7 @@
                                                         <c:set var="disabled" scope="page" value=""/>
                                                     </c:otherwise>
                                                 </c:choose>
-                                                <option value="${level.value}" ${selected} ${disabled}><spring:message code="${level.i18nKey}"/></option>
+                                                <option value="${level.value}" ${selected} ${disabled}><fmt:message key="${level.i18nKey}"/></option>
                                                 </c:forEach><!-- for each element of a referentiel -->
                                             </optgroup>
                                             </c:forEach><!-- for each referentiel -->

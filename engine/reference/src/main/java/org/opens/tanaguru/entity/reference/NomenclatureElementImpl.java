@@ -55,27 +55,33 @@ public class NomenclatureElementImpl implements NomenclatureElement,
         this.label = value;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     @XmlTransient
     public Nomenclature getNomenclature() {
         return nomenclature;
     }
 
+    @Override
     public String getLabel() {
         return label;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
+    @Override
     public void setNomenclature(Nomenclature nomenclature) {
         this.nomenclature = (NomenclatureImpl) nomenclature;
     }
 
+    @Override
     public void setLabel(String value) {
         this.label = value;
     }

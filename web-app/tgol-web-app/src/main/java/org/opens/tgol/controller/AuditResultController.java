@@ -21,6 +21,8 @@
  */
 package org.opens.tgol.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -79,9 +81,9 @@ public class AuditResultController extends AuditDataHandlerController {
     private static final String CRITERION_RESULT_PAGE_KEY="criterion-result";
     private static final String REFERER_HEADER_KEY="referer";
 
-    List<FormFieldBuilder> sortFormFieldBuilderList;
+    private final List<FormFieldBuilder> sortFormFieldBuilderList = new ArrayList();
     public final void setFormFieldBuilderList(final List<FormFieldBuilder> formFieldBuilderList) {
-        this.sortFormFieldBuilderList = formFieldBuilderList;
+        this.sortFormFieldBuilderList.addAll(formFieldBuilderList);
     }
     
     /**
@@ -89,9 +91,7 @@ public class AuditResultController extends AuditDataHandlerController {
      * @param formFieldBuilder 
      */
     public final void addFormFieldBuilder(final FormFieldBuilder formFieldBuilder) {
-        if (sortFormFieldBuilderList != null) {
-            this.sortFormFieldBuilderList.add(formFieldBuilder);
-        }
+        this.sortFormFieldBuilderList.add(formFieldBuilder);
     }
 
     private ActionHandler actionHandler;
@@ -576,7 +576,7 @@ public class AuditResultController extends AuditDataHandlerController {
         
         if (StringUtils.equalsIgnoreCase(displayScope, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE)) {
             AuditResultSortCommand asuc = ((AuditResultSortCommand)model.asMap().get(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY));
-            
+
             model.addAttribute(TgolKeyStore.TEST_RESULT_LIST_KEY,
                 TestResultFactory.getInstance().getTestResultSortedByThemeMap(
                     page,

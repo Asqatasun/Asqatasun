@@ -64,7 +64,7 @@ public class AuditSynthesisController extends AuditDataHandlerController {
     public void setNbOfDisplayedFailedPages(int nbOfDisplayedFailedPages) {
         this.nbOfDisplayedFailedPages = nbOfDisplayedFailedPages;
     }
-    private List<String> authorizedScopeForSynthesis = new ArrayList<String>();
+    private List<String> authorizedScopeForSynthesis = new ArrayList<>();
 
     public void setAuthorizedScopeForSynthesis(List<String> authorizedScopeForSynthesis) {
         this.authorizedScopeForSynthesis = authorizedScopeForSynthesis;
@@ -79,7 +79,7 @@ public class AuditSynthesisController extends AuditDataHandlerController {
             return false;
         }
         String scope = getActDataService().getActFromAudit(audit).getScope().getCode().name();
-        return (authorizedScopeForSynthesis.contains(scope)) ? true : false;
+        return (authorizedScopeForSynthesis.contains(scope));
     }
 
     public AuditSynthesisController() {
@@ -88,8 +88,10 @@ public class AuditSynthesisController extends AuditDataHandlerController {
 
     /**
      *
+     * @param auditId
      * @param request
      * @param response
+     * @param model
      * @return
      */
     @RequestMapping(value = TgolKeyStore.AUDIT_SYNTHESIS_CONTRACT_URL, method = RequestMethod.GET)
@@ -127,8 +129,10 @@ public class AuditSynthesisController extends AuditDataHandlerController {
 
     /**
      *
+     * @param auditId
      * @param request
      * @param response
+     * @param model
      * @return
      */
     @RequestMapping(value = TgolKeyStore.FAILED_TEST_LIST_CONTRACT_URL, method = RequestMethod.GET)
@@ -188,7 +192,7 @@ public class AuditSynthesisController extends AuditDataHandlerController {
         addAuditStatisticsToModel(site, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE);
 
         Map<Theme, ResultCounter> top5SortedThemeMap =
-                new LinkedHashMap<Theme, ResultCounter>();
+                new LinkedHashMap<>();
         @SuppressWarnings("unchecked")
         Collection<FailedThemeInfo> tfiCollection =
                 (Collection<FailedThemeInfo>) getWebResourceDataService().
@@ -199,7 +203,6 @@ public class AuditSynthesisController extends AuditDataHandlerController {
             failedCounter.setFailedCount(tfi.getResultCounter().intValue());
             top5SortedThemeMap.put(AuditStatisticsFactory.getInstance().getTheme(tfi.getThemeId()), failedCounter);
         }
-
         model.addAttribute(
                 TgolKeyStore.AUDITED_PAGES_COUNT_KEY,
                 getWebResourceDataService().getWebResourceCountByAuditAndHttpStatusCode(

@@ -133,6 +133,18 @@ public interface AuditStatistics {
      * @param pageCounter
      */
     void setPageCounter(Integer pageCounter);
+    
+    /**
+     *
+     * @return
+     */
+    Integer getAuditedPageCounter();
+
+    /**
+     *
+     * @param auditedPageCounter
+     */
+    void setAuditedPageCounter(Integer auditedPageCounter);
 
     /**
      *

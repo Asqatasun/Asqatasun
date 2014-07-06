@@ -41,8 +41,7 @@
         <heritrixVersion>3.1.1</heritrixVersion>
         
         <hibernateGroupId>org.hibernate</hibernateGroupId>
-        <hibernateVersion>3.6.0.Final</hibernateVersion>
-        <hibernateJmxVersion>3.5.6-Final</hibernateJmxVersion>
+        <hibernateVersion>4.3.5.Final</hibernateVersion>
         
         <junitGroupId>junit</junitGroupId>
         <junitVersion>3.8.2</junitVersion>
@@ -59,8 +58,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
@@ -399,10 +398,15 @@
                 <scope>test</scope>
             </dependency>
 
-            <!-- hibernate dependencies -->
+            <!-- hibernate dependencies -->   
             <dependency>
                 <groupId>${hibernateGroupId}</groupId>
-                <artifactId>hibernate-core</artifactId>
+                <artifactId>hibernate-ehcache</artifactId>
+                <version>${hibernateVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>${hibernateGroupId}</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
                 <version>${hibernateVersion}</version>
                 <exclusions>
                     <exclusion>
@@ -419,21 +423,6 @@
                 <groupId>${hibernateGroupId}</groupId>
                 <artifactId>hibernate-c3p0</artifactId>
                 <version>${hibernateVersion}</version>
-            </dependency>
-            <dependency>
-                <groupId>${hibernateGroupId}</groupId>
-                <artifactId>hibernate-ehcache</artifactId>
-                <version>${hibernateVersion}</version>
-            </dependency>
-            <dependency>
-                <groupId>${hibernateGroupId}</groupId>
-                <artifactId>hibernate-entitymanager</artifactId>
-                <version>${hibernateVersion}</version>
-            </dependency>
-            <dependency>
-                <groupId>${hibernateGroupId}</groupId>
-                <artifactId>hibernate-jmx</artifactId>
-                <version>${hibernateJmxVersion}</version>
             </dependency>
 
             <!-- javax dependencies -->
@@ -897,13 +886,13 @@
             <dependency>
                 <groupId>org.dbunit</groupId>
                 <artifactId>dbunit</artifactId>
-                <version>2.4.8</version>
+                <version>2.5.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.hsqldb</groupId>
                 <artifactId>hsqldb</artifactId>
-                <version>2.3.1</version>
+                <version>2.3.2</version>
                 <scope>test</scope>
             </dependency>
 

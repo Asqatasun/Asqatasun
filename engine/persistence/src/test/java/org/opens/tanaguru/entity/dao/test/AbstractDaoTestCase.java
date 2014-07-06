@@ -54,7 +54,7 @@ public abstract class AbstractDaoTestCase extends DBTestCase {
     private static final String SPRING_FILE_PATH =
             "src/test/resources/conf/context/unit-test-context.xml";
 
-    private String inputDataFilePath = "src/test/resources/dataSets/";
+    private final String inputDataFilePath = "src/test/resources/dataSets/";
     public String getInputDataFilePath() {
         return inputDataFilePath;
     }
@@ -109,6 +109,7 @@ public abstract class AbstractDaoTestCase extends DBTestCase {
 
     /**
      * Override method to set custom properties/features {@inheritDoc}
+     * @param config
      */
     @Override
     protected void setUpDatabaseConfig(DatabaseConfig config) {
@@ -118,10 +119,13 @@ public abstract class AbstractDaoTestCase extends DBTestCase {
 
     /**
      * Charge le jeu de données à partir d'un fichier XML d'import
+     * @return 
+     * @throws java.lang.Exception 
      */
     @Override
     protected IDataSet getDataSet() throws Exception {
         FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+        builder.setColumnSensing(true);
         ReplacementDataSet dataSet = new ReplacementDataSet(builder.build(new FileInputStream(
                 getInputDataFileName())));
         dataSet.addReplacementObject("[NULL]", null);

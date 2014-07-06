@@ -32,7 +32,11 @@ import org.opens.tanaguru.rules.elementchecker.NomenclatureBasedElementChecker;
 import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
+ * This class checks whether the text of an dom element doesn't only contains 
+ * non-alphanumerical characters. It is particularly used on text pertinence 
+ * check.
  * 
+ * @author jkowalczyk
  */
 public class TextOnlyContainsNonAlphanumericalCharactersChecker 
             extends NomenclatureBasedElementChecker {

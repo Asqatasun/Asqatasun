@@ -46,7 +46,7 @@ public class EvidenceImpl implements Evidence, Serializable {
     @Column(name = "Description")
     private String description;
     @OneToMany(mappedBy = "evidence", cascade = CascadeType.ALL)
-    private Set<EvidenceElementImpl> elementList = new HashSet<EvidenceElementImpl>();
+    private final Set<EvidenceElementImpl> elementList = new HashSet<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Evidence")
@@ -110,7 +110,7 @@ public class EvidenceImpl implements Evidence, Serializable {
 
     @Override
     public Collection<String> getValueList() {
-        Collection<String> values = new HashSet<String>();
+        Collection<String> values = new HashSet<>();
         for (EvidenceElement element : elementList) {
             values.add(element.getValue());
         }

@@ -63,7 +63,7 @@ public class ContrastChecker extends ElementCheckerImpl {
     private static final int BOLD_FONT_SIZE_THRESHOLD = 14;
     
     /** The contrast ratio */
-    private Float contrastRatio;
+    private final Float contrastRatio;
     
     /** is lower test */
     private boolean isLowerTest = true;
@@ -75,10 +75,10 @@ public class ContrastChecker extends ElementCheckerImpl {
     private boolean checkNormalText = true;
 
     /** */
-    private boolean createSourceCodeRemarkForNmi = false;
+    private final boolean createSourceCodeRemarkForNmi = false;
     
     /** */
-    private Set<String> notTreatedBackgroundColorValue = new HashSet<String>();
+    private final Set<String> notTreatedBackgroundColorValue = new HashSet<>();
     
     /** */
     private boolean alternativeContrastMechanismPresent = false;
@@ -93,6 +93,8 @@ public class ContrastChecker extends ElementCheckerImpl {
      * Constructor 
      * 
      * @param contrastRatio
+     * @param checkNormalText
+     * @param checkBoldText
      * @param isLowerTest 
      */
     public ContrastChecker(
@@ -242,7 +244,7 @@ public class ContrastChecker extends ElementCheckerImpl {
 
         Element element = DomElementExtractor.getElementFromDomElement(domElement, sspHandler);
         if (element != null) {
-            Collection<EvidenceElement> eeList = new LinkedList<EvidenceElement>();
+            Collection<EvidenceElement> eeList = new LinkedList<>();
             eeList.add(getEvidenceElement(FG_COLOR_EE, domElement.getFgColor()));
             eeList.add(getEvidenceElement(BG_COLOR_EE, domElement.getBgColor()));
             eeList.add(getEvidenceElement(CONTRAST_EE, contrast));
@@ -274,7 +276,7 @@ public class ContrastChecker extends ElementCheckerImpl {
         if (createSourceCodeRemarkForNmi) {
             Element el = DomElementExtractor.getElementFromDomElement(element, sspHandler);
             if (el != null) {
-                Collection<EvidenceElement> eeList = new ArrayList<EvidenceElement>();
+                Collection<EvidenceElement> eeList = new ArrayList<>();
                 eeList.add(getEvidenceElement(FG_COLOR_EE, element.getFgColor()));
                 eeList.add(getEvidenceElement(BG_COLOR_EE, element.getBgColor()));
                 addSourceCodeRemark(
@@ -284,7 +286,7 @@ public class ContrastChecker extends ElementCheckerImpl {
                         eeList);
             }
         } else if (!notTreatedBackgroundColorValue.contains(element.getBgColor())) {
-            List<EvidenceElement> eeList = new ArrayList<EvidenceElement>();
+            List<EvidenceElement> eeList = new ArrayList<>();
             eeList.add(getEvidenceElement(DEFAULT_EVIDENCE, element.getDisplayableBgColor()));
             addSourceCodeRemark(
                     TestSolution.NEED_MORE_INFO,

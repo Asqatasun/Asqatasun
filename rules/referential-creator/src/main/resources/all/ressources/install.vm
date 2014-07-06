@@ -1,0 +1,14 @@
+#!/bin/bash
+
+TOMCAT_HOST_PATH=/var/lib/tomcat7/webapps/tanaguru
+
+# Copy jar in classpath
+cp lib/*.jar $TOMCAT_HOST_PATH/WEB-INF/lib
+
+# Add spring conf for mvc part
+sed -i -e "s#</beans>#\t<import resource=\"classpath:conf/context/${referentiel.toLowerCase()}/web-app/${referentiel.toLowerCase()}-beans-webapp.xml\"/>\n\n</beans>#" \
+	    "$TOMCAT_HOST_PATH/WEB-INF/tgol-web-app-servlet.xml"
+
+# Add i18n files 
+sed -i -e "s#<!--rules-commons i18n#<!--${referentielFolder.toLowerCase()} i18n files -->\n\t\t<value>classpath:i18n/referential-${referentiel.toLowerCase()}-I18N</value>\n\t\t<value>classpath:i18n/theme-${referentiel.toLowerCase()}-I18N</value>\n\t\t<value>classpath:i18n/criterion-${referentiel.toLowerCase()}-I18N</value>\n\t\t<value>classpath:i18n/rule-${referentiel.toLowerCase()}-I18N</value>\n\n\t\t<!--rules-commons i18n#" \
+	    "$TOMCAT_HOST_PATH/WEB-INF/conf/mvc/tgol-beans-i18n.xml"

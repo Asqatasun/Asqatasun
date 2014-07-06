@@ -109,9 +109,9 @@ public abstract class AbstractLinkRuleImplementation
      * Set service to elementChecker depending on their nature.
      * @param elementChecker 
      */
-    protected void setServicesToChecker(ElementChecker ec) {
-        if (ec instanceof NomenclatureBasedElementChecker) {
-            ((NomenclatureBasedElementChecker)ec).
+    protected void setServicesToChecker(ElementChecker elementChecker) {
+        if (elementChecker instanceof NomenclatureBasedElementChecker) {
+            ((NomenclatureBasedElementChecker)elementChecker).
                 setNomenclatureLoaderService(nomenclatureLoaderService);
         }
     }

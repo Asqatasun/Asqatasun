@@ -1,8 +1,8 @@
-<!DOCTYPE dataset SYSTEM "src/test/resources/dataSets/test.dtd">
+<?xml version='1.0' encoding='UTF-8'?>
 <dataset>
     
-    <REFERENCE Id_Reference="1" Cd_Reference="01" Description="" Label="Ref 1.0" Rank="1" Url="http://www.mock-ref1.org/"/>
-    <REFERENCE Id_Reference="2" Cd_Reference="02" Description="" Label="Ref 2.0" Rank="2" Url="http://www.mock-ref2.org/"/>
+    <REFERENCE Id_Reference="1" Cd_Reference="01" Description="Reference 1.0" Label="Ref 1.0" Rank="1" Url="http://www.mock-ref1.org/"/>
+    <REFERENCE Id_Reference="2" Cd_Reference="02" Description="Reference 2.0" Label="Ref 2.0" Rank="2" Url="http://www.mock-ref2.org/"/>
 
     <THEME Id_Theme="1" Cd_Theme="01" Label="Theme1" Rank="1"/>
     <THEME Id_Theme="2" Cd_Theme="02" Label="Theme2" Rank="2"/>

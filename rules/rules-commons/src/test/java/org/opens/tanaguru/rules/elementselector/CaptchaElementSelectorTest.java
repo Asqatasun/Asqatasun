@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import junit.framework.TestCase;
+import org.apache.log4j.Logger;
 import org.easymock.EasyMock;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -40,6 +41,9 @@ import org.opens.tanaguru.rules.keystore.HtmlElementStore;
  * @author jkowalczyk
  */
 public class CaptchaElementSelectorTest extends TestCase{
+    
+    private static final Logger LOGGER = 
+            Logger.getLogger(CaptchaElementSelectorTest.class);
     
     private SSP ssp;
     private SSPHandler sspHandler;
@@ -59,7 +63,7 @@ public class CaptchaElementSelectorTest extends TestCase{
      * Test of selectElements method, of class CaptchaElementSelector.
      */
     public void testSelectElementsAttrElement() {
-        System.out.println("selectElementsAttrElement");
+        LOGGER.debug("selectElementsAttrElement");
         Document doc = null;
         try {
              doc = Jsoup.parse(new File("src/test/resources/captcha/captcha1.html"), 
@@ -86,7 +90,7 @@ public class CaptchaElementSelectorTest extends TestCase{
      * Test of selectElements method, of class CaptchaElementSelector.
      */
     public void testSelectElementsTextSibling1() {
-        System.out.println("selectElementsTextSibling1");
+        LOGGER.debug("selectElementsTextSibling1");
         Document doc = null;
         try {
              doc = Jsoup.parse(new File("src/test/resources/captcha/captcha2.html"), 
@@ -113,7 +117,7 @@ public class CaptchaElementSelectorTest extends TestCase{
      * Test of selectElements method, of class CaptchaElementSelector.
      */
     public void testSelectElementsTextSibling2() {
-        System.out.println("selectElementsTextSibling2");
+        LOGGER.debug("selectElementsTextSibling2");
         Document doc = null;
         try {
              doc = Jsoup.parse(new File("src/test/resources/captcha/captcha3.html"), 
@@ -140,7 +144,7 @@ public class CaptchaElementSelectorTest extends TestCase{
      * Test of selectElements method, of class CaptchaElementSelector.
      */
     public void testSelectElementsTextParent() {
-        System.out.println("selectElementsTextParent");
+        LOGGER.debug("selectElementsTextParent");
         Document doc = null;
         try {
              doc = Jsoup.parse(new File("src/test/resources/captcha/captcha4.html"), 
@@ -167,7 +171,7 @@ public class CaptchaElementSelectorTest extends TestCase{
      * Test of selectElements method, of class CaptchaElementSelector.
      */
     public void testSelectElementsAttrParent() {
-        System.out.println("selectElementsAttrParent");
+        LOGGER.debug("selectElementsAttrParent");
         Document doc = null;
         try {
              doc = Jsoup.parse(new File("src/test/resources/captcha/captcha5.html"), 
@@ -194,7 +198,7 @@ public class CaptchaElementSelectorTest extends TestCase{
      * Test of selectElements method, of class CaptchaElementSelector.
      */
     public void testNoCaptcha1() {
-        System.out.println("noCaptcha1");
+        LOGGER.debug("noCaptcha1");
         Document doc = null;
         try {
              doc = Jsoup.parse(new File("src/test/resources/captcha/no-captcha1.html"), 
@@ -219,7 +223,7 @@ public class CaptchaElementSelectorTest extends TestCase{
      * Test of selectElements method, of class CaptchaElementSelector.
      */
     public void testNoCaptcha2() {
-        System.out.println("noCaptcha1");
+        LOGGER.debug("noCaptcha1");
         Document doc = null;
         try {
              doc = Jsoup.parse(new File("src/test/resources/captcha/no-captcha2.html"), 
@@ -244,7 +248,7 @@ public class CaptchaElementSelectorTest extends TestCase{
      * Test of selectElements method, of class CaptchaElementSelector.
      */
     public void testEmptyPreSelection() {
-        System.out.println("EmptyPreSelection");
+        LOGGER.debug("EmptyPreSelection");
         Document doc = null;
         try {
              doc = Jsoup.parse(new File("src/test/resources/captcha/captcha1.html"), 

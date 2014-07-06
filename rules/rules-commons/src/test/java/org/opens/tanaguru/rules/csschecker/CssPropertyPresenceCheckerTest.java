@@ -30,11 +30,10 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import junit.framework.TestCase;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.easymock.EasyMock;
 import static org.easymock.EasyMock.*;
 import org.opens.tanaguru.contentadapter.css.CSSParserExceptionHandlerImpl;
@@ -53,11 +52,14 @@ import org.opens.tanaguru.service.ProcessRemarkService;
  */
 public class CssPropertyPresenceCheckerTest extends TestCase {
     
+    private static final Logger LOGGER = 
+            Logger.getLogger(CssPropertyPresenceCheckerTest.class);
+    
     private TestSolutionHandler mockTestSolutionHandler;
     private SSPHandler mockSSPHandler;
     private ProcessRemarkService mockProcessRemarkService;
     private StylesheetContent stylesheetContent;
-    private String contentAttributeDectected = "mockDetectionMessage";
+    private final String contentAttributeDectected = "mockDetectionMessage";
     
     public CssPropertyPresenceCheckerTest(String testName) {
         super(testName);
@@ -85,7 +87,7 @@ public class CssPropertyPresenceCheckerTest extends TestCase {
      * Test of check method, of class CssPropertyPresenceChecker.
      */
     public void testCheckButNotFound() {
-        System.out.println("check but not found");
+        LOGGER.debug("check but not found");
         initCheckerAndLaunch("src/test/resources/css/test1.css", null, TestSolution.NOT_APPLICABLE, null);
     }
     
@@ -93,7 +95,7 @@ public class CssPropertyPresenceCheckerTest extends TestCase {
      * Test of check method, of class CssPropertyPresenceChecker.
      */
     public void testCheckFoundButEmpty() {
-        System.out.println("check found but empty");
+        LOGGER.debug("check found but empty");
         initCheckerAndLaunch("src/test/resources/css/test2.css", null,TestSolution.PASSED, null);
     }
     
@@ -101,7 +103,7 @@ public class CssPropertyPresenceCheckerTest extends TestCase {
      * Test of check method, of class CssPropertyPresenceChecker.
      */
     public void testCheckFoundWithResultAsNMI() {
-        System.out.println("check found with result as nmi");
+        LOGGER.debug("check found with result as nmi");
         initCheckerAndLaunch("src/test/resources/css/test3.css", null,TestSolution.NEED_MORE_INFO, ".selector");
     }
     
@@ -109,7 +111,7 @@ public class CssPropertyPresenceCheckerTest extends TestCase {
      * Test of check method, of class CssPropertyPresenceChecker.
      */
     public void testCheckFoundWithResultAsFailed() {
-        System.out.println("check found with result as failed");
+        LOGGER.debug("check found with result as failed");
         initCheckerAndLaunch("src/test/resources/css/test3.css", null,TestSolution.FAILED, ".selector");
     }
     
@@ -117,7 +119,7 @@ public class CssPropertyPresenceCheckerTest extends TestCase {
      * Test of check method, of class CssPropertyPresenceChecker.
      */
     public void testCheckNotFoundWithPseudoSelectorAndWithResultAsNMI() {
-        System.out.println("check not found with pseudoSelector");
+        LOGGER.debug("check not found with pseudoSelector");
         String[] pseudoSelectors = {":before", ":after"};
         initCheckerAndLaunch("src/test/resources/css/test3.css", pseudoSelectors, TestSolution.NOT_APPLICABLE, null);
     }
@@ -126,7 +128,7 @@ public class CssPropertyPresenceCheckerTest extends TestCase {
      * Test of check method, of class CssPropertyPresenceChecker.
      */
     public void testCheckFoundWithPseudoSelectorAndWithResultAsNMI() {
-        System.out.println("check found with pseudoSelector result as nmi");
+        LOGGER.debug("check found with pseudoSelector result as nmi");
         String[] pseudoSelectors = {":before", ":after"};
         initCheckerAndLaunch("src/test/resources/css/test4.css", pseudoSelectors, TestSolution.NEED_MORE_INFO, ".selector:before");
     }
@@ -135,7 +137,7 @@ public class CssPropertyPresenceCheckerTest extends TestCase {
      * Test of check method, of class CssPropertyPresenceChecker.
      */
     public void testCheckFoundWithPseudoSelectorAndWithResultAsFailed() {
-        System.out.println("check found with pseudoSelector and result as failed");
+        LOGGER.debug("check found with pseudoSelector and result as failed");
         String[] pseudoSelectors = {":before", ":after"};
         initCheckerAndLaunch("src/test/resources/css/test5.css", pseudoSelectors, TestSolution.FAILED, ".selector:after");
     }
@@ -162,9 +164,7 @@ public class CssPropertyPresenceCheckerTest extends TestCase {
                 EvidenceElement eElement2 = createMock(EvidenceElement.class);
                 expect(mockProcessRemarkService.getEvidenceElement(EvidenceStore.CSS_SELECTOR_EE, selector)).andReturn(eElement1);
                 expect(mockProcessRemarkService.getEvidenceElement(EvidenceStore.CSS_FILENAME_EE, styleSheetName)).andReturn(eElement2);
-                Collection<EvidenceElement> eeList = new ArrayList<EvidenceElement>();
-                eeList.add(eElement1);
-                eeList.add(eElement2);
+
                 mockProcessRemarkService.addSourceCodeRemark(
                         resultOnDetection, 
                         "content attribute not empty", 
@@ -184,7 +184,7 @@ public class CssPropertyPresenceCheckerTest extends TestCase {
             
             Collection<String> pseudoSelectorList;
             if (pseudoSelectors == null) {
-                pseudoSelectorList = new ArrayList<String>();
+                pseudoSelectorList = new ArrayList<>();
             } else {
                 pseudoSelectorList = Arrays.asList(pseudoSelectors);
             }
@@ -204,7 +204,7 @@ public class CssPropertyPresenceCheckerTest extends TestCase {
                     mockTestSolutionHandler);
             
         } catch (IOException ex) {
-            Logger.getLogger(CssPropertyPresenceCheckerTest.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.warn(ex);
         }
     }
 }

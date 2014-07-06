@@ -34,5 +34,13 @@ public class KrashAuditException extends RuntimeException{
     public KrashAuditException() {
         super();
     }
+    
+    /**
+     * Constructor
+     * @param exception
+     */
+    public KrashAuditException(Exception exception) {
+        super(exception);
+    }
 
 }

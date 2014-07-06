@@ -52,21 +52,21 @@ public class Rgaa22Rule04071Test extends Rgaa22RuleImplementationTestCase {
     protected void setUpWebResourceMap() {
         getWebResourceMap().put("RGAA22.Test.4.7-3NMI-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04071/RGAA22.Test.4.7-3NMI-01.html"));
+                getTestcasesFilePath() + "rgaa22/Rgaa22Rule04071/RGAA22.Test.4.7-3NMI-01.html"));
         getWebResourceMap().put("RGAA22.Test.4.7-3NMI-02",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04071/RGAA22.Test.4.7-3NMI-02.html"));
+                getTestcasesFilePath() + "rgaa22/Rgaa22Rule04071/RGAA22.Test.4.7-3NMI-02.html"));
         addParameterToParameterMap("RGAA22.Test.4.7-3NMI-02", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "id-informative-image"));
         addParameterToParameterMap("RGAA22.Test.4.7-3NMI-02", createParameter("Rules", "DECORATIVE_IMAGE_MARKER", "id-decorative-image"));
         getWebResourceMap().put("RGAA22.Test.4.7-4NA-01",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "RGAA22/Rgaa22Rule04071/RGAA22.Test.4.7-4NA-01.html"));
+              getTestcasesFilePath() + "rgaa22/Rgaa22Rule04071/RGAA22.Test.4.7-4NA-01.html"));
         getWebResourceMap().put("RGAA22.Test.4.7-4NA-02",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "RGAA22/Rgaa22Rule04071/RGAA22.Test.4.7-4NA-02.html"));
+              getTestcasesFilePath() + "rgaa22/Rgaa22Rule04071/RGAA22.Test.4.7-4NA-02.html"));
         getWebResourceMap().put("RGAA22.Test.4.7-4NA-03",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "RGAA22/Rgaa22Rule04071/RGAA22.Test.4.7-4NA-03.html"));
+              getTestcasesFilePath() + "rgaa22/Rgaa22Rule04071/RGAA22.Test.4.7-4NA-03.html"));
         addParameterToParameterMap("RGAA22.Test.4.7-4NA-03", createParameter("Rules", "DECORATIVE_IMAGE_MARKER", "class-decorative-image"));
     }
 

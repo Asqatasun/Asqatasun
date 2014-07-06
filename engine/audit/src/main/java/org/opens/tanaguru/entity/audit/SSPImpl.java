@@ -140,7 +140,7 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
     @Override
     public Collection<RelatedContent> getRelatedContentSet() {
         if (relatedContentSet == null) {
-            relatedContentSet = new HashSet<RelatedContentImpl>();
+            relatedContentSet = new HashSet<>();
         }
         return (Collection)relatedContentSet;
     }
@@ -148,7 +148,7 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
     @Override
     public void addAllRelationContent(Collection<RelatedContent> contentList) {
         if (relatedContentSet == null) {
-            relatedContentSet = new HashSet<RelatedContentImpl>();
+            relatedContentSet = new HashSet<>();
         }
         for (RelatedContent content : contentList) {
             if (content instanceof RelatedContentImpl) {
@@ -160,7 +160,7 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
     @Override
     public void addRelatedContent(RelatedContent content) {
         if (relatedContentSet == null) {
-            relatedContentSet = new HashSet<RelatedContentImpl>();
+            relatedContentSet = new HashSet<>();
         }
         this.relatedContentSet.add((RelatedContentImpl) content);
     }

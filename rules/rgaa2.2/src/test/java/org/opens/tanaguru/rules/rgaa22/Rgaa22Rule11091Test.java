@@ -58,46 +58,46 @@ public class Rgaa22Rule11091Test extends Rgaa22RuleImplementationTestCase {
     protected void setUpWebResourceMap() {
         getWebResourceMap().put("Rgaa22.Test.11.9-2Failed-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule11091/RGAA22.Test.11.9-2Failed-01.html"));
+                getTestcasesFilePath() + "rgaa22/Rgaa22Rule11091/RGAA22.Test.11.9-2Failed-01.html"));
         addParameterToParameterMap("Rgaa22.Test.11.9-2Failed-01", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
         getWebResourceMap().put("Rgaa22.Test.11.9-2Failed-02",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule11091/RGAA22.Test.11.9-2Failed-02.html"));
+                getTestcasesFilePath() + "rgaa22/Rgaa22Rule11091/RGAA22.Test.11.9-2Failed-02.html"));
         addParameterToParameterMap("Rgaa22.Test.11.9-2Failed-02", createParameter("Rules", "DATA_TABLE_MARKER", "id-data-table"));
         getWebResourceMap().put("Rgaa22.Test.11.9-2Failed-03",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule11091/RGAA22.Test.11.9-2Failed-03.html"));
+                getTestcasesFilePath() + "rgaa22/Rgaa22Rule11091/RGAA22.Test.11.9-2Failed-03.html"));
         addParameterToParameterMap("Rgaa22.Test.11.9-2Failed-03", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
         getWebResourceMap().put("Rgaa22.Test.11.9-3NMI-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule11091/RGAA22.Test.11.9-3NMI-01.html"));
+                getTestcasesFilePath() + "rgaa22/Rgaa22Rule11091/RGAA22.Test.11.9-3NMI-01.html"));
         getWebResourceMap().put("Rgaa22.Test.11.9-3NMI-02",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule11091/RGAA22.Test.11.9-3NMI-02.html"));
+                getTestcasesFilePath() + "rgaa22/Rgaa22Rule11091/RGAA22.Test.11.9-3NMI-02.html"));
         addParameterToParameterMap("Rgaa22.Test.11.9-3NMI-02", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
         getWebResourceMap().put("Rgaa22.Test.11.9-3NMI-03",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule11091/RGAA22.Test.11.9-3NMI-03.html"));
+                getTestcasesFilePath() + "rgaa22/Rgaa22Rule11091/RGAA22.Test.11.9-3NMI-03.html"));
         getWebResourceMap().put("Rgaa22.Test.11.9-3NMI-04",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule11091/RGAA22.Test.11.9-3NMI-04.html"));
+                getTestcasesFilePath() + "rgaa22/Rgaa22Rule11091/RGAA22.Test.11.9-3NMI-04.html"));
         getWebResourceMap().put("Rgaa22.Test.11.9-3NMI-05",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule11091/RGAA22.Test.11.9-3NMI-05.html"));
+                getTestcasesFilePath() + "rgaa22/Rgaa22Rule11091/RGAA22.Test.11.9-3NMI-05.html"));
         addParameterToParameterMap("Rgaa22.Test.11.9-3NMI-05", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
         getWebResourceMap().put("Rgaa22.Test.11.9-4NA-01",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "RGAA22/Rgaa22Rule11091/RGAA22.Test.11.9-4NA-01.html"));
+              getTestcasesFilePath() + "rgaa22/Rgaa22Rule11091/RGAA22.Test.11.9-4NA-01.html"));
         getWebResourceMap().put("Rgaa22.Test.11.9-4NA-02",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "RGAA22/Rgaa22Rule11091/RGAA22.Test.11.9-4NA-02.html"));
+              getTestcasesFilePath() + "rgaa22/Rgaa22Rule11091/RGAA22.Test.11.9-4NA-02.html"));
         getWebResourceMap().put("Rgaa22.Test.11.9-4NA-03",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "RGAA22/Rgaa22Rule11091/RGAA22.Test.11.9-4NA-03.html"));
+              getTestcasesFilePath() + "rgaa22/Rgaa22Rule11091/RGAA22.Test.11.9-4NA-03.html"));
         addParameterToParameterMap("Rgaa22.Test.11.9-4NA-03", createParameter("Rules", "PRESENTATION_TABLE_MARKER", "class-presentation-table"));
         getWebResourceMap().put("Rgaa22.Test.11.9-4NA-04",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "RGAA22/Rgaa22Rule11091/RGAA22.Test.11.9-4NA-04.html"));
+              getTestcasesFilePath() + "rgaa22/Rgaa22Rule11091/RGAA22.Test.11.9-4NA-04.html"));
         addParameterToParameterMap("Rgaa22.Test.11.9-4NA-04", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
     }
 

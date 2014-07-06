@@ -26,7 +26,7 @@ import org.jsoup.nodes.Element;
 
 /**
  * This implementation of the {@link TextualElementBuilder} simply extracts the 
- * text of an element.
+ * text of an element and its children.
  */
 public class SimpleTextElementBuilder implements TextElementBuilder{
 

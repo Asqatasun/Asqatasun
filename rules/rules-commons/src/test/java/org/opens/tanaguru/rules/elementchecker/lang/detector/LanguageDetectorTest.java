@@ -21,8 +21,8 @@
  */
 package org.opens.tanaguru.rules.elementchecker.lang.detector;
 
+import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
@@ -35,6 +35,8 @@ import org.jsoup.nodes.Document;
 public class LanguageDetectorTest extends TestCase {
     
     private static final Logger LOGGER = Logger.getLogger(LanguageDetectorTest.class);
+    private static final String PATH = "src/test/resources/langDetection/";
+    private static final String UTF_8 = "UTF-8";
     
     public LanguageDetectorTest(String testName) {
         super(testName);
@@ -51,7 +53,7 @@ public class LanguageDetectorTest extends TestCase {
     }
 
     public void testDetectLanguageWithCaseSensitiveText() {
-        System.out.println("detectLanguage With case sensitive text");
+        LOGGER.debug("detectLanguage With case sensitive text");
         LanguageDetector instance = LanguageDetector.getInstance();
         LOGGER.debug("start detection");
         assertEquals("fr",instance.detectLanguage("34808 : CABLE DE COMMANDE DE BOITE A VITESSE RENAULT KANGOO 32.11 € TTC 34808 : CABLE DE COMMANDE DE BOITE A VITESSE RENAULT KANGOO").getDetectedLanguage());
@@ -79,11 +81,11 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with af pages.
      */
     public void testDetectLanguageAf() {
-        System.out.println("detectLanguage Af");
+        LOGGER.debug("detectLanguage Af");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
-            doc = Jsoup.parse(new URL("https://af.wikipedia.org/wiki/Suider-Afrika"), 10000);
+            doc = Jsoup.parse(new File(PATH+"af.wikipedia.org-wiki-Suider-Afrika_20140701.html"), UTF_8);
             LOGGER.debug("start detection");
             assertEquals("af", instance.detectLanguage(doc.text()).getDetectedLanguage());
             assertEquals("af", instance.detectLanguage(doc.text().toLowerCase()).getDetectedLanguage());
@@ -100,11 +102,11 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with fr pages.
      */
     public void testDetectLanguageFr() {
-        System.out.println("detectLanguage fr");
+        LOGGER.debug("detectLanguage fr");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
-            doc = Jsoup.parse(new URL("http://fr.wikipedia.org/wiki/Accessibilit%C3%A9_du_web"), 10000);
+            doc = Jsoup.parse(new File(PATH+"fr.wikipedia.org-wiki-Accessibilite_du_web_20140701.html"), UTF_8);
             assertEquals("fr", instance.detectLanguage(doc.text()).getDetectedLanguage());
             assertEquals("fr", instance.detectLanguage(doc.text().toLowerCase()).getDetectedLanguage());
             assertEquals("fr", instance.detectLanguage(doc.text().toUpperCase()).getDetectedLanguage());
@@ -120,11 +122,11 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with de pages.
      */
     public void testDetectLanguageDe() {
-        System.out.println("detectLanguage De");
+        LOGGER.debug("detectLanguage De");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
-            doc = Jsoup.parse(new URL("http://de.wikipedia.org/wiki/Barrierefreies_Internet"), 10000);
+            doc = Jsoup.parse(new File(PATH+"de.wikipedia.org-wiki-Barrierefreies_Internet_20140701.html"), UTF_8);
             LOGGER.debug("start detection");
             assertEquals("de", instance.detectLanguage(doc.text()).getDetectedLanguage());
             assertEquals("de", instance.detectLanguage(doc.text().toLowerCase()).getDetectedLanguage());
@@ -141,11 +143,11 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with en pages.
      */
     public void testDetectLanguageEn() {
-        System.out.println("detectLanguage en");
+        LOGGER.debug("detectLanguage en");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
-            doc = Jsoup.parse(new URL("http://en.wikipedia.org/wiki/Web_accessibility"), 10000);
+            doc = Jsoup.parse(new File(PATH+"en.wikipedia.org-wiki-Web_accessibility_20140701.html"), UTF_8);
             LOGGER.debug("start detection");
             assertEquals("en", instance.detectLanguage(doc.text()).getDetectedLanguage());
             assertEquals("en", instance.detectLanguage(doc.text().toLowerCase()).getDetectedLanguage());
@@ -163,11 +165,11 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with es pages.
      */
     public void testDetectLanguageEs() {
-        System.out.println("detectLanguage es");
+        LOGGER.debug("detectLanguage es");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
-            doc = Jsoup.parse(new URL("http://es.wikipedia.org/wiki/Accesibilidad_web"), 10000);
+            doc = Jsoup.parse(new File(PATH+"es.wikipedia.org-wiki-Accesibilidad_web_20140701.html"), UTF_8);
             LOGGER.debug("start detection");
             assertEquals("es", instance.detectLanguage(doc.text()).getDetectedLanguage());
             assertEquals("es", instance.detectLanguage(doc.text().toLowerCase()).getDetectedLanguage());
@@ -184,11 +186,11 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with fa pages.
      */
     public void testDetectLanguageFa() {
-        System.out.println("detectLanguage fa");
+        LOGGER.debug("detectLanguage fa");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
-            doc = Jsoup.parse(new URL("http://fa.wikipedia.org/wiki/%D8%AF%D8%B3%D8%AA%D8%B1%D8%B3%DB%8C%E2%80%8C%D9%BE%D8%B0%DB%8C%D8%B1%DB%8C_%D9%88%D8%A8"), 10000);
+            doc = Jsoup.parse(new File(PATH+"fa.wikipedia.org-wiki_20140701.html"), UTF_8);
             LOGGER.debug("start detection");
             assertEquals("fa", instance.detectLanguage(doc.text()).getDetectedLanguage());
             assertEquals("fa", instance.detectLanguage(doc.text().toLowerCase()).getDetectedLanguage());
@@ -205,11 +207,11 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with he pages.
      */
     public void testDetectLanguageHe() {
-        System.out.println("detectLanguage he");
+        LOGGER.debug("detectLanguage he");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
-            doc = Jsoup.parse(new URL("http://he.wikipedia.org/wiki/%D7%A0%D7%92%D7%99%D7%A9%D7%95%D7%AA_%D7%90%D7%99%D7%A0%D7%98%D7%A8%D7%A0%D7%98"), 10000);
+            doc = Jsoup.parse(new File(PATH+"he.wikipedia.org-wiki_20140701.html"), UTF_8);
             LOGGER.debug("start detection");
             assertEquals("he", instance.detectLanguage(doc.text()).getDetectedLanguage());
             assertEquals("he", instance.detectLanguage(doc.text().toLowerCase()).getDetectedLanguage());
@@ -226,12 +228,12 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with ko pages.
      */
     public void testDetectLanguageKo() {
-        System.out.println("detectLanguage ko");
+        LOGGER.debug("detectLanguage ko");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
-            doc = Jsoup.parse(new URL("http://ko.wikipedia.org/wiki/%EC%9B%B9_%EC%A0%91%EA%B7%BC%EC%84%B1"), 10000);
-            System.out.println(doc.text());
+            doc = Jsoup.parse(new File(PATH+"ko.wikipedia.org-wiki_20140701.html"), UTF_8);
+            LOGGER.debug(doc.text());
             LOGGER.debug("start detection");
             assertEquals("ko", instance.detectLanguage(doc.text()).getDetectedLanguage());
             assertEquals("ko", instance.detectLanguage(doc.text().toLowerCase()).getDetectedLanguage());
@@ -248,11 +250,11 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with mk pages.
      */
     public void testDetectLanguageMk() {
-        System.out.println("detectLanguage mk");
+        LOGGER.debug("detectLanguage mk");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
-            doc = Jsoup.parse(new URL("http://mk.wikipedia.org/wiki/%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%BD%D0%B5%D1%82-%D0%BF%D1%80%D0%B8%D1%81%D1%82%D0%B0%D0%BF%D0%BD%D0%BE%D1%81%D1%82"), 10000);
+            doc = Jsoup.parse(new File(PATH+"mk.wikipedia.org-wiki_20140701.html"), UTF_8);
             LOGGER.debug("start detection");
             assertEquals("mk", instance.detectLanguage(doc.text()).getDetectedLanguage());
             assertEquals("mk", instance.detectLanguage(doc.text().toLowerCase()).getDetectedLanguage());
@@ -269,11 +271,11 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with pl pages.
      */
     public void testDetectLanguagePl() {
-        System.out.println("detectLanguage pl");
+        LOGGER.debug("detectLanguage pl");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
-            doc = Jsoup.parse(new URL("http://pl.wikipedia.org/wiki/Dost%C4%99pno%C5%9B%C4%87_%28WWW%29"), 10000);
+            doc = Jsoup.parse(new File(PATH+"pl.wikipedia.org-wiki_20140701.html"), UTF_8);
             LOGGER.debug("start detection");
             assertEquals("pl", instance.detectLanguage(doc.text()).getDetectedLanguage());
             assertEquals("pl", instance.detectLanguage(doc.text().toLowerCase()).getDetectedLanguage());
@@ -290,11 +292,11 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with pt pages.
      */
     public void testDetectLanguagePt() {
-        System.out.println("detectLanguage pt");
+        LOGGER.debug("detectLanguage pt");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
-            doc = Jsoup.parse(new URL("http://pt.wikipedia.org/wiki/Acessibilidade_Web"), 10000);
+            doc = Jsoup.parse(new File(PATH+"pt.wikipedia.org-wiki-Acessibilidade_Web_20140701.html"), UTF_8);
             LOGGER.debug("start detection");
             assertEquals("pt", instance.detectLanguage(doc.text()).getDetectedLanguage());
             assertEquals("pt", instance.detectLanguage(doc.text().toLowerCase()).getDetectedLanguage());
@@ -311,11 +313,11 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with th pages.
      */
     public void testDetectLanguageTh() {
-        System.out.println("detectLanguage th");
+        LOGGER.debug("detectLanguage th");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
-            doc = Jsoup.parse(new URL("http://th.wikipedia.org/wiki/%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%AA%E0%B8%B2%E0%B8%A1%E0%B8%B2%E0%B8%A3%E0%B8%96%E0%B9%83%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B8%96%E0%B8%B6%E0%B8%87%E0%B9%80%E0%B8%A7%E0%B9%87%E0%B8%9A"), 10000);
+            doc = Jsoup.parse(new File(PATH+"th.wikipedia.org-wiki_20140701.html"), UTF_8);
             LOGGER.debug("start detection");
             assertEquals("th", instance.detectLanguage(doc.text()).getDetectedLanguage());
             assertEquals("th", instance.detectLanguage(doc.text().toLowerCase()).getDetectedLanguage());
@@ -332,11 +334,11 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with vi pages.
      */
     public void testDetectLanguageVi() {
-        System.out.println("detectLanguage vi");
+        LOGGER.debug("detectLanguage vi");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
-            doc = Jsoup.parse(new URL("http://vi.wikipedia.org/wiki/C%C3%B4ng_ngh%E1%BB%87_th%C3%B4ng_tin_ti%E1%BA%BFp_c%E1%BA%ADn"), 10000);
+            doc = Jsoup.parse(new File(PATH+"vi.wikipedia.org-wiki_20140701.html"), UTF_8);
             LOGGER.debug("start detection");
             assertEquals("vi", instance.detectLanguage(doc.text()).getDetectedLanguage());
             assertEquals("vi", instance.detectLanguage(doc.text().toLowerCase()).getDetectedLanguage());
@@ -353,11 +355,11 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with zh pages.
      */
     public void testDetectLanguageZh() {
-        System.out.println("detectLanguage zh");
+        LOGGER.debug("detectLanguage zh");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
-            doc = Jsoup.parse(new URL("http://zh.wikipedia.org/wiki/%E7%B6%B2%E9%A0%81%E8%A6%AA%E5%92%8C%E5%8A%9B"), 10000);
+            doc = Jsoup.parse(new File(PATH+"zh.wikipedia.org-wiki_20140701.html"), UTF_8);
             LOGGER.debug("start detection");
             assertEquals("zh-tw", instance.detectLanguage(doc.text()).getDetectedLanguage());
             assertEquals("zh-tw", instance.detectLanguage(doc.text().toLowerCase()).getDetectedLanguage());
@@ -374,19 +376,19 @@ public class LanguageDetectorTest extends TestCase {
      * Test of detectLanguage method, of class LanguageDetector with ru pages.
      */
     public void testDetectLanguageRu() {
-        System.out.println("detectLanguage ru");
+        LOGGER.debug("detectLanguage ru");
         LanguageDetector instance = LanguageDetector.getInstance();
         Document doc;
         try {
-            doc = Jsoup.parse(new URL("http://timeliner.ru/"), 100000);
+            doc = Jsoup.parse(new File(PATH+"timeliner.ru_20140701.html"), UTF_8);
             LOGGER.debug("start detection");
             assertEquals("ru", instance.detectLanguage(doc.text()).getDetectedLanguage());
             LOGGER.debug("detection ended");
-            doc = Jsoup.parse(new URL("http://atrainings.ru/"), 100000);
+            doc = Jsoup.parse(new File(PATH+"atrainings.ru_20140701.html"), UTF_8);
             LOGGER.debug("start detection");
             assertEquals("ru", instance.detectLanguage(doc.text()).getDetectedLanguage());
             LOGGER.debug("detection ended");
-            doc = Jsoup.parse(new URL("http://alpidos.ru/home/"), 100000);
+            doc = Jsoup.parse(new File(PATH+"alpidos.ru-home_20140701.html"), UTF_8);
             LOGGER.debug("start detection");
             assertEquals("ru", instance.detectLanguage(doc.text()).getDetectedLanguage());
             LOGGER.debug("detection ended");

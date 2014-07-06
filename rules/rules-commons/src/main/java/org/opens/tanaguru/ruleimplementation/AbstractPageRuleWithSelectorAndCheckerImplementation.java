@@ -41,13 +41,13 @@ public abstract class AbstractPageRuleWithSelectorAndCheckerImplementation
         extends AbstractPageRuleMarkupImplementation {
 
     /** The elementChecker used by the rule */
-    private ElementChecker elementChecker;
+    private final ElementChecker elementChecker;
     public ElementChecker getElementChecker() {
         return elementChecker;
     }
     
     /** The elementSelector used by the rule */
-    private ElementSelector elementSelector;
+    private final ElementSelector elementSelector;
     public ElementSelector getElementSelector() {
         return elementSelector;
     }

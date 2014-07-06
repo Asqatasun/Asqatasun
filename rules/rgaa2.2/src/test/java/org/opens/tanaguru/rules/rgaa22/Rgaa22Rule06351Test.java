@@ -46,19 +46,19 @@ public class Rgaa22Rule06351Test extends Rgaa22RuleImplementationTestCase {
     protected void setUpWebResourceMap() {
 //        getWebResourceMap().put("Rgaa22.Test.6.35-1Passed-01",
 //              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "RGAA22/Rgaa22Rule06351/RGAA22.Test.6.35-1Passed-01.html"));
+//              getTestcasesFilePath() + "rgaa22/Rgaa22Rule06351/RGAA22.Test.6.35-1Passed-01.html"));
 //        getWebResourceMap().put("Rgaa22.Test.6.35-2Failed-01",
 //              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "RGAA22/Rgaa22Rule06351/RGAA22.Test.6.35-2Failed-01.html"));
+//              getTestcasesFilePath() + "rgaa22/Rgaa22Rule06351/RGAA22.Test.6.35-2Failed-01.html"));
 //        getWebResourceMap().put("Rgaa22.Test.6.35-3NMI-01",
 //                getWebResourceFactory().createPage(
-//                getTestcasesFilePath() + "RGAA22/Rgaa22Rule06351/RGAA22.Test.6.35-3NMI-01.html"));
+//                getTestcasesFilePath() + "rgaa22/Rgaa22Rule06351/RGAA22.Test.6.35-3NMI-01.html"));
 //        getWebResourceMap().put("Rgaa22.Test.6.35-4NA-01",
 //              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "RGAA22/Rgaa22Rule06351/RGAA22.Test.6.35-4NA-01.html"));
+//              getTestcasesFilePath() + "rgaa22/Rgaa22Rule06351/RGAA22.Test.6.35-4NA-01.html"));
         getWebResourceMap().put("Rgaa22.Test.6.35-5NT-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule06351/RGAA22.Test.6.35-5NT-01.html"));
+                getTestcasesFilePath() + "rgaa22/Rgaa22Rule06351/RGAA22.Test.6.35-5NT-01.html"));
     }
 
     @Override

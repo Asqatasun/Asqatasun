@@ -58,42 +58,52 @@ public class LevelImpl implements Level, Serializable {
         this.description = description;
     }
 
+    @Override
     public String getCode() {
         return code;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public String getLabel() {
         return label;
     }
 
+    @Override
     public int getRank() {
         return rank;
     }
 
+    @Override
     public void setCode(String code) {
         this.code = code;
     }
 
+    @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
+    @Override
     public void setLabel(String label) {
         this.label = label;
     }
 
+    @Override
     public void setRank(int rank) {
         this.rank = rank;
     }

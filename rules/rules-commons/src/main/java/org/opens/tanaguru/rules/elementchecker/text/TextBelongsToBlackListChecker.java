@@ -52,7 +52,7 @@ public class TextBelongsToBlackListChecker
     
     public Collection<Pattern> getBlackListPatternCollection() {
         if (blackListPatternCollection == null) {
-            blackListPatternCollection = new ArrayList<Pattern>();
+            blackListPatternCollection = new ArrayList<>();
             StringBuilder patternBuilder = new StringBuilder();
             for (String blacklistedText : getNomenclatureLoaderService().loadByCode(blackListNomName).getValueList()) {
                 patternBuilder.setLength(0);

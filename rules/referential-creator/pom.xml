@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.opens</groupId>
+        <artifactId>rules</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <groupId>org.opens</groupId>
+    <artifactId>referential-creator</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>referential-creator</name>
+    <url>http://maven.apache.org</url>
+    <!-- Here is what you need to set-uo before launching generation-->
+    <properties>
+        <generator.referentielName>Referentiel Name 1.0</generator.referentielName>
+        <generator.referentiel>referentielname1.0</generator.referentiel>
+        <generator.baseFolder>/home/$user/Tanaguru/rules/</generator.baseFolder>
+        <generator.dataFile>/home/$user/referentiel.csv</generator.dataFile>
+        <!--<generator.delimiter>ø</generator.delimiter>-->
+        <generator.refdescriptor>http://www.example.com/refential-descriptor.html</generator.refdescriptor>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.opens</groupId>
+                <artifactId>referential-creator-maven-plugin</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <id>generate</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <destinationFolder>${generator.baseFolder}/${generator.referentiel}</destinationFolder>
+                    <dataFile>${generator.dataFile}</dataFile>
+                    <delimiter>${generator.delimiter}</delimiter>
+                    <referentiel>${generator.referentiel}</referentiel>
+                    <referentielLabel>${generator.referentielName}</referentielLabel>
+                    <refDescriptor>${generator.refdescriptor}</refDescriptor>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

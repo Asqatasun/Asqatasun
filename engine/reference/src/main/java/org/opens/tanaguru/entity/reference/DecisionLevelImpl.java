@@ -26,7 +26,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * 
+ *
  * @author jkowalczyk
  */
 @Entity
@@ -34,50 +34,58 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class DecisionLevelImpl implements DecisionLevel, Serializable {
 
-	@Column(name = "Cd_Decision_Level")
-	private String code;
-	@Column(name = "Description")
-	private String description;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Id_Decision_Level")
-	private Long id;
-	@Column(name = "Label", nullable = false)
-	private String label;
+    @Column(name = "Cd_Decision_Level")
+    private String code;
+    @Column(name = "Description")
+    private String description;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Id_Decision_Level")
+    private Long id;
+    @Column(name = "Label", nullable = false)
+    private String label;
 
-	public DecisionLevelImpl() {
-		super();
-	}
+    public DecisionLevelImpl() {
+        super();
+    }
 
-	public String getCode() {
-		return code;
-	}
+    @Override
+    public String getCode() {
+        return code;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    @Override
+    public String getDescription() {
+        return description;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    @Override
+    public Long getId() {
+        return id;
+    }
 
-	public String getLabel() {
-		return label;
-	}
+    @Override
+    public String getLabel() {
+        return label;
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    @Override
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    @Override
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setLabel(String label) {
-		this.label = label;
-	}
+    @Override
+    public void setLabel(String label) {
+        this.label = label;
+    }
 }

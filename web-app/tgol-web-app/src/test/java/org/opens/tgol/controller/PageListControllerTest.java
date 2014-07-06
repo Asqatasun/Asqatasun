@@ -46,6 +46,7 @@ import org.opens.tgol.entity.decorator.tanaguru.subject.WebResourceDataServiceDe
 import org.opens.tgol.entity.service.contract.ActDataService;
 import org.opens.tgol.entity.service.user.UserDataService;
 import org.opens.tgol.entity.user.User;
+import org.opens.tgol.exception.AuditParameterMissingException;
 import org.opens.tgol.exception.ForbiddenPageException;
 import org.opens.tgol.exception.ForbiddenScopeException;
 import org.opens.tgol.presentation.factory.AuditStatisticsFactory;
@@ -174,11 +175,8 @@ public class PageListControllerTest extends TestCase {
                     new MockHttpServletResponse(), 
                     new ExtendedModelMap());
             assertTrue(false);
-        } catch (ForbiddenPageException fbe) {
-            assertTrue(
-                    StringUtils.equals(
-                    "org.opens.tgol.exception.AuditParameterMissingException", 
-                    fbe.getCause().toString()));
+        } catch (AuditParameterMissingException fbe) {
+            assertTrue(true);
         }
     } 
     
@@ -286,7 +284,7 @@ public class PageListControllerTest extends TestCase {
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.addParameter(TgolKeyStore.AUDIT_ID_KEY, String.valueOf(UNAUTHORIZED_SCOPE_AUDIT_ID));
         
-        List<String> authorizedScopeForPageList = new ArrayList<String>();
+        List<String> authorizedScopeForPageList = new ArrayList();
         authorizedScopeForPageList.add("DOMAIN");
         instance.setAuthorizedScopeForPageList(authorizedScopeForPageList);        
 
@@ -315,7 +313,7 @@ public class PageListControllerTest extends TestCase {
         setUpMockAuthenticationContext();
         setUpAuditStatisticsFactory();
         
-        List<String> authorizedScopeForPageList = new ArrayList<String>();
+        List<String> authorizedScopeForPageList = new ArrayList();
         authorizedScopeForPageList.add("DOMAIN");
         instance.setAuthorizedScopeForPageList(authorizedScopeForPageList);
         
@@ -389,7 +387,7 @@ public class PageListControllerTest extends TestCase {
     private void setUpMockAuthenticationContext(){
         // initialise the context with the user identified by the email 
         // "test1@test.com" seen as authenticated
-        Collection<GrantedAuthority> gac = new ArrayList<GrantedAuthority>();
+        Collection<GrantedAuthority> gac = new ArrayList();
         TgolUserDetails tud = new TgolUserDetails("test1@test.com", "", true, false, true, true, gac, mockUser);
         mockAuthentication = createMock(Authentication.class);
         SecurityContextImpl securityContextImpl = new SecurityContextImpl();
@@ -442,8 +440,6 @@ public class PageListControllerTest extends TestCase {
         mockGroupOfPagesScope = createMock(Scope.class);
         mockSiteScope = createMock(Scope.class);
         mockContract = createMock(Contract.class);
-        Collection<Contract> contractSet = new HashSet<Contract>();
-        contractSet.add(mockContract);
         
         mockActDataService = createMock(ActDataService.class);
         mockAct = createMock(Act.class);
@@ -520,8 +516,8 @@ public class PageListControllerTest extends TestCase {
             case SITE_AUDIT_GENERAL_PAGE_LIST_ID:
                 mockSite = createMock(Site.class);
                 expect(mockAuditDataService.read(Long.valueOf(getIdValue))).andReturn(mockAudit).anyTimes();
-                expect(mockAudit.getSubject()).andReturn(mockSite).times(2);
-                expect(mockAudit.getId()).andReturn(Long.valueOf(getIdValue)).times(4);
+                expect(mockAudit.getSubject()).andReturn(mockSite).anyTimes();
+                expect(mockAudit.getId()).andReturn(Long.valueOf(getIdValue)).anyTimes();
                 // set mock data Service cause the data are all collected
                 setUpMockWebResourceDataServiceDecorator(Long.valueOf(getIdValue));
                 replay(mockSite);
@@ -529,8 +525,8 @@ public class PageListControllerTest extends TestCase {
             case SITE_AUDIT_2XX_PAGE_LIST_ID:
                 mockSite = createMock(Site.class);
                 expect(mockAuditDataService.read(Long.valueOf(getIdValue))).andReturn(mockAudit).anyTimes();
-                expect(mockAudit.getSubject()).andReturn(mockSite).times(2);
-                expect(mockAudit.getId()).andReturn(Long.valueOf(getIdValue)).times(3);
+                expect(mockAudit.getSubject()).andReturn(mockSite).anyTimes();
+                expect(mockAudit.getId()).andReturn(Long.valueOf(getIdValue)).anyTimes();
                 // set mock data Service cause the data are all collected
                 setUpMockWebResourceDataServiceDecorator(Long.valueOf(getIdValue));
                 replay(mockSite);
@@ -538,8 +534,8 @@ public class PageListControllerTest extends TestCase {
             case SITE_AUDIT_3XX_PAGE_LIST_ID:
                 mockSite = createMock(Site.class);
                 expect(mockAuditDataService.read(Long.valueOf(getIdValue))).andReturn(mockAudit).anyTimes();
-                expect(mockAudit.getSubject()).andReturn(mockSite).times(2);
-                expect(mockAudit.getId()).andReturn(Long.valueOf(getIdValue)).times(3);
+                expect(mockAudit.getSubject()).andReturn(mockSite).anyTimes();
+                expect(mockAudit.getId()).andReturn(Long.valueOf(getIdValue)).anyTimes();
                 // set mock data Service cause the data are all collected
                 setUpMockWebResourceDataServiceDecorator(Long.valueOf(getIdValue));
                 replay(mockSite);
@@ -547,8 +543,8 @@ public class PageListControllerTest extends TestCase {
             case SITE_AUDIT_4XX_PAGE_LIST_ID:
                 mockSite = createMock(Site.class);
                 expect(mockAuditDataService.read(Long.valueOf(getIdValue))).andReturn(mockAudit).anyTimes();
-                expect(mockAudit.getSubject()).andReturn(mockSite).times(2);
-                expect(mockAudit.getId()).andReturn(Long.valueOf(getIdValue)).times(3);
+                expect(mockAudit.getSubject()).andReturn(mockSite).anyTimes();
+                expect(mockAudit.getId()).andReturn(Long.valueOf(getIdValue)).anyTimes();
                 // set mock data Service cause the data are all collected
                 setUpMockWebResourceDataServiceDecorator(Long.valueOf(getIdValue));
                 replay(mockSite);
@@ -627,7 +623,7 @@ public class PageListControllerTest extends TestCase {
                 andReturn(Long.valueOf(1)).
                 anyTimes();
                 
-        Set<Parameter> paramSet = new HashSet<Parameter>();
+        Set<Parameter> paramSet = new HashSet();
 //        Parameter mockParameter=  createMock(Parameter.class);
         ParameterElement mockParameterElement=  createMock(ParameterElement.class);
 //        expect(mockParameterElement.getParameterElementCode()).andReturn("LEVEL").anyTimes();
@@ -652,13 +648,13 @@ public class PageListControllerTest extends TestCase {
         mockThemeDataService = createMock(ThemeDataService.class);
         
         mockTheme = createMock(Theme.class);
-        Collection<Theme> themeCollection = new ArrayList<Theme>();
+        Collection<Theme> themeCollection = new ArrayList();
         themeCollection.add(mockTheme);
         
         Reference mockReference = createMock(Reference.class);
         
         Criterion mockCriterion = createMock(Criterion.class);
-        Collection<Criterion> criterionCollection = new ArrayList<Criterion>();
+        Collection<Criterion> criterionCollection = new ArrayList();
         criterionCollection.add(mockCriterion);
         
         expect(mockThemeDataService.findAll()).andReturn(themeCollection).anyTimes();

@@ -127,7 +127,7 @@ public class CheckUnitCSSVisitor extends SimpleCssVisitor {
      * @return 
      */
     private List<ECSSUnit> getECSSUnitListFromLexicalUnitBlackList(Collection<String> blacklist) {
-        List<ECSSUnit> unitList = new ArrayList<ECSSUnit>();
+        List<ECSSUnit> unitList = new ArrayList<>();
         for (String unit : blacklist) {
             unitList.add(ECSSUnit.getFromNameOrNull(unit));
         }
@@ -139,11 +139,7 @@ public class CheckUnitCSSVisitor extends SimpleCssVisitor {
         if (StringUtils.isBlank(propertyName)) {
             return;
         }
-        if (StringUtils.equalsIgnoreCase(propertyName, property)) {
-            excludeProperty = false;
-        } else {
-            excludeProperty = true;
-        }
+        excludeProperty = !StringUtils.equalsIgnoreCase(propertyName, property);
     }
 
 }

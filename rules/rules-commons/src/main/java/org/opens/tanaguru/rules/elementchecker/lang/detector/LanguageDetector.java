@@ -126,7 +126,7 @@ public class LanguageDetector {
     private void initProfiles() {
         PathMatchingResourcePatternResolver resolver = 
                 new PathMatchingResourcePatternResolver();
-        List<String> profiles = new ArrayList<String>();
+        List<String> profiles = new ArrayList<>();
         DetectorFactory.setSeed(0L);
         try {
             for (Resource rs : resolver.getResources(profilePath)) {
@@ -135,9 +135,7 @@ public class LanguageDetector {
                 profiles.add(writer.toString());
             }
             DetectorFactory.loadProfile(profiles);
-        } catch (IOException ex) {
-            LOGGER.warn(ex);
-        } catch (LangDetectException ex) {
+        } catch (IOException | LangDetectException ex) {
             LOGGER.warn(ex);
         }
     }

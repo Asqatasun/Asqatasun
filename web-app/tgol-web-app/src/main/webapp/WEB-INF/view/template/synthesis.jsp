@@ -50,7 +50,14 @@
             <span class="synthesis-meta-title"><fmt:message key="contract.createdOn"/> : </span><fmt:formatDate type="date" value="${statistics.date}" dateStyle="long"/> <fmt:formatDate type="time" value="${statistics.date}"/>
         </div>
         <c:if test="${hasPageCounter == 'true'}">
+            <c:choose>
+                <c:when test="${statistics.auditScope == 'DOMAIN'}">
+                    <div id="audit-nb-of-pages-domain">
+                </c:when>
+                <c:otherwise>
             <div class="audit-nb-of-pages">
+                </c:otherwise>
+            </c:choose>
                 <c:set var="pageCounterLinkTitle" scope="page">
                     <fmt:message key="resultPage.pageCounter">
                         <fmt:param value="${auditedPagesCount}"/>
@@ -65,17 +72,20 @@
                     <c:when test="${hasPagesListLink == 'true'}">
                         <c:choose>
                             <c:when test="${statistics.auditScope == 'SCENARIO'}">
-                                <a href="<c:url value="/home/contract/page-list.html?audit=${param.audit}&amp;status=f2xx&amp;sortDirection=2&amp;sortCriterion=rank"/>" >${pageCounterLinkTitle}</a>
+                <a href="<c:url value="/home/contract/page-list.html?audit=${param.audit}&amp;status=f2xx&amp;sortDirection=2&amp;sortCriterion=rank"/>" >${pageCounterLinkTitle}</a>
                             </c:when>
                             <c:when test="${statistics.auditScope == 'DOMAIN'}">
-                                <a href="<c:url value="/home/contract/page-list.html?audit=${param.audit}"/>">${pageCounterLinkTitle}</a>
-                                <span>${totalPageCounterTitle}</span>
+                <fmt:message key="synthesisSite.errors">
+                    <fmt:param value="${statistics.resultCounter.failedCount}"/>
+                </fmt:message>
+                <a href="<c:url value="/home/contract/page-list.html?audit=${param.audit}"/>">${pageCounterLinkTitle}</a>
+                <span>(${totalPageCounterTitle})</span>
                             </c:when>
                         </c:choose>
                     </c:when>
                     <c:otherwise>
-                        ${pageCounterLinkTitle}
-                        <span>${totalPageCounterTitle}</span>
+                ${pageCounterLinkTitle}
+                <span>${totalPageCounterTitle}</span>
                     </c:otherwise>
                 </c:choose>
             </div>

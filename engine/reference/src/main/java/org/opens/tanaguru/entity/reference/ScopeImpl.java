@@ -22,6 +22,7 @@
 package org.opens.tanaguru.entity.reference;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -101,10 +102,7 @@ public class ScopeImpl implements Scope, Serializable {
         if ((this.code == null) ? (other.code != null) : !this.code.equals(other.code)) {
             return false;
         }
-        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.id, other.id) || (this.id != null && this.id.equals(other.id));
     }
 
     @Override

@@ -55,6 +55,7 @@ public class LangChangeChecker extends LangChecker {
     
     /**
      * Default constructor
+     * @param textElementBuilder
      */
     public LangChangeChecker(TextElementBuilder textElementBuilder) {
         super();

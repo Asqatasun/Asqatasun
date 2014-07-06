@@ -20,10 +20,6 @@
             <artifactId>tanaguru-sebuilder-interpreter-tools</artifactId>
         </dependency>
         <dependency>
-            <groupId>${hibernateGroupId}</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>

@@ -40,7 +40,7 @@ public class MultipleElementSelector implements ElementSelector{
     private Collection<String> cssQueryList;
     public void addCssQuery(String cssQuery) {
         if (cssQueryList == null) {
-            cssQueryList = new ArrayList<String>();
+            cssQueryList = new ArrayList<>();
         }
         cssQueryList.add(cssQuery);
     }
