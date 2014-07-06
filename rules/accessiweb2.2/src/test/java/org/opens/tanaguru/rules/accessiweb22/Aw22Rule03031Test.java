@@ -216,7 +216,7 @@ public class Aw22Rule03031Test extends Aw22RuleImplementationTestCase {
         assertEquals("rgb(255; 255; 255)", ee.getValue());
         assertEquals(EvidenceStore.BG_COLOR_EE, ee.getEvidence().getCode());
         ee = iter.next();
-        assertEquals("4.00", ee.getValue());
+        assertEquals("4.00", ee.getValue().replaceAll(",", "."));
         assertEquals(EvidenceStore.CONTRAST_EE, ee.getEvidence().getCode());
 
         
@@ -244,7 +244,7 @@ public class Aw22Rule03031Test extends Aw22RuleImplementationTestCase {
         assertEquals("rgb(255; 255; 255)", ee.getValue());
         assertEquals(EvidenceStore.BG_COLOR_EE, ee.getEvidence().getCode());
         ee = iter.next();
-        assertEquals("1.97", ee.getValue());
+        assertEquals("1.97", ee.getValue().replaceAll(",", "."));
         assertEquals(EvidenceStore.CONTRAST_EE, ee.getEvidence().getCode());
 
         
@@ -285,7 +285,7 @@ public class Aw22Rule03031Test extends Aw22RuleImplementationTestCase {
         assertEquals("rgb(255; 165; 0)", ee.getValue());
         assertEquals(EvidenceStore.BG_COLOR_EE, ee.getEvidence().getCode());
         ee = iter.next();
-        assertEquals("1.97", ee.getValue());
+        assertEquals("1.97", ee.getValue().replaceAll(",", "."));
         assertEquals(EvidenceStore.CONTRAST_EE, ee.getEvidence().getCode());
 
         
@@ -326,7 +326,7 @@ public class Aw22Rule03031Test extends Aw22RuleImplementationTestCase {
         assertEquals("rgb(98; 111; 83)", ee.getValue());
         assertEquals(EvidenceStore.BG_COLOR_EE, ee.getEvidence().getCode());
         ee = iter.next();
-        assertEquals("4.49", ee.getValue());
+        assertEquals("4.49", ee.getValue().replaceAll(",", "."));
         assertEquals(EvidenceStore.CONTRAST_EE, ee.getEvidence().getCode());
 
         
@@ -367,7 +367,7 @@ public class Aw22Rule03031Test extends Aw22RuleImplementationTestCase {
         assertEquals("rgb(223; 240; 216)", ee.getValue());
         assertEquals(EvidenceStore.BG_COLOR_EE, ee.getEvidence().getCode());
         ee = iter.next();
-        assertEquals("3.61", ee.getValue());
+        assertEquals("3.61", ee.getValue().replaceAll(",", "."));
         assertEquals(EvidenceStore.CONTRAST_EE, ee.getEvidence().getCode());
         
         
@@ -507,7 +507,7 @@ public class Aw22Rule03031Test extends Aw22RuleImplementationTestCase {
         assertEquals("rgb(223; 240; 216)", ee.getValue());
         assertEquals(EvidenceStore.BG_COLOR_EE, ee.getEvidence().getCode());
         ee = iter.next();
-        assertEquals("3.61", ee.getValue());
+        assertEquals("3.61", ee.getValue().replaceAll(",", "."));
         assertEquals(EvidenceStore.CONTRAST_EE, ee.getEvidence().getCode());
 
         
