@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
 
-    <NOMENCLATURE Id_Nomenclature="1" Cd_Nomenclature="IrrelevantTitleNomenclature" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
+    <NOMENCLATURE Id_Nomenclature="1" Cd_Nomenclature="UnexplicitPageTitle" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
 
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="1" Label="document"  Id_Nomenclature="1"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2" Label="untitled"  Id_Nomenclature="1"/>

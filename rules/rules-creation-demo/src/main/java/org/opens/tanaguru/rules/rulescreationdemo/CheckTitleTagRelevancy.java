@@ -43,7 +43,7 @@ public class CheckTitleTagRelevancy extends
         super(new SimpleElementSelector("title"), // The ElementSelector implementation
                 new TextBelongsToBlackListChecker( // The ElementChecker implementation
                     new SimpleTextElementBuilder(), // the TextElementBuilder implementation
-                    "IrrelevantTitleNomenclature",// the name of the irrelevant titles nomenclature 
+                    "UnexplicitPageTitle",// the name of the irrelevant titles nomenclature 
                     "IrrelevantTitle",// message created when the title belongs to the blacklist
                     HtmlElementStore.TEXT_ELEMENT2 // the text of the title is extracted and displayed in case of irrelevant detection   
               )
