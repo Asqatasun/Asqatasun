@@ -95,7 +95,7 @@ public class CheckTitleContentUnicityAtSiteLevel
     }
 }
 ``` 
-This example introduces a new usefull interface called [TextElementBuilder](#textElementBuilder), that produces a String representation for a given Element. The [SimpleTextElementBuilder](https://github.com/Tanaguru/Tanaguru/blob/master/rules/rules-commons/src/main/java/org/opens/tanaguru/rules/elementselector/SimpleElementSelector.java) used in the example simply returns the content of the title element. You may need to use other [text element builder implementations](#the-existing-TextElementBuilder-implementations) or implement your own ones.
+This example introduces a new usefull interface called [TextElementBuilder](#textelementbuilder), that produces a String representation for a given Element. The [SimpleTextElementBuilder](https://github.com/Tanaguru/Tanaguru/blob/master/rules/rules-commons/src/main/java/org/opens/tanaguru/rules/elementselector/SimpleElementSelector.java) used in the example simply returns the content of the title element. You may need to use other [text element builder implementations](#the-existing-textelementbuilder-implementations) or implement your own ones.
 
 ## Nomenclature based Check rule
 Tanaguru uses the concept of nomenclature to create dynamic lists that then can be used as white lists or black lists. 
