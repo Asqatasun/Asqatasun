@@ -21,13 +21,14 @@ mvn clean install
 
 ## Prepare and generate your referential
 ### Prepare your referential (CSV File)
-The Header line :<br/>
-`theme;theme_en;critere;critere-label_en;test;test-label_en;level;scope;class-name`<br/>
 
 #### Mandatory columns
 * The theme column : The thematic id, defined by an integer (should be incremented).
 
 * The test column : Defined by two numbers separated by a dash. The first is the theme number and the second is the test number.
+
+The minimum header line to create context : 
+`theme;theme_en;test;test-label_en`
 
 #### Optional columns
 
@@ -45,29 +46,33 @@ The Header line :<br/>
 If you want to name your class, set the cell with the class name. i.e. MyClassRuleToTestCssClass<br/>
 We rename automatically the class file and link it to the database.
 
+The header line with all optional columns :
+`theme;theme_en;critere;critere-label_en;test;test-label_en;level;scope;class-name`
+
 #### Add multiple languages
 
 The first and second columns are for the themes. The first for the theme number, and the second for the theme Name. We consider the first theme column as the default language. If you want to have multi languages (i18n) add other column suffixes by the lang code (fr, en, es, ...)<br/> 
-For example<br/>
-`theme;theme_en;theme_fr;test;test-label_en;test-label_fr`<br/>
+Header line with multiple languages : `theme;theme_en;theme_fr;test;test-label_en;test-label_fr`<br/>
 Note that if you have to translate the themes, you must translate the others columns : each language must have a translation for theme, and test-label.
 
 You can see [our CSV example](https://github.com/Tanaguru/Tanaguru/blob/master/rules/rules-creation-demo/src/main/resources/referential-creator-csv-src/referentiel.csv).
 
 ### Generate your referential (from data)
 
-1. Go to the referentiel-context-creator project.
-
-1. Edit the pom.xml file and set the properties between the `<properties>` tag. 
+* Go to the referentiel-context-creator project.<br/>
+```sh
+cd Tanaguru/rules/referential-creator/
+```
+* Edit the pom.xml file and set the properties between the `<properties>` tag. 
  1. In the `<generator.referentielName>` tag, set the complete name of your referential (i.e. Rgaa 3.0) 
  1. In the `<generator.referentiel>` tag, set the of your referential name with lowercase letters, a version and without whitespace. (i.e. rgaa3.0)
  1. In the `<generator.baseFolder>` tag, set the absolute path where you want to install the referential.
  1. In the `<generator.dataFile>` tag, set the absolute path to your CSV file.
  1. In the `<generator.delimiter>` is optional. Set the character who's delimite each CSV columns. (Default value is `;` character). 
  1. In the `<generator.refDescriptor>` is optional, if you have an web page that describe your referential, set this url between refDescriptor tag.
-1. Build this project (referentiel-context-creator) :
+
+* Build this project (referentiel-context-creator) :
 ```sh
-cd Tanaguru/rules/referential-creator/
 mvn referential-creator:generate
 ```
 
