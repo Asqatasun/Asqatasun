@@ -80,7 +80,7 @@ Your referential is now ready to implement what you need !
 ## The generated referential context
 ### Rules classes
 The Java rules classes files are available under<br/> 
-`$my-generated-ref/src/main/java/org/opens/tanaguru/rules/$my-ref/`
+`$my-generated-ref/src/main/java/org/opens/tanaguru/rules/$myRef/`
 ### Test classes (JUnit) and the testcases (HTML)
 ### Sql insertion script
 ### I18n files
