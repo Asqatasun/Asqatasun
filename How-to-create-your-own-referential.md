@@ -24,7 +24,7 @@ The test column : Define by three numbers (or two if the critere column is not s
 
 The level column (Optional) : The default value is 1. You can override this value (1, 2 or 3) to set the criticality of each rule. 1 is very critically, 2 medium level, 3 less critically.
 
-The scope column (Optional) : The default value is 1.<br/>
+The scope column (Optional) : The default value is 1.
 * For page rule, set the value to 1.<br/>
 * For site rule, set the value to 2.<br/>
 * For site and page rule, set the value to 3.<br/>
