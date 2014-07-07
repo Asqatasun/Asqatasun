@@ -1,6 +1,8 @@
 # Referential-Creator ease the referential creation
 
-## Prerequisite :
+## Prerequisite : 
+You must have build a first time Tanaguru to continue the tutorial.
+
 Manual install of the apache commons-csv library available here.
 Go into the jar folder (Tanaguru/rules/referential-creator-maven-plugin/src/main/resources/lib/) and execute this command :
 
