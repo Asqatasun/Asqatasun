@@ -88,9 +88,14 @@ The Java test classes files are available under<br/>
 The HTML testcases files are available under<br/>
 `$my-generated-ref/src/test/resources/testcases/$myRef/`
 ### Sql insertion script
+The SQL insertion script file is available under<br/>
+`$my-generated-ref/src/main/resources/sql/`
 ### I18n files
+The I18n files are available under<br/>
+`$my-generated-ref/src/main/resources/i18n/`
 ### Spring configuration files (to be rendered in the UI)
-### The testcases
+The Spring configuration files are available under<br/>
+`$my-generated-ref/src/main/resources/conf/
 
 ## How to generate the new referential and make it usable from the Tanaguru web application? 
 ### Build
