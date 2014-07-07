@@ -1,14 +1,26 @@
-# Referential-Creator ease the referential creation
+# Referential-Creator helps the referential creation
 
 ## Prerequisite : 
-You must have build a first time Tanaguru to continue the tutorial.
+Build tanaguru (it may take a while !!)
+```sh
+cd Tanaguru/
+mvn clean install
+```
 
-Manual install of the apache commons-csv library available here.
-Go into the jar folder (Tanaguru/rules/referential-creator-maven-plugin/src/main/resources/lib/) and execute this command :
+Install manually the apache commons-csv library.
+```sh
+cd Tanaguru/rules/referential-creator-maven-plugin/src/main/resources/lib/
+./install_lib.sh
+```
 
-`./install_lib.sh` or `sh install_lib.sh`
+Build the referential-creator maven plugin
+```sh
+cd Tanaguru/rules/referential-creator-maven-plugin/
+mvn clean install
+```
 
-## How to format the CSV File ?
+## Prepare and generate your referential
+### The csv file format
 The Header line :<br/>
 `theme;theme_en;critere;critere-label_en;test;test-label_en;level;scope;class-name`<br/>
 
@@ -41,11 +53,9 @@ You can see [our CSV example](https://github.com/Tanaguru/Tanaguru/blob/master/r
 
 ## The steps to generate the context
 
-1. Build the referentiel-creator maven plugin `mvn clean install` in the plugin base folder.
+1. Go to the referentiel-context-creator project.
 
-1. Get the referentiel-context-creator project.
-
-1. Open and edit the pom.xml file and set the properties between the `<properties>` tag. 
+1. Edit the pom.xml file and set the properties between the `<properties>` tag. 
  1. In the `<generator.referentielName>` tag, set the complete name of your referential (i.e. Rgaa 3.0) 
  1. In the `<generator.referentiel>` tag, set the of your referential name with lowercase letters, a version and without whitespace. (i.e. rgaa3.0)
  1. In the `<generator.baseFolder>` tag, set the absolute path where you want to install the referential.
@@ -55,3 +65,20 @@ You can see [our CSV example](https://github.com/Tanaguru/Tanaguru/blob/master/r
 1. Build this project (referentiel-context-creator) with `referential-creator:generate`
 
 Your referential is now ready to implement what you need !
+## The generated referential context
+### Rules classes
+### Test classes (JUnit) and the testcases (HTML)
+### Sql insertion script
+### I18n files
+### Spring configuration files (to be rendered in the UI)
+### The testcases
+
+## How to generate the new referential and make it usable from the Tanaguru web application? 
+### Build
+```shell
+cd $my-generated-ref
+mvn clean install
+cd target
+tar xvf tgz
+### Install in database
+### Deploy in the web application context
