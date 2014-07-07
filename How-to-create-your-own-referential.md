@@ -41,7 +41,7 @@ You can see [our CSV example](https://github.com/Tanaguru/Tanaguru/blob/master/r
 
 ## The steps to generate the context
 
-1. Build the referentiel-creator maven plugin `mvn clean install` on the plugin base folder.
+1. Build the referentiel-creator maven plugin `mvn clean install` in the plugin base folder.
 
 1. Get the referentiel-context-creator project.
 
