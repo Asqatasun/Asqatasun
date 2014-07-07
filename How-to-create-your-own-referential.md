@@ -117,3 +117,7 @@ cd tgz-extract-folder/
 vi deploy.sh ## Set $TOMCAT_HOST_PATH to your tomcat tanaguru web-app folder. 
 ./deploy.sh
 ```
+Then restart tomcat
+```sh
+sudo invoke-rc.d $tomcatVersion restart
+```
