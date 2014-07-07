@@ -108,6 +108,10 @@ tar xvf tgz
 ### Install in database
 ```sh
 cd tgz-extract-folder/sql/
-mysql -u $username -p $tanaguru-database < $ref-insert.sql
+mysql -u $username -p$myPassword $tanaguru-database < $ref-insert.sql
 ```
 ### Deploy in the web application context
+Set $TOMCAT_HOST_PATH to your tomcat tanaguru web-app folder.
+```sh
+./deploy.sh
+```
