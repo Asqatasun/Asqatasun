@@ -95,7 +95,7 @@ The I18n files are available under<br/>
 `$my-generated-ref/src/main/resources/i18n/`
 ### Spring configuration files (to be rendered in the UI)
 The Spring configuration files are available under<br/>
-`$my-generated-ref/src/main/resources/conf/
+`$my-generated-ref/src/main/resources/conf/`
 
 ## How to generate the new referential and make it usable from the Tanaguru web application? 
 ### Build
