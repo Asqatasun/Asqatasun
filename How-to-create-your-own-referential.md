@@ -18,7 +18,8 @@ For example<br/>
 Note that if you have translate the themes, you must translate the others columns : each language must have a  translate for theme, critere-label and test-label.
 
 * The theme column : Define by a number, just an integer.
-The critere column (Optional) : Define by two numbers separated by a dash. The first number is the theme number, the second is the critere number.<br/>
+
+* The critere column (Optional) : Define by two numbers separated by a dash. The first number is the theme number, the second is the critere number.<br/>
 
 * The test column : Define by three numbers (or two if the critere column is not set) separated by a dash. The first is the theme number. If the critere colum is set, the second is the critere number and the third (or the second if there is not critere column) is the test number.
 
