@@ -99,7 +99,7 @@ The Spring configuration files are available under<br/>
 
 ## How to generate the new referential and make it usable from the Tanaguru web application? 
 ### Build
-```shell
+```sh
 cd $my-generated-ref
 mvn clean install
 cd target
