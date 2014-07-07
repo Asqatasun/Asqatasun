@@ -96,10 +96,16 @@ public class CheckTitleContentUnicityAtSiteLevel
      */
     public CheckTitleContentUnicityAtSiteLevel() {
         super(
-                new SimpleElementSelector("head title"), //The ElementSelector implementation  
-                new SimpleTextElementBuilder(), // the TextElementBuilder implementation
-                "TitleIdenticalToAnotherPage",//message associated with element its title is present on another page
-                "TitleNotUnique",//message created to render a cross-page version of the result
+                // The ElementSelector implementation   
+                new SimpleElementSelector("head title"), 
+                // The TextElementBuilder implementation
+                new SimpleTextElementBuilder(), 
+                // Message associated with element its title 
+                // is present on another page
+                "TitleIdenticalToAnotherPage",
+                // Message created to render a cross-page 
+                // version of the result 
+                "TitleNotUnique",
                 false);
     }
 }
