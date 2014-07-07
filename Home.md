@@ -6,7 +6,7 @@ If you want to contribute, you can jump to the paragraph describing [[how to con
 
 ## 4 kinds of audit
 * page audit : instant result
-* site audit : up to **50,000 pages** !
+* site audit : up to **50,000 pages** (in fact only limit is disk space)
 * offline file audit : begin your accessibility work from your **offline template**
 * scenario audit : coool for forms in multiple steps, **e-commerce check out process**...
 
