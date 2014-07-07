@@ -16,11 +16,16 @@ public class DetectH1 extends AbstractDetectionPageRuleImplementation {
      */
     public DetectH1 () {
         super(
-                new SimpleElementSelector("h1"),// the selector implementation that performs the selection
-                TestSolution.PASSED, // solution when at least one element is found
-                TestSolution.FAILED, // solution when no element is found
-                null, // no message created when element is found because passed doesn't produce message
-                "H1TagMissing" // General message indicating the element is not present on the page
+                // the selector implementation that performs the selection
+                new SimpleElementSelector("h1"),
+                // solution when at least one element is found
+                TestSolution.PASSED,
+                // solution when no element is found
+                TestSolution.FAILED, 
+                // no message created when element is found because passed doesn't produce message
+                null, 
+                // General message indicating the element is not present on the page
+                "H1TagMissing" 
             );
     }
 
