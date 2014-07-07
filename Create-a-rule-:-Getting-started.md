@@ -115,17 +115,23 @@ The concept of nomenclature can also lead to the check of relevancy. Dealing wit
 From this approach, the relevancy of the title of a page can be compared with a list of definitive irrelevant titles such as 'Document', 'Home', 'Welcome'. That list can be then populated from feedbacks by just inserting entries in database. The rule that implements this case could be written as follows : 
 ```java
 public class CheckTitleTagRelevancy extends 
-                         AbstractPageRuleWithSelectorAndCheckerImplementation {
+                 AbstractPageRuleWithSelectorAndCheckerImplementation {
     /**
      * Constructor
      */
     public CheckTitleTagRelevancy() {
         super(new SimpleElementSelector("title"), // The ElementSelector implementation
               new TextBelongsToBlackListChecker( // The ElementChecker implementation
-                  new SimpleTextElementBuilder(), // the TextElementBuilder implementation
-                  "IrrelevantTitleNomenclature",// the name of the irrelevant titles nomenclature 
-                  "IrrelevantTitle",// message created when the title belongs to the blacklist
-                  "text" // the text of the title is extracted and displayed in case of irrelevant   
+                  // the TextElementBuilder implementation  
+                  new SimpleTextElementBuilder(), 
+                  // the name of the irrelevant titles nomenclature 
+                  "IrrelevantTitleNomenclature",
+                  // message created when the title belongs 
+                  // to the blacklist 
+                  "IrrelevantTitle",
+                  // the text of the title is extracted 
+                  // and displayed in case of irrelevant   
+                  "text" 
               )
         );
     }
