@@ -100,7 +100,7 @@ The Spring configuration files are available under<br/>
 ## How to generate the new referential and make it usable from the Tanaguru web application? 
 ### Build
 ```sh
-cd $my-generated-ref
+cd $myGeneratedReferential
 mvn clean install
 cd target
 tar xvf tgz
@@ -108,7 +108,7 @@ tar xvf tgz
 ### Install in database
 ```sh
 cd tgz-extract-folder/sql/
-mysql -u $username -p$myPassword $tanaguru-database < $ref-insert.sql
+mysql -u $username -p$myPassword $tanaguruDatabase < $ref-insert.sql
 ```
 ### Deploy in the web application context
 
