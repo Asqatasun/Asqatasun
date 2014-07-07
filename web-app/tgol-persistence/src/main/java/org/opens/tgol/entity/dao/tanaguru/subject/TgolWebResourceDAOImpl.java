@@ -276,7 +276,7 @@ public class TgolWebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
         query.setParameter("scope", scope);
         query.setHint(CACHEABLE_OPTION, TRUE);
         try {
-            if ((Long)query.getSingleResult()>1) {
+            if ((Long)query.getSingleResult()>0) {
                 return true;
             } else {
                 return false;
