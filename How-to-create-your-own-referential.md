@@ -23,7 +23,10 @@ Note that if you have translate the themes, you must translate the others column
 
 * The test column : Define by three numbers (or two if the critere column is not set) separated by a dash. The first is the theme number. If the critere colum is set, the second is the critere number and the third (or the second if there is not critere column) is the test number.
 
-* The level column (Optional) : The default value is 1. You can override this value (1, 2 or 3) to set the criticality of each rule. 1 is very critically, 2 medium level, 3 less critically.
+* The level column (Optional) : The default value is 1. You can override this value :
+ * 1 : high criticality
+ * 2 : medium criticality
+ * 3 : low critically
 
 * The scope column (Optional) : The default value is 1.
  * For page rule, set the value to 1.<br/>
