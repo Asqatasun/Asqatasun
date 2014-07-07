@@ -2,18 +2,18 @@
 
 ## Prerequisite :
 Manual install of the apache commons-csv library available here.
-Go into the jar folder and execute this command :
+Go into the jar folder (Tanaguru/rules/referential-creator-maven-plugin/src/main/resources/lib/) and execute this command :
 
-`mvn install:install-file -Dfile=commons-csv-1.0-SNAPSHOT.jar -DgroupId=org.apache -DartifactId=commons-csv -Dversion=1.0-SNAPSHOT -Dpackaging=jar`
+`./install_lib.sh`
 
 ## How to format the CSV File ?
-The Header line : theme;theme_en;critere;critere-label_en;test;test-label_en
-The first and second columns are for the themes. The first for the theme number, and the second for the theme Name. The first theme column name define the default language name. If you want to have multi language (i18n) add other column suffixes by the two letters language (i.e. theme;theme_en;theme_fr;critere;critere-label_en;critere-label_fr;test;test-label_en;test-label_fr).
+The Header line : theme;theme_en;critere;critere-label_en;test;test-label_en;level;scope;class-name<br/>
+The first and second columns are for the themes. The first for the theme number, and the second for the theme Name. The first theme column name define the default language name. If you want to have multi language (i18n) add other column suffixes by the two letters language (i.e. theme;theme_en;theme_fr;critere;critere-label_en;critere-label_fr;test;test-label_en;test-label_fr).<br/>
 Note that if you have translate the themes, you must translate the others columns : each language must have a  translate for theme, critere-label and test-label.
 
 The theme column : Define by a number, just an integer.
-The critere column : Define by two numbers separated by a dash. The first number is the theme number, the second is the critere number.
-The test column : Define by three numbers separated by a dash. The first is the theme number, the second is the critere number and the third is the test number.
+The critere column (Optional) : Define by two numbers separated by a dash. The first number is the theme number, the second is the critere number.<br/>
+The test column : Define by three numbers (or two if the critere column is not set) separated by a dash. The first is the theme number. If the critere colum is set, the second is the critere number and the third (or the second if there is not critere column) is the test number.
 
 You can see our CSV example use the `ø` delimiter.
 
