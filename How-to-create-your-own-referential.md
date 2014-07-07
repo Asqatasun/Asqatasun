@@ -82,6 +82,11 @@ Your referential is now ready to implement what you need !
 The Java rules classes files are available under<br/> 
 `$my-generated-ref/src/main/java/org/opens/tanaguru/rules/$myRef/`
 ### Test classes (JUnit) and the testcases (HTML)
+The Java test classes files are available under<br/> 
+`$my-generated-ref/src/test/java/org/opens/tanaguru/rules/$myRef/`
+
+The HTML testcases files are available under<br/>
+`$my-generated-ref/src/test/resources/testcases/$myRef/`
 ### Sql insertion script
 ### I18n files
 ### Spring configuration files (to be rendered in the UI)
