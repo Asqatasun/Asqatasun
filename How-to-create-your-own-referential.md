@@ -17,11 +17,11 @@ For example<br/>
 `theme;theme_en;theme_fr;critere;critere-label_en;critere-label_fr;test;test-label_en;test-label_fr`<br/>
 Note that if you have translate the themes, you must translate the others columns : each language must have a  translate for theme, critere-label and test-label.
 
-* The theme column : Define by a number, just an integer.
+* The theme column (mandatory) : Define by a number, just an integer.
 
 * The critere column (Optional) : Define by two numbers separated by a dash. The first number is the theme number, the second is the critere number.<br/>
 
-* The test column : Define by three numbers (or two if the critere column is not set) separated by a dash. The first is the theme number. If the critere colum is set, the second is the critere number and the third (or the second if there is not critere column) is the test number.
+* The test column (mandatory) : Define by three numbers (or two if the critere column is not set) separated by a dash. The first is the theme number. If the critere colum is set, the second is the critere number and the third (or the second if there is not critere column) is the test number.
 
 * The level column (Optional) : The default value is 1. You can override this value :
  * 1 : high criticality
