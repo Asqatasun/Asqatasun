@@ -33,6 +33,7 @@ mvn clean install
 
 The minimum header line to create context : 
 `theme;theme_en;test;test-label_en`
+Note that you can replace `en` by an other language.
 
 #### Optional columns
 
