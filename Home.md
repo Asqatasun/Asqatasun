@@ -22,7 +22,10 @@ If you want to contribute, you can jump to the paragraph describing [[how to con
 
 ***
 
-# How to contribute to Tanaguru using Git and GitHub
+# Contribute to Tanaguru using Git and GitHub
+
+Foreword: welcome ! Come having fun coding :)
+
 This chapter assumes that you already have a git client (see [Scott Chacon's Pro Git](http://git-scm.com/book/en/Getting-Started-Installing-Git) if you need help getting started) and a GitHub account by the name of "github_user" (but any other way of forking the original Tanaguru repository should work the same).
 
 ## Fork and clone
