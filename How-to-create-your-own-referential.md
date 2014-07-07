@@ -107,6 +107,7 @@ tar xvf tgz
 ```
 ### Install in database
 ```sh
+cd tgz-extract-folder/sql/
 mysql -u $username -p $tanaguru-database < $ref-insert.sql
 ```
 ### Deploy in the web application context
