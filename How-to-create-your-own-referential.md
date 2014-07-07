@@ -23,13 +23,13 @@ mvn clean install
 ### Prepare your referential (CSV File)
 
 #### Mandatory columns
-* The theme column : The thematic id, defined by an integer (should be incremented).
+* The theme column : Each cell contain a thematic id, defined by an integer (should be incremented).
 
-* The theme_xx column : Each cells contains the theme label to be display on the UI.
+* The theme_xx column : Each cell contain the theme label to be display on the UI.
 
-* The test column : Defined by two numbers separated by a dash. The first is the theme number and the second is the test number.
+* The test column : Defined by two numbers separated by a dash. The first is the theme number (the number in the first cell on the current line and the second is the test number (for each theme, a test code can't be used many times).
 
-* The test-label_xx column : Each cells contains the test label to be display on the UI.
+* The test-label_xx column : Each cell contains the test label to be display on the UI.
 
 The minimum header line to create context : 
 `theme;theme_en;test;test-label_en`
