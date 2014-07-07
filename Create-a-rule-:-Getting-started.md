@@ -11,9 +11,6 @@ For example, the detection of the `h1` tag should be implemented as follows :
 ```java
 public class DetectH1 extends AbstractDetectionPageRuleImplementation {
 
-    /**
-     * Default constructor
-     */
     public DetectH1 () {
         super(
                 // the selector implementation that performs the selection
@@ -22,9 +19,11 @@ public class DetectH1 extends AbstractDetectionPageRuleImplementation {
                 TestSolution.PASSED,
                 // solution when no element is found
                 TestSolution.FAILED, 
-                // no message created when element is found because passed doesn't produce message
+                // no message created when element is found 
+                // because passed doesn't produce message
                 null, 
-                // General message indicating the element is not present on the page
+                // General message indicating the element is 
+                // not present on the page
                 "H1TagMissing" 
             );
     }
