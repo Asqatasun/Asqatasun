@@ -59,18 +59,23 @@ Let's say that you want to check that all the links (`a` tags) of a page have no
 ```java
 public class CheckWhetherEachLinkHaventTitleAttribute extends 
                          AbstractPageRuleWithSelectorAndCheckerImplementation {
-    /**
-     * Constructor
-     */
+
     public CheckWhetherEachLinkHaventTitleAttribute() {
+               
         super(new SimpleElementSelector("a"), // The ElementSelector implementation
               new AttributePresenceChecker( // The ElementChecker implementation
-                  "title", // the attribute to search
-                  TestSolution.FAILED, // solution when attribute is found
-                  TestSolution.PASSED, // solution when attribute is not found
-                  "LinkWithTitleDetected", // message associated with element when attribute is not found
-                  null // no message created when attribute is not found because passed doesn't produce message
-              )
+                  // the attribute to search
+                  "title",
+                  // solution when attribute is found  
+                  TestSolution.FAILED,
+                  // solution when attribute is not found
+                  TestSolution.PASSED,
+                  // message associated with element 
+                  // when attribute is not found
+                  "LinkWithTitleDetected",
+                  // no message created when attribute is not 
+                  // found because passed doesn't produce message
+                  null)
         );
     }
 
