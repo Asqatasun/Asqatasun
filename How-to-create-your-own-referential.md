@@ -25,7 +25,11 @@ mvn clean install
 #### Mandatory columns
 * The theme column : The thematic id, defined by an integer (should be incremented).
 
+* The theme_xx column : Each cells contains the theme label to be display on the UI.
+
 * The test column : Defined by two numbers separated by a dash. The first is the theme number and the second is the test number.
+
+* The test-label_xx column : Each cells contains the test label to be display on the UI.
 
 The minimum header line to create context : 
 `theme;theme_en;test;test-label_en`
