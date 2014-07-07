@@ -111,7 +111,10 @@ cd tgz-extract-folder/sql/
 mysql -u $username -p$myPassword $tanaguru-database < $ref-insert.sql
 ```
 ### Deploy in the web application context
-Set $TOMCAT_HOST_PATH to your tomcat tanaguru web-app folder.
+
 ```sh
+cd tgz-extract-folder/
+vi deploy.sh
+## Set $TOMCAT_HOST_PATH to your tomcat tanaguru web-app folder. 
 ./deploy.sh
 ```
