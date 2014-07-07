@@ -8,7 +8,7 @@ Go into the jar folder (Tanaguru/rules/referential-creator-maven-plugin/src/main
 
 ## How to format the CSV File ?
 The Header line :<br/>
-theme;theme_en;critere;critere-label_en;test;test-label_en;level;scope;class-name<br/>
+`theme;theme_en;critere;critere-label_en;test;test-label_en;level;scope;class-name`<br/>
 The first and second columns are for the themes. The first for the theme number, and the second for the theme Name. The first theme column name define the default language name. If you want to have multi language (i18n) add other column suffixes by the two letters language (i.e. theme;theme_en;theme_fr;critere;critere-label_en;critere-label_fr;test;test-label_en;test-label_fr).<br/>
 
 Note that if you have translate the themes, you must translate the others columns : each language must have a  translate for theme, critere-label and test-label.
