@@ -4,7 +4,7 @@
 Manual install of the apache commons-csv library available here.
 Go into the jar folder (Tanaguru/rules/referential-creator-maven-plugin/src/main/resources/lib/) and execute this command :
 
-`./install_lib.sh`
+`./install_lib.sh` or `sh install_lib.sh`
 
 ## How to format the CSV File ?
 The Header line : theme;theme_en;critere;critere-label_en;test;test-label_en;level;scope;class-name<br/>
