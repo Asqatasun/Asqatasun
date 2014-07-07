@@ -79,7 +79,8 @@ mvn referential-creator:generate
 Your referential is now ready to implement what you need !
 ## The generated referential context
 ### Rules classes
-The Java rules classes files are available under `$my-generated-ref/src/main/java/org/opens/tanaguru/rules/$my-ref/`
+The Java rules classes files are available under 
+`$my-generated-ref/src/main/java/org/opens/tanaguru/rules/$my-ref/`
 ### Test classes (JUnit) and the testcases (HTML)
 ### Sql insertion script
 ### I18n files
