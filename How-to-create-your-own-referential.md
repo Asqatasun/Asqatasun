@@ -37,7 +37,7 @@ Note that if you have to translate the themes, you must translate the others col
 If you want to name your class, set the cell with the class name. i.e. MyClassRuleToTestCssClass<br/>
 We rename automatically the class file and link it to the database.<br/>
 
-You can see our CSV example use the `ø` delimiter.
+You can see [our CSV example](https://github.com/Tanaguru/Tanaguru/blob/master/rules/rules-creation-demo/src/main/resources/referential-creator-csv-src/referentiel.csv).
 
 ## The steps to generate the context
 
