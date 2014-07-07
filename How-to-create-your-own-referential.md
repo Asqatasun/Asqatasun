@@ -104,5 +104,9 @@ cd $my-generated-ref
 mvn clean install
 cd target
 tar xvf tgz
+```
 ### Install in database
+```sh
+mysql -u $username -p $tanaguru-database < $ref-insert.sql
+```
 ### Deploy in the web application context
