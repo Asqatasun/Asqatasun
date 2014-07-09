@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>web-app</artifactId>
-        <version>3.0.0-SNAPSHOT</version>
+        <version>3.1.0-SNAPSHOT</version>
     </parent>
     <artifactId>tgol-web-app</artifactId>
     <packaging>war</packaging>
@@ -118,11 +118,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-instrument</artifactId>
         </dependency>
-<!--        <dependency>
+        <!--        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-instrument-tomcat</artifactId>
         </dependency>-->
-<!--        <dependency>
+        <!--        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
         </dependency>
@@ -229,9 +229,8 @@
     <build>
         <plugins>
             <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.2</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
@@ -246,13 +245,12 @@
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>yuicompressor-maven-plugin</artifactId>
-                <version>1.1</version>
                 <executions>
-                <execution>
-                    <goals>
-                        <goal>compress</goal>
-                    </goals>
-                </execution>
+                    <execution>
+                        <goals>
+                            <goal>compress</goal>
+                        </goals>
+                    </execution>
                 </executions>        
                 <configuration>
                     <excludes>
@@ -293,7 +291,7 @@
                                               keyfile="${qa.keyFile}" 
                                               passphrase="${qa.passPhrase}" />
                                         <!-- see also: http://ant.apache.org/manual/Tasks/scp.html -->
-<!--                                        <exec executable="/bin/sh">
+                                        <!--                                        <exec executable="/bin/sh">
                                             <arg value="/root/bin/restart-tg-instance.sh"/>
                                         </exec>-->
                                     </target>
