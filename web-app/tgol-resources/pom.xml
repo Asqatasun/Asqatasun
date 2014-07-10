@@ -10,14 +10,6 @@
     </parent>
     <artifactId>tgol-resources</artifactId>
     <name>tgol-resources</name>
-     <dependencies>
-        <!-- tgol dependencies-->
-       <dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-envers</artifactId>
-			<version>3.6.0.Final</version>
-		</dependency>
-    </dependencies> 
     <build>
         <resources>
             <resource>
