@@ -23,9 +23,6 @@ package org.opens.tgol.presentation.data;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.hibernate.envers.AuditReader;
-import org.hibernate.envers.AuditReaderFactory;
 import org.opens.tanaguru.entity.audit.DefiniteResult;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.reference.Test;
