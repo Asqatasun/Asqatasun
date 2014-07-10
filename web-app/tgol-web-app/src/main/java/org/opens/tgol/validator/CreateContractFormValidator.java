@@ -37,7 +37,7 @@ import org.springframework.validation.Validator;
  * @author jkowalczyk
  */
 public class CreateContractFormValidator implements Validator {
-    
+
     private static final String GENERAL_ERROR_MSG_KEY = "generalErrorMsg";
     private static final String CONTRACT_URL_KEY = "contractUrl";
     private static final String CONTRACT_LABEL_KEY = "label";
@@ -45,158 +45,170 @@ public class CreateContractFormValidator implements Validator {
     private static final String BEGIN_DATE_KEY = "beginDate";
     private static final String END_DATE_KEY = "endDate";
 
-    private static final String MANDATORY_FIELD_MSG_BUNDLE_KEY =
-            "sign-up.mandatoryField";
-    private static final String EMPTY_LABEL_KEY =
-            "edit-contract.emptyLabel";
-    private static final String EMPTY_BEGIN_DATE_KEY =
-            "edit-contract.emptyBeginDate";
-    private static final String EMPTY_END_DATE_KEY =
-            "edit-contract.emptyEndDate";
-    private static final String EMPTY_USER_LIST_KEY =
-            "edit-contract.emptyUserList";
-    private static final String EMPTY_REF_KEY =
-            "edit-contract.emptyRefChoice";
-    private static final String END_DATE_ANTERIOR_TO_BEGIN_KEY =
-            "edit-contract.endDateAnteriorToBeginDate";
-    private static final String INVALID_URL_KEY =
-            "sign-up.invalidUrl";
-    private static final String COMBINATION_NOT_ALLOWED =
-    "edit-contract.typeAuditCombinationIsNotAllowed";
+    private static final String MANDATORY_FIELD_MSG_BUNDLE_KEY
+            = "sign-up.mandatoryField";
+    private static final String EMPTY_LABEL_KEY
+            = "edit-contract.emptyLabel";
+    private static final String EMPTY_BEGIN_DATE_KEY
+            = "edit-contract.emptyBeginDate";
+    private static final String EMPTY_END_DATE_KEY
+            = "edit-contract.emptyEndDate";
+    private static final String EMPTY_USER_LIST_KEY
+            = "edit-contract.emptyUserList";
+    private static final String EMPTY_REF_KEY
+            = "edit-contract.emptyRefChoice";
+    private static final String END_DATE_ANTERIOR_TO_BEGIN_KEY
+            = "edit-contract.endDateAnteriorToBeginDate";
+    private static final String INVALID_URL_KEY
+            = "sign-up.invalidUrl";
+    private static final String COMBINATION_NOT_ALLOWED
+            = "edit-contract.typeAuditCombinationIsNotAllowed";
 //    private static final String URL_CHECKER_REGEXP =
 //            "(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
 //    private final Pattern urlCheckerPattern = Pattern.compile(URL_CHECKER_REGEXP);
-    
-    private Map<String, ContractOptionFormField> contractOptionFormFieldMap =
-            new HashMap<String,ContractOptionFormField>();
+
+    private final Map<String, ContractOptionFormField> contractOptionFormFieldMap = new HashMap<>();
+
     public void setContractOptionFormFieldMap(Map<String, List<ContractOptionFormField>> contractOptionFormFieldMap) {
         for (Map.Entry<String, List<ContractOptionFormField>> entry : contractOptionFormFieldMap.entrySet()) {
-            for (ContractOptionFormField coff : entry.getValue()){
+            for (ContractOptionFormField coff : entry.getValue()) {
                 this.contractOptionFormFieldMap.put(coff.getOption().getCode(), coff);
             }
         }
     }
-    
+
     @Override
     public void validate(Object target, Errors errors) {
-        CreateContractCommand ccc = (CreateContractCommand)target;
+        CreateContractCommand ccc = (CreateContractCommand) target;
         checkMandatoryElements(ccc, errors, false);
         try {
-        	checkElements(ccc, errors);
-        }catch (IllegalArgumentException e) {
+            checkElements(ccc, errors);
+        } catch (IllegalArgumentException e) {
 //        	 errors.rejectValue("optionMap["+entry.getKey()+"]", coff.getFormField().getErrorI18nKey());
-        	//afficher le bon message
+            //afficher le bon message
         }
     }
 
     public void validateMultipleUsers(Object target, Errors errors) {
-        CreateContractCommand ccc = (CreateContractCommand)target;
+        CreateContractCommand ccc = (CreateContractCommand) target;
         checkMandatoryElements(ccc, errors, true);
         checkElements(ccc, errors);
     }
-    
+
     /**
-     * Check whether mandatory elements are valid : label (not empty), dates
-     * and users when needed
+     * Check whether mandatory elements are valid : label (not empty), dates and
+     * users when needed
+     *
      * @param ccc
      * @param errors
-     * @param checkUsers 
+     * @param checkUsers
      */
     private void checkMandatoryElements(
-            CreateContractCommand ccc, 
-            Errors errors, 
+            CreateContractCommand ccc,
+            Errors errors,
             boolean checkUsers) {
         boolean hasMandatoryElementWrong = false;
 
         if (!checkContractLabel(ccc, errors)) {
             hasMandatoryElementWrong = true;
         }
-        
+
         if (checkUsers) {
             if (!checkUsers(ccc, errors)) {
                 errors.rejectValue(USER_LIST_KEY, EMPTY_USER_LIST_KEY);
                 hasMandatoryElementWrong = true;
             }
         }
-        
+
         if (!checkDates(ccc, errors)) {
             hasMandatoryElementWrong = true;
         }
-        if (!checkTypeAudit(ccc, errors))
-        {
-        	errors.rejectValue(GENERAL_ERROR_MSG_KEY, COMBINATION_NOT_ALLOWED);
+        if (!checkTypeAudit(ccc, errors)) {
+            errors.rejectValue(GENERAL_ERROR_MSG_KEY, COMBINATION_NOT_ALLOWED);
             hasMandatoryElementWrong = true;
-        } 
-        if(hasMandatoryElementWrong) { // if no URL is filled-in
+        }
+        if (hasMandatoryElementWrong) { // if no URL is filled-in
             errors.rejectValue(GENERAL_ERROR_MSG_KEY,
                     MANDATORY_FIELD_MSG_BUNDLE_KEY);
         }
     }
-    
+
     /**
      * Check whether contract Url and other options are valid
+     *
      * @param ccc
-     * @param errors 
+     * @param errors
      */
     private void checkElements(
-            CreateContractCommand ccc, 
+            CreateContractCommand ccc,
             Errors errors) {
-    
+
         checkContractUrl(ccc, errors);
-        
+
         ContractOptionFormField coff;
         for (Map.Entry<String, String> entry : ccc.getOptionMap().entrySet()) {
             coff = contractOptionFormFieldMap.get(entry.getKey());
             try {
-                if (!StringUtils.isEmpty(entry.getValue()) && 
-                    !coff.getFormField().checkParameters(entry.getValue())){
+                if (!StringUtils.isEmpty(entry.getValue())
+                        && !coff.getFormField().checkParameters(entry.getValue())) {
                     // the auditParameter[] key is due to object mapping of the form
                     // management of Spring mvc. Each field is mapped with a method
                     // of the mapped object. In this case, the returned object of the method
                     // is a map.
-                    errors.rejectValue("optionMap["+entry.getKey()+"]", coff.getFormField().getErrorI18nKey());
+                    errors.rejectValue("optionMap[" + entry.getKey() + "]", coff.getFormField().getErrorI18nKey());
                 }
-            }catch (NumberFormatException nfe) {
-                errors.rejectValue("optionMap["+entry.getKey()+"]", coff.getFormField().getErrorI18nKey());
+            } catch (NumberFormatException nfe) {
+                errors.rejectValue("optionMap[" + entry.getKey() + "]", coff.getFormField().getErrorI18nKey());
             }
         }
     }
-    
-	private boolean checkTypeAudit(CreateContractCommand ccc, Errors errors) {
-		// TODO Auto-generated method stub
-		// taoufiq
-		boolean manual = false;
-		boolean scenario = false;
-		boolean upload = false;
-		boolean pages = false;
-		Map<String, Boolean> functionalityMap = ccc.getFunctionalityMap();
-		for (Entry<String, Boolean> it : functionalityMap.entrySet()) {
-			System.out.println(it.getKey());
-			System.out.println(it.getValue());
-			if (it.getKey().equals("MANUAL")) {
-				if (it.getValue() == null) {
-				} else
-					manual = true;
-			} else if (it.getKey().equals("SCENARIO")) {
-				if (it.getValue() == null) {
-				} else
-					scenario = true;
-			} else if (it.getKey().equals("UPLOAD")) {
-				if (it.getValue() == null) {
-				} else
-					upload = true;
-			} else if (it.getKey().equals("PAGES")) {
-				if (it.getValue() == null) {
-				} else
-					pages = true;
-			}
-		}
-		if (!pages && !upload && !scenario && manual)
-			return false;
-		return true;
-	}
 
-	/**
+    /**
+     * The combinaison DOMAIN + MANUAL is forbidden. That's what we try to 
+     * determine here
+     * @param ccc
+     * @param errors
+     * @return 
+     */
+    private boolean checkTypeAudit(CreateContractCommand ccc, Errors errors) {
+        // TODO Auto-generated method stub
+        // taoufiq
+        boolean manual = false;
+        boolean scenario = false;
+        boolean upload = false;
+        boolean pages = false;
+        Map<String, Boolean> functionalityMap = ccc.getFunctionalityMap();
+        for (Entry<String, Boolean> it : functionalityMap.entrySet()) {
+            switch (it.getKey()) {
+                case "MANUAL":
+                    if (it.getValue() != null) {
+                        manual = true;
+                    }   
+                    break;
+                case "SCENARIO":
+                    if (it.getValue() != null) {
+                        scenario = true;
+                    }   
+                    break;
+                case "UPLOAD":
+                    if (it.getValue() != null) {
+                        upload = true;
+                    }   
+                    break;
+                case "PAGES":
+                    if (it.getValue() != null) {
+                        pages = true;
+                    }   
+                    break;
+            }
+        }
+        if (!pages && !upload && !scenario && manual) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      *
      * @param userSubscriptionCommand
      * @param errors
@@ -209,7 +221,7 @@ public class CreateContractFormValidator implements Validator {
         }
         return true;
     }
-    
+
     /**
      *
      * @param userSubscriptionCommand
@@ -229,7 +241,7 @@ public class CreateContractFormValidator implements Validator {
         }
         return true;
     }
-    
+
     /**
      *
      * @param userSubscriptionCommand
