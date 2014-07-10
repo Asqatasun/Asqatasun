@@ -23,7 +23,6 @@ package org.opens.tanaguru.service;
 
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.service.command.AuditCommand;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -31,9 +30,6 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class AuditServiceThreadFactoryImpl implements AuditServiceThreadFactory {
 	
-//	@Autowired
-//	private AuditServiceThread auditServiceThread;
-
     @Override
     public AuditServiceThread create(Audit audit) {
         return new AuditServiceThreadImpl(audit);

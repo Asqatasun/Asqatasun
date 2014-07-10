@@ -26,7 +26,6 @@ import java.util.Set;
 
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.service.command.AuditCommand;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -39,15 +38,10 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
     private Audit audit;
     private AuditCommand auditCommand;
     
-    @Autowired
-    private AuditServiceThread auditServiceThread;
-
     private Set<AuditServiceThreadListener> listeners;
     public Set<AuditServiceThreadListener> getListeners() {
         return listeners;
     }
-
-    
 
     /**
      * 
@@ -79,7 +73,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
     @Override
     public void add(AuditServiceThreadListener listener) {
         if (listeners == null) {
-            listeners = new HashSet<AuditServiceThreadListener>();
+            listeners = new HashSet<>();
         }
         listeners.add(listener);
     }
