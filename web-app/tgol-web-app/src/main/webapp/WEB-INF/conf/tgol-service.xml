@@ -33,13 +33,15 @@
     <import resource="classpath:conf/context/beans-reference.xml"/>
     <import resource="classpath:conf/context/beans-ruleimplementationloader.xml"/>
     <import resource="classpath:conf/context/beans-statistics.xml"/>
-    <import resource="classpath:conf/context/beans-tanaguru.xml"/>
     <import resource="classpath:conf/context/beans-scenarioloader.xml"/>
    
     <!-- conf jms   -->
 <!--     <import resource="classpath:conf/context/spring-jms-example.xml"/>
- -->    
-    <import resource="classpath:conf/context/spring-jms-tanaguru.xml"/>
+ -->
+ <!-- import beans-tanaguru for normal web-app usage OR import spring-jms-tanaguru
+ to activate mqueue-->
+    <import resource="classpath:conf/context/beans-tanaguru.xml"/>
+    <!--<import resource="classpath:conf/context/spring-jms-tanaguru.xml"/>-->
 
     <!-- tgol imports -->
     <import resource="tgol-beans-decorator.xml"/>

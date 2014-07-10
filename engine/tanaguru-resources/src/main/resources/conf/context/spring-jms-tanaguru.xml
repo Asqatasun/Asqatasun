@@ -1,69 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
-	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:task="http://www.springframework.org/schema/task"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+       xmlns:jee="http://www.springframework.org/schema/jee" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
-	
-	 <!-- Fabrique de connexions à ActiveMQ  -->
-        <bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
-              <property name="brokerURL" value="tcp://localhost:61616?jms.prefetchPolicy.queuePrefetch=0"/>
-        </bean> 
-        <bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
-    			<property name="connectionFactory" ref="jmsConnectionFactory"/>
-		</bean>
 
-    <bean id="auditService" class="org.opens.tanaguru.service.AuditServiceImpl"/>
+    
+    <import resource="beans-tanaguru.xml"/>
 
-	<!--Listener -->
-	<bean id="auditListener" class="org.tanaguru.jms.messaging.AuditListener" />
+    <!-- Fabrique de connexions à ActiveMQ  -->
+    <bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="tcp://localhost:61616?jms.prefetchPolicy.queuePrefetch=0"/>
+    </bean> 
+    <bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
+        <property name="connectionFactory" ref="jmsConnectionFactory"/>
+    </bean>
 
-	<!--Queues -->
-	 <!-- Destination dans ActiveMQ -->
-        <bean id="auditQueueIn" class="org.apache.activemq.command.ActiveMQQueue">
-               <constructor-arg value="test" />
-        </bean>
+    <!--Listener -->
+    <bean id="auditListener" class="org.tanaguru.jms.messaging.AuditListener" />
+
+    <!--Queues -->
+    <!-- Destination dans ActiveMQ -->
+    <bean id="auditQueueIn" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="test" />
+    </bean>
       
-        <bean id="auditQueueOut" class="org.apache.activemq.command.ActiveMQQueue">
-               <constructor-arg value="testAcquittement" />
-        </bean>
+    <bean id="auditQueueOut" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="testAcquittement" />
+    </bean>
  
-        <!-- Instance de JmsTemplate qui utilise ConnectionFactory et la 
-               Destination -->
-        <bean id="producerTemplate" class="org.springframework.jms.core.JmsTemplate">
-               <property name="connectionFactory" ref="pooledConnectionFactory" />
-               <property name="defaultDestination" ref="auditQueueOut" />
-        </bean>
+    <!-- Instance de JmsTemplate qui utilise ConnectionFactory et la 
+    Destination -->
+    <bean id="producerTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="pooledConnectionFactory" />
+        <property name="defaultDestination" ref="auditQueueOut" />
+    </bean>
 
-        <bean id="tanaguruMsgOutService" class="org.tanaguru.jms.messaging.TanaguruMsgOutServiceImpl">
-               <property name="jmsTemplate" ref="producerTemplate" />
-        </bean>
+    <bean id="tanaguruMsgOutService" class="org.tanaguru.jms.messaging.TanaguruMsgOutServiceImpl">
+        <property name="jmsTemplate" ref="producerTemplate" />
+    </bean>
         
 	
-	<!--Templates -->
-	<bean id="jmsAuditInTemplate" class="org.springframework.jms.core.JmsTemplate">
-		<property name="connectionFactory" ref="pooledConnectionFactory" />
-		<property name="defaultDestination" ref="auditQueueIn" />
-		<property name="sessionTransacted" value="true" />
-		<property name="sessionAcknowledgeModeName" value="SESSION_TRANSACTED" />
-	</bean>
+    <!--Templates -->
+    <bean id="jmsAuditInTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="pooledConnectionFactory" />
+        <property name="defaultDestination" ref="auditQueueIn" />
+        <property name="sessionTransacted" value="true" />
+        <property name="sessionAcknowledgeModeName" value="SESSION_TRANSACTED" />
+    </bean>
 	
-	<!--Container -->
-	<bean id="jmsTanaguruContainer"
-		class="org.springframework.jms.listener.DefaultMessageListenerContainer102">
-		<property name="connectionFactory" ref="jmsConnectionFactory" />
-		<property name="destination" ref="auditQueueIn" />
-		<property name="messageListener" ref="auditListener" />
-		<property name="sessionTransacted" value="true" />
-		<property name="sessionAcknowledgeModeName" value="SESSION_TRANSACTED" />
-	</bean>
+    <!--Container -->
+    <bean id="jmsTanaguruContainer"
+              class="org.springframework.jms.listener.DefaultMessageListenerContainer102">
+        <property name="connectionFactory" ref="jmsConnectionFactory" />
+        <property name="destination" ref="auditQueueIn" />
+        <property name="messageListener" ref="auditListener" />
+        <property name="sessionTransacted" value="true" />
+        <property name="sessionAcknowledgeModeName" value="SESSION_TRANSACTED" />
+    </bean>
 
 </beans>
