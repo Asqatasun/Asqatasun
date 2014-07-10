@@ -37,25 +37,25 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
 
     private Audit audit;
     private AuditCommand auditCommand;
-    
+
     private Set<AuditServiceThreadListener> listeners;
+
     public Set<AuditServiceThreadListener> getListeners() {
         return listeners;
     }
 
     /**
-     * 
-     * @param audit 
+     *
+     * @param audit
      */
-    public AuditServiceThreadImpl(
-            Audit audit) {
+    public AuditServiceThreadImpl(Audit audit) {
         super();
         this.audit = audit;
     }
-    
+
     /**
-     * 
-     * @param auditCommand 
+     *
+     * @param auditCommand
      */
     public AuditServiceThreadImpl(AuditCommand auditCommand) {
         super();
@@ -88,9 +88,9 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
 
     @Override
     public void run() {
-        
-    	//FIXME :Taoufiq
-    	try {
+
+        //FIXME :Taoufiq
+        try {
             init();
             sendMessage("[MSGOUT] AUDIT " + getAudit().getId() + " PENDIG ");
             loadContent();
@@ -104,11 +104,11 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
             fireAuditException(e);
         }
     }
- 
-	@Override
+
+    @Override
     public void init() {
         auditCommand.init();
-        
+
     }
 
     @Override
@@ -130,16 +130,17 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
     public void consolidate() {
         auditCommand.consolidate();
     }
-    
+
     @Override
     public void analyse() {
         auditCommand.analyse();
     }
 
     @Override
-    public boolean sendMessage(String urlPage){
-    	return auditCommand.sendMessageOut(urlPage);
+    public boolean sendMessage(String urlPage) {
+        return auditCommand.sendMessageOut(urlPage);
     }
+
     private void fireAuditCompleted() {
         if (listeners == null) {
             return;

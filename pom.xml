@@ -115,7 +115,7 @@
     </repositories>
     <pluginRepositories>
         <!-- download plugins from this repo -->
-        <pluginRepository>
+<!--        <pluginRepository>
             <id>oceane-repo</id>
             <name>oceane repository</name>
             <url>http://192.168.58.116:8094/nexus/content/groups/public</url>
@@ -125,24 +125,24 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
-        </pluginRepository>
+        </pluginRepository>-->
     </pluginRepositories>
 
-    <distributionManagement>
-        <!-- Publish the versioned releases here -->
+<!--    <distributionManagement>
+         Publish the versioned releases here 
         <repository>
             <id>oceane-releases-repo</id>
             <name>oceane-releases-repo</name>
             <url>http://192.168.58.116:8094/nexus/content/repositories/oceane-releases/</url>
         </repository>
 
-        <!-- Publish the versioned releases here -->
+         Publish the versioned releases here 
         <snapshotRepository>
             <id>oceane-snapshots-repo</id>
             <name>oceane-snapshots-repo</name>
             <url>http://192.168.58.116:8094/nexus/content/repositories/oceane-snapshots/</url>
         </snapshotRepository>
-    </distributionManagement>
+    </distributionManagement>-->
 
     <build>
         <plugins>
