@@ -15,6 +15,7 @@
     <url>http://www.tanaguru.org</url>
 
     <properties>
+        <junit.version>4.8.2</junit.version>
         <jersey.version>2.2</jersey.version>
     </properties>
 
@@ -101,10 +102,6 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>tanaguru-accessiweb2.2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>tanaguru-accessiweb2.1</artifactId>
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
@@ -252,7 +249,6 @@
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
         </dependency>
         <!-- Test dependencies -->
         <dependency>
@@ -277,6 +273,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
