@@ -179,6 +179,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
      * @param audit
      * @param testSolution
      * @param theme
+     * @param manualAudit
      * @return
      *      the number of elements for a given result type and theme
      */
@@ -195,8 +196,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         queryString = selectNbField(queryString, testSolution);
         queryString.append(RETRIEVE_COUNT_BY_RESULT_TYPE_AND_THEME_QUERY);
         queryString.append(" and wrs.manual_audit = ");
-        queryString.append(manualAudit ? "1" : "0")
-        ;
+        queryString.append(manualAudit ? "1" : "0");
         
         Query query = entityManager.createNativeQuery(queryString.toString());
         query.setParameter("idWebResource", webResource.getId());

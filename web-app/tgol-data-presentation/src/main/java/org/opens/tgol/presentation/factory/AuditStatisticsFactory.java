@@ -163,8 +163,7 @@ public class AuditStatisticsFactory {
                 actDataService.getActFromAudit(audit).getScope().getCode());
 
         ResultCounter resultCounter = auditStats.getResultCounter();
-        resultCounter.setPassedCount(webResourceDataService.getResultCountByResultType(
-                webResource, audit, TestSolution.PASSED).intValue());
+
         resultCounter.setPassedCount(0);
         resultCounter.setFailedCount(0);
         resultCounter.setNmiCount(0);

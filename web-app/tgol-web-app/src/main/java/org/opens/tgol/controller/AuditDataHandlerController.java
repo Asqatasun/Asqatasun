@@ -98,7 +98,7 @@ public abstract class AuditDataHandlerController extends AbstractController {
     /*
      * Authorized elements depending on the context.
      */
-    private Set<Integer> authorizedPageSize = new LinkedHashSet<Integer>();
+    private final Set<Integer> authorizedPageSize = new LinkedHashSet<>();
     public Set<Integer> getAuthorizedPageSize() {
         return authorizedPageSize;
     }
@@ -109,7 +109,7 @@ public abstract class AuditDataHandlerController extends AbstractController {
         }
     }
 
-    private final Set<String> authorizedSortCriterion = new LinkedHashSet<String>();
+    private final Set<String> authorizedSortCriterion = new LinkedHashSet<>();
     public Set<String> getAuthorizedSortCriterion() {
         return authorizedSortCriterion;
     }
@@ -200,7 +200,7 @@ public abstract class AuditDataHandlerController extends AbstractController {
         this.defaultParamSet = parameterDataService.getDefaultParameterSet();
     }
 
-    private Map<String, String> parametersToDisplay = new LinkedHashMap<String, String>();
+    private final Map<String, String> parametersToDisplay = new LinkedHashMap<>();
     public Map<String, String> getParametersToDisplay() {
         return parametersToDisplay;
     }
@@ -214,9 +214,9 @@ public abstract class AuditDataHandlerController extends AbstractController {
         return localeResolver;
     }
 
-    private List<String> authorizedScopeForPageList = new ArrayList<String>();
+    private final List<String> authorizedScopeForPageList = new ArrayList<>();
     public void setAuthorizedScopeForPageList(List<String> authorizedScopeForPageList) {
-        this.authorizedScopeForPageList = authorizedScopeForPageList;
+        this.authorizedScopeForPageList.addAll(authorizedScopeForPageList);
     }
 
     public List<String> getAuthorizedScopeForPageList() {
@@ -225,7 +225,7 @@ public abstract class AuditDataHandlerController extends AbstractController {
 
     protected boolean isAuthorizedScopeForPageList(Audit audit) {
         String scope = getActDataService().getActFromAudit(audit).getScope().getCode().name();
-        return authorizedScopeForPageList.contains(scope) ? true : false;
+        return authorizedScopeForPageList.contains(scope);
     }
 
     @Autowired
@@ -234,7 +234,7 @@ public abstract class AuditDataHandlerController extends AbstractController {
     }
 
     private static final String INVALID_TEST_VALUE_CHECKER_REGEXP = "\\d\\d?\\.\\d\\d?\\.?\\d?\\d?";
-    private Pattern invalidTestValueCheckerPattern = Pattern.compile(INVALID_TEST_VALUE_CHECKER_REGEXP);
+    private final Pattern invalidTestValueCheckerPattern = Pattern.compile(INVALID_TEST_VALUE_CHECKER_REGEXP);
     
     public AuditDataHandlerController() {}
 
@@ -244,6 +244,8 @@ public abstract class AuditDataHandlerController extends AbstractController {
      * @param webResource
      * @param model
      * @param displayScope
+     * @param isAuditManual 
+     * @param isInitialManual 
      */
     protected void addAuditStatisticsToModel(WebResource webResource, Model model, String displayScope, boolean isAuditManual, boolean isInitialManual) {
         model.addAttribute(
@@ -256,6 +258,8 @@ public abstract class AuditDataHandlerController extends AbstractController {
      * @param webResource
      * @param model
      * @param displayScope
+     * @param isAuditManual 
+     * @param isInitialManual
      * @return
      */
     protected AuditStatistics getAuditStatistics(WebResource webResource, Model model, String displayScope, boolean isAuditManual, boolean isInitialManual){
