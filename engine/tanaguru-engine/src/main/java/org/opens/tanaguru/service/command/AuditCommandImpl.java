@@ -193,12 +193,11 @@ public abstract class AuditCommandImpl implements AuditCommand {
     //The sender
     private TanaguruMsgOutService tanaguruMsgOutService;
     public TanaguruMsgOutService getTanaguruMsgOutService() {
-  		return tanaguruMsgOutService;
-  	}
-  	public void setTanaguruMsgOutService(TanaguruMsgOutService tanaguruMsgOutService) {
-  		this.tanaguruMsgOutService = tanaguruMsgOutService;
-  	}
-    
+        return tanaguruMsgOutService;
+    }
+    public void setTanaguruMsgOutService(TanaguruMsgOutService tanaguruMsgOutService) {
+        this.tanaguruMsgOutService = tanaguruMsgOutService;
+    }
 
     // The listeners
 	private AdaptationListener adaptationListener;
@@ -217,7 +216,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
     /**
      * The audit parameters
      */
-    private Set<Parameter> paramSet;
+    private final Set<Parameter> paramSet;
 
     /**
      * @param paramSet 
@@ -743,12 +742,13 @@ public abstract class AuditCommandImpl implements AuditCommand {
         }
     }
     
-    
     @Override
     public boolean sendMessageOut(String ulrPage){
-    	return tanaguruMsgOutService.send(ulrPage);
+        if (tanaguruMsgOutService != null) {
+            return tanaguruMsgOutService.send(ulrPage);
+        }
+        return false;
     }
-    
     
     /**
      * 

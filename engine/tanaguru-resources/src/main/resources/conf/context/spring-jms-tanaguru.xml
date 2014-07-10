@@ -47,8 +47,21 @@
     <bean id="tanaguruMsgOutService" class="org.tanaguru.jms.messaging.TanaguruMsgOutServiceImpl">
         <property name="jmsTemplate" ref="producerTemplate" />
     </bean>
-        
-	
+
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="auditCommandFactory"/>
+        </property>
+        <property name="targetMethod">
+            <value>setTanaguruMsgOutService</value>
+        </property>
+        <property name="arguments">
+            <list>
+                <ref local="tanaguruMsgOutService"/>
+            </list>
+        </property>
+    </bean>    
+                	
     <!--Templates -->
     <bean id="jmsAuditInTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="pooledConnectionFactory" />
