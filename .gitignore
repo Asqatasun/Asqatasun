@@ -86,3 +86,4 @@ org.eclipse.m2e.core.prefs
 target
 nb-configuration.xml
 nbactions.xml
+hsql-db*
