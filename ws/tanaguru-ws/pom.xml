@@ -7,6 +7,7 @@
         <groupId>org.opens</groupId>
         <artifactId>tanaguru</artifactId>
         <version>3.1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
     <artifactId>tanaguru-ws</artifactId>
     <packaging>war</packaging>
@@ -14,10 +15,6 @@
     <url>http://www.tanaguru.org</url>
 
     <properties>
-        <java.version>1.6</java.version>
-        <log4j.version>1.2.15</log4j.version>
-        <junit.version>4.8.2</junit.version>
-        <spring.version>3.1.2.RELEASE</spring.version>
         <jersey.version>2.2</jersey.version>
     </properties>
 
@@ -280,7 +277,6 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
