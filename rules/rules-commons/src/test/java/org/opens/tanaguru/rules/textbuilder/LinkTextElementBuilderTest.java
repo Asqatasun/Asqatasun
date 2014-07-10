@@ -22,6 +22,7 @@
 package org.opens.tanaguru.rules.textbuilder;
 
 import junit.framework.TestCase;
+import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -31,6 +32,9 @@ import org.jsoup.nodes.Element;
  * @author jkowalczyk
  */
 public class LinkTextElementBuilderTest extends TestCase {
+    
+    private static final Logger LOGGER = 
+            Logger.getLogger(LinkTextElementBuilderTest.class);
     
     public LinkTextElementBuilderTest(String testName) {
         super(testName);
@@ -50,7 +54,7 @@ public class LinkTextElementBuilderTest extends TestCase {
      * Test of buildTextFromElement method, of class LinkTextElementBuilder.
      */
     public void testCompositeLink() {
-        System.out.println("buildTextFromElement of Composite link");
+        LOGGER.debug("buildTextFromElement of Composite link");
         Document document = Jsoup.parse("<a href=\"\">Text1<img alt=\"Image Alt \" src=\"\"/> Text3</a>");
         Element el = document.select("a").first();
         LinkTextElementBuilder instance = new LinkTextElementBuilder();
@@ -63,7 +67,7 @@ public class LinkTextElementBuilderTest extends TestCase {
      * Test of buildTextFromElement method, of class LinkTextElementBuilder.
      */
     public void testCompositeLinkWithNonAlphanumericalCharacters() {
-        System.out.println("buildTextFromElement of Composite link");
+        LOGGER.debug("buildTextFromElement of Composite link");
         Document document = Jsoup.parse("<a href=\"my-link.html\" title=\"-+*-->;*&!§\">"
             +"    -+*"
             +"    <img src=\"image.jpg\" alt=\"-->;*\"/>"
@@ -80,7 +84,7 @@ public class LinkTextElementBuilderTest extends TestCase {
      * Test of buildTextFromElement method, of class LinkTextElementBuilder.
      */
     public void testImageLink() {
-        System.out.println("buildTextFromElement of Image link");
+        LOGGER.debug("buildTextFromElement of Image link");
         Document document = Jsoup.parse("<a href=\"\">   <img alt=\" Image Alt \" src=\"\"/>  </a>");
         Element el = document.select("a").first();
         LinkTextElementBuilder instance = new LinkTextElementBuilder();
@@ -93,7 +97,7 @@ public class LinkTextElementBuilderTest extends TestCase {
      * Test of buildTextFromElement method, of class LinkTextElementBuilder.
      */
     public void testImageObjectLink() {
-        System.out.println("buildTextFromElement of Image object link");
+        LOGGER.debug("buildTextFromElement of Image object link");
         Document document = Jsoup.parse("<a href=\"fake-link.htm\"> <object type=\"image\" "
                 + "data=\"fake-data.png\">"
                 
@@ -111,7 +115,7 @@ public class LinkTextElementBuilderTest extends TestCase {
      * Test of buildTextFromElement method, of class LinkTextElementBuilder.
      */
     public void testSimpleLink() {
-        System.out.println("buildTextFromElement of simple link");
+        LOGGER.debug("buildTextFromElement of simple link");
         Document document = Jsoup.parse("<a href=\"\">    Text1 Text3    </a>");
         Element el = document.select("a").first();
         LinkTextElementBuilder instance = new LinkTextElementBuilder();

@@ -22,6 +22,7 @@
 package org.opens.tanaguru.rules.elementchecker.text;
 
 import junit.framework.TestCase;
+import org.apache.log4j.Logger;
 import static org.easymock.EasyMock.*;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
@@ -37,6 +38,9 @@ import org.opens.tanaguru.service.ProcessRemarkService;
  * @author jkowalczyk
  */
 public class TextEmptinessCheckerTest extends TestCase {
+    
+    private static final Logger LOGGER = 
+            Logger.getLogger(TextEmptinessCheckerTest.class);
     
     private static final String TEXT_EMPTY_MSG = "empty";
     private static final String TEXT_NOT_EMPTY_MSG = "not empty";
@@ -72,7 +76,7 @@ public class TextEmptinessCheckerTest extends TestCase {
      * Test of doCheck method, of class TextEmptinessChecker.
      */
     public void testDoCheckWithEmptyElements() {
-        System.out.println("doCheckWithEmptyElements");
+        LOGGER.debug("doCheckWithEmptyElements");
         
         /* Prepare test context */
         mockTestSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
@@ -94,7 +98,7 @@ public class TextEmptinessCheckerTest extends TestCase {
      * Test of doCheck method, of class TextEmptinessChecker.
      */
     public void testDoCheckWithNullText() {
-        System.out.println("doCheckWithNullText");
+        LOGGER.debug("doCheckWithNullText");
         
         /* Prepare test context */
         elements.add(element);
@@ -118,7 +122,7 @@ public class TextEmptinessCheckerTest extends TestCase {
      * Test of doCheck method, of class TextEmptinessChecker.
      */
     public void testDoCheckWithEmptyText() {
-        System.out.println("doCheckWithEmptyText");
+        LOGGER.debug("doCheckWithEmptyText");
         
         /* Prepare test context */
         elements.add(element);
@@ -155,7 +159,7 @@ public class TextEmptinessCheckerTest extends TestCase {
      * Test of doCheck method, of class TextEmptinessChecker.
      */
     public void testDoCheckWithNotEmptyText() {
-        System.out.println("doCheckWithNotEmptyText");
+        LOGGER.debug("doCheckWithNotEmptyText");
         
         /* Prepare test context */
         elements.add(element);
@@ -186,7 +190,7 @@ public class TextEmptinessCheckerTest extends TestCase {
      * Test of doCheck method, of class TextEmptinessChecker.
      */
     public void testDoCheckWithEmptyTextAndEmptyResultOverridenByConstructor() {
-        System.out.println("doCheckWithEmptyTextAndEmptyResultOverridenByConstructor");
+        LOGGER.debug("doCheckWithEmptyTextAndEmptyResultOverridenByConstructor");
         
         /* Prepare test context */
         elements.add(element);
@@ -227,7 +231,7 @@ public class TextEmptinessCheckerTest extends TestCase {
      * Test of doCheck method, of class TextEmptinessChecker.
      */
     public void testDoCheckWithNotEmptyTextAndNotEmptyResultOverridenByConstructor() {
-        System.out.println("doCheckWithNotEmptyTextAndNotEmptyResultOverridenByConstructor");
+        LOGGER.debug("doCheckWithNotEmptyTextAndNotEmptyResultOverridenByConstructor");
         
         /* Prepare test context */
         elements.add(element);

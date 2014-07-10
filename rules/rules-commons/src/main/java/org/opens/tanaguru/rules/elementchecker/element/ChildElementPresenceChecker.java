@@ -47,7 +47,7 @@ public class ChildElementPresenceChecker extends ElementCheckerImpl {
     /**
      * The child elements to search
      */
-    private Collection<String> childElementNames = new ArrayList<String>();
+    private final Collection<String> childElementNames = new ArrayList<>();
     
     /**
      * The minimum number of children required. Default is 8
@@ -68,13 +68,13 @@ public class ChildElementPresenceChecker extends ElementCheckerImpl {
      * The message code associated with a processRemark when the element is
      * detected on the page
      */
-    private String messageCodeOnElementDetected;
+    private final String messageCodeOnElementDetected;
     
     /**
      * The message code associated with a processRemark when the element is
      * not found on the page
      */
-    private String messageCodeOnElementNotDetected;
+    private final String messageCodeOnElementNotDetected;
     
     /**
      * Constructor.
@@ -128,6 +128,7 @@ public class ChildElementPresenceChecker extends ElementCheckerImpl {
      * Constructor.
      * 
      * @param childElementName
+     * @param minimumNumberOfChildRequired
      * @param detectedSolution
      * @param notDetectedSolution
      * @param messageCodeOnElementDetected
@@ -153,6 +154,7 @@ public class ChildElementPresenceChecker extends ElementCheckerImpl {
      * Constructor.
      * 
      * @param childElementName
+     * @param minimumNumberOfChildRequired
      * @param detectedSolution
      * @param notDetectedSolution
      * @param messageCodeOnElementDetected

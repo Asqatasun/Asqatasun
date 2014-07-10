@@ -52,34 +52,34 @@ public class Aw22Rule01062Test extends Aw22RuleImplementationTestCase {
     protected void setUpWebResourceMap() {
         getWebResourceMap().put("AW22.Test.1.6.2-3NMI-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule01062/AW22.Test.1.6.2-3NMI-01.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule01062/AW22.Test.1.6.2-3NMI-01.html"));
         getWebResourceMap().put("AW22.Test.1.6.2-3NMI-02",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule01062/AW22.Test.1.6.2-3NMI-02.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule01062/AW22.Test.1.6.2-3NMI-02.html"));
         addParameterToParameterMap("AW22.Test.1.6.2-3NMI-02", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "id-informative-object"));
         getWebResourceMap().put("AW22.Test.1.6.2-3NMI-03",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "AW22/Aw22Rule01062/AW22.Test.1.6.2-3NMI-03.html"));
+                getTestcasesFilePath() + "accessiweb22/Aw22Rule01062/AW22.Test.1.6.2-3NMI-03.html"));
         addParameterToParameterMap("AW22.Test.1.6.2-3NMI-03", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "id-informative-object"));
         addParameterToParameterMap("AW22.Test.1.6.2-3NMI-03", createParameter("Rules", "DECORATIVE_IMAGE_MARKER", "class-decorative-object"));
         getWebResourceMap().put("AW22.Test.1.6.2-4NA-01",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "AW22/Aw22Rule01062/AW22.Test.1.6.2-4NA-01.html"));
+              getTestcasesFilePath() + "accessiweb22/Aw22Rule01062/AW22.Test.1.6.2-4NA-01.html"));
         getWebResourceMap().put("AW22.Test.1.6.2-4NA-02",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "AW22/Aw22Rule01062/AW22.Test.1.6.2-4NA-02.html"));
+              getTestcasesFilePath() + "accessiweb22/Aw22Rule01062/AW22.Test.1.6.2-4NA-02.html"));
         getWebResourceMap().put("AW22.Test.1.6.2-4NA-03",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "AW22/Aw22Rule01062/AW22.Test.1.6.2-4NA-03.html"));
+              getTestcasesFilePath() + "accessiweb22/Aw22Rule01062/AW22.Test.1.6.2-4NA-03.html"));
         getWebResourceMap().put("AW22.Test.1.6.2-4NA-04",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "AW22/Aw22Rule01062/AW22.Test.1.6.2-4NA-04.html"));
+              getTestcasesFilePath() + "accessiweb22/Aw22Rule01062/AW22.Test.1.6.2-4NA-04.html"));
         getWebResourceMap().put("AW22.Test.1.6.2-4NA-05",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "AW22/Aw22Rule01062/AW22.Test.1.6.2-4NA-05.html"));
+              getTestcasesFilePath() + "accessiweb22/Aw22Rule01062/AW22.Test.1.6.2-4NA-05.html"));
         getWebResourceMap().put("AW22.Test.1.6.2-4NA-06",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "AW22/Aw22Rule01062/AW22.Test.1.6.2-4NA-06.html"));
+              getTestcasesFilePath() + "accessiweb22/Aw22Rule01062/AW22.Test.1.6.2-4NA-06.html"));
         addParameterToParameterMap("AW22.Test.1.6.2-4NA-06", createParameter("Rules", "DECORATIVE_IMAGE_MARKER", "class-decorative-object"));
     }
 

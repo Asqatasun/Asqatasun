@@ -22,8 +22,7 @@
 package org.opens.tanaguru.entity.dao.reference;
 
 import java.util.List;
-import java.util.Map;
-
+import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Level;
 import org.opens.tanaguru.entity.reference.Reference;
@@ -85,15 +84,9 @@ public interface TestDAO extends GenericDAO<Test, Long> {
 
     /**
      * 
-     * @param levelDAO
+     * @param audit
+     * @param testLabel
+     * @return the test for a given audit and label
      */
-    void setLevelDAO(LevelDAO levelDAO);
-
-    /**
-     * 
-     * @param bronzeLevelCodeByRefMap This map handles the bronze level code
-     *      (first level) for each referential
-     */
-    void setBronzeLevelCodeByRefMap(Map<String, String> bronzeLevelCodeByRefMap);
-
+    Test retrieveTestFromAuditAndLabel(Audit audit, String testLabel);
 }

@@ -1,0 +1,6 @@
+theme;theme_en;test;test-label_en;level;scope;class-name
+1;Detection;1-1;Does each page have a h1 tag?;A;1;DetectH1
+1;Detection;1-2;A page cannot contain iframe. Is that rule respected?;A;1;DetectIframe
+2;Select and Check;2-1;Each link element must not have a title attribute. Is that rule respected?;A;1;CheckWhetherEachLinkHaventTitleAttribute
+3;Site scope rule;3-1;Is each title tag unique on the whole site?;A;3;CheckTitleContentUnicityAtSiteLevel
+4;Nomenclature based Check;4-1;The title tag must not be included in the irrelevant page title blacklist. Is that rule respected?;A;1;CheckTitleTagRelevancy

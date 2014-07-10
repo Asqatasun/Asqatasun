@@ -197,10 +197,10 @@ public class AuditStatisticsImpl implements AuditStatistics{
      */
     @Override
     public int getTestCount(){
-        return Integer.valueOf(resultCounter.getNmiCount()) +
-               Integer.valueOf(resultCounter.getNaCount()) +
-               Integer.valueOf(resultCounter.getPassedCount()) +
-               Integer.valueOf(resultCounter.getFailedCount());
+        return resultCounter.getNmiCount() +
+               resultCounter.getNaCount() +
+               resultCounter.getPassedCount() +
+               resultCounter.getFailedCount();
     }
 
     private Integer pageCounter;
@@ -222,7 +222,7 @@ public class AuditStatisticsImpl implements AuditStatistics{
         this.pageCounter = pageCounter;
     }
 
-    private Map<String, String> parametersMap = new LinkedHashMap<String, String>();
+    private Map<String, String> parametersMap = new LinkedHashMap();
     /**
      *
      * @return
@@ -258,6 +258,17 @@ public class AuditStatisticsImpl implements AuditStatistics{
     @Override
     public void setAuditScope(ScopeEnum auditScope) {
         this.auditScope = auditScope;
+    }
+
+    private Integer auditedPageCounter;
+    @Override
+    public Integer getAuditedPageCounter() {
+        return auditedPageCounter;
+    }
+
+    @Override
+    public void setAuditedPageCounter(Integer auditedPageCounter) {
+        this.auditedPageCounter = auditedPageCounter;
     }
 
 }

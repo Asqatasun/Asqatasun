@@ -161,6 +161,7 @@ CREATE TABLE IF NOT EXISTS `THEME` (
   `Label` varchar(255) NOT NULL,
   `Rank` int(11) DEFAULT NULL,
   PRIMARY KEY (`Id_Theme`),
+  UNIQUE INDEX `Cd_Theme_UNIQUE` (`Cd_Theme` ASC),
   INDEX `Cd_Theme_Index` (`Cd_Theme` ASC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -177,7 +178,13 @@ CREATE TABLE IF NOT EXISTS `REFERENCE` (
   `Label` varchar(255) NOT NULL,
   `Rank` int(11) DEFAULT NULL,
   `Url` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`Id_Reference`)
+  `Id_Default_Level` bigint(20) DEFAULT 2,
+  PRIMARY KEY (`Id_Reference`),
+  UNIQUE INDEX `Cd_Reference_UNIQUE` (`Cd_Reference` ASC),
+  KEY `fk_Ref_Level` (`Id_Default_Level`),
+      CONSTRAINT `fk_Ref_Level` 
+          FOREIGN KEY Id_Default_Level_Index (`Id_Default_Level`) 
+          REFERENCES `LEVEL` (`Id_Level`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
@@ -196,6 +203,7 @@ CREATE TABLE IF NOT EXISTS `CRITERION` (
   `Reference_Id_Reference` bigint(20) DEFAULT NULL,
   `Theme_Id_Theme` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`Id_Criterion`),
+  UNIQUE INDEX `Cd_Criterion_UNIQUE` (`Cd_Criterion` ASC),
   KEY `FKBCFA1E81E8F67244` (`Theme_Id_Theme`),
   CONSTRAINT `FKBCFA1E81E8F67244` 
       FOREIGN KEY Theme_Id_Theme_Index (`Theme_Id_Theme`) 
@@ -229,6 +237,7 @@ CREATE TABLE IF NOT EXISTS `TEST` (
   `Id_Scope` bigint(20) DEFAULT NULL,
   `No_Process` bit(1) DEFAULT b'1',
   PRIMARY KEY (`Id_Test`),
+  UNIQUE INDEX `Cd_Test_UNIQUE` (`Cd_Test` ASC),
   CONSTRAINT `FK273C92CCA757AD` 
       FOREIGN KEY Id_Decision_Level_Index (`Id_Decision_Level`) 
       REFERENCES `DECISION_LEVEL` (`Id_Decision_Level`),
@@ -525,6 +534,7 @@ CREATE  TABLE IF NOT EXISTS `PARAMETER` (
   `Is_Default` BIT NULL DEFAULT 0 ,
   PRIMARY KEY (`Id_Parameter`) ,
   INDEX `fk_PARAMETER_PARAMETER_ELEMENT` (`Id_Parameter_Element` ASC) ,
+  UNIQUE KEY `Unique_Param_Element_Type_Param_value` (`Parameter_Value`(255), `Id_Parameter_Element`),
   CONSTRAINT `fk_PARAMETER_PARAMETER_ELEMENT`
     FOREIGN KEY (`Id_Parameter_Element` )
     REFERENCES `PARAMETER_ELEMENT` (`Id_Parameter_Element` )
@@ -698,13 +708,10 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-
-
 -- ---------------------------------------------------------------------------------------------------------
 -- Creating the hibernate audit table of process_result
 -- ---------------------------------------------------------------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS `process_result_aud` (
+CREATE TABLE IF NOT EXISTS `PROCESS_RESULT_AUD` (
   `DTYPE` varchar(31) NOT NULL,
   `Id_Process_Result` bigint(20) NOT NULL,
   `REV` int(11) NOT NULL,
@@ -716,13 +723,13 @@ CREATE TABLE IF NOT EXISTS `process_result_aud` (
   `Manual_Definite_Value` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`Id_Process_Result`,`REV`),
   KEY `FK5411075EDF74E053` (`REV`),
-  CONSTRAINT `FK5411075EDF74E053` FOREIGN KEY (`REV`) REFERENCES `revinfo` (`REV`)
+  CONSTRAINT `FK5411075EDF74E053` FOREIGN KEY (`REV`) REFERENCES `REVINFO` (`REV`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ---------------------------------------------------------------------------------------------------------
 -- Hibernate envers technical table to refer the hibernate changes versions
 -- ---------------------------------------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `revinfo` (
+CREATE TABLE IF NOT EXISTS `REVINFO` (
   `REV` int(11) NOT NULL AUTO_INCREMENT,
   `REVTSTMP` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`REV`)

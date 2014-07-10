@@ -151,7 +151,7 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     @Override
     public void addProcessResult(ProcessResult processResult) {
         if (this.processResultSet == null) {
-            this.processResultSet = new LinkedHashSet<ProcessResultImpl>();
+            this.processResultSet = new LinkedHashSet<>();
         }
         processResult.setSubject(this);
         this.processResultSet.add((ProcessResultImpl) processResult);
@@ -160,7 +160,7 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     @Override
     public void addAllProcessResult(Collection<ProcessResult> processResultList) {
         if (this.processResultSet == null) {
-            this.processResultSet = new LinkedHashSet<ProcessResultImpl>();
+            this.processResultSet = new LinkedHashSet<>();
         }
         for (ProcessResult processResult : processResultList) {
             addProcessResult(processResult);

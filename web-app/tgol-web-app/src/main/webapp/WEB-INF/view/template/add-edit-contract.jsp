@@ -7,12 +7,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@taglib uri="http://tagutils" prefix="tg" %>
 
-<c:set var="jAuditAssisteUrl">
-<c:url value="/Js/audit-assiste/type-audit.js"/>  
-</c:set>
-<script type="text/javascript" src="${jAuditAssisteUrl}""></script>
-<body onload="gereCheckBox()"></body>
-
                 <div class="span16">
                     <div id="mandatory-elements-message" class="alert-message block-message warning">
                         <spring:message code="sign-up.mandatoryElementsMessage"/>
@@ -103,7 +97,7 @@
                                 <c:forEach items="${createContractCommand.referentialMap}" var="ref" varStatus="pRefInput">
                                     <span class="edit-contract-ref">
                                     <c:set var="refKey">${ref.key}</c:set>
-                                    <label id="${refKey}" for="referentialMap${refKey}1" class="edit-contract-label"><fmt:message key="edit-contract.${refKey}"/></label>
+                                    <label id="${refKey}" for="referentialMap${refKey}1" class="edit-contract-label"><fmt:message key="${refKey}"/></label>
                                     <form:checkbox path="referentialMap[${refKey}]" cssErrorClass="error" value="${ref.value}" />
                                     <form:errors path="referentialMap[${refKey}]" cssClass="alert-message error" />
                                     </span>
@@ -116,8 +110,8 @@
                                 <c:forEach items="${createContractCommand.functionalityMap}" var="funct" varStatus="pFunctInput">
                                     <span class="edit-contract-funct">
                                         <c:set var="functKey">${funct.key}</c:set>
-                                        <label id="${functKey}" for="functionalityMap${functKey}1" class="edit-contract-label" ><fmt:message key="edit-contract.${functKey}"/></label>
-                                        <form:checkbox  path="functionalityMap[${functKey}]" cssErrorClass="error"  value="${funct.value}" onchange="gereCheckBox()"/>
+                                        <label id="${functKey}" for="functionalityMap${functKey}1" class="edit-contract-label"><fmt:message key="edit-contract.${functKey}"/></label>
+                                        <form:checkbox path="functionalityMap[${functKey}]" cssErrorClass="error"  value="${funct.value}"/>
                                         <form:errors path="functionalityMap[${functKey}]" cssClass="alert-message error" />
                                     </span>
                                 </c:forEach>

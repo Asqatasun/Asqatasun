@@ -39,6 +39,7 @@ import org.opens.tgol.form.NumericalFormField;
 import org.opens.tgol.form.SelectFormField;
 import org.opens.tgol.form.parameterization.AuditSetUpFormField;
 import org.opens.tgol.form.parameterization.helper.AuditSetUpFormFieldHelper;
+import org.opens.tgol.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -49,23 +50,10 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 public final class AuditSetUpCommandFactory {
 
     /**
-     * The code that identified the level Parameter
-     */
-    private String levelParameterCode = "LEVEL";
-
-    public String getLevelParameterCode() {
-        return levelParameterCode;
-    }
-
-    public void setLevelParameterCode(String levelParameterCode) {
-        this.levelParameterCode = levelParameterCode;
-    }
-
-    /**
      *
      */
     public ParameterElement getLevelParameterElement() {
-        return parameterElementDataService.getParameterElement(levelParameterCode);
+        return parameterElementDataService.getParameterElement(TgolKeyStore.LEVEL_PARAM_KEY);
     }
     /**
      *
@@ -119,23 +107,27 @@ public final class AuditSetUpCommandFactory {
     public void setScenarioDataService(ScenarioDataService scenarioDataService) {
         this.scenarioDataService = scenarioDataService;
     }
-    
+
     /**
      * The holder that handles the unique instance of AuditSetUpCommandFactory
      */
     private static class AuditSetUpCommandFactoryHolder {
-        private static final AuditSetUpCommandFactory INSTANCE = 
+
+        private static final AuditSetUpCommandFactory INSTANCE =
                 new AuditSetUpCommandFactory();
     }
-    
+
     /**
      * Private constructor
      */
-    private AuditSetUpCommandFactory() {}
-    
+    private AuditSetUpCommandFactory() {
+    }
+
     /**
-     * Singleton pattern based on the "Initialization-on-demand 
-     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
+     * Singleton pattern based on the "Initialization-on-demand holder idiom".
+     * See
+     *
+     * @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
      * @return the unique instance of AuditSetUpCommandFactory
      */
     public static AuditSetUpCommandFactory getInstance() {
@@ -154,7 +146,7 @@ public final class AuditSetUpCommandFactory {
             Map<String, List<AuditSetUpFormField>> optionalFormFieldMap) {
         AuditSetUpCommand pageAuditSetUpCommand = new AuditSetUpCommand();
         pageAuditSetUpCommand.setScope(ScopeEnum.PAGE);
-        pageAuditSetUpCommand.setUrlList(getGroupOfPagesUrl(contract));
+        pageAuditSetUpCommand.setUrlList(getGroupOfPagesUrl(contract, false));
         setUpAuditSetUpCommand(
                 pageAuditSetUpCommand,
                 contract,
@@ -177,7 +169,7 @@ public final class AuditSetUpCommandFactory {
         pageAuditSetUpCommand.setUrlList(urlList);
         for (Parameter param : auditParamset) {
             String paramCode = param.getParameterElement().getParameterElementCode();
-            if (paramCode.equals(levelParameterCode)) {
+            if (paramCode.equals(TgolKeyStore.LEVEL_PARAM_KEY)) {
                 pageAuditSetUpCommand.setLevel(param.getValue());
             } else {
                 pageAuditSetUpCommand.setAuditParameter(paramCode, param.getValue());
@@ -221,6 +213,7 @@ public final class AuditSetUpCommandFactory {
             List<SelectFormField> levelFormFieldList,
             Map<String, List<AuditSetUpFormField>> optionalFormFieldMap) {
         AuditSetUpCommand siteAuditSetUpCommand = new AuditSetUpCommand();
+        siteAuditSetUpCommand.setUrlList(getGroupOfPagesUrl(contract, true));
         siteAuditSetUpCommand.setScope(ScopeEnum.DOMAIN);
         setUpAuditSetUpCommand(
                 siteAuditSetUpCommand,
@@ -340,7 +333,7 @@ public final class AuditSetUpCommandFactory {
      * @param contractId
      * @return
      */
-    private List<String> getGroupOfPagesUrl(Contract contract) {
+    private List<String> getGroupOfPagesUrl(Contract contract, boolean isSiteAudit) {
         User user = contract.getUser();
         /* 
          * WARNING hard-coded exception for guest user 
@@ -350,7 +343,7 @@ public final class AuditSetUpCommandFactory {
         List<String> groupOfPagesUrl = new LinkedList<String>();
         if (user == null) {
             return null;
-        } else if (user.getEmail1().equalsIgnoreCase("guest")) {
+        } else if (user.getEmail1().equalsIgnoreCase("guest") || isSiteAudit) {
             nbOfPages = 1;
         }
         for (int i = 0; i < nbOfPages; i++) {
@@ -375,16 +368,16 @@ public final class AuditSetUpCommandFactory {
             Contract contract,
             List<SelectFormField> levelFormFieldList,
             AuditSetUpCommand auditSetUpCommand) {
-        ParameterElement levelParameterElement = getLevelParameterElement();
+
         // We retrieve the default value of the Parameter associated 
         // with the level ParameterElement
-        String defaultValue = getParameterDataService().
-                getDefaultParameter(levelParameterElement).getValue();
+        String defaultValue = getParameterDataService().getDefaultLevelParameter().getValue();
+        
         Logger.getLogger(this.getClass()).debug("default level value " + defaultValue);
         ScopeEnum scope = auditSetUpCommand.getScope();
         boolean isDefaultValue = true;
         if (scope == ScopeEnum.DOMAIN || scope == ScopeEnum.SCENARIO) {
-            String lastUserValue = retrieveParameterValueFromLastAudit(contract, levelParameterElement, auditSetUpCommand);
+            String lastUserValue = retrieveParameterValueFromLastAudit(contract, getLevelParameterElement(), auditSetUpCommand);
             Logger.getLogger(this.getClass()).debug("lastUserValue " + lastUserValue);
             if (lastUserValue != null && !StringUtils.equals(lastUserValue, defaultValue)) {
                 // we override the auditParameter with the last user value

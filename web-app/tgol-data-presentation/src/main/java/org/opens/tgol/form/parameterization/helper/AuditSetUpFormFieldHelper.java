@@ -21,11 +21,10 @@
  */
 package org.opens.tgol.form.parameterization.helper;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import org.apache.commons.lang.StringUtils;
+import org.opens.tanaguru.entity.reference.Reference;
+import org.opens.tanaguru.entity.service.reference.ReferenceDataService;
 import org.opens.tgol.entity.option.OptionElement;
 import org.opens.tgol.form.NumericalFormField;
 import org.opens.tgol.form.SelectElement;
@@ -42,12 +41,18 @@ import org.opens.tgol.form.parameterization.AuditSetUpFormField;
  */
 public final class AuditSetUpFormFieldHelper {
 
-    private static final String DEFAULT_LEVEL = "Ar";
     private static Map<String, String> DEFAULT_LEVEL_BY_REF_MAP = Collections.EMPTY_MAP;
     public static void setDefaultLevelByRefMap(Map<String, String> defaultLevelByRef) {
         DEFAULT_LEVEL_BY_REF_MAP = defaultLevelByRef;
     }
-            
+     
+    public static void setReferenceDataService(ReferenceDataService referenceDataService) {
+        DEFAULT_LEVEL_BY_REF_MAP = new HashMap<String, String> ();
+        for (Reference reference : referenceDataService.findAll()) {
+            DEFAULT_LEVEL_BY_REF_MAP.put(reference.getCode(), reference.getDefaultLevel().getCode());
+        }
+    }
+    
     private AuditSetUpFormFieldHelper() {
     }
 
@@ -237,8 +242,6 @@ public final class AuditSetUpFormFieldHelper {
         strb.append(";");
         if (DEFAULT_LEVEL_BY_REF_MAP.containsKey(ref)) {
             strb.append(DEFAULT_LEVEL_BY_REF_MAP.get(ref));
-        } else {
-            strb.append(DEFAULT_LEVEL);
         }
         selectDefaultLevelFromLevelValue(selectFormFieldList, strb.toString());
     }

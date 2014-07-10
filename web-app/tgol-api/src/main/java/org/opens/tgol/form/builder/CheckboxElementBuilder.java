@@ -50,7 +50,7 @@ public interface CheckboxElementBuilder extends FormFieldBuilder {
      * 
      * @return
      */
-    boolean getDefault();
+    boolean getDefaultElement();
     
     /**
      * Sets whether each checkbox is selected.

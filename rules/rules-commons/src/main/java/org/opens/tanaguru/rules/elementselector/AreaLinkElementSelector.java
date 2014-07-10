@@ -28,7 +28,7 @@ import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
- * Element selector implementation that select area links. 
+ * Element selector implementation that selects area links. 
  * 
  * @author jkowalczyk
  */
@@ -37,7 +37,7 @@ public class AreaLinkElementSelector extends LinkElementSelector {
     /*
      * The element builder needed to build the link text
      */
-    private TextElementBuilder areaTextElementBuilder =
+    private final TextElementBuilder areaTextElementBuilder =
             new TextAttributeOfElementBuilder(AttributeStore.ALT_ATTR);
 
     /**

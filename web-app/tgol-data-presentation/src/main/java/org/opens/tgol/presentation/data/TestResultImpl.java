@@ -32,17 +32,16 @@ import org.opens.tanaguru.entity.reference.Test;
 
 /**
  * This class processes raw results and handles displayable remarks data
+ *
  * @author jkowalczyk
  */
-public class TestResultImpl implements TestResult{
+public class TestResultImpl implements TestResult {
 
-	
-    private List<RemarkInfos> remarkInfosList = new ArrayList<RemarkInfos>();
-    
+    private List<RemarkInfos> remarkInfosList = new ArrayList<>();
+
     /**
      *
-     * @return
-     *          the list of remark info for the given test
+     * @return the list of remark info for the given test
      */
     @Override
     public List<RemarkInfos> getRemarkInfosList() {
@@ -50,45 +49,49 @@ public class TestResultImpl implements TestResult{
     }
 
     private String[] testEvidenceRepresentationOrder;
+
     @Override
     public void setTestEvidenceRepresentationOrder(String testEvidenceRepresentationOrder) {
         this.testEvidenceRepresentationOrder = testEvidenceRepresentationOrder.split(";");
     }
     private String manualStatus;
-	private String comment;
-	@Override
+    private String comment;
+
+    @Override
     public String getManualStatus() {
-		return manualStatus;
-	}
-	
-	public void setManualStatus(String manualStatus) {
-		this.manualStatus = manualStatus;
-	}
-	@Override
-	public String getComment() {
-		return comment;
-	}
+        return manualStatus;
+    }
 
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
+    public void setManualStatus(String manualStatus) {
+        this.manualStatus = manualStatus;
+    }
 
-	@Override
+    @Override
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    @Override
     public String[] getTestEvidenceRepresentationOrder() {
         return testEvidenceRepresentationOrder;
     }
 
     private int testRepresentationType;
+
     @Override
     public int getTestRepresentationType() {
         return testRepresentationType;
     }
 
     private String testRepresentation;
+
     /**
      *
-     * @return
-     *          the test representation needed to display test results
+     * @return the test representation needed to display test results
      */
     @Override
     public String getTestRepresentation() {
@@ -101,17 +104,17 @@ public class TestResultImpl implements TestResult{
      */
     @Override
     public void setTestRepresentation(int testRepresentationType) {
-        this.testRepresentation = REPRESENTATION_FILE_PREFIX +
-                testRepresentationType +
-                REPRESENTATION_FILE_SUFFIX;
+        this.testRepresentation = REPRESENTATION_FILE_PREFIX
+                + testRepresentationType
+                + REPRESENTATION_FILE_SUFFIX;
         this.testRepresentationType = testRepresentationType;
     }
 
     private Test test;
+
     /**
      *
-     * @return
-     *          The test 
+     * @return The test
      */
     @Override
     public Test getTest() {
@@ -128,10 +131,10 @@ public class TestResultImpl implements TestResult{
     }
 
     private String testShortLabel;
+
     /**
      *
-     * @return
-     *          The test short label
+     * @return The test short label
      */
     @Override
     public String getTestShortLabel() {
@@ -148,10 +151,10 @@ public class TestResultImpl implements TestResult{
     }
 
     private String testCode;
+
     /**
      *
-     * @return
-     *      the test key 
+     * @return the test key
      */
     @Override
     public String getTestCode() {
@@ -168,10 +171,10 @@ public class TestResultImpl implements TestResult{
     }
 
     private String testUrl;
+
     /**
      *
-     * @return
-     *      the tested url
+     * @return the tested url
      */
     @Override
     public String getTestUrl() {
@@ -188,10 +191,10 @@ public class TestResultImpl implements TestResult{
     }
 
     private int elementCounter = 0;
+
     /**
      *
-     * @return
-     *          the number of encountered elements
+     * @return the number of encountered elements
      */
     @Override
     public int getElementCounter() {
@@ -208,6 +211,7 @@ public class TestResultImpl implements TestResult{
     }
 
     private ResultCounter resultCounter;
+
     @Override
     public ResultCounter getResultCounter() {
         return resultCounter;
@@ -219,11 +223,11 @@ public class TestResultImpl implements TestResult{
     }
 
     private String resultCode;
+
     /**
      *
-     * @return
-     * The lower-case-formatted result value. This data is usefull to apply the
-     * correct css on the displayed result String.
+     * @return The lower-case-formatted result value. This data is usefull to
+     * apply the correct css on the displayed result String.
      */
     @Override
     public String getResultCode() {
@@ -232,14 +236,14 @@ public class TestResultImpl implements TestResult{
 
     @Override
     public void setResultCode(String resultCode) {
-        this.resultCode=resultCode;
+        this.resultCode = resultCode;
     }
 
     private String result;
+
     /**
      *
-     * @return
-     *          the displayable result data
+     * @return the displayable result data
      */
     @Override
     public String getResult() {
@@ -259,10 +263,10 @@ public class TestResultImpl implements TestResult{
      * The test level
      */
     private String levelCode;
+
     /**
      *
-     * @return
-     *          the code of the level for the current test
+     * @return the code of the level for the current test
      */
     @Override
     public String getLevelCode() {
@@ -279,11 +283,11 @@ public class TestResultImpl implements TestResult{
     }
 
     private String ruleDesignUrl;
+
     /**
      *
-     * @return
-     *          the rule design url that explains the algorithm for the current
-     *          test
+     * @return the rule design url that explains the algorithm for the current
+     * test
      */
     @Override
     public String getRuleDesignUrl() {
@@ -300,6 +304,7 @@ public class TestResultImpl implements TestResult{
     }
 
     boolean isTruncated = false;
+
     @Override
     public boolean getIsTruncated() {
         return isTruncated;
@@ -309,31 +314,43 @@ public class TestResultImpl implements TestResult{
     public void setTruncated(boolean isTruncated) {
         this.isTruncated = isTruncated;
     }
-    
+
+    private String colorTestContrastRatio;
+
+    @Override
+    public void setColorTestContrastRatio(String colorTestContrastRatio) {
+        this.colorTestContrastRatio = colorTestContrastRatio;
+    }
+
+    @Override
+    public String getColorTestContrastRatio() {
+        return colorTestContrastRatio;
+    }
+
     /**
      * Default constructor
      */
     public TestResultImpl() {
     }
-    
+
     private List<DefiniteResult> history;
 
-	public List<DefiniteResult> getHistory() {
-		return history;
-	}
+    @Override
+    public List<DefiniteResult> getHistory() {
+        return history;
+    }
 
-	public void setHistory(List<DefiniteResult> history) {
-		this.history = history;
-	}
+    @Override
+    public void setHistory(List<DefiniteResult> history) {
+        this.history = history;
+    }
 
-	@Override
-	public List<ProcessResult> getHistory(ProcessResult processResult) {
-		//TODO :YNE: afficher l'historique pour chaque processResult
-		//TODO :YNE: essayer de déporter ce code sur un service et/ou module dédier à hibernate-envers
-		
+    @Override
+    public List<ProcessResult> getHistory(ProcessResult processResult) {
+        //TODO :YNE: afficher l'historique pour chaque processResult
+        //TODO :YNE: essayer de déporter ce code sur un service et/ou module dédier à hibernate-envers
 //		AuditReader auditReader = AuditReaderFactory.get(ProcessResultImpl);
-		
-		return null;
-	}
+        return null;
+    }
 
 }

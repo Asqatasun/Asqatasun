@@ -54,10 +54,17 @@ public class SelectFormFieldBuilderImpl extends FormFieldBuilderImpl
     
     private Map<String, List<SelectElementBuilder>> selectElementBuilderMap;
     @Override
-    public void setSelectElementBuilderMap(Map<String,List<SelectElementBuilder>> selectElementBuilderMap) {
+    public void setSelectElementBuilderMap(Map<String, List<SelectElementBuilder>> selectElementBuilderMap) {
         this.selectElementBuilderMap = selectElementBuilderMap;
     }
-
+    
+    @Override
+    public void addSelectElementBuilder(String refKey, List<SelectElementBuilder> selectElementBuilderList) {
+        if (selectElementBuilderMap != null) {
+            this.selectElementBuilderMap.put(refKey, selectElementBuilderList);
+        }
+    }
+    
     @Override
     public Map<String, List<SelectElement>> getSelectElementMap() {
         Map<String, List<SelectElement>> selectElementMap = new TreeMap<String, List<SelectElement>>();

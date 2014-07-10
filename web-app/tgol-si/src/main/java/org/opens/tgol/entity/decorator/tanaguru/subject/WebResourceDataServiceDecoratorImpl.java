@@ -52,8 +52,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataService<WebResource, Long>
         implements WebResourceDataServiceDecorator{
 
-    private WebResourceDataService decoratedWebResourceDataService; // the WebResourceDataService instance being decorated
-    private StatisticsDAO statisticsDAO;
+    private final WebResourceDataService decoratedWebResourceDataService; // the WebResourceDataService instance being decorated
+    private final StatisticsDAO statisticsDAO;
 
     @Autowired
     public WebResourceDataServiceDecoratorImpl (

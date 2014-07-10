@@ -23,7 +23,7 @@ package org.opens.tanaguru.entity.service.reference;
 
 import java.util.List;
 import java.util.Set;
-
+import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Level;
@@ -83,4 +83,11 @@ public interface TestDataService extends GenericDataService<Test, Long> {
      */
     List<Test> getTestListFromParamSet(Set<Parameter> paramSet);
 
+    /**
+     * 
+     * @param audit
+     * @param testLabel
+     * @return the test
+     */
+    Test getTestFromAuditAndLabel(Audit audit, String testLabel);
 }

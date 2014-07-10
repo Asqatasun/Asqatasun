@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ *  Copyright (C) 2008-2014  Open-S Company
  * 
  *  This file is part of Tanaguru.
  * 
@@ -56,9 +56,9 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
     private static final Logger LOGGER = Logger.getLogger(LangChecker.class);
 
     private static final String NON_ALPHANUMERIC_PATTERN_STR = "[\\d+\\W+]+?";
-    private Pattern nonAlphanumericPattern = Pattern.compile(NON_ALPHANUMERIC_PATTERN_STR);
+    private final Pattern nonAlphanumericPattern = Pattern.compile(NON_ALPHANUMERIC_PATTERN_STR);
     private static final String LANG_DECLARATION_PATTERN_STR = "\\w{2,3}(\\-\\w{2,})?$";
-    private Pattern langDeclarationPattern = Pattern.compile(LANG_DECLARATION_PATTERN_STR);
+    private final Pattern langDeclarationPattern = Pattern.compile(LANG_DECLARATION_PATTERN_STR);
     private Collection<String> xhtmlDoctypesSet;
     private Collection<String> validLanguagesSet;
     private static final String XHTML_DOCTYPE_NOM = "XhtmlDoctypeDeclarations";
@@ -155,6 +155,7 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
      * 
      * @param element
      * @param sspHandler 
+     * @return  the solution of the check
      */
     protected abstract TestSolution doCheckLanguage(Element element, SSPHandler sspHandler);
     
@@ -181,7 +182,7 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
                     testSolution,
                     MALFORMED_LANGUAGE_DECLARATION_MSG);
             }
-        } else if(!validLanguagesSet.contains(effectiveLang)) {
+        } else if(!validLanguagesSet.contains(effectiveLang.toLowerCase())) {
             testSolution = TestSolution.FAILED;
             if (createProcessRemarkOnFailure) {
                 addInvalidDeclarationSourceCodeRemark(
@@ -380,11 +381,12 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
     }
     
     /**
+     * @param sspHandler
      * @return
      *      true if the ssp embeds a xhtml doctype, false instead.
      */
     protected boolean hasSSPXhtmlDoctype(SSPHandler sspHandler) {
-        return xhtmlDoctypesSet.contains(sspHandler.getSSP().getDoctype()) ? true : false;
+        return xhtmlDoctypesSet.contains(sspHandler.getSSP().getDoctype());
     }
 
     /**
@@ -442,7 +444,7 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
                 StringUtils.isBlank(message)) {
             return;
         }
-        List<EvidenceElement> evidenceElementList = new ArrayList<EvidenceElement>();
+        List<EvidenceElement> evidenceElementList = new ArrayList<>();
 
         if (StringUtils.isNotBlank(currentLang)) {
             evidenceElementList.add(getEvidenceElement(DEFAULT_LANGUAGE_EE, defaultLang));
@@ -472,8 +474,7 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
             String extractedLang,
             TestSolution testSolution,
             String message) {
-        List<EvidenceElement> evidenceElementList =
-                new ArrayList<EvidenceElement>();
+        List<EvidenceElement> evidenceElementList = new ArrayList<>();
 
         evidenceElementList.add(getEvidenceElement(LANGUAGE_EE, extractedLang));
         

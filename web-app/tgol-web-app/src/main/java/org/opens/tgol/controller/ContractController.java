@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.opens.tgol.action.voter.ActionHandler;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.functionality.Functionality;
 import org.opens.tgol.exception.ForbiddenPageException;
@@ -64,15 +63,6 @@ public class ContractController extends AbstractController {
     public void setAuthorizedFunctionalityForTrend(List<String> authorizedFunctionalityForTrend) {
         this.authorizedFunctionalityForTrend = authorizedFunctionalityForTrend;
     }
-
-//    private ActionHandler actionHandler;
-//    public ActionHandler getActionHandler() {
-//        return actionHandler;
-//    }
-//
-//    public void setActionHandler(ActionHandler contractActionHandler) {
-//        this.actionHandler = contractActionHandler;
-//    }
 
     public ContractController() {
         super();

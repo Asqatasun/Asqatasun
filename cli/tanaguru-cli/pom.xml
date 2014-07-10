@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>cli</artifactId>
-        <version>3.0.0-SNAPSHOT</version>
+        <version>3.1.0-SNAPSHOT</version>
     </parent>
     <artifactId>tanaguru-cli</artifactId>
     <name>tanaguru-cli</name>
@@ -105,11 +105,6 @@
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
-            <artifactId>tanaguru-accessiweb2.1</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>${rulesGroupId}</groupId>
             <artifactId>tanaguru-accessiweb2.2</artifactId>
             <scope>runtime</scope>
         </dependency>
@@ -126,11 +121,6 @@
         <dependency>
             <groupId>${springGroupId}</groupId>
             <artifactId>spring-orm</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>

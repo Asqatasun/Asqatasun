@@ -66,6 +66,7 @@ public class CssPropertyPresenceCSSVisitor extends SimpleCssVisitor {
     /**
      * 
      * @param cssPropertyList
+     * @param pseudoSelectorList
      * @param solutionOnDetection
      * @param messageOnDetection 
      */

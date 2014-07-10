@@ -52,28 +52,28 @@ public class Rgaa22Rule04091Test extends Rgaa22RuleImplementationTestCase {
     protected void setUpWebResourceMap() {
         getWebResourceMap().put("RGAA22.Test.4.9-3NMI-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04091/RGAA22.Test.4.9-3NMI-01.html"));
+                getTestcasesFilePath() + "rgaa22/Rgaa22Rule04091/RGAA22.Test.4.9-3NMI-01.html"));
         getWebResourceMap().put("RGAA22.Test.4.9-3NMI-02",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04091/RGAA22.Test.4.9-3NMI-02.html"));
+                getTestcasesFilePath() + "rgaa22/Rgaa22Rule04091/RGAA22.Test.4.9-3NMI-02.html"));
         addParameterToParameterMap("RGAA22.Test.4.9-3NMI-02", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "id-informative-image"));
         getWebResourceMap().put("RGAA22.Test.4.9-3NMI-03",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule04091/RGAA22.Test.4.9-3NMI-03.html"));
+                getTestcasesFilePath() + "rgaa22/Rgaa22Rule04091/RGAA22.Test.4.9-3NMI-03.html"));
         addParameterToParameterMap("RGAA22.Test.4.9-3NMI-03", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "id-informative-image"));
         addParameterToParameterMap("RGAA22.Test.4.9-3NMI-03", createParameter("Rules", "DECORATIVE_IMAGE_MARKER", "class-decorative-image"));
         getWebResourceMap().put("RGAA22.Test.4.9-4NA-01",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "RGAA22/Rgaa22Rule04091/RGAA22.Test.4.9-4NA-01.html"));
+              getTestcasesFilePath() + "rgaa22/Rgaa22Rule04091/RGAA22.Test.4.9-4NA-01.html"));
         getWebResourceMap().put("RGAA22.Test.4.9-4NA-02",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "RGAA22/Rgaa22Rule04091/RGAA22.Test.4.9-4NA-02.html"));
+              getTestcasesFilePath() + "rgaa22/Rgaa22Rule04091/RGAA22.Test.4.9-4NA-02.html"));
         getWebResourceMap().put("RGAA22.Test.4.9-4NA-03",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "RGAA22/Rgaa22Rule04091/RGAA22.Test.4.9-4NA-03.html"));
+              getTestcasesFilePath() + "rgaa22/Rgaa22Rule04091/RGAA22.Test.4.9-4NA-03.html"));
         getWebResourceMap().put("RGAA22.Test.4.9-4NA-04",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "RGAA22/Rgaa22Rule04091/RGAA22.Test.4.9-4NA-04.html"));
+              getTestcasesFilePath() + "rgaa22/Rgaa22Rule04091/RGAA22.Test.4.9-4NA-04.html"));
         addParameterToParameterMap("RGAA22.Test.4.9-4NA-04", createParameter("Rules", "DECORATIVE_IMAGE_MARKER", "class-decorative-image"));
     }
 

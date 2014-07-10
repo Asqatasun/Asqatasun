@@ -48,7 +48,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
-/** 
+/**
  *
  * @author jkowalczyk
  */
@@ -56,19 +56,19 @@ import org.springframework.ui.Model;
 public class AuditLauncherController extends AuditDataHandlerController {
 
     private static final Logger LOGGER = Logger.getLogger(AuditLauncherController.class);
-    private static final String LEVEL_PARAM_KEY="LEVEL";
-    private static final String PROXY_HOST_PARAM_KEY="PROXY_HOST";
-    private static final String PROXY_PORT_PARAM_KEY="PROXY_PORT";
-    private static final String DEPTH_PARAM_KEY="DEPTH";
-    private static final String MAX_DOCUMENT_PARAM_KEY="MAX_DOCUMENTS";
-    private static final String MAX_DURATION_PARAM_KEY="MAX_DURATION";
-    private static final String EXCLUSION_URL_LIST_PARAM_KEY="EXCLUSION_REGEXP";
-    private static final String DEPTH_PAGE_PARAM_VALUE="0";
-    private static final String PROXY_HOST_CONF_KEY="proxyHost";
-    private static final String PROXY_PORT_CONF_KEY="proxyPort";
-    private static final String PROXY_EXCLUSION_URL_CONF_KEY="proxyExclusionUrl";
-    private static final String EMAIL_SENT_TO_USER_EXCLUSION_CONF_KEY="emailSentToUserExclusionList";
-            
+
+    private static final String PROXY_HOST_PARAM_KEY = "PROXY_HOST";
+    private static final String PROXY_PORT_PARAM_KEY = "PROXY_PORT";
+    private static final String DEPTH_PARAM_KEY = "DEPTH";
+    private static final String MAX_DOCUMENT_PARAM_KEY = "MAX_DOCUMENTS";
+    private static final String MAX_DURATION_PARAM_KEY = "MAX_DURATION";
+    private static final String EXCLUSION_URL_LIST_PARAM_KEY = "EXCLUSION_REGEXP";
+    private static final String DEPTH_PAGE_PARAM_VALUE = "0";
+    private static final String PROXY_HOST_CONF_KEY = "proxyHost";
+    private static final String PROXY_PORT_CONF_KEY = "proxyPort";
+    private static final String PROXY_EXCLUSION_URL_CONF_KEY = "proxyExclusionUrl";
+    private static final String EMAIL_SENT_TO_USER_EXCLUSION_CONF_KEY = "emailSentToUserExclusionList";
+    
     private String groupePagesName = "";
     /**
      * The TanaguruOrchestrator instance needed to launch the audit process
@@ -80,7 +80,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
         this.tanaguruExecutor = tanaguruExecutor;
     }
     /**
-     * The RestrictionHandler instance needed to decide 
+     * The RestrictionHandler instance needed to decide
      */
     private RestrictionHandler restrictionHandler;
 
@@ -109,19 +109,19 @@ public class AuditLauncherController extends AuditDataHandlerController {
      * default audit page parameter set.
      */
     Set<Parameter> auditPageParamSet = null;
-
     private ExposablePropertyPlaceholderConfigurer exposablePropertyPlaceholderConfigurer;
+
     @Autowired
     public final void setExposablePropertyPlaceholderConfigurer(ExposablePropertyPlaceholderConfigurer exposablePropertyPlaceholderConfigurer) {
         this.exposablePropertyPlaceholderConfigurer = exposablePropertyPlaceholderConfigurer;
     }
-    
     private String httpProxyHost;
+
     /**
      * Direct call to the property place holder configurer due to exposition
      * context
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getHttpProxyHost() {
         if (httpProxyHost == null) {
@@ -129,13 +129,13 @@ public class AuditLauncherController extends AuditDataHandlerController {
         }
         return httpProxyHost;
     }
-
     private String httpProxyPort;
+
     /**
      * Direct call to the property place holder configurer due to exposition
      * context
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getHttpProxyPort() {
         if (httpProxyPort == null) {
@@ -143,16 +143,16 @@ public class AuditLauncherController extends AuditDataHandlerController {
         }
         return httpProxyPort;
     }
-
     /**
      * Multiple Url can be set through a unique String separated by ;
      */
     private List<String> proxyExclusionUrlList;
+
     /**
      * Direct call to the property place holder configurer due to exposition
      * context
-     * 
-     * @return 
+     *
+     * @return
      */
     public List<String> getProxyExclusionUrlList() {
         if (proxyExclusionUrlList == null) {
@@ -162,16 +162,16 @@ public class AuditLauncherController extends AuditDataHandlerController {
         }
         return proxyExclusionUrlList;
     }
-
     /**
-     * 
+     *
      */
     private List<String> emailSentToUserExclusionList;
+
     /**
      * Direct call to the property place holder configurer due to exposition
      * context
-     * 
-     * @return 
+     *
+     * @return
      */
     public List<String> getEmailSentToUserExclusionList() {
         if (emailSentToUserExclusionList == null) {
@@ -181,11 +181,11 @@ public class AuditLauncherController extends AuditDataHandlerController {
         }
         return emailSentToUserExclusionList;
     }
-    
     /**
      * The user options that have to be converted as audit parameters
      */
     private List<String> userOption;
+
     public List<String> getUserOption() {
         return userOption;
     }
@@ -193,12 +193,12 @@ public class AuditLauncherController extends AuditDataHandlerController {
     public void setUserOption(List<String> userOption) {
         this.userOption = userOption;
     }
-
     /**
-     * The user options that have to be converted as audit parameters and 
-     * that depend on the selected referential
+     * The user options that have to be converted as audit parameters and that
+     * depend on the selected referential
      */
     private List<String> userOptionDependingOnReferential;
+
     public List<String> getUserOptionDependingOnReferential() {
         return userOptionDependingOnReferential;
     }
@@ -206,22 +206,24 @@ public class AuditLauncherController extends AuditDataHandlerController {
     public void setUserOptionDependingOnReferential(List<String> userOptionDependingOnReferential) {
         this.userOptionDependingOnReferential = userOptionDependingOnReferential;
     }
-    
     private OptionElementDataService optionElementDataService;
+
     public OptionElementDataService getOptionElementDataService() {
         return optionElementDataService;
     }
+
     @Autowired
     public void setOptionElementDataService(OptionElementDataService optionElementDataService) {
         this.optionElementDataService = optionElementDataService;
     }
-    
+
     public AuditLauncherController() {
         super();
     }
 
     /**
      * This methods enables an authenticated user to launch an audit.
+     *
      * @param auditSetUpCommand
      * @param locale
      * @param model
@@ -242,28 +244,26 @@ public class AuditLauncherController extends AuditDataHandlerController {
             if (!checkResult.equalsIgnoreCase(TgolKeyStore.ACT_ALLOWED)) {
                 return checkResult;
             }
-            if (scope.equals(ScopeEnum.PAGE) ||
-                    scope.equals(ScopeEnum.FILE)) {
-                return preparePageAudit(auditSetUpCommand, contract, locale, scope,model);
+            if (scope.equals(ScopeEnum.PAGE)
+                    || scope.equals(ScopeEnum.FILE)) {
+                return preparePageAudit(auditSetUpCommand, contract, locale, scope, model);
             }
             String url = getContractDataService().getUrlFromContractOption(contract);
             if (scope.equals(ScopeEnum.DOMAIN)) {
                 tanaguruExecutor.auditSite(
-                    contract,
-                    url,
-                    getClientIpAddress(),
-                    getUserParamSet(auditSetUpCommand, contract.getId(),-1,url),
-                    locale
-                    );
+                        contract,
+                        url,
+                        getClientIpAddress(),
+                        getUserParamSet(auditSetUpCommand, contract.getId(), -1, url),
+                        locale);
                 model.addAttribute(TgolKeyStore.TESTED_URL_KEY, url);
             } else if (scope.equals(ScopeEnum.SCENARIO)) {
                 tanaguruExecutor.auditScenario(
-                    contract,
-                    auditSetUpCommand.getScenarioId(),
-                    getClientIpAddress(),
-                    getUserParamSet(auditSetUpCommand, contract.getId(),-1,url),
-                    locale
-                    );
+                        contract,
+                        auditSetUpCommand.getScenarioId(),
+                        getClientIpAddress(),
+                        getUserParamSet(auditSetUpCommand, contract.getId(), -1, url),
+                        locale);
                 model.addAttribute(TgolKeyStore.SCENARIO_NAME_KEY, auditSetUpCommand.getScenarioName());
                 model.addAttribute(TgolKeyStore.SCENARIO_ID_KEY, auditSetUpCommand.getScenarioId());
             }
@@ -277,6 +277,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
      * This methods controls the validity of the form and launch an audit with
      * values populated by the user. In case of audit failure, an appropriate
      * message is displayed
+     *
      * @param pageAuditSetUpCommand
      * @param contract
      * @param locale
@@ -298,7 +299,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
                 audit = launchUploadAudit(contract, auditSetUpCommand, locale);
                 isPageAudit = false;
             } else {
-                audit = launchPageAudit(contract,auditSetUpCommand, locale);
+                audit = launchPageAudit(contract, auditSetUpCommand, locale);
             }
         } catch (KrashAuditException kae) {
             return TgolKeyStore.OUPS_VIEW_NAME;
@@ -316,7 +317,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
             return TgolKeyStore.GREEDY_AUDIT_VIEW_NAME;
         }
         if (audit.getStatus() != AuditStatus.COMPLETED) {
-            return prepareFailedAuditData(audit,model);
+            return prepareFailedAuditData(audit, model);
         }
         if (audit.getSubject() instanceof Site) {
             // in case of group of page, we display the list of audited pages
@@ -333,6 +334,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
     /**
      * This method launches the audit process using the tanaguru orchestrator
      * bean
+     *
      * @param contract
      * @param auditSetUpCommand
      * @param locale
@@ -359,7 +361,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
                     contract,
                     trueUrl.get(0),
                     getClientIpAddress(),
-                    paramSet, 
+                    paramSet,
                     locale);
         } else if (trueUrl.size() > 1) {
             String[] finalUrlTab = new String[trueUrl.size()];
@@ -373,7 +375,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
                     groupePagesName,
                     trueUrl,
                     getClientIpAddress(),
-                    paramSet, 
+                    paramSet,
                     locale);
         } else {
             return null;
@@ -381,17 +383,17 @@ public class AuditLauncherController extends AuditDataHandlerController {
     }
 
     /**
-     * 
+     *
      * @param contract
      * @param auditSetUpCommand
      * @param locale
-     * @return 
+     * @return
      */
     private Audit launchUploadAudit(
             final Contract contract,
-            final AuditSetUpCommand auditSetUpCommand, 
+            final AuditSetUpCommand auditSetUpCommand,
             final Locale locale) {
-        
+
         Map<String, String> fileMap = auditSetUpCommand.getFileMap();
 
         return tanaguruExecutor.auditPageUpload(
@@ -404,6 +406,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
 
     /**
      * This methods extracts the name of a group of pages from an url
+     *
      * @param url
      * @return
      */
@@ -427,6 +430,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
     /**
      * This method gets the default parameters for an audit and eventually
      * override some of them in case of contract restriction.
+     *
      * @param auditSetUpCommand
      * @param contractId
      * @param nbOfPages
@@ -475,21 +479,19 @@ public class AuditLauncherController extends AuditDataHandlerController {
     }
 
     /**
-     * 
+     *
      * @param paramSet
      * @param url
-     * @return 
+     * @return
      */
     private Set<Parameter> setLevelParameter(Set<Parameter> paramSet, String level) {
-        ParameterElement levelParameterElement =
-                parameterElementDataService.getParameterElement(LEVEL_PARAM_KEY);
-        Parameter levelParameter = getParameterDataService().getParameter(levelParameterElement, level);
+        Parameter levelParameter = getParameterDataService().getLevelParameter(level);
         paramSet = getParameterDataService().updateParameter(paramSet, levelParameter);
         return paramSet;
     }
-    
+
     /**
-     * 
+     *
      * @param paramSet
      * @param url
      */
@@ -502,13 +504,13 @@ public class AuditLauncherController extends AuditDataHandlerController {
                 return paramSet;
             }
         }
-        if (StringUtils.isEmpty(url)){
+        if (StringUtils.isEmpty(url)) {
             return paramSet;
         }
         try {
             Integer.valueOf(getHttpProxyPort());
         } catch (NumberFormatException nfe) {
-            LOGGER.warn("Incorrect value of proxy Port : "+ getHttpProxyPort() +". Proxy parameters are ignored");
+            LOGGER.warn("Incorrect value of proxy Port : " + getHttpProxyPort() + ". Proxy parameters are ignored");
             return paramSet;
         }
         Set<Parameter> proxyParamSet = new HashSet<Parameter>();
@@ -522,7 +524,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
         proxyParamSet.add(proxyPortParameter);
         LOGGER.debug("paramSet.size() " + paramSet.size());
         LOGGER.debug("proxyParamSet " + proxyParamSet.size());
-        for (Parameter param: paramSet) {
+        for (Parameter param : paramSet) {
             if (param.getParameterElement().getParameterElementCode().equals(PROXY_HOST_PARAM_KEY)) {
                 LOGGER.debug(param.getValue());
             } else if (param.getParameterElement().getParameterElementCode().equals(PROXY_PORT_PARAM_KEY)) {
@@ -534,12 +536,12 @@ public class AuditLauncherController extends AuditDataHandlerController {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Audit is set to use proxy with parameters " + getHttpProxyHost() + " : " + getHttpProxyPort());
         }
-        for (Parameter param: paramSet) {
+        for (Parameter param : paramSet) {
             if (param.getParameterElement().getParameterElementCode().equals(PROXY_HOST_PARAM_KEY)) {
                 LOGGER.debug(param.getValue());
             } else if (param.getParameterElement().getParameterElementCode().equals(PROXY_PORT_PARAM_KEY)) {
                 LOGGER.debug(param.getValue());
-            } 
+            }
         }
         return paramSet;
     }
@@ -548,6 +550,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
      * The default parameter set embeds a depth value that corresponds to the
      * site audit. We need here to replace this parameter by a parameter value
      * equals to 0.
+     *
      * @return
      */
     private Set<Parameter> getAuditPageParameterSet(int nbOfPages) {
@@ -563,21 +566,22 @@ public class AuditLauncherController extends AuditDataHandlerController {
         }
         return auditPageParamSet;
     }
-    
+
     /**
      * The default parameter set embeds a depth value that corresponds to the
      * site audit. We need here to replace this parameter by a parameter value
      * equals to 0.
+     *
      * @return
      */
     private Set<Parameter> getAuditScenarioParameterSet() {
         Set<Parameter> scenarioParamSet = getDefaultParamSet();
         Set<Parameter> parameterToRemove = new HashSet<Parameter>();
         for (Parameter param : scenarioParamSet) {
-            if (StringUtils.equals(param.getParameterElement().getParameterElementCode(), DEPTH_PARAM_KEY) ||
-                    StringUtils.equals(param.getParameterElement().getParameterElementCode(), MAX_DOCUMENT_PARAM_KEY) ||
-                    StringUtils.equals(param.getParameterElement().getParameterElementCode(), MAX_DURATION_PARAM_KEY) ||
-                    StringUtils.equals(param.getParameterElement().getParameterElementCode(), EXCLUSION_URL_LIST_PARAM_KEY) ) {
+            if (StringUtils.equals(param.getParameterElement().getParameterElementCode(), DEPTH_PARAM_KEY)
+                    || StringUtils.equals(param.getParameterElement().getParameterElementCode(), MAX_DOCUMENT_PARAM_KEY)
+                    || StringUtils.equals(param.getParameterElement().getParameterElementCode(), MAX_DURATION_PARAM_KEY)
+                    || StringUtils.equals(param.getParameterElement().getParameterElementCode(), EXCLUSION_URL_LIST_PARAM_KEY)) {
                 parameterToRemove.add(param);
             }
         }
@@ -588,16 +592,16 @@ public class AuditLauncherController extends AuditDataHandlerController {
     /**
      * Some user options have to be converted as parameters and added to the
      * general audit parameters.
-     * 
+     *
      * @param paramSet
      * @param referentialKey
-     * @return 
+     * @return
      */
     private Set<Parameter> setUserParameters(Set<Parameter> paramSet, String referentialKey) {
         User user = getCurrentUser();
         Collection<OptionElement> optionElementSet = new HashSet<OptionElement>();
         for (String optionFamily : userOptionDependingOnReferential) {
-            optionElementSet.addAll(optionElementDataService.getOptionElementFromUserAndFamilyCode(user, referentialKey+"_"+optionFamily));
+            optionElementSet.addAll(optionElementDataService.getOptionElementFromUserAndFamilyCode(user, referentialKey + "_" + optionFamily));
         }
         for (String optionFamily : userOption) {
             optionElementSet.addAll(optionElementDataService.getOptionElementFromUserAndFamilyCode(user, optionFamily));
@@ -605,5 +609,4 @@ public class AuditLauncherController extends AuditDataHandlerController {
         paramSet.addAll(getParameterDataService().getParameterSetFromOptionElementSet(optionElementSet));
         return paramSet;
     }
-    
 }

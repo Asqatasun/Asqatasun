@@ -21,7 +21,7 @@
  */
 package org.opens.tanaguru.contentadapter;
 
-import java.util.List;
+import java.util.Collection;
 import org.opens.tanaguru.entity.audit.Content;
 
 /**
@@ -42,7 +42,7 @@ public interface ContentsAdapterFactory {
      * @return
      */
     ContentsAdapter create(
-            List<Content> contentList,
+            Collection<Content> contentList,
             boolean writeCleanHtmlInFile,
             String tempFolderRootPath,
             HTMLCleaner htmlCleaner,

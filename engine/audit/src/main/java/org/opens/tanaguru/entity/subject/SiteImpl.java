@@ -42,7 +42,7 @@ public class SiteImpl extends WebResourceImpl implements Site, Serializable {
 
     private static final long serialVersionUID = -5472991643021548362L;
     @OneToMany(mappedBy = "parent")
-    private Collection<WebResourceImpl> componentList = new ArrayList<WebResourceImpl>();
+    private final Collection<WebResourceImpl> componentList = new ArrayList<>();
 
     public SiteImpl() {
         super();

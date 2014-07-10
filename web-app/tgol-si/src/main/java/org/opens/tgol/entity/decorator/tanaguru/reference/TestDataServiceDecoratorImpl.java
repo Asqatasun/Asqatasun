@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -23,7 +23,7 @@ package org.opens.tgol.entity.decorator.tanaguru.reference;
 
 import java.util.List;
 import java.util.Set;
-
+import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Level;
@@ -39,12 +39,12 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author jkowalczyk
  */
 public class TestDataServiceDecoratorImpl extends AbstractGenericDataService<Test, Long>
-        implements TestDataServiceDecorator{
+        implements TestDataServiceDecorator {
 
-    private TestDataService decoratedTestDataService; // the TestDAO instance being decorated
+    private final TestDataService decoratedTestDataService; // the TestDAO instance being decorated
 
     @Autowired
-    public TestDataServiceDecoratorImpl (TestDataService decoratedTestDataService) {
+    public TestDataServiceDecoratorImpl(TestDataService decoratedTestDataService) {
         this.decoratedTestDataService = decoratedTestDataService;
     }
 
@@ -60,7 +60,7 @@ public class TestDataServiceDecoratorImpl extends AbstractGenericDataService<Tes
 
     @Override
     public List<Test> findAllTestByLevel(Level level) {
-        return ((TgolTestDAO)entityDao).retrieveAllByLevel(level);
+        return ((TgolTestDAO) entityDao).retrieveAllByLevel(level);
     }
 
     @Override
@@ -78,9 +78,14 @@ public class TestDataServiceDecoratorImpl extends AbstractGenericDataService<Tes
         return decoratedTestDataService.findAllByCriterion(criterion);
     }
 
-	@Override
-	public Test read(String label) {
-		return decoratedTestDataService.read(label);
-	}
+    @Override
+    public Test read(String label) {
+        return decoratedTestDataService.read(label);
+    }
+
+    @Override
+    public Test getTestFromAuditAndLabel(Audit audit, String testLabel) {
+        return decoratedTestDataService.getTestFromAuditAndLabel(audit, testLabel);
+    }
 
 }

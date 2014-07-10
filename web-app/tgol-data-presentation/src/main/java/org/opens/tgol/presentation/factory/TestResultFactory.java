@@ -180,6 +180,12 @@ public final class TestResultFactory {
         } catch (MissingResourceException mre) {
             Logger.getLogger(this.getClass()).warn(mre);
         }
+        try {
+            testResult.setColorTestContrastRatio(representationBundle.
+                getString(testResult.getTestCode()+TestResult.CONTRAST_RATIO_SUFFIX_KEY));
+        } catch (MissingResourceException mre) {
+            Logger.getLogger(this.getClass()).warn(mre);
+        }
         if (hasResultDetails && 
                 (testResult.getResult().equalsIgnoreCase(TestSolution.FAILED.toString()) || 
                 testResult.getResult().equalsIgnoreCase(TestSolution.NEED_MORE_INFO.toString()))) {
@@ -476,9 +482,9 @@ public final class TestResultFactory {
         Collections.sort(processResultList, new Comparator<ProcessResult>() {
             @Override
             public int compare(ProcessResult o1, ProcessResult o2) {
-                return String.CASE_INSENSITIVE_ORDER.compare(
-                        o1.getTest().getCode(),
-                        o2.getTest().getCode());
+                return Integer.compare(
+                        o1.getTest().getRank(),
+                        o2.getTest().getRank());
             }
         });
     }

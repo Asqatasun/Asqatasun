@@ -49,14 +49,14 @@ import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 public class IdenticalLinkWithDifferentTargetChecker extends ElementCheckerImpl {
 
     /* The text element builder. By default, it is a simple Text builder */
-    private TextElementBuilder linkTextBuilder = new LinkTextElementBuilder();
+    private final TextElementBuilder linkTextBuilder = new LinkTextElementBuilder();
     @Override
     public TextElementBuilder getTextElementBuilder() {
         return linkTextBuilder;
     }
-    private TextElementBuilder titleAttrTextBuilder = 
+    private final TextElementBuilder titleAttrTextBuilder = 
             new TextAttributeOfElementBuilder(TITLE_ATTR);
-    private TextElementBuilder hrefAttrTextBuilder = 
+    private final TextElementBuilder hrefAttrTextBuilder = 
             new TextAttributeOfElementBuilder(HREF_ATTR);
     
     private String identicalLinkDetectedMsg = 
@@ -171,8 +171,7 @@ public class IdenticalLinkWithDifferentTargetChecker extends ElementCheckerImpl 
      * @return
      */
     private Collection<List<Link>> sortLinksByIdenticalTextTarget(Elements elements) {
-        Map<String, List<Link>> linksSortedByTextTarget = 
-                new HashMap<String, List<Link>>();
+        Map<String, List<Link>> linksSortedByTextTarget = new HashMap<>();
 
         // For each node of the selection set
         for (Element el : elements) {
@@ -182,7 +181,7 @@ public class IdenticalLinkWithDifferentTargetChecker extends ElementCheckerImpl 
             if (linksSortedByTextTarget.containsKey(link.getLinkText())) {
                 linksSortedByTextTarget.get(link.getLinkText()).add(link);
             } else {
-                List<Link> linksByTarget = new ArrayList<Link>();
+                List<Link> linksByTarget = new ArrayList<>();
                 linksByTarget.add(link);
                 linksSortedByTextTarget.put(link.getLinkText(), linksByTarget);
             }
@@ -190,7 +189,7 @@ public class IdenticalLinkWithDifferentTargetChecker extends ElementCheckerImpl 
         }
         // We finally parse the map to only keep identical links (list of links
         // with more than 1 element)
-        Collection<List<Link>> finalList = new ArrayList<List<Link>>();
+        Collection<List<Link>> finalList = new ArrayList<>();
         for (List<Link> links : linksSortedByTextTarget.values()){
             if (links.size()>1){
                 finalList.add(links);
@@ -211,7 +210,7 @@ public class IdenticalLinkWithDifferentTargetChecker extends ElementCheckerImpl 
             Link link,
             String message) {
 
-        Collection<EvidenceElement> eeList = new ArrayList<EvidenceElement>();
+        Collection<EvidenceElement> eeList = new ArrayList<>();
         
         eeList.add(getEvidenceElement(TEXT_ELEMENT2, link.text));
         if (link.title != null) {

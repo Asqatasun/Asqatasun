@@ -44,8 +44,7 @@ import org.opens.tanaguru.rules.elementchecker.helper.RuleCheckHelper;
 
 /**
  * This class deals with the tests related with links that point to 
- * downloadable documents.
- * 
+ * downloadable documents. * 
  */
 public abstract class AbstractDownloadableLinkRuleImplementation 
             extends AbstractPageRuleWithSelectorAndCheckerImplementation {
@@ -54,10 +53,11 @@ public abstract class AbstractDownloadableLinkRuleImplementation
     private static final String SLASH_CHAR = "/";
 
     /* the links with a proper extension */
-    private ElementHandler linkWithSimpleExtension = new ElementHandlerImpl();
+    private final ElementHandler linkWithSimpleExtension = new ElementHandlerImpl();
 
     /**
      * Default constructor
+     * @param elementChecker
      */
     public AbstractDownloadableLinkRuleImplementation (ElementChecker elementChecker) {
         super(
@@ -158,11 +158,7 @@ public abstract class AbstractDownloadableLinkRuleImplementation
             return false;
         }
         int lastSlash = StringUtils.lastIndexOf(path, SLASH_CHAR);
-        if (StringUtils.substring(path, lastSlash).contains(POINT_CHAR)) {
-            return true;
-        }
-
-        return false;
+        return StringUtils.substring(path, lastSlash).contains(POINT_CHAR);
     }
     
 }

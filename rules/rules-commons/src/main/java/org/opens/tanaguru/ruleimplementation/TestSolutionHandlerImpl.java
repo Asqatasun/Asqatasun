@@ -37,7 +37,7 @@ public class TestSolutionHandlerImpl implements TestSolutionHandler {
      * The testSolution of the elementary checks used to compute the final
      * result of the test
      */
-    private Collection<TestSolution> testSolutions = new ArrayList<TestSolution>();
+    private Collection<TestSolution> testSolutions = new ArrayList<>();
     
     /**
      * Default constructor
@@ -46,6 +46,7 @@ public class TestSolutionHandlerImpl implements TestSolutionHandler {
 
     /**
      * {@inheritDoc}
+     * @param testSolution
      */
     @Override
     public void addTestSolution(TestSolution testSolution) {
@@ -54,6 +55,7 @@ public class TestSolutionHandlerImpl implements TestSolutionHandler {
     
     /**
      * {@inheritDoc}
+     * @param testSolutions
      */
     @Override
     public void addTestSolutions(Collection<TestSolution> testSolutions) {
@@ -70,6 +72,7 @@ public class TestSolutionHandlerImpl implements TestSolutionHandler {
 
     /**
      * {@inheritDoc}
+     * @return the TestSolution computed from all the unitary TestSolutions
      */
     @Override
     public TestSolution getTestSolution() {

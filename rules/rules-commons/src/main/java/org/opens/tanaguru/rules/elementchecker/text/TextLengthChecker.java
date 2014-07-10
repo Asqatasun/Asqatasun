@@ -32,6 +32,8 @@ import org.opens.tanaguru.rules.elementchecker.ElementCheckerImpl;
 import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
+ * This class checks whether the size of a given textual element doesn't exceed
+ * a given size.
  * 
  * @author jkowalczyk
  */

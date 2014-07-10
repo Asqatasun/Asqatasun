@@ -77,6 +77,9 @@ public abstract class AbstractAllLinkAggregateRuleImplementation
      * Constructor
      * 
      * @param linkElementSelector
+     * @param imageLinkElementSelector
+     * @param areaLinkElementSelector
+     * @param compositeLinkElementSelector
      * @param decidableElementsChecker
      * @param notDecidableElementsChecker
      */

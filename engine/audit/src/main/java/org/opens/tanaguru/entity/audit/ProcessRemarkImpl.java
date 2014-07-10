@@ -125,7 +125,7 @@ public class ProcessRemarkImpl implements ProcessRemark, Serializable {
     @Override
     public void addElement(EvidenceElement element) {
         if (elementSet == null) {
-            elementSet = new LinkedHashSet<EvidenceElementImpl>();
+            elementSet = new LinkedHashSet<>();
         }
         element.setProcessRemark(this);
         elementSet.add((EvidenceElementImpl) element);
@@ -142,7 +142,7 @@ public class ProcessRemarkImpl implements ProcessRemark, Serializable {
     @Override
     public void setElementList(Collection<EvidenceElement> elementList) {
         if (this.elementSet == null) {
-            this.elementSet = new LinkedHashSet<EvidenceElementImpl>();
+            this.elementSet = new LinkedHashSet<>();
         }
         for (EvidenceElement evEl : elementList) {
             this.elementSet.add((EvidenceElementImpl) evEl);

@@ -132,7 +132,7 @@ public class AnalyserImpl implements Analyser {
      * the set of audit parameters that handles some overridden values for test
      * weight (needed to compute the raw mark)
      */
-    private Collection<Parameter> paramSet;
+    private Collection<Parameter> paramSet; 
     private static BigDecimal ZERO = BigDecimal.valueOf(Double.valueOf(0.0));
 
     public AnalyserImpl(
@@ -538,7 +538,7 @@ public class AnalyserImpl implements Analyser {
             wrStatistics.setRawMark(Float.valueOf(-1));
             return wrStatistics;
         }
-        BigDecimal weightedPassed = wrStatistics.getWeightedPassed();
+        BigDecimal weightedPassed = BigDecimal.valueOf(passed);
         BigDecimal weightedFailed = wrStatistics.getWeightedFailed();
         if ((weightedFailed.equals(BigDecimal.ZERO) || weightedFailed.equals(ZERO))
                 && (weightedPassed.equals(BigDecimal.ZERO) || weightedPassed.equals(ZERO))) {

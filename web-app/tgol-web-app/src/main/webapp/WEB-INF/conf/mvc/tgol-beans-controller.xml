@@ -27,7 +27,7 @@
                 <ref bean="exclusionRegexpContractFormFieldBuilder"/>
             </list>
         </property>
-<!--        <property name="exclusionContractSortKey" value="label-exclusion-choice"/>
+        <!--        <property name="exclusionContractSortKey" value="label-exclusion-choice"/>
         <property name="inclusionContractSortKey" value="label-inclusion-choice"/>
         <property name="sortByKey" value="sort-by-choice"/>
         <property name="sortOrderKey" value="order-choice"/>
@@ -42,7 +42,7 @@
                 <value>SCENARIO</value>
             </list>
         </property>
-<!--        <property name="actionHandler" ref="contractActionHandler"/>-->
+        <!--        <property name="actionHandler" ref="contractActionHandler"/>-->
     </bean>
 
     <bean id="pageListController" class="org.opens.tgol.controller.PageListController">
@@ -97,14 +97,12 @@
         </property>
         <property name="authorizedRefForCriterionViewList">
             <list>
-                <value>AW21</value>
-                <value>AW22</value>
+                <value>Aw22</value>
             </list>
         </property>
         <property name="actionHandler" ref="resultActionHandler"/>
         <property name="formFieldBuilderList">
             <list>
-                <ref bean="aw21ThemeSelectFormFieldBuilder"/>
                 <ref bean="aw22ThemeSelectFormFieldBuilder"/>
                 <ref bean="rgaa22ThemeSelectFormFieldBuilder"/>
                 <ref bean="testResultCheckboxFormFieldBuilder"/>
@@ -141,6 +139,9 @@
                 </entry>
                 <entry key="EXCLUSION_REGEXP">
                     <value>exclusion-regexp</value>
+                </entry>
+                <entry key="INCLUSION_REGEXP">
+                    <value>inclusion-regexp</value>
                 </entry>
                 <entry key="DATA_TABLE_MARKER">
                     <value>data-table</value>
@@ -185,6 +186,7 @@
                 </entry>
                 <entry key="crawl-options">
                     <list>
+                        <ref bean="inclusionRegexpParamBuilder"/>
                         <ref bean="exclusionRegexpParamBuilder"/>
                         <ref bean="considerCookiesParamBuilder"/>
                     </list>
@@ -242,7 +244,7 @@
         <property name="auditUploadSetUpValidator">
             <ref bean="auditUploadSetUpFormValidator"/>
         </property>
-<!--        <property name="auditScenarioSetUpValidator">
+        <!--        <property name="auditScenarioSetUpValidator">
             <ref bean="auditScenarioSetUpFormValidator"/>
         </property>-->
         <property name="viewFunctionalityBindingMap">

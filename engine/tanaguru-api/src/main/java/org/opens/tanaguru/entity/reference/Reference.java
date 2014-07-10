@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -22,7 +22,6 @@
 package org.opens.tanaguru.entity.reference;
 
 import java.util.List;
-
 import org.opens.tanaguru.sdk.entity.Entity;
 import org.opens.tanaguru.sdk.entity.Reorderable;
 
@@ -51,6 +50,12 @@ public interface Reference extends Entity, Reorderable {
      */
     List<Criterion> getCriterionList();
 
+    /**
+     *
+     * @return the default level for the current referential
+     */
+    Level getDefaultLevel();
+    
     /**
      *
      * @return the description
@@ -82,6 +87,12 @@ public interface Reference extends Entity, Reorderable {
      *            the criterion list to set
      */
     void setCriterionList(List<Criterion> criterionList);
+    
+    /**
+     * 
+     * @param level 
+     */
+    void setDefaultLevel(Level level);
 
     /**
      *

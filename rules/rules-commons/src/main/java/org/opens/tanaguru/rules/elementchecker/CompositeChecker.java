@@ -45,7 +45,7 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
      * The collection of checkers recursively called to check the pertinence. 
      * This collection is of LinkedList type to maintain an order.
      */
-    private Collection<ElementChecker> checkers = new LinkedList<ElementChecker>();
+    private final Collection<ElementChecker> checkers;
     public Collection<ElementChecker> getCheckers() {
         return checkers;
     }
@@ -57,7 +57,7 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
      * the message code thrown to manually check the element when no checker
      * has returned a failed result.
      */
-    private String manualCheckMessage;
+    private final String manualCheckMessage;
     
     /**
      * Constructor. 
@@ -67,6 +67,7 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
      */
     public CompositeChecker(String manualCheckMessage) {
         super();
+        this.checkers = new LinkedList<>();
         this.manualCheckMessage = manualCheckMessage;
     }
     
@@ -81,6 +82,7 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
             String manualCheckMessage,
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
+        this.checkers = new LinkedList<>();
         this.manualCheckMessage = manualCheckMessage;
     }
     
@@ -95,6 +97,7 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
             String manualCheckMessage,
             TestSolution notPertinentSolution) {
         super();
+        this.checkers = new LinkedList<>();
         setFailureSolution(notPertinentSolution);
         this.manualCheckMessage = manualCheckMessage;
     }
@@ -111,6 +114,7 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
             TestSolution notPertinentSolution,
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
+        this.checkers = new LinkedList<>();
         
         setFailureSolution(notPertinentSolution);
         this.manualCheckMessage = manualCheckMessage;
@@ -138,6 +142,7 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
      * 
      * @param sspHandler
      * @param elementHandler
+     * @return the solution of the pertinence check
      */
     protected TestSolution checkPertinence(
             SSPHandler sspHandler,

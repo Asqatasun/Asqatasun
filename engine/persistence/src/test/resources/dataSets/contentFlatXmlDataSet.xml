@@ -1,4 +1,4 @@
-<!DOCTYPE dataset SYSTEM "src/test/resources/dataSets/test.dtd">
+<?xml version='1.0' encoding='UTF-8'?>
 <dataset>
     
     <AUDIT Id_Audit="1" Dt_Creation="2010-10-26 13:50:29" Status="COMPLETED"/>

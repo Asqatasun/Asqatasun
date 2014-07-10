@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -23,13 +23,9 @@ package org.opens.tgol.presentation.factory;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
-import java.util.Random;
 import java.util.Set;
-
-import org.apache.commons.lang.StringUtils;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
-import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tgol.entity.contract.Act;
@@ -47,18 +43,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 public final class ActInfoFactory {
 
     private ContentDataService contentDataService;
+
     @Autowired
     public void setContentDataService(ContentDataService contentDataService) {
         this.contentDataService = contentDataService;
     }
 
     private WebResourceDataServiceDecorator webResourceDataService;
+
     @Autowired
     public void setWebResourceDataService(WebResourceDataServiceDecorator webResourceDataServiceDecorator) {
         this.webResourceDataService = webResourceDataServiceDecorator;
     }
-    
+
     private ParameterDataServiceDecorator parameterDataService;
+
     @Autowired
     public void setParameterDataService(ParameterDataServiceDecorator parameterDataServiceDecorator) {
         this.parameterDataService = parameterDataServiceDecorator;
@@ -72,9 +71,10 @@ public final class ActInfoFactory {
     /**
      * Default private constructor
      */
-    private ActInfoFactory(){}
+    private ActInfoFactory() {
+    }
 
-    public static synchronized ActInfoFactory getInstance(){
+    public static synchronized ActInfoFactory getInstance() {
         if (actInfoFactory == null) {
             actInfoFactory = new ActInfoFactory();
         }
@@ -82,90 +82,86 @@ public final class ActInfoFactory {
     }
 
     /**
-     * 
+     *
      * @param act
      * @return an ActInfo instance that handles displayable act data
-     * 
+     *
      */
-    public ActInfo getActInfo(Act act){
+    public ActInfo getActInfo(Act act) {
         ActInfoImpl actInfo = new ActInfoImpl();
         actInfo.setDate(act.getEndDate());
         if (act.getAudit() != null) {
             Audit audit = act.getAudit();
-            
+
             actInfo.setAuditId(audit.getId().intValue());
             actInfo.setScope(act.getScope().getCode().name());
-            
+
             WebResource wr = audit.getSubject();
             if (wr != null) {
                 actInfo.setUrl(wr.getURL());
             }
-            
-            
-            //
-            
-            //cas automatioque
-            
+
+            //cas automatique
             if (audit.getStatus().equals(AuditStatus.COMPLETED) || audit.getStatus().equals(AuditStatus.MANUAL_INITIALIZING)
-					|| audit.getStatus().equals(
-							AuditStatus.MANUAL_ANALYSE_IN_PROGRESS)
-					|| audit.getStatus().equals(AuditStatus.MANUAL_COMPLETED)) {
-                actInfo.setWeightedMark(webResourceDataService.getMarkByWebResourceAndAudit(wr, false , false).intValue());
+                    || audit.getStatus().equals(
+                            AuditStatus.MANUAL_ANALYSE_IN_PROGRESS)
+                    || audit.getStatus().equals(AuditStatus.MANUAL_COMPLETED)) {
+                actInfo.setWeightedMark(webResourceDataService.getMarkByWebResourceAndAudit(wr, false, false).intValue());
                 actInfo.setRawMark(webResourceDataService.getMarkByWebResourceAndAudit(wr, true, false).intValue());
+                if (actInfo.getRawMark() == -1) {
+                    actInfo.setRawMark(0);
+                }
                 actInfo.setStatus(TgolKeyStore.COMPLETED_KEY);
-            } else if (!contentDataService.hasContent(audit)){
+            } else if (!contentDataService.hasContent(audit)) {
                 actInfo.setStatus(TgolKeyStore.ERROR_LOADING_KEY);
             } else if (!contentDataService.hasAdaptedSSP(audit)) {
                 actInfo.setStatus(TgolKeyStore.ERROR_ADAPTING_KEY);
             } else {
                 actInfo.setStatus(TgolKeyStore.ERROR_UNKNOWN_KEY);
             }
-            
+
             //cas manual
             actInfo.setManual(audit.getStatus().equals(AuditStatus.MANUAL_INITIALIZING)
-					|| audit.getStatus().equals(
-							AuditStatus.MANUAL_ANALYSE_IN_PROGRESS)
-					|| audit.getStatus().equals(AuditStatus.MANUAL_COMPLETED));
-			if (actInfo.isManual()) {
-				
-				actInfo.setDateManual(audit.getManualAuditDateOfCreation());
-				actInfo.setWeightedMarkManual(webResourceDataService
-						.getMarkByWebResourceAndAudit(wr, false, true)
-						.intValue());
-				actInfo.setRawMarkManual(webResourceDataService
-						.getMarkByWebResourceAndAudit(wr, true, true)
-						.intValue());
+                    || audit.getStatus().equals(
+                            AuditStatus.MANUAL_ANALYSE_IN_PROGRESS)
+                    || audit.getStatus().equals(AuditStatus.MANUAL_COMPLETED));
+            if (actInfo.isManual()) {
 
-				if (audit.getStatus().equals(AuditStatus.MANUAL_COMPLETED)) {
-					actInfo.setStatusManual(TgolKeyStore.COMPLETED_KEY);
-				} else if (audit.getStatus().equals(
-						AuditStatus.MANUAL_ANALYSE_IN_PROGRESS)
-						|| audit.getStatus().equals(
-								AuditStatus.MANUAL_INITIALIZING)) {
-					actInfo.setStatusManual(TgolKeyStore.ONGOING_KEY);
+                actInfo.setDateManual(audit.getManualAuditDateOfCreation());
+                actInfo.setWeightedMarkManual(webResourceDataService
+                        .getMarkByWebResourceAndAudit(wr, false, true)
+                        .intValue());
+                actInfo.setRawMarkManual(webResourceDataService
+                        .getMarkByWebResourceAndAudit(wr, true, true)
+                        .intValue());
 
-				} else {
-					actInfo.setStatusManual(TgolKeyStore.ERROR_UNKNOWN_KEY);
-				}
+                if (audit.getStatus().equals(AuditStatus.MANUAL_COMPLETED)) {
+                    actInfo.setStatusManual(TgolKeyStore.COMPLETED_KEY);
+                } else if (audit.getStatus().equals(
+                        AuditStatus.MANUAL_ANALYSE_IN_PROGRESS)
+                        || audit.getStatus().equals(
+                                AuditStatus.MANUAL_INITIALIZING)) {
+                    actInfo.setStatusManual(TgolKeyStore.ONGOING_KEY);
 
-			}
+                } else {
+                    actInfo.setStatusManual(TgolKeyStore.ERROR_UNKNOWN_KEY);
+                }
+
+            }
             setActInfoReferential(actInfo, audit);
         }
-        
-      
-        
+
         return actInfo;
     }
-  
 
     /**
-     * 
+     *
      * @param actSet
      * @return collection of ActInfo instances that handle displayable Act data
-     *  
+     *
      */
-    public Collection<ActInfo> getActInfoSet(Collection<Act> actSet){
-        Set<ActInfo> actInfoSet = new LinkedHashSet<ActInfo>();
+    public Collection<ActInfo> getActInfoSet(Collection<Act> actSet) {
+        Set<ActInfo> actInfoSet = new LinkedHashSet<>();
         for (Act act : actSet) {
             actInfoSet.add(getActInfo(act));
         }
@@ -173,19 +169,13 @@ public final class ActInfoFactory {
     }
 
     /**
-     * Set the referential to the ActInfo regarding the "LEVEL" parameter of the 
-     * audit. This parameter handles level and referential. That's why its value
-     * needs to be split to extract the referential data.
+     * Set the referential to the ActInfo interrogating the parameterDataService
+     *
      * @param actInfo
-     * @param audit 
+     * @param audit
      */
     private void setActInfoReferential(ActInfo actInfo, Audit audit) {
-        Set<Parameter> parameterSet = parameterDataService.getParameterSetFromAudit(audit);
-        for (Parameter param : parameterSet) {
-            if (StringUtils.equals(param.getParameterElement().getParameterElementCode(), "LEVEL")) {
-                actInfo.setReferential(param.getValue().split(";")[0]);
-            }
-        }
+        actInfo.setReferential(parameterDataService.getReferentialKeyFromAudit(audit));
     }
 
 }

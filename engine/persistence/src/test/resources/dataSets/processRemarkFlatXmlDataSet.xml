@@ -1,8 +1,8 @@
-<!DOCTYPE dataset SYSTEM "src/test/resources/dataSets/test.dtd">
+<?xml version='1.0' encoding='UTF-8'?>
 <dataset>
     
-    <REFERENCE Id_Reference="1" Cd_Reference="01" Description="" Label="Ref 1.0" Rank="1" Url="http://www.mock-ref1.org/"/>
-    <REFERENCE Id_Reference="2" Cd_Reference="02" Description="" Label="Ref 2.0" Rank="2" Url="http://www.mock-ref2.org/"/>
+    <REFERENCE Id_Reference="1" Cd_Reference="01" Description="Reference 1.0" Label="Ref 1.0" Rank="1" Url="http://www.mock-ref1.org/"/>
+    <REFERENCE Id_Reference="2" Cd_Reference="02" Description="Reference 2.0" Label="Ref 2.0" Rank="2" Url="http://www.mock-ref2.org/"/>
 
     <THEME Id_Theme="1" Cd_Theme="01" Label="Theme1" Rank="1"/>
     <THEME Id_Theme="2" Cd_Theme="02" Label="Theme2" Rank="2"/>
@@ -35,9 +35,37 @@
     <TEST Id_Test="13" Cd_Test="10113" Description="Test 1.1.13" Label="1.1.13" Rank="13" Weight="1.0" Id_Criterion="3" Id_Scope="1" Id_Level="1" No_Process="false"/>
     <TEST Id_Test="14" Cd_Test="10114" Description="Test 1.1.14" Label="1.1.14" Rank="14" Weight="1.0" Id_Criterion="4" Id_Scope="1" Id_Level="2" No_Process="false"/>
     <TEST Id_Test="15" Cd_Test="10115" Description="Test 1.1.15" Label="1.1.15" Rank="15" Weight="1.0" Id_Criterion="4" Id_Scope="1" Id_Level="2" No_Process="false"/>
+    <!--<TEST Id_Test="16" Cd_Test="10116" Description="Test 1.1.1" Label="1.1.1" Rank="16" Weight="1.0" Id_Criterion="1" Id_Scope="2" Id_Level="1" No_Process="false"/>-->
 
     <AUDIT Id_Audit="1" Dt_Creation="2010-10-26 13:50:29" Status="COMPLETED"/>
     <AUDIT Id_Audit="2" Dt_Creation="2010-10-26 14:50:29" Status="COMPLETED"/>
+    
+    <AUDIT_TEST Id_Audit="1"  Id_Test="1"/>
+    <AUDIT_TEST Id_Audit="1"  Id_Test="2"/>
+    <AUDIT_TEST Id_Audit="1"  Id_Test="3"/>
+    <AUDIT_TEST Id_Audit="1"  Id_Test="4"/>
+    <AUDIT_TEST Id_Audit="1"  Id_Test="5"/>
+    <AUDIT_TEST Id_Audit="1"  Id_Test="6"/>
+    <AUDIT_TEST Id_Audit="1"  Id_Test="7"/>
+    <AUDIT_TEST Id_Audit="1"  Id_Test="8"/>
+    <AUDIT_TEST Id_Audit="1"  Id_Test="9"/>
+    <AUDIT_TEST Id_Audit="1"  Id_Test="10"/>
+
+    <AUDIT_TEST Id_Audit="2"  Id_Test="2"/>
+    <AUDIT_TEST Id_Audit="2"  Id_Test="3"/>
+    <AUDIT_TEST Id_Audit="2"  Id_Test="4"/>
+    <AUDIT_TEST Id_Audit="2"  Id_Test="5"/>
+    <AUDIT_TEST Id_Audit="2"  Id_Test="6"/>
+    <AUDIT_TEST Id_Audit="2"  Id_Test="7"/>
+    <AUDIT_TEST Id_Audit="2"  Id_Test="8"/>
+    <AUDIT_TEST Id_Audit="2"  Id_Test="9"/>
+    <AUDIT_TEST Id_Audit="2"  Id_Test="10"/>
+    <AUDIT_TEST Id_Audit="2"  Id_Test="11"/>
+    <AUDIT_TEST Id_Audit="2"  Id_Test="12"/>
+    <AUDIT_TEST Id_Audit="2"  Id_Test="13"/>
+    <AUDIT_TEST Id_Audit="2"  Id_Test="14"/>
+    <AUDIT_TEST Id_Audit="2"  Id_Test="15"/>
+    <!--<AUDIT_TEST Id_Audit="2"  Id_Test="16"/>-->
     
     <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="1" Label="NULL" Url="http://www.mock-url.org/1.html" Id_Audit="1" Rank="1"/>
     <WEB_RESOURCE DTYPE="PageImpl" Id_Web_Resource="2" Label="NULL" Url="http://www.mock-url.org/2.html" Id_Audit="2" Rank="1" />

@@ -62,6 +62,6 @@ public interface SelectElementBuilder extends FormFieldBuilder {
      * 
      * @return
      */
-    boolean getDefault();
+    boolean getDefaultElement();
 
 }

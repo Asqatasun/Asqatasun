@@ -1,4 +1,5 @@
 use $myDatabaseName;
+SET foreign_key_checks=0;
 
 -- -----------------------------------------------------
 -- Column `Manual_Definite_Value` to store the manual 
@@ -35,7 +36,7 @@ ADD COLUMN `Manual_Audit_Dt_Creation` DATETIME NULL DEFAULT NULL AFTER `Dt_Creat
 -- Creating the hibernate audit table of process_result
 -- ---------------------------------------------------------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS `process_result_aud` (
+CREATE TABLE IF NOT EXISTS `PROCESS_RESULT_AUD` (
   `DTYPE` varchar(31) NOT NULL,
   `Id_Process_Result` bigint(20) NOT NULL,
   `REV` int(11) NOT NULL,
@@ -47,16 +48,35 @@ CREATE TABLE IF NOT EXISTS `process_result_aud` (
   `Manual_Definite_Value` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`Id_Process_Result`,`REV`),
   KEY `FK5411075EDF74E053` (`REV`),
-  CONSTRAINT `FK5411075EDF74E053` FOREIGN KEY (`REV`) REFERENCES `revinfo` (`REV`)
+  CONSTRAINT `FK5411075EDF74E053` FOREIGN KEY (`REV`) REFERENCES `REVINFO` (`REV`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ---------------------------------------------------------------------------------------------------------
 -- Hibernate envers technical table to refer the hibernate changes versions
 -- ---------------------------------------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `revinfo` (
+CREATE TABLE IF NOT EXISTS `REVINFO` (
   `REV` int(11) NOT NULL AUTO_INCREMENT,
   `REVTSTMP` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`REV`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
+INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_Element`, `Id_Parameter_Family`, `Long_Label`, `Short_Label`) VALUES
+(42, 'INCLUSION_REGEXP', 1, 'Regulard expression to crawl on a specific folder', 'inclusion regex');
 
+INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
+(42, '', b'1');
+
+ALTER IGNORE TABLE REFERENCE ADD `Id_Default_Level` bigint(20) DEFAULT 2 AFTER `Url`;
+
+ALTER TABLE `REFERENCE`
+	ADD CONSTRAINT `fk_Ref_Level` FOREIGN KEY Id_Default_Level_Index (`Id_Default_Level`)  REFERENCES `LEVEL` (`Id_Level`) ON DELETE NO ACTION;
+
+ALTER TABLE `PARAMETER`	ADD UNIQUE KEY `Unique_Param_Element_Type_Param_value` 
+        (`Parameter_Value`(255),`Id_Parameter_Element`);
+
+ALTER TABLE `THEME` ADD UNIQUE INDEX `Cd_Theme_UNIQUE` (`Cd_Theme` ASC);
+ALTER TABLE `TEST` ADD UNIQUE INDEX `Cd_Test_UNIQUE` (`Cd_Test` ASC);
+ALTER TABLE `CRITERION` ADD UNIQUE INDEX `Cd_Criterion_UNIQUE` (`Cd_Criterion` ASC);
+ALTER TABLE `REFERENCE` ADD UNIQUE INDEX `Cd_Reference_UNIQUE` (`Cd_Reference` ASC);
+
+SET foreign_key_checks=1;

@@ -54,6 +54,19 @@ public interface FailedTestInfo {
      * @param testCode
      */
     void setTestCode(String testCode);
+    
+    /**
+     *
+     * @return
+     *          the level code of the test
+     */
+    String getTestLevelCode();
+
+    /**
+     *
+     * @param testCode
+     */
+    void setTestLevelCode(String testLevelCode);
 
     /**
      *

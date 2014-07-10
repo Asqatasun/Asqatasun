@@ -55,17 +55,17 @@ public class Rgaa22Rule11061Test extends Rgaa22RuleImplementationTestCase {
     protected void setUpWebResourceMap() {
         getWebResourceMap().put("Rgaa22.Test.11.6-3NMI-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule11061/RGAA22.Test.11.6-3NMI-01.html"));
+                getTestcasesFilePath() + "rgaa22/Rgaa22Rule11061/RGAA22.Test.11.6-3NMI-01.html"));
         addParameterToParameterMap("Rgaa22.Test.11.6-3NMI-01", createParameter("Rules", "PRESENTATION_TABLE_MARKER", "class-presentation-table"));
         getWebResourceMap().put("Rgaa22.Test.11.6-3NMI-02",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule11061/RGAA22.Test.11.6-3NMI-02.html"));
+                getTestcasesFilePath() + "rgaa22/Rgaa22Rule11061/RGAA22.Test.11.6-3NMI-02.html"));
         getWebResourceMap().put("Rgaa22.Test.11.6-4NA-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "RGAA22/Rgaa22Rule11061/RGAA22.Test.11.6-4NA-01.html"));
+                getTestcasesFilePath() + "rgaa22/Rgaa22Rule11061/RGAA22.Test.11.6-4NA-01.html"));
         getWebResourceMap().put("Rgaa22.Test.11.6-4NA-02",
               getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "RGAA22/Rgaa22Rule11061/RGAA22.Test.11.6-4NA-02.html"));
+              getTestcasesFilePath() + "rgaa22/Rgaa22Rule11061/RGAA22.Test.11.6-4NA-02.html"));
         addParameterToParameterMap("Rgaa22.Test.11.6-4NA-02", createParameter("Rules", "DATA_TABLE_MARKER", "id-data-table"));
     }
 

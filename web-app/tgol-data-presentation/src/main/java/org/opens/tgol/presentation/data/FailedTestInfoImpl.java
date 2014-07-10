@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -36,13 +36,16 @@ public class FailedTestInfoImpl implements FailedTestInfo{
 
     /**
      * Constructor
+     * @param testCode
      * @param testLabel
      * @param pageCounter
+     * @param testLevelCode
      */
-    public FailedTestInfoImpl(String testCode, String testLabel, Long pageCounter) {
+    public FailedTestInfoImpl(String testCode, String testLabel, Long pageCounter, String testLevelCode) {
         this.testCode = testCode;
         this.testLabel = testLabel;
         this.pageCounter = pageCounter;
+        this.testLevelCode = testLevelCode;
     }
 
     private String testLabel;
@@ -106,6 +109,18 @@ public class FailedTestInfoImpl implements FailedTestInfo{
     @Override
     public void setPageCounter(Long pageCounter) {
         this.pageCounter = pageCounter;
+    }
+
+    private String testLevelCode;
+    
+    @Override
+    public String getTestLevelCode() {
+        return testLevelCode;
+    }
+
+    @Override
+    public void setTestLevelCode(String testLevelCode) {
+        this.testLevelCode = testLevelCode;
     }
 
 }

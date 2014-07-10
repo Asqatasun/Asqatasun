@@ -33,7 +33,10 @@ import org.opens.tanaguru.rules.elementchecker.ElementCheckerImpl;
 import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
 
 /**
- *
+ * This class checks whether the text of a dom element is not strictly or
+ * partially identical to the text of an attribute of this element.
+ * 
+ * @author jkowalczyk
  */
 public class TextNotIdenticalToAttributeChecker extends ElementCheckerImpl {
 
@@ -49,7 +52,8 @@ public class TextNotIdenticalToAttributeChecker extends ElementCheckerImpl {
     /* The attr element builder needed to retrieve the attribute to compare with*/
     private TextElementBuilder attrElementBuilder;
 
-    /* Boolean that enable to determine the kind of control : contains or equals.
+    /* 
+     * Boolean that enables to determine the kind of control : contains or equals.
      * Contains is the default 
      */
     private boolean strictEquality = false;

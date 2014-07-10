@@ -120,7 +120,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     @Override
     public void addChildResult(ProcessResult childResult) {
         if (childResultSet == null) {
-            this.childResultSet = new HashSet<ProcessResultImpl>();
+            this.childResultSet = new HashSet<>();
         }
         childResult.setParentResult(this);
         this.childResultSet.add((ProcessResultImpl) childResult);
@@ -130,7 +130,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
 //    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     public void addRemark(ProcessRemark remark) {
         if (remarkSet == null) {
-            this.remarkSet = new LinkedHashSet<ProcessRemarkImpl>();
+            this.remarkSet = new LinkedHashSet<>();
         }
         remark.setProcessResult(this);
         remarkSet.add((ProcessRemarkImpl) remark);
@@ -201,7 +201,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     public void setChildResultList(
             Collection<ProcessResult> childResultList) {
         if (this.childResultSet == null) {
-            this.childResultSet = new LinkedHashSet<ProcessResultImpl>();
+            this.childResultSet = new LinkedHashSet<>();
         }
         for (ProcessResult processResult : childResultList) {
             processResult.setParentResult(this);
@@ -233,7 +233,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
 //    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     public void setRemarkSet(Collection<ProcessRemark> remarkSet) {
         if (this.remarkSet == null) {
-            this.remarkSet = new LinkedHashSet<ProcessRemarkImpl>();
+            this.remarkSet = new LinkedHashSet<>();
         }
         for (ProcessRemark processRemark : remarkSet) {
             processRemark.setProcessResult(this);

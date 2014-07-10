@@ -27,7 +27,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import javax.persistence.PersistenceException;
 import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.contentadapter.AdaptationListener;
 import org.opens.tanaguru.entity.audit.*;
@@ -258,7 +257,6 @@ public abstract class AuditCommandImpl implements AuditCommand {
         LOGGER.info("Adapting " + audit.getSubject().getURL());
         
         // debug tools
-        Date beginProcessDate;
         Date endRetrieveDate;
         Date endProcessDate;
         Date endPersistDate;
@@ -276,7 +274,6 @@ public abstract class AuditCommandImpl implements AuditCommand {
         
         while (i.compareTo(nbOfContent) < 0) {
 
-            beginProcessDate = Calendar.getInstance().getTime();
             LOGGER.debug(
                         new StringBuilder("Adapting ssp from  ")
                             .append(i)
@@ -285,12 +282,10 @@ public abstract class AuditCommandImpl implements AuditCommand {
                             .append(" for ")
                             .append(audit.getSubject().getURL()).toString());
 
-            List<Content> contentList = retrieveContentList(
+            Collection<Content> contentList = contentDataService.getSSPFromWebResource(
                                             webResourceId, 
                                             i, 
                                             adaptationTreatmentWindow, 
-                                            beginProcessDate, 
-                                            false, 
                                             true);
             endRetrieveDate = Calendar.getInstance().getTime();
             
@@ -347,77 +342,6 @@ public abstract class AuditCommandImpl implements AuditCommand {
         LOGGER.info(audit.getSubject().getURL() + " has been adapted");
     }
 
-    /**
-     * This method retrieves a list of content for a given webResource 
-     * from a startValue regarding the ADAPTATION_TREATMENT_WINDOW
-     * 
-     * @param webResourceId
-     * @param startValue
-     * @return 
-     */
-    private List<Content> retrieveContentList(
-            Long webResourceId, 
-            Long startValue, 
-            int windowSize,
-            Date beginProcessDate, 
-            boolean getContentWithRelatedContent, 
-            boolean getContentWithNullDom) {
-
-        List<Content> contentList = new ArrayList<Content>();
-        
-        // First we retrieve a list of Ids
-        List<Long> contentIdList = contentDataService.getSSPFromWebResource(
-                                webResourceId,
-                                HttpStatus.SC_OK,
-                                startValue.intValue(),
-                                windowSize);
-        
-        // we retrieve each content from its ID and add it to the contentList 
-        // that will be returned
-        for (Long id : contentIdList) {
-            Content content;
-            if (getContentWithRelatedContent) {
-                content = contentDataService.readWithRelatedContent(id, true);
-            } else {
-                content = contentDataService.read(id);
-            }
-            if (content != null && 
-                    ( getContentWithNullDom || 
-                        (!getContentWithNullDom 
-                            && content instanceof SSP 
-                            && StringUtils.isNotEmpty(((SSP)content).getDOM())))) {
-                contentList.add(content);
-            }
-        }
-        
-        if (LOGGER.isDebugEnabled()) {
-            long length = 0;
-            int nbOfResources = 0;
-            for (Content content : contentList) {
-                if (((SSP) content).getDOM() != null) {
-                    length += ((SSP) content).getDOM().length();
-                    if (getContentWithRelatedContent) {
-                        nbOfResources += ((SSP) content).getRelatedContentSet().size();
-                    }
-                }
-            }
-            StringBuilder debugMessage = new StringBuilder("Retrieving  ")
-                        .append(contentList.size())
-                        .append(SSP_TOOK_LOGGER_STR)
-                        .append(Calendar.getInstance().getTime().getTime() - beginProcessDate.getTime())
-                        .append(" ms and working on ")
-                        .append(length)
-                        .append(" characters");
-            if (getContentWithRelatedContent) {
-                debugMessage.append(" and ");
-                debugMessage.append(nbOfResources);
-                debugMessage.append(" relatedContent ");
-            }
-            LOGGER.debug(debugMessage.toString());
-        }
-        return contentList;
-    }
-    
     /**
      * 
      * @param contentSet
@@ -503,12 +427,10 @@ public abstract class AuditCommandImpl implements AuditCommand {
                             .append(audit.getSubject().getURL()).toString());
                 beginProcessDate = Calendar.getInstance().getTime();
             }
-            List<Content> contentList = retrieveContentList(
+            Collection<Content> contentList = contentDataService.getSSPWithRelatedContentFromWebResource(
                                             webResourceId, 
                                             i, 
                                             processingTreatmentWindow, 
-                                            beginProcessDate, 
-                                            true, 
                                             false);
             processResultSet.clear();
             processResultSet.addAll(processorService.process(contentList, audit.getTestList()));
@@ -526,6 +448,11 @@ public abstract class AuditCommandImpl implements AuditCommand {
                             .append(MS_LOGGER_STR)
                             .append("for ")
                             .append(audit.getSubject().getURL()).toString());
+            }
+            if (LOGGER.isDebugEnabled()) {
+                for (Content content : contentList) {
+                    LOGGER.debug("Persisting result for page " +content.getURI());
+                }
             }
             processResultDataService.saveOrUpdate(processResultSet);
             if (LOGGER.isDebugEnabled()) {
@@ -833,12 +760,10 @@ public abstract class AuditCommandImpl implements AuditCommand {
         Long webResourceId = audit.getSubject().getId();
         Long nbOfContent = contentDataService.getNumberOfSSPFromWebResource(audit.getSubject(), HttpStatus.SC_OK);
         while (i.compareTo(nbOfContent) < 0) {
-            List<Content> contentList = retrieveContentList(
+            Collection<Content> contentList = contentDataService.getSSPWithRelatedContentFromWebResource(
                         webResourceId, 
                         i, 
                         processingTreatmentWindow, 
-                        Calendar.getInstance().getTime(), 
-                        true, 
                         true);
             for (Content content : contentList) {
                 if (content instanceof SSP) {

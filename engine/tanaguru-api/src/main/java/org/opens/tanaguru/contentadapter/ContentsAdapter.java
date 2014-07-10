@@ -21,6 +21,7 @@
  */
 package org.opens.tanaguru.contentadapter;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import org.opens.tanaguru.entity.audit.Content;
@@ -35,7 +36,7 @@ public interface ContentsAdapter {
      *
      * @return the result
      */
-    List<Content> getResult();
+    Collection<Content> getResult();
 
     /**
      *

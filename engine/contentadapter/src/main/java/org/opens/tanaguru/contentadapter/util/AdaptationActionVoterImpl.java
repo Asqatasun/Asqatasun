@@ -25,7 +25,6 @@ package org.opens.tanaguru.contentadapter.util;
 import java.util.Collection;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -37,8 +36,6 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class AdaptationActionVoterImpl implements AdaptationActionVoter {
 
-    private static final String LEVEL_PARAMETER_KEY = "LEVEL";
-    
     @Autowired
     private ParameterDataService parameterDataService;
     @Override
@@ -55,23 +52,7 @@ public class AdaptationActionVoterImpl implements AdaptationActionVoter {
     @Override
     public boolean doesExecute(Audit audit) {
         Logger.getLogger(this.getClass()).debug("doesExecute "+getClass() + " for audit n° " +audit.getId());
-        Parameter level = parameterDataService.getParameter(audit, LEVEL_PARAMETER_KEY);
-        Logger.getLogger(this.getClass()).debug("Level " + level.getValue());
-        return authorizedValues.contains(extractReferentialFromParameter(level));
+        return authorizedValues.contains(parameterDataService.getReferentialKeyFromAudit(audit));
     }
     
-    /**
-     * Extract the referential from the LEVEL parameter
-     * 
-     * @param paramSet
-     * @return 
-     */
-    private String extractReferentialFromParameter(Parameter level) {
-        if (level != null & level.getParameterElement().
-                getParameterElementCode().equals(LEVEL_PARAMETER_KEY)) {
-            return level.getValue().split(";")[0];
-        }
-        return "";
-    }
-
 }

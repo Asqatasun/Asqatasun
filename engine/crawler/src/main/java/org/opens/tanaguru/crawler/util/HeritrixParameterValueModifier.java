@@ -30,7 +30,7 @@ import org.w3c.dom.Node;
  *
  * @author jkowalczyk
  */
-public class HeritrixParameterValueModifier extends HeritrixConfigurationModifier {
+public class HeritrixParameterValueModifier extends DefaultHeritrixConfigurationModifier {
 
     public HeritrixParameterValueModifier(){
         super();

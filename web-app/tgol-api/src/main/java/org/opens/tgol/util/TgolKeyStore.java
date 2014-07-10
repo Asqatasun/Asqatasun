@@ -271,7 +271,7 @@ public final class TgolKeyStore {
     public static final String TEST_RESULT_LIST_KEY ="testResultMap";
     public static final String CRITERION_RESULT_LIST_KEY ="criterionResultMap";
     public static final String CRITERION_CODE_KEY ="crit";
-    public static final String TEST_CODE_KEY ="test";
+    public static final String TEST_CODE_KEY ="testKey";
     public static final String CRITERION_LABEL_KEY ="criterionLabel";
     public static final String TEST_LABEL_KEY ="testLabel";
     public static final String TEST_LIST_KEY ="testList";
@@ -302,6 +302,7 @@ public final class TgolKeyStore {
             "hasSiteScopeTest";
     public static final String HAS_SSP_KEY = "hasSSP";
     public static final String STATUS_KEY = "status";
+    public static final String TEST_KEY = "test";
     public static final String COMPLETED_KEY = "COMPLETED";
     public static final String ONGOING_KEY = "ONGOING";
     public static final String ERROR_LOADING_KEY = "ERROR_LOADING";
@@ -320,7 +321,7 @@ public final class TgolKeyStore {
     public static final String CREATE_CONTRACT_COMMAND_KEY = "createContractCommand";
     public static final String CREATE_USER_ATTACK_COMMAND_KEY = "createUserAttack";
     public static final String CHANGE_TEST_WEIGHT_COMMAND_KEY ="changeTestWeightCommand";
-    public static final String MANUAL_AUDIT_COMMAND_KEY ="manualAuditCommand";
+     public static final String MANUAL_AUDIT_COMMAND_KEY ="manualAuditCommand";
     public static final String TEST_WEIGHT_SUCCESSFULLY_UPDATED_KEY="testWeightSuccessfullyUpdated";
     public static final String IS_CONTRACT_EXPIRED_KEY = "isContractExpired";
     public static final String PARAMETERS_MAP_KEY = "parametersMap";
@@ -346,6 +347,9 @@ public final class TgolKeyStore {
     public static final String DELETED_SCENARIO_NAME_KEY = "deletedScenarioName";
     public static final String SCENARIO_NAME_KEY = "scenarioName";
     public static final String SCENARIO_KEY = "scenario";
+    
+    public static final String REFERENTIAL_PARAM_KEY = "referential";
+    public static final String LEVEL_PARAM_KEY = "LEVEL";
     
     public static final String CRITERION_DISPLAY_SCOPE_VALUE = "cr";
     public static final String TEST_DISPLAY_SCOPE_VALUE = "tst";

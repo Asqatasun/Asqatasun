@@ -82,6 +82,7 @@ public abstract class RelatedTextContentImpl extends RelatedContentImpl implemen
         return adaptedContent;
     }
 
+    @Override
     public void setAdaptedContent(String adaptedContent) {
         this.adaptedContent = adaptedContent;
     }

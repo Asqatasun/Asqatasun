@@ -1,5 +1,6 @@
 package org.opens.tanaguru.service;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,7 +38,7 @@ public class ContentAdapterServiceImpl implements ContentAdapterService {
     }
 
     @Override
-    public List<Content> adaptContent(List<Content> contentList) {
+    public Collection<Content> adaptContent(Collection<Content> contentList) {
 
         Set<ContentAdapter> contentAdapterSet = new HashSet<ContentAdapter>();
         

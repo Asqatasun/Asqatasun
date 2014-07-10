@@ -132,7 +132,7 @@
             <li class="active">${pageName}</li>
             </ul>
             <!-- little hack to insert message for guest user. That user has to be named 'guest' in the db -->
-            <c:if test="${authorizedScopeForPageList != 'true' && configProperties['enable-demo-link'] == 'true' && currentUserName == 'guest'}">
+            <c:if test="${authorizedScopeForPageList != 'true' && currentUserName == 'guest'}">
             <div class="row">
                 <div class="span16">
                     <div class="alert-message info like-it-message">

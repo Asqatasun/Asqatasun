@@ -31,8 +31,6 @@ import org.opens.tanaguru.entity.audit.TestSolution;
  * by constructor argument (default is failed).
  * The testSolution when no element is detected can be overridden 
  * by constructor argument (default is passed).
- * The creation of {@link sourceCodeRemark} for each detected element is 
- * optional and may be overridden by constructor argument (default is true).
  * 
  */
 public class ElementWithAttributePresenceChecker extends ElementPresenceChecker {
@@ -40,7 +38,7 @@ public class ElementWithAttributePresenceChecker extends ElementPresenceChecker 
     /**
      * The name of the attribute handled by the element
      */
-    private String attributeName;
+    private final String attributeName;
 
     /**
      * Constructor.

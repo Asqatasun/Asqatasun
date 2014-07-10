@@ -86,7 +86,7 @@ public class CaptchaElementSelector implements ElementSelector {
         if (selectionHandler.isEmpty()) {
             return;
         }
-        Set<Element> captchaElements = new HashSet<Element>();
+        Set<Element> captchaElements = new HashSet<>();
         for (Element el : selectionHandler.get()) {
             if (parseAttributeToExtractCaptcha(el)) {
                 captchaElements.add(el);

@@ -21,7 +21,7 @@
  */
 package org.opens.tanaguru.service;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Set;
 import javax.xml.bind.annotation.XmlTransient;
 import org.opens.tanaguru.contentadapter.ContentAdapterFactory;
@@ -46,7 +46,7 @@ public interface ContentAdapterService {// TODO Write javadoc
      * @param contentList
      * @return
      */
-    List<Content> adaptContent(List<Content> contentList);
+    Collection<Content> adaptContent(Collection<Content> contentList);
 
     /**
      *

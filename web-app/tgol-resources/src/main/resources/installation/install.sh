@@ -218,30 +218,29 @@ create_tables() {
 		mysql --user=${mysql_tg_user}            \
 		      --password=${mysql_tg_passwd}      \
                       ${mysql_tg_db} ||                  \
-		fail "Unable to create the rules tables."\
+		fail "Unable to create the engine tables."\
                      "The mysql user ${mysql_tg_user}" \
                      "may already exists with a different" \
                      "password in the database."
 
-	cd "$PKG_DIR/install/rules/sql"
-	cat 10-rules-resources-insert.sql                \
-            accessiweb2.1-insert.sql               \
-            accessiweb2.2-insert.sql               \
-            rgaa2.2-insert.sql |              \
-		mysql --user=${mysql_tg_user}            \
-		      --password=${mysql_tg_passwd}      \
-                      ${mysql_tg_db} ||                  \
-		fail "Unable to create the rules tables" \
-                     "The mysql user ${mysql_tg_user}" \
-                     "may already exists with a different" \
-                     "password in the database."
-	
 	cd "$PKG_DIR/install/web-app/sql"
 	cat tgol-20-create-tables.sql tgol-30-insert.sql | \
 		sed -e "s/\$tgDatabase/$mysql_tg_db/" |    \
 		mysql --user="$mysql_tg_user"              \
 		      --password="$mysql_tg_passwd" ||     \
 		fail "Unable to create and fill the TGSI tables" \
+                     "The mysql user ${mysql_tg_user}" \
+                     "may already exists with a different" \
+                     "password in the database."
+
+	cd "$PKG_DIR/install/rules/sql"
+	cat 10-rules-resources-insert.sql                \
+            accessiweb2.2-insert.sql               \
+            rgaa2.2-insert.sql |              \
+		mysql --user=${mysql_tg_user}            \
+		      --password=${mysql_tg_passwd}      \
+                      ${mysql_tg_db} ||                  \
+		fail "Unable to create the rules tables" \
                      "The mysql user ${mysql_tg_user}" \
                      "may already exists with a different" \
                      "password in the database."
@@ -324,7 +323,7 @@ update_tomcat_configuration() {
 	    echo "Adding JAVA_OPTS in tomcat configuration file"
 	    echo "" >>$MY_DEFAULT_TOMCAT
 	    echo "# Tanaguru JVM options" >>$MY_DEFAULT_TOMCAT
-	    echo "JAVA_OPTS=\"\$JAVA_OPTS -Xms512M -Xmx2048M -Dwebdriver.firefox.bin=${firefox_esr_path} -Ddisplay=${display_port}\"" >>$MY_DEFAULT_TOMCAT
+	    echo "JAVA_OPTS=\"\$JAVA_OPTS -Xms512M -Xmx2048M -DconfDir=file://${prefix}$TG_CONF_DIR -DlogDir=${prefix}$TG_LOG_DIR -Dwebdriver.firefox.bin=${firefox_esr_path} -Ddisplay=${display_port}\"" >>$MY_DEFAULT_TOMCAT
 	fi
 }
 
