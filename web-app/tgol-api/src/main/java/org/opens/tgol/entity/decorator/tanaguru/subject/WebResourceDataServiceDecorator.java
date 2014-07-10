@@ -188,6 +188,7 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
      * @param audit
      * @param testSolution
      * @param theme
+     * @param manualAudit
      * @return 
      */
     Long getResultCountByResultTypeAndTheme(
@@ -195,8 +196,7 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
             Audit audit,
             TestSolution testSolution,
             Theme theme,
-            boolean manualAudit
-            );
+            boolean manualAudit);
 
     /**
      * 

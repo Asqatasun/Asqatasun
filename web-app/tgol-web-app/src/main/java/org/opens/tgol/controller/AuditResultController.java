@@ -44,7 +44,7 @@ import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.reference.CriterionDataService;
 import org.opens.tanaguru.entity.service.statistics.CriterionStatisticsDataService;
-import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
+import org.opens.tanaguru.entity.service.statistics.WebResourceStatisticsDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -94,8 +94,16 @@ public class AuditResultController extends AuditDataHandlerController {
             .getLogger(AuditResultController.class);
     private static final String CRITERION_RESULT_PAGE_KEY = "criterion-result";
     private static final String REFERER_HEADER_KEY = "referer";
+    private static final String FINISH_ACTION_NAME = "Finish";
+    
+    private WebResourceStatisticsDataService webResourceStatisticsDataService;
+    @Autowired
+    public void setWebResourceStatisticsDataService(WebResourceStatisticsDataService webResourceStatisticsDataService) {
+        this.webResourceStatisticsDataService = webResourceStatisticsDataService;
+    }
 
     ManualAuditValidator manualAuditValidator;
+
     @Autowired
     public void setManualAuditValidator(
             ManualAuditValidator manualAuditValidator) {
@@ -245,8 +253,8 @@ public class AuditResultController extends AuditDataHandlerController {
     public String displayAuditResultFromContract(
             @RequestParam(TgolKeyStore.AUDIT_ID_KEY) String auditId,
             @RequestParam(value = TgolKeyStore.IS_MANUAL_AUDIT_KEY, required = false, defaultValue = "false") boolean manual,
-            @RequestParam(value = "type", required = false, defaultValue = "false") String type,
-            HttpServletRequest request, 
+            @RequestParam(value = TgolKeyStore.TYPE_KEY, required = false, defaultValue = "false") String type,
+            HttpServletRequest request,
             Model model) {
         try {
             Audit audit = getAuditDataService().read(Long.valueOf(auditId));
@@ -257,7 +265,7 @@ public class AuditResultController extends AuditDataHandlerController {
                     model.addAttribute(TgolKeyStore.WEBRESOURCE_ID_KEY, audit
                             .getSubject().getId());
                     model.addAttribute(TgolKeyStore.IS_MANUAL_AUDIT_KEY, manual);
-                    model.addAttribute("type", type);
+                    model.addAttribute(TgolKeyStore.TYPE_KEY, type);
 
                     if (manual) {
                         // appel au service
@@ -309,8 +317,8 @@ public class AuditResultController extends AuditDataHandlerController {
     public String displayPageResultFromContract(
             @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
             @RequestParam(value = TgolKeyStore.IS_MANUAL_AUDIT_KEY) boolean manual,
-            @RequestParam(value = "type") String type,
-            HttpServletRequest request, 
+            @RequestParam(value = TgolKeyStore.TYPE_KEY) String type,
+            HttpServletRequest request,
             Model model) {
         Long webResourceIdValue;
         try {
@@ -356,7 +364,7 @@ public class AuditResultController extends AuditDataHandlerController {
     // }
     // }
     /**
-     * 
+     *
      * @param auditResultSortCommand
      * @param webresourceId
      * @param manualAuditCommand
@@ -364,7 +372,7 @@ public class AuditResultController extends AuditDataHandlerController {
      * @param result
      * @param model
      * @param request
-     * @return 
+     * @return
      */
     @RequestMapping(value = {TgolKeyStore.CONTRACT_VIEW_NAME_REDIRECT, TgolKeyStore.PAGE_RESULT_CONTRACT_URL}, method = RequestMethod.POST)
     @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
@@ -372,45 +380,45 @@ public class AuditResultController extends AuditDataHandlerController {
             @ModelAttribute(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY) AuditResultSortCommand auditResultSortCommand,
             @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
             @ModelAttribute(TgolKeyStore.MANUAL_AUDIT_COMMAND_KEY) ManualAuditCommand manualAuditCommand,
-            @RequestParam String action, 
+            @RequestParam String action,
             BindingResult result,
             Model model,
             HttpServletRequest request) {
         if (manualAuditCommand != null) {
-            if (action.equals("Finish")) {
                 return dispatchSubmitManualAuditValues(
-                        webresourceId, manualAuditCommand, result, model,
-                        request, true, auditResultSortCommand);
-            } else {
-                return dispatchSubmitManualAuditValues(webresourceId,
-                        manualAuditCommand, result, model, request, false,
-                        auditResultSortCommand);
-            }
+                        webresourceId, 
+                        manualAuditCommand, 
+                        result, 
+                        model,
+                        request, 
+                        StringUtils.equalsIgnoreCase(action, FINISH_ACTION_NAME));
         } else {
             return dispatchDisplayResultRequest(
                     auditResultSortCommand.getWebResourceId(),
-                    auditResultSortCommand, model, request, false, "auto",
+                    auditResultSortCommand, 
+                    model, 
+                    request, 
+                    false, 
+                    TgolKeyStore.AUTO_TYPE_KEY,
                     manualAuditCommand);
         }
     }
 
     /**
-     * 
+     *
      * @param webresourceId
      * @param manualAuditCommand
      * @param result
      * @param model
      * @param request
      * @param isValidating
-     * @param auditResultSortCommand
-     * @return 
+     * @return
      */
     private String dispatchSubmitManualAuditValues(
             @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
             @ModelAttribute(TgolKeyStore.MANUAL_AUDIT_COMMAND_KEY) ManualAuditCommand manualAuditCommand,
             BindingResult result, Model model, HttpServletRequest request,
-            boolean isValidating, 
-            AuditResultSortCommand auditResultSortCommand) {
+            boolean isValidating) {
 
         WebResource webResource;
         try {
@@ -455,10 +463,15 @@ public class AuditResultController extends AuditDataHandlerController {
                 manualAuditValidator.validate(manualAuditCommand, result);
                 if (result.hasErrors()) {
                     // ajout message d'erreur.
-                    model.addAttribute("manualAuditCommand", manualAuditCommand);
+                    model.addAttribute(TgolKeyStore.MANUAL_AUDIT_COMMAND_KEY, manualAuditCommand);
 
-                    return dispatchDisplayResultRequest(webResource.getId(),
-                            null, model, request, true, "manual",
+                    return dispatchDisplayResultRequest(
+                            webResource.getId(),
+                            null, 
+                            model, 
+                            request, 
+                            true, 
+                            TgolKeyStore.MANUAL_TYPE_KEY,
                             manualAuditCommand);
 
                 } else {
@@ -466,9 +479,10 @@ public class AuditResultController extends AuditDataHandlerController {
                     audit.setStatus(AuditStatus.MANUAL_COMPLETED);
                     auditDataService.update(audit);
 
-                    WebResourceStatistics ws = getWebResourceDataService()
-                            .createWebResourceStatisticsForManualAudit(audit,
-                                    webResource, allProcessResultList);
+                    webResourceStatisticsDataService.createWebResourceStatisticsForManualAudit(
+                            audit,
+                            webResource, 
+                            allProcessResultList);
 
                     Contract contract = retrieveContractFromAudit(audit);
                     model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contract.getId());
@@ -476,30 +490,37 @@ public class AuditResultController extends AuditDataHandlerController {
                 }
             }
 
-            WebResourceStatistics ws = getWebResourceDataService()
-                    .createWebResourceStatisticsForManualAudit(audit,
-                            webResource, allProcessResultList);
+            webResourceStatisticsDataService.createWebResourceStatisticsForManualAudit(
+                    audit,
+                    webResource, 
+                    allProcessResultList);
 
-            return dispatchDisplayResultRequest(webResource.getId(), null,
-                    model, request, true, "manual", manualAuditCommand);
+            return dispatchDisplayResultRequest(
+                    webResource.getId(), 
+                    null,
+                    model, 
+                    request, 
+                    true, 
+                    TgolKeyStore.MANUAL_TYPE_KEY, 
+                    manualAuditCommand);
         } else {
             throw new ForbiddenPageException();
         }
     }
 
     /**
-     * 
+     *
      * @param webresourceId
      * @param request
      * @param response
      * @param model
-     * @return 
+     * @return
      */
     @RequestMapping(value = TgolKeyStore.SOURCE_CODE_CONTRACT_URL, method = RequestMethod.GET)
     @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String displaySourceCodeFromContract(
             @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
-            HttpServletRequest request, 
+            HttpServletRequest request,
             HttpServletResponse response,
             Model model) {
         WebResource webResource;
@@ -534,6 +555,8 @@ public class AuditResultController extends AuditDataHandlerController {
 
     /**
      *
+     * @param webresourceId
+     * @param criterionId
      * @param model
      * @return the test-result view name
      */
@@ -583,13 +606,15 @@ public class AuditResultController extends AuditDataHandlerController {
 
     /**
      *
+     * @param webresourceId
+     * @param testId
      * @param model
      * @return the test-result view name
      */
     @RequestMapping(value = TgolKeyStore.TEST_RESULT_CONTRACT_URL, method = RequestMethod.GET)
     public String displayTestResult(
             @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
-            @RequestParam(TgolKeyStore.TEST_CODE_KEY) String testId, 
+            @RequestParam(TgolKeyStore.TEST_CODE_KEY) String testId,
             Model model) {
         Long wrId;
         Long tstId;
@@ -639,7 +664,7 @@ public class AuditResultController extends AuditDataHandlerController {
     /**
      * Regarding the page type, this method collects data, set them up and
      * display the appropriate result page.
-     * 
+     *
      * @param webResourceId
      * @param auditResultSortCommand
      * @param model
@@ -647,19 +672,19 @@ public class AuditResultController extends AuditDataHandlerController {
      * @param isManualAudit
      * @param type
      * @param manualAuditCommand
-     * @return 
+     * @return
      */
     private String dispatchDisplayResultRequest(
             Long webResourceId,
-            AuditResultSortCommand auditResultSortCommand, 
+            AuditResultSortCommand auditResultSortCommand,
             Model model,
-            HttpServletRequest request, 
-            boolean isManualAudit, 
+            HttpServletRequest request,
+            boolean isManualAudit,
             String type,
             ManualAuditCommand manualAuditCommand) {
         // We first check that the current user is allowed to display the result
         // of this audit
-        boolean statManual = false;
+
         WebResource webResource = getWebResourceDataService().ligthRead(
                 webResourceId);
         if (webResource == null) {
@@ -671,17 +696,16 @@ public class AuditResultController extends AuditDataHandlerController {
         if (isUserAllowedToDisplayResult(audit)) {
             this.callGc(webResource);
 
-            String displayScope = computeDisplayScope(request,
+            String displayScope = computeDisplayScope(
+                    request,
                     auditResultSortCommand);
 
-            // first we add statistics meta-data to model
-            if (type.equals("manual")) {
-                statManual = true;
-            } else {
-                statManual = false;
-            }
-            addAuditStatisticsToModel(webResource, model, displayScope,
-                    statManual, isManualAudit);
+            addAuditStatisticsToModel(
+                    webResource, 
+                    model, 
+                    displayScope,
+                    StringUtils.equalsIgnoreCase(type, TgolKeyStore.MANUAL_TYPE_KEY), 
+                    isManualAudit);
 
             // The page is displayed with sort option. Form needs to be set up
             prepareDataForSortConsole(webResourceId, displayScope,
@@ -699,17 +723,18 @@ public class AuditResultController extends AuditDataHandlerController {
     /**
      * This method prepares the data to be displayed in the sort (referential,
      * theme, result types) console of the result page.
+     *
      * @param webResourceId
      * @param displayScope
      * @param auditResultSortCommand
      * @param model
-     * @param isManualAudit 
+     * @param isManualAudit
      */
     private void prepareDataForSortConsole(
             Long webResourceId,
-            String displayScope, 
+            String displayScope,
             AuditResultSortCommand auditResultSortCommand,
-            Model model, 
+            Model model,
             boolean isManualAudit) {
         // Meta-statistics have been added to the method previously
         String referentialParameter = ((AuditStatistics) model.asMap().get(
@@ -767,7 +792,7 @@ public class AuditResultController extends AuditDataHandlerController {
 
     /**
      * Regarding the audit type, collect data needed by the view.
-     * 
+     *
      * @param webResource
      * @param audit
      * @param model
@@ -775,15 +800,15 @@ public class AuditResultController extends AuditDataHandlerController {
      * @param locale
      * @param isManualAudit
      * @param manualAuditCommand
-     * @return 
+     * @return
      */
     private String prepareSuccessfullAuditData(
             WebResource webResource,
-            Audit audit, 
-            Model model, 
-            String displayScope, 
+            Audit audit,
+            Model model,
+            String displayScope,
             Locale locale,
-            boolean isManualAudit, 
+            boolean isManualAudit,
             ManualAuditCommand manualAuditCommand) {
         model.addAttribute(TgolKeyStore.LOCALE_KEY, locale);
         if (webResource instanceof Site) {
@@ -839,10 +864,10 @@ public class AuditResultController extends AuditDataHandlerController {
      * @throws IOException
      */
     private String prepareSuccessfullPageData(
-            Page page, 
+            Page page,
             Audit audit,
-            Model model, 
-            String displayScope, 
+            Model model,
+            String displayScope,
             boolean isManualAudit,
             ManualAuditCommand manualAuditCommand) {
 
