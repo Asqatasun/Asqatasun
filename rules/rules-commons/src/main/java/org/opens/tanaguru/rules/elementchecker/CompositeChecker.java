@@ -22,6 +22,7 @@
 
 package org.opens.tanaguru.rules.elementchecker;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import org.apache.commons.lang3.StringUtils;
@@ -42,10 +43,10 @@ import org.opens.tanaguru.ruleimplementation.TestSolutionHandlerImpl;
 public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
 
     /**
-     * The collection of checkers recursively called to check the pertinence. 
+     * The collection of checkers recursively called. 
      * This collection is of LinkedList type to maintain an order.
      */
-    private final Collection<ElementChecker> checkers;
+    private final Collection<ElementChecker> checkers = new LinkedList<>();
     public Collection<ElementChecker> getCheckers() {
         return checkers;
     }
@@ -61,19 +62,25 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
     
     /**
      * Constructor. 
-     * Returns FAILED when the tested element is not pertinent.
+     * 
+     * @param elementCheckers
+     */
+    public CompositeChecker(ElementChecker... elementCheckers) {
+        super();
+        this.manualCheckMessage = "";
+        this.checkers.addAll(Arrays.asList(elementCheckers));
+    }
+    
+    /**
      * 
      * @param manualCheckMessage
      */
     public CompositeChecker(String manualCheckMessage) {
         super();
-        this.checkers = new LinkedList<>();
         this.manualCheckMessage = manualCheckMessage;
     }
     
     /**
-     * Constructor. 
-     * Returns FAILED when the tested element is not pertinent.
      * 
      * @param manualCheckMessage
      * @param eeAttributeNameList 
@@ -82,23 +89,19 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
             String manualCheckMessage,
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
-        this.checkers = new LinkedList<>();
         this.manualCheckMessage = manualCheckMessage;
     }
     
     /**
-     * Constructor.
-     * Enables to override the failure solution.
      * 
      * @param manualCheckMessage
-     * @param notPertinentSolution
+     * @param failureSolution
      */
     public CompositeChecker(
             String manualCheckMessage,
-            TestSolution notPertinentSolution) {
+            TestSolution failureSolution) {
         super();
-        this.checkers = new LinkedList<>();
-        setFailureSolution(notPertinentSolution);
+        setFailureSolution(failureSolution);
         this.manualCheckMessage = manualCheckMessage;
     }
     
@@ -106,17 +109,15 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
      * Constructor.
      * Enables to override the failure solution.
      * @param manualCheckMessage
-     * @param notPertinentSolution
+     * @param failureSolution
      * @param eeAttributeNameList 
      */
     public CompositeChecker(
             String manualCheckMessage,
-            TestSolution notPertinentSolution,
+            TestSolution failureSolution,
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
-        this.checkers = new LinkedList<>();
-        
-        setFailureSolution(notPertinentSolution);
+        setFailureSolution(failureSolution);
         this.manualCheckMessage = manualCheckMessage;
     }
 
@@ -129,7 +130,7 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
          ElementHandler elementHandler = new ElementHandlerImpl();
          for (Element element : elements) {
              elementHandler.clean().add(element);
-             testSolutionHandler.addTestSolution(checkPertinence(sspHandler, elementHandler));
+             testSolutionHandler.addTestSolution(callCheckers(sspHandler, elementHandler));
          }
     }
     
@@ -144,14 +145,14 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
      * @param elementHandler
      * @return the solution of the pertinence check
      */
-    protected TestSolution checkPertinence(
+    protected TestSolution callCheckers(
             SSPHandler sspHandler,
             ElementHandler<Element> elementHandler) {
         
-        TestSolutionHandler testSolutionHandler = new TestSolutionHandlerImpl();
+        TestSolutionHandler globalTestSolutionHandler = new TestSolutionHandlerImpl();
 
         for (ElementChecker ec : checkers) {
-            testSolutionHandler.cleanTestSolutions();
+            TestSolutionHandler testSolutionHandler = new TestSolutionHandlerImpl();
             ec.check(sspHandler, elementHandler, testSolutionHandler);
 
             TestSolution checkerSolution = testSolutionHandler.getTestSolution();
@@ -163,18 +164,30 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
                     checkerSolution.equals(TestSolution.NOT_APPLICABLE))  {
                 return checkerSolution;
             }
+            globalTestSolutionHandler.addTestSolution(checkerSolution);
         }
 
-        createNMIProcessRemark(elementHandler);
-
-        return TestSolution.NEED_MORE_INFO;
+        return createSolutionWhenCheckersOnSuccess(globalTestSolutionHandler, elementHandler);
     }
 
     /**
      * 
+     * @param testSolutionHandler
+     * @param elementHandler
+     * @return the solution when the successive checkers doesn't produce a 
+     * failure or a not_applicable result.
+     */
+    protected TestSolution createSolutionWhenCheckersOnSuccess(
+            TestSolutionHandler testSolutionHandler, 
+            ElementHandler<Element> elementHandler) {
+        return testSolutionHandler.getTestSolution();
+    }
+            
+    /**
+     * 
      * @param elementHandler 
      */
-    private void createNMIProcessRemark(ElementHandler<Element> elementHandler) {
+    protected void createNMIProcessRemark(ElementHandler<Element> elementHandler) {
         if (StringUtils.isNotBlank(manualCheckMessage)) {
             // if the test at this step is not failed, create a NMI ProcessRemark
             // for a manual check

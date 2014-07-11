@@ -24,7 +24,10 @@ package org.opens.tanaguru.rules.elementchecker.pertinence;
 
 import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
+import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.CompositeChecker;
 import org.opens.tanaguru.rules.elementchecker.text.TextBelongsToBlackListChecker;
 import org.opens.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
@@ -250,4 +253,22 @@ public class TextPertinenceChecker extends CompositeChecker {
         }
     }
 
+    /**
+     * Override the default method to return a NEED_MORE_INFO result
+     * in case of pertinence check. In other word, the fact that the
+     * successive checkers doesn't return FAILED doesn't mean the result is PASSED.
+     * In this case, a human check is needed.
+     * 
+     * @param testSolutionHandler
+     * @param elementHandler
+     * @return TestSolution.NEED_MORE_INFO
+     */
+    @Override
+    protected TestSolution createSolutionWhenCheckersOnSuccess(
+            TestSolutionHandler testSolutionHandler, 
+            ElementHandler<Element> elementHandler) {
+        
+        createNMIProcessRemark(elementHandler);
+        return TestSolution.NEED_MORE_INFO;
+    }
 }
