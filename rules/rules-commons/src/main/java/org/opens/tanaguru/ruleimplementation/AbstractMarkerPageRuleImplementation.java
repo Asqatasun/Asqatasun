@@ -87,16 +87,25 @@ public abstract class AbstractMarkerPageRuleImplementation
      * The elementSelector used by the rule
      */
     private ElementSelector elementSelector;
-    
+    public void setElementSelector(ElementSelector elementSelector) {
+        this.elementSelector = elementSelector;
+    }
+
     /**
      * The elementChecker used by the rule
      */
     private ElementChecker elementChecker;
+    public void setElementChecker(ElementChecker elementChecker) {
+        this.elementChecker = elementChecker;
+    }
     
     /**
      * The elementChecker used by the rule for marker elements
      */
     private ElementChecker markerElementChecker;
+    public void setMarkerElementChecker(ElementChecker markerElementChecker) {
+        this.markerElementChecker = markerElementChecker;
+    }
     
     /**
      * Constructor
@@ -119,6 +128,23 @@ public abstract class AbstractMarkerPageRuleImplementation
         this.elementSelector = elementSelector;
         this.elementChecker = elementChecker;
         this.markerElementChecker = markerElementChecker;
+    }
+    
+    /**
+     * Constructor
+     * 
+     * @param elementSelector
+     * @param markerCode
+     * @param inverseMarkerCode
+     * @param markerElementChecker 
+     * @param elementChecker
+     */
+    public AbstractMarkerPageRuleImplementation(
+            @Nonnull String markerCode,
+            @Nonnull String inverseMarkerCode) {
+        super();
+        this.markerCode = markerCode;
+        this.inverseMarkerCode = inverseMarkerCode;
     }
 
     @Override
@@ -167,14 +193,14 @@ public abstract class AbstractMarkerPageRuleImplementation
             if (parameter.getParameterElement().getParameterElementCode().equalsIgnoreCase(markerCode)) {
                 String markerTab = parameter.getValue();
                 if (StringUtils.isNotEmpty(markerTab)) {
-                    markerList = new ArrayList<String>();
+                    markerList = new ArrayList();
                     inverseMarkerFound = initMarkerList(markerTab, markerList);
                 }
             }
             if (parameter.getParameterElement().getParameterElementCode().equalsIgnoreCase(inverseMarkerCode)) {
                 String markerTab = parameter.getValue();
                 if (StringUtils.isNotEmpty(markerTab)) {
-                    inverseMarkerList = new ArrayList<String>();
+                    inverseMarkerList = new ArrayList();
                     inverseMarkerFound = initMarkerList(markerTab, inverseMarkerList);
                 }
             }
@@ -239,7 +265,7 @@ public abstract class AbstractMarkerPageRuleImplementation
         if (CollectionUtils.isEmpty(markerList)) {
             return false;
         }
-        Collection<String> elAttr = new ArrayList<String>();
+        Collection<String> elAttr = new ArrayList();
         elAttr.add(id);
         elAttr.addAll(classNames);
         elAttr.add(role);

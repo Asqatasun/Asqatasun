@@ -24,7 +24,9 @@ package org.opens.tanaguru.rules.elementchecker;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
@@ -40,7 +42,7 @@ import org.opens.tanaguru.ruleimplementation.TestSolutionHandlerImpl;
  * This checker aggregate checkers and call then recursively, element by element
  * 
  */
-public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
+public class CompositeChecker extends NomenclatureBasedElementChecker {
 
     /**
      * The collection of checkers recursively called. 
@@ -55,10 +57,21 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
     }
     
     /**
-     * the message code thrown to manually check the element when no checker
-     * has returned a failed result.
+     * boolean used to determine how to compute results from successive checkers
      */
-    private final String manualCheckMessage;
+    private boolean isOrCombinaison = true;
+    public void setIsOrCombinaison(boolean isOrCombinaison) {
+        this.isOrCombinaison = isOrCombinaison;
+    }
+    
+    /**
+     * This map provides a way to override the final result of the successive 
+     * checkers execution and associate eventually a message.
+     */
+    private final Map<TestSolution, Map<TestSolution, String>> checkMessageFromSolutionMap = new HashMap();
+    public void addCheckMessageFromSolution(TestSolution solution, Map resultAndMessage) {
+        checkMessageFromSolutionMap.put(solution, resultAndMessage);
+    }
     
     /**
      * Constructor. 
@@ -67,7 +80,6 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
      */
     public CompositeChecker(ElementChecker... elementCheckers) {
         super();
-        this.manualCheckMessage = "";
         this.checkers.addAll(Arrays.asList(elementCheckers));
     }
     
@@ -75,34 +87,25 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
      * 
      * @param manualCheckMessage
      */
-    public CompositeChecker(String manualCheckMessage) {
+    public CompositeChecker() {
         super();
-        this.manualCheckMessage = manualCheckMessage;
     }
     
     /**
      * 
-     * @param manualCheckMessage
      * @param eeAttributeNameList 
      */
-    public CompositeChecker(
-            String manualCheckMessage,
-            String... eeAttributeNameList) {
+    public CompositeChecker(String... eeAttributeNameList) {
         super(eeAttributeNameList);
-        this.manualCheckMessage = manualCheckMessage;
     }
     
     /**
      * 
-     * @param manualCheckMessage
      * @param failureSolution
      */
-    public CompositeChecker(
-            String manualCheckMessage,
-            TestSolution failureSolution) {
+    public CompositeChecker(TestSolution failureSolution) {
         super();
         setFailureSolution(failureSolution);
-        this.manualCheckMessage = manualCheckMessage;
     }
     
     /**
@@ -113,12 +116,10 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
      * @param eeAttributeNameList 
      */
     public CompositeChecker(
-            String manualCheckMessage,
             TestSolution failureSolution,
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
         setFailureSolution(failureSolution);
-        this.manualCheckMessage = manualCheckMessage;
     }
 
     @Override
@@ -156,46 +157,47 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
             ec.check(sspHandler, elementHandler, testSolutionHandler);
 
             TestSolution checkerSolution = testSolutionHandler.getTestSolution();
-
+            
             Logger.getLogger(this.getClass()).debug("Checker "+ec.getClass() + 
                     " returned " + checkerSolution);
 
-            if (checkerSolution.equals(ec.getFailureSolution()) || 
-                    checkerSolution.equals(TestSolution.NOT_APPLICABLE))  {
+            if (isOrCombinaison && (checkerSolution.equals(ec.getFailureSolution()) || 
+                    checkerSolution.equals(TestSolution.NOT_APPLICABLE)))  {
                 return checkerSolution;
             }
             globalTestSolutionHandler.addTestSolution(checkerSolution);
         }
 
-        return createSolutionWhenCheckersOnSuccess(globalTestSolutionHandler, elementHandler);
-    }
-
-    /**
-     * 
-     * @param testSolutionHandler
-     * @param elementHandler
-     * @return the solution when the successive checkers doesn't produce a 
-     * failure or a not_applicable result.
-     */
-    protected TestSolution createSolutionWhenCheckersOnSuccess(
-            TestSolutionHandler testSolutionHandler, 
-            ElementHandler<Element> elementHandler) {
-        return testSolutionHandler.getTestSolution();
+        return createSolutionFromCheckersResult(
+                globalTestSolutionHandler.getTestSolution(), 
+                elementHandler);
     }
             
     /**
      * 
+     * @param testSolution 
      * @param elementHandler 
+     * @return the solution when the successive checkers doesn't produce a 
+     * failure or a not_applicable result. The final result may be overidden 
+     * if the solution is managed by the checkMessageFromSolutionMap.
      */
-    protected void createNMIProcessRemark(ElementHandler<Element> elementHandler) {
-        if (StringUtils.isNotBlank(manualCheckMessage)) {
-            // if the test at this step is not failed, create a NMI ProcessRemark
-            // for a manual check
-            Element el = (Element)elementHandler.get().iterator().next();
-            addSourceCodeRemark(
-                    TestSolution.NEED_MORE_INFO,
-                    el,
-                    manualCheckMessage);
+    protected TestSolution createSolutionFromCheckersResult (
+            TestSolution testSolution, 
+            ElementHandler<Element> elementHandler) {
+        if (checkMessageFromSolutionMap.containsKey(testSolution)) {
+            // if the final solution belongs to the checkMessageFromSolutionMap,
+            // we create a message and override the final result
+            Map.Entry<TestSolution, String> entry = 
+                    checkMessageFromSolutionMap.get(testSolution).entrySet().iterator().next();
+            if (StringUtils.isNotBlank(entry.getValue())) {
+                addSourceCodeRemark(
+                    entry.getKey(),
+                    (Element)elementHandler.get().iterator().next(),
+                    entry.getValue());
+            }
+            return entry.getKey();
+        } else {
+            return testSolution;
         }
     }
     

@@ -22,10 +22,7 @@
 
 package org.opens.tanaguru.rules.elementchecker.link;
 
-import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.ruleimplementation.ElementHandler;
-import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.CompositeChecker;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
 import org.opens.tanaguru.rules.elementchecker.text.TextBelongsToBlackListChecker;
@@ -69,7 +66,7 @@ public class LinkTitlePertinenceChecker extends CompositeChecker {
      * @param isEqualContentAuthorized 
      */
     public LinkTitlePertinenceChecker(boolean isEqualContentAuthorized) {
-        super(null, HtmlElementStore.TEXT_ELEMENT2, TITLE_ATTR);
+        super(HtmlElementStore.TEXT_ELEMENT2, TITLE_ATTR);
         this.isEqualContentAuthorized = isEqualContentAuthorized;
         addCheckers();
     }
@@ -78,7 +75,7 @@ public class LinkTitlePertinenceChecker extends CompositeChecker {
      * Constructor.
      */
     public LinkTitlePertinenceChecker() {
-        super(null, HtmlElementStore.TEXT_ELEMENT2, TITLE_ATTR);
+        super(HtmlElementStore.TEXT_ELEMENT2, TITLE_ATTR);
         addCheckers();
     }
  
@@ -140,25 +137,6 @@ public class LinkTitlePertinenceChecker extends CompositeChecker {
                         getEeAttributeNames());
         containChecker.setTextElementBuilder(linkTextElementBuilder);
         addChecker(containChecker);
-    }
-    
-    /**
-     * Override the default method to return a NEED_MORE_INFO result
-     * in case of pertinence check. In other word, the fact that the
-     * successive checkers doesn't return FAILED doesn't mean the result is PASSED.
-     * In this case, a human check is needed.
-     * 
-     * @param testSolutionHandler
-     * @param elementHandler
-     * @return TestSolution.NEED_MORE_INFO
-     */
-    @Override
-    protected TestSolution createSolutionWhenCheckersOnSuccess(
-            TestSolutionHandler testSolutionHandler, 
-            ElementHandler<Element> elementHandler) {
-        
-        createNMIProcessRemark(elementHandler);
-        return TestSolution.NEED_MORE_INFO;
     }
     
 }
