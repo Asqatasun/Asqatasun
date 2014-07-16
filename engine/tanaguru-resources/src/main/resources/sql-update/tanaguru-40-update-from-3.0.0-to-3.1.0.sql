@@ -19,4 +19,18 @@ ALTER TABLE `TEST` ADD UNIQUE INDEX `Cd_Test_UNIQUE` (`Cd_Test` ASC);
 ALTER TABLE `CRITERION` ADD UNIQUE INDEX `Cd_Criterion_UNIQUE` (`Cd_Criterion` ASC);
 ALTER TABLE `REFERENCE` ADD UNIQUE INDEX `Cd_Reference_UNIQUE` (`Cd_Reference` ASC);
 
+UPDATE LEVEL SET Cd_Level='LEVEL_1' WHERE Cd_Level='Bz';
+UPDATE LEVEL SET Cd_Level='Level 1' WHERE Cd_Level='LEVEL_1';
+UPDATE LEVEL SET Cd_Level='LEVEL_2' WHERE Cd_Level='Ar';
+UPDATE LEVEL SET Cd_Level='Level 2' WHERE Cd_Level='LEVEL_2';
+UPDATE LEVEL SET Cd_Level='LEVEL_3' WHERE Cd_Level='Or';
+UPDATE LEVEL SET Cd_Level='Level 3' WHERE Cd_Level='LEVEL_3';
+
+UPDATE PARAMETER SET Parameter_Value = REPLACE(Parameter_Value, ';Bz', ';LEVEL_1');
+UPDATE PARAMETER SET Parameter_Value = REPLACE(Parameter_Value, ';Ar', ';LEVEL_2');
+UPDATE PARAMETER SET Parameter_Value = REPLACE(Parameter_Value, ';Or', ';LEVEL_3');
+UPDATE PARAMETER SET Parameter_Value = REPLACE(Parameter_Value, ';AAA', ';LEVEL_3');
+UPDATE PARAMETER SET Parameter_Value = REPLACE(Parameter_Value, ';AA', ';LEVEL_2');
+UPDATE PARAMETER SET Parameter_Value = REPLACE(Parameter_Value, ';A', ';LEVEL_1');
+
 SET foreign_key_checks=1;
