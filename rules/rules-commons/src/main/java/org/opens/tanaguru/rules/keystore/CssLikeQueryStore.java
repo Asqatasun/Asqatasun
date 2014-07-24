@@ -212,6 +212,14 @@ public final class CssLikeQueryStore {
     // Structuration of information css-like queries
     public static final String HEADINGS_CSS_LIKE_QUERY = 
                     "h1, h2, h3, h4, h5, h6";
+
+    // Structuration of information css-like queries
+    public static final String ARIA_HEADINGS_CSS_LIKE_QUERY = 
+                    "[role=heading][aria-level]";
+
+    // Structuration of information css-like queries
+    public static final String ARIA_LEVEL1_HEADINGS_CSS_LIKE_QUERY = 
+                    "[role=heading][aria-level=1]";
     
     // Elements with attributes (minus element exceptions)
     public static final String ELEMENT_WITH_WITDH_ATTR_NOT_IMG = 

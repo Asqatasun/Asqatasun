@@ -62,5 +62,5 @@ public class SimpleElementSelector implements ElementSelector {
                             getSelectedElements());
         }
     }
-
+    
 }

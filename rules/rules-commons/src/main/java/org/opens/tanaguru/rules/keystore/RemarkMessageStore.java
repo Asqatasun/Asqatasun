@@ -46,6 +46,8 @@ public final class RemarkMessageStore {
     public static final String ALT_MISSING_MSG = "AltMissing";
     public static final String DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG =
             "DecorativeElementWithNotEmptyAltAttribute";
+    public static final String DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_OR_TITLE_MSG =
+            "DecorativeElementWithNotEmptyAltAttributeOrTitlePresence";
     public static final String CHECK_ALTERNATIVE_OF_DECORATIVE_ELEMENT_MSG =
             "CheckAlternativeOfDecorativeElement";
     public static final String CHECK_NATURE_AND_ALTERNATIVE_OF_ELEMENT_MSG =
