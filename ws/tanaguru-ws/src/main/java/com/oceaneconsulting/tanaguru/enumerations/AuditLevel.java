@@ -7,9 +7,9 @@ package com.oceaneconsulting.tanaguru.enumerations;
  * 
  */
 public enum AuditLevel {
-	AW22_OR("AW22;Or"), 
-	AW22_AR("AW22;Ar"),
-	AW22_BZ("AW22;Bz");
+	AW22_OR("AW22;LEVEL_3"), 
+	AW22_AR("AW22;LEVEL_2"),
+	AW22_BZ("AW22;LEVEL_1");
     
     private String value;
 

@@ -316,8 +316,8 @@ public class AuditResultController extends AuditDataHandlerController {
     @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     public String displayPageResultFromContract(
             @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
-            @RequestParam(value = TgolKeyStore.IS_MANUAL_AUDIT_KEY) boolean manual,
-            @RequestParam(value = TgolKeyStore.TYPE_KEY) String type,
+            @RequestParam(value = TgolKeyStore.IS_MANUAL_AUDIT_KEY, required = false, defaultValue = "false") boolean manual,
+            @RequestParam(value = TgolKeyStore.TYPE_KEY, required = false, defaultValue = "auto") String type,
             HttpServletRequest request,
             Model model) {
         Long webResourceIdValue;
