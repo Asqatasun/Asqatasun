@@ -75,12 +75,11 @@
                                             </span>
                                         </td>
                                     </tr>   
-                                     <c:if test="${isManualAudit == false}">                                 
+                                    <c:if test="${isManualAudit != true}">                                 
                                     <tr>
                                         <td class="col01 nmi"></td>
                                         <td class="col02"><fmt:message key="nmi"/></td>
                                         <td class="col03">${counter.nmiCount}</td>
-                                        
                                     </tr>
                                     <tr>
                                         <td class="col01"></td>

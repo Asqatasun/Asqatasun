@@ -6,20 +6,6 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib uri="http://tagutils" prefix="tg" %>
 
-<!-- external js -->
-<c:set var="jqueryUrl">
-    <c:url value="/External-Js/jquery-1.9.1.min.js"/>
-</c:set>
-<c:set var="jqueryUIUrl">
-    <c:url value="/External-Js/jquery-ui-1.10.1.custom.min.js"/>  
-</c:set>
-<!-- internal js -->
-<c:set var="detailResultManualJsUrl">
-    <c:url value="/Js/result-page/detail-result-manual.js"/>  
-</c:set>
-<script type="text/javascript" src="${jqueryUrl}"></script>
-<script type="text/javascript" src="${jqueryUIUrl}"></script>
-<script type="text/javascript" src="${detailResultManualJsUrl}"></script>
 <c:set var="isManualAudit" scope="request" value="${param.ma}"/>
 <c:if test="${addSideBarNav}">
     <div class="theme-nav bs-docs-sidebar">
@@ -58,7 +44,14 @@
                 </div><!-- class="span16" -->
             </div><!-- class="row" -->
         </c:if>
-        <form:form commandName="manualAuditCommand" method="post" acceptCharset="UTF-8" enctype="application/x-www-form-urlencoded">
+        <c:set var="updateManualResultUrl">
+            <c:url value="/home/contract/update-manual-result.html?wr=${param.wr}&type=${param.type}&ma=${param.ma}"/>
+        </c:set>
+        <form:form commandName="manualAuditCommand" 
+                   method="post" 
+                   acceptCharset="UTF-8" 
+                   enctype="application/x-www-form-urlencoded" 
+                   action="${updateManualResultUrl}">
             <div id="all-themes">
                 <spring:hasBindErrors name="manualAuditCommand">
                     <div id="sign-up-form-general-error">

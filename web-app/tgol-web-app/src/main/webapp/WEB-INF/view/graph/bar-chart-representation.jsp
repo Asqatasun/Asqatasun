@@ -27,7 +27,7 @@
                             <td headers="serie2 category${entry.key.rank}">${entry.value.passedCount}</td>
                             </c:forEach>
                         </tr>
-                        <c:if test="${isManualAudit == false}">
+                        <c:if test="${isManualAudit != true}">
                         <tr>
                             <th id="serie3" title="<fmt:message key="nmi"/>"><fmt:message key="nmi"/></th>
                             <c:forEach var="entry" items="${counterByThemeMap}">    

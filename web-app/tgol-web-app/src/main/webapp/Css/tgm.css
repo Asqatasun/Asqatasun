@@ -2400,6 +2400,14 @@ td.occurences {
 .url-in-title{
     font-size : 20px;
 }
+
+.row > [class*="span"].audit-result-manual-comment-hidden {
+    display: none;
+}
+
+.row > [class*="span"].audit-result-manual-comment {
+    display: inline;
+}
 /*
  * page : detailed-result (criterion scope)
  * ==============================================

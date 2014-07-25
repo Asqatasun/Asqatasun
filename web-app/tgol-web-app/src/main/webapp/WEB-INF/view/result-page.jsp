@@ -60,6 +60,9 @@
 <c:set var="displaySnapshotJsUrl" scope="page">
     <c:url value="/Js/snapshot/snapshot-min.js"/>
 </c:set>
+<c:set var="detailResultManualJsUrl">
+    <c:url value="/Js/result-page/detail-result-manual.js"/>  
+</c:set>
 
 <!-- external images -->
 <c:set var="testInfoLinkImg" scope="request">
@@ -229,6 +232,9 @@
         <c:if test="${addRelaunchAction}">
         <script type="text/javascript" src="${jqueryUIUrl}"></script>
         <script type="text/javascript" src="${progressBarJsUrl}"></script>
+        </c:if>
+        <c:if test="${param.ma == true}">
+        <script type="text/javascript" src="${detailResultManualJsUrl}"></script>
         </c:if>
         <!--[if lte IE 8]>
         <script type="text/javascript" src="${r2d3JsUrl}"></script>
