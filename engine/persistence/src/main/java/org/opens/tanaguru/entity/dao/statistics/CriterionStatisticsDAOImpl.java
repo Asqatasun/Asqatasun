@@ -24,14 +24,17 @@ package org.opens.tanaguru.entity.dao.statistics;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+
 import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.statistics.CriterionStatistics;
 import org.opens.tanaguru.entity.statistics.CriterionStatisticsImpl;
+import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.entity.subject.WebResourceImpl;
 import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
@@ -179,5 +182,27 @@ public class CriterionStatisticsDAOImpl extends AbstractJPADAO<CriterionStatisti
             return Long.valueOf(0);
         }
     }
+
+    /**
+     * {@inheritDoc}
+     * */
+	@Override
+	public CriterionStatistics findCriterionStatisticsByWebResource(
+			Criterion criterion, WebResourceStatistics webResourceStatistics) {
+		StringBuilder strb = new StringBuilder();
+		strb.append("SELECT cs FROM ");
+		strb.append(getEntityClass().getName());
+		strb.append(" cs ");
+		strb.append(" WHERE cs.webResourceStatistics=:webResourceId ");
+		strb.append(" AND cs.criterion=:criterion ");
+		Query query = entityManager.createQuery(strb.toString());
+		query.setParameter("webResourceId", webResourceStatistics);
+		query.setParameter("criterion", criterion);
+		try {
+			return (CriterionStatistics) query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
 
 }

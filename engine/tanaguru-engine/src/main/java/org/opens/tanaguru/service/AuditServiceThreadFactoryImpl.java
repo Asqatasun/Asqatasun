@@ -29,7 +29,7 @@ import org.opens.tanaguru.service.command.AuditCommand;
  * @author enzolalay
  */
 public class AuditServiceThreadFactoryImpl implements AuditServiceThreadFactory {
-
+	
     @Override
     public AuditServiceThread create(Audit audit) {
         return new AuditServiceThreadImpl(audit);

@@ -23,6 +23,8 @@ package org.opens.tgol.presentation.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.opens.tanaguru.entity.audit.DefiniteResult;
+import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.reference.Test;
 
 /**
@@ -31,7 +33,7 @@ import org.opens.tanaguru.entity.reference.Test;
  */
 public class TestResultImpl implements TestResult{
 
-    private List<RemarkInfos> remarkInfosList = new ArrayList<RemarkInfos>();
+    private List<RemarkInfos> remarkInfosList = new ArrayList<>();
 
     /**
      *
@@ -48,7 +50,27 @@ public class TestResultImpl implements TestResult{
     public void setTestEvidenceRepresentationOrder(String testEvidenceRepresentationOrder) {
         this.testEvidenceRepresentationOrder = testEvidenceRepresentationOrder.split(";");
     }
-    
+    private String manualStatus;
+    private String comment;
+
+    @Override
+    public String getManualStatus() {
+        return manualStatus;
+    }
+
+    public void setManualStatus(String manualStatus) {
+        this.manualStatus = manualStatus;
+    }
+
+    @Override
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     @Override
     public String[] getTestEvidenceRepresentationOrder() {
         return testEvidenceRepresentationOrder;
@@ -208,7 +230,7 @@ public class TestResultImpl implements TestResult{
 
     @Override
     public void setResultCode(String resultCode) {
-        this.resultCode=resultCode;
+        this.resultCode = resultCode;
     }
 
     private String result;
@@ -285,7 +307,7 @@ public class TestResultImpl implements TestResult{
     public void setTruncated(boolean isTruncated) {
         this.isTruncated = isTruncated;
     }
-    
+
     private String colorTestContrastRatio;
     @Override
     public void setColorTestContrastRatio(String colorTestContrastRatio) {
@@ -296,11 +318,31 @@ public class TestResultImpl implements TestResult{
     public String getColorTestContrastRatio() {
         return colorTestContrastRatio;
     }
-    
+
     /**
      * Default constructor
      */
     public TestResultImpl() {
     }
-    
+
+    private List<DefiniteResult> history;
+
+    @Override
+    public List<DefiniteResult> getHistory() {
+        return history;
+    }
+
+    @Override
+    public void setHistory(List<DefiniteResult> history) {
+        this.history = history;
+    }
+
+    @Override
+    public List<ProcessResult> getHistory(ProcessResult processResult) {
+        //TODO :YNE: afficher l'historique pour chaque processResult
+        //TODO :YNE: essayer de déporter ce code sur un service et/ou module dédier à hibernate-envers
+//		AuditReader auditReader = AuditReaderFactory.get(ProcessResultImpl);
+        return null;
+    }
+
 }

@@ -23,6 +23,7 @@ package org.opens.tanaguru.entity.statistics;
 
 import java.math.BigDecimal;
 import java.util.Set;
+
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.Entity;
@@ -219,5 +220,17 @@ public interface WebResourceStatistics extends Entity, ResultCounter {
      * @param httpStatusCode
      */
     void setHttpStatusCode(int httpStatusCode);
+    
+    /**
+     * 
+     * @return
+     */
+    public int getIsManualAuditStatistics();
+
+    /**
+     * 
+     * @param isManualAuditStatistics
+     */
+    public void setIsManualAuditStatistics(int isManualAuditStatistics);
     
 }

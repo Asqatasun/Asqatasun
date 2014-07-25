@@ -23,6 +23,8 @@ package org.opens.tanaguru.entity.dao.statistics;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.List;
+
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
@@ -56,22 +58,26 @@ public interface WebResourceStatisticsDAO extends GenericDAO<WebResourceStatisti
      * @param webresourceId
      * @param paramSet
      * @param testSolution
+     * @param isManualAudit
      * @return 
      */
     public BigDecimal findWeightedResultCountByResultType(
             Long webresourceId,
             Collection<Parameter> paramSet,
-            TestSolution testSolution);
+            TestSolution testSolution, 
+            boolean isManualAudit);
     
     /**
      * 
      * @param webresourceId
      * @param testSolution
+     * @param isManualAudit
      * @return
      */
     Long findNumberOfOccurrencesByWebResourceAndResultType(
             Long webresourceId,
-            TestSolution testSolution);
+            TestSolution testSolution,
+            boolean isManualAudit);
 
     /**
      * 
@@ -86,5 +92,17 @@ public interface WebResourceStatisticsDAO extends GenericDAO<WebResourceStatisti
      * @return
      */
     WebResourceStatistics findWebResourceStatisticsByWebResource(WebResource webResource);
+    
+    
+    
+    /**
+     * Getting the The list of WebResourceStatistics for either the manual and the automatic audit by webResouce
+     * @param webResource 
+     * @param manual If incluse olso the manual statistics
+     * @return The list of WebResourceStatistics for either the manual and the automatic audit
+     */
+    WebResourceStatistics findWebResourceStatisticsByWebResource(WebResource webResource, boolean manual);
+    
+    
 
 }

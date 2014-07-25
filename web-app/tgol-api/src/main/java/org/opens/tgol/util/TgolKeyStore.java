@@ -91,8 +91,11 @@ public final class TgolKeyStore {
     public static final String AUDIT_RESULT_CONTRACT_URL =
             CONTRACT_URL+AUDIT_RESULT_URL;
     public static final String PAGE_RESULT_URL = "/page-result";
+    public static final String PAGE_MANUAL_AUDIT_URL = "/page-manual";
     public static final String PAGE_RESULT_CONTRACT_URL =
             CONTRACT_URL+PAGE_RESULT_URL;
+    public static final String PAGE_MANUAL_AUDIT_CONTRACT_URL =
+            CONTRACT_URL+PAGE_MANUAL_AUDIT_URL;
     public static final String SITE_RESULT_URL = "/site-result";
     public static final String SITE_RESULT_CONTRACT_URL =
             CONTRACT_URL+SITE_RESULT_URL;
@@ -170,6 +173,7 @@ public final class TgolKeyStore {
     public static final String SIGN_UP_CONFIRMATION_VIEW_NAME = "sign-up-confirmation";
     public static final String SIGN_UP_CONFIRMATION_VIEW_REDIRECT_NAME = "sign-up-confirmation-redirect";
     public static final String CONTRACT_VIEW_NAME = "contract";
+    public static final String CONTRACT_VIEW_NAME_REDIRECT = "contract-redirect";
     public static final String AUDIT_SITE_SET_UP_VIEW_NAME = "audit-site-set-up";
     public static final String AUDIT_PAGE_SET_UP_VIEW_NAME = "audit-page-set-up";
     public static final String AUDIT_UPLOAD_SET_UP_VIEW_NAME = "audit-upload-set-up";
@@ -229,6 +233,10 @@ public final class TgolKeyStore {
     public static final String AUDIT_RESULT_SORT_COMMAND_KEY="auditResultSortCommand";
     public static final String CONTRACT_SORT_COMMAND_KEY="contractSortCommand";
     public static final String WEBRESOURCE_ID_KEY = "wr";
+    public static final String IS_MANUAL_AUDIT_KEY = "ma";
+    public static final String TYPE_KEY = "type";
+    public static final String AUTO_TYPE_KEY = "auto";
+    public static final String MANUAL_TYPE_KEY = "manual";
     public static final String AUDIT_ID_KEY = "audit";
     public static final String DISPLAY_SCOPE_KEY = "lvl";
     public static final String EXPORT_FORMAT_KEY = "format";
@@ -276,6 +284,7 @@ public final class TgolKeyStore {
     public static final String RESULT_ACTION_LIST_KEY = "resultActionList";
     public static final String HOME_ACTION_LIST_KEY = "homeActionList";
     public static final String DISPLAY_RESULT_TREND_KEY = "displayResultTrend";
+    public static final String CONTRACT_WITH_MANUAL_AUDIT_KEY = "displayManualAuditOption";
     public static final String CONTRACT_LIST_KEY = "contractList";
     public static final String USER_LIST_KEY = "userList";
     public static final String RETURN_PAGE_URL_KEY="returnPageUrl";
@@ -298,6 +307,7 @@ public final class TgolKeyStore {
     public static final String STATUS_KEY = "status";
     public static final String TEST_KEY = "test";
     public static final String COMPLETED_KEY = "COMPLETED";
+    public static final String ONGOING_KEY = "ONGOING";
     public static final String ERROR_LOADING_KEY = "ERROR_LOADING";
     public static final String ERROR_ADAPTING_KEY = "ERROR_ADAPTING";
     public static final String ERROR_UNKNOWN_KEY = "ERROR_UNKNOWN";
@@ -314,6 +324,7 @@ public final class TgolKeyStore {
     public static final String CREATE_CONTRACT_COMMAND_KEY = "createContractCommand";
     public static final String CREATE_USER_ATTACK_COMMAND_KEY = "createUserAttack";
     public static final String CHANGE_TEST_WEIGHT_COMMAND_KEY ="changeTestWeightCommand";
+    public static final String MANUAL_AUDIT_COMMAND_KEY ="manualAuditCommand";
     public static final String TEST_WEIGHT_SUCCESSFULLY_UPDATED_KEY="testWeightSuccessfullyUpdated";
     public static final String IS_CONTRACT_EXPIRED_KEY = "isContractExpired";
     public static final String PARAMETERS_MAP_KEY = "parametersMap";

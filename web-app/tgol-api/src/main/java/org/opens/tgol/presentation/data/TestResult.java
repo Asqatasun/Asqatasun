@@ -22,6 +22,9 @@
 package org.opens.tgol.presentation.data;
 
 import java.util.List;
+
+import org.opens.tanaguru.entity.audit.DefiniteResult;
+import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.reference.Test;
 
 /**
@@ -65,6 +68,20 @@ public interface TestResult {
      *          the list of remark info for the given test
      */
     List<RemarkInfos> getRemarkInfosList();
+    
+    /**
+    *
+    * @return
+    *          the manual audit test status
+    */
+    String getManualStatus();
+   
+   /**
+   *
+   * @return
+   *          the manual audit entered comment
+   */
+    String getComment();
 
     /**
      *
@@ -255,5 +272,12 @@ public interface TestResult {
      * @param isTruncated
      */
     void setTruncated(boolean isTruncated);
+    
+    List<ProcessResult> getHistory(ProcessResult processResult);
+    
+    
+    public List<DefiniteResult> getHistory();
+
+	public void setHistory(List<DefiniteResult> list) ;
     
 }

@@ -71,4 +71,10 @@ public class IndefiniteResultImpl extends ProcessResultImpl implements
     public void setValue(Object value) {
         setIndefiniteValue((String) value);
     }
+
+	@Override
+	public Object getManualValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

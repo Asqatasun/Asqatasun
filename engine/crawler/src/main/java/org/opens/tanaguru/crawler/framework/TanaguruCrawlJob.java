@@ -77,7 +77,7 @@ public class TanaguruCrawlJob implements ApplicationListener<CrawlStateEvent>{
     private static final String WRITER_BEAN_NAME = "tanaguruWriter";
     private static final String DECIDE_RULE_SEQUENCE_BEAN_NAME = "scope";
     private File currentJobOutputDir;
-    private String outputDir = System.getenv("PWD") + "/output";
+    private String outputDir = System.getProperty("user.dir")  + "/output";
     private CrawlJob crawlJob;
     private String crawlConfigFilePath = "/etc/tanaguru/context/crawler/";
     private ContentWriter contentWriter;

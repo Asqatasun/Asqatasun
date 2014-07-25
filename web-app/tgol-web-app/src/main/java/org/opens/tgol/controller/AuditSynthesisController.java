@@ -46,7 +46,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-/**
+/** 
  *
  * @author jkowalczyk
  */
@@ -54,18 +54,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AuditSynthesisController extends AuditDataHandlerController {
 
     private static final Logger LOGGER = Logger.getLogger(AuditSynthesisController.class);
-    private int nbOfDisplayedFailedTest = 5;
 
+    private int nbOfDisplayedFailedTest = 5;
     public void setNbOfDisplayedFailedTest(int nbOfDisplayedFailedTest) {
         this.nbOfDisplayedFailedTest = nbOfDisplayedFailedTest;
     }
-    private int nbOfDisplayedFailedPages = 10;
 
+    private int nbOfDisplayedFailedPages = 10;
     public void setNbOfDisplayedFailedPages(int nbOfDisplayedFailedPages) {
         this.nbOfDisplayedFailedPages = nbOfDisplayedFailedPages;
     }
-    private List<String> authorizedScopeForSynthesis = new ArrayList<>();
 
+    private List<String> authorizedScopeForSynthesis = new ArrayList<String>();
     public void setAuthorizedScopeForSynthesis(List<String> authorizedScopeForSynthesis) {
         this.authorizedScopeForSynthesis = authorizedScopeForSynthesis;
     }
@@ -81,7 +81,7 @@ public class AuditSynthesisController extends AuditDataHandlerController {
         String scope = getActDataService().getActFromAudit(audit).getScope().getCode().name();
         return (authorizedScopeForSynthesis.contains(scope));
     }
-
+    
     public AuditSynthesisController() {
         super();
     }
@@ -160,7 +160,7 @@ public class AuditSynthesisController extends AuditDataHandlerController {
                 model.addAttribute(TgolKeyStore.REFERENTIAL_CD_KEY, getParameterDataService().getReferentialKeyFromAudit(audit));
                 model.addAttribute(TgolKeyStore.WEBRESOURCE_ID_KEY, audit.getSubject().getId());
                 Site site = (Site) audit.getSubject();
-                addAuditStatisticsToModel(site, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE);
+                addAuditStatisticsToModel(site, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE , false ,false);//TODO cas manual
                 model.addAttribute(TgolKeyStore.FAILED_TEST_INFO_BY_OCCURRENCE_SET_KEY,
                         getWebResourceDataService().getFailedTestByOccurrence(site, audit, -1));
                 model.addAttribute(TgolKeyStore.HAS_SITE_SCOPE_TEST_KEY,
@@ -189,7 +189,7 @@ public class AuditSynthesisController extends AuditDataHandlerController {
         // Add this step, we are sure that the audit subject 
         // is a site, we can trustly cast it
         Site site = (Site) audit.getSubject();
-        addAuditStatisticsToModel(site, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE);
+        addAuditStatisticsToModel(site, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE, false ,false);//TODO cas manual
 
         Map<Theme, ResultCounter> top5SortedThemeMap =
                 new LinkedHashMap<>();

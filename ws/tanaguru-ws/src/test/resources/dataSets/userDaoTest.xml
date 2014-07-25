@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <WS_ROLE ID_ROLE="1" ROLE="ADMIN" LABEL="Know admin"></WS_ROLE>
+	<WS_ROLE ID_ROLE="2" ROLE="USER" LABEL="Know user"></WS_ROLE>
+	
+	<WS_USER ID_USER="2" EMAIL="xconnu@oceaneconsulting.com" PASSWORD="test" NAME="CONNU" FIRST_NAME="CONNU" ACTIVE="1" ID_ROLE="2"></WS_USER>
+	<WS_USER ID_USER="3" EMAIL="xinconnu@oceaneconsulting.com" PASSWORD="test" NAME="INCONNU" FIRST_NAME="INCONNU" ACTIVE="1" ID_ROLE="2"></WS_USER>
+</dataset>	

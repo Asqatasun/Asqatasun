@@ -118,23 +118,26 @@ public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
             WebResource webResource,
             Audit audit,
             TestSolution testSolution,
-            Theme theme);
+            Theme theme,
+            boolean manualAudit);
 
     /**
      * 
      * @param idWebResource
+     * @param isManual 
      * @return 
      */
     Float findWeightedMarkByWebResourceAndAudit(
-            Long idWebResource);
+            Long idWebResource, boolean isManual);
 
     /**
      * 
      * @param idWebResource
+     * @param isManual
      * @return 
      */
     Float findRawMarkByWebResourceAndAudit(
-            Long idWebResource);
+            Long idWebResource, boolean isManual);
 
     /**
      * 

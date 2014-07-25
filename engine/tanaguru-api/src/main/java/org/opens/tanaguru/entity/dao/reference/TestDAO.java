@@ -22,7 +22,6 @@
 package org.opens.tanaguru.entity.dao.reference;
 
 import java.util.List;
-import java.util.Map;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Level;
@@ -35,8 +34,16 @@ import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
  * @author jkowalczyk
  */
 public interface TestDAO extends GenericDAO<Test, Long> {
-
-    /**
+	
+	/**
+    *
+    * @param label
+    *            the label of the test to read
+    * @return the matching read test
+    */
+	Test read(String label);
+    
+	/**
      *
      * @param reference
      *            the reference of the tests to find

@@ -188,13 +188,15 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
      * @param audit
      * @param testSolution
      * @param theme
+     * @param manualAudit
      * @return 
      */
     Long getResultCountByResultTypeAndTheme(
             WebResource webResource,
             Audit audit,
             TestSolution testSolution,
-            Theme theme);
+            Theme theme,
+            boolean manualAudit);
 
     /**
      * 
@@ -218,9 +220,10 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
      *
      * @param webResource
      * @param isRawMark
+     * @param isManual
      * @return
      */
-    Float getMarkByWebResourceAndAudit(WebResource webResource, boolean isRawMark);
+    Float getMarkByWebResourceAndAudit(WebResource webResource, boolean isRawMark, boolean isManual);
     
     /**
      * 

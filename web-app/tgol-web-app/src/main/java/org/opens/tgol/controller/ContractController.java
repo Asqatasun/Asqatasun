@@ -105,18 +105,36 @@ public class ContractController extends AbstractController {
     private String displayContractPage(
             HttpServletRequest request,
             Model model,
-            Long contractId) {
-        model.addAttribute(TgolKeyStore.LOCALE_KEY,localeResolver.resolveLocale(request));
-        Contract contract = getContractDataService().read(contractId);
-        if (isContractExpired(contract)) {
-            throw new ForbiddenUserException(getCurrentUser());
+            Long contractId) {            
+                model.addAttribute(TgolKeyStore.LOCALE_KEY,localeResolver.resolveLocale(request));
+                Contract contract = getContractDataService().read(contractId);
+                if (isContractExpired(contract)) {
+                    throw new ForbiddenUserException(getCurrentUser());
+                }
+                // add the action list to the view
+//                model.addAttribute(TgolKeyStore.CONTRACT_ACTION_LIST_KEY, actionHandler.getActionList(contract));
+                if (isContractHasFunctionalityAllowingTrend(contract)) {
+                    model.addAttribute(TgolKeyStore.DISPLAY_RESULT_TREND_KEY, true);
+                }
+                if(isContractHasFunctionalityAllowingManualAudit(contract)){
+                	model.addAttribute(TgolKeyStore.CONTRACT_WITH_MANUAL_AUDIT_KEY, true);
+                }
+                return displayContractView(contract, model);
+}
+    
+    /**
+     * We iterate through the list of functionalities associated with the contract
+     * to determine whether a manual audit option has to be displayed. 
+     * @param contract
+     * @return 
+     */
+    private boolean isContractHasFunctionalityAllowingManualAudit(Contract contract) {
+        for (Functionality functionality : contract.getFunctionalitySet()) {
+            if (functionality.getId() == 5) {
+                return true;
+            }
         }
-        // add the action list to the view
-//        model.addAttribute(TgolKeyStore.CONTRACT_ACTION_LIST_KEY, actionHandler.getActionList(contract));
-        if (isContractHasFunctionalityAllowingTrend(contract)) {
-            model.addAttribute(TgolKeyStore.DISPLAY_RESULT_TREND_KEY, true);
-        }
-        return displayContractView(contract, model);
+        return false;
     }
 
     /**

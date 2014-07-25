@@ -2,6 +2,7 @@
 <%@page pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ <c:set var="isManualAudit" scope="request" value="${param.ma}"/>
                         <c:if test="${addSpan == 'true'}">
                             <div class="span4">
                         </c:if>
@@ -73,7 +74,8 @@
                                                 <span class="fd-slider-bar"></span>
                                             </span>
                                         </td>
-                                    </tr>                                    
+                                    </tr>   
+                                     <c:if test="${isManualAudit == false}">                                 
                                     <tr>
                                         <td class="col01 nmi"></td>
                                         <td class="col02"><fmt:message key="nmi"/></td>
@@ -94,7 +96,8 @@
                                                 <span class="fd-slider-bar"></span>
                                             </span>
                                         </td>
-                                    </tr>   
+                                    </tr> 
+                                    </c:if>  
                                     <tr>
                                         <td class="col01 nt"></td>
                                         <td class="col02"><fmt:message key="nt"/></td>

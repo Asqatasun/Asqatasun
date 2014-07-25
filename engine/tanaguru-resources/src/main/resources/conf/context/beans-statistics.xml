@@ -20,6 +20,8 @@
     <bean id="webResourceStatisticsDataService" class="org.opens.tanaguru.entity.service.statistics.WebResourceStatisticsDataServiceImpl">
         <property name="entityDao" ref="webResourceStatisticsDAO"/>
         <property name="entityFactory" ref="webResourceStatisticsFactory"/>
+        <property name="criterionStatisticsDAO" ref="criterionStatisticsDAO"/>
+       	<property name="themeStatisticsDAO" ref="themeStatisticsDAO" />
     </bean>
     
     <bean id="criterionStatisticsDAO" class="org.opens.tanaguru.entity.dao.statistics.CriterionStatisticsDAOImpl">

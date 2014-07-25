@@ -1,4 +1,64 @@
+use $myDatabaseName;
 SET foreign_key_checks=0;
+
+-- -----------------------------------------------------
+-- Column `Manual_Definite_Value` to store the manual 
+-- audit value
+-- -----------------------------------------------------
+ALTER TABLE `PROCESS_RESULT` 
+ADD COLUMN `Manual_Definite_Value` VARCHAR(255) NULL DEFAULT NULL 
+COMMENT 'Manual audit overridden definite value' AFTER `Id_Test`;
+
+-- -----------------------------------------------------
+-- Column `Manual_Audit_Comment` to store the manual 
+-- audit invalidation comment
+-- -----------------------------------------------------
+ALTER TABLE `PROCESS_RESULT` 
+ADD COLUMN `Manual_Audit_Comment` VARCHAR(255) NULL DEFAULT NULL 
+COMMENT 'Manual audit user comment' AFTER `Manual_Definite_Value`;
+
+-- -----------------------------------------------------
+-- Column `Manual_Audit_Dt_Creation` to store the manual 
+-- audit launch dates
+-- -----------------------------------------------------
+ALTER TABLE `AUDIT` 
+ADD COLUMN `Manual_Audit_Dt_Creation` DATETIME NULL DEFAULT NULL AFTER `Dt_Creation`;
+
+-- ---------------------------------------------------------------------------------------------------------
+-- Column `web_resource_statistics` to know if the web_resource_statistics is for manual or automatic audit 
+-- ---------------------------------------------------------------------------------------------------------
+ ALTER TABLE  `WEB_RESOURCE_STATISTICS` ADD COLUMN `Manual_Audit` IF NOT EXISTS INT NULL DEFAULT 0 
+ COMMENT 'Colonne indiquant s il s agit de statistiques d un audit manuel ou automatique\n0 : automatique\n1: manuel  AFTER Http_Status_Code' ;
+
+
+ 
+-- ---------------------------------------------------------------------------------------------------------
+-- Creating the hibernate audit table of process_result
+-- ---------------------------------------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `PROCESS_RESULT_AUD` (
+  `DTYPE` varchar(31) NOT NULL,
+  `Id_Process_Result` bigint(20) NOT NULL,
+  `REV` int(11) NOT NULL,
+  `REVTYPE` tinyint(4) DEFAULT NULL,
+  `Element_Counter` int(11) DEFAULT NULL,
+  `Id_Process_Result_Parent` bigint(20) DEFAULT NULL,
+  `Definite_Value` varchar(255) DEFAULT NULL,
+  `Manual_Audit_Comment` varchar(255) DEFAULT NULL,
+  `Manual_Definite_Value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`Id_Process_Result`,`REV`),
+  KEY `FK5411075EDF74E053` (`REV`),
+  CONSTRAINT `FK5411075EDF74E053` FOREIGN KEY (`REV`) REFERENCES `REVINFO` (`REV`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ---------------------------------------------------------------------------------------------------------
+-- Hibernate envers technical table to refer the hibernate changes versions
+-- ---------------------------------------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `REVINFO` (
+  `REV` int(11) NOT NULL AUTO_INCREMENT,
+  `REVTSTMP` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`REV`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_Element`, `Id_Parameter_Family`, `Long_Label`, `Short_Label`) VALUES
 (42, 'INCLUSION_REGEXP', 1, 'Regulard expression to crawl on a specific folder', 'inclusion regex');
@@ -20,11 +80,11 @@ ALTER TABLE `CRITERION` ADD UNIQUE INDEX `Cd_Criterion_UNIQUE` (`Cd_Criterion` A
 ALTER TABLE `REFERENCE` ADD UNIQUE INDEX `Cd_Reference_UNIQUE` (`Cd_Reference` ASC);
 
 UPDATE LEVEL SET Cd_Level='LEVEL_1' WHERE Cd_Level='Bz';
-UPDATE LEVEL SET Cd_Level='Level 1' WHERE Cd_Level='LEVEL_1';
+UPDATE LEVEL SET Label='Level 1' WHERE Cd_Level='LEVEL_1';
 UPDATE LEVEL SET Cd_Level='LEVEL_2' WHERE Cd_Level='Ar';
-UPDATE LEVEL SET Cd_Level='Level 2' WHERE Cd_Level='LEVEL_2';
+UPDATE LEVEL SET Label='Level 2' WHERE Cd_Level='LEVEL_2';
 UPDATE LEVEL SET Cd_Level='LEVEL_3' WHERE Cd_Level='Or';
-UPDATE LEVEL SET Cd_Level='Level 3' WHERE Cd_Level='LEVEL_3';
+UPDATE LEVEL SET Label='Level 3' WHERE Cd_Level='LEVEL_3';
 
 UPDATE PARAMETER SET Parameter_Value = REPLACE(Parameter_Value, ';Bz', ';LEVEL_1');
 UPDATE PARAMETER SET Parameter_Value = REPLACE(Parameter_Value, ';Ar', ';LEVEL_2');
@@ -32,5 +92,4 @@ UPDATE PARAMETER SET Parameter_Value = REPLACE(Parameter_Value, ';Or', ';LEVEL_3
 UPDATE PARAMETER SET Parameter_Value = REPLACE(Parameter_Value, ';AAA', ';LEVEL_3');
 UPDATE PARAMETER SET Parameter_Value = REPLACE(Parameter_Value, ';AA', ';LEVEL_2');
 UPDATE PARAMETER SET Parameter_Value = REPLACE(Parameter_Value, ';A', ';LEVEL_1');
-
 SET foreign_key_checks=1;

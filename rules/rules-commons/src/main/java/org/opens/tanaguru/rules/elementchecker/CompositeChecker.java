@@ -48,7 +48,7 @@ public class CompositeChecker extends NomenclatureBasedElementChecker {
      * The collection of checkers recursively called. 
      * This collection is of LinkedList type to maintain an order.
      */
-    private final Collection<ElementChecker> checkers = new LinkedList<>();
+    private Collection<ElementChecker> checkers = new LinkedList<ElementChecker>();
     public Collection<ElementChecker> getCheckers() {
         return checkers;
     }

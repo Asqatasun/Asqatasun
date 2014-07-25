@@ -34,31 +34,36 @@ import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 
 /**
- *
+ * 
  * @author jkowalczyk
  */
 public class TestDataServiceImpl extends AbstractGenericDataService<Test, Long>
         implements TestDataService {
 
     private static final Logger LOGGER = Logger.getLogger(TestDataServiceImpl.class);
-    private String levelParameterCode = "LEVEL";
 
+    private String levelParameterCode = "LEVEL";
     public void setLevelParameterCode(String levelParameterCode) {
         this.levelParameterCode = levelParameterCode;
     }
-    private LevelDataService levelDataService;
 
+    private LevelDataService levelDataService;
     public void setLevelDataService(LevelDataService levelDataService) {
         this.levelDataService = levelDataService;
     }
-    private ReferenceDataService referenceDataService;
 
+    private ReferenceDataService referenceDataService;
     public void setReferenceDataService(ReferenceDataService referenceDataService) {
         this.referenceDataService = referenceDataService;
     }
-
+    
     public TestDataServiceImpl() {
         super();
+    }
+
+    @Override
+    public Test read(String label) {
+        return ((TestDAO) entityDao).read(label);
     }
 
     @Override
@@ -82,9 +87,9 @@ public class TestDataServiceImpl extends AbstractGenericDataService<Test, Long>
     }
 
     /**
-     * The parameter set contains a unique parameter that combines the
-     * referential and the level parameters. This method extracts these
-     * parameters to retrieve the appropriate tests.
+     * The parameter set contains a unique parameter that combines the referential
+     * and the level parameters.
+     * This method extracts these parameters to retrieve the appropriate tests.
      *
      * @param paramSet
      * @return
@@ -105,20 +110,21 @@ public class TestDataServiceImpl extends AbstractGenericDataService<Test, Long>
         List<Test> testList = getAllByReferenceAndLevel(reference, level);
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Retrieved " + testList.size() + " test for the referential "
-                    + reference.getLabel() + " and the level " + level.getLabel());
+                + reference.getLabel() + " and the level " + level.getLabel());
         }
         return testList;
     }
 
     /**
-     * 
+     *
      * @param audit
      * @param testLabel
-     * @return 
+     * @return
      */
     @Override
     public Test getTestFromAuditAndLabel(Audit audit, String testLabel) {
         return ((TestDAO) entityDao).retrieveTestFromAuditAndLabel(audit, testLabel);
-        
+
     }
+
 }

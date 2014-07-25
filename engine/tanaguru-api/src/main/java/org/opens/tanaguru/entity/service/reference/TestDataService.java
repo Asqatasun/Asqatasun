@@ -36,7 +36,15 @@ import org.opens.tanaguru.sdk.entity.service.GenericDataService;
  * @author jkowalczyk
  */
 public interface TestDataService extends GenericDataService<Test, Long> {
-
+	
+	/**
+    *
+    * @param label
+    *            the label of the test to read
+    * @return the matching read test
+    */
+	Test read(String label);
+	
     /**
      *
      * @param reference
@@ -75,6 +83,11 @@ public interface TestDataService extends GenericDataService<Test, Long> {
      */
     List<Test> getTestListFromParamSet(Set<Parameter> paramSet);
 
-    
+    /**
+     * 
+     * @param audit
+     * @param testLabel
+     * @return the test
+     */
     Test getTestFromAuditAndLabel(Audit audit, String testLabel);
 }

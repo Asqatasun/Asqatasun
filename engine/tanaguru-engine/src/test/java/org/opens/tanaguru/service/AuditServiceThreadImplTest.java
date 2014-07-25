@@ -22,9 +22,9 @@
 package org.opens.tanaguru.service;
 
 import junit.framework.TestCase;
-import org.easymock.EasyMock;
+import static org.easymock.EasyMock.*;
 import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.entity.service.audit.AuditDataService;
+
 import org.opens.tanaguru.service.command.AuditCommand;
 
 /**
@@ -33,8 +33,6 @@ import org.opens.tanaguru.service.command.AuditCommand;
  */
 public class AuditServiceThreadImplTest extends TestCase {
     
-    private AuditDataService mockAuditDataService;
-    
     public AuditServiceThreadImplTest(String testName) {
         super(testName);
     }
@@ -42,7 +40,6 @@ public class AuditServiceThreadImplTest extends TestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        mockAuditDataService = EasyMock.createMock(AuditDataService.class);
     }
     
     @Override
@@ -56,11 +53,11 @@ public class AuditServiceThreadImplTest extends TestCase {
     public void testGetAudit() {
         System.out.println("getAudit");
         
-        Audit audit = EasyMock.createMock(Audit.class);
-        Audit auditReturnedByAuditCommand = EasyMock.createMock(Audit.class);
-        AuditCommand mockAuditCommand = EasyMock.createMock(AuditCommand.class);
-        EasyMock.expect(mockAuditCommand.getAudit()).andReturn(auditReturnedByAuditCommand);
-        EasyMock.replay(mockAuditCommand);
+        Audit audit = createMock(Audit.class);
+        Audit auditReturnedByAuditCommand = createMock(Audit.class);
+        AuditCommand mockAuditCommand = createMock(AuditCommand.class);
+        expect(mockAuditCommand.getAudit()).andReturn(auditReturnedByAuditCommand);
+        replay(mockAuditCommand);
         
         AuditServiceThreadImpl instance = initialiseAuditServiceThread(audit);
         assertEquals(audit, instance.getAudit());
@@ -74,12 +71,12 @@ public class AuditServiceThreadImplTest extends TestCase {
      */
     public void testAddAndRemove() {
         
-        Audit audit = EasyMock.createMock(Audit.class);
+        Audit audit = createMock(Audit.class);
         
         AuditServiceThreadImpl instance = initialiseAuditServiceThread(audit);
         
         AuditServiceThreadListener mockAuditServiceThreadListener = 
-                EasyMock.createMock(AuditServiceThreadListener.class);
+                createMock(AuditServiceThreadListener.class);
         // when try to remove a listener not recorded, nothing happened
         instance.remove(mockAuditServiceThreadListener);
         
@@ -95,48 +92,57 @@ public class AuditServiceThreadImplTest extends TestCase {
     public void testRun() {
         System.out.println("run");
 
-        AuditCommand mockAuditCommand = EasyMock.createMock(AuditCommand.class);
+        Audit mockAudit = createMock(Audit.class);
+        expect(mockAudit.getId()).andReturn(1l).anyTimes();
+        
+        AuditCommand mockAuditCommand = createMock(AuditCommand.class);
         mockAuditCommand.init();
-        EasyMock.expectLastCall().once();
+        expectLastCall().once();
         mockAuditCommand.loadContent();
-        EasyMock.expectLastCall().once();
+        expectLastCall().once();
         mockAuditCommand.adaptContent();
-        EasyMock.expectLastCall().once();
+        expectLastCall().once();
         mockAuditCommand.process();
-        EasyMock.expectLastCall().once();
+        expectLastCall().once();
         mockAuditCommand.consolidate();
-        EasyMock.expectLastCall().once();
+        expectLastCall().once();
         mockAuditCommand.analyse();
-        EasyMock.expectLastCall().once();
-        EasyMock.replay(mockAuditCommand);
+        expectLastCall().once();
+        expect(mockAuditCommand.getAudit()).andReturn(mockAudit).anyTimes();
+        expect(mockAuditCommand.sendMessageOut("[MSGOUT] AUDIT 1 PENDIG ")).andReturn(Boolean.TRUE);
+        expect(mockAuditCommand.sendMessageOut("[MSGOUT] AUDIT 1 FINISHED ")).andReturn(Boolean.TRUE);
+        
+        replay(mockAudit);
+        replay(mockAuditCommand);
         
         AuditServiceThreadImpl instance = initialiseAuditServiceThread(mockAuditCommand);
         
         AuditServiceThreadListener auditServiceThreadListener = 
-                EasyMock.createMock(AuditServiceThreadListener.class);
+                createMock(AuditServiceThreadListener.class);
         auditServiceThreadListener.auditCompleted(instance);
-        EasyMock.expectLastCall().once();
-        EasyMock.replay(auditServiceThreadListener);
+        expectLastCall().once();
+        replay(auditServiceThreadListener);
         
         instance.add(auditServiceThreadListener);
         instance.run();
         
-        EasyMock.verify(mockAuditCommand);
-        EasyMock.verify(auditServiceThreadListener);
+        verify(mockAudit);
+        verify(mockAuditCommand);
+        verify(auditServiceThreadListener);
     }
 
     public void testInit() {
         System.out.println("init");
         
-        AuditCommand mockAuditCommand = EasyMock.createMock(AuditCommand.class);
+        AuditCommand mockAuditCommand = createMock(AuditCommand.class);
         mockAuditCommand.init();
-        EasyMock.expectLastCall().once();
-        EasyMock.replay(mockAuditCommand);
+        expectLastCall().once();
+        replay(mockAuditCommand);
         
         AuditServiceThreadImpl instance = initialiseAuditServiceThread(mockAuditCommand);
         instance.init();
         
-        EasyMock.verify(mockAuditCommand);
+        verify(mockAuditCommand);
     }
     
     /**
@@ -145,15 +151,15 @@ public class AuditServiceThreadImplTest extends TestCase {
     public void testLoadContent() {
         System.out.println("loadContent");
         
-        AuditCommand mockAuditCommand = EasyMock.createMock(AuditCommand.class);
+        AuditCommand mockAuditCommand = createMock(AuditCommand.class);
         mockAuditCommand.loadContent();
-        EasyMock.expectLastCall().once();
-        EasyMock.replay(mockAuditCommand);
+        expectLastCall().once();
+        replay(mockAuditCommand);
         
         AuditServiceThreadImpl instance = initialiseAuditServiceThread(mockAuditCommand);
         instance.loadContent();
         
-        EasyMock.verify(mockAuditCommand);
+        verify(mockAuditCommand);
     }
 
     /**
@@ -162,15 +168,15 @@ public class AuditServiceThreadImplTest extends TestCase {
     public void testAdaptContent() {
         System.out.println("adaptContent");
         
-        AuditCommand mockAuditCommand = EasyMock.createMock(AuditCommand.class);
+        AuditCommand mockAuditCommand = createMock(AuditCommand.class);
         mockAuditCommand.adaptContent();
-        EasyMock.expectLastCall().once();
-        EasyMock.replay(mockAuditCommand);
+        expectLastCall().once();
+        replay(mockAuditCommand);
         
         AuditServiceThreadImpl instance = initialiseAuditServiceThread(mockAuditCommand);
         instance.adaptContent();
         
-        EasyMock.verify(mockAuditCommand);
+        verify(mockAuditCommand);
     }
 
     /**
@@ -179,15 +185,15 @@ public class AuditServiceThreadImplTest extends TestCase {
     public void testProcess() {
         System.out.println("process");
         
-        AuditCommand mockAuditCommand = EasyMock.createMock(AuditCommand.class);
+        AuditCommand mockAuditCommand = createMock(AuditCommand.class);
         mockAuditCommand.process();
-        EasyMock.expectLastCall().once();
-        EasyMock.replay(mockAuditCommand);
+        expectLastCall().once();
+        replay(mockAuditCommand);
         
         AuditServiceThreadImpl instance = initialiseAuditServiceThread(mockAuditCommand);
         instance.process();
         
-        EasyMock.verify(mockAuditCommand);
+        verify(mockAuditCommand);
     }
 
     /**
@@ -196,15 +202,15 @@ public class AuditServiceThreadImplTest extends TestCase {
     public void testConsolidate() {
         System.out.println("consolidate");
         
-        AuditCommand mockAuditCommand = EasyMock.createMock(AuditCommand.class);
+        AuditCommand mockAuditCommand = createMock(AuditCommand.class);
         mockAuditCommand.consolidate();
-        EasyMock.expectLastCall().once();
-        EasyMock.replay(mockAuditCommand);
+        expectLastCall().once();
+        replay(mockAuditCommand);
         
         AuditServiceThreadImpl instance = initialiseAuditServiceThread(mockAuditCommand);
         instance.consolidate();
         
-        EasyMock.verify(mockAuditCommand);
+        verify(mockAuditCommand);
     }
 
     /**
@@ -213,15 +219,15 @@ public class AuditServiceThreadImplTest extends TestCase {
     public void testAnalyse() {
         System.out.println("analyse");
         
-        AuditCommand mockAuditCommand = EasyMock.createMock(AuditCommand.class);
+        AuditCommand mockAuditCommand = createMock(AuditCommand.class);
         mockAuditCommand.analyse();
-        EasyMock.expectLastCall().once();
-        EasyMock.replay(mockAuditCommand);
+        expectLastCall().once();
+        replay(mockAuditCommand);
         
         AuditServiceThreadImpl instance = initialiseAuditServiceThread(mockAuditCommand);
         instance.analyse();
         
-        EasyMock.verify(mockAuditCommand);
+        verify(mockAuditCommand);
     }
 
     /**

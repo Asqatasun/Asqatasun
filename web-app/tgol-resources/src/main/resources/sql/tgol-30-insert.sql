@@ -19,7 +19,8 @@ INSERT IGNORE INTO `TGSI_FUNCTIONALITY` (`Id_Functionality`, `Code`, `Label`, `D
 (1, 'PAGES', 'Audit Pages (Up to 10)', ''),
 (2, 'DOMAIN', 'Audit Domain ', ''),
 (3, 'UPLOAD', 'Audit Upload', ''), 
-(4, 'SCENARIO', 'Audit Scenario', '');
+(4, 'SCENARIO', 'Audit Scenario', ''),
+(5, 'MANUAL', 'Audit manuel', '');
 
 INSERT IGNORE INTO `TGSI_OPTION_FAMILY` (`Id_Option_Family`, `Code`, `Label`) VALUES
 (1, 'CRAWL', ''),

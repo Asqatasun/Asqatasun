@@ -152,4 +152,9 @@ public class ThemeImpl implements Theme, Serializable {
         }
         return Objects.equals(this.id, other.id) || (this.id != null && this.id.equals(other.id));
     }
+
+	@Override
+	public String toString() {
+		return "ThemeImpl [id=" + id + ", label=" + label + "]";
+	}
 }
