@@ -169,7 +169,7 @@ public class Rgaa30Rule110901Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.11.09.01-4NA-01");
         // check test result
-        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         
@@ -179,7 +179,7 @@ public class Rgaa30Rule110901Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.11.09.01-4NA-02");
         // check test result
-        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
         // check test has no remark
         assertNull(processResult.getRemarkSet());
     }
@@ -196,9 +196,9 @@ public class Rgaa30Rule110901Test extends Rgaa30RuleImplementationTestCase {
                 consolidate("Rgaa30.Test.11.09.01-3NMI-04").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("Rgaa30.Test.11.09.01-3NMI-05").getValue());
-        assertEquals(TestSolution.NOT_TESTED,
+        assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("Rgaa30.Test.11.09.01-4NA-01").getValue());
-        assertEquals(TestSolution.NOT_TESTED,
+        assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("Rgaa30.Test.11.09.01-4NA-02").getValue());
     }
 
