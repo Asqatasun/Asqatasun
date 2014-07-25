@@ -82,7 +82,7 @@ public class Rgaa30Rule111401Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.11.14.01-4NA-01");
         // check test result
-        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
         // check test has no remark
         assertNull(processResult.getRemarkSet());
     }
@@ -91,7 +91,7 @@ public class Rgaa30Rule111401Test extends Rgaa30RuleImplementationTestCase {
     protected void setConsolidate() {
         assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("Rgaa30.Test.11.14.01-3NMI-01").getValue());
-        assertEquals(TestSolution.NOT_TESTED,
+        assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("Rgaa30.Test.11.14.01-4NA-01").getValue());
     }
 
