@@ -116,6 +116,12 @@ public interface Audit extends Entity {
      * @return the date of creation
      */
     Date getDateOfCreation();
+    
+    /**
+    *
+    * @return the date of creation
+    */
+    Date getManualAuditDateOfCreation();
 
     /**
      *
@@ -163,9 +169,16 @@ public interface Audit extends Entity {
 
     /**
      *
-     * @param dateOfCreaction
-     *            the date of content loading to set
+     * @param manualAuditDateOfCreation
+     *            the date of manual audit launch to set
      */
+    void setManualAuditDateOfCreation(Date manualAuditDateOfCreation);
+    
+    /**
+    *
+    * @param dateOfCreaction
+    *            the date of content loading to set
+    */
     void setDateOfCreation(Date dateOfCreaction);
 
     /**

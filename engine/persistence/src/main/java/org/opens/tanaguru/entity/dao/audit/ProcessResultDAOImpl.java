@@ -21,10 +21,16 @@
  */
 package org.opens.tanaguru.entity.dao.audit;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
+
 import javax.persistence.Query;
+
+import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.AuditReaderFactory;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.reference.Test;
@@ -178,5 +184,28 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
         query.setParameter("audit", audit);
         return query.getResultList();
     }
+
+	@Override
+	public List<DefiniteResult> getHistoryChanges(ProcessResult processResultImpl) {
+		
+		List<DefiniteResult> history = new ArrayList<DefiniteResult>();
+		AuditReader auditReader = AuditReaderFactory.get(this.entityManager);
+		Long id = processResultImpl.getId();
+		if (id == null) {
+			return new ArrayList<DefiniteResult>();
+		}
+		List<Number> revisions = auditReader.getRevisions(processResultImpl.getClass(), id);
+		DefiniteResult find = null;
+		for (int i=0; i<revisions.size(); i++) {
+			Number revision = revisions.get(i);
+			find = auditReader.find(DefiniteResultImpl.class, id, revision);
+			history.add(find);
+		}
+		
+		
+		
+		return history;
+		
+	}
 
 }

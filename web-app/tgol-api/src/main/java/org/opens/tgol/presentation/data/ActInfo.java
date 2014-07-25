@@ -141,5 +141,33 @@ public interface ActInfo {
      * @param referential 
      */
     void setReferential(String referential);
+    
+    /**
+     * @return 
+     *   the boolean of manual
+     * */
+    boolean isManual();
+    
+    /**
+     *  @param manual 
+     * **/
+    void setManual(boolean isManual);
+    
+	void setStatusManual(String statusManual);
+
+	String getStatusManual();
+
+	void setRawMarkManual(int rawMarkManual);
+
+	int getRawMarkManual();
+
+	void setWeightedMarkManual(int weightedMarkManual);
+
+	int getWeightedMarkManual();
+
+	void setDateManual(Date dateManual);
+
+	Date getDateManual();
+
 
 }

@@ -45,7 +45,7 @@ public class ContentsAdapterImpl implements ContentsAdapter {
     private HTMLParser htmlParser;
     private Collection<Content> result;
     private Boolean writeCleanHtmlInFile = false;
-    private String tempFolderRootPath = "/var/tmp";
+    private String tempFolderRootPath = "C:/tmp_spec";
     private boolean xmlizeContent = false;
     private boolean parseAndRetrievelRelatedContent = true;
 

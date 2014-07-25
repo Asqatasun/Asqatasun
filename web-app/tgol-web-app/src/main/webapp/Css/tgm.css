@@ -1949,6 +1949,9 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     padding-right: 10px;
     color : #FFF;
 }
+.manual-audit-save-btn{
+	float:right;
+}
 .theme-nav {
     display: none;
 }
@@ -2053,6 +2056,56 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
 .rule-general-result-last select,
 .rule-general-result select{
     width: 140px;
+}
+.audit-result-container {
+	float:right;
+	width:280px;
+}
+.audit-result-container .audit-result-manual,.audit-result-container .test-result,.audit-result-container .test-details{
+	float:right;
+}
+.audit-result-manual-empty{
+	margin-left:20px;;
+}
+.audit-result-manual div{
+	margin-bottom:0;
+}
+.audit-result-manual legend{
+	font-size:13px;
+	margin-left:0;
+}
+.audit-result-manual fieldset {
+	border: none;
+    margin-top: 0;
+    padding-right: 0;
+}
+.audit-result-manual label{
+	margin-right:5px;
+	padding-top:0;
+}
+.audit-result-manual fieldset div:nth-child(2) label{
+	color:green;
+}
+.audit-result-manual fieldset div:nth-child(3) label{
+	color:red;
+}
+.audit-result-manual div.input{
+	margin-left:0;
+}
+.audit-result-manual + div{
+	margin-left:35px!important;
+}
+.audit-result-manual-comment {
+	width:550px;
+	margin-top:10px;
+}
+.audit-result-manual-comment textarea{
+	resize: none;
+	width:400px;
+}
+.audit-result-manual-comment label{
+	font-size:10px;
+	font-weight:bold;
 }
 #audit-result-menu-actions ul {
     margin : 0;

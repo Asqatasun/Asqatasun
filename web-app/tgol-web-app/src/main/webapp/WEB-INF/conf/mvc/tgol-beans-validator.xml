@@ -13,6 +13,7 @@
     <bean id="createContractFormValidator" class="org.opens.tgol.validator.CreateContractFormValidator" />
     <bean id="auditSiteSetUpFormValidator" class="org.opens.tgol.validator.AuditSetUpFormValidator" />
     <bean id="auditPageSetUpFormValidator" class="org.opens.tgol.validator.PageAuditSetUpFormValidator" />
+    <bean id="manualAuditValidator" class="org.opens.tgol.validator.ManualAuditValidator" />
     <bean id="auditUploadSetUpFormValidator" class="org.opens.tgol.validator.UploadAuditSetUpFormValidator" >
         <property name="maxFileSize" value="2097152"/>
         <property name="authorizedMimeType">

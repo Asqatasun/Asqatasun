@@ -23,7 +23,6 @@ package org.opens.tgol.presentation.factory;
 
 import java.util.*;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.parameterization.Parameter;
@@ -99,7 +98,7 @@ public class AuditStatisticsFactory {
             sortThemeList(entry);
         }
     }
-    
+
     /**
      * The unique shared instance of ContractInfoFactory
      */
@@ -126,29 +125,33 @@ public class AuditStatisticsFactory {
      * @param webResource
      * @param parametersToDisplay
      * @param displayScope
+     * @param isAuditManual
+     * @param isInitialManual 
      * @return
      */
     public AuditStatistics getAuditStatistics(
             WebResource webResource,
             Map<String, String> parametersToDisplay,
-            String displayScope) {
-        
+            String displayScope,
+            boolean isAuditManual,
+            boolean isInitialManual) {
+
         AuditStatistics auditStats = new AuditStatisticsImpl();
-        
+
         auditStats.setUrl(webResource.getURL());
         auditStats.setSnapshotUrl(webResource.getURL());
-        auditStats.setRawMark(markFormatter(webResource, true));
-        auditStats.setWeightedMark(markFormatter(webResource, false));
+        auditStats.setRawMark(markFormatter(webResource, true, isAuditManual));
+        auditStats.setWeightedMark(markFormatter(webResource, false, isAuditManual));
 
         Audit audit;
         if (webResource instanceof Site) {
             auditStats.setPageCounter(webResourceDataService.getChildWebResourceCount(webResource).intValue());
             audit = webResource.getAudit();
             auditStats.setAuditedPageCounter(webResourceDataService.getWebResourceCountByAuditAndHttpStatusCode(
-                audit.getId(),
-                HttpStatusCodeFamily.f2xx,
-                null,
-                null).intValue());
+                    audit.getId(),
+                    HttpStatusCodeFamily.f2xx,
+                    null,
+                    null).intValue());
         } else if (webResource.getParent() != null) {
             audit = webResource.getParent().getAudit();
         } else {
@@ -160,8 +163,7 @@ public class AuditStatisticsFactory {
                 actDataService.getActFromAudit(audit).getScope().getCode());
 
         ResultCounter resultCounter = auditStats.getResultCounter();
-        resultCounter.setPassedCount(webResourceDataService.getResultCountByResultType(
-                webResource, audit, TestSolution.PASSED).intValue());
+
         resultCounter.setPassedCount(0);
         resultCounter.setFailedCount(0);
         resultCounter.setNmiCount(0);
@@ -204,8 +206,8 @@ public class AuditStatisticsFactory {
             Audit audit,
             Map<String, String> parametersToDisplay) {
         Map<String, String> auditParameters = new LinkedHashMap();
-        Set<Parameter> auditParamSet =
-                parameterDataService.getParameterSetFromAudit(audit);
+        Set<Parameter> auditParamSet
+                = parameterDataService.getParameterSetFromAudit(audit);
         // to ensure compatibility with audit that have been launched before
         // the parameter management has been integrated
         if (auditParamSet.isEmpty()) {
@@ -215,14 +217,14 @@ public class AuditStatisticsFactory {
             for (Parameter param : auditParamSet) {
                 if (entry.getKey().equals(param.getParameterElement().getParameterElementCode())) {
                     auditParameters.put(
-                                entry.getValue(),
-                                param.getValue());
+                            entry.getValue(),
+                            param.getValue());
                 }
             }
         }
         if (!parametersToDisplay.isEmpty()) {
-            auditParameters.put(TgolKeyStore.REFERENTIAL_PARAM_KEY, 
-                            parameterDataService.getReferentialKeyFromAudit(audit));
+            auditParameters.put(TgolKeyStore.REFERENTIAL_PARAM_KEY,
+                    parameterDataService.getReferentialKeyFromAudit(audit));
         }
         return auditParameters;
     }
@@ -235,11 +237,12 @@ public class AuditStatisticsFactory {
      * @return
      */
     private String markFormatter(
-            WebResource webresource, 
-            boolean isRawMark) {
-        Float mark = webResourceDataService.getMarkByWebResourceAndAudit(webresource, isRawMark);
+            WebResource webresource,
+            boolean isRawMark,
+            boolean isManual) {
+        Float mark = webResourceDataService.getMarkByWebResourceAndAudit(webresource, isRawMark, isManual);
         if (mark == -1) {
-            mark = 0f;
+            return "0";
         }
         return String.valueOf(mark.intValue());
     }
@@ -253,28 +256,54 @@ public class AuditStatisticsFactory {
      * @param webResource
      * @param globalResultCounter
      * @param displayScope
+     * @param manualAudit
+     * @param isInitialManual
      * @return
      */
     private Map<Theme, ResultCounter> addCounterByThemeMap(
             Audit audit,
             WebResource webResource,
-            ResultCounter globalResultCounter, 
-            String displayScope) {
+            ResultCounter globalResultCounter,
+            String displayScope,
+            boolean isAuditManual,
+            boolean isInitialManual) {
         Map<Theme, ResultCounter> counterByThemeMap = new LinkedHashMap();
+
         for (Theme theme : getThemeListFromAudit(audit)) {
 
             ResultCounter themeResultCounter = null;
             if (StringUtils.equalsIgnoreCase(displayScope, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE)) {
-                themeResultCounter = getResultCounterByThemeForTest(webResource, audit, theme);
+                themeResultCounter = getResultCounterByThemeForTest(webResource, audit, theme, isAuditManual);
             } else if (StringUtils.equalsIgnoreCase(displayScope, TgolKeyStore.CRITERION_DISPLAY_SCOPE_VALUE)) {
                 themeResultCounter = getResultCounterByThemeForCriterion(webResource, theme);
             }
             if (themeResultCounter != null) {
-                globalResultCounter.setPassedCount(themeResultCounter.getPassedCount() + globalResultCounter.getPassedCount());
-                globalResultCounter.setFailedCount(themeResultCounter.getFailedCount() + globalResultCounter.getFailedCount());
-                globalResultCounter.setNmiCount(themeResultCounter.getNmiCount() + globalResultCounter.getNmiCount());
-                globalResultCounter.setNaCount(themeResultCounter.getNaCount() + globalResultCounter.getNaCount());
-                globalResultCounter.setNtCount(themeResultCounter.getNtCount() + globalResultCounter.getNtCount());
+                if (isInitialManual && !isAuditManual) {
+                    //Initialisation des compteurs lors de la creation d'un audit manual
+                    themeResultCounter.setNtCount(themeResultCounter.getPassedCount()
+                            + themeResultCounter.getFailedCount() + themeResultCounter.getNmiCount()
+                            + themeResultCounter.getNaCount() + themeResultCounter.getNtCount());
+                    themeResultCounter.setFailedCount(0);
+                    themeResultCounter.setNaCount(0);
+                    themeResultCounter.setPassedCount(0);
+                    themeResultCounter.setNmiCount(0);
+
+                    globalResultCounter.setPassedCount(0);
+                    globalResultCounter.setFailedCount(0);
+                    globalResultCounter.setNmiCount(0);
+                    globalResultCounter.setNaCount(0);
+                    globalResultCounter.setNtCount(themeResultCounter.getPassedCount()
+                            + themeResultCounter.getFailedCount() + themeResultCounter.getNmiCount()
+                            + themeResultCounter.getNaCount() + themeResultCounter.getNtCount() + globalResultCounter.getNtCount());
+
+                } else {
+                    globalResultCounter.setPassedCount(themeResultCounter.getPassedCount() + globalResultCounter.getPassedCount());
+                    globalResultCounter.setFailedCount(themeResultCounter.getFailedCount() + globalResultCounter.getFailedCount());
+                    globalResultCounter.setNmiCount(themeResultCounter.getNmiCount() + globalResultCounter.getNmiCount());
+                    globalResultCounter.setNaCount(themeResultCounter.getNaCount() + globalResultCounter.getNaCount());
+                    globalResultCounter.setNtCount(themeResultCounter.getNtCount() + globalResultCounter.getNtCount());
+                }
+
                 counterByThemeMap.put(theme, themeResultCounter);
             }
         }
@@ -291,19 +320,20 @@ public class AuditStatisticsFactory {
     private ResultCounter getResultCounterByThemeForTest(
             WebResource webResource,
             Audit audit,
-            Theme theme) {
-        ResultCounter resultCounter =
-                ResultCounterFactory.getInstance().getResultCounter();
+            Theme theme,
+            boolean manualAudit) {
+        ResultCounter resultCounter
+                = ResultCounterFactory.getInstance().getResultCounter();
         resultCounter.setPassedCount(webResourceDataService.getResultCountByResultTypeAndTheme(
-                webResource, audit, TestSolution.PASSED, theme).intValue());
+                webResource, audit, TestSolution.PASSED, theme, manualAudit).intValue());
         resultCounter.setFailedCount(webResourceDataService.getResultCountByResultTypeAndTheme(
-                webResource, audit, TestSolution.FAILED, theme).intValue());
+                webResource, audit, TestSolution.FAILED, theme, manualAudit).intValue());
         resultCounter.setNmiCount(webResourceDataService.getResultCountByResultTypeAndTheme(
-                webResource, audit, TestSolution.NEED_MORE_INFO, theme).intValue());
+                webResource, audit, TestSolution.NEED_MORE_INFO, theme, manualAudit).intValue());
         resultCounter.setNaCount(webResourceDataService.getResultCountByResultTypeAndTheme(
-                webResource, audit, TestSolution.NOT_APPLICABLE, theme).intValue());
+                webResource, audit, TestSolution.NOT_APPLICABLE, theme, manualAudit).intValue());
         resultCounter.setNtCount(webResourceDataService.getResultCountByResultTypeAndTheme(
-                webResource, audit, TestSolution.NOT_TESTED, theme).intValue());
+                webResource, audit, TestSolution.NOT_TESTED, theme, manualAudit).intValue());
         return resultCounter;
     }
 
@@ -382,4 +412,5 @@ public class AuditStatisticsFactory {
             }
         });
     }
+
 }

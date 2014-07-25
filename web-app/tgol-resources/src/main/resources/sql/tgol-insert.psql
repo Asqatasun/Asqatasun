@@ -23,7 +23,8 @@ INSERT INTO "tgsi_functionality" VALUES
 (1,'PAGES','audit pages (Up to 10)',''),
 (2,'DOMAIN','audit Domain ',''),
 (3,'UPLOAD','audit Upload',''),
-(4,'SCENARIO','audit scenario','');
+(4,'SCENARIO','audit scenario',''),
+(5,'MANUAL','audit manuel','');
 
 
 INSERT INTO "tgsi_referential" VALUES 

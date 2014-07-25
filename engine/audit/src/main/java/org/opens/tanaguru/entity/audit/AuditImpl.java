@@ -55,6 +55,8 @@ public class AuditImpl implements Audit, Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     @Column(name = "Dt_Creation")
     private Date dateOfCreation;
+    @Column(name = "Manual_Audit_Dt_Creation")
+    private Date manualAuditDateOfCreation;
     @OneToMany(mappedBy = "grossResultAudit")
     private Set<ProcessResultImpl> grossResultSet;
     @Id
@@ -174,6 +176,11 @@ public class AuditImpl implements Audit, Serializable {
     }
 
     @Override
+    public Date getManualAuditDateOfCreation() {
+        return manualAuditDateOfCreation;
+    }
+    
+    @Override
     @XmlElementWrapper
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.IndefiniteResultImpl.class),
@@ -233,6 +240,11 @@ public class AuditImpl implements Audit, Serializable {
     @Override
     public void setDateOfCreation(Date dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
+    }
+    
+    @Override
+    public void setManualAuditDateOfCreation(Date manualAuditDateOfCreation) {
+        this.manualAuditDateOfCreation = manualAuditDateOfCreation;
     }
 
     @Override

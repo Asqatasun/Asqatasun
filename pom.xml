@@ -16,9 +16,20 @@
         <module>web-app</module>
         <module>cli</module>
     </modules>
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <modules>
+                <module>engine</module>
+                <module>rules</module>
+                <module>web-app</module>
+                <module>cli</module>
+            </modules>
+        </profile>
+    </profiles>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        
+
         <engineGroupId>org.opens</engineGroupId>
         <engineVersion>3.1.0-SNAPSHOT</engineVersion>
         
@@ -36,21 +47,104 @@
         
         <springGroupId>org.springframework</springGroupId>
         <springVersion>3.1.2.RELEASE</springVersion>
-        
+
         <heritrixGroupId>org.archive.heritrix</heritrixGroupId>
         <heritrixVersion>3.1.1</heritrixVersion>
-        
+
         <hibernateGroupId>org.hibernate</hibernateGroupId>
         <hibernateVersion>4.3.5.Final</hibernateVersion>
         
         <junitGroupId>junit</junitGroupId>
         <junitVersion>3.8.2</junitVersion>
-        
+
         <log4jGroupId>log4j</log4jGroupId>
         <log4jVersion>1.2.15</log4jVersion>
-        
+
         <httpcomponentsGroupId>org.apache.httpcomponents</httpcomponentsGroupId>
     </properties>
+    <repositories>
+        <repository>
+            <url>http://repo1.maven.org/maven2/</url>
+            <id>central</id>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>saucelabs-repository</id>
+            <url>https://repository-saucelabs.forge.cloudbees.com/release</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>phlocRepos</id>
+            <url>http://repo.phloc.com/maven2/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>heritrixRepos</id>
+            <url>http://builds.archive.org:8080/maven2/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>fdvsolution.public</id>
+            <url>http://archiva.fdvs.com.ar/repository/public1/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <!-- download plugins from this repo -->
+<!--        <pluginRepository>
+            <id>oceane-repo</id>
+            <name>oceane repository</name>
+            <url>http://192.168.58.116:8094/nexus/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>-->
+    </pluginRepositories>
+
+<!--    <distributionManagement>
+         Publish the versioned releases here 
+        <repository>
+            <id>oceane-releases-repo</id>
+            <name>oceane-releases-repo</name>
+            <url>http://192.168.58.116:8094/nexus/content/repositories/oceane-releases/</url>
+        </repository>
+
+         Publish the versioned releases here 
+        <snapshotRepository>
+            <id>oceane-snapshots-repo</id>
+            <name>oceane-snapshots-repo</name>
+            <url>http://192.168.58.116:8094/nexus/content/repositories/oceane-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>-->
+
     <build>
         <plugins>
             <plugin>
@@ -203,7 +297,7 @@
                         <groupId>poi</groupId>
                         <artifactId>poi-scratchpad</artifactId>
                     </exclusion>
-                </exclusions>                    
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.opens</groupId>
@@ -232,6 +326,11 @@
             <dependency>
                 <groupId>${engineGroupId}</groupId>
                 <artifactId>tanaguru-persistence</artifactId>
+                <version>${engineVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>${engineGroupId}</groupId>
+                <artifactId>tanaguru-jms</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
@@ -315,8 +414,8 @@
                 <artifactId>tanaguru-logging</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
-            
-            <!-- tanaguru testing-tools --> 
+
+            <!-- tanaguru testing-tools -->
             <dependency>
                 <groupId>${testingToolsGroupId}</groupId>
                 <artifactId>tanaguru-rules-testing-tools</artifactId>
@@ -329,8 +428,8 @@
                 <version>${testingToolsVersion}</version>
                 <scope>test</scope>
             </dependency>
-        
-            <!-- tanaguru web-app --> 
+
+            <!-- tanaguru web-app -->
             <dependency>
                 <groupId>${webappGroupId}</groupId>
                 <artifactId>tgol-api</artifactId>
@@ -415,7 +514,7 @@
                 <version>${webappVersion}</version>
                 <scope>runtime</scope>
             </dependency>
-        
+
             <!-- mysql connector dependencies -->
             <dependency>
                 <groupId>mysql</groupId>
@@ -455,6 +554,11 @@
             <dependency>
                 <groupId>${hibernateGroupId}</groupId>
                 <artifactId>hibernate-c3p0</artifactId>
+                <version>${hibernateVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>${hibernateGroupId}</groupId>
+                <artifactId>hibernate-envers</artifactId>
                 <version>${hibernateVersion}</version>
             </dependency>
 
@@ -504,7 +608,7 @@
             <dependency>
                 <groupId>commons-validator</groupId>
                 <artifactId>commons-validator</artifactId>
-                <version>1.4.0</version>    
+                <version>1.4.0</version>
             </dependency>
             <dependency>
                 <groupId>commons-http</groupId>
@@ -585,9 +689,7 @@
                 </exclusions>
             </dependency>
 
-            <!-- 
-                 httpcomponents dependencies.
-            -->
+            <!-- httpcomponents dependencies. -->
             <dependency>
                 <groupId>${httpcomponentsGroupId}</groupId>
                 <artifactId>httpclient</artifactId>
@@ -600,7 +702,7 @@
                 <artifactId>aspectjweaver</artifactId>
                 <version>1.6.8</version>
             </dependency>
-            
+
             <!-- spring dependencies -->
             <dependency>
                 <groupId>${springGroupId}</groupId>
@@ -753,7 +855,7 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            
+
             <!-- heritrix dependencies -->
             <dependency>
                 <groupId>${heritrixGroupId}</groupId>
@@ -777,23 +879,23 @@
                         <artifactId>commons-net</artifactId>
                     </exclusion>
                     <exclusion>
-                        <groupId>commons-io</groupId>                        
+                        <groupId>commons-io</groupId>
                         <artifactId>commons-io</artifactId>
                     </exclusion>
                     <exclusion>
-                        <groupId>commons-collections</groupId>                        
+                        <groupId>commons-collections</groupId>
                         <artifactId>commons-collections</artifactId>
                     </exclusion>
                     <exclusion>
-                        <groupId>commons-logging</groupId>                        
+                        <groupId>commons-logging</groupId>
                         <artifactId>commons-logging</artifactId>
                     </exclusion>
                     <exclusion>
-                        <groupId>commons-lang</groupId>                        
+                        <groupId>commons-lang</groupId>
                         <artifactId>commons-lang</artifactId>
                     </exclusion>
                     <exclusion>
-                        <groupId>commons-cli</groupId>                        
+                        <groupId>commons-cli</groupId>
                         <artifactId>commons-cli</artifactId>
                     </exclusion>
                     <exclusion>
@@ -801,11 +903,11 @@
                         <artifactId>jericho-html</artifactId>
                     </exclusion>
                     <exclusion>
-                        <groupId>com.lowagie</groupId>  
+                        <groupId>com.lowagie</groupId>
                         <artifactId>itext</artifactId>
                     </exclusion>
                     <exclusion>
-                        <groupId>junit</groupId>  
+                        <groupId>junit</groupId>
                         <artifactId>junit</artifactId>
                     </exclusion>
                     <exclusion>
@@ -896,7 +998,7 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            
+
             <dependency>
                 <groupId>com.googlecode.juniversalchardet</groupId>
                 <artifactId>juniversalchardet</artifactId>
@@ -936,7 +1038,7 @@
                 <version>1.3</version>
             </dependency>
 
-            <!-- xerces dependencies-->
+            <!-- xerces dependencies -->
             <dependency>
                 <groupId>xerces</groupId>
                 <artifactId>xercesImpl</artifactId>
@@ -1036,8 +1138,8 @@
                 <version>1.2</version>
                 <exclusions>
                     <exclusion>
-                        <groupId>org.slf4j</groupId>            
-                        <artifactId>jcl104-over-slf4j</artifactId>                        
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>jcl104-over-slf4j</artifactId>
                     </exclusion>
                     <exclusion>
                         <groupId>commons-beanutils</groupId>
@@ -1049,14 +1151,14 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            
+
             <!-- highlighter dependency -->
             <dependency>
                 <groupId>com.uwyn</groupId>
                 <artifactId>jhighlight</artifactId>
                 <version>1.0</version>
             </dependency>
-            
+
             <!-- jasper et dynamicJasper dependencies -->
             <dependency>
                 <groupId>net.sf.jasperreports</groupId>
@@ -1157,7 +1259,7 @@
                 <version>1.3</version>
             </dependency>
 
-            <!-- EasyMock --> 
+            <!-- EasyMock -->
             <dependency>
                 <groupId>org.easymock</groupId>
                 <artifactId>easymock</artifactId>
@@ -1170,14 +1272,14 @@
                 <version>3.1</version>
                 <scope>test</scope>
             </dependency>
-            
-            <!-- commons pool api--> 
+
+            <!-- commons pool api -->
             <dependency>
                 <groupId>commons-pool</groupId>
                 <artifactId>commons-pool</artifactId>
                 <version>1.6</version>
             </dependency>
-            
+
             <!-- webdriver api -->
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
@@ -1278,21 +1380,21 @@
                 <artifactId>json</artifactId>
                 <version>20090211</version>
             </dependency>
-            
+
             <!-- language detection library -->
             <dependency>
                 <groupId>com.cybozu.labs</groupId>
                 <artifactId>langdetect</artifactId>
                 <version>1.1-20120112</version>
             </dependency>
-            
+
             <!-- velocity (needed by maven testgenerator -->
             <dependency>
                 <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity</artifactId>
                 <version>1.6.4</version>
             </dependency>
-            
+
             <!-- velocity (needed by maven kbcsv-plugin -->
             <dependency>
                 <groupId>jaxen</groupId>
@@ -1302,56 +1404,5 @@
         </dependencies>
     </dependencyManagement>
 
-    <repositories>
-        <repository>
-            <url>http://repo1.maven.org/maven2/</url>
-            <id>central</id>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>saucelabs-repository</id>
-            <url>https://repository-saucelabs.forge.cloudbees.com/release</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>phlocRepos</id>
-            <url>http://repo.phloc.com/maven2/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>heritrixRepos</id>
-            <url>http://builds.archive.org:8080/maven2/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>fdvsolution.public</id>
-            <url>http://archiva.fdvs.com.ar/repository/public1/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+
 </project>

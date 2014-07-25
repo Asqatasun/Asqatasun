@@ -23,6 +23,10 @@ package org.opens.tanaguru.entity.service.statistics;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.List;
+
+import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
@@ -56,17 +60,20 @@ public interface WebResourceStatisticsDataService
     BigDecimal getWeightedResultByResultType(
             Long webresourceId,
             Collection<Parameter> paramSet,
-            TestSolution testSolution);
+            TestSolution testSolution,
+            boolean isManualAudit);
 
     /**
      * 
      * @param webresourceId
      * @param testSolution
+     * @param isManualAudit
      * @return
      */
     Long getNumberOfOccurrencesByWebResourceAndResultType(
             Long webresourceId,
-            TestSolution testSolution);
+            TestSolution testSolution,
+            boolean isManualAudit);
 
     /**
      *
@@ -81,4 +88,11 @@ public interface WebResourceStatisticsDataService
      * @return
      */
     WebResourceStatistics getWebResourceStatisticsByWebResource(WebResource webResource);
+    
+    /**
+     * 
+     * @param audit
+     * @param webResource
+     */
+    WebResourceStatistics createWebResourceStatisticsForManualAudit(Audit audit, WebResource webResource, List<ProcessResult> netResultList);
 }

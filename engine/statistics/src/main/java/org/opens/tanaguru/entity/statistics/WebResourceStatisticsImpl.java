@@ -23,10 +23,13 @@ package org.opens.tanaguru.entity.statistics;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditImpl;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -100,6 +103,9 @@ public class WebResourceStatisticsImpl
     @ManyToOne
     @JoinColumn(name = "Id_Web_Resource")
     private WebResourceImpl webResource;
+    
+    @Column(name="Manual_Audit")
+    private int isManualAuditStatistics=0;
 
     @ManyToOne
     @JoinColumn(name = "Id_Audit")
@@ -363,5 +369,15 @@ public class WebResourceStatisticsImpl
     public void setWeightedFailed(BigDecimal weightedFailed) {
         this.weightedFailed = weightedFailed;
     }
+
+    @Override
+    public int getIsManualAuditStatistics() {
+		return isManualAuditStatistics;
+	}
+
+    @Override
+    public void setIsManualAuditStatistics(int isManualAuditStatistics) {
+		this.isManualAuditStatistics = isManualAuditStatistics;
+	}
 
 }

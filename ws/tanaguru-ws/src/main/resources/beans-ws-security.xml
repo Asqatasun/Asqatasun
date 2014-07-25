@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sec="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <!-- simple 
+<sec:authentication-manager>
+    <sec:authentication-provider>
+        <sec:user-service id="userService">
+            <sec:user name="admin" password="password" authorities="ADMIN" />
+            <sec:user name="user" password="password" authorities="USER" />
+        </sec:user-service>
+    </sec:authentication-provider>
+</sec:authentication-manager>
+    -->
+    <!-- TODO define interception rules here -->
+    <sec:http create-session="stateless" use-expressions="true">
+        <!-- audit site -->
+        <sec:intercept-url pattern="/secure/**" access="hasAnyRole('ADMIN','USER')" />
+        <!-- audit page -->
+        <sec:intercept-url pattern="/**" access="permitAll" />
+        <sec:http-basic />
+    </sec:http>
+    
+    <sec:authentication-manager>
+        <sec:authentication-provider user-service-ref="userServiceSecurityProviderImpl">
+            <sec:password-encoder hash="md5"/>
+        </sec:authentication-provider>
+    </sec:authentication-manager>
+
+</beans>

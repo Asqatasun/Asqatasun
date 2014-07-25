@@ -34,7 +34,12 @@ public class ResultCounterImpl implements ResultCounter {
     public ResultCounterImpl (){}
 
     /**
-     * Constructor with parameters
+     * 
+     * @param passedCount
+     * @param failedCount
+     * @param nmiCount
+     * @param naCount
+     * @param ntCount 
      */
     public ResultCounterImpl (
             Integer passedCount, 
