@@ -17,57 +17,22 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-
 package org.opens.tanaguru.rules.rgaa30;
 
-import java.util.Collection;
-import org.jsoup.nodes.Element;
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleFromPreProcessImplementation;
-import org.opens.tanaguru.ruleimplementation.ElementHandler;
-import org.opens.tanaguru.rules.domelement.DomElement;
-import org.opens.tanaguru.rules.domelement.extractor.DomElementExtractor;
-import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.HIDDEN_TEXT_DETECTED_MSG;
+import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
 
 /**
- * Implementation of the rule 10.13.1 of the referential Rgaa 3.0.
- * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/aw22-rule-10-13-1">the rule 10.13.1 design page.</a>
- * @see <a href="http://www.accessiweb.org/index.php/accessiweb-html5aria-liste-deployee.html#test-10-13-1"> 10.13.1 rule specification</a>
+ * Implementation of the rule 10-13-2 of the referential Rgaa 3.0.
  *
- * @author jkowalczyk
+ * @author
  */
-public class Rgaa30Rule101302 extends AbstractPageRuleFromPreProcessImplementation {
+public class Rgaa30Rule101302 extends AbstractNotTestedRuleImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa30Rule101302 () {
-        super(new ElementPresenceChecker(
-                    // if some elements are found
-                    TestSolution.NEED_MORE_INFO, 
-                    // if no found element
-                    TestSolution.NOT_APPLICABLE, 
-                    // message for each detected element
-                    HIDDEN_TEXT_DETECTED_MSG,
-                    null));
+        super();
     }
-
-    @Override
-    protected void doSelect(
-            Collection<DomElement> domElements, 
-            SSPHandler sspHandler, 
-            ElementHandler elementHandler) {
-        for (DomElement element : domElements) {
-            if (element.isHidden() && element.isTextNode()) {
-                Element el = DomElementExtractor.getElementFromDomElement(element, sspHandler);
-                if (el != null) {
-                    elementHandler.add(el);
-                }
-            }
-        }
-    }   
 
 }
