@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.envers.Audited;
 
 /**
- * 
+ *
  * @author jkowalczyk
  */
 @Entity
@@ -49,26 +49,26 @@ public class DefiniteResultImpl extends ProcessResultImpl implements
     @Column(name = "Definite_Value")
     @Audited
     private TestSolution definiteValue;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(name = "Manual_Definite_Value")
     private TestSolution manualDefiniteValue;
-    
+
     @Column(name = "Manual_Audit_Comment")
     private String manualAuditComment;
-    
+
     @Transient
     private List<DefiniteResultImpl> history;
 
     public List<DefiniteResultImpl> getHistory() {
-		return history;
-	}
+        return history;
+    }
 
-	public void setHistory(List<DefiniteResultImpl> history) {
-		this.history = history;
-	}
+    public void setHistory(List<DefiniteResultImpl> history) {
+        this.history = history;
+    }
 
-	public DefiniteResultImpl() {
+    public DefiniteResultImpl() {
         super();
     }
 
@@ -91,27 +91,34 @@ public class DefiniteResultImpl extends ProcessResultImpl implements
     public void setValue(Object value) {
         setDefiniteValue((TestSolution) value);
     }
+
     @Override
-	public TestSolution getManualDefiniteValue() {
-		return manualDefiniteValue;
-	}
-	@Override
-	public void setManualDefiniteValue(TestSolution manualDefiniteValue) {
-		this.manualDefiniteValue = manualDefiniteValue;
-	}
+    public TestSolution getManualDefiniteValue() {
+        return manualDefiniteValue;
+    }
 
-	@Override
-	public String getManualAuditcomment() {
-		return manualAuditComment;
-	}
+    @Override
+    public void setManualDefiniteValue(TestSolution manualDefiniteValue) {
+        this.manualDefiniteValue = manualDefiniteValue;
+    }
 
-	@Override
-	public void setManualAuditComment(String manualAuditcomment) {
-		this.manualAuditComment=manualAuditcomment;
-	}
+    @Override
+    public String getManualAuditcomment() {
+        return manualAuditComment;
+    }
 
-	@Override
-	public Object getManualValue() {
-		return getManualDefiniteValue();
-	}
+    @Override
+    public void setManualAuditComment(String manualAuditcomment) {
+        this.manualAuditComment = manualAuditcomment;
+    }
+
+    @Override
+    public Object getManualValue() {
+        return getManualDefiniteValue();
+    }
+
+    @Override
+    public void setManualValue(Object manualValue) {
+        setManualDefiniteValue((TestSolution) manualValue);
+    }
 }
