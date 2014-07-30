@@ -55,6 +55,7 @@ public interface WebResourceStatisticsDataService
      * @param webresourceId
      * @param paramSet
      * @param testSolution
+     * @param isManualAudit
      * @return
      */
     BigDecimal getWeightedResultByResultType(
