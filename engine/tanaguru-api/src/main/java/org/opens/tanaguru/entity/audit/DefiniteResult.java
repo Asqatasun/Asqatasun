@@ -22,7 +22,7 @@
 package org.opens.tanaguru.entity.audit;
 
 /**
- * 
+ *
  * @author jkowalczyk
  */
 public interface DefiniteResult extends ProcessResult {
@@ -35,31 +35,31 @@ public interface DefiniteResult extends ProcessResult {
 
     /**
      *
-     * @param testSolution
-     *            the definite value to set
+     * @param testSolution the definite value to set
      */
     void setDefiniteValue(TestSolution testSolution);
-    
+
     /**
-     * 
+     *
      * @return the definite manual audit value
      */
     TestSolution getManualDefiniteValue();
+
     /**
-     * 
-     * @param definiteManualValue
-     * 				the definite manual value to set
+     *
+     * @param manualDefiniteValue the definite manual value to set
      */
     void setManualDefiniteValue(TestSolution manualDefiniteValue);
+
     /**
-     * 
+     *
      * @return the manual audit comment
      */
     String getManualAuditcomment();
+
     /**
-     * 	
-     * @param manualAuditcomment
-     * 				the manual audit comment to set
+     *
+     * @param manualAuditcomment the manual audit comment to set
      */
     void setManualAuditComment(String manualAuditcomment);
 }

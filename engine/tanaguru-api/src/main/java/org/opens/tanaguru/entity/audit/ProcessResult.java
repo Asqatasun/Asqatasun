@@ -109,6 +109,11 @@ public interface ProcessResult extends Entity {
     int getElementCounter();
 
     /**
+     * Return the manual audit status
+     * */
+    Object getManualValue();
+    
+    /**
      *
      * @param subResultList
      *            the sub result list to set
@@ -172,9 +177,9 @@ public interface ProcessResult extends Entity {
     void setElementCounter(int elementCounter);
  
     /**
-     * Return the manual audit status
-     * */
-    Object getManualValue ();
-    
-  
+     *
+     * @param manualValue
+     *            the value to set
+     */
+    void setManualValue(Object manualValue);
 }
