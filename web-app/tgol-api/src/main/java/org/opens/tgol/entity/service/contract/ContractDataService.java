@@ -59,5 +59,13 @@ public interface ContractDataService extends GenericDataService<Contract, Long> 
      * @return the presetContractKey
      */
     String getPresetContractKeyContractOption(Contract contract);
+    
+    /**
+     * 
+     * @param contract
+     * @param functionnalityKey
+     * @return whether the contract has the given functionnality
+     */
+    boolean doesContractHaveFunctionality(Contract contract, String functionnalityKey);
 
 }

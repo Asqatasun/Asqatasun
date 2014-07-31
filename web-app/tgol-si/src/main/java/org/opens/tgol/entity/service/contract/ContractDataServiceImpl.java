@@ -26,6 +26,7 @@ import org.apache.commons.lang.StringUtils;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.dao.contract.ContractDAO;
+import org.opens.tgol.entity.functionality.Functionality;
 import org.opens.tgol.entity.option.OptionElement;
 import org.opens.tgol.entity.user.User;
 
@@ -63,6 +64,16 @@ public class ContractDataServiceImpl extends AbstractGenericDataService<Contract
             }
         }
         return "";
+    }
+
+    @Override
+    public boolean doesContractHaveFunctionality(Contract contract, String functionnalityKey) {
+        for (Functionality functionality : contract.getFunctionalitySet()) {
+            if (StringUtils.equalsIgnoreCase(functionality.getCode(), functionnalityKey)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
