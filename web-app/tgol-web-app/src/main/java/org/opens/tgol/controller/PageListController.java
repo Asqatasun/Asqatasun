@@ -47,7 +47,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author jkowalczyk
  */
 @Controller
-public class PageListController extends AuditDataHandlerController {
+public class PageListController extends AbstractAuditDataHandlerController {
 
     private static final Logger LOGGER = Logger.getLogger(PageListController.class);
 

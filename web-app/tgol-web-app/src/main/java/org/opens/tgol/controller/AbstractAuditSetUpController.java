@@ -50,7 +50,7 @@ import org.springframework.validation.BindingResult;
  * @author jkowalczyk
  */
 @Controller
-public abstract class AbstractAuditSetUpController extends AuditDataHandlerController{
+public abstract class AbstractAuditSetUpController extends AbstractAuditDataHandlerController{
 
     private String defaultReferential = "Aw22";
     public String getDefaultReferential() {
@@ -289,8 +289,8 @@ public abstract class AbstractAuditSetUpController extends AuditDataHandlerContr
         // If the form has some errors, we display it again with errors' details
         if (result.hasErrors()) {
 
-            Contract currentContract  =
-                    getContractDataService().read(Long.valueOf(auditSetUpCommand.getContractId()));
+            Contract currentContract  = 
+                    getContractDataService().read(auditSetUpCommand.getContractId());
 
             return displayFormWithErrors(
                     model,
@@ -453,8 +453,7 @@ public abstract class AbstractAuditSetUpController extends AuditDataHandlerContr
             Map<String, List<AuditSetUpFormFieldBuilderImpl>> auditSetUpFormFieldBuilderMap) {
 
         // Copy the audit setup form field map from the builders
-        Map<String, List<AuditSetUpFormField>> initialisedSetUpFormFielMap = 
-                new LinkedHashMap<String, List<AuditSetUpFormField>>();
+        Map<String, List<AuditSetUpFormField>> initialisedSetUpFormFielMap = new LinkedHashMap();
         for (Map.Entry<String, List<AuditSetUpFormFieldBuilderImpl>> entry : auditSetUpFormFieldBuilderMap.entrySet()) {
             initialisedSetUpFormFielMap.put(
                     entry.getKey(), 
@@ -477,7 +476,7 @@ public abstract class AbstractAuditSetUpController extends AuditDataHandlerContr
      */
     protected List<AuditSetUpFormField> getFreshAuditSetUpFormFieldList(
             List<AuditSetUpFormFieldBuilderImpl> auditSetUpFormFieldBuilderList) {
-        List<AuditSetUpFormField> setUpFormFieldList = new LinkedList<AuditSetUpFormField>();
+        List<AuditSetUpFormField> setUpFormFieldList = new LinkedList();
         for (AuditSetUpFormFieldBuilderImpl seb : auditSetUpFormFieldBuilderList) {
             setUpFormFieldList.add(seb.build());
         }
@@ -499,7 +498,7 @@ public abstract class AbstractAuditSetUpController extends AuditDataHandlerContr
             Collection<String> authorisedReferentialList,
             List<SelectFormFieldBuilderImpl> auditSetUpFormFieldBuilderList) {
         
-        List<SelectFormField> selectFormFieldList = new LinkedList<SelectFormField>();
+        List<SelectFormField> selectFormFieldList = new LinkedList();
         for (SelectFormFieldBuilderImpl seb : auditSetUpFormFieldBuilderList) {
             
             // Create the SelectElement from the builder
@@ -519,6 +518,7 @@ public abstract class AbstractAuditSetUpController extends AuditDataHandlerContr
     /**
      * 
      * @param optionElementSet 
+     * @param setUpFormFielList 
      */
     protected void applyRestrictionRegardingOption(
             Collection<OptionElement> optionElementSet, 
@@ -544,7 +544,7 @@ public abstract class AbstractAuditSetUpController extends AuditDataHandlerContr
      * @return 
      */
     protected Collection<String> getAuthorisedReferentialCodeFromContract (Contract contract) {
-        Set<String> authorisedReferentialSet = new HashSet<String>();
+        Set<String> authorisedReferentialSet = new HashSet();
         for (Referential ref : contract.getReferentialSet()) {
             authorisedReferentialSet.add(ref.getCode());
         }
@@ -560,7 +560,7 @@ public abstract class AbstractAuditSetUpController extends AuditDataHandlerContr
      * @return 
      */
     protected Collection<String> getAuthorisedFunctionalityCodeFromContract (Contract contract) {
-        Set<String> authorisedFunctionalitySet = new HashSet<String>();
+        Set<String> authorisedFunctionalitySet = new HashSet();
         for (Functionality funct : contract.getFunctionalitySet()) {
             authorisedFunctionalitySet.add(funct.getCode());
         }

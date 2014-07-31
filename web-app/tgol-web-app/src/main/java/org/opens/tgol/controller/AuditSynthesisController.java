@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -51,7 +51,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author jkowalczyk
  */
 @Controller
-public class AuditSynthesisController extends AuditDataHandlerController {
+public class AuditSynthesisController extends AbstractAuditDataHandlerController {
 
     private static final Logger LOGGER = Logger.getLogger(AuditSynthesisController.class);
 
@@ -65,7 +65,7 @@ public class AuditSynthesisController extends AuditDataHandlerController {
         this.nbOfDisplayedFailedPages = nbOfDisplayedFailedPages;
     }
 
-    private List<String> authorizedScopeForSynthesis = new ArrayList<String>();
+    private List<String> authorizedScopeForSynthesis = new ArrayList();
     public void setAuthorizedScopeForSynthesis(List<String> authorizedScopeForSynthesis) {
         this.authorizedScopeForSynthesis = authorizedScopeForSynthesis;
     }

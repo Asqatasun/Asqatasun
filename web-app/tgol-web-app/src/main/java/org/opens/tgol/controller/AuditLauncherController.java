@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -53,7 +53,7 @@ import org.springframework.ui.Model;
  * @author jkowalczyk
  */
 @Controller
-public class AuditLauncherController extends AuditDataHandlerController {
+public class AuditLauncherController extends AbstractAuditDataHandlerController {
 
     private static final Logger LOGGER = Logger.getLogger(AuditLauncherController.class);
 
@@ -83,23 +83,22 @@ public class AuditLauncherController extends AuditDataHandlerController {
      * The RestrictionHandler instance needed to decide
      */
     private RestrictionHandler restrictionHandler;
-
     @Autowired
     public final void setRestrictionHandler(RestrictionHandler restrictionHandler) {
         this.restrictionHandler = restrictionHandler;
     }
+    
     /**
      * The ParameterElementDataService instance
      */
     private ParameterElementDataService parameterElementDataService;
-
     @Autowired
     public void setParameterElementDataService(ParameterElementDataService parameterElementDataService) {
         this.parameterElementDataService = parameterElementDataService;
         setParameterElementMap(parameterElementDataService);
     }
-    private Map<String, ParameterElement> parameterElementMap = new HashMap<String, ParameterElement>();
-
+    
+    private final Map<String, ParameterElement> parameterElementMap = new HashMap();
     private void setParameterElementMap(ParameterElementDataService peds) {
         for (ParameterElement pe : peds.findAll()) {
             parameterElementMap.put(pe.getParameterElementCode(), pe);
@@ -157,8 +156,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
     public List<String> getProxyExclusionUrlList() {
         if (proxyExclusionUrlList == null) {
             String rawList = exposablePropertyPlaceholderConfigurer.getResolvedProps().get(PROXY_EXCLUSION_URL_CONF_KEY);
-            proxyExclusionUrlList = new ArrayList<String>();
-            proxyExclusionUrlList.addAll(Arrays.asList(rawList.split(";")));
+            proxyExclusionUrlList=Arrays.asList(rawList.split(";"));
         }
         return proxyExclusionUrlList;
     }
@@ -176,8 +174,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
     public List<String> getEmailSentToUserExclusionList() {
         if (emailSentToUserExclusionList == null) {
             String rawList = exposablePropertyPlaceholderConfigurer.getResolvedProps().get(EMAIL_SENT_TO_USER_EXCLUSION_CONF_KEY);
-            emailSentToUserExclusionList = new ArrayList<String>();
-            emailSentToUserExclusionList.addAll(Arrays.asList(rawList.split(";")));
+            emailSentToUserExclusionList = Arrays.asList(rawList.split(";"));
         }
         return emailSentToUserExclusionList;
     }
@@ -347,7 +344,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
         int urlCounter = 0;
         // 10 String are received from the form even if these String are empty.
         // We sort the string and only keep the not empty ones.
-        List<String> trueUrl = new ArrayList<String>();
+        List<String> trueUrl = new ArrayList();
         for (String str : auditSetUpCommand.getUrlList()) {
             if (StringUtils.isNotBlank(str)) {
                 trueUrl.add(urlCounter, str.trim());
@@ -439,7 +436,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
      */
     private Set<Parameter> getUserParamSet(AuditSetUpCommand auditSetUpCommand, Long contractId, int nbOfPages, String url) {
         Set<Parameter> paramSet;
-        Set<Parameter> userParamSet = new HashSet<Parameter>();
+        Set<Parameter> userParamSet = new HashSet();
         if (auditSetUpCommand != null) {
             // The default parameter set corresponds to a site audit
             // If the launched audit is of any other type, we retrieve another 
@@ -513,7 +510,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
             LOGGER.warn("Incorrect value of proxy Port : " + getHttpProxyPort() + ". Proxy parameters are ignored");
             return paramSet;
         }
-        Set<Parameter> proxyParamSet = new HashSet<Parameter>();
+        Set<Parameter> proxyParamSet = new HashSet();
         ParameterElement proxyHostParameterElement =
                 parameterElementDataService.getParameterElement(PROXY_HOST_PARAM_KEY);
         ParameterElement proxyPortParameterElement =
@@ -524,11 +521,16 @@ public class AuditLauncherController extends AuditDataHandlerController {
         proxyParamSet.add(proxyPortParameter);
         LOGGER.debug("paramSet.size() " + paramSet.size());
         LOGGER.debug("proxyParamSet " + proxyParamSet.size());
-        for (Parameter param : paramSet) {
-            if (param.getParameterElement().getParameterElementCode().equals(PROXY_HOST_PARAM_KEY)) {
-                LOGGER.debug(param.getValue());
-            } else if (param.getParameterElement().getParameterElementCode().equals(PROXY_PORT_PARAM_KEY)) {
-                LOGGER.debug(param.getValue());
+        if (LOGGER.isDebugEnabled()) {
+            for (Parameter param : paramSet) {
+                switch (param.getParameterElement().getParameterElementCode()) {
+                    case PROXY_HOST_PARAM_KEY:
+                        LOGGER.debug(param.getValue());
+                        break;
+                    case PROXY_PORT_PARAM_KEY:
+                        LOGGER.debug(param.getValue());
+                        break;
+                }
             }
         }
         paramSet = getParameterDataService().updateParameterSet(paramSet, proxyParamSet);
@@ -536,11 +538,16 @@ public class AuditLauncherController extends AuditDataHandlerController {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Audit is set to use proxy with parameters " + getHttpProxyHost() + " : " + getHttpProxyPort());
         }
-        for (Parameter param : paramSet) {
-            if (param.getParameterElement().getParameterElementCode().equals(PROXY_HOST_PARAM_KEY)) {
-                LOGGER.debug(param.getValue());
-            } else if (param.getParameterElement().getParameterElementCode().equals(PROXY_PORT_PARAM_KEY)) {
-                LOGGER.debug(param.getValue());
+        if (LOGGER.isDebugEnabled()) {
+            for (Parameter param : paramSet) {
+                switch (param.getParameterElement().getParameterElementCode()) {
+                    case PROXY_HOST_PARAM_KEY:
+                        LOGGER.debug(param.getValue());
+                        break;
+                    case PROXY_PORT_PARAM_KEY:
+                        LOGGER.debug(param.getValue());
+                        break;
+                }
             }
         }
         return paramSet;
@@ -555,7 +562,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
      */
     private Set<Parameter> getAuditPageParameterSet(int nbOfPages) {
         if (auditPageParamSet == null) {
-            Set<Parameter> paramSet = new HashSet<Parameter>();
+            Set<Parameter> paramSet = new HashSet();
             ParameterElement depthParameterElement = parameterElementDataService.getParameterElement(DEPTH_PARAM_KEY);
             ParameterElement maxDocParameterElement = parameterElementDataService.getParameterElement(MAX_DOCUMENT_PARAM_KEY);
             Parameter depthParameter = getParameterDataService().getParameter(depthParameterElement, DEPTH_PAGE_PARAM_VALUE);
@@ -576,7 +583,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
      */
     private Set<Parameter> getAuditScenarioParameterSet() {
         Set<Parameter> scenarioParamSet = getDefaultParamSet();
-        Set<Parameter> parameterToRemove = new HashSet<Parameter>();
+        Set<Parameter> parameterToRemove = new HashSet();
         for (Parameter param : scenarioParamSet) {
             if (StringUtils.equals(param.getParameterElement().getParameterElementCode(), DEPTH_PARAM_KEY)
                     || StringUtils.equals(param.getParameterElement().getParameterElementCode(), MAX_DOCUMENT_PARAM_KEY)
@@ -599,7 +606,7 @@ public class AuditLauncherController extends AuditDataHandlerController {
      */
     private Set<Parameter> setUserParameters(Set<Parameter> paramSet, String referentialKey) {
         User user = getCurrentUser();
-        Collection<OptionElement> optionElementSet = new HashSet<OptionElement>();
+        Collection<OptionElement> optionElementSet = new HashSet();
         for (String optionFamily : userOptionDependingOnReferential) {
             optionElementSet.addAll(optionElementDataService.getOptionElementFromUserAndFamilyCode(user, referentialKey + "_" + optionFamily));
         }
