@@ -112,6 +112,7 @@ public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
      * @param audit
      * @param testSolution
      * @param theme
+     * @param manualAudit
      * @return 
      */
     Long findResultCountByResultTypeAndTheme(
