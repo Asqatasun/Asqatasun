@@ -7,8 +7,7 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <context:component-scan
-        base-package="org.opens.tgol.controller"/>
+    <context:component-scan base-package="org.opens.tgol.controller"/>
 
     <bean id="loginController" class="org.opens.tgol.controller.LoginController">
         <property name="guestUser" value="guest"/>
@@ -65,8 +64,7 @@
         </property>
     </bean>
 
-    <bean id="auditResultController" class="org.opens.tgol.controller.AuditResultController">
-        <property name="webResourceStatisticsDataService" ref="webResourceStatisticsDataServiceBean"/>
+    <bean id="abstractAuditResultController" abstract="true">
         <property name="parametersToDisplay">
             <map>
                 <entry key="LEVEL">
@@ -112,14 +110,11 @@
         <property name="testResultSortKey" value="test-result"/>
     </bean>
     
-    <bean id="webResourceStatisticsDataServiceBean" class="org.opens.tanaguru.entity.service.statistics.WebResourceStatisticsDataServiceImpl">
-    	<property name="entityDao" ref="webResourceStatisticsDAO"/>
-        <property name="entityFactory" ref="webResourceStatisticsFactory"/>
-        <property name="criterionStatisticsDAO" ref="criterionStatisticsDAO" />
-        <property name="themeStatisticsDAO" ref="themeStatisticsDAO" />
-        <property name="webResourceStatisticsDAO" ref="webResourceStatisticsDAO" />
-    </bean>
-
+    <bean id="auditResultController" class="org.opens.tgol.controller.AuditResultController" parent="abstractAuditResultController"/>
+        
+    <bean id="manualAuditController" class="org.opens.tgol.controller.ManualAuditController" 
+            parent="abstractAuditResultController"/>
+    
     <bean id="auditSynthesisController" class="org.opens.tgol.controller.AuditSynthesisController">
         <property name="nbOfDisplayedFailedTest" value="5"/>
         <property name="nbOfDisplayedFailedPages" value="10"/>
