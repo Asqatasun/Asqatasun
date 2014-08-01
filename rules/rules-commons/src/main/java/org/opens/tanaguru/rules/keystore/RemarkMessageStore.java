@@ -34,6 +34,7 @@ public final class RemarkMessageStore {
             "NoPatternDetected";
     public static final String TITLE_ATTR_MISSING_MSG = "TitleAttributeMissing";
     public static final String ID_MISSING_MSG = "IdMissing";
+    public static final String FOR_MISSING_MSG = "ForMissing";
     public static final String ID_NOT_UNIQUE_MSG = "IdNotUnique";
 
     // doctype
@@ -121,6 +122,7 @@ public final class RemarkMessageStore {
             "FormElementWithoutIdentifier";
     public static final String INVALID_FORM_FIELD_MSG = "InvalidFormField";
     public static final String INVALID_LABEL_MSG = "InvalidLabel";
+    public static final String INVALID_INPUT_MSG = "InvalidInput";
     
     // table
     public static final String SUMMARY_MISSING_MSG = "SummaryMissing";

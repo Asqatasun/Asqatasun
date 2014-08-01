@@ -32,7 +32,7 @@ import org.opens.tanaguru.rules.elementselector.InputFormElementWithExplicitLabe
 import org.opens.tanaguru.rules.elementselector.InputFormElementWithInplicitLabelSelector;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.FORM_ELEMENT_CSS_LIKE_QUERY;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.INPUT_ELEMENT_INSIDE_FORM_CSS_LIKE_QUERY;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.INVALID_FORM_FIELD_MSG;
 
 /**
@@ -44,8 +44,8 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.INVALID_FORM_
  */
 public class Rgaa30Rule110101 extends AbstractPageRuleMarkupImplementation {
 
-    /** the input form elements with inplicit label */
-    private ElementHandler inputFormWithoutLabelHandler = new ElementHandlerImpl();
+    /** the input form elements with implicit label */
+    private final ElementHandler inputFormWithoutLabelHandler = new ElementHandlerImpl();
         
     /**
      * Default constructor
@@ -56,8 +56,9 @@ public class Rgaa30Rule110101 extends AbstractPageRuleMarkupImplementation {
 
     @Override
     protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
+        
         // Selection of all the input form elements of the page
-        ElementSelector elementSelector = new SimpleElementSelector(FORM_ELEMENT_CSS_LIKE_QUERY);
+        ElementSelector elementSelector = new SimpleElementSelector(INPUT_ELEMENT_INSIDE_FORM_CSS_LIKE_QUERY);
         elementSelector.selectElements(sspHandler, elementHandler);
 
         // the selection of the input form elements without label is initialised
