@@ -157,7 +157,7 @@ public class AuditExportResultController extends AbstractAuditDataHandlerControl
         AuditStatistics auditStatistics = getAuditStatistics(
                     webResource, 
                     model, 
-                    TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE, false, false);//TODO a revoir dans le cas manuel 
+                    TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE, false);//TODO a revoir dans le cas manuel 
         model.addAttribute(TgolKeyStore.STATISTICS_KEY, auditStatistics);
 
         try {

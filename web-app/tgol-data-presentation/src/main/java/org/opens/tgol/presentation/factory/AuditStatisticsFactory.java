@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -26,7 +26,9 @@ import org.apache.commons.lang.StringUtils;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.Theme;
+import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.reference.ThemeDataService;
 import org.opens.tanaguru.entity.service.statistics.CriterionStatisticsDataService;
@@ -49,31 +51,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AuditStatisticsFactory {
 
     private ActDataService actDataService;
-
     @Autowired
     public void setActDataService(ActDataService actDataService) {
         this.actDataService = actDataService;
     }
+    
     private WebResourceDataServiceDecorator webResourceDataService;
-
     @Autowired
     public void setWebResourceDataService(WebResourceDataServiceDecorator webResourceDataServiceDecorator) {
         this.webResourceDataService = webResourceDataServiceDecorator;
     }
+    
+    private AuditDataService auditDataService;
+    @Autowired
+    public void setAuditDataService(AuditDataService auditDataService) {
+        this.auditDataService = auditDataService;
+    }
+    
     private ParameterDataService parameterDataService;
-
     @Autowired
     public void setParameterDataService(ParameterDataService parameterDataService) {
         this.parameterDataService = parameterDataService;
     }
+    
     private CriterionStatisticsDataService criterionStatisticsDataService;
-
     @Autowired
     public void setCriterionStatisticsDataService(CriterionStatisticsDataService criterionStatisticsDataService) {
         this.criterionStatisticsDataService = criterionStatisticsDataService;
     }
-    private Map<String, Collection<Theme>> fullThemeMapByRef = null;
 
+    private Map<String, Collection<Theme>> fullThemeMapByRef = null;
     @Autowired
     public final void setThemeDataService(ThemeDataService themeDataService) {
         Collection<Theme> themeList = themeDataService.findAll();
@@ -126,15 +133,13 @@ public class AuditStatisticsFactory {
      * @param parametersToDisplay
      * @param displayScope
      * @param isAuditManual
-     * @param isInitialManual 
      * @return
      */
     public AuditStatistics getAuditStatistics(
             WebResource webResource,
             Map<String, String> parametersToDisplay,
             String displayScope,
-            boolean isAuditManual,
-            boolean isInitialManual) {
+            boolean isAuditManual) {
 
         AuditStatistics auditStats = new AuditStatisticsImpl();
 
@@ -170,7 +175,7 @@ public class AuditStatisticsFactory {
         resultCounter.setNaCount(0);
         resultCounter.setNtCount(0);
 
-        auditStats.setCounterByThemeMap(addCounterByThemeMap(audit, webResource, resultCounter, displayScope, isAuditManual, isInitialManual));
+        auditStats.setCounterByThemeMap(addCounterByThemeMap(audit, webResource, resultCounter, displayScope, isAuditManual));
         auditStats.setParametersMap(getAuditParameters(audit, parametersToDisplay));
         return auditStats;
     }
@@ -206,8 +211,8 @@ public class AuditStatisticsFactory {
             Audit audit,
             Map<String, String> parametersToDisplay) {
         Map<String, String> auditParameters = new LinkedHashMap();
-        Set<Parameter> auditParamSet
-                = parameterDataService.getParameterSetFromAudit(audit);
+        Set<Parameter> auditParamSet = 
+                parameterDataService.getParameterSetFromAudit(audit);
         // to ensure compatibility with audit that have been launched before
         // the parameter management has been integrated
         if (auditParamSet.isEmpty()) {
@@ -256,8 +261,7 @@ public class AuditStatisticsFactory {
      * @param webResource
      * @param globalResultCounter
      * @param displayScope
-     * @param manualAudit
-     * @param isInitialManual
+     * @param isAuditManual
      * @return
      */
     private Map<Theme, ResultCounter> addCounterByThemeMap(
@@ -265,8 +269,7 @@ public class AuditStatisticsFactory {
             WebResource webResource,
             ResultCounter globalResultCounter,
             String displayScope,
-            boolean isAuditManual,
-            boolean isInitialManual) {
+            boolean isAuditManual) {
         Map<Theme, ResultCounter> counterByThemeMap = new LinkedHashMap();
 
         for (Theme theme : getThemeListFromAudit(audit)) {
@@ -278,33 +281,31 @@ public class AuditStatisticsFactory {
                 themeResultCounter = getResultCounterByThemeForCriterion(webResource, theme);
             }
             if (themeResultCounter != null) {
-                if (isInitialManual && !isAuditManual) {
-                    //Initialisation des compteurs lors de la creation d'un audit manual
-                    themeResultCounter.setNtCount(themeResultCounter.getPassedCount()
-                            + themeResultCounter.getFailedCount() + themeResultCounter.getNmiCount()
-                            + themeResultCounter.getNaCount() + themeResultCounter.getNtCount());
-                    themeResultCounter.setFailedCount(0);
-                    themeResultCounter.setNaCount(0);
-                    themeResultCounter.setPassedCount(0);
-                    themeResultCounter.setNmiCount(0);
-
-                    globalResultCounter.setPassedCount(0);
-                    globalResultCounter.setFailedCount(0);
-                    globalResultCounter.setNmiCount(0);
-                    globalResultCounter.setNaCount(0);
-                    globalResultCounter.setNtCount(themeResultCounter.getPassedCount()
-                            + themeResultCounter.getFailedCount() + themeResultCounter.getNmiCount()
-                            + themeResultCounter.getNaCount() + themeResultCounter.getNtCount() + globalResultCounter.getNtCount());
-
-                } else {
-                    globalResultCounter.setPassedCount(themeResultCounter.getPassedCount() + globalResultCounter.getPassedCount());
-                    globalResultCounter.setFailedCount(themeResultCounter.getFailedCount() + globalResultCounter.getFailedCount());
-                    globalResultCounter.setNmiCount(themeResultCounter.getNmiCount() + globalResultCounter.getNmiCount());
-                    globalResultCounter.setNaCount(themeResultCounter.getNaCount() + globalResultCounter.getNaCount());
-                    globalResultCounter.setNtCount(themeResultCounter.getNtCount() + globalResultCounter.getNtCount());
-                }
-
+                globalResultCounter.setPassedCount(themeResultCounter.getPassedCount() + globalResultCounter.getPassedCount());
+                globalResultCounter.setFailedCount(themeResultCounter.getFailedCount() + globalResultCounter.getFailedCount());
+                globalResultCounter.setNmiCount(themeResultCounter.getNmiCount() + globalResultCounter.getNmiCount());
+                globalResultCounter.setNaCount(themeResultCounter.getNaCount() + globalResultCounter.getNaCount());
+                globalResultCounter.setNtCount(themeResultCounter.getNtCount() + globalResultCounter.getNtCount());
                 counterByThemeMap.put(theme, themeResultCounter);
+            }
+        }
+        // in case of initial manual audit, the sum of passed, failed, nmi and na
+        // must be equals to 0. In this case, the count of the nt must be 
+        // set to the total number of test. Could be replace by initiliasing 
+        // the manual statistics input when creating the audit.
+        if (isAuditManual && 
+                globalResultCounter.getPassedCount() == 0 && 
+                globalResultCounter.getNaCount() == 0 && 
+                globalResultCounter.getNmiCount() == 0 && 
+                globalResultCounter.getFailedCount() == 0 ) {
+            Collection<Test> testList = auditDataService.getAuditWithTest(audit.getId()).getTestList();
+            globalResultCounter.setNtCount(testList.size());
+            Theme theme;
+            for (Test test : testList) {
+                theme = test.getCriterion().getTheme();
+                if (counterByThemeMap.containsKey(theme)) {
+                    counterByThemeMap.get(theme).setNtCount(counterByThemeMap.get(theme).getNtCount()+1);
+                }
             }
         }
         return counterByThemeMap;
