@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -90,12 +90,15 @@ public final class TgolKeyStore {
     public static final String AUDIT_RESULT_URL = "/audit-result";
     public static final String AUDIT_RESULT_CONTRACT_URL =
             CONTRACT_URL+AUDIT_RESULT_URL;
+    public static final String MANUAL_AUDIT_RESULT_URL = "/manual-audit-result";
+    public static final String MANUAL_AUDIT_RESULT_CONTRACT_URL =
+            CONTRACT_URL+MANUAL_AUDIT_RESULT_URL;
+    public static final String MANUAL_AUDIT_PAGE_RESULT_URL = "/manual-audit-page-result";
+    public static final String MANUAL_AUDIT_PAGE_RESULT_CONTRACT_URL =
+            CONTRACT_URL+MANUAL_AUDIT_PAGE_RESULT_URL;
     public static final String PAGE_RESULT_URL = "/page-result";
-    public static final String PAGE_MANUAL_AUDIT_URL = "/page-manual";
     public static final String PAGE_RESULT_CONTRACT_URL =
             CONTRACT_URL+PAGE_RESULT_URL;
-    public static final String PAGE_MANUAL_AUDIT_CONTRACT_URL =
-            CONTRACT_URL+PAGE_MANUAL_AUDIT_URL;
     public static final String UPDATE_MANUAL_RESULT_URL = "/update-manual-result";
     public static final String UPDATE_MANUAL_RESULT_CONTRACT_URL =
             CONTRACT_URL+UPDATE_MANUAL_RESULT_URL;
@@ -191,6 +194,8 @@ public final class TgolKeyStore {
     public static final String RESULT_PAGE_VIEW_NAME = "result-page";
     public static final String RESULT_PAGE_VIEW_REDIRECT_NAME =
             "result-page-redirect";
+    public static final String MANUAL_AUDIT_RESULT_VIEW_REDIRECT_NAME =
+            "manual-audit-page-result-redirect";
     public static final String RESULT_PAGE_BY_CRITERION_VIEW_NAME = "result-page-by-criterion";
     public static final String RESULT_PAGE_BY_CRITERION_VIEW_REDIRECT_NAME =
             "result-page-by-criterion-redirect";
@@ -236,10 +241,7 @@ public final class TgolKeyStore {
     public static final String AUDIT_RESULT_SORT_COMMAND_KEY="auditResultSortCommand";
     public static final String CONTRACT_SORT_COMMAND_KEY="contractSortCommand";
     public static final String WEBRESOURCE_ID_KEY = "wr";
-    public static final String IS_MANUAL_AUDIT_KEY = "ma";
-    public static final String TYPE_KEY = "type";
-    public static final String AUTO_TYPE_KEY = "auto";
-    public static final String MANUAL_TYPE_KEY = "manual";
+    public static final String IS_MANUAL_AUDIT_KEY = "isManualAudit";
     public static final String AUDIT_ID_KEY = "audit";
     public static final String DISPLAY_SCOPE_KEY = "lvl";
     public static final String EXPORT_FORMAT_KEY = "format";
@@ -360,6 +362,9 @@ public final class TgolKeyStore {
     public static final String CRITERION_DISPLAY_SCOPE_VALUE = "cr";
     public static final String TEST_DISPLAY_SCOPE_VALUE = "tst";
 
+    /* functionality keys */
+    public static final String MANUAL_AUDIT_FUNCTIONALITY_KEY = "MANUAL";
+    
     /* role keys */
     public static final String ROLE_GUEST_KEY = "ROLE_GUEST";
     public static final String ROLE_USER_KEY = "ROLE_USER";

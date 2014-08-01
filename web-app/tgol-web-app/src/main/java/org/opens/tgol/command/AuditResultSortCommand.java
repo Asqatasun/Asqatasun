@@ -33,7 +33,7 @@ public class AuditResultSortCommand implements Serializable {
 
     private static final long serialVersionUID = -6799971556530681226L;
     
-    private Map<String, Object> sortOptionMap=new HashMap<String, Object>();
+    private Map<String, Object> sortOptionMap=new HashMap();
     public Map<String, Object> getSortOptionMap() {
         return sortOptionMap;
     }
