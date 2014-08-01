@@ -209,6 +209,7 @@
         <c:set var="hasResultDispatchTitle" scope="request" value="false"/>
         <c:set var="themeRepartitionWidth" scope="request" value="690"/>
         <c:set var="hasPieChartInGraphicalResult" scope="request" value="true"/>
+        <c:set var="hasBarChartInGraphicalResult" scope="request" value="true"/>
         <c:set var="addLinkToSourceCode" scope="request" value="true"/>
         <c:import url="template/synthesis.jsp" />
         <c:import url="template/sort-result-console.jsp" />
@@ -233,7 +234,7 @@
         <script type="text/javascript" src="${jqueryUIUrl}"></script>
         <script type="text/javascript" src="${progressBarJsUrl}"></script>
         </c:if>
-        <c:if test="${param.ma == true}">
+        <c:if test="${isManualAudit}">
         <script type="text/javascript" src="${detailResultManualJsUrl}"></script>
         </c:if>
         <!--[if lte IE 8]>

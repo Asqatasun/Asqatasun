@@ -6,7 +6,6 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib uri="http://tagutils" prefix="tg" %>
 
-<c:set var="isManualAudit" scope="request" value="${param.ma}"/>
 <c:if test="${addSideBarNav}">
     <div class="theme-nav bs-docs-sidebar">
         <ul class="nav-list bs-docs-sidenav">
@@ -45,7 +44,7 @@
             </div><!-- class="row" -->
         </c:if>
         <c:set var="updateManualResultUrl">
-            <c:url value="/home/contract/update-manual-result.html?wr=${param.wr}&type=${param.type}&ma=${param.ma}"/>
+            <c:url value="/home/contract/update-manual-result.html?wr=${param.wr}"/>
         </c:set>
         <form:form commandName="manualAuditCommand" 
                    method="post" 
@@ -91,7 +90,7 @@
                                             <fmt:message key="${entry.key.code}"/>
                                         </c:set>
                                         <span class="failed-th-gray theme-result" title="${failedTitle}">${counterByThemeMap[entry.key].failedCount}</span>
-                                        <c:if test="${isManualAudit == false}">
+                                        <c:if test="${isManualAudit != 'true'}">
                                             <c:set scope="page" var="nmiTitle">
                                                 <fmt:message key="resultPage.tests">
                                                     <fmt:param value="${counterByThemeMap[entry.key].nmiCount}"/>
@@ -186,16 +185,15 @@
                                                 <img src="<c:url value="/Images/ico-${testResult.resultCode}-m.png"/>" alt="test ${testResult.testShortLabel} <fmt:message key="${testResult.resultCode}"/>"/> 
                                             </div>
                                             <c:choose>
-                                                <c:when test="${isManualAudit == true}">
+                                                <c:when test="${isManualAudit}">
                                                     <div class="audit-result-manual span3">
-                                                        <form:hidden path="modifiedTestResultMap['${testResult.testShortLabel}'].testShortLabel" value="${testResult.testShortLabel}"/>
                                                         <fieldset>
                                                             <legend><fmt:message key="resultPage.overridenResult"/><span class="offscreen">${testResult.testShortLabel}</span>
                                                             </legend>
                                                             <c:forEach items="${manualAuditCommand.statusList}" var="auditStatus">
                                                                 <div class="clearfix ">
                                                                     <div class="input">
-                                                                        <form:radiobutton id="${auditStatus}${testResult.testShortLabel}" name="auditStatus${testResult.testShortLabel}" path="modifiedTestResultMap['${testResult.testShortLabel}'].manualStatus" value="${auditStatus}"/>
+                                                                        <form:radiobutton id="${auditStatus}${testResult.testShortLabel}" name="auditStatus${testResult.testShortLabel}" path="modifiedManualResultMap['${testResult.testShortLabel}'].result" value="${auditStatus}"/>
                                                                         <form:label path="" for="${auditStatus}${testResult.testShortLabel}"><fmt:message key="${auditStatus}"/></form:label>
                                                                         </div>
                                                                     </div>
@@ -210,10 +208,10 @@
 
 
                                         </div>
-                                        <c:if test="${isManualAudit == true}">
+                                        <c:if test="${isManualAudit}">
                                             <div class="audit-result-manual-comment span11" id="commentContainer${testResult.testShortLabel}">
                                                 <label for="cmt${testResult.testShortLabel}"> <fmt:message key="resultPage.commentArea"/> <span class="offscreen">${testResult.testShortLabel}</label>
-                                                <form:textarea id="cmt${testResult.testShortLabel}" path="modifiedTestResultMap['${testResult.testShortLabel}'].comment" rows="2" cols="30" maxLength="250"/>
+                                                <form:textarea id="cmt${testResult.testShortLabel}" path="modifiedManualResultMap['${testResult.testShortLabel}'].comment" rows="2" cols="30" maxLength="250"/>
                                             </div>
                                         </c:if>
                                     </div>
@@ -343,7 +341,7 @@
                         </c:forEach>
                     </div> <!-- div id="themex-results"> --> 
                 </c:forEach>
-                <c:if test="${isManualAudit == true}">
+                <c:if test="${isManualAudit}">
                     <div id="manual-audit-form-submit">
                         <input  type="submit"  class="result-page-action manual-audit-save-btn"  name="action"  value="<fmt:message key="resultPage.saveManualResultsBtnName"/>"/>
                         <input class="result-page-action manual-audit-save-btn" type="submit" value="Finish" name="action" />

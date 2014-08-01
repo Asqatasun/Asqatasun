@@ -2,7 +2,6 @@
 <%@page pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<c:set var="isManualAudit" scope="request" value="${param.ma}"/>
 
                 <table id="result-by-theme" class="zebra-striped">
                     <caption><fmt:message key="graph.resultRepartitionByThemeSummaryAndCaption"/></caption>
@@ -27,7 +26,7 @@
                             <td headers="serie2 category${entry.key.rank}">${entry.value.passedCount}</td>
                             </c:forEach>
                         </tr>
-                        <c:if test="${isManualAudit != true}">
+                        <c:if test="${isManualAudit}">
                         <tr>
                             <th id="serie3" title="<fmt:message key="nmi"/>"><fmt:message key="nmi"/></th>
                             <c:forEach var="entry" items="${counterByThemeMap}">    

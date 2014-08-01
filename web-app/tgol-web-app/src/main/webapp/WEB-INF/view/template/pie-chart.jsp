@@ -2,8 +2,7 @@
 <%@page pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
- <c:set var="isManualAudit" scope="request" value="${param.ma}"/>
-                        <c:if test="${addSpan == 'true'}">
+                         <c:if test="${addSpan == 'true'}">
                             <div class="span4">
                         </c:if>
                             <div id="result-repartition-pie-graph"></div>
@@ -75,7 +74,7 @@
                                             </span>
                                         </td>
                                     </tr>   
-                                    <c:if test="${isManualAudit != true}">                                 
+                                    <c:if test="${isManualAudit != 'true'}">                                 
                                     <tr>
                                         <td class="col01 nmi"></td>
                                         <td class="col02"><fmt:message key="nmi"/></td>
