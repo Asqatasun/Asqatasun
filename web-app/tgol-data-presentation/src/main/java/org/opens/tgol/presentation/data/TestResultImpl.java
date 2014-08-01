@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -33,7 +33,7 @@ import org.opens.tanaguru.entity.reference.Test;
  */
 public class TestResultImpl implements TestResult{
 
-    private List<RemarkInfos> remarkInfosList = new ArrayList<>();
+    private final List<RemarkInfos> remarkInfosList = new ArrayList<>();
 
     /**
      *
@@ -50,25 +50,26 @@ public class TestResultImpl implements TestResult{
     public void setTestEvidenceRepresentationOrder(String testEvidenceRepresentationOrder) {
         this.testEvidenceRepresentationOrder = testEvidenceRepresentationOrder.split(";");
     }
-    private String manualStatus;
-    private String comment;
-
+    
+    private final ManualResult manualResult = new ManualResult();
     @Override
-    public String getManualStatus() {
-        return manualStatus;
+    public String getManualResult() {
+        return manualResult.getResult();
     }
 
-    public void setManualStatus(String manualStatus) {
-        this.manualStatus = manualStatus;
+    @Override
+    public void setManualResult(String manualResult) {
+        this.manualResult.setResult(manualResult);
     }
 
     @Override
     public String getComment() {
-        return comment;
+        return manualResult.getComment();
     }
 
+    @Override
     public void setComment(String comment) {
-        this.comment = comment;
+        this.manualResult.setComment(comment);
     }
 
     @Override
