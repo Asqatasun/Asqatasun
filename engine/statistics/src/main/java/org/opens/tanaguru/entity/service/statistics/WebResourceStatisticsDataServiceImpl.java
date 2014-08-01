@@ -61,8 +61,6 @@ public class WebResourceStatisticsDataServiceImpl extends
 
     private ThemeStatisticsDAO themeStatisticsDAO;
 
-    private WebResourceStatisticsDAO webResourceStatisticsDAO;
-
     private CriterionStatisticsDataService criterionStatisticsDataService;
 
     private ThemeStatisticsDataService themeStatisticsDataService;
@@ -233,7 +231,7 @@ public class WebResourceStatisticsDataServiceImpl extends
             List<ProcessResult> netResultList) {
         boolean isNewWebRs = false;
 
-        WebResourceStatistics wrStats = webResourceStatisticsDAO.findWebResourceStatisticsByWebResource(webResource, true);
+        WebResourceStatistics wrStats = ((WebResourceStatisticsDAO) entityDao).findWebResourceStatisticsByWebResource(webResource, true);
 
         if (wrStats == null) {
             wrStats = this.create();
@@ -529,11 +527,6 @@ public class WebResourceStatisticsDataServiceImpl extends
     public void setCriterionStatisticsDAO(
             CriterionStatisticsDAO criterionStatisticsDAO) {
         this.criterionStatisticsDAO = criterionStatisticsDAO;
-    }
-
-    public void setWebResourceStatisticsDAO(
-            WebResourceStatisticsDAO webResourceStatisticsDAO) {
-        this.webResourceStatisticsDAO = webResourceStatisticsDAO;
     }
 
     public ThemeStatisticsDAO getThemeStatisticsDAO() {
