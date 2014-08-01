@@ -221,9 +221,6 @@
                                 <c:if test="${fn:length(detailedContractInfo.lastActInfoSet) > 0}">
                                     <tbody>
                                     </c:if>
-                                    <c:set var="contractSupportedManualTrue" scope="page" value="&ma=true" />
-                                    <c:set var="typeAuditManual" scope="page" value="&type=manual" />
-                                    <c:set var="typeAuditAuto" scope="page" value="&type=auto" />
                                     <c:forEach var="actInfo" items="${detailedContractInfo.lastActInfoSet}" varStatus="pContractSet">
                                         <tr>
                                             <td headers="page-url" class="tg-textual-column">
@@ -268,19 +265,19 @@
                                                 </a>
                                             </td>
                                             <td headers="manual" class="tg-textual-column">
-                                                <c:set var="auditUrl" scope="page" value="/home/contract/audit-result.html?audit=" />
+                                                <c:set var="auditUrl" scope="page" value="/home/contract/manual-audit-result.html?audit=" />
                                                 <c:choose>
                                                     <c:when test="${actInfo.scope == 'DOMAIN'}">
                                                         
                                                     </c:when>
                                                     <c:when test="${actInfo.manual == 'true'}">
-                                                        <a href="<c:url value="${auditUrl}${actInfo.auditId}${contractSupportedManualTrue}${typeAuditAuto}"/>" 
+                                                        <a href="<c:url value="${auditUrl}${actInfo.auditId}"/>" 
                                                            title="<fmt:message key="pageList.resumeManualAuditTitle" ><fmt:param>${actInfo.url}</fmt:param></fmt:message>">
                                                             <fmt:message key="pageList.resumeManualAudit" />
                                                         </a>
                                                     </c:when>
                                                     <c:when test="${actInfo.manual == 'false'}">
-                                                        <a href="<c:url value="${auditUrl}${actInfo.auditId}${contractSupportedManualTrue}${typeAuditAuto}"/>"
+                                                        <a href="<c:url value="${auditUrl}${actInfo.auditId}"/>"
                                                            title="<fmt:message key="pageList.startManualAuditTitle" ><fmt:param>${actInfo.url}</fmt:param></fmt:message>">
                                                             <fmt:message key="pageList.startManualAudit" />
                                                         </a>
