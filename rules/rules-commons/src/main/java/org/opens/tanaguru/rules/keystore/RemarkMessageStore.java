@@ -34,6 +34,7 @@ public final class RemarkMessageStore {
             "NoPatternDetected";
     public static final String TITLE_ATTR_MISSING_MSG = "TitleAttributeMissing";
     public static final String ID_MISSING_MSG = "IdMissing";
+    public static final String ARIA_LABELLEDBY_MISSING_MSG = "AriaLabelledbyMissing";
     public static final String FOR_MISSING_MSG = "ForMissing";
     public static final String ID_NOT_UNIQUE_MSG = "IdNotUnique";
 
@@ -112,6 +113,8 @@ public final class RemarkMessageStore {
             "CheckLabelPertinence";
     public static final String FORM_ELEMENT_WITHOUT_LABEL_MSG = 
             "FormElementWithoutLabel";
+    public static final String FORM_ELEMENT_WITH_NOT_UNIQUE_LABEL_MSG = 
+            "FormElementWithNotUniqueLabel";
     public static final String CHECK_TITLE_OF_FORM_ELEMENT_MSG = 
             "CheckTitleOfFormElement";
     public static final String NOT_PERTINENT_OPTGROUP_LABEL_MSG = 

@@ -19,8 +19,11 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
@@ -28,26 +31,48 @@ import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
+import org.opens.tanaguru.rules.elementchecker.attribute.AttributePresenceChecker;
+import org.opens.tanaguru.rules.elementchecker.attribute.IdUnicityChecker;
 import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
-import org.opens.tanaguru.rules.elementselector.ElementSelector;
-import org.opens.tanaguru.rules.elementselector.InputFormElementWithExplicitLabelSelector;
+import org.opens.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
+import org.opens.tanaguru.rules.elementselector.builder.CssLikeSelectorBuilder;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.ARIA_LABELLEDBY_ATTR;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.ARIA_LABEL_ATTR;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.FOR_ATTR;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.ID_ATTR;
+import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.FORM_ELEMENT_CSS_LIKE_QUERY;
-import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.FORM_LABEL_WITH_INNER_FORM_ELEMENT_CSS_LIKE_QUERY;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.INVALID_LABEL_MSG;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.FORM_ELEMENT_WITH_ID_CSS_LIKE_QUERY;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.INPUT_ELEMENT_WITH_ARIA_INSIDE_FORM_CSS_LIKE_QUERY;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.LABEL_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.ARIA_LABELLEDBY_MISSING_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.FORM_ELEMENT_WITHOUT_LABEL_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.FORM_ELEMENT_WITH_NOT_UNIQUE_LABEL_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.FOR_MISSING_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.ID_MISSING_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.ID_NOT_UNIQUE_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.INVALID_INPUT_MSG;
+import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 11.1.3 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/aw22-rule-11-1-3">the rule 11.1.3 design page.</a>
- * @see <a href="http://www.accessiweb.org/index.php/accessiweb-html5aria-liste-deployee.html#test-11-1-3"> 11.1.3 rule specification</a>
+ * For more details about the implementation, refer to <a
+ * href="http://www.tanaguru.org/en/content/aw22-rule-11-1-3">the rule 11.1.3
+ * design page.</a>
+ *
+ * @see <a
+ * href="http://www.accessiweb.org/index.php/accessiweb-html5aria-liste-deployee.html#test-11-1-3">
+ * 11.1.3 rule specification</a>
  *
  */
 public class Rgaa30Rule110103 extends AbstractPageRuleMarkupImplementation {
 
-    /** The explicit label elements */
-    private ElementHandler<Element> explicitLabelElements = new ElementHandlerImpl();
+    private static final String FORM_TAG = "form";
+    private SimpleElementSelector selector;
+    private final ElementHandler<Element> inputElementHandler = new ElementHandlerImpl();
+    private final Map<Element, ElementHandler<Element>> inputFormMap = new HashMap();
 
     /**
      * Default constructor
@@ -58,69 +83,96 @@ public class Rgaa30Rule110103 extends AbstractPageRuleMarkupImplementation {
 
     @Override
     protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
-        ElementSelector elementSelector = 
-                new SimpleElementSelector(
-                    FORM_LABEL_WITH_INNER_FORM_ELEMENT_CSS_LIKE_QUERY);
-        elementSelector.selectElements(sspHandler, elementHandler);
+        selector = new SimpleElementSelector(INPUT_ELEMENT_WITH_ARIA_INSIDE_FORM_CSS_LIKE_QUERY);
+        selector.selectElements(
+                sspHandler,
+                inputElementHandler);
+        putInputElementHandlerIntoTheMap();
+    }
 
-        ElementSelector explicitLabelSelector = 
-                new InputFormElementWithExplicitLabelSelector();
-        explicitLabelSelector.selectElements(
-                        sspHandler, 
-                        explicitLabelElements);
+    @Override
+    public int getSelectionSize() {
+        return inputElementHandler.get().size();
     }
 
     @Override
     protected void check(
-            SSPHandler sspHandler, 
-            ElementHandler<Element> elementHandler, 
+            SSPHandler sspHandler,
+            ElementHandler elementHandler,
             TestSolutionHandler testSolutionHandler) {
-        
-        if (explicitLabelElements.isEmpty() && elementHandler.isEmpty()) {
+
+        System.out.println(inputElementHandler.get().size());
+        System.out.println(inputFormMap.size());
+
+        /* If the page has no input form element, the test is not applicable */
+        if (inputFormMap.entrySet().isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;
         }
-        // if all the label are explicitely defined, the test is passed
-        if (elementHandler.isEmpty()){
-            // add the explicit label element to main handler for counter
-            // purpose
-            elementHandler.addAll(explicitLabelElements.get());
-            testSolutionHandler.addTestSolution(TestSolution.PASSED);
-            return;
-        }
-        ElementHandler labelOnError = new ElementHandlerImpl();
-        for (Element el:elementHandler.get()) {
-            if (!isForAttributeOfLabelEqualsToIdAttributeOfFormField(
-                    el, 
-                    el.attr(FOR_ATTR)))  {
-                labelOnError.add(el);
+
+        for (Map.Entry<Element, ElementHandler<Element>> entry : inputFormMap.entrySet()) {
+            /* The attribute Emptiness Checker. Keep default value i.e failed 
+             when attribute is empty
+             */
+            ElementChecker attributeEmptinessChecker
+                    = new TextEmptinessChecker(
+                            new TextAttributeOfElementBuilder(ARIA_LABELLEDBY_ATTR),
+                            ARIA_LABELLEDBY_MISSING_MSG,
+                            null);
+            attributeEmptinessChecker.check(sspHandler, entry.getValue(), testSolutionHandler);
+
+            ElementHandler<Element> inputWithoutLabel = new ElementHandlerImpl();
+            ElementHandler<Element> notUniqueLabel = new ElementHandlerImpl();
+            for (Element el : entry.getValue().get()) {
+                ElementHandler<Element> labelHandler = new ElementHandlerImpl();
+                labelHandler.addAll(entry.getKey().select(CssLikeSelectorBuilder
+                        .buildSelectorFromAttributeTypeAndValue(ID_ATTR, el.attr(ARIA_LABELLEDBY_ATTR))));
+                if (labelHandler.get().isEmpty()) {
+                    inputWithoutLabel.add(el);
+                } else if (labelHandler.get().size() > 1) {
+                    notUniqueLabel.add(el);
+                    notUniqueLabel.addAll(labelHandler.get());
+                }
             }
+
+            /* Check if the form element has a label associated */
+            ElementChecker elementPresenceChecker
+                    = new ElementPresenceChecker(TestSolution.FAILED,
+                            TestSolution.PASSED,
+                            FORM_ELEMENT_WITHOUT_LABEL_MSG,
+                            null);
+            elementPresenceChecker.check(sspHandler, inputWithoutLabel, testSolutionHandler);
+
+            /* Check if the id attr of the label associated to the form element is unique */
+            elementPresenceChecker
+                    = new ElementPresenceChecker(TestSolution.FAILED,
+                            TestSolution.PASSED,
+                            FORM_ELEMENT_WITH_NOT_UNIQUE_LABEL_MSG,
+                            null);
+            elementPresenceChecker.check(sspHandler, notUniqueLabel, testSolutionHandler);
         }
-        // use this checker to create sourceCodeRemark when needed
-        ElementChecker checker = new ElementPresenceChecker(INVALID_LABEL_MSG, null);
-        checker.check(sspHandler, labelOnError, testSolutionHandler);
     }
-    
+
     /**
-     * This methods checks whether the value of the for attribute of a label
-     * node corresponds to the value of the id attribute of any child form field.
-     * 
-     * @param childNodes
-     * @param forAttributeValue
-     * @return
+     * This method linked each input on a page to its form in a map.
      */
-    private boolean isForAttributeOfLabelEqualsToIdAttributeOfFormField(
-            Element element, 
-            String forAttributeValue) {
-        if (StringUtils.isBlank(forAttributeValue)) {
-            return false;
-        }
-        for (Element el : element.children().select(FORM_ELEMENT_CSS_LIKE_QUERY)) {
-            if (StringUtils.equalsIgnoreCase(forAttributeValue, el.id())) {
-                return true;
+    private void putInputElementHandlerIntoTheMap() {
+        for (Element el : inputElementHandler.get()) {
+            Element tmpElement = el.parent();
+            while (StringUtils.isNotBlank(tmpElement.tagName())) {
+                if (tmpElement.tagName().equals(FORM_TAG)) {
+                    if (inputFormMap.containsKey(tmpElement)) {
+                        inputFormMap.get(tmpElement).add(el);
+                    } else {
+                        ElementHandler<Element> inputElement = new ElementHandlerImpl();
+                        inputElement.add(el);
+                        inputFormMap.put(tmpElement, inputElement);
+                    }
+                    break;
+                }
+                tmpElement = tmpElement.parent();
             }
         }
-        return false;
     }
 
 }

@@ -110,6 +110,14 @@ public final class CssLikeQueryStore {
                    +"form input[type=file] , "
                    +"form input[type=text] , "
                    +"form input[type=radio]"; 
+    public static final String INPUT_ELEMENT_WITH_ARIA_INSIDE_FORM_CSS_LIKE_QUERY=
+                    "form textarea[aria-labelledby] , "
+                   +"form select[aria-labelledby] , "
+                   +"form input[type=password][aria-labelledby] , "
+                   +"form input[type=checkbox][aria-labelledby] , "
+                   +"form input[type=file][aria-labelledby] , "
+                   +"form input[type=text][aria-labelledby] , "
+                   +"form input[type=radio][aria-labelledby]"; 
     public static final String FORM_ELEMENT_WITH_ID_CSS_LIKE_QUERY = 
                     "textarea[id] , "
                     + "select[id] , "

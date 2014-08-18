@@ -1,14 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa30 Test.11.01.3 Passed 13</title>
+        <title>Rgaa30 Test.11.01.3 Failed 01</title>
     </head>
     <body>
         <div>
 
-            <h1>Rgaa30 Test.11.01.3 Passed 13</h1>
+            <h1>Rgaa30 Test.11.01.3 Failed 01</h1>
 
             <p class="test-detail">
                 <span>
@@ -23,16 +23,16 @@
             <div class="testcase">
                 <form action="http://action.html" method="post">
                     <p>
-                        <label for="textarea">
-                            <textarea id="textarea" cols="1" rows="20" title="textarea title"/>
-                        </label>
+                        <span id="mylabel"> Text:</span>
+                        <span id="mylabel"> Text:</span>
+                        <input type="text" aria-labelledby="mylabel"/>
                         <input type="submit" value="Send"/> <input type="reset"/>
                     </p>
                 </form>
             </div>
 
             <p class="test-explanation">
-                Passed : All the labels implicitly associated with form fields have a for attribute that corresponds with the id of form field.
+                Failed : All the labels implicitly associated with form fields are missing a "for" attribute.
             </p>
 
         </div>
