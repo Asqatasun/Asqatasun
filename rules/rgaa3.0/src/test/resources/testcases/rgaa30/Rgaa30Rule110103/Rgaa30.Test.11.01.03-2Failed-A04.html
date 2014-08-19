@@ -3,12 +3,12 @@
 
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa30 Test.11.01.3 Failed 01</title>
+        <title>Rgaa30 Test.11.01.3 Failed A04</title>
     </head>
     <body>
         <div>
 
-            <h1>Rgaa30 Test.11.01.3 Failed 01</h1>
+            <h1>Rgaa30 Test.11.01.3 Failed A04</h1>
 
             <p class="test-detail">
                 <span>
@@ -25,7 +25,14 @@
                 <form action="http://action.html" method="post">
                     <p>
                         <span id="mylabel"> Text:</span>
-                        <span id="mylabel"> Text:</span>
+                        <input type="text" aria-labelledby="mylabel"/>
+                        <input type="submit" value="Send"/> <input type="reset"/>
+                    </p>
+                </form>
+
+                <form action="http://action.html" method="post">
+                    <p>
+                        <span> Text:</span>
                         <input type="text" aria-labelledby="mylabel"/>
                         <input type="submit" value="Send"/> <input type="reset"/>
                     </p>
@@ -33,7 +40,7 @@
             </div>
 
             <p class="test-explanation">
-                Failed : There are two label with the same id linked to the input.
+                Failed : The input type in the second form has not a label linked.
             </p>
 
         </div>

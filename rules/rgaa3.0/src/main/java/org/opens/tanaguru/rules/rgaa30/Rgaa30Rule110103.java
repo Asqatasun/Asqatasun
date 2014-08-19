@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
@@ -31,28 +30,16 @@ import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
-import org.opens.tanaguru.rules.elementchecker.attribute.AttributePresenceChecker;
-import org.opens.tanaguru.rules.elementchecker.attribute.IdUnicityChecker;
 import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
 import org.opens.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import org.opens.tanaguru.rules.elementselector.builder.CssLikeSelectorBuilder;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.ARIA_LABELLEDBY_ATTR;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.ARIA_LABEL_ATTR;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.FOR_ATTR;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.ID_ATTR;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.FORM_ELEMENT_CSS_LIKE_QUERY;
-import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.FORM_ELEMENT_WITH_ID_CSS_LIKE_QUERY;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.INPUT_ELEMENT_WITH_ARIA_INSIDE_FORM_CSS_LIKE_QUERY;
-import static org.opens.tanaguru.rules.keystore.HtmlElementStore.LABEL_ELEMENT;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.ARIA_LABELLEDBY_MISSING_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.FORM_ELEMENT_WITHOUT_LABEL_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.FORM_ELEMENT_WITH_NOT_UNIQUE_LABEL_MSG;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.FOR_MISSING_MSG;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.ID_MISSING_MSG;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.ID_NOT_UNIQUE_MSG;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.INVALID_INPUT_MSG;
 import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
@@ -100,9 +87,6 @@ public class Rgaa30Rule110103 extends AbstractPageRuleMarkupImplementation {
             SSPHandler sspHandler,
             ElementHandler elementHandler,
             TestSolutionHandler testSolutionHandler) {
-
-        System.out.println(inputElementHandler.get().size());
-        System.out.println(inputFormMap.size());
 
         /* If the page has no input form element, the test is not applicable */
         if (inputFormMap.entrySet().isEmpty()) {

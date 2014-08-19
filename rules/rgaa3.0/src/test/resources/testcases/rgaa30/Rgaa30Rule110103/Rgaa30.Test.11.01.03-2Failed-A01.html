@@ -12,10 +12,11 @@
 
             <p class="test-detail">
                 <span>
-                    Does each label (label tag) that is associated with a form field (input tag of type text, password, checkbox, radio, file, or textarea and select tag) pass the conditions below?
-                    <ul class="Tests">
-                        <li> The label tag has a for attribute</li>
-                        <li> The value of the for attribute is equal to the value of the id attribute of the associated form field</li>
+                    Chaque <a href="index.php/glossaire-du-referentiel-accessiweb-html5aria.html#mChpSaisie">champ de formulaire</a> associé à une <a href="index.php/glossaire-du-referentiel-accessiweb-html5aria.html#mEtiquette">étiquette</a> via la propriété ARIA aria-labelledby, vérifie-t-elle ces conditions ?
+                    <ul class="ssTests">
+                        <li> l'<a href="index.php/glossaire-du-referentiel-accessiweb-html5aria.html#mEtiquette">étiquette</a> possède un attribut id</li>
+                        <li> La valeur de l'attribut id est unique</li>
+                        <li>La valeur de la propriété ARIA aria-labelledby est égale à la valeur de l'attribut id de l'<a href="index.php/glossaire-du-referentiel-accessiweb-html5aria.html#mEtiquette">étiquette</a></li>
                     </ul>
                 </span>
             </p>
@@ -31,7 +32,7 @@
             </div>
 
             <p class="test-explanation">
-                Failed : All the labels implicitly associated with form fields are missing a "for" attribute.
+                Failed : There is no input with "mylabel" content of id attribute.
             </p>
 
         </div>
