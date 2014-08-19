@@ -19,7 +19,6 @@
  * 
  *  Contact us by mail: open-s AT open-s DOT com
  */
-
 package org.opens.tanaguru.rules.keystore;
 
 import javax.swing.text.html.HTML;
@@ -33,7 +32,7 @@ public final class AttributeStore {
      * Returned key when an attribute requested as evidence element is missing
      */
     public static final String ABSENT_ATTRIBUTE_VALUE = "attribute-absent";
-    
+
     public static final String ALT_ATTR = HTML.Attribute.ALT.toString();
     public static final String CLASS_ATTR = HTML.Attribute.CLASS.toString();
     public static final String CODE_ATTR = HTML.Attribute.CODE.toString();
@@ -61,10 +60,14 @@ public final class AttributeStore {
     public static final String WIDTH_ATTR = HTML.Attribute.WIDTH.toString();
     public static final String HEIGHT_ATTR = HTML.Attribute.HEIGHT.toString();
     public static final String XML_LANG_ATTR = "xml:lang";
-    
+
+    /* Value linked to an attribute */
+    public static final String PRESENTATION_VALUE = "presentation";
+
     /**
      * Private constructor. This class handles keys and must not be instantiated
      */
-    private AttributeStore() {}
-    
+    private AttributeStore() {
+    }
+
 }

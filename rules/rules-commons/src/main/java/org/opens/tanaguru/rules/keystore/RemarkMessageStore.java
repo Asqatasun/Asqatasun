@@ -174,6 +174,8 @@ public final class RemarkMessageStore {
             "CheckLinearisedContent";
     public static final String PRESENTATION_TABLE_WITH_FORBIDDEN_MARKUP_MSG =
             "PresentationTableWithForbiddenMarkup";
+    public static final String PRESENTATION_TABLE_WITHOUT_ARIA_MARKUP_MSG =
+            "PresentationTableWithoutAriaMarkup";
     public static final String CHECK_TABLE_IS_DATA_TABLE_MSG =
             "CheckTableIsDataTable";
     public static final String CHECK_TABLE_IS_PRESENTATION_TABLE_MSG =
