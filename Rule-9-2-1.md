@@ -52,53 +52,6 @@ does not exceed 80 characters.
 
 #### Process
 
--   Bou
-
--   bou
-
--   bpou
-
--   -   bou
-
--   bou
-
--   bou
-
--   bou
-
--   bou
-
--   bou
-
--   bou
-
--   bou
-
--   bou
-
--   bou
-
--   bpou
-
--   bou
-
--   bou
-
--   bou
-
--   bou
-
--   bou
-
--   bou
-
--   bou
-
--   bou
-
--   bou
-
-• •
 
 #### Analysis
 
