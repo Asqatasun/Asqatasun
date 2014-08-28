@@ -1,5 +1,4 @@
-# Tanaguru
-## [Feature](https://github.com/Tanaguru/Tanaguru/wiki#features)
-## Tanaguru Rule design
-### [Accessiweb 2.2](https://github.com/Tanaguru/Tanaguru-rules-AccessiWeb-2.2-doc/wiki)
-### Rgaa 3.0
+# [Feature](https://github.com/Tanaguru/Tanaguru/wiki#features)
+# Tanaguru Rule design
+## [Accessiweb 2.2](https://github.com/Tanaguru/Tanaguru-rules-AccessiWeb-2.2-doc/wiki)
+## Rgaa 3.0
