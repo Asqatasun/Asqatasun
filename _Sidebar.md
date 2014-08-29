@@ -1,1 +1,1 @@
-[[Back to Tanaguru wiki|Tanaguru/Tanaguru/wiki]]
+[Back to Tanaguru wiki](https://github.com/Tanaguru/Tanaguru/wiki)
