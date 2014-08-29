@@ -1,0 +1,1 @@
+[[Back to Tanaguru wiki|Tanaguru/wiki]]
