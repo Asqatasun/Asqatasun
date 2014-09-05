@@ -16,7 +16,7 @@
         <module>maven-kbcsv-plugin</module>
         <module>maven-testgenerator-plugin</module>
         <module>tgol-testing-tools</module>
-        <module>rules-doc-utils</module>
+<!--        <module>rules-doc-utils</module>-->
 <!--        <module>tgol-test-scenario</module>-->
 <!--        <module>tgol-test-kbaccess-campaign</module>
         <module>tgol-test-krash-offline</module>
