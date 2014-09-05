@@ -27,15 +27,21 @@ ADD COLUMN `Manual_Audit_Dt_Creation` DATETIME NULL DEFAULT NULL AFTER `Dt_Creat
 -- ---------------------------------------------------------------------------------------------------------
 -- Column `web_resource_statistics` to know if the web_resource_statistics is for manual or automatic audit 
 -- ---------------------------------------------------------------------------------------------------------
- ALTER TABLE  `WEB_RESOURCE_STATISTICS` ADD COLUMN `Manual_Audit` IF NOT EXISTS INT NULL DEFAULT 0 
- COMMENT 'Colonne indiquant s il s agit de statistiques d un audit manuel ou automatique\n0 : automatique\n1: manuel  AFTER Http_Status_Code' ;
+ ALTER TABLE  `WEB_RESOURCE_STATISTICS` ADD COLUMN `Manual_Audit` int(11) NULL DEFAULT 0;
 
 
+-- ---------------------------------------------------------------------------------------------------------
+-- Hibernate envers technical table to refer the hibernate changes versions
+-- ---------------------------------------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `REVINFO` (
+  `REV` int(11) NOT NULL AUTO_INCREMENT,
+  `REVTSTMP` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`REV`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
  
 -- ---------------------------------------------------------------------------------------------------------
 -- Creating the hibernate audit table of process_result
 -- ---------------------------------------------------------------------------------------------------------
-
 CREATE TABLE IF NOT EXISTS `PROCESS_RESULT_AUD` (
   `DTYPE` varchar(31) NOT NULL,
   `Id_Process_Result` bigint(20) NOT NULL,
@@ -51,14 +57,6 @@ CREATE TABLE IF NOT EXISTS `PROCESS_RESULT_AUD` (
   CONSTRAINT `FK5411075EDF74E053` FOREIGN KEY (`REV`) REFERENCES `REVINFO` (`REV`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ---------------------------------------------------------------------------------------------------------
--- Hibernate envers technical table to refer the hibernate changes versions
--- ---------------------------------------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `REVINFO` (
-  `REV` int(11) NOT NULL AUTO_INCREMENT,
-  `REVTSTMP` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`REV`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_Element`, `Id_Parameter_Family`, `Long_Label`, `Short_Label`) VALUES
 (42, 'INCLUSION_REGEXP', 1, 'Regulard expression to crawl on a specific folder', 'inclusion regex');
