@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Tanaguru/Tanaguru.svg?branch=master)](https://travis-ci.org/Tanaguru/Tanaguru) [![Coverage Status](https://coveralls.io/repos/Tanaguru/Tanaguru/badge.png?branch=master)](https://coveralls.io/r/Tanaguru/Tanaguru)
+
 # Tanaguru
 
 Tanaguru is an opensource (AGPL license) website assessment tool dedicated to
