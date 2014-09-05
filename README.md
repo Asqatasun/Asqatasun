@@ -1,4 +1,6 @@
-# Tanaguru https://api.travis-ci.org/Tanaguru/Tanaguru.svg?branch=develop
+[![Build Status](https://travis-ci.org/Tanaguru/Tanaguru.svg?branch=develop)](https://travis-ci.org/Tanaguru/Tanaguru)
+
+# Tanaguru
 
 Tanaguru is an opensource (AGPL license) website assessment tool dedicated to
 
