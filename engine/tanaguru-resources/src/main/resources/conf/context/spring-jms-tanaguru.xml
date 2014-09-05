@@ -50,7 +50,7 @@
 
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="targetObject">
-            <ref local="auditCommandFactory"/>
+            <ref bean="auditCommandFactory"/>
         </property>
         <property name="targetMethod">
             <value>setTanaguruMsgOutService</value>
