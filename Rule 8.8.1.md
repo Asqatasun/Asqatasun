@@ -13,7 +13,7 @@ Test description :
 On each Web page, is each language change (lang and/or xml:lang
 attribute) valid?
 
-Level : [Argent](/en/category/rules-design/accessiweb-11/level/argent)
+Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 

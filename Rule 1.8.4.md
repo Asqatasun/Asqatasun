@@ -18,7 +18,7 @@ text](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#
 text](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTexteStyle)
 if possible. Does this rule have been followed?
 
-Level : [Argent](/en/category/rules-design/accessiweb-11/level/argent)
+Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 

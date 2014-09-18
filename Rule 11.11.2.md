@@ -14,7 +14,7 @@ Test description :
 For each form, for each input error, are examples for expected values
 suggested, when possible?
 
-Level : [Argent](/en/category/rules-design/accessiweb-11/level/argent)
+Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 

@@ -14,7 +14,7 @@ the ["site map"
 page](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mPlanSite)
 located at the same place in the presentation?
 
-Level : [Argent](/en/category/rules-design/accessiweb-11/level/argent)
+Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 

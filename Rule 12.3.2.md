@@ -15,7 +15,7 @@ do repeated navigation bars have a consistent presentation ([except in
 special
 cases](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#cpCrit12- "Special cases for criterion 12.3"))?
 
-Level : [Argent](/en/category/rules-design/accessiweb-11/level/argent)
+Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 

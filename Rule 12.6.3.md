@@ -14,7 +14,7 @@ the [search
 function](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mMoteurRecherche)
 always presented in the same relative order in the source code?
 
-Level : [Argent](/en/category/rules-design/accessiweb-11/level/argent)
+Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 

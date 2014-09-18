@@ -20,7 +20,7 @@ pass one of the conditions below?
 -   An explicit mechanism confirming deletion, via a form field or an
     additional step, is available
 
-Level : [Argent](/en/category/rules-design/accessiweb-11/level/argent)
+Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 

@@ -13,7 +13,7 @@ Test description : In each set of pages, is the ["site map"
 page](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mPlanSite)
 accessible from an identical functionality?
 
-Level : [Argent](/en/category/rules-design/accessiweb-11/level/argent)
+Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 

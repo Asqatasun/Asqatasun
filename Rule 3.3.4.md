@@ -22,7 +22,7 @@ cases](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php
 -   a mechanism allows the user to display text with a contrast ratio of
     at least 3:1
 
-Level : [Argent](/en/category/rules-design/accessiweb-11/level/argent)
+Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 

@@ -16,7 +16,7 @@ Is each
 related with a form field with the same function and that is repeated
 several times on a same Web page consistent?
 
-Level : [Argent](/en/category/rules-design/accessiweb-11/level/argent)
+Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 

@@ -14,7 +14,7 @@ Test description : Is each
 related with a form field with the same function and that is repeated
 several times in a set of pages consistent?
 
-Level : [Argent](/en/category/rules-design/accessiweb-11/level/argent)
+Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 

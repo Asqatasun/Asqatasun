@@ -15,7 +15,7 @@ background colour for an element that may contain text , via CSS
 declaration (background, background-color), at least, that is inherited
 from a parent?
 
-Level : [Argent](/en/category/rules-design/accessiweb-11/level/argent)
+Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 

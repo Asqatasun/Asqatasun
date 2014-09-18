@@ -14,7 +14,7 @@ colours (color), of an element that may contain text , accompanied by
 background colour declaration (background, background-color), at least,
 inherited from a parent?
 
-Level : [Argent](/en/category/rules-design/accessiweb-11/level/argent)
+Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 

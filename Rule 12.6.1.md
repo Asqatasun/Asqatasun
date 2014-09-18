@@ -13,7 +13,7 @@ Test description : In each set of pages, is the [search
 function](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mMoteurRecherche)
 accessible with an identical functionality?
 
-Level : [Argent](/en/category/rules-design/accessiweb-11/level/argent)
+Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 

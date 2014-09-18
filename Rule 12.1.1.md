@@ -26,7 +26,7 @@ cases](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php
     function](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mMoteurRecherche)
     and a site map are available
 
-Level : [Argent](/en/category/rules-design/accessiweb-11/level/argent)
+Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 

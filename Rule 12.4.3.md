@@ -12,7 +12,7 @@ Test :
 Test description : Do the links of the site map refer to the pages that
 are specified by the text?
 
-Level : [Argent](/en/category/rules-design/accessiweb-11/level/argent)
+Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 

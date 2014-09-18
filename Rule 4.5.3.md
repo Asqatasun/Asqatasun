@@ -26,7 +26,7 @@ cases](index.php/glossary-76.html#cpCrit4- "Special cases for criterion 4.5"))?
     transcript](index.php/glossary-76.html#mTranscriptTextuel) via a
     link or an anchor is available between <noembed\> and </noembed\>
 
-Level : [Argent](/en/category/rules-design/accessiweb-11/level/argent)
+Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 

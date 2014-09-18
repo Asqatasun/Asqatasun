@@ -34,7 +34,7 @@ cases](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php
     transcript](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTranscriptTextuel)
     that can be clearly identified
 
-Level : [Argent](/en/category/rules-design/accessiweb-11/level/argent)
+Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 

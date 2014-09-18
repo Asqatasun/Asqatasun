@@ -11,7 +11,7 @@ Test :
 
 Test description : Are the links of the site map functional?
 
-Level : [Argent](/en/category/rules-design/accessiweb-11/level/argent)
+Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 

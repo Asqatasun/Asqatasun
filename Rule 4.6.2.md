@@ -24,7 +24,7 @@ pass one of the conditions below?
     transcript](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTranscriptTextuel)
     is relevant
 
-Level : [Argent](/en/category/rules-design/accessiweb-11/level/argent)
+Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 
