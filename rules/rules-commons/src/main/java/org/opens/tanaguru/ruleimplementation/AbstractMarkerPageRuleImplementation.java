@@ -63,6 +63,12 @@ public abstract class AbstractMarkerPageRuleImplementation
         return selectionWithMarkerHandler;
     }
     
+    /** The elements not identified by the markers */
+    private ElementHandler<Element> selectionWithoutMarkerHandler = new ElementHandlerImpl();
+    public ElementHandler<Element> getSelectionWithoutMarkerHandler() {
+        return selectionWithoutMarkerHandler;
+    }
+    
     /** The marker code that identifies the targeted elements */
     private String markerCode;
     
@@ -106,6 +112,23 @@ public abstract class AbstractMarkerPageRuleImplementation
     public void setMarkerElementChecker(ElementChecker markerElementChecker) {
         this.markerElementChecker = markerElementChecker;
     }
+
+    /**
+     * Constructor
+     * 
+     * @param elementSelector
+     * @param markerCode
+     * @param inverseMarkerCode
+     * @param markerElementChecker 
+     * @param elementChecker
+     */
+    public AbstractMarkerPageRuleImplementation(
+            @Nonnull String markerCode,
+            @Nonnull String inverseMarkerCode) {
+        super();
+        this.markerCode = markerCode;
+        this.inverseMarkerCode = inverseMarkerCode;
+    }
     
     /**
      * Constructor
@@ -130,28 +153,11 @@ public abstract class AbstractMarkerPageRuleImplementation
         this.markerElementChecker = markerElementChecker;
     }
     
-    /**
-     * Constructor
-     * 
-     * @param elementSelector
-     * @param markerCode
-     * @param inverseMarkerCode
-     * @param markerElementChecker 
-     * @param elementChecker
-     */
-    public AbstractMarkerPageRuleImplementation(
-            @Nonnull String markerCode,
-            @Nonnull String inverseMarkerCode) {
-        super();
-        this.markerCode = markerCode;
-        this.inverseMarkerCode = inverseMarkerCode;
-    }
-
     @Override
     protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        elementSelector.selectElements(sspHandler, elementHandler);
+        elementSelector.selectElements(sspHandler, selectionWithoutMarkerHandler);
         extractMarkerListFromAuditParameter(sspHandler);
-        sortMarkerElements(elementHandler);
+        sortMarkerElements();
     }
 
     @Override
@@ -166,18 +172,19 @@ public abstract class AbstractMarkerPageRuleImplementation
                     selectionWithMarkerHandler, 
                     testSolutionHandler);
         }
-        if (!selectionHandler.isEmpty()) {
+        if (!selectionWithoutMarkerHandler.isEmpty()) {
             setServicesToChecker(elementChecker);
             elementChecker.check(
                     sspHandler, 
-                    selectionHandler, 
+                    selectionWithoutMarkerHandler, 
                     testSolutionHandler);
         }
     }
     
     @Override
     public int getSelectionSize() {
-        return get().size() + this.selectionWithMarkerHandler.get().size();
+        return this.selectionWithoutMarkerHandler.get().size() + 
+                this.selectionWithMarkerHandler.get().size();
     }
      
     /**
@@ -219,12 +226,12 @@ public abstract class AbstractMarkerPageRuleImplementation
      * 
      * @param nodeList 
      */
-    private void sortMarkerElements(ElementHandler<Element> elementHandler) {
+    private void sortMarkerElements() {
         if ((CollectionUtils.isEmpty(markerList) && CollectionUtils.isEmpty(inverseMarkerList)) 
-                || elementHandler.isEmpty()) {
+                || selectionWithoutMarkerHandler.isEmpty()) {
             return;
         }
-        Iterator<Element> iter = elementHandler.get().iterator();
+        Iterator<Element> iter = selectionWithoutMarkerHandler.get().iterator();
         Element el;
         while (iter.hasNext()) {
             el = iter.next();

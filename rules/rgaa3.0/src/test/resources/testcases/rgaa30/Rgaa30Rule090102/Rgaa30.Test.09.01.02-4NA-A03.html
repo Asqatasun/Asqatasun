@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>Rgaa30 Test.09.01.02 NA A03</title>
+    </head>
+    <body>
+        <div>
+
+            <div role="heading" aria-level="0">Rgaa30 Test.09.01.02 NA A03</div>
+
+            <p class="test-detail">
+                <span lang="fr">
+                    Test 09.01.02 : Dans chaque page Web, la hiérarchie entre les titres (balises h) est-elle pertinente ?
+                </span>
+            </p>
+
+            <div class="testcase">
+                <div role="heading" aria-level="-1"></div>
+                <div role="heading" aria-level=""></div>
+                <div role="heading" aria-level="anyText"></div>
+            </div>
+
+            <p class="test-explanation">
+                NA : No &lt;h&gt; or tag with full heading semantic in the page. The role="heading" is not set. 
+                Moreover, if the role="heading" is not set, the semantic is lost.
+            </p>
+
+        </div>
+    </body>
+</html>

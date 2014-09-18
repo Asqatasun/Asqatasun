@@ -257,7 +257,7 @@ public class ElementPresenceChecker extends ElementCheckerImpl {
         TestSolution checkResult = notDetectedSolution;
 
         if (!elements.isEmpty() && ((!checkUnicity)||(checkUnicity && elements.size() == 1))) {
-
+            
             checkResult = detectedSolution;
 
             if (StringUtils.isNotBlank(messageCodeOnElementDetected)) {
