@@ -44,7 +44,7 @@ None
 
 #### Analysis
 
-returns **NMI** in all cases
+**Not Tested**
 
 ### Notes
 
