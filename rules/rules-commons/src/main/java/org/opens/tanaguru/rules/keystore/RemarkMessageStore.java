@@ -34,6 +34,8 @@ public final class RemarkMessageStore {
             "NoPatternDetected";
     public static final String TITLE_ATTR_MISSING_MSG = "TitleAttributeMissing";
     public static final String ID_MISSING_MSG = "IdMissing";
+    public static final String ARIA_LABELLEDBY_MISSING_MSG = "AriaLabelledbyMissing";
+    public static final String FOR_MISSING_MSG = "ForMissing";
     public static final String ID_NOT_UNIQUE_MSG = "IdNotUnique";
 
     // doctype
@@ -46,6 +48,8 @@ public final class RemarkMessageStore {
     public static final String ALT_MISSING_MSG = "AltMissing";
     public static final String DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG =
             "DecorativeElementWithNotEmptyAltAttribute";
+    public static final String DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_OR_TITLE_MSG =
+            "DecorativeElementWithNotEmptyAltAttributeOrTitlePresence";
     public static final String CHECK_ALTERNATIVE_OF_DECORATIVE_ELEMENT_MSG =
             "CheckAlternativeOfDecorativeElement";
     public static final String CHECK_NATURE_AND_ALTERNATIVE_OF_ELEMENT_MSG =
@@ -109,6 +113,8 @@ public final class RemarkMessageStore {
             "CheckLabelPertinence";
     public static final String FORM_ELEMENT_WITHOUT_LABEL_MSG = 
             "FormElementWithoutLabel";
+    public static final String FORM_ELEMENT_WITH_NOT_UNIQUE_LABEL_MSG = 
+            "FormElementWithNotUniqueLabel";
     public static final String CHECK_TITLE_OF_FORM_ELEMENT_MSG = 
             "CheckTitleOfFormElement";
     public static final String NOT_PERTINENT_OPTGROUP_LABEL_MSG = 
@@ -119,6 +125,7 @@ public final class RemarkMessageStore {
             "FormElementWithoutIdentifier";
     public static final String INVALID_FORM_FIELD_MSG = "InvalidFormField";
     public static final String INVALID_LABEL_MSG = "InvalidLabel";
+    public static final String INVALID_INPUT_MSG = "InvalidInput";
     
     // table
     public static final String SUMMARY_MISSING_MSG = "SummaryMissing";
@@ -167,6 +174,8 @@ public final class RemarkMessageStore {
             "CheckLinearisedContent";
     public static final String PRESENTATION_TABLE_WITH_FORBIDDEN_MARKUP_MSG =
             "PresentationTableWithForbiddenMarkup";
+    public static final String PRESENTATION_TABLE_WITHOUT_ARIA_MARKUP_MSG =
+            "PresentationTableWithoutAriaMarkup";
     public static final String CHECK_TABLE_IS_DATA_TABLE_MSG =
             "CheckTableIsDataTable";
     public static final String CHECK_TABLE_IS_PRESENTATION_TABLE_MSG =
