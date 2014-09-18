@@ -47,4 +47,4 @@ None
 
 ### Notes
 
-No notes yet for that rule
+
