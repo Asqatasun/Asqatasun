@@ -14,8 +14,8 @@ Test description :
 Does each embedded image (embed tag with type="image/..." attribute)
 that does not convey information, pass one of the conditions below?
 
--   The noembed element is not on the page
--   The noembed element does not contain any image description
+* The noembed element is not on the page
+* The noembed element does not contain any image description
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
