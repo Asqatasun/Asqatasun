@@ -7,7 +7,7 @@ decorative image is empty.
 
 Criterion : 1.2
 
-Test : [1.2.1](http://www.braillenet.org/accessibilite/referentiel-aw21/liste-deploye.php#test-1-2-1)
+Test : (http://www.braillenet.org/accessibilite/referentiel-aw21/liste-deploye.php#test-1-2-1)[1.2.1]
 
 Test description :
 
