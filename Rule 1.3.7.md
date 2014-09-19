@@ -1,6 +1,6 @@
 ### Summary
 
-Empty rule
+No-check rule
 
 ### Business description
 
@@ -40,7 +40,7 @@ None
 
 #### Analysis
 
-return **NMI** in all cases
+**Not Tested**
 
 ### Notes
 
