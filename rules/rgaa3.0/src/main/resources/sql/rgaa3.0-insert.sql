@@ -362,8 +362,6 @@ INSERT IGNORE INTO `TEST` (`Cd_Test`, `Description`, `Label`, `Rank`, `Weight`, 
 ('Rgaa30-10-1-2', '', '10.1.2', 190, '1.0', 'rgaa30', 'org.opens.tanaguru.rules.rgaa30.Rgaa30Rule100102', NULL, 1, 1, '', b'1'),
 ('Rgaa30-10-1-3', '', '10.1.3', 191, '1.0', 'rgaa30', 'org.opens.tanaguru.rules.rgaa30.Rgaa30Rule100103', NULL, 1, 1, '', b'1'),
 ('Rgaa30-10-2-1', '', '10.2.1', 192, '1.0', 'rgaa30', 'org.opens.tanaguru.rules.rgaa30.Rgaa30Rule100201', NULL, 1, 1, '', b'1'),
-('Rgaa30-10-2-2', '', '10.2.2', 193, '1.0', 'rgaa30', 'org.opens.tanaguru.rules.rgaa30.Rgaa30Rule100202', NULL, 1, 1, '', b'1'),
-('Rgaa30-10-2-3', '', '10.2.3', 194, '1.0', 'rgaa30', 'org.opens.tanaguru.rules.rgaa30.Rgaa30Rule100203', NULL, 1, 1, '', b'1'),
 ('Rgaa30-10-3-1', '', '10.3.1', 195, '1.0', 'rgaa30', 'org.opens.tanaguru.rules.rgaa30.Rgaa30Rule100301', NULL, 1, 1, '', b'1'),
 ('Rgaa30-10-4-1', '', '10.4.1', 196, '1.0', 'rgaa30', 'org.opens.tanaguru.rules.rgaa30.Rgaa30Rule100401', NULL, 2, 1, '', b'1'),
 ('Rgaa30-10-4-2', '', '10.4.2', 197, '1.0', 'rgaa30', 'org.opens.tanaguru.rules.rgaa30.Rgaa30Rule100402', NULL, 2, 1, '', b'1'),
@@ -676,6 +674,7 @@ Cd_Test='Rgaa30-6-4-1' OR
 Cd_Test='Rgaa30-6-4-2' OR 
 Cd_Test='Rgaa30-6-4-3' OR 
 Cd_Test='Rgaa30-6-4-4' OR 
+Cd_Test='Rgaa30-6-5-1' OR 
 Cd_Test='Rgaa30-8-1-1' OR 
 Cd_Test='Rgaa30-8-1-2' OR 
 Cd_Test='Rgaa30-8-1-3' OR 
@@ -726,8 +725,17 @@ Cd_Test='Rgaa30-13-6-1' OR
 Cd_Test='Rgaa30-13-6-2' OR 
 Cd_Test='Rgaa30-13-6-3' OR 
 Cd_Test='Rgaa30-13-15-4' OR 
-Cd_Test='Rgaa30-13-16-4';
+Cd_Test='Rgaa30-13-16-4' OR
 
+-- AW22 modified without impact
+Cd_Test='Rgaa30-13-1-2' OR 
+Cd_Test='Rgaa30-13-7-1' OR 
+
+-- AW22 modified scope
+Cd_Test='Rgaa30-13-2-2' OR 
+
+-- AW22 Renumerotation
+Cd_Test='Rgaa30-11-14-4';  -- was 11-14-2
 
 -- AW22 modified
 -- Cd_Test='Rgaa30-1-1-4' OR 
@@ -787,9 +795,7 @@ Cd_Test='Rgaa30-13-16-4';
 -- Cd_Test='Rgaa30-11-10-3' OR 
 -- Cd_Test='Rgaa30-11-14-1' OR 
 -- Cd_Test='Rgaa30-11-14-2' OR 
--- Cd_Test='Rgaa30-13-1-2' OR 
--- Cd_Test='Rgaa30-13-2-2' OR 
--- Cd_Test='Rgaa30-13-7-1' OR 
+
 
 
 -- Disappeared between AW22 and RGAA3
@@ -800,7 +806,6 @@ Cd_Test='Rgaa30-13-16-4';
 -- Cd_Test='Rgaa30-4-5-3' OR 
 -- Cd_Test='Rgaa30-4-13-3' OR 
 -- Cd_Test='Rgaa30-5-2-2' OR 
--- Cd_Test='Rgaa30-6-5-1' OR 
 -- Cd_Test='Rgaa30-6-5-2' OR 
 -- Cd_Test='Rgaa30-6-5-3' OR 
 -- Cd_Test='Rgaa30-6-6-1' OR 
