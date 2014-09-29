@@ -59,7 +59,7 @@ public class Rgaa30Rule100701 extends AbstractPageRuleFromPreProcessImplementati
      * For these elements, the extraction is not trusted, the default value
      * depends on the browser and may be confusable
      */
-    private static String[] FOCUSABLE_EXCLUDED_LIST = 
+    private static final String[] FOCUSABLE_EXCLUDED_LIST = 
             {HtmlElementStore.INPUT_ELEMENT, 
              HtmlElementStore.BUTTON_ELEMENT, 
              HtmlElementStore.TEXTAREA_ELEMENT, 
@@ -130,10 +130,7 @@ public class Rgaa30Rule100701 extends AbstractPageRuleFromPreProcessImplementati
         if (StringUtils.equalsIgnoreCase(element.getBgColor(),element.getOutlineColor())) {
             return false;
         }
-        if (element.getOutlineWidthValue() == 0) {
-            return false;
-        }
-        return true;
+        return element.getOutlineWidthValue() != 0;
     }
 
     @Override

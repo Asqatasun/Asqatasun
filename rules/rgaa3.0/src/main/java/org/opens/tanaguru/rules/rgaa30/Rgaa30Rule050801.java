@@ -50,13 +50,13 @@ public class Rgaa30Rule050801 extends AbstractMarkerPageRuleImplementation {
      * Tables not identified as presentation table that does not contain
      * data table markup
      */
-    private ElementHandler notIdentifiedTableWithoutDataTableMarkup = 
+    private final ElementHandler notIdentifiedTableWithoutDataTableMarkup = 
             new ElementHandlerImpl();
     /** 
      * Tables identified as presentation table that does not contain
      * data table markup
      */
-    private ElementHandler presentationTableWithoutDataTableMarkup = 
+    private final ElementHandler presentationTableWithoutDataTableMarkup = 
             new ElementHandlerImpl();
     
     /** The local element counter */

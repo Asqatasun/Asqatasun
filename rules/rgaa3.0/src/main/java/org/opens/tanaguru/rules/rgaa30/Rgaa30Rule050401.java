@@ -53,8 +53,7 @@ public class Rgaa30Rule050401 extends AbstractMarkerPageRuleImplementation {
                 // checker for elements identified by marker
                 new ChildElementPresenceChecker(
                     HtmlElementStore.CAPTION_ELEMENT, 
-                    // the child element is supposed to appear at least once
-                    Integer.valueOf(1),
+                    1,
                     // passed when child element is found
                     TestSolution.PASSED, 
                     // failed when child element is not found
@@ -68,7 +67,7 @@ public class Rgaa30Rule050401 extends AbstractMarkerPageRuleImplementation {
                 new ChildElementPresenceChecker(
                     HtmlElementStore.CAPTION_ELEMENT, 
                     // the child element is supposed to appear at least once
-                    Integer.valueOf(1),
+                    1,
                     // nmi when attribute is found
                     TestSolution.NEED_MORE_INFO, 
                     // nmi when attribute is not found

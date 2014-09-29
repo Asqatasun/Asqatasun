@@ -19,7 +19,6 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Nomenclature;
 import org.opens.tanaguru.processor.SSPHandler;

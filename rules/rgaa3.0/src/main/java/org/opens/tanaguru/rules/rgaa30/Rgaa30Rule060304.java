@@ -58,7 +58,7 @@ public class Rgaa30Rule060304 extends AbstractLinkRuleImplementation {
     private static final String LINK_TEXT_BL_NOM_NAME = "LinkTextBlacklist";
     
     /* the checker of link title pertinence*/
-    private ElementChecker titlePertinenceElementChecker = 
+    private final ElementChecker titlePertinenceElementChecker = 
             new TextPertinenceChecker(
                 new TextAttributeOfElementBuilder(TITLE_ATTR),
                 // no emptiness check
@@ -75,7 +75,7 @@ public class Rgaa30Rule060304 extends AbstractLinkRuleImplementation {
                 TEXT_ELEMENT2,
                 TITLE_ATTR);
     /* local collection of process remarks*/
-    private Collection<ProcessRemark> remarks = new ArrayList<ProcessRemark>();
+    private final Collection<ProcessRemark> remarks = new ArrayList();
     /* local instance of ProcessRemarkService*/
     ProcessRemarkService  prs;
     

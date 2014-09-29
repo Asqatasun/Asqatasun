@@ -45,8 +45,7 @@ public class Rgaa30Rule110601 extends AbstractPageRuleWithSelectorAndCheckerImpl
                 
                 new ChildElementPresenceChecker(
                     LEGEND_ELEMENT, 
-                    // one legend element is expected
-                    Integer.valueOf(1),
+                    1,
                     // passed when a child element is found
                     TestSolution.PASSED,    
                     // failed when no child element is found

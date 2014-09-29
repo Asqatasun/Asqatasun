@@ -45,9 +45,9 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.LANG_ATTRIBUT
 public class Rgaa30Rule080301 extends AbstractPageRuleMarkupImplementation {
 
     /** the elements with a lang attribute */
-    private ElementHandler elementWithLang = new ElementHandlerImpl();
+    private final ElementHandler elementWithLang = new ElementHandlerImpl();
     /** the elements without lang attribute */
-    private ElementHandler elementWithoutLang = new ElementHandlerImpl();
+    private final ElementHandler elementWithoutLang = new ElementHandlerImpl();
     
     /**
      * Default constructor

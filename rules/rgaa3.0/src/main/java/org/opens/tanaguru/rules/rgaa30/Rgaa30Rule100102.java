@@ -51,8 +51,7 @@ public class Rgaa30Rule100102 extends AbstractPageRuleMarkupImplementation {
     private static final String PRESENTATION_ATTR_NOM = 
                 "DeprecatedRepresentationAttributes";
     
-    private Map<String, ElementHandler> attrElementHandlerMap = 
-            new HashMap<String, ElementHandler>();
+    private final Map<String, ElementHandler> attrElementHandlerMap = new HashMap();
     /* the total number of elements */
     int totalNumberOfElements = 0;
     
