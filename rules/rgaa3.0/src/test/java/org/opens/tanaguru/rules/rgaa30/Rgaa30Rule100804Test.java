@@ -52,9 +52,6 @@ public class Rgaa30Rule100804Test extends Rgaa30RuleImplementationTestCase {
         getWebResourceMap().put("Rgaa30.Test.10.08.04-3NMI-01",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "rgaa30/Rgaa30Rule100804/Rgaa30.Test.10.08.04-3NMI-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.08.04-3NMI-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100804/Rgaa30.Test.10.08.04-3NMI-02.html"));
         getWebResourceMap().put("Rgaa30.Test.10.08.04-3NMI-03",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "rgaa30/Rgaa30Rule100804/Rgaa30.Test.10.08.04-3NMI-03.html"));
@@ -79,24 +76,6 @@ public class Rgaa30Rule100804Test extends Rgaa30RuleImplementationTestCase {
         assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
         assertEquals(RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG, processRemark.getMessageCode());
         assertEquals(HtmlElementStore.EMBED_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
-        
-        
-        //----------------------------------------------------------------------
-        //------------------------------3NMI-02---------------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.08.04-3NMI-02");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.APPLET_ELEMENT, processRemark.getTarget());
         // check number of evidence elements and their value
         assertNull(processRemark.getElementList());
         
@@ -135,8 +114,6 @@ public class Rgaa30Rule100804Test extends Rgaa30RuleImplementationTestCase {
     protected void setConsolidate() {
         assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("Rgaa30.Test.10.08.04-3NMI-01").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.10.08.04-3NMI-02").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("Rgaa30.Test.10.08.04-3NMI-03").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,

@@ -40,7 +40,7 @@ public class Rgaa30Rule100804 extends AbstractDetectionPageRuleImplementation {
      */
     public Rgaa30Rule100804 () {
         super(
-                new MultipleElementSelector(OBJECT_ELEMENT, APPLET_ELEMENT, EMBED_ELEMENT),
+                new MultipleElementSelector(OBJECT_ELEMENT, EMBED_ELEMENT),
                 // solution when at least one element is found
                 TestSolution.NEED_MORE_INFO,
                 // solution when no element is found

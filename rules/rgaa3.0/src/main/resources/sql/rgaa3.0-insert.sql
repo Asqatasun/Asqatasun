@@ -728,10 +728,14 @@ Cd_Test='Rgaa30-13-15-4' OR
 Cd_Test='Rgaa30-13-16-4' OR
 
 -- AW22 modified without impact
+Cd_Test='Rgaa30-11-9-1' OR 
+Cd_Test='Rgaa30-11-14-1' OR 
 Cd_Test='Rgaa30-13-1-2' OR 
 Cd_Test='Rgaa30-13-7-1' OR 
 
 -- AW22 modified scope
+Cd_Test='Rgaa30-10-8-3' OR 
+Cd_Test='Rgaa30-10-8-4' OR 
 Cd_Test='Rgaa30-13-2-2' OR 
 
 -- AW22 Renumerotation
@@ -781,8 +785,6 @@ Cd_Test='Rgaa30-11-14-4';  -- was 11-14-2
 -- Cd_Test='Rgaa30-9-1-1' OR 
 -- Cd_Test='Rgaa30-9-1-2' OR 
 -- Cd_Test='Rgaa30-9-1-4' OR 
--- Cd_Test='Rgaa30-10-8-3' OR 
--- Cd_Test='Rgaa30-10-8-4' OR 
 -- Cd_Test='Rgaa30-10-13-1' OR 
 -- Cd_Test='Rgaa30-11-1-1' OR 
 -- Cd_Test='Rgaa30-11-1-2' OR 
