@@ -28,8 +28,7 @@ Decision level :
 
 #### Selection
 
-Set1 : All the <a\> tags with a "href" attribute, with children (
-a[href]:has(\*) )
+Set1 : All the `a` tags with a `href` attribute, with children (a[href]:has(\*) )
 
 Set2 : All the elements of Set1 with own text or with more than 1 child
 or with only one child not of type img or object (where "img ,
