@@ -2,7 +2,7 @@
 
 This test consists in checking whether each audio sequence played
 automatically and defined with an `object`, an `embed`, an `applet`
-or a <bgdound\> tag can be stopped by the user or the volume can be
+or a `bgdound` tag can be stopped by the user or the volume can be
 shutdowned
 
 ### Business description
@@ -35,7 +35,7 @@ Decision level :
 
 #### Selection
 
-Selection1 : All the <embed\>, <object\>, <applet\> and <bgsound\> tags
+Selection1 : All the `embed`, `object`, `applet` and `bgsound` tags
 (embed, object, bgsound, applet)
 
 #### Process
@@ -55,8 +55,8 @@ For each occurence of the Selection1 raise a MessageA
 
 ##### NA
 
-Selection is empty (The page has neither <object\>, nor <applet\>, nor
-<bgsound\>, nor <embed\> tag)
+Selection is empty (The page has neither `object`, nor `applet`, nor
+`bgsound`, nor `embed` tag)
 
 ##### NMI
 
