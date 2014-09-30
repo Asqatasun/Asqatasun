@@ -30,13 +30,13 @@ Decision level :
 
 **Set1 (table tags identified as data table from html markers)**
 
-All the <table\> tags with an "id" attribute or a "class" attribute or a
+All the `table` tags with an "id" attribute or a "class" attribute or a
 "role" attribute that matches one of the values set by the user through
 the "DATA\_TABLE\_MARKER" parameter.
 
 **Set2 (table tags not identified as data table from html markers)**
 
-All the <table\> tags without an "id" attribute or a "class" attribute
+All the `table` tags without an "id" attribute or a "class" attribute
 equal to the value of the "DATA\_TABLE\_MARKER" parameter or the
 "PRESENTATION\_TABLE\_MARKER" parameter associated with the audit. That
 means select all the table tags of the page when the parameter is empty.
@@ -70,7 +70,7 @@ For each occurence of Set2, raise a MessageB
 **NA : \
 **
 
-Set1 AND Set2 are empty (The page has no <table\> tag or only tables
+Set1 AND Set2 are empty (The page has no `table` tag or only tables
 identified as presentation table)
 
 **NMI : \

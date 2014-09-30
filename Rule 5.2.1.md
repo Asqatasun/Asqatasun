@@ -33,13 +33,13 @@ Decision level :
 
 **Set1 (table tags identified as data table from html markers)**
 
-All the <table\> tags with an "id" attribute or a "class" attribute or a
+All the `table` tags with an "id" attribute or a "class" attribute or a
 "role" attribute that matches one of the values set by the user through
 the "DATA\_TABLE\_MARKER" parameter AND a "summary" attribute.
 
 **Set2 (table tags not identified as data table from html markers)**
 
-All the <table\> tags that don't have an "id" attribute or a "class"
+All the `table` tags that don't have an "id" attribute or a "class"
 attribute or a "role" attribute that matches one the values set by the
 use through the "PRESENTATION\_TABLE\_MARKER" parameter or the
 "DATA\_TABLE\_MARKER" parameter AND a "summary" attribute. That means

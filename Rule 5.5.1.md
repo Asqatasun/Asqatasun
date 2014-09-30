@@ -33,14 +33,14 @@ Decision level :
 **Set1 (table tags identified as data table from html markers) : \
 **
 
-All the <table\> tags with an "id" attribute or a "class" attribute or a
+All the `table` tags with an "id" attribute or a "class" attribute or a
 "role" attribute that matches one of the values set by the user through
 the "DATA\_TABLE\_MARKER" parameter AND with a <caption\> child tag.
 
 **Set2 (table tags not identified as data table from html markers) :\
 **
 
-All the <table\> tags that don't have an "id" attribute or a "class"
+All the `table` tags that don't have an "id" attribute or a "class"
 attribute or a "role" attribute that matches one the values set by the
 use through the "PRESENTATION\_TABLE\_MARKER" parameter or the
 "DATA\_TABLE\_MARKER" parameter AND with a <caption\> child tag. That
@@ -134,7 +134,7 @@ identified as data table has a not pertinent caption)**\
 **NA : \
 **
 
-Set1 AND Set2 are empty (the page has no <table\> tag or only table
+Set1 AND Set2 are empty (the page has no `table` tag or only table
 identified as presentation table)
 
 **NMI :**
