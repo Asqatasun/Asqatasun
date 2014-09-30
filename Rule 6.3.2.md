@@ -14,7 +14,7 @@ Test description :
 
 Is each text for an [image
 link](http://accessiweb.org/index.php/glossary-76.html#mLienImage)
-(content of the alt attribute or content between <object\></object\>)
+(content of the alt attribute or content between `object`</object\>)
 [explicit out of
 context](http://accessiweb.org/index.php/glossary-76.html#mLienHorsContexte)
 ([except in special

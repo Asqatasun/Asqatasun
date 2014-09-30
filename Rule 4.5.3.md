@@ -1,7 +1,7 @@
 ### Summary
 
 This test consists in checking whether each synchronised or audio-only
-time-based media defined with an <object\> or an <embed\> tag has a
+time-based media defined with an `object` or an `embed` tag has a
 well-defined text transcript when it is required.
 
 ### Business description
@@ -14,14 +14,14 @@ Test description :
 
 Does each synchronised or audio-only [time-based
 media](index.php/glossary-76.html#mMediaTemp) that is embedded via
-<object\> or <embed\> and that requires a [text
+`object` or `embed` and that requires a [text
 transcript](index.php/glossary-76.html#mTranscriptTextuel) pass one of
 the conditions below ([except in special
 cases](index.php/glossary-76.html#cpCrit4- "Special cases for criterion 4.5"))?
 
 -   A reference to the [text
     transcript](index.php/glossary-76.html#mTranscriptTextuel) via a
-    link or an anchor is available between <object\> and </object\>
+    link or an anchor is available between `object` and </object\>
 -   A reference to the [text
     transcript](index.php/glossary-76.html#mTranscriptTextuel) via a
     link or an anchor is available between <noembed\> and </noembed\>
@@ -39,7 +39,7 @@ Decision level :
 
 #### Selection
 
-Selection1 : All the <embed\> and <object\> tags (embed, object)
+Selection1 : All the `embed` and `object` tags (embed, object)
 
 #### Process
 
@@ -58,7 +58,7 @@ For each occurence of the Selection1 raise a MessageA
 
 ##### NA
 
-Selection is empty (The page has neither <object\> nor <embed\> tag)
+Selection is empty (The page has neither `object` nor `embed` tag)
 
 ##### NMI
 

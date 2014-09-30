@@ -30,7 +30,7 @@ Decision level :
 
 #### Selection
 
-All the <applet\> tags of the page
+All the `applet` tags of the page
 
 #### Process
 
@@ -40,7 +40,7 @@ The selection handles the process
 
 ##### NA
 
-The selection is empty (The page has no <applet\> tag)
+The selection is empty (The page has no `applet` tag)
 
 ##### NMI
 

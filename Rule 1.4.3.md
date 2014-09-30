@@ -31,7 +31,7 @@ Decision level :
 
 #### Selection
 
-All the <applet\> tags with a "alt" attribute
+All the `applet` tags with a "alt" attribute
 
 #### Process
 
@@ -41,7 +41,7 @@ The selection handles the process
 
 ##### NA
 
-Selection is empty (The page has no <applet\> tag with a "alt"
+Selection is empty (The page has no `applet` tag with a "alt"
 attribute)
 
 ##### NMI

@@ -38,7 +38,7 @@ Decision level :
 
 #### Selection
 
-Selection1 : All the <embed\>, <applet\> and <object\> tags (embed,
+Selection1 : All the `embed`, `applet` and `object` tags (embed,
 applet, object)
 
 #### Process
@@ -58,8 +58,8 @@ For each occurence of the Selection1 raise a MessageA
 
 ##### NA
 
-Selection is empty (The page has neither <object\>, nor <applet\> nor
-<embed\> tag)
+Selection is empty (The page has neither `object`, nor `applet` nor
+`embed` tag)
 
 ##### NMI
 

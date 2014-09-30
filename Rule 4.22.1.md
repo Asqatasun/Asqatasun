@@ -1,8 +1,8 @@
 ### Summary
 
 This test consists in checking whether each time-based media and each
-non time-based media defined with an <object\>, an <embed\> or an
-<applet\> tag is supported by assistive technologies
+non time-based media defined with an `object`, an `embed` or an
+`applet` tag is supported by assistive technologies
 
 ### Business description
 
@@ -37,7 +37,7 @@ Decision level :
 
 #### Selection
 
-Selection1 : All the <embed\>, <applet\> and <object\> tags (embed,
+Selection1 : All the `embed`, `applet` and `object` tags (embed,
 applet, object)
 
 #### Process
@@ -57,8 +57,8 @@ For each occurence of the Selection1 raise a MessageA
 
 ##### NA
 
-Selection is empty (The page has neither <object\>, nor <applet\> nor
-<embed\> tag)
+Selection is empty (The page has neither `object`, nor `applet` nor
+`embed` tag)
 
 ##### NMI
 

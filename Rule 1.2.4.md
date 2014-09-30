@@ -16,7 +16,7 @@ image](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php
 (object tag with the attribute type="image/...") that does not convey
 information, is the [text
 alternative](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mAltTexteImg)
-between <object\> and </object\> empty?
+between `object` and </object\> empty?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
@@ -31,7 +31,7 @@ Decision level :
 
 #### Selection
 
-All the <object\> tags with a "type" attribute that starts with
+All the `object` tags with a "type" attribute that starts with
 "image/..."
 
 #### Process
@@ -42,7 +42,7 @@ The selection handles the process
 
 ##### NA
 
-Selection is empty (The page has no <object\> tag with a "type"
+Selection is empty (The page has no `object` tag with a "type"
 attribute that starts with "image/...")
 
 ##### NMI

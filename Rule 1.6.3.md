@@ -20,7 +20,7 @@ pass one of the conditions below?
 -   An alt attribute containing the reference to a [detailed
     description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee)
     just next to the image is available
--   Between <applet\> and </applet\> there is a reference to a [detailed
+-   Between `applet` and </applet\> there is a reference to a [detailed
     description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee)
     available on the page
 -   An [adjacent
@@ -44,7 +44,7 @@ Decision level :
 
 #### Selection
 
-All the <applet\> tags
+All the `applet` tags
 
 #### Process
 
@@ -54,7 +54,7 @@ The selection handles the process
 
 ##### NA
 
-Selection is empty (The page has no <applet\> tag)
+Selection is empty (The page has no `applet` tag)
 
 ##### NMI
 

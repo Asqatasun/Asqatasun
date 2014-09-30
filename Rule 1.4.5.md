@@ -21,7 +21,7 @@ and with a [text
 alternative](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mAltTexteImg),
 does the [text
 alternative](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mAltTexteImg)
-between <object\> and </object\> allow to identify the kind and the
+between `object` and </object\> allow to identify the kind and the
 purpose of the image?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
@@ -37,7 +37,7 @@ Decision level :
 
 #### Selection
 
-All the <object\> tags with a "type" attribute that starts with
+All the `object` tags with a "type" attribute that starts with
 "image/..."
 
 #### Process
@@ -48,7 +48,7 @@ The selection handles the process
 
 ##### NA
 
-Selection is empty (The page has no <object\> tag with a "type"
+Selection is empty (The page has no `object` tag with a "type"
 attribute that starts with "image/...")
 
 ##### NMI

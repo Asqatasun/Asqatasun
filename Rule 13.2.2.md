@@ -1,7 +1,7 @@
 ### Summary
 
 This test consists in checking whether the user is warned when he's
-about to open a new window via an <applet\>, an <object\> or an <embed\>
+about to open a new window via an `applet`, an `object` or an `embed`
 tag
 
 ### Business description
@@ -28,7 +28,7 @@ Decision level :
 
 #### Selection
 
-Set1 : All the <embed\>, <applet\> and <object\> tags (embed, applet,
+Set1 : All the `embed`, `applet` and `object` tags (embed, applet,
 object)
 
 #### Process
@@ -48,8 +48,8 @@ For each occurence of the Set1 raise a MessageA
 
 ##### NA
 
-Selection is empty (The page has neither <object\>, nor <applet\> nor
-<embed\> tag)
+Selection is empty (The page has neither `object`, nor `applet` nor
+`embed` tag)
 
 ##### NMI
 

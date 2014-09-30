@@ -13,7 +13,7 @@ Test description :
 
 Does each [image
 link](http://accessiweb.org/index.php/glossary-76.html#mLienImage)
-(content of the alt attribute or text between <object\> and </object\>)
+(content of the alt attribute or text between `object` and </object\>)
 pass one of the conditions below (except in [special
 cases](http://accessiweb.org/index.php/glossary-76.html#cpCrit6- "Special cases for criterion 6.1"))?
 

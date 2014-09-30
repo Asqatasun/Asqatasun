@@ -1,7 +1,7 @@
 ### Summary
 
 This test consists in checking whether the font color of each text of an
-<object\>, <applet\> or <embed\> tag can be controlled by the user
+`object`, `applet` or `embed` tag can be controlled by the user
 
 ### Business description
 
@@ -27,7 +27,7 @@ Decision level :
 
 #### Selection
 
-Selection1 : All the <embed\>, <applet\> and <object\> tags (embed,
+Selection1 : All the `embed`, `applet` and `object` tags (embed,
 applet, object)
 
 #### Process
@@ -47,8 +47,8 @@ For each occurence of the Selection1 raise a MessageA
 
 ##### NA
 
-Selection is empty (The page has neither <object\>, nor <applet\> nor
-<embed\> tag)
+Selection is empty (The page has neither `object`, nor `applet` nor
+`embed` tag)
 
 ##### NMI
 

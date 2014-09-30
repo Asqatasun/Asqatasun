@@ -1,7 +1,7 @@
 ### Summary
 
 This test consists in checking whether the background color of each text
-of an <object\>, <applet\> or <embed\> tag can be controlled by the user
+of an `object`, `applet` or `embed` tag can be controlled by the user
 
 ### Business description
 
@@ -27,7 +27,7 @@ Decision level :
 
 #### Selection
 
-Selection1 : All the <embed\>, <applet\> and <object\> tags (embed,
+Selection1 : All the `embed`, `applet` and `object` tags (embed,
 applet, object)
 
 #### Process
@@ -41,8 +41,8 @@ raise a MessageA MessageA : Check Manually the elements code
 
 ##### NA
 
-Selection is empty (The page has neither <object\>, nor <applet\> nor
-<embed\> tag)
+Selection is empty (The page has neither `object`, nor `applet` nor
+`embed` tag)
 
 ##### NMI
 

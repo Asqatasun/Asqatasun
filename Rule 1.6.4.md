@@ -41,7 +41,7 @@ Decision level :
 
 #### Selection
 
-All the <embed\> tags
+All the `embed` tags
 
 #### Process
 
@@ -51,7 +51,7 @@ The selection handles the process
 
 ##### NA
 
-Selection is empty (The page has no <embed\> tag)
+Selection is empty (The page has no `embed` tag)
 
 ##### NMI
 

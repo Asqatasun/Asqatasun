@@ -16,7 +16,7 @@ attribute type="image/..."), that requires a [detailed
 description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee),
 pass one of the conditions below?
 
--   Between <object\> and </object\> there is a reference to a [detailed
+-   Between `object` and </object\> there is a reference to a [detailed
     description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee)
     available on the page
 -   An [adjacent
@@ -40,7 +40,7 @@ Decision level :
 
 #### Selection
 
-All the <object\> tags with a "type" attribute that starts with
+All the `object` tags with a "type" attribute that starts with
 "image/..."
 
 #### Process
@@ -51,7 +51,7 @@ The selection handles the process
 
 ##### NA
 
-Selection is empty (The page has no <object\> tag with a "type"
+Selection is empty (The page has no `object` tag with a "type"
 attribute that starts with "image/...")
 
 ##### NMI

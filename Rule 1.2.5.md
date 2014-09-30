@@ -30,7 +30,7 @@ Decision level :
 
 #### Selection
 
-All the <embed\> tags with a "type" attribute that starts with
+All the `embed` tags with a "type" attribute that starts with
 "image/..."
 
 #### Process
@@ -41,7 +41,7 @@ The selection handles the process
 
 ##### NA
 
-Selection is empty (The page has no <embed\> tag with a "type" attribute
+Selection is empty (The page has no `embed` tag with a "type" attribute
 that starts with "image/...")
 
 ##### NMI
