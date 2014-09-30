@@ -31,13 +31,13 @@ Decision level :
 
 **Selection1:**
 
-All the html elements that can grab the focus and not of type <input\>,
-<button\>, <iframe\>, <textarea\> and <select\>
+All the html elements that can grab the focus and not of type `input`,
+`button`, `iframe`, `textarea` and `select`
 
 **Selection2:**
 
-All the html elements that can grab the focus and of type <input\>,
-<button\>, <iframe\>, <textarea\> and <select\>
+All the html elements that can grab the focus and of type `input`,
+`button`, `iframe`, `textarea` and `select`
 
 #### Process
 

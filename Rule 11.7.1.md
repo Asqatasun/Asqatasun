@@ -27,7 +27,7 @@ Decision level :
 
 #### Selection
 
-All the <legend\> tags with a <fieldset\> ancestor that has a <form\>
+All the `legend` tags with a `fieldset` ancestor that has a `form`
 ancestor
 
 #### Process

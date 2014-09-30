@@ -44,11 +44,11 @@ Decision level :
 
 ##### Set1
 
-All the <img\> tags of the page
+All the `img` tags of the page
 
 ##### Set2
 
-All the <input\> tags with the "type" attribute equals to "image"
+All the `input` tags with the "type" attribute equals to "image"
 
 #### Process
 
@@ -58,7 +58,7 @@ The selection handles the process
 
 ##### NA
 
-Set1 AND Set2 are empty (The page has no <img\> tag and no <input\> tag
+Set1 AND Set2 are empty (The page has no `img` tag and no `input` tag
 with a type" attribute equals to "image")
 
 ##### NMI

@@ -32,7 +32,7 @@ Decision level :
 
 #### Selection
 
-All the <input\> tags with a "alt" attribute and the type attribute
+All the `input` tags with a `alt` attribute and the type attribute
 equals to "image"
 
 #### Process
@@ -43,7 +43,7 @@ The selection handles the process
 
 ##### NA
 
-Selection is empty (The page has no<input\> tags with a "alt" attribute
+Selection is empty (The page has no`input` tags with a `alt` attribute
 and the type attribute equals to "image")
 
 ##### NMI

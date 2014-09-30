@@ -1,7 +1,6 @@
 ### Summary
 
-This test consists in searching patterns indicating that forbidden tags
-(not div, span or table) are used for layout purpose.
+This test consists in searching patterns indicating that forbidden tags (not `div`, `span` or `table`) are used for layout purpose.
 
 ### Business description
 
@@ -11,9 +10,7 @@ Test : [8.9.1](http://accessiweb.org/index.php/accessiweb-22-english-version.htm
 
 Test description :
 
-On each Web page tags must not be used (except div, span and table)
-[only for layout](index.php/glossary-76.html#mUniquPres). Does this rule
-have been followed?
+On each Web page tags must not be used (except div, span and table) [only for layout](index.php/glossary-76.html#mUniquPres). Does this rule have been followed?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
@@ -28,18 +25,15 @@ Decision level :
 
 #### Selection
 
-Selection1 : all the <a\> tags without "href", "name" or "id" attribute
-(a:not([href]):not([name]):not([id]))
+Selection1 : all the `<a>` tags without `href`, `name` or `id` attribute (`a:not([href]):not([name]):not([id])`)
 
-Selection2 : all the fieldset not within a form (fieldset:not(form
-fieldset):not(\*[role=search] fieldset):not(\*[role=form] fieldset))
+Selection2 : all the `fieldset` not within a `form` (`fieldset:not(form fieldset):not(\*[role=search] fieldset):not(\*[role=form] fieldset)`)
 
 #### Process
 
 **Test1 :**
 
-We check whether Selection1 AND Selection2 are empty. If true, raise a
-MessageA
+We check whether Selection1 AND Selection2 are empty. If true, raise a MessageA
 
 ###### MessageA : No suspect pattern detected
 
@@ -71,8 +65,7 @@ Test1 :
 
 ##### Failed :
 
-Test1 returns false (The page contains a link without target or a
-fieldset not within a form)
+Test1 returns false (The page contains a link without `target` or a `fieldset` not within a `form`)
 
 ##### NMI :
 
@@ -80,11 +73,7 @@ Test1 returns true
 
 ### Notes
 
-On latest webdev data set (2013-10-30, 78,000 pages), links without
-target (a:not([href]):not([name]):not([id])) have been found on 18256
-pages, i.e on 23% of the pages.
+On latest webdev data set (2013-10-30, 78,000 pages), links without target (`a:not([href]):not([name]):not([id])`) have been found on 18256 pages, i.e on 23% of the pages.
 
-On latest webdev data set (2013-10-30, 78,000 pages), fieldsets not
-within form (fieldset:not(form fieldset):not(\*[role=search]
-fieldset):not(\*[role=form] fieldset)) have been found on 982 pages, i.e
+On latest webdev data set (2013-10-30, 78,000 pages), fieldsets not within form (`fieldset:not(form fieldset):not(\*[role=search] fieldset):not(\*[role=form] fieldset)`) have been found on 982 pages, i.e
 on 1.25% of the pages.

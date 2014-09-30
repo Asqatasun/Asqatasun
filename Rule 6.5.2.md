@@ -34,7 +34,7 @@ Decision level :
 
 #### Selection
 
-All the <img\> tags and the <input\> tags with the "type" attribute
+All the `img` tags and the `input` tags with the "type" attribute
 equals to image, with the "ismap" attribute (img[ismap] ,
 input[type=image][ismap])
 

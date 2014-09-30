@@ -30,7 +30,7 @@ Decision level :
 
 #### Selection
 
-All the <form\> tags
+All the `form` tags
 
 #### Process
 
@@ -49,7 +49,7 @@ For each occurence of the selection raise a MessageA
 
 ##### NA
 
-Selection is empty (The page has no <form\> tag)
+Selection is empty (The page has no `form` tag)
 
 ##### NMI
 

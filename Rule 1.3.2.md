@@ -1,7 +1,7 @@
 ### Summary
 
 This test consists in checking whether each area of an image map that
-handles information has a relevant "alt" attribute
+handles information has a relevant `alt` attribute
 
 ### Business description
 
@@ -32,7 +32,7 @@ Decision level :
 
 #### Selection
 
-All the <area\> tags with a "alt" attribute
+All the `area` tags with a `alt` attribute
 
 #### Process
 
@@ -42,7 +42,7 @@ The selection handles the process
 
 ##### NA
 
-Selection is empty (The page has no <area\> tag with a "alt" attribute)
+Selection is empty (The page has no `area` tag with a `alt` attribute)
 
 ##### NMI
 

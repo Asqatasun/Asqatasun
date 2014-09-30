@@ -32,7 +32,7 @@ Decision level :
 
 #### Selection
 
-All the <area\> tags of the page
+All the `area` tags of the page
 
 #### Process
 
@@ -42,7 +42,7 @@ The selection handles the process
 
 ##### NA
 
-The selection is empty (The page has no <area\> tag)
+The selection is empty (The page has no `area` tag)
 
 ##### NMI
 

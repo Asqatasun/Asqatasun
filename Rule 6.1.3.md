@@ -39,7 +39,7 @@ Decision level :
 
 ##### Set1 :
 
-All the <area\> tags with a "href" attribute and a "alt attribute (
+All the `area` tags with a "href" attribute and a "alt attribute (
 area[href][alt] )
 
 ##### Set2 :

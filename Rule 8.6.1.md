@@ -28,7 +28,7 @@ Decision level :
 
 #### Selection
 
-The content of the <title\> tag
+The content of the `title` tag
 
 -   used nomenclature : none
 
@@ -36,7 +36,7 @@ The content of the <title\> tag
 
 #### Process
 
-We compare the content of the <title\> tag with blacklist elements.
+We compare the content of the `title` tag with blacklist elements.
 
 -   used nomenclature : UnexplicitPageTitle
 
@@ -44,7 +44,7 @@ We compare the content of the <title\> tag with blacklist elements.
 
 #### Analysis
 
--   NA : The page has no <title\> tag
+-   NA : The page has no `title` tag
 -   Failed : The title of the page has been found in the blacklist
 -   NMI : The title of the page has not been found in the blacklist
 

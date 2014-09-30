@@ -27,7 +27,7 @@ Decision level :
 
 #### Selection
 
-All the <select\> tags within a <form\> tag with a "label" attribute
+All the `select` tags within a `form` tag with a "label" attribute
 
 #### Process
 
@@ -46,7 +46,7 @@ For each occurence of the selection raise a MessageA
 
 ##### NA
 
-Selection is empty (The page has no <select\> tag within a <form\> tag
+Selection is empty (The page has no `select` tag within a `form` tag
 with a "label" attribute)
 
 ##### NMI

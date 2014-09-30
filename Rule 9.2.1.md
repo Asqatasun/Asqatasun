@@ -1,7 +1,6 @@
 ### Summary
 
-This test consists in checking the use of appropriate tags (<ul\> and
-<li\>) in case of information grouped in unordered list.
+This test consists in checking the use of appropriate tags (`<ul>` and `<li>`) in case of information grouped in unordered list.
 
 ### Business description
 
@@ -11,9 +10,7 @@ Test : [9.2.1](http://www.braillenet.org/accessibilite/referentiel-aw21-en/index
 
 Test description :
 
-On each Web page, does information grouped in unordered
-[lists](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mListes)
-use the ul and li tags?
+On each Web page, does information grouped in unordered [lists](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mListes) use the ul and li tags?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
@@ -30,7 +27,7 @@ Decision level :
 
 All the set of tags respecting the following pattern :
 
-    <p>
+`    <p>
 
         text 
 
@@ -43,9 +40,8 @@ All the set of tags respecting the following pattern :
         ......
 
     </p>
-
-where more than 2 <br\> tags are encountered and where each text part
-does not exceed 80 characters.
+`
+where more than 2 `<br>` tags are encountered and where each text part does not exceed 80 characters.
 
 -   used nomenclature : none
 -   reference : none

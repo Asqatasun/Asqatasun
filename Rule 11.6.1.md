@@ -27,9 +27,9 @@ Decision level :
 
 #### Selection
 
-Set1 : All the <fieldset\> tags.
+Set1 : All the `fieldset` tags.
 
-Set2 : All the <fieldset\> tags with a <legend\> child tag.
+Set2 : All the `fieldset` tags with a `legend` child tag.
 
 #### Process
 

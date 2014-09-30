@@ -1,7 +1,7 @@
 ### Summary
 
 This test consists in checking whether each area of an image map is
-defined with an "alt" attribute
+defined with an `alt` attribute
 
 ### Business description
 
@@ -30,9 +30,9 @@ Decision level :
 
 #### Selection
 
-All the <area\> tags, defined in a <map\> tag associated with the
-"usemap"\
-attribute of an <img\> tag
+All the `area` tags, defined in a `map` tag associated with the
+`usemap`\
+attribute of an `img` tag
 
 -   used nomenclature : none
 
@@ -40,7 +40,7 @@ attribute of an <img\> tag
 
 #### Process
 
-Test the presence of an "alt" attribute in each element of the selection
+Test the presence of an `alt` attribute in each element of the selection
 set.
 
 -   used nomenclature : none
@@ -51,18 +51,18 @@ set.
 
 ##### NA
 
--   The page has no <img\> tag
--   no <img\> tag is defined with an "usemap" attribute
+-   The page has no `img` tag
+-   no `img` tag is defined with an `usemap` attribute
 
 ##### Failed
 
-The <map\> associated with the "usemap" attribute of a <img\> tag has at
-least one <area\> tag without "alt" attribute
+The `map` associated with the `usemap` attribute of a `img` tag has at
+least one `area` tag without `alt` attribute
 
 ##### Passed
 
-All the <area\> tags, defined in a <map\> tag associated with the
-"usemap" attribute of an <img\> tag have an "alt" attribute
+All the `area` tags, defined in a `map` tag associated with the
+`usemap` attribute of an `img` tag have an `alt` attribute
 
 ### Notes
 

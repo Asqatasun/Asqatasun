@@ -29,7 +29,7 @@ Decision level :
 
 #### Selection
 
-All the <input\> tags with a "type" attribute equals to "image"
+All the `input` tags with a "type" attribute equals to "image"
 
 #### Process
 
@@ -39,7 +39,7 @@ The selection handles the process
 
 ##### NA
 
-The selection is empty (The page has no <input\> tag with a "type"
+The selection is empty (The page has no `input` tag with a "type"
 attribute equals to "image")
 
 ##### NMI

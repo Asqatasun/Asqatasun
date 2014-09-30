@@ -29,7 +29,7 @@ Decision level :
 
 #### Selection
 
--   All the <input\> tags with a "title" attribute and a "type"
+-   All the `input` tags with a "title" attribute and a "type"
     attribute equals to:
     -   "text"
     -   or "password"
@@ -37,8 +37,8 @@ Decision level :
     -   or "radio"
     -   or "file"
 
--   AND all the <textarea\> tags with a "title" attribute
--   AND all the <select\> tags with a "title" attribute
+-   AND all the `textarea` tags with a "title" attribute
+-   AND all the `select` tags with a "title" attribute
 
 #### Process
 
@@ -67,6 +67,6 @@ The selection is not empty
 
 -   We only detect the elements of the scope of the test to determine
     whether the test is applicable
--   We assume here that the raised messages focus on the <form\> element
+-   We assume here that the raised messages focus on the `form` element
     and not on the form fields
 

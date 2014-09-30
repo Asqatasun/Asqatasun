@@ -31,7 +31,7 @@ Decision level :
 
 **Set1 :**
 
-All the <iframe\> tags with a "title" attribute ( iframe[title] )
+All the `iframe` tags with a "title" attribute ( iframe[title] )
 
 #### Process
 
@@ -52,7 +52,7 @@ For each element returning false in Test2, raise a Message1.
 ##### Test3
 
 For each element of Set1, we check whether the "title" attribute is not
-striclty identical to the "src" attribute.
+striclty identical to the `src` attribute.
 
 For each element returning false in Test3, raise a Message1.
 
@@ -79,7 +79,7 @@ Message2**.**
 
 **NA :**
 
-The page has no <iframe\> tag with a "title" attribute (Set1 is empty)
+The page has no `iframe` tag with a "title" attribute (Set1 is empty)
 
 **Failed :**
 

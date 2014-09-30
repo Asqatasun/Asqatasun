@@ -28,7 +28,7 @@ Decision level :
 
 **Set1**
 
-All the <iframe\> tags ( iframe )
+All the `iframe` tags ( iframe )
 
 #### Process
 
@@ -49,16 +49,16 @@ For each element returning false in Test1, raise a Message1.
 
 ##### NA
 
-The page has no <iframe\> tag (Set1 is empty)
+The page has no `iframe` tag (Set1 is empty)
 
 ##### Failed
 
-At least one <iframe\> tag has no "title" attribute (Test1 returns false
+At least one `iframe` tag has no "title" attribute (Test1 returns false
 for at least one element of Set1)
 
 ##### Passed
 
-All the <iframe\> tags have an "title" attribute (Test1 returns true for
+All the `iframe` tags have an "title" attribute (Test1 returns true for
 all the elements of Set1)
 
 ### Notes

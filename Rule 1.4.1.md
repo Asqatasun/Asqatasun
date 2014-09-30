@@ -31,7 +31,7 @@ Decision level :
 
 #### Selection
 
-All the <img\> tags of the page with an "alt" attribute.
+All the `img` tags of the page with an `alt` attribute.
 
 #### Process
 
@@ -41,7 +41,7 @@ The selection handles the process
 
 ##### NA
 
-Selection is empty (The page has no <img\> tag with a "alt" attribute )
+Selection is empty (The page has no `img` tag with a `alt` attribute )
 
 ##### NMI
 

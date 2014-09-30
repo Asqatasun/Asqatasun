@@ -1,6 +1,6 @@
 ### Summary
 
-This test consists in checking whether each <optgroup\> in a <select\>
+This test consists in checking whether each `optgroup` in a `select`
 tag has a label attribute.
 
 ### Business description
@@ -29,7 +29,7 @@ Decision level :
 
 #### Selection
 
-Set1 : All the <optgroup\> tags within a <select\> tag
+Set1 : All the `optgroup` tags within a `select` tag
 
 #### Process
 

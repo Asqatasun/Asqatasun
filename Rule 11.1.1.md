@@ -39,35 +39,35 @@ Decision level :
 
 ##### Set1 (fields without implicit labels)
 
--   all the <input\> tags with a "type" attribute equals to:
+-   all the `input` tags with a "type" attribute equals to:
     -   "text"
     -   or "password"
     -   or "checkbox"
     -   or "radio"
     -   or "file",
 
--   and all the <textarea\> tags
--   and all the <select\> tags
--   and **for all of them** not within a <label\> tag
+-   and all the `textarea` tags
+-   and all the `select` tags
+-   and **for all of them** not within a `label` tag
 
 ##### Set2 (fields with implicit labels)
 
--   All the <input\> tags with a "type" attribute equals to:
+-   All the `input` tags with a "type" attribute equals to:
     -   "text"
     -   or "password"
     -   or "checkbox"
     -   or "radio"
     -   or "file"
 
--   and all the <textarea\> tags
--   and all the <select\> tags
--   and **for all of them** within a <label\> tag
+-   and all the `textarea` tags
+-   and all the `select` tags
+-   and **for all of them** within a `label` tag
 
 #### Process
 
 ##### Test1
 
-SetA ("for values") : All the "for" attributes values of each <label\>
+SetA ("for values") : All the "for" attributes values of each `label`
 tag of the page.
 
 For each element of Set1 (fields without implicit labels), test wether:

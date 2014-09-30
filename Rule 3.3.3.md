@@ -47,7 +47,7 @@ to 18px and not bold
 
 **Set3**
 
-All the <img\> tags
+All the `img` tags
 
 #### Process
 

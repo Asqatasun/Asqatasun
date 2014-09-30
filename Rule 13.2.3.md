@@ -27,9 +27,9 @@ Decision level :
 
 #### Selection
 
-Set1 : all the <form\>, <select\> not within a <form\>, <textarea\> not
-within a <form\>, <input\> not within a <form\> and <button\> not within
-a <form\> tags (form, select:not(form select), textarea:not(form
+Set1 : all the `form`, `select` not within a `form`, `textarea` not
+within a `form`, `input` not within a `form` and `button` not within
+a `form` tags (form, select:not(form select), textarea:not(form
 textarea), input:not(form input), button:not(form button))
 
 #### Process
@@ -49,9 +49,9 @@ For each occurence of the Set1 raise a MessageA
 
 ##### NA
 
-Set1 is empty (The page has neither <form\>, nor <select\> within a
-<form\>, nor <input\> within a <form\>, nor <button\>within a <form\>,
-nor <textarea\> within a <form\> tag)
+Set1 is empty (The page has neither `form`, nor `select` within a
+`form`, nor `input` within a `form`, nor `button`within a `form`,
+nor `textarea` within a `form` tag)
 
 ##### NMI
 

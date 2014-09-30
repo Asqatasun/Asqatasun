@@ -35,7 +35,7 @@ Decision level :
 
 All the `table` tags with an "id" attribute or a "class" attribute or a
 "role" attribute that matches one of the values set by the user through
-the "DATA\_TABLE\_MARKER" parameter AND with a <caption\> child tag.
+the "DATA\_TABLE\_MARKER" parameter AND with a `caption` child tag.
 
 **Set2 (table tags not identified as data table from html markers) :\
 **
@@ -43,17 +43,17 @@ the "DATA\_TABLE\_MARKER" parameter AND with a <caption\> child tag.
 All the `table` tags that don't have an "id" attribute or a "class"
 attribute or a "role" attribute that matches one the values set by the
 use through the "PRESENTATION\_TABLE\_MARKER" parameter or the
-"DATA\_TABLE\_MARKER" parameter AND with a <caption\> child tag. That
+"DATA\_TABLE\_MARKER" parameter AND with a `caption` child tag. That
 means select all the table tags of the page when these parameters are
 empty.
 
 **Set3 :**
 
-The <caption\> child tag of each element of Set1.
+The `caption` child tag of each element of Set1.
 
 **Set4 :**
 
-The <caption\> child tag of each element of Set2.
+The `caption` child tag of each element of Set2.
 
 #### Process
 

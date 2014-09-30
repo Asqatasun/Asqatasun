@@ -1,7 +1,6 @@
 ### Summary
 
-This test consists in checking whether the detailed description of an
-informative embedded image is relevant.
+This test consists in checking whether the detailed description of an informative embedded image is relevant.
 
 ### Business description
 
@@ -11,20 +10,11 @@ Test : [1.7.3](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 
 Test description :
 
-Does each embedded image (embed tag with the attribute type="image/...")
-with a [detailed
-description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee)
-pass one of the conditions below?
+Does each embedded image (`<embed>` tag with the attribute type="image/...") with a [detailed description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee)
+pass one of the conditions below? 
 
--   the [detailed
-    description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee)
-    available on the page and indicated between <noembed\> and
-    </noembed\> is relevant
--   The [detailed
-    description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee)
-    via an [adjacent
-    link](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mLienAdj)
-    is relevant
+-   the [detailed description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee) available on the page and indicated between `<noembed>` and `</noembed>` is relevant
+-   The [detailed description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee) via an [adjacent link](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mLienAdj) is relevant
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
@@ -39,7 +29,7 @@ Decision level :
 
 #### Selection
 
-All the `embed` tags
+All the `<embed>` tags
 
 #### Process
 
@@ -49,7 +39,7 @@ The selection handles the process
 
 ##### NA
 
-Selection is empty (The page has no `embed` tag)
+Selection is empty (The page has no `<embed>` tag)
 
 ##### NMI
 

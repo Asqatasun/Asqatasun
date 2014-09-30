@@ -1,7 +1,7 @@
 ### Summary
 
 This test consists in checking whether each colum header of a data table
-is defined with a <th\> tag
+is defined with a `th` tag
 
 ### Business description
 

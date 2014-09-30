@@ -28,7 +28,7 @@ Decision level :
 
 #### Selection
 
-All the <form\> tags with child <label\> tags
+All the `form` tags with child `label` tags
 
 #### Process
 
@@ -47,7 +47,7 @@ For each occurence of the selection raise a MessageA
 
 ##### NA
 
-Selection is empty (The page has no <form\> tag with <label\> tag as
+Selection is empty (The page has no `form` tag with `label` tag as
 child)
 
 ##### NMI
@@ -58,6 +58,6 @@ The selection is not empty
 
 -   We only detect the elements of the scope of the test to determine
     whether the test is applicable
--   We assume here that the raised messages focus on the <form\> element
-    and not on the <label\> elements
+-   We assume here that the raised messages focus on the `form` element
+    and not on the `label` elements
 

@@ -1,7 +1,6 @@
 ### Summary
 
-This test consists in checking whether a refresh action declared via the
-meta tag is immediate
+This test consists in checking whether a refresh action declared via the meta tag is immediate
 
 ### Business description
 
@@ -11,9 +10,7 @@ Test : [13.1.2](http://www.accessiweb.org/index.php/accessiweb-22-english-versio
 
 Test description :
 
-For each Web page, is each redirect process initiated via the meta tag
-immediate ([except in special
-cases](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#cpCrit13-1 "Special cases for criterion 13.1"))?
+For each Web page, is each redirect process initiated via the meta tag immediate ([except in special cases](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#cpCrit13-1 "Special cases for criterion 13.1"))?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
@@ -28,9 +25,7 @@ Decision level :
 
 #### Selection
 
-Set1 : All the <meta\> tags within a head with a "http-equiv" attribute
-equals to "refresh" and a "content" attribute that contains the "URL" or
-"url" occurence
+Set1 : All the `<meta>` tags within a head with a `http-equiv` attribute equals to "refresh" and a `content` attribute that contains the "URL" or "url" occurence.
 
 #### Process
 
@@ -40,11 +35,9 @@ We check whether the size of Set1 is equal to 1.
 
 Test2 :
 
-If Test1 is TRUE, we extract the delay value of the refresh regarding
-the definition of meta tag (@see Note)
+If Test1 is TRUE, we extract the delay value of the refresh regarding the definition of meta tag (@see Note)
 
-Then we check whether the delay value is superior to 0. If true raise a
-message A
+Then we check whether the delay value is superior to 0. If true raise a message A
 
 ##### Message 1: Not Immediate Redirection via Meta
 
@@ -72,4 +65,4 @@ message A
 
 We assume that the meta tag has to be defined has follows:
 
-    <meta http-equiv="refresh" content="delay;URL='URL'">
+`    <meta http-equiv="refresh" content="delay;URL=\'URL\'">`

@@ -34,12 +34,12 @@ Decision level :
 
 **Set1 :**
 
-All the <area\> tags with a "href" attribute and a "alt attribute (
+All the `area` tags with a "href" attribute and a "alt attribute (
 area[href][alt] )
 
 **Set2 :**
 
-All the elements of Set1 with a not empty "alt" attribute
+All the elements of Set1 with a not empty `alt` attribute
 
 #### Process
 
@@ -82,7 +82,7 @@ Set1 is empty (the page has no clickable area)
 **Failed :**
 
 Test1 OR Test2 returns false for at least one element (At least one
-element of the Set2 has an "alt" attribute" content which is blacklisted
+element of the Set2 has an `alt` attribute" content which is blacklisted
 or that only contains non alphanumerical characters)
 
 **NMI :\

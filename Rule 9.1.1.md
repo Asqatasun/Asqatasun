@@ -1,6 +1,6 @@
 ### Summary
 
-This test consists in checking whether a <h1\> tag is present on the
+This test consists in checking whether a `h1` tag is present on the
 page.
 
 ### Business description
@@ -28,7 +28,7 @@ Decision level :
 
 #### Selection
 
-Set1 : <h1\> tags included in the <body\> tag
+Set1 : `h1` tags included in the `body` tag
 
 -   used nomenclature : none
 
@@ -40,8 +40,8 @@ The selection handles the process.
 
 #### Analysis
 
--   Passed : at least one <h1\> tag is present
--   Failed : no <h1\> tag can be found
+-   Passed : at least one `h1` tag is present
+-   Failed : no `h1` tag can be found
 -   Message : none
 
 ### Notes

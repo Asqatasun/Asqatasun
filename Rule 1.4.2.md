@@ -35,7 +35,7 @@ Decision level :
 
 #### Selection
 
-All the <area\> tags with a "alt" attribute
+All the `area` tags with a `alt` attribute
 
 #### Process
 
@@ -45,7 +45,7 @@ The selection handles the process
 
 ##### NA
 
-Selection is empty (The page has no `area` tag with a "alt" attribute)
+Selection is empty (The page has no `area` tag with a `alt` attribute)
 
 ##### NMI
 

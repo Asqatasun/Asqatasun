@@ -30,12 +30,12 @@ Decision level :
 
 #### Selection
 
--   All the <input\> tags within a <form\> with a "type" attribute
+-   All the `input` tags within a `form` with a "type" attribute
     equals to:
     -   "text"
     -   or "password"
 
--   AND all the <textarea\> tags within a <form\>
+-   AND all the `textarea` tags within a `form`
 
 #### Process
 

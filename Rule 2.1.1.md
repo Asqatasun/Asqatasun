@@ -30,7 +30,7 @@ Decision level :
 
 **Set1**
 
-All the <frame\> tags (frame)
+All the `frame` tags (frame)
 
 #### Process
 
@@ -51,16 +51,16 @@ For each element returning false in Test1, raise a Message1.
 
 ##### NA
 
-The page has no <frame\> tag (Set1 is empty)
+The page has no `frame` tag (Set1 is empty)
 
 ##### Failed
 
-At least one <frame\> tag has no "title" attribute (Test1 returns false
+At least one `frame` tag has no "title" attribute (Test1 returns false
 for at least one element of Set1)
 
 ##### Passed
 
-All the <frame\> tags have an "title" attribute (Test1 returns true for
+All the `frame` tags have an "title" attribute (Test1 returns true for
 all the elements of Set1)
 
 ### Notes

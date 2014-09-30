@@ -47,7 +47,7 @@ or equals to 14px and bold
 
 **Set3**
 
-All the <img\> tags
+All the `img` tags
 
 #### Process
 

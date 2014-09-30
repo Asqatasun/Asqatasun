@@ -28,7 +28,7 @@ Decision level :
 
 #### Selection
 
-Set1 : All the <area\> tags with a "href" attribute and a "alt attribute
+Set1 : All the `area` tags with a "href" attribute and a "alt attribute
 ( area[href][alt] )
 
 Set2 : All the elements of Set1 with a not empty alt attribute and a

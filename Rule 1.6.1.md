@@ -43,7 +43,7 @@ Decision level :
 
 #### Selection
 
-All the <img\> of the page
+All the `img` of the page
 
 #### Process
 
@@ -53,7 +53,7 @@ The selection handles the process
 
 ##### NA:
 
-The selection is empty (the page has no <img\> tag)
+The selection is empty (the page has no `img` tag)
 
 ##### NMI:
 

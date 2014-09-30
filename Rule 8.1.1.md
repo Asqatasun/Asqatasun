@@ -10,9 +10,7 @@ Test : [8.1.1](http://www.braillenet.org/accessibilite/referentiel-aw21-en/index
 
 Test description :
 
-For each Web page, is the [document
-type](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDTD)
-(doctype tag) available?
+For each Web page, is the [document type](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDTD) (`doctype` tag) available?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
@@ -27,7 +25,7 @@ Decision level :
 
 #### Selection
 
-The <!doctype\> tag on the page
+The `<!doctype>` tag on the page
 
 #### Process
 
@@ -37,11 +35,11 @@ The selection handles the process
 
 ##### Failed
 
-The page has no doctype (the selection is empty)
+The page has no `doctype` (the selection is empty)
 
 ##### Passed
 
-A doctype is available on the page (the selection is not empty)
+A `doctype` is available on the page (the selection is not empty)
 
 ### Notes
 

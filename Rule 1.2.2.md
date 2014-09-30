@@ -1,7 +1,7 @@
 ### Summary
 
 This test consists in checking whether each non clickable area that
-doesn't handle any information is defined with an empty "alt" attribute.
+doesn't handle any information is defined with an empty `alt` attribute.
 
 ### Business description
 
@@ -30,7 +30,7 @@ Decision level :
 
 #### Selection
 
-All the <area\> tags with a "nohref" and a "alt" attribute
+All the `area` tags with a "nohref" and a `alt` attribute
 
 #### Process
 
@@ -40,8 +40,8 @@ The selection handles the process
 
 ##### NA
 
-Selection is empty (The page has no <area\> tag with a "nohref" and a
-"alt" attribute)
+Selection is empty (The page has no `area` tag with a "nohref" and a
+`alt` attribute)
 
 ##### NMI
 

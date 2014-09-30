@@ -10,9 +10,7 @@ Test : [9.1.2](http://www.braillenet.org/accessibilite/referentiel-aw21/liste-de
 
 Test description :
 
-On each Web page, is the hierarchy between the
-[headings](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTitre)
-(h tags) relevant?
+On each Web page, is the hierarchy between the [headings](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTitre) (h tags) relevant?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
@@ -27,22 +25,19 @@ Decision level :
 
 #### Selection
 
-Set1 : All the <Hx\> tags where x is comprise between 1 and 6
+Set1 : All the `<Hx>` tags where x is comprise between 1 and 6
 
 -   used nomenclature : none
 
 -   reference : none
 
 #### Process
+ 
+We assume that the index of the first encountered `<Hx>` tag represents the index of reference for the document.
 
-We assume that the index of the first encountered <Hx\> tag represents
-the index of reference for the document.
+Test1 : We check that the difference between the index of two following elements of Set1 is not superior or equal to 2.
 
-Test1 : We check that the difference between the index of two following
-elements of Set1 is not superior or equal to 2.
-
-Test2 : We check that the index of each element of Set1 is not inferior
-to the index of reference.
+Test2 : We check that the index of each element of Set1 is not inferior to the index of reference.
 
 -   used nomenclature : none
 
@@ -50,9 +45,8 @@ to the index of reference.
 
 #### Analysis
 
--   NA : The page has no <H\> tag
--   Failed : Test1 or Test2 return false for at least one element of
-    Set1
+-   NA : The page has no `<H>` tag
+-   Failed : Test1 or Test2 return false for at least one element of Set1
 -   Passed : Test1 or Test2 return true for all the elements of Set1
 
 -   Message :

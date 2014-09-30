@@ -35,7 +35,7 @@ Set1 : All the tags with attributes defined as deprecated by the W3C.
 -   Used nomenclature : "DeprecatedPresentationTags"
 -   Reference : deprecated column in
     [http://www.w3.org/TR/html4/index/attributes.html](http://www.w3.org/TR/html4/index/attributes.html "http://www.w3.org/TR/html4/index/attributes.html")
-    (except "heigth" and "weigth" attributes for <img\> and <svg\> tags)
+    (except "heigth" and `weigth` attributes for `img` and `svg` tags)
 
 #### Process
 
