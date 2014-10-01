@@ -674,7 +674,6 @@ Cd_Test='Rgaa30-6-4-1' OR
 Cd_Test='Rgaa30-6-4-2' OR 
 Cd_Test='Rgaa30-6-4-3' OR 
 Cd_Test='Rgaa30-6-4-4' OR 
-Cd_Test='Rgaa30-6-5-1' OR 
 Cd_Test='Rgaa30-8-1-1' OR 
 Cd_Test='Rgaa30-8-1-2' OR 
 Cd_Test='Rgaa30-8-1-3' OR 
@@ -734,11 +733,16 @@ Cd_Test='Rgaa30-13-1-2' OR
 Cd_Test='Rgaa30-13-7-1' OR 
 
 -- AW22 modified scope
+Cd_Test='Rgaa30-9-1-1' OR 
+Cd_Test='Rgaa30-9-1-2' OR 
+Cd_Test='Rgaa30-9-1-4' OR 
 Cd_Test='Rgaa30-10-8-3' OR 
 Cd_Test='Rgaa30-10-8-4' OR 
 Cd_Test='Rgaa30-13-2-2' OR 
 
 -- AW22 Renumerotation
+Cd_Test='Rgaa30-6-5-1' OR -- was 6-6-1
+Cd_Test='Rgaa30-7-4-1' OR -- was 7-5-1
 Cd_Test='Rgaa30-11-14-4';  -- was 11-14-2
 
 -- AW22 modified
