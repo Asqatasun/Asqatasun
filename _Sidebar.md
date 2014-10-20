@@ -10,5 +10,5 @@
 * [[Contribute to Tanaguru|Contribute-to-Tanaguru]]
 * [[How to create your own referential|How-to-create-your-own-referential]]
 * [[Create a rule : Getting started|Create-a-rule-:-Getting-started]]
-* [[Create a rule : the framework|Create-a-rule-:-the-framework]]
+* [[Create a rule : The framework|Create-a-rule-:-the-framework]]
 
