@@ -14,7 +14,7 @@ A test can produce a result with 3 levels of informations :
 
 ## The main interfaces
 
-### `ElementSelector`
+### The `ElementSelector`
 #### Explanation
 This interface defines a selection applied to the DOM, to set the scope of the rule, and thus its applicability
 
@@ -26,7 +26,7 @@ Here is a not exhaustive list of existing ElementSelector implementations :
 * [ImageElementSelector](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementselector/ImageElementSelector.html)
 * ...
 
-### `ElementChecker`
+### The `ElementChecker`
 #### Explanation
 This interface defines a check to be done on elements 
 #### Method to implement
@@ -64,7 +64,7 @@ Here is a not exhaustive list of existing ElementChecker implementations :
 * [LinkPertinenceChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/link/LinkPertinenceChecker.html)
 * ...
 
-### TextElementBuilder
+### The `TextElementBuilder`
 #### Explanation
 This builder is in charge of creating a textual representation of an HTML element.
 #### Method to implement
