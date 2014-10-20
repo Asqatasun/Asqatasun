@@ -13,9 +13,9 @@ A test can produce a result with 3 levels of informations :
 * Level3 (optional) -> EVIDENCE_ELEMENT that can store additionnal informations about the DOM element to help the qualification and thus the resolution.
 
 ## The main interfaces
+
 ### `ElementSelector`
 #### Explanation
-
 This interface defines a selection applied to the DOM, to set the scope of the rule, and thus its applicability
 
 #### The existing ElementSelector implementations 
