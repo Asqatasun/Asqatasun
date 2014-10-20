@@ -1,6 +1,6 @@
 [Tanaguru](http://www.tanaguru.org/) is an enterprise grade [free-libre software](http://www.tanaguru.org/en/content/license-gnu-agpl) for web accessibility assessment.
 
-If you want to contribute, you can jump to the paragraph describing [[how to contribute to Tanaguru|/Tanaguru/Tanaguru/wiki/Contribute-to-Tanaguru]]. For a description of Tanaguru's features, read on!
+If you want to contribute, you can jump to the paragraph describing [[how to contribute to Tanaguru|Contribute-to-Tanaguru]]. For a description of Tanaguru's features, read on!
 
 # Features
 
