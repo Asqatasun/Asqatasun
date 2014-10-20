@@ -168,6 +168,9 @@ Let's discuss [Tanaguru on StackOverflow](http://stackoverflow.com/search?q=tana
 # Advanced
 ## Rules input/output
 ### Input
+
+@@@to be completed
+
 ### Output
 A test can produce a result with 3 levels of informations : 
 * Level1 (mandatory) -> PROCESS_RESULT that handles the final result of the test (and the total number of elements implied by the test)
@@ -175,10 +178,11 @@ A test can produce a result with 3 levels of informations :
 * Level3 (optional) -> EVIDENCE_ELEMENT that can store additionnal informations about the DOM element to help the qualification and thus the resolution.
 
 ## The main interfaces
-### `SSPHandler`
-#### Explanation
 ### `ElementSelector`
 #### Explanation
+
+This interface defines a selection applied to the DOM, to set the scope of the rule, and thus its applicability
+
 #### The existing ElementSelector implementations 
 Here is a not exhaustive list of existing ElementSelector implementations : 
 * [SimpleElementSelector](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementselector/SimpleElementSelector.html)
