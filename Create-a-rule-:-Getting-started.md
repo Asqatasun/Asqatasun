@@ -1,5 +1,7 @@
 # Getting started
 
+## Prerequisites
+
 Start by [creating your test referential context](/Tanaguru/Tanaguru/wiki/How-to-create-your-own-referential) by using the referential-creator maven plugin. 
 
 Once created, let's implement some rules : 
