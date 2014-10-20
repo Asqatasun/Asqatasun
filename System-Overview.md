@@ -1,7 +1,6 @@
 The following diagram represents the workflow of an audit through the different components that can modify its state and populate/aggregate data : 
 ![Global architecture of Tanaguru ](http://asset.open-s.com/Doc/archi/global_architecture.png)
 
-***
 
 * The Crawler Component (or content-loader) uses the URL(s) set to the system to fetch the pages and thus form the set of WebResources (URL) and Contents to test.
 
