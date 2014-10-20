@@ -8,5 +8,7 @@
 ## Contribute
 * [System overview](https://github.com/Tanaguru/Tanaguru/wiki/System-Overview)
 * [Contribute to Tanaguru](https://github.com/Tanaguru/Tanaguru/wiki#contribute-to-tanaguru-using-git-and-github)
-* [Create a rule : Getting started](https://github.com/Tanaguru/Tanaguru/wiki/Create-a-rule-:-Getting-started)
 * [How to create your own referential](https://github.com/Tanaguru/Tanaguru/wiki/How-to-create-your-own-referential)
+* [Create a rule : Getting started](https://github.com/Tanaguru/Tanaguru/wiki/Create-a-rule-:-Getting-started)
+* [Create a rule : the framework](https://github.com/Tanaguru/Tanaguru/wiki/Create-a-rule-:-the-framework)
+
