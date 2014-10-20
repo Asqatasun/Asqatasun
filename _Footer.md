@@ -1,1 +1,1 @@
-[Try Tanaguru online](https://my.tanaguru.com/) / [Blog](http://blog.tanaguru.com/) / [Twitter](https://twitter.com/tanaguruapp)
+[Try Tanaguru online](https://my.tanaguru.com/) | [Blog](http://blog.tanaguru.com/) | [Twitter](https://twitter.com/tanaguruapp)
