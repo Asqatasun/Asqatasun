@@ -144,20 +144,22 @@ public class CheckTitleTagRelevancy extends
 
 }
 ```
-To make this test work, an entry named "IrrelevantTitleNomenclature" has to exist in the NOMENCLATURE table of the database. Please refer to the "[Create a nomenclature and populate it](#create-a-nomenclature-and-populate-it)" section for more details.
+To make this test work, an entry named "IrrelevantTitleNomenclature" has to exist in the NOMENCLATURE table of the database. Please refer to the "[Create a nomenclature and populate it](/Tanaguru/Tanaguru/wiki/Create-a-rule-:-the-framework#create-a-nomenclature-and-populate-it)" section for more details.
 
 
 ##More About Selection
 You need to perform more complex selection? The `SimpleElementSelector` is based on [Jsoup](http://jsoup.org) and its powerfull CSS (or jquery) like selector syntax to find matching elements. Have a look to the [Jsoup selector-syntax description page](http://jsoup.org/cookbook/extracting-data/selector-syntax) to know more about what you can do.
 
-You can use also use one of [our selection implementations](#the-existing-elementselector-implementations) or even implement your own ones. 
+You can use also use one of [our selection implementations](/Tanaguru/Tanaguru/wiki/Create-a-rule-:-the-framework#the-existing-elementselector-implementations) or even implement your own ones. 
 
 ##More About Check
 Based on the implementation of accessiblity rules, many checkers have been implemented and can be reused.
-Regarding your need, you can use one of [our check implementations](#the-existing-elementchecker-implementations) or even implement your own ones.
+Regarding your need, you can use one of [our check implementations](/Tanaguru/Tanaguru/wiki/Create-a-rule-:-the-framework#the-existing-elementchecker-implementations) or even implement your own ones.
 
 ##More About More
-Tanaguru can also make controls on CSS, combine selectors, checkers, use data extracted from a javascript script executing while fetching the page and more, characterise elements by using a marker approach (use the "decorative-image" class to identify all the decoration images of the page). You can browse [the Accessiweb 2.2 rules implementations](https://github.com/Tanaguru/Tanaguru/tree/master/rules/accessiweb2.2/src/main/java/org/opens/tanaguru/rules/accessiweb22) to get more examples of how to implement a rule. 
+Tanaguru can also make controls on CSS, combine selectors, checkers, use data extracted from a javascript script executing while fetching the page and more, characterise elements by using a marker approach (use the "decorative-image" class to identify all the decoration images of the page). You can browse [the Accessiweb 2.2 rules implementations](https://github.com/Tanaguru/Tanaguru/tree/master/rules/accessiweb2.2/src/main/java/org/opens/tanaguru/rules/accessiweb22) or the [RGAA v2.2 rules implementation](https://github.com/Tanaguru/Tanaguru/tree/master/rules/rgaa2.2/src/main/java/org/opens/tanaguru/rules/rgaa22) to get more examples of how to implement a rule. 
+
+Want really more ? see [Create a rule : the framework](https://github.com/Tanaguru/Tanaguru/wiki/Create-a-rule-:-the-framework)
 
 ##Any questions?
 
