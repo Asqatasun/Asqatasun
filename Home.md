@@ -19,6 +19,3 @@ If you want to contribute, you can jump to the paragraph describing [[how to con
 - deal with **generated HTML** (the one you actually see, after Javascript is executed)
 - export
 - business intelligence of accessibility data
-
-***
-
