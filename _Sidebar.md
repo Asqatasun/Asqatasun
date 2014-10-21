@@ -1,6 +1,6 @@
 :arrow_heading_up:  [Back to Tanaguru wiki](https://github.com/Tanaguru/Tanaguru/wiki)
 
-Home
+[[Home|Home]]
 
 ## Theme 1: Images
 
@@ -43,7 +43,7 @@ Rule 2.1.2
 Rule 2.2.1
 Rule 2.2.2
 
-# Theme 3: Colors
+## Theme 3: Colors
 
 Rule 3.1.1
 Rule 3.1.2
@@ -66,7 +66,7 @@ Rule 3.4.2
 Rule 3.4.3
 Rule 3.4.4
 
-# Theme 4: Multimedia
+## Theme 4: Multimedia
 
 Rule 4.1.1
 Rule 4.1.2
@@ -113,7 +113,7 @@ Rule 4.8.2
 Rule 4.9.1
 Rule 4.9.2
 
-# Theme 5: Tables
+## Theme 5: Tables
 
 Rule 5.1.1
 Rule 5.2.1
@@ -129,7 +129,7 @@ Rule 5.7.3
 Rule 5.7.4
 Rule 5.8.1
 
-# Theme 6: Links
+## Theme 6: Links
 
 Rule 6.1.1
 Rule 6.1.2
@@ -150,7 +150,7 @@ Rule 6.5.2
 Rule 6.5.3
 Rule 6.6.1
 
-# Theme 7: Scripts
+## Theme 7: Scripts
 
 Rule 7.1.1
 Rule 7.1.2
@@ -164,7 +164,7 @@ Rule 7.4.2
 Rule 7.5.1
 Rule 7.6.1
 
-# Theme 8: Mandatory elements
+## Theme 8: Mandatory elements
 
 Rule 8.1.1
 Rule 8.1.2
@@ -178,7 +178,7 @@ Rule 8.7.1
 Rule 8.8.1
 Rule 8.9.1
 
-# Theme 9: Structuration of information
+## Theme 9: Structuration of information
 
 Rule 9.1.1
 Rule 9.1.2
@@ -194,7 +194,7 @@ Rule 9.4.2
 Rule 9.5.1
 Rule 9.5.2 
 
-# Theme 10: PResentation of information
+## Theme 10: PResentation of information
 
 Rule 10.1.2
 Rule 10.1.3
