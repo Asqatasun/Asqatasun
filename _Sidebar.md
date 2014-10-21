@@ -38,33 +38,33 @@
 
 ## Theme 2: Frames
 
-Rule 2.1.1
-Rule 2.1.2
-Rule 2.2.1
-Rule 2.2.2
+[[Rule 2.1.1|Rule 2.1.1]]
+[[Rule 2.1.2|Rule 2.1.2]]
+[[Rule 2.2.1|Rule 2.2.1]]
+[[Rule 2.2.2|Rule 2.2.2]]
 
 ## Theme 3: Colors
 
-Rule 3.1.1
-Rule 3.1.2
-Rule 3.1.3
-Rule 3.1.4
-Rule 3.1.5
-Rule 3.1.6
-Rule 3.2.1
-Rule 3.2.2
-Rule 3.2.3
-Rule 3.2.4
-Rule 3.2.5
-Rule 3.2.6
-Rule 3.3.1
-Rule 3.3.2
-Rule 3.3.3
-Rule 3.3.4
-Rule 3.4.1
-Rule 3.4.2
-Rule 3.4.3
-Rule 3.4.4
+[[Rule 3.1.1|Rule 3.1.1]]
+[[Rule 3.1.2|Rule 3.1.2]]
+[[Rule 3.1.3|Rule 3.1.3]]
+[[Rule 3.1.4|Rule 3.1.4]]
+[[Rule 3.1.5|Rule 3.1.5]]
+[[Rule 3.1.6|Rule 3.1.6]]
+[[Rule 3.2.1|Rule 3.2.1]]
+[[Rule 3.2.2|Rule 3.2.2]]
+[[Rule 3.2.3|Rule 3.2.3]]
+[[Rule 3.2.4|Rule 3.2.4]]
+[[Rule 3.2.5|Rule 3.2.5]]
+[[Rule 3.2.6|Rule 3.2.6]]
+[[Rule 3.3.1|Rule 3.3.1]]
+[[Rule 3.3.2|Rule 3.3.2]]
+[[Rule 3.3.3|Rule 3.3.3]]
+[[Rule 3.3.4|Rule 3.3.4]]
+[[Rule 3.4.1|Rule 3.4.1]]
+[[Rule 3.4.2|Rule 3.4.2]]
+[[Rule 3.4.3|Rule 3.4.3]]
+[[Rule 3.4.4|Rule 3.4.4]]
 
 ## Theme 4: Multimedia
 
