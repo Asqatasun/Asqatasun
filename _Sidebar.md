@@ -4,37 +4,37 @@
 
 ## Theme 1: Images
 
-Rule 1.1.2
-Rule 1.1.3
-Rule 1.2.1
-Rule 1.2.2
-Rule 1.2.4
-Rule 1.2.5
-Rule 1.3.2
-Rule 1.3.3
-Rule 1.3.5
-Rule 1.3.7
-Rule 1.4.1
-Rule 1.4.2
-Rule 1.4.3
-Rule 1.4.4
-Rule 1.4.5
-Rule 1.5.1
-Rule 1.6.1
-Rule 1.6.2
-Rule 1.6.3
-Rule 1.6.4
-Rule 1.7.1
-Rule 1.7.3
-Rule 1.8.1
-Rule 1.8.2
-Rule 1.8.3
-Rule 1.8.4
-Rule 1.8.6
-Rule 1.9.2
-Rule 1.9.3
-Rule 1.9.4
-Rule 1.9.5
+[[Rule 1.1.2|Rule 1.1.2]]
+[[Rule 1.1.3|Rule 1.1.3]]
+[[Rule 1.2.1|Rule 1.2.1]]
+[[Rule 1.2.2|Rule 1.2.2]]
+[[Rule 1.2.4|Rule 1.2.4]]
+[[Rule 1.2.5|Rule 1.2.5]]
+[[Rule 1.3.2|Rule 1.3.2]]
+[[Rule 1.3.3|Rule 1.3.3]]
+[[Rule 1.3.5|Rule 1.3.5]]
+[[Rule 1.3.7|Rule 1.3.7]]
+[[Rule 1.4.1|Rule 1.4.1]]
+[[Rule 1.4.2|Rule 1.4.2]]
+[[Rule 1.4.3|Rule 1.4.3]]
+[[Rule 1.4.4|Rule 1.4.4]]
+[[Rule 1.4.5|Rule 1.4.5]]
+[[Rule 1.5.1|Rule 1.5.1]]
+[[Rule 1.6.1|Rule 1.6.1]]
+[[Rule 1.6.2|Rule 1.6.2]]
+[[Rule 1.6.3|Rule 1.6.3]]
+[[Rule 1.6.4|Rule 1.6.4]]
+[[Rule 1.7.1|Rule 1.7.1]]
+[[Rule 1.7.3|Rule 1.7.3]]
+[[Rule 1.8.1|Rule 1.8.1]]
+[[Rule 1.8.2|Rule 1.8.2]]
+[[Rule 1.8.3|Rule 1.8.3]]
+[[Rule 1.8.4|Rule 1.8.4]]
+[[Rule 1.8.6|Rule 1.8.6]]
+[[Rule 1.9.2|Rule 1.9.2]]
+[[Rule 1.9.3|Rule 1.9.3]]
+[[Rule 1.9.4|Rule 1.9.4]]
+[[Rule 1.9.5|Rule 1.9.5]]
 
 ## Theme 2: Frames
 
