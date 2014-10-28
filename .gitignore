@@ -87,3 +87,6 @@ target
 nb-configuration.xml
 nbactions.xml
 hsql-db*
+
+# Crowdin (translation tool) configuration file (contains personal data
+crowdin.yaml
