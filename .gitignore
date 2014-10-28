@@ -72,17 +72,22 @@ web-app/tgol-voter/target/
 web-app/tgol-web-app/target/
 web-app/security/target/
 web-app/email-sender/target/
+
+/ws/tanaguru-ws/target/
+/testing-tools/tgol-test-krash-online-site/target/
+/testing-tools/tgol-test-krash-online-site/nbactions.xml
+/web-app/security/target/
+/testing-tools/tgol-test-krash-online/target/
+
+# Eclipse
 .project
 .classpath
 .settings
 org.eclipse.core.resources.prefs
 org.eclipse.jdt.core.prefs
 org.eclipse.m2e.core.prefs
-/ws/tanaguru-ws/target/
-/testing-tools/tgol-test-krash-online-site/target/
-/testing-tools/tgol-test-krash-online-site/nbactions.xml
-/web-app/security/target/
-/testing-tools/tgol-test-krash-online/target/
+
+# Netbeans
 target
 nb-configuration.xml
 nbactions.xml
@@ -90,3 +95,6 @@ hsql-db*
 
 # Crowdin (translation tool) configuration file (contains personal data
 crowdin.yaml
+
+# saved files
+*~
