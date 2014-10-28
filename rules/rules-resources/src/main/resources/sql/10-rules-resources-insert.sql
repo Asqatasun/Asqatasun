@@ -1181,6 +1181,10 @@ INSERT IGNORE INTO `NOMENCLATURE_ELEMENT` (`DTYPE`, `Id_Nomenclature_Element`, `
 ('NomenclatureElementImpl', 1092, '.r98', NULL, 24),
 ('NomenclatureElementImpl', 1093, '.r99', NULL, 24),
 ('NomenclatureElementImpl', 1094, '.taz', NULL, 24),
-('NomenclatureElementImpl', 1095, 'page sans titre', NULL, 12);
+('NomenclatureElementImpl', 1095, 'page sans titre', NULL, 12), 
+('NomenclatureElementImpl', 1096, '<!DOCTYPE html SYSTEM "about:legacy-compat">', NULL, 19),
+('NomenclatureElementImpl', 1097, '<!DOCTYPE html SYSTEM \'about:legacy-compat\'>', NULL, 19),
+('NomenclatureElementImpl', 1098, '<!DOCTYPE html "about:legacy-compat">', NULL, 19),
+('NomenclatureElementImpl', 1099, '<!DOCTYPE html \'about:legacy-compat\'>', NULL, 19);
 
 SET foreign_key_checks=1;
