@@ -47,7 +47,7 @@ import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
  * page.</a>
  *
  * @see <a href="http://rgaa.net/Pertinence-de-l-alternative,38.html"> 4.4 rule
- * specification
+ * specification</a>
  *
  */
 public class Rgaa22Rule04041 extends AbstractCompositePageRuleMarkupImplementation {
@@ -62,8 +62,7 @@ public class Rgaa22Rule04041 extends AbstractCompositePageRuleMarkupImplementati
      */
     public Rgaa22Rule04041() {
         super();
-        Collection<AbstractPageRuleMarkupImplementation> ruleCheckers =
-                new ArrayList<AbstractPageRuleMarkupImplementation>();
+        Collection<AbstractPageRuleMarkupImplementation> ruleCheckers = new ArrayList();
         ruleCheckers.add(new InformativeImageRuleMarkupImplementation());
         ruleCheckers.add(new InformativeAppletRuleMarkupImplementation());
         ruleCheckers.add(new InformativeObjectRuleMarkupImplementation());
@@ -123,8 +122,8 @@ public class Rgaa22Rule04041 extends AbstractCompositePageRuleMarkupImplementati
 
         @Override
         protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-            super.select(sspHandler, elementHandler);
-            Iterator<Element> iter = elementHandler.get().iterator();
+            super.select(sspHandler, null); // the elementHandler instance is unused
+            Iterator<Element> iter = getSelectionWithoutMarkerHandler().get().iterator();
             // The elements with a longdesc attribute are seen as informative. 
             // They are added to the selection with marker
             while (iter.hasNext()) {

@@ -97,14 +97,15 @@ public class Rgaa22Rule11091 extends AbstractMarkerPageRuleImplementation {
 
     @Override
     protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        super.select(sspHandler, elementHandler);
+        super.select(sspHandler, null); // the elementHandler instance is unused
+        
         // once tables selected, we extract the caption child element of each 
         // to make the control
         Elements captionOnTable = new Elements();
-        for (Element el : elementHandler.get()) {
+        for (Element el : getSelectionWithoutMarkerHandler().get()) {
             captionOnTable.add(el.select(CAPTION_ELEMENT).first());
         }
-        elementHandler.clean().addAll(captionOnTable);
+        getSelectionWithoutMarkerHandler().clean().addAll(captionOnTable);
         
         Elements captionOnDataTable = new Elements();
         for (Element el : getSelectionWithMarkerHandler().get()) {
