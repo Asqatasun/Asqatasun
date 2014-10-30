@@ -4,7 +4,7 @@
 
 Making your website better is hard. Better for users, better for developers,
 better for the client. [W3C standards](http://www.w3.org/TR/) can bring a lot of
- help, but they are a kind of tedious to understand and implement.
+ help, but they are kind of tedious to understand and implement.
 
 [Tanaguru](http://www.tanaguru.com/) helps you in making your web site 
 accessible. It tests your pages, whole site,  or application and gives you 
