@@ -2,60 +2,71 @@
 
 # Tanaguru
 
-Tanaguru is an opensource (AGPL license) website assessment tool. It is dedicated to 
-accessibility (a11y) audits, and focuses on reliability and high level of automation.
+## Problem & solution
+
+Making your website better is hard. Better for users, better for developers,
+better for the client. [W3C standards](http://www.w3.org/TR/) can bring a lot of
+ help, but they are a kind of tedious to understand and implement.
+
+[Tanaguru](http://www.tanaguru.com/) helps you in making your web site 
+accessible. It tests your pages, whole site,  or application and gives you 
+precise and detailed insights on the identified issues.
+
+You can [install Tanaguru by yourself](link to install doc) or use 
+[Tanaguru in SaaS](https://my.tanaguru.com/)
 
 ## Features
 
-Four kinds of audit:
+### Four kinds of audit
 
 * offline file audit
 * page audit
 * entire website audit (Heritrix crawler embedded)
-* scenario audit 
+* scenario audit (pages with sign-up, multiple-steps forms, electronic procedures, web applications...)
 
 (That's the DOM that is tested, thus dealing with JS/AJAX/ARIA)
- 
-## Vision
 
-1. Automate as much as we can and more :)
-2. Be 200% reliable (don't give erroneous result)
-3. have technological fun
+### Accessibility Analytics
 
-## Download
+ * Metrics to follow your accessibility growth
 
-http://www.tanaguru.org/Download/tanaguru-latest.tar.gz
+### Customization
 
-## Demo
-
-http://my.tanaguru.com/
-
-## Installation and documentation
-
-[Tanaguru wiki](http://www.tanaguru.org) (registration is warmly welcomed, please email mfaure AT tanaguru. org)
-
-More precisely:
-
-* [Installation](http://www.tanaguru.org/en/content/tanaguru-3x)
-* [Configuration](http://www.tanaguru.org/en/content/configuration)
-* [How to build](http://www.tanaguru.org/en/content/how-build)
+* Create your own rules
+* Optimise++ with integration in Quality Assurance tools like Travis, Jenkins...
+* multi-lingual: English, Spanish, French, and [any other language you would add](https://crowdin.com/project/tanaguru) :)
 
 ## Business: accessibility
 
-What tests are covered:
+What tests are covered ? The ones users like more:
 
-* all the "tag and attributes tests" like missing alt, table headers check, frame title...
-* color contrast
-* language specification
+* color contrast with solutions offered
+* language change in the page
+
+Other tests they enjoy:
+
+* all usual tests like the "tag and attributes tests" (missing alt, table headers check, frame title...)
 * downloadable files / office files (spreadsheet, wordprocessor...)
 * switch of context
-* ...
+* and much more tedious silly tests you won't have to deal with
 
 By january 2014, this represents [~170 accessibility tests](http://www.tanaguru.org/en/content/accessiweb-22-coverage)
 
-## Contact and mailing-list
+## Installation & download
 
-We have a mailing lists dedicated to Tanaguru user and development
+* [Download Tanaguru latest (.tar.gz, ~110Mb)](http://www.tanaguru.org/Download/tanaguru-latest.tar.gz)
+* [Installation](http://www.tanaguru.org/en/content/tanaguru-3x)
+* [Configuration](http://www.tanaguru.org/en/content/configuration)
+
+## Contribute
+
+- [Issue Tracker](https://github.com/Tanaguru/Tanaguru/issues)
+- [Source Code](https://github.com/Tanaguru/Tanaguru)
+- [How to build](http://www.tanaguru.org/en/content/how-build)
+
+## Support
+
+We have a mailing lists dedicated to Tanaguru users and development
 discussion. To subscribe, send an empty message to :
 
         tanaguru-users-fr@lists.adullact.net
@@ -66,30 +77,18 @@ Or you can send an email to
 
 (only english, french and klingon is spoken :) ) 
 
-## Content of this (last) version
+## License
 
-Bugs:
-
-- [#86](https://github.com/Tanaguru/Tanaguru/issues/86) : AW22 8.8.1 Case sensitivity of lang definition
-
-Features :
-
-- Upgrade Java from 1.6 to 1.7
-- Upgrade Hibernate from 3.6.0.Final to 4.3.5.Final
-- Add new "referential-creator-maven-plugin" and "referential-creator" projects 
-- Create "rule demo project"
-- Refactor rule packaging to be handled by one project 
-- Harmonisation of Referential names
-- Improve rules test management 
+Tanaguru is licensed under the AGPL license.
 
 ## Other opensource tools
 
 * [KBAccess](http://www.kbaccess.org/) : database of good and bad examples of web accessibility
-* [Tanaguru Contrast-Finder](http://contrast-finder.tanaguru.com/) : for a given wrong contrast, *propose* good color combination
+* [Tanaguru Contrast-Finder](http://contrast-finder.tanaguru.com/) : for a given wrong contrast, *offers* good color combination
 * [Accessibility observatory](http://observatoire-accessibilite.org/) : have an overview of the accessibility of a large set of websites
  
 All these projects are opensource and also under the umbrella of [Tanaguru Github account](https://github.com/Tanaguru)
 
 Have Fun
 
-Tanaguru team
+[Tanaguru Team](tanaguru-team.md)
