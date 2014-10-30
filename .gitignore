@@ -88,6 +88,7 @@ org.eclipse.jdt.core.prefs
 org.eclipse.m2e.core.prefs
 
 # Netbeans
+nbproject
 target
 nb-configuration.xml
 nbactions.xml
@@ -98,3 +99,6 @@ crowdin.yaml
 
 # saved files
 *~
+
+# Mkdocs
+/docs/Site
