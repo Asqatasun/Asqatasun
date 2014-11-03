@@ -1,6 +1,6 @@
 ### Summary
 
-@@@TODO
+This test is of site scope or group of pages scope. When requesting a page audit, the result is automatically set to "Not Applicable". No check is done instead.
 
 ### Business description
 
@@ -16,7 +16,7 @@ Level : Silver
 
 ### Technical description
 
-Scope : Page
+Scope : [site](/en/category/rules-design/accessiweb-11/scope/site)
 
 Decision level : Semi-decidable
 
@@ -24,11 +24,20 @@ Decision level : Semi-decidable
 
 #### Selection
 
+None
 
 #### Process
 
+None
 
 #### Analysis
 
+##### Not Applicable
+
+Page audit 
+
+##### Not Tested
+
+Group of pages audit or site audit
 
 ### Notes
