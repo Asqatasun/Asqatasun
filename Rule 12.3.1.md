@@ -16,7 +16,7 @@ Level : Silver
 
 ### Technical description
 
-Scope : Page
+Scope : Site
 
 Decision level : Semi-decidable
 
