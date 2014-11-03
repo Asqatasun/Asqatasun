@@ -10,15 +10,14 @@ Test :
 [12.7.1](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-12-7-1)
 
 Test description : Does each page within a [collection of
-pages](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mCollecPage),
+pages](http://www.accessiweb.org/index.php/glossary-76.html#mCollecPage),
 pass the conditions below?
 
 -   A link alloows to access to the next page
 -   A link allows to access to the previous page
 -   [links allow to access to each
-    page](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mAccColl)
-    of the [collection of
-    pages](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mCollecPage)
+    page](http://www.accessiweb.org/index.php/glossary-76.html#mAccColl)
+    of the [collection of pages](http://www.accessiweb.org/index.php/glossary-76.html#mCollecPage)
 
 Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
