@@ -58,6 +58,9 @@ public final class TagUtils {
         if (pageContext.getResponse().getLocale().getLanguage().
                 equalsIgnoreCase(Locale.FRENCH.getLanguage())) {
             return Locale.FRENCH.getLanguage();
+        } else if (pageContext.getResponse().getLocale().getLanguage().
+                equalsIgnoreCase("es")) {
+            return "es";
         }
         return Locale.ENGLISH.getLanguage();
     }
