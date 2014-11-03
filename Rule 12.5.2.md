@@ -1,6 +1,6 @@
 ### Summary
 
-No-check rule
+This test is of site scope or group of pages scope. When requesting a page audit, the result is automatically set to "Not Applicable". No check is done instead.
 
 ### Business description
 
@@ -11,14 +11,14 @@ Test :
 
 Test description : In each set of pages, is the functionality leading to
 the ["site map"
-page](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mPlanSite)
+page](http://www.accessiweb.org/index.php/glossary-76.html#mPlanSite)
 located at the same place in the presentation?
 
 Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : [site](/en/category/rules-design/accessiweb-11/scope/site)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
