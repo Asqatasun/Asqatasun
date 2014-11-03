@@ -67,7 +67,7 @@ public final class TagUtils {
     
     /**
      * 
-     * @param pageContext
+     * @param url
      * @return 
      */
     public static String getHostFromUrl(String url)  {
