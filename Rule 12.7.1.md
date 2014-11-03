@@ -1,6 +1,6 @@
 ### Summary
 
-No-check rule
+This test is of site scope or group of pages scope. When requesting a page audit, the result is automatically set to "Not Applicable". No check is done instead.
 
 ### Business description
 
@@ -24,7 +24,7 @@ Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
 ### Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : [site](/en/category/rules-design/accessiweb-11/scope/site)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
@@ -41,6 +41,10 @@ None
 
 #### Analysis
 
+Page audit : 
+**Not Applicable**
+
+Group of pages audit or site audit : 
 **Not Tested**
 
 ### Notes
