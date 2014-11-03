@@ -24,20 +24,33 @@
                             <c:set var="enUrl" scope="request" value="?${properQueryString}"/>
                             <c:set var="frUrl" scope="request" value="?${fn:replace(properQueryString, 
                                 'lang=en', 'lang=fr')}" />
+                            <c:set var="esUrl" scope="request" value="?${fn:replace(properQueryString, 
+                                'lang=en', 'lang=es')}" />
                         </c:when>
                         <c:when test="${fn:contains(pageContext.request.queryString, 'lang=fr')}">
                             <c:set var="frUrl" scope="request" value="?${properQueryString}"/>
                             <c:set var="enUrl" scope="request" value="?${fn:replace(properQueryString, 
                                 'lang=fr', 'lang=en')}" />
+                            <c:set var="esUrl" scope="request" value="?${fn:replace(properQueryString, 
+                                'lang=fr', 'lang=es')}" />
+                        </c:when>
+                        <c:when test="${fn:contains(pageContext.request.queryString, 'lang=es')}">
+                            <c:set var="esUrl" scope="request" value="?${properQueryString}"/>
+                            <c:set var="enUrl" scope="request" value="?${fn:replace(properQueryString, 
+                                'lang=es', 'lang=en')}" />
+                            <c:set var="frUrl" scope="request" value="?${fn:replace(properQueryString, 
+                                'lang=es', 'lang=fr')}" />
                         </c:when>
                         <c:otherwise>
                             <c:set var="frUrl" scope="request" value="?${properQueryString}&amp;lang=fr"/>
+                            <c:set var="esUrl" scope="request" value="?${properQueryString}&amp;lang=es"/>
                             <c:set var="enUrl" scope="request" value="?${properQueryString}&amp;lang=en"/>
                         </c:otherwise>
                     </c:choose>
                 </c:when>
                 <c:otherwise>
                     <c:set var="frUrl" scope="request" value="?lang=fr"/>
+                    <c:set var="esUrl" scope="request" value="?lang=es"/>
                     <c:set var="enUrl" scope="request" value="?lang=en"/>
                 </c:otherwise>
             </c:choose>
@@ -47,5 +60,8 @@
                 </a>
                 <a href="${frUrl}" title="Passer en français" lang="fr">
                     <abbr title="Français">FR</abbr>
+                </a>
+                <a href="${esUrl}" title="Cambaiar a español" lang="es">
+                    <abbr title="Español">ES</abbr>
                 </a>
             </div>
