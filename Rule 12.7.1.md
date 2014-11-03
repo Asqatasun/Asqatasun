@@ -41,11 +41,13 @@ None
 
 #### Analysis
 
-Page audit : 
-**Not Applicable**
+##### Not Applicable
 
-Group of pages audit or site audit : 
-**Not Tested**
+Page audit 
+
+##### Not Tested
+
+Group of pages audit or site audit
 
 ### Notes
 
