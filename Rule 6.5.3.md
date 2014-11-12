@@ -7,20 +7,14 @@ well-defined
 
 Criterion : 6.5
 
-Test : [6.5.3](http://www.braillenet.org/accessibilite/referentiel-aw21-en/index.php#test-6-5-3)
+Test : [6.5.3](www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-6-5-3)
 
 Test description :
 
-Does each server-side [image
-map](index.php/glossary-76.html#mImgReactive) (img tag or input tag as
-image with the ismap attribute) pass one of the conditions below?
+Does each server-side [image map](http://www.accessiweb.org/index.php/glossary-76.html#mImgReactive) (img tag or input tag as image with the ismap attribute) pass one of the conditions below?
 
--   The [image map](index.php/glossary-76.html#mImgReactive) is
-    immediately followed, in the source code by the list of links
-    redundant to the areas
--   The [image map](index.php/glossary-76.html#mImgReactive) is
-    immediately followed, in the source code by a navigation form
-    redundant with the areas
+-   The [image map](http://www.accessiweb.org/index.php/glossary-76.html#mImgReactive) is immediately followed, in the source code by the list of links redundant to the areas
+-   The [image map](http://www.accessiweb.org/index.php/glossary-76.html#mImgReactive) is immediately followed, in the source code by a navigation form redundant with the areas
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
