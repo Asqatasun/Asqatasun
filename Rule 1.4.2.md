@@ -12,15 +12,7 @@ Test : [1.4.2](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 Test description :
 
 For each
-[area](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mZone)
-(area tag) of an [image
-map](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mImgReactive),
-used as
-[CAPTCHA](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mcaptcha)
-or as [test
-image](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mImgTest),
-and with an alt attribute, does the content of this attribute allow to
-identify the kind and the purpose of the image?
+[area](http://www.accessiweb.org/index.php/glossary-76.html#mZone) (area tag) of an [image map](http://www.accessiweb.org/index.php/glossary-76.html#mImgReactive), used as [CAPTCHA](http://www.accessiweb.org/index.php/glossary-76.html#mcaptcha) or as [test image](http://www.accessiweb.org/index.php/glossary-76.html#mImgTest), and with an alt attribute, does the content of this attribute allow to identify the kind and the purpose of the image?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
