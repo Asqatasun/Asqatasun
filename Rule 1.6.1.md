@@ -12,23 +12,12 @@ Test : [1.6.1](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 Test description :
 
 Does each [image that conveys
-information](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mImgInfo)
-(img tag) that needs a [detailed
-description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee),
-pass one of the conditions below?
+information](http://www.accessiweb.org/index.php/glossary-76.html#mImgInfo)
+(img tag) that needs a [detailed description](http://www.accessiweb.org/index.php/glossary-76.html#mDescDetaillee), pass one of the conditions below?
 
--   A longdesc attribute providing the
-    [url](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mUrl)
-    of a page that contains the [detailed
-    description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee)is
-    available
--   An alt attribute that contains the reference to a [detailed
-    description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee)
-    just next to the image is available
--   There is an [adjacent
-    link](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mLienAdj)
-    allowing to access to the content of the [detailed
-    description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee)
+-   A longdesc attribute providing the [url](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mUrl) of a page that contains the [detailed description](http://www.accessiweb.org/index.php/glossary-76.html#mDescDetaillee) is available
+-   An alt attribute that contains the reference to a [detailed description](http://www.accessiweb.org/index.php/glossary-76.html#mDescDetaillee) just next to the image is available
+-   There is an [adjacent link](http://www.accessiweb.org/index.php/glossary-76.html#mLienAdj) allowing to access to the content of the [detailed description](http://www.accessiweb.org/index.php/glossary-76.html#mDescDetaillee)
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
