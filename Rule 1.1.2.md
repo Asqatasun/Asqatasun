@@ -30,9 +30,7 @@ Decision level :
 
 #### Selection
 
-All the `area` tags, defined in a `map` tag associated with the
-`usemap`\
-attribute of an `img` tag
+All the `area` tags, defined in a `map` tag associated with the `usemap` attribute of an `img` tag
 
 -   used nomenclature : none
 
@@ -40,8 +38,7 @@ attribute of an `img` tag
 
 #### Process
 
-Test the presence of an `alt` attribute in each element of the selection
-set.
+Test the presence of an `alt` attribute in each element of the selection set.
 
 -   used nomenclature : none
 
