@@ -10,32 +10,15 @@ Test : [4.1.2](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 
 Test description :
 
-Does each prerecorded video-only [time-based
-media](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mMediaTemp)
-pass one of the conditions below ([except in special
-cases](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#cpCrit4- "Special cases for criterion 4.1")
+Does each prerecorded video-only [time-based media](http://www.accessiweb.org/index.php/glossary-76.html#mMediaTemp) pass one of the conditions below ([except in special cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit4- "Special cases for criterion 4.1") )?
 
-)?
-
--   There is a [text
-    transcript](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTranscriptTextuel)
-    that is accessible via an [adjacent
-    link](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mLienAdj)
-    (an url or an anchor)
--   There is an adjacent [text
-    transcript](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTranscriptTextuel)
-    that can be clearly identified
--   A synchronised [audio
-    description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mAudioDesc)
-    is available
--   There is an alternative version with a synchronised audio
-    description that is accessible via an [adjacent
-    link](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mLienAdj)
-    (an url or an anchor)
--   There is an alternative audio-only version that is accessible via an
-    [adjacent
-    link](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mLienAdj)
-    (an url or an anchor)
+-   There is a [text transcript](http://www.accessiweb.org/index.php/glossary-76.html#mTranscriptTextuel) that is accessible via an [adjacent link](http://www.accessiweb.org/index.php/glossary-76.html#mLienAdj) (an url or an anchor)
+-   There is an adjacent [text transcript](http://www.accessiweb.org/index.php/glossary-76.html#mTranscriptTextuel) that can be clearly identified
+-   A synchronised [audio description](http://www.accessiweb.org/index.php/glossary-76.html#mAudioDesc) is available
+-   There is an alternative version with a synchronised audio description that is accessible via an [adjacent
+    link](http://www.accessiweb.org/index.php/glossary-76.html#mLienAdj) (an url or an anchor)
+-   There is an alternative audio-only version that is accessible via an [adjacent
+    link](http://www.accessiweb.org/index.php/glossary-76.html#mLienAdj) (an url or an anchor)
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
