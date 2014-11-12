@@ -12,7 +12,7 @@ Test : [11.10.3](http://www.accessiweb.org/index.php/accessiweb-22-english-versi
 Test description :
 
 For each form, is for each mandatory field the [data and/Or format
-type](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTypeDonnes)
+type](http://www.accessiweb.org/index.php/glossary-76.html#mTypeDonnes)
 specified, if necessary?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
