@@ -11,16 +11,16 @@ Test : [4.13.1](http://www.accessiweb.org/index.php/accessiweb-22-english-versio
 Test description :
 
 Does each synchronised [time-based
-media](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mMediaTemp)
-pass one of the conditions below, if necessary?
+media](http://www.accessiweb.org/index.php/glossary-76.html#mMediaTemp)
+pass one of the conditions below, if necessary ([except in special cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit4- "Special cases for criterion 4.13"))? 
 
 -   There is a [text
-    transcript](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTranscriptTextuel)
+    transcript](http://www.accessiweb.org/index.php/glossary-76.html#mTranscriptTextuel)
     that is accessible via an [adjacent
-    link](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mLienAdj)
+    link](http://www.accessiweb.org/index.php/glossary-76.html#mLienAdj)
     (an url or an anchor)
 -   There is an adjacent [text
-    transcript](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTranscriptTextuel)
+    transcript](http://www.accessiweb.org/index.php/glossary-76.html#mTranscriptTextuel)
     that can be clearly identified
 
 Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
