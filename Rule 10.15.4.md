@@ -11,7 +11,7 @@ Test : [10.15.4](http://www.accessiweb.org/index.php/accessiweb-22-english-versi
 Test description :
 
 On each Web page, for each [non time-based
-media](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mMediaNoTemp),
+media](http://www.accessiweb.org/index.php/glossary-76.html#mMediaNoTemp),
 information must not be provided by its shape or location alone. Does
 this rule have been implemented in a relevant way?
 
