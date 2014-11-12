@@ -10,20 +10,20 @@ Test :
 [7.2.1](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-7-2-1)
 
 Test description : Does each
-[script](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mScript)
+[script](http://www.accessiweb.org/index.php/glossary-76.html#mScript)
 that begins with the script tag and that has an
-[alternative](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mAltScript)
+[alternative](http://www.accessiweb.org/index.php/glossary-76.html#mAltScript)
 pass one of the conditions below?
 
 -   The
-    [alternative](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mAltScript)
+    [alternative](http://www.accessiweb.org/index.php/glossary-76.html#mAltScript)
     between
     and
     allows to access similar content and functionalities
 -   When javascript is disabled, the displayed page allows to access
     similar content and functionalities
 -   The
-    [alternative](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mAltScript)
+    [alternative](http://www.accessiweb.org/index.php/glossary-76.html#mAltScript)
     page allows to access similar content and functionalities
 -   The server-side script language allows to access similar content and
     functionalities
