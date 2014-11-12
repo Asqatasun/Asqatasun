@@ -12,10 +12,8 @@ Test :
 Test description :
 
 For each word or for each group of words where colour is used to convey
-[information](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mInfoCouleur),
-[information](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mInfoCouleur)
-does not have to be provided only by colour. Does this rule have been
-followed?
+[information](http://www.accessiweb.org/index.php/glossary-76.html#mInfoCouleur),
+[information](http://www.accessiweb.org/index.php/glossary-76.html#mInfoCouleur) does not have to be provided only by colour. Does this rule have been followed?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
