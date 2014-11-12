@@ -27,19 +27,15 @@ Decision level :
 
 All the set of tags respecting the following pattern :
 
-`    <p>
-
+```html
+    <p>
         text 
-
         <br/>
-
         text 
-
         <br/>
-
         ......
-
-    </p>`
+    </p>
+``` 
 
 where more than 2 `<br>` tags are encountered and where each text part does not exceed 80 characters.
 
