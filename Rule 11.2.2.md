@@ -12,7 +12,7 @@ Test : [11.2.2](http://www.accessiweb.org/index.php/accessiweb-22-english-versio
 Test description :
 
 Does each title attribute allow to know the exact function of the [form
-field](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mChpSaisie)
+field](http://www.accessiweb.org/index.php/glossary-76.html#mChpSaisie)
 (input tag of type text, password, checkbox, radio, file, or textarea
 and select tags) with which it is associated?
 
