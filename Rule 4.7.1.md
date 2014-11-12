@@ -10,16 +10,10 @@ Test : [4.7.1](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 
 Test description :
 
-does each prerecorded synchronised [time-based
-media](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mMediaTemp)
-pass one of the conditions below?
+Does each video-only prerecorded [time-based media](http://www.accessiweb.org/index.php/glossary-76.html#mMediaTemp) pass one of the conditions below, if necessary (except in [special cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit4- "Special cases for criterion 4.7" ))?
 
--   A track for the synchronised [audio
-    description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mAudioDesc)
-    is available
--   An alternative version with a synchronised [audio
-    description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mAudioDesc)
-    is available
+-    A synchronised [audio description](http://www.accessiweb.org/index.php/glossary-76.html#mAudioDesc) is available
+-    an alternative version with a synchronised [audio description](http://www.accessiweb.org/index.php/glossary-76.html#mAudioDesc) is available
 
 Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
