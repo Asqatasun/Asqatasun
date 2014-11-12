@@ -10,7 +10,7 @@ Test :
 [8.2.1](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-8-2-1)
 
 Test description : For each [document
-type](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDTD)
+type](http://www.accessiweb.org/index.php/glossary-76.html#mDTD)
 declaration, does the page source code pass the conditions below?
 
 -   Tags follow the writing rules
