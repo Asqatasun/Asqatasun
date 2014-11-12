@@ -7,13 +7,11 @@ page.
 
 Criterion : 8.6
 
-Test : [8.6.1](http://www.braillenet.org/accessibilite/referentiel-aw21/liste-deploye.php#test-8-6-1)
+Test : [8.6.1](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-8-6-1)
 
 Test description :
 
-Test 8.6.1 : Pour chaque page Web ayant un [titre de
-page](http://www.braillenet.org/accessibilite/referentiel-aw21/glossaire.php#mTitrePage)
-(balise title), le contenu de cette balise est-il pertinent ?
+Test 8.6.1 : For each Web page with a [page title](http://www.accessiweb.org/index.php/glossary-76.html#mTitrePage) (title tag), is the content of this tag relevant? 
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
