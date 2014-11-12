@@ -12,7 +12,7 @@ Test description :
 
 Does each prerecorded synchronised [time-based media](http://www.accessiweb.org/index.php/glossary-76.html#mMediaTemp) pass one of the conditions below ([except in special cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit4- "Special cases for criterion 4.3"))?
 
--   The synchronised [time-based media]http://www.accessiweb.org/index.php/glossary-76.html#mMediaTemp)
+-   The synchronised [time-based media](http://www.accessiweb.org/index.php/glossary-76.html#mMediaTemp)
     has [synchronised captions](http://www.accessiweb.org/index.php/glossary-76.html#mSsTitreSynchro)
 -   there is an alternative version with [synchronised captions](http://www.accessiweb.org/index.php/glossary-76.html#mSsTitreSynchro) that is accessible via an [adjacent link](http://www.accessiweb.org/index.php/glossary-76.html#mLienAdj) (an url or an anchor)
 
