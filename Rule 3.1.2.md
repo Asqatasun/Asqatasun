@@ -10,10 +10,7 @@ Test : [3.1.2](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 
 Test description :
 
-For each colour indication provided by a text,
-[information](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mInfoCouleur)
-does not have to be provided only by colour. Does this rule have been
-followed?
+For each colour indication provided by a text, [information](http://www.accessiweb.org/index.php/glossary-76.html#mInfoCouleur) does not have to be provided only by colour. Does this rule have been followed?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
