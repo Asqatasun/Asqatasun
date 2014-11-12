@@ -31,10 +31,10 @@ Decision level :
 #### Selection
 
 Set1 : All the clickable area (see [the definition of a clickable
-area](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mZoneCliquable))
+area](http://www.accessiweb.org/index.php/glossary-76.html#mZoneCliquable))
 with a "href" attribute, without "title" attribute, without context
 (assuming [the definition of a link context in AccessiWeb
-2.1](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mContexteLien))
+2.2](http://www.accessiweb.org/glossaire.html#mContexteLien))
 and with an identical link text.
 
 Set2 : All the clickable area with a "href" attribute, a not empty
