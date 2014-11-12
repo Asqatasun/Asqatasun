@@ -11,14 +11,14 @@ Test : [1.5.1](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 Test description :
 
 Does each image (img, area, applet, object, embed tags) used as
-[CAPTCHA](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mcaptcha)
+[CAPTCHA](http://www.accessiweb.org/index.php/glossary-76.html#mcaptcha)
 pass one of the conditions below?
 
 -   Another form of
-    [CAPTCHA](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mcaptcha)
+    [CAPTCHA](http://www.accessiweb.org/index.php/glossary-76.html#mcaptcha)
     at least non grafic is available
 -   Another solution to access the secured functionality of the
-    [CAPTCHA](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mcaptcha)
+    [CAPTCHA](http://www.accessiweb.org/index.php/glossary-76.html#mcaptcha)
     is available
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
