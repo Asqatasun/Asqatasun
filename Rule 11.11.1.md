@@ -12,7 +12,7 @@ Test : [11.11.1](http://www.accessiweb.org/index.php/accessiweb-22-english-versi
 Test description :
 
 For each form, for each input error, are each [data types and
-formats](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mmTypeDonnes)
+formats](http://www.accessiweb.org/index.php/glossary-76.html#mTypeDonnes)
 suggested, if necessary?
 
 Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
