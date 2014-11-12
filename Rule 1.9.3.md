@@ -11,10 +11,7 @@ Test : [1.9.3](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 
 Test description :
 
-For each form tag, each button "image of text" (input tag with the
-attribute type="image") must be rreplaced with [styled
-text](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTexteStyle)
-if possible. Does this rule have been followed?
+For each form tag, each button "image of text" (input tag with the attribute type="image") must be replaced with [styled text](http://www.accessiweb.org/index.php/glossary-76.html#mTexteStyle) if possible. Does this rule have been followed ([except in special cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit19- "Special cases for criterion 1.9"))?
 
 Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
 
