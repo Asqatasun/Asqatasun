@@ -7,14 +7,14 @@ have the same purpose and target
 
 Criterion : 6.4
 
-Test : [6.4.3](http://www.braillenet.org/accessibilite/referentiel-aw21-en/index.php#test-6-4-3)
+Test : [6.4.3](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-6-4-3)
 
 Test description :
 
 Does each [identical
-link](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mLienIdentique)
+link](http://www.accessiweb.org/index.php/glossary-76.html#mLienIdentique)
 of type [clickable
-area](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mZoneCliquable)
+area](http://www.accessiweb.org/index.php/glossary-76.html#mZoneCliquable)
 have the same purpose and target?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
