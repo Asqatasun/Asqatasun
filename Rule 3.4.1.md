@@ -8,15 +8,15 @@ sized textual elements
 
 Criterion : 3.4
 
-Test : [3.4.1](http://www.braillenet.org/accessibilite/referentiel-aw21-en/index.php#test-3-4-1)
+Test : [3.4.1](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-3-4-1)
 
 Test description :
 
 On each Web page, **until 150%** of the [default font
-size](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTaillePolice)
+size](http://www.accessiweb.org/index.php/glossary-76.html#mTaillePolice)
 (or 1.5em), do text and image of text without bolding pass one of the
 conditions below([except in special
-cases](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#cpCrit3- "Special cases for criterion 3.4"))?
+cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit3- "Special cases for criterion 3.4"))?
 
 -   the contrast ratio between text and its background is at least 7:1
 -   a mechanism allows the user to display text with a contrast ratio of
