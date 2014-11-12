@@ -8,15 +8,14 @@ textual elements
 
 Criterion : 3.3
 
-Test : [3.3.2](http://www.braillenet.org/accessibilite/referentiel-aw21-en/index.php#test-3-3-2)
+Test : [3.3.2](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-3-3-2)
 
 Test description :
 
 On each Web page, [**until 120%** of the default font
-size](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTailleCaract%C3%A8re)
-(or 1.2em), does bold text and image of text pass one of the conditions
-below ([except in special
-cases](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#cpCrit3- "Special cases for criterion 3.3"))?
+size](http://www.accessiweb.org/index.php/glossary-76.html#mTailleCaract%C3%A8re)
+(or 1.2em), does bold text and image of text pass one of the conditions below ([except in special
+cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit3- "Special cases for criterion 3.3"))?
 
 -   The contrast ratio between text and its background is at least 4.5:1
 -   a mechanism allows the user to display text with a contrast ratio of
