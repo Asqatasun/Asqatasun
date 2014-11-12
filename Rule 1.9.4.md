@@ -12,10 +12,7 @@ Test : [1.9.4](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 Test description :
 
 Each [text image
-applet](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mImgTextApplet)
-(applet tag) must be rreplaced with [styled
-text](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTexteStyle)
-if possible. Does this rule have been followed?
+applet](http://www.accessiweb.org/index.php/glossary-76.html#mImgTextApplet) (applet tag) must be replaced with [styled text](http://www.accessiweb.org/index.php/glossary-76.html#mTexteStyle) if possible. Does this rule have been followed ([except in special cases] (http://www.accessiweb.org/index.php/glossary-76.html#cpCrit19- "Special cases for criterion 1.9") )?
 
 Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
 
