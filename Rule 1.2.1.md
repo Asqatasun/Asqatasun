@@ -7,14 +7,11 @@ decorative image is empty.
 
 Criterion : 1.2
 
-Test : [1.2.1](http://www.braillenet.org/accessibilite/referentiel-aw21/liste-deploye.php#test-1-2-1)
+Test : [1.2.1](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-1-2-1)
 
 Test description :
 
-For each [decorative
-image](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mImgDeco)
-(img tag) with an `alt` attribute, is the content of this attribute empty
-(alt="")?
+For each [decorative image](http://www.accessiweb.org/index.php/glossary-76.html#mImgDeco) (img tag) with an `alt` attribute, is the content of this attribute empty (alt="")?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
