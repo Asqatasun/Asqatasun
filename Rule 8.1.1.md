@@ -6,11 +6,11 @@ This tests checks whether a document type is available on the page.
 
 Criterion : 8.1
 
-Test : [8.1.1](http://www.braillenet.org/accessibilite/referentiel-aw21-en/index.php#test-8-1-1)
+Test : [8.1.1](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-8-1-1)
 
 Test description :
 
-For each Web page, is the [document type](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDTD) (`doctype` tag) available?
+For each Web page, is the [document type](http://www.accessiweb.org/index.php/glossary-76.html#mDTD) (`doctype` tag) available?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
