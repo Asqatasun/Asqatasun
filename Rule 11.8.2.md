@@ -7,14 +7,11 @@ tag has a label attribute.
 
 Criterion : 11.8
 
-Test : [11.8.2](http://www.braillenet.org/accessibilite/referentiel-aw21-en/index.php#test-11-8-2)
+Test : [11.8.2](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-11-8-2)
 
 Test description :
 
-In each [selection
-list](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mListeChoix)
-(select tag), does each list item grouping (optgroup tag) have a label
-attribute?
+In each [selection list](http://www.accessiweb.org/index.php/glossary-76.html#mListeChoix) (select tag), does each list item grouping (optgroup tag) have a label attribute?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
@@ -41,7 +38,7 @@ For each occurence of false-result of Test1, raise a MessageA
 
 ###### MessageA : Optgroup without label
 
--   code :OptgroupWithoutLabel
+-   code : OptgroupWithoutLabel
 -   status: Failed
 -   parameter : tag name
 -   present in source : yes
@@ -61,5 +58,3 @@ Test1 returns false for at least one element.
 Test1 returns true for all the elements.
 
 ### Notes
-
-No notes yet for that rule
