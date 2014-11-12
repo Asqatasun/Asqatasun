@@ -39,8 +39,8 @@ All the set of tags respecting the following pattern :
 
         ......
 
-    </p>
-`
+    </p>`
+
 where more than 2 `<br>` tags are encountered and where each text part does not exceed 80 characters.
 
 -   used nomenclature : none
