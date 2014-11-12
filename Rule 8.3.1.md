@@ -6,14 +6,14 @@ We check whether a language is specified for each textual element of the page
 
 Criterion : 8.3
 
-Test : [8.3.1](http://www.braillenet.org/accessibilite/referentiel-aw21-en/index.php#test-8-3-1)
+Test : [8.3.1](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-8-3-1)
 
 Test description :
 
-For each Web page, does the [default human language](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mLangueDefaut) specification pass one of the conditions below?
+For each Web page with a default [human language](http://www.accessiweb.org/index.php/glossary-76.html#mLangueDefaut), does the [language code](http://www.accessiweb.org/index.php/glossary-76.html#mCodeLangue) pass the conditions below?
 
--   The page human language specification (`lang` and/or `xml:lang` attribute) is provided for the Html element
--   The page human language specification (`lang` and/or `xml:lang` attribute) is provided for each text element or on one of the parent elements
+-   The [language code](http://www.accessiweb.org/index.php/glossary-76.html#mCodeLangue) is valid
+-   The [language code](http://www.accessiweb.org/index.php/glossary-76.html#mCodeLangue) is relevant
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
