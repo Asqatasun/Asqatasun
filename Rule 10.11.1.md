@@ -12,7 +12,7 @@ Test description :
 
 For each Web page, does each block of text pass one of the conditions
 below ([except in special
-cases](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#cpCrit10-11 "Special cases for criterion 10.11"))?
+cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit10-11 "Special cases for criterion 10.11"))?
 
 -   Each block of text has a width that is less than or equal to 80
     characters
