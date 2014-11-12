@@ -10,8 +10,8 @@ Test : [1.3.5](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 
 Test description :
 
-For each [object image](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mImgObj) (`<object>` tag with the attribute type="image/...") that conveys information and with a [text
-alternative](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mAltTexteImg), is the [text alternative](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mAltTexteImg) between `<object>` and `</object>` relevant (except in [special cases](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#cpCrit1-3 "Special cases for criterion 1.3"))?
+For each [object image](http://www.accessiweb.org/index.php/glossary-76.html#mImgObj) (`<object>` tag with the attribute type="image/...") that conveys information and with a [text
+alternative](http://www.accessiweb.org/index.php/glossary-76.html#mAltTexteImg), is the [text alternative](http://www.accessiweb.org/index.php/glossary-76.html#mAltTexteImg) between `<object>` and `</object>` relevant (except in [special cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit1-3 "Special cases for criterion 1.3"))?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
