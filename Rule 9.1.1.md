@@ -7,12 +7,12 @@ page.
 
 Criterion : 9.1
 
-Test : [9.1.1](http://www.braillenet.org/accessibilite/referentiel-aw21/liste-deploye.php#test-9-1-1)
+Test : [9.1.1](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-9-1-1)
 
 Test description :
 
 Is there a level 1
-[heading](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTitre)
+[heading](http://www.accessiweb.org/index.php/glossary-76.html#mTitre)
 (h1 tag) on each Web page?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
