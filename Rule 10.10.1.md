@@ -10,9 +10,7 @@ Test : [10.10.1](http://www.accessiweb.org/index.php/accessiweb-22-english-versi
 
 Test description :
 
-On each Web page, does increasing of [character
-size](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTailleCaractere)
-to 200% pass one of the conditions below?
+On each Web page, does increasing of [character size](http://www.accessiweb.org/index.php/glossary-76.html#mTailleCaractere) to 200% pass one of the conditions below?
 
 -   In a full-screen window, the use of horizontal scrolling is not
     necessary to read a block of text
