@@ -12,7 +12,7 @@ Test : [11.4.1](http://www.accessiweb.org/index.php/accessiweb-22-english-versio
 Test description :
 
 In each form, are each control
-[label](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mEtiquette)
+[label](http://www.accessiweb.org/index.php/glossary-76.html#mEtiquette)
 and its related control positioned next to each other?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
