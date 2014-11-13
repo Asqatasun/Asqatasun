@@ -7,19 +7,12 @@ well-defined
 
 Criterion : 6.5
 
-Test : [6.5.2](http://www.braillenet.org/accessibilite/referentiel-aw21-en/index.php#test-6-5-2)
+Test : [6.5.2](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-6-5-2)
 
-Test description : Does each server-side [image
-map](index.php/glossary-76.html#mImgReactive) (img tag or input tag as
-image with the ismap attribute) pass one of the conditions below?
+Test description : Does each server-side [image map](http://www.accessiweb.org/index.php/glossary-76.html#mImgReactive) (img tag or input tag as image with the ismap attribute) pass one of the conditions below?
 
--   The link that doubles the [clickable
-    area](index.php/glossary-76.html#mZoneCliquable) allows to access to
-    the same function and the same target as the [clickable
-    area](index.php/glossary-76.html#mZoneCliquable)
--   the form submission allows to access the same purpose and the same
-    target as the [clickable
-    area](index.php/glossary-76.html#mZoneCliquable).
+-   The link that doubles the [clickable area](http://www.accessiweb.org/index.php/glossary-76.html#mZoneCliquable) allows to access to the same function and the same target as the [clickable area](http://www.accessiweb.org/index.php/glossary-76.html#mZoneCliquable)
+-   the form submission allows to access the same purpose and the same target as the [clickable area](http://www.accessiweb.org/index.php/glossary-76.html#mZoneCliquable).
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
