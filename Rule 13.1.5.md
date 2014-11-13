@@ -11,7 +11,7 @@ Test :
 
 Test description : For each Web page, does each process restricting a
 session time pass one of the conditions below ([except in special
-cases](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#cpCrit13-1 "Special cases for criterion 13.1"))?
+cases](http://www.accessiweb.org/index.php/glossary-76.html "Special cases for criterion 13.1"))?
 
 -   The user can suppress time limit
 -   The user can increase time limit
