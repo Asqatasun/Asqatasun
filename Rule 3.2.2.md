@@ -11,12 +11,12 @@ Test : [3.2.2](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 Test description :
 
 For each
-[information](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mInfoCouleur)
+[information](http://www.accessiweb.org/index.php/glossary-76.html#mInfoCouleur)
 conveyed by colour for a word or a group of words,
-[information](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mInfoCouleur)
+[information](http://www.accessiweb.org/index.php/glossary-76.html#mInfoCouleur)
 does not have to be provided only by colour. Does this rule have been
 implemented in a
-[relevant](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mPertinence)
+[relevant](http://www.accessiweb.org/index.php/glossary-76.html#mPertinence)
 way?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
