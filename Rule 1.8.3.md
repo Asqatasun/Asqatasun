@@ -10,12 +10,7 @@ Test : [1.8.3](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 
 Test description :
 
-For each form tag, when an [alternate
-mechanism](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mMecaRempl)
-is missing, each button "image of text" (input tag with the attribute
-type="image") must be replaced with [styled
-text](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTexteStyle),
-if possible. Does this rule have been followed?
+For each form tag, when an [alternate mechanism](http://www.accessiweb.org/index.php/glossary-76.html#mMecaRempl) is missing, each button "image of text" (input tag with the attribute type="image") must be replaced with [styled text](http://www.accessiweb.org/index.php/glossary-76.html#mTexteStyle), if possible. Does this rule have been followed ([except in special cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit1-8 "Special cases for criterion 1.8") )?
 
 Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
