@@ -6,12 +6,12 @@ No-check rule
 
 Criterion : 4.10
 
-Test : [4.10.1](http://www.braillenet.org/accessibilite/referentiel-aw21-en/index.php#test-4-10-1)
+Test : [4.10.1](www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-4-10-1)
 
 Test description :
 
 For each prerecorded synchronised [time-based
-media](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mMediaTemp)
+media](http://www.accessiweb.org/index.php/glossary-76.html#mMediaTemp)
 with a sign language interpretation, is this interpretation relevant?
 
 Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
