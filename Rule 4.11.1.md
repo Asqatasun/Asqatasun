@@ -10,19 +10,10 @@ Test : [4.11.1](http://www.accessiweb.org/index.php/accessiweb-22-english-versio
 
 Test description :
 
-Does each prerecorded synchronised [time-based
-media](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mMediaTemp)
-pass one of the conditions below, if necessary? ([except in special
-cases](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#cpCrit4- "Special cases for criterion 4.11")
+Does each prerecorded synchronised [time-based media](http://www.accessiweb.org/index.php/glossary-76.html#mMediaTemp) pass one of the conditions below, if necessary? ([except in special cases](http://www.accessiweb.org/index.php/glossary-76.html "Special cases for criterion 4.11"))
 
-)
-
--   A synchronised [extended audio
-    description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mAudioDescE)
-    is available
--   An alternative version with a synchronised [extended audio
-    description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mAudioDescE)
-    is available
+-   A synchronised [extended audio description](http://www.accessiweb.org/index.php/glossary-76.html#mAudioDescE) is available
+-   An alternative version with a synchronised [extended audio description](http://www.accessiweb.org/index.php/glossary-76.html#mAudioDescE) is available
 
 Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
 
