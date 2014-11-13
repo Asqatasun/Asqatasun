@@ -10,9 +10,7 @@ Test : [12.11.3](http://www.accessiweb.org/index.php/accessiweb-22-english-versi
 
 Test description :
 
-On each Web page, does each [bypass or quick access
-link](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mLienEvitement)
-work?
+On each Web page, does each [bypass or quick access link](http://www.accessiweb.org/index.php/glossary-76.html#mLienEvitement) work?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
