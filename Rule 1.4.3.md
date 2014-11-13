@@ -11,12 +11,7 @@ Test : [1.4.3](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 
 Test description :
 
-For each image (applet tag) used as
-[CAPTCHA](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mcaptcha)
-or as [test
-image](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mImgTest),
-with an alt attribute, does the content of this attribute allow to
-identify the kind and the purpose of the image?
+For each image (applet tag) used as [CAPTCHA](http://www.accessiweb.org/index.php/glossary-76.html#mcaptcha) or as [test image](http://www.accessiweb.org/index.php/glossary-76.html#mImgTest), with an alt attribute, does the content of this attribute allow to identify the kind and the purpose of the image?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
