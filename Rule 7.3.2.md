@@ -11,14 +11,14 @@ Test :
 
 Test description : Does each element with an event handler controlled by
 a
-[script](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mScript)
+[script](http://www.accessiweb.org/index.php/glossary-76.html#mScript)
 pass one of the conditions below ([except in special
-cases](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#cpCrit7-3 "Special cases for criterion 7.3"))?
+cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit7-3 "Special cases for criterion 7.3"))?
 
 -   The element can be [activated by keyboard and
-    mouse](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mAAClavierSouris)
+    mouse](http://www.accessiweb.org/index.php/glossary-76.html#mAAClavierSouris)
 -   An element that can be [activated by keyboard and
-    mouse](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mAAClavierSouris)
+    mouse](http://www.accessiweb.org/index.php/glossary-76.html#mAAClavierSouris)
     allowing to perform the same action is available on the page
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
