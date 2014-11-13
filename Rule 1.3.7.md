@@ -11,13 +11,13 @@ Test : [1.3.7](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 Test description :
 
 For each [image that conveys
-information](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mImgInfo)
+information](http://www.accessiweb.org/index.php/glossary-76.html#mImgInfo)
 and with a [text
-alternative](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mAltTexteImg),
+alternative](http://www.accessiweb.org/index.php/glossary-76.html#mAltTexteImg),
 is [the text alternative short and
-concise](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#maltCC)
+concise](http://www.accessiweb.org/index.php/glossary-76.html#maltCC)
 (except in [special
-cases](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#cpCrit1-3 "Special cases for criterion 1.3"))?
+cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit1-3 "Special cases for criterion 1.3"))?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
