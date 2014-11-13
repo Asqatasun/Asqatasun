@@ -11,10 +11,10 @@ Test : [3.1.6](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 Test description :
 
 For each [time-based
-media](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mMediaNoTemp)
+media](http://www.accessiweb.org/index.php/glossary-76.html#mMediaNoTemp)
 that conveys
-[information](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mInfoCouleur),
-[information](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mInfoCouleur)
+[information](http://www.accessiweb.org/index.php/glossary-76.html#mInfoCouleur),
+[information](http://www.accessiweb.org/index.php/glossary-76.html#mInfoCouleur)
 does not have to be provided only by colour. Does this rule have been
 followed?
 
