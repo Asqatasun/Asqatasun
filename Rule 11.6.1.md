@@ -7,7 +7,7 @@ a legend tag in the source code.
 
 Criterion : 11.6
 
-Test : [11.6.1](http://www.braillenet.org/accessibilite/referentiel-aw21-en/index.php#test-11-6-1)
+Test : [11.6.1](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-11-6-1)
 
 Test description :
 
