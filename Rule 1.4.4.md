@@ -13,9 +13,9 @@ Test description :
 
 For each button associated with an image (input tag with the attribute
 type="image") used as
-[CAPTCHA](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mcaptcha)
+[CAPTCHA](http://www.accessiweb.org/index.php/glossary-76.html#mcaptcha)
 or as [test
-image](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mImgTest),
+image](http://www.accessiweb.org/index.php/glossary-76.html#mImgTest),
 with an alt attribute, does the content of this attribute allow to
 identify the kind and the purpose of the image?
 
