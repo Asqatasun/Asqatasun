@@ -10,7 +10,7 @@ Test : [1.4.5](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 
 Test description :
 
-For each [object image](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mImgObj) (`<object>` tag with the attribute type="image/...") used as [CAPTCHA](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mcaptcha) or as [test image](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mImgTest), and with a [text alternative](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mAltTexteImg), does the [text alternative](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mAltTexteImg)
+For each [object image](http://www.accessiweb.org/index.php/glossary-76.html#mImgObj) (`<object>` tag with the attribute type="image/...") used as [CAPTCHA](http://www.accessiweb.org/index.php/glossary-76.html#mcaptcha) or as [test image](http://www.accessiweb.org/index.php/glossary-76.html#mImgTest), and with a [text alternative](http://www.accessiweb.org/index.php/glossary-76.html#mAltTexteImg), does the [text alternative](http://www.accessiweb.org/index.php/glossary-76.html#mAltTexteImg)
 between `<object>` and `</object>` allow to identify the kind and the purpose of the image?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
