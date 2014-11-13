@@ -10,12 +10,7 @@ Test : [3.1.4](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 
 Test description :
 
-For each [CSS property that specifies a
-colour](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mPropCouleur)
-and that conveys
-[information](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mInfoCouleur),
-[information](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mInfoCouleur)
-must not be provided only by colour. Does this rule have been followed?
+For each [CSS property that specifies a colour](http://www.accessiweb.org/index.php/glossary-76.html#mPropCouleur) and that conveys [information](http://www.accessiweb.org/index.php/glossary-76.html#mInfoCouleur), [information](http://www.accessiweb.org/index.php/glossary-76.html#mInfoCouleur) must not be provided only by colour. Does this rule have been followed?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
