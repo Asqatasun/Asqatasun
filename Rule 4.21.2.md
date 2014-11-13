@@ -11,7 +11,7 @@ Test : [4.21.2](http://www.accessiweb.org/index.php/accessiweb-22-english-versio
 Test description :
 
 For each [non time-based
-media](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mMediaNoTemp),
+media](http://www.accessiweb.org/index.php/glossary-76.html#mMediaNoTemp),
 can each functionality be activated by the keyboard and by the mouse?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
