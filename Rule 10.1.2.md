@@ -8,12 +8,12 @@ code.
 
 Criterion : 10.1
 
-Test : [10.1.2](http://www.braillenet.org/accessibilite/referentiel-aw21-en/index.php#test-10-1-2)
+Test : [10.1.2](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-10-1-2)
 
 Test description :
 
 On each Web page, attributes serving for [information
-presentation](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mPresInfo)
+presentation](http://www.accessiweb.org/index.php/glossary-76.html#mPresInfo)
 must not be available in the page source code. Does this rule have been
 followed?
 
