@@ -10,12 +10,12 @@ Test : [1.6.3](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 
 Test description :
 
-Does each [applet image](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mImgApplet) that conveys information (applet tag), requiring a [detailed description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee), pass one of the conditions below?
+Does each [applet image](http://www.accessiweb.org/index.php/glossary-76.html#mImgApplet) that conveys information (applet tag), requiring a [detailed description](http://www.accessiweb.org/index.php/glossary-76.html#mDescDetaillee), pass one of the conditions below?
 
--   An `alt` attribute containing the reference to a [detailed description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee) just next to the image is available
--   Between `<applet>` and `</applet>` there is a reference to a [detailed description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee) available on the page
--   An [adjacent link](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mLienAdj) (via a [url](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mUrl)
-    or an anchor) allowing to access to the content of the [detailed description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee) is available
+-   An `alt` attribute containing the reference to a [detailed description](http://www.accessiweb.org/index.php/glossary-76.html#mDescDetaillee) just next to the image is available
+-   Between `<applet>` and `</applet>` there is a reference to a [detailed description](http://www.accessiweb.org/index.php/glossary-76.html#mDescDetaillee) available on the page
+-   An [adjacent link](http://www.accessiweb.org/index.php/glossary-76.html#mLienAdj) (via a [url](http://www.accessiweb.org/index.php/glossary-76.html#mUrl)
+    or an anchor) allowing to access to the content of the [detailed description](http://www.accessiweb.org/index.php/glossary-76.html#mDescDetaillee) is available
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
