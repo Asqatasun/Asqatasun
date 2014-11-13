@@ -6,11 +6,11 @@ This test consists in checking the use of appropriate tags (`<ol>` and `<li>`) i
 
 Criterion : 9.2
 
-Test : [9.2.2](http://www.braillenet.org/accessibilite/referentiel-aw21-en/index.php#test-9-2-2)
+Test : [9.2.2](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-9-2-2)
 
 Test description :
 
-On each Web page, does information grouped in ordered [lists](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mListes) use the ol and li tags?
+On each Web page, does information grouped in ordered [lists](http://www.accessiweb.org/index.php/glossary-76.html#mListes) use the ol and li tags?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
