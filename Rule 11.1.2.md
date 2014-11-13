@@ -10,19 +10,13 @@ attribute corresponds to the "for" attribute of any label tag or
 
 Criterion : 11.1
 
-Test : [11.1.2](http://www.braillenet.org/accessibilite/referentiel-aw21-en/index.php#test-11-1-2)
+Test : [11.1.2](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-11-1-2)
 
 Test description :
 
-Does each [form
-field](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mChpSaisie)
-(input tag of type text, password, checkbox, radio, file, or textarea
-and select tags), that is associated with a label (label tag), pass the
-conditions below?
+Does each [form field](http://www.accessiweb.org/index.php/glossary-76.html#mChpSaisie) (input tag of type text, password, checkbox, radio, file, or textarea and select tags), that is associated with a label (label tag), pass the conditions below?
 
--   The [form
-    field](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mChpSaisie)
-    has an id attribute
+-   The [form field](http://www.accessiweb.org/index.php/glossary-76.html#mChpSaisie) has an id attribute
 -   The value of the id attribute is unique
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
