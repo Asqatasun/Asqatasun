@@ -12,10 +12,10 @@ Test :
 Test description :
 
 Does each prerecorded synchronised [time-based
-media](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mMediaTemp)
+media](http://www.accessiweb.org/index.php/glossary-76.html#mMediaTemp)
 have a sign language interpretation, if necessary, that is adapted to
 the media language ([except in special
-cases](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#cpCrit4- "Special cases for criterion 4.9"))?
+cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit4- "Special cases for criterion 4.9"))?
 
 Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
 
