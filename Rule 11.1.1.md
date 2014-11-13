@@ -10,19 +10,15 @@ form field is within the contents of the label elements
 
 Criterion : 11.1
 
-Test : [11.1.1](http://www.braillenet.org/accessibilite/referentiel-aw21-en/index.php#test-11-1-1)
+Test : [11.1.1](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-11-1-1)
 
 Test description :
 
-Does each [form
-field](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mChpSaisie)
-(input tag of type text, password, checkbox, radio, file, or textarea
-and select tags), pass one of the conditions below?
+Does each [form field](http://www.accessiweb.org/index.php/glossary-76.html#mChpSaisie)
+(input tag of type text, password, checkbox, radio, file, or textarea and select tags), pass one of the conditions below?
 
 -   The form field has a title attribute
--   A
-    [label](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mEtiquette)
-    (label tag) is associated with the form field
+-   A [label](http://www.accessiweb.org/index.php/glossary-76.html#mEtiquette) (label tag) is associated with the form field
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
