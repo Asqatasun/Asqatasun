@@ -176,6 +176,7 @@
 * [[Rule 8.8.1|Rule 8.8.1]]
 * [[Rule 8.9.1|Rule 8.9.1]]
 * [[Rule 8.10.1|Rule 8.10.1]]
+
 ## Theme 9: Structuration of information
 
 * [[Rule 9.1.1|Rule 9.1.1]]
