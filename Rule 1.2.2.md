@@ -11,11 +11,8 @@ Test : [1.2.2](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 
 Test description :
 
-For each [non clickable
-area](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mZoneNonCliquable)
-(area tag with the nohref attribute), that does not convey information,
-and that has an alt attribute, is the content of this attribute empty
-(alt="")?
+For each [non clickable area](http://www.accessiweb.org/index.php/glossary-76.html#mZoneNonCliquable)
+(area tag with the nohref attribute), that does not convey information, and that has an alt attribute, is the content of this attribute empty (alt="")?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
