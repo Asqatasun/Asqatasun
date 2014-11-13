@@ -11,10 +11,7 @@ Test : [11.3.1](http://www.accessiweb.org/index.php/accessiweb-22-english-versio
 
 Test description :
 
-Is each
-[label](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mEtiquette)
-related with a form field with the same function and that is repeated
-several times on a same Web page consistent?
+Is each [label](http://www.accessiweb.org/index.php/glossary-76.html#mEtiquette) related with a form field with the same function and that is repeated several times on a same Web page consistent?
 
 Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
