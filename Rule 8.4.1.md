@@ -10,7 +10,7 @@ Test : [8.4.1](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 
 Test description :
 
-Test8.4.1: For each Web page with a [default human language](http://www.accessiweb.org/index.php/glossary-76.html#mLangueDefaut), does the [language code](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mCodeLangue) pass the conditions below?
+Test8.4.1: For each Web page with a [default human language](http://www.accessiweb.org/index.php/glossary-76.html#mLangueDefaut), does the [language code](http://www.accessiweb.org/index.php/glossary-76.html#mCodeLangue) pass the conditions below?
 
 -   The [language code](http://www.accessiweb.org/index.php/glossary-76.html#mCodeLangue) is valid
 -   The [language code](http://www.accessiweb.org/index.php/glossary-76.html#mCodeLangue) is relevant
