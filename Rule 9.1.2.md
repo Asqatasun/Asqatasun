@@ -6,11 +6,11 @@ This test consists in checking the relevancy of the headings hierarchy.
 
 Criterion : 9.1
 
-Test : [9.1.2](http://www.braillenet.org/accessibilite/referentiel-aw21/liste-deploye.php#test-9-1-2)
+Test : [9.1.2](www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-9-1-2)
 
 Test description :
 
-On each Web page, is the hierarchy between the [headings](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTitre) (h tags) relevant?
+On each Web page, is the hierarchy between the [headings](http://www.accessiweb.org/index.php/glossary-76.html#mTitre) (h tags) relevant?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
