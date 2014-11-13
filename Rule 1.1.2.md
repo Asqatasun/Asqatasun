@@ -7,15 +7,11 @@ defined with an `alt` attribute
 
 Criterion : 1.1
 
-Test : [1.1.2](http://www.braillenet.org/accessibilite/referentiel-aw21/liste-deploye.php#test-1-1-2)
+Test : [1.1.2](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-1-1-2)
 
 Test description :
 
-Does each
-[area](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mZone)
-(area tag) of an [image
-map](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mImgReactive)
-have an alt attribute?
+Does each [area](http://www.accessiweb.org/index.php/glossary-76.html#mZone) (area tag) of an [image map](http://www.accessiweb.org/index.php/glossary-76.html#mImgReactive) have an `alt` attribute?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
