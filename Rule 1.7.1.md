@@ -12,21 +12,21 @@ Test : [1.7.1](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 Test description :
 
 Does each [image that conveys
-information](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mImgInfo)
+information](http://www.accessiweb.org/index.php/glossary-76.html#mImgInfo)
 (img tag or input as image) with a [detailed
-description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee)
+description](http://www.accessiweb.org/index.php/glossary-76.html#mDescDetaillee)
 pass one of the conditions below?
 
 -   The [detailed
-    description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee)
+    description](http://www.accessiweb.org/index.php/glossary-76.html#mDescDetaillee)
     via the url referred by the longdesc attribute is relevant
 -   the [detailed
-    description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee)
+    description](http://www.accessiweb.org/index.php/glossary-76.html#mDescDetaillee)
     on the page and identified in the alt attribute is relevant
 -   The [detailed
-    description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDescDetaillee)
+    description](http://www.accessiweb.org/index.php/glossary-76.html#mDescDetaillee)
     via an [adjacent
-    link](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mLienAdj)
+    link](http://www.accessiweb.org/index.php/glossary-76.html#mLienAdj)
     is relevant
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
