@@ -12,12 +12,12 @@ Test : [1.3.2](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 Test description :
 
 For each
-[area](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mZone)
+[area](http://www.accessiweb.org/index.php/glossary-76.html#mZone)
 (area tag) of an [image
-map](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mImgReactive),
+map](http://www.accessiweb.org/index.php/glossary-76.html#mImgReactive),
 that conveys information and has an alt attribute, is the content of
 this attribute relevant (except in [special
-cases](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#cpCrit1-3 "Special cases for criterion 1.3"))?
+cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit1-3 "Special cases for criterion 1.3"))?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
