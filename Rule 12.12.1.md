@@ -12,7 +12,7 @@ Test description :
 
 On each Web page, is the current viewed page specified in the
 [navigation
-menu](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mMenuNav)
+menu](http://www.accessiweb.org/index.php/glossary-76.html#mMenuNav)
 
 ?
 
