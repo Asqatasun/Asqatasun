@@ -11,13 +11,8 @@ Test : [1.9.2](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 
 Test description :
 
-For each [image
-map](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mImgReactive)
-(img tag or object with the usemap attribute), each [text
-area](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mZoneTexte)
-(area tag) must be rreplaced with [styled
-text](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTexteStyle)
-if possible. Does this rule have been followed?
+For each [image map](http://www.accessiweb.org/index.php/glossary-76.html#mImgReactive) (img tag or object with the usemap attribute), each [text area](http://www.accessiweb.org/index.php/glossary-76.html#mZoneTexte)
+(area tag) must be replaced with [styled text](http://www.accessiweb.org/index.php/glossary-76.html#mTexteStyle) if possible. Does this rule have been followed?
 
 Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
 
