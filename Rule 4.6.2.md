@@ -10,19 +10,11 @@ Test : [4.6.2](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 
 Test description :
 
-Does each synchronised live [time-based
-media](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mMediaTemp)
-pass one of the conditions below?
+Does each synchronised live [time-based media](http://www.accessiweb.org/index.php/glossary-76.html#mMediaTemp#mMediaTemp) pass one of the conditions below?
 
--   The [synchronised
-    captions](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mSsTitreSynchro)
-    are relevant
--   The [synchronised
-    captions](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mSsTitreSynchro)
-    of the alternative version are relevant
--   The [text
-    transcript](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTranscriptTextuel)
-    is relevant
+-   The [synchronised captions](http://www.accessiweb.org/index.php/glossary-76.html#mMediaTemp#mSsTitreSynchro) are relevant
+-   The [synchronised captions](http://www.accessiweb.org/index.php/glossary-76.html#mMediaTemp#mSsTitreSynchro) of the alternative version are relevant
+-   The [text transcript](http://www.accessiweb.org/index.php/glossary-76.html#mMediaTemp#mTranscriptTextuel) is relevant
 
 Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
