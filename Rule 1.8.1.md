@@ -10,13 +10,9 @@ Test : [1.8.1](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 
 Test description :
 
-When an [alternate
-mechanism](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mMecaRempl)
-is missing, each [image of
-text](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mImgText)
-(img tag) must be replaced with [styled
-text](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTexteStyle),
-if possible. Does this rule have been followed?
+When an [alternate mechanism](http://www.accessiweb.org/index.php/glossary-76.html#mMecaRempl) 
+is missing, each [image of text](http://www.accessiweb.org/index.php/glossary-76.html#mImgText)
+(img tag) must be replaced with [styled text](http://www.accessiweb.org/index.php/glossary-76.html#mTexteStyle), if possible. Does this rule have been followed?
 
 Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
