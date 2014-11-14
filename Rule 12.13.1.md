@@ -10,10 +10,7 @@ Test : [12.13.1](http://www.accessiweb.org/index.php/accessiweb-22-english-versi
 
 Test description :
 
-On each Web page, is the tabbing order through the content
-[consistent](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mCoherentODL)
-
-?
+On each Web page, is the tabbing order through the content [consistent](http://www.accessiweb.org/index.php/glossary-76.html#mCoherentODL) ?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
