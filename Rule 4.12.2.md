@@ -11,11 +11,7 @@ Test :
 
 Test description :
 
-For each prerecorded video-only [time-based
-media](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mMediaTemp)
-with a synchronised [extended audio
-description](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mAudioDescE),
-is this audio description relevant?
+For each prerecorded video-only [time-based media](http://www.accessiweb.org/index.php/glossary-76.html#mMediaTemp) with a synchronised [extended audio description](http://www.accessiweb.org/index.php/glossary-76.html#mAudioDescE), is this audio description relevant?
 
 Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
 
