@@ -10,15 +10,7 @@ Test : [1.8.2](http://www.accessiweb.org/index.php/accessiweb-22-english-version
 
 Test description :
 
-For each [image
-map](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mImgReactive)
-(img tag or object with the usemap attribute), when an [alternate
-mechanism](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mMecaRempl)
-is missing, each [text
-area](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mZoneTexte)
-(area tag) must be replaced with [styled
-text](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mTexteStyle)
-if possible. Does this rule have been followed?
+For each [image map](http://www.accessiweb.org/index.php/glossary-76.html#mImgReactive) (img tag or object with the usemap attribute), when an [alternate mechanism](http://www.accessiweb.org/index.php/glossary-76.html#mMecaRempl) is missing, each [text area](http://www.accessiweb.org/index.php/glossary-76.html#mZoneTexte) (area tag) must be replaced with [styled text](http://www.accessiweb.org/index.php/glossary-76.html#mTexteStyle) if possible. Does this rule have been followed ([except in special cases] (http://www.accessiweb.org/index.php/glossary-76.html#cpCrit1-8 "Special cases for criterion 1.8"))?
 
 Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
