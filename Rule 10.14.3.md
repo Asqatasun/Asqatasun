@@ -10,10 +10,7 @@ Test : [10.14.3](http://www.accessiweb.org/index.php/accessiweb-22-english-versi
 
 Test description :
 
-On each Web page, for each [time-based
-media](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mMediaTemp),
-information must not be provided by its shape or location alone. Does
-this rule have been followed?
+On each Web page, for each [time-based media](http://www.accessiweb.org/index.php/glossary-76.html#mMediaTemp), information must not be provided by its shape or location alone. Does this rule have been followed?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
