@@ -38,7 +38,7 @@ For each element of Set1, raise a MessageA.
 
 **Test2**
 
-For each element of Set1, raise a MessageB.
+For each element of Set2, raise a MessageB.
 
 ##### MessageA : Check the pertinence of the informative image
 

@@ -43,8 +43,8 @@ For each element returning true in Test1, raise a MessageB
 **Test2**
 
 For each element of Set2 (`applet` tags not identified as informative applet), check the relevancy of the content of the `alt` attribute (not empty, different from the value of the `code` attribute and without image extension such as jpg, jpeg, bmp, png, tiff).
-For each element returning false in Test3, raise a MessageC
-For each element returning true in Test4, raise a MessageD
+For each element returning false in Test2, raise a MessageC
+For each element returning true in Test2, raise a MessageD
 
 ##### MessageA : Informative applet with not pertinent alternative
 

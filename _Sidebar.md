@@ -32,17 +32,22 @@
 * [[Rule 1.6.2|Rule 1.6.2]]
 * [[Rule 1.6.3|Rule 1.6.3]]
 * [[Rule 1.6.4|Rule 1.6.4]]
+* [[Rule 1.6.5|Rule 1.6.5]]
 * [[Rule 1.7.1|Rule 1.7.1]]
+* [[Rule 1.7.2|Rule 1.7.2]]
 * [[Rule 1.7.3|Rule 1.7.3]]
+* [[Rule 1.7.4|Rule 1.7.4]]
 * [[Rule 1.8.1|Rule 1.8.1]]
 * [[Rule 1.8.2|Rule 1.8.2]]
 * [[Rule 1.8.3|Rule 1.8.3]]
 * [[Rule 1.8.4|Rule 1.8.4]]
 * [[Rule 1.8.6|Rule 1.8.6]]
+* [[Rule 1.9.1|Rule 1.9.1]]
 * [[Rule 1.9.2|Rule 1.9.2]]
 * [[Rule 1.9.3|Rule 1.9.3]]
 * [[Rule 1.9.4|Rule 1.9.4]]
 * [[Rule 1.9.5|Rule 1.9.5]]
+* [[Rule 1.9.6|Rule 1.9.6]]
 
 ## Theme 2: Frames
 

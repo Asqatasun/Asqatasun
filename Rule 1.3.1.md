@@ -24,7 +24,7 @@ Decision level :[decidable](/en/category/rules-design/accessiweb-11/decision-lev
 
 #### Selection
 
-**Set1** (`img` tags identified as a ninformative image from html markers)
+**Set1** (`img` tags identified as an informative image from html markers)
 
 All the `img` tags not within an `a` tag (in this case, the image would be considered as a link) with an `alt` attribute and with an `id` attribute or a `class` attribute or a `role` that matches one of the values set by the user through the "INFORMATIVE_IMAGE_MARKER" parameter.
 The elements of Set2 with a `longdesc` attribute are added to that collection.
@@ -88,7 +88,3 @@ Test1 returns false for at least one element (one `img` identified as informativ
 ##### Pre-Qualified
 
 In all other cases
-
-
-
-
