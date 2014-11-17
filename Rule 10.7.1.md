@@ -29,12 +29,12 @@ Decision level :
 
 #### Selection
 
-**Selection1:**
+**Set1**
 
 All the html elements that can grab the focus and not of type `input`,
 `button`, `iframe`, `textarea` and `select`
 
-**Selection2:**
+**Set2**
 
 All the html elements that can grab the focus and of type `input`,
 `button`, `iframe`, `textarea` and `select`
@@ -43,14 +43,14 @@ All the html elements that can grab the focus and of type `input`,
 
 **Test1 :**
 
-For each occurence of the Sélection1, we check whether the value of the
+For each occurence of the Set1, we check whether the value of the
 "outline-style" css property is different from "none" or "hidden".
 
 For each element returning false in Test1, raise a MessageA
 
 **Test2 :**
 
-For each occurence of the Sélection1, we check whether the value of the
+For each occurence of the Set1, we check whether the value of the
 "outline-color" css property is different from the background-color css
 property.
 
@@ -58,7 +58,7 @@ For each element returning false in Test2, raise a MessageA
 
 **Test3 :**
 
-For each occurence of the Sélection1, we check whether the value of the
+For each occurence of the Set1, we check whether the value of the
 "outline-width" css property is different from 0.
 
 For each element returning false in Test3, raise a MessageA
@@ -82,19 +82,17 @@ If Selection2 is not empty, raise a MessageB
 
 #### Analysis
 
-**Not applicable :**
+##### Not applicable
 
-Selection1 AND Selection2 are empty (the page has no focusable
-element)**\
-**
+Set1 AND Set2 are empty (the page has no focusable element)
 
-**Passed :**
+##### Passed
 
 Test1 AND Test2 AND Test3 return true for all elements AND Selection2 is
 empty (all the elements have a visible focus visual indication and no
 element that needs a human check is present on the page)
 
-**NMI :**
+##### Pre-Qualified
 
 In all other cases
 
