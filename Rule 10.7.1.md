@@ -70,14 +70,14 @@ If Selection2 is not empty, raise a MessageB
 ##### MessageA : Invisible Outline on Focus
 
 -   code : InvisibleOutlineOnFocus
--   status: NMI
+-   status: Pre-Qualified
 -   parameter : tag name, Snippet
 -   present in source : yes
 
 ##### MessageB : Check Manually Outline For Form Element And Iframe
 
 -   code : CheckManuallyOutlineForFormElementAndIframe
--   status: NMI
+-   status: Pre-Qualified
 -   present in source : no
 
 #### Analysis
@@ -88,7 +88,7 @@ Set1 AND Set2 are empty (the page has no focusable element)
 
 ##### Passed
 
-Test1 AND Test2 AND Test3 return true for all elements AND Selection2 is
+Test1 AND Test2 AND Test3 return true for all elements AND Set2 is
 empty (all the elements have a visible focus visual indication and no
 element that needs a human check is present on the page)
 
@@ -114,5 +114,3 @@ Some elements are de facto excluded from the selection:
 -   select
 
 Their look&feel is defined by the browser.
-
-
