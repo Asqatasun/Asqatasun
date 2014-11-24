@@ -25,6 +25,9 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonSubTypes;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 
 /**
  * 
@@ -48,6 +51,7 @@ public class EvidenceElementImpl implements EvidenceElement,
     private String value;
     @ManyToOne
     @JoinColumn(name = "PROCESS_REMARK_Id_Process_Remark")
+    @JsonIgnore
     private ProcessRemarkImpl processRemark;
 
     public EvidenceElementImpl() {
@@ -66,6 +70,9 @@ public class EvidenceElementImpl implements EvidenceElement,
 
     @XmlTransient
     @Override
+    @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
+    @JsonSubTypes({
+        @JsonSubTypes.Type(value=org.opens.tanaguru.entity.audit.EvidenceImpl.class, name="Evidence")})
     public Evidence getEvidence() {
         return (Evidence) evidence;
     }

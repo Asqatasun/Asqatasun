@@ -30,6 +30,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * 
@@ -43,8 +44,10 @@ public class ThemeImpl implements Theme, Serializable {
     @Column(name = "Cd_Theme")
     private String code;
     @OneToMany(mappedBy = "theme", cascade = CascadeType.ALL)
+    @JsonIgnore
     private final Set<CriterionImpl> criterionList = new HashSet<>();
     @Column(name = "Description")
+    @JsonIgnore
     private String description;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,6 +56,7 @@ public class ThemeImpl implements Theme, Serializable {
     @Column(name = "Label", nullable = false)
     private String label;
     @Column(name = "Rank")
+    @JsonIgnore
     private int rank;
 
     public ThemeImpl() {

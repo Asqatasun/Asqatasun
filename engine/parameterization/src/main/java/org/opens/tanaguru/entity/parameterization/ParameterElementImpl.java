@@ -26,6 +26,8 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonSubTypes;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 
 /**
  *
@@ -82,6 +84,9 @@ public class ParameterElementImpl implements ParameterElement, Serializable{
     @Override
     @XmlElementWrapper
     @XmlElementRef(type = org.opens.tanaguru.entity.parameterization.ParameterFamilyImpl.class)
+    @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
+    @JsonSubTypes({
+        @JsonSubTypes.Type(value=org.opens.tanaguru.entity.parameterization.ParameterFamilyImpl.class, name="ParameterFamily")})
     public void setParameterFamily(ParameterFamily parameterFamily) {
         this.parameterFamily = (ParameterFamilyImpl)parameterFamily;
     }

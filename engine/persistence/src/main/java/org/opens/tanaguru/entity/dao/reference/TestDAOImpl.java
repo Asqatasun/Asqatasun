@@ -143,7 +143,7 @@ public class TestDAOImpl extends AbstractJPADAO<Test, Long> implements TestDAO {
         Query query = entityManager.createQuery(
                 "SELECT t FROM "
                 + getAuditEntityClass().getName() + " a"
-                + " LEFT JOIN a.testSet t"
+                + " LEFT JOIN a.testList t"
                 + " WHERE t.label=:testLabel"
                 + " AND a = :audit");
         query.setParameter("audit", audit);

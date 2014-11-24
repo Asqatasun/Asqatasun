@@ -30,6 +30,9 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonSubTypes;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditImpl;
 import org.opens.tanaguru.entity.audit.ProcessResult;
@@ -46,6 +49,7 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     private static final long serialVersionUID = 5534153976635867531L;
     @OneToOne
     @JoinColumn(name = "Id_Audit", nullable = true)
+    @JsonIgnore
     private AuditImpl audit;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -138,6 +142,10 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.IndefiniteResultImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.DefiniteResultImpl.class)})
+    @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
+    @JsonSubTypes({
+        @JsonSubTypes.Type(value=org.opens.tanaguru.entity.audit.IndefiniteResultImpl.class, name="Indefinite"),
+        @JsonSubTypes.Type(value=org.opens.tanaguru.entity.audit.DefiniteResultImpl.class, name="Definite")})
     public Collection<ProcessResult> getProcessResultList() {
         return (Collection)processResultSet;
     }

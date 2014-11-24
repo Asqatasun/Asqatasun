@@ -27,6 +27,9 @@ import java.util.Objects;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonSubTypes;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 
 /**
  *
@@ -44,8 +47,10 @@ public class TestImpl implements Test, Serializable {
     private CriterionImpl criterion;
     @ManyToOne
     @JoinColumn(name = "Id_Decision_Level")
+    @JsonIgnore
     private DecisionLevelImpl decisionLevel;
     @Column(name = "Description")
+    @JsonIgnore
     private String description;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,10 +62,13 @@ public class TestImpl implements Test, Serializable {
     @JoinColumn(name = "Id_Level")
     private LevelImpl level;
     @Column(name = "Rank")
+    @JsonIgnore
     private int rank;
     @Column(name = "Rule_Archive_Name")
+    @JsonIgnore
     private String ruleArchiveName;
     @Column(name = "Rule_Class_Name")
+    @JsonIgnore
     private String ruleClassName;
     @ManyToOne
     @JoinColumn(name = "Id_Scope")
@@ -70,6 +78,7 @@ public class TestImpl implements Test, Serializable {
     @Column(name = "Weight", precision=2, scale=1)
     private BigDecimal weight;
     @Column(name = "No_Process")
+    @JsonIgnore
     private boolean noProcess;
 
     public TestImpl() {
@@ -90,6 +99,9 @@ public class TestImpl implements Test, Serializable {
 
     @Override
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.CriterionImpl.class)
+    @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
+    @JsonSubTypes({
+        @JsonSubTypes.Type(value=org.opens.tanaguru.entity.reference.CriterionImpl.class, name="Criterion")})
     public Criterion getCriterion() {
         return this.criterion;
     }
@@ -111,6 +123,7 @@ public class TestImpl implements Test, Serializable {
      */
     @Deprecated
     @Override
+    @JsonIgnore
     public String getFullCode() {
         if (criterion == null) {
             return "";
@@ -135,6 +148,9 @@ public class TestImpl implements Test, Serializable {
 
     @Override
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.LevelImpl.class)
+    @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
+    @JsonSubTypes({
+        @JsonSubTypes.Type(value=org.opens.tanaguru.entity.reference.LevelImpl.class, name="Level")})
     public Level getLevel() {
         return this.level;
     }
@@ -156,6 +172,9 @@ public class TestImpl implements Test, Serializable {
 
     @Override
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.ScopeImpl.class)
+    @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
+    @JsonSubTypes({
+        @JsonSubTypes.Type(value=org.opens.tanaguru.entity.reference.ScopeImpl.class, name="Scope")})
     public Scope getScope() {
         return this.scope;
     }

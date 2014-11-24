@@ -28,6 +28,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * 
@@ -41,6 +42,7 @@ public class ReferenceImpl implements Reference, Serializable {
     @Column(name = "Cd_Reference")
     private String code;
     @OneToMany(mappedBy = "reference", cascade = CascadeType.ALL)
+    @JsonIgnore
     private final List<CriterionImpl> criterionList = new ArrayList<>();
     @Column(name = "Description")
     private String description;

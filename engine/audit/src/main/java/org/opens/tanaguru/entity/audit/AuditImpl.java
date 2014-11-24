@@ -31,6 +31,10 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonSubTypes;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.annotate.JsonTypeInfo.As;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.parameterization.ParameterImpl;
 import org.opens.tanaguru.entity.reference.Test;
@@ -51,20 +55,24 @@ public class AuditImpl implements Audit, Serializable {
     @Column(name = "Comment")
     private String comment;
     @OneToMany(mappedBy = "audit")
-    private Set<ContentImpl> contentSet;
+    @JsonIgnore
+    private Set<ContentImpl> contentList;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     @Column(name = "Dt_Creation")
     private Date dateOfCreation;
     @Column(name = "Manual_Audit_Dt_Creation")
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date manualAuditDateOfCreation;
     @OneToMany(mappedBy = "grossResultAudit")
-    private Set<ProcessResultImpl> grossResultSet;
+    @JsonIgnore
+    private Set<ProcessResultImpl> grossResultList;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Audit")
     private Long id;
     @OneToMany(mappedBy = "netResultAudit")
-    private Set<ProcessResultImpl> netResultSet;
+    @JsonIgnore
+    private Set<ProcessResultImpl> netResultList;
     @Enumerated(EnumType.STRING)
     @Column(name = "Status")
     private AuditStatus status = AuditStatus.INITIALISATION;
@@ -74,7 +82,8 @@ public class AuditImpl implements Audit, Serializable {
     @JoinTable(name = "AUDIT_TEST", joinColumns =
     @JoinColumn(name = "Id_Audit"), inverseJoinColumns =
     @JoinColumn(name = "Id_Test"))
-    private Set<TestImpl> testSet;
+    @JsonIgnore
+    private Set<TestImpl> testList;
     @ManyToMany
     @JoinTable(name = "AUDIT_PARAMETER", joinColumns =
     @JoinColumn(name = "Id_Audit"), inverseJoinColumns =
@@ -120,28 +129,28 @@ public class AuditImpl implements Audit, Serializable {
     @Override
     public void addContent(Content content) {
         content.setAudit(this);
-        if (contentSet == null) {
-            contentSet = new HashSet<>();
+        if (contentList == null) {
+            contentList = new HashSet<>();
         }
-        this.contentSet.add((ContentImpl) content);
+        this.contentList.add((ContentImpl) content);
     }
 
     @Override
     public void addGrossResult(ProcessResult pageResult) {
         pageResult.setGrossResultAudit(this);
-        if (grossResultSet == null) {
-            grossResultSet = new HashSet<>();
+        if (grossResultList == null) {
+            grossResultList = new HashSet<>();
         }
-        grossResultSet.add((ProcessResultImpl) pageResult);
+        grossResultList.add((ProcessResultImpl) pageResult);
     }
 
     @Override
     public void addNetResult(ProcessResult testResult) {
         testResult.setNetResultAudit(this);
-        if (netResultSet == null) {
-            netResultSet = new HashSet<>();
+        if (netResultList == null) {
+            netResultList = new HashSet<>();
         }
-        netResultSet.add((ProcessResultImpl) testResult);
+        netResultList.add((ProcessResultImpl) testResult);
     }
 
     @Override
@@ -152,7 +161,7 @@ public class AuditImpl implements Audit, Serializable {
 
     @Override
     public void addTest(Test test) {
-        this.testSet.add((TestImpl) test);
+        this.testList.add((TestImpl) test);
     }
 
     @Override
@@ -167,7 +176,7 @@ public class AuditImpl implements Audit, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.JavascriptContentImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.StylesheetContentImpl.class)})
     public Collection<Content> getContentList() {
-        return (Collection)contentSet;
+        return (Collection)contentList;
     }
 
     @Override
@@ -186,7 +195,7 @@ public class AuditImpl implements Audit, Serializable {
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.IndefiniteResultImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.DefiniteResultImpl.class)})
     public Collection<ProcessResult> getGrossResultList() {
-        return (Collection)grossResultSet;
+        return (Collection)grossResultList;
     }
 
     @Override
@@ -198,7 +207,7 @@ public class AuditImpl implements Audit, Serializable {
     @XmlElementWrapper
     @XmlElementRef(type = org.opens.tanaguru.entity.audit.DefiniteResultImpl.class)
     public Collection<ProcessResult> getNetResultList() {
-        return (Collection)netResultSet;
+        return (Collection)netResultList;
     }
 
     @Override
@@ -210,6 +219,10 @@ public class AuditImpl implements Audit, Serializable {
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.subject.PageImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.subject.SiteImpl.class)})
+    @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=As.WRAPPER_OBJECT)
+    @JsonSubTypes({
+        @JsonSubTypes.Type(value=org.opens.tanaguru.entity.subject.PageImpl.class, name="Page"),
+        @JsonSubTypes.Type(value=org.opens.tanaguru.entity.subject.SiteImpl.class, name="Site")})
     public WebResourceImpl getSubject() {
         return subject;
     }
@@ -218,7 +231,7 @@ public class AuditImpl implements Audit, Serializable {
     @XmlElementWrapper
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.TestImpl.class)
     public Collection<Test> getTestList() {
-        return (Collection)testSet;
+        return (Collection)testList;
     }
 
     @Override
@@ -228,12 +241,12 @@ public class AuditImpl implements Audit, Serializable {
 
     @Override
     public void setContentList(Collection<Content> contentList) {
-        if (this.contentSet == null) {
-            this.contentSet = new HashSet<>();
+        if (this.contentList == null) {
+            this.contentList = new HashSet<>();
         }
         for (Content content : contentList) {
             content.setAudit(this);
-            this.contentSet.add((ContentImpl)content);
+            this.contentList.add((ContentImpl)content);
         }
     }
 
@@ -249,12 +262,12 @@ public class AuditImpl implements Audit, Serializable {
 
     @Override
     public void setGrossResultList(Collection<ProcessResult> pageResultList) {
-        if (this.grossResultSet == null) {
-            this.grossResultSet = new HashSet<>();
+        if (this.grossResultList == null) {
+            this.grossResultList = new HashSet<>();
         }
         for (ProcessResult grossResult : pageResultList) {
             grossResult.setGrossResultAudit(this);
-            this.grossResultSet.add((ProcessResultImpl)grossResult);
+            this.grossResultList.add((ProcessResultImpl)grossResult);
         }
     }
 
@@ -265,12 +278,12 @@ public class AuditImpl implements Audit, Serializable {
 
     @Override
     public void setNetResultList(Collection<ProcessResult> netResultList) {
-        if (this.netResultSet == null) {
-            this.netResultSet = new HashSet<>();
+        if (this.netResultList == null) {
+            this.netResultList = new HashSet<>();
         }
         for (ProcessResult netResult : netResultList) {
             netResult.setNetResultAudit(this);
-            this.netResultSet.add((ProcessResultImpl)netResult);
+            this.netResultList.add((ProcessResultImpl)netResult);
         }
     }
 
@@ -281,11 +294,11 @@ public class AuditImpl implements Audit, Serializable {
 
     @Override
     public void setTestList(Collection<Test> testList) {
-        if (this.testSet == null) {
-            this.testSet = new HashSet<>();
+        if (this.testList == null) {
+            this.testList = new HashSet<>();
         }
         for (Test test : testList) {
-            this.testSet.add((TestImpl)test);
+            this.testList.add((TestImpl)test);
         }
     }
 
@@ -308,6 +321,9 @@ public class AuditImpl implements Audit, Serializable {
     }
 
     @Override
+    @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=As.WRAPPER_OBJECT)
+    @JsonSubTypes({
+        @JsonSubTypes.Type(value=org.opens.tanaguru.entity.parameterization.ParameterImpl.class, name="Parameter")})
     public Collection<Parameter> getParameterSet() {
         if (this.parameterSet == null) {
             this.parameterSet = new HashSet<>();
