@@ -126,6 +126,16 @@
                             </div><!-- class="span16" -->
                         </div><!-- class="row" -->
                     </c:if>
+                    <c:if test="${tg:lang(pageContext) != 'en' && tg:lang(pageContext) != 'fr'}">
+                        <c:choose>
+                            <c:when test="${fn:startsWith(statistics.parametersMap['referential'], 'RGAA')}">
+                                <c:set var="ruleLang" value=" lang=fr "/>
+                            </c:when>
+                            <c:otherwise>
+                                <c:set var="ruleLang" value=" lang=en "/>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:if>
                     <div id="theme${entry.key.rank}-details" class="theme-details">
                         <c:forEach var="testResult" items="${entry.value}" varStatus="pTestResultList">
                             <c:choose>
@@ -162,14 +172,14 @@
                                                     <img alt="<fmt:message key="resultPage.displayTestInfosOn"> <fmt:param>${testResult.testShortLabel}</fmt:param></fmt:message>" src="${collapsedSmallImg}" class="show-test-details-link-icon">
                                                         </span>
                                             </c:if>
-                                            <h4>${testResult.testShortLabel} <span class="test-result sr-only"> <fmt:message key="${testResult.resultCode}"/> </span></h4>
+                                            <h4 id="test-${testResult.testShortLabel}">${testResult.testShortLabel} <span class="test-result sr-only"> <fmt:message key="${testResult.resultCode}"/> </span></h4>
                                             <span class="rule-detail-link">
                                                 <a title="<fmt:message key="resultPage.more"/> ${testResult.testShortLabel}" href="<fmt:message key="${testResult.testCode}-url"/>">
                                                     <img alt="<fmt:message key="resultPage.more"/> ${testResult.testShortLabel}" src="${testInfoLinkImg}">
                                                 </a>
                                             </span>
                                         </div>
-                                        <div class="rule-label span9">
+                                        <div class="rule-label span9" ${ruleLang}>
                                             <fmt:message key="${testResult.testCode}"/>
                                         </div><!-- class="span9 rule-label" -->
 
@@ -205,8 +215,6 @@
                                                     <div class="audit-result-manual-empty span3"></div>
                                                 </c:otherwise>
                                             </c:choose>	    
-
-
                                         </div>
                                         <c:if test="${isManualAudit}">
                                             <div class="audit-result-manual-comment span11" id="commentContainer${testResult.testShortLabel}">

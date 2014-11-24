@@ -3,6 +3,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://tagutils" prefix="tg" %>
+
                 <div class="theme-nav bs-docs-sidebar">
                     <ul class="nav-list bs-docs-sidenav">
                         <c:forEach var="entry" items="${criterionResultMap}" varStatus="pResultMap">
@@ -34,6 +36,16 @@
                         </button>
                     </div><!-- class="span16" -->
                 </div><!-- class="row" -->
+                <c:if test="${tg:lang(pageContext) != 'en' && tg:lang(pageContext) != 'fr'}">
+                    <c:choose>
+                        <c:when test="${fn:startsWith(statistics.parametersMap['referential'], 'RGAA')}">
+                            <c:set var="ruleLang" value=" lang=fr "/>
+                        </c:when>
+                        <c:otherwise>
+                            <c:set var="ruleLang" value=" lang=en "/>
+                        </c:otherwise>
+                    </c:choose>
+                </c:if>
                 <form id="result-by-criterion-form" action="#">
                     <c:forEach var="entry" items="${criterionResultMap}" varStatus="pResultMap">
                     <div class="row theme-info">
@@ -123,7 +135,7 @@
                                 <div class="span1 criterion-id ">
                                     <h4>${criterionResult.criterion.label}</h4>
                                 </div><!-- class="span1 rule-id" -->
-                                <div class="span11 criterion-label">
+                                <div class="span11 criterion-label" ${ruleLang}>
                                     <fmt:message key="${criterionResult.criterion.code}"/>
                                 </div><!-- class="span9 rule-label" -->
                                 <div class="span1 criterion-result offset2">
