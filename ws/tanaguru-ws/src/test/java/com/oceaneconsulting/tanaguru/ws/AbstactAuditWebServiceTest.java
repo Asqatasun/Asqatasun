@@ -6,42 +6,35 @@ import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;
 import com.oceaneconsulting.tanaguru.ws.impl.AuditWebImpl;
 
-
-
 /**
  * Unit test initialization abstract class.
- * 
+ *
  * @author shamdi at oceaneconsulting com
- * 
+ *
  */
 public abstract class AbstactAuditWebServiceTest extends JerseyTest {
 
-	private static final Logger LOGGER = Logger.getLogger(AbstactAuditWebServiceTest.class);
+    private static final Logger LOGGER = Logger.getLogger(AbstactAuditWebServiceTest.class);
 
-//	protected static JerseyTest jersyTest;
-	
-	public AbstactAuditWebServiceTest(){
-		
-	}
- 
+    public AbstactAuditWebServiceTest() {
 
-	 /**
+    }
+
+    /**
      * Register specific context parameters
+     * @return 
      */
     @Override
     protected ResourceConfig configure() {
-    	
-    	// logging enabled
+
+        // logging enabled
         enable(TestProperties.LOG_TRAFFIC);
         enable(TestProperties.DUMP_ENTITY);
 
-    	// Create specific test parameters for WSApplication instance
+        // Create specific test parameters for WSApplication instance
         return new WSApplication().register(AuditWebImpl.class) //root resource
-                .property("contextConfigLocation", "classpath:beans-ws.xml"); // application context configuration file
+                .property("contextConfigLocation", "classpath:test-beans-ws.xml"); // application context configuration file
     }
-    
-    
-
 
 //	@Before
 //	public void init() {
@@ -88,6 +81,4 @@ public abstract class AbstactAuditWebServiceTest extends JerseyTest {
 //	public Client client() {
 //		return jersyTest.client();
 //	}
-
 }
-
