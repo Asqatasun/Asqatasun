@@ -64,10 +64,6 @@ public class AuditImplRESTFacade {
     @Resource(name = "messages")
     Properties messages;
     
-    public AuditImplRESTFacade() {
-        LOGGER.error(this.hashCode());
-    }
-    
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -89,14 +85,14 @@ public class AuditImplRESTFacade {
             String auditJson = mapper.writeValueAsString(audit);
             response.resume(auditJson);
             Audit resultAudit = mapper.readValue(auditJson, AuditImpl.class);
-            LOGGER.error(resultAudit.getId());
-            LOGGER.error(resultAudit.getSubject().getURL());
+            LOGGER.debug(resultAudit.getId());
+            LOGGER.debug(resultAudit.getSubject().getURL());
             for (ProcessResult pr : resultAudit.getSubject().getProcessResultList()) {
-                LOGGER.error(pr.getTest().getCode() +" : "+pr.getValue());
+                LOGGER.debug(pr.getTest().getCode() +" : "+pr.getValue());
                 for (ProcessRemark prk : pr.getRemarkSet()) {
                     if (prk instanceof SourceCodeRemark) {
-                        LOGGER.error(prk.getIssue() + " : " +prk.getMessageCode());
-                        LOGGER.error(((SourceCodeRemark)prk).getSnippet());
+                        LOGGER.debug(prk.getIssue() + " : " +prk.getMessageCode());
+                        LOGGER.debug(((SourceCodeRemark)prk).getSnippet());
                     }
                 }
             }
