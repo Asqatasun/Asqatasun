@@ -6,15 +6,12 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
     <context:component-scan base-package="com.oceaneconsulting.tanaguru,org.opens.tanaguru" />
-	
+    
     <!-- loading configuration files parameters -->
     <bean id="exposedPropertiesConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
                 <value>file:/${CONFIG_TANAGURU}\tanaguru.conf</value>
-                <value>file:/${CONFIG_TANAGURU}\google-code.properties</value>
-                <value>file:/${CONFIG_TANAGURU}\sign-up-mail.properties</value>
-                <value>file:/${CONFIG_TANAGURU}\ESAPI.properties</value>
             </list>
         </property>
         <property name="fileEncoding">
@@ -48,5 +45,5 @@
     <import resource="classpath*:conf/context/beans-scenarioloader.xml"/>
     <import resource="classpath*:conf/context/beans-statistics.xml"/>
     <import resource="classpath*:conf/context/beans-tanaguru.xml"/>
-    <import resource="beans-ws-security.xml"/>
+
 </beans>
