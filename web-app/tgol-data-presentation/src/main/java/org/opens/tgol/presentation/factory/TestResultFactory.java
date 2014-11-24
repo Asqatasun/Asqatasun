@@ -154,7 +154,7 @@ public final class TestResultFactory {
         testResult.setTest(processResult.getTest());
         testResult.setHistory(constructHistoryChanges(processResult));
         if (processResult instanceof DefiniteResult && processResult.getManualValue() != null) {
-            testResult.setComment(((DefiniteResult) processResult).getManualAuditcomment());
+            testResult.setComment(((DefiniteResult) processResult).getManualAuditComment());
             switch ((TestSolution)processResult.getManualValue()) {
                 case FAILED : 
                     testResult.setManualResult(TestResult.FAILED_LOWER);
