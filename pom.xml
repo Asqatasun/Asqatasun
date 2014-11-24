@@ -51,6 +51,8 @@
         <log4jVersion>1.2.15</log4jVersion>
         
         <httpcomponentsGroupId>org.apache.httpcomponents</httpcomponentsGroupId>
+        
+        <jersey.version>2.13</jersey.version>
     </properties>
     <repositories>
         <repository>
@@ -639,6 +641,12 @@
                 <artifactId>aspectjweaver</artifactId>
                 <version>1.6.8</version>
             </dependency>
+            
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>1.6.8</version>
+            </dependency>
 
             <!-- spring dependencies -->
             <dependency>
@@ -1214,6 +1222,14 @@
                 <scope>test</scope>
             </dependency>
 
+            <!-- Mockito -->
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>1.9.5</version>
+                <scope>test</scope>
+            </dependency>
+
             <!-- commons pool api -->
             <dependency>
                 <groupId>commons-pool</groupId>
@@ -1354,8 +1370,60 @@
                 <artifactId>jaxen</artifactId>
                 <version>1.1.1</version>
             </dependency>
+            
+            <dependency>
+                <groupId>org.glassfish.hk2</groupId>
+                <artifactId>spring-bridge</artifactId>
+                <version>2.3.0-b10</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.glassfish.jersey.ext</groupId>
+                <artifactId>jersey-spring3</artifactId>
+                <version>2.13</version>
+            </dependency>
+            
+            <!-- jax-rs 2.0 dep -->
+            <dependency>
+                <groupId>javax.ws.rs</groupId>
+                <artifactId>javax.ws.rs-api</artifactId>
+                <version>2.0</version>
+            </dependency>
+
+            <!-- servlet api 3 -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.0.1</version>
+                <scope>provided</scope>
+            </dependency>
+            
+            <!-- jackson dependencies -->		
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-core-asl</artifactId>
+                <version>1.9.13</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>1.9.13</version>
+            </dependency>
+            
+            <!-- glassfish jersey -->
+            <dependency>
+                <groupId>org.glassfish.jersey.test-framework.providers</groupId>
+                <artifactId>jersey-test-framework-provider-grizzly2</artifactId>
+                <version>${jersey.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.test-framework</groupId>
+                <artifactId>jersey-test-framework-core</artifactId>
+                <version>${jersey.version}</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-
 
 </project>
