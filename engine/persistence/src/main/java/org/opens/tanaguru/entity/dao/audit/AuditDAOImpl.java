@@ -65,7 +65,7 @@ public class AuditDAOImpl extends AbstractJPADAO<Audit, Long> implements
     public Audit findAuditWithTest(Long id) {
         Query query = entityManager.createQuery("SELECT a FROM "
                 + getEntityClass().getName() + " a"
-                + " LEFT JOIN FETCH a.testSet"
+                + " LEFT JOIN FETCH a.testList"
                 + " WHERE a.id = :id");
         query.setParameter("id", id);
         try {

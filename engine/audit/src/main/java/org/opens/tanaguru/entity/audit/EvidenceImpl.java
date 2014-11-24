@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * 
@@ -46,6 +47,7 @@ public class EvidenceImpl implements Evidence, Serializable {
     @Column(name = "Description")
     private String description;
     @OneToMany(mappedBy = "evidence", cascade = CascadeType.ALL)
+    @JsonIgnore
     private final Set<EvidenceElementImpl> elementList = new HashSet<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -109,6 +111,7 @@ public class EvidenceImpl implements Evidence, Serializable {
     }
 
     @Override
+    @JsonIgnore
     public Collection<String> getValueList() {
         Collection<String> values = new HashSet<>();
         for (EvidenceElement element : elementList) {

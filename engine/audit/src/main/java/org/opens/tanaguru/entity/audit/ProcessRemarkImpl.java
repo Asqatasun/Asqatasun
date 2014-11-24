@@ -27,6 +27,9 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonSubTypes;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 
 /**
  * 
@@ -49,10 +52,13 @@ public class ProcessRemarkImpl implements ProcessRemark, Serializable {
     private String messageCode;
     @ManyToOne
     @JoinColumn(name = "Id_Process_Result")
+    @JsonIgnore
     private ProcessResultImpl processResult;
     @Column(name = "Selected_Element")
+    @JsonIgnore
     private String selectedElement;
     @Column(name = "Selection_Expression")
+    @JsonIgnore
     private String selectionExpression;
     @OneToMany(mappedBy = "processRemark", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<EvidenceElementImpl> elementSet;
@@ -135,6 +141,9 @@ public class ProcessRemarkImpl implements ProcessRemark, Serializable {
     @XmlElementWrapper
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.EvidenceElementImpl.class)})
+    @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
+    @JsonSubTypes({
+        @JsonSubTypes.Type(value=org.opens.tanaguru.entity.audit.EvidenceElementImpl.class, name="EvidenceElement")})
     public Collection<EvidenceElement> getElementList() {
         return (Collection)elementSet;
     }

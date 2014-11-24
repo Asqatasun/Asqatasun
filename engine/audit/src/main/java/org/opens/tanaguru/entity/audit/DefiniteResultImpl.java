@@ -30,6 +30,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonSubTypes;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 
 import org.hibernate.envers.Audited;
 
@@ -78,6 +80,9 @@ public class DefiniteResultImpl extends ProcessResultImpl implements
     }
 
     @Override
+    @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
+    @JsonSubTypes({
+        @JsonSubTypes.Type(value=org.opens.tanaguru.entity.audit.TestSolution.class, name="TestSolution")})
     public Object getValue() {
         return getDefiniteValue();
     }
@@ -103,7 +108,7 @@ public class DefiniteResultImpl extends ProcessResultImpl implements
     }
 
     @Override
-    public String getManualAuditcomment() {
+    public String getManualAuditComment() {
         return manualAuditComment;
     }
 

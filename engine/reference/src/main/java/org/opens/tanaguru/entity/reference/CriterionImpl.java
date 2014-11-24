@@ -24,10 +24,14 @@ package org.opens.tanaguru.entity.reference;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonSubTypes;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 
 /**
  * 
@@ -41,6 +45,7 @@ public class CriterionImpl implements Criterion, Serializable {
     @Column(name = "Cd_Criterion")
     private String code;
     @Column(name = "Description")
+    @JsonIgnore
     private String description;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,12 +56,15 @@ public class CriterionImpl implements Criterion, Serializable {
     @Column(name = "Url")
     private String url;
     @Column(name = "Rank")
+    @JsonIgnore
     private int rank;
     @ManyToOne
     @JoinColumn(name = "Reference_Id_Reference")
+    @JsonIgnore
     private ReferenceImpl reference;
     @OneToMany(mappedBy = "criterion", cascade = CascadeType.ALL)
-    private Collection<TestImpl> testList = new ArrayList<>();
+    @JsonIgnore
+    private final Collection<TestImpl> testList = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "Theme_Id_Theme")
     private ThemeImpl theme;
@@ -118,6 +126,9 @@ public class CriterionImpl implements Criterion, Serializable {
 
     @Override
     @XmlElementRef(type = org.opens.tanaguru.entity.reference.ThemeImpl.class)
+    @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
+    @JsonSubTypes({
+        @JsonSubTypes.Type(value=org.opens.tanaguru.entity.reference.ThemeImpl.class, name="Theme")})
     public Theme getTheme() {
         return theme;
     }
@@ -194,10 +205,7 @@ public class CriterionImpl implements Criterion, Serializable {
         if ((this.code == null) ? (other.code != null) : !this.code.equals(other.code)) {
             return false;
         }
-        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !(!Objects.equals(this.id, other.id) && (this.id == null || !this.id.equals(other.id)));
     }
 
 }
