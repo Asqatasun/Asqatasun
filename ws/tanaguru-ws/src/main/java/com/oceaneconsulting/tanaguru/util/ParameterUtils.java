@@ -11,7 +11,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.oceaneconsulting.tanaguru.ws.types.CommonOrder;
 
@@ -41,7 +41,7 @@ public class ParameterUtils {
             // get all parameters
             Collection<Parameter> params = parameterDataService.findAll();
 
-            parametersMap = new HashMap<String, List<Parameter>>();
+            parametersMap = new HashMap();
 
             for (Parameter param : params) {
                 if (param != null && param.getParameterElement() != null && param.getParameterElement().getParameterElementCode() != null) {
@@ -62,7 +62,7 @@ public class ParameterUtils {
      */
     private static Set<Parameter> commonDefaultParameters() {
 
-        Set<Parameter> parameters = new HashSet<Parameter>();
+        Set<Parameter> parameters = new HashSet();
 
         parameters.add(createParameter(ParameterInputs.DATA_TABLE_MARKER, ""));
         parameters.add(createParameter(ParameterInputs.PROXY_HOST, ""));
