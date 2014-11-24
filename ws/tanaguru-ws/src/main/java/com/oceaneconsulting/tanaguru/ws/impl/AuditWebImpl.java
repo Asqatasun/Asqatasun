@@ -86,7 +86,6 @@ public class AuditWebImpl implements AuditWeb {
 
     public AuditWebImpl() {
         super();
-        LOGGER.error("new AuditWebImpl "  + this.hashCode());
     }
 
     @GET
@@ -236,7 +235,7 @@ public class AuditWebImpl implements AuditWeb {
         }
 
         LOGGER.info("Initialize parameters...");
-		// init parameters
+        // init parameters
         // get parameters from DB
         ParameterUtils.initParametersMap(parameterDataService);
         // get default set of parameters
