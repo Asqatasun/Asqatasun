@@ -2,15 +2,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.opens</groupId>
-        <artifactId>tanaguru</artifactId>
+        <artifactId>ws</artifactId>
         <version>3.1.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>tanaguru-ws-client</artifactId>
     <name>tanaguru-ws-client</name>
     <version>3.1.0-SNAPSHOT</version>
-    <url>http://www.open-s.com</url>
     <build>
         <resources>
             <resource>
@@ -26,7 +24,7 @@
             </resource>
         </resources>
         <plugins>
-            <plugin>
+            <!--            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
                 <version>1.10</version>
@@ -59,34 +57,32 @@
                     <extension>true</extension>
                     <catalog>${basedir}/src/jax-ws-catalog.xml</catalog>
                 </configuration>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
-    <repositories>
-        <repository>
-            <url>http://download.java.net/maven/2</url>
-            <id>metro</id>
-            <layout>default</layout>
-            <name>Repository for library[metro]</name>
-        </repository>
-    </repositories>
     <dependencies>
+
         <dependency>
-            <groupId>com.sun.xml.ws</groupId>
-            <artifactId>webservices-rt</artifactId>
-            <version>1.5</version>
-            <scope>provided</scope>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>tanaguru-audit</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.sun.xml.ws</groupId>
-            <artifactId>webservices-rt</artifactId>
-            <version>1.5</version>
-            <scope>runtime</scope>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>2.13</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
