@@ -55,7 +55,7 @@ public interface DefiniteResult extends ProcessResult {
      *
      * @return the manual audit comment
      */
-    String getManualAuditcomment();
+    String getManualAuditComment();
 
     /**
      *
