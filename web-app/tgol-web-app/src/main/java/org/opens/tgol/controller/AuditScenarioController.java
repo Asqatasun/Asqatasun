@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.util.JRStyledTextParser;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tgol.command.AddScenarioCommand;
 import org.opens.tgol.command.AuditSetUpCommand;
 import org.opens.tgol.command.factory.AddScenarioCommandFactory;

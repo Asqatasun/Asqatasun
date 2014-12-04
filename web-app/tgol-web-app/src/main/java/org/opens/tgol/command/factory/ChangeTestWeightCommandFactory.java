@@ -24,7 +24,7 @@ package org.opens.tgol.command.factory;
 import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.*;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tgol.command.ChangeTestWeightCommand;
 import org.opens.tgol.entity.option.Option;

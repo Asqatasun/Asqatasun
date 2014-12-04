@@ -23,7 +23,7 @@ package org.opens.tgol.validator;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.util.MD5Encoder;
 import org.opens.tgol.command.ChangePasswordCommand;
@@ -82,9 +82,7 @@ public class ChangePasswordFormValidator implements Validator {
                         errors.rejectValue(CURRENT_PASSWORD_KEY, INCORRECT_PASSWORD_KEY);
                         return false;
                     }
-                } catch (NoSuchAlgorithmException ex) {
-                    Logger.getLogger(this.getClass()).warn(ex);
-                } catch (UnsupportedEncodingException ex) {
+                } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
                     Logger.getLogger(this.getClass()).warn(ex);
                 }
             }

@@ -23,7 +23,7 @@ package org.opens.tgol.validator;
 
 import java.util.HashSet;
 import java.util.Set;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tgol.command.AuditSetUpCommand;
 import org.opens.tgol.entity.service.contract.ContractDataService;
 import org.opens.tgol.util.TgolKeyStore;
@@ -74,7 +74,7 @@ public class PageAuditSetUpFormValidator extends AuditSetUpFormValidator {
         
         boolean emptyUrl = true;
         String domainOfFirstUrlEncountered = "";
-        Set<Integer> urlWithProblemIndexSet = new HashSet<Integer>();
+        Set<Integer> urlWithProblemIndexSet = new HashSet();
         
         // We parse all the URL filled-in by the user and extract the ones that
         // don't match with the domain of the first encountered URL.

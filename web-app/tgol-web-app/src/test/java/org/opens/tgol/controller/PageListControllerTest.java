@@ -24,7 +24,7 @@ package org.opens.tgol.controller;
 import java.util.*;
 import javax.servlet.http.HttpServletResponse;
 import junit.framework.TestCase;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import static org.easymock.EasyMock.*;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.TestSolution;

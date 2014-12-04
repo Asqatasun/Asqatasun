@@ -22,7 +22,7 @@
 package org.opens.tgol.controller;
 
 import java.util.*;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
@@ -471,8 +471,7 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
             paramSet = getParameterDataService().updateParameterSet(paramSet, userParamSet);
         }
         paramSet = setProxyParameters(paramSet, url);
-        paramSet = setUserParameters(paramSet, auditSetUpCommand.getLevel().split(";")[0]);
-        return paramSet;
+        return (auditSetUpCommand.getLevel() != null )? setUserParameters(paramSet, auditSetUpCommand.getLevel().split(";")[0]) : paramSet;
     }
 
     /**
