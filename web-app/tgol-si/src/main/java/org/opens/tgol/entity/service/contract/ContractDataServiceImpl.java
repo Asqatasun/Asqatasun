@@ -22,7 +22,7 @@
 package org.opens.tgol.entity.service.contract;
 
 import java.util.Collection;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.dao.contract.ContractDAO;
