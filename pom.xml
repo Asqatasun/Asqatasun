@@ -1146,6 +1146,10 @@
                         <artifactId>commons-beanutils</artifactId>
                     </exclusion>
                     <exclusion>
+                        <groupId>commons-lang</groupId>
+                        <artifactId>commons-lang</artifactId>
+                    </exclusion>
+                    <exclusion>
                         <groupId>com.lowagie</groupId>
                         <artifactId>itext</artifactId>
                     </exclusion>
