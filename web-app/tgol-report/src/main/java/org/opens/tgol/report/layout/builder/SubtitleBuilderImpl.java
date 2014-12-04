@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -22,7 +22,7 @@
 package org.opens.tgol.report.layout.builder;
 
 import java.util.*;
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.opens.tgol.presentation.data.AuditStatistics;
 
 /**
@@ -36,10 +36,10 @@ public class SubtitleBuilderImpl implements TitleBuilder {
     private static final String DOUBLE_DOT_KEY = " : ";
     private static final char SPACE_KEY = ' ';
 
-    private String markKey = "export-report.mark";
+    private static final String MARK_KEY = "export-report.mark";
 //    private String weightedMarkKey = "export-report.weightedMark";
-    private String refKey = "referential";
-    private String levelKey = "level";
+    private static final String REF_KEY = "referential";
+    private static final String LEVEL_KEY = "level";
     
     private String levelParamKey = "LEVEL";
     public String getLevelParamKey() {
@@ -77,7 +77,7 @@ public class SubtitleBuilderImpl implements TitleBuilder {
         this.refBundleName = refBundleName;
     }
     
-    private List<String> refAndLevelValueBundleNameList = new ArrayList<String>();
+    private final List<String> refAndLevelValueBundleNameList = new ArrayList();
     public List<String> getRefAndLevelValueBundleList() {
         return refAndLevelValueBundleNameList;
     }
@@ -94,7 +94,7 @@ public class SubtitleBuilderImpl implements TitleBuilder {
     public String getTitle(AuditStatistics auditStatistics, Locale locale) {
         ResourceBundle bundle = ResourceBundle.getBundle(bundleName, locale);
         StringBuilder subTitle = new StringBuilder();
-        subTitle.append(bundle.getString(markKey));
+        subTitle.append(bundle.getString(MARK_KEY));
         subTitle.append(SPACE_KEY);
         subTitle.append(auditStatistics.getRawMark());
         subTitle.append(PERCENT_KEY);
@@ -110,24 +110,24 @@ public class SubtitleBuilderImpl implements TitleBuilder {
 
     private String getRefAndLevel(AuditStatistics auditStatistics, Locale locale) {
         ResourceBundle refBundle = ResourceBundle.getBundle(refBundleName, locale);
-        Collection<ResourceBundle> refAndlevelValueBundleList = new ArrayList<ResourceBundle>();
+        Collection<ResourceBundle> refAndlevelValueBundleList = new ArrayList();
         for (String bundle: refAndLevelValueBundleNameList) {
             refAndlevelValueBundleList.add(ResourceBundle.getBundle(bundle, locale));
         }
         ResourceBundle levelBundle = ResourceBundle.getBundle(levelBundleName, locale);
         StringBuilder refAndLevel = new StringBuilder();
-        refAndLevel.append(StringEscapeUtils.unescapeHtml(refBundle.getString(refKey)));
+        refAndLevel.append(StringEscapeUtils.unescapeHtml4(refBundle.getString(REF_KEY)));
         refAndLevel.append(DOUBLE_DOT_KEY);
-        refAndLevel.append(StringEscapeUtils.unescapeHtml(
+        refAndLevel.append(StringEscapeUtils.unescapeHtml4(
                 retrieveI18nValue(
-                    auditStatistics.getParametersMap().get(refKey),
+                    auditStatistics.getParametersMap().get(REF_KEY),
                     refAndlevelValueBundleList)));
         refAndLevel.append(SEPARATOR_KEY);
-        refAndLevel.append(StringEscapeUtils.unescapeHtml(levelBundle.getString(levelKey)));
+        refAndLevel.append(StringEscapeUtils.unescapeHtml4(levelBundle.getString(LEVEL_KEY)));
         refAndLevel.append(DOUBLE_DOT_KEY);
-        refAndLevel.append(StringEscapeUtils.unescapeHtml(
+        refAndLevel.append(StringEscapeUtils.unescapeHtml4(
                 retrieveI18nValue(
-                    auditStatistics.getParametersMap().get(levelKey).replace(";", "-"),
+                    auditStatistics.getParametersMap().get(LEVEL_KEY).replace(";", "-"),
                     refAndlevelValueBundleList)));
         return refAndLevel.toString();
     }

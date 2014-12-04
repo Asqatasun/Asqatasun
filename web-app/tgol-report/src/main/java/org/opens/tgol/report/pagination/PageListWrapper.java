@@ -25,7 +25,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.displaytag.decorator.TableDecorator;
 import org.opens.tgol.presentation.data.PageResult;
 import org.springframework.web.servlet.LocaleResolver;

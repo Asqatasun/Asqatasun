@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -23,7 +23,7 @@ package org.opens.tgol.report.expression;
 
 import ar.com.fdvs.dj.domain.CustomExpression;
 import java.util.*;
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.opens.tgol.report.expression.retriever.KeyRetriever;
 
 /**
@@ -34,12 +34,16 @@ public class I18nExpression implements CustomExpression {
 
     private static final long serialVersionUID = 1174999656431046383L;
 
-    private List<ResourceBundle> resourceBundleList = new ArrayList<ResourceBundle>();
+    private final List<ResourceBundle> resourceBundleList = new ArrayList();
     private KeyRetriever keyRetriever = null;
     private boolean escapeHtml = false;
     
     /**
      * Default constructor
+     * @param bundleNameList
+     * @param keyRetriever
+     * @param escapeHtml
+     * @param locale 
      */
     public I18nExpression(
             List<String> bundleNameList,
@@ -61,9 +65,9 @@ public class I18nExpression implements CustomExpression {
         if (!resourceBundleList.isEmpty()) {
             String i18nValue = retrieveI18nValue(key);
             if (escapeHtml) {
-                return StringEscapeUtils.escapeHtml(i18nValue);
+                return StringEscapeUtils.escapeHtml4(i18nValue);
             }
-            return StringEscapeUtils.unescapeHtml(i18nValue);
+            return StringEscapeUtils.unescapeHtml4(i18nValue);
         }
         return key;
     }
