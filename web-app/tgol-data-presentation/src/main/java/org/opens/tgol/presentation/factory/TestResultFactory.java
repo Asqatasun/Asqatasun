@@ -23,7 +23,7 @@ package org.opens.tgol.presentation.factory;
 
 import java.util.*;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.entity.factory.audit.ProcessResultFactory;
