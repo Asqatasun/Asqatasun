@@ -233,9 +233,6 @@ public final class TestResultFactory {
     /**
      *
      * @param netResultList
-     * @param hasSourceCodeWithDoctype
-     * @param hasResultDetails
-     * @param truncatable
      * @return
      */
     private Map<Theme, List<TestResult>> prepareThemeResultMap(
