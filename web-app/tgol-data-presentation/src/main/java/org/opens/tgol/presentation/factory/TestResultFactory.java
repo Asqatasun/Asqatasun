@@ -23,7 +23,7 @@ package org.opens.tgol.presentation.factory;
 
 import java.util.*;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.entity.factory.audit.ProcessResultFactory;
@@ -303,9 +303,11 @@ public final class TestResultFactory {
     // The code seems to be a duplication
     public List<ProcessResult> getProcessResultListFromTestsResult(Map<String, ManualResult> overriddenResultMap, WebResource webResource) {
         List<ProcessResult> processResultList = new LinkedList();
+        Audit audit = webResource.getAudit();
+        
         for (Map.Entry<String, ManualResult> entry : overriddenResultMap.entrySet()) {
             if (StringUtils.isNotBlank(entry.getValue().getResult())) {
-                Test test = testDataService.read(entry.getKey());
+                Test test = testDataService.getTestFromAuditAndLabel(audit, entry.getKey());
                 List<ProcessResult> prList = ((List<ProcessResult>) webResourceDataService.getProcessResultListByWebResourceAndTest(webResource, test));
                 /**
                  * If returned process result list doesn't contains elements
@@ -332,11 +334,20 @@ public final class TestResultFactory {
         return processResultList;
     }
 
-    public List<ProcessResult> getAllProcessResultListFromTestsResult(Map<String, ManualResult> overriddenResultMap, WebResource webResource) {
+    /**
+     * 
+     * @param overriddenResultMap
+     * @param webResource
+     * @return 
+     */
+    public List<ProcessResult> getAllProcessResultListFromTestsResult(
+            Map<String, ManualResult> overriddenResultMap, 
+            WebResource webResource) {
         List<ProcessResult> processResultList = new LinkedList();
+        Audit audit = webResource.getAudit();
         for (Map.Entry<String, ManualResult> entry : overriddenResultMap.entrySet()) {
 
-            Test test = testDataService.read(entry.getKey());
+            Test test = testDataService.getTestFromAuditAndLabel(audit, entry.getKey());
             List<ProcessResult> prList = ((List<ProcessResult>) webResourceDataService.getProcessResultListByWebResourceAndTest(webResource, test));
             /**
              * If returned process result list doesn't contains elements that
