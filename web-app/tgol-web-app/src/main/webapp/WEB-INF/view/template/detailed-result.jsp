@@ -357,7 +357,7 @@
                             <input  type="submit"  class="result-page-action manual-audit-save-btn"  name="action"  value="<fmt:message key="resultPage.saveManualResultsBtnName"/>"/>
                         </div>
                         <div class="span4 offset2">
-                            <input class="result-page-action manual-audit-save-btn" type="submit" value="Finish" name="action" />
+                            <input class="result-page-action manual-audit-save-btn" type="submit" value="<fmt:message key="resultPage.closeManualAudit"/>" name="action" />
                         </div>
                     </div>
                 </c:if>
