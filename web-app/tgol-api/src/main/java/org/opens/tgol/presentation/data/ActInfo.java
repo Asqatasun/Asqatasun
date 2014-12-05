@@ -32,8 +32,7 @@ public interface ActInfo {
 
     /**
      *
-     * @return
-     *      the date of the act
+     * @return the date of the act
      */
     Date getDate();
 
@@ -46,8 +45,7 @@ public interface ActInfo {
 
     /**
      *
-     * @return
-     *      the Url of the act
+     * @return the Url of the act
      */
     String getUrl();
 
@@ -60,8 +58,7 @@ public interface ActInfo {
 
     /**
      *
-     * @return
-     *      the scope of the act
+     * @return the scope of the act
      */
     String getScope();
 
@@ -74,36 +71,33 @@ public interface ActInfo {
 
     /**
      *
-     * @return
-     *      the weighted mark of the act
+     * @return the weighted mark of the act
      */
     int getWeightedMark();
 
     /**
      * Sets the weighted act of the act
-     * 
+     *
      * @param weightedMark
      */
     void setWeightedMark(int weightedMark);
 
     /**
      *
-     * @return
-     *      the raw mark of the act
+     * @return the raw mark of the act
      */
     int getRawMark();
 
     /**
      * Sets the raw mark of the act
-     * 
+     *
      * @param rawMark
      */
     void setRawMark(int rawMark);
 
     /**
      *
-     * @return
-     *      the id of the audit associated with the act
+     * @return the id of the audit associated with the act
      */
     int getAuditId();
 
@@ -116,58 +110,89 @@ public interface ActInfo {
 
     /**
      *
-     * @return
-     *      the status of the act
+     * @return the status of the act
      */
     String getStatus();
 
     /**
      * Sets the status of the act
-     * 
+     *
      * @param status
      */
     void setStatus(String status);
-    
+
     /**
-     * 
-     * @return 
-     * 
-     *      the referential of the current act
+     *
+     * @return
+     *
+     * the referential of the current act
      */
     String getReferential();
-    
+
     /**
-     * 
-     * @param referential 
+     *
+     * @param referential
      */
     void setReferential(String referential);
-    
+
     /**
-     * @return 
-     *   the boolean of manual
-     * */
+     * @return the boolean of manual
+     *
+     */
     boolean isManual();
-    
+
     /**
-     *  @param manual 
-     * **/
+     * @param isManual 
+     * *
+     */
     void setManual(boolean isManual);
-    
-	void setStatusManual(String statusManual);
 
-	String getStatusManual();
+    /**
+     * 
+     * @param statusManual 
+     */
+    void setStatusManual(String statusManual);
 
-	void setRawMarkManual(int rawMarkManual);
+    /**
+     * 
+     * @return the current status of the manual audit
+     */
+    String getStatusManual();
 
-	int getRawMarkManual();
+    /**
+     * 
+     * @param rawMarkManual 
+     */
+    void setRawMarkManual(int rawMarkManual);
 
-	void setWeightedMarkManual(int weightedMarkManual);
+    /**
+     * 
+     * @return 
+     */
+    int getRawMarkManual();
 
-	int getWeightedMarkManual();
+    /**
+     * 
+     * @param weightedMarkManual 
+     */
+    void setWeightedMarkManual(int weightedMarkManual);
 
-	void setDateManual(Date dateManual);
+    /**
+     * 
+     * @return 
+     */
+    int getWeightedMarkManual();
 
-	Date getDateManual();
+    /**
+     * 
+     * @param dateManual 
+     */
+    void setDateManual(Date dateManual);
 
+    /**
+     * 
+     * @return 
+     */
+    Date getDateManual();
 
 }

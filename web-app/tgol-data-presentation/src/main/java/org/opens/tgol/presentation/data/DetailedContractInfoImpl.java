@@ -31,9 +31,8 @@ import java.util.LinkedHashSet;
  */
 public class DetailedContractInfoImpl extends ContractInfoImpl implements DetailedContractInfo{
 
-
-    private Collection<ActInfo> lastActInfoSet = new LinkedHashSet<ActInfo>();
-    private Collection<ActInfo> siteActInfoSet = new LinkedHashSet<ActInfo>();
+    private final Collection<ActInfo> lastActInfoSet = new LinkedHashSet();
+    private final Collection<ActInfo> siteActInfoSet = new LinkedHashSet();
 
     private Date contractCreationDate = null;
     @Override
@@ -110,6 +109,17 @@ public class DetailedContractInfoImpl extends ContractInfoImpl implements Detail
     @Override
     public void setNumberOfDisplayedAct(int numberOfDisplayedAct) {
         this.numberOfDisplayedAct = numberOfDisplayedAct;
+    }
+
+    private boolean isManualAuditEnabled;
+    @Override
+    public boolean getIsManualAuditEnabled() {
+        return isManualAuditEnabled;
+    }
+
+    @Override
+    public void setIsManualAuditEnabled(boolean isManualAuditEnabled) {
+        this.isManualAuditEnabled = isManualAuditEnabled;
     }
 
 }
