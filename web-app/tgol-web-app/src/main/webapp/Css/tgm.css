@@ -1949,8 +1949,8 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     padding-right: 10px;
     color : #FFF;
 }
-.manual-audit-save-btn{
-	float:right;
+.result-page-action.manual-audit-save-btn{
+    width: 100%;
 }
 .theme-nav {
     display: none;
@@ -2058,54 +2058,68 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     width: 140px;
 }
 .audit-result-container {
-	float:right;
-	width:280px;
+    float:right;
+    /*width:280px;*/
+}
+.audit-result-container.span5 {
+    margin-left: 10px;
+}
+.audit-result-container .test-result {
+    text-align: right;
 }
 .audit-result-container .audit-result-manual,.audit-result-container .test-result,.audit-result-container .test-details{
-	float:right;
+    float:right;
+    margin-left: 10px;
 }
 .audit-result-manual-empty{
-	margin-left:20px;;
+    margin-left:20px;;
 }
 .audit-result-manual div{
-	margin-bottom:0;
+    margin-bottom:0;
 }
 .audit-result-manual legend{
-	font-size:13px;
-	margin-left:0;
+    font-size:13px;
+    margin-left:0;
+    padding-left: 23px;
+    padding-top: 4px;
 }
 .audit-result-manual fieldset {
-	border: none;
+    border: none;
     margin-top: 0;
     padding-right: 0;
 }
 .audit-result-manual label{
-	margin-right:5px;
-	padding-top:0;
+    margin-right:5px;
+    padding-top:0;
 }
 .audit-result-manual fieldset div:nth-child(2) label{
-	color:green;
+    color:green;
 }
 .audit-result-manual fieldset div:nth-child(3) label{
-	color:red;
+    color:red;
 }
 .audit-result-manual div.input{
-	margin-left:0;
+    margin-left:0;
 }
 .audit-result-manual + div{
-	margin-left:35px!important;
+    margin-left:35px!important;
 }
 .audit-result-manual-comment {
-	width:550px;
-	margin-top:10px;
+    margin-top:0;
+    margin-bottom:5px;
 }
 .audit-result-manual-comment textarea{
-	resize: none;
-	width:400px;
+    resize: none;
+    width:80%;
+    margin-left: 10px;
 }
 .audit-result-manual-comment label{
-	font-size:10px;
-	font-weight:bold;
+    font-size:10px;
+    font-weight:bold;
+    padding-top: 0;
+}
+#manual-audit-form-submit {
+    margin-top: 40px;
 }
 #audit-result-menu-actions ul {
     margin : 0;
