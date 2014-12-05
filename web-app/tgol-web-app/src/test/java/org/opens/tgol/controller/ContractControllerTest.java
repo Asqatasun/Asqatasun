@@ -220,6 +220,7 @@ public class ContractControllerTest extends TestCase {
             expect(mockContractDataService.getUrlFromContractOption(mockContract)).andReturn("").times(getUrlFromContractOption);
             expect(mockContractDataService.getPresetContractKeyContractOption(mockContract)).andReturn("").times(getUrlFromContractOption);
         }
+        expect(mockContractDataService.doesContractHaveFunctionality(mockContract,"MANUAL")).andReturn(true).anyTimes();
         expect(mockContractDataService.read(Long.valueOf(1))).andReturn(mockContract).anyTimes();
         replay(mockContractDataService);
         

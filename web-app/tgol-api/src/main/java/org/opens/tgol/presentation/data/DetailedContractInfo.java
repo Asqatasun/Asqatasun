@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2014  Open-S Company
  *
  * This file is part of Tanaguru.
  *
@@ -107,5 +107,18 @@ public interface DetailedContractInfo extends ContractInfo{
      * @param numberOfDisplayedAct
      */
     void setNumberOfDisplayedAct(int numberOfDisplayedAct);
+    
+    /**
+     * 
+     * @return whether the current contract handles the manual audit 
+     * functionality
+     */
+    boolean getIsManualAuditEnabled();
+    
+    /**
+     * 
+     * @param isManualAuditEnabled
+     */
+    void setIsManualAuditEnabled(boolean isManualAuditEnabled);
 
 }

@@ -93,10 +93,10 @@
                     <div class="span16">
                         <table id="audit-actions" class="link-underline">
                             <tr>
-                                <!--                        <div id="audit-actions">-->
+                                <!-- <div id="audit-actions">-->
                                 <c:forEach var="contractAction" items="${detailedContractInfo.actionList}" varStatus="pContractAction">
                                     <td class="action-button">
-                                        <!--                            <span class="action-button">-->
+                                        <!-- <span class="action-button">-->
                                         <c:choose>
                                             <c:when test="${contractAction.actionEnabled == 'false' || isContractExpired == 'true'}">
                                                 <c:set var="contractActionImgUrl">
@@ -175,9 +175,9 @@
                     <div class="row"> 
                         <div class="span16">
                             <div id="holder-site-audit-history-graph"></div>
-                            <!--                    <div id="site-audit-history-graph-sample" style="display : none;">
-                                                    <img id="site-audit-history" src="${historicSampleImgUrl}" alt="<fmt:message key="contract.historicSampleImgAltAndTitle"/>" title="<fmt:message key="contract.historicSampleImgAltAndTitle"/>"/>
-                                                </div>-->
+                            <!-- <div id="site-audit-history-graph-sample" style="display : none;">
+                                    <img id="site-audit-history" src="${historicSampleImgUrl}" alt="<fmt:message key="contract.historicSampleImgAltAndTitle"/>" title="<fmt:message key="contract.historicSampleImgAltAndTitle"/>"/>
+                            </div>-->
                         </div>
                     </div>
                 </c:if>
@@ -215,7 +215,9 @@
                                         <th id="referential" scope="col" class="tg-textual-column"><fmt:message key="referential"/></th>
                                         <th id="scope" scope="col" class="tg-textual-column"><fmt:message key="contract.scope"/></th>
                                         <th id="status" scope="col" class="tg-textual-column"><fmt:message key="contract.status"/></th>
+                                        <c:if test='${detailedContractInfo.isManualAuditEnabled}'>
                                         <th id="manual" scope="col" class="tg-textual-column"><fmt:message key="contract.manual"/></th>
+                                        </c:if>
                                     </tr>
                                 </thead>
                                 <c:if test="${fn:length(detailedContractInfo.lastActInfoSet) > 0}">
@@ -264,6 +266,7 @@
                                                     <fmt:message key="${actInfo.status}"/>
                                                 </a>
                                             </td>
+                                            <c:if test='${detailedContractInfo.isManualAuditEnabled}'>
                                             <td headers="manual" class="tg-textual-column">
                                                 <c:set var="auditUrl" scope="page" value="/home/contract/manual-audit-result.html?audit=" />
                                                 <c:choose>
@@ -284,6 +287,7 @@
                                                     </c:when>
                                                 </c:choose>
                                             </td>
+                                            </c:if>
                                         </tr>
                                     </c:forEach>
                                     <c:if test="${fn:length(detailedContractInfo.lastActInfoSet) > 0}">
