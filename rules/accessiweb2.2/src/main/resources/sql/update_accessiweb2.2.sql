@@ -8,4 +8,5 @@ UPDATE TEST SET Cd_Test = REPLACE(Cd_Test, 'AW22', 'Aw22');
 UPDATE PROCESS_REMARK SET Message_Code = REPLACE(Message_Code, 'AW22', 'Aw22');
 UPDATE PARAMETER SET Parameter_Value = REPLACE(Parameter_Value, 'AW22', 'Aw22');
 
+UPDATE TEST SET Rank='3081001' WHERE Cd_Test='Aw22-08101';
 SET foreign_key_checks=1;
