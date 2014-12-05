@@ -25,10 +25,10 @@ import java.util.Collection;
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.contract.ScopeEnum;
-import org.opens.tgol.entity.functionality.Functionality;
 import org.opens.tgol.entity.option.OptionElement;
 import org.opens.tgol.presentation.data.DetailedContractInfo;
 import org.opens.tgol.presentation.data.DetailedContractInfoImpl;
+import org.opens.tgol.util.TgolKeyStore;
 
 /**
  *
@@ -36,9 +36,8 @@ import org.opens.tgol.presentation.data.DetailedContractInfoImpl;
  */
 public final class DetailedContractInfoFactory extends ContractInfoFactory {
 
-    private static int NB_MAX_DISPLAYED_ACT = 100;
-    private static String MANUAL_AUDIT_FUNCT_KEY = "MANUAL";
-    
+    private static final int NB_MAX_DISPLAYED_ACT = 100;
+
     private String nbMaxActRestrictionCode;
     public String getNbMaxActRestrictionCode() {
         return nbMaxActRestrictionCode;
@@ -78,7 +77,7 @@ public final class DetailedContractInfoFactory extends ContractInfoFactory {
         detailedContractInfo.setIsManualAuditEnabled(
                 getContractDataService().doesContractHaveFunctionality(
                         contract, 
-                        MANUAL_AUDIT_FUNCT_KEY));
+                        TgolKeyStore.MANUAL_AUDIT_FUNCTIONALITY_KEY));
         return detailedContractInfo;
     }
 
