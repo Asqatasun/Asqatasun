@@ -57,11 +57,11 @@ import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
  * Implementation of the rule 11.1.2 of the referential Rgaa 3.0.
  * <br/>
  * For more details about the implementation, refer to <a
- * href="http://www.tanaguru.org/en/content/aw22-rule-11-1-2">the rule 11.1.2
+ * href="https://github.com/Tanaguru/Tanaguru-rules-RGAA-3-doc/wiki/Rule-11-1-2">the rule 11.1.2
  * design page.</a>
  *
  * @see <a
- * href="http://www.accessiweb.org/index.php/accessiweb-html5aria-liste-deployee.html#test-11-1-2">
+ * href="https://references.modernisation.gouv.fr/sites/default/files/RGAA3/referentiel_technique.htm#test-11-1-2">
  * 11.1.2 rule specification</a>
  *
  */

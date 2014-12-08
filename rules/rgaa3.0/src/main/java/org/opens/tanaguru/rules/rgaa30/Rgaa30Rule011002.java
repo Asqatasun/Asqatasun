@@ -22,9 +22,10 @@ package org.opens.tanaguru.rules.rgaa30;
 import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
 
 /**
- * Implementation of the rule 1-10-2 of the referential Rgaa 3.0.
+ * Implementation of the rule 1.10.2 of the referential Rgaa 3.0.
  *
- * @author
+ * For more details about the implementation, refer to <a href="https://github.com/Tanaguru/Tanaguru-rules-RGAA-3-doc/wiki/Rule-1-10-2">the rule 1.10.2 design page.</a>
+ * @see <a href="https://references.modernisation.gouv.fr/sites/default/files/RGAA3/referentiel_technique.htm#test-1-10-2"> 1.10.2 rule specification</a>
  */
 
 public class Rgaa30Rule011002 extends AbstractNotTestedRuleImplementation {

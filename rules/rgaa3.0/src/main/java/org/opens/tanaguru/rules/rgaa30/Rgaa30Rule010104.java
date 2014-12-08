@@ -24,7 +24,8 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
 /**
  * Implementation of the rule 1-1-4 of the referential Rgaa 3.0.
  *
- * @author
+ * For more details about the implementation, refer to <a href="https://github.com/Tanaguru/Tanaguru-rules-RGAA-3-doc/wiki/Rule-1-1-4">the rule 1.1.4 design page.</a>
+ * @see <a href="https://references.modernisation.gouv.fr/sites/default/files/RGAA3/referentiel_technique.htm#test-1-1-4"> 1.1.4 rule specification</a>
  */
 
 public class Rgaa30Rule010104 extends AbstractNotTestedRuleImplementation {

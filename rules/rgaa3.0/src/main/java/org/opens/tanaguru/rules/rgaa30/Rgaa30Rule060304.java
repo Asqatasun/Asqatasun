@@ -46,8 +46,8 @@ import org.opens.tanaguru.service.ProcessRemarkService;
 /**
  * Implementation of the rule 6.3.4 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/aw22-rule-6-3-4">the rule 6.3.4 design page.</a>
- * @see <a href="http://www.accessiweb.org/index.php/accessiweb-html5aria-liste-deployee.html#test-6-3-4"> 6.3.4 rule specification</a>
+ * For more details about the implementation, refer to <a href="https://github.com/Tanaguru/Tanaguru-rules-RGAA-3-doc/wiki/Rule-6-3-4">the rule 6.3.4 design page.</a>
+ * @see <a href="https://references.modernisation.gouv.fr/sites/default/files/RGAA3/referentiel_technique.htm#test-6-3-4"> 6.3.4 rule specification</a>
  *
  * @author jkowalczyk
  */

@@ -33,8 +33,8 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_USAGE_O
 /**
  * Implementation of the rule 5.6.2 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/aw22-rule-5-6-2">the rule 5.6.2 design page.</a>
- * @see <a href="http://www.accessiweb.org/index.php/accessiweb-html5aria-liste-deployee.html#test-5-6-2"> 5.6.2 rule specification</a>
+ * For more details about the implementation, refer to <a href="https://github.com/Tanaguru/Tanaguru-rules-RGAA-3-doc/wiki/Rule-5-6-2">the rule 5.6.2 design page.</a>
+ * @see <a href="https://references.modernisation.gouv.fr/sites/default/files/RGAA3/referentiel_technique.htm#test-5-6-2"> 5.6.2 rule specification</a>
  *
  */
 public class Rgaa30Rule050602 extends AbstractMarkerPageRuleImplementation {

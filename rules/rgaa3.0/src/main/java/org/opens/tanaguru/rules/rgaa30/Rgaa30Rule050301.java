@@ -38,11 +38,11 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_
  * Implementation of the rule 5.3.1 of the referential Rgaa 3.0.
  * <br/>
  * For more details about the implementation, refer to <a
- * href="http://www.tanaguru.org/en/content/aw22-rule-5-3-1">the rule 5.3.1
+ * href="https://github.com/Tanaguru/Tanaguru-rules-RGAA-3-doc/wiki/Rule-5-3-1">the rule 5.3.1
  * design page.</a>
  *
  * @see <a
- * href="http://www.accessiweb.org/index.php/accessiweb-html5aria-liste-deployee.html#test-5-3-1">
+ * href="https://references.modernisation.gouv.fr/sites/default/files/RGAA3/referentiel_technique.htm#test-5-3-1">
  * 5.3.1 rule specification</a>
  *
  */

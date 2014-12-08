@@ -22,9 +22,10 @@ package org.opens.tanaguru.rules.rgaa30;
 import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
 
 /**
- * Implementation of the rule 4-7-1 of the referential Rgaa 3.0.
+ * Implementation of the rule 4.7.1 of the referential Rgaa 3.0.
  *
- * @author
+ * For more details about the implementation, refer to <a href="https://github.com/Tanaguru/Tanaguru-rules-RGAA-3-doc/wiki/Rule-4-7-1">the rule 4.7.1 design page.</a>
+ * @see <a href="https://references.modernisation.gouv.fr/sites/default/files/RGAA3/referentiel_technique.htm#test-4-7-1"> 4.7.1 rule specification</a>
  */
 
 public class Rgaa30Rule040701 extends AbstractNotTestedRuleImplementation {
