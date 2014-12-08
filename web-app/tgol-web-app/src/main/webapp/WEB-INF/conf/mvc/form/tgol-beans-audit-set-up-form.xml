@@ -70,6 +70,37 @@
         <property name="default" value="false"/>
         <property name="enabled" value="false"/>-->
     </bean>
+    
+    <!-- RGAA 3.0 select elements -->
+    <bean id="rgaa30ASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Rgaa30;LEVEL_1"/>
+        <property name="i18nKey" value="Rgaa30-LEVEL_1"/>
+        <property name="errorI18nKey" value="A-error"/>
+        <property name="defaultCode" value="DEFAULT_LEVEL"/>
+        <!--    Default values
+        <property name="default" value="false"/>
+        <property name="enabled" value="false"/>-->
+    </bean>
+    
+    <bean id="rgaa30AASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Rgaa30;LEVEL_2"/>
+        <property name="i18nKey" value="Rgaa30-LEVEL_2"/>
+        <property name="errorI18nKey" value="LEVEL_2-error"/>
+        <property name="defaultCode" value="DEFAULT_LEVEL"/>
+        <!--    Default values
+        <property name="default" value="false"/>
+        <property name="enabled" value="false"/>-->
+    </bean>
+    
+    <bean id="rgaa30AAASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Rgaa30;LEVEL_3"/>
+        <property name="i18nKey" value="Rgaa30-LEVEL_3"/>
+        <property name="errorI18nKey" value="LEVEL_3-error"/>
+        <property name="defaultCode" value="DEFAULT_LEVEL"/>
+        <!--    Default values
+        <property name="default" value="false"/>
+        <property name="enabled" value="false"/>-->
+    </bean>
 
     <bean id="levelSelectFormFieldBuilder" class="org.opens.tgol.form.builder.SelectFormFieldBuilderImpl">
         <property name="i18nKey" value="level"/>
@@ -88,6 +119,13 @@
                         <ref local="rgaa22ASelectElementBuilder"/>
                         <ref local="rgaa22AASelectElementBuilder"/>
                         <ref local="rgaa22AAASelectElementBuilder"/>
+                    </list>
+                </entry>
+                <entry key="Rgaa30">
+                    <list>
+                        <ref local="rgaa30ASelectElementBuilder"/>
+                        <ref local="rgaa30AASelectElementBuilder"/>
+                        <ref local="rgaa30AAASelectElementBuilder"/>
                     </list>
                 </entry>
             </map>

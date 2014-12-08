@@ -51,7 +51,7 @@ public class AuditSetUpCommand implements Serializable {
     /**
      * The map that handles the audit parameters (except the level parameter)
      */
-    private Map<String, String> auditParameterMap = new HashMap<String, String>();
+    private Map<String, String> auditParameterMap = new HashMap();
     public Map<String, String> getAuditParameter() {
         return auditParameterMap;
     }

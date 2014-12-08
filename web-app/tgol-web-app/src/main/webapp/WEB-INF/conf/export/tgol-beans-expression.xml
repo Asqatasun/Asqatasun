@@ -34,6 +34,7 @@
         <property name="bundleNameList">
             <list>
                 <value>i18n/theme-rgaa22-I18N</value>
+                <value>i18n/theme-rgaa30-I18N</value>
                 <value>i18n/theme-aw22-I18N</value>
             </list>
         </property>
@@ -50,6 +51,7 @@
         <property name="bundleNameList">
             <list>
                 <value>i18n/rule-rgaa22-I18N</value>
+                <value>i18n/rule-rgaa30-I18N</value>
                 <value>i18n/rule-aw22-I18N</value>
             </list>
         </property>
@@ -62,6 +64,7 @@
             <list>
                 <value>i18n/referential-aw22-I18N</value>
                 <value>i18n/referential-rgaa22-I18N</value>
+                <value>i18n/referential-rgaa30-I18N</value>
             </list>
         </property>
         <property name="escapeHtml" value="false"/>
