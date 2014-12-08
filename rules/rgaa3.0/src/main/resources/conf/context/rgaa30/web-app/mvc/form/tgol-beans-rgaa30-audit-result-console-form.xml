@@ -118,20 +118,20 @@
                 <entry key="theme">
                     <list>
                         <ref local="rgaa30AllThemeSelectElementBuilder"/>
-                                                <ref local="rgaa30-1ThemeSelectElementBuilder"/>
-                                                <ref local="rgaa30-2ThemeSelectElementBuilder"/>
-                                                <ref local="rgaa30-3ThemeSelectElementBuilder"/>
-                                                <ref local="rgaa30-4ThemeSelectElementBuilder"/>
-                                                <ref local="rgaa30-5ThemeSelectElementBuilder"/>
-                                                <ref local="rgaa30-6ThemeSelectElementBuilder"/>
-                                                <ref local="rgaa30-7ThemeSelectElementBuilder"/>
-                                                <ref local="rgaa30-8ThemeSelectElementBuilder"/>
-                                                <ref local="rgaa30-9ThemeSelectElementBuilder"/>
-                                                <ref local="rgaa30-10ThemeSelectElementBuilder"/>
-                                                <ref local="rgaa30-11ThemeSelectElementBuilder"/>
-                                                <ref local="rgaa30-12ThemeSelectElementBuilder"/>
-                                                <ref local="rgaa30-13ThemeSelectElementBuilder"/>
-                                            </list>
+                            <ref local="rgaa30-1ThemeSelectElementBuilder"/>
+                            <ref local="rgaa30-2ThemeSelectElementBuilder"/>
+                            <ref local="rgaa30-3ThemeSelectElementBuilder"/>
+                            <ref local="rgaa30-4ThemeSelectElementBuilder"/>
+                            <ref local="rgaa30-5ThemeSelectElementBuilder"/>
+                            <ref local="rgaa30-6ThemeSelectElementBuilder"/>
+                            <ref local="rgaa30-7ThemeSelectElementBuilder"/>
+                            <ref local="rgaa30-8ThemeSelectElementBuilder"/>
+                            <ref local="rgaa30-9ThemeSelectElementBuilder"/>
+                            <ref local="rgaa30-10ThemeSelectElementBuilder"/>
+                            <ref local="rgaa30-11ThemeSelectElementBuilder"/>
+                            <ref local="rgaa30-12ThemeSelectElementBuilder"/>
+                            <ref local="rgaa30-13ThemeSelectElementBuilder"/>
+                        </list>
                 </entry>
             </map>
         </property>
