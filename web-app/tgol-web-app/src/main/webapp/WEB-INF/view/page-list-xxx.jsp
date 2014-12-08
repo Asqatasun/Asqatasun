@@ -106,7 +106,17 @@
                             ${pageName}
                         </h1>
                         <c:if test="${not empty testKey}">
-                            <blockquote class="test-label">
+                            <c:if test="${tg:lang(pageContext) != 'en' && tg:lang(pageContext) != 'fr'}">
+                                <c:choose>
+                                    <c:when test="${fn:startsWith(testKey.code, 'Rgaa')} ">
+                                        <c:set var="ruleLang" value=" lang=fr "/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:set var="ruleLang" value=" lang=en "/>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:if>
+                            <blockquote class="test-label" ${ruleLang}>
                                 <fmt:message key="${testKey.code}"/>
                             </blockquote>
                         </c:if>
