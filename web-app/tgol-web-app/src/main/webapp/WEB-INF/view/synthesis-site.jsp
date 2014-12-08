@@ -118,13 +118,23 @@
                             </tr>
                         </thead>
                         <tbody>
+                        <c:if test="${tg:lang(pageContext) != 'en' && tg:lang(pageContext) != 'fr'}">
+                            <c:choose>
+                                <c:when test="${fn:startsWith(statistics.parametersMap['referential'], 'RGAA')}">
+                                    <c:set var="ruleLang" value=" lang=fr "/>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:set var="ruleLang" value=" lang=en "/>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:if>
                         <c:forEach var="failedTestByPageInfo" items="${failedTestInfoByPageSet}" varStatus="pFailedTestInfoByPageSet">
                             <tr>
                                 <td headers="testTop5FailedTestByPage" class="tg-textual-column">
                                     <c:set var="abbrTitle">
                                         ${failedTestByPageInfo.testLabel} : <spring:message code="${failedTestByPageInfo.testCode}"/>
                                     </c:set>
-                                    <abbr title="${fn:escapeXml(abbrTitle)}"  style="border-bottom: 1px dotted;cursor: help;">
+                                    <abbr title="${fn:escapeXml(abbrTitle)}"  style="border-bottom: 1px dotted;cursor: help;" ${ruleLang}>
                                         ${failedTestByPageInfo.testLabel}
                                     </abbr>
                                 </td>
