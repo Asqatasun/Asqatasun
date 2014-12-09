@@ -38,7 +38,7 @@
                 </div><!-- class="row" -->
                 <c:if test="${tg:lang(pageContext) != 'en' && tg:lang(pageContext) != 'fr'}">
                     <c:choose>
-                        <c:when test="${fn:startsWith(statistics.parametersMap['referential'], 'RGAA')}">
+                        <c:when test="${fn:startsWith(statistics.parametersMap['referential'], 'Rgaa')}">
                             <c:set var="ruleLang" value=" lang=fr "/>
                         </c:when>
                         <c:otherwise>
