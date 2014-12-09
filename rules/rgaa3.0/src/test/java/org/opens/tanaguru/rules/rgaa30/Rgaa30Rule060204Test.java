@@ -232,25 +232,25 @@ public class Rgaa30Rule060204Test extends Rgaa30RuleImplementationTestCase {
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "rgaa30/Rgaa30Rule060203/Rgaa30.Test.06.02.03-4NA-04.html"));
         
-        //06.06.01 testcases -> empty links
-        getWebResourceMap().put("Rgaa30.Test.06.06.01-2Failed-01",
+        //06.05.01 testcases -> empty links
+        getWebResourceMap().put("Rgaa30.Test.06.05.01-2Failed-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060601/Rgaa30.Test.06.06.01-2Failed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.06.01-2Failed-02",
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060501/Rgaa30.Test.06.05.01-2Failed-01.html"));
+        getWebResourceMap().put("Rgaa30.Test.06.05.01-2Failed-02",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060601/Rgaa30.Test.06.06.01-2Failed-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.06.01-2Failed-03",
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060501/Rgaa30.Test.06.05.01-2Failed-02.html"));
+        getWebResourceMap().put("Rgaa30.Test.06.05.01-2Failed-03",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060601/Rgaa30.Test.06.06.01-2Failed-03.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.06.01-2Failed-04",
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060501/Rgaa30.Test.06.05.01-2Failed-03.html"));
+        getWebResourceMap().put("Rgaa30.Test.06.05.01-2Failed-04",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060601/Rgaa30.Test.06.06.01-2Failed-04.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.06.01-2Failed-05",
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060501/Rgaa30.Test.06.05.01-2Failed-04.html"));
+        getWebResourceMap().put("Rgaa30.Test.06.05.01-2Failed-05",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060601/Rgaa30.Test.06.06.01-2Failed-05.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.06.01-4NA-01",
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060501/Rgaa30.Test.06.05.01-2Failed-05.html"));
+        getWebResourceMap().put("Rgaa30.Test.06.05.01-4NA-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060601/Rgaa30.Test.06.06.01-4NA-01.html"));
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060501/Rgaa30.Test.06.05.01-4NA-01.html"));
     }
 
     @Override
@@ -447,28 +447,28 @@ public class Rgaa30Rule060204Test extends Rgaa30RuleImplementationTestCase {
         assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
         assertNull(processResult.getRemarkSet());
         
-        // 06.06.01 testcases : All is Not Applicable
-        processResult = processPageTest("Rgaa30.Test.06.06.01-2Failed-01");
+        // 06.05.01 testcases : All is Not Applicable
+        processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-01");
         assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
         assertNull(processResult.getRemarkSet());
         
-        processResult = processPageTest("Rgaa30.Test.06.06.01-2Failed-02");
+        processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-02");
         assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
         assertNull(processResult.getRemarkSet());
         
-        processResult = processPageTest("Rgaa30.Test.06.06.01-2Failed-03");
+        processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-03");
         assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
         assertNull(processResult.getRemarkSet());
         
-        processResult = processPageTest("Rgaa30.Test.06.06.01-2Failed-04");
+        processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-04");
         assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
         assertNull(processResult.getRemarkSet());
         
-        processResult = processPageTest("Rgaa30.Test.06.06.01-2Failed-05");
+        processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-05");
         assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
         assertNull(processResult.getRemarkSet());
         
-        processResult = processPageTest("Rgaa30.Test.06.06.01-4NA-01");
+        processResult = processPageTest("Rgaa30.Test.06.05.01-4NA-01");
         assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
         assertNull(processResult.getRemarkSet());
     }
@@ -568,19 +568,19 @@ public class Rgaa30Rule060204Test extends Rgaa30RuleImplementationTestCase {
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("Rgaa30.Test.06.02.03-3NMI-03").getValue());
         
-        // 06.06.01 testcases : All is Not Applicable
+        // 06.05.01 testcases : All is Not Applicable
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.06.06.01-2Failed-01").getValue());
+                consolidate("Rgaa30.Test.06.05.01-2Failed-01").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.06.06.01-2Failed-02").getValue());
+                consolidate("Rgaa30.Test.06.05.01-2Failed-02").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.06.06.01-2Failed-03").getValue());
+                consolidate("Rgaa30.Test.06.05.01-2Failed-03").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.06.06.01-2Failed-04").getValue());
+                consolidate("Rgaa30.Test.06.05.01-2Failed-04").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.06.06.01-2Failed-05").getValue());
+                consolidate("Rgaa30.Test.06.05.01-2Failed-05").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.06.06.01-4NA-01").getValue());
+                consolidate("Rgaa30.Test.06.05.01-4NA-01").getValue());
     }
 
 }
