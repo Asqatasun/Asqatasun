@@ -94,6 +94,14 @@
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
         <fileSet>
+            <directory>${basedir}/../../rules/rgaa3.0/src/main/resources/sql</directory>
+            <includes>
+                <include>rgaa3.0-insert.sql</include>
+            </includes>
+            <fileMode>755</fileMode>
+            <outputDirectory>/install/rules/sql</outputDirectory>
+        </fileSet>
+        <fileSet>
             <directory>${basedir}/../../engine/tanaguru-resources/src/main/resources/sql-update</directory>
             <includes>
                 <include>**/*</include>
