@@ -64,9 +64,6 @@ import org.springframework.ui.Model;
 @Controller
 public class AbstractAuditResultController extends AbstractAuditDataHandlerController {
 
-    private static final String CRITERION_RESULT_PAGE_KEY = "criterion-result";
-    private static final String REFERER_HEADER_KEY = "referer";
-
     private final List<FormFieldBuilder> sortFormFieldBuilderList = new ArrayList();
     public final void setFormFieldBuilderList(final List<FormFieldBuilder> formFieldBuilderList) {
         this.sortFormFieldBuilderList.addAll(formFieldBuilderList);
@@ -451,8 +448,8 @@ public class AbstractAuditResultController extends AbstractAuditDataHandlerContr
     private String computeDisplayScope(
             HttpServletRequest request,
             AuditResultSortCommand arsc) {
-        if (StringUtils.contains(request.getHeader(REFERER_HEADER_KEY),
-                CRITERION_RESULT_PAGE_KEY)) {
+        if (StringUtils.contains(request.getHeader(TgolKeyStore.REFERER_HEADER_KEY),
+                TgolKeyStore.CRITERION_RESULT_PAGE_KEY)) {
             return TgolKeyStore.CRITERION_DISPLAY_SCOPE_VALUE;
         }
         if (arsc != null) {

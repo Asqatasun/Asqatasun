@@ -61,11 +61,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AuditScenarioController extends AbstractAuditSetUpController {
 
-    private static final String CONTENT_TYPE="text/plain";
-    private static final String JSON_EXTENSION=".json";
-    private static final String CONTENT_DISPOSITION="Content-Disposition";
-    private static final String ATTACHMENT="attachment; filename=";
-    JRStyledTextParser j;
+    private JRStyledTextParser j;
     private AddScenarioFormValidator addScenarioFormValidator;
     public AddScenarioFormValidator getAddScenarioFormValidator() {
         return addScenarioFormValidator;
@@ -158,11 +154,11 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
                     if (scenario.getId().equals(Long.valueOf(scenarioId))) {
                         InputStream is = IOUtils.toInputStream(scenario.getContent());
                         IOUtils.copy(is, response.getOutputStream());
-                        response.setContentType(CONTENT_TYPE); 
-                        StringBuilder strb = new StringBuilder(ATTACHMENT);
+                        response.setContentType(TgolKeyStore.CONTENT_TYPE); 
+                        StringBuilder strb = new StringBuilder(TgolKeyStore.ATTACHMENT);
                         strb.append(scenario.getLabel());
-                        strb.append(JSON_EXTENSION);
-                        response.setHeader(CONTENT_DISPOSITION,strb.toString()); 
+                        strb.append(TgolKeyStore.JSON_EXTENSION);
+                        response.setHeader(TgolKeyStore.CONTENT_DISPOSITION,strb.toString()); 
                         response.flushBuffer();
                         break;
                     }
@@ -312,7 +308,7 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
      * @param model 
      */
     private void addScenarioListToModel(Contract contract, Model model) {
-        List<Scenario> scenarios = new ArrayList<Scenario>();
+        List<Scenario> scenarios = new ArrayList();
         scenarios.addAll(contract.getScenarioSet());
         Collections.sort(scenarios, new ScenarioDateSorter());
         model.addAttribute(TgolKeyStore.SCENARIO_LIST_KEY, scenarios);
@@ -338,7 +334,7 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
      * @return 
      */
     private Collection<Act> retrieveActCollection(Scenario scenario, Contract contract) {
-        Collection<Act> actCollectionFromScenarioAndContract = new HashSet<Act>();
+        Collection<Act> actCollectionFromScenarioAndContract = new HashSet();
         for (Act act : getActDataService().getActsByContract(contract, -1, 2, ScopeEnum.SCENARIO, true)) {
             if (StringUtils.equals(scenario.getLabel(), act.getAudit().getSubject().getURL())) {
                 actCollectionFromScenarioAndContract.add(act);

@@ -53,7 +53,7 @@ import org.springframework.web.servlet.LocaleResolver;
 @Controller
 public class AccountSettingsController extends AbstractUserAndContractsController {
 
-    List<String> forbiddenUserList = new ArrayList<String>();
+    List<String> forbiddenUserList = new ArrayList();
     public void setForbiddenUserList(List<String> forbiddenUserList) {
         this.forbiddenUserList = forbiddenUserList;
     }
@@ -64,7 +64,7 @@ public class AccountSettingsController extends AbstractUserAndContractsControlle
         this.testDataService = testDataService;
     }
     
-    private Map<String, Reference> refMap = new HashMap<String, Reference>();
+    private final Map<String, Reference> refMap = new HashMap();
     @Autowired
     public void setReferenceDataService(ReferenceDataService referenceDataService) {
         for (Reference ref : referenceDataService.findAll()) {

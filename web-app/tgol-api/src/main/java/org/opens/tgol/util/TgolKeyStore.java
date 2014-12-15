@@ -382,4 +382,48 @@ public final class TgolKeyStore {
     public static final String ACT_QUOTA_BY_IP_EXCEEDED = "actQuotaByIpExceeded";
     public static final String ACT_ALLOWED = "actAllowed";
     
+    /* audit param keys */
+    public static final String PROXY_HOST_PARAM_KEY = "PROXY_HOST";
+    public static final String PROXY_PORT_PARAM_KEY = "PROXY_PORT";
+    public static final String DEPTH_PARAM_KEY = "DEPTH";
+    public static final String MAX_DOCUMENT_PARAM_KEY = "MAX_DOCUMENTS";
+    public static final String MAX_DURATION_PARAM_KEY = "MAX_DURATION";
+    public static final String EXCLUSION_URL_LIST_PARAM_KEY = "EXCLUSION_REGEXP";
+    public static final String DEPTH_PAGE_PARAM_VALUE = "0";
+    public static final String PROXY_HOST_CONF_KEY = "proxyHost";
+    public static final String PROXY_PORT_CONF_KEY = "proxyPort";
+    public static final String PROXY_EXCLUSION_URL_CONF_KEY = "proxyExclusionUrl";
+    public static final String EMAIL_SENT_TO_USER_EXCLUSION_CONF_KEY = "emailSentToUserExclusionList";
+    
+    /* url param keys */
+    public static final String CRITERION_RESULT_PAGE_KEY = "criterion-result";
+    public static final String REFERER_HEADER_KEY = "referer";
+    
+    /* email creator keys */
+    public static final String EMAIL_FROM_KEY="emailFrom";
+    public static final String EMAIL_TO_KEY="emailTo";
+    public static final String EMAIL_SUBJECT_KEY="emailSubject";
+    public static final String EMAIL_CONTENT_KEY="emailContent";
+    public static final String EMAIL_CONTENT_URL_KEY="#urlToTest";
+    public static final String EMAIL_CONTENT_EMAIL_KEY="#email";
+    public static final String EMAIL_CONTENT_FIRST_NAME_KEY="#firstName";
+    public static final String EMAIL_CONTENT_LAST_NAME_KEY="#lastName";
+    public static final String EMAIL_CONTENT_PHONE_NUMBER_KEY="#phoneNumber";
+    
+    /* scenario meta data keys */
+    public static final String CONTENT_TYPE="text/plain";
+    public static final String JSON_EXTENSION=".json";
+    public static final String CONTENT_DISPOSITION="Content-Disposition";
+    public static final String ATTACHMENT="attachment; filename=";
+    
+    /* forgotten password email creator keys */
+    public static final String FORGOTTEN_PASSWD_EMAIL_FROM_KEY = "forgotten-password.emailFrom";
+    public static final String FORGOTTEN_PASSWD_EMAIL_SUBJECT_KEY = "forgotten-password.emailSubject";
+    public static final String FORGOTTEN_PASSWD_EMAIL_CONTENT_KEY = "forgotten-password.emailContent";
+    public static final String FORGOTTEN_PASSWD_BUNDLE_NAME = "i18n/forgotten-password-page-I18N";
+    public static final String FORGOTTEN_PASSWD_CHANGE_PASSWORD_URL_KEY = "changePasswordUrl";
+
+    public static final String AUTHENTICATED_KEY = "authenticated";
+    
+    public static final String ROLE_ADMIN_NAME_KEY = "ROLE_ADMIN";
 }

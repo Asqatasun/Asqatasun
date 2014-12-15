@@ -83,7 +83,6 @@ public class UserManagementController extends AbstractUserAndContractsController
     }
 
     /**
-     * @param contractId
      * @param request
      * @param response
      * @param model
@@ -396,6 +395,7 @@ public class UserManagementController extends AbstractUserAndContractsController
 
     /**
      * @param ccc the CreateContractCommand 
+     * @param result
      * @param request
      * @param response
      * @param model

@@ -59,7 +59,7 @@ public class ContractManagementController extends AbstractUserAndContractsContro
     }
 
     /**
-     * @param contractId
+     * @param userId
      * @param request
      * @param response
      * @param model
