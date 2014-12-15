@@ -344,6 +344,8 @@ public class UserManagementController extends AbstractUserAndContractsController
      * @param request
      * @param response
      * @param model
+     * @return the name of the view that displays the confirmation page 
+     * when trying to delete all the audits of a user
      */
     @RequestMapping(value = TgolKeyStore.DELETE_USER_AUDITS_URL, method = RequestMethod.POST)
     @Secured(TgolKeyStore.ROLE_ADMIN_KEY)
