@@ -376,6 +376,7 @@ public final class TgolKeyStore {
     /* HTTP PREFIX*/
     public static final String HTTP_PREFIX = "http://";
     public static final String HTTPS_PREFIX = "https://";
+    public static final String FILE_PREFIX = "file:";
     public static final char SLASH_CHAR = '/';
 
     public static final String ACT_QUOTA_EXCEEDED = "actQuotaExceeded";

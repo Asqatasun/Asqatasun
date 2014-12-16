@@ -41,7 +41,7 @@ public class AuditSetUpFormValidator implements Validator {
     protected static final String MANDATORY_FIELD_MSG_BUNDLE_KEY =
             "required.mandatoryField";
 
-    private ContractDataService contractDataService;
+    private final ContractDataService contractDataService;
     public ContractDataService getContractDataService() {
         return contractDataService;
     }
@@ -51,8 +51,7 @@ public class AuditSetUpFormValidator implements Validator {
         this.contractDataService = contractDataService;
     }
 
-    private Map<String, AuditSetUpFormField> auditSetUpFormFieldMap =
-            new HashMap<String,AuditSetUpFormField>();
+    private final Map<String, AuditSetUpFormField> auditSetUpFormFieldMap = new HashMap();
     public void setAuditSetUpFormFieldMap(Map<String, List<AuditSetUpFormField>> auditSetUpFormFieldMapSortedByParamType) {
         for (Map.Entry<String, List<AuditSetUpFormField>> entry : auditSetUpFormFieldMapSortedByParamType.entrySet()) {
             for (AuditSetUpFormField asuff : entry.getValue()){
