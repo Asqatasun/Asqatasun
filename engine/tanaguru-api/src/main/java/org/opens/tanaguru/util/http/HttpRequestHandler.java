@@ -66,7 +66,7 @@ public class HttpRequestHandler {
     /**
      * Multiple Url can be set through a unique String separated by ;
      */
-    private List<String> proxyExclusionUrlList = new ArrayList<String>();
+    private final List<String> proxyExclusionUrlList = new ArrayList();
     public List<String> getProxyExclusionUrlList() {
         return proxyExclusionUrlList;
     }

@@ -1,5 +1,3 @@
-package org.opens.tgol.controller;
-
 /*
  * Tanaguru - Automated webpage assessment Copyright (C) 2008-2011 Open-S
  * Company
@@ -21,6 +19,8 @@ package org.opens.tgol.controller;
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
+package org.opens.tgol.controller;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -345,7 +345,7 @@ public class UserManagementController extends AbstractUserAndContractsController
      * @param response
      * @param model
      * @return the name of the view that displays the confirmation page 
-     * when trying to delete all the audits of a user
+         * when trying to delete all the audits of a user
      */
     @RequestMapping(value = TgolKeyStore.DELETE_USER_AUDITS_URL, method = RequestMethod.POST)
     @Secured(TgolKeyStore.ROLE_ADMIN_KEY)
