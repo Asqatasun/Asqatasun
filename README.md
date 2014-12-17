@@ -54,16 +54,9 @@ By january 2014, this represents [~170 accessibility tests](http://www.tanaguru.
 
 ## Contact and mailing-list
 
-We have a mailing lists dedicated to Tanaguru user and development
-discussion. To subscribe, send an empty message to :
+Join our brand new [Tanaguru discussion space](http://discuss.tanaguru.org) 
 
-        tanaguru-users-fr@lists.adullact.net
-
-Or you can send an email to 
-
-        tanaguru AT tanaguru dot org 
-
-(only english, french and klingon is spoken :) ) 
+Or you can contact the team by sending an email to `tanaguru AT tanaguru dot org` (only english, french and klingon is spoken :) ) 
 
 ## Content of this (last) version
 
