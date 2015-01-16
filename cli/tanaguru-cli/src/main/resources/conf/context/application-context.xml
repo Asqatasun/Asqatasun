@@ -36,7 +36,6 @@
     <import resource="classpath:conf/context/beans-scenarioloader.xml"/>
     <import resource="classpath:conf/context/beans-statistics.xml"/>
     <import resource="classpath:conf/context/beans-tanaguru.xml"/>
-    <import resource="classpath:conf/context/spring-jms-tanaguru.xml"/>
 
 </beans>
 

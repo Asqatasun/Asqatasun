@@ -44,6 +44,9 @@ import org.opens.tanaguru.entity.service.audit.ProcessRemarkDataService;
 import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterElementDataService;
+import org.opens.tanaguru.entity.service.reference.TestDataService;
+import org.opens.tanaguru.entity.service.reference.ThemeDataService;
+import org.opens.tanaguru.entity.service.statistics.ThemeStatisticsDataService;
 import org.opens.tanaguru.entity.service.statistics.WebResourceStatisticsDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Site;
@@ -118,6 +121,15 @@ public class Tanaguru implements AuditServiceListener {
                 String ffPath = cl.getOptionValue("f");
                 if (isValidPath(ffPath, "f", false)) {
                     System.setProperty("webdriver.firefox.bin", ffPath);
+                } else {
+                    printUsage();
+                    return;
+                }
+            }
+            if (cl.hasOption("d")) {
+                String display = cl.getOptionValue("d");
+                if (isValidDisplay(display, "d")) {
+                    System.setProperty("display", ":"+display);
                 } else {
                     printUsage();
                     return;
@@ -251,10 +263,19 @@ public class Tanaguru implements AuditServiceListener {
     public void auditCompleted(Audit audit) {
         audit = auditDataService.read(audit.getId());
         List<ProcessResult> processResultList = (List<ProcessResult>) processResultDataService.getNetResultFromAudit(audit);
+
         System.out.println("Audit terminated with success at " + audit.getDateOfCreation());
+        System.out.println("Audit Id : " + audit.getId());
         System.out.println("");
         System.out.println("RawMark : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getRawMark() + "%");
         System.out.println("WeightedMark : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getMark() + "%");
+        System.out.println("Nb Passed : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getNbOfPassed());
+        System.out.println("Nb Failed test : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getNbOfInvalidTest());
+        System.out.println("Nb Failed occurences : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getNbOfFailedOccurences());
+        System.out.println("Nb Pre-qualified : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getNbOfNmi());
+        System.out.println("Nb Not Applicable : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getNbOfNa());
+        System.out.println("Nb Not Tested : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getNbOfNotTested());
+
         if (audit.getSubject() instanceof Site) {
             int numberOfChildWebResource = webResourceDataService.getNumberOfChildWebResource(audit.getSubject()).intValue();
             for (int i = 0; i < numberOfChildWebResource; i++) {
@@ -279,6 +300,13 @@ public class Tanaguru implements AuditServiceListener {
         }
         System.out.println("RawMark : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getRawMark() + "%");
         System.out.println("WeightedMark : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getMark() + "%");
+        System.out.println("Nb Passed : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getNbOfPassed());
+        System.out.println("Nb Failed test : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getNbOfInvalidTest());
+        System.out.println("Nb Failed occurences : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getNbOfFailedOccurences());
+        System.out.println("Nb Pre-qualified : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getNbOfNmi());
+        System.out.println("Nb Not Applicable : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getNbOfNa());
+        System.out.println("Nb Not Tested : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getNbOfNotTested());
+        
         Collections.sort(prList, new Comparator<ProcessResult>() {
             @Override
             public int compare(ProcessResult t, ProcessResult t1) {
@@ -411,6 +439,12 @@ public class Tanaguru implements AuditServiceListener {
                              .isRequired(false)
                              .create("f"));
         
+        options.addOption(OptionBuilder.withLongOpt("display")
+                             .withDescription("Value of the display")
+                             .hasArg()
+                             .isRequired(false)
+                             .create("d"));
+        
         options.addOption(OptionBuilder.withLongOpt("referential")
                              .withDescription("Referential : \n"
                 + "- \"Aw22\" for Accessiweb 2.2 (default)\n"
@@ -467,6 +501,22 @@ public class Tanaguru implements AuditServiceListener {
         }
         System.out.println("\n"+path + " is an invalid path for " + option + " option.\n");
         return false;
+    }
+    
+    /**
+     * 
+     * @param display
+     * @param option
+     * @return whether the given display is valid 
+     */
+    private static boolean isValidDisplay(String display, String option) {
+        try {
+            Integer.valueOf(display);
+            return true;
+        } catch (NumberFormatException nme) {
+            System.out.println("\n"+display + " is invalid for " + option + " option.\n");
+            return false;
+        }
     }
     
     /**
