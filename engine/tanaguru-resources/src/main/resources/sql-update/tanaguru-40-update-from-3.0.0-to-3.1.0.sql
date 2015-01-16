@@ -90,4 +90,13 @@ UPDATE PARAMETER SET Parameter_Value = REPLACE(Parameter_Value, ';Or', ';LEVEL_3
 UPDATE PARAMETER SET Parameter_Value = REPLACE(Parameter_Value, ';AAA', ';LEVEL_3');
 UPDATE PARAMETER SET Parameter_Value = REPLACE(Parameter_Value, ';AA', ';LEVEL_2');
 UPDATE PARAMETER SET Parameter_Value = REPLACE(Parameter_Value, ';A', ';LEVEL_1');
+
+INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_Element`, `Id_Parameter_Family`, `Long_Label`, `Short_Label`) VALUES
+(43, 'SCREEN_WIDTH', 1, '', 'screen width'),
+(44, 'SCREEN_HEIGHT', 1, '', 'screen height');
+
+INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
+(43, '1680', b'1'),
+(44, '1050', b'1'); 
+
 SET foreign_key_checks=1;

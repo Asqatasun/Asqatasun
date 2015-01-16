@@ -1,23 +1,23 @@
 /*
- * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
- *
- * This file is part of Tanaguru.
- *
- * Tanaguru is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Contact us by mail: open-s AT open-s DOT com
+ *  Tanaguru - Automated webpage assessment
+ *  Copyright (C) 2008-2015  Tanaguru.org
+ * 
+ *  This file is part of Tanaguru.
+ * 
+ *  Tanaguru is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Affero General Public License as
+ *  published by the Free Software Foundation, either version 3 of the
+ *  License, or (at your option) any later version.
+ * 
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Affero General Public License for more details.
+ * 
+ *  You should have received a copy of the GNU Affero General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ *  Contact us by mail: open-s AT open-s DOT com
  */
 package org.opens.tanaguru.scenarioloader;
 
@@ -30,6 +30,7 @@ import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.factory.audit.PreProcessResultFactory;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.audit.PreProcessResultDataService;
+import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.util.factory.DateFactory;
@@ -71,6 +72,16 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
     @Autowired
     public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
         this.webResourceDataService = webResourceDataService;
+    }
+    
+    private ParameterDataService parameterDataService;
+    public ParameterDataService getParameterDataService() {
+        return parameterDataService;
+    }
+
+    @Autowired
+    public void setParameterDataService(ParameterDataService parameterDataService) {
+        this.parameterDataService = parameterDataService;
     }
     
     private ContentDataService contentDataService;
@@ -130,7 +141,7 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
 
     public void setJsScriptMap(Map<String, String> jsScriptMap) {
         if (this.jsScriptMap == null) {
-            this.jsScriptMap = new HashMap<String,String>();
+            this.jsScriptMap = new HashMap<>();
         }
         for (Map.Entry<String, String> entry : jsScriptMap.entrySet()) {
         Resource resource = new ClassPathResource(entry.getValue());
@@ -170,6 +181,7 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
         scenarioLoader.setPreProcessResultDataService(preProcessResultDataService);
         scenarioLoader.setJsScriptMap(jsScriptMap);
         scenarioLoader.setPageLoadDriverTimeout(pageLoadDriverTimeout);
+        scenarioLoader.setParameterDataService(parameterDataService);
 //        scenarioLoader.setFirefoxDriverObjectPool(firefoxDriverObjectPool);
         return scenarioLoader;
     }
