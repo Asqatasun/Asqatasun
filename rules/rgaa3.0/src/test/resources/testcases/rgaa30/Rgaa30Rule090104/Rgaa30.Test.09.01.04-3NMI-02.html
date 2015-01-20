@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Rgaa30 Test.09.01.04 NMI 02</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>Rgaa30 Test.09.01.04 NMI 02</h1>
+
+            <div class="test-detail">
+                On each Web page, is each heading (h tag) relevant?
+            </div>
+
+            <div class="testcase">
+                <span role="heading" aria-level="1"> Title level 1-1 </span>
+                <div role="heading" aria-level="1"> <img src="my-image.jpg" alt="Title level 1-2"></img></div>
+                <span role="heading" aria-level="2"> Title level 2-1 </span>
+                <div role="heading" aria-level="2"> <img src="my-image.jpg" alt="Title level 2-2"></img></div>
+                <span role="heading" aria-level="3"> Title level 3-1 </span>
+                <div role="heading" aria-level="3"> <img src="my-image.jpg" alt="Title level 3-2"></img></div>
+                <span role="heading" aria-level="4"> Title level 4-1 </span>
+                <div role="heading" aria-level="4"> <img src="my-image.jpg" alt="Title level 4-2"></img></div>
+                <span role="heading" aria-level="5"> Title level 5-1 </span>
+                <div role="heading" aria-level="5"> <img src="my-image.jpg" alt="Title level 5-2"></img></div>
+                <span role="heading" aria-level="6"> Title level 6-1 </span>
+                <div role="heading" aria-level="6"> <img src="my-image.jpg" alt="Title level 6-2"></img></div>
+                <span role="heading" aria-level="7"> Title level 7-1 </span>
+                <div role="heading" aria-level="7"> <img src="my-image.jpg" alt="Title level 7-2"></img></div>
+            </div>
+
+            <div class="test-explanation">
+                NMI : The relevancy of each heading needs to be humanly checked.
+                The aria-level 7 is not ignored. Aria provides here a way to 
+                bypass the limit of 6 defined by semantic markup.
+            </div>
+        </div>
+    </body>
+</html>

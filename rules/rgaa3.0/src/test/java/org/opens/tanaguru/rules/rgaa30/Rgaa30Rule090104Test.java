@@ -40,6 +40,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
 
     /**
      * Default constructor
+     * @param testName
      */
     public Rgaa30Rule090104Test (String testName){
         super(testName);
@@ -56,9 +57,15 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         getWebResourceMap().put("Rgaa30.Test.09.01.04-2Failed-01",
               getWebResourceFactory().createPage(
               getTestcasesFilePath() + "rgaa30/Rgaa30Rule090104/Rgaa30.Test.09.01.04-2Failed-01.html"));
+        getWebResourceMap().put("Rgaa30.Test.09.01.04-2Failed-02",
+              getWebResourceFactory().createPage(
+              getTestcasesFilePath() + "rgaa30/Rgaa30Rule090104/Rgaa30.Test.09.01.04-2Failed-02.html"));
         getWebResourceMap().put("Rgaa30.Test.09.01.04-3NMI-01",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "rgaa30/Rgaa30Rule090104/Rgaa30.Test.09.01.04-3NMI-01.html"));
+        getWebResourceMap().put("Rgaa30.Test.09.01.04-3NMI-02",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule090104/Rgaa30.Test.09.01.04-3NMI-02.html"));
         getWebResourceMap().put("Rgaa30.Test.09.01.04-4NA-01",
               getWebResourceFactory().createPage(
               getTestcasesFilePath() + "rgaa30/Rgaa30Rule090104/Rgaa30.Test.09.01.04-4NA-01.html"));
@@ -73,7 +80,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         // check number of elements in the page
         assertEquals(19, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
+        assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
         assertEquals(19, processResult.getRemarkSet().size());
         Iterator<SourceCodeRemark> iter =  ((LinkedHashSet)processResult.getRemarkSet()).iterator();
@@ -95,7 +102,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processRemark = iter.next();
         assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NOT_TESTED, processRemark.getIssue());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals(HtmlElementStore.H1_ELEMENT, processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
@@ -110,7 +117,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processRemark = iter.next();
         assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NOT_TESTED, processRemark.getIssue());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals(HtmlElementStore.H1_ELEMENT, processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
@@ -125,7 +132,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processRemark = iter.next();
         assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NOT_TESTED, processRemark.getIssue());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals(HtmlElementStore.H1_ELEMENT, processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
@@ -140,7 +147,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processRemark = iter.next();
         assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NOT_TESTED, processRemark.getIssue());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals(HtmlElementStore.H2_ELEMENT, processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
@@ -155,7 +162,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processRemark = iter.next();
         assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NOT_TESTED, processRemark.getIssue());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals(HtmlElementStore.H2_ELEMENT, processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
@@ -170,7 +177,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processRemark = iter.next();
         assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NOT_TESTED, processRemark.getIssue());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals(HtmlElementStore.H2_ELEMENT, processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
@@ -185,7 +192,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processRemark = iter.next();
         assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NOT_TESTED, processRemark.getIssue());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals(HtmlElementStore.H3_ELEMENT, processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
@@ -200,7 +207,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processRemark = iter.next();
         assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NOT_TESTED, processRemark.getIssue());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals(HtmlElementStore.H3_ELEMENT, processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
@@ -215,7 +222,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processRemark = iter.next();
         assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NOT_TESTED, processRemark.getIssue());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals(HtmlElementStore.H3_ELEMENT, processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
@@ -230,7 +237,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processRemark = iter.next();
         assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NOT_TESTED, processRemark.getIssue());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals(HtmlElementStore.H4_ELEMENT, processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
@@ -245,7 +252,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processRemark = iter.next();
         assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NOT_TESTED, processRemark.getIssue());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals(HtmlElementStore.H4_ELEMENT, processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
@@ -260,7 +267,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processRemark = iter.next();
         assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NOT_TESTED, processRemark.getIssue());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals(HtmlElementStore.H4_ELEMENT, processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
@@ -275,7 +282,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processRemark = iter.next();
         assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NOT_TESTED, processRemark.getIssue());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals(HtmlElementStore.H5_ELEMENT, processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
@@ -290,7 +297,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processRemark = iter.next();
         assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NOT_TESTED, processRemark.getIssue());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals(HtmlElementStore.H5_ELEMENT, processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
@@ -305,7 +312,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processRemark = iter.next();
         assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NOT_TESTED, processRemark.getIssue());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals(HtmlElementStore.H5_ELEMENT, processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
@@ -320,7 +327,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processRemark = iter.next();
         assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NOT_TESTED, processRemark.getIssue());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals(HtmlElementStore.H6_ELEMENT, processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
@@ -335,7 +342,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processRemark = iter.next();
         assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NOT_TESTED, processRemark.getIssue());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals(HtmlElementStore.H6_ELEMENT, processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
@@ -350,8 +357,351 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processRemark = iter.next();
         assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NOT_TESTED, processRemark.getIssue());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
         assertEquals(HtmlElementStore.H6_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertTrue(StringUtils.isEmpty(ee.getValue()));
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-02------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.09.01.04-2Failed-02");
+        // check number of elements in the page
+        assertEquals(22, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.FAILED, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(22, processResult.getRemarkSet().size());
+        iter =  ((LinkedHashSet)processResult.getRemarkSet()).iterator();
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(HtmlElementStore.H1_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("Rgaa30 Test.09.01.04 Failed 02", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.SPAN_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertTrue(StringUtils.isEmpty(ee.getValue()));
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("!:;,&~$*/-*/-*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertTrue(StringUtils.isEmpty(ee.getValue()));
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.SPAN_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertTrue(StringUtils.isEmpty(ee.getValue()));
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("!:;,&~$*/-*/-*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertTrue(StringUtils.isEmpty(ee.getValue()));
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.SPAN_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertTrue(StringUtils.isEmpty(ee.getValue()));
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("!:;,&~$*/-*/-*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertTrue(StringUtils.isEmpty(ee.getValue()));
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.SPAN_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertTrue(StringUtils.isEmpty(ee.getValue()));
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("!:;,&~$*/-*/-*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertTrue(StringUtils.isEmpty(ee.getValue()));
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.SPAN_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertTrue(StringUtils.isEmpty(ee.getValue()));
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("!:;,&~$*/-*/-*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertTrue(StringUtils.isEmpty(ee.getValue()));
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.SPAN_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertTrue(StringUtils.isEmpty(ee.getValue()));
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("!:;,&~$*/-*/-*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertTrue(StringUtils.isEmpty(ee.getValue()));
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.SPAN_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertTrue(StringUtils.isEmpty(ee.getValue()));
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("!:;,&~$*/-*/-*", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.NOT_PERTINENT_HEADING_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
         assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
         assertEquals(2,processRemark.getElementList().size());
@@ -573,6 +923,244 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         
         
         //----------------------------------------------------------------------
+        //------------------------------3NMI-02---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.09.01.04-3NMI-02");
+        // check number of elements in the page
+        assertEquals(15, processResult.getElementCounter());
+        // check test result
+        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        // check number of remarks and their value
+        assertEquals(15, processResult.getRemarkSet().size());
+        iter =  ((LinkedHashSet)processResult.getRemarkSet()).iterator();
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(HtmlElementStore.H1_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("Rgaa30 Test.09.01.04 NMI 02", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(HtmlElementStore.SPAN_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("Title level 1-1", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("Title level 1-2", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(HtmlElementStore.SPAN_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("Title level 2-1", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("Title level 2-2", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(HtmlElementStore.SPAN_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("Title level 3-1", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("Title level 3-2", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(HtmlElementStore.SPAN_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("Title level 4-1", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("Title level 4-2", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(HtmlElementStore.SPAN_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("Title level 5-1", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("Title level 5-2", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(HtmlElementStore.SPAN_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("Title level 6-1", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("Title level 6-2", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(HtmlElementStore.SPAN_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("Title level 7-1", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        //----------------------------------------------------------------------
+        processRemark = iter.next();
+        assertEquals(RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG, processRemark.getMessageCode());
+        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
+        assertNotNull(processRemark.getSnippet());
+        // check number of evidence elements and their value
+        assertEquals(2,processRemark.getElementList().size());
+        eIter =  processRemark.getElementList().iterator();
+        ee = eIter.next();
+        assertEquals("Title level 7-2", ee.getValue());
+        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+        ee = eIter.next();
+        assertEquals("headings", ee.getValue());
+        assertEquals(ProcessRemarkService.DEFAULT_EVIDENCE, ee.getEvidence().getCode());
+        
+        
+        //----------------------------------------------------------------------
         //------------------------------4NA-01----------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.09.01.04-4NA-01");
@@ -584,10 +1172,14 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setConsolidate() {
-        assertEquals(TestSolution.NOT_TESTED,
+        assertEquals(TestSolution.FAILED,
                 consolidate("Rgaa30.Test.09.01.04-2Failed-01").getValue());
+        assertEquals(TestSolution.FAILED,
+                consolidate("Rgaa30.Test.09.01.04-2Failed-02").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("Rgaa30.Test.09.01.04-3NMI-01").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Rgaa30.Test.09.01.04-3NMI-02").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("Rgaa30.Test.09.01.04-4NA-01").getValue());
     }
