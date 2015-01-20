@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Tanaguru/Tanaguru.svg?branch=develop)](https://travis-ci.org/Tanaguru/Tanaguru) [![Coverage Status](https://coveralls.io/repos/Tanaguru/Tanaguru/badge.png?branch=develop)](https://coveralls.io/r/Tanaguru/Tanaguru)
+[![Build Status](https://travis-ci.org/Tanaguru/Tanaguru.svg?branch=develop)](https://travis-ci.org/Tanaguru/Tanaguru) 
 
 # Tanaguru
 
