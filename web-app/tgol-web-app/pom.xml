@@ -12,7 +12,7 @@
     <packaging>war</packaging>
     <name>tgol-web-app</name>
     <dependencies>
-<!--        <dependency>
+        <!--        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.14</version>
@@ -284,7 +284,7 @@
                     <failOnWarning>false</failOnWarning>
                 </configuration>
             </plugin>
-<!--            <plugin>
+            <!--            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>tomcat-maven-plugin</artifactId>
                 <version>1.1</version>
@@ -308,6 +308,13 @@
         <finalName>tgol-web-app-${webappVersion}</finalName>
     </build>
     <profiles>
+        <profile>
+            <id>web</id>
+            <properties>
+                <sonar.branch>web</sonar.branch>
+                <sonar.language>web</sonar.language>
+            </properties>
+        </profile>
         <profile>
             <activation>
                 <!-- the "activation" command offer the ability to run this profile only if "property" is set
