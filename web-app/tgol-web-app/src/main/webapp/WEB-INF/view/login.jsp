@@ -1,20 +1,21 @@
-<%@taglib uri="http://htmlcompressor.googlecode.com/taglib/compressor" prefix="compress" %>
+<%@ taglib uri="http://htmlcompressor.googlecode.com/taglib/compressor" prefix="compress" %>
 <compress:html>
-<%@page contentType="text/html;charset=UTF-8"%>
-<%@page pageEncoding="UTF-8"%>
-<%@page language="java"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@taglib uri="http://tagutils" prefix="tg" %>
-<%@page import="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter" %>
-<%@page import="org.springframework.web.context.request.RequestContextHolder" %>
-<%@page import="org.springframework.web.context.request.ServletRequestAttributes" %>
-<%@page import="java.util.Collection" %>
-<%@page import="java.util.Iterator"%>
-<%@page import="java.util.Map"%>
-<%@page import="java.util.Set"%>
+<%@ page contentType="text/html;charset=UTF-8" 
+         pageEncoding="UTF-8"  
+         language="java"
+         import="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter"
+         import="org.springframework.web.context.request.RequestContextHolder"
+         import="org.springframework.web.context.request.ServletRequestAttributes"
+         import="java.util.Collection"
+         import="java.util.Iterator"
+         import="java.util.Map"
+         import="java.util.Set"
+         %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
 
 <c:set var="tgLogoUrl">

@@ -1,9 +1,8 @@
-<%@page contentType="text/html;charset=UTF-8"%>
-<%@page pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@taglib uri="http://tagutils" prefix="tg" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://tagutils" prefix="tg" %>
 
 <div class="row">
     <div class="span15">
@@ -20,7 +19,7 @@
                 </c:otherwise>
             </c:choose>
             <fmt:message  key="${msgCode}">
-                <c:if test='${remarkInfosItem.remarkTarget != null}'>
+                <c:if test="${remarkInfosItem.remarkTarget != null}">
                     <c:set var="remarkTarget">
                         ${fn:escapeXml(fn:replace(remarkInfosItem.remarkTarget,"&", "&amp;"))}
                     </c:set>
@@ -28,7 +27,7 @@
                 </c:if>
             </fmt:message>
         </p>
-        <c:if test='${not empty remarkInfosItem.evidenceElementList}'>
+        <c:if test="${not empty remarkInfosItem.evidenceElementList}">
             <c:set value="false" var="bgColor" scope="page"/>
             <c:set value="false" var="color" scope="page"/>
             <table class="evidence-elements-table">
