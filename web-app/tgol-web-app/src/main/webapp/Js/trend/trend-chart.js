@@ -14,15 +14,15 @@ $(document).ready(function() {
         svg;
 
     $("#act-list-table tbody tr").each(function (d, i) {
-        if (!isNaN(parseInt($(this).find("[headers=raw-mark]").text(), 10)) && 
-            ($(this).find("[headers=scope]").text() == "Site" || 
-                $(this).find("[headers=scope]").text() == "Scenario" || 
-                $(this).find("[headers=scope]").text() == "Scénario") ) {
+        if (!isNaN(parseInt($(this).find("[headers=raw-mark]").text().trim(), 10)) && 
+            ($(this).find("[headers=scope]").text().trim() === "Site" || 
+                $(this).find("[headers=scope]").text().trim() === "Scenario" || 
+                $(this).find("[headers=scope]").text().trim() === "Scénario") ) {
             var value = parseInt($(this).find("[headers=raw-mark]").text(), 10)/100,
                 myResult = {};
-            myResult.label=$(this).find("[headers=date]").text();
+            myResult.label=$(this).find("[headers=date]").text().trim();
             myResult.value=value;
-            myResult.ref=$(this).find("[headers=referential]").text();
+            myResult.ref=$(this).find("[headers=referential]").text().trim();
             data.push(myResult);
         }
     });
